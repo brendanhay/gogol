@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Installs.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,7 @@
 -- is already installed then it is updated to the latest version if
 -- necessary.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.update@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.installs.update@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Update
     (
     -- * REST Resource
@@ -66,7 +66,7 @@ type InstallsUpdateResource =
 -- necessary.
 --
 -- /See:/ 'installsUpdate' smart constructor.
-data InstallsUpdate = InstallsUpdate
+data InstallsUpdate = InstallsUpdate'
     { _iuEnterpriseId :: !Text
     , _iuPayload      :: !Install
     , _iuUserId       :: !Text
@@ -95,7 +95,7 @@ installsUpdate
     -> Text -- ^ 'iuDeviceId'
     -> InstallsUpdate
 installsUpdate pIuEnterpriseId_ pIuPayload_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
-    InstallsUpdate
+    InstallsUpdate'
     { _iuEnterpriseId = pIuEnterpriseId_
     , _iuPayload = pIuPayload_
     , _iuUserId = pIuUserId_
@@ -131,7 +131,9 @@ iuDeviceId
 
 instance GoogleRequest InstallsUpdate where
         type Rs InstallsUpdate = Install
-        requestClient InstallsUpdate{..}
+        type Scopes InstallsUpdate =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient InstallsUpdate'{..}
           = go _iuEnterpriseId _iuUserId _iuDeviceId
               _iuInstallId
               (Just AltJSON)

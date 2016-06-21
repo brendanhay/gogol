@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.DNS.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,17 +22,17 @@ import           Network.Google.Prelude
 data ChangesListSortBy
     = ChangeSequence
       -- ^ @changeSequence@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChangesListSortBy
 
-instance FromText ChangesListSortBy where
-    fromText = \case
-        "changeSequence" -> Just ChangeSequence
-        _ -> Nothing
+instance FromHttpApiData ChangesListSortBy where
+    parseQueryParam = \case
+        "changeSequence" -> Right ChangeSequence
+        x -> Left ("Unable to parse ChangesListSortBy from: " <> x)
 
-instance ToText ChangesListSortBy where
-    toText = \case
+instance ToHttpApiData ChangesListSortBy where
+    toQueryParam = \case
         ChangeSequence -> "changeSequence"
 
 instance FromJSON ChangesListSortBy where
@@ -47,18 +47,18 @@ data ChangeStatus
       -- ^ @done@
     | Pending
       -- ^ @pending@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChangeStatus
 
-instance FromText ChangeStatus where
-    fromText = \case
-        "done" -> Just Done
-        "pending" -> Just Pending
-        _ -> Nothing
+instance FromHttpApiData ChangeStatus where
+    parseQueryParam = \case
+        "done" -> Right Done
+        "pending" -> Right Pending
+        x -> Left ("Unable to parse ChangeStatus from: " <> x)
 
-instance ToText ChangeStatus where
-    toText = \case
+instance ToHttpApiData ChangeStatus where
+    toQueryParam = \case
         Done -> "done"
         Pending -> "pending"
 

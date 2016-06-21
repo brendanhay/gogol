@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'TargetableRemarketingListsList' request conforms to.
 type TargetableRemarketingListsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetableRemarketingLists" :>
@@ -72,7 +72,7 @@ type TargetableRemarketingListsListResource =
 -- | Retrieves a list of targetable remarketing lists, possibly filtered.
 --
 -- /See:/ 'targetableRemarketingListsList' smart constructor.
-data TargetableRemarketingListsList = TargetableRemarketingListsList
+data TargetableRemarketingListsList = TargetableRemarketingListsList'
     { _trllAdvertiserId :: !(Textual Int64)
     , _trllProFileId    :: !(Textual Int64)
     , _trllSortOrder    :: !(Maybe TargetableRemarketingListsListSortOrder)
@@ -107,7 +107,7 @@ targetableRemarketingListsList
     -> Int64 -- ^ 'trllProFileId'
     -> TargetableRemarketingListsList
 targetableRemarketingListsList pTrllAdvertiserId_ pTrllProFileId_ =
-    TargetableRemarketingListsList
+    TargetableRemarketingListsList'
     { _trllAdvertiserId = _Coerce # pTrllAdvertiserId_
     , _trllProFileId = _Coerce # pTrllProFileId_
     , _trllSortOrder = Nothing
@@ -178,7 +178,9 @@ instance GoogleRequest TargetableRemarketingListsList
          where
         type Rs TargetableRemarketingListsList =
              TargetableRemarketingListsListResponse
-        requestClient TargetableRemarketingListsList{..}
+        type Scopes TargetableRemarketingListsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient TargetableRemarketingListsList'{..}
           = go _trllProFileId (Just _trllAdvertiserId)
               _trllSortOrder
               _trllActive

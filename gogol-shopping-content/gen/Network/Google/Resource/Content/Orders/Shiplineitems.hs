@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.Shiplineitems
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type OrdersShiplineitemsResource =
 -- | Marks line item(s) as shipped.
 --
 -- /See:/ 'ordersShiplineitems' smart constructor.
-data OrdersShiplineitems = OrdersShiplineitems
+data OrdersShiplineitems = OrdersShiplineitems'
     { _osMerchantId :: !(Textual Word64)
     , _osPayload    :: !OrdersShipLineItemsRequest
     , _osOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersShiplineitems
     -> Text -- ^ 'osOrderId'
     -> OrdersShiplineitems
 ordersShiplineitems pOsMerchantId_ pOsPayload_ pOsOrderId_ =
-    OrdersShiplineitems
+    OrdersShiplineitems'
     { _osMerchantId = _Coerce # pOsMerchantId_
     , _osPayload = pOsPayload_
     , _osOrderId = pOsOrderId_
@@ -103,7 +103,9 @@ osOrderId
 instance GoogleRequest OrdersShiplineitems where
         type Rs OrdersShiplineitems =
              OrdersShipLineItemsResponse
-        requestClient OrdersShiplineitems{..}
+        type Scopes OrdersShiplineitems =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersShiplineitems'{..}
           = go _osMerchantId _osOrderId (Just AltJSON)
               _osPayload
               shoppingContentService

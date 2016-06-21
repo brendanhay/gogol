@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetPools.AddInstance
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds instance url to targetPool.
+-- Adds an instance to a target pool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.addInstance@.
 module Network.Google.Resource.Compute.TargetPools.AddInstance
@@ -58,10 +58,10 @@ type TargetPoolsAddInstanceResource =
                          ReqBody '[JSON] TargetPoolsAddInstanceRequest :>
                            Post '[JSON] Operation
 
--- | Adds instance url to targetPool.
+-- | Adds an instance to a target pool.
 --
 -- /See:/ 'targetPoolsAddInstance' smart constructor.
-data TargetPoolsAddInstance = TargetPoolsAddInstance
+data TargetPoolsAddInstance = TargetPoolsAddInstance'
     { _tpaiProject    :: !Text
     , _tpaiTargetPool :: !Text
     , _tpaiPayload    :: !TargetPoolsAddInstanceRequest
@@ -86,18 +86,19 @@ targetPoolsAddInstance
     -> Text -- ^ 'tpaiRegion'
     -> TargetPoolsAddInstance
 targetPoolsAddInstance pTpaiProject_ pTpaiTargetPool_ pTpaiPayload_ pTpaiRegion_ =
-    TargetPoolsAddInstance
+    TargetPoolsAddInstance'
     { _tpaiProject = pTpaiProject_
     , _tpaiTargetPool = pTpaiTargetPool_
     , _tpaiPayload = pTpaiPayload_
     , _tpaiRegion = pTpaiRegion_
     }
 
+-- | Project ID for this request.
 tpaiProject :: Lens' TargetPoolsAddInstance Text
 tpaiProject
   = lens _tpaiProject (\ s a -> s{_tpaiProject = a})
 
--- | Name of the TargetPool resource to which instance_url is to be added.
+-- | Name of the TargetPool resource to add instances to.
 tpaiTargetPool :: Lens' TargetPoolsAddInstance Text
 tpaiTargetPool
   = lens _tpaiTargetPool
@@ -115,7 +116,10 @@ tpaiRegion
 
 instance GoogleRequest TargetPoolsAddInstance where
         type Rs TargetPoolsAddInstance = Operation
-        requestClient TargetPoolsAddInstance{..}
+        type Scopes TargetPoolsAddInstance =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetPoolsAddInstance'{..}
           = go _tpaiProject _tpaiRegion _tpaiTargetPool
               (Just AltJSON)
               _tpaiPayload

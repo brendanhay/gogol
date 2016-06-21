@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Groups.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type GroupsListResource =
 -- | Retrieve all groups in a domain (paginated)
 --
 -- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList
+data GroupsList = GroupsList'
     { _glDomain     :: !(Maybe Text)
     , _glCustomer   :: !(Maybe Text)
     , _glPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ data GroupsList = GroupsList
 groupsList
     :: GroupsList
 groupsList =
-    GroupsList
+    GroupsList'
     { _glDomain = Nothing
     , _glCustomer = Nothing
     , _glPageToken = Nothing
@@ -123,7 +123,10 @@ glMaxResults
 
 instance GoogleRequest GroupsList where
         type Rs GroupsList = Groups
-        requestClient GroupsList{..}
+        type Scopes GroupsList =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.readonly"]
+        requestClient GroupsList'{..}
           = go _glDomain _glCustomer _glPageToken _glUserKey
               _glMaxResults
               (Just AltJSON)

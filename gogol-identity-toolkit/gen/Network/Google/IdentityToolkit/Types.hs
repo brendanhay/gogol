@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.IdentityToolkit.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -28,9 +29,28 @@ module Network.Google.IdentityToolkit.Types
     , UserInfoProviderUserInfoItem
     , userInfoProviderUserInfoItem
     , uipuiiProviderId
+    , uipuiiEmail
     , uipuiiPhotoURL
     , uipuiiFederatedId
     , uipuiiDisplayName
+    , uipuiiRawId
+
+    -- * VerifyCustomTokenResponse
+    , VerifyCustomTokenResponse
+    , verifyCustomTokenResponse
+    , vctrKind
+    , vctrRefreshToken
+    , vctrExpiresIn
+    , vctrIdToken
+
+    -- * IdpConfig
+    , IdpConfig
+    , idpConfig
+    , icClientId
+    , icEnabled
+    , icSecret
+    , icExperimentPercent
+    , icProvider
 
     -- * UserInfo
     , UserInfo
@@ -48,28 +68,78 @@ module Network.Google.IdentityToolkit.Types
     , uiPasswordHash
     , uiLocalId
 
+    -- * IdentitytoolkitRelyingPartySetProjectConfigResponse
+    , IdentitytoolkitRelyingPartySetProjectConfigResponse
+    , identitytoolkitRelyingPartySetProjectConfigResponse
+    , irpspcrProjectId
+
+    -- * IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
+    , IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
+    , identitytoolkitRelyingPartyVerifyCustomTokenRequest
+    , irpvctrInstanceId
+    , irpvctrDelegatedProjectNumber
+    , irpvctrToken
+    , irpvctrReturnSecureToken
+
     -- * SetAccountInfoResponseProviderUserInfoItem
     , SetAccountInfoResponseProviderUserInfoItem
     , setAccountInfoResponseProviderUserInfoItem
     , sairpuiiProviderId
     , sairpuiiPhotoURL
+    , sairpuiiFederatedId
     , sairpuiiDisplayName
 
     -- * IdentitytoolkitRelyingPartyVerifyPasswordRequest
     , IdentitytoolkitRelyingPartyVerifyPasswordRequest
     , identitytoolkitRelyingPartyVerifyPasswordRequest
     , irpvprEmail
+    , irpvprInstanceId
     , irpvprCaptchaChallenge
+    , irpvprDelegatedProjectNumber
+    , irpvprReturnSecureToken
     , irpvprPassword
     , irpvprCaptchaResponse
+    , irpvprIdToken
     , irpvprPendingIdToken
+
+    -- * SignupNewUserResponse
+    , SignupNewUserResponse
+    , signupNewUserResponse
+    , snurEmail
+    , snurKind
+    , snurRefreshToken
+    , snurExpiresIn
+    , snurDisplayName
+    , snurLocalId
+    , snurIdToken
+
+    -- * IdentitytoolkitRelyingPartySetProjectConfigRequest
+    , IdentitytoolkitRelyingPartySetProjectConfigRequest
+    , identitytoolkitRelyingPartySetProjectConfigRequest
+    , irpspcrAuthorizedDomains
+    , irpspcrAPIKey
+    , irpspcrIdpConfig
+    , irpspcrChangeEmailTemplate
+    , irpspcrDelegatedProjectNumber
+    , irpspcrVerifyEmailTemplate
+    , irpspcrEnableAnonymousUser
+    , irpspcrLegacyResetPasswordTemplate
+    , irpspcrAllowPasswordUser
+    , irpspcrResetPasswordTemplate
+    , irpspcrUseEmailSending
 
     -- * IdentitytoolkitRelyingPartySetAccountInfoRequest
     , IdentitytoolkitRelyingPartySetAccountInfoRequest
     , identitytoolkitRelyingPartySetAccountInfoRequest
     , irpsairUpgradeToFederatedLogin
     , irpsairEmail
+    , irpsairInstanceId
+    , irpsairPhotoURL
     , irpsairCaptchaChallenge
+    , irpsairDelegatedProjectNumber
+    , irpsairDeleteAttribute
+    , irpsairDeleteProvider
+    , irpsairReturnSecureToken
     , irpsairValidSince
     , irpsairOOBCode
     , irpsairPassword
@@ -84,9 +154,14 @@ module Network.Google.IdentityToolkit.Types
     -- * IdentitytoolkitRelyingPartyVerifyAssertionRequest
     , IdentitytoolkitRelyingPartyVerifyAssertionRequest
     , identitytoolkitRelyingPartyVerifyAssertionRequest
+    , irpvarInstanceId
+    , irpvarDelegatedProjectNumber
     , irpvarPostBody
+    , irpvarReturnSecureToken
     , irpvarReturnRefreshToken
     , irpvarRequestURI
+    , irpvarSessionId
+    , irpvarIdToken
     , irpvarPendingIdToken
 
     -- * DeleteAccountResponse
@@ -94,12 +169,32 @@ module Network.Google.IdentityToolkit.Types
     , deleteAccountResponse
     , darKind
 
+    -- * IdentitytoolkitRelyingPartySignOutUserResponse
+    , IdentitytoolkitRelyingPartySignOutUserResponse
+    , identitytoolkitRelyingPartySignOutUserResponse
+    , irpsourLocalId
+
     -- * DownloadAccountResponse
     , DownloadAccountResponse
     , downloadAccountResponse
     , dNextPageToken
     , dUsers
     , dKind
+
+    -- * IdentitytoolkitRelyingPartyGetProjectConfigResponse
+    , IdentitytoolkitRelyingPartyGetProjectConfigResponse
+    , identitytoolkitRelyingPartyGetProjectConfigResponse
+    , irpgpcrAuthorizedDomains
+    , irpgpcrAPIKey
+    , irpgpcrIdpConfig
+    , irpgpcrChangeEmailTemplate
+    , irpgpcrVerifyEmailTemplate
+    , irpgpcrEnableAnonymousUser
+    , irpgpcrLegacyResetPasswordTemplate
+    , irpgpcrAllowPasswordUser
+    , irpgpcrResetPasswordTemplate
+    , irpgpcrProjectId
+    , irpgpcrUseEmailSending
 
     -- * ResetPasswordResponse
     , ResetPasswordResponse
@@ -118,9 +213,11 @@ module Network.Google.IdentityToolkit.Types
     , createAuthURIResponse
     , caurProviderId
     , caurKind
+    , caurAllProviders
     , caurAuthURI
     , caurCaptchaRequired
     , caurRegistered
+    , caurSessionId
     , caurForExistingProvider
 
     -- * IdentitytoolkitRelyingPartyGetPublicKeysResponse
@@ -144,14 +241,26 @@ module Network.Google.IdentityToolkit.Types
     , IdentitytoolkitRelyingPartyGetAccountInfoRequest
     , identitytoolkitRelyingPartyGetAccountInfoRequest
     , irpgairEmail
+    , irpgairDelegatedProjectNumber
     , irpgairLocalId
     , irpgairIdToken
+
+    -- * EmailTemplate
+    , EmailTemplate
+    , emailTemplate
+    , etSubject
+    , etBody
+    , etFormat
+    , etFromDisplayName
+    , etFrom
+    , etReplyTo
 
     -- * IdentitytoolkitRelyingPartyUploadAccountRequest
     , IdentitytoolkitRelyingPartyUploadAccountRequest
     , identitytoolkitRelyingPartyUploadAccountRequest
     , irpuarUsers
     , irpuarMemoryCost
+    , irpuarDelegatedProjectNumber
     , irpuarSaltSeparator
     , irpuarHashAlgorithm
     , irpuarSignerKey
@@ -188,19 +297,23 @@ module Network.Google.IdentityToolkit.Types
     -- * IdentitytoolkitRelyingPartyDeleteAccountRequest
     , IdentitytoolkitRelyingPartyDeleteAccountRequest
     , identitytoolkitRelyingPartyDeleteAccountRequest
+    , irpdarDelegatedProjectNumber
     , irpdarLocalId
+    , irpdarIdToken
 
     -- * GetOOBConfirmationCodeResponse
     , GetOOBConfirmationCodeResponse
     , getOOBConfirmationCodeResponse
+    , goobccrEmail
     , goobccrKind
     , goobccrOOBCode
 
     -- * IdentitytoolkitRelyingPartyDownloadAccountRequest
     , IdentitytoolkitRelyingPartyDownloadAccountRequest
     , identitytoolkitRelyingPartyDownloadAccountRequest
-    , irpdarNextPageToken
-    , irpdarMaxResults
+    , iNextPageToken
+    , iDelegatedProjectNumber
+    , iMaxResults
 
     -- * VerifyPasswordResponse
     , VerifyPasswordResponse
@@ -210,6 +323,8 @@ module Network.Google.IdentityToolkit.Types
     , vprOAuthAccessToken
     , vprKind
     , vprOAuthExpireIn
+    , vprRefreshToken
+    , vprExpiresIn
     , vprDisplayName
     , vprLocalId
     , vprRegistered
@@ -220,11 +335,27 @@ module Network.Google.IdentityToolkit.Types
     , SetAccountInfoResponse
     , setAccountInfoResponse
     , sairEmail
+    , sairPhotoURL
     , sairKind
+    , sairRefreshToken
     , sairProviderUserInfo
+    , sairExpiresIn
     , sairDisplayName
+    , sairPasswordHash
+    , sairLocalId
     , sairNewEmail
     , sairIdToken
+
+    -- * IdentitytoolkitRelyingPartySignupNewUserRequest
+    , IdentitytoolkitRelyingPartySignupNewUserRequest
+    , identitytoolkitRelyingPartySignupNewUserRequest
+    , irpsnurEmail
+    , irpsnurInstanceId
+    , irpsnurCaptchaChallenge
+    , irpsnurPassword
+    , irpsnurCaptchaResponse
+    , irpsnurDisplayName
+    , irpsnurIdToken
 
     -- * VerifyAssertionResponse
     , VerifyAssertionResponse
@@ -243,13 +374,17 @@ module Network.Google.IdentityToolkit.Types
     , varDateOfBirth
     , varKind
     , varOAuthExpireIn
+    , varRefreshToken
     , varAppInstallationURL
     , varAction
     , varNeedEmail
     , varFederatedId
+    , varOAuthIdToken
     , varAppScheme
+    , varExpiresIn
     , varInputEmail
     , varEmailVerified
+    , varOAuthTokenSecret
     , varLanguage
     , varFirstName
     , varDisplayName
@@ -260,6 +395,12 @@ module Network.Google.IdentityToolkit.Types
     , varTimeZone
     , varIdToken
     , varOAuthAuthorizationCode
+
+    -- * IdentitytoolkitRelyingPartySignOutUserRequest
+    , IdentitytoolkitRelyingPartySignOutUserRequest
+    , identitytoolkitRelyingPartySignOutUserRequest
+    , iInstanceId
+    , iLocalId
 
     -- * GetRecaptchaParamResponse
     , GetRecaptchaParamResponse
@@ -274,7 +415,7 @@ import           Network.Google.IdentityToolkit.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Identity Toolkit API. This contains the host and root path used as a starting point for constructing service requests.
-identityToolkitService :: Service
+identityToolkitService :: ServiceConfig
 identityToolkitService
   = defaultService (ServiceId "identitytoolkit:v3")
       "www.googleapis.com"

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.TurnBasedMatches.Join
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -33,6 +33,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Join
     , TurnBasedMatchesJoin
 
     -- * Request Lenses
+    , tbmjConsistencyToken
     , tbmjLanguage
     , tbmjMatchId
     ) where
@@ -48,21 +49,25 @@ type TurnBasedMatchesJoinResource =
          "turnbasedmatches" :>
            Capture "matchId" Text :>
              "join" :>
-               QueryParam "language" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Put '[JSON] TurnBasedMatch
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "language" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Put '[JSON] TurnBasedMatch
 
 -- | Join a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesJoin' smart constructor.
-data TurnBasedMatchesJoin = TurnBasedMatchesJoin
-    { _tbmjLanguage :: !(Maybe Text)
-    , _tbmjMatchId  :: !Text
+data TurnBasedMatchesJoin = TurnBasedMatchesJoin'
+    { _tbmjConsistencyToken :: !(Maybe (Textual Int64))
+    , _tbmjLanguage         :: !(Maybe Text)
+    , _tbmjMatchId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesJoin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbmjConsistencyToken'
 --
 -- * 'tbmjLanguage'
 --
@@ -71,10 +76,18 @@ turnBasedMatchesJoin
     :: Text -- ^ 'tbmjMatchId'
     -> TurnBasedMatchesJoin
 turnBasedMatchesJoin pTbmjMatchId_ =
-    TurnBasedMatchesJoin
-    { _tbmjLanguage = Nothing
+    TurnBasedMatchesJoin'
+    { _tbmjConsistencyToken = Nothing
+    , _tbmjLanguage = Nothing
     , _tbmjMatchId = pTbmjMatchId_
     }
+
+-- | The last-seen mutation timestamp.
+tbmjConsistencyToken :: Lens' TurnBasedMatchesJoin (Maybe Int64)
+tbmjConsistencyToken
+  = lens _tbmjConsistencyToken
+      (\ s a -> s{_tbmjConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 tbmjLanguage :: Lens' TurnBasedMatchesJoin (Maybe Text)
@@ -88,8 +101,12 @@ tbmjMatchId
 
 instance GoogleRequest TurnBasedMatchesJoin where
         type Rs TurnBasedMatchesJoin = TurnBasedMatch
-        requestClient TurnBasedMatchesJoin{..}
-          = go _tbmjMatchId _tbmjLanguage (Just AltJSON)
+        type Scopes TurnBasedMatchesJoin =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient TurnBasedMatchesJoin'{..}
+          = go _tbmjMatchId _tbmjConsistencyToken _tbmjLanguage
+              (Just AltJSON)
               gamesService
           where go
                   = buildClient

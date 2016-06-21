@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.UserProFiles.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'UserProFilesGet' request conforms to.
 type UserProFilesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              QueryParam "alt" AltJSON :> Get '[JSON] UserProFile
@@ -51,7 +51,7 @@ type UserProFilesGetResource =
 -- | Gets one user profile by ID.
 --
 -- /See:/ 'userProFilesGet' smart constructor.
-newtype UserProFilesGet = UserProFilesGet
+newtype UserProFilesGet = UserProFilesGet'
     { _upfgProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ userProFilesGet
     :: Int64 -- ^ 'upfgProFileId'
     -> UserProFilesGet
 userProFilesGet pUpfgProFileId_ =
-    UserProFilesGet
+    UserProFilesGet'
     { _upfgProFileId = _Coerce # pUpfgProFileId_
     }
 
@@ -77,7 +77,10 @@ upfgProFileId
 
 instance GoogleRequest UserProFilesGet where
         type Rs UserProFilesGet = UserProFile
-        requestClient UserProFilesGet{..}
+        type Scopes UserProFilesGet =
+             '["https://www.googleapis.com/auth/dfareporting",
+               "https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient UserProFilesGet'{..}
           = go _upfgProFileId (Just AltJSON)
               dFAReportingService
           where go

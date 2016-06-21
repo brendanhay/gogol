@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.TransferOperations.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type TransferOperationsDeleteResource =
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
 -- /See:/ 'transferOperationsDelete' smart constructor.
-data TransferOperationsDelete = TransferOperationsDelete
+data TransferOperationsDelete = TransferOperationsDelete'
     { _todXgafv          :: !(Maybe Text)
     , _todUploadProtocol :: !(Maybe Text)
     , _todPp             :: !Bool
@@ -97,7 +97,7 @@ transferOperationsDelete
     :: Text -- ^ 'todName'
     -> TransferOperationsDelete
 transferOperationsDelete pTodName_ =
-    TransferOperationsDelete
+    TransferOperationsDelete'
     { _todXgafv = Nothing
     , _todUploadProtocol = Nothing
     , _todPp = True
@@ -151,7 +151,9 @@ todCallback
 
 instance GoogleRequest TransferOperationsDelete where
         type Rs TransferOperationsDelete = Empty
-        requestClient TransferOperationsDelete{..}
+        type Scopes TransferOperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TransferOperationsDelete'{..}
           = go _todName _todXgafv _todUploadProtocol
               (Just _todPp)
               _todAccessToken

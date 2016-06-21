@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@
 -- Lists a site\'s sample URLs for the specified crawl error category and
 -- platform.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorssamples.list@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.urlcrawlerrorssamples.list@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
     (
     -- * REST Resource
@@ -63,7 +63,7 @@ type URLCrawlErrorsSamplesListResource =
 -- platform.
 --
 -- /See:/ 'urlCrawlErrorsSamplesList' smart constructor.
-data URLCrawlErrorsSamplesList = URLCrawlErrorsSamplesList
+data URLCrawlErrorsSamplesList = URLCrawlErrorsSamplesList'
     { _uceslPlatform :: !URLCrawlErrorsSamplesListPlatform
     , _uceslCategory :: !URLCrawlErrorsSamplesListCategory
     , _uceslSiteURL  :: !Text
@@ -84,7 +84,7 @@ urlCrawlErrorsSamplesList
     -> Text -- ^ 'uceslSiteURL'
     -> URLCrawlErrorsSamplesList
 urlCrawlErrorsSamplesList pUceslPlatform_ pUceslCategory_ pUceslSiteURL_ =
-    URLCrawlErrorsSamplesList
+    URLCrawlErrorsSamplesList'
     { _uceslPlatform = pUceslPlatform_
     , _uceslCategory = pUceslCategory_
     , _uceslSiteURL = pUceslSiteURL_
@@ -112,7 +112,10 @@ instance GoogleRequest URLCrawlErrorsSamplesList
          where
         type Rs URLCrawlErrorsSamplesList =
              URLCrawlErrorsSamplesListResponse
-        requestClient URLCrawlErrorsSamplesList{..}
+        type Scopes URLCrawlErrorsSamplesList =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
+        requestClient URLCrawlErrorsSamplesList'{..}
           = go _uceslSiteURL (Just _uceslCategory)
               (Just _uceslPlatform)
               (Just AltJSON)

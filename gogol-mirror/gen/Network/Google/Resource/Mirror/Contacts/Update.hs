@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Contacts.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type ContactsUpdateResource =
 -- | Updates a contact in place.
 --
 -- /See:/ 'contactsUpdate' smart constructor.
-data ContactsUpdate = ContactsUpdate
+data ContactsUpdate = ContactsUpdate'
     { _cuPayload :: !Contact
     , _cuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ contactsUpdate
     -> Text -- ^ 'cuId'
     -> ContactsUpdate
 contactsUpdate pCuPayload_ pCuId_ =
-    ContactsUpdate
+    ContactsUpdate'
     { _cuPayload = pCuPayload_
     , _cuId = pCuId_
     }
@@ -86,7 +86,9 @@ cuId = lens _cuId (\ s a -> s{_cuId = a})
 
 instance GoogleRequest ContactsUpdate where
         type Rs ContactsUpdate = Contact
-        requestClient ContactsUpdate{..}
+        type Scopes ContactsUpdate =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient ContactsUpdate'{..}
           = go _cuId (Just AltJSON) _cuPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsUpdateResource)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroupManagers.Resize
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type InstanceGroupManagersResizeResource =
 -- method.
 --
 -- /See:/ 'instanceGroupManagersResize' smart constructor.
-data InstanceGroupManagersResize = InstanceGroupManagersResize
+data InstanceGroupManagersResize = InstanceGroupManagersResize'
     { _igmrProject              :: !Text
     , _igmrSize                 :: !(Textual Int32)
     , _igmrInstanceGroupManager :: !Text
@@ -97,14 +97,14 @@ instanceGroupManagersResize
     -> Text -- ^ 'igmrZone'
     -> InstanceGroupManagersResize
 instanceGroupManagersResize pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ pIgmrZone_ =
-    InstanceGroupManagersResize
+    InstanceGroupManagersResize'
     { _igmrProject = pIgmrProject_
     , _igmrSize = _Coerce # pIgmrSize_
     , _igmrInstanceGroupManager = pIgmrInstanceGroupManager_
     , _igmrZone = pIgmrZone_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmrProject :: Lens' InstanceGroupManagersResize Text
 igmrProject
   = lens _igmrProject (\ s a -> s{_igmrProject = a})
@@ -131,7 +131,10 @@ igmrZone = lens _igmrZone (\ s a -> s{_igmrZone = a})
 instance GoogleRequest InstanceGroupManagersResize
          where
         type Rs InstanceGroupManagersResize = Operation
-        requestClient InstanceGroupManagersResize{..}
+        type Scopes InstanceGroupManagersResize =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceGroupManagersResize'{..}
           = go _igmrProject _igmrZone _igmrInstanceGroupManager
               (Just _igmrSize)
               (Just AltJSON)

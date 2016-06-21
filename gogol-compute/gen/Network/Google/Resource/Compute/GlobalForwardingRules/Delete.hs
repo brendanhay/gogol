@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.GlobalForwardingRules.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type GlobalForwardingRulesDeleteResource =
 -- | Deletes the specified ForwardingRule resource.
 --
 -- /See:/ 'globalForwardingRulesDelete' smart constructor.
-data GlobalForwardingRulesDelete = GlobalForwardingRulesDelete
+data GlobalForwardingRulesDelete = GlobalForwardingRulesDelete'
     { _gfrdProject        :: !Text
     , _gfrdForwardingRule :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,12 +72,12 @@ globalForwardingRulesDelete
     -> Text -- ^ 'gfrdForwardingRule'
     -> GlobalForwardingRulesDelete
 globalForwardingRulesDelete pGfrdProject_ pGfrdForwardingRule_ =
-    GlobalForwardingRulesDelete
+    GlobalForwardingRulesDelete'
     { _gfrdProject = pGfrdProject_
     , _gfrdForwardingRule = pGfrdForwardingRule_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 gfrdProject :: Lens' GlobalForwardingRulesDelete Text
 gfrdProject
   = lens _gfrdProject (\ s a -> s{_gfrdProject = a})
@@ -91,7 +91,10 @@ gfrdForwardingRule
 instance GoogleRequest GlobalForwardingRulesDelete
          where
         type Rs GlobalForwardingRulesDelete = Operation
-        requestClient GlobalForwardingRulesDelete{..}
+        type Scopes GlobalForwardingRulesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient GlobalForwardingRulesDelete'{..}
           = go _gfrdProject _gfrdForwardingRule (Just AltJSON)
               computeService
           where go

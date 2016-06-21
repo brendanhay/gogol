@@ -7,20 +7,22 @@
 
 -- |
 -- Module      : Network.Google.AppEngine
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google App Engine Admin API enables developers to provision and
--- manage their App Engine applications.
+-- Provisions and manages App Engine applications.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference>
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference>
 module Network.Google.AppEngine
     (
     -- * Service Configuration
       appEngineService
+
+    -- * OAuth Scopes
+    , cloudPlatformScope
 
     -- * API Declaration
     , AppEngineAPI
@@ -30,37 +32,51 @@ module Network.Google.AppEngine
     -- ** appengine.apps.get
     , module Network.Google.Resource.AppEngine.Apps.Get
 
-    -- ** appengine.apps.modules.delete
-    , module Network.Google.Resource.AppEngine.Apps.Modules.Delete
-
-    -- ** appengine.apps.modules.get
-    , module Network.Google.Resource.AppEngine.Apps.Modules.Get
-
-    -- ** appengine.apps.modules.list
-    , module Network.Google.Resource.AppEngine.Apps.Modules.List
-
-    -- ** appengine.apps.modules.patch
-    , module Network.Google.Resource.AppEngine.Apps.Modules.Patch
-
-    -- ** appengine.apps.modules.versions.create
-    , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
-
-    -- ** appengine.apps.modules.versions.delete
-    , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
-
-    -- ** appengine.apps.modules.versions.get
-    , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
-
-    -- ** appengine.apps.modules.versions.list
-    , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
-
     -- ** appengine.apps.operations.get
     , module Network.Google.Resource.AppEngine.Apps.Operations.Get
 
     -- ** appengine.apps.operations.list
     , module Network.Google.Resource.AppEngine.Apps.Operations.List
 
+    -- ** appengine.apps.services.delete
+    , module Network.Google.Resource.AppEngine.Apps.Services.Delete
+
+    -- ** appengine.apps.services.get
+    , module Network.Google.Resource.AppEngine.Apps.Services.Get
+
+    -- ** appengine.apps.services.list
+    , module Network.Google.Resource.AppEngine.Apps.Services.List
+
+    -- ** appengine.apps.services.patch
+    , module Network.Google.Resource.AppEngine.Apps.Services.Patch
+
+    -- ** appengine.apps.services.versions.create
+    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
+
+    -- ** appengine.apps.services.versions.delete
+    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
+
+    -- ** appengine.apps.services.versions.get
+    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
+
+    -- ** appengine.apps.services.versions.instances.list
+    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
+
+    -- ** appengine.apps.services.versions.list
+    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.List
+
+    -- ** appengine.apps.services.versions.patch
+    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
+
     -- * Types
+
+    -- ** NetworkUtilization
+    , NetworkUtilization
+    , networkUtilization
+    , nuTargetReceivedBytesPerSec
+    , nuTargetSentPacketsPerSec
+    , nuTargetReceivedPacketsPerSec
+    , nuTargetSentBytesPerSec
 
     -- ** Status
     , Status
@@ -85,6 +101,12 @@ module Network.Google.AppEngine
     , scriptHandler
     , shScriptPath
 
+    -- ** ListServicesResponse
+    , ListServicesResponse
+    , listServicesResponse
+    , lsrNextPageToken
+    , lsrServices
+
     -- ** URLMap
     , URLMap
     , urlMap
@@ -96,13 +118,20 @@ module Network.Google.AppEngine
     , umAuthFailAction
     , umStaticFiles
     , umLogin
-    , umStaticDirectory
 
     -- ** Library
     , Library
     , library
     , lName
     , lVersion
+
+    -- ** DiskUtilization
+    , DiskUtilization
+    , diskUtilization
+    , duTargetWriteOpsPerSec
+    , duTargetReadOpsPerSec
+    , duTargetWriteBytesPerSec
+    , duTargetReadBytesPerSec
 
     -- ** ListOperationsResponse
     , ListOperationsResponse
@@ -138,16 +167,27 @@ module Network.Google.AppEngine
     -- ** Application
     , Application
     , application
+    , aDefaultHostname
+    , aDefaultCookieExpiration
     , aLocation
+    , aAuthDomain
     , aCodeBucket
     , aName
     , aDispatchRules
+    , aDefaultBucket
     , aId
 
     -- ** VersionBetaSettings
     , VersionBetaSettings
     , versionBetaSettings
     , vbsAddtional
+
+    -- ** Service
+    , Service
+    , service
+    , sSplit
+    , sName
+    , sId
 
     -- ** Operation
     , Operation
@@ -162,13 +202,8 @@ module Network.Google.AppEngine
     , URLDispatchRule
     , urlDispatchRule
     , udrPath
+    , udrService
     , udrDomain
-    , udrModule
-
-    -- ** StaticDirectoryHandlerHTTPHeaders
-    , StaticDirectoryHandlerHTTPHeaders
-    , staticDirectoryHandlerHTTPHeaders
-    , sdhhttphAddtional
 
     -- ** ListVersionsResponse
     , ListVersionsResponse
@@ -186,21 +221,27 @@ module Network.Google.AppEngine
     -- ** AutomaticScaling
     , AutomaticScaling
     , automaticScaling
+    , asNetworkUtilization
     , asMaxTotalInstances
     , asMinIdleInstances
+    , asDiskUtilization
     , asMinPendingLatency
     , asCPUUtilization
     , asMaxIdleInstances
     , asMinTotalInstances
     , asMaxConcurrentRequests
     , asCoolDownPeriod
+    , asRequestUtilization
     , asMaxPendingLatency
 
-    -- ** ListModulesResponse
-    , ListModulesResponse
-    , listModulesResponse
-    , lmrNextPageToken
-    , lmrModules
+    -- ** OperationMetadataV1Beta5
+    , OperationMetadataV1Beta5
+    , operationMetadataV1Beta5
+    , omvbInsertTime
+    , omvbUser
+    , omvbMethod
+    , omvbEndTime
+    , omvbTarget
 
     -- ** APIEndpointHandler
     , APIEndpointHandler
@@ -285,15 +326,9 @@ module Network.Google.AppEngine
     , vId
     , vEnvVariables
     , vServingStatus
+    , vDiskUsageBytes
     , vLibraries
     , vDeployment
-
-    -- ** Module
-    , Module
-    , module'
-    , mSplit
-    , mName
-    , mId
 
     -- ** StaticFilesHandler
     , StaticFilesHandler
@@ -323,6 +358,18 @@ module Network.Google.AppEngine
     , omOperationType
     , omTarget
 
+    -- ** ListInstancesResponse
+    , ListInstancesResponse
+    , listInstancesResponse
+    , lirNextPageToken
+    , lirInstances
+
+    -- ** RequestUtilization
+    , RequestUtilization
+    , requestUtilization
+    , ruTargetConcurrentRequests
+    , ruTargetRequestCountPerSec
+
     -- ** SourceReference
     , SourceReference
     , sourceReference
@@ -339,37 +386,48 @@ module Network.Google.AppEngine
     , containerInfo
     , ciImage
 
+    -- ** Instance
+    , Instance
+    , instance'
+    , iMemoryUsage
+    , iVMStatus
+    , iVMZoneName
+    , iVMId
+    , iAvailability
+    , iVMName
+    , iName
+    , iVMUnlocked
+    , iRequests
+    , iQps
+    , iId
+    , iErrors
+    , iAverageLatency
+    , iStartTimestamp
+    , iAppEngineRelease
+
     -- ** Deployment
     , Deployment
     , deployment
     , dContainer
     , dFiles
     , dSourceReferences
-
-    -- ** StaticDirectoryHandler
-    , StaticDirectoryHandler
-    , staticDirectoryHandler
-    , sdhHTTPHeaders
-    , sdhRequireMatchingFile
-    , sdhExpiration
-    , sdhMimeType
-    , sdhApplicationReadable
-    , sdhDirectory
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.AppEngine.Apps.Get
-import           Network.Google.Resource.AppEngine.Apps.Modules.Delete
-import           Network.Google.Resource.AppEngine.Apps.Modules.Get
-import           Network.Google.Resource.AppEngine.Apps.Modules.List
-import           Network.Google.Resource.AppEngine.Apps.Modules.Patch
-import           Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
-import           Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
-import           Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
-import           Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
 import           Network.Google.Resource.AppEngine.Apps.Operations.Get
 import           Network.Google.Resource.AppEngine.Apps.Operations.List
+import           Network.Google.Resource.AppEngine.Apps.Services.Delete
+import           Network.Google.Resource.AppEngine.Apps.Services.Get
+import           Network.Google.Resource.AppEngine.Apps.Services.List
+import           Network.Google.Resource.AppEngine.Apps.Services.Patch
+import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
+import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
+import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
+import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
+import           Network.Google.Resource.AppEngine.Apps.Services.Versions.List
+import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
 
 {- $resources
 TODO
@@ -377,14 +435,16 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google App Engine Admin API service.
 type AppEngineAPI =
-     AppsModulesVersionsListResource :<|>
-       AppsModulesVersionsGetResource
-       :<|> AppsModulesVersionsCreateResource
-       :<|> AppsModulesVersionsDeleteResource
-       :<|> AppsModulesListResource
-       :<|> AppsModulesPatchResource
-       :<|> AppsModulesGetResource
-       :<|> AppsModulesDeleteResource
-       :<|> AppsOperationsListResource
-       :<|> AppsOperationsGetResource
+     AppsOperationsListResource :<|>
+       AppsOperationsGetResource
+       :<|> AppsServicesVersionsInstancesListResource
+       :<|> AppsServicesVersionsListResource
+       :<|> AppsServicesVersionsPatchResource
+       :<|> AppsServicesVersionsGetResource
+       :<|> AppsServicesVersionsCreateResource
+       :<|> AppsServicesVersionsDeleteResource
+       :<|> AppsServicesListResource
+       :<|> AppsServicesPatchResource
+       :<|> AppsServicesGetResource
+       :<|> AppsServicesDeleteResource
        :<|> AppsGetResource

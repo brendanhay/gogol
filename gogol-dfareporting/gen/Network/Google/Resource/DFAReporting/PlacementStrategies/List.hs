@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlacementStrategies.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesList' request conforms to.
 type PlacementStrategiesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -69,7 +69,7 @@ type PlacementStrategiesListResource =
 -- | Retrieves a list of placement strategies, possibly filtered.
 --
 -- /See:/ 'placementStrategiesList' smart constructor.
-data PlacementStrategiesList = PlacementStrategiesList
+data PlacementStrategiesList = PlacementStrategiesList'
     { _pslSearchString :: !(Maybe Text)
     , _pslIds          :: !(Maybe [Textual Int64])
     , _pslProFileId    :: !(Textual Int64)
@@ -100,7 +100,7 @@ placementStrategiesList
     :: Int64 -- ^ 'pslProFileId'
     -> PlacementStrategiesList
 placementStrategiesList pPslProFileId_ =
-    PlacementStrategiesList
+    PlacementStrategiesList'
     { _pslSearchString = Nothing
     , _pslIds = Nothing
     , _pslProFileId = _Coerce # pPslProFileId_
@@ -160,7 +160,9 @@ pslMaxResults
 instance GoogleRequest PlacementStrategiesList where
         type Rs PlacementStrategiesList =
              PlacementStrategiesListResponse
-        requestClient PlacementStrategiesList{..}
+        type Scopes PlacementStrategiesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementStrategiesList'{..}
           = go _pslProFileId _pslSearchString
               (_pslIds ^. _Default)
               _pslSortOrder

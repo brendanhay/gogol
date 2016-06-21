@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.Plus.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | The service provider that initially published this activity.
 --
 -- /See:/ 'activityProvider' smart constructor.
-newtype ActivityProvider = ActivityProvider
+newtype ActivityProvider = ActivityProvider'
     { _apTitle :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -35,7 +35,7 @@ newtype ActivityProvider = ActivityProvider
 activityProvider
     :: ActivityProvider
 activityProvider =
-    ActivityProvider
+    ActivityProvider'
     { _apTitle = Nothing
     }
 
@@ -46,16 +46,16 @@ apTitle = lens _apTitle (\ s a -> s{_apTitle = a})
 instance FromJSON ActivityProvider where
         parseJSON
           = withObject "ActivityProvider"
-              (\ o -> ActivityProvider <$> (o .:? "title"))
+              (\ o -> ActivityProvider' <$> (o .:? "title"))
 
 instance ToJSON ActivityProvider where
-        toJSON ActivityProvider{..}
+        toJSON ActivityProvider'{..}
           = object (catMaybes [("title" .=) <$> _apTitle])
 
 -- | If the attachment is a video, the embeddable link.
 --
 -- /See:/ 'activityObjectAttachmentsItemEmbed' smart constructor.
-data ActivityObjectAttachmentsItemEmbed = ActivityObjectAttachmentsItemEmbed
+data ActivityObjectAttachmentsItemEmbed = ActivityObjectAttachmentsItemEmbed'
     { _aoaieURL  :: !(Maybe Text)
     , _aoaieType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ data ActivityObjectAttachmentsItemEmbed = ActivityObjectAttachmentsItemEmbed
 activityObjectAttachmentsItemEmbed
     :: ActivityObjectAttachmentsItemEmbed
 activityObjectAttachmentsItemEmbed =
-    ActivityObjectAttachmentsItemEmbed
+    ActivityObjectAttachmentsItemEmbed'
     { _aoaieURL = Nothing
     , _aoaieType = Nothing
     }
@@ -89,12 +89,12 @@ instance FromJSON ActivityObjectAttachmentsItemEmbed
         parseJSON
           = withObject "ActivityObjectAttachmentsItemEmbed"
               (\ o ->
-                 ActivityObjectAttachmentsItemEmbed <$>
+                 ActivityObjectAttachmentsItemEmbed' <$>
                    (o .:? "url") <*> (o .:? "type"))
 
 instance ToJSON ActivityObjectAttachmentsItemEmbed
          where
-        toJSON ActivityObjectAttachmentsItemEmbed{..}
+        toJSON ActivityObjectAttachmentsItemEmbed'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _aoaieURL,
@@ -103,7 +103,7 @@ instance ToJSON ActivityObjectAttachmentsItemEmbed
 -- | People who +1\'d this comment.
 --
 -- /See:/ 'commentPlusoners' smart constructor.
-newtype CommentPlusoners = CommentPlusoners
+newtype CommentPlusoners = CommentPlusoners'
     { _cpTotalItems :: Maybe (Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -115,7 +115,7 @@ newtype CommentPlusoners = CommentPlusoners
 commentPlusoners
     :: CommentPlusoners
 commentPlusoners =
-    CommentPlusoners
+    CommentPlusoners'
     { _cpTotalItems = Nothing
     }
 
@@ -128,17 +128,17 @@ cpTotalItems
 instance FromJSON CommentPlusoners where
         parseJSON
           = withObject "CommentPlusoners"
-              (\ o -> CommentPlusoners <$> (o .:? "totalItems"))
+              (\ o -> CommentPlusoners' <$> (o .:? "totalItems"))
 
 instance ToJSON CommentPlusoners where
-        toJSON CommentPlusoners{..}
+        toJSON CommentPlusoners'{..}
           = object
               (catMaybes [("totalItems" .=) <$> _cpTotalItems])
 
 -- | Actor info specific to particular clients.
 --
 -- /See:/ 'commentActorClientSpecificActorInfo' smart constructor.
-newtype CommentActorClientSpecificActorInfo = CommentActorClientSpecificActorInfo
+newtype CommentActorClientSpecificActorInfo = CommentActorClientSpecificActorInfo'
     { _cacsaiYouTubeActorInfo :: Maybe CommentActorClientSpecificActorInfoYouTubeActorInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -150,7 +150,7 @@ newtype CommentActorClientSpecificActorInfo = CommentActorClientSpecificActorInf
 commentActorClientSpecificActorInfo
     :: CommentActorClientSpecificActorInfo
 commentActorClientSpecificActorInfo =
-    CommentActorClientSpecificActorInfo
+    CommentActorClientSpecificActorInfo'
     { _cacsaiYouTubeActorInfo = Nothing
     }
 
@@ -165,12 +165,12 @@ instance FromJSON CommentActorClientSpecificActorInfo
         parseJSON
           = withObject "CommentActorClientSpecificActorInfo"
               (\ o ->
-                 CommentActorClientSpecificActorInfo <$>
+                 CommentActorClientSpecificActorInfo' <$>
                    (o .:? "youtubeActorInfo"))
 
 instance ToJSON CommentActorClientSpecificActorInfo
          where
-        toJSON CommentActorClientSpecificActorInfo{..}
+        toJSON CommentActorClientSpecificActorInfo'{..}
           = object
               (catMaybes
                  [("youtubeActorInfo" .=) <$>
@@ -179,7 +179,7 @@ instance ToJSON CommentActorClientSpecificActorInfo
 -- | Actor info specific to YouTube clients.
 --
 -- /See:/ 'activityObjectActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
-newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo = ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo = ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
     { _aoacsaiytaiChannelId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -191,7 +191,7 @@ newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo = ActivityObj
 activityObjectActorClientSpecificActorInfoYouTubeActorInfo
     :: ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
 activityObjectActorClientSpecificActorInfoYouTubeActorInfo =
-    ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
     { _aoacsaiytaiChannelId = Nothing
     }
 
@@ -208,14 +208,14 @@ instance FromJSON
           = withObject
               "ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo"
               (\ o ->
-                 ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+                 ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
                    <$> (o .:? "channelId"))
 
 instance ToJSON
          ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
          where
         toJSON
-          ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo{..}
+          ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'{..}
           = object
               (catMaybes
                  [("channelId" .=) <$> _aoacsaiytaiChannelId])
@@ -223,7 +223,7 @@ instance ToJSON
 -- | People who +1\'d this activity.
 --
 -- /See:/ 'activityObjectPlusoners' smart constructor.
-data ActivityObjectPlusoners = ActivityObjectPlusoners
+data ActivityObjectPlusoners = ActivityObjectPlusoners'
     { _aopTotalItems :: !(Maybe (Textual Word32))
     , _aopSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -238,7 +238,7 @@ data ActivityObjectPlusoners = ActivityObjectPlusoners
 activityObjectPlusoners
     :: ActivityObjectPlusoners
 activityObjectPlusoners =
-    ActivityObjectPlusoners
+    ActivityObjectPlusoners'
     { _aopTotalItems = Nothing
     , _aopSelfLink = Nothing
     }
@@ -259,11 +259,11 @@ instance FromJSON ActivityObjectPlusoners where
         parseJSON
           = withObject "ActivityObjectPlusoners"
               (\ o ->
-                 ActivityObjectPlusoners <$>
+                 ActivityObjectPlusoners' <$>
                    (o .:? "totalItems") <*> (o .:? "selfLink"))
 
 instance ToJSON ActivityObjectPlusoners where
-        toJSON ActivityObjectPlusoners{..}
+        toJSON ActivityObjectPlusoners'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _aopTotalItems,
@@ -271,7 +271,7 @@ instance ToJSON ActivityObjectPlusoners where
 
 --
 -- /See:/ 'personEmailsItem' smart constructor.
-data PersonEmailsItem = PersonEmailsItem
+data PersonEmailsItem = PersonEmailsItem'
     { _peiValue :: !(Maybe Text)
     , _peiType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -286,7 +286,7 @@ data PersonEmailsItem = PersonEmailsItem
 personEmailsItem
     :: PersonEmailsItem
 personEmailsItem =
-    PersonEmailsItem
+    PersonEmailsItem'
     { _peiValue = Nothing
     , _peiType = Nothing
     }
@@ -306,11 +306,11 @@ instance FromJSON PersonEmailsItem where
         parseJSON
           = withObject "PersonEmailsItem"
               (\ o ->
-                 PersonEmailsItem <$>
+                 PersonEmailsItem' <$>
                    (o .:? "value") <*> (o .:? "type"))
 
 instance ToJSON PersonEmailsItem where
-        toJSON PersonEmailsItem{..}
+        toJSON PersonEmailsItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _peiValue,
@@ -319,7 +319,7 @@ instance ToJSON PersonEmailsItem where
 -- | The image representation of this actor.
 --
 -- /See:/ 'commentActorImage' smart constructor.
-newtype CommentActorImage = CommentActorImage
+newtype CommentActorImage = CommentActorImage'
     { _caiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -331,7 +331,7 @@ newtype CommentActorImage = CommentActorImage
 commentActorImage
     :: CommentActorImage
 commentActorImage =
-    CommentActorImage
+    CommentActorImage'
     { _caiURL = Nothing
     }
 
@@ -344,16 +344,16 @@ caiURL = lens _caiURL (\ s a -> s{_caiURL = a})
 instance FromJSON CommentActorImage where
         parseJSON
           = withObject "CommentActorImage"
-              (\ o -> CommentActorImage <$> (o .:? "url"))
+              (\ o -> CommentActorImage' <$> (o .:? "url"))
 
 instance ToJSON CommentActorImage where
-        toJSON CommentActorImage{..}
+        toJSON CommentActorImage'{..}
           = object (catMaybes [("url" .=) <$> _caiURL])
 
 -- | Image resource.
 --
 -- /See:/ 'activityObjectAttachmentsItemThumbnailsItemImage' smart constructor.
-data ActivityObjectAttachmentsItemThumbnailsItemImage = ActivityObjectAttachmentsItemThumbnailsItemImage
+data ActivityObjectAttachmentsItemThumbnailsItemImage = ActivityObjectAttachmentsItemThumbnailsItemImage'
     { _aoaitiiHeight :: !(Maybe (Textual Word32))
     , _aoaitiiURL    :: !(Maybe Text)
     , _aoaitiiWidth  :: !(Maybe (Textual Word32))
@@ -374,7 +374,7 @@ data ActivityObjectAttachmentsItemThumbnailsItemImage = ActivityObjectAttachment
 activityObjectAttachmentsItemThumbnailsItemImage
     :: ActivityObjectAttachmentsItemThumbnailsItemImage
 activityObjectAttachmentsItemThumbnailsItemImage =
-    ActivityObjectAttachmentsItemThumbnailsItemImage
+    ActivityObjectAttachmentsItemThumbnailsItemImage'
     { _aoaitiiHeight = Nothing
     , _aoaitiiURL = Nothing
     , _aoaitiiWidth = Nothing
@@ -411,7 +411,7 @@ instance FromJSON
           = withObject
               "ActivityObjectAttachmentsItemThumbnailsItemImage"
               (\ o ->
-                 ActivityObjectAttachmentsItemThumbnailsItemImage <$>
+                 ActivityObjectAttachmentsItemThumbnailsItemImage' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width")
                      <*> (o .:? "type"))
@@ -420,7 +420,7 @@ instance ToJSON
          ActivityObjectAttachmentsItemThumbnailsItemImage
          where
         toJSON
-          ActivityObjectAttachmentsItemThumbnailsItemImage{..}
+          ActivityObjectAttachmentsItemThumbnailsItemImage'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _aoaitiiHeight,
@@ -431,7 +431,7 @@ instance ToJSON
 -- | The position of the place.
 --
 -- /See:/ 'placePosition' smart constructor.
-data PlacePosition = PlacePosition
+data PlacePosition = PlacePosition'
     { _ppLatitude  :: !(Maybe (Textual Double))
     , _ppLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -446,7 +446,7 @@ data PlacePosition = PlacePosition
 placePosition
     :: PlacePosition
 placePosition =
-    PlacePosition
+    PlacePosition'
     { _ppLatitude = Nothing
     , _ppLongitude = Nothing
     }
@@ -467,11 +467,11 @@ instance FromJSON PlacePosition where
         parseJSON
           = withObject "PlacePosition"
               (\ o ->
-                 PlacePosition <$>
+                 PlacePosition' <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
 instance ToJSON PlacePosition where
-        toJSON PlacePosition{..}
+        toJSON PlacePosition'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _ppLatitude,
@@ -479,7 +479,7 @@ instance ToJSON PlacePosition where
 
 --
 -- /See:/ 'personPlacesLivedItem' smart constructor.
-data PersonPlacesLivedItem = PersonPlacesLivedItem
+data PersonPlacesLivedItem = PersonPlacesLivedItem'
     { _ppliValue   :: !(Maybe Text)
     , _ppliPrimary :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -494,7 +494,7 @@ data PersonPlacesLivedItem = PersonPlacesLivedItem
 personPlacesLivedItem
     :: PersonPlacesLivedItem
 personPlacesLivedItem =
-    PersonPlacesLivedItem
+    PersonPlacesLivedItem'
     { _ppliValue = Nothing
     , _ppliPrimary = Nothing
     }
@@ -515,11 +515,11 @@ instance FromJSON PersonPlacesLivedItem where
         parseJSON
           = withObject "PersonPlacesLivedItem"
               (\ o ->
-                 PersonPlacesLivedItem <$>
+                 PersonPlacesLivedItem' <$>
                    (o .:? "value") <*> (o .:? "primary"))
 
 instance ToJSON PersonPlacesLivedItem where
-        toJSON PersonPlacesLivedItem{..}
+        toJSON PersonPlacesLivedItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _ppliValue,
@@ -528,7 +528,7 @@ instance ToJSON PersonPlacesLivedItem where
 -- | Actor info specific to particular clients.
 --
 -- /See:/ 'activityActorClientSpecificActorInfo' smart constructor.
-newtype ActivityActorClientSpecificActorInfo = ActivityActorClientSpecificActorInfo
+newtype ActivityActorClientSpecificActorInfo = ActivityActorClientSpecificActorInfo'
     { _aacsaiYouTubeActorInfo :: Maybe ActivityActorClientSpecificActorInfoYouTubeActorInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -540,7 +540,7 @@ newtype ActivityActorClientSpecificActorInfo = ActivityActorClientSpecificActorI
 activityActorClientSpecificActorInfo
     :: ActivityActorClientSpecificActorInfo
 activityActorClientSpecificActorInfo =
-    ActivityActorClientSpecificActorInfo
+    ActivityActorClientSpecificActorInfo'
     { _aacsaiYouTubeActorInfo = Nothing
     }
 
@@ -555,12 +555,12 @@ instance FromJSON
         parseJSON
           = withObject "ActivityActorClientSpecificActorInfo"
               (\ o ->
-                 ActivityActorClientSpecificActorInfo <$>
+                 ActivityActorClientSpecificActorInfo' <$>
                    (o .:? "youtubeActorInfo"))
 
 instance ToJSON ActivityActorClientSpecificActorInfo
          where
-        toJSON ActivityActorClientSpecificActorInfo{..}
+        toJSON ActivityActorClientSpecificActorInfo'{..}
           = object
               (catMaybes
                  [("youtubeActorInfo" .=) <$>
@@ -568,7 +568,7 @@ instance ToJSON ActivityActorClientSpecificActorInfo
 
 --
 -- /See:/ 'person' smart constructor.
-data Person = Person
+data Person = Person'
     { _pCurrentLocation    :: !(Maybe Text)
     , _pAgeRange           :: !(Maybe PersonAgeRange)
     , _pEtag               :: !(Maybe Text)
@@ -667,7 +667,7 @@ data Person = Person
 person
     :: Person
 person =
-    Person
+    Person'
     { _pCurrentLocation = Nothing
     , _pAgeRange = Nothing
     , _pEtag = Nothing
@@ -878,7 +878,7 @@ instance FromJSON Person where
         parseJSON
           = withObject "Person"
               (\ o ->
-                 Person <$>
+                 Person' <$>
                    (o .:? "currentLocation") <*> (o .:? "ageRange") <*>
                      (o .:? "etag")
                      <*> (o .:? "image")
@@ -910,7 +910,7 @@ instance FromJSON Person where
                      <*> (o .:? "circledByCount"))
 
 instance ToJSON Person where
-        toJSON Person{..}
+        toJSON Person'{..}
           = object
               (catMaybes
                  [("currentLocation" .=) <$> _pCurrentLocation,
@@ -941,7 +941,7 @@ instance ToJSON Person where
 -- | The preview image for photos or videos.
 --
 -- /See:/ 'activityObjectAttachmentsItemImage' smart constructor.
-data ActivityObjectAttachmentsItemImage = ActivityObjectAttachmentsItemImage
+data ActivityObjectAttachmentsItemImage = ActivityObjectAttachmentsItemImage'
     { _aoaiiHeight :: !(Maybe (Textual Word32))
     , _aoaiiURL    :: !(Maybe Text)
     , _aoaiiWidth  :: !(Maybe (Textual Word32))
@@ -962,7 +962,7 @@ data ActivityObjectAttachmentsItemImage = ActivityObjectAttachmentsItemImage
 activityObjectAttachmentsItemImage
     :: ActivityObjectAttachmentsItemImage
 activityObjectAttachmentsItemImage =
-    ActivityObjectAttachmentsItemImage
+    ActivityObjectAttachmentsItemImage'
     { _aoaiiHeight = Nothing
     , _aoaiiURL = Nothing
     , _aoaiiWidth = Nothing
@@ -995,14 +995,14 @@ instance FromJSON ActivityObjectAttachmentsItemImage
         parseJSON
           = withObject "ActivityObjectAttachmentsItemImage"
               (\ o ->
-                 ActivityObjectAttachmentsItemImage <$>
+                 ActivityObjectAttachmentsItemImage' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width")
                      <*> (o .:? "type"))
 
 instance ToJSON ActivityObjectAttachmentsItemImage
          where
-        toJSON ActivityObjectAttachmentsItemImage{..}
+        toJSON ActivityObjectAttachmentsItemImage'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _aoaiiHeight,
@@ -1013,7 +1013,7 @@ instance ToJSON ActivityObjectAttachmentsItemImage
 -- | The person who posted this comment.
 --
 -- /See:/ 'commentActor' smart constructor.
-data CommentActor = CommentActor
+data CommentActor = CommentActor'
     { _caClientSpecificActorInfo :: !(Maybe CommentActorClientSpecificActorInfo)
     , _caImage                   :: !(Maybe CommentActorImage)
     , _caURL                     :: !(Maybe Text)
@@ -1040,7 +1040,7 @@ data CommentActor = CommentActor
 commentActor
     :: CommentActor
 commentActor =
-    CommentActor
+    CommentActor'
     { _caClientSpecificActorInfo = Nothing
     , _caImage = Nothing
     , _caURL = Nothing
@@ -1083,7 +1083,7 @@ instance FromJSON CommentActor where
         parseJSON
           = withObject "CommentActor"
               (\ o ->
-                 CommentActor <$>
+                 CommentActor' <$>
                    (o .:? "clientSpecificActorInfo") <*> (o .:? "image")
                      <*> (o .:? "url")
                      <*> (o .:? "displayName")
@@ -1091,7 +1091,7 @@ instance FromJSON CommentActor where
                      <*> (o .:? "verification"))
 
 instance ToJSON CommentActor where
-        toJSON CommentActor{..}
+        toJSON CommentActor'{..}
           = object
               (catMaybes
                  [("clientSpecificActorInfo" .=) <$>
@@ -1101,111 +1101,10 @@ instance ToJSON CommentActor where
                   ("id" .=) <$> _caId,
                   ("verification" .=) <$> _caVerification])
 
---
--- /See:/ 'moment' smart constructor.
-data Moment = Moment
-    { _mKind      :: !Text
-    , _mResult    :: !(Maybe ItemScope)
-    , _mStartDate :: !(Maybe DateTime')
-    , _mObject    :: !(Maybe ItemScope)
-    , _mId        :: !(Maybe Text)
-    , _mType      :: !(Maybe Text)
-    , _mTarget    :: !(Maybe ItemScope)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Moment' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mKind'
---
--- * 'mResult'
---
--- * 'mStartDate'
---
--- * 'mObject'
---
--- * 'mId'
---
--- * 'mType'
---
--- * 'mTarget'
-moment
-    :: Moment
-moment =
-    Moment
-    { _mKind = "plus#moment"
-    , _mResult = Nothing
-    , _mStartDate = Nothing
-    , _mObject = Nothing
-    , _mId = Nothing
-    , _mType = Nothing
-    , _mTarget = Nothing
-    }
-
--- | Identifies this resource as a moment.
-mKind :: Lens' Moment Text
-mKind = lens _mKind (\ s a -> s{_mKind = a})
-
--- | The object generated by performing the action on the object. For
--- example, a user writes a review of a restaurant, the object is the
--- restaurant and the result is the review.
-mResult :: Lens' Moment (Maybe ItemScope)
-mResult = lens _mResult (\ s a -> s{_mResult = a})
-
--- | Time stamp of when the action occurred in RFC3339 format.
-mStartDate :: Lens' Moment (Maybe UTCTime)
-mStartDate
-  = lens _mStartDate (\ s a -> s{_mStartDate = a}) .
-      mapping _DateTime
-
--- | The object on which the action was performed. Specifying this is
--- equivalent with specifying \"target\". Note that responses from the
--- server will use the \"target\" field instead for backward-compatibility
--- with older clients.
-mObject :: Lens' Moment (Maybe ItemScope)
-mObject = lens _mObject (\ s a -> s{_mObject = a})
-
--- | The moment ID.
-mId :: Lens' Moment (Maybe Text)
-mId = lens _mId (\ s a -> s{_mId = a})
-
--- | The schema.org type for the type of moment to write. For example,
--- http:\/\/schema.org\/AddAction. Note that responses from the server will
--- use the Google schema type instead for backward-compatibility with older
--- clients. For example, http:\/\/schemas.google.com\/AddActivity.
-mType :: Lens' Moment (Maybe Text)
-mType = lens _mType (\ s a -> s{_mType = a})
-
--- | The object on which the action was performed.
-mTarget :: Lens' Moment (Maybe ItemScope)
-mTarget = lens _mTarget (\ s a -> s{_mTarget = a})
-
-instance FromJSON Moment where
-        parseJSON
-          = withObject "Moment"
-              (\ o ->
-                 Moment <$>
-                   (o .:? "kind" .!= "plus#moment") <*> (o .:? "result")
-                     <*> (o .:? "startDate")
-                     <*> (o .:? "object")
-                     <*> (o .:? "id")
-                     <*> (o .:? "type")
-                     <*> (o .:? "target"))
-
-instance ToJSON Moment where
-        toJSON Moment{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _mKind), ("result" .=) <$> _mResult,
-                  ("startDate" .=) <$> _mStartDate,
-                  ("object" .=) <$> _mObject, ("id" .=) <$> _mId,
-                  ("type" .=) <$> _mType, ("target" .=) <$> _mTarget])
-
 -- | The object of this activity.
 --
 -- /See:/ 'activityObject' smart constructor.
-data ActivityObject = ActivityObject
+data ActivityObject = ActivityObject'
     { _aoPlusoners       :: !(Maybe ActivityObjectPlusoners)
     , _aoAttachments     :: !(Maybe [ActivityObjectAttachmentsItem])
     , _aoObjectType      :: !(Maybe Text)
@@ -1244,7 +1143,7 @@ data ActivityObject = ActivityObject
 activityObject
     :: ActivityObject
 activityObject =
-    ActivityObject
+    ActivityObject'
     { _aoPlusoners = Nothing
     , _aoAttachments = Nothing
     , _aoObjectType = Nothing
@@ -1319,7 +1218,7 @@ instance FromJSON ActivityObject where
         parseJSON
           = withObject "ActivityObject"
               (\ o ->
-                 ActivityObject <$>
+                 ActivityObject' <$>
                    (o .:? "plusoners") <*>
                      (o .:? "attachments" .!= mempty)
                      <*> (o .:? "objectType")
@@ -1332,7 +1231,7 @@ instance FromJSON ActivityObject where
                      <*> (o .:? "resharers"))
 
 instance ToJSON ActivityObject where
-        toJSON ActivityObject{..}
+        toJSON ActivityObject'{..}
           = object
               (catMaybes
                  [("plusoners" .=) <$> _aoPlusoners,
@@ -1349,7 +1248,7 @@ instance ToJSON ActivityObject where
 -- activity\'s actor.
 --
 -- /See:/ 'activityObjectActor' smart constructor.
-data ActivityObjectActor = ActivityObjectActor
+data ActivityObjectActor = ActivityObjectActor'
     { _aoaClientSpecificActorInfo :: !(Maybe ActivityObjectActorClientSpecificActorInfo)
     , _aoaImage                   :: !(Maybe ActivityObjectActorImage)
     , _aoaURL                     :: !(Maybe Text)
@@ -1376,7 +1275,7 @@ data ActivityObjectActor = ActivityObjectActor
 activityObjectActor
     :: ActivityObjectActor
 activityObjectActor =
-    ActivityObjectActor
+    ActivityObjectActor'
     { _aoaClientSpecificActorInfo = Nothing
     , _aoaImage = Nothing
     , _aoaURL = Nothing
@@ -1419,7 +1318,7 @@ instance FromJSON ActivityObjectActor where
         parseJSON
           = withObject "ActivityObjectActor"
               (\ o ->
-                 ActivityObjectActor <$>
+                 ActivityObjectActor' <$>
                    (o .:? "clientSpecificActorInfo") <*> (o .:? "image")
                      <*> (o .:? "url")
                      <*> (o .:? "displayName")
@@ -1427,7 +1326,7 @@ instance FromJSON ActivityObjectActor where
                      <*> (o .:? "verification"))
 
 instance ToJSON ActivityObjectActor where
-        toJSON ActivityObjectActor{..}
+        toJSON ActivityObjectActor'{..}
           = object
               (catMaybes
                  [("clientSpecificActorInfo" .=) <$>
@@ -1440,7 +1339,7 @@ instance ToJSON ActivityObjectActor where
 -- | The full image URL for photo attachments.
 --
 -- /See:/ 'activityObjectAttachmentsItemFullImage' smart constructor.
-data ActivityObjectAttachmentsItemFullImage = ActivityObjectAttachmentsItemFullImage
+data ActivityObjectAttachmentsItemFullImage = ActivityObjectAttachmentsItemFullImage'
     { _aoaifiHeight :: !(Maybe (Textual Word32))
     , _aoaifiURL    :: !(Maybe Text)
     , _aoaifiWidth  :: !(Maybe (Textual Word32))
@@ -1461,7 +1360,7 @@ data ActivityObjectAttachmentsItemFullImage = ActivityObjectAttachmentsItemFullI
 activityObjectAttachmentsItemFullImage
     :: ActivityObjectAttachmentsItemFullImage
 activityObjectAttachmentsItemFullImage =
-    ActivityObjectAttachmentsItemFullImage
+    ActivityObjectAttachmentsItemFullImage'
     { _aoaifiHeight = Nothing
     , _aoaifiURL = Nothing
     , _aoaifiWidth = Nothing
@@ -1495,14 +1394,14 @@ instance FromJSON
         parseJSON
           = withObject "ActivityObjectAttachmentsItemFullImage"
               (\ o ->
-                 ActivityObjectAttachmentsItemFullImage <$>
+                 ActivityObjectAttachmentsItemFullImage' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width")
                      <*> (o .:? "type"))
 
 instance ToJSON
          ActivityObjectAttachmentsItemFullImage where
-        toJSON ActivityObjectAttachmentsItemFullImage{..}
+        toJSON ActivityObjectAttachmentsItemFullImage'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _aoaifiHeight,
@@ -1513,7 +1412,7 @@ instance ToJSON
 -- | The image representation of the actor.
 --
 -- /See:/ 'activityActorImage' smart constructor.
-newtype ActivityActorImage = ActivityActorImage
+newtype ActivityActorImage = ActivityActorImage'
     { _aaiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1525,7 +1424,7 @@ newtype ActivityActorImage = ActivityActorImage
 activityActorImage
     :: ActivityActorImage
 activityActorImage =
-    ActivityActorImage
+    ActivityActorImage'
     { _aaiURL = Nothing
     }
 
@@ -1538,15 +1437,15 @@ aaiURL = lens _aaiURL (\ s a -> s{_aaiURL = a})
 instance FromJSON ActivityActorImage where
         parseJSON
           = withObject "ActivityActorImage"
-              (\ o -> ActivityActorImage <$> (o .:? "url"))
+              (\ o -> ActivityActorImage' <$> (o .:? "url"))
 
 instance ToJSON ActivityActorImage where
-        toJSON ActivityActorImage{..}
+        toJSON ActivityActorImage'{..}
           = object (catMaybes [("url" .=) <$> _aaiURL])
 
 --
 -- /See:/ 'peopleFeed' smart constructor.
-data PeopleFeed = PeopleFeed
+data PeopleFeed = PeopleFeed'
     { _pfTotalItems    :: !(Maybe (Textual Int32))
     , _pfEtag          :: !(Maybe Text)
     , _pfNextPageToken :: !(Maybe Text)
@@ -1576,7 +1475,7 @@ data PeopleFeed = PeopleFeed
 peopleFeed
     :: PeopleFeed
 peopleFeed =
-    PeopleFeed
+    PeopleFeed'
     { _pfTotalItems = Nothing
     , _pfEtag = Nothing
     , _pfNextPageToken = Nothing
@@ -1632,7 +1531,7 @@ instance FromJSON PeopleFeed where
         parseJSON
           = withObject "PeopleFeed"
               (\ o ->
-                 PeopleFeed <$>
+                 PeopleFeed' <$>
                    (o .:? "totalItems") <*> (o .:? "etag") <*>
                      (o .:? "nextPageToken")
                      <*> (o .:? "kind" .!= "plus#peopleFeed")
@@ -1641,7 +1540,7 @@ instance FromJSON PeopleFeed where
                      <*> (o .:? "title"))
 
 instance ToJSON PeopleFeed where
-        toJSON PeopleFeed{..}
+        toJSON PeopleFeed'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _pfTotalItems,
@@ -1654,7 +1553,7 @@ instance ToJSON PeopleFeed where
 -- | The person\'s primary cover image.
 --
 -- /See:/ 'personCoverCoverPhoto' smart constructor.
-data PersonCoverCoverPhoto = PersonCoverCoverPhoto
+data PersonCoverCoverPhoto = PersonCoverCoverPhoto'
     { _pccpHeight :: !(Maybe (Textual Int32))
     , _pccpURL    :: !(Maybe Text)
     , _pccpWidth  :: !(Maybe (Textual Int32))
@@ -1672,7 +1571,7 @@ data PersonCoverCoverPhoto = PersonCoverCoverPhoto
 personCoverCoverPhoto
     :: PersonCoverCoverPhoto
 personCoverCoverPhoto =
-    PersonCoverCoverPhoto
+    PersonCoverCoverPhoto'
     { _pccpHeight = Nothing
     , _pccpURL = Nothing
     , _pccpWidth = Nothing
@@ -1698,12 +1597,12 @@ instance FromJSON PersonCoverCoverPhoto where
         parseJSON
           = withObject "PersonCoverCoverPhoto"
               (\ o ->
-                 PersonCoverCoverPhoto <$>
+                 PersonCoverCoverPhoto' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width"))
 
 instance ToJSON PersonCoverCoverPhoto where
-        toJSON PersonCoverCoverPhoto{..}
+        toJSON PersonCoverCoverPhoto'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _pccpHeight,
@@ -1715,7 +1614,7 @@ instance ToJSON PersonCoverCoverPhoto where
 -- Western age reckoning.
 --
 -- /See:/ 'personAgeRange' smart constructor.
-data PersonAgeRange = PersonAgeRange
+data PersonAgeRange = PersonAgeRange'
     { _parMax :: !(Maybe (Textual Int32))
     , _parMin :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1730,7 +1629,7 @@ data PersonAgeRange = PersonAgeRange
 personAgeRange
     :: PersonAgeRange
 personAgeRange =
-    PersonAgeRange
+    PersonAgeRange'
     { _parMax = Nothing
     , _parMin = Nothing
     }
@@ -1755,10 +1654,10 @@ instance FromJSON PersonAgeRange where
         parseJSON
           = withObject "PersonAgeRange"
               (\ o ->
-                 PersonAgeRange <$> (o .:? "max") <*> (o .:? "min"))
+                 PersonAgeRange' <$> (o .:? "max") <*> (o .:? "min"))
 
 instance ToJSON PersonAgeRange where
-        toJSON PersonAgeRange{..}
+        toJSON PersonAgeRange'{..}
           = object
               (catMaybes
                  [("max" .=) <$> _parMax, ("min" .=) <$> _parMin])
@@ -1766,7 +1665,7 @@ instance ToJSON PersonAgeRange where
 -- | The image representation of the original actor.
 --
 -- /See:/ 'activityObjectActorImage' smart constructor.
-newtype ActivityObjectActorImage = ActivityObjectActorImage
+newtype ActivityObjectActorImage = ActivityObjectActorImage'
     { _aoaiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1778,7 +1677,7 @@ newtype ActivityObjectActorImage = ActivityObjectActorImage
 activityObjectActorImage
     :: ActivityObjectActorImage
 activityObjectActorImage =
-    ActivityObjectActorImage
+    ActivityObjectActorImage'
     { _aoaiURL = Nothing
     }
 
@@ -1789,16 +1688,16 @@ aoaiURL = lens _aoaiURL (\ s a -> s{_aoaiURL = a})
 instance FromJSON ActivityObjectActorImage where
         parseJSON
           = withObject "ActivityObjectActorImage"
-              (\ o -> ActivityObjectActorImage <$> (o .:? "url"))
+              (\ o -> ActivityObjectActorImage' <$> (o .:? "url"))
 
 instance ToJSON ActivityObjectActorImage where
-        toJSON ActivityObjectActorImage{..}
+        toJSON ActivityObjectActorImage'{..}
           = object (catMaybes [("url" .=) <$> _aoaiURL])
 
 -- | Actor info specific to YouTube clients.
 --
 -- /See:/ 'commentActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
-newtype CommentActorClientSpecificActorInfoYouTubeActorInfo = CommentActorClientSpecificActorInfoYouTubeActorInfo
+newtype CommentActorClientSpecificActorInfoYouTubeActorInfo = CommentActorClientSpecificActorInfoYouTubeActorInfo'
     { _cacsaiytaiChannelId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1810,7 +1709,7 @@ newtype CommentActorClientSpecificActorInfoYouTubeActorInfo = CommentActorClient
 commentActorClientSpecificActorInfoYouTubeActorInfo
     :: CommentActorClientSpecificActorInfoYouTubeActorInfo
 commentActorClientSpecificActorInfoYouTubeActorInfo =
-    CommentActorClientSpecificActorInfoYouTubeActorInfo
+    CommentActorClientSpecificActorInfoYouTubeActorInfo'
     { _cacsaiytaiChannelId = Nothing
     }
 
@@ -1827,14 +1726,14 @@ instance FromJSON
           = withObject
               "CommentActorClientSpecificActorInfoYouTubeActorInfo"
               (\ o ->
-                 CommentActorClientSpecificActorInfoYouTubeActorInfo
+                 CommentActorClientSpecificActorInfoYouTubeActorInfo'
                    <$> (o .:? "channelId"))
 
 instance ToJSON
          CommentActorClientSpecificActorInfoYouTubeActorInfo
          where
         toJSON
-          CommentActorClientSpecificActorInfoYouTubeActorInfo{..}
+          CommentActorClientSpecificActorInfoYouTubeActorInfo'{..}
           = object
               (catMaybes
                  [("channelId" .=) <$> _cacsaiytaiChannelId])
@@ -1842,7 +1741,7 @@ instance ToJSON
 -- | Comments in reply to this activity.
 --
 -- /See:/ 'activityObjectReplies' smart constructor.
-data ActivityObjectReplies = ActivityObjectReplies
+data ActivityObjectReplies = ActivityObjectReplies'
     { _aorTotalItems :: !(Maybe (Textual Word32))
     , _aorSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1857,7 +1756,7 @@ data ActivityObjectReplies = ActivityObjectReplies
 activityObjectReplies
     :: ActivityObjectReplies
 activityObjectReplies =
-    ActivityObjectReplies
+    ActivityObjectReplies'
     { _aorTotalItems = Nothing
     , _aorSelfLink = Nothing
     }
@@ -1878,11 +1777,11 @@ instance FromJSON ActivityObjectReplies where
         parseJSON
           = withObject "ActivityObjectReplies"
               (\ o ->
-                 ActivityObjectReplies <$>
+                 ActivityObjectReplies' <$>
                    (o .:? "totalItems") <*> (o .:? "selfLink"))
 
 instance ToJSON ActivityObjectReplies where
-        toJSON ActivityObjectReplies{..}
+        toJSON ActivityObjectReplies'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _aorTotalItems,
@@ -1891,7 +1790,7 @@ instance ToJSON ActivityObjectReplies where
 -- | Verification status of actor.
 --
 -- /See:/ 'activityActorVerification' smart constructor.
-newtype ActivityActorVerification = ActivityActorVerification
+newtype ActivityActorVerification = ActivityActorVerification'
     { _aavAdHocVerified :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1903,7 +1802,7 @@ newtype ActivityActorVerification = ActivityActorVerification
 activityActorVerification
     :: ActivityActorVerification
 activityActorVerification =
-    ActivityActorVerification
+    ActivityActorVerification'
     { _aavAdHocVerified = Nothing
     }
 
@@ -1917,700 +1816,19 @@ instance FromJSON ActivityActorVerification where
         parseJSON
           = withObject "ActivityActorVerification"
               (\ o ->
-                 ActivityActorVerification <$>
+                 ActivityActorVerification' <$>
                    (o .:? "adHocVerified"))
 
 instance ToJSON ActivityActorVerification where
-        toJSON ActivityActorVerification{..}
+        toJSON ActivityActorVerification'{..}
           = object
               (catMaybes
                  [("adHocVerified" .=) <$> _aavAdHocVerified])
 
---
--- /See:/ 'itemScope' smart constructor.
-data ItemScope = ItemScope
-    { _isGivenName           :: !(Maybe Text)
-    , _isContentSize         :: !(Maybe Text)
-    , _isThumbnail           :: !(Maybe ItemScope)
-    , _isTickerSymbol        :: !(Maybe Text)
-    , _isHeight              :: !(Maybe Text)
-    , _isThumbnailURL        :: !(Maybe Text)
-    , _isImage               :: !(Maybe Text)
-    , _isStreetAddress       :: !(Maybe Text)
-    , _isWorstRating         :: !(Maybe Text)
-    , _isLocation            :: !(Maybe ItemScope)
-    , _isAttendees           :: !(Maybe [ItemScope])
-    , _isText                :: !(Maybe Text)
-    , _isKind                :: !Text
-    , _isLatitude            :: !(Maybe (Textual Double))
-    , _isPostalCode          :: !(Maybe Text)
-    , _isEndDate             :: !(Maybe Text)
-    , _isAssociatedMedia     :: !(Maybe [ItemScope])
-    , _isPlayerType          :: !(Maybe Text)
-    , _isURL                 :: !(Maybe Text)
-    , _isWidth               :: !(Maybe Text)
-    , _isCaption             :: !(Maybe Text)
-    , _isAddress             :: !(Maybe ItemScope)
-    , _isAddressCountry      :: !(Maybe Text)
-    , _isPostOfficeBoxNumber :: !(Maybe Text)
-    , _isAdditionalName      :: !(Maybe [Text])
-    , _isFamilyName          :: !(Maybe Text)
-    , _isDateCreated         :: !(Maybe Text)
-    , _isRatingValue         :: !(Maybe Text)
-    , _isDatePublished       :: !(Maybe Text)
-    , _isStartDate           :: !(Maybe Text)
-    , _isGender              :: !(Maybe Text)
-    , _isName                :: !(Maybe Text)
-    , _isBestRating          :: !(Maybe Text)
-    , _isAddressLocality     :: !(Maybe Text)
-    , _isPartOfTVSeries      :: !(Maybe ItemScope)
-    , _isContentURL          :: !(Maybe Text)
-    , _isByArtist            :: !(Maybe ItemScope)
-    , _isAbout               :: !(Maybe ItemScope)
-    , _isReviewRating        :: !(Maybe ItemScope)
-    , _isDateModified        :: !(Maybe Text)
-    , _isAuthor              :: !(Maybe [ItemScope])
-    , _isGeo                 :: !(Maybe ItemScope)
-    , _isId                  :: !(Maybe Text)
-    , _isPerformers          :: !(Maybe [ItemScope])
-    , _isAttendeeCount       :: !(Maybe (Textual Int32))
-    , _isInAlbum             :: !(Maybe ItemScope)
-    , _isEmbedURL            :: !(Maybe Text)
-    , _isType                :: !(Maybe Text)
-    , _isContributor         :: !(Maybe [ItemScope])
-    , _isLongitude           :: !(Maybe (Textual Double))
-    , _isDuration            :: !(Maybe Text)
-    , _isAddressRegion       :: !(Maybe Text)
-    , _isAudio               :: !(Maybe ItemScope)
-    , _isDescription         :: !(Maybe Text)
-    , _isBirthDate           :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ItemScope' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'isGivenName'
---
--- * 'isContentSize'
---
--- * 'isThumbnail'
---
--- * 'isTickerSymbol'
---
--- * 'isHeight'
---
--- * 'isThumbnailURL'
---
--- * 'isImage'
---
--- * 'isStreetAddress'
---
--- * 'isWorstRating'
---
--- * 'isLocation'
---
--- * 'isAttendees'
---
--- * 'isText'
---
--- * 'isKind'
---
--- * 'isLatitude'
---
--- * 'isPostalCode'
---
--- * 'isEndDate'
---
--- * 'isAssociatedMedia'
---
--- * 'isPlayerType'
---
--- * 'isURL'
---
--- * 'isWidth'
---
--- * 'isCaption'
---
--- * 'isAddress'
---
--- * 'isAddressCountry'
---
--- * 'isPostOfficeBoxNumber'
---
--- * 'isAdditionalName'
---
--- * 'isFamilyName'
---
--- * 'isDateCreated'
---
--- * 'isRatingValue'
---
--- * 'isDatePublished'
---
--- * 'isStartDate'
---
--- * 'isGender'
---
--- * 'isName'
---
--- * 'isBestRating'
---
--- * 'isAddressLocality'
---
--- * 'isPartOfTVSeries'
---
--- * 'isContentURL'
---
--- * 'isByArtist'
---
--- * 'isAbout'
---
--- * 'isReviewRating'
---
--- * 'isDateModified'
---
--- * 'isAuthor'
---
--- * 'isGeo'
---
--- * 'isId'
---
--- * 'isPerformers'
---
--- * 'isAttendeeCount'
---
--- * 'isInAlbum'
---
--- * 'isEmbedURL'
---
--- * 'isType'
---
--- * 'isContributor'
---
--- * 'isLongitude'
---
--- * 'isDuration'
---
--- * 'isAddressRegion'
---
--- * 'isAudio'
---
--- * 'isDescription'
---
--- * 'isBirthDate'
-itemScope
-    :: ItemScope
-itemScope =
-    ItemScope
-    { _isGivenName = Nothing
-    , _isContentSize = Nothing
-    , _isThumbnail = Nothing
-    , _isTickerSymbol = Nothing
-    , _isHeight = Nothing
-    , _isThumbnailURL = Nothing
-    , _isImage = Nothing
-    , _isStreetAddress = Nothing
-    , _isWorstRating = Nothing
-    , _isLocation = Nothing
-    , _isAttendees = Nothing
-    , _isText = Nothing
-    , _isKind = "plus#itemScope"
-    , _isLatitude = Nothing
-    , _isPostalCode = Nothing
-    , _isEndDate = Nothing
-    , _isAssociatedMedia = Nothing
-    , _isPlayerType = Nothing
-    , _isURL = Nothing
-    , _isWidth = Nothing
-    , _isCaption = Nothing
-    , _isAddress = Nothing
-    , _isAddressCountry = Nothing
-    , _isPostOfficeBoxNumber = Nothing
-    , _isAdditionalName = Nothing
-    , _isFamilyName = Nothing
-    , _isDateCreated = Nothing
-    , _isRatingValue = Nothing
-    , _isDatePublished = Nothing
-    , _isStartDate = Nothing
-    , _isGender = Nothing
-    , _isName = Nothing
-    , _isBestRating = Nothing
-    , _isAddressLocality = Nothing
-    , _isPartOfTVSeries = Nothing
-    , _isContentURL = Nothing
-    , _isByArtist = Nothing
-    , _isAbout = Nothing
-    , _isReviewRating = Nothing
-    , _isDateModified = Nothing
-    , _isAuthor = Nothing
-    , _isGeo = Nothing
-    , _isId = Nothing
-    , _isPerformers = Nothing
-    , _isAttendeeCount = Nothing
-    , _isInAlbum = Nothing
-    , _isEmbedURL = Nothing
-    , _isType = Nothing
-    , _isContributor = Nothing
-    , _isLongitude = Nothing
-    , _isDuration = Nothing
-    , _isAddressRegion = Nothing
-    , _isAudio = Nothing
-    , _isDescription = Nothing
-    , _isBirthDate = Nothing
-    }
-
--- | Given name. This property can be used with familyName instead of the
--- name property.
-isGivenName :: Lens' ItemScope (Maybe Text)
-isGivenName
-  = lens _isGivenName (\ s a -> s{_isGivenName = a})
-
--- | File size in (mega\/kilo) bytes.
-isContentSize :: Lens' ItemScope (Maybe Text)
-isContentSize
-  = lens _isContentSize
-      (\ s a -> s{_isContentSize = a})
-
--- | Thumbnail image for an image or video.
-isThumbnail :: Lens' ItemScope (Maybe ItemScope)
-isThumbnail
-  = lens _isThumbnail (\ s a -> s{_isThumbnail = a})
-
--- | The exchange traded instrument associated with a Corporation object. The
--- tickerSymbol is expressed as an exchange and an instrument name
--- separated by a space character. For the exchange component of the
--- tickerSymbol attribute, we recommend using the controlled vocabulary of
--- Market Identifier Codes (MIC) specified in ISO15022.
-isTickerSymbol :: Lens' ItemScope (Maybe Text)
-isTickerSymbol
-  = lens _isTickerSymbol
-      (\ s a -> s{_isTickerSymbol = a})
-
--- | The height of the media object.
-isHeight :: Lens' ItemScope (Maybe Text)
-isHeight = lens _isHeight (\ s a -> s{_isHeight = a})
-
--- | A URL to a thumbnail image that represents this result.
-isThumbnailURL :: Lens' ItemScope (Maybe Text)
-isThumbnailURL
-  = lens _isThumbnailURL
-      (\ s a -> s{_isThumbnailURL = a})
-
--- | A URL to the image that represents this result. For example, if a user
--- writes a review of a restaurant and attaches a photo of their meal, you
--- might use that photo as the result.image.
-isImage :: Lens' ItemScope (Maybe Text)
-isImage = lens _isImage (\ s a -> s{_isImage = a})
-
--- | Street address.
-isStreetAddress :: Lens' ItemScope (Maybe Text)
-isStreetAddress
-  = lens _isStreetAddress
-      (\ s a -> s{_isStreetAddress = a})
-
--- | Worst possible rating value that a result might obtain. This property
--- defines the lower bound for the ratingValue.
-isWorstRating :: Lens' ItemScope (Maybe Text)
-isWorstRating
-  = lens _isWorstRating
-      (\ s a -> s{_isWorstRating = a})
-
--- | The location of the event or organization.
-isLocation :: Lens' ItemScope (Maybe ItemScope)
-isLocation
-  = lens _isLocation (\ s a -> s{_isLocation = a})
-
--- | A person attending the event.
-isAttendees :: Lens' ItemScope [ItemScope]
-isAttendees
-  = lens _isAttendees (\ s a -> s{_isAttendees = a}) .
-      _Default
-      . _Coerce
-
--- | The text that is the result of the app activity. For example, if a user
--- leaves a review of a restaurant, this might be the text of the review.
-isText :: Lens' ItemScope (Maybe Text)
-isText = lens _isText (\ s a -> s{_isText = a})
-
--- | Identifies this resource as an itemScope.
-isKind :: Lens' ItemScope Text
-isKind = lens _isKind (\ s a -> s{_isKind = a})
-
--- | Latitude.
-isLatitude :: Lens' ItemScope (Maybe Double)
-isLatitude
-  = lens _isLatitude (\ s a -> s{_isLatitude = a}) .
-      mapping _Coerce
-
--- | Postal code.
-isPostalCode :: Lens' ItemScope (Maybe Text)
-isPostalCode
-  = lens _isPostalCode (\ s a -> s{_isPostalCode = a})
-
--- | The end date and time of the event (in ISO 8601 date format).
-isEndDate :: Lens' ItemScope (Maybe Text)
-isEndDate
-  = lens _isEndDate (\ s a -> s{_isEndDate = a})
-
--- | The encoding.
-isAssociatedMedia :: Lens' ItemScope [ItemScope]
-isAssociatedMedia
-  = lens _isAssociatedMedia
-      (\ s a -> s{_isAssociatedMedia = a})
-      . _Default
-      . _Coerce
-
--- | Player type that is required. For example: Flash or Silverlight.
-isPlayerType :: Lens' ItemScope (Maybe Text)
-isPlayerType
-  = lens _isPlayerType (\ s a -> s{_isPlayerType = a})
-
--- | The URL that points to the result object. For example, a permalink
--- directly to a restaurant reviewer\'s comment.
-isURL :: Lens' ItemScope (Maybe Text)
-isURL = lens _isURL (\ s a -> s{_isURL = a})
-
--- | The width of the media object.
-isWidth :: Lens' ItemScope (Maybe Text)
-isWidth = lens _isWidth (\ s a -> s{_isWidth = a})
-
--- | The caption for this object.
-isCaption :: Lens' ItemScope (Maybe Text)
-isCaption
-  = lens _isCaption (\ s a -> s{_isCaption = a})
-
--- | Postal address.
-isAddress :: Lens' ItemScope (Maybe ItemScope)
-isAddress
-  = lens _isAddress (\ s a -> s{_isAddress = a})
-
--- | Address country.
-isAddressCountry :: Lens' ItemScope (Maybe Text)
-isAddressCountry
-  = lens _isAddressCountry
-      (\ s a -> s{_isAddressCountry = a})
-
--- | Post office box number.
-isPostOfficeBoxNumber :: Lens' ItemScope (Maybe Text)
-isPostOfficeBoxNumber
-  = lens _isPostOfficeBoxNumber
-      (\ s a -> s{_isPostOfficeBoxNumber = a})
-
--- | An additional name for a Person, can be used for a middle name.
-isAdditionalName :: Lens' ItemScope [Text]
-isAdditionalName
-  = lens _isAdditionalName
-      (\ s a -> s{_isAdditionalName = a})
-      . _Default
-      . _Coerce
-
--- | Family name. This property can be used with givenName instead of the
--- name property.
-isFamilyName :: Lens' ItemScope (Maybe Text)
-isFamilyName
-  = lens _isFamilyName (\ s a -> s{_isFamilyName = a})
-
--- | The date the result was created such as the date that a review was first
--- created.
-isDateCreated :: Lens' ItemScope (Maybe Text)
-isDateCreated
-  = lens _isDateCreated
-      (\ s a -> s{_isDateCreated = a})
-
--- | Rating value.
-isRatingValue :: Lens' ItemScope (Maybe Text)
-isRatingValue
-  = lens _isRatingValue
-      (\ s a -> s{_isRatingValue = a})
-
--- | The initial date that the result was published. For example, a user
--- writes a comment on a blog, which has a result.dateCreated of when they
--- submit it. If the blog users comment moderation, the
--- result.datePublished value would match the date when the owner approved
--- the message.
-isDatePublished :: Lens' ItemScope (Maybe Text)
-isDatePublished
-  = lens _isDatePublished
-      (\ s a -> s{_isDatePublished = a})
-
--- | The start date and time of the event (in ISO 8601 date format).
-isStartDate :: Lens' ItemScope (Maybe Text)
-isStartDate
-  = lens _isStartDate (\ s a -> s{_isStartDate = a})
-
--- | Gender of the person.
-isGender :: Lens' ItemScope (Maybe Text)
-isGender = lens _isGender (\ s a -> s{_isGender = a})
-
--- | The name of the result. In the example of a restaurant review, this
--- might be the summary the user gave their review such as \"Great
--- ambiance, but overpriced.\"
-isName :: Lens' ItemScope (Maybe Text)
-isName = lens _isName (\ s a -> s{_isName = a})
-
--- | Best possible rating value that a result might obtain. This property
--- defines the upper bound for the ratingValue. For example, you might have
--- a 5 star rating scale, you would provide 5 as the value for this
--- property.
-isBestRating :: Lens' ItemScope (Maybe Text)
-isBestRating
-  = lens _isBestRating (\ s a -> s{_isBestRating = a})
-
--- | Address locality.
-isAddressLocality :: Lens' ItemScope (Maybe Text)
-isAddressLocality
-  = lens _isAddressLocality
-      (\ s a -> s{_isAddressLocality = a})
-
--- | Property of http:\/\/schema.org\/TVEpisode indicating which series the
--- episode belongs to.
-isPartOfTVSeries :: Lens' ItemScope (Maybe ItemScope)
-isPartOfTVSeries
-  = lens _isPartOfTVSeries
-      (\ s a -> s{_isPartOfTVSeries = a})
-
--- | Actual bytes of the media object, for example the image file or video
--- file.
-isContentURL :: Lens' ItemScope (Maybe Text)
-isContentURL
-  = lens _isContentURL (\ s a -> s{_isContentURL = a})
-
--- | From http:\/\/schema.org\/MusicRecording, the artist that performed this
--- recording.
-isByArtist :: Lens' ItemScope (Maybe ItemScope)
-isByArtist
-  = lens _isByArtist (\ s a -> s{_isByArtist = a})
-
--- | The subject matter of the content.
-isAbout :: Lens' ItemScope (Maybe ItemScope)
-isAbout = lens _isAbout (\ s a -> s{_isAbout = a})
-
--- | Review rating.
-isReviewRating :: Lens' ItemScope (Maybe ItemScope)
-isReviewRating
-  = lens _isReviewRating
-      (\ s a -> s{_isReviewRating = a})
-
--- | The date the result was last modified such as the date that a review was
--- last edited.
-isDateModified :: Lens' ItemScope (Maybe Text)
-isDateModified
-  = lens _isDateModified
-      (\ s a -> s{_isDateModified = a})
-
--- | The person or persons who created this result. In the example of
--- restaurant reviews, this might be the reviewer\'s name.
-isAuthor :: Lens' ItemScope [ItemScope]
-isAuthor
-  = lens _isAuthor (\ s a -> s{_isAuthor = a}) .
-      _Default
-      . _Coerce
-
--- | Geo coordinates.
-isGeo :: Lens' ItemScope (Maybe ItemScope)
-isGeo = lens _isGeo (\ s a -> s{_isGeo = a})
-
--- | An identifier for the object. Your app can choose how to identify
--- objects. The object.id is required if you are writing an action that
--- does not have a corresponding web page or object.url property.
-isId :: Lens' ItemScope (Maybe Text)
-isId = lens _isId (\ s a -> s{_isId = a})
-
--- | The main performer or performers of the event-for example, a presenter,
--- musician, or actor.
-isPerformers :: Lens' ItemScope [ItemScope]
-isPerformers
-  = lens _isPerformers (\ s a -> s{_isPerformers = a})
-      . _Default
-      . _Coerce
-
--- | Number of attendees.
-isAttendeeCount :: Lens' ItemScope (Maybe Int32)
-isAttendeeCount
-  = lens _isAttendeeCount
-      (\ s a -> s{_isAttendeeCount = a})
-      . mapping _Coerce
-
--- | From http:\/\/schema.org\/MusicRecording, which album a song is in.
-isInAlbum :: Lens' ItemScope (Maybe ItemScope)
-isInAlbum
-  = lens _isInAlbum (\ s a -> s{_isInAlbum = a})
-
--- | A URL pointing to a player for a specific video. In general, this is the
--- information in the src element of an embed tag and should not be the
--- same as the content of the loc tag.
-isEmbedURL :: Lens' ItemScope (Maybe Text)
-isEmbedURL
-  = lens _isEmbedURL (\ s a -> s{_isEmbedURL = a})
-
--- | The schema.org URL that best describes the referenced object and matches
--- the type of moment.
-isType :: Lens' ItemScope (Maybe Text)
-isType = lens _isType (\ s a -> s{_isType = a})
-
--- | A list of contributors to this result.
-isContributor :: Lens' ItemScope [ItemScope]
-isContributor
-  = lens _isContributor
-      (\ s a -> s{_isContributor = a})
-      . _Default
-      . _Coerce
-
--- | Longitude.
-isLongitude :: Lens' ItemScope (Maybe Double)
-isLongitude
-  = lens _isLongitude (\ s a -> s{_isLongitude = a}) .
-      mapping _Coerce
-
--- | The duration of the item (movie, audio recording, event, etc.) in ISO
--- 8601 date format.
-isDuration :: Lens' ItemScope (Maybe Text)
-isDuration
-  = lens _isDuration (\ s a -> s{_isDuration = a})
-
--- | Address region.
-isAddressRegion :: Lens' ItemScope (Maybe Text)
-isAddressRegion
-  = lens _isAddressRegion
-      (\ s a -> s{_isAddressRegion = a})
-
--- | From http:\/\/schema.org\/MusicRecording, the audio file.
-isAudio :: Lens' ItemScope (Maybe ItemScope)
-isAudio = lens _isAudio (\ s a -> s{_isAudio = a})
-
--- | The string that describes the content of the result.
-isDescription :: Lens' ItemScope (Maybe Text)
-isDescription
-  = lens _isDescription
-      (\ s a -> s{_isDescription = a})
-
--- | Date of birth.
-isBirthDate :: Lens' ItemScope (Maybe Text)
-isBirthDate
-  = lens _isBirthDate (\ s a -> s{_isBirthDate = a})
-
-instance FromJSON ItemScope where
-        parseJSON
-          = withObject "ItemScope"
-              (\ o ->
-                 ItemScope <$>
-                   (o .:? "givenName") <*> (o .:? "contentSize") <*>
-                     (o .:? "thumbnail")
-                     <*> (o .:? "tickerSymbol")
-                     <*> (o .:? "height")
-                     <*> (o .:? "thumbnailUrl")
-                     <*> (o .:? "image")
-                     <*> (o .:? "streetAddress")
-                     <*> (o .:? "worstRating")
-                     <*> (o .:? "location")
-                     <*> (o .:? "attendees" .!= mempty)
-                     <*> (o .:? "text")
-                     <*> (o .:? "kind" .!= "plus#itemScope")
-                     <*> (o .:? "latitude")
-                     <*> (o .:? "postalCode")
-                     <*> (o .:? "endDate")
-                     <*> (o .:? "associated_media" .!= mempty)
-                     <*> (o .:? "playerType")
-                     <*> (o .:? "url")
-                     <*> (o .:? "width")
-                     <*> (o .:? "caption")
-                     <*> (o .:? "address")
-                     <*> (o .:? "addressCountry")
-                     <*> (o .:? "postOfficeBoxNumber")
-                     <*> (o .:? "additionalName" .!= mempty)
-                     <*> (o .:? "familyName")
-                     <*> (o .:? "dateCreated")
-                     <*> (o .:? "ratingValue")
-                     <*> (o .:? "datePublished")
-                     <*> (o .:? "startDate")
-                     <*> (o .:? "gender")
-                     <*> (o .:? "name")
-                     <*> (o .:? "bestRating")
-                     <*> (o .:? "addressLocality")
-                     <*> (o .:? "partOfTVSeries")
-                     <*> (o .:? "contentUrl")
-                     <*> (o .:? "byArtist")
-                     <*> (o .:? "about")
-                     <*> (o .:? "reviewRating")
-                     <*> (o .:? "dateModified")
-                     <*> (o .:? "author" .!= mempty)
-                     <*> (o .:? "geo")
-                     <*> (o .:? "id")
-                     <*> (o .:? "performers" .!= mempty)
-                     <*> (o .:? "attendeeCount")
-                     <*> (o .:? "inAlbum")
-                     <*> (o .:? "embedUrl")
-                     <*> (o .:? "type")
-                     <*> (o .:? "contributor" .!= mempty)
-                     <*> (o .:? "longitude")
-                     <*> (o .:? "duration")
-                     <*> (o .:? "addressRegion")
-                     <*> (o .:? "audio")
-                     <*> (o .:? "description")
-                     <*> (o .:? "birthDate"))
-
-instance ToJSON ItemScope where
-        toJSON ItemScope{..}
-          = object
-              (catMaybes
-                 [("givenName" .=) <$> _isGivenName,
-                  ("contentSize" .=) <$> _isContentSize,
-                  ("thumbnail" .=) <$> _isThumbnail,
-                  ("tickerSymbol" .=) <$> _isTickerSymbol,
-                  ("height" .=) <$> _isHeight,
-                  ("thumbnailUrl" .=) <$> _isThumbnailURL,
-                  ("image" .=) <$> _isImage,
-                  ("streetAddress" .=) <$> _isStreetAddress,
-                  ("worstRating" .=) <$> _isWorstRating,
-                  ("location" .=) <$> _isLocation,
-                  ("attendees" .=) <$> _isAttendees,
-                  ("text" .=) <$> _isText, Just ("kind" .= _isKind),
-                  ("latitude" .=) <$> _isLatitude,
-                  ("postalCode" .=) <$> _isPostalCode,
-                  ("endDate" .=) <$> _isEndDate,
-                  ("associated_media" .=) <$> _isAssociatedMedia,
-                  ("playerType" .=) <$> _isPlayerType,
-                  ("url" .=) <$> _isURL, ("width" .=) <$> _isWidth,
-                  ("caption" .=) <$> _isCaption,
-                  ("address" .=) <$> _isAddress,
-                  ("addressCountry" .=) <$> _isAddressCountry,
-                  ("postOfficeBoxNumber" .=) <$>
-                    _isPostOfficeBoxNumber,
-                  ("additionalName" .=) <$> _isAdditionalName,
-                  ("familyName" .=) <$> _isFamilyName,
-                  ("dateCreated" .=) <$> _isDateCreated,
-                  ("ratingValue" .=) <$> _isRatingValue,
-                  ("datePublished" .=) <$> _isDatePublished,
-                  ("startDate" .=) <$> _isStartDate,
-                  ("gender" .=) <$> _isGender, ("name" .=) <$> _isName,
-                  ("bestRating" .=) <$> _isBestRating,
-                  ("addressLocality" .=) <$> _isAddressLocality,
-                  ("partOfTVSeries" .=) <$> _isPartOfTVSeries,
-                  ("contentUrl" .=) <$> _isContentURL,
-                  ("byArtist" .=) <$> _isByArtist,
-                  ("about" .=) <$> _isAbout,
-                  ("reviewRating" .=) <$> _isReviewRating,
-                  ("dateModified" .=) <$> _isDateModified,
-                  ("author" .=) <$> _isAuthor, ("geo" .=) <$> _isGeo,
-                  ("id" .=) <$> _isId,
-                  ("performers" .=) <$> _isPerformers,
-                  ("attendeeCount" .=) <$> _isAttendeeCount,
-                  ("inAlbum" .=) <$> _isInAlbum,
-                  ("embedUrl" .=) <$> _isEmbedURL,
-                  ("type" .=) <$> _isType,
-                  ("contributor" .=) <$> _isContributor,
-                  ("longitude" .=) <$> _isLongitude,
-                  ("duration" .=) <$> _isDuration,
-                  ("addressRegion" .=) <$> _isAddressRegion,
-                  ("audio" .=) <$> _isAudio,
-                  ("description" .=) <$> _isDescription,
-                  ("birthDate" .=) <$> _isBirthDate])
-
 -- | Actor info specific to particular clients.
 --
 -- /See:/ 'activityObjectActorClientSpecificActorInfo' smart constructor.
-newtype ActivityObjectActorClientSpecificActorInfo = ActivityObjectActorClientSpecificActorInfo
+newtype ActivityObjectActorClientSpecificActorInfo = ActivityObjectActorClientSpecificActorInfo'
     { _aoacsaiYouTubeActorInfo :: Maybe ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2622,7 +1840,7 @@ newtype ActivityObjectActorClientSpecificActorInfo = ActivityObjectActorClientSp
 activityObjectActorClientSpecificActorInfo
     :: ActivityObjectActorClientSpecificActorInfo
 activityObjectActorClientSpecificActorInfo =
-    ActivityObjectActorClientSpecificActorInfo
+    ActivityObjectActorClientSpecificActorInfo'
     { _aoacsaiYouTubeActorInfo = Nothing
     }
 
@@ -2638,12 +1856,13 @@ instance FromJSON
           = withObject
               "ActivityObjectActorClientSpecificActorInfo"
               (\ o ->
-                 ActivityObjectActorClientSpecificActorInfo <$>
+                 ActivityObjectActorClientSpecificActorInfo' <$>
                    (o .:? "youtubeActorInfo"))
 
 instance ToJSON
          ActivityObjectActorClientSpecificActorInfo where
-        toJSON ActivityObjectActorClientSpecificActorInfo{..}
+        toJSON
+          ActivityObjectActorClientSpecificActorInfo'{..}
           = object
               (catMaybes
                  [("youtubeActorInfo" .=) <$>
@@ -2651,7 +1870,7 @@ instance ToJSON
 
 --
 -- /See:/ 'activityObjectAttachmentsItem' smart constructor.
-data ActivityObjectAttachmentsItem = ActivityObjectAttachmentsItem
+data ActivityObjectAttachmentsItem = ActivityObjectAttachmentsItem'
     { _aFullImage   :: !(Maybe ActivityObjectAttachmentsItemFullImage)
     , _aImage       :: !(Maybe ActivityObjectAttachmentsItemImage)
     , _aObjectType  :: !(Maybe Text)
@@ -2687,7 +1906,7 @@ data ActivityObjectAttachmentsItem = ActivityObjectAttachmentsItem
 activityObjectAttachmentsItem
     :: ActivityObjectAttachmentsItem
 activityObjectAttachmentsItem =
-    ActivityObjectAttachmentsItem
+    ActivityObjectAttachmentsItem'
     { _aFullImage = Nothing
     , _aImage = Nothing
     , _aObjectType = Nothing
@@ -2751,7 +1970,7 @@ instance FromJSON ActivityObjectAttachmentsItem where
         parseJSON
           = withObject "ActivityObjectAttachmentsItem"
               (\ o ->
-                 ActivityObjectAttachmentsItem <$>
+                 ActivityObjectAttachmentsItem' <$>
                    (o .:? "fullImage") <*> (o .:? "image") <*>
                      (o .:? "objectType")
                      <*> (o .:? "url")
@@ -2762,7 +1981,7 @@ instance FromJSON ActivityObjectAttachmentsItem where
                      <*> (o .:? "id"))
 
 instance ToJSON ActivityObjectAttachmentsItem where
-        toJSON ActivityObjectAttachmentsItem{..}
+        toJSON ActivityObjectAttachmentsItem'{..}
           = object
               (catMaybes
                  [("fullImage" .=) <$> _aFullImage,
@@ -2776,7 +1995,7 @@ instance ToJSON ActivityObjectAttachmentsItem where
 
 --
 -- /See:/ 'activityFeed' smart constructor.
-data ActivityFeed = ActivityFeed
+data ActivityFeed = ActivityFeed'
     { _afEtag          :: !(Maybe Text)
     , _afNextPageToken :: !(Maybe Text)
     , _afNextLink      :: !(Maybe Text)
@@ -2812,7 +2031,7 @@ data ActivityFeed = ActivityFeed
 activityFeed
     :: ActivityFeed
 activityFeed =
-    ActivityFeed
+    ActivityFeed'
     { _afEtag = Nothing
     , _afNextPageToken = Nothing
     , _afNextLink = Nothing
@@ -2877,7 +2096,7 @@ instance FromJSON ActivityFeed where
         parseJSON
           = withObject "ActivityFeed"
               (\ o ->
-                 ActivityFeed <$>
+                 ActivityFeed' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "nextLink")
                      <*> (o .:? "kind" .!= "plus#activityFeed")
@@ -2888,7 +2107,7 @@ instance FromJSON ActivityFeed where
                      <*> (o .:? "title"))
 
 instance ToJSON ActivityFeed where
-        toJSON ActivityFeed{..}
+        toJSON ActivityFeed'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _afEtag,
@@ -2902,7 +2121,7 @@ instance ToJSON ActivityFeed where
 -- | Verification status of actor.
 --
 -- /See:/ 'activityObjectActorVerification' smart constructor.
-newtype ActivityObjectActorVerification = ActivityObjectActorVerification
+newtype ActivityObjectActorVerification = ActivityObjectActorVerification'
     { _aoavAdHocVerified :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2914,7 +2133,7 @@ newtype ActivityObjectActorVerification = ActivityObjectActorVerification
 activityObjectActorVerification
     :: ActivityObjectActorVerification
 activityObjectActorVerification =
-    ActivityObjectActorVerification
+    ActivityObjectActorVerification'
     { _aoavAdHocVerified = Nothing
     }
 
@@ -2929,11 +2148,11 @@ instance FromJSON ActivityObjectActorVerification
         parseJSON
           = withObject "ActivityObjectActorVerification"
               (\ o ->
-                 ActivityObjectActorVerification <$>
+                 ActivityObjectActorVerification' <$>
                    (o .:? "adHocVerified"))
 
 instance ToJSON ActivityObjectActorVerification where
-        toJSON ActivityObjectActorVerification{..}
+        toJSON ActivityObjectActorVerification'{..}
           = object
               (catMaybes
                  [("adHocVerified" .=) <$> _aoavAdHocVerified])
@@ -2942,7 +2161,7 @@ instance ToJSON ActivityObjectActorVerification where
 -- name.
 --
 -- /See:/ 'personName' smart constructor.
-data PersonName = PersonName
+data PersonName = PersonName'
     { _pnGivenName       :: !(Maybe Text)
     , _pnMiddleName      :: !(Maybe Text)
     , _pnFormatted       :: !(Maybe Text)
@@ -2969,7 +2188,7 @@ data PersonName = PersonName
 personName
     :: PersonName
 personName =
-    PersonName
+    PersonName'
     { _pnGivenName = Nothing
     , _pnMiddleName = Nothing
     , _pnFormatted = Nothing
@@ -3014,7 +2233,7 @@ instance FromJSON PersonName where
         parseJSON
           = withObject "PersonName"
               (\ o ->
-                 PersonName <$>
+                 PersonName' <$>
                    (o .:? "givenName") <*> (o .:? "middleName") <*>
                      (o .:? "formatted")
                      <*> (o .:? "honorificPrefix")
@@ -3022,7 +2241,7 @@ instance FromJSON PersonName where
                      <*> (o .:? "honorificSuffix"))
 
 instance ToJSON PersonName where
-        toJSON PersonName{..}
+        toJSON PersonName'{..}
           = object
               (catMaybes
                  [("givenName" .=) <$> _pnGivenName,
@@ -3035,7 +2254,7 @@ instance ToJSON PersonName where
 -- | The representation of the person\'s profile photo.
 --
 -- /See:/ 'personImage' smart constructor.
-data PersonImage = PersonImage
+data PersonImage = PersonImage'
     { _piURL       :: !(Maybe Text)
     , _piIsDefault :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3050,7 +2269,7 @@ data PersonImage = PersonImage
 personImage
     :: PersonImage
 personImage =
-    PersonImage
+    PersonImage'
     { _piURL = Nothing
     , _piIsDefault = Nothing
     }
@@ -3070,11 +2289,11 @@ instance FromJSON PersonImage where
         parseJSON
           = withObject "PersonImage"
               (\ o ->
-                 PersonImage <$>
+                 PersonImage' <$>
                    (o .:? "url") <*> (o .:? "isDefault"))
 
 instance ToJSON PersonImage where
-        toJSON PersonImage{..}
+        toJSON PersonImage'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _piURL,
@@ -3083,7 +2302,7 @@ instance ToJSON PersonImage where
 -- | Actor info specific to YouTube clients.
 --
 -- /See:/ 'activityActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
-newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo = ActivityActorClientSpecificActorInfoYouTubeActorInfo
+newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo = ActivityActorClientSpecificActorInfoYouTubeActorInfo'
     { _aacsaiytaiChannelId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3095,7 +2314,7 @@ newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo = ActivityActorClie
 activityActorClientSpecificActorInfoYouTubeActorInfo
     :: ActivityActorClientSpecificActorInfoYouTubeActorInfo
 activityActorClientSpecificActorInfoYouTubeActorInfo =
-    ActivityActorClientSpecificActorInfoYouTubeActorInfo
+    ActivityActorClientSpecificActorInfoYouTubeActorInfo'
     { _aacsaiytaiChannelId = Nothing
     }
 
@@ -3112,21 +2331,21 @@ instance FromJSON
           = withObject
               "ActivityActorClientSpecificActorInfoYouTubeActorInfo"
               (\ o ->
-                 ActivityActorClientSpecificActorInfoYouTubeActorInfo
+                 ActivityActorClientSpecificActorInfoYouTubeActorInfo'
                    <$> (o .:? "channelId"))
 
 instance ToJSON
          ActivityActorClientSpecificActorInfoYouTubeActorInfo
          where
         toJSON
-          ActivityActorClientSpecificActorInfoYouTubeActorInfo{..}
+          ActivityActorClientSpecificActorInfoYouTubeActorInfo'{..}
           = object
               (catMaybes
                  [("channelId" .=) <$> _aacsaiytaiChannelId])
 
 --
 -- /See:/ 'plusACLentryResource' smart constructor.
-data PlusACLentryResource = PlusACLentryResource
+data PlusACLentryResource = PlusACLentryResource'
     { _parDisplayName :: !(Maybe Text)
     , _parId          :: !(Maybe Text)
     , _parType        :: !(Maybe Text)
@@ -3144,7 +2363,7 @@ data PlusACLentryResource = PlusACLentryResource
 plusACLentryResource
     :: PlusACLentryResource
 plusACLentryResource =
-    PlusACLentryResource
+    PlusACLentryResource'
     { _parDisplayName = Nothing
     , _parId = Nothing
     , _parType = Nothing
@@ -3175,12 +2394,12 @@ instance FromJSON PlusACLentryResource where
         parseJSON
           = withObject "PlusACLentryResource"
               (\ o ->
-                 PlusACLentryResource <$>
+                 PlusACLentryResource' <$>
                    (o .:? "displayName") <*> (o .:? "id") <*>
                      (o .:? "type"))
 
 instance ToJSON PlusACLentryResource where
-        toJSON PlusACLentryResource{..}
+        toJSON PlusACLentryResource'{..}
           = object
               (catMaybes
                  [("displayName" .=) <$> _parDisplayName,
@@ -3188,7 +2407,7 @@ instance ToJSON PlusACLentryResource where
 
 --
 -- /See:/ 'activity' smart constructor.
-data Activity = Activity
+data Activity = Activity'
     { _actAccess          :: !(Maybe ACL)
     , _actPlaceName       :: !(Maybe Text)
     , _actEtag            :: !(Maybe Text)
@@ -3257,7 +2476,7 @@ data Activity = Activity
 activity
     :: Activity
 activity =
-    Activity
+    Activity'
     { _actAccess = Nothing
     , _actPlaceName = Nothing
     , _actEtag = Nothing
@@ -3390,7 +2609,7 @@ instance FromJSON Activity where
         parseJSON
           = withObject "Activity"
               (\ o ->
-                 Activity <$>
+                 Activity' <$>
                    (o .:? "access") <*> (o .:? "placeName") <*>
                      (o .:? "etag")
                      <*> (o .:? "annotation")
@@ -3412,7 +2631,7 @@ instance FromJSON Activity where
                      <*> (o .:? "provider"))
 
 instance ToJSON Activity where
-        toJSON Activity{..}
+        toJSON Activity'{..}
           = object
               (catMaybes
                  [("access" .=) <$> _actAccess,
@@ -3436,7 +2655,7 @@ instance ToJSON Activity where
 -- | The physical address of the place.
 --
 -- /See:/ 'placeAddress' smart constructor.
-newtype PlaceAddress = PlaceAddress
+newtype PlaceAddress = PlaceAddress'
     { _paFormatted :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3448,7 +2667,7 @@ newtype PlaceAddress = PlaceAddress
 placeAddress
     :: PlaceAddress
 placeAddress =
-    PlaceAddress
+    PlaceAddress'
     { _paFormatted = Nothing
     }
 
@@ -3460,16 +2679,16 @@ paFormatted
 instance FromJSON PlaceAddress where
         parseJSON
           = withObject "PlaceAddress"
-              (\ o -> PlaceAddress <$> (o .:? "formatted"))
+              (\ o -> PlaceAddress' <$> (o .:? "formatted"))
 
 instance ToJSON PlaceAddress where
-        toJSON PlaceAddress{..}
+        toJSON PlaceAddress'{..}
           = object
               (catMaybes [("formatted" .=) <$> _paFormatted])
 
 --
 -- /See:/ 'activityObjectAttachmentsItemThumbnailsItem' smart constructor.
-data ActivityObjectAttachmentsItemThumbnailsItem = ActivityObjectAttachmentsItemThumbnailsItem
+data ActivityObjectAttachmentsItemThumbnailsItem = ActivityObjectAttachmentsItemThumbnailsItem'
     { _aoaitiImage       :: !(Maybe ActivityObjectAttachmentsItemThumbnailsItemImage)
     , _aoaitiURL         :: !(Maybe Text)
     , _aoaitiDescription :: !(Maybe Text)
@@ -3487,7 +2706,7 @@ data ActivityObjectAttachmentsItemThumbnailsItem = ActivityObjectAttachmentsItem
 activityObjectAttachmentsItemThumbnailsItem
     :: ActivityObjectAttachmentsItemThumbnailsItem
 activityObjectAttachmentsItemThumbnailsItem =
-    ActivityObjectAttachmentsItemThumbnailsItem
+    ActivityObjectAttachmentsItemThumbnailsItem'
     { _aoaitiImage = Nothing
     , _aoaitiURL = Nothing
     , _aoaitiDescription = Nothing
@@ -3515,14 +2734,14 @@ instance FromJSON
           = withObject
               "ActivityObjectAttachmentsItemThumbnailsItem"
               (\ o ->
-                 ActivityObjectAttachmentsItemThumbnailsItem <$>
+                 ActivityObjectAttachmentsItemThumbnailsItem' <$>
                    (o .:? "image") <*> (o .:? "url") <*>
                      (o .:? "description"))
 
 instance ToJSON
          ActivityObjectAttachmentsItemThumbnailsItem where
         toJSON
-          ActivityObjectAttachmentsItemThumbnailsItem{..}
+          ActivityObjectAttachmentsItemThumbnailsItem'{..}
           = object
               (catMaybes
                  [("image" .=) <$> _aoaitiImage,
@@ -3532,7 +2751,7 @@ instance ToJSON
 -- | The cover photo content.
 --
 -- /See:/ 'personCover' smart constructor.
-data PersonCover = PersonCover
+data PersonCover = PersonCover'
     { _pcLayout     :: !(Maybe Text)
     , _pcCoverInfo  :: !(Maybe PersonCoverCoverInfo)
     , _pcCoverPhoto :: !(Maybe PersonCoverCoverPhoto)
@@ -3550,7 +2769,7 @@ data PersonCover = PersonCover
 personCover
     :: PersonCover
 personCover =
-    PersonCover
+    PersonCover'
     { _pcLayout = Nothing
     , _pcCoverInfo = Nothing
     , _pcCoverPhoto = Nothing
@@ -3575,12 +2794,12 @@ instance FromJSON PersonCover where
         parseJSON
           = withObject "PersonCover"
               (\ o ->
-                 PersonCover <$>
+                 PersonCover' <$>
                    (o .:? "layout") <*> (o .:? "coverInfo") <*>
                      (o .:? "coverPhoto"))
 
 instance ToJSON PersonCover where
-        toJSON PersonCover{..}
+        toJSON PersonCover'{..}
           = object
               (catMaybes
                  [("layout" .=) <$> _pcLayout,
@@ -3589,7 +2808,7 @@ instance ToJSON PersonCover where
 
 --
 -- /See:/ 'commentInReplyToItem' smart constructor.
-data CommentInReplyToItem = CommentInReplyToItem
+data CommentInReplyToItem = CommentInReplyToItem'
     { _cirtiURL :: !(Maybe Text)
     , _cirtiId  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3604,7 +2823,7 @@ data CommentInReplyToItem = CommentInReplyToItem
 commentInReplyToItem
     :: CommentInReplyToItem
 commentInReplyToItem =
-    CommentInReplyToItem
+    CommentInReplyToItem'
     { _cirtiURL = Nothing
     , _cirtiId = Nothing
     }
@@ -3621,18 +2840,18 @@ instance FromJSON CommentInReplyToItem where
         parseJSON
           = withObject "CommentInReplyToItem"
               (\ o ->
-                 CommentInReplyToItem <$>
+                 CommentInReplyToItem' <$>
                    (o .:? "url") <*> (o .:? "id"))
 
 instance ToJSON CommentInReplyToItem where
-        toJSON CommentInReplyToItem{..}
+        toJSON CommentInReplyToItem'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _cirtiURL, ("id" .=) <$> _cirtiId])
 
 --
 -- /See:/ 'personOrganizationsItem' smart constructor.
-data PersonOrganizationsItem = PersonOrganizationsItem
+data PersonOrganizationsItem = PersonOrganizationsItem'
     { _poiDePartment  :: !(Maybe Text)
     , _poiLocation    :: !(Maybe Text)
     , _poiEndDate     :: !(Maybe Text)
@@ -3668,7 +2887,7 @@ data PersonOrganizationsItem = PersonOrganizationsItem
 personOrganizationsItem
     :: PersonOrganizationsItem
 personOrganizationsItem =
-    PersonOrganizationsItem
+    PersonOrganizationsItem'
     { _poiDePartment = Nothing
     , _poiLocation = Nothing
     , _poiEndDate = Nothing
@@ -3731,7 +2950,7 @@ instance FromJSON PersonOrganizationsItem where
         parseJSON
           = withObject "PersonOrganizationsItem"
               (\ o ->
-                 PersonOrganizationsItem <$>
+                 PersonOrganizationsItem' <$>
                    (o .:? "department") <*> (o .:? "location") <*>
                      (o .:? "endDate")
                      <*> (o .:? "primary")
@@ -3742,7 +2961,7 @@ instance FromJSON PersonOrganizationsItem where
                      <*> (o .:? "description"))
 
 instance ToJSON PersonOrganizationsItem where
-        toJSON PersonOrganizationsItem{..}
+        toJSON PersonOrganizationsItem'{..}
           = object
               (catMaybes
                  [("department" .=) <$> _poiDePartment,
@@ -3756,7 +2975,7 @@ instance ToJSON PersonOrganizationsItem where
 
 --
 -- /See:/ 'personURLsItem' smart constructor.
-data PersonURLsItem = PersonURLsItem
+data PersonURLsItem = PersonURLsItem'
     { _puiValue :: !(Maybe Text)
     , _puiType  :: !(Maybe Text)
     , _puiLabel :: !(Maybe Text)
@@ -3774,7 +2993,7 @@ data PersonURLsItem = PersonURLsItem
 personURLsItem
     :: PersonURLsItem
 personURLsItem =
-    PersonURLsItem
+    PersonURLsItem'
     { _puiValue = Nothing
     , _puiType = Nothing
     , _puiLabel = Nothing
@@ -3800,12 +3019,12 @@ instance FromJSON PersonURLsItem where
         parseJSON
           = withObject "PersonURLsItem"
               (\ o ->
-                 PersonURLsItem <$>
+                 PersonURLsItem' <$>
                    (o .:? "value") <*> (o .:? "type") <*>
                      (o .:? "label"))
 
 instance ToJSON PersonURLsItem where
-        toJSON PersonURLsItem{..}
+        toJSON PersonURLsItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _puiValue,
@@ -3815,7 +3034,7 @@ instance ToJSON PersonURLsItem where
 -- | Extra information about the cover photo.
 --
 -- /See:/ 'personCoverCoverInfo' smart constructor.
-data PersonCoverCoverInfo = PersonCoverCoverInfo
+data PersonCoverCoverInfo = PersonCoverCoverInfo'
     { _pcciTopImageOffSet  :: !(Maybe (Textual Int32))
     , _pcciLeftImageOffSet :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3830,7 +3049,7 @@ data PersonCoverCoverInfo = PersonCoverCoverInfo
 personCoverCoverInfo
     :: PersonCoverCoverInfo
 personCoverCoverInfo =
-    PersonCoverCoverInfo
+    PersonCoverCoverInfo'
     { _pcciTopImageOffSet = Nothing
     , _pcciLeftImageOffSet = Nothing
     }
@@ -3855,12 +3074,12 @@ instance FromJSON PersonCoverCoverInfo where
         parseJSON
           = withObject "PersonCoverCoverInfo"
               (\ o ->
-                 PersonCoverCoverInfo <$>
+                 PersonCoverCoverInfo' <$>
                    (o .:? "topImageOffset") <*>
                      (o .:? "leftImageOffset"))
 
 instance ToJSON PersonCoverCoverInfo where
-        toJSON PersonCoverCoverInfo{..}
+        toJSON PersonCoverCoverInfo'{..}
           = object
               (catMaybes
                  [("topImageOffset" .=) <$> _pcciTopImageOffSet,
@@ -3869,7 +3088,7 @@ instance ToJSON PersonCoverCoverInfo where
 -- | People who reshared this activity.
 --
 -- /See:/ 'activityObjectResharers' smart constructor.
-data ActivityObjectResharers = ActivityObjectResharers
+data ActivityObjectResharers = ActivityObjectResharers'
     { _aTotalItems :: !(Maybe (Textual Word32))
     , _aSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3884,7 +3103,7 @@ data ActivityObjectResharers = ActivityObjectResharers
 activityObjectResharers
     :: ActivityObjectResharers
 activityObjectResharers =
-    ActivityObjectResharers
+    ActivityObjectResharers'
     { _aTotalItems = Nothing
     , _aSelfLink = Nothing
     }
@@ -3904,11 +3123,11 @@ instance FromJSON ActivityObjectResharers where
         parseJSON
           = withObject "ActivityObjectResharers"
               (\ o ->
-                 ActivityObjectResharers <$>
+                 ActivityObjectResharers' <$>
                    (o .:? "totalItems") <*> (o .:? "selfLink"))
 
 instance ToJSON ActivityObjectResharers where
-        toJSON ActivityObjectResharers{..}
+        toJSON ActivityObjectResharers'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _aTotalItems,
@@ -3916,7 +3135,7 @@ instance ToJSON ActivityObjectResharers where
 
 --
 -- /See:/ 'comment' smart constructor.
-data Comment = Comment
+data Comment = Comment'
     { _cEtag      :: !(Maybe Text)
     , _cPlusoners :: !(Maybe CommentPlusoners)
     , _cKind      :: !Text
@@ -3958,7 +3177,7 @@ data Comment = Comment
 comment
     :: Comment
 comment =
-    Comment
+    Comment'
     { _cEtag = Nothing
     , _cPlusoners = Nothing
     , _cKind = "plus#comment"
@@ -4032,7 +3251,7 @@ instance FromJSON Comment where
         parseJSON
           = withObject "Comment"
               (\ o ->
-                 Comment <$>
+                 Comment' <$>
                    (o .:? "etag") <*> (o .:? "plusoners") <*>
                      (o .:? "kind" .!= "plus#comment")
                      <*> (o .:? "published")
@@ -4045,7 +3264,7 @@ instance FromJSON Comment where
                      <*> (o .:? "inReplyTo" .!= mempty))
 
 instance ToJSON Comment where
-        toJSON Comment{..}
+        toJSON Comment'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _cEtag,
@@ -4061,7 +3280,7 @@ instance ToJSON Comment where
 
 --
 -- /See:/ 'place' smart constructor.
-data Place = Place
+data Place = Place'
     { _plaKind        :: !Text
     , _plaAddress     :: !(Maybe PlaceAddress)
     , _plaDisplayName :: !(Maybe Text)
@@ -4085,7 +3304,7 @@ data Place = Place
 place
     :: Place
 place =
-    Place
+    Place'
     { _plaKind = "plus#place"
     , _plaAddress = Nothing
     , _plaDisplayName = Nothing
@@ -4121,14 +3340,14 @@ instance FromJSON Place where
         parseJSON
           = withObject "Place"
               (\ o ->
-                 Place <$>
+                 Place' <$>
                    (o .:? "kind" .!= "plus#place") <*> (o .:? "address")
                      <*> (o .:? "displayName")
                      <*> (o .:? "id")
                      <*> (o .:? "position"))
 
 instance ToJSON Place where
-        toJSON Place{..}
+        toJSON Place'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _plaKind),
@@ -4139,7 +3358,7 @@ instance ToJSON Place where
 
 --
 -- /See:/ 'acl' smart constructor.
-data ACL = ACL
+data ACL = ACL'
     { _aKind        :: !Text
     , _aItems       :: !(Maybe [PlusACLentryResource])
     , _aDescription :: !(Maybe Text)
@@ -4157,7 +3376,7 @@ data ACL = ACL
 acl
     :: ACL
 acl =
-    ACL
+    ACL'
     { _aKind = "plus#acl"
     , _aItems = Nothing
     , _aDescription = Nothing
@@ -4183,13 +3402,13 @@ instance FromJSON ACL where
         parseJSON
           = withObject "ACL"
               (\ o ->
-                 ACL <$>
+                 ACL' <$>
                    (o .:? "kind" .!= "plus#acl") <*>
                      (o .:? "items" .!= mempty)
                      <*> (o .:? "description"))
 
 instance ToJSON ACL where
-        toJSON ACL{..}
+        toJSON ACL'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aKind), ("items" .=) <$> _aItems,
@@ -4198,7 +3417,7 @@ instance ToJSON ACL where
 -- | The person who performed this activity.
 --
 -- /See:/ 'activityActor' smart constructor.
-data ActivityActor = ActivityActor
+data ActivityActor = ActivityActor'
     { _aaClientSpecificActorInfo :: !(Maybe ActivityActorClientSpecificActorInfo)
     , _aaImage                   :: !(Maybe ActivityActorImage)
     , _aaURL                     :: !(Maybe Text)
@@ -4228,7 +3447,7 @@ data ActivityActor = ActivityActor
 activityActor
     :: ActivityActor
 activityActor =
-    ActivityActor
+    ActivityActor'
     { _aaClientSpecificActorInfo = Nothing
     , _aaImage = Nothing
     , _aaURL = Nothing
@@ -4276,7 +3495,7 @@ instance FromJSON ActivityActor where
         parseJSON
           = withObject "ActivityActor"
               (\ o ->
-                 ActivityActor <$>
+                 ActivityActor' <$>
                    (o .:? "clientSpecificActorInfo") <*> (o .:? "image")
                      <*> (o .:? "url")
                      <*> (o .:? "name")
@@ -4285,7 +3504,7 @@ instance FromJSON ActivityActor where
                      <*> (o .:? "verification"))
 
 instance ToJSON ActivityActor where
-        toJSON ActivityActor{..}
+        toJSON ActivityActor'{..}
           = object
               (catMaybes
                  [("clientSpecificActorInfo" .=) <$>
@@ -4299,7 +3518,7 @@ instance ToJSON ActivityActor where
 -- | The object of this comment.
 --
 -- /See:/ 'commentObject' smart constructor.
-data CommentObject = CommentObject
+data CommentObject = CommentObject'
     { _coObjectType      :: !Text
     , _coOriginalContent :: !(Maybe Text)
     , _coContent         :: !(Maybe Text)
@@ -4317,7 +3536,7 @@ data CommentObject = CommentObject
 commentObject
     :: CommentObject
 commentObject =
-    CommentObject
+    CommentObject'
     { _coObjectType = "comment"
     , _coOriginalContent = Nothing
     , _coContent = Nothing
@@ -4346,13 +3565,13 @@ instance FromJSON CommentObject where
         parseJSON
           = withObject "CommentObject"
               (\ o ->
-                 CommentObject <$>
+                 CommentObject' <$>
                    (o .:? "objectType" .!= "comment") <*>
                      (o .:? "originalContent")
                      <*> (o .:? "content"))
 
 instance ToJSON CommentObject where
-        toJSON CommentObject{..}
+        toJSON CommentObject'{..}
           = object
               (catMaybes
                  [Just ("objectType" .= _coObjectType),
@@ -4361,7 +3580,7 @@ instance ToJSON CommentObject where
 
 --
 -- /See:/ 'commentFeed' smart constructor.
-data CommentFeed = CommentFeed
+data CommentFeed = CommentFeed'
     { _cfEtag          :: !(Maybe Text)
     , _cfNextPageToken :: !(Maybe Text)
     , _cfNextLink      :: !(Maybe Text)
@@ -4394,7 +3613,7 @@ data CommentFeed = CommentFeed
 commentFeed
     :: CommentFeed
 commentFeed =
-    CommentFeed
+    CommentFeed'
     { _cfEtag = Nothing
     , _cfNextPageToken = Nothing
     , _cfNextLink = Nothing
@@ -4452,7 +3671,7 @@ instance FromJSON CommentFeed where
         parseJSON
           = withObject "CommentFeed"
               (\ o ->
-                 CommentFeed <$>
+                 CommentFeed' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "nextLink")
                      <*> (o .:? "kind" .!= "plus#commentFeed")
@@ -4462,7 +3681,7 @@ instance FromJSON CommentFeed where
                      <*> (o .:? "title"))
 
 instance ToJSON CommentFeed where
-        toJSON CommentFeed{..}
+        toJSON CommentFeed'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _cfEtag,
@@ -4475,7 +3694,7 @@ instance ToJSON CommentFeed where
 -- | Verification status of actor.
 --
 -- /See:/ 'commentActorVerification' smart constructor.
-newtype CommentActorVerification = CommentActorVerification
+newtype CommentActorVerification = CommentActorVerification'
     { _cavAdHocVerified :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4487,7 +3706,7 @@ newtype CommentActorVerification = CommentActorVerification
 commentActorVerification
     :: CommentActorVerification
 commentActorVerification =
-    CommentActorVerification
+    CommentActorVerification'
     { _cavAdHocVerified = Nothing
     }
 
@@ -4501,133 +3720,19 @@ instance FromJSON CommentActorVerification where
         parseJSON
           = withObject "CommentActorVerification"
               (\ o ->
-                 CommentActorVerification <$> (o .:? "adHocVerified"))
+                 CommentActorVerification' <$>
+                   (o .:? "adHocVerified"))
 
 instance ToJSON CommentActorVerification where
-        toJSON CommentActorVerification{..}
+        toJSON CommentActorVerification'{..}
           = object
               (catMaybes
                  [("adHocVerified" .=) <$> _cavAdHocVerified])
 
---
--- /See:/ 'momentsFeed' smart constructor.
-data MomentsFeed = MomentsFeed
-    { _mfEtag          :: !(Maybe Text)
-    , _mfNextPageToken :: !(Maybe Text)
-    , _mfNextLink      :: !(Maybe Text)
-    , _mfKind          :: !Text
-    , _mfItems         :: !(Maybe [Moment])
-    , _mfSelfLink      :: !(Maybe Text)
-    , _mfUpdated       :: !(Maybe DateTime')
-    , _mfTitle         :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MomentsFeed' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mfEtag'
---
--- * 'mfNextPageToken'
---
--- * 'mfNextLink'
---
--- * 'mfKind'
---
--- * 'mfItems'
---
--- * 'mfSelfLink'
---
--- * 'mfUpdated'
---
--- * 'mfTitle'
-momentsFeed
-    :: MomentsFeed
-momentsFeed =
-    MomentsFeed
-    { _mfEtag = Nothing
-    , _mfNextPageToken = Nothing
-    , _mfNextLink = Nothing
-    , _mfKind = "plus#momentsFeed"
-    , _mfItems = Nothing
-    , _mfSelfLink = Nothing
-    , _mfUpdated = Nothing
-    , _mfTitle = Nothing
-    }
-
--- | ETag of this response for caching purposes.
-mfEtag :: Lens' MomentsFeed (Maybe Text)
-mfEtag = lens _mfEtag (\ s a -> s{_mfEtag = a})
-
--- | The continuation token, which is used to page through large result sets.
--- Provide this value in a subsequent request to return the next page of
--- results.
-mfNextPageToken :: Lens' MomentsFeed (Maybe Text)
-mfNextPageToken
-  = lens _mfNextPageToken
-      (\ s a -> s{_mfNextPageToken = a})
-
--- | Link to the next page of moments.
-mfNextLink :: Lens' MomentsFeed (Maybe Text)
-mfNextLink
-  = lens _mfNextLink (\ s a -> s{_mfNextLink = a})
-
--- | Identifies this resource as a collection of moments. Value:
--- \"plus#momentsFeed\".
-mfKind :: Lens' MomentsFeed Text
-mfKind = lens _mfKind (\ s a -> s{_mfKind = a})
-
--- | The moments in this page of results.
-mfItems :: Lens' MomentsFeed [Moment]
-mfItems
-  = lens _mfItems (\ s a -> s{_mfItems = a}) . _Default
-      . _Coerce
-
--- | Link to this page of moments.
-mfSelfLink :: Lens' MomentsFeed (Maybe Text)
-mfSelfLink
-  = lens _mfSelfLink (\ s a -> s{_mfSelfLink = a})
-
--- | The RFC 339 timestamp for when this collection of moments was last
--- updated.
-mfUpdated :: Lens' MomentsFeed (Maybe UTCTime)
-mfUpdated
-  = lens _mfUpdated (\ s a -> s{_mfUpdated = a}) .
-      mapping _DateTime
-
--- | The title of this collection of moments.
-mfTitle :: Lens' MomentsFeed (Maybe Text)
-mfTitle = lens _mfTitle (\ s a -> s{_mfTitle = a})
-
-instance FromJSON MomentsFeed where
-        parseJSON
-          = withObject "MomentsFeed"
-              (\ o ->
-                 MomentsFeed <$>
-                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
-                     (o .:? "nextLink")
-                     <*> (o .:? "kind" .!= "plus#momentsFeed")
-                     <*> (o .:? "items" .!= mempty)
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "updated")
-                     <*> (o .:? "title"))
-
-instance ToJSON MomentsFeed where
-        toJSON MomentsFeed{..}
-          = object
-              (catMaybes
-                 [("etag" .=) <$> _mfEtag,
-                  ("nextPageToken" .=) <$> _mfNextPageToken,
-                  ("nextLink" .=) <$> _mfNextLink,
-                  Just ("kind" .= _mfKind), ("items" .=) <$> _mfItems,
-                  ("selfLink" .=) <$> _mfSelfLink,
-                  ("updated" .=) <$> _mfUpdated,
-                  ("title" .=) <$> _mfTitle])
-
 -- | An object representation of the individual components of name.
 --
 -- /See:/ 'activityActorName' smart constructor.
-data ActivityActorName = ActivityActorName
+data ActivityActorName = ActivityActorName'
     { _aanGivenName  :: !(Maybe Text)
     , _aanFamilyName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4642,7 +3747,7 @@ data ActivityActorName = ActivityActorName
 activityActorName
     :: ActivityActorName
 activityActorName =
-    ActivityActorName
+    ActivityActorName'
     { _aanGivenName = Nothing
     , _aanFamilyName = Nothing
     }
@@ -4662,11 +3767,11 @@ instance FromJSON ActivityActorName where
         parseJSON
           = withObject "ActivityActorName"
               (\ o ->
-                 ActivityActorName <$>
+                 ActivityActorName' <$>
                    (o .:? "givenName") <*> (o .:? "familyName"))
 
 instance ToJSON ActivityActorName where
-        toJSON ActivityActorName{..}
+        toJSON ActivityActorName'{..}
           = object
               (catMaybes
                  [("givenName" .=) <$> _aanGivenName,

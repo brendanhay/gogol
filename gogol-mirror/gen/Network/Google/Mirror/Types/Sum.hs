@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Mirror.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -28,18 +28,18 @@ data TimelineListOrderBy
       -- ^ @writeTime@
       -- Results will be ordered by the time at which they were last written to
       -- the data store.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TimelineListOrderBy
 
-instance FromText TimelineListOrderBy where
-    fromText = \case
-        "displayTime" -> Just DisplayTime
-        "writeTime" -> Just WriteTime
-        _ -> Nothing
+instance FromHttpApiData TimelineListOrderBy where
+    parseQueryParam = \case
+        "displayTime" -> Right DisplayTime
+        "writeTime" -> Right WriteTime
+        x -> Left ("Unable to parse TimelineListOrderBy from: " <> x)
 
-instance ToText TimelineListOrderBy where
-    toText = \case
+instance ToHttpApiData TimelineListOrderBy where
+    toQueryParam = \case
         DisplayTime -> "displayTime"
         WriteTime -> "writeTime"
 

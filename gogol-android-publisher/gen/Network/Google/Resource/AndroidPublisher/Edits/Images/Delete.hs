@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Images.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type EditsImagesDeleteResource =
 -- | Deletes the image (specified by id) from the edit.
 --
 -- /See:/ 'editsImagesDelete' smart constructor.
-data EditsImagesDelete = EditsImagesDelete
+data EditsImagesDelete = EditsImagesDelete'
     { _eidPackageName :: !Text
     , _eidImageType   :: !EditsImagesDeleteImageType
     , _eidImageId     :: !Text
@@ -90,7 +90,7 @@ editsImagesDelete
     -> Text -- ^ 'eidEditId'
     -> EditsImagesDelete
 editsImagesDelete pEidPackageName_ pEidImageType_ pEidImageId_ pEidLanguage_ pEidEditId_ =
-    EditsImagesDelete
+    EditsImagesDelete'
     { _eidPackageName = pEidPackageName_
     , _eidImageType = pEidImageType_
     , _eidImageId = pEidImageId_
@@ -129,7 +129,9 @@ eidEditId
 
 instance GoogleRequest EditsImagesDelete where
         type Rs EditsImagesDelete = ()
-        requestClient EditsImagesDelete{..}
+        type Scopes EditsImagesDelete =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsImagesDelete'{..}
           = go _eidPackageName _eidEditId _eidLanguage
               _eidImageType
               _eidImageId

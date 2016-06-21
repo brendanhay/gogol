@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.RegionOperations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type RegionOperationsGetResource =
 -- | Retrieves the specified region-specific Operations resource.
 --
 -- /See:/ 'regionOperationsGet' smart constructor.
-data RegionOperationsGet = RegionOperationsGet
+data RegionOperationsGet = RegionOperationsGet'
     { _rogProject   :: !Text
     , _rogOperation :: !Text
     , _rogRegion    :: !Text
@@ -78,7 +78,7 @@ regionOperationsGet
     -> Text -- ^ 'rogRegion'
     -> RegionOperationsGet
 regionOperationsGet pRogProject_ pRogOperation_ pRogRegion_ =
-    RegionOperationsGet
+    RegionOperationsGet'
     { _rogProject = pRogProject_
     , _rogOperation = pRogOperation_
     , _rogRegion = pRogRegion_
@@ -94,14 +94,18 @@ rogOperation :: Lens' RegionOperationsGet Text
 rogOperation
   = lens _rogOperation (\ s a -> s{_rogOperation = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the region for this request.
 rogRegion :: Lens' RegionOperationsGet Text
 rogRegion
   = lens _rogRegion (\ s a -> s{_rogRegion = a})
 
 instance GoogleRequest RegionOperationsGet where
         type Rs RegionOperationsGet = Operation
-        requestClient RegionOperationsGet{..}
+        type Scopes RegionOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient RegionOperationsGet'{..}
           = go _rogProject _rogRegion _rogOperation
               (Just AltJSON)
               computeService

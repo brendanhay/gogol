@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.Files.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'ReportsFilesList' request conforms to.
 type ReportsFilesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -63,7 +63,7 @@ type ReportsFilesListResource =
 -- | Lists files for a report.
 --
 -- /See:/ 'reportsFilesList' smart constructor.
-data ReportsFilesList = ReportsFilesList
+data ReportsFilesList = ReportsFilesList'
     { _rflReportId   :: !(Textual Int64)
     , _rflProFileId  :: !(Textual Int64)
     , _rflSortOrder  :: !ReportsFilesListSortOrder
@@ -92,7 +92,7 @@ reportsFilesList
     -> Int64 -- ^ 'rflProFileId'
     -> ReportsFilesList
 reportsFilesList pRflReportId_ pRflProFileId_ =
-    ReportsFilesList
+    ReportsFilesList'
     { _rflReportId = _Coerce # pRflReportId_
     , _rflProFileId = _Coerce # pRflProFileId_
     , _rflSortOrder = RFLSODescending
@@ -137,7 +137,9 @@ rflMaxResults
 
 instance GoogleRequest ReportsFilesList where
         type Rs ReportsFilesList = FileList
-        requestClient ReportsFilesList{..}
+        type Scopes ReportsFilesList =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient ReportsFilesList'{..}
           = go _rflProFileId _rflReportId (Just _rflSortOrder)
               _rflPageToken
               (Just _rflSortField)

@@ -7,19 +7,23 @@
 
 -- |
 -- Module      : Network.Google.AppsReseller
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you create and manage your customers and their subscriptions.
+-- Creates and manages your customers and their subscriptions.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference>
 module Network.Google.AppsReseller
     (
     -- * Service Configuration
       appsResellerService
+
+    -- * OAuth Scopes
+    , appsOrderReadOnlyScope
+    , appsOrderScope
 
     -- * API Declaration
     , AppsResellerAPI
@@ -93,6 +97,7 @@ module Network.Google.AppsReseller
     -- ** Customer
     , Customer
     , customer
+    , cCustomerDomainVerified
     , cResourceUiURL
     , cKind
     , cCustomerId
@@ -105,6 +110,7 @@ module Network.Google.AppsReseller
     , ChangePlanRequest
     , changePlanRequest
     , cprKind
+    , cprDealCode
     , cprPlanName
     , cprPurchaseOrderId
     , cprSeats
@@ -157,7 +163,9 @@ module Network.Google.AppsReseller
     , subKind
     , subSKUId
     , subPlan
+    , subDealCode
     , subCustomerId
+    , subCustomerDomain
     , subSuspensionReasons
     , subTransferInfo
     , subPurchaseOrderId

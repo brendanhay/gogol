@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.GroupsMigration.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | JSON response template for groups migration API.
 --
 -- /See:/ 'groups' smart constructor.
-data Groups = Groups
+data Groups = Groups'
     { _gKind         :: !Text
     , _gResponseCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data Groups = Groups
 groups
     :: Groups
 groups =
-    Groups
+    Groups'
     { _gKind = "groupsmigration#groups"
     , _gResponseCode = Nothing
     }
@@ -57,12 +57,12 @@ instance FromJSON Groups where
         parseJSON
           = withObject "Groups"
               (\ o ->
-                 Groups <$>
+                 Groups' <$>
                    (o .:? "kind" .!= "groupsmigration#groups") <*>
                      (o .:? "responseCode"))
 
 instance ToJSON Groups where
-        toJSON Groups{..}
+        toJSON Groups'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _gKind),

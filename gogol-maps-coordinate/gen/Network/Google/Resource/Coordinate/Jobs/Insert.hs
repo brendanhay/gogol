@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Coordinate.Jobs.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type JobsInsertResource =
 -- | Inserts a new job. Only the state field of the job should be set.
 --
 -- /See:/ 'jobsInsert' smart constructor.
-data JobsInsert = JobsInsert
+data JobsInsert = JobsInsert'
     { _jiNote                :: !(Maybe Text)
     , _jiTeamId              :: !Text
     , _jiCustomerPhoneNumber :: !(Maybe Text)
@@ -120,7 +120,7 @@ jobsInsert
     -> Text -- ^ 'jiTitle'
     -> JobsInsert
 jobsInsert pJiTeamId_ pJiAddress_ pJiPayload_ pJiLat_ pJiLng_ pJiTitle_ =
-    JobsInsert
+    JobsInsert'
     { _jiNote = Nothing
     , _jiTeamId = pJiTeamId_
     , _jiCustomerPhoneNumber = Nothing
@@ -198,7 +198,9 @@ jiCustomField
 
 instance GoogleRequest JobsInsert where
         type Rs JobsInsert = Job
-        requestClient JobsInsert{..}
+        type Scopes JobsInsert =
+             '["https://www.googleapis.com/auth/coordinate"]
+        requestClient JobsInsert'{..}
           = go _jiTeamId (Just _jiAddress) (Just _jiLat)
               (Just _jiLng)
               (Just _jiTitle)

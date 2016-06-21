@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.CustomDimensions.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type ManagementCustomDimensionsGetResource =
 -- | Get a custom dimension to which the user has access.
 --
 -- /See:/ 'managementCustomDimensionsGet' smart constructor.
-data ManagementCustomDimensionsGet = ManagementCustomDimensionsGet
+data ManagementCustomDimensionsGet = ManagementCustomDimensionsGet'
     { _mcdgWebPropertyId     :: !Text
     , _mcdgAccountId         :: !Text
     , _mcdgCustomDimensionId :: !Text
@@ -80,7 +80,7 @@ managementCustomDimensionsGet
     -> Text -- ^ 'mcdgCustomDimensionId'
     -> ManagementCustomDimensionsGet
 managementCustomDimensionsGet pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDimensionId_ =
-    ManagementCustomDimensionsGet
+    ManagementCustomDimensionsGet'
     { _mcdgWebPropertyId = pMcdgWebPropertyId_
     , _mcdgAccountId = pMcdgAccountId_
     , _mcdgCustomDimensionId = pMcdgCustomDimensionId_
@@ -108,7 +108,10 @@ instance GoogleRequest ManagementCustomDimensionsGet
          where
         type Rs ManagementCustomDimensionsGet =
              CustomDimension
-        requestClient ManagementCustomDimensionsGet{..}
+        type Scopes ManagementCustomDimensionsGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementCustomDimensionsGet'{..}
           = go _mcdgAccountId _mcdgWebPropertyId
               _mcdgCustomDimensionId
               (Just AltJSON)

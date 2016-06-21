@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.InAppProducts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type InAppProductsListResource =
 -- managed in-app products..
 --
 -- /See:/ 'inAppProductsList' smart constructor.
-data InAppProductsList = InAppProductsList
+data InAppProductsList = InAppProductsList'
     { _iaplPackageName :: !Text
     , _iaplToken       :: !(Maybe Text)
     , _iaplStartIndex  :: !(Maybe (Textual Word32))
@@ -83,7 +83,7 @@ inAppProductsList
     :: Text -- ^ 'iaplPackageName'
     -> InAppProductsList
 inAppProductsList pIaplPackageName_ =
-    InAppProductsList
+    InAppProductsList'
     { _iaplPackageName = pIaplPackageName_
     , _iaplToken = Nothing
     , _iaplStartIndex = Nothing
@@ -115,7 +115,9 @@ iaplMaxResults
 
 instance GoogleRequest InAppProductsList where
         type Rs InAppProductsList = InAppProductsListResponse
-        requestClient InAppProductsList{..}
+        type Scopes InAppProductsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient InAppProductsList'{..}
           = go _iaplPackageName _iaplToken _iaplStartIndex
               _iaplMaxResults
               (Just AltJSON)

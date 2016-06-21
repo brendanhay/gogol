@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type AccountsAdUnitsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'accountsAdUnitsPatch' smart constructor.
-data AccountsAdUnitsPatch = AccountsAdUnitsPatch
+data AccountsAdUnitsPatch = AccountsAdUnitsPatch'
     { _aaupAdUnitId   :: !Text
     , _aaupPayload    :: !AdUnit
     , _aaupAdClientId :: !Text
@@ -86,7 +86,7 @@ accountsAdUnitsPatch
     -> Text -- ^ 'aaupAccountId'
     -> AccountsAdUnitsPatch
 accountsAdUnitsPatch pAaupAdUnitId_ pAaupPayload_ pAaupAdClientId_ pAaupAccountId_ =
-    AccountsAdUnitsPatch
+    AccountsAdUnitsPatch'
     { _aaupAdUnitId = pAaupAdUnitId_
     , _aaupPayload = pAaupPayload_
     , _aaupAdClientId = pAaupAdClientId_
@@ -117,7 +117,9 @@ aaupAccountId
 
 instance GoogleRequest AccountsAdUnitsPatch where
         type Rs AccountsAdUnitsPatch = AdUnit
-        requestClient AccountsAdUnitsPatch{..}
+        type Scopes AccountsAdUnitsPatch =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AccountsAdUnitsPatch'{..}
           = go _aaupAccountId _aaupAdClientId
               (Just _aaupAdUnitId)
               (Just AltJSON)

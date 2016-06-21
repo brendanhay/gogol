@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.LiveStreams.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type LiveStreamsDeleteResource =
 -- | Deletes a video stream.
 --
 -- /See:/ 'liveStreamsDelete' smart constructor.
-data LiveStreamsDelete = LiveStreamsDelete
+data LiveStreamsDelete = LiveStreamsDelete'
     { _lsdOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lsdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lsdId                            :: !Text
@@ -74,7 +74,7 @@ liveStreamsDelete
     :: Text -- ^ 'lsdId'
     -> LiveStreamsDelete
 liveStreamsDelete pLsdId_ =
-    LiveStreamsDelete
+    LiveStreamsDelete'
     { _lsdOnBehalfOfContentOwner = Nothing
     , _lsdOnBehalfOfContentOwnerChannel = Nothing
     , _lsdId = pLsdId_
@@ -123,7 +123,10 @@ lsdId = lens _lsdId (\ s a -> s{_lsdId = a})
 
 instance GoogleRequest LiveStreamsDelete where
         type Rs LiveStreamsDelete = ()
-        requestClient LiveStreamsDelete{..}
+        type Scopes LiveStreamsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient LiveStreamsDelete'{..}
           = go (Just _lsdId) _lsdOnBehalfOfContentOwner
               _lsdOnBehalfOfContentOwnerChannel
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetHTTPProxies.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type TargetHTTPProxiesInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'targetHTTPProxiesInsert' smart constructor.
-data TargetHTTPProxiesInsert = TargetHTTPProxiesInsert
+data TargetHTTPProxiesInsert = TargetHTTPProxiesInsert'
     { _thttppiProject :: !Text
     , _thttppiPayload :: !TargetHTTPProxy
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,12 +75,12 @@ targetHTTPProxiesInsert
     -> TargetHTTPProxy -- ^ 'thttppiPayload'
     -> TargetHTTPProxiesInsert
 targetHTTPProxiesInsert pThttppiProject_ pThttppiPayload_ =
-    TargetHTTPProxiesInsert
+    TargetHTTPProxiesInsert'
     { _thttppiProject = pThttppiProject_
     , _thttppiPayload = pThttppiPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thttppiProject :: Lens' TargetHTTPProxiesInsert Text
 thttppiProject
   = lens _thttppiProject
@@ -94,7 +94,10 @@ thttppiPayload
 
 instance GoogleRequest TargetHTTPProxiesInsert where
         type Rs TargetHTTPProxiesInsert = Operation
-        requestClient TargetHTTPProxiesInsert{..}
+        type Scopes TargetHTTPProxiesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetHTTPProxiesInsert'{..}
           = go _thttppiProject (Just AltJSON) _thttppiPayload
               computeService
           where go

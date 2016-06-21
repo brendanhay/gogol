@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accounttax.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccounttaxUpdateResource =
 -- | Updates the tax settings of the account.
 --
 -- /See:/ 'accounttaxUpdate' smart constructor.
-data AccounttaxUpdate = AccounttaxUpdate
+data AccounttaxUpdate = AccounttaxUpdate'
     { _auuMerchantId :: !(Textual Word64)
     , _auuPayload    :: !AccountTax
     , _auuAccountId  :: !(Textual Word64)
@@ -81,7 +81,7 @@ accounttaxUpdate
     -> Word64 -- ^ 'auuAccountId'
     -> AccounttaxUpdate
 accounttaxUpdate pAuuMerchantId_ pAuuPayload_ pAuuAccountId_ =
-    AccounttaxUpdate
+    AccounttaxUpdate'
     { _auuMerchantId = _Coerce # pAuuMerchantId_
     , _auuPayload = pAuuPayload_
     , _auuAccountId = _Coerce # pAuuAccountId_
@@ -113,7 +113,9 @@ auuDryRun
 
 instance GoogleRequest AccounttaxUpdate where
         type Rs AccounttaxUpdate = AccountTax
-        requestClient AccounttaxUpdate{..}
+        type Scopes AccounttaxUpdate =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccounttaxUpdate'{..}
           = go _auuMerchantId _auuAccountId _auuDryRun
               (Just AltJSON)
               _auuPayload

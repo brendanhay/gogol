@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type GetGoogleServiceAccountResource =
 -- Service and can only be used by Storage Transfer Service.
 --
 -- /See:/ 'getGoogleServiceAccount' smart constructor.
-data GetGoogleServiceAccount = GetGoogleServiceAccount
+data GetGoogleServiceAccount = GetGoogleServiceAccount'
     { _ggsaXgafv          :: !(Maybe Text)
     , _ggsaUploadProtocol :: !(Maybe Text)
     , _ggsaPp             :: !Bool
@@ -109,7 +109,7 @@ data GetGoogleServiceAccount = GetGoogleServiceAccount
 getGoogleServiceAccount
     :: GetGoogleServiceAccount
 getGoogleServiceAccount =
-    GetGoogleServiceAccount
+    GetGoogleServiceAccount'
     { _ggsaXgafv = Nothing
     , _ggsaUploadProtocol = Nothing
     , _ggsaPp = True
@@ -168,7 +168,9 @@ ggsaCallback
 instance GoogleRequest GetGoogleServiceAccount where
         type Rs GetGoogleServiceAccount =
              GoogleServiceAccount
-        requestClient GetGoogleServiceAccount{..}
+        type Scopes GetGoogleServiceAccount =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient GetGoogleServiceAccount'{..}
           = go _ggsaXgafv _ggsaUploadProtocol (Just _ggsaPp)
               _ggsaAccessToken
               _ggsaUploadType

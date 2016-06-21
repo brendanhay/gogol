@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Roles.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type RolesInsertResource =
 -- | Creates a role.
 --
 -- /See:/ 'rolesInsert' smart constructor.
-data RolesInsert = RolesInsert
+data RolesInsert = RolesInsert'
     { _riPayload  :: !Role
     , _riCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ rolesInsert
     -> Text -- ^ 'riCustomer'
     -> RolesInsert
 rolesInsert pRiPayload_ pRiCustomer_ =
-    RolesInsert
+    RolesInsert'
     { _riPayload = pRiPayload_
     , _riCustomer = pRiCustomer_
     }
@@ -89,7 +89,9 @@ riCustomer
 
 instance GoogleRequest RolesInsert where
         type Rs RolesInsert = Role
-        requestClient RolesInsert{..}
+        type Scopes RolesInsert =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
+        requestClient RolesInsert'{..}
           = go _riCustomer (Just AltJSON) _riPayload
               directoryService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Files.EmptyTrash
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 -- 'FilesEmptyTrash' request conforms to.
 type FilesEmptyTrashResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            "trash" :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()
@@ -50,18 +50,20 @@ type FilesEmptyTrashResource =
 --
 -- /See:/ 'filesEmptyTrash' smart constructor.
 data FilesEmptyTrash =
-    FilesEmptyTrash
+    FilesEmptyTrash'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesEmptyTrash' with the minimum fields required to make a request.
 --
 filesEmptyTrash
     :: FilesEmptyTrash
-filesEmptyTrash = FilesEmptyTrash
+filesEmptyTrash = FilesEmptyTrash'
 
 instance GoogleRequest FilesEmptyTrash where
         type Rs FilesEmptyTrash = ()
-        requestClient FilesEmptyTrash{}
+        type Scopes FilesEmptyTrash =
+             '["https://www.googleapis.com/auth/drive"]
+        requestClient FilesEmptyTrash'{}
           = go (Just AltJSON) driveService
           where go
                   = buildClient

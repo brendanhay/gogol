@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Rasters.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -78,7 +78,7 @@ type RastersListResource =
 -- | Return all rasters readable by the current user.
 --
 -- /See:/ 'rastersList' smart constructor.
-data RastersList = RastersList
+data RastersList = RastersList'
     { _rlCreatedAfter     :: !(Maybe DateTime')
     , _rlCreatorEmail     :: !(Maybe Text)
     , _rlRole             :: !(Maybe RastersListRole)
@@ -127,7 +127,7 @@ rastersList
     :: Text -- ^ 'rlProjectId'
     -> RastersList
 rastersList pRlProjectId_ =
-    RastersList
+    RastersList'
     { _rlCreatedAfter = Nothing
     , _rlCreatorEmail = Nothing
     , _rlRole = Nothing
@@ -231,7 +231,10 @@ rlCreatedBefore
 
 instance GoogleRequest RastersList where
         type Rs RastersList = RastersListResponse
-        requestClient RastersList{..}
+        type Scopes RastersList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient RastersList'{..}
           = go (Just _rlProjectId) _rlCreatedAfter
               _rlCreatorEmail
               _rlRole

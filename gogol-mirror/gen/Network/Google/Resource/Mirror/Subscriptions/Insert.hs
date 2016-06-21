@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Subscriptions.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type SubscriptionsInsertResource =
 -- | Creates a new subscription.
 --
 -- /See:/ 'subscriptionsInsert' smart constructor.
-newtype SubscriptionsInsert = SubscriptionsInsert
+newtype SubscriptionsInsert = SubscriptionsInsert'
     { _siPayload :: Subscription
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ subscriptionsInsert
     :: Subscription -- ^ 'siPayload'
     -> SubscriptionsInsert
 subscriptionsInsert pSiPayload_ =
-    SubscriptionsInsert
+    SubscriptionsInsert'
     { _siPayload = pSiPayload_
     }
 
@@ -76,7 +76,9 @@ siPayload
 
 instance GoogleRequest SubscriptionsInsert where
         type Rs SubscriptionsInsert = Subscription
-        requestClient SubscriptionsInsert{..}
+        type Scopes SubscriptionsInsert =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient SubscriptionsInsert'{..}
           = go (Just AltJSON) _siPayload mirrorService
           where go
                   = buildClient

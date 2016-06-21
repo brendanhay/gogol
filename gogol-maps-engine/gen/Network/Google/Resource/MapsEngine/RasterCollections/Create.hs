@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.RasterCollections.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type RasterCollectionsCreateResource =
 -- | Create a raster collection asset.
 --
 -- /See:/ 'rasterCollectionsCreate' smart constructor.
-newtype RasterCollectionsCreate = RasterCollectionsCreate
+newtype RasterCollectionsCreate = RasterCollectionsCreate'
     { _rccPayload :: RasterCollection
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ rasterCollectionsCreate
     :: RasterCollection -- ^ 'rccPayload'
     -> RasterCollectionsCreate
 rasterCollectionsCreate pRccPayload_ =
-    RasterCollectionsCreate
+    RasterCollectionsCreate'
     { _rccPayload = pRccPayload_
     }
 
@@ -76,7 +76,9 @@ rccPayload
 
 instance GoogleRequest RasterCollectionsCreate where
         type Rs RasterCollectionsCreate = RasterCollection
-        requestClient RasterCollectionsCreate{..}
+        type Scopes RasterCollectionsCreate =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient RasterCollectionsCreate'{..}
           = go (Just AltJSON) _rccPayload mapsEngineService
           where go
                   = buildClient

@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.CustomSearch.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -36,21 +36,21 @@ data CSEListImgType
     | Photo
       -- ^ @photo@
       -- photo
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgType
 
-instance FromText CSEListImgType where
-    fromText = \case
-        "clipart" -> Just CliPart
-        "face" -> Just Face
-        "lineart" -> Just Lineart
-        "news" -> Just News
-        "photo" -> Just Photo
-        _ -> Nothing
+instance FromHttpApiData CSEListImgType where
+    parseQueryParam = \case
+        "clipart" -> Right CliPart
+        "face" -> Right Face
+        "lineart" -> Right Lineart
+        "news" -> Right News
+        "photo" -> Right Photo
+        x -> Left ("Unable to parse CSEListImgType from: " <> x)
 
-instance ToText CSEListImgType where
-    toText = \case
+instance ToHttpApiData CSEListImgType where
+    toQueryParam = \case
         CliPart -> "clipart"
         Face -> "face"
         Lineart -> "lineart"
@@ -72,18 +72,18 @@ data CSEListSiteSearchFilter
     | I
       -- ^ @i@
       -- include
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListSiteSearchFilter
 
-instance FromText CSEListSiteSearchFilter where
-    fromText = \case
-        "e" -> Just E
-        "i" -> Just I
-        _ -> Nothing
+instance FromHttpApiData CSEListSiteSearchFilter where
+    parseQueryParam = \case
+        "e" -> Right E
+        "i" -> Right I
+        x -> Left ("Unable to parse CSEListSiteSearchFilter from: " <> x)
 
-instance ToText CSEListSiteSearchFilter where
-    toText = \case
+instance ToHttpApiData CSEListSiteSearchFilter where
+    toQueryParam = \case
         E -> "e"
         I -> "i"
 
@@ -126,26 +126,26 @@ data CSEListImgDominantColor
     | Yellow
       -- ^ @yellow@
       -- yellow
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgDominantColor
 
-instance FromText CSEListImgDominantColor where
-    fromText = \case
-        "black" -> Just Black
-        "blue" -> Just Blue
-        "brown" -> Just Brown
-        "gray" -> Just Gray
-        "green" -> Just Green
-        "pink" -> Just Pink
-        "purple" -> Just Purple
-        "teal" -> Just Teal
-        "white" -> Just White
-        "yellow" -> Just Yellow
-        _ -> Nothing
+instance FromHttpApiData CSEListImgDominantColor where
+    parseQueryParam = \case
+        "black" -> Right Black
+        "blue" -> Right Blue
+        "brown" -> Right Brown
+        "gray" -> Right Gray
+        "green" -> Right Green
+        "pink" -> Right Pink
+        "purple" -> Right Purple
+        "teal" -> Right Teal
+        "white" -> Right White
+        "yellow" -> Right Yellow
+        x -> Left ("Unable to parse CSEListImgDominantColor from: " <> x)
 
-instance ToText CSEListImgDominantColor where
-    toText = \case
+instance ToHttpApiData CSEListImgDominantColor where
+    toQueryParam = \case
         Black -> "black"
         Blue -> "blue"
         Brown -> "brown"
@@ -174,19 +174,19 @@ data CSEListSafe
     | Off
       -- ^ @off@
       -- Disables safe search filtering.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListSafe
 
-instance FromText CSEListSafe where
-    fromText = \case
-        "high" -> Just High
-        "medium" -> Just Medium
-        "off" -> Just Off
-        _ -> Nothing
+instance FromHttpApiData CSEListSafe where
+    parseQueryParam = \case
+        "high" -> Right High
+        "medium" -> Right Medium
+        "off" -> Right Off
+        x -> Left ("Unable to parse CSEListSafe from: " <> x)
 
-instance ToText CSEListSafe where
-    toText = \case
+instance ToHttpApiData CSEListSafe where
+    toQueryParam = \case
         High -> "high"
         Medium -> "medium"
         Off -> "off"
@@ -209,19 +209,19 @@ data CSEListImgColorType
     | CSELICTMono
       -- ^ @mono@
       -- mono
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgColorType
 
-instance FromText CSEListImgColorType where
-    fromText = \case
-        "color" -> Just CSELICTColor
-        "gray" -> Just CSELICTGray
-        "mono" -> Just CSELICTMono
-        _ -> Nothing
+instance FromHttpApiData CSEListImgColorType where
+    parseQueryParam = \case
+        "color" -> Right CSELICTColor
+        "gray" -> Right CSELICTGray
+        "mono" -> Right CSELICTMono
+        x -> Left ("Unable to parse CSEListImgColorType from: " <> x)
 
-instance ToText CSEListImgColorType where
-    toText = \case
+instance ToHttpApiData CSEListImgColorType where
+    toQueryParam = \case
         CSELICTColor -> "color"
         CSELICTGray -> "gray"
         CSELICTMono -> "mono"
@@ -240,18 +240,18 @@ data CSEListFilter
     | CSELF1
       -- ^ @1@
       -- Turns on duplicate content filter.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListFilter
 
-instance FromText CSEListFilter where
-    fromText = \case
-        "0" -> Just CSELF0
-        "1" -> Just CSELF1
-        _ -> Nothing
+instance FromHttpApiData CSEListFilter where
+    parseQueryParam = \case
+        "0" -> Right CSELF0
+        "1" -> Right CSELF1
+        x -> Left ("Unable to parse CSEListFilter from: " <> x)
 
-instance ToText CSEListFilter where
-    toText = \case
+instance ToHttpApiData CSEListFilter where
+    toQueryParam = \case
         CSELF0 -> "0"
         CSELF1 -> "1"
 
@@ -368,51 +368,51 @@ data CSEListLr
     | LangZhTw
       -- ^ @lang_zh-TW@
       -- Chinese (Traditional)
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListLr
 
-instance FromText CSEListLr where
-    fromText = \case
-        "lang_ar" -> Just LangAr
-        "lang_bg" -> Just LangBg
-        "lang_ca" -> Just LangCa
-        "lang_cs" -> Just LangCs
-        "lang_da" -> Just LangDa
-        "lang_de" -> Just LangDe
-        "lang_el" -> Just LangEl
-        "lang_en" -> Just LangEn
-        "lang_es" -> Just LangEs
-        "lang_et" -> Just LangEt
-        "lang_fi" -> Just LangFi
-        "lang_fr" -> Just LangFr
-        "lang_hr" -> Just LangHr
-        "lang_hu" -> Just LangHu
-        "lang_id" -> Just LangId
-        "lang_is" -> Just LangIs
-        "lang_it" -> Just LangIt
-        "lang_iw" -> Just LangIw
-        "lang_ja" -> Just LangJa
-        "lang_ko" -> Just LangKo
-        "lang_lt" -> Just LangLT
-        "lang_lv" -> Just LangLv
-        "lang_nl" -> Just LangNl
-        "lang_no" -> Just LangNo
-        "lang_pl" -> Just LangPl
-        "lang_pt" -> Just LangPt
-        "lang_ro" -> Just LangRo
-        "lang_ru" -> Just LangRu
-        "lang_sk" -> Just LangSk
-        "lang_sl" -> Just LangSl
-        "lang_sr" -> Just LangSr
-        "lang_sv" -> Just LangSv
-        "lang_tr" -> Just LangTr
-        "lang_zh-CN" -> Just LangZhCn
-        "lang_zh-TW" -> Just LangZhTw
-        _ -> Nothing
+instance FromHttpApiData CSEListLr where
+    parseQueryParam = \case
+        "lang_ar" -> Right LangAr
+        "lang_bg" -> Right LangBg
+        "lang_ca" -> Right LangCa
+        "lang_cs" -> Right LangCs
+        "lang_da" -> Right LangDa
+        "lang_de" -> Right LangDe
+        "lang_el" -> Right LangEl
+        "lang_en" -> Right LangEn
+        "lang_es" -> Right LangEs
+        "lang_et" -> Right LangEt
+        "lang_fi" -> Right LangFi
+        "lang_fr" -> Right LangFr
+        "lang_hr" -> Right LangHr
+        "lang_hu" -> Right LangHu
+        "lang_id" -> Right LangId
+        "lang_is" -> Right LangIs
+        "lang_it" -> Right LangIt
+        "lang_iw" -> Right LangIw
+        "lang_ja" -> Right LangJa
+        "lang_ko" -> Right LangKo
+        "lang_lt" -> Right LangLT
+        "lang_lv" -> Right LangLv
+        "lang_nl" -> Right LangNl
+        "lang_no" -> Right LangNo
+        "lang_pl" -> Right LangPl
+        "lang_pt" -> Right LangPt
+        "lang_ro" -> Right LangRo
+        "lang_ru" -> Right LangRu
+        "lang_sk" -> Right LangSk
+        "lang_sl" -> Right LangSl
+        "lang_sr" -> Right LangSr
+        "lang_sv" -> Right LangSv
+        "lang_tr" -> Right LangTr
+        "lang_zh-CN" -> Right LangZhCn
+        "lang_zh-TW" -> Right LangZhTw
+        x -> Left ("Unable to parse CSEListLr from: " <> x)
 
-instance ToText CSEListLr where
-    toText = \case
+instance ToHttpApiData CSEListLr where
+    toQueryParam = \case
         LangAr -> "lang_ar"
         LangBg -> "lang_bg"
         LangCa -> "lang_ca"
@@ -460,17 +460,17 @@ data CSEListSearchType
     = Image
       -- ^ @image@
       -- custom image search
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListSearchType
 
-instance FromText CSEListSearchType where
-    fromText = \case
-        "image" -> Just Image
-        _ -> Nothing
+instance FromHttpApiData CSEListSearchType where
+    parseQueryParam = \case
+        "image" -> Right Image
+        x -> Left ("Unable to parse CSEListSearchType from: " <> x)
 
-instance ToText CSEListSearchType where
-    toText = \case
+instance ToHttpApiData CSEListSearchType where
+    toQueryParam = \case
         Image -> "image"
 
 instance FromJSON CSEListSearchType where
@@ -503,23 +503,23 @@ data CSEListImgSize
     | CSELISXxlarge
       -- ^ @xxlarge@
       -- xxlarge
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgSize
 
-instance FromText CSEListImgSize where
-    fromText = \case
-        "huge" -> Just CSELISHuge
-        "icon" -> Just CSELISIcon
-        "large" -> Just CSELISLarge
-        "medium" -> Just CSELISMedium
-        "small" -> Just CSELISSmall
-        "xlarge" -> Just CSELISXlarge
-        "xxlarge" -> Just CSELISXxlarge
-        _ -> Nothing
+instance FromHttpApiData CSEListImgSize where
+    parseQueryParam = \case
+        "huge" -> Right CSELISHuge
+        "icon" -> Right CSELISIcon
+        "large" -> Right CSELISLarge
+        "medium" -> Right CSELISMedium
+        "small" -> Right CSELISSmall
+        "xlarge" -> Right CSELISXlarge
+        "xxlarge" -> Right CSELISXxlarge
+        x -> Left ("Unable to parse CSEListImgSize from: " <> x)
 
-instance ToText CSEListImgSize where
-    toText = \case
+instance ToHttpApiData CSEListImgSize where
+    toQueryParam = \case
         CSELISHuge -> "huge"
         CSELISIcon -> "icon"
         CSELISLarge -> "large"

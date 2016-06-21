@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickSearch.Reports.Generate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type ReportsGenerateResource =
 -- | Generates and returns a report immediately.
 --
 -- /See:/ 'reportsGenerate' smart constructor.
-newtype ReportsGenerate = ReportsGenerate
+newtype ReportsGenerate = ReportsGenerate'
     { _rgPayload :: ReportRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ reportsGenerate
     :: ReportRequest -- ^ 'rgPayload'
     -> ReportsGenerate
 reportsGenerate pRgPayload_ =
-    ReportsGenerate
+    ReportsGenerate'
     { _rgPayload = pRgPayload_
     }
 
@@ -76,7 +76,9 @@ rgPayload
 
 instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate = Report
-        requestClient ReportsGenerate{..}
+        type Scopes ReportsGenerate =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
+        requestClient ReportsGenerate'{..}
           = go (Just AltJSON) _rgPayload
               doubleClickSearchService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DataTransfer.Transfers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type TransfersGetResource =
 -- | Retrieves a data transfer request by its resource ID.
 --
 -- /See:/ 'transfersGet' smart constructor.
-newtype TransfersGet = TransfersGet
+newtype TransfersGet = TransfersGet'
     { _tgDataTransferId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ transfersGet
     :: Text -- ^ 'tgDataTransferId'
     -> TransfersGet
 transfersGet pTgDataTransferId_ =
-    TransfersGet
+    TransfersGet'
     { _tgDataTransferId = pTgDataTransferId_
     }
 
@@ -78,7 +78,10 @@ tgDataTransferId
 
 instance GoogleRequest TransfersGet where
         type Rs TransfersGet = DataTransfer
-        requestClient TransfersGet{..}
+        type Scopes TransfersGet =
+             '["https://www.googleapis.com/auth/admin.datatransfer",
+               "https://www.googleapis.com/auth/admin.datatransfer.readonly"]
+        requestClient TransfersGet'{..}
           = go _tgDataTransferId (Just AltJSON)
               dataTransferService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Quests.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -34,6 +34,7 @@ module Network.Google.Resource.Games.Quests.List
     , QuestsList
 
     -- * Request Lenses
+    , qlConsistencyToken
     , qlLanguage
     , qlPageToken
     , qlPlayerId
@@ -51,26 +52,30 @@ type QuestsListResource =
          "players" :>
            Capture "playerId" Text :>
              "quests" :>
-               QueryParam "language" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Int32) :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] QuestListResponse
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "language" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" (Textual Int32) :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] QuestListResponse
 
 -- | Get a list of quests for your application and the currently
 -- authenticated player.
 --
 -- /See:/ 'questsList' smart constructor.
-data QuestsList = QuestsList
-    { _qlLanguage   :: !(Maybe Text)
-    , _qlPageToken  :: !(Maybe Text)
-    , _qlPlayerId   :: !Text
-    , _qlMaxResults :: !(Maybe (Textual Int32))
+data QuestsList = QuestsList'
+    { _qlConsistencyToken :: !(Maybe (Textual Int64))
+    , _qlLanguage         :: !(Maybe Text)
+    , _qlPageToken        :: !(Maybe Text)
+    , _qlPlayerId         :: !Text
+    , _qlMaxResults       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qlConsistencyToken'
 --
 -- * 'qlLanguage'
 --
@@ -83,12 +88,20 @@ questsList
     :: Text -- ^ 'qlPlayerId'
     -> QuestsList
 questsList pQlPlayerId_ =
-    QuestsList
-    { _qlLanguage = Nothing
+    QuestsList'
+    { _qlConsistencyToken = Nothing
+    , _qlLanguage = Nothing
     , _qlPageToken = Nothing
     , _qlPlayerId = pQlPlayerId_
     , _qlMaxResults = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+qlConsistencyToken :: Lens' QuestsList (Maybe Int64)
+qlConsistencyToken
+  = lens _qlConsistencyToken
+      (\ s a -> s{_qlConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 qlLanguage :: Lens' QuestsList (Maybe Text)
@@ -117,8 +130,12 @@ qlMaxResults
 
 instance GoogleRequest QuestsList where
         type Rs QuestsList = QuestListResponse
-        requestClient QuestsList{..}
-          = go _qlPlayerId _qlLanguage _qlPageToken
+        type Scopes QuestsList =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient QuestsList'{..}
+          = go _qlPlayerId _qlConsistencyToken _qlLanguage
+              _qlPageToken
               _qlMaxResults
               (Just AltJSON)
               gamesService

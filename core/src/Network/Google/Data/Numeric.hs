@@ -1,10 +1,11 @@
 {-# LANGUAGE DeriveDataTypeable         #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE ScopedTypeVariables        #-}
 
 -- |
 -- Module      : Network.Google.Data.Numeric
--- Copyright   : (c) 2015 Brendan Hay <brendan.g.hay@gmail.com>
+-- Copyright   : (c) 2015-2016 Brendan Hay <brendan.g.hay@gmail.com>
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
@@ -14,10 +15,10 @@ module Network.Google.Data.Numeric
     ( Nat (..)
     ) where
 
-import           Control.Lens
 import           Control.Monad
 import           Data.Aeson
 import           Data.Data
+import           Data.Monoid                ((<>))
 import           Data.Scientific
 import           Data.Text                  (Text)
 import qualified Data.Text                  as Text
@@ -47,15 +48,15 @@ instance FromJSON Nat where
 instance ToJSON Nat where
     toJSON = Number . flip scientific 0 . toInteger . unNat
 
-instance ToText Nat where
-    toText = shortText . Build.decimal
+instance ToHttpApiData Nat where
+    toQueryParam = shortText . Build.decimal
 
-instance FromText Nat where
-    fromText t =
+instance FromHttpApiData Nat where
+    parseQueryParam t =
         case Read.decimal t of
             Right (x, r) | Text.null r
-                -> Just x
-            _   -> Nothing
+                -> Right x
+            _   -> Left ("Unable to parse natural from: " <> t)
 
 shortText :: Builder -> Text
 shortText = LText.toStrict . Build.toLazyTextWith 32

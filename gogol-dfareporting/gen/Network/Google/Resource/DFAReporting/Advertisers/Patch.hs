@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Advertisers.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersPatch' request conforms to.
 type AdvertisersPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
@@ -57,7 +57,7 @@ type AdvertisersPatchResource =
 -- | Updates an existing advertiser. This method supports patch semantics.
 --
 -- /See:/ 'advertisersPatch' smart constructor.
-data AdvertisersPatch = AdvertisersPatch
+data AdvertisersPatch = AdvertisersPatch'
     { _apProFileId :: !(Textual Int64)
     , _apPayload   :: !Advertiser
     , _apId        :: !(Textual Int64)
@@ -78,7 +78,7 @@ advertisersPatch
     -> Int64 -- ^ 'apId'
     -> AdvertisersPatch
 advertisersPatch pApProFileId_ pApPayload_ pApId_ =
-    AdvertisersPatch
+    AdvertisersPatch'
     { _apProFileId = _Coerce # pApProFileId_
     , _apPayload = pApPayload_
     , _apId = _Coerce # pApId_
@@ -101,7 +101,9 @@ apId = lens _apId (\ s a -> s{_apId = a}) . _Coerce
 
 instance GoogleRequest AdvertisersPatch where
         type Rs AdvertisersPatch = Advertiser
-        requestClient AdvertisersPatch{..}
+        type Scopes AdvertisersPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdvertisersPatch'{..}
           = go _apProFileId (Just _apId) (Just AltJSON)
               _apPayload
               dFAReportingService

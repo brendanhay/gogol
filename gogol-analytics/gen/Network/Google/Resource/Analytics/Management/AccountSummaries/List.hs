@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.AccountSummaries.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ManagementAccountSummariesListResource =
 -- accounts\/properties\/profiles) to which the user has access.
 --
 -- /See:/ 'managementAccountSummariesList' smart constructor.
-data ManagementAccountSummariesList = ManagementAccountSummariesList
+data ManagementAccountSummariesList = ManagementAccountSummariesList'
     { _maslStartIndex :: !(Maybe (Textual Int32))
     , _maslMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ data ManagementAccountSummariesList = ManagementAccountSummariesList
 managementAccountSummariesList
     :: ManagementAccountSummariesList
 managementAccountSummariesList =
-    ManagementAccountSummariesList
+    ManagementAccountSummariesList'
     { _maslStartIndex = Nothing
     , _maslMaxResults = Nothing
     }
@@ -97,7 +97,10 @@ instance GoogleRequest ManagementAccountSummariesList
          where
         type Rs ManagementAccountSummariesList =
              AccountSummaries
-        requestClient ManagementAccountSummariesList{..}
+        type Scopes ManagementAccountSummariesList =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementAccountSummariesList'{..}
           = go _maslStartIndex _maslMaxResults (Just AltJSON)
               analyticsService
           where go

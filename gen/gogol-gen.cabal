@@ -1,5 +1,5 @@
 name:                  gogol-gen
-version:               0.0.1
+version:               0.1.0
 synopsis:              Gogol Code Generator
 homepage:              https://github.com/brendanhay/gogol
 license:               OtherLicense
@@ -46,16 +46,16 @@ executable gogol-gen
     build-depends:
           aeson
         , attoparsec
-        , base       == 4.8.*
+        , base             >= 4.8
         , bifunctors
         , bytestring
         , case-insensitive
         , directory-tree
         , ede
-        , errors
+        , errors           >= 2.1.2
         , formatting
         , hashable
-        , haskell-src-exts
+        , haskell-src-exts >= 1.17.1
         , hindent
         , lens
         , mtl
@@ -69,4 +69,5 @@ executable gogol-gen
         , text-icu
         , text-manipulate
         , text-regex-replace
+        , unexceptionalio
         , unordered-containers

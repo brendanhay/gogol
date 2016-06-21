@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.Groups.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type GroupsDeleteResource =
 -- | Deletes the specified Group resource.
 --
 -- /See:/ 'groupsDelete' smart constructor.
-data GroupsDelete = GroupsDelete
+data GroupsDelete = GroupsDelete'
     { _gdProject   :: !Text
     , _gdGroupName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ groupsDelete
     -> Text -- ^ 'gdGroupName'
     -> GroupsDelete
 groupsDelete pGdProject_ pGdGroupName_ =
-    GroupsDelete
+    GroupsDelete'
     { _gdProject = pGdProject_
     , _gdGroupName = pGdGroupName_
     }
@@ -89,7 +89,10 @@ gdGroupName
 
 instance GoogleRequest GroupsDelete where
         type Rs GroupsDelete = Operation
-        requestClient GroupsDelete{..}
+        type Scopes GroupsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
+        requestClient GroupsDelete'{..}
           = go _gdProject _gdGroupName (Just AltJSON)
               userAccountsService
           where go

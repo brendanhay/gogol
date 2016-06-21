@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Firewalls.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified firewall resource with the data included in the
+-- Updates the specified firewall rule with the data included in the
 -- request. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.patch@.
@@ -55,11 +55,11 @@ type FirewallsPatchResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Firewall :> Patch '[JSON] Operation
 
--- | Updates the specified firewall resource with the data included in the
+-- | Updates the specified firewall rule with the data included in the
 -- request. This method supports patch semantics.
 --
 -- /See:/ 'firewallsPatch' smart constructor.
-data FirewallsPatch = FirewallsPatch
+data FirewallsPatch = FirewallsPatch'
     { _fpProject  :: !Text
     , _fpPayload  :: !Firewall
     , _fpFirewall :: !Text
@@ -80,7 +80,7 @@ firewallsPatch
     -> Text -- ^ 'fpFirewall'
     -> FirewallsPatch
 firewallsPatch pFpProject_ pFpPayload_ pFpFirewall_ =
-    FirewallsPatch
+    FirewallsPatch'
     { _fpProject = pFpProject_
     , _fpPayload = pFpPayload_
     , _fpFirewall = pFpFirewall_
@@ -96,14 +96,17 @@ fpPayload :: Lens' FirewallsPatch Firewall
 fpPayload
   = lens _fpPayload (\ s a -> s{_fpPayload = a})
 
--- | Name of the firewall resource to update.
+-- | Name of the firewall rule to update.
 fpFirewall :: Lens' FirewallsPatch Text
 fpFirewall
   = lens _fpFirewall (\ s a -> s{_fpFirewall = a})
 
 instance GoogleRequest FirewallsPatch where
         type Rs FirewallsPatch = Operation
-        requestClient FirewallsPatch{..}
+        type Scopes FirewallsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient FirewallsPatch'{..}
           = go _fpProject _fpFirewall (Just AltJSON) _fpPayload
               computeService
           where go

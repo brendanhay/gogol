@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type RelyingPartyGetAccountInfoResource =
 -- | Returns the account info.
 --
 -- /See:/ 'relyingPartyGetAccountInfo' smart constructor.
-newtype RelyingPartyGetAccountInfo = RelyingPartyGetAccountInfo
+newtype RelyingPartyGetAccountInfo = RelyingPartyGetAccountInfo'
     { _rpgaiPayload :: IdentitytoolkitRelyingPartyGetAccountInfoRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyGetAccountInfo
     :: IdentitytoolkitRelyingPartyGetAccountInfoRequest -- ^ 'rpgaiPayload'
     -> RelyingPartyGetAccountInfo
 relyingPartyGetAccountInfo pRpgaiPayload_ =
-    RelyingPartyGetAccountInfo
+    RelyingPartyGetAccountInfo'
     { _rpgaiPayload = pRpgaiPayload_
     }
 
@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartyGetAccountInfo
          where
         type Rs RelyingPartyGetAccountInfo =
              GetAccountInfoResponse
-        requestClient RelyingPartyGetAccountInfo{..}
+        type Scopes RelyingPartyGetAccountInfo = '[]
+        requestClient RelyingPartyGetAccountInfo'{..}
           = go (Just AltJSON) _rpgaiPayload
               identityToolkitService
           where go

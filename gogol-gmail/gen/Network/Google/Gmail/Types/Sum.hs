@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Gmail.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -28,20 +28,20 @@ data UsersMessagesGetFormat
       -- ^ @minimal@
     | Raw
       -- ^ @raw@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersMessagesGetFormat
 
-instance FromText UsersMessagesGetFormat where
-    fromText = \case
-        "full" -> Just Full
-        "metadata" -> Just Metadata
-        "minimal" -> Just Minimal
-        "raw" -> Just Raw
-        _ -> Nothing
+instance FromHttpApiData UsersMessagesGetFormat where
+    parseQueryParam = \case
+        "full" -> Right Full
+        "metadata" -> Right Metadata
+        "minimal" -> Right Minimal
+        "raw" -> Right Raw
+        x -> Left ("Unable to parse UsersMessagesGetFormat from: " <> x)
 
-instance ToText UsersMessagesGetFormat where
-    toText = \case
+instance ToHttpApiData UsersMessagesGetFormat where
+    toQueryParam = \case
         Full -> "full"
         Metadata -> "metadata"
         Minimal -> "minimal"
@@ -66,18 +66,18 @@ data LabelType
       -- ^ @system@
     | User
       -- ^ @user@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelType
 
-instance FromText LabelType where
-    fromText = \case
-        "system" -> Just System
-        "user" -> Just User
-        _ -> Nothing
+instance FromHttpApiData LabelType where
+    parseQueryParam = \case
+        "system" -> Right System
+        "user" -> Right User
+        x -> Left ("Unable to parse LabelType from: " <> x)
 
-instance ToText LabelType where
-    toText = \case
+instance ToHttpApiData LabelType where
+    toQueryParam = \case
         System -> "system"
         User -> "user"
 
@@ -97,20 +97,20 @@ data UsersDraftsGetFormat
       -- ^ @minimal@
     | UDGFRaw
       -- ^ @raw@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersDraftsGetFormat
 
-instance FromText UsersDraftsGetFormat where
-    fromText = \case
-        "full" -> Just UDGFFull
-        "metadata" -> Just UDGFMetadata
-        "minimal" -> Just UDGFMinimal
-        "raw" -> Just UDGFRaw
-        _ -> Nothing
+instance FromHttpApiData UsersDraftsGetFormat where
+    parseQueryParam = \case
+        "full" -> Right UDGFFull
+        "metadata" -> Right UDGFMetadata
+        "minimal" -> Right UDGFMinimal
+        "raw" -> Right UDGFRaw
+        x -> Left ("Unable to parse UsersDraftsGetFormat from: " <> x)
 
-instance ToText UsersDraftsGetFormat where
-    toText = \case
+instance ToHttpApiData UsersDraftsGetFormat where
+    toQueryParam = \case
         UDGFFull -> "full"
         UDGFMetadata -> "metadata"
         UDGFMinimal -> "minimal"
@@ -128,18 +128,18 @@ data UsersMessagesImportInternalDateSource
       -- ^ @dateHeader@
     | ReceivedTime
       -- ^ @receivedTime@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersMessagesImportInternalDateSource
 
-instance FromText UsersMessagesImportInternalDateSource where
-    fromText = \case
-        "dateHeader" -> Just DateHeader
-        "receivedTime" -> Just ReceivedTime
-        _ -> Nothing
+instance FromHttpApiData UsersMessagesImportInternalDateSource where
+    parseQueryParam = \case
+        "dateHeader" -> Right DateHeader
+        "receivedTime" -> Right ReceivedTime
+        x -> Left ("Unable to parse UsersMessagesImportInternalDateSource from: " <> x)
 
-instance ToText UsersMessagesImportInternalDateSource where
-    toText = \case
+instance ToHttpApiData UsersMessagesImportInternalDateSource where
+    toQueryParam = \case
         DateHeader -> "dateHeader"
         ReceivedTime -> "receivedTime"
 
@@ -156,18 +156,18 @@ data LabelMessageListVisibility
       -- ^ @hide@
     | Show
       -- ^ @show@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelMessageListVisibility
 
-instance FromText LabelMessageListVisibility where
-    fromText = \case
-        "hide" -> Just Hide
-        "show" -> Just Show
-        _ -> Nothing
+instance FromHttpApiData LabelMessageListVisibility where
+    parseQueryParam = \case
+        "hide" -> Right Hide
+        "show" -> Right Show
+        x -> Left ("Unable to parse LabelMessageListVisibility from: " <> x)
 
-instance ToText LabelMessageListVisibility where
-    toText = \case
+instance ToHttpApiData LabelMessageListVisibility where
+    toQueryParam = \case
         Hide -> "hide"
         Show -> "show"
 
@@ -186,19 +186,19 @@ data LabelLabelListVisibility
       -- ^ @labelShow@
     | LabelShowIfUnread
       -- ^ @labelShowIfUnread@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelLabelListVisibility
 
-instance FromText LabelLabelListVisibility where
-    fromText = \case
-        "labelHide" -> Just LabelHide
-        "labelShow" -> Just LabelShow
-        "labelShowIfUnread" -> Just LabelShowIfUnread
-        _ -> Nothing
+instance FromHttpApiData LabelLabelListVisibility where
+    parseQueryParam = \case
+        "labelHide" -> Right LabelHide
+        "labelShow" -> Right LabelShow
+        "labelShowIfUnread" -> Right LabelShowIfUnread
+        x -> Left ("Unable to parse LabelLabelListVisibility from: " <> x)
 
-instance ToText LabelLabelListVisibility where
-    toText = \case
+instance ToHttpApiData LabelLabelListVisibility where
+    toQueryParam = \case
         LabelHide -> "labelHide"
         LabelShow -> "labelShow"
         LabelShowIfUnread -> "labelShowIfUnread"
@@ -217,19 +217,19 @@ data UsersThreadsGetFormat
       -- ^ @metadata@
     | UTGFMinimal
       -- ^ @minimal@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersThreadsGetFormat
 
-instance FromText UsersThreadsGetFormat where
-    fromText = \case
-        "full" -> Just UTGFFull
-        "metadata" -> Just UTGFMetadata
-        "minimal" -> Just UTGFMinimal
-        _ -> Nothing
+instance FromHttpApiData UsersThreadsGetFormat where
+    parseQueryParam = \case
+        "full" -> Right UTGFFull
+        "metadata" -> Right UTGFMetadata
+        "minimal" -> Right UTGFMinimal
+        x -> Left ("Unable to parse UsersThreadsGetFormat from: " <> x)
 
-instance ToText UsersThreadsGetFormat where
-    toText = \case
+instance ToHttpApiData UsersThreadsGetFormat where
+    toQueryParam = \case
         UTGFFull -> "full"
         UTGFMetadata -> "metadata"
         UTGFMinimal -> "minimal"
@@ -246,18 +246,18 @@ data WatchRequestLabelFilterAction
       -- ^ @exclude@
     | Include
       -- ^ @include@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable WatchRequestLabelFilterAction
 
-instance FromText WatchRequestLabelFilterAction where
-    fromText = \case
-        "exclude" -> Just Exclude
-        "include" -> Just Include
-        _ -> Nothing
+instance FromHttpApiData WatchRequestLabelFilterAction where
+    parseQueryParam = \case
+        "exclude" -> Right Exclude
+        "include" -> Right Include
+        x -> Left ("Unable to parse WatchRequestLabelFilterAction from: " <> x)
 
-instance ToText WatchRequestLabelFilterAction where
-    toText = \case
+instance ToHttpApiData WatchRequestLabelFilterAction where
+    toQueryParam = \case
         Exclude -> "exclude"
         Include -> "include"
 
@@ -273,18 +273,18 @@ data UsersMessagesInsertInternalDateSource
       -- ^ @dateHeader@
     | UMIIDSReceivedTime
       -- ^ @receivedTime@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersMessagesInsertInternalDateSource
 
-instance FromText UsersMessagesInsertInternalDateSource where
-    fromText = \case
-        "dateHeader" -> Just UMIIDSDateHeader
-        "receivedTime" -> Just UMIIDSReceivedTime
-        _ -> Nothing
+instance FromHttpApiData UsersMessagesInsertInternalDateSource where
+    parseQueryParam = \case
+        "dateHeader" -> Right UMIIDSDateHeader
+        "receivedTime" -> Right UMIIDSReceivedTime
+        x -> Left ("Unable to parse UsersMessagesInsertInternalDateSource from: " <> x)
 
-instance ToText UsersMessagesInsertInternalDateSource where
-    toText = \case
+instance ToHttpApiData UsersMessagesInsertInternalDateSource where
+    toQueryParam = \case
         UMIIDSDateHeader -> "dateHeader"
         UMIIDSReceivedTime -> "receivedTime"
 

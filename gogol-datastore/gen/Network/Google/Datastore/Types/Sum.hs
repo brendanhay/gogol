@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Datastore.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -18,25 +18,31 @@ module Network.Google.Datastore.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The direction to order by. One of ascending or descending. Optional,
--- defaults to ascending.
+-- | The direction to order by. Defaults to \`ASCENDING\`.
 data PropertyOrderDirection
-    = Ascending
+    = DirectionUnspecified
+      -- ^ @DIRECTION_UNSPECIFIED@
+      -- Unspecified. This value must not be used.
+    | Ascending
       -- ^ @ASCENDING@
+      -- Ascending.
     | Descending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Descending.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PropertyOrderDirection
 
-instance FromText PropertyOrderDirection where
-    fromText = \case
-        "ASCENDING" -> Just Ascending
-        "DESCENDING" -> Just Descending
-        _ -> Nothing
+instance FromHttpApiData PropertyOrderDirection where
+    parseQueryParam = \case
+        "DIRECTION_UNSPECIFIED" -> Right DirectionUnspecified
+        "ASCENDING" -> Right Ascending
+        "DESCENDING" -> Right Descending
+        x -> Left ("Unable to parse PropertyOrderDirection from: " <> x)
 
-instance ToText PropertyOrderDirection where
-    toText = \case
+instance ToHttpApiData PropertyOrderDirection where
+    toQueryParam = \case
+        DirectionUnspecified -> "DIRECTION_UNSPECIFIED"
         Ascending -> "ASCENDING"
         Descending -> "DESCENDING"
 
@@ -46,32 +52,67 @@ instance FromJSON PropertyOrderDirection where
 instance ToJSON PropertyOrderDirection where
     toJSON = toJSONText
 
--- | The result type for every entity in entityResults. full for full
--- entities, projection for entities with only projected properties,
--- keyOnly for entities with only a key.
+-- | The operator for combining multiple filters.
+data CompositeFilterOp
+    = OperatorUnspecified
+      -- ^ @OPERATOR_UNSPECIFIED@
+      -- Unspecified. This value must not be used.
+    | And
+      -- ^ @AND@
+      -- The results are required to satisfy each of the combined filters.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CompositeFilterOp
+
+instance FromHttpApiData CompositeFilterOp where
+    parseQueryParam = \case
+        "OPERATOR_UNSPECIFIED" -> Right OperatorUnspecified
+        "AND" -> Right And
+        x -> Left ("Unable to parse CompositeFilterOp from: " <> x)
+
+instance ToHttpApiData CompositeFilterOp where
+    toQueryParam = \case
+        OperatorUnspecified -> "OPERATOR_UNSPECIFIED"
+        And -> "AND"
+
+instance FromJSON CompositeFilterOp where
+    parseJSON = parseJSONText "CompositeFilterOp"
+
+instance ToJSON CompositeFilterOp where
+    toJSON = toJSONText
+
+-- | The result type for every entity in \`entity_results\`.
 data QueryResultBatchEntityResultType
-    = Full
+    = QRBERTResultTypeUnspecified
+      -- ^ @RESULT_TYPE_UNSPECIFIED@
+      -- Unspecified. This value is never used.
+    | QRBERTFull
       -- ^ @FULL@
-    | KeyOnly
-      -- ^ @KEY_ONLY@
-    | Projection
+      -- The key and properties.
+    | QRBERTProjection
       -- ^ @PROJECTION@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- A projected subset of properties. The entity may have no key.
+    | QRBERTKeyOnly
+      -- ^ @KEY_ONLY@
+      -- Only the key.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable QueryResultBatchEntityResultType
 
-instance FromText QueryResultBatchEntityResultType where
-    fromText = \case
-        "FULL" -> Just Full
-        "KEY_ONLY" -> Just KeyOnly
-        "PROJECTION" -> Just Projection
-        _ -> Nothing
+instance FromHttpApiData QueryResultBatchEntityResultType where
+    parseQueryParam = \case
+        "RESULT_TYPE_UNSPECIFIED" -> Right QRBERTResultTypeUnspecified
+        "FULL" -> Right QRBERTFull
+        "PROJECTION" -> Right QRBERTProjection
+        "KEY_ONLY" -> Right QRBERTKeyOnly
+        x -> Left ("Unable to parse QueryResultBatchEntityResultType from: " <> x)
 
-instance ToText QueryResultBatchEntityResultType where
-    toText = \case
-        Full -> "FULL"
-        KeyOnly -> "KEY_ONLY"
-        Projection -> "PROJECTION"
+instance ToHttpApiData QueryResultBatchEntityResultType where
+    toQueryParam = \case
+        QRBERTResultTypeUnspecified -> "RESULT_TYPE_UNSPECIFIED"
+        QRBERTFull -> "FULL"
+        QRBERTProjection -> "PROJECTION"
+        QRBERTKeyOnly -> "KEY_ONLY"
 
 instance FromJSON QueryResultBatchEntityResultType where
     parseJSON = parseJSONText "QueryResultBatchEntityResultType"
@@ -79,54 +120,43 @@ instance FromJSON QueryResultBatchEntityResultType where
 instance ToJSON QueryResultBatchEntityResultType where
     toJSON = toJSONText
 
--- | The operator for combining multiple filters. Only \"and\" is currently
--- supported.
-data CompositeFilterOperator
-    = And
-      -- ^ @AND@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable CompositeFilterOperator
-
-instance FromText CompositeFilterOperator where
-    fromText = \case
-        "AND" -> Just And
-        _ -> Nothing
-
-instance ToText CompositeFilterOperator where
-    toText = \case
-        And -> "AND"
-
-instance FromJSON CompositeFilterOperator where
-    parseJSON = parseJSONText "CompositeFilterOperator"
-
-instance ToJSON CompositeFilterOperator where
-    toJSON = toJSONText
-
--- | The state of the query after the current batch. One of notFinished,
--- moreResultsAfterLimit, noMoreResults.
+-- | The state of the query after the current batch.
 data QueryResultBatchMoreResults
-    = MoreResultsAfterLimit
-      -- ^ @MORE_RESULTS_AFTER_LIMIT@
+    = MoreResultsTypeUnspecified
+      -- ^ @MORE_RESULTS_TYPE_UNSPECIFIED@
+      -- Unspecified. This value is never used.
     | NotFinished
       -- ^ @NOT_FINISHED@
+      -- There may be additional batches to fetch from this query.
+    | MoreResultsAfterLimit
+      -- ^ @MORE_RESULTS_AFTER_LIMIT@
+      -- The query is finished, but there may be more results after the limit.
+    | MoreResultsAfterCursor
+      -- ^ @MORE_RESULTS_AFTER_CURSOR@
+      -- The query is finished, but there may be more results after the end
+      -- cursor.
     | NoMoreResults
       -- ^ @NO_MORE_RESULTS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- The query has been exhausted.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable QueryResultBatchMoreResults
 
-instance FromText QueryResultBatchMoreResults where
-    fromText = \case
-        "MORE_RESULTS_AFTER_LIMIT" -> Just MoreResultsAfterLimit
-        "NOT_FINISHED" -> Just NotFinished
-        "NO_MORE_RESULTS" -> Just NoMoreResults
-        _ -> Nothing
+instance FromHttpApiData QueryResultBatchMoreResults where
+    parseQueryParam = \case
+        "MORE_RESULTS_TYPE_UNSPECIFIED" -> Right MoreResultsTypeUnspecified
+        "NOT_FINISHED" -> Right NotFinished
+        "MORE_RESULTS_AFTER_LIMIT" -> Right MoreResultsAfterLimit
+        "MORE_RESULTS_AFTER_CURSOR" -> Right MoreResultsAfterCursor
+        "NO_MORE_RESULTS" -> Right NoMoreResults
+        x -> Left ("Unable to parse QueryResultBatchMoreResults from: " <> x)
 
-instance ToText QueryResultBatchMoreResults where
-    toText = \case
-        MoreResultsAfterLimit -> "MORE_RESULTS_AFTER_LIMIT"
+instance ToHttpApiData QueryResultBatchMoreResults where
+    toQueryParam = \case
+        MoreResultsTypeUnspecified -> "MORE_RESULTS_TYPE_UNSPECIFIED"
         NotFinished -> "NOT_FINISHED"
+        MoreResultsAfterLimit -> "MORE_RESULTS_AFTER_LIMIT"
+        MoreResultsAfterCursor -> "MORE_RESULTS_AFTER_CURSOR"
         NoMoreResults -> "NO_MORE_RESULTS"
 
 instance FromJSON QueryResultBatchMoreResults where
@@ -135,33 +165,58 @@ instance FromJSON QueryResultBatchMoreResults where
 instance ToJSON QueryResultBatchMoreResults where
     toJSON = toJSONText
 
--- | The read consistency to use. One of default, strong, or eventual. Cannot
--- be set when transaction is set. Lookup and ancestor queries default to
--- strong, global queries default to eventual and cannot be set to strong.
--- Optional. Default is default.
+-- | A null value.
+data ValueNullValue
+    = NullValue
+      -- ^ @NULL_VALUE@
+      -- Null value.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ValueNullValue
+
+instance FromHttpApiData ValueNullValue where
+    parseQueryParam = \case
+        "NULL_VALUE" -> Right NullValue
+        x -> Left ("Unable to parse ValueNullValue from: " <> x)
+
+instance ToHttpApiData ValueNullValue where
+    toQueryParam = \case
+        NullValue -> "NULL_VALUE"
+
+instance FromJSON ValueNullValue where
+    parseJSON = parseJSONText "ValueNullValue"
+
+instance ToJSON ValueNullValue where
+    toJSON = toJSONText
+
+-- | The non-transactional read consistency to use. Cannot be set to
+-- \`STRONG\` for global queries.
 data ReadOptionsReadConsistency
-    = Default
-      -- ^ @DEFAULT@
-    | Eventual
-      -- ^ @EVENTUAL@
+    = ReadConsistencyUnspecified
+      -- ^ @READ_CONSISTENCY_UNSPECIFIED@
+      -- Unspecified. This value must not be used.
     | Strong
       -- ^ @STRONG@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Strong consistency.
+    | Eventual
+      -- ^ @EVENTUAL@
+      -- Eventual consistency.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReadOptionsReadConsistency
 
-instance FromText ReadOptionsReadConsistency where
-    fromText = \case
-        "DEFAULT" -> Just Default
-        "EVENTUAL" -> Just Eventual
-        "STRONG" -> Just Strong
-        _ -> Nothing
+instance FromHttpApiData ReadOptionsReadConsistency where
+    parseQueryParam = \case
+        "READ_CONSISTENCY_UNSPECIFIED" -> Right ReadConsistencyUnspecified
+        "STRONG" -> Right Strong
+        "EVENTUAL" -> Right Eventual
+        x -> Left ("Unable to parse ReadOptionsReadConsistency from: " <> x)
 
-instance ToText ReadOptionsReadConsistency where
-    toText = \case
-        Default -> "DEFAULT"
-        Eventual -> "EVENTUAL"
+instance ToHttpApiData ReadOptionsReadConsistency where
+    toQueryParam = \case
+        ReadConsistencyUnspecified -> "READ_CONSISTENCY_UNSPECIFIED"
         Strong -> "STRONG"
+        Eventual -> "EVENTUAL"
 
 instance FromJSON ReadOptionsReadConsistency where
     parseJSON = parseJSONText "ReadOptionsReadConsistency"
@@ -169,133 +224,121 @@ instance FromJSON ReadOptionsReadConsistency where
 instance ToJSON ReadOptionsReadConsistency where
     toJSON = toJSONText
 
--- | The operator to filter by. One of lessThan, lessThanOrEqual,
--- greaterThan, greaterThanOrEqual, equal, or hasAncestor.
-data PropertyFilterOperator
-    = Equal
-      -- ^ @EQUAL@
-    | GreaterThan
-      -- ^ @GREATER_THAN@
-    | GreaterThanOrEqual
-      -- ^ @GREATER_THAN_OR_EQUAL@
-    | HasAncestor
-      -- ^ @HAS_ANCESTOR@
-    | LessThan
+-- | V1 error format.
+data Xgafv
+    = X1
+      -- ^ @1@
+      -- v1 error format
+    | X2
+      -- ^ @2@
+      -- v2 error format
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable Xgafv
+
+instance FromHttpApiData Xgafv where
+    parseQueryParam = \case
+        "1" -> Right X1
+        "2" -> Right X2
+        x -> Left ("Unable to parse Xgafv from: " <> x)
+
+instance ToHttpApiData Xgafv where
+    toQueryParam = \case
+        X1 -> "1"
+        X2 -> "2"
+
+instance FromJSON Xgafv where
+    parseJSON = parseJSONText "Xgafv"
+
+instance ToJSON Xgafv where
+    toJSON = toJSONText
+
+-- | The operator to filter by.
+data PropertyFilterOp
+    = PFOOperatorUnspecified
+      -- ^ @OPERATOR_UNSPECIFIED@
+      -- Unspecified. This value must not be used.
+    | PFOLessThan
       -- ^ @LESS_THAN@
-    | LessThanOrEqual
+      -- Less than.
+    | PFOLessThanOrEqual
       -- ^ @LESS_THAN_OR_EQUAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Less than or equal.
+    | PFOGreaterThan
+      -- ^ @GREATER_THAN@
+      -- Greater than.
+    | PFOGreaterThanOrEqual
+      -- ^ @GREATER_THAN_OR_EQUAL@
+      -- Greater than or equal.
+    | PFOEqual
+      -- ^ @EQUAL@
+      -- Equal.
+    | PFOHasAncestor
+      -- ^ @HAS_ANCESTOR@
+      -- Has ancestor.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
-instance Hashable PropertyFilterOperator
+instance Hashable PropertyFilterOp
 
-instance FromText PropertyFilterOperator where
-    fromText = \case
-        "EQUAL" -> Just Equal
-        "GREATER_THAN" -> Just GreaterThan
-        "GREATER_THAN_OR_EQUAL" -> Just GreaterThanOrEqual
-        "HAS_ANCESTOR" -> Just HasAncestor
-        "LESS_THAN" -> Just LessThan
-        "LESS_THAN_OR_EQUAL" -> Just LessThanOrEqual
-        _ -> Nothing
+instance FromHttpApiData PropertyFilterOp where
+    parseQueryParam = \case
+        "OPERATOR_UNSPECIFIED" -> Right PFOOperatorUnspecified
+        "LESS_THAN" -> Right PFOLessThan
+        "LESS_THAN_OR_EQUAL" -> Right PFOLessThanOrEqual
+        "GREATER_THAN" -> Right PFOGreaterThan
+        "GREATER_THAN_OR_EQUAL" -> Right PFOGreaterThanOrEqual
+        "EQUAL" -> Right PFOEqual
+        "HAS_ANCESTOR" -> Right PFOHasAncestor
+        x -> Left ("Unable to parse PropertyFilterOp from: " <> x)
 
-instance ToText PropertyFilterOperator where
-    toText = \case
-        Equal -> "EQUAL"
-        GreaterThan -> "GREATER_THAN"
-        GreaterThanOrEqual -> "GREATER_THAN_OR_EQUAL"
-        HasAncestor -> "HAS_ANCESTOR"
-        LessThan -> "LESS_THAN"
-        LessThanOrEqual -> "LESS_THAN_OR_EQUAL"
+instance ToHttpApiData PropertyFilterOp where
+    toQueryParam = \case
+        PFOOperatorUnspecified -> "OPERATOR_UNSPECIFIED"
+        PFOLessThan -> "LESS_THAN"
+        PFOLessThanOrEqual -> "LESS_THAN_OR_EQUAL"
+        PFOGreaterThan -> "GREATER_THAN"
+        PFOGreaterThanOrEqual -> "GREATER_THAN_OR_EQUAL"
+        PFOEqual -> "EQUAL"
+        PFOHasAncestor -> "HAS_ANCESTOR"
 
-instance FromJSON PropertyFilterOperator where
-    parseJSON = parseJSONText "PropertyFilterOperator"
+instance FromJSON PropertyFilterOp where
+    parseJSON = parseJSONText "PropertyFilterOp"
 
-instance ToJSON PropertyFilterOperator where
+instance ToJSON PropertyFilterOp where
     toJSON = toJSONText
 
--- | The transaction isolation level. Either snapshot or serializable. The
--- default isolation level is snapshot isolation, which means that another
--- transaction may not concurrently modify the data that is modified by
--- this transaction. Optionally, a transaction can request to be made
--- serializable which means that another transaction cannot concurrently
--- modify the data that is read or modified by this transaction.
-data BeginTransactionRequestIsolationLevel
-    = Serializable
-      -- ^ @SERIALIZABLE@
-    | Snapshot
-      -- ^ @SNAPSHOT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable BeginTransactionRequestIsolationLevel
-
-instance FromText BeginTransactionRequestIsolationLevel where
-    fromText = \case
-        "SERIALIZABLE" -> Just Serializable
-        "SNAPSHOT" -> Just Snapshot
-        _ -> Nothing
-
-instance ToText BeginTransactionRequestIsolationLevel where
-    toText = \case
-        Serializable -> "SERIALIZABLE"
-        Snapshot -> "SNAPSHOT"
-
-instance FromJSON BeginTransactionRequestIsolationLevel where
-    parseJSON = parseJSONText "BeginTransactionRequestIsolationLevel"
-
-instance ToJSON BeginTransactionRequestIsolationLevel where
-    toJSON = toJSONText
-
--- | The type of commit to perform. Either TRANSACTIONAL or
--- NON_TRANSACTIONAL.
+-- | The type of commit to perform. Defaults to \`TRANSACTIONAL\`.
 data CommitRequestMode
-    = NonTransactional
-      -- ^ @NON_TRANSACTIONAL@
+    = ModeUnspecified
+      -- ^ @MODE_UNSPECIFIED@
+      -- Unspecified. This value must not be used.
     | Transactional
       -- ^ @TRANSACTIONAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Transactional: The mutations are either all applied, or none are
+      -- applied. Learn about transactions
+      -- [here](https:\/\/cloud.google.com\/datastore\/docs\/concepts\/transactions).
+    | NonTransactional
+      -- ^ @NON_TRANSACTIONAL@
+      -- Non-transactional: The mutations may not apply as all or none.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommitRequestMode
 
-instance FromText CommitRequestMode where
-    fromText = \case
-        "NON_TRANSACTIONAL" -> Just NonTransactional
-        "TRANSACTIONAL" -> Just Transactional
-        _ -> Nothing
+instance FromHttpApiData CommitRequestMode where
+    parseQueryParam = \case
+        "MODE_UNSPECIFIED" -> Right ModeUnspecified
+        "TRANSACTIONAL" -> Right Transactional
+        "NON_TRANSACTIONAL" -> Right NonTransactional
+        x -> Left ("Unable to parse CommitRequestMode from: " <> x)
 
-instance ToText CommitRequestMode where
-    toText = \case
-        NonTransactional -> "NON_TRANSACTIONAL"
+instance ToHttpApiData CommitRequestMode where
+    toQueryParam = \case
+        ModeUnspecified -> "MODE_UNSPECIFIED"
         Transactional -> "TRANSACTIONAL"
+        NonTransactional -> "NON_TRANSACTIONAL"
 
 instance FromJSON CommitRequestMode where
     parseJSON = parseJSONText "CommitRequestMode"
 
 instance ToJSON CommitRequestMode where
-    toJSON = toJSONText
-
--- | The aggregation function to apply to the property. Optional. Can only be
--- used when grouping by at least one property. Must then be set on all
--- properties in the projection that are not being grouped by. Aggregation
--- functions: first selects the first result as determined by the query\'s
--- order.
-data PropertyExpressionAggregationFunction
-    = First
-      -- ^ @FIRST@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable PropertyExpressionAggregationFunction
-
-instance FromText PropertyExpressionAggregationFunction where
-    fromText = \case
-        "FIRST" -> Just First
-        _ -> Nothing
-
-instance ToText PropertyExpressionAggregationFunction where
-    toText = \case
-        First -> "FIRST"
-
-instance FromJSON PropertyExpressionAggregationFunction where
-    parseJSON = parseJSONText "PropertyExpressionAggregationFunction"
-
-instance ToJSON PropertyExpressionAggregationFunction where
     toJSON = toJSONText

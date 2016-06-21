@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Customers.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type CustomersUpdateResource =
 -- | Updates a customer.
 --
 -- /See:/ 'customersUpdate' smart constructor.
-data CustomersUpdate = CustomersUpdate
+data CustomersUpdate = CustomersUpdate'
     { _cuCustomerKey :: !Text
     , _cuPayload     :: !Customer
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ customersUpdate
     -> Customer -- ^ 'cuPayload'
     -> CustomersUpdate
 customersUpdate pCuCustomerKey_ pCuPayload_ =
-    CustomersUpdate
+    CustomersUpdate'
     { _cuCustomerKey = pCuCustomerKey_
     , _cuPayload = pCuPayload_
     }
@@ -89,7 +89,9 @@ cuPayload
 
 instance GoogleRequest CustomersUpdate where
         type Rs CustomersUpdate = Customer
-        requestClient CustomersUpdate{..}
+        type Scopes CustomersUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.customer"]
+        requestClient CustomersUpdate'{..}
           = go _cuCustomerKey (Just AltJSON) _cuPayload
               directoryService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type LeaderboardConfigurationsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'leaderboardConfigurationsPatch' smart constructor.
-data LeaderboardConfigurationsPatch = LeaderboardConfigurationsPatch
+data LeaderboardConfigurationsPatch = LeaderboardConfigurationsPatch'
     { _lcpPayload       :: !LeaderboardConfiguration
     , _lcpLeaderboardId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ leaderboardConfigurationsPatch
     -> Text -- ^ 'lcpLeaderboardId'
     -> LeaderboardConfigurationsPatch
 leaderboardConfigurationsPatch pLcpPayload_ pLcpLeaderboardId_ =
-    LeaderboardConfigurationsPatch
+    LeaderboardConfigurationsPatch'
     { _lcpPayload = pLcpPayload_
     , _lcpLeaderboardId = pLcpLeaderboardId_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest LeaderboardConfigurationsPatch
          where
         type Rs LeaderboardConfigurationsPatch =
              LeaderboardConfiguration
-        requestClient LeaderboardConfigurationsPatch{..}
+        type Scopes LeaderboardConfigurationsPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient LeaderboardConfigurationsPatch'{..}
           = go _lcpLeaderboardId (Just AltJSON) _lcpPayload
               gamesConfigurationService
           where go

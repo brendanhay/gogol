@@ -14,14 +14,15 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroups.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the specified instance group. The instances in the group are not
--- deleted.
+-- deleted. Note that instance group must not belong to a backend service.
+-- Read Deleting an instance group for more information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.delete@.
 module Network.Google.Resource.Compute.InstanceGroups.Delete
@@ -56,10 +57,11 @@ type InstanceGroupsDeleteResource =
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance group. The instances in the group are not
--- deleted.
+-- deleted. Note that instance group must not belong to a backend service.
+-- Read Deleting an instance group for more information.
 --
 -- /See:/ 'instanceGroupsDelete' smart constructor.
-data InstanceGroupsDelete = InstanceGroupsDelete
+data InstanceGroupsDelete = InstanceGroupsDelete'
     { _igdProject       :: !Text
     , _igdZone          :: !Text
     , _igdInstanceGroup :: !Text
@@ -80,13 +82,13 @@ instanceGroupsDelete
     -> Text -- ^ 'igdInstanceGroup'
     -> InstanceGroupsDelete
 instanceGroupsDelete pIgdProject_ pIgdZone_ pIgdInstanceGroup_ =
-    InstanceGroupsDelete
+    InstanceGroupsDelete'
     { _igdProject = pIgdProject_
     , _igdZone = pIgdZone_
     , _igdInstanceGroup = pIgdInstanceGroup_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igdProject :: Lens' InstanceGroupsDelete Text
 igdProject
   = lens _igdProject (\ s a -> s{_igdProject = a})
@@ -103,7 +105,10 @@ igdInstanceGroup
 
 instance GoogleRequest InstanceGroupsDelete where
         type Rs InstanceGroupsDelete = Operation
-        requestClient InstanceGroupsDelete{..}
+        type Scopes InstanceGroupsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceGroupsDelete'{..}
           = go _igdProject _igdZone _igdInstanceGroup
               (Just AltJSON)
               computeService

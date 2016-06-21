@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Users.RevokeToken
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Revokes a previously generated token (activation code) for the user.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.revokeToken@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.revokeToken@.
 module Network.Google.Resource.AndroidEnterprise.Users.RevokeToken
     (
     -- * REST Resource
@@ -55,7 +55,7 @@ type UsersRevokeTokenResource =
 -- | Revokes a previously generated token (activation code) for the user.
 --
 -- /See:/ 'usersRevokeToken' smart constructor.
-data UsersRevokeToken = UsersRevokeToken
+data UsersRevokeToken = UsersRevokeToken'
     { _urtEnterpriseId :: !Text
     , _urtUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersRevokeToken
     -> Text -- ^ 'urtUserId'
     -> UsersRevokeToken
 usersRevokeToken pUrtEnterpriseId_ pUrtUserId_ =
-    UsersRevokeToken
+    UsersRevokeToken'
     { _urtEnterpriseId = pUrtEnterpriseId_
     , _urtUserId = pUrtUserId_
     }
@@ -90,7 +90,9 @@ urtUserId
 
 instance GoogleRequest UsersRevokeToken where
         type Rs UsersRevokeToken = ()
-        requestClient UsersRevokeToken{..}
+        type Scopes UsersRevokeToken =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient UsersRevokeToken'{..}
           = go _urtEnterpriseId _urtUserId (Just AltJSON)
               androidEnterpriseService
           where go

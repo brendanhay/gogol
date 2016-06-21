@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Partners.UserEvents.Log
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type UserEventsLogResource =
 -- | Logs a user event.
 --
 -- /See:/ 'userEventsLog' smart constructor.
-data UserEventsLog = UserEventsLog
+data UserEventsLog = UserEventsLog'
     { _uelXgafv          :: !(Maybe Text)
     , _uelUploadProtocol :: !(Maybe Text)
     , _uelPp             :: !Bool
@@ -99,7 +99,7 @@ userEventsLog
     :: LogUserEventRequest -- ^ 'uelPayload'
     -> UserEventsLog
 userEventsLog pUelPayload_ =
-    UserEventsLog
+    UserEventsLog'
     { _uelXgafv = Nothing
     , _uelUploadProtocol = Nothing
     , _uelPp = True
@@ -154,7 +154,8 @@ uelCallback
 
 instance GoogleRequest UserEventsLog where
         type Rs UserEventsLog = LogUserEventResponse
-        requestClient UserEventsLog{..}
+        type Scopes UserEventsLog = '[]
+        requestClient UserEventsLog'{..}
           = go _uelXgafv _uelUploadProtocol (Just _uelPp)
               _uelAccessToken
               _uelUploadType

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.LiveBroadcasts.Transition
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -73,7 +73,7 @@ type LiveBroadcastsTransitionResource =
 -- for the stream bound to your broadcast is active.
 --
 -- /See:/ 'liveBroadcastsTransition' smart constructor.
-data LiveBroadcastsTransition = LiveBroadcastsTransition
+data LiveBroadcastsTransition = LiveBroadcastsTransition'
     { _lbtPart                          :: !Text
     , _lbtBroadcastStatus               :: !LiveBroadcastsTransitionBroadcastStatus
     , _lbtOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -100,7 +100,7 @@ liveBroadcastsTransition
     -> Text -- ^ 'lbtId'
     -> LiveBroadcastsTransition
 liveBroadcastsTransition pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
-    LiveBroadcastsTransition
+    LiveBroadcastsTransition'
     { _lbtPart = pLbtPart_
     , _lbtBroadcastStatus = pLbtBroadcastStatus_
     , _lbtOnBehalfOfContentOwner = Nothing
@@ -167,7 +167,10 @@ lbtId = lens _lbtId (\ s a -> s{_lbtId = a})
 
 instance GoogleRequest LiveBroadcastsTransition where
         type Rs LiveBroadcastsTransition = LiveBroadcast
-        requestClient LiveBroadcastsTransition{..}
+        type Scopes LiveBroadcastsTransition =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient LiveBroadcastsTransition'{..}
           = go (Just _lbtBroadcastStatus) (Just _lbtId)
               (Just _lbtPart)
               _lbtOnBehalfOfContentOwner

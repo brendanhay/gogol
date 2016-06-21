@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Discovery.APIs.GetRest
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type APIsGetRestResource =
 -- | Retrieve the description of a particular version of an api.
 --
 -- /See:/ 'apisGetRest' smart constructor.
-data APIsGetRest = APIsGetRest
+data APIsGetRest = APIsGetRest'
     { _agrVersion :: !Text
     , _agrAPI     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ apisGetRest
     -> Text -- ^ 'agrAPI'
     -> APIsGetRest
 apisGetRest pAgrVersion_ pAgrAPI_ =
-    APIsGetRest
+    APIsGetRest'
     { _agrVersion = pAgrVersion_
     , _agrAPI = pAgrAPI_
     }
@@ -88,7 +88,8 @@ agrAPI = lens _agrAPI (\ s a -> s{_agrAPI = a})
 
 instance GoogleRequest APIsGetRest where
         type Rs APIsGetRest = RestDescription
-        requestClient APIsGetRest{..}
+        type Scopes APIsGetRest = '[]
+        requestClient APIsGetRest'{..}
           = go _agrAPI _agrVersion (Just AltJSON)
               discoveryService
           where go

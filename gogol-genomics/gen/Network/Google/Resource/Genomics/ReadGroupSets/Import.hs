@@ -14,24 +14,27 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.ReadGroupSets.Import
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates read group sets by asynchronously importing the provided
--- information. The caller must have WRITE permissions to the dataset. ##
--- Notes on [BAM](https:\/\/samtools.github.io\/hts-specs\/SAMv1.pdf)
--- import - Tags will be converted to strings - tag types are not preserved
--- - Comments (\`\'CO\`) in the input file header will not be preserved -
--- Original header order of references (\`\'SQ\`) will not be preserved -
--- Any reverse stranded unmapped reads will be reverse complemented, and
--- their qualities (and \"BQ\" tag, if any) will be reversed - Unmapped
--- reads will be stripped of positional information (reference name and
--- position)
+-- information. For the definitions of read group sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- The caller must have WRITE permissions to the dataset. ## Notes on
+-- [BAM](https:\/\/samtools.github.io\/hts-specs\/SAMv1.pdf) import - Tags
+-- will be converted to strings - tag types are not preserved - Comments
+-- (\`\'CO\`) in the input file header will not be preserved - Original
+-- header order of references (\`\'SQ\`) will not be preserved - Any
+-- reverse stranded unmapped reads will be reverse complemented, and their
+-- qualities (also the \"BQ\" and \"OQ\" tags, if any) will be reversed -
+-- Unmapped reads will be stripped of positional information (reference
+-- name and position)
 --
--- /See:/ < Genomics API Reference> for @genomics.readgroupsets.import@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.import@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Import
     (
     -- * REST Resource
@@ -72,18 +75,21 @@ type ReadGroupSetsImportResource =
                            Post '[JSON] Operation
 
 -- | Creates read group sets by asynchronously importing the provided
--- information. The caller must have WRITE permissions to the dataset. ##
--- Notes on [BAM](https:\/\/samtools.github.io\/hts-specs\/SAMv1.pdf)
--- import - Tags will be converted to strings - tag types are not preserved
--- - Comments (\`\'CO\`) in the input file header will not be preserved -
--- Original header order of references (\`\'SQ\`) will not be preserved -
--- Any reverse stranded unmapped reads will be reverse complemented, and
--- their qualities (and \"BQ\" tag, if any) will be reversed - Unmapped
--- reads will be stripped of positional information (reference name and
--- position)
+-- information. For the definitions of read group sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- The caller must have WRITE permissions to the dataset. ## Notes on
+-- [BAM](https:\/\/samtools.github.io\/hts-specs\/SAMv1.pdf) import - Tags
+-- will be converted to strings - tag types are not preserved - Comments
+-- (\`\'CO\`) in the input file header will not be preserved - Original
+-- header order of references (\`\'SQ\`) will not be preserved - Any
+-- reverse stranded unmapped reads will be reverse complemented, and their
+-- qualities (also the \"BQ\" and \"OQ\" tags, if any) will be reversed -
+-- Unmapped reads will be stripped of positional information (reference
+-- name and position)
 --
 -- /See:/ 'readGroupSetsImport' smart constructor.
-data ReadGroupSetsImport = ReadGroupSetsImport
+data ReadGroupSetsImport = ReadGroupSetsImport'
     { _rgsiXgafv          :: !(Maybe Text)
     , _rgsiUploadProtocol :: !(Maybe Text)
     , _rgsiPp             :: !Bool
@@ -117,7 +123,7 @@ readGroupSetsImport
     :: ImportReadGroupSetsRequest -- ^ 'rgsiPayload'
     -> ReadGroupSetsImport
 readGroupSetsImport pRgsiPayload_ =
-    ReadGroupSetsImport
+    ReadGroupSetsImport'
     { _rgsiXgafv = Nothing
     , _rgsiUploadProtocol = Nothing
     , _rgsiPp = True
@@ -173,7 +179,11 @@ rgsiCallback
 
 instance GoogleRequest ReadGroupSetsImport where
         type Rs ReadGroupSetsImport = Operation
-        requestClient ReadGroupSetsImport{..}
+        type Scopes ReadGroupSetsImport =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.read_write",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient ReadGroupSetsImport'{..}
           = go _rgsiXgafv _rgsiUploadProtocol (Just _rgsiPp)
               _rgsiAccessToken
               _rgsiUploadType

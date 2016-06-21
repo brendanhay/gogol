@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type LayersGetResource =
 -- | Return metadata for a particular layer.
 --
 -- /See:/ 'layersGet' smart constructor.
-data LayersGet = LayersGet
+data LayersGet = LayersGet'
     { _lgVersion :: !(Maybe LayersGetVersion)
     , _lgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ layersGet
     :: Text -- ^ 'lgId'
     -> LayersGet
 layersGet pLgId_ =
-    LayersGet
+    LayersGet'
     { _lgVersion = Nothing
     , _lgId = pLgId_
     }
@@ -88,7 +88,10 @@ lgId = lens _lgId (\ s a -> s{_lgId = a})
 
 instance GoogleRequest LayersGet where
         type Rs LayersGet = Layer
-        requestClient LayersGet{..}
+        type Scopes LayersGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient LayersGet'{..}
           = go _lgId _lgVersion (Just AltJSON)
               mapsEngineService
           where go

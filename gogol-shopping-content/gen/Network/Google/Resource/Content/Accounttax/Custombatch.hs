@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accounttax.Custombatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccounttaxCustombatchResource =
 -- request.
 --
 -- /See:/ 'accounttaxCustombatch' smart constructor.
-data AccounttaxCustombatch = AccounttaxCustombatch
+data AccounttaxCustombatch = AccounttaxCustombatch'
     { _acccPayload :: !AccounttaxCustomBatchRequest
     , _acccDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accounttaxCustombatch
     :: AccounttaxCustomBatchRequest -- ^ 'acccPayload'
     -> AccounttaxCustombatch
 accounttaxCustombatch pAcccPayload_ =
-    AccounttaxCustombatch
+    AccounttaxCustombatch'
     { _acccPayload = pAcccPayload_
     , _acccDryRun = Nothing
     }
@@ -91,7 +91,9 @@ acccDryRun
 instance GoogleRequest AccounttaxCustombatch where
         type Rs AccounttaxCustombatch =
              AccounttaxCustomBatchResponse
-        requestClient AccounttaxCustombatch{..}
+        type Scopes AccounttaxCustombatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccounttaxCustombatch'{..}
           = go _acccDryRun (Just AltJSON) _acccPayload
               shoppingContentService
           where go

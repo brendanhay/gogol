@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accounts.AuthInfo
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,18 +51,20 @@ type AccountsAuthInfoResource =
 --
 -- /See:/ 'accountsAuthInfo' smart constructor.
 data AccountsAuthInfo =
-    AccountsAuthInfo
+    AccountsAuthInfo'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAuthInfo' with the minimum fields required to make a request.
 --
 accountsAuthInfo
     :: AccountsAuthInfo
-accountsAuthInfo = AccountsAuthInfo
+accountsAuthInfo = AccountsAuthInfo'
 
 instance GoogleRequest AccountsAuthInfo where
         type Rs AccountsAuthInfo = AccountsAuthInfoResponse
-        requestClient AccountsAuthInfo{}
+        type Scopes AccountsAuthInfo =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountsAuthInfo'{}
           = go (Just AltJSON) shoppingContentService
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Maps.ListPublished
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type MapsListPublishedResource =
 -- | Return all published maps readable by the current user.
 --
 -- /See:/ 'mapsListPublished' smart constructor.
-data MapsListPublished = MapsListPublished
+data MapsListPublished = MapsListPublished'
     { _mlpPageToken  :: !(Maybe Text)
     , _mlpProjectId  :: !(Maybe Text)
     , _mlpMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ data MapsListPublished = MapsListPublished
 mapsListPublished
     :: MapsListPublished
 mapsListPublished =
-    MapsListPublished
+    MapsListPublished'
     { _mlpPageToken = Nothing
     , _mlpProjectId = Nothing
     , _mlpMaxResults = Nothing
@@ -106,7 +106,10 @@ mlpMaxResults
 
 instance GoogleRequest MapsListPublished where
         type Rs MapsListPublished = PublishedMapsListResponse
-        requestClient MapsListPublished{..}
+        type Scopes MapsListPublished =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient MapsListPublished'{..}
           = go _mlpPageToken _mlpProjectId _mlpMaxResults
               (Just AltJSON)
               mapsEngineService

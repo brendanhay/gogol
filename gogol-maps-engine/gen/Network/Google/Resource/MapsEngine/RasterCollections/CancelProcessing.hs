@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.RasterCollections.CancelProcessing
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type RasterCollectionsCancelProcessingResource =
 -- | Cancel processing on a raster collection asset.
 --
 -- /See:/ 'rasterCollectionsCancelProcessing' smart constructor.
-newtype RasterCollectionsCancelProcessing = RasterCollectionsCancelProcessing
+newtype RasterCollectionsCancelProcessing = RasterCollectionsCancelProcessing'
     { _rccpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ rasterCollectionsCancelProcessing
     :: Text -- ^ 'rccpId'
     -> RasterCollectionsCancelProcessing
 rasterCollectionsCancelProcessing pRccpId_ =
-    RasterCollectionsCancelProcessing
+    RasterCollectionsCancelProcessing'
     { _rccpId = pRccpId_
     }
 
@@ -78,7 +78,9 @@ instance GoogleRequest
          RasterCollectionsCancelProcessing where
         type Rs RasterCollectionsCancelProcessing =
              ProcessResponse
-        requestClient RasterCollectionsCancelProcessing{..}
+        type Scopes RasterCollectionsCancelProcessing =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient RasterCollectionsCancelProcessing'{..}
           = go _rccpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

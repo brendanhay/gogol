@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type LeaderboardConfigurationsUpdateResource =
 -- | Update the metadata of the leaderboard configuration with the given ID.
 --
 -- /See:/ 'leaderboardConfigurationsUpdate' smart constructor.
-data LeaderboardConfigurationsUpdate = LeaderboardConfigurationsUpdate
+data LeaderboardConfigurationsUpdate = LeaderboardConfigurationsUpdate'
     { _lcuPayload       :: !LeaderboardConfiguration
     , _lcuLeaderboardId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ leaderboardConfigurationsUpdate
     -> Text -- ^ 'lcuLeaderboardId'
     -> LeaderboardConfigurationsUpdate
 leaderboardConfigurationsUpdate pLcuPayload_ pLcuLeaderboardId_ =
-    LeaderboardConfigurationsUpdate
+    LeaderboardConfigurationsUpdate'
     { _lcuPayload = pLcuPayload_
     , _lcuLeaderboardId = pLcuLeaderboardId_
     }
@@ -91,7 +91,9 @@ instance GoogleRequest
          LeaderboardConfigurationsUpdate where
         type Rs LeaderboardConfigurationsUpdate =
              LeaderboardConfiguration
-        requestClient LeaderboardConfigurationsUpdate{..}
+        type Scopes LeaderboardConfigurationsUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient LeaderboardConfigurationsUpdate'{..}
           = go _lcuLeaderboardId (Just AltJSON) _lcuPayload
               gamesConfigurationService
           where go

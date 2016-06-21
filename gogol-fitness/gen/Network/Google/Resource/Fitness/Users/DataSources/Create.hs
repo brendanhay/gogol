@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.DataSources.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -68,7 +68,7 @@ type UsersDataSourcesCreateResource =
 -- when read by any other developer reading public data types.
 --
 -- /See:/ 'usersDataSourcesCreate' smart constructor.
-data UsersDataSourcesCreate = UsersDataSourcesCreate
+data UsersDataSourcesCreate = UsersDataSourcesCreate'
     { _udscPayload :: !DataSource
     , _udscUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,7 +85,7 @@ usersDataSourcesCreate
     -> Text -- ^ 'udscUserId'
     -> UsersDataSourcesCreate
 usersDataSourcesCreate pUdscPayload_ pUdscUserId_ =
-    UsersDataSourcesCreate
+    UsersDataSourcesCreate'
     { _udscPayload = pUdscPayload_
     , _udscUserId = pUdscUserId_
     }
@@ -103,7 +103,11 @@ udscUserId
 
 instance GoogleRequest UsersDataSourcesCreate where
         type Rs UsersDataSourcesCreate = DataSource
-        requestClient UsersDataSourcesCreate{..}
+        type Scopes UsersDataSourcesCreate =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
+        requestClient UsersDataSourcesCreate'{..}
           = go _udscUserId (Just AltJSON) _udscPayload
               fitnessService
           where go

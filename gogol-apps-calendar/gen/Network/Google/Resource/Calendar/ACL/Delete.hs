@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.ACL.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ACLDeleteResource =
 -- | Deletes an access control rule.
 --
 -- /See:/ 'aclDelete' smart constructor.
-data ACLDelete = ACLDelete
+data ACLDelete = ACLDelete'
     { _adCalendarId :: !Text
     , _adRuleId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ aclDelete
     -> Text -- ^ 'adRuleId'
     -> ACLDelete
 aclDelete pAdCalendarId_ pAdRuleId_ =
-    ACLDelete
+    ACLDelete'
     { _adCalendarId = pAdCalendarId_
     , _adRuleId = pAdRuleId_
     }
@@ -89,7 +89,9 @@ adRuleId = lens _adRuleId (\ s a -> s{_adRuleId = a})
 
 instance GoogleRequest ACLDelete where
         type Rs ACLDelete = ()
-        requestClient ACLDelete{..}
+        type Scopes ACLDelete =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient ACLDelete'{..}
           = go _adCalendarId _adRuleId (Just AltJSON)
               appsCalendarService
           where go

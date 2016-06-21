@@ -14,15 +14,15 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enrolls an enterprise with the calling MDM.
+-- Enrolls an enterprise with the calling EMM.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.enroll@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.enroll@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
     (
     -- * REST Resource
@@ -51,10 +51,10 @@ type EnterprisesEnrollResource =
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
 
--- | Enrolls an enterprise with the calling MDM.
+-- | Enrolls an enterprise with the calling EMM.
 --
 -- /See:/ 'enterprisesEnroll' smart constructor.
-data EnterprisesEnroll = EnterprisesEnroll
+data EnterprisesEnroll = EnterprisesEnroll'
     { _eeToken   :: !Text
     , _eePayload :: !Enterprise
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,12 +71,12 @@ enterprisesEnroll
     -> Enterprise -- ^ 'eePayload'
     -> EnterprisesEnroll
 enterprisesEnroll pEeToken_ pEePayload_ =
-    EnterprisesEnroll
+    EnterprisesEnroll'
     { _eeToken = pEeToken_
     , _eePayload = pEePayload_
     }
 
--- | The token provided by the enterprise to register the MDM.
+-- | The token provided by the enterprise to register the EMM.
 eeToken :: Lens' EnterprisesEnroll Text
 eeToken = lens _eeToken (\ s a -> s{_eeToken = a})
 
@@ -87,7 +87,9 @@ eePayload
 
 instance GoogleRequest EnterprisesEnroll where
         type Rs EnterprisesEnroll = Enterprise
-        requestClient EnterprisesEnroll{..}
+        type Scopes EnterprisesEnroll =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EnterprisesEnroll'{..}
           = go (Just _eeToken) (Just AltJSON) _eePayload
               androidEnterpriseService
           where go

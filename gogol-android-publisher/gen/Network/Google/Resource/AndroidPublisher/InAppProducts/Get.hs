@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.InAppProducts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type InAppProductsGetResource =
 -- | Returns information about the in-app product specified.
 --
 -- /See:/ 'inAppProductsGet' smart constructor.
-data InAppProductsGet = InAppProductsGet
+data InAppProductsGet = InAppProductsGet'
     { _iapgPackageName :: !Text
     , _iapgSKU         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ inAppProductsGet
     -> Text -- ^ 'iapgSKU'
     -> InAppProductsGet
 inAppProductsGet pIapgPackageName_ pIapgSKU_ =
-    InAppProductsGet
+    InAppProductsGet'
     { _iapgPackageName = pIapgPackageName_
     , _iapgSKU = pIapgSKU_
     }
@@ -87,7 +87,9 @@ iapgSKU = lens _iapgSKU (\ s a -> s{_iapgSKU = a})
 
 instance GoogleRequest InAppProductsGet where
         type Rs InAppProductsGet = InAppProduct
-        requestClient InAppProductsGet{..}
+        type Scopes InAppProductsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient InAppProductsGet'{..}
           = go _iapgPackageName _iapgSKU (Just AltJSON)
               androidPublisherService
           where go

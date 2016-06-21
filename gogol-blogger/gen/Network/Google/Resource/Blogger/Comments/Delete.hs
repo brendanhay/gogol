@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Comments.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type CommentsDeleteResource =
 -- | Delete a comment by ID.
 --
 -- /See:/ 'commentsDelete' smart constructor.
-data CommentsDelete = CommentsDelete
+data CommentsDelete = CommentsDelete'
     { _cdBlogId    :: !Text
     , _cdPostId    :: !Text
     , _cdCommentId :: !Text
@@ -78,7 +78,7 @@ commentsDelete
     -> Text -- ^ 'cdCommentId'
     -> CommentsDelete
 commentsDelete pCdBlogId_ pCdPostId_ pCdCommentId_ =
-    CommentsDelete
+    CommentsDelete'
     { _cdBlogId = pCdBlogId_
     , _cdPostId = pCdPostId_
     , _cdCommentId = pCdCommentId_
@@ -99,7 +99,9 @@ cdCommentId
 
 instance GoogleRequest CommentsDelete where
         type Rs CommentsDelete = ()
-        requestClient CommentsDelete{..}
+        type Scopes CommentsDelete =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient CommentsDelete'{..}
           = go _cdBlogId _cdPostId _cdCommentId (Just AltJSON)
               bloggerService
           where go

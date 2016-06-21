@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.QPXExpress.Trips.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type TripsSearchResource =
 -- | Returns a list of flights.
 --
 -- /See:/ 'tripsSearch' smart constructor.
-newtype TripsSearch = TripsSearch
+newtype TripsSearch = TripsSearch'
     { _tsPayload :: TripsSearchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ tripsSearch
     :: TripsSearchRequest -- ^ 'tsPayload'
     -> TripsSearch
 tripsSearch pTsPayload_ =
-    TripsSearch
+    TripsSearch'
     { _tsPayload = pTsPayload_
     }
 
@@ -77,7 +77,8 @@ tsPayload
 
 instance GoogleRequest TripsSearch where
         type Rs TripsSearch = TripsSearchResponse
-        requestClient TripsSearch{..}
+        type Scopes TripsSearch = '[]
+        requestClient TripsSearch'{..}
           = go (Just AltJSON) _tsPayload qPXExpressService
           where go
                   = buildClient (Proxy :: Proxy TripsSearchResource)

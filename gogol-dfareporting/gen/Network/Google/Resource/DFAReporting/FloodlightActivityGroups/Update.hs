@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivityGroupsUpdate' request conforms to.
 type FloodlightActivityGroupsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>
@@ -55,7 +55,7 @@ type FloodlightActivityGroupsUpdateResource =
 -- | Updates an existing floodlight activity group.
 --
 -- /See:/ 'floodlightActivityGroupsUpdate' smart constructor.
-data FloodlightActivityGroupsUpdate = FloodlightActivityGroupsUpdate
+data FloodlightActivityGroupsUpdate = FloodlightActivityGroupsUpdate'
     { _faguProFileId :: !(Textual Int64)
     , _faguPayload   :: !FloodlightActivityGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivityGroupsUpdate
     -> FloodlightActivityGroup -- ^ 'faguPayload'
     -> FloodlightActivityGroupsUpdate
 floodlightActivityGroupsUpdate pFaguProFileId_ pFaguPayload_ =
-    FloodlightActivityGroupsUpdate
+    FloodlightActivityGroupsUpdate'
     { _faguProFileId = _Coerce # pFaguProFileId_
     , _faguPayload = pFaguPayload_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest FloodlightActivityGroupsUpdate
          where
         type Rs FloodlightActivityGroupsUpdate =
              FloodlightActivityGroup
-        requestClient FloodlightActivityGroupsUpdate{..}
+        type Scopes FloodlightActivityGroupsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightActivityGroupsUpdate'{..}
           = go _faguProFileId (Just AltJSON) _faguPayload
               dFAReportingService
           where go

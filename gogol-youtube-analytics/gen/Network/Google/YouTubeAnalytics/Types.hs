@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.YouTubeAnalytics.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,11 +20,11 @@ module Network.Google.YouTubeAnalytics.Types
       youTubeAnalyticsService
 
     -- * OAuth Scopes
-    , youtubeScope
-    , ytAnalyticsReadonlyScope
-    , youtubepartnerScope
-    , ytAnalyticsMonetaryReadonlyScope
-    , youtubeReadonlyScope
+    , youTubeScope
+    , youTubeAnalyticsReadOnlyScope
+    , youTubePartnerScope
+    , youTubeAnalyticsMonetaryReadOnlyScope
+    , youTubeReadOnlyScope
 
     -- * GroupContentDetails
     , GroupContentDetails
@@ -130,6 +131,7 @@ module Network.Google.YouTubeAnalytics.Types
     , GroupListResponse
     , groupListResponse
     , glrEtag
+    , glrNextPageToken
     , glrKind
     , glrItems
     ) where
@@ -139,28 +141,28 @@ import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
 -- | Default request referring to version 'v1' of the YouTube Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeAnalyticsService :: Service
+youTubeAnalyticsService :: ServiceConfig
 youTubeAnalyticsService
   = defaultService (ServiceId "youtubeAnalytics:v1")
       "www.googleapis.com"
 
 -- | Manage your YouTube account
-youtubeScope :: OAuthScope
-youtubeScope = "https://www.googleapis.com/auth/youtube";
+youTubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
+youTubeScope = Proxy;
 
 -- | View YouTube Analytics reports for your YouTube content
-ytAnalyticsReadonlyScope :: OAuthScope
-ytAnalyticsReadonlyScope = "https://www.googleapis.com/auth/yt-analytics.readonly";
+youTubeAnalyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
+youTubeAnalyticsReadOnlyScope = Proxy;
 
 -- | View and manage your assets and associated content on YouTube
-youtubepartnerScope :: OAuthScope
-youtubepartnerScope = "https://www.googleapis.com/auth/youtubepartner";
+youTubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
+youTubePartnerScope = Proxy;
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
-ytAnalyticsMonetaryReadonlyScope :: OAuthScope
-ytAnalyticsMonetaryReadonlyScope = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";
+youTubeAnalyticsMonetaryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
+youTubeAnalyticsMonetaryReadOnlyScope = Proxy;
 
 -- | View your YouTube account
-youtubeReadonlyScope :: OAuthScope
-youtubeReadonlyScope = "https://www.googleapis.com/auth/youtube.readonly";
+youTubeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
+youTubeReadOnlyScope = Proxy;

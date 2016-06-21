@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.Annotations.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type MyLibraryAnnotationsInsertResource =
 -- | Inserts a new annotation.
 --
 -- /See:/ 'myLibraryAnnotationsInsert' smart constructor.
-data MyLibraryAnnotationsInsert = MyLibraryAnnotationsInsert
+data MyLibraryAnnotationsInsert = MyLibraryAnnotationsInsert'
     { _mlaiCountry                   :: !(Maybe Text)
     , _mlaiPayload                   :: !Annotation
     , _mlaiShowOnlySummaryInResponse :: !(Maybe Bool)
@@ -80,7 +80,7 @@ myLibraryAnnotationsInsert
     :: Annotation -- ^ 'mlaiPayload'
     -> MyLibraryAnnotationsInsert
 myLibraryAnnotationsInsert pMlaiPayload_ =
-    MyLibraryAnnotationsInsert
+    MyLibraryAnnotationsInsert'
     { _mlaiCountry = Nothing
     , _mlaiPayload = pMlaiPayload_
     , _mlaiShowOnlySummaryInResponse = Nothing
@@ -112,7 +112,9 @@ mlaiSource
 instance GoogleRequest MyLibraryAnnotationsInsert
          where
         type Rs MyLibraryAnnotationsInsert = Annotation
-        requestClient MyLibraryAnnotationsInsert{..}
+        type Scopes MyLibraryAnnotationsInsert =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryAnnotationsInsert'{..}
           = go _mlaiCountry _mlaiShowOnlySummaryInResponse
               _mlaiSource
               (Just AltJSON)

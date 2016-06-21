@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Customers.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type CustomersInsertResource =
 -- | Creates a customer resource if one does not already exist.
 --
 -- /See:/ 'customersInsert' smart constructor.
-data CustomersInsert = CustomersInsert
+data CustomersInsert = CustomersInsert'
     { _ciPayload           :: !Customer
     , _ciCustomerAuthToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ customersInsert
     :: Customer -- ^ 'ciPayload'
     -> CustomersInsert
 customersInsert pCiPayload_ =
-    CustomersInsert
+    CustomersInsert'
     { _ciPayload = pCiPayload_
     , _ciCustomerAuthToken = Nothing
     }
@@ -81,8 +81,8 @@ ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 -- | An auth token needed for inserting a customer for which domain already
--- exists. Can be generated at
--- https:\/\/www.google.com\/a\/cpanel\/\/TransferToken. Optional.
+-- exists. Can be generated at https:\/\/admin.google.com\/TransferToken.
+-- Optional.
 ciCustomerAuthToken :: Lens' CustomersInsert (Maybe Text)
 ciCustomerAuthToken
   = lens _ciCustomerAuthToken
@@ -90,7 +90,9 @@ ciCustomerAuthToken
 
 instance GoogleRequest CustomersInsert where
         type Rs CustomersInsert = Customer
-        requestClient CustomersInsert{..}
+        type Scopes CustomersInsert =
+             '["https://www.googleapis.com/auth/apps.order"]
+        requestClient CustomersInsert'{..}
           = go _ciCustomerAuthToken (Just AltJSON) _ciPayload
               appsResellerService
           where go

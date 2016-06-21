@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Videos.ReportAbuse
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type VideosReportAbuseResource =
 -- | Report abuse for a video.
 --
 -- /See:/ 'videosReportAbuse' smart constructor.
-data VideosReportAbuse = VideosReportAbuse
+data VideosReportAbuse = VideosReportAbuse'
     { _vraPayload                :: !VideoAbuseReport
     , _vraOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ videosReportAbuse
     :: VideoAbuseReport -- ^ 'vraPayload'
     -> VideosReportAbuse
 videosReportAbuse pVraPayload_ =
-    VideosReportAbuse
+    VideosReportAbuse'
     { _vraPayload = pVraPayload_
     , _vraOnBehalfOfContentOwner = Nothing
     }
@@ -97,7 +97,11 @@ vraOnBehalfOfContentOwner
 
 instance GoogleRequest VideosReportAbuse where
         type Rs VideosReportAbuse = ()
-        requestClient VideosReportAbuse{..}
+        type Scopes VideosReportAbuse =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient VideosReportAbuse'{..}
           = go _vraOnBehalfOfContentOwner (Just AltJSON)
               _vraPayload
               youTubeService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type ObjectsDeleteResource =
 -- is used.
 --
 -- /See:/ 'objectsDelete' smart constructor.
-data ObjectsDelete = ObjectsDelete
+data ObjectsDelete = ObjectsDelete'
     { _odIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _odIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _odIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -101,7 +101,7 @@ objectsDelete
     -> Text -- ^ 'odObject'
     -> ObjectsDelete
 objectsDelete pOdBucket_ pOdObject_ =
-    ObjectsDelete
+    ObjectsDelete'
     { _odIfMetagenerationMatch = Nothing
     , _odIfGenerationNotMatch = Nothing
     , _odIfGenerationMatch = Nothing
@@ -161,7 +161,11 @@ odGeneration
 
 instance GoogleRequest ObjectsDelete where
         type Rs ObjectsDelete = ()
-        requestClient ObjectsDelete{..}
+        type Scopes ObjectsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient ObjectsDelete'{..}
           = go _odBucket _odObject _odIfMetagenerationMatch
               _odIfGenerationNotMatch
               _odIfGenerationMatch

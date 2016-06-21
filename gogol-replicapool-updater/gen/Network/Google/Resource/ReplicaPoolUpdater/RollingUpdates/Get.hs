@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type RollingUpdatesGetResource =
 -- | Returns information about an update.
 --
 -- /See:/ 'rollingUpdatesGet' smart constructor.
-data RollingUpdatesGet = RollingUpdatesGet
+data RollingUpdatesGet = RollingUpdatesGet'
     { _rugRollingUpdate :: !Text
     , _rugProject       :: !Text
     , _rugZone          :: !Text
@@ -78,7 +78,7 @@ rollingUpdatesGet
     -> Text -- ^ 'rugZone'
     -> RollingUpdatesGet
 rollingUpdatesGet pRugRollingUpdate_ pRugProject_ pRugZone_ =
-    RollingUpdatesGet
+    RollingUpdatesGet'
     { _rugRollingUpdate = pRugRollingUpdate_
     , _rugProject = pRugProject_
     , _rugZone = pRugZone_
@@ -101,7 +101,12 @@ rugZone = lens _rugZone (\ s a -> s{_rugZone = a})
 
 instance GoogleRequest RollingUpdatesGet where
         type Rs RollingUpdatesGet = RollingUpdate
-        requestClient RollingUpdatesGet{..}
+        type Scopes RollingUpdatesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/replicapool",
+               "https://www.googleapis.com/auth/replicapool.readonly"]
+        requestClient RollingUpdatesGet'{..}
           = go _rugProject _rugZone _rugRollingUpdate
               (Just AltJSON)
               replicaPoolUpdaterService

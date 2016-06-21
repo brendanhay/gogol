@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.OAuth2.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'tokenInfo' smart constructor.
-data TokenInfo = TokenInfo
+data TokenInfo = TokenInfo'
     { _tiAudience      :: !(Maybe Text)
     , _tiEmail         :: !(Maybe Text)
     , _tiExpiresIn     :: !(Maybe (Textual Int32))
@@ -58,7 +58,7 @@ data TokenInfo = TokenInfo
 tokenInfo
     :: TokenInfo
 tokenInfo =
-    TokenInfo
+    TokenInfo'
     { _tiAudience = Nothing
     , _tiEmail = Nothing
     , _tiExpiresIn = Nothing
@@ -122,7 +122,7 @@ instance FromJSON TokenInfo where
         parseJSON
           = withObject "TokenInfo"
               (\ o ->
-                 TokenInfo <$>
+                 TokenInfo' <$>
                    (o .:? "audience") <*> (o .:? "email") <*>
                      (o .:? "expires_in")
                      <*> (o .:? "access_type")
@@ -133,7 +133,7 @@ instance FromJSON TokenInfo where
                      <*> (o .:? "issued_to"))
 
 instance ToJSON TokenInfo where
-        toJSON TokenInfo{..}
+        toJSON TokenInfo'{..}
           = object
               (catMaybes
                  [("audience" .=) <$> _tiAudience,
@@ -148,7 +148,7 @@ instance ToJSON TokenInfo where
 
 --
 -- /See:/ 'jwk' smart constructor.
-newtype JWK = JWK
+newtype JWK = JWK'
     { _jKeys :: Maybe [JWKKeysItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -160,7 +160,7 @@ newtype JWK = JWK
 jwk
     :: JWK
 jwk =
-    JWK
+    JWK'
     { _jKeys = Nothing
     }
 
@@ -172,15 +172,15 @@ jKeys
 instance FromJSON JWK where
         parseJSON
           = withObject "JWK"
-              (\ o -> JWK <$> (o .:? "keys" .!= mempty))
+              (\ o -> JWK' <$> (o .:? "keys" .!= mempty))
 
 instance ToJSON JWK where
-        toJSON JWK{..}
+        toJSON JWK'{..}
           = object (catMaybes [("keys" .=) <$> _jKeys])
 
 --
 -- /See:/ 'jwkKeysItem' smart constructor.
-data JWKKeysItem = JWKKeysItem
+data JWKKeysItem = JWKKeysItem'
     { _jkiAlg :: !Text
     , _jkiUse :: !Text
     , _jkiKid :: !(Maybe Text)
@@ -207,7 +207,7 @@ data JWKKeysItem = JWKKeysItem
 jwkKeysItem
     :: JWKKeysItem
 jwkKeysItem =
-    JWKKeysItem
+    JWKKeysItem'
     { _jkiAlg = "RS256"
     , _jkiUse = "sig"
     , _jkiKid = Nothing
@@ -238,7 +238,7 @@ instance FromJSON JWKKeysItem where
         parseJSON
           = withObject "JWKKeysItem"
               (\ o ->
-                 JWKKeysItem <$>
+                 JWKKeysItem' <$>
                    (o .:? "alg" .!= "RS256") <*> (o .:? "use" .!= "sig")
                      <*> (o .:? "kid")
                      <*> (o .:? "n")
@@ -246,7 +246,7 @@ instance FromJSON JWKKeysItem where
                      <*> (o .:? "kty" .!= "RSA"))
 
 instance ToJSON JWKKeysItem where
-        toJSON JWKKeysItem{..}
+        toJSON JWKKeysItem'{..}
           = object
               (catMaybes
                  [Just ("alg" .= _jkiAlg), Just ("use" .= _jkiUse),
@@ -255,7 +255,7 @@ instance ToJSON JWKKeysItem where
 
 --
 -- /See:/ 'userInfoplus' smart constructor.
-data UserInfoplus = UserInfoplus
+data UserInfoplus = UserInfoplus'
     { _uiHd            :: !(Maybe Text)
     , _uiEmail         :: !(Maybe Text)
     , _uiLink          :: !(Maybe Text)
@@ -297,7 +297,7 @@ data UserInfoplus = UserInfoplus
 userInfoplus
     :: UserInfoplus
 userInfoplus =
-    UserInfoplus
+    UserInfoplus'
     { _uiHd = Nothing
     , _uiEmail = Nothing
     , _uiLink = Nothing
@@ -365,7 +365,7 @@ instance FromJSON UserInfoplus where
         parseJSON
           = withObject "UserInfoplus"
               (\ o ->
-                 UserInfoplus <$>
+                 UserInfoplus' <$>
                    (o .:? "hd") <*> (o .:? "email") <*> (o .:? "link")
                      <*> (o .:? "locale")
                      <*> (o .:? "given_name")
@@ -377,7 +377,7 @@ instance FromJSON UserInfoplus where
                      <*> (o .:? "id"))
 
 instance ToJSON UserInfoplus where
-        toJSON UserInfoplus{..}
+        toJSON UserInfoplus'{..}
           = object
               (catMaybes
                  [("hd" .=) <$> _uiHd, ("email" .=) <$> _uiEmail,

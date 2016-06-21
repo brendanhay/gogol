@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AccountsPatchResource =
 -- | Updates an existing account. This method supports patch semantics.
 --
 -- /See:/ 'accountsPatch' smart constructor.
-data AccountsPatch = AccountsPatch
+data AccountsPatch = AccountsPatch'
     { _apPayload :: !Account
     , _apId      :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ accountsPatch
     -> Int32 -- ^ 'apId'
     -> AccountsPatch
 accountsPatch pApPayload_ pApId_ =
-    AccountsPatch
+    AccountsPatch'
     { _apPayload = pApPayload_
     , _apId = _Coerce # pApId_
     }
@@ -86,7 +86,9 @@ apId = lens _apId (\ s a -> s{_apId = a}) . _Coerce
 
 instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account
-        requestClient AccountsPatch{..}
+        type Scopes AccountsPatch =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient AccountsPatch'{..}
           = go _apId (Just AltJSON) _apPayload
               adExchangeBuyerService
           where go

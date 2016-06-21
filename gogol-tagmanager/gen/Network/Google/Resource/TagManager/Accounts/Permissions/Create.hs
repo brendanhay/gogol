@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Permissions.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type AccountsPermissionsCreateResource =
 -- | Creates a user\'s Account & Container Permissions.
 --
 -- /See:/ 'accountsPermissionsCreate' smart constructor.
-data AccountsPermissionsCreate = AccountsPermissionsCreate
+data AccountsPermissionsCreate = AccountsPermissionsCreate'
     { _apcPayload   :: !UserAccess
     , _apcAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsPermissionsCreate
     -> Text -- ^ 'apcAccountId'
     -> AccountsPermissionsCreate
 accountsPermissionsCreate pApcPayload_ pApcAccountId_ =
-    AccountsPermissionsCreate
+    AccountsPermissionsCreate'
     { _apcPayload = pApcPayload_
     , _apcAccountId = pApcAccountId_
     }
@@ -89,7 +89,9 @@ apcAccountId
 instance GoogleRequest AccountsPermissionsCreate
          where
         type Rs AccountsPermissionsCreate = UserAccess
-        requestClient AccountsPermissionsCreate{..}
+        type Scopes AccountsPermissionsCreate =
+             '["https://www.googleapis.com/auth/tagmanager.manage.users"]
+        requestClient AccountsPermissionsCreate'{..}
           = go _apcAccountId (Just AltJSON) _apcPayload
               tagManagerService
           where go

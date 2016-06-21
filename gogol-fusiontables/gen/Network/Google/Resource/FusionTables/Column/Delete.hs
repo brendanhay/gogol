@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Column.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ColumnDeleteResource =
 -- | Deletes the specified column.
 --
 -- /See:/ 'columnDelete' smart constructor.
-data ColumnDelete = ColumnDelete
+data ColumnDelete = ColumnDelete'
     { _cdTableId  :: !Text
     , _cdColumnId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ columnDelete
     -> Text -- ^ 'cdColumnId'
     -> ColumnDelete
 columnDelete pCdTableId_ pCdColumnId_ =
-    ColumnDelete
+    ColumnDelete'
     { _cdTableId = pCdTableId_
     , _cdColumnId = pCdColumnId_
     }
@@ -88,7 +88,9 @@ cdColumnId
 
 instance GoogleRequest ColumnDelete where
         type Rs ColumnDelete = ()
-        requestClient ColumnDelete{..}
+        type Scopes ColumnDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient ColumnDelete'{..}
           = go _cdTableId _cdColumnId (Just AltJSON)
               fusionTablesService
           where go

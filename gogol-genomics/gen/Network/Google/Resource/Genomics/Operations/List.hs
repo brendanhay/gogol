@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Operations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Lists operations that match the specified filter in the request.
 --
--- /See:/ < Genomics API Reference> for @genomics.operations.list@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.operations.list@.
 module Network.Google.Resource.Genomics.Operations.List
     (
     -- * REST Resource
@@ -70,7 +70,7 @@ type OperationsListResource =
 -- | Lists operations that match the specified filter in the request.
 --
 -- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList
+data OperationsList = OperationsList'
     { _olXgafv          :: !(Maybe Text)
     , _olUploadProtocol :: !(Maybe Text)
     , _olPp             :: !Bool
@@ -113,7 +113,7 @@ operationsList
     :: Text -- ^ 'olName'
     -> OperationsList
 operationsList pOlName_ =
-    OperationsList
+    OperationsList'
     { _olXgafv = Nothing
     , _olUploadProtocol = Nothing
     , _olPp = True
@@ -191,7 +191,10 @@ olCallback
 
 instance GoogleRequest OperationsList where
         type Rs OperationsList = ListOperationsResponse
-        requestClient OperationsList{..}
+        type Scopes OperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient OperationsList'{..}
           = go _olName _olXgafv _olUploadProtocol (Just _olPp)
               _olAccessToken
               _olUploadType

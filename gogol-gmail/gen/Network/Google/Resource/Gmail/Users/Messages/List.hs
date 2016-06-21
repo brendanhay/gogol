@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Messages.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type UsersMessagesListResource =
 -- | Lists the messages in the user\'s mailbox.
 --
 -- /See:/ 'usersMessagesList' smart constructor.
-data UsersMessagesList = UsersMessagesList
+data UsersMessagesList = UsersMessagesList'
     { _umlQ                :: !(Maybe Text)
     , _umlUserId           :: !Text
     , _umlIncludeSpamTrash :: !Bool
@@ -88,10 +88,9 @@ data UsersMessagesList = UsersMessagesList
 --
 -- * 'umlMaxResults'
 usersMessagesList
-    :: Text
-    -> UsersMessagesList
-usersMessagesList pUmlUserId_ =
-    UsersMessagesList
+    :: UsersMessagesList
+usersMessagesList =
+    UsersMessagesList'
     { _umlQ = Nothing
     , _umlUserId = "me"
     , _umlIncludeSpamTrash = False
@@ -140,7 +139,11 @@ umlMaxResults
 
 instance GoogleRequest UsersMessagesList where
         type Rs UsersMessagesList = ListMessagesResponse
-        requestClient UsersMessagesList{..}
+        type Scopes UsersMessagesList =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersMessagesList'{..}
           = go _umlUserId _umlQ (Just _umlIncludeSpamTrash)
               (_umlLabelIds ^. _Default)
               _umlPageToken

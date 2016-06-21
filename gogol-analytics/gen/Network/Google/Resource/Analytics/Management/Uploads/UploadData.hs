@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Uploads.UploadData
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,13 +69,12 @@ type ManagementUploadsUploadDataResource =
                            "uploads" :>
                              QueryParam "alt" AltJSON :>
                                QueryParam "uploadType" AltMedia :>
-                                 ReqBody '[OctetStream] RequestBody :>
-                                   Post '[JSON] Upload
+                                 AltMedia :> Post '[JSON] Upload
 
 -- | Upload data for a custom data source.
 --
 -- /See:/ 'managementUploadsUploadData' smart constructor.
-data ManagementUploadsUploadData = ManagementUploadsUploadData
+data ManagementUploadsUploadData = ManagementUploadsUploadData'
     { _muudWebPropertyId      :: !Text
     , _muudCustomDataSourceId :: !Text
     , _muudAccountId          :: !Text
@@ -96,7 +95,7 @@ managementUploadsUploadData
     -> Text -- ^ 'muudAccountId'
     -> ManagementUploadsUploadData
 managementUploadsUploadData pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudAccountId_ =
-    ManagementUploadsUploadData
+    ManagementUploadsUploadData'
     { _muudWebPropertyId = pMuudWebPropertyId_
     , _muudCustomDataSourceId = pMuudCustomDataSourceId_
     , _muudAccountId = pMuudAccountId_
@@ -123,7 +122,10 @@ muudAccountId
 instance GoogleRequest ManagementUploadsUploadData
          where
         type Rs ManagementUploadsUploadData = Upload
-        requestClient ManagementUploadsUploadData{..}
+        type Scopes ManagementUploadsUploadData =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementUploadsUploadData'{..}
           = go _muudAccountId _muudWebPropertyId
               _muudCustomDataSourceId
               (Just AltJSON)
@@ -137,8 +139,10 @@ instance GoogleRequest
          (MediaUpload ManagementUploadsUploadData) where
         type Rs (MediaUpload ManagementUploadsUploadData) =
              Upload
+        type Scopes (MediaUpload ManagementUploadsUploadData)
+             = Scopes ManagementUploadsUploadData
         requestClient
-          (MediaUpload ManagementUploadsUploadData{..} body)
+          (MediaUpload ManagementUploadsUploadData'{..} body)
           = go _muudAccountId _muudWebPropertyId
               _muudCustomDataSourceId
               (Just AltJSON)

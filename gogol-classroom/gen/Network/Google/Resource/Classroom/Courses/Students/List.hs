@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Students.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type CoursesStudentsListResource =
 -- access errors.
 --
 -- /See:/ 'coursesStudentsList' smart constructor.
-data CoursesStudentsList = CoursesStudentsList
+data CoursesStudentsList = CoursesStudentsList'
     { _cslXgafv          :: !(Maybe Text)
     , _cslUploadProtocol :: !(Maybe Text)
     , _cslPp             :: !Bool
@@ -116,7 +116,7 @@ coursesStudentsList
     :: Text -- ^ 'cslCourseId'
     -> CoursesStudentsList
 coursesStudentsList pCslCourseId_ =
-    CoursesStudentsList
+    CoursesStudentsList'
     { _cslXgafv = Nothing
     , _cslUploadProtocol = Nothing
     , _cslPp = True
@@ -188,7 +188,12 @@ cslCallback
 
 instance GoogleRequest CoursesStudentsList where
         type Rs CoursesStudentsList = ListStudentsResponse
-        requestClient CoursesStudentsList{..}
+        type Scopes CoursesStudentsList =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
+        requestClient CoursesStudentsList'{..}
           = go _cslCourseId _cslXgafv _cslUploadProtocol
               (Just _cslPp)
               _cslAccessToken

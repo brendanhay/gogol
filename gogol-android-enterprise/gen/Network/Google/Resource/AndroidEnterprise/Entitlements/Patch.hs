@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Entitlements.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@
 -- Adds or updates an entitlement to an app for a user. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.patch@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.patch@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Patch
     (
     -- * REST Resource
@@ -64,7 +64,7 @@ type EntitlementsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'entitlementsPatch' smart constructor.
-data EntitlementsPatch = EntitlementsPatch
+data EntitlementsPatch = EntitlementsPatch'
     { _epEntitlementId :: !Text
     , _epEnterpriseId  :: !Text
     , _epPayload       :: !Entitlement
@@ -92,7 +92,7 @@ entitlementsPatch
     -> Text -- ^ 'epUserId'
     -> EntitlementsPatch
 entitlementsPatch pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
-    EntitlementsPatch
+    EntitlementsPatch'
     { _epEntitlementId = pEpEntitlementId_
     , _epEnterpriseId = pEpEnterpriseId_
     , _epPayload = pEpPayload_
@@ -100,7 +100,8 @@ entitlementsPatch pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
     , _epUserId = pEpUserId_
     }
 
--- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
+-- | The ID of the entitlement (a product ID), e.g.
+-- \"app:com.google.android.gm\".
 epEntitlementId :: Lens' EntitlementsPatch Text
 epEntitlementId
   = lens _epEntitlementId
@@ -131,7 +132,9 @@ epUserId = lens _epUserId (\ s a -> s{_epUserId = a})
 
 instance GoogleRequest EntitlementsPatch where
         type Rs EntitlementsPatch = Entitlement
-        requestClient EntitlementsPatch{..}
+        type Scopes EntitlementsPatch =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EntitlementsPatch'{..}
           = go _epEnterpriseId _epUserId _epEntitlementId
               _epInstall
               (Just AltJSON)

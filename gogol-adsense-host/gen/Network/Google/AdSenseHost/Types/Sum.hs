@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AdSenseHost.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -28,28 +28,28 @@ data AssociationSessionsStartProductCode
       -- AdSense For Games
     | Afmc
       -- ^ @AFMC@
-      -- AdSense For Mobile Content
+      -- AdSense For Mobile Content - deprecated
     | Afs
       -- ^ @AFS@
-      -- AdSense For Search
+      -- AdSense For Search - deprecated
     | Afv
       -- ^ @AFV@
       -- AdSense For Video
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AssociationSessionsStartProductCode
 
-instance FromText AssociationSessionsStartProductCode where
-    fromText = \case
-        "AFC" -> Just Afc
-        "AFG" -> Just Afg
-        "AFMC" -> Just Afmc
-        "AFS" -> Just Afs
-        "AFV" -> Just Afv
-        _ -> Nothing
+instance FromHttpApiData AssociationSessionsStartProductCode where
+    parseQueryParam = \case
+        "AFC" -> Right Afc
+        "AFG" -> Right Afg
+        "AFMC" -> Right Afmc
+        "AFS" -> Right Afs
+        "AFV" -> Right Afv
+        x -> Left ("Unable to parse AssociationSessionsStartProductCode from: " <> x)
 
-instance ToText AssociationSessionsStartProductCode where
-    toText = \case
+instance ToHttpApiData AssociationSessionsStartProductCode where
+    toQueryParam = \case
         Afc -> "AFC"
         Afg -> "AFG"
         Afmc -> "AFMC"

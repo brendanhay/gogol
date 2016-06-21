@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetVPNGateways.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetVpnGateway resource.
+-- Returns the specified target VPN gateway. Get a list of available target
+-- VPN gateways by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.get@.
 module Network.Google.Resource.Compute.TargetVPNGateways.Get
@@ -55,10 +56,11 @@ type TargetVPNGatewaysGetResource =
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] TargetVPNGateway
 
--- | Returns the specified TargetVpnGateway resource.
+-- | Returns the specified target VPN gateway. Get a list of available target
+-- VPN gateways by making a list() request.
 --
 -- /See:/ 'targetVPNGatewaysGet' smart constructor.
-data TargetVPNGatewaysGet = TargetVPNGatewaysGet
+data TargetVPNGatewaysGet = TargetVPNGatewaysGet'
     { _tvggProject          :: !Text
     , _tvggTargetVPNGateway :: !Text
     , _tvggRegion           :: !Text
@@ -79,7 +81,7 @@ targetVPNGatewaysGet
     -> Text -- ^ 'tvggRegion'
     -> TargetVPNGatewaysGet
 targetVPNGatewaysGet pTvggProject_ pTvggTargetVPNGateway_ pTvggRegion_ =
-    TargetVPNGatewaysGet
+    TargetVPNGatewaysGet'
     { _tvggProject = pTvggProject_
     , _tvggTargetVPNGateway = pTvggTargetVPNGateway_
     , _tvggRegion = pTvggRegion_
@@ -90,20 +92,24 @@ tvggProject :: Lens' TargetVPNGatewaysGet Text
 tvggProject
   = lens _tvggProject (\ s a -> s{_tvggProject = a})
 
--- | Name of the TargetVpnGateway resource to return.
+-- | Name of the target VPN gateway to return.
 tvggTargetVPNGateway :: Lens' TargetVPNGatewaysGet Text
 tvggTargetVPNGateway
   = lens _tvggTargetVPNGateway
       (\ s a -> s{_tvggTargetVPNGateway = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 tvggRegion :: Lens' TargetVPNGatewaysGet Text
 tvggRegion
   = lens _tvggRegion (\ s a -> s{_tvggRegion = a})
 
 instance GoogleRequest TargetVPNGatewaysGet where
         type Rs TargetVPNGatewaysGet = TargetVPNGateway
-        requestClient TargetVPNGatewaysGet{..}
+        type Scopes TargetVPNGatewaysGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient TargetVPNGatewaysGet'{..}
           = go _tvggProject _tvggRegion _tvggTargetVPNGateway
               (Just AltJSON)
               computeService

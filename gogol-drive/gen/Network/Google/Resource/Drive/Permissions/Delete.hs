@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Permissions.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a permission from a file.
+-- Deletes a permission.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.delete@.
 module Network.Google.Resource.Drive.Permissions.Delete
@@ -33,8 +33,8 @@ module Network.Google.Resource.Drive.Permissions.Delete
     , PermissionsDelete
 
     -- * Request Lenses
-    , pFileId
-    , pPermissionId
+    , pdFileId
+    , pdPermissionId
     ) where
 
 import           Network.Google.Drive.Types
@@ -44,52 +44,55 @@ import           Network.Google.Prelude
 -- 'PermissionsDelete' request conforms to.
 type PermissionsDeleteResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "permissions" :>
                Capture "permissionId" Text :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes a permission from a file.
+-- | Deletes a permission.
 --
 -- /See:/ 'permissionsDelete' smart constructor.
-data PermissionsDelete = PermissionsDelete
-    { _pFileId       :: !Text
-    , _pPermissionId :: !Text
+data PermissionsDelete = PermissionsDelete'
+    { _pdFileId       :: !Text
+    , _pdPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pFileId'
+-- * 'pdFileId'
 --
--- * 'pPermissionId'
+-- * 'pdPermissionId'
 permissionsDelete
-    :: Text -- ^ 'pFileId'
-    -> Text -- ^ 'pPermissionId'
+    :: Text -- ^ 'pdFileId'
+    -> Text -- ^ 'pdPermissionId'
     -> PermissionsDelete
-permissionsDelete pPFileId_ pPPermissionId_ =
-    PermissionsDelete
-    { _pFileId = pPFileId_
-    , _pPermissionId = pPPermissionId_
+permissionsDelete pPdFileId_ pPdPermissionId_ =
+    PermissionsDelete'
+    { _pdFileId = pPdFileId_
+    , _pdPermissionId = pPdPermissionId_
     }
 
--- | The ID for the file.
-pFileId :: Lens' PermissionsDelete Text
-pFileId = lens _pFileId (\ s a -> s{_pFileId = a})
+-- | The ID of the file.
+pdFileId :: Lens' PermissionsDelete Text
+pdFileId = lens _pdFileId (\ s a -> s{_pdFileId = a})
 
--- | The ID for the permission.
-pPermissionId :: Lens' PermissionsDelete Text
-pPermissionId
-  = lens _pPermissionId
-      (\ s a -> s{_pPermissionId = a})
+-- | The ID of the permission.
+pdPermissionId :: Lens' PermissionsDelete Text
+pdPermissionId
+  = lens _pdPermissionId
+      (\ s a -> s{_pdPermissionId = a})
 
 instance GoogleRequest PermissionsDelete where
         type Rs PermissionsDelete = ()
-        requestClient PermissionsDelete{..}
-          = go _pFileId _pPermissionId (Just AltJSON)
+        type Scopes PermissionsDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
+        requestClient PermissionsDelete'{..}
+          = go _pdFileId _pdPermissionId (Just AltJSON)
               driveService
           where go
                   = buildClient

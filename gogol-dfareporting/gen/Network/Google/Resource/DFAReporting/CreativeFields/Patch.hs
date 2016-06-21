@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeFields.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsPatch' request conforms to.
 type CreativeFieldsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -59,7 +59,7 @@ type CreativeFieldsPatchResource =
 -- semantics.
 --
 -- /See:/ 'creativeFieldsPatch' smart constructor.
-data CreativeFieldsPatch = CreativeFieldsPatch
+data CreativeFieldsPatch = CreativeFieldsPatch'
     { _cfpProFileId :: !(Textual Int64)
     , _cfpPayload   :: !CreativeField
     , _cfpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ creativeFieldsPatch
     -> Int64 -- ^ 'cfpId'
     -> CreativeFieldsPatch
 creativeFieldsPatch pCfpProFileId_ pCfpPayload_ pCfpId_ =
-    CreativeFieldsPatch
+    CreativeFieldsPatch'
     { _cfpProFileId = _Coerce # pCfpProFileId_
     , _cfpPayload = pCfpPayload_
     , _cfpId = _Coerce # pCfpId_
@@ -104,7 +104,9 @@ cfpId
 
 instance GoogleRequest CreativeFieldsPatch where
         type Rs CreativeFieldsPatch = CreativeField
-        requestClient CreativeFieldsPatch{..}
+        type Scopes CreativeFieldsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeFieldsPatch'{..}
           = go _cfpProFileId (Just _cfpId) (Just AltJSON)
               _cfpPayload
               dFAReportingService

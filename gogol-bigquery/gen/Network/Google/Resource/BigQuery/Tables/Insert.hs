@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Tables.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type TablesInsertResource =
 -- | Creates a new, empty table in the dataset.
 --
 -- /See:/ 'tablesInsert' smart constructor.
-data TablesInsert = TablesInsert
+data TablesInsert = TablesInsert'
     { _tiPayload   :: !Table
     , _tiDataSetId :: !Text
     , _tiProjectId :: !Text
@@ -78,7 +78,7 @@ tablesInsert
     -> Text -- ^ 'tiProjectId'
     -> TablesInsert
 tablesInsert pTiPayload_ pTiDataSetId_ pTiProjectId_ =
-    TablesInsert
+    TablesInsert'
     { _tiPayload = pTiPayload_
     , _tiDataSetId = pTiDataSetId_
     , _tiProjectId = pTiProjectId_
@@ -101,7 +101,10 @@ tiProjectId
 
 instance GoogleRequest TablesInsert where
         type Rs TablesInsert = Table
-        requestClient TablesInsert{..}
+        type Scopes TablesInsert =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TablesInsert'{..}
           = go _tiProjectId _tiDataSetId (Just AltJSON)
               _tiPayload
               bigQueryService

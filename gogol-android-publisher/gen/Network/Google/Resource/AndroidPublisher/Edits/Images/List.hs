@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Images.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type EditsImagesListResource =
 -- | Lists all images for the specified language and image type.
 --
 -- /See:/ 'editsImagesList' smart constructor.
-data EditsImagesList = EditsImagesList
+data EditsImagesList = EditsImagesList'
     { _eilPackageName :: !Text
     , _eilImageType   :: !EditsImagesListImageType
     , _eilLanguage    :: !Text
@@ -85,7 +85,7 @@ editsImagesList
     -> Text -- ^ 'eilEditId'
     -> EditsImagesList
 editsImagesList pEilPackageName_ pEilImageType_ pEilLanguage_ pEilEditId_ =
-    EditsImagesList
+    EditsImagesList'
     { _eilPackageName = pEilPackageName_
     , _eilImageType = pEilImageType_
     , _eilLanguage = pEilLanguage_
@@ -117,7 +117,9 @@ eilEditId
 
 instance GoogleRequest EditsImagesList where
         type Rs EditsImagesList = ImagesListResponse
-        requestClient EditsImagesList{..}
+        type Scopes EditsImagesList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsImagesList'{..}
           = go _eilPackageName _eilEditId _eilLanguage
               _eilImageType
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlacementGroups.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementGroupsUpdate' request conforms to.
 type PlacementGroupsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
@@ -55,7 +55,7 @@ type PlacementGroupsUpdateResource =
 -- | Updates an existing placement group.
 --
 -- /See:/ 'placementGroupsUpdate' smart constructor.
-data PlacementGroupsUpdate = PlacementGroupsUpdate
+data PlacementGroupsUpdate = PlacementGroupsUpdate'
     { _pguProFileId :: !(Textual Int64)
     , _pguPayload   :: !PlacementGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementGroupsUpdate
     -> PlacementGroup -- ^ 'pguPayload'
     -> PlacementGroupsUpdate
 placementGroupsUpdate pPguProFileId_ pPguPayload_ =
-    PlacementGroupsUpdate
+    PlacementGroupsUpdate'
     { _pguProFileId = _Coerce # pPguProFileId_
     , _pguPayload = pPguPayload_
     }
@@ -90,7 +90,9 @@ pguPayload
 
 instance GoogleRequest PlacementGroupsUpdate where
         type Rs PlacementGroupsUpdate = PlacementGroup
-        requestClient PlacementGroupsUpdate{..}
+        type Scopes PlacementGroupsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementGroupsUpdate'{..}
           = go _pguProFileId (Just AltJSON) _pguPayload
               dFAReportingService
           where go

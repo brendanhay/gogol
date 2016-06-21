@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.Budget.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type BudgetGetResource =
 -- accountId and billingId.
 --
 -- /See:/ 'budgetGet' smart constructor.
-data BudgetGet = BudgetGet
+data BudgetGet = BudgetGet'
     { _bgAccountId :: !(Textual Int64)
     , _bgBillingId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ budgetGet
     -> Int64 -- ^ 'bgBillingId'
     -> BudgetGet
 budgetGet pBgAccountId_ pBgBillingId_ =
-    BudgetGet
+    BudgetGet'
     { _bgAccountId = _Coerce # pBgAccountId_
     , _bgBillingId = _Coerce # pBgBillingId_
     }
@@ -91,7 +91,9 @@ bgBillingId
 
 instance GoogleRequest BudgetGet where
         type Rs BudgetGet = Budget
-        requestClient BudgetGet{..}
+        type Scopes BudgetGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient BudgetGet'{..}
           = go _bgAccountId _bgBillingId (Just AltJSON)
               adExchangeBuyerService
           where go

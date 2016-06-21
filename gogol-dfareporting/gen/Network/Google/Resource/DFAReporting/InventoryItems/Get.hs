@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.InventoryItems.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'InventoryItemsGet' request conforms to.
 type InventoryItemsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -57,7 +57,7 @@ type InventoryItemsGetResource =
 -- | Gets one inventory item by ID.
 --
 -- /See:/ 'inventoryItemsGet' smart constructor.
-data InventoryItemsGet = InventoryItemsGet
+data InventoryItemsGet = InventoryItemsGet'
     { _iigProFileId :: !(Textual Int64)
     , _iigId        :: !(Textual Int64)
     , _iigProjectId :: !(Textual Int64)
@@ -78,7 +78,7 @@ inventoryItemsGet
     -> Int64 -- ^ 'iigProjectId'
     -> InventoryItemsGet
 inventoryItemsGet pIigProFileId_ pIigId_ pIigProjectId_ =
-    InventoryItemsGet
+    InventoryItemsGet'
     { _iigProFileId = _Coerce # pIigProFileId_
     , _iigId = _Coerce # pIigId_
     , _iigProjectId = _Coerce # pIigProjectId_
@@ -103,7 +103,9 @@ iigProjectId
 
 instance GoogleRequest InventoryItemsGet where
         type Rs InventoryItemsGet = InventoryItem
-        requestClient InventoryItemsGet{..}
+        type Scopes InventoryItemsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient InventoryItemsGet'{..}
           = go _iigProFileId _iigProjectId _iigId
               (Just AltJSON)
               dFAReportingService

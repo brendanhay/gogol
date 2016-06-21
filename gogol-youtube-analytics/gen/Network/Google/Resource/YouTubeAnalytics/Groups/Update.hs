@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeAnalytics.Groups.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type GroupsUpdateResource =
 -- | Modifies a group. For example, you could change a group\'s title.
 --
 -- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate
+data GroupsUpdate = GroupsUpdate'
     { _guPayload                :: !Group
     , _guOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupsUpdate
     :: Group -- ^ 'guPayload'
     -> GroupsUpdate
 groupsUpdate pGuPayload_ =
-    GroupsUpdate
+    GroupsUpdate'
     { _guPayload = pGuPayload_
     , _guOnBehalfOfContentOwner = Nothing
     }
@@ -97,7 +97,10 @@ guOnBehalfOfContentOwner
 
 instance GoogleRequest GroupsUpdate where
         type Rs GroupsUpdate = Group
-        requestClient GroupsUpdate{..}
+        type Scopes GroupsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient GroupsUpdate'{..}
           = go _guOnBehalfOfContentOwner (Just AltJSON)
               _guPayload
               youTubeAnalyticsService

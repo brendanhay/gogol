@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.DataSources.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type UsersDataSourcesListResource =
 -- using other scopes.
 --
 -- /See:/ 'usersDataSourcesList' smart constructor.
-data UsersDataSourcesList = UsersDataSourcesList
+data UsersDataSourcesList = UsersDataSourcesList'
     { _udslDataTypeName :: !(Maybe [Text])
     , _udslUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ usersDataSourcesList
     :: Text -- ^ 'udslUserId'
     -> UsersDataSourcesList
 usersDataSourcesList pUdslUserId_ =
-    UsersDataSourcesList
+    UsersDataSourcesList'
     { _udslDataTypeName = Nothing
     , _udslUserId = pUdslUserId_
     }
@@ -100,7 +100,14 @@ udslUserId
 instance GoogleRequest UsersDataSourcesList where
         type Rs UsersDataSourcesList =
              ListDataSourcesResponse
-        requestClient UsersDataSourcesList{..}
+        type Scopes UsersDataSourcesList =
+             '["https://www.googleapis.com/auth/fitness.activity.read",
+               "https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.read",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.read",
+               "https://www.googleapis.com/auth/fitness.location.write"]
+        requestClient UsersDataSourcesList'{..}
           = go _udslUserId (_udslDataTypeName ^. _Default)
               (Just AltJSON)
               fitnessService

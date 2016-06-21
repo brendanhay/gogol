@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Column.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type ColumnListResource =
 -- | Retrieves a list of columns.
 --
 -- /See:/ 'columnList'' smart constructor.
-data ColumnList' = ColumnList'
+data ColumnList' = ColumnList''
     { _clPageToken  :: !(Maybe Text)
     , _clTableId    :: !Text
     , _clMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ columnList'
     :: Text -- ^ 'clTableId'
     -> ColumnList'
 columnList' pClTableId_ =
-    ColumnList'
+    ColumnList''
     { _clPageToken = Nothing
     , _clTableId = pClTableId_
     , _clMaxResults = Nothing
@@ -99,7 +99,10 @@ clMaxResults
 
 instance GoogleRequest ColumnList' where
         type Rs ColumnList' = ColumnList
-        requestClient ColumnList'{..}
+        type Scopes ColumnList' =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient ColumnList''{..}
           = go _clTableId _clPageToken _clMaxResults
               (Just AltJSON)
               fusionTablesService

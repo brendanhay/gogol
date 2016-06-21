@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Messages.Import
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -78,8 +78,8 @@ type UsersMessagesImportResource =
                              UsersMessagesImportInternalDateSource
                              :>
                              QueryParam "alt" AltJSON :>
-                               QueryParam "uploadType" AltMedia :>
-                                 MultipartRelated '[JSON] Message RequestBody :>
+                               QueryParam "uploadType" Multipart :>
+                                 MultipartRelated '[JSON] Message :>
                                    Post '[JSON] Message
 
 -- | Imports a message into only this user\'s mailbox, with standard email
@@ -87,7 +87,7 @@ type UsersMessagesImportResource =
 -- not send a message.
 --
 -- /See:/ 'usersMessagesImport' smart constructor.
-data UsersMessagesImport = UsersMessagesImport
+data UsersMessagesImport = UsersMessagesImport'
     { _umiPayload            :: !Message
     , _umiUserId             :: !Text
     , _umiProcessForCalendar :: !Bool
@@ -113,10 +113,9 @@ data UsersMessagesImport = UsersMessagesImport
 -- * 'umiInternalDateSource'
 usersMessagesImport
     :: Message -- ^ 'umiPayload'
-    -> Text
     -> UsersMessagesImport
-usersMessagesImport pUmiPayload_ pUmiUserId_ =
-    UsersMessagesImport
+usersMessagesImport pUmiPayload_ =
+    UsersMessagesImport'
     { _umiPayload = pUmiPayload_
     , _umiUserId = "me"
     , _umiProcessForCalendar = False
@@ -165,7 +164,11 @@ umiInternalDateSource
 
 instance GoogleRequest UsersMessagesImport where
         type Rs UsersMessagesImport = Message
-        requestClient UsersMessagesImport{..}
+        type Scopes UsersMessagesImport =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.insert",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersMessagesImport'{..}
           = go _umiUserId (Just _umiProcessForCalendar)
               (Just _umiDeleted)
               (Just _umiNeverMarkSpam)
@@ -181,14 +184,16 @@ instance GoogleRequest UsersMessagesImport where
 instance GoogleRequest
          (MediaUpload UsersMessagesImport) where
         type Rs (MediaUpload UsersMessagesImport) = Message
+        type Scopes (MediaUpload UsersMessagesImport) =
+             Scopes UsersMessagesImport
         requestClient
-          (MediaUpload UsersMessagesImport{..} body)
+          (MediaUpload UsersMessagesImport'{..} body)
           = go _umiUserId (Just _umiProcessForCalendar)
               (Just _umiDeleted)
               (Just _umiNeverMarkSpam)
               (Just _umiInternalDateSource)
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _umiPayload
               body
               gmailService

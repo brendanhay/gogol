@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Photos.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersPhotosPatchResource =
 -- | Add a photo for the user. This method supports patch semantics.
 --
 -- /See:/ 'usersPhotosPatch' smart constructor.
-data UsersPhotosPatch = UsersPhotosPatch
+data UsersPhotosPatch = UsersPhotosPatch'
     { _uppPayload :: !UserPhoto
     , _uppUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ usersPhotosPatch
     -> Text -- ^ 'uppUserKey'
     -> UsersPhotosPatch
 usersPhotosPatch pUppPayload_ pUppUserKey_ =
-    UsersPhotosPatch
+    UsersPhotosPatch'
     { _uppPayload = pUppPayload_
     , _uppUserKey = pUppUserKey_
     }
@@ -90,7 +90,9 @@ uppUserKey
 
 instance GoogleRequest UsersPhotosPatch where
         type Rs UsersPhotosPatch = UserPhoto
-        requestClient UsersPhotosPatch{..}
+        type Scopes UsersPhotosPatch =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
+        requestClient UsersPhotosPatch'{..}
           = go _uppUserKey (Just AltJSON) _uppPayload
               directoryService
           where go

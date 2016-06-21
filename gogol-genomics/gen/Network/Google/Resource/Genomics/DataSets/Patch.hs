@@ -14,15 +14,18 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.DataSets.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a dataset. This method supports patch semantics.
+-- Updates a dataset. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics.
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.patch@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.patch@.
 module Network.Google.Resource.Genomics.DataSets.Patch
     (
     -- * REST Resource
@@ -65,10 +68,13 @@ type DataSetsPatchResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] DataSet :> Patch '[JSON] DataSet
 
--- | Updates a dataset. This method supports patch semantics.
+-- | Updates a dataset. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics.
 --
 -- /See:/ 'dataSetsPatch' smart constructor.
-data DataSetsPatch = DataSetsPatch
+data DataSetsPatch = DataSetsPatch'
     { _dspXgafv          :: !(Maybe Text)
     , _dspUploadProtocol :: !(Maybe Text)
     , _dspUpdateMask     :: !(Maybe Text)
@@ -109,7 +115,7 @@ dataSetsPatch
     -> Text -- ^ 'dspDataSetId'
     -> DataSetsPatch
 dataSetsPatch pDspPayload_ pDspDataSetId_ =
-    DataSetsPatch
+    DataSetsPatch'
     { _dspXgafv = Nothing
     , _dspUploadProtocol = Nothing
     , _dspUpdateMask = Nothing
@@ -179,7 +185,10 @@ dspCallback
 
 instance GoogleRequest DataSetsPatch where
         type Rs DataSetsPatch = DataSet
-        requestClient DataSetsPatch{..}
+        type Scopes DataSetsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient DataSetsPatch'{..}
           = go _dspDataSetId _dspXgafv _dspUploadProtocol
               _dspUpdateMask
               (Just _dspPp)

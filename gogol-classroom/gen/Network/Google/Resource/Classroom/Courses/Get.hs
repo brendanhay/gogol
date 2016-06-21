@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type CoursesGetResource =
 -- exists with the requested ID.
 --
 -- /See:/ 'coursesGet' smart constructor.
-data CoursesGet = CoursesGet
+data CoursesGet = CoursesGet'
     { _cgXgafv          :: !(Maybe Text)
     , _cgUploadProtocol :: !(Maybe Text)
     , _cgPp             :: !Bool
@@ -104,7 +104,7 @@ coursesGet
     :: Text -- ^ 'cgId'
     -> CoursesGet
 coursesGet pCgId_ =
-    CoursesGet
+    CoursesGet'
     { _cgXgafv = Nothing
     , _cgUploadProtocol = Nothing
     , _cgPp = True
@@ -158,7 +158,10 @@ cgCallback
 
 instance GoogleRequest CoursesGet where
         type Rs CoursesGet = Course
-        requestClient CoursesGet{..}
+        type Scopes CoursesGet =
+             '["https://www.googleapis.com/auth/classroom.courses",
+               "https://www.googleapis.com/auth/classroom.courses.readonly"]
+        requestClient CoursesGet'{..}
           = go _cgId _cgXgafv _cgUploadProtocol (Just _cgPp)
               _cgAccessToken
               _cgUploadType

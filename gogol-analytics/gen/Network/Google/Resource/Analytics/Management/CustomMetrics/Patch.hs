@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ManagementCustomMetricsPatchResource =
 -- | Updates an existing custom metric. This method supports patch semantics.
 --
 -- /See:/ 'managementCustomMetricsPatch' smart constructor.
-data ManagementCustomMetricsPatch = ManagementCustomMetricsPatch
+data ManagementCustomMetricsPatch = ManagementCustomMetricsPatch'
     { _mcmpCustomMetricId              :: !Text
     , _mcmpWebPropertyId               :: !Text
     , _mcmpIgnoreCustomDataSourceLinks :: !Bool
@@ -91,7 +91,7 @@ managementCustomMetricsPatch
     -> Text -- ^ 'mcmpAccountId'
     -> ManagementCustomMetricsPatch
 managementCustomMetricsPatch pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpPayload_ pMcmpAccountId_ =
-    ManagementCustomMetricsPatch
+    ManagementCustomMetricsPatch'
     { _mcmpCustomMetricId = pMcmpCustomMetricId_
     , _mcmpWebPropertyId = pMcmpWebPropertyId_
     , _mcmpIgnoreCustomDataSourceLinks = False
@@ -132,7 +132,9 @@ mcmpAccountId
 instance GoogleRequest ManagementCustomMetricsPatch
          where
         type Rs ManagementCustomMetricsPatch = CustomMetric
-        requestClient ManagementCustomMetricsPatch{..}
+        type Scopes ManagementCustomMetricsPatch =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementCustomMetricsPatch'{..}
           = go _mcmpAccountId _mcmpWebPropertyId
               _mcmpCustomMetricId
               (Just _mcmpIgnoreCustomDataSourceLinks)

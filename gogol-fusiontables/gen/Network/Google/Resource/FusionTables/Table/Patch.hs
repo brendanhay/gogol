@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Table.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type TablePatchResource =
 -- semantics.
 --
 -- /See:/ 'tablePatch' smart constructor.
-data TablePatch = TablePatch
+data TablePatch = TablePatch'
     { _tpPayload               :: !Table
     , _tpReplaceViewDefinition :: !(Maybe Bool)
     , _tpTableId               :: !Text
@@ -79,7 +79,7 @@ tablePatch
     -> Text -- ^ 'tpTableId'
     -> TablePatch
 tablePatch pTpPayload_ pTpTableId_ =
-    TablePatch
+    TablePatch'
     { _tpPayload = pTpPayload_
     , _tpReplaceViewDefinition = Nothing
     , _tpTableId = pTpTableId_
@@ -105,7 +105,9 @@ tpTableId
 
 instance GoogleRequest TablePatch where
         type Rs TablePatch = Table
-        requestClient TablePatch{..}
+        type Scopes TablePatch =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient TablePatch'{..}
           = go _tpTableId _tpReplaceViewDefinition
               (Just AltJSON)
               _tpPayload

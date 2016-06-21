@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.URLShortener.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,7 +20,7 @@ module Network.Google.URLShortener.Types
       uRLShortenerService
 
     -- * OAuth Scopes
-    , urlshortenerScope
+    , urlShortenerScope
 
     -- * URL
     , URL
@@ -77,11 +78,11 @@ import           Network.Google.URLShortener.Types.Product
 import           Network.Google.URLShortener.Types.Sum
 
 -- | Default request referring to version 'v1' of the URL Shortener API. This contains the host and root path used as a starting point for constructing service requests.
-uRLShortenerService :: Service
+uRLShortenerService :: ServiceConfig
 uRLShortenerService
   = defaultService (ServiceId "urlshortener:v1")
       "www.googleapis.com"
 
 -- | Manage your goo.gl short URLs
-urlshortenerScope :: OAuthScope
-urlshortenerScope = "https://www.googleapis.com/auth/urlshortener";
+urlShortenerScope :: Proxy '["https://www.googleapis.com/auth/urlshortener"]
+urlShortenerScope = Proxy;

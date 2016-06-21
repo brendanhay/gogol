@@ -14,14 +14,15 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroupManagers.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the specified managed instance group and all of the instances in
--- that group.
+-- that group. Note that the instance group must not belong to a backend
+-- service. Read Deleting an instance group for more information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.delete@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
@@ -56,10 +57,11 @@ type InstanceGroupManagersDeleteResource =
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified managed instance group and all of the instances in
--- that group.
+-- that group. Note that the instance group must not belong to a backend
+-- service. Read Deleting an instance group for more information.
 --
 -- /See:/ 'instanceGroupManagersDelete' smart constructor.
-data InstanceGroupManagersDelete = InstanceGroupManagersDelete
+data InstanceGroupManagersDelete = InstanceGroupManagersDelete'
     { _igmdProject              :: !Text
     , _igmdInstanceGroupManager :: !Text
     , _igmdZone                 :: !Text
@@ -80,13 +82,13 @@ instanceGroupManagersDelete
     -> Text -- ^ 'igmdZone'
     -> InstanceGroupManagersDelete
 instanceGroupManagersDelete pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ =
-    InstanceGroupManagersDelete
+    InstanceGroupManagersDelete'
     { _igmdProject = pIgmdProject_
     , _igmdInstanceGroupManager = pIgmdInstanceGroupManager_
     , _igmdZone = pIgmdZone_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmdProject :: Lens' InstanceGroupManagersDelete Text
 igmdProject
   = lens _igmdProject (\ s a -> s{_igmdProject = a})
@@ -104,7 +106,10 @@ igmdZone = lens _igmdZone (\ s a -> s{_igmdZone = a})
 instance GoogleRequest InstanceGroupManagersDelete
          where
         type Rs InstanceGroupManagersDelete = Operation
-        requestClient InstanceGroupManagersDelete{..}
+        type Scopes InstanceGroupManagersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceGroupManagersDelete'{..}
           = go _igmdProject _igmdZone _igmdInstanceGroupManager
               (Just AltJSON)
               computeService

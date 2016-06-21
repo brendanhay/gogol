@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type ObjectsPatchResource =
 -- | Updates an object\'s metadata. This method supports patch semantics.
 --
 -- /See:/ 'objectsPatch' smart constructor.
-data ObjectsPatch = ObjectsPatch
+data ObjectsPatch = ObjectsPatch'
     { _opIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _opIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _opIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -114,7 +114,7 @@ objectsPatch
     -> Text -- ^ 'opObject'
     -> ObjectsPatch
 objectsPatch pOpBucket_ pOpPayload_ pOpObject_ =
-    ObjectsPatch
+    ObjectsPatch'
     { _opIfMetagenerationMatch = Nothing
     , _opIfGenerationNotMatch = Nothing
     , _opIfGenerationMatch = Nothing
@@ -193,7 +193,10 @@ opGeneration
 
 instance GoogleRequest ObjectsPatch where
         type Rs ObjectsPatch = Object
-        requestClient ObjectsPatch{..}
+        type Scopes ObjectsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient ObjectsPatch'{..}
           = go _opBucket _opObject _opIfMetagenerationMatch
               _opIfGenerationNotMatch
               _opIfGenerationMatch

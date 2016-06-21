@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type PurchasesSubscriptionsRevokeResource =
 -- recurring.
 --
 -- /See:/ 'purchasesSubscriptionsRevoke' smart constructor.
-data PurchasesSubscriptionsRevoke = PurchasesSubscriptionsRevoke
+data PurchasesSubscriptionsRevoke = PurchasesSubscriptionsRevoke'
     { _pPackageName    :: !Text
     , _pToken          :: !Text
     , _pSubscriptionId :: !Text
@@ -83,7 +83,7 @@ purchasesSubscriptionsRevoke
     -> Text -- ^ 'pSubscriptionId'
     -> PurchasesSubscriptionsRevoke
 purchasesSubscriptionsRevoke pPPackageName_ pPToken_ pPSubscriptionId_ =
-    PurchasesSubscriptionsRevoke
+    PurchasesSubscriptionsRevoke'
     { _pPackageName = pPPackageName_
     , _pToken = pPToken_
     , _pSubscriptionId = pPSubscriptionId_
@@ -109,7 +109,9 @@ pSubscriptionId
 instance GoogleRequest PurchasesSubscriptionsRevoke
          where
         type Rs PurchasesSubscriptionsRevoke = ()
-        requestClient PurchasesSubscriptionsRevoke{..}
+        type Scopes PurchasesSubscriptionsRevoke =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient PurchasesSubscriptionsRevoke'{..}
           = go _pPackageName _pSubscriptionId _pToken
               (Just AltJSON)
               androidPublisherService

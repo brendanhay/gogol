@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -74,7 +74,7 @@ type CoursesUpdateResource =
 -- following request errors: * CourseNotModifiable
 --
 -- /See:/ 'coursesUpdate' smart constructor.
-data CoursesUpdate = CoursesUpdate
+data CoursesUpdate = CoursesUpdate'
     { _cuXgafv          :: !(Maybe Text)
     , _cuUploadProtocol :: !(Maybe Text)
     , _cuPp             :: !Bool
@@ -112,7 +112,7 @@ coursesUpdate
     -> Text -- ^ 'cuId'
     -> CoursesUpdate
 coursesUpdate pCuPayload_ pCuId_ =
-    CoursesUpdate
+    CoursesUpdate'
     { _cuXgafv = Nothing
     , _cuUploadProtocol = Nothing
     , _cuPp = True
@@ -172,7 +172,9 @@ cuCallback
 
 instance GoogleRequest CoursesUpdate where
         type Rs CoursesUpdate = Course
-        requestClient CoursesUpdate{..}
+        type Scopes CoursesUpdate =
+             '["https://www.googleapis.com/auth/classroom.courses"]
+        requestClient CoursesUpdate'{..}
           = go _cuId _cuXgafv _cuUploadProtocol (Just _cuPp)
               _cuAccessToken
               _cuUploadType

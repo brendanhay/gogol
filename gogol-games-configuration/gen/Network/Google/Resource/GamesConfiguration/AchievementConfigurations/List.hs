@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AchievementConfigurationsListResource =
 -- | Returns a list of the achievement configurations in this application.
 --
 -- /See:/ 'achievementConfigurationsList' smart constructor.
-data AchievementConfigurationsList = AchievementConfigurationsList
+data AchievementConfigurationsList = AchievementConfigurationsList'
     { _aclApplicationId :: !Text
     , _aclPageToken     :: !(Maybe Text)
     , _aclMaxResults    :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ achievementConfigurationsList
     :: Text -- ^ 'aclApplicationId'
     -> AchievementConfigurationsList
 achievementConfigurationsList pAclApplicationId_ =
-    AchievementConfigurationsList
+    AchievementConfigurationsList'
     { _aclApplicationId = pAclApplicationId_
     , _aclPageToken = Nothing
     , _aclMaxResults = Nothing
@@ -106,7 +106,9 @@ instance GoogleRequest AchievementConfigurationsList
          where
         type Rs AchievementConfigurationsList =
              AchievementConfigurationListResponse
-        requestClient AchievementConfigurationsList{..}
+        type Scopes AchievementConfigurationsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient AchievementConfigurationsList'{..}
           = go _aclApplicationId _aclPageToken _aclMaxResults
               (Just AltJSON)
               gamesConfigurationService

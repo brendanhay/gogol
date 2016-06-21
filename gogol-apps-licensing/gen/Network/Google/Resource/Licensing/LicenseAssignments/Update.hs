@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Licensing.LicenseAssignments.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type LicenseAssignmentsUpdateResource =
 -- | Assign License.
 --
 -- /See:/ 'licenseAssignmentsUpdate' smart constructor.
-data LicenseAssignmentsUpdate = LicenseAssignmentsUpdate
+data LicenseAssignmentsUpdate = LicenseAssignmentsUpdate'
     { _lauSKUId     :: !Text
     , _lauPayload   :: !LicenseAssignment
     , _lauUserId    :: !Text
@@ -86,7 +86,7 @@ licenseAssignmentsUpdate
     -> Text -- ^ 'lauProductId'
     -> LicenseAssignmentsUpdate
 licenseAssignmentsUpdate pLauSKUId_ pLauPayload_ pLauUserId_ pLauProductId_ =
-    LicenseAssignmentsUpdate
+    LicenseAssignmentsUpdate'
     { _lauSKUId = pLauSKUId_
     , _lauPayload = pLauPayload_
     , _lauUserId = pLauUserId_
@@ -114,7 +114,9 @@ lauProductId
 
 instance GoogleRequest LicenseAssignmentsUpdate where
         type Rs LicenseAssignmentsUpdate = LicenseAssignment
-        requestClient LicenseAssignmentsUpdate{..}
+        type Scopes LicenseAssignmentsUpdate =
+             '["https://www.googleapis.com/auth/apps.licensing"]
+        requestClient LicenseAssignmentsUpdate'{..}
           = go _lauProductId _lauSKUId _lauUserId
               (Just AltJSON)
               _lauPayload

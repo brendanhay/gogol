@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Tasks.Tasks.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type TasksListResource =
 -- | Returns all tasks in the specified task list.
 --
 -- /See:/ 'tasksList' smart constructor.
-data TasksList = TasksList
+data TasksList = TasksList'
     { _tlDueMax        :: !(Maybe Text)
     , _tlShowDeleted   :: !(Maybe Bool)
     , _tlShowCompleted :: !(Maybe Bool)
@@ -115,7 +115,7 @@ tasksList
     :: Text -- ^ 'tlTaskList'
     -> TasksList
 tasksList pTlTaskList_ =
-    TasksList
+    TasksList'
     { _tlDueMax = Nothing
     , _tlShowDeleted = Nothing
     , _tlShowCompleted = Nothing
@@ -199,7 +199,10 @@ tlMaxResults
 
 instance GoogleRequest TasksList where
         type Rs TasksList = Tasks
-        requestClient TasksList{..}
+        type Scopes TasksList =
+             '["https://www.googleapis.com/auth/tasks",
+               "https://www.googleapis.com/auth/tasks.readonly"]
+        requestClient TasksList'{..}
           = go _tlTaskList _tlDueMax _tlShowDeleted
               _tlShowCompleted
               _tlDueMin

@@ -14,14 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Autoscalers.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an autoscaler resource in the specified project using the data
--- included in the request.
+-- Updates an autoscaler in the specified project using the data included
+-- in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.update@.
 module Network.Google.Resource.Compute.Autoscalers.Update
@@ -57,11 +57,11 @@ type AutoscalersUpdateResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Autoscaler :> Put '[JSON] Operation
 
--- | Updates an autoscaler resource in the specified project using the data
--- included in the request.
+-- | Updates an autoscaler in the specified project using the data included
+-- in the request.
 --
 -- /See:/ 'autoscalersUpdate' smart constructor.
-data AutoscalersUpdate = AutoscalersUpdate
+data AutoscalersUpdate = AutoscalersUpdate'
     { _auProject    :: !Text
     , _auZone       :: !Text
     , _auPayload    :: !Autoscaler
@@ -85,19 +85,19 @@ autoscalersUpdate
     -> Autoscaler -- ^ 'auPayload'
     -> AutoscalersUpdate
 autoscalersUpdate pAuProject_ pAuZone_ pAuPayload_ =
-    AutoscalersUpdate
+    AutoscalersUpdate'
     { _auProject = pAuProject_
     , _auZone = pAuZone_
     , _auPayload = pAuPayload_
     , _auAutoscaler = Nothing
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 auProject :: Lens' AutoscalersUpdate Text
 auProject
   = lens _auProject (\ s a -> s{_auProject = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 auZone :: Lens' AutoscalersUpdate Text
 auZone = lens _auZone (\ s a -> s{_auZone = a})
 
@@ -106,14 +106,17 @@ auPayload :: Lens' AutoscalersUpdate Autoscaler
 auPayload
   = lens _auPayload (\ s a -> s{_auPayload = a})
 
--- | Name of the autoscaler resource to update.
+-- | Name of the autoscaler to update.
 auAutoscaler :: Lens' AutoscalersUpdate (Maybe Text)
 auAutoscaler
   = lens _auAutoscaler (\ s a -> s{_auAutoscaler = a})
 
 instance GoogleRequest AutoscalersUpdate where
         type Rs AutoscalersUpdate = Operation
-        requestClient AutoscalersUpdate{..}
+        type Scopes AutoscalersUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient AutoscalersUpdate'{..}
           = go _auProject _auZone _auAutoscaler (Just AltJSON)
               _auPayload
               computeService

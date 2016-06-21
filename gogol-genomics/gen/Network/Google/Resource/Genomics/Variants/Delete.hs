@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Variants.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a variant.
+-- Deletes a variant. For the definitions of variants and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.delete@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.delete@.
 module Network.Google.Resource.Genomics.Variants.Delete
     (
     -- * REST Resource
@@ -61,10 +63,12 @@ type VariantsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a variant.
+-- | Deletes a variant. For the definitions of variants and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantsDelete' smart constructor.
-data VariantsDelete = VariantsDelete
+data VariantsDelete = VariantsDelete'
     { _vdXgafv          :: !(Maybe Text)
     , _vdUploadProtocol :: !(Maybe Text)
     , _vdPp             :: !Bool
@@ -98,7 +102,7 @@ variantsDelete
     :: Text -- ^ 'vdVariantId'
     -> VariantsDelete
 variantsDelete pVdVariantId_ =
-    VariantsDelete
+    VariantsDelete'
     { _vdXgafv = Nothing
     , _vdUploadProtocol = Nothing
     , _vdPp = True
@@ -152,7 +156,10 @@ vdCallback
 
 instance GoogleRequest VariantsDelete where
         type Rs VariantsDelete = Empty
-        requestClient VariantsDelete{..}
+        type Scopes VariantsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient VariantsDelete'{..}
           = go _vdVariantId _vdXgafv _vdUploadProtocol
               (Just _vdPp)
               _vdAccessToken

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Assets.Permissions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AssetsPermissionsListResource =
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ 'assetsPermissionsList' smart constructor.
-newtype AssetsPermissionsList = AssetsPermissionsList
+newtype AssetsPermissionsList = AssetsPermissionsList'
     { _assId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ assetsPermissionsList
     :: Text -- ^ 'assId'
     -> AssetsPermissionsList
 assetsPermissionsList pAssId_ =
-    AssetsPermissionsList
+    AssetsPermissionsList'
     { _assId = pAssId_
     }
 
@@ -77,7 +77,10 @@ assId = lens _assId (\ s a -> s{_assId = a})
 instance GoogleRequest AssetsPermissionsList where
         type Rs AssetsPermissionsList =
              PermissionsListResponse
-        requestClient AssetsPermissionsList{..}
+        type Scopes AssetsPermissionsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient AssetsPermissionsList'{..}
           = go _assId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

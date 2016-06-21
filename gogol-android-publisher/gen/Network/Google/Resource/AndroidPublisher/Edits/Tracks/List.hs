@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Tracks.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type EditsTracksListResource =
 -- | Lists all the track configurations for this edit.
 --
 -- /See:/ 'editsTracksList' smart constructor.
-data EditsTracksList = EditsTracksList
+data EditsTracksList = EditsTracksList'
     { _etlPackageName :: !Text
     , _etlEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ editsTracksList
     -> Text -- ^ 'etlEditId'
     -> EditsTracksList
 editsTracksList pEtlPackageName_ pEtlEditId_ =
-    EditsTracksList
+    EditsTracksList'
     { _etlPackageName = pEtlPackageName_
     , _etlEditId = pEtlEditId_
     }
@@ -92,7 +92,9 @@ etlEditId
 
 instance GoogleRequest EditsTracksList where
         type Rs EditsTracksList = TracksListResponse
-        requestClient EditsTracksList{..}
+        type Scopes EditsTracksList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsTracksList'{..}
           = go _etlPackageName _etlEditId (Just AltJSON)
               androidPublisherService
           where go

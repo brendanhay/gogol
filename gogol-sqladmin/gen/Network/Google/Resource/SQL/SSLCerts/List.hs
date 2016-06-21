@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.SSLCerts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type SSLCertsListResource =
 -- | Lists all of the current SSL certificates for the instance.
 --
 -- /See:/ 'sslCertsList' smart constructor.
-data SSLCertsList = SSLCertsList
+data SSLCertsList = SSLCertsList'
     { _sclProject  :: !Text
     , _sclInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ sslCertsList
     -> Text -- ^ 'sclInstance'
     -> SSLCertsList
 sslCertsList pSclProject_ pSclInstance_ =
-    SSLCertsList
+    SSLCertsList'
     { _sclProject = pSclProject_
     , _sclInstance = pSclInstance_
     }
@@ -90,7 +90,10 @@ sclInstance
 
 instance GoogleRequest SSLCertsList where
         type Rs SSLCertsList = SSLCertsListResponse
-        requestClient SSLCertsList{..}
+        type Scopes SSLCertsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient SSLCertsList'{..}
           = go _sclProject _sclInstance (Just AltJSON)
               sQLAdminService
           where go

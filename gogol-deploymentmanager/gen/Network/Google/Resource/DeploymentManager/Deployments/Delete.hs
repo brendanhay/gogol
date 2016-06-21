@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DeploymentManager.Deployments.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type DeploymentsDeleteResource =
 -- | Deletes a deployment and all of the resources in the deployment.
 --
 -- /See:/ 'deploymentsDelete' smart constructor.
-data DeploymentsDelete = DeploymentsDelete
+data DeploymentsDelete = DeploymentsDelete'
     { _ddProject    :: !Text
     , _ddDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ deploymentsDelete
     -> Text -- ^ 'ddDeployment'
     -> DeploymentsDelete
 deploymentsDelete pDdProject_ pDdDeployment_ =
-    DeploymentsDelete
+    DeploymentsDelete'
     { _ddProject = pDdProject_
     , _ddDeployment = pDdDeployment_
     }
@@ -89,7 +89,10 @@ ddDeployment
 
 instance GoogleRequest DeploymentsDelete where
         type Rs DeploymentsDelete = Operation
-        requestClient DeploymentsDelete{..}
+        type Scopes DeploymentsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient DeploymentsDelete'{..}
           = go _ddProject _ddDeployment (Just AltJSON)
               deploymentManagerService
           where go

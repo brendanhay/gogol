@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Networks.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified network resource.
+-- Returns the specified network. Get a list of available networks by
+-- making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.networks.get@.
 module Network.Google.Resource.Compute.Networks.Get
@@ -52,10 +53,11 @@ type NetworksGetResource =
                  Capture "network" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Network
 
--- | Returns the specified network resource.
+-- | Returns the specified network. Get a list of available networks by
+-- making a list() request.
 --
 -- /See:/ 'networksGet' smart constructor.
-data NetworksGet = NetworksGet
+data NetworksGet = NetworksGet'
     { _ngProject :: !Text
     , _ngNetwork :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +74,7 @@ networksGet
     -> Text -- ^ 'ngNetwork'
     -> NetworksGet
 networksGet pNgProject_ pNgNetwork_ =
-    NetworksGet
+    NetworksGet'
     { _ngProject = pNgProject_
     , _ngNetwork = pNgNetwork_
     }
@@ -82,14 +84,18 @@ ngProject :: Lens' NetworksGet Text
 ngProject
   = lens _ngProject (\ s a -> s{_ngProject = a})
 
--- | Name of the network resource to return.
+-- | Name of the network to return.
 ngNetwork :: Lens' NetworksGet Text
 ngNetwork
   = lens _ngNetwork (\ s a -> s{_ngNetwork = a})
 
 instance GoogleRequest NetworksGet where
         type Rs NetworksGet = Network
-        requestClient NetworksGet{..}
+        type Scopes NetworksGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient NetworksGet'{..}
           = go _ngProject _ngNetwork (Just AltJSON)
               computeService
           where go

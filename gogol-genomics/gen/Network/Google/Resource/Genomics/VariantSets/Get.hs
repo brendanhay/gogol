@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.VariantSets.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a variant set by ID.
+-- Gets a variant set by ID. For the definitions of variant sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.get@.
 module Network.Google.Resource.Genomics.VariantSets.Get
     (
     -- * REST Resource
@@ -61,10 +63,12 @@ type VariantSetsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] VariantSet
 
--- | Gets a variant set by ID.
+-- | Gets a variant set by ID. For the definitions of variant sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSetsGet' smart constructor.
-data VariantSetsGet = VariantSetsGet
+data VariantSetsGet = VariantSetsGet'
     { _vsgXgafv          :: !(Maybe Text)
     , _vsgUploadProtocol :: !(Maybe Text)
     , _vsgPp             :: !Bool
@@ -98,7 +102,7 @@ variantSetsGet
     :: Text -- ^ 'vsgVariantSetId'
     -> VariantSetsGet
 variantSetsGet pVsgVariantSetId_ =
-    VariantSetsGet
+    VariantSetsGet'
     { _vsgXgafv = Nothing
     , _vsgUploadProtocol = Nothing
     , _vsgPp = True
@@ -154,7 +158,11 @@ vsgCallback
 
 instance GoogleRequest VariantSetsGet where
         type Rs VariantSetsGet = VariantSet
-        requestClient VariantSetsGet{..}
+        type Scopes VariantSetsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient VariantSetsGet'{..}
           = go _vsgVariantSetId _vsgXgafv _vsgUploadProtocol
               (Just _vsgPp)
               _vsgAccessToken

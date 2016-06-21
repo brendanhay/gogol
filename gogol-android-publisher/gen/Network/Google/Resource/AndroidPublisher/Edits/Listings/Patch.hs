@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type EditsListingsPatchResource =
 -- semantics.
 --
 -- /See:/ 'editsListingsPatch' smart constructor.
-data EditsListingsPatch = EditsListingsPatch
+data EditsListingsPatch = EditsListingsPatch'
     { _elpPackageName :: !Text
     , _elpPayload     :: !Listing
     , _elpLanguage    :: !Text
@@ -86,7 +86,7 @@ editsListingsPatch
     -> Text -- ^ 'elpEditId'
     -> EditsListingsPatch
 editsListingsPatch pElpPackageName_ pElpPayload_ pElpLanguage_ pElpEditId_ =
-    EditsListingsPatch
+    EditsListingsPatch'
     { _elpPackageName = pElpPackageName_
     , _elpPayload = pElpPayload_
     , _elpLanguage = pElpLanguage_
@@ -118,7 +118,9 @@ elpEditId
 
 instance GoogleRequest EditsListingsPatch where
         type Rs EditsListingsPatch = Listing
-        requestClient EditsListingsPatch{..}
+        type Scopes EditsListingsPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsListingsPatch'{..}
           = go _elpPackageName _elpEditId _elpLanguage
               (Just AltJSON)
               _elpPayload

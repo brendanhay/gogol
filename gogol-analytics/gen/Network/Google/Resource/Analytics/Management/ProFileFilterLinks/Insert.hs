@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type ManagementProFileFilterLinksInsertResource =
 -- | Create a new profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksInsert' smart constructor.
-data ManagementProFileFilterLinksInsert = ManagementProFileFilterLinksInsert
+data ManagementProFileFilterLinksInsert = ManagementProFileFilterLinksInsert'
     { _mpffliWebPropertyId :: !Text
     , _mpffliProFileId     :: !Text
     , _mpffliPayload       :: !ProFileFilterLink
@@ -87,7 +87,7 @@ managementProFileFilterLinksInsert
     -> Text -- ^ 'mpffliAccountId'
     -> ManagementProFileFilterLinksInsert
 managementProFileFilterLinksInsert pMpffliWebPropertyId_ pMpffliProFileId_ pMpffliPayload_ pMpffliAccountId_ =
-    ManagementProFileFilterLinksInsert
+    ManagementProFileFilterLinksInsert'
     { _mpffliWebPropertyId = pMpffliWebPropertyId_
     , _mpffliProFileId = pMpffliProFileId_
     , _mpffliPayload = pMpffliPayload_
@@ -122,7 +122,9 @@ instance GoogleRequest
          ManagementProFileFilterLinksInsert where
         type Rs ManagementProFileFilterLinksInsert =
              ProFileFilterLink
-        requestClient ManagementProFileFilterLinksInsert{..}
+        type Scopes ManagementProFileFilterLinksInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementProFileFilterLinksInsert'{..}
           = go _mpffliAccountId _mpffliWebPropertyId
               _mpffliProFileId
               (Just AltJSON)

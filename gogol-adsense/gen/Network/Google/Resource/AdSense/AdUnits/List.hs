@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.AdUnits.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type AdUnitsListResource =
 -- | List all ad units in the specified ad client for this AdSense account.
 --
 -- /See:/ 'adUnitsList' smart constructor.
-data AdUnitsList = AdUnitsList
+data AdUnitsList = AdUnitsList'
     { _aulIncludeInactive :: !(Maybe Bool)
     , _aulAdClientId      :: !Text
     , _aulPageToken       :: !(Maybe Text)
@@ -80,7 +80,7 @@ adUnitsList
     :: Text -- ^ 'aulAdClientId'
     -> AdUnitsList
 adUnitsList pAulAdClientId_ =
-    AdUnitsList
+    AdUnitsList'
     { _aulIncludeInactive = Nothing
     , _aulAdClientId = pAulAdClientId_
     , _aulPageToken = Nothing
@@ -116,7 +116,10 @@ aulMaxResults
 
 instance GoogleRequest AdUnitsList where
         type Rs AdUnitsList = AdUnits
-        requestClient AdUnitsList{..}
+        type Scopes AdUnitsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AdUnitsList'{..}
           = go _aulAdClientId _aulIncludeInactive _aulPageToken
               _aulMaxResults
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.LiveBroadcasts.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type LiveBroadcastsUpdateResource =
 -- settings defined in the liveBroadcast resource\'s contentDetails object.
 --
 -- /See:/ 'liveBroadcastsUpdate' smart constructor.
-data LiveBroadcastsUpdate = LiveBroadcastsUpdate
+data LiveBroadcastsUpdate = LiveBroadcastsUpdate'
     { _lbuPart                          :: !Text
     , _lbuPayload                       :: !LiveBroadcast
     , _lbuOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -83,7 +83,7 @@ liveBroadcastsUpdate
     -> LiveBroadcast -- ^ 'lbuPayload'
     -> LiveBroadcastsUpdate
 liveBroadcastsUpdate pLbuPart_ pLbuPayload_ =
-    LiveBroadcastsUpdate
+    LiveBroadcastsUpdate'
     { _lbuPart = pLbuPart_
     , _lbuPayload = pLbuPayload_
     , _lbuOnBehalfOfContentOwner = Nothing
@@ -149,7 +149,10 @@ lbuOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest LiveBroadcastsUpdate where
         type Rs LiveBroadcastsUpdate = LiveBroadcast
-        requestClient LiveBroadcastsUpdate{..}
+        type Scopes LiveBroadcastsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient LiveBroadcastsUpdate'{..}
           = go (Just _lbuPart) _lbuOnBehalfOfContentOwner
               _lbuOnBehalfOfContentOwnerChannel
               (Just AltJSON)

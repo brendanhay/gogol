@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ResourceViews.ZoneViews.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type ZoneViewsListResource =
 -- | List resource views.
 --
 -- /See:/ 'zoneViewsList'' smart constructor.
-data ZoneViewsList' = ZoneViewsList'
+data ZoneViewsList' = ZoneViewsList''
     { _zvlProject    :: !Text
     , _zvlZone       :: !Text
     , _zvlPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ zoneViewsList'
     -> Text -- ^ 'zvlZone'
     -> ZoneViewsList'
 zoneViewsList' pZvlProject_ pZvlZone_ =
-    ZoneViewsList'
+    ZoneViewsList''
     { _zvlProject = pZvlProject_
     , _zvlZone = pZvlZone_
     , _zvlPageToken = Nothing
@@ -115,7 +115,14 @@ zvlMaxResults
 
 instance GoogleRequest ZoneViewsList' where
         type Rs ZoneViewsList' = ZoneViewsList
-        requestClient ZoneViewsList'{..}
+        type Scopes ZoneViewsList' =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+        requestClient ZoneViewsList''{..}
           = go _zvlProject _zvlZone _zvlPageToken
               (Just _zvlMaxResults)
               (Just AltJSON)

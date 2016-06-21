@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Circles.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type CirclesGetResource =
 -- | Get a circle.
 --
 -- /See:/ 'circlesGet' smart constructor.
-newtype CirclesGet = CirclesGet
+newtype CirclesGet = CirclesGet'
     { _cgCircleId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ circlesGet
     :: Text -- ^ 'cgCircleId'
     -> CirclesGet
 circlesGet pCgCircleId_ =
-    CirclesGet
+    CirclesGet'
     { _cgCircleId = pCgCircleId_
     }
 
@@ -75,7 +75,10 @@ cgCircleId
 
 instance GoogleRequest CirclesGet where
         type Rs CirclesGet = Circle
-        requestClient CirclesGet{..}
+        type Scopes CirclesGet =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient CirclesGet'{..}
           = go _cgCircleId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CirclesGetResource)

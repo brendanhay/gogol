@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Watermarks.Set
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,14 +61,14 @@ type WatermarksSetResource =
                  QueryParam "channelId" Text :>
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "alt" AltJSON :>
-                       QueryParam "uploadType" AltMedia :>
-                         MultipartRelated '[JSON] InvideoBranding RequestBody
-                           :> Post '[JSON] ()
+                       QueryParam "uploadType" Multipart :>
+                         MultipartRelated '[JSON] InvideoBranding :>
+                           Post '[JSON] ()
 
 -- | Uploads a watermark image to YouTube and sets it for a channel.
 --
 -- /See:/ 'watermarksSet' smart constructor.
-data WatermarksSet = WatermarksSet
+data WatermarksSet = WatermarksSet'
     { _wsChannelId              :: !Text
     , _wsPayload                :: !InvideoBranding
     , _wsOnBehalfOfContentOwner :: !(Maybe Text)
@@ -88,7 +88,7 @@ watermarksSet
     -> InvideoBranding -- ^ 'wsPayload'
     -> WatermarksSet
 watermarksSet pWsChannelId_ pWsPayload_ =
-    WatermarksSet
+    WatermarksSet'
     { _wsChannelId = pWsChannelId_
     , _wsPayload = pWsPayload_
     , _wsOnBehalfOfContentOwner = Nothing
@@ -122,7 +122,12 @@ wsOnBehalfOfContentOwner
 
 instance GoogleRequest WatermarksSet where
         type Rs WatermarksSet = ()
-        requestClient WatermarksSet{..}
+        type Scopes WatermarksSet =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.upload",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient WatermarksSet'{..}
           = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               (Just AltJSON)
               _wsPayload
@@ -134,10 +139,12 @@ instance GoogleRequest WatermarksSet where
 instance GoogleRequest (MediaUpload WatermarksSet)
          where
         type Rs (MediaUpload WatermarksSet) = ()
-        requestClient (MediaUpload WatermarksSet{..} body)
+        type Scopes (MediaUpload WatermarksSet) =
+             Scopes WatermarksSet
+        requestClient (MediaUpload WatermarksSet'{..} body)
           = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _wsPayload
               body
               youTubeService

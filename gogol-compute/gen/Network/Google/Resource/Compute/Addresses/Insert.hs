@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Addresses.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type AddressesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'addressesInsert' smart constructor.
-data AddressesInsert = AddressesInsert
+data AddressesInsert = AddressesInsert'
     { _aiProject :: !Text
     , _aiPayload :: !Address
     , _aiRegion  :: !Text
@@ -80,7 +80,7 @@ addressesInsert
     -> Text -- ^ 'aiRegion'
     -> AddressesInsert
 addressesInsert pAiProject_ pAiPayload_ pAiRegion_ =
-    AddressesInsert
+    AddressesInsert'
     { _aiProject = pAiProject_
     , _aiPayload = pAiPayload_
     , _aiRegion = pAiRegion_
@@ -96,13 +96,16 @@ aiPayload :: Lens' AddressesInsert Address
 aiPayload
   = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 aiRegion :: Lens' AddressesInsert Text
 aiRegion = lens _aiRegion (\ s a -> s{_aiRegion = a})
 
 instance GoogleRequest AddressesInsert where
         type Rs AddressesInsert = Operation
-        requestClient AddressesInsert{..}
+        type Scopes AddressesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient AddressesInsert'{..}
           = go _aiProject _aiRegion (Just AltJSON) _aiPayload
               computeService
           where go

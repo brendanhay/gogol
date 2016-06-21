@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Details.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type EditsDetailsUpdateResource =
 -- | Updates app details for this edit.
 --
 -- /See:/ 'editsDetailsUpdate' smart constructor.
-data EditsDetailsUpdate = EditsDetailsUpdate
+data EditsDetailsUpdate = EditsDetailsUpdate'
     { _eduPackageName :: !Text
     , _eduPayload     :: !AppDetails
     , _eduEditId      :: !Text
@@ -78,7 +78,7 @@ editsDetailsUpdate
     -> Text -- ^ 'eduEditId'
     -> EditsDetailsUpdate
 editsDetailsUpdate pEduPackageName_ pEduPayload_ pEduEditId_ =
-    EditsDetailsUpdate
+    EditsDetailsUpdate'
     { _eduPackageName = pEduPackageName_
     , _eduPayload = pEduPayload_
     , _eduEditId = pEduEditId_
@@ -103,7 +103,9 @@ eduEditId
 
 instance GoogleRequest EditsDetailsUpdate where
         type Rs EditsDetailsUpdate = AppDetails
-        requestClient EditsDetailsUpdate{..}
+        type Scopes EditsDetailsUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsDetailsUpdate'{..}
           = go _eduPackageName _eduEditId (Just AltJSON)
               _eduPayload
               androidPublisherService

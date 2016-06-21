@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsContainersTagsCreateResource =
 -- | Creates a GTM Tag.
 --
 -- /See:/ 'accountsContainersTagsCreate' smart constructor.
-data AccountsContainersTagsCreate = AccountsContainersTagsCreate
+data AccountsContainersTagsCreate = AccountsContainersTagsCreate'
     { _actccContainerId :: !Text
     , _actccPayload     :: !Tag
     , _actccAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersTagsCreate
     -> Text -- ^ 'actccAccountId'
     -> AccountsContainersTagsCreate
 accountsContainersTagsCreate pActccContainerId_ pActccPayload_ pActccAccountId_ =
-    AccountsContainersTagsCreate
+    AccountsContainersTagsCreate'
     { _actccContainerId = pActccContainerId_
     , _actccPayload = pActccPayload_
     , _actccAccountId = pActccAccountId_
@@ -104,7 +104,9 @@ actccAccountId
 instance GoogleRequest AccountsContainersTagsCreate
          where
         type Rs AccountsContainersTagsCreate = Tag
-        requestClient AccountsContainersTagsCreate{..}
+        type Scopes AccountsContainersTagsCreate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient AccountsContainersTagsCreate'{..}
           = go _actccAccountId _actccContainerId (Just AltJSON)
               _actccPayload
               tagManagerService

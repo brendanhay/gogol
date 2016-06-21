@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.Groups.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type GroupsInsertResource =
 -- included in the request.
 --
 -- /See:/ 'groupsInsert' smart constructor.
-data GroupsInsert = GroupsInsert
+data GroupsInsert = GroupsInsert'
     { _giProject :: !Text
     , _giPayload :: !Group
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ groupsInsert
     -> Group -- ^ 'giPayload'
     -> GroupsInsert
 groupsInsert pGiProject_ pGiPayload_ =
-    GroupsInsert
+    GroupsInsert'
     { _giProject = pGiProject_
     , _giPayload = pGiPayload_
     }
@@ -91,7 +91,10 @@ giPayload
 
 instance GoogleRequest GroupsInsert where
         type Rs GroupsInsert = Operation
-        requestClient GroupsInsert{..}
+        type Scopes GroupsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
+        requestClient GroupsInsert'{..}
           = go _giProject (Just AltJSON) _giPayload
               userAccountsService
           where go

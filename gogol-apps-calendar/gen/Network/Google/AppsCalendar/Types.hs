@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AppsCalendar.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -20,7 +21,7 @@ module Network.Google.AppsCalendar.Types
 
     -- * OAuth Scopes
     , calendarScope
-    , calendarReadonlyScope
+    , calendarReadOnlyScope
 
     -- * CalendarListEntry
     , CalendarListEntry
@@ -388,15 +389,15 @@ import           Network.Google.AppsCalendar.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Calendar API. This contains the host and root path used as a starting point for constructing service requests.
-appsCalendarService :: Service
+appsCalendarService :: ServiceConfig
 appsCalendarService
   = defaultService (ServiceId "calendar:v3")
       "www.googleapis.com"
 
 -- | Manage your calendars
-calendarScope :: OAuthScope
-calendarScope = "https://www.googleapis.com/auth/calendar";
+calendarScope :: Proxy '["https://www.googleapis.com/auth/calendar"]
+calendarScope = Proxy;
 
 -- | View your calendars
-calendarReadonlyScope :: OAuthScope
-calendarReadonlyScope = "https://www.googleapis.com/auth/calendar.readonly";
+calendarReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.readonly"]
+calendarReadOnlyScope = Proxy;

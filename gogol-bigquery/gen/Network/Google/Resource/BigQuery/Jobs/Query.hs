@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Jobs.Query
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type JobsQueryResource =
 -- query completes within a specified timeout.
 --
 -- /See:/ 'jobsQuery' smart constructor.
-data JobsQuery = JobsQuery
+data JobsQuery = JobsQuery'
     { _jqPayload   :: !QueryRequest
     , _jqProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ jobsQuery
     -> Text -- ^ 'jqProjectId'
     -> JobsQuery
 jobsQuery pJqPayload_ pJqProjectId_ =
-    JobsQuery
+    JobsQuery'
     { _jqPayload = pJqPayload_
     , _jqProjectId = pJqProjectId_
     }
@@ -91,7 +91,11 @@ jqProjectId
 
 instance GoogleRequest JobsQuery where
         type Rs JobsQuery = QueryResponse
-        requestClient JobsQuery{..}
+        type Scopes JobsQuery =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient JobsQuery'{..}
           = go _jqProjectId (Just AltJSON) _jqPayload
               bigQueryService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.TransferJobs.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type TransferJobsCreateResource =
 -- | Creates a transfer job that runs periodically.
 --
 -- /See:/ 'transferJobsCreate' smart constructor.
-data TransferJobsCreate = TransferJobsCreate
+data TransferJobsCreate = TransferJobsCreate'
     { _tjcXgafv          :: !(Maybe Text)
     , _tjcUploadProtocol :: !(Maybe Text)
     , _tjcPp             :: !Bool
@@ -99,7 +99,7 @@ transferJobsCreate
     :: TransferJob -- ^ 'tjcPayload'
     -> TransferJobsCreate
 transferJobsCreate pTjcPayload_ =
-    TransferJobsCreate
+    TransferJobsCreate'
     { _tjcXgafv = Nothing
     , _tjcUploadProtocol = Nothing
     , _tjcPp = True
@@ -154,7 +154,9 @@ tjcCallback
 
 instance GoogleRequest TransferJobsCreate where
         type Rs TransferJobsCreate = TransferJob
-        requestClient TransferJobsCreate{..}
+        type Scopes TransferJobsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TransferJobsCreate'{..}
           = go _tjcXgafv _tjcUploadProtocol (Just _tjcPp)
               _tjcAccessToken
               _tjcUploadType

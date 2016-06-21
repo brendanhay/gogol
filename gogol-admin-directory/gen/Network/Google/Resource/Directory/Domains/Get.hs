@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Domains.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type DomainsGetResource =
 -- | Retrives a domain of the customer.
 --
 -- /See:/ 'domainsGet' smart constructor.
-data DomainsGet = DomainsGet
+data DomainsGet = DomainsGet'
     { _dgCustomer   :: !Text
     , _dgDomainName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ domainsGet
     -> Text -- ^ 'dgDomainName'
     -> DomainsGet
 domainsGet pDgCustomer_ pDgDomainName_ =
-    DomainsGet
+    DomainsGet'
     { _dgCustomer = pDgCustomer_
     , _dgDomainName = pDgDomainName_
     }
@@ -89,7 +89,10 @@ dgDomainName
 
 instance GoogleRequest DomainsGet where
         type Rs DomainsGet = Domains
-        requestClient DomainsGet{..}
+        type Scopes DomainsGet =
+             '["https://www.googleapis.com/auth/admin.directory.domain",
+               "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
+        requestClient DomainsGet'{..}
           = go _dgCustomer _dgDomainName (Just AltJSON)
               directoryService
           where go

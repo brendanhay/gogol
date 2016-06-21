@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.EmailMigration.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | JSON template for MailItem object in Email Migration API.
 --
 -- /See:/ 'mailItem' smart constructor.
-data MailItem = MailItem
+data MailItem = MailItem'
     { _miIsDeleted :: !(Maybe Bool)
     , _miIsDraft   :: !(Maybe Bool)
     , _miIsStarred :: !(Maybe Bool)
@@ -59,7 +59,7 @@ data MailItem = MailItem
 mailItem
     :: MailItem
 mailItem =
-    MailItem
+    MailItem'
     { _miIsDeleted = Nothing
     , _miIsDraft = Nothing
     , _miIsStarred = Nothing
@@ -120,7 +120,7 @@ instance FromJSON MailItem where
         parseJSON
           = withObject "MailItem"
               (\ o ->
-                 MailItem <$>
+                 MailItem' <$>
                    (o .:? "isDeleted") <*> (o .:? "isDraft") <*>
                      (o .:? "isStarred")
                      <*> (o .:? "kind" .!= "mailItem")
@@ -131,7 +131,7 @@ instance FromJSON MailItem where
                      <*> (o .:? "isSent"))
 
 instance ToJSON MailItem where
-        toJSON MailItem{..}
+        toJSON MailItem'{..}
           = object
               (catMaybes
                  [("isDeleted" .=) <$> _miIsDeleted,

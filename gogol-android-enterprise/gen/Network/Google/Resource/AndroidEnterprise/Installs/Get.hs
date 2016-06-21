@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Installs.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves details of an installation of an app on a device.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.installs.get@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Get
     (
     -- * REST Resource
@@ -60,7 +60,7 @@ type InstallsGetResource =
 -- | Retrieves details of an installation of an app on a device.
 --
 -- /See:/ 'installsGet' smart constructor.
-data InstallsGet = InstallsGet
+data InstallsGet = InstallsGet'
     { _igEnterpriseId :: !Text
     , _igUserId       :: !Text
     , _igInstallId    :: !Text
@@ -85,7 +85,7 @@ installsGet
     -> Text -- ^ 'igDeviceId'
     -> InstallsGet
 installsGet pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
-    InstallsGet
+    InstallsGet'
     { _igEnterpriseId = pIgEnterpriseId_
     , _igUserId = pIgUserId_
     , _igInstallId = pIgInstallId_
@@ -115,7 +115,9 @@ igDeviceId
 
 instance GoogleRequest InstallsGet where
         type Rs InstallsGet = Install
-        requestClient InstallsGet{..}
+        type Scopes InstallsGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient InstallsGet'{..}
           = go _igEnterpriseId _igUserId _igDeviceId
               _igInstallId
               (Just AltJSON)

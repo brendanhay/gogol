@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,20 +52,21 @@ type RelyingPartyGetPublicKeysResource =
 --
 -- /See:/ 'relyingPartyGetPublicKeys' smart constructor.
 data RelyingPartyGetPublicKeys =
-    RelyingPartyGetPublicKeys
+    RelyingPartyGetPublicKeys'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyGetPublicKeys' with the minimum fields required to make a request.
 --
 relyingPartyGetPublicKeys
     :: RelyingPartyGetPublicKeys
-relyingPartyGetPublicKeys = RelyingPartyGetPublicKeys
+relyingPartyGetPublicKeys = RelyingPartyGetPublicKeys'
 
 instance GoogleRequest RelyingPartyGetPublicKeys
          where
         type Rs RelyingPartyGetPublicKeys =
              IdentitytoolkitRelyingPartyGetPublicKeysResponse
-        requestClient RelyingPartyGetPublicKeys{}
+        type Scopes RelyingPartyGetPublicKeys = '[]
+        requestClient RelyingPartyGetPublicKeys'{}
           = go (Just AltJSON) identityToolkitService
           where go
                   = buildClient

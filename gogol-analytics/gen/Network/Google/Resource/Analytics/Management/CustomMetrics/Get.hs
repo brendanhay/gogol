@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.CustomMetrics.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ManagementCustomMetricsGetResource =
 -- | Get a custom metric to which the user has access.
 --
 -- /See:/ 'managementCustomMetricsGet' smart constructor.
-data ManagementCustomMetricsGet = ManagementCustomMetricsGet
+data ManagementCustomMetricsGet = ManagementCustomMetricsGet'
     { _mcmgCustomMetricId :: !Text
     , _mcmgWebPropertyId  :: !Text
     , _mcmgAccountId      :: !Text
@@ -79,7 +79,7 @@ managementCustomMetricsGet
     -> Text -- ^ 'mcmgAccountId'
     -> ManagementCustomMetricsGet
 managementCustomMetricsGet pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccountId_ =
-    ManagementCustomMetricsGet
+    ManagementCustomMetricsGet'
     { _mcmgCustomMetricId = pMcmgCustomMetricId_
     , _mcmgWebPropertyId = pMcmgWebPropertyId_
     , _mcmgAccountId = pMcmgAccountId_
@@ -106,7 +106,10 @@ mcmgAccountId
 instance GoogleRequest ManagementCustomMetricsGet
          where
         type Rs ManagementCustomMetricsGet = CustomMetric
-        requestClient ManagementCustomMetricsGet{..}
+        type Scopes ManagementCustomMetricsGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementCustomMetricsGet'{..}
           = go _mcmgAccountId _mcmgWebPropertyId
               _mcmgCustomMetricId
               (Just AltJSON)

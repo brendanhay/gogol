@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type TablesGetResource =
 -- | Return metadata for a particular table, including the schema.
 --
 -- /See:/ 'tablesGet' smart constructor.
-data TablesGet = TablesGet
+data TablesGet = TablesGet'
     { _tgVersion :: !(Maybe TablesGetVersion)
     , _tgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ tablesGet
     :: Text -- ^ 'tgId'
     -> TablesGet
 tablesGet pTgId_ =
-    TablesGet
+    TablesGet'
     { _tgVersion = Nothing
     , _tgId = pTgId_
     }
@@ -84,7 +84,10 @@ tgId = lens _tgId (\ s a -> s{_tgId = a})
 
 instance GoogleRequest TablesGet where
         type Rs TablesGet = Table
-        requestClient TablesGet{..}
+        type Scopes TablesGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient TablesGet'{..}
           = go _tgId _tgVersion (Just AltJSON)
               mapsEngineService
           where go

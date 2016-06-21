@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.PageSpeed.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -26,18 +26,18 @@ data PagespeedAPIRunPagespeedStrategy
     | Mobile
       -- ^ @mobile@
       -- Fetch and analyze the URL for mobile devices
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PagespeedAPIRunPagespeedStrategy
 
-instance FromText PagespeedAPIRunPagespeedStrategy where
-    fromText = \case
-        "desktop" -> Just Desktop
-        "mobile" -> Just Mobile
-        _ -> Nothing
+instance FromHttpApiData PagespeedAPIRunPagespeedStrategy where
+    parseQueryParam = \case
+        "desktop" -> Right Desktop
+        "mobile" -> Right Mobile
+        x -> Left ("Unable to parse PagespeedAPIRunPagespeedStrategy from: " <> x)
 
-instance ToText PagespeedAPIRunPagespeedStrategy where
-    toText = \case
+instance ToHttpApiData PagespeedAPIRunPagespeedStrategy where
+    toQueryParam = \case
         Desktop -> "desktop"
         Mobile -> "mobile"
 

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.Groups.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type GroupsGetResource =
 -- | Returns the specified Group resource.
 --
 -- /See:/ 'groupsGet' smart constructor.
-data GroupsGet = GroupsGet
+data GroupsGet = GroupsGet'
     { _ggProject   :: !Text
     , _ggGroupName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ groupsGet
     -> Text -- ^ 'ggGroupName'
     -> GroupsGet
 groupsGet pGgProject_ pGgGroupName_ =
-    GroupsGet
+    GroupsGet'
     { _ggProject = pGgProject_
     , _ggGroupName = pGgGroupName_
     }
@@ -89,7 +89,12 @@ ggGroupName
 
 instance GoogleRequest GroupsGet where
         type Rs GroupsGet = Group
-        requestClient GroupsGet{..}
+        type Scopes GroupsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
+        requestClient GroupsGet'{..}
           = go _ggProject _ggGroupName (Just AltJSON)
               userAccountsService
           where go

@@ -14,13 +14,15 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.BackendServices.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the entire content of the BackendService resource.
+-- Updates the entire content of the BackendService resource. There are
+-- several restrictions and guidelines to keep in mind when updating a
+-- backend service. Read Restrictions and Guidelines for more information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.update@.
 module Network.Google.Resource.Compute.BackendServices.Update
@@ -55,10 +57,12 @@ type BackendServicesUpdateResource =
                      ReqBody '[JSON] BackendService :>
                        Put '[JSON] Operation
 
--- | Update the entire content of the BackendService resource.
+-- | Updates the entire content of the BackendService resource. There are
+-- several restrictions and guidelines to keep in mind when updating a
+-- backend service. Read Restrictions and Guidelines for more information.
 --
 -- /See:/ 'backendServicesUpdate' smart constructor.
-data BackendServicesUpdate = BackendServicesUpdate
+data BackendServicesUpdate = BackendServicesUpdate'
     { _bsuProject        :: !Text
     , _bsuPayload        :: !BackendService
     , _bsuBackendService :: !Text
@@ -79,13 +83,13 @@ backendServicesUpdate
     -> Text -- ^ 'bsuBackendService'
     -> BackendServicesUpdate
 backendServicesUpdate pBsuProject_ pBsuPayload_ pBsuBackendService_ =
-    BackendServicesUpdate
+    BackendServicesUpdate'
     { _bsuProject = pBsuProject_
     , _bsuPayload = pBsuPayload_
     , _bsuBackendService = pBsuBackendService_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 bsuProject :: Lens' BackendServicesUpdate Text
 bsuProject
   = lens _bsuProject (\ s a -> s{_bsuProject = a})
@@ -103,7 +107,10 @@ bsuBackendService
 
 instance GoogleRequest BackendServicesUpdate where
         type Rs BackendServicesUpdate = Operation
-        requestClient BackendServicesUpdate{..}
+        type Scopes BackendServicesUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient BackendServicesUpdate'{..}
           = go _bsuProject _bsuBackendService (Just AltJSON)
               _bsuPayload
               computeService

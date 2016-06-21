@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type EditsImagesDeleteallResource =
 -- | Deletes all images for the specified language and image type.
 --
 -- /See:/ 'editsImagesDeleteall' smart constructor.
-data EditsImagesDeleteall = EditsImagesDeleteall
+data EditsImagesDeleteall = EditsImagesDeleteall'
     { _ediPackageName :: !Text
     , _ediImageType   :: !EditsImagesDeleteallImageType
     , _ediLanguage    :: !Text
@@ -85,7 +85,7 @@ editsImagesDeleteall
     -> Text -- ^ 'ediEditId'
     -> EditsImagesDeleteall
 editsImagesDeleteall pEdiPackageName_ pEdiImageType_ pEdiLanguage_ pEdiEditId_ =
-    EditsImagesDeleteall
+    EditsImagesDeleteall'
     { _ediPackageName = pEdiPackageName_
     , _ediImageType = pEdiImageType_
     , _ediLanguage = pEdiLanguage_
@@ -118,7 +118,9 @@ ediEditId
 instance GoogleRequest EditsImagesDeleteall where
         type Rs EditsImagesDeleteall =
              ImagesDeleteAllResponse
-        requestClient EditsImagesDeleteall{..}
+        type Scopes EditsImagesDeleteall =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsImagesDeleteall'{..}
           = go _ediPackageName _ediEditId _ediLanguage
               _ediImageType
               (Just AltJSON)

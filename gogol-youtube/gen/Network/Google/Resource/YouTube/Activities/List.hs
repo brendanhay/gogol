@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Activities.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type ActivitiesListResource =
 -- each user.
 --
 -- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList
+data ActivitiesList = ActivitiesList'
     { _alPublishedAfter  :: !(Maybe DateTime')
     , _alPart            :: !Text
     , _alHome            :: !(Maybe Bool)
@@ -113,7 +113,7 @@ activitiesList
     :: Text -- ^ 'alPart'
     -> ActivitiesList
 activitiesList pAlPart_ =
-    ActivitiesList
+    ActivitiesList'
     { _alPublishedAfter = Nothing
     , _alPart = pAlPart_
     , _alHome = Nothing
@@ -201,7 +201,11 @@ alPublishedBefore
 
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = ActivityListResponse
-        requestClient ActivitiesList{..}
+        type Scopes ActivitiesList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
+        requestClient ActivitiesList'{..}
           = go (Just _alPart) _alPublishedAfter _alHome _alMine
               _alRegionCode
               _alChannelId

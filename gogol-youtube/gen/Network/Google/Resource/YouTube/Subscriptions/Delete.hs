@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Subscriptions.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type SubscriptionsDeleteResource =
 -- | Deletes a subscription.
 --
 -- /See:/ 'subscriptionsDelete' smart constructor.
-newtype SubscriptionsDelete = SubscriptionsDelete
+newtype SubscriptionsDelete = SubscriptionsDelete'
     { _sdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ subscriptionsDelete
     :: Text -- ^ 'sdId'
     -> SubscriptionsDelete
 subscriptionsDelete pSdId_ =
-    SubscriptionsDelete
+    SubscriptionsDelete'
     { _sdId = pSdId_
     }
 
@@ -76,7 +76,11 @@ sdId = lens _sdId (\ s a -> s{_sdId = a})
 
 instance GoogleRequest SubscriptionsDelete where
         type Rs SubscriptionsDelete = ()
-        requestClient SubscriptionsDelete{..}
+        type Scopes SubscriptionsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient SubscriptionsDelete'{..}
           = go (Just _sdId) (Just AltJSON) youTubeService
           where go
                   = buildClient

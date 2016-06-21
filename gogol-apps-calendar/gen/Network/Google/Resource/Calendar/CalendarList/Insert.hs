@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.CalendarList.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type CalendarListInsertResource =
 -- | Adds an entry to the user\'s calendar list.
 --
 -- /See:/ 'calendarListInsert' smart constructor.
-data CalendarListInsert = CalendarListInsert
+data CalendarListInsert = CalendarListInsert'
     { _cliPayload        :: !CalendarListEntry
     , _cliColorRgbFormat :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ calendarListInsert
     :: CalendarListEntry -- ^ 'cliPayload'
     -> CalendarListInsert
 calendarListInsert pCliPayload_ =
-    CalendarListInsert
+    CalendarListInsert'
     { _cliPayload = pCliPayload_
     , _cliColorRgbFormat = Nothing
     }
@@ -93,7 +93,9 @@ cliColorRgbFormat
 
 instance GoogleRequest CalendarListInsert where
         type Rs CalendarListInsert = CalendarListEntry
-        requestClient CalendarListInsert{..}
+        type Scopes CalendarListInsert =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient CalendarListInsert'{..}
           = go _cliColorRgbFormat (Just AltJSON) _cliPayload
               appsCalendarService
           where go

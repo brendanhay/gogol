@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.HTTPHealthChecks.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type HTTPHealthChecksDeleteResource =
 -- | Deletes the specified HttpHealthCheck resource.
 --
 -- /See:/ 'hTTPHealthChecksDelete' smart constructor.
-data HTTPHealthChecksDelete = HTTPHealthChecksDelete
+data HTTPHealthChecksDelete = HTTPHealthChecksDelete'
     { _httphcdProject         :: !Text
     , _httphcdHTTPHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,12 +72,12 @@ hTTPHealthChecksDelete
     -> Text -- ^ 'httphcdHTTPHealthCheck'
     -> HTTPHealthChecksDelete
 hTTPHealthChecksDelete pHttphcdProject_ pHttphcdHTTPHealthCheck_ =
-    HTTPHealthChecksDelete
+    HTTPHealthChecksDelete'
     { _httphcdProject = pHttphcdProject_
     , _httphcdHTTPHealthCheck = pHttphcdHTTPHealthCheck_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 httphcdProject :: Lens' HTTPHealthChecksDelete Text
 httphcdProject
   = lens _httphcdProject
@@ -91,7 +91,10 @@ httphcdHTTPHealthCheck
 
 instance GoogleRequest HTTPHealthChecksDelete where
         type Rs HTTPHealthChecksDelete = Operation
-        requestClient HTTPHealthChecksDelete{..}
+        type Scopes HTTPHealthChecksDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient HTTPHealthChecksDelete'{..}
           = go _httphcdProject _httphcdHTTPHealthCheck
               (Just AltJSON)
               computeService

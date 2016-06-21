@@ -14,14 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetVPNGateways.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a TargetVpnGateway resource in the specified project and region
--- using the data included in the request.
+-- Creates a target VPN gateway in the specified project and region using
+-- the data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.insert@.
 module Network.Google.Resource.Compute.TargetVPNGateways.Insert
@@ -56,11 +56,11 @@ type TargetVPNGatewaysInsertResource =
                      ReqBody '[JSON] TargetVPNGateway :>
                        Post '[JSON] Operation
 
--- | Creates a TargetVpnGateway resource in the specified project and region
--- using the data included in the request.
+-- | Creates a target VPN gateway in the specified project and region using
+-- the data included in the request.
 --
 -- /See:/ 'targetVPNGatewaysInsert' smart constructor.
-data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert
+data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert'
     { _tvgiProject :: !Text
     , _tvgiPayload :: !TargetVPNGateway
     , _tvgiRegion  :: !Text
@@ -81,7 +81,7 @@ targetVPNGatewaysInsert
     -> Text -- ^ 'tvgiRegion'
     -> TargetVPNGatewaysInsert
 targetVPNGatewaysInsert pTvgiProject_ pTvgiPayload_ pTvgiRegion_ =
-    TargetVPNGatewaysInsert
+    TargetVPNGatewaysInsert'
     { _tvgiProject = pTvgiProject_
     , _tvgiPayload = pTvgiPayload_
     , _tvgiRegion = pTvgiRegion_
@@ -97,14 +97,17 @@ tvgiPayload :: Lens' TargetVPNGatewaysInsert TargetVPNGateway
 tvgiPayload
   = lens _tvgiPayload (\ s a -> s{_tvgiPayload = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 tvgiRegion :: Lens' TargetVPNGatewaysInsert Text
 tvgiRegion
   = lens _tvgiRegion (\ s a -> s{_tvgiRegion = a})
 
 instance GoogleRequest TargetVPNGatewaysInsert where
         type Rs TargetVPNGatewaysInsert = Operation
-        requestClient TargetVPNGatewaysInsert{..}
+        type Scopes TargetVPNGatewaysInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetVPNGatewaysInsert'{..}
           = go _tvgiProject _tvgiRegion (Just AltJSON)
               _tvgiPayload
               computeService

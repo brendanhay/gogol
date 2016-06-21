@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type SSLCertsCreateEphemeralResource =
 -- the database.
 --
 -- /See:/ 'sslCertsCreateEphemeral' smart constructor.
-data SSLCertsCreateEphemeral = SSLCertsCreateEphemeral
+data SSLCertsCreateEphemeral = SSLCertsCreateEphemeral'
     { _scceProject  :: !Text
     , _sccePayload  :: !SSLCertsCreateEphemeralRequest
     , _scceInstance :: !Text
@@ -85,7 +85,7 @@ sslCertsCreateEphemeral
     -> Text -- ^ 'scceInstance'
     -> SSLCertsCreateEphemeral
 sslCertsCreateEphemeral pScceProject_ pSccePayload_ pScceInstance_ =
-    SSLCertsCreateEphemeral
+    SSLCertsCreateEphemeral'
     { _scceProject = pScceProject_
     , _sccePayload = pSccePayload_
     , _scceInstance = pScceInstance_
@@ -108,7 +108,10 @@ scceInstance
 
 instance GoogleRequest SSLCertsCreateEphemeral where
         type Rs SSLCertsCreateEphemeral = SSLCert
-        requestClient SSLCertsCreateEphemeral{..}
+        type Scopes SSLCertsCreateEphemeral =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient SSLCertsCreateEphemeral'{..}
           = go _scceProject _scceInstance (Just AltJSON)
               _sccePayload
               sQLAdminService

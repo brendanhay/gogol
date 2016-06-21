@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Players.Hide
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type PlayersHideResource =
 -- console.
 --
 -- /See:/ 'playersHide' smart constructor.
-data PlayersHide = PlayersHide
+data PlayersHide = PlayersHide'
     { _phApplicationId :: !Text
     , _phPlayerId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -76,7 +76,7 @@ playersHide
     -> Text -- ^ 'phPlayerId'
     -> PlayersHide
 playersHide pPhApplicationId_ pPhPlayerId_ =
-    PlayersHide
+    PlayersHide'
     { _phApplicationId = pPhApplicationId_
     , _phPlayerId = pPhPlayerId_
     }
@@ -95,7 +95,10 @@ phPlayerId
 
 instance GoogleRequest PlayersHide where
         type Rs PlayersHide = ()
-        requestClient PlayersHide{..}
+        type Scopes PlayersHide =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient PlayersHide'{..}
           = go _phApplicationId _phPlayerId (Just AltJSON)
               gamesManagementService
           where go

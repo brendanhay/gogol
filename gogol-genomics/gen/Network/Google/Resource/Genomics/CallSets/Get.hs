@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.CallSets.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a call set by ID.
+-- Gets a call set by ID. For the definitions of call sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.callsets.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.get@.
 module Network.Google.Resource.Genomics.CallSets.Get
     (
     -- * REST Resource
@@ -61,10 +63,12 @@ type CallSetsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] CallSet
 
--- | Gets a call set by ID.
+-- | Gets a call set by ID. For the definitions of call sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSetsGet' smart constructor.
-data CallSetsGet = CallSetsGet
+data CallSetsGet = CallSetsGet'
     { _csgXgafv          :: !(Maybe Text)
     , _csgUploadProtocol :: !(Maybe Text)
     , _csgPp             :: !Bool
@@ -98,7 +102,7 @@ callSetsGet
     :: Text -- ^ 'csgCallSetId'
     -> CallSetsGet
 callSetsGet pCsgCallSetId_ =
-    CallSetsGet
+    CallSetsGet'
     { _csgXgafv = Nothing
     , _csgUploadProtocol = Nothing
     , _csgPp = True
@@ -153,7 +157,11 @@ csgCallback
 
 instance GoogleRequest CallSetsGet where
         type Rs CallSetsGet = CallSet
-        requestClient CallSetsGet{..}
+        type Scopes CallSetsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient CallSetsGet'{..}
           = go _csgCallSetId _csgXgafv _csgUploadProtocol
               (Just _csgPp)
               _csgAccessToken

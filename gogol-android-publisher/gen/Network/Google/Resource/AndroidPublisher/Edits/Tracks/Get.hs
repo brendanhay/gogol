@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Tracks.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type EditsTracksGetResource =
 -- the APK version codes that are in this track.
 --
 -- /See:/ 'editsTracksGet' smart constructor.
-data EditsTracksGet = EditsTracksGet
+data EditsTracksGet = EditsTracksGet'
     { _etgtTrack       :: !EditsTracksGetTrack
     , _etgtPackageName :: !Text
     , _etgtEditId      :: !Text
@@ -80,7 +80,7 @@ editsTracksGet
     -> Text -- ^ 'etgtEditId'
     -> EditsTracksGet
 editsTracksGet pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
-    EditsTracksGet
+    EditsTracksGet'
     { _etgtTrack = pEtgtTrack_
     , _etgtPackageName = pEtgtPackageName_
     , _etgtEditId = pEtgtEditId_
@@ -105,7 +105,9 @@ etgtEditId
 
 instance GoogleRequest EditsTracksGet where
         type Rs EditsTracksGet = Track
-        requestClient EditsTracksGet{..}
+        type Scopes EditsTracksGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsTracksGet'{..}
           = go _etgtPackageName _etgtEditId _etgtTrack
               (Just AltJSON)
               androidPublisherService

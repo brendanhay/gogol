@@ -14,14 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Autoscalers.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an autoscaler resource in the specified project using the data
--- included in the request. This method supports patch semantics.
+-- Updates an autoscaler in the specified project using the data included
+-- in the request. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.patch@.
 module Network.Google.Resource.Compute.Autoscalers.Patch
@@ -57,11 +57,11 @@ type AutoscalersPatchResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Autoscaler :> Patch '[JSON] Operation
 
--- | Updates an autoscaler resource in the specified project using the data
--- included in the request. This method supports patch semantics.
+-- | Updates an autoscaler in the specified project using the data included
+-- in the request. This method supports patch semantics.
 --
 -- /See:/ 'autoscalersPatch' smart constructor.
-data AutoscalersPatch = AutoscalersPatch
+data AutoscalersPatch = AutoscalersPatch'
     { _apProject    :: !Text
     , _apZone       :: !Text
     , _apPayload    :: !Autoscaler
@@ -86,19 +86,19 @@ autoscalersPatch
     -> Text -- ^ 'apAutoscaler'
     -> AutoscalersPatch
 autoscalersPatch pApProject_ pApZone_ pApPayload_ pApAutoscaler_ =
-    AutoscalersPatch
+    AutoscalersPatch'
     { _apProject = pApProject_
     , _apZone = pApZone_
     , _apPayload = pApPayload_
     , _apAutoscaler = pApAutoscaler_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 apProject :: Lens' AutoscalersPatch Text
 apProject
   = lens _apProject (\ s a -> s{_apProject = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 apZone :: Lens' AutoscalersPatch Text
 apZone = lens _apZone (\ s a -> s{_apZone = a})
 
@@ -107,14 +107,17 @@ apPayload :: Lens' AutoscalersPatch Autoscaler
 apPayload
   = lens _apPayload (\ s a -> s{_apPayload = a})
 
--- | Name of the autoscaler resource to update.
+-- | Name of the autoscaler to update.
 apAutoscaler :: Lens' AutoscalersPatch Text
 apAutoscaler
   = lens _apAutoscaler (\ s a -> s{_apAutoscaler = a})
 
 instance GoogleRequest AutoscalersPatch where
         type Rs AutoscalersPatch = Operation
-        requestClient AutoscalersPatch{..}
+        type Scopes AutoscalersPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient AutoscalersPatch'{..}
           = go _apProject _apZone (Just _apAutoscaler)
               (Just AltJSON)
               _apPayload

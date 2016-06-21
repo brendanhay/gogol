@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Tables.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type TablesGetResource =
 -- describes the structure of this table.
 --
 -- /See:/ 'tablesGet' smart constructor.
-data TablesGet = TablesGet
+data TablesGet = TablesGet'
     { _tgDataSetId :: !Text
     , _tgProjectId :: !Text
     , _tgTableId   :: !Text
@@ -82,7 +82,7 @@ tablesGet
     -> Text -- ^ 'tgTableId'
     -> TablesGet
 tablesGet pTgDataSetId_ pTgProjectId_ pTgTableId_ =
-    TablesGet
+    TablesGet'
     { _tgDataSetId = pTgDataSetId_
     , _tgProjectId = pTgProjectId_
     , _tgTableId = pTgTableId_
@@ -105,7 +105,11 @@ tgTableId
 
 instance GoogleRequest TablesGet where
         type Rs TablesGet = Table
-        requestClient TablesGet{..}
+        type Scopes TablesGet =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient TablesGet'{..}
           = go _tgProjectId _tgDataSetId _tgTableId
               (Just AltJSON)
               bigQueryService

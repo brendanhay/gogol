@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.APKs.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type EditsAPKsListResource =
 
 --
 -- /See:/ 'editsAPKsList' smart constructor.
-data EditsAPKsList = EditsAPKsList
+data EditsAPKsList = EditsAPKsList'
     { _eapklPackageName :: !Text
     , _eapklEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ editsAPKsList
     -> Text -- ^ 'eapklEditId'
     -> EditsAPKsList
 editsAPKsList pEapklPackageName_ pEapklEditId_ =
-    EditsAPKsList
+    EditsAPKsList'
     { _eapklPackageName = pEapklPackageName_
     , _eapklEditId = pEapklEditId_
     }
@@ -89,7 +89,9 @@ eapklEditId
 
 instance GoogleRequest EditsAPKsList where
         type Rs EditsAPKsList = APKsListResponse
-        requestClient EditsAPKsList{..}
+        type Scopes EditsAPKsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsAPKsList'{..}
           = go _eapklPackageName _eapklEditId (Just AltJSON)
               androidPublisherService
           where go

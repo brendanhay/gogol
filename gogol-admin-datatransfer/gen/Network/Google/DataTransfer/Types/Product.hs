@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.DataTransfer.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | The JSON template for an Application resource.
 --
 -- /See:/ 'application' smart constructor.
-data Application = Application
+data Application = Application'
     { _aTransferParams :: !(Maybe [ApplicationTransferParam])
     , _aEtag           :: !(Maybe Text)
     , _aKind           :: !Text
@@ -47,7 +47,7 @@ data Application = Application
 application
     :: Application
 application =
-    Application
+    Application'
     { _aTransferParams = Nothing
     , _aEtag = Nothing
     , _aKind = "admin#datatransfer#ApplicationResource"
@@ -86,7 +86,7 @@ instance FromJSON Application where
         parseJSON
           = withObject "Application"
               (\ o ->
-                 Application <$>
+                 Application' <$>
                    (o .:? "transferParams" .!= mempty) <*>
                      (o .:? "etag")
                      <*>
@@ -96,7 +96,7 @@ instance FromJSON Application where
                      <*> (o .:? "id"))
 
 instance ToJSON Application where
-        toJSON Application{..}
+        toJSON Application'{..}
           = object
               (catMaybes
                  [("transferParams" .=) <$> _aTransferParams,
@@ -106,7 +106,7 @@ instance ToJSON Application where
 -- | Template for application transfer parameters.
 --
 -- /See:/ 'applicationTransferParam' smart constructor.
-data ApplicationTransferParam = ApplicationTransferParam
+data ApplicationTransferParam = ApplicationTransferParam'
     { _atpValue :: !(Maybe [Text])
     , _atpKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -121,7 +121,7 @@ data ApplicationTransferParam = ApplicationTransferParam
 applicationTransferParam
     :: ApplicationTransferParam
 applicationTransferParam =
-    ApplicationTransferParam
+    ApplicationTransferParam'
     { _atpValue = Nothing
     , _atpKey = Nothing
     }
@@ -142,11 +142,11 @@ instance FromJSON ApplicationTransferParam where
         parseJSON
           = withObject "ApplicationTransferParam"
               (\ o ->
-                 ApplicationTransferParam <$>
+                 ApplicationTransferParam' <$>
                    (o .:? "value" .!= mempty) <*> (o .:? "key"))
 
 instance ToJSON ApplicationTransferParam where
-        toJSON ApplicationTransferParam{..}
+        toJSON ApplicationTransferParam'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _atpValue, ("key" .=) <$> _atpKey])
@@ -154,7 +154,7 @@ instance ToJSON ApplicationTransferParam where
 -- | Template for a collection of Applications.
 --
 -- /See:/ 'applicationsListResponse' smart constructor.
-data ApplicationsListResponse = ApplicationsListResponse
+data ApplicationsListResponse = ApplicationsListResponse'
     { _alrEtag          :: !(Maybe Text)
     , _alrNextPageToken :: !(Maybe Text)
     , _alrKind          :: !Text
@@ -175,7 +175,7 @@ data ApplicationsListResponse = ApplicationsListResponse
 applicationsListResponse
     :: ApplicationsListResponse
 applicationsListResponse =
-    ApplicationsListResponse
+    ApplicationsListResponse'
     { _alrEtag = Nothing
     , _alrNextPageToken = Nothing
     , _alrKind = "admin#datatransfer#applicationsList"
@@ -209,14 +209,14 @@ instance FromJSON ApplicationsListResponse where
         parseJSON
           = withObject "ApplicationsListResponse"
               (\ o ->
-                 ApplicationsListResponse <$>
+                 ApplicationsListResponse' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "admin#datatransfer#applicationsList")
                      <*> (o .:? "applications" .!= mempty))
 
 instance ToJSON ApplicationsListResponse where
-        toJSON ApplicationsListResponse{..}
+        toJSON ApplicationsListResponse'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _alrEtag,
@@ -227,7 +227,7 @@ instance ToJSON ApplicationsListResponse where
 -- | The JSON template for a DataTransfer resource.
 --
 -- /See:/ 'dataTransfer' smart constructor.
-data DataTransfer = DataTransfer
+data DataTransfer = DataTransfer'
     { _dtEtag                      :: !(Maybe Text)
     , _dtOldOwnerUserId            :: !(Maybe Text)
     , _dtKind                      :: !Text
@@ -260,7 +260,7 @@ data DataTransfer = DataTransfer
 dataTransfer
     :: DataTransfer
 dataTransfer =
-    DataTransfer
+    DataTransfer'
     { _dtEtag = Nothing
     , _dtOldOwnerUserId = Nothing
     , _dtKind = "admin#datatransfer#DataTransfer"
@@ -324,7 +324,7 @@ instance FromJSON DataTransfer where
         parseJSON
           = withObject "DataTransfer"
               (\ o ->
-                 DataTransfer <$>
+                 DataTransfer' <$>
                    (o .:? "etag") <*> (o .:? "oldOwnerUserId") <*>
                      (o .:? "kind" .!= "admin#datatransfer#DataTransfer")
                      <*> (o .:? "newOwnerUserId")
@@ -334,7 +334,7 @@ instance FromJSON DataTransfer where
                      <*> (o .:? "overallTransferStatusCode"))
 
 instance ToJSON DataTransfer where
-        toJSON DataTransfer{..}
+        toJSON DataTransfer'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _dtEtag,
@@ -351,7 +351,7 @@ instance ToJSON DataTransfer where
 -- | Template for a collection of DataTransfer resources.
 --
 -- /See:/ 'dataTransfersListResponse' smart constructor.
-data DataTransfersListResponse = DataTransfersListResponse
+data DataTransfersListResponse = DataTransfersListResponse'
     { _dtlrEtag          :: !(Maybe Text)
     , _dtlrNextPageToken :: !(Maybe Text)
     , _dtlrKind          :: !Text
@@ -372,7 +372,7 @@ data DataTransfersListResponse = DataTransfersListResponse
 dataTransfersListResponse
     :: DataTransfersListResponse
 dataTransfersListResponse =
-    DataTransfersListResponse
+    DataTransfersListResponse'
     { _dtlrEtag = Nothing
     , _dtlrNextPageToken = Nothing
     , _dtlrKind = "admin#datatransfer#dataTransfersList"
@@ -405,14 +405,14 @@ instance FromJSON DataTransfersListResponse where
         parseJSON
           = withObject "DataTransfersListResponse"
               (\ o ->
-                 DataTransfersListResponse <$>
+                 DataTransfersListResponse' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "admin#datatransfer#dataTransfersList")
                      <*> (o .:? "dataTransfers" .!= mempty))
 
 instance ToJSON DataTransfersListResponse where
-        toJSON DataTransfersListResponse{..}
+        toJSON DataTransfersListResponse'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _dtlrEtag,
@@ -423,7 +423,7 @@ instance ToJSON DataTransfersListResponse where
 -- | Template to map fields of ApplicationDataTransfer resource.
 --
 -- /See:/ 'applicationDataTransfer' smart constructor.
-data ApplicationDataTransfer = ApplicationDataTransfer
+data ApplicationDataTransfer = ApplicationDataTransfer'
     { _adtApplicationTransferParams :: !(Maybe [ApplicationTransferParam])
     , _adtApplicationId             :: !(Maybe (Textual Int64))
     , _adtApplicationTransferStatus :: !(Maybe Text)
@@ -441,7 +441,7 @@ data ApplicationDataTransfer = ApplicationDataTransfer
 applicationDataTransfer
     :: ApplicationDataTransfer
 applicationDataTransfer =
-    ApplicationDataTransfer
+    ApplicationDataTransfer'
     { _adtApplicationTransferParams = Nothing
     , _adtApplicationId = Nothing
     , _adtApplicationTransferStatus = Nothing
@@ -474,13 +474,13 @@ instance FromJSON ApplicationDataTransfer where
         parseJSON
           = withObject "ApplicationDataTransfer"
               (\ o ->
-                 ApplicationDataTransfer <$>
+                 ApplicationDataTransfer' <$>
                    (o .:? "applicationTransferParams" .!= mempty) <*>
                      (o .:? "applicationId")
                      <*> (o .:? "applicationTransferStatus"))
 
 instance ToJSON ApplicationDataTransfer where
-        toJSON ApplicationDataTransfer{..}
+        toJSON ApplicationDataTransfer'{..}
           = object
               (catMaybes
                  [("applicationTransferParams" .=) <$>

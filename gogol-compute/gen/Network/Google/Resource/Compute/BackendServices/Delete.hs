@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.BackendServices.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type BackendServicesDeleteResource =
 -- | Deletes the specified BackendService resource.
 --
 -- /See:/ 'backendServicesDelete' smart constructor.
-data BackendServicesDelete = BackendServicesDelete
+data BackendServicesDelete = BackendServicesDelete'
     { _bsdProject        :: !Text
     , _bsdBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,12 +72,12 @@ backendServicesDelete
     -> Text -- ^ 'bsdBackendService'
     -> BackendServicesDelete
 backendServicesDelete pBsdProject_ pBsdBackendService_ =
-    BackendServicesDelete
+    BackendServicesDelete'
     { _bsdProject = pBsdProject_
     , _bsdBackendService = pBsdBackendService_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 bsdProject :: Lens' BackendServicesDelete Text
 bsdProject
   = lens _bsdProject (\ s a -> s{_bsdProject = a})
@@ -90,7 +90,10 @@ bsdBackendService
 
 instance GoogleRequest BackendServicesDelete where
         type Rs BackendServicesDelete = Operation
-        requestClient BackendServicesDelete{..}
+        type Scopes BackendServicesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient BackendServicesDelete'{..}
           = go _bsdProject _bsdBackendService (Just AltJSON)
               computeService
           where go

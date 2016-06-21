@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Posts.Revert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type PostsRevertResource =
 -- | Revert a published or scheduled post to draft state.
 --
 -- /See:/ 'postsRevert' smart constructor.
-data PostsRevert = PostsRevert
+data PostsRevert = PostsRevert'
     { _prBlogId :: !Text
     , _prPostId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ postsRevert
     -> Text -- ^ 'prPostId'
     -> PostsRevert
 postsRevert pPrBlogId_ pPrPostId_ =
-    PostsRevert
+    PostsRevert'
     { _prBlogId = pPrBlogId_
     , _prPostId = pPrPostId_
     }
@@ -87,7 +87,9 @@ prPostId = lens _prPostId (\ s a -> s{_prPostId = a})
 
 instance GoogleRequest PostsRevert where
         type Rs PostsRevert = Post'
-        requestClient PostsRevert{..}
+        type Scopes PostsRevert =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PostsRevert'{..}
           = go _prBlogId _prPostId (Just AltJSON)
               bloggerService
           where go

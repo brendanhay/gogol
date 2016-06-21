@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.EmailMigration.Mail.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,14 +58,13 @@ type MailInsertResource =
                Capture "userKey" Text :>
                  "mail" :>
                    QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" AltMedia :>
-                       MultipartRelated '[JSON] MailItem RequestBody :>
-                         Post '[JSON] ()
+                     QueryParam "uploadType" Multipart :>
+                       MultipartRelated '[JSON] MailItem :> Post '[JSON] ()
 
 -- | Insert Mail into Google\'s Gmail backends
 --
 -- /See:/ 'mailInsert' smart constructor.
-data MailInsert = MailInsert
+data MailInsert = MailInsert'
     { _miPayload :: !MailItem
     , _miUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +81,7 @@ mailInsert
     -> Text -- ^ 'miUserKey'
     -> MailInsert
 mailInsert pMiPayload_ pMiUserKey_ =
-    MailInsert
+    MailInsert'
     { _miPayload = pMiPayload_
     , _miUserKey = pMiUserKey_
     }
@@ -99,7 +98,9 @@ miUserKey
 
 instance GoogleRequest MailInsert where
         type Rs MailInsert = ()
-        requestClient MailInsert{..}
+        type Scopes MailInsert =
+             '["https://www.googleapis.com/auth/email.migration"]
+        requestClient MailInsert'{..}
           = go _miUserKey (Just AltJSON) _miPayload
               emailMigrationService
           where go :<|> _
@@ -108,8 +109,10 @@ instance GoogleRequest MailInsert where
 
 instance GoogleRequest (MediaUpload MailInsert) where
         type Rs (MediaUpload MailInsert) = ()
-        requestClient (MediaUpload MailInsert{..} body)
-          = go _miUserKey (Just AltJSON) (Just AltMedia)
+        type Scopes (MediaUpload MailInsert) =
+             Scopes MailInsert
+        requestClient (MediaUpload MailInsert'{..} body)
+          = go _miUserKey (Just AltJSON) (Just Multipart)
               _miPayload
               body
               emailMigrationService

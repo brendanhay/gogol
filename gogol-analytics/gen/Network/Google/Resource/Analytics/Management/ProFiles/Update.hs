@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFiles.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ManagementProFilesUpdateResource =
 -- | Updates an existing view (profile).
 --
 -- /See:/ 'managementProFilesUpdate' smart constructor.
-data ManagementProFilesUpdate = ManagementProFilesUpdate
+data ManagementProFilesUpdate = ManagementProFilesUpdate'
     { _mpfuWebPropertyId :: !Text
     , _mpfuProFileId     :: !Text
     , _mpfuPayload       :: !ProFile
@@ -85,7 +85,7 @@ managementProFilesUpdate
     -> Text -- ^ 'mpfuAccountId'
     -> ManagementProFilesUpdate
 managementProFilesUpdate pMpfuWebPropertyId_ pMpfuProFileId_ pMpfuPayload_ pMpfuAccountId_ =
-    ManagementProFilesUpdate
+    ManagementProFilesUpdate'
     { _mpfuWebPropertyId = pMpfuWebPropertyId_
     , _mpfuProFileId = pMpfuProFileId_
     , _mpfuPayload = pMpfuPayload_
@@ -117,7 +117,9 @@ mpfuAccountId
 
 instance GoogleRequest ManagementProFilesUpdate where
         type Rs ManagementProFilesUpdate = ProFile
-        requestClient ManagementProFilesUpdate{..}
+        type Scopes ManagementProFilesUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementProFilesUpdate'{..}
           = go _mpfuAccountId _mpfuWebPropertyId _mpfuProFileId
               (Just AltJSON)
               _mpfuPayload

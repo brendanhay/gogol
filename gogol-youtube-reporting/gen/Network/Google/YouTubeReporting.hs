@@ -7,20 +7,24 @@
 
 -- |
 -- Module      : Network.Google.YouTubeReporting
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API to schedule reporting jobs and download the resulting bulk data
--- reports about YouTube channels, videos etc. in the form of CSV files.
+-- Schedules reporting jobs containing your YouTube Analytics data and
+-- downloads the resulting bulk data reports in the form of CSV files.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference>
 module Network.Google.YouTubeReporting
     (
     -- * Service Configuration
       youTubeReportingService
+
+    -- * OAuth Scopes
+    , youTubeAnalyticsReadOnlyScope
+    , youTubeAnalyticsMonetaryReadOnlyScope
 
     -- * API Declaration
     , YouTubeReportingAPI
@@ -72,6 +76,7 @@ module Network.Google.YouTubeReporting
     , rEndTime
     , rId
     , rCreateTime
+    , rJobExpireTime
 
     -- ** ListReportTypesResponse
     , ListReportTypesResponse
@@ -89,7 +94,9 @@ module Network.Google.YouTubeReporting
     , job
     , jName
     , jId
+    , jSystemManaged
     , jReportTypeId
+    , jExpireTime
     , jCreateTime
 
     -- ** ListJobsResponse
@@ -103,6 +110,8 @@ module Network.Google.YouTubeReporting
     , reportType
     , rtName
     , rtId
+    , rtDeprecateTime
+    , rtSystemManaged
     ) where
 
 import           Network.Google.Prelude

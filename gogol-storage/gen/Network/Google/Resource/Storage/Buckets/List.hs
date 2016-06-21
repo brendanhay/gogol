@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Buckets.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type BucketsListResource =
 -- | Retrieves a list of buckets for a given project.
 --
 -- /See:/ 'bucketsList' smart constructor.
-data BucketsList = BucketsList
+data BucketsList = BucketsList'
     { _blProject    :: !Text
     , _blPrefix     :: !(Maybe Text)
     , _blProjection :: !(Maybe BucketsListProjection)
@@ -84,7 +84,7 @@ bucketsList
     :: Text -- ^ 'blProject'
     -> BucketsList
 bucketsList pBlProject_ =
-    BucketsList
+    BucketsList'
     { _blProject = pBlProject_
     , _blPrefix = Nothing
     , _blProjection = Nothing
@@ -120,7 +120,13 @@ blMaxResults
 
 instance GoogleRequest BucketsList where
         type Rs BucketsList = Buckets
-        requestClient BucketsList{..}
+        type Scopes BucketsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient BucketsList'{..}
           = go (Just _blProject) _blPrefix _blProjection
               _blPageToken
               _blMaxResults

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type RollingUpdatesListInstanceUpdatesResource =
 -- | Lists the current status for each instance within a given update.
 --
 -- /See:/ 'rollingUpdatesListInstanceUpdates' smart constructor.
-data RollingUpdatesListInstanceUpdates = RollingUpdatesListInstanceUpdates
+data RollingUpdatesListInstanceUpdates = RollingUpdatesListInstanceUpdates'
     { _ruliuRollingUpdate :: !Text
     , _ruliuProject       :: !Text
     , _ruliuZone          :: !Text
@@ -95,7 +95,7 @@ rollingUpdatesListInstanceUpdates
     -> Text -- ^ 'ruliuZone'
     -> RollingUpdatesListInstanceUpdates
 rollingUpdatesListInstanceUpdates pRuliuRollingUpdate_ pRuliuProject_ pRuliuZone_ =
-    RollingUpdatesListInstanceUpdates
+    RollingUpdatesListInstanceUpdates'
     { _ruliuRollingUpdate = pRuliuRollingUpdate_
     , _ruliuProject = pRuliuProject_
     , _ruliuZone = pRuliuZone_
@@ -144,7 +144,12 @@ instance GoogleRequest
          RollingUpdatesListInstanceUpdates where
         type Rs RollingUpdatesListInstanceUpdates =
              InstanceUpdateList
-        requestClient RollingUpdatesListInstanceUpdates{..}
+        type Scopes RollingUpdatesListInstanceUpdates =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/replicapool",
+               "https://www.googleapis.com/auth/replicapool.readonly"]
+        requestClient RollingUpdatesListInstanceUpdates'{..}
           = go _ruliuProject _ruliuZone _ruliuRollingUpdate
               _ruliuFilter
               _ruliuPageToken

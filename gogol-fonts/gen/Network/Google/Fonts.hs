@@ -7,13 +7,15 @@
 
 -- |
 -- Module      : Network.Google.Fonts
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Fonts Developer API.
+-- Accesses the metadata for all families served by Google Fonts, providing
+-- a list of families currently available (including available styles and a
+-- list of supported script subsets).
 --
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference>
 module Network.Google.Fonts

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.ConnectionTypes.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'ConnectionTypesList' request conforms to.
 type ConnectionTypesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "connectionTypes" :>
@@ -53,7 +53,7 @@ type ConnectionTypesListResource =
 -- | Retrieves a list of connection types.
 --
 -- /See:/ 'connectionTypesList' smart constructor.
-newtype ConnectionTypesList = ConnectionTypesList
+newtype ConnectionTypesList = ConnectionTypesList'
     { _ctlProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ connectionTypesList
     :: Int64 -- ^ 'ctlProFileId'
     -> ConnectionTypesList
 connectionTypesList pCtlProFileId_ =
-    ConnectionTypesList
+    ConnectionTypesList'
     { _ctlProFileId = _Coerce # pCtlProFileId_
     }
 
@@ -79,7 +79,9 @@ ctlProFileId
 instance GoogleRequest ConnectionTypesList where
         type Rs ConnectionTypesList =
              ConnectionTypesListResponse
-        requestClient ConnectionTypesList{..}
+        type Scopes ConnectionTypesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ConnectionTypesList'{..}
           = go _ctlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

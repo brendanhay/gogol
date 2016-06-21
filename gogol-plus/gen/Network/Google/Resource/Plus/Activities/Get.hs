@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Plus.Activities.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type ActivitiesGetResource =
 -- | Get an activity.
 --
 -- /See:/ 'activitiesGet' smart constructor.
-newtype ActivitiesGet = ActivitiesGet
+newtype ActivitiesGet = ActivitiesGet'
     { _agActivityId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ activitiesGet
     :: Text -- ^ 'agActivityId'
     -> ActivitiesGet
 activitiesGet pAgActivityId_ =
-    ActivitiesGet
+    ActivitiesGet'
     { _agActivityId = pAgActivityId_
     }
 
@@ -75,7 +75,10 @@ agActivityId
 
 instance GoogleRequest ActivitiesGet where
         type Rs ActivitiesGet = Activity
-        requestClient ActivitiesGet{..}
+        type Scopes ActivitiesGet =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient ActivitiesGet'{..}
           = go _agActivityId (Just AltJSON) plusService
           where go
                   = buildClient (Proxy :: Proxy ActivitiesGetResource)

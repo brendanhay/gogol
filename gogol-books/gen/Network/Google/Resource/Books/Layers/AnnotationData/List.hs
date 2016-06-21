@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Layers.AnnotationData.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -79,7 +79,7 @@ type LayersAnnotationDataListResource =
 -- | Gets the annotation data for a volume and layer.
 --
 -- /See:/ 'layersAnnotationDataList' smart constructor.
-data LayersAnnotationDataList = LayersAnnotationDataList
+data LayersAnnotationDataList = LayersAnnotationDataList'
     { _ladlW                :: !(Maybe (Textual Int32))
     , _ladlScale            :: !(Maybe (Textual Int32))
     , _ladlLocale           :: !(Maybe Text)
@@ -130,7 +130,7 @@ layersAnnotationDataList
     -> Text -- ^ 'ladlLayerId'
     -> LayersAnnotationDataList
 layersAnnotationDataList pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
-    LayersAnnotationDataList
+    LayersAnnotationDataList'
     { _ladlW = Nothing
     , _ladlScale = Nothing
     , _ladlLocale = Nothing
@@ -231,7 +231,9 @@ ladlMaxResults
 
 instance GoogleRequest LayersAnnotationDataList where
         type Rs LayersAnnotationDataList = AnnotationsData
-        requestClient LayersAnnotationDataList{..}
+        type Scopes LayersAnnotationDataList =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient LayersAnnotationDataList'{..}
           = go _ladlVolumeId _ladlLayerId
               (Just _ladlContentVersion)
               _ladlW

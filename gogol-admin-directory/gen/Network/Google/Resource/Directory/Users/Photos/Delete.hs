@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Photos.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type UsersPhotosDeleteResource =
 -- | Remove photos for the user
 --
 -- /See:/ 'usersPhotosDelete' smart constructor.
-newtype UsersPhotosDelete = UsersPhotosDelete
+newtype UsersPhotosDelete = UsersPhotosDelete'
     { _updUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ usersPhotosDelete
     :: Text -- ^ 'updUserKey'
     -> UsersPhotosDelete
 usersPhotosDelete pUpdUserKey_ =
-    UsersPhotosDelete
+    UsersPhotosDelete'
     { _updUserKey = pUpdUserKey_
     }
 
@@ -78,7 +78,9 @@ updUserKey
 
 instance GoogleRequest UsersPhotosDelete where
         type Rs UsersPhotosDelete = ()
-        requestClient UsersPhotosDelete{..}
+        type Scopes UsersPhotosDelete =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
+        requestClient UsersPhotosDelete'{..}
           = go _updUserKey (Just AltJSON) directoryService
           where go
                   = buildClient

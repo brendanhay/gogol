@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Coordinate.Jobs.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type JobsGetResource =
 -- | Retrieves a job, including all the changes made to the job.
 --
 -- /See:/ 'jobsGet' smart constructor.
-data JobsGet = JobsGet
+data JobsGet = JobsGet'
     { _jgJobId  :: !(Textual Word64)
     , _jgTeamId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ jobsGet
     -> Text -- ^ 'jgTeamId'
     -> JobsGet
 jobsGet pJgJobId_ pJgTeamId_ =
-    JobsGet
+    JobsGet'
     { _jgJobId = _Coerce # pJgJobId_
     , _jgTeamId = pJgTeamId_
     }
@@ -87,7 +87,10 @@ jgTeamId = lens _jgTeamId (\ s a -> s{_jgTeamId = a})
 
 instance GoogleRequest JobsGet where
         type Rs JobsGet = Job
-        requestClient JobsGet{..}
+        type Scopes JobsGet =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
+        requestClient JobsGet'{..}
           = go _jgTeamId _jgJobId (Just AltJSON)
               mapsCoordinateService
           where go

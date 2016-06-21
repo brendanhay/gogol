@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.ReplicaPoolUpdater.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +23,7 @@ module Network.Google.ReplicaPoolUpdater.Types
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
     , replicapoolScope
-    , replicapoolReadonlyScope
+    , replicapoolReadOnlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -166,24 +167,24 @@ import           Network.Google.ReplicaPoolUpdater.Types.Product
 import           Network.Google.ReplicaPoolUpdater.Types.Sum
 
 -- | Default request referring to version 'v1beta1' of the Google Compute Engine Instance Group Updater API. This contains the host and root path used as a starting point for constructing service requests.
-replicaPoolUpdaterService :: Service
+replicaPoolUpdaterService :: ServiceConfig
 replicaPoolUpdaterService
   = defaultService
       (ServiceId "replicapoolupdater:v1beta1")
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View and manage replica pools
-replicapoolScope :: OAuthScope
-replicapoolScope = "https://www.googleapis.com/auth/replicapool";
+replicapoolScope :: Proxy '["https://www.googleapis.com/auth/replicapool"]
+replicapoolScope = Proxy;
 
 -- | View replica pools
-replicapoolReadonlyScope :: OAuthScope
-replicapoolReadonlyScope = "https://www.googleapis.com/auth/replicapool.readonly";
+replicapoolReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
+replicapoolReadOnlyScope = Proxy;

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GAN.Publishers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type PublishersGetResource =
 -- omitting the publisherId query parameter.
 --
 -- /See:/ 'publishersGet' smart constructor.
-data PublishersGet = PublishersGet
+data PublishersGet = PublishersGet'
     { _pgRoleId      :: !Text
     , _pgRole        :: !PublishersGetRole
     , _pgPublisherId :: !(Maybe Text)
@@ -81,7 +81,7 @@ publishersGet
     -> PublishersGetRole -- ^ 'pgRole'
     -> PublishersGet
 publishersGet pPgRoleId_ pPgRole_ =
-    PublishersGet
+    PublishersGet'
     { _pgRoleId = pPgRoleId_
     , _pgRole = pPgRole_
     , _pgPublisherId = Nothing
@@ -104,7 +104,8 @@ pgPublisherId
 
 instance GoogleRequest PublishersGet where
         type Rs PublishersGet = Publisher
-        requestClient PublishersGet{..}
+        type Scopes PublishersGet = '[]
+        requestClient PublishersGet'{..}
           = go _pgRole _pgRoleId _pgPublisherId (Just AltJSON)
               affiliatesService
           where go

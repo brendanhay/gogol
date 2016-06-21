@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Addresses.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AddressesGetResource =
 -- | Returns the specified address resource.
 --
 -- /See:/ 'addressesGet' smart constructor.
-data AddressesGet = AddressesGet
+data AddressesGet = AddressesGet'
     { _addProject :: !Text
     , _addAddress :: !Text
     , _addRegion  :: !Text
@@ -78,7 +78,7 @@ addressesGet
     -> Text -- ^ 'addRegion'
     -> AddressesGet
 addressesGet pAddProject_ pAddAddress_ pAddRegion_ =
-    AddressesGet
+    AddressesGet'
     { _addProject = pAddProject_
     , _addAddress = pAddAddress_
     , _addRegion = pAddRegion_
@@ -94,14 +94,18 @@ addAddress :: Lens' AddressesGet Text
 addAddress
   = lens _addAddress (\ s a -> s{_addAddress = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 addRegion :: Lens' AddressesGet Text
 addRegion
   = lens _addRegion (\ s a -> s{_addRegion = a})
 
 instance GoogleRequest AddressesGet where
         type Rs AddressesGet = Address
-        requestClient AddressesGet{..}
+        type Scopes AddressesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient AddressesGet'{..}
           = go _addProject _addRegion _addAddress
               (Just AltJSON)
               computeService

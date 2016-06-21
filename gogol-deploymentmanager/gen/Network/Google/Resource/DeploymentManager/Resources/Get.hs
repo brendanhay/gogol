@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DeploymentManager.Resources.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ResourcesGetResource =
 -- | Gets information about a single resource.
 --
 -- /See:/ 'resourcesGet' smart constructor.
-data ResourcesGet = ResourcesGet
+data ResourcesGet = ResourcesGet'
     { _rgProject    :: !Text
     , _rgResource   :: !Text
     , _rgDeployment :: !Text
@@ -79,7 +79,7 @@ resourcesGet
     -> Text -- ^ 'rgDeployment'
     -> ResourcesGet
 resourcesGet pRgProject_ pRgResource_ pRgDeployment_ =
-    ResourcesGet
+    ResourcesGet'
     { _rgProject = pRgProject_
     , _rgResource = pRgResource_
     , _rgDeployment = pRgDeployment_
@@ -102,7 +102,12 @@ rgDeployment
 
 instance GoogleRequest ResourcesGet where
         type Rs ResourcesGet = Resource
-        requestClient ResourcesGet{..}
+        type Scopes ResourcesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+        requestClient ResourcesGet'{..}
           = go _rgProject _rgDeployment _rgResource
               (Just AltJSON)
               deploymentManagerService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Tasks.Tasks.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type TasksInsertResource =
 -- | Creates a new task on the specified task list.
 --
 -- /See:/ 'tasksInsert' smart constructor.
-data TasksInsert = TasksInsert
+data TasksInsert = TasksInsert'
     { _tiParent   :: !(Maybe Text)
     , _tiPayload  :: !Task
     , _tiTaskList :: !Text
@@ -81,7 +81,7 @@ tasksInsert
     -> Text -- ^ 'tiTaskList'
     -> TasksInsert
 tasksInsert pTiPayload_ pTiTaskList_ =
-    TasksInsert
+    TasksInsert'
     { _tiParent = Nothing
     , _tiPayload = pTiPayload_
     , _tiTaskList = pTiTaskList_
@@ -111,7 +111,9 @@ tiPrevious
 
 instance GoogleRequest TasksInsert where
         type Rs TasksInsert = Task
-        requestClient TasksInsert{..}
+        type Scopes TasksInsert =
+             '["https://www.googleapis.com/auth/tasks"]
+        requestClient TasksInsert'{..}
           = go _tiTaskList _tiParent _tiPrevious (Just AltJSON)
               _tiPayload
               appsTasksService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accounts.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsUpdateResource =
 -- | Updates a Merchant Center account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate
+data AccountsUpdate = AccountsUpdate'
     { _au1MerchantId :: !(Textual Word64)
     , _au1Payload    :: !Account
     , _au1AccountId  :: !(Textual Word64)
@@ -81,7 +81,7 @@ accountsUpdate
     -> Word64 -- ^ 'au1AccountId'
     -> AccountsUpdate
 accountsUpdate pAu1MerchantId_ pAu1Payload_ pAu1AccountId_ =
-    AccountsUpdate
+    AccountsUpdate'
     { _au1MerchantId = _Coerce # pAu1MerchantId_
     , _au1Payload = pAu1Payload_
     , _au1AccountId = _Coerce # pAu1AccountId_
@@ -113,7 +113,9 @@ au1DryRun
 
 instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
-        requestClient AccountsUpdate{..}
+        type Scopes AccountsUpdate =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountsUpdate'{..}
           = go _au1MerchantId _au1AccountId _au1DryRun
               (Just AltJSON)
               _au1Payload

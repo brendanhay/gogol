@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Subscriptions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,18 +52,20 @@ type SubscriptionsListResource =
 --
 -- /See:/ 'subscriptionsList' smart constructor.
 data SubscriptionsList =
-    SubscriptionsList
+    SubscriptionsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
 --
 subscriptionsList
     :: SubscriptionsList
-subscriptionsList = SubscriptionsList
+subscriptionsList = SubscriptionsList'
 
 instance GoogleRequest SubscriptionsList where
         type Rs SubscriptionsList = SubscriptionsListResponse
-        requestClient SubscriptionsList{}
+        type Scopes SubscriptionsList =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient SubscriptionsList'{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient

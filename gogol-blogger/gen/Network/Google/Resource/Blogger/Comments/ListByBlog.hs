@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Comments.ListByBlog
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type CommentsListByBlogResource =
 -- | Retrieves the comments for a blog, across all posts, possibly filtered.
 --
 -- /See:/ 'commentsListByBlog' smart constructor.
-data CommentsListByBlog = CommentsListByBlog
+data CommentsListByBlog = CommentsListByBlog'
     { _clbbStatus      :: !(Maybe [CommentsListByBlogStatus])
     , _clbbEndDate     :: !(Maybe DateTime')
     , _clbbBlogId      :: !Text
@@ -95,7 +95,7 @@ commentsListByBlog
     :: Text -- ^ 'clbbBlogId'
     -> CommentsListByBlog
 commentsListByBlog pClbbBlogId_ =
-    CommentsListByBlog
+    CommentsListByBlog'
     { _clbbStatus = Nothing
     , _clbbEndDate = Nothing
     , _clbbBlogId = pClbbBlogId_
@@ -150,7 +150,10 @@ clbbMaxResults
 
 instance GoogleRequest CommentsListByBlog where
         type Rs CommentsListByBlog = CommentList
-        requestClient CommentsListByBlog{..}
+        type Scopes CommentsListByBlog =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient CommentsListByBlog'{..}
           = go _clbbBlogId (_clbbStatus ^. _Default)
               _clbbEndDate
               _clbbStartDate

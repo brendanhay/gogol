@@ -14,17 +14,19 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for the dataset. Is empty if the policy
--- or the resource does not exist. See Getting a Policy for more
--- information.
+-- Gets the access control policy for the dataset. This is empty if the
+-- policy or resource does not exist. See Getting a Policy for more
+-- information. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.getIamPolicy@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.getIamPolicy@.
 module Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
     (
     -- * REST Resource
@@ -65,12 +67,14 @@ type DataSetsGetIAMPolicyResource =
                          ReqBody '[JSON] GetIAMPolicyRequest :>
                            Post '[JSON] Policy
 
--- | Gets the access control policy for the dataset. Is empty if the policy
--- or the resource does not exist. See Getting a Policy for more
--- information.
+-- | Gets the access control policy for the dataset. This is empty if the
+-- policy or resource does not exist. See Getting a Policy for more
+-- information. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsGetIAMPolicy' smart constructor.
-data DataSetsGetIAMPolicy = DataSetsGetIAMPolicy
+data DataSetsGetIAMPolicy = DataSetsGetIAMPolicy'
     { _dsgipXgafv          :: !(Maybe Text)
     , _dsgipUploadProtocol :: !(Maybe Text)
     , _dsgipPp             :: !Bool
@@ -108,7 +112,7 @@ dataSetsGetIAMPolicy
     -> Text -- ^ 'dsgipResource'
     -> DataSetsGetIAMPolicy
 dataSetsGetIAMPolicy pDsgipPayload_ pDsgipResource_ =
-    DataSetsGetIAMPolicy
+    DataSetsGetIAMPolicy'
     { _dsgipXgafv = Nothing
     , _dsgipUploadProtocol = Nothing
     , _dsgipPp = True
@@ -173,7 +177,10 @@ dsgipCallback
 
 instance GoogleRequest DataSetsGetIAMPolicy where
         type Rs DataSetsGetIAMPolicy = Policy
-        requestClient DataSetsGetIAMPolicy{..}
+        type Scopes DataSetsGetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient DataSetsGetIAMPolicy'{..}
           = go _dsgipResource _dsgipXgafv _dsgipUploadProtocol
               (Just _dsgipPp)
               _dsgipAccessToken

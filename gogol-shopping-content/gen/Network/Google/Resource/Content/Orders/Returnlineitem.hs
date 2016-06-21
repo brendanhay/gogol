@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.Returnlineitem
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type OrdersReturnlineitemResource =
 -- | Returns a line item.
 --
 -- /See:/ 'ordersReturnlineitem' smart constructor.
-data OrdersReturnlineitem = OrdersReturnlineitem
+data OrdersReturnlineitem = OrdersReturnlineitem'
     { _oMerchantId :: !(Textual Word64)
     , _oPayload    :: !OrdersReturnLineItemRequest
     , _oOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersReturnlineitem
     -> Text -- ^ 'oOrderId'
     -> OrdersReturnlineitem
 ordersReturnlineitem pOMerchantId_ pOPayload_ pOOrderId_ =
-    OrdersReturnlineitem
+    OrdersReturnlineitem'
     { _oMerchantId = _Coerce # pOMerchantId_
     , _oPayload = pOPayload_
     , _oOrderId = pOOrderId_
@@ -101,7 +101,9 @@ oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
 instance GoogleRequest OrdersReturnlineitem where
         type Rs OrdersReturnlineitem =
              OrdersReturnLineItemResponse
-        requestClient OrdersReturnlineitem{..}
+        type Scopes OrdersReturnlineitem =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersReturnlineitem'{..}
           = go _oMerchantId _oOrderId (Just AltJSON) _oPayload
               shoppingContentService
           where go

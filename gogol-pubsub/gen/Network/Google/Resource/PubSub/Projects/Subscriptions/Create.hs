@@ -14,17 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a subscription to a given topic for a given subscriber. If the
--- subscription already exists, returns \`ALREADY_EXISTS\`. If the
--- corresponding topic doesn\'t exist, returns \`NOT_FOUND\`. If the name
--- is not provided in the request, the server will assign a random name for
--- this subscription on the same project as the topic.
+-- Creates a subscription to a given topic. If the subscription already
+-- exists, returns \`ALREADY_EXISTS\`. If the corresponding topic doesn\'t
+-- exist, returns \`NOT_FOUND\`. If the name is not provided in the
+-- request, the server will assign a random name for this subscription on
+-- the same project as the topic.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.create@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
@@ -67,14 +67,14 @@ type ProjectsSubscriptionsCreateResource =
                          ReqBody '[JSON] Subscription :>
                            Put '[JSON] Subscription
 
--- | Creates a subscription to a given topic for a given subscriber. If the
--- subscription already exists, returns \`ALREADY_EXISTS\`. If the
--- corresponding topic doesn\'t exist, returns \`NOT_FOUND\`. If the name
--- is not provided in the request, the server will assign a random name for
--- this subscription on the same project as the topic.
+-- | Creates a subscription to a given topic. If the subscription already
+-- exists, returns \`ALREADY_EXISTS\`. If the corresponding topic doesn\'t
+-- exist, returns \`NOT_FOUND\`. If the name is not provided in the
+-- request, the server will assign a random name for this subscription on
+-- the same project as the topic.
 --
 -- /See:/ 'projectsSubscriptionsCreate' smart constructor.
-data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate
+data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'
     { _pscXgafv          :: !(Maybe Text)
     , _pscUploadProtocol :: !(Maybe Text)
     , _pscPp             :: !Bool
@@ -112,7 +112,7 @@ projectsSubscriptionsCreate
     -> Text -- ^ 'pscName'
     -> ProjectsSubscriptionsCreate
 projectsSubscriptionsCreate pPscPayload_ pPscName_ =
-    ProjectsSubscriptionsCreate
+    ProjectsSubscriptionsCreate'
     { _pscXgafv = Nothing
     , _pscUploadProtocol = Nothing
     , _pscPp = True
@@ -179,7 +179,10 @@ pscCallback
 instance GoogleRequest ProjectsSubscriptionsCreate
          where
         type Rs ProjectsSubscriptionsCreate = Subscription
-        requestClient ProjectsSubscriptionsCreate{..}
+        type Scopes ProjectsSubscriptionsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsSubscriptionsCreate'{..}
           = go _pscName _pscXgafv _pscUploadProtocol
               (Just _pscPp)
               _pscAccessToken

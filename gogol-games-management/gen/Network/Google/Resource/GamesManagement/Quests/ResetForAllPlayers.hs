@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Quests.ResetForAllPlayers
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type QuestsResetForAllPlayersResource =
 -- developer console. Only draft quests can be reset.
 --
 -- /See:/ 'questsResetForAllPlayers' smart constructor.
-newtype QuestsResetForAllPlayers = QuestsResetForAllPlayers
+newtype QuestsResetForAllPlayers = QuestsResetForAllPlayers'
     { _qrfapQuestId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ questsResetForAllPlayers
     :: Text -- ^ 'qrfapQuestId'
     -> QuestsResetForAllPlayers
 questsResetForAllPlayers pQrfapQuestId_ =
-    QuestsResetForAllPlayers
+    QuestsResetForAllPlayers'
     { _qrfapQuestId = pQrfapQuestId_
     }
 
@@ -80,7 +80,10 @@ qrfapQuestId
 
 instance GoogleRequest QuestsResetForAllPlayers where
         type Rs QuestsResetForAllPlayers = ()
-        requestClient QuestsResetForAllPlayers{..}
+        type Scopes QuestsResetForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient QuestsResetForAllPlayers'{..}
           = go _qrfapQuestId (Just AltJSON)
               gamesManagementService
           where go

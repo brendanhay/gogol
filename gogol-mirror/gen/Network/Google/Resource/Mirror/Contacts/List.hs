@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Contacts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,18 +50,20 @@ type ContactsListResource =
 --
 -- /See:/ 'contactsList' smart constructor.
 data ContactsList =
-    ContactsList
+    ContactsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsList' with the minimum fields required to make a request.
 --
 contactsList
     :: ContactsList
-contactsList = ContactsList
+contactsList = ContactsList'
 
 instance GoogleRequest ContactsList where
         type Rs ContactsList = ContactsListResponse
-        requestClient ContactsList{}
+        type Scopes ContactsList =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient ContactsList'{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsListResource)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.GlobalAddresses.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type GlobalAddressesDeleteResource =
 -- | Deletes the specified address resource.
 --
 -- /See:/ 'globalAddressesDelete' smart constructor.
-data GlobalAddressesDelete = GlobalAddressesDelete
+data GlobalAddressesDelete = GlobalAddressesDelete'
     { _gadProject :: !Text
     , _gadAddress :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ globalAddressesDelete
     -> Text -- ^ 'gadAddress'
     -> GlobalAddressesDelete
 globalAddressesDelete pGadProject_ pGadAddress_ =
-    GlobalAddressesDelete
+    GlobalAddressesDelete'
     { _gadProject = pGadProject_
     , _gadAddress = pGadAddress_
     }
@@ -89,7 +89,10 @@ gadAddress
 
 instance GoogleRequest GlobalAddressesDelete where
         type Rs GlobalAddressesDelete = Operation
-        requestClient GlobalAddressesDelete{..}
+        type Scopes GlobalAddressesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient GlobalAddressesDelete'{..}
           = go _gadProject _gadAddress (Just AltJSON)
               computeService
           where go

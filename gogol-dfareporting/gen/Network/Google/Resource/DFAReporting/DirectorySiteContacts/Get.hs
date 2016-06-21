@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'DirectorySiteContactsGet' request conforms to.
 type DirectorySiteContactsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySiteContacts" :>
@@ -55,7 +55,7 @@ type DirectorySiteContactsGetResource =
 -- | Gets one directory site contact by ID.
 --
 -- /See:/ 'directorySiteContactsGet' smart constructor.
-data DirectorySiteContactsGet = DirectorySiteContactsGet
+data DirectorySiteContactsGet = DirectorySiteContactsGet'
     { _dscgProFileId :: !(Textual Int64)
     , _dscgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ directorySiteContactsGet
     -> Int64 -- ^ 'dscgId'
     -> DirectorySiteContactsGet
 directorySiteContactsGet pDscgProFileId_ pDscgId_ =
-    DirectorySiteContactsGet
+    DirectorySiteContactsGet'
     { _dscgProFileId = _Coerce # pDscgProFileId_
     , _dscgId = _Coerce # pDscgId_
     }
@@ -92,7 +92,9 @@ dscgId
 instance GoogleRequest DirectorySiteContactsGet where
         type Rs DirectorySiteContactsGet =
              DirectorySiteContact
-        requestClient DirectorySiteContactsGet{..}
+        type Scopes DirectorySiteContactsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient DirectorySiteContactsGet'{..}
           = go _dscgProFileId _dscgId (Just AltJSON)
               dFAReportingService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.Accounts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -49,18 +49,20 @@ type AccountsListResource =
 --
 -- /See:/ 'accountsList'' smart constructor.
 data AccountsList' =
-    AccountsList'
+    AccountsList''
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
 --
 accountsList'
     :: AccountsList'
-accountsList' = AccountsList'
+accountsList' = AccountsList''
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsList
-        requestClient AccountsList'{}
+        type Scopes AccountsList' =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient AccountsList''{}
           = go (Just AltJSON) adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy AccountsListResource)

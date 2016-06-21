@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlatformTypes.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'PlatformTypesList' request conforms to.
 type PlatformTypesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "platformTypes" :>
@@ -53,7 +53,7 @@ type PlatformTypesListResource =
 -- | Retrieves a list of platform types.
 --
 -- /See:/ 'platformTypesList' smart constructor.
-newtype PlatformTypesList = PlatformTypesList
+newtype PlatformTypesList = PlatformTypesList'
     { _ptlProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ platformTypesList
     :: Int64 -- ^ 'ptlProFileId'
     -> PlatformTypesList
 platformTypesList pPtlProFileId_ =
-    PlatformTypesList
+    PlatformTypesList'
     { _ptlProFileId = _Coerce # pPtlProFileId_
     }
 
@@ -78,7 +78,9 @@ ptlProFileId
 
 instance GoogleRequest PlatformTypesList where
         type Rs PlatformTypesList = PlatformTypesListResponse
-        requestClient PlatformTypesList{..}
+        type Scopes PlatformTypesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlatformTypesList'{..}
           = go _ptlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

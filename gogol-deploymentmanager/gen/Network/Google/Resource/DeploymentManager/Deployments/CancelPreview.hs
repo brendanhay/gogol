@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type DeploymentsCancelPreviewResource =
 -- deployment.
 --
 -- /See:/ 'deploymentsCancelPreview' smart constructor.
-data DeploymentsCancelPreview = DeploymentsCancelPreview
+data DeploymentsCancelPreview = DeploymentsCancelPreview'
     { _dcpProject    :: !Text
     , _dcpPayload    :: !DeploymentsCancelPreviewRequest
     , _dcpDeployment :: !Text
@@ -82,7 +82,7 @@ deploymentsCancelPreview
     -> Text -- ^ 'dcpDeployment'
     -> DeploymentsCancelPreview
 deploymentsCancelPreview pDcpProject_ pDcpPayload_ pDcpDeployment_ =
-    DeploymentsCancelPreview
+    DeploymentsCancelPreview'
     { _dcpProject = pDcpProject_
     , _dcpPayload = pDcpPayload_
     , _dcpDeployment = pDcpDeployment_
@@ -106,7 +106,10 @@ dcpDeployment
 
 instance GoogleRequest DeploymentsCancelPreview where
         type Rs DeploymentsCancelPreview = Operation
-        requestClient DeploymentsCancelPreview{..}
+        type Scopes DeploymentsCancelPreview =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient DeploymentsCancelPreview'{..}
           = go _dcpProject _dcpDeployment (Just AltJSON)
               _dcpPayload
               deploymentManagerService

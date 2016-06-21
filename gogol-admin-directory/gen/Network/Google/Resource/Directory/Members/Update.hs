@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Members.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type MembersUpdateResource =
 -- | Update membership of a user in the specified group.
 --
 -- /See:/ 'membersUpdate' smart constructor.
-data MembersUpdate = MembersUpdate
+data MembersUpdate = MembersUpdate'
     { _muMemberKey :: !Text
     , _muGroupKey  :: !Text
     , _muPayload   :: !Member
@@ -78,7 +78,7 @@ membersUpdate
     -> Member -- ^ 'muPayload'
     -> MembersUpdate
 membersUpdate pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
-    MembersUpdate
+    MembersUpdate'
     { _muMemberKey = pMuMemberKey_
     , _muGroupKey = pMuGroupKey_
     , _muPayload = pMuPayload_
@@ -103,7 +103,10 @@ muPayload
 
 instance GoogleRequest MembersUpdate where
         type Rs MembersUpdate = Member
-        requestClient MembersUpdate{..}
+        type Scopes MembersUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member"]
+        requestClient MembersUpdate'{..}
           = go _muGroupKey _muMemberKey (Just AltJSON)
               _muPayload
               directoryService

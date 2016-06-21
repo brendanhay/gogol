@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeGroups.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsPatch' request conforms to.
 type CreativeGroupsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
@@ -59,7 +59,7 @@ type CreativeGroupsPatchResource =
 -- semantics.
 --
 -- /See:/ 'creativeGroupsPatch' smart constructor.
-data CreativeGroupsPatch = CreativeGroupsPatch
+data CreativeGroupsPatch = CreativeGroupsPatch'
     { _cgpProFileId :: !(Textual Int64)
     , _cgpPayload   :: !CreativeGroup
     , _cgpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ creativeGroupsPatch
     -> Int64 -- ^ 'cgpId'
     -> CreativeGroupsPatch
 creativeGroupsPatch pCgpProFileId_ pCgpPayload_ pCgpId_ =
-    CreativeGroupsPatch
+    CreativeGroupsPatch'
     { _cgpProFileId = _Coerce # pCgpProFileId_
     , _cgpPayload = pCgpPayload_
     , _cgpId = _Coerce # pCgpId_
@@ -104,7 +104,9 @@ cgpId
 
 instance GoogleRequest CreativeGroupsPatch where
         type Rs CreativeGroupsPatch = CreativeGroup
-        requestClient CreativeGroupsPatch{..}
+        type Scopes CreativeGroupsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeGroupsPatch'{..}
           = go _cgpProFileId (Just _cgpId) (Just AltJSON)
               _cgpPayload
               dFAReportingService

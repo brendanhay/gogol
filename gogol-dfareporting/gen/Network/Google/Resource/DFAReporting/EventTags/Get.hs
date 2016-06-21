@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.EventTags.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsGet' request conforms to.
 type EventTagsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -54,7 +54,7 @@ type EventTagsGetResource =
 -- | Gets one event tag by ID.
 --
 -- /See:/ 'eventTagsGet' smart constructor.
-data EventTagsGet = EventTagsGet
+data EventTagsGet = EventTagsGet'
     { _etgProFileId :: !(Textual Int64)
     , _etgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ eventTagsGet
     -> Int64 -- ^ 'etgId'
     -> EventTagsGet
 eventTagsGet pEtgProFileId_ pEtgId_ =
-    EventTagsGet
+    EventTagsGet'
     { _etgProFileId = _Coerce # pEtgProFileId_
     , _etgId = _Coerce # pEtgId_
     }
@@ -89,7 +89,9 @@ etgId
 
 instance GoogleRequest EventTagsGet where
         type Rs EventTagsGet = EventTag
-        requestClient EventTagsGet{..}
+        type Scopes EventTagsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient EventTagsGet'{..}
           = go _etgProFileId _etgId (Just AltJSON)
               dFAReportingService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Template.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type TemplateGetResource =
 -- | Retrieves a specific template by its id
 --
 -- /See:/ 'templateGet' smart constructor.
-data TemplateGet = TemplateGet
+data TemplateGet = TemplateGet'
     { _temeTemplateId :: !(Textual Int32)
     , _temeTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ templateGet
     -> Text -- ^ 'temeTableId'
     -> TemplateGet
 templateGet pTemeTemplateId_ pTemeTableId_ =
-    TemplateGet
+    TemplateGet'
     { _temeTemplateId = _Coerce # pTemeTemplateId_
     , _temeTableId = pTemeTableId_
     }
@@ -90,7 +90,10 @@ temeTableId
 
 instance GoogleRequest TemplateGet where
         type Rs TemplateGet = Template
-        requestClient TemplateGet{..}
+        type Scopes TemplateGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient TemplateGet'{..}
           = go _temeTableId _temeTemplateId (Just AltJSON)
               fusionTablesService
           where go

@@ -14,17 +14,20 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.VariantSets.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new variant set. The provided variant set must have a valid
--- \`datasetId\` set - all other fields are optional. Note that the \`id\`
--- field will be ignored, as this is assigned by the server.
+-- Creates a new variant set. For the definitions of variant sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- The provided variant set must have a valid \`datasetId\` set - all other
+-- fields are optional. Note that the \`id\` field will be ignored, as this
+-- is assigned by the server.
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.create@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.create@.
 module Network.Google.Resource.Genomics.VariantSets.Create
     (
     -- * REST Resource
@@ -63,12 +66,15 @@ type VariantSetsCreateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] VariantSet :> Post '[JSON] VariantSet
 
--- | Creates a new variant set. The provided variant set must have a valid
--- \`datasetId\` set - all other fields are optional. Note that the \`id\`
--- field will be ignored, as this is assigned by the server.
+-- | Creates a new variant set. For the definitions of variant sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- The provided variant set must have a valid \`datasetId\` set - all other
+-- fields are optional. Note that the \`id\` field will be ignored, as this
+-- is assigned by the server.
 --
 -- /See:/ 'variantSetsCreate' smart constructor.
-data VariantSetsCreate = VariantSetsCreate
+data VariantSetsCreate = VariantSetsCreate'
     { _vscXgafv          :: !(Maybe Text)
     , _vscUploadProtocol :: !(Maybe Text)
     , _vscPp             :: !Bool
@@ -102,7 +108,7 @@ variantSetsCreate
     :: VariantSet -- ^ 'vscPayload'
     -> VariantSetsCreate
 variantSetsCreate pVscPayload_ =
-    VariantSetsCreate
+    VariantSetsCreate'
     { _vscXgafv = Nothing
     , _vscUploadProtocol = Nothing
     , _vscPp = True
@@ -157,7 +163,10 @@ vscCallback
 
 instance GoogleRequest VariantSetsCreate where
         type Rs VariantSetsCreate = VariantSet
-        requestClient VariantSetsCreate{..}
+        type Scopes VariantSetsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient VariantSetsCreate'{..}
           = go _vscXgafv _vscUploadProtocol (Just _vscPp)
               _vscAccessToken
               _vscUploadType

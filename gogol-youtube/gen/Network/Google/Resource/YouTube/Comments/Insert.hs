@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Comments.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type CommentsInsertResource =
 -- comment, use the commentThreads.insert method.
 --
 -- /See:/ 'commentsInsert' smart constructor.
-data CommentsInsert = CommentsInsert
+data CommentsInsert = CommentsInsert'
     { _comPart    :: !Text
     , _comPayload :: !Comment
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ commentsInsert
     -> Comment -- ^ 'comPayload'
     -> CommentsInsert
 commentsInsert pComPart_ pComPayload_ =
-    CommentsInsert
+    CommentsInsert'
     { _comPart = pComPart_
     , _comPayload = pComPayload_
     }
@@ -90,7 +90,9 @@ comPayload
 
 instance GoogleRequest CommentsInsert where
         type Rs CommentsInsert = Comment
-        requestClient CommentsInsert{..}
+        type Scopes CommentsInsert =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient CommentsInsert'{..}
           = go (Just _comPart) (Just AltJSON) _comPayload
               youTubeService
           where go

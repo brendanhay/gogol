@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Placements.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ import           Network.Google.Prelude
 -- 'PlacementsList' request conforms to.
 type PlacementsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -119,7 +119,7 @@ type PlacementsListResource =
 -- | Retrieves a list of placements, possibly filtered.
 --
 -- /See:/ 'placementsList' smart constructor.
-data PlacementsList = PlacementsList
+data PlacementsList = PlacementsList'
     { _pPlacementStrategyIds :: !(Maybe [Textual Int64])
     , _pContentCategoryIds   :: !(Maybe [Textual Int64])
     , _pMaxEndDate           :: !(Maybe Text)
@@ -198,7 +198,7 @@ placementsList
     :: Int64 -- ^ 'pProFileId'
     -> PlacementsList
 placementsList pPProFileId_ =
-    PlacementsList
+    PlacementsList'
     { _pPlacementStrategyIds = Nothing
     , _pContentCategoryIds = Nothing
     , _pMaxEndDate = Nothing
@@ -339,10 +339,11 @@ pSortField
   = lens _pSortField (\ s a -> s{_pSortField = a})
 
 -- | Select only placements that are associated with these compatibilities.
--- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
--- mobile devices for regular or interstitial ads respectively. APP and
--- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
--- to rendering in in-stream video ads developed with the VAST standard.
+-- DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or
+-- on mobile devices for regular or interstitial ads respectively. APP and
+-- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
+-- refers to rendering in in-stream video ads developed with the VAST
+-- standard.
 pCompatibilities :: Lens' PlacementsList [PlacementsListCompatibilities]
 pCompatibilities
   = lens _pCompatibilities
@@ -395,7 +396,9 @@ pMinEndDate
 
 instance GoogleRequest PlacementsList where
         type Rs PlacementsList = PlacementsListResponse
-        requestClient PlacementsList{..}
+        type Scopes PlacementsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementsList'{..}
           = go _pProFileId (_pPlacementStrategyIds ^. _Default)
               (_pContentCategoryIds ^. _Default)
               _pMaxEndDate

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.CustomChannels.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type CustomChannelsUpdateResource =
 -- | Update a custom channel in the host AdSense account.
 --
 -- /See:/ 'customChannelsUpdate' smart constructor.
-data CustomChannelsUpdate = CustomChannelsUpdate
+data CustomChannelsUpdate = CustomChannelsUpdate'
     { _ccuPayload    :: !CustomChannel
     , _ccuAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ customChannelsUpdate
     -> Text -- ^ 'ccuAdClientId'
     -> CustomChannelsUpdate
 customChannelsUpdate pCcuPayload_ pCcuAdClientId_ =
-    CustomChannelsUpdate
+    CustomChannelsUpdate'
     { _ccuPayload = pCcuPayload_
     , _ccuAdClientId = pCcuAdClientId_
     }
@@ -90,7 +90,9 @@ ccuAdClientId
 
 instance GoogleRequest CustomChannelsUpdate where
         type Rs CustomChannelsUpdate = CustomChannel
-        requestClient CustomChannelsUpdate{..}
+        type Scopes CustomChannelsUpdate =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient CustomChannelsUpdate'{..}
           = go _ccuAdClientId (Just AltJSON) _ccuPayload
               adSenseHostService
           where go

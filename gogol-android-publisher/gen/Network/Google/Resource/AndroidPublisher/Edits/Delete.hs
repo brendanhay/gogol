@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type EditsDeleteResource =
 -- you want to preemptively abandon an edit.
 --
 -- /See:/ 'editsDelete' smart constructor.
-data EditsDelete = EditsDelete
+data EditsDelete = EditsDelete'
     { _edPackageName :: !Text
     , _edEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ editsDelete
     -> Text -- ^ 'edEditId'
     -> EditsDelete
 editsDelete pEdPackageName_ pEdEditId_ =
-    EditsDelete
+    EditsDelete'
     { _edPackageName = pEdPackageName_
     , _edEditId = pEdEditId_
     }
@@ -93,7 +93,9 @@ edEditId = lens _edEditId (\ s a -> s{_edEditId = a})
 
 instance GoogleRequest EditsDelete where
         type Rs EditsDelete = ()
-        requestClient EditsDelete{..}
+        type Scopes EditsDelete =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsDelete'{..}
           = go _edPackageName _edEditId (Just AltJSON)
               androidPublisherService
           where go

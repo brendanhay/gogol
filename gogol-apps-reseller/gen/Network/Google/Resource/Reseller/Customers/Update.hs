@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Customers.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type CustomersUpdateResource =
 -- reseller.
 --
 -- /See:/ 'customersUpdate' smart constructor.
-data CustomersUpdate = CustomersUpdate
+data CustomersUpdate = CustomersUpdate'
     { _cuPayload    :: !Customer
     , _cuCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ customersUpdate
     -> Text -- ^ 'cuCustomerId'
     -> CustomersUpdate
 customersUpdate pCuPayload_ pCuCustomerId_ =
-    CustomersUpdate
+    CustomersUpdate'
     { _cuPayload = pCuPayload_
     , _cuCustomerId = pCuCustomerId_
     }
@@ -90,7 +90,9 @@ cuCustomerId
 
 instance GoogleRequest CustomersUpdate where
         type Rs CustomersUpdate = Customer
-        requestClient CustomersUpdate{..}
+        type Scopes CustomersUpdate =
+             '["https://www.googleapis.com/auth/apps.order"]
+        requestClient CustomersUpdate'{..}
           = go _cuCustomerId (Just AltJSON) _cuPayload
               appsResellerService
           where go

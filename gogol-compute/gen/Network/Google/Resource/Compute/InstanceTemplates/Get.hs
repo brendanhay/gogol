@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceTemplates.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified instance template resource.
+-- Returns the specified instance template. Get a list of available
+-- instance templates by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.get@.
 module Network.Google.Resource.Compute.InstanceTemplates.Get
@@ -53,10 +54,11 @@ type InstanceTemplatesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] InstanceTemplate
 
--- | Returns the specified instance template resource.
+-- | Returns the specified instance template. Get a list of available
+-- instance templates by making a list() request.
 --
 -- /See:/ 'instanceTemplatesGet' smart constructor.
-data InstanceTemplatesGet = InstanceTemplatesGet
+data InstanceTemplatesGet = InstanceTemplatesGet'
     { _itgProject          :: !Text
     , _itgInstanceTemplate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,12 +75,12 @@ instanceTemplatesGet
     -> Text -- ^ 'itgInstanceTemplate'
     -> InstanceTemplatesGet
 instanceTemplatesGet pItgProject_ pItgInstanceTemplate_ =
-    InstanceTemplatesGet
+    InstanceTemplatesGet'
     { _itgProject = pItgProject_
     , _itgInstanceTemplate = pItgInstanceTemplate_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 itgProject :: Lens' InstanceTemplatesGet Text
 itgProject
   = lens _itgProject (\ s a -> s{_itgProject = a})
@@ -91,7 +93,11 @@ itgInstanceTemplate
 
 instance GoogleRequest InstanceTemplatesGet where
         type Rs InstanceTemplatesGet = InstanceTemplate
-        requestClient InstanceTemplatesGet{..}
+        type Scopes InstanceTemplatesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient InstanceTemplatesGet'{..}
           = go _itgProject _itgInstanceTemplate (Just AltJSON)
               computeService
           where go

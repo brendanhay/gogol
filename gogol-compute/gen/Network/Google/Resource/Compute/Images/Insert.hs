@@ -14,14 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Images.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an image resource in the specified project using the data
--- included in the request.
+-- Creates an image in the specified project using the data included in the
+-- request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.insert@.
 module Network.Google.Resource.Compute.Images.Insert
@@ -53,11 +53,11 @@ type ImagesInsertResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Image :> Post '[JSON] Operation
 
--- | Creates an image resource in the specified project using the data
--- included in the request.
+-- | Creates an image in the specified project using the data included in the
+-- request.
 --
 -- /See:/ 'imagesInsert' smart constructor.
-data ImagesInsert = ImagesInsert
+data ImagesInsert = ImagesInsert'
     { _iiProject :: !Text
     , _iiPayload :: !Image
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ imagesInsert
     -> Image -- ^ 'iiPayload'
     -> ImagesInsert
 imagesInsert pIiProject_ pIiPayload_ =
-    ImagesInsert
+    ImagesInsert'
     { _iiProject = pIiProject_
     , _iiPayload = pIiPayload_
     }
@@ -91,7 +91,13 @@ iiPayload
 
 instance GoogleRequest ImagesInsert where
         type Rs ImagesInsert = Operation
-        requestClient ImagesInsert{..}
+        type Scopes ImagesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient ImagesInsert'{..}
           = go _iiProject (Just AltJSON) _iiPayload
               computeService
           where go

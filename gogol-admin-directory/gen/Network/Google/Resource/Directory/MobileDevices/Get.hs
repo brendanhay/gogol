@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.MobileDevices.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type MobileDevicesGetResource =
 -- | Retrieve Mobile Device
 --
 -- /See:/ 'mobileDevicesGet' smart constructor.
-data MobileDevicesGet = MobileDevicesGet
+data MobileDevicesGet = MobileDevicesGet'
     { _mdgResourceId :: !Text
     , _mdgCustomerId :: !Text
     , _mdgProjection :: !(Maybe MobileDevicesGetProjection)
@@ -78,7 +78,7 @@ mobileDevicesGet
     -> Text -- ^ 'mdgCustomerId'
     -> MobileDevicesGet
 mobileDevicesGet pMdgResourceId_ pMdgCustomerId_ =
-    MobileDevicesGet
+    MobileDevicesGet'
     { _mdgResourceId = pMdgResourceId_
     , _mdgCustomerId = pMdgCustomerId_
     , _mdgProjection = Nothing
@@ -104,7 +104,11 @@ mdgProjection
 
 instance GoogleRequest MobileDevicesGet where
         type Rs MobileDevicesGet = MobileDevice
-        requestClient MobileDevicesGet{..}
+        type Scopes MobileDevicesGet =
+             '["https://www.googleapis.com/auth/admin.directory.device.mobile",
+               "https://www.googleapis.com/auth/admin.directory.device.mobile.action",
+               "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"]
+        requestClient MobileDevicesGet'{..}
           = go _mdgCustomerId _mdgResourceId _mdgProjection
               (Just AltJSON)
               directoryService

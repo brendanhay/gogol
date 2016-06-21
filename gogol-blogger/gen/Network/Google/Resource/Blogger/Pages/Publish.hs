@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Pages.Publish
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type PagesPublishResource =
 -- | Publishes a draft page.
 --
 -- /See:/ 'pagesPublish' smart constructor.
-data PagesPublish = PagesPublish
+data PagesPublish = PagesPublish'
     { _pagaBlogId :: !Text
     , _pagaPageId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ pagesPublish
     -> Text -- ^ 'pagaPageId'
     -> PagesPublish
 pagesPublish pPagaBlogId_ pPagaPageId_ =
-    PagesPublish
+    PagesPublish'
     { _pagaBlogId = pPagaBlogId_
     , _pagaPageId = pPagaPageId_
     }
@@ -89,7 +89,9 @@ pagaPageId
 
 instance GoogleRequest PagesPublish where
         type Rs PagesPublish = Page
-        requestClient PagesPublish{..}
+        type Scopes PagesPublish =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PagesPublish'{..}
           = go _pagaBlogId _pagaPageId (Just AltJSON)
               bloggerService
           where go

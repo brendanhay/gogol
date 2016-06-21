@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accountstatuses.Custombatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,7 +50,7 @@ type AccountstatusesCustombatchResource =
 
 --
 -- /See:/ 'accountstatusesCustombatch' smart constructor.
-newtype AccountstatusesCustombatch = AccountstatusesCustombatch
+newtype AccountstatusesCustombatch = AccountstatusesCustombatch'
     { _accPayload :: AccountstatusesCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -63,7 +63,7 @@ accountstatusesCustombatch
     :: AccountstatusesCustomBatchRequest -- ^ 'accPayload'
     -> AccountstatusesCustombatch
 accountstatusesCustombatch pAccPayload_ =
-    AccountstatusesCustombatch
+    AccountstatusesCustombatch'
     { _accPayload = pAccPayload_
     }
 
@@ -76,7 +76,9 @@ instance GoogleRequest AccountstatusesCustombatch
          where
         type Rs AccountstatusesCustombatch =
              AccountstatusesCustomBatchResponse
-        requestClient AccountstatusesCustombatch{..}
+        type Scopes AccountstatusesCustombatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountstatusesCustombatch'{..}
           = go (Just AltJSON) _accPayload
               shoppingContentService
           where go

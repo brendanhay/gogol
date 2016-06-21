@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.Restart
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type InstancesRestartResource =
 -- | Restarts a Cloud SQL instance.
 --
 -- /See:/ 'instancesRestart' smart constructor.
-data InstancesRestart = InstancesRestart
+data InstancesRestart = InstancesRestart'
     { _irProject  :: !Text
     , _irInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ instancesRestart
     -> Text -- ^ 'irInstance'
     -> InstancesRestart
 instancesRestart pIrProject_ pIrInstance_ =
-    InstancesRestart
+    InstancesRestart'
     { _irProject = pIrProject_
     , _irInstance = pIrInstance_
     }
@@ -89,7 +89,10 @@ irInstance
 
 instance GoogleRequest InstancesRestart where
         type Rs InstancesRestart = Operation
-        requestClient InstancesRestart{..}
+        type Scopes InstancesRestart =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient InstancesRestart'{..}
           = go _irProject _irInstance (Just AltJSON)
               sQLAdminService
           where go

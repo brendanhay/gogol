@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsCustomChannelsGetResource =
 -- | Get the specified custom channel from the specified ad client.
 --
 -- /See:/ 'accountsCustomChannelsGet' smart constructor.
-data AccountsCustomChannelsGet = AccountsCustomChannelsGet
+data AccountsCustomChannelsGet = AccountsCustomChannelsGet'
     { _accgCustomChannelId :: !Text
     , _accgAdClientId      :: !Text
     , _accgAccountId       :: !Text
@@ -78,7 +78,7 @@ accountsCustomChannelsGet
     -> Text -- ^ 'accgAccountId'
     -> AccountsCustomChannelsGet
 accountsCustomChannelsGet pAccgCustomChannelId_ pAccgAdClientId_ pAccgAccountId_ =
-    AccountsCustomChannelsGet
+    AccountsCustomChannelsGet'
     { _accgCustomChannelId = pAccgCustomChannelId_
     , _accgAdClientId = pAccgAdClientId_
     , _accgAccountId = pAccgAccountId_
@@ -105,7 +105,10 @@ accgAccountId
 instance GoogleRequest AccountsCustomChannelsGet
          where
         type Rs AccountsCustomChannelsGet = CustomChannel
-        requestClient AccountsCustomChannelsGet{..}
+        type Scopes AccountsCustomChannelsGet =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
+        requestClient AccountsCustomChannelsGet'{..}
           = go _accgAccountId _accgAdClientId
               _accgCustomChannelId
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AccountUserProFiles.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesInsert' request conforms to.
 type AccountUserProFilesInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
@@ -55,7 +55,7 @@ type AccountUserProFilesInsertResource =
 -- | Inserts a new account user profile.
 --
 -- /See:/ 'accountUserProFilesInsert' smart constructor.
-data AccountUserProFilesInsert = AccountUserProFilesInsert
+data AccountUserProFilesInsert = AccountUserProFilesInsert'
     { _aupfiProFileId :: !(Textual Int64)
     , _aupfiPayload   :: !AccountUserProFile
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ accountUserProFilesInsert
     -> AccountUserProFile -- ^ 'aupfiPayload'
     -> AccountUserProFilesInsert
 accountUserProFilesInsert pAupfiProFileId_ pAupfiPayload_ =
-    AccountUserProFilesInsert
+    AccountUserProFilesInsert'
     { _aupfiProFileId = _Coerce # pAupfiProFileId_
     , _aupfiPayload = pAupfiPayload_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest AccountUserProFilesInsert
          where
         type Rs AccountUserProFilesInsert =
              AccountUserProFile
-        requestClient AccountUserProFilesInsert{..}
+        type Scopes AccountUserProFilesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountUserProFilesInsert'{..}
           = go _aupfiProFileId (Just AltJSON) _aupfiPayload
               dFAReportingService
           where go

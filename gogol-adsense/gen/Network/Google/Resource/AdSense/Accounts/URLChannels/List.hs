@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Accounts.URLChannels.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type AccountsURLChannelsListResource =
 -- account.
 --
 -- /See:/ 'accountsURLChannelsList' smart constructor.
-data AccountsURLChannelsList = AccountsURLChannelsList
+data AccountsURLChannelsList = AccountsURLChannelsList'
     { _auclAdClientId :: !Text
     , _auclAccountId  :: !Text
     , _auclPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ accountsURLChannelsList
     -> Text -- ^ 'auclAccountId'
     -> AccountsURLChannelsList
 accountsURLChannelsList pAuclAdClientId_ pAuclAccountId_ =
-    AccountsURLChannelsList
+    AccountsURLChannelsList'
     { _auclAdClientId = pAuclAdClientId_
     , _auclAccountId = pAuclAccountId_
     , _auclPageToken = Nothing
@@ -121,7 +121,10 @@ auclMaxResults
 
 instance GoogleRequest AccountsURLChannelsList where
         type Rs AccountsURLChannelsList = URLChannels
-        requestClient AccountsURLChannelsList{..}
+        type Scopes AccountsURLChannelsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AccountsURLChannelsList'{..}
           = go _auclAccountId _auclAdClientId _auclPageToken
               _auclMaxResults
               (Just AltJSON)

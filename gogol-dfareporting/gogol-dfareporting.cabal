@@ -1,5 +1,5 @@
 name:                  gogol-dfareporting
-version:               0.0.1
+version:               0.1.0
 synopsis:              Google DCM/DFA Reporting And Trafficking SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -7,19 +7,19 @@ license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015 Brendan Hay
+copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Manage your DoubleClick Campaign Manager ad campaigns and reports.
+    Manages your DoubleClick Campaign Manager ad campaigns and reports.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2.2@
+    This library is compatible with version @v2.5@
     of the API.
 
 source-repository head
@@ -84,6 +84,7 @@ library
         , Network.Google.Resource.DFAReporting.ContentCategories.List
         , Network.Google.Resource.DFAReporting.ContentCategories.Patch
         , Network.Google.Resource.DFAReporting.ContentCategories.Update
+        , Network.Google.Resource.DFAReporting.Conversions.Batchinsert
         , Network.Google.Resource.DFAReporting.Countries.Get
         , Network.Google.Resource.DFAReporting.Countries.List
         , Network.Google.Resource.DFAReporting.CreativeAssets.Insert
@@ -115,6 +116,9 @@ library
         , Network.Google.Resource.DFAReporting.DirectorySites.Get
         , Network.Google.Resource.DFAReporting.DirectorySites.Insert
         , Network.Google.Resource.DFAReporting.DirectorySites.List
+        , Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
+        , Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Insert
+        , Network.Google.Resource.DFAReporting.DynamicTargetingKeys.List
         , Network.Google.Resource.DFAReporting.EventTags.Delete
         , Network.Google.Resource.DFAReporting.EventTags.Get
         , Network.Google.Resource.DFAReporting.EventTags.Insert
@@ -130,7 +134,6 @@ library
         , Network.Google.Resource.DFAReporting.FloodlightActivities.List
         , Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
         , Network.Google.Resource.DFAReporting.FloodlightActivities.Update
-        , Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
         , Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
         , Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
         , Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
@@ -234,5 +237,5 @@ library
         , Network.Google.DFAReporting.Types.Sum
 
     build-depends:
-          gogol-core == 0.0.1.*
-        , base       >= 4.7 && < 5
+          gogol-core == 0.1.0.*
+        , base       >= 4.7

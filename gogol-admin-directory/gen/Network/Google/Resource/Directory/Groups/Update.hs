@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Groups.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type GroupsUpdateResource =
 -- | Update Group
 --
 -- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate
+data GroupsUpdate = GroupsUpdate'
     { _guGroupKey :: !Text
     , _guPayload  :: !Group
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ groupsUpdate
     -> Group -- ^ 'guPayload'
     -> GroupsUpdate
 groupsUpdate pGuGroupKey_ pGuPayload_ =
-    GroupsUpdate
+    GroupsUpdate'
     { _guGroupKey = pGuGroupKey_
     , _guPayload = pGuPayload_
     }
@@ -89,7 +89,9 @@ guPayload
 
 instance GoogleRequest GroupsUpdate where
         type Rs GroupsUpdate = Group
-        requestClient GroupsUpdate{..}
+        type Scopes GroupsUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.group"]
+        requestClient GroupsUpdate'{..}
           = go _guGroupKey (Just AltJSON) _guPayload
               directoryService
           where go

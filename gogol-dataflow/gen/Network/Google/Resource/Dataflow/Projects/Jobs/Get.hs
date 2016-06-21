@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Dataflow.Projects.Jobs.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type ProjectsJobsGetResource =
 -- | Gets the state of the specified dataflow job.
 --
 -- /See:/ 'projectsJobsGet' smart constructor.
-data ProjectsJobsGet = ProjectsJobsGet
+data ProjectsJobsGet = ProjectsJobsGet'
     { _pjgXgafv          :: !(Maybe Text)
     , _pjgJobId          :: !Text
     , _pjgUploadProtocol :: !(Maybe Text)
@@ -110,7 +110,7 @@ projectsJobsGet
     -> Text -- ^ 'pjgProjectId'
     -> ProjectsJobsGet
 projectsJobsGet pPjgJobId_ pPjgProjectId_ =
-    ProjectsJobsGet
+    ProjectsJobsGet'
     { _pjgXgafv = Nothing
     , _pjgJobId = pPjgJobId_
     , _pjgUploadProtocol = Nothing
@@ -175,7 +175,10 @@ pjgCallback
 
 instance GoogleRequest ProjectsJobsGet where
         type Rs ProjectsJobsGet = Job
-        requestClient ProjectsJobsGet{..}
+        type Scopes ProjectsJobsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
+        requestClient ProjectsJobsGet'{..}
           = go _pjgProjectId _pjgJobId _pjgXgafv
               _pjgUploadProtocol
               (Just _pjgPp)

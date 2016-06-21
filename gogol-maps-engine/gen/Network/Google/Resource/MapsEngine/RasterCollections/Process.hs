@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.RasterCollections.Process
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type RasterCollectionsProcessResource =
 -- | Process a raster collection asset.
 --
 -- /See:/ 'rasterCollectionsProcess' smart constructor.
-newtype RasterCollectionsProcess = RasterCollectionsProcess
+newtype RasterCollectionsProcess = RasterCollectionsProcess'
     { _rcpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ rasterCollectionsProcess
     :: Text -- ^ 'rcpId'
     -> RasterCollectionsProcess
 rasterCollectionsProcess pRcpId_ =
-    RasterCollectionsProcess
+    RasterCollectionsProcess'
     { _rcpId = pRcpId_
     }
 
@@ -76,7 +76,9 @@ rcpId = lens _rcpId (\ s a -> s{_rcpId = a})
 
 instance GoogleRequest RasterCollectionsProcess where
         type Rs RasterCollectionsProcess = ProcessResponse
-        requestClient RasterCollectionsProcess{..}
+        type Scopes RasterCollectionsProcess =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient RasterCollectionsProcess'{..}
           = go _rcpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

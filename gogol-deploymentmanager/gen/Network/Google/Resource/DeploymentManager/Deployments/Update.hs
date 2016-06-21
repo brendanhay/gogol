@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DeploymentManager.Deployments.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type DeploymentsUpdateResource =
 -- deployment manifest.
 --
 -- /See:/ 'deploymentsUpdate' smart constructor.
-data DeploymentsUpdate = DeploymentsUpdate
+data DeploymentsUpdate = DeploymentsUpdate'
     { _duCreatePolicy :: !DeploymentsUpdateCreatePolicy
     , _duProject      :: !Text
     , _duPayload      :: !Deployment
@@ -99,7 +99,7 @@ deploymentsUpdate
     -> Text -- ^ 'duDeployment'
     -> DeploymentsUpdate
 deploymentsUpdate pDuProject_ pDuPayload_ pDuDeployment_ =
-    DeploymentsUpdate
+    DeploymentsUpdate'
     { _duCreatePolicy = CreateOrAcquire
     , _duProject = pDuProject_
     , _duPayload = pDuPayload_
@@ -132,8 +132,8 @@ duDeletePolicy
 
 -- | If set to true, updates the deployment and creates and updates the
 -- \"shell\" resources but does not actually alter or instantiate these
--- resources. This allows you to preview what your deployment looks like.
--- You can use this intent to preview how an update would affect your
+-- resources. This allows you to preview what your deployment will look
+-- like. You can use this intent to preview how an update would affect your
 -- deployment. You must provide a target.config with a configuration if
 -- this is set to true. After previewing a deployment, you can deploy your
 -- resources by making a request with the update() or you can
@@ -151,7 +151,10 @@ duDeployment
 
 instance GoogleRequest DeploymentsUpdate where
         type Rs DeploymentsUpdate = Operation
-        requestClient DeploymentsUpdate{..}
+        type Scopes DeploymentsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient DeploymentsUpdate'{..}
           = go _duProject _duDeployment (Just _duCreatePolicy)
               (Just _duDeletePolicy)
               (Just _duPreview)

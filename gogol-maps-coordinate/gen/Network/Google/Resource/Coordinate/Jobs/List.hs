@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Coordinate.Jobs.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type JobsListResource =
 -- | Retrieves jobs created or modified since the given timestamp.
 --
 -- /See:/ 'jobsList' smart constructor.
-data JobsList = JobsList
+data JobsList = JobsList'
     { _jlTeamId                 :: !Text
     , _jlMinModifiedTimestampMs :: !(Maybe (Textual Word64))
     , _jlOmitJobChanges         :: !(Maybe Bool)
@@ -87,7 +87,7 @@ jobsList
     :: Text -- ^ 'jlTeamId'
     -> JobsList
 jobsList pJlTeamId_ =
-    JobsList
+    JobsList'
     { _jlTeamId = pJlTeamId_
     , _jlMinModifiedTimestampMs = Nothing
     , _jlOmitJobChanges = Nothing
@@ -125,7 +125,10 @@ jlMaxResults
 
 instance GoogleRequest JobsList where
         type Rs JobsList = JobListResponse
-        requestClient JobsList{..}
+        type Scopes JobsList =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
+        requestClient JobsList'{..}
           = go _jlTeamId _jlMinModifiedTimestampMs
               _jlOmitJobChanges
               _jlPageToken

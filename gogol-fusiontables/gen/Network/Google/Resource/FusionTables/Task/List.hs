@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Task.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type TaskListResource =
 -- | Retrieves a list of tasks.
 --
 -- /See:/ 'taskList'' smart constructor.
-data TaskList' = TaskList'
+data TaskList' = TaskList''
     { _tlPageToken  :: !(Maybe Text)
     , _tlTableId    :: !Text
     , _tlStartIndex :: !(Maybe (Textual Word32))
@@ -80,7 +80,7 @@ taskList'
     :: Text -- ^ 'tlTableId'
     -> TaskList'
 taskList' pTlTableId_ =
-    TaskList'
+    TaskList''
     { _tlPageToken = Nothing
     , _tlTableId = pTlTableId_
     , _tlStartIndex = Nothing
@@ -111,7 +111,10 @@ tlMaxResults
 
 instance GoogleRequest TaskList' where
         type Rs TaskList' = TaskList
-        requestClient TaskList'{..}
+        type Scopes TaskList' =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient TaskList''{..}
           = go _tlTableId _tlPageToken _tlStartIndex
               _tlMaxResults
               (Just AltJSON)

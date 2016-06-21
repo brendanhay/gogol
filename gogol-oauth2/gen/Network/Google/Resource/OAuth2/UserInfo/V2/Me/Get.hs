@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,18 +46,23 @@ type UserInfoV2MeGetResource =
 --
 -- /See:/ 'userInfoV2MeGet' smart constructor.
 data UserInfoV2MeGet =
-    UserInfoV2MeGet
+    UserInfoV2MeGet'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserInfoV2MeGet' with the minimum fields required to make a request.
 --
 userInfoV2MeGet
     :: UserInfoV2MeGet
-userInfoV2MeGet = UserInfoV2MeGet
+userInfoV2MeGet = UserInfoV2MeGet'
 
 instance GoogleRequest UserInfoV2MeGet where
         type Rs UserInfoV2MeGet = UserInfoplus
-        requestClient UserInfoV2MeGet{}
+        type Scopes UserInfoV2MeGet =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me",
+               "https://www.googleapis.com/auth/userinfo.email",
+               "https://www.googleapis.com/auth/userinfo.profile"]
+        requestClient UserInfoV2MeGet'{}
           = go (Just AltJSON) oAuth2Service
           where go
                   = buildClient

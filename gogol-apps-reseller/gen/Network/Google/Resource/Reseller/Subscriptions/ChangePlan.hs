@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Subscriptions.ChangePlan
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type SubscriptionsChangePlanResource =
 -- | Changes the plan of a subscription
 --
 -- /See:/ 'subscriptionsChangePlan' smart constructor.
-data SubscriptionsChangePlan = SubscriptionsChangePlan
+data SubscriptionsChangePlan = SubscriptionsChangePlan'
     { _scpPayload        :: !ChangePlanRequest
     , _scpCustomerId     :: !Text
     , _scpSubscriptionId :: !Text
@@ -80,7 +80,7 @@ subscriptionsChangePlan
     -> Text -- ^ 'scpSubscriptionId'
     -> SubscriptionsChangePlan
 subscriptionsChangePlan pScpPayload_ pScpCustomerId_ pScpSubscriptionId_ =
-    SubscriptionsChangePlan
+    SubscriptionsChangePlan'
     { _scpPayload = pScpPayload_
     , _scpCustomerId = pScpCustomerId_
     , _scpSubscriptionId = pScpSubscriptionId_
@@ -105,7 +105,9 @@ scpSubscriptionId
 
 instance GoogleRequest SubscriptionsChangePlan where
         type Rs SubscriptionsChangePlan = Subscription
-        requestClient SubscriptionsChangePlan{..}
+        type Scopes SubscriptionsChangePlan =
+             '["https://www.googleapis.com/auth/apps.order"]
+        requestClient SubscriptionsChangePlan'{..}
           = go _scpCustomerId _scpSubscriptionId (Just AltJSON)
               _scpPayload
               appsResellerService

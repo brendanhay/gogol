@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.Permissions.BatchUpdate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type LayersPermissionsBatchUpdateResource =
 -- is atomic.
 --
 -- /See:/ 'layersPermissionsBatchUpdate' smart constructor.
-data LayersPermissionsBatchUpdate = LayersPermissionsBatchUpdate
+data LayersPermissionsBatchUpdate = LayersPermissionsBatchUpdate'
     { _lpbuPayload :: !PermissionsBatchUpdateRequest
     , _lpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ layersPermissionsBatchUpdate
     -> Text -- ^ 'lpbuId'
     -> LayersPermissionsBatchUpdate
 layersPermissionsBatchUpdate pLpbuPayload_ pLpbuId_ =
-    LayersPermissionsBatchUpdate
+    LayersPermissionsBatchUpdate'
     { _lpbuPayload = pLpbuPayload_
     , _lpbuId = pLpbuId_
     }
@@ -95,7 +95,9 @@ instance GoogleRequest LayersPermissionsBatchUpdate
          where
         type Rs LayersPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
-        requestClient LayersPermissionsBatchUpdate{..}
+        type Scopes LayersPermissionsBatchUpdate =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient LayersPermissionsBatchUpdate'{..}
           = go _lpbuId (Just AltJSON) _lpbuPayload
               mapsEngineService
           where go

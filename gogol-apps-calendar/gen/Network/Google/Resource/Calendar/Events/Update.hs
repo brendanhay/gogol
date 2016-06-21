@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Events.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type EventsUpdateResource =
 -- | Updates an event.
 --
 -- /See:/ 'eventsUpdate' smart constructor.
-data EventsUpdate = EventsUpdate
+data EventsUpdate = EventsUpdate'
     { _euCalendarId          :: !Text
     , _euPayload             :: !Event
     , _euMaxAttendees        :: !(Maybe (Textual Int32))
@@ -97,7 +97,7 @@ eventsUpdate
     -> Text -- ^ 'euEventId'
     -> EventsUpdate
 eventsUpdate pEuCalendarId_ pEuPayload_ pEuEventId_ =
-    EventsUpdate
+    EventsUpdate'
     { _euCalendarId = pEuCalendarId_
     , _euPayload = pEuPayload_
     , _euMaxAttendees = Nothing
@@ -160,7 +160,9 @@ euEventId
 
 instance GoogleRequest EventsUpdate where
         type Rs EventsUpdate = Event
-        requestClient EventsUpdate{..}
+        type Scopes EventsUpdate =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient EventsUpdate'{..}
           = go _euCalendarId _euEventId _euMaxAttendees
               _euSendNotifications
               _euSupportsAttachments

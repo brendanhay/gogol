@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolePermissionGroupsGet' request conforms to.
 type UserRolePermissionGroupsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRolePermissionGroups" :>
@@ -55,7 +55,7 @@ type UserRolePermissionGroupsGetResource =
 -- | Gets one user role permission group by ID.
 --
 -- /See:/ 'userRolePermissionGroupsGet' smart constructor.
-data UserRolePermissionGroupsGet = UserRolePermissionGroupsGet
+data UserRolePermissionGroupsGet = UserRolePermissionGroupsGet'
     { _urpggProFileId :: !(Textual Int64)
     , _urpggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ userRolePermissionGroupsGet
     -> Int64 -- ^ 'urpggId'
     -> UserRolePermissionGroupsGet
 userRolePermissionGroupsGet pUrpggProFileId_ pUrpggId_ =
-    UserRolePermissionGroupsGet
+    UserRolePermissionGroupsGet'
     { _urpggProFileId = _Coerce # pUrpggProFileId_
     , _urpggId = _Coerce # pUrpggId_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest UserRolePermissionGroupsGet
          where
         type Rs UserRolePermissionGroupsGet =
              UserRolePermissionGroup
-        requestClient UserRolePermissionGroupsGet{..}
+        type Scopes UserRolePermissionGroupsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient UserRolePermissionGroupsGet'{..}
           = go _urpggProFileId _urpggId (Just AltJSON)
               dFAReportingService
           where go

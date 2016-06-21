@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetInstances.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type TargetInstancesDeleteResource =
 -- | Deletes the specified TargetInstance resource.
 --
 -- /See:/ 'targetInstancesDelete' smart constructor.
-data TargetInstancesDelete = TargetInstancesDelete
+data TargetInstancesDelete = TargetInstancesDelete'
     { _tidProject        :: !Text
     , _tidTargetInstance :: !Text
     , _tidZone           :: !Text
@@ -78,13 +78,13 @@ targetInstancesDelete
     -> Text -- ^ 'tidZone'
     -> TargetInstancesDelete
 targetInstancesDelete pTidProject_ pTidTargetInstance_ pTidZone_ =
-    TargetInstancesDelete
+    TargetInstancesDelete'
     { _tidProject = pTidProject_
     , _tidTargetInstance = pTidTargetInstance_
     , _tidZone = pTidZone_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tidProject :: Lens' TargetInstancesDelete Text
 tidProject
   = lens _tidProject (\ s a -> s{_tidProject = a})
@@ -101,7 +101,10 @@ tidZone = lens _tidZone (\ s a -> s{_tidZone = a})
 
 instance GoogleRequest TargetInstancesDelete where
         type Rs TargetInstancesDelete = Operation
-        requestClient TargetInstancesDelete{..}
+        type Scopes TargetInstancesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetInstancesDelete'{..}
           = go _tidProject _tidZone _tidTargetInstance
               (Just AltJSON)
               computeService

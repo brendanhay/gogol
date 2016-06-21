@@ -7,19 +7,27 @@
 
 -- |
 -- Module      : Network.Google.Compute
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for the Google Compute Engine service.
+-- Creates and runs virtual machines on Google Cloud Platform.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference>
 module Network.Google.Compute
     (
     -- * Service Configuration
       computeService
+
+    -- * OAuth Scopes
+    , computeScope
+    , cloudPlatformScope
+    , storageReadOnlyScope
+    , storageReadWriteScope
+    , computeReadOnlyScope
+    , storageFullControlScope
 
     -- * API Declaration
     , ComputeAPI
@@ -109,6 +117,9 @@ module Network.Google.Compute
 
     -- ** compute.disks.list
     , module Network.Google.Resource.Compute.Disks.List
+
+    -- ** compute.disks.resize
+    , module Network.Google.Resource.Compute.Disks.Resize
 
     -- ** compute.firewalls.delete
     , module Network.Google.Resource.Compute.Firewalls.Delete
@@ -230,6 +241,9 @@ module Network.Google.Compute
     -- ** compute.images.get
     , module Network.Google.Resource.Compute.Images.Get
 
+    -- ** compute.images.getFromFamily
+    , module Network.Google.Resource.Compute.Images.GetFromFamily
+
     -- ** compute.images.insert
     , module Network.Google.Resource.Compute.Images.Insert
 
@@ -347,6 +361,9 @@ module Network.Google.Compute
     -- ** compute.instances.setDiskAutoDelete
     , module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
 
+    -- ** compute.instances.setMachineType
+    , module Network.Google.Resource.Compute.Instances.SetMachineType
+
     -- ** compute.instances.setMetadata
     , module Network.Google.Resource.Compute.Instances.SetMetadata
 
@@ -448,6 +465,21 @@ module Network.Google.Compute
 
     -- ** compute.sslCertificates.list
     , module Network.Google.Resource.Compute.SSLCertificates.List
+
+    -- ** compute.subnetworks.aggregatedList
+    , module Network.Google.Resource.Compute.Subnetworks.AggregatedList
+
+    -- ** compute.subnetworks.delete
+    , module Network.Google.Resource.Compute.Subnetworks.Delete
+
+    -- ** compute.subnetworks.get
+    , module Network.Google.Resource.Compute.Subnetworks.Get
+
+    -- ** compute.subnetworks.insert
+    , module Network.Google.Resource.Compute.Subnetworks.Insert
+
+    -- ** compute.subnetworks.list
+    , module Network.Google.Resource.Compute.Subnetworks.List
 
     -- ** compute.targetHttpProxies.delete
     , module Network.Google.Resource.Compute.TargetHTTPProxies.Delete
@@ -665,6 +697,11 @@ module Network.Google.Compute
     , iglSelfLink
     , iglId
 
+    -- ** InstancesSetMachineTypeRequest
+    , InstancesSetMachineTypeRequest
+    , instancesSetMachineTypeRequest
+    , ismtrMachineType
+
     -- ** AutoscalerAggregatedListItems
     , AutoscalerAggregatedListItems
     , autoscalerAggregatedListItems
@@ -772,6 +809,13 @@ module Network.Google.Compute
     , igmlSelfLink
     , igmlId
 
+    -- ** SubnetworksScopedListWarning
+    , SubnetworksScopedListWarning
+    , subnetworksScopedListWarning
+    , sslwData
+    , sslwCode
+    , sslwMessage
+
     -- ** AttachedDiskType
     , AttachedDiskType (..)
 
@@ -784,6 +828,7 @@ module Network.Google.Compute
     , iSourceDiskId
     , iKind
     , iArchiveSizeBytes
+    , iFamily
     , iRawDisk
     , iSelfLink
     , iName
@@ -1022,6 +1067,12 @@ module Network.Google.Compute
     , igmslwdiValue
     , igmslwdiKey
 
+    -- ** SubnetworksScopedList
+    , SubnetworksScopedList
+    , subnetworksScopedList
+    , sslSubnetworks
+    , sslWarning
+
     -- ** DisksScopedListWarningCode
     , DisksScopedListWarningCode (..)
 
@@ -1062,6 +1113,7 @@ module Network.Google.Compute
     , oId
     , oOperationType
     , oRegion
+    , oDescription
     , oTargetLink
     , oClientOperationId
 
@@ -1131,6 +1183,7 @@ module Network.Google.Compute
     , igmTargetPools
     , igmDescription
     , igmInstanceGroup
+    , igmNamedPorts
 
     -- ** TargetPoolsScopedListWarningCode
     , TargetPoolsScopedListWarningCode (..)
@@ -1266,6 +1319,7 @@ module Network.Google.Compute
     , niNetwork
     , niName
     , niNetworkIP
+    , niSubnetwork
     , niAccessConfigs
 
     -- ** TargetPoolsRemoveHealthCheckRequest
@@ -1330,7 +1384,9 @@ module Network.Google.Compute
     -- ** Network
     , Network
     , network
+    , nAutoCreateSubnetworks
     , nKind
+    , nSubnetworks
     , nIPv4Range
     , nSelfLink
     , nName
@@ -1383,7 +1439,6 @@ module Network.Google.Compute
     , Zone
     , zone
     , zStatus
-    , zMaintenanceWindows
     , zKind
     , zSelfLink
     , zName
@@ -1470,14 +1525,6 @@ module Network.Google.Compute
     , itId
     , itDescription
     , itProperties
-
-    -- ** ZoneMaintenanceWindowsItem
-    , ZoneMaintenanceWindowsItem
-    , zoneMaintenanceWindowsItem
-    , zmwiBeginTime
-    , zmwiName
-    , zmwiEndTime
-    , zmwiDescription
 
     -- ** TargetVPNGateway
     , TargetVPNGateway
@@ -1823,11 +1870,34 @@ module Network.Google.Compute
     , machineTypeScratchDisksItem
     , mtsdiDiskGb
 
+    -- ** SubnetworksScopedListWarningDataItem
+    , SubnetworksScopedListWarningDataItem
+    , subnetworksScopedListWarningDataItem
+    , sslwdiValue
+    , sslwdiKey
+
     -- ** MachineTypesScopedList
     , MachineTypesScopedList
     , machineTypesScopedList
     , mtslMachineTypes
     , mtslWarning
+
+    -- ** SubnetworksScopedListWarningCode
+    , SubnetworksScopedListWarningCode (..)
+
+    -- ** Subnetwork
+    , Subnetwork
+    , subnetwork
+    , subKind
+    , subNetwork
+    , subGatewayAddress
+    , subSelfLink
+    , subName
+    , subCreationTimestamp
+    , subIPCIdRRange
+    , subId
+    , subRegion
+    , subDescription
 
     -- ** MachineTypeAggregatedList
     , MachineTypeAggregatedList
@@ -1939,6 +2009,20 @@ module Network.Google.Compute
     , tislwCode
     , tislwMessage
 
+    -- ** SubnetworkAggregatedList
+    , SubnetworkAggregatedList
+    , subnetworkAggregatedList
+    , salNextPageToken
+    , salKind
+    , salItems
+    , salSelfLink
+    , salId
+
+    -- ** DisksResizeRequest
+    , DisksResizeRequest
+    , disksResizeRequest
+    , drrSizeGb
+
     -- ** AutoscalersScopedListWarningDataItem
     , AutoscalersScopedListWarningDataItem
     , autoscalersScopedListWarningDataItem
@@ -2016,6 +2100,7 @@ module Network.Google.Compute
     , vpnTunnel
     , vtDetailedStatus
     , vtStatus
+    , vtLocalTrafficSelector
     , vtKind
     , vtPeerIP
     , vtTargetVPNGateway
@@ -2051,6 +2136,15 @@ module Network.Google.Compute
     , vpnTunnelsScopedListWarningDataItem
     , vtslwdiValue
     , vtslwdiKey
+
+    -- ** SubnetworkList
+    , SubnetworkList
+    , subnetworkList
+    , slNextPageToken
+    , slKind
+    , slItems
+    , slSelfLink
+    , slId
 
     -- ** ForwardingRulesScopedListWarning
     , ForwardingRulesScopedListWarning
@@ -2124,6 +2218,11 @@ module Network.Google.Compute
     , insItems
     , insSelfLink
     , insId
+
+    -- ** SubnetworkAggregatedListItems
+    , SubnetworkAggregatedListItems
+    , subnetworkAggregatedListItems
+    , saliAddtional
 
     -- ** ManagedInstanceLastAttempt
     , ManagedInstanceLastAttempt
@@ -2205,6 +2304,7 @@ module Network.Google.Compute
     , iiSelfLink
     , iiName
     , iiCreationTimestamp
+    , iiSubnetwork
     , iiId
     , iiDescription
     , iiNamedPorts
@@ -2215,11 +2315,11 @@ module Network.Google.Compute
     -- ** SnapshotList
     , SnapshotList
     , snapshotList
-    , slNextPageToken
-    , slKind
-    , slItems
-    , slSelfLink
-    , slId
+    , snaNextPageToken
+    , snaKind
+    , snaItems
+    , snaSelfLink
+    , snaId
 
     -- ** TestFailure
     , TestFailure
@@ -2304,6 +2404,7 @@ module Network.Google.Compute
     , bsName
     , bsCreationTimestamp
     , bsId
+    , bsRegion
     , bsTimeoutSec
     , bsDescription
     , bsPortName
@@ -2438,6 +2539,7 @@ import           Network.Google.Resource.Compute.Disks.Delete
 import           Network.Google.Resource.Compute.Disks.Get
 import           Network.Google.Resource.Compute.Disks.Insert
 import           Network.Google.Resource.Compute.Disks.List
+import           Network.Google.Resource.Compute.Disks.Resize
 import           Network.Google.Resource.Compute.DiskTypes.AggregatedList
 import           Network.Google.Resource.Compute.DiskTypes.Get
 import           Network.Google.Resource.Compute.DiskTypes.List
@@ -2481,6 +2583,7 @@ import           Network.Google.Resource.Compute.HTTPSHealthChecks.Update
 import           Network.Google.Resource.Compute.Images.Delete
 import           Network.Google.Resource.Compute.Images.Deprecate
 import           Network.Google.Resource.Compute.Images.Get
+import           Network.Google.Resource.Compute.Images.GetFromFamily
 import           Network.Google.Resource.Compute.Images.Insert
 import           Network.Google.Resource.Compute.Images.List
 import           Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
@@ -2516,6 +2619,7 @@ import           Network.Google.Resource.Compute.Instances.Insert
 import           Network.Google.Resource.Compute.Instances.List
 import           Network.Google.Resource.Compute.Instances.Reset
 import           Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
+import           Network.Google.Resource.Compute.Instances.SetMachineType
 import           Network.Google.Resource.Compute.Instances.SetMetadata
 import           Network.Google.Resource.Compute.Instances.SetScheduling
 import           Network.Google.Resource.Compute.Instances.SetTags
@@ -2554,6 +2658,11 @@ import           Network.Google.Resource.Compute.SSLCertificates.Delete
 import           Network.Google.Resource.Compute.SSLCertificates.Get
 import           Network.Google.Resource.Compute.SSLCertificates.Insert
 import           Network.Google.Resource.Compute.SSLCertificates.List
+import           Network.Google.Resource.Compute.Subnetworks.AggregatedList
+import           Network.Google.Resource.Compute.Subnetworks.Delete
+import           Network.Google.Resource.Compute.Subnetworks.Get
+import           Network.Google.Resource.Compute.Subnetworks.Insert
+import           Network.Google.Resource.Compute.Subnetworks.List
 import           Network.Google.Resource.Compute.TargetHTTPProxies.Delete
 import           Network.Google.Resource.Compute.TargetHTTPProxies.Get
 import           Network.Google.Resource.Compute.TargetHTTPProxies.Insert
@@ -2612,6 +2721,7 @@ TODO
 type ComputeAPI =
      ImagesInsertResource :<|> ImagesListResource :<|>
        ImagesGetResource
+       :<|> ImagesGetFromFamilyResource
        :<|> ImagesDeprecateResource
        :<|> ImagesDeleteResource
        :<|> URLMapsInsertResource
@@ -2692,6 +2802,11 @@ type ComputeAPI =
        :<|> HTTPHealthChecksGetResource
        :<|> HTTPHealthChecksDeleteResource
        :<|> HTTPHealthChecksUpdateResource
+       :<|> SubnetworksAggregatedListResource
+       :<|> SubnetworksInsertResource
+       :<|> SubnetworksListResource
+       :<|> SubnetworksGetResource
+       :<|> SubnetworksDeleteResource
        :<|> SnapshotsListResource
        :<|> SnapshotsGetResource
        :<|> SnapshotsDeleteResource
@@ -2708,6 +2823,7 @@ type ComputeAPI =
        :<|> InstancesListResource
        :<|> InstancesStartResource
        :<|> InstancesGetResource
+       :<|> InstancesSetMachineTypeResource
        :<|> InstancesDeleteAccessConfigResource
        :<|> InstancesSetMetadataResource
        :<|> InstancesSetSchedulingResource
@@ -2761,6 +2877,7 @@ type ComputeAPI =
        :<|> TargetInstancesDeleteResource
        :<|> DisksAggregatedListResource
        :<|> DisksInsertResource
+       :<|> DisksResizeResource
        :<|> DisksListResource
        :<|> DisksGetResource
        :<|> DisksCreateSnapshotResource

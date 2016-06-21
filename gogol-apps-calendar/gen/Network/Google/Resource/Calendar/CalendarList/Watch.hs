@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.CalendarList.Watch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -68,7 +68,7 @@ type CalendarListWatchResource =
 -- | Watch for changes to CalendarList resources.
 --
 -- /See:/ 'calendarListWatch' smart constructor.
-data CalendarListWatch = CalendarListWatch
+data CalendarListWatch = CalendarListWatch'
     { _clwSyncToken     :: !(Maybe Text)
     , _clwMinAccessRole :: !(Maybe CalendarListWatchMinAccessRole)
     , _clwShowDeleted   :: !(Maybe Bool)
@@ -99,7 +99,7 @@ calendarListWatch
     :: Channel -- ^ 'clwPayload'
     -> CalendarListWatch
 calendarListWatch pClwPayload_ =
-    CalendarListWatch
+    CalendarListWatch'
     { _clwSyncToken = Nothing
     , _clwMinAccessRole = Nothing
     , _clwShowDeleted = Nothing
@@ -167,7 +167,10 @@ clwMaxResults
 
 instance GoogleRequest CalendarListWatch where
         type Rs CalendarListWatch = Channel
-        requestClient CalendarListWatch{..}
+        type Scopes CalendarListWatch =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient CalendarListWatch'{..}
           = go _clwSyncToken _clwMinAccessRole _clwShowDeleted
               _clwShowHidden
               _clwPageToken

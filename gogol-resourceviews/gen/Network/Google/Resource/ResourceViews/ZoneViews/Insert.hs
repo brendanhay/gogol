@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ResourceViews.ZoneViews.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ZoneViewsInsertResource =
 -- | Create a resource view.
 --
 -- /See:/ 'zoneViewsInsert' smart constructor.
-data ZoneViewsInsert = ZoneViewsInsert
+data ZoneViewsInsert = ZoneViewsInsert'
     { _zviProject :: !Text
     , _zviZone    :: !Text
     , _zviPayload :: !ResourceView
@@ -79,7 +79,7 @@ zoneViewsInsert
     -> ResourceView -- ^ 'zviPayload'
     -> ZoneViewsInsert
 zoneViewsInsert pZviProject_ pZviZone_ pZviPayload_ =
-    ZoneViewsInsert
+    ZoneViewsInsert'
     { _zviProject = pZviProject_
     , _zviZone = pZviZone_
     , _zviPayload = pZviPayload_
@@ -101,7 +101,11 @@ zviPayload
 
 instance GoogleRequest ZoneViewsInsert where
         type Rs ZoneViewsInsert = Operation
-        requestClient ZoneViewsInsert{..}
+        type Scopes ZoneViewsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient ZoneViewsInsert'{..}
           = go _zviProject _zviZone (Just AltJSON) _zviPayload
               resourceViewsService
           where go

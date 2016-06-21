@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Tables.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type TablesDeleteResource =
 -- contains data, all the data will be deleted.
 --
 -- /See:/ 'tablesDelete' smart constructor.
-data TablesDelete = TablesDelete
+data TablesDelete = TablesDelete'
     { _tdDataSetId :: !Text
     , _tdProjectId :: !Text
     , _tdTableId   :: !Text
@@ -80,7 +80,7 @@ tablesDelete
     -> Text -- ^ 'tdTableId'
     -> TablesDelete
 tablesDelete pTdDataSetId_ pTdProjectId_ pTdTableId_ =
-    TablesDelete
+    TablesDelete'
     { _tdDataSetId = pTdDataSetId_
     , _tdProjectId = pTdProjectId_
     , _tdTableId = pTdTableId_
@@ -103,7 +103,10 @@ tdTableId
 
 instance GoogleRequest TablesDelete where
         type Rs TablesDelete = ()
-        requestClient TablesDelete{..}
+        type Scopes TablesDelete =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TablesDelete'{..}
           = go _tdProjectId _tdDataSetId _tdTableId
               (Just AltJSON)
               bigQueryService

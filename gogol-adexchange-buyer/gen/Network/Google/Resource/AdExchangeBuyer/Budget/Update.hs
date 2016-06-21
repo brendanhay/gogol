@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.Budget.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type BudgetUpdateResource =
 -- accountId and billingId, with the budget amount in the request.
 --
 -- /See:/ 'budgetUpdate' smart constructor.
-data BudgetUpdate = BudgetUpdate
+data BudgetUpdate = BudgetUpdate'
     { _buPayload   :: !Budget
     , _buAccountId :: !(Textual Int64)
     , _buBillingId :: !(Textual Int64)
@@ -78,7 +78,7 @@ budgetUpdate
     -> Int64 -- ^ 'buBillingId'
     -> BudgetUpdate
 budgetUpdate pBuPayload_ pBuAccountId_ pBuBillingId_ =
-    BudgetUpdate
+    BudgetUpdate'
     { _buPayload = pBuPayload_
     , _buAccountId = _Coerce # pBuAccountId_
     , _buBillingId = _Coerce # pBuBillingId_
@@ -103,7 +103,9 @@ buBillingId
 
 instance GoogleRequest BudgetUpdate where
         type Rs BudgetUpdate = Budget
-        requestClient BudgetUpdate{..}
+        type Scopes BudgetUpdate =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient BudgetUpdate'{..}
           = go _buAccountId _buBillingId (Just AltJSON)
               _buPayload
               adExchangeBuyerService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GroupsSettings.Groups.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type GroupsUpdateResource =
 -- | Updates an existing resource.
 --
 -- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate
+data GroupsUpdate = GroupsUpdate'
     { _guPayload       :: !Groups
     , _guGroupUniqueId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupsUpdate
     -> Text -- ^ 'guGroupUniqueId'
     -> GroupsUpdate
 groupsUpdate pGuPayload_ pGuGroupUniqueId_ =
-    GroupsUpdate
+    GroupsUpdate'
     { _guPayload = pGuPayload_
     , _guGroupUniqueId = pGuGroupUniqueId_
     }
@@ -88,7 +88,9 @@ guGroupUniqueId
 
 instance GoogleRequest GroupsUpdate where
         type Rs GroupsUpdate = Groups
-        requestClient GroupsUpdate{..}
+        type Scopes GroupsUpdate =
+             '["https://www.googleapis.com/auth/apps.groups.settings"]
+        requestClient GroupsUpdate'{..}
           = go _guGroupUniqueId (Just AltJSON) _guPayload
               groupsSettingsService
           where go

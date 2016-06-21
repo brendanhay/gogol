@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Monitoring.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,181 +20,278 @@ module Network.Google.Monitoring.Types
       monitoringService
 
     -- * OAuth Scopes
+    , monitoringReadScope
     , cloudPlatformScope
     , monitoringScope
+    , monitoringWriteScope
 
-    -- * MetricDescriptorTypeDescriptor
-    , MetricDescriptorTypeDescriptor
-    , metricDescriptorTypeDescriptor
-    , mdtdMetricType
-    , mdtdValueType
+    -- * MonitoredResourceDescriptor
+    , MonitoredResourceDescriptor
+    , monitoredResourceDescriptor
+    , mrdName
+    , mrdDisplayName
+    , mrdLabels
+    , mrdType
+    , mrdDescription
 
-    -- * ListTimeseriesResponse
-    , ListTimeseriesResponse
-    , listTimeseriesResponse
-    , ltrNextPageToken
-    , ltrKind
-    , ltrOldest
-    , ltrYoungest
-    , ltrTimeseries
+    -- * ListTimeSeriesResponse
+    , ListTimeSeriesResponse
+    , listTimeSeriesResponse
+    , ltsrNextPageToken
+    , ltsrTimeSeries
 
     -- * MetricDescriptor
     , MetricDescriptor
     , metricDescriptor
-    , mdProject
-    , mdTypeDescriptor
+    , mdMetricKind
     , mdName
+    , mdDisplayName
     , mdLabels
+    , mdType
+    , mdValueType
     , mdDescription
+    , mdUnit
 
-    -- * WriteTimeseriesRequest
-    , WriteTimeseriesRequest
-    , writeTimeseriesRequest
-    , wtrCommonLabels
-    , wtrTimeseries
+    -- * Group
+    , Group
+    , group'
+    , gName
+    , gDisplayName
+    , gFilter
+    , gIsCluster
+    , gParentName
 
-    -- * WriteTimeseriesRequestCommonLabels
-    , WriteTimeseriesRequestCommonLabels
-    , writeTimeseriesRequestCommonLabels
-    , wtrclAddtional
+    -- * TypedValue
+    , TypedValue
+    , typedValue
+    , tvBoolValue
+    , tvDoubleValue
+    , tvStringValue
+    , tvDistributionValue
+    , tvInt64Value
 
-    -- * MetricDescriptorLabelDescriptor
-    , MetricDescriptorLabelDescriptor
-    , metricDescriptorLabelDescriptor
-    , mdldKey
-    , mdldDescription
+    -- * MonitoredResourceLabels
+    , MonitoredResourceLabels
+    , monitoredResourceLabels
+    , mrlAddtional
 
-    -- * PointDistributionUnderflowBucket
-    , PointDistributionUnderflowBucket
-    , pointDistributionUnderflowBucket
-    , pdubUpperBound
-    , pdubCount
+    -- * SourceContext
+    , SourceContext
+    , sourceContext
+    , scFileName
 
-    -- * TimeseriesListAggregator
-    , TimeseriesListAggregator (..)
+    -- * Distribution
+    , Distribution
+    , distribution
+    , dSumOfSquaredDeviation
+    , dMean
+    , dCount
+    , dBucketCounts
+    , dRange
+    , dBucketOptions
+
+    -- * Field
+    , Field
+    , field
+    , fKind
+    , fOneofIndex
+    , fName
+    , fJSONName
+    , fCardinality
+    , fOptions
+    , fPacked
+    , fDefaultValue
+    , fNumber
+    , fTypeURL
+
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * ListGroupsResponse
+    , ListGroupsResponse
+    , listGroupsResponse
+    , lgrNextPageToken
+    , lgrGroup
 
     -- * ListMetricDescriptorsResponse
     , ListMetricDescriptorsResponse
     , listMetricDescriptorsResponse
-    , lmdrMetrics
+    , lmdrMetricDescriptors
     , lmdrNextPageToken
-    , lmdrKind
 
-    -- * ListTimeseriesDescriptorsRequest
-    , ListTimeseriesDescriptorsRequest
-    , listTimeseriesDescriptorsRequest
-    , ltdrKind
+    -- * OptionValue
+    , OptionValue
+    , optionValue
+    , ovAddtional
 
-    -- * TimeseriesDescriptorLabels
-    , TimeseriesDescriptorLabels
-    , timeseriesDescriptorLabels
-    , tdlAddtional
+    -- * CreateTimeSeriesRequest
+    , CreateTimeSeriesRequest
+    , createTimeSeriesRequest
+    , ctsrTimeSeries
 
-    -- * PointDistributionBucket
-    , PointDistributionBucket
-    , pointDistributionBucket
-    , pdbUpperBound
-    , pdbCount
-    , pdbLowerBound
+    -- * ListMonitoredResourceDescriptorsResponse
+    , ListMonitoredResourceDescriptorsResponse
+    , listMonitoredResourceDescriptorsResponse
+    , lmrdrNextPageToken
+    , lmrdrResourceDescriptors
 
-    -- * WriteTimeseriesResponse
-    , WriteTimeseriesResponse
-    , writeTimeseriesResponse
-    , wtrKind
+    -- * Explicit
+    , Explicit
+    , explicit
+    , eBounds
 
-    -- * TimeseriesDescriptorLabel
-    , TimeseriesDescriptorLabel
-    , timeseriesDescriptorLabel
-    , tdlValue
-    , tdlKey
+    -- * MetricLabels
+    , MetricLabels
+    , metricLabels
+    , mlAddtional
 
-    -- * PointDistribution
-    , PointDistribution
-    , pointDistribution
-    , pdOverflowBucket
-    , pdBuckets
-    , pdUnderflowBucket
+    -- * CollectdPayloadMetadata
+    , CollectdPayloadMetadata
+    , collectdPayloadMetadata
+    , cpmAddtional
+
+    -- * CollectdValue
+    , CollectdValue
+    , collectdValue
+    , cvDataSourceName
+    , cvDataSourceType
+    , cvValue
+
+    -- * CreateCollectdTimeSeriesRequest
+    , CreateCollectdTimeSeriesRequest
+    , createCollectdTimeSeriesRequest
+    , cctsrCollectdPayloads
+    , cctsrResource
+    , cctsrCollectdVersion
 
     -- * Point
     , Point
     , point
-    , pBoolValue
-    , pStart
-    , pDoubleValue
-    , pStringValue
-    , pDistributionValue
-    , pEnd
-    , pInt64Value
+    , pValue
+    , pInterval
 
-    -- * PointDistributionOverflowBucket
-    , PointDistributionOverflowBucket
-    , pointDistributionOverflowBucket
-    , pdobCount
-    , pdobLowerBound
+    -- * CollectdPayload
+    , CollectdPayload
+    , collectdPayload
+    , cpStartTime
+    , cpPluginInstance
+    , cpValues
+    , cpTypeInstance
+    , cpEndTime
+    , cpMetadata
+    , cpType
+    , cpPlugin
 
-    -- * ListTimeseriesDescriptorsResponse
-    , ListTimeseriesDescriptorsResponse
-    , listTimeseriesDescriptorsResponse
-    , lNextPageToken
-    , lKind
-    , lOldest
-    , lYoungest
-    , lTimeseries
+    -- * Metric
+    , Metric
+    , metric
+    , mLabels
+    , mType
 
-    -- * ListMetricDescriptorsRequest
-    , ListMetricDescriptorsRequest
-    , listMetricDescriptorsRequest
-    , lisKind
+    -- * Exponential
+    , Exponential
+    , exponential
+    , eGrowthFactor
+    , eScale
+    , eNumFiniteBuckets
 
-    -- * TimeseriesPoint
-    , TimeseriesPoint
-    , timeseriesPoint
-    , tpPoint
-    , tpTimeseriesDesc
+    -- * Range
+    , Range
+    , range
+    , rMax
+    , rMin
 
-    -- * TimeseriesDescriptorsListAggregator
-    , TimeseriesDescriptorsListAggregator (..)
+    -- * MonitoredResource
+    , MonitoredResource
+    , monitoredResource
+    , mrLabels
+    , mrType
 
-    -- * DeleteMetricDescriptorResponse
-    , DeleteMetricDescriptorResponse
-    , deleteMetricDescriptorResponse
-    , dmdrKind
+    -- * TimeInterval
+    , TimeInterval
+    , timeInterval
+    , tiStartTime
+    , tiEndTime
 
-    -- * ListTimeseriesRequest
-    , ListTimeseriesRequest
-    , listTimeseriesRequest
-    , ltrtKind
+    -- * ListGroupMembersResponse
+    , ListGroupMembersResponse
+    , listGroupMembersResponse
+    , lgmrNextPageToken
+    , lgmrMembers
+    , lgmrTotalSize
 
-    -- * TimeseriesDescriptor
-    , TimeseriesDescriptor
-    , timeseriesDescriptor
-    , tdProject
-    , tdMetric
-    , tdLabels
+    -- * LabelDescriptor
+    , LabelDescriptor
+    , labelDescriptor
+    , ldKey
+    , ldValueType
+    , ldDescription
 
-    -- * Timeseries
-    , Timeseries
-    , timeseries
-    , tPoints
-    , tTimeseriesDesc
+    -- * Linear
+    , Linear
+    , linear
+    , lOffSet
+    , lWidth
+    , lNumFiniteBuckets
+
+    -- * Type
+    , Type
+    , type'
+    , tSourceContext
+    , tOneofs
+    , tName
+    , tOptions
+    , tFields
+    , tSyntax
+
+    -- * Option
+    , Option
+    , option
+    , oValue
+    , oName
+
+    -- * BucketOptions
+    , BucketOptions
+    , bucketOptions
+    , boExponentialBuckets
+    , boLinearBuckets
+    , boExplicitBuckets
+
+    -- * TimeSeries
+    , TimeSeries
+    , timeSeries
+    , tsPoints
+    , tsMetricKind
+    , tsMetric
+    , tsResource
+    , tsValueType
     ) where
 
 import           Network.Google.Monitoring.Types.Product
 import           Network.Google.Monitoring.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2beta2' of the Cloud Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
-monitoringService :: Service
+-- | Default request referring to version 'v3' of the Google Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
+monitoringService :: ServiceConfig
 monitoringService
-  = defaultService
-      (ServiceId "cloudmonitoring:v2beta2")
-      "www.googleapis.com"
+  = defaultService (ServiceId "monitoring:v3")
+      "monitoring.googleapis.com"
+
+-- | View monitoring data for all of your Google Cloud and third-party
+-- projects
+monitoringReadScope :: Proxy '["https://www.googleapis.com/auth/monitoring.read"]
+monitoringReadScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View and write monitoring data for all of your Google and third-party
 -- Cloud and API projects
-monitoringScope :: OAuthScope
-monitoringScope = "https://www.googleapis.com/auth/monitoring";
+monitoringScope :: Proxy '["https://www.googleapis.com/auth/monitoring"]
+monitoringScope = Proxy;
+
+-- | Publish metric data to your Google Cloud projects
+monitoringWriteScope :: Proxy '["https://www.googleapis.com/auth/monitoring.write"]
+monitoringWriteScope = Proxy;

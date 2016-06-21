@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Revisions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'RevisionsList' request conforms to.
 type RevisionsListResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "revisions" :>
@@ -52,7 +52,7 @@ type RevisionsListResource =
 -- | Lists a file\'s revisions.
 --
 -- /See:/ 'revisionsList' smart constructor.
-newtype RevisionsList = RevisionsList
+newtype RevisionsList = RevisionsList'
     { _rllFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ revisionsList
     :: Text -- ^ 'rllFileId'
     -> RevisionsList
 revisionsList pRllFileId_ =
-    RevisionsList
+    RevisionsList'
     { _rllFileId = pRllFileId_
     }
 
@@ -76,7 +76,15 @@ rllFileId
 
 instance GoogleRequest RevisionsList where
         type Rs RevisionsList = RevisionList
-        requestClient RevisionsList{..}
+        type Scopes RevisionsList =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
+        requestClient RevisionsList'{..}
           = go _rllFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy RevisionsListResource)

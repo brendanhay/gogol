@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Threads.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type UsersThreadsListResource =
 -- | Lists the threads in the user\'s mailbox.
 --
 -- /See:/ 'usersThreadsList' smart constructor.
-data UsersThreadsList = UsersThreadsList
+data UsersThreadsList = UsersThreadsList'
     { _utlQ                :: !(Maybe Text)
     , _utlUserId           :: !Text
     , _utlIncludeSpamTrash :: !Bool
@@ -88,10 +88,9 @@ data UsersThreadsList = UsersThreadsList
 --
 -- * 'utlMaxResults'
 usersThreadsList
-    :: Text
-    -> UsersThreadsList
-usersThreadsList pUtlUserId_ =
-    UsersThreadsList
+    :: UsersThreadsList
+usersThreadsList =
+    UsersThreadsList'
     { _utlQ = Nothing
     , _utlUserId = "me"
     , _utlIncludeSpamTrash = False
@@ -140,7 +139,11 @@ utlMaxResults
 
 instance GoogleRequest UsersThreadsList where
         type Rs UsersThreadsList = ListThreadsResponse
-        requestClient UsersThreadsList{..}
+        type Scopes UsersThreadsList =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersThreadsList'{..}
           = go _utlUserId _utlQ (Just _utlIncludeSpamTrash)
               (_utlLabelIds ^. _Default)
               _utlPageToken

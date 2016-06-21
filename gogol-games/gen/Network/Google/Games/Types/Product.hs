@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.Games.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | This is a JSON template for a join room request.
 --
 -- /See:/ 'roomJoinRequest' smart constructor.
-data RoomJoinRequest = RoomJoinRequest
+data RoomJoinRequest = RoomJoinRequest'
     { _rjrNetworkDiagnostics :: !(Maybe NetworkDiagnostics)
     , _rjrKind               :: !Text
     , _rjrClientAddress      :: !(Maybe RoomClientAddress)
@@ -44,7 +44,7 @@ data RoomJoinRequest = RoomJoinRequest
 roomJoinRequest
     :: RoomJoinRequest
 roomJoinRequest =
-    RoomJoinRequest
+    RoomJoinRequest'
     { _rjrNetworkDiagnostics = Nothing
     , _rjrKind = "games#roomJoinRequest"
     , _rjrClientAddress = Nothing
@@ -80,14 +80,14 @@ instance FromJSON RoomJoinRequest where
         parseJSON
           = withObject "RoomJoinRequest"
               (\ o ->
-                 RoomJoinRequest <$>
+                 RoomJoinRequest' <$>
                    (o .:? "networkDiagnostics") <*>
                      (o .:? "kind" .!= "games#roomJoinRequest")
                      <*> (o .:? "clientAddress")
                      <*> (o .:? "capabilities" .!= mempty))
 
 instance ToJSON RoomJoinRequest where
-        toJSON RoomJoinRequest{..}
+        toJSON RoomJoinRequest'{..}
           = object
               (catMaybes
                  [("networkDiagnostics" .=) <$>
@@ -100,7 +100,7 @@ instance ToJSON RoomJoinRequest where
 -- name. For some players, these fields may not be present.
 --
 -- /See:/ 'playerName' smart constructor.
-data PlayerName = PlayerName
+data PlayerName = PlayerName'
     { _pnGivenName  :: !(Maybe Text)
     , _pnFamilyName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -115,7 +115,7 @@ data PlayerName = PlayerName
 playerName
     :: PlayerName
 playerName =
-    PlayerName
+    PlayerName'
     { _pnGivenName = Nothing
     , _pnFamilyName = Nothing
     }
@@ -136,11 +136,11 @@ instance FromJSON PlayerName where
         parseJSON
           = withObject "PlayerName"
               (\ o ->
-                 PlayerName <$>
+                 PlayerName' <$>
                    (o .:? "givenName") <*> (o .:? "familyName"))
 
 instance ToJSON PlayerName where
-        toJSON PlayerName{..}
+        toJSON PlayerName'{..}
           = object
               (catMaybes
                  [("givenName" .=) <$> _pnGivenName,
@@ -149,7 +149,7 @@ instance ToJSON PlayerName where
 -- | This is a JSON template for an snapshot object.
 --
 -- /See:/ 'snapshot' smart constructor.
-data Snapshot = Snapshot
+data Snapshot = Snapshot'
     { _sLastModifiedMillis :: !(Maybe (Textual Int64))
     , _sKind               :: !Text
     , _sProgressValue      :: !(Maybe (Textual Int64))
@@ -191,7 +191,7 @@ data Snapshot = Snapshot
 snapshot
     :: Snapshot
 snapshot =
-    Snapshot
+    Snapshot'
     { _sLastModifiedMillis = Nothing
     , _sKind = "games#snapshot"
     , _sProgressValue = Nothing
@@ -271,7 +271,7 @@ instance FromJSON Snapshot where
         parseJSON
           = withObject "Snapshot"
               (\ o ->
-                 Snapshot <$>
+                 Snapshot' <$>
                    (o .:? "lastModifiedMillis") <*>
                      (o .:? "kind" .!= "games#snapshot")
                      <*> (o .:? "progressValue")
@@ -285,7 +285,7 @@ instance FromJSON Snapshot where
                      <*> (o .:? "driveId"))
 
 instance ToJSON Snapshot where
-        toJSON Snapshot{..}
+        toJSON Snapshot'{..}
           = object
               (catMaybes
                  [("lastModifiedMillis" .=) <$> _sLastModifiedMillis,
@@ -302,7 +302,7 @@ instance ToJSON Snapshot where
 -- | This is a JSON template for a room resource object.
 --
 -- /See:/ 'room' smart constructor.
-data Room = Room
+data Room = Room'
     { _rStatus               :: !(Maybe Text)
     , _rVariant              :: !(Maybe (Textual Int32))
     , _rKind                 :: !Text
@@ -350,7 +350,7 @@ data Room = Room
 room
     :: Room
 room =
-    Room
+    Room'
     { _rStatus = Nothing
     , _rVariant = Nothing
     , _rKind = "games#room"
@@ -459,7 +459,7 @@ instance FromJSON Room where
         parseJSON
           = withObject "Room"
               (\ o ->
-                 Room <$>
+                 Room' <$>
                    (o .:? "status") <*> (o .:? "variant") <*>
                      (o .:? "kind" .!= "games#room")
                      <*> (o .:? "autoMatchingStatus")
@@ -474,7 +474,7 @@ instance FromJSON Room where
                      <*> (o .:? "description"))
 
 instance ToJSON Room where
-        toJSON Room{..}
+        toJSON Room'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _rStatus,
@@ -495,7 +495,7 @@ instance ToJSON Room where
 -- | This is a JSON template for a list of quest objects.
 --
 -- /See:/ 'questListResponse' smart constructor.
-data QuestListResponse = QuestListResponse
+data QuestListResponse = QuestListResponse'
     { _qlrNextPageToken :: !(Maybe Text)
     , _qlrKind          :: !Text
     , _qlrItems         :: !(Maybe [Quest])
@@ -513,7 +513,7 @@ data QuestListResponse = QuestListResponse
 questListResponse
     :: QuestListResponse
 questListResponse =
-    QuestListResponse
+    QuestListResponse'
     { _qlrNextPageToken = Nothing
     , _qlrKind = "games#questListResponse"
     , _qlrItems = Nothing
@@ -541,13 +541,13 @@ instance FromJSON QuestListResponse where
         parseJSON
           = withObject "QuestListResponse"
               (\ o ->
-                 QuestListResponse <$>
+                 QuestListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "games#questListResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON QuestListResponse where
-        toJSON QuestListResponse{..}
+        toJSON QuestListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _qlrNextPageToken,
@@ -557,7 +557,7 @@ instance ToJSON QuestListResponse where
 -- | This is a JSON template for a turn-based match resource object.
 --
 -- /See:/ 'turnBasedMatch' smart constructor.
-data TurnBasedMatch = TurnBasedMatch
+data TurnBasedMatch = TurnBasedMatch'
     { _tbmStatus               :: !(Maybe Text)
     , _tbmVariant              :: !(Maybe (Textual Int32))
     , _tbmResults              :: !(Maybe [ParticipantResult])
@@ -626,7 +626,7 @@ data TurnBasedMatch = TurnBasedMatch
 turnBasedMatch
     :: TurnBasedMatch
 turnBasedMatch =
-    TurnBasedMatch
+    TurnBasedMatch'
     { _tbmStatus = Nothing
     , _tbmVariant = Nothing
     , _tbmResults = Nothing
@@ -795,7 +795,7 @@ instance FromJSON TurnBasedMatch where
         parseJSON
           = withObject "TurnBasedMatch"
               (\ o ->
-                 TurnBasedMatch <$>
+                 TurnBasedMatch' <$>
                    (o .:? "status") <*> (o .:? "variant") <*>
                      (o .:? "results" .!= mempty)
                      <*> (o .:? "matchNumber")
@@ -817,7 +817,7 @@ instance FromJSON TurnBasedMatch where
                      <*> (o .:? "matchVersion"))
 
 instance ToJSON TurnBasedMatch where
-        toJSON TurnBasedMatch{..}
+        toJSON TurnBasedMatch'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _tbmStatus,
@@ -845,9 +845,9 @@ instance ToJSON TurnBasedMatch where
 -- | This is a JSON template for a turn-based match data object.
 --
 -- /See:/ 'turnBasedMatchData' smart constructor.
-data TurnBasedMatchData = TurnBasedMatchData
+data TurnBasedMatchData = TurnBasedMatchData'
     { _tbmdKind          :: !Text
-    , _tbmdData          :: !(Maybe (Textual Word8))
+    , _tbmdData          :: !(Maybe Base64)
     , _tbmdDataAvailable :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -863,7 +863,7 @@ data TurnBasedMatchData = TurnBasedMatchData
 turnBasedMatchData
     :: TurnBasedMatchData
 turnBasedMatchData =
-    TurnBasedMatchData
+    TurnBasedMatchData'
     { _tbmdKind = "games#turnBasedMatchData"
     , _tbmdData = Nothing
     , _tbmdDataAvailable = Nothing
@@ -876,10 +876,10 @@ tbmdKind = lens _tbmdKind (\ s a -> s{_tbmdKind = a})
 
 -- | The byte representation of the data (limited to 128 kB), as a
 -- Base64-encoded string with the URL_SAFE encoding option.
-tbmdData :: Lens' TurnBasedMatchData (Maybe Word8)
+tbmdData :: Lens' TurnBasedMatchData (Maybe ByteString)
 tbmdData
   = lens _tbmdData (\ s a -> s{_tbmdData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | True if this match has data available but it wasn\'t returned in a list
 -- response; fetching the match individually will retrieve this data.
@@ -892,13 +892,13 @@ instance FromJSON TurnBasedMatchData where
         parseJSON
           = withObject "TurnBasedMatchData"
               (\ o ->
-                 TurnBasedMatchData <$>
+                 TurnBasedMatchData' <$>
                    (o .:? "kind" .!= "games#turnBasedMatchData") <*>
                      (o .:? "data")
                      <*> (o .:? "dataAvailable"))
 
 instance ToJSON TurnBasedMatchData where
-        toJSON TurnBasedMatchData{..}
+        toJSON TurnBasedMatchData'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tbmdKind),
@@ -908,7 +908,7 @@ instance ToJSON TurnBasedMatchData where
 -- | This is a JSON template for an event status resource.
 --
 -- /See:/ 'playerEvent' smart constructor.
-data PlayerEvent = PlayerEvent
+data PlayerEvent = PlayerEvent'
     { _peKind               :: !Text
     , _peNumEvents          :: !(Maybe (Textual Int64))
     , _peFormattedNumEvents :: !(Maybe Text)
@@ -932,7 +932,7 @@ data PlayerEvent = PlayerEvent
 playerEvent
     :: PlayerEvent
 playerEvent =
-    PlayerEvent
+    PlayerEvent'
     { _peKind = "games#playerEvent"
     , _peNumEvents = Nothing
     , _peFormattedNumEvents = Nothing
@@ -974,7 +974,7 @@ instance FromJSON PlayerEvent where
         parseJSON
           = withObject "PlayerEvent"
               (\ o ->
-                 PlayerEvent <$>
+                 PlayerEvent' <$>
                    (o .:? "kind" .!= "games#playerEvent") <*>
                      (o .:? "numEvents")
                      <*> (o .:? "formattedNumEvents")
@@ -982,7 +982,7 @@ instance FromJSON PlayerEvent where
                      <*> (o .:? "playerId"))
 
 instance ToJSON PlayerEvent where
-        toJSON PlayerEvent{..}
+        toJSON PlayerEvent'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _peKind),
@@ -994,7 +994,7 @@ instance ToJSON PlayerEvent where
 -- | This is a JSON template for a player leaderboard score object.
 --
 -- /See:/ 'playerLeaderboardScore' smart constructor.
-data PlayerLeaderboardScore = PlayerLeaderboardScore
+data PlayerLeaderboardScore = PlayerLeaderboardScore'
     { _plsScoreTag       :: !(Maybe Text)
     , _plsScoreString    :: !(Maybe Text)
     , _plsKind           :: !Text
@@ -1030,7 +1030,7 @@ data PlayerLeaderboardScore = PlayerLeaderboardScore
 playerLeaderboardScore
     :: PlayerLeaderboardScore
 playerLeaderboardScore =
-    PlayerLeaderboardScore
+    PlayerLeaderboardScore'
     { _plsScoreTag = Nothing
     , _plsScoreString = Nothing
     , _plsKind = "games#playerLeaderboardScore"
@@ -1104,7 +1104,7 @@ instance FromJSON PlayerLeaderboardScore where
         parseJSON
           = withObject "PlayerLeaderboardScore"
               (\ o ->
-                 PlayerLeaderboardScore <$>
+                 PlayerLeaderboardScore' <$>
                    (o .:? "scoreTag") <*> (o .:? "scoreString") <*>
                      (o .:? "kind" .!= "games#playerLeaderboardScore")
                      <*> (o .:? "scoreValue")
@@ -1115,7 +1115,7 @@ instance FromJSON PlayerLeaderboardScore where
                      <*> (o .:? "writeTimestamp"))
 
 instance ToJSON PlayerLeaderboardScore where
-        toJSON PlayerLeaderboardScore{..}
+        toJSON PlayerLeaderboardScore'{..}
           = object
               (catMaybes
                  [("scoreTag" .=) <$> _plsScoreTag,
@@ -1131,7 +1131,7 @@ instance ToJSON PlayerLeaderboardScore where
 -- | This is a JSON template for the Application resource.
 --
 -- /See:/ 'application' smart constructor.
-data Application = Application
+data Application = Application'
     { _aThemeColor           :: !(Maybe Text)
     , _aLeaderboardCount     :: !(Maybe (Textual Int32))
     , _aKind                 :: !Text
@@ -1179,7 +1179,7 @@ data Application = Application
 application
     :: Application
 application =
-    Application
+    Application'
     { _aThemeColor = Nothing
     , _aLeaderboardCount = Nothing
     , _aKind = "games#application"
@@ -1277,7 +1277,7 @@ instance FromJSON Application where
         parseJSON
           = withObject "Application"
               (\ o ->
-                 Application <$>
+                 Application' <$>
                    (o .:? "themeColor") <*> (o .:? "leaderboard_count")
                      <*> (o .:? "kind" .!= "games#application")
                      <*> (o .:? "category")
@@ -1292,7 +1292,7 @@ instance FromJSON Application where
                      <*> (o .:? "lastUpdatedTimestamp"))
 
 instance ToJSON Application where
-        toJSON Application{..}
+        toJSON Application'{..}
           = object
               (catMaybes
                  [("themeColor" .=) <$> _aThemeColor,
@@ -1312,7 +1312,7 @@ instance ToJSON Application where
 -- | This is a JSON template for an application category object.
 --
 -- /See:/ 'applicationCategory' smart constructor.
-data ApplicationCategory = ApplicationCategory
+data ApplicationCategory = ApplicationCategory'
     { _acSecondary :: !(Maybe Text)
     , _acKind      :: !Text
     , _acPrimary   :: !(Maybe Text)
@@ -1330,7 +1330,7 @@ data ApplicationCategory = ApplicationCategory
 applicationCategory
     :: ApplicationCategory
 applicationCategory =
-    ApplicationCategory
+    ApplicationCategory'
     { _acSecondary = Nothing
     , _acKind = "games#applicationCategory"
     , _acPrimary = Nothing
@@ -1355,13 +1355,13 @@ instance FromJSON ApplicationCategory where
         parseJSON
           = withObject "ApplicationCategory"
               (\ o ->
-                 ApplicationCategory <$>
+                 ApplicationCategory' <$>
                    (o .:? "secondary") <*>
                      (o .:? "kind" .!= "games#applicationCategory")
                      <*> (o .:? "primary"))
 
 instance ToJSON ApplicationCategory where
-        toJSON ApplicationCategory{..}
+        toJSON ApplicationCategory'{..}
           = object
               (catMaybes
                  [("secondary" .=) <$> _acSecondary,
@@ -1371,7 +1371,7 @@ instance ToJSON ApplicationCategory where
 -- | This is a JSON template for a list of score submission statuses.
 --
 -- /See:/ 'playerScoreListResponse' smart constructor.
-data PlayerScoreListResponse = PlayerScoreListResponse
+data PlayerScoreListResponse = PlayerScoreListResponse'
     { _pslrSubmittedScores :: !(Maybe [PlayerScoreResponse])
     , _pslrKind            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1386,7 +1386,7 @@ data PlayerScoreListResponse = PlayerScoreListResponse
 playerScoreListResponse
     :: PlayerScoreListResponse
 playerScoreListResponse =
-    PlayerScoreListResponse
+    PlayerScoreListResponse'
     { _pslrSubmittedScores = Nothing
     , _pslrKind = "games#playerScoreListResponse"
     }
@@ -1408,12 +1408,12 @@ instance FromJSON PlayerScoreListResponse where
         parseJSON
           = withObject "PlayerScoreListResponse"
               (\ o ->
-                 PlayerScoreListResponse <$>
+                 PlayerScoreListResponse' <$>
                    (o .:? "submittedScores" .!= mempty) <*>
                      (o .:? "kind" .!= "games#playerScoreListResponse"))
 
 instance ToJSON PlayerScoreListResponse where
-        toJSON PlayerScoreListResponse{..}
+        toJSON PlayerScoreListResponse'{..}
           = object
               (catMaybes
                  [("submittedScores" .=) <$> _pslrSubmittedScores,
@@ -1422,7 +1422,7 @@ instance ToJSON PlayerScoreListResponse where
 -- | This is a JSON template for network diagnostics reported for a client.
 --
 -- /See:/ 'networkDiagnostics' smart constructor.
-data NetworkDiagnostics = NetworkDiagnostics
+data NetworkDiagnostics = NetworkDiagnostics'
     { _ndAndroidNetworkType        :: !(Maybe (Textual Int32))
     , _ndKind                      :: !Text
     , _ndNetworkOperatorCode       :: !(Maybe Text)
@@ -1452,7 +1452,7 @@ data NetworkDiagnostics = NetworkDiagnostics
 networkDiagnostics
     :: NetworkDiagnostics
 networkDiagnostics =
-    NetworkDiagnostics
+    NetworkDiagnostics'
     { _ndAndroidNetworkType = Nothing
     , _ndKind = "games#networkDiagnostics"
     , _ndNetworkOperatorCode = Nothing
@@ -1518,7 +1518,7 @@ instance FromJSON NetworkDiagnostics where
         parseJSON
           = withObject "NetworkDiagnostics"
               (\ o ->
-                 NetworkDiagnostics <$>
+                 NetworkDiagnostics' <$>
                    (o .:? "androidNetworkType") <*>
                      (o .:? "kind" .!= "games#networkDiagnostics")
                      <*> (o .:? "networkOperatorCode")
@@ -1528,7 +1528,7 @@ instance FromJSON NetworkDiagnostics where
                      <*> (o .:? "androidNetworkSubtype"))
 
 instance ToJSON NetworkDiagnostics where
-        toJSON NetworkDiagnostics{..}
+        toJSON NetworkDiagnostics'{..}
           = object
               (catMaybes
                  [("androidNetworkType" .=) <$> _ndAndroidNetworkType,
@@ -1546,7 +1546,7 @@ instance ToJSON NetworkDiagnostics where
 -- | This is a JSON template for the object representing a turn.
 --
 -- /See:/ 'turnBasedMatchTurn' smart constructor.
-data TurnBasedMatchTurn = TurnBasedMatchTurn
+data TurnBasedMatchTurn = TurnBasedMatchTurn'
     { _tbmtResults              :: !(Maybe [ParticipantResult])
     , _tbmtKind                 :: !Text
     , _tbmtData                 :: !(Maybe TurnBasedMatchDataRequest)
@@ -1570,7 +1570,7 @@ data TurnBasedMatchTurn = TurnBasedMatchTurn
 turnBasedMatchTurn
     :: TurnBasedMatchTurn
 turnBasedMatchTurn =
-    TurnBasedMatchTurn
+    TurnBasedMatchTurn'
     { _tbmtResults = Nothing
     , _tbmtKind = "games#turnBasedMatchTurn"
     , _tbmtData = Nothing
@@ -1616,7 +1616,7 @@ instance FromJSON TurnBasedMatchTurn where
         parseJSON
           = withObject "TurnBasedMatchTurn"
               (\ o ->
-                 TurnBasedMatchTurn <$>
+                 TurnBasedMatchTurn' <$>
                    (o .:? "results" .!= mempty) <*>
                      (o .:? "kind" .!= "games#turnBasedMatchTurn")
                      <*> (o .:? "data")
@@ -1624,7 +1624,7 @@ instance FromJSON TurnBasedMatchTurn where
                      <*> (o .:? "matchVersion"))
 
 instance ToJSON TurnBasedMatchTurn where
-        toJSON TurnBasedMatchTurn{..}
+        toJSON TurnBasedMatchTurn'{..}
           = object
               (catMaybes
                  [("results" .=) <$> _tbmtResults,
@@ -1637,7 +1637,7 @@ instance ToJSON TurnBasedMatchTurn where
 -- | This is a JSON template for a Quest Criterion resource.
 --
 -- /See:/ 'questCriterion' smart constructor.
-data QuestCriterion = QuestCriterion
+data QuestCriterion = QuestCriterion'
     { _qcCurrentContribution    :: !(Maybe QuestContribution)
     , _qcCompletionContribution :: !(Maybe QuestContribution)
     , _qcKind                   :: !Text
@@ -1661,7 +1661,7 @@ data QuestCriterion = QuestCriterion
 questCriterion
     :: QuestCriterion
 questCriterion =
-    QuestCriterion
+    QuestCriterion'
     { _qcCurrentContribution = Nothing
     , _qcCompletionContribution = Nothing
     , _qcKind = "games#questCriterion"
@@ -1709,7 +1709,7 @@ instance FromJSON QuestCriterion where
         parseJSON
           = withObject "QuestCriterion"
               (\ o ->
-                 QuestCriterion <$>
+                 QuestCriterion' <$>
                    (o .:? "currentContribution") <*>
                      (o .:? "completionContribution")
                      <*> (o .:? "kind" .!= "games#questCriterion")
@@ -1717,7 +1717,7 @@ instance FromJSON QuestCriterion where
                      <*> (o .:? "eventId"))
 
 instance ToJSON QuestCriterion where
-        toJSON QuestCriterion{..}
+        toJSON QuestCriterion'{..}
           = object
               (catMaybes
                  [("currentContribution" .=) <$>
@@ -1732,7 +1732,7 @@ instance ToJSON QuestCriterion where
 -- | This is a JSON template for a list of turn-based matches.
 --
 -- /See:/ 'turnBasedMatchList' smart constructor.
-data TurnBasedMatchList = TurnBasedMatchList
+data TurnBasedMatchList = TurnBasedMatchList'
     { _tbmlNextPageToken :: !(Maybe Text)
     , _tbmlKind          :: !Text
     , _tbmlItems         :: !(Maybe [TurnBasedMatch])
@@ -1750,7 +1750,7 @@ data TurnBasedMatchList = TurnBasedMatchList
 turnBasedMatchList
     :: TurnBasedMatchList
 turnBasedMatchList =
-    TurnBasedMatchList
+    TurnBasedMatchList'
     { _tbmlNextPageToken = Nothing
     , _tbmlKind = "games#turnBasedMatchList"
     , _tbmlItems = Nothing
@@ -1778,13 +1778,13 @@ instance FromJSON TurnBasedMatchList where
         parseJSON
           = withObject "TurnBasedMatchList"
               (\ o ->
-                 TurnBasedMatchList <$>
+                 TurnBasedMatchList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "games#turnBasedMatchList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON TurnBasedMatchList where
-        toJSON TurnBasedMatchList{..}
+        toJSON TurnBasedMatchList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tbmlNextPageToken,
@@ -1794,7 +1794,7 @@ instance ToJSON TurnBasedMatchList where
 -- | This is a JSON template for peer channel diagnostics.
 --
 -- /See:/ 'peerChannelDiagnostics' smart constructor.
-data PeerChannelDiagnostics = PeerChannelDiagnostics
+data PeerChannelDiagnostics = PeerChannelDiagnostics'
     { _pcdNumMessagesLost        :: !(Maybe (Textual Int32))
     , _pcdBytesSent              :: !(Maybe AggregateStats)
     , _pcdKind                   :: !Text
@@ -1827,7 +1827,7 @@ data PeerChannelDiagnostics = PeerChannelDiagnostics
 peerChannelDiagnostics
     :: PeerChannelDiagnostics
 peerChannelDiagnostics =
-    PeerChannelDiagnostics
+    PeerChannelDiagnostics'
     { _pcdNumMessagesLost = Nothing
     , _pcdBytesSent = Nothing
     , _pcdKind = "games#peerChannelDiagnostics"
@@ -1892,7 +1892,7 @@ instance FromJSON PeerChannelDiagnostics where
         parseJSON
           = withObject "PeerChannelDiagnostics"
               (\ o ->
-                 PeerChannelDiagnostics <$>
+                 PeerChannelDiagnostics' <$>
                    (o .:? "numMessagesLost") <*> (o .:? "bytesSent") <*>
                      (o .:? "kind" .!= "games#peerChannelDiagnostics")
                      <*> (o .:? "roundtripLatencyMillis")
@@ -1902,7 +1902,7 @@ instance FromJSON PeerChannelDiagnostics where
                      <*> (o .:? "numMessagesSent"))
 
 instance ToJSON PeerChannelDiagnostics where
-        toJSON PeerChannelDiagnostics{..}
+        toJSON PeerChannelDiagnostics'{..}
           = object
               (catMaybes
                  [("numMessagesLost" .=) <$> _pcdNumMessagesLost,
@@ -1919,7 +1919,7 @@ instance ToJSON PeerChannelDiagnostics where
 -- | This is a JSON template for a list of rooms.
 --
 -- /See:/ 'roomList' smart constructor.
-data RoomList = RoomList
+data RoomList = RoomList'
     { _rlNextPageToken :: !(Maybe Text)
     , _rlKind          :: !Text
     , _rlItems         :: !(Maybe [Room])
@@ -1937,7 +1937,7 @@ data RoomList = RoomList
 roomList
     :: RoomList
 roomList =
-    RoomList
+    RoomList'
     { _rlNextPageToken = Nothing
     , _rlKind = "games#roomList"
     , _rlItems = Nothing
@@ -1964,13 +1964,13 @@ instance FromJSON RoomList where
         parseJSON
           = withObject "RoomList"
               (\ o ->
-                 RoomList <$>
+                 RoomList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "games#roomList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON RoomList where
-        toJSON RoomList{..}
+        toJSON RoomList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rlNextPageToken,
@@ -1979,7 +1979,7 @@ instance ToJSON RoomList where
 -- | This is a JSON template for a push token resource.
 --
 -- /See:/ 'pushToken' smart constructor.
-data PushToken = PushToken
+data PushToken = PushToken'
     { _ptClientRevision :: !(Maybe Text)
     , _ptKind           :: !Text
     , _ptLanguage       :: !(Maybe Text)
@@ -2000,7 +2000,7 @@ data PushToken = PushToken
 pushToken
     :: PushToken
 pushToken =
-    PushToken
+    PushToken'
     { _ptClientRevision = Nothing
     , _ptKind = "games#pushToken"
     , _ptLanguage = Nothing
@@ -2034,14 +2034,14 @@ instance FromJSON PushToken where
         parseJSON
           = withObject "PushToken"
               (\ o ->
-                 PushToken <$>
+                 PushToken' <$>
                    (o .:? "clientRevision") <*>
                      (o .:? "kind" .!= "games#pushToken")
                      <*> (o .:? "language")
                      <*> (o .:? "id"))
 
 instance ToJSON PushToken where
-        toJSON PushToken{..}
+        toJSON PushToken'{..}
           = object
               (catMaybes
                  [("clientRevision" .=) <$> _ptClientRevision,
@@ -2052,7 +2052,7 @@ instance ToJSON PushToken where
 -- | This is a JSON template for an achievement update response.
 --
 -- /See:/ 'achievementUpdateResponse' smart constructor.
-data AchievementUpdateResponse = AchievementUpdateResponse
+data AchievementUpdateResponse = AchievementUpdateResponse'
     { _aurUpdateOccurred :: !(Maybe Bool)
     , _aurAchievementId  :: !(Maybe Text)
     , _aurKind           :: !Text
@@ -2079,7 +2079,7 @@ data AchievementUpdateResponse = AchievementUpdateResponse
 achievementUpdateResponse
     :: AchievementUpdateResponse
 achievementUpdateResponse =
-    AchievementUpdateResponse
+    AchievementUpdateResponse'
     { _aurUpdateOccurred = Nothing
     , _aurAchievementId = Nothing
     , _aurKind = "games#achievementUpdateResponse"
@@ -2131,7 +2131,7 @@ instance FromJSON AchievementUpdateResponse where
         parseJSON
           = withObject "AchievementUpdateResponse"
               (\ o ->
-                 AchievementUpdateResponse <$>
+                 AchievementUpdateResponse' <$>
                    (o .:? "updateOccurred") <*> (o .:? "achievementId")
                      <*>
                      (o .:? "kind" .!= "games#achievementUpdateResponse")
@@ -2140,7 +2140,7 @@ instance FromJSON AchievementUpdateResponse where
                      <*> (o .:? "currentSteps"))
 
 instance ToJSON AchievementUpdateResponse where
-        toJSON AchievementUpdateResponse{..}
+        toJSON AchievementUpdateResponse'{..}
           = object
               (catMaybes
                  [("updateOccurred" .=) <$> _aurUpdateOccurred,
@@ -2153,7 +2153,7 @@ instance ToJSON AchievementUpdateResponse where
 -- | This is a JSON template for the Leaderboard Entry resource.
 --
 -- /See:/ 'leaderboardEntry' smart constructor.
-data LeaderboardEntry = LeaderboardEntry
+data LeaderboardEntry = LeaderboardEntry'
     { _leScoreTag             :: !(Maybe Text)
     , _leWriteTimestampMillis :: !(Maybe (Textual Int64))
     , _leKind                 :: !Text
@@ -2189,7 +2189,7 @@ data LeaderboardEntry = LeaderboardEntry
 leaderboardEntry
     :: LeaderboardEntry
 leaderboardEntry =
-    LeaderboardEntry
+    LeaderboardEntry'
     { _leScoreTag = Nothing
     , _leWriteTimestampMillis = Nothing
     , _leKind = "games#leaderboardEntry"
@@ -2259,7 +2259,7 @@ instance FromJSON LeaderboardEntry where
         parseJSON
           = withObject "LeaderboardEntry"
               (\ o ->
-                 LeaderboardEntry <$>
+                 LeaderboardEntry' <$>
                    (o .:? "scoreTag") <*> (o .:? "writeTimestampMillis")
                      <*> (o .:? "kind" .!= "games#leaderboardEntry")
                      <*> (o .:? "scoreValue")
@@ -2270,7 +2270,7 @@ instance FromJSON LeaderboardEntry where
                      <*> (o .:? "scoreRank"))
 
 instance ToJSON LeaderboardEntry where
-        toJSON LeaderboardEntry{..}
+        toJSON LeaderboardEntry'{..}
           = object
               (catMaybes
                  [("scoreTag" .=) <$> _leScoreTag,
@@ -2287,7 +2287,7 @@ instance ToJSON LeaderboardEntry where
 -- | This is a JSON template for a list of snapshot objects.
 --
 -- /See:/ 'snapshotListResponse' smart constructor.
-data SnapshotListResponse = SnapshotListResponse
+data SnapshotListResponse = SnapshotListResponse'
     { _slrNextPageToken :: !(Maybe Text)
     , _slrKind          :: !Text
     , _slrItems         :: !(Maybe [Snapshot])
@@ -2305,7 +2305,7 @@ data SnapshotListResponse = SnapshotListResponse
 snapshotListResponse
     :: SnapshotListResponse
 snapshotListResponse =
-    SnapshotListResponse
+    SnapshotListResponse'
     { _slrNextPageToken = Nothing
     , _slrKind = "games#snapshotListResponse"
     , _slrItems = Nothing
@@ -2334,13 +2334,13 @@ instance FromJSON SnapshotListResponse where
         parseJSON
           = withObject "SnapshotListResponse"
               (\ o ->
-                 SnapshotListResponse <$>
+                 SnapshotListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "games#snapshotListResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON SnapshotListResponse where
-        toJSON SnapshotListResponse{..}
+        toJSON SnapshotListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _slrNextPageToken,
@@ -2350,7 +2350,7 @@ instance ToJSON SnapshotListResponse where
 -- | This is a JSON template for 1P\/3P metadata about a user\'s level.
 --
 -- /See:/ 'playerLevel' smart constructor.
-data PlayerLevel = PlayerLevel
+data PlayerLevel = PlayerLevel'
     { _plMaxExperiencePoints :: !(Maybe (Textual Int64))
     , _plKind                :: !Text
     , _plMinExperiencePoints :: !(Maybe (Textual Int64))
@@ -2371,7 +2371,7 @@ data PlayerLevel = PlayerLevel
 playerLevel
     :: PlayerLevel
 playerLevel =
-    PlayerLevel
+    PlayerLevel'
     { _plMaxExperiencePoints = Nothing
     , _plKind = "games#playerLevel"
     , _plMinExperiencePoints = Nothing
@@ -2407,14 +2407,14 @@ instance FromJSON PlayerLevel where
         parseJSON
           = withObject "PlayerLevel"
               (\ o ->
-                 PlayerLevel <$>
+                 PlayerLevel' <$>
                    (o .:? "maxExperiencePoints") <*>
                      (o .:? "kind" .!= "games#playerLevel")
                      <*> (o .:? "minExperiencePoints")
                      <*> (o .:? "level"))
 
 instance ToJSON PlayerLevel where
-        toJSON PlayerLevel{..}
+        toJSON PlayerLevel'{..}
           = object
               (catMaybes
                  [("maxExperiencePoints" .=) <$>
@@ -2427,7 +2427,7 @@ instance ToJSON PlayerLevel where
 -- | This is a JSON template for an achievement unlock response.
 --
 -- /See:/ 'achievementUpdateMultipleResponse' smart constructor.
-data AchievementUpdateMultipleResponse = AchievementUpdateMultipleResponse
+data AchievementUpdateMultipleResponse = AchievementUpdateMultipleResponse'
     { _aumrKind                :: !Text
     , _aumrUpdatedAchievements :: !(Maybe [AchievementUpdateResponse])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2442,7 +2442,7 @@ data AchievementUpdateMultipleResponse = AchievementUpdateMultipleResponse
 achievementUpdateMultipleResponse
     :: AchievementUpdateMultipleResponse
 achievementUpdateMultipleResponse =
-    AchievementUpdateMultipleResponse
+    AchievementUpdateMultipleResponse'
     { _aumrKind = "games#achievementUpdateMultipleResponse"
     , _aumrUpdatedAchievements = Nothing
     }
@@ -2465,14 +2465,14 @@ instance FromJSON AchievementUpdateMultipleResponse
         parseJSON
           = withObject "AchievementUpdateMultipleResponse"
               (\ o ->
-                 AchievementUpdateMultipleResponse <$>
+                 AchievementUpdateMultipleResponse' <$>
                    (o .:? "kind" .!=
                       "games#achievementUpdateMultipleResponse")
                      <*> (o .:? "updatedAchievements" .!= mempty))
 
 instance ToJSON AchievementUpdateMultipleResponse
          where
-        toJSON AchievementUpdateMultipleResponse{..}
+        toJSON AchievementUpdateMultipleResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aumrKind),
@@ -2482,7 +2482,7 @@ instance ToJSON AchievementUpdateMultipleResponse
 -- | This is a JSON template for a participant in a room.
 --
 -- /See:/ 'roomParticipant' smart constructor.
-data RoomParticipant = RoomParticipant
+data RoomParticipant = RoomParticipant'
     { _rpStatus            :: !(Maybe Text)
     , _rpConnected         :: !(Maybe Bool)
     , _rpLeaveReason       :: !(Maybe Text)
@@ -2521,7 +2521,7 @@ data RoomParticipant = RoomParticipant
 roomParticipant
     :: RoomParticipant
 roomParticipant =
-    RoomParticipant
+    RoomParticipant'
     { _rpStatus = Nothing
     , _rpConnected = Nothing
     , _rpLeaveReason = Nothing
@@ -2615,7 +2615,7 @@ instance FromJSON RoomParticipant where
         parseJSON
           = withObject "RoomParticipant"
               (\ o ->
-                 RoomParticipant <$>
+                 RoomParticipant' <$>
                    (o .:? "status") <*> (o .:? "connected") <*>
                      (o .:? "leaveReason")
                      <*> (o .:? "kind" .!= "games#roomParticipant")
@@ -2627,7 +2627,7 @@ instance FromJSON RoomParticipant where
                      <*> (o .:? "autoMatchedPlayer"))
 
 instance ToJSON RoomParticipant where
-        toJSON RoomParticipant{..}
+        toJSON RoomParticipant'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _rpStatus,
@@ -2644,7 +2644,7 @@ instance ToJSON RoomParticipant where
 -- | This is a JSON template for a ListDefinitions response.
 --
 -- /See:/ 'eventDefinitionListResponse' smart constructor.
-data EventDefinitionListResponse = EventDefinitionListResponse
+data EventDefinitionListResponse = EventDefinitionListResponse'
     { _edlrNextPageToken :: !(Maybe Text)
     , _edlrKind          :: !Text
     , _edlrItems         :: !(Maybe [EventDefinition])
@@ -2662,7 +2662,7 @@ data EventDefinitionListResponse = EventDefinitionListResponse
 eventDefinitionListResponse
     :: EventDefinitionListResponse
 eventDefinitionListResponse =
-    EventDefinitionListResponse
+    EventDefinitionListResponse'
     { _edlrNextPageToken = Nothing
     , _edlrKind = "games#eventDefinitionListResponse"
     , _edlrItems = Nothing
@@ -2690,14 +2690,14 @@ instance FromJSON EventDefinitionListResponse where
         parseJSON
           = withObject "EventDefinitionListResponse"
               (\ o ->
-                 EventDefinitionListResponse <$>
+                 EventDefinitionListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "games#eventDefinitionListResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON EventDefinitionListResponse where
-        toJSON EventDefinitionListResponse{..}
+        toJSON EventDefinitionListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _edlrNextPageToken,
@@ -2707,7 +2707,7 @@ instance ToJSON EventDefinitionListResponse where
 -- | This is a JSON template for data related to individual game categories.
 --
 -- /See:/ 'category' smart constructor.
-data Category = Category
+data Category = Category'
     { _cKind             :: !Text
     , _cCategory         :: !(Maybe Text)
     , _cExperiencePoints :: !(Maybe (Textual Int64))
@@ -2725,7 +2725,7 @@ data Category = Category
 category
     :: Category
 category =
-    Category
+    Category'
     { _cKind = "games#category"
     , _cCategory = Nothing
     , _cExperiencePoints = Nothing
@@ -2752,13 +2752,13 @@ instance FromJSON Category where
         parseJSON
           = withObject "Category"
               (\ o ->
-                 Category <$>
+                 Category' <$>
                    (o .:? "kind" .!= "games#category") <*>
                      (o .:? "category")
                      <*> (o .:? "experiencePoints"))
 
 instance ToJSON Category where
-        toJSON Category{..}
+        toJSON Category'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cKind),
@@ -2768,7 +2768,7 @@ instance ToJSON Category where
 -- | This is a JSON template for the Android instance details resource.
 --
 -- /See:/ 'instanceAndroidDetails' smart constructor.
-data InstanceAndroidDetails = InstanceAndroidDetails
+data InstanceAndroidDetails = InstanceAndroidDetails'
     { _iadPackageName       :: !(Maybe Text)
     , _iadPreferred         :: !(Maybe Bool)
     , _iadKind              :: !Text
@@ -2789,7 +2789,7 @@ data InstanceAndroidDetails = InstanceAndroidDetails
 instanceAndroidDetails
     :: InstanceAndroidDetails
 instanceAndroidDetails =
-    InstanceAndroidDetails
+    InstanceAndroidDetails'
     { _iadPackageName = Nothing
     , _iadPreferred = Nothing
     , _iadKind = "games#instanceAndroidDetails"
@@ -2822,13 +2822,13 @@ instance FromJSON InstanceAndroidDetails where
         parseJSON
           = withObject "InstanceAndroidDetails"
               (\ o ->
-                 InstanceAndroidDetails <$>
+                 InstanceAndroidDetails' <$>
                    (o .:? "packageName") <*> (o .:? "preferred") <*>
                      (o .:? "kind" .!= "games#instanceAndroidDetails")
                      <*> (o .:? "enablePiracyCheck"))
 
 instance ToJSON InstanceAndroidDetails where
-        toJSON InstanceAndroidDetails{..}
+        toJSON InstanceAndroidDetails'{..}
           = object
               (catMaybes
                  [("packageName" .=) <$> _iadPackageName,
@@ -2839,7 +2839,7 @@ instance ToJSON InstanceAndroidDetails where
 -- | This is a JSON template for a participant in a turn-based match.
 --
 -- /See:/ 'turnBasedMatchParticipant' smart constructor.
-data TurnBasedMatchParticipant = TurnBasedMatchParticipant
+data TurnBasedMatchParticipant = TurnBasedMatchParticipant'
     { _tbmpStatus            :: !(Maybe Text)
     , _tbmpKind              :: !Text
     , _tbmpId                :: !(Maybe Text)
@@ -2866,7 +2866,7 @@ data TurnBasedMatchParticipant = TurnBasedMatchParticipant
 turnBasedMatchParticipant
     :: TurnBasedMatchParticipant
 turnBasedMatchParticipant =
-    TurnBasedMatchParticipant
+    TurnBasedMatchParticipant'
     { _tbmpStatus = Nothing
     , _tbmpKind = "games#turnBasedMatchParticipant"
     , _tbmpId = Nothing
@@ -2926,7 +2926,7 @@ instance FromJSON TurnBasedMatchParticipant where
         parseJSON
           = withObject "TurnBasedMatchParticipant"
               (\ o ->
-                 TurnBasedMatchParticipant <$>
+                 TurnBasedMatchParticipant' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "games#turnBasedMatchParticipant")
                      <*> (o .:? "id")
@@ -2935,7 +2935,7 @@ instance FromJSON TurnBasedMatchParticipant where
                      <*> (o .:? "autoMatchedPlayer"))
 
 instance ToJSON TurnBasedMatchParticipant where
-        toJSON TurnBasedMatchParticipant{..}
+        toJSON TurnBasedMatchParticipant'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _tbmpStatus,
@@ -2947,7 +2947,7 @@ instance ToJSON TurnBasedMatchParticipant where
 -- | This is a JSON template for a list of achievement definition objects.
 --
 -- /See:/ 'achievementDefinitionsListResponse' smart constructor.
-data AchievementDefinitionsListResponse = AchievementDefinitionsListResponse
+data AchievementDefinitionsListResponse = AchievementDefinitionsListResponse'
     { _adlrNextPageToken :: !(Maybe Text)
     , _adlrKind          :: !Text
     , _adlrItems         :: !(Maybe [AchievementDefinition])
@@ -2965,7 +2965,7 @@ data AchievementDefinitionsListResponse = AchievementDefinitionsListResponse
 achievementDefinitionsListResponse
     :: AchievementDefinitionsListResponse
 achievementDefinitionsListResponse =
-    AchievementDefinitionsListResponse
+    AchievementDefinitionsListResponse'
     { _adlrNextPageToken = Nothing
     , _adlrKind = "games#achievementDefinitionsListResponse"
     , _adlrItems = Nothing
@@ -2994,7 +2994,7 @@ instance FromJSON AchievementDefinitionsListResponse
         parseJSON
           = withObject "AchievementDefinitionsListResponse"
               (\ o ->
-                 AchievementDefinitionsListResponse <$>
+                 AchievementDefinitionsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "games#achievementDefinitionsListResponse")
@@ -3002,7 +3002,7 @@ instance FromJSON AchievementDefinitionsListResponse
 
 instance ToJSON AchievementDefinitionsListResponse
          where
-        toJSON AchievementDefinitionsListResponse{..}
+        toJSON AchievementDefinitionsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _adlrNextPageToken,
@@ -3012,7 +3012,7 @@ instance ToJSON AchievementDefinitionsListResponse
 -- | This is a JSON template for a list of leaderboard entry resources.
 --
 -- /See:/ 'playerScoreResponse' smart constructor.
-data PlayerScoreResponse = PlayerScoreResponse
+data PlayerScoreResponse = PlayerScoreResponse'
     { _psrScoreTag             :: !(Maybe Text)
     , _psrKind                 :: !Text
     , _psrFormattedScore       :: !(Maybe Text)
@@ -3039,7 +3039,7 @@ data PlayerScoreResponse = PlayerScoreResponse
 playerScoreResponse
     :: PlayerScoreResponse
 playerScoreResponse =
-    PlayerScoreResponse
+    PlayerScoreResponse'
     { _psrScoreTag = Nothing
     , _psrKind = "games#playerScoreResponse"
     , _psrFormattedScore = Nothing
@@ -3096,7 +3096,7 @@ instance FromJSON PlayerScoreResponse where
         parseJSON
           = withObject "PlayerScoreResponse"
               (\ o ->
-                 PlayerScoreResponse <$>
+                 PlayerScoreResponse' <$>
                    (o .:? "scoreTag") <*>
                      (o .:? "kind" .!= "games#playerScoreResponse")
                      <*> (o .:? "formattedScore")
@@ -3105,7 +3105,7 @@ instance FromJSON PlayerScoreResponse where
                      <*> (o .:? "unbeatenScores" .!= mempty))
 
 instance ToJSON PlayerScoreResponse where
-        toJSON PlayerScoreResponse{..}
+        toJSON PlayerScoreResponse'{..}
           = object
               (catMaybes
                  [("scoreTag" .=) <$> _psrScoreTag,
@@ -3119,7 +3119,7 @@ instance ToJSON PlayerScoreResponse where
 -- | This is a JSON template for an anonymous player
 --
 -- /See:/ 'anonymousPlayer' smart constructor.
-data AnonymousPlayer = AnonymousPlayer
+data AnonymousPlayer = AnonymousPlayer'
     { _apAvatarImageURL :: !(Maybe Text)
     , _apKind           :: !Text
     , _apDisplayName    :: !(Maybe Text)
@@ -3137,7 +3137,7 @@ data AnonymousPlayer = AnonymousPlayer
 anonymousPlayer
     :: AnonymousPlayer
 anonymousPlayer =
-    AnonymousPlayer
+    AnonymousPlayer'
     { _apAvatarImageURL = Nothing
     , _apKind = "games#anonymousPlayer"
     , _apDisplayName = Nothing
@@ -3164,13 +3164,13 @@ instance FromJSON AnonymousPlayer where
         parseJSON
           = withObject "AnonymousPlayer"
               (\ o ->
-                 AnonymousPlayer <$>
+                 AnonymousPlayer' <$>
                    (o .:? "avatarImageUrl") <*>
                      (o .:? "kind" .!= "games#anonymousPlayer")
                      <*> (o .:? "displayName"))
 
 instance ToJSON AnonymousPlayer where
-        toJSON AnonymousPlayer{..}
+        toJSON AnonymousPlayer'{..}
           = object
               (catMaybes
                  [("avatarImageUrl" .=) <$> _apAvatarImageURL,
@@ -3180,7 +3180,7 @@ instance ToJSON AnonymousPlayer where
 -- | This is a JSON template for a Quest Criterion Contribution resource.
 --
 -- /See:/ 'questContribution' smart constructor.
-data QuestContribution = QuestContribution
+data QuestContribution = QuestContribution'
     { _qKind           :: !Text
     , _qValue          :: !(Maybe (Textual Int64))
     , _qFormattedValue :: !(Maybe Text)
@@ -3198,7 +3198,7 @@ data QuestContribution = QuestContribution
 questContribution
     :: QuestContribution
 questContribution =
-    QuestContribution
+    QuestContribution'
     { _qKind = "games#questContribution"
     , _qValue = Nothing
     , _qFormattedValue = Nothing
@@ -3227,13 +3227,13 @@ instance FromJSON QuestContribution where
         parseJSON
           = withObject "QuestContribution"
               (\ o ->
-                 QuestContribution <$>
+                 QuestContribution' <$>
                    (o .:? "kind" .!= "games#questContribution") <*>
                      (o .:? "value")
                      <*> (o .:? "formattedValue"))
 
 instance ToJSON QuestContribution where
-        toJSON QuestContribution{..}
+        toJSON QuestContribution'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _qKind), ("value" .=) <$> _qValue,
@@ -3242,7 +3242,7 @@ instance ToJSON QuestContribution where
 -- | This is a JSON template for the client address when setting up a room.
 --
 -- /See:/ 'roomClientAddress' smart constructor.
-data RoomClientAddress = RoomClientAddress
+data RoomClientAddress = RoomClientAddress'
     { _rcaKind        :: !Text
     , _rcaXmppAddress :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3257,7 +3257,7 @@ data RoomClientAddress = RoomClientAddress
 roomClientAddress
     :: RoomClientAddress
 roomClientAddress =
-    RoomClientAddress
+    RoomClientAddress'
     { _rcaKind = "games#roomClientAddress"
     , _rcaXmppAddress = Nothing
     }
@@ -3277,12 +3277,12 @@ instance FromJSON RoomClientAddress where
         parseJSON
           = withObject "RoomClientAddress"
               (\ o ->
-                 RoomClientAddress <$>
+                 RoomClientAddress' <$>
                    (o .:? "kind" .!= "games#roomClientAddress") <*>
                      (o .:? "xmppAddress"))
 
 instance ToJSON RoomClientAddress where
-        toJSON RoomClientAddress{..}
+        toJSON RoomClientAddress'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rcaKind),
@@ -3291,7 +3291,7 @@ instance ToJSON RoomClientAddress where
 -- | This is a JSON template for a list of leaderboard objects.
 --
 -- /See:/ 'leaderboardListResponse' smart constructor.
-data LeaderboardListResponse = LeaderboardListResponse
+data LeaderboardListResponse = LeaderboardListResponse'
     { _llrNextPageToken :: !(Maybe Text)
     , _llrKind          :: !Text
     , _llrItems         :: !(Maybe [Leaderboard])
@@ -3309,7 +3309,7 @@ data LeaderboardListResponse = LeaderboardListResponse
 leaderboardListResponse
     :: LeaderboardListResponse
 leaderboardListResponse =
-    LeaderboardListResponse
+    LeaderboardListResponse'
     { _llrNextPageToken = Nothing
     , _llrKind = "games#leaderboardListResponse"
     , _llrItems = Nothing
@@ -3337,13 +3337,13 @@ instance FromJSON LeaderboardListResponse where
         parseJSON
           = withObject "LeaderboardListResponse"
               (\ o ->
-                 LeaderboardListResponse <$>
+                 LeaderboardListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "games#leaderboardListResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON LeaderboardListResponse where
-        toJSON LeaderboardListResponse{..}
+        toJSON LeaderboardListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _llrNextPageToken,
@@ -3353,7 +3353,7 @@ instance ToJSON LeaderboardListResponse where
 -- | This is a JSON template for a player score.
 --
 -- /See:/ 'playerScore' smart constructor.
-data PlayerScore = PlayerScore
+data PlayerScore = PlayerScore'
     { _psScoreTag       :: !(Maybe Text)
     , _psScore          :: !(Maybe (Textual Int64))
     , _psKind           :: !Text
@@ -3377,7 +3377,7 @@ data PlayerScore = PlayerScore
 playerScore
     :: PlayerScore
 playerScore =
-    PlayerScore
+    PlayerScore'
     { _psScoreTag = Nothing
     , _psScore = Nothing
     , _psKind = "games#playerScore"
@@ -3419,14 +3419,14 @@ instance FromJSON PlayerScore where
         parseJSON
           = withObject "PlayerScore"
               (\ o ->
-                 PlayerScore <$>
+                 PlayerScore' <$>
                    (o .:? "scoreTag") <*> (o .:? "score") <*>
                      (o .:? "kind" .!= "games#playerScore")
                      <*> (o .:? "formattedScore")
                      <*> (o .:? "timeSpan"))
 
 instance ToJSON PlayerScore where
-        toJSON PlayerScore{..}
+        toJSON PlayerScore'{..}
           = object
               (catMaybes
                  [("scoreTag" .=) <$> _psScoreTag,
@@ -3437,7 +3437,7 @@ instance ToJSON PlayerScore where
 -- | This is a JSON template for an turn-based auto-match criteria object.
 --
 -- /See:/ 'turnBasedAutoMatchingCriteria' smart constructor.
-data TurnBasedAutoMatchingCriteria = TurnBasedAutoMatchingCriteria
+data TurnBasedAutoMatchingCriteria = TurnBasedAutoMatchingCriteria'
     { _tbamcKind                   :: !Text
     , _tbamcExclusiveBitmask       :: !(Maybe (Textual Int64))
     , _tbamcMaxAutoMatchingPlayers :: !(Maybe (Textual Int32))
@@ -3458,7 +3458,7 @@ data TurnBasedAutoMatchingCriteria = TurnBasedAutoMatchingCriteria
 turnBasedAutoMatchingCriteria
     :: TurnBasedAutoMatchingCriteria
 turnBasedAutoMatchingCriteria =
-    TurnBasedAutoMatchingCriteria
+    TurnBasedAutoMatchingCriteria'
     { _tbamcKind = "games#turnBasedAutoMatchingCriteria"
     , _tbamcExclusiveBitmask = Nothing
     , _tbamcMaxAutoMatchingPlayers = Nothing
@@ -3500,7 +3500,7 @@ instance FromJSON TurnBasedAutoMatchingCriteria where
         parseJSON
           = withObject "TurnBasedAutoMatchingCriteria"
               (\ o ->
-                 TurnBasedAutoMatchingCriteria <$>
+                 TurnBasedAutoMatchingCriteria' <$>
                    (o .:? "kind" .!=
                       "games#turnBasedAutoMatchingCriteria")
                      <*> (o .:? "exclusiveBitmask")
@@ -3508,7 +3508,7 @@ instance FromJSON TurnBasedAutoMatchingCriteria where
                      <*> (o .:? "minAutoMatchingPlayers"))
 
 instance ToJSON TurnBasedAutoMatchingCriteria where
-        toJSON TurnBasedAutoMatchingCriteria{..}
+        toJSON TurnBasedAutoMatchingCriteria'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tbamcKind),
@@ -3521,7 +3521,7 @@ instance ToJSON TurnBasedAutoMatchingCriteria where
 -- | This is a JSON template for an image of a snapshot.
 --
 -- /See:/ 'snapshotImage' smart constructor.
-data SnapshotImage = SnapshotImage
+data SnapshotImage = SnapshotImage'
     { _siHeight   :: !(Maybe (Textual Int32))
     , _siKind     :: !Text
     , _siURL      :: !(Maybe Text)
@@ -3545,7 +3545,7 @@ data SnapshotImage = SnapshotImage
 snapshotImage
     :: SnapshotImage
 snapshotImage =
-    SnapshotImage
+    SnapshotImage'
     { _siHeight = Nothing
     , _siKind = "games#snapshotImage"
     , _siURL = Nothing
@@ -3584,7 +3584,7 @@ instance FromJSON SnapshotImage where
         parseJSON
           = withObject "SnapshotImage"
               (\ o ->
-                 SnapshotImage <$>
+                 SnapshotImage' <$>
                    (o .:? "height") <*>
                      (o .:? "kind" .!= "games#snapshotImage")
                      <*> (o .:? "url")
@@ -3592,7 +3592,7 @@ instance FromJSON SnapshotImage where
                      <*> (o .:? "width"))
 
 instance ToJSON SnapshotImage where
-        toJSON SnapshotImage{..}
+        toJSON SnapshotImage'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _siHeight,
@@ -3604,7 +3604,7 @@ instance ToJSON SnapshotImage where
 -- joined.
 --
 -- /See:/ 'roomStatus' smart constructor.
-data RoomStatus = RoomStatus
+data RoomStatus = RoomStatus'
     { _rsStatus             :: !(Maybe Text)
     , _rsKind               :: !Text
     , _rsAutoMatchingStatus :: !(Maybe RoomAutoMatchStatus)
@@ -3631,7 +3631,7 @@ data RoomStatus = RoomStatus
 roomStatus
     :: RoomStatus
 roomStatus =
-    RoomStatus
+    RoomStatus'
     { _rsStatus = Nothing
     , _rsKind = "games#roomStatus"
     , _rsAutoMatchingStatus = Nothing
@@ -3687,7 +3687,7 @@ instance FromJSON RoomStatus where
         parseJSON
           = withObject "RoomStatus"
               (\ o ->
-                 RoomStatus <$>
+                 RoomStatus' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "games#roomStatus")
                      <*> (o .:? "autoMatchingStatus")
@@ -3696,7 +3696,7 @@ instance FromJSON RoomStatus where
                      <*> (o .:? "roomId"))
 
 instance ToJSON RoomStatus where
-        toJSON RoomStatus{..}
+        toJSON RoomStatus'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _rsStatus,
@@ -3709,7 +3709,7 @@ instance ToJSON RoomStatus where
 -- | This is a JSON template for a list of player leaderboard scores.
 --
 -- /See:/ 'playerLeaderboardScoreListResponse' smart constructor.
-data PlayerLeaderboardScoreListResponse = PlayerLeaderboardScoreListResponse
+data PlayerLeaderboardScoreListResponse = PlayerLeaderboardScoreListResponse'
     { _plslrNextPageToken :: !(Maybe Text)
     , _plslrKind          :: !Text
     , _plslrItems         :: !(Maybe [PlayerLeaderboardScore])
@@ -3730,7 +3730,7 @@ data PlayerLeaderboardScoreListResponse = PlayerLeaderboardScoreListResponse
 playerLeaderboardScoreListResponse
     :: PlayerLeaderboardScoreListResponse
 playerLeaderboardScoreListResponse =
-    PlayerLeaderboardScoreListResponse
+    PlayerLeaderboardScoreListResponse'
     { _plslrNextPageToken = Nothing
     , _plslrKind = "games#playerLeaderboardScoreListResponse"
     , _plslrItems = Nothing
@@ -3766,7 +3766,7 @@ instance FromJSON PlayerLeaderboardScoreListResponse
         parseJSON
           = withObject "PlayerLeaderboardScoreListResponse"
               (\ o ->
-                 PlayerLeaderboardScoreListResponse <$>
+                 PlayerLeaderboardScoreListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "games#playerLeaderboardScoreListResponse")
@@ -3775,7 +3775,7 @@ instance FromJSON PlayerLeaderboardScoreListResponse
 
 instance ToJSON PlayerLeaderboardScoreListResponse
          where
-        toJSON PlayerLeaderboardScoreListResponse{..}
+        toJSON PlayerLeaderboardScoreListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _plslrNextPageToken,
@@ -3786,7 +3786,7 @@ instance ToJSON PlayerLeaderboardScoreListResponse
 -- | This is a JSON template for the iOS details resource.
 --
 -- /See:/ 'instanceIosDetails' smart constructor.
-data InstanceIosDetails = InstanceIosDetails
+data InstanceIosDetails = InstanceIosDetails'
     { _iidItunesAppId        :: !(Maybe Text)
     , _iidPreferredForIPad   :: !(Maybe Bool)
     , _iidSupportIPhone      :: !(Maybe Bool)
@@ -3816,7 +3816,7 @@ data InstanceIosDetails = InstanceIosDetails
 instanceIosDetails
     :: InstanceIosDetails
 instanceIosDetails =
-    InstanceIosDetails
+    InstanceIosDetails'
     { _iidItunesAppId = Nothing
     , _iidPreferredForIPad = Nothing
     , _iidSupportIPhone = Nothing
@@ -3873,7 +3873,7 @@ instance FromJSON InstanceIosDetails where
         parseJSON
           = withObject "InstanceIosDetails"
               (\ o ->
-                 InstanceIosDetails <$>
+                 InstanceIosDetails' <$>
                    (o .:? "itunesAppId") <*> (o .:? "preferredForIpad")
                      <*> (o .:? "supportIphone")
                      <*> (o .:? "kind" .!= "games#instanceIosDetails")
@@ -3882,7 +3882,7 @@ instance FromJSON InstanceIosDetails where
                      <*> (o .:? "bundleIdentifier"))
 
 instance ToJSON InstanceIosDetails where
-        toJSON InstanceIosDetails{..}
+        toJSON InstanceIosDetails'{..}
           = object
               (catMaybes
                  [("itunesAppId" .=) <$> _iidItunesAppId,
@@ -3896,7 +3896,7 @@ instance ToJSON InstanceIosDetails where
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventUpdateResponse' smart constructor.
-data EventUpdateResponse = EventUpdateResponse
+data EventUpdateResponse = EventUpdateResponse'
     { _eurPlayerEvents  :: !(Maybe [PlayerEvent])
     , _eurBatchFailures :: !(Maybe [EventBatchRecordFailure])
     , _eurEventFailures :: !(Maybe [EventRecordFailure])
@@ -3917,7 +3917,7 @@ data EventUpdateResponse = EventUpdateResponse
 eventUpdateResponse
     :: EventUpdateResponse
 eventUpdateResponse =
-    EventUpdateResponse
+    EventUpdateResponse'
     { _eurPlayerEvents = Nothing
     , _eurBatchFailures = Nothing
     , _eurEventFailures = Nothing
@@ -3957,14 +3957,14 @@ instance FromJSON EventUpdateResponse where
         parseJSON
           = withObject "EventUpdateResponse"
               (\ o ->
-                 EventUpdateResponse <$>
+                 EventUpdateResponse' <$>
                    (o .:? "playerEvents" .!= mempty) <*>
                      (o .:? "batchFailures" .!= mempty)
                      <*> (o .:? "eventFailures" .!= mempty)
                      <*> (o .:? "kind" .!= "games#eventUpdateResponse"))
 
 instance ToJSON EventUpdateResponse where
-        toJSON EventUpdateResponse{..}
+        toJSON EventUpdateResponse'{..}
           = object
               (catMaybes
                  [("playerEvents" .=) <$> _eurPlayerEvents,
@@ -3975,7 +3975,7 @@ instance ToJSON EventUpdateResponse where
 -- | This is a JSON template for the result of checking a revision.
 --
 -- /See:/ 'revisionCheckResponse' smart constructor.
-data RevisionCheckResponse = RevisionCheckResponse
+data RevisionCheckResponse = RevisionCheckResponse'
     { _rcrAPIVersion     :: !(Maybe Text)
     , _rcrKind           :: !Text
     , _rcrRevisionStatus :: !(Maybe Text)
@@ -3993,7 +3993,7 @@ data RevisionCheckResponse = RevisionCheckResponse
 revisionCheckResponse
     :: RevisionCheckResponse
 revisionCheckResponse =
-    RevisionCheckResponse
+    RevisionCheckResponse'
     { _rcrAPIVersion = Nothing
     , _rcrKind = "games#revisionCheckResponse"
     , _rcrRevisionStatus = Nothing
@@ -4025,13 +4025,13 @@ instance FromJSON RevisionCheckResponse where
         parseJSON
           = withObject "RevisionCheckResponse"
               (\ o ->
-                 RevisionCheckResponse <$>
+                 RevisionCheckResponse' <$>
                    (o .:? "apiVersion") <*>
                      (o .:? "kind" .!= "games#revisionCheckResponse")
                      <*> (o .:? "revisionStatus"))
 
 instance ToJSON RevisionCheckResponse where
-        toJSON RevisionCheckResponse{..}
+        toJSON RevisionCheckResponse'{..}
           = object
               (catMaybes
                  [("apiVersion" .=) <$> _rcrAPIVersion,
@@ -4041,7 +4041,7 @@ instance ToJSON RevisionCheckResponse where
 -- | This is a JSON template for a result for a match participant.
 --
 -- /See:/ 'participantResult' smart constructor.
-data ParticipantResult = ParticipantResult
+data ParticipantResult = ParticipantResult'
     { _prParticipantId :: !(Maybe Text)
     , _prKind          :: !Text
     , _prResult        :: !(Maybe Text)
@@ -4062,7 +4062,7 @@ data ParticipantResult = ParticipantResult
 participantResult
     :: ParticipantResult
 participantResult =
-    ParticipantResult
+    ParticipantResult'
     { _prParticipantId = Nothing
     , _prKind = "games#participantResult"
     , _prResult = Nothing
@@ -4104,14 +4104,14 @@ instance FromJSON ParticipantResult where
         parseJSON
           = withObject "ParticipantResult"
               (\ o ->
-                 ParticipantResult <$>
+                 ParticipantResult' <$>
                    (o .:? "participantId") <*>
                      (o .:? "kind" .!= "games#participantResult")
                      <*> (o .:? "result")
                      <*> (o .:? "placing"))
 
 instance ToJSON ParticipantResult where
-        toJSON ParticipantResult{..}
+        toJSON ParticipantResult'{..}
           = object
               (catMaybes
                  [("participantId" .=) <$> _prParticipantId,
@@ -4122,7 +4122,7 @@ instance ToJSON ParticipantResult where
 -- | This is a JSON template for the Leaderboard resource.
 --
 -- /See:/ 'leaderboard' smart constructor.
-data Leaderboard = Leaderboard
+data Leaderboard = Leaderboard'
     { _lKind             :: !Text
     , _lIsIconURLDefault :: !(Maybe Bool)
     , _lName             :: !(Maybe Text)
@@ -4149,7 +4149,7 @@ data Leaderboard = Leaderboard
 leaderboard
     :: Leaderboard
 leaderboard =
-    Leaderboard
+    Leaderboard'
     { _lKind = "games#leaderboard"
     , _lIsIconURLDefault = Nothing
     , _lName = Nothing
@@ -4193,7 +4193,7 @@ instance FromJSON Leaderboard where
         parseJSON
           = withObject "Leaderboard"
               (\ o ->
-                 Leaderboard <$>
+                 Leaderboard' <$>
                    (o .:? "kind" .!= "games#leaderboard") <*>
                      (o .:? "isIconUrlDefault")
                      <*> (o .:? "name")
@@ -4202,7 +4202,7 @@ instance FromJSON Leaderboard where
                      <*> (o .:? "order"))
 
 instance ToJSON Leaderboard where
-        toJSON Leaderboard{..}
+        toJSON Leaderboard'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _lKind),
@@ -4214,7 +4214,7 @@ instance ToJSON Leaderboard where
 -- | This is a JSON template for the metagame config resource
 --
 -- /See:/ 'metagameConfig' smart constructor.
-data MetagameConfig = MetagameConfig
+data MetagameConfig = MetagameConfig'
     { _mcKind           :: !Text
     , _mcCurrentVersion :: !(Maybe (Textual Int32))
     , _mcPlayerLevels   :: !(Maybe [PlayerLevel])
@@ -4232,7 +4232,7 @@ data MetagameConfig = MetagameConfig
 metagameConfig
     :: MetagameConfig
 metagameConfig =
-    MetagameConfig
+    MetagameConfig'
     { _mcKind = "games#metagameConfig"
     , _mcCurrentVersion = Nothing
     , _mcPlayerLevels = Nothing
@@ -4263,13 +4263,13 @@ instance FromJSON MetagameConfig where
         parseJSON
           = withObject "MetagameConfig"
               (\ o ->
-                 MetagameConfig <$>
+                 MetagameConfig' <$>
                    (o .:? "kind" .!= "games#metagameConfig") <*>
                      (o .:? "currentVersion")
                      <*> (o .:? "playerLevels" .!= mempty))
 
 instance ToJSON MetagameConfig where
-        toJSON MetagameConfig{..}
+        toJSON MetagameConfig'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mcKind),
@@ -4279,7 +4279,7 @@ instance ToJSON MetagameConfig where
 -- | This is a JSON template for a list of category data objects.
 --
 -- /See:/ 'categoryListResponse' smart constructor.
-data CategoryListResponse = CategoryListResponse
+data CategoryListResponse = CategoryListResponse'
     { _clrNextPageToken :: !(Maybe Text)
     , _clrKind          :: !Text
     , _clrItems         :: !(Maybe [Category])
@@ -4297,7 +4297,7 @@ data CategoryListResponse = CategoryListResponse
 categoryListResponse
     :: CategoryListResponse
 categoryListResponse =
-    CategoryListResponse
+    CategoryListResponse'
     { _clrNextPageToken = Nothing
     , _clrKind = "games#categoryListResponse"
     , _clrItems = Nothing
@@ -4325,13 +4325,13 @@ instance FromJSON CategoryListResponse where
         parseJSON
           = withObject "CategoryListResponse"
               (\ o ->
-                 CategoryListResponse <$>
+                 CategoryListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "games#categoryListResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON CategoryListResponse where
-        toJSON CategoryListResponse{..}
+        toJSON CategoryListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _clrNextPageToken,
@@ -4341,7 +4341,7 @@ instance ToJSON CategoryListResponse where
 -- | This is a JSON template for an update on the status of a peer in a room.
 --
 -- /See:/ 'roomP2PStatus' smart constructor.
-data RoomP2PStatus = RoomP2PStatus
+data RoomP2PStatus = RoomP2PStatus'
     { _rppsStatus                           :: !(Maybe Text)
     , _rppsParticipantId                    :: !(Maybe Text)
     , _rppsKind                             :: !Text
@@ -4371,7 +4371,7 @@ data RoomP2PStatus = RoomP2PStatus
 roomP2PStatus
     :: RoomP2PStatus
 roomP2PStatus =
-    RoomP2PStatus
+    RoomP2PStatus'
     { _rppsStatus = Nothing
     , _rppsParticipantId = Nothing
     , _rppsKind = "games#roomP2PStatus"
@@ -4437,7 +4437,7 @@ instance FromJSON RoomP2PStatus where
         parseJSON
           = withObject "RoomP2PStatus"
               (\ o ->
-                 RoomP2PStatus <$>
+                 RoomP2PStatus' <$>
                    (o .:? "status") <*> (o .:? "participantId") <*>
                      (o .:? "kind" .!= "games#roomP2PStatus")
                      <*> (o .:? "error")
@@ -4446,7 +4446,7 @@ instance FromJSON RoomP2PStatus where
                      <*> (o .:? "unreliableRoundtripLatencyMillis"))
 
 instance ToJSON RoomP2PStatus where
-        toJSON RoomP2PStatus{..}
+        toJSON RoomP2PStatus'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _rppsStatus,
@@ -4462,7 +4462,7 @@ instance ToJSON RoomP2PStatus where
 -- | This is a JSON template for turn-based match modification metadata.
 --
 -- /See:/ 'turnBasedMatchModification' smart constructor.
-data TurnBasedMatchModification = TurnBasedMatchModification
+data TurnBasedMatchModification = TurnBasedMatchModification'
     { _tbmmParticipantId           :: !(Maybe Text)
     , _tbmmKind                    :: !Text
     , _tbmmModifiedTimestampMillis :: !(Maybe (Textual Int64))
@@ -4480,7 +4480,7 @@ data TurnBasedMatchModification = TurnBasedMatchModification
 turnBasedMatchModification
     :: TurnBasedMatchModification
 turnBasedMatchModification =
-    TurnBasedMatchModification
+    TurnBasedMatchModification'
     { _tbmmParticipantId = Nothing
     , _tbmmKind = "games#turnBasedMatchModification"
     , _tbmmModifiedTimestampMillis = Nothing
@@ -4509,13 +4509,13 @@ instance FromJSON TurnBasedMatchModification where
         parseJSON
           = withObject "TurnBasedMatchModification"
               (\ o ->
-                 TurnBasedMatchModification <$>
+                 TurnBasedMatchModification' <$>
                    (o .:? "participantId") <*>
                      (o .:? "kind" .!= "games#turnBasedMatchModification")
                      <*> (o .:? "modifiedTimestampMillis"))
 
 instance ToJSON TurnBasedMatchModification where
-        toJSON TurnBasedMatchModification{..}
+        toJSON TurnBasedMatchModification'{..}
           = object
               (catMaybes
                  [("participantId" .=) <$> _tbmmParticipantId,
@@ -4526,7 +4526,7 @@ instance ToJSON TurnBasedMatchModification where
 -- | This is a JSON template for an event definition resource.
 --
 -- /See:/ 'eventDefinition' smart constructor.
-data EventDefinition = EventDefinition
+data EventDefinition = EventDefinition'
     { _edIsDefaultImageURL :: !(Maybe Bool)
     , _edKind              :: !Text
     , _edVisibility        :: !(Maybe Text)
@@ -4559,7 +4559,7 @@ data EventDefinition = EventDefinition
 eventDefinition
     :: EventDefinition
 eventDefinition =
-    EventDefinition
+    EventDefinition'
     { _edIsDefaultImageURL = Nothing
     , _edKind = "games#eventDefinition"
     , _edVisibility = Nothing
@@ -4623,7 +4623,7 @@ instance FromJSON EventDefinition where
         parseJSON
           = withObject "EventDefinition"
               (\ o ->
-                 EventDefinition <$>
+                 EventDefinition' <$>
                    (o .:? "isDefaultImageUrl") <*>
                      (o .:? "kind" .!= "games#eventDefinition")
                      <*> (o .:? "visibility")
@@ -4634,7 +4634,7 @@ instance FromJSON EventDefinition where
                      <*> (o .:? "description"))
 
 instance ToJSON EventDefinition where
-        toJSON EventDefinition{..}
+        toJSON EventDefinition'{..}
           = object
               (catMaybes
                  [("isDefaultImageUrl" .=) <$> _edIsDefaultImageURL,
@@ -4649,7 +4649,7 @@ instance ToJSON EventDefinition where
 -- | This is a JSON template for room modification metadata.
 --
 -- /See:/ 'roomModification' smart constructor.
-data RoomModification = RoomModification
+data RoomModification = RoomModification'
     { _rmParticipantId           :: !(Maybe Text)
     , _rmKind                    :: !Text
     , _rmModifiedTimestampMillis :: !(Maybe (Textual Int64))
@@ -4667,7 +4667,7 @@ data RoomModification = RoomModification
 roomModification
     :: RoomModification
 roomModification =
-    RoomModification
+    RoomModification'
     { _rmParticipantId = Nothing
     , _rmKind = "games#roomModification"
     , _rmModifiedTimestampMillis = Nothing
@@ -4696,13 +4696,13 @@ instance FromJSON RoomModification where
         parseJSON
           = withObject "RoomModification"
               (\ o ->
-                 RoomModification <$>
+                 RoomModification' <$>
                    (o .:? "participantId") <*>
                      (o .:? "kind" .!= "games#roomModification")
                      <*> (o .:? "modifiedTimestampMillis"))
 
 instance ToJSON RoomModification where
-        toJSON RoomModification{..}
+        toJSON RoomModification'{..}
           = object
               (catMaybes
                  [("participantId" .=) <$> _rmParticipantId,
@@ -4713,7 +4713,7 @@ instance ToJSON RoomModification where
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventUpdateRequest' smart constructor.
-data EventUpdateRequest = EventUpdateRequest
+data EventUpdateRequest = EventUpdateRequest'
     { _eUpdateCount  :: !(Maybe (Textual Int64))
     , _eKind         :: !Text
     , _eDefinitionId :: !(Maybe Text)
@@ -4731,7 +4731,7 @@ data EventUpdateRequest = EventUpdateRequest
 eventUpdateRequest
     :: EventUpdateRequest
 eventUpdateRequest =
-    EventUpdateRequest
+    EventUpdateRequest'
     { _eUpdateCount = Nothing
     , _eKind = "games#eventUpdateRequest"
     , _eDefinitionId = Nothing
@@ -4758,13 +4758,13 @@ instance FromJSON EventUpdateRequest where
         parseJSON
           = withObject "EventUpdateRequest"
               (\ o ->
-                 EventUpdateRequest <$>
+                 EventUpdateRequest' <$>
                    (o .:? "updateCount") <*>
                      (o .:? "kind" .!= "games#eventUpdateRequest")
                      <*> (o .:? "definitionId"))
 
 instance ToJSON EventUpdateRequest where
-        toJSON EventUpdateRequest{..}
+        toJSON EventUpdateRequest'{..}
           = object
               (catMaybes
                  [("updateCount" .=) <$> _eUpdateCount,
@@ -4774,7 +4774,7 @@ instance ToJSON EventUpdateRequest where
 -- | This is a JSON template for an achievement unlock response
 --
 -- /See:/ 'achievementUnlockResponse' smart constructor.
-data AchievementUnlockResponse = AchievementUnlockResponse
+data AchievementUnlockResponse = AchievementUnlockResponse'
     { _achKind          :: !Text
     , _achNewlyUnlocked :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4789,7 +4789,7 @@ data AchievementUnlockResponse = AchievementUnlockResponse
 achievementUnlockResponse
     :: AchievementUnlockResponse
 achievementUnlockResponse =
-    AchievementUnlockResponse
+    AchievementUnlockResponse'
     { _achKind = "games#achievementUnlockResponse"
     , _achNewlyUnlocked = Nothing
     }
@@ -4810,12 +4810,12 @@ instance FromJSON AchievementUnlockResponse where
         parseJSON
           = withObject "AchievementUnlockResponse"
               (\ o ->
-                 AchievementUnlockResponse <$>
+                 AchievementUnlockResponse' <$>
                    (o .:? "kind" .!= "games#achievementUnlockResponse")
                      <*> (o .:? "newlyUnlocked"))
 
 instance ToJSON AchievementUnlockResponse where
-        toJSON AchievementUnlockResponse{..}
+        toJSON AchievementUnlockResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _achKind),
@@ -4824,7 +4824,7 @@ instance ToJSON AchievementUnlockResponse where
 -- | This is a JSON template for an achievement object.
 --
 -- /See:/ 'playerAchievement' smart constructor.
-data PlayerAchievement = PlayerAchievement
+data PlayerAchievement = PlayerAchievement'
     { _paKind                        :: !Text
     , _paAchievementState            :: !(Maybe Text)
     , _paFormattedCurrentStepsString :: !(Maybe Text)
@@ -4854,7 +4854,7 @@ data PlayerAchievement = PlayerAchievement
 playerAchievement
     :: PlayerAchievement
 playerAchievement =
-    PlayerAchievement
+    PlayerAchievement'
     { _paKind = "games#playerAchievement"
     , _paAchievementState = Nothing
     , _paFormattedCurrentStepsString = Nothing
@@ -4914,7 +4914,7 @@ instance FromJSON PlayerAchievement where
         parseJSON
           = withObject "PlayerAchievement"
               (\ o ->
-                 PlayerAchievement <$>
+                 PlayerAchievement' <$>
                    (o .:? "kind" .!= "games#playerAchievement") <*>
                      (o .:? "achievementState")
                      <*> (o .:? "formattedCurrentStepsString")
@@ -4924,7 +4924,7 @@ instance FromJSON PlayerAchievement where
                      <*> (o .:? "lastUpdatedTimestamp"))
 
 instance ToJSON PlayerAchievement where
-        toJSON PlayerAchievement{..}
+        toJSON PlayerAchievement'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _paKind),
@@ -4940,7 +4940,7 @@ instance ToJSON PlayerAchievement where
 -- | This is a JSON template for an update on the status of peers in a room.
 --
 -- /See:/ 'roomP2PStatuses' smart constructor.
-data RoomP2PStatuses = RoomP2PStatuses
+data RoomP2PStatuses = RoomP2PStatuses'
     { _rppssKind    :: !Text
     , _rppssUpdates :: !(Maybe [RoomP2PStatus])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4955,7 +4955,7 @@ data RoomP2PStatuses = RoomP2PStatuses
 roomP2PStatuses
     :: RoomP2PStatuses
 roomP2PStatuses =
-    RoomP2PStatuses
+    RoomP2PStatuses'
     { _rppssKind = "games#roomP2PStatuses"
     , _rppssUpdates = Nothing
     }
@@ -4977,12 +4977,12 @@ instance FromJSON RoomP2PStatuses where
         parseJSON
           = withObject "RoomP2PStatuses"
               (\ o ->
-                 RoomP2PStatuses <$>
+                 RoomP2PStatuses' <$>
                    (o .:? "kind" .!= "games#roomP2PStatuses") <*>
                      (o .:? "updates" .!= mempty))
 
 instance ToJSON RoomP2PStatuses where
-        toJSON RoomP2PStatuses{..}
+        toJSON RoomP2PStatuses'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rppssKind),
@@ -4991,7 +4991,7 @@ instance ToJSON RoomP2PStatuses where
 -- | This is a JSON template for an image asset object.
 --
 -- /See:/ 'imageAsset' smart constructor.
-data ImageAsset = ImageAsset
+data ImageAsset = ImageAsset'
     { _iaHeight :: !(Maybe (Textual Int32))
     , _iaKind   :: !Text
     , _iaURL    :: !(Maybe Text)
@@ -5015,7 +5015,7 @@ data ImageAsset = ImageAsset
 imageAsset
     :: ImageAsset
 imageAsset =
-    ImageAsset
+    ImageAsset'
     { _iaHeight = Nothing
     , _iaKind = "games#imageAsset"
     , _iaURL = Nothing
@@ -5052,7 +5052,7 @@ instance FromJSON ImageAsset where
         parseJSON
           = withObject "ImageAsset"
               (\ o ->
-                 ImageAsset <$>
+                 ImageAsset' <$>
                    (o .:? "height") <*>
                      (o .:? "kind" .!= "games#imageAsset")
                      <*> (o .:? "url")
@@ -5060,7 +5060,7 @@ instance FromJSON ImageAsset where
                      <*> (o .:? "name"))
 
 instance ToJSON ImageAsset where
-        toJSON ImageAsset{..}
+        toJSON ImageAsset'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _iaHeight,
@@ -5070,7 +5070,7 @@ instance ToJSON ImageAsset where
 -- | This is a JSON template for a list of achievement update requests.
 --
 -- /See:/ 'achievementUpdateMultipleRequest' smart constructor.
-data AchievementUpdateMultipleRequest = AchievementUpdateMultipleRequest
+data AchievementUpdateMultipleRequest = AchievementUpdateMultipleRequest'
     { _aumruKind    :: !Text
     , _aumruUpdates :: !(Maybe [AchievementUpdateRequest])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5085,7 +5085,7 @@ data AchievementUpdateMultipleRequest = AchievementUpdateMultipleRequest
 achievementUpdateMultipleRequest
     :: AchievementUpdateMultipleRequest
 achievementUpdateMultipleRequest =
-    AchievementUpdateMultipleRequest
+    AchievementUpdateMultipleRequest'
     { _aumruKind = "games#achievementUpdateMultipleRequest"
     , _aumruUpdates = Nothing
     }
@@ -5108,14 +5108,14 @@ instance FromJSON AchievementUpdateMultipleRequest
         parseJSON
           = withObject "AchievementUpdateMultipleRequest"
               (\ o ->
-                 AchievementUpdateMultipleRequest <$>
+                 AchievementUpdateMultipleRequest' <$>
                    (o .:? "kind" .!=
                       "games#achievementUpdateMultipleRequest")
                      <*> (o .:? "updates" .!= mempty))
 
 instance ToJSON AchievementUpdateMultipleRequest
          where
-        toJSON AchievementUpdateMultipleRequest{..}
+        toJSON AchievementUpdateMultipleRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aumruKind),
@@ -5125,7 +5125,7 @@ instance ToJSON AchievementUpdateMultipleRequest
 -- progress.
 --
 -- /See:/ 'roomAutoMatchStatus' smart constructor.
-data RoomAutoMatchStatus = RoomAutoMatchStatus
+data RoomAutoMatchStatus = RoomAutoMatchStatus'
     { _ramsKind                :: !Text
     , _ramsWaitEstimateSeconds :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5140,7 +5140,7 @@ data RoomAutoMatchStatus = RoomAutoMatchStatus
 roomAutoMatchStatus
     :: RoomAutoMatchStatus
 roomAutoMatchStatus =
-    RoomAutoMatchStatus
+    RoomAutoMatchStatus'
     { _ramsKind = "games#roomAutoMatchStatus"
     , _ramsWaitEstimateSeconds = Nothing
     }
@@ -5162,12 +5162,12 @@ instance FromJSON RoomAutoMatchStatus where
         parseJSON
           = withObject "RoomAutoMatchStatus"
               (\ o ->
-                 RoomAutoMatchStatus <$>
+                 RoomAutoMatchStatus' <$>
                    (o .:? "kind" .!= "games#roomAutoMatchStatus") <*>
                      (o .:? "waitEstimateSeconds"))
 
 instance ToJSON RoomAutoMatchStatus where
-        toJSON RoomAutoMatchStatus{..}
+        toJSON RoomAutoMatchStatus'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ramsKind),
@@ -5177,7 +5177,7 @@ instance ToJSON RoomAutoMatchStatus where
 -- | This is a JSON template for a request to update an achievement.
 --
 -- /See:/ 'achievementUpdateRequest' smart constructor.
-data AchievementUpdateRequest = AchievementUpdateRequest
+data AchievementUpdateRequest = AchievementUpdateRequest'
     { _auruAchievementId          :: !(Maybe Text)
     , _auruKind                   :: !Text
     , _auruUpdateType             :: !(Maybe Text)
@@ -5201,7 +5201,7 @@ data AchievementUpdateRequest = AchievementUpdateRequest
 achievementUpdateRequest
     :: AchievementUpdateRequest
 achievementUpdateRequest =
-    AchievementUpdateRequest
+    AchievementUpdateRequest'
     { _auruAchievementId = Nothing
     , _auruKind = "games#achievementUpdateRequest"
     , _auruUpdateType = Nothing
@@ -5247,7 +5247,7 @@ instance FromJSON AchievementUpdateRequest where
         parseJSON
           = withObject "AchievementUpdateRequest"
               (\ o ->
-                 AchievementUpdateRequest <$>
+                 AchievementUpdateRequest' <$>
                    (o .:? "achievementId") <*>
                      (o .:? "kind" .!= "games#achievementUpdateRequest")
                      <*> (o .:? "updateType")
@@ -5255,7 +5255,7 @@ instance FromJSON AchievementUpdateRequest where
                      <*> (o .:? "incrementPayload"))
 
 instance ToJSON AchievementUpdateRequest where
-        toJSON AchievementUpdateRequest{..}
+        toJSON AchievementUpdateRequest'{..}
           = object
               (catMaybes
                  [("achievementId" .=) <$> _auruAchievementId,
@@ -5268,7 +5268,7 @@ instance ToJSON AchievementUpdateRequest where
 -- | This is a JSON template for a score rank in a leaderboard.
 --
 -- /See:/ 'leaderboardScoreRank' smart constructor.
-data LeaderboardScoreRank = LeaderboardScoreRank
+data LeaderboardScoreRank = LeaderboardScoreRank'
     { _lsrNumScores          :: !(Maybe (Textual Int64))
     , _lsrKind               :: !Text
     , _lsrFormattedRank      :: !(Maybe Text)
@@ -5292,7 +5292,7 @@ data LeaderboardScoreRank = LeaderboardScoreRank
 leaderboardScoreRank
     :: LeaderboardScoreRank
 leaderboardScoreRank =
-    LeaderboardScoreRank
+    LeaderboardScoreRank'
     { _lsrNumScores = Nothing
     , _lsrKind = "games#leaderboardScoreRank"
     , _lsrFormattedRank = Nothing
@@ -5333,7 +5333,7 @@ instance FromJSON LeaderboardScoreRank where
         parseJSON
           = withObject "LeaderboardScoreRank"
               (\ o ->
-                 LeaderboardScoreRank <$>
+                 LeaderboardScoreRank' <$>
                    (o .:? "numScores") <*>
                      (o .:? "kind" .!= "games#leaderboardScoreRank")
                      <*> (o .:? "formattedRank")
@@ -5341,7 +5341,7 @@ instance FromJSON LeaderboardScoreRank where
                      <*> (o .:? "rank"))
 
 instance ToJSON LeaderboardScoreRank where
-        toJSON LeaderboardScoreRank{..}
+        toJSON LeaderboardScoreRank'{..}
           = object
               (catMaybes
                  [("numScores" .=) <$> _lsrNumScores,
@@ -5353,7 +5353,7 @@ instance ToJSON LeaderboardScoreRank where
 -- | This is a JSON template for a room creation request.
 --
 -- /See:/ 'roomCreateRequest' smart constructor.
-data RoomCreateRequest = RoomCreateRequest
+data RoomCreateRequest = RoomCreateRequest'
     { _rooRequestId            :: !(Maybe (Textual Int64))
     , _rooVariant              :: !(Maybe (Textual Int32))
     , _rooNetworkDiagnostics   :: !(Maybe NetworkDiagnostics)
@@ -5386,7 +5386,7 @@ data RoomCreateRequest = RoomCreateRequest
 roomCreateRequest
     :: RoomCreateRequest
 roomCreateRequest =
-    RoomCreateRequest
+    RoomCreateRequest'
     { _rooRequestId = Nothing
     , _rooVariant = Nothing
     , _rooNetworkDiagnostics = Nothing
@@ -5455,7 +5455,7 @@ instance FromJSON RoomCreateRequest where
         parseJSON
           = withObject "RoomCreateRequest"
               (\ o ->
-                 RoomCreateRequest <$>
+                 RoomCreateRequest' <$>
                    (o .:? "requestId") <*> (o .:? "variant") <*>
                      (o .:? "networkDiagnostics")
                      <*> (o .:? "kind" .!= "games#roomCreateRequest")
@@ -5465,7 +5465,7 @@ instance FromJSON RoomCreateRequest where
                      <*> (o .:? "capabilities" .!= mempty))
 
 instance ToJSON RoomCreateRequest where
-        toJSON RoomCreateRequest{..}
+        toJSON RoomCreateRequest'{..}
           = object
               (catMaybes
                  [("requestId" .=) <$> _rooRequestId,
@@ -5481,7 +5481,7 @@ instance ToJSON RoomCreateRequest where
 -- | This is a JSON template for a third party player list response.
 --
 -- /See:/ 'playerListResponse' smart constructor.
-data PlayerListResponse = PlayerListResponse
+data PlayerListResponse = PlayerListResponse'
     { _plrNextPageToken :: !(Maybe Text)
     , _plrKind          :: !Text
     , _plrItems         :: !(Maybe [Player])
@@ -5499,7 +5499,7 @@ data PlayerListResponse = PlayerListResponse
 playerListResponse
     :: PlayerListResponse
 playerListResponse =
-    PlayerListResponse
+    PlayerListResponse'
     { _plrNextPageToken = Nothing
     , _plrKind = "games#playerListResponse"
     , _plrItems = Nothing
@@ -5527,13 +5527,13 @@ instance FromJSON PlayerListResponse where
         parseJSON
           = withObject "PlayerListResponse"
               (\ o ->
-                 PlayerListResponse <$>
+                 PlayerListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "games#playerListResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON PlayerListResponse where
-        toJSON PlayerListResponse{..}
+        toJSON PlayerListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _plrNextPageToken,
@@ -5543,7 +5543,7 @@ instance ToJSON PlayerListResponse where
 -- | This is a JSON template for a ListScores response.
 --
 -- /See:/ 'leaderboardScores' smart constructor.
-data LeaderboardScores = LeaderboardScores
+data LeaderboardScores = LeaderboardScores'
     { _lsNextPageToken :: !(Maybe Text)
     , _lsNumScores     :: !(Maybe (Textual Int64))
     , _lsKind          :: !Text
@@ -5570,7 +5570,7 @@ data LeaderboardScores = LeaderboardScores
 leaderboardScores
     :: LeaderboardScores
 leaderboardScores =
-    LeaderboardScores
+    LeaderboardScores'
     { _lsNextPageToken = Nothing
     , _lsNumScores = Nothing
     , _lsKind = "games#leaderboardScores"
@@ -5622,7 +5622,7 @@ instance FromJSON LeaderboardScores where
         parseJSON
           = withObject "LeaderboardScores"
               (\ o ->
-                 LeaderboardScores <$>
+                 LeaderboardScores' <$>
                    (o .:? "nextPageToken") <*> (o .:? "numScores") <*>
                      (o .:? "kind" .!= "games#leaderboardScores")
                      <*> (o .:? "playerScore")
@@ -5630,7 +5630,7 @@ instance FromJSON LeaderboardScores where
                      <*> (o .:? "prevPageToken"))
 
 instance ToJSON LeaderboardScores where
-        toJSON LeaderboardScores{..}
+        toJSON LeaderboardScores'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lsNextPageToken,
@@ -5643,7 +5643,7 @@ instance ToJSON LeaderboardScores where
 -- | This is a JSON template for an achievement definition object.
 --
 -- /See:/ 'achievementDefinition' smart constructor.
-data AchievementDefinition = AchievementDefinition
+data AchievementDefinition = AchievementDefinition'
     { _adAchievementType          :: !(Maybe Text)
     , _adFormattedTotalSteps      :: !(Maybe Text)
     , _adRevealedIconURL          :: !(Maybe Text)
@@ -5691,7 +5691,7 @@ data AchievementDefinition = AchievementDefinition
 achievementDefinition
     :: AchievementDefinition
 achievementDefinition =
-    AchievementDefinition
+    AchievementDefinition'
     { _adAchievementType = Nothing
     , _adFormattedTotalSteps = Nothing
     , _adRevealedIconURL = Nothing
@@ -5791,7 +5791,7 @@ instance FromJSON AchievementDefinition where
         parseJSON
           = withObject "AchievementDefinition"
               (\ o ->
-                 AchievementDefinition <$>
+                 AchievementDefinition' <$>
                    (o .:? "achievementType") <*>
                      (o .:? "formattedTotalSteps")
                      <*> (o .:? "revealedIconUrl")
@@ -5807,7 +5807,7 @@ instance FromJSON AchievementDefinition where
                      <*> (o .:? "unlockedIconUrl"))
 
 instance ToJSON AchievementDefinition where
-        toJSON AchievementDefinition{..}
+        toJSON AchievementDefinition'{..}
           = object
               (catMaybes
                  [("achievementType" .=) <$> _adAchievementType,
@@ -5829,7 +5829,7 @@ instance ToJSON AchievementDefinition where
 -- | This is a JSON template for a turn-based match creation request.
 --
 -- /See:/ 'turnBasedMatchCreateRequest' smart constructor.
-data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest
+data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest'
     { _tbmcrRequestId            :: !(Maybe (Textual Int64))
     , _tbmcrVariant              :: !(Maybe (Textual Int32))
     , _tbmcrKind                 :: !Text
@@ -5853,7 +5853,7 @@ data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest
 turnBasedMatchCreateRequest
     :: TurnBasedMatchCreateRequest
 turnBasedMatchCreateRequest =
-    TurnBasedMatchCreateRequest
+    TurnBasedMatchCreateRequest'
     { _tbmcrRequestId = Nothing
     , _tbmcrVariant = Nothing
     , _tbmcrKind = "games#turnBasedMatchCreateRequest"
@@ -5901,7 +5901,7 @@ instance FromJSON TurnBasedMatchCreateRequest where
         parseJSON
           = withObject "TurnBasedMatchCreateRequest"
               (\ o ->
-                 TurnBasedMatchCreateRequest <$>
+                 TurnBasedMatchCreateRequest' <$>
                    (o .:? "requestId") <*> (o .:? "variant") <*>
                      (o .:? "kind" .!=
                         "games#turnBasedMatchCreateRequest")
@@ -5909,7 +5909,7 @@ instance FromJSON TurnBasedMatchCreateRequest where
                      <*> (o .:? "autoMatchingCriteria"))
 
 instance ToJSON TurnBasedMatchCreateRequest where
-        toJSON TurnBasedMatchCreateRequest{..}
+        toJSON TurnBasedMatchCreateRequest'{..}
           = object
               (catMaybes
                  [("requestId" .=) <$> _tbmcrRequestId,
@@ -5922,7 +5922,7 @@ instance ToJSON TurnBasedMatchCreateRequest where
 -- | This is a JSON template for a batch update failure resource.
 --
 -- /See:/ 'eventBatchRecordFailure' smart constructor.
-data EventBatchRecordFailure = EventBatchRecordFailure
+data EventBatchRecordFailure = EventBatchRecordFailure'
     { _ebrfKind         :: !Text
     , _ebrfRange        :: !(Maybe EventPeriodRange)
     , _ebrfFailureCause :: !(Maybe Text)
@@ -5940,7 +5940,7 @@ data EventBatchRecordFailure = EventBatchRecordFailure
 eventBatchRecordFailure
     :: EventBatchRecordFailure
 eventBatchRecordFailure =
-    EventBatchRecordFailure
+    EventBatchRecordFailure'
     { _ebrfKind = "games#eventBatchRecordFailure"
     , _ebrfRange = Nothing
     , _ebrfFailureCause = Nothing
@@ -5974,13 +5974,13 @@ instance FromJSON EventBatchRecordFailure where
         parseJSON
           = withObject "EventBatchRecordFailure"
               (\ o ->
-                 EventBatchRecordFailure <$>
+                 EventBatchRecordFailure' <$>
                    (o .:? "kind" .!= "games#eventBatchRecordFailure")
                      <*> (o .:? "range")
                      <*> (o .:? "failureCause"))
 
 instance ToJSON EventBatchRecordFailure where
-        toJSON EventBatchRecordFailure{..}
+        toJSON EventBatchRecordFailure'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ebrfKind),
@@ -5990,7 +5990,7 @@ instance ToJSON EventBatchRecordFailure where
 -- | This is a JSON template for a turn-based match results object.
 --
 -- /See:/ 'turnBasedMatchResults' smart constructor.
-data TurnBasedMatchResults = TurnBasedMatchResults
+data TurnBasedMatchResults = TurnBasedMatchResults'
     { _tbmrResults      :: !(Maybe [ParticipantResult])
     , _tbmrKind         :: !Text
     , _tbmrData         :: !(Maybe TurnBasedMatchDataRequest)
@@ -6011,7 +6011,7 @@ data TurnBasedMatchResults = TurnBasedMatchResults
 turnBasedMatchResults
     :: TurnBasedMatchResults
 turnBasedMatchResults =
-    TurnBasedMatchResults
+    TurnBasedMatchResults'
     { _tbmrResults = Nothing
     , _tbmrKind = "games#turnBasedMatchResults"
     , _tbmrData = Nothing
@@ -6045,14 +6045,14 @@ instance FromJSON TurnBasedMatchResults where
         parseJSON
           = withObject "TurnBasedMatchResults"
               (\ o ->
-                 TurnBasedMatchResults <$>
+                 TurnBasedMatchResults' <$>
                    (o .:? "results" .!= mempty) <*>
                      (o .:? "kind" .!= "games#turnBasedMatchResults")
                      <*> (o .:? "data")
                      <*> (o .:? "matchVersion"))
 
 instance ToJSON TurnBasedMatchResults where
-        toJSON TurnBasedMatchResults{..}
+        toJSON TurnBasedMatchResults'{..}
           = object
               (catMaybes
                  [("results" .=) <$> _tbmrResults,
@@ -6063,8 +6063,8 @@ instance ToJSON TurnBasedMatchResults where
 -- | A push token ID for iOS devices.
 --
 -- /See:/ 'pushTokenIdIos' smart constructor.
-data PushTokenIdIos = PushTokenIdIos
-    { _ptiiAPNSDeviceToken :: !(Maybe (Textual Word8))
+data PushTokenIdIos = PushTokenIdIos'
+    { _ptiiAPNSDeviceToken :: !(Maybe Base64)
     , _ptiiAPNSEnvironment :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6078,18 +6078,18 @@ data PushTokenIdIos = PushTokenIdIos
 pushTokenIdIos
     :: PushTokenIdIos
 pushTokenIdIos =
-    PushTokenIdIos
+    PushTokenIdIos'
     { _ptiiAPNSDeviceToken = Nothing
     , _ptiiAPNSEnvironment = Nothing
     }
 
 -- | Device token supplied by an iOS system call to register for remote
 -- notifications. Encode this field as web-safe base64.
-ptiiAPNSDeviceToken :: Lens' PushTokenIdIos (Maybe Word8)
+ptiiAPNSDeviceToken :: Lens' PushTokenIdIos (Maybe ByteString)
 ptiiAPNSDeviceToken
   = lens _ptiiAPNSDeviceToken
       (\ s a -> s{_ptiiAPNSDeviceToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Indicates whether this token should be used for the production or
 -- sandbox APNS server.
@@ -6102,12 +6102,12 @@ instance FromJSON PushTokenIdIos where
         parseJSON
           = withObject "PushTokenIdIos"
               (\ o ->
-                 PushTokenIdIos <$>
+                 PushTokenIdIos' <$>
                    (o .:? "apns_device_token") <*>
                      (o .:? "apns_environment"))
 
 instance ToJSON PushTokenIdIos where
-        toJSON PushTokenIdIos{..}
+        toJSON PushTokenIdIos'{..}
           = object
               (catMaybes
                  [("apns_device_token" .=) <$> _ptiiAPNSDeviceToken,
@@ -6116,7 +6116,7 @@ instance ToJSON PushTokenIdIos where
 -- | This is a JSON template for a leave room request.
 --
 -- /See:/ 'roomLeaveRequest' smart constructor.
-data RoomLeaveRequest = RoomLeaveRequest
+data RoomLeaveRequest = RoomLeaveRequest'
     { _rlrKind             :: !Text
     , _rlrReason           :: !(Maybe Text)
     , _rlrLeaveDiagnostics :: !(Maybe RoomLeaveDiagnostics)
@@ -6134,7 +6134,7 @@ data RoomLeaveRequest = RoomLeaveRequest
 roomLeaveRequest
     :: RoomLeaveRequest
 roomLeaveRequest =
-    RoomLeaveRequest
+    RoomLeaveRequest'
     { _rlrKind = "games#roomLeaveRequest"
     , _rlrReason = Nothing
     , _rlrLeaveDiagnostics = Nothing
@@ -6176,13 +6176,13 @@ instance FromJSON RoomLeaveRequest where
         parseJSON
           = withObject "RoomLeaveRequest"
               (\ o ->
-                 RoomLeaveRequest <$>
+                 RoomLeaveRequest' <$>
                    (o .:? "kind" .!= "games#roomLeaveRequest") <*>
                      (o .:? "reason")
                      <*> (o .:? "leaveDiagnostics"))
 
 instance ToJSON RoomLeaveRequest where
-        toJSON RoomLeaveRequest{..}
+        toJSON RoomLeaveRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rlrKind),
@@ -6193,7 +6193,7 @@ instance ToJSON RoomLeaveRequest where
 -- the currently authenticated user.
 --
 -- /See:/ 'played' smart constructor.
-data Played = Played
+data Played = Played'
     { _pKind        :: !Text
     , _pAutoMatched :: !(Maybe Bool)
     , _pTimeMillis  :: !(Maybe (Textual Int64))
@@ -6211,7 +6211,7 @@ data Played = Played
 played
     :: Played
 played =
-    Played
+    Played'
     { _pKind = "games#played"
     , _pAutoMatched = Nothing
     , _pTimeMillis = Nothing
@@ -6239,13 +6239,13 @@ instance FromJSON Played where
         parseJSON
           = withObject "Played"
               (\ o ->
-                 Played <$>
+                 Played' <$>
                    (o .:? "kind" .!= "games#played") <*>
                      (o .:? "autoMatched")
                      <*> (o .:? "timeMillis"))
 
 instance ToJSON Played where
-        toJSON Played{..}
+        toJSON Played'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pKind),
@@ -6255,7 +6255,7 @@ instance ToJSON Played where
 -- | This is a JSON template for an achievement increment response
 --
 -- /See:/ 'achievementIncrementResponse' smart constructor.
-data AchievementIncrementResponse = AchievementIncrementResponse
+data AchievementIncrementResponse = AchievementIncrementResponse'
     { _airKind          :: !Text
     , _airNewlyUnlocked :: !(Maybe Bool)
     , _airCurrentSteps  :: !(Maybe (Textual Int32))
@@ -6273,7 +6273,7 @@ data AchievementIncrementResponse = AchievementIncrementResponse
 achievementIncrementResponse
     :: AchievementIncrementResponse
 achievementIncrementResponse =
-    AchievementIncrementResponse
+    AchievementIncrementResponse'
     { _airKind = "games#achievementIncrementResponse"
     , _airNewlyUnlocked = Nothing
     , _airCurrentSteps = Nothing
@@ -6284,8 +6284,8 @@ achievementIncrementResponse =
 airKind :: Lens' AchievementIncrementResponse Text
 airKind = lens _airKind (\ s a -> s{_airKind = a})
 
--- | Whether the the current steps for the achievement has reached the number
--- of steps required to unlock.
+-- | Whether the current steps for the achievement has reached the number of
+-- steps required to unlock.
 airNewlyUnlocked :: Lens' AchievementIncrementResponse (Maybe Bool)
 airNewlyUnlocked
   = lens _airNewlyUnlocked
@@ -6302,14 +6302,14 @@ instance FromJSON AchievementIncrementResponse where
         parseJSON
           = withObject "AchievementIncrementResponse"
               (\ o ->
-                 AchievementIncrementResponse <$>
+                 AchievementIncrementResponse' <$>
                    (o .:? "kind" .!=
                       "games#achievementIncrementResponse")
                      <*> (o .:? "newlyUnlocked")
                      <*> (o .:? "currentSteps"))
 
 instance ToJSON AchievementIncrementResponse where
-        toJSON AchievementIncrementResponse{..}
+        toJSON AchievementIncrementResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _airKind),
@@ -6319,7 +6319,7 @@ instance ToJSON AchievementIncrementResponse where
 -- | This is a JSON template for an achievement reveal response
 --
 -- /See:/ 'achievementRevealResponse' smart constructor.
-data AchievementRevealResponse = AchievementRevealResponse
+data AchievementRevealResponse = AchievementRevealResponse'
     { _arrKind         :: !Text
     , _arrCurrentState :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6334,7 +6334,7 @@ data AchievementRevealResponse = AchievementRevealResponse
 achievementRevealResponse
     :: AchievementRevealResponse
 achievementRevealResponse =
-    AchievementRevealResponse
+    AchievementRevealResponse'
     { _arrKind = "games#achievementRevealResponse"
     , _arrCurrentState = Nothing
     }
@@ -6357,12 +6357,12 @@ instance FromJSON AchievementRevealResponse where
         parseJSON
           = withObject "AchievementRevealResponse"
               (\ o ->
-                 AchievementRevealResponse <$>
+                 AchievementRevealResponse' <$>
                    (o .:? "kind" .!= "games#achievementRevealResponse")
                      <*> (o .:? "currentState"))
 
 instance ToJSON AchievementRevealResponse where
-        toJSON AchievementRevealResponse{..}
+        toJSON AchievementRevealResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _arrKind),
@@ -6371,7 +6371,7 @@ instance ToJSON AchievementRevealResponse where
 -- | This is a JSON template for an achievement set steps at least response.
 --
 -- /See:/ 'achievementSetStepsAtLeastResponse' smart constructor.
-data AchievementSetStepsAtLeastResponse = AchievementSetStepsAtLeastResponse
+data AchievementSetStepsAtLeastResponse = AchievementSetStepsAtLeastResponse'
     { _assalrKind          :: !Text
     , _assalrNewlyUnlocked :: !(Maybe Bool)
     , _assalrCurrentSteps  :: !(Maybe (Textual Int32))
@@ -6389,7 +6389,7 @@ data AchievementSetStepsAtLeastResponse = AchievementSetStepsAtLeastResponse
 achievementSetStepsAtLeastResponse
     :: AchievementSetStepsAtLeastResponse
 achievementSetStepsAtLeastResponse =
-    AchievementSetStepsAtLeastResponse
+    AchievementSetStepsAtLeastResponse'
     { _assalrKind = "games#achievementSetStepsAtLeastResponse"
     , _assalrNewlyUnlocked = Nothing
     , _assalrCurrentSteps = Nothing
@@ -6420,7 +6420,7 @@ instance FromJSON AchievementSetStepsAtLeastResponse
         parseJSON
           = withObject "AchievementSetStepsAtLeastResponse"
               (\ o ->
-                 AchievementSetStepsAtLeastResponse <$>
+                 AchievementSetStepsAtLeastResponse' <$>
                    (o .:? "kind" .!=
                       "games#achievementSetStepsAtLeastResponse")
                      <*> (o .:? "newlyUnlocked")
@@ -6428,7 +6428,7 @@ instance FromJSON AchievementSetStepsAtLeastResponse
 
 instance ToJSON AchievementSetStepsAtLeastResponse
          where
-        toJSON AchievementSetStepsAtLeastResponse{..}
+        toJSON AchievementSetStepsAtLeastResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _assalrKind),
@@ -6438,7 +6438,7 @@ instance ToJSON AchievementSetStepsAtLeastResponse
 -- | This is a JSON template for a list of achievement objects.
 --
 -- /See:/ 'playerAchievementListResponse' smart constructor.
-data PlayerAchievementListResponse = PlayerAchievementListResponse
+data PlayerAchievementListResponse = PlayerAchievementListResponse'
     { _palrNextPageToken :: !(Maybe Text)
     , _palrKind          :: !Text
     , _palrItems         :: !(Maybe [PlayerAchievement])
@@ -6456,7 +6456,7 @@ data PlayerAchievementListResponse = PlayerAchievementListResponse
 playerAchievementListResponse
     :: PlayerAchievementListResponse
 playerAchievementListResponse =
-    PlayerAchievementListResponse
+    PlayerAchievementListResponse'
     { _palrNextPageToken = Nothing
     , _palrKind = "games#playerAchievementListResponse"
     , _palrItems = Nothing
@@ -6484,14 +6484,14 @@ instance FromJSON PlayerAchievementListResponse where
         parseJSON
           = withObject "PlayerAchievementListResponse"
               (\ o ->
-                 PlayerAchievementListResponse <$>
+                 PlayerAchievementListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "games#playerAchievementListResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON PlayerAchievementListResponse where
-        toJSON PlayerAchievementListResponse{..}
+        toJSON PlayerAchievementListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _palrNextPageToken,
@@ -6501,7 +6501,7 @@ instance ToJSON PlayerAchievementListResponse where
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventRecordRequest' smart constructor.
-data EventRecordRequest = EventRecordRequest
+data EventRecordRequest = EventRecordRequest'
     { _errRequestId         :: !(Maybe (Textual Int64))
     , _errKind              :: !Text
     , _errCurrentTimeMillis :: !(Maybe (Textual Int64))
@@ -6522,7 +6522,7 @@ data EventRecordRequest = EventRecordRequest
 eventRecordRequest
     :: EventRecordRequest
 eventRecordRequest =
-    EventRecordRequest
+    EventRecordRequest'
     { _errRequestId = Nothing
     , _errKind = "games#eventRecordRequest"
     , _errCurrentTimeMillis = Nothing
@@ -6560,14 +6560,14 @@ instance FromJSON EventRecordRequest where
         parseJSON
           = withObject "EventRecordRequest"
               (\ o ->
-                 EventRecordRequest <$>
+                 EventRecordRequest' <$>
                    (o .:? "requestId") <*>
                      (o .:? "kind" .!= "games#eventRecordRequest")
                      <*> (o .:? "currentTimeMillis")
                      <*> (o .:? "timePeriods" .!= mempty))
 
 instance ToJSON EventRecordRequest where
-        toJSON EventRecordRequest{..}
+        toJSON EventRecordRequest'{..}
           = object
               (catMaybes
                  [("requestId" .=) <$> _errRequestId,
@@ -6578,7 +6578,7 @@ instance ToJSON EventRecordRequest where
 -- | This is a JSON template for a room auto-match criteria object.
 --
 -- /See:/ 'roomAutoMatchingCriteria' smart constructor.
-data RoomAutoMatchingCriteria = RoomAutoMatchingCriteria
+data RoomAutoMatchingCriteria = RoomAutoMatchingCriteria'
     { _ramcKind                   :: !Text
     , _ramcExclusiveBitmask       :: !(Maybe (Textual Int64))
     , _ramcMaxAutoMatchingPlayers :: !(Maybe (Textual Int32))
@@ -6599,7 +6599,7 @@ data RoomAutoMatchingCriteria = RoomAutoMatchingCriteria
 roomAutoMatchingCriteria
     :: RoomAutoMatchingCriteria
 roomAutoMatchingCriteria =
-    RoomAutoMatchingCriteria
+    RoomAutoMatchingCriteria'
     { _ramcKind = "games#roomAutoMatchingCriteria"
     , _ramcExclusiveBitmask = Nothing
     , _ramcMaxAutoMatchingPlayers = Nothing
@@ -6640,14 +6640,14 @@ instance FromJSON RoomAutoMatchingCriteria where
         parseJSON
           = withObject "RoomAutoMatchingCriteria"
               (\ o ->
-                 RoomAutoMatchingCriteria <$>
+                 RoomAutoMatchingCriteria' <$>
                    (o .:? "kind" .!= "games#roomAutoMatchingCriteria")
                      <*> (o .:? "exclusiveBitmask")
                      <*> (o .:? "maxAutoMatchingPlayers")
                      <*> (o .:? "minAutoMatchingPlayers"))
 
 instance ToJSON RoomAutoMatchingCriteria where
-        toJSON RoomAutoMatchingCriteria{..}
+        toJSON RoomAutoMatchingCriteria'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ramcKind),
@@ -6660,11 +6660,11 @@ instance ToJSON RoomAutoMatchingCriteria where
 -- | This is a JSON template for a Quest Milestone resource.
 --
 -- /See:/ 'questMilestone' smart constructor.
-data QuestMilestone = QuestMilestone
+data QuestMilestone = QuestMilestone'
     { _qmState                :: !(Maybe Text)
     , _qmKind                 :: !Text
     , _qmId                   :: !(Maybe Text)
-    , _qmCompletionRewardData :: !(Maybe (Textual Word8))
+    , _qmCompletionRewardData :: !(Maybe Base64)
     , _qmCriteria             :: !(Maybe [QuestCriterion])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6684,7 +6684,7 @@ data QuestMilestone = QuestMilestone
 questMilestone
     :: QuestMilestone
 questMilestone =
-    QuestMilestone
+    QuestMilestone'
     { _qmState = Nothing
     , _qmKind = "games#questMilestone"
     , _qmId = Nothing
@@ -6713,11 +6713,11 @@ qmId = lens _qmId (\ s a -> s{_qmId = a})
 -- | The completion reward data of the milestone, represented as a
 -- Base64-encoded string. This is a developer-specified binary blob with
 -- size between 0 and 2 KB before encoding.
-qmCompletionRewardData :: Lens' QuestMilestone (Maybe Word8)
+qmCompletionRewardData :: Lens' QuestMilestone (Maybe ByteString)
 qmCompletionRewardData
   = lens _qmCompletionRewardData
       (\ s a -> s{_qmCompletionRewardData = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The criteria of the milestone.
 qmCriteria :: Lens' QuestMilestone [QuestCriterion]
@@ -6730,7 +6730,7 @@ instance FromJSON QuestMilestone where
         parseJSON
           = withObject "QuestMilestone"
               (\ o ->
-                 QuestMilestone <$>
+                 QuestMilestone' <$>
                    (o .:? "state") <*>
                      (o .:? "kind" .!= "games#questMilestone")
                      <*> (o .:? "id")
@@ -6738,7 +6738,7 @@ instance FromJSON QuestMilestone where
                      <*> (o .:? "criteria" .!= mempty))
 
 instance ToJSON QuestMilestone where
-        toJSON QuestMilestone{..}
+        toJSON QuestMilestone'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _qmState, Just ("kind" .= _qmKind),
@@ -6750,7 +6750,7 @@ instance ToJSON QuestMilestone where
 -- | This is a JSON template for peer session diagnostics.
 --
 -- /See:/ 'peerSessionDiagnostics' smart constructor.
-data PeerSessionDiagnostics = PeerSessionDiagnostics
+data PeerSessionDiagnostics = PeerSessionDiagnostics'
     { _psdConnectedTimestampMillis :: !(Maybe (Textual Int64))
     , _psdParticipantId            :: !(Maybe Text)
     , _psdKind                     :: !Text
@@ -6774,7 +6774,7 @@ data PeerSessionDiagnostics = PeerSessionDiagnostics
 peerSessionDiagnostics
     :: PeerSessionDiagnostics
 peerSessionDiagnostics =
-    PeerSessionDiagnostics
+    PeerSessionDiagnostics'
     { _psdConnectedTimestampMillis = Nothing
     , _psdParticipantId = Nothing
     , _psdKind = "games#peerSessionDiagnostics"
@@ -6816,7 +6816,7 @@ instance FromJSON PeerSessionDiagnostics where
         parseJSON
           = withObject "PeerSessionDiagnostics"
               (\ o ->
-                 PeerSessionDiagnostics <$>
+                 PeerSessionDiagnostics' <$>
                    (o .:? "connectedTimestampMillis") <*>
                      (o .:? "participantId")
                      <*> (o .:? "kind" .!= "games#peerSessionDiagnostics")
@@ -6824,7 +6824,7 @@ instance FromJSON PeerSessionDiagnostics where
                      <*> (o .:? "reliableChannel"))
 
 instance ToJSON PeerSessionDiagnostics where
-        toJSON PeerSessionDiagnostics{..}
+        toJSON PeerSessionDiagnostics'{..}
           = object
               (catMaybes
                  [("connectedTimestampMillis" .=) <$>
@@ -6837,7 +6837,7 @@ instance ToJSON PeerSessionDiagnostics where
 -- | This is a JSON template for a push token ID resource.
 --
 -- /See:/ 'pushTokenId' smart constructor.
-data PushTokenId = PushTokenId
+data PushTokenId = PushTokenId'
     { _ptiIos  :: !(Maybe PushTokenIdIos)
     , _ptiKind :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6852,7 +6852,7 @@ data PushTokenId = PushTokenId
 pushTokenId
     :: PushTokenId
 pushTokenId =
-    PushTokenId
+    PushTokenId'
     { _ptiIos = Nothing
     , _ptiKind = "games#pushTokenId"
     }
@@ -6870,12 +6870,12 @@ instance FromJSON PushTokenId where
         parseJSON
           = withObject "PushTokenId"
               (\ o ->
-                 PushTokenId <$>
+                 PushTokenId' <$>
                    (o .:? "ios") <*>
                      (o .:? "kind" .!= "games#pushTokenId"))
 
 instance ToJSON PushTokenId where
-        toJSON PushTokenId{..}
+        toJSON PushTokenId'{..}
           = object
               (catMaybes
                  [("ios" .=) <$> _ptiIos, Just ("kind" .= _ptiKind)])
@@ -6883,7 +6883,7 @@ instance ToJSON PushTokenId where
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventPeriodUpdate' smart constructor.
-data EventPeriodUpdate = EventPeriodUpdate
+data EventPeriodUpdate = EventPeriodUpdate'
     { _epuKind       :: !Text
     , _epuTimePeriod :: !(Maybe EventPeriodRange)
     , _epuUpdates    :: !(Maybe [EventUpdateRequest])
@@ -6901,7 +6901,7 @@ data EventPeriodUpdate = EventPeriodUpdate
 eventPeriodUpdate
     :: EventPeriodUpdate
 eventPeriodUpdate =
-    EventPeriodUpdate
+    EventPeriodUpdate'
     { _epuKind = "games#eventPeriodUpdate"
     , _epuTimePeriod = Nothing
     , _epuUpdates = Nothing
@@ -6929,13 +6929,13 @@ instance FromJSON EventPeriodUpdate where
         parseJSON
           = withObject "EventPeriodUpdate"
               (\ o ->
-                 EventPeriodUpdate <$>
+                 EventPeriodUpdate' <$>
                    (o .:? "kind" .!= "games#eventPeriodUpdate") <*>
                      (o .:? "timePeriod")
                      <*> (o .:? "updates" .!= mempty))
 
 instance ToJSON EventPeriodUpdate where
-        toJSON EventPeriodUpdate{..}
+        toJSON EventPeriodUpdate'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _epuKind),
@@ -6946,7 +6946,7 @@ instance ToJSON EventPeriodUpdate where
 -- sync.
 --
 -- /See:/ 'turnBasedMatchSync' smart constructor.
-data TurnBasedMatchSync = TurnBasedMatchSync
+data TurnBasedMatchSync = TurnBasedMatchSync'
     { _tbmsMoreAvailable :: !(Maybe Bool)
     , _tbmsNextPageToken :: !(Maybe Text)
     , _tbmsKind          :: !Text
@@ -6967,7 +6967,7 @@ data TurnBasedMatchSync = TurnBasedMatchSync
 turnBasedMatchSync
     :: TurnBasedMatchSync
 turnBasedMatchSync =
-    TurnBasedMatchSync
+    TurnBasedMatchSync'
     { _tbmsMoreAvailable = Nothing
     , _tbmsNextPageToken = Nothing
     , _tbmsKind = "games#turnBasedMatchSync"
@@ -7004,13 +7004,13 @@ instance FromJSON TurnBasedMatchSync where
         parseJSON
           = withObject "TurnBasedMatchSync"
               (\ o ->
-                 TurnBasedMatchSync <$>
+                 TurnBasedMatchSync' <$>
                    (o .:? "moreAvailable") <*> (o .:? "nextPageToken")
                      <*> (o .:? "kind" .!= "games#turnBasedMatchSync")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON TurnBasedMatchSync where
-        toJSON TurnBasedMatchSync{..}
+        toJSON TurnBasedMatchSync'{..}
           = object
               (catMaybes
                  [("moreAvailable" .=) <$> _tbmsMoreAvailable,
@@ -7021,7 +7021,7 @@ instance ToJSON TurnBasedMatchSync where
 -- | This is a JSON template for a request to submit a score to leaderboards.
 --
 -- /See:/ 'scoreSubmission' smart constructor.
-data ScoreSubmission = ScoreSubmission
+data ScoreSubmission = ScoreSubmission'
     { _scoSignature     :: !(Maybe Text)
     , _scoScoreTag      :: !(Maybe Text)
     , _scoScore         :: !(Maybe (Textual Int64))
@@ -7045,7 +7045,7 @@ data ScoreSubmission = ScoreSubmission
 scoreSubmission
     :: ScoreSubmission
 scoreSubmission =
-    ScoreSubmission
+    ScoreSubmission'
     { _scoSignature = Nothing
     , _scoScoreTag = Nothing
     , _scoScore = Nothing
@@ -7086,14 +7086,14 @@ instance FromJSON ScoreSubmission where
         parseJSON
           = withObject "ScoreSubmission"
               (\ o ->
-                 ScoreSubmission <$>
+                 ScoreSubmission' <$>
                    (o .:? "signature") <*> (o .:? "scoreTag") <*>
                      (o .:? "score")
                      <*> (o .:? "kind" .!= "games#scoreSubmission")
                      <*> (o .:? "leaderboardId"))
 
 instance ToJSON ScoreSubmission where
-        toJSON ScoreSubmission{..}
+        toJSON ScoreSubmission'{..}
           = object
               (catMaybes
                  [("signature" .=) <$> _scoSignature,
@@ -7105,7 +7105,7 @@ instance ToJSON ScoreSubmission where
 -- | This is a JSON template for room leave diagnostics.
 --
 -- /See:/ 'roomLeaveDiagnostics' smart constructor.
-data RoomLeaveDiagnostics = RoomLeaveDiagnostics
+data RoomLeaveDiagnostics = RoomLeaveDiagnostics'
     { _rldPeerSession           :: !(Maybe [PeerSessionDiagnostics])
     , _rldAndroidNetworkType    :: !(Maybe (Textual Int32))
     , _rldKind                  :: !Text
@@ -7138,7 +7138,7 @@ data RoomLeaveDiagnostics = RoomLeaveDiagnostics
 roomLeaveDiagnostics
     :: RoomLeaveDiagnostics
 roomLeaveDiagnostics =
-    RoomLeaveDiagnostics
+    RoomLeaveDiagnostics'
     { _rldPeerSession = Nothing
     , _rldAndroidNetworkType = Nothing
     , _rldKind = "games#roomLeaveDiagnostics"
@@ -7213,7 +7213,7 @@ instance FromJSON RoomLeaveDiagnostics where
         parseJSON
           = withObject "RoomLeaveDiagnostics"
               (\ o ->
-                 RoomLeaveDiagnostics <$>
+                 RoomLeaveDiagnostics' <$>
                    (o .:? "peerSession" .!= mempty) <*>
                      (o .:? "androidNetworkType")
                      <*> (o .:? "kind" .!= "games#roomLeaveDiagnostics")
@@ -7224,7 +7224,7 @@ instance FromJSON RoomLeaveDiagnostics where
                      <*> (o .:? "androidNetworkSubtype"))
 
 instance ToJSON RoomLeaveDiagnostics where
-        toJSON RoomLeaveDiagnostics{..}
+        toJSON RoomLeaveDiagnostics'{..}
           = object
               (catMaybes
                  [("peerSession" .=) <$> _rldPeerSession,
@@ -7242,7 +7242,7 @@ instance ToJSON RoomLeaveDiagnostics where
 -- | This is a JSON template for aggregate stats.
 --
 -- /See:/ 'aggregateStats' smart constructor.
-data AggregateStats = AggregateStats
+data AggregateStats = AggregateStats'
     { _asMax   :: !(Maybe (Textual Int64))
     , _asKind  :: !Text
     , _asCount :: !(Maybe (Textual Int64))
@@ -7266,7 +7266,7 @@ data AggregateStats = AggregateStats
 aggregateStats
     :: AggregateStats
 aggregateStats =
-    AggregateStats
+    AggregateStats'
     { _asMax = Nothing
     , _asKind = "games#aggregateStats"
     , _asCount = Nothing
@@ -7307,7 +7307,7 @@ instance FromJSON AggregateStats where
         parseJSON
           = withObject "AggregateStats"
               (\ o ->
-                 AggregateStats <$>
+                 AggregateStats' <$>
                    (o .:? "max") <*>
                      (o .:? "kind" .!= "games#aggregateStats")
                      <*> (o .:? "count")
@@ -7315,7 +7315,7 @@ instance FromJSON AggregateStats where
                      <*> (o .:? "sum"))
 
 instance ToJSON AggregateStats where
-        toJSON AggregateStats{..}
+        toJSON AggregateStats'{..}
           = object
               (catMaybes
                  [("max" .=) <$> _asMax, Just ("kind" .= _asKind),
@@ -7325,7 +7325,7 @@ instance ToJSON AggregateStats where
 -- | This is a JSON template for the Web details resource.
 --
 -- /See:/ 'instanceWebDetails' smart constructor.
-data InstanceWebDetails = InstanceWebDetails
+data InstanceWebDetails = InstanceWebDetails'
     { _iwdPreferred :: !(Maybe Bool)
     , _iwdKind      :: !Text
     , _iwdLaunchURL :: !(Maybe Text)
@@ -7343,7 +7343,7 @@ data InstanceWebDetails = InstanceWebDetails
 instanceWebDetails
     :: InstanceWebDetails
 instanceWebDetails =
-    InstanceWebDetails
+    InstanceWebDetails'
     { _iwdPreferred = Nothing
     , _iwdKind = "games#instanceWebDetails"
     , _iwdLaunchURL = Nothing
@@ -7368,13 +7368,13 @@ instance FromJSON InstanceWebDetails where
         parseJSON
           = withObject "InstanceWebDetails"
               (\ o ->
-                 InstanceWebDetails <$>
+                 InstanceWebDetails' <$>
                    (o .:? "preferred") <*>
                      (o .:? "kind" .!= "games#instanceWebDetails")
                      <*> (o .:? "launchUrl"))
 
 instance ToJSON InstanceWebDetails where
-        toJSON InstanceWebDetails{..}
+        toJSON InstanceWebDetails'{..}
           = object
               (catMaybes
                  [("preferred" .=) <$> _iwdPreferred,
@@ -7384,7 +7384,7 @@ instance ToJSON InstanceWebDetails where
 -- | This is a JSON template for a rematch response.
 --
 -- /See:/ 'turnBasedMatchRematch' smart constructor.
-data TurnBasedMatchRematch = TurnBasedMatchRematch
+data TurnBasedMatchRematch = TurnBasedMatchRematch'
     { _tRematch       :: !(Maybe TurnBasedMatch)
     , _tKind          :: !Text
     , _tPreviousMatch :: !(Maybe TurnBasedMatch)
@@ -7402,7 +7402,7 @@ data TurnBasedMatchRematch = TurnBasedMatchRematch
 turnBasedMatchRematch
     :: TurnBasedMatchRematch
 turnBasedMatchRematch =
-    TurnBasedMatchRematch
+    TurnBasedMatchRematch'
     { _tRematch = Nothing
     , _tKind = "games#turnBasedMatchRematch"
     , _tPreviousMatch = Nothing
@@ -7429,13 +7429,13 @@ instance FromJSON TurnBasedMatchRematch where
         parseJSON
           = withObject "TurnBasedMatchRematch"
               (\ o ->
-                 TurnBasedMatchRematch <$>
+                 TurnBasedMatchRematch' <$>
                    (o .:? "rematch") <*>
                      (o .:? "kind" .!= "games#turnBasedMatchRematch")
                      <*> (o .:? "previousMatch"))
 
 instance ToJSON TurnBasedMatchRematch where
-        toJSON TurnBasedMatchRematch{..}
+        toJSON TurnBasedMatchRematch'{..}
           = object
               (catMaybes
                  [("rematch" .=) <$> _tRematch,
@@ -7446,7 +7446,7 @@ instance ToJSON TurnBasedMatchRematch where
 -- experience.
 --
 -- /See:/ 'playerExperienceInfo' smart constructor.
-data PlayerExperienceInfo = PlayerExperienceInfo
+data PlayerExperienceInfo = PlayerExperienceInfo'
     { _peiKind                       :: !Text
     , _peiCurrentExperiencePoints    :: !(Maybe (Textual Int64))
     , _peiCurrentLevel               :: !(Maybe PlayerLevel)
@@ -7470,7 +7470,7 @@ data PlayerExperienceInfo = PlayerExperienceInfo
 playerExperienceInfo
     :: PlayerExperienceInfo
 playerExperienceInfo =
-    PlayerExperienceInfo
+    PlayerExperienceInfo'
     { _peiKind = "games#playerExperienceInfo"
     , _peiCurrentExperiencePoints = Nothing
     , _peiCurrentLevel = Nothing
@@ -7514,7 +7514,7 @@ instance FromJSON PlayerExperienceInfo where
         parseJSON
           = withObject "PlayerExperienceInfo"
               (\ o ->
-                 PlayerExperienceInfo <$>
+                 PlayerExperienceInfo' <$>
                    (o .:? "kind" .!= "games#playerExperienceInfo") <*>
                      (o .:? "currentExperiencePoints")
                      <*> (o .:? "currentLevel")
@@ -7522,7 +7522,7 @@ instance FromJSON PlayerExperienceInfo where
                      <*> (o .:? "lastLevelUpTimestampMillis"))
 
 instance ToJSON PlayerExperienceInfo where
-        toJSON PlayerExperienceInfo{..}
+        toJSON PlayerExperienceInfo'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _peiKind),
@@ -7537,7 +7537,7 @@ instance ToJSON PlayerExperienceInfo where
 -- achievement.
 --
 -- /See:/ 'gamesAchievementSetStepsAtLeast' smart constructor.
-data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast
+data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast'
     { _gassalKind  :: !Text
     , _gassalSteps :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7552,7 +7552,7 @@ data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast
 gamesAchievementSetStepsAtLeast
     :: GamesAchievementSetStepsAtLeast
 gamesAchievementSetStepsAtLeast =
-    GamesAchievementSetStepsAtLeast
+    GamesAchievementSetStepsAtLeast'
     { _gassalKind = "games#GamesAchievementSetStepsAtLeast"
     , _gassalSteps = Nothing
     }
@@ -7574,13 +7574,13 @@ instance FromJSON GamesAchievementSetStepsAtLeast
         parseJSON
           = withObject "GamesAchievementSetStepsAtLeast"
               (\ o ->
-                 GamesAchievementSetStepsAtLeast <$>
+                 GamesAchievementSetStepsAtLeast' <$>
                    (o .:? "kind" .!=
                       "games#GamesAchievementSetStepsAtLeast")
                      <*> (o .:? "steps"))
 
 instance ToJSON GamesAchievementSetStepsAtLeast where
-        toJSON GamesAchievementSetStepsAtLeast{..}
+        toJSON GamesAchievementSetStepsAtLeast'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _gassalKind),
@@ -7589,20 +7589,26 @@ instance ToJSON GamesAchievementSetStepsAtLeast where
 -- | This is a JSON template for a Player resource.
 --
 -- /See:/ 'player' smart constructor.
-data Player = Player
-    { _plaLastPlayedWith :: !(Maybe Played)
-    , _plaAvatarImageURL :: !(Maybe Text)
-    , _plaKind           :: !Text
-    , _plaExperienceInfo :: !(Maybe PlayerExperienceInfo)
-    , _plaName           :: !(Maybe PlayerName)
-    , _plaDisplayName    :: !(Maybe Text)
-    , _plaTitle          :: !(Maybe Text)
-    , _plaPlayerId       :: !(Maybe Text)
+data Player = Player'
+    { _plaBannerURLLandscape :: !(Maybe Text)
+    , _plaLastPlayedWith     :: !(Maybe Played)
+    , _plaAvatarImageURL     :: !(Maybe Text)
+    , _plaKind               :: !Text
+    , _plaExperienceInfo     :: !(Maybe PlayerExperienceInfo)
+    , _plaName               :: !(Maybe PlayerName)
+    , _plaOriginalPlayerId   :: !(Maybe Text)
+    , _plaDisplayName        :: !(Maybe Text)
+    , _plaTitle              :: !(Maybe Text)
+    , _plaBannerURLPortrait  :: !(Maybe Text)
+    , _plaPlayerId           :: !(Maybe Text)
+    , _plaProFileSettings    :: !(Maybe ProFileSettings)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Player' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plaBannerURLLandscape'
 --
 -- * 'plaLastPlayedWith'
 --
@@ -7614,24 +7620,40 @@ data Player = Player
 --
 -- * 'plaName'
 --
+-- * 'plaOriginalPlayerId'
+--
 -- * 'plaDisplayName'
 --
 -- * 'plaTitle'
 --
+-- * 'plaBannerURLPortrait'
+--
 -- * 'plaPlayerId'
+--
+-- * 'plaProFileSettings'
 player
     :: Player
 player =
-    Player
-    { _plaLastPlayedWith = Nothing
+    Player'
+    { _plaBannerURLLandscape = Nothing
+    , _plaLastPlayedWith = Nothing
     , _plaAvatarImageURL = Nothing
     , _plaKind = "games#player"
     , _plaExperienceInfo = Nothing
     , _plaName = Nothing
+    , _plaOriginalPlayerId = Nothing
     , _plaDisplayName = Nothing
     , _plaTitle = Nothing
+    , _plaBannerURLPortrait = Nothing
     , _plaPlayerId = Nothing
+    , _plaProFileSettings = Nothing
     }
+
+-- | The url to the landscape mode player banner image.
+plaBannerURLLandscape :: Lens' Player (Maybe Text)
+plaBannerURLLandscape
+  = lens _plaBannerURLLandscape
+      (\ s a -> s{_plaBannerURLLandscape = a})
 
 -- | Details about the last time this player played a multiplayer game with
 -- the currently authenticated player. Populated for PLAYED_WITH player
@@ -7663,6 +7685,16 @@ plaExperienceInfo
 plaName :: Lens' Player (Maybe PlayerName)
 plaName = lens _plaName (\ s a -> s{_plaName = a})
 
+-- | The player ID that was used for this player the first time they signed
+-- into the game in question. This is only populated for calls to
+-- player.get for the requesting player, only if the player ID has
+-- subsequently changed, and only to clients that support remapping player
+-- IDs.
+plaOriginalPlayerId :: Lens' Player (Maybe Text)
+plaOriginalPlayerId
+  = lens _plaOriginalPlayerId
+      (\ s a -> s{_plaOriginalPlayerId = a})
+
 -- | The name to display for the player.
 plaDisplayName :: Lens' Player (Maybe Text)
 plaDisplayName
@@ -7673,42 +7705,65 @@ plaDisplayName
 plaTitle :: Lens' Player (Maybe Text)
 plaTitle = lens _plaTitle (\ s a -> s{_plaTitle = a})
 
+-- | The url to the portrait mode player banner image.
+plaBannerURLPortrait :: Lens' Player (Maybe Text)
+plaBannerURLPortrait
+  = lens _plaBannerURLPortrait
+      (\ s a -> s{_plaBannerURLPortrait = a})
+
 -- | The ID of the player.
 plaPlayerId :: Lens' Player (Maybe Text)
 plaPlayerId
   = lens _plaPlayerId (\ s a -> s{_plaPlayerId = a})
 
+-- | The player\'s profile settings. Controls whether or not the player\'s
+-- profile is visible to other players.
+plaProFileSettings :: Lens' Player (Maybe ProFileSettings)
+plaProFileSettings
+  = lens _plaProFileSettings
+      (\ s a -> s{_plaProFileSettings = a})
+
 instance FromJSON Player where
         parseJSON
           = withObject "Player"
               (\ o ->
-                 Player <$>
-                   (o .:? "lastPlayedWith") <*> (o .:? "avatarImageUrl")
+                 Player' <$>
+                   (o .:? "bannerUrlLandscape") <*>
+                     (o .:? "lastPlayedWith")
+                     <*> (o .:? "avatarImageUrl")
                      <*> (o .:? "kind" .!= "games#player")
                      <*> (o .:? "experienceInfo")
                      <*> (o .:? "name")
+                     <*> (o .:? "originalPlayerId")
                      <*> (o .:? "displayName")
                      <*> (o .:? "title")
-                     <*> (o .:? "playerId"))
+                     <*> (o .:? "bannerUrlPortrait")
+                     <*> (o .:? "playerId")
+                     <*> (o .:? "profileSettings"))
 
 instance ToJSON Player where
-        toJSON Player{..}
+        toJSON Player'{..}
           = object
               (catMaybes
-                 [("lastPlayedWith" .=) <$> _plaLastPlayedWith,
+                 [("bannerUrlLandscape" .=) <$>
+                    _plaBannerURLLandscape,
+                  ("lastPlayedWith" .=) <$> _plaLastPlayedWith,
                   ("avatarImageUrl" .=) <$> _plaAvatarImageURL,
                   Just ("kind" .= _plaKind),
                   ("experienceInfo" .=) <$> _plaExperienceInfo,
                   ("name" .=) <$> _plaName,
+                  ("originalPlayerId" .=) <$> _plaOriginalPlayerId,
                   ("displayName" .=) <$> _plaDisplayName,
                   ("title" .=) <$> _plaTitle,
-                  ("playerId" .=) <$> _plaPlayerId])
+                  ("bannerUrlPortrait" .=) <$> _plaBannerURLPortrait,
+                  ("playerId" .=) <$> _plaPlayerId,
+                  ("profileSettings" .=) <$> _plaProFileSettings])
 
 -- | This is a JSON template for the payload to request to increment an
 -- achievement.
 --
 -- /See:/ 'gamesAchievementIncrement' smart constructor.
-data GamesAchievementIncrement = GamesAchievementIncrement
+data GamesAchievementIncrement = GamesAchievementIncrement'
     { _gaiRequestId :: !(Maybe (Textual Int64))
     , _gaiKind      :: !Text
     , _gaiSteps     :: !(Maybe (Textual Int32))
@@ -7726,7 +7781,7 @@ data GamesAchievementIncrement = GamesAchievementIncrement
 gamesAchievementIncrement
     :: GamesAchievementIncrement
 gamesAchievementIncrement =
-    GamesAchievementIncrement
+    GamesAchievementIncrement'
     { _gaiRequestId = Nothing
     , _gaiKind = "games#GamesAchievementIncrement"
     , _gaiSteps = Nothing
@@ -7753,13 +7808,13 @@ instance FromJSON GamesAchievementIncrement where
         parseJSON
           = withObject "GamesAchievementIncrement"
               (\ o ->
-                 GamesAchievementIncrement <$>
+                 GamesAchievementIncrement' <$>
                    (o .:? "requestId") <*>
                      (o .:? "kind" .!= "games#GamesAchievementIncrement")
                      <*> (o .:? "steps"))
 
 instance ToJSON GamesAchievementIncrement where
-        toJSON GamesAchievementIncrement{..}
+        toJSON GamesAchievementIncrement'{..}
           = object
               (catMaybes
                  [("requestId" .=) <$> _gaiRequestId,
@@ -7769,7 +7824,7 @@ instance ToJSON GamesAchievementIncrement where
 -- | This is a JSON template for a Quest resource.
 --
 -- /See:/ 'quest' smart constructor.
-data Quest = Quest
+data Quest = Quest'
     { _queLastUpdatedTimestampMillis :: !(Maybe (Textual Int64))
     , _queBannerURL                  :: !(Maybe Text)
     , _queState                      :: !(Maybe Text)
@@ -7826,7 +7881,7 @@ data Quest = Quest
 quest
     :: Quest
 quest =
-    Quest
+    Quest'
     { _queLastUpdatedTimestampMillis = Nothing
     , _queBannerURL = Nothing
     , _queState = Nothing
@@ -7958,7 +8013,7 @@ instance FromJSON Quest where
         parseJSON
           = withObject "Quest"
               (\ o ->
-                 Quest <$>
+                 Quest' <$>
                    (o .:? "lastUpdatedTimestampMillis") <*>
                      (o .:? "bannerUrl")
                      <*> (o .:? "state")
@@ -7977,7 +8032,7 @@ instance FromJSON Quest where
                      <*> (o .:? "acceptedTimestampMillis"))
 
 instance ToJSON Quest where
-        toJSON Quest{..}
+        toJSON Quest'{..}
           = object
               (catMaybes
                  [("lastUpdatedTimestampMillis" .=) <$>
@@ -8003,7 +8058,7 @@ instance ToJSON Quest where
 -- | This is a JSON template for an event child relationship resource.
 --
 -- /See:/ 'eventChild' smart constructor.
-data EventChild = EventChild
+data EventChild = EventChild'
     { _ecKind    :: !Text
     , _ecChildId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8018,7 +8073,7 @@ data EventChild = EventChild
 eventChild
     :: EventChild
 eventChild =
-    EventChild
+    EventChild'
     { _ecKind = "games#eventChild"
     , _ecChildId = Nothing
     }
@@ -8037,21 +8092,84 @@ instance FromJSON EventChild where
         parseJSON
           = withObject "EventChild"
               (\ o ->
-                 EventChild <$>
+                 EventChild' <$>
                    (o .:? "kind" .!= "games#eventChild") <*>
                      (o .:? "childId"))
 
 instance ToJSON EventChild where
-        toJSON EventChild{..}
+        toJSON EventChild'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ecKind),
                   ("childId" .=) <$> _ecChildId])
 
+-- | This is a JSON template for a third party application verification
+-- response resource.
+--
+-- /See:/ 'applicationVerifyResponse' smart constructor.
+data ApplicationVerifyResponse = ApplicationVerifyResponse'
+    { _avrKind              :: !Text
+    , _avrAlternatePlayerId :: !(Maybe Text)
+    , _avrPlayerId          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ApplicationVerifyResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'avrKind'
+--
+-- * 'avrAlternatePlayerId'
+--
+-- * 'avrPlayerId'
+applicationVerifyResponse
+    :: ApplicationVerifyResponse
+applicationVerifyResponse =
+    ApplicationVerifyResponse'
+    { _avrKind = "games#applicationVerifyResponse"
+    , _avrAlternatePlayerId = Nothing
+    , _avrPlayerId = Nothing
+    }
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#applicationVerifyResponse.
+avrKind :: Lens' ApplicationVerifyResponse Text
+avrKind = lens _avrKind (\ s a -> s{_avrKind = a})
+
+-- | An alternate ID that was once used for the player that was issued the
+-- auth token used in this request. (This field is not normally populated.)
+avrAlternatePlayerId :: Lens' ApplicationVerifyResponse (Maybe Text)
+avrAlternatePlayerId
+  = lens _avrAlternatePlayerId
+      (\ s a -> s{_avrAlternatePlayerId = a})
+
+-- | The ID of the player that was issued the auth token used in this
+-- request.
+avrPlayerId :: Lens' ApplicationVerifyResponse (Maybe Text)
+avrPlayerId
+  = lens _avrPlayerId (\ s a -> s{_avrPlayerId = a})
+
+instance FromJSON ApplicationVerifyResponse where
+        parseJSON
+          = withObject "ApplicationVerifyResponse"
+              (\ o ->
+                 ApplicationVerifyResponse' <$>
+                   (o .:? "kind" .!= "games#applicationVerifyResponse")
+                     <*> (o .:? "alternate_player_id")
+                     <*> (o .:? "player_id"))
+
+instance ToJSON ApplicationVerifyResponse where
+        toJSON ApplicationVerifyResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _avrKind),
+                  ("alternate_player_id" .=) <$> _avrAlternatePlayerId,
+                  ("player_id" .=) <$> _avrPlayerId])
+
 -- | This is a JSON template for a ListByPlayer response.
 --
 -- /See:/ 'playerEventListResponse' smart constructor.
-data PlayerEventListResponse = PlayerEventListResponse
+data PlayerEventListResponse = PlayerEventListResponse'
     { _pelrNextPageToken :: !(Maybe Text)
     , _pelrKind          :: !Text
     , _pelrItems         :: !(Maybe [PlayerEvent])
@@ -8069,7 +8187,7 @@ data PlayerEventListResponse = PlayerEventListResponse
 playerEventListResponse
     :: PlayerEventListResponse
 playerEventListResponse =
-    PlayerEventListResponse
+    PlayerEventListResponse'
     { _pelrNextPageToken = Nothing
     , _pelrKind = "games#playerEventListResponse"
     , _pelrItems = Nothing
@@ -8097,13 +8215,13 @@ instance FromJSON PlayerEventListResponse where
         parseJSON
           = withObject "PlayerEventListResponse"
               (\ o ->
-                 PlayerEventListResponse <$>
+                 PlayerEventListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "games#playerEventListResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON PlayerEventListResponse where
-        toJSON PlayerEventListResponse{..}
+        toJSON PlayerEventListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _pelrNextPageToken,
@@ -8113,9 +8231,9 @@ instance ToJSON PlayerEventListResponse where
 -- | This is a JSON template for sending a turn-based match data object.
 --
 -- /See:/ 'turnBasedMatchDataRequest' smart constructor.
-data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest
+data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest'
     { _tbmdrKind :: !Text
-    , _tbmdrData :: !(Maybe (Textual Word8))
+    , _tbmdrData :: !(Maybe Base64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchDataRequest' with the minimum fields required to make a request.
@@ -8128,7 +8246,7 @@ data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest
 turnBasedMatchDataRequest
     :: TurnBasedMatchDataRequest
 turnBasedMatchDataRequest =
-    TurnBasedMatchDataRequest
+    TurnBasedMatchDataRequest'
     { _tbmdrKind = "games#turnBasedMatchDataRequest"
     , _tbmdrData = Nothing
     }
@@ -8141,30 +8259,80 @@ tbmdrKind
 
 -- | The byte representation of the data (limited to 128 kB), as a
 -- Base64-encoded string with the URL_SAFE encoding option.
-tbmdrData :: Lens' TurnBasedMatchDataRequest (Maybe Word8)
+tbmdrData :: Lens' TurnBasedMatchDataRequest (Maybe ByteString)
 tbmdrData
   = lens _tbmdrData (\ s a -> s{_tbmdrData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 instance FromJSON TurnBasedMatchDataRequest where
         parseJSON
           = withObject "TurnBasedMatchDataRequest"
               (\ o ->
-                 TurnBasedMatchDataRequest <$>
+                 TurnBasedMatchDataRequest' <$>
                    (o .:? "kind" .!= "games#turnBasedMatchDataRequest")
                      <*> (o .:? "data"))
 
 instance ToJSON TurnBasedMatchDataRequest where
-        toJSON TurnBasedMatchDataRequest{..}
+        toJSON TurnBasedMatchDataRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tbmdrKind),
                   ("data" .=) <$> _tbmdrData])
 
+-- | This is a JSON template for profile settings
+--
+-- /See:/ 'proFileSettings' smart constructor.
+data ProFileSettings = ProFileSettings'
+    { _pfsProFileVisible :: !(Maybe Bool)
+    , _pfsKind           :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProFileSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pfsProFileVisible'
+--
+-- * 'pfsKind'
+proFileSettings
+    :: ProFileSettings
+proFileSettings =
+    ProFileSettings'
+    { _pfsProFileVisible = Nothing
+    , _pfsKind = "games#profileSettings"
+    }
+
+-- | The player\'s current profile visibility. This field is visible to both
+-- 1P and 3P APIs.
+pfsProFileVisible :: Lens' ProFileSettings (Maybe Bool)
+pfsProFileVisible
+  = lens _pfsProFileVisible
+      (\ s a -> s{_pfsProFileVisible = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string games#profileSettings.
+pfsKind :: Lens' ProFileSettings Text
+pfsKind = lens _pfsKind (\ s a -> s{_pfsKind = a})
+
+instance FromJSON ProFileSettings where
+        parseJSON
+          = withObject "ProFileSettings"
+              (\ o ->
+                 ProFileSettings' <$>
+                   (o .:? "profileVisible") <*>
+                     (o .:? "kind" .!= "games#profileSettings"))
+
+instance ToJSON ProFileSettings where
+        toJSON ProFileSettings'{..}
+          = object
+              (catMaybes
+                 [("profileVisible" .=) <$> _pfsProFileVisible,
+                  Just ("kind" .= _pfsKind)])
+
 -- | This is a JSON template for an event period time range.
 --
 -- /See:/ 'eventPeriodRange' smart constructor.
-data EventPeriodRange = EventPeriodRange
+data EventPeriodRange = EventPeriodRange'
     { _eprKind              :: !Text
     , _eprPeriodStartMillis :: !(Maybe (Textual Int64))
     , _eprPeriodEndMillis   :: !(Maybe (Textual Int64))
@@ -8182,7 +8350,7 @@ data EventPeriodRange = EventPeriodRange
 eventPeriodRange
     :: EventPeriodRange
 eventPeriodRange =
-    EventPeriodRange
+    EventPeriodRange'
     { _eprKind = "games#eventPeriodRange"
     , _eprPeriodStartMillis = Nothing
     , _eprPeriodEndMillis = Nothing
@@ -8213,13 +8381,13 @@ instance FromJSON EventPeriodRange where
         parseJSON
           = withObject "EventPeriodRange"
               (\ o ->
-                 EventPeriodRange <$>
+                 EventPeriodRange' <$>
                    (o .:? "kind" .!= "games#eventPeriodRange") <*>
                      (o .:? "periodStartMillis")
                      <*> (o .:? "periodEndMillis"))
 
 instance ToJSON EventPeriodRange where
-        toJSON EventPeriodRange{..}
+        toJSON EventPeriodRange'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _eprKind),
@@ -8229,7 +8397,7 @@ instance ToJSON EventPeriodRange where
 -- | This is a JSON template for an event update failure resource.
 --
 -- /See:/ 'eventRecordFailure' smart constructor.
-data EventRecordFailure = EventRecordFailure
+data EventRecordFailure = EventRecordFailure'
     { _erfKind         :: !Text
     , _erfFailureCause :: !(Maybe Text)
     , _erfEventId      :: !(Maybe Text)
@@ -8247,7 +8415,7 @@ data EventRecordFailure = EventRecordFailure
 eventRecordFailure
     :: EventRecordFailure
 eventRecordFailure =
-    EventRecordFailure
+    EventRecordFailure'
     { _erfKind = "games#eventRecordFailure"
     , _erfFailureCause = Nothing
     , _erfEventId = Nothing
@@ -8276,13 +8444,13 @@ instance FromJSON EventRecordFailure where
         parseJSON
           = withObject "EventRecordFailure"
               (\ o ->
-                 EventRecordFailure <$>
+                 EventRecordFailure' <$>
                    (o .:? "kind" .!= "games#eventRecordFailure") <*>
                      (o .:? "failureCause")
                      <*> (o .:? "eventId"))
 
 instance ToJSON EventRecordFailure where
-        toJSON EventRecordFailure{..}
+        toJSON EventRecordFailure'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _erfKind),
@@ -8292,7 +8460,7 @@ instance ToJSON EventRecordFailure where
 -- | This is a JSON template for a list of score submission requests
 --
 -- /See:/ 'playerScoreSubmissionList' smart constructor.
-data PlayerScoreSubmissionList = PlayerScoreSubmissionList
+data PlayerScoreSubmissionList = PlayerScoreSubmissionList'
     { _psslKind   :: !Text
     , _psslScores :: !(Maybe [ScoreSubmission])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8307,7 +8475,7 @@ data PlayerScoreSubmissionList = PlayerScoreSubmissionList
 playerScoreSubmissionList
     :: PlayerScoreSubmissionList
 playerScoreSubmissionList =
-    PlayerScoreSubmissionList
+    PlayerScoreSubmissionList'
     { _psslKind = "games#playerScoreSubmissionList"
     , _psslScores = Nothing
     }
@@ -8328,12 +8496,12 @@ instance FromJSON PlayerScoreSubmissionList where
         parseJSON
           = withObject "PlayerScoreSubmissionList"
               (\ o ->
-                 PlayerScoreSubmissionList <$>
+                 PlayerScoreSubmissionList' <$>
                    (o .:? "kind" .!= "games#playerScoreSubmissionList")
                      <*> (o .:? "scores" .!= mempty))
 
 instance ToJSON PlayerScoreSubmissionList where
-        toJSON PlayerScoreSubmissionList{..}
+        toJSON PlayerScoreSubmissionList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _psslKind),
@@ -8342,7 +8510,7 @@ instance ToJSON PlayerScoreSubmissionList where
 -- | This is a JSON template for the Instance resource.
 --
 -- /See:/ 'instance'' smart constructor.
-data Instance = Instance
+data Instance = Instance'
     { _iAndroidInstance :: !(Maybe InstanceAndroidDetails)
     , _iKind            :: !Text
     , _iWebInstance     :: !(Maybe InstanceWebDetails)
@@ -8378,7 +8546,7 @@ data Instance = Instance
 instance'
     :: Instance
 instance' =
-    Instance
+    Instance'
     { _iAndroidInstance = Nothing
     , _iKind = "games#instance"
     , _iWebInstance = Nothing
@@ -8445,7 +8613,7 @@ instance FromJSON Instance where
         parseJSON
           = withObject "Instance"
               (\ o ->
-                 Instance <$>
+                 Instance' <$>
                    (o .:? "androidInstance") <*>
                      (o .:? "kind" .!= "games#instance")
                      <*> (o .:? "webInstance")
@@ -8457,7 +8625,7 @@ instance FromJSON Instance where
                      <*> (o .:? "realtimePlay"))
 
 instance ToJSON Instance where
-        toJSON Instance{..}
+        toJSON Instance'{..}
           = object
               (catMaybes
                  [("androidInstance" .=) <$> _iAndroidInstance,

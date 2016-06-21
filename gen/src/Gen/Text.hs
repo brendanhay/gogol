@@ -88,6 +88,14 @@ renameBranch t
             , (">=", "GreaterEqual")
             ]
 
+renameSpecial :: Text -> Text
+renameSpecial t =
+    case Text.uncons t of
+        Nothing           -> t
+        Just (x, xs)
+            | separator x -> renameSpecial xs
+            | otherwise   -> t
+
 separator :: Char -> Bool
 separator x =
       x == '\\'
@@ -100,6 +108,7 @@ separator x =
    || x == '-'
    || x == '_'
    || x == '*'
+   || x == '$'
 
 dot :: Char -> Bool
 dot x = x == '.'
@@ -124,6 +133,7 @@ renameReserved x
         , "Error"
         , "read"
         , "Read"
+        , "role"
         , "request"
         , "Get"
         , "Post"
@@ -137,6 +147,9 @@ renameReserved x
         , "LocalTime"
         , "MediaDownload"
         , "MediaUpload"
+        , "Left"
+        , "Right"
+        , "Request"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text
@@ -223,6 +236,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Vpn",           "VPN")
          , ("Xml",           "XML")
          , ("Youtube",       "YouTube")
+         , ("youtube",       "YouTube")
 
          , ("([^a])data",  "$1Data")
          , ("([^ypn])load", "$1Load")
@@ -265,6 +279,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("proper",      "Proper")
          , ("publish",     "Publish")
          , ("query",       "Query")
+         , ("queue",       "Queue")
          , ("resource",    "Resource")
          , ("round",       "Round")
          , ("sample",      "Sample")

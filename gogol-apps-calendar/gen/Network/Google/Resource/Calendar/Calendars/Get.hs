@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Calendars.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type CalendarsGetResource =
 -- | Returns metadata for a calendar.
 --
 -- /See:/ 'calendarsGet' smart constructor.
-newtype CalendarsGet = CalendarsGet
+newtype CalendarsGet = CalendarsGet'
     { _cgCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ calendarsGet
     :: Text -- ^ 'cgCalendarId'
     -> CalendarsGet
 calendarsGet pCgCalendarId_ =
-    CalendarsGet
+    CalendarsGet'
     { _cgCalendarId = pCgCalendarId_
     }
 
@@ -77,7 +77,10 @@ cgCalendarId
 
 instance GoogleRequest CalendarsGet where
         type Rs CalendarsGet = Calendar
-        requestClient CalendarsGet{..}
+        type Scopes CalendarsGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient CalendarsGet'{..}
           = go _cgCalendarId (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy CalendarsGetResource)

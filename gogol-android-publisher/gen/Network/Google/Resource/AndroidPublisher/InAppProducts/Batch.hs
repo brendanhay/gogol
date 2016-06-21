@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.InAppProducts.Batch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type InAppProductsBatchResource =
 
 --
 -- /See:/ 'inAppProductsBatch' smart constructor.
-newtype InAppProductsBatch = InAppProductsBatch
+newtype InAppProductsBatch = InAppProductsBatch'
     { _iapbPayload :: InAppProductsBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ inAppProductsBatch
     :: InAppProductsBatchRequest -- ^ 'iapbPayload'
     -> InAppProductsBatch
 inAppProductsBatch pIapbPayload_ =
-    InAppProductsBatch
+    InAppProductsBatch'
     { _iapbPayload = pIapbPayload_
     }
 
@@ -76,7 +76,9 @@ iapbPayload
 instance GoogleRequest InAppProductsBatch where
         type Rs InAppProductsBatch =
              InAppProductsBatchResponse
-        requestClient InAppProductsBatch{..}
+        type Scopes InAppProductsBatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient InAppProductsBatch'{..}
           = go (Just AltJSON) _iapbPayload
               androidPublisherService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.PromoOffer.Dismiss
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type PromoOfferDismissResource =
 -- |
 --
 -- /See:/ 'promoOfferDismiss' smart constructor.
-data PromoOfferDismiss = PromoOfferDismiss
+data PromoOfferDismiss = PromoOfferDismiss'
     { _podManufacturer :: !(Maybe Text)
     , _podSerial       :: !(Maybe Text)
     , _podDevice       :: !(Maybe Text)
@@ -94,7 +94,7 @@ data PromoOfferDismiss = PromoOfferDismiss
 promoOfferDismiss
     :: PromoOfferDismiss
 promoOfferDismiss =
-    PromoOfferDismiss
+    PromoOfferDismiss'
     { _podManufacturer = Nothing
     , _podSerial = Nothing
     , _podDevice = Nothing
@@ -141,7 +141,9 @@ podAndroidId
 
 instance GoogleRequest PromoOfferDismiss where
         type Rs PromoOfferDismiss = ()
-        requestClient PromoOfferDismiss{..}
+        type Scopes PromoOfferDismiss =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient PromoOfferDismiss'{..}
           = go _podManufacturer _podSerial _podDevice _podModel
               _podOfferId
               _podProduct

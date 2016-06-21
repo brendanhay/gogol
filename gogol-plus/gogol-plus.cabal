@@ -1,5 +1,5 @@
 name:                  gogol-plus
-version:               0.0.1
+version:               0.1.0
 synopsis:              Google + SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -7,15 +7,14 @@ license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015 Brendan Hay
+copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    The Google+ API enables developers to build on top of the Google+
-    platform.
+    Builds on top of the Google+ platform.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -41,8 +40,6 @@ library
         , Network.Google.Resource.Plus.Activities.Search
         , Network.Google.Resource.Plus.Comments.Get
         , Network.Google.Resource.Plus.Comments.List
-        , Network.Google.Resource.Plus.Moments.Insert
-        , Network.Google.Resource.Plus.Moments.List
         , Network.Google.Resource.Plus.People.Get
         , Network.Google.Resource.Plus.People.List
         , Network.Google.Resource.Plus.People.ListByActivity
@@ -53,5 +50,5 @@ library
         , Network.Google.Plus.Types.Sum
 
     build-depends:
-          gogol-core == 0.0.1.*
-        , base       >= 4.7 && < 5
+          gogol-core == 0.1.0.*
+        , base       >= 4.7

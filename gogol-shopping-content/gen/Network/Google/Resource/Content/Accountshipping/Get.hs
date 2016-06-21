@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accountshipping.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type AccountshippingGetResource =
 -- | Retrieves the shipping settings of the account.
 --
 -- /See:/ 'accountshippingGet' smart constructor.
-data AccountshippingGet = AccountshippingGet
+data AccountshippingGet = AccountshippingGet'
     { _acccMerchantId :: !(Textual Word64)
     , _acccAccountId  :: !(Textual Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountshippingGet
     -> Word64 -- ^ 'acccAccountId'
     -> AccountshippingGet
 accountshippingGet pAcccMerchantId_ pAcccAccountId_ =
-    AccountshippingGet
+    AccountshippingGet'
     { _acccMerchantId = _Coerce # pAcccMerchantId_
     , _acccAccountId = _Coerce # pAcccAccountId_
     }
@@ -93,7 +93,9 @@ acccAccountId
 
 instance GoogleRequest AccountshippingGet where
         type Rs AccountshippingGet = AccountShipping
-        requestClient AccountshippingGet{..}
+        type Scopes AccountshippingGet =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountshippingGet'{..}
           = go _acccMerchantId _acccAccountId (Just AltJSON)
               shoppingContentService
           where go

@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Routes.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified route resource.
+-- Deletes the specified Route resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.delete@.
 module Network.Google.Resource.Compute.Routes.Delete
@@ -52,10 +52,10 @@ type RoutesDeleteResource =
                  Capture "route" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified route resource.
+-- | Deletes the specified Route resource.
 --
 -- /See:/ 'routesDelete' smart constructor.
-data RoutesDelete = RoutesDelete
+data RoutesDelete = RoutesDelete'
     { _rdProject :: !Text
     , _rdRoute   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,23 +72,26 @@ routesDelete
     -> Text -- ^ 'rdRoute'
     -> RoutesDelete
 routesDelete pRdProject_ pRdRoute_ =
-    RoutesDelete
+    RoutesDelete'
     { _rdProject = pRdProject_
     , _rdRoute = pRdRoute_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 rdProject :: Lens' RoutesDelete Text
 rdProject
   = lens _rdProject (\ s a -> s{_rdProject = a})
 
--- | Name of the route resource to delete.
+-- | Name of the Route resource to delete.
 rdRoute :: Lens' RoutesDelete Text
 rdRoute = lens _rdRoute (\ s a -> s{_rdRoute = a})
 
 instance GoogleRequest RoutesDelete where
         type Rs RoutesDelete = Operation
-        requestClient RoutesDelete{..}
+        type Scopes RoutesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient RoutesDelete'{..}
           = go _rdProject _rdRoute (Just AltJSON)
               computeService
           where go

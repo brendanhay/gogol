@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.ObjectAccessControls.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ObjectAccessControlsGetResource =
 -- | Returns the ACL entry for the specified entity on the specified object.
 --
 -- /See:/ 'objectAccessControlsGet' smart constructor.
-data ObjectAccessControlsGet = ObjectAccessControlsGet
+data ObjectAccessControlsGet = ObjectAccessControlsGet'
     { _oacgBucket     :: !Text
     , _oacgObject     :: !Text
     , _oacgEntity     :: !Text
@@ -84,7 +84,7 @@ objectAccessControlsGet
     -> Text -- ^ 'oacgEntity'
     -> ObjectAccessControlsGet
 objectAccessControlsGet pOacgBucket_ pOacgObject_ pOacgEntity_ =
-    ObjectAccessControlsGet
+    ObjectAccessControlsGet'
     { _oacgBucket = pOacgBucket_
     , _oacgObject = pOacgObject_
     , _oacgEntity = pOacgEntity_
@@ -119,7 +119,10 @@ oacgGeneration
 
 instance GoogleRequest ObjectAccessControlsGet where
         type Rs ObjectAccessControlsGet = ObjectAccessControl
-        requestClient ObjectAccessControlsGet{..}
+        type Scopes ObjectAccessControlsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient ObjectAccessControlsGet'{..}
           = go _oacgBucket _oacgObject _oacgEntity
               _oacgGeneration
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Accounts.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountsUpdate' request conforms to.
 type AccountsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
@@ -54,7 +54,7 @@ type AccountsUpdateResource =
 -- | Updates an existing account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate
+data AccountsUpdate = AccountsUpdate'
     { _auuProFileId :: !(Textual Int64)
     , _auuPayload   :: !Account
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsUpdate
     -> Account -- ^ 'auuPayload'
     -> AccountsUpdate
 accountsUpdate pAuuProFileId_ pAuuPayload_ =
-    AccountsUpdate
+    AccountsUpdate'
     { _auuProFileId = _Coerce # pAuuProFileId_
     , _auuPayload = pAuuPayload_
     }
@@ -89,7 +89,9 @@ auuPayload
 
 instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
-        requestClient AccountsUpdate{..}
+        type Scopes AccountsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountsUpdate'{..}
           = go _auuProFileId (Just AltJSON) _auuPayload
               dFAReportingService
           where go

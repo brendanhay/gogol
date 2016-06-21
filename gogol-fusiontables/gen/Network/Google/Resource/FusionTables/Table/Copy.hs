@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Table.Copy
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type TableCopyResource =
 -- | Copies a table.
 --
 -- /See:/ 'tableCopy' smart constructor.
-data TableCopy = TableCopy
+data TableCopy = TableCopy'
     { _tcTableId          :: !Text
     , _tcCopyPresentation :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ tableCopy
     :: Text -- ^ 'tcTableId'
     -> TableCopy
 tableCopy pTcTableId_ =
-    TableCopy
+    TableCopy'
     { _tcTableId = pTcTableId_
     , _tcCopyPresentation = Nothing
     }
@@ -88,7 +88,10 @@ tcCopyPresentation
 
 instance GoogleRequest TableCopy where
         type Rs TableCopy = Table
-        requestClient TableCopy{..}
+        type Scopes TableCopy =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient TableCopy'{..}
           = go _tcTableId _tcCopyPresentation (Just AltJSON)
               fusionTablesService
           where go

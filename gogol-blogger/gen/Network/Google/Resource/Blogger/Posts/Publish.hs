@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Posts.Publish
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type PostsPublishResource =
 -- publishDate parameter.
 --
 -- /See:/ 'postsPublish' smart constructor.
-data PostsPublish = PostsPublish
+data PostsPublish = PostsPublish'
     { _pppPublishDate :: !(Maybe DateTime')
     , _pppBlogId      :: !Text
     , _pppPostId      :: !Text
@@ -79,7 +79,7 @@ postsPublish
     -> Text -- ^ 'pppPostId'
     -> PostsPublish
 postsPublish pPppBlogId_ pPppPostId_ =
-    PostsPublish
+    PostsPublish'
     { _pppPublishDate = Nothing
     , _pppBlogId = pPppBlogId_
     , _pppPostId = pPppPostId_
@@ -107,7 +107,9 @@ pppPostId
 
 instance GoogleRequest PostsPublish where
         type Rs PostsPublish = Post'
-        requestClient PostsPublish{..}
+        type Scopes PostsPublish =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PostsPublish'{..}
           = go _pppBlogId _pppPostId _pppPublishDate
               (Just AltJSON)
               bloggerService

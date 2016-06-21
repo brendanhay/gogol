@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.BackendServices.GetHealth
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type BackendServicesGetHealthResource =
 -- | Gets the most recent health check results for this BackendService.
 --
 -- /See:/ 'backendServicesGetHealth' smart constructor.
-data BackendServicesGetHealth = BackendServicesGetHealth
+data BackendServicesGetHealth = BackendServicesGetHealth'
     { _bsghProject        :: !Text
     , _bsghPayload        :: !ResourceGroupReference
     , _bsghBackendService :: !Text
@@ -80,7 +80,7 @@ backendServicesGetHealth
     -> Text -- ^ 'bsghBackendService'
     -> BackendServicesGetHealth
 backendServicesGetHealth pBsghProject_ pBsghPayload_ pBsghBackendService_ =
-    BackendServicesGetHealth
+    BackendServicesGetHealth'
     { _bsghProject = pBsghProject_
     , _bsghPayload = pBsghPayload_
     , _bsghBackendService = pBsghBackendService_
@@ -105,7 +105,11 @@ bsghBackendService
 instance GoogleRequest BackendServicesGetHealth where
         type Rs BackendServicesGetHealth =
              BackendServiceGroupHealth
-        requestClient BackendServicesGetHealth{..}
+        type Scopes BackendServicesGetHealth =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient BackendServicesGetHealth'{..}
           = go _bsghProject _bsghBackendService (Just AltJSON)
               _bsghPayload
               computeService

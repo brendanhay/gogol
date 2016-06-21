@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.TransferOperations.Resume
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type TransferOperationsResumeResource =
 -- | Resumes a transfer operation that is paused.
 --
 -- /See:/ 'transferOperationsResume' smart constructor.
-data TransferOperationsResume = TransferOperationsResume
+data TransferOperationsResume = TransferOperationsResume'
     { _torXgafv          :: !(Maybe Text)
     , _torUploadProtocol :: !(Maybe Text)
     , _torPp             :: !Bool
@@ -104,7 +104,7 @@ transferOperationsResume
     -> Text -- ^ 'torName'
     -> TransferOperationsResume
 transferOperationsResume pTorPayload_ pTorName_ =
-    TransferOperationsResume
+    TransferOperationsResume'
     { _torXgafv = Nothing
     , _torUploadProtocol = Nothing
     , _torPp = True
@@ -164,7 +164,9 @@ torCallback
 
 instance GoogleRequest TransferOperationsResume where
         type Rs TransferOperationsResume = Empty
-        requestClient TransferOperationsResume{..}
+        type Scopes TransferOperationsResume =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TransferOperationsResume'{..}
           = go _torName _torXgafv _torUploadProtocol
               (Just _torPp)
               _torAccessToken

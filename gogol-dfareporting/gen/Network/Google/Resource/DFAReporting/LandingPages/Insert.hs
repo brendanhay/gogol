@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.LandingPages.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'LandingPagesInsert' request conforms to.
 type LandingPagesInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -58,7 +58,7 @@ type LandingPagesInsertResource =
 -- | Inserts a new landing page for the specified campaign.
 --
 -- /See:/ 'landingPagesInsert' smart constructor.
-data LandingPagesInsert = LandingPagesInsert
+data LandingPagesInsert = LandingPagesInsert'
     { _lpiCampaignId :: !(Textual Int64)
     , _lpiProFileId  :: !(Textual Int64)
     , _lpiPayload    :: !LandingPage
@@ -79,7 +79,7 @@ landingPagesInsert
     -> LandingPage -- ^ 'lpiPayload'
     -> LandingPagesInsert
 landingPagesInsert pLpiCampaignId_ pLpiProFileId_ pLpiPayload_ =
-    LandingPagesInsert
+    LandingPagesInsert'
     { _lpiCampaignId = _Coerce # pLpiCampaignId_
     , _lpiProFileId = _Coerce # pLpiProFileId_
     , _lpiPayload = pLpiPayload_
@@ -105,7 +105,9 @@ lpiPayload
 
 instance GoogleRequest LandingPagesInsert where
         type Rs LandingPagesInsert = LandingPage
-        requestClient LandingPagesInsert{..}
+        type Scopes LandingPagesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient LandingPagesInsert'{..}
           = go _lpiProFileId _lpiCampaignId (Just AltJSON)
               _lpiPayload
               dFAReportingService

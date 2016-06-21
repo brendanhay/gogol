@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -75,7 +75,7 @@ type UsersListResource =
 -- | Retrieve either deleted users or all users in a domain (paginated)
 --
 -- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
+data UsersList = UsersList'
     { _ulEvent           :: !(Maybe UsersListEvent)
     , _ulOrderBy         :: !(Maybe UsersListOrderBy)
     , _ulViewType        :: !UsersListViewType
@@ -120,7 +120,7 @@ data UsersList = UsersList
 usersList
     :: UsersList
 usersList =
-    UsersList
+    UsersList'
     { _ulEvent = Nothing
     , _ulOrderBy = Nothing
     , _ulViewType = AdminView
@@ -202,7 +202,10 @@ ulMaxResults
 
 instance GoogleRequest UsersList where
         type Rs UsersList = Users
-        requestClient UsersList{..}
+        type Scopes UsersList =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
+        requestClient UsersList'{..}
           = go _ulEvent _ulOrderBy (Just _ulViewType)
               _ulCustomFieldMask
               _ulDomain

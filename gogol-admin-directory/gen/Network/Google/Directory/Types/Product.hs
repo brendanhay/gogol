@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.Directory.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | JSON template for verification codes in Directory API.
 --
 -- /See:/ 'verificationCode' smart constructor.
-data VerificationCode = VerificationCode
+data VerificationCode = VerificationCode'
     { _vcVerificationCode :: !(Maybe Text)
     , _vcEtag             :: !(Maybe Text)
     , _vcKind             :: !Text
@@ -44,7 +44,7 @@ data VerificationCode = VerificationCode
 verificationCode
     :: VerificationCode
 verificationCode =
-    VerificationCode
+    VerificationCode'
     { _vcVerificationCode = Nothing
     , _vcEtag = Nothing
     , _vcKind = "admin#directory#verificationCode"
@@ -75,13 +75,13 @@ instance FromJSON VerificationCode where
         parseJSON
           = withObject "VerificationCode"
               (\ o ->
-                 VerificationCode <$>
+                 VerificationCode' <$>
                    (o .:? "verificationCode") <*> (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#verificationCode")
                      <*> (o .:? "userId"))
 
 instance ToJSON VerificationCode where
-        toJSON VerificationCode{..}
+        toJSON VerificationCode'{..}
           = object
               (catMaybes
                  [("verificationCode" .=) <$> _vcVerificationCode,
@@ -91,7 +91,7 @@ instance ToJSON VerificationCode where
 -- | JSON template for Org Unit resource in Directory API.
 --
 -- /See:/ 'orgUnit' smart constructor.
-data OrgUnit = OrgUnit
+data OrgUnit = OrgUnit'
     { _ouEtag              :: !(Maybe Text)
     , _ouParentOrgUnitPath :: !(Maybe Text)
     , _ouKind              :: !Text
@@ -127,7 +127,7 @@ data OrgUnit = OrgUnit
 orgUnit
     :: OrgUnit
 orgUnit =
-    OrgUnit
+    OrgUnit'
     { _ouEtag = Nothing
     , _ouParentOrgUnitPath = Nothing
     , _ouKind = "admin#directory#orgUnit"
@@ -190,7 +190,7 @@ instance FromJSON OrgUnit where
         parseJSON
           = withObject "OrgUnit"
               (\ o ->
-                 OrgUnit <$>
+                 OrgUnit' <$>
                    (o .:? "etag") <*> (o .:? "parentOrgUnitPath") <*>
                      (o .:? "kind" .!= "admin#directory#orgUnit")
                      <*> (o .:? "orgUnitPath")
@@ -201,7 +201,7 @@ instance FromJSON OrgUnit where
                      <*> (o .:? "orgUnitId"))
 
 instance ToJSON OrgUnit where
-        toJSON OrgUnit{..}
+        toJSON OrgUnit'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _ouEtag,
@@ -218,7 +218,7 @@ instance ToJSON OrgUnit where
 -- Directory API.
 --
 -- /See:/ 'userMakeAdmin' smart constructor.
-newtype UserMakeAdmin = UserMakeAdmin
+newtype UserMakeAdmin = UserMakeAdmin'
     { _umaStatus :: Maybe Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -230,7 +230,7 @@ newtype UserMakeAdmin = UserMakeAdmin
 userMakeAdmin
     :: UserMakeAdmin
 userMakeAdmin =
-    UserMakeAdmin
+    UserMakeAdmin'
     { _umaStatus = Nothing
     }
 
@@ -242,16 +242,16 @@ umaStatus
 instance FromJSON UserMakeAdmin where
         parseJSON
           = withObject "UserMakeAdmin"
-              (\ o -> UserMakeAdmin <$> (o .:? "status"))
+              (\ o -> UserMakeAdmin' <$> (o .:? "status"))
 
 instance ToJSON UserMakeAdmin where
-        toJSON UserMakeAdmin{..}
+        toJSON UserMakeAdmin'{..}
           = object (catMaybes [("status" .=) <$> _umaStatus])
 
 -- | JSON template for About (notes) of a user in Directory API.
 --
 -- /See:/ 'userAbout' smart constructor.
-data UserAbout = UserAbout
+data UserAbout = UserAbout'
     { _uaValue       :: !(Maybe Text)
     , _uaContentType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -266,7 +266,7 @@ data UserAbout = UserAbout
 userAbout
     :: UserAbout
 userAbout =
-    UserAbout
+    UserAbout'
     { _uaValue = Nothing
     , _uaContentType = Nothing
     }
@@ -287,11 +287,11 @@ instance FromJSON UserAbout where
         parseJSON
           = withObject "UserAbout"
               (\ o ->
-                 UserAbout <$>
+                 UserAbout' <$>
                    (o .:? "value") <*> (o .:? "contentType"))
 
 instance ToJSON UserAbout where
-        toJSON UserAbout{..}
+        toJSON UserAbout'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _uaValue,
@@ -300,7 +300,7 @@ instance ToJSON UserAbout where
 -- | JSON response template for List privileges operation in Directory API.
 --
 -- /See:/ 'privileges' smart constructor.
-data Privileges = Privileges
+data Privileges = Privileges'
     { _pEtag  :: !(Maybe Text)
     , _pKind  :: !Text
     , _pItems :: !(Maybe [Privilege])
@@ -318,7 +318,7 @@ data Privileges = Privileges
 privileges
     :: Privileges
 privileges =
-    Privileges
+    Privileges'
     { _pEtag = Nothing
     , _pKind = "admin#directory#privileges"
     , _pItems = Nothing
@@ -342,13 +342,13 @@ instance FromJSON Privileges where
         parseJSON
           = withObject "Privileges"
               (\ o ->
-                 Privileges <$>
+                 Privileges' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#privileges")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Privileges where
-        toJSON Privileges{..}
+        toJSON Privileges'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _pEtag, Just ("kind" .= _pKind),
@@ -357,7 +357,7 @@ instance ToJSON Privileges where
 -- | JSON response template for List Groups operation in Directory API.
 --
 -- /See:/ 'groups' smart constructor.
-data Groups = Groups
+data Groups = Groups'
     { _gGroups        :: !(Maybe [Group])
     , _gEtag          :: !(Maybe Text)
     , _gNextPageToken :: !(Maybe Text)
@@ -378,7 +378,7 @@ data Groups = Groups
 groups
     :: Groups
 groups =
-    Groups
+    Groups'
     { _gGroups = Nothing
     , _gEtag = Nothing
     , _gNextPageToken = Nothing
@@ -409,13 +409,13 @@ instance FromJSON Groups where
         parseJSON
           = withObject "Groups"
               (\ o ->
-                 Groups <$>
+                 Groups' <$>
                    (o .:? "groups" .!= mempty) <*> (o .:? "etag") <*>
                      (o .:? "nextPageToken")
                      <*> (o .:? "kind" .!= "admin#directory#groups"))
 
 instance ToJSON Groups where
-        toJSON Groups{..}
+        toJSON Groups'{..}
           = object
               (catMaybes
                  [("groups" .=) <$> _gGroups, ("etag" .=) <$> _gEtag,
@@ -426,7 +426,7 @@ instance ToJSON Groups where
 -- API.
 --
 -- /See:/ 'roleAssignments' smart constructor.
-data RoleAssignments = RoleAssignments
+data RoleAssignments = RoleAssignments'
     { _raEtag          :: !(Maybe Text)
     , _raNextPageToken :: !(Maybe Text)
     , _raKind          :: !Text
@@ -447,7 +447,7 @@ data RoleAssignments = RoleAssignments
 roleAssignments
     :: RoleAssignments
 roleAssignments =
-    RoleAssignments
+    RoleAssignments'
     { _raEtag = Nothing
     , _raNextPageToken = Nothing
     , _raKind = "admin#directory#roleAssignments"
@@ -478,13 +478,13 @@ instance FromJSON RoleAssignments where
         parseJSON
           = withObject "RoleAssignments"
               (\ o ->
-                 RoleAssignments <$>
+                 RoleAssignments' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "admin#directory#roleAssignments")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON RoleAssignments where
-        toJSON RoleAssignments{..}
+        toJSON RoleAssignments'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _raEtag,
@@ -494,7 +494,7 @@ instance ToJSON RoleAssignments where
 -- | JSON template for privilege resource in Directory API.
 --
 -- /See:/ 'privilege' smart constructor.
-data Privilege = Privilege
+data Privilege = Privilege'
     { _priEtag            :: !(Maybe Text)
     , _priIsOuScopable    :: !(Maybe Bool)
     , _priKind            :: !Text
@@ -524,7 +524,7 @@ data Privilege = Privilege
 privilege
     :: Privilege
 privilege =
-    Privilege
+    Privilege'
     { _priEtag = Nothing
     , _priIsOuScopable = Nothing
     , _priKind = "admin#directory#privilege"
@@ -579,7 +579,7 @@ instance FromJSON Privilege where
         parseJSON
           = withObject "Privilege"
               (\ o ->
-                 Privilege <$>
+                 Privilege' <$>
                    (o .:? "etag") <*> (o .:? "isOuScopable") <*>
                      (o .:? "kind" .!= "admin#directory#privilege")
                      <*> (o .:? "serviceName")
@@ -588,7 +588,7 @@ instance FromJSON Privilege where
                      <*> (o .:? "childPrivileges" .!= mempty))
 
 instance ToJSON Privilege where
-        toJSON Privilege{..}
+        toJSON Privilege'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _priEtag,
@@ -602,7 +602,7 @@ instance ToJSON Privilege where
 -- | JSON response template for List roles operation in Directory API.
 --
 -- /See:/ 'roles' smart constructor.
-data Roles = Roles
+data Roles = Roles'
     { _rEtag          :: !(Maybe Text)
     , _rNextPageToken :: !(Maybe Text)
     , _rKind          :: !Text
@@ -623,7 +623,7 @@ data Roles = Roles
 roles
     :: Roles
 roles =
-    Roles
+    Roles'
     { _rEtag = Nothing
     , _rNextPageToken = Nothing
     , _rKind = "admin#directory#roles"
@@ -653,13 +653,13 @@ instance FromJSON Roles where
         parseJSON
           = withObject "Roles"
               (\ o ->
-                 Roles <$>
+                 Roles' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "admin#directory#roles")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Roles where
-        toJSON Roles{..}
+        toJSON Roles'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _rEtag,
@@ -669,7 +669,7 @@ instance ToJSON Roles where
 -- | JSON template for address.
 --
 -- /See:/ 'userAddress' smart constructor.
-data UserAddress = UserAddress
+data UserAddress = UserAddress'
     { _uaStreetAddress      :: !(Maybe Text)
     , _uaPoBox              :: !(Maybe Text)
     , _uaCountry            :: !(Maybe Text)
@@ -717,7 +717,7 @@ data UserAddress = UserAddress
 userAddress
     :: UserAddress
 userAddress =
-    UserAddress
+    UserAddress'
     { _uaStreetAddress = Nothing
     , _uaPoBox = Nothing
     , _uaCountry = Nothing
@@ -810,7 +810,7 @@ instance FromJSON UserAddress where
         parseJSON
           = withObject "UserAddress"
               (\ o ->
-                 UserAddress <$>
+                 UserAddress' <$>
                    (o .:? "streetAddress") <*> (o .:? "poBox") <*>
                      (o .:? "country")
                      <*> (o .:? "postalCode")
@@ -825,7 +825,7 @@ instance FromJSON UserAddress where
                      <*> (o .:? "sourceIsStructured"))
 
 instance ToJSON UserAddress where
-        toJSON UserAddress{..}
+        toJSON UserAddress'{..}
           = object
               (catMaybes
                  [("streetAddress" .=) <$> _uaStreetAddress,
@@ -844,7 +844,7 @@ instance ToJSON UserAddress where
 -- | JSON template for postal address of a customer.
 --
 -- /See:/ 'customerPostalAddress' smart constructor.
-data CustomerPostalAddress = CustomerPostalAddress
+data CustomerPostalAddress = CustomerPostalAddress'
     { _cpaOrganizationName :: !(Maybe Text)
     , _cpaPostalCode       :: !(Maybe Text)
     , _cpaAddressLine1     :: !(Maybe Text)
@@ -880,7 +880,7 @@ data CustomerPostalAddress = CustomerPostalAddress
 customerPostalAddress
     :: CustomerPostalAddress
 customerPostalAddress =
-    CustomerPostalAddress
+    CustomerPostalAddress'
     { _cpaOrganizationName = Nothing
     , _cpaPostalCode = Nothing
     , _cpaAddressLine1 = Nothing
@@ -954,7 +954,7 @@ instance FromJSON CustomerPostalAddress where
         parseJSON
           = withObject "CustomerPostalAddress"
               (\ o ->
-                 CustomerPostalAddress <$>
+                 CustomerPostalAddress' <$>
                    (o .:? "organizationName") <*> (o .:? "postalCode")
                      <*> (o .:? "addressLine1")
                      <*> (o .:? "locality")
@@ -965,7 +965,7 @@ instance FromJSON CustomerPostalAddress where
                      <*> (o .:? "addressLine3"))
 
 instance ToJSON CustomerPostalAddress where
-        toJSON CustomerPostalAddress{..}
+        toJSON CustomerPostalAddress'{..}
           = object
               (catMaybes
                  [("organizationName" .=) <$> _cpaOrganizationName,
@@ -981,7 +981,7 @@ instance ToJSON CustomerPostalAddress where
 -- | JSON template for roleAssignment resource in Directory API.
 --
 -- /See:/ 'roleAssignment' smart constructor.
-data RoleAssignment = RoleAssignment
+data RoleAssignment = RoleAssignment'
     { _rolEtag             :: !(Maybe Text)
     , _rolScopeType        :: !(Maybe Text)
     , _rolKind             :: !Text
@@ -1011,7 +1011,7 @@ data RoleAssignment = RoleAssignment
 roleAssignment
     :: RoleAssignment
 roleAssignment =
-    RoleAssignment
+    RoleAssignment'
     { _rolEtag = Nothing
     , _rolScopeType = Nothing
     , _rolKind = "admin#directory#roleAssignment"
@@ -1065,7 +1065,7 @@ instance FromJSON RoleAssignment where
         parseJSON
           = withObject "RoleAssignment"
               (\ o ->
-                 RoleAssignment <$>
+                 RoleAssignment' <$>
                    (o .:? "etag") <*> (o .:? "scopeType") <*>
                      (o .:? "kind" .!= "admin#directory#roleAssignment")
                      <*> (o .:? "assignedTo")
@@ -1074,7 +1074,7 @@ instance FromJSON RoleAssignment where
                      <*> (o .:? "orgUnitId"))
 
 instance ToJSON RoleAssignment where
-        toJSON RoleAssignment{..}
+        toJSON RoleAssignment'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _rolEtag,
@@ -1088,7 +1088,7 @@ instance ToJSON RoleAssignment where
 -- | JSON template for Group resource in Directory API.
 --
 -- /See:/ 'group'' smart constructor.
-data Group = Group
+data Group = Group'
     { _groEmail              :: !(Maybe Text)
     , _groEtag               :: !(Maybe Text)
     , _groDirectMembersCount :: !(Maybe (Textual Int64))
@@ -1127,7 +1127,7 @@ data Group = Group
 group'
     :: Group
 group' =
-    Group
+    Group'
     { _groEmail = Nothing
     , _groEtag = Nothing
     , _groDirectMembersCount = Nothing
@@ -1198,7 +1198,7 @@ instance FromJSON Group where
         parseJSON
           = withObject "Group"
               (\ o ->
-                 Group <$>
+                 Group' <$>
                    (o .:? "email") <*> (o .:? "etag") <*>
                      (o .:? "directMembersCount")
                      <*> (o .:? "kind" .!= "admin#directory#group")
@@ -1210,7 +1210,7 @@ instance FromJSON Group where
                      <*> (o .:? "description"))
 
 instance ToJSON Group where
-        toJSON Group{..}
+        toJSON Group'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _groEmail,
@@ -1227,7 +1227,7 @@ instance ToJSON Group where
 -- | JSON template for Chrome Os Device resource in Directory API.
 --
 -- /See:/ 'chromeOSDevice' smart constructor.
-data ChromeOSDevice = ChromeOSDevice
+data ChromeOSDevice = ChromeOSDevice'
     { _codStatus             :: !(Maybe Text)
     , _codEtag               :: !(Maybe Text)
     , _codAnnotatedUser      :: !(Maybe Text)
@@ -1311,7 +1311,7 @@ data ChromeOSDevice = ChromeOSDevice
 chromeOSDevice
     :: ChromeOSDevice
 chromeOSDevice =
-    ChromeOSDevice
+    ChromeOSDevice'
     { _codStatus = Nothing
     , _codEtag = Nothing
     , _codAnnotatedUser = Nothing
@@ -1488,7 +1488,7 @@ instance FromJSON ChromeOSDevice where
         parseJSON
           = withObject "ChromeOSDevice"
               (\ o ->
-                 ChromeOSDevice <$>
+                 ChromeOSDevice' <$>
                    (o .:? "status") <*> (o .:? "etag") <*>
                      (o .:? "annotatedUser")
                      <*> (o .:? "platformVersion")
@@ -1516,7 +1516,7 @@ instance FromJSON ChromeOSDevice where
                      <*> (o .:? "osVersion"))
 
 instance ToJSON ChromeOSDevice where
-        toJSON ChromeOSDevice{..}
+        toJSON ChromeOSDevice'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _codStatus,
@@ -1548,7 +1548,7 @@ instance ToJSON ChromeOSDevice where
 -- | JSON response template for List Users operation in Apps Directory API.
 --
 -- /See:/ 'users' smart constructor.
-data Users = Users
+data Users = Users'
     { _uEtag          :: !(Maybe Text)
     , _uNextPageToken :: !(Maybe Text)
     , _uUsers         :: !(Maybe [User])
@@ -1572,7 +1572,7 @@ data Users = Users
 users
     :: Users
 users =
-    Users
+    Users'
     { _uEtag = Nothing
     , _uNextPageToken = Nothing
     , _uUsers = Nothing
@@ -1610,14 +1610,14 @@ instance FromJSON Users where
         parseJSON
           = withObject "Users"
               (\ o ->
-                 Users <$>
+                 Users' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "users" .!= mempty)
                      <*> (o .:? "kind" .!= "admin#directory#users")
                      <*> (o .:? "trigger_event"))
 
 instance ToJSON Users where
-        toJSON Users{..}
+        toJSON Users'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _uEtag,
@@ -1628,7 +1628,7 @@ instance ToJSON Users where
 -- | The template that returns individual ASP (Access Code) data.
 --
 -- /See:/ 'asp' smart constructor.
-data Asp = Asp
+data Asp = Asp'
     { _aCreationTime :: !(Maybe (Textual Int64))
     , _aEtag         :: !(Maybe Text)
     , _aCodeId       :: !(Maybe (Textual Int32))
@@ -1658,7 +1658,7 @@ data Asp = Asp
 asp
     :: Asp
 asp =
-    Asp
+    Asp'
     { _aCreationTime = Nothing
     , _aEtag = Nothing
     , _aCodeId = Nothing
@@ -1709,7 +1709,7 @@ instance FromJSON Asp where
         parseJSON
           = withObject "Asp"
               (\ o ->
-                 Asp <$>
+                 Asp' <$>
                    (o .:? "creationTime") <*> (o .:? "etag") <*>
                      (o .:? "codeId")
                      <*> (o .:? "kind" .!= "admin#directory#asp")
@@ -1718,7 +1718,7 @@ instance FromJSON Asp where
                      <*> (o .:? "userKey"))
 
 instance ToJSON Asp where
-        toJSON Asp{..}
+        toJSON Asp'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _aCreationTime,
@@ -1730,7 +1730,7 @@ instance ToJSON Asp where
 -- | JSON response template for List Schema operation in Directory API.
 --
 -- /See:/ 'schemas' smart constructor.
-data Schemas = Schemas
+data Schemas = Schemas'
     { _sEtag    :: !(Maybe Text)
     , _sSchemas :: !(Maybe [Schema])
     , _sKind    :: !Text
@@ -1748,7 +1748,7 @@ data Schemas = Schemas
 schemas
     :: Schemas
 schemas =
-    Schemas
+    Schemas'
     { _sEtag = Nothing
     , _sSchemas = Nothing
     , _sKind = "admin#directory#schemas"
@@ -1773,12 +1773,12 @@ instance FromJSON Schemas where
         parseJSON
           = withObject "Schemas"
               (\ o ->
-                 Schemas <$>
+                 Schemas' <$>
                    (o .:? "etag") <*> (o .:? "schemas" .!= mempty) <*>
                      (o .:? "kind" .!= "admin#directory#schemas"))
 
 instance ToJSON Schemas where
-        toJSON Schemas{..}
+        toJSON Schemas'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _sEtag,
@@ -1788,7 +1788,7 @@ instance ToJSON Schemas where
 -- | Template for a notification resource.
 --
 -- /See:/ 'notification' smart constructor.
-data Notification = Notification
+data Notification = Notification'
     { _nSubject        :: !(Maybe Text)
     , _nEtag           :: !(Maybe Text)
     , _nKind           :: !Text
@@ -1821,7 +1821,7 @@ data Notification = Notification
 notification
     :: Notification
 notification =
-    Notification
+    Notification'
     { _nSubject = Nothing
     , _nEtag = Nothing
     , _nKind = "admin#directory#notification"
@@ -1873,7 +1873,7 @@ instance FromJSON Notification where
         parseJSON
           = withObject "Notification"
               (\ o ->
-                 Notification <$>
+                 Notification' <$>
                    (o .:? "subject") <*> (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#notification")
                      <*> (o .:? "body")
@@ -1883,7 +1883,7 @@ instance FromJSON Notification where
                      <*> (o .:? "sendTime"))
 
 instance ToJSON Notification where
-        toJSON Notification{..}
+        toJSON Notification'{..}
           = object
               (catMaybes
                  [("subject" .=) <$> _nSubject,
@@ -1897,7 +1897,7 @@ instance ToJSON Notification where
 -- | JSON template for instant messenger of an user.
 --
 -- /See:/ 'userIm' smart constructor.
-data UserIm = UserIm
+data UserIm = UserIm'
     { _uiIm             :: !(Maybe Text)
     , _uiProtocol       :: !(Maybe Text)
     , _uiPrimary        :: !(Maybe Bool)
@@ -1924,7 +1924,7 @@ data UserIm = UserIm
 userIm
     :: UserIm
 userIm =
-    UserIm
+    UserIm'
     { _uiIm = Nothing
     , _uiProtocol = Nothing
     , _uiPrimary = Nothing
@@ -1973,7 +1973,7 @@ instance FromJSON UserIm where
         parseJSON
           = withObject "UserIm"
               (\ o ->
-                 UserIm <$>
+                 UserIm' <$>
                    (o .:? "im") <*> (o .:? "protocol") <*>
                      (o .:? "primary")
                      <*> (o .:? "customProtocol")
@@ -1981,7 +1981,7 @@ instance FromJSON UserIm where
                      <*> (o .:? "customType"))
 
 instance ToJSON UserIm where
-        toJSON UserIm{..}
+        toJSON UserIm'{..}
           = object
               (catMaybes
                  [("im" .=) <$> _uiIm,
@@ -1994,7 +1994,7 @@ instance ToJSON UserIm where
 -- | JSON response template for List tokens operation in Directory API.
 --
 -- /See:/ 'tokens' smart constructor.
-data Tokens = Tokens
+data Tokens = Tokens'
     { _tEtag  :: !(Maybe Text)
     , _tKind  :: !Text
     , _tItems :: !(Maybe [Token])
@@ -2012,7 +2012,7 @@ data Tokens = Tokens
 tokens
     :: Tokens
 tokens =
-    Tokens
+    Tokens'
     { _tEtag = Nothing
     , _tKind = "admin#directory#tokenList"
     , _tItems = Nothing
@@ -2036,13 +2036,13 @@ instance FromJSON Tokens where
         parseJSON
           = withObject "Tokens"
               (\ o ->
-                 Tokens <$>
+                 Tokens' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#tokenList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Tokens where
-        toJSON Tokens{..}
+        toJSON Tokens'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _tEtag, Just ("kind" .= _tKind),
@@ -2051,7 +2051,7 @@ instance ToJSON Tokens where
 -- | Custom fields of the user.
 --
 -- /See:/ 'userCustomSchemas' smart constructor.
-newtype UserCustomSchemas = UserCustomSchemas
+newtype UserCustomSchemas = UserCustomSchemas'
     { _ucsAddtional :: HashMap Text UserCustomProperties
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2064,7 +2064,7 @@ userCustomSchemas
     :: HashMap Text UserCustomProperties -- ^ 'ucsAddtional'
     -> UserCustomSchemas
 userCustomSchemas pUcsAddtional_ =
-    UserCustomSchemas
+    UserCustomSchemas'
     { _ucsAddtional = _Coerce # pUcsAddtional_
     }
 
@@ -2076,7 +2076,7 @@ ucsAddtional
 instance FromJSON UserCustomSchemas where
         parseJSON
           = withObject "UserCustomSchemas"
-              (\ o -> UserCustomSchemas <$> (parseJSONObject o))
+              (\ o -> UserCustomSchemas' <$> (parseJSONObject o))
 
 instance ToJSON UserCustomSchemas where
         toJSON = toJSON . _ucsAddtional
@@ -2084,7 +2084,7 @@ instance ToJSON UserCustomSchemas where
 -- | JSON response template to list domain aliases in Directory API.
 --
 -- /See:/ 'domainAliases' smart constructor.
-data DomainAliases = DomainAliases
+data DomainAliases = DomainAliases'
     { _daEtag          :: !(Maybe Text)
     , _daKind          :: !Text
     , _daDomainAliases :: !(Maybe [DomainAlias])
@@ -2102,7 +2102,7 @@ data DomainAliases = DomainAliases
 domainAliases
     :: DomainAliases
 domainAliases =
-    DomainAliases
+    DomainAliases'
     { _daEtag = Nothing
     , _daKind = "admin#directory#domainAliases"
     , _daDomainAliases = Nothing
@@ -2128,13 +2128,13 @@ instance FromJSON DomainAliases where
         parseJSON
           = withObject "DomainAliases"
               (\ o ->
-                 DomainAliases <$>
+                 DomainAliases' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#domainAliases")
                      <*> (o .:? "domainAliases" .!= mempty))
 
 instance ToJSON DomainAliases where
-        toJSON DomainAliases{..}
+        toJSON DomainAliases'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _daEtag, Just ("kind" .= _daKind),
@@ -2143,10 +2143,10 @@ instance ToJSON DomainAliases where
 -- | JSON response template to list aliases in Directory API.
 --
 -- /See:/ 'aliases' smart constructor.
-data Aliases = Aliases
+data Aliases = Aliases'
     { _aliEtag    :: !(Maybe Text)
     , _aliKind    :: !Text
-    , _aliAliases :: !(Maybe [Alias])
+    , _aliAliases :: !(Maybe [JSONValue])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Aliases' with the minimum fields required to make a request.
@@ -2161,7 +2161,7 @@ data Aliases = Aliases
 aliases
     :: Aliases
 aliases =
-    Aliases
+    Aliases'
     { _aliEtag = Nothing
     , _aliKind = "admin#directory#aliases"
     , _aliAliases = Nothing
@@ -2176,7 +2176,7 @@ aliKind :: Lens' Aliases Text
 aliKind = lens _aliKind (\ s a -> s{_aliKind = a})
 
 -- | List of alias objects.
-aliAliases :: Lens' Aliases [Alias]
+aliAliases :: Lens' Aliases [JSONValue]
 aliAliases
   = lens _aliAliases (\ s a -> s{_aliAliases = a}) .
       _Default
@@ -2186,22 +2186,132 @@ instance FromJSON Aliases where
         parseJSON
           = withObject "Aliases"
               (\ o ->
-                 Aliases <$>
+                 Aliases' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#aliases")
                      <*> (o .:? "aliases" .!= mempty))
 
 instance ToJSON Aliases where
-        toJSON Aliases{..}
+        toJSON Aliases'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _aliEtag, Just ("kind" .= _aliKind),
                   ("aliases" .=) <$> _aliAliases])
 
+-- | JSON template for Calendar Resource object in Directory API.
+--
+-- /See:/ 'calendarResource' smart constructor.
+data CalendarResource = CalendarResource'
+    { _crEtags               :: !(Maybe Text)
+    , _crResourceId          :: !(Maybe Text)
+    , _crResourceType        :: !(Maybe Text)
+    , _crResourceName        :: !(Maybe Text)
+    , _crKind                :: !Text
+    , _crResourceEmail       :: !(Maybe Text)
+    , _crResourceDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CalendarResource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crEtags'
+--
+-- * 'crResourceId'
+--
+-- * 'crResourceType'
+--
+-- * 'crResourceName'
+--
+-- * 'crKind'
+--
+-- * 'crResourceEmail'
+--
+-- * 'crResourceDescription'
+calendarResource
+    :: CalendarResource
+calendarResource =
+    CalendarResource'
+    { _crEtags = Nothing
+    , _crResourceId = Nothing
+    , _crResourceType = Nothing
+    , _crResourceName = Nothing
+    , _crKind = "admin#directory#resources#calendars#CalendarResource"
+    , _crResourceEmail = Nothing
+    , _crResourceDescription = Nothing
+    }
+
+-- | ETag of the resource.
+crEtags :: Lens' CalendarResource (Maybe Text)
+crEtags = lens _crEtags (\ s a -> s{_crEtags = a})
+
+-- | The unique ID for the calendar resource.
+crResourceId :: Lens' CalendarResource (Maybe Text)
+crResourceId
+  = lens _crResourceId (\ s a -> s{_crResourceId = a})
+
+-- | The type of the calendar resource. Used for grouping resources in the
+-- calendar user interface.
+crResourceType :: Lens' CalendarResource (Maybe Text)
+crResourceType
+  = lens _crResourceType
+      (\ s a -> s{_crResourceType = a})
+
+-- | The name of the calendar resource. For example, Training Room 1A
+crResourceName :: Lens' CalendarResource (Maybe Text)
+crResourceName
+  = lens _crResourceName
+      (\ s a -> s{_crResourceName = a})
+
+-- | The type of the resource. For calendar resources, the value is
+-- admin#directory#resources#calendars#CalendarResource.
+crKind :: Lens' CalendarResource Text
+crKind = lens _crKind (\ s a -> s{_crKind = a})
+
+-- | The read-only email ID for the calendar resource. Generated as part of
+-- creating a new calendar resource.
+crResourceEmail :: Lens' CalendarResource (Maybe Text)
+crResourceEmail
+  = lens _crResourceEmail
+      (\ s a -> s{_crResourceEmail = a})
+
+-- | The brief description of the calendar resource.
+crResourceDescription :: Lens' CalendarResource (Maybe Text)
+crResourceDescription
+  = lens _crResourceDescription
+      (\ s a -> s{_crResourceDescription = a})
+
+instance FromJSON CalendarResource where
+        parseJSON
+          = withObject "CalendarResource"
+              (\ o ->
+                 CalendarResource' <$>
+                   (o .:? "etags") <*> (o .:? "resourceId") <*>
+                     (o .:? "resourceType")
+                     <*> (o .:? "resourceName")
+                     <*>
+                     (o .:? "kind" .!=
+                        "admin#directory#resources#calendars#CalendarResource")
+                     <*> (o .:? "resourceEmail")
+                     <*> (o .:? "resourceDescription"))
+
+instance ToJSON CalendarResource where
+        toJSON CalendarResource'{..}
+          = object
+              (catMaybes
+                 [("etags" .=) <$> _crEtags,
+                  ("resourceId" .=) <$> _crResourceId,
+                  ("resourceType" .=) <$> _crResourceType,
+                  ("resourceName" .=) <$> _crResourceName,
+                  Just ("kind" .= _crKind),
+                  ("resourceEmail" .=) <$> _crResourceEmail,
+                  ("resourceDescription" .=) <$>
+                    _crResourceDescription])
+
 -- | JSON request template to undelete a user in Directory API.
 --
 -- /See:/ 'userUndelete' smart constructor.
-newtype UserUndelete = UserUndelete
+newtype UserUndelete = UserUndelete'
     { _uuOrgUnitPath :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2213,7 +2323,7 @@ newtype UserUndelete = UserUndelete
 userUndelete
     :: UserUndelete
 userUndelete =
-    UserUndelete
+    UserUndelete'
     { _uuOrgUnitPath = Nothing
     }
 
@@ -2226,17 +2336,17 @@ uuOrgUnitPath
 instance FromJSON UserUndelete where
         parseJSON
           = withObject "UserUndelete"
-              (\ o -> UserUndelete <$> (o .:? "orgUnitPath"))
+              (\ o -> UserUndelete' <$> (o .:? "orgUnitPath"))
 
 instance ToJSON UserUndelete where
-        toJSON UserUndelete{..}
+        toJSON UserUndelete'{..}
           = object
               (catMaybes [("orgUnitPath" .=) <$> _uuOrgUnitPath])
 
 -- | JSON response template for List Members operation in Directory API.
 --
 -- /See:/ 'members' smart constructor.
-data Members = Members
+data Members = Members'
     { _mEtag          :: !(Maybe Text)
     , _mNextPageToken :: !(Maybe Text)
     , _mKind          :: !Text
@@ -2257,7 +2367,7 @@ data Members = Members
 members
     :: Members
 members =
-    Members
+    Members'
     { _mEtag = Nothing
     , _mNextPageToken = Nothing
     , _mKind = "admin#directory#members"
@@ -2289,13 +2399,13 @@ instance FromJSON Members where
         parseJSON
           = withObject "Members"
               (\ o ->
-                 Members <$>
+                 Members' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "admin#directory#members")
                      <*> (o .:? "members" .!= mempty))
 
 instance ToJSON Members where
-        toJSON Members{..}
+        toJSON Members'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _mEtag,
@@ -2306,7 +2416,7 @@ instance ToJSON Members where
 -- | An notification channel used to watch for resource changes.
 --
 -- /See:/ 'channel' smart constructor.
-data Channel = Channel
+data Channel = Channel'
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
@@ -2345,7 +2455,7 @@ data Channel = Channel
 channel
     :: Channel
 channel =
-    Channel
+    Channel'
     { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
@@ -2410,7 +2520,7 @@ instance FromJSON Channel where
         parseJSON
           = withObject "Channel"
               (\ o ->
-                 Channel <$>
+                 Channel' <$>
                    (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
                      (o .:? "kind" .!= "api#channel")
                      <*> (o .:? "expiration")
@@ -2422,7 +2532,7 @@ instance FromJSON Channel where
                      <*> (o .:? "type"))
 
 instance ToJSON Channel where
-        toJSON Channel{..}
+        toJSON Channel'{..}
           = object
               (catMaybes
                  [("resourceUri" .=) <$> _cResourceURI,
@@ -2439,7 +2549,7 @@ instance ToJSON Channel where
 -- API.
 --
 -- /See:/ 'mobileDevices' smart constructor.
-data MobileDevices = MobileDevices
+data MobileDevices = MobileDevices'
     { _mdEtag          :: !(Maybe Text)
     , _mdNextPageToken :: !(Maybe Text)
     , _mdKind          :: !Text
@@ -2460,7 +2570,7 @@ data MobileDevices = MobileDevices
 mobileDevices
     :: MobileDevices
 mobileDevices =
-    MobileDevices
+    MobileDevices'
     { _mdEtag = Nothing
     , _mdNextPageToken = Nothing
     , _mdKind = "admin#directory#mobiledevices"
@@ -2493,13 +2603,13 @@ instance FromJSON MobileDevices where
         parseJSON
           = withObject "MobileDevices"
               (\ o ->
-                 MobileDevices <$>
+                 MobileDevices' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "admin#directory#mobiledevices")
                      <*> (o .:? "mobiledevices" .!= mempty))
 
 instance ToJSON MobileDevices where
-        toJSON MobileDevices{..}
+        toJSON MobileDevices'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _mdEtag,
@@ -2510,7 +2620,7 @@ instance ToJSON MobileDevices where
 -- | JSON template for token resource in Directory API.
 --
 -- /See:/ 'token' smart constructor.
-data Token = Token
+data Token = Token'
     { _tokClientId    :: !(Maybe Text)
     , _tokEtag        :: !(Maybe Text)
     , _tokDisplayText :: !(Maybe Text)
@@ -2543,7 +2653,7 @@ data Token = Token
 token
     :: Token
 token =
-    Token
+    Token'
     { _tokClientId = Nothing
     , _tokEtag = Nothing
     , _tokDisplayText = Nothing
@@ -2601,7 +2711,7 @@ instance FromJSON Token where
         parseJSON
           = withObject "Token"
               (\ o ->
-                 Token <$>
+                 Token' <$>
                    (o .:? "clientId") <*> (o .:? "etag") <*>
                      (o .:? "displayText")
                      <*> (o .:? "kind" .!= "admin#directory#token")
@@ -2611,7 +2721,7 @@ instance FromJSON Token where
                      <*> (o .:? "userKey"))
 
 instance ToJSON Token where
-        toJSON Token{..}
+        toJSON Token'{..}
           = object
               (catMaybes
                  [("clientId" .=) <$> _tokClientId,
@@ -2626,7 +2736,7 @@ instance ToJSON Token where
 -- | JSON template for name of a user in Directory API.
 --
 -- /See:/ 'userName' smart constructor.
-data UserName = UserName
+data UserName = UserName'
     { _unGivenName  :: !(Maybe Text)
     , _unFullName   :: !(Maybe Text)
     , _unFamilyName :: !(Maybe Text)
@@ -2644,7 +2754,7 @@ data UserName = UserName
 userName
     :: UserName
 userName =
-    UserName
+    UserName'
     { _unGivenName = Nothing
     , _unFullName = Nothing
     , _unFamilyName = Nothing
@@ -2669,12 +2779,12 @@ instance FromJSON UserName where
         parseJSON
           = withObject "UserName"
               (\ o ->
-                 UserName <$>
+                 UserName' <$>
                    (o .:? "givenName") <*> (o .:? "fullName") <*>
                      (o .:? "familyName"))
 
 instance ToJSON UserName where
-        toJSON UserName{..}
+        toJSON UserName'{..}
           = object
               (catMaybes
                  [("givenName" .=) <$> _unGivenName,
@@ -2683,7 +2793,7 @@ instance ToJSON UserName where
 
 --
 -- /See:/ 'chromeOSDeviceRecentUsersItem' smart constructor.
-data ChromeOSDeviceRecentUsersItem = ChromeOSDeviceRecentUsersItem
+data ChromeOSDeviceRecentUsersItem = ChromeOSDeviceRecentUsersItem'
     { _codruiEmail :: !(Maybe Text)
     , _codruiType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2698,7 +2808,7 @@ data ChromeOSDeviceRecentUsersItem = ChromeOSDeviceRecentUsersItem
 chromeOSDeviceRecentUsersItem
     :: ChromeOSDeviceRecentUsersItem
 chromeOSDeviceRecentUsersItem =
-    ChromeOSDeviceRecentUsersItem
+    ChromeOSDeviceRecentUsersItem'
     { _codruiEmail = Nothing
     , _codruiType = Nothing
     }
@@ -2717,11 +2827,11 @@ instance FromJSON ChromeOSDeviceRecentUsersItem where
         parseJSON
           = withObject "ChromeOSDeviceRecentUsersItem"
               (\ o ->
-                 ChromeOSDeviceRecentUsersItem <$>
+                 ChromeOSDeviceRecentUsersItem' <$>
                    (o .:? "email") <*> (o .:? "type"))
 
 instance ToJSON ChromeOSDeviceRecentUsersItem where
-        toJSON ChromeOSDeviceRecentUsersItem{..}
+        toJSON ChromeOSDeviceRecentUsersItem'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _codruiEmail,
@@ -2730,7 +2840,7 @@ instance ToJSON ChromeOSDeviceRecentUsersItem where
 -- | JSON template for Domain Alias object in Directory API.
 --
 -- /See:/ 'domainAlias' smart constructor.
-data DomainAlias = DomainAlias
+data DomainAlias = DomainAlias'
     { _dCreationTime     :: !(Maybe (Textual Int64))
     , _dEtag             :: !(Maybe Text)
     , _dKind             :: !Text
@@ -2757,7 +2867,7 @@ data DomainAlias = DomainAlias
 domainAlias
     :: DomainAlias
 domainAlias =
-    DomainAlias
+    DomainAlias'
     { _dCreationTime = Nothing
     , _dEtag = Nothing
     , _dKind = "admin#directory#domainAlias"
@@ -2803,7 +2913,7 @@ instance FromJSON DomainAlias where
         parseJSON
           = withObject "DomainAlias"
               (\ o ->
-                 DomainAlias <$>
+                 DomainAlias' <$>
                    (o .:? "creationTime") <*> (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#domainAlias")
                      <*> (o .:? "verified")
@@ -2811,7 +2921,7 @@ instance FromJSON DomainAlias where
                      <*> (o .:? "parentDomainName"))
 
 instance ToJSON DomainAlias where
-        toJSON DomainAlias{..}
+        toJSON DomainAlias'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _dCreationTime,
@@ -2823,7 +2933,7 @@ instance ToJSON DomainAlias where
 -- | JSON template for Alias object in Directory API.
 --
 -- /See:/ 'alias' smart constructor.
-data Alias = Alias
+data Alias = Alias'
     { _aaEtag         :: !(Maybe Text)
     , _aaKind         :: !Text
     , _aaAlias        :: !(Maybe Text)
@@ -2847,7 +2957,7 @@ data Alias = Alias
 alias
     :: Alias
 alias =
-    Alias
+    Alias'
     { _aaEtag = Nothing
     , _aaKind = "admin#directory#alias"
     , _aaAlias = Nothing
@@ -2881,7 +2991,7 @@ instance FromJSON Alias where
         parseJSON
           = withObject "Alias"
               (\ o ->
-                 Alias <$>
+                 Alias' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#alias")
                      <*> (o .:? "alias")
@@ -2889,7 +2999,7 @@ instance FromJSON Alias where
                      <*> (o .:? "primaryEmail"))
 
 instance ToJSON Alias where
-        toJSON Alias{..}
+        toJSON Alias'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _aaEtag, Just ("kind" .= _aaKind),
@@ -2899,7 +3009,7 @@ instance ToJSON Alias where
 -- | JSON template for Schema resource in Directory API.
 --
 -- /See:/ 'schema' smart constructor.
-data Schema = Schema
+data Schema = Schema'
     { _schEtag       :: !(Maybe Text)
     , _schKind       :: !Text
     , _schSchemaName :: !(Maybe Text)
@@ -2923,7 +3033,7 @@ data Schema = Schema
 schema
     :: Schema
 schema =
-    Schema
+    Schema'
     { _schEtag = Nothing
     , _schKind = "admin#directory#schema"
     , _schSchemaName = Nothing
@@ -2961,7 +3071,7 @@ instance FromJSON Schema where
         parseJSON
           = withObject "Schema"
               (\ o ->
-                 Schema <$>
+                 Schema' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#schema")
                      <*> (o .:? "schemaName")
@@ -2969,7 +3079,7 @@ instance FromJSON Schema where
                      <*> (o .:? "fields" .!= mempty))
 
 instance ToJSON Schema where
-        toJSON Schema{..}
+        toJSON Schema'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _schEtag, Just ("kind" .= _schKind),
@@ -2980,7 +3090,7 @@ instance ToJSON Schema where
 -- | JSON template for User object in Directory API.
 --
 -- /See:/ 'user' smart constructor.
-data User = User
+data User = User'
     { _useCreationTime               :: !(Maybe DateTime')
     , _useLastLoginTime              :: !(Maybe DateTime')
     , _useThumbnailPhotoEtag         :: !(Maybe Text)
@@ -3094,7 +3204,7 @@ data User = User
 user
     :: User
 user =
-    User
+    User'
     { _useCreationTime = Nothing
     , _useLastLoginTime = Nothing
     , _useThumbnailPhotoEtag = Nothing
@@ -3322,7 +3432,7 @@ instance FromJSON User where
         parseJSON
           = withObject "User"
               (\ o ->
-                 User <$>
+                 User' <$>
                    (o .:? "creationTime") <*> (o .:? "lastLoginTime")
                      <*> (o .:? "thumbnailPhotoEtag")
                      <*> (o .:? "etag")
@@ -3359,7 +3469,7 @@ instance FromJSON User where
                      <*> (o .:? "suspensionReason"))
 
 instance ToJSON User where
-        toJSON User{..}
+        toJSON User'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _useCreationTime,
@@ -3400,8 +3510,8 @@ instance ToJSON User where
 
 -- | JSON template for role resource in Directory API.
 --
--- /See:/ 'role' smart constructor.
-data Role = Role
+-- /See:/ 'role'' smart constructor.
+data Role = Role'
     { _rrEtag             :: !(Maybe Text)
     , _rrKind             :: !Text
     , _rrRoleName         :: !(Maybe Text)
@@ -3431,10 +3541,10 @@ data Role = Role
 -- * 'rrIsSuperAdminRole'
 --
 -- * 'rrRolePrivileges'
-role
+role'
     :: Role
-role =
-    Role
+role' =
+    Role'
     { _rrEtag = Nothing
     , _rrKind = "admin#directory#role"
     , _rrRoleName = Nothing
@@ -3494,7 +3604,7 @@ instance FromJSON Role where
         parseJSON
           = withObject "Role"
               (\ o ->
-                 Role <$>
+                 Role' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#role")
                      <*> (o .:? "roleName")
@@ -3505,7 +3615,7 @@ instance FromJSON Role where
                      <*> (o .:? "rolePrivileges" .!= mempty))
 
 instance ToJSON Role where
-        toJSON Role{..}
+        toJSON Role'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _rrEtag, Just ("kind" .= _rrKind),
@@ -3519,7 +3629,7 @@ instance ToJSON Role where
 -- | JSON template for Customer Resource object in Directory API.
 --
 -- /See:/ 'customer' smart constructor.
-data Customer = Customer
+data Customer = Customer'
     { _cusEtag                 :: !(Maybe Text)
     , _cusKind                 :: !Text
     , _cusAlternateEmail       :: !(Maybe Text)
@@ -3555,7 +3665,7 @@ data Customer = Customer
 customer
     :: Customer
 customer =
-    Customer
+    Customer'
     { _cusEtag = Nothing
     , _cusKind = "admin#directory#customer"
     , _cusAlternateEmail = Nothing
@@ -3621,7 +3731,7 @@ instance FromJSON Customer where
         parseJSON
           = withObject "Customer"
               (\ o ->
-                 Customer <$>
+                 Customer' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#customer")
                      <*> (o .:? "alternateEmail")
@@ -3633,7 +3743,7 @@ instance FromJSON Customer where
                      <*> (o .:? "postalAddress"))
 
 instance ToJSON Customer where
-        toJSON Customer{..}
+        toJSON Customer'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _cusEtag, Just ("kind" .= _cusKind),
@@ -3648,7 +3758,7 @@ instance ToJSON Customer where
 
 --
 -- /See:/ 'mobileDeviceApplicationsItem' smart constructor.
-data MobileDeviceApplicationsItem = MobileDeviceApplicationsItem
+data MobileDeviceApplicationsItem = MobileDeviceApplicationsItem'
     { _mdaiVersionCode :: !(Maybe (Textual Int32))
     , _mdaiVersionName :: !(Maybe Text)
     , _mdaiPackageName :: !(Maybe Text)
@@ -3672,7 +3782,7 @@ data MobileDeviceApplicationsItem = MobileDeviceApplicationsItem
 mobileDeviceApplicationsItem
     :: MobileDeviceApplicationsItem
 mobileDeviceApplicationsItem =
-    MobileDeviceApplicationsItem
+    MobileDeviceApplicationsItem'
     { _mdaiVersionCode = Nothing
     , _mdaiVersionName = Nothing
     , _mdaiPackageName = Nothing
@@ -3717,14 +3827,14 @@ instance FromJSON MobileDeviceApplicationsItem where
         parseJSON
           = withObject "MobileDeviceApplicationsItem"
               (\ o ->
-                 MobileDeviceApplicationsItem <$>
+                 MobileDeviceApplicationsItem' <$>
                    (o .:? "versionCode") <*> (o .:? "versionName") <*>
                      (o .:? "packageName")
                      <*> (o .:? "displayName")
                      <*> (o .:? "permission" .!= mempty))
 
 instance ToJSON MobileDeviceApplicationsItem where
-        toJSON MobileDeviceApplicationsItem{..}
+        toJSON MobileDeviceApplicationsItem'{..}
           = object
               (catMaybes
                  [("versionCode" .=) <$> _mdaiVersionCode,
@@ -3737,7 +3847,7 @@ instance ToJSON MobileDeviceApplicationsItem where
 -- Directory API.
 --
 -- /See:/ 'orgUnits' smart constructor.
-data OrgUnits = OrgUnits
+data OrgUnits = OrgUnits'
     { _oEtag              :: !(Maybe Text)
     , _oKind              :: !Text
     , _oOrganizationUnits :: !(Maybe [OrgUnit])
@@ -3755,7 +3865,7 @@ data OrgUnits = OrgUnits
 orgUnits
     :: OrgUnits
 orgUnits =
-    OrgUnits
+    OrgUnits'
     { _oEtag = Nothing
     , _oKind = "admin#directory#orgUnits"
     , _oOrganizationUnits = Nothing
@@ -3781,13 +3891,13 @@ instance FromJSON OrgUnits where
         parseJSON
           = withObject "OrgUnits"
               (\ o ->
-                 OrgUnits <$>
+                 OrgUnits' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#orgUnits")
                      <*> (o .:? "organizationUnits" .!= mempty))
 
 instance ToJSON OrgUnits where
-        toJSON OrgUnits{..}
+        toJSON OrgUnits'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _oEtag, Just ("kind" .= _oKind),
@@ -3797,7 +3907,7 @@ instance ToJSON OrgUnits where
 -- Directory API.
 --
 -- /See:/ 'verificationCodes' smart constructor.
-data VerificationCodes = VerificationCodes
+data VerificationCodes = VerificationCodes'
     { _vEtag  :: !(Maybe Text)
     , _vKind  :: !Text
     , _vItems :: !(Maybe [VerificationCode])
@@ -3815,7 +3925,7 @@ data VerificationCodes = VerificationCodes
 verificationCodes
     :: VerificationCodes
 verificationCodes =
-    VerificationCodes
+    VerificationCodes'
     { _vEtag = Nothing
     , _vKind = "admin#directory#verificationCodesList"
     , _vItems = Nothing
@@ -3840,14 +3950,14 @@ instance FromJSON VerificationCodes where
         parseJSON
           = withObject "VerificationCodes"
               (\ o ->
-                 VerificationCodes <$>
+                 VerificationCodes' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!=
                         "admin#directory#verificationCodesList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON VerificationCodes where
-        toJSON VerificationCodes{..}
+        toJSON VerificationCodes'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _vEtag, Just ("kind" .= _vKind),
@@ -3856,7 +3966,7 @@ instance ToJSON VerificationCodes where
 -- | JSON template for a relation entry.
 --
 -- /See:/ 'userRelation' smart constructor.
-data UserRelation = UserRelation
+data UserRelation = UserRelation'
     { _urValue      :: !(Maybe Text)
     , _urType       :: !(Maybe Text)
     , _urCustomType :: !(Maybe Text)
@@ -3874,7 +3984,7 @@ data UserRelation = UserRelation
 userRelation
     :: UserRelation
 userRelation =
-    UserRelation
+    UserRelation'
     { _urValue = Nothing
     , _urType = Nothing
     , _urCustomType = Nothing
@@ -3898,12 +4008,12 @@ instance FromJSON UserRelation where
         parseJSON
           = withObject "UserRelation"
               (\ o ->
-                 UserRelation <$>
+                 UserRelation' <$>
                    (o .:? "value") <*> (o .:? "type") <*>
                      (o .:? "customType"))
 
 instance ToJSON UserRelation where
-        toJSON UserRelation{..}
+        toJSON UserRelation'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _urValue, ("type" .=) <$> _urType,
@@ -3912,7 +4022,7 @@ instance ToJSON UserRelation where
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-newtype ChannelParams = ChannelParams
+newtype ChannelParams = ChannelParams'
     { _cpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3925,7 +4035,7 @@ channelParams
     :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
-    ChannelParams
+    ChannelParams'
     { _cpAddtional = _Coerce # pCpAddtional_
     }
 
@@ -3938,7 +4048,7 @@ cpAddtional
 instance FromJSON ChannelParams where
         parseJSON
           = withObject "ChannelParams"
-              (\ o -> ChannelParams <$> (parseJSONObject o))
+              (\ o -> ChannelParams' <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
         toJSON = toJSON . _cpAddtional
@@ -3946,7 +4056,7 @@ instance ToJSON ChannelParams where
 -- | JSON template for an organization entry.
 --
 -- /See:/ 'userOrganization' smart constructor.
-data UserOrganization = UserOrganization
+data UserOrganization = UserOrganization'
     { _uoDePartment  :: !(Maybe Text)
     , _uoLocation    :: !(Maybe Text)
     , _uoCostCenter  :: !(Maybe Text)
@@ -3988,7 +4098,7 @@ data UserOrganization = UserOrganization
 userOrganization
     :: UserOrganization
 userOrganization =
-    UserOrganization
+    UserOrganization'
     { _uoDePartment = Nothing
     , _uoLocation = Nothing
     , _uoCostCenter = Nothing
@@ -4061,7 +4171,7 @@ instance FromJSON UserOrganization where
         parseJSON
           = withObject "UserOrganization"
               (\ o ->
-                 UserOrganization <$>
+                 UserOrganization' <$>
                    (o .:? "department") <*> (o .:? "location") <*>
                      (o .:? "costCenter")
                      <*> (o .:? "domain")
@@ -4074,7 +4184,7 @@ instance FromJSON UserOrganization where
                      <*> (o .:? "description"))
 
 instance ToJSON UserOrganization where
-        toJSON UserOrganization{..}
+        toJSON UserOrganization'{..}
           = object
               (catMaybes
                  [("department" .=) <$> _uoDePartment,
@@ -4091,7 +4201,7 @@ instance ToJSON UserOrganization where
 -- | JSON template for a website entry.
 --
 -- /See:/ 'userWebsite' smart constructor.
-data UserWebsite = UserWebsite
+data UserWebsite = UserWebsite'
     { _uwValue      :: !(Maybe Text)
     , _uwPrimary    :: !(Maybe Bool)
     , _uwType       :: !(Maybe Text)
@@ -4112,7 +4222,7 @@ data UserWebsite = UserWebsite
 userWebsite
     :: UserWebsite
 userWebsite =
-    UserWebsite
+    UserWebsite'
     { _uwValue = Nothing
     , _uwPrimary = Nothing
     , _uwType = Nothing
@@ -4145,13 +4255,13 @@ instance FromJSON UserWebsite where
         parseJSON
           = withObject "UserWebsite"
               (\ o ->
-                 UserWebsite <$>
+                 UserWebsite' <$>
                    (o .:? "value") <*> (o .:? "primary") <*>
                      (o .:? "type")
                      <*> (o .:? "customType"))
 
 instance ToJSON UserWebsite where
-        toJSON UserWebsite{..}
+        toJSON UserWebsite'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _uwValue,
@@ -4161,7 +4271,7 @@ instance ToJSON UserWebsite where
 
 --
 -- /See:/ 'chromeOSDeviceActiveTimeRangesItem' smart constructor.
-data ChromeOSDeviceActiveTimeRangesItem = ChromeOSDeviceActiveTimeRangesItem
+data ChromeOSDeviceActiveTimeRangesItem = ChromeOSDeviceActiveTimeRangesItem'
     { _codatriDate       :: !(Maybe Date')
     , _codatriActiveTime :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4176,7 +4286,7 @@ data ChromeOSDeviceActiveTimeRangesItem = ChromeOSDeviceActiveTimeRangesItem
 chromeOSDeviceActiveTimeRangesItem
     :: ChromeOSDeviceActiveTimeRangesItem
 chromeOSDeviceActiveTimeRangesItem =
-    ChromeOSDeviceActiveTimeRangesItem
+    ChromeOSDeviceActiveTimeRangesItem'
     { _codatriDate = Nothing
     , _codatriActiveTime = Nothing
     }
@@ -4199,12 +4309,12 @@ instance FromJSON ChromeOSDeviceActiveTimeRangesItem
         parseJSON
           = withObject "ChromeOSDeviceActiveTimeRangesItem"
               (\ o ->
-                 ChromeOSDeviceActiveTimeRangesItem <$>
+                 ChromeOSDeviceActiveTimeRangesItem' <$>
                    (o .:? "date") <*> (o .:? "activeTime"))
 
 instance ToJSON ChromeOSDeviceActiveTimeRangesItem
          where
-        toJSON ChromeOSDeviceActiveTimeRangesItem{..}
+        toJSON ChromeOSDeviceActiveTimeRangesItem'{..}
           = object
               (catMaybes
                  [("date" .=) <$> _codatriDate,
@@ -4213,7 +4323,7 @@ instance ToJSON ChromeOSDeviceActiveTimeRangesItem
 -- | JSON template for an email.
 --
 -- /See:/ 'userEmail' smart constructor.
-data UserEmail = UserEmail
+data UserEmail = UserEmail'
     { _ueAddress    :: !(Maybe Text)
     , _uePrimary    :: !(Maybe Bool)
     , _ueType       :: !(Maybe Text)
@@ -4234,7 +4344,7 @@ data UserEmail = UserEmail
 userEmail
     :: UserEmail
 userEmail =
-    UserEmail
+    UserEmail'
     { _ueAddress = Nothing
     , _uePrimary = Nothing
     , _ueType = Nothing
@@ -4269,13 +4379,13 @@ instance FromJSON UserEmail where
         parseJSON
           = withObject "UserEmail"
               (\ o ->
-                 UserEmail <$>
+                 UserEmail' <$>
                    (o .:? "address") <*> (o .:? "primary") <*>
                      (o .:? "type")
                      <*> (o .:? "customType"))
 
 instance ToJSON UserEmail where
-        toJSON UserEmail{..}
+        toJSON UserEmail'{..}
           = object
               (catMaybes
                  [("address" .=) <$> _ueAddress,
@@ -4286,7 +4396,7 @@ instance ToJSON UserEmail where
 -- | JSON template for a phone entry.
 --
 -- /See:/ 'userPhone' smart constructor.
-data UserPhone = UserPhone
+data UserPhone = UserPhone'
     { _upValue      :: !(Maybe Text)
     , _upPrimary    :: !(Maybe Bool)
     , _upType       :: !(Maybe Text)
@@ -4307,7 +4417,7 @@ data UserPhone = UserPhone
 userPhone
     :: UserPhone
 userPhone =
-    UserPhone
+    UserPhone'
     { _upValue = Nothing
     , _upPrimary = Nothing
     , _upType = Nothing
@@ -4340,13 +4450,13 @@ instance FromJSON UserPhone where
         parseJSON
           = withObject "UserPhone"
               (\ o ->
-                 UserPhone <$>
+                 UserPhone' <$>
                    (o .:? "value") <*> (o .:? "primary") <*>
                      (o .:? "type")
                      <*> (o .:? "customType"))
 
 instance ToJSON UserPhone where
-        toJSON UserPhone{..}
+        toJSON UserPhone'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _upValue,
@@ -4357,8 +4467,8 @@ instance ToJSON UserPhone where
 -- | JSON template for Photo object in Directory API.
 --
 -- /See:/ 'userPhoto' smart constructor.
-data UserPhoto = UserPhoto
-    { _upPhotoData    :: !(Maybe (Textual Word8))
+data UserPhoto = UserPhoto'
+    { _upPhotoData    :: !(Maybe Base64)
     , _upEtag         :: !(Maybe Text)
     , _upHeight       :: !(Maybe (Textual Int32))
     , _upKind         :: !Text
@@ -4390,7 +4500,7 @@ data UserPhoto = UserPhoto
 userPhoto
     :: UserPhoto
 userPhoto =
-    UserPhoto
+    UserPhoto'
     { _upPhotoData = Nothing
     , _upEtag = Nothing
     , _upHeight = Nothing
@@ -4402,10 +4512,10 @@ userPhoto =
     }
 
 -- | Base64 encoded photo data
-upPhotoData :: Lens' UserPhoto (Maybe Word8)
+upPhotoData :: Lens' UserPhoto (Maybe ByteString)
 upPhotoData
   = lens _upPhotoData (\ s a -> s{_upPhotoData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | ETag of the resource.
 upEtag :: Lens' UserPhoto (Maybe Text)
@@ -4446,7 +4556,7 @@ instance FromJSON UserPhoto where
         parseJSON
           = withObject "UserPhoto"
               (\ o ->
-                 UserPhoto <$>
+                 UserPhoto' <$>
                    (o .:? "photoData") <*> (o .:? "etag") <*>
                      (o .:? "height")
                      <*> (o .:? "kind" .!= "admin#directory#user#photo")
@@ -4456,7 +4566,7 @@ instance FromJSON UserPhoto where
                      <*> (o .:? "primaryEmail"))
 
 instance ToJSON UserPhoto where
-        toJSON UserPhoto{..}
+        toJSON UserPhoto'{..}
           = object
               (catMaybes
                  [("photoData" .=) <$> _upPhotoData,
@@ -4468,7 +4578,7 @@ instance ToJSON UserPhoto where
 -- | JSON template for Mobile Device resource in Directory API.
 --
 -- /See:/ 'mobileDevice' smart constructor.
-data MobileDevice = MobileDevice
+data MobileDevice = MobileDevice'
     { _mobEmail                          :: !(Maybe [Text])
     , _mobStatus                         :: !(Maybe Text)
     , _mobEtag                           :: !(Maybe Text)
@@ -4570,7 +4680,7 @@ data MobileDevice = MobileDevice
 mobileDevice
     :: MobileDevice
 mobileDevice =
-    MobileDevice
+    MobileDevice'
     { _mobEmail = Nothing
     , _mobStatus = Nothing
     , _mobEtag = Nothing
@@ -4784,7 +4894,7 @@ instance FromJSON MobileDevice where
         parseJSON
           = withObject "MobileDevice"
               (\ o ->
-                 MobileDevice <$>
+                 MobileDevice' <$>
                    (o .:? "email" .!= mempty) <*> (o .:? "status") <*>
                      (o .:? "etag")
                      <*> (o .:? "resourceId")
@@ -4817,7 +4927,7 @@ instance FromJSON MobileDevice where
                      <*> (o .:? "defaultLanguage"))
 
 instance ToJSON MobileDevice where
-        toJSON MobileDevice{..}
+        toJSON MobileDevice'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _mobEmail,
@@ -4858,7 +4968,7 @@ instance ToJSON MobileDevice where
 -- | JSON template for Member resource in Directory API.
 --
 -- /See:/ 'member' smart constructor.
-data Member = Member
+data Member = Member'
     { _memEmail :: !(Maybe Text)
     , _memEtag  :: !(Maybe Text)
     , _memKind  :: !Text
@@ -4885,7 +4995,7 @@ data Member = Member
 member
     :: Member
 member =
-    Member
+    Member'
     { _memEmail = Nothing
     , _memEtag = Nothing
     , _memKind = "admin#directory#member"
@@ -4923,7 +5033,7 @@ instance FromJSON Member where
         parseJSON
           = withObject "Member"
               (\ o ->
-                 Member <$>
+                 Member' <$>
                    (o .:? "email") <*> (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#member")
                      <*> (o .:? "role")
@@ -4931,7 +5041,7 @@ instance FromJSON Member where
                      <*> (o .:? "type"))
 
 instance ToJSON Member where
-        toJSON Member{..}
+        toJSON Member'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _memEmail,
@@ -4943,7 +5053,7 @@ instance ToJSON Member where
 -- particular schema)
 --
 -- /See:/ 'userCustomProperties' smart constructor.
-newtype UserCustomProperties = UserCustomProperties
+newtype UserCustomProperties = UserCustomProperties'
     { _ucpAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4956,7 +5066,7 @@ userCustomProperties
     :: HashMap Text JSONValue -- ^ 'ucpAddtional'
     -> UserCustomProperties
 userCustomProperties pUcpAddtional_ =
-    UserCustomProperties
+    UserCustomProperties'
     { _ucpAddtional = _Coerce # pUcpAddtional_
     }
 
@@ -4968,7 +5078,8 @@ ucpAddtional
 instance FromJSON UserCustomProperties where
         parseJSON
           = withObject "UserCustomProperties"
-              (\ o -> UserCustomProperties <$> (parseJSONObject o))
+              (\ o ->
+                 UserCustomProperties' <$> (parseJSONObject o))
 
 instance ToJSON UserCustomProperties where
         toJSON = toJSON . _ucpAddtional
@@ -4976,7 +5087,7 @@ instance ToJSON UserCustomProperties where
 -- | JSON template for Domain object in Directory API.
 --
 -- /See:/ 'domains' smart constructor.
-data Domains = Domains
+data Domains = Domains'
     { _domCreationTime  :: !(Maybe (Textual Int64))
     , _domEtag          :: !(Maybe Text)
     , _domKind          :: !Text
@@ -5006,7 +5117,7 @@ data Domains = Domains
 domains
     :: Domains
 domains =
-    Domains
+    Domains'
     { _domCreationTime = Nothing
     , _domEtag = Nothing
     , _domKind = "admin#directory#domain"
@@ -5059,7 +5170,7 @@ instance FromJSON Domains where
         parseJSON
           = withObject "Domains"
               (\ o ->
-                 Domains <$>
+                 Domains' <$>
                    (o .:? "creationTime") <*> (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#domain")
                      <*> (o .:? "domainAliases" .!= mempty)
@@ -5068,7 +5179,7 @@ instance FromJSON Domains where
                      <*> (o .:? "isPrimary"))
 
 instance ToJSON Domains where
-        toJSON Domains{..}
+        toJSON Domains'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _domCreationTime,
@@ -5078,10 +5189,84 @@ instance ToJSON Domains where
                   ("domainName" .=) <$> _domDomainName,
                   ("isPrimary" .=) <$> _domIsPrimary])
 
+-- | JSON template for Calendar Resource List Response object in Directory
+-- API.
+--
+-- /See:/ 'calendarResources' smart constructor.
+data CalendarResources = CalendarResources'
+    { _crsEtag          :: !(Maybe Text)
+    , _crsNextPageToken :: !(Maybe Text)
+    , _crsKind          :: !Text
+    , _crsItems         :: !(Maybe [CalendarResource])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CalendarResources' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crsEtag'
+--
+-- * 'crsNextPageToken'
+--
+-- * 'crsKind'
+--
+-- * 'crsItems'
+calendarResources
+    :: CalendarResources
+calendarResources =
+    CalendarResources'
+    { _crsEtag = Nothing
+    , _crsNextPageToken = Nothing
+    , _crsKind = "admin#directory#resources#calendars#calendarResourcesList"
+    , _crsItems = Nothing
+    }
+
+-- | ETag of the resource.
+crsEtag :: Lens' CalendarResources (Maybe Text)
+crsEtag = lens _crsEtag (\ s a -> s{_crsEtag = a})
+
+-- | The continuation token, used to page through large result sets. Provide
+-- this value in a subsequent request to return the next page of results.
+crsNextPageToken :: Lens' CalendarResources (Maybe Text)
+crsNextPageToken
+  = lens _crsNextPageToken
+      (\ s a -> s{_crsNextPageToken = a})
+
+-- | Identifies this as a collection of CalendarResources. This is always
+-- admin#directory#resources#calendars#calendarResourcesList.
+crsKind :: Lens' CalendarResources Text
+crsKind = lens _crsKind (\ s a -> s{_crsKind = a})
+
+-- | The CalendarResources in this page of results.
+crsItems :: Lens' CalendarResources [CalendarResource]
+crsItems
+  = lens _crsItems (\ s a -> s{_crsItems = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON CalendarResources where
+        parseJSON
+          = withObject "CalendarResources"
+              (\ o ->
+                 CalendarResources' <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "admin#directory#resources#calendars#calendarResourcesList")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON CalendarResources where
+        toJSON CalendarResources'{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _crsEtag,
+                  ("nextPageToken" .=) <$> _crsNextPageToken,
+                  Just ("kind" .= _crsKind),
+                  ("items" .=) <$> _crsItems])
+
 -- | Template for notifications list response.
 --
 -- /See:/ 'notifications' smart constructor.
-data Notifications = Notifications
+data Notifications = Notifications'
     { _notEtag                     :: !(Maybe Text)
     , _notNextPageToken            :: !(Maybe Text)
     , _notKind                     :: !Text
@@ -5105,7 +5290,7 @@ data Notifications = Notifications
 notifications
     :: Notifications
 notifications =
-    Notifications
+    Notifications'
     { _notEtag = Nothing
     , _notNextPageToken = Nothing
     , _notKind = "admin#directory#notifications"
@@ -5145,14 +5330,14 @@ instance FromJSON Notifications where
         parseJSON
           = withObject "Notifications"
               (\ o ->
-                 Notifications <$>
+                 Notifications' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "admin#directory#notifications")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "unreadNotificationsCount"))
 
 instance ToJSON Notifications where
-        toJSON Notifications{..}
+        toJSON Notifications'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _notEtag,
@@ -5167,7 +5352,7 @@ instance ToJSON Notifications where
 -- allows range queries to be supported.
 --
 -- /See:/ 'schemaFieldSpecNumericIndexingSpec' smart constructor.
-data SchemaFieldSpecNumericIndexingSpec = SchemaFieldSpecNumericIndexingSpec
+data SchemaFieldSpecNumericIndexingSpec = SchemaFieldSpecNumericIndexingSpec'
     { _sfsnisMaxValue :: !(Maybe (Textual Double))
     , _sfsnisMinValue :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5182,7 +5367,7 @@ data SchemaFieldSpecNumericIndexingSpec = SchemaFieldSpecNumericIndexingSpec
 schemaFieldSpecNumericIndexingSpec
     :: SchemaFieldSpecNumericIndexingSpec
 schemaFieldSpecNumericIndexingSpec =
-    SchemaFieldSpecNumericIndexingSpec
+    SchemaFieldSpecNumericIndexingSpec'
     { _sfsnisMaxValue = Nothing
     , _sfsnisMinValue = Nothing
     }
@@ -5210,12 +5395,12 @@ instance FromJSON SchemaFieldSpecNumericIndexingSpec
         parseJSON
           = withObject "SchemaFieldSpecNumericIndexingSpec"
               (\ o ->
-                 SchemaFieldSpecNumericIndexingSpec <$>
+                 SchemaFieldSpecNumericIndexingSpec' <$>
                    (o .:? "maxValue") <*> (o .:? "minValue"))
 
 instance ToJSON SchemaFieldSpecNumericIndexingSpec
          where
-        toJSON SchemaFieldSpecNumericIndexingSpec{..}
+        toJSON SchemaFieldSpecNumericIndexingSpec'{..}
           = object
               (catMaybes
                  [("maxValue" .=) <$> _sfsnisMaxValue,
@@ -5225,7 +5410,7 @@ instance ToJSON SchemaFieldSpecNumericIndexingSpec
 -- Devices API.
 --
 -- /See:/ 'mobileDeviceAction' smart constructor.
-newtype MobileDeviceAction = MobileDeviceAction
+newtype MobileDeviceAction = MobileDeviceAction'
     { _mdaAction :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5237,7 +5422,7 @@ newtype MobileDeviceAction = MobileDeviceAction
 mobileDeviceAction
     :: MobileDeviceAction
 mobileDeviceAction =
-    MobileDeviceAction
+    MobileDeviceAction'
     { _mdaAction = Nothing
     }
 
@@ -5249,16 +5434,16 @@ mdaAction
 instance FromJSON MobileDeviceAction where
         parseJSON
           = withObject "MobileDeviceAction"
-              (\ o -> MobileDeviceAction <$> (o .:? "action"))
+              (\ o -> MobileDeviceAction' <$> (o .:? "action"))
 
 instance ToJSON MobileDeviceAction where
-        toJSON MobileDeviceAction{..}
+        toJSON MobileDeviceAction'{..}
           = object (catMaybes [("action" .=) <$> _mdaAction])
 
 -- | JSON template for FieldSpec resource for Schemas in Directory API.
 --
 -- /See:/ 'schemaFieldSpec' smart constructor.
-data SchemaFieldSpec = SchemaFieldSpec
+data SchemaFieldSpec = SchemaFieldSpec'
     { _sfsEtag                :: !(Maybe Text)
     , _sfsKind                :: !Text
     , _sfsNumericIndexingSpec :: !(Maybe SchemaFieldSpecNumericIndexingSpec)
@@ -5294,7 +5479,7 @@ data SchemaFieldSpec = SchemaFieldSpec
 schemaFieldSpec
     :: SchemaFieldSpec
 schemaFieldSpec =
-    SchemaFieldSpec
+    SchemaFieldSpec'
     { _sfsEtag = Nothing
     , _sfsKind = "admin#directory#schema#fieldspec"
     , _sfsNumericIndexingSpec = Nothing
@@ -5359,7 +5544,7 @@ instance FromJSON SchemaFieldSpec where
         parseJSON
           = withObject "SchemaFieldSpec"
               (\ o ->
-                 SchemaFieldSpec <$>
+                 SchemaFieldSpec' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#schema#fieldspec")
                      <*> (o .:? "numericIndexingSpec")
@@ -5371,7 +5556,7 @@ instance FromJSON SchemaFieldSpec where
                      <*> (o .:? "multiValued"))
 
 instance ToJSON SchemaFieldSpec where
-        toJSON SchemaFieldSpec{..}
+        toJSON SchemaFieldSpec'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _sfsEtag, Just ("kind" .= _sfsKind),
@@ -5388,7 +5573,7 @@ instance ToJSON SchemaFieldSpec where
 -- API.
 --
 -- /See:/ 'chromeOSDevices' smart constructor.
-data ChromeOSDevices = ChromeOSDevices
+data ChromeOSDevices = ChromeOSDevices'
     { _cosdEtag            :: !(Maybe Text)
     , _cosdNextPageToken   :: !(Maybe Text)
     , _cosdKind            :: !Text
@@ -5409,7 +5594,7 @@ data ChromeOSDevices = ChromeOSDevices
 chromeOSDevices
     :: ChromeOSDevices
 chromeOSDevices =
-    ChromeOSDevices
+    ChromeOSDevices'
     { _cosdEtag = Nothing
     , _cosdNextPageToken = Nothing
     , _cosdKind = "admin#directory#chromeosdevices"
@@ -5442,13 +5627,13 @@ instance FromJSON ChromeOSDevices where
         parseJSON
           = withObject "ChromeOSDevices"
               (\ o ->
-                 ChromeOSDevices <$>
+                 ChromeOSDevices' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "admin#directory#chromeosdevices")
                      <*> (o .:? "chromeosdevices" .!= mempty))
 
 instance ToJSON ChromeOSDevices where
-        toJSON ChromeOSDevices{..}
+        toJSON ChromeOSDevices'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _cosdEtag,
@@ -5459,7 +5644,7 @@ instance ToJSON ChromeOSDevices where
 -- | JSON template for an externalId entry.
 --
 -- /See:/ 'userExternalId' smart constructor.
-data UserExternalId = UserExternalId
+data UserExternalId = UserExternalId'
     { _ueiValue      :: !(Maybe Text)
     , _ueiType       :: !(Maybe Text)
     , _ueiCustomType :: !(Maybe Text)
@@ -5477,7 +5662,7 @@ data UserExternalId = UserExternalId
 userExternalId
     :: UserExternalId
 userExternalId =
-    UserExternalId
+    UserExternalId'
     { _ueiValue = Nothing
     , _ueiType = Nothing
     , _ueiCustomType = Nothing
@@ -5501,12 +5686,12 @@ instance FromJSON UserExternalId where
         parseJSON
           = withObject "UserExternalId"
               (\ o ->
-                 UserExternalId <$>
+                 UserExternalId' <$>
                    (o .:? "value") <*> (o .:? "type") <*>
                      (o .:? "customType"))
 
 instance ToJSON UserExternalId where
-        toJSON UserExternalId{..}
+        toJSON UserExternalId'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _ueiValue,
@@ -5515,7 +5700,7 @@ instance ToJSON UserExternalId where
 
 --
 -- /See:/ 'asps' smart constructor.
-data Asps = Asps
+data Asps = Asps'
     { _aspEtag  :: !(Maybe Text)
     , _aspKind  :: !Text
     , _aspItems :: !(Maybe [Asp])
@@ -5533,7 +5718,7 @@ data Asps = Asps
 asps
     :: Asps
 asps =
-    Asps
+    Asps'
     { _aspEtag = Nothing
     , _aspKind = "admin#directory#aspList"
     , _aspItems = Nothing
@@ -5558,13 +5743,13 @@ instance FromJSON Asps where
         parseJSON
           = withObject "Asps"
               (\ o ->
-                 Asps <$>
+                 Asps' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#aspList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Asps where
-        toJSON Asps{..}
+        toJSON Asps'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _aspEtag, Just ("kind" .= _aspKind),
@@ -5572,7 +5757,7 @@ instance ToJSON Asps where
 
 --
 -- /See:/ 'roleRolePrivilegesItem' smart constructor.
-data RoleRolePrivilegesItem = RoleRolePrivilegesItem
+data RoleRolePrivilegesItem = RoleRolePrivilegesItem'
     { _rrpiServiceId     :: !(Maybe Text)
     , _rrpiPrivilegeName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5587,7 +5772,7 @@ data RoleRolePrivilegesItem = RoleRolePrivilegesItem
 roleRolePrivilegesItem
     :: RoleRolePrivilegesItem
 roleRolePrivilegesItem =
-    RoleRolePrivilegesItem
+    RoleRolePrivilegesItem'
     { _rrpiServiceId = Nothing
     , _rrpiPrivilegeName = Nothing
     }
@@ -5608,11 +5793,11 @@ instance FromJSON RoleRolePrivilegesItem where
         parseJSON
           = withObject "RoleRolePrivilegesItem"
               (\ o ->
-                 RoleRolePrivilegesItem <$>
+                 RoleRolePrivilegesItem' <$>
                    (o .:? "serviceId") <*> (o .:? "privilegeName"))
 
 instance ToJSON RoleRolePrivilegesItem where
-        toJSON RoleRolePrivilegesItem{..}
+        toJSON RoleRolePrivilegesItem'{..}
           = object
               (catMaybes
                  [("serviceId" .=) <$> _rrpiServiceId,
@@ -5621,7 +5806,7 @@ instance ToJSON RoleRolePrivilegesItem where
 -- | JSON response template to list Domains in Directory API.
 --
 -- /See:/ 'domains2' smart constructor.
-data Domains2 = Domains2
+data Domains2 = Domains2'
     { _ddEtag    :: !(Maybe Text)
     , _ddKind    :: !Text
     , _ddDomains :: !(Maybe [Domains])
@@ -5639,7 +5824,7 @@ data Domains2 = Domains2
 domains2
     :: Domains2
 domains2 =
-    Domains2
+    Domains2'
     { _ddEtag = Nothing
     , _ddKind = "admin#directory#domains"
     , _ddDomains = Nothing
@@ -5664,13 +5849,13 @@ instance FromJSON Domains2 where
         parseJSON
           = withObject "Domains2"
               (\ o ->
-                 Domains2 <$>
+                 Domains2' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#directory#domains")
                      <*> (o .:? "domains" .!= mempty))
 
 instance ToJSON Domains2 where
-        toJSON Domains2{..}
+        toJSON Domains2'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _ddEtag, Just ("kind" .= _ddKind),

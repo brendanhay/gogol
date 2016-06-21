@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.Users.RemovePublicKey
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type UsersRemovePublicKeyResource =
 -- | Removes the specified public key from the user.
 --
 -- /See:/ 'usersRemovePublicKey' smart constructor.
-data UsersRemovePublicKey = UsersRemovePublicKey
+data UsersRemovePublicKey = UsersRemovePublicKey'
     { _urpkProject     :: !Text
     , _urpkFingerprint :: !Text
     , _urpkUser        :: !Text
@@ -79,7 +79,7 @@ usersRemovePublicKey
     -> Text -- ^ 'urpkUser'
     -> UsersRemovePublicKey
 usersRemovePublicKey pUrpkProject_ pUrpkFingerprint_ pUrpkUser_ =
-    UsersRemovePublicKey
+    UsersRemovePublicKey'
     { _urpkProject = pUrpkProject_
     , _urpkFingerprint = pUrpkFingerprint_
     , _urpkUser = pUrpkUser_
@@ -104,7 +104,10 @@ urpkUser = lens _urpkUser (\ s a -> s{_urpkUser = a})
 
 instance GoogleRequest UsersRemovePublicKey where
         type Rs UsersRemovePublicKey = Operation
-        requestClient UsersRemovePublicKey{..}
+        type Scopes UsersRemovePublicKey =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
+        requestClient UsersRemovePublicKey'{..}
           = go _urpkProject _urpkUser (Just _urpkFingerprint)
               (Just AltJSON)
               userAccountsService

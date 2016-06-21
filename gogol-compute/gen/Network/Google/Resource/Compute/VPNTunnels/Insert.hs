@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.VPNTunnels.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type VPNTunnelsInsertResource =
 -- the data included in the request.
 --
 -- /See:/ 'vpnTunnelsInsert' smart constructor.
-data VPNTunnelsInsert = VPNTunnelsInsert
+data VPNTunnelsInsert = VPNTunnelsInsert'
     { _vtiProject :: !Text
     , _vtiPayload :: !VPNTunnel
     , _vtiRegion  :: !Text
@@ -80,7 +80,7 @@ vpnTunnelsInsert
     -> Text -- ^ 'vtiRegion'
     -> VPNTunnelsInsert
 vpnTunnelsInsert pVtiProject_ pVtiPayload_ pVtiRegion_ =
-    VPNTunnelsInsert
+    VPNTunnelsInsert'
     { _vtiProject = pVtiProject_
     , _vtiPayload = pVtiPayload_
     , _vtiRegion = pVtiRegion_
@@ -96,14 +96,17 @@ vtiPayload :: Lens' VPNTunnelsInsert VPNTunnel
 vtiPayload
   = lens _vtiPayload (\ s a -> s{_vtiPayload = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 vtiRegion :: Lens' VPNTunnelsInsert Text
 vtiRegion
   = lens _vtiRegion (\ s a -> s{_vtiRegion = a})
 
 instance GoogleRequest VPNTunnelsInsert where
         type Rs VPNTunnelsInsert = Operation
-        requestClient VPNTunnelsInsert{..}
+        type Scopes VPNTunnelsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient VPNTunnelsInsert'{..}
           = go _vtiProject _vtiRegion (Just AltJSON)
               _vtiPayload
               computeService

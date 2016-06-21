@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Circles.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type CirclesPatchResource =
 -- | Update a circle\'s description. This method supports patch semantics.
 --
 -- /See:/ 'circlesPatch' smart constructor.
-data CirclesPatch = CirclesPatch
+data CirclesPatch = CirclesPatch'
     { _cpPayload  :: !Circle
     , _cpCircleId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ circlesPatch
     -> Text -- ^ 'cpCircleId'
     -> CirclesPatch
 circlesPatch pCpPayload_ pCpCircleId_ =
-    CirclesPatch
+    CirclesPatch'
     { _cpPayload = pCpPayload_
     , _cpCircleId = pCpCircleId_
     }
@@ -87,7 +87,10 @@ cpCircleId
 
 instance GoogleRequest CirclesPatch where
         type Rs CirclesPatch = Circle
-        requestClient CirclesPatch{..}
+        type Scopes CirclesPatch =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient CirclesPatch'{..}
           = go _cpCircleId (Just AltJSON) _cpPayload
               plusDomainsService
           where go

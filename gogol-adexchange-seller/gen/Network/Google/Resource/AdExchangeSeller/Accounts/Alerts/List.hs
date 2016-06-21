@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type AccountsAlertsListResource =
 -- | List the alerts for this Ad Exchange account.
 --
 -- /See:/ 'accountsAlertsList' smart constructor.
-data AccountsAlertsList = AccountsAlertsList
+data AccountsAlertsList = AccountsAlertsList'
     { _aalLocale    :: !(Maybe Text)
     , _aalAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ accountsAlertsList
     :: Text -- ^ 'aalAccountId'
     -> AccountsAlertsList
 accountsAlertsList pAalAccountId_ =
-    AccountsAlertsList
+    AccountsAlertsList'
     { _aalLocale = Nothing
     , _aalAccountId = pAalAccountId_
     }
@@ -89,7 +89,10 @@ aalAccountId
 
 instance GoogleRequest AccountsAlertsList where
         type Rs AccountsAlertsList = Alerts
-        requestClient AccountsAlertsList{..}
+        type Scopes AccountsAlertsList =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
+        requestClient AccountsAlertsList'{..}
           = go _aalAccountId _aalLocale (Just AltJSON)
               adExchangeSellerService
           where go

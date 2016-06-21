@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.PlayLists.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type PlayListsInsertResource =
 -- | Creates a playlist.
 --
 -- /See:/ 'playListsInsert' smart constructor.
-data PlayListsInsert = PlayListsInsert
+data PlayListsInsert = PlayListsInsert'
     { _pliPart                          :: !Text
     , _pliPayload                       :: !PlayList
     , _pliOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -80,7 +80,7 @@ playListsInsert
     -> PlayList -- ^ 'pliPayload'
     -> PlayListsInsert
 playListsInsert pPliPart_ pPliPayload_ =
-    PlayListsInsert
+    PlayListsInsert'
     { _pliPart = pPliPart_
     , _pliPayload = pPliPayload_
     , _pliOnBehalfOfContentOwner = Nothing
@@ -136,7 +136,11 @@ pliOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest PlayListsInsert where
         type Rs PlayListsInsert = PlayList
-        requestClient PlayListsInsert{..}
+        type Scopes PlayListsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient PlayListsInsert'{..}
           = go (Just _pliPart) _pliOnBehalfOfContentOwner
               _pliOnBehalfOfContentOwnerChannel
               (Just AltJSON)

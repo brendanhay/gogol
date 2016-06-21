@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Campaigns.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ import           Network.Google.Prelude
 -- 'CampaignsList' request conforms to.
 type CampaignsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -81,7 +81,7 @@ type CampaignsListResource =
 -- | Retrieves a list of campaigns, possibly filtered.
 --
 -- /See:/ 'campaignsList' smart constructor.
-data CampaignsList = CampaignsList
+data CampaignsList = CampaignsList'
     { _clExcludedIds                    :: !(Maybe [Textual Int64])
     , _clSearchString                   :: !(Maybe Text)
     , _clIds                            :: !(Maybe [Textual Int64])
@@ -133,7 +133,7 @@ campaignsList
     :: Int64 -- ^ 'clProFileId'
     -> CampaignsList
 campaignsList pClProFileId_ =
-    CampaignsList
+    CampaignsList'
     { _clExcludedIds = Nothing
     , _clSearchString = Nothing
     , _clIds = Nothing
@@ -248,7 +248,9 @@ clMaxResults
 
 instance GoogleRequest CampaignsList where
         type Rs CampaignsList = CampaignsListResponse
-        requestClient CampaignsList{..}
+        type Scopes CampaignsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CampaignsList'{..}
           = go _clProFileId (_clExcludedIds ^. _Default)
               _clSearchString
               (_clIds ^. _Default)

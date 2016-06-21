@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Coordinate.Jobs.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -78,7 +78,7 @@ type JobsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'jobsPatch' smart constructor.
-data JobsPatch = JobsPatch
+data JobsPatch = JobsPatch'
     { _jpJobId               :: !(Textual Word64)
     , _jpProgress            :: !(Maybe JobsPatchProgress)
     , _jpNote                :: !(Maybe Text)
@@ -129,7 +129,7 @@ jobsPatch
     -> Job -- ^ 'jpPayload'
     -> JobsPatch
 jobsPatch pJpJobId_ pJpTeamId_ pJpPayload_ =
-    JobsPatch
+    JobsPatch'
     { _jpJobId = _Coerce # pJpJobId_
     , _jpProgress = Nothing
     , _jpNote = Nothing
@@ -221,7 +221,9 @@ jpCustomField
 
 instance GoogleRequest JobsPatch where
         type Rs JobsPatch = Job
-        requestClient JobsPatch{..}
+        type Scopes JobsPatch =
+             '["https://www.googleapis.com/auth/coordinate"]
+        requestClient JobsPatch'{..}
           = go _jpTeamId _jpJobId _jpProgress _jpNote
               _jpCustomerPhoneNumber
               _jpCustomerName

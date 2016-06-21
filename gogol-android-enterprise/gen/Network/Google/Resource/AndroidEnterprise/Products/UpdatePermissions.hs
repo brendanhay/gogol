@@ -14,16 +14,20 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the set of Android app permissions for this app that have been
--- accepted by the enterprise.
+-- This method has been deprecated. To programmatically approve
+-- applications, you must use the iframe mechanism via the
+-- generateApprovalUrl and approve methods of the Products resource. For
+-- more information, see the Play EMM API usage requirements. The
+-- updatePermissions method (deprecated) updates the set of Android app
+-- permissions for this app that have been accepted by the enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.updatePermissions@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.updatePermissions@.
 module Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
     (
     -- * REST Resource
@@ -56,11 +60,15 @@ type ProductsUpdatePermissionsResource =
                      ReqBody '[JSON] ProductPermissions :>
                        Put '[JSON] ProductPermissions
 
--- | Updates the set of Android app permissions for this app that have been
--- accepted by the enterprise.
+-- | This method has been deprecated. To programmatically approve
+-- applications, you must use the iframe mechanism via the
+-- generateApprovalUrl and approve methods of the Products resource. For
+-- more information, see the Play EMM API usage requirements. The
+-- updatePermissions method (deprecated) updates the set of Android app
+-- permissions for this app that have been accepted by the enterprise.
 --
 -- /See:/ 'productsUpdatePermissions' smart constructor.
-data ProductsUpdatePermissions = ProductsUpdatePermissions
+data ProductsUpdatePermissions = ProductsUpdatePermissions'
     { _pupEnterpriseId :: !Text
     , _pupPayload      :: !ProductPermissions
     , _pupProductId    :: !Text
@@ -81,7 +89,7 @@ productsUpdatePermissions
     -> Text -- ^ 'pupProductId'
     -> ProductsUpdatePermissions
 productsUpdatePermissions pPupEnterpriseId_ pPupPayload_ pPupProductId_ =
-    ProductsUpdatePermissions
+    ProductsUpdatePermissions'
     { _pupEnterpriseId = pPupEnterpriseId_
     , _pupPayload = pPupPayload_
     , _pupProductId = pPupProductId_
@@ -107,7 +115,9 @@ instance GoogleRequest ProductsUpdatePermissions
          where
         type Rs ProductsUpdatePermissions =
              ProductPermissions
-        requestClient ProductsUpdatePermissions{..}
+        type Scopes ProductsUpdatePermissions =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient ProductsUpdatePermissions'{..}
           = go _pupEnterpriseId _pupProductId (Just AltJSON)
               _pupPayload
               androidEnterpriseService

@@ -7,7 +7,7 @@
 
 -- |
 -- Module      : Network.Google.Reports
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,6 +21,10 @@ module Network.Google.Reports
     (
     -- * Service Configuration
       reportsService
+
+    -- * OAuth Scopes
+    , adminReportsUsageReadOnlyScope
+    , adminReportsAuditReadOnlyScope
 
     -- * API Declaration
     , ReportsAPI

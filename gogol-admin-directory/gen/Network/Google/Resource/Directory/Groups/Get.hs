@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Groups.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type GroupsGetResource =
 -- | Retrieve Group
 --
 -- /See:/ 'groupsGet' smart constructor.
-newtype GroupsGet = GroupsGet
+newtype GroupsGet = GroupsGet'
     { _ggGroupKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ groupsGet
     :: Text -- ^ 'ggGroupKey'
     -> GroupsGet
 groupsGet pGgGroupKey_ =
-    GroupsGet
+    GroupsGet'
     { _ggGroupKey = pGgGroupKey_
     }
 
@@ -76,7 +76,10 @@ ggGroupKey
 
 instance GoogleRequest GroupsGet where
         type Rs GroupsGet = Group
-        requestClient GroupsGet{..}
+        type Scopes GroupsGet =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.readonly"]
+        requestClient GroupsGet'{..}
           = go _ggGroupKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy GroupsGetResource)

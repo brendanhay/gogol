@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.DFAReporting.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Represents the list of File resources.
 --
 -- /See:/ 'fileList' smart constructor.
-data FileList = FileList
+data FileList = FileList'
     { _flEtag          :: !(Maybe Text)
     , _flNextPageToken :: !(Maybe Text)
     , _flKind          :: !Text
@@ -44,7 +44,7 @@ data FileList = FileList
 fileList
     :: FileList
 fileList =
-    FileList
+    FileList'
     { _flEtag = Nothing
     , _flNextPageToken = Nothing
     , _flKind = "dfareporting#fileList"
@@ -78,13 +78,13 @@ instance FromJSON FileList where
         parseJSON
           = withObject "FileList"
               (\ o ->
-                 FileList <$>
+                 FileList' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "dfareporting#fileList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON FileList where
-        toJSON FileList{..}
+        toJSON FileList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _flEtag,
@@ -94,7 +94,7 @@ instance ToJSON FileList where
 -- | Creative optimization activity.
 --
 -- /See:/ 'optimizationActivity' smart constructor.
-data OptimizationActivity = OptimizationActivity
+data OptimizationActivity = OptimizationActivity'
     { _oaWeight                             :: !(Maybe (Textual Int32))
     , _oaFloodlightActivityId               :: !(Maybe (Textual Int64))
     , _oaFloodlightActivityIdDimensionValue :: !(Maybe DimensionValue)
@@ -112,7 +112,7 @@ data OptimizationActivity = OptimizationActivity
 optimizationActivity
     :: OptimizationActivity
 optimizationActivity =
-    OptimizationActivity
+    OptimizationActivity'
     { _oaWeight = Nothing
     , _oaFloodlightActivityId = Nothing
     , _oaFloodlightActivityIdDimensionValue = Nothing
@@ -146,12 +146,12 @@ instance FromJSON OptimizationActivity where
         parseJSON
           = withObject "OptimizationActivity"
               (\ o ->
-                 OptimizationActivity <$>
+                 OptimizationActivity' <$>
                    (o .:? "weight") <*> (o .:? "floodlightActivityId")
                      <*> (o .:? "floodlightActivityIdDimensionValue"))
 
 instance ToJSON OptimizationActivity where
-        toJSON OptimizationActivity{..}
+        toJSON OptimizationActivity'{..}
           = object
               (catMaybes
                  [("weight" .=) <$> _oaWeight,
@@ -164,7 +164,7 @@ instance ToJSON OptimizationActivity where
 -- joined by ORs.
 --
 -- /See:/ 'listPopulationClause' smart constructor.
-newtype ListPopulationClause = ListPopulationClause
+newtype ListPopulationClause = ListPopulationClause'
     { _lpcTerms :: Maybe [ListPopulationTerm]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -176,7 +176,7 @@ newtype ListPopulationClause = ListPopulationClause
 listPopulationClause
     :: ListPopulationClause
 listPopulationClause =
-    ListPopulationClause
+    ListPopulationClause'
     { _lpcTerms = Nothing
     }
 
@@ -192,17 +192,18 @@ instance FromJSON ListPopulationClause where
         parseJSON
           = withObject "ListPopulationClause"
               (\ o ->
-                 ListPopulationClause <$> (o .:? "terms" .!= mempty))
+                 ListPopulationClause' <$> (o .:? "terms" .!= mempty))
 
 instance ToJSON ListPopulationClause where
-        toJSON ListPopulationClause{..}
+        toJSON ListPopulationClause'{..}
           = object (catMaybes [("terms" .=) <$> _lpcTerms])
 
 -- | Creative Custom Event.
 --
 -- /See:/ 'creativeCustomEvent' smart constructor.
-data CreativeCustomEvent = CreativeCustomEvent
-    { _cceAdvertiserCustomEventType :: !(Maybe CreativeCustomEventAdvertiserCustomEventType)
+data CreativeCustomEvent = CreativeCustomEvent'
+    { _cceAdvertiserCustomEventId   :: !(Maybe (Textual Int64))
+    , _cceAdvertiserCustomEventType :: !(Maybe CreativeCustomEventAdvertiserCustomEventType)
     , _cceAdvertiserCustomEventName :: !(Maybe Text)
     , _cceExitURL                   :: !(Maybe Text)
     , _cceTargetType                :: !(Maybe CreativeCustomEventTargetType)
@@ -216,6 +217,8 @@ data CreativeCustomEvent = CreativeCustomEvent
 -- | Creates a value of 'CreativeCustomEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cceAdvertiserCustomEventId'
 --
 -- * 'cceAdvertiserCustomEventType'
 --
@@ -237,8 +240,9 @@ data CreativeCustomEvent = CreativeCustomEvent
 creativeCustomEvent
     :: CreativeCustomEvent
 creativeCustomEvent =
-    CreativeCustomEvent
-    { _cceAdvertiserCustomEventType = Nothing
+    CreativeCustomEvent'
+    { _cceAdvertiserCustomEventId = Nothing
+    , _cceAdvertiserCustomEventType = Nothing
     , _cceAdvertiserCustomEventName = Nothing
     , _cceExitURL = Nothing
     , _cceTargetType = Nothing
@@ -248,6 +252,14 @@ creativeCustomEvent =
     , _cceArtworkLabel = Nothing
     , _cceArtworkType = Nothing
     }
+
+-- | Unique ID of this event used by DDM Reporting and Data Transfer. This is
+-- a read-only field.
+cceAdvertiserCustomEventId :: Lens' CreativeCustomEvent (Maybe Int64)
+cceAdvertiserCustomEventId
+  = lens _cceAdvertiserCustomEventId
+      (\ s a -> s{_cceAdvertiserCustomEventId = a})
+      . mapping _Coerce
 
 -- | Type of the event. This is a read-only field.
 cceAdvertiserCustomEventType :: Lens' CreativeCustomEvent (Maybe CreativeCustomEventAdvertiserCustomEventType)
@@ -279,8 +291,8 @@ ccePopupWindowProperties
   = lens _ccePopupWindowProperties
       (\ s a -> s{_ccePopupWindowProperties = a})
 
--- | Reporting ID, used to differentiate multiple videos in a single
--- creative.
+-- | Video reporting ID, used to differentiate multiple videos in a single
+-- creative. This is a read-only field.
 cceVideoReportingId :: Lens' CreativeCustomEvent (Maybe Text)
 cceVideoReportingId
   = lens _cceVideoReportingId
@@ -311,9 +323,10 @@ instance FromJSON CreativeCustomEvent where
         parseJSON
           = withObject "CreativeCustomEvent"
               (\ o ->
-                 CreativeCustomEvent <$>
-                   (o .:? "advertiserCustomEventType") <*>
-                     (o .:? "advertiserCustomEventName")
+                 CreativeCustomEvent' <$>
+                   (o .:? "advertiserCustomEventId") <*>
+                     (o .:? "advertiserCustomEventType")
+                     <*> (o .:? "advertiserCustomEventName")
                      <*> (o .:? "exitUrl")
                      <*> (o .:? "targetType")
                      <*> (o .:? "popupWindowProperties")
@@ -323,10 +336,12 @@ instance FromJSON CreativeCustomEvent where
                      <*> (o .:? "artworkType"))
 
 instance ToJSON CreativeCustomEvent where
-        toJSON CreativeCustomEvent{..}
+        toJSON CreativeCustomEvent'{..}
           = object
               (catMaybes
-                 [("advertiserCustomEventType" .=) <$>
+                 [("advertiserCustomEventId" .=) <$>
+                    _cceAdvertiserCustomEventId,
+                  ("advertiserCustomEventType" .=) <$>
                     _cceAdvertiserCustomEventType,
                   ("advertiserCustomEventName" .=) <$>
                     _cceAdvertiserCustomEventName,
@@ -342,7 +357,7 @@ instance ToJSON CreativeCustomEvent where
 -- | Creative Click Tag.
 --
 -- /See:/ 'clickTag' smart constructor.
-data ClickTag = ClickTag
+data ClickTag = ClickTag'
     { _ctValue     :: !(Maybe Text)
     , _ctName      :: !(Maybe Text)
     , _ctEventName :: !(Maybe Text)
@@ -360,7 +375,7 @@ data ClickTag = ClickTag
 clickTag
     :: ClickTag
 clickTag =
-    ClickTag
+    ClickTag'
     { _ctValue = Nothing
     , _ctName = Nothing
     , _ctEventName = Nothing
@@ -387,12 +402,12 @@ instance FromJSON ClickTag where
         parseJSON
           = withObject "ClickTag"
               (\ o ->
-                 ClickTag <$>
+                 ClickTag' <$>
                    (o .:? "value") <*> (o .:? "name") <*>
                      (o .:? "eventName"))
 
 instance ToJSON ClickTag where
-        toJSON ClickTag{..}
+        toJSON ClickTag'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _ctValue, ("name" .=) <$> _ctName,
@@ -401,7 +416,7 @@ instance ToJSON ClickTag where
 -- | Campaign List Response
 --
 -- /See:/ 'campaignsListResponse' smart constructor.
-data CampaignsListResponse = CampaignsListResponse
+data CampaignsListResponse = CampaignsListResponse'
     { _clrNextPageToken :: !(Maybe Text)
     , _clrCampaigns     :: !(Maybe [Campaign])
     , _clrKind          :: !Text
@@ -419,7 +434,7 @@ data CampaignsListResponse = CampaignsListResponse
 campaignsListResponse
     :: CampaignsListResponse
 campaignsListResponse =
-    CampaignsListResponse
+    CampaignsListResponse'
     { _clrNextPageToken = Nothing
     , _clrCampaigns = Nothing
     , _clrKind = "dfareporting#campaignsListResponse"
@@ -447,7 +462,7 @@ instance FromJSON CampaignsListResponse where
         parseJSON
           = withObject "CampaignsListResponse"
               (\ o ->
-                 CampaignsListResponse <$>
+                 CampaignsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "campaigns" .!= mempty)
                      <*>
@@ -455,7 +470,7 @@ instance FromJSON CampaignsListResponse where
                         "dfareporting#campaignsListResponse"))
 
 instance ToJSON CampaignsListResponse where
-        toJSON CampaignsListResponse{..}
+        toJSON CampaignsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _clrNextPageToken,
@@ -465,7 +480,7 @@ instance ToJSON CampaignsListResponse where
 -- | Geographical Targeting.
 --
 -- /See:/ 'geoTargeting' smart constructor.
-data GeoTargeting = GeoTargeting
+data GeoTargeting = GeoTargeting'
     { _gtRegions          :: !(Maybe [Region])
     , _gtCountries        :: !(Maybe [Country])
     , _gtCities           :: !(Maybe [City])
@@ -492,7 +507,7 @@ data GeoTargeting = GeoTargeting
 geoTargeting
     :: GeoTargeting
 geoTargeting =
-    GeoTargeting
+    GeoTargeting'
     { _gtRegions = Nothing
     , _gtCountries = Nothing
     , _gtCities = Nothing
@@ -564,7 +579,7 @@ instance FromJSON GeoTargeting where
         parseJSON
           = withObject "GeoTargeting"
               (\ o ->
-                 GeoTargeting <$>
+                 GeoTargeting' <$>
                    (o .:? "regions" .!= mempty) <*>
                      (o .:? "countries" .!= mempty)
                      <*> (o .:? "cities" .!= mempty)
@@ -573,7 +588,7 @@ instance FromJSON GeoTargeting where
                      <*> (o .:? "postalCodes" .!= mempty))
 
 instance ToJSON GeoTargeting where
-        toJSON GeoTargeting{..}
+        toJSON GeoTargeting'{..}
           = object
               (catMaybes
                  [("regions" .=) <$> _gtRegions,
@@ -587,7 +602,7 @@ instance ToJSON GeoTargeting where
 -- type \"REACH\".
 --
 -- /See:/ 'reachReportCompatibleFields' smart constructor.
-data ReachReportCompatibleFields = ReachReportCompatibleFields
+data ReachReportCompatibleFields = ReachReportCompatibleFields'
     { _rrcfMetrics                 :: !(Maybe [Metric])
     , _rrcfReachByFrequencyMetrics :: !(Maybe [Metric])
     , _rrcfKind                    :: !Text
@@ -614,7 +629,7 @@ data ReachReportCompatibleFields = ReachReportCompatibleFields
 reachReportCompatibleFields
     :: ReachReportCompatibleFields
 reachReportCompatibleFields =
-    ReachReportCompatibleFields
+    ReachReportCompatibleFields'
     { _rrcfMetrics = Nothing
     , _rrcfReachByFrequencyMetrics = Nothing
     , _rrcfKind = "dfareporting#reachReportCompatibleFields"
@@ -676,7 +691,7 @@ instance FromJSON ReachReportCompatibleFields where
         parseJSON
           = withObject "ReachReportCompatibleFields"
               (\ o ->
-                 ReachReportCompatibleFields <$>
+                 ReachReportCompatibleFields' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "reachByFrequencyMetrics" .!= mempty)
                      <*>
@@ -687,7 +702,7 @@ instance FromJSON ReachReportCompatibleFields where
                      <*> (o .:? "dimensions" .!= mempty))
 
 instance ToJSON ReachReportCompatibleFields where
-        toJSON ReachReportCompatibleFields{..}
+        toJSON ReachReportCompatibleFields'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _rrcfMetrics,
@@ -702,7 +717,7 @@ instance ToJSON ReachReportCompatibleFields where
 -- | Contains information about a browser that can be targeted by ads.
 --
 -- /See:/ 'browser' smart constructor.
-data Browser = Browser
+data Browser = Browser'
     { _bMinorVersion     :: !(Maybe Text)
     , _bKind             :: !Text
     , _bBrowserVersionId :: !(Maybe (Textual Int64))
@@ -729,7 +744,7 @@ data Browser = Browser
 browser
     :: Browser
 browser =
-    Browser
+    Browser'
     { _bMinorVersion = Nothing
     , _bKind = "dfareporting#browser"
     , _bBrowserVersionId = Nothing
@@ -791,7 +806,7 @@ instance FromJSON Browser where
         parseJSON
           = withObject "Browser"
               (\ o ->
-                 Browser <$>
+                 Browser' <$>
                    (o .:? "minorVersion") <*>
                      (o .:? "kind" .!= "dfareporting#browser")
                      <*> (o .:? "browserVersionId")
@@ -800,7 +815,7 @@ instance FromJSON Browser where
                      <*> (o .:? "dartId"))
 
 instance ToJSON Browser where
-        toJSON Browser{..}
+        toJSON Browser'{..}
           = object
               (catMaybes
                  [("minorVersion" .=) <$> _bMinorVersion,
@@ -812,7 +827,7 @@ instance ToJSON Browser where
 -- | Creative Group Assignment.
 --
 -- /See:/ 'creativeGroupAssignment' smart constructor.
-data CreativeGroupAssignment = CreativeGroupAssignment
+data CreativeGroupAssignment = CreativeGroupAssignment'
     { _cgaCreativeGroupNumber :: !(Maybe CreativeGroupAssignmentCreativeGroupNumber)
     , _cgaCreativeGroupId     :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -827,7 +842,7 @@ data CreativeGroupAssignment = CreativeGroupAssignment
 creativeGroupAssignment
     :: CreativeGroupAssignment
 creativeGroupAssignment =
-    CreativeGroupAssignment
+    CreativeGroupAssignment'
     { _cgaCreativeGroupNumber = Nothing
     , _cgaCreativeGroupId = Nothing
     }
@@ -849,12 +864,12 @@ instance FromJSON CreativeGroupAssignment where
         parseJSON
           = withObject "CreativeGroupAssignment"
               (\ o ->
-                 CreativeGroupAssignment <$>
+                 CreativeGroupAssignment' <$>
                    (o .:? "creativeGroupNumber") <*>
                      (o .:? "creativeGroupId"))
 
 instance ToJSON CreativeGroupAssignment where
-        toJSON CreativeGroupAssignment{..}
+        toJSON CreativeGroupAssignment'{..}
           = object
               (catMaybes
                  [("creativeGroupNumber" .=) <$>
@@ -864,7 +879,7 @@ instance ToJSON CreativeGroupAssignment where
 -- | Directory Site Settings
 --
 -- /See:/ 'directorySiteSettings' smart constructor.
-data DirectorySiteSettings = DirectorySiteSettings
+data DirectorySiteSettings = DirectorySiteSettings'
     { _dssInterstitialPlacementAccepted  :: !(Maybe Bool)
     , _dssDfpSettings                    :: !(Maybe DfpSettings)
     , _dssVerificationTagOptOut          :: !(Maybe Bool)
@@ -894,7 +909,7 @@ data DirectorySiteSettings = DirectorySiteSettings
 directorySiteSettings
     :: DirectorySiteSettings
 directorySiteSettings =
-    DirectorySiteSettings
+    DirectorySiteSettings'
     { _dssInterstitialPlacementAccepted = Nothing
     , _dssDfpSettings = Nothing
     , _dssVerificationTagOptOut = Nothing
@@ -952,7 +967,7 @@ instance FromJSON DirectorySiteSettings where
         parseJSON
           = withObject "DirectorySiteSettings"
               (\ o ->
-                 DirectorySiteSettings <$>
+                 DirectorySiteSettings' <$>
                    (o .:? "interstitialPlacementAccepted") <*>
                      (o .:? "dfp_settings")
                      <*> (o .:? "verificationTagOptOut")
@@ -962,7 +977,7 @@ instance FromJSON DirectorySiteSettings where
                      <*> (o .:? "nielsenOcrOptOut"))
 
 instance ToJSON DirectorySiteSettings where
-        toJSON DirectorySiteSettings{..}
+        toJSON DirectorySiteSettings'{..}
           = object
               (catMaybes
                  [("interstitialPlacementAccepted" .=) <$>
@@ -980,7 +995,7 @@ instance ToJSON DirectorySiteSettings where
 -- | Remarketing List Population Rule.
 --
 -- /See:/ 'listPopulationRule' smart constructor.
-data ListPopulationRule = ListPopulationRule
+data ListPopulationRule = ListPopulationRule'
     { _lprFloodlightActivityName :: !(Maybe Text)
     , _lprFloodlightActivityId   :: !(Maybe (Textual Int64))
     , _lprListPopulationClauses  :: !(Maybe [ListPopulationClause])
@@ -998,7 +1013,7 @@ data ListPopulationRule = ListPopulationRule
 listPopulationRule
     :: ListPopulationRule
 listPopulationRule =
-    ListPopulationRule
+    ListPopulationRule'
     { _lprFloodlightActivityName = Nothing
     , _lprFloodlightActivityId = Nothing
     , _lprListPopulationClauses = Nothing
@@ -1033,13 +1048,13 @@ instance FromJSON ListPopulationRule where
         parseJSON
           = withObject "ListPopulationRule"
               (\ o ->
-                 ListPopulationRule <$>
+                 ListPopulationRule' <$>
                    (o .:? "floodlightActivityName") <*>
                      (o .:? "floodlightActivityId")
                      <*> (o .:? "listPopulationClauses" .!= mempty))
 
 instance ToJSON ListPopulationRule where
-        toJSON ListPopulationRule{..}
+        toJSON ListPopulationRule'{..}
           = object
               (catMaybes
                  [("floodlightActivityName" .=) <$>
@@ -1052,7 +1067,7 @@ instance ToJSON ListPopulationRule where
 -- | Size List Response
 --
 -- /See:/ 'sizesListResponse' smart constructor.
-data SizesListResponse = SizesListResponse
+data SizesListResponse = SizesListResponse'
     { _slrKind  :: !Text
     , _slrSizes :: !(Maybe [Size])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1067,7 +1082,7 @@ data SizesListResponse = SizesListResponse
 sizesListResponse
     :: SizesListResponse
 sizesListResponse =
-    SizesListResponse
+    SizesListResponse'
     { _slrKind = "dfareporting#sizesListResponse"
     , _slrSizes = Nothing
     }
@@ -1088,12 +1103,12 @@ instance FromJSON SizesListResponse where
         parseJSON
           = withObject "SizesListResponse"
               (\ o ->
-                 SizesListResponse <$>
+                 SizesListResponse' <$>
                    (o .:? "kind" .!= "dfareporting#sizesListResponse")
                      <*> (o .:? "sizes" .!= mempty))
 
 instance ToJSON SizesListResponse where
-        toJSON SizesListResponse{..}
+        toJSON SizesListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _slrKind),
@@ -1102,7 +1117,7 @@ instance ToJSON SizesListResponse where
 -- | Creative Rotation.
 --
 -- /See:/ 'creativeRotation' smart constructor.
-data CreativeRotation = CreativeRotation
+data CreativeRotation = CreativeRotation'
     { _crWeightCalculationStrategy           :: !(Maybe CreativeRotationWeightCalculationStrategy)
     , _crCreativeAssignments                 :: !(Maybe [CreativeAssignment])
     , _crCreativeOptimizationConfigurationId :: !(Maybe (Textual Int64))
@@ -1123,7 +1138,7 @@ data CreativeRotation = CreativeRotation
 creativeRotation
     :: CreativeRotation
 creativeRotation =
-    CreativeRotation
+    CreativeRotation'
     { _crWeightCalculationStrategy = Nothing
     , _crCreativeAssignments = Nothing
     , _crCreativeOptimizationConfigurationId = Nothing
@@ -1165,14 +1180,14 @@ instance FromJSON CreativeRotation where
         parseJSON
           = withObject "CreativeRotation"
               (\ o ->
-                 CreativeRotation <$>
+                 CreativeRotation' <$>
                    (o .:? "weightCalculationStrategy") <*>
                      (o .:? "creativeAssignments" .!= mempty)
                      <*> (o .:? "creativeOptimizationConfigurationId")
                      <*> (o .:? "type"))
 
 instance ToJSON CreativeRotation where
-        toJSON CreativeRotation{..}
+        toJSON CreativeRotation'{..}
           = object
               (catMaybes
                  [("weightCalculationStrategy" .=) <$>
@@ -1186,7 +1201,7 @@ instance ToJSON CreativeRotation where
 -- | Technology Targeting.
 --
 -- /See:/ 'technologyTargeting' smart constructor.
-data TechnologyTargeting = TechnologyTargeting
+data TechnologyTargeting = TechnologyTargeting'
     { _ttMobileCarriers          :: !(Maybe [MobileCarrier])
     , _ttOperatingSystemVersions :: !(Maybe [OperatingSystemVersion])
     , _ttPlatformTypes           :: !(Maybe [PlatformType])
@@ -1213,7 +1228,7 @@ data TechnologyTargeting = TechnologyTargeting
 technologyTargeting
     :: TechnologyTargeting
 technologyTargeting =
-    TechnologyTargeting
+    TechnologyTargeting'
     { _ttMobileCarriers = Nothing
     , _ttOperatingSystemVersions = Nothing
     , _ttPlatformTypes = Nothing
@@ -1292,7 +1307,7 @@ instance FromJSON TechnologyTargeting where
         parseJSON
           = withObject "TechnologyTargeting"
               (\ o ->
-                 TechnologyTargeting <$>
+                 TechnologyTargeting' <$>
                    (o .:? "mobileCarriers" .!= mempty) <*>
                      (o .:? "operatingSystemVersions" .!= mempty)
                      <*> (o .:? "platformTypes" .!= mempty)
@@ -1301,7 +1316,7 @@ instance FromJSON TechnologyTargeting where
                      <*> (o .:? "operatingSystems" .!= mempty))
 
 instance ToJSON TechnologyTargeting where
-        toJSON TechnologyTargeting{..}
+        toJSON TechnologyTargeting'{..}
           = object
               (catMaybes
                  [("mobileCarriers" .=) <$> _ttMobileCarriers,
@@ -1315,7 +1330,7 @@ instance ToJSON TechnologyTargeting where
 -- | Represents a buy from the DoubleClick Planning inventory store.
 --
 -- /See:/ 'inventoryItem' smart constructor.
-data InventoryItem = InventoryItem
+data InventoryItem = InventoryItem'
     { _iiPlacementStrategyId       :: !(Maybe (Textual Int64))
     , _iiEstimatedClickThroughRate :: !(Maybe (Textual Int64))
     , _iiPricing                   :: !(Maybe Pricing)
@@ -1333,6 +1348,7 @@ data InventoryItem = InventoryItem
     , _iiEstimatedConversionRate   :: !(Maybe (Textual Int64))
     , _iiProjectId                 :: !(Maybe (Textual Int64))
     , _iiSubAccountId              :: !(Maybe (Textual Int64))
+    , _iiType                      :: !(Maybe InventoryItemType)
     , _iiOrderId                   :: !(Maybe (Textual Int64))
     , _iiSiteId                    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1375,13 +1391,15 @@ data InventoryItem = InventoryItem
 --
 -- * 'iiSubAccountId'
 --
+-- * 'iiType'
+--
 -- * 'iiOrderId'
 --
 -- * 'iiSiteId'
 inventoryItem
     :: InventoryItem
 inventoryItem =
-    InventoryItem
+    InventoryItem'
     { _iiPlacementStrategyId = Nothing
     , _iiEstimatedClickThroughRate = Nothing
     , _iiPricing = Nothing
@@ -1399,6 +1417,7 @@ inventoryItem =
     , _iiEstimatedConversionRate = Nothing
     , _iiProjectId = Nothing
     , _iiSubAccountId = Nothing
+    , _iiType = Nothing
     , _iiOrderId = Nothing
     , _iiSiteId = Nothing
     }
@@ -1512,6 +1531,10 @@ iiSubAccountId
       (\ s a -> s{_iiSubAccountId = a})
       . mapping _Coerce
 
+-- | Type of inventory item.
+iiType :: Lens' InventoryItem (Maybe InventoryItemType)
+iiType = lens _iiType (\ s a -> s{_iiType = a})
+
 -- | Order ID of this inventory item.
 iiOrderId :: Lens' InventoryItem (Maybe Int64)
 iiOrderId
@@ -1528,7 +1551,7 @@ instance FromJSON InventoryItem where
         parseJSON
           = withObject "InventoryItem"
               (\ o ->
-                 InventoryItem <$>
+                 InventoryItem' <$>
                    (o .:? "placementStrategyId") <*>
                      (o .:? "estimatedClickThroughRate")
                      <*> (o .:? "pricing")
@@ -1546,11 +1569,12 @@ instance FromJSON InventoryItem where
                      <*> (o .:? "estimatedConversionRate")
                      <*> (o .:? "projectId")
                      <*> (o .:? "subaccountId")
+                     <*> (o .:? "type")
                      <*> (o .:? "orderId")
                      <*> (o .:? "siteId"))
 
 instance ToJSON InventoryItem where
-        toJSON InventoryItem{..}
+        toJSON InventoryItem'{..}
           = object
               (catMaybes
                  [("placementStrategyId" .=) <$>
@@ -1574,13 +1598,14 @@ instance ToJSON InventoryItem where
                     _iiEstimatedConversionRate,
                   ("projectId" .=) <$> _iiProjectId,
                   ("subaccountId" .=) <$> _iiSubAccountId,
+                  ("type" .=) <$> _iiType,
                   ("orderId" .=) <$> _iiOrderId,
                   ("siteId" .=) <$> _iiSiteId])
 
 -- | Project List Response
 --
 -- /See:/ 'projectsListResponse' smart constructor.
-data ProjectsListResponse = ProjectsListResponse
+data ProjectsListResponse = ProjectsListResponse'
     { _plrNextPageToken :: !(Maybe Text)
     , _plrKind          :: !Text
     , _plrProjects      :: !(Maybe [Project])
@@ -1598,7 +1623,7 @@ data ProjectsListResponse = ProjectsListResponse
 projectsListResponse
     :: ProjectsListResponse
 projectsListResponse =
-    ProjectsListResponse
+    ProjectsListResponse'
     { _plrNextPageToken = Nothing
     , _plrKind = "dfareporting#projectsListResponse"
     , _plrProjects = Nothing
@@ -1626,14 +1651,14 @@ instance FromJSON ProjectsListResponse where
         parseJSON
           = withObject "ProjectsListResponse"
               (\ o ->
-                 ProjectsListResponse <$>
+                 ProjectsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#projectsListResponse")
                      <*> (o .:? "projects" .!= mempty))
 
 instance ToJSON ProjectsListResponse where
-        toJSON ProjectsListResponse{..}
+        toJSON ProjectsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _plrNextPageToken,
@@ -1643,7 +1668,7 @@ instance ToJSON ProjectsListResponse where
 -- | Ad List Response
 --
 -- /See:/ 'adsListResponse' smart constructor.
-data AdsListResponse = AdsListResponse
+data AdsListResponse = AdsListResponse'
     { _alrNextPageToken :: !(Maybe Text)
     , _alrKind          :: !Text
     , _alrAds           :: !(Maybe [Ad])
@@ -1661,7 +1686,7 @@ data AdsListResponse = AdsListResponse
 adsListResponse
     :: AdsListResponse
 adsListResponse =
-    AdsListResponse
+    AdsListResponse'
     { _alrNextPageToken = Nothing
     , _alrKind = "dfareporting#adsListResponse"
     , _alrAds = Nothing
@@ -1688,13 +1713,13 @@ instance FromJSON AdsListResponse where
         parseJSON
           = withObject "AdsListResponse"
               (\ o ->
-                 AdsListResponse <$>
+                 AdsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "dfareporting#adsListResponse")
                      <*> (o .:? "ads" .!= mempty))
 
 instance ToJSON AdsListResponse where
-        toJSON AdsListResponse{..}
+        toJSON AdsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _alrNextPageToken,
@@ -1703,7 +1728,7 @@ instance ToJSON AdsListResponse where
 -- | Remarketing List Population Rule Term.
 --
 -- /See:/ 'listPopulationTerm' smart constructor.
-data ListPopulationTerm = ListPopulationTerm
+data ListPopulationTerm = ListPopulationTerm'
     { _lptOperator             :: !(Maybe ListPopulationTermOperator)
     , _lptValue                :: !(Maybe Text)
     , _lptVariableFriendlyName :: !(Maybe Text)
@@ -1736,7 +1761,7 @@ data ListPopulationTerm = ListPopulationTerm
 listPopulationTerm
     :: ListPopulationTerm
 listPopulationTerm =
-    ListPopulationTerm
+    ListPopulationTerm'
     { _lptOperator = Nothing
     , _lptValue = Nothing
     , _lptVariableFriendlyName = Nothing
@@ -1810,7 +1835,7 @@ instance FromJSON ListPopulationTerm where
         parseJSON
           = withObject "ListPopulationTerm"
               (\ o ->
-                 ListPopulationTerm <$>
+                 ListPopulationTerm' <$>
                    (o .:? "operator") <*> (o .:? "value") <*>
                      (o .:? "variableFriendlyName")
                      <*> (o .:? "negation")
@@ -1820,7 +1845,7 @@ instance FromJSON ListPopulationTerm where
                      <*> (o .:? "contains"))
 
 instance ToJSON ListPopulationTerm where
-        toJSON ListPopulationTerm{..}
+        toJSON ListPopulationTerm'{..}
           = object
               (catMaybes
                  [("operator" .=) <$> _lptOperator,
@@ -1836,7 +1861,7 @@ instance ToJSON ListPopulationTerm where
 -- | Dynamic and Image Tag Settings.
 --
 -- /See:/ 'tagSettings' smart constructor.
-data TagSettings = TagSettings
+data TagSettings = TagSettings'
     { _tsDynamicTagEnabled :: !(Maybe Bool)
     , _tsImageTagEnabled   :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1851,7 +1876,7 @@ data TagSettings = TagSettings
 tagSettings
     :: TagSettings
 tagSettings =
-    TagSettings
+    TagSettings'
     { _tsDynamicTagEnabled = Nothing
     , _tsImageTagEnabled = Nothing
     }
@@ -1872,12 +1897,12 @@ instance FromJSON TagSettings where
         parseJSON
           = withObject "TagSettings"
               (\ o ->
-                 TagSettings <$>
+                 TagSettings' <$>
                    (o .:? "dynamicTagEnabled") <*>
                      (o .:? "imageTagEnabled"))
 
 instance ToJSON TagSettings where
-        toJSON TagSettings{..}
+        toJSON TagSettings'{..}
           = object
               (catMaybes
                  [("dynamicTagEnabled" .=) <$> _tsDynamicTagEnabled,
@@ -1886,7 +1911,7 @@ instance ToJSON TagSettings where
 -- | Subaccount List Response
 --
 -- /See:/ 'subAccountsListResponse' smart constructor.
-data SubAccountsListResponse = SubAccountsListResponse
+data SubAccountsListResponse = SubAccountsListResponse'
     { _salrNextPageToken :: !(Maybe Text)
     , _salrKind          :: !Text
     , _salrSubAccounts   :: !(Maybe [SubAccount])
@@ -1904,7 +1929,7 @@ data SubAccountsListResponse = SubAccountsListResponse
 subAccountsListResponse
     :: SubAccountsListResponse
 subAccountsListResponse =
-    SubAccountsListResponse
+    SubAccountsListResponse'
     { _salrNextPageToken = Nothing
     , _salrKind = "dfareporting#subaccountsListResponse"
     , _salrSubAccounts = Nothing
@@ -1933,14 +1958,14 @@ instance FromJSON SubAccountsListResponse where
         parseJSON
           = withObject "SubAccountsListResponse"
               (\ o ->
-                 SubAccountsListResponse <$>
+                 SubAccountsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#subaccountsListResponse")
                      <*> (o .:? "subaccounts" .!= mempty))
 
 instance ToJSON SubAccountsListResponse where
-        toJSON SubAccountsListResponse{..}
+        toJSON SubAccountsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _salrNextPageToken,
@@ -1950,7 +1975,7 @@ instance ToJSON SubAccountsListResponse where
 -- | Contains properties of a Site Directory contact.
 --
 -- /See:/ 'directorySiteContact' smart constructor.
-data DirectorySiteContact = DirectorySiteContact
+data DirectorySiteContact = DirectorySiteContact'
     { _dscEmail     :: !(Maybe Text)
     , _dscPhone     :: !(Maybe Text)
     , _dscLastName  :: !(Maybe Text)
@@ -1989,7 +2014,7 @@ data DirectorySiteContact = DirectorySiteContact
 directorySiteContact
     :: DirectorySiteContact
 directorySiteContact =
-    DirectorySiteContact
+    DirectorySiteContact'
     { _dscEmail = Nothing
     , _dscPhone = Nothing
     , _dscLastName = Nothing
@@ -2053,7 +2078,7 @@ instance FromJSON DirectorySiteContact where
         parseJSON
           = withObject "DirectorySiteContact"
               (\ o ->
-                 DirectorySiteContact <$>
+                 DirectorySiteContact' <$>
                    (o .:? "email") <*> (o .:? "phone") <*>
                      (o .:? "lastName")
                      <*>
@@ -2067,7 +2092,7 @@ instance FromJSON DirectorySiteContact where
                      <*> (o .:? "type"))
 
 instance ToJSON DirectorySiteContact where
-        toJSON DirectorySiteContact{..}
+        toJSON DirectorySiteContact'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _dscEmail,
@@ -2083,7 +2108,7 @@ instance ToJSON DirectorySiteContact where
 -- | Region List Response
 --
 -- /See:/ 'regionsListResponse' smart constructor.
-data RegionsListResponse = RegionsListResponse
+data RegionsListResponse = RegionsListResponse'
     { _rlrKind    :: !Text
     , _rlrRegions :: !(Maybe [Region])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2098,7 +2123,7 @@ data RegionsListResponse = RegionsListResponse
 regionsListResponse
     :: RegionsListResponse
 regionsListResponse =
-    RegionsListResponse
+    RegionsListResponse'
     { _rlrKind = "dfareporting#regionsListResponse"
     , _rlrRegions = Nothing
     }
@@ -2119,12 +2144,12 @@ instance FromJSON RegionsListResponse where
         parseJSON
           = withObject "RegionsListResponse"
               (\ o ->
-                 RegionsListResponse <$>
+                 RegionsListResponse' <$>
                    (o .:? "kind" .!= "dfareporting#regionsListResponse")
                      <*> (o .:? "regions" .!= mempty))
 
 instance ToJSON RegionsListResponse where
-        toJSON RegionsListResponse{..}
+        toJSON RegionsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rlrKind),
@@ -2133,7 +2158,7 @@ instance ToJSON RegionsListResponse where
 -- | Dynamic Tag
 --
 -- /See:/ 'floodlightActivityDynamicTag' smart constructor.
-data FloodlightActivityDynamicTag = FloodlightActivityDynamicTag
+data FloodlightActivityDynamicTag = FloodlightActivityDynamicTag'
     { _fadtTag  :: !(Maybe Text)
     , _fadtName :: !(Maybe Text)
     , _fadtId   :: !(Maybe (Textual Int64))
@@ -2151,7 +2176,7 @@ data FloodlightActivityDynamicTag = FloodlightActivityDynamicTag
 floodlightActivityDynamicTag
     :: FloodlightActivityDynamicTag
 floodlightActivityDynamicTag =
-    FloodlightActivityDynamicTag
+    FloodlightActivityDynamicTag'
     { _fadtTag = Nothing
     , _fadtName = Nothing
     , _fadtId = Nothing
@@ -2175,11 +2200,11 @@ instance FromJSON FloodlightActivityDynamicTag where
         parseJSON
           = withObject "FloodlightActivityDynamicTag"
               (\ o ->
-                 FloodlightActivityDynamicTag <$>
+                 FloodlightActivityDynamicTag' <$>
                    (o .:? "tag") <*> (o .:? "name") <*> (o .:? "id"))
 
 instance ToJSON FloodlightActivityDynamicTag where
-        toJSON FloodlightActivityDynamicTag{..}
+        toJSON FloodlightActivityDynamicTag'{..}
           = object
               (catMaybes
                  [("tag" .=) <$> _fadtTag, ("name" .=) <$> _fadtName,
@@ -2190,7 +2215,7 @@ instance ToJSON FloodlightActivityDynamicTag where
 -- can be assigned to a placement.
 --
 -- /See:/ 'directorySite' smart constructor.
-data DirectorySite = DirectorySite
+data DirectorySite = DirectorySite'
     { _dsCurrencyId             :: !(Maybe (Textual Int64))
     , _dsSettings               :: !(Maybe DirectorySiteSettings)
     , _dsInterstitialTagFormats :: !(Maybe [DirectorySiteInterstitialTagFormatsItem])
@@ -2241,7 +2266,7 @@ data DirectorySite = DirectorySite
 directorySite
     :: DirectorySite
 directorySite =
-    DirectorySite
+    DirectorySite'
     { _dsCurrencyId = Nothing
     , _dsSettings = Nothing
     , _dsInterstitialTagFormats = Nothing
@@ -2267,7 +2292,10 @@ directorySite =
 -- \"23\" for NZD - \"24\" for MYR - \"25\" for BRL - \"26\" for PTE -
 -- \"27\" for MXP - \"28\" for CLP - \"29\" for TRY - \"30\" for ARS -
 -- \"31\" for PEN - \"32\" for ILS - \"33\" for CHF - \"34\" for VEF -
--- \"35\" for COP - \"36\" for GTQ
+-- \"35\" for COP - \"36\" for GTQ - \"37\" for PLN - \"39\" for INR -
+-- \"40\" for THB - \"41\" for IDR - \"42\" for CZK - \"43\" for RON -
+-- \"44\" for HUF - \"45\" for RUB - \"46\" for AED - \"47\" for BGN -
+-- \"48\" for HRK
 dsCurrencyId :: Lens' DirectorySite (Maybe Int64)
 dsCurrencyId
   = lens _dsCurrencyId (\ s a -> s{_dsCurrencyId = a})
@@ -2358,7 +2386,7 @@ instance FromJSON DirectorySite where
         parseJSON
           = withObject "DirectorySite"
               (\ o ->
-                 DirectorySite <$>
+                 DirectorySite' <$>
                    (o .:? "currencyId") <*> (o .:? "settings") <*>
                      (o .:? "interstitialTagFormats" .!= mempty)
                      <*> (o .:? "kind" .!= "dfareporting#directorySite")
@@ -2374,7 +2402,7 @@ instance FromJSON DirectorySite where
                      <*> (o .:? "parentId"))
 
 instance ToJSON DirectorySite where
-        toJSON DirectorySite{..}
+        toJSON DirectorySite'{..}
           = object
               (catMaybes
                  [("currencyId" .=) <$> _dsCurrencyId,
@@ -2394,7 +2422,7 @@ instance ToJSON DirectorySite where
 -- | The properties of the report.
 --
 -- /See:/ 'reportFloodlightCriteriaReportProperties' smart constructor.
-data ReportFloodlightCriteriaReportProperties = ReportFloodlightCriteriaReportProperties
+data ReportFloodlightCriteriaReportProperties = ReportFloodlightCriteriaReportProperties'
     { _rfcrpIncludeUnattributedIPConversions     :: !(Maybe Bool)
     , _rfcrpIncludeUnattributedCookieConversions :: !(Maybe Bool)
     , _rfcrpIncludeAttributedIPConversions       :: !(Maybe Bool)
@@ -2412,7 +2440,7 @@ data ReportFloodlightCriteriaReportProperties = ReportFloodlightCriteriaReportPr
 reportFloodlightCriteriaReportProperties
     :: ReportFloodlightCriteriaReportProperties
 reportFloodlightCriteriaReportProperties =
-    ReportFloodlightCriteriaReportProperties
+    ReportFloodlightCriteriaReportProperties'
     { _rfcrpIncludeUnattributedIPConversions = Nothing
     , _rfcrpIncludeUnattributedCookieConversions = Nothing
     , _rfcrpIncludeAttributedIPConversions = Nothing
@@ -2450,14 +2478,14 @@ instance FromJSON
           = withObject
               "ReportFloodlightCriteriaReportProperties"
               (\ o ->
-                 ReportFloodlightCriteriaReportProperties <$>
+                 ReportFloodlightCriteriaReportProperties' <$>
                    (o .:? "includeUnattributedIPConversions") <*>
                      (o .:? "includeUnattributedCookieConversions")
                      <*> (o .:? "includeAttributedIPConversions"))
 
 instance ToJSON
          ReportFloodlightCriteriaReportProperties where
-        toJSON ReportFloodlightCriteriaReportProperties{..}
+        toJSON ReportFloodlightCriteriaReportProperties'{..}
           = object
               (catMaybes
                  [("includeUnattributedIPConversions" .=) <$>
@@ -2470,7 +2498,7 @@ instance ToJSON
 -- | Contains properties of a Floodlight activity group.
 --
 -- /See:/ 'floodlightActivityGroup' smart constructor.
-data FloodlightActivityGroup = FloodlightActivityGroup
+data FloodlightActivityGroup = FloodlightActivityGroup'
     { _fagTagString                               :: !(Maybe Text)
     , _fagFloodlightConfigurationId               :: !(Maybe (Textual Int64))
     , _fagKind                                    :: !Text
@@ -2515,7 +2543,7 @@ data FloodlightActivityGroup = FloodlightActivityGroup
 floodlightActivityGroup
     :: FloodlightActivityGroup
 floodlightActivityGroup =
-    FloodlightActivityGroup
+    FloodlightActivityGroup'
     { _fagTagString = Nothing
     , _fagFloodlightConfigurationId = Nothing
     , _fagKind = "dfareporting#floodlightActivityGroup"
@@ -2622,7 +2650,7 @@ instance FromJSON FloodlightActivityGroup where
         parseJSON
           = withObject "FloodlightActivityGroup"
               (\ o ->
-                 FloodlightActivityGroup <$>
+                 FloodlightActivityGroup' <$>
                    (o .:? "tagString") <*>
                      (o .:? "floodlightConfigurationId")
                      <*>
@@ -2640,7 +2668,7 @@ instance FromJSON FloodlightActivityGroup where
                      (o .:? "floodlightConfigurationIdDimensionValue"))
 
 instance ToJSON FloodlightActivityGroup where
-        toJSON FloodlightActivityGroup{..}
+        toJSON FloodlightActivityGroup'{..}
           = object
               (catMaybes
                  [("tagString" .=) <$> _fagTagString,
@@ -2662,7 +2690,7 @@ instance ToJSON FloodlightActivityGroup where
 -- type \"CROSS_DIMENSION_REACH\".
 --
 -- /See:/ 'crossDimensionReachReportCompatibleFields' smart constructor.
-data CrossDimensionReachReportCompatibleFields = CrossDimensionReachReportCompatibleFields
+data CrossDimensionReachReportCompatibleFields = CrossDimensionReachReportCompatibleFields'
     { _cdrrcfMetrics          :: !(Maybe [Metric])
     , _cdrrcfBreakdown        :: !(Maybe [Dimension])
     , _cdrrcfKind             :: !Text
@@ -2686,7 +2714,7 @@ data CrossDimensionReachReportCompatibleFields = CrossDimensionReachReportCompat
 crossDimensionReachReportCompatibleFields
     :: CrossDimensionReachReportCompatibleFields
 crossDimensionReachReportCompatibleFields =
-    CrossDimensionReachReportCompatibleFields
+    CrossDimensionReachReportCompatibleFields'
     { _cdrrcfMetrics = Nothing
     , _cdrrcfBreakdown = Nothing
     , _cdrrcfKind = "dfareporting#crossDimensionReachReportCompatibleFields"
@@ -2742,7 +2770,7 @@ instance FromJSON
           = withObject
               "CrossDimensionReachReportCompatibleFields"
               (\ o ->
-                 CrossDimensionReachReportCompatibleFields <$>
+                 CrossDimensionReachReportCompatibleFields' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "breakdown" .!= mempty)
                      <*>
@@ -2753,7 +2781,7 @@ instance FromJSON
 
 instance ToJSON
          CrossDimensionReachReportCompatibleFields where
-        toJSON CrossDimensionReachReportCompatibleFields{..}
+        toJSON CrossDimensionReachReportCompatibleFields'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _cdrrcfMetrics,
@@ -2765,7 +2793,7 @@ instance ToJSON
 -- | FsCommand.
 --
 -- /See:/ 'fsCommand' smart constructor.
-data FsCommand = FsCommand
+data FsCommand = FsCommand'
     { _fcPositionOption :: !(Maybe FsCommandPositionOption)
     , _fcLeft           :: !(Maybe (Textual Int32))
     , _fcWindowHeight   :: !(Maybe (Textual Int32))
@@ -2789,7 +2817,7 @@ data FsCommand = FsCommand
 fsCommand
     :: FsCommand
 fsCommand =
-    FsCommand
+    FsCommand'
     { _fcPositionOption = Nothing
     , _fcLeft = Nothing
     , _fcWindowHeight = Nothing
@@ -2835,14 +2863,14 @@ instance FromJSON FsCommand where
         parseJSON
           = withObject "FsCommand"
               (\ o ->
-                 FsCommand <$>
+                 FsCommand' <$>
                    (o .:? "positionOption") <*> (o .:? "left") <*>
                      (o .:? "windowHeight")
                      <*> (o .:? "windowWidth")
                      <*> (o .:? "top"))
 
 instance ToJSON FsCommand where
-        toJSON FsCommand{..}
+        toJSON FsCommand'{..}
           = object
               (catMaybes
                  [("positionOption" .=) <$> _fcPositionOption,
@@ -2854,7 +2882,7 @@ instance ToJSON FsCommand where
 -- | Placement Assignment.
 --
 -- /See:/ 'placementAssignment' smart constructor.
-data PlacementAssignment = PlacementAssignment
+data PlacementAssignment = PlacementAssignment'
     { _paPlacementId               :: !(Maybe (Textual Int64))
     , _paPlacementIdDimensionValue :: !(Maybe DimensionValue)
     , _paActive                    :: !(Maybe Bool)
@@ -2875,7 +2903,7 @@ data PlacementAssignment = PlacementAssignment
 placementAssignment
     :: PlacementAssignment
 placementAssignment =
-    PlacementAssignment
+    PlacementAssignment'
     { _paPlacementId = Nothing
     , _paPlacementIdDimensionValue = Nothing
     , _paActive = Nothing
@@ -2912,14 +2940,14 @@ instance FromJSON PlacementAssignment where
         parseJSON
           = withObject "PlacementAssignment"
               (\ o ->
-                 PlacementAssignment <$>
+                 PlacementAssignment' <$>
                    (o .:? "placementId") <*>
                      (o .:? "placementIdDimensionValue")
                      <*> (o .:? "active")
                      <*> (o .:? "sslRequired"))
 
 instance ToJSON PlacementAssignment where
-        toJSON PlacementAssignment{..}
+        toJSON PlacementAssignment'{..}
           = object
               (catMaybes
                  [("placementId" .=) <$> _paPlacementId,
@@ -2931,7 +2959,7 @@ instance ToJSON PlacementAssignment where
 -- | Contains properties of a creative field value.
 --
 -- /See:/ 'creativeFieldValue' smart constructor.
-data CreativeFieldValue = CreativeFieldValue
+data CreativeFieldValue = CreativeFieldValue'
     { _cfvKind  :: !Text
     , _cfvValue :: !(Maybe Text)
     , _cfvId    :: !(Maybe (Textual Int64))
@@ -2949,7 +2977,7 @@ data CreativeFieldValue = CreativeFieldValue
 creativeFieldValue
     :: CreativeFieldValue
 creativeFieldValue =
-    CreativeFieldValue
+    CreativeFieldValue'
     { _cfvKind = "dfareporting#creativeFieldValue"
     , _cfvValue = Nothing
     , _cfvId = Nothing
@@ -2976,13 +3004,13 @@ instance FromJSON CreativeFieldValue where
         parseJSON
           = withObject "CreativeFieldValue"
               (\ o ->
-                 CreativeFieldValue <$>
+                 CreativeFieldValue' <$>
                    (o .:? "kind" .!= "dfareporting#creativeFieldValue")
                      <*> (o .:? "value")
                      <*> (o .:? "id"))
 
 instance ToJSON CreativeFieldValue where
-        toJSON CreativeFieldValue{..}
+        toJSON CreativeFieldValue'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cfvKind),
@@ -2991,7 +3019,7 @@ instance ToJSON CreativeFieldValue where
 -- | Represents a DimensionValuesRequest.
 --
 -- /See:/ 'dimensionValueRequest' smart constructor.
-data DimensionValueRequest = DimensionValueRequest
+data DimensionValueRequest = DimensionValueRequest'
     { _dvrKind          :: !Text
     , _dvrEndDate       :: !(Maybe Date')
     , _dvrFilters       :: !(Maybe [DimensionFilter])
@@ -3015,7 +3043,7 @@ data DimensionValueRequest = DimensionValueRequest
 dimensionValueRequest
     :: DimensionValueRequest
 dimensionValueRequest =
-    DimensionValueRequest
+    DimensionValueRequest'
     { _dvrKind = "dfareporting#dimensionValueRequest"
     , _dvrEndDate = Nothing
     , _dvrFilters = Nothing
@@ -3059,7 +3087,7 @@ instance FromJSON DimensionValueRequest where
         parseJSON
           = withObject "DimensionValueRequest"
               (\ o ->
-                 DimensionValueRequest <$>
+                 DimensionValueRequest' <$>
                    (o .:? "kind" .!=
                       "dfareporting#dimensionValueRequest")
                      <*> (o .:? "endDate")
@@ -3068,7 +3096,7 @@ instance FromJSON DimensionValueRequest where
                      <*> (o .:? "dimensionName"))
 
 instance ToJSON DimensionValueRequest where
-        toJSON DimensionValueRequest{..}
+        toJSON DimensionValueRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dvrKind),
@@ -3080,7 +3108,7 @@ instance ToJSON DimensionValueRequest where
 -- | Floodlight Configuration List Response
 --
 -- /See:/ 'floodlightConfigurationsListResponse' smart constructor.
-data FloodlightConfigurationsListResponse = FloodlightConfigurationsListResponse
+data FloodlightConfigurationsListResponse = FloodlightConfigurationsListResponse'
     { _fclrKind                     :: !Text
     , _fclrFloodlightConfigurations :: !(Maybe [FloodlightConfiguration])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3095,7 +3123,7 @@ data FloodlightConfigurationsListResponse = FloodlightConfigurationsListResponse
 floodlightConfigurationsListResponse
     :: FloodlightConfigurationsListResponse
 floodlightConfigurationsListResponse =
-    FloodlightConfigurationsListResponse
+    FloodlightConfigurationsListResponse'
     { _fclrKind = "dfareporting#floodlightConfigurationsListResponse"
     , _fclrFloodlightConfigurations = Nothing
     }
@@ -3118,14 +3146,14 @@ instance FromJSON
         parseJSON
           = withObject "FloodlightConfigurationsListResponse"
               (\ o ->
-                 FloodlightConfigurationsListResponse <$>
+                 FloodlightConfigurationsListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#floodlightConfigurationsListResponse")
                      <*> (o .:? "floodlightConfigurations" .!= mempty))
 
 instance ToJSON FloodlightConfigurationsListResponse
          where
-        toJSON FloodlightConfigurationsListResponse{..}
+        toJSON FloodlightConfigurationsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _fclrKind),
@@ -3135,7 +3163,7 @@ instance ToJSON FloodlightConfigurationsListResponse
 -- | Floodlight Activity List Response
 --
 -- /See:/ 'floodlightActivitiesListResponse' smart constructor.
-data FloodlightActivitiesListResponse = FloodlightActivitiesListResponse
+data FloodlightActivitiesListResponse = FloodlightActivitiesListResponse'
     { _falrNextPageToken        :: !(Maybe Text)
     , _falrKind                 :: !Text
     , _falrFloodlightActivities :: !(Maybe [FloodlightActivity])
@@ -3153,7 +3181,7 @@ data FloodlightActivitiesListResponse = FloodlightActivitiesListResponse
 floodlightActivitiesListResponse
     :: FloodlightActivitiesListResponse
 floodlightActivitiesListResponse =
-    FloodlightActivitiesListResponse
+    FloodlightActivitiesListResponse'
     { _falrNextPageToken = Nothing
     , _falrKind = "dfareporting#floodlightActivitiesListResponse"
     , _falrFloodlightActivities = Nothing
@@ -3183,7 +3211,7 @@ instance FromJSON FloodlightActivitiesListResponse
         parseJSON
           = withObject "FloodlightActivitiesListResponse"
               (\ o ->
-                 FloodlightActivitiesListResponse <$>
+                 FloodlightActivitiesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#floodlightActivitiesListResponse")
@@ -3191,7 +3219,7 @@ instance FromJSON FloodlightActivitiesListResponse
 
 instance ToJSON FloodlightActivitiesListResponse
          where
-        toJSON FloodlightActivitiesListResponse{..}
+        toJSON FloodlightActivitiesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _falrNextPageToken,
@@ -3202,7 +3230,7 @@ instance ToJSON FloodlightActivitiesListResponse
 -- | Creative Field Assignment.
 --
 -- /See:/ 'creativeFieldAssignment' smart constructor.
-data CreativeFieldAssignment = CreativeFieldAssignment
+data CreativeFieldAssignment = CreativeFieldAssignment'
     { _cfaCreativeFieldId      :: !(Maybe (Textual Int64))
     , _cfaCreativeFieldValueId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3217,7 +3245,7 @@ data CreativeFieldAssignment = CreativeFieldAssignment
 creativeFieldAssignment
     :: CreativeFieldAssignment
 creativeFieldAssignment =
-    CreativeFieldAssignment
+    CreativeFieldAssignment'
     { _cfaCreativeFieldId = Nothing
     , _cfaCreativeFieldValueId = Nothing
     }
@@ -3240,12 +3268,12 @@ instance FromJSON CreativeFieldAssignment where
         parseJSON
           = withObject "CreativeFieldAssignment"
               (\ o ->
-                 CreativeFieldAssignment <$>
+                 CreativeFieldAssignment' <$>
                    (o .:? "creativeFieldId") <*>
                      (o .:? "creativeFieldValueId"))
 
 instance ToJSON CreativeFieldAssignment where
-        toJSON CreativeFieldAssignment{..}
+        toJSON CreativeFieldAssignment'{..}
           = object
               (catMaybes
                  [("creativeFieldId" .=) <$> _cfaCreativeFieldId,
@@ -3256,7 +3284,7 @@ instance ToJSON CreativeFieldAssignment where
 -- entire group at once.
 --
 -- /See:/ 'advertiserGroup' smart constructor.
-data AdvertiserGroup = AdvertiserGroup
+data AdvertiserGroup = AdvertiserGroup'
     { _agKind      :: !Text
     , _agAccountId :: !(Maybe (Textual Int64))
     , _agName      :: !(Maybe Text)
@@ -3277,7 +3305,7 @@ data AdvertiserGroup = AdvertiserGroup
 advertiserGroup
     :: AdvertiserGroup
 advertiserGroup =
-    AdvertiserGroup
+    AdvertiserGroup'
     { _agKind = "dfareporting#advertiserGroup"
     , _agAccountId = Nothing
     , _agName = Nothing
@@ -3312,14 +3340,14 @@ instance FromJSON AdvertiserGroup where
         parseJSON
           = withObject "AdvertiserGroup"
               (\ o ->
-                 AdvertiserGroup <$>
+                 AdvertiserGroup' <$>
                    (o .:? "kind" .!= "dfareporting#advertiserGroup") <*>
                      (o .:? "accountId")
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON AdvertiserGroup where
-        toJSON AdvertiserGroup{..}
+        toJSON AdvertiserGroup'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _agKind),
@@ -3329,7 +3357,7 @@ instance ToJSON AdvertiserGroup where
 -- | Placement Tag Data
 --
 -- /See:/ 'tagData' smart constructor.
-data TagData = TagData
+data TagData = TagData'
     { _tdClickTag      :: !(Maybe Text)
     , _tdFormat        :: !(Maybe TagDataFormat)
     , _tdCreativeId    :: !(Maybe (Textual Int64))
@@ -3353,7 +3381,7 @@ data TagData = TagData
 tagData
     :: TagData
 tagData =
-    TagData
+    TagData'
     { _tdClickTag = Nothing
     , _tdFormat = Nothing
     , _tdCreativeId = Nothing
@@ -3392,14 +3420,14 @@ instance FromJSON TagData where
         parseJSON
           = withObject "TagData"
               (\ o ->
-                 TagData <$>
+                 TagData' <$>
                    (o .:? "clickTag") <*> (o .:? "format") <*>
                      (o .:? "creativeId")
                      <*> (o .:? "adId")
                      <*> (o .:? "impressionTag"))
 
 instance ToJSON TagData where
-        toJSON TagData{..}
+        toJSON TagData'{..}
           = object
               (catMaybes
                  [("clickTag" .=) <$> _tdClickTag,
@@ -3411,7 +3439,7 @@ instance ToJSON TagData where
 -- | Day Part Targeting.
 --
 -- /See:/ 'dayPartTargeting' smart constructor.
-data DayPartTargeting = DayPartTargeting
+data DayPartTargeting = DayPartTargeting'
     { _dptDaysOfWeek    :: !(Maybe [DayPartTargetingDaysOfWeekItem])
     , _dptHoursOfDay    :: !(Maybe [Textual Int32])
     , _dptUserLocalTime :: !(Maybe Bool)
@@ -3429,7 +3457,7 @@ data DayPartTargeting = DayPartTargeting
 dayPartTargeting
     :: DayPartTargeting
 dayPartTargeting =
-    DayPartTargeting
+    DayPartTargeting'
     { _dptDaysOfWeek = Nothing
     , _dptHoursOfDay = Nothing
     , _dptUserLocalTime = Nothing
@@ -3470,13 +3498,13 @@ instance FromJSON DayPartTargeting where
         parseJSON
           = withObject "DayPartTargeting"
               (\ o ->
-                 DayPartTargeting <$>
+                 DayPartTargeting' <$>
                    (o .:? "daysOfWeek" .!= mempty) <*>
                      (o .:? "hoursOfDay" .!= mempty)
                      <*> (o .:? "userLocalTime"))
 
 instance ToJSON DayPartTargeting where
-        toJSON DayPartTargeting{..}
+        toJSON DayPartTargeting'{..}
           = object
               (catMaybes
                  [("daysOfWeek" .=) <$> _dptDaysOfWeek,
@@ -3486,7 +3514,7 @@ instance ToJSON DayPartTargeting where
 -- | Creative optimization settings.
 --
 -- /See:/ 'creativeOptimizationConfiguration' smart constructor.
-data CreativeOptimizationConfiguration = CreativeOptimizationConfiguration
+data CreativeOptimizationConfiguration = CreativeOptimizationConfiguration'
     { _cocOptimizationModel     :: !(Maybe CreativeOptimizationConfigurationOptimizationModel)
     , _cocName                  :: !(Maybe Text)
     , _cocOptimizationActivitys :: !(Maybe [OptimizationActivity])
@@ -3507,7 +3535,7 @@ data CreativeOptimizationConfiguration = CreativeOptimizationConfiguration
 creativeOptimizationConfiguration
     :: CreativeOptimizationConfiguration
 creativeOptimizationConfiguration =
-    CreativeOptimizationConfiguration
+    CreativeOptimizationConfiguration'
     { _cocOptimizationModel = Nothing
     , _cocName = Nothing
     , _cocOptimizationActivitys = Nothing
@@ -3546,14 +3574,14 @@ instance FromJSON CreativeOptimizationConfiguration
         parseJSON
           = withObject "CreativeOptimizationConfiguration"
               (\ o ->
-                 CreativeOptimizationConfiguration <$>
+                 CreativeOptimizationConfiguration' <$>
                    (o .:? "optimizationModel") <*> (o .:? "name") <*>
                      (o .:? "optimizationActivitys" .!= mempty)
                      <*> (o .:? "id"))
 
 instance ToJSON CreativeOptimizationConfiguration
          where
-        toJSON CreativeOptimizationConfiguration{..}
+        toJSON CreativeOptimizationConfiguration'{..}
           = object
               (catMaybes
                  [("optimizationModel" .=) <$> _cocOptimizationModel,
@@ -3565,7 +3593,7 @@ instance ToJSON CreativeOptimizationConfiguration
 -- | The report criteria for a report of type \"STANDARD\".
 --
 -- /See:/ 'reportCriteria' smart constructor.
-data ReportCriteria = ReportCriteria
+data ReportCriteria = ReportCriteria'
     { _rcMetricNames           :: !(Maybe [Text])
     , _rcCustomRichMediaEvents :: !(Maybe CustomRichMediaEvents)
     , _rcDimensionFilters      :: !(Maybe [DimensionValue])
@@ -3592,7 +3620,7 @@ data ReportCriteria = ReportCriteria
 reportCriteria
     :: ReportCriteria
 reportCriteria =
-    ReportCriteria
+    ReportCriteria'
     { _rcMetricNames = Nothing
     , _rcCustomRichMediaEvents = Nothing
     , _rcDimensionFilters = Nothing
@@ -3646,7 +3674,7 @@ instance FromJSON ReportCriteria where
         parseJSON
           = withObject "ReportCriteria"
               (\ o ->
-                 ReportCriteria <$>
+                 ReportCriteria' <$>
                    (o .:? "metricNames" .!= mempty) <*>
                      (o .:? "customRichMediaEvents")
                      <*> (o .:? "dimensionFilters" .!= mempty)
@@ -3655,7 +3683,7 @@ instance FromJSON ReportCriteria where
                      <*> (o .:? "dimensions" .!= mempty))
 
 instance ToJSON ReportCriteria where
-        toJSON ReportCriteria{..}
+        toJSON ReportCriteria'{..}
           = object
               (catMaybes
                  [("metricNames" .=) <$> _rcMetricNames,
@@ -3669,7 +3697,7 @@ instance ToJSON ReportCriteria where
 -- | Placement Strategy List Response
 --
 -- /See:/ 'placementStrategiesListResponse' smart constructor.
-data PlacementStrategiesListResponse = PlacementStrategiesListResponse
+data PlacementStrategiesListResponse = PlacementStrategiesListResponse'
     { _pslrPlacementStrategies :: !(Maybe [PlacementStrategy])
     , _pslrNextPageToken       :: !(Maybe Text)
     , _pslrKind                :: !Text
@@ -3687,7 +3715,7 @@ data PlacementStrategiesListResponse = PlacementStrategiesListResponse
 placementStrategiesListResponse
     :: PlacementStrategiesListResponse
 placementStrategiesListResponse =
-    PlacementStrategiesListResponse
+    PlacementStrategiesListResponse'
     { _pslrPlacementStrategies = Nothing
     , _pslrNextPageToken = Nothing
     , _pslrKind = "dfareporting#placementStrategiesListResponse"
@@ -3717,7 +3745,7 @@ instance FromJSON PlacementStrategiesListResponse
         parseJSON
           = withObject "PlacementStrategiesListResponse"
               (\ o ->
-                 PlacementStrategiesListResponse <$>
+                 PlacementStrategiesListResponse' <$>
                    (o .:? "placementStrategies" .!= mempty) <*>
                      (o .:? "nextPageToken")
                      <*>
@@ -3725,7 +3753,7 @@ instance FromJSON PlacementStrategiesListResponse
                         "dfareporting#placementStrategiesListResponse"))
 
 instance ToJSON PlacementStrategiesListResponse where
-        toJSON PlacementStrategiesListResponse{..}
+        toJSON PlacementStrategiesListResponse'{..}
           = object
               (catMaybes
                  [("placementStrategies" .=) <$>
@@ -3736,7 +3764,7 @@ instance ToJSON PlacementStrategiesListResponse where
 -- | Contains properties of a DCM subaccount.
 --
 -- /See:/ 'subAccount' smart constructor.
-data SubAccount = SubAccount
+data SubAccount = SubAccount'
     { _saKind                   :: !Text
     , _saAvailablePermissionIds :: !(Maybe [Textual Int64])
     , _saAccountId              :: !(Maybe (Textual Int64))
@@ -3760,7 +3788,7 @@ data SubAccount = SubAccount
 subAccount
     :: SubAccount
 subAccount =
-    SubAccount
+    SubAccount'
     { _saKind = "dfareporting#subaccount"
     , _saAvailablePermissionIds = Nothing
     , _saAccountId = Nothing
@@ -3803,7 +3831,7 @@ instance FromJSON SubAccount where
         parseJSON
           = withObject "SubAccount"
               (\ o ->
-                 SubAccount <$>
+                 SubAccount' <$>
                    (o .:? "kind" .!= "dfareporting#subaccount") <*>
                      (o .:? "availablePermissionIds" .!= mempty)
                      <*> (o .:? "accountId")
@@ -3811,7 +3839,7 @@ instance FromJSON SubAccount where
                      <*> (o .:? "id"))
 
 instance ToJSON SubAccount where
-        toJSON SubAccount{..}
+        toJSON SubAccount'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _saKind),
@@ -3823,7 +3851,7 @@ instance ToJSON SubAccount where
 -- | Inventory item List Response
 --
 -- /See:/ 'inventoryItemsListResponse' smart constructor.
-data InventoryItemsListResponse = InventoryItemsListResponse
+data InventoryItemsListResponse = InventoryItemsListResponse'
     { _iilrInventoryItems :: !(Maybe [InventoryItem])
     , _iilrNextPageToken  :: !(Maybe Text)
     , _iilrKind           :: !Text
@@ -3841,7 +3869,7 @@ data InventoryItemsListResponse = InventoryItemsListResponse
 inventoryItemsListResponse
     :: InventoryItemsListResponse
 inventoryItemsListResponse =
-    InventoryItemsListResponse
+    InventoryItemsListResponse'
     { _iilrInventoryItems = Nothing
     , _iilrNextPageToken = Nothing
     , _iilrKind = "dfareporting#inventoryItemsListResponse"
@@ -3870,7 +3898,7 @@ instance FromJSON InventoryItemsListResponse where
         parseJSON
           = withObject "InventoryItemsListResponse"
               (\ o ->
-                 InventoryItemsListResponse <$>
+                 InventoryItemsListResponse' <$>
                    (o .:? "inventoryItems" .!= mempty) <*>
                      (o .:? "nextPageToken")
                      <*>
@@ -3878,7 +3906,7 @@ instance FromJSON InventoryItemsListResponse where
                         "dfareporting#inventoryItemsListResponse"))
 
 instance ToJSON InventoryItemsListResponse where
-        toJSON InventoryItemsListResponse{..}
+        toJSON InventoryItemsListResponse'{..}
           = object
               (catMaybes
                  [("inventoryItems" .=) <$> _iilrInventoryItems,
@@ -3888,7 +3916,7 @@ instance ToJSON InventoryItemsListResponse where
 -- | Contains properties of a DCM ad.
 --
 -- /See:/ 'ad' smart constructor.
-data Ad = Ad
+data Ad = Ad'
     { _aCreativeGroupAssignments              :: !(Maybe [CreativeGroupAssignment])
     , _aGeoTargeting                          :: !(Maybe GeoTargeting)
     , _aCreativeRotation                      :: !(Maybe CreativeRotation)
@@ -4008,7 +4036,7 @@ data Ad = Ad
 ad
     :: Ad
 ad =
-    Ad
+    Ad'
     { _aCreativeGroupAssignments = Nothing
     , _aGeoTargeting = Nothing
     , _aCreativeRotation = Nothing
@@ -4272,11 +4300,13 @@ aDynamicClickTracker
       (\ s a -> s{_aDynamicClickTracker = a})
 
 -- | Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
--- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
--- mobile devices for regular or interstitial ads, respectively. APP and
--- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
--- refers to rendering an in-stream video ads developed with the VAST
--- standard.
+-- DISPLAY and DISPLAY_INTERSTITIAL refer to either rendering on desktop or
+-- on mobile devices or in mobile apps for regular or interstitial ads,
+-- respectively. APP and APP_INTERSTITIAL are only used for existing
+-- default ads. New mobile placements must be assigned DISPLAY or
+-- DISPLAY_INTERSTITIAL and default ads created for those placements will
+-- be limited to those compatibility types. IN_STREAM_VIDEO refers to
+-- rendering in-stream video ads developed with the VAST standard.
 aCompatibility :: Lens' Ad (Maybe AdCompatibility)
 aCompatibility
   = lens _aCompatibility
@@ -4306,7 +4336,7 @@ instance FromJSON Ad where
         parseJSON
           = withObject "Ad"
               (\ o ->
-                 Ad <$>
+                 Ad' <$>
                    (o .:? "creativeGroupAssignments" .!= mempty) <*>
                      (o .:? "geoTargeting")
                      <*> (o .:? "creativeRotation")
@@ -4346,7 +4376,7 @@ instance FromJSON Ad where
                      <*> (o .:? "placementAssignments" .!= mempty))
 
 instance ToJSON Ad where
-        toJSON Ad{..}
+        toJSON Ad'{..}
           = object
               (catMaybes
                  [("creativeGroupAssignments" .=) <$>
@@ -4398,7 +4428,7 @@ instance ToJSON Ad where
 -- | Contains properties of a DoubleClick Planning project.
 --
 -- /See:/ 'project' smart constructor.
-data Project = Project
+data Project = Project'
     { _pTargetClicks      :: !(Maybe (Textual Int64))
     , _pClientBillingCode :: !(Maybe Text)
     , _pTargetCpmNanos    :: !(Maybe (Textual Int64))
@@ -4470,7 +4500,7 @@ data Project = Project
 project
     :: Project
 project =
-    Project
+    Project'
     { _pTargetClicks = Nothing
     , _pClientBillingCode = Nothing
     , _pTargetCpmNanos = Nothing
@@ -4629,7 +4659,7 @@ instance FromJSON Project where
         parseJSON
           = withObject "Project"
               (\ o ->
-                 Project <$>
+                 Project' <$>
                    (o .:? "targetClicks") <*>
                      (o .:? "clientBillingCode")
                      <*> (o .:? "targetCpmNanos")
@@ -4653,7 +4683,7 @@ instance FromJSON Project where
                      <*> (o .:? "targetCpaNanos"))
 
 instance ToJSON Project where
-        toJSON Project{..}
+        toJSON Project'{..}
           = object
               (catMaybes
                  [("targetClicks" .=) <$> _pTargetClicks,
@@ -4680,7 +4710,7 @@ instance ToJSON Project where
 -- | The report criteria for a report of type \"FLOODLIGHT\".
 --
 -- /See:/ 'reportFloodlightCriteria' smart constructor.
-data ReportFloodlightCriteria = ReportFloodlightCriteria
+data ReportFloodlightCriteria = ReportFloodlightCriteria'
     { _rfcReportProperties      :: !(Maybe ReportFloodlightCriteriaReportProperties)
     , _rfcMetricNames           :: !(Maybe [Text])
     , _rfcCustomRichMediaEvents :: !(Maybe [DimensionValue])
@@ -4710,7 +4740,7 @@ data ReportFloodlightCriteria = ReportFloodlightCriteria
 reportFloodlightCriteria
     :: ReportFloodlightCriteria
 reportFloodlightCriteria =
-    ReportFloodlightCriteria
+    ReportFloodlightCriteria'
     { _rfcReportProperties = Nothing
     , _rfcMetricNames = Nothing
     , _rfcCustomRichMediaEvents = Nothing
@@ -4777,7 +4807,7 @@ instance FromJSON ReportFloodlightCriteria where
         parseJSON
           = withObject "ReportFloodlightCriteria"
               (\ o ->
-                 ReportFloodlightCriteria <$>
+                 ReportFloodlightCriteria' <$>
                    (o .:? "reportProperties") <*>
                      (o .:? "metricNames" .!= mempty)
                      <*> (o .:? "customRichMediaEvents" .!= mempty)
@@ -4787,7 +4817,7 @@ instance FromJSON ReportFloodlightCriteria where
                      <*> (o .:? "dimensions" .!= mempty))
 
 instance ToJSON ReportFloodlightCriteria where
-        toJSON ReportFloodlightCriteria{..}
+        toJSON ReportFloodlightCriteria'{..}
           = object
               (catMaybes
                  [("reportProperties" .=) <$> _rfcReportProperties,
@@ -4803,7 +4833,7 @@ instance ToJSON ReportFloodlightCriteria where
 -- assets.
 --
 -- /See:/ 'size' smart constructor.
-data Size = Size
+data Size = Size'
     { _sHeight :: !(Maybe (Textual Int32))
     , _sKind   :: !Text
     , _sWidth  :: !(Maybe (Textual Int32))
@@ -4827,7 +4857,7 @@ data Size = Size
 size
     :: Size
 size =
-    Size
+    Size'
     { _sHeight = Nothing
     , _sKind = "dfareporting#size"
     , _sWidth = Nothing
@@ -4865,7 +4895,7 @@ instance FromJSON Size where
         parseJSON
           = withObject "Size"
               (\ o ->
-                 Size <$>
+                 Size' <$>
                    (o .:? "height") <*>
                      (o .:? "kind" .!= "dfareporting#size")
                      <*> (o .:? "width")
@@ -4873,7 +4903,7 @@ instance FromJSON Size where
                      <*> (o .:? "id"))
 
 instance ToJSON Size where
-        toJSON Size{..}
+        toJSON Size'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _sHeight, Just ("kind" .= _sKind),
@@ -4883,7 +4913,7 @@ instance ToJSON Size where
 -- | Object Filter.
 --
 -- /See:/ 'objectFilter' smart constructor.
-data ObjectFilter = ObjectFilter
+data ObjectFilter = ObjectFilter'
     { _ofStatus    :: !(Maybe ObjectFilterStatus)
     , _ofKind      :: !Text
     , _ofObjectIds :: !(Maybe [Textual Int64])
@@ -4901,7 +4931,7 @@ data ObjectFilter = ObjectFilter
 objectFilter
     :: ObjectFilter
 objectFilter =
-    ObjectFilter
+    ObjectFilter'
     { _ofStatus = Nothing
     , _ofKind = "dfareporting#objectFilter"
     , _ofObjectIds = Nothing
@@ -4930,13 +4960,13 @@ instance FromJSON ObjectFilter where
         parseJSON
           = withObject "ObjectFilter"
               (\ o ->
-                 ObjectFilter <$>
+                 ObjectFilter' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "dfareporting#objectFilter")
                      <*> (o .:? "objectIds" .!= mempty))
 
 instance ToJSON ObjectFilter where
-        toJSON ObjectFilter{..}
+        toJSON ObjectFilter'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _ofStatus,
@@ -4946,7 +4976,7 @@ instance ToJSON ObjectFilter where
 -- | Reporting Configuration
 --
 -- /See:/ 'reportsConfiguration' smart constructor.
-data ReportsConfiguration = ReportsConfiguration
+data ReportsConfiguration = ReportsConfiguration'
     { _rcExposureToConversionEnabled :: !(Maybe Bool)
     , _rcReportGenerationTimeZoneId  :: !(Maybe (Textual Int64))
     , _rcLookbackConfiguration       :: !(Maybe LookbackConfiguration)
@@ -4964,7 +4994,7 @@ data ReportsConfiguration = ReportsConfiguration
 reportsConfiguration
     :: ReportsConfiguration
 reportsConfiguration =
-    ReportsConfiguration
+    ReportsConfiguration'
     { _rcExposureToConversionEnabled = Nothing
     , _rcReportGenerationTimeZoneId = Nothing
     , _rcLookbackConfiguration = Nothing
@@ -5003,13 +5033,13 @@ instance FromJSON ReportsConfiguration where
         parseJSON
           = withObject "ReportsConfiguration"
               (\ o ->
-                 ReportsConfiguration <$>
+                 ReportsConfiguration' <$>
                    (o .:? "exposureToConversionEnabled") <*>
                      (o .:? "reportGenerationTimeZoneId")
                      <*> (o .:? "lookbackConfiguration"))
 
 instance ToJSON ReportsConfiguration where
-        toJSON ReportsConfiguration{..}
+        toJSON ReportsConfiguration'{..}
           = object
               (catMaybes
                  [("exposureToConversionEnabled" .=) <$>
@@ -5022,7 +5052,7 @@ instance ToJSON ReportsConfiguration where
 -- | Pricing Schedule
 --
 -- /See:/ 'pricingSchedule' smart constructor.
-data PricingSchedule = PricingSchedule
+data PricingSchedule = PricingSchedule'
     { _psTestingStartDate      :: !(Maybe Date')
     , _psFloodlightActivityId  :: !(Maybe (Textual Int64))
     , _psEndDate               :: !(Maybe Date')
@@ -5058,7 +5088,7 @@ data PricingSchedule = PricingSchedule
 pricingSchedule
     :: PricingSchedule
 pricingSchedule =
-    PricingSchedule
+    PricingSchedule'
     { _psTestingStartDate = Nothing
     , _psFloodlightActivityId = Nothing
     , _psEndDate = Nothing
@@ -5142,7 +5172,7 @@ instance FromJSON PricingSchedule where
         parseJSON
           = withObject "PricingSchedule"
               (\ o ->
-                 PricingSchedule <$>
+                 PricingSchedule' <$>
                    (o .:? "testingStartDate") <*>
                      (o .:? "floodlightActivityId")
                      <*> (o .:? "endDate")
@@ -5154,7 +5184,7 @@ instance FromJSON PricingSchedule where
                      <*> (o .:? "flighted"))
 
 instance ToJSON PricingSchedule where
-        toJSON PricingSchedule{..}
+        toJSON PricingSchedule'{..}
           = object
               (catMaybes
                  [("testingStartDate" .=) <$> _psTestingStartDate,
@@ -5172,7 +5202,7 @@ instance ToJSON PricingSchedule where
 -- | Contains information about a postal code that can be targeted by ads.
 --
 -- /See:/ 'postalCode' smart constructor.
-data PostalCode = PostalCode
+data PostalCode = PostalCode'
     { _pcKind          :: !Text
     , _pcCode          :: !(Maybe Text)
     , _pcCountryCode   :: !(Maybe Text)
@@ -5196,7 +5226,7 @@ data PostalCode = PostalCode
 postalCode
     :: PostalCode
 postalCode =
-    PostalCode
+    PostalCode'
     { _pcKind = "dfareporting#postalCode"
     , _pcCode = Nothing
     , _pcCountryCode = Nothing
@@ -5234,7 +5264,7 @@ instance FromJSON PostalCode where
         parseJSON
           = withObject "PostalCode"
               (\ o ->
-                 PostalCode <$>
+                 PostalCode' <$>
                    (o .:? "kind" .!= "dfareporting#postalCode") <*>
                      (o .:? "code")
                      <*> (o .:? "countryCode")
@@ -5242,7 +5272,7 @@ instance FromJSON PostalCode where
                      <*> (o .:? "countryDartId"))
 
 instance ToJSON PostalCode where
-        toJSON PostalCode{..}
+        toJSON PostalCode'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pcKind), ("code" .=) <$> _pcCode,
@@ -5253,7 +5283,7 @@ instance ToJSON PostalCode where
 -- | Account Permission List Response
 --
 -- /See:/ 'accountPermissionsListResponse' smart constructor.
-data AccountPermissionsListResponse = AccountPermissionsListResponse
+data AccountPermissionsListResponse = AccountPermissionsListResponse'
     { _aplrKind               :: !Text
     , _aplrAccountPermissions :: !(Maybe [AccountPermission])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5268,7 +5298,7 @@ data AccountPermissionsListResponse = AccountPermissionsListResponse
 accountPermissionsListResponse
     :: AccountPermissionsListResponse
 accountPermissionsListResponse =
-    AccountPermissionsListResponse
+    AccountPermissionsListResponse'
     { _aplrKind = "dfareporting#accountPermissionsListResponse"
     , _aplrAccountPermissions = Nothing
     }
@@ -5291,13 +5321,13 @@ instance FromJSON AccountPermissionsListResponse
         parseJSON
           = withObject "AccountPermissionsListResponse"
               (\ o ->
-                 AccountPermissionsListResponse <$>
+                 AccountPermissionsListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#accountPermissionsListResponse")
                      <*> (o .:? "accountPermissions" .!= mempty))
 
 instance ToJSON AccountPermissionsListResponse where
-        toJSON AccountPermissionsListResponse{..}
+        toJSON AccountPermissionsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aplrKind),
@@ -5307,7 +5337,7 @@ instance ToJSON AccountPermissionsListResponse where
 -- | Contains information about a country that can be targeted by ads.
 --
 -- /See:/ 'country' smart constructor.
-data Country = Country
+data Country = Country'
     { _cKind        :: !Text
     , _cName        :: !(Maybe Text)
     , _cCountryCode :: !(Maybe Text)
@@ -5331,7 +5361,7 @@ data Country = Country
 country
     :: Country
 country =
-    Country
+    Country'
     { _cKind = "dfareporting#country"
     , _cName = Nothing
     , _cCountryCode = Nothing
@@ -5369,7 +5399,7 @@ instance FromJSON Country where
         parseJSON
           = withObject "Country"
               (\ o ->
-                 Country <$>
+                 Country' <$>
                    (o .:? "kind" .!= "dfareporting#country") <*>
                      (o .:? "name")
                      <*> (o .:? "countryCode")
@@ -5377,7 +5407,7 @@ instance FromJSON Country where
                      <*> (o .:? "sslEnabled"))
 
 instance ToJSON Country where
-        toJSON Country{..}
+        toJSON Country'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cKind), ("name" .=) <$> _cName,
@@ -5388,7 +5418,7 @@ instance ToJSON Country where
 -- | Operating System Version List Response
 --
 -- /See:/ 'operatingSystemVersionsListResponse' smart constructor.
-data OperatingSystemVersionsListResponse = OperatingSystemVersionsListResponse
+data OperatingSystemVersionsListResponse = OperatingSystemVersionsListResponse'
     { _osvlrKind                    :: !Text
     , _osvlrOperatingSystemVersions :: !(Maybe [OperatingSystemVersion])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5403,7 +5433,7 @@ data OperatingSystemVersionsListResponse = OperatingSystemVersionsListResponse
 operatingSystemVersionsListResponse
     :: OperatingSystemVersionsListResponse
 operatingSystemVersionsListResponse =
-    OperatingSystemVersionsListResponse
+    OperatingSystemVersionsListResponse'
     { _osvlrKind = "dfareporting#operatingSystemVersionsListResponse"
     , _osvlrOperatingSystemVersions = Nothing
     }
@@ -5427,14 +5457,14 @@ instance FromJSON OperatingSystemVersionsListResponse
         parseJSON
           = withObject "OperatingSystemVersionsListResponse"
               (\ o ->
-                 OperatingSystemVersionsListResponse <$>
+                 OperatingSystemVersionsListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#operatingSystemVersionsListResponse")
                      <*> (o .:? "operatingSystemVersions" .!= mempty))
 
 instance ToJSON OperatingSystemVersionsListResponse
          where
-        toJSON OperatingSystemVersionsListResponse{..}
+        toJSON OperatingSystemVersionsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _osvlrKind),
@@ -5444,7 +5474,7 @@ instance ToJSON OperatingSystemVersionsListResponse
 -- | Click Through URL Suffix settings.
 --
 -- /See:/ 'clickThroughURLSuffixProperties' smart constructor.
-data ClickThroughURLSuffixProperties = ClickThroughURLSuffixProperties
+data ClickThroughURLSuffixProperties = ClickThroughURLSuffixProperties'
     { _ctuspOverrideInheritedSuffix :: !(Maybe Bool)
     , _ctuspClickThroughURLSuffix   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5459,7 +5489,7 @@ data ClickThroughURLSuffixProperties = ClickThroughURLSuffixProperties
 clickThroughURLSuffixProperties
     :: ClickThroughURLSuffixProperties
 clickThroughURLSuffixProperties =
-    ClickThroughURLSuffixProperties
+    ClickThroughURLSuffixProperties'
     { _ctuspOverrideInheritedSuffix = Nothing
     , _ctuspClickThroughURLSuffix = Nothing
     }
@@ -5483,12 +5513,12 @@ instance FromJSON ClickThroughURLSuffixProperties
         parseJSON
           = withObject "ClickThroughURLSuffixProperties"
               (\ o ->
-                 ClickThroughURLSuffixProperties <$>
+                 ClickThroughURLSuffixProperties' <$>
                    (o .:? "overrideInheritedSuffix") <*>
                      (o .:? "clickThroughUrlSuffix"))
 
 instance ToJSON ClickThroughURLSuffixProperties where
-        toJSON ClickThroughURLSuffixProperties{..}
+        toJSON ClickThroughURLSuffixProperties'{..}
           = object
               (catMaybes
                  [("overrideInheritedSuffix" .=) <$>
@@ -5499,7 +5529,7 @@ instance ToJSON ClickThroughURLSuffixProperties where
 -- | Pricing Information
 --
 -- /See:/ 'pricing' smart constructor.
-data Pricing = Pricing
+data Pricing = Pricing'
     { _priEndDate     :: !(Maybe Date')
     , _priStartDate   :: !(Maybe Date')
     , _priGroupType   :: !(Maybe PricingGroupType)
@@ -5526,7 +5556,7 @@ data Pricing = Pricing
 pricing
     :: Pricing
 pricing =
-    Pricing
+    Pricing'
     { _priEndDate = Nothing
     , _priStartDate = Nothing
     , _priGroupType = Nothing
@@ -5584,7 +5614,7 @@ instance FromJSON Pricing where
         parseJSON
           = withObject "Pricing"
               (\ o ->
-                 Pricing <$>
+                 Pricing' <$>
                    (o .:? "endDate") <*> (o .:? "startDate") <*>
                      (o .:? "groupType")
                      <*> (o .:? "pricingType")
@@ -5592,7 +5622,7 @@ instance FromJSON Pricing where
                      <*> (o .:? "capCostType"))
 
 instance ToJSON Pricing where
-        toJSON Pricing{..}
+        toJSON Pricing'{..}
           = object
               (catMaybes
                  [("endDate" .=) <$> _priEndDate,
@@ -5605,7 +5635,7 @@ instance ToJSON Pricing where
 -- | Audience Segment Group.
 --
 -- /See:/ 'audienceSegmentGroup' smart constructor.
-data AudienceSegmentGroup = AudienceSegmentGroup
+data AudienceSegmentGroup = AudienceSegmentGroup'
     { _asgAudienceSegments :: !(Maybe [AudienceSegment])
     , _asgName             :: !(Maybe Text)
     , _asgId               :: !(Maybe (Textual Int64))
@@ -5623,7 +5653,7 @@ data AudienceSegmentGroup = AudienceSegmentGroup
 audienceSegmentGroup
     :: AudienceSegmentGroup
 audienceSegmentGroup =
-    AudienceSegmentGroup
+    AudienceSegmentGroup'
     { _asgAudienceSegments = Nothing
     , _asgName = Nothing
     , _asgId = Nothing
@@ -5654,13 +5684,13 @@ instance FromJSON AudienceSegmentGroup where
         parseJSON
           = withObject "AudienceSegmentGroup"
               (\ o ->
-                 AudienceSegmentGroup <$>
+                 AudienceSegmentGroup' <$>
                    (o .:? "audienceSegments" .!= mempty) <*>
                      (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON AudienceSegmentGroup where
-        toJSON AudienceSegmentGroup{..}
+        toJSON AudienceSegmentGroup'{..}
           = object
               (catMaybes
                  [("audienceSegments" .=) <$> _asgAudienceSegments,
@@ -5670,7 +5700,7 @@ instance ToJSON AudienceSegmentGroup where
 -- ads.
 --
 -- /See:/ 'operatingSystem' smart constructor.
-data OperatingSystem = OperatingSystem
+data OperatingSystem = OperatingSystem'
     { _osDesktop :: !(Maybe Bool)
     , _osKind    :: !Text
     , _osName    :: !(Maybe Text)
@@ -5694,7 +5724,7 @@ data OperatingSystem = OperatingSystem
 operatingSystem
     :: OperatingSystem
 operatingSystem =
-    OperatingSystem
+    OperatingSystem'
     { _osDesktop = Nothing
     , _osKind = "dfareporting#operatingSystem"
     , _osName = Nothing
@@ -5730,7 +5760,7 @@ instance FromJSON OperatingSystem where
         parseJSON
           = withObject "OperatingSystem"
               (\ o ->
-                 OperatingSystem <$>
+                 OperatingSystem' <$>
                    (o .:? "desktop") <*>
                      (o .:? "kind" .!= "dfareporting#operatingSystem")
                      <*> (o .:? "name")
@@ -5738,7 +5768,7 @@ instance FromJSON OperatingSystem where
                      <*> (o .:? "dartId"))
 
 instance ToJSON OperatingSystem where
-        toJSON OperatingSystem{..}
+        toJSON OperatingSystem'{..}
           = object
               (catMaybes
                  [("desktop" .=) <$> _osDesktop,
@@ -5749,7 +5779,7 @@ instance ToJSON OperatingSystem where
 -- | Flight
 --
 -- /See:/ 'flight' smart constructor.
-data Flight = Flight
+data Flight = Flight'
     { _fRateOrCost :: !(Maybe (Textual Int64))
     , _fEndDate    :: !(Maybe Date')
     , _fStartDate  :: !(Maybe Date')
@@ -5770,7 +5800,7 @@ data Flight = Flight
 flight
     :: Flight
 flight =
-    Flight
+    Flight'
     { _fRateOrCost = Nothing
     , _fEndDate = Nothing
     , _fStartDate = Nothing
@@ -5805,13 +5835,13 @@ instance FromJSON Flight where
         parseJSON
           = withObject "Flight"
               (\ o ->
-                 Flight <$>
+                 Flight' <$>
                    (o .:? "rateOrCost") <*> (o .:? "endDate") <*>
                      (o .:? "startDate")
                      <*> (o .:? "units"))
 
 instance ToJSON Flight where
-        toJSON Flight{..}
+        toJSON Flight'{..}
           = object
               (catMaybes
                  [("rateOrCost" .=) <$> _fRateOrCost,
@@ -5822,7 +5852,7 @@ instance ToJSON Flight where
 -- | City List Response
 --
 -- /See:/ 'citiesListResponse' smart constructor.
-data CitiesListResponse = CitiesListResponse
+data CitiesListResponse = CitiesListResponse'
     { _citKind   :: !Text
     , _citCities :: !(Maybe [City])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5837,7 +5867,7 @@ data CitiesListResponse = CitiesListResponse
 citiesListResponse
     :: CitiesListResponse
 citiesListResponse =
-    CitiesListResponse
+    CitiesListResponse'
     { _citKind = "dfareporting#citiesListResponse"
     , _citCities = Nothing
     }
@@ -5858,12 +5888,12 @@ instance FromJSON CitiesListResponse where
         parseJSON
           = withObject "CitiesListResponse"
               (\ o ->
-                 CitiesListResponse <$>
+                 CitiesListResponse' <$>
                    (o .:? "kind" .!= "dfareporting#citiesListResponse")
                      <*> (o .:? "cities" .!= mempty))
 
 instance ToJSON CitiesListResponse where
-        toJSON CitiesListResponse{..}
+        toJSON CitiesListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _citKind),
@@ -5872,7 +5902,7 @@ instance ToJSON CitiesListResponse where
 -- | Represents a dimension.
 --
 -- /See:/ 'dimension' smart constructor.
-data Dimension = Dimension
+data Dimension = Dimension'
     { _dKind :: !Text
     , _dName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5887,7 +5917,7 @@ data Dimension = Dimension
 dimension
     :: Dimension
 dimension =
-    Dimension
+    Dimension'
     { _dKind = "dfareporting#dimension"
     , _dName = Nothing
     }
@@ -5904,12 +5934,12 @@ instance FromJSON Dimension where
         parseJSON
           = withObject "Dimension"
               (\ o ->
-                 Dimension <$>
+                 Dimension' <$>
                    (o .:? "kind" .!= "dfareporting#dimension") <*>
                      (o .:? "name"))
 
 instance ToJSON Dimension where
-        toJSON Dimension{..}
+        toJSON Dimension'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dKind), ("name" .=) <$> _dName])
@@ -5917,7 +5947,7 @@ instance ToJSON Dimension where
 -- | The report criteria for a report of type \"REACH\".
 --
 -- /See:/ 'reportReachCriteria' smart constructor.
-data ReportReachCriteria = ReportReachCriteria
+data ReportReachCriteria = ReportReachCriteria'
     { _rrcReachByFrequencyMetricNames    :: !(Maybe [Text])
     , _rrcEnableAllDimensionCombinations :: !(Maybe Bool)
     , _rrcMetricNames                    :: !(Maybe [Text])
@@ -5950,7 +5980,7 @@ data ReportReachCriteria = ReportReachCriteria
 reportReachCriteria
     :: ReportReachCriteria
 reportReachCriteria =
-    ReportReachCriteria
+    ReportReachCriteria'
     { _rrcReachByFrequencyMetricNames = Nothing
     , _rrcEnableAllDimensionCombinations = Nothing
     , _rrcMetricNames = Nothing
@@ -6025,7 +6055,7 @@ instance FromJSON ReportReachCriteria where
         parseJSON
           = withObject "ReportReachCriteria"
               (\ o ->
-                 ReportReachCriteria <$>
+                 ReportReachCriteria' <$>
                    (o .:? "reachByFrequencyMetricNames" .!= mempty) <*>
                      (o .:? "enableAllDimensionCombinations")
                      <*> (o .:? "metricNames" .!= mempty)
@@ -6036,7 +6066,7 @@ instance FromJSON ReportReachCriteria where
                      <*> (o .:? "dimensions" .!= mempty))
 
 instance ToJSON ReportReachCriteria where
-        toJSON ReportReachCriteria{..}
+        toJSON ReportReachCriteria'{..}
           = object
               (catMaybes
                  [("reachByFrequencyMetricNames" .=) <$>
@@ -6054,7 +6084,7 @@ instance ToJSON ReportReachCriteria where
 -- | Represents a Custom Rich Media Events group.
 --
 -- /See:/ 'customRichMediaEvents' smart constructor.
-data CustomRichMediaEvents = CustomRichMediaEvents
+data CustomRichMediaEvents = CustomRichMediaEvents'
     { _crmeKind             :: !Text
     , _crmeFilteredEventIds :: !(Maybe [DimensionValue])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6069,7 +6099,7 @@ data CustomRichMediaEvents = CustomRichMediaEvents
 customRichMediaEvents
     :: CustomRichMediaEvents
 customRichMediaEvents =
-    CustomRichMediaEvents
+    CustomRichMediaEvents'
     { _crmeKind = "dfareporting#customRichMediaEvents"
     , _crmeFilteredEventIds = Nothing
     }
@@ -6092,13 +6122,13 @@ instance FromJSON CustomRichMediaEvents where
         parseJSON
           = withObject "CustomRichMediaEvents"
               (\ o ->
-                 CustomRichMediaEvents <$>
+                 CustomRichMediaEvents' <$>
                    (o .:? "kind" .!=
                       "dfareporting#customRichMediaEvents")
                      <*> (o .:? "filteredEventIds" .!= mempty))
 
 instance ToJSON CustomRichMediaEvents where
-        toJSON CustomRichMediaEvents{..}
+        toJSON CustomRichMediaEvents'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _crmeKind),
@@ -6107,7 +6137,7 @@ instance ToJSON CustomRichMediaEvents where
 -- | Targetable remarketing list response
 --
 -- /See:/ 'targetableRemarketingListsListResponse' smart constructor.
-data TargetableRemarketingListsListResponse = TargetableRemarketingListsListResponse
+data TargetableRemarketingListsListResponse = TargetableRemarketingListsListResponse'
     { _trllrNextPageToken              :: !(Maybe Text)
     , _trllrKind                       :: !Text
     , _trllrTargetableRemarketingLists :: !(Maybe [TargetableRemarketingList])
@@ -6125,7 +6155,7 @@ data TargetableRemarketingListsListResponse = TargetableRemarketingListsListResp
 targetableRemarketingListsListResponse
     :: TargetableRemarketingListsListResponse
 targetableRemarketingListsListResponse =
-    TargetableRemarketingListsListResponse
+    TargetableRemarketingListsListResponse'
     { _trllrNextPageToken = Nothing
     , _trllrKind = "dfareporting#targetableRemarketingListsListResponse"
     , _trllrTargetableRemarketingLists = Nothing
@@ -6156,7 +6186,7 @@ instance FromJSON
         parseJSON
           = withObject "TargetableRemarketingListsListResponse"
               (\ o ->
-                 TargetableRemarketingListsListResponse <$>
+                 TargetableRemarketingListsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#targetableRemarketingListsListResponse")
@@ -6164,7 +6194,7 @@ instance FromJSON
 
 instance ToJSON
          TargetableRemarketingListsListResponse where
-        toJSON TargetableRemarketingListsListResponse{..}
+        toJSON TargetableRemarketingListsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _trllrNextPageToken,
@@ -6175,7 +6205,7 @@ instance ToJSON
 -- | Change Log List Response
 --
 -- /See:/ 'changeLogsListResponse' smart constructor.
-data ChangeLogsListResponse = ChangeLogsListResponse
+data ChangeLogsListResponse = ChangeLogsListResponse'
     { _cllrNextPageToken :: !(Maybe Text)
     , _cllrKind          :: !Text
     , _cllrChangeLogs    :: !(Maybe [ChangeLog])
@@ -6193,7 +6223,7 @@ data ChangeLogsListResponse = ChangeLogsListResponse
 changeLogsListResponse
     :: ChangeLogsListResponse
 changeLogsListResponse =
-    ChangeLogsListResponse
+    ChangeLogsListResponse'
     { _cllrNextPageToken = Nothing
     , _cllrKind = "dfareporting#changeLogsListResponse"
     , _cllrChangeLogs = Nothing
@@ -6222,14 +6252,14 @@ instance FromJSON ChangeLogsListResponse where
         parseJSON
           = withObject "ChangeLogsListResponse"
               (\ o ->
-                 ChangeLogsListResponse <$>
+                 ChangeLogsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#changeLogsListResponse")
                      <*> (o .:? "changeLogs" .!= mempty))
 
 instance ToJSON ChangeLogsListResponse where
-        toJSON ChangeLogsListResponse{..}
+        toJSON ChangeLogsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _cllrNextPageToken,
@@ -6241,7 +6271,7 @@ instance ToJSON ChangeLogsListResponse where
 -- UserProfiles is for accessing the API.
 --
 -- /See:/ 'accountUserProFile' smart constructor.
-data AccountUserProFile = AccountUserProFile
+data AccountUserProFile = AccountUserProFile'
     { _aupfEmail            :: !(Maybe Text)
     , _aupfUserRoleFilter   :: !(Maybe ObjectFilter)
     , _aupfAdvertiserFilter :: !(Maybe ObjectFilter)
@@ -6298,7 +6328,7 @@ data AccountUserProFile = AccountUserProFile
 accountUserProFile
     :: AccountUserProFile
 accountUserProFile =
-    AccountUserProFile
+    AccountUserProFile'
     { _aupfEmail = Nothing
     , _aupfUserRoleFilter = Nothing
     , _aupfAdvertiserFilter = Nothing
@@ -6427,7 +6457,7 @@ instance FromJSON AccountUserProFile where
         parseJSON
           = withObject "AccountUserProFile"
               (\ o ->
-                 AccountUserProFile <$>
+                 AccountUserProFile' <$>
                    (o .:? "email") <*> (o .:? "userRoleFilter") <*>
                      (o .:? "advertiserFilter")
                      <*> (o .:? "userRoleId")
@@ -6446,7 +6476,7 @@ instance FromJSON AccountUserProFile where
                      <*> (o .:? "campaignFilter"))
 
 instance ToJSON AccountUserProFile where
-        toJSON AccountUserProFile{..}
+        toJSON AccountUserProFile'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _aupfEmail,
@@ -6468,7 +6498,7 @@ instance ToJSON AccountUserProFile where
 -- | Represents a DimensionValue resource.
 --
 -- /See:/ 'dimensionValue' smart constructor.
-data DimensionValue = DimensionValue
+data DimensionValue = DimensionValue'
     { _dvEtag          :: !(Maybe Text)
     , _dvKind          :: !Text
     , _dvValue         :: !(Maybe Text)
@@ -6495,7 +6525,7 @@ data DimensionValue = DimensionValue
 dimensionValue
     :: DimensionValue
 dimensionValue =
-    DimensionValue
+    DimensionValue'
     { _dvEtag = Nothing
     , _dvKind = "dfareporting#dimensionValue"
     , _dvValue = Nothing
@@ -6539,7 +6569,7 @@ instance FromJSON DimensionValue where
         parseJSON
           = withObject "DimensionValue"
               (\ o ->
-                 DimensionValue <$>
+                 DimensionValue' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "dfareporting#dimensionValue")
                      <*> (o .:? "value")
@@ -6548,7 +6578,7 @@ instance FromJSON DimensionValue where
                      <*> (o .:? "id"))
 
 instance ToJSON DimensionValue where
-        toJSON DimensionValue{..}
+        toJSON DimensionValue'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _dvEtag, Just ("kind" .= _dvKind),
@@ -6560,7 +6590,7 @@ instance ToJSON DimensionValue where
 -- | Represents an activity group.
 --
 -- /See:/ 'activities' smart constructor.
-data Activities = Activities
+data Activities = Activities'
     { _actKind        :: !Text
     , _actMetricNames :: !(Maybe [Text])
     , _actFilters     :: !(Maybe [DimensionValue])
@@ -6578,7 +6608,7 @@ data Activities = Activities
 activities
     :: Activities
 activities =
-    Activities
+    Activities'
     { _actKind = "dfareporting#activities"
     , _actMetricNames = Nothing
     , _actFilters = Nothing
@@ -6608,13 +6638,13 @@ instance FromJSON Activities where
         parseJSON
           = withObject "Activities"
               (\ o ->
-                 Activities <$>
+                 Activities' <$>
                    (o .:? "kind" .!= "dfareporting#activities") <*>
                      (o .:? "metricNames" .!= mempty)
                      <*> (o .:? "filters" .!= mempty))
 
 instance ToJSON Activities where
-        toJSON Activities{..}
+        toJSON Activities'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _actKind),
@@ -6624,7 +6654,7 @@ instance ToJSON Activities where
 -- | User Role Permission Group List Response
 --
 -- /See:/ 'userRolePermissionGroupsListResponse' smart constructor.
-data UserRolePermissionGroupsListResponse = UserRolePermissionGroupsListResponse
+data UserRolePermissionGroupsListResponse = UserRolePermissionGroupsListResponse'
     { _urpglrUserRolePermissionGroups :: !(Maybe [UserRolePermissionGroup])
     , _urpglrKind                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6639,7 +6669,7 @@ data UserRolePermissionGroupsListResponse = UserRolePermissionGroupsListResponse
 userRolePermissionGroupsListResponse
     :: UserRolePermissionGroupsListResponse
 userRolePermissionGroupsListResponse =
-    UserRolePermissionGroupsListResponse
+    UserRolePermissionGroupsListResponse'
     { _urpglrUserRolePermissionGroups = Nothing
     , _urpglrKind = "dfareporting#userRolePermissionGroupsListResponse"
     }
@@ -6663,14 +6693,14 @@ instance FromJSON
         parseJSON
           = withObject "UserRolePermissionGroupsListResponse"
               (\ o ->
-                 UserRolePermissionGroupsListResponse <$>
+                 UserRolePermissionGroupsListResponse' <$>
                    (o .:? "userRolePermissionGroups" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "dfareporting#userRolePermissionGroupsListResponse"))
 
 instance ToJSON UserRolePermissionGroupsListResponse
          where
-        toJSON UserRolePermissionGroupsListResponse{..}
+        toJSON UserRolePermissionGroupsListResponse'{..}
           = object
               (catMaybes
                  [("userRolePermissionGroups" .=) <$>
@@ -6680,7 +6710,7 @@ instance ToJSON UserRolePermissionGroupsListResponse
 -- | Placement Tag
 --
 -- /See:/ 'placementTag' smart constructor.
-data PlacementTag = PlacementTag
+data PlacementTag = PlacementTag'
     { _ptPlacementId :: !(Maybe (Textual Int64))
     , _ptTagDatas    :: !(Maybe [TagData])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6695,7 +6725,7 @@ data PlacementTag = PlacementTag
 placementTag
     :: PlacementTag
 placementTag =
-    PlacementTag
+    PlacementTag'
     { _ptPlacementId = Nothing
     , _ptTagDatas = Nothing
     }
@@ -6718,12 +6748,12 @@ instance FromJSON PlacementTag where
         parseJSON
           = withObject "PlacementTag"
               (\ o ->
-                 PlacementTag <$>
+                 PlacementTag' <$>
                    (o .:? "placementId") <*>
                      (o .:? "tagDatas" .!= mempty))
 
 instance ToJSON PlacementTag where
-        toJSON PlacementTag{..}
+        toJSON PlacementTag'{..}
           = object
               (catMaybes
                  [("placementId" .=) <$> _ptPlacementId,
@@ -6732,7 +6762,7 @@ instance ToJSON PlacementTag where
 -- | Remarketing list response
 --
 -- /See:/ 'remarketingListsListResponse' smart constructor.
-data RemarketingListsListResponse = RemarketingListsListResponse
+data RemarketingListsListResponse = RemarketingListsListResponse'
     { _rllrNextPageToken    :: !(Maybe Text)
     , _rllrRemarketingLists :: !(Maybe [RemarketingList])
     , _rllrKind             :: !Text
@@ -6750,7 +6780,7 @@ data RemarketingListsListResponse = RemarketingListsListResponse
 remarketingListsListResponse
     :: RemarketingListsListResponse
 remarketingListsListResponse =
-    RemarketingListsListResponse
+    RemarketingListsListResponse'
     { _rllrNextPageToken = Nothing
     , _rllrRemarketingLists = Nothing
     , _rllrKind = "dfareporting#remarketingListsListResponse"
@@ -6779,7 +6809,7 @@ instance FromJSON RemarketingListsListResponse where
         parseJSON
           = withObject "RemarketingListsListResponse"
               (\ o ->
-                 RemarketingListsListResponse <$>
+                 RemarketingListsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "remarketingLists" .!= mempty)
                      <*>
@@ -6787,17 +6817,97 @@ instance FromJSON RemarketingListsListResponse where
                         "dfareporting#remarketingListsListResponse"))
 
 instance ToJSON RemarketingListsListResponse where
-        toJSON RemarketingListsListResponse{..}
+        toJSON RemarketingListsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rllrNextPageToken,
                   ("remarketingLists" .=) <$> _rllrRemarketingLists,
                   Just ("kind" .= _rllrKind)])
 
+-- | Contains properties of a dynamic targeting key. Dynamic targeting keys
+-- are unique, user-friendly labels, created at the advertiser level in
+-- DCM, that can be assigned to ads, creatives, and placements and used for
+-- targeting with DoubleClick Studio dynamic creatives. Use these labels
+-- instead of numeric DCM IDs (such as placement IDs) to save time and
+-- avoid errors in your dynamic feeds.
+--
+-- /See:/ 'dynamicTargetingKey' smart constructor.
+data DynamicTargetingKey = DynamicTargetingKey'
+    { _dtkObjectType :: !(Maybe DynamicTargetingKeyObjectType)
+    , _dtkKind       :: !Text
+    , _dtkObjectId   :: !(Maybe (Textual Int64))
+    , _dtkName       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DynamicTargetingKey' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtkObjectType'
+--
+-- * 'dtkKind'
+--
+-- * 'dtkObjectId'
+--
+-- * 'dtkName'
+dynamicTargetingKey
+    :: DynamicTargetingKey
+dynamicTargetingKey =
+    DynamicTargetingKey'
+    { _dtkObjectType = Nothing
+    , _dtkKind = "dfareporting#dynamicTargetingKey"
+    , _dtkObjectId = Nothing
+    , _dtkName = Nothing
+    }
+
+-- | Type of the object of this dynamic targeting key. This is a required
+-- field.
+dtkObjectType :: Lens' DynamicTargetingKey (Maybe DynamicTargetingKeyObjectType)
+dtkObjectType
+  = lens _dtkObjectType
+      (\ s a -> s{_dtkObjectType = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#dynamicTargetingKey\".
+dtkKind :: Lens' DynamicTargetingKey Text
+dtkKind = lens _dtkKind (\ s a -> s{_dtkKind = a})
+
+-- | ID of the object of this dynamic targeting key. This is a required
+-- field.
+dtkObjectId :: Lens' DynamicTargetingKey (Maybe Int64)
+dtkObjectId
+  = lens _dtkObjectId (\ s a -> s{_dtkObjectId = a}) .
+      mapping _Coerce
+
+-- | Name of this dynamic targeting key. This is a required field. Must be
+-- less than 256 characters long and cannot contain commas. All characters
+-- are converted to lowercase.
+dtkName :: Lens' DynamicTargetingKey (Maybe Text)
+dtkName = lens _dtkName (\ s a -> s{_dtkName = a})
+
+instance FromJSON DynamicTargetingKey where
+        parseJSON
+          = withObject "DynamicTargetingKey"
+              (\ o ->
+                 DynamicTargetingKey' <$>
+                   (o .:? "objectType") <*>
+                     (o .:? "kind" .!= "dfareporting#dynamicTargetingKey")
+                     <*> (o .:? "objectId")
+                     <*> (o .:? "name"))
+
+instance ToJSON DynamicTargetingKey where
+        toJSON DynamicTargetingKey'{..}
+          = object
+              (catMaybes
+                 [("objectType" .=) <$> _dtkObjectType,
+                  Just ("kind" .= _dtkKind),
+                  ("objectId" .=) <$> _dtkObjectId,
+                  ("name" .=) <$> _dtkName])
+
 -- | Contains properties of a Creative.
 --
 -- /See:/ 'creative' smart constructor.
-data Creative = Creative
+data Creative = Creative'
     { _creConvertFlashToHTML5                 :: !(Maybe Bool)
     , _creBackupImageTargetWindow             :: !(Maybe TargetWindow)
     , _creRenderingIdDimensionValue           :: !(Maybe DimensionValue)
@@ -6839,6 +6949,7 @@ data Creative = Creative
     , _creThirdPartyRichMediaImpressionsURL   :: !(Maybe Text)
     , _creLastModifiedInfo                    :: !(Maybe LastModifiedInfo)
     , _creId                                  :: !(Maybe (Textual Int64))
+    , _creAuthoringSource                     :: !(Maybe CreativeAuthoringSource)
     , _creStudioAdvertiserId                  :: !(Maybe (Textual Int64))
     , _creCreativeAssets                      :: !(Maybe [CreativeAsset])
     , _creSubAccountId                        :: !(Maybe (Textual Int64))
@@ -6943,6 +7054,8 @@ data Creative = Creative
 --
 -- * 'creId'
 --
+-- * 'creAuthoringSource'
+--
 -- * 'creStudioAdvertiserId'
 --
 -- * 'creCreativeAssets'
@@ -6977,7 +7090,7 @@ data Creative = Creative
 creative
     :: Creative
 creative =
-    Creative
+    Creative'
     { _creConvertFlashToHTML5 = Nothing
     , _creBackupImageTargetWindow = Nothing
     , _creRenderingIdDimensionValue = Nothing
@@ -7019,6 +7132,7 @@ creative =
     , _creThirdPartyRichMediaImpressionsURL = Nothing
     , _creLastModifiedInfo = Nothing
     , _creId = Nothing
+    , _creAuthoringSource = Nothing
     , _creStudioAdvertiserId = Nothing
     , _creCreativeAssets = Nothing
     , _creSubAccountId = Nothing
@@ -7041,14 +7155,16 @@ creative =
 -- automatically converted to HTML5. This flag is enabled by default and
 -- users can choose to disable it if they don\'t want the system to
 -- generate and use HTML5 asset for this creative. Applicable to the
--- following creative types: ENHANCED_BANNER and FLASH_INPAGE.
+-- following creative type: FLASH_INPAGE. Applicable to DISPLAY when the
+-- primary asset type is not HTML_IMAGE.
 creConvertFlashToHTML5 :: Lens' Creative (Maybe Bool)
 creConvertFlashToHTML5
   = lens _creConvertFlashToHTML5
       (\ s a -> s{_creConvertFlashToHTML5 = a})
 
 -- | Target window for backup image. Applicable to the following creative
--- types: ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER.
+-- types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the
+-- primary asset type is not HTML_IMAGE.
 creBackupImageTargetWindow :: Lens' Creative (Maybe TargetWindow)
 creBackupImageTargetWindow
   = lens _creBackupImageTargetWindow
@@ -7091,7 +7207,7 @@ creRenderingId
       . mapping _Coerce
 
 -- | Third-party URL used to record backup image impressions. Applicable to
--- the following creative types: all RICH_MEDIA
+-- the following creative types: all RICH_MEDIA.
 creThirdPartyBackupImageImpressionsURL :: Lens' Creative (Maybe Text)
 creThirdPartyBackupImageImpressionsURL
   = lens _creThirdPartyBackupImageImpressionsURL
@@ -7140,16 +7256,17 @@ creAuthoringTool
 
 -- | Size associated with this creative. When inserting or updating a
 -- creative either the size ID field or size width and height fields can be
--- used. This is a required field when applicable; however for IMAGE and
--- FLASH_INPAGE creatives, if left blank, this field will be automatically
--- set using the actual size of the associated image assets. Applicable to
--- the following creative types: ENHANCED_BANNER, ENHANCED_IMAGE,
--- FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA.
+-- used. This is a required field when applicable; however for IMAGE,
+-- FLASH_INPAGE creatives, and for DISPLAY creatives with a primary asset
+-- of type HTML_IMAGE, if left blank, this field will be automatically set
+-- using the actual size of the associated image assets. Applicable to the
+-- following creative types: DISPLAY, DISPLAY_IMAGE_GALLERY, FLASH_INPAGE,
+-- HTML5_BANNER, IMAGE, and all RICH_MEDIA.
 creSize :: Lens' Creative (Maybe Size)
 creSize = lens _creSize (\ s a -> s{_creSize = a})
 
 -- | Third-party URLs for tracking in-stream video creative events.
--- Applicable to the following creative types: INSTREAM_VIDEO and all
+-- Applicable to the following creative types: all INSTREAM_VIDEO and all
 -- VPAID.
 creThirdPartyURLs :: Lens' Creative [ThirdPartyTrackingURL]
 creThirdPartyURLs
@@ -7158,8 +7275,10 @@ creThirdPartyURLs
       . _Default
       . _Coerce
 
--- | List of counter events configured for the creative. Applicable to the
--- following creative types: all RICH_MEDIA, and all VPAID.
+-- | List of counter events configured for the creative. For
+-- DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated
+-- from clickTags. Applicable to the following creative types:
+-- DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID.
 creCounterCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creCounterCustomEvents
   = lens _creCounterCustomEvents
@@ -7173,7 +7292,7 @@ creKind :: Lens' Creative Text
 creKind = lens _creKind (\ s a -> s{_creKind = a})
 
 -- | Whether creative should be treated as SSL compliant even if the system
--- scan shows it\'s not.
+-- scan shows it\'s not. Applicable to all creative types.
 creSSLOverride :: Lens' Creative (Maybe Bool)
 creSSLOverride
   = lens _creSSLOverride
@@ -7197,8 +7316,8 @@ creAdvertiserId
 
 -- | The internal Flash version for this creative as calculated by
 -- DoubleClick Studio. This is a read-only field. Applicable to the
--- following creative types: FLASH_INPAGE, ENHANCED_BANNER, all RICH_MEDIA,
--- and all VPAID.
+-- following creative types: FLASH_INPAGE all RICH_MEDIA, and all VPAID.
+-- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
 creRequiredFlashVersion :: Lens' Creative (Maybe Int32)
 creRequiredFlashVersion
   = lens _creRequiredFlashVersion
@@ -7225,7 +7344,7 @@ creAdTagKeys
       . _Coerce
 
 -- | Whether the user can choose to skip the creative. Applicable to the
--- following creative types: INSTREAM_VIDEO.
+-- following creative types: all INSTREAM_VIDEO and all VPAID.
 creSkippable :: Lens' Creative (Maybe Bool)
 creSkippable
   = lens _creSkippable (\ s a -> s{_creSkippable = a})
@@ -7245,14 +7364,15 @@ creIdDimensionValue
       (\ s a -> s{_creIdDimensionValue = a})
 
 -- | Reporting label used for HTML5 banner backup image. Applicable to the
--- following creative types: ENHANCED_BANNER.
+-- following creative types: DISPLAY when the primary asset type is not
+-- HTML_IMAGE.
 creBackupImageReportingLabel :: Lens' Creative (Maybe Text)
 creBackupImageReportingLabel
   = lens _creBackupImageReportingLabel
       (\ s a -> s{_creBackupImageReportingLabel = a})
 
 -- | Industry standard ID assigned to creative for reach and frequency.
--- Applicable to the following creative types: INSTREAM_VIDEO and all
+-- Applicable to the following creative types: all INSTREAM_VIDEO and all
 -- VPAID.
 creCommercialId :: Lens' Creative (Maybe Text)
 creCommercialId
@@ -7264,8 +7384,12 @@ creActive :: Lens' Creative (Maybe Bool)
 creActive
   = lens _creActive (\ s a -> s{_creActive = a})
 
--- | List of exit events configured for the creative. Applicable to the
--- following creative types: all RICH_MEDIA, and all VPAID.
+-- | List of exit events configured for the creative. For DISPLAY and
+-- DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated
+-- from clickTags, For DISPLAY, an event is also created from the
+-- backupImageReportingLabel. Applicable to the following creative types:
+-- DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID. Applicable to
+-- DISPLAY when the primary asset type is not HTML_IMAGE.
 creExitCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creExitCustomEvents
   = lens _creExitCustomEvents
@@ -7282,7 +7406,8 @@ creAccountId
       . mapping _Coerce
 
 -- | Click-through URL for backup image. Applicable to the following creative
--- types: ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER.
+-- types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the
+-- primary asset type is not HTML_IMAGE.
 creBackupImageClickThroughURL :: Lens' Creative (Maybe Text)
 creBackupImageClickThroughURL
   = lens _creBackupImageClickThroughURL
@@ -7301,24 +7426,24 @@ creOverrideCss
       (\ s a -> s{_creOverrideCss = a})
 
 -- | Description of the video ad. Applicable to the following creative types:
--- INSTREAM_VIDEO and all VPAID.
+-- all INSTREAM_VIDEO and all VPAID.
 creVideoDescription :: Lens' Creative (Maybe Text)
 creVideoDescription
   = lens _creVideoDescription
       (\ s a -> s{_creVideoDescription = a})
 
--- | Click tags of the creative. For ENHANCED_BANNER, FLASH_INPAGE, and
--- HTML5_BANNER creatives, this is a subset of detected click tags for the
--- assets associated with this creative. After creating a flash asset,
--- detected click tags will be returned in the creativeAssetMetadata. When
--- inserting the creative, populate the creative clickTags field using the
--- creativeAssetMetadata.clickTags field. For ENHANCED_IMAGE creatives,
--- there should be exactly one entry in this list for each image creative
--- asset. A click tag is matched with a corresponding creative asset by
--- matching the clickTag.name field with the
+-- | Click tags of the creative. For DISPLAY, FLASH_INPAGE, and HTML5_BANNER
+-- creatives, this is a subset of detected click tags for the assets
+-- associated with this creative. After creating a flash asset, detected
+-- click tags will be returned in the creativeAssetMetadata. When inserting
+-- the creative, populate the creative clickTags field using the
+-- creativeAssetMetadata.clickTags field. For DISPLAY_IMAGE_GALLERY
+-- creatives, there should be exactly one entry in this list for each image
+-- creative asset. A click tag is matched with a corresponding creative
+-- asset by matching the clickTag.name field with the
 -- creativeAsset.assetIdentifier.name field. Applicable to the following
--- creative types: ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE,
--- HTML5_BANNER.
+-- creative types: DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER.
+-- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
 creClickTags :: Lens' Creative [ClickTag]
 creClickTags
   = lens _creClickTags (\ s a -> s{_creClickTags = a})
@@ -7355,7 +7480,7 @@ creLatestTraffickedCreativeId
       . mapping _Coerce
 
 -- | Third-party URL used to record rich media impressions. Applicable to the
--- following creative types: all RICH_MEDIA
+-- following creative types: all RICH_MEDIA.
 creThirdPartyRichMediaImpressionsURL :: Lens' Creative (Maybe Text)
 creThirdPartyRichMediaImpressionsURL
   = lens _creThirdPartyRichMediaImpressionsURL
@@ -7375,6 +7500,14 @@ creId :: Lens' Creative (Maybe Int64)
 creId
   = lens _creId (\ s a -> s{_creId = a}) .
       mapping _Coerce
+
+-- | Source application where creative was authored. Presently, only DBM
+-- authored creatives will have this field set. Applicable to all creative
+-- types.
+creAuthoringSource :: Lens' Creative (Maybe CreativeAuthoringSource)
+creAuthoringSource
+  = lens _creAuthoringSource
+      (\ s a -> s{_creAuthoringSource = a})
 
 -- | Studio advertiser ID associated with rich media and VPAID creatives.
 -- This is a read-only field. Applicable to the following creative types:
@@ -7409,8 +7542,11 @@ creSubAccountId
 creType :: Lens' Creative (Maybe CreativeType)
 creType = lens _creType (\ s a -> s{_creType = a})
 
--- | List of timer events configured for the creative. Applicable to the
--- following creative types: all RICH_MEDIA, and all VPAID.
+-- | List of timer events configured for the creative. For
+-- DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated
+-- from clickTags. Applicable to the following creative types:
+-- DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID. Applicable to
+-- DISPLAY when the primary asset is not HTML_IMAGE.
 creTimerCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creTimerCustomEvents
   = lens _creTimerCustomEvents
@@ -7428,13 +7564,15 @@ creStudioCreativeId
       . mapping _Coerce
 
 -- | Compatibilities associated with this creative. This is a read-only
--- field. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or
--- on mobile devices for regular or interstitial ads, respectively. APP and
--- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
--- refers to rendering in in-stream video ads developed with the VAST
--- standard. Applicable to all creative types. Acceptable values are: -
--- \"APP\" - \"APP_INTERSTITIAL\" - \"IN_STREAM_VIDEO\" - \"WEB\" -
--- \"WEB_INTERSTITIAL\"
+-- field. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on
+-- desktop or on mobile devices or in mobile apps for regular or
+-- interstitial ads, respectively. APP and APP_INTERSTITIAL are for
+-- rendering in mobile apps. Only pre-existing creatives may have these
+-- compatibilities since new creatives will either be assigned DISPLAY or
+-- DISPLAY_INTERSTITIAL instead. IN_STREAM_VIDEO refers to rendering in
+-- in-stream video ads developed with the VAST standard. Applicable to all
+-- creative types. Acceptable values are: - \"APP\" - \"APP_INTERSTITIAL\"
+-- - \"IN_STREAM_VIDEO\" - \"DISPLAY\" - \"DISPLAY_INTERSTITIAL\"
 creCompatibility :: Lens' Creative [CreativeCompatibilityItem]
 creCompatibility
   = lens _creCompatibility
@@ -7449,8 +7587,8 @@ creCompatibility
 -- initially auto-generated to contain all features detected by DCM for all
 -- the assets of this creative and can then be modified by the client. To
 -- reset this field, copy over all the creativeAssets\' detected features.
--- Applicable to the following creative types: ENHANCED_BANNER and
--- HTML5_BANNER.
+-- Applicable to the following creative types: HTML5_BANNER. Applicable to
+-- DISPLAY when the primary asset type is not HTML_IMAGE.
 creBackupImageFeatures :: Lens' Creative [CreativeBackupImageFeaturesItem]
 creBackupImageFeatures
   = lens _creBackupImageFeatures
@@ -7473,7 +7611,7 @@ creArchived
 
 -- | List of companion creatives assigned to an in-Stream videocreative.
 -- Acceptable values include IDs of existing flash and image creatives.
--- Applicable to the following creative types: INSTREAM_VIDEO and all
+-- Applicable to the following creative types: all INSTREAM_VIDEO and all
 -- VPAID.
 creCompanionCreatives :: Lens' Creative [Int64]
 creCompanionCreatives
@@ -7500,16 +7638,20 @@ creStudioTraffickedCreativeId
       (\ s a -> s{_creStudioTraffickedCreativeId = a})
       . mapping _Coerce
 
--- | URL of hosted image or another ad tag. This is a required field when
--- applicable. Applicable to the following creative types:
--- INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, and REDIRECT
+-- | URL of hosted image or hosted video or another ad tag. For
+-- INSTREAM_VIDEO_REDIRECT creatives this is the in-stream video redirect
+-- URL. The standard for a VAST (Video Ad Serving Template) ad response
+-- allows for a redirect link to another VAST 2.0 or 3.0 call. This is a
+-- required field when applicable. Applicable to the following creative
+-- types: DISPLAY_REDIRECT, INTERNAL_REDIRECT,
+-- INTERSTITIAL_INTERNAL_REDIRECT, and INSTREAM_VIDEO_REDIRECT
 creRedirectURL :: Lens' Creative (Maybe Text)
 creRedirectURL
   = lens _creRedirectURL
       (\ s a -> s{_creRedirectURL = a})
 
 -- | Whether images are automatically advanced for enhanced image creatives.
--- Applicable to the following creative types: ENHANCED_IMAGE.
+-- Applicable to the following creative types: DISPLAY_IMAGE_GALLERY.
 creAutoAdvanceImages :: Lens' Creative (Maybe Bool)
 creAutoAdvanceImages
   = lens _creAutoAdvanceImages
@@ -7528,7 +7670,7 @@ instance FromJSON Creative where
         parseJSON
           = withObject "Creative"
               (\ o ->
-                 Creative <$>
+                 Creative' <$>
                    (o .:? "convertFlashToHtml5") <*>
                      (o .:? "backupImageTargetWindow")
                      <*> (o .:? "renderingIdDimensionValue")
@@ -7570,6 +7712,7 @@ instance FromJSON Creative where
                      <*> (o .:? "thirdPartyRichMediaImpressionsUrl")
                      <*> (o .:? "lastModifiedInfo")
                      <*> (o .:? "id")
+                     <*> (o .:? "authoringSource")
                      <*> (o .:? "studioAdvertiserId")
                      <*> (o .:? "creativeAssets" .!= mempty)
                      <*> (o .:? "subaccountId")
@@ -7588,7 +7731,7 @@ instance FromJSON Creative where
                      <*> (o .:? "creativeFieldAssignments" .!= mempty))
 
 instance ToJSON Creative where
-        toJSON Creative{..}
+        toJSON Creative'{..}
           = object
               (catMaybes
                  [("convertFlashToHtml5" .=) <$>
@@ -7643,6 +7786,7 @@ instance ToJSON Creative where
                     _creThirdPartyRichMediaImpressionsURL,
                   ("lastModifiedInfo" .=) <$> _creLastModifiedInfo,
                   ("id" .=) <$> _creId,
+                  ("authoringSource" .=) <$> _creAuthoringSource,
                   ("studioAdvertiserId" .=) <$> _creStudioAdvertiserId,
                   ("creativeAssets" .=) <$> _creCreativeAssets,
                   ("subaccountId" .=) <$> _creSubAccountId,
@@ -7666,7 +7810,7 @@ instance ToJSON Creative where
 -- | Site Contact
 --
 -- /See:/ 'siteContact' smart constructor.
-data SiteContact = SiteContact
+data SiteContact = SiteContact'
     { _scEmail       :: !(Maybe Text)
     , _scPhone       :: !(Maybe Text)
     , _scLastName    :: !(Maybe Text)
@@ -7699,7 +7843,7 @@ data SiteContact = SiteContact
 siteContact
     :: SiteContact
 siteContact =
-    SiteContact
+    SiteContact'
     { _scEmail = Nothing
     , _scPhone = Nothing
     , _scLastName = Nothing
@@ -7753,7 +7897,7 @@ instance FromJSON SiteContact where
         parseJSON
           = withObject "SiteContact"
               (\ o ->
-                 SiteContact <$>
+                 SiteContact' <$>
                    (o .:? "email") <*> (o .:? "phone") <*>
                      (o .:? "lastName")
                      <*> (o .:? "address")
@@ -7763,7 +7907,7 @@ instance FromJSON SiteContact where
                      <*> (o .:? "contactType"))
 
 instance ToJSON SiteContact where
-        toJSON SiteContact{..}
+        toJSON SiteContact'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _scEmail,
@@ -7777,7 +7921,7 @@ instance ToJSON SiteContact where
 -- | Account List Response
 --
 -- /See:/ 'accountsListResponse' smart constructor.
-data AccountsListResponse = AccountsListResponse
+data AccountsListResponse = AccountsListResponse'
     { _accNextPageToken :: !(Maybe Text)
     , _accAccounts      :: !(Maybe [Account])
     , _accKind          :: !Text
@@ -7795,7 +7939,7 @@ data AccountsListResponse = AccountsListResponse
 accountsListResponse
     :: AccountsListResponse
 accountsListResponse =
-    AccountsListResponse
+    AccountsListResponse'
     { _accNextPageToken = Nothing
     , _accAccounts = Nothing
     , _accKind = "dfareporting#accountsListResponse"
@@ -7823,7 +7967,7 @@ instance FromJSON AccountsListResponse where
         parseJSON
           = withObject "AccountsListResponse"
               (\ o ->
-                 AccountsListResponse <$>
+                 AccountsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "accounts" .!= mempty)
                      <*>
@@ -7831,7 +7975,7 @@ instance FromJSON AccountsListResponse where
                         "dfareporting#accountsListResponse"))
 
 instance ToJSON AccountsListResponse where
-        toJSON AccountsListResponse{..}
+        toJSON AccountsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _accNextPageToken,
@@ -7841,7 +7985,7 @@ instance ToJSON AccountsListResponse where
 -- | Represents a date range.
 --
 -- /See:/ 'dateRange' smart constructor.
-data DateRange = DateRange
+data DateRange = DateRange'
     { _drKind              :: !Text
     , _drEndDate           :: !(Maybe Date')
     , _drStartDate         :: !(Maybe Date')
@@ -7862,7 +8006,7 @@ data DateRange = DateRange
 dateRange
     :: DateRange
 dateRange =
-    DateRange
+    DateRange'
     { _drKind = "dfareporting#dateRange"
     , _drEndDate = Nothing
     , _drStartDate = Nothing
@@ -7897,14 +8041,14 @@ instance FromJSON DateRange where
         parseJSON
           = withObject "DateRange"
               (\ o ->
-                 DateRange <$>
+                 DateRange' <$>
                    (o .:? "kind" .!= "dfareporting#dateRange") <*>
                      (o .:? "endDate")
                      <*> (o .:? "startDate")
                      <*> (o .:? "relativeDateRange"))
 
 instance ToJSON DateRange where
-        toJSON DateRange{..}
+        toJSON DateRange'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _drKind),
@@ -7915,7 +8059,7 @@ instance ToJSON DateRange where
 -- | Represents a Report resource.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report
+data Report = Report'
     { _rDelivery                    :: !(Maybe ReportDelivery)
     , _rEtag                        :: !(Maybe Text)
     , _rOwnerProFileId              :: !(Maybe (Textual Int64))
@@ -7978,7 +8122,7 @@ data Report = Report
 report
     :: Report
 report =
-    Report
+    Report'
     { _rDelivery = Nothing
     , _rEtag = Nothing
     , _rOwnerProFileId = Nothing
@@ -8104,7 +8248,7 @@ instance FromJSON Report where
         parseJSON
           = withObject "Report"
               (\ o ->
-                 Report <$>
+                 Report' <$>
                    (o .:? "delivery") <*> (o .:? "etag") <*>
                      (o .:? "ownerProfileId")
                      <*> (o .:? "schedule")
@@ -8124,7 +8268,7 @@ instance FromJSON Report where
                      <*> (o .:? "fileName"))
 
 instance ToJSON Report where
-        toJSON Report{..}
+        toJSON Report'{..}
           = object
               (catMaybes
                  [("delivery" .=) <$> _rDelivery,
@@ -8149,7 +8293,7 @@ instance ToJSON Report where
 -- | Contains properties of a DCM campaign.
 --
 -- /See:/ 'campaign' smart constructor.
-data Campaign = Campaign
+data Campaign = Campaign'
     { _camCreativeOptimizationConfiguration            :: !(Maybe CreativeOptimizationConfiguration)
     , _camCreativeGroupIds                             :: !(Maybe [Textual Int64])
     , _camNielsenOCREnabled                            :: !(Maybe Bool)
@@ -8242,7 +8386,7 @@ data Campaign = Campaign
 campaign
     :: Campaign
 campaign =
-    Campaign
+    Campaign'
     { _camCreativeOptimizationConfiguration = Nothing
     , _camCreativeGroupIds = Nothing
     , _camNielsenOCREnabled = Nothing
@@ -8477,7 +8621,7 @@ instance FromJSON Campaign where
         parseJSON
           = withObject "Campaign"
               (\ o ->
-                 Campaign <$>
+                 Campaign' <$>
                    (o .:? "creativeOptimizationConfiguration") <*>
                      (o .:? "creativeGroupIds" .!= mempty)
                      <*> (o .:? "nielsenOcrEnabled")
@@ -8510,7 +8654,7 @@ instance FromJSON Campaign where
                      <*> (o .:? "defaultClickThroughEventTagProperties"))
 
 instance ToJSON Campaign where
-        toJSON Campaign{..}
+        toJSON Campaign'{..}
           = object
               (catMaybes
                  [("creativeOptimizationConfiguration" .=) <$>
@@ -8552,7 +8696,7 @@ instance ToJSON Campaign where
 -- | Third Party Authentication Token
 --
 -- /See:/ 'thirdPartyAuthenticationToken' smart constructor.
-data ThirdPartyAuthenticationToken = ThirdPartyAuthenticationToken
+data ThirdPartyAuthenticationToken = ThirdPartyAuthenticationToken'
     { _tpatValue :: !(Maybe Text)
     , _tpatName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8567,7 +8711,7 @@ data ThirdPartyAuthenticationToken = ThirdPartyAuthenticationToken
 thirdPartyAuthenticationToken
     :: ThirdPartyAuthenticationToken
 thirdPartyAuthenticationToken =
-    ThirdPartyAuthenticationToken
+    ThirdPartyAuthenticationToken'
     { _tpatValue = Nothing
     , _tpatName = Nothing
     }
@@ -8586,11 +8730,11 @@ instance FromJSON ThirdPartyAuthenticationToken where
         parseJSON
           = withObject "ThirdPartyAuthenticationToken"
               (\ o ->
-                 ThirdPartyAuthenticationToken <$>
+                 ThirdPartyAuthenticationToken' <$>
                    (o .:? "value") <*> (o .:? "name"))
 
 instance ToJSON ThirdPartyAuthenticationToken where
-        toJSON ThirdPartyAuthenticationToken{..}
+        toJSON ThirdPartyAuthenticationToken'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _tpatValue,
@@ -8599,7 +8743,7 @@ instance ToJSON ThirdPartyAuthenticationToken where
 -- | Click-through URL
 --
 -- /See:/ 'clickThroughURL' smart constructor.
-data ClickThroughURL = ClickThroughURL
+data ClickThroughURL = ClickThroughURL'
     { _ctuDefaultLandingPage      :: !(Maybe Bool)
     , _ctuComputedClickThroughURL :: !(Maybe Text)
     , _ctuCustomClickThroughURL   :: !(Maybe Text)
@@ -8620,7 +8764,7 @@ data ClickThroughURL = ClickThroughURL
 clickThroughURL
     :: ClickThroughURL
 clickThroughURL =
-    ClickThroughURL
+    ClickThroughURL'
     { _ctuDefaultLandingPage = Nothing
     , _ctuComputedClickThroughURL = Nothing
     , _ctuCustomClickThroughURL = Nothing
@@ -8664,14 +8808,14 @@ instance FromJSON ClickThroughURL where
         parseJSON
           = withObject "ClickThroughURL"
               (\ o ->
-                 ClickThroughURL <$>
+                 ClickThroughURL' <$>
                    (o .:? "defaultLandingPage") <*>
                      (o .:? "computedClickThroughUrl")
                      <*> (o .:? "customClickThroughUrl")
                      <*> (o .:? "landingPageId"))
 
 instance ToJSON ClickThroughURL where
-        toJSON ClickThroughURL{..}
+        toJSON ClickThroughURL'{..}
           = object
               (catMaybes
                  [("defaultLandingPage" .=) <$>
@@ -8685,7 +8829,7 @@ instance ToJSON ClickThroughURL where
 -- | Browser List Response
 --
 -- /See:/ 'browsersListResponse' smart constructor.
-data BrowsersListResponse = BrowsersListResponse
+data BrowsersListResponse = BrowsersListResponse'
     { _blrKind     :: !Text
     , _blrBrowsers :: !(Maybe [Browser])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8700,7 +8844,7 @@ data BrowsersListResponse = BrowsersListResponse
 browsersListResponse
     :: BrowsersListResponse
 browsersListResponse =
-    BrowsersListResponse
+    BrowsersListResponse'
     { _blrKind = "dfareporting#browsersListResponse"
     , _blrBrowsers = Nothing
     }
@@ -8721,13 +8865,13 @@ instance FromJSON BrowsersListResponse where
         parseJSON
           = withObject "BrowsersListResponse"
               (\ o ->
-                 BrowsersListResponse <$>
+                 BrowsersListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#browsersListResponse")
                      <*> (o .:? "browsers" .!= mempty))
 
 instance ToJSON BrowsersListResponse where
-        toJSON BrowsersListResponse{..}
+        toJSON BrowsersListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _blrKind),
@@ -8736,12 +8880,13 @@ instance ToJSON BrowsersListResponse where
 -- | Site Settings
 --
 -- /See:/ 'siteSettings' smart constructor.
-data SiteSettings = SiteSettings
+data SiteSettings = SiteSettings'
     { _ssDisableNewCookie      :: !(Maybe Bool)
     , _ssDisableBrandSafeAds   :: !(Maybe Bool)
     , _ssLookbackConfiguration :: !(Maybe LookbackConfiguration)
     , _ssTagSetting            :: !(Maybe TagSetting)
     , _ssActiveViewOptOut      :: !(Maybe Bool)
+    , _ssVideoActiveViewOptOut :: !(Maybe Bool)
     , _ssCreativeSettings      :: !(Maybe CreativeSettings)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8759,16 +8904,19 @@ data SiteSettings = SiteSettings
 --
 -- * 'ssActiveViewOptOut'
 --
+-- * 'ssVideoActiveViewOptOut'
+--
 -- * 'ssCreativeSettings'
 siteSettings
     :: SiteSettings
 siteSettings =
-    SiteSettings
+    SiteSettings'
     { _ssDisableNewCookie = Nothing
     , _ssDisableBrandSafeAds = Nothing
     , _ssLookbackConfiguration = Nothing
     , _ssTagSetting = Nothing
     , _ssActiveViewOptOut = Nothing
+    , _ssVideoActiveViewOptOut = Nothing
     , _ssCreativeSettings = Nothing
     }
 
@@ -8801,6 +8949,19 @@ ssActiveViewOptOut
   = lens _ssActiveViewOptOut
       (\ s a -> s{_ssActiveViewOptOut = a})
 
+-- | Whether Verification and ActiveView are disabled for in-stream video
+-- creatives on this site. The same setting videoActiveViewOptOut exists on
+-- the directory site level -- the opt out occurs if either of these
+-- settings are true. These settings are distinct from
+-- DirectorySites.settings.activeViewOptOut or
+-- Sites.siteSettings.activeViewOptOut which only apply to display ads.
+-- However, Accounts.activeViewOptOut opts out both video traffic, as well
+-- as display ads, from Verification and ActiveView.
+ssVideoActiveViewOptOut :: Lens' SiteSettings (Maybe Bool)
+ssVideoActiveViewOptOut
+  = lens _ssVideoActiveViewOptOut
+      (\ s a -> s{_ssVideoActiveViewOptOut = a})
+
 -- | Site-wide creative settings.
 ssCreativeSettings :: Lens' SiteSettings (Maybe CreativeSettings)
 ssCreativeSettings
@@ -8811,16 +8972,17 @@ instance FromJSON SiteSettings where
         parseJSON
           = withObject "SiteSettings"
               (\ o ->
-                 SiteSettings <$>
+                 SiteSettings' <$>
                    (o .:? "disableNewCookie") <*>
                      (o .:? "disableBrandSafeAds")
                      <*> (o .:? "lookbackConfiguration")
                      <*> (o .:? "tagSetting")
                      <*> (o .:? "activeViewOptOut")
+                     <*> (o .:? "videoActiveViewOptOut")
                      <*> (o .:? "creativeSettings"))
 
 instance ToJSON SiteSettings where
-        toJSON SiteSettings{..}
+        toJSON SiteSettings'{..}
           = object
               (catMaybes
                  [("disableNewCookie" .=) <$> _ssDisableNewCookie,
@@ -8830,12 +8992,14 @@ instance ToJSON SiteSettings where
                     _ssLookbackConfiguration,
                   ("tagSetting" .=) <$> _ssTagSetting,
                   ("activeViewOptOut" .=) <$> _ssActiveViewOptOut,
+                  ("videoActiveViewOptOut" .=) <$>
+                    _ssVideoActiveViewOptOut,
                   ("creativeSettings" .=) <$> _ssCreativeSettings])
 
 -- | Content Category List Response
 --
 -- /See:/ 'contentCategoriesListResponse' smart constructor.
-data ContentCategoriesListResponse = ContentCategoriesListResponse
+data ContentCategoriesListResponse = ContentCategoriesListResponse'
     { _cclrNextPageToken     :: !(Maybe Text)
     , _cclrKind              :: !Text
     , _cclrContentCategories :: !(Maybe [ContentCategory])
@@ -8853,7 +9017,7 @@ data ContentCategoriesListResponse = ContentCategoriesListResponse
 contentCategoriesListResponse
     :: ContentCategoriesListResponse
 contentCategoriesListResponse =
-    ContentCategoriesListResponse
+    ContentCategoriesListResponse'
     { _cclrNextPageToken = Nothing
     , _cclrKind = "dfareporting#contentCategoriesListResponse"
     , _cclrContentCategories = Nothing
@@ -8882,14 +9046,14 @@ instance FromJSON ContentCategoriesListResponse where
         parseJSON
           = withObject "ContentCategoriesListResponse"
               (\ o ->
-                 ContentCategoriesListResponse <$>
+                 ContentCategoriesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#contentCategoriesListResponse")
                      <*> (o .:? "contentCategories" .!= mempty))
 
 instance ToJSON ContentCategoriesListResponse where
-        toJSON ContentCategoriesListResponse{..}
+        toJSON ContentCategoriesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _cclrNextPageToken,
@@ -8899,7 +9063,7 @@ instance ToJSON ContentCategoriesListResponse where
 -- | Creative List Response
 --
 -- /See:/ 'creativesListResponse' smart constructor.
-data CreativesListResponse = CreativesListResponse
+data CreativesListResponse = CreativesListResponse'
     { _clrlNextPageToken :: !(Maybe Text)
     , _clrlKind          :: !Text
     , _clrlCreatives     :: !(Maybe [Creative])
@@ -8917,7 +9081,7 @@ data CreativesListResponse = CreativesListResponse
 creativesListResponse
     :: CreativesListResponse
 creativesListResponse =
-    CreativesListResponse
+    CreativesListResponse'
     { _clrlNextPageToken = Nothing
     , _clrlKind = "dfareporting#creativesListResponse"
     , _clrlCreatives = Nothing
@@ -8946,14 +9110,14 @@ instance FromJSON CreativesListResponse where
         parseJSON
           = withObject "CreativesListResponse"
               (\ o ->
-                 CreativesListResponse <$>
+                 CreativesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#creativesListResponse")
                      <*> (o .:? "creatives" .!= mempty))
 
 instance ToJSON CreativesListResponse where
-        toJSON CreativesListResponse{..}
+        toJSON CreativesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _clrlNextPageToken,
@@ -8963,7 +9127,7 @@ instance ToJSON CreativesListResponse where
 -- | Contains properties of a DCM account.
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account
+data Account = Account'
     { _aaAccountPermissionIds   :: !(Maybe [Textual Int64])
     , _aaMaximumImageSize       :: !(Maybe (Textual Int64))
     , _aaCurrencyId             :: !(Maybe (Textual Int64))
@@ -9029,7 +9193,7 @@ data Account = Account
 account
     :: Account
 account =
-    Account
+    Account'
     { _aaAccountPermissionIds = Nothing
     , _aaMaximumImageSize = Nothing
     , _aaCurrencyId = Nothing
@@ -9075,7 +9239,10 @@ aaMaximumImageSize
 -- \"21\" for CNY - \"22\" for HKD - \"23\" for NZD - \"24\" for MYR -
 -- \"25\" for BRL - \"26\" for PTE - \"27\" for MXP - \"28\" for CLP -
 -- \"29\" for TRY - \"30\" for ARS - \"31\" for PEN - \"32\" for ILS -
--- \"33\" for CHF - \"34\" for VEF - \"35\" for COP - \"36\" for GTQ
+-- \"33\" for CHF - \"34\" for VEF - \"35\" for COP - \"36\" for GTQ -
+-- \"37\" for PLN - \"39\" for INR - \"40\" for THB - \"41\" for IDR -
+-- \"42\" for CZK - \"43\" for RON - \"44\" for HUF - \"45\" for RUB -
+-- \"46\" for AED - \"47\" for BGN - \"48\" for HRK
 aaCurrencyId :: Lens' Account (Maybe Int64)
 aaCurrencyId
   = lens _aaCurrencyId (\ s a -> s{_aaCurrencyId = a})
@@ -9189,7 +9356,7 @@ instance FromJSON Account where
         parseJSON
           = withObject "Account"
               (\ o ->
-                 Account <$>
+                 Account' <$>
                    (o .:? "accountPermissionIds" .!= mempty) <*>
                      (o .:? "maximumImageSize")
                      <*> (o .:? "currencyId")
@@ -9211,7 +9378,7 @@ instance FromJSON Account where
                      <*> (o .:? "description"))
 
 instance ToJSON Account where
-        toJSON Account{..}
+        toJSON Account'{..}
           = object
               (catMaybes
                  [("accountPermissionIds" .=) <$>
@@ -9238,10 +9405,75 @@ instance ToJSON Account where
                     _aaDefaultCreativeSizeId,
                   ("description" .=) <$> _aaDescription])
 
+-- | Insert Conversions Request.
+--
+-- /See:/ 'conversionsBatchInsertRequest' smart constructor.
+data ConversionsBatchInsertRequest = ConversionsBatchInsertRequest'
+    { _cbirKind           :: !Text
+    , _cbirConversions    :: !(Maybe [Conversion])
+    , _cbirEncryptionInfo :: !(Maybe EncryptionInfo)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConversionsBatchInsertRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cbirKind'
+--
+-- * 'cbirConversions'
+--
+-- * 'cbirEncryptionInfo'
+conversionsBatchInsertRequest
+    :: ConversionsBatchInsertRequest
+conversionsBatchInsertRequest =
+    ConversionsBatchInsertRequest'
+    { _cbirKind = "dfareporting#conversionsBatchInsertRequest"
+    , _cbirConversions = Nothing
+    , _cbirEncryptionInfo = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversionsBatchInsertRequest\".
+cbirKind :: Lens' ConversionsBatchInsertRequest Text
+cbirKind = lens _cbirKind (\ s a -> s{_cbirKind = a})
+
+-- | The set of conversions to insert.
+cbirConversions :: Lens' ConversionsBatchInsertRequest [Conversion]
+cbirConversions
+  = lens _cbirConversions
+      (\ s a -> s{_cbirConversions = a})
+      . _Default
+      . _Coerce
+
+-- | Describes how encryptedUserId is encrypted. This is a required field if
+-- encryptedUserId is used.
+cbirEncryptionInfo :: Lens' ConversionsBatchInsertRequest (Maybe EncryptionInfo)
+cbirEncryptionInfo
+  = lens _cbirEncryptionInfo
+      (\ s a -> s{_cbirEncryptionInfo = a})
+
+instance FromJSON ConversionsBatchInsertRequest where
+        parseJSON
+          = withObject "ConversionsBatchInsertRequest"
+              (\ o ->
+                 ConversionsBatchInsertRequest' <$>
+                   (o .:? "kind" .!=
+                      "dfareporting#conversionsBatchInsertRequest")
+                     <*> (o .:? "conversions" .!= mempty)
+                     <*> (o .:? "encryptionInfo"))
+
+instance ToJSON ConversionsBatchInsertRequest where
+        toJSON ConversionsBatchInsertRequest'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cbirKind),
+                  ("conversions" .=) <$> _cbirConversions,
+                  ("encryptionInfo" .=) <$> _cbirEncryptionInfo])
+
 -- | Account User Profile List Response
 --
 -- /See:/ 'accountUserProFilesListResponse' smart constructor.
-data AccountUserProFilesListResponse = AccountUserProFilesListResponse
+data AccountUserProFilesListResponse = AccountUserProFilesListResponse'
     { _aupflrNextPageToken       :: !(Maybe Text)
     , _aupflrAccountUserProFiles :: !(Maybe [AccountUserProFile])
     , _aupflrKind                :: !Text
@@ -9259,7 +9491,7 @@ data AccountUserProFilesListResponse = AccountUserProFilesListResponse
 accountUserProFilesListResponse
     :: AccountUserProFilesListResponse
 accountUserProFilesListResponse =
-    AccountUserProFilesListResponse
+    AccountUserProFilesListResponse'
     { _aupflrNextPageToken = Nothing
     , _aupflrAccountUserProFiles = Nothing
     , _aupflrKind = "dfareporting#accountUserProfilesListResponse"
@@ -9290,7 +9522,7 @@ instance FromJSON AccountUserProFilesListResponse
         parseJSON
           = withObject "AccountUserProFilesListResponse"
               (\ o ->
-                 AccountUserProFilesListResponse <$>
+                 AccountUserProFilesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "accountUserProfiles" .!= mempty)
                      <*>
@@ -9298,7 +9530,7 @@ instance FromJSON AccountUserProFilesListResponse
                         "dfareporting#accountUserProfilesListResponse"))
 
 instance ToJSON AccountUserProFilesListResponse where
-        toJSON AccountUserProFilesListResponse{..}
+        toJSON AccountUserProFilesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _aupflrNextPageToken,
@@ -9310,7 +9542,7 @@ instance ToJSON AccountUserProFilesListResponse where
 -- webpages.
 --
 -- /See:/ 'contentCategory' smart constructor.
-data ContentCategory = ContentCategory
+data ContentCategory = ContentCategory'
     { _conKind      :: !Text
     , _conAccountId :: !(Maybe (Textual Int64))
     , _conName      :: !(Maybe Text)
@@ -9331,7 +9563,7 @@ data ContentCategory = ContentCategory
 contentCategory
     :: ContentCategory
 contentCategory =
-    ContentCategory
+    ContentCategory'
     { _conKind = "dfareporting#contentCategory"
     , _conAccountId = Nothing
     , _conName = Nothing
@@ -9366,14 +9598,14 @@ instance FromJSON ContentCategory where
         parseJSON
           = withObject "ContentCategory"
               (\ o ->
-                 ContentCategory <$>
+                 ContentCategory' <$>
                    (o .:? "kind" .!= "dfareporting#contentCategory") <*>
                      (o .:? "accountId")
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON ContentCategory where
-        toJSON ContentCategory{..}
+        toJSON ContentCategory'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _conKind),
@@ -9384,7 +9616,7 @@ instance ToJSON ContentCategory where
 -- type \"STANDARD\".
 --
 -- /See:/ 'reportCompatibleFields' smart constructor.
-data ReportCompatibleFields = ReportCompatibleFields
+data ReportCompatibleFields = ReportCompatibleFields'
     { _rcfMetrics                :: !(Maybe [Metric])
     , _rcfKind                   :: !Text
     , _rcfDimensionFilters       :: !(Maybe [Dimension])
@@ -9408,7 +9640,7 @@ data ReportCompatibleFields = ReportCompatibleFields
 reportCompatibleFields
     :: ReportCompatibleFields
 reportCompatibleFields =
-    ReportCompatibleFields
+    ReportCompatibleFields'
     { _rcfMetrics = Nothing
     , _rcfKind = "dfareporting#reportCompatibleFields"
     , _rcfDimensionFilters = Nothing
@@ -9460,7 +9692,7 @@ instance FromJSON ReportCompatibleFields where
         parseJSON
           = withObject "ReportCompatibleFields"
               (\ o ->
-                 ReportCompatibleFields <$>
+                 ReportCompatibleFields' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "dfareporting#reportCompatibleFields")
@@ -9469,7 +9701,7 @@ instance FromJSON ReportCompatibleFields where
                      <*> (o .:? "dimensions" .!= mempty))
 
 instance ToJSON ReportCompatibleFields where
-        toJSON ReportCompatibleFields{..}
+        toJSON ReportCompatibleFields'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _rcfMetrics,
@@ -9482,7 +9714,7 @@ instance ToJSON ReportCompatibleFields where
 -- | Delivery Schedule.
 --
 -- /See:/ 'deliverySchedule' smart constructor.
-data DeliverySchedule = DeliverySchedule
+data DeliverySchedule = DeliverySchedule'
     { _dsHardCutoff      :: !(Maybe Bool)
     , _dsPriority        :: !(Maybe DeliverySchedulePriority)
     , _dsImpressionRatio :: !(Maybe (Textual Int64))
@@ -9503,7 +9735,7 @@ data DeliverySchedule = DeliverySchedule
 deliverySchedule
     :: DeliverySchedule
 deliverySchedule =
-    DeliverySchedule
+    DeliverySchedule'
     { _dsHardCutoff = Nothing
     , _dsPriority = Nothing
     , _dsImpressionRatio = Nothing
@@ -9544,13 +9776,13 @@ instance FromJSON DeliverySchedule where
         parseJSON
           = withObject "DeliverySchedule"
               (\ o ->
-                 DeliverySchedule <$>
+                 DeliverySchedule' <$>
                    (o .:? "hardCutoff") <*> (o .:? "priority") <*>
                      (o .:? "impressionRatio")
                      <*> (o .:? "frequencyCap"))
 
 instance ToJSON DeliverySchedule where
-        toJSON DeliverySchedule{..}
+        toJSON DeliverySchedule'{..}
           = object
               (catMaybes
                  [("hardCutoff" .=) <$> _dsHardCutoff,
@@ -9567,7 +9799,7 @@ instance ToJSON DeliverySchedule where
 -- TargetableRemarketingLists resource.
 --
 -- /See:/ 'remarketingList' smart constructor.
-data RemarketingList = RemarketingList
+data RemarketingList = RemarketingList'
     { _rlListSize                   :: !(Maybe (Textual Int64))
     , _rlListPopulationRule         :: !(Maybe ListPopulationRule)
     , _rlLifeSpan                   :: !(Maybe (Textual Int64))
@@ -9615,7 +9847,7 @@ data RemarketingList = RemarketingList
 remarketingList
     :: RemarketingList
 remarketingList =
-    RemarketingList
+    RemarketingList'
     { _rlListSize = Nothing
     , _rlListPopulationRule = Nothing
     , _rlLifeSpan = Nothing
@@ -9715,7 +9947,7 @@ instance FromJSON RemarketingList where
         parseJSON
           = withObject "RemarketingList"
               (\ o ->
-                 RemarketingList <$>
+                 RemarketingList' <$>
                    (o .:? "listSize") <*> (o .:? "listPopulationRule")
                      <*> (o .:? "lifeSpan")
                      <*> (o .:? "kind" .!= "dfareporting#remarketingList")
@@ -9730,7 +9962,7 @@ instance FromJSON RemarketingList where
                      <*> (o .:? "description"))
 
 instance ToJSON RemarketingList where
-        toJSON RemarketingList{..}
+        toJSON RemarketingList'{..}
           = object
               (catMaybes
                  [("listSize" .=) <$> _rlListSize,
@@ -9748,10 +9980,66 @@ instance ToJSON RemarketingList where
                   ("subaccountId" .=) <$> _rlSubAccountId,
                   ("description" .=) <$> _rlDescription])
 
+-- | Dynamic Targeting Key List Response
+--
+-- /See:/ 'dynamicTargetingKeysListResponse' smart constructor.
+data DynamicTargetingKeysListResponse = DynamicTargetingKeysListResponse'
+    { _dtklrKind                 :: !Text
+    , _dtklrDynamicTargetingKeys :: !(Maybe [DynamicTargetingKey])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DynamicTargetingKeysListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtklrKind'
+--
+-- * 'dtklrDynamicTargetingKeys'
+dynamicTargetingKeysListResponse
+    :: DynamicTargetingKeysListResponse
+dynamicTargetingKeysListResponse =
+    DynamicTargetingKeysListResponse'
+    { _dtklrKind = "dfareporting#dynamicTargetingKeysListResponse"
+    , _dtklrDynamicTargetingKeys = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#dynamicTargetingKeysListResponse\".
+dtklrKind :: Lens' DynamicTargetingKeysListResponse Text
+dtklrKind
+  = lens _dtklrKind (\ s a -> s{_dtklrKind = a})
+
+-- | Dynamic targeting key collection.
+dtklrDynamicTargetingKeys :: Lens' DynamicTargetingKeysListResponse [DynamicTargetingKey]
+dtklrDynamicTargetingKeys
+  = lens _dtklrDynamicTargetingKeys
+      (\ s a -> s{_dtklrDynamicTargetingKeys = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DynamicTargetingKeysListResponse
+         where
+        parseJSON
+          = withObject "DynamicTargetingKeysListResponse"
+              (\ o ->
+                 DynamicTargetingKeysListResponse' <$>
+                   (o .:? "kind" .!=
+                      "dfareporting#dynamicTargetingKeysListResponse")
+                     <*> (o .:? "dynamicTargetingKeys" .!= mempty))
+
+instance ToJSON DynamicTargetingKeysListResponse
+         where
+        toJSON DynamicTargetingKeysListResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _dtklrKind),
+                  ("dynamicTargetingKeys" .=) <$>
+                    _dtklrDynamicTargetingKeys])
+
 -- | Represents the list of DimensionValue resources.
 --
 -- /See:/ 'dimensionValueList' smart constructor.
-data DimensionValueList = DimensionValueList
+data DimensionValueList = DimensionValueList'
     { _dvlEtag          :: !(Maybe Text)
     , _dvlNextPageToken :: !(Maybe Text)
     , _dvlKind          :: !Text
@@ -9772,7 +10060,7 @@ data DimensionValueList = DimensionValueList
 dimensionValueList
     :: DimensionValueList
 dimensionValueList =
-    DimensionValueList
+    DimensionValueList'
     { _dvlEtag = Nothing
     , _dvlNextPageToken = Nothing
     , _dvlKind = "dfareporting#dimensionValueList"
@@ -9807,13 +10095,13 @@ instance FromJSON DimensionValueList where
         parseJSON
           = withObject "DimensionValueList"
               (\ o ->
-                 DimensionValueList <$>
+                 DimensionValueList' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "dfareporting#dimensionValueList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON DimensionValueList where
-        toJSON DimensionValueList{..}
+        toJSON DimensionValueList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _dvlEtag,
@@ -9825,7 +10113,7 @@ instance ToJSON DimensionValueList where
 -- type \"FlOODLIGHT\".
 --
 -- /See:/ 'floodlightReportCompatibleFields' smart constructor.
-data FloodlightReportCompatibleFields = FloodlightReportCompatibleFields
+data FloodlightReportCompatibleFields = FloodlightReportCompatibleFields'
     { _frcfMetrics          :: !(Maybe [Metric])
     , _frcfKind             :: !Text
     , _frcfDimensionFilters :: !(Maybe [Dimension])
@@ -9846,7 +10134,7 @@ data FloodlightReportCompatibleFields = FloodlightReportCompatibleFields
 floodlightReportCompatibleFields
     :: FloodlightReportCompatibleFields
 floodlightReportCompatibleFields =
-    FloodlightReportCompatibleFields
+    FloodlightReportCompatibleFields'
     { _frcfMetrics = Nothing
     , _frcfKind = "dfareporting#floodlightReportCompatibleFields"
     , _frcfDimensionFilters = Nothing
@@ -9889,7 +10177,7 @@ instance FromJSON FloodlightReportCompatibleFields
         parseJSON
           = withObject "FloodlightReportCompatibleFields"
               (\ o ->
-                 FloodlightReportCompatibleFields <$>
+                 FloodlightReportCompatibleFields' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "dfareporting#floodlightReportCompatibleFields")
@@ -9898,7 +10186,7 @@ instance FromJSON FloodlightReportCompatibleFields
 
 instance ToJSON FloodlightReportCompatibleFields
          where
-        toJSON FloodlightReportCompatibleFields{..}
+        toJSON FloodlightReportCompatibleFields'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _frcfMetrics,
@@ -9909,7 +10197,7 @@ instance ToJSON FloodlightReportCompatibleFields
 -- | Represents a grouping of related user role permissions.
 --
 -- /See:/ 'userRolePermissionGroup' smart constructor.
-data UserRolePermissionGroup = UserRolePermissionGroup
+data UserRolePermissionGroup = UserRolePermissionGroup'
     { _urpgKind :: !Text
     , _urpgName :: !(Maybe Text)
     , _urpgId   :: !(Maybe (Textual Int64))
@@ -9927,7 +10215,7 @@ data UserRolePermissionGroup = UserRolePermissionGroup
 userRolePermissionGroup
     :: UserRolePermissionGroup
 userRolePermissionGroup =
-    UserRolePermissionGroup
+    UserRolePermissionGroup'
     { _urpgKind = "dfareporting#userRolePermissionGroup"
     , _urpgName = Nothing
     , _urpgId = Nothing
@@ -9952,14 +10240,14 @@ instance FromJSON UserRolePermissionGroup where
         parseJSON
           = withObject "UserRolePermissionGroup"
               (\ o ->
-                 UserRolePermissionGroup <$>
+                 UserRolePermissionGroup' <$>
                    (o .:? "kind" .!=
                       "dfareporting#userRolePermissionGroup")
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON UserRolePermissionGroup where
-        toJSON UserRolePermissionGroup{..}
+        toJSON UserRolePermissionGroup'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _urpgKind),
@@ -9968,7 +10256,7 @@ instance ToJSON UserRolePermissionGroup where
 -- | Tag Settings
 --
 -- /See:/ 'tagSetting' smart constructor.
-data TagSetting = TagSetting
+data TagSetting = TagSetting'
     { _tsKeywordOption           :: !(Maybe TagSettingKeywordOption)
     , _tsIncludeClickThroughURLs :: !(Maybe Bool)
     , _tsIncludeClickTracking    :: !(Maybe Bool)
@@ -9989,7 +10277,7 @@ data TagSetting = TagSetting
 tagSetting
     :: TagSetting
 tagSetting =
-    TagSetting
+    TagSetting'
     { _tsKeywordOption = Nothing
     , _tsIncludeClickThroughURLs = Nothing
     , _tsIncludeClickTracking = Nothing
@@ -10031,14 +10319,14 @@ instance FromJSON TagSetting where
         parseJSON
           = withObject "TagSetting"
               (\ o ->
-                 TagSetting <$>
+                 TagSetting' <$>
                    (o .:? "keywordOption") <*>
                      (o .:? "includeClickThroughUrls")
                      <*> (o .:? "includeClickTracking")
                      <*> (o .:? "additionalKeyValues"))
 
 instance ToJSON TagSetting where
-        toJSON TagSetting{..}
+        toJSON TagSetting'{..}
           = object
               (catMaybes
                  [("keywordOption" .=) <$> _tsKeywordOption,
@@ -10052,7 +10340,7 @@ instance ToJSON TagSetting where
 -- | The properties of the report.
 --
 -- /See:/ 'reportPathToConversionCriteriaReportProperties' smart constructor.
-data ReportPathToConversionCriteriaReportProperties = ReportPathToConversionCriteriaReportProperties
+data ReportPathToConversionCriteriaReportProperties = ReportPathToConversionCriteriaReportProperties'
     { _rptccrpMaximumInteractionGap                :: !(Maybe (Textual Int32))
     , _rptccrpMaximumClickInteractions             :: !(Maybe (Textual Int32))
     , _rptccrpPivotOnInteractionPath               :: !(Maybe Bool)
@@ -10088,7 +10376,7 @@ data ReportPathToConversionCriteriaReportProperties = ReportPathToConversionCrit
 reportPathToConversionCriteriaReportProperties
     :: ReportPathToConversionCriteriaReportProperties
 reportPathToConversionCriteriaReportProperties =
-    ReportPathToConversionCriteriaReportProperties
+    ReportPathToConversionCriteriaReportProperties'
     { _rptccrpMaximumInteractionGap = Nothing
     , _rptccrpMaximumClickInteractions = Nothing
     , _rptccrpPivotOnInteractionPath = Nothing
@@ -10186,7 +10474,7 @@ instance FromJSON
           = withObject
               "ReportPathToConversionCriteriaReportProperties"
               (\ o ->
-                 ReportPathToConversionCriteriaReportProperties <$>
+                 ReportPathToConversionCriteriaReportProperties' <$>
                    (o .:? "maximumInteractionGap") <*>
                      (o .:? "maximumClickInteractions")
                      <*> (o .:? "pivotOnInteractionPath")
@@ -10200,7 +10488,7 @@ instance FromJSON
 instance ToJSON
          ReportPathToConversionCriteriaReportProperties where
         toJSON
-          ReportPathToConversionCriteriaReportProperties{..}
+          ReportPathToConversionCriteriaReportProperties'{..}
           = object
               (catMaybes
                  [("maximumInteractionGap" .=) <$>
@@ -10225,7 +10513,7 @@ instance ToJSON
 -- | User Role Permission List Response
 --
 -- /See:/ 'userRolePermissionsListResponse' smart constructor.
-data UserRolePermissionsListResponse = UserRolePermissionsListResponse
+data UserRolePermissionsListResponse = UserRolePermissionsListResponse'
     { _urplrKind                :: !Text
     , _urplrUserRolePermissions :: !(Maybe [UserRolePermission])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10240,7 +10528,7 @@ data UserRolePermissionsListResponse = UserRolePermissionsListResponse
 userRolePermissionsListResponse
     :: UserRolePermissionsListResponse
 userRolePermissionsListResponse =
-    UserRolePermissionsListResponse
+    UserRolePermissionsListResponse'
     { _urplrKind = "dfareporting#userRolePermissionsListResponse"
     , _urplrUserRolePermissions = Nothing
     }
@@ -10264,13 +10552,13 @@ instance FromJSON UserRolePermissionsListResponse
         parseJSON
           = withObject "UserRolePermissionsListResponse"
               (\ o ->
-                 UserRolePermissionsListResponse <$>
+                 UserRolePermissionsListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#userRolePermissionsListResponse")
                      <*> (o .:? "userRolePermissions" .!= mempty))
 
 instance ToJSON UserRolePermissionsListResponse where
-        toJSON UserRolePermissionsListResponse{..}
+        toJSON UserRolePermissionsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _urplrKind),
@@ -10280,7 +10568,7 @@ instance ToJSON UserRolePermissionsListResponse where
 -- | Placement Group List Response
 --
 -- /See:/ 'placementGroupsListResponse' smart constructor.
-data PlacementGroupsListResponse = PlacementGroupsListResponse
+data PlacementGroupsListResponse = PlacementGroupsListResponse'
     { _pglrNextPageToken   :: !(Maybe Text)
     , _pglrKind            :: !Text
     , _pglrPlacementGroups :: !(Maybe [PlacementGroup])
@@ -10298,7 +10586,7 @@ data PlacementGroupsListResponse = PlacementGroupsListResponse
 placementGroupsListResponse
     :: PlacementGroupsListResponse
 placementGroupsListResponse =
-    PlacementGroupsListResponse
+    PlacementGroupsListResponse'
     { _pglrNextPageToken = Nothing
     , _pglrKind = "dfareporting#placementGroupsListResponse"
     , _pglrPlacementGroups = Nothing
@@ -10327,14 +10615,14 @@ instance FromJSON PlacementGroupsListResponse where
         parseJSON
           = withObject "PlacementGroupsListResponse"
               (\ o ->
-                 PlacementGroupsListResponse <$>
+                 PlacementGroupsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#placementGroupsListResponse")
                      <*> (o .:? "placementGroups" .!= mempty))
 
 instance ToJSON PlacementGroupsListResponse where
-        toJSON PlacementGroupsListResponse{..}
+        toJSON PlacementGroupsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _pglrNextPageToken,
@@ -10344,7 +10632,7 @@ instance ToJSON PlacementGroupsListResponse where
 -- | Contains information about a mobile carrier that can be targeted by ads.
 --
 -- /See:/ 'mobileCarrier' smart constructor.
-data MobileCarrier = MobileCarrier
+data MobileCarrier = MobileCarrier'
     { _mcKind          :: !Text
     , _mcName          :: !(Maybe Text)
     , _mcCountryCode   :: !(Maybe Text)
@@ -10368,7 +10656,7 @@ data MobileCarrier = MobileCarrier
 mobileCarrier
     :: MobileCarrier
 mobileCarrier =
-    MobileCarrier
+    MobileCarrier'
     { _mcKind = "dfareporting#mobileCarrier"
     , _mcName = Nothing
     , _mcCountryCode = Nothing
@@ -10408,7 +10696,7 @@ instance FromJSON MobileCarrier where
         parseJSON
           = withObject "MobileCarrier"
               (\ o ->
-                 MobileCarrier <$>
+                 MobileCarrier' <$>
                    (o .:? "kind" .!= "dfareporting#mobileCarrier") <*>
                      (o .:? "name")
                      <*> (o .:? "countryCode")
@@ -10416,7 +10704,7 @@ instance FromJSON MobileCarrier where
                      <*> (o .:? "countryDartId"))
 
 instance ToJSON MobileCarrier where
-        toJSON MobileCarrier{..}
+        toJSON MobileCarrier'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mcKind), ("name" .=) <$> _mcName,
@@ -10428,7 +10716,7 @@ instance ToJSON MobileCarrier where
 -- user clicks an ad.
 --
 -- /See:/ 'landingPage' smart constructor.
-data LandingPage = LandingPage
+data LandingPage = LandingPage'
     { _lpKind    :: !Text
     , _lpDefault :: !(Maybe Bool)
     , _lpURL     :: !(Maybe Text)
@@ -10452,7 +10740,7 @@ data LandingPage = LandingPage
 landingPage
     :: LandingPage
 landingPage =
-    LandingPage
+    LandingPage'
     { _lpKind = "dfareporting#landingPage"
     , _lpDefault = Nothing
     , _lpURL = Nothing
@@ -10492,7 +10780,7 @@ instance FromJSON LandingPage where
         parseJSON
           = withObject "LandingPage"
               (\ o ->
-                 LandingPage <$>
+                 LandingPage' <$>
                    (o .:? "kind" .!= "dfareporting#landingPage") <*>
                      (o .:? "default")
                      <*> (o .:? "url")
@@ -10500,7 +10788,7 @@ instance FromJSON LandingPage where
                      <*> (o .:? "id"))
 
 instance ToJSON LandingPage where
-        toJSON LandingPage{..}
+        toJSON LandingPage'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _lpKind),
@@ -10510,7 +10798,7 @@ instance ToJSON LandingPage where
 -- | Connection Type List Response
 --
 -- /See:/ 'connectionTypesListResponse' smart constructor.
-data ConnectionTypesListResponse = ConnectionTypesListResponse
+data ConnectionTypesListResponse = ConnectionTypesListResponse'
     { _ctlrKind            :: !Text
     , _ctlrConnectionTypes :: !(Maybe [ConnectionType])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10525,7 +10813,7 @@ data ConnectionTypesListResponse = ConnectionTypesListResponse
 connectionTypesListResponse
     :: ConnectionTypesListResponse
 connectionTypesListResponse =
-    ConnectionTypesListResponse
+    ConnectionTypesListResponse'
     { _ctlrKind = "dfareporting#connectionTypesListResponse"
     , _ctlrConnectionTypes = Nothing
     }
@@ -10547,13 +10835,13 @@ instance FromJSON ConnectionTypesListResponse where
         parseJSON
           = withObject "ConnectionTypesListResponse"
               (\ o ->
-                 ConnectionTypesListResponse <$>
+                 ConnectionTypesListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#connectionTypesListResponse")
                      <*> (o .:? "connectionTypes" .!= mempty))
 
 instance ToJSON ConnectionTypesListResponse where
-        toJSON ConnectionTypesListResponse{..}
+        toJSON ConnectionTypesListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ctlrKind),
@@ -10562,7 +10850,7 @@ instance ToJSON ConnectionTypesListResponse where
 -- | Order List Response
 --
 -- /See:/ 'ordersListResponse' smart constructor.
-data OrdersListResponse = OrdersListResponse
+data OrdersListResponse = OrdersListResponse'
     { _olrNextPageToken :: !(Maybe Text)
     , _olrKind          :: !Text
     , _olrOrders        :: !(Maybe [Order])
@@ -10580,7 +10868,7 @@ data OrdersListResponse = OrdersListResponse
 ordersListResponse
     :: OrdersListResponse
 ordersListResponse =
-    OrdersListResponse
+    OrdersListResponse'
     { _olrNextPageToken = Nothing
     , _olrKind = "dfareporting#ordersListResponse"
     , _olrOrders = Nothing
@@ -10608,13 +10896,13 @@ instance FromJSON OrdersListResponse where
         parseJSON
           = withObject "OrdersListResponse"
               (\ o ->
-                 OrdersListResponse <$>
+                 OrdersListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "dfareporting#ordersListResponse")
                      <*> (o .:? "orders" .!= mempty))
 
 instance ToJSON OrdersListResponse where
-        toJSON OrdersListResponse{..}
+        toJSON OrdersListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olrNextPageToken,
@@ -10624,7 +10912,7 @@ instance ToJSON OrdersListResponse where
 -- | Represents the list of reports.
 --
 -- /See:/ 'reportList' smart constructor.
-data ReportList = ReportList
+data ReportList = ReportList'
     { _repEtag          :: !(Maybe Text)
     , _repNextPageToken :: !(Maybe Text)
     , _repKind          :: !Text
@@ -10645,7 +10933,7 @@ data ReportList = ReportList
 reportList
     :: ReportList
 reportList =
-    ReportList
+    ReportList'
     { _repEtag = Nothing
     , _repNextPageToken = Nothing
     , _repKind = "dfareporting#reportList"
@@ -10680,13 +10968,13 @@ instance FromJSON ReportList where
         parseJSON
           = withObject "ReportList"
               (\ o ->
-                 ReportList <$>
+                 ReportList' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "dfareporting#reportList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON ReportList where
-        toJSON ReportList{..}
+        toJSON ReportList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _repEtag,
@@ -10697,7 +10985,7 @@ instance ToJSON ReportList where
 -- | Contains properties of a creative group.
 --
 -- /See:/ 'creativeGroup' smart constructor.
-data CreativeGroup = CreativeGroup
+data CreativeGroup = CreativeGroup'
     { _cgKind                       :: !Text
     , _cgAdvertiserId               :: !(Maybe (Textual Int64))
     , _cgAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
@@ -10730,7 +11018,7 @@ data CreativeGroup = CreativeGroup
 creativeGroup
     :: CreativeGroup
 creativeGroup =
-    CreativeGroup
+    CreativeGroup'
     { _cgKind = "dfareporting#creativeGroup"
     , _cgAdvertiserId = Nothing
     , _cgAdvertiserIdDimensionValue = Nothing
@@ -10802,7 +11090,7 @@ instance FromJSON CreativeGroup where
         parseJSON
           = withObject "CreativeGroup"
               (\ o ->
-                 CreativeGroup <$>
+                 CreativeGroup' <$>
                    (o .:? "kind" .!= "dfareporting#creativeGroup") <*>
                      (o .:? "advertiserId")
                      <*> (o .:? "advertiserIdDimensionValue")
@@ -10813,7 +11101,7 @@ instance FromJSON CreativeGroup where
                      <*> (o .:? "subaccountId"))
 
 instance ToJSON CreativeGroup where
-        toJSON CreativeGroup{..}
+        toJSON CreativeGroup'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cgKind),
@@ -10828,7 +11116,7 @@ instance ToJSON CreativeGroup where
 -- | Identifies a creative which has been associated with a given campaign.
 --
 -- /See:/ 'campaignCreativeAssociation' smart constructor.
-data CampaignCreativeAssociation = CampaignCreativeAssociation
+data CampaignCreativeAssociation = CampaignCreativeAssociation'
     { _ccaKind       :: !Text
     , _ccaCreativeId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10843,7 +11131,7 @@ data CampaignCreativeAssociation = CampaignCreativeAssociation
 campaignCreativeAssociation
     :: CampaignCreativeAssociation
 campaignCreativeAssociation =
-    CampaignCreativeAssociation
+    CampaignCreativeAssociation'
     { _ccaKind = "dfareporting#campaignCreativeAssociation"
     , _ccaCreativeId = Nothing
     }
@@ -10865,22 +11153,84 @@ instance FromJSON CampaignCreativeAssociation where
         parseJSON
           = withObject "CampaignCreativeAssociation"
               (\ o ->
-                 CampaignCreativeAssociation <$>
+                 CampaignCreativeAssociation' <$>
                    (o .:? "kind" .!=
                       "dfareporting#campaignCreativeAssociation")
                      <*> (o .:? "creativeId"))
 
 instance ToJSON CampaignCreativeAssociation where
-        toJSON CampaignCreativeAssociation{..}
+        toJSON CampaignCreativeAssociation'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ccaKind),
                   ("creativeId" .=) <$> _ccaCreativeId])
 
+-- | The original conversion that was inserted and whether there were any
+-- errors.
+--
+-- /See:/ 'conversionStatus' smart constructor.
+data ConversionStatus = ConversionStatus'
+    { _csKind       :: !Text
+    , _csConversion :: !(Maybe Conversion)
+    , _csErrors     :: !(Maybe [ConversionError])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConversionStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csKind'
+--
+-- * 'csConversion'
+--
+-- * 'csErrors'
+conversionStatus
+    :: ConversionStatus
+conversionStatus =
+    ConversionStatus'
+    { _csKind = "dfareporting#conversionStatus"
+    , _csConversion = Nothing
+    , _csErrors = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversionStatus\".
+csKind :: Lens' ConversionStatus Text
+csKind = lens _csKind (\ s a -> s{_csKind = a})
+
+-- | The original conversion that was inserted.
+csConversion :: Lens' ConversionStatus (Maybe Conversion)
+csConversion
+  = lens _csConversion (\ s a -> s{_csConversion = a})
+
+-- | A list of errors related to this conversion.
+csErrors :: Lens' ConversionStatus [ConversionError]
+csErrors
+  = lens _csErrors (\ s a -> s{_csErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ConversionStatus where
+        parseJSON
+          = withObject "ConversionStatus"
+              (\ o ->
+                 ConversionStatus' <$>
+                   (o .:? "kind" .!= "dfareporting#conversionStatus")
+                     <*> (o .:? "conversion")
+                     <*> (o .:? "errors" .!= mempty))
+
+instance ToJSON ConversionStatus where
+        toJSON ConversionStatus'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _csKind),
+                  ("conversion" .=) <$> _csConversion,
+                  ("errors" .=) <$> _csErrors])
+
 -- | Lookback configuration settings.
 --
 -- /See:/ 'lookbackConfiguration' smart constructor.
-data LookbackConfiguration = LookbackConfiguration
+data LookbackConfiguration = LookbackConfiguration'
     { _lcClickDuration                    :: !(Maybe (Textual Int32))
     , _lcPostImpressionActivitiesDuration :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10895,7 +11245,7 @@ data LookbackConfiguration = LookbackConfiguration
 lookbackConfiguration
     :: LookbackConfiguration
 lookbackConfiguration =
-    LookbackConfiguration
+    LookbackConfiguration'
     { _lcClickDuration = Nothing
     , _lcPostImpressionActivitiesDuration = Nothing
     }
@@ -10924,12 +11274,12 @@ instance FromJSON LookbackConfiguration where
         parseJSON
           = withObject "LookbackConfiguration"
               (\ o ->
-                 LookbackConfiguration <$>
+                 LookbackConfiguration' <$>
                    (o .:? "clickDuration") <*>
                      (o .:? "postImpressionActivitiesDuration"))
 
 instance ToJSON LookbackConfiguration where
-        toJSON LookbackConfiguration{..}
+        toJSON LookbackConfiguration'{..}
           = object
               (catMaybes
                  [("clickDuration" .=) <$> _lcClickDuration,
@@ -10939,7 +11289,7 @@ instance ToJSON LookbackConfiguration where
 -- | Publisher Dynamic Tag
 --
 -- /See:/ 'floodlightActivityPublisherDynamicTag' smart constructor.
-data FloodlightActivityPublisherDynamicTag = FloodlightActivityPublisherDynamicTag
+data FloodlightActivityPublisherDynamicTag = FloodlightActivityPublisherDynamicTag'
     { _fapdtClickThrough         :: !(Maybe Bool)
     , _fapdtSiteIdDimensionValue :: !(Maybe DimensionValue)
     , _fapdtDynamicTag           :: !(Maybe FloodlightActivityDynamicTag)
@@ -10966,7 +11316,7 @@ data FloodlightActivityPublisherDynamicTag = FloodlightActivityPublisherDynamicT
 floodlightActivityPublisherDynamicTag
     :: FloodlightActivityPublisherDynamicTag
 floodlightActivityPublisherDynamicTag =
-    FloodlightActivityPublisherDynamicTag
+    FloodlightActivityPublisherDynamicTag'
     { _fapdtClickThrough = Nothing
     , _fapdtSiteIdDimensionValue = Nothing
     , _fapdtDynamicTag = Nothing
@@ -11020,7 +11370,7 @@ instance FromJSON
         parseJSON
           = withObject "FloodlightActivityPublisherDynamicTag"
               (\ o ->
-                 FloodlightActivityPublisherDynamicTag <$>
+                 FloodlightActivityPublisherDynamicTag' <$>
                    (o .:? "clickThrough") <*>
                      (o .:? "siteIdDimensionValue")
                      <*> (o .:? "dynamicTag")
@@ -11030,7 +11380,7 @@ instance FromJSON
 
 instance ToJSON FloodlightActivityPublisherDynamicTag
          where
-        toJSON FloodlightActivityPublisherDynamicTag{..}
+        toJSON FloodlightActivityPublisherDynamicTag'{..}
           = object
               (catMaybes
                  [("clickThrough" .=) <$> _fapdtClickThrough,
@@ -11044,7 +11394,7 @@ instance ToJSON FloodlightActivityPublisherDynamicTag
 -- | Gets a summary of active ads in an account.
 --
 -- /See:/ 'accountActiveAdSummary' smart constructor.
-data AccountActiveAdSummary = AccountActiveAdSummary
+data AccountActiveAdSummary = AccountActiveAdSummary'
     { _aaasAvailableAds       :: !(Maybe (Textual Int64))
     , _aaasKind               :: !Text
     , _aaasAccountId          :: !(Maybe (Textual Int64))
@@ -11068,7 +11418,7 @@ data AccountActiveAdSummary = AccountActiveAdSummary
 accountActiveAdSummary
     :: AccountActiveAdSummary
 accountActiveAdSummary =
-    AccountActiveAdSummary
+    AccountActiveAdSummary'
     { _aaasAvailableAds = Nothing
     , _aaasKind = "dfareporting#accountActiveAdSummary"
     , _aaasAccountId = Nothing
@@ -11112,7 +11462,7 @@ instance FromJSON AccountActiveAdSummary where
         parseJSON
           = withObject "AccountActiveAdSummary"
               (\ o ->
-                 AccountActiveAdSummary <$>
+                 AccountActiveAdSummary' <$>
                    (o .:? "availableAds") <*>
                      (o .:? "kind" .!=
                         "dfareporting#accountActiveAdSummary")
@@ -11121,7 +11471,7 @@ instance FromJSON AccountActiveAdSummary where
                      <*> (o .:? "activeAdsLimitTier"))
 
 instance ToJSON AccountActiveAdSummary where
-        toJSON AccountActiveAdSummary{..}
+        toJSON AccountActiveAdSummary'{..}
           = object
               (catMaybes
                  [("availableAds" .=) <$> _aaasAvailableAds,
@@ -11134,7 +11484,7 @@ instance ToJSON AccountActiveAdSummary where
 -- | Offset Position.
 --
 -- /See:/ 'offSetPosition' smart constructor.
-data OffSetPosition = OffSetPosition
+data OffSetPosition = OffSetPosition'
     { _ospLeft :: !(Maybe (Textual Int32))
     , _ospTop  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11149,7 +11499,7 @@ data OffSetPosition = OffSetPosition
 offSetPosition
     :: OffSetPosition
 offSetPosition =
-    OffSetPosition
+    OffSetPosition'
     { _ospLeft = Nothing
     , _ospTop = Nothing
     }
@@ -11170,10 +11520,10 @@ instance FromJSON OffSetPosition where
         parseJSON
           = withObject "OffSetPosition"
               (\ o ->
-                 OffSetPosition <$> (o .:? "left") <*> (o .:? "top"))
+                 OffSetPosition' <$> (o .:? "left") <*> (o .:? "top"))
 
 instance ToJSON OffSetPosition where
-        toJSON OffSetPosition{..}
+        toJSON OffSetPosition'{..}
           = object
               (catMaybes
                  [("left" .=) <$> _ospLeft, ("top" .=) <$> _ospTop])
@@ -11181,7 +11531,7 @@ instance ToJSON OffSetPosition where
 -- | Represents a metric.
 --
 -- /See:/ 'metric' smart constructor.
-data Metric = Metric
+data Metric = Metric'
     { _mKind :: !Text
     , _mName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11196,7 +11546,7 @@ data Metric = Metric
 metric
     :: Metric
 metric =
-    Metric
+    Metric'
     { _mKind = "dfareporting#metric"
     , _mName = Nothing
     }
@@ -11213,12 +11563,12 @@ instance FromJSON Metric where
         parseJSON
           = withObject "Metric"
               (\ o ->
-                 Metric <$>
+                 Metric' <$>
                    (o .:? "kind" .!= "dfareporting#metric") <*>
                      (o .:? "name"))
 
 instance ToJSON Metric where
-        toJSON Metric{..}
+        toJSON Metric'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mKind), ("name" .=) <$> _mName])
@@ -11229,7 +11579,7 @@ instance ToJSON Metric where
 -- sharing to other accounts and advertisers.
 --
 -- /See:/ 'remarketingListShare' smart constructor.
-data RemarketingListShare = RemarketingListShare
+data RemarketingListShare = RemarketingListShare'
     { _rlsSharedAdvertiserIds :: !(Maybe [Textual Int64])
     , _rlsKind                :: !Text
     , _rlsRemarketingListId   :: !(Maybe (Textual Int64))
@@ -11250,7 +11600,7 @@ data RemarketingListShare = RemarketingListShare
 remarketingListShare
     :: RemarketingListShare
 remarketingListShare =
-    RemarketingListShare
+    RemarketingListShare'
     { _rlsSharedAdvertiserIds = Nothing
     , _rlsKind = "dfareporting#remarketingListShare"
     , _rlsRemarketingListId = Nothing
@@ -11289,7 +11639,7 @@ instance FromJSON RemarketingListShare where
         parseJSON
           = withObject "RemarketingListShare"
               (\ o ->
-                 RemarketingListShare <$>
+                 RemarketingListShare' <$>
                    (o .:? "sharedAdvertiserIds" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "dfareporting#remarketingListShare")
@@ -11297,7 +11647,7 @@ instance FromJSON RemarketingListShare where
                      <*> (o .:? "sharedAccountIds" .!= mempty))
 
 instance ToJSON RemarketingListShare where
-        toJSON RemarketingListShare{..}
+        toJSON RemarketingListShare'{..}
           = object
               (catMaybes
                  [("sharedAdvertiserIds" .=) <$>
@@ -11309,7 +11659,7 @@ instance ToJSON RemarketingListShare where
 -- | Event Tag List Response
 --
 -- /See:/ 'eventTagsListResponse' smart constructor.
-data EventTagsListResponse = EventTagsListResponse
+data EventTagsListResponse = EventTagsListResponse'
     { _etlrKind      :: !Text
     , _etlrEventTags :: !(Maybe [EventTag])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11324,7 +11674,7 @@ data EventTagsListResponse = EventTagsListResponse
 eventTagsListResponse
     :: EventTagsListResponse
 eventTagsListResponse =
-    EventTagsListResponse
+    EventTagsListResponse'
     { _etlrKind = "dfareporting#eventTagsListResponse"
     , _etlrEventTags = Nothing
     }
@@ -11346,13 +11696,13 @@ instance FromJSON EventTagsListResponse where
         parseJSON
           = withObject "EventTagsListResponse"
               (\ o ->
-                 EventTagsListResponse <$>
+                 EventTagsListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#eventTagsListResponse")
                      <*> (o .:? "eventTags" .!= mempty))
 
 instance ToJSON EventTagsListResponse where
-        toJSON EventTagsListResponse{..}
+        toJSON EventTagsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _etlrKind),
@@ -11361,7 +11711,7 @@ instance ToJSON EventTagsListResponse where
 -- | User Role List Response
 --
 -- /See:/ 'userRolesListResponse' smart constructor.
-data UserRolesListResponse = UserRolesListResponse
+data UserRolesListResponse = UserRolesListResponse'
     { _urlrNextPageToken :: !(Maybe Text)
     , _urlrKind          :: !Text
     , _urlrUserRoles     :: !(Maybe [UserRole])
@@ -11379,7 +11729,7 @@ data UserRolesListResponse = UserRolesListResponse
 userRolesListResponse
     :: UserRolesListResponse
 userRolesListResponse =
-    UserRolesListResponse
+    UserRolesListResponse'
     { _urlrNextPageToken = Nothing
     , _urlrKind = "dfareporting#userRolesListResponse"
     , _urlrUserRoles = Nothing
@@ -11408,14 +11758,14 @@ instance FromJSON UserRolesListResponse where
         parseJSON
           = withObject "UserRolesListResponse"
               (\ o ->
-                 UserRolesListResponse <$>
+                 UserRolesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#userRolesListResponse")
                      <*> (o .:? "userRoles" .!= mempty))
 
 instance ToJSON UserRolesListResponse where
-        toJSON UserRolesListResponse{..}
+        toJSON UserRolesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _urlrNextPageToken,
@@ -11425,7 +11775,7 @@ instance ToJSON UserRolesListResponse where
 -- | Represents a response to the queryCompatibleFields method.
 --
 -- /See:/ 'compatibleFields' smart constructor.
-data CompatibleFields = CompatibleFields
+data CompatibleFields = CompatibleFields'
     { _cfReachReportCompatibleFields               :: !(Maybe ReachReportCompatibleFields)
     , _cfCrossDimensionReachReportCompatibleFields :: !(Maybe CrossDimensionReachReportCompatibleFields)
     , _cfKind                                      :: !Text
@@ -11452,7 +11802,7 @@ data CompatibleFields = CompatibleFields
 compatibleFields
     :: CompatibleFields
 compatibleFields =
-    CompatibleFields
+    CompatibleFields'
     { _cfReachReportCompatibleFields = Nothing
     , _cfCrossDimensionReachReportCompatibleFields = Nothing
     , _cfKind = "dfareporting#compatibleFields"
@@ -11507,7 +11857,7 @@ instance FromJSON CompatibleFields where
         parseJSON
           = withObject "CompatibleFields"
               (\ o ->
-                 CompatibleFields <$>
+                 CompatibleFields' <$>
                    (o .:? "reachReportCompatibleFields") <*>
                      (o .:? "crossDimensionReachReportCompatibleFields")
                      <*>
@@ -11517,7 +11867,7 @@ instance FromJSON CompatibleFields where
                      <*> (o .:? "pathToConversionReportCompatibleFields"))
 
 instance ToJSON CompatibleFields where
-        toJSON CompatibleFields{..}
+        toJSON CompatibleFields'{..}
           = object
               (catMaybes
                  [("reachReportCompatibleFields" .=) <$>
@@ -11535,7 +11885,7 @@ instance ToJSON CompatibleFields where
 -- | Audience Segment.
 --
 -- /See:/ 'audienceSegment' smart constructor.
-data AudienceSegment = AudienceSegment
+data AudienceSegment = AudienceSegment'
     { _asName       :: !(Maybe Text)
     , _asId         :: !(Maybe (Textual Int64))
     , _asAllocation :: !(Maybe (Textual Int32))
@@ -11553,7 +11903,7 @@ data AudienceSegment = AudienceSegment
 audienceSegment
     :: AudienceSegment
 audienceSegment =
-    AudienceSegment
+    AudienceSegment'
     { _asName = Nothing
     , _asId = Nothing
     , _asAllocation = Nothing
@@ -11582,12 +11932,12 @@ instance FromJSON AudienceSegment where
         parseJSON
           = withObject "AudienceSegment"
               (\ o ->
-                 AudienceSegment <$>
+                 AudienceSegment' <$>
                    (o .:? "name") <*> (o .:? "id") <*>
                      (o .:? "allocation"))
 
 instance ToJSON AudienceSegment where
-        toJSON AudienceSegment{..}
+        toJSON AudienceSegment'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _asName, ("id" .=) <$> _asId,
@@ -11596,7 +11946,7 @@ instance ToJSON AudienceSegment where
 -- | DFP Settings
 --
 -- /See:/ 'dfpSettings' smart constructor.
-data DfpSettings = DfpSettings
+data DfpSettings = DfpSettings'
     { _dsPubPaidPlacementAccepted      :: !(Maybe Bool)
     , _dsDfpNetworkName                :: !(Maybe Text)
     , _dsPublisherPortalOnly           :: !(Maybe Bool)
@@ -11620,7 +11970,7 @@ data DfpSettings = DfpSettings
 dfpSettings
     :: DfpSettings
 dfpSettings =
-    DfpSettings
+    DfpSettings'
     { _dsPubPaidPlacementAccepted = Nothing
     , _dsDfpNetworkName = Nothing
     , _dsPublisherPortalOnly = Nothing
@@ -11663,7 +12013,7 @@ instance FromJSON DfpSettings where
         parseJSON
           = withObject "DfpSettings"
               (\ o ->
-                 DfpSettings <$>
+                 DfpSettings' <$>
                    (o .:? "pubPaidPlacementAccepted") <*>
                      (o .:? "dfp_network_name")
                      <*> (o .:? "publisherPortalOnly")
@@ -11671,7 +12021,7 @@ instance FromJSON DfpSettings where
                      <*> (o .:? "dfp_network_code"))
 
 instance ToJSON DfpSettings where
-        toJSON DfpSettings{..}
+        toJSON DfpSettings'{..}
           = object
               (catMaybes
                  [("pubPaidPlacementAccepted" .=) <$>
@@ -11687,7 +12037,7 @@ instance ToJSON DfpSettings where
 -- type \"PATH_TO_CONVERSION\".
 --
 -- /See:/ 'pathToConversionReportCompatibleFields' smart constructor.
-data PathToConversionReportCompatibleFields = PathToConversionReportCompatibleFields
+data PathToConversionReportCompatibleFields = PathToConversionReportCompatibleFields'
     { _ptcrcfMetrics                   :: !(Maybe [Metric])
     , _ptcrcfKind                      :: !Text
     , _ptcrcfConversionDimensions      :: !(Maybe [Dimension])
@@ -11711,7 +12061,7 @@ data PathToConversionReportCompatibleFields = PathToConversionReportCompatibleFi
 pathToConversionReportCompatibleFields
     :: PathToConversionReportCompatibleFields
 pathToConversionReportCompatibleFields =
-    PathToConversionReportCompatibleFields
+    PathToConversionReportCompatibleFields'
     { _ptcrcfMetrics = Nothing
     , _ptcrcfKind = "dfareporting#pathToConversionReportCompatibleFields"
     , _ptcrcfConversionDimensions = Nothing
@@ -11766,7 +12116,7 @@ instance FromJSON
         parseJSON
           = withObject "PathToConversionReportCompatibleFields"
               (\ o ->
-                 PathToConversionReportCompatibleFields <$>
+                 PathToConversionReportCompatibleFields' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "dfareporting#pathToConversionReportCompatibleFields")
@@ -11776,7 +12126,7 @@ instance FromJSON
 
 instance ToJSON
          PathToConversionReportCompatibleFields where
-        toJSON PathToConversionReportCompatibleFields{..}
+        toJSON PathToConversionReportCompatibleFields'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _ptcrcfMetrics,
@@ -11791,7 +12141,7 @@ instance ToJSON
 -- | Contains information about a city that can be targeted by ads.
 --
 -- /See:/ 'city' smart constructor.
-data City = City
+data City = City'
     { _ccMetroCode     :: !(Maybe Text)
     , _ccRegionCode    :: !(Maybe Text)
     , _ccKind          :: !Text
@@ -11827,7 +12177,7 @@ data City = City
 city
     :: City
 city =
-    City
+    City'
     { _ccMetroCode = Nothing
     , _ccRegionCode = Nothing
     , _ccKind = "dfareporting#city"
@@ -11895,7 +12245,7 @@ instance FromJSON City where
         parseJSON
           = withObject "City"
               (\ o ->
-                 City <$>
+                 City' <$>
                    (o .:? "metroCode") <*> (o .:? "regionCode") <*>
                      (o .:? "kind" .!= "dfareporting#city")
                      <*> (o .:? "regionDartId")
@@ -11906,7 +12256,7 @@ instance FromJSON City where
                      <*> (o .:? "dartId"))
 
 instance ToJSON City where
-        toJSON City{..}
+        toJSON City'{..}
           = object
               (catMaybes
                  [("metroCode" .=) <$> _ccMetroCode,
@@ -11922,7 +12272,7 @@ instance ToJSON City where
 -- | Contains information about a platform type that can be targeted by ads.
 --
 -- /See:/ 'platformType' smart constructor.
-data PlatformType = PlatformType
+data PlatformType = PlatformType'
     { _ptKind :: !Text
     , _ptName :: !(Maybe Text)
     , _ptId   :: !(Maybe (Textual Int64))
@@ -11940,7 +12290,7 @@ data PlatformType = PlatformType
 platformType
     :: PlatformType
 platformType =
-    PlatformType
+    PlatformType'
     { _ptKind = "dfareporting#platformType"
     , _ptName = Nothing
     , _ptId = Nothing
@@ -11965,13 +12315,13 @@ instance FromJSON PlatformType where
         parseJSON
           = withObject "PlatformType"
               (\ o ->
-                 PlatformType <$>
+                 PlatformType' <$>
                    (o .:? "kind" .!= "dfareporting#platformType") <*>
                      (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON PlatformType where
-        toJSON PlatformType{..}
+        toJSON PlatformType'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ptKind), ("name" .=) <$> _ptName,
@@ -11980,7 +12330,7 @@ instance ToJSON PlatformType where
 -- | Key Value Targeting Expression.
 --
 -- /See:/ 'keyValueTargetingExpression' smart constructor.
-newtype KeyValueTargetingExpression = KeyValueTargetingExpression
+newtype KeyValueTargetingExpression = KeyValueTargetingExpression'
     { _kvteExpression :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11992,7 +12342,7 @@ newtype KeyValueTargetingExpression = KeyValueTargetingExpression
 keyValueTargetingExpression
     :: KeyValueTargetingExpression
 keyValueTargetingExpression =
-    KeyValueTargetingExpression
+    KeyValueTargetingExpression'
     { _kvteExpression = Nothing
     }
 
@@ -12006,17 +12356,18 @@ instance FromJSON KeyValueTargetingExpression where
         parseJSON
           = withObject "KeyValueTargetingExpression"
               (\ o ->
-                 KeyValueTargetingExpression <$> (o .:? "expression"))
+                 KeyValueTargetingExpression' <$>
+                   (o .:? "expression"))
 
 instance ToJSON KeyValueTargetingExpression where
-        toJSON KeyValueTargetingExpression{..}
+        toJSON KeyValueTargetingExpression'{..}
           = object
               (catMaybes [("expression" .=) <$> _kvteExpression])
 
 -- | Companion Click-through override.
 --
 -- /See:/ 'companionClickThroughOverride' smart constructor.
-data CompanionClickThroughOverride = CompanionClickThroughOverride
+data CompanionClickThroughOverride = CompanionClickThroughOverride'
     { _cctoCreativeId      :: !(Maybe (Textual Int64))
     , _cctoClickThroughURL :: !(Maybe ClickThroughURL)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12031,7 +12382,7 @@ data CompanionClickThroughOverride = CompanionClickThroughOverride
 companionClickThroughOverride
     :: CompanionClickThroughOverride
 companionClickThroughOverride =
-    CompanionClickThroughOverride
+    CompanionClickThroughOverride'
     { _cctoCreativeId = Nothing
     , _cctoClickThroughURL = Nothing
     }
@@ -12053,11 +12404,11 @@ instance FromJSON CompanionClickThroughOverride where
         parseJSON
           = withObject "CompanionClickThroughOverride"
               (\ o ->
-                 CompanionClickThroughOverride <$>
+                 CompanionClickThroughOverride' <$>
                    (o .:? "creativeId") <*> (o .:? "clickThroughUrl"))
 
 instance ToJSON CompanionClickThroughOverride where
-        toJSON CompanionClickThroughOverride{..}
+        toJSON CompanionClickThroughOverride'{..}
           = object
               (catMaybes
                  [("creativeId" .=) <$> _cctoCreativeId,
@@ -12066,7 +12417,7 @@ instance ToJSON CompanionClickThroughOverride where
 -- | Advertiser List Response
 --
 -- /See:/ 'advertisersListResponse' smart constructor.
-data AdvertisersListResponse = AdvertisersListResponse
+data AdvertisersListResponse = AdvertisersListResponse'
     { _advNextPageToken :: !(Maybe Text)
     , _advKind          :: !Text
     , _advAdvertisers   :: !(Maybe [Advertiser])
@@ -12084,7 +12435,7 @@ data AdvertisersListResponse = AdvertisersListResponse
 advertisersListResponse
     :: AdvertisersListResponse
 advertisersListResponse =
-    AdvertisersListResponse
+    AdvertisersListResponse'
     { _advNextPageToken = Nothing
     , _advKind = "dfareporting#advertisersListResponse"
     , _advAdvertisers = Nothing
@@ -12113,14 +12464,14 @@ instance FromJSON AdvertisersListResponse where
         parseJSON
           = withObject "AdvertisersListResponse"
               (\ o ->
-                 AdvertisersListResponse <$>
+                 AdvertisersListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#advertisersListResponse")
                      <*> (o .:? "advertisers" .!= mempty))
 
 instance ToJSON AdvertisersListResponse where
-        toJSON AdvertisersListResponse{..}
+        toJSON AdvertisersListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _advNextPageToken,
@@ -12130,7 +12481,7 @@ instance ToJSON AdvertisersListResponse where
 -- | Country List Response
 --
 -- /See:/ 'countriesListResponse' smart constructor.
-data CountriesListResponse = CountriesListResponse
+data CountriesListResponse = CountriesListResponse'
     { _couKind      :: !Text
     , _couCountries :: !(Maybe [Country])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12145,7 +12496,7 @@ data CountriesListResponse = CountriesListResponse
 countriesListResponse
     :: CountriesListResponse
 countriesListResponse =
-    CountriesListResponse
+    CountriesListResponse'
     { _couKind = "dfareporting#countriesListResponse"
     , _couCountries = Nothing
     }
@@ -12166,13 +12517,13 @@ instance FromJSON CountriesListResponse where
         parseJSON
           = withObject "CountriesListResponse"
               (\ o ->
-                 CountriesListResponse <$>
+                 CountriesListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#countriesListResponse")
                      <*> (o .:? "countries" .!= mempty))
 
 instance ToJSON CountriesListResponse where
-        toJSON CountriesListResponse{..}
+        toJSON CountriesListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _couKind),
@@ -12181,7 +12532,7 @@ instance ToJSON CountriesListResponse where
 -- | Account Permission Group List Response
 --
 -- /See:/ 'accountPermissionGroupsListResponse' smart constructor.
-data AccountPermissionGroupsListResponse = AccountPermissionGroupsListResponse
+data AccountPermissionGroupsListResponse = AccountPermissionGroupsListResponse'
     { _apglrKind                    :: !Text
     , _apglrAccountPermissionGroups :: !(Maybe [AccountPermissionGroup])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12196,7 +12547,7 @@ data AccountPermissionGroupsListResponse = AccountPermissionGroupsListResponse
 accountPermissionGroupsListResponse
     :: AccountPermissionGroupsListResponse
 accountPermissionGroupsListResponse =
-    AccountPermissionGroupsListResponse
+    AccountPermissionGroupsListResponse'
     { _apglrKind = "dfareporting#accountPermissionGroupsListResponse"
     , _apglrAccountPermissionGroups = Nothing
     }
@@ -12220,14 +12571,14 @@ instance FromJSON AccountPermissionGroupsListResponse
         parseJSON
           = withObject "AccountPermissionGroupsListResponse"
               (\ o ->
-                 AccountPermissionGroupsListResponse <$>
+                 AccountPermissionGroupsListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#accountPermissionGroupsListResponse")
                      <*> (o .:? "accountPermissionGroups" .!= mempty))
 
 instance ToJSON AccountPermissionGroupsListResponse
          where
-        toJSON AccountPermissionGroupsListResponse{..}
+        toJSON AccountPermissionGroupsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _apglrKind),
@@ -12237,7 +12588,7 @@ instance ToJSON AccountPermissionGroupsListResponse
 -- | Popup Window Properties.
 --
 -- /See:/ 'popupWindowProperties' smart constructor.
-data PopupWindowProperties = PopupWindowProperties
+data PopupWindowProperties = PopupWindowProperties'
     { _pwpOffSet         :: !(Maybe OffSetPosition)
     , _pwpDimension      :: !(Maybe Size)
     , _pwpShowStatusBar  :: !(Maybe Bool)
@@ -12273,7 +12624,7 @@ data PopupWindowProperties = PopupWindowProperties
 popupWindowProperties
     :: PopupWindowProperties
 popupWindowProperties =
-    PopupWindowProperties
+    PopupWindowProperties'
     { _pwpOffSet = Nothing
     , _pwpDimension = Nothing
     , _pwpShowStatusBar = Nothing
@@ -12341,7 +12692,7 @@ instance FromJSON PopupWindowProperties where
         parseJSON
           = withObject "PopupWindowProperties"
               (\ o ->
-                 PopupWindowProperties <$>
+                 PopupWindowProperties' <$>
                    (o .:? "offset") <*> (o .:? "dimension") <*>
                      (o .:? "showStatusBar")
                      <*> (o .:? "showMenuBar")
@@ -12352,7 +12703,7 @@ instance FromJSON PopupWindowProperties where
                      <*> (o .:? "title"))
 
 instance ToJSON PopupWindowProperties where
-        toJSON PopupWindowProperties{..}
+        toJSON PopupWindowProperties'{..}
           = object
               (catMaybes
                  [("offset" .=) <$> _pwpOffSet,
@@ -12368,7 +12719,7 @@ instance ToJSON PopupWindowProperties where
 -- | Event tag override information.
 --
 -- /See:/ 'eventTagOverride' smart constructor.
-data EventTagOverride = EventTagOverride
+data EventTagOverride = EventTagOverride'
     { _etoEnabled :: !(Maybe Bool)
     , _etoId      :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12383,7 +12734,7 @@ data EventTagOverride = EventTagOverride
 eventTagOverride
     :: EventTagOverride
 eventTagOverride =
-    EventTagOverride
+    EventTagOverride'
     { _etoEnabled = Nothing
     , _etoId = Nothing
     }
@@ -12404,11 +12755,11 @@ instance FromJSON EventTagOverride where
         parseJSON
           = withObject "EventTagOverride"
               (\ o ->
-                 EventTagOverride <$>
+                 EventTagOverride' <$>
                    (o .:? "enabled") <*> (o .:? "id"))
 
 instance ToJSON EventTagOverride where
-        toJSON EventTagOverride{..}
+        toJSON EventTagOverride'{..}
           = object
               (catMaybes
                  [("enabled" .=) <$> _etoEnabled,
@@ -12418,7 +12769,7 @@ instance ToJSON EventTagOverride where
 -- that can be targeted by ads.
 --
 -- /See:/ 'operatingSystemVersion' smart constructor.
-data OperatingSystemVersion = OperatingSystemVersion
+data OperatingSystemVersion = OperatingSystemVersion'
     { _osvMinorVersion    :: !(Maybe Text)
     , _osvKind            :: !Text
     , _osvOperatingSystem :: !(Maybe OperatingSystem)
@@ -12445,7 +12796,7 @@ data OperatingSystemVersion = OperatingSystemVersion
 operatingSystemVersion
     :: OperatingSystemVersion
 operatingSystemVersion =
-    OperatingSystemVersion
+    OperatingSystemVersion'
     { _osvMinorVersion = Nothing
     , _osvKind = "dfareporting#operatingSystemVersion"
     , _osvOperatingSystem = Nothing
@@ -12492,7 +12843,7 @@ instance FromJSON OperatingSystemVersion where
         parseJSON
           = withObject "OperatingSystemVersion"
               (\ o ->
-                 OperatingSystemVersion <$>
+                 OperatingSystemVersion' <$>
                    (o .:? "minorVersion") <*>
                      (o .:? "kind" .!=
                         "dfareporting#operatingSystemVersion")
@@ -12502,7 +12853,7 @@ instance FromJSON OperatingSystemVersion where
                      <*> (o .:? "id"))
 
 instance ToJSON OperatingSystemVersion where
-        toJSON OperatingSystemVersion{..}
+        toJSON OperatingSystemVersion'{..}
           = object
               (catMaybes
                  [("minorVersion" .=) <$> _osvMinorVersion,
@@ -12516,7 +12867,7 @@ instance ToJSON OperatingSystemVersion where
 -- present in the account.
 --
 -- /See:/ 'accountPermission' smart constructor.
-data AccountPermission = AccountPermission
+data AccountPermission = AccountPermission'
     { _acccKind              :: !Text
     , _acccAccountProFiles   :: !(Maybe [AccountPermissionAccountProFilesItem])
     , _acccName              :: !(Maybe Text)
@@ -12543,7 +12894,7 @@ data AccountPermission = AccountPermission
 accountPermission
     :: AccountPermission
 accountPermission =
-    AccountPermission
+    AccountPermission'
     { _acccKind = "dfareporting#accountPermission"
     , _acccAccountProFiles = Nothing
     , _acccName = Nothing
@@ -12592,7 +12943,7 @@ instance FromJSON AccountPermission where
         parseJSON
           = withObject "AccountPermission"
               (\ o ->
-                 AccountPermission <$>
+                 AccountPermission' <$>
                    (o .:? "kind" .!= "dfareporting#accountPermission")
                      <*> (o .:? "accountProfiles" .!= mempty)
                      <*> (o .:? "name")
@@ -12601,7 +12952,7 @@ instance FromJSON AccountPermission where
                      <*> (o .:? "permissionGroupId"))
 
 instance ToJSON AccountPermission where
-        toJSON AccountPermission{..}
+        toJSON AccountPermission'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _acccKind),
@@ -12613,7 +12964,7 @@ instance ToJSON AccountPermission where
 -- | Represents a UserProfile resource.
 --
 -- /See:/ 'userProFile' smart constructor.
-data UserProFile = UserProFile
+data UserProFile = UserProFile'
     { _upfEtag           :: !(Maybe Text)
     , _upfKind           :: !Text
     , _upfAccountName    :: !(Maybe Text)
@@ -12646,7 +12997,7 @@ data UserProFile = UserProFile
 userProFile
     :: UserProFile
 userProFile =
-    UserProFile
+    UserProFile'
     { _upfEtag = Nothing
     , _upfKind = "dfareporting#userProfile"
     , _upfAccountName = Nothing
@@ -12705,7 +13056,7 @@ instance FromJSON UserProFile where
         parseJSON
           = withObject "UserProFile"
               (\ o ->
-                 UserProFile <$>
+                 UserProFile' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "dfareporting#userProfile")
                      <*> (o .:? "accountName")
@@ -12716,7 +13067,7 @@ instance FromJSON UserProFile where
                      <*> (o .:? "subAccountId"))
 
 instance ToJSON UserProFile where
-        toJSON UserProFile{..}
+        toJSON UserProFile'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _upfEtag, Just ("kind" .= _upfKind),
@@ -12730,7 +13081,7 @@ instance ToJSON UserProFile where
 -- | Operating System List Response
 --
 -- /See:/ 'operatingSystemsListResponse' smart constructor.
-data OperatingSystemsListResponse = OperatingSystemsListResponse
+data OperatingSystemsListResponse = OperatingSystemsListResponse'
     { _oslrKind             :: !Text
     , _oslrOperatingSystems :: !(Maybe [OperatingSystem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12745,7 +13096,7 @@ data OperatingSystemsListResponse = OperatingSystemsListResponse
 operatingSystemsListResponse
     :: OperatingSystemsListResponse
 operatingSystemsListResponse =
-    OperatingSystemsListResponse
+    OperatingSystemsListResponse'
     { _oslrKind = "dfareporting#operatingSystemsListResponse"
     , _oslrOperatingSystems = Nothing
     }
@@ -12767,13 +13118,13 @@ instance FromJSON OperatingSystemsListResponse where
         parseJSON
           = withObject "OperatingSystemsListResponse"
               (\ o ->
-                 OperatingSystemsListResponse <$>
+                 OperatingSystemsListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#operatingSystemsListResponse")
                      <*> (o .:? "operatingSystems" .!= mempty))
 
 instance ToJSON OperatingSystemsListResponse where
-        toJSON OperatingSystemsListResponse{..}
+        toJSON OperatingSystemsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _oslrKind),
@@ -12782,7 +13133,7 @@ instance ToJSON OperatingSystemsListResponse where
 -- | The report\'s email delivery settings.
 --
 -- /See:/ 'reportDelivery' smart constructor.
-data ReportDelivery = ReportDelivery
+data ReportDelivery = ReportDelivery'
     { _rdEmailOwner             :: !(Maybe Bool)
     , _rdRecipients             :: !(Maybe [Recipient])
     , _rdMessage                :: !(Maybe Text)
@@ -12803,7 +13154,7 @@ data ReportDelivery = ReportDelivery
 reportDelivery
     :: ReportDelivery
 reportDelivery =
-    ReportDelivery
+    ReportDelivery'
     { _rdEmailOwner = Nothing
     , _rdRecipients = Nothing
     , _rdMessage = Nothing
@@ -12837,14 +13188,14 @@ instance FromJSON ReportDelivery where
         parseJSON
           = withObject "ReportDelivery"
               (\ o ->
-                 ReportDelivery <$>
+                 ReportDelivery' <$>
                    (o .:? "emailOwner") <*>
                      (o .:? "recipients" .!= mempty)
                      <*> (o .:? "message")
                      <*> (o .:? "emailOwnerDeliveryType"))
 
 instance ToJSON ReportDelivery where
-        toJSON ReportDelivery{..}
+        toJSON ReportDelivery'{..}
           = object
               (catMaybes
                  [("emailOwner" .=) <$> _rdEmailOwner,
@@ -12863,7 +13214,7 @@ instance ToJSON ReportDelivery where
 -- by your advertisers, use the RemarketingLists resource.
 --
 -- /See:/ 'targetableRemarketingList' smart constructor.
-data TargetableRemarketingList = TargetableRemarketingList
+data TargetableRemarketingList = TargetableRemarketingList'
     { _trlListSize                   :: !(Maybe (Textual Int64))
     , _trlLifeSpan                   :: !(Maybe (Textual Int64))
     , _trlKind                       :: !Text
@@ -12908,7 +13259,7 @@ data TargetableRemarketingList = TargetableRemarketingList
 targetableRemarketingList
     :: TargetableRemarketingList
 targetableRemarketingList =
-    TargetableRemarketingList
+    TargetableRemarketingList'
     { _trlListSize = Nothing
     , _trlLifeSpan = Nothing
     , _trlKind = "dfareporting#targetableRemarketingList"
@@ -13002,7 +13353,7 @@ instance FromJSON TargetableRemarketingList where
         parseJSON
           = withObject "TargetableRemarketingList"
               (\ o ->
-                 TargetableRemarketingList <$>
+                 TargetableRemarketingList' <$>
                    (o .:? "listSize") <*> (o .:? "lifeSpan") <*>
                      (o .:? "kind" .!=
                         "dfareporting#targetableRemarketingList")
@@ -13017,7 +13368,7 @@ instance FromJSON TargetableRemarketingList where
                      <*> (o .:? "description"))
 
 instance ToJSON TargetableRemarketingList where
-        toJSON TargetableRemarketingList{..}
+        toJSON TargetableRemarketingList'{..}
           = object
               (catMaybes
                  [("listSize" .=) <$> _trlListSize,
@@ -13037,7 +13388,7 @@ instance ToJSON TargetableRemarketingList where
 -- | Postal Code List Response
 --
 -- /See:/ 'postalCodesListResponse' smart constructor.
-data PostalCodesListResponse = PostalCodesListResponse
+data PostalCodesListResponse = PostalCodesListResponse'
     { _pclrKind        :: !Text
     , _pclrPostalCodes :: !(Maybe [PostalCode])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13052,7 +13403,7 @@ data PostalCodesListResponse = PostalCodesListResponse
 postalCodesListResponse
     :: PostalCodesListResponse
 postalCodesListResponse =
-    PostalCodesListResponse
+    PostalCodesListResponse'
     { _pclrKind = "dfareporting#postalCodesListResponse"
     , _pclrPostalCodes = Nothing
     }
@@ -13074,13 +13425,13 @@ instance FromJSON PostalCodesListResponse where
         parseJSON
           = withObject "PostalCodesListResponse"
               (\ o ->
-                 PostalCodesListResponse <$>
+                 PostalCodesListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#postalCodesListResponse")
                      <*> (o .:? "postalCodes" .!= mempty))
 
 instance ToJSON PostalCodesListResponse where
-        toJSON PostalCodesListResponse{..}
+        toJSON PostalCodesListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pclrKind),
@@ -13089,7 +13440,7 @@ instance ToJSON PostalCodesListResponse where
 -- | Describes a change that a user has made to a resource.
 --
 -- /See:/ 'changeLog' smart constructor.
-data ChangeLog = ChangeLog
+data ChangeLog = ChangeLog'
     { _chaUserProFileId   :: !(Maybe (Textual Int64))
     , _chaObjectType      :: !(Maybe Text)
     , _chaUserProFileName :: !(Maybe Text)
@@ -13140,7 +13491,7 @@ data ChangeLog = ChangeLog
 changeLog
     :: ChangeLog
 changeLog =
-    ChangeLog
+    ChangeLog'
     { _chaUserProFileId = Nothing
     , _chaObjectType = Nothing
     , _chaUserProFileName = Nothing
@@ -13247,7 +13598,7 @@ instance FromJSON ChangeLog where
         parseJSON
           = withObject "ChangeLog"
               (\ o ->
-                 ChangeLog <$>
+                 ChangeLog' <$>
                    (o .:? "userProfileId") <*> (o .:? "objectType") <*>
                      (o .:? "userProfileName")
                      <*> (o .:? "kind" .!= "dfareporting#changeLog")
@@ -13263,7 +13614,7 @@ instance FromJSON ChangeLog where
                      <*> (o .:? "changeTime"))
 
 instance ToJSON ChangeLog where
-        toJSON ChangeLog{..}
+        toJSON ChangeLog'{..}
           = object
               (catMaybes
                  [("userProfileId" .=) <$> _chaUserProFileId,
@@ -13284,7 +13635,7 @@ instance ToJSON ChangeLog where
 -- | Contains properties of a placement strategy.
 --
 -- /See:/ 'placementStrategy' smart constructor.
-data PlacementStrategy = PlacementStrategy
+data PlacementStrategy = PlacementStrategy'
     { _psKind      :: !Text
     , _psAccountId :: !(Maybe (Textual Int64))
     , _psName      :: !(Maybe Text)
@@ -13305,7 +13656,7 @@ data PlacementStrategy = PlacementStrategy
 placementStrategy
     :: PlacementStrategy
 placementStrategy =
-    PlacementStrategy
+    PlacementStrategy'
     { _psKind = "dfareporting#placementStrategy"
     , _psAccountId = Nothing
     , _psName = Nothing
@@ -13341,14 +13692,14 @@ instance FromJSON PlacementStrategy where
         parseJSON
           = withObject "PlacementStrategy"
               (\ o ->
-                 PlacementStrategy <$>
+                 PlacementStrategy' <$>
                    (o .:? "kind" .!= "dfareporting#placementStrategy")
                      <*> (o .:? "accountId")
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON PlacementStrategy where
-        toJSON PlacementStrategy{..}
+        toJSON PlacementStrategy'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _psKind),
@@ -13358,7 +13709,7 @@ instance ToJSON PlacementStrategy where
 -- | Contains properties of a Floodlight activity.
 --
 -- /See:/ 'floodlightActivity' smart constructor.
-data FloodlightActivity = FloodlightActivity
+data FloodlightActivity = FloodlightActivity'
     { _faCountingMethod                          :: !(Maybe FloodlightActivityCountingMethod)
     , _faTagString                               :: !(Maybe Text)
     , _faSecure                                  :: !(Maybe Bool)
@@ -13451,7 +13802,7 @@ data FloodlightActivity = FloodlightActivity
 floodlightActivity
     :: FloodlightActivity
 floodlightActivity =
-    FloodlightActivity
+    FloodlightActivity'
     { _faCountingMethod = Nothing
     , _faTagString = Nothing
     , _faSecure = Nothing
@@ -13684,7 +14035,7 @@ instance FromJSON FloodlightActivity where
         parseJSON
           = withObject "FloodlightActivity"
               (\ o ->
-                 FloodlightActivity <$>
+                 FloodlightActivity' <$>
                    (o .:? "countingMethod") <*> (o .:? "tagString") <*>
                      (o .:? "secure")
                      <*> (o .:? "expectedUrl")
@@ -13716,7 +14067,7 @@ instance FromJSON FloodlightActivity where
                      (o .:? "floodlightConfigurationIdDimensionValue"))
 
 instance ToJSON FloodlightActivity where
-        toJSON FloodlightActivity{..}
+        toJSON FloodlightActivity'{..}
           = object
               (catMaybes
                  [("countingMethod" .=) <$> _faCountingMethod,
@@ -13756,10 +14107,70 @@ instance ToJSON FloodlightActivity where
                   ("floodlightConfigurationIdDimensionValue" .=) <$>
                     _faFloodlightConfigurationIdDimensionValue])
 
+-- | A custom floodlight variable.
+--
+-- /See:/ 'customFloodlightVariable' smart constructor.
+data CustomFloodlightVariable = CustomFloodlightVariable'
+    { _cusKind  :: !Text
+    , _cusValue :: !(Maybe Text)
+    , _cusType  :: !(Maybe CustomFloodlightVariableType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomFloodlightVariable' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cusKind'
+--
+-- * 'cusValue'
+--
+-- * 'cusType'
+customFloodlightVariable
+    :: CustomFloodlightVariable
+customFloodlightVariable =
+    CustomFloodlightVariable'
+    { _cusKind = "dfareporting#customFloodlightVariable"
+    , _cusValue = Nothing
+    , _cusType = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#customFloodlightVariable\".
+cusKind :: Lens' CustomFloodlightVariable Text
+cusKind = lens _cusKind (\ s a -> s{_cusKind = a})
+
+-- | The value of the custom floodlight variable. The length of string must
+-- not exceed 50 characters.
+cusValue :: Lens' CustomFloodlightVariable (Maybe Text)
+cusValue = lens _cusValue (\ s a -> s{_cusValue = a})
+
+-- | The type of custom floodlight variable to supply a value for. These map
+-- to the \"u[1-20]=\" in the tags.
+cusType :: Lens' CustomFloodlightVariable (Maybe CustomFloodlightVariableType)
+cusType = lens _cusType (\ s a -> s{_cusType = a})
+
+instance FromJSON CustomFloodlightVariable where
+        parseJSON
+          = withObject "CustomFloodlightVariable"
+              (\ o ->
+                 CustomFloodlightVariable' <$>
+                   (o .:? "kind" .!=
+                      "dfareporting#customFloodlightVariable")
+                     <*> (o .:? "value")
+                     <*> (o .:? "type"))
+
+instance ToJSON CustomFloodlightVariable where
+        toJSON CustomFloodlightVariable'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cusKind),
+                  ("value" .=) <$> _cusValue,
+                  ("type" .=) <$> _cusType])
+
 -- | Platform Type List Response
 --
 -- /See:/ 'platformTypesListResponse' smart constructor.
-data PlatformTypesListResponse = PlatformTypesListResponse
+data PlatformTypesListResponse = PlatformTypesListResponse'
     { _ptlrKind          :: !Text
     , _ptlrPlatformTypes :: !(Maybe [PlatformType])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13774,7 +14185,7 @@ data PlatformTypesListResponse = PlatformTypesListResponse
 platformTypesListResponse
     :: PlatformTypesListResponse
 platformTypesListResponse =
-    PlatformTypesListResponse
+    PlatformTypesListResponse'
     { _ptlrKind = "dfareporting#platformTypesListResponse"
     , _ptlrPlatformTypes = Nothing
     }
@@ -13796,13 +14207,13 @@ instance FromJSON PlatformTypesListResponse where
         parseJSON
           = withObject "PlatformTypesListResponse"
               (\ o ->
-                 PlatformTypesListResponse <$>
+                 PlatformTypesListResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#platformTypesListResponse")
                      <*> (o .:? "platformTypes" .!= mempty))
 
 instance ToJSON PlatformTypesListResponse where
-        toJSON PlatformTypesListResponse{..}
+        toJSON PlatformTypesListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ptlrKind),
@@ -13811,7 +14222,7 @@ instance ToJSON PlatformTypesListResponse where
 -- | Modification timestamp.
 --
 -- /See:/ 'lastModifiedInfo' smart constructor.
-newtype LastModifiedInfo = LastModifiedInfo
+newtype LastModifiedInfo = LastModifiedInfo'
     { _lmiTime :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -13823,7 +14234,7 @@ newtype LastModifiedInfo = LastModifiedInfo
 lastModifiedInfo
     :: LastModifiedInfo
 lastModifiedInfo =
-    LastModifiedInfo
+    LastModifiedInfo'
     { _lmiTime = Nothing
     }
 
@@ -13836,16 +14247,16 @@ lmiTime
 instance FromJSON LastModifiedInfo where
         parseJSON
           = withObject "LastModifiedInfo"
-              (\ o -> LastModifiedInfo <$> (o .:? "time"))
+              (\ o -> LastModifiedInfo' <$> (o .:? "time"))
 
 instance ToJSON LastModifiedInfo where
-        toJSON LastModifiedInfo{..}
+        toJSON LastModifiedInfo'{..}
           = object (catMaybes [("time" .=) <$> _lmiTime])
 
 -- | Target Window.
 --
 -- /See:/ 'targetWindow' smart constructor.
-data TargetWindow = TargetWindow
+data TargetWindow = TargetWindow'
     { _twCustomHTML         :: !(Maybe Text)
     , _twTargetWindowOption :: !(Maybe TargetWindowTargetWindowOption)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13860,7 +14271,7 @@ data TargetWindow = TargetWindow
 targetWindow
     :: TargetWindow
 targetWindow =
-    TargetWindow
+    TargetWindow'
     { _twCustomHTML = Nothing
     , _twTargetWindowOption = Nothing
     }
@@ -13881,12 +14292,12 @@ instance FromJSON TargetWindow where
         parseJSON
           = withObject "TargetWindow"
               (\ o ->
-                 TargetWindow <$>
+                 TargetWindow' <$>
                    (o .:? "customHtml") <*>
                      (o .:? "targetWindowOption"))
 
 instance ToJSON TargetWindow where
-        toJSON TargetWindow{..}
+        toJSON TargetWindow'{..}
           = object
               (catMaybes
                  [("customHtml" .=) <$> _twCustomHTML,
@@ -13896,7 +14307,7 @@ instance ToJSON TargetWindow where
 -- names. A permission group is a grouping of account permissions.
 --
 -- /See:/ 'accountPermissionGroup' smart constructor.
-data AccountPermissionGroup = AccountPermissionGroup
+data AccountPermissionGroup = AccountPermissionGroup'
     { _apgpKind :: !Text
     , _apgpName :: !(Maybe Text)
     , _apgpId   :: !(Maybe (Textual Int64))
@@ -13914,7 +14325,7 @@ data AccountPermissionGroup = AccountPermissionGroup
 accountPermissionGroup
     :: AccountPermissionGroup
 accountPermissionGroup =
-    AccountPermissionGroup
+    AccountPermissionGroup'
     { _apgpKind = "dfareporting#accountPermissionGroup"
     , _apgpName = Nothing
     , _apgpId = Nothing
@@ -13939,14 +14350,14 @@ instance FromJSON AccountPermissionGroup where
         parseJSON
           = withObject "AccountPermissionGroup"
               (\ o ->
-                 AccountPermissionGroup <$>
+                 AccountPermissionGroup' <$>
                    (o .:? "kind" .!=
                       "dfareporting#accountPermissionGroup")
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON AccountPermissionGroup where
-        toJSON AccountPermissionGroup{..}
+        toJSON AccountPermissionGroup'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _apgpKind),
@@ -13955,7 +14366,7 @@ instance ToJSON AccountPermissionGroup where
 -- | Contains properties of a DCM advertiser.
 --
 -- /See:/ 'advertiser' smart constructor.
-data Advertiser = Advertiser
+data Advertiser = Advertiser'
     { _advdOriginalFloodlightConfigurationId       :: !(Maybe (Textual Int64))
     , _advdStatus                                  :: !(Maybe AdvertiserStatus)
     , _advdFloodlightConfigurationId               :: !(Maybe (Textual Int64))
@@ -14009,7 +14420,7 @@ data Advertiser = Advertiser
 advertiser
     :: Advertiser
 advertiser =
-    Advertiser
+    Advertiser'
     { _advdOriginalFloodlightConfigurationId = Nothing
     , _advdStatus = Nothing
     , _advdFloodlightConfigurationId = Nothing
@@ -14147,7 +14558,7 @@ instance FromJSON Advertiser where
         parseJSON
           = withObject "Advertiser"
               (\ o ->
-                 Advertiser <$>
+                 Advertiser' <$>
                    (o .:? "originalFloodlightConfigurationId") <*>
                      (o .:? "status")
                      <*> (o .:? "floodlightConfigurationId")
@@ -14165,7 +14576,7 @@ instance FromJSON Advertiser where
                      <*> (o .:? "clickThroughUrlSuffix"))
 
 instance ToJSON Advertiser where
-        toJSON Advertiser{..}
+        toJSON Advertiser'{..}
           = object
               (catMaybes
                  [("originalFloodlightConfigurationId" .=) <$>
@@ -14192,7 +14603,7 @@ instance ToJSON Advertiser where
 -- | Contains properties of auser role, which is used to manage user access.
 --
 -- /See:/ 'userRole' smart constructor.
-data UserRole = UserRole
+data UserRole = UserRole'
     { _urParentUserRoleId :: !(Maybe (Textual Int64))
     , _urKind             :: !Text
     , _urDefaultUserRole  :: !(Maybe Bool)
@@ -14225,7 +14636,7 @@ data UserRole = UserRole
 userRole
     :: UserRole
 userRole =
-    UserRole
+    UserRole'
     { _urParentUserRoleId = Nothing
     , _urKind = "dfareporting#userRole"
     , _urDefaultUserRole = Nothing
@@ -14299,7 +14710,7 @@ instance FromJSON UserRole where
         parseJSON
           = withObject "UserRole"
               (\ o ->
-                 UserRole <$>
+                 UserRole' <$>
                    (o .:? "parentUserRoleId") <*>
                      (o .:? "kind" .!= "dfareporting#userRole")
                      <*> (o .:? "defaultUserRole")
@@ -14310,7 +14721,7 @@ instance FromJSON UserRole where
                      <*> (o .:? "subaccountId"))
 
 instance ToJSON UserRole where
-        toJSON UserRole{..}
+        toJSON UserRole'{..}
           = object
               (catMaybes
                  [("parentUserRoleId" .=) <$> _urParentUserRoleId,
@@ -14324,7 +14735,7 @@ instance ToJSON UserRole where
 -- | Directory Site List Response
 --
 -- /See:/ 'directorySitesListResponse' smart constructor.
-data DirectorySitesListResponse = DirectorySitesListResponse
+data DirectorySitesListResponse = DirectorySitesListResponse'
     { _dslrNextPageToken  :: !(Maybe Text)
     , _dslrKind           :: !Text
     , _dslrDirectorySites :: !(Maybe [DirectorySite])
@@ -14342,7 +14753,7 @@ data DirectorySitesListResponse = DirectorySitesListResponse
 directorySitesListResponse
     :: DirectorySitesListResponse
 directorySitesListResponse =
-    DirectorySitesListResponse
+    DirectorySitesListResponse'
     { _dslrNextPageToken = Nothing
     , _dslrKind = "dfareporting#directorySitesListResponse"
     , _dslrDirectorySites = Nothing
@@ -14371,24 +14782,81 @@ instance FromJSON DirectorySitesListResponse where
         parseJSON
           = withObject "DirectorySitesListResponse"
               (\ o ->
-                 DirectorySitesListResponse <$>
+                 DirectorySitesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#directorySitesListResponse")
                      <*> (o .:? "directorySites" .!= mempty))
 
 instance ToJSON DirectorySitesListResponse where
-        toJSON DirectorySitesListResponse{..}
+        toJSON DirectorySitesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dslrNextPageToken,
                   Just ("kind" .= _dslrKind),
                   ("directorySites" .=) <$> _dslrDirectorySites])
 
+-- | The error code and description for a conversion that failed to insert.
+--
+-- /See:/ 'conversionError' smart constructor.
+data ConversionError = ConversionError'
+    { _ceKind    :: !Text
+    , _ceCode    :: !(Maybe ConversionErrorCode)
+    , _ceMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConversionError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ceKind'
+--
+-- * 'ceCode'
+--
+-- * 'ceMessage'
+conversionError
+    :: ConversionError
+conversionError =
+    ConversionError'
+    { _ceKind = "dfareporting#conversionError"
+    , _ceCode = Nothing
+    , _ceMessage = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversionError\".
+ceKind :: Lens' ConversionError Text
+ceKind = lens _ceKind (\ s a -> s{_ceKind = a})
+
+-- | The error code.
+ceCode :: Lens' ConversionError (Maybe ConversionErrorCode)
+ceCode = lens _ceCode (\ s a -> s{_ceCode = a})
+
+-- | A description of the error.
+ceMessage :: Lens' ConversionError (Maybe Text)
+ceMessage
+  = lens _ceMessage (\ s a -> s{_ceMessage = a})
+
+instance FromJSON ConversionError where
+        parseJSON
+          = withObject "ConversionError"
+              (\ o ->
+                 ConversionError' <$>
+                   (o .:? "kind" .!= "dfareporting#conversionError") <*>
+                     (o .:? "code")
+                     <*> (o .:? "message"))
+
+instance ToJSON ConversionError where
+        toJSON ConversionError'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ceKind), ("code" .=) <$> _ceCode,
+                  ("message" .=) <$> _ceMessage])
+
 -- | Pricing Period
 --
 -- /See:/ 'pricingSchedulePricingPeriod' smart constructor.
-data PricingSchedulePricingPeriod = PricingSchedulePricingPeriod
+data PricingSchedulePricingPeriod = PricingSchedulePricingPeriod'
     { _psppEndDate         :: !(Maybe Date')
     , _psppRateOrCostNanos :: !(Maybe (Textual Int64))
     , _psppStartDate       :: !(Maybe Date')
@@ -14412,7 +14880,7 @@ data PricingSchedulePricingPeriod = PricingSchedulePricingPeriod
 pricingSchedulePricingPeriod
     :: PricingSchedulePricingPeriod
 pricingSchedulePricingPeriod =
-    PricingSchedulePricingPeriod
+    PricingSchedulePricingPeriod'
     { _psppEndDate = Nothing
     , _psppRateOrCostNanos = Nothing
     , _psppStartDate = Nothing
@@ -14464,14 +14932,14 @@ instance FromJSON PricingSchedulePricingPeriod where
         parseJSON
           = withObject "PricingSchedulePricingPeriod"
               (\ o ->
-                 PricingSchedulePricingPeriod <$>
+                 PricingSchedulePricingPeriod' <$>
                    (o .:? "endDate") <*> (o .:? "rateOrCostNanos") <*>
                      (o .:? "startDate")
                      <*> (o .:? "units")
                      <*> (o .:? "pricingComment"))
 
 instance ToJSON PricingSchedulePricingPeriod where
-        toJSON PricingSchedulePricingPeriod{..}
+        toJSON PricingSchedulePricingPeriod'{..}
           = object
               (catMaybes
                  [("endDate" .=) <$> _psppEndDate,
@@ -14483,7 +14951,7 @@ instance ToJSON PricingSchedulePricingPeriod where
 -- | Directory Site Contact List Response
 --
 -- /See:/ 'directorySiteContactsListResponse' smart constructor.
-data DirectorySiteContactsListResponse = DirectorySiteContactsListResponse
+data DirectorySiteContactsListResponse = DirectorySiteContactsListResponse'
     { _dsclrNextPageToken         :: !(Maybe Text)
     , _dsclrKind                  :: !Text
     , _dsclrDirectorySiteContacts :: !(Maybe [DirectorySiteContact])
@@ -14501,7 +14969,7 @@ data DirectorySiteContactsListResponse = DirectorySiteContactsListResponse
 directorySiteContactsListResponse
     :: DirectorySiteContactsListResponse
 directorySiteContactsListResponse =
-    DirectorySiteContactsListResponse
+    DirectorySiteContactsListResponse'
     { _dsclrNextPageToken = Nothing
     , _dsclrKind = "dfareporting#directorySiteContactsListResponse"
     , _dsclrDirectorySiteContacts = Nothing
@@ -14532,7 +15000,7 @@ instance FromJSON DirectorySiteContactsListResponse
         parseJSON
           = withObject "DirectorySiteContactsListResponse"
               (\ o ->
-                 DirectorySiteContactsListResponse <$>
+                 DirectorySiteContactsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#directorySiteContactsListResponse")
@@ -14540,7 +15008,7 @@ instance FromJSON DirectorySiteContactsListResponse
 
 instance ToJSON DirectorySiteContactsListResponse
          where
-        toJSON DirectorySiteContactsListResponse{..}
+        toJSON DirectorySiteContactsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dsclrNextPageToken,
@@ -14551,7 +15019,7 @@ instance ToJSON DirectorySiteContactsListResponse
 -- | Contains information about a region that can be targeted by ads.
 --
 -- /See:/ 'region' smart constructor.
-data Region = Region
+data Region = Region'
     { _regRegionCode    :: !(Maybe Text)
     , _regKind          :: !Text
     , _regName          :: !(Maybe Text)
@@ -14578,7 +15046,7 @@ data Region = Region
 region
     :: Region
 region =
-    Region
+    Region'
     { _regRegionCode = Nothing
     , _regKind = "dfareporting#region"
     , _regName = Nothing
@@ -14625,7 +15093,7 @@ instance FromJSON Region where
         parseJSON
           = withObject "Region"
               (\ o ->
-                 Region <$>
+                 Region' <$>
                    (o .:? "regionCode") <*>
                      (o .:? "kind" .!= "dfareporting#region")
                      <*> (o .:? "name")
@@ -14634,7 +15102,7 @@ instance FromJSON Region where
                      <*> (o .:? "dartId"))
 
 instance ToJSON Region where
-        toJSON Region{..}
+        toJSON Region'{..}
           = object
               (catMaybes
                  [("regionCode" .=) <$> _regRegionCode,
@@ -14646,7 +15114,7 @@ instance ToJSON Region where
 -- | Advertiser Group List Response
 --
 -- /See:/ 'advertiserGroupsListResponse' smart constructor.
-data AdvertiserGroupsListResponse = AdvertiserGroupsListResponse
+data AdvertiserGroupsListResponse = AdvertiserGroupsListResponse'
     { _aglrNextPageToken    :: !(Maybe Text)
     , _aglrKind             :: !Text
     , _aglrAdvertiserGroups :: !(Maybe [AdvertiserGroup])
@@ -14664,7 +15132,7 @@ data AdvertiserGroupsListResponse = AdvertiserGroupsListResponse
 advertiserGroupsListResponse
     :: AdvertiserGroupsListResponse
 advertiserGroupsListResponse =
-    AdvertiserGroupsListResponse
+    AdvertiserGroupsListResponse'
     { _aglrNextPageToken = Nothing
     , _aglrKind = "dfareporting#advertiserGroupsListResponse"
     , _aglrAdvertiserGroups = Nothing
@@ -14693,14 +15161,14 @@ instance FromJSON AdvertiserGroupsListResponse where
         parseJSON
           = withObject "AdvertiserGroupsListResponse"
               (\ o ->
-                 AdvertiserGroupsListResponse <$>
+                 AdvertiserGroupsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#advertiserGroupsListResponse")
                      <*> (o .:? "advertiserGroups" .!= mempty))
 
 instance ToJSON AdvertiserGroupsListResponse where
-        toJSON AdvertiserGroupsListResponse{..}
+        toJSON AdvertiserGroupsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _aglrNextPageToken,
@@ -14710,7 +15178,7 @@ instance ToJSON AdvertiserGroupsListResponse where
 -- | Creative Assignment.
 --
 -- /See:/ 'creativeAssignment' smart constructor.
-data CreativeAssignment = CreativeAssignment
+data CreativeAssignment = CreativeAssignment'
     { _caCreativeGroupAssignments   :: !(Maybe [CreativeGroupAssignment])
     , _caStartTime                  :: !(Maybe DateTime')
     , _caWeight                     :: !(Maybe (Textual Int32))
@@ -14758,7 +15226,7 @@ data CreativeAssignment = CreativeAssignment
 creativeAssignment
     :: CreativeAssignment
 creativeAssignment =
-    CreativeAssignment
+    CreativeAssignment'
     { _caCreativeGroupAssignments = Nothing
     , _caStartTime = Nothing
     , _caWeight = Nothing
@@ -14878,7 +15346,7 @@ instance FromJSON CreativeAssignment where
         parseJSON
           = withObject "CreativeAssignment"
               (\ o ->
-                 CreativeAssignment <$>
+                 CreativeAssignment' <$>
                    (o .:? "creativeGroupAssignments" .!= mempty) <*>
                      (o .:? "startTime")
                      <*> (o .:? "weight")
@@ -14894,7 +15362,7 @@ instance FromJSON CreativeAssignment where
                      <*> (o .:? "creativeIdDimensionValue"))
 
 instance ToJSON CreativeAssignment where
-        toJSON CreativeAssignment{..}
+        toJSON CreativeAssignment'{..}
           = object
               (catMaybes
                  [("creativeGroupAssignments" .=) <$>
@@ -14918,7 +15386,7 @@ instance ToJSON CreativeAssignment where
 -- | Represents a dimension filter.
 --
 -- /See:/ 'dimensionFilter' smart constructor.
-data DimensionFilter = DimensionFilter
+data DimensionFilter = DimensionFilter'
     { _dfKind          :: !Text
     , _dfValue         :: !(Maybe Text)
     , _dfDimensionName :: !(Maybe Text)
@@ -14936,7 +15404,7 @@ data DimensionFilter = DimensionFilter
 dimensionFilter
     :: DimensionFilter
 dimensionFilter =
-    DimensionFilter
+    DimensionFilter'
     { _dfKind = "dfareporting#dimensionFilter"
     , _dfValue = Nothing
     , _dfDimensionName = Nothing
@@ -14960,13 +15428,13 @@ instance FromJSON DimensionFilter where
         parseJSON
           = withObject "DimensionFilter"
               (\ o ->
-                 DimensionFilter <$>
+                 DimensionFilter' <$>
                    (o .:? "kind" .!= "dfareporting#dimensionFilter") <*>
                      (o .:? "value")
                      <*> (o .:? "dimensionName"))
 
 instance ToJSON DimensionFilter where
-        toJSON DimensionFilter{..}
+        toJSON DimensionFilter'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dfKind), ("value" .=) <$> _dfValue,
@@ -14975,7 +15443,7 @@ instance ToJSON DimensionFilter where
 -- | Represents the list of user profiles.
 --
 -- /See:/ 'userProFileList' smart constructor.
-data UserProFileList = UserProFileList
+data UserProFileList = UserProFileList'
     { _upflEtag  :: !(Maybe Text)
     , _upflKind  :: !Text
     , _upflItems :: !(Maybe [UserProFile])
@@ -14993,7 +15461,7 @@ data UserProFileList = UserProFileList
 userProFileList
     :: UserProFileList
 userProFileList =
-    UserProFileList
+    UserProFileList'
     { _upflEtag = Nothing
     , _upflKind = "dfareporting#userProfileList"
     , _upflItems = Nothing
@@ -15018,13 +15486,13 @@ instance FromJSON UserProFileList where
         parseJSON
           = withObject "UserProFileList"
               (\ o ->
-                 UserProFileList <$>
+                 UserProFileList' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "dfareporting#userProfileList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON UserProFileList where
-        toJSON UserProFileList{..}
+        toJSON UserProFileList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _upflEtag,
@@ -15034,7 +15502,7 @@ instance ToJSON UserProFileList where
 -- | Contains properties of a Floodlight configuration.
 --
 -- /See:/ 'floodlightConfiguration' smart constructor.
-data FloodlightConfiguration = FloodlightConfiguration
+data FloodlightConfiguration = FloodlightConfiguration'
     { _fcTagSettings                              :: !(Maybe TagSettings)
     , _fcExposureToConversionEnabled              :: !(Maybe Bool)
     , _fcInAppAttributionTrackingEnabled          :: !(Maybe Bool)
@@ -15047,7 +15515,6 @@ data FloodlightConfiguration = FloodlightConfiguration
     , _fcLookbackConfiguration                    :: !(Maybe LookbackConfiguration)
     , _fcAccountId                                :: !(Maybe (Textual Int64))
     , _fcId                                       :: !(Maybe (Textual Int64))
-    , _fcSSLRequired                              :: !(Maybe Bool)
     , _fcNATuralSearchConversionAttributionOption :: !(Maybe FloodlightConfigurationNATuralSearchConversionAttributionOption)
     , _fcUserDefinedVariableConfigurations        :: !(Maybe [UserDefinedVariableConfiguration])
     , _fcSubAccountId                             :: !(Maybe (Textual Int64))
@@ -15084,8 +15551,6 @@ data FloodlightConfiguration = FloodlightConfiguration
 --
 -- * 'fcId'
 --
--- * 'fcSSLRequired'
---
 -- * 'fcNATuralSearchConversionAttributionOption'
 --
 -- * 'fcUserDefinedVariableConfigurations'
@@ -15100,7 +15565,7 @@ data FloodlightConfiguration = FloodlightConfiguration
 floodlightConfiguration
     :: FloodlightConfiguration
 floodlightConfiguration =
-    FloodlightConfiguration
+    FloodlightConfiguration'
     { _fcTagSettings = Nothing
     , _fcExposureToConversionEnabled = Nothing
     , _fcInAppAttributionTrackingEnabled = Nothing
@@ -15113,7 +15578,6 @@ floodlightConfiguration =
     , _fcLookbackConfiguration = Nothing
     , _fcAccountId = Nothing
     , _fcId = Nothing
-    , _fcSSLRequired = Nothing
     , _fcNATuralSearchConversionAttributionOption = Nothing
     , _fcUserDefinedVariableConfigurations = Nothing
     , _fcSubAccountId = Nothing
@@ -15203,13 +15667,6 @@ fcId
   = lens _fcId (\ s a -> s{_fcId = a}) .
       mapping _Coerce
 
--- | Whether floodlight activities owned by this configuration are required
--- to be SSL-compliant.
-fcSSLRequired :: Lens' FloodlightConfiguration (Maybe Bool)
-fcSSLRequired
-  = lens _fcSSLRequired
-      (\ s a -> s{_fcSSLRequired = a})
-
 -- | Types of attribution options for natural search conversions.
 fcNATuralSearchConversionAttributionOption :: Lens' FloodlightConfiguration (Maybe FloodlightConfigurationNATuralSearchConversionAttributionOption)
 fcNATuralSearchConversionAttributionOption
@@ -15260,7 +15717,7 @@ instance FromJSON FloodlightConfiguration where
         parseJSON
           = withObject "FloodlightConfiguration"
               (\ o ->
-                 FloodlightConfiguration <$>
+                 FloodlightConfiguration' <$>
                    (o .:? "tagSettings") <*>
                      (o .:? "exposureToConversionEnabled")
                      <*> (o .:? "inAppAttributionTrackingEnabled")
@@ -15276,7 +15733,6 @@ instance FromJSON FloodlightConfiguration where
                      <*> (o .:? "lookbackConfiguration")
                      <*> (o .:? "accountId")
                      <*> (o .:? "id")
-                     <*> (o .:? "sslRequired")
                      <*>
                      (o .:? "naturalSearchConversionAttributionOption")
                      <*>
@@ -15288,7 +15744,7 @@ instance FromJSON FloodlightConfiguration where
                      <*> (o .:? "standardVariableTypes" .!= mempty))
 
 instance ToJSON FloodlightConfiguration where
-        toJSON FloodlightConfiguration{..}
+        toJSON FloodlightConfiguration'{..}
           = object
               (catMaybes
                  [("tagSettings" .=) <$> _fcTagSettings,
@@ -15309,7 +15765,6 @@ instance ToJSON FloodlightConfiguration where
                     _fcLookbackConfiguration,
                   ("accountId" .=) <$> _fcAccountId,
                   ("id" .=) <$> _fcId,
-                  ("sslRequired" .=) <$> _fcSSLRequired,
                   ("naturalSearchConversionAttributionOption" .=) <$>
                     _fcNATuralSearchConversionAttributionOption,
                   ("userDefinedVariableConfigurations" .=) <$>
@@ -15323,7 +15778,7 @@ instance ToJSON FloodlightConfiguration where
 -- | Floodlight Activity Group List Response
 --
 -- /See:/ 'floodlightActivityGroupsListResponse' smart constructor.
-data FloodlightActivityGroupsListResponse = FloodlightActivityGroupsListResponse
+data FloodlightActivityGroupsListResponse = FloodlightActivityGroupsListResponse'
     { _faglrNextPageToken            :: !(Maybe Text)
     , _faglrKind                     :: !Text
     , _faglrFloodlightActivityGroups :: !(Maybe [FloodlightActivityGroup])
@@ -15341,7 +15796,7 @@ data FloodlightActivityGroupsListResponse = FloodlightActivityGroupsListResponse
 floodlightActivityGroupsListResponse
     :: FloodlightActivityGroupsListResponse
 floodlightActivityGroupsListResponse =
-    FloodlightActivityGroupsListResponse
+    FloodlightActivityGroupsListResponse'
     { _faglrNextPageToken = Nothing
     , _faglrKind = "dfareporting#floodlightActivityGroupsListResponse"
     , _faglrFloodlightActivityGroups = Nothing
@@ -15372,7 +15827,7 @@ instance FromJSON
         parseJSON
           = withObject "FloodlightActivityGroupsListResponse"
               (\ o ->
-                 FloodlightActivityGroupsListResponse <$>
+                 FloodlightActivityGroupsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#floodlightActivityGroupsListResponse")
@@ -15380,7 +15835,7 @@ instance FromJSON
 
 instance ToJSON FloodlightActivityGroupsListResponse
          where
-        toJSON FloodlightActivityGroupsListResponse{..}
+        toJSON FloodlightActivityGroupsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _faglrNextPageToken,
@@ -15388,10 +15843,193 @@ instance ToJSON FloodlightActivityGroupsListResponse
                   ("floodlightActivityGroups" .=) <$>
                     _faglrFloodlightActivityGroups])
 
+-- | A Conversion represents when a user successfully performs a desired
+-- action after seeing an ad.
+--
+-- /See:/ 'conversion' smart constructor.
+data Conversion = Conversion'
+    { _conoTimestampMicros           :: !(Maybe (Textual Int64))
+    , _conoLimitAdTracking           :: !(Maybe Bool)
+    , _conoEncryptedUserId           :: !(Maybe Text)
+    , _conoMobileDeviceId            :: !(Maybe Text)
+    , _conoFloodlightConfigurationId :: !(Maybe (Textual Int64))
+    , _conoKind                      :: !Text
+    , _conoFloodlightActivityId      :: !(Maybe (Textual Int64))
+    , _conoQuantity                  :: !(Maybe (Textual Int64))
+    , _conoValue                     :: !(Maybe (Textual Double))
+    , _conoCustomVariables           :: !(Maybe [CustomFloodlightVariable])
+    , _conoChildDirectedTreatment    :: !(Maybe Bool)
+    , _conoOrdinal                   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Conversion' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'conoTimestampMicros'
+--
+-- * 'conoLimitAdTracking'
+--
+-- * 'conoEncryptedUserId'
+--
+-- * 'conoMobileDeviceId'
+--
+-- * 'conoFloodlightConfigurationId'
+--
+-- * 'conoKind'
+--
+-- * 'conoFloodlightActivityId'
+--
+-- * 'conoQuantity'
+--
+-- * 'conoValue'
+--
+-- * 'conoCustomVariables'
+--
+-- * 'conoChildDirectedTreatment'
+--
+-- * 'conoOrdinal'
+conversion
+    :: Conversion
+conversion =
+    Conversion'
+    { _conoTimestampMicros = Nothing
+    , _conoLimitAdTracking = Nothing
+    , _conoEncryptedUserId = Nothing
+    , _conoMobileDeviceId = Nothing
+    , _conoFloodlightConfigurationId = Nothing
+    , _conoKind = "dfareporting#conversion"
+    , _conoFloodlightActivityId = Nothing
+    , _conoQuantity = Nothing
+    , _conoValue = Nothing
+    , _conoCustomVariables = Nothing
+    , _conoChildDirectedTreatment = Nothing
+    , _conoOrdinal = Nothing
+    }
+
+-- | The timestamp of conversion, in Unix epoch micros. This is a required
+-- field.
+conoTimestampMicros :: Lens' Conversion (Maybe Int64)
+conoTimestampMicros
+  = lens _conoTimestampMicros
+      (\ s a -> s{_conoTimestampMicros = a})
+      . mapping _Coerce
+
+-- | Whether the user has Limit Ad Tracking set.
+conoLimitAdTracking :: Lens' Conversion (Maybe Bool)
+conoLimitAdTracking
+  = lens _conoLimitAdTracking
+      (\ s a -> s{_conoLimitAdTracking = a})
+
+-- | The alphanumeric encrypted user ID. When set, encryptionInfo should also
+-- be specified. This field is mutually exclusive with mobileDeviceId. This
+-- or mobileDeviceId is a required field.
+conoEncryptedUserId :: Lens' Conversion (Maybe Text)
+conoEncryptedUserId
+  = lens _conoEncryptedUserId
+      (\ s a -> s{_conoEncryptedUserId = a})
+
+-- | The mobile device ID. This field is mutually exclusive with
+-- encryptedUserId. This or encryptedUserId is a required field.
+conoMobileDeviceId :: Lens' Conversion (Maybe Text)
+conoMobileDeviceId
+  = lens _conoMobileDeviceId
+      (\ s a -> s{_conoMobileDeviceId = a})
+
+-- | Floodlight Configuration ID of this conversion. This is a required
+-- field.
+conoFloodlightConfigurationId :: Lens' Conversion (Maybe Int64)
+conoFloodlightConfigurationId
+  = lens _conoFloodlightConfigurationId
+      (\ s a -> s{_conoFloodlightConfigurationId = a})
+      . mapping _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversion\".
+conoKind :: Lens' Conversion Text
+conoKind = lens _conoKind (\ s a -> s{_conoKind = a})
+
+-- | Floodlight Activity ID of this conversion. This is a required field.
+conoFloodlightActivityId :: Lens' Conversion (Maybe Int64)
+conoFloodlightActivityId
+  = lens _conoFloodlightActivityId
+      (\ s a -> s{_conoFloodlightActivityId = a})
+      . mapping _Coerce
+
+-- | The quantity of the conversion.
+conoQuantity :: Lens' Conversion (Maybe Int64)
+conoQuantity
+  = lens _conoQuantity (\ s a -> s{_conoQuantity = a})
+      . mapping _Coerce
+
+-- | The value of the conversion.
+conoValue :: Lens' Conversion (Maybe Double)
+conoValue
+  = lens _conoValue (\ s a -> s{_conoValue = a}) .
+      mapping _Coerce
+
+-- | Custom floodlight variables.
+conoCustomVariables :: Lens' Conversion [CustomFloodlightVariable]
+conoCustomVariables
+  = lens _conoCustomVariables
+      (\ s a -> s{_conoCustomVariables = a})
+      . _Default
+      . _Coerce
+
+-- | Whether the conversion was directed toward children.
+conoChildDirectedTreatment :: Lens' Conversion (Maybe Bool)
+conoChildDirectedTreatment
+  = lens _conoChildDirectedTreatment
+      (\ s a -> s{_conoChildDirectedTreatment = a})
+
+-- | The ordinal of the conversion. Use this field to control how conversions
+-- of the same user and day are de-duplicated. This is a required field.
+conoOrdinal :: Lens' Conversion (Maybe Text)
+conoOrdinal
+  = lens _conoOrdinal (\ s a -> s{_conoOrdinal = a})
+
+instance FromJSON Conversion where
+        parseJSON
+          = withObject "Conversion"
+              (\ o ->
+                 Conversion' <$>
+                   (o .:? "timestampMicros") <*>
+                     (o .:? "limitAdTracking")
+                     <*> (o .:? "encryptedUserId")
+                     <*> (o .:? "mobileDeviceId")
+                     <*> (o .:? "floodlightConfigurationId")
+                     <*> (o .:? "kind" .!= "dfareporting#conversion")
+                     <*> (o .:? "floodlightActivityId")
+                     <*> (o .:? "quantity")
+                     <*> (o .:? "value")
+                     <*> (o .:? "customVariables" .!= mempty)
+                     <*> (o .:? "childDirectedTreatment")
+                     <*> (o .:? "ordinal"))
+
+instance ToJSON Conversion where
+        toJSON Conversion'{..}
+          = object
+              (catMaybes
+                 [("timestampMicros" .=) <$> _conoTimestampMicros,
+                  ("limitAdTracking" .=) <$> _conoLimitAdTracking,
+                  ("encryptedUserId" .=) <$> _conoEncryptedUserId,
+                  ("mobileDeviceId" .=) <$> _conoMobileDeviceId,
+                  ("floodlightConfigurationId" .=) <$>
+                    _conoFloodlightConfigurationId,
+                  Just ("kind" .= _conoKind),
+                  ("floodlightActivityId" .=) <$>
+                    _conoFloodlightActivityId,
+                  ("quantity" .=) <$> _conoQuantity,
+                  ("value" .=) <$> _conoValue,
+                  ("customVariables" .=) <$> _conoCustomVariables,
+                  ("childDirectedTreatment" .=) <$>
+                    _conoChildDirectedTreatment,
+                  ("ordinal" .=) <$> _conoOrdinal])
+
 -- | Creative Field Value List Response
 --
 -- /See:/ 'creativeFieldValuesListResponse' smart constructor.
-data CreativeFieldValuesListResponse = CreativeFieldValuesListResponse
+data CreativeFieldValuesListResponse = CreativeFieldValuesListResponse'
     { _cfvlrNextPageToken       :: !(Maybe Text)
     , _cfvlrKind                :: !Text
     , _cfvlrCreativeFieldValues :: !(Maybe [CreativeFieldValue])
@@ -15409,7 +16047,7 @@ data CreativeFieldValuesListResponse = CreativeFieldValuesListResponse
 creativeFieldValuesListResponse
     :: CreativeFieldValuesListResponse
 creativeFieldValuesListResponse =
-    CreativeFieldValuesListResponse
+    CreativeFieldValuesListResponse'
     { _cfvlrNextPageToken = Nothing
     , _cfvlrKind = "dfareporting#creativeFieldValuesListResponse"
     , _cfvlrCreativeFieldValues = Nothing
@@ -15440,14 +16078,14 @@ instance FromJSON CreativeFieldValuesListResponse
         parseJSON
           = withObject "CreativeFieldValuesListResponse"
               (\ o ->
-                 CreativeFieldValuesListResponse <$>
+                 CreativeFieldValuesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#creativeFieldValuesListResponse")
                      <*> (o .:? "creativeFieldValues" .!= mempty))
 
 instance ToJSON CreativeFieldValuesListResponse where
-        toJSON CreativeFieldValuesListResponse{..}
+        toJSON CreativeFieldValuesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _cfvlrNextPageToken,
@@ -15458,7 +16096,7 @@ instance ToJSON CreativeFieldValuesListResponse where
 -- | Rich Media Exit Override.
 --
 -- /See:/ 'richMediaExitOverride' smart constructor.
-data RichMediaExitOverride = RichMediaExitOverride
+data RichMediaExitOverride = RichMediaExitOverride'
     { _rmeoUseCustomExitURL :: !(Maybe Bool)
     , _rmeoExitId           :: !(Maybe (Textual Int64))
     , _rmeoCustomExitURL    :: !(Maybe Text)
@@ -15476,7 +16114,7 @@ data RichMediaExitOverride = RichMediaExitOverride
 richMediaExitOverride
     :: RichMediaExitOverride
 richMediaExitOverride =
-    RichMediaExitOverride
+    RichMediaExitOverride'
     { _rmeoUseCustomExitURL = Nothing
     , _rmeoExitId = Nothing
     , _rmeoCustomExitURL = Nothing
@@ -15505,12 +16143,12 @@ instance FromJSON RichMediaExitOverride where
         parseJSON
           = withObject "RichMediaExitOverride"
               (\ o ->
-                 RichMediaExitOverride <$>
+                 RichMediaExitOverride' <$>
                    (o .:? "useCustomExitUrl") <*> (o .:? "exitId") <*>
                      (o .:? "customExitUrl"))
 
 instance ToJSON RichMediaExitOverride where
-        toJSON RichMediaExitOverride{..}
+        toJSON RichMediaExitOverride'{..}
           = object
               (catMaybes
                  [("useCustomExitUrl" .=) <$> _rmeoUseCustomExitURL,
@@ -15520,7 +16158,7 @@ instance ToJSON RichMediaExitOverride where
 -- | Represents a sorted dimension.
 --
 -- /See:/ 'sortedDimension' smart constructor.
-data SortedDimension = SortedDimension
+data SortedDimension = SortedDimension'
     { _sdKind      :: !Text
     , _sdSortOrder :: !(Maybe SortedDimensionSortOrder)
     , _sdName      :: !(Maybe Text)
@@ -15538,7 +16176,7 @@ data SortedDimension = SortedDimension
 sortedDimension
     :: SortedDimension
 sortedDimension =
-    SortedDimension
+    SortedDimension'
     { _sdKind = "dfareporting#sortedDimension"
     , _sdSortOrder = Nothing
     , _sdName = Nothing
@@ -15561,13 +16199,13 @@ instance FromJSON SortedDimension where
         parseJSON
           = withObject "SortedDimension"
               (\ o ->
-                 SortedDimension <$>
+                 SortedDimension' <$>
                    (o .:? "kind" .!= "dfareporting#sortedDimension") <*>
                      (o .:? "sortOrder")
                      <*> (o .:? "name"))
 
 instance ToJSON SortedDimension where
-        toJSON SortedDimension{..}
+        toJSON SortedDimension'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _sdKind),
@@ -15577,7 +16215,7 @@ instance ToJSON SortedDimension where
 -- | Creative Field List Response
 --
 -- /See:/ 'creativeFieldsListResponse' smart constructor.
-data CreativeFieldsListResponse = CreativeFieldsListResponse
+data CreativeFieldsListResponse = CreativeFieldsListResponse'
     { _cflrNextPageToken  :: !(Maybe Text)
     , _cflrKind           :: !Text
     , _cflrCreativeFields :: !(Maybe [CreativeField])
@@ -15595,7 +16233,7 @@ data CreativeFieldsListResponse = CreativeFieldsListResponse
 creativeFieldsListResponse
     :: CreativeFieldsListResponse
 creativeFieldsListResponse =
-    CreativeFieldsListResponse
+    CreativeFieldsListResponse'
     { _cflrNextPageToken = Nothing
     , _cflrKind = "dfareporting#creativeFieldsListResponse"
     , _cflrCreativeFields = Nothing
@@ -15624,14 +16262,14 @@ instance FromJSON CreativeFieldsListResponse where
         parseJSON
           = withObject "CreativeFieldsListResponse"
               (\ o ->
-                 CreativeFieldsListResponse <$>
+                 CreativeFieldsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#creativeFieldsListResponse")
                      <*> (o .:? "creativeFields" .!= mempty))
 
 instance ToJSON CreativeFieldsListResponse where
-        toJSON CreativeFieldsListResponse{..}
+        toJSON CreativeFieldsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _cflrNextPageToken,
@@ -15641,7 +16279,7 @@ instance ToJSON CreativeFieldsListResponse where
 -- | Placement GenerateTags Response
 --
 -- /See:/ 'placementsGenerateTagsResponse' smart constructor.
-data PlacementsGenerateTagsResponse = PlacementsGenerateTagsResponse
+data PlacementsGenerateTagsResponse = PlacementsGenerateTagsResponse'
     { _pgtrKind          :: !Text
     , _pgtrPlacementTags :: !(Maybe [PlacementTag])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -15656,7 +16294,7 @@ data PlacementsGenerateTagsResponse = PlacementsGenerateTagsResponse
 placementsGenerateTagsResponse
     :: PlacementsGenerateTagsResponse
 placementsGenerateTagsResponse =
-    PlacementsGenerateTagsResponse
+    PlacementsGenerateTagsResponse'
     { _pgtrKind = "dfareporting#placementsGenerateTagsResponse"
     , _pgtrPlacementTags = Nothing
     }
@@ -15679,13 +16317,13 @@ instance FromJSON PlacementsGenerateTagsResponse
         parseJSON
           = withObject "PlacementsGenerateTagsResponse"
               (\ o ->
-                 PlacementsGenerateTagsResponse <$>
+                 PlacementsGenerateTagsResponse' <$>
                    (o .:? "kind" .!=
                       "dfareporting#placementsGenerateTagsResponse")
                      <*> (o .:? "placementTags" .!= mempty))
 
 instance ToJSON PlacementsGenerateTagsResponse where
-        toJSON PlacementsGenerateTagsResponse{..}
+        toJSON PlacementsGenerateTagsResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pgtrKind),
@@ -15694,7 +16332,7 @@ instance ToJSON PlacementsGenerateTagsResponse where
 -- | Creative Asset.
 --
 -- /See:/ 'creativeAsset' smart constructor.
-data CreativeAsset = CreativeAsset
+data CreativeAsset = CreativeAsset'
     { _caaZIndex                :: !(Maybe (Textual Int32))
     , _caaPushdown              :: !(Maybe Bool)
     , _caaVideoDuration         :: !(Maybe (Textual Double))
@@ -15829,7 +16467,7 @@ data CreativeAsset = CreativeAsset
 creativeAsset
     :: CreativeAsset
 creativeAsset =
-    CreativeAsset
+    CreativeAsset'
     { _caaZIndex = Nothing
     , _caaPushdown = Nothing
     , _caaVideoDuration = Nothing
@@ -15908,16 +16546,17 @@ caaOriginalBackup
       (\ s a -> s{_caaOriginalBackup = a})
 
 -- | Window mode options for flash assets. Applicable to the following
--- creative types: FLASH_INPAGE, RICH_MEDIA_EXPANDING,
--- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_INPAGE, and RICH_MEDIA_INPAGE_FLOATING.
+-- creative types: FLASH_INPAGE, RICH_MEDIA_DISPLAY_EXPANDING,
+-- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_DISPLAY_BANNER, and
+-- RICH_MEDIA_INPAGE_FLOATING.
 caaWindowMode :: Lens' CreativeAsset (Maybe CreativeAssetWindowMode)
 caaWindowMode
   = lens _caaWindowMode
       (\ s a -> s{_caaWindowMode = a})
 
 -- | Flash version of the asset. This is a read-only field. Applicable to the
--- following creative types: FLASH_INPAGE, ENHANCED_BANNER, all RICH_MEDIA,
--- and all VPAID.
+-- following creative types: FLASH_INPAGE, all RICH_MEDIA, and all VPAID.
+-- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
 caaFlashVersion :: Lens' CreativeAsset (Maybe Int32)
 caaFlashVersion
   = lens _caaFlashVersion
@@ -15936,11 +16575,12 @@ caaPushdownDuration
       . mapping _Coerce
 
 -- | Size associated with this creative asset. This is a required field when
--- applicable; however for IMAGE and FLASH_INPAGE creatives, if left blank,
+-- applicable; however for IMAGE and FLASH_INPAGE, creatives if left blank,
 -- this field will be automatically set using the actual size of the
 -- associated image asset. Applicable to the following creative types:
--- ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE, HTML5_BANNER, IMAGE, and
--- all RICH_MEDIA.
+-- DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all
+-- RICH_MEDIA. Applicable to DISPLAY when the primary asset type is not
+-- HTML_IMAGE.
 caaSize :: Lens' CreativeAsset (Maybe Size)
 caaSize = lens _caaSize (\ s a -> s{_caaSize = a})
 
@@ -16026,32 +16666,33 @@ caaProgressiveServingURL
       (\ s a -> s{_caaProgressiveServingURL = a})
 
 -- | Whether the video asset is active. This is a read-only field for
--- VPAID_NON_LINEAR assets. Applicable to the following creative types:
--- INSTREAM_VIDEO and all VPAID.
+-- VPAID_NON_LINEAR_VIDEO assets. Applicable to the following creative
+-- types: INSTREAM_VIDEO and all VPAID.
 caaActive :: Lens' CreativeAsset (Maybe Bool)
 caaActive
   = lens _caaActive (\ s a -> s{_caaActive = a})
 
 -- | Role of the asset in relation to creative. Applicable to all but the
 -- following creative types: all REDIRECT and TRACKING_TEXT. This is a
--- required field. PRIMARY applies to ENHANCED_BANNER, FLASH_INPAGE,
--- HTML5_BANNER, IMAGE, IMAGE_GALLERY, all RICH_MEDIA (which may contain
--- multiple primary assets), and all VPAID creatives. BACKUP_IMAGE applies
--- to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all
--- VPAID creatives. ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to
--- FLASH_INPAGE creatives. OTHER refers to assets from sources other than
--- DCM, such as Studio uploaded assets, applicable to all RICH_MEDIA and
--- all VPAID creatives. PARENT_VIDEO refers to videos uploaded by the user
--- in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
+-- required field. PRIMARY applies to DISPLAY, FLASH_INPAGE, HTML5_BANNER,
+-- IMAGE, DISPLAY_IMAGE_GALLERY, all RICH_MEDIA (which may contain multiple
+-- primary assets), and all VPAID creatives. BACKUP_IMAGE applies to
+-- FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives.
+-- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
+-- ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to FLASH_INPAGE creatives.
+-- OTHER refers to assets from sources other than DCM, such as Studio
+-- uploaded assets, applicable to all RICH_MEDIA and all VPAID creatives.
+-- PARENT_VIDEO refers to videos uploaded by the user in DCM and is
+-- applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO creatives.
 -- TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO
--- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
--- ALTERNATE_VIDEO refers to the DCM representation of child asset videos
--- from Studio, and is applicable to VPAID_LINEAR creatives. These cannot
--- be added or removed within DCM. For VPAID_LINEAR creatives,
--- PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are
--- marked active serve as backup in case the VPAID creative cannot be
--- served. Only PARENT_VIDEO assets can be added or removed for an
--- INSTREAM_VIDEO or VPAID_LINEAR creative.
+-- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO
+-- creatives. ALTERNATE_VIDEO refers to the DCM representation of child
+-- asset videos from Studio, and is applicable to VPAID_LINEAR_VIDEO
+-- creatives. These cannot be added or removed within DCM. For
+-- VPAID_LINEAR_VIDEO creatives, PARENT_VIDEO, TRANSCODED_VIDEO and
+-- ALTERNATE_VIDEO assets that are marked active serve as backup in case
+-- the VPAID creative cannot be served. Only PARENT_VIDEO assets can be
+-- added or removed for an INSTREAM_VIDEO or VPAID_LINEAR_VIDEO creative.
 caaRole :: Lens' CreativeAsset (Maybe CreativeAssetRole)
 caaRole = lens _caaRole (\ s a -> s{_caaRole = a})
 
@@ -16078,7 +16719,8 @@ caaPositionLeftUnit
       (\ s a -> s{_caaPositionLeftUnit = a})
 
 -- | Possible alignments for an asset. This is a read-only field. Applicable
--- to the following creative types: RICH_MEDIA_MULTI_FLOATING.
+-- to the following creative types:
+-- RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL.
 caaAlignment :: Lens' CreativeAsset (Maybe CreativeAssetAlignment)
 caaAlignment
   = lens _caaAlignment (\ s a -> s{_caaAlignment = a})
@@ -16099,8 +16741,9 @@ caaZipFilename
       (\ s a -> s{_caaZipFilename = a})
 
 -- | Whether ActionScript3 is enabled for the flash asset. This is a
--- read-only field. Applicable to the following creative types:
--- FLASH_INPAGE and ENHANCED_BANNER.
+-- read-only field. Applicable to the following creative type:
+-- FLASH_INPAGE. Applicable to DISPLAY when the primary asset type is not
+-- HTML_IMAGE.
 caaActionScript3 :: Lens' CreativeAsset (Maybe Bool)
 caaActionScript3
   = lens _caaActionScript3
@@ -16160,7 +16803,7 @@ caaStartTimeType
       (\ s a -> s{_caaStartTimeType = a})
 
 -- | Duration in seconds for which an asset will be displayed. Applicable to
--- the following creative types: INSTREAM_VIDEO and VPAID_LINEAR.
+-- the following creative types: INSTREAM_VIDEO and VPAID_LINEAR_VIDEO.
 caaDuration :: Lens' CreativeAsset (Maybe Int32)
 caaDuration
   = lens _caaDuration (\ s a -> s{_caaDuration = a}) .
@@ -16184,7 +16827,8 @@ caaHideFlashObjects
 -- DCM. Feature dependencies are features that a browser must be able to
 -- support in order to render your HTML5 creative correctly. This is a
 -- read-only, auto-generated field. Applicable to the following creative
--- types: ENHANCED_BANNER and HTML5_BANNER.
+-- types: HTML5_BANNER. Applicable to DISPLAY when the primary asset type
+-- is not HTML_IMAGE.
 caaDetectedFeatures :: Lens' CreativeAsset [CreativeAssetDetectedFeaturesItem]
 caaDetectedFeatures
   = lens _caaDetectedFeatures
@@ -16216,7 +16860,7 @@ instance FromJSON CreativeAsset where
         parseJSON
           = withObject "CreativeAsset"
               (\ o ->
-                 CreativeAsset <$>
+                 CreativeAsset' <$>
                    (o .:? "zIndex") <*> (o .:? "pushdown") <*>
                      (o .:? "videoDuration")
                      <*> (o .:? "originalBackup")
@@ -16260,7 +16904,7 @@ instance FromJSON CreativeAsset where
                      <*> (o .:? "horizontallyLocked"))
 
 instance ToJSON CreativeAsset where
-        toJSON CreativeAsset{..}
+        toJSON CreativeAsset'{..}
           = object
               (catMaybes
                  [("zIndex" .=) <$> _caaZIndex,
@@ -16312,7 +16956,7 @@ instance ToJSON CreativeAsset where
 -- | Placement List Response
 --
 -- /See:/ 'placementsListResponse' smart constructor.
-data PlacementsListResponse = PlacementsListResponse
+data PlacementsListResponse = PlacementsListResponse'
     { _plaNextPageToken :: !(Maybe Text)
     , _plaKind          :: !Text
     , _plaPlacements    :: !(Maybe [Placement])
@@ -16330,7 +16974,7 @@ data PlacementsListResponse = PlacementsListResponse
 placementsListResponse
     :: PlacementsListResponse
 placementsListResponse =
-    PlacementsListResponse
+    PlacementsListResponse'
     { _plaNextPageToken = Nothing
     , _plaKind = "dfareporting#placementsListResponse"
     , _plaPlacements = Nothing
@@ -16359,14 +17003,14 @@ instance FromJSON PlacementsListResponse where
         parseJSON
           = withObject "PlacementsListResponse"
               (\ o ->
-                 PlacementsListResponse <$>
+                 PlacementsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#placementsListResponse")
                      <*> (o .:? "placements" .!= mempty))
 
 instance ToJSON PlacementsListResponse where
-        toJSON PlacementsListResponse{..}
+        toJSON PlacementsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _plaNextPageToken,
@@ -16377,7 +17021,7 @@ instance ToJSON PlacementsListResponse where
 -- is a relative date range and the relative date range is not \"TODAY\".
 --
 -- /See:/ 'reportSchedule' smart constructor.
-data ReportSchedule = ReportSchedule
+data ReportSchedule = ReportSchedule'
     { _rsEvery             :: !(Maybe (Textual Int32))
     , _rsActive            :: !(Maybe Bool)
     , _rsRepeats           :: !(Maybe Text)
@@ -16407,7 +17051,7 @@ data ReportSchedule = ReportSchedule
 reportSchedule
     :: ReportSchedule
 reportSchedule =
-    ReportSchedule
+    ReportSchedule'
     { _rsEvery = Nothing
     , _rsActive = Nothing
     , _rsRepeats = Nothing
@@ -16474,7 +17118,7 @@ instance FromJSON ReportSchedule where
         parseJSON
           = withObject "ReportSchedule"
               (\ o ->
-                 ReportSchedule <$>
+                 ReportSchedule' <$>
                    (o .:? "every") <*> (o .:? "active") <*>
                      (o .:? "repeats")
                      <*> (o .:? "startDate")
@@ -16483,7 +17127,7 @@ instance FromJSON ReportSchedule where
                      <*> (o .:? "repeatsOnWeekDays" .!= mempty))
 
 instance ToJSON ReportSchedule where
-        toJSON ReportSchedule{..}
+        toJSON ReportSchedule'{..}
           = object
               (catMaybes
                  [("every" .=) <$> _rsEvery,
@@ -16497,7 +17141,7 @@ instance ToJSON ReportSchedule where
 -- | The report criteria for a report of type \"PATH_TO_CONVERSION\".
 --
 -- /See:/ 'reportPathToConversionCriteria' smart constructor.
-data ReportPathToConversionCriteria = ReportPathToConversionCriteria
+data ReportPathToConversionCriteria = ReportPathToConversionCriteria'
     { _rptccReportProperties          :: !(Maybe ReportPathToConversionCriteriaReportProperties)
     , _rptccMetricNames               :: !(Maybe [Text])
     , _rptccCustomRichMediaEvents     :: !(Maybe [DimensionValue])
@@ -16533,7 +17177,7 @@ data ReportPathToConversionCriteria = ReportPathToConversionCriteria
 reportPathToConversionCriteria
     :: ReportPathToConversionCriteria
 reportPathToConversionCriteria =
-    ReportPathToConversionCriteria
+    ReportPathToConversionCriteria'
     { _rptccReportProperties = Nothing
     , _rptccMetricNames = Nothing
     , _rptccCustomRichMediaEvents = Nothing
@@ -16618,7 +17262,7 @@ instance FromJSON ReportPathToConversionCriteria
         parseJSON
           = withObject "ReportPathToConversionCriteria"
               (\ o ->
-                 ReportPathToConversionCriteria <$>
+                 ReportPathToConversionCriteria' <$>
                    (o .:? "reportProperties") <*>
                      (o .:? "metricNames" .!= mempty)
                      <*> (o .:? "customRichMediaEvents" .!= mempty)
@@ -16630,7 +17274,7 @@ instance FromJSON ReportPathToConversionCriteria
                      <*> (o .:? "perInteractionDimensions" .!= mempty))
 
 instance ToJSON ReportPathToConversionCriteria where
-        toJSON ReportPathToConversionCriteria{..}
+        toJSON ReportPathToConversionCriteria'{..}
           = object
               (catMaybes
                  [("reportProperties" .=) <$> _rptccReportProperties,
@@ -16651,7 +17295,7 @@ instance ToJSON ReportPathToConversionCriteria where
 -- | Metro List Response
 --
 -- /See:/ 'metrosListResponse' smart constructor.
-data MetrosListResponse = MetrosListResponse
+data MetrosListResponse = MetrosListResponse'
     { _mlrKind   :: !Text
     , _mlrMetros :: !(Maybe [Metro])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -16666,7 +17310,7 @@ data MetrosListResponse = MetrosListResponse
 metrosListResponse
     :: MetrosListResponse
 metrosListResponse =
-    MetrosListResponse
+    MetrosListResponse'
     { _mlrKind = "dfareporting#metrosListResponse"
     , _mlrMetros = Nothing
     }
@@ -16687,21 +17331,87 @@ instance FromJSON MetrosListResponse where
         parseJSON
           = withObject "MetrosListResponse"
               (\ o ->
-                 MetrosListResponse <$>
+                 MetrosListResponse' <$>
                    (o .:? "kind" .!= "dfareporting#metrosListResponse")
                      <*> (o .:? "metros" .!= mempty))
 
 instance ToJSON MetrosListResponse where
-        toJSON MetrosListResponse{..}
+        toJSON MetrosListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mlrKind),
                   ("metros" .=) <$> _mlrMetros])
 
+-- | Insert Conversions Response.
+--
+-- /See:/ 'conversionsBatchInsertResponse' smart constructor.
+data ConversionsBatchInsertResponse = ConversionsBatchInsertResponse'
+    { _cbirbStatus      :: !(Maybe [ConversionStatus])
+    , _cbirbKind        :: !Text
+    , _cbirbHasFailures :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConversionsBatchInsertResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cbirbStatus'
+--
+-- * 'cbirbKind'
+--
+-- * 'cbirbHasFailures'
+conversionsBatchInsertResponse
+    :: ConversionsBatchInsertResponse
+conversionsBatchInsertResponse =
+    ConversionsBatchInsertResponse'
+    { _cbirbStatus = Nothing
+    , _cbirbKind = "dfareporting#conversionsBatchInsertResponse"
+    , _cbirbHasFailures = Nothing
+    }
+
+-- | The status of each conversion\'s insertion status. The status is
+-- returned in the same order that conversions are inserted.
+cbirbStatus :: Lens' ConversionsBatchInsertResponse [ConversionStatus]
+cbirbStatus
+  = lens _cbirbStatus (\ s a -> s{_cbirbStatus = a}) .
+      _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversionsBatchInsertResponse\".
+cbirbKind :: Lens' ConversionsBatchInsertResponse Text
+cbirbKind
+  = lens _cbirbKind (\ s a -> s{_cbirbKind = a})
+
+-- | Indicates that some or all conversions failed to insert.
+cbirbHasFailures :: Lens' ConversionsBatchInsertResponse (Maybe Bool)
+cbirbHasFailures
+  = lens _cbirbHasFailures
+      (\ s a -> s{_cbirbHasFailures = a})
+
+instance FromJSON ConversionsBatchInsertResponse
+         where
+        parseJSON
+          = withObject "ConversionsBatchInsertResponse"
+              (\ o ->
+                 ConversionsBatchInsertResponse' <$>
+                   (o .:? "status" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "dfareporting#conversionsBatchInsertResponse")
+                     <*> (o .:? "hasFailures"))
+
+instance ToJSON ConversionsBatchInsertResponse where
+        toJSON ConversionsBatchInsertResponse'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _cbirbStatus,
+                  Just ("kind" .= _cbirbKind),
+                  ("hasFailures" .=) <$> _cbirbHasFailures])
+
 -- | Order document List Response
 --
 -- /See:/ 'orderDocumentsListResponse' smart constructor.
-data OrderDocumentsListResponse = OrderDocumentsListResponse
+data OrderDocumentsListResponse = OrderDocumentsListResponse'
     { _odlrNextPageToken  :: !(Maybe Text)
     , _odlrKind           :: !Text
     , _odlrOrderDocuments :: !(Maybe [OrderDocument])
@@ -16719,7 +17429,7 @@ data OrderDocumentsListResponse = OrderDocumentsListResponse
 orderDocumentsListResponse
     :: OrderDocumentsListResponse
 orderDocumentsListResponse =
-    OrderDocumentsListResponse
+    OrderDocumentsListResponse'
     { _odlrNextPageToken = Nothing
     , _odlrKind = "dfareporting#orderDocumentsListResponse"
     , _odlrOrderDocuments = Nothing
@@ -16748,14 +17458,14 @@ instance FromJSON OrderDocumentsListResponse where
         parseJSON
           = withObject "OrderDocumentsListResponse"
               (\ o ->
-                 OrderDocumentsListResponse <$>
+                 OrderDocumentsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#orderDocumentsListResponse")
                      <*> (o .:? "orderDocuments" .!= mempty))
 
 instance ToJSON OrderDocumentsListResponse where
-        toJSON OrderDocumentsListResponse{..}
+        toJSON OrderDocumentsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _odlrNextPageToken,
@@ -16765,7 +17475,7 @@ instance ToJSON OrderDocumentsListResponse where
 -- | Represents a recipient.
 --
 -- /See:/ 'recipient' smart constructor.
-data Recipient = Recipient
+data Recipient = Recipient'
     { _recEmail        :: !(Maybe Text)
     , _recKind         :: !Text
     , _recDeliveryType :: !(Maybe RecipientDeliveryType)
@@ -16783,7 +17493,7 @@ data Recipient = Recipient
 recipient
     :: Recipient
 recipient =
-    Recipient
+    Recipient'
     { _recEmail = Nothing
     , _recKind = "dfareporting#recipient"
     , _recDeliveryType = Nothing
@@ -16807,13 +17517,13 @@ instance FromJSON Recipient where
         parseJSON
           = withObject "Recipient"
               (\ o ->
-                 Recipient <$>
+                 Recipient' <$>
                    (o .:? "email") <*>
                      (o .:? "kind" .!= "dfareporting#recipient")
                      <*> (o .:? "deliveryType"))
 
 instance ToJSON Recipient where
-        toJSON Recipient{..}
+        toJSON Recipient'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _recEmail,
@@ -16823,7 +17533,7 @@ instance ToJSON Recipient where
 -- | Contains properties of a site.
 --
 -- /See:/ 'site' smart constructor.
-data Site = Site
+data Site = Site'
     { _ssKind                          :: !Text
     , _ssKeyName                       :: !(Maybe Text)
     , _ssSiteContacts                  :: !(Maybe [SiteContact])
@@ -16868,7 +17578,7 @@ data Site = Site
 site
     :: Site
 site =
-    Site
+    Site'
     { _ssKind = "dfareporting#site"
     , _ssKeyName = Nothing
     , _ssSiteContacts = Nothing
@@ -16967,7 +17677,7 @@ instance FromJSON Site where
         parseJSON
           = withObject "Site"
               (\ o ->
-                 Site <$>
+                 Site' <$>
                    (o .:? "kind" .!= "dfareporting#site") <*>
                      (o .:? "keyName")
                      <*> (o .:? "siteContacts" .!= mempty)
@@ -16982,7 +17692,7 @@ instance FromJSON Site where
                      <*> (o .:? "approved"))
 
 instance ToJSON Site where
-        toJSON Site{..}
+        toJSON Site'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ssKind),
@@ -17002,7 +17712,7 @@ instance ToJSON Site where
 -- | User Defined Variable configuration.
 --
 -- /See:/ 'userDefinedVariableConfiguration' smart constructor.
-data UserDefinedVariableConfiguration = UserDefinedVariableConfiguration
+data UserDefinedVariableConfiguration = UserDefinedVariableConfiguration'
     { _udvcReportName   :: !(Maybe Text)
     , _udvcDataType     :: !(Maybe UserDefinedVariableConfigurationDataType)
     , _udvcVariableType :: !(Maybe UserDefinedVariableConfigurationVariableType)
@@ -17020,7 +17730,7 @@ data UserDefinedVariableConfiguration = UserDefinedVariableConfiguration
 userDefinedVariableConfiguration
     :: UserDefinedVariableConfiguration
 userDefinedVariableConfiguration =
-    UserDefinedVariableConfiguration
+    UserDefinedVariableConfiguration'
     { _udvcReportName = Nothing
     , _udvcDataType = Nothing
     , _udvcVariableType = Nothing
@@ -17050,13 +17760,13 @@ instance FromJSON UserDefinedVariableConfiguration
         parseJSON
           = withObject "UserDefinedVariableConfiguration"
               (\ o ->
-                 UserDefinedVariableConfiguration <$>
+                 UserDefinedVariableConfiguration' <$>
                    (o .:? "reportName") <*> (o .:? "dataType") <*>
                      (o .:? "variableType"))
 
 instance ToJSON UserDefinedVariableConfiguration
          where
-        toJSON UserDefinedVariableConfiguration{..}
+        toJSON UserDefinedVariableConfiguration'{..}
           = object
               (catMaybes
                  [("reportName" .=) <$> _udvcReportName,
@@ -17066,7 +17776,7 @@ instance ToJSON UserDefinedVariableConfiguration
 -- | The report criteria for a report of type \"CROSS_DIMENSION_REACH\".
 --
 -- /See:/ 'reportCrossDimensionReachCriteria' smart constructor.
-data ReportCrossDimensionReachCriteria = ReportCrossDimensionReachCriteria
+data ReportCrossDimensionReachCriteria = ReportCrossDimensionReachCriteria'
     { _rcdrcPivoted            :: !(Maybe Bool)
     , _rcdrcBreakdown          :: !(Maybe [SortedDimension])
     , _rcdrcDimension          :: !(Maybe ReportCrossDimensionReachCriteriaDimension)
@@ -17096,7 +17806,7 @@ data ReportCrossDimensionReachCriteria = ReportCrossDimensionReachCriteria
 reportCrossDimensionReachCriteria
     :: ReportCrossDimensionReachCriteria
 reportCrossDimensionReachCriteria =
-    ReportCrossDimensionReachCriteria
+    ReportCrossDimensionReachCriteria'
     { _rcdrcPivoted = Nothing
     , _rcdrcBreakdown = Nothing
     , _rcdrcDimension = Nothing
@@ -17160,7 +17870,7 @@ instance FromJSON ReportCrossDimensionReachCriteria
         parseJSON
           = withObject "ReportCrossDimensionReachCriteria"
               (\ o ->
-                 ReportCrossDimensionReachCriteria <$>
+                 ReportCrossDimensionReachCriteria' <$>
                    (o .:? "pivoted") <*> (o .:? "breakdown" .!= mempty)
                      <*> (o .:? "dimension")
                      <*> (o .:? "metricNames" .!= mempty)
@@ -17170,7 +17880,7 @@ instance FromJSON ReportCrossDimensionReachCriteria
 
 instance ToJSON ReportCrossDimensionReachCriteria
          where
-        toJSON ReportCrossDimensionReachCriteria{..}
+        toJSON ReportCrossDimensionReachCriteria'{..}
           = object
               (catMaybes
                  [("pivoted" .=) <$> _rcdrcPivoted,
@@ -17185,7 +17895,7 @@ instance ToJSON ReportCrossDimensionReachCriteria
 -- | The URLs where the completed report file can be downloaded.
 --
 -- /See:/ 'fileURLs' smart constructor.
-data FileURLs = FileURLs
+data FileURLs = FileURLs'
     { _fuBrowserURL :: !(Maybe Text)
     , _fuAPIURL     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -17200,7 +17910,7 @@ data FileURLs = FileURLs
 fileURLs
     :: FileURLs
 fileURLs =
-    FileURLs
+    FileURLs'
     { _fuBrowserURL = Nothing
     , _fuAPIURL = Nothing
     }
@@ -17218,11 +17928,11 @@ instance FromJSON FileURLs where
         parseJSON
           = withObject "FileURLs"
               (\ o ->
-                 FileURLs <$>
+                 FileURLs' <$>
                    (o .:? "browserUrl") <*> (o .:? "apiUrl"))
 
 instance ToJSON FileURLs where
-        toJSON FileURLs{..}
+        toJSON FileURLs'{..}
           = object
               (catMaybes
                  [("browserUrl" .=) <$> _fuBrowserURL,
@@ -17231,7 +17941,7 @@ instance ToJSON FileURLs where
 -- | Campaign Creative Association List Response
 --
 -- /See:/ 'campaignCreativeAssociationsListResponse' smart constructor.
-data CampaignCreativeAssociationsListResponse = CampaignCreativeAssociationsListResponse
+data CampaignCreativeAssociationsListResponse = CampaignCreativeAssociationsListResponse'
     { _ccalrCampaignCreativeAssociations :: !(Maybe [CampaignCreativeAssociation])
     , _ccalrNextPageToken                :: !(Maybe Text)
     , _ccalrKind                         :: !Text
@@ -17249,7 +17959,7 @@ data CampaignCreativeAssociationsListResponse = CampaignCreativeAssociationsList
 campaignCreativeAssociationsListResponse
     :: CampaignCreativeAssociationsListResponse
 campaignCreativeAssociationsListResponse =
-    CampaignCreativeAssociationsListResponse
+    CampaignCreativeAssociationsListResponse'
     { _ccalrCampaignCreativeAssociations = Nothing
     , _ccalrNextPageToken = Nothing
     , _ccalrKind = "dfareporting#campaignCreativeAssociationsListResponse"
@@ -17281,7 +17991,7 @@ instance FromJSON
           = withObject
               "CampaignCreativeAssociationsListResponse"
               (\ o ->
-                 CampaignCreativeAssociationsListResponse <$>
+                 CampaignCreativeAssociationsListResponse' <$>
                    (o .:? "campaignCreativeAssociations" .!= mempty) <*>
                      (o .:? "nextPageToken")
                      <*>
@@ -17290,7 +18000,7 @@ instance FromJSON
 
 instance ToJSON
          CampaignCreativeAssociationsListResponse where
-        toJSON CampaignCreativeAssociationsListResponse{..}
+        toJSON CampaignCreativeAssociationsListResponse'{..}
           = object
               (catMaybes
                  [("campaignCreativeAssociations" .=) <$>
@@ -17301,7 +18011,7 @@ instance ToJSON
 -- | Describes properties of a DoubleClick Planning order.
 --
 -- /See:/ 'order' smart constructor.
-data Order = Order
+data Order = Order'
     { _oSellerOrderId          :: !(Maybe Text)
     , _oSellerOrganizationName :: !(Maybe Text)
     , _oKind                   :: !Text
@@ -17370,7 +18080,7 @@ data Order = Order
 order
     :: Order
 order =
-    Order
+    Order'
     { _oSellerOrderId = Nothing
     , _oSellerOrganizationName = Nothing
     , _oKind = "dfareporting#order"
@@ -17517,7 +18227,7 @@ instance FromJSON Order where
         parseJSON
           = withObject "Order"
               (\ o ->
-                 Order <$>
+                 Order' <$>
                    (o .:? "sellerOrderId") <*>
                      (o .:? "sellerOrganizationName")
                      <*> (o .:? "kind" .!= "dfareporting#order")
@@ -17540,7 +18250,7 @@ instance FromJSON Order where
                      <*> (o .:? "approverUserProfileIds" .!= mempty))
 
 instance ToJSON Order where
-        toJSON Order{..}
+        toJSON Order'{..}
           = object
               (catMaybes
                  [("sellerOrderId" .=) <$> _oSellerOrderId,
@@ -17570,7 +18280,7 @@ instance ToJSON Order where
 -- | Creative Asset ID.
 --
 -- /See:/ 'creativeAssetId' smart constructor.
-data CreativeAssetId = CreativeAssetId
+data CreativeAssetId = CreativeAssetId'
     { _caiName :: !(Maybe Text)
     , _caiType :: !(Maybe CreativeAssetIdType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -17585,7 +18295,7 @@ data CreativeAssetId = CreativeAssetId
 creativeAssetId
     :: CreativeAssetId
 creativeAssetId =
-    CreativeAssetId
+    CreativeAssetId'
     { _caiName = Nothing
     , _caiType = Nothing
     }
@@ -17606,11 +18316,11 @@ instance FromJSON CreativeAssetId where
         parseJSON
           = withObject "CreativeAssetId"
               (\ o ->
-                 CreativeAssetId <$>
+                 CreativeAssetId' <$>
                    (o .:? "name") <*> (o .:? "type"))
 
 instance ToJSON CreativeAssetId where
-        toJSON CreativeAssetId{..}
+        toJSON CreativeAssetId'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _caiName, ("type" .=) <$> _caiType])
@@ -17618,7 +18328,7 @@ instance ToJSON CreativeAssetId where
 -- | Frequency Cap.
 --
 -- /See:/ 'frequencyCap' smart constructor.
-data FrequencyCap = FrequencyCap
+data FrequencyCap = FrequencyCap'
     { _fcImpressions :: !(Maybe (Textual Int64))
     , _fcDuration    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -17633,7 +18343,7 @@ data FrequencyCap = FrequencyCap
 frequencyCap
     :: FrequencyCap
 frequencyCap =
-    FrequencyCap
+    FrequencyCap'
     { _fcImpressions = Nothing
     , _fcDuration = Nothing
     }
@@ -17657,11 +18367,11 @@ instance FromJSON FrequencyCap where
         parseJSON
           = withObject "FrequencyCap"
               (\ o ->
-                 FrequencyCap <$>
+                 FrequencyCap' <$>
                    (o .:? "impressions") <*> (o .:? "duration"))
 
 instance ToJSON FrequencyCap where
-        toJSON FrequencyCap{..}
+        toJSON FrequencyCap'{..}
           = object
               (catMaybes
                  [("impressions" .=) <$> _fcImpressions,
@@ -17673,7 +18383,7 @@ instance ToJSON FrequencyCap where
 -- \"REPORT_AVAILABLE\".
 --
 -- /See:/ 'file' smart constructor.
-data File = File
+data File = File'
     { _filStatus           :: !(Maybe FileStatus)
     , _filEtag             :: !(Maybe Text)
     , _filKind             :: !Text
@@ -17712,7 +18422,7 @@ data File = File
 file
     :: File
 file =
-    File
+    File'
     { _filStatus = Nothing
     , _filEtag = Nothing
     , _filKind = "dfareporting#file"
@@ -17783,7 +18493,7 @@ instance FromJSON File where
         parseJSON
           = withObject "File"
               (\ o ->
-                 File <$>
+                 File' <$>
                    (o .:? "status") <*> (o .:? "etag") <*>
                      (o .:? "kind" .!= "dfareporting#file")
                      <*> (o .:? "urls")
@@ -17795,7 +18505,7 @@ instance FromJSON File where
                      <*> (o .:? "fileName"))
 
 instance ToJSON File where
-        toJSON File{..}
+        toJSON File'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _filStatus,
@@ -17811,7 +18521,7 @@ instance ToJSON File where
 -- | Creative Settings
 --
 -- /See:/ 'creativeSettings' smart constructor.
-data CreativeSettings = CreativeSettings
+data CreativeSettings = CreativeSettings'
     { _csIFrameHeader :: !(Maybe Text)
     , _csIFrameFooter :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -17826,7 +18536,7 @@ data CreativeSettings = CreativeSettings
 creativeSettings
     :: CreativeSettings
 creativeSettings =
-    CreativeSettings
+    CreativeSettings'
     { _csIFrameHeader = Nothing
     , _csIFrameFooter = Nothing
     }
@@ -17849,11 +18559,11 @@ instance FromJSON CreativeSettings where
         parseJSON
           = withObject "CreativeSettings"
               (\ o ->
-                 CreativeSettings <$>
+                 CreativeSettings' <$>
                    (o .:? "iFrameHeader") <*> (o .:? "iFrameFooter"))
 
 instance ToJSON CreativeSettings where
-        toJSON CreativeSettings{..}
+        toJSON CreativeSettings'{..}
           = object
               (catMaybes
                  [("iFrameHeader" .=) <$> _csIFrameHeader,
@@ -17862,7 +18572,7 @@ instance ToJSON CreativeSettings where
 -- | Creative Group List Response
 --
 -- /See:/ 'creativeGroupsListResponse' smart constructor.
-data CreativeGroupsListResponse = CreativeGroupsListResponse
+data CreativeGroupsListResponse = CreativeGroupsListResponse'
     { _cglrCreativeGroups :: !(Maybe [CreativeGroup])
     , _cglrNextPageToken  :: !(Maybe Text)
     , _cglrKind           :: !Text
@@ -17880,7 +18590,7 @@ data CreativeGroupsListResponse = CreativeGroupsListResponse
 creativeGroupsListResponse
     :: CreativeGroupsListResponse
 creativeGroupsListResponse =
-    CreativeGroupsListResponse
+    CreativeGroupsListResponse'
     { _cglrCreativeGroups = Nothing
     , _cglrNextPageToken = Nothing
     , _cglrKind = "dfareporting#creativeGroupsListResponse"
@@ -17909,7 +18619,7 @@ instance FromJSON CreativeGroupsListResponse where
         parseJSON
           = withObject "CreativeGroupsListResponse"
               (\ o ->
-                 CreativeGroupsListResponse <$>
+                 CreativeGroupsListResponse' <$>
                    (o .:? "creativeGroups" .!= mempty) <*>
                      (o .:? "nextPageToken")
                      <*>
@@ -17917,7 +18627,7 @@ instance FromJSON CreativeGroupsListResponse where
                         "dfareporting#creativeGroupsListResponse"))
 
 instance ToJSON CreativeGroupsListResponse where
-        toJSON CreativeGroupsListResponse{..}
+        toJSON CreativeGroupsListResponse'{..}
           = object
               (catMaybes
                  [("creativeGroups" .=) <$> _cglrCreativeGroups,
@@ -17927,7 +18637,7 @@ instance ToJSON CreativeGroupsListResponse where
 -- | Mobile Carrier List Response
 --
 -- /See:/ 'mobileCarriersListResponse' smart constructor.
-data MobileCarriersListResponse = MobileCarriersListResponse
+data MobileCarriersListResponse = MobileCarriersListResponse'
     { _mclrMobileCarriers :: !(Maybe [MobileCarrier])
     , _mclrKind           :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -17942,7 +18652,7 @@ data MobileCarriersListResponse = MobileCarriersListResponse
 mobileCarriersListResponse
     :: MobileCarriersListResponse
 mobileCarriersListResponse =
-    MobileCarriersListResponse
+    MobileCarriersListResponse'
     { _mclrMobileCarriers = Nothing
     , _mclrKind = "dfareporting#mobileCarriersListResponse"
     }
@@ -17964,13 +18674,13 @@ instance FromJSON MobileCarriersListResponse where
         parseJSON
           = withObject "MobileCarriersListResponse"
               (\ o ->
-                 MobileCarriersListResponse <$>
+                 MobileCarriersListResponse' <$>
                    (o .:? "mobileCarriers" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "dfareporting#mobileCarriersListResponse"))
 
 instance ToJSON MobileCarriersListResponse where
-        toJSON MobileCarriersListResponse{..}
+        toJSON MobileCarriersListResponse'{..}
           = object
               (catMaybes
                  [("mobileCarriers" .=) <$> _mclrMobileCarriers,
@@ -17979,7 +18689,7 @@ instance ToJSON MobileCarriersListResponse where
 -- | Landing Page List Response
 --
 -- /See:/ 'landingPagesListResponse' smart constructor.
-data LandingPagesListResponse = LandingPagesListResponse
+data LandingPagesListResponse = LandingPagesListResponse'
     { _lplrLandingPages :: !(Maybe [LandingPage])
     , _lplrKind         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -17994,7 +18704,7 @@ data LandingPagesListResponse = LandingPagesListResponse
 landingPagesListResponse
     :: LandingPagesListResponse
 landingPagesListResponse =
-    LandingPagesListResponse
+    LandingPagesListResponse'
     { _lplrLandingPages = Nothing
     , _lplrKind = "dfareporting#landingPagesListResponse"
     }
@@ -18016,13 +18726,13 @@ instance FromJSON LandingPagesListResponse where
         parseJSON
           = withObject "LandingPagesListResponse"
               (\ o ->
-                 LandingPagesListResponse <$>
+                 LandingPagesListResponse' <$>
                    (o .:? "landingPages" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "dfareporting#landingPagesListResponse"))
 
 instance ToJSON LandingPagesListResponse where
-        toJSON LandingPagesListResponse{..}
+        toJSON LandingPagesListResponse'{..}
           = object
               (catMaybes
                  [("landingPages" .=) <$> _lplrLandingPages,
@@ -18033,7 +18743,7 @@ instance ToJSON LandingPagesListResponse where
 -- code for how to upload assets and insert a creative.
 --
 -- /See:/ 'creativeAssetMetadata' smart constructor.
-data CreativeAssetMetadata = CreativeAssetMetadata
+data CreativeAssetMetadata = CreativeAssetMetadata'
     { _camaKind                  :: !Text
     , _camaAssetIdentifier       :: !(Maybe CreativeAssetId)
     , _camaClickTags             :: !(Maybe [ClickTag])
@@ -18057,7 +18767,7 @@ data CreativeAssetMetadata = CreativeAssetMetadata
 creativeAssetMetadata
     :: CreativeAssetMetadata
 creativeAssetMetadata =
-    CreativeAssetMetadata
+    CreativeAssetMetadata'
     { _camaKind = "dfareporting#creativeAssetMetadata"
     , _camaAssetIdentifier = Nothing
     , _camaClickTags = Nothing
@@ -18087,15 +18797,17 @@ camaClickTags
 
 -- | Rules validated during code generation that generated a warning. This is
 -- a read-only, auto-generated field. Possible values are: -
--- \"CLICK_TAG_NON_TOP_LEVEL\" - \"CLICK_TAG_MISSING\" -
--- \"CLICK_TAG_MORE_THAN_ONE\" - \"CLICK_TAG_INVALID\" - \"ORPHANED_ASSET\"
--- - \"PRIMARY_HTML_MISSING\" - \"EXTERNAL_FILE_REFERENCED\" -
--- \"MRAID_REFERENCED\" - \"ADMOB_REFERENCED\" - \"FILE_TYPE_INVALID\" -
--- \"ZIP_INVALID\" - \"LINKED_FILE_NOT_FOUND\" - \"MAX_FLASH_VERSION_11\" -
--- \"NOT_SSL_COMPLIANT\" - \"FILE_DETAIL_EMPTY\" - \"ASSET_INVALID\" -
--- \"GWD_PROPERTIES_INVALID\" - \"ENABLER_UNSUPPORTED_METHOD_DCM\" -
--- \"ASSET_FORMAT_UNSUPPORTED_DCM\" - \"COMPONENT_UNSUPPORTED_DCM\" -
--- \"HTML5_FEATURE_UNSUPPORTED\' \"
+-- \"ADMOB_REFERENCED\" - \"ASSET_FORMAT_UNSUPPORTED_DCM\" -
+-- \"ASSET_INVALID\" - \"CLICK_TAG_HARD_CODED\" - \"CLICK_TAG_INVALID\" -
+-- \"CLICK_TAG_IN_GWD\" - \"CLICK_TAG_MISSING\" -
+-- \"CLICK_TAG_MORE_THAN_ONE\" - \"CLICK_TAG_NON_TOP_LEVEL\" -
+-- \"COMPONENT_UNSUPPORTED_DCM\" - \"ENABLER_UNSUPPORTED_METHOD_DCM\" -
+-- \"EXTERNAL_FILE_REFERENCED\" - \"FILE_DETAIL_EMPTY\" -
+-- \"FILE_TYPE_INVALID\" - \"GWD_PROPERTIES_INVALID\" -
+-- \"HTML5_FEATURE_UNSUPPORTED\" - \"LINKED_FILE_NOT_FOUND\" -
+-- \"MAX_FLASH_VERSION_11\" - \"MRAID_REFERENCED\" - \"NOT_SSL_COMPLIANT\"
+-- - \"ORPHANED_ASSET\" - \"PRIMARY_HTML_MISSING\" - \"SVG_INVALID\" -
+-- \"ZIP_INVALID\"
 camaWarnedValidationRules :: Lens' CreativeAssetMetadata [CreativeAssetMetadataWarnedValidationRulesItem]
 camaWarnedValidationRules
   = lens _camaWarnedValidationRules
@@ -18118,7 +18830,7 @@ instance FromJSON CreativeAssetMetadata where
         parseJSON
           = withObject "CreativeAssetMetadata"
               (\ o ->
-                 CreativeAssetMetadata <$>
+                 CreativeAssetMetadata' <$>
                    (o .:? "kind" .!=
                       "dfareporting#creativeAssetMetadata")
                      <*> (o .:? "assetIdentifier")
@@ -18127,7 +18839,7 @@ instance FromJSON CreativeAssetMetadata where
                      <*> (o .:? "detectedFeatures" .!= mempty))
 
 instance ToJSON CreativeAssetMetadata where
-        toJSON CreativeAssetMetadata{..}
+        toJSON CreativeAssetMetadata'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _camaKind),
@@ -18140,7 +18852,7 @@ instance ToJSON CreativeAssetMetadata where
 -- | Omniture Integration Settings.
 --
 -- /See:/ 'omnitureSettings' smart constructor.
-data OmnitureSettings = OmnitureSettings
+data OmnitureSettings = OmnitureSettings'
     { _osOmnitureCostDataEnabled    :: !(Maybe Bool)
     , _osOmnitureIntegrationEnabled :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -18155,7 +18867,7 @@ data OmnitureSettings = OmnitureSettings
 omnitureSettings
     :: OmnitureSettings
 omnitureSettings =
-    OmnitureSettings
+    OmnitureSettings'
     { _osOmnitureCostDataEnabled = Nothing
     , _osOmnitureIntegrationEnabled = Nothing
     }
@@ -18178,12 +18890,12 @@ instance FromJSON OmnitureSettings where
         parseJSON
           = withObject "OmnitureSettings"
               (\ o ->
-                 OmnitureSettings <$>
+                 OmnitureSettings' <$>
                    (o .:? "omnitureCostDataEnabled") <*>
                      (o .:? "omnitureIntegrationEnabled"))
 
 instance ToJSON OmnitureSettings where
-        toJSON OmnitureSettings{..}
+        toJSON OmnitureSettings'{..}
           = object
               (catMaybes
                  [("omnitureCostDataEnabled" .=) <$>
@@ -18196,7 +18908,7 @@ instance ToJSON OmnitureSettings where
 -- vs. broadband users.
 --
 -- /See:/ 'connectionType' smart constructor.
-data ConnectionType = ConnectionType
+data ConnectionType = ConnectionType'
     { _cttKind :: !Text
     , _cttName :: !(Maybe Text)
     , _cttId   :: !(Maybe (Textual Int64))
@@ -18214,7 +18926,7 @@ data ConnectionType = ConnectionType
 connectionType
     :: ConnectionType
 connectionType =
-    ConnectionType
+    ConnectionType'
     { _cttKind = "dfareporting#connectionType"
     , _cttName = Nothing
     , _cttId = Nothing
@@ -18239,13 +18951,13 @@ instance FromJSON ConnectionType where
         parseJSON
           = withObject "ConnectionType"
               (\ o ->
-                 ConnectionType <$>
+                 ConnectionType' <$>
                    (o .:? "kind" .!= "dfareporting#connectionType") <*>
                      (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON ConnectionType where
-        toJSON ConnectionType{..}
+        toJSON ConnectionType'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cttKind), ("name" .=) <$> _cttName,
@@ -18254,7 +18966,7 @@ instance ToJSON ConnectionType where
 -- | Contains properties of a package or roadblock.
 --
 -- /See:/ 'placementGroup' smart constructor.
-data PlacementGroup = PlacementGroup
+data PlacementGroup = PlacementGroup'
     { _plalPlacementStrategyId              :: !(Maybe (Textual Int64))
     , _plalSiteIdDimensionValue             :: !(Maybe DimensionValue)
     , _plalPricingSchedule                  :: !(Maybe PricingSchedule)
@@ -18341,7 +19053,7 @@ data PlacementGroup = PlacementGroup
 placementGroup
     :: PlacementGroup
 placementGroup =
-    PlacementGroup
+    PlacementGroup'
     { _plalPlacementStrategyId = Nothing
     , _plalSiteIdDimensionValue = Nothing
     , _plalPricingSchedule = Nothing
@@ -18564,7 +19276,7 @@ instance FromJSON PlacementGroup where
         parseJSON
           = withObject "PlacementGroup"
               (\ o ->
-                 PlacementGroup <$>
+                 PlacementGroup' <$>
                    (o .:? "placementStrategyId") <*>
                      (o .:? "siteIdDimensionValue")
                      <*> (o .:? "pricingSchedule")
@@ -18593,7 +19305,7 @@ instance FromJSON PlacementGroup where
                      <*> (o .:? "archived"))
 
 instance ToJSON PlacementGroup where
-        toJSON PlacementGroup{..}
+        toJSON PlacementGroup'{..}
           = object
               (catMaybes
                  [("placementStrategyId" .=) <$>
@@ -18634,7 +19346,7 @@ instance ToJSON PlacementGroup where
 -- | Contains properties of an event tag.
 --
 -- /See:/ 'eventTag' smart constructor.
-data EventTag = EventTag
+data EventTag = EventTag'
     { _etStatus                     :: !(Maybe EventTagStatus)
     , _etExcludeFromAdxRequests     :: !(Maybe Bool)
     , _etEnabledByDefault           :: !(Maybe Bool)
@@ -18697,7 +19409,7 @@ data EventTag = EventTag
 eventTag
     :: EventTag
 eventTag =
-    EventTag
+    EventTag'
     { _etStatus = Nothing
     , _etExcludeFromAdxRequests = Nothing
     , _etEnabledByDefault = Nothing
@@ -18846,7 +19558,7 @@ instance FromJSON EventTag where
         parseJSON
           = withObject "EventTag"
               (\ o ->
-                 EventTag <$>
+                 EventTag' <$>
                    (o .:? "status") <*> (o .:? "excludeFromAdxRequests")
                      <*> (o .:? "enabledByDefault")
                      <*> (o .:? "kind" .!= "dfareporting#eventTag")
@@ -18866,7 +19578,7 @@ instance FromJSON EventTag where
                      <*> (o .:? "siteFilterType"))
 
 instance ToJSON EventTag where
-        toJSON EventTag{..}
+        toJSON EventTag'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _etStatus,
@@ -18893,7 +19605,7 @@ instance ToJSON EventTag where
 -- | Contains properties of a user role permission.
 --
 -- /See:/ 'userRolePermission' smart constructor.
-data UserRolePermission = UserRolePermission
+data UserRolePermission = UserRolePermission'
     { _useKind              :: !Text
     , _useAvailability      :: !(Maybe UserRolePermissionAvailability)
     , _useName              :: !(Maybe Text)
@@ -18917,7 +19629,7 @@ data UserRolePermission = UserRolePermission
 userRolePermission
     :: UserRolePermission
 userRolePermission =
-    UserRolePermission
+    UserRolePermission'
     { _useKind = "dfareporting#userRolePermission"
     , _useAvailability = Nothing
     , _useName = Nothing
@@ -18957,7 +19669,7 @@ instance FromJSON UserRolePermission where
         parseJSON
           = withObject "UserRolePermission"
               (\ o ->
-                 UserRolePermission <$>
+                 UserRolePermission' <$>
                    (o .:? "kind" .!= "dfareporting#userRolePermission")
                      <*> (o .:? "availability")
                      <*> (o .:? "name")
@@ -18965,7 +19677,7 @@ instance FromJSON UserRolePermission where
                      <*> (o .:? "permissionGroupId"))
 
 instance ToJSON UserRolePermission where
-        toJSON UserRolePermission{..}
+        toJSON UserRolePermission'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _useKind),
@@ -18976,7 +19688,7 @@ instance ToJSON UserRolePermission where
 -- | Contact of an order.
 --
 -- /See:/ 'orderContact' smart constructor.
-data OrderContact = OrderContact
+data OrderContact = OrderContact'
     { _ocSignatureUserProFileId :: !(Maybe (Textual Int64))
     , _ocContactName            :: !(Maybe Text)
     , _ocContactTitle           :: !(Maybe Text)
@@ -19000,7 +19712,7 @@ data OrderContact = OrderContact
 orderContact
     :: OrderContact
 orderContact =
-    OrderContact
+    OrderContact'
     { _ocSignatureUserProFileId = Nothing
     , _ocContactName = Nothing
     , _ocContactTitle = Nothing
@@ -19046,7 +19758,7 @@ instance FromJSON OrderContact where
         parseJSON
           = withObject "OrderContact"
               (\ o ->
-                 OrderContact <$>
+                 OrderContact' <$>
                    (o .:? "signatureUserProfileId") <*>
                      (o .:? "contactName")
                      <*> (o .:? "contactTitle")
@@ -19054,7 +19766,7 @@ instance FromJSON OrderContact where
                      <*> (o .:? "contactInfo"))
 
 instance ToJSON OrderContact where
-        toJSON OrderContact{..}
+        toJSON OrderContact'{..}
           = object
               (catMaybes
                  [("signatureUserProfileId" .=) <$>
@@ -19067,7 +19779,7 @@ instance ToJSON OrderContact where
 -- | Floodlight Activity GenerateTag Response
 --
 -- /See:/ 'floodlightActivitiesGenerateTagResponse' smart constructor.
-data FloodlightActivitiesGenerateTagResponse = FloodlightActivitiesGenerateTagResponse
+data FloodlightActivitiesGenerateTagResponse = FloodlightActivitiesGenerateTagResponse'
     { _fagtrFloodlightActivityTag :: !(Maybe Text)
     , _fagtrKind                  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -19082,7 +19794,7 @@ data FloodlightActivitiesGenerateTagResponse = FloodlightActivitiesGenerateTagRe
 floodlightActivitiesGenerateTagResponse
     :: FloodlightActivitiesGenerateTagResponse
 floodlightActivitiesGenerateTagResponse =
-    FloodlightActivitiesGenerateTagResponse
+    FloodlightActivitiesGenerateTagResponse'
     { _fagtrFloodlightActivityTag = Nothing
     , _fagtrKind = "dfareporting#floodlightActivitiesGenerateTagResponse"
     }
@@ -19105,14 +19817,14 @@ instance FromJSON
           = withObject
               "FloodlightActivitiesGenerateTagResponse"
               (\ o ->
-                 FloodlightActivitiesGenerateTagResponse <$>
+                 FloodlightActivitiesGenerateTagResponse' <$>
                    (o .:? "floodlightActivityTag") <*>
                      (o .:? "kind" .!=
                         "dfareporting#floodlightActivitiesGenerateTagResponse"))
 
 instance ToJSON
          FloodlightActivitiesGenerateTagResponse where
-        toJSON FloodlightActivitiesGenerateTagResponse{..}
+        toJSON FloodlightActivitiesGenerateTagResponse'{..}
           = object
               (catMaybes
                  [("floodlightActivityTag" .=) <$>
@@ -19122,7 +19834,7 @@ instance ToJSON
 -- | Directory Site Contact Assignment
 --
 -- /See:/ 'directorySiteContactAssignment' smart constructor.
-data DirectorySiteContactAssignment = DirectorySiteContactAssignment
+data DirectorySiteContactAssignment = DirectorySiteContactAssignment'
     { _dscaVisibility :: !(Maybe DirectorySiteContactAssignmentVisibility)
     , _dscaContactId  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -19137,7 +19849,7 @@ data DirectorySiteContactAssignment = DirectorySiteContactAssignment
 directorySiteContactAssignment
     :: DirectorySiteContactAssignment
 directorySiteContactAssignment =
-    DirectorySiteContactAssignment
+    DirectorySiteContactAssignment'
     { _dscaVisibility = Nothing
     , _dscaContactId = Nothing
     }
@@ -19163,11 +19875,11 @@ instance FromJSON DirectorySiteContactAssignment
         parseJSON
           = withObject "DirectorySiteContactAssignment"
               (\ o ->
-                 DirectorySiteContactAssignment <$>
+                 DirectorySiteContactAssignment' <$>
                    (o .:? "visibility") <*> (o .:? "contactId"))
 
 instance ToJSON DirectorySiteContactAssignment where
-        toJSON DirectorySiteContactAssignment{..}
+        toJSON DirectorySiteContactAssignment'{..}
           = object
               (catMaybes
                  [("visibility" .=) <$> _dscaVisibility,
@@ -19176,7 +19888,7 @@ instance ToJSON DirectorySiteContactAssignment where
 -- | Ad Slot
 --
 -- /See:/ 'adSlot' smart constructor.
-data AdSlot = AdSlot
+data AdSlot = AdSlot'
     { _assHeight            :: !(Maybe (Textual Int64))
     , _assPaymentSourceType :: !(Maybe AdSlotPaymentSourceType)
     , _assLinkedPlacementId :: !(Maybe (Textual Int64))
@@ -19209,7 +19921,7 @@ data AdSlot = AdSlot
 adSlot
     :: AdSlot
 adSlot =
-    AdSlot
+    AdSlot'
     { _assHeight = Nothing
     , _assPaymentSourceType = Nothing
     , _assLinkedPlacementId = Nothing
@@ -19260,11 +19972,11 @@ assComment :: Lens' AdSlot (Maybe Text)
 assComment
   = lens _assComment (\ s a -> s{_assComment = a})
 
--- | Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering
--- either on desktop or on mobile devices for regular or interstitial ads
--- respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.
--- IN_STREAM_VIDEO refers to rendering in in-stream video ads developed
--- with the VAST standard.
+-- | Ad slot compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
+-- rendering either on desktop, mobile devices or in mobile apps for
+-- regular or interstitial ads respectively. APP and APP_INTERSTITIAL are
+-- for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in
+-- in-stream video ads developed with the VAST standard.
 assCompatibility :: Lens' AdSlot (Maybe AdSlotCompatibility)
 assCompatibility
   = lens _assCompatibility
@@ -19274,7 +19986,7 @@ instance FromJSON AdSlot where
         parseJSON
           = withObject "AdSlot"
               (\ o ->
-                 AdSlot <$>
+                 AdSlot' <$>
                    (o .:? "height") <*> (o .:? "paymentSourceType") <*>
                      (o .:? "linkedPlacementId")
                      <*> (o .:? "width")
@@ -19284,7 +19996,7 @@ instance FromJSON AdSlot where
                      <*> (o .:? "compatibility"))
 
 instance ToJSON AdSlot where
-        toJSON AdSlot{..}
+        toJSON AdSlot'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _assHeight,
@@ -19299,7 +20011,7 @@ instance ToJSON AdSlot where
 -- | Third-party Tracking URL.
 --
 -- /See:/ 'thirdPartyTrackingURL' smart constructor.
-data ThirdPartyTrackingURL = ThirdPartyTrackingURL
+data ThirdPartyTrackingURL = ThirdPartyTrackingURL'
     { _tptuURL               :: !(Maybe Text)
     , _tptuThirdPartyURLType :: !(Maybe ThirdPartyTrackingURLThirdPartyURLType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -19314,7 +20026,7 @@ data ThirdPartyTrackingURL = ThirdPartyTrackingURL
 thirdPartyTrackingURL
     :: ThirdPartyTrackingURL
 thirdPartyTrackingURL =
-    ThirdPartyTrackingURL
+    ThirdPartyTrackingURL'
     { _tptuURL = Nothing
     , _tptuThirdPartyURLType = Nothing
     }
@@ -19333,11 +20045,11 @@ instance FromJSON ThirdPartyTrackingURL where
         parseJSON
           = withObject "ThirdPartyTrackingURL"
               (\ o ->
-                 ThirdPartyTrackingURL <$>
+                 ThirdPartyTrackingURL' <$>
                    (o .:? "url") <*> (o .:? "thirdPartyUrlType"))
 
 instance ToJSON ThirdPartyTrackingURL where
-        toJSON ThirdPartyTrackingURL{..}
+        toJSON ThirdPartyTrackingURL'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _tptuURL,
@@ -19346,7 +20058,7 @@ instance ToJSON ThirdPartyTrackingURL where
 -- | Contains properties of a DoubleClick Planning order document.
 --
 -- /See:/ 'orderDocument' smart constructor.
-data OrderDocument = OrderDocument
+data OrderDocument = OrderDocument'
     { _odSigned                   :: !(Maybe Bool)
     , _odKind                     :: !Text
     , _odAdvertiserId             :: !(Maybe (Textual Int64))
@@ -19406,7 +20118,7 @@ data OrderDocument = OrderDocument
 orderDocument
     :: OrderDocument
 orderDocument =
-    OrderDocument
+    OrderDocument'
     { _odSigned = Nothing
     , _odKind = "dfareporting#orderDocument"
     , _odAdvertiserId = Nothing
@@ -19535,7 +20247,7 @@ instance FromJSON OrderDocument where
         parseJSON
           = withObject "OrderDocument"
               (\ o ->
-                 OrderDocument <$>
+                 OrderDocument' <$>
                    (o .:? "signed") <*>
                      (o .:? "kind" .!= "dfareporting#orderDocument")
                      <*> (o .:? "advertiserId")
@@ -19555,7 +20267,7 @@ instance FromJSON OrderDocument where
                      <*> (o .:? "createdInfo"))
 
 instance ToJSON OrderDocument where
-        toJSON OrderDocument{..}
+        toJSON OrderDocument'{..}
           = object
               (catMaybes
                  [("signed" .=) <$> _odSigned,
@@ -19581,7 +20293,7 @@ instance ToJSON OrderDocument where
 -- | Contains information about a metro region that can be targeted by ads.
 --
 -- /See:/ 'metro' smart constructor.
-data Metro = Metro
+data Metro = Metro'
     { _metMetroCode     :: !(Maybe Text)
     , _metKind          :: !Text
     , _metName          :: !(Maybe Text)
@@ -19611,7 +20323,7 @@ data Metro = Metro
 metro
     :: Metro
 metro =
-    Metro
+    Metro'
     { _metMetroCode = Nothing
     , _metKind = "dfareporting#metro"
     , _metName = Nothing
@@ -19665,7 +20377,7 @@ instance FromJSON Metro where
         parseJSON
           = withObject "Metro"
               (\ o ->
-                 Metro <$>
+                 Metro' <$>
                    (o .:? "metroCode") <*>
                      (o .:? "kind" .!= "dfareporting#metro")
                      <*> (o .:? "name")
@@ -19675,7 +20387,7 @@ instance FromJSON Metro where
                      <*> (o .:? "dartId"))
 
 instance ToJSON Metro where
-        toJSON Metro{..}
+        toJSON Metro'{..}
           = object
               (catMaybes
                  [("metroCode" .=) <$> _metMetroCode,
@@ -19688,7 +20400,7 @@ instance ToJSON Metro where
 -- | Contains properties of a placement.
 --
 -- /See:/ 'placement' smart constructor.
-data Placement = Placement
+data Placement = Placement'
     { _p1Status                         :: !(Maybe PlacementStatus)
     , _p1PlacementStrategyId            :: !(Maybe (Textual Int64))
     , _p1TagFormats                     :: !(Maybe [PlacementTagFormatsItem])
@@ -19805,7 +20517,7 @@ data Placement = Placement
 placement
     :: Placement
 placement =
-    Placement
+    Placement'
     { _p1Status = Nothing
     , _p1PlacementStrategyId = Nothing
     , _p1TagFormats = Nothing
@@ -20064,11 +20776,13 @@ p1SiteId
   = lens _p1SiteId (\ s a -> s{_p1SiteId = a}) .
       mapping _Coerce
 
--- | Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering
--- either on desktop or on mobile devices for regular or interstitial ads,
--- respectively. APP and APP_INTERSTITIAL are for rendering in mobile
--- apps.IN_STREAM_VIDEO refers to rendering in in-stream video ads
--- developed with the VAST standard. This field is required on insertion.
+-- | Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
+-- rendering on desktop, on mobile devices or in mobile apps for regular or
+-- interstitial ads respectively. APP and APP_INTERSTITIAL are no longer
+-- allowed for new placement insertions. Instead, use DISPLAY or
+-- DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream
+-- video ads developed with the VAST standard. This field is required on
+-- insertion.
 p1Compatibility :: Lens' Placement (Maybe PlacementCompatibility)
 p1Compatibility
   = lens _p1Compatibility
@@ -20096,7 +20810,7 @@ instance FromJSON Placement where
         parseJSON
           = withObject "Placement"
               (\ o ->
-                 Placement <$>
+                 Placement' <$>
                    (o .:? "status") <*> (o .:? "placementStrategyId")
                      <*> (o .:? "tagFormats" .!= mempty)
                      <*> (o .:? "siteIdDimensionValue")
@@ -20134,7 +20848,7 @@ instance FromJSON Placement where
                      <*> (o .:? "publisherUpdateInfo"))
 
 instance ToJSON Placement where
-        toJSON Placement{..}
+        toJSON Placement'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _p1Status,
@@ -20181,10 +20895,88 @@ instance ToJSON Placement where
                   ("publisherUpdateInfo" .=) <$>
                     _p1PublisherUpdateInfo])
 
+-- | A description of how user IDs are encrypted.
+--
+-- /See:/ 'encryptionInfo' smart constructor.
+data EncryptionInfo = EncryptionInfo'
+    { _eiEncryptionSource     :: !(Maybe EncryptionInfoEncryptionSource)
+    , _eiKind                 :: !Text
+    , _eiEncryptionEntityType :: !(Maybe EncryptionInfoEncryptionEntityType)
+    , _eiEncryptionEntityId   :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EncryptionInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eiEncryptionSource'
+--
+-- * 'eiKind'
+--
+-- * 'eiEncryptionEntityType'
+--
+-- * 'eiEncryptionEntityId'
+encryptionInfo
+    :: EncryptionInfo
+encryptionInfo =
+    EncryptionInfo'
+    { _eiEncryptionSource = Nothing
+    , _eiKind = "dfareporting#encryptionInfo"
+    , _eiEncryptionEntityType = Nothing
+    , _eiEncryptionEntityId = Nothing
+    }
+
+-- | Describes whether the encrypted cookie was received from ad serving (the
+-- %m macro) or from Data Transfer.
+eiEncryptionSource :: Lens' EncryptionInfo (Maybe EncryptionInfoEncryptionSource)
+eiEncryptionSource
+  = lens _eiEncryptionSource
+      (\ s a -> s{_eiEncryptionSource = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#encryptionInfo\".
+eiKind :: Lens' EncryptionInfo Text
+eiKind = lens _eiKind (\ s a -> s{_eiKind = a})
+
+-- | The encryption entity type. This should match the encryption
+-- configuration for ad serving or Data Transfer.
+eiEncryptionEntityType :: Lens' EncryptionInfo (Maybe EncryptionInfoEncryptionEntityType)
+eiEncryptionEntityType
+  = lens _eiEncryptionEntityType
+      (\ s a -> s{_eiEncryptionEntityType = a})
+
+-- | The encryption entity ID. This should match the encryption configuration
+-- for ad serving or Data Transfer.
+eiEncryptionEntityId :: Lens' EncryptionInfo (Maybe Int64)
+eiEncryptionEntityId
+  = lens _eiEncryptionEntityId
+      (\ s a -> s{_eiEncryptionEntityId = a})
+      . mapping _Coerce
+
+instance FromJSON EncryptionInfo where
+        parseJSON
+          = withObject "EncryptionInfo"
+              (\ o ->
+                 EncryptionInfo' <$>
+                   (o .:? "encryptionSource") <*>
+                     (o .:? "kind" .!= "dfareporting#encryptionInfo")
+                     <*> (o .:? "encryptionEntityType")
+                     <*> (o .:? "encryptionEntityId"))
+
+instance ToJSON EncryptionInfo where
+        toJSON EncryptionInfo'{..}
+          = object
+              (catMaybes
+                 [("encryptionSource" .=) <$> _eiEncryptionSource,
+                  Just ("kind" .= _eiKind),
+                  ("encryptionEntityType" .=) <$>
+                    _eiEncryptionEntityType,
+                  ("encryptionEntityId" .=) <$> _eiEncryptionEntityId])
+
 -- | Site List Response
 --
 -- /See:/ 'sitesListResponse' smart constructor.
-data SitesListResponse = SitesListResponse
+data SitesListResponse = SitesListResponse'
     { _sitNextPageToken :: !(Maybe Text)
     , _sitKind          :: !Text
     , _sitSites         :: !(Maybe [Site])
@@ -20202,7 +20994,7 @@ data SitesListResponse = SitesListResponse
 sitesListResponse
     :: SitesListResponse
 sitesListResponse =
-    SitesListResponse
+    SitesListResponse'
     { _sitNextPageToken = Nothing
     , _sitKind = "dfareporting#sitesListResponse"
     , _sitSites = Nothing
@@ -20230,13 +21022,13 @@ instance FromJSON SitesListResponse where
         parseJSON
           = withObject "SitesListResponse"
               (\ o ->
-                 SitesListResponse <$>
+                 SitesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "dfareporting#sitesListResponse")
                      <*> (o .:? "sites" .!= mempty))
 
 instance ToJSON SitesListResponse where
-        toJSON SitesListResponse{..}
+        toJSON SitesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _sitNextPageToken,
@@ -20246,7 +21038,7 @@ instance ToJSON SitesListResponse where
 -- | Contains properties of a creative field.
 --
 -- /See:/ 'creativeField' smart constructor.
-data CreativeField = CreativeField
+data CreativeField = CreativeField'
     { _cffKind                       :: !Text
     , _cffAdvertiserId               :: !(Maybe (Textual Int64))
     , _cffAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
@@ -20276,7 +21068,7 @@ data CreativeField = CreativeField
 creativeField
     :: CreativeField
 creativeField =
-    CreativeField
+    CreativeField'
     { _cffKind = "dfareporting#creativeField"
     , _cffAdvertiserId = Nothing
     , _cffAdvertiserIdDimensionValue = Nothing
@@ -20337,7 +21129,7 @@ instance FromJSON CreativeField where
         parseJSON
           = withObject "CreativeField"
               (\ o ->
-                 CreativeField <$>
+                 CreativeField' <$>
                    (o .:? "kind" .!= "dfareporting#creativeField") <*>
                      (o .:? "advertiserId")
                      <*> (o .:? "advertiserIdDimensionValue")
@@ -20347,7 +21139,7 @@ instance FromJSON CreativeField where
                      <*> (o .:? "subaccountId"))
 
 instance ToJSON CreativeField where
-        toJSON CreativeField{..}
+        toJSON CreativeField'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cffKind),
@@ -20363,7 +21155,7 @@ instance ToJSON CreativeField where
 -- level, and an ad may also override the campaign\'s setting further.
 --
 -- /See:/ 'defaultClickThroughEventTagProperties' smart constructor.
-data DefaultClickThroughEventTagProperties = DefaultClickThroughEventTagProperties
+data DefaultClickThroughEventTagProperties = DefaultClickThroughEventTagProperties'
     { _dctetpOverrideInheritedEventTag     :: !(Maybe Bool)
     , _dctetpDefaultClickThroughEventTagId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -20378,7 +21170,7 @@ data DefaultClickThroughEventTagProperties = DefaultClickThroughEventTagProperti
 defaultClickThroughEventTagProperties
     :: DefaultClickThroughEventTagProperties
 defaultClickThroughEventTagProperties =
-    DefaultClickThroughEventTagProperties
+    DefaultClickThroughEventTagProperties'
     { _dctetpOverrideInheritedEventTag = Nothing
     , _dctetpDefaultClickThroughEventTagId = Nothing
     }
@@ -20404,13 +21196,13 @@ instance FromJSON
         parseJSON
           = withObject "DefaultClickThroughEventTagProperties"
               (\ o ->
-                 DefaultClickThroughEventTagProperties <$>
+                 DefaultClickThroughEventTagProperties' <$>
                    (o .:? "overrideInheritedEventTag") <*>
                      (o .:? "defaultClickThroughEventTagId"))
 
 instance ToJSON DefaultClickThroughEventTagProperties
          where
-        toJSON DefaultClickThroughEventTagProperties{..}
+        toJSON DefaultClickThroughEventTagProperties'{..}
           = object
               (catMaybes
                  [("overrideInheritedEventTag" .=) <$>
@@ -20421,7 +21213,7 @@ instance ToJSON DefaultClickThroughEventTagProperties
 -- | Remarketing List Targeting Expression.
 --
 -- /See:/ 'listTargetingExpression' smart constructor.
-newtype ListTargetingExpression = ListTargetingExpression
+newtype ListTargetingExpression = ListTargetingExpression'
     { _lteExpression :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -20433,7 +21225,7 @@ newtype ListTargetingExpression = ListTargetingExpression
 listTargetingExpression
     :: ListTargetingExpression
 listTargetingExpression =
-    ListTargetingExpression
+    ListTargetingExpression'
     { _lteExpression = Nothing
     }
 
@@ -20447,9 +21239,9 @@ instance FromJSON ListTargetingExpression where
         parseJSON
           = withObject "ListTargetingExpression"
               (\ o ->
-                 ListTargetingExpression <$> (o .:? "expression"))
+                 ListTargetingExpression' <$> (o .:? "expression"))
 
 instance ToJSON ListTargetingExpression where
-        toJSON ListTargetingExpression{..}
+        toJSON ListTargetingExpression'{..}
           = object
               (catMaybes [("expression" .=) <$> _lteExpression])

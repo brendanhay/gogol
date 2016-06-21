@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Databases.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type DatabasesUpdateResource =
 -- Cloud SQL instance.
 --
 -- /See:/ 'databasesUpdate' smart constructor.
-data DatabasesUpdate = DatabasesUpdate
+data DatabasesUpdate = DatabasesUpdate'
     { _duProject  :: !Text
     , _duDatabase :: !Text
     , _duPayload  :: !Database
@@ -86,7 +86,7 @@ databasesUpdate
     -> Text -- ^ 'duInstance'
     -> DatabasesUpdate
 databasesUpdate pDuProject_ pDuDatabase_ pDuPayload_ pDuInstance_ =
-    DatabasesUpdate
+    DatabasesUpdate'
     { _duProject = pDuProject_
     , _duDatabase = pDuDatabase_
     , _duPayload = pDuPayload_
@@ -115,7 +115,10 @@ duInstance
 
 instance GoogleRequest DatabasesUpdate where
         type Rs DatabasesUpdate = Operation
-        requestClient DatabasesUpdate{..}
+        type Scopes DatabasesUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient DatabasesUpdate'{..}
           = go _duProject _duInstance _duDatabase
               (Just AltJSON)
               _duPayload

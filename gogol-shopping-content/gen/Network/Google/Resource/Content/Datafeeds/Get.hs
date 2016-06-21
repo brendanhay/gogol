@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Datafeeds.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type DatafeedsGetResource =
 -- | Retrieves a datafeed from your Merchant Center account.
 --
 -- /See:/ 'datafeedsGet' smart constructor.
-data DatafeedsGet = DatafeedsGet
+data DatafeedsGet = DatafeedsGet'
     { _dgMerchantId :: !(Textual Word64)
     , _dgDatafeedId :: !(Textual Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ datafeedsGet
     -> Word64 -- ^ 'dgDatafeedId'
     -> DatafeedsGet
 datafeedsGet pDgMerchantId_ pDgDatafeedId_ =
-    DatafeedsGet
+    DatafeedsGet'
     { _dgMerchantId = _Coerce # pDgMerchantId_
     , _dgDatafeedId = _Coerce # pDgDatafeedId_
     }
@@ -87,7 +87,9 @@ dgDatafeedId
 
 instance GoogleRequest DatafeedsGet where
         type Rs DatafeedsGet = Datafeed
-        requestClient DatafeedsGet{..}
+        type Scopes DatafeedsGet =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient DatafeedsGet'{..}
           = go _dgMerchantId _dgDatafeedId (Just AltJSON)
               shoppingContentService
           where go

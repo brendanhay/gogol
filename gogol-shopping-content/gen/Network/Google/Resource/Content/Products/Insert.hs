@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Products.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ProductsInsertResource =
 -- | Uploads a product to your Merchant Center account.
 --
 -- /See:/ 'productsInsert' smart constructor.
-data ProductsInsert = ProductsInsert
+data ProductsInsert = ProductsInsert'
     { _piMerchantId :: !(Textual Word64)
     , _piPayload    :: !Product
     , _piDryRun     :: !(Maybe Bool)
@@ -75,7 +75,7 @@ productsInsert
     -> Product -- ^ 'piPayload'
     -> ProductsInsert
 productsInsert pPiMerchantId_ pPiPayload_ =
-    ProductsInsert
+    ProductsInsert'
     { _piMerchantId = _Coerce # pPiMerchantId_
     , _piPayload = pPiPayload_
     , _piDryRun = Nothing
@@ -98,7 +98,9 @@ piDryRun = lens _piDryRun (\ s a -> s{_piDryRun = a})
 
 instance GoogleRequest ProductsInsert where
         type Rs ProductsInsert = Product
-        requestClient ProductsInsert{..}
+        type Scopes ProductsInsert =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient ProductsInsert'{..}
           = go _piMerchantId _piDryRun (Just AltJSON)
               _piPayload
               shoppingContentService

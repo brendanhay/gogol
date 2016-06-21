@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.URLShortener.URL.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type URLListResource =
 -- | Retrieves a list of URLs shortened by a user.
 --
 -- /See:/ 'urlList' smart constructor.
-data URLList = URLList
+data URLList = URLList'
     { _ulStartToken :: !(Maybe Text)
     , _ulProjection :: !(Maybe URLListProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ data URLList = URLList
 urlList
     :: URLList
 urlList =
-    URLList
+    URLList'
     { _ulStartToken = Nothing
     , _ulProjection = Nothing
     }
@@ -86,7 +86,9 @@ ulProjection
 
 instance GoogleRequest URLList where
         type Rs URLList = URLHistory
-        requestClient URLList{..}
+        type Scopes URLList =
+             '["https://www.googleapis.com/auth/urlshortener"]
+        requestClient URLList'{..}
           = go _ulStartToken _ulProjection (Just AltJSON)
               uRLShortenerService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Notification.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type NotificationGetResource =
 -- | Returns notification details for a given notification id.
 --
 -- /See:/ 'notificationGet' smart constructor.
-data NotificationGet = NotificationGet
+data NotificationGet = NotificationGet'
     { _ngLocale         :: !(Maybe Text)
     , _ngNotificationId :: !Text
     , _ngSource         :: !(Maybe Text)
@@ -75,7 +75,7 @@ notificationGet
     :: Text -- ^ 'ngNotificationId'
     -> NotificationGet
 notificationGet pNgNotificationId_ =
-    NotificationGet
+    NotificationGet'
     { _ngLocale = Nothing
     , _ngNotificationId = pNgNotificationId_
     , _ngSource = Nothing
@@ -98,7 +98,9 @@ ngSource = lens _ngSource (\ s a -> s{_ngSource = a})
 
 instance GoogleRequest NotificationGet where
         type Rs NotificationGet = Notification
-        requestClient NotificationGet{..}
+        type Scopes NotificationGet =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient NotificationGet'{..}
           = go (Just _ngNotificationId) _ngLocale _ngSource
               (Just AltJSON)
               booksService

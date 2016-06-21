@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Filters.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ManagementFiltersInsertResource =
 -- | Create a new filter.
 --
 -- /See:/ 'managementFiltersInsert' smart constructor.
-data ManagementFiltersInsert = ManagementFiltersInsert
+data ManagementFiltersInsert = ManagementFiltersInsert'
     { _mfiPayload   :: !Filter
     , _mfiAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ managementFiltersInsert
     -> Text -- ^ 'mfiAccountId'
     -> ManagementFiltersInsert
 managementFiltersInsert pMfiPayload_ pMfiAccountId_ =
-    ManagementFiltersInsert
+    ManagementFiltersInsert'
     { _mfiPayload = pMfiPayload_
     , _mfiAccountId = pMfiAccountId_
     }
@@ -89,7 +89,9 @@ mfiAccountId
 
 instance GoogleRequest ManagementFiltersInsert where
         type Rs ManagementFiltersInsert = Filter
-        requestClient ManagementFiltersInsert{..}
+        type Scopes ManagementFiltersInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementFiltersInsert'{..}
           = go _mfiAccountId (Just AltJSON) _mfiPayload
               analyticsService
           where go

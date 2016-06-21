@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.People.ListByCircle
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type PeopleListByCircleResource =
 -- | List all of the people who are members of a circle.
 --
 -- /See:/ 'peopleListByCircle' smart constructor.
-data PeopleListByCircle = PeopleListByCircle
+data PeopleListByCircle = PeopleListByCircle'
     { _plbcCircleId   :: !Text
     , _plbcPageToken  :: !(Maybe Text)
     , _plbcMaxResults :: !(Textual Word32)
@@ -75,7 +75,7 @@ peopleListByCircle
     :: Text -- ^ 'plbcCircleId'
     -> PeopleListByCircle
 peopleListByCircle pPlbcCircleId_ =
-    PeopleListByCircle
+    PeopleListByCircle'
     { _plbcCircleId = pPlbcCircleId_
     , _plbcPageToken = Nothing
     , _plbcMaxResults = 20
@@ -105,7 +105,10 @@ plbcMaxResults
 
 instance GoogleRequest PeopleListByCircle where
         type Rs PeopleListByCircle = PeopleFeed
-        requestClient PeopleListByCircle{..}
+        type Scopes PeopleListByCircle =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient PeopleListByCircle'{..}
           = go _plbcCircleId _plbcPageToken
               (Just _plbcMaxResults)
               (Just AltJSON)

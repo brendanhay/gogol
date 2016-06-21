@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type EditsAPKListingsDeleteallResource =
 -- | Deletes all the APK-specific localized listings for a specified APK.
 --
 -- /See:/ 'editsAPKListingsDeleteall' smart constructor.
-data EditsAPKListingsDeleteall = EditsAPKListingsDeleteall
+data EditsAPKListingsDeleteall = EditsAPKListingsDeleteall'
     { _eapkldaPackageName    :: !Text
     , _eapkldaAPKVersionCode :: !(Textual Int32)
     , _eapkldaEditId         :: !Text
@@ -79,7 +79,7 @@ editsAPKListingsDeleteall
     -> Text -- ^ 'eapkldaEditId'
     -> EditsAPKListingsDeleteall
 editsAPKListingsDeleteall pEapkldaPackageName_ pEapkldaAPKVersionCode_ pEapkldaEditId_ =
-    EditsAPKListingsDeleteall
+    EditsAPKListingsDeleteall'
     { _eapkldaPackageName = pEapkldaPackageName_
     , _eapkldaAPKVersionCode = _Coerce # pEapkldaAPKVersionCode_
     , _eapkldaEditId = pEapkldaEditId_
@@ -109,7 +109,9 @@ eapkldaEditId
 instance GoogleRequest EditsAPKListingsDeleteall
          where
         type Rs EditsAPKListingsDeleteall = ()
-        requestClient EditsAPKListingsDeleteall{..}
+        type Scopes EditsAPKListingsDeleteall =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsAPKListingsDeleteall'{..}
           = go _eapkldaPackageName _eapkldaEditId
               _eapkldaAPKVersionCode
               (Just AltJSON)

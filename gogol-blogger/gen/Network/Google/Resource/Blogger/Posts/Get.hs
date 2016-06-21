@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Posts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type PostsGetResource =
 -- | Get a post by ID.
 --
 -- /See:/ 'postsGet' smart constructor.
-data PostsGet = PostsGet
+data PostsGet = PostsGet'
     { _pggFetchBody   :: !Bool
     , _pggFetchImages :: !(Maybe Bool)
     , _pggBlogId      :: !Text
@@ -91,7 +91,7 @@ postsGet
     -> Text -- ^ 'pggPostId'
     -> PostsGet
 postsGet pPggBlogId_ pPggPostId_ =
-    PostsGet
+    PostsGet'
     { _pggFetchBody = True
     , _pggFetchImages = Nothing
     , _pggBlogId = pPggBlogId_
@@ -137,7 +137,10 @@ pggPostId
 
 instance GoogleRequest PostsGet where
         type Rs PostsGet = Post'
-        requestClient PostsGet{..}
+        type Scopes PostsGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient PostsGet'{..}
           = go _pggBlogId _pggPostId (Just _pggFetchBody)
               _pggFetchImages
               _pggMaxComments

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DNS.ManagedZones.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ManagedZonesDeleteResource =
 -- | Delete a previously created ManagedZone.
 --
 -- /See:/ 'managedZonesDelete' smart constructor.
-data ManagedZonesDelete = ManagedZonesDelete
+data ManagedZonesDelete = ManagedZonesDelete'
     { _mzdProject     :: !Text
     , _mzdManagedZone :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ managedZonesDelete
     -> Text -- ^ 'mzdManagedZone'
     -> ManagedZonesDelete
 managedZonesDelete pMzdProject_ pMzdManagedZone_ =
-    ManagedZonesDelete
+    ManagedZonesDelete'
     { _mzdProject = pMzdProject_
     , _mzdManagedZone = pMzdManagedZone_
     }
@@ -90,7 +90,10 @@ mzdManagedZone
 
 instance GoogleRequest ManagedZonesDelete where
         type Rs ManagedZonesDelete = ()
-        requestClient ManagedZonesDelete{..}
+        type Scopes ManagedZonesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
+        requestClient ManagedZonesDelete'{..}
           = go _mzdProject _mzdManagedZone (Just AltJSON)
               dNSService
           where go

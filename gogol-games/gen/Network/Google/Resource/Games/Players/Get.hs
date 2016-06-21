@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Players.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -34,6 +34,7 @@ module Network.Google.Resource.Games.Players.Get
     , PlayersGet
 
     -- * Request Lenses
+    , pgConsistencyToken
     , pgLanguage
     , pgPlayerId
     ) where
@@ -48,21 +49,25 @@ type PlayersGetResource =
        "v1" :>
          "players" :>
            Capture "playerId" Text :>
-             QueryParam "language" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Player
+             QueryParam "consistencyToken" (Textual Int64) :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Player
 
 -- | Retrieves the Player resource with the given ID. To retrieve the player
 -- for the currently authenticated user, set playerId to me.
 --
 -- /See:/ 'playersGet' smart constructor.
-data PlayersGet = PlayersGet
-    { _pgLanguage :: !(Maybe Text)
-    , _pgPlayerId :: !Text
+data PlayersGet = PlayersGet'
+    { _pgConsistencyToken :: !(Maybe (Textual Int64))
+    , _pgLanguage         :: !(Maybe Text)
+    , _pgPlayerId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pgConsistencyToken'
 --
 -- * 'pgLanguage'
 --
@@ -71,10 +76,18 @@ playersGet
     :: Text -- ^ 'pgPlayerId'
     -> PlayersGet
 playersGet pPgPlayerId_ =
-    PlayersGet
-    { _pgLanguage = Nothing
+    PlayersGet'
+    { _pgConsistencyToken = Nothing
+    , _pgLanguage = Nothing
     , _pgPlayerId = pPgPlayerId_
     }
+
+-- | The last-seen mutation timestamp.
+pgConsistencyToken :: Lens' PlayersGet (Maybe Int64)
+pgConsistencyToken
+  = lens _pgConsistencyToken
+      (\ s a -> s{_pgConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 pgLanguage :: Lens' PlayersGet (Maybe Text)
@@ -89,8 +102,12 @@ pgPlayerId
 
 instance GoogleRequest PlayersGet where
         type Rs PlayersGet = Player
-        requestClient PlayersGet{..}
-          = go _pgPlayerId _pgLanguage (Just AltJSON)
+        type Scopes PlayersGet =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient PlayersGet'{..}
+          = go _pgPlayerId _pgConsistencyToken _pgLanguage
+              (Just AltJSON)
               gamesService
           where go
                   = buildClient (Proxy :: Proxy PlayersGetResource)

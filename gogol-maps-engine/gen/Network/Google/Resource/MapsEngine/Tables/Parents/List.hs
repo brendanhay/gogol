@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Parents.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type TablesParentsListResource =
 -- | Return all parent ids of the specified table.
 --
 -- /See:/ 'tablesParentsList' smart constructor.
-data TablesParentsList = TablesParentsList
+data TablesParentsList = TablesParentsList'
     { _tId         :: !Text
     , _tPageToken  :: !(Maybe Text)
     , _tMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ tablesParentsList
     :: Text -- ^ 'tId'
     -> TablesParentsList
 tablesParentsList pTId_ =
-    TablesParentsList
+    TablesParentsList'
     { _tId = pTId_
     , _tPageToken = Nothing
     , _tMaxResults = Nothing
@@ -102,7 +102,10 @@ tMaxResults
 
 instance GoogleRequest TablesParentsList where
         type Rs TablesParentsList = ParentsListResponse
-        requestClient TablesParentsList{..}
+        type Scopes TablesParentsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient TablesParentsList'{..}
           = go _tId _tPageToken _tMaxResults (Just AltJSON)
               mapsEngineService
           where go

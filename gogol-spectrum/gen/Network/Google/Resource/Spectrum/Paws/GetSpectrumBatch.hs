@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type PawsGetSpectrumBatchResource =
 -- method always yields an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsGetSpectrumBatch' smart constructor.
-newtype PawsGetSpectrumBatch = PawsGetSpectrumBatch
+newtype PawsGetSpectrumBatch = PawsGetSpectrumBatch'
     { _pgsbPayload :: PawsGetSpectrumBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ pawsGetSpectrumBatch
     :: PawsGetSpectrumBatchRequest -- ^ 'pgsbPayload'
     -> PawsGetSpectrumBatch
 pawsGetSpectrumBatch pPgsbPayload_ =
-    PawsGetSpectrumBatch
+    PawsGetSpectrumBatch'
     { _pgsbPayload = pPgsbPayload_
     }
 
@@ -80,7 +80,8 @@ pgsbPayload
 instance GoogleRequest PawsGetSpectrumBatch where
         type Rs PawsGetSpectrumBatch =
              PawsGetSpectrumBatchResponse
-        requestClient PawsGetSpectrumBatch{..}
+        type Scopes PawsGetSpectrumBatch = '[]
+        requestClient PawsGetSpectrumBatch'{..}
           = go (Just AltJSON) _pgsbPayload spectrumService
           where go
                   = buildClient

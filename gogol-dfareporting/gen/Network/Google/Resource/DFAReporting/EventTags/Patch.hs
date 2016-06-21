@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.EventTags.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'EventTagsPatch' request conforms to.
 type EventTagsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -56,7 +56,7 @@ type EventTagsPatchResource =
 -- | Updates an existing event tag. This method supports patch semantics.
 --
 -- /See:/ 'eventTagsPatch' smart constructor.
-data EventTagsPatch = EventTagsPatch
+data EventTagsPatch = EventTagsPatch'
     { _etpProFileId :: !(Textual Int64)
     , _etpPayload   :: !EventTag
     , _etpId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ eventTagsPatch
     -> Int64 -- ^ 'etpId'
     -> EventTagsPatch
 eventTagsPatch pEtpProFileId_ pEtpPayload_ pEtpId_ =
-    EventTagsPatch
+    EventTagsPatch'
     { _etpProFileId = _Coerce # pEtpProFileId_
     , _etpPayload = pEtpPayload_
     , _etpId = _Coerce # pEtpId_
@@ -101,7 +101,9 @@ etpId
 
 instance GoogleRequest EventTagsPatch where
         type Rs EventTagsPatch = EventTag
-        requestClient EventTagsPatch{..}
+        type Scopes EventTagsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient EventTagsPatch'{..}
           = go _etpProFileId (Just _etpId) (Just AltJSON)
               _etpPayload
               dFAReportingService

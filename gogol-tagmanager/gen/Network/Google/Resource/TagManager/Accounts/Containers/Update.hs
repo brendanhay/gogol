@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type AccountsContainersUpdateResource =
 -- | Updates a Container.
 --
 -- /See:/ 'accountsContainersUpdate' smart constructor.
-data AccountsContainersUpdate = AccountsContainersUpdate
+data AccountsContainersUpdate = AccountsContainersUpdate'
     { _acuContainerId :: !Text
     , _acuFingerprint :: !(Maybe Text)
     , _acuPayload     :: !Container
@@ -82,7 +82,7 @@ accountsContainersUpdate
     -> Text -- ^ 'acuAccountId'
     -> AccountsContainersUpdate
 accountsContainersUpdate pAcuContainerId_ pAcuPayload_ pAcuAccountId_ =
-    AccountsContainersUpdate
+    AccountsContainersUpdate'
     { _acuContainerId = pAcuContainerId_
     , _acuFingerprint = Nothing
     , _acuPayload = pAcuPayload_
@@ -114,7 +114,9 @@ acuAccountId
 
 instance GoogleRequest AccountsContainersUpdate where
         type Rs AccountsContainersUpdate = Container
-        requestClient AccountsContainersUpdate{..}
+        type Scopes AccountsContainersUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient AccountsContainersUpdate'{..}
           = go _acuAccountId _acuContainerId _acuFingerprint
               (Just AltJSON)
               _acuPayload

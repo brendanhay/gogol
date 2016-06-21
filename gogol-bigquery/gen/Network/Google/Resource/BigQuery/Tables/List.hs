@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Tables.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type TablesListResource =
 -- role.
 --
 -- /See:/ 'tablesList' smart constructor.
-data TablesList = TablesList
+data TablesList = TablesList'
     { _tlDataSetId  :: !Text
     , _tlPageToken  :: !(Maybe Text)
     , _tlProjectId  :: !Text
@@ -84,7 +84,7 @@ tablesList
     -> Text -- ^ 'tlProjectId'
     -> TablesList
 tablesList pTlDataSetId_ pTlProjectId_ =
-    TablesList
+    TablesList'
     { _tlDataSetId = pTlDataSetId_
     , _tlPageToken = Nothing
     , _tlProjectId = pTlProjectId_
@@ -115,7 +115,11 @@ tlMaxResults
 
 instance GoogleRequest TablesList where
         type Rs TablesList = TableList
-        requestClient TablesList{..}
+        type Scopes TablesList =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient TablesList'{..}
           = go _tlProjectId _tlDataSetId _tlPageToken
               _tlMaxResults
               (Just AltJSON)

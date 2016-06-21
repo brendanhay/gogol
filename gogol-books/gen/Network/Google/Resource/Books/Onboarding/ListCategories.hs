@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Onboarding.ListCategories
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type OnboardingListCategoriesResource =
 -- | List categories for onboarding experience.
 --
 -- /See:/ 'onboardingListCategories' smart constructor.
-newtype OnboardingListCategories = OnboardingListCategories
+newtype OnboardingListCategories = OnboardingListCategories'
     { _olcLocale :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ newtype OnboardingListCategories = OnboardingListCategories
 onboardingListCategories
     :: OnboardingListCategories
 onboardingListCategories =
-    OnboardingListCategories
+    OnboardingListCategories'
     { _olcLocale = Nothing
     }
 
@@ -76,7 +76,9 @@ olcLocale
 
 instance GoogleRequest OnboardingListCategories where
         type Rs OnboardingListCategories = Category
-        requestClient OnboardingListCategories{..}
+        type Scopes OnboardingListCategories =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient OnboardingListCategories'{..}
           = go _olcLocale (Just AltJSON) booksService
           where go
                   = buildClient

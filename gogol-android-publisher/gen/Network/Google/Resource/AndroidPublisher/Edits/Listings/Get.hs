@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Listings.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type EditsListingsGetResource =
 -- | Fetches information about a localized store listing.
 --
 -- /See:/ 'editsListingsGet' smart constructor.
-data EditsListingsGet = EditsListingsGet
+data EditsListingsGet = EditsListingsGet'
     { _elgPackageName :: !Text
     , _elgLanguage    :: !Text
     , _elgEditId      :: !Text
@@ -78,7 +78,7 @@ editsListingsGet
     -> Text -- ^ 'elgEditId'
     -> EditsListingsGet
 editsListingsGet pElgPackageName_ pElgLanguage_ pElgEditId_ =
-    EditsListingsGet
+    EditsListingsGet'
     { _elgPackageName = pElgPackageName_
     , _elgLanguage = pElgLanguage_
     , _elgEditId = pElgEditId_
@@ -104,7 +104,9 @@ elgEditId
 
 instance GoogleRequest EditsListingsGet where
         type Rs EditsListingsGet = Listing
-        requestClient EditsListingsGet{..}
+        type Scopes EditsListingsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsListingsGet'{..}
           = go _elgPackageName _elgEditId _elgLanguage
               (Just AltJSON)
               androidPublisherService

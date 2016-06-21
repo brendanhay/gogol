@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Scores.ListWindow
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -34,6 +34,7 @@ module Network.Google.Resource.Games.Scores.ListWindow
     , ScoresListWindow
 
     -- * Request Lenses
+    , slwConsistencyToken
     , slwCollection
     , slwTimeSpan
     , slwReturnTopIfAbsent
@@ -57,20 +58,22 @@ type ScoresListWindowResource =
              "window" :>
                Capture "collection" ScoresListWindowCollection :>
                  QueryParam "timeSpan" ScoresListWindowTimeSpan :>
-                   QueryParam "returnTopIfAbsent" Bool :>
-                     QueryParam "language" Text :>
-                       QueryParam "resultsAbove" (Textual Int32) :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (Textual Int32) :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] LeaderboardScores
+                   QueryParam "consistencyToken" (Textual Int64) :>
+                     QueryParam "returnTopIfAbsent" Bool :>
+                       QueryParam "language" Text :>
+                         QueryParam "resultsAbove" (Textual Int32) :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" (Textual Int32) :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] LeaderboardScores
 
 -- | Lists the scores in a leaderboard around (and including) a player\'s
 -- score.
 --
 -- /See:/ 'scoresListWindow' smart constructor.
-data ScoresListWindow = ScoresListWindow
-    { _slwCollection        :: !ScoresListWindowCollection
+data ScoresListWindow = ScoresListWindow'
+    { _slwConsistencyToken  :: !(Maybe (Textual Int64))
+    , _slwCollection        :: !ScoresListWindowCollection
     , _slwTimeSpan          :: !ScoresListWindowTimeSpan
     , _slwReturnTopIfAbsent :: !(Maybe Bool)
     , _slwLeaderboardId     :: !Text
@@ -83,6 +86,8 @@ data ScoresListWindow = ScoresListWindow
 -- | Creates a value of 'ScoresListWindow' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slwConsistencyToken'
 --
 -- * 'slwCollection'
 --
@@ -105,8 +110,9 @@ scoresListWindow
     -> Text -- ^ 'slwLeaderboardId'
     -> ScoresListWindow
 scoresListWindow pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
-    ScoresListWindow
-    { _slwCollection = pSlwCollection_
+    ScoresListWindow'
+    { _slwConsistencyToken = Nothing
+    , _slwCollection = pSlwCollection_
     , _slwTimeSpan = pSlwTimeSpan_
     , _slwReturnTopIfAbsent = Nothing
     , _slwLeaderboardId = pSlwLeaderboardId_
@@ -115,6 +121,13 @@ scoresListWindow pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
     , _slwPageToken = Nothing
     , _slwMaxResults = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+slwConsistencyToken :: Lens' ScoresListWindow (Maybe Int64)
+slwConsistencyToken
+  = lens _slwConsistencyToken
+      (\ s a -> s{_slwConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The collection of scores you\'re requesting.
 slwCollection :: Lens' ScoresListWindow ScoresListWindowCollection
@@ -171,9 +184,13 @@ slwMaxResults
 
 instance GoogleRequest ScoresListWindow where
         type Rs ScoresListWindow = LeaderboardScores
-        requestClient ScoresListWindow{..}
+        type Scopes ScoresListWindow =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient ScoresListWindow'{..}
           = go _slwLeaderboardId _slwCollection
               (Just _slwTimeSpan)
+              _slwConsistencyToken
               _slwReturnTopIfAbsent
               _slwLanguage
               _slwResultsAbove

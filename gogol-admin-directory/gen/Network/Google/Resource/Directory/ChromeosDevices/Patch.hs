@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.ChromeosDevices.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ChromeosDevicesPatchResource =
 -- | Update Chrome OS Device. This method supports patch semantics.
 --
 -- /See:/ 'chromeosDevicesPatch' smart constructor.
-data ChromeosDevicesPatch = ChromeosDevicesPatch
+data ChromeosDevicesPatch = ChromeosDevicesPatch'
     { _cdpPayload    :: !ChromeOSDevice
     , _cdpCustomerId :: !Text
     , _cdpDeviceId   :: !Text
@@ -87,7 +87,7 @@ chromeosDevicesPatch
     -> Text -- ^ 'cdpDeviceId'
     -> ChromeosDevicesPatch
 chromeosDevicesPatch pCdpPayload_ pCdpCustomerId_ pCdpDeviceId_ =
-    ChromeosDevicesPatch
+    ChromeosDevicesPatch'
     { _cdpPayload = pCdpPayload_
     , _cdpCustomerId = pCdpCustomerId_
     , _cdpDeviceId = pCdpDeviceId_
@@ -118,7 +118,9 @@ cdpProjection
 
 instance GoogleRequest ChromeosDevicesPatch where
         type Rs ChromeosDevicesPatch = ChromeOSDevice
-        requestClient ChromeosDevicesPatch{..}
+        type Scopes ChromeosDevicesPatch =
+             '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
+        requestClient ChromeosDevicesPatch'{..}
           = go _cdpCustomerId _cdpDeviceId _cdpProjection
               (Just AltJSON)
               _cdpPayload

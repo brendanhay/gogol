@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.Sitemaps.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@
 -- Lists the sitemaps-entries submitted for this site, or included in the
 -- sitemap index file (if sitemapIndex is specified in the request).
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.list@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.list@.
 module Network.Google.Resource.Webmasters.Sitemaps.List
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type SitemapsListResource =
 -- sitemap index file (if sitemapIndex is specified in the request).
 --
 -- /See:/ 'sitemapsList' smart constructor.
-data SitemapsList = SitemapsList
+data SitemapsList = SitemapsList'
     { _slSiteURL      :: !Text
     , _slSitemapIndex :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ sitemapsList
     :: Text -- ^ 'slSiteURL'
     -> SitemapsList
 sitemapsList pSlSiteURL_ =
-    SitemapsList
+    SitemapsList'
     { _slSiteURL = pSlSiteURL_
     , _slSitemapIndex = Nothing
     }
@@ -93,7 +93,10 @@ slSitemapIndex
 
 instance GoogleRequest SitemapsList where
         type Rs SitemapsList = SitemapsListResponse
-        requestClient SitemapsList{..}
+        type Scopes SitemapsList =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
+        requestClient SitemapsList'{..}
           = go _slSiteURL _slSitemapIndex (Just AltJSON)
               webmasterToolsService
           where go

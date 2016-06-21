@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.SubAccounts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsList' request conforms to.
 type SubAccountsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
@@ -65,7 +65,7 @@ type SubAccountsListResource =
 -- | Gets a list of subaccounts, possibly filtered.
 --
 -- /See:/ 'subAccountsList' smart constructor.
-data SubAccountsList = SubAccountsList
+data SubAccountsList = SubAccountsList'
     { _salSearchString :: !(Maybe Text)
     , _salIds          :: !(Maybe [Textual Int64])
     , _salProFileId    :: !(Textual Int64)
@@ -96,7 +96,7 @@ subAccountsList
     :: Int64 -- ^ 'salProFileId'
     -> SubAccountsList
 subAccountsList pSalProFileId_ =
-    SubAccountsList
+    SubAccountsList'
     { _salSearchString = Nothing
     , _salIds = Nothing
     , _salProFileId = _Coerce # pSalProFileId_
@@ -154,7 +154,9 @@ salMaxResults
 
 instance GoogleRequest SubAccountsList where
         type Rs SubAccountsList = SubAccountsListResponse
-        requestClient SubAccountsList{..}
+        type Scopes SubAccountsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SubAccountsList'{..}
           = go _salProFileId _salSearchString
               (_salIds ^. _Default)
               _salSortOrder

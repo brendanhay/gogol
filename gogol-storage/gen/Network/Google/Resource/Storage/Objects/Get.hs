@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -83,7 +83,7 @@ type ObjectsGetResource =
 -- | Retrieves an object or its metadata.
 --
 -- /See:/ 'objectsGet' smart constructor.
-data ObjectsGet = ObjectsGet
+data ObjectsGet = ObjectsGet'
     { _ogIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _ogIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _ogIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -118,7 +118,7 @@ objectsGet
     -> Text -- ^ 'ogObject'
     -> ObjectsGet
 objectsGet pOgBucket_ pOgObject_ =
-    ObjectsGet
+    ObjectsGet'
     { _ogIfMetagenerationMatch = Nothing
     , _ogIfGenerationNotMatch = Nothing
     , _ogIfGenerationMatch = Nothing
@@ -184,7 +184,13 @@ ogGeneration
 
 instance GoogleRequest ObjectsGet where
         type Rs ObjectsGet = Object
-        requestClient ObjectsGet{..}
+        type Scopes ObjectsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient ObjectsGet'{..}
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
               _ogIfGenerationMatch
@@ -200,7 +206,9 @@ instance GoogleRequest ObjectsGet where
 instance GoogleRequest (MediaDownload ObjectsGet)
          where
         type Rs (MediaDownload ObjectsGet) = Stream
-        requestClient (MediaDownload ObjectsGet{..})
+        type Scopes (MediaDownload ObjectsGet) =
+             Scopes ObjectsGet
+        requestClient (MediaDownload ObjectsGet'{..})
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
               _ogIfGenerationMatch

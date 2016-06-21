@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.BackupRuns.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type BackupRunsListResource =
 -- in the reverse chronological order of the enqueued time.
 --
 -- /See:/ 'backupRunsList' smart constructor.
-data BackupRunsList = BackupRunsList
+data BackupRunsList = BackupRunsList'
     { _brlProject    :: !Text
     , _brlPageToken  :: !(Maybe Text)
     , _brlMaxResults :: !(Maybe (Textual Int32))
@@ -85,7 +85,7 @@ backupRunsList
     -> Text -- ^ 'brlInstance'
     -> BackupRunsList
 backupRunsList pBrlProject_ pBrlInstance_ =
-    BackupRunsList
+    BackupRunsList'
     { _brlProject = pBrlProject_
     , _brlPageToken = Nothing
     , _brlMaxResults = Nothing
@@ -117,7 +117,10 @@ brlInstance
 
 instance GoogleRequest BackupRunsList where
         type Rs BackupRunsList = BackupRunsListResponse
-        requestClient BackupRunsList{..}
+        type Scopes BackupRunsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient BackupRunsList'{..}
           = go _brlProject _brlInstance _brlPageToken
               _brlMaxResults
               (Just AltJSON)

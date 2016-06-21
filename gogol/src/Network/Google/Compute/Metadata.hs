@@ -2,7 +2,7 @@
 
 -- |
 -- Module      : Network.Google.Compute.Metadata
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
@@ -12,7 +12,8 @@
 -- information about your instance or project.
 --
 -- This module contains functions for retrieving various Compute metadata from an
--- instance's local metadata endpoint using 'MonadIO' and not the Google monad.
+-- instance\'s local metadata endpoint using 'MonadIO', prior to initialisation
+-- of the environment used by the "Network.Google" monad.
 module Network.Google.Compute.Metadata
     (
     -- * Google Compute Instance Check
@@ -35,13 +36,13 @@ module Network.Google.Compute.Metadata
     -- * Raw Metadata Requests
     , metadataFlavorHeader
     , metadataFlavorDesired
-    , metadata
     , metadataRequest
+    , getMetadata
     ) where
 
 import           Control.Monad.Catch
-import           Control.Monad.IO.Class
-import           Data.Aeson
+import           Control.Monad.IO.Class  (MonadIO (..))
+import           Data.Aeson              (eitherDecode')
 import           Data.ByteString         (ByteString)
 import qualified Data.ByteString.Lazy    as LBS
 import           Data.Char               (toLower)
@@ -49,15 +50,13 @@ import           Data.Default.Class      (def)
 import qualified Data.Text.Encoding      as Text
 import qualified Data.Text.Lazy          as LText
 import qualified Data.Text.Lazy.Encoding as LText
-import           Network.Google.Prelude
-import           Network.HTTP.Conduit    (HttpException (..), Manager, httpLbs,
-                                          responseBody, responseHeaders,
-                                          responseStatus)
+import           Network.Google.Prelude  (Text, (<>))
+import           Network.HTTP.Conduit    (HttpException (..), Manager)
 import qualified Network.HTTP.Conduit    as Client
-import           Network.HTTP.Types
+import           Network.HTTP.Types      (HeaderName)
 import           System.Environment      (lookupEnv)
 
--- | @NO_GCE_CHECK@.
+-- | The @NO_GCE_CHECK@ environment variable.
 checkGCEVar :: String
 checkGCEVar = "NO_GCE_CHECK"
 
@@ -69,15 +68,6 @@ metadataFlavorHeader = "Metadata-Flavor"
 metadataFlavorDesired :: ByteString
 metadataFlavorDesired = "Google"
 
-metadataRequest :: Client.Request
-metadataRequest = def
-    { Client.host           = "metadata.google.internal"
-    , Client.port           = 80
-    , Client.secure         = False
-    , Client.method         = "GET"
-    , Client.requestHeaders = [(metadataFlavorHeader, metadataFlavorDesired)]
-    }
-
 -- | Detect if the underlying host is running on GCE.
 --
 -- The environment variable @NO_GCE_CHECK@ can be set to @1@, @true@, @yes@, or @on@
@@ -86,15 +76,15 @@ isGCE :: MonadIO m => Manager -> m Bool
 isGCE m = liftIO $ do
     p <- check <$> lookupEnv checkGCEVar
     if p
-        then (success <$> httpLbs rq m) `catch` failure
+        then (success <$> Client.httpLbs rq m) `catch` failure
         else pure False
   where
     check Nothing  = True
     check (Just x) = map toLower x `notElem` ["1", "true", "yes", "on"]
 
     success rs =
-           fromEnum (responseStatus rs) == 200
-        && (lookup metadataFlavorHeader (responseHeaders rs)
+           fromEnum (Client.responseStatus rs) == 200
+        && (lookup metadataFlavorHeader (Client.responseHeaders rs)
                == Just metadataFlavorDesired)
 
     failure :: HttpException -> IO Bool
@@ -107,14 +97,14 @@ isGCE m = liftIO $ do
 -- | A directory of custom metadata values that have been set for this project.
 getProjectAttribute :: MonadIO m => Text -> Manager -> m (Maybe LBS.ByteString)
 getProjectAttribute k =
-    metadataMaybe ("project/attributes/" <> Text.encodeUtf8 k)
+    getMetadataMaybe ("project/attributes/" <> Text.encodeUtf8 k)
 
 -- | SSH keys that can connect to instances in the project. SSH keys for Compute
 -- Engine use a specialized format where the keys are prepended with a username,
 -- like so: @user1:ssh-rsa my-public-ssh-key user1@host.com@
 getSSHKeys :: MonadIO m => Manager -> m [Text]
 getSSHKeys m = do
-    mx <- metadataMaybe "project/attributes/sshKeys" m
+    mx <- getMetadataMaybe "project/attributes/sshKeys" m
     case mx of
         Nothing -> pure []
         Just x  -> pure
@@ -127,48 +117,48 @@ getSSHKeys m = do
 -- the project-id metadata entry value. The project-id value is required for all
 -- requests to the Compute Engine service.
 getNumericProjectId :: MonadIO m => Manager -> m Text
-getNumericProjectId = metadataText "project/numeric-project-id"
+getNumericProjectId = getMetadataText "project/numeric-project-id"
 
 -- | The project ID.
 getProjectId :: MonadIO m => Manager -> m Text
-getProjectId = metadataText "project/project-id"
+getProjectId = getMetadataText "project/project-id"
 
 -- | A directory of custom metadata values passed to the instance during startup
 -- or shutdown.
 getInstanceAttribute :: MonadIO m => Text -> Manager -> m (Maybe LBS.ByteString)
 getInstanceAttribute k =
-    metadataMaybe ("instance/attributes/" <> Text.encodeUtf8 k)
+    getMetadataMaybe ("instance/attributes/" <> Text.encodeUtf8 k)
 
 -- | The free-text description of an instance, assigned using the
 -- @--description@ flag, or set in the API.
 getDescription :: MonadIO m => Manager -> m Text
-getDescription = metadataText "instance/description"
+getDescription = getMetadataText "instance/description"
 
 -- | The host name of the instance.
 getHostname :: MonadIO m => Manager -> m Text
-getHostname = metadataText "instance/hostname"
+getHostname = getMetadataText "instance/hostname"
 
 -- | The ID of the instance. This is a unique, numerical ID that is generated by
 -- Google Compute Engine. This is useful for identifying instances if you do not
 -- want to use instance names.
 getInstanceId :: MonadIO m => Manager -> m Text
-getInstanceId = metadataText "instance/id"
+getInstanceId = getMetadataText "instance/id"
 
 -- | The fully-qualified machine type name of the instance's host machine.
 getMachineType :: MonadIO m => Manager -> m Text
-getMachineType = metadataText "instance/machine-type"
+getMachineType = getMetadataText "instance/machine-type"
 
 -- | Any tags associated with the instance.
 getTags :: MonadIO m => Manager -> m [Text]
 getTags m = do
-    rs <- metadata "instance/tags" [] m
-    case eitherDecode' (responseBody rs) of
+    rs <- getMetadata "instance/tags" [] m
+    case eitherDecode' (Client.responseBody rs) of
         Left  _  -> pure []
         Right xs -> pure xs
 
 -- | The instance's zone.
 getZone :: MonadIO m => Manager -> m Text
-getZone = metadataText "instance/zone"
+getZone = getMetadataText "instance/zone"
 
 -- -- | A directory of disks attached to this instance.
 -- getDisk ::
@@ -211,30 +201,30 @@ getZone = metadataText "instance/zone"
 -- Metadata wait for change
 -- curl "http://metadata.google.internal/computeMetadata/v1/instance/tags?wait_for_change=true"
 
-metadataMaybe :: MonadIO m
+getMetadataMaybe :: MonadIO m
               => ByteString
               -> Manager
               -> m (Maybe LBS.ByteString)
-metadataMaybe path m = do
-    rs <- metadata path [404] m
-    if fromEnum (responseStatus rs) == 404
+getMetadataMaybe path m = do
+    rs <- getMetadata path [404] m
+    if fromEnum (Client.responseStatus rs) == 404
         then pure Nothing
-        else pure $ Just (responseBody rs)
+        else pure $ Just (Client.responseBody rs)
 
-metadataText :: MonadIO m
+getMetadataText :: MonadIO m
              => ByteString
              -> Manager
              -> m Text
-metadataText path m = LText.toStrict . LText.decodeUtf8 . responseBody
-    <$> metadata path [] m
+getMetadataText path m = LText.toStrict . LText.decodeUtf8 . Client.responseBody
+    <$> getMetadata path [] m
 
-metadata :: MonadIO m
-         => ByteString
-         -> [Int]
-         -> Manager
-         -> m (Client.Response LBS.ByteString)
-metadata path ss m =
-    liftIO . flip httpLbs m $ metadataRequest
+getMetadata :: MonadIO m
+            => ByteString -- ^ The request path.
+            -> [Int]      -- ^ Acceptable status code responses.
+            -> Manager
+            -> m (Client.Response LBS.ByteString)
+getMetadata path ss m =
+    liftIO . flip Client.httpLbs m $ metadataRequest
         { Client.path        = "/computeMetadata/v1/" <> path
         , Client.checkStatus = \s hs cj ->
             let c = fromEnum s
@@ -243,3 +233,13 @@ metadata path ss m =
                  else Just . toException $ StatusCodeException s hs cj
         }
 
+-- | A default @http-client@ 'Client.Request' with the host, port, and headers
+-- set appropriately for @metadata.google.internal@ use.
+metadataRequest :: Client.Request
+metadataRequest = def
+    { Client.host           = "metadata.google.internal"
+    , Client.port           = 80
+    , Client.secure         = False
+    , Client.method         = "GET"
+    , Client.requestHeaders = [(metadataFlavorHeader, metadataFlavorDesired)]
+    }

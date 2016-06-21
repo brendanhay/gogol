@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ProjectsSubscriptionsGetResource =
 -- | Gets the configuration details of a subscription.
 --
 -- /See:/ 'projectsSubscriptionsGet' smart constructor.
-data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet
+data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet'
     { _psgXgafv          :: !(Maybe Text)
     , _psgUploadProtocol :: !(Maybe Text)
     , _psgPp             :: !Bool
@@ -97,7 +97,7 @@ projectsSubscriptionsGet
     :: Text -- ^ 'psgSubscription'
     -> ProjectsSubscriptionsGet
 projectsSubscriptionsGet pPsgSubscription_ =
-    ProjectsSubscriptionsGet
+    ProjectsSubscriptionsGet'
     { _psgXgafv = Nothing
     , _psgUploadProtocol = Nothing
     , _psgPp = True
@@ -153,7 +153,10 @@ psgCallback
 
 instance GoogleRequest ProjectsSubscriptionsGet where
         type Rs ProjectsSubscriptionsGet = Subscription
-        requestClient ProjectsSubscriptionsGet{..}
+        type Scopes ProjectsSubscriptionsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsSubscriptionsGet'{..}
           = go _psgSubscription _psgXgafv _psgUploadProtocol
               (Just _psgPp)
               _psgAccessToken

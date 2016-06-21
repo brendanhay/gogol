@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.BackupRuns.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type BackupRunsGetResource =
 -- | Retrieves a resource containing information about a backup run.
 --
 -- /See:/ 'backupRunsGet' smart constructor.
-data BackupRunsGet = BackupRunsGet
+data BackupRunsGet = BackupRunsGet'
     { _brgProject  :: !Text
     , _brgId       :: !(Textual Int64)
     , _brgInstance :: !Text
@@ -78,7 +78,7 @@ backupRunsGet
     -> Text -- ^ 'brgInstance'
     -> BackupRunsGet
 backupRunsGet pBrgProject_ pBrgId_ pBrgInstance_ =
-    BackupRunsGet
+    BackupRunsGet'
     { _brgProject = pBrgProject_
     , _brgId = _Coerce # pBrgId_
     , _brgInstance = pBrgInstance_
@@ -101,7 +101,10 @@ brgInstance
 
 instance GoogleRequest BackupRunsGet where
         type Rs BackupRunsGet = BackupRun
-        requestClient BackupRunsGet{..}
+        type Scopes BackupRunsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient BackupRunsGet'{..}
           = go _brgProject _brgInstance _brgId (Just AltJSON)
               sQLAdminService
           where go

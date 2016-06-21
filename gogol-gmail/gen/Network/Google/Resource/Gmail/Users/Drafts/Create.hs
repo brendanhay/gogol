@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Drafts.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,14 +58,13 @@ type UsersDraftsCreateResource =
                Capture "userId" Text :>
                  "drafts" :>
                    QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" AltMedia :>
-                       MultipartRelated '[JSON] Draft RequestBody :>
-                         Post '[JSON] Draft
+                     QueryParam "uploadType" Multipart :>
+                       MultipartRelated '[JSON] Draft :> Post '[JSON] Draft
 
 -- | Creates a new draft with the DRAFT label.
 --
 -- /See:/ 'usersDraftsCreate' smart constructor.
-data UsersDraftsCreate = UsersDraftsCreate
+data UsersDraftsCreate = UsersDraftsCreate'
     { _udcPayload :: !Draft
     , _udcUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -79,10 +78,9 @@ data UsersDraftsCreate = UsersDraftsCreate
 -- * 'udcUserId'
 usersDraftsCreate
     :: Draft -- ^ 'udcPayload'
-    -> Text
     -> UsersDraftsCreate
-usersDraftsCreate pUdcPayload_ pUdcUserId_ =
-    UsersDraftsCreate
+usersDraftsCreate pUdcPayload_ =
+    UsersDraftsCreate'
     { _udcPayload = pUdcPayload_
     , _udcUserId = "me"
     }
@@ -100,7 +98,11 @@ udcUserId
 
 instance GoogleRequest UsersDraftsCreate where
         type Rs UsersDraftsCreate = Draft
-        requestClient UsersDraftsCreate{..}
+        type Scopes UsersDraftsCreate =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersDraftsCreate'{..}
           = go _udcUserId (Just AltJSON) _udcPayload
               gmailService
           where go :<|> _
@@ -111,9 +113,11 @@ instance GoogleRequest UsersDraftsCreate where
 instance GoogleRequest
          (MediaUpload UsersDraftsCreate) where
         type Rs (MediaUpload UsersDraftsCreate) = Draft
+        type Scopes (MediaUpload UsersDraftsCreate) =
+             Scopes UsersDraftsCreate
         requestClient
-          (MediaUpload UsersDraftsCreate{..} body)
-          = go _udcUserId (Just AltJSON) (Just AltMedia)
+          (MediaUpload UsersDraftsCreate'{..} body)
+          = go _udcUserId (Just AltJSON) (Just Multipart)
               _udcPayload
               body
               gmailService

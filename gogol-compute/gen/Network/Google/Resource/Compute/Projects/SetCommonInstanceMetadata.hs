@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type ProjectsSetCommonInstanceMetadataResource =
 -- the data included in the request.
 --
 -- /See:/ 'projectsSetCommonInstanceMetadata' smart constructor.
-data ProjectsSetCommonInstanceMetadata = ProjectsSetCommonInstanceMetadata
+data ProjectsSetCommonInstanceMetadata = ProjectsSetCommonInstanceMetadata'
     { _pscimProject :: !Text
     , _pscimPayload :: !Metadata
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ projectsSetCommonInstanceMetadata
     -> Metadata -- ^ 'pscimPayload'
     -> ProjectsSetCommonInstanceMetadata
 projectsSetCommonInstanceMetadata pPscimProject_ pPscimPayload_ =
-    ProjectsSetCommonInstanceMetadata
+    ProjectsSetCommonInstanceMetadata'
     { _pscimProject = pPscimProject_
     , _pscimPayload = pPscimPayload_
     }
@@ -91,7 +91,10 @@ pscimPayload
 instance GoogleRequest
          ProjectsSetCommonInstanceMetadata where
         type Rs ProjectsSetCommonInstanceMetadata = Operation
-        requestClient ProjectsSetCommonInstanceMetadata{..}
+        type Scopes ProjectsSetCommonInstanceMetadata =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient ProjectsSetCommonInstanceMetadata'{..}
           = go _pscimProject (Just AltJSON) _pscimPayload
               computeService
           where go

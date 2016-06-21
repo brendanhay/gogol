@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Metadata.Dimensions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,18 +50,21 @@ type MetadataDimensionsListResource =
 --
 -- /See:/ 'metadataDimensionsList' smart constructor.
 data MetadataDimensionsList =
-    MetadataDimensionsList
+    MetadataDimensionsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataDimensionsList' with the minimum fields required to make a request.
 --
 metadataDimensionsList
     :: MetadataDimensionsList
-metadataDimensionsList = MetadataDimensionsList
+metadataDimensionsList = MetadataDimensionsList'
 
 instance GoogleRequest MetadataDimensionsList where
         type Rs MetadataDimensionsList = Metadata
-        requestClient MetadataDimensionsList{}
+        type Scopes MetadataDimensionsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient MetadataDimensionsList'{}
           = go (Just AltJSON) adSenseService
           where go
                   = buildClient

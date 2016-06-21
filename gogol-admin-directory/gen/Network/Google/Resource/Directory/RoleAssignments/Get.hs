@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.RoleAssignments.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type RoleAssignmentsGetResource =
 -- | Retrieve a role assignment.
 --
 -- /See:/ 'roleAssignmentsGet' smart constructor.
-data RoleAssignmentsGet = RoleAssignmentsGet
+data RoleAssignmentsGet = RoleAssignmentsGet'
     { _ragCustomer         :: !Text
     , _ragRoleAssignmentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ roleAssignmentsGet
     -> Text -- ^ 'ragRoleAssignmentId'
     -> RoleAssignmentsGet
 roleAssignmentsGet pRagCustomer_ pRagRoleAssignmentId_ =
-    RoleAssignmentsGet
+    RoleAssignmentsGet'
     { _ragCustomer = pRagCustomer_
     , _ragRoleAssignmentId = pRagRoleAssignmentId_
     }
@@ -91,7 +91,10 @@ ragRoleAssignmentId
 
 instance GoogleRequest RoleAssignmentsGet where
         type Rs RoleAssignmentsGet = RoleAssignment
-        requestClient RoleAssignmentsGet{..}
+        type Scopes RoleAssignmentsGet =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
+               "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
+        requestClient RoleAssignmentsGet'{..}
           = go _ragCustomer _ragRoleAssignmentId (Just AltJSON)
               directoryService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -90,7 +90,7 @@ type AccountsExperienceLocalesListResource =
 -- more information about this method.
 --
 -- /See:/ 'accountsExperienceLocalesList' smart constructor.
-data AccountsExperienceLocalesList = AccountsExperienceLocalesList
+data AccountsExperienceLocalesList = AccountsExperienceLocalesList'
     { _aellTitleLevelEidr :: !(Maybe Text)
     , _aellStatus         :: !(Maybe [Text])
     , _aellPphNames       :: !(Maybe [Text])
@@ -151,7 +151,7 @@ accountsExperienceLocalesList
     :: Text -- ^ 'aellAccountId'
     -> AccountsExperienceLocalesList
 accountsExperienceLocalesList pAellAccountId_ =
-    AccountsExperienceLocalesList
+    AccountsExperienceLocalesList'
     { _aellTitleLevelEidr = Nothing
     , _aellStatus = Nothing
     , _aellPphNames = Nothing
@@ -277,7 +277,9 @@ instance GoogleRequest AccountsExperienceLocalesList
          where
         type Rs AccountsExperienceLocalesList =
              ListExperienceLocalesResponse
-        requestClient AccountsExperienceLocalesList{..}
+        type Scopes AccountsExperienceLocalesList =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+        requestClient AccountsExperienceLocalesList'{..}
           = go _aellAccountId _aellTitleLevelEidr
               (_aellStatus ^. _Default)
               (_aellPphNames ^. _Default)

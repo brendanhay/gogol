@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ZoneOperationsListResource =
 -- zone.
 --
 -- /See:/ 'zoneOperationsList' smart constructor.
-data ZoneOperationsList = ZoneOperationsList
+data ZoneOperationsList = ZoneOperationsList'
     { _zolProject    :: !Text
     , _zolZone       :: !Text
     , _zolFilter     :: !(Maybe Text)
@@ -89,7 +89,7 @@ zoneOperationsList
     -> Text -- ^ 'zolZone'
     -> ZoneOperationsList
 zoneOperationsList pZolProject_ pZolZone_ =
-    ZoneOperationsList
+    ZoneOperationsList'
     { _zolProject = pZolProject_
     , _zolZone = pZolZone_
     , _zolFilter = Nothing
@@ -127,7 +127,10 @@ zolMaxResults
 
 instance GoogleRequest ZoneOperationsList where
         type Rs ZoneOperationsList = OperationList
-        requestClient ZoneOperationsList{..}
+        type Scopes ZoneOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/replicapool"]
+        requestClient ZoneOperationsList'{..}
           = go _zolProject _zolZone _zolFilter _zolPageToken
               (Just _zolMaxResults)
               (Just AltJSON)

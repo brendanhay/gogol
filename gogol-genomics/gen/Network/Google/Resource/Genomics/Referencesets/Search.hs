@@ -14,16 +14,20 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Referencesets.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Searches for reference sets which match the given criteria. Implements
--- [GlobalAllianceApi.searchReferenceSets](http:\/\/ga4gh.org\/documentation\/api\/v0.5.1\/ga4gh_api.html#\/schema\/org.ga4gh.searchReferenceSets).
+-- Searches for reference sets which match the given criteria. For the
+-- definitions of references and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
+-- [GlobalAllianceApi.searchReferenceSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L71)
 --
--- /See:/ < Genomics API Reference> for @genomics.referencesets.search@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.referencesets.search@.
 module Network.Google.Resource.Genomics.Referencesets.Search
     (
     -- * REST Resource
@@ -64,11 +68,15 @@ type ReferencesetsSearchResource =
                            ReqBody '[JSON] SearchReferenceSetsRequest :>
                              Post '[JSON] SearchReferenceSetsResponse
 
--- | Searches for reference sets which match the given criteria. Implements
--- [GlobalAllianceApi.searchReferenceSets](http:\/\/ga4gh.org\/documentation\/api\/v0.5.1\/ga4gh_api.html#\/schema\/org.ga4gh.searchReferenceSets).
+-- | Searches for reference sets which match the given criteria. For the
+-- definitions of references and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
+-- [GlobalAllianceApi.searchReferenceSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L71)
 --
 -- /See:/ 'referencesetsSearch' smart constructor.
-data ReferencesetsSearch = ReferencesetsSearch
+data ReferencesetsSearch = ReferencesetsSearch'
     { _rsXgafv          :: !(Maybe Text)
     , _rsUploadProtocol :: !(Maybe Text)
     , _rsPp             :: !Bool
@@ -102,7 +110,7 @@ referencesetsSearch
     :: SearchReferenceSetsRequest -- ^ 'rsPayload'
     -> ReferencesetsSearch
 referencesetsSearch pRsPayload_ =
-    ReferencesetsSearch
+    ReferencesetsSearch'
     { _rsXgafv = Nothing
     , _rsUploadProtocol = Nothing
     , _rsPp = True
@@ -157,7 +165,11 @@ rsCallback
 instance GoogleRequest ReferencesetsSearch where
         type Rs ReferencesetsSearch =
              SearchReferenceSetsResponse
-        requestClient ReferencesetsSearch{..}
+        type Scopes ReferencesetsSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient ReferencesetsSearch'{..}
           = go _rsXgafv _rsUploadProtocol (Just _rsPp)
               _rsAccessToken
               _rsUploadType

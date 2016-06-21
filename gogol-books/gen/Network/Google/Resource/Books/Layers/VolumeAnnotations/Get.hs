@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type LayersVolumeAnnotationsGetResource =
 -- | Gets the volume annotation.
 --
 -- /See:/ 'layersVolumeAnnotationsGet' smart constructor.
-data LayersVolumeAnnotationsGet = LayersVolumeAnnotationsGet
+data LayersVolumeAnnotationsGet = LayersVolumeAnnotationsGet'
     { _lvagLocale       :: !(Maybe Text)
     , _lvagAnnotationId :: !Text
     , _lvagVolumeId     :: !Text
@@ -89,7 +89,7 @@ layersVolumeAnnotationsGet
     -> Text -- ^ 'lvagLayerId'
     -> LayersVolumeAnnotationsGet
 layersVolumeAnnotationsGet pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
-    LayersVolumeAnnotationsGet
+    LayersVolumeAnnotationsGet'
     { _lvagLocale = Nothing
     , _lvagAnnotationId = pLvagAnnotationId_
     , _lvagVolumeId = pLvagVolumeId_
@@ -127,7 +127,9 @@ lvagLayerId
 instance GoogleRequest LayersVolumeAnnotationsGet
          where
         type Rs LayersVolumeAnnotationsGet = Volumeannotation
-        requestClient LayersVolumeAnnotationsGet{..}
+        type Scopes LayersVolumeAnnotationsGet =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient LayersVolumeAnnotationsGet'{..}
           = go _lvagVolumeId _lvagLayerId _lvagAnnotationId
               _lvagLocale
               _lvagSource

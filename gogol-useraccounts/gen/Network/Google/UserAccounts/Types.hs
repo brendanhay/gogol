@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.UserAccounts.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,8 +22,8 @@ module Network.Google.UserAccounts.Types
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
-    , cloudUseraccountsScope
-    , cloudUseraccountsReadonlyScope
+    , cloudUserAccountsScope
+    , cloudUserAccountsReadOnlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -85,6 +86,7 @@ module Network.Google.UserAccounts.Types
     , oId
     , oOperationType
     , oRegion
+    , oDescription
     , oTargetLink
     , oClientOperationId
 
@@ -197,23 +199,23 @@ import           Network.Google.UserAccounts.Types.Product
 import           Network.Google.UserAccounts.Types.Sum
 
 -- | Default request referring to version 'beta' of the Cloud User Accounts API. This contains the host and root path used as a starting point for constructing service requests.
-userAccountsService :: Service
+userAccountsService :: ServiceConfig
 userAccountsService
   = defaultService (ServiceId "clouduseraccounts:beta")
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | Manage your Google Cloud User Accounts
-cloudUseraccountsScope :: OAuthScope
-cloudUseraccountsScope = "https://www.googleapis.com/auth/cloud.useraccounts";
+cloudUserAccountsScope :: Proxy '["https://www.googleapis.com/auth/cloud.useraccounts"]
+cloudUserAccountsScope = Proxy;
 
 -- | View your Google Cloud User Accounts
-cloudUseraccountsReadonlyScope :: OAuthScope
-cloudUseraccountsReadonlyScope = "https://www.googleapis.com/auth/cloud.useraccounts.readonly";
+cloudUserAccountsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
+cloudUserAccountsReadOnlyScope = Proxy;

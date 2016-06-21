@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Events.ResetAll
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,18 +54,21 @@ type EventsResetAllResource =
 --
 -- /See:/ 'eventsResetAll' smart constructor.
 data EventsResetAll =
-    EventsResetAll
+    EventsResetAll'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsResetAll' with the minimum fields required to make a request.
 --
 eventsResetAll
     :: EventsResetAll
-eventsResetAll = EventsResetAll
+eventsResetAll = EventsResetAll'
 
 instance GoogleRequest EventsResetAll where
         type Rs EventsResetAll = ()
-        requestClient EventsResetAll{}
+        type Scopes EventsResetAll =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient EventsResetAll'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy EventsResetAllResource)

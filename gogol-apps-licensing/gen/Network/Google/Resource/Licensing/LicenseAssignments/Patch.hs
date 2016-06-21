@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Licensing.LicenseAssignments.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type LicenseAssignmentsPatchResource =
 -- | Assign License. This method supports patch semantics.
 --
 -- /See:/ 'licenseAssignmentsPatch' smart constructor.
-data LicenseAssignmentsPatch = LicenseAssignmentsPatch
+data LicenseAssignmentsPatch = LicenseAssignmentsPatch'
     { _lapSKUId     :: !Text
     , _lapPayload   :: !LicenseAssignment
     , _lapUserId    :: !Text
@@ -86,7 +86,7 @@ licenseAssignmentsPatch
     -> Text -- ^ 'lapProductId'
     -> LicenseAssignmentsPatch
 licenseAssignmentsPatch pLapSKUId_ pLapPayload_ pLapUserId_ pLapProductId_ =
-    LicenseAssignmentsPatch
+    LicenseAssignmentsPatch'
     { _lapSKUId = pLapSKUId_
     , _lapPayload = pLapPayload_
     , _lapUserId = pLapUserId_
@@ -114,7 +114,9 @@ lapProductId
 
 instance GoogleRequest LicenseAssignmentsPatch where
         type Rs LicenseAssignmentsPatch = LicenseAssignment
-        requestClient LicenseAssignmentsPatch{..}
+        type Scopes LicenseAssignmentsPatch =
+             '["https://www.googleapis.com/auth/apps.licensing"]
+        requestClient LicenseAssignmentsPatch'{..}
           = go _lapProductId _lapSKUId _lapUserId
               (Just AltJSON)
               _lapPayload

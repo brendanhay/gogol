@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Sites.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'SitesPatch' request conforms to.
 type SitesPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -56,7 +56,7 @@ type SitesPatchResource =
 -- | Updates an existing site. This method supports patch semantics.
 --
 -- /See:/ 'sitesPatch' smart constructor.
-data SitesPatch = SitesPatch
+data SitesPatch = SitesPatch'
     { _spProFileId :: !(Textual Int64)
     , _spPayload   :: !Site
     , _spId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ sitesPatch
     -> Int64 -- ^ 'spId'
     -> SitesPatch
 sitesPatch pSpProFileId_ pSpPayload_ pSpId_ =
-    SitesPatch
+    SitesPatch'
     { _spProFileId = _Coerce # pSpProFileId_
     , _spPayload = pSpPayload_
     , _spId = _Coerce # pSpId_
@@ -100,7 +100,9 @@ spId = lens _spId (\ s a -> s{_spId = a}) . _Coerce
 
 instance GoogleRequest SitesPatch where
         type Rs SitesPatch = Site
-        requestClient SitesPatch{..}
+        type Scopes SitesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SitesPatch'{..}
           = go _spProFileId (Just _spId) (Just AltJSON)
               _spPayload
               dFAReportingService

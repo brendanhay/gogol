@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type InAppProductsInsertResource =
 -- | Creates a new in-app product for an app.
 --
 -- /See:/ 'inAppProductsInsert' smart constructor.
-data InAppProductsInsert = InAppProductsInsert
+data InAppProductsInsert = InAppProductsInsert'
     { _iapiAutoConvertMissingPrices :: !(Maybe Bool)
     , _iapiPackageName              :: !Text
     , _iapiPayload                  :: !InAppProduct
@@ -77,7 +77,7 @@ inAppProductsInsert
     -> InAppProduct -- ^ 'iapiPayload'
     -> InAppProductsInsert
 inAppProductsInsert pIapiPackageName_ pIapiPayload_ =
-    InAppProductsInsert
+    InAppProductsInsert'
     { _iapiAutoConvertMissingPrices = Nothing
     , _iapiPackageName = pIapiPackageName_
     , _iapiPayload = pIapiPayload_
@@ -105,7 +105,9 @@ iapiPayload
 
 instance GoogleRequest InAppProductsInsert where
         type Rs InAppProductsInsert = InAppProduct
-        requestClient InAppProductsInsert{..}
+        type Scopes InAppProductsInsert =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient InAppProductsInsert'{..}
           = go _iapiPackageName _iapiAutoConvertMissingPrices
               (Just AltJSON)
               _iapiPayload

@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.CivicInfo.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Political geographic divisions that contain the requested address.
 --
 -- /See:/ 'representativeInfoResponseDivisions' smart constructor.
-newtype RepresentativeInfoResponseDivisions = RepresentativeInfoResponseDivisions
+newtype RepresentativeInfoResponseDivisions = RepresentativeInfoResponseDivisions'
     { _rirdAddtional :: HashMap Text GeographicDivision
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -36,7 +36,7 @@ representativeInfoResponseDivisions
     :: HashMap Text GeographicDivision -- ^ 'rirdAddtional'
     -> RepresentativeInfoResponseDivisions
 representativeInfoResponseDivisions pRirdAddtional_ =
-    RepresentativeInfoResponseDivisions
+    RepresentativeInfoResponseDivisions'
     { _rirdAddtional = _Coerce # pRirdAddtional_
     }
 
@@ -52,7 +52,7 @@ instance FromJSON RepresentativeInfoResponseDivisions
         parseJSON
           = withObject "RepresentativeInfoResponseDivisions"
               (\ o ->
-                 RepresentativeInfoResponseDivisions <$>
+                 RepresentativeInfoResponseDivisions' <$>
                    (parseJSONObject o))
 
 instance ToJSON RepresentativeInfoResponseDivisions
@@ -62,7 +62,7 @@ instance ToJSON RepresentativeInfoResponseDivisions
 -- | The result of a voter info lookup query.
 --
 -- /See:/ 'voterInfoResponse' smart constructor.
-data VoterInfoResponse = VoterInfoResponse
+data VoterInfoResponse = VoterInfoResponse'
     { _virOtherElections   :: !(Maybe [Election])
     , _virContests         :: !(Maybe [Contest])
     , _virState            :: !(Maybe [AdministrationRegion])
@@ -104,7 +104,7 @@ data VoterInfoResponse = VoterInfoResponse
 voterInfoResponse
     :: VoterInfoResponse
 voterInfoResponse =
-    VoterInfoResponse
+    VoterInfoResponse'
     { _virOtherElections = Nothing
     , _virContests = Nothing
     , _virState = Nothing
@@ -204,7 +204,7 @@ instance FromJSON VoterInfoResponse where
         parseJSON
           = withObject "VoterInfoResponse"
               (\ o ->
-                 VoterInfoResponse <$>
+                 VoterInfoResponse' <$>
                    (o .:? "otherElections" .!= mempty) <*>
                      (o .:? "contests" .!= mempty)
                      <*> (o .:? "state" .!= mempty)
@@ -218,7 +218,7 @@ instance FromJSON VoterInfoResponse where
                      <*> (o .:? "precinctId"))
 
 instance ToJSON VoterInfoResponse where
-        toJSON VoterInfoResponse{..}
+        toJSON VoterInfoResponse'{..}
           = object
               (catMaybes
                  [("otherElections" .=) <$> _virOtherElections,
@@ -238,7 +238,7 @@ instance ToJSON VoterInfoResponse where
 -- ballot.
 --
 -- /See:/ 'pollingLocation' smart constructor.
-data PollingLocation = PollingLocation
+data PollingLocation = PollingLocation'
     { _plVoterServices :: !(Maybe Text)
     , _plEndDate       :: !(Maybe Text)
     , _plSources       :: !(Maybe [Source])
@@ -274,7 +274,7 @@ data PollingLocation = PollingLocation
 pollingLocation
     :: PollingLocation
 pollingLocation =
-    PollingLocation
+    PollingLocation'
     { _plVoterServices = Nothing
     , _plEndDate = Nothing
     , _plSources = Nothing
@@ -343,7 +343,7 @@ instance FromJSON PollingLocation where
         parseJSON
           = withObject "PollingLocation"
               (\ o ->
-                 PollingLocation <$>
+                 PollingLocation' <$>
                    (o .:? "voterServices") <*> (o .:? "endDate") <*>
                      (o .:? "sources" .!= mempty)
                      <*> (o .:? "address")
@@ -354,7 +354,7 @@ instance FromJSON PollingLocation where
                      <*> (o .:? "notes"))
 
 instance ToJSON PollingLocation where
-        toJSON PollingLocation{..}
+        toJSON PollingLocation'{..}
           = object
               (catMaybes
                  [("voterServices" .=) <$> _plVoterServices,
@@ -369,7 +369,7 @@ instance ToJSON PollingLocation where
 -- | Describes a political geography.
 --
 -- /See:/ 'geographicDivision' smart constructor.
-data GeographicDivision = GeographicDivision
+data GeographicDivision = GeographicDivision'
     { _gdName          :: !(Maybe Text)
     , _gdOfficeIndices :: !(Maybe [Textual Word32])
     , _gdAlsoKnownAs   :: !(Maybe [Text])
@@ -387,7 +387,7 @@ data GeographicDivision = GeographicDivision
 geographicDivision
     :: GeographicDivision
 geographicDivision =
-    GeographicDivision
+    GeographicDivision'
     { _gdName = Nothing
     , _gdOfficeIndices = Nothing
     , _gdAlsoKnownAs = Nothing
@@ -427,12 +427,12 @@ instance FromJSON GeographicDivision where
         parseJSON
           = withObject "GeographicDivision"
               (\ o ->
-                 GeographicDivision <$>
+                 GeographicDivision' <$>
                    (o .:? "name") <*> (o .:? "officeIndices" .!= mempty)
                      <*> (o .:? "alsoKnownAs" .!= mempty))
 
 instance ToJSON GeographicDivision where
-        toJSON GeographicDivision{..}
+        toJSON GeographicDivision'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _gdName,
@@ -442,7 +442,7 @@ instance ToJSON GeographicDivision where
 -- | Information about a candidate running for elected office.
 --
 -- /See:/ 'candidate' smart constructor.
-data Candidate = Candidate
+data Candidate = Candidate'
     { _cEmail         :: !(Maybe Text)
     , _cPhone         :: !(Maybe Text)
     , _cPhotoURL      :: !(Maybe Text)
@@ -475,7 +475,7 @@ data Candidate = Candidate
 candidate
     :: Candidate
 candidate =
-    Candidate
+    Candidate'
     { _cEmail = Nothing
     , _cPhone = Nothing
     , _cPhotoURL = Nothing
@@ -531,7 +531,7 @@ instance FromJSON Candidate where
         parseJSON
           = withObject "Candidate"
               (\ o ->
-                 Candidate <$>
+                 Candidate' <$>
                    (o .:? "email") <*> (o .:? "phone") <*>
                      (o .:? "photoUrl")
                      <*> (o .:? "channels" .!= mempty)
@@ -541,7 +541,7 @@ instance FromJSON Candidate where
                      <*> (o .:? "party"))
 
 instance ToJSON Candidate where
-        toJSON Candidate{..}
+        toJSON Candidate'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _cEmail, ("phone" .=) <$> _cPhone,
@@ -554,7 +554,7 @@ instance ToJSON Candidate where
 -- | Information about an Office held by one or more Officials.
 --
 -- /See:/ 'office' smart constructor.
-data Office = Office
+data Office = Office'
     { _oDivisionId      :: !(Maybe Text)
     , _oRoles           :: !(Maybe [Text])
     , _oOfficialIndices :: !(Maybe [Textual Word32])
@@ -581,7 +581,7 @@ data Office = Office
 office
     :: Office
 office =
-    Office
+    Office'
     { _oDivisionId = Nothing
     , _oRoles = Nothing
     , _oOfficialIndices = Nothing
@@ -639,7 +639,7 @@ instance FromJSON Office where
         parseJSON
           = withObject "Office"
               (\ o ->
-                 Office <$>
+                 Office' <$>
                    (o .:? "divisionId") <*> (o .:? "roles" .!= mempty)
                      <*> (o .:? "officialIndices" .!= mempty)
                      <*> (o .:? "sources" .!= mempty)
@@ -647,7 +647,7 @@ instance FromJSON Office where
                      <*> (o .:? "levels" .!= mempty))
 
 instance ToJSON Office where
-        toJSON Office{..}
+        toJSON Office'{..}
           = object
               (catMaybes
                  [("divisionId" .=) <$> _oDivisionId,
@@ -659,7 +659,7 @@ instance ToJSON Office where
 -- | A social media or web channel for a candidate.
 --
 -- /See:/ 'channel' smart constructor.
-data Channel = Channel
+data Channel = Channel'
     { _cId   :: !(Maybe Text)
     , _cType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -674,7 +674,7 @@ data Channel = Channel
 channel
     :: Channel
 channel =
-    Channel
+    Channel'
     { _cId = Nothing
     , _cType = Nothing
     }
@@ -692,10 +692,10 @@ cType = lens _cType (\ s a -> s{_cType = a})
 instance FromJSON Channel where
         parseJSON
           = withObject "Channel"
-              (\ o -> Channel <$> (o .:? "id") <*> (o .:? "type"))
+              (\ o -> Channel' <$> (o .:? "id") <*> (o .:? "type"))
 
 instance ToJSON Channel where
-        toJSON Channel{..}
+        toJSON Channel'{..}
           = object
               (catMaybes
                  [("id" .=) <$> _cId, ("type" .=) <$> _cType])
@@ -703,7 +703,7 @@ instance ToJSON Channel where
 -- | Information about the election that was queried.
 --
 -- /See:/ 'election' smart constructor.
-data Election = Election
+data Election = Election'
     { _eOcdDivisionId :: !(Maybe Text)
     , _eElectionDay   :: !(Maybe Text)
     , _eName          :: !(Maybe Text)
@@ -724,7 +724,7 @@ data Election = Election
 election
     :: Election
 election =
-    Election
+    Election'
     { _eOcdDivisionId = Nothing
     , _eElectionDay = Nothing
     , _eName = Nothing
@@ -759,13 +759,13 @@ instance FromJSON Election where
         parseJSON
           = withObject "Election"
               (\ o ->
-                 Election <$>
+                 Election' <$>
                    (o .:? "ocdDivisionId") <*> (o .:? "electionDay") <*>
                      (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON Election where
-        toJSON Election{..}
+        toJSON Election'{..}
           = object
               (catMaybes
                  [("ocdDivisionId" .=) <$> _eOcdDivisionId,
@@ -775,7 +775,7 @@ instance ToJSON Election where
 -- | The result of a representative info lookup query.
 --
 -- /See:/ 'representativeInfoResponse' smart constructor.
-data RepresentativeInfoResponse = RepresentativeInfoResponse
+data RepresentativeInfoResponse = RepresentativeInfoResponse'
     { _rirKind            :: !Text
     , _rirNormalizedInput :: !(Maybe SimpleAddressType)
     , _rirOfficials       :: !(Maybe [Official])
@@ -799,7 +799,7 @@ data RepresentativeInfoResponse = RepresentativeInfoResponse
 representativeInfoResponse
     :: RepresentativeInfoResponse
 representativeInfoResponse =
-    RepresentativeInfoResponse
+    RepresentativeInfoResponse'
     { _rirKind = "civicinfo#representativeInfoResponse"
     , _rirNormalizedInput = Nothing
     , _rirOfficials = Nothing
@@ -843,7 +843,7 @@ instance FromJSON RepresentativeInfoResponse where
         parseJSON
           = withObject "RepresentativeInfoResponse"
               (\ o ->
-                 RepresentativeInfoResponse <$>
+                 RepresentativeInfoResponse' <$>
                    (o .:? "kind" .!=
                       "civicinfo#representativeInfoResponse")
                      <*> (o .:? "normalizedInput")
@@ -852,7 +852,7 @@ instance FromJSON RepresentativeInfoResponse where
                      <*> (o .:? "offices" .!= mempty))
 
 instance ToJSON RepresentativeInfoResponse where
-        toJSON RepresentativeInfoResponse{..}
+        toJSON RepresentativeInfoResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rirKind),
@@ -865,7 +865,7 @@ instance ToJSON RepresentativeInfoResponse where
 -- query.
 --
 -- /See:/ 'divisionSearchResult' smart constructor.
-data DivisionSearchResult = DivisionSearchResult
+data DivisionSearchResult = DivisionSearchResult'
     { _dsrAliases :: !(Maybe [Text])
     , _dsrName    :: !(Maybe Text)
     , _dsrOcdId   :: !(Maybe Text)
@@ -883,7 +883,7 @@ data DivisionSearchResult = DivisionSearchResult
 divisionSearchResult
     :: DivisionSearchResult
 divisionSearchResult =
-    DivisionSearchResult
+    DivisionSearchResult'
     { _dsrAliases = Nothing
     , _dsrName = Nothing
     , _dsrOcdId = Nothing
@@ -913,12 +913,12 @@ instance FromJSON DivisionSearchResult where
         parseJSON
           = withObject "DivisionSearchResult"
               (\ o ->
-                 DivisionSearchResult <$>
+                 DivisionSearchResult' <$>
                    (o .:? "aliases" .!= mempty) <*> (o .:? "name") <*>
                      (o .:? "ocdId"))
 
 instance ToJSON DivisionSearchResult where
-        toJSON DivisionSearchResult{..}
+        toJSON DivisionSearchResult'{..}
           = object
               (catMaybes
                  [("aliases" .=) <$> _dsrAliases,
@@ -929,7 +929,7 @@ instance ToJSON DivisionSearchResult where
 -- Elections).
 --
 -- /See:/ 'administrativeBody' smart constructor.
-data AdministrativeBody = AdministrativeBody
+data AdministrativeBody = AdministrativeBody'
     { _abCorrespondenceAddress               :: !(Maybe SimpleAddressType)
     , _abAbsenteeVotingInfoURL               :: !(Maybe Text)
     , _abHoursOfOperation                    :: !(Maybe Text)
@@ -977,7 +977,7 @@ data AdministrativeBody = AdministrativeBody
 administrativeBody
     :: AdministrativeBody
 administrativeBody =
-    AdministrativeBody
+    AdministrativeBody'
     { _abCorrespondenceAddress = Nothing
     , _abAbsenteeVotingInfoURL = Nothing
     , _abHoursOfOperation = Nothing
@@ -1084,7 +1084,7 @@ instance FromJSON AdministrativeBody where
         parseJSON
           = withObject "AdministrativeBody"
               (\ o ->
-                 AdministrativeBody <$>
+                 AdministrativeBody' <$>
                    (o .:? "correspondenceAddress") <*>
                      (o .:? "absenteeVotingInfoUrl")
                      <*> (o .:? "hoursOfOperation")
@@ -1100,7 +1100,7 @@ instance FromJSON AdministrativeBody where
                      <*> (o .:? "electionRegistrationUrl"))
 
 instance ToJSON AdministrativeBody where
-        toJSON AdministrativeBody{..}
+        toJSON AdministrativeBody'{..}
           = object
               (catMaybes
                  [("correspondenceAddress" .=) <$>
@@ -1125,7 +1125,7 @@ instance ToJSON AdministrativeBody where
 -- | Information about a contest that appears on a voter\'s ballot.
 --
 -- /See:/ 'contest' smart constructor.
-data Contest = Contest
+data Contest = Contest'
     { _conReferendumPassageThreshold :: !(Maybe Text)
     , _conRoles                      :: !(Maybe [Text])
     , _conReferendumURL              :: !(Maybe Text)
@@ -1206,7 +1206,7 @@ data Contest = Contest
 contest
     :: Contest
 contest =
-    Contest
+    Contest'
     { _conReferendumPassageThreshold = Nothing
     , _conRoles = Nothing
     , _conReferendumURL = Nothing
@@ -1412,7 +1412,7 @@ instance FromJSON Contest where
         parseJSON
           = withObject "Contest"
               (\ o ->
-                 Contest <$>
+                 Contest' <$>
                    (o .:? "referendumPassageThreshold") <*>
                      (o .:? "roles" .!= mempty)
                      <*> (o .:? "referendumUrl")
@@ -1439,7 +1439,7 @@ instance FromJSON Contest where
                      <*> (o .:? "ballotPlacement"))
 
 instance ToJSON Contest where
-        toJSON Contest{..}
+        toJSON Contest'{..}
           = object
               (catMaybes
                  [("referendumPassageThreshold" .=) <$>
@@ -1475,7 +1475,7 @@ instance ToJSON Contest where
 -- | The result of a division search query.
 --
 -- /See:/ 'divisionSearchResponse' smart constructor.
-data DivisionSearchResponse = DivisionSearchResponse
+data DivisionSearchResponse = DivisionSearchResponse'
     { _dsrResults :: !(Maybe [DivisionSearchResult])
     , _dsrKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1490,7 +1490,7 @@ data DivisionSearchResponse = DivisionSearchResponse
 divisionSearchResponse
     :: DivisionSearchResponse
 divisionSearchResponse =
-    DivisionSearchResponse
+    DivisionSearchResponse'
     { _dsrResults = Nothing
     , _dsrKind = "civicinfo#divisionSearchResponse"
     }
@@ -1510,13 +1510,13 @@ instance FromJSON DivisionSearchResponse where
         parseJSON
           = withObject "DivisionSearchResponse"
               (\ o ->
-                 DivisionSearchResponse <$>
+                 DivisionSearchResponse' <$>
                    (o .:? "results" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "civicinfo#divisionSearchResponse"))
 
 instance ToJSON DivisionSearchResponse where
-        toJSON DivisionSearchResponse{..}
+        toJSON DivisionSearchResponse'{..}
           = object
               (catMaybes
                  [("results" .=) <$> _dsrResults,
@@ -1525,7 +1525,7 @@ instance ToJSON DivisionSearchResponse where
 -- | Political geographic divisions that contain the requested address.
 --
 -- /See:/ 'representativeInfoDataDivisions' smart constructor.
-newtype RepresentativeInfoDataDivisions = RepresentativeInfoDataDivisions
+newtype RepresentativeInfoDataDivisions = RepresentativeInfoDataDivisions'
     { _riddAddtional :: HashMap Text GeographicDivision
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1538,7 +1538,7 @@ representativeInfoDataDivisions
     :: HashMap Text GeographicDivision -- ^ 'riddAddtional'
     -> RepresentativeInfoDataDivisions
 representativeInfoDataDivisions pRiddAddtional_ =
-    RepresentativeInfoDataDivisions
+    RepresentativeInfoDataDivisions'
     { _riddAddtional = _Coerce # pRiddAddtional_
     }
 
@@ -1554,7 +1554,7 @@ instance FromJSON RepresentativeInfoDataDivisions
         parseJSON
           = withObject "RepresentativeInfoDataDivisions"
               (\ o ->
-                 RepresentativeInfoDataDivisions <$>
+                 RepresentativeInfoDataDivisions' <$>
                    (parseJSONObject o))
 
 instance ToJSON RepresentativeInfoDataDivisions where
@@ -1563,7 +1563,7 @@ instance ToJSON RepresentativeInfoDataDivisions where
 -- | Information about individual election officials.
 --
 -- /See:/ 'electionOfficial' smart constructor.
-data ElectionOfficial = ElectionOfficial
+data ElectionOfficial = ElectionOfficial'
     { _eoFaxNumber         :: !(Maybe Text)
     , _eoName              :: !(Maybe Text)
     , _eoOfficePhoneNumber :: !(Maybe Text)
@@ -1587,7 +1587,7 @@ data ElectionOfficial = ElectionOfficial
 electionOfficial
     :: ElectionOfficial
 electionOfficial =
-    ElectionOfficial
+    ElectionOfficial'
     { _eoFaxNumber = Nothing
     , _eoName = Nothing
     , _eoOfficePhoneNumber = Nothing
@@ -1624,14 +1624,14 @@ instance FromJSON ElectionOfficial where
         parseJSON
           = withObject "ElectionOfficial"
               (\ o ->
-                 ElectionOfficial <$>
+                 ElectionOfficial' <$>
                    (o .:? "faxNumber") <*> (o .:? "name") <*>
                      (o .:? "officePhoneNumber")
                      <*> (o .:? "emailAddress")
                      <*> (o .:? "title"))
 
 instance ToJSON ElectionOfficial where
-        toJSON ElectionOfficial{..}
+        toJSON ElectionOfficial'{..}
           = object
               (catMaybes
                  [("faxNumber" .=) <$> _eoFaxNumber,
@@ -1642,7 +1642,7 @@ instance ToJSON ElectionOfficial where
 
 --
 -- /See:/ 'representativeInfoData' smart constructor.
-data RepresentativeInfoData = RepresentativeInfoData
+data RepresentativeInfoData = RepresentativeInfoData'
     { _ridOfficials :: !(Maybe [Official])
     , _ridDivisions :: !(Maybe RepresentativeInfoDataDivisions)
     , _ridOffices   :: !(Maybe [Office])
@@ -1660,7 +1660,7 @@ data RepresentativeInfoData = RepresentativeInfoData
 representativeInfoData
     :: RepresentativeInfoData
 representativeInfoData =
-    RepresentativeInfoData
+    RepresentativeInfoData'
     { _ridOfficials = Nothing
     , _ridDivisions = Nothing
     , _ridOffices = Nothing
@@ -1691,13 +1691,13 @@ instance FromJSON RepresentativeInfoData where
         parseJSON
           = withObject "RepresentativeInfoData"
               (\ o ->
-                 RepresentativeInfoData <$>
+                 RepresentativeInfoData' <$>
                    (o .:? "officials" .!= mempty) <*>
                      (o .:? "divisions")
                      <*> (o .:? "offices" .!= mempty))
 
 instance ToJSON RepresentativeInfoData where
-        toJSON RepresentativeInfoData{..}
+        toJSON RepresentativeInfoData'{..}
           = object
               (catMaybes
                  [("officials" .=) <$> _ridOfficials,
@@ -1708,7 +1708,7 @@ instance ToJSON RepresentativeInfoData where
 -- it.
 --
 -- /See:/ 'source' smart constructor.
-data Source = Source
+data Source = Source'
     { _sName     :: !(Maybe Text)
     , _sOfficial :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1723,7 +1723,7 @@ data Source = Source
 source
     :: Source
 source =
-    Source
+    Source'
     { _sName = Nothing
     , _sOfficial = Nothing
     }
@@ -1741,10 +1741,10 @@ instance FromJSON Source where
         parseJSON
           = withObject "Source"
               (\ o ->
-                 Source <$> (o .:? "name") <*> (o .:? "official"))
+                 Source' <$> (o .:? "name") <*> (o .:? "official"))
 
 instance ToJSON Source where
-        toJSON Source{..}
+        toJSON Source'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _sName,
@@ -1753,7 +1753,7 @@ instance ToJSON Source where
 -- | Describes the geographic scope of a contest.
 --
 -- /See:/ 'electoralDistrict' smart constructor.
-data ElectoralDistrict = ElectoralDistrict
+data ElectoralDistrict = ElectoralDistrict'
     { _edName  :: !(Maybe Text)
     , _edScope :: !(Maybe Text)
     , _edId    :: !(Maybe Text)
@@ -1771,7 +1771,7 @@ data ElectoralDistrict = ElectoralDistrict
 electoralDistrict
     :: ElectoralDistrict
 electoralDistrict =
-    ElectoralDistrict
+    ElectoralDistrict'
     { _edName = Nothing
     , _edScope = Nothing
     , _edId = Nothing
@@ -1798,11 +1798,11 @@ instance FromJSON ElectoralDistrict where
         parseJSON
           = withObject "ElectoralDistrict"
               (\ o ->
-                 ElectoralDistrict <$>
+                 ElectoralDistrict' <$>
                    (o .:? "name") <*> (o .:? "scope") <*> (o .:? "id"))
 
 instance ToJSON ElectoralDistrict where
-        toJSON ElectoralDistrict{..}
+        toJSON ElectoralDistrict'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _edName, ("scope" .=) <$> _edScope,
@@ -1811,7 +1811,7 @@ instance ToJSON ElectoralDistrict where
 -- | A simple representation of an address.
 --
 -- /See:/ 'simpleAddressType' smart constructor.
-data SimpleAddressType = SimpleAddressType
+data SimpleAddressType = SimpleAddressType'
     { _satLine2        :: !(Maybe Text)
     , _satState        :: !(Maybe Text)
     , _satLine3        :: !(Maybe Text)
@@ -1841,7 +1841,7 @@ data SimpleAddressType = SimpleAddressType
 simpleAddressType
     :: SimpleAddressType
 simpleAddressType =
-    SimpleAddressType
+    SimpleAddressType'
     { _satLine2 = Nothing
     , _satState = Nothing
     , _satLine3 = Nothing
@@ -1885,7 +1885,7 @@ instance FromJSON SimpleAddressType where
         parseJSON
           = withObject "SimpleAddressType"
               (\ o ->
-                 SimpleAddressType <$>
+                 SimpleAddressType' <$>
                    (o .:? "line2") <*> (o .:? "state") <*>
                      (o .:? "line3")
                      <*> (o .:? "zip")
@@ -1894,7 +1894,7 @@ instance FromJSON SimpleAddressType where
                      <*> (o .:? "locationName"))
 
 instance ToJSON SimpleAddressType where
-        toJSON SimpleAddressType{..}
+        toJSON SimpleAddressType'{..}
           = object
               (catMaybes
                  [("line2" .=) <$> _satLine2,
@@ -1906,7 +1906,7 @@ instance ToJSON SimpleAddressType where
 -- | Describes information about a regional election administrative area.
 --
 -- /See:/ 'administrationRegion' smart constructor.
-data AdministrationRegion = AdministrationRegion
+data AdministrationRegion = AdministrationRegion'
     { _arLocalJurisdiction          :: !(Maybe AdministrationRegion)
     , _arSources                    :: !(Maybe [Source])
     , _arName                       :: !(Maybe Text)
@@ -1930,7 +1930,7 @@ data AdministrationRegion = AdministrationRegion
 administrationRegion
     :: AdministrationRegion
 administrationRegion =
-    AdministrationRegion
+    AdministrationRegion'
     { _arLocalJurisdiction = Nothing
     , _arSources = Nothing
     , _arName = Nothing
@@ -1973,7 +1973,7 @@ instance FromJSON AdministrationRegion where
         parseJSON
           = withObject "AdministrationRegion"
               (\ o ->
-                 AdministrationRegion <$>
+                 AdministrationRegion' <$>
                    (o .:? "local_jurisdiction") <*>
                      (o .:? "sources" .!= mempty)
                      <*> (o .:? "name")
@@ -1981,7 +1981,7 @@ instance FromJSON AdministrationRegion where
                      <*> (o .:? "id"))
 
 instance ToJSON AdministrationRegion where
-        toJSON AdministrationRegion{..}
+        toJSON AdministrationRegion'{..}
           = object
               (catMaybes
                  [("local_jurisdiction" .=) <$> _arLocalJurisdiction,
@@ -1994,7 +1994,7 @@ instance ToJSON AdministrationRegion where
 -- | The list of elections available for this version of the API.
 --
 -- /See:/ 'electionsQueryResponse' smart constructor.
-data ElectionsQueryResponse = ElectionsQueryResponse
+data ElectionsQueryResponse = ElectionsQueryResponse'
     { _eqrKind      :: !Text
     , _eqrElections :: !(Maybe [Election])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2009,7 +2009,7 @@ data ElectionsQueryResponse = ElectionsQueryResponse
 electionsQueryResponse
     :: ElectionsQueryResponse
 electionsQueryResponse =
-    ElectionsQueryResponse
+    ElectionsQueryResponse'
     { _eqrKind = "civicinfo#electionsQueryResponse"
     , _eqrElections = Nothing
     }
@@ -2030,12 +2030,12 @@ instance FromJSON ElectionsQueryResponse where
         parseJSON
           = withObject "ElectionsQueryResponse"
               (\ o ->
-                 ElectionsQueryResponse <$>
+                 ElectionsQueryResponse' <$>
                    (o .:? "kind" .!= "civicinfo#electionsQueryResponse")
                      <*> (o .:? "elections" .!= mempty))
 
 instance ToJSON ElectionsQueryResponse where
-        toJSON ElectionsQueryResponse{..}
+        toJSON ElectionsQueryResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _eqrKind),
@@ -2044,7 +2044,7 @@ instance ToJSON ElectionsQueryResponse where
 -- | Information about a person holding an elected office.
 --
 -- /See:/ 'official' smart constructor.
-data Official = Official
+data Official = Official'
     { _offPhotoURL :: !(Maybe Text)
     , _offURLs     :: !(Maybe [Text])
     , _offChannels :: !(Maybe [Channel])
@@ -2077,7 +2077,7 @@ data Official = Official
 official
     :: Official
 official =
-    Official
+    Official'
     { _offPhotoURL = Nothing
     , _offURLs = Nothing
     , _offChannels = Nothing
@@ -2139,7 +2139,7 @@ instance FromJSON Official where
         parseJSON
           = withObject "Official"
               (\ o ->
-                 Official <$>
+                 Official' <$>
                    (o .:? "photoUrl") <*> (o .:? "urls" .!= mempty) <*>
                      (o .:? "channels" .!= mempty)
                      <*> (o .:? "address" .!= mempty)
@@ -2149,7 +2149,7 @@ instance FromJSON Official where
                      <*> (o .:? "party"))
 
 instance ToJSON Official where
-        toJSON Official{..}
+        toJSON Official'{..}
           = object
               (catMaybes
                  [("photoUrl" .=) <$> _offPhotoURL,

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type TablesDeleteResource =
 -- | Delete a table.
 --
 -- /See:/ 'tablesDelete' smart constructor.
-newtype TablesDelete = TablesDelete
+newtype TablesDelete = TablesDelete'
     { _tdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ tablesDelete
     :: Text -- ^ 'tdId'
     -> TablesDelete
 tablesDelete pTdId_ =
-    TablesDelete
+    TablesDelete'
     { _tdId = pTdId_
     }
 
@@ -76,7 +76,9 @@ tdId = lens _tdId (\ s a -> s{_tdId = a})
 
 instance GoogleRequest TablesDelete where
         type Rs TablesDelete = ()
-        requestClient TablesDelete{..}
+        type Scopes TablesDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient TablesDelete'{..}
           = go _tdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesDeleteResource)

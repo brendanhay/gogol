@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.DimensionValues.Query
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'DimensionValuesQuery' request conforms to.
 type DimensionValuesQueryResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dimensionvalues" :>
@@ -60,7 +60,7 @@ type DimensionValuesQueryResource =
 -- | Retrieves list of report dimension values for a list of filters.
 --
 -- /See:/ 'dimensionValuesQuery' smart constructor.
-data DimensionValuesQuery = DimensionValuesQuery
+data DimensionValuesQuery = DimensionValuesQuery'
     { _dvqProFileId  :: !(Textual Int64)
     , _dvqPayload    :: !DimensionValueRequest
     , _dvqPageToken  :: !(Maybe Text)
@@ -83,7 +83,7 @@ dimensionValuesQuery
     -> DimensionValueRequest -- ^ 'dvqPayload'
     -> DimensionValuesQuery
 dimensionValuesQuery pDvqProFileId_ pDvqPayload_ =
-    DimensionValuesQuery
+    DimensionValuesQuery'
     { _dvqProFileId = _Coerce # pDvqProFileId_
     , _dvqPayload = pDvqPayload_
     , _dvqPageToken = Nothing
@@ -115,7 +115,9 @@ dvqMaxResults
 
 instance GoogleRequest DimensionValuesQuery where
         type Rs DimensionValuesQuery = DimensionValueList
-        requestClient DimensionValuesQuery{..}
+        type Scopes DimensionValuesQuery =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient DimensionValuesQuery'{..}
           = go _dvqProFileId _dvqPageToken _dvqMaxResults
               (Just AltJSON)
               _dvqPayload

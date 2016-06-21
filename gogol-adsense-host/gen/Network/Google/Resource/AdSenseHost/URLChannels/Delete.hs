@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.URLChannels.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type URLChannelsDeleteResource =
 -- | Delete a URL channel from the host AdSense account.
 --
 -- /See:/ 'urlChannelsDelete' smart constructor.
-data URLChannelsDelete = URLChannelsDelete
+data URLChannelsDelete = URLChannelsDelete'
     { _ucdURLChannelId :: !Text
     , _ucdAdClientId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ urlChannelsDelete
     -> Text -- ^ 'ucdAdClientId'
     -> URLChannelsDelete
 urlChannelsDelete pUcdURLChannelId_ pUcdAdClientId_ =
-    URLChannelsDelete
+    URLChannelsDelete'
     { _ucdURLChannelId = pUcdURLChannelId_
     , _ucdAdClientId = pUcdAdClientId_
     }
@@ -90,7 +90,9 @@ ucdAdClientId
 
 instance GoogleRequest URLChannelsDelete where
         type Rs URLChannelsDelete = URLChannel
-        requestClient URLChannelsDelete{..}
+        type Scopes URLChannelsDelete =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient URLChannelsDelete'{..}
           = go _ucdAdClientId _ucdURLChannelId (Just AltJSON)
               adSenseHostService
           where go

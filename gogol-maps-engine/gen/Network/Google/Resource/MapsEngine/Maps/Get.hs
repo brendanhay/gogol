@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Maps.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type MapsGetResource =
 -- | Return metadata for a particular map.
 --
 -- /See:/ 'mapsGet' smart constructor.
-data MapsGet = MapsGet
+data MapsGet = MapsGet'
     { _mgVersion :: !(Maybe MapsGetVersion)
     , _mgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ mapsGet
     :: Text -- ^ 'mgId'
     -> MapsGet
 mapsGet pMgId_ =
-    MapsGet
+    MapsGet'
     { _mgVersion = Nothing
     , _mgId = pMgId_
     }
@@ -88,7 +88,10 @@ mgId = lens _mgId (\ s a -> s{_mgId = a})
 
 instance GoogleRequest MapsGet where
         type Rs MapsGet = Map
-        requestClient MapsGet{..}
+        type Scopes MapsGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient MapsGet'{..}
           = go _mgId _mgVersion (Just AltJSON)
               mapsEngineService
           where go

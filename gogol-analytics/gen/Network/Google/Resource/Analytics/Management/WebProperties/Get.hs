@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.WebProperties.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ManagementWebPropertiesGetResource =
 -- | Gets a web property to which the user has access.
 --
 -- /See:/ 'managementWebPropertiesGet' smart constructor.
-data ManagementWebPropertiesGet = ManagementWebPropertiesGet
+data ManagementWebPropertiesGet = ManagementWebPropertiesGet'
     { _mwpgWebPropertyId :: !Text
     , _mwpgAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ managementWebPropertiesGet
     -> Text -- ^ 'mwpgAccountId'
     -> ManagementWebPropertiesGet
 managementWebPropertiesGet pMwpgWebPropertyId_ pMwpgAccountId_ =
-    ManagementWebPropertiesGet
+    ManagementWebPropertiesGet'
     { _mwpgWebPropertyId = pMwpgWebPropertyId_
     , _mwpgAccountId = pMwpgAccountId_
     }
@@ -92,7 +92,10 @@ mwpgAccountId
 instance GoogleRequest ManagementWebPropertiesGet
          where
         type Rs ManagementWebPropertiesGet = WebProperty
-        requestClient ManagementWebPropertiesGet{..}
+        type Scopes ManagementWebPropertiesGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementWebPropertiesGet'{..}
           = go _mwpgAccountId _mwpgWebPropertyId (Just AltJSON)
               analyticsService
           where go

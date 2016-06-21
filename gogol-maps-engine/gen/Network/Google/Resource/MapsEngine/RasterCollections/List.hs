@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.RasterCollections.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -78,7 +78,7 @@ type RasterCollectionsListResource =
 -- | Return all raster collections readable by the current user.
 --
 -- /See:/ 'rasterCollectionsList' smart constructor.
-data RasterCollectionsList = RasterCollectionsList
+data RasterCollectionsList = RasterCollectionsList'
     { _rclCreatedAfter     :: !(Maybe DateTime')
     , _rclCreatorEmail     :: !(Maybe Text)
     , _rclRole             :: !(Maybe RasterCollectionsListRole)
@@ -126,7 +126,7 @@ data RasterCollectionsList = RasterCollectionsList
 rasterCollectionsList
     :: RasterCollectionsList
 rasterCollectionsList =
-    RasterCollectionsList
+    RasterCollectionsList'
     { _rclCreatedAfter = Nothing
     , _rclCreatorEmail = Nothing
     , _rclRole = Nothing
@@ -233,7 +233,10 @@ rclCreatedBefore
 instance GoogleRequest RasterCollectionsList where
         type Rs RasterCollectionsList =
              RasterCollectionsListResponse
-        requestClient RasterCollectionsList{..}
+        type Scopes RasterCollectionsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient RasterCollectionsList'{..}
           = go _rclCreatedAfter _rclCreatorEmail _rclRole
               _rclBbox
               _rclProcessingStatus

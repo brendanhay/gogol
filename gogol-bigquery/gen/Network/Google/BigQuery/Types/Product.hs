@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.BigQuery.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'jobReference' smart constructor.
-data JobReference = JobReference
+data JobReference = JobReference'
     { _jrJobId     :: !(Maybe Text)
     , _jrProjectId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data JobReference = JobReference
 jobReference
     :: JobReference
 jobReference =
-    JobReference
+    JobReference'
     { _jrJobId = Nothing
     , _jrProjectId = Nothing
     }
@@ -57,11 +57,11 @@ instance FromJSON JobReference where
         parseJSON
           = withObject "JobReference"
               (\ o ->
-                 JobReference <$>
+                 JobReference' <$>
                    (o .:? "jobId") <*> (o .:? "projectId"))
 
 instance ToJSON JobReference where
-        toJSON JobReference{..}
+        toJSON JobReference'{..}
           = object
               (catMaybes
                  [("jobId" .=) <$> _jrJobId,
@@ -69,7 +69,7 @@ instance ToJSON JobReference where
 
 --
 -- /See:/ 'tableList' smart constructor.
-data TableList = TableList
+data TableList = TableList'
     { _tlTotalItems    :: !(Maybe (Textual Int32))
     , _tlEtag          :: !(Maybe Text)
     , _tlNextPageToken :: !(Maybe Text)
@@ -93,7 +93,7 @@ data TableList = TableList
 tableList
     :: TableList
 tableList =
-    TableList
+    TableList'
     { _tlTotalItems = Nothing
     , _tlEtag = Nothing
     , _tlNextPageToken = Nothing
@@ -132,14 +132,14 @@ instance FromJSON TableList where
         parseJSON
           = withObject "TableList"
               (\ o ->
-                 TableList <$>
+                 TableList' <$>
                    (o .:? "totalItems") <*> (o .:? "etag") <*>
                      (o .:? "nextPageToken")
                      <*> (o .:? "kind" .!= "bigquery#tableList")
                      <*> (o .:? "tables" .!= mempty))
 
 instance ToJSON TableList where
-        toJSON TableList{..}
+        toJSON TableList'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _tlTotalItems,
@@ -150,7 +150,7 @@ instance ToJSON TableList where
 
 --
 -- /See:/ 'dataSetListDataSetsItem' smart constructor.
-data DataSetListDataSetsItem = DataSetListDataSetsItem
+data DataSetListDataSetsItem = DataSetListDataSetsItem'
     { _dsldsiFriendlyName     :: !(Maybe Text)
     , _dsldsiKind             :: !Text
     , _dsldsiDataSetReference :: !(Maybe DataSetReference)
@@ -171,7 +171,7 @@ data DataSetListDataSetsItem = DataSetListDataSetsItem
 dataSetListDataSetsItem
     :: DataSetListDataSetsItem
 dataSetListDataSetsItem =
-    DataSetListDataSetsItem
+    DataSetListDataSetsItem'
     { _dsldsiFriendlyName = Nothing
     , _dsldsiKind = "bigquery#dataset"
     , _dsldsiDataSetReference = Nothing
@@ -205,14 +205,14 @@ instance FromJSON DataSetListDataSetsItem where
         parseJSON
           = withObject "DataSetListDataSetsItem"
               (\ o ->
-                 DataSetListDataSetsItem <$>
+                 DataSetListDataSetsItem' <$>
                    (o .:? "friendlyName") <*>
                      (o .:? "kind" .!= "bigquery#dataset")
                      <*> (o .:? "datasetReference")
                      <*> (o .:? "id"))
 
 instance ToJSON DataSetListDataSetsItem where
-        toJSON DataSetListDataSetsItem{..}
+        toJSON DataSetListDataSetsItem'{..}
           = object
               (catMaybes
                  [("friendlyName" .=) <$> _dsldsiFriendlyName,
@@ -222,7 +222,7 @@ instance ToJSON DataSetListDataSetsItem where
 
 --
 -- /See:/ 'tableDataList' smart constructor.
-data TableDataList = TableDataList
+data TableDataList = TableDataList'
     { _tdlEtag      :: !(Maybe Text)
     , _tdlKind      :: !Text
     , _tdlRows      :: !(Maybe [TableRow])
@@ -246,7 +246,7 @@ data TableDataList = TableDataList
 tableDataList
     :: TableDataList
 tableDataList =
-    TableDataList
+    TableDataList'
     { _tdlEtag = Nothing
     , _tdlKind = "bigquery#tableDataList"
     , _tdlRows = Nothing
@@ -285,7 +285,7 @@ instance FromJSON TableDataList where
         parseJSON
           = withObject "TableDataList"
               (\ o ->
-                 TableDataList <$>
+                 TableDataList' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "bigquery#tableDataList")
                      <*> (o .:? "rows" .!= mempty)
@@ -293,7 +293,7 @@ instance FromJSON TableDataList where
                      <*> (o .:? "totalRows"))
 
 instance ToJSON TableDataList where
-        toJSON TableDataList{..}
+        toJSON TableDataList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _tdlEtag, Just ("kind" .= _tdlKind),
@@ -303,7 +303,7 @@ instance ToJSON TableDataList where
 
 --
 -- /See:/ 'jobConfigurationTableCopy' smart constructor.
-data JobConfigurationTableCopy = JobConfigurationTableCopy
+data JobConfigurationTableCopy = JobConfigurationTableCopy'
     { _jctcDestinationTable  :: !(Maybe TableReference)
     , _jctcWriteDisPosition  :: !(Maybe Text)
     , _jctcSourceTables      :: !(Maybe [TableReference])
@@ -327,7 +327,7 @@ data JobConfigurationTableCopy = JobConfigurationTableCopy
 jobConfigurationTableCopy
     :: JobConfigurationTableCopy
 jobConfigurationTableCopy =
-    JobConfigurationTableCopy
+    JobConfigurationTableCopy'
     { _jctcDestinationTable = Nothing
     , _jctcWriteDisPosition = Nothing
     , _jctcSourceTables = Nothing
@@ -384,7 +384,7 @@ instance FromJSON JobConfigurationTableCopy where
         parseJSON
           = withObject "JobConfigurationTableCopy"
               (\ o ->
-                 JobConfigurationTableCopy <$>
+                 JobConfigurationTableCopy' <$>
                    (o .:? "destinationTable") <*>
                      (o .:? "writeDisposition")
                      <*> (o .:? "sourceTables" .!= mempty)
@@ -392,7 +392,7 @@ instance FromJSON JobConfigurationTableCopy where
                      <*> (o .:? "sourceTable"))
 
 instance ToJSON JobConfigurationTableCopy where
-        toJSON JobConfigurationTableCopy{..}
+        toJSON JobConfigurationTableCopy'{..}
           = object
               (catMaybes
                  [("destinationTable" .=) <$> _jctcDestinationTable,
@@ -403,7 +403,7 @@ instance ToJSON JobConfigurationTableCopy where
 
 --
 -- /See:/ 'tableListTablesItem' smart constructor.
-data TableListTablesItem = TableListTablesItem
+data TableListTablesItem = TableListTablesItem'
     { _tltiTableReference :: !(Maybe TableReference)
     , _tltiFriendlyName   :: !(Maybe Text)
     , _tltiKind           :: !Text
@@ -427,7 +427,7 @@ data TableListTablesItem = TableListTablesItem
 tableListTablesItem
     :: TableListTablesItem
 tableListTablesItem =
-    TableListTablesItem
+    TableListTablesItem'
     { _tltiTableReference = Nothing
     , _tltiFriendlyName = Nothing
     , _tltiKind = "bigquery#table"
@@ -463,14 +463,14 @@ instance FromJSON TableListTablesItem where
         parseJSON
           = withObject "TableListTablesItem"
               (\ o ->
-                 TableListTablesItem <$>
+                 TableListTablesItem' <$>
                    (o .:? "tableReference") <*> (o .:? "friendlyName")
                      <*> (o .:? "kind" .!= "bigquery#table")
                      <*> (o .:? "id")
                      <*> (o .:? "type"))
 
 instance ToJSON TableListTablesItem where
-        toJSON TableListTablesItem{..}
+        toJSON TableListTablesItem'{..}
           = object
               (catMaybes
                  [("tableReference" .=) <$> _tltiTableReference,
@@ -480,7 +480,7 @@ instance ToJSON TableListTablesItem where
 
 --
 -- /See:/ 'tableSchema' smart constructor.
-newtype TableSchema = TableSchema
+newtype TableSchema = TableSchema'
     { _tsFields :: Maybe [TableFieldSchema]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -492,7 +492,7 @@ newtype TableSchema = TableSchema
 tableSchema
     :: TableSchema
 tableSchema =
-    TableSchema
+    TableSchema'
     { _tsFields = Nothing
     }
 
@@ -506,15 +506,15 @@ tsFields
 instance FromJSON TableSchema where
         parseJSON
           = withObject "TableSchema"
-              (\ o -> TableSchema <$> (o .:? "fields" .!= mempty))
+              (\ o -> TableSchema' <$> (o .:? "fields" .!= mempty))
 
 instance ToJSON TableSchema where
-        toJSON TableSchema{..}
+        toJSON TableSchema'{..}
           = object (catMaybes [("fields" .=) <$> _tsFields])
 
 --
 -- /See:/ 'projectList' smart constructor.
-data ProjectList = ProjectList
+data ProjectList = ProjectList'
     { _plTotalItems    :: !(Maybe (Textual Int32))
     , _plEtag          :: !(Maybe Text)
     , _plNextPageToken :: !(Maybe Text)
@@ -538,7 +538,7 @@ data ProjectList = ProjectList
 projectList
     :: ProjectList
 projectList =
-    ProjectList
+    ProjectList'
     { _plTotalItems = Nothing
     , _plEtag = Nothing
     , _plNextPageToken = Nothing
@@ -577,14 +577,14 @@ instance FromJSON ProjectList where
         parseJSON
           = withObject "ProjectList"
               (\ o ->
-                 ProjectList <$>
+                 ProjectList' <$>
                    (o .:? "totalItems") <*> (o .:? "etag") <*>
                      (o .:? "nextPageToken")
                      <*> (o .:? "kind" .!= "bigquery#projectList")
                      <*> (o .:? "projects" .!= mempty))
 
 instance ToJSON ProjectList where
-        toJSON ProjectList{..}
+        toJSON ProjectList'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _plTotalItems,
@@ -594,8 +594,152 @@ instance ToJSON ProjectList where
                   ("projects" .=) <$> _plProjects])
 
 --
+-- /See:/ 'explainQueryStep' smart constructor.
+data ExplainQueryStep = ExplainQueryStep'
+    { _eqsSubsteps :: !(Maybe [Text])
+    , _eqsKind     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExplainQueryStep' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eqsSubsteps'
+--
+-- * 'eqsKind'
+explainQueryStep
+    :: ExplainQueryStep
+explainQueryStep =
+    ExplainQueryStep'
+    { _eqsSubsteps = Nothing
+    , _eqsKind = Nothing
+    }
+
+-- | Human-readable stage descriptions.
+eqsSubsteps :: Lens' ExplainQueryStep [Text]
+eqsSubsteps
+  = lens _eqsSubsteps (\ s a -> s{_eqsSubsteps = a}) .
+      _Default
+      . _Coerce
+
+-- | Machine-readable operation type.
+eqsKind :: Lens' ExplainQueryStep (Maybe Text)
+eqsKind = lens _eqsKind (\ s a -> s{_eqsKind = a})
+
+instance FromJSON ExplainQueryStep where
+        parseJSON
+          = withObject "ExplainQueryStep"
+              (\ o ->
+                 ExplainQueryStep' <$>
+                   (o .:? "substeps" .!= mempty) <*> (o .:? "kind"))
+
+instance ToJSON ExplainQueryStep where
+        toJSON ExplainQueryStep'{..}
+          = object
+              (catMaybes
+                 [("substeps" .=) <$> _eqsSubsteps,
+                  ("kind" .=) <$> _eqsKind])
+
+--
+-- /See:/ 'bigtableColumnFamily' smart constructor.
+data BigtableColumnFamily = BigtableColumnFamily'
+    { _bcfFamilyId       :: !(Maybe Text)
+    , _bcfColumns        :: !(Maybe [BigtableColumn])
+    , _bcfOnlyReadLatest :: !(Maybe Bool)
+    , _bcfType           :: !(Maybe Text)
+    , _bcfEncoding       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BigtableColumnFamily' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcfFamilyId'
+--
+-- * 'bcfColumns'
+--
+-- * 'bcfOnlyReadLatest'
+--
+-- * 'bcfType'
+--
+-- * 'bcfEncoding'
+bigtableColumnFamily
+    :: BigtableColumnFamily
+bigtableColumnFamily =
+    BigtableColumnFamily'
+    { _bcfFamilyId = Nothing
+    , _bcfColumns = Nothing
+    , _bcfOnlyReadLatest = Nothing
+    , _bcfType = Nothing
+    , _bcfEncoding = Nothing
+    }
+
+-- | Identifier of the column family.
+bcfFamilyId :: Lens' BigtableColumnFamily (Maybe Text)
+bcfFamilyId
+  = lens _bcfFamilyId (\ s a -> s{_bcfFamilyId = a})
+
+-- | [Optional] Lists of columns that should be exposed as individual fields
+-- as opposed to a list of (column name, value) pairs. All columns whose
+-- qualifier matches a qualifier in this list can be accessed as .. Other
+-- columns can be accessed as a list through .Column field.
+bcfColumns :: Lens' BigtableColumnFamily [BigtableColumn]
+bcfColumns
+  = lens _bcfColumns (\ s a -> s{_bcfColumns = a}) .
+      _Default
+      . _Coerce
+
+-- | [Optional] If this is set only the latest version of value are exposed
+-- for all columns in this column family. This can be overridden for a
+-- specific column by listing that column in \'columns\' and specifying a
+-- different setting for that column.
+bcfOnlyReadLatest :: Lens' BigtableColumnFamily (Maybe Bool)
+bcfOnlyReadLatest
+  = lens _bcfOnlyReadLatest
+      (\ s a -> s{_bcfOnlyReadLatest = a})
+
+-- | [Optional] The type to convert the value in cells of this column family.
+-- The values are expected to be encoded using HBase Bytes.toBytes function
+-- when using the BINARY encoding value. Following BigQuery types are
+-- allowed (case-sensitive) - BYTES STRING INTEGER FLOAT BOOLEAN Defaut
+-- type is BYTES. This can be overridden for a specific column by listing
+-- that column in \'columns\' and specifying a type for it.
+bcfType :: Lens' BigtableColumnFamily (Maybe Text)
+bcfType = lens _bcfType (\ s a -> s{_bcfType = a})
+
+-- | [Optional] The encoding of the values when the type is not STRING.
+-- Acceptable encoding values are: TEXT - indicates values are alphanumeric
+-- text strings. BINARY - indicates values are encoded using HBase
+-- Bytes.toBytes family of functions. This can be overridden for a specific
+-- column by listing that column in \'columns\' and specifying an encoding
+-- for it.
+bcfEncoding :: Lens' BigtableColumnFamily (Maybe Text)
+bcfEncoding
+  = lens _bcfEncoding (\ s a -> s{_bcfEncoding = a})
+
+instance FromJSON BigtableColumnFamily where
+        parseJSON
+          = withObject "BigtableColumnFamily"
+              (\ o ->
+                 BigtableColumnFamily' <$>
+                   (o .:? "familyId") <*> (o .:? "columns" .!= mempty)
+                     <*> (o .:? "onlyReadLatest")
+                     <*> (o .:? "type")
+                     <*> (o .:? "encoding"))
+
+instance ToJSON BigtableColumnFamily where
+        toJSON BigtableColumnFamily'{..}
+          = object
+              (catMaybes
+                 [("familyId" .=) <$> _bcfFamilyId,
+                  ("columns" .=) <$> _bcfColumns,
+                  ("onlyReadLatest" .=) <$> _bcfOnlyReadLatest,
+                  ("type" .=) <$> _bcfType,
+                  ("encoding" .=) <$> _bcfEncoding])
+
+--
 -- /See:/ 'jobStatistics' smart constructor.
-data JobStatistics = JobStatistics
+data JobStatistics = JobStatistics'
     { _jsCreationTime        :: !(Maybe (Textual Int64))
     , _jsStartTime           :: !(Maybe (Textual Int64))
     , _jsLoad                :: !(Maybe JobStatistics3)
@@ -625,7 +769,7 @@ data JobStatistics = JobStatistics
 jobStatistics
     :: JobStatistics
 jobStatistics =
-    JobStatistics
+    JobStatistics'
     { _jsCreationTime = Nothing
     , _jsStartTime = Nothing
     , _jsLoad = Nothing
@@ -683,7 +827,7 @@ instance FromJSON JobStatistics where
         parseJSON
           = withObject "JobStatistics"
               (\ o ->
-                 JobStatistics <$>
+                 JobStatistics' <$>
                    (o .:? "creationTime") <*> (o .:? "startTime") <*>
                      (o .:? "load")
                      <*> (o .:? "totalBytesProcessed")
@@ -692,7 +836,7 @@ instance FromJSON JobStatistics where
                      <*> (o .:? "extract"))
 
 instance ToJSON JobStatistics where
-        toJSON JobStatistics{..}
+        toJSON JobStatistics'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _jsCreationTime,
@@ -706,7 +850,7 @@ instance ToJSON JobStatistics where
 
 --
 -- /See:/ 'dataSet' smart constructor.
-data DataSet = DataSet
+data DataSet = DataSet'
     { _dsCreationTime             :: !(Maybe (Textual Int64))
     , _dsAccess                   :: !(Maybe [DataSetAccessItem])
     , _dsEtag                     :: !(Maybe Text)
@@ -751,7 +895,7 @@ data DataSet = DataSet
 dataSet
     :: DataSet
 dataSet =
-    DataSet
+    DataSet'
     { _dsCreationTime = Nothing
     , _dsAccess = Nothing
     , _dsEtag = Nothing
@@ -835,7 +979,7 @@ dsSelfLink
 dsId :: Lens' DataSet (Maybe Text)
 dsId = lens _dsId (\ s a -> s{_dsId = a})
 
--- | [Experimental] The default lifetime of all tables in the dataset, in
+-- | [Optional] The default lifetime of all tables in the dataset, in
 -- milliseconds. The minimum value is 3600000 milliseconds (one hour). Once
 -- this property is set, all newly-created tables in the dataset will have
 -- an expirationTime property set to the creation time plus the value in
@@ -861,7 +1005,7 @@ instance FromJSON DataSet where
         parseJSON
           = withObject "DataSet"
               (\ o ->
-                 DataSet <$>
+                 DataSet' <$>
                    (o .:? "creationTime") <*>
                      (o .:? "access" .!= mempty)
                      <*> (o .:? "etag")
@@ -876,7 +1020,7 @@ instance FromJSON DataSet where
                      <*> (o .:? "description"))
 
 instance ToJSON DataSet where
-        toJSON DataSet{..}
+        toJSON DataSet'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _dsCreationTime,
@@ -892,13 +1036,77 @@ instance ToJSON DataSet where
                   ("description" .=) <$> _dsDescription])
 
 --
+-- /See:/ 'bigtableOptions' smart constructor.
+data BigtableOptions = BigtableOptions'
+    { _boIgnoreUnspecifiedColumnFamilies :: !(Maybe Bool)
+    , _boColumnFamilies                  :: !(Maybe [BigtableColumnFamily])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BigtableOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'boIgnoreUnspecifiedColumnFamilies'
+--
+-- * 'boColumnFamilies'
+bigtableOptions
+    :: BigtableOptions
+bigtableOptions =
+    BigtableOptions'
+    { _boIgnoreUnspecifiedColumnFamilies = Nothing
+    , _boColumnFamilies = Nothing
+    }
+
+-- | [Optional] If field is true, then the column families that are not
+-- specified in columnFamilies list are not exposed in the table schema.
+-- Otherwise, they are read with BYTES type values. The default value is
+-- false.
+boIgnoreUnspecifiedColumnFamilies :: Lens' BigtableOptions (Maybe Bool)
+boIgnoreUnspecifiedColumnFamilies
+  = lens _boIgnoreUnspecifiedColumnFamilies
+      (\ s a -> s{_boIgnoreUnspecifiedColumnFamilies = a})
+
+-- | [Optional] List of column families to expose in the table schema along
+-- with their types. This list restricts the column families that can be
+-- referenced in queries and specifies their value types. You can use this
+-- list to do type conversions - see the \'type\' field for more details.
+-- If you leave this list empty, all column families are present in the
+-- table schema and their values are read as BYTES. During a query only the
+-- column families referenced in that query are read from Bigtable.
+boColumnFamilies :: Lens' BigtableOptions [BigtableColumnFamily]
+boColumnFamilies
+  = lens _boColumnFamilies
+      (\ s a -> s{_boColumnFamilies = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BigtableOptions where
+        parseJSON
+          = withObject "BigtableOptions"
+              (\ o ->
+                 BigtableOptions' <$>
+                   (o .:? "ignoreUnspecifiedColumnFamilies") <*>
+                     (o .:? "columnFamilies" .!= mempty))
+
+instance ToJSON BigtableOptions where
+        toJSON BigtableOptions'{..}
+          = object
+              (catMaybes
+                 [("ignoreUnspecifiedColumnFamilies" .=) <$>
+                    _boIgnoreUnspecifiedColumnFamilies,
+                  ("columnFamilies" .=) <$> _boColumnFamilies])
+
+--
 -- /See:/ 'externalDataConfiguration' smart constructor.
-data ExternalDataConfiguration = ExternalDataConfiguration
-    { _edcIgnoreUnknownValues :: !(Maybe Bool)
+data ExternalDataConfiguration = ExternalDataConfiguration'
+    { _edcBigtableOptions     :: !(Maybe BigtableOptions)
+    , _edcIgnoreUnknownValues :: !(Maybe Bool)
     , _edcCompression         :: !(Maybe Text)
     , _edcSourceFormat        :: !(Maybe Text)
     , _edcSchema              :: !(Maybe TableSchema)
     , _edcMaxBadRecords       :: !(Maybe (Textual Int32))
+    , _edcGoogleSheetsOptions :: !(Maybe GoogleSheetsOptions)
+    , _edcAutodetect          :: !(Maybe Bool)
     , _edcSourceURIs          :: !(Maybe [Text])
     , _edcCSVOptions          :: !(Maybe CSVOptions)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -906,6 +1114,8 @@ data ExternalDataConfiguration = ExternalDataConfiguration
 -- | Creates a value of 'ExternalDataConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'edcBigtableOptions'
 --
 -- * 'edcIgnoreUnknownValues'
 --
@@ -917,21 +1127,34 @@ data ExternalDataConfiguration = ExternalDataConfiguration
 --
 -- * 'edcMaxBadRecords'
 --
+-- * 'edcGoogleSheetsOptions'
+--
+-- * 'edcAutodetect'
+--
 -- * 'edcSourceURIs'
 --
 -- * 'edcCSVOptions'
 externalDataConfiguration
     :: ExternalDataConfiguration
 externalDataConfiguration =
-    ExternalDataConfiguration
-    { _edcIgnoreUnknownValues = Nothing
+    ExternalDataConfiguration'
+    { _edcBigtableOptions = Nothing
+    , _edcIgnoreUnknownValues = Nothing
     , _edcCompression = Nothing
     , _edcSourceFormat = Nothing
     , _edcSchema = Nothing
     , _edcMaxBadRecords = Nothing
+    , _edcGoogleSheetsOptions = Nothing
+    , _edcAutodetect = Nothing
     , _edcSourceURIs = Nothing
     , _edcCSVOptions = Nothing
     }
+
+-- | [Optional] Additional options if sourceFormat is set to BIGTABLE.
+edcBigtableOptions :: Lens' ExternalDataConfiguration (Maybe BigtableOptions)
+edcBigtableOptions
+  = lens _edcBigtableOptions
+      (\ s a -> s{_edcBigtableOptions = a})
 
 -- | [Optional] Indicates if BigQuery should allow extra values that are not
 -- represented in the table schema. If true, the extra values are ignored.
@@ -939,27 +1162,39 @@ externalDataConfiguration =
 -- there are too many bad records, an invalid error is returned in the job
 -- result. The default value is false. The sourceFormat property determines
 -- what BigQuery treats as an extra value: CSV: Trailing columns JSON:
--- Named values that don\'t match any column names
+-- Named values that don\'t match any column names Google Cloud Bigtable:
+-- This setting is ignored. Google Cloud Datastore backups: This setting is
+-- ignored. Avro: This setting is ignored.
 edcIgnoreUnknownValues :: Lens' ExternalDataConfiguration (Maybe Bool)
 edcIgnoreUnknownValues
   = lens _edcIgnoreUnknownValues
       (\ s a -> s{_edcIgnoreUnknownValues = a})
 
 -- | [Optional] The compression type of the data source. Possible values
--- include GZIP and NONE. The default value is NONE.
+-- include GZIP and NONE. The default value is NONE. This setting is
+-- ignored for Google Cloud Bigtable, Google Cloud Datastore backups and
+-- Avro formats.
 edcCompression :: Lens' ExternalDataConfiguration (Maybe Text)
 edcCompression
   = lens _edcCompression
       (\ s a -> s{_edcCompression = a})
 
--- | [Required] The data format. For CSV files, specify \"CSV\". For
--- newline-delimited JSON, specify \"NEWLINE_DELIMITED_JSON\".
+-- | [Required] The data format. For CSV files, specify \"CSV\". For Google
+-- sheets, specify \"GOOGLE_SHEETS\". For newline-delimited JSON, specify
+-- \"NEWLINE_DELIMITED_JSON\". For Avro files, specify \"AVRO\". For Google
+-- Cloud Datastore backups, specify \"DATASTORE_BACKUP\". [Experimental]
+-- For Google Cloud Bigtable, specify \"BIGTABLE\". Please note that
+-- reading from Google Cloud Bigtable is experimental and has to be enabled
+-- for your project. Please contact Google Cloud Support to enable this for
+-- your project.
 edcSourceFormat :: Lens' ExternalDataConfiguration (Maybe Text)
 edcSourceFormat
   = lens _edcSourceFormat
       (\ s a -> s{_edcSourceFormat = a})
 
--- | [Required] The schema for the data.
+-- | [Optional] The schema for the data. Schema is required for CSV and JSON
+-- formats. Schema is disallowed for Google Cloud Bigtable, Cloud Datastore
+-- backups, and Avro formats.
 edcSchema :: Lens' ExternalDataConfiguration (Maybe TableSchema)
 edcSchema
   = lens _edcSchema (\ s a -> s{_edcSchema = a})
@@ -967,18 +1202,36 @@ edcSchema
 -- | [Optional] The maximum number of bad records that BigQuery can ignore
 -- when reading data. If the number of bad records exceeds this value, an
 -- invalid error is returned in the job result. The default value is 0,
--- which requires that all records are valid.
+-- which requires that all records are valid. This setting is ignored for
+-- Google Cloud Bigtable, Google Cloud Datastore backups and Avro formats.
 edcMaxBadRecords :: Lens' ExternalDataConfiguration (Maybe Int32)
 edcMaxBadRecords
   = lens _edcMaxBadRecords
       (\ s a -> s{_edcMaxBadRecords = a})
       . mapping _Coerce
 
+-- | [Optional] Additional options if sourceFormat is set to GOOGLE_SHEETS.
+edcGoogleSheetsOptions :: Lens' ExternalDataConfiguration (Maybe GoogleSheetsOptions)
+edcGoogleSheetsOptions
+  = lens _edcGoogleSheetsOptions
+      (\ s a -> s{_edcGoogleSheetsOptions = a})
+
+-- | [Experimental] Try to detect schema and format options automatically.
+-- Any option specified explicitly will be honored.
+edcAutodetect :: Lens' ExternalDataConfiguration (Maybe Bool)
+edcAutodetect
+  = lens _edcAutodetect
+      (\ s a -> s{_edcAutodetect = a})
+
 -- | [Required] The fully-qualified URIs that point to your data in Google
--- Cloud Storage. Each URI can contain one \'*\' wildcard character and it
--- must come after the \'bucket\' name. Size limits related to load jobs
--- apply to external data sources, plus an additional limit of 10 GB
--- maximum size across all URIs.
+-- Cloud. For Google Cloud Storage URIs: Each URI can contain one \'*\'
+-- wildcard character and it must come after the \'bucket\' name. Size
+-- limits related to load jobs apply to external data sources. For Google
+-- Cloud Bigtable URIs: Exactly one URI can be specified and it has be a
+-- fully specified and valid HTTPS URL for a Google Cloud Bigtable table.
+-- For Google Cloud Datastore backups, exactly one URI can be specified,
+-- and it must end with \'.backup_info\'. Also, the \'*\' wildcard
+-- character is not allowed.
 edcSourceURIs :: Lens' ExternalDataConfiguration [Text]
 edcSourceURIs
   = lens _edcSourceURIs
@@ -996,31 +1249,38 @@ instance FromJSON ExternalDataConfiguration where
         parseJSON
           = withObject "ExternalDataConfiguration"
               (\ o ->
-                 ExternalDataConfiguration <$>
-                   (o .:? "ignoreUnknownValues") <*>
-                     (o .:? "compression")
+                 ExternalDataConfiguration' <$>
+                   (o .:? "bigtableOptions") <*>
+                     (o .:? "ignoreUnknownValues")
+                     <*> (o .:? "compression")
                      <*> (o .:? "sourceFormat")
                      <*> (o .:? "schema")
                      <*> (o .:? "maxBadRecords")
+                     <*> (o .:? "googleSheetsOptions")
+                     <*> (o .:? "autodetect")
                      <*> (o .:? "sourceUris" .!= mempty)
                      <*> (o .:? "csvOptions"))
 
 instance ToJSON ExternalDataConfiguration where
-        toJSON ExternalDataConfiguration{..}
+        toJSON ExternalDataConfiguration'{..}
           = object
               (catMaybes
-                 [("ignoreUnknownValues" .=) <$>
+                 [("bigtableOptions" .=) <$> _edcBigtableOptions,
+                  ("ignoreUnknownValues" .=) <$>
                     _edcIgnoreUnknownValues,
                   ("compression" .=) <$> _edcCompression,
                   ("sourceFormat" .=) <$> _edcSourceFormat,
                   ("schema" .=) <$> _edcSchema,
                   ("maxBadRecords" .=) <$> _edcMaxBadRecords,
+                  ("googleSheetsOptions" .=) <$>
+                    _edcGoogleSheetsOptions,
+                  ("autodetect" .=) <$> _edcAutodetect,
                   ("sourceUris" .=) <$> _edcSourceURIs,
                   ("csvOptions" .=) <$> _edcCSVOptions])
 
 --
 -- /See:/ 'tableReference' smart constructor.
-data TableReference = TableReference
+data TableReference = TableReference'
     { _trDataSetId :: !(Maybe Text)
     , _trProjectId :: !(Maybe Text)
     , _trTableId   :: !(Maybe Text)
@@ -1038,7 +1298,7 @@ data TableReference = TableReference
 tableReference
     :: TableReference
 tableReference =
-    TableReference
+    TableReference'
     { _trDataSetId = Nothing
     , _trProjectId = Nothing
     , _trTableId = Nothing
@@ -1065,12 +1325,12 @@ instance FromJSON TableReference where
         parseJSON
           = withObject "TableReference"
               (\ o ->
-                 TableReference <$>
+                 TableReference' <$>
                    (o .:? "datasetId") <*> (o .:? "projectId") <*>
                      (o .:? "tableId"))
 
 instance ToJSON TableReference where
-        toJSON TableReference{..}
+        toJSON TableReference'{..}
           = object
               (catMaybes
                  [("datasetId" .=) <$> _trDataSetId,
@@ -1079,7 +1339,7 @@ instance ToJSON TableReference where
 
 --
 -- /See:/ 'tableFieldSchema' smart constructor.
-data TableFieldSchema = TableFieldSchema
+data TableFieldSchema = TableFieldSchema'
     { _tfsMode        :: !(Maybe Text)
     , _tfsName        :: !(Maybe Text)
     , _tfsType        :: !(Maybe Text)
@@ -1103,7 +1363,7 @@ data TableFieldSchema = TableFieldSchema
 tableFieldSchema
     :: TableFieldSchema
 tableFieldSchema =
-    TableFieldSchema
+    TableFieldSchema'
     { _tfsMode = Nothing
     , _tfsName = Nothing
     , _tfsType = Nothing
@@ -1122,9 +1382,9 @@ tfsMode = lens _tfsMode (\ s a -> s{_tfsMode = a})
 tfsName :: Lens' TableFieldSchema (Maybe Text)
 tfsName = lens _tfsName (\ s a -> s{_tfsName = a})
 
--- | [Required] The field data type. Possible values include STRING, INTEGER,
--- FLOAT, BOOLEAN, TIMESTAMP or RECORD (where RECORD indicates that the
--- field contains a nested schema).
+-- | [Required] The field data type. Possible values include STRING, BYTES,
+-- INTEGER, FLOAT, BOOLEAN, TIMESTAMP or RECORD (where RECORD indicates
+-- that the field contains a nested schema).
 tfsType :: Lens' TableFieldSchema (Maybe Text)
 tfsType = lens _tfsType (\ s a -> s{_tfsType = a})
 
@@ -1146,13 +1406,13 @@ instance FromJSON TableFieldSchema where
         parseJSON
           = withObject "TableFieldSchema"
               (\ o ->
-                 TableFieldSchema <$>
+                 TableFieldSchema' <$>
                    (o .:? "mode") <*> (o .:? "name") <*> (o .:? "type")
                      <*> (o .:? "description")
                      <*> (o .:? "fields" .!= mempty))
 
 instance ToJSON TableFieldSchema where
-        toJSON TableFieldSchema{..}
+        toJSON TableFieldSchema'{..}
           = object
               (catMaybes
                  [("mode" .=) <$> _tfsMode, ("name" .=) <$> _tfsName,
@@ -1162,7 +1422,7 @@ instance ToJSON TableFieldSchema where
 
 --
 -- /See:/ 'getQueryResultsResponse' smart constructor.
-data GetQueryResultsResponse = GetQueryResultsResponse
+data GetQueryResultsResponse = GetQueryResultsResponse'
     { _gqrrJobReference        :: !(Maybe JobReference)
     , _gqrrEtag                :: !(Maybe Text)
     , _gqrrKind                :: !Text
@@ -1204,7 +1464,7 @@ data GetQueryResultsResponse = GetQueryResultsResponse
 getQueryResultsResponse
     :: GetQueryResultsResponse
 getQueryResultsResponse =
-    GetQueryResultsResponse
+    GetQueryResultsResponse'
     { _gqrrJobReference = Nothing
     , _gqrrEtag = Nothing
     , _gqrrKind = "bigquery#getQueryResultsResponse"
@@ -1301,7 +1561,7 @@ instance FromJSON GetQueryResultsResponse where
         parseJSON
           = withObject "GetQueryResultsResponse"
               (\ o ->
-                 GetQueryResultsResponse <$>
+                 GetQueryResultsResponse' <$>
                    (o .:? "jobReference") <*> (o .:? "etag") <*>
                      (o .:? "kind" .!= "bigquery#getQueryResultsResponse")
                      <*> (o .:? "schema")
@@ -1314,7 +1574,7 @@ instance FromJSON GetQueryResultsResponse where
                      <*> (o .:? "cacheHit"))
 
 instance ToJSON GetQueryResultsResponse where
-        toJSON GetQueryResultsResponse{..}
+        toJSON GetQueryResultsResponse'{..}
           = object
               (catMaybes
                  [("jobReference" .=) <$> _gqrrJobReference,
@@ -1332,7 +1592,7 @@ instance ToJSON GetQueryResultsResponse where
 
 --
 -- /See:/ 'dataSetList' smart constructor.
-data DataSetList = DataSetList
+data DataSetList = DataSetList'
     { _dslEtag          :: !(Maybe Text)
     , _dslNextPageToken :: !(Maybe Text)
     , _dslKind          :: !Text
@@ -1353,7 +1613,7 @@ data DataSetList = DataSetList
 dataSetList
     :: DataSetList
 dataSetList =
-    DataSetList
+    DataSetList'
     { _dslEtag = Nothing
     , _dslNextPageToken = Nothing
     , _dslKind = "bigquery#datasetList"
@@ -1391,13 +1651,13 @@ instance FromJSON DataSetList where
         parseJSON
           = withObject "DataSetList"
               (\ o ->
-                 DataSetList <$>
+                 DataSetList' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "bigquery#datasetList")
                      <*> (o .:? "datasets" .!= mempty))
 
 instance ToJSON DataSetList where
-        toJSON DataSetList{..}
+        toJSON DataSetList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _dslEtag,
@@ -1407,12 +1667,13 @@ instance ToJSON DataSetList where
 
 --
 -- /See:/ 'queryRequest' smart constructor.
-data QueryRequest = QueryRequest
+data QueryRequest = QueryRequest'
     { _qrUseQueryCache  :: !Bool
     , _qrPreserveNulls  :: !(Maybe Bool)
     , _qrKind           :: !Text
     , _qrQuery          :: !(Maybe Text)
     , _qrTimeoutMs      :: !(Maybe (Textual Word32))
+    , _qrUseLegacySQL   :: !(Maybe Bool)
     , _qrDryRun         :: !(Maybe Bool)
     , _qrMaxResults     :: !(Maybe (Textual Word32))
     , _qrDefaultDataSet :: !(Maybe DataSetReference)
@@ -1432,6 +1693,8 @@ data QueryRequest = QueryRequest
 --
 -- * 'qrTimeoutMs'
 --
+-- * 'qrUseLegacySQL'
+--
 -- * 'qrDryRun'
 --
 -- * 'qrMaxResults'
@@ -1440,12 +1703,13 @@ data QueryRequest = QueryRequest
 queryRequest
     :: QueryRequest
 queryRequest =
-    QueryRequest
+    QueryRequest'
     { _qrUseQueryCache = True
     , _qrPreserveNulls = Nothing
     , _qrKind = "bigquery#queryRequest"
     , _qrQuery = Nothing
     , _qrTimeoutMs = Nothing
+    , _qrUseLegacySQL = Nothing
     , _qrDryRun = Nothing
     , _qrMaxResults = Nothing
     , _qrDefaultDataSet = Nothing
@@ -1487,6 +1751,18 @@ qrTimeoutMs
   = lens _qrTimeoutMs (\ s a -> s{_qrTimeoutMs = a}) .
       mapping _Coerce
 
+-- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL dialect
+-- for this query. The default value is true. If set to false, the query
+-- will use BigQuery\'s standard SQL:
+-- https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql
+-- is set to false, the values of allowLargeResults and flattenResults are
+-- ignored; query will be run as if allowLargeResults is true and
+-- flattenResults is false.
+qrUseLegacySQL :: Lens' QueryRequest (Maybe Bool)
+qrUseLegacySQL
+  = lens _qrUseLegacySQL
+      (\ s a -> s{_qrUseLegacySQL = a})
+
 -- | [Optional] If set to true, BigQuery doesn\'t run the job. Instead, if
 -- the query is valid, BigQuery returns statistics about the job such as
 -- how many bytes would be processed. If the query is invalid, an error
@@ -1517,31 +1793,33 @@ instance FromJSON QueryRequest where
         parseJSON
           = withObject "QueryRequest"
               (\ o ->
-                 QueryRequest <$>
+                 QueryRequest' <$>
                    (o .:? "useQueryCache" .!= True) <*>
                      (o .:? "preserveNulls")
                      <*> (o .:? "kind" .!= "bigquery#queryRequest")
                      <*> (o .:? "query")
                      <*> (o .:? "timeoutMs")
+                     <*> (o .:? "useLegacySql")
                      <*> (o .:? "dryRun")
                      <*> (o .:? "maxResults")
                      <*> (o .:? "defaultDataset"))
 
 instance ToJSON QueryRequest where
-        toJSON QueryRequest{..}
+        toJSON QueryRequest'{..}
           = object
               (catMaybes
                  [Just ("useQueryCache" .= _qrUseQueryCache),
                   ("preserveNulls" .=) <$> _qrPreserveNulls,
                   Just ("kind" .= _qrKind), ("query" .=) <$> _qrQuery,
                   ("timeoutMs" .=) <$> _qrTimeoutMs,
+                  ("useLegacySql" .=) <$> _qrUseLegacySQL,
                   ("dryRun" .=) <$> _qrDryRun,
                   ("maxResults" .=) <$> _qrMaxResults,
                   ("defaultDataset" .=) <$> _qrDefaultDataSet])
 
 --
 -- /See:/ 'jobStatistics4' smart constructor.
-newtype JobStatistics4 = JobStatistics4
+newtype JobStatistics4 = JobStatistics4'
     { _jsDestinationURIFileCounts :: Maybe [Textual Int64]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1553,7 +1831,7 @@ newtype JobStatistics4 = JobStatistics4
 jobStatistics4
     :: JobStatistics4
 jobStatistics4 =
-    JobStatistics4
+    JobStatistics4'
     { _jsDestinationURIFileCounts = Nothing
     }
 
@@ -1571,11 +1849,11 @@ instance FromJSON JobStatistics4 where
         parseJSON
           = withObject "JobStatistics4"
               (\ o ->
-                 JobStatistics4 <$>
+                 JobStatistics4' <$>
                    (o .:? "destinationUriFileCounts" .!= mempty))
 
 instance ToJSON JobStatistics4 where
-        toJSON JobStatistics4{..}
+        toJSON JobStatistics4'{..}
           = object
               (catMaybes
                  [("destinationUriFileCounts" .=) <$>
@@ -1583,7 +1861,7 @@ instance ToJSON JobStatistics4 where
 
 --
 -- /See:/ 'projectReference' smart constructor.
-newtype ProjectReference = ProjectReference
+newtype ProjectReference = ProjectReference'
     { _prProjectId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1595,7 +1873,7 @@ newtype ProjectReference = ProjectReference
 projectReference
     :: ProjectReference
 projectReference =
-    ProjectReference
+    ProjectReference'
     { _prProjectId = Nothing
     }
 
@@ -1608,16 +1886,206 @@ prProjectId
 instance FromJSON ProjectReference where
         parseJSON
           = withObject "ProjectReference"
-              (\ o -> ProjectReference <$> (o .:? "projectId"))
+              (\ o -> ProjectReference' <$> (o .:? "projectId"))
 
 instance ToJSON ProjectReference where
-        toJSON ProjectReference{..}
+        toJSON ProjectReference'{..}
           = object
               (catMaybes [("projectId" .=) <$> _prProjectId])
 
 --
+-- /See:/ 'explainQueryStage' smart constructor.
+data ExplainQueryStage = ExplainQueryStage'
+    { _eqsWaitRatioMax    :: !(Maybe (Textual Double))
+    , _eqsRecordsWritten  :: !(Maybe (Textual Int64))
+    , _eqsSteps           :: !(Maybe [ExplainQueryStep])
+    , _eqsWriteRatioAvg   :: !(Maybe (Textual Double))
+    , _eqsRecordsRead     :: !(Maybe (Textual Int64))
+    , _eqsComputeRatioAvg :: !(Maybe (Textual Double))
+    , _eqsName            :: !(Maybe Text)
+    , _eqsReadRatioMax    :: !(Maybe (Textual Double))
+    , _eqsWaitRatioAvg    :: !(Maybe (Textual Double))
+    , _eqsId              :: !(Maybe (Textual Int64))
+    , _eqsComputeRatioMax :: !(Maybe (Textual Double))
+    , _eqsWriteRatioMax   :: !(Maybe (Textual Double))
+    , _eqsReadRatioAvg    :: !(Maybe (Textual Double))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExplainQueryStage' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eqsWaitRatioMax'
+--
+-- * 'eqsRecordsWritten'
+--
+-- * 'eqsSteps'
+--
+-- * 'eqsWriteRatioAvg'
+--
+-- * 'eqsRecordsRead'
+--
+-- * 'eqsComputeRatioAvg'
+--
+-- * 'eqsName'
+--
+-- * 'eqsReadRatioMax'
+--
+-- * 'eqsWaitRatioAvg'
+--
+-- * 'eqsId'
+--
+-- * 'eqsComputeRatioMax'
+--
+-- * 'eqsWriteRatioMax'
+--
+-- * 'eqsReadRatioAvg'
+explainQueryStage
+    :: ExplainQueryStage
+explainQueryStage =
+    ExplainQueryStage'
+    { _eqsWaitRatioMax = Nothing
+    , _eqsRecordsWritten = Nothing
+    , _eqsSteps = Nothing
+    , _eqsWriteRatioAvg = Nothing
+    , _eqsRecordsRead = Nothing
+    , _eqsComputeRatioAvg = Nothing
+    , _eqsName = Nothing
+    , _eqsReadRatioMax = Nothing
+    , _eqsWaitRatioAvg = Nothing
+    , _eqsId = Nothing
+    , _eqsComputeRatioMax = Nothing
+    , _eqsWriteRatioMax = Nothing
+    , _eqsReadRatioAvg = Nothing
+    }
+
+-- | Relative amount of time the slowest shard spent waiting to be scheduled.
+eqsWaitRatioMax :: Lens' ExplainQueryStage (Maybe Double)
+eqsWaitRatioMax
+  = lens _eqsWaitRatioMax
+      (\ s a -> s{_eqsWaitRatioMax = a})
+      . mapping _Coerce
+
+-- | Number of records written by the stage.
+eqsRecordsWritten :: Lens' ExplainQueryStage (Maybe Int64)
+eqsRecordsWritten
+  = lens _eqsRecordsWritten
+      (\ s a -> s{_eqsRecordsWritten = a})
+      . mapping _Coerce
+
+-- | List of operations within the stage in dependency order (approximately
+-- chronological).
+eqsSteps :: Lens' ExplainQueryStage [ExplainQueryStep]
+eqsSteps
+  = lens _eqsSteps (\ s a -> s{_eqsSteps = a}) .
+      _Default
+      . _Coerce
+
+-- | Relative amount of time the average shard spent on writing output.
+eqsWriteRatioAvg :: Lens' ExplainQueryStage (Maybe Double)
+eqsWriteRatioAvg
+  = lens _eqsWriteRatioAvg
+      (\ s a -> s{_eqsWriteRatioAvg = a})
+      . mapping _Coerce
+
+-- | Number of records read into the stage.
+eqsRecordsRead :: Lens' ExplainQueryStage (Maybe Int64)
+eqsRecordsRead
+  = lens _eqsRecordsRead
+      (\ s a -> s{_eqsRecordsRead = a})
+      . mapping _Coerce
+
+-- | Relative amount of time the average shard spent on CPU-bound tasks.
+eqsComputeRatioAvg :: Lens' ExplainQueryStage (Maybe Double)
+eqsComputeRatioAvg
+  = lens _eqsComputeRatioAvg
+      (\ s a -> s{_eqsComputeRatioAvg = a})
+      . mapping _Coerce
+
+-- | Human-readable name for stage.
+eqsName :: Lens' ExplainQueryStage (Maybe Text)
+eqsName = lens _eqsName (\ s a -> s{_eqsName = a})
+
+-- | Relative amount of time the slowest shard spent reading input.
+eqsReadRatioMax :: Lens' ExplainQueryStage (Maybe Double)
+eqsReadRatioMax
+  = lens _eqsReadRatioMax
+      (\ s a -> s{_eqsReadRatioMax = a})
+      . mapping _Coerce
+
+-- | Relative amount of time the average shard spent waiting to be scheduled.
+eqsWaitRatioAvg :: Lens' ExplainQueryStage (Maybe Double)
+eqsWaitRatioAvg
+  = lens _eqsWaitRatioAvg
+      (\ s a -> s{_eqsWaitRatioAvg = a})
+      . mapping _Coerce
+
+-- | Unique ID for stage within plan.
+eqsId :: Lens' ExplainQueryStage (Maybe Int64)
+eqsId
+  = lens _eqsId (\ s a -> s{_eqsId = a}) .
+      mapping _Coerce
+
+-- | Relative amount of time the slowest shard spent on CPU-bound tasks.
+eqsComputeRatioMax :: Lens' ExplainQueryStage (Maybe Double)
+eqsComputeRatioMax
+  = lens _eqsComputeRatioMax
+      (\ s a -> s{_eqsComputeRatioMax = a})
+      . mapping _Coerce
+
+-- | Relative amount of time the slowest shard spent on writing output.
+eqsWriteRatioMax :: Lens' ExplainQueryStage (Maybe Double)
+eqsWriteRatioMax
+  = lens _eqsWriteRatioMax
+      (\ s a -> s{_eqsWriteRatioMax = a})
+      . mapping _Coerce
+
+-- | Relative amount of time the average shard spent reading input.
+eqsReadRatioAvg :: Lens' ExplainQueryStage (Maybe Double)
+eqsReadRatioAvg
+  = lens _eqsReadRatioAvg
+      (\ s a -> s{_eqsReadRatioAvg = a})
+      . mapping _Coerce
+
+instance FromJSON ExplainQueryStage where
+        parseJSON
+          = withObject "ExplainQueryStage"
+              (\ o ->
+                 ExplainQueryStage' <$>
+                   (o .:? "waitRatioMax") <*> (o .:? "recordsWritten")
+                     <*> (o .:? "steps" .!= mempty)
+                     <*> (o .:? "writeRatioAvg")
+                     <*> (o .:? "recordsRead")
+                     <*> (o .:? "computeRatioAvg")
+                     <*> (o .:? "name")
+                     <*> (o .:? "readRatioMax")
+                     <*> (o .:? "waitRatioAvg")
+                     <*> (o .:? "id")
+                     <*> (o .:? "computeRatioMax")
+                     <*> (o .:? "writeRatioMax")
+                     <*> (o .:? "readRatioAvg"))
+
+instance ToJSON ExplainQueryStage where
+        toJSON ExplainQueryStage'{..}
+          = object
+              (catMaybes
+                 [("waitRatioMax" .=) <$> _eqsWaitRatioMax,
+                  ("recordsWritten" .=) <$> _eqsRecordsWritten,
+                  ("steps" .=) <$> _eqsSteps,
+                  ("writeRatioAvg" .=) <$> _eqsWriteRatioAvg,
+                  ("recordsRead" .=) <$> _eqsRecordsRead,
+                  ("computeRatioAvg" .=) <$> _eqsComputeRatioAvg,
+                  ("name" .=) <$> _eqsName,
+                  ("readRatioMax" .=) <$> _eqsReadRatioMax,
+                  ("waitRatioAvg" .=) <$> _eqsWaitRatioAvg,
+                  ("id" .=) <$> _eqsId,
+                  ("computeRatioMax" .=) <$> _eqsComputeRatioMax,
+                  ("writeRatioMax" .=) <$> _eqsWriteRatioMax,
+                  ("readRatioAvg" .=) <$> _eqsReadRatioAvg])
+
+--
 -- /See:/ 'jobConfigurationLoad' smart constructor.
-data JobConfigurationLoad = JobConfigurationLoad
+data JobConfigurationLoad = JobConfigurationLoad'
     { _jclSkipLeadingRows     :: !(Maybe (Textual Int32))
     , _jclProjectionFields    :: !(Maybe [Text])
     , _jclDestinationTable    :: !(Maybe TableReference)
@@ -1632,6 +2100,7 @@ data JobConfigurationLoad = JobConfigurationLoad
     , _jclSchema              :: !(Maybe TableSchema)
     , _jclQuote               :: !Text
     , _jclMaxBadRecords       :: !(Maybe (Textual Int32))
+    , _jclAutodetect          :: !(Maybe Bool)
     , _jclSourceURIs          :: !(Maybe [Text])
     , _jclEncoding            :: !(Maybe Text)
     , _jclFieldDelimiter      :: !(Maybe Text)
@@ -1669,6 +2138,8 @@ data JobConfigurationLoad = JobConfigurationLoad
 --
 -- * 'jclMaxBadRecords'
 --
+-- * 'jclAutodetect'
+--
 -- * 'jclSourceURIs'
 --
 -- * 'jclEncoding'
@@ -1677,7 +2148,7 @@ data JobConfigurationLoad = JobConfigurationLoad
 jobConfigurationLoad
     :: JobConfigurationLoad
 jobConfigurationLoad =
-    JobConfigurationLoad
+    JobConfigurationLoad'
     { _jclSkipLeadingRows = Nothing
     , _jclProjectionFields = Nothing
     , _jclDestinationTable = Nothing
@@ -1692,6 +2163,7 @@ jobConfigurationLoad =
     , _jclSchema = Nothing
     , _jclQuote = "\""
     , _jclMaxBadRecords = Nothing
+    , _jclAutodetect = Nothing
     , _jclSourceURIs = Nothing
     , _jclEncoding = Nothing
     , _jclFieldDelimiter = Nothing
@@ -1795,16 +2267,16 @@ jclAllowQuotedNewlines
 
 -- | [Optional] The format of the data files. For CSV files, specify \"CSV\".
 -- For datastore backups, specify \"DATASTORE_BACKUP\". For
--- newline-delimited JSON, specify \"NEWLINE_DELIMITED_JSON\". The default
--- value is CSV.
+-- newline-delimited JSON, specify \"NEWLINE_DELIMITED_JSON\". For Avro,
+-- specify \"AVRO\". The default value is CSV.
 jclSourceFormat :: Lens' JobConfigurationLoad (Maybe Text)
 jclSourceFormat
   = lens _jclSourceFormat
       (\ s a -> s{_jclSourceFormat = a})
 
 -- | [Optional] The schema for the destination table. The schema can be
--- omitted if the destination table already exists or if the schema can be
--- inferred from the loaded data.
+-- omitted if the destination table already exists, or if you\'re loading
+-- data from Google Cloud Datastore.
 jclSchema :: Lens' JobConfigurationLoad (Maybe TableSchema)
 jclSchema
   = lens _jclSchema (\ s a -> s{_jclSchema = a})
@@ -1829,6 +2301,13 @@ jclMaxBadRecords
       (\ s a -> s{_jclMaxBadRecords = a})
       . mapping _Coerce
 
+-- | [Experimental] Indicates if we should automatically infer the options
+-- and schema for CSV and JSON sources.
+jclAutodetect :: Lens' JobConfigurationLoad (Maybe Bool)
+jclAutodetect
+  = lens _jclAutodetect
+      (\ s a -> s{_jclAutodetect = a})
+
 -- | [Required] The fully-qualified URIs that point to your data in Google
 -- Cloud Storage. Each URI can contain one \'*\' wildcard character and it
 -- must come after the \'bucket\' name.
@@ -1847,7 +2326,9 @@ jclEncoding :: Lens' JobConfigurationLoad (Maybe Text)
 jclEncoding
   = lens _jclEncoding (\ s a -> s{_jclEncoding = a})
 
--- | [Optional] The separator for fields in a CSV file. BigQuery converts the
+-- | [Optional] The separator for fields in a CSV file. The separator can be
+-- any ISO-8859-1 single-byte character. To use a character in the range
+-- 128-255, you must encode the character as UTF8. BigQuery converts the
 -- string to ISO-8859-1 encoding, and then uses the first byte of the
 -- encoded string to split the data in its raw, binary state. BigQuery also
 -- supports the escape sequence \"\\t\" to specify a tab separator. The
@@ -1861,7 +2342,7 @@ instance FromJSON JobConfigurationLoad where
         parseJSON
           = withObject "JobConfigurationLoad"
               (\ o ->
-                 JobConfigurationLoad <$>
+                 JobConfigurationLoad' <$>
                    (o .:? "skipLeadingRows") <*>
                      (o .:? "projectionFields" .!= mempty)
                      <*> (o .:? "destinationTable")
@@ -1876,12 +2357,13 @@ instance FromJSON JobConfigurationLoad where
                      <*> (o .:? "schema")
                      <*> (o .:? "quote" .!= "\"")
                      <*> (o .:? "maxBadRecords")
+                     <*> (o .:? "autodetect")
                      <*> (o .:? "sourceUris" .!= mempty)
                      <*> (o .:? "encoding")
                      <*> (o .:? "fieldDelimiter"))
 
 instance ToJSON JobConfigurationLoad where
-        toJSON JobConfigurationLoad{..}
+        toJSON JobConfigurationLoad'{..}
           = object
               (catMaybes
                  [("skipLeadingRows" .=) <$> _jclSkipLeadingRows,
@@ -1900,13 +2382,14 @@ instance ToJSON JobConfigurationLoad where
                   ("schema" .=) <$> _jclSchema,
                   Just ("quote" .= _jclQuote),
                   ("maxBadRecords" .=) <$> _jclMaxBadRecords,
+                  ("autodetect" .=) <$> _jclAutodetect,
                   ("sourceUris" .=) <$> _jclSourceURIs,
                   ("encoding" .=) <$> _jclEncoding,
                   ("fieldDelimiter" .=) <$> _jclFieldDelimiter])
 
 --
 -- /See:/ 'dataSetReference' smart constructor.
-data DataSetReference = DataSetReference
+data DataSetReference = DataSetReference'
     { _dsrDataSetId :: !(Maybe Text)
     , _dsrProjectId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1921,7 +2404,7 @@ data DataSetReference = DataSetReference
 dataSetReference
     :: DataSetReference
 dataSetReference =
-    DataSetReference
+    DataSetReference'
     { _dsrDataSetId = Nothing
     , _dsrProjectId = Nothing
     }
@@ -1942,11 +2425,11 @@ instance FromJSON DataSetReference where
         parseJSON
           = withObject "DataSetReference"
               (\ o ->
-                 DataSetReference <$>
+                 DataSetReference' <$>
                    (o .:? "datasetId") <*> (o .:? "projectId"))
 
 instance ToJSON DataSetReference where
-        toJSON DataSetReference{..}
+        toJSON DataSetReference'{..}
           = object
               (catMaybes
                  [("datasetId" .=) <$> _dsrDataSetId,
@@ -1954,10 +2437,11 @@ instance ToJSON DataSetReference where
 
 --
 -- /See:/ 'tableDataInsertAllRequest' smart constructor.
-data TableDataInsertAllRequest = TableDataInsertAllRequest
+data TableDataInsertAllRequest = TableDataInsertAllRequest'
     { _tdiarKind                :: !Text
     , _tdiarIgnoreUnknownValues :: !(Maybe Bool)
     , _tdiarRows                :: !(Maybe [TableDataInsertAllRequestRowsItem])
+    , _tdiarTemplateSuffix      :: !(Maybe Text)
     , _tdiarSkipInvalidRows     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1971,14 +2455,17 @@ data TableDataInsertAllRequest = TableDataInsertAllRequest
 --
 -- * 'tdiarRows'
 --
+-- * 'tdiarTemplateSuffix'
+--
 -- * 'tdiarSkipInvalidRows'
 tableDataInsertAllRequest
     :: TableDataInsertAllRequest
 tableDataInsertAllRequest =
-    TableDataInsertAllRequest
+    TableDataInsertAllRequest'
     { _tdiarKind = "bigquery#tableDataInsertAllRequest"
     , _tdiarIgnoreUnknownValues = Nothing
     , _tdiarRows = Nothing
+    , _tdiarTemplateSuffix = Nothing
     , _tdiarSkipInvalidRows = Nothing
     }
 
@@ -2002,6 +2489,17 @@ tdiarRows
       _Default
       . _Coerce
 
+-- | [Experimental] If specified, treats the destination table as a base
+-- template, and inserts the rows into an instance table named
+-- \"{destination}{templateSuffix}\". BigQuery will manage creation of the
+-- instance table, using the schema of the base template table. See
+-- https:\/\/cloud.google.com\/bigquery\/streaming-data-into-bigquery#template-tables
+-- for considerations when working with templates tables.
+tdiarTemplateSuffix :: Lens' TableDataInsertAllRequest (Maybe Text)
+tdiarTemplateSuffix
+  = lens _tdiarTemplateSuffix
+      (\ s a -> s{_tdiarTemplateSuffix = a})
+
 -- | [Optional] Insert all valid rows of a request, even if invalid rows
 -- exist. The default value is false, which causes the entire request to
 -- fail if any invalid rows exist.
@@ -2014,26 +2512,28 @@ instance FromJSON TableDataInsertAllRequest where
         parseJSON
           = withObject "TableDataInsertAllRequest"
               (\ o ->
-                 TableDataInsertAllRequest <$>
+                 TableDataInsertAllRequest' <$>
                    (o .:? "kind" .!=
                       "bigquery#tableDataInsertAllRequest")
                      <*> (o .:? "ignoreUnknownValues")
                      <*> (o .:? "rows" .!= mempty)
+                     <*> (o .:? "templateSuffix")
                      <*> (o .:? "skipInvalidRows"))
 
 instance ToJSON TableDataInsertAllRequest where
-        toJSON TableDataInsertAllRequest{..}
+        toJSON TableDataInsertAllRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tdiarKind),
                   ("ignoreUnknownValues" .=) <$>
                     _tdiarIgnoreUnknownValues,
                   ("rows" .=) <$> _tdiarRows,
+                  ("templateSuffix" .=) <$> _tdiarTemplateSuffix,
                   ("skipInvalidRows" .=) <$> _tdiarSkipInvalidRows])
 
 --
 -- /See:/ 'projectListProjectsItem' smart constructor.
-data ProjectListProjectsItem = ProjectListProjectsItem
+data ProjectListProjectsItem = ProjectListProjectsItem'
     { _plpiFriendlyName     :: !(Maybe Text)
     , _plpiKind             :: !Text
     , _plpiProjectReference :: !(Maybe ProjectReference)
@@ -2057,7 +2557,7 @@ data ProjectListProjectsItem = ProjectListProjectsItem
 projectListProjectsItem
     :: ProjectListProjectsItem
 projectListProjectsItem =
-    ProjectListProjectsItem
+    ProjectListProjectsItem'
     { _plpiFriendlyName = Nothing
     , _plpiKind = "bigquery#project"
     , _plpiProjectReference = Nothing
@@ -2096,7 +2596,7 @@ instance FromJSON ProjectListProjectsItem where
         parseJSON
           = withObject "ProjectListProjectsItem"
               (\ o ->
-                 ProjectListProjectsItem <$>
+                 ProjectListProjectsItem' <$>
                    (o .:? "friendlyName") <*>
                      (o .:? "kind" .!= "bigquery#project")
                      <*> (o .:? "projectReference")
@@ -2104,7 +2604,7 @@ instance FromJSON ProjectListProjectsItem where
                      <*> (o .:? "numericId"))
 
 instance ToJSON ProjectListProjectsItem where
-        toJSON ProjectListProjectsItem{..}
+        toJSON ProjectListProjectsItem'{..}
           = object
               (catMaybes
                  [("friendlyName" .=) <$> _plpiFriendlyName,
@@ -2114,8 +2614,123 @@ instance ToJSON ProjectListProjectsItem where
                   ("numericId" .=) <$> _plpiNumericId])
 
 --
+-- /See:/ 'bigtableColumn' smart constructor.
+data BigtableColumn = BigtableColumn'
+    { _bcQualifierEncoded :: !(Maybe Base64)
+    , _bcFieldName        :: !(Maybe Text)
+    , _bcQualifierString  :: !(Maybe Text)
+    , _bcOnlyReadLatest   :: !(Maybe Bool)
+    , _bcType             :: !(Maybe Text)
+    , _bcEncoding         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BigtableColumn' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcQualifierEncoded'
+--
+-- * 'bcFieldName'
+--
+-- * 'bcQualifierString'
+--
+-- * 'bcOnlyReadLatest'
+--
+-- * 'bcType'
+--
+-- * 'bcEncoding'
+bigtableColumn
+    :: BigtableColumn
+bigtableColumn =
+    BigtableColumn'
+    { _bcQualifierEncoded = Nothing
+    , _bcFieldName = Nothing
+    , _bcQualifierString = Nothing
+    , _bcOnlyReadLatest = Nothing
+    , _bcType = Nothing
+    , _bcEncoding = Nothing
+    }
+
+-- | [Required] Qualifier of the column. Columns in the parent column family
+-- that has this exact qualifier are exposed as . field. If the qualifier
+-- is valid UTF-8 string, it can be specified in the qualifier_string
+-- field. Otherwise, a base-64 encoded value must be set to
+-- qualifier_encoded. The column field name is the same as the column
+-- qualifier. However, if the qualifier is not a valid BigQuery field
+-- identifier i.e. does not match [a-zA-Z][a-zA-Z0-9_]*, a valid identifier
+-- must be provided as field_name.
+bcQualifierEncoded :: Lens' BigtableColumn (Maybe ByteString)
+bcQualifierEncoded
+  = lens _bcQualifierEncoded
+      (\ s a -> s{_bcQualifierEncoded = a})
+      . mapping _Base64
+
+-- | [Optional] If the qualifier is not a valid BigQuery field identifier
+-- i.e. does not match [a-zA-Z][a-zA-Z0-9_]*, a valid identifier must be
+-- provided as the column field name and is used as field name in queries.
+bcFieldName :: Lens' BigtableColumn (Maybe Text)
+bcFieldName
+  = lens _bcFieldName (\ s a -> s{_bcFieldName = a})
+
+bcQualifierString :: Lens' BigtableColumn (Maybe Text)
+bcQualifierString
+  = lens _bcQualifierString
+      (\ s a -> s{_bcQualifierString = a})
+
+-- | [Optional] If this is set, only the latest version of value in this
+-- column are exposed. \'onlyReadLatest\' can also be set at the column
+-- family level. However, the setting at this level takes precedence if
+-- \'onlyReadLatest\' is set at both levels.
+bcOnlyReadLatest :: Lens' BigtableColumn (Maybe Bool)
+bcOnlyReadLatest
+  = lens _bcOnlyReadLatest
+      (\ s a -> s{_bcOnlyReadLatest = a})
+
+-- | [Optional] The type to convert the value in cells of this column. The
+-- values are expected to be encoded using HBase Bytes.toBytes function
+-- when using the BINARY encoding value. Following BigQuery types are
+-- allowed (case-sensitive) - BYTES STRING INTEGER FLOAT BOOLEAN Defaut
+-- type is BYTES. \'type\' can also be set at the column family level.
+-- However, the setting at this level takes precedence if \'type\' is set
+-- at both levels.
+bcType :: Lens' BigtableColumn (Maybe Text)
+bcType = lens _bcType (\ s a -> s{_bcType = a})
+
+-- | [Optional] The encoding of the values when the type is not STRING.
+-- Acceptable encoding values are: TEXT - indicates values are alphanumeric
+-- text strings. BINARY - indicates values are encoded using HBase
+-- Bytes.toBytes family of functions. \'encoding\' can also be set at the
+-- column family level. However, the setting at this level takes precedence
+-- if \'encoding\' is set at both levels.
+bcEncoding :: Lens' BigtableColumn (Maybe Text)
+bcEncoding
+  = lens _bcEncoding (\ s a -> s{_bcEncoding = a})
+
+instance FromJSON BigtableColumn where
+        parseJSON
+          = withObject "BigtableColumn"
+              (\ o ->
+                 BigtableColumn' <$>
+                   (o .:? "qualifierEncoded") <*> (o .:? "fieldName")
+                     <*> (o .:? "qualifierString")
+                     <*> (o .:? "onlyReadLatest")
+                     <*> (o .:? "type")
+                     <*> (o .:? "encoding"))
+
+instance ToJSON BigtableColumn where
+        toJSON BigtableColumn'{..}
+          = object
+              (catMaybes
+                 [("qualifierEncoded" .=) <$> _bcQualifierEncoded,
+                  ("fieldName" .=) <$> _bcFieldName,
+                  ("qualifierString" .=) <$> _bcQualifierString,
+                  ("onlyReadLatest" .=) <$> _bcOnlyReadLatest,
+                  ("type" .=) <$> _bcType,
+                  ("encoding" .=) <$> _bcEncoding])
+
+--
 -- /See:/ 'streamingbuffer' smart constructor.
-data Streamingbuffer = Streamingbuffer
+data Streamingbuffer = Streamingbuffer'
     { _sEstimatedBytes  :: !(Maybe (Textual Word64))
     , _sOldestEntryTime :: !(Maybe (Textual Word64))
     , _sEstimatedRows   :: !(Maybe (Textual Word64))
@@ -2133,7 +2748,7 @@ data Streamingbuffer = Streamingbuffer
 streamingbuffer
     :: Streamingbuffer
 streamingbuffer =
-    Streamingbuffer
+    Streamingbuffer'
     { _sEstimatedBytes = Nothing
     , _sOldestEntryTime = Nothing
     , _sEstimatedRows = Nothing
@@ -2168,13 +2783,13 @@ instance FromJSON Streamingbuffer where
         parseJSON
           = withObject "Streamingbuffer"
               (\ o ->
-                 Streamingbuffer <$>
+                 Streamingbuffer' <$>
                    (o .:? "estimatedBytes") <*>
                      (o .:? "oldestEntryTime")
                      <*> (o .:? "estimatedRows"))
 
 instance ToJSON Streamingbuffer where
-        toJSON Streamingbuffer{..}
+        toJSON Streamingbuffer'{..}
           = object
               (catMaybes
                  [("estimatedBytes" .=) <$> _sEstimatedBytes,
@@ -2183,7 +2798,7 @@ instance ToJSON Streamingbuffer where
 
 --
 -- /See:/ 'tableRow' smart constructor.
-newtype TableRow = TableRow
+newtype TableRow = TableRow'
     { _trF :: Maybe [TableCell]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2195,7 +2810,7 @@ newtype TableRow = TableRow
 tableRow
     :: TableRow
 tableRow =
-    TableRow
+    TableRow'
     { _trF = Nothing
     }
 
@@ -2209,15 +2824,15 @@ trF
 instance FromJSON TableRow where
         parseJSON
           = withObject "TableRow"
-              (\ o -> TableRow <$> (o .:? "f" .!= mempty))
+              (\ o -> TableRow' <$> (o .:? "f" .!= mempty))
 
 instance ToJSON TableRow where
-        toJSON TableRow{..}
+        toJSON TableRow'{..}
           = object (catMaybes [("f" .=) <$> _trF])
 
 --
 -- /See:/ 'jobListJobsItem' smart constructor.
-data JobListJobsItem = JobListJobsItem
+data JobListJobsItem = JobListJobsItem'
     { _jljiJobReference  :: !(Maybe JobReference)
     , _jljiStatus        :: !(Maybe JobStatus)
     , _jljiState         :: !(Maybe Text)
@@ -2253,7 +2868,7 @@ data JobListJobsItem = JobListJobsItem
 jobListJobsItem
     :: JobListJobsItem
 jobListJobsItem =
-    JobListJobsItem
+    JobListJobsItem'
     { _jljiJobReference = Nothing
     , _jljiStatus = Nothing
     , _jljiState = Nothing
@@ -2319,7 +2934,7 @@ instance FromJSON JobListJobsItem where
         parseJSON
           = withObject "JobListJobsItem"
               (\ o ->
-                 JobListJobsItem <$>
+                 JobListJobsItem' <$>
                    (o .:? "jobReference") <*> (o .:? "status") <*>
                      (o .:? "state")
                      <*> (o .:? "user_email")
@@ -2330,7 +2945,7 @@ instance FromJSON JobListJobsItem where
                      <*> (o .:? "configuration"))
 
 instance ToJSON JobListJobsItem where
-        toJSON JobListJobsItem{..}
+        toJSON JobListJobsItem'{..}
           = object
               (catMaybes
                  [("jobReference" .=) <$> _jljiJobReference,
@@ -2344,10 +2959,58 @@ instance ToJSON JobListJobsItem where
                   ("configuration" .=) <$> _jljiConfiguration])
 
 --
+-- /See:/ 'timePartitioning' smart constructor.
+data TimePartitioning = TimePartitioning'
+    { _tpExpirationMs :: !(Maybe (Textual Int64))
+    , _tpType         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TimePartitioning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpExpirationMs'
+--
+-- * 'tpType'
+timePartitioning
+    :: TimePartitioning
+timePartitioning =
+    TimePartitioning'
+    { _tpExpirationMs = Nothing
+    , _tpType = Nothing
+    }
+
+-- | [Optional] Number of milliseconds for which to keep the storage for a
+-- partition.
+tpExpirationMs :: Lens' TimePartitioning (Maybe Int64)
+tpExpirationMs
+  = lens _tpExpirationMs
+      (\ s a -> s{_tpExpirationMs = a})
+      . mapping _Coerce
+
+-- | [Required] The only type supported is DAY, which will generate one
+-- partition per day based on data loading time.
+tpType :: Lens' TimePartitioning (Maybe Text)
+tpType = lens _tpType (\ s a -> s{_tpType = a})
+
+instance FromJSON TimePartitioning where
+        parseJSON
+          = withObject "TimePartitioning"
+              (\ o ->
+                 TimePartitioning' <$>
+                   (o .:? "expirationMs") <*> (o .:? "type"))
+
+instance ToJSON TimePartitioning where
+        toJSON TimePartitioning'{..}
+          = object
+              (catMaybes
+                 [("expirationMs" .=) <$> _tpExpirationMs,
+                  ("type" .=) <$> _tpType])
+
+--
 -- /See:/ 'jobConfiguration' smart constructor.
-data JobConfiguration = JobConfiguration
+data JobConfiguration = JobConfiguration'
     { _jcCopy    :: !(Maybe JobConfigurationTableCopy)
-    , _jcLink    :: !(Maybe JobConfigurationLink)
     , _jcLoad    :: !(Maybe JobConfigurationLoad)
     , _jcQuery   :: !(Maybe JobConfigurationQuery)
     , _jcExtract :: !(Maybe JobConfigurationExtract)
@@ -2360,8 +3023,6 @@ data JobConfiguration = JobConfiguration
 --
 -- * 'jcCopy'
 --
--- * 'jcLink'
---
 -- * 'jcLoad'
 --
 -- * 'jcQuery'
@@ -2372,9 +3033,8 @@ data JobConfiguration = JobConfiguration
 jobConfiguration
     :: JobConfiguration
 jobConfiguration =
-    JobConfiguration
+    JobConfiguration'
     { _jcCopy = Nothing
-    , _jcLink = Nothing
     , _jcLoad = Nothing
     , _jcQuery = Nothing
     , _jcExtract = Nothing
@@ -2384,10 +3044,6 @@ jobConfiguration =
 -- | [Pick one] Copies a table.
 jcCopy :: Lens' JobConfiguration (Maybe JobConfigurationTableCopy)
 jcCopy = lens _jcCopy (\ s a -> s{_jcCopy = a})
-
--- | [Pick one] Configures a link job.
-jcLink :: Lens' JobConfiguration (Maybe JobConfigurationLink)
-jcLink = lens _jcLink (\ s a -> s{_jcLink = a})
 
 -- | [Pick one] Configures a load job.
 jcLoad :: Lens' JobConfiguration (Maybe JobConfigurationLoad)
@@ -2413,24 +3069,23 @@ instance FromJSON JobConfiguration where
         parseJSON
           = withObject "JobConfiguration"
               (\ o ->
-                 JobConfiguration <$>
-                   (o .:? "copy") <*> (o .:? "link") <*> (o .:? "load")
-                     <*> (o .:? "query")
+                 JobConfiguration' <$>
+                   (o .:? "copy") <*> (o .:? "load") <*> (o .:? "query")
                      <*> (o .:? "extract")
                      <*> (o .:? "dryRun"))
 
 instance ToJSON JobConfiguration where
-        toJSON JobConfiguration{..}
+        toJSON JobConfiguration'{..}
           = object
               (catMaybes
-                 [("copy" .=) <$> _jcCopy, ("link" .=) <$> _jcLink,
-                  ("load" .=) <$> _jcLoad, ("query" .=) <$> _jcQuery,
+                 [("copy" .=) <$> _jcCopy, ("load" .=) <$> _jcLoad,
+                  ("query" .=) <$> _jcQuery,
                   ("extract" .=) <$> _jcExtract,
                   ("dryRun" .=) <$> _jcDryRun])
 
 --
 -- /See:/ 'job' smart constructor.
-data Job = Job
+data Job = Job'
     { _jJobReference  :: !(Maybe JobReference)
     , _jStatus        :: !(Maybe JobStatus)
     , _jEtag          :: !(Maybe Text)
@@ -2466,7 +3121,7 @@ data Job = Job
 job
     :: Job
 job =
-    Job
+    Job'
     { _jJobReference = Nothing
     , _jStatus = Nothing
     , _jEtag = Nothing
@@ -2527,7 +3182,7 @@ instance FromJSON Job where
         parseJSON
           = withObject "Job"
               (\ o ->
-                 Job <$>
+                 Job' <$>
                    (o .:? "jobReference") <*> (o .:? "status") <*>
                      (o .:? "etag")
                      <*> (o .:? "user_email")
@@ -2538,7 +3193,7 @@ instance FromJSON Job where
                      <*> (o .:? "configuration"))
 
 instance ToJSON Job where
-        toJSON Job{..}
+        toJSON Job'{..}
           = object
               (catMaybes
                  [("jobReference" .=) <$> _jJobReference,
@@ -2550,95 +3205,8 @@ instance ToJSON Job where
                   ("configuration" .=) <$> _jConfiguration])
 
 --
--- /See:/ 'jobConfigurationLink' smart constructor.
-data JobConfigurationLink = JobConfigurationLink
-    { _jDestinationTable  :: !(Maybe TableReference)
-    , _jWriteDisPosition  :: !(Maybe Text)
-    , _jCreateDisPosition :: !(Maybe Text)
-    , _jSourceURI         :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'JobConfigurationLink' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'jDestinationTable'
---
--- * 'jWriteDisPosition'
---
--- * 'jCreateDisPosition'
---
--- * 'jSourceURI'
-jobConfigurationLink
-    :: JobConfigurationLink
-jobConfigurationLink =
-    JobConfigurationLink
-    { _jDestinationTable = Nothing
-    , _jWriteDisPosition = Nothing
-    , _jCreateDisPosition = Nothing
-    , _jSourceURI = Nothing
-    }
-
--- | [Required] The destination table of the link job.
-jDestinationTable :: Lens' JobConfigurationLink (Maybe TableReference)
-jDestinationTable
-  = lens _jDestinationTable
-      (\ s a -> s{_jDestinationTable = a})
-
--- | [Optional] Specifies the action that occurs if the destination table
--- already exists. The following values are supported: WRITE_TRUNCATE: If
--- the table already exists, BigQuery overwrites the table data.
--- WRITE_APPEND: If the table already exists, BigQuery appends the data to
--- the table. WRITE_EMPTY: If the table already exists and contains data, a
--- \'duplicate\' error is returned in the job result. The default value is
--- WRITE_EMPTY. Each action is atomic and only occurs if BigQuery is able
--- to complete the job successfully. Creation, truncation and append
--- actions occur as one atomic update upon job completion.
-jWriteDisPosition :: Lens' JobConfigurationLink (Maybe Text)
-jWriteDisPosition
-  = lens _jWriteDisPosition
-      (\ s a -> s{_jWriteDisPosition = a})
-
--- | [Optional] Specifies whether the job is allowed to create new tables.
--- The following values are supported: CREATE_IF_NEEDED: If the table does
--- not exist, BigQuery creates the table. CREATE_NEVER: The table must
--- already exist. If it does not, a \'notFound\' error is returned in the
--- job result. The default value is CREATE_IF_NEEDED. Creation, truncation
--- and append actions occur as one atomic update upon job completion.
-jCreateDisPosition :: Lens' JobConfigurationLink (Maybe Text)
-jCreateDisPosition
-  = lens _jCreateDisPosition
-      (\ s a -> s{_jCreateDisPosition = a})
-
--- | [Required] URI of source table to link.
-jSourceURI :: Lens' JobConfigurationLink [Text]
-jSourceURI
-  = lens _jSourceURI (\ s a -> s{_jSourceURI = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON JobConfigurationLink where
-        parseJSON
-          = withObject "JobConfigurationLink"
-              (\ o ->
-                 JobConfigurationLink <$>
-                   (o .:? "destinationTable") <*>
-                     (o .:? "writeDisposition")
-                     <*> (o .:? "createDisposition")
-                     <*> (o .:? "sourceUri" .!= mempty))
-
-instance ToJSON JobConfigurationLink where
-        toJSON JobConfigurationLink{..}
-          = object
-              (catMaybes
-                 [("destinationTable" .=) <$> _jDestinationTable,
-                  ("writeDisposition" .=) <$> _jWriteDisPosition,
-                  ("createDisposition" .=) <$> _jCreateDisPosition,
-                  ("sourceUri" .=) <$> _jSourceURI])
-
---
 -- /See:/ 'tableDataInsertAllResponseInsertErrorsItem' smart constructor.
-data TableDataInsertAllResponseInsertErrorsItem = TableDataInsertAllResponseInsertErrorsItem
+data TableDataInsertAllResponseInsertErrorsItem = TableDataInsertAllResponseInsertErrorsItem'
     { _tdiarieiErrors :: !(Maybe [ErrorProto])
     , _tdiarieiIndex  :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2653,7 +3221,7 @@ data TableDataInsertAllResponseInsertErrorsItem = TableDataInsertAllResponseInse
 tableDataInsertAllResponseInsertErrorsItem
     :: TableDataInsertAllResponseInsertErrorsItem
 tableDataInsertAllResponseInsertErrorsItem =
-    TableDataInsertAllResponseInsertErrorsItem
+    TableDataInsertAllResponseInsertErrorsItem'
     { _tdiarieiErrors = Nothing
     , _tdiarieiIndex = Nothing
     }
@@ -2679,12 +3247,13 @@ instance FromJSON
           = withObject
               "TableDataInsertAllResponseInsertErrorsItem"
               (\ o ->
-                 TableDataInsertAllResponseInsertErrorsItem <$>
+                 TableDataInsertAllResponseInsertErrorsItem' <$>
                    (o .:? "errors" .!= mempty) <*> (o .:? "index"))
 
 instance ToJSON
          TableDataInsertAllResponseInsertErrorsItem where
-        toJSON TableDataInsertAllResponseInsertErrorsItem{..}
+        toJSON
+          TableDataInsertAllResponseInsertErrorsItem'{..}
           = object
               (catMaybes
                  [("errors" .=) <$> _tdiarieiErrors,
@@ -2692,7 +3261,7 @@ instance ToJSON
 
 --
 -- /See:/ 'jobConfigurationExtract' smart constructor.
-data JobConfigurationExtract = JobConfigurationExtract
+data JobConfigurationExtract = JobConfigurationExtract'
     { _jceDestinationFormat :: !(Maybe Text)
     , _jceSourceTable       :: !(Maybe TableReference)
     , _jcePrintHeader       :: !Bool
@@ -2722,7 +3291,7 @@ data JobConfigurationExtract = JobConfigurationExtract
 jobConfigurationExtract
     :: JobConfigurationExtract
 jobConfigurationExtract =
-    JobConfigurationExtract
+    JobConfigurationExtract'
     { _jceDestinationFormat = Nothing
     , _jceSourceTable = Nothing
     , _jcePrintHeader = True
@@ -2788,7 +3357,7 @@ instance FromJSON JobConfigurationExtract where
         parseJSON
           = withObject "JobConfigurationExtract"
               (\ o ->
-                 JobConfigurationExtract <$>
+                 JobConfigurationExtract' <$>
                    (o .:? "destinationFormat") <*> (o .:? "sourceTable")
                      <*> (o .:? "printHeader" .!= True)
                      <*> (o .:? "compression")
@@ -2797,7 +3366,7 @@ instance FromJSON JobConfigurationExtract where
                      <*> (o .:? "fieldDelimiter"))
 
 instance ToJSON JobConfigurationExtract where
-        toJSON JobConfigurationExtract{..}
+        toJSON JobConfigurationExtract'{..}
           = object
               (catMaybes
                  [("destinationFormat" .=) <$> _jceDestinationFormat,
@@ -2810,7 +3379,7 @@ instance ToJSON JobConfigurationExtract where
 
 --
 -- /See:/ 'jobCancelResponse' smart constructor.
-data JobCancelResponse = JobCancelResponse
+data JobCancelResponse = JobCancelResponse'
     { _jcrKind :: !Text
     , _jcrJob  :: !(Maybe Job)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2825,7 +3394,7 @@ data JobCancelResponse = JobCancelResponse
 jobCancelResponse
     :: JobCancelResponse
 jobCancelResponse =
-    JobCancelResponse
+    JobCancelResponse'
     { _jcrKind = "bigquery#jobCancelResponse"
     , _jcrJob = Nothing
     }
@@ -2842,12 +3411,12 @@ instance FromJSON JobCancelResponse where
         parseJSON
           = withObject "JobCancelResponse"
               (\ o ->
-                 JobCancelResponse <$>
+                 JobCancelResponse' <$>
                    (o .:? "kind" .!= "bigquery#jobCancelResponse") <*>
                      (o .:? "job"))
 
 instance ToJSON JobCancelResponse where
-        toJSON JobCancelResponse{..}
+        toJSON JobCancelResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _jcrKind), ("job" .=) <$> _jcrJob])
@@ -2855,7 +3424,7 @@ instance ToJSON JobCancelResponse where
 -- | Represents a single JSON object.
 --
 -- /See:/ 'jsonObject' smart constructor.
-newtype JSONObject = JSONObject
+newtype JSONObject = JSONObject'
     { _joAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2868,7 +3437,7 @@ jsonObject
     :: HashMap Text JSONValue -- ^ 'joAddtional'
     -> JSONObject
 jsonObject pJoAddtional_ =
-    JSONObject
+    JSONObject'
     { _joAddtional = _Coerce # pJoAddtional_
     }
 
@@ -2880,14 +3449,14 @@ joAddtional
 instance FromJSON JSONObject where
         parseJSON
           = withObject "JSONObject"
-              (\ o -> JSONObject <$> (parseJSONObject o))
+              (\ o -> JSONObject' <$> (parseJSONObject o))
 
 instance ToJSON JSONObject where
         toJSON = toJSON . _joAddtional
 
 --
 -- /See:/ 'jobConfigurationQuery' smart constructor.
-data JobConfigurationQuery = JobConfigurationQuery
+data JobConfigurationQuery = JobConfigurationQuery'
     { _jcqDestinationTable             :: !(Maybe TableReference)
     , _jcqWriteDisPosition             :: !(Maybe Text)
     , _jcqPriority                     :: !(Maybe Text)
@@ -2897,8 +3466,10 @@ data JobConfigurationQuery = JobConfigurationQuery
     , _jcqCreateDisPosition            :: !(Maybe Text)
     , _jcqUserDefinedFunctionResources :: !(Maybe [UserDefinedFunctionResource])
     , _jcqAllowLargeResults            :: !(Maybe Bool)
+    , _jcqMaximumBillingTier           :: !(Textual Int32)
     , _jcqQuery                        :: !(Maybe Text)
     , _jcqFlattenResults               :: !Bool
+    , _jcqUseLegacySQL                 :: !(Maybe Bool)
     , _jcqDefaultDataSet               :: !(Maybe DataSetReference)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2924,15 +3495,19 @@ data JobConfigurationQuery = JobConfigurationQuery
 --
 -- * 'jcqAllowLargeResults'
 --
+-- * 'jcqMaximumBillingTier'
+--
 -- * 'jcqQuery'
 --
 -- * 'jcqFlattenResults'
+--
+-- * 'jcqUseLegacySQL'
 --
 -- * 'jcqDefaultDataSet'
 jobConfigurationQuery
     :: JobConfigurationQuery
 jobConfigurationQuery =
-    JobConfigurationQuery
+    JobConfigurationQuery'
     { _jcqDestinationTable = Nothing
     , _jcqWriteDisPosition = Nothing
     , _jcqPriority = Nothing
@@ -2942,8 +3517,10 @@ jobConfigurationQuery =
     , _jcqCreateDisPosition = Nothing
     , _jcqUserDefinedFunctionResources = Nothing
     , _jcqAllowLargeResults = Nothing
+    , _jcqMaximumBillingTier = 1
     , _jcqQuery = Nothing
     , _jcqFlattenResults = True
+    , _jcqUseLegacySQL = Nothing
     , _jcqDefaultDataSet = Nothing
     }
 
@@ -2990,7 +3567,7 @@ jcqPreserveNulls
   = lens _jcqPreserveNulls
       (\ s a -> s{_jcqPreserveNulls = a})
 
--- | [Experimental] If querying an external data source outside of BigQuery,
+-- | [Optional] If querying an external data source outside of BigQuery,
 -- describes the data format, location and other properties of the data
 -- source. By defining these properties, the data source can then be
 -- queried as if it were a standard BigQuery table.
@@ -3026,6 +3603,15 @@ jcqAllowLargeResults
   = lens _jcqAllowLargeResults
       (\ s a -> s{_jcqAllowLargeResults = a})
 
+-- | [Optional] Limits the billing tier for this job. Queries that have
+-- resource usage beyond this tier will fail (without incurring a charge).
+-- If unspecified, this will be set to your project default.
+jcqMaximumBillingTier :: Lens' JobConfigurationQuery Int32
+jcqMaximumBillingTier
+  = lens _jcqMaximumBillingTier
+      (\ s a -> s{_jcqMaximumBillingTier = a})
+      . _Coerce
+
 -- | [Required] BigQuery SQL query to execute.
 jcqQuery :: Lens' JobConfigurationQuery (Maybe Text)
 jcqQuery = lens _jcqQuery (\ s a -> s{_jcqQuery = a})
@@ -3038,6 +3624,18 @@ jcqFlattenResults
   = lens _jcqFlattenResults
       (\ s a -> s{_jcqFlattenResults = a})
 
+-- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL dialect
+-- for this query. The default value is true. If set to false, the query
+-- will use BigQuery\'s standard SQL:
+-- https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql
+-- is set to false, the values of allowLargeResults and flattenResults are
+-- ignored; query will be run as if allowLargeResults is true and
+-- flattenResults is false.
+jcqUseLegacySQL :: Lens' JobConfigurationQuery (Maybe Bool)
+jcqUseLegacySQL
+  = lens _jcqUseLegacySQL
+      (\ s a -> s{_jcqUseLegacySQL = a})
+
 -- | [Optional] Specifies the default dataset to use for unqualified table
 -- names in the query.
 jcqDefaultDataSet :: Lens' JobConfigurationQuery (Maybe DataSetReference)
@@ -3049,7 +3647,7 @@ instance FromJSON JobConfigurationQuery where
         parseJSON
           = withObject "JobConfigurationQuery"
               (\ o ->
-                 JobConfigurationQuery <$>
+                 JobConfigurationQuery' <$>
                    (o .:? "destinationTable") <*>
                      (o .:? "writeDisposition")
                      <*> (o .:? "priority")
@@ -3059,12 +3657,14 @@ instance FromJSON JobConfigurationQuery where
                      <*> (o .:? "createDisposition")
                      <*> (o .:? "userDefinedFunctionResources" .!= mempty)
                      <*> (o .:? "allowLargeResults")
+                     <*> (o .:? "maximumBillingTier" .!= 1)
                      <*> (o .:? "query")
                      <*> (o .:? "flattenResults" .!= True)
+                     <*> (o .:? "useLegacySql")
                      <*> (o .:? "defaultDataset"))
 
 instance ToJSON JobConfigurationQuery where
-        toJSON JobConfigurationQuery{..}
+        toJSON JobConfigurationQuery'{..}
           = object
               (catMaybes
                  [("destinationTable" .=) <$> _jcqDestinationTable,
@@ -3077,13 +3677,63 @@ instance ToJSON JobConfigurationQuery where
                   ("userDefinedFunctionResources" .=) <$>
                     _jcqUserDefinedFunctionResources,
                   ("allowLargeResults" .=) <$> _jcqAllowLargeResults,
+                  Just
+                    ("maximumBillingTier" .= _jcqMaximumBillingTier),
                   ("query" .=) <$> _jcqQuery,
                   Just ("flattenResults" .= _jcqFlattenResults),
+                  ("useLegacySql" .=) <$> _jcqUseLegacySQL,
                   ("defaultDataset" .=) <$> _jcqDefaultDataSet])
 
 --
+-- /See:/ 'googleSheetsOptions' smart constructor.
+newtype GoogleSheetsOptions = GoogleSheetsOptions'
+    { _gsoSkipLeadingRows :: Maybe (Textual Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleSheetsOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gsoSkipLeadingRows'
+googleSheetsOptions
+    :: GoogleSheetsOptions
+googleSheetsOptions =
+    GoogleSheetsOptions'
+    { _gsoSkipLeadingRows = Nothing
+    }
+
+-- | [Optional] The number of rows at the top of a sheet that BigQuery will
+-- skip when reading the data. The default value is 0. This property is
+-- useful if you have header rows that should be skipped. When autodetect
+-- is on, behavior is the following: * skipLeadingRows unspecified -
+-- Autodetect tries to detect headers in the first row. If they are not
+-- detected, the row is read as data. Otherwise data is read starting from
+-- the second row. * skipLeadingRows is 0 - Instructs autodetect that there
+-- are no headers and data should be read starting from the first row. *
+-- skipLeadingRows = N > 0 - Autodetect skips N-1 rows and tries to detect
+-- headers in row N. If headers are not detected, row N is just skipped.
+-- Otherwise row N is used to extract column names for the detected schema.
+gsoSkipLeadingRows :: Lens' GoogleSheetsOptions (Maybe Int64)
+gsoSkipLeadingRows
+  = lens _gsoSkipLeadingRows
+      (\ s a -> s{_gsoSkipLeadingRows = a})
+      . mapping _Coerce
+
+instance FromJSON GoogleSheetsOptions where
+        parseJSON
+          = withObject "GoogleSheetsOptions"
+              (\ o ->
+                 GoogleSheetsOptions' <$> (o .:? "skipLeadingRows"))
+
+instance ToJSON GoogleSheetsOptions where
+        toJSON GoogleSheetsOptions'{..}
+          = object
+              (catMaybes
+                 [("skipLeadingRows" .=) <$> _gsoSkipLeadingRows])
+
+--
 -- /See:/ 'tableDataInsertAllRequestRowsItem' smart constructor.
-data TableDataInsertAllRequestRowsItem = TableDataInsertAllRequestRowsItem
+data TableDataInsertAllRequestRowsItem = TableDataInsertAllRequestRowsItem'
     { _tdiarriJSON     :: !(Maybe JSONObject)
     , _tdiarriInsertId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3098,7 +3748,7 @@ data TableDataInsertAllRequestRowsItem = TableDataInsertAllRequestRowsItem
 tableDataInsertAllRequestRowsItem
     :: TableDataInsertAllRequestRowsItem
 tableDataInsertAllRequestRowsItem =
-    TableDataInsertAllRequestRowsItem
+    TableDataInsertAllRequestRowsItem'
     { _tdiarriJSON = Nothing
     , _tdiarriInsertId = Nothing
     }
@@ -3121,12 +3771,12 @@ instance FromJSON TableDataInsertAllRequestRowsItem
         parseJSON
           = withObject "TableDataInsertAllRequestRowsItem"
               (\ o ->
-                 TableDataInsertAllRequestRowsItem <$>
+                 TableDataInsertAllRequestRowsItem' <$>
                    (o .:? "json") <*> (o .:? "insertId"))
 
 instance ToJSON TableDataInsertAllRequestRowsItem
          where
-        toJSON TableDataInsertAllRequestRowsItem{..}
+        toJSON TableDataInsertAllRequestRowsItem'{..}
           = object
               (catMaybes
                  [("json" .=) <$> _tdiarriJSON,
@@ -3134,7 +3784,7 @@ instance ToJSON TableDataInsertAllRequestRowsItem
 
 --
 -- /See:/ 'jobList' smart constructor.
-data JobList = JobList
+data JobList = JobList'
     { _jlEtag          :: !(Maybe Text)
     , _jlNextPageToken :: !(Maybe Text)
     , _jlKind          :: !Text
@@ -3155,7 +3805,7 @@ data JobList = JobList
 jobList
     :: JobList
 jobList =
-    JobList
+    JobList'
     { _jlEtag = Nothing
     , _jlNextPageToken = Nothing
     , _jlKind = "bigquery#jobList"
@@ -3186,26 +3836,26 @@ instance FromJSON JobList where
         parseJSON
           = withObject "JobList"
               (\ o ->
-                 JobList <$>
+                 JobList' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "bigquery#jobList")
                      <*> (o .:? "jobs" .!= mempty))
 
 instance ToJSON JobList where
-        toJSON JobList{..}
+        toJSON JobList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _jlEtag,
                   ("nextPageToken" .=) <$> _jlNextPageToken,
                   Just ("kind" .= _jlKind), ("jobs" .=) <$> _jlJobs])
 
--- | [Experimental] If querying an external data source outside of BigQuery,
+-- | [Optional] If querying an external data source outside of BigQuery,
 -- describes the data format, location and other properties of the data
 -- source. By defining these properties, the data source can then be
 -- queried as if it were a standard BigQuery table.
 --
 -- /See:/ 'jobConfigurationQueryTableDefinitions' smart constructor.
-newtype JobConfigurationQueryTableDefinitions = JobConfigurationQueryTableDefinitions
+newtype JobConfigurationQueryTableDefinitions = JobConfigurationQueryTableDefinitions'
     { _jcqtdAddtional :: HashMap Text ExternalDataConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3218,7 +3868,7 @@ jobConfigurationQueryTableDefinitions
     :: HashMap Text ExternalDataConfiguration -- ^ 'jcqtdAddtional'
     -> JobConfigurationQueryTableDefinitions
 jobConfigurationQueryTableDefinitions pJcqtdAddtional_ =
-    JobConfigurationQueryTableDefinitions
+    JobConfigurationQueryTableDefinitions'
     { _jcqtdAddtional = _Coerce # pJcqtdAddtional_
     }
 
@@ -3233,7 +3883,7 @@ instance FromJSON
         parseJSON
           = withObject "JobConfigurationQueryTableDefinitions"
               (\ o ->
-                 JobConfigurationQueryTableDefinitions <$>
+                 JobConfigurationQueryTableDefinitions' <$>
                    (parseJSONObject o))
 
 instance ToJSON JobConfigurationQueryTableDefinitions
@@ -3242,7 +3892,7 @@ instance ToJSON JobConfigurationQueryTableDefinitions
 
 --
 -- /See:/ 'tableCell' smart constructor.
-newtype TableCell = TableCell
+newtype TableCell = TableCell'
     { _tcV :: Maybe JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3254,7 +3904,7 @@ newtype TableCell = TableCell
 tableCell
     :: TableCell
 tableCell =
-    TableCell
+    TableCell'
     { _tcV = Nothing
     }
 
@@ -3264,29 +3914,42 @@ tcV = lens _tcV (\ s a -> s{_tcV = a})
 instance FromJSON TableCell where
         parseJSON
           = withObject "TableCell"
-              (\ o -> TableCell <$> (o .:? "v"))
+              (\ o -> TableCell' <$> (o .:? "v"))
 
 instance ToJSON TableCell where
-        toJSON TableCell{..}
+        toJSON TableCell'{..}
           = object (catMaybes [("v" .=) <$> _tcV])
 
 --
 -- /See:/ 'viewDefinition' smart constructor.
-newtype ViewDefinition = ViewDefinition
-    { _vdQuery :: Maybe Text
+data ViewDefinition = ViewDefinition'
+    { _vdUserDefinedFunctionResources :: !(Maybe [UserDefinedFunctionResource])
+    , _vdQuery                        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ViewDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vdUserDefinedFunctionResources'
+--
 -- * 'vdQuery'
 viewDefinition
     :: ViewDefinition
 viewDefinition =
-    ViewDefinition
-    { _vdQuery = Nothing
+    ViewDefinition'
+    { _vdUserDefinedFunctionResources = Nothing
+    , _vdQuery = Nothing
     }
+
+-- | [Experimental] Describes user-defined function resources used in the
+-- query.
+vdUserDefinedFunctionResources :: Lens' ViewDefinition [UserDefinedFunctionResource]
+vdUserDefinedFunctionResources
+  = lens _vdUserDefinedFunctionResources
+      (\ s a -> s{_vdUserDefinedFunctionResources = a})
+      . _Default
+      . _Coerce
 
 -- | [Required] A query that BigQuery executes when the view is referenced.
 vdQuery :: Lens' ViewDefinition (Maybe Text)
@@ -3295,15 +3958,22 @@ vdQuery = lens _vdQuery (\ s a -> s{_vdQuery = a})
 instance FromJSON ViewDefinition where
         parseJSON
           = withObject "ViewDefinition"
-              (\ o -> ViewDefinition <$> (o .:? "query"))
+              (\ o ->
+                 ViewDefinition' <$>
+                   (o .:? "userDefinedFunctionResources" .!= mempty) <*>
+                     (o .:? "query"))
 
 instance ToJSON ViewDefinition where
-        toJSON ViewDefinition{..}
-          = object (catMaybes [("query" .=) <$> _vdQuery])
+        toJSON ViewDefinition'{..}
+          = object
+              (catMaybes
+                 [("userDefinedFunctionResources" .=) <$>
+                    _vdUserDefinedFunctionResources,
+                  ("query" .=) <$> _vdQuery])
 
 --
 -- /See:/ 'userDefinedFunctionResource' smart constructor.
-data UserDefinedFunctionResource = UserDefinedFunctionResource
+data UserDefinedFunctionResource = UserDefinedFunctionResource'
     { _udfrResourceURI :: !(Maybe Text)
     , _udfrInlineCode  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3318,7 +3988,7 @@ data UserDefinedFunctionResource = UserDefinedFunctionResource
 userDefinedFunctionResource
     :: UserDefinedFunctionResource
 userDefinedFunctionResource =
-    UserDefinedFunctionResource
+    UserDefinedFunctionResource'
     { _udfrResourceURI = Nothing
     , _udfrInlineCode = Nothing
     }
@@ -3342,11 +4012,11 @@ instance FromJSON UserDefinedFunctionResource where
         parseJSON
           = withObject "UserDefinedFunctionResource"
               (\ o ->
-                 UserDefinedFunctionResource <$>
+                 UserDefinedFunctionResource' <$>
                    (o .:? "resourceUri") <*> (o .:? "inlineCode"))
 
 instance ToJSON UserDefinedFunctionResource where
-        toJSON UserDefinedFunctionResource{..}
+        toJSON UserDefinedFunctionResource'{..}
           = object
               (catMaybes
                  [("resourceUri" .=) <$> _udfrResourceURI,
@@ -3354,9 +4024,12 @@ instance ToJSON UserDefinedFunctionResource where
 
 --
 -- /See:/ 'jobStatistics2' smart constructor.
-data JobStatistics2 = JobStatistics2
-    { _jTotalBytesProcessed :: !(Maybe (Textual Int64))
+data JobStatistics2 = JobStatistics2'
+    { _jSchema              :: !(Maybe TableSchema)
+    , _jTotalBytesProcessed :: !(Maybe (Textual Int64))
     , _jBillingTier         :: !(Maybe (Textual Int32))
+    , _jReferencedTables    :: !(Maybe [TableReference])
+    , _jQueryPlan           :: !(Maybe [ExplainQueryStage])
     , _jCacheHit            :: !(Maybe Bool)
     , _jTotalBytesBilled    :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3365,9 +4038,15 @@ data JobStatistics2 = JobStatistics2
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'jSchema'
+--
 -- * 'jTotalBytesProcessed'
 --
 -- * 'jBillingTier'
+--
+-- * 'jReferencedTables'
+--
+-- * 'jQueryPlan'
 --
 -- * 'jCacheHit'
 --
@@ -3375,12 +4054,20 @@ data JobStatistics2 = JobStatistics2
 jobStatistics2
     :: JobStatistics2
 jobStatistics2 =
-    JobStatistics2
-    { _jTotalBytesProcessed = Nothing
+    JobStatistics2'
+    { _jSchema = Nothing
+    , _jTotalBytesProcessed = Nothing
     , _jBillingTier = Nothing
+    , _jReferencedTables = Nothing
+    , _jQueryPlan = Nothing
     , _jCacheHit = Nothing
     , _jTotalBytesBilled = Nothing
     }
+
+-- | [Output-only, Experimental] The schema of the results. Present only for
+-- successful dry run of non-legacy SQL queries.
+jSchema :: Lens' JobStatistics2 (Maybe TableSchema)
+jSchema = lens _jSchema (\ s a -> s{_jSchema = a})
 
 -- | [Output-only] Total bytes processed for the job.
 jTotalBytesProcessed :: Lens' JobStatistics2 (Maybe Int64)
@@ -3394,6 +4081,23 @@ jBillingTier :: Lens' JobStatistics2 (Maybe Int32)
 jBillingTier
   = lens _jBillingTier (\ s a -> s{_jBillingTier = a})
       . mapping _Coerce
+
+-- | [Output-only, Experimental] Referenced tables for the job. Queries that
+-- reference more than 50 tables will not have a complete list.
+jReferencedTables :: Lens' JobStatistics2 [TableReference]
+jReferencedTables
+  = lens _jReferencedTables
+      (\ s a -> s{_jReferencedTables = a})
+      . _Default
+      . _Coerce
+
+-- | [Output-only, Experimental] Describes execution plan for the query as a
+-- list of stages.
+jQueryPlan :: Lens' JobStatistics2 [ExplainQueryStage]
+jQueryPlan
+  = lens _jQueryPlan (\ s a -> s{_jQueryPlan = a}) .
+      _Default
+      . _Coerce
 
 -- | [Output-only] Whether the query result was fetched from the query cache.
 jCacheHit :: Lens' JobStatistics2 (Maybe Bool)
@@ -3411,25 +4115,29 @@ instance FromJSON JobStatistics2 where
         parseJSON
           = withObject "JobStatistics2"
               (\ o ->
-                 JobStatistics2 <$>
-                   (o .:? "totalBytesProcessed") <*>
-                     (o .:? "billingTier")
+                 JobStatistics2' <$>
+                   (o .:? "schema") <*> (o .:? "totalBytesProcessed")
+                     <*> (o .:? "billingTier")
+                     <*> (o .:? "referencedTables" .!= mempty)
+                     <*> (o .:? "queryPlan" .!= mempty)
                      <*> (o .:? "cacheHit")
                      <*> (o .:? "totalBytesBilled"))
 
 instance ToJSON JobStatistics2 where
-        toJSON JobStatistics2{..}
+        toJSON JobStatistics2'{..}
           = object
               (catMaybes
-                 [("totalBytesProcessed" .=) <$>
-                    _jTotalBytesProcessed,
+                 [("schema" .=) <$> _jSchema,
+                  ("totalBytesProcessed" .=) <$> _jTotalBytesProcessed,
                   ("billingTier" .=) <$> _jBillingTier,
+                  ("referencedTables" .=) <$> _jReferencedTables,
+                  ("queryPlan" .=) <$> _jQueryPlan,
                   ("cacheHit" .=) <$> _jCacheHit,
                   ("totalBytesBilled" .=) <$> _jTotalBytesBilled])
 
 --
 -- /See:/ 'jobStatus' smart constructor.
-data JobStatus = JobStatus
+data JobStatus = JobStatus'
     { _jsState       :: !(Maybe Text)
     , _jsErrorResult :: !(Maybe ErrorProto)
     , _jsErrors      :: !(Maybe [ErrorProto])
@@ -3447,7 +4155,7 @@ data JobStatus = JobStatus
 jobStatus
     :: JobStatus
 jobStatus =
-    JobStatus
+    JobStatus'
     { _jsState = Nothing
     , _jsErrorResult = Nothing
     , _jsErrors = Nothing
@@ -3477,12 +4185,12 @@ instance FromJSON JobStatus where
         parseJSON
           = withObject "JobStatus"
               (\ o ->
-                 JobStatus <$>
+                 JobStatus' <$>
                    (o .:? "state") <*> (o .:? "errorResult") <*>
                      (o .:? "errors" .!= mempty))
 
 instance ToJSON JobStatus where
-        toJSON JobStatus{..}
+        toJSON JobStatus'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _jsState,
@@ -3491,7 +4199,7 @@ instance ToJSON JobStatus where
 
 --
 -- /See:/ 'dataSetAccessItem' smart constructor.
-data DataSetAccessItem = DataSetAccessItem
+data DataSetAccessItem = DataSetAccessItem'
     { _dsaiGroupByEmail :: !(Maybe Text)
     , _dsaiDomain       :: !(Maybe Text)
     , _dsaiSpecialGroup :: !(Maybe Text)
@@ -3518,7 +4226,7 @@ data DataSetAccessItem = DataSetAccessItem
 dataSetAccessItem
     :: DataSetAccessItem
 dataSetAccessItem =
-    DataSetAccessItem
+    DataSetAccessItem'
     { _dsaiGroupByEmail = Nothing
     , _dsaiDomain = Nothing
     , _dsaiSpecialGroup = Nothing
@@ -3574,7 +4282,7 @@ instance FromJSON DataSetAccessItem where
         parseJSON
           = withObject "DataSetAccessItem"
               (\ o ->
-                 DataSetAccessItem <$>
+                 DataSetAccessItem' <$>
                    (o .:? "groupByEmail") <*> (o .:? "domain") <*>
                      (o .:? "specialGroup")
                      <*> (o .:? "role")
@@ -3582,7 +4290,7 @@ instance FromJSON DataSetAccessItem where
                      <*> (o .:? "userByEmail"))
 
 instance ToJSON DataSetAccessItem where
-        toJSON DataSetAccessItem{..}
+        toJSON DataSetAccessItem'{..}
           = object
               (catMaybes
                  [("groupByEmail" .=) <$> _dsaiGroupByEmail,
@@ -3593,7 +4301,7 @@ instance ToJSON DataSetAccessItem where
 
 --
 -- /See:/ 'tableDataInsertAllResponse' smart constructor.
-data TableDataInsertAllResponse = TableDataInsertAllResponse
+data TableDataInsertAllResponse = TableDataInsertAllResponse'
     { _tKind         :: !Text
     , _tInsertErrors :: !(Maybe [TableDataInsertAllResponseInsertErrorsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3608,7 +4316,7 @@ data TableDataInsertAllResponse = TableDataInsertAllResponse
 tableDataInsertAllResponse
     :: TableDataInsertAllResponse
 tableDataInsertAllResponse =
-    TableDataInsertAllResponse
+    TableDataInsertAllResponse'
     { _tKind = "bigquery#tableDataInsertAllResponse"
     , _tInsertErrors = Nothing
     }
@@ -3629,13 +4337,13 @@ instance FromJSON TableDataInsertAllResponse where
         parseJSON
           = withObject "TableDataInsertAllResponse"
               (\ o ->
-                 TableDataInsertAllResponse <$>
+                 TableDataInsertAllResponse' <$>
                    (o .:? "kind" .!=
                       "bigquery#tableDataInsertAllResponse")
                      <*> (o .:? "insertErrors" .!= mempty))
 
 instance ToJSON TableDataInsertAllResponse where
-        toJSON TableDataInsertAllResponse{..}
+        toJSON TableDataInsertAllResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tKind),
@@ -3643,7 +4351,7 @@ instance ToJSON TableDataInsertAllResponse where
 
 --
 -- /See:/ 'table' smart constructor.
-data Table = Table
+data Table = Table'
     { _tabCreationTime              :: !(Maybe (Textual Int64))
     , _tabEtag                      :: !(Maybe Text)
     , _tabNumBytes                  :: !(Maybe (Textual Int64))
@@ -3656,10 +4364,12 @@ data Table = Table
     , _tabSchema                    :: !(Maybe TableSchema)
     , _tabStreamingBuffer           :: !(Maybe Streamingbuffer)
     , _tabSelfLink                  :: !(Maybe Text)
+    , _tabTimePartitioning          :: !(Maybe TimePartitioning)
     , _tabNumRows                   :: !(Maybe (Textual Word64))
     , _tabView                      :: !(Maybe ViewDefinition)
     , _tabId                        :: !(Maybe Text)
     , _tabType                      :: !(Maybe Text)
+    , _tabNumLongTermBytes          :: !(Maybe (Textual Int64))
     , _tabExpirationTime            :: !(Maybe (Textual Int64))
     , _tabDescription               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3692,6 +4402,8 @@ data Table = Table
 --
 -- * 'tabSelfLink'
 --
+-- * 'tabTimePartitioning'
+--
 -- * 'tabNumRows'
 --
 -- * 'tabView'
@@ -3700,13 +4412,15 @@ data Table = Table
 --
 -- * 'tabType'
 --
+-- * 'tabNumLongTermBytes'
+--
 -- * 'tabExpirationTime'
 --
 -- * 'tabDescription'
 table
     :: Table
 table =
-    Table
+    Table'
     { _tabCreationTime = Nothing
     , _tabEtag = Nothing
     , _tabNumBytes = Nothing
@@ -3719,10 +4433,12 @@ table =
     , _tabSchema = Nothing
     , _tabStreamingBuffer = Nothing
     , _tabSelfLink = Nothing
+    , _tabTimePartitioning = Nothing
     , _tabNumRows = Nothing
     , _tabView = Nothing
     , _tabId = Nothing
     , _tabType = Nothing
+    , _tabNumLongTermBytes = Nothing
     , _tabExpirationTime = Nothing
     , _tabDescription = Nothing
     }
@@ -3746,8 +4462,8 @@ tabNumBytes
   = lens _tabNumBytes (\ s a -> s{_tabNumBytes = a}) .
       mapping _Coerce
 
--- | [Experimental] Describes the data format, location, and other properties
--- of a table stored outside of BigQuery. By defining these properties, the
+-- | [Optional] Describes the data format, location, and other properties of
+-- a table stored outside of BigQuery. By defining these properties, the
 -- data source can then be queried as if it were a standard BigQuery table.
 tabExternalDataConfiguration :: Lens' Table (Maybe ExternalDataConfiguration)
 tabExternalDataConfiguration
@@ -3802,6 +4518,13 @@ tabSelfLink :: Lens' Table (Maybe Text)
 tabSelfLink
   = lens _tabSelfLink (\ s a -> s{_tabSelfLink = a})
 
+-- | [Experimental] If specified, configures time-based partitioning for this
+-- table.
+tabTimePartitioning :: Lens' Table (Maybe TimePartitioning)
+tabTimePartitioning
+  = lens _tabTimePartitioning
+      (\ s a -> s{_tabTimePartitioning = a})
+
 -- | [Output-only] The number of rows of data in this table, excluding any
 -- data in the streaming buffer.
 tabNumRows :: Lens' Table (Maybe Word64)
@@ -3819,9 +4542,19 @@ tabId = lens _tabId (\ s a -> s{_tabId = a})
 
 -- | [Output-only] Describes the table type. The following values are
 -- supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined
--- by a SQL query. The default value is TABLE.
+-- by a SQL query. EXTERNAL: A table that references data stored in an
+-- external storage system, such as Google Cloud Storage. The default value
+-- is TABLE.
 tabType :: Lens' Table (Maybe Text)
 tabType = lens _tabType (\ s a -> s{_tabType = a})
+
+-- | [Output-only] The number of bytes in the table that are considered
+-- \"long-term storage\".
+tabNumLongTermBytes :: Lens' Table (Maybe Int64)
+tabNumLongTermBytes
+  = lens _tabNumLongTermBytes
+      (\ s a -> s{_tabNumLongTermBytes = a})
+      . mapping _Coerce
 
 -- | [Optional] The time when this table expires, in milliseconds since the
 -- epoch. If not present, the table will persist indefinitely. Expired
@@ -3842,7 +4575,7 @@ instance FromJSON Table where
         parseJSON
           = withObject "Table"
               (\ o ->
-                 Table <$>
+                 Table' <$>
                    (o .:? "creationTime") <*> (o .:? "etag") <*>
                      (o .:? "numBytes")
                      <*> (o .:? "externalDataConfiguration")
@@ -3854,15 +4587,17 @@ instance FromJSON Table where
                      <*> (o .:? "schema")
                      <*> (o .:? "streamingBuffer")
                      <*> (o .:? "selfLink")
+                     <*> (o .:? "timePartitioning")
                      <*> (o .:? "numRows")
                      <*> (o .:? "view")
                      <*> (o .:? "id")
                      <*> (o .:? "type")
+                     <*> (o .:? "numLongTermBytes")
                      <*> (o .:? "expirationTime")
                      <*> (o .:? "description"))
 
 instance ToJSON Table where
-        toJSON Table{..}
+        toJSON Table'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _tabCreationTime,
@@ -3878,15 +4613,17 @@ instance ToJSON Table where
                   ("schema" .=) <$> _tabSchema,
                   ("streamingBuffer" .=) <$> _tabStreamingBuffer,
                   ("selfLink" .=) <$> _tabSelfLink,
+                  ("timePartitioning" .=) <$> _tabTimePartitioning,
                   ("numRows" .=) <$> _tabNumRows,
                   ("view" .=) <$> _tabView, ("id" .=) <$> _tabId,
                   ("type" .=) <$> _tabType,
+                  ("numLongTermBytes" .=) <$> _tabNumLongTermBytes,
                   ("expirationTime" .=) <$> _tabExpirationTime,
                   ("description" .=) <$> _tabDescription])
 
 --
 -- /See:/ 'errorProto' smart constructor.
-data ErrorProto = ErrorProto
+data ErrorProto = ErrorProto'
     { _epDebugInfo :: !(Maybe Text)
     , _epLocation  :: !(Maybe Text)
     , _epReason    :: !(Maybe Text)
@@ -3907,7 +4644,7 @@ data ErrorProto = ErrorProto
 errorProto
     :: ErrorProto
 errorProto =
-    ErrorProto
+    ErrorProto'
     { _epDebugInfo = Nothing
     , _epLocation = Nothing
     , _epReason = Nothing
@@ -3938,13 +4675,13 @@ instance FromJSON ErrorProto where
         parseJSON
           = withObject "ErrorProto"
               (\ o ->
-                 ErrorProto <$>
+                 ErrorProto' <$>
                    (o .:? "debugInfo") <*> (o .:? "location") <*>
                      (o .:? "reason")
                      <*> (o .:? "message"))
 
 instance ToJSON ErrorProto where
-        toJSON ErrorProto{..}
+        toJSON ErrorProto'{..}
           = object
               (catMaybes
                  [("debugInfo" .=) <$> _epDebugInfo,
@@ -3954,8 +4691,8 @@ instance ToJSON ErrorProto where
 
 --
 -- /See:/ 'csvOptions' smart constructor.
-data CSVOptions = CSVOptions
-    { _coSkipLeadingRows     :: !(Maybe (Textual Int32))
+data CSVOptions = CSVOptions'
+    { _coSkipLeadingRows     :: !(Maybe (Textual Int64))
     , _coAllowJaggedRows     :: !(Maybe Bool)
     , _coAllowQuotedNewlines :: !(Maybe Bool)
     , _coQuote               :: !Text
@@ -3981,7 +4718,7 @@ data CSVOptions = CSVOptions
 csvOptions
     :: CSVOptions
 csvOptions =
-    CSVOptions
+    CSVOptions'
     { _coSkipLeadingRows = Nothing
     , _coAllowJaggedRows = Nothing
     , _coAllowQuotedNewlines = Nothing
@@ -3993,7 +4730,7 @@ csvOptions =
 -- | [Optional] The number of rows at the top of a CSV file that BigQuery
 -- will skip when reading the data. The default value is 0. This property
 -- is useful if you have header rows in the file that should be skipped.
-coSkipLeadingRows :: Lens' CSVOptions (Maybe Int32)
+coSkipLeadingRows :: Lens' CSVOptions (Maybe Int64)
 coSkipLeadingRows
   = lens _coSkipLeadingRows
       (\ s a -> s{_coSkipLeadingRows = a})
@@ -4048,7 +4785,7 @@ instance FromJSON CSVOptions where
         parseJSON
           = withObject "CSVOptions"
               (\ o ->
-                 CSVOptions <$>
+                 CSVOptions' <$>
                    (o .:? "skipLeadingRows") <*>
                      (o .:? "allowJaggedRows")
                      <*> (o .:? "allowQuotedNewlines")
@@ -4057,7 +4794,7 @@ instance FromJSON CSVOptions where
                      <*> (o .:? "fieldDelimiter"))
 
 instance ToJSON CSVOptions where
-        toJSON CSVOptions{..}
+        toJSON CSVOptions'{..}
           = object
               (catMaybes
                  [("skipLeadingRows" .=) <$> _coSkipLeadingRows,
@@ -4070,7 +4807,7 @@ instance ToJSON CSVOptions where
 
 --
 -- /See:/ 'jobStatistics3' smart constructor.
-data JobStatistics3 = JobStatistics3
+data JobStatistics3 = JobStatistics3'
     { _jsInputFiles     :: !(Maybe (Textual Int64))
     , _jsOutputRows     :: !(Maybe (Textual Int64))
     , _jsOutputBytes    :: !(Maybe (Textual Int64))
@@ -4091,7 +4828,7 @@ data JobStatistics3 = JobStatistics3
 jobStatistics3
     :: JobStatistics3
 jobStatistics3 =
-    JobStatistics3
+    JobStatistics3'
     { _jsInputFiles = Nothing
     , _jsOutputRows = Nothing
     , _jsOutputBytes = Nothing
@@ -4130,13 +4867,13 @@ instance FromJSON JobStatistics3 where
         parseJSON
           = withObject "JobStatistics3"
               (\ o ->
-                 JobStatistics3 <$>
+                 JobStatistics3' <$>
                    (o .:? "inputFiles") <*> (o .:? "outputRows") <*>
                      (o .:? "outputBytes")
                      <*> (o .:? "inputFileBytes"))
 
 instance ToJSON JobStatistics3 where
-        toJSON JobStatistics3{..}
+        toJSON JobStatistics3'{..}
           = object
               (catMaybes
                  [("inputFiles" .=) <$> _jsInputFiles,
@@ -4146,7 +4883,7 @@ instance ToJSON JobStatistics3 where
 
 --
 -- /See:/ 'queryResponse' smart constructor.
-data QueryResponse = QueryResponse
+data QueryResponse = QueryResponse'
     { _qJobReference        :: !(Maybe JobReference)
     , _qKind                :: !Text
     , _qSchema              :: !(Maybe TableSchema)
@@ -4185,7 +4922,7 @@ data QueryResponse = QueryResponse
 queryResponse
     :: QueryResponse
 queryResponse =
-    QueryResponse
+    QueryResponse'
     { _qJobReference = Nothing
     , _qKind = "bigquery#queryResponse"
     , _qSchema = Nothing
@@ -4271,7 +5008,7 @@ instance FromJSON QueryResponse where
         parseJSON
           = withObject "QueryResponse"
               (\ o ->
-                 QueryResponse <$>
+                 QueryResponse' <$>
                    (o .:? "jobReference") <*>
                      (o .:? "kind" .!= "bigquery#queryResponse")
                      <*> (o .:? "schema")
@@ -4284,7 +5021,7 @@ instance FromJSON QueryResponse where
                      <*> (o .:? "cacheHit"))
 
 instance ToJSON QueryResponse where
-        toJSON QueryResponse{..}
+        toJSON QueryResponse'{..}
           = object
               (catMaybes
                  [("jobReference" .=) <$> _qJobReference,

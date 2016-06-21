@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesDelete' request conforms to.
 type PlacementStrategiesDeleteResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -54,7 +54,7 @@ type PlacementStrategiesDeleteResource =
 -- | Deletes an existing placement strategy.
 --
 -- /See:/ 'placementStrategiesDelete' smart constructor.
-data PlacementStrategiesDelete = PlacementStrategiesDelete
+data PlacementStrategiesDelete = PlacementStrategiesDelete'
     { _psdProFileId :: !(Textual Int64)
     , _psdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ placementStrategiesDelete
     -> Int64 -- ^ 'psdId'
     -> PlacementStrategiesDelete
 placementStrategiesDelete pPsdProFileId_ pPsdId_ =
-    PlacementStrategiesDelete
+    PlacementStrategiesDelete'
     { _psdProFileId = _Coerce # pPsdProFileId_
     , _psdId = _Coerce # pPsdId_
     }
@@ -90,7 +90,9 @@ psdId
 instance GoogleRequest PlacementStrategiesDelete
          where
         type Rs PlacementStrategiesDelete = ()
-        requestClient PlacementStrategiesDelete{..}
+        type Scopes PlacementStrategiesDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementStrategiesDelete'{..}
           = go _psdProFileId _psdId (Just AltJSON)
               dFAReportingService
           where go

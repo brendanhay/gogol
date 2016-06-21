@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.LiveStreams.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type LiveStreamsUpdateResource =
 -- settings.
 --
 -- /See:/ 'liveStreamsUpdate' smart constructor.
-data LiveStreamsUpdate = LiveStreamsUpdate
+data LiveStreamsUpdate = LiveStreamsUpdate'
     { _lsuPart                          :: !Text
     , _lsuPayload                       :: !LiveStream
     , _lsuOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -84,7 +84,7 @@ liveStreamsUpdate
     -> LiveStream -- ^ 'lsuPayload'
     -> LiveStreamsUpdate
 liveStreamsUpdate pLsuPart_ pLsuPayload_ =
-    LiveStreamsUpdate
+    LiveStreamsUpdate'
     { _lsuPart = pLsuPart_
     , _lsuPayload = pLsuPayload_
     , _lsuOnBehalfOfContentOwner = Nothing
@@ -145,7 +145,10 @@ lsuOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest LiveStreamsUpdate where
         type Rs LiveStreamsUpdate = LiveStream
-        requestClient LiveStreamsUpdate{..}
+        type Scopes LiveStreamsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient LiveStreamsUpdate'{..}
           = go (Just _lsuPart) _lsuOnBehalfOfContentOwner
               _lsuOnBehalfOfContentOwnerChannel
               (Just AltJSON)

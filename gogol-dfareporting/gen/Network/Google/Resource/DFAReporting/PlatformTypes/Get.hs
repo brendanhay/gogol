@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlatformTypes.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlatformTypesGet' request conforms to.
 type PlatformTypesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "platformTypes" :>
@@ -54,7 +54,7 @@ type PlatformTypesGetResource =
 -- | Gets one platform type by ID.
 --
 -- /See:/ 'platformTypesGet' smart constructor.
-data PlatformTypesGet = PlatformTypesGet
+data PlatformTypesGet = PlatformTypesGet'
     { _ptgProFileId :: !(Textual Int64)
     , _ptgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ platformTypesGet
     -> Int64 -- ^ 'ptgId'
     -> PlatformTypesGet
 platformTypesGet pPtgProFileId_ pPtgId_ =
-    PlatformTypesGet
+    PlatformTypesGet'
     { _ptgProFileId = _Coerce # pPtgProFileId_
     , _ptgId = _Coerce # pPtgId_
     }
@@ -89,7 +89,9 @@ ptgId
 
 instance GoogleRequest PlatformTypesGet where
         type Rs PlatformTypesGet = PlatformType
-        requestClient PlatformTypesGet{..}
+        type Scopes PlatformTypesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlatformTypesGet'{..}
           = go _ptgProFileId _ptgId (Just AltJSON)
               dFAReportingService
           where go

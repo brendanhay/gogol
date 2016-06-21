@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Posts.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type PostsSearchResource =
 -- | Search for a post.
 --
 -- /See:/ 'postsSearch' smart constructor.
-data PostsSearch = PostsSearch
+data PostsSearch = PostsSearch'
     { _psOrderBy     :: !PostsSearchOrderBy
     , _psBlogId      :: !Text
     , _psQ           :: !Text
@@ -82,7 +82,7 @@ postsSearch
     -> Text -- ^ 'psQ'
     -> PostsSearch
 postsSearch pPsBlogId_ pPsQ_ =
-    PostsSearch
+    PostsSearch'
     { _psOrderBy = PSOBPublished
     , _psBlogId = pPsBlogId_
     , _psQ = pPsQ_
@@ -112,7 +112,10 @@ psFetchBodies
 
 instance GoogleRequest PostsSearch where
         type Rs PostsSearch = PostList
-        requestClient PostsSearch{..}
+        type Scopes PostsSearch =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient PostsSearch'{..}
           = go _psBlogId (Just _psQ) (Just _psOrderBy)
               (Just _psFetchBodies)
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Collectionviewers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,7 @@
 -- the collection. If the collection\'s visibility is set to viewersOnly
 -- then only these users will see the collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collectionviewers.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collectionviewers.list@.
 module Network.Google.Resource.AndroidEnterprise.Collectionviewers.List
     (
     -- * REST Resource
@@ -60,7 +60,7 @@ type CollectionviewersListResource =
 -- then only these users will see the collection.
 --
 -- /See:/ 'collectionviewersList' smart constructor.
-data CollectionviewersList = CollectionviewersList
+data CollectionviewersList = CollectionviewersList'
     { _cEnterpriseId :: !Text
     , _cCollectionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ collectionviewersList
     -> Text -- ^ 'cCollectionId'
     -> CollectionviewersList
 collectionviewersList pCEnterpriseId_ pCCollectionId_ =
-    CollectionviewersList
+    CollectionviewersList'
     { _cEnterpriseId = pCEnterpriseId_
     , _cCollectionId = pCCollectionId_
     }
@@ -97,7 +97,9 @@ cCollectionId
 instance GoogleRequest CollectionviewersList where
         type Rs CollectionviewersList =
              CollectionViewersListResponse
-        requestClient CollectionviewersList{..}
+        type Scopes CollectionviewersList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient CollectionviewersList'{..}
           = go _cEnterpriseId _cCollectionId (Just AltJSON)
               androidEnterpriseService
           where go

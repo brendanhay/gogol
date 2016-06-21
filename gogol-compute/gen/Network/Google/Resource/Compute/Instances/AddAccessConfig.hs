@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.AddAccessConfig
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type InstancesAddAccessConfigResource =
 -- | Adds an access config to an instance\'s network interface.
 --
 -- /See:/ 'instancesAddAccessConfig' smart constructor.
-data InstancesAddAccessConfig = InstancesAddAccessConfig
+data InstancesAddAccessConfig = InstancesAddAccessConfig'
     { _iaacProject          :: !Text
     , _iaacNetworkInterface :: !Text
     , _iaacZone             :: !Text
@@ -92,7 +92,7 @@ instancesAddAccessConfig
     -> Text -- ^ 'iaacInstance'
     -> InstancesAddAccessConfig
 instancesAddAccessConfig pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacPayload_ pIaacInstance_ =
-    InstancesAddAccessConfig
+    InstancesAddAccessConfig'
     { _iaacProject = pIaacProject_
     , _iaacNetworkInterface = pIaacNetworkInterface_
     , _iaacZone = pIaacZone_
@@ -127,7 +127,10 @@ iaacInstance
 
 instance GoogleRequest InstancesAddAccessConfig where
         type Rs InstancesAddAccessConfig = Operation
-        requestClient InstancesAddAccessConfig{..}
+        type Scopes InstancesAddAccessConfig =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstancesAddAccessConfig'{..}
           = go _iaacProject _iaacZone _iaacInstance
               (Just _iaacNetworkInterface)
               (Just AltJSON)

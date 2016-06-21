@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type UsersDeleteResource =
 -- | Delete user
 --
 -- /See:/ 'usersDelete' smart constructor.
-newtype UsersDelete = UsersDelete
+newtype UsersDelete = UsersDelete'
     { _udUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ usersDelete
     :: Text -- ^ 'udUserKey'
     -> UsersDelete
 usersDelete pUdUserKey_ =
-    UsersDelete
+    UsersDelete'
     { _udUserKey = pUdUserKey_
     }
 
@@ -76,7 +76,9 @@ udUserKey
 
 instance GoogleRequest UsersDelete where
         type Rs UsersDelete = ()
-        requestClient UsersDelete{..}
+        type Scopes UsersDelete =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
+        requestClient UsersDelete'{..}
           = go _udUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersDeleteResource)

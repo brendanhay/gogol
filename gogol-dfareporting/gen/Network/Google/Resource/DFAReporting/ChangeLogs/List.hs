@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.ChangeLogs.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'ChangeLogsList' request conforms to.
 type ChangeLogsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "changeLogs" :>
@@ -73,7 +73,7 @@ type ChangeLogsListResource =
 -- | Retrieves a list of change logs.
 --
 -- /See:/ 'changeLogsList' smart constructor.
-data ChangeLogsList = ChangeLogsList
+data ChangeLogsList = ChangeLogsList'
     { _cllUserProFileIds :: !(Maybe [Textual Int64])
     , _cllObjectType     :: !(Maybe ChangeLogsListObjectType)
     , _cllSearchString   :: !(Maybe Text)
@@ -116,7 +116,7 @@ changeLogsList
     :: Int64 -- ^ 'cllProFileId'
     -> ChangeLogsList
 changeLogsList pCllProFileId_ =
-    ChangeLogsList
+    ChangeLogsList'
     { _cllUserProFileIds = Nothing
     , _cllObjectType = Nothing
     , _cllSearchString = Nothing
@@ -213,7 +213,9 @@ cllMaxResults
 
 instance GoogleRequest ChangeLogsList where
         type Rs ChangeLogsList = ChangeLogsListResponse
-        requestClient ChangeLogsList{..}
+        type Scopes ChangeLogsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ChangeLogsList'{..}
           = go _cllProFileId (_cllUserProFileIds ^. _Default)
               _cllObjectType
               _cllSearchString

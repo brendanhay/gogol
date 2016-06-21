@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.CustomDataSources.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ManagementCustomDataSourcesListResource =
 -- | List custom data sources to which the user has access.
 --
 -- /See:/ 'managementCustomDataSourcesList' smart constructor.
-data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList
+data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList'
     { _mcdslWebPropertyId :: !Text
     , _mcdslAccountId     :: !Text
     , _mcdslStartIndex    :: !(Maybe (Textual Int32))
@@ -84,7 +84,7 @@ managementCustomDataSourcesList
     -> Text -- ^ 'mcdslAccountId'
     -> ManagementCustomDataSourcesList
 managementCustomDataSourcesList pMcdslWebPropertyId_ pMcdslAccountId_ =
-    ManagementCustomDataSourcesList
+    ManagementCustomDataSourcesList'
     { _mcdslWebPropertyId = pMcdslWebPropertyId_
     , _mcdslAccountId = pMcdslAccountId_
     , _mcdslStartIndex = Nothing
@@ -123,7 +123,11 @@ instance GoogleRequest
          ManagementCustomDataSourcesList where
         type Rs ManagementCustomDataSourcesList =
              CustomDataSources
-        requestClient ManagementCustomDataSourcesList{..}
+        type Scopes ManagementCustomDataSourcesList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementCustomDataSourcesList'{..}
           = go _mcdslAccountId _mcdslWebPropertyId
               _mcdslStartIndex
               _mcdslMaxResults

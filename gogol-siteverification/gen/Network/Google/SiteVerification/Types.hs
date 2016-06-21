@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.SiteVerification.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,8 +20,8 @@ module Network.Google.SiteVerification.Types
       siteVerificationService
 
     -- * OAuth Scopes
-    , siteverificationVerifyOnlyScope
-    , siteverificationScope
+    , siteVerificationVerifyOnlyScope
+    , siteVerificationScope
 
     -- * SiteVerificationWebResourceGettokenRequestSite
     , SiteVerificationWebResourceGettokenRequestSite
@@ -64,15 +65,15 @@ import           Network.Google.SiteVerification.Types.Product
 import           Network.Google.SiteVerification.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Site Verification API. This contains the host and root path used as a starting point for constructing service requests.
-siteVerificationService :: Service
+siteVerificationService :: ServiceConfig
 siteVerificationService
   = defaultService (ServiceId "siteVerification:v1")
       "www.googleapis.com"
 
 -- | Manage your new site verifications with Google
-siteverificationVerifyOnlyScope :: OAuthScope
-siteverificationVerifyOnlyScope = "https://www.googleapis.com/auth/siteverification.verify_only";
+siteVerificationVerifyOnlyScope :: Proxy '["https://www.googleapis.com/auth/siteverification.verify_only"]
+siteVerificationVerifyOnlyScope = Proxy;
 
 -- | Manage the list of sites and domains you control
-siteverificationScope :: OAuthScope
-siteverificationScope = "https://www.googleapis.com/auth/siteverification";
+siteVerificationScope :: Proxy '["https://www.googleapis.com/auth/siteverification"]
+siteVerificationScope = Proxy;

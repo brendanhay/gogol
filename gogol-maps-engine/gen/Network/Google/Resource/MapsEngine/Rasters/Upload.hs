@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Rasters.Upload
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type RastersUploadResource =
 -- | Create a skeleton raster asset for upload.
 --
 -- /See:/ 'rastersUpload' smart constructor.
-newtype RastersUpload = RastersUpload
+newtype RastersUpload = RastersUpload'
     { _ruPayload :: Raster
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ rastersUpload
     :: Raster -- ^ 'ruPayload'
     -> RastersUpload
 rastersUpload pRuPayload_ =
-    RastersUpload
+    RastersUpload'
     { _ruPayload = pRuPayload_
     }
 
@@ -76,7 +76,9 @@ ruPayload
 
 instance GoogleRequest RastersUpload where
         type Rs RastersUpload = Raster
-        requestClient RastersUpload{..}
+        type Scopes RastersUpload =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient RastersUpload'{..}
           = go (Just AltJSON) _ruPayload mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersUploadResource)

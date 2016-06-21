@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Operations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ < Genomics API Reference> for @genomics.operations.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.operations.get@.
 module Network.Google.Resource.Genomics.Operations.Get
     (
     -- * REST Resource
@@ -67,7 +67,7 @@ type OperationsGetResource =
 -- API service.
 --
 -- /See:/ 'operationsGet' smart constructor.
-data OperationsGet = OperationsGet
+data OperationsGet = OperationsGet'
     { _ogXgafv          :: !(Maybe Text)
     , _ogUploadProtocol :: !(Maybe Text)
     , _ogPp             :: !Bool
@@ -101,7 +101,7 @@ operationsGet
     :: Text -- ^ 'ogName'
     -> OperationsGet
 operationsGet pOgName_ =
-    OperationsGet
+    OperationsGet'
     { _ogXgafv = Nothing
     , _ogUploadProtocol = Nothing
     , _ogPp = True
@@ -154,7 +154,10 @@ ogCallback
 
 instance GoogleRequest OperationsGet where
         type Rs OperationsGet = Operation
-        requestClient OperationsGet{..}
+        type Scopes OperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient OperationsGet'{..}
           = go _ogName _ogXgafv _ogUploadProtocol (Just _ogPp)
               _ogAccessToken
               _ogUploadType

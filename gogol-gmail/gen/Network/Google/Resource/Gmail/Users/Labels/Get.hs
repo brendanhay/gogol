@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Labels.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type UsersLabelsGetResource =
 -- | Gets the specified label.
 --
 -- /See:/ 'usersLabelsGet' smart constructor.
-data UsersLabelsGet = UsersLabelsGet
+data UsersLabelsGet = UsersLabelsGet'
     { _ulgUserId :: !Text
     , _ulgId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,10 +68,9 @@ data UsersLabelsGet = UsersLabelsGet
 -- * 'ulgId'
 usersLabelsGet
     :: Text -- ^ 'ulgId'
-    -> Text
     -> UsersLabelsGet
-usersLabelsGet pUlgUserId_ pUlgId_ =
-    UsersLabelsGet
+usersLabelsGet pUlgId_ =
+    UsersLabelsGet'
     { _ulgUserId = "me"
     , _ulgId = pUlgId_
     }
@@ -88,7 +87,12 @@ ulgId = lens _ulgId (\ s a -> s{_ulgId = a})
 
 instance GoogleRequest UsersLabelsGet where
         type Rs UsersLabelsGet = Label
-        requestClient UsersLabelsGet{..}
+        type Scopes UsersLabelsGet =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersLabelsGet'{..}
           = go _ulgUserId _ulgId (Just AltJSON) gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersLabelsGetResource)

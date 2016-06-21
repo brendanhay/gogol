@@ -1,5 +1,5 @@
 name:                  gogol-apps-tasks
-version:               0.0.1
+version:               0.1.0
 synopsis:              Google Tasks SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -7,7 +7,7 @@ license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015 Brendan Hay
+copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
@@ -55,5 +55,5 @@ library
         , Network.Google.AppsTasks.Types.Sum
 
     build-depends:
-          gogol-core == 0.0.1.*
-        , base       >= 4.7 && < 5
+          gogol-core == 0.1.0.*
+        , base       >= 4.7

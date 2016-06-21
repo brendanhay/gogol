@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.PageViews.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type PageViewsGetResource =
 -- | Retrieve pageview stats for a Blog.
 --
 -- /See:/ 'pageViewsGet' smart constructor.
-data PageViewsGet = PageViewsGet
+data PageViewsGet = PageViewsGet'
     { _pvgBlogId :: !Text
     , _pvgRange  :: !(Maybe [PageViewsGetRange])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ pageViewsGet
     :: Text -- ^ 'pvgBlogId'
     -> PageViewsGet
 pageViewsGet pPvgBlogId_ =
-    PageViewsGet
+    PageViewsGet'
     { _pvgBlogId = pPvgBlogId_
     , _pvgRange = Nothing
     }
@@ -88,7 +88,9 @@ pvgRange
 
 instance GoogleRequest PageViewsGet where
         type Rs PageViewsGet = Pageviews
-        requestClient PageViewsGet{..}
+        type Scopes PageViewsGet =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PageViewsGet'{..}
           = go _pvgBlogId (_pvgRange ^. _Default)
               (Just AltJSON)
               bloggerService

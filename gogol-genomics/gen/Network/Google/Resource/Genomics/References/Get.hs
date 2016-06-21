@@ -14,16 +14,19 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.References.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a reference. Implements
+-- Gets a reference. For the definitions of references and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.getReference](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L158).
 --
--- /See:/ < Genomics API Reference> for @genomics.references.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.references.get@.
 module Network.Google.Resource.Genomics.References.Get
     (
     -- * REST Resource
@@ -62,11 +65,14 @@ type ReferencesGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Reference
 
--- | Gets a reference. Implements
+-- | Gets a reference. For the definitions of references and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.getReference](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L158).
 --
 -- /See:/ 'referencesGet' smart constructor.
-data ReferencesGet = ReferencesGet
+data ReferencesGet = ReferencesGet'
     { _rXgafv          :: !(Maybe Text)
     , _rUploadProtocol :: !(Maybe Text)
     , _rPp             :: !Bool
@@ -100,7 +106,7 @@ referencesGet
     :: Text -- ^ 'rReferenceId'
     -> ReferencesGet
 referencesGet pRReferenceId_ =
-    ReferencesGet
+    ReferencesGet'
     { _rXgafv = Nothing
     , _rUploadProtocol = Nothing
     , _rPp = True
@@ -152,7 +158,11 @@ rCallback
 
 instance GoogleRequest ReferencesGet where
         type Rs ReferencesGet = Reference
-        requestClient ReferencesGet{..}
+        type Scopes ReferencesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient ReferencesGet'{..}
           = go _rReferenceId _rXgafv _rUploadProtocol
               (Just _rPp)
               _rAccessToken

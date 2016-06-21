@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.CloudLoading.UpdateBook
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type CloudLoadingUpdateBookResource =
 -- |
 --
 -- /See:/ 'cloudLoadingUpdateBook' smart constructor.
-newtype CloudLoadingUpdateBook = CloudLoadingUpdateBook
+newtype CloudLoadingUpdateBook = CloudLoadingUpdateBook'
     { _clubPayload :: BooksCloudLoadingResource
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ cloudLoadingUpdateBook
     :: BooksCloudLoadingResource -- ^ 'clubPayload'
     -> CloudLoadingUpdateBook
 cloudLoadingUpdateBook pClubPayload_ =
-    CloudLoadingUpdateBook
+    CloudLoadingUpdateBook'
     { _clubPayload = pClubPayload_
     }
 
@@ -78,7 +78,9 @@ clubPayload
 instance GoogleRequest CloudLoadingUpdateBook where
         type Rs CloudLoadingUpdateBook =
              BooksCloudLoadingResource
-        requestClient CloudLoadingUpdateBook{..}
+        type Scopes CloudLoadingUpdateBook =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient CloudLoadingUpdateBook'{..}
           = go (Just AltJSON) _clubPayload booksService
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Maps.GetPublished
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type MapsGetPublishedResource =
 -- | Return the published metadata for a particular map.
 --
 -- /See:/ 'mapsGetPublished' smart constructor.
-newtype MapsGetPublished = MapsGetPublished
+newtype MapsGetPublished = MapsGetPublished'
     { _mgpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ mapsGetPublished
     :: Text -- ^ 'mgpId'
     -> MapsGetPublished
 mapsGetPublished pMgpId_ =
-    MapsGetPublished
+    MapsGetPublished'
     { _mgpId = pMgpId_
     }
 
@@ -75,7 +75,10 @@ mgpId = lens _mgpId (\ s a -> s{_mgpId = a})
 
 instance GoogleRequest MapsGetPublished where
         type Rs MapsGetPublished = PublishedMap
-        requestClient MapsGetPublished{..}
+        type Scopes MapsGetPublished =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient MapsGetPublished'{..}
           = go _mgpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

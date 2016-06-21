@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Tasks.Tasks.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TasksPatchResource =
 -- | Updates the specified task. This method supports patch semantics.
 --
 -- /See:/ 'tasksPatch' smart constructor.
-data TasksPatch = TasksPatch
+data TasksPatch = TasksPatch'
     { _tpPayload  :: !Task
     , _tpTaskList :: !Text
     , _tpTask     :: !Text
@@ -77,7 +77,7 @@ tasksPatch
     -> Text -- ^ 'tpTask'
     -> TasksPatch
 tasksPatch pTpPayload_ pTpTaskList_ pTpTask_ =
-    TasksPatch
+    TasksPatch'
     { _tpPayload = pTpPayload_
     , _tpTaskList = pTpTaskList_
     , _tpTask = pTpTask_
@@ -99,7 +99,9 @@ tpTask = lens _tpTask (\ s a -> s{_tpTask = a})
 
 instance GoogleRequest TasksPatch where
         type Rs TasksPatch = Task
-        requestClient TasksPatch{..}
+        type Scopes TasksPatch =
+             '["https://www.googleapis.com/auth/tasks"]
+        requestClient TasksPatch'{..}
           = go _tpTaskList _tpTask (Just AltJSON) _tpPayload
               appsTasksService
           where go

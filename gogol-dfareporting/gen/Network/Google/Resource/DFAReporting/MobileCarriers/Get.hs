@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.MobileCarriers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'MobileCarriersGet' request conforms to.
 type MobileCarriersGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "mobileCarriers" :>
@@ -54,7 +54,7 @@ type MobileCarriersGetResource =
 -- | Gets one mobile carrier by ID.
 --
 -- /See:/ 'mobileCarriersGet' smart constructor.
-data MobileCarriersGet = MobileCarriersGet
+data MobileCarriersGet = MobileCarriersGet'
     { _mcgProFileId :: !(Textual Int64)
     , _mcgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ mobileCarriersGet
     -> Int64 -- ^ 'mcgId'
     -> MobileCarriersGet
 mobileCarriersGet pMcgProFileId_ pMcgId_ =
-    MobileCarriersGet
+    MobileCarriersGet'
     { _mcgProFileId = _Coerce # pMcgProFileId_
     , _mcgId = _Coerce # pMcgId_
     }
@@ -89,7 +89,9 @@ mcgId
 
 instance GoogleRequest MobileCarriersGet where
         type Rs MobileCarriersGet = MobileCarrier
-        requestClient MobileCarriersGet{..}
+        type Scopes MobileCarriersGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient MobileCarriersGet'{..}
           = go _mcgProFileId _mcgId (Just AltJSON)
               dFAReportingService
           where go

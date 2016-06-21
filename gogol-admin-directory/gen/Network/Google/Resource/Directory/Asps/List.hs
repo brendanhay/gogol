@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Asps.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AspsListResource =
 -- | List the ASPs issued by a user.
 --
 -- /See:/ 'aspsList' smart constructor.
-newtype AspsList = AspsList
+newtype AspsList = AspsList'
     { _alUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ aspsList
     :: Text -- ^ 'alUserKey'
     -> AspsList
 aspsList pAlUserKey_ =
-    AspsList
+    AspsList'
     { _alUserKey = pAlUserKey_
     }
 
@@ -78,7 +78,9 @@ alUserKey
 
 instance GoogleRequest AspsList where
         type Rs AspsList = Asps
-        requestClient AspsList{..}
+        type Scopes AspsList =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
+        requestClient AspsList'{..}
           = go _alUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy AspsListResource)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Autoscaler.Zones.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -47,8 +47,8 @@ import           Network.Google.Prelude
 type ZonesListResource =
      "autoscaler" :>
        "v1beta2" :>
-         Capture "project" Text :>
-           "zones" :>
+         "zones" :>
+           QueryParam "project" Text :>
              QueryParam "filter" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" (Textual Word32) :>
@@ -57,8 +57,8 @@ type ZonesListResource =
 -- |
 --
 -- /See:/ 'zonesList' smart constructor.
-data ZonesList = ZonesList
-    { _zlProject    :: !Text
+data ZonesList = ZonesList'
+    { _zlProject    :: !(Maybe Text)
     , _zlFilter     :: !(Maybe Text)
     , _zlPageToken  :: !(Maybe Text)
     , _zlMaxResults :: !(Textual Word32)
@@ -76,17 +76,16 @@ data ZonesList = ZonesList
 --
 -- * 'zlMaxResults'
 zonesList
-    :: Text -- ^ 'zlProject'
-    -> ZonesList
-zonesList pZlProject_ =
-    ZonesList
-    { _zlProject = pZlProject_
+    :: ZonesList
+zonesList =
+    ZonesList'
+    { _zlProject = Nothing
     , _zlFilter = Nothing
     , _zlPageToken = Nothing
     , _zlMaxResults = 500
     }
 
-zlProject :: Lens' ZonesList Text
+zlProject :: Lens' ZonesList (Maybe Text)
 zlProject
   = lens _zlProject (\ s a -> s{_zlProject = a})
 
@@ -104,7 +103,10 @@ zlMaxResults
 
 instance GoogleRequest ZonesList where
         type Rs ZonesList = ZoneList
-        requestClient ZonesList{..}
+        type Scopes ZonesList =
+             '["https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient ZonesList'{..}
           = go _zlProject _zlFilter _zlPageToken
               (Just _zlMaxResults)
               (Just AltJSON)

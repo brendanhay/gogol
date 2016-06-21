@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Collections.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Deletes a collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.delete@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.delete@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Delete
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type CollectionsDeleteResource =
 -- | Deletes a collection.
 --
 -- /See:/ 'collectionsDelete' smart constructor.
-data CollectionsDelete = CollectionsDelete
+data CollectionsDelete = CollectionsDelete'
     { _cddEnterpriseId :: !Text
     , _cddCollectionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ collectionsDelete
     -> Text -- ^ 'cddCollectionId'
     -> CollectionsDelete
 collectionsDelete pCddEnterpriseId_ pCddCollectionId_ =
-    CollectionsDelete
+    CollectionsDelete'
     { _cddEnterpriseId = pCddEnterpriseId_
     , _cddCollectionId = pCddCollectionId_
     }
@@ -90,7 +90,9 @@ cddCollectionId
 
 instance GoogleRequest CollectionsDelete where
         type Rs CollectionsDelete = ()
-        requestClient CollectionsDelete{..}
+        type Scopes CollectionsDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient CollectionsDelete'{..}
           = go _cddEnterpriseId _cddCollectionId (Just AltJSON)
               androidEnterpriseService
           where go

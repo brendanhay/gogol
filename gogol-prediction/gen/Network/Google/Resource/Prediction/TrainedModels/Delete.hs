@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Prediction.TrainedModels.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type TrainedModelsDeleteResource =
 -- | Delete a trained model.
 --
 -- /See:/ 'trainedModelsDelete' smart constructor.
-data TrainedModelsDelete = TrainedModelsDelete
+data TrainedModelsDelete = TrainedModelsDelete'
     { _tmdProject :: !Text
     , _tmdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ trainedModelsDelete
     -> Text -- ^ 'tmdId'
     -> TrainedModelsDelete
 trainedModelsDelete pTmdProject_ pTmdId_ =
-    TrainedModelsDelete
+    TrainedModelsDelete'
     { _tmdProject = pTmdProject_
     , _tmdId = pTmdId_
     }
@@ -87,7 +87,10 @@ tmdId = lens _tmdId (\ s a -> s{_tmdId = a})
 
 instance GoogleRequest TrainedModelsDelete where
         type Rs TrainedModelsDelete = ()
-        requestClient TrainedModelsDelete{..}
+        type Scopes TrainedModelsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/prediction"]
+        requestClient TrainedModelsDelete'{..}
           = go _tmdProject _tmdId (Just AltJSON)
               predictionService
           where go

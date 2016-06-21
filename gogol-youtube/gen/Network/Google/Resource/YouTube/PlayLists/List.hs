@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.PlayLists.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type PlayListsListResource =
 -- owns, or you can retrieve one or more playlists by their unique IDs.
 --
 -- /See:/ 'playListsList' smart constructor.
-data PlayListsList = PlayListsList
+data PlayListsList = PlayListsList'
     { _pllPart                          :: !Text
     , _pllMine                          :: !(Maybe Bool)
     , _pllChannelId                     :: !(Maybe Text)
@@ -109,7 +109,7 @@ playListsList
     :: Text -- ^ 'pllPart'
     -> PlayListsList
 playListsList pPllPart_ =
-    PlayListsList
+    PlayListsList'
     { _pllPart = pPllPart_
     , _pllMine = Nothing
     , _pllChannelId = Nothing
@@ -207,7 +207,12 @@ pllMaxResults
 
 instance GoogleRequest PlayListsList where
         type Rs PlayListsList = PlayListListResponse
-        requestClient PlayListsList{..}
+        type Scopes PlayListsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient PlayListsList'{..}
           = go (Just _pllPart) _pllMine _pllChannelId _pllHl
               _pllOnBehalfOfContentOwner
               _pllOnBehalfOfContentOwnerChannel

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -73,7 +73,7 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
 -- processing was interrupted.
 --
 -- /See:/ 'projectsSubscriptionsModifyAckDeadline' smart constructor.
-data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDeadline
+data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv          :: !(Maybe Text)
     , _psmadUploadProtocol :: !(Maybe Text)
     , _psmadPp             :: !Bool
@@ -111,7 +111,7 @@ projectsSubscriptionsModifyAckDeadline
     -> Text -- ^ 'psmadSubscription'
     -> ProjectsSubscriptionsModifyAckDeadline
 projectsSubscriptionsModifyAckDeadline pPsmadPayload_ pPsmadSubscription_ =
-    ProjectsSubscriptionsModifyAckDeadline
+    ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv = Nothing
     , _psmadUploadProtocol = Nothing
     , _psmadPp = True
@@ -177,8 +177,11 @@ instance GoogleRequest
          ProjectsSubscriptionsModifyAckDeadline where
         type Rs ProjectsSubscriptionsModifyAckDeadline =
              Empty
+        type Scopes ProjectsSubscriptionsModifyAckDeadline =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient
-          ProjectsSubscriptionsModifyAckDeadline{..}
+          ProjectsSubscriptionsModifyAckDeadline'{..}
           = go _psmadSubscription _psmadXgafv
               _psmadUploadProtocol
               (Just _psmadPp)

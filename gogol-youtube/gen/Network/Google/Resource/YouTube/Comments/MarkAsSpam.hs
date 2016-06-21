@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Comments.MarkAsSpam
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type CommentsMarkAsSpamResource =
 -- flagged as spam.
 --
 -- /See:/ 'commentsMarkAsSpam' smart constructor.
-newtype CommentsMarkAsSpam = CommentsMarkAsSpam
+newtype CommentsMarkAsSpam = CommentsMarkAsSpam'
     { _cmasId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ commentsMarkAsSpam
     :: Text -- ^ 'cmasId'
     -> CommentsMarkAsSpam
 commentsMarkAsSpam pCmasId_ =
-    CommentsMarkAsSpam
+    CommentsMarkAsSpam'
     { _cmasId = pCmasId_
     }
 
@@ -78,7 +78,9 @@ cmasId = lens _cmasId (\ s a -> s{_cmasId = a})
 
 instance GoogleRequest CommentsMarkAsSpam where
         type Rs CommentsMarkAsSpam = ()
-        requestClient CommentsMarkAsSpam{..}
+        type Scopes CommentsMarkAsSpam =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient CommentsMarkAsSpam'{..}
           = go (Just _cmasId) (Just AltJSON) youTubeService
           where go
                   = buildClient

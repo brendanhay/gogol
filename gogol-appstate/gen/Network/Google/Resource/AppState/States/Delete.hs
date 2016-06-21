@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AppState.States.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type StatesDeleteResource =
 -- can result in data loss and data corruption.
 --
 -- /See:/ 'statesDelete' smart constructor.
-newtype StatesDelete = StatesDelete
+newtype StatesDelete = StatesDelete'
     { _sdStateKey :: Textual Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -72,7 +72,7 @@ statesDelete
     :: Int32 -- ^ 'sdStateKey'
     -> StatesDelete
 statesDelete pSdStateKey_ =
-    StatesDelete
+    StatesDelete'
     { _sdStateKey = _Coerce # pSdStateKey_
     }
 
@@ -84,7 +84,9 @@ sdStateKey
 
 instance GoogleRequest StatesDelete where
         type Rs StatesDelete = ()
-        requestClient StatesDelete{..}
+        type Scopes StatesDelete =
+             '["https://www.googleapis.com/auth/appstate"]
+        requestClient StatesDelete'{..}
           = go _sdStateKey (Just AltJSON) appStateService
           where go
                   = buildClient (Proxy :: Proxy StatesDeleteResource)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Language.Translations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type TranslationsListResource =
 -- | Returns text translations from one language to another.
 --
 -- /See:/ 'translationsList' smart constructor.
-data TranslationsList = TranslationsList
+data TranslationsList = TranslationsList'
     { _tlFormat :: !(Maybe TranslationsListFormat)
     , _tlQ      :: ![Text]
     , _tlSource :: !(Maybe Text)
@@ -86,7 +86,7 @@ translationsList
     -> Text -- ^ 'tlTarget'
     -> TranslationsList
 translationsList pTlQ_ pTlTarget_ =
-    TranslationsList
+    TranslationsList'
     { _tlFormat = Nothing
     , _tlQ = _Coerce # pTlQ_
     , _tlSource = Nothing
@@ -118,7 +118,8 @@ tlTarget = lens _tlTarget (\ s a -> s{_tlTarget = a})
 
 instance GoogleRequest TranslationsList where
         type Rs TranslationsList = TranslationsListResponse
-        requestClient TranslationsList{..}
+        type Scopes TranslationsList = '[]
+        requestClient TranslationsList'{..}
           = go _tlQ (Just _tlTarget) _tlFormat _tlSource
               (_tlCid ^. _Default)
               (Just AltJSON)

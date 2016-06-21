@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Locations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type LocationsGetResource =
 -- | Gets a single location by ID.
 --
 -- /See:/ 'locationsGet' smart constructor.
-newtype LocationsGet = LocationsGet
+newtype LocationsGet = LocationsGet'
     { _lgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ locationsGet
     :: Text -- ^ 'lgId'
     -> LocationsGet
 locationsGet pLgId_ =
-    LocationsGet
+    LocationsGet'
     { _lgId = pLgId_
     }
 
@@ -74,7 +74,10 @@ lgId = lens _lgId (\ s a -> s{_lgId = a})
 
 instance GoogleRequest LocationsGet where
         type Rs LocationsGet = Location
-        requestClient LocationsGet{..}
+        type Scopes LocationsGet =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient LocationsGet'{..}
           = go _lgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy LocationsGetResource)

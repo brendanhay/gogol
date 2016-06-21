@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Asps.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type AspsGetResource =
 -- | Get information about an ASP issued by a user.
 --
 -- /See:/ 'aspsGet' smart constructor.
-data AspsGet = AspsGet
+data AspsGet = AspsGet'
     { _agCodeId  :: !(Textual Int32)
     , _agUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ aspsGet
     -> Text -- ^ 'agUserKey'
     -> AspsGet
 aspsGet pAgCodeId_ pAgUserKey_ =
-    AspsGet
+    AspsGet'
     { _agCodeId = _Coerce # pAgCodeId_
     , _agUserKey = pAgUserKey_
     }
@@ -91,7 +91,9 @@ agUserKey
 
 instance GoogleRequest AspsGet where
         type Rs AspsGet = Asp
-        requestClient AspsGet{..}
+        type Scopes AspsGet =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
+        requestClient AspsGet'{..}
           = go _agUserKey _agCodeId (Just AltJSON)
               directoryService
           where go

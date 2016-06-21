@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Datafeedstatuses.Custombatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,7 +50,7 @@ type DatafeedstatusesCustombatchResource =
 
 --
 -- /See:/ 'datafeedstatusesCustombatch' smart constructor.
-newtype DatafeedstatusesCustombatch = DatafeedstatusesCustombatch
+newtype DatafeedstatusesCustombatch = DatafeedstatusesCustombatch'
     { _dcPayload :: DatafeedstatusesCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -63,7 +63,7 @@ datafeedstatusesCustombatch
     :: DatafeedstatusesCustomBatchRequest -- ^ 'dcPayload'
     -> DatafeedstatusesCustombatch
 datafeedstatusesCustombatch pDcPayload_ =
-    DatafeedstatusesCustombatch
+    DatafeedstatusesCustombatch'
     { _dcPayload = pDcPayload_
     }
 
@@ -76,7 +76,9 @@ instance GoogleRequest DatafeedstatusesCustombatch
          where
         type Rs DatafeedstatusesCustombatch =
              DatafeedstatusesCustomBatchResponse
-        requestClient DatafeedstatusesCustombatch{..}
+        type Scopes DatafeedstatusesCustombatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient DatafeedstatusesCustombatch'{..}
           = go (Just AltJSON) _dcPayload shoppingContentService
           where go
                   = buildClient

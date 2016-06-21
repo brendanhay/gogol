@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.CreatetestOrder
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type OrdersCreatetestOrderResource =
 -- | Sandbox only. Creates a test order.
 --
 -- /See:/ 'ordersCreatetestOrder' smart constructor.
-data OrdersCreatetestOrder = OrdersCreatetestOrder
+data OrdersCreatetestOrder = OrdersCreatetestOrder'
     { _ocoMerchantId :: !(Textual Word64)
     , _ocoPayload    :: !OrdersCreateTestOrderRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ ordersCreatetestOrder
     -> OrdersCreateTestOrderRequest -- ^ 'ocoPayload'
     -> OrdersCreatetestOrder
 ordersCreatetestOrder pOcoMerchantId_ pOcoPayload_ =
-    OrdersCreatetestOrder
+    OrdersCreatetestOrder'
     { _ocoMerchantId = _Coerce # pOcoMerchantId_
     , _ocoPayload = pOcoPayload_
     }
@@ -91,7 +91,9 @@ ocoPayload
 instance GoogleRequest OrdersCreatetestOrder where
         type Rs OrdersCreatetestOrder =
              OrdersCreateTestOrderResponse
-        requestClient OrdersCreatetestOrder{..}
+        type Scopes OrdersCreatetestOrder =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersCreatetestOrder'{..}
           = go _ocoMerchantId (Just AltJSON) _ocoPayload
               shoppingContentService
           where go

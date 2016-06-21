@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.GroupsSettings.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | JSON template for Group resource
 --
 -- /See:/ 'groups' smart constructor.
-data Groups = Groups
+data Groups = Groups'
     { _gEmail                              :: !(Maybe Text)
     , _gSendMessageDenyNotification        :: !(Maybe Text)
     , _gWhoCanPostMessage                  :: !(Maybe Text)
@@ -45,6 +45,7 @@ data Groups = Groups
     , _gMessageDisplayFont                 :: !(Maybe Text)
     , _gCustomReplyTo                      :: !(Maybe Text)
     , _gWhoCanContactOwner                 :: !(Maybe Text)
+    , _gWhoCanAdd                          :: !(Maybe Text)
     , _gWhoCanInvite                       :: !(Maybe Text)
     , _gWhoCanLeaveGroup                   :: !(Maybe Text)
     , _gAllowGoogleCommunication           :: !(Maybe Text)
@@ -100,6 +101,8 @@ data Groups = Groups
 --
 -- * 'gWhoCanContactOwner'
 --
+-- * 'gWhoCanAdd'
+--
 -- * 'gWhoCanInvite'
 --
 -- * 'gWhoCanLeaveGroup'
@@ -116,7 +119,7 @@ data Groups = Groups
 groups
     :: Groups
 groups =
-    Groups
+    Groups'
     { _gEmail = Nothing
     , _gSendMessageDenyNotification = Nothing
     , _gWhoCanPostMessage = Nothing
@@ -138,6 +141,7 @@ groups =
     , _gMessageDisplayFont = Nothing
     , _gCustomReplyTo = Nothing
     , _gWhoCanContactOwner = Nothing
+    , _gWhoCanAdd = Nothing
     , _gWhoCanInvite = Nothing
     , _gWhoCanLeaveGroup = Nothing
     , _gAllowGoogleCommunication = Nothing
@@ -188,7 +192,7 @@ gSpamModerationLevel
 gKind :: Lens' Groups Text
 gKind = lens _gKind (\ s a -> s{_gKind = a})
 
--- | Permissions to view membership. Possbile values are:
+-- | Permissions to view membership. Possible values are:
 -- ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW
 gWhoCanViewMembership :: Lens' Groups (Maybe Text)
 gWhoCanViewMembership
@@ -201,7 +205,7 @@ gMembersCanPostAsTheGroup
   = lens _gMembersCanPostAsTheGroup
       (\ s a -> s{_gMembersCanPostAsTheGroup = a})
 
--- | Permissions to view group. Possbile values are: ANYONE_CAN_VIEW
+-- | Permissions to view group. Possible values are: ANYONE_CAN_VIEW
 -- ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW
 gWhoCanViewGroup :: Lens' Groups (Maybe Text)
 gWhoCanViewGroup
@@ -268,7 +272,7 @@ gCustomReplyTo
   = lens _gCustomReplyTo
       (\ s a -> s{_gCustomReplyTo = a})
 
--- | Permission to contact owner of the group via web UI. Possbile values
+-- | Permission to contact owner of the group via web UI. Possible values
 -- are: ANYONE_CAN_CONTACT ALL_IN_DOMAIN_CAN_CONTACT
 -- ALL_MEMBERS_CAN_CONTACT ALL_MANAGERS_CAN_CONTACT
 gWhoCanContactOwner :: Lens' Groups (Maybe Text)
@@ -276,15 +280,21 @@ gWhoCanContactOwner
   = lens _gWhoCanContactOwner
       (\ s a -> s{_gWhoCanContactOwner = a})
 
--- | Permissions to invite members. Possbile values are:
--- ALL_MEMBERS_CAN_INVITE ALL_MANAGERS_CAN_INVITE
+-- | Permissions to add members. Possible values are: ALL_MANAGERS_CAN_ADD
+-- ALL_MEMBERS_CAN_ADD NONE_CAN_ADD
+gWhoCanAdd :: Lens' Groups (Maybe Text)
+gWhoCanAdd
+  = lens _gWhoCanAdd (\ s a -> s{_gWhoCanAdd = a})
+
+-- | Permissions to invite members. Possible values are:
+-- ALL_MEMBERS_CAN_INVITE ALL_MANAGERS_CAN_INVITE NONE_CAN_INVITE
 gWhoCanInvite :: Lens' Groups (Maybe Text)
 gWhoCanInvite
   = lens _gWhoCanInvite
       (\ s a -> s{_gWhoCanInvite = a})
 
 -- | Permission to leave the group. Possible values are:
--- ALL_MANAGERS_CAN_LEAVE ALL_MEMBERS_CAN_LEAVE
+-- ALL_MANAGERS_CAN_LEAVE ALL_MEMBERS_CAN_LEAVE NONE_CAN_LEAVE
 gWhoCanLeaveGroup :: Lens' Groups (Maybe Text)
 gWhoCanLeaveGroup
   = lens _gWhoCanLeaveGroup
@@ -324,7 +334,7 @@ instance FromJSON Groups where
         parseJSON
           = withObject "Groups"
               (\ o ->
-                 Groups <$>
+                 Groups' <$>
                    (o .:? "email") <*>
                      (o .:? "sendMessageDenyNotification")
                      <*> (o .:? "whoCanPostMessage")
@@ -346,6 +356,7 @@ instance FromJSON Groups where
                      <*> (o .:? "messageDisplayFont")
                      <*> (o .:? "customReplyTo")
                      <*> (o .:? "whoCanContactOwner")
+                     <*> (o .:? "whoCanAdd")
                      <*> (o .:? "whoCanInvite")
                      <*> (o .:? "whoCanLeaveGroup")
                      <*> (o .:? "allowGoogleCommunication")
@@ -355,7 +366,7 @@ instance FromJSON Groups where
                      <*> (o .:? "allowWebPosting"))
 
 instance ToJSON Groups where
-        toJSON Groups{..}
+        toJSON Groups'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _gEmail,
@@ -386,6 +397,7 @@ instance ToJSON Groups where
                   ("messageDisplayFont" .=) <$> _gMessageDisplayFont,
                   ("customReplyTo" .=) <$> _gCustomReplyTo,
                   ("whoCanContactOwner" .=) <$> _gWhoCanContactOwner,
+                  ("whoCanAdd" .=) <$> _gWhoCanAdd,
                   ("whoCanInvite" .=) <$> _gWhoCanInvite,
                   ("whoCanLeaveGroup" .=) <$> _gWhoCanLeaveGroup,
                   ("allowGoogleCommunication" .=) <$>

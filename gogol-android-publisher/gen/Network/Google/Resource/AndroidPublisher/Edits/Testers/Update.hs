@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Testers.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type EditsTestersUpdateResource =
 
 --
 -- /See:/ 'editsTestersUpdate' smart constructor.
-data EditsTestersUpdate = EditsTestersUpdate
+data EditsTestersUpdate = EditsTestersUpdate'
     { _etutTrack       :: !EditsTestersUpdateTrack
     , _etutPackageName :: !Text
     , _etutPayload     :: !Testers
@@ -81,7 +81,7 @@ editsTestersUpdate
     -> Text -- ^ 'etutEditId'
     -> EditsTestersUpdate
 editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
-    EditsTestersUpdate
+    EditsTestersUpdate'
     { _etutTrack = pEtutTrack_
     , _etutPackageName = pEtutPackageName_
     , _etutPayload = pEtutPayload_
@@ -111,7 +111,9 @@ etutEditId
 
 instance GoogleRequest EditsTestersUpdate where
         type Rs EditsTestersUpdate = Testers
-        requestClient EditsTestersUpdate{..}
+        type Scopes EditsTestersUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsTestersUpdate'{..}
           = go _etutPackageName _etutEditId _etutTrack
               (Just AltJSON)
               _etutPayload

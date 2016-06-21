@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeFields.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsInsert' request conforms to.
 type CreativeFieldsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -55,7 +55,7 @@ type CreativeFieldsInsertResource =
 -- | Inserts a new creative field.
 --
 -- /See:/ 'creativeFieldsInsert' smart constructor.
-data CreativeFieldsInsert = CreativeFieldsInsert
+data CreativeFieldsInsert = CreativeFieldsInsert'
     { _cfiProFileId :: !(Textual Int64)
     , _cfiPayload   :: !CreativeField
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ creativeFieldsInsert
     -> CreativeField -- ^ 'cfiPayload'
     -> CreativeFieldsInsert
 creativeFieldsInsert pCfiProFileId_ pCfiPayload_ =
-    CreativeFieldsInsert
+    CreativeFieldsInsert'
     { _cfiProFileId = _Coerce # pCfiProFileId_
     , _cfiPayload = pCfiPayload_
     }
@@ -90,7 +90,9 @@ cfiPayload
 
 instance GoogleRequest CreativeFieldsInsert where
         type Rs CreativeFieldsInsert = CreativeField
-        requestClient CreativeFieldsInsert{..}
+        type Scopes CreativeFieldsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeFieldsInsert'{..}
           = go _cfiProFileId (Just AltJSON) _cfiPayload
               dFAReportingService
           where go

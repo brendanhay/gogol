@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.SetTags
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type InstancesSetTagsResource =
 -- request.
 --
 -- /See:/ 'instancesSetTags' smart constructor.
-data InstancesSetTags = InstancesSetTags
+data InstancesSetTags = InstancesSetTags'
     { _istProject  :: !Text
     , _istZone     :: !Text
     , _istPayload  :: !Tags
@@ -87,7 +87,7 @@ instancesSetTags
     -> Text -- ^ 'istInstance'
     -> InstancesSetTags
 instancesSetTags pIstProject_ pIstZone_ pIstPayload_ pIstInstance_ =
-    InstancesSetTags
+    InstancesSetTags'
     { _istProject = pIstProject_
     , _istZone = pIstZone_
     , _istPayload = pIstPayload_
@@ -115,7 +115,10 @@ istInstance
 
 instance GoogleRequest InstancesSetTags where
         type Rs InstancesSetTags = Operation
-        requestClient InstancesSetTags{..}
+        type Scopes InstancesSetTags =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstancesSetTags'{..}
           = go _istProject _istZone _istInstance (Just AltJSON)
               _istPayload
               computeService

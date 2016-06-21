@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Domains.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type DomainsListResource =
 -- | Lists the domains of the customer.
 --
 -- /See:/ 'domainsList' smart constructor.
-newtype DomainsList = DomainsList
+newtype DomainsList = DomainsList'
     { _dlCustomer :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ domainsList
     :: Text -- ^ 'dlCustomer'
     -> DomainsList
 domainsList pDlCustomer_ =
-    DomainsList
+    DomainsList'
     { _dlCustomer = pDlCustomer_
     }
 
@@ -77,7 +77,10 @@ dlCustomer
 
 instance GoogleRequest DomainsList where
         type Rs DomainsList = Domains2
-        requestClient DomainsList{..}
+        type Scopes DomainsList =
+             '["https://www.googleapis.com/auth/admin.directory.domain",
+               "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
+        requestClient DomainsList'{..}
           = go _dlCustomer (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy DomainsListResource)

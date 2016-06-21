@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.CancelProcessing
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type LayersCancelProcessingResource =
 -- | Cancel processing on a layer asset.
 --
 -- /See:/ 'layersCancelProcessing' smart constructor.
-newtype LayersCancelProcessing = LayersCancelProcessing
+newtype LayersCancelProcessing = LayersCancelProcessing'
     { _lcpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ layersCancelProcessing
     :: Text -- ^ 'lcpId'
     -> LayersCancelProcessing
 layersCancelProcessing pLcpId_ =
-    LayersCancelProcessing
+    LayersCancelProcessing'
     { _lcpId = pLcpId_
     }
 
@@ -76,7 +76,9 @@ lcpId = lens _lcpId (\ s a -> s{_lcpId = a})
 
 instance GoogleRequest LayersCancelProcessing where
         type Rs LayersCancelProcessing = ProcessResponse
-        requestClient LayersCancelProcessing{..}
+        type Scopes LayersCancelProcessing =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient LayersCancelProcessing'{..}
           = go _lcpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

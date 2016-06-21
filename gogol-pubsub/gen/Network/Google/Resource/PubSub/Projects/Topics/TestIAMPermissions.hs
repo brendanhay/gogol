@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type ProjectsTopicsTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'projectsTopicsTestIAMPermissions' smart constructor.
-data ProjectsTopicsTestIAMPermissions = ProjectsTopicsTestIAMPermissions
+data ProjectsTopicsTestIAMPermissions = ProjectsTopicsTestIAMPermissions'
     { _pttipXgafv          :: !(Maybe Text)
     , _pttipUploadProtocol :: !(Maybe Text)
     , _pttipPp             :: !Bool
@@ -104,7 +104,7 @@ projectsTopicsTestIAMPermissions
     -> Text -- ^ 'pttipResource'
     -> ProjectsTopicsTestIAMPermissions
 projectsTopicsTestIAMPermissions pPttipPayload_ pPttipResource_ =
-    ProjectsTopicsTestIAMPermissions
+    ProjectsTopicsTestIAMPermissions'
     { _pttipXgafv = Nothing
     , _pttipUploadProtocol = Nothing
     , _pttipPp = True
@@ -154,9 +154,11 @@ pttipBearerToken
   = lens _pttipBearerToken
       (\ s a -> s{_pttipBearerToken = a})
 
--- | REQUIRED: The resource for which policy detail is being requested.
--- \`resource\` is usually specified as a path, such as,
--- \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy detail is being requested.
+-- \`resource\` is usually specified as a path, such as
+-- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
+-- the path specified in this value is resource specific and is specified
+-- in the \`testIamPermissions\` documentation.
 pttipResource :: Lens' ProjectsTopicsTestIAMPermissions Text
 pttipResource
   = lens _pttipResource
@@ -172,7 +174,10 @@ instance GoogleRequest
          ProjectsTopicsTestIAMPermissions where
         type Rs ProjectsTopicsTestIAMPermissions =
              TestIAMPermissionsResponse
-        requestClient ProjectsTopicsTestIAMPermissions{..}
+        type Scopes ProjectsTopicsTestIAMPermissions =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsTopicsTestIAMPermissions'{..}
           = go _pttipResource _pttipXgafv _pttipUploadProtocol
               (Just _pttipPp)
               _pttipAccessToken

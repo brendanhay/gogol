@@ -7,19 +7,25 @@
 
 -- |
 -- Module      : Network.Google.OAuth2
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you access OAuth2 protocol related APIs.
+-- Obtains end-user authorization grants for use with other Google APIs.
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference>
 module Network.Google.OAuth2
     (
     -- * Service Configuration
       oAuth2Service
+
+    -- * OAuth Scopes
+    , userInfoProFileScope
+    , plusLoginScope
+    , userInfoEmailScope
+    , plusMeScope
 
     -- * API Declaration
     , OAuth2API

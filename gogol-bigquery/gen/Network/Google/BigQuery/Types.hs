@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.BigQuery.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,11 +22,11 @@ module Network.Google.BigQuery.Types
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
-    , devstorageReadOnlyScope
-    , bigqueryInsertdataScope
-    , devstorageReadWriteScope
-    , bigqueryScope
-    , devstorageFullControlScope
+    , storageReadOnlyScope
+    , bigQueryInsertDataScope
+    , storageReadWriteScope
+    , bigQueryScope
+    , storageFullControlScope
 
     -- * JobReference
     , JobReference
@@ -91,6 +92,21 @@ module Network.Google.BigQuery.Types
     , plKind
     , plProjects
 
+    -- * ExplainQueryStep
+    , ExplainQueryStep
+    , explainQueryStep
+    , eqsSubsteps
+    , eqsKind
+
+    -- * BigtableColumnFamily
+    , BigtableColumnFamily
+    , bigtableColumnFamily
+    , bcfFamilyId
+    , bcfColumns
+    , bcfOnlyReadLatest
+    , bcfType
+    , bcfEncoding
+
     -- * JobStatistics
     , JobStatistics
     , jobStatistics
@@ -118,14 +134,23 @@ module Network.Google.BigQuery.Types
     , dsDefaultTableExpirationMs
     , dsDescription
 
+    -- * BigtableOptions
+    , BigtableOptions
+    , bigtableOptions
+    , boIgnoreUnspecifiedColumnFamilies
+    , boColumnFamilies
+
     -- * ExternalDataConfiguration
     , ExternalDataConfiguration
     , externalDataConfiguration
+    , edcBigtableOptions
     , edcIgnoreUnknownValues
     , edcCompression
     , edcSourceFormat
     , edcSchema
     , edcMaxBadRecords
+    , edcGoogleSheetsOptions
+    , edcAutodetect
     , edcSourceURIs
     , edcCSVOptions
 
@@ -176,6 +201,7 @@ module Network.Google.BigQuery.Types
     , qrKind
     , qrQuery
     , qrTimeoutMs
+    , qrUseLegacySQL
     , qrDryRun
     , qrMaxResults
     , qrDefaultDataSet
@@ -192,6 +218,23 @@ module Network.Google.BigQuery.Types
     , ProjectReference
     , projectReference
     , prProjectId
+
+    -- * ExplainQueryStage
+    , ExplainQueryStage
+    , explainQueryStage
+    , eqsWaitRatioMax
+    , eqsRecordsWritten
+    , eqsSteps
+    , eqsWriteRatioAvg
+    , eqsRecordsRead
+    , eqsComputeRatioAvg
+    , eqsName
+    , eqsReadRatioMax
+    , eqsWaitRatioAvg
+    , eqsId
+    , eqsComputeRatioMax
+    , eqsWriteRatioMax
+    , eqsReadRatioAvg
 
     -- * JobConfigurationLoad
     , JobConfigurationLoad
@@ -210,6 +253,7 @@ module Network.Google.BigQuery.Types
     , jclSchema
     , jclQuote
     , jclMaxBadRecords
+    , jclAutodetect
     , jclSourceURIs
     , jclEncoding
     , jclFieldDelimiter
@@ -229,6 +273,7 @@ module Network.Google.BigQuery.Types
     , tdiarKind
     , tdiarIgnoreUnknownValues
     , tdiarRows
+    , tdiarTemplateSuffix
     , tdiarSkipInvalidRows
 
     -- * ProjectListProjectsItem
@@ -239,6 +284,16 @@ module Network.Google.BigQuery.Types
     , plpiProjectReference
     , plpiId
     , plpiNumericId
+
+    -- * BigtableColumn
+    , BigtableColumn
+    , bigtableColumn
+    , bcQualifierEncoded
+    , bcFieldName
+    , bcQualifierString
+    , bcOnlyReadLatest
+    , bcType
+    , bcEncoding
 
     -- * Streamingbuffer
     , Streamingbuffer
@@ -265,11 +320,16 @@ module Network.Google.BigQuery.Types
     , jljiStatistics
     , jljiConfiguration
 
+    -- * TimePartitioning
+    , TimePartitioning
+    , timePartitioning
+    , tpExpirationMs
+    , tpType
+
     -- * JobConfiguration
     , JobConfiguration
     , jobConfiguration
     , jcCopy
-    , jcLink
     , jcLoad
     , jcQuery
     , jcExtract
@@ -287,14 +347,6 @@ module Network.Google.BigQuery.Types
     , jId
     , jStatistics
     , jConfiguration
-
-    -- * JobConfigurationLink
-    , JobConfigurationLink
-    , jobConfigurationLink
-    , jDestinationTable
-    , jWriteDisPosition
-    , jCreateDisPosition
-    , jSourceURI
 
     -- * TableDataInsertAllResponseInsertErrorsItem
     , TableDataInsertAllResponseInsertErrorsItem
@@ -336,9 +388,16 @@ module Network.Google.BigQuery.Types
     , jcqCreateDisPosition
     , jcqUserDefinedFunctionResources
     , jcqAllowLargeResults
+    , jcqMaximumBillingTier
     , jcqQuery
     , jcqFlattenResults
+    , jcqUseLegacySQL
     , jcqDefaultDataSet
+
+    -- * GoogleSheetsOptions
+    , GoogleSheetsOptions
+    , googleSheetsOptions
+    , gsoSkipLeadingRows
 
     -- * TableDataInsertAllRequestRowsItem
     , TableDataInsertAllRequestRowsItem
@@ -367,6 +426,7 @@ module Network.Google.BigQuery.Types
     -- * ViewDefinition
     , ViewDefinition
     , viewDefinition
+    , vdUserDefinedFunctionResources
     , vdQuery
 
     -- * UserDefinedFunctionResource
@@ -378,8 +438,11 @@ module Network.Google.BigQuery.Types
     -- * JobStatistics2
     , JobStatistics2
     , jobStatistics2
+    , jSchema
     , jTotalBytesProcessed
     , jBillingTier
+    , jReferencedTables
+    , jQueryPlan
     , jCacheHit
     , jTotalBytesBilled
 
@@ -421,10 +484,12 @@ module Network.Google.BigQuery.Types
     , tabSchema
     , tabStreamingBuffer
     , tabSelfLink
+    , tabTimePartitioning
     , tabNumRows
     , tabView
     , tabId
     , tabType
+    , tabNumLongTermBytes
     , tabExpirationTime
     , tabDescription
 
@@ -474,35 +539,35 @@ import           Network.Google.BigQuery.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the BigQuery API. This contains the host and root path used as a starting point for constructing service requests.
-bigQueryService :: Service
+bigQueryService :: ServiceConfig
 bigQueryService
   = defaultService (ServiceId "bigquery:v2")
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View your data in Google Cloud Storage
-devstorageReadOnlyScope :: OAuthScope
-devstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
+storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+storageReadOnlyScope = Proxy;
 
 -- | Insert data into Google BigQuery
-bigqueryInsertdataScope :: OAuthScope
-bigqueryInsertdataScope = "https://www.googleapis.com/auth/bigquery.insertdata";
+bigQueryInsertDataScope :: Proxy '["https://www.googleapis.com/auth/bigquery.insertdata"]
+bigQueryInsertDataScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: OAuthScope
-devstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+storageReadWriteScope = Proxy;
 
 -- | View and manage your data in Google BigQuery
-bigqueryScope :: OAuthScope
-bigqueryScope = "https://www.googleapis.com/auth/bigquery";
+bigQueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
+bigQueryScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-devstorageFullControlScope :: OAuthScope
-devstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";
+storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+storageFullControlScope = Proxy;

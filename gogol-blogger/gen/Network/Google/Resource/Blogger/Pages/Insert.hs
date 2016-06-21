@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Pages.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type PagesInsertResource =
 -- | Add a page.
 --
 -- /See:/ 'pagesInsert' smart constructor.
-data PagesInsert = PagesInsert
+data PagesInsert = PagesInsert'
     { _piIsDraft :: !(Maybe Bool)
     , _piBlogId  :: !Text
     , _piPayload :: !Page
@@ -76,7 +76,7 @@ pagesInsert
     -> Page -- ^ 'piPayload'
     -> PagesInsert
 pagesInsert pPiBlogId_ pPiPayload_ =
-    PagesInsert
+    PagesInsert'
     { _piIsDraft = Nothing
     , _piBlogId = pPiBlogId_
     , _piPayload = pPiPayload_
@@ -98,7 +98,9 @@ piPayload
 
 instance GoogleRequest PagesInsert where
         type Rs PagesInsert = Page
-        requestClient PagesInsert{..}
+        type Scopes PagesInsert =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PagesInsert'{..}
           = go _piBlogId _piIsDraft (Just AltJSON) _piPayload
               bloggerService
           where go

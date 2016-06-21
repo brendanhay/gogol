@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.TaskQueue.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.TaskQueue.Types.Sum
 
 --
 -- /See:/ 'tasks2' smart constructor.
-data Tasks2 = Tasks2
+data Tasks2 = Tasks2'
     { _tKind  :: !Text
     , _tItems :: !(Maybe [Task])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data Tasks2 = Tasks2
 tasks2
     :: Tasks2
 tasks2 =
-    Tasks2
+    Tasks2'
     { _tKind = "taskqueues#tasks"
     , _tItems = Nothing
     }
@@ -56,19 +56,19 @@ instance FromJSON Tasks2 where
         parseJSON
           = withObject "Tasks2"
               (\ o ->
-                 Tasks2 <$>
+                 Tasks2' <$>
                    (o .:? "kind" .!= "taskqueues#tasks") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON Tasks2 where
-        toJSON Tasks2{..}
+        toJSON Tasks2'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tKind), ("items" .=) <$> _tItems])
 
 --
 -- /See:/ 'taskQueue' smart constructor.
-data TaskQueue = TaskQueue
+data TaskQueue = TaskQueue'
     { _tqKind      :: !Text
     , _tqStats     :: !(Maybe TaskQueueStats)
     , _tqMaxLeases :: !(Maybe (Textual Int32))
@@ -92,7 +92,7 @@ data TaskQueue = TaskQueue
 taskQueue
     :: TaskQueue
 taskQueue =
-    TaskQueue
+    TaskQueue'
     { _tqKind = "taskqueues#taskqueue"
     , _tqStats = Nothing
     , _tqMaxLeases = Nothing
@@ -127,7 +127,7 @@ instance FromJSON TaskQueue where
         parseJSON
           = withObject "TaskQueue"
               (\ o ->
-                 TaskQueue <$>
+                 TaskQueue' <$>
                    (o .:? "kind" .!= "taskqueues#taskqueue") <*>
                      (o .:? "stats")
                      <*> (o .:? "maxLeases")
@@ -135,7 +135,7 @@ instance FromJSON TaskQueue where
                      <*> (o .:? "acl"))
 
 instance ToJSON TaskQueue where
-        toJSON TaskQueue{..}
+        toJSON TaskQueue'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tqKind), ("stats" .=) <$> _tqStats,
@@ -145,7 +145,7 @@ instance ToJSON TaskQueue where
 -- | ACLs that are applicable to this TaskQueue object.
 --
 -- /See:/ 'taskQueueACL' smart constructor.
-data TaskQueueACL = TaskQueueACL
+data TaskQueueACL = TaskQueueACL'
     { _tqaProducerEmails :: !(Maybe [Text])
     , _tqaAdminEmails    :: !(Maybe [Text])
     , _tqaConsumerEmails :: !(Maybe [Text])
@@ -163,7 +163,7 @@ data TaskQueueACL = TaskQueueACL
 taskQueueACL
     :: TaskQueueACL
 taskQueueACL =
-    TaskQueueACL
+    TaskQueueACL'
     { _tqaProducerEmails = Nothing
     , _tqaAdminEmails = Nothing
     , _tqaConsumerEmails = Nothing
@@ -200,13 +200,13 @@ instance FromJSON TaskQueueACL where
         parseJSON
           = withObject "TaskQueueACL"
               (\ o ->
-                 TaskQueueACL <$>
+                 TaskQueueACL' <$>
                    (o .:? "producerEmails" .!= mempty) <*>
                      (o .:? "adminEmails" .!= mempty)
                      <*> (o .:? "consumerEmails" .!= mempty))
 
 instance ToJSON TaskQueueACL where
-        toJSON TaskQueueACL{..}
+        toJSON TaskQueueACL'{..}
           = object
               (catMaybes
                  [("producerEmails" .=) <$> _tqaProducerEmails,
@@ -216,7 +216,7 @@ instance ToJSON TaskQueueACL where
 -- | Statistics for the TaskQueue object in question.
 --
 -- /See:/ 'taskQueueStats' smart constructor.
-data TaskQueueStats = TaskQueueStats
+data TaskQueueStats = TaskQueueStats'
     { _tqsTotalTasks       :: !(Maybe (Textual Int32))
     , _tqsOldestTask       :: !(Maybe (Textual Int64))
     , _tqsLeasedLastHour   :: !(Maybe (Textual Int64))
@@ -237,7 +237,7 @@ data TaskQueueStats = TaskQueueStats
 taskQueueStats
     :: TaskQueueStats
 taskQueueStats =
-    TaskQueueStats
+    TaskQueueStats'
     { _tqsTotalTasks = Nothing
     , _tqsOldestTask = Nothing
     , _tqsLeasedLastHour = Nothing
@@ -277,13 +277,13 @@ instance FromJSON TaskQueueStats where
         parseJSON
           = withObject "TaskQueueStats"
               (\ o ->
-                 TaskQueueStats <$>
+                 TaskQueueStats' <$>
                    (o .:? "totalTasks") <*> (o .:? "oldestTask") <*>
                      (o .:? "leasedLastHour")
                      <*> (o .:? "leasedLastMinute"))
 
 instance ToJSON TaskQueueStats where
-        toJSON TaskQueueStats{..}
+        toJSON TaskQueueStats'{..}
           = object
               (catMaybes
                  [("totalTasks" .=) <$> _tqsTotalTasks,
@@ -293,7 +293,7 @@ instance ToJSON TaskQueueStats where
 
 --
 -- /See:/ 'tasks' smart constructor.
-data Tasks = Tasks
+data Tasks = Tasks'
     { _tasKind  :: !Text
     , _tasItems :: !(Maybe [Task])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -308,7 +308,7 @@ data Tasks = Tasks
 tasks
     :: Tasks
 tasks =
-    Tasks
+    Tasks'
     { _tasKind = "taskqueue#tasks"
     , _tasItems = Nothing
     }
@@ -328,12 +328,12 @@ instance FromJSON Tasks where
         parseJSON
           = withObject "Tasks"
               (\ o ->
-                 Tasks <$>
+                 Tasks' <$>
                    (o .:? "kind" .!= "taskqueue#tasks") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON Tasks where
-        toJSON Tasks{..}
+        toJSON Tasks'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tasKind),
@@ -341,9 +341,9 @@ instance ToJSON Tasks where
 
 --
 -- /See:/ 'task' smart constructor.
-data Task = Task
+data Task = Task'
     { _ttRetryCount       :: !(Maybe (Textual Int32))
-    , _ttEnqueueTimestamp :: !(Maybe (Textual Int64))
+    , _ttEnQueueTimestamp :: !(Maybe (Textual Int64))
     , _ttTag              :: !(Maybe Text)
     , _ttKind             :: !Text
     , _ttQueueName        :: !(Maybe Text)
@@ -358,7 +358,7 @@ data Task = Task
 --
 -- * 'ttRetryCount'
 --
--- * 'ttEnqueueTimestamp'
+-- * 'ttEnQueueTimestamp'
 --
 -- * 'ttTag'
 --
@@ -374,9 +374,9 @@ data Task = Task
 task
     :: Task
 task =
-    Task
+    Task'
     { _ttRetryCount = Nothing
-    , _ttEnqueueTimestamp = Nothing
+    , _ttEnQueueTimestamp = Nothing
     , _ttTag = Nothing
     , _ttKind = "taskqueues#task"
     , _ttQueueName = Nothing
@@ -392,10 +392,10 @@ ttRetryCount
       . mapping _Coerce
 
 -- | Time (in seconds since the epoch) at which the task was enqueued.
-ttEnqueueTimestamp :: Lens' Task (Maybe Int64)
-ttEnqueueTimestamp
-  = lens _ttEnqueueTimestamp
-      (\ s a -> s{_ttEnqueueTimestamp = a})
+ttEnQueueTimestamp :: Lens' Task (Maybe Int64)
+ttEnQueueTimestamp
+  = lens _ttEnQueueTimestamp
+      (\ s a -> s{_ttEnQueueTimestamp = a})
       . mapping _Coerce
 
 -- | Tag for the task, could be used later to lease tasks grouped by a
@@ -435,7 +435,7 @@ instance FromJSON Task where
         parseJSON
           = withObject "Task"
               (\ o ->
-                 Task <$>
+                 Task' <$>
                    (o .:? "retry_count") <*> (o .:? "enqueueTimestamp")
                      <*> (o .:? "tag")
                      <*> (o .:? "kind" .!= "taskqueues#task")
@@ -445,11 +445,11 @@ instance FromJSON Task where
                      <*> (o .:? "leaseTimestamp"))
 
 instance ToJSON Task where
-        toJSON Task{..}
+        toJSON Task'{..}
           = object
               (catMaybes
                  [("retry_count" .=) <$> _ttRetryCount,
-                  ("enqueueTimestamp" .=) <$> _ttEnqueueTimestamp,
+                  ("enqueueTimestamp" .=) <$> _ttEnQueueTimestamp,
                   ("tag" .=) <$> _ttTag, Just ("kind" .= _ttKind),
                   ("queueName" .=) <$> _ttQueueName,
                   ("payloadBase64" .=) <$> _ttPayloadBase64,

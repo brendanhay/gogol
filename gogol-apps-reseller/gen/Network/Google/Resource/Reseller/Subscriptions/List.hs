@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Subscriptions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type SubscriptionsListResource =
 -- name prefix.
 --
 -- /See:/ 'subscriptionsList' smart constructor.
-data SubscriptionsList = SubscriptionsList
+data SubscriptionsList = SubscriptionsList'
     { _slCustomerNamePrefix :: !(Maybe Text)
     , _slCustomerId         :: !(Maybe Text)
     , _slCustomerAuthToken  :: !(Maybe Text)
@@ -86,7 +86,7 @@ data SubscriptionsList = SubscriptionsList
 subscriptionsList
     :: SubscriptionsList
 subscriptionsList =
-    SubscriptionsList
+    SubscriptionsList'
     { _slCustomerNamePrefix = Nothing
     , _slCustomerId = Nothing
     , _slCustomerAuthToken = Nothing
@@ -127,7 +127,10 @@ slMaxResults
 
 instance GoogleRequest SubscriptionsList where
         type Rs SubscriptionsList = Subscriptions
-        requestClient SubscriptionsList{..}
+        type Scopes SubscriptionsList =
+             '["https://www.googleapis.com/auth/apps.order",
+               "https://www.googleapis.com/auth/apps.order.readonly"]
+        requestClient SubscriptionsList'{..}
           = go _slCustomerNamePrefix _slCustomerId
               _slCustomerAuthToken
               _slPageToken

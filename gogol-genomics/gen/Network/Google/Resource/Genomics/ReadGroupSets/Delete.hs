@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.ReadGroupSets.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a read group set.
+-- Deletes a read group set. For the definitions of read group sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.readgroupsets.delete@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.delete@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Delete
     (
     -- * REST Resource
@@ -61,10 +63,12 @@ type ReadGroupSetsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a read group set.
+-- | Deletes a read group set. For the definitions of read group sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'readGroupSetsDelete' smart constructor.
-data ReadGroupSetsDelete = ReadGroupSetsDelete
+data ReadGroupSetsDelete = ReadGroupSetsDelete'
     { _rgsdXgafv          :: !(Maybe Text)
     , _rgsdReadGroupSetId :: !Text
     , _rgsdUploadProtocol :: !(Maybe Text)
@@ -98,7 +102,7 @@ readGroupSetsDelete
     :: Text -- ^ 'rgsdReadGroupSetId'
     -> ReadGroupSetsDelete
 readGroupSetsDelete pRgsdReadGroupSetId_ =
-    ReadGroupSetsDelete
+    ReadGroupSetsDelete'
     { _rgsdXgafv = Nothing
     , _rgsdReadGroupSetId = pRgsdReadGroupSetId_
     , _rgsdUploadProtocol = Nothing
@@ -156,7 +160,10 @@ rgsdCallback
 
 instance GoogleRequest ReadGroupSetsDelete where
         type Rs ReadGroupSetsDelete = Empty
-        requestClient ReadGroupSetsDelete{..}
+        type Scopes ReadGroupSetsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient ReadGroupSetsDelete'{..}
           = go _rgsdReadGroupSetId _rgsdXgafv
               _rgsdUploadProtocol
               (Just _rgsdPp)

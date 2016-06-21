@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Comments.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CommentsGet' request conforms to.
 type CommentsGetResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>
@@ -56,7 +56,7 @@ type CommentsGetResource =
 -- | Gets a comment by ID.
 --
 -- /See:/ 'commentsGet' smart constructor.
-data CommentsGet = CommentsGet
+data CommentsGet = CommentsGet'
     { _cgFileId         :: !Text
     , _cgCommentId      :: !Text
     , _cgIncludeDeleted :: !Bool
@@ -76,7 +76,7 @@ commentsGet
     -> Text -- ^ 'cgCommentId'
     -> CommentsGet
 commentsGet pCgFileId_ pCgCommentId_ =
-    CommentsGet
+    CommentsGet'
     { _cgFileId = pCgFileId_
     , _cgCommentId = pCgCommentId_
     , _cgIncludeDeleted = False
@@ -91,8 +91,8 @@ cgCommentId :: Lens' CommentsGet Text
 cgCommentId
   = lens _cgCommentId (\ s a -> s{_cgCommentId = a})
 
--- | If set, this will succeed when retrieving a deleted comment, and will
--- include any deleted replies.
+-- | Whether to return deleted comments. Deleted comments will not include
+-- their original content.
 cgIncludeDeleted :: Lens' CommentsGet Bool
 cgIncludeDeleted
   = lens _cgIncludeDeleted
@@ -100,7 +100,11 @@ cgIncludeDeleted
 
 instance GoogleRequest CommentsGet where
         type Rs CommentsGet = Comment
-        requestClient CommentsGet{..}
+        type Scopes CommentsGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.readonly"]
+        requestClient CommentsGet'{..}
           = go _cgFileId _cgCommentId (Just _cgIncludeDeleted)
               (Just AltJSON)
               driveService

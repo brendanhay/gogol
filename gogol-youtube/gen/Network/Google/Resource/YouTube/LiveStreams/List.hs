@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.LiveStreams.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type LiveStreamsListResource =
 -- | Returns a list of video streams that match the API request parameters.
 --
 -- /See:/ 'liveStreamsList' smart constructor.
-data LiveStreamsList = LiveStreamsList
+data LiveStreamsList = LiveStreamsList'
     { _lslPart                          :: !Text
     , _lslMine                          :: !(Maybe Bool)
     , _lslOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -95,7 +95,7 @@ liveStreamsList
     :: Text -- ^ 'lslPart'
     -> LiveStreamsList
 liveStreamsList pLslPart_ =
-    LiveStreamsList
+    LiveStreamsList'
     { _lslPart = pLslPart_
     , _lslMine = Nothing
     , _lslOnBehalfOfContentOwner = Nothing
@@ -177,7 +177,11 @@ lslMaxResults
 
 instance GoogleRequest LiveStreamsList where
         type Rs LiveStreamsList = LiveStreamListResponse
-        requestClient LiveStreamsList{..}
+        type Scopes LiveStreamsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
+        requestClient LiveStreamsList'{..}
           = go (Just _lslPart) _lslMine
               _lslOnBehalfOfContentOwner
               _lslOnBehalfOfContentOwnerChannel

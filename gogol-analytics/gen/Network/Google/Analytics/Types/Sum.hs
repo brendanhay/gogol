@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Analytics.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -30,19 +30,19 @@ data DataGaGetSamplingLevel
       -- ^ @HIGHER_PRECISION@
       -- Returns a more accurate response using a large sample size, but this may
       -- result in the response being slower.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataGaGetSamplingLevel
 
-instance FromText DataGaGetSamplingLevel where
-    fromText = \case
-        "DEFAULT" -> Just Default
-        "FASTER" -> Just Faster
-        "HIGHER_PRECISION" -> Just HigherPrecision
-        _ -> Nothing
+instance FromHttpApiData DataGaGetSamplingLevel where
+    parseQueryParam = \case
+        "DEFAULT" -> Right Default
+        "FASTER" -> Right Faster
+        "HIGHER_PRECISION" -> Right HigherPrecision
+        x -> Left ("Unable to parse DataGaGetSamplingLevel from: " <> x)
 
-instance ToText DataGaGetSamplingLevel where
-    toText = \case
+instance ToHttpApiData DataGaGetSamplingLevel where
+    toQueryParam = \case
         Default -> "DEFAULT"
         Faster -> "FASTER"
         HigherPrecision -> "HIGHER_PRECISION"
@@ -62,18 +62,18 @@ data DataGaGetOutput
     | JSON
       -- ^ @json@
       -- Returns the response in standard JSON format.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataGaGetOutput
 
-instance FromText DataGaGetOutput where
-    fromText = \case
-        "dataTable" -> Just DataTable
-        "json" -> Just JSON
-        _ -> Nothing
+instance FromHttpApiData DataGaGetOutput where
+    parseQueryParam = \case
+        "dataTable" -> Right DataTable
+        "json" -> Right JSON
+        x -> Left ("Unable to parse DataGaGetOutput from: " <> x)
 
-instance ToText DataGaGetOutput where
-    toText = \case
+instance ToHttpApiData DataGaGetOutput where
+    toQueryParam = \case
         DataTable -> "dataTable"
         JSON -> "json"
 
@@ -95,19 +95,19 @@ data DataMcfGetSamplingLevel
       -- ^ @HIGHER_PRECISION@
       -- Returns a more accurate response using a large sample size, but this may
       -- result in the response being slower.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataMcfGetSamplingLevel
 
-instance FromText DataMcfGetSamplingLevel where
-    fromText = \case
-        "DEFAULT" -> Just DMGSLDefault
-        "FASTER" -> Just DMGSLFaster
-        "HIGHER_PRECISION" -> Just DMGSLHigherPrecision
-        _ -> Nothing
+instance FromHttpApiData DataMcfGetSamplingLevel where
+    parseQueryParam = \case
+        "DEFAULT" -> Right DMGSLDefault
+        "FASTER" -> Right DMGSLFaster
+        "HIGHER_PRECISION" -> Right DMGSLHigherPrecision
+        x -> Left ("Unable to parse DataMcfGetSamplingLevel from: " <> x)
 
-instance ToText DataMcfGetSamplingLevel where
-    toText = \case
+instance ToHttpApiData DataMcfGetSamplingLevel where
+    toQueryParam = \case
         DMGSLDefault -> "DEFAULT"
         DMGSLFaster -> "FASTER"
         DMGSLHigherPrecision -> "HIGHER_PRECISION"

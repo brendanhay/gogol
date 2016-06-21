@@ -14,15 +14,18 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.ReadGroupSets.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a read group set. This method supports patch semantics.
+-- Updates a read group set. For the definitions of read group sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics.
 --
--- /See:/ < Genomics API Reference> for @genomics.readgroupsets.patch@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.patch@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Patch
     (
     -- * REST Resource
@@ -66,10 +69,13 @@ type ReadGroupSetsPatchResource =
                              ReqBody '[JSON] ReadGroupSet :>
                                Patch '[JSON] ReadGroupSet
 
--- | Updates a read group set. This method supports patch semantics.
+-- | Updates a read group set. For the definitions of read group sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics.
 --
 -- /See:/ 'readGroupSetsPatch' smart constructor.
-data ReadGroupSetsPatch = ReadGroupSetsPatch
+data ReadGroupSetsPatch = ReadGroupSetsPatch'
     { _rgspXgafv          :: !(Maybe Text)
     , _rgspReadGroupSetId :: !Text
     , _rgspUploadProtocol :: !(Maybe Text)
@@ -110,7 +116,7 @@ readGroupSetsPatch
     -> ReadGroupSet -- ^ 'rgspPayload'
     -> ReadGroupSetsPatch
 readGroupSetsPatch pRgspReadGroupSetId_ pRgspPayload_ =
-    ReadGroupSetsPatch
+    ReadGroupSetsPatch'
     { _rgspXgafv = Nothing
     , _rgspReadGroupSetId = pRgspReadGroupSetId_
     , _rgspUploadProtocol = Nothing
@@ -141,10 +147,9 @@ rgspUploadProtocol
   = lens _rgspUploadProtocol
       (\ s a -> s{_rgspUploadProtocol = a})
 
--- | An optional mask specifying which fields to update. At this time,
--- mutable fields are referenceSetId and name. Acceptable values are
--- \"referenceSetId\" and \"name\". If unspecified, all mutable fields will
--- be updated.
+-- | An optional mask specifying which fields to update. Supported fields: *
+-- name. * referenceSetId. Leaving \`updateMask\` unset is equivalent to
+-- specifying all mutable fields.
 rgspUpdateMask :: Lens' ReadGroupSetsPatch (Maybe Text)
 rgspUpdateMask
   = lens _rgspUpdateMask
@@ -184,7 +189,10 @@ rgspCallback
 
 instance GoogleRequest ReadGroupSetsPatch where
         type Rs ReadGroupSetsPatch = ReadGroupSet
-        requestClient ReadGroupSetsPatch{..}
+        type Scopes ReadGroupSetsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient ReadGroupSetsPatch'{..}
           = go _rgspReadGroupSetId _rgspXgafv
               _rgspUploadProtocol
               _rgspUpdateMask

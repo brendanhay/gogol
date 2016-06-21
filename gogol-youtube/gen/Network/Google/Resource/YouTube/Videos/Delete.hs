@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Videos.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type VideosDeleteResource =
 -- | Deletes a YouTube video.
 --
 -- /See:/ 'videosDelete' smart constructor.
-data VideosDelete = VideosDelete
+data VideosDelete = VideosDelete'
     { _vdOnBehalfOfContentOwner :: !(Maybe Text)
     , _vdId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ videosDelete
     :: Text -- ^ 'vdId'
     -> VideosDelete
 videosDelete pVdId_ =
-    VideosDelete
+    VideosDelete'
     { _vdOnBehalfOfContentOwner = Nothing
     , _vdId = pVdId_
     }
@@ -97,7 +97,11 @@ vdId = lens _vdId (\ s a -> s{_vdId = a})
 
 instance GoogleRequest VideosDelete where
         type Rs VideosDelete = ()
-        requestClient VideosDelete{..}
+        type Scopes VideosDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient VideosDelete'{..}
           = go (Just _vdId) _vdOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

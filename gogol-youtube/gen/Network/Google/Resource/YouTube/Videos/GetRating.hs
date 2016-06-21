@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Videos.GetRating
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type VideosGetRatingResource =
 -- specified videos.
 --
 -- /See:/ 'videosGetRating' smart constructor.
-data VideosGetRating = VideosGetRating
+data VideosGetRating = VideosGetRating'
     { _vgrOnBehalfOfContentOwner :: !(Maybe Text)
     , _vgrId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ videosGetRating
     :: Text -- ^ 'vgrId'
     -> VideosGetRating
 videosGetRating pVgrId_ =
-    VideosGetRating
+    VideosGetRating'
     { _vgrOnBehalfOfContentOwner = Nothing
     , _vgrId = pVgrId_
     }
@@ -101,7 +101,11 @@ vgrId = lens _vgrId (\ s a -> s{_vgrId = a})
 
 instance GoogleRequest VideosGetRating where
         type Rs VideosGetRating = VideoGetRatingResponse
-        requestClient VideosGetRating{..}
+        type Scopes VideosGetRating =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient VideosGetRating'{..}
           = go (Just _vgrId) _vgrOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

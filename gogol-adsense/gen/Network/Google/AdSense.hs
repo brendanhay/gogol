@@ -7,20 +7,24 @@
 
 -- |
 -- Module      : Network.Google.AdSense
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gives AdSense publishers access to their inventory and the ability to
--- generate reports
+-- Accesses AdSense publishers\' inventory and generates performance
+-- reports.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference>
 module Network.Google.AdSense
     (
     -- * Service Configuration
       adSenseService
+
+    -- * OAuth Scopes
+    , adSenseReadOnlyScope
+    , adSenseScope
 
     -- * API Declaration
     , AdSenseAPI
@@ -312,7 +316,6 @@ module Network.Google.AdSense
     , adSupportsReporting
     , adId
     , adProductCode
-    , adArcReviewMode
 
     -- ** SavedAdStyle
     , SavedAdStyle

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.ForwardingRules.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ForwardingRulesGetResource =
 -- | Returns the specified ForwardingRule resource.
 --
 -- /See:/ 'forwardingRulesGet' smart constructor.
-data ForwardingRulesGet = ForwardingRulesGet
+data ForwardingRulesGet = ForwardingRulesGet'
     { _frgProject        :: !Text
     , _frgForwardingRule :: !Text
     , _frgRegion         :: !Text
@@ -79,13 +79,13 @@ forwardingRulesGet
     -> Text -- ^ 'frgRegion'
     -> ForwardingRulesGet
 forwardingRulesGet pFrgProject_ pFrgForwardingRule_ pFrgRegion_ =
-    ForwardingRulesGet
+    ForwardingRulesGet'
     { _frgProject = pFrgProject_
     , _frgForwardingRule = pFrgForwardingRule_
     , _frgRegion = pFrgRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 frgProject :: Lens' ForwardingRulesGet Text
 frgProject
   = lens _frgProject (\ s a -> s{_frgProject = a})
@@ -103,7 +103,11 @@ frgRegion
 
 instance GoogleRequest ForwardingRulesGet where
         type Rs ForwardingRulesGet = ForwardingRule
-        requestClient ForwardingRulesGet{..}
+        type Scopes ForwardingRulesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient ForwardingRulesGet'{..}
           = go _frgProject _frgRegion _frgForwardingRule
               (Just AltJSON)
               computeService

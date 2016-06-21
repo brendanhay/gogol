@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -41,6 +41,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Dele
     , ddbdBreakpointId
     , ddbdBearerToken
     , ddbdDebuggeeId
+    , ddbdClientVersion
     , ddbdCallback
     ) where
 
@@ -62,13 +63,15 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+                             QueryParam "clientVersion" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Delete '[JSON] Empty
 
 -- | Deletes the breakpoint from the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsDelete' smart constructor.
-data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete
+data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv          :: !(Maybe Text)
     , _ddbdUploadProtocol :: !(Maybe Text)
     , _ddbdPp             :: !Bool
@@ -77,6 +80,7 @@ data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete
     , _ddbdBreakpointId   :: !Text
     , _ddbdBearerToken    :: !(Maybe Text)
     , _ddbdDebuggeeId     :: !Text
+    , _ddbdClientVersion  :: !(Maybe Text)
     , _ddbdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,13 +104,15 @@ data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete
 --
 -- * 'ddbdDebuggeeId'
 --
+-- * 'ddbdClientVersion'
+--
 -- * 'ddbdCallback'
 debuggerDebuggeesBreakpointsDelete
     :: Text -- ^ 'ddbdBreakpointId'
     -> Text -- ^ 'ddbdDebuggeeId'
     -> DebuggerDebuggeesBreakpointsDelete
 debuggerDebuggeesBreakpointsDelete pDdbdBreakpointId_ pDdbdDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsDelete
+    DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv = Nothing
     , _ddbdUploadProtocol = Nothing
     , _ddbdPp = True
@@ -115,6 +121,7 @@ debuggerDebuggeesBreakpointsDelete pDdbdBreakpointId_ pDdbdDebuggeeId_ =
     , _ddbdBreakpointId = pDdbdBreakpointId_
     , _ddbdBearerToken = Nothing
     , _ddbdDebuggeeId = pDdbdDebuggeeId_
+    , _ddbdClientVersion = Nothing
     , _ddbdCallback = Nothing
     }
 
@@ -145,7 +152,7 @@ ddbdUploadType
   = lens _ddbdUploadType
       (\ s a -> s{_ddbdUploadType = a})
 
--- | The breakpoint to delete.
+-- | ID of the breakpoint to delete.
 ddbdBreakpointId :: Lens' DebuggerDebuggeesBreakpointsDelete Text
 ddbdBreakpointId
   = lens _ddbdBreakpointId
@@ -157,11 +164,18 @@ ddbdBearerToken
   = lens _ddbdBearerToken
       (\ s a -> s{_ddbdBearerToken = a})
 
--- | The debuggee id to delete the breakpoint from.
+-- | ID of the debuggee whose breakpoint to delete.
 ddbdDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsDelete Text
 ddbdDebuggeeId
   = lens _ddbdDebuggeeId
       (\ s a -> s{_ddbdDebuggeeId = a})
+
+-- | The client version making the call. Following: \`domain\/type\/version\`
+-- (e.g., \`google.com\/intellij\/v1\`).
+ddbdClientVersion :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
+ddbdClientVersion
+  = lens _ddbdClientVersion
+      (\ s a -> s{_ddbdClientVersion = a})
 
 -- | JSONP
 ddbdCallback :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
@@ -171,13 +185,17 @@ ddbdCallback
 instance GoogleRequest
          DebuggerDebuggeesBreakpointsDelete where
         type Rs DebuggerDebuggeesBreakpointsDelete = Empty
-        requestClient DebuggerDebuggeesBreakpointsDelete{..}
+        type Scopes DebuggerDebuggeesBreakpointsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud_debugger"]
+        requestClient DebuggerDebuggeesBreakpointsDelete'{..}
           = go _ddbdDebuggeeId _ddbdBreakpointId _ddbdXgafv
               _ddbdUploadProtocol
               (Just _ddbdPp)
               _ddbdAccessToken
               _ddbdUploadType
               _ddbdBearerToken
+              _ddbdClientVersion
               _ddbdCallback
               (Just AltJSON)
               debuggerService

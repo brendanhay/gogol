@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Advertisers.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersInsert' request conforms to.
 type AdvertisersInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
@@ -54,7 +54,7 @@ type AdvertisersInsertResource =
 -- | Inserts a new advertiser.
 --
 -- /See:/ 'advertisersInsert' smart constructor.
-data AdvertisersInsert = AdvertisersInsert
+data AdvertisersInsert = AdvertisersInsert'
     { _aiiProFileId :: !(Textual Int64)
     , _aiiPayload   :: !Advertiser
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ advertisersInsert
     -> Advertiser -- ^ 'aiiPayload'
     -> AdvertisersInsert
 advertisersInsert pAiiProFileId_ pAiiPayload_ =
-    AdvertisersInsert
+    AdvertisersInsert'
     { _aiiProFileId = _Coerce # pAiiProFileId_
     , _aiiPayload = pAiiPayload_
     }
@@ -89,7 +89,9 @@ aiiPayload
 
 instance GoogleRequest AdvertisersInsert where
         type Rs AdvertisersInsert = Advertiser
-        requestClient AdvertisersInsert{..}
+        type Scopes AdvertisersInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdvertisersInsert'{..}
           = go _aiiProFileId (Just AltJSON) _aiiPayload
               dFAReportingService
           where go

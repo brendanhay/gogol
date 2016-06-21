@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -25,7 +25,7 @@
 -- only such users will see the collection. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collectionviewers.patch@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collectionviewers.patch@.
 module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
     (
     -- * REST Resource
@@ -65,7 +65,7 @@ type CollectionviewersPatchResource =
 -- semantics.
 --
 -- /See:/ 'collectionviewersPatch' smart constructor.
-data CollectionviewersPatch = CollectionviewersPatch
+data CollectionviewersPatch = CollectionviewersPatch'
     { _cppEnterpriseId :: !Text
     , _cppCollectionId :: !Text
     , _cppPayload      :: !User
@@ -90,7 +90,7 @@ collectionviewersPatch
     -> Text -- ^ 'cppUserId'
     -> CollectionviewersPatch
 collectionviewersPatch pCppEnterpriseId_ pCppCollectionId_ pCppPayload_ pCppUserId_ =
-    CollectionviewersPatch
+    CollectionviewersPatch'
     { _cppEnterpriseId = pCppEnterpriseId_
     , _cppCollectionId = pCppCollectionId_
     , _cppPayload = pCppPayload_
@@ -121,7 +121,9 @@ cppUserId
 
 instance GoogleRequest CollectionviewersPatch where
         type Rs CollectionviewersPatch = User
-        requestClient CollectionviewersPatch{..}
+        type Scopes CollectionviewersPatch =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient CollectionviewersPatch'{..}
           = go _cppEnterpriseId _cppCollectionId _cppUserId
               (Just AltJSON)
               _cppPayload

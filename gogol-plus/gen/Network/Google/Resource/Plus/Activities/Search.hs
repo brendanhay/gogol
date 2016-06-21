@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Plus.Activities.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type ActivitiesSearchResource =
 -- | Search public activities.
 --
 -- /See:/ 'activitiesSearch' smart constructor.
-data ActivitiesSearch = ActivitiesSearch
+data ActivitiesSearch = ActivitiesSearch'
     { _asOrderBy    :: !ActivitiesSearchOrderBy
     , _asQuery      :: !Text
     , _asLanguage   :: !Text
@@ -84,7 +84,7 @@ activitiesSearch
     :: Text -- ^ 'asQuery'
     -> ActivitiesSearch
 activitiesSearch pAsQuery_ =
-    ActivitiesSearch
+    ActivitiesSearch'
     { _asOrderBy = ASOBRecent
     , _asQuery = pAsQuery_
     , _asLanguage = "en-US"
@@ -125,7 +125,10 @@ asMaxResults
 
 instance GoogleRequest ActivitiesSearch where
         type Rs ActivitiesSearch = ActivityFeed
-        requestClient ActivitiesSearch{..}
+        type Scopes ActivitiesSearch =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient ActivitiesSearch'{..}
           = go (Just _asQuery) (Just _asOrderBy)
               (Just _asLanguage)
               _asPageToken

@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.ResourceViews.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.ResourceViews.Types.Sum
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem
+    OperationWarningsItemDataItem'
     { _owidiValue = Nothing
     , _owidiKey = Nothing
     }
@@ -55,11 +55,11 @@ instance FromJSON OperationWarningsItemDataItem where
         parseJSON
           = withObject "OperationWarningsItemDataItem"
               (\ o ->
-                 OperationWarningsItemDataItem <$>
+                 OperationWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON OperationWarningsItemDataItem where
-        toJSON OperationWarningsItemDataItem{..}
+        toJSON OperationWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _owidiValue,
@@ -67,7 +67,7 @@ instance ToJSON OperationWarningsItemDataItem where
 
 --
 -- /See:/ 'operationList' smart constructor.
-data OperationList = OperationList
+data OperationList = OperationList'
     { _olNextPageToken :: !(Maybe Text)
     , _olKind          :: !Text
     , _olItems         :: !(Maybe [Operation])
@@ -91,7 +91,7 @@ data OperationList = OperationList
 operationList
     :: OperationList
 operationList =
-    OperationList
+    OperationList'
     { _olNextPageToken = Nothing
     , _olKind = "resourceviews#operationList"
     , _olItems = Nothing
@@ -128,7 +128,7 @@ instance FromJSON OperationList where
         parseJSON
           = withObject "OperationList"
               (\ o ->
-                 OperationList <$>
+                 OperationList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "resourceviews#operationList")
                      <*> (o .:? "items" .!= mempty)
@@ -136,7 +136,7 @@ instance FromJSON OperationList where
                      <*> (o .:? "id"))
 
 instance ToJSON OperationList where
-        toJSON OperationList{..}
+        toJSON OperationList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olNextPageToken,
@@ -147,7 +147,7 @@ instance ToJSON OperationList where
 -- | The resource view object.
 --
 -- /See:/ 'resourceView' smart constructor.
-data ResourceView = ResourceView
+data ResourceView = ResourceView'
     { _rvSize              :: !(Maybe (Textual Word32))
     , _rvKind              :: !Text
     , _rvFingerprint       :: !(Maybe Text)
@@ -192,7 +192,7 @@ data ResourceView = ResourceView
 resourceView
     :: ResourceView
 resourceView =
-    ResourceView
+    ResourceView'
     { _rvSize = Nothing
     , _rvKind = "resourceviews#resourceView"
     , _rvFingerprint = Nothing
@@ -279,7 +279,7 @@ instance FromJSON ResourceView where
         parseJSON
           = withObject "ResourceView"
               (\ o ->
-                 ResourceView <$>
+                 ResourceView' <$>
                    (o .:? "size") <*>
                      (o .:? "kind" .!= "resourceviews#resourceView")
                      <*> (o .:? "fingerprint")
@@ -294,7 +294,7 @@ instance FromJSON ResourceView where
                      <*> (o .:? "description"))
 
 instance ToJSON ResourceView where
-        toJSON ResourceView{..}
+        toJSON ResourceView'{..}
           = object
               (catMaybes
                  [("size" .=) <$> _rvSize, Just ("kind" .= _rvKind),
@@ -311,7 +311,7 @@ instance ToJSON ResourceView where
 -- | The response to a list request.
 --
 -- /See:/ 'zoneViewsList' smart constructor.
-data ZoneViewsList = ZoneViewsList
+data ZoneViewsList = ZoneViewsList'
     { _zvlNextPageToken :: !(Maybe Text)
     , _zvlKind          :: !Text
     , _zvlItems         :: !(Maybe [ResourceView])
@@ -332,7 +332,7 @@ data ZoneViewsList = ZoneViewsList
 zoneViewsList
     :: ZoneViewsList
 zoneViewsList =
-    ZoneViewsList
+    ZoneViewsList'
     { _zvlNextPageToken = Nothing
     , _zvlKind = "resourceviews#zoneViewsList"
     , _zvlItems = Nothing
@@ -365,14 +365,14 @@ instance FromJSON ZoneViewsList where
         parseJSON
           = withObject "ZoneViewsList"
               (\ o ->
-                 ZoneViewsList <$>
+                 ZoneViewsList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "resourceviews#zoneViewsList")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "selfLink"))
 
 instance ToJSON ZoneViewsList where
-        toJSON ZoneViewsList{..}
+        toJSON ZoneViewsList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _zvlNextPageToken,
@@ -383,7 +383,7 @@ instance ToJSON ZoneViewsList where
 -- | An operation resource, used to manage asynchronous API requests.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
@@ -458,7 +458,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -619,7 +619,7 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "targetId") <*> (o .:? "status") <*>
                      (o .:? "insertTime")
                      <*> (o .:? "progress")
@@ -643,7 +643,7 @@ instance FromJSON Operation where
                      <*> (o .:? "clientOperationId"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("targetId" .=) <$> _oTargetId,
@@ -670,7 +670,7 @@ instance ToJSON Operation where
 -- | The response to a list resource request.
 --
 -- /See:/ 'zoneViewsListResourcesResponse' smart constructor.
-data ZoneViewsListResourcesResponse = ZoneViewsListResourcesResponse
+data ZoneViewsListResourcesResponse = ZoneViewsListResourcesResponse'
     { _zvlrrNextPageToken :: !(Maybe Text)
     , _zvlrrItems         :: !(Maybe [ListResourceResponseItem])
     , _zvlrrNetwork       :: !(Maybe Text)
@@ -688,7 +688,7 @@ data ZoneViewsListResourcesResponse = ZoneViewsListResourcesResponse
 zoneViewsListResourcesResponse
     :: ZoneViewsListResourcesResponse
 zoneViewsListResourcesResponse =
-    ZoneViewsListResourcesResponse
+    ZoneViewsListResourcesResponse'
     { _zvlrrNextPageToken = Nothing
     , _zvlrrItems = Nothing
     , _zvlrrNetwork = Nothing
@@ -718,13 +718,13 @@ instance FromJSON ZoneViewsListResourcesResponse
         parseJSON
           = withObject "ZoneViewsListResourcesResponse"
               (\ o ->
-                 ZoneViewsListResourcesResponse <$>
+                 ZoneViewsListResourcesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "items" .!= mempty)
                      <*> (o .:? "network"))
 
 instance ToJSON ZoneViewsListResourcesResponse where
-        toJSON ZoneViewsListResourcesResponse{..}
+        toJSON ZoneViewsListResourcesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _zvlrrNextPageToken,
@@ -734,7 +734,7 @@ instance ToJSON ZoneViewsListResourcesResponse where
 -- | The service endpoint that may be started in a VM.
 --
 -- /See:/ 'serviceEndpoint' smart constructor.
-data ServiceEndpoint = ServiceEndpoint
+data ServiceEndpoint = ServiceEndpoint'
     { _seName :: !(Maybe Text)
     , _sePort :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -749,7 +749,7 @@ data ServiceEndpoint = ServiceEndpoint
 serviceEndpoint
     :: ServiceEndpoint
 serviceEndpoint =
-    ServiceEndpoint
+    ServiceEndpoint'
     { _seName = Nothing
     , _sePort = Nothing
     }
@@ -768,11 +768,11 @@ instance FromJSON ServiceEndpoint where
         parseJSON
           = withObject "ServiceEndpoint"
               (\ o ->
-                 ServiceEndpoint <$>
+                 ServiceEndpoint' <$>
                    (o .:? "name") <*> (o .:? "port"))
 
 instance ToJSON ServiceEndpoint where
-        toJSON ServiceEndpoint{..}
+        toJSON ServiceEndpoint'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _seName, ("port" .=) <$> _sePort])
@@ -780,7 +780,7 @@ instance ToJSON ServiceEndpoint where
 -- | The request to remove resources from the resource view.
 --
 -- /See:/ 'zoneViewsRemoveResourcesRequest' smart constructor.
-newtype ZoneViewsRemoveResourcesRequest = ZoneViewsRemoveResourcesRequest
+newtype ZoneViewsRemoveResourcesRequest = ZoneViewsRemoveResourcesRequest'
     { _zvrrrResources :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -792,7 +792,7 @@ newtype ZoneViewsRemoveResourcesRequest = ZoneViewsRemoveResourcesRequest
 zoneViewsRemoveResourcesRequest
     :: ZoneViewsRemoveResourcesRequest
 zoneViewsRemoveResourcesRequest =
-    ZoneViewsRemoveResourcesRequest
+    ZoneViewsRemoveResourcesRequest'
     { _zvrrrResources = Nothing
     }
 
@@ -809,18 +809,18 @@ instance FromJSON ZoneViewsRemoveResourcesRequest
         parseJSON
           = withObject "ZoneViewsRemoveResourcesRequest"
               (\ o ->
-                 ZoneViewsRemoveResourcesRequest <$>
+                 ZoneViewsRemoveResourcesRequest' <$>
                    (o .:? "resources" .!= mempty))
 
 instance ToJSON ZoneViewsRemoveResourcesRequest where
-        toJSON ZoneViewsRemoveResourcesRequest{..}
+        toJSON ZoneViewsRemoveResourcesRequest'{..}
           = object
               (catMaybes [("resources" .=) <$> _zvrrrResources])
 
 -- | The list of service end points on the resource.
 --
 -- /See:/ 'listResourceResponseItemEndpoints' smart constructor.
-newtype ListResourceResponseItemEndpoints = ListResourceResponseItemEndpoints
+newtype ListResourceResponseItemEndpoints = ListResourceResponseItemEndpoints'
     { _lrrieAddtional :: HashMap Text [Textual Int32]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -833,7 +833,7 @@ listResourceResponseItemEndpoints
     :: HashMap Text [Int32] -- ^ 'lrrieAddtional'
     -> ListResourceResponseItemEndpoints
 listResourceResponseItemEndpoints pLrrieAddtional_ =
-    ListResourceResponseItemEndpoints
+    ListResourceResponseItemEndpoints'
     { _lrrieAddtional = _Coerce # pLrrieAddtional_
     }
 
@@ -849,7 +849,7 @@ instance FromJSON ListResourceResponseItemEndpoints
         parseJSON
           = withObject "ListResourceResponseItemEndpoints"
               (\ o ->
-                 ListResourceResponseItemEndpoints <$>
+                 ListResourceResponseItemEndpoints' <$>
                    (parseJSONObject o))
 
 instance ToJSON ListResourceResponseItemEndpoints
@@ -859,7 +859,7 @@ instance ToJSON ListResourceResponseItemEndpoints
 -- | The request to add resources to the resource view.
 --
 -- /See:/ 'zoneViewsAddResourcesRequest' smart constructor.
-newtype ZoneViewsAddResourcesRequest = ZoneViewsAddResourcesRequest
+newtype ZoneViewsAddResourcesRequest = ZoneViewsAddResourcesRequest'
     { _zvarrResources :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -871,7 +871,7 @@ newtype ZoneViewsAddResourcesRequest = ZoneViewsAddResourcesRequest
 zoneViewsAddResourcesRequest
     :: ZoneViewsAddResourcesRequest
 zoneViewsAddResourcesRequest =
-    ZoneViewsAddResourcesRequest
+    ZoneViewsAddResourcesRequest'
     { _zvarrResources = Nothing
     }
 
@@ -887,11 +887,11 @@ instance FromJSON ZoneViewsAddResourcesRequest where
         parseJSON
           = withObject "ZoneViewsAddResourcesRequest"
               (\ o ->
-                 ZoneViewsAddResourcesRequest <$>
+                 ZoneViewsAddResourcesRequest' <$>
                    (o .:? "resources" .!= mempty))
 
 instance ToJSON ZoneViewsAddResourcesRequest where
-        toJSON ZoneViewsAddResourcesRequest{..}
+        toJSON ZoneViewsAddResourcesRequest'{..}
           = object
               (catMaybes [("resources" .=) <$> _zvarrResources])
 
@@ -899,7 +899,7 @@ instance ToJSON ZoneViewsAddResourcesRequest where
 -- this field will be populated.
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
+newtype OperationError = OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -911,7 +911,7 @@ newtype OperationError = OperationError
 operationError
     :: OperationError
 operationError =
-    OperationError
+    OperationError'
     { _oeErrors = Nothing
     }
 
@@ -927,15 +927,15 @@ instance FromJSON OperationError where
         parseJSON
           = withObject "OperationError"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 OperationError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON OperationError where
-        toJSON OperationError{..}
+        toJSON OperationError'{..}
           = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 --
 -- /See:/ 'zoneViewsGetServiceResponse' smart constructor.
-data ZoneViewsGetServiceResponse = ZoneViewsGetServiceResponse
+data ZoneViewsGetServiceResponse = ZoneViewsGetServiceResponse'
     { _zvgsrFingerprint :: !(Maybe Text)
     , _zvgsrEndpoints   :: !(Maybe [ServiceEndpoint])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -950,7 +950,7 @@ data ZoneViewsGetServiceResponse = ZoneViewsGetServiceResponse
 zoneViewsGetServiceResponse
     :: ZoneViewsGetServiceResponse
 zoneViewsGetServiceResponse =
-    ZoneViewsGetServiceResponse
+    ZoneViewsGetServiceResponse'
     { _zvgsrFingerprint = Nothing
     , _zvgsrEndpoints = Nothing
     }
@@ -973,12 +973,12 @@ instance FromJSON ZoneViewsGetServiceResponse where
         parseJSON
           = withObject "ZoneViewsGetServiceResponse"
               (\ o ->
-                 ZoneViewsGetServiceResponse <$>
+                 ZoneViewsGetServiceResponse' <$>
                    (o .:? "fingerprint") <*>
                      (o .:? "endpoints" .!= mempty))
 
 instance ToJSON ZoneViewsGetServiceResponse where
-        toJSON ZoneViewsGetServiceResponse{..}
+        toJSON ZoneViewsGetServiceResponse'{..}
           = object
               (catMaybes
                  [("fingerprint" .=) <$> _zvgsrFingerprint,
@@ -986,7 +986,7 @@ instance ToJSON ZoneViewsGetServiceResponse where
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem
+data OperationErrorErrorsItem = OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
@@ -1004,7 +1004,7 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem
+    OperationErrorErrorsItem'
     { _oeeiLocation = Nothing
     , _oeeiCode = Nothing
     , _oeeiMessage = Nothing
@@ -1029,12 +1029,12 @@ instance FromJSON OperationErrorErrorsItem where
         parseJSON
           = withObject "OperationErrorErrorsItem"
               (\ o ->
-                 OperationErrorErrorsItem <$>
+                 OperationErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationErrorErrorsItem where
-        toJSON OperationErrorErrorsItem{..}
+        toJSON OperationErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _oeeiLocation,
@@ -1043,7 +1043,7 @@ instance ToJSON OperationErrorErrorsItem where
 
 --
 -- /See:/ 'zoneViewsSetServiceRequest' smart constructor.
-data ZoneViewsSetServiceRequest = ZoneViewsSetServiceRequest
+data ZoneViewsSetServiceRequest = ZoneViewsSetServiceRequest'
     { _zvssrResourceName :: !(Maybe Text)
     , _zvssrFingerprint  :: !(Maybe Text)
     , _zvssrEndpoints    :: !(Maybe [ServiceEndpoint])
@@ -1061,7 +1061,7 @@ data ZoneViewsSetServiceRequest = ZoneViewsSetServiceRequest
 zoneViewsSetServiceRequest
     :: ZoneViewsSetServiceRequest
 zoneViewsSetServiceRequest =
-    ZoneViewsSetServiceRequest
+    ZoneViewsSetServiceRequest'
     { _zvssrResourceName = Nothing
     , _zvssrFingerprint = Nothing
     , _zvssrEndpoints = Nothing
@@ -1093,12 +1093,12 @@ instance FromJSON ZoneViewsSetServiceRequest where
         parseJSON
           = withObject "ZoneViewsSetServiceRequest"
               (\ o ->
-                 ZoneViewsSetServiceRequest <$>
+                 ZoneViewsSetServiceRequest' <$>
                    (o .:? "resourceName") <*> (o .:? "fingerprint") <*>
                      (o .:? "endpoints" .!= mempty))
 
 instance ToJSON ZoneViewsSetServiceRequest where
-        toJSON ZoneViewsSetServiceRequest{..}
+        toJSON ZoneViewsSetServiceRequest'{..}
           = object
               (catMaybes
                  [("resourceName" .=) <$> _zvssrResourceName,
@@ -1109,7 +1109,7 @@ instance ToJSON ZoneViewsSetServiceRequest where
 -- information.
 --
 -- /See:/ 'listResourceResponseItem' smart constructor.
-data ListResourceResponseItem = ListResourceResponseItem
+data ListResourceResponseItem = ListResourceResponseItem'
     { _lrriResource  :: !(Maybe Text)
     , _lrriEndpoints :: !(Maybe ListResourceResponseItemEndpoints)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1124,7 +1124,7 @@ data ListResourceResponseItem = ListResourceResponseItem
 listResourceResponseItem
     :: ListResourceResponseItem
 listResourceResponseItem =
-    ListResourceResponseItem
+    ListResourceResponseItem'
     { _lrriResource = Nothing
     , _lrriEndpoints = Nothing
     }
@@ -1144,11 +1144,11 @@ instance FromJSON ListResourceResponseItem where
         parseJSON
           = withObject "ListResourceResponseItem"
               (\ o ->
-                 ListResourceResponseItem <$>
+                 ListResourceResponseItem' <$>
                    (o .:? "resource") <*> (o .:? "endpoints"))
 
 instance ToJSON ListResourceResponseItem where
-        toJSON ListResourceResponseItem{..}
+        toJSON ListResourceResponseItem'{..}
           = object
               (catMaybes
                  [("resource" .=) <$> _lrriResource,
@@ -1157,7 +1157,7 @@ instance ToJSON ListResourceResponseItem where
 -- | The Label to be applied to the resource views.
 --
 -- /See:/ 'label' smart constructor.
-data Label = Label
+data Label = Label'
     { _lValue :: !(Maybe Text)
     , _lKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1172,7 +1172,7 @@ data Label = Label
 label
     :: Label
 label =
-    Label
+    Label'
     { _lValue = Nothing
     , _lKey = Nothing
     }
@@ -1188,17 +1188,17 @@ lKey = lens _lKey (\ s a -> s{_lKey = a})
 instance FromJSON Label where
         parseJSON
           = withObject "Label"
-              (\ o -> Label <$> (o .:? "value") <*> (o .:? "key"))
+              (\ o -> Label' <$> (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON Label where
-        toJSON Label{..}
+        toJSON Label'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _lValue, ("key" .=) <$> _lKey])
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem
+data OperationWarningsItem = OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe Text)
     , _owiMessage :: !(Maybe Text)
@@ -1216,7 +1216,7 @@ data OperationWarningsItem = OperationWarningsItem
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem
+    OperationWarningsItem'
     { _owiData = Nothing
     , _owiCode = Nothing
     , _owiMessage = Nothing
@@ -1241,12 +1241,12 @@ instance FromJSON OperationWarningsItem where
         parseJSON
           = withObject "OperationWarningsItem"
               (\ o ->
-                 OperationWarningsItem <$>
+                 OperationWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationWarningsItem where
-        toJSON OperationWarningsItem{..}
+        toJSON OperationWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,

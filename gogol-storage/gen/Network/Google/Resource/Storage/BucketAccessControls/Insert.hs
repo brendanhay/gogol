@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.BucketAccessControls.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type BucketAccessControlsInsertResource =
 -- | Creates a new ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsInsert' smart constructor.
-data BucketAccessControlsInsert = BucketAccessControlsInsert
+data BucketAccessControlsInsert = BucketAccessControlsInsert'
     { _baciBucket  :: !Text
     , _baciPayload :: !BucketAccessControl
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ bucketAccessControlsInsert
     -> BucketAccessControl -- ^ 'baciPayload'
     -> BucketAccessControlsInsert
 bucketAccessControlsInsert pBaciBucket_ pBaciPayload_ =
-    BucketAccessControlsInsert
+    BucketAccessControlsInsert'
     { _baciBucket = pBaciBucket_
     , _baciPayload = pBaciPayload_
     }
@@ -91,7 +91,10 @@ instance GoogleRequest BucketAccessControlsInsert
          where
         type Rs BucketAccessControlsInsert =
              BucketAccessControl
-        requestClient BucketAccessControlsInsert{..}
+        type Scopes BucketAccessControlsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient BucketAccessControlsInsert'{..}
           = go _baciBucket (Just AltJSON) _baciPayload
               storageService
           where go

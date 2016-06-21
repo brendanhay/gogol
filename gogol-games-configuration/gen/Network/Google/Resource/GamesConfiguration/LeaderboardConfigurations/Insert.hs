@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type LeaderboardConfigurationsInsertResource =
 -- | Insert a new leaderboard configuration in this application.
 --
 -- /See:/ 'leaderboardConfigurationsInsert' smart constructor.
-data LeaderboardConfigurationsInsert = LeaderboardConfigurationsInsert
+data LeaderboardConfigurationsInsert = LeaderboardConfigurationsInsert'
     { _lciPayload       :: !LeaderboardConfiguration
     , _lciApplicationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ leaderboardConfigurationsInsert
     -> Text -- ^ 'lciApplicationId'
     -> LeaderboardConfigurationsInsert
 leaderboardConfigurationsInsert pLciPayload_ pLciApplicationId_ =
-    LeaderboardConfigurationsInsert
+    LeaderboardConfigurationsInsert'
     { _lciPayload = pLciPayload_
     , _lciApplicationId = pLciApplicationId_
     }
@@ -92,7 +92,9 @@ instance GoogleRequest
          LeaderboardConfigurationsInsert where
         type Rs LeaderboardConfigurationsInsert =
              LeaderboardConfiguration
-        requestClient LeaderboardConfigurationsInsert{..}
+        type Scopes LeaderboardConfigurationsInsert =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient LeaderboardConfigurationsInsert'{..}
           = go _lciApplicationId (Just AltJSON) _lciPayload
               gamesConfigurationService
           where go

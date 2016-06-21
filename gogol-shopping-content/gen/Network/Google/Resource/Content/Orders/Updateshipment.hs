@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.Updateshipment
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type OrdersUpdateshipmentResource =
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
 -- /See:/ 'ordersUpdateshipment' smart constructor.
-data OrdersUpdateshipment = OrdersUpdateshipment
+data OrdersUpdateshipment = OrdersUpdateshipment'
     { _ouMerchantId :: !(Textual Word64)
     , _ouPayload    :: !OrdersUpdateShipmentRequest
     , _ouOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersUpdateshipment
     -> Text -- ^ 'ouOrderId'
     -> OrdersUpdateshipment
 ordersUpdateshipment pOuMerchantId_ pOuPayload_ pOuOrderId_ =
-    OrdersUpdateshipment
+    OrdersUpdateshipment'
     { _ouMerchantId = _Coerce # pOuMerchantId_
     , _ouPayload = pOuPayload_
     , _ouOrderId = pOuOrderId_
@@ -103,7 +103,9 @@ ouOrderId
 instance GoogleRequest OrdersUpdateshipment where
         type Rs OrdersUpdateshipment =
              OrdersUpdateShipmentResponse
-        requestClient OrdersUpdateshipment{..}
+        type Scopes OrdersUpdateshipment =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersUpdateshipment'{..}
           = go _ouMerchantId _ouOrderId (Just AltJSON)
               _ouPayload
               shoppingContentService

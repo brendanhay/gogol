@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Alerts.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AlertsDeleteResource =
 -- account.
 --
 -- /See:/ 'alertsDelete' smart constructor.
-newtype AlertsDelete = AlertsDelete
+newtype AlertsDelete = AlertsDelete'
     { _adAlertId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ alertsDelete
     :: Text -- ^ 'adAlertId'
     -> AlertsDelete
 alertsDelete pAdAlertId_ =
-    AlertsDelete
+    AlertsDelete'
     { _adAlertId = pAdAlertId_
     }
 
@@ -77,7 +77,9 @@ adAlertId
 
 instance GoogleRequest AlertsDelete where
         type Rs AlertsDelete = ()
-        requestClient AlertsDelete{..}
+        type Scopes AlertsDelete =
+             '["https://www.googleapis.com/auth/adsense"]
+        requestClient AlertsDelete'{..}
           = go _adAlertId (Just AltJSON) adSenseService
           where go
                   = buildClient (Proxy :: Proxy AlertsDeleteResource)

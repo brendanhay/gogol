@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsAdUnitsUpdateResource =
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 --
 -- /See:/ 'accountsAdUnitsUpdate' smart constructor.
-data AccountsAdUnitsUpdate = AccountsAdUnitsUpdate
+data AccountsAdUnitsUpdate = AccountsAdUnitsUpdate'
     { _aauuPayload    :: !AdUnit
     , _aauuAdClientId :: !Text
     , _aauuAccountId  :: !Text
@@ -78,7 +78,7 @@ accountsAdUnitsUpdate
     -> Text -- ^ 'aauuAccountId'
     -> AccountsAdUnitsUpdate
 accountsAdUnitsUpdate pAauuPayload_ pAauuAdClientId_ pAauuAccountId_ =
-    AccountsAdUnitsUpdate
+    AccountsAdUnitsUpdate'
     { _aauuPayload = pAauuPayload_
     , _aauuAdClientId = pAauuAdClientId_
     , _aauuAccountId = pAauuAccountId_
@@ -103,7 +103,9 @@ aauuAccountId
 
 instance GoogleRequest AccountsAdUnitsUpdate where
         type Rs AccountsAdUnitsUpdate = AdUnit
-        requestClient AccountsAdUnitsUpdate{..}
+        type Scopes AccountsAdUnitsUpdate =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AccountsAdUnitsUpdate'{..}
           = go _aauuAccountId _aauuAdClientId (Just AltJSON)
               _aauuPayload
               adSenseHostService

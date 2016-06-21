@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsPatch' request conforms to.
 type AdvertiserGroupsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -59,7 +59,7 @@ type AdvertiserGroupsPatchResource =
 -- semantics.
 --
 -- /See:/ 'advertiserGroupsPatch' smart constructor.
-data AdvertiserGroupsPatch = AdvertiserGroupsPatch
+data AdvertiserGroupsPatch = AdvertiserGroupsPatch'
     { _agpProFileId :: !(Textual Int64)
     , _agpPayload   :: !AdvertiserGroup
     , _agpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ advertiserGroupsPatch
     -> Int64 -- ^ 'agpId'
     -> AdvertiserGroupsPatch
 advertiserGroupsPatch pAgpProFileId_ pAgpPayload_ pAgpId_ =
-    AdvertiserGroupsPatch
+    AdvertiserGroupsPatch'
     { _agpProFileId = _Coerce # pAgpProFileId_
     , _agpPayload = pAgpPayload_
     , _agpId = _Coerce # pAgpId_
@@ -104,7 +104,9 @@ agpId
 
 instance GoogleRequest AdvertiserGroupsPatch where
         type Rs AdvertiserGroupsPatch = AdvertiserGroup
-        requestClient AdvertiserGroupsPatch{..}
+        type Scopes AdvertiserGroupsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdvertiserGroupsPatch'{..}
           = go _agpProFileId (Just _agpId) (Just AltJSON)
               _agpPayload
               dFAReportingService

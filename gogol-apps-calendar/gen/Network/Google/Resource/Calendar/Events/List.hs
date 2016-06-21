@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Events.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -92,7 +92,7 @@ type EventsListResource =
 -- | Returns events on the specified calendar.
 --
 -- /See:/ 'eventsList' smart constructor.
-data EventsList = EventsList
+data EventsList = EventsList'
     { _elSyncToken               :: !(Maybe Text)
     , _elCalendarId              :: !Text
     , _elTimeMin                 :: !(Maybe DateTime')
@@ -156,7 +156,7 @@ eventsList
     :: Text -- ^ 'elCalendarId'
     -> EventsList
 eventsList pElCalendarId_ =
-    EventsList
+    EventsList'
     { _elSyncToken = Nothing
     , _elCalendarId = pElCalendarId_
     , _elTimeMin = Nothing
@@ -333,7 +333,10 @@ elTimeMax
 
 instance GoogleRequest EventsList where
         type Rs EventsList = Events
-        requestClient EventsList{..}
+        type Scopes EventsList =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient EventsList'{..}
           = go _elCalendarId _elSyncToken _elTimeMin _elOrderBy
               _elSingleEvents
               (_elPrivateExtendedProperty ^. _Default)

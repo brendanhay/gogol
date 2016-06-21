@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Projects.Icons.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ProjectsIconsGetResource =
 -- | Return an icon or its associated metadata
 --
 -- /See:/ 'projectsIconsGet' smart constructor.
-data ProjectsIconsGet = ProjectsIconsGet
+data ProjectsIconsGet = ProjectsIconsGet'
     { _pigId        :: !Text
     , _pigProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ projectsIconsGet
     -> Text -- ^ 'pigProjectId'
     -> ProjectsIconsGet
 projectsIconsGet pPigId_ pPigProjectId_ =
-    ProjectsIconsGet
+    ProjectsIconsGet'
     { _pigId = pPigId_
     , _pigProjectId = pPigProjectId_
     }
@@ -96,7 +96,10 @@ pigProjectId
 
 instance GoogleRequest ProjectsIconsGet where
         type Rs ProjectsIconsGet = Icon
-        requestClient ProjectsIconsGet{..}
+        type Scopes ProjectsIconsGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient ProjectsIconsGet'{..}
           = go _pigProjectId _pigId (Just AltJSON)
               mapsEngineService
           where go :<|> _
@@ -107,7 +110,9 @@ instance GoogleRequest ProjectsIconsGet where
 instance GoogleRequest
          (MediaDownload ProjectsIconsGet) where
         type Rs (MediaDownload ProjectsIconsGet) = Stream
-        requestClient (MediaDownload ProjectsIconsGet{..})
+        type Scopes (MediaDownload ProjectsIconsGet) =
+             Scopes ProjectsIconsGet
+        requestClient (MediaDownload ProjectsIconsGet'{..})
           = go _pigProjectId _pigId (Just AltMedia)
               mapsEngineService
           where _ :<|> go

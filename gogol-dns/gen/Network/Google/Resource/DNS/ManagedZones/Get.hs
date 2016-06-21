@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DNS.ManagedZones.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ManagedZonesGetResource =
 -- | Fetch the representation of an existing ManagedZone.
 --
 -- /See:/ 'managedZonesGet' smart constructor.
-data ManagedZonesGet = ManagedZonesGet
+data ManagedZonesGet = ManagedZonesGet'
     { _mzgProject     :: !Text
     , _mzgManagedZone :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ managedZonesGet
     -> Text -- ^ 'mzgManagedZone'
     -> ManagedZonesGet
 managedZonesGet pMzgProject_ pMzgManagedZone_ =
-    ManagedZonesGet
+    ManagedZonesGet'
     { _mzgProject = pMzgProject_
     , _mzgManagedZone = pMzgManagedZone_
     }
@@ -90,7 +90,12 @@ mzgManagedZone
 
 instance GoogleRequest ManagedZonesGet where
         type Rs ManagedZonesGet = ManagedZone
-        requestClient ManagedZonesGet{..}
+        type Scopes ManagedZonesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
+        requestClient ManagedZonesGet'{..}
           = go _mzgProject _mzgManagedZone (Just AltJSON)
               dNSService
           where go

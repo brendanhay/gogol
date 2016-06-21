@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Bookshelves.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type BookshelvesGetResource =
 -- | Retrieves metadata for a specific bookshelf for the specified user.
 --
 -- /See:/ 'bookshelvesGet' smart constructor.
-data BookshelvesGet = BookshelvesGet
+data BookshelvesGet = BookshelvesGet'
     { _bgUserId :: !Text
     , _bgShelf  :: !Text
     , _bgSource :: !(Maybe Text)
@@ -76,7 +76,7 @@ bookshelvesGet
     -> Text -- ^ 'bgShelf'
     -> BookshelvesGet
 bookshelvesGet pBgUserId_ pBgShelf_ =
-    BookshelvesGet
+    BookshelvesGet'
     { _bgUserId = pBgUserId_
     , _bgShelf = pBgShelf_
     , _bgSource = Nothing
@@ -96,7 +96,9 @@ bgSource = lens _bgSource (\ s a -> s{_bgSource = a})
 
 instance GoogleRequest BookshelvesGet where
         type Rs BookshelvesGet = Bookshelf
-        requestClient BookshelvesGet{..}
+        type Scopes BookshelvesGet =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient BookshelvesGet'{..}
           = go _bgUserId _bgShelf _bgSource (Just AltJSON)
               booksService
           where go

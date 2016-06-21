@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.ContentCategories.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesUpdate' request conforms to.
 type ContentCategoriesUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -55,7 +55,7 @@ type ContentCategoriesUpdateResource =
 -- | Updates an existing content category.
 --
 -- /See:/ 'contentCategoriesUpdate' smart constructor.
-data ContentCategoriesUpdate = ContentCategoriesUpdate
+data ContentCategoriesUpdate = ContentCategoriesUpdate'
     { _ccuProFileId :: !(Textual Int64)
     , _ccuPayload   :: !ContentCategory
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ contentCategoriesUpdate
     -> ContentCategory -- ^ 'ccuPayload'
     -> ContentCategoriesUpdate
 contentCategoriesUpdate pCcuProFileId_ pCcuPayload_ =
-    ContentCategoriesUpdate
+    ContentCategoriesUpdate'
     { _ccuProFileId = _Coerce # pCcuProFileId_
     , _ccuPayload = pCcuPayload_
     }
@@ -90,7 +90,9 @@ ccuPayload
 
 instance GoogleRequest ContentCategoriesUpdate where
         type Rs ContentCategoriesUpdate = ContentCategory
-        requestClient ContentCategoriesUpdate{..}
+        type Scopes ContentCategoriesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ContentCategoriesUpdate'{..}
           = go _ccuProFileId (Just AltJSON) _ccuPayload
               dFAReportingService
           where go

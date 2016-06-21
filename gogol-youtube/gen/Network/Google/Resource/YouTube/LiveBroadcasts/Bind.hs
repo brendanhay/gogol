@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.LiveBroadcasts.Bind
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type LiveBroadcastsBindResource =
 -- broadcast.
 --
 -- /See:/ 'liveBroadcastsBind' smart constructor.
-data LiveBroadcastsBind = LiveBroadcastsBind
+data LiveBroadcastsBind = LiveBroadcastsBind'
     { _lbbPart                          :: !Text
     , _lbbOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbbOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -93,7 +93,7 @@ liveBroadcastsBind
     -> Text -- ^ 'lbbId'
     -> LiveBroadcastsBind
 liveBroadcastsBind pLbbPart_ pLbbId_ =
-    LiveBroadcastsBind
+    LiveBroadcastsBind'
     { _lbbPart = pLbbPart_
     , _lbbOnBehalfOfContentOwner = Nothing
     , _lbbOnBehalfOfContentOwnerChannel = Nothing
@@ -159,7 +159,10 @@ lbbStreamId
 
 instance GoogleRequest LiveBroadcastsBind where
         type Rs LiveBroadcastsBind = LiveBroadcast
-        requestClient LiveBroadcastsBind{..}
+        type Scopes LiveBroadcastsBind =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient LiveBroadcastsBind'{..}
           = go (Just _lbbId) (Just _lbbPart)
               _lbbOnBehalfOfContentOwner
               _lbbOnBehalfOfContentOwnerChannel

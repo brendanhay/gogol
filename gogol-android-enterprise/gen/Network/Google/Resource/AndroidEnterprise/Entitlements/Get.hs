@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Entitlements.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves details of an entitlement.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.get@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Get
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type EntitlementsGetResource =
 -- | Retrieves details of an entitlement.
 --
 -- /See:/ 'entitlementsGet' smart constructor.
-data EntitlementsGet = EntitlementsGet
+data EntitlementsGet = EntitlementsGet'
     { _egEntitlementId :: !Text
     , _egEnterpriseId  :: !Text
     , _egUserId        :: !Text
@@ -78,13 +78,14 @@ entitlementsGet
     -> Text -- ^ 'egUserId'
     -> EntitlementsGet
 entitlementsGet pEgEntitlementId_ pEgEnterpriseId_ pEgUserId_ =
-    EntitlementsGet
+    EntitlementsGet'
     { _egEntitlementId = pEgEntitlementId_
     , _egEnterpriseId = pEgEnterpriseId_
     , _egUserId = pEgUserId_
     }
 
--- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
+-- | The ID of the entitlement (a product ID), e.g.
+-- \"app:com.google.android.gm\".
 egEntitlementId :: Lens' EntitlementsGet Text
 egEntitlementId
   = lens _egEntitlementId
@@ -102,7 +103,9 @@ egUserId = lens _egUserId (\ s a -> s{_egUserId = a})
 
 instance GoogleRequest EntitlementsGet where
         type Rs EntitlementsGet = Entitlement
-        requestClient EntitlementsGet{..}
+        type Scopes EntitlementsGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EntitlementsGet'{..}
           = go _egEnterpriseId _egUserId _egEntitlementId
               (Just AltJSON)
               androidEnterpriseService

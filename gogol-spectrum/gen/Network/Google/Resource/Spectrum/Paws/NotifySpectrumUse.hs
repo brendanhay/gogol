@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type PawsNotifySpectrumUseResource =
 -- require notification, so this always yields an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsNotifySpectrumUse' smart constructor.
-newtype PawsNotifySpectrumUse = PawsNotifySpectrumUse
+newtype PawsNotifySpectrumUse = PawsNotifySpectrumUse'
     { _pnsuPayload :: PawsNotifySpectrumUseRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -72,7 +72,7 @@ pawsNotifySpectrumUse
     :: PawsNotifySpectrumUseRequest -- ^ 'pnsuPayload'
     -> PawsNotifySpectrumUse
 pawsNotifySpectrumUse pPnsuPayload_ =
-    PawsNotifySpectrumUse
+    PawsNotifySpectrumUse'
     { _pnsuPayload = pPnsuPayload_
     }
 
@@ -84,7 +84,8 @@ pnsuPayload
 instance GoogleRequest PawsNotifySpectrumUse where
         type Rs PawsNotifySpectrumUse =
              PawsNotifySpectrumUseResponse
-        requestClient PawsNotifySpectrumUse{..}
+        type Scopes PawsNotifySpectrumUse = '[]
+        requestClient PawsNotifySpectrumUse'{..}
           = go (Just AltJSON) _pnsuPayload spectrumService
           where go
                   = buildClient

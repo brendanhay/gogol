@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DNS.Changes.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ChangesCreateResource =
 -- | Atomically update the ResourceRecordSet collection.
 --
 -- /See:/ 'changesCreate' smart constructor.
-data ChangesCreate = ChangesCreate
+data ChangesCreate = ChangesCreate'
     { _ccProject     :: !Text
     , _ccPayload     :: !Change
     , _ccManagedZone :: !Text
@@ -78,7 +78,7 @@ changesCreate
     -> Text -- ^ 'ccManagedZone'
     -> ChangesCreate
 changesCreate pCcProject_ pCcPayload_ pCcManagedZone_ =
-    ChangesCreate
+    ChangesCreate'
     { _ccProject = pCcProject_
     , _ccPayload = pCcPayload_
     , _ccManagedZone = pCcManagedZone_
@@ -103,7 +103,10 @@ ccManagedZone
 
 instance GoogleRequest ChangesCreate where
         type Rs ChangesCreate = Change
-        requestClient ChangesCreate{..}
+        type Scopes ChangesCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
+        requestClient ChangesCreate'{..}
           = go _ccProject _ccManagedZone (Just AltJSON)
               _ccPayload
               dNSService

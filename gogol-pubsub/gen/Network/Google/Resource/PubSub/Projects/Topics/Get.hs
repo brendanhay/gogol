@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Topics.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ProjectsTopicsGetResource =
 -- | Gets the configuration of a topic.
 --
 -- /See:/ 'projectsTopicsGet' smart constructor.
-data ProjectsTopicsGet = ProjectsTopicsGet
+data ProjectsTopicsGet = ProjectsTopicsGet'
     { _ptgXgafv          :: !(Maybe Text)
     , _ptgUploadProtocol :: !(Maybe Text)
     , _ptgPp             :: !Bool
@@ -97,7 +97,7 @@ projectsTopicsGet
     :: Text -- ^ 'ptgTopic'
     -> ProjectsTopicsGet
 projectsTopicsGet pPtgTopic_ =
-    ProjectsTopicsGet
+    ProjectsTopicsGet'
     { _ptgXgafv = Nothing
     , _ptgUploadProtocol = Nothing
     , _ptgPp = True
@@ -151,7 +151,10 @@ ptgCallback
 
 instance GoogleRequest ProjectsTopicsGet where
         type Rs ProjectsTopicsGet = Topic
-        requestClient ProjectsTopicsGet{..}
+        type Scopes ProjectsTopicsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsTopicsGet'{..}
           = go _ptgTopic _ptgXgafv _ptgUploadProtocol
               (Just _ptgPp)
               _ptgAccessToken

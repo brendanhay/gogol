@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Prediction.TrainedModels.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type TrainedModelsInsertResource =
 -- | Train a Prediction API model.
 --
 -- /See:/ 'trainedModelsInsert' smart constructor.
-data TrainedModelsInsert = TrainedModelsInsert
+data TrainedModelsInsert = TrainedModelsInsert'
     { _tmiProject :: !Text
     , _tmiPayload :: !Insert
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ trainedModelsInsert
     -> Insert -- ^ 'tmiPayload'
     -> TrainedModelsInsert
 trainedModelsInsert pTmiProject_ pTmiPayload_ =
-    TrainedModelsInsert
+    TrainedModelsInsert'
     { _tmiProject = pTmiProject_
     , _tmiPayload = pTmiPayload_
     }
@@ -88,7 +88,13 @@ tmiPayload
 
 instance GoogleRequest TrainedModelsInsert where
         type Rs TrainedModelsInsert = Insert2
-        requestClient TrainedModelsInsert{..}
+        type Scopes TrainedModelsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write",
+               "https://www.googleapis.com/auth/prediction"]
+        requestClient TrainedModelsInsert'{..}
           = go _tmiProject (Just AltJSON) _tmiPayload
               predictionService
           where go

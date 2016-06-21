@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,9 +22,9 @@
 --
 -- Generates a token (activation code) to allow this user to configure
 -- their work account in the Android Setup Wizard. Revokes any previously
--- generated token.
+-- generated token. This call only works with Google managed accounts.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.generateToken@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.generateToken@.
 module Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
     (
     -- * REST Resource
@@ -56,10 +56,10 @@ type UsersGenerateTokenResource =
 
 -- | Generates a token (activation code) to allow this user to configure
 -- their work account in the Android Setup Wizard. Revokes any previously
--- generated token.
+-- generated token. This call only works with Google managed accounts.
 --
 -- /See:/ 'usersGenerateToken' smart constructor.
-data UsersGenerateToken = UsersGenerateToken
+data UsersGenerateToken = UsersGenerateToken'
     { _ugtEnterpriseId :: !Text
     , _ugtUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -76,7 +76,7 @@ usersGenerateToken
     -> Text -- ^ 'ugtUserId'
     -> UsersGenerateToken
 usersGenerateToken pUgtEnterpriseId_ pUgtUserId_ =
-    UsersGenerateToken
+    UsersGenerateToken'
     { _ugtEnterpriseId = pUgtEnterpriseId_
     , _ugtUserId = pUgtUserId_
     }
@@ -94,7 +94,9 @@ ugtUserId
 
 instance GoogleRequest UsersGenerateToken where
         type Rs UsersGenerateToken = UserToken
-        requestClient UsersGenerateToken{..}
+        type Scopes UsersGenerateToken =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient UsersGenerateToken'{..}
           = go _ugtEnterpriseId _ugtUserId (Just AltJSON)
               androidEnterpriseService
           where go

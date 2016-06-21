@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Filters.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ManagementFiltersPatchResource =
 -- | Updates an existing filter. This method supports patch semantics.
 --
 -- /See:/ 'managementFiltersPatch' smart constructor.
-data ManagementFiltersPatch = ManagementFiltersPatch
+data ManagementFiltersPatch = ManagementFiltersPatch'
     { _mfpFilterId  :: !Text
     , _mfpPayload   :: !Filter
     , _mfpAccountId :: !Text
@@ -78,7 +78,7 @@ managementFiltersPatch
     -> Text -- ^ 'mfpAccountId'
     -> ManagementFiltersPatch
 managementFiltersPatch pMfpFilterId_ pMfpPayload_ pMfpAccountId_ =
-    ManagementFiltersPatch
+    ManagementFiltersPatch'
     { _mfpFilterId = pMfpFilterId_
     , _mfpPayload = pMfpPayload_
     , _mfpAccountId = pMfpAccountId_
@@ -101,7 +101,9 @@ mfpAccountId
 
 instance GoogleRequest ManagementFiltersPatch where
         type Rs ManagementFiltersPatch = Filter
-        requestClient ManagementFiltersPatch{..}
+        type Scopes ManagementFiltersPatch =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementFiltersPatch'{..}
           = go _mfpAccountId _mfpFilterId (Just AltJSON)
               _mfpPayload
               analyticsService

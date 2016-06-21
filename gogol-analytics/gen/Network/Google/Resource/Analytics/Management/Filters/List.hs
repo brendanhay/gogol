@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Filters.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ManagementFiltersListResource =
 -- | Lists all filters for an account
 --
 -- /See:/ 'managementFiltersList' smart constructor.
-data ManagementFiltersList = ManagementFiltersList
+data ManagementFiltersList = ManagementFiltersList'
     { _mflAccountId  :: !Text
     , _mflStartIndex :: !(Maybe (Textual Int32))
     , _mflMaxResults :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ managementFiltersList
     :: Text -- ^ 'mflAccountId'
     -> ManagementFiltersList
 managementFiltersList pMflAccountId_ =
-    ManagementFiltersList
+    ManagementFiltersList'
     { _mflAccountId = pMflAccountId_
     , _mflStartIndex = Nothing
     , _mflMaxResults = Nothing
@@ -104,7 +104,10 @@ mflMaxResults
 
 instance GoogleRequest ManagementFiltersList where
         type Rs ManagementFiltersList = Filters
-        requestClient ManagementFiltersList{..}
+        type Scopes ManagementFiltersList =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementFiltersList'{..}
           = go _mflAccountId _mflStartIndex _mflMaxResults
               (Just AltJSON)
               analyticsService

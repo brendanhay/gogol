@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Schemas.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type SchemasDeleteResource =
 -- | Delete schema
 --
 -- /See:/ 'schemasDelete' smart constructor.
-data SchemasDelete = SchemasDelete
+data SchemasDelete = SchemasDelete'
     { _sdCustomerId :: !Text
     , _sdSchemaKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ schemasDelete
     -> Text -- ^ 'sdSchemaKey'
     -> SchemasDelete
 schemasDelete pSdCustomerId_ pSdSchemaKey_ =
-    SchemasDelete
+    SchemasDelete'
     { _sdCustomerId = pSdCustomerId_
     , _sdSchemaKey = pSdSchemaKey_
     }
@@ -89,7 +89,9 @@ sdSchemaKey
 
 instance GoogleRequest SchemasDelete where
         type Rs SchemasDelete = ()
-        requestClient SchemasDelete{..}
+        type Scopes SchemasDelete =
+             '["https://www.googleapis.com/auth/admin.directory.userschema"]
+        requestClient SchemasDelete'{..}
           = go _sdCustomerId _sdSchemaKey (Just AltJSON)
               directoryService
           where go

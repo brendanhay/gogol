@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Column.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ColumnPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'columnPatch' smart constructor.
-data ColumnPatch = ColumnPatch
+data ColumnPatch = ColumnPatch'
     { _cpPayload  :: !Column
     , _cpTableId  :: !Text
     , _cpColumnId :: !Text
@@ -79,7 +79,7 @@ columnPatch
     -> Text -- ^ 'cpColumnId'
     -> ColumnPatch
 columnPatch pCpPayload_ pCpTableId_ pCpColumnId_ =
-    ColumnPatch
+    ColumnPatch'
     { _cpPayload = pCpPayload_
     , _cpTableId = pCpTableId_
     , _cpColumnId = pCpColumnId_
@@ -102,7 +102,9 @@ cpColumnId
 
 instance GoogleRequest ColumnPatch where
         type Rs ColumnPatch = Column
-        requestClient ColumnPatch{..}
+        type Scopes ColumnPatch =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient ColumnPatch'{..}
           = go _cpTableId _cpColumnId (Just AltJSON) _cpPayload
               fusionTablesService
           where go

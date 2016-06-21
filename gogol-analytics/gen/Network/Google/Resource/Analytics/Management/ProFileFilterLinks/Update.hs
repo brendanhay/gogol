@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type ManagementProFileFilterLinksUpdateResource =
 -- | Update an existing profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksUpdate' smart constructor.
-data ManagementProFileFilterLinksUpdate = ManagementProFileFilterLinksUpdate
+data ManagementProFileFilterLinksUpdate = ManagementProFileFilterLinksUpdate'
     { _mpffluWebPropertyId :: !Text
     , _mpffluProFileId     :: !Text
     , _mpffluPayload       :: !ProFileFilterLink
@@ -93,7 +93,7 @@ managementProFileFilterLinksUpdate
     -> Text -- ^ 'mpffluLinkId'
     -> ManagementProFileFilterLinksUpdate
 managementProFileFilterLinksUpdate pMpffluWebPropertyId_ pMpffluProFileId_ pMpffluPayload_ pMpffluAccountId_ pMpffluLinkId_ =
-    ManagementProFileFilterLinksUpdate
+    ManagementProFileFilterLinksUpdate'
     { _mpffluWebPropertyId = pMpffluWebPropertyId_
     , _mpffluProFileId = pMpffluProFileId_
     , _mpffluPayload = pMpffluPayload_
@@ -134,7 +134,9 @@ instance GoogleRequest
          ManagementProFileFilterLinksUpdate where
         type Rs ManagementProFileFilterLinksUpdate =
              ProFileFilterLink
-        requestClient ManagementProFileFilterLinksUpdate{..}
+        type Scopes ManagementProFileFilterLinksUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementProFileFilterLinksUpdate'{..}
           = go _mpffluAccountId _mpffluWebPropertyId
               _mpffluProFileId
               _mpffluLinkId

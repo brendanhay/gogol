@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AccountsMetadataMetricsListResource =
 -- | List the metadata for the metrics available to this AdExchange account.
 --
 -- /See:/ 'accountsMetadataMetricsList' smart constructor.
-newtype AccountsMetadataMetricsList = AccountsMetadataMetricsList
+newtype AccountsMetadataMetricsList = AccountsMetadataMetricsList'
     { _ammlAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountsMetadataMetricsList
     :: Text -- ^ 'ammlAccountId'
     -> AccountsMetadataMetricsList
 accountsMetadataMetricsList pAmmlAccountId_ =
-    AccountsMetadataMetricsList
+    AccountsMetadataMetricsList'
     { _ammlAccountId = pAmmlAccountId_
     }
 
@@ -79,7 +79,10 @@ ammlAccountId
 instance GoogleRequest AccountsMetadataMetricsList
          where
         type Rs AccountsMetadataMetricsList = Metadata
-        requestClient AccountsMetadataMetricsList{..}
+        type Scopes AccountsMetadataMetricsList =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
+        requestClient AccountsMetadataMetricsList'{..}
           = go _ammlAccountId (Just AltJSON)
               adExchangeSellerService
           where go

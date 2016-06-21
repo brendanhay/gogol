@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PostalCodes.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PostalCodesGet' request conforms to.
 type PostalCodesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "postalCodes" :>
@@ -54,7 +54,7 @@ type PostalCodesGetResource =
 -- | Gets one postal code by ID.
 --
 -- /See:/ 'postalCodesGet' smart constructor.
-data PostalCodesGet = PostalCodesGet
+data PostalCodesGet = PostalCodesGet'
     { _pcgProFileId :: !(Textual Int64)
     , _pcgCode      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ postalCodesGet
     -> Text -- ^ 'pcgCode'
     -> PostalCodesGet
 postalCodesGet pPcgProFileId_ pPcgCode_ =
-    PostalCodesGet
+    PostalCodesGet'
     { _pcgProFileId = _Coerce # pPcgProFileId_
     , _pcgCode = pPcgCode_
     }
@@ -88,7 +88,9 @@ pcgCode = lens _pcgCode (\ s a -> s{_pcgCode = a})
 
 instance GoogleRequest PostalCodesGet where
         type Rs PostalCodesGet = PostalCode
-        requestClient PostalCodesGet{..}
+        type Scopes PostalCodesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PostalCodesGet'{..}
           = go _pcgProFileId _pcgCode (Just AltJSON)
               dFAReportingService
           where go

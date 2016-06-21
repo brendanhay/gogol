@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SiteVerification.WebResource.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,19 +50,21 @@ type WebResourceListResource =
 --
 -- /See:/ 'webResourceList' smart constructor.
 data WebResourceList =
-    WebResourceList
+    WebResourceList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceList' with the minimum fields required to make a request.
 --
 webResourceList
     :: WebResourceList
-webResourceList = WebResourceList
+webResourceList = WebResourceList'
 
 instance GoogleRequest WebResourceList where
         type Rs WebResourceList =
              SiteVerificationWebResourceListResponse
-        requestClient WebResourceList{}
+        type Scopes WebResourceList =
+             '["https://www.googleapis.com/auth/siteverification"]
+        requestClient WebResourceList'{}
           = go (Just AltJSON) siteVerificationService
           where go
                   = buildClient

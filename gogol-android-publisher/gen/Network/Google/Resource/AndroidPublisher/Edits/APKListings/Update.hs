@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.APKListings.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type EditsAPKListingsUpdateResource =
 -- APK and language code.
 --
 -- /See:/ 'editsAPKListingsUpdate' smart constructor.
-data EditsAPKListingsUpdate = EditsAPKListingsUpdate
+data EditsAPKListingsUpdate = EditsAPKListingsUpdate'
     { _eapkluPackageName    :: !Text
     , _eapkluAPKVersionCode :: !(Textual Int32)
     , _eapkluPayload        :: !APKListing
@@ -93,7 +93,7 @@ editsAPKListingsUpdate
     -> Text -- ^ 'eapkluEditId'
     -> EditsAPKListingsUpdate
 editsAPKListingsUpdate pEapkluPackageName_ pEapkluAPKVersionCode_ pEapkluPayload_ pEapkluLanguage_ pEapkluEditId_ =
-    EditsAPKListingsUpdate
+    EditsAPKListingsUpdate'
     { _eapkluPackageName = pEapkluPackageName_
     , _eapkluAPKVersionCode = _Coerce # pEapkluAPKVersionCode_
     , _eapkluPayload = pEapkluPayload_
@@ -137,7 +137,9 @@ eapkluEditId
 
 instance GoogleRequest EditsAPKListingsUpdate where
         type Rs EditsAPKListingsUpdate = APKListing
-        requestClient EditsAPKListingsUpdate{..}
+        type Scopes EditsAPKListingsUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsAPKListingsUpdate'{..}
           = go _eapkluPackageName _eapkluEditId
               _eapkluAPKVersionCode
               _eapkluLanguage

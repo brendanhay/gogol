@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type LeaderboardConfigurationsGetResource =
 -- ID.
 --
 -- /See:/ 'leaderboardConfigurationsGet' smart constructor.
-newtype LeaderboardConfigurationsGet = LeaderboardConfigurationsGet
+newtype LeaderboardConfigurationsGet = LeaderboardConfigurationsGet'
     { _lcgLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ leaderboardConfigurationsGet
     :: Text -- ^ 'lcgLeaderboardId'
     -> LeaderboardConfigurationsGet
 leaderboardConfigurationsGet pLcgLeaderboardId_ =
-    LeaderboardConfigurationsGet
+    LeaderboardConfigurationsGet'
     { _lcgLeaderboardId = pLcgLeaderboardId_
     }
 
@@ -81,7 +81,9 @@ instance GoogleRequest LeaderboardConfigurationsGet
          where
         type Rs LeaderboardConfigurationsGet =
              LeaderboardConfiguration
-        requestClient LeaderboardConfigurationsGet{..}
+        type Scopes LeaderboardConfigurationsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient LeaderboardConfigurationsGet'{..}
           = go _lcgLeaderboardId (Just AltJSON)
               gamesConfigurationService
           where go

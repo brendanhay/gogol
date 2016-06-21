@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type UsersPatchResource =
 -- | update user. This method supports patch semantics.
 --
 -- /See:/ 'usersPatch' smart constructor.
-data UsersPatch = UsersPatch
+data UsersPatch = UsersPatch'
     { _upPayload :: !User
     , _upUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersPatch
     -> Text -- ^ 'upUserKey'
     -> UsersPatch
 usersPatch pUpPayload_ pUpUserKey_ =
-    UsersPatch
+    UsersPatch'
     { _upPayload = pUpPayload_
     , _upUserKey = pUpUserKey_
     }
@@ -89,7 +89,9 @@ upUserKey
 
 instance GoogleRequest UsersPatch where
         type Rs UsersPatch = User
-        requestClient UsersPatch{..}
+        type Scopes UsersPatch =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
+        requestClient UsersPatch'{..}
           = go _upUserKey (Just AltJSON) _upPayload
               directoryService
           where go

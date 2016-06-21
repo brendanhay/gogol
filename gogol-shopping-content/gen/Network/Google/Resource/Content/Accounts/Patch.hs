@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accounts.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsPatchResource =
 -- | Updates a Merchant Center account. This method supports patch semantics.
 --
 -- /See:/ 'accountsPatch' smart constructor.
-data AccountsPatch = AccountsPatch
+data AccountsPatch = AccountsPatch'
     { _apMerchantId :: !(Textual Word64)
     , _apPayload    :: !Account
     , _apAccountId  :: !(Textual Word64)
@@ -81,7 +81,7 @@ accountsPatch
     -> Word64 -- ^ 'apAccountId'
     -> AccountsPatch
 accountsPatch pApMerchantId_ pApPayload_ pApAccountId_ =
-    AccountsPatch
+    AccountsPatch'
     { _apMerchantId = _Coerce # pApMerchantId_
     , _apPayload = pApPayload_
     , _apAccountId = _Coerce # pApAccountId_
@@ -111,7 +111,9 @@ apDryRun = lens _apDryRun (\ s a -> s{_apDryRun = a})
 
 instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account
-        requestClient AccountsPatch{..}
+        type Scopes AccountsPatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountsPatch'{..}
           = go _apMerchantId _apAccountId _apDryRun
               (Just AltJSON)
               _apPayload

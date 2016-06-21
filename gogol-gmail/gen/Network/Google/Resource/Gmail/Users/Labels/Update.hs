@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Labels.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersLabelsUpdateResource =
 -- | Updates the specified label.
 --
 -- /See:/ 'usersLabelsUpdate' smart constructor.
-data UsersLabelsUpdate = UsersLabelsUpdate
+data UsersLabelsUpdate = UsersLabelsUpdate'
     { _uluPayload :: !Label
     , _uluUserId  :: !Text
     , _uluId      :: !Text
@@ -74,10 +74,9 @@ data UsersLabelsUpdate = UsersLabelsUpdate
 usersLabelsUpdate
     :: Label -- ^ 'uluPayload'
     -> Text -- ^ 'uluId'
-    -> Text
     -> UsersLabelsUpdate
-usersLabelsUpdate pUluPayload_ pUluUserId_ pUluId_ =
-    UsersLabelsUpdate
+usersLabelsUpdate pUluPayload_ pUluId_ =
+    UsersLabelsUpdate'
     { _uluPayload = pUluPayload_
     , _uluUserId = "me"
     , _uluId = pUluId_
@@ -100,7 +99,11 @@ uluId = lens _uluId (\ s a -> s{_uluId = a})
 
 instance GoogleRequest UsersLabelsUpdate where
         type Rs UsersLabelsUpdate = Label
-        requestClient UsersLabelsUpdate{..}
+        type Scopes UsersLabelsUpdate =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersLabelsUpdate'{..}
           = go _uluUserId _uluId (Just AltJSON) _uluPayload
               gmailService
           where go

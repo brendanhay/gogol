@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.UserRoles.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolesGet' request conforms to.
 type UserRolesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -54,7 +54,7 @@ type UserRolesGetResource =
 -- | Gets one user role by ID.
 --
 -- /See:/ 'userRolesGet' smart constructor.
-data UserRolesGet = UserRolesGet
+data UserRolesGet = UserRolesGet'
     { _urgProFileId :: !(Textual Int64)
     , _urgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ userRolesGet
     -> Int64 -- ^ 'urgId'
     -> UserRolesGet
 userRolesGet pUrgProFileId_ pUrgId_ =
-    UserRolesGet
+    UserRolesGet'
     { _urgProFileId = _Coerce # pUrgProFileId_
     , _urgId = _Coerce # pUrgId_
     }
@@ -89,7 +89,9 @@ urgId
 
 instance GoogleRequest UserRolesGet where
         type Rs UserRolesGet = UserRole
-        requestClient UserRolesGet{..}
+        type Scopes UserRolesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient UserRolesGet'{..}
           = go _urgProFileId _urgId (Just AltJSON)
               dFAReportingService
           where go

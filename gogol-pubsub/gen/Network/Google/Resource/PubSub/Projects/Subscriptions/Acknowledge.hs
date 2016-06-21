@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type ProjectsSubscriptionsAcknowledgeResource =
 -- error.
 --
 -- /See:/ 'projectsSubscriptionsAcknowledge' smart constructor.
-data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge
+data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge'
     { _psaXgafv          :: !(Maybe Text)
     , _psaUploadProtocol :: !(Maybe Text)
     , _psaPp             :: !Bool
@@ -114,7 +114,7 @@ projectsSubscriptionsAcknowledge
     -> Text -- ^ 'psaSubscription'
     -> ProjectsSubscriptionsAcknowledge
 projectsSubscriptionsAcknowledge pPsaPayload_ pPsaSubscription_ =
-    ProjectsSubscriptionsAcknowledge
+    ProjectsSubscriptionsAcknowledge'
     { _psaXgafv = Nothing
     , _psaUploadProtocol = Nothing
     , _psaPp = True
@@ -177,7 +177,10 @@ psaCallback
 instance GoogleRequest
          ProjectsSubscriptionsAcknowledge where
         type Rs ProjectsSubscriptionsAcknowledge = Empty
-        requestClient ProjectsSubscriptionsAcknowledge{..}
+        type Scopes ProjectsSubscriptionsAcknowledge =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsSubscriptionsAcknowledge'{..}
           = go _psaSubscription _psaXgafv _psaUploadProtocol
               (Just _psaPp)
               _psaAccessToken

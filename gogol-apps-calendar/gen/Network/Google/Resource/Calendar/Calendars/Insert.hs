@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Calendars.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type CalendarsInsertResource =
 -- | Creates a secondary calendar.
 --
 -- /See:/ 'calendarsInsert' smart constructor.
-newtype CalendarsInsert = CalendarsInsert
+newtype CalendarsInsert = CalendarsInsert'
     { _ciPayload :: Calendar
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ calendarsInsert
     :: Calendar -- ^ 'ciPayload'
     -> CalendarsInsert
 calendarsInsert pCiPayload_ =
-    CalendarsInsert
+    CalendarsInsert'
     { _ciPayload = pCiPayload_
     }
 
@@ -75,7 +75,9 @@ ciPayload
 
 instance GoogleRequest CalendarsInsert where
         type Rs CalendarsInsert = Calendar
-        requestClient CalendarsInsert{..}
+        type Scopes CalendarsInsert =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient CalendarsInsert'{..}
           = go (Just AltJSON) _ciPayload appsCalendarService
           where go
                   = buildClient

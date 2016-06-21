@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.GettestOrdertemplate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type OrdersGettestOrdertemplateResource =
 -- create a new order in sandbox.
 --
 -- /See:/ 'ordersGettestOrdertemplate' smart constructor.
-data OrdersGettestOrdertemplate = OrdersGettestOrdertemplate
+data OrdersGettestOrdertemplate = OrdersGettestOrdertemplate'
     { _ogoMerchantId   :: !(Textual Word64)
     , _ogoTemplateName :: !OrdersGettestOrdertemplateTemplateName
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ ordersGettestOrdertemplate
     -> OrdersGettestOrdertemplateTemplateName -- ^ 'ogoTemplateName'
     -> OrdersGettestOrdertemplate
 ordersGettestOrdertemplate pOgoMerchantId_ pOgoTemplateName_ =
-    OrdersGettestOrdertemplate
+    OrdersGettestOrdertemplate'
     { _ogoMerchantId = _Coerce # pOgoMerchantId_
     , _ogoTemplateName = pOgoTemplateName_
     }
@@ -97,7 +97,9 @@ instance GoogleRequest OrdersGettestOrdertemplate
          where
         type Rs OrdersGettestOrdertemplate =
              OrdersGetTestOrderTemplateResponse
-        requestClient OrdersGettestOrdertemplate{..}
+        type Scopes OrdersGettestOrdertemplate =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersGettestOrdertemplate'{..}
           = go _ogoMerchantId _ogoTemplateName (Just AltJSON)
               shoppingContentService
           where go

@@ -7,14 +7,13 @@
 
 -- |
 -- Module      : Network.Google.QPXExpress
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you find the least expensive flights between an origin and a
--- destination.
+-- Finds the least expensive flights between an origin and a destination.
 --
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference>
 module Network.Google.QPXExpress

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Style.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type StyleGetResource =
 -- | Gets a specific style.
 --
 -- /See:/ 'styleGet' smart constructor.
-data StyleGet = StyleGet
+data StyleGet = StyleGet'
     { _sgStyleId :: !(Textual Int32)
     , _sgTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ styleGet
     -> Text -- ^ 'sgTableId'
     -> StyleGet
 styleGet pSgStyleId_ pSgTableId_ =
-    StyleGet
+    StyleGet'
     { _sgStyleId = _Coerce # pSgStyleId_
     , _sgTableId = pSgTableId_
     }
@@ -89,7 +89,10 @@ sgTableId
 
 instance GoogleRequest StyleGet where
         type Rs StyleGet = StyleSetting
-        requestClient StyleGet{..}
+        type Scopes StyleGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient StyleGet'{..}
           = go _sgTableId _sgStyleId (Just AltJSON)
               fusionTablesService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GAN.Links.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -83,7 +83,7 @@ type LinksListResource =
 -- | Retrieves all links that match the query parameters.
 --
 -- /See:/ 'linksList' smart constructor.
-data LinksList = LinksList
+data LinksList = LinksList'
     { _llCreateDateMax      :: !(Maybe Text)
     , _llAuthorship         :: !(Maybe LinksListAuthorship)
     , _llAssetSize          :: !(Maybe [Text])
@@ -139,7 +139,7 @@ linksList
     -> LinksListRole -- ^ 'llRole'
     -> LinksList
 linksList pLlRoleId_ pLlRole_ =
-    LinksList
+    LinksList'
     { _llCreateDateMax = Nothing
     , _llAuthorship = Nothing
     , _llAssetSize = Nothing
@@ -249,7 +249,8 @@ llMaxResults
 
 instance GoogleRequest LinksList where
         type Rs LinksList = Links
-        requestClient LinksList{..}
+        type Scopes LinksList = '[]
+        requestClient LinksList'{..}
           = go _llRole _llRoleId _llCreateDateMax _llAuthorship
               (_llAssetSize ^. _Default)
               _llRelationshipStatus

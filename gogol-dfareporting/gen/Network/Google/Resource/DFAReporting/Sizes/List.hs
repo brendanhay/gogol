@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Sizes.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'SizesList' request conforms to.
 type SizesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sizes" :>
@@ -61,7 +61,7 @@ type SizesListResource =
 -- | Retrieves a list of sizes, possibly filtered.
 --
 -- /See:/ 'sizesList' smart constructor.
-data SizesList = SizesList
+data SizesList = SizesList'
     { _slHeight      :: !(Maybe (Textual Int32))
     , _slIds         :: !(Maybe [Textual Int64])
     , _slWidth       :: !(Maybe (Textual Int32))
@@ -86,7 +86,7 @@ sizesList
     :: Int64 -- ^ 'slProFileId'
     -> SizesList
 sizesList pSlProFileId_ =
-    SizesList
+    SizesList'
     { _slHeight = Nothing
     , _slIds = Nothing
     , _slWidth = Nothing
@@ -126,7 +126,9 @@ slIabStandard
 
 instance GoogleRequest SizesList where
         type Rs SizesList = SizesListResponse
-        requestClient SizesList{..}
+        type Scopes SizesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SizesList'{..}
           = go _slProFileId _slHeight (_slIds ^. _Default)
               _slWidth
               _slIabStandard

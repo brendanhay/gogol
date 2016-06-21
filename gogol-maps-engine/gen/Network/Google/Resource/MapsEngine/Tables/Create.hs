@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type TablesCreateResource =
 -- | Create a table asset.
 --
 -- /See:/ 'tablesCreate' smart constructor.
-newtype TablesCreate = TablesCreate
+newtype TablesCreate = TablesCreate'
     { _tcPayload :: Table
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ tablesCreate
     :: Table -- ^ 'tcPayload'
     -> TablesCreate
 tablesCreate pTcPayload_ =
-    TablesCreate
+    TablesCreate'
     { _tcPayload = pTcPayload_
     }
 
@@ -75,7 +75,9 @@ tcPayload
 
 instance GoogleRequest TablesCreate where
         type Rs TablesCreate = Table
-        requestClient TablesCreate{..}
+        type Scopes TablesCreate =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient TablesCreate'{..}
           = go (Just AltJSON) _tcPayload mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesCreateResource)

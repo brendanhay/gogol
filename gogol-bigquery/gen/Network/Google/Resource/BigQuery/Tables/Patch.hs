@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Tables.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type TablesPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'tablesPatch' smart constructor.
-data TablesPatch = TablesPatch
+data TablesPatch = TablesPatch'
     { _tpPayload   :: !Table
     , _tpDataSetId :: !Text
     , _tpProjectId :: !Text
@@ -90,7 +90,7 @@ tablesPatch
     -> Text -- ^ 'tpTableId'
     -> TablesPatch
 tablesPatch pTpPayload_ pTpDataSetId_ pTpProjectId_ pTpTableId_ =
-    TablesPatch
+    TablesPatch'
     { _tpPayload = pTpPayload_
     , _tpDataSetId = pTpDataSetId_
     , _tpProjectId = pTpProjectId_
@@ -119,7 +119,10 @@ tpTableId
 
 instance GoogleRequest TablesPatch where
         type Rs TablesPatch = Table
-        requestClient TablesPatch{..}
+        type Scopes TablesPatch =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TablesPatch'{..}
           = go _tpProjectId _tpDataSetId _tpTableId
               (Just AltJSON)
               _tpPayload

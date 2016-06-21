@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Bookshelves.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type BookshelvesListResource =
 -- | Retrieves a list of public bookshelves for the specified user.
 --
 -- /See:/ 'bookshelvesList' smart constructor.
-data BookshelvesList = BookshelvesList
+data BookshelvesList = BookshelvesList'
     { _blUserId :: !Text
     , _blSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ bookshelvesList
     :: Text -- ^ 'blUserId'
     -> BookshelvesList
 bookshelvesList pBlUserId_ =
-    BookshelvesList
+    BookshelvesList'
     { _blUserId = pBlUserId_
     , _blSource = Nothing
     }
@@ -85,7 +85,9 @@ blSource = lens _blSource (\ s a -> s{_blSource = a})
 
 instance GoogleRequest BookshelvesList where
         type Rs BookshelvesList = Bookshelves
-        requestClient BookshelvesList{..}
+        type Scopes BookshelvesList =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient BookshelvesList'{..}
           = go _blUserId _blSource (Just AltJSON) booksService
           where go
                   = buildClient

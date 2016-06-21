@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AccountsPreferredDealsListResource =
 -- | List the preferred deals for this Ad Exchange account.
 --
 -- /See:/ 'accountsPreferredDealsList' smart constructor.
-newtype AccountsPreferredDealsList = AccountsPreferredDealsList
+newtype AccountsPreferredDealsList = AccountsPreferredDealsList'
     { _apdlAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountsPreferredDealsList
     :: Text -- ^ 'apdlAccountId'
     -> AccountsPreferredDealsList
 accountsPreferredDealsList pApdlAccountId_ =
-    AccountsPreferredDealsList
+    AccountsPreferredDealsList'
     { _apdlAccountId = pApdlAccountId_
     }
 
@@ -79,7 +79,10 @@ apdlAccountId
 instance GoogleRequest AccountsPreferredDealsList
          where
         type Rs AccountsPreferredDealsList = PreferredDeals
-        requestClient AccountsPreferredDealsList{..}
+        type Scopes AccountsPreferredDealsList =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
+        requestClient AccountsPreferredDealsList'{..}
           = go _apdlAccountId (Just AltJSON)
               adExchangeSellerService
           where go

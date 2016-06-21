@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -77,7 +77,7 @@ type GoogleServiceAccountsGetResource =
 -- Service and can only be used by Storage Transfer Service.
 --
 -- /See:/ 'googleServiceAccountsGet' smart constructor.
-data GoogleServiceAccountsGet = GoogleServiceAccountsGet
+data GoogleServiceAccountsGet = GoogleServiceAccountsGet'
     { _gsagXgafv          :: !(Maybe Text)
     , _gsagUploadProtocol :: !(Maybe Text)
     , _gsagPp             :: !Bool
@@ -111,7 +111,7 @@ googleServiceAccountsGet
     :: Text -- ^ 'gsagProjectId'
     -> GoogleServiceAccountsGet
 googleServiceAccountsGet pGsagProjectId_ =
-    GoogleServiceAccountsGet
+    GoogleServiceAccountsGet'
     { _gsagXgafv = Nothing
     , _gsagUploadProtocol = Nothing
     , _gsagPp = True
@@ -170,7 +170,9 @@ gsagCallback
 instance GoogleRequest GoogleServiceAccountsGet where
         type Rs GoogleServiceAccountsGet =
              GoogleServiceAccount
-        requestClient GoogleServiceAccountsGet{..}
+        type Scopes GoogleServiceAccountsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient GoogleServiceAccountsGet'{..}
           = go _gsagProjectId _gsagXgafv _gsagUploadProtocol
               (Just _gsagPp)
               _gsagAccessToken

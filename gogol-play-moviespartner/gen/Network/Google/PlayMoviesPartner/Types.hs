@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.PlayMoviesPartner.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,7 +20,40 @@ module Network.Google.PlayMoviesPartner.Types
       playMoviesPartnerService
 
     -- * OAuth Scopes
-    , playmoviesPartnerReadonlyScope
+    , playmoviesPartnerReadOnlyScope
+
+    -- * Component
+    , Component
+    , component
+    , cStatus
+    , cPphName
+    , cStudioName
+    , cElIds
+    , cReceivedTime
+    , cPriority
+    , cCustomIds
+    , cAltCutIds
+    , cProcessingErrors
+    , cPlayableUnitType
+    , cEditLevelEidrs
+    , cApprovedTime
+    , cName
+    , cTitleLevelEidrs
+    , cRejectionNote
+    , cComponentId
+    , cLanguage
+    , cStatusDetail
+    , cType
+    , cNormalizedPriority
+    , cComponentDetailType
+    , cFilename
+
+    -- * ListComponentsResponse
+    , ListComponentsResponse
+    , listComponentsResponse
+    , lcrComponents
+    , lcrNextPageToken
+    , lcrTotalSize
 
     -- * Avail
     , Avail
@@ -37,6 +71,7 @@ module Network.Google.PlayMoviesPartner.Types
     , aTerritory
     , aEpisodeTitleInternalAlias
     , aLicenseType
+    , aAvailId
     , aSeasonNumber
     , aWorkType
     , aRatingValue
@@ -62,23 +97,27 @@ module Network.Google.PlayMoviesPartner.Types
     , listAvailsResponse
     , larNextPageToken
     , larAvails
+    , larTotalSize
 
     -- * ListExperienceLocalesResponse
     , ListExperienceLocalesResponse
     , listExperienceLocalesResponse
     , lelrNextPageToken
+    , lelrTotalSize
     , lelrExperienceLocales
 
     -- * ListOrdersResponse
     , ListOrdersResponse
     , listOrdersResponse
     , lorNextPageToken
+    , lorTotalSize
     , lorOrders
 
     -- * ListStoreInfosResponse
     , ListStoreInfosResponse
     , listStoreInfosResponse
     , lsirNextPageToken
+    , lsirTotalSize
     , lsirStoreInfos
 
     -- * Order
@@ -170,11 +209,11 @@ import           Network.Google.PlayMoviesPartner.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play Movies Partner API. This contains the host and root path used as a starting point for constructing service requests.
-playMoviesPartnerService :: Service
+playMoviesPartnerService :: ServiceConfig
 playMoviesPartnerService
   = defaultService (ServiceId "playmoviespartner:v1")
       "playmoviespartner.googleapis.com"
 
 -- | View the digital assets you publish on Google Play Movies and TV
-playmoviesPartnerReadonlyScope :: OAuthScope
-playmoviesPartnerReadonlyScope = "https://www.googleapis.com/auth/playmovies_partner.readonly";
+playmoviesPartnerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+playmoviesPartnerReadOnlyScope = Proxy;

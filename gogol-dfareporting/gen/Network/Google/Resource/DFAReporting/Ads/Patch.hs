@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Ads.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'AdsPatch' request conforms to.
 type AdsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>
@@ -56,7 +56,7 @@ type AdsPatchResource =
 -- | Updates an existing ad. This method supports patch semantics.
 --
 -- /See:/ 'adsPatch' smart constructor.
-data AdsPatch = AdsPatch
+data AdsPatch = AdsPatch'
     { _adsdProFileId :: !(Textual Int64)
     , _adsdPayload   :: !Ad
     , _adsdId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ adsPatch
     -> Int64 -- ^ 'adsdId'
     -> AdsPatch
 adsPatch pAdsdProFileId_ pAdsdPayload_ pAdsdId_ =
-    AdsPatch
+    AdsPatch'
     { _adsdProFileId = _Coerce # pAdsdProFileId_
     , _adsdPayload = pAdsdPayload_
     , _adsdId = _Coerce # pAdsdId_
@@ -102,7 +102,9 @@ adsdId
 
 instance GoogleRequest AdsPatch where
         type Rs AdsPatch = Ad
-        requestClient AdsPatch{..}
+        type Scopes AdsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdsPatch'{..}
           = go _adsdProFileId (Just _adsdId) (Just AltJSON)
               _adsdPayload
               dFAReportingService

@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AppsReseller.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -32,20 +32,20 @@ data SubscriptionsDeleteDeletionType
     | TransferToDirect
       -- ^ @transfer_to_direct@
       -- Transfers a subscription directly to Google
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SubscriptionsDeleteDeletionType
 
-instance FromText SubscriptionsDeleteDeletionType where
-    fromText = \case
-        "cancel" -> Just Cancel
-        "downgrade" -> Just Downgrade
-        "suspend" -> Just Suspend
-        "transfer_to_direct" -> Just TransferToDirect
-        _ -> Nothing
+instance FromHttpApiData SubscriptionsDeleteDeletionType where
+    parseQueryParam = \case
+        "cancel" -> Right Cancel
+        "downgrade" -> Right Downgrade
+        "suspend" -> Right Suspend
+        "transfer_to_direct" -> Right TransferToDirect
+        x -> Left ("Unable to parse SubscriptionsDeleteDeletionType from: " <> x)
 
-instance ToText SubscriptionsDeleteDeletionType where
-    toText = \case
+instance ToHttpApiData SubscriptionsDeleteDeletionType where
+    toQueryParam = \case
         Cancel -> "cancel"
         Downgrade -> "downgrade"
         Suspend -> "suspend"

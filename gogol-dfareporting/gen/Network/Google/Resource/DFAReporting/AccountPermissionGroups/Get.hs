@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountPermissionGroupsGet' request conforms to.
 type AccountPermissionGroupsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountPermissionGroups" :>
@@ -55,7 +55,7 @@ type AccountPermissionGroupsGetResource =
 -- | Gets one account permission group by ID.
 --
 -- /See:/ 'accountPermissionGroupsGet' smart constructor.
-data AccountPermissionGroupsGet = AccountPermissionGroupsGet
+data AccountPermissionGroupsGet = AccountPermissionGroupsGet'
     { _apggProFileId :: !(Textual Int64)
     , _apggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ accountPermissionGroupsGet
     -> Int64 -- ^ 'apggId'
     -> AccountPermissionGroupsGet
 accountPermissionGroupsGet pApggProFileId_ pApggId_ =
-    AccountPermissionGroupsGet
+    AccountPermissionGroupsGet'
     { _apggProFileId = _Coerce # pApggProFileId_
     , _apggId = _Coerce # pApggId_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest AccountPermissionGroupsGet
          where
         type Rs AccountPermissionGroupsGet =
              AccountPermissionGroup
-        requestClient AccountPermissionGroupsGet{..}
+        type Scopes AccountPermissionGroupsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountPermissionGroupsGet'{..}
           = go _apggProFileId _apggId (Just AltJSON)
               dFAReportingService
           where go

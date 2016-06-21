@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Players.Unhide
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type PlayersUnhideResource =
 -- developer console.
 --
 -- /See:/ 'playersUnhide' smart constructor.
-data PlayersUnhide = PlayersUnhide
+data PlayersUnhide = PlayersUnhide'
     { _puApplicationId :: !Text
     , _puPlayerId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -76,7 +76,7 @@ playersUnhide
     -> Text -- ^ 'puPlayerId'
     -> PlayersUnhide
 playersUnhide pPuApplicationId_ pPuPlayerId_ =
-    PlayersUnhide
+    PlayersUnhide'
     { _puApplicationId = pPuApplicationId_
     , _puPlayerId = pPuPlayerId_
     }
@@ -95,7 +95,10 @@ puPlayerId
 
 instance GoogleRequest PlayersUnhide where
         type Rs PlayersUnhide = ()
-        requestClient PlayersUnhide{..}
+        type Scopes PlayersUnhide =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient PlayersUnhide'{..}
           = go _puApplicationId _puPlayerId (Just AltJSON)
               gamesManagementService
           where go

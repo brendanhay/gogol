@@ -7,20 +7,23 @@
 
 -- |
 -- Module      : Network.Google.ShoppingContent
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manage product items, inventory, and Merchant Center accounts for Google
--- Shopping.
+-- Manages product items, inventory, and Merchant Center accounts for
+-- Google Shopping.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference>
 module Network.Google.ShoppingContent
     (
     -- * Service Configuration
       shoppingContentService
+
+    -- * OAuth Scopes
+    , contentScope
 
     -- * API Declaration
     , ShoppingContentAPI
@@ -333,6 +336,7 @@ module Network.Google.ShoppingContent
     -- ** OrdersCustomBatchRequestEntryCancelLineItem
     , OrdersCustomBatchRequestEntryCancelLineItem
     , ordersCustomBatchRequestEntryCancelLineItem
+    , ocbrecliAmount
     , ocbrecliQuantity
     , ocbrecliLineItemId
     , ocbrecliReason
@@ -510,12 +514,6 @@ module Network.Google.ShoppingContent
     , wValue
     , wUnit
 
-    -- ** ProductInstallment
-    , ProductInstallment
-    , productInstallment
-    , piAmount
-    , piMonths
-
     -- ** Error'
     , Error'
     , error'
@@ -566,11 +564,18 @@ module Network.Google.ShoppingContent
     , dcbreDatafeedId
     , dcbreBatchId
 
+    -- ** Installment
+    , Installment
+    , installment
+    , iAmount
+    , iMonths
+
     -- ** DatafeedFetchSchedule
     , DatafeedFetchSchedule
     , datafeedFetchSchedule
     , dfsFetchURL
     , dfsUsername
+    , dfsMinuteOfHour
     , dfsPassword
     , dfsDayOfMonth
     , dfsHour
@@ -666,7 +671,9 @@ module Network.Google.ShoppingContent
     -- ** InventorySetRequest
     , InventorySetRequest
     , inventorySetRequest
+    , isrLoyaltyPoints
     , isrQuantity
+    , isrInstallment
     , isrSalePrice
     , isrAvailability
     , isrSalePriceEffectiveDate
@@ -683,6 +690,7 @@ module Network.Google.ShoppingContent
     -- ** OrdersCancelLineItemRequest
     , OrdersCancelLineItemRequest
     , ordersCancelLineItemRequest
+    , oclirAmount
     , oclirQuantity
     , oclirLineItemId
     , oclirReason
@@ -893,8 +901,10 @@ module Network.Google.ShoppingContent
     -- ** Inventory
     , Inventory
     , inventory
+    , iLoyaltyPoints
     , iKind
     , iQuantity
+    , iInstallment
     , iSalePrice
     , iAvailability
     , iSalePriceEffectiveDate
@@ -906,6 +916,15 @@ module Network.Google.ShoppingContent
     , ordersGetByMerchantOrderIdResponse
     , ogbmoirKind
     , ogbmoirOrder
+
+    -- ** OrderPromotionBenefit
+    , OrderPromotionBenefit
+    , orderPromotionBenefit
+    , opbTaxImpact
+    , opbDiscount
+    , opbOfferIds
+    , opbSubType
+    , opbType
 
     -- ** OrdersCancelRequest
     , OrdersCancelRequest
@@ -939,6 +958,17 @@ module Network.Google.ShoppingContent
     , ascrModifierPercent
     , ascrName
     , ascrModifierFlatRate
+
+    -- ** OrderPromotion
+    , OrderPromotion
+    , orderPromotion
+    , opEffectiveDates
+    , opGenericRedemptionCode
+    , opRedemptionChannel
+    , opBenefits
+    , opLongTitle
+    , opId
+    , opProductApplicability
 
     -- ** Price
     , Price
@@ -981,6 +1011,7 @@ module Network.Google.ShoppingContent
     , toShippingCostTax
     , toCustomer
     , toPaymentMethod
+    , toPromotions
     , toShippingCost
 
     -- ** DatafeedstatusesCustomBatchResponseEntry
@@ -1143,6 +1174,7 @@ module Network.Google.ShoppingContent
     , ppId
     , ppAdwordsLabels
     , ppPrice
+    , ppPromotionIds
     , ppSizeType
     , ppMobileLink
     , ppTitle
@@ -1264,6 +1296,7 @@ module Network.Google.ShoppingContent
     , ooCustomer
     , ooId
     , ooPaymentMethod
+    , ooPromotions
     , ooPaymentStatus
     , ooShippingCost
 

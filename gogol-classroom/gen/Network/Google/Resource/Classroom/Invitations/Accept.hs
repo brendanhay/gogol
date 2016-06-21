@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Invitations.Accept
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -80,7 +80,7 @@ type InvitationsAcceptResource =
 -- \`NOT_FOUND\` if no invitation exists with the requested ID.
 --
 -- /See:/ 'invitationsAccept' smart constructor.
-data InvitationsAccept = InvitationsAccept
+data InvitationsAccept = InvitationsAccept'
     { _iaXgafv          :: !(Maybe Text)
     , _iaUploadProtocol :: !(Maybe Text)
     , _iaPp             :: !Bool
@@ -114,7 +114,7 @@ invitationsAccept
     :: Text -- ^ 'iaId'
     -> InvitationsAccept
 invitationsAccept pIaId_ =
-    InvitationsAccept
+    InvitationsAccept'
     { _iaXgafv = Nothing
     , _iaUploadProtocol = Nothing
     , _iaPp = True
@@ -167,7 +167,9 @@ iaCallback
 
 instance GoogleRequest InvitationsAccept where
         type Rs InvitationsAccept = Empty
-        requestClient InvitationsAccept{..}
+        type Scopes InvitationsAccept =
+             '["https://www.googleapis.com/auth/classroom.rosters"]
+        requestClient InvitationsAccept'{..}
           = go _iaId _iaXgafv _iaUploadProtocol (Just _iaPp)
               _iaAccessToken
               _iaUploadType

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.PlayListItems.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type PlayListItemsDeleteResource =
 -- | Deletes a playlist item.
 --
 -- /See:/ 'playListItemsDelete' smart constructor.
-newtype PlayListItemsDelete = PlayListItemsDelete
+newtype PlayListItemsDelete = PlayListItemsDelete'
     { _plidId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ playListItemsDelete
     :: Text -- ^ 'plidId'
     -> PlayListItemsDelete
 playListItemsDelete pPlidId_ =
-    PlayListItemsDelete
+    PlayListItemsDelete'
     { _plidId = pPlidId_
     }
 
@@ -76,7 +76,11 @@ plidId = lens _plidId (\ s a -> s{_plidId = a})
 
 instance GoogleRequest PlayListItemsDelete where
         type Rs PlayListItemsDelete = ()
-        requestClient PlayListItemsDelete{..}
+        type Scopes PlayListItemsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient PlayListItemsDelete'{..}
           = go (Just _plidId) (Just AltJSON) youTubeService
           where go
                   = buildClient

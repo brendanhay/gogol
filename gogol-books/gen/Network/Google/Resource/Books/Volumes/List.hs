@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Volumes.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -79,7 +79,7 @@ type VolumesListResource =
 -- | Performs a book search.
 --
 -- /See:/ 'volumesList' smart constructor.
-data VolumesList = VolumesList
+data VolumesList = VolumesList'
     { _vlOrderBy         :: !(Maybe VolumesListOrderBy)
     , _vlLibraryRestrict :: !(Maybe VolumesListLibraryRestrict)
     , _vlPartner         :: !(Maybe Text)
@@ -128,7 +128,7 @@ volumesList
     :: Text -- ^ 'vlQ'
     -> VolumesList
 volumesList pVlQ_ =
-    VolumesList
+    VolumesList'
     { _vlOrderBy = Nothing
     , _vlLibraryRestrict = Nothing
     , _vlPartner = Nothing
@@ -213,7 +213,9 @@ vlPrintType
 
 instance GoogleRequest VolumesList where
         type Rs VolumesList = Volumes
-        requestClient VolumesList{..}
+        type Scopes VolumesList =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient VolumesList'{..}
           = go (Just _vlQ) _vlOrderBy _vlLibraryRestrict
               _vlPartner
               _vlDownload

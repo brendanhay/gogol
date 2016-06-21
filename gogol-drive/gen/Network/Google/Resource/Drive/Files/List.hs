@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Files.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the user\'s files.
+-- Lists or searches files.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.list@.
 module Network.Google.Resource.Drive.Files.List
@@ -36,10 +36,9 @@ module Network.Google.Resource.Drive.Files.List
     , flOrderBy
     , flQ
     , flSpaces
-    , flProjection
     , flCorpus
     , flPageToken
-    , flMaxResults
+    , flPageSize
     ) where
 
 import           Network.Google.Drive.Types
@@ -49,28 +48,26 @@ import           Network.Google.Prelude
 -- 'FilesList' request conforms to.
 type FilesListResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            QueryParam "orderBy" Text :>
              QueryParam "q" Text :>
                QueryParam "spaces" Text :>
-                 QueryParam "projection" FilesListProjection :>
-                   QueryParam "corpus" FilesListCorpus :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Int32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] FileList
+                 QueryParam "corpus" FilesListCorpus :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "pageSize" (Textual Int32) :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] FileList
 
--- | Lists the user\'s files.
+-- | Lists or searches files.
 --
 -- /See:/ 'filesList' smart constructor.
-data FilesList = FilesList
-    { _flOrderBy    :: !(Maybe Text)
-    , _flQ          :: !(Maybe Text)
-    , _flSpaces     :: !(Maybe Text)
-    , _flProjection :: !(Maybe FilesListProjection)
-    , _flCorpus     :: !(Maybe FilesListCorpus)
-    , _flPageToken  :: !(Maybe Text)
-    , _flMaxResults :: !(Textual Int32)
+data FilesList = FilesList'
+    { _flOrderBy   :: !(Maybe Text)
+    , _flQ         :: !(Maybe Text)
+    , _flSpaces    :: !Text
+    , _flCorpus    :: !FilesListCorpus
+    , _flPageToken :: !(Maybe Text)
+    , _flPageSize  :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesList' with the minimum fields required to make a request.
@@ -83,74 +80,77 @@ data FilesList = FilesList
 --
 -- * 'flSpaces'
 --
--- * 'flProjection'
---
 -- * 'flCorpus'
 --
 -- * 'flPageToken'
 --
--- * 'flMaxResults'
+-- * 'flPageSize'
 filesList
     :: FilesList
 filesList =
-    FilesList
+    FilesList'
     { _flOrderBy = Nothing
     , _flQ = Nothing
-    , _flSpaces = Nothing
-    , _flProjection = Nothing
-    , _flCorpus = Nothing
+    , _flSpaces = "drive"
+    , _flCorpus = FLCUser
     , _flPageToken = Nothing
-    , _flMaxResults = 100
+    , _flPageSize = 100
     }
 
--- | A comma-separated list of sort keys. Valid keys are \'createdDate\',
--- \'folder\', \'lastViewedByMeDate\', \'modifiedByMeDate\',
--- \'modifiedDate\', \'quotaBytesUsed\', \'recency\', \'sharedWithMeDate\',
--- \'starred\', and \'title\'. Each key sorts ascending by default, but may
--- be reversed with the \'desc\' modifier. Example usage:
--- ?orderBy=folder,modifiedDate desc,title. Please note that there is a
+-- | A comma-separated list of sort keys. Valid keys are \'createdTime\',
+-- \'folder\', \'modifiedByMeTime\', \'modifiedTime\', \'name\',
+-- \'quotaBytesUsed\', \'recency\', \'sharedWithMeTime\', \'starred\', and
+-- \'viewedByMeTime\'. Each key sorts ascending by default, but may be
+-- reversed with the \'desc\' modifier. Example usage:
+-- ?orderBy=folder,modifiedTime desc,name. Please note that there is a
 -- current limitation for users with approximately one million files in
 -- which the requested sort order is ignored.
 flOrderBy :: Lens' FilesList (Maybe Text)
 flOrderBy
   = lens _flOrderBy (\ s a -> s{_flOrderBy = a})
 
--- | Query string for searching files.
+-- | A query for filtering the file results. See the \"Search for Files\"
+-- guide for supported syntax.
 flQ :: Lens' FilesList (Maybe Text)
 flQ = lens _flQ (\ s a -> s{_flQ = a})
 
--- | A comma-separated list of spaces to query. Supported values are
--- \'drive\', \'appDataFolder\' and \'photos\'.
-flSpaces :: Lens' FilesList (Maybe Text)
+-- | A comma-separated list of spaces to query within the corpus. Supported
+-- values are \'drive\', \'appDataFolder\' and \'photos\'.
+flSpaces :: Lens' FilesList Text
 flSpaces = lens _flSpaces (\ s a -> s{_flSpaces = a})
 
--- | This parameter is deprecated and has no function.
-flProjection :: Lens' FilesList (Maybe FilesListProjection)
-flProjection
-  = lens _flProjection (\ s a -> s{_flProjection = a})
-
--- | The body of items (files\/documents) to which the query applies.
-flCorpus :: Lens' FilesList (Maybe FilesListCorpus)
+-- | The source of files to list.
+flCorpus :: Lens' FilesList FilesListCorpus
 flCorpus = lens _flCorpus (\ s a -> s{_flCorpus = a})
 
--- | Page token for files.
+-- | The token for continuing a previous list request on the next page. This
+-- should be set to the value of \'nextPageToken\' from the previous
+-- response.
 flPageToken :: Lens' FilesList (Maybe Text)
 flPageToken
   = lens _flPageToken (\ s a -> s{_flPageToken = a})
 
--- | Maximum number of files to return.
-flMaxResults :: Lens' FilesList Int32
-flMaxResults
-  = lens _flMaxResults (\ s a -> s{_flMaxResults = a})
-      . _Coerce
+-- | The maximum number of files to return per page.
+flPageSize :: Lens' FilesList Int32
+flPageSize
+  = lens _flPageSize (\ s a -> s{_flPageSize = a}) .
+      _Coerce
 
 instance GoogleRequest FilesList where
         type Rs FilesList = FileList
-        requestClient FilesList{..}
-          = go _flOrderBy _flQ _flSpaces _flProjection
-              _flCorpus
+        type Scopes FilesList =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
+        requestClient FilesList'{..}
+          = go _flOrderBy _flQ (Just _flSpaces)
+              (Just _flCorpus)
               _flPageToken
-              (Just _flMaxResults)
+              (Just _flPageSize)
               (Just AltJSON)
               driveService
           where go

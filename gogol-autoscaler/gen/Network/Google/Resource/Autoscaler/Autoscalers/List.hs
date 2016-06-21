@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Autoscaler.Autoscalers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type AutoscalersListResource =
 -- | Lists all Autoscaler resources in this zone.
 --
 -- /See:/ 'autoscalersList' smart constructor.
-data AutoscalersList = AutoscalersList
+data AutoscalersList = AutoscalersList'
     { _alProject    :: !Text
     , _alZone       :: !Text
     , _alFilter     :: !(Maybe Text)
@@ -88,7 +88,7 @@ autoscalersList
     -> Text -- ^ 'alZone'
     -> AutoscalersList
 autoscalersList pAlProject_ pAlZone_ =
-    AutoscalersList
+    AutoscalersList'
     { _alProject = pAlProject_
     , _alZone = pAlZone_
     , _alFilter = Nothing
@@ -119,7 +119,10 @@ alMaxResults
 
 instance GoogleRequest AutoscalersList where
         type Rs AutoscalersList = AutoscalerListResponse
-        requestClient AutoscalersList{..}
+        type Scopes AutoscalersList =
+             '["https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient AutoscalersList'{..}
           = go _alProject _alZone _alFilter _alPageToken
               (Just _alMaxResults)
               (Just AltJSON)

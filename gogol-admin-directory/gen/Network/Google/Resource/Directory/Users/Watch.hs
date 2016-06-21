@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Watch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -78,7 +78,7 @@ type UsersWatchResource =
 -- | Watch for changes in users list
 --
 -- /See:/ 'usersWatch' smart constructor.
-data UsersWatch = UsersWatch
+data UsersWatch = UsersWatch'
     { _uwEvent           :: !(Maybe UsersWatchEvent)
     , _uwOrderBy         :: !(Maybe UsersWatchOrderBy)
     , _uwViewType        :: !UsersWatchViewType
@@ -127,7 +127,7 @@ usersWatch
     :: Channel -- ^ 'uwPayload'
     -> UsersWatch
 usersWatch pUwPayload_ =
-    UsersWatch
+    UsersWatch'
     { _uwEvent = Nothing
     , _uwOrderBy = Nothing
     , _uwViewType = UWVTAdminView
@@ -215,7 +215,10 @@ uwMaxResults
 
 instance GoogleRequest UsersWatch where
         type Rs UsersWatch = Channel
-        requestClient UsersWatch{..}
+        type Scopes UsersWatch =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
+        requestClient UsersWatch'{..}
           = go _uwEvent _uwOrderBy (Just _uwViewType)
               _uwCustomFieldMask
               _uwDomain

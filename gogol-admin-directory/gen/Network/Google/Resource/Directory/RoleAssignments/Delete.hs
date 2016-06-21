@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.RoleAssignments.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type RoleAssignmentsDeleteResource =
 -- | Deletes a role assignment.
 --
 -- /See:/ 'roleAssignmentsDelete' smart constructor.
-data RoleAssignmentsDelete = RoleAssignmentsDelete
+data RoleAssignmentsDelete = RoleAssignmentsDelete'
     { _radCustomer         :: !Text
     , _radRoleAssignmentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ roleAssignmentsDelete
     -> Text -- ^ 'radRoleAssignmentId'
     -> RoleAssignmentsDelete
 roleAssignmentsDelete pRadCustomer_ pRadRoleAssignmentId_ =
-    RoleAssignmentsDelete
+    RoleAssignmentsDelete'
     { _radCustomer = pRadCustomer_
     , _radRoleAssignmentId = pRadRoleAssignmentId_
     }
@@ -90,7 +90,9 @@ radRoleAssignmentId
 
 instance GoogleRequest RoleAssignmentsDelete where
         type Rs RoleAssignmentsDelete = ()
-        requestClient RoleAssignmentsDelete{..}
+        type Scopes RoleAssignmentsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
+        requestClient RoleAssignmentsDelete'{..}
           = go _radCustomer _radRoleAssignmentId (Just AltJSON)
               directoryService
           where go

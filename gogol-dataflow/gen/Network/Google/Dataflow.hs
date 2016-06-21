@@ -7,19 +7,24 @@
 
 -- |
 -- Module      : Network.Google.Dataflow
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Google Dataflow API.
+-- Develops and executes data processing patterns like ETL, batch
+-- computation, and continuous computation.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference>
 module Network.Google.Dataflow
     (
     -- * Service Configuration
       dataflowService
+
+    -- * OAuth Scopes
+    , userInfoEmailScope
+    , cloudPlatformScope
 
     -- * API Declaration
     , DataflowAPI
@@ -49,6 +54,9 @@ module Network.Google.Dataflow
 
     -- ** dataflow.projects.jobs.workItems.reportStatus
     , module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+
+    -- ** dataflow.projects.workerMessages
+    , module Network.Google.Resource.Dataflow.Projects.WorkerMessages
 
     -- * Types
 
@@ -100,6 +108,14 @@ module Network.Google.Dataflow
     , wiConfiguration
     , wiSeqMapTask
 
+    -- ** WorkerHealthReport
+    , WorkerHealthReport
+    , workerHealthReport
+    , whrVMIsHealthy
+    , whrReportInterval
+    , whrPods
+    , whrVMStartupTime
+
     -- ** SourceSplitOptions
     , SourceSplitOptions
     , sourceSplitOptions
@@ -146,6 +162,11 @@ module Network.Google.Dataflow
     , sink
     , sCodec
     , sSpec
+
+    -- ** WorkerHealthReportResponse
+    , WorkerHealthReportResponse
+    , workerHealthReportResponse
+    , whrrReportInterval
 
     -- ** MetricStructuredName
     , MetricStructuredName
@@ -234,6 +255,7 @@ module Network.Google.Dataflow
     -- ** WorkItemStatus
     , WorkItemStatus
     , workItemStatus
+    , wisReportedProgress
     , wisProgress
     , wisSourceOperationResponse
     , wisStopPosition
@@ -246,10 +268,21 @@ module Network.Google.Dataflow
     , wisMetricUpdates
     , wisWorkItemId
 
+    -- ** WorkerMessageLabels
+    , WorkerMessageLabels
+    , workerMessageLabels
+    , wmlAddtional
+
     -- ** FlattenInstruction
     , FlattenInstruction
     , flattenInstruction
     , fiInputs
+
+    -- ** WorkerMessageCode
+    , WorkerMessageCode
+    , workerMessageCode
+    , wmcParameters
+    , wmcCode
 
     -- ** JobTransformNameMApping
     , JobTransformNameMApping
@@ -332,6 +365,12 @@ module Network.Google.Dataflow
     , statusDetailsItem
     , sdiAddtional
 
+    -- ** ReportedParallelism
+    , ReportedParallelism
+    , reportedParallelism
+    , rpValue
+    , rpIsInfinite
+
     -- ** StepProperties
     , StepProperties
     , stepProperties
@@ -341,8 +380,16 @@ module Network.Google.Dataflow
     , TopologyConfig
     , topologyConfig
     , tcDataDiskAssignments
+    , tcPersistentStateVersion
+    , tcForwardingKeyBits
     , tcUserStageToComputationNameMap
     , tcComputations
+
+    -- ** ApproximateSplitRequest
+    , ApproximateSplitRequest
+    , approximateSplitRequest
+    , asrFractionConsumed
+    , asrPosition
 
     -- ** WorkerSettings
     , WorkerSettings
@@ -365,6 +412,11 @@ module Network.Google.Dataflow
     , ddaVMInstance
     , ddaDataDisks
 
+    -- ** WorkerMessageResponse
+    , WorkerMessageResponse
+    , workerMessageResponse
+    , wmrWorkerHealthReportResponse
+
     -- ** WorkItemServiceState
     , WorkItemServiceState
     , workItemServiceState
@@ -374,6 +426,7 @@ module Network.Google.Dataflow
     , wissSuggestedStopPoint
     , wissSuggestedStopPosition
     , wissLeaseExpireTime
+    , wissSplitRequest
 
     -- ** StreamingSetupTask
     , StreamingSetupTask
@@ -381,6 +434,7 @@ module Network.Google.Dataflow
     , sstStreamingComputationTopology
     , sstReceiveWorkPort
     , sstWorkerHarnessPort
+    , sstDrain
 
     -- ** PartialGroupByKeyInstructionInputElementCodec
     , PartialGroupByKeyInstructionInputElementCodec
@@ -404,6 +458,11 @@ module Network.Google.Dataflow
     , sinkCodec
     , scAddtional
 
+    -- ** WorkerHealthReportPodsItem
+    , WorkerHealthReportPodsItem
+    , workerHealthReportPodsItem
+    , whrpiAddtional
+
     -- ** ParDoInstructionUserFn
     , ParDoInstructionUserFn
     , parDoInstructionUserFn
@@ -426,6 +485,11 @@ module Network.Google.Dataflow
     , WorkerPoolPoolArgs
     , workerPoolPoolArgs
     , wppaAddtional
+
+    -- ** SendWorkerMessagesResponse
+    , SendWorkerMessagesResponse
+    , sendWorkerMessagesResponse
+    , swmrWorkerMessageResponses
 
     -- ** StreamingSideInputLocation
     , StreamingSideInputLocation
@@ -477,6 +541,7 @@ module Network.Google.Dataflow
     , jClientRequestId
     , jCurrentState
     , jReplacedByJobId
+    , jTempFiles
     , jSteps
     , jExecutionInfo
     , jName
@@ -493,6 +558,14 @@ module Network.Google.Dataflow
     , readInstruction
     , riSource
 
+    -- ** ApproximateReportedProgress
+    , ApproximateReportedProgress
+    , approximateReportedProgress
+    , arpFractionConsumed
+    , arpConsumedParallelism
+    , arpRemainingParallelism
+    , arpPosition
+
     -- ** SinkSpec
     , SinkSpec
     , sinkSpec
@@ -502,6 +575,7 @@ module Network.Google.Dataflow
     , WorkerPool
     , workerPool
     , wpAutoscalingSettings
+    , wpNumThreadsPerWorker
     , wpDiskSizeGb
     , wpKind
     , wpTaskrunnerSettings
@@ -511,12 +585,14 @@ module Network.Google.Dataflow
     , wpPackages
     , wpOnHostMaintenance
     , wpDiskSourceImage
+    , wpSubnetwork
     , wpMachineType
     , wpMetadata
     , wpDiskType
     , wpTeardownPolicy
     , wpDefaultPackageSet
     , wpPoolArgs
+    , wpWorkerHarnessContainerImage
     , wpDataDisks
 
     -- ** Step
@@ -531,6 +607,11 @@ module Network.Google.Dataflow
     , package
     , pLocation
     , pName
+
+    -- ** WorkerMessageCodeParameters
+    , WorkerMessageCodeParameters
+    , workerMessageCodeParameters
+    , wmcpAddtional
 
     -- ** DynamicSourceSplit
     , DynamicSourceSplit
@@ -579,6 +660,14 @@ module Network.Google.Dataflow
     , apPercentComplete
     , apPosition
 
+    -- ** WorkerMessage
+    , WorkerMessage
+    , workerMessage
+    , wmWorkerHealthReport
+    , wmTime
+    , wmWorkerMessageCode
+    , wmLabels
+
     -- ** KeyRangeLocation
     , KeyRangeLocation
     , keyRangeLocation
@@ -597,6 +686,7 @@ module Network.Google.Dataflow
     , PartialGroupByKeyInstruction
     , partialGroupByKeyInstruction
     , pgbkiValueCombiningFn
+    , pgbkiSideInputs
     , pgbkiInput
     , pgbkiInputElementCodec
 
@@ -635,6 +725,11 @@ module Network.Google.Dataflow
     , SideInputInfoKind
     , sideInputInfoKind
     , siikAddtional
+
+    -- ** SendWorkerMessagesRequest
+    , SendWorkerMessagesRequest
+    , sendWorkerMessagesRequest
+    , swmrWorkerMessages
 
     -- ** SourceSplitShard
     , SourceSplitShard
@@ -742,6 +837,7 @@ import           Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
 import           Network.Google.Resource.Dataflow.Projects.Jobs.Update
 import           Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
 import           Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+import           Network.Google.Resource.Dataflow.Projects.WorkerMessages
 
 {- $resources
 TODO
@@ -757,3 +853,4 @@ type DataflowAPI =
        :<|> ProjectsJobsCreateResource
        :<|> ProjectsJobsUpdateResource
        :<|> ProjectsJobsGetMetricsResource
+       :<|> ProjectsWorkerMessagesResource

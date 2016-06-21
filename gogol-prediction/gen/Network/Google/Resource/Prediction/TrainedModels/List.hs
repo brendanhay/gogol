@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Prediction.TrainedModels.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type TrainedModelsListResource =
 -- | List available models.
 --
 -- /See:/ 'trainedModelsList' smart constructor.
-data TrainedModelsList = TrainedModelsList
+data TrainedModelsList = TrainedModelsList'
     { _tmlProject    :: !Text
     , _tmlPageToken  :: !(Maybe Text)
     , _tmlMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ trainedModelsList
     :: Text -- ^ 'tmlProject'
     -> TrainedModelsList
 trainedModelsList pTmlProject_ =
-    TrainedModelsList
+    TrainedModelsList'
     { _tmlProject = pTmlProject_
     , _tmlPageToken = Nothing
     , _tmlMaxResults = Nothing
@@ -101,7 +101,10 @@ tmlMaxResults
 
 instance GoogleRequest TrainedModelsList where
         type Rs TrainedModelsList = List
-        requestClient TrainedModelsList{..}
+        type Scopes TrainedModelsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/prediction"]
+        requestClient TrainedModelsList'{..}
           = go _tmlProject _tmlPageToken _tmlMaxResults
               (Just AltJSON)
               predictionService

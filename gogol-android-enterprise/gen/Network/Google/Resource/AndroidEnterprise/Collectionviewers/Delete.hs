@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Collectionviewers.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,7 @@
 -- collection. If the collection\'s visibility is set to viewersOnly then
 -- only such users will see the collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collectionviewers.delete@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collectionviewers.delete@.
 module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Delete
     (
     -- * REST Resource
@@ -61,7 +61,7 @@ type CollectionviewersDeleteResource =
 -- only such users will see the collection.
 --
 -- /See:/ 'collectionviewersDelete' smart constructor.
-data CollectionviewersDelete = CollectionviewersDelete
+data CollectionviewersDelete = CollectionviewersDelete'
     { _cdEnterpriseId :: !Text
     , _cdCollectionId :: !Text
     , _cdUserId       :: !Text
@@ -82,7 +82,7 @@ collectionviewersDelete
     -> Text -- ^ 'cdUserId'
     -> CollectionviewersDelete
 collectionviewersDelete pCdEnterpriseId_ pCdCollectionId_ pCdUserId_ =
-    CollectionviewersDelete
+    CollectionviewersDelete'
     { _cdEnterpriseId = pCdEnterpriseId_
     , _cdCollectionId = pCdCollectionId_
     , _cdUserId = pCdUserId_
@@ -106,7 +106,9 @@ cdUserId = lens _cdUserId (\ s a -> s{_cdUserId = a})
 
 instance GoogleRequest CollectionviewersDelete where
         type Rs CollectionviewersDelete = ()
-        requestClient CollectionviewersDelete{..}
+        type Scopes CollectionviewersDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient CollectionviewersDelete'{..}
           = go _cdEnterpriseId _cdCollectionId _cdUserId
               (Just AltJSON)
               androidEnterpriseService

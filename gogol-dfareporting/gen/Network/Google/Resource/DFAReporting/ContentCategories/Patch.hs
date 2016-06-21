@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.ContentCategories.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesPatch' request conforms to.
 type ContentCategoriesPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -59,7 +59,7 @@ type ContentCategoriesPatchResource =
 -- semantics.
 --
 -- /See:/ 'contentCategoriesPatch' smart constructor.
-data ContentCategoriesPatch = ContentCategoriesPatch
+data ContentCategoriesPatch = ContentCategoriesPatch'
     { _ccpProFileId :: !(Textual Int64)
     , _ccpPayload   :: !ContentCategory
     , _ccpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ contentCategoriesPatch
     -> Int64 -- ^ 'ccpId'
     -> ContentCategoriesPatch
 contentCategoriesPatch pCcpProFileId_ pCcpPayload_ pCcpId_ =
-    ContentCategoriesPatch
+    ContentCategoriesPatch'
     { _ccpProFileId = _Coerce # pCcpProFileId_
     , _ccpPayload = pCcpPayload_
     , _ccpId = _Coerce # pCcpId_
@@ -104,7 +104,9 @@ ccpId
 
 instance GoogleRequest ContentCategoriesPatch where
         type Rs ContentCategoriesPatch = ContentCategory
-        requestClient ContentCategoriesPatch{..}
+        type Scopes ContentCategoriesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ContentCategoriesPatch'{..}
           = go _ccpProFileId (Just _ccpId) (Just AltJSON)
               _ccpPayload
               dFAReportingService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Inventory.Custombatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type InventoryCustombatchResource =
 -- the products.
 --
 -- /See:/ 'inventoryCustombatch' smart constructor.
-data InventoryCustombatch = InventoryCustombatch
+data InventoryCustombatch = InventoryCustombatch'
     { _icPayload :: !InventoryCustomBatchRequest
     , _icDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ inventoryCustombatch
     :: InventoryCustomBatchRequest -- ^ 'icPayload'
     -> InventoryCustombatch
 inventoryCustombatch pIcPayload_ =
-    InventoryCustombatch
+    InventoryCustombatch'
     { _icPayload = pIcPayload_
     , _icDryRun = Nothing
     }
@@ -92,7 +92,9 @@ icDryRun = lens _icDryRun (\ s a -> s{_icDryRun = a})
 instance GoogleRequest InventoryCustombatch where
         type Rs InventoryCustombatch =
              InventoryCustomBatchResponse
-        requestClient InventoryCustombatch{..}
+        type Scopes InventoryCustombatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient InventoryCustombatch'{..}
           = go _icDryRun (Just AltJSON) _icPayload
               shoppingContentService
           where go

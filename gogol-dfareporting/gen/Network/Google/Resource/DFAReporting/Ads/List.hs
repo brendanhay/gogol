@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Ads.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ import           Network.Google.Prelude
 -- 'AdsList' request conforms to.
 type AdsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>
@@ -130,7 +130,7 @@ type AdsListResource =
 -- | Retrieves a list of ads, possibly filtered.
 --
 -- /See:/ 'adsList' smart constructor.
-data AdsList = AdsList
+data AdsList = AdsList'
     { _alRemarketingListIds                   :: !(Maybe [Textual Int64])
     , _alLandingPageIds                       :: !(Maybe [Textual Int64])
     , _alCreativeIds                          :: !(Maybe [Textual Int64])
@@ -215,7 +215,7 @@ adsList
     :: Int64 -- ^ 'alProFileId'
     -> AdsList
 adsList pAlProFileId_ =
-    AdsList
+    AdsList'
     { _alRemarketingListIds = Nothing
     , _alLandingPageIds = Nothing
     , _alCreativeIds = Nothing
@@ -389,7 +389,7 @@ alDynamicClickTracker
       (\ s a -> s{_alDynamicClickTracker = a})
 
 -- | Select default ads with the specified compatibility. Applicable when
--- type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to
+-- type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to
 -- rendering either on desktop or on mobile devices for regular or
 -- interstitial ads, respectively. APP and APP_INTERSTITIAL are for
 -- rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an
@@ -420,7 +420,9 @@ alAudienceSegmentIds
 
 instance GoogleRequest AdsList where
         type Rs AdsList = AdsListResponse
-        requestClient AdsList{..}
+        type Scopes AdsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdsList'{..}
           = go _alProFileId (_alRemarketingListIds ^. _Default)
               (_alLandingPageIds ^. _Default)
               (_alCreativeIds ^. _Default)

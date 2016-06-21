@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Colors.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -49,18 +49,21 @@ type ColorsGetResource =
 --
 -- /See:/ 'colorsGet' smart constructor.
 data ColorsGet =
-    ColorsGet
+    ColorsGet'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColorsGet' with the minimum fields required to make a request.
 --
 colorsGet
     :: ColorsGet
-colorsGet = ColorsGet
+colorsGet = ColorsGet'
 
 instance GoogleRequest ColorsGet where
         type Rs ColorsGet = Colors
-        requestClient ColorsGet{}
+        type Scopes ColorsGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient ColorsGet'{}
           = go (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy ColorsGetResource)

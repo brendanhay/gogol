@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type LicenseAssignmentsListForProductAndSKUResource =
 -- | List license assignments for given product and sku of the customer.
 --
 -- /See:/ 'licenseAssignmentsListForProductAndSKU' smart constructor.
-data LicenseAssignmentsListForProductAndSKU = LicenseAssignmentsListForProductAndSKU
+data LicenseAssignmentsListForProductAndSKU = LicenseAssignmentsListForProductAndSKU'
     { _lalfpaskuSKUId      :: !Text
     , _lalfpaskuCustomerId :: !Text
     , _lalfpaskuPageToken  :: !Text
@@ -90,7 +90,7 @@ licenseAssignmentsListForProductAndSKU
     -> Text -- ^ 'lalfpaskuProductId'
     -> LicenseAssignmentsListForProductAndSKU
 licenseAssignmentsListForProductAndSKU pLalfpaskuSKUId_ pLalfpaskuCustomerId_ pLalfpaskuProductId_ =
-    LicenseAssignmentsListForProductAndSKU
+    LicenseAssignmentsListForProductAndSKU'
     { _lalfpaskuSKUId = pLalfpaskuSKUId_
     , _lalfpaskuCustomerId = pLalfpaskuCustomerId_
     , _lalfpaskuPageToken = ""
@@ -136,8 +136,10 @@ instance GoogleRequest
          LicenseAssignmentsListForProductAndSKU where
         type Rs LicenseAssignmentsListForProductAndSKU =
              LicenseAssignmentList
+        type Scopes LicenseAssignmentsListForProductAndSKU =
+             '["https://www.googleapis.com/auth/apps.licensing"]
         requestClient
-          LicenseAssignmentsListForProductAndSKU{..}
+          LicenseAssignmentsListForProductAndSKU'{..}
           = go _lalfpaskuProductId _lalfpaskuSKUId
               (Just _lalfpaskuCustomerId)
               (Just _lalfpaskuPageToken)

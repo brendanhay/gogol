@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type RollingUpdatesPauseResource =
 -- effect if invoked when the state of the update is PAUSED.
 --
 -- /See:/ 'rollingUpdatesPause' smart constructor.
-data RollingUpdatesPause = RollingUpdatesPause
+data RollingUpdatesPause = RollingUpdatesPause'
     { _rupRollingUpdate :: !Text
     , _rupProject       :: !Text
     , _rupZone          :: !Text
@@ -81,7 +81,7 @@ rollingUpdatesPause
     -> Text -- ^ 'rupZone'
     -> RollingUpdatesPause
 rollingUpdatesPause pRupRollingUpdate_ pRupProject_ pRupZone_ =
-    RollingUpdatesPause
+    RollingUpdatesPause'
     { _rupRollingUpdate = pRupRollingUpdate_
     , _rupProject = pRupProject_
     , _rupZone = pRupZone_
@@ -104,7 +104,10 @@ rupZone = lens _rupZone (\ s a -> s{_rupZone = a})
 
 instance GoogleRequest RollingUpdatesPause where
         type Rs RollingUpdatesPause = Operation
-        requestClient RollingUpdatesPause{..}
+        type Scopes RollingUpdatesPause =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/replicapool"]
+        requestClient RollingUpdatesPause'{..}
           = go _rupProject _rupZone _rupRollingUpdate
               (Just AltJSON)
               replicaPoolUpdaterService

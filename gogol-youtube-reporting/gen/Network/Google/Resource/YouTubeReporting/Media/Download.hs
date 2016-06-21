@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeReporting.Media.Download
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -79,7 +79,7 @@ type MediaDownloadResource =
 -- \`\/v1\/media\/{+name}?alt=media\`.
 --
 -- /See:/ 'mediaDownload' smart constructor.
-data MediaDownload' = MediaDownload'
+data MediaDownload' = MediaDownload''
     { _mdXgafv          :: !(Maybe Text)
     , _mdUploadProtocol :: !(Maybe Text)
     , _mdResourceName   :: !Text
@@ -113,7 +113,7 @@ mediaDownload
     :: Text -- ^ 'mdResourceName'
     -> MediaDownload'
 mediaDownload pMdResourceName_ =
-    MediaDownload'
+    MediaDownload''
     { _mdXgafv = Nothing
     , _mdUploadProtocol = Nothing
     , _mdResourceName = pMdResourceName_
@@ -135,7 +135,7 @@ mdUploadProtocol
       (\ s a -> s{_mdUploadProtocol = a})
 
 -- | Name of the media that is being downloaded. See
--- [][ByteStream.ReadRequest.resource_name].
+-- ReadRequest.resource_name.
 mdResourceName :: Lens' MediaDownload' Text
 mdResourceName
   = lens _mdResourceName
@@ -169,7 +169,10 @@ mdCallback
 
 instance GoogleRequest MediaDownload' where
         type Rs MediaDownload' = Media
-        requestClient MediaDownload'{..}
+        type Scopes MediaDownload' =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
+        requestClient MediaDownload''{..}
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)
               _mdAccessToken
@@ -185,7 +188,9 @@ instance GoogleRequest MediaDownload' where
 instance GoogleRequest (MediaDownload MediaDownload')
          where
         type Rs (MediaDownload MediaDownload') = Stream
-        requestClient (MediaDownload MediaDownload'{..})
+        type Scopes (MediaDownload MediaDownload') =
+             Scopes MediaDownload'
+        requestClient (MediaDownload MediaDownload''{..})
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)
               _mdAccessToken

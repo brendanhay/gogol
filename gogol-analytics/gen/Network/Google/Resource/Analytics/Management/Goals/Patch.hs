@@ -14,14 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Goals.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing view (profile). This method supports patch
--- semantics.
+-- Updates an existing goal. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.goals.patch@.
 module Network.Google.Resource.Analytics.Management.Goals.Patch
@@ -61,11 +60,10 @@ type ManagementGoalsPatchResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Goal :> Patch '[JSON] Goal
 
--- | Updates an existing view (profile). This method supports patch
--- semantics.
+-- | Updates an existing goal. This method supports patch semantics.
 --
 -- /See:/ 'managementGoalsPatch' smart constructor.
-data ManagementGoalsPatch = ManagementGoalsPatch
+data ManagementGoalsPatch = ManagementGoalsPatch'
     { _mgpWebPropertyId :: !Text
     , _mgpGoalId        :: !Text
     , _mgpProFileId     :: !Text
@@ -94,7 +92,7 @@ managementGoalsPatch
     -> Text -- ^ 'mgpAccountId'
     -> ManagementGoalsPatch
 managementGoalsPatch pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_ pMgpAccountId_ =
-    ManagementGoalsPatch
+    ManagementGoalsPatch'
     { _mgpWebPropertyId = pMgpWebPropertyId_
     , _mgpGoalId = pMgpGoalId_
     , _mgpProFileId = pMgpProFileId_
@@ -130,7 +128,9 @@ mgpAccountId
 
 instance GoogleRequest ManagementGoalsPatch where
         type Rs ManagementGoalsPatch = Goal
-        requestClient ManagementGoalsPatch{..}
+        type Scopes ManagementGoalsPatch =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementGoalsPatch'{..}
           = go _mgpAccountId _mgpWebPropertyId _mgpProFileId
               _mgpGoalId
               (Just AltJSON)

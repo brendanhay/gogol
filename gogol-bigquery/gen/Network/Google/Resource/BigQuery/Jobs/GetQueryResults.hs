@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Jobs.GetQueryResults
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type JobsGetQueryResultsResource =
 -- | Retrieves the results of a query job.
 --
 -- /See:/ 'jobsGetQueryResults' smart constructor.
-data JobsGetQueryResults = JobsGetQueryResults
+data JobsGetQueryResults = JobsGetQueryResults'
     { _jgqrJobId      :: !Text
     , _jgqrTimeoutMs  :: !(Maybe (Textual Word32))
     , _jgqrPageToken  :: !(Maybe Text)
@@ -92,7 +92,7 @@ jobsGetQueryResults
     -> Text -- ^ 'jgqrProjectId'
     -> JobsGetQueryResults
 jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
-    JobsGetQueryResults
+    JobsGetQueryResults'
     { _jgqrJobId = pJgqrJobId_
     , _jgqrTimeoutMs = Nothing
     , _jgqrPageToken = Nothing
@@ -101,7 +101,7 @@ jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
     , _jgqrMaxResults = Nothing
     }
 
--- | Job ID of the query job
+-- | [Required] Job ID of the query job
 jgqrJobId :: Lens' JobsGetQueryResults Text
 jgqrJobId
   = lens _jgqrJobId (\ s a -> s{_jgqrJobId = a})
@@ -122,7 +122,7 @@ jgqrPageToken
   = lens _jgqrPageToken
       (\ s a -> s{_jgqrPageToken = a})
 
--- | Project ID of the query job
+-- | [Required] Project ID of the query job
 jgqrProjectId :: Lens' JobsGetQueryResults Text
 jgqrProjectId
   = lens _jgqrProjectId
@@ -144,7 +144,11 @@ jgqrMaxResults
 
 instance GoogleRequest JobsGetQueryResults where
         type Rs JobsGetQueryResults = GetQueryResultsResponse
-        requestClient JobsGetQueryResults{..}
+        type Scopes JobsGetQueryResults =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient JobsGetQueryResults'{..}
           = go _jgqrProjectId _jgqrJobId _jgqrTimeoutMs
               _jgqrPageToken
               _jgqrStartIndex

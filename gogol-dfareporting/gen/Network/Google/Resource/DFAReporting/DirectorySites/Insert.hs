@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.DirectorySites.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'DirectorySitesInsert' request conforms to.
 type DirectorySitesInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>
@@ -55,7 +55,7 @@ type DirectorySitesInsertResource =
 -- | Inserts a new directory site.
 --
 -- /See:/ 'directorySitesInsert' smart constructor.
-data DirectorySitesInsert = DirectorySitesInsert
+data DirectorySitesInsert = DirectorySitesInsert'
     { _dsiProFileId :: !(Textual Int64)
     , _dsiPayload   :: !DirectorySite
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ directorySitesInsert
     -> DirectorySite -- ^ 'dsiPayload'
     -> DirectorySitesInsert
 directorySitesInsert pDsiProFileId_ pDsiPayload_ =
-    DirectorySitesInsert
+    DirectorySitesInsert'
     { _dsiProFileId = _Coerce # pDsiProFileId_
     , _dsiPayload = pDsiPayload_
     }
@@ -90,7 +90,9 @@ dsiPayload
 
 instance GoogleRequest DirectorySitesInsert where
         type Rs DirectorySitesInsert = DirectorySite
-        requestClient DirectorySitesInsert{..}
+        type Scopes DirectorySitesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient DirectorySitesInsert'{..}
           = go _dsiProFileId (Just AltJSON) _dsiPayload
               dFAReportingService
           where go

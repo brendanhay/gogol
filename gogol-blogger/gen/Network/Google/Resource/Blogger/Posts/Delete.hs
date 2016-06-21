@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Posts.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type PostsDeleteResource =
 -- | Delete a post by ID.
 --
 -- /See:/ 'postsDelete' smart constructor.
-data PostsDelete = PostsDelete
+data PostsDelete = PostsDelete'
     { _pdBlogId :: !Text
     , _pdPostId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ postsDelete
     -> Text -- ^ 'pdPostId'
     -> PostsDelete
 postsDelete pPdBlogId_ pPdPostId_ =
-    PostsDelete
+    PostsDelete'
     { _pdBlogId = pPdBlogId_
     , _pdPostId = pPdPostId_
     }
@@ -86,7 +86,9 @@ pdPostId = lens _pdPostId (\ s a -> s{_pdPostId = a})
 
 instance GoogleRequest PostsDelete where
         type Rs PostsDelete = ()
-        requestClient PostsDelete{..}
+        type Scopes PostsDelete =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PostsDelete'{..}
           = go _pdBlogId _pdPostId (Just AltJSON)
               bloggerService
           where go

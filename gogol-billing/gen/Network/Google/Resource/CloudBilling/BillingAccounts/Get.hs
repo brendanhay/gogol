@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudBilling.BillingAccounts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -68,7 +68,7 @@ type BillingAccountsGetResource =
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
 -- /See:/ 'billingAccountsGet' smart constructor.
-data BillingAccountsGet = BillingAccountsGet
+data BillingAccountsGet = BillingAccountsGet'
     { _bagXgafv          :: !(Maybe Text)
     , _bagUploadProtocol :: !(Maybe Text)
     , _bagPp             :: !Bool
@@ -102,7 +102,7 @@ billingAccountsGet
     :: Text -- ^ 'bagName'
     -> BillingAccountsGet
 billingAccountsGet pBagName_ =
-    BillingAccountsGet
+    BillingAccountsGet'
     { _bagXgafv = Nothing
     , _bagUploadProtocol = Nothing
     , _bagPp = True
@@ -157,7 +157,9 @@ bagCallback
 
 instance GoogleRequest BillingAccountsGet where
         type Rs BillingAccountsGet = BillingAccount
-        requestClient BillingAccountsGet{..}
+        type Scopes BillingAccountsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient BillingAccountsGet'{..}
           = go _bagName _bagXgafv _bagUploadProtocol
               (Just _bagPp)
               _bagAccessToken

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.DoubleClickSearch.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,7 +20,7 @@ module Network.Google.DoubleClickSearch.Types
       doubleClickSearchService
 
     -- * OAuth Scopes
-    , doubleclicksearchScope
+    , doubleClickSearchScope
 
     -- * ReportRow
     , ReportRow
@@ -203,11 +204,11 @@ import           Network.Google.DoubleClickSearch.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the DoubleClick Search API. This contains the host and root path used as a starting point for constructing service requests.
-doubleClickSearchService :: Service
+doubleClickSearchService :: ServiceConfig
 doubleClickSearchService
   = defaultService (ServiceId "doubleclicksearch:v2")
       "www.googleapis.com"
 
 -- | View and manage your advertising data in DoubleClick Search
-doubleclicksearchScope :: OAuthScope
-doubleclicksearchScope = "https://www.googleapis.com/auth/doubleclicksearch";
+doubleClickSearchScope :: Proxy '["https://www.googleapis.com/auth/doubleclicksearch"]
+doubleClickSearchScope = Proxy;

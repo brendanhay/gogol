@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type TimelinePatchResource =
 -- | Updates a timeline item in place. This method supports patch semantics.
 --
 -- /See:/ 'timelinePatch' smart constructor.
-data TimelinePatch = TimelinePatch
+data TimelinePatch = TimelinePatch'
     { _tpPayload :: !TimelineItem
     , _tpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ timelinePatch
     -> Text -- ^ 'tpId'
     -> TimelinePatch
 timelinePatch pTpPayload_ pTpId_ =
-    TimelinePatch
+    TimelinePatch'
     { _tpPayload = pTpPayload_
     , _tpId = pTpId_
     }
@@ -87,7 +87,10 @@ tpId = lens _tpId (\ s a -> s{_tpId = a})
 
 instance GoogleRequest TimelinePatch where
         type Rs TimelinePatch = TimelineItem
-        requestClient TimelinePatch{..}
+        type Scopes TimelinePatch =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient TimelinePatch'{..}
           = go _tpId (Just AltJSON) _tpPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy TimelinePatchResource)

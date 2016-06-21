@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -68,7 +68,7 @@ type ProjectsTopicsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsTopicsSetIAMPolicy' smart constructor.
-data ProjectsTopicsSetIAMPolicy = ProjectsTopicsSetIAMPolicy
+data ProjectsTopicsSetIAMPolicy = ProjectsTopicsSetIAMPolicy'
     { _ptsipXgafv          :: !(Maybe Text)
     , _ptsipUploadProtocol :: !(Maybe Text)
     , _ptsipPp             :: !Bool
@@ -106,7 +106,7 @@ projectsTopicsSetIAMPolicy
     -> Text -- ^ 'ptsipResource'
     -> ProjectsTopicsSetIAMPolicy
 projectsTopicsSetIAMPolicy pPtsipPayload_ pPtsipResource_ =
-    ProjectsTopicsSetIAMPolicy
+    ProjectsTopicsSetIAMPolicy'
     { _ptsipXgafv = Nothing
     , _ptsipUploadProtocol = Nothing
     , _ptsipPp = True
@@ -156,9 +156,11 @@ ptsipBearerToken
   = lens _ptsipBearerToken
       (\ s a -> s{_ptsipBearerToken = a})
 
--- | REQUIRED: The resource for which policy is being specified. \`resource\`
--- is usually specified as a path, such as,
--- \`projects\/{project}\/zones\/{zone}\/disks\/{disk}\`.
+-- | REQUIRED: The resource for which the policy is being specified.
+-- \`resource\` is usually specified as a path, such as
+-- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
+-- the path specified in this value is resource specific and is specified
+-- in the \`setIamPolicy\` documentation.
 ptsipResource :: Lens' ProjectsTopicsSetIAMPolicy Text
 ptsipResource
   = lens _ptsipResource
@@ -173,7 +175,10 @@ ptsipCallback
 instance GoogleRequest ProjectsTopicsSetIAMPolicy
          where
         type Rs ProjectsTopicsSetIAMPolicy = Policy
-        requestClient ProjectsTopicsSetIAMPolicy{..}
+        type Scopes ProjectsTopicsSetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsTopicsSetIAMPolicy'{..}
           = go _ptsipResource _ptsipXgafv _ptsipUploadProtocol
               (Just _ptsipPp)
               _ptsipAccessToken

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Search.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -164,7 +164,7 @@ type SearchListResource =
 -- configure queries to only retrieve a specific type of resource.
 --
 -- /See:/ 'searchList' smart constructor.
-data SearchList = SearchList
+data SearchList = SearchList'
     { _slPublishedAfter         :: !(Maybe DateTime')
     , _slVideoDefinition        :: !(Maybe SearchListVideoDefinition)
     , _slPart                   :: !Text
@@ -267,7 +267,7 @@ searchList
     :: Text -- ^ 'slPart'
     -> SearchList
 searchList pSlPart_ =
-    SearchList
+    SearchList'
     { _slPublishedAfter = Nothing
     , _slVideoDefinition = Nothing
     , _slPart = pSlPart_
@@ -573,7 +573,12 @@ slVideoDimension
 
 instance GoogleRequest SearchList where
         type Rs SearchList = SearchListResponse
-        requestClient SearchList{..}
+        type Scopes SearchList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient SearchList'{..}
           = go (Just _slPart) _slPublishedAfter
               _slVideoDefinition
               _slVideoDuration

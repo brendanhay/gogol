@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Devices.SetState
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -26,7 +26,7 @@
 -- Otherwise, the device state is ignored and all devices are allowed
 -- access to Google services.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.devices.setState@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.devices.setState@.
 module Network.Google.Resource.AndroidEnterprise.Devices.SetState
     (
     -- * REST Resource
@@ -69,7 +69,7 @@ type DevicesSetStateResource =
 -- access to Google services.
 --
 -- /See:/ 'devicesSetState' smart constructor.
-data DevicesSetState = DevicesSetState
+data DevicesSetState = DevicesSetState'
     { _dssEnterpriseId :: !Text
     , _dssPayload      :: !DeviceState
     , _dssUserId       :: !Text
@@ -94,7 +94,7 @@ devicesSetState
     -> Text -- ^ 'dssDeviceId'
     -> DevicesSetState
 devicesSetState pDssEnterpriseId_ pDssPayload_ pDssUserId_ pDssDeviceId_ =
-    DevicesSetState
+    DevicesSetState'
     { _dssEnterpriseId = pDssEnterpriseId_
     , _dssPayload = pDssPayload_
     , _dssUserId = pDssUserId_
@@ -124,7 +124,9 @@ dssDeviceId
 
 instance GoogleRequest DevicesSetState where
         type Rs DevicesSetState = DeviceState
-        requestClient DevicesSetState{..}
+        type Scopes DevicesSetState =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient DevicesSetState'{..}
           = go _dssEnterpriseId _dssUserId _dssDeviceId
               (Just AltJSON)
               _dssPayload

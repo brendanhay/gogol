@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Language.Languages.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type LanguagesListResource =
 -- | List the source\/target languages supported by the API
 --
 -- /See:/ 'languagesList' smart constructor.
-newtype LanguagesList = LanguagesList
+newtype LanguagesList = LanguagesList'
     { _llTarget :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ newtype LanguagesList = LanguagesList
 languagesList
     :: LanguagesList
 languagesList =
-    LanguagesList
+    LanguagesList'
     { _llTarget = Nothing
     }
 
@@ -76,7 +76,8 @@ llTarget = lens _llTarget (\ s a -> s{_llTarget = a})
 
 instance GoogleRequest LanguagesList where
         type Rs LanguagesList = LanguagesListResponse
-        requestClient LanguagesList{..}
+        type Scopes LanguagesList = '[]
+        requestClient LanguagesList'{..}
           = go _llTarget (Just AltJSON) translateService
           where go
                   = buildClient (Proxy :: Proxy LanguagesListResource)

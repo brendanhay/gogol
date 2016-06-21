@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GAN.CcOffers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type CcOffersListResource =
 -- | Retrieves credit card offers for the given publisher.
 --
 -- /See:/ 'ccOffersList' smart constructor.
-data CcOffersList = CcOffersList
+data CcOffersList = CcOffersList'
     { _colAdvertiser :: !(Maybe [Text])
     , _colProjection :: !(Maybe CcOffersListProjection)
     , _colPublisher  :: !Text
@@ -75,7 +75,7 @@ ccOffersList
     :: Text -- ^ 'colPublisher'
     -> CcOffersList
 ccOffersList pColPublisher_ =
-    CcOffersList
+    CcOffersList'
     { _colAdvertiser = Nothing
     , _colProjection = Nothing
     , _colPublisher = pColPublisher_
@@ -103,7 +103,8 @@ colPublisher
 
 instance GoogleRequest CcOffersList where
         type Rs CcOffersList = CcOffers
-        requestClient CcOffersList{..}
+        type Scopes CcOffersList = '[]
+        requestClient CcOffersList'{..}
           = go _colPublisher (_colAdvertiser ^. _Default)
               _colProjection
               (Just AltJSON)

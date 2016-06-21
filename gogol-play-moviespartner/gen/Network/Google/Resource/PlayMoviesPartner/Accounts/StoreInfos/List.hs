@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -42,6 +42,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
     , asilUploadProtocol
     , asilPp
     , asilAccessToken
+    , asilSeasonIds
+    , asilMids
     , asilUploadType
     , asilCountries
     , asilVideoId
@@ -70,23 +72,27 @@ type AccountsStoreInfosListResource =
                      QueryParam "upload_protocol" Text :>
                        QueryParam "pp" Bool :>
                          QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParams "countries" Text :>
-                               QueryParam "videoId" Text :>
-                                 QueryParam "bearer_token" Text :>
-                                   QueryParam "name" Text :>
-                                     QueryParam "pageToken" Text :>
-                                       QueryParam "pageSize" (Textual Int32) :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] ListStoreInfosResponse
+                           QueryParams "seasonIds" Text :>
+                             QueryParams "mids" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParams "countries" Text :>
+                                   QueryParam "videoId" Text :>
+                                     QueryParam "bearer_token" Text :>
+                                       QueryParam "name" Text :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "pageSize" (Textual Int32)
+                                             :>
+                                             QueryParam "callback" Text :>
+                                               QueryParam "alt" AltJSON :>
+                                                 Get '[JSON]
+                                                   ListStoreInfosResponse
 
 -- | List StoreInfos owned or managed by the partner. See _Authentication and
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
 -- /See:/ 'accountsStoreInfosList' smart constructor.
-data AccountsStoreInfosList = AccountsStoreInfosList
+data AccountsStoreInfosList = AccountsStoreInfosList'
     { _asilPphNames       :: !(Maybe [Text])
     , _asilXgafv          :: !(Maybe Text)
     , _asilStudioNames    :: !(Maybe [Text])
@@ -94,6 +100,8 @@ data AccountsStoreInfosList = AccountsStoreInfosList
     , _asilUploadProtocol :: !(Maybe Text)
     , _asilPp             :: !Bool
     , _asilAccessToken    :: !(Maybe Text)
+    , _asilSeasonIds      :: !(Maybe [Text])
+    , _asilMids           :: !(Maybe [Text])
     , _asilUploadType     :: !(Maybe Text)
     , _asilCountries      :: !(Maybe [Text])
     , _asilVideoId        :: !(Maybe Text)
@@ -123,6 +131,10 @@ data AccountsStoreInfosList = AccountsStoreInfosList
 --
 -- * 'asilAccessToken'
 --
+-- * 'asilSeasonIds'
+--
+-- * 'asilMids'
+--
 -- * 'asilUploadType'
 --
 -- * 'asilCountries'
@@ -144,7 +156,7 @@ accountsStoreInfosList
     :: Text -- ^ 'asilAccountId'
     -> AccountsStoreInfosList
 accountsStoreInfosList pAsilAccountId_ =
-    AccountsStoreInfosList
+    AccountsStoreInfosList'
     { _asilPphNames = Nothing
     , _asilXgafv = Nothing
     , _asilStudioNames = Nothing
@@ -152,6 +164,8 @@ accountsStoreInfosList pAsilAccountId_ =
     , _asilUploadProtocol = Nothing
     , _asilPp = True
     , _asilAccessToken = Nothing
+    , _asilSeasonIds = Nothing
+    , _asilMids = Nothing
     , _asilUploadType = Nothing
     , _asilCountries = Nothing
     , _asilVideoId = Nothing
@@ -206,6 +220,21 @@ asilAccessToken
   = lens _asilAccessToken
       (\ s a -> s{_asilAccessToken = a})
 
+-- | Filter StoreInfos that match any of the given \`season_id\`s.
+asilSeasonIds :: Lens' AccountsStoreInfosList [Text]
+asilSeasonIds
+  = lens _asilSeasonIds
+      (\ s a -> s{_asilSeasonIds = a})
+      . _Default
+      . _Coerce
+
+-- | Filter StoreInfos that match any of the given \`mid\`s.
+asilMids :: Lens' AccountsStoreInfosList [Text]
+asilMids
+  = lens _asilMids (\ s a -> s{_asilMids = a}) .
+      _Default
+      . _Coerce
+
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 asilUploadType :: Lens' AccountsStoreInfosList (Maybe Text)
 asilUploadType
@@ -241,8 +270,8 @@ asilBearerToken
   = lens _asilBearerToken
       (\ s a -> s{_asilBearerToken = a})
 
--- | Filter StoreInfos that match a case-insensitive substring of the default
--- name.
+-- | Filter that matches StoreInfos with a \`name\` or \`show_name\` that
+-- contains the given case-insensitive name.
 asilName :: Lens' AccountsStoreInfosList (Maybe Text)
 asilName = lens _asilName (\ s a -> s{_asilName = a})
 
@@ -266,7 +295,9 @@ asilCallback
 instance GoogleRequest AccountsStoreInfosList where
         type Rs AccountsStoreInfosList =
              ListStoreInfosResponse
-        requestClient AccountsStoreInfosList{..}
+        type Scopes AccountsStoreInfosList =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+        requestClient AccountsStoreInfosList'{..}
           = go _asilAccountId (_asilPphNames ^. _Default)
               _asilXgafv
               (_asilStudioNames ^. _Default)
@@ -274,6 +305,8 @@ instance GoogleRequest AccountsStoreInfosList where
               _asilUploadProtocol
               (Just _asilPp)
               _asilAccessToken
+              (_asilSeasonIds ^. _Default)
+              (_asilMids ^. _Default)
               _asilUploadType
               (_asilCountries ^. _Default)
               _asilVideoId

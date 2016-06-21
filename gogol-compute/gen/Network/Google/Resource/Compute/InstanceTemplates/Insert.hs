@@ -14,14 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceTemplates.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates an instance template in the specified project using the data
--- that is included in the request.
+-- that is included in the request. If you are creating a new template to
+-- update an existing instance group, your new instance template must use
+-- the same network or, if applicable, the same subnetwork as the original
+-- template.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.insert@.
 module Network.Google.Resource.Compute.InstanceTemplates.Insert
@@ -55,10 +58,13 @@ type InstanceTemplatesInsertResource =
                      Post '[JSON] Operation
 
 -- | Creates an instance template in the specified project using the data
--- that is included in the request.
+-- that is included in the request. If you are creating a new template to
+-- update an existing instance group, your new instance template must use
+-- the same network or, if applicable, the same subnetwork as the original
+-- template.
 --
 -- /See:/ 'instanceTemplatesInsert' smart constructor.
-data InstanceTemplatesInsert = InstanceTemplatesInsert
+data InstanceTemplatesInsert = InstanceTemplatesInsert'
     { _itiProject :: !Text
     , _itiPayload :: !InstanceTemplate
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,12 +81,12 @@ instanceTemplatesInsert
     -> InstanceTemplate -- ^ 'itiPayload'
     -> InstanceTemplatesInsert
 instanceTemplatesInsert pItiProject_ pItiPayload_ =
-    InstanceTemplatesInsert
+    InstanceTemplatesInsert'
     { _itiProject = pItiProject_
     , _itiPayload = pItiPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 itiProject :: Lens' InstanceTemplatesInsert Text
 itiProject
   = lens _itiProject (\ s a -> s{_itiProject = a})
@@ -92,7 +98,10 @@ itiPayload
 
 instance GoogleRequest InstanceTemplatesInsert where
         type Rs InstanceTemplatesInsert = Operation
-        requestClient InstanceTemplatesInsert{..}
+        type Scopes InstanceTemplatesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceTemplatesInsert'{..}
           = go _itiProject (Just AltJSON) _itiPayload
               computeService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type UsersInsertResource =
 -- | create user.
 --
 -- /See:/ 'usersInsert' smart constructor.
-newtype UsersInsert = UsersInsert
+newtype UsersInsert = UsersInsert'
     { _uiPayload :: User
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ usersInsert
     :: User -- ^ 'uiPayload'
     -> UsersInsert
 usersInsert pUiPayload_ =
-    UsersInsert
+    UsersInsert'
     { _uiPayload = pUiPayload_
     }
 
@@ -76,7 +76,9 @@ uiPayload
 
 instance GoogleRequest UsersInsert where
         type Rs UsersInsert = User
-        requestClient UsersInsert{..}
+        type Scopes UsersInsert =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
+        requestClient UsersInsert'{..}
           = go (Just AltJSON) _uiPayload directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersInsertResource)

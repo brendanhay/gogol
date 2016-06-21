@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Campaigns.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CampaignsUpdate' request conforms to.
 type CampaignsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -54,7 +54,7 @@ type CampaignsUpdateResource =
 -- | Updates an existing campaign.
 --
 -- /See:/ 'campaignsUpdate' smart constructor.
-data CampaignsUpdate = CampaignsUpdate
+data CampaignsUpdate = CampaignsUpdate'
     { _cuProFileId :: !(Textual Int64)
     , _cuPayload   :: !Campaign
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ campaignsUpdate
     -> Campaign -- ^ 'cuPayload'
     -> CampaignsUpdate
 campaignsUpdate pCuProFileId_ pCuPayload_ =
-    CampaignsUpdate
+    CampaignsUpdate'
     { _cuProFileId = _Coerce # pCuProFileId_
     , _cuPayload = pCuPayload_
     }
@@ -89,7 +89,9 @@ cuPayload
 
 instance GoogleRequest CampaignsUpdate where
         type Rs CampaignsUpdate = Campaign
-        requestClient CampaignsUpdate{..}
+        type Scopes CampaignsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CampaignsUpdate'{..}
           = go _cuProFileId (Just AltJSON) _cuPayload
               dFAReportingService
           where go

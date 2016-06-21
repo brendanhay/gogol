@@ -7,19 +7,30 @@
 
 -- |
 -- Module      : Network.Google.Drive
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The API to interact with Drive.
+-- Manages files in Drive including uploading, downloading, searching,
+-- detecting changes, and updating sharing permissions.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference>
 module Network.Google.Drive
     (
     -- * Service Configuration
       driveService
+
+    -- * OAuth Scopes
+    , driveMetadataReadOnlyScope
+    , drivePhotosReadOnlyScope
+    , driveAppDataScope
+    , driveReadOnlyScope
+    , driveScope
+    , driveFileScope
+    , driveMetadataScope
+    , driveScriptsScope
 
     -- * API Declaration
     , DriveAPI
@@ -29,14 +40,8 @@ module Network.Google.Drive
     -- ** drive.about.get
     , module Network.Google.Resource.Drive.About.Get
 
-    -- ** drive.apps.get
-    , module Network.Google.Resource.Drive.Apps.Get
-
-    -- ** drive.apps.list
-    , module Network.Google.Resource.Drive.Apps.List
-
-    -- ** drive.changes.get
-    , module Network.Google.Resource.Drive.Changes.Get
+    -- ** drive.changes.getStartPageToken
+    , module Network.Google.Resource.Drive.Changes.GetStartPageToken
 
     -- ** drive.changes.list
     , module Network.Google.Resource.Drive.Changes.List
@@ -47,17 +52,8 @@ module Network.Google.Drive
     -- ** drive.channels.stop
     , module Network.Google.Resource.Drive.Channels.Stop
 
-    -- ** drive.children.delete
-    , module Network.Google.Resource.Drive.Children.Delete
-
-    -- ** drive.children.get
-    , module Network.Google.Resource.Drive.Children.Get
-
-    -- ** drive.children.insert
-    , module Network.Google.Resource.Drive.Children.Insert
-
-    -- ** drive.children.list
-    , module Network.Google.Resource.Drive.Children.List
+    -- ** drive.comments.create
+    , module Network.Google.Resource.Drive.Comments.Create
 
     -- ** drive.comments.delete
     , module Network.Google.Resource.Drive.Comments.Delete
@@ -65,14 +61,8 @@ module Network.Google.Drive
     -- ** drive.comments.get
     , module Network.Google.Resource.Drive.Comments.Get
 
-    -- ** drive.comments.insert
-    , module Network.Google.Resource.Drive.Comments.Insert
-
     -- ** drive.comments.list
     , module Network.Google.Resource.Drive.Comments.List
-
-    -- ** drive.comments.patch
-    , module Network.Google.Resource.Drive.Comments.Patch
 
     -- ** drive.comments.update
     , module Network.Google.Resource.Drive.Comments.Update
@@ -80,11 +70,17 @@ module Network.Google.Drive
     -- ** drive.files.copy
     , module Network.Google.Resource.Drive.Files.Copy
 
+    -- ** drive.files.create
+    , module Network.Google.Resource.Drive.Files.Create
+
     -- ** drive.files.delete
     , module Network.Google.Resource.Drive.Files.Delete
 
     -- ** drive.files.emptyTrash
     , module Network.Google.Resource.Drive.Files.EmptyTrash
+
+    -- ** drive.files.export
+    , module Network.Google.Resource.Drive.Files.Export
 
     -- ** drive.files.generateIds
     , module Network.Google.Resource.Drive.Files.GenerateIds
@@ -92,23 +88,8 @@ module Network.Google.Drive
     -- ** drive.files.get
     , module Network.Google.Resource.Drive.Files.Get
 
-    -- ** drive.files.insert
-    , module Network.Google.Resource.Drive.Files.Insert
-
     -- ** drive.files.list
     , module Network.Google.Resource.Drive.Files.List
-
-    -- ** drive.files.patch
-    , module Network.Google.Resource.Drive.Files.Patch
-
-    -- ** drive.files.touch
-    , module Network.Google.Resource.Drive.Files.Touch
-
-    -- ** drive.files.trash
-    , module Network.Google.Resource.Drive.Files.Trash
-
-    -- ** drive.files.untrash
-    , module Network.Google.Resource.Drive.Files.Untrash
 
     -- ** drive.files.update
     , module Network.Google.Resource.Drive.Files.Update
@@ -116,17 +97,8 @@ module Network.Google.Drive
     -- ** drive.files.watch
     , module Network.Google.Resource.Drive.Files.Watch
 
-    -- ** drive.parents.delete
-    , module Network.Google.Resource.Drive.Parents.Delete
-
-    -- ** drive.parents.get
-    , module Network.Google.Resource.Drive.Parents.Get
-
-    -- ** drive.parents.insert
-    , module Network.Google.Resource.Drive.Parents.Insert
-
-    -- ** drive.parents.list
-    , module Network.Google.Resource.Drive.Parents.List
+    -- ** drive.permissions.create
+    , module Network.Google.Resource.Drive.Permissions.Create
 
     -- ** drive.permissions.delete
     , module Network.Google.Resource.Drive.Permissions.Delete
@@ -134,44 +106,14 @@ module Network.Google.Drive
     -- ** drive.permissions.get
     , module Network.Google.Resource.Drive.Permissions.Get
 
-    -- ** drive.permissions.getIdForEmail
-    , module Network.Google.Resource.Drive.Permissions.GetIdForEmail
-
-    -- ** drive.permissions.insert
-    , module Network.Google.Resource.Drive.Permissions.Insert
-
     -- ** drive.permissions.list
     , module Network.Google.Resource.Drive.Permissions.List
-
-    -- ** drive.permissions.patch
-    , module Network.Google.Resource.Drive.Permissions.Patch
 
     -- ** drive.permissions.update
     , module Network.Google.Resource.Drive.Permissions.Update
 
-    -- ** drive.properties.delete
-    , module Network.Google.Resource.Drive.Properties.Delete
-
-    -- ** drive.properties.get
-    , module Network.Google.Resource.Drive.Properties.Get
-
-    -- ** drive.properties.insert
-    , module Network.Google.Resource.Drive.Properties.Insert
-
-    -- ** drive.properties.list
-    , module Network.Google.Resource.Drive.Properties.List
-
-    -- ** drive.properties.patch
-    , module Network.Google.Resource.Drive.Properties.Patch
-
-    -- ** drive.properties.update
-    , module Network.Google.Resource.Drive.Properties.Update
-
-    -- ** drive.realtime.get
-    , module Network.Google.Resource.Drive.Realtime.Get
-
-    -- ** drive.realtime.update
-    , module Network.Google.Resource.Drive.Realtime.Update
+    -- ** drive.replies.create
+    , module Network.Google.Resource.Drive.Replies.Create
 
     -- ** drive.replies.delete
     , module Network.Google.Resource.Drive.Replies.Delete
@@ -179,14 +121,8 @@ module Network.Google.Drive
     -- ** drive.replies.get
     , module Network.Google.Resource.Drive.Replies.Get
 
-    -- ** drive.replies.insert
-    , module Network.Google.Resource.Drive.Replies.Insert
-
     -- ** drive.replies.list
     , module Network.Google.Resource.Drive.Replies.List
-
-    -- ** drive.replies.patch
-    , module Network.Google.Resource.Drive.Replies.Patch
 
     -- ** drive.replies.update
     , module Network.Google.Resource.Drive.Replies.Update
@@ -200,116 +136,74 @@ module Network.Google.Drive
     -- ** drive.revisions.list
     , module Network.Google.Resource.Drive.Revisions.List
 
-    -- ** drive.revisions.patch
-    , module Network.Google.Resource.Drive.Revisions.Patch
-
     -- ** drive.revisions.update
     , module Network.Google.Resource.Drive.Revisions.Update
 
     -- * Types
 
-    -- ** CommentContext
-    , CommentContext
-    , commentContext
-    , ccValue
-    , ccType
-
-    -- ** AppIconsItem
-    , AppIconsItem
-    , appIconsItem
-    , aiiSize
-    , aiiCategory
-    , aiiIconURL
-
-    -- ** FilesInsertVisibility
-    , FilesInsertVisibility (..)
-
     -- ** FileList
     , FileList
     , fileList
-    , flEtag
     , flNextPageToken
-    , flNextLink
     , flKind
-    , flItems
-    , flSelfLink
-
-    -- ** ParentReference
-    , ParentReference
-    , parentReference
-    , prParentLink
-    , prIsRoot
-    , prKind
-    , prSelfLink
-    , prId
-
-    -- ** Property
-    , Property
-    , property
-    , pEtag
-    , pKind
-    , pValue
-    , pVisibility
-    , pSelfLink
-    , pKey
+    , flFiles
 
     -- ** FilesListCorpus
     , FilesListCorpus (..)
 
-    -- ** FileThumbnail
-    , FileThumbnail
-    , fileThumbnail
-    , ftImage
-    , ftMimeType
+    -- ** CommentQuotedFileContent
+    , CommentQuotedFileContent
+    , commentQuotedFileContent
+    , cqfcValue
+    , cqfcMimeType
 
-    -- ** FilesListProjection
-    , FilesListProjection (..)
+    -- ** AboutStorageQuota
+    , AboutStorageQuota
+    , aboutStorageQuota
+    , asqUsageInDriveTrash
+    , asqLimit
+    , asqUsage
+    , asqUsageInDrive
 
-    -- ** UserPicture
-    , UserPicture
-    , userPicture
-    , upURL
+    -- ** Reply
+    , Reply
+    , reply
+    , rHTMLContent
+    , rModifiedTime
+    , rCreatedTime
+    , rKind
+    , rAction
+    , rContent
+    , rAuthor
+    , rId
+    , rDeleted
 
-    -- ** FilesUpdateModifiedDateBehavior
-    , FilesUpdateModifiedDateBehavior (..)
+    -- ** AboutImportFormats
+    , AboutImportFormats
+    , aboutImportFormats
+    , aifAddtional
 
-    -- ** PropertyList
-    , PropertyList
-    , propertyList
-    , plEtag
-    , plKind
-    , plItems
-    , plSelfLink
+    -- ** FileCapabilities
+    , FileCapabilities
+    , fileCapabilities
+    , fcCanComment
+    , fcCanEdit
+    , fcCanReadRevisions
+    , fcCanCopy
+    , fcCanShare
 
-    -- ** ChildList
-    , ChildList
-    , childList
-    , clEtag
-    , clNextPageToken
-    , clNextLink
-    , clKind
-    , clItems
-    , clSelfLink
+    -- ** ReplyList
+    , ReplyList
+    , replyList
+    , rlNextPageToken
+    , rlKind
+    , rlReplies
 
-    -- ** AppList
-    , AppList
-    , appList
-    , alDefaultAppIds
-    , alEtag
-    , alKind
-    , alItems
-    , alSelfLink
-
-    -- ** FileOpenWithLinks
-    , FileOpenWithLinks
-    , fileOpenWithLinks
-    , fowlAddtional
-
-    -- ** AboutAdditionalRoleInfoItemRoleSetsItem
-    , AboutAdditionalRoleInfoItemRoleSetsItem
-    , aboutAdditionalRoleInfoItemRoleSetsItem
-    , aariirsiPrimaryRole
-    , aariirsiAdditionalRoles
+    -- ** FileContentHintsThumbnail
+    , FileContentHintsThumbnail
+    , fileContentHintsThumbnail
+    , fchtImage
+    , fchtMimeType
 
     -- ** Channel
     , Channel
@@ -325,15 +219,6 @@ module Network.Google.Drive
     , cId
     , cType
 
-    -- ** CommentReplyList
-    , CommentReplyList
-    , commentReplyList
-    , crlNextPageToken
-    , crlNextLink
-    , crlKind
-    , crlItems
-    , crlSelfLink
-
     -- ** FileVideoMediaMetadata
     , FileVideoMediaMetadata
     , fileVideoMediaMetadata
@@ -341,159 +226,76 @@ module Network.Google.Drive
     , fvmmWidth
     , fvmmDurationMillis
 
+    -- ** FileAppProperties
+    , FileAppProperties
+    , fileAppProperties
+    , fapAddtional
+
     -- ** Change
     , Change
     , change
+    , chaRemoved
+    , chaTime
     , chaKind
-    , chaSelfLink
-    , chaModificationDate
-    , chaId
-    , chaDeleted
     , chaFileId
     , chaFile
 
-    -- ** App
-    , App
-    , app
-    , aLongDescription
-    , aOpenURLTemplate
-    , aAuthorized
-    , aObjectType
-    , aSecondaryMimeTypes
-    , aCreateInFolderTemplate
-    , aKind
-    , aIcons
-    , aProductURL
-    , aUseByDefault
-    , aShortDescription
-    , aName
-    , aCreateURL
-    , aId
-    , aPrimaryFileExtensions
-    , aInstalled
-    , aSupportsCreate
-    , aPrimaryMimeTypes
-    , aHasDriveWideScope
-    , aProductId
-    , aSecondaryFileExtensions
-    , aSupportsMultiOpen
-    , aSupportsImport
-    , aSupportsOfflineCreate
-
-    -- ** ChildReference
-    , ChildReference
-    , childReference
-    , crChildLink
-    , crKind
-    , crSelfLink
-    , crId
-
-    -- ** FilesWatchProjection
-    , FilesWatchProjection (..)
-
-    -- ** AboutMaxUploadSizesItem
-    , AboutMaxUploadSizesItem
-    , aboutMaxUploadSizesItem
-    , amusiSize
-    , amusiType
-
-    -- ** CommentReply
-    , CommentReply
-    , commentReply
-    , comHTMLContent
-    , comKind
-    , comContent
-    , comCreatedDate
-    , comReplyId
-    , comAuthor
-    , comModifiedDate
-    , comDeleted
-    , comVerb
-
-    -- ** AboutQuotaBytesByServiceItem
-    , AboutQuotaBytesByServiceItem
-    , aboutQuotaBytesByServiceItem
-    , aqbbsiBytesUsed
-    , aqbbsiServiceName
+    -- ** AboutExportFormats
+    , AboutExportFormats
+    , aboutExportFormats
+    , aefAddtional
 
     -- ** User
     , User
     , user
-    , uIsAuthenticatedUser
+    , uPhotoLink
+    , uMe
     , uKind
-    , uPicture
     , uEmailAddress
     , uDisplayName
     , uPermissionId
 
-    -- ** AboutExportFormatsItem
-    , AboutExportFormatsItem
-    , aboutExportFormatsItem
-    , aefiTargets
-    , aefiSource
-
     -- ** ChangeList
     , ChangeList
     , changeList
-    , cllEtag
-    , cllNextPageToken
-    , cllNextLink
-    , cllKind
-    , cllItems
-    , cllSelfLink
-    , cllLargestChangeId
+    , clNewStartPageToken
+    , clNextPageToken
+    , clChanges
+    , clKind
 
-    -- ** RevisionExportLinks
-    , RevisionExportLinks
-    , revisionExportLinks
-    , relAddtional
-
-    -- ** FileIndexableText
-    , FileIndexableText
-    , fileIndexableText
-    , fitText
-
-    -- ** AboutFeaturesItem
-    , AboutFeaturesItem
-    , aboutFeaturesItem
-    , afiFeatureRate
-    , afiFeatureName
+    -- ** FileContentHints
+    , FileContentHints
+    , fileContentHints
+    , fchThumbnail
+    , fchIndexableText
 
     -- ** ChannelParams
     , ChannelParams
     , channelParams
     , cpAddtional
 
-    -- ** FilesPatchModifiedDateBehavior
-    , FilesPatchModifiedDateBehavior (..)
+    -- ** FileProperties
+    , FileProperties
+    , fileProperties
+    , fpAddtional
+
+    -- ** AboutMaxImportSizes
+    , AboutMaxImportSizes
+    , aboutMaxImportSizes
+    , amisAddtional
 
     -- ** About
     , About
     , about
-    , aboExportFormats
-    , aboRemainingChangeIds
-    , aboLanguageCode
-    , aboEtag
-    , aboImportFormats
-    , aboKind
-    , aboDomainSharingPolicy
-    , aboQuotaBytesUsedInTrash
-    , aboQuotaType
-    , aboMaxUploadSizes
-    , aboUser
-    , aboSelfLink
-    , aboName
-    , aboFeatures
-    , aboIsCurrentAppInstalled
-    , aboQuotaBytesTotal
-    , aboRootFolderId
-    , aboQuotaBytesUsed
-    , aboAdditionalRoleInfo
-    , aboFolderColorPalette
-    , aboPermissionId
-    , aboQuotaBytesUsedAggregate
-    , aboQuotaBytesByService
-    , aboLargestChangeId
+    , aExportFormats
+    , aMaxImportSizes
+    , aImportFormats
+    , aKind
+    , aAppInstalled
+    , aUser
+    , aStorageQuota
+    , aMaxUploadSize
+    , aFolderColorPalette
 
     -- ** FileImageMediaMetadataLocation
     , FileImageMediaMetadataLocation
@@ -502,11 +304,11 @@ module Network.Google.Drive
     , fimmlAltitude
     , fimmlLongitude
 
-    -- ** AboutImportFormatsItem
-    , AboutImportFormatsItem
-    , aboutImportFormatsItem
-    , aifiTargets
-    , aifiSource
+    -- ** StartPageToken
+    , StartPageToken
+    , startPageToken
+    , sptKind
+    , sptStartPageToken
 
     -- ** FileImageMediaMetadata
     , FileImageMediaMetadata
@@ -516,6 +318,7 @@ module Network.Google.Drive
     , fimmSubjectDistance
     , fimmMaxApertureValue
     , fimmIsoSpeed
+    , fimmTime
     , fimmLocation
     , fimmAperture
     , fimmFocalLength
@@ -524,7 +327,6 @@ module Network.Google.Drive
     , fimmExposureTime
     , fimmCameraModel
     , fimmWhiteBalance
-    , fimmDate
     , fimmLens
     , fimmFlashUsed
     , fimmExposureBias
@@ -533,79 +335,50 @@ module Network.Google.Drive
     , fimmSensor
     , fimmColorSpace
 
-    -- ** FileLabels
-    , FileLabels
-    , fileLabels
-    , flViewed
-    , flTrashed
-    , flStarred
-    , flHidden
-    , flRestricted
-
     -- ** Comment
     , Comment
     , comment
-    , ccStatus
-    , ccHTMLContent
-    , ccContext
-    , ccKind
-    , ccFileTitle
-    , ccAnchor
-    , ccContent
-    , ccReplies
-    , ccCreatedDate
-    , ccSelfLink
-    , ccAuthor
-    , ccModifiedDate
-    , ccDeleted
-    , ccFileId
-    , ccCommentId
+    , comHTMLContent
+    , comModifiedTime
+    , comCreatedTime
+    , comKind
+    , comResolved
+    , comQuotedFileContent
+    , comAnchor
+    , comContent
+    , comReplies
+    , comAuthor
+    , comId
+    , comDeleted
 
     -- ** Revision
     , Revision
     , revision
-    , rEtag
-    , rOriginalFilename
-    , rKind
-    , rPublishedLink
-    , rPinned
-    , rPublished
-    , rLastModifyingUser
-    , rFileSize
-    , rPublishAuto
-    , rMD5Checksum
-    , rMimeType
-    , rSelfLink
-    , rLastModifyingUserName
-    , rDownloadURL
-    , rExportLinks
-    , rPublishedOutsideDomain
-    , rId
-    , rModifiedDate
-
-    -- ** AboutAdditionalRoleInfoItem
-    , AboutAdditionalRoleInfoItem
-    , aboutAdditionalRoleInfoItem
-    , aariiRoleSets
-    , aariiType
+    , revModifiedTime
+    , revSize
+    , revOriginalFilename
+    , revKind
+    , revPublished
+    , revLastModifyingUser
+    , revPublishAuto
+    , revMD5Checksum
+    , revKeepForever
+    , revMimeType
+    , revPublishedOutsideDomain
+    , revId
 
     -- ** Permission
     , Permission
     , permission
-    , perPhotoLink
-    , perEtag
-    , perWithLink
-    , perKind
-    , perDomain
-    , perValue
-    , perAdditionalRoles
-    , perRole
-    , perSelfLink
-    , perName
-    , perAuthKey
-    , perEmailAddress
-    , perId
-    , perType
+    , pPhotoLink
+    , pKind
+    , pDomain
+    , pRole
+    , pEmailAddress
+    , pAllowFileDiscovery
+    , pDisplayName
+    , pId
+    , pType
 
     -- ** File
     , File
@@ -613,79 +386,47 @@ module Network.Google.Drive
     , fOwnedByMe
     , fThumbnailLink
     , fFullFileExtension
-    , fThumbnail
-    , fMarkedViewedByMeDate
-    , fEtag
+    , fModifiedTime
+    , fModifiedByMeTime
     , fFileExtension
-    , fCanComment
+    , fViewedByMe
     , fOwners
-    , fOwnerNames
-    , fOpenWithLinks
+    , fViewedByMeTime
+    , fSize
+    , fTrashed
     , fWebViewLink
+    , fCreatedTime
     , fOriginalFilename
     , fKind
     , fLastModifyingUser
     , fIconLink
-    , fEmbedLink
-    , fFileSize
-    , fAppDataContents
     , fImageMediaMetadata
     , fExplicitlyTrashed
-    , fEditable
-    , fModifiedByMeDate
-    , fLastViewedByMeDate
     , fShared
     , fMD5Checksum
     , fFolderColorRgb
     , fMimeType
-    , fCreatedDate
-    , fSelfLink
-    , fLastModifyingUserName
-    , fShareable
-    , fDownloadURL
-    , fExportLinks
-    , fCopyable
+    , fIsAppAuthorized
+    , fName
     , fParents
-    , fSharedWithMeDate
+    , fStarred
     , fSpaces
     , fVersion
-    , fUserPermission
     , fWritersCanShare
-    , fDefaultOpenWithLink
     , fId
-    , fLabels
-    , fModifiedDate
     , fPermissions
     , fQuotaBytesUsed
-    , fTitle
-    , fAlternateLink
+    , fAppProperties
     , fVideoMediaMetadata
+    , fSharedWithMeTime
     , fHeadRevisionId
+    , fCapabilities
     , fDescription
+    , fViewersCanCopyContent
     , fSharingUser
     , fWebContentLink
+    , fContentHints
     , fProperties
-    , fIndexableText
-
-    -- ** PermissionId
-    , PermissionId
-    , permissionId
-    , piKind
-    , piId
-
-    -- ** FilesCopyVisibility
-    , FilesCopyVisibility (..)
-
-    -- ** FilesGetProjection
-    , FilesGetProjection (..)
-
-    -- ** ParentList
-    , ParentList
-    , parentList
-    , parEtag
-    , parKind
-    , parItems
-    , parSelfLink
 
     -- ** GeneratedIds
     , GeneratedIds
@@ -694,98 +435,61 @@ module Network.Google.Drive
     , giKind
     , giIds
 
-    -- ** FileExportLinks
-    , FileExportLinks
-    , fileExportLinks
-    , felAddtional
-
     -- ** CommentList
     , CommentList
     , commentList
-    , comoNextPageToken
-    , comoNextLink
-    , comoKind
-    , comoItems
-    , comoSelfLink
+    , cllNextPageToken
+    , cllKind
+    , cllComments
 
     -- ** RevisionList
     , RevisionList
     , revisionList
-    , rlEtag
-    , rlKind
-    , rlItems
-    , rlSelfLink
+    , rllKind
+    , rllRevisions
 
     -- ** PermissionList
     , PermissionList
     , permissionList
-    , pllEtag
-    , pllKind
-    , pllItems
-    , pllSelfLink
+    , plKind
+    , plPermissions
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.Drive.About.Get
-import           Network.Google.Resource.Drive.Apps.Get
-import           Network.Google.Resource.Drive.Apps.List
-import           Network.Google.Resource.Drive.Changes.Get
+import           Network.Google.Resource.Drive.Changes.GetStartPageToken
 import           Network.Google.Resource.Drive.Changes.List
 import           Network.Google.Resource.Drive.Changes.Watch
 import           Network.Google.Resource.Drive.Channels.Stop
-import           Network.Google.Resource.Drive.Children.Delete
-import           Network.Google.Resource.Drive.Children.Get
-import           Network.Google.Resource.Drive.Children.Insert
-import           Network.Google.Resource.Drive.Children.List
+import           Network.Google.Resource.Drive.Comments.Create
 import           Network.Google.Resource.Drive.Comments.Delete
 import           Network.Google.Resource.Drive.Comments.Get
-import           Network.Google.Resource.Drive.Comments.Insert
 import           Network.Google.Resource.Drive.Comments.List
-import           Network.Google.Resource.Drive.Comments.Patch
 import           Network.Google.Resource.Drive.Comments.Update
 import           Network.Google.Resource.Drive.Files.Copy
+import           Network.Google.Resource.Drive.Files.Create
 import           Network.Google.Resource.Drive.Files.Delete
 import           Network.Google.Resource.Drive.Files.EmptyTrash
+import           Network.Google.Resource.Drive.Files.Export
 import           Network.Google.Resource.Drive.Files.GenerateIds
 import           Network.Google.Resource.Drive.Files.Get
-import           Network.Google.Resource.Drive.Files.Insert
 import           Network.Google.Resource.Drive.Files.List
-import           Network.Google.Resource.Drive.Files.Patch
-import           Network.Google.Resource.Drive.Files.Touch
-import           Network.Google.Resource.Drive.Files.Trash
-import           Network.Google.Resource.Drive.Files.Untrash
 import           Network.Google.Resource.Drive.Files.Update
 import           Network.Google.Resource.Drive.Files.Watch
-import           Network.Google.Resource.Drive.Parents.Delete
-import           Network.Google.Resource.Drive.Parents.Get
-import           Network.Google.Resource.Drive.Parents.Insert
-import           Network.Google.Resource.Drive.Parents.List
+import           Network.Google.Resource.Drive.Permissions.Create
 import           Network.Google.Resource.Drive.Permissions.Delete
 import           Network.Google.Resource.Drive.Permissions.Get
-import           Network.Google.Resource.Drive.Permissions.GetIdForEmail
-import           Network.Google.Resource.Drive.Permissions.Insert
 import           Network.Google.Resource.Drive.Permissions.List
-import           Network.Google.Resource.Drive.Permissions.Patch
 import           Network.Google.Resource.Drive.Permissions.Update
-import           Network.Google.Resource.Drive.Properties.Delete
-import           Network.Google.Resource.Drive.Properties.Get
-import           Network.Google.Resource.Drive.Properties.Insert
-import           Network.Google.Resource.Drive.Properties.List
-import           Network.Google.Resource.Drive.Properties.Patch
-import           Network.Google.Resource.Drive.Properties.Update
-import           Network.Google.Resource.Drive.Realtime.Get
-import           Network.Google.Resource.Drive.Realtime.Update
+import           Network.Google.Resource.Drive.Replies.Create
 import           Network.Google.Resource.Drive.Replies.Delete
 import           Network.Google.Resource.Drive.Replies.Get
-import           Network.Google.Resource.Drive.Replies.Insert
 import           Network.Google.Resource.Drive.Replies.List
-import           Network.Google.Resource.Drive.Replies.Patch
 import           Network.Google.Resource.Drive.Replies.Update
 import           Network.Google.Resource.Drive.Revisions.Delete
 import           Network.Google.Resource.Drive.Revisions.Get
 import           Network.Google.Resource.Drive.Revisions.List
-import           Network.Google.Resource.Drive.Revisions.Patch
 import           Network.Google.Resource.Drive.Revisions.Update
 
 {- $resources
@@ -794,62 +498,37 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Drive API service.
 type DriveAPI =
-     AppsListResource :<|> AppsGetResource :<|>
-       ChangesListResource
-       :<|> ChangesGetResource
+     ChangesListResource :<|>
+       ChangesGetStartPageTokenResource
        :<|> ChangesWatchResource
        :<|> ChannelsStopResource
-       :<|> ChildrenInsertResource
-       :<|> ChildrenListResource
-       :<|> ChildrenGetResource
-       :<|> ChildrenDeleteResource
-       :<|> RepliesInsertResource
        :<|> RepliesListResource
-       :<|> RepliesPatchResource
        :<|> RepliesGetResource
+       :<|> RepliesCreateResource
        :<|> RepliesDeleteResource
        :<|> RepliesUpdateResource
-       :<|> ParentsInsertResource
-       :<|> ParentsListResource
-       :<|> ParentsGetResource
-       :<|> ParentsDeleteResource
-       :<|> RealtimeGetResource
-       :<|> RealtimeUpdateResource
        :<|> AboutGetResource
-       :<|> FilesInsertResource
+       :<|> FilesExportResource
        :<|> FilesListResource
        :<|> FilesCopyResource
-       :<|> FilesPatchResource
        :<|> FilesGetResource
        :<|> FilesEmptyTrashResource
-       :<|> FilesTrashResource
-       :<|> FilesUntrashResource
-       :<|> FilesTouchResource
+       :<|> FilesCreateResource
        :<|> FilesGenerateIdsResource
        :<|> FilesDeleteResource
        :<|> FilesUpdateResource
        :<|> FilesWatchResource
-       :<|> PermissionsGetIdForEmailResource
-       :<|> PermissionsInsertResource
        :<|> PermissionsListResource
-       :<|> PermissionsPatchResource
        :<|> PermissionsGetResource
+       :<|> PermissionsCreateResource
        :<|> PermissionsDeleteResource
        :<|> PermissionsUpdateResource
-       :<|> CommentsInsertResource
        :<|> CommentsListResource
-       :<|> CommentsPatchResource
        :<|> CommentsGetResource
+       :<|> CommentsCreateResource
        :<|> CommentsDeleteResource
        :<|> CommentsUpdateResource
        :<|> RevisionsListResource
-       :<|> RevisionsPatchResource
        :<|> RevisionsGetResource
        :<|> RevisionsDeleteResource
        :<|> RevisionsUpdateResource
-       :<|> PropertiesInsertResource
-       :<|> PropertiesListResource
-       :<|> PropertiesPatchResource
-       :<|> PropertiesGetResource
-       :<|> PropertiesDeleteResource
-       :<|> PropertiesUpdateResource

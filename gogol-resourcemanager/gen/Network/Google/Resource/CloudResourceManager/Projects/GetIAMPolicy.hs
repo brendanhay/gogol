@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the IAM access control policy for specified project.
+-- Returns the IAM access control policy for the specified Project.
+-- Permission is denied if the policy or the resource does not exist.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.getIamPolicy@.
 module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
@@ -50,7 +51,7 @@ import           Network.Google.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.projects.getIamPolicy@ method which the
 -- 'ProjectsGetIAMPolicy' request conforms to.
 type ProjectsGetIAMPolicyResource =
-     "v1beta1" :>
+     "v1" :>
        "projects" :>
          CaptureMode "resource" "getIamPolicy" Text :>
            QueryParam "$.xgafv" Text :>
@@ -64,10 +65,11 @@ type ProjectsGetIAMPolicyResource =
                            ReqBody '[JSON] GetIAMPolicyRequest :>
                              Post '[JSON] Policy
 
--- | Returns the IAM access control policy for specified project.
+-- | Returns the IAM access control policy for the specified Project.
+-- Permission is denied if the policy or the resource does not exist.
 --
 -- /See:/ 'projectsGetIAMPolicy' smart constructor.
-data ProjectsGetIAMPolicy = ProjectsGetIAMPolicy
+data ProjectsGetIAMPolicy = ProjectsGetIAMPolicy'
     { _pgipXgafv          :: !(Maybe Text)
     , _pgipUploadProtocol :: !(Maybe Text)
     , _pgipPp             :: !Bool
@@ -105,7 +107,7 @@ projectsGetIAMPolicy
     -> Text -- ^ 'pgipResource'
     -> ProjectsGetIAMPolicy
 projectsGetIAMPolicy pPgipPayload_ pPgipResource_ =
-    ProjectsGetIAMPolicy
+    ProjectsGetIAMPolicy'
     { _pgipXgafv = Nothing
     , _pgipUploadProtocol = Nothing
     , _pgipPp = True
@@ -155,8 +157,11 @@ pgipBearerToken
   = lens _pgipBearerToken
       (\ s a -> s{_pgipBearerToken = a})
 
--- | REQUIRED: The resource for which policy is being requested. Resource is
--- usually specified as a path, such as, \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy is being requested.
+-- \`resource\` is usually specified as a path, such as
+-- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
+-- the path specified in this value is resource specific and is specified
+-- in the \`getIamPolicy\` documentation.
 pgipResource :: Lens' ProjectsGetIAMPolicy Text
 pgipResource
   = lens _pgipResource (\ s a -> s{_pgipResource = a})
@@ -168,7 +173,10 @@ pgipCallback
 
 instance GoogleRequest ProjectsGetIAMPolicy where
         type Rs ProjectsGetIAMPolicy = Policy
-        requestClient ProjectsGetIAMPolicy{..}
+        type Scopes ProjectsGetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient ProjectsGetIAMPolicy'{..}
           = go _pgipResource _pgipXgafv _pgipUploadProtocol
               (Just _pgipPp)
               _pgipAccessToken

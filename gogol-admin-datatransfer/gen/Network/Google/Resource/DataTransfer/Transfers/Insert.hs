@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DataTransfer.Transfers.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type TransfersInsertResource =
 -- | Inserts a data transfer request.
 --
 -- /See:/ 'transfersInsert' smart constructor.
-newtype TransfersInsert = TransfersInsert
+newtype TransfersInsert = TransfersInsert'
     { _tiPayload :: DataTransfer
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ transfersInsert
     :: DataTransfer -- ^ 'tiPayload'
     -> TransfersInsert
 transfersInsert pTiPayload_ =
-    TransfersInsert
+    TransfersInsert'
     { _tiPayload = pTiPayload_
     }
 
@@ -77,7 +77,9 @@ tiPayload
 
 instance GoogleRequest TransfersInsert where
         type Rs TransfersInsert = DataTransfer
-        requestClient TransfersInsert{..}
+        type Scopes TransfersInsert =
+             '["https://www.googleapis.com/auth/admin.datatransfer"]
+        requestClient TransfersInsert'{..}
           = go (Just AltJSON) _tiPayload dataTransferService
           where go
                   = buildClient

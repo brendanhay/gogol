@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.Acknowledge
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type OrdersAcknowledgeResource =
 -- | Marks an order as acknowledged.
 --
 -- /See:/ 'ordersAcknowledge' smart constructor.
-data OrdersAcknowledge = OrdersAcknowledge
+data OrdersAcknowledge = OrdersAcknowledge'
     { _oaMerchantId :: !(Textual Word64)
     , _oaPayload    :: !OrdersAcknowledgeRequest
     , _oaOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersAcknowledge
     -> Text -- ^ 'oaOrderId'
     -> OrdersAcknowledge
 ordersAcknowledge pOaMerchantId_ pOaPayload_ pOaOrderId_ =
-    OrdersAcknowledge
+    OrdersAcknowledge'
     { _oaMerchantId = _Coerce # pOaMerchantId_
     , _oaPayload = pOaPayload_
     , _oaOrderId = pOaOrderId_
@@ -102,7 +102,9 @@ oaOrderId
 
 instance GoogleRequest OrdersAcknowledge where
         type Rs OrdersAcknowledge = OrdersAcknowledgeResponse
-        requestClient OrdersAcknowledge{..}
+        type Scopes OrdersAcknowledge =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersAcknowledge'{..}
           = go _oaMerchantId _oaOrderId (Just AltJSON)
               _oaPayload
               shoppingContentService

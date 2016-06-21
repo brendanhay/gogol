@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Drafts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersDraftsGetResource =
 -- | Gets the specified draft.
 --
 -- /See:/ 'usersDraftsGet' smart constructor.
-data UsersDraftsGet = UsersDraftsGet
+data UsersDraftsGet = UsersDraftsGet'
     { _udgFormat :: !UsersDraftsGetFormat
     , _udgUserId :: !Text
     , _udgId     :: !Text
@@ -73,10 +73,9 @@ data UsersDraftsGet = UsersDraftsGet
 -- * 'udgId'
 usersDraftsGet
     :: Text -- ^ 'udgId'
-    -> Text
     -> UsersDraftsGet
-usersDraftsGet pUdgUserId_ pUdgId_ =
-    UsersDraftsGet
+usersDraftsGet pUdgId_ =
+    UsersDraftsGet'
     { _udgFormat = UDGFFull
     , _udgUserId = "me"
     , _udgId = pUdgId_
@@ -99,7 +98,12 @@ udgId = lens _udgId (\ s a -> s{_udgId = a})
 
 instance GoogleRequest UsersDraftsGet where
         type Rs UsersDraftsGet = Draft
-        requestClient UsersDraftsGet{..}
+        type Scopes UsersDraftsGet =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersDraftsGet'{..}
           = go _udgUserId _udgId (Just _udgFormat)
               (Just AltJSON)
               gmailService

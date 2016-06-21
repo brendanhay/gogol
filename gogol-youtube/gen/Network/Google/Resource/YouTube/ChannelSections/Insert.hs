@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.ChannelSections.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ChannelSectionsInsertResource =
 -- | Adds a channelSection for the authenticated user\'s channel.
 --
 -- /See:/ 'channelSectionsInsert' smart constructor.
-data ChannelSectionsInsert = ChannelSectionsInsert
+data ChannelSectionsInsert = ChannelSectionsInsert'
     { _csiPart                          :: !Text
     , _csiPayload                       :: !ChannelSection
     , _csiOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -81,7 +81,7 @@ channelSectionsInsert
     -> ChannelSection -- ^ 'csiPayload'
     -> ChannelSectionsInsert
 channelSectionsInsert pCsiPart_ pCsiPayload_ =
-    ChannelSectionsInsert
+    ChannelSectionsInsert'
     { _csiPart = pCsiPart_
     , _csiPayload = pCsiPayload_
     , _csiOnBehalfOfContentOwner = Nothing
@@ -138,7 +138,11 @@ csiOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest ChannelSectionsInsert where
         type Rs ChannelSectionsInsert = ChannelSection
-        requestClient ChannelSectionsInsert{..}
+        type Scopes ChannelSectionsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient ChannelSectionsInsert'{..}
           = go (Just _csiPart) _csiOnBehalfOfContentOwner
               _csiOnBehalfOfContentOwnerChannel
               (Just AltJSON)

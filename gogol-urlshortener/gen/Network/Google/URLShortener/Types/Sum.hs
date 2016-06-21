@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.URLShortener.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -26,18 +26,18 @@ data URLListProjection
     | Full
       -- ^ @FULL@
       -- Returns short URL click counts.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLListProjection
 
-instance FromText URLListProjection where
-    fromText = \case
-        "ANALYTICS_CLICKS" -> Just AnalyticsClicks
-        "FULL" -> Just Full
-        _ -> Nothing
+instance FromHttpApiData URLListProjection where
+    parseQueryParam = \case
+        "ANALYTICS_CLICKS" -> Right AnalyticsClicks
+        "FULL" -> Right Full
+        x -> Left ("Unable to parse URLListProjection from: " <> x)
 
-instance ToText URLListProjection where
-    toText = \case
+instance ToHttpApiData URLListProjection where
+    toQueryParam = \case
         AnalyticsClicks -> "ANALYTICS_CLICKS"
         Full -> "FULL"
 
@@ -58,19 +58,19 @@ data URLGetProjection
     | UGPFull
       -- ^ @FULL@
       -- Returns the creation timestamp and all available analytics.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLGetProjection
 
-instance FromText URLGetProjection where
-    fromText = \case
-        "ANALYTICS_CLICKS" -> Just UGPAnalyticsClicks
-        "ANALYTICS_TOP_STRINGS" -> Just UGPAnalyticsTopStrings
-        "FULL" -> Just UGPFull
-        _ -> Nothing
+instance FromHttpApiData URLGetProjection where
+    parseQueryParam = \case
+        "ANALYTICS_CLICKS" -> Right UGPAnalyticsClicks
+        "ANALYTICS_TOP_STRINGS" -> Right UGPAnalyticsTopStrings
+        "FULL" -> Right UGPFull
+        x -> Left ("Unable to parse URLGetProjection from: " <> x)
 
-instance ToText URLGetProjection where
-    toText = \case
+instance ToHttpApiData URLGetProjection where
+    toQueryParam = \case
         UGPAnalyticsClicks -> "ANALYTICS_CLICKS"
         UGPAnalyticsTopStrings -> "ANALYTICS_TOP_STRINGS"
         UGPFull -> "FULL"

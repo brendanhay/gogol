@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.SSLCerts.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type SSLCertsInsertResource =
 -- until the instance is restarted.
 --
 -- /See:/ 'sslCertsInsert' smart constructor.
-data SSLCertsInsert = SSLCertsInsert
+data SSLCertsInsert = SSLCertsInsert'
     { _sciProject  :: !Text
     , _sciPayload  :: !SSLCertsInsertRequest
     , _sciInstance :: !Text
@@ -83,7 +83,7 @@ sslCertsInsert
     -> Text -- ^ 'sciInstance'
     -> SSLCertsInsert
 sslCertsInsert pSciProject_ pSciPayload_ pSciInstance_ =
-    SSLCertsInsert
+    SSLCertsInsert'
     { _sciProject = pSciProject_
     , _sciPayload = pSciPayload_
     , _sciInstance = pSciInstance_
@@ -107,7 +107,10 @@ sciInstance
 
 instance GoogleRequest SSLCertsInsert where
         type Rs SSLCertsInsert = SSLCertsInsertResponse
-        requestClient SSLCertsInsert{..}
+        type Scopes SSLCertsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient SSLCertsInsert'{..}
           = go _sciProject _sciInstance (Just AltJSON)
               _sciPayload
               sQLAdminService

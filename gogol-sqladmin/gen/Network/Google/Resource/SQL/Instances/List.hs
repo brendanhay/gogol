@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type InstancesListResource =
 -- instance name.
 --
 -- /See:/ 'instancesList' smart constructor.
-data InstancesList = InstancesList
+data InstancesList = InstancesList'
     { _ilProject    :: !Text
     , _ilPageToken  :: !(Maybe Text)
     , _ilMaxResults :: !(Maybe (Textual Word32))
@@ -78,7 +78,7 @@ instancesList
     :: Text -- ^ 'ilProject'
     -> InstancesList
 instancesList pIlProject_ =
-    InstancesList
+    InstancesList'
     { _ilProject = pIlProject_
     , _ilPageToken = Nothing
     , _ilMaxResults = Nothing
@@ -103,7 +103,10 @@ ilMaxResults
 
 instance GoogleRequest InstancesList where
         type Rs InstancesList = InstancesListResponse
-        requestClient InstancesList{..}
+        type Scopes InstancesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient InstancesList'{..}
           = go _ilProject _ilPageToken _ilMaxResults
               (Just AltJSON)
               sQLAdminService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reports.Activities.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -73,7 +73,7 @@ type ActivitiesListResource =
 -- | Retrieves a list of activities for a specific customer and application.
 --
 -- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList
+data ActivitiesList = ActivitiesList'
     { _alStartTime       :: !(Maybe Text)
     , _alFilters         :: !(Maybe Text)
     , _alCustomerId      :: !(Maybe Text)
@@ -114,7 +114,7 @@ activitiesList
     -> Text -- ^ 'alUserKey'
     -> ActivitiesList
 activitiesList pAlApplicationName_ pAlUserKey_ =
-    ActivitiesList
+    ActivitiesList'
     { _alStartTime = Nothing
     , _alFilters = Nothing
     , _alCustomerId = Nothing
@@ -186,7 +186,9 @@ alMaxResults
 
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = Activities
-        requestClient ActivitiesList{..}
+        type Scopes ActivitiesList =
+             '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
+        requestClient ActivitiesList'{..}
           = go _alUserKey _alApplicationName _alStartTime
               _alFilters
               _alCustomerId

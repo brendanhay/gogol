@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Datafeedstatuses.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type DatafeedstatusesGetResource =
 -- | Retrieves the status of a datafeed from your Merchant Center account.
 --
 -- /See:/ 'datafeedstatusesGet' smart constructor.
-data DatafeedstatusesGet = DatafeedstatusesGet
+data DatafeedstatusesGet = DatafeedstatusesGet'
     { _dggMerchantId :: !(Textual Word64)
     , _dggDatafeedId :: !(Textual Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ datafeedstatusesGet
     -> Word64 -- ^ 'dggDatafeedId'
     -> DatafeedstatusesGet
 datafeedstatusesGet pDggMerchantId_ pDggDatafeedId_ =
-    DatafeedstatusesGet
+    DatafeedstatusesGet'
     { _dggMerchantId = _Coerce # pDggMerchantId_
     , _dggDatafeedId = _Coerce # pDggDatafeedId_
     }
@@ -90,7 +90,9 @@ dggDatafeedId
 
 instance GoogleRequest DatafeedstatusesGet where
         type Rs DatafeedstatusesGet = DatafeedStatus
-        requestClient DatafeedstatusesGet{..}
+        type Scopes DatafeedstatusesGet =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient DatafeedstatusesGet'{..}
           = go _dggMerchantId _dggDatafeedId (Just AltJSON)
               shoppingContentService
           where go

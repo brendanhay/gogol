@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Accounts.Payments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type AccountsPaymentsListResource =
 -- | List the payments for the specified AdSense account.
 --
 -- /See:/ 'accountsPaymentsList' smart constructor.
-newtype AccountsPaymentsList = AccountsPaymentsList
+newtype AccountsPaymentsList = AccountsPaymentsList'
     { _aplAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ accountsPaymentsList
     :: Text -- ^ 'aplAccountId'
     -> AccountsPaymentsList
 accountsPaymentsList pAplAccountId_ =
-    AccountsPaymentsList
+    AccountsPaymentsList'
     { _aplAccountId = pAplAccountId_
     }
 
@@ -76,7 +76,10 @@ aplAccountId
 
 instance GoogleRequest AccountsPaymentsList where
         type Rs AccountsPaymentsList = Payments
-        requestClient AccountsPaymentsList{..}
+        type Scopes AccountsPaymentsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AccountsPaymentsList'{..}
           = go _aplAccountId (Just AltJSON) adSenseService
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Goals.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ManagementGoalsListResource =
 -- | Lists goals to which the user has access.
 --
 -- /See:/ 'managementGoalsList' smart constructor.
-data ManagementGoalsList = ManagementGoalsList
+data ManagementGoalsList = ManagementGoalsList'
     { _mglWebPropertyId :: !Text
     , _mglProFileId     :: !Text
     , _mglAccountId     :: !Text
@@ -90,7 +90,7 @@ managementGoalsList
     -> Text -- ^ 'mglAccountId'
     -> ManagementGoalsList
 managementGoalsList pMglWebPropertyId_ pMglProFileId_ pMglAccountId_ =
-    ManagementGoalsList
+    ManagementGoalsList'
     { _mglWebPropertyId = pMglWebPropertyId_
     , _mglProFileId = pMglProFileId_
     , _mglAccountId = pMglAccountId_
@@ -136,7 +136,11 @@ mglMaxResults
 
 instance GoogleRequest ManagementGoalsList where
         type Rs ManagementGoalsList = Goals
-        requestClient ManagementGoalsList{..}
+        type Scopes ManagementGoalsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementGoalsList'{..}
           = go _mglAccountId _mglWebPropertyId _mglProFileId
               _mglStartIndex
               _mglMaxResults

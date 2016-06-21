@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Reports.Saved.Generate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ReportsSavedGenerateResource =
 -- query parameters.
 --
 -- /See:/ 'reportsSavedGenerate' smart constructor.
-data ReportsSavedGenerate = ReportsSavedGenerate
+data ReportsSavedGenerate = ReportsSavedGenerate'
     { _rsgLocale        :: !(Maybe Text)
     , _rsgSavedReportId :: !Text
     , _rsgStartIndex    :: !(Maybe (Textual Int32))
@@ -82,7 +82,7 @@ reportsSavedGenerate
     :: Text -- ^ 'rsgSavedReportId'
     -> ReportsSavedGenerate
 reportsSavedGenerate pRsgSavedReportId_ =
-    ReportsSavedGenerate
+    ReportsSavedGenerate'
     { _rsgLocale = Nothing
     , _rsgSavedReportId = pRsgSavedReportId_
     , _rsgStartIndex = Nothing
@@ -118,7 +118,10 @@ rsgMaxResults
 instance GoogleRequest ReportsSavedGenerate where
         type Rs ReportsSavedGenerate =
              AdsenseReportsGenerateResponse
-        requestClient ReportsSavedGenerate{..}
+        type Scopes ReportsSavedGenerate =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient ReportsSavedGenerate'{..}
           = go _rsgSavedReportId _rsgLocale _rsgStartIndex
               _rsgMaxResults
               (Just AltJSON)

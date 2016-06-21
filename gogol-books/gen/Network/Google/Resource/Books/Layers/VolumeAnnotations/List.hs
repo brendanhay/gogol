@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Layers.VolumeAnnotations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -82,7 +82,7 @@ type LayersVolumeAnnotationsListResource =
 -- | Gets the volume annotations for a volume and layer.
 --
 -- /See:/ 'layersVolumeAnnotationsList' smart constructor.
-data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList
+data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList'
     { _lvalStartOffSet              :: !(Maybe Text)
     , _lvalLocale                   :: !(Maybe Text)
     , _lvalContentVersion           :: !Text
@@ -139,7 +139,7 @@ layersVolumeAnnotationsList
     -> Text -- ^ 'lvalLayerId'
     -> LayersVolumeAnnotationsList
 layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
-    LayersVolumeAnnotationsList
+    LayersVolumeAnnotationsList'
     { _lvalStartOffSet = Nothing
     , _lvalLocale = Nothing
     , _lvalContentVersion = pLvalContentVersion_
@@ -252,7 +252,9 @@ instance GoogleRequest LayersVolumeAnnotationsList
          where
         type Rs LayersVolumeAnnotationsList =
              Volumeannotations
-        requestClient LayersVolumeAnnotationsList{..}
+        type Scopes LayersVolumeAnnotationsList =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient LayersVolumeAnnotationsList'{..}
           = go _lvalVolumeId _lvalLayerId
               (Just _lvalContentVersion)
               _lvalStartOffSet

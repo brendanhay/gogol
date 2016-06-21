@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsContainersFoldersDeleteResource =
 -- | Deletes a GTM Folder.
 --
 -- /See:/ 'accountsContainersFoldersDelete' smart constructor.
-data AccountsContainersFoldersDelete = AccountsContainersFoldersDelete
+data AccountsContainersFoldersDelete = AccountsContainersFoldersDelete'
     { _acfdContainerId :: !Text
     , _acfdFolderId    :: !Text
     , _acfdAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersFoldersDelete
     -> Text -- ^ 'acfdAccountId'
     -> AccountsContainersFoldersDelete
 accountsContainersFoldersDelete pAcfdContainerId_ pAcfdFolderId_ pAcfdAccountId_ =
-    AccountsContainersFoldersDelete
+    AccountsContainersFoldersDelete'
     { _acfdContainerId = pAcfdContainerId_
     , _acfdFolderId = pAcfdFolderId_
     , _acfdAccountId = pAcfdAccountId_
@@ -104,7 +104,9 @@ acfdAccountId
 instance GoogleRequest
          AccountsContainersFoldersDelete where
         type Rs AccountsContainersFoldersDelete = ()
-        requestClient AccountsContainersFoldersDelete{..}
+        type Scopes AccountsContainersFoldersDelete =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient AccountsContainersFoldersDelete'{..}
           = go _acfdAccountId _acfdContainerId _acfdFolderId
               (Just AltJSON)
               tagManagerService

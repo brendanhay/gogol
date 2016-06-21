@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type MyLibraryBookshelvesRemoveVolumeResource =
 -- | Removes a volume from a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesRemoveVolume' smart constructor.
-data MyLibraryBookshelvesRemoveVolume = MyLibraryBookshelvesRemoveVolume
+data MyLibraryBookshelvesRemoveVolume = MyLibraryBookshelvesRemoveVolume'
     { _mlbrvReason   :: !(Maybe MyLibraryBookshelvesRemoveVolumeReason)
     , _mlbrvShelf    :: !Text
     , _mlbrvVolumeId :: !Text
@@ -84,7 +84,7 @@ myLibraryBookshelvesRemoveVolume
     -> Text -- ^ 'mlbrvVolumeId'
     -> MyLibraryBookshelvesRemoveVolume
 myLibraryBookshelvesRemoveVolume pMlbrvShelf_ pMlbrvVolumeId_ =
-    MyLibraryBookshelvesRemoveVolume
+    MyLibraryBookshelvesRemoveVolume'
     { _mlbrvReason = Nothing
     , _mlbrvShelf = pMlbrvShelf_
     , _mlbrvVolumeId = pMlbrvVolumeId_
@@ -115,7 +115,9 @@ mlbrvSource
 instance GoogleRequest
          MyLibraryBookshelvesRemoveVolume where
         type Rs MyLibraryBookshelvesRemoveVolume = ()
-        requestClient MyLibraryBookshelvesRemoveVolume{..}
+        type Scopes MyLibraryBookshelvesRemoveVolume =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryBookshelvesRemoveVolume'{..}
           = go _mlbrvShelf (Just _mlbrvVolumeId) _mlbrvReason
               _mlbrvSource
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchUpdate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type RastersPermissionsBatchUpdateResource =
 -- is atomic.
 --
 -- /See:/ 'rastersPermissionsBatchUpdate' smart constructor.
-data RastersPermissionsBatchUpdate = RastersPermissionsBatchUpdate
+data RastersPermissionsBatchUpdate = RastersPermissionsBatchUpdate'
     { _rpbuPayload :: !PermissionsBatchUpdateRequest
     , _rpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ rastersPermissionsBatchUpdate
     -> Text -- ^ 'rpbuId'
     -> RastersPermissionsBatchUpdate
 rastersPermissionsBatchUpdate pRpbuPayload_ pRpbuId_ =
-    RastersPermissionsBatchUpdate
+    RastersPermissionsBatchUpdate'
     { _rpbuPayload = pRpbuPayload_
     , _rpbuId = pRpbuId_
     }
@@ -95,7 +95,9 @@ instance GoogleRequest RastersPermissionsBatchUpdate
          where
         type Rs RastersPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
-        requestClient RastersPermissionsBatchUpdate{..}
+        type Scopes RastersPermissionsBatchUpdate =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient RastersPermissionsBatchUpdate'{..}
           = go _rpbuId (Just AltJSON) _rpbuPayload
               mapsEngineService
           where go

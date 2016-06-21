@@ -7,19 +7,26 @@
 
 -- |
 -- Module      : Network.Google.UserAccounts
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for the Google Cloud User Accounts service.
+-- Creates and manages users and groups for accessing Google Compute Engine
+-- virtual machines.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference>
 module Network.Google.UserAccounts
     (
     -- * Service Configuration
       userAccountsService
+
+    -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , cloudUserAccountsScope
+    , cloudUserAccountsReadOnlyScope
 
     -- * API Declaration
     , UserAccountsAPI
@@ -140,6 +147,7 @@ module Network.Google.UserAccounts
     , oId
     , oOperationType
     , oRegion
+    , oDescription
     , oTargetLink
     , oClientOperationId
 

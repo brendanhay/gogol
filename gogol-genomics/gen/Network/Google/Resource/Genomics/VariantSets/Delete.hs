@@ -14,16 +14,18 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.VariantSets.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the contents of a variant set. The variant set object is not
--- deleted.
+-- Deletes a variant set including all variants, call sets, and calls
+-- within. This is not reversible. For the definitions of variant sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.delete@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.delete@.
 module Network.Google.Resource.Genomics.VariantSets.Delete
     (
     -- * REST Resource
@@ -62,11 +64,13 @@ type VariantSetsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes the contents of a variant set. The variant set object is not
--- deleted.
+-- | Deletes a variant set including all variants, call sets, and calls
+-- within. This is not reversible. For the definitions of variant sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSetsDelete' smart constructor.
-data VariantSetsDelete = VariantSetsDelete
+data VariantSetsDelete = VariantSetsDelete'
     { _vsdXgafv          :: !(Maybe Text)
     , _vsdUploadProtocol :: !(Maybe Text)
     , _vsdPp             :: !Bool
@@ -100,7 +104,7 @@ variantSetsDelete
     :: Text -- ^ 'vsdVariantSetId'
     -> VariantSetsDelete
 variantSetsDelete pVsdVariantSetId_ =
-    VariantSetsDelete
+    VariantSetsDelete'
     { _vsdXgafv = Nothing
     , _vsdUploadProtocol = Nothing
     , _vsdPp = True
@@ -156,7 +160,10 @@ vsdCallback
 
 instance GoogleRequest VariantSetsDelete where
         type Rs VariantSetsDelete = Empty
-        requestClient VariantSetsDelete{..}
+        type Scopes VariantSetsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient VariantSetsDelete'{..}
           = go _vsdVariantSetId _vsdXgafv _vsdUploadProtocol
               (Just _vsdPp)
               _vsdAccessToken

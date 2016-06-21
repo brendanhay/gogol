@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Subscriptions.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type SubscriptionsInsertResource =
 -- | Creates\/Transfers a subscription for the customer.
 --
 -- /See:/ 'subscriptionsInsert' smart constructor.
-data SubscriptionsInsert = SubscriptionsInsert
+data SubscriptionsInsert = SubscriptionsInsert'
     { _siPayload           :: !Subscription
     , _siCustomerId        :: !Text
     , _siCustomerAuthToken :: !(Maybe Text)
@@ -78,7 +78,7 @@ subscriptionsInsert
     -> Text -- ^ 'siCustomerId'
     -> SubscriptionsInsert
 subscriptionsInsert pSiPayload_ pSiCustomerId_ =
-    SubscriptionsInsert
+    SubscriptionsInsert'
     { _siPayload = pSiPayload_
     , _siCustomerId = pSiCustomerId_
     , _siCustomerAuthToken = Nothing
@@ -104,7 +104,9 @@ siCustomerAuthToken
 
 instance GoogleRequest SubscriptionsInsert where
         type Rs SubscriptionsInsert = Subscription
-        requestClient SubscriptionsInsert{..}
+        type Scopes SubscriptionsInsert =
+             '["https://www.googleapis.com/auth/apps.order"]
+        requestClient SubscriptionsInsert'{..}
           = go _siCustomerId _siCustomerAuthToken
               (Just AltJSON)
               _siPayload

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Storage.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,9 +22,9 @@ module Network.Google.Storage.Types
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
-    , devstorageReadOnlyScope
-    , devstorageReadWriteScope
-    , devstorageFullControlScope
+    , storageReadOnlyScope
+    , storageReadWriteScope
+    , storageFullControlScope
 
     -- * ObjectOwner
     , ObjectOwner
@@ -121,6 +122,12 @@ module Network.Google.Storage.Types
     , objectAccessControlProjectTeam
     , oacptProjectNumber
     , oacptTeam
+
+    -- * ObjectCustomerEncryption
+    , ObjectCustomerEncryption
+    , objectCustomerEncryption
+    , oceKeySha256
+    , oceEncryptionAlgorithm
 
     -- * Bucket
     , Bucket
@@ -228,6 +235,7 @@ module Network.Google.Storage.Types
     , objKind
     , objTimeDeleted
     , objCrc32c
+    , objCustomerEncryption
     , objBucket
     , objOwner
     , objSelfLink
@@ -343,27 +351,27 @@ import           Network.Google.Storage.Types.Product
 import           Network.Google.Storage.Types.Sum
 
 -- | Default request referring to version 'v1' of the Cloud Storage JSON API. This contains the host and root path used as a starting point for constructing service requests.
-storageService :: Service
+storageService :: ServiceConfig
 storageService
   = defaultService (ServiceId "storage:v1")
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-cloudPlatformReadOnlyScope :: OAuthScope
-cloudPlatformReadOnlyScope = "https://www.googleapis.com/auth/cloud-platform.read-only";
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View your data in Google Cloud Storage
-devstorageReadOnlyScope :: OAuthScope
-devstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
+storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+storageReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: OAuthScope
-devstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+storageReadWriteScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-devstorageFullControlScope :: OAuthScope
-devstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";
+storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+storageFullControlScope = Proxy;

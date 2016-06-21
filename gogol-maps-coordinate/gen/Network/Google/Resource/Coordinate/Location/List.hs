@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Coordinate.Location.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type LocationListResource =
 -- | Retrieves a list of locations for a worker.
 --
 -- /See:/ 'locationList' smart constructor.
-data LocationList = LocationList
+data LocationList = LocationList'
     { _llWorkerEmail      :: !Text
     , _llStartTimestampMs :: !(Textual Word64)
     , _llTeamId           :: !Text
@@ -89,7 +89,7 @@ locationList
     -> Text -- ^ 'llTeamId'
     -> LocationList
 locationList pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
-    LocationList
+    LocationList'
     { _llWorkerEmail = pLlWorkerEmail_
     , _llStartTimestampMs = _Coerce # pLlStartTimestampMs_
     , _llTeamId = pLlTeamId_
@@ -127,7 +127,10 @@ llMaxResults
 
 instance GoogleRequest LocationList where
         type Rs LocationList = LocationListResponse
-        requestClient LocationList{..}
+        type Scopes LocationList =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
+        requestClient LocationList'{..}
           = go _llTeamId _llWorkerEmail
               (Just _llStartTimestampMs)
               _llPageToken

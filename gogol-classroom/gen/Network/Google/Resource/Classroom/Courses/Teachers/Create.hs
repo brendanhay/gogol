@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Teachers.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -83,7 +83,7 @@ type CoursesTeachersCreateResource =
 -- course.
 --
 -- /See:/ 'coursesTeachersCreate' smart constructor.
-data CoursesTeachersCreate = CoursesTeachersCreate
+data CoursesTeachersCreate = CoursesTeachersCreate'
     { _ctcXgafv          :: !(Maybe Text)
     , _ctcUploadProtocol :: !(Maybe Text)
     , _ctcPp             :: !Bool
@@ -121,7 +121,7 @@ coursesTeachersCreate
     -> Teacher -- ^ 'ctcPayload'
     -> CoursesTeachersCreate
 coursesTeachersCreate pCtcCourseId_ pCtcPayload_ =
-    CoursesTeachersCreate
+    CoursesTeachersCreate'
     { _ctcXgafv = Nothing
     , _ctcUploadProtocol = Nothing
     , _ctcPp = True
@@ -183,7 +183,11 @@ ctcCallback
 
 instance GoogleRequest CoursesTeachersCreate where
         type Rs CoursesTeachersCreate = Teacher
-        requestClient CoursesTeachersCreate{..}
+        type Scopes CoursesTeachersCreate =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters"]
+        requestClient CoursesTeachersCreate'{..}
           = go _ctcCourseId _ctcXgafv _ctcUploadProtocol
               (Just _ctcPp)
               _ctcAccessToken

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Variables.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsContainersVariablesListResource =
 -- | Lists all GTM Variables of a Container.
 --
 -- /See:/ 'accountsContainersVariablesList' smart constructor.
-data AccountsContainersVariablesList = AccountsContainersVariablesList
+data AccountsContainersVariablesList = AccountsContainersVariablesList'
     { _acvlcContainerId :: !Text
     , _acvlcAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsContainersVariablesList
     -> Text -- ^ 'acvlcAccountId'
     -> AccountsContainersVariablesList
 accountsContainersVariablesList pAcvlcContainerId_ pAcvlcAccountId_ =
-    AccountsContainersVariablesList
+    AccountsContainersVariablesList'
     { _acvlcContainerId = pAcvlcContainerId_
     , _acvlcAccountId = pAcvlcAccountId_
     }
@@ -94,7 +94,10 @@ instance GoogleRequest
          AccountsContainersVariablesList where
         type Rs AccountsContainersVariablesList =
              ListVariablesResponse
-        requestClient AccountsContainersVariablesList{..}
+        type Scopes AccountsContainersVariablesList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersVariablesList'{..}
           = go _acvlcAccountId _acvlcContainerId (Just AltJSON)
               tagManagerService
           where go

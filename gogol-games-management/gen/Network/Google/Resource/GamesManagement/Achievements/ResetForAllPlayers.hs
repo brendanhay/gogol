@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Achievements.ResetForAllPlayers
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AchievementsResetForAllPlayersResource =
 -- achievements can be reset.
 --
 -- /See:/ 'achievementsResetForAllPlayers' smart constructor.
-newtype AchievementsResetForAllPlayers = AchievementsResetForAllPlayers
+newtype AchievementsResetForAllPlayers = AchievementsResetForAllPlayers'
     { _arfapAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ achievementsResetForAllPlayers
     :: Text -- ^ 'arfapAchievementId'
     -> AchievementsResetForAllPlayers
 achievementsResetForAllPlayers pArfapAchievementId_ =
-    AchievementsResetForAllPlayers
+    AchievementsResetForAllPlayers'
     { _arfapAchievementId = pArfapAchievementId_
     }
 
@@ -82,7 +82,10 @@ arfapAchievementId
 instance GoogleRequest AchievementsResetForAllPlayers
          where
         type Rs AchievementsResetForAllPlayers = ()
-        requestClient AchievementsResetForAllPlayers{..}
+        type Scopes AchievementsResetForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient AchievementsResetForAllPlayers'{..}
           = go _arfapAchievementId (Just AltJSON)
               gamesManagementService
           where go

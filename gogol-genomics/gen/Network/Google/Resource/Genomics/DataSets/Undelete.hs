@@ -14,17 +14,19 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.DataSets.Undelete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Undeletes a dataset by restoring a dataset which was deleted via this
--- API. This operation is only possible for a week after the deletion
--- occurred.
+-- API. For the definitions of datasets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This operation is only possible for a week after the deletion occurred.
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.undelete@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.undelete@.
 module Network.Google.Resource.Genomics.DataSets.Undelete
     (
     -- * REST Resource
@@ -67,11 +69,13 @@ type DataSetsUndeleteResource =
                              Post '[JSON] DataSet
 
 -- | Undeletes a dataset by restoring a dataset which was deleted via this
--- API. This operation is only possible for a week after the deletion
--- occurred.
+-- API. For the definitions of datasets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This operation is only possible for a week after the deletion occurred.
 --
 -- /See:/ 'dataSetsUndelete' smart constructor.
-data DataSetsUndelete = DataSetsUndelete
+data DataSetsUndelete = DataSetsUndelete'
     { _dsuXgafv          :: !(Maybe Text)
     , _dsuUploadProtocol :: !(Maybe Text)
     , _dsuPp             :: !Bool
@@ -109,7 +113,7 @@ dataSetsUndelete
     -> Text -- ^ 'dsuDataSetId'
     -> DataSetsUndelete
 dataSetsUndelete pDsuPayload_ pDsuDataSetId_ =
-    DataSetsUndelete
+    DataSetsUndelete'
     { _dsuXgafv = Nothing
     , _dsuUploadProtocol = Nothing
     , _dsuPp = True
@@ -170,7 +174,10 @@ dsuCallback
 
 instance GoogleRequest DataSetsUndelete where
         type Rs DataSetsUndelete = DataSet
-        requestClient DataSetsUndelete{..}
+        type Scopes DataSetsUndelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient DataSetsUndelete'{..}
           = go _dsuDataSetId _dsuXgafv _dsuUploadProtocol
               (Just _dsuPp)
               _dsuAccessToken

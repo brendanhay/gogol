@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Listings.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type EditsListingsListResource =
 -- | Returns all of the localized store listings attached to this edit.
 --
 -- /See:/ 'editsListingsList' smart constructor.
-data EditsListingsList = EditsListingsList
+data EditsListingsList = EditsListingsList'
     { _ellPackageName :: !Text
     , _ellEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ editsListingsList
     -> Text -- ^ 'ellEditId'
     -> EditsListingsList
 editsListingsList pEllPackageName_ pEllEditId_ =
-    EditsListingsList
+    EditsListingsList'
     { _ellPackageName = pEllPackageName_
     , _ellEditId = pEllEditId_
     }
@@ -92,7 +92,9 @@ ellEditId
 
 instance GoogleRequest EditsListingsList where
         type Rs EditsListingsList = ListingsListResponse
-        requestClient EditsListingsList{..}
+        type Scopes EditsListingsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsListingsList'{..}
           = go _ellPackageName _ellEditId (Just AltJSON)
               androidPublisherService
           where go

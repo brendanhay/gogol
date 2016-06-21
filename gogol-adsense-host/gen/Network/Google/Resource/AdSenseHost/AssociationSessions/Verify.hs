@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.AssociationSessions.Verify
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type AssociationSessionsVerifyResource =
 -- from AdSense signup.
 --
 -- /See:/ 'associationSessionsVerify' smart constructor.
-newtype AssociationSessionsVerify = AssociationSessionsVerify
+newtype AssociationSessionsVerify = AssociationSessionsVerify'
     { _asvToken :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ associationSessionsVerify
     :: Text -- ^ 'asvToken'
     -> AssociationSessionsVerify
 associationSessionsVerify pAsvToken_ =
-    AssociationSessionsVerify
+    AssociationSessionsVerify'
     { _asvToken = pAsvToken_
     }
 
@@ -80,7 +80,9 @@ instance GoogleRequest AssociationSessionsVerify
          where
         type Rs AssociationSessionsVerify =
              AssociationSession
-        requestClient AssociationSessionsVerify{..}
+        type Scopes AssociationSessionsVerify =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AssociationSessionsVerify'{..}
           = go (Just _asvToken) (Just AltJSON)
               adSenseHostService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Products.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ProductsDeleteResource =
 -- | Deletes a product from your Merchant Center account.
 --
 -- /See:/ 'productsDelete' smart constructor.
-data ProductsDelete = ProductsDelete
+data ProductsDelete = ProductsDelete'
     { _pdMerchantId :: !(Textual Word64)
     , _pdProductId  :: !Text
     , _pdDryRun     :: !(Maybe Bool)
@@ -75,7 +75,7 @@ productsDelete
     -> Text -- ^ 'pdProductId'
     -> ProductsDelete
 productsDelete pPdMerchantId_ pPdProductId_ =
-    ProductsDelete
+    ProductsDelete'
     { _pdMerchantId = _Coerce # pPdMerchantId_
     , _pdProductId = pPdProductId_
     , _pdDryRun = Nothing
@@ -98,7 +98,9 @@ pdDryRun = lens _pdDryRun (\ s a -> s{_pdDryRun = a})
 
 instance GoogleRequest ProductsDelete where
         type Rs ProductsDelete = ()
-        requestClient ProductsDelete{..}
+        type Scopes ProductsDelete =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient ProductsDelete'{..}
           = go _pdMerchantId _pdProductId _pdDryRun
               (Just AltJSON)
               shoppingContentService

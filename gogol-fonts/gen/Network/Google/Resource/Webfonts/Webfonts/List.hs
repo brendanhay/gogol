@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webfonts.Webfonts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type WebfontsListResource =
 -- Developer API
 --
 -- /See:/ 'webfontsList' smart constructor.
-newtype WebfontsList = WebfontsList
+newtype WebfontsList = WebfontsList'
     { _wlSort :: Maybe WebfontsListSort
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ newtype WebfontsList = WebfontsList
 webfontsList
     :: WebfontsList
 webfontsList =
-    WebfontsList
+    WebfontsList'
     { _wlSort = Nothing
     }
 
@@ -75,7 +75,8 @@ wlSort = lens _wlSort (\ s a -> s{_wlSort = a})
 
 instance GoogleRequest WebfontsList where
         type Rs WebfontsList = WebfontList
-        requestClient WebfontsList{..}
+        type Scopes WebfontsList = '[]
+        requestClient WebfontsList'{..}
           = go _wlSort (Just AltJSON) fontsService
           where go
                   = buildClient (Proxy :: Proxy WebfontsListResource)

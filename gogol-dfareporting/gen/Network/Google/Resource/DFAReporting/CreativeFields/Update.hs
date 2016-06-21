@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeFields.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsUpdate' request conforms to.
 type CreativeFieldsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -55,7 +55,7 @@ type CreativeFieldsUpdateResource =
 -- | Updates an existing creative field.
 --
 -- /See:/ 'creativeFieldsUpdate' smart constructor.
-data CreativeFieldsUpdate = CreativeFieldsUpdate
+data CreativeFieldsUpdate = CreativeFieldsUpdate'
     { _cfuProFileId :: !(Textual Int64)
     , _cfuPayload   :: !CreativeField
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ creativeFieldsUpdate
     -> CreativeField -- ^ 'cfuPayload'
     -> CreativeFieldsUpdate
 creativeFieldsUpdate pCfuProFileId_ pCfuPayload_ =
-    CreativeFieldsUpdate
+    CreativeFieldsUpdate'
     { _cfuProFileId = _Coerce # pCfuProFileId_
     , _cfuPayload = pCfuPayload_
     }
@@ -90,7 +90,9 @@ cfuPayload
 
 instance GoogleRequest CreativeFieldsUpdate where
         type Rs CreativeFieldsUpdate = CreativeField
-        requestClient CreativeFieldsUpdate{..}
+        type Scopes CreativeFieldsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeFieldsUpdate'{..}
           = go _cfuProFileId (Just AltJSON) _cfuPayload
               dFAReportingService
           where go

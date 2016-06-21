@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.Monitoring.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -20,1314 +20,2279 @@ module Network.Google.Monitoring.Types.Product where
 import           Network.Google.Monitoring.Types.Sum
 import           Network.Google.Prelude
 
--- | A type in a metric contains information about how the metric is
--- collected and what its data points look like.
+-- | An object that describes the schema of a MonitoredResource object using
+-- a type name and a set of labels. For example, the monitored resource
+-- descriptor for Google Compute Engine VM instances has a type of
+-- \`\"gce_instance\"\` and specifies the use of the labels
+-- \`\"instance_id\"\` and \`\"zone\"\` to identify particular VM
+-- instances. Different APIs can support different monitored resource
+-- types. APIs generally provide a \`list\` method that returns the
+-- monitored resource descriptors used by the API.
 --
--- /See:/ 'metricDescriptorTypeDescriptor' smart constructor.
-data MetricDescriptorTypeDescriptor = MetricDescriptorTypeDescriptor
-    { _mdtdMetricType :: !(Maybe Text)
-    , _mdtdValueType  :: !(Maybe Text)
+-- /See:/ 'monitoredResourceDescriptor' smart constructor.
+data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
+    { _mrdName        :: !(Maybe Text)
+    , _mrdDisplayName :: !(Maybe Text)
+    , _mrdLabels      :: !(Maybe [LabelDescriptor])
+    , _mrdType        :: !(Maybe Text)
+    , _mrdDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetricDescriptorTypeDescriptor' with the minimum fields required to make a request.
+-- | Creates a value of 'MonitoredResourceDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mdtdMetricType'
+-- * 'mrdName'
 --
--- * 'mdtdValueType'
-metricDescriptorTypeDescriptor
-    :: MetricDescriptorTypeDescriptor
-metricDescriptorTypeDescriptor =
-    MetricDescriptorTypeDescriptor
-    { _mdtdMetricType = Nothing
-    , _mdtdValueType = Nothing
+-- * 'mrdDisplayName'
+--
+-- * 'mrdLabels'
+--
+-- * 'mrdType'
+--
+-- * 'mrdDescription'
+monitoredResourceDescriptor
+    :: MonitoredResourceDescriptor
+monitoredResourceDescriptor =
+    MonitoredResourceDescriptor'
+    { _mrdName = Nothing
+    , _mrdDisplayName = Nothing
+    , _mrdLabels = Nothing
+    , _mrdType = Nothing
+    , _mrdDescription = Nothing
     }
 
--- | The method of collecting data for the metric. See Metric types.
-mdtdMetricType :: Lens' MetricDescriptorTypeDescriptor (Maybe Text)
-mdtdMetricType
-  = lens _mdtdMetricType
-      (\ s a -> s{_mdtdMetricType = a})
+-- | Optional. The resource name of the monitored resource descriptor:
+-- \`\"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\"\`
+-- where {type} is the value of the \`type\` field in this object and
+-- {project_id} is a project ID that provides API-specific context for
+-- accessing the type. APIs that do not use project information can use the
+-- resource name format \`\"monitoredResourceDescriptors\/{type}\"\`.
+mrdName :: Lens' MonitoredResourceDescriptor (Maybe Text)
+mrdName = lens _mrdName (\ s a -> s{_mrdName = a})
 
--- | The data type of of individual points in the metric\'s time series. See
--- Metric value types.
-mdtdValueType :: Lens' MetricDescriptorTypeDescriptor (Maybe Text)
-mdtdValueType
-  = lens _mdtdValueType
-      (\ s a -> s{_mdtdValueType = a})
+-- | Optional. A concise name for the monitored resource type that might be
+-- displayed in user interfaces. For example, \`\"Google Cloud SQL
+-- Database\"\`.
+mrdDisplayName :: Lens' MonitoredResourceDescriptor (Maybe Text)
+mrdDisplayName
+  = lens _mrdDisplayName
+      (\ s a -> s{_mrdDisplayName = a})
 
-instance FromJSON MetricDescriptorTypeDescriptor
-         where
+-- | Required. A set of labels used to describe instances of this monitored
+-- resource type. For example, an individual Google Cloud SQL database is
+-- identified by values for the labels \`\"database_id\"\` and
+-- \`\"zone\"\`.
+mrdLabels :: Lens' MonitoredResourceDescriptor [LabelDescriptor]
+mrdLabels
+  = lens _mrdLabels (\ s a -> s{_mrdLabels = a}) .
+      _Default
+      . _Coerce
+
+-- | Required. The monitored resource type. For example, the type
+-- \`\"cloudsql_database\"\` represents databases in Google Cloud SQL.
+mrdType :: Lens' MonitoredResourceDescriptor (Maybe Text)
+mrdType = lens _mrdType (\ s a -> s{_mrdType = a})
+
+-- | Optional. A detailed description of the monitored resource type that
+-- might be used in documentation.
+mrdDescription :: Lens' MonitoredResourceDescriptor (Maybe Text)
+mrdDescription
+  = lens _mrdDescription
+      (\ s a -> s{_mrdDescription = a})
+
+instance FromJSON MonitoredResourceDescriptor where
         parseJSON
-          = withObject "MetricDescriptorTypeDescriptor"
+          = withObject "MonitoredResourceDescriptor"
               (\ o ->
-                 MetricDescriptorTypeDescriptor <$>
-                   (o .:? "metricType") <*> (o .:? "valueType"))
+                 MonitoredResourceDescriptor' <$>
+                   (o .:? "name") <*> (o .:? "displayName") <*>
+                     (o .:? "labels" .!= mempty)
+                     <*> (o .:? "type")
+                     <*> (o .:? "description"))
 
-instance ToJSON MetricDescriptorTypeDescriptor where
-        toJSON MetricDescriptorTypeDescriptor{..}
+instance ToJSON MonitoredResourceDescriptor where
+        toJSON MonitoredResourceDescriptor'{..}
           = object
               (catMaybes
-                 [("metricType" .=) <$> _mdtdMetricType,
-                  ("valueType" .=) <$> _mdtdValueType])
+                 [("name" .=) <$> _mrdName,
+                  ("displayName" .=) <$> _mrdDisplayName,
+                  ("labels" .=) <$> _mrdLabels,
+                  ("type" .=) <$> _mrdType,
+                  ("description" .=) <$> _mrdDescription])
 
--- | The response of cloudmonitoring.timeseries.list
+-- | The \`ListTimeSeries\` response.
 --
--- /See:/ 'listTimeseriesResponse' smart constructor.
-data ListTimeseriesResponse = ListTimeseriesResponse
-    { _ltrNextPageToken :: !(Maybe Text)
-    , _ltrKind          :: !Text
-    , _ltrOldest        :: !(Maybe DateTime')
-    , _ltrYoungest      :: !(Maybe DateTime')
-    , _ltrTimeseries    :: !(Maybe [Timeseries])
+-- /See:/ 'listTimeSeriesResponse' smart constructor.
+data ListTimeSeriesResponse = ListTimeSeriesResponse'
+    { _ltsrNextPageToken :: !(Maybe Text)
+    , _ltsrTimeSeries    :: !(Maybe [TimeSeries])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListTimeseriesResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ListTimeSeriesResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltrNextPageToken'
+-- * 'ltsrNextPageToken'
 --
--- * 'ltrKind'
---
--- * 'ltrOldest'
---
--- * 'ltrYoungest'
---
--- * 'ltrTimeseries'
-listTimeseriesResponse
-    :: ListTimeseriesResponse
-listTimeseriesResponse =
-    ListTimeseriesResponse
-    { _ltrNextPageToken = Nothing
-    , _ltrKind = "cloudmonitoring#listTimeseriesResponse"
-    , _ltrOldest = Nothing
-    , _ltrYoungest = Nothing
-    , _ltrTimeseries = Nothing
+-- * 'ltsrTimeSeries'
+listTimeSeriesResponse
+    :: ListTimeSeriesResponse
+listTimeSeriesResponse =
+    ListTimeSeriesResponse'
+    { _ltsrNextPageToken = Nothing
+    , _ltsrTimeSeries = Nothing
     }
 
--- | Pagination token. If present, indicates that additional results are
--- available for retrieval. To access the results past the pagination
--- limit, set the pageToken query parameter to this value. All of the
--- points of a time series will be returned before returning any point of
--- the subsequent time series.
-ltrNextPageToken :: Lens' ListTimeseriesResponse (Maybe Text)
-ltrNextPageToken
-  = lens _ltrNextPageToken
-      (\ s a -> s{_ltrNextPageToken = a})
+-- | If there are more results than have been returned, then this field is
+-- set to a non-empty value. To see the additional results, use that value
+-- as \`pageToken\` in the next call to this method.
+ltsrNextPageToken :: Lens' ListTimeSeriesResponse (Maybe Text)
+ltsrNextPageToken
+  = lens _ltsrNextPageToken
+      (\ s a -> s{_ltsrNextPageToken = a})
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#listTimeseriesResponse\".
-ltrKind :: Lens' ListTimeseriesResponse Text
-ltrKind = lens _ltrKind (\ s a -> s{_ltrKind = a})
-
--- | The oldest timestamp of the interval of this query as an RFC 3339
--- string.
-ltrOldest :: Lens' ListTimeseriesResponse (Maybe UTCTime)
-ltrOldest
-  = lens _ltrOldest (\ s a -> s{_ltrOldest = a}) .
-      mapping _DateTime
-
--- | The youngest timestamp of the interval of this query as an RFC 3339
--- string.
-ltrYoungest :: Lens' ListTimeseriesResponse (Maybe UTCTime)
-ltrYoungest
-  = lens _ltrYoungest (\ s a -> s{_ltrYoungest = a}) .
-      mapping _DateTime
-
--- | The returned time series.
-ltrTimeseries :: Lens' ListTimeseriesResponse [Timeseries]
-ltrTimeseries
-  = lens _ltrTimeseries
-      (\ s a -> s{_ltrTimeseries = a})
+-- | One or more time series that match the filter included in the request.
+ltsrTimeSeries :: Lens' ListTimeSeriesResponse [TimeSeries]
+ltsrTimeSeries
+  = lens _ltsrTimeSeries
+      (\ s a -> s{_ltsrTimeSeries = a})
       . _Default
       . _Coerce
 
-instance FromJSON ListTimeseriesResponse where
+instance FromJSON ListTimeSeriesResponse where
         parseJSON
-          = withObject "ListTimeseriesResponse"
+          = withObject "ListTimeSeriesResponse"
               (\ o ->
-                 ListTimeseriesResponse <$>
+                 ListTimeSeriesResponse' <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!=
-                        "cloudmonitoring#listTimeseriesResponse")
-                     <*> (o .:? "oldest")
-                     <*> (o .:? "youngest")
-                     <*> (o .:? "timeseries" .!= mempty))
+                     (o .:? "timeSeries" .!= mempty))
 
-instance ToJSON ListTimeseriesResponse where
-        toJSON ListTimeseriesResponse{..}
+instance ToJSON ListTimeSeriesResponse where
+        toJSON ListTimeSeriesResponse'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _ltrNextPageToken,
-                  Just ("kind" .= _ltrKind),
-                  ("oldest" .=) <$> _ltrOldest,
-                  ("youngest" .=) <$> _ltrYoungest,
-                  ("timeseries" .=) <$> _ltrTimeseries])
+                 [("nextPageToken" .=) <$> _ltsrNextPageToken,
+                  ("timeSeries" .=) <$> _ltsrTimeSeries])
 
--- | A metricDescriptor defines the name, label keys, and data type of a
--- particular metric.
+-- | Defines a metric type and its schema.
 --
 -- /See:/ 'metricDescriptor' smart constructor.
-data MetricDescriptor = MetricDescriptor
-    { _mdProject        :: !(Maybe Text)
-    , _mdTypeDescriptor :: !(Maybe MetricDescriptorTypeDescriptor)
-    , _mdName           :: !(Maybe Text)
-    , _mdLabels         :: !(Maybe [MetricDescriptorLabelDescriptor])
-    , _mdDescription    :: !(Maybe Text)
+data MetricDescriptor = MetricDescriptor'
+    { _mdMetricKind  :: !(Maybe Text)
+    , _mdName        :: !(Maybe Text)
+    , _mdDisplayName :: !(Maybe Text)
+    , _mdLabels      :: !(Maybe [LabelDescriptor])
+    , _mdType        :: !(Maybe Text)
+    , _mdValueType   :: !(Maybe Text)
+    , _mdDescription :: !(Maybe Text)
+    , _mdUnit        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricDescriptor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mdProject'
---
--- * 'mdTypeDescriptor'
+-- * 'mdMetricKind'
 --
 -- * 'mdName'
 --
+-- * 'mdDisplayName'
+--
 -- * 'mdLabels'
 --
+-- * 'mdType'
+--
+-- * 'mdValueType'
+--
 -- * 'mdDescription'
+--
+-- * 'mdUnit'
 metricDescriptor
     :: MetricDescriptor
 metricDescriptor =
-    MetricDescriptor
-    { _mdProject = Nothing
-    , _mdTypeDescriptor = Nothing
+    MetricDescriptor'
+    { _mdMetricKind = Nothing
     , _mdName = Nothing
+    , _mdDisplayName = Nothing
     , _mdLabels = Nothing
+    , _mdType = Nothing
+    , _mdValueType = Nothing
     , _mdDescription = Nothing
+    , _mdUnit = Nothing
     }
 
--- | The project ID to which the metric belongs.
-mdProject :: Lens' MetricDescriptor (Maybe Text)
-mdProject
-  = lens _mdProject (\ s a -> s{_mdProject = a})
+-- | Whether the metric records instantaneous values, changes to a value,
+-- etc.
+mdMetricKind :: Lens' MetricDescriptor (Maybe Text)
+mdMetricKind
+  = lens _mdMetricKind (\ s a -> s{_mdMetricKind = a})
 
--- | Type description for this metric.
-mdTypeDescriptor :: Lens' MetricDescriptor (Maybe MetricDescriptorTypeDescriptor)
-mdTypeDescriptor
-  = lens _mdTypeDescriptor
-      (\ s a -> s{_mdTypeDescriptor = a})
-
--- | The name of this metric.
+-- | Resource name. The format of the name may vary between different
+-- implementations. For examples:
+-- projects\/{project_id}\/metricDescriptors\/{type=**}
+-- metricDescriptors\/{type=**}
 mdName :: Lens' MetricDescriptor (Maybe Text)
 mdName = lens _mdName (\ s a -> s{_mdName = a})
 
--- | Labels defined for this metric.
-mdLabels :: Lens' MetricDescriptor [MetricDescriptorLabelDescriptor]
+-- | A concise name for the metric, which can be displayed in user
+-- interfaces. Use sentence case without an ending period, for example
+-- \"Request count\".
+mdDisplayName :: Lens' MetricDescriptor (Maybe Text)
+mdDisplayName
+  = lens _mdDisplayName
+      (\ s a -> s{_mdDisplayName = a})
+
+-- | The set of labels that can be used to describe a specific instance of
+-- this metric type. For example, the
+-- \`compute.googleapis.com\/instance\/network\/received_bytes_count\`
+-- metric type has a label, \`loadbalanced\`, that specifies whether the
+-- traffic was received through a load balanced IP address.
+mdLabels :: Lens' MetricDescriptor [LabelDescriptor]
 mdLabels
   = lens _mdLabels (\ s a -> s{_mdLabels = a}) .
       _Default
       . _Coerce
 
--- | Description of this metric.
+-- | The metric type including a DNS name prefix, for example
+-- \`\"compute.googleapis.com\/instance\/cpu\/utilization\"\`. Metric types
+-- should use a natural hierarchical grouping such as the following:
+-- compute.googleapis.com\/instance\/cpu\/utilization
+-- compute.googleapis.com\/instance\/disk\/read_ops_count
+-- compute.googleapis.com\/instance\/network\/received_bytes_count Note
+-- that if the metric type changes, the monitoring data will be
+-- discontinued, and anything depends on it will break, such as monitoring
+-- dashboards, alerting rules and quota limits. Therefore, once a metric
+-- has been published, its type should be immutable.
+mdType :: Lens' MetricDescriptor (Maybe Text)
+mdType = lens _mdType (\ s a -> s{_mdType = a})
+
+-- | Whether the measurement is an integer, a floating-point number, etc.
+mdValueType :: Lens' MetricDescriptor (Maybe Text)
+mdValueType
+  = lens _mdValueType (\ s a -> s{_mdValueType = a})
+
+-- | A detailed description of the metric, which can be used in
+-- documentation.
 mdDescription :: Lens' MetricDescriptor (Maybe Text)
 mdDescription
   = lens _mdDescription
       (\ s a -> s{_mdDescription = a})
 
+-- | The unit in which the metric value is reported. It is only applicable if
+-- the \`value_type\` is \`INT64\`, \`DOUBLE\`, or \`DISTRIBUTION\`. The
+-- supported units are a subset of [The Unified Code for Units of
+-- Measure](http:\/\/unitsofmeasure.org\/ucum.html) standard: **Basic units
+-- (UNIT)** * \`bit\` bit * \`By\` byte * \`s\` second * \`min\` minute *
+-- \`h\` hour * \`d\` day **Prefixes (PREFIX)** * \`k\` kilo (10**3) *
+-- \`M\` mega (10**6) * \`G\` giga (10**9) * \`T\` tera (10**12) * \`P\`
+-- peta (10**15) * \`E\` exa (10**18) * \`Z\` zetta (10**21) * \`Y\` yotta
+-- (10**24) * \`m\` milli (10**-3) * \`u\` micro (10**-6) * \`n\` nano
+-- (10**-9) * \`p\` pico (10**-12) * \`f\` femto (10**-15) * \`a\` atto
+-- (10**-18) * \`z\` zepto (10**-21) * \`y\` yocto (10**-24) * \`Ki\` kibi
+-- (2**10) * \`Mi\` mebi (2**20) * \`Gi\` gibi (2**30) * \`Ti\` tebi
+-- (2**40) **Grammar** The grammar includes the dimensionless unit \`1\`,
+-- such as \`1\/s\`. The grammar also includes these connectors: * \`\/\`
+-- division (as an infix operator, e.g. \`1\/s\`). * \`.\` multiplication
+-- (as an infix operator, e.g. \`GBy.d\`) The grammar for a unit is as
+-- follows: Expression = Component { \".\" Component } { \"\/\" Component }
+-- ; Component = [ PREFIX ] UNIT [ Annotation ] | Annotation | \"1\" ;
+-- Annotation = \"{\" NAME \"}\" ; Notes: * \`Annotation\` is just a
+-- comment if it follows a \`UNIT\` and is equivalent to \`1\` if it is
+-- used alone. For examples, \`{requests}\/s == 1\/s\`,
+-- \`By{transmitted}\/s == By\/s\`. * \`NAME\` is a sequence of non-blank
+-- printable ASCII characters not containing \'{\' or \'}\'.
+mdUnit :: Lens' MetricDescriptor (Maybe Text)
+mdUnit = lens _mdUnit (\ s a -> s{_mdUnit = a})
+
 instance FromJSON MetricDescriptor where
         parseJSON
           = withObject "MetricDescriptor"
               (\ o ->
-                 MetricDescriptor <$>
-                   (o .:? "project") <*> (o .:? "typeDescriptor") <*>
-                     (o .:? "name")
+                 MetricDescriptor' <$>
+                   (o .:? "metricKind") <*> (o .:? "name") <*>
+                     (o .:? "displayName")
                      <*> (o .:? "labels" .!= mempty)
-                     <*> (o .:? "description"))
+                     <*> (o .:? "type")
+                     <*> (o .:? "valueType")
+                     <*> (o .:? "description")
+                     <*> (o .:? "unit"))
 
 instance ToJSON MetricDescriptor where
-        toJSON MetricDescriptor{..}
+        toJSON MetricDescriptor'{..}
           = object
               (catMaybes
-                 [("project" .=) <$> _mdProject,
-                  ("typeDescriptor" .=) <$> _mdTypeDescriptor,
-                  ("name" .=) <$> _mdName, ("labels" .=) <$> _mdLabels,
-                  ("description" .=) <$> _mdDescription])
+                 [("metricKind" .=) <$> _mdMetricKind,
+                  ("name" .=) <$> _mdName,
+                  ("displayName" .=) <$> _mdDisplayName,
+                  ("labels" .=) <$> _mdLabels, ("type" .=) <$> _mdType,
+                  ("valueType" .=) <$> _mdValueType,
+                  ("description" .=) <$> _mdDescription,
+                  ("unit" .=) <$> _mdUnit])
 
--- | The request of cloudmonitoring.timeseries.write
+-- | The description of a dynamic collection of monitored resources. Each
+-- group has a filter that is matched against monitored resources and their
+-- associated metadata. If a group\'s filter matches an available monitored
+-- resource, then that resource is a member of that group. Groups can
+-- contain any number of monitored resources, and each monitored resource
+-- can be a member of any number of groups. Groups can be nested in
+-- parent-child hierarchies. The \`parentName\` field identifies an
+-- optional parent for each group. If a group has a parent, then the only
+-- monitored resources available to be matched by the group\'s filter are
+-- the resources contained in the parent group. In other words, a group
+-- contains the monitored resources that match its filter and the filters
+-- of all the group\'s ancestors. A group without a parent can contain any
+-- monitored resource. For example, consider an infrastructure running a
+-- set of instances with two user-defined tags: \`\"environment\"\` and
+-- \`\"role\"\`. A parent group has a filter,
+-- \`environment=\"production\"\`. A child of that parent group has a
+-- filter, \`role=\"transcoder\"\`. The parent group contains all instances
+-- in the production environment, regardless of their roles. The child
+-- group contains instances that have the transcoder role *and* are in the
+-- production environment. The monitored resources contained in a group can
+-- change at any moment, depending on what resources exist and what filters
+-- are associated with the group and its ancestors.
 --
--- /See:/ 'writeTimeseriesRequest' smart constructor.
-data WriteTimeseriesRequest = WriteTimeseriesRequest
-    { _wtrCommonLabels :: !(Maybe WriteTimeseriesRequestCommonLabels)
-    , _wtrTimeseries   :: !(Maybe [TimeseriesPoint])
+-- /See:/ 'group'' smart constructor.
+data Group = Group'
+    { _gName        :: !(Maybe Text)
+    , _gDisplayName :: !(Maybe Text)
+    , _gFilter      :: !(Maybe Text)
+    , _gIsCluster   :: !(Maybe Bool)
+    , _gParentName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WriteTimeseriesRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'Group' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wtrCommonLabels'
+-- * 'gName'
 --
--- * 'wtrTimeseries'
-writeTimeseriesRequest
-    :: WriteTimeseriesRequest
-writeTimeseriesRequest =
-    WriteTimeseriesRequest
-    { _wtrCommonLabels = Nothing
-    , _wtrTimeseries = Nothing
+-- * 'gDisplayName'
+--
+-- * 'gFilter'
+--
+-- * 'gIsCluster'
+--
+-- * 'gParentName'
+group'
+    :: Group
+group' =
+    Group'
+    { _gName = Nothing
+    , _gDisplayName = Nothing
+    , _gFilter = Nothing
+    , _gIsCluster = Nothing
+    , _gParentName = Nothing
     }
 
--- | The label\'s name.
-wtrCommonLabels :: Lens' WriteTimeseriesRequest (Maybe WriteTimeseriesRequestCommonLabels)
-wtrCommonLabels
-  = lens _wtrCommonLabels
-      (\ s a -> s{_wtrCommonLabels = a})
+-- | The name of this group. The format is
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. When
+-- creating a group, this field is ignored and a new name is created
+-- consisting of the project specified in the call to \`CreateGroup\` and a
+-- unique \`{group_id}\` that is generated automatically. \'OutputOnly
+gName :: Lens' Group (Maybe Text)
+gName = lens _gName (\ s a -> s{_gName = a})
 
--- | Provide time series specific labels and the data points for each time
--- series. The labels in timeseries and the common_labels should form a
--- complete list of labels that required by the metric.
-wtrTimeseries :: Lens' WriteTimeseriesRequest [TimeseriesPoint]
-wtrTimeseries
-  = lens _wtrTimeseries
-      (\ s a -> s{_wtrTimeseries = a})
+-- | A user-assigned name for this group, used only for display purposes.
+gDisplayName :: Lens' Group (Maybe Text)
+gDisplayName
+  = lens _gDisplayName (\ s a -> s{_gDisplayName = a})
+
+-- | The filter used to determine which monitored resources belong to this
+-- group.
+gFilter :: Lens' Group (Maybe Text)
+gFilter = lens _gFilter (\ s a -> s{_gFilter = a})
+
+-- | If true, the members of this group are considered to be a cluster. The
+-- system can perform additional analysis on groups that are clusters.
+gIsCluster :: Lens' Group (Maybe Bool)
+gIsCluster
+  = lens _gIsCluster (\ s a -> s{_gIsCluster = a})
+
+-- | The name of the group\'s parent, if it has one. The format is
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. For groups
+-- with no parent, \`parentName\` is the empty string, \`\"\"\`.
+gParentName :: Lens' Group (Maybe Text)
+gParentName
+  = lens _gParentName (\ s a -> s{_gParentName = a})
+
+instance FromJSON Group where
+        parseJSON
+          = withObject "Group"
+              (\ o ->
+                 Group' <$>
+                   (o .:? "name") <*> (o .:? "displayName") <*>
+                     (o .:? "filter")
+                     <*> (o .:? "isCluster")
+                     <*> (o .:? "parentName"))
+
+instance ToJSON Group where
+        toJSON Group'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _gName,
+                  ("displayName" .=) <$> _gDisplayName,
+                  ("filter" .=) <$> _gFilter,
+                  ("isCluster" .=) <$> _gIsCluster,
+                  ("parentName" .=) <$> _gParentName])
+
+-- | A single strongly-typed value.
+--
+-- /See:/ 'typedValue' smart constructor.
+data TypedValue = TypedValue'
+    { _tvBoolValue         :: !(Maybe Bool)
+    , _tvDoubleValue       :: !(Maybe (Textual Double))
+    , _tvStringValue       :: !(Maybe Text)
+    , _tvDistributionValue :: !(Maybe Distribution)
+    , _tvInt64Value        :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TypedValue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tvBoolValue'
+--
+-- * 'tvDoubleValue'
+--
+-- * 'tvStringValue'
+--
+-- * 'tvDistributionValue'
+--
+-- * 'tvInt64Value'
+typedValue
+    :: TypedValue
+typedValue =
+    TypedValue'
+    { _tvBoolValue = Nothing
+    , _tvDoubleValue = Nothing
+    , _tvStringValue = Nothing
+    , _tvDistributionValue = Nothing
+    , _tvInt64Value = Nothing
+    }
+
+-- | A Boolean value: \`true\` or \`false\`.
+tvBoolValue :: Lens' TypedValue (Maybe Bool)
+tvBoolValue
+  = lens _tvBoolValue (\ s a -> s{_tvBoolValue = a})
+
+-- | A 64-bit double-precision floating-point number. Its magnitude is
+-- approximately ±10±300 and it has 16 significant digits of precision.
+tvDoubleValue :: Lens' TypedValue (Maybe Double)
+tvDoubleValue
+  = lens _tvDoubleValue
+      (\ s a -> s{_tvDoubleValue = a})
+      . mapping _Coerce
+
+-- | A variable-length string value.
+tvStringValue :: Lens' TypedValue (Maybe Text)
+tvStringValue
+  = lens _tvStringValue
+      (\ s a -> s{_tvStringValue = a})
+
+-- | A distribution value.
+tvDistributionValue :: Lens' TypedValue (Maybe Distribution)
+tvDistributionValue
+  = lens _tvDistributionValue
+      (\ s a -> s{_tvDistributionValue = a})
+
+-- | A 64-bit integer. Its range is approximately ±9.2x1018.
+tvInt64Value :: Lens' TypedValue (Maybe Int64)
+tvInt64Value
+  = lens _tvInt64Value (\ s a -> s{_tvInt64Value = a})
+      . mapping _Coerce
+
+instance FromJSON TypedValue where
+        parseJSON
+          = withObject "TypedValue"
+              (\ o ->
+                 TypedValue' <$>
+                   (o .:? "boolValue") <*> (o .:? "doubleValue") <*>
+                     (o .:? "stringValue")
+                     <*> (o .:? "distributionValue")
+                     <*> (o .:? "int64Value"))
+
+instance ToJSON TypedValue where
+        toJSON TypedValue'{..}
+          = object
+              (catMaybes
+                 [("boolValue" .=) <$> _tvBoolValue,
+                  ("doubleValue" .=) <$> _tvDoubleValue,
+                  ("stringValue" .=) <$> _tvStringValue,
+                  ("distributionValue" .=) <$> _tvDistributionValue,
+                  ("int64Value" .=) <$> _tvInt64Value])
+
+-- | Required. Values for all of the labels listed in the associated
+-- monitored resource descriptor. For example, Cloud SQL databases use the
+-- labels \`\"database_id\"\` and \`\"zone\"\`.
+--
+-- /See:/ 'monitoredResourceLabels' smart constructor.
+newtype MonitoredResourceLabels = MonitoredResourceLabels'
+    { _mrlAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MonitoredResourceLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mrlAddtional'
+monitoredResourceLabels
+    :: HashMap Text Text -- ^ 'mrlAddtional'
+    -> MonitoredResourceLabels
+monitoredResourceLabels pMrlAddtional_ =
+    MonitoredResourceLabels'
+    { _mrlAddtional = _Coerce # pMrlAddtional_
+    }
+
+mrlAddtional :: Lens' MonitoredResourceLabels (HashMap Text Text)
+mrlAddtional
+  = lens _mrlAddtional (\ s a -> s{_mrlAddtional = a})
+      . _Coerce
+
+instance FromJSON MonitoredResourceLabels where
+        parseJSON
+          = withObject "MonitoredResourceLabels"
+              (\ o ->
+                 MonitoredResourceLabels' <$> (parseJSONObject o))
+
+instance ToJSON MonitoredResourceLabels where
+        toJSON = toJSON . _mrlAddtional
+
+-- | \`SourceContext\` represents information about the source of a protobuf
+-- element, like the file in which it is defined.
+--
+-- /See:/ 'sourceContext' smart constructor.
+newtype SourceContext = SourceContext'
+    { _scFileName :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scFileName'
+sourceContext
+    :: SourceContext
+sourceContext =
+    SourceContext'
+    { _scFileName = Nothing
+    }
+
+-- | The path-qualified name of the .proto file that contained the associated
+-- protobuf element. For example: \`\"google\/protobuf\/source.proto\"\`.
+scFileName :: Lens' SourceContext (Maybe Text)
+scFileName
+  = lens _scFileName (\ s a -> s{_scFileName = a})
+
+instance FromJSON SourceContext where
+        parseJSON
+          = withObject "SourceContext"
+              (\ o -> SourceContext' <$> (o .:? "fileName"))
+
+instance ToJSON SourceContext where
+        toJSON SourceContext'{..}
+          = object
+              (catMaybes [("fileName" .=) <$> _scFileName])
+
+-- | Distribution contains summary statistics for a population of values and,
+-- optionally, a histogram representing the distribution of those values
+-- across a specified set of histogram buckets. The summary statistics are
+-- the count, mean, sum of the squared deviation from the mean, the
+-- minimum, and the maximum of the set of population of values. The
+-- histogram is based on a sequence of buckets and gives a count of values
+-- that fall into each bucket. The boundaries of the buckets are given
+-- either explicitly or by specifying parameters for a method of computing
+-- them (buckets of fixed width or buckets of exponentially increasing
+-- width). Although it is not forbidden, it is generally a bad idea to
+-- include non-finite values (infinities or NaNs) in the population of
+-- values, as this will render the \`mean\` and
+-- \`sum_of_squared_deviation\` fields meaningless.
+--
+-- /See:/ 'distribution' smart constructor.
+data Distribution = Distribution'
+    { _dSumOfSquaredDeviation :: !(Maybe (Textual Double))
+    , _dMean                  :: !(Maybe (Textual Double))
+    , _dCount                 :: !(Maybe (Textual Int64))
+    , _dBucketCounts          :: !(Maybe [Textual Int64])
+    , _dRange                 :: !(Maybe Range)
+    , _dBucketOptions         :: !(Maybe BucketOptions)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Distribution' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dSumOfSquaredDeviation'
+--
+-- * 'dMean'
+--
+-- * 'dCount'
+--
+-- * 'dBucketCounts'
+--
+-- * 'dRange'
+--
+-- * 'dBucketOptions'
+distribution
+    :: Distribution
+distribution =
+    Distribution'
+    { _dSumOfSquaredDeviation = Nothing
+    , _dMean = Nothing
+    , _dCount = Nothing
+    , _dBucketCounts = Nothing
+    , _dRange = Nothing
+    , _dBucketOptions = Nothing
+    }
+
+-- | The sum of squared deviations from the mean of the values in the
+-- population. For values x_i this is: Sum[i=1..n]((x_i - mean)^2) Knuth,
+-- \"The Art of Computer Programming\", Vol. 2, page 323, 3rd edition
+-- describes Welford\'s method for accumulating this sum in one pass. If
+-- \`count\` is zero then this field must be zero.
+dSumOfSquaredDeviation :: Lens' Distribution (Maybe Double)
+dSumOfSquaredDeviation
+  = lens _dSumOfSquaredDeviation
+      (\ s a -> s{_dSumOfSquaredDeviation = a})
+      . mapping _Coerce
+
+-- | The arithmetic mean of the values in the population. If \`count\` is
+-- zero then this field must be zero.
+dMean :: Lens' Distribution (Maybe Double)
+dMean
+  = lens _dMean (\ s a -> s{_dMean = a}) .
+      mapping _Coerce
+
+-- | The number of values in the population. Must be non-negative.
+dCount :: Lens' Distribution (Maybe Int64)
+dCount
+  = lens _dCount (\ s a -> s{_dCount = a}) .
+      mapping _Coerce
+
+-- | If \`bucket_options\` is given, then the sum of the values in
+-- \`bucket_counts\` must equal the value in \`count\`. If
+-- \`bucket_options\` is not given, no \`bucket_counts\` fields may be
+-- given. Bucket counts are given in order under the numbering scheme
+-- described above (the underflow bucket has number 0; the finite buckets,
+-- if any, have numbers 1 through N-2; the overflow bucket has number N-1).
+-- The size of \`bucket_counts\` must be no greater than N as defined in
+-- \`bucket_options\`. Any suffix of trailing zero bucket_count fields may
+-- be omitted.
+dBucketCounts :: Lens' Distribution [Int64]
+dBucketCounts
+  = lens _dBucketCounts
+      (\ s a -> s{_dBucketCounts = a})
       . _Default
       . _Coerce
 
-instance FromJSON WriteTimeseriesRequest where
-        parseJSON
-          = withObject "WriteTimeseriesRequest"
-              (\ o ->
-                 WriteTimeseriesRequest <$>
-                   (o .:? "commonLabels") <*>
-                     (o .:? "timeseries" .!= mempty))
+-- | If specified, contains the range of the population values. The field
+-- must not be present if the \`count\` is zero.
+dRange :: Lens' Distribution (Maybe Range)
+dRange = lens _dRange (\ s a -> s{_dRange = a})
 
-instance ToJSON WriteTimeseriesRequest where
-        toJSON WriteTimeseriesRequest{..}
+-- | Defines the histogram bucket boundaries.
+dBucketOptions :: Lens' Distribution (Maybe BucketOptions)
+dBucketOptions
+  = lens _dBucketOptions
+      (\ s a -> s{_dBucketOptions = a})
+
+instance FromJSON Distribution where
+        parseJSON
+          = withObject "Distribution"
+              (\ o ->
+                 Distribution' <$>
+                   (o .:? "sumOfSquaredDeviation") <*> (o .:? "mean")
+                     <*> (o .:? "count")
+                     <*> (o .:? "bucketCounts" .!= mempty)
+                     <*> (o .:? "range")
+                     <*> (o .:? "bucketOptions"))
+
+instance ToJSON Distribution where
+        toJSON Distribution'{..}
           = object
               (catMaybes
-                 [("commonLabels" .=) <$> _wtrCommonLabels,
-                  ("timeseries" .=) <$> _wtrTimeseries])
+                 [("sumOfSquaredDeviation" .=) <$>
+                    _dSumOfSquaredDeviation,
+                  ("mean" .=) <$> _dMean, ("count" .=) <$> _dCount,
+                  ("bucketCounts" .=) <$> _dBucketCounts,
+                  ("range" .=) <$> _dRange,
+                  ("bucketOptions" .=) <$> _dBucketOptions])
 
--- | The label\'s name.
+-- | A single field of a message type.
 --
--- /See:/ 'writeTimeseriesRequestCommonLabels' smart constructor.
-newtype WriteTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels
-    { _wtrclAddtional :: HashMap Text Text
+-- /See:/ 'field' smart constructor.
+data Field = Field'
+    { _fKind         :: !(Maybe Text)
+    , _fOneofIndex   :: !(Maybe (Textual Int32))
+    , _fName         :: !(Maybe Text)
+    , _fJSONName     :: !(Maybe Text)
+    , _fCardinality  :: !(Maybe Text)
+    , _fOptions      :: !(Maybe [Option])
+    , _fPacked       :: !(Maybe Bool)
+    , _fDefaultValue :: !(Maybe Text)
+    , _fNumber       :: !(Maybe (Textual Int32))
+    , _fTypeURL      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WriteTimeseriesRequestCommonLabels' with the minimum fields required to make a request.
+-- | Creates a value of 'Field' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wtrclAddtional'
-writeTimeseriesRequestCommonLabels
-    :: HashMap Text Text -- ^ 'wtrclAddtional'
-    -> WriteTimeseriesRequestCommonLabels
-writeTimeseriesRequestCommonLabels pWtrclAddtional_ =
-    WriteTimeseriesRequestCommonLabels
-    { _wtrclAddtional = _Coerce # pWtrclAddtional_
+-- * 'fKind'
+--
+-- * 'fOneofIndex'
+--
+-- * 'fName'
+--
+-- * 'fJSONName'
+--
+-- * 'fCardinality'
+--
+-- * 'fOptions'
+--
+-- * 'fPacked'
+--
+-- * 'fDefaultValue'
+--
+-- * 'fNumber'
+--
+-- * 'fTypeURL'
+field
+    :: Field
+field =
+    Field'
+    { _fKind = Nothing
+    , _fOneofIndex = Nothing
+    , _fName = Nothing
+    , _fJSONName = Nothing
+    , _fCardinality = Nothing
+    , _fOptions = Nothing
+    , _fPacked = Nothing
+    , _fDefaultValue = Nothing
+    , _fNumber = Nothing
+    , _fTypeURL = Nothing
     }
 
--- | The label\'s name.
-wtrclAddtional :: Lens' WriteTimeseriesRequestCommonLabels (HashMap Text Text)
-wtrclAddtional
-  = lens _wtrclAddtional
-      (\ s a -> s{_wtrclAddtional = a})
-      . _Coerce
+-- | The field type.
+fKind :: Lens' Field (Maybe Text)
+fKind = lens _fKind (\ s a -> s{_fKind = a})
 
-instance FromJSON WriteTimeseriesRequestCommonLabels
-         where
-        parseJSON
-          = withObject "WriteTimeseriesRequestCommonLabels"
-              (\ o ->
-                 WriteTimeseriesRequestCommonLabels <$>
-                   (parseJSONObject o))
-
-instance ToJSON WriteTimeseriesRequestCommonLabels
-         where
-        toJSON = toJSON . _wtrclAddtional
-
--- | A label in a metric is a description of this metric, including the key
--- of this description (what the description is), and the value for this
--- description.
---
--- /See:/ 'metricDescriptorLabelDescriptor' smart constructor.
-data MetricDescriptorLabelDescriptor = MetricDescriptorLabelDescriptor
-    { _mdldKey         :: !(Maybe Text)
-    , _mdldDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'MetricDescriptorLabelDescriptor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mdldKey'
---
--- * 'mdldDescription'
-metricDescriptorLabelDescriptor
-    :: MetricDescriptorLabelDescriptor
-metricDescriptorLabelDescriptor =
-    MetricDescriptorLabelDescriptor
-    { _mdldKey = Nothing
-    , _mdldDescription = Nothing
-    }
-
--- | Label key.
-mdldKey :: Lens' MetricDescriptorLabelDescriptor (Maybe Text)
-mdldKey = lens _mdldKey (\ s a -> s{_mdldKey = a})
-
--- | Label description.
-mdldDescription :: Lens' MetricDescriptorLabelDescriptor (Maybe Text)
-mdldDescription
-  = lens _mdldDescription
-      (\ s a -> s{_mdldDescription = a})
-
-instance FromJSON MetricDescriptorLabelDescriptor
-         where
-        parseJSON
-          = withObject "MetricDescriptorLabelDescriptor"
-              (\ o ->
-                 MetricDescriptorLabelDescriptor <$>
-                   (o .:? "key") <*> (o .:? "description"))
-
-instance ToJSON MetricDescriptorLabelDescriptor where
-        toJSON MetricDescriptorLabelDescriptor{..}
-          = object
-              (catMaybes
-                 [("key" .=) <$> _mdldKey,
-                  ("description" .=) <$> _mdldDescription])
-
--- | The underflow bucket is a special bucket that does not have the
--- lowerBound field; it includes all of the events that are less than its
--- upper bound.
---
--- /See:/ 'pointDistributionUnderflowBucket' smart constructor.
-data PointDistributionUnderflowBucket = PointDistributionUnderflowBucket
-    { _pdubUpperBound :: !(Maybe (Textual Double))
-    , _pdubCount      :: !(Maybe (Textual Int64))
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PointDistributionUnderflowBucket' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pdubUpperBound'
---
--- * 'pdubCount'
-pointDistributionUnderflowBucket
-    :: PointDistributionUnderflowBucket
-pointDistributionUnderflowBucket =
-    PointDistributionUnderflowBucket
-    { _pdubUpperBound = Nothing
-    , _pdubCount = Nothing
-    }
-
--- | The upper bound of the value interval of this bucket (exclusive).
-pdubUpperBound :: Lens' PointDistributionUnderflowBucket (Maybe Double)
-pdubUpperBound
-  = lens _pdubUpperBound
-      (\ s a -> s{_pdubUpperBound = a})
-      . mapping _Coerce
-
--- | The number of events whose values are in the interval defined by this
--- bucket.
-pdubCount :: Lens' PointDistributionUnderflowBucket (Maybe Int64)
-pdubCount
-  = lens _pdubCount (\ s a -> s{_pdubCount = a}) .
+-- | The index of the field type in \`Type.oneofs\`, for message or
+-- enumeration types. The first type has index 1; zero means the type is
+-- not in the list.
+fOneofIndex :: Lens' Field (Maybe Int32)
+fOneofIndex
+  = lens _fOneofIndex (\ s a -> s{_fOneofIndex = a}) .
       mapping _Coerce
 
-instance FromJSON PointDistributionUnderflowBucket
-         where
-        parseJSON
-          = withObject "PointDistributionUnderflowBucket"
-              (\ o ->
-                 PointDistributionUnderflowBucket <$>
-                   (o .:? "upperBound") <*> (o .:? "count"))
+-- | The field name.
+fName :: Lens' Field (Maybe Text)
+fName = lens _fName (\ s a -> s{_fName = a})
 
-instance ToJSON PointDistributionUnderflowBucket
-         where
-        toJSON PointDistributionUnderflowBucket{..}
+-- | The field JSON name.
+fJSONName :: Lens' Field (Maybe Text)
+fJSONName
+  = lens _fJSONName (\ s a -> s{_fJSONName = a})
+
+-- | The field cardinality.
+fCardinality :: Lens' Field (Maybe Text)
+fCardinality
+  = lens _fCardinality (\ s a -> s{_fCardinality = a})
+
+-- | The protocol buffer options.
+fOptions :: Lens' Field [Option]
+fOptions
+  = lens _fOptions (\ s a -> s{_fOptions = a}) .
+      _Default
+      . _Coerce
+
+-- | Whether to use alternative packed wire representation.
+fPacked :: Lens' Field (Maybe Bool)
+fPacked = lens _fPacked (\ s a -> s{_fPacked = a})
+
+-- | The string value of the default value of this field. Proto2 syntax only.
+fDefaultValue :: Lens' Field (Maybe Text)
+fDefaultValue
+  = lens _fDefaultValue
+      (\ s a -> s{_fDefaultValue = a})
+
+-- | The field number.
+fNumber :: Lens' Field (Maybe Int32)
+fNumber
+  = lens _fNumber (\ s a -> s{_fNumber = a}) .
+      mapping _Coerce
+
+-- | The field type URL, without the scheme, for message or enumeration
+-- types. Example: \`\"type.googleapis.com\/google.protobuf.Timestamp\"\`.
+fTypeURL :: Lens' Field (Maybe Text)
+fTypeURL = lens _fTypeURL (\ s a -> s{_fTypeURL = a})
+
+instance FromJSON Field where
+        parseJSON
+          = withObject "Field"
+              (\ o ->
+                 Field' <$>
+                   (o .:? "kind") <*> (o .:? "oneofIndex") <*>
+                     (o .:? "name")
+                     <*> (o .:? "jsonName")
+                     <*> (o .:? "cardinality")
+                     <*> (o .:? "options" .!= mempty)
+                     <*> (o .:? "packed")
+                     <*> (o .:? "defaultValue")
+                     <*> (o .:? "number")
+                     <*> (o .:? "typeUrl"))
+
+instance ToJSON Field where
+        toJSON Field'{..}
           = object
               (catMaybes
-                 [("upperBound" .=) <$> _pdubUpperBound,
-                  ("count" .=) <$> _pdubCount])
+                 [("kind" .=) <$> _fKind,
+                  ("oneofIndex" .=) <$> _fOneofIndex,
+                  ("name" .=) <$> _fName,
+                  ("jsonName" .=) <$> _fJSONName,
+                  ("cardinality" .=) <$> _fCardinality,
+                  ("options" .=) <$> _fOptions,
+                  ("packed" .=) <$> _fPacked,
+                  ("defaultValue" .=) <$> _fDefaultValue,
+                  ("number" .=) <$> _fNumber,
+                  ("typeUrl" .=) <$> _fTypeURL])
 
--- | The response of cloudmonitoring.metricDescriptors.list.
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+    Empty'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty'
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
+
+instance ToJSON Empty where
+        toJSON = const emptyObject
+
+-- | The \`ListGroups\` response.
+--
+-- /See:/ 'listGroupsResponse' smart constructor.
+data ListGroupsResponse = ListGroupsResponse'
+    { _lgrNextPageToken :: !(Maybe Text)
+    , _lgrGroup         :: !(Maybe [Group])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListGroupsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lgrNextPageToken'
+--
+-- * 'lgrGroup'
+listGroupsResponse
+    :: ListGroupsResponse
+listGroupsResponse =
+    ListGroupsResponse'
+    { _lgrNextPageToken = Nothing
+    , _lgrGroup = Nothing
+    }
+
+-- | If there are more results than have been returned, then this field is
+-- set to a non-empty value. To see the additional results, use that value
+-- as \`pageToken\` in the next call to this method.
+lgrNextPageToken :: Lens' ListGroupsResponse (Maybe Text)
+lgrNextPageToken
+  = lens _lgrNextPageToken
+      (\ s a -> s{_lgrNextPageToken = a})
+
+-- | The groups that match the specified filters.
+lgrGroup :: Lens' ListGroupsResponse [Group]
+lgrGroup
+  = lens _lgrGroup (\ s a -> s{_lgrGroup = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListGroupsResponse where
+        parseJSON
+          = withObject "ListGroupsResponse"
+              (\ o ->
+                 ListGroupsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "group" .!= mempty))
+
+instance ToJSON ListGroupsResponse where
+        toJSON ListGroupsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lgrNextPageToken,
+                  ("group" .=) <$> _lgrGroup])
+
+-- | The \`ListMetricDescriptors\` response.
 --
 -- /See:/ 'listMetricDescriptorsResponse' smart constructor.
-data ListMetricDescriptorsResponse = ListMetricDescriptorsResponse
-    { _lmdrMetrics       :: !(Maybe [MetricDescriptor])
-    , _lmdrNextPageToken :: !(Maybe Text)
-    , _lmdrKind          :: !Text
+data ListMetricDescriptorsResponse = ListMetricDescriptorsResponse'
+    { _lmdrMetricDescriptors :: !(Maybe [MetricDescriptor])
+    , _lmdrNextPageToken     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListMetricDescriptorsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lmdrMetrics'
+-- * 'lmdrMetricDescriptors'
 --
 -- * 'lmdrNextPageToken'
---
--- * 'lmdrKind'
 listMetricDescriptorsResponse
     :: ListMetricDescriptorsResponse
 listMetricDescriptorsResponse =
-    ListMetricDescriptorsResponse
-    { _lmdrMetrics = Nothing
+    ListMetricDescriptorsResponse'
+    { _lmdrMetricDescriptors = Nothing
     , _lmdrNextPageToken = Nothing
-    , _lmdrKind = "cloudmonitoring#listMetricDescriptorsResponse"
     }
 
--- | The returned metric descriptors.
-lmdrMetrics :: Lens' ListMetricDescriptorsResponse [MetricDescriptor]
-lmdrMetrics
-  = lens _lmdrMetrics (\ s a -> s{_lmdrMetrics = a}) .
-      _Default
+-- | The metric descriptors that are available to the project and that match
+-- the value of \`filter\`, if present.
+lmdrMetricDescriptors :: Lens' ListMetricDescriptorsResponse [MetricDescriptor]
+lmdrMetricDescriptors
+  = lens _lmdrMetricDescriptors
+      (\ s a -> s{_lmdrMetricDescriptors = a})
+      . _Default
       . _Coerce
 
--- | Pagination token. If present, indicates that additional results are
--- available for retrieval. To access the results past the pagination
--- limit, pass this value to the pageToken query parameter.
+-- | If there are more results than have been returned, then this field is
+-- set to a non-empty value. To see the additional results, use that value
+-- as \`pageToken\` in the next call to this method.
 lmdrNextPageToken :: Lens' ListMetricDescriptorsResponse (Maybe Text)
 lmdrNextPageToken
   = lens _lmdrNextPageToken
       (\ s a -> s{_lmdrNextPageToken = a})
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#listMetricDescriptorsResponse\".
-lmdrKind :: Lens' ListMetricDescriptorsResponse Text
-lmdrKind = lens _lmdrKind (\ s a -> s{_lmdrKind = a})
-
 instance FromJSON ListMetricDescriptorsResponse where
         parseJSON
           = withObject "ListMetricDescriptorsResponse"
               (\ o ->
-                 ListMetricDescriptorsResponse <$>
-                   (o .:? "metrics" .!= mempty) <*>
-                     (o .:? "nextPageToken")
-                     <*>
-                     (o .:? "kind" .!=
-                        "cloudmonitoring#listMetricDescriptorsResponse"))
+                 ListMetricDescriptorsResponse' <$>
+                   (o .:? "metricDescriptors" .!= mempty) <*>
+                     (o .:? "nextPageToken"))
 
 instance ToJSON ListMetricDescriptorsResponse where
-        toJSON ListMetricDescriptorsResponse{..}
+        toJSON ListMetricDescriptorsResponse'{..}
           = object
               (catMaybes
-                 [("metrics" .=) <$> _lmdrMetrics,
-                  ("nextPageToken" .=) <$> _lmdrNextPageToken,
-                  Just ("kind" .= _lmdrKind)])
+                 [("metricDescriptors" .=) <$> _lmdrMetricDescriptors,
+                  ("nextPageToken" .=) <$> _lmdrNextPageToken])
 
--- | The request of cloudmonitoring.timeseriesDescriptors.list
+-- | The option\'s value. For example, \`\"com.google.protobuf\"\`.
 --
--- /See:/ 'listTimeseriesDescriptorsRequest' smart constructor.
-newtype ListTimeseriesDescriptorsRequest = ListTimeseriesDescriptorsRequest
-    { _ltdrKind :: Text
+-- /See:/ 'optionValue' smart constructor.
+newtype OptionValue = OptionValue'
+    { _ovAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListTimeseriesDescriptorsRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'OptionValue' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltdrKind'
-listTimeseriesDescriptorsRequest
-    :: ListTimeseriesDescriptorsRequest
-listTimeseriesDescriptorsRequest =
-    ListTimeseriesDescriptorsRequest
-    { _ltdrKind = "cloudmonitoring#listTimeseriesDescriptorsRequest"
+-- * 'ovAddtional'
+optionValue
+    :: HashMap Text JSONValue -- ^ 'ovAddtional'
+    -> OptionValue
+optionValue pOvAddtional_ =
+    OptionValue'
+    { _ovAddtional = _Coerce # pOvAddtional_
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#listTimeseriesDescriptorsRequest\".
-ltdrKind :: Lens' ListTimeseriesDescriptorsRequest Text
-ltdrKind = lens _ltdrKind (\ s a -> s{_ltdrKind = a})
+-- | Properties of the object. Contains field \'ype with type URL.
+ovAddtional :: Lens' OptionValue (HashMap Text JSONValue)
+ovAddtional
+  = lens _ovAddtional (\ s a -> s{_ovAddtional = a}) .
+      _Coerce
 
-instance FromJSON ListTimeseriesDescriptorsRequest
-         where
+instance FromJSON OptionValue where
         parseJSON
-          = withObject "ListTimeseriesDescriptorsRequest"
-              (\ o ->
-                 ListTimeseriesDescriptorsRequest <$>
-                   (o .:? "kind" .!=
-                      "cloudmonitoring#listTimeseriesDescriptorsRequest"))
+          = withObject "OptionValue"
+              (\ o -> OptionValue' <$> (parseJSONObject o))
 
-instance ToJSON ListTimeseriesDescriptorsRequest
-         where
-        toJSON ListTimeseriesDescriptorsRequest{..}
-          = object (catMaybes [Just ("kind" .= _ltdrKind)])
+instance ToJSON OptionValue where
+        toJSON = toJSON . _ovAddtional
 
--- | The label\'s name.
+-- | The \`CreateTimeSeries\` request.
 --
--- /See:/ 'timeseriesDescriptorLabels' smart constructor.
-newtype TimeseriesDescriptorLabels = TimeseriesDescriptorLabels
-    { _tdlAddtional :: HashMap Text Text
+-- /See:/ 'createTimeSeriesRequest' smart constructor.
+newtype CreateTimeSeriesRequest = CreateTimeSeriesRequest'
+    { _ctsrTimeSeries :: Maybe [TimeSeries]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TimeseriesDescriptorLabels' with the minimum fields required to make a request.
+-- | Creates a value of 'CreateTimeSeriesRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tdlAddtional'
-timeseriesDescriptorLabels
-    :: HashMap Text Text -- ^ 'tdlAddtional'
-    -> TimeseriesDescriptorLabels
-timeseriesDescriptorLabels pTdlAddtional_ =
-    TimeseriesDescriptorLabels
-    { _tdlAddtional = _Coerce # pTdlAddtional_
+-- * 'ctsrTimeSeries'
+createTimeSeriesRequest
+    :: CreateTimeSeriesRequest
+createTimeSeriesRequest =
+    CreateTimeSeriesRequest'
+    { _ctsrTimeSeries = Nothing
     }
 
--- | The label\'s name.
-tdlAddtional :: Lens' TimeseriesDescriptorLabels (HashMap Text Text)
-tdlAddtional
-  = lens _tdlAddtional (\ s a -> s{_tdlAddtional = a})
+-- | The new data to be added to a list of time series. Adds at most one data
+-- point to each of several time series. The new data point must be more
+-- recent than any other point in its time series. Each \`TimeSeries\`
+-- value must fully specify a unique time series by supplying all label
+-- values for the metric and the monitored resource.
+ctsrTimeSeries :: Lens' CreateTimeSeriesRequest [TimeSeries]
+ctsrTimeSeries
+  = lens _ctsrTimeSeries
+      (\ s a -> s{_ctsrTimeSeries = a})
+      . _Default
       . _Coerce
 
-instance FromJSON TimeseriesDescriptorLabels where
+instance FromJSON CreateTimeSeriesRequest where
         parseJSON
-          = withObject "TimeseriesDescriptorLabels"
+          = withObject "CreateTimeSeriesRequest"
               (\ o ->
-                 TimeseriesDescriptorLabels <$> (parseJSONObject o))
+                 CreateTimeSeriesRequest' <$>
+                   (o .:? "timeSeries" .!= mempty))
 
-instance ToJSON TimeseriesDescriptorLabels where
-        toJSON = toJSON . _tdlAddtional
-
--- | The histogram\'s bucket. Buckets that form the histogram of a
--- distribution value. If the upper bound of a bucket, say U1, does not
--- equal the lower bound of the next bucket, say L2, this means that there
--- is no event in [U1, L2).
---
--- /See:/ 'pointDistributionBucket' smart constructor.
-data PointDistributionBucket = PointDistributionBucket
-    { _pdbUpperBound :: !(Maybe (Textual Double))
-    , _pdbCount      :: !(Maybe (Textual Int64))
-    , _pdbLowerBound :: !(Maybe (Textual Double))
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PointDistributionBucket' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pdbUpperBound'
---
--- * 'pdbCount'
---
--- * 'pdbLowerBound'
-pointDistributionBucket
-    :: PointDistributionBucket
-pointDistributionBucket =
-    PointDistributionBucket
-    { _pdbUpperBound = Nothing
-    , _pdbCount = Nothing
-    , _pdbLowerBound = Nothing
-    }
-
--- | The upper bound of the value interval of this bucket (exclusive).
-pdbUpperBound :: Lens' PointDistributionBucket (Maybe Double)
-pdbUpperBound
-  = lens _pdbUpperBound
-      (\ s a -> s{_pdbUpperBound = a})
-      . mapping _Coerce
-
--- | The number of events whose values are in the interval defined by this
--- bucket.
-pdbCount :: Lens' PointDistributionBucket (Maybe Int64)
-pdbCount
-  = lens _pdbCount (\ s a -> s{_pdbCount = a}) .
-      mapping _Coerce
-
--- | The lower bound of the value interval of this bucket (inclusive).
-pdbLowerBound :: Lens' PointDistributionBucket (Maybe Double)
-pdbLowerBound
-  = lens _pdbLowerBound
-      (\ s a -> s{_pdbLowerBound = a})
-      . mapping _Coerce
-
-instance FromJSON PointDistributionBucket where
-        parseJSON
-          = withObject "PointDistributionBucket"
-              (\ o ->
-                 PointDistributionBucket <$>
-                   (o .:? "upperBound") <*> (o .:? "count") <*>
-                     (o .:? "lowerBound"))
-
-instance ToJSON PointDistributionBucket where
-        toJSON PointDistributionBucket{..}
+instance ToJSON CreateTimeSeriesRequest where
+        toJSON CreateTimeSeriesRequest'{..}
           = object
-              (catMaybes
-                 [("upperBound" .=) <$> _pdbUpperBound,
-                  ("count" .=) <$> _pdbCount,
-                  ("lowerBound" .=) <$> _pdbLowerBound])
+              (catMaybes [("timeSeries" .=) <$> _ctsrTimeSeries])
 
--- | The response of cloudmonitoring.timeseries.write
+-- | The \`ListMonitoredResourcDescriptors\` response.
 --
--- /See:/ 'writeTimeseriesResponse' smart constructor.
-newtype WriteTimeseriesResponse = WriteTimeseriesResponse
-    { _wtrKind :: Text
+-- /See:/ 'listMonitoredResourceDescriptorsResponse' smart constructor.
+data ListMonitoredResourceDescriptorsResponse = ListMonitoredResourceDescriptorsResponse'
+    { _lmrdrNextPageToken       :: !(Maybe Text)
+    , _lmrdrResourceDescriptors :: !(Maybe [MonitoredResourceDescriptor])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WriteTimeseriesResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ListMonitoredResourceDescriptorsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wtrKind'
-writeTimeseriesResponse
-    :: WriteTimeseriesResponse
-writeTimeseriesResponse =
-    WriteTimeseriesResponse
-    { _wtrKind = "cloudmonitoring#writeTimeseriesResponse"
+-- * 'lmrdrNextPageToken'
+--
+-- * 'lmrdrResourceDescriptors'
+listMonitoredResourceDescriptorsResponse
+    :: ListMonitoredResourceDescriptorsResponse
+listMonitoredResourceDescriptorsResponse =
+    ListMonitoredResourceDescriptorsResponse'
+    { _lmrdrNextPageToken = Nothing
+    , _lmrdrResourceDescriptors = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#writeTimeseriesResponse\".
-wtrKind :: Lens' WriteTimeseriesResponse Text
-wtrKind = lens _wtrKind (\ s a -> s{_wtrKind = a})
+-- | If there are more results than have been returned, then this field is
+-- set to a non-empty value. To see the additional results, use that value
+-- as \`pageToken\` in the next call to this method.
+lmrdrNextPageToken :: Lens' ListMonitoredResourceDescriptorsResponse (Maybe Text)
+lmrdrNextPageToken
+  = lens _lmrdrNextPageToken
+      (\ s a -> s{_lmrdrNextPageToken = a})
 
-instance FromJSON WriteTimeseriesResponse where
-        parseJSON
-          = withObject "WriteTimeseriesResponse"
-              (\ o ->
-                 WriteTimeseriesResponse <$>
-                   (o .:? "kind" .!=
-                      "cloudmonitoring#writeTimeseriesResponse"))
-
-instance ToJSON WriteTimeseriesResponse where
-        toJSON WriteTimeseriesResponse{..}
-          = object (catMaybes [Just ("kind" .= _wtrKind)])
-
---
--- /See:/ 'timeseriesDescriptorLabel' smart constructor.
-data TimeseriesDescriptorLabel = TimeseriesDescriptorLabel
-    { _tdlValue :: !(Maybe Text)
-    , _tdlKey   :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TimeseriesDescriptorLabel' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tdlValue'
---
--- * 'tdlKey'
-timeseriesDescriptorLabel
-    :: TimeseriesDescriptorLabel
-timeseriesDescriptorLabel =
-    TimeseriesDescriptorLabel
-    { _tdlValue = Nothing
-    , _tdlKey = Nothing
-    }
-
--- | The label\'s value.
-tdlValue :: Lens' TimeseriesDescriptorLabel (Maybe Text)
-tdlValue = lens _tdlValue (\ s a -> s{_tdlValue = a})
-
--- | The label\'s name.
-tdlKey :: Lens' TimeseriesDescriptorLabel (Maybe Text)
-tdlKey = lens _tdlKey (\ s a -> s{_tdlKey = a})
-
-instance FromJSON TimeseriesDescriptorLabel where
-        parseJSON
-          = withObject "TimeseriesDescriptorLabel"
-              (\ o ->
-                 TimeseriesDescriptorLabel <$>
-                   (o .:? "value") <*> (o .:? "key"))
-
-instance ToJSON TimeseriesDescriptorLabel where
-        toJSON TimeseriesDescriptorLabel{..}
-          = object
-              (catMaybes
-                 [("value" .=) <$> _tdlValue, ("key" .=) <$> _tdlKey])
-
--- | Distribution data point value type. When writing distribution points,
--- try to be consistent with the boundaries of your buckets. If you must
--- modify the bucket boundaries, then do so by merging, partitioning, or
--- appending rather than skewing them.
---
--- /See:/ 'pointDistribution' smart constructor.
-data PointDistribution = PointDistribution
-    { _pdOverflowBucket  :: !(Maybe PointDistributionOverflowBucket)
-    , _pdBuckets         :: !(Maybe [PointDistributionBucket])
-    , _pdUnderflowBucket :: !(Maybe PointDistributionUnderflowBucket)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'PointDistribution' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'pdOverflowBucket'
---
--- * 'pdBuckets'
---
--- * 'pdUnderflowBucket'
-pointDistribution
-    :: PointDistribution
-pointDistribution =
-    PointDistribution
-    { _pdOverflowBucket = Nothing
-    , _pdBuckets = Nothing
-    , _pdUnderflowBucket = Nothing
-    }
-
--- | The overflow bucket.
-pdOverflowBucket :: Lens' PointDistribution (Maybe PointDistributionOverflowBucket)
-pdOverflowBucket
-  = lens _pdOverflowBucket
-      (\ s a -> s{_pdOverflowBucket = a})
-
--- | The finite buckets.
-pdBuckets :: Lens' PointDistribution [PointDistributionBucket]
-pdBuckets
-  = lens _pdBuckets (\ s a -> s{_pdBuckets = a}) .
-      _Default
+-- | The monitored resource descriptors that are available to this project
+-- and that match \`filter\`, if present.
+lmrdrResourceDescriptors :: Lens' ListMonitoredResourceDescriptorsResponse [MonitoredResourceDescriptor]
+lmrdrResourceDescriptors
+  = lens _lmrdrResourceDescriptors
+      (\ s a -> s{_lmrdrResourceDescriptors = a})
+      . _Default
       . _Coerce
 
--- | The underflow bucket.
-pdUnderflowBucket :: Lens' PointDistribution (Maybe PointDistributionUnderflowBucket)
-pdUnderflowBucket
-  = lens _pdUnderflowBucket
-      (\ s a -> s{_pdUnderflowBucket = a})
-
-instance FromJSON PointDistribution where
+instance FromJSON
+         ListMonitoredResourceDescriptorsResponse where
         parseJSON
-          = withObject "PointDistribution"
+          = withObject
+              "ListMonitoredResourceDescriptorsResponse"
               (\ o ->
-                 PointDistribution <$>
-                   (o .:? "overflowBucket") <*>
-                     (o .:? "buckets" .!= mempty)
-                     <*> (o .:? "underflowBucket"))
+                 ListMonitoredResourceDescriptorsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "resourceDescriptors" .!= mempty))
 
-instance ToJSON PointDistribution where
-        toJSON PointDistribution{..}
+instance ToJSON
+         ListMonitoredResourceDescriptorsResponse where
+        toJSON ListMonitoredResourceDescriptorsResponse'{..}
           = object
               (catMaybes
-                 [("overflowBucket" .=) <$> _pdOverflowBucket,
-                  ("buckets" .=) <$> _pdBuckets,
-                  ("underflowBucket" .=) <$> _pdUnderflowBucket])
+                 [("nextPageToken" .=) <$> _lmrdrNextPageToken,
+                  ("resourceDescriptors" .=) <$>
+                    _lmrdrResourceDescriptors])
 
--- | Point is a single point in a time series. It consists of a start time,
--- an end time, and a value.
+-- | A set of buckets with arbitrary widths. Defines \`size(bounds) + 1\` (=
+-- N) buckets with these boundaries for bucket i: Upper bound (0 \<= i \<
+-- N-1): bounds[i] Lower bound (1 \<= i \< N); bounds[i - 1] There must be
+-- at least one element in \`bounds\`. If \`bounds\` has only one element,
+-- there are no finite buckets, and that single element is the common
+-- boundary of the overflow and underflow buckets.
+--
+-- /See:/ 'explicit' smart constructor.
+newtype Explicit = Explicit'
+    { _eBounds :: Maybe [Textual Double]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Explicit' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eBounds'
+explicit
+    :: Explicit
+explicit =
+    Explicit'
+    { _eBounds = Nothing
+    }
+
+-- | The values must be monotonically increasing.
+eBounds :: Lens' Explicit [Double]
+eBounds
+  = lens _eBounds (\ s a -> s{_eBounds = a}) . _Default
+      . _Coerce
+
+instance FromJSON Explicit where
+        parseJSON
+          = withObject "Explicit"
+              (\ o -> Explicit' <$> (o .:? "bounds" .!= mempty))
+
+instance ToJSON Explicit where
+        toJSON Explicit'{..}
+          = object (catMaybes [("bounds" .=) <$> _eBounds])
+
+-- | The set of labels that uniquely identify a metric. To specify a metric,
+-- all labels enumerated in the \`MetricDescriptor\` must be assigned
+-- values.
+--
+-- /See:/ 'metricLabels' smart constructor.
+newtype MetricLabels = MetricLabels'
+    { _mlAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MetricLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mlAddtional'
+metricLabels
+    :: HashMap Text Text -- ^ 'mlAddtional'
+    -> MetricLabels
+metricLabels pMlAddtional_ =
+    MetricLabels'
+    { _mlAddtional = _Coerce # pMlAddtional_
+    }
+
+mlAddtional :: Lens' MetricLabels (HashMap Text Text)
+mlAddtional
+  = lens _mlAddtional (\ s a -> s{_mlAddtional = a}) .
+      _Coerce
+
+instance FromJSON MetricLabels where
+        parseJSON
+          = withObject "MetricLabels"
+              (\ o -> MetricLabels' <$> (parseJSONObject o))
+
+instance ToJSON MetricLabels where
+        toJSON = toJSON . _mlAddtional
+
+-- | The measurement metadata. Example: \`\"process_id\" -> 12345\`
+--
+-- /See:/ 'collectdPayloadMetadata' smart constructor.
+newtype CollectdPayloadMetadata = CollectdPayloadMetadata'
+    { _cpmAddtional :: HashMap Text TypedValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CollectdPayloadMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpmAddtional'
+collectdPayloadMetadata
+    :: HashMap Text TypedValue -- ^ 'cpmAddtional'
+    -> CollectdPayloadMetadata
+collectdPayloadMetadata pCpmAddtional_ =
+    CollectdPayloadMetadata'
+    { _cpmAddtional = _Coerce # pCpmAddtional_
+    }
+
+cpmAddtional :: Lens' CollectdPayloadMetadata (HashMap Text TypedValue)
+cpmAddtional
+  = lens _cpmAddtional (\ s a -> s{_cpmAddtional = a})
+      . _Coerce
+
+instance FromJSON CollectdPayloadMetadata where
+        parseJSON
+          = withObject "CollectdPayloadMetadata"
+              (\ o ->
+                 CollectdPayloadMetadata' <$> (parseJSONObject o))
+
+instance ToJSON CollectdPayloadMetadata where
+        toJSON = toJSON . _cpmAddtional
+
+-- | A single data point from a \`collectd\`-based plugin.
+--
+-- /See:/ 'collectdValue' smart constructor.
+data CollectdValue = CollectdValue'
+    { _cvDataSourceName :: !(Maybe Text)
+    , _cvDataSourceType :: !(Maybe Text)
+    , _cvValue          :: !(Maybe TypedValue)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CollectdValue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cvDataSourceName'
+--
+-- * 'cvDataSourceType'
+--
+-- * 'cvValue'
+collectdValue
+    :: CollectdValue
+collectdValue =
+    CollectdValue'
+    { _cvDataSourceName = Nothing
+    , _cvDataSourceType = Nothing
+    , _cvValue = Nothing
+    }
+
+-- | The data source for the \`collectd\` value. For example there are two
+-- data sources for network measurements: \`\"rx\"\` and \`\"tx\"\`.
+cvDataSourceName :: Lens' CollectdValue (Maybe Text)
+cvDataSourceName
+  = lens _cvDataSourceName
+      (\ s a -> s{_cvDataSourceName = a})
+
+-- | The type of measurement.
+cvDataSourceType :: Lens' CollectdValue (Maybe Text)
+cvDataSourceType
+  = lens _cvDataSourceType
+      (\ s a -> s{_cvDataSourceType = a})
+
+-- | The measurement value.
+cvValue :: Lens' CollectdValue (Maybe TypedValue)
+cvValue = lens _cvValue (\ s a -> s{_cvValue = a})
+
+instance FromJSON CollectdValue where
+        parseJSON
+          = withObject "CollectdValue"
+              (\ o ->
+                 CollectdValue' <$>
+                   (o .:? "dataSourceName") <*> (o .:? "dataSourceType")
+                     <*> (o .:? "value"))
+
+instance ToJSON CollectdValue where
+        toJSON CollectdValue'{..}
+          = object
+              (catMaybes
+                 [("dataSourceName" .=) <$> _cvDataSourceName,
+                  ("dataSourceType" .=) <$> _cvDataSourceType,
+                  ("value" .=) <$> _cvValue])
+
+-- | The \`CreateCollectdTimeSeries\` request.
+--
+-- /See:/ 'createCollectdTimeSeriesRequest' smart constructor.
+data CreateCollectdTimeSeriesRequest = CreateCollectdTimeSeriesRequest'
+    { _cctsrCollectdPayloads :: !(Maybe [CollectdPayload])
+    , _cctsrResource         :: !(Maybe MonitoredResource)
+    , _cctsrCollectdVersion  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreateCollectdTimeSeriesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cctsrCollectdPayloads'
+--
+-- * 'cctsrResource'
+--
+-- * 'cctsrCollectdVersion'
+createCollectdTimeSeriesRequest
+    :: CreateCollectdTimeSeriesRequest
+createCollectdTimeSeriesRequest =
+    CreateCollectdTimeSeriesRequest'
+    { _cctsrCollectdPayloads = Nothing
+    , _cctsrResource = Nothing
+    , _cctsrCollectdVersion = Nothing
+    }
+
+-- | The \`collectd\` payloads representing the time series data. You must
+-- not include more than a single point for each time series, so no two
+-- payloads can have the same values for all of the fields \`plugin\`,
+-- \`plugin_instance\`, \`type\`, and \`type_instance\`.
+cctsrCollectdPayloads :: Lens' CreateCollectdTimeSeriesRequest [CollectdPayload]
+cctsrCollectdPayloads
+  = lens _cctsrCollectdPayloads
+      (\ s a -> s{_cctsrCollectdPayloads = a})
+      . _Default
+      . _Coerce
+
+-- | The monitored resource associated with the time series.
+cctsrResource :: Lens' CreateCollectdTimeSeriesRequest (Maybe MonitoredResource)
+cctsrResource
+  = lens _cctsrResource
+      (\ s a -> s{_cctsrResource = a})
+
+-- | The version of \`collectd\` that collected the data. Example:
+-- \`\"5.3.0-192.el6\"\`.
+cctsrCollectdVersion :: Lens' CreateCollectdTimeSeriesRequest (Maybe Text)
+cctsrCollectdVersion
+  = lens _cctsrCollectdVersion
+      (\ s a -> s{_cctsrCollectdVersion = a})
+
+instance FromJSON CreateCollectdTimeSeriesRequest
+         where
+        parseJSON
+          = withObject "CreateCollectdTimeSeriesRequest"
+              (\ o ->
+                 CreateCollectdTimeSeriesRequest' <$>
+                   (o .:? "collectdPayloads" .!= mempty) <*>
+                     (o .:? "resource")
+                     <*> (o .:? "collectdVersion"))
+
+instance ToJSON CreateCollectdTimeSeriesRequest where
+        toJSON CreateCollectdTimeSeriesRequest'{..}
+          = object
+              (catMaybes
+                 [("collectdPayloads" .=) <$> _cctsrCollectdPayloads,
+                  ("resource" .=) <$> _cctsrResource,
+                  ("collectdVersion" .=) <$> _cctsrCollectdVersion])
+
+-- | A single data point in a time series.
 --
 -- /See:/ 'point' smart constructor.
-data Point = Point
-    { _pBoolValue         :: !(Maybe Bool)
-    , _pStart             :: !(Maybe DateTime')
-    , _pDoubleValue       :: !(Maybe (Textual Double))
-    , _pStringValue       :: !(Maybe Text)
-    , _pDistributionValue :: !(Maybe PointDistribution)
-    , _pEnd               :: !(Maybe DateTime')
-    , _pInt64Value        :: !(Maybe (Textual Int64))
+data Point = Point'
+    { _pValue    :: !(Maybe TypedValue)
+    , _pInterval :: !(Maybe TimeInterval)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Point' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pBoolValue'
+-- * 'pValue'
 --
--- * 'pStart'
---
--- * 'pDoubleValue'
---
--- * 'pStringValue'
---
--- * 'pDistributionValue'
---
--- * 'pEnd'
---
--- * 'pInt64Value'
+-- * 'pInterval'
 point
     :: Point
 point =
-    Point
-    { _pBoolValue = Nothing
-    , _pStart = Nothing
-    , _pDoubleValue = Nothing
-    , _pStringValue = Nothing
-    , _pDistributionValue = Nothing
-    , _pEnd = Nothing
-    , _pInt64Value = Nothing
+    Point'
+    { _pValue = Nothing
+    , _pInterval = Nothing
     }
 
--- | The value of this data point. Either \"true\" or \"false\".
-pBoolValue :: Lens' Point (Maybe Bool)
-pBoolValue
-  = lens _pBoolValue (\ s a -> s{_pBoolValue = a})
+-- | The value of the data point.
+pValue :: Lens' Point (Maybe TypedValue)
+pValue = lens _pValue (\ s a -> s{_pValue = a})
 
--- | The interval [start, end] is the time period to which the point\'s value
--- applies. For gauge metrics, whose values are instantaneous measurements,
--- this interval should be empty (start should equal end). For cumulative
--- metrics (of which deltas and rates are special cases), the interval
--- should be non-empty. Both start and end are RFC 3339 strings.
-pStart :: Lens' Point (Maybe UTCTime)
-pStart
-  = lens _pStart (\ s a -> s{_pStart = a}) .
-      mapping _DateTime
-
--- | The value of this data point as a double-precision floating-point
--- number.
-pDoubleValue :: Lens' Point (Maybe Double)
-pDoubleValue
-  = lens _pDoubleValue (\ s a -> s{_pDoubleValue = a})
-      . mapping _Coerce
-
--- | The value of this data point in string format.
-pStringValue :: Lens' Point (Maybe Text)
-pStringValue
-  = lens _pStringValue (\ s a -> s{_pStringValue = a})
-
--- | The value of this data point as a distribution. A distribution value can
--- contain a list of buckets and\/or an underflowBucket and an
--- overflowBucket. The values of these points can be used to create a
--- histogram.
-pDistributionValue :: Lens' Point (Maybe PointDistribution)
-pDistributionValue
-  = lens _pDistributionValue
-      (\ s a -> s{_pDistributionValue = a})
-
--- | The interval [start, end] is the time period to which the point\'s value
--- applies. For gauge metrics, whose values are instantaneous measurements,
--- this interval should be empty (start should equal end). For cumulative
--- metrics (of which deltas and rates are special cases), the interval
--- should be non-empty. Both start and end are RFC 3339 strings.
-pEnd :: Lens' Point (Maybe UTCTime)
-pEnd
-  = lens _pEnd (\ s a -> s{_pEnd = a}) .
-      mapping _DateTime
-
--- | The value of this data point as a 64-bit integer.
-pInt64Value :: Lens' Point (Maybe Int64)
-pInt64Value
-  = lens _pInt64Value (\ s a -> s{_pInt64Value = a}) .
-      mapping _Coerce
+-- | The time interval to which the value applies.
+pInterval :: Lens' Point (Maybe TimeInterval)
+pInterval
+  = lens _pInterval (\ s a -> s{_pInterval = a})
 
 instance FromJSON Point where
         parseJSON
           = withObject "Point"
               (\ o ->
-                 Point <$>
-                   (o .:? "boolValue") <*> (o .:? "start") <*>
-                     (o .:? "doubleValue")
-                     <*> (o .:? "stringValue")
-                     <*> (o .:? "distributionValue")
-                     <*> (o .:? "end")
-                     <*> (o .:? "int64Value"))
+                 Point' <$> (o .:? "value") <*> (o .:? "interval"))
 
 instance ToJSON Point where
-        toJSON Point{..}
+        toJSON Point'{..}
           = object
               (catMaybes
-                 [("boolValue" .=) <$> _pBoolValue,
-                  ("start" .=) <$> _pStart,
-                  ("doubleValue" .=) <$> _pDoubleValue,
-                  ("stringValue" .=) <$> _pStringValue,
-                  ("distributionValue" .=) <$> _pDistributionValue,
-                  ("end" .=) <$> _pEnd,
-                  ("int64Value" .=) <$> _pInt64Value])
+                 [("value" .=) <$> _pValue,
+                  ("interval" .=) <$> _pInterval])
 
--- | The overflow bucket is a special bucket that does not have the
--- upperBound field; it includes all of the events that are no less than
--- its lower bound.
+-- | A collection of data points sent from a \`collectd\`-based plugin. See
+-- the \`collectd\` documentation for more information.
 --
--- /See:/ 'pointDistributionOverflowBucket' smart constructor.
-data PointDistributionOverflowBucket = PointDistributionOverflowBucket
-    { _pdobCount      :: !(Maybe (Textual Int64))
-    , _pdobLowerBound :: !(Maybe (Textual Double))
+-- /See:/ 'collectdPayload' smart constructor.
+data CollectdPayload = CollectdPayload'
+    { _cpStartTime      :: !(Maybe Text)
+    , _cpPluginInstance :: !(Maybe Text)
+    , _cpValues         :: !(Maybe [CollectdValue])
+    , _cpTypeInstance   :: !(Maybe Text)
+    , _cpEndTime        :: !(Maybe Text)
+    , _cpMetadata       :: !(Maybe CollectdPayloadMetadata)
+    , _cpType           :: !(Maybe Text)
+    , _cpPlugin         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PointDistributionOverflowBucket' with the minimum fields required to make a request.
+-- | Creates a value of 'CollectdPayload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pdobCount'
+-- * 'cpStartTime'
 --
--- * 'pdobLowerBound'
-pointDistributionOverflowBucket
-    :: PointDistributionOverflowBucket
-pointDistributionOverflowBucket =
-    PointDistributionOverflowBucket
-    { _pdobCount = Nothing
-    , _pdobLowerBound = Nothing
+-- * 'cpPluginInstance'
+--
+-- * 'cpValues'
+--
+-- * 'cpTypeInstance'
+--
+-- * 'cpEndTime'
+--
+-- * 'cpMetadata'
+--
+-- * 'cpType'
+--
+-- * 'cpPlugin'
+collectdPayload
+    :: CollectdPayload
+collectdPayload =
+    CollectdPayload'
+    { _cpStartTime = Nothing
+    , _cpPluginInstance = Nothing
+    , _cpValues = Nothing
+    , _cpTypeInstance = Nothing
+    , _cpEndTime = Nothing
+    , _cpMetadata = Nothing
+    , _cpType = Nothing
+    , _cpPlugin = Nothing
     }
 
--- | The number of events whose values are in the interval defined by this
--- bucket.
-pdobCount :: Lens' PointDistributionOverflowBucket (Maybe Int64)
-pdobCount
-  = lens _pdobCount (\ s a -> s{_pdobCount = a}) .
-      mapping _Coerce
+-- | The start time of the interval.
+cpStartTime :: Lens' CollectdPayload (Maybe Text)
+cpStartTime
+  = lens _cpStartTime (\ s a -> s{_cpStartTime = a})
 
--- | The lower bound of the value interval of this bucket (inclusive).
-pdobLowerBound :: Lens' PointDistributionOverflowBucket (Maybe Double)
-pdobLowerBound
-  = lens _pdobLowerBound
-      (\ s a -> s{_pdobLowerBound = a})
-      . mapping _Coerce
+-- | The instance name of the plugin Example: \`\"hdcl\"\`.
+cpPluginInstance :: Lens' CollectdPayload (Maybe Text)
+cpPluginInstance
+  = lens _cpPluginInstance
+      (\ s a -> s{_cpPluginInstance = a})
 
-instance FromJSON PointDistributionOverflowBucket
-         where
-        parseJSON
-          = withObject "PointDistributionOverflowBucket"
-              (\ o ->
-                 PointDistributionOverflowBucket <$>
-                   (o .:? "count") <*> (o .:? "lowerBound"))
-
-instance ToJSON PointDistributionOverflowBucket where
-        toJSON PointDistributionOverflowBucket{..}
-          = object
-              (catMaybes
-                 [("count" .=) <$> _pdobCount,
-                  ("lowerBound" .=) <$> _pdobLowerBound])
-
--- | The response of cloudmonitoring.timeseriesDescriptors.list
---
--- /See:/ 'listTimeseriesDescriptorsResponse' smart constructor.
-data ListTimeseriesDescriptorsResponse = ListTimeseriesDescriptorsResponse
-    { _lNextPageToken :: !(Maybe Text)
-    , _lKind          :: !Text
-    , _lOldest        :: !(Maybe DateTime')
-    , _lYoungest      :: !(Maybe DateTime')
-    , _lTimeseries    :: !(Maybe [TimeseriesDescriptor])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListTimeseriesDescriptorsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lNextPageToken'
---
--- * 'lKind'
---
--- * 'lOldest'
---
--- * 'lYoungest'
---
--- * 'lTimeseries'
-listTimeseriesDescriptorsResponse
-    :: ListTimeseriesDescriptorsResponse
-listTimeseriesDescriptorsResponse =
-    ListTimeseriesDescriptorsResponse
-    { _lNextPageToken = Nothing
-    , _lKind = "cloudmonitoring#listTimeseriesDescriptorsResponse"
-    , _lOldest = Nothing
-    , _lYoungest = Nothing
-    , _lTimeseries = Nothing
-    }
-
--- | Pagination token. If present, indicates that additional results are
--- available for retrieval. To access the results past the pagination
--- limit, set this value to the pageToken query parameter.
-lNextPageToken :: Lens' ListTimeseriesDescriptorsResponse (Maybe Text)
-lNextPageToken
-  = lens _lNextPageToken
-      (\ s a -> s{_lNextPageToken = a})
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#listTimeseriesDescriptorsResponse\".
-lKind :: Lens' ListTimeseriesDescriptorsResponse Text
-lKind = lens _lKind (\ s a -> s{_lKind = a})
-
--- | The oldest timestamp of the interval of this query, as an RFC 3339
--- string.
-lOldest :: Lens' ListTimeseriesDescriptorsResponse (Maybe UTCTime)
-lOldest
-  = lens _lOldest (\ s a -> s{_lOldest = a}) .
-      mapping _DateTime
-
--- | The youngest timestamp of the interval of this query, as an RFC 3339
--- string.
-lYoungest :: Lens' ListTimeseriesDescriptorsResponse (Maybe UTCTime)
-lYoungest
-  = lens _lYoungest (\ s a -> s{_lYoungest = a}) .
-      mapping _DateTime
-
--- | The returned time series descriptors.
-lTimeseries :: Lens' ListTimeseriesDescriptorsResponse [TimeseriesDescriptor]
-lTimeseries
-  = lens _lTimeseries (\ s a -> s{_lTimeseries = a}) .
+-- | The measured values during this time interval. Each value must have a
+-- different \`dataSourceName\`.
+cpValues :: Lens' CollectdPayload [CollectdValue]
+cpValues
+  = lens _cpValues (\ s a -> s{_cpValues = a}) .
       _Default
       . _Coerce
 
-instance FromJSON ListTimeseriesDescriptorsResponse
-         where
-        parseJSON
-          = withObject "ListTimeseriesDescriptorsResponse"
-              (\ o ->
-                 ListTimeseriesDescriptorsResponse <$>
-                   (o .:? "nextPageToken") <*>
-                     (o .:? "kind" .!=
-                        "cloudmonitoring#listTimeseriesDescriptorsResponse")
-                     <*> (o .:? "oldest")
-                     <*> (o .:? "youngest")
-                     <*> (o .:? "timeseries" .!= mempty))
+-- | The measurement type instance. Example: \`\"used\"\`.
+cpTypeInstance :: Lens' CollectdPayload (Maybe Text)
+cpTypeInstance
+  = lens _cpTypeInstance
+      (\ s a -> s{_cpTypeInstance = a})
 
-instance ToJSON ListTimeseriesDescriptorsResponse
-         where
-        toJSON ListTimeseriesDescriptorsResponse{..}
+-- | The end time of the interval.
+cpEndTime :: Lens' CollectdPayload (Maybe Text)
+cpEndTime
+  = lens _cpEndTime (\ s a -> s{_cpEndTime = a})
+
+-- | The measurement metadata. Example: \`\"process_id\" -> 12345\`
+cpMetadata :: Lens' CollectdPayload (Maybe CollectdPayloadMetadata)
+cpMetadata
+  = lens _cpMetadata (\ s a -> s{_cpMetadata = a})
+
+-- | The measurement type. Example: \`\"memory\"\`.
+cpType :: Lens' CollectdPayload (Maybe Text)
+cpType = lens _cpType (\ s a -> s{_cpType = a})
+
+-- | The name of the plugin. Example: \`\"disk\"\`.
+cpPlugin :: Lens' CollectdPayload (Maybe Text)
+cpPlugin = lens _cpPlugin (\ s a -> s{_cpPlugin = a})
+
+instance FromJSON CollectdPayload where
+        parseJSON
+          = withObject "CollectdPayload"
+              (\ o ->
+                 CollectdPayload' <$>
+                   (o .:? "startTime") <*> (o .:? "pluginInstance") <*>
+                     (o .:? "values" .!= mempty)
+                     <*> (o .:? "typeInstance")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "metadata")
+                     <*> (o .:? "type")
+                     <*> (o .:? "plugin"))
+
+instance ToJSON CollectdPayload where
+        toJSON CollectdPayload'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _lNextPageToken,
-                  Just ("kind" .= _lKind), ("oldest" .=) <$> _lOldest,
-                  ("youngest" .=) <$> _lYoungest,
-                  ("timeseries" .=) <$> _lTimeseries])
+                 [("startTime" .=) <$> _cpStartTime,
+                  ("pluginInstance" .=) <$> _cpPluginInstance,
+                  ("values" .=) <$> _cpValues,
+                  ("typeInstance" .=) <$> _cpTypeInstance,
+                  ("endTime" .=) <$> _cpEndTime,
+                  ("metadata" .=) <$> _cpMetadata,
+                  ("type" .=) <$> _cpType,
+                  ("plugin" .=) <$> _cpPlugin])
 
--- | The request of cloudmonitoring.metricDescriptors.list.
+-- | A specific metric identified by specifying values for all of the labels
+-- of a \`MetricDescriptor\`.
 --
--- /See:/ 'listMetricDescriptorsRequest' smart constructor.
-newtype ListMetricDescriptorsRequest = ListMetricDescriptorsRequest
-    { _lisKind :: Text
+-- /See:/ 'metric' smart constructor.
+data Metric = Metric'
+    { _mLabels :: !(Maybe MetricLabels)
+    , _mType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListMetricDescriptorsRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'Metric' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lisKind'
-listMetricDescriptorsRequest
-    :: ListMetricDescriptorsRequest
-listMetricDescriptorsRequest =
-    ListMetricDescriptorsRequest
-    { _lisKind = "cloudmonitoring#listMetricDescriptorsRequest"
+-- * 'mLabels'
+--
+-- * 'mType'
+metric
+    :: Metric
+metric =
+    Metric'
+    { _mLabels = Nothing
+    , _mType = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#listMetricDescriptorsRequest\".
-lisKind :: Lens' ListMetricDescriptorsRequest Text
-lisKind = lens _lisKind (\ s a -> s{_lisKind = a})
+-- | The set of labels that uniquely identify a metric. To specify a metric,
+-- all labels enumerated in the \`MetricDescriptor\` must be assigned
+-- values.
+mLabels :: Lens' Metric (Maybe MetricLabels)
+mLabels = lens _mLabels (\ s a -> s{_mLabels = a})
 
-instance FromJSON ListMetricDescriptorsRequest where
+-- | An existing metric type, see google.api.MetricDescriptor. For example,
+-- \`compute.googleapis.com\/instance\/cpu\/usage_time\`.
+mType :: Lens' Metric (Maybe Text)
+mType = lens _mType (\ s a -> s{_mType = a})
+
+instance FromJSON Metric where
         parseJSON
-          = withObject "ListMetricDescriptorsRequest"
+          = withObject "Metric"
               (\ o ->
-                 ListMetricDescriptorsRequest <$>
-                   (o .:? "kind" .!=
-                      "cloudmonitoring#listMetricDescriptorsRequest"))
+                 Metric' <$> (o .:? "labels") <*> (o .:? "type"))
 
-instance ToJSON ListMetricDescriptorsRequest where
-        toJSON ListMetricDescriptorsRequest{..}
-          = object (catMaybes [Just ("kind" .= _lisKind)])
-
--- | When writing time series, TimeseriesPoint should be used instead of
--- Timeseries, to enforce single point for each time series in the
--- timeseries.write request.
---
--- /See:/ 'timeseriesPoint' smart constructor.
-data TimeseriesPoint = TimeseriesPoint
-    { _tpPoint          :: !(Maybe Point)
-    , _tpTimeseriesDesc :: !(Maybe TimeseriesDescriptor)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TimeseriesPoint' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tpPoint'
---
--- * 'tpTimeseriesDesc'
-timeseriesPoint
-    :: TimeseriesPoint
-timeseriesPoint =
-    TimeseriesPoint
-    { _tpPoint = Nothing
-    , _tpTimeseriesDesc = Nothing
-    }
-
--- | The data point in this time series snapshot.
-tpPoint :: Lens' TimeseriesPoint (Maybe Point)
-tpPoint = lens _tpPoint (\ s a -> s{_tpPoint = a})
-
--- | The descriptor of this time series.
-tpTimeseriesDesc :: Lens' TimeseriesPoint (Maybe TimeseriesDescriptor)
-tpTimeseriesDesc
-  = lens _tpTimeseriesDesc
-      (\ s a -> s{_tpTimeseriesDesc = a})
-
-instance FromJSON TimeseriesPoint where
-        parseJSON
-          = withObject "TimeseriesPoint"
-              (\ o ->
-                 TimeseriesPoint <$>
-                   (o .:? "point") <*> (o .:? "timeseriesDesc"))
-
-instance ToJSON TimeseriesPoint where
-        toJSON TimeseriesPoint{..}
+instance ToJSON Metric where
+        toJSON Metric'{..}
           = object
               (catMaybes
-                 [("point" .=) <$> _tpPoint,
-                  ("timeseriesDesc" .=) <$> _tpTimeseriesDesc])
+                 [("labels" .=) <$> _mLabels, ("type" .=) <$> _mType])
 
--- | The response of cloudmonitoring.metricDescriptors.delete.
+-- | Specify a sequence of buckets that have a width that is proportional to
+-- the value of the lower bound. Each bucket represents a constant relative
+-- uncertainty on a specific value in the bucket. Defines
+-- \`num_finite_buckets + 2\` (= N) buckets with these boundaries for
+-- bucket i: Upper bound (0 \<= i \< N-1): scale * (growth_factor ^ i).
+-- Lower bound (1 \<= i \< N): scale * (growth_factor ^ (i - 1)).
 --
--- /See:/ 'deleteMetricDescriptorResponse' smart constructor.
-newtype DeleteMetricDescriptorResponse = DeleteMetricDescriptorResponse
-    { _dmdrKind :: Text
+-- /See:/ 'exponential' smart constructor.
+data Exponential = Exponential'
+    { _eGrowthFactor     :: !(Maybe (Textual Double))
+    , _eScale            :: !(Maybe (Textual Double))
+    , _eNumFiniteBuckets :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DeleteMetricDescriptorResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'Exponential' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dmdrKind'
-deleteMetricDescriptorResponse
-    :: DeleteMetricDescriptorResponse
-deleteMetricDescriptorResponse =
-    DeleteMetricDescriptorResponse
-    { _dmdrKind = "cloudmonitoring#deleteMetricDescriptorResponse"
+-- * 'eGrowthFactor'
+--
+-- * 'eScale'
+--
+-- * 'eNumFiniteBuckets'
+exponential
+    :: Exponential
+exponential =
+    Exponential'
+    { _eGrowthFactor = Nothing
+    , _eScale = Nothing
+    , _eNumFiniteBuckets = Nothing
     }
 
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#deleteMetricDescriptorResponse\".
-dmdrKind :: Lens' DeleteMetricDescriptorResponse Text
-dmdrKind = lens _dmdrKind (\ s a -> s{_dmdrKind = a})
+-- | Must be greater than 1
+eGrowthFactor :: Lens' Exponential (Maybe Double)
+eGrowthFactor
+  = lens _eGrowthFactor
+      (\ s a -> s{_eGrowthFactor = a})
+      . mapping _Coerce
 
-instance FromJSON DeleteMetricDescriptorResponse
-         where
+-- | Must be greater than 0
+eScale :: Lens' Exponential (Maybe Double)
+eScale
+  = lens _eScale (\ s a -> s{_eScale = a}) .
+      mapping _Coerce
+
+-- | must be greater than 0
+eNumFiniteBuckets :: Lens' Exponential (Maybe Int32)
+eNumFiniteBuckets
+  = lens _eNumFiniteBuckets
+      (\ s a -> s{_eNumFiniteBuckets = a})
+      . mapping _Coerce
+
+instance FromJSON Exponential where
         parseJSON
-          = withObject "DeleteMetricDescriptorResponse"
+          = withObject "Exponential"
               (\ o ->
-                 DeleteMetricDescriptorResponse <$>
-                   (o .:? "kind" .!=
-                      "cloudmonitoring#deleteMetricDescriptorResponse"))
+                 Exponential' <$>
+                   (o .:? "growthFactor") <*> (o .:? "scale") <*>
+                     (o .:? "numFiniteBuckets"))
 
-instance ToJSON DeleteMetricDescriptorResponse where
-        toJSON DeleteMetricDescriptorResponse{..}
-          = object (catMaybes [Just ("kind" .= _dmdrKind)])
-
--- | The request of cloudmonitoring.timeseries.list
---
--- /See:/ 'listTimeseriesRequest' smart constructor.
-newtype ListTimeseriesRequest = ListTimeseriesRequest
-    { _ltrtKind :: Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListTimeseriesRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'ltrtKind'
-listTimeseriesRequest
-    :: ListTimeseriesRequest
-listTimeseriesRequest =
-    ListTimeseriesRequest
-    { _ltrtKind = "cloudmonitoring#listTimeseriesRequest"
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"cloudmonitoring#listTimeseriesRequest\".
-ltrtKind :: Lens' ListTimeseriesRequest Text
-ltrtKind = lens _ltrtKind (\ s a -> s{_ltrtKind = a})
-
-instance FromJSON ListTimeseriesRequest where
-        parseJSON
-          = withObject "ListTimeseriesRequest"
-              (\ o ->
-                 ListTimeseriesRequest <$>
-                   (o .:? "kind" .!=
-                      "cloudmonitoring#listTimeseriesRequest"))
-
-instance ToJSON ListTimeseriesRequest where
-        toJSON ListTimeseriesRequest{..}
-          = object (catMaybes [Just ("kind" .= _ltrtKind)])
-
--- | TimeseriesDescriptor identifies a single time series.
---
--- /See:/ 'timeseriesDescriptor' smart constructor.
-data TimeseriesDescriptor = TimeseriesDescriptor
-    { _tdProject :: !(Maybe Text)
-    , _tdMetric  :: !(Maybe Text)
-    , _tdLabels  :: !(Maybe TimeseriesDescriptorLabels)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'TimeseriesDescriptor' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'tdProject'
---
--- * 'tdMetric'
---
--- * 'tdLabels'
-timeseriesDescriptor
-    :: TimeseriesDescriptor
-timeseriesDescriptor =
-    TimeseriesDescriptor
-    { _tdProject = Nothing
-    , _tdMetric = Nothing
-    , _tdLabels = Nothing
-    }
-
--- | The Developers Console project number to which this time series belongs.
-tdProject :: Lens' TimeseriesDescriptor (Maybe Text)
-tdProject
-  = lens _tdProject (\ s a -> s{_tdProject = a})
-
--- | The name of the metric.
-tdMetric :: Lens' TimeseriesDescriptor (Maybe Text)
-tdMetric = lens _tdMetric (\ s a -> s{_tdMetric = a})
-
--- | The label\'s name.
-tdLabels :: Lens' TimeseriesDescriptor (Maybe TimeseriesDescriptorLabels)
-tdLabels = lens _tdLabels (\ s a -> s{_tdLabels = a})
-
-instance FromJSON TimeseriesDescriptor where
-        parseJSON
-          = withObject "TimeseriesDescriptor"
-              (\ o ->
-                 TimeseriesDescriptor <$>
-                   (o .:? "project") <*> (o .:? "metric") <*>
-                     (o .:? "labels"))
-
-instance ToJSON TimeseriesDescriptor where
-        toJSON TimeseriesDescriptor{..}
+instance ToJSON Exponential where
+        toJSON Exponential'{..}
           = object
               (catMaybes
-                 [("project" .=) <$> _tdProject,
-                  ("metric" .=) <$> _tdMetric,
-                  ("labels" .=) <$> _tdLabels])
+                 [("growthFactor" .=) <$> _eGrowthFactor,
+                  ("scale" .=) <$> _eScale,
+                  ("numFiniteBuckets" .=) <$> _eNumFiniteBuckets])
 
--- | The monitoring data is organized as metrics and stored as data points
--- that are recorded over time. Each data point represents information like
--- the CPU utilization of your virtual machine. A historical record of
--- these data points is called a time series.
+-- | The range of the population values.
 --
--- /See:/ 'timeseries' smart constructor.
-data Timeseries = Timeseries
-    { _tPoints         :: !(Maybe [Point])
-    , _tTimeseriesDesc :: !(Maybe TimeseriesDescriptor)
+-- /See:/ 'range' smart constructor.
+data Range = Range'
+    { _rMax :: !(Maybe (Textual Double))
+    , _rMin :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Timeseries' with the minimum fields required to make a request.
+-- | Creates a value of 'Range' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tPoints'
+-- * 'rMax'
 --
--- * 'tTimeseriesDesc'
-timeseries
-    :: Timeseries
-timeseries =
-    Timeseries
-    { _tPoints = Nothing
-    , _tTimeseriesDesc = Nothing
+-- * 'rMin'
+range
+    :: Range
+range =
+    Range'
+    { _rMax = Nothing
+    , _rMin = Nothing
     }
 
--- | The data points of this time series. The points are listed in order of
--- their end timestamp, from younger to older.
-tPoints :: Lens' Timeseries [Point]
-tPoints
-  = lens _tPoints (\ s a -> s{_tPoints = a}) . _Default
+-- | The maximum of the population values.
+rMax :: Lens' Range (Maybe Double)
+rMax
+  = lens _rMax (\ s a -> s{_rMax = a}) .
+      mapping _Coerce
+
+-- | The minimum of the population values.
+rMin :: Lens' Range (Maybe Double)
+rMin
+  = lens _rMin (\ s a -> s{_rMin = a}) .
+      mapping _Coerce
+
+instance FromJSON Range where
+        parseJSON
+          = withObject "Range"
+              (\ o -> Range' <$> (o .:? "max") <*> (o .:? "min"))
+
+instance ToJSON Range where
+        toJSON Range'{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _rMax, ("min" .=) <$> _rMin])
+
+-- | An object representing a resource that can be used for monitoring,
+-- logging, billing, or other purposes. Examples include virtual machine
+-- instances, databases, and storage devices such as disks. The \`type\`
+-- field identifies a MonitoredResourceDescriptor object that describes the
+-- resource\'s schema. Information in the \`labels\` field identifies the
+-- actual resource and its attributes according to the schema. For example,
+-- a particular Compute Engine VM instance could be represented by the
+-- following object, because the MonitoredResourceDescriptor for
+-- \`\"gce_instance\"\` has labels \`\"instance_id\"\` and \`\"zone\"\`: {
+-- \"type\": \"gce_instance\", \"labels\": { \"instance_id\":
+-- \"my-instance\", \"zone\": \"us-central1-a\" }}
+--
+-- /See:/ 'monitoredResource' smart constructor.
+data MonitoredResource = MonitoredResource'
+    { _mrLabels :: !(Maybe MonitoredResourceLabels)
+    , _mrType   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MonitoredResource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mrLabels'
+--
+-- * 'mrType'
+monitoredResource
+    :: MonitoredResource
+monitoredResource =
+    MonitoredResource'
+    { _mrLabels = Nothing
+    , _mrType = Nothing
+    }
+
+-- | Required. Values for all of the labels listed in the associated
+-- monitored resource descriptor. For example, Cloud SQL databases use the
+-- labels \`\"database_id\"\` and \`\"zone\"\`.
+mrLabels :: Lens' MonitoredResource (Maybe MonitoredResourceLabels)
+mrLabels = lens _mrLabels (\ s a -> s{_mrLabels = a})
+
+-- | Required. The monitored resource type. This field must match the
+-- \`type\` field of a MonitoredResourceDescriptor object. For example, the
+-- type of a Cloud SQL database is \`\"cloudsql_database\"\`.
+mrType :: Lens' MonitoredResource (Maybe Text)
+mrType = lens _mrType (\ s a -> s{_mrType = a})
+
+instance FromJSON MonitoredResource where
+        parseJSON
+          = withObject "MonitoredResource"
+              (\ o ->
+                 MonitoredResource' <$>
+                   (o .:? "labels") <*> (o .:? "type"))
+
+instance ToJSON MonitoredResource where
+        toJSON MonitoredResource'{..}
+          = object
+              (catMaybes
+                 [("labels" .=) <$> _mrLabels,
+                  ("type" .=) <$> _mrType])
+
+-- | A time interval extending from after \`startTime\` through \`endTime\`.
+-- If \`startTime\` is omitted, the interval is the single point in time,
+-- \`endTime\`.
+--
+-- /See:/ 'timeInterval' smart constructor.
+data TimeInterval = TimeInterval'
+    { _tiStartTime :: !(Maybe Text)
+    , _tiEndTime   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TimeInterval' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tiStartTime'
+--
+-- * 'tiEndTime'
+timeInterval
+    :: TimeInterval
+timeInterval =
+    TimeInterval'
+    { _tiStartTime = Nothing
+    , _tiEndTime = Nothing
+    }
+
+-- | If this value is omitted, the interval is a point in time, \`endTime\`.
+-- If \`startTime\` is present, it must be earlier than (less than)
+-- \`endTime\`. The interval begins after \`startTime\`—it does not include
+-- \`startTime\`.
+tiStartTime :: Lens' TimeInterval (Maybe Text)
+tiStartTime
+  = lens _tiStartTime (\ s a -> s{_tiStartTime = a})
+
+-- | Required. The end of the interval. The interval includes this time.
+tiEndTime :: Lens' TimeInterval (Maybe Text)
+tiEndTime
+  = lens _tiEndTime (\ s a -> s{_tiEndTime = a})
+
+instance FromJSON TimeInterval where
+        parseJSON
+          = withObject "TimeInterval"
+              (\ o ->
+                 TimeInterval' <$>
+                   (o .:? "startTime") <*> (o .:? "endTime"))
+
+instance ToJSON TimeInterval where
+        toJSON TimeInterval'{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _tiStartTime,
+                  ("endTime" .=) <$> _tiEndTime])
+
+-- | The \`ListGroupMembers\` response.
+--
+-- /See:/ 'listGroupMembersResponse' smart constructor.
+data ListGroupMembersResponse = ListGroupMembersResponse'
+    { _lgmrNextPageToken :: !(Maybe Text)
+    , _lgmrMembers       :: !(Maybe [MonitoredResource])
+    , _lgmrTotalSize     :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListGroupMembersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lgmrNextPageToken'
+--
+-- * 'lgmrMembers'
+--
+-- * 'lgmrTotalSize'
+listGroupMembersResponse
+    :: ListGroupMembersResponse
+listGroupMembersResponse =
+    ListGroupMembersResponse'
+    { _lgmrNextPageToken = Nothing
+    , _lgmrMembers = Nothing
+    , _lgmrTotalSize = Nothing
+    }
+
+-- | If there are more results than have been returned, then this field is
+-- set to a non-empty value. To see the additional results, use that value
+-- as \`pageToken\` in the next call to this method.
+lgmrNextPageToken :: Lens' ListGroupMembersResponse (Maybe Text)
+lgmrNextPageToken
+  = lens _lgmrNextPageToken
+      (\ s a -> s{_lgmrNextPageToken = a})
+
+-- | A set of monitored resources in the group.
+lgmrMembers :: Lens' ListGroupMembersResponse [MonitoredResource]
+lgmrMembers
+  = lens _lgmrMembers (\ s a -> s{_lgmrMembers = a}) .
+      _Default
       . _Coerce
 
--- | The descriptor of this time series.
-tTimeseriesDesc :: Lens' Timeseries (Maybe TimeseriesDescriptor)
-tTimeseriesDesc
-  = lens _tTimeseriesDesc
-      (\ s a -> s{_tTimeseriesDesc = a})
+-- | The total number of elements matching this request.
+lgmrTotalSize :: Lens' ListGroupMembersResponse (Maybe Int32)
+lgmrTotalSize
+  = lens _lgmrTotalSize
+      (\ s a -> s{_lgmrTotalSize = a})
+      . mapping _Coerce
 
-instance FromJSON Timeseries where
+instance FromJSON ListGroupMembersResponse where
         parseJSON
-          = withObject "Timeseries"
+          = withObject "ListGroupMembersResponse"
               (\ o ->
-                 Timeseries <$>
-                   (o .:? "points" .!= mempty) <*>
-                     (o .:? "timeseriesDesc"))
+                 ListGroupMembersResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "members" .!= mempty)
+                     <*> (o .:? "totalSize"))
 
-instance ToJSON Timeseries where
-        toJSON Timeseries{..}
+instance ToJSON ListGroupMembersResponse where
+        toJSON ListGroupMembersResponse'{..}
           = object
               (catMaybes
-                 [("points" .=) <$> _tPoints,
-                  ("timeseriesDesc" .=) <$> _tTimeseriesDesc])
+                 [("nextPageToken" .=) <$> _lgmrNextPageToken,
+                  ("members" .=) <$> _lgmrMembers,
+                  ("totalSize" .=) <$> _lgmrTotalSize])
+
+-- | A description of a label.
+--
+-- /See:/ 'labelDescriptor' smart constructor.
+data LabelDescriptor = LabelDescriptor'
+    { _ldKey         :: !(Maybe Text)
+    , _ldValueType   :: !(Maybe Text)
+    , _ldDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LabelDescriptor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ldKey'
+--
+-- * 'ldValueType'
+--
+-- * 'ldDescription'
+labelDescriptor
+    :: LabelDescriptor
+labelDescriptor =
+    LabelDescriptor'
+    { _ldKey = Nothing
+    , _ldValueType = Nothing
+    , _ldDescription = Nothing
+    }
+
+-- | The label key.
+ldKey :: Lens' LabelDescriptor (Maybe Text)
+ldKey = lens _ldKey (\ s a -> s{_ldKey = a})
+
+-- | The type of data that can be assigned to the label.
+ldValueType :: Lens' LabelDescriptor (Maybe Text)
+ldValueType
+  = lens _ldValueType (\ s a -> s{_ldValueType = a})
+
+-- | A human-readable description for the label.
+ldDescription :: Lens' LabelDescriptor (Maybe Text)
+ldDescription
+  = lens _ldDescription
+      (\ s a -> s{_ldDescription = a})
+
+instance FromJSON LabelDescriptor where
+        parseJSON
+          = withObject "LabelDescriptor"
+              (\ o ->
+                 LabelDescriptor' <$>
+                   (o .:? "key") <*> (o .:? "valueType") <*>
+                     (o .:? "description"))
+
+instance ToJSON LabelDescriptor where
+        toJSON LabelDescriptor'{..}
+          = object
+              (catMaybes
+                 [("key" .=) <$> _ldKey,
+                  ("valueType" .=) <$> _ldValueType,
+                  ("description" .=) <$> _ldDescription])
+
+-- | Specify a sequence of buckets that all have the same width (except
+-- overflow and underflow). Each bucket represents a constant absolute
+-- uncertainty on the specific value in the bucket. Defines
+-- \`num_finite_buckets + 2\` (= N) buckets with these boundaries for
+-- bucket \`i\`: Upper bound (0 \<= i \< N-1): offset + (width * i). Lower
+-- bound (1 \<= i \< N): offset + (width * (i - 1)).
+--
+-- /See:/ 'linear' smart constructor.
+data Linear = Linear'
+    { _lOffSet           :: !(Maybe (Textual Double))
+    , _lWidth            :: !(Maybe (Textual Double))
+    , _lNumFiniteBuckets :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Linear' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lOffSet'
+--
+-- * 'lWidth'
+--
+-- * 'lNumFiniteBuckets'
+linear
+    :: Linear
+linear =
+    Linear'
+    { _lOffSet = Nothing
+    , _lWidth = Nothing
+    , _lNumFiniteBuckets = Nothing
+    }
+
+-- | Lower bound of the first bucket.
+lOffSet :: Lens' Linear (Maybe Double)
+lOffSet
+  = lens _lOffSet (\ s a -> s{_lOffSet = a}) .
+      mapping _Coerce
+
+-- | Must be greater than 0.
+lWidth :: Lens' Linear (Maybe Double)
+lWidth
+  = lens _lWidth (\ s a -> s{_lWidth = a}) .
+      mapping _Coerce
+
+-- | Must be greater than 0.
+lNumFiniteBuckets :: Lens' Linear (Maybe Int32)
+lNumFiniteBuckets
+  = lens _lNumFiniteBuckets
+      (\ s a -> s{_lNumFiniteBuckets = a})
+      . mapping _Coerce
+
+instance FromJSON Linear where
+        parseJSON
+          = withObject "Linear"
+              (\ o ->
+                 Linear' <$>
+                   (o .:? "offset") <*> (o .:? "width") <*>
+                     (o .:? "numFiniteBuckets"))
+
+instance ToJSON Linear where
+        toJSON Linear'{..}
+          = object
+              (catMaybes
+                 [("offset" .=) <$> _lOffSet,
+                  ("width" .=) <$> _lWidth,
+                  ("numFiniteBuckets" .=) <$> _lNumFiniteBuckets])
+
+-- | A protocol buffer message type.
+--
+-- /See:/ 'type'' smart constructor.
+data Type = Type'
+    { _tSourceContext :: !(Maybe SourceContext)
+    , _tOneofs        :: !(Maybe [Text])
+    , _tName          :: !(Maybe Text)
+    , _tOptions       :: !(Maybe [Option])
+    , _tFields        :: !(Maybe [Field])
+    , _tSyntax        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Type' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tSourceContext'
+--
+-- * 'tOneofs'
+--
+-- * 'tName'
+--
+-- * 'tOptions'
+--
+-- * 'tFields'
+--
+-- * 'tSyntax'
+type'
+    :: Type
+type' =
+    Type'
+    { _tSourceContext = Nothing
+    , _tOneofs = Nothing
+    , _tName = Nothing
+    , _tOptions = Nothing
+    , _tFields = Nothing
+    , _tSyntax = Nothing
+    }
+
+-- | The source context.
+tSourceContext :: Lens' Type (Maybe SourceContext)
+tSourceContext
+  = lens _tSourceContext
+      (\ s a -> s{_tSourceContext = a})
+
+-- | The list of types appearing in \`oneof\` definitions in this type.
+tOneofs :: Lens' Type [Text]
+tOneofs
+  = lens _tOneofs (\ s a -> s{_tOneofs = a}) . _Default
+      . _Coerce
+
+-- | The fully qualified message name.
+tName :: Lens' Type (Maybe Text)
+tName = lens _tName (\ s a -> s{_tName = a})
+
+-- | The protocol buffer options.
+tOptions :: Lens' Type [Option]
+tOptions
+  = lens _tOptions (\ s a -> s{_tOptions = a}) .
+      _Default
+      . _Coerce
+
+-- | The list of fields.
+tFields :: Lens' Type [Field]
+tFields
+  = lens _tFields (\ s a -> s{_tFields = a}) . _Default
+      . _Coerce
+
+-- | The source syntax.
+tSyntax :: Lens' Type (Maybe Text)
+tSyntax = lens _tSyntax (\ s a -> s{_tSyntax = a})
+
+instance FromJSON Type where
+        parseJSON
+          = withObject "Type"
+              (\ o ->
+                 Type' <$>
+                   (o .:? "sourceContext") <*>
+                     (o .:? "oneofs" .!= mempty)
+                     <*> (o .:? "name")
+                     <*> (o .:? "options" .!= mempty)
+                     <*> (o .:? "fields" .!= mempty)
+                     <*> (o .:? "syntax"))
+
+instance ToJSON Type where
+        toJSON Type'{..}
+          = object
+              (catMaybes
+                 [("sourceContext" .=) <$> _tSourceContext,
+                  ("oneofs" .=) <$> _tOneofs, ("name" .=) <$> _tName,
+                  ("options" .=) <$> _tOptions,
+                  ("fields" .=) <$> _tFields,
+                  ("syntax" .=) <$> _tSyntax])
+
+-- | A protocol buffer option, which can be attached to a message, field,
+-- enumeration, etc.
+--
+-- /See:/ 'option' smart constructor.
+data Option = Option'
+    { _oValue :: !(Maybe OptionValue)
+    , _oName  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Option' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oValue'
+--
+-- * 'oName'
+option
+    :: Option
+option =
+    Option'
+    { _oValue = Nothing
+    , _oName = Nothing
+    }
+
+-- | The option\'s value. For example, \`\"com.google.protobuf\"\`.
+oValue :: Lens' Option (Maybe OptionValue)
+oValue = lens _oValue (\ s a -> s{_oValue = a})
+
+-- | The option\'s name. For example, \`\"java_package\"\`.
+oName :: Lens' Option (Maybe Text)
+oName = lens _oName (\ s a -> s{_oName = a})
+
+instance FromJSON Option where
+        parseJSON
+          = withObject "Option"
+              (\ o ->
+                 Option' <$> (o .:? "value") <*> (o .:? "name"))
+
+instance ToJSON Option where
+        toJSON Option'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oValue, ("name" .=) <$> _oName])
+
+-- | A Distribution may optionally contain a histogram of the values in the
+-- population. The histogram is given in \`bucket_counts\` as counts of
+-- values that fall into one of a sequence of non-overlapping buckets. The
+-- sequence of buckets is described by \`bucket_options\`. A bucket
+-- specifies an inclusive lower bound and exclusive upper bound for the
+-- values that are counted for that bucket. The upper bound of a bucket is
+-- strictly greater than the lower bound. The sequence of N buckets for a
+-- Distribution consists of an underflow bucket (number 0), zero or more
+-- finite buckets (number 1 through N - 2) and an overflow bucket (number N
+-- - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is
+-- the same as the upper bound of bucket i - 1. The buckets span the whole
+-- range of finite values: lower bound of the underflow bucket is -infinity
+-- and the upper bound of the overflow bucket is +infinity. The finite
+-- buckets are so-called because both bounds are finite. \`BucketOptions\`
+-- describes bucket boundaries in one of three ways. Two describe the
+-- boundaries by giving parameters for a formula to generate boundaries and
+-- one gives the bucket boundaries explicitly. If \`bucket_boundaries\` is
+-- not given, then no \`bucket_counts\` may be given.
+--
+-- /See:/ 'bucketOptions' smart constructor.
+data BucketOptions = BucketOptions'
+    { _boExponentialBuckets :: !(Maybe Exponential)
+    , _boLinearBuckets      :: !(Maybe Linear)
+    , _boExplicitBuckets    :: !(Maybe Explicit)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'boExponentialBuckets'
+--
+-- * 'boLinearBuckets'
+--
+-- * 'boExplicitBuckets'
+bucketOptions
+    :: BucketOptions
+bucketOptions =
+    BucketOptions'
+    { _boExponentialBuckets = Nothing
+    , _boLinearBuckets = Nothing
+    , _boExplicitBuckets = Nothing
+    }
+
+-- | The exponential buckets.
+boExponentialBuckets :: Lens' BucketOptions (Maybe Exponential)
+boExponentialBuckets
+  = lens _boExponentialBuckets
+      (\ s a -> s{_boExponentialBuckets = a})
+
+-- | The linear bucket.
+boLinearBuckets :: Lens' BucketOptions (Maybe Linear)
+boLinearBuckets
+  = lens _boLinearBuckets
+      (\ s a -> s{_boLinearBuckets = a})
+
+-- | The explicit buckets.
+boExplicitBuckets :: Lens' BucketOptions (Maybe Explicit)
+boExplicitBuckets
+  = lens _boExplicitBuckets
+      (\ s a -> s{_boExplicitBuckets = a})
+
+instance FromJSON BucketOptions where
+        parseJSON
+          = withObject "BucketOptions"
+              (\ o ->
+                 BucketOptions' <$>
+                   (o .:? "exponentialBuckets") <*>
+                     (o .:? "linearBuckets")
+                     <*> (o .:? "explicitBuckets"))
+
+instance ToJSON BucketOptions where
+        toJSON BucketOptions'{..}
+          = object
+              (catMaybes
+                 [("exponentialBuckets" .=) <$> _boExponentialBuckets,
+                  ("linearBuckets" .=) <$> _boLinearBuckets,
+                  ("explicitBuckets" .=) <$> _boExplicitBuckets])
+
+-- | A collection of data points that describes the time-varying nature of a
+-- metric. A time series is identified by a combination of a
+-- fully-specified monitored resource and a fully-specified metric.
+--
+-- /See:/ 'timeSeries' smart constructor.
+data TimeSeries = TimeSeries'
+    { _tsPoints     :: !(Maybe [Point])
+    , _tsMetricKind :: !(Maybe Text)
+    , _tsMetric     :: !(Maybe Metric)
+    , _tsResource   :: !(Maybe MonitoredResource)
+    , _tsValueType  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TimeSeries' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tsPoints'
+--
+-- * 'tsMetricKind'
+--
+-- * 'tsMetric'
+--
+-- * 'tsResource'
+--
+-- * 'tsValueType'
+timeSeries
+    :: TimeSeries
+timeSeries =
+    TimeSeries'
+    { _tsPoints = Nothing
+    , _tsMetricKind = Nothing
+    , _tsMetric = Nothing
+    , _tsResource = Nothing
+    , _tsValueType = Nothing
+    }
+
+-- | The data points of this time series. When used as output, points will be
+-- sorted by decreasing time order. When used as input, points could be
+-- written in any orders.
+tsPoints :: Lens' TimeSeries [Point]
+tsPoints
+  = lens _tsPoints (\ s a -> s{_tsPoints = a}) .
+      _Default
+      . _Coerce
+
+-- | The metric kind of the time series. This can be different than the
+-- metric kind specified in [google.api.MetricDescriptor] because of
+-- alignment and reduction operations on the data. This field is ignored
+-- when writing data; the value specified in the descriptor is used
+-- instead. \'OutputOnly
+tsMetricKind :: Lens' TimeSeries (Maybe Text)
+tsMetricKind
+  = lens _tsMetricKind (\ s a -> s{_tsMetricKind = a})
+
+-- | The fully-specified metric used to identify the time series.
+tsMetric :: Lens' TimeSeries (Maybe Metric)
+tsMetric = lens _tsMetric (\ s a -> s{_tsMetric = a})
+
+-- | The fully-specified monitored resource used to identify the time series.
+tsResource :: Lens' TimeSeries (Maybe MonitoredResource)
+tsResource
+  = lens _tsResource (\ s a -> s{_tsResource = a})
+
+-- | The value type of the time series. This can be different than the value
+-- type specified in [google.api.MetricDescriptor] because of alignment and
+-- reduction operations on the data. This field is ignored when writing
+-- data; the value specified in the descriptor is used instead.
+-- \'OutputOnly
+tsValueType :: Lens' TimeSeries (Maybe Text)
+tsValueType
+  = lens _tsValueType (\ s a -> s{_tsValueType = a})
+
+instance FromJSON TimeSeries where
+        parseJSON
+          = withObject "TimeSeries"
+              (\ o ->
+                 TimeSeries' <$>
+                   (o .:? "points" .!= mempty) <*> (o .:? "metricKind")
+                     <*> (o .:? "metric")
+                     <*> (o .:? "resource")
+                     <*> (o .:? "valueType"))
+
+instance ToJSON TimeSeries where
+        toJSON TimeSeries'{..}
+          = object
+              (catMaybes
+                 [("points" .=) <$> _tsPoints,
+                  ("metricKind" .=) <$> _tsMetricKind,
+                  ("metric" .=) <$> _tsMetric,
+                  ("resource" .=) <$> _tsResource,
+                  ("valueType" .=) <$> _tsValueType])

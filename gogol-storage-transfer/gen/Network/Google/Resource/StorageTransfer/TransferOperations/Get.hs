@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.TransferOperations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type TransferOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'transferOperationsGet' smart constructor.
-data TransferOperationsGet = TransferOperationsGet
+data TransferOperationsGet = TransferOperationsGet'
     { _togXgafv          :: !(Maybe Text)
     , _togUploadProtocol :: !(Maybe Text)
     , _togPp             :: !Bool
@@ -101,7 +101,7 @@ transferOperationsGet
     :: Text -- ^ 'togName'
     -> TransferOperationsGet
 transferOperationsGet pTogName_ =
-    TransferOperationsGet
+    TransferOperationsGet'
     { _togXgafv = Nothing
     , _togUploadProtocol = Nothing
     , _togPp = True
@@ -155,7 +155,9 @@ togCallback
 
 instance GoogleRequest TransferOperationsGet where
         type Rs TransferOperationsGet = Operation
-        requestClient TransferOperationsGet{..}
+        type Scopes TransferOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TransferOperationsGet'{..}
           = go _togName _togXgafv _togUploadProtocol
               (Just _togPp)
               _togAccessToken

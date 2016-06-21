@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.Partners.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- NormalizeLatLng(-270.0, 10.0)
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng
+data LatLng = LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -60,7 +60,7 @@ data LatLng = LatLng
 latLng
     :: LatLng
 latLng =
-    LatLng
+    LatLng'
     { _llLatitude = Nothing
     , _llLongitude = Nothing
     }
@@ -81,11 +81,11 @@ instance FromJSON LatLng where
         parseJSON
           = withObject "LatLng"
               (\ o ->
-                 LatLng <$>
+                 LatLng' <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
 instance ToJSON LatLng where
-        toJSON LatLng{..}
+        toJSON LatLng'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _llLatitude,
@@ -94,7 +94,7 @@ instance ToJSON LatLng where
 -- | Response message for ListUserStates.
 --
 -- /See:/ 'listUserStatesResponse' smart constructor.
-data ListUserStatesResponse = ListUserStatesResponse
+data ListUserStatesResponse = ListUserStatesResponse'
     { _lusrUserStates       :: !(Maybe [Text])
     , _lusrResponseMetadata :: !(Maybe ResponseMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -109,7 +109,7 @@ data ListUserStatesResponse = ListUserStatesResponse
 listUserStatesResponse
     :: ListUserStatesResponse
 listUserStatesResponse =
-    ListUserStatesResponse
+    ListUserStatesResponse'
     { _lusrUserStates = Nothing
     , _lusrResponseMetadata = Nothing
     }
@@ -132,12 +132,12 @@ instance FromJSON ListUserStatesResponse where
         parseJSON
           = withObject "ListUserStatesResponse"
               (\ o ->
-                 ListUserStatesResponse <$>
+                 ListUserStatesResponse' <$>
                    (o .:? "userStates" .!= mempty) <*>
                      (o .:? "responseMetadata"))
 
 instance ToJSON ListUserStatesResponse where
-        toJSON ListUserStatesResponse{..}
+        toJSON ListUserStatesResponse'{..}
           = object
               (catMaybes
                  [("userStates" .=) <$> _lusrUserStates,
@@ -146,7 +146,7 @@ instance ToJSON ListUserStatesResponse where
 -- | Key value data pair for an event.
 --
 -- /See:/ 'eventData' smart constructor.
-data EventData = EventData
+data EventData = EventData'
     { _edValues :: !(Maybe [Text])
     , _edKey    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -161,7 +161,7 @@ data EventData = EventData
 eventData
     :: EventData
 eventData =
-    EventData
+    EventData'
     { _edValues = Nothing
     , _edKey = Nothing
     }
@@ -181,11 +181,11 @@ instance FromJSON EventData where
         parseJSON
           = withObject "EventData"
               (\ o ->
-                 EventData <$>
+                 EventData' <$>
                    (o .:? "values" .!= mempty) <*> (o .:? "key"))
 
 instance ToJSON EventData where
-        toJSON EventData{..}
+        toJSON EventData'{..}
           = object
               (catMaybes
                  [("values" .=) <$> _edValues, ("key" .=) <$> _edKey])
@@ -193,7 +193,7 @@ instance ToJSON EventData where
 -- | Common data that is in each API request.
 --
 -- /See:/ 'requestMetadata' smart constructor.
-data RequestMetadata = RequestMetadata
+data RequestMetadata = RequestMetadata'
     { _rmExperimentIds     :: !(Maybe [Text])
     , _rmTrafficSource     :: !(Maybe TrafficSource)
     , _rmLocale            :: !(Maybe Text)
@@ -217,7 +217,7 @@ data RequestMetadata = RequestMetadata
 requestMetadata
     :: RequestMetadata
 requestMetadata =
-    RequestMetadata
+    RequestMetadata'
     { _rmExperimentIds = Nothing
     , _rmTrafficSource = Nothing
     , _rmLocale = Nothing
@@ -260,7 +260,7 @@ instance FromJSON RequestMetadata where
         parseJSON
           = withObject "RequestMetadata"
               (\ o ->
-                 RequestMetadata <$>
+                 RequestMetadata' <$>
                    (o .:? "experimentIds" .!= mempty) <*>
                      (o .:? "trafficSource")
                      <*> (o .:? "locale")
@@ -268,7 +268,7 @@ instance FromJSON RequestMetadata where
                      <*> (o .:? "partnersSessionId"))
 
 instance ToJSON RequestMetadata where
-        toJSON RequestMetadata{..}
+        toJSON RequestMetadata'{..}
           = object
               (catMaybes
                  [("experimentIds" .=) <$> _rmExperimentIds,
@@ -280,7 +280,7 @@ instance ToJSON RequestMetadata where
 -- | Google Partners certification status.
 --
 -- /See:/ 'certificationStatus' smart constructor.
-data CertificationStatus = CertificationStatus
+data CertificationStatus = CertificationStatus'
     { _csIsCertified  :: !(Maybe Bool)
     , _csType         :: !(Maybe Text)
     , _csExamStatuses :: !(Maybe [CertificationExamStatus])
@@ -298,7 +298,7 @@ data CertificationStatus = CertificationStatus
 certificationStatus
     :: CertificationStatus
 certificationStatus =
-    CertificationStatus
+    CertificationStatus'
     { _csIsCertified = Nothing
     , _csType = Nothing
     , _csExamStatuses = Nothing
@@ -326,12 +326,12 @@ instance FromJSON CertificationStatus where
         parseJSON
           = withObject "CertificationStatus"
               (\ o ->
-                 CertificationStatus <$>
+                 CertificationStatus' <$>
                    (o .:? "isCertified") <*> (o .:? "type") <*>
                      (o .:? "examStatuses" .!= mempty))
 
 instance ToJSON CertificationStatus where
-        toJSON CertificationStatus{..}
+        toJSON CertificationStatus'{..}
           = object
               (catMaybes
                  [("isCertified" .=) <$> _csIsCertified,
@@ -341,7 +341,7 @@ instance ToJSON CertificationStatus where
 -- | Debug information about this request.
 --
 -- /See:/ 'debugInfo' smart constructor.
-data DebugInfo = DebugInfo
+data DebugInfo = DebugInfo'
     { _diServiceURL      :: !(Maybe Text)
     , _diServerTraceInfo :: !(Maybe Text)
     , _diServerInfo      :: !(Maybe Text)
@@ -359,7 +359,7 @@ data DebugInfo = DebugInfo
 debugInfo
     :: DebugInfo
 debugInfo =
-    DebugInfo
+    DebugInfo'
     { _diServiceURL = Nothing
     , _diServerTraceInfo = Nothing
     , _diServerInfo = Nothing
@@ -385,12 +385,12 @@ instance FromJSON DebugInfo where
         parseJSON
           = withObject "DebugInfo"
               (\ o ->
-                 DebugInfo <$>
+                 DebugInfo' <$>
                    (o .:? "serviceUrl") <*> (o .:? "serverTraceInfo")
                      <*> (o .:? "serverInfo"))
 
 instance ToJSON DebugInfo where
-        toJSON DebugInfo{..}
+        toJSON DebugInfo'{..}
           = object
               (catMaybes
                  [("serviceUrl" .=) <$> _diServiceURL,
@@ -400,7 +400,7 @@ instance ToJSON DebugInfo where
 -- | Response message for GetCompany.
 --
 -- /See:/ 'getCompanyResponse' smart constructor.
-data GetCompanyResponse = GetCompanyResponse
+data GetCompanyResponse = GetCompanyResponse'
     { _gcrResponseMetadata :: !(Maybe ResponseMetadata)
     , _gcrCompany          :: !(Maybe Company)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -415,7 +415,7 @@ data GetCompanyResponse = GetCompanyResponse
 getCompanyResponse
     :: GetCompanyResponse
 getCompanyResponse =
-    GetCompanyResponse
+    GetCompanyResponse'
     { _gcrResponseMetadata = Nothing
     , _gcrCompany = Nothing
     }
@@ -435,11 +435,11 @@ instance FromJSON GetCompanyResponse where
         parseJSON
           = withObject "GetCompanyResponse"
               (\ o ->
-                 GetCompanyResponse <$>
+                 GetCompanyResponse' <$>
                    (o .:? "responseMetadata") <*> (o .:? "company"))
 
 instance ToJSON GetCompanyResponse where
-        toJSON GetCompanyResponse{..}
+        toJSON GetCompanyResponse'{..}
           = object
               (catMaybes
                  [("responseMetadata" .=) <$> _gcrResponseMetadata,
@@ -448,7 +448,7 @@ instance ToJSON GetCompanyResponse where
 -- | Basic information from a public profile.
 --
 -- /See:/ 'publicProFile' smart constructor.
-data PublicProFile = PublicProFile
+data PublicProFile = PublicProFile'
     { _ppfURL             :: !(Maybe Text)
     , _ppfDisplayImageURL :: !(Maybe Text)
     , _ppfDisplayName     :: !(Maybe Text)
@@ -469,7 +469,7 @@ data PublicProFile = PublicProFile
 publicProFile
     :: PublicProFile
 publicProFile =
-    PublicProFile
+    PublicProFile'
     { _ppfURL = Nothing
     , _ppfDisplayImageURL = Nothing
     , _ppfDisplayName = Nothing
@@ -501,13 +501,13 @@ instance FromJSON PublicProFile where
         parseJSON
           = withObject "PublicProFile"
               (\ o ->
-                 PublicProFile <$>
+                 PublicProFile' <$>
                    (o .:? "url") <*> (o .:? "displayImageUrl") <*>
                      (o .:? "displayName")
                      <*> (o .:? "id"))
 
 instance ToJSON PublicProFile where
-        toJSON PublicProFile{..}
+        toJSON PublicProFile'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _ppfURL,
@@ -518,7 +518,7 @@ instance ToJSON PublicProFile where
 -- | Status for a Google Partners certification exam.
 --
 -- /See:/ 'certificationExamStatus' smart constructor.
-data CertificationExamStatus = CertificationExamStatus
+data CertificationExamStatus = CertificationExamStatus'
     { _cesNumberUsersPass :: !(Maybe (Textual Int32))
     , _cesType            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -533,7 +533,7 @@ data CertificationExamStatus = CertificationExamStatus
 certificationExamStatus
     :: CertificationExamStatus
 certificationExamStatus =
-    CertificationExamStatus
+    CertificationExamStatus'
     { _cesNumberUsersPass = Nothing
     , _cesType = Nothing
     }
@@ -553,11 +553,11 @@ instance FromJSON CertificationExamStatus where
         parseJSON
           = withObject "CertificationExamStatus"
               (\ o ->
-                 CertificationExamStatus <$>
+                 CertificationExamStatus' <$>
                    (o .:? "numberUsersPass") <*> (o .:? "type"))
 
 instance ToJSON CertificationExamStatus where
-        toJSON CertificationExamStatus{..}
+        toJSON CertificationExamStatus'{..}
           = object
               (catMaybes
                  [("numberUsersPass" .=) <$> _cesNumberUsersPass,
@@ -566,7 +566,7 @@ instance ToJSON CertificationExamStatus where
 -- | A location with address and geographic coordinates.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location
+data Location = Location'
     { _lLatLng  :: !(Maybe LatLng)
     , _lAddress :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -581,7 +581,7 @@ data Location = Location
 location
     :: Location
 location =
-    Location
+    Location'
     { _lLatLng = Nothing
     , _lAddress = Nothing
     }
@@ -598,10 +598,10 @@ instance FromJSON Location where
         parseJSON
           = withObject "Location"
               (\ o ->
-                 Location <$> (o .:? "latLng") <*> (o .:? "address"))
+                 Location' <$> (o .:? "latLng") <*> (o .:? "address"))
 
 instance ToJSON Location where
-        toJSON Location{..}
+        toJSON Location'{..}
           = object
               (catMaybes
                  [("latLng" .=) <$> _lLatLng,
@@ -610,7 +610,7 @@ instance ToJSON Location where
 -- | Source of traffic for the current request.
 --
 -- /See:/ 'trafficSource' smart constructor.
-data TrafficSource = TrafficSource
+data TrafficSource = TrafficSource'
     { _tsTrafficSubId    :: !(Maybe Text)
     , _tsTrafficSourceId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -625,7 +625,7 @@ data TrafficSource = TrafficSource
 trafficSource
     :: TrafficSource
 trafficSource =
-    TrafficSource
+    TrafficSource'
     { _tsTrafficSubId = Nothing
     , _tsTrafficSourceId = Nothing
     }
@@ -649,11 +649,11 @@ instance FromJSON TrafficSource where
         parseJSON
           = withObject "TrafficSource"
               (\ o ->
-                 TrafficSource <$>
+                 TrafficSource' <$>
                    (o .:? "trafficSubId") <*> (o .:? "trafficSourceId"))
 
 instance ToJSON TrafficSource where
-        toJSON TrafficSource{..}
+        toJSON TrafficSource'{..}
           = object
               (catMaybes
                  [("trafficSubId" .=) <$> _tsTrafficSubId,
@@ -662,7 +662,7 @@ instance ToJSON TrafficSource where
 -- | Represents an amount of money with its currency type.
 --
 -- /See:/ 'money' smart constructor.
-data Money = Money
+data Money = Money'
     { _mCurrencyCode :: !(Maybe Text)
     , _mNanos        :: !(Maybe (Textual Int32))
     , _mUnits        :: !(Maybe (Textual Int64))
@@ -680,7 +680,7 @@ data Money = Money
 money
     :: Money
 money =
-    Money
+    Money'
     { _mCurrencyCode = Nothing
     , _mNanos = Nothing
     , _mUnits = Nothing
@@ -714,12 +714,12 @@ instance FromJSON Money where
         parseJSON
           = withObject "Money"
               (\ o ->
-                 Money <$>
+                 Money' <$>
                    (o .:? "currencyCode") <*> (o .:? "nanos") <*>
                      (o .:? "units"))
 
 instance ToJSON Money where
-        toJSON Money{..}
+        toJSON Money'{..}
           = object
               (catMaybes
                  [("currencyCode" .=) <$> _mCurrencyCode,
@@ -728,7 +728,7 @@ instance ToJSON Money where
 -- | Response message for ListCompanies.
 --
 -- /See:/ 'listCompaniesResponse' smart constructor.
-data ListCompaniesResponse = ListCompaniesResponse
+data ListCompaniesResponse = ListCompaniesResponse'
     { _lcrNextPageToken    :: !(Maybe Text)
     , _lcrResponseMetadata :: !(Maybe ResponseMetadata)
     , _lcrCompanies        :: !(Maybe [Company])
@@ -746,7 +746,7 @@ data ListCompaniesResponse = ListCompaniesResponse
 listCompaniesResponse
     :: ListCompaniesResponse
 listCompaniesResponse =
-    ListCompaniesResponse
+    ListCompaniesResponse'
     { _lcrNextPageToken = Nothing
     , _lcrResponseMetadata = Nothing
     , _lcrCompanies = Nothing
@@ -777,13 +777,13 @@ instance FromJSON ListCompaniesResponse where
         parseJSON
           = withObject "ListCompaniesResponse"
               (\ o ->
-                 ListCompaniesResponse <$>
+                 ListCompaniesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "responseMetadata")
                      <*> (o .:? "companies" .!= mempty))
 
 instance ToJSON ListCompaniesResponse where
-        toJSON ListCompaniesResponse{..}
+        toJSON ListCompaniesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lcrNextPageToken,
@@ -793,7 +793,7 @@ instance ToJSON ListCompaniesResponse where
 -- | reCaptcha challenge info.
 --
 -- /See:/ 'recaptchaChallenge' smart constructor.
-data RecaptchaChallenge = RecaptchaChallenge
+data RecaptchaChallenge = RecaptchaChallenge'
     { _rcResponse :: !(Maybe Text)
     , _rcId       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -808,7 +808,7 @@ data RecaptchaChallenge = RecaptchaChallenge
 recaptchaChallenge
     :: RecaptchaChallenge
 recaptchaChallenge =
-    RecaptchaChallenge
+    RecaptchaChallenge'
     { _rcResponse = Nothing
     , _rcId = Nothing
     }
@@ -826,11 +826,11 @@ instance FromJSON RecaptchaChallenge where
         parseJSON
           = withObject "RecaptchaChallenge"
               (\ o ->
-                 RecaptchaChallenge <$>
+                 RecaptchaChallenge' <$>
                    (o .:? "response") <*> (o .:? "id"))
 
 instance ToJSON RecaptchaChallenge where
-        toJSON RecaptchaChallenge{..}
+        toJSON RecaptchaChallenge'{..}
           = object
               (catMaybes
                  [("response" .=) <$> _rcResponse,
@@ -839,7 +839,7 @@ instance ToJSON RecaptchaChallenge where
 -- | Response message for CreateLead. Debug information about this request.
 --
 -- /See:/ 'createLeadResponse' smart constructor.
-data CreateLeadResponse = CreateLeadResponse
+data CreateLeadResponse = CreateLeadResponse'
     { _clrRecaptchaStatus  :: !(Maybe Text)
     , _clrResponseMetadata :: !(Maybe ResponseMetadata)
     , _clrLead             :: !(Maybe Lead)
@@ -857,7 +857,7 @@ data CreateLeadResponse = CreateLeadResponse
 createLeadResponse
     :: CreateLeadResponse
 createLeadResponse =
-    CreateLeadResponse
+    CreateLeadResponse'
     { _clrRecaptchaStatus = Nothing
     , _clrResponseMetadata = Nothing
     , _clrLead = Nothing
@@ -883,13 +883,13 @@ instance FromJSON CreateLeadResponse where
         parseJSON
           = withObject "CreateLeadResponse"
               (\ o ->
-                 CreateLeadResponse <$>
+                 CreateLeadResponse' <$>
                    (o .:? "recaptchaStatus") <*>
                      (o .:? "responseMetadata")
                      <*> (o .:? "lead"))
 
 instance ToJSON CreateLeadResponse where
-        toJSON CreateLeadResponse{..}
+        toJSON CreateLeadResponse'{..}
           = object
               (catMaybes
                  [("recaptchaStatus" .=) <$> _clrRecaptchaStatus,
@@ -900,7 +900,7 @@ instance ToJSON CreateLeadResponse where
 -- honored by whitelisted products.
 --
 -- /See:/ 'userOverrides' smart constructor.
-data UserOverrides = UserOverrides
+data UserOverrides = UserOverrides'
     { _uoIPAddress :: !(Maybe Text)
     , _uoUserId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -915,7 +915,7 @@ data UserOverrides = UserOverrides
 userOverrides
     :: UserOverrides
 userOverrides =
-    UserOverrides
+    UserOverrides'
     { _uoIPAddress = Nothing
     , _uoUserId = Nothing
     }
@@ -933,11 +933,11 @@ instance FromJSON UserOverrides where
         parseJSON
           = withObject "UserOverrides"
               (\ o ->
-                 UserOverrides <$>
+                 UserOverrides' <$>
                    (o .:? "ipAddress") <*> (o .:? "userId"))
 
 instance ToJSON UserOverrides where
-        toJSON UserOverrides{..}
+        toJSON UserOverrides'{..}
           = object
               (catMaybes
                  [("ipAddress" .=) <$> _uoIPAddress,
@@ -946,7 +946,7 @@ instance ToJSON UserOverrides where
 -- | Common data that is in each API response.
 --
 -- /See:/ 'responseMetadata' smart constructor.
-newtype ResponseMetadata = ResponseMetadata
+newtype ResponseMetadata = ResponseMetadata'
     { _rmDebugInfo :: Maybe DebugInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -958,7 +958,7 @@ newtype ResponseMetadata = ResponseMetadata
 responseMetadata
     :: ResponseMetadata
 responseMetadata =
-    ResponseMetadata
+    ResponseMetadata'
     { _rmDebugInfo = Nothing
     }
 
@@ -970,17 +970,17 @@ rmDebugInfo
 instance FromJSON ResponseMetadata where
         parseJSON
           = withObject "ResponseMetadata"
-              (\ o -> ResponseMetadata <$> (o .:? "debugInfo"))
+              (\ o -> ResponseMetadata' <$> (o .:? "debugInfo"))
 
 instance ToJSON ResponseMetadata where
-        toJSON ResponseMetadata{..}
+        toJSON ResponseMetadata'{..}
           = object
               (catMaybes [("debugInfo" .=) <$> _rmDebugInfo])
 
 -- | Request message for LogClientMessage.
 --
 -- /See:/ 'logMessageRequest' smart constructor.
-data LogMessageRequest = LogMessageRequest
+data LogMessageRequest = LogMessageRequest'
     { _lmrRequestMetadata :: !(Maybe RequestMetadata)
     , _lmrClientInfo      :: !(Maybe LogMessageRequestClientInfo)
     , _lmrDetails         :: !(Maybe Text)
@@ -1001,7 +1001,7 @@ data LogMessageRequest = LogMessageRequest
 logMessageRequest
     :: LogMessageRequest
 logMessageRequest =
-    LogMessageRequest
+    LogMessageRequest'
     { _lmrRequestMetadata = Nothing
     , _lmrClientInfo = Nothing
     , _lmrDetails = Nothing
@@ -1034,13 +1034,13 @@ instance FromJSON LogMessageRequest where
         parseJSON
           = withObject "LogMessageRequest"
               (\ o ->
-                 LogMessageRequest <$>
+                 LogMessageRequest' <$>
                    (o .:? "requestMetadata") <*> (o .:? "clientInfo")
                      <*> (o .:? "details")
                      <*> (o .:? "level"))
 
 instance ToJSON LogMessageRequest where
-        toJSON LogMessageRequest{..}
+        toJSON LogMessageRequest'{..}
           = object
               (catMaybes
                  [("requestMetadata" .=) <$> _lmrRequestMetadata,
@@ -1051,7 +1051,7 @@ instance ToJSON LogMessageRequest where
 -- | The localized company information.
 --
 -- /See:/ 'localizedCompanyInfo' smart constructor.
-data LocalizedCompanyInfo = LocalizedCompanyInfo
+data LocalizedCompanyInfo = LocalizedCompanyInfo'
     { _lciLanguageCode :: !(Maybe Text)
     , _lciOverview     :: !(Maybe Text)
     , _lciCountryCodes :: !(Maybe [Text])
@@ -1072,7 +1072,7 @@ data LocalizedCompanyInfo = LocalizedCompanyInfo
 localizedCompanyInfo
     :: LocalizedCompanyInfo
 localizedCompanyInfo =
-    LocalizedCompanyInfo
+    LocalizedCompanyInfo'
     { _lciLanguageCode = Nothing
     , _lciOverview = Nothing
     , _lciCountryCodes = Nothing
@@ -1110,13 +1110,13 @@ instance FromJSON LocalizedCompanyInfo where
         parseJSON
           = withObject "LocalizedCompanyInfo"
               (\ o ->
-                 LocalizedCompanyInfo <$>
+                 LocalizedCompanyInfo' <$>
                    (o .:? "languageCode") <*> (o .:? "overview") <*>
                      (o .:? "countryCodes" .!= mempty)
                      <*> (o .:? "displayName"))
 
 instance ToJSON LocalizedCompanyInfo where
-        toJSON LocalizedCompanyInfo{..}
+        toJSON LocalizedCompanyInfo'{..}
           = object
               (catMaybes
                  [("languageCode" .=) <$> _lciLanguageCode,
@@ -1128,7 +1128,7 @@ instance ToJSON LocalizedCompanyInfo where
 -- etc.
 --
 -- /See:/ 'logMessageRequestClientInfo' smart constructor.
-newtype LogMessageRequestClientInfo = LogMessageRequestClientInfo
+newtype LogMessageRequestClientInfo = LogMessageRequestClientInfo'
     { _lmrciAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1141,7 +1141,7 @@ logMessageRequestClientInfo
     :: HashMap Text Text -- ^ 'lmrciAddtional'
     -> LogMessageRequestClientInfo
 logMessageRequestClientInfo pLmrciAddtional_ =
-    LogMessageRequestClientInfo
+    LogMessageRequestClientInfo'
     { _lmrciAddtional = _Coerce # pLmrciAddtional_
     }
 
@@ -1155,7 +1155,7 @@ instance FromJSON LogMessageRequestClientInfo where
         parseJSON
           = withObject "LogMessageRequestClientInfo"
               (\ o ->
-                 LogMessageRequestClientInfo <$> (parseJSONObject o))
+                 LogMessageRequestClientInfo' <$> (parseJSONObject o))
 
 instance ToJSON LogMessageRequestClientInfo where
         toJSON = toJSON . _lmrciAddtional
@@ -1165,7 +1165,7 @@ instance ToJSON LogMessageRequestClientInfo where
 -- portal).
 --
 -- /See:/ 'lead' smart constructor.
-data Lead = Lead
+data Lead = Lead'
     { _lGivenName        :: !(Maybe Text)
     , _lEmail            :: !(Maybe Text)
     , _lFamilyName       :: !(Maybe Text)
@@ -1204,7 +1204,7 @@ data Lead = Lead
 lead
     :: Lead
 lead =
-    Lead
+    Lead'
     { _lGivenName = Nothing
     , _lEmail = Nothing
     , _lFamilyName = Nothing
@@ -1272,7 +1272,7 @@ instance FromJSON Lead where
         parseJSON
           = withObject "Lead"
               (\ o ->
-                 Lead <$>
+                 Lead' <$>
                    (o .:? "givenName") <*> (o .:? "email") <*>
                      (o .:? "familyName")
                      <*> (o .:? "phoneNumber")
@@ -1284,7 +1284,7 @@ instance FromJSON Lead where
                      <*> (o .:? "gpsMotivations" .!= mempty))
 
 instance ToJSON Lead where
-        toJSON Lead{..}
+        toJSON Lead'{..}
           = object
               (catMaybes
                  [("givenName" .=) <$> _lGivenName,
@@ -1300,7 +1300,7 @@ instance ToJSON Lead where
 -- | Response message for LogClientMessage.
 --
 -- /See:/ 'logMessageResponse' smart constructor.
-newtype LogMessageResponse = LogMessageResponse
+newtype LogMessageResponse = LogMessageResponse'
     { _lmrResponseMetadata :: Maybe ResponseMetadata
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1312,7 +1312,7 @@ newtype LogMessageResponse = LogMessageResponse
 logMessageResponse
     :: LogMessageResponse
 logMessageResponse =
-    LogMessageResponse
+    LogMessageResponse'
     { _lmrResponseMetadata = Nothing
     }
 
@@ -1326,10 +1326,10 @@ instance FromJSON LogMessageResponse where
         parseJSON
           = withObject "LogMessageResponse"
               (\ o ->
-                 LogMessageResponse <$> (o .:? "responseMetadata"))
+                 LogMessageResponse' <$> (o .:? "responseMetadata"))
 
 instance ToJSON LogMessageResponse where
-        toJSON LogMessageResponse{..}
+        toJSON LogMessageResponse'{..}
           = object
               (catMaybes
                  [("responseMetadata" .=) <$> _lmrResponseMetadata])
@@ -1338,7 +1338,7 @@ instance ToJSON LogMessageResponse where
 -- qualifies for being searched by advertisers.
 --
 -- /See:/ 'company' smart constructor.
-data Company = Company
+data Company = Company'
     { _cPublicProFile             :: !(Maybe PublicProFile)
     , _cOriginalMinMonthlyBudget  :: !(Maybe Money)
     , _cIndustries                :: !(Maybe [Text])
@@ -1383,7 +1383,7 @@ data Company = Company
 company
     :: Company
 company =
-    Company
+    Company'
     { _cPublicProFile = Nothing
     , _cOriginalMinMonthlyBudget = Nothing
     , _cIndustries = Nothing
@@ -1479,7 +1479,7 @@ instance FromJSON Company where
         parseJSON
           = withObject "Company"
               (\ o ->
-                 Company <$>
+                 Company' <$>
                    (o .:? "publicProfile") <*>
                      (o .:? "originalMinMonthlyBudget")
                      <*> (o .:? "industries" .!= mempty)
@@ -1494,7 +1494,7 @@ instance FromJSON Company where
                      <*> (o .:? "services" .!= mempty))
 
 instance ToJSON Company where
-        toJSON Company{..}
+        toJSON Company'{..}
           = object
               (catMaybes
                  [("publicProfile" .=) <$> _cPublicProFile,
@@ -1515,7 +1515,7 @@ instance ToJSON Company where
 -- | Response message for LogUserEvent.
 --
 -- /See:/ 'logUserEventResponse' smart constructor.
-newtype LogUserEventResponse = LogUserEventResponse
+newtype LogUserEventResponse = LogUserEventResponse'
     { _luerResponseMetadata :: Maybe ResponseMetadata
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1527,7 +1527,7 @@ newtype LogUserEventResponse = LogUserEventResponse
 logUserEventResponse
     :: LogUserEventResponse
 logUserEventResponse =
-    LogUserEventResponse
+    LogUserEventResponse'
     { _luerResponseMetadata = Nothing
     }
 
@@ -1541,10 +1541,10 @@ instance FromJSON LogUserEventResponse where
         parseJSON
           = withObject "LogUserEventResponse"
               (\ o ->
-                 LogUserEventResponse <$> (o .:? "responseMetadata"))
+                 LogUserEventResponse' <$> (o .:? "responseMetadata"))
 
 instance ToJSON LogUserEventResponse where
-        toJSON LogUserEventResponse{..}
+        toJSON LogUserEventResponse'{..}
           = object
               (catMaybes
                  [("responseMetadata" .=) <$> _luerResponseMetadata])
@@ -1552,7 +1552,7 @@ instance ToJSON LogUserEventResponse where
 -- | Request message for LogUserEvent.
 --
 -- /See:/ 'logUserEventRequest' smart constructor.
-data LogUserEventRequest = LogUserEventRequest
+data LogUserEventRequest = LogUserEventRequest'
     { _luerEventCategory   :: !(Maybe Text)
     , _luerRequestMetadata :: !(Maybe RequestMetadata)
     , _luerURL             :: !(Maybe Text)
@@ -1582,7 +1582,7 @@ data LogUserEventRequest = LogUserEventRequest
 logUserEventRequest
     :: LogUserEventRequest
 logUserEventRequest =
-    LogUserEventRequest
+    LogUserEventRequest'
     { _luerEventCategory = Nothing
     , _luerRequestMetadata = Nothing
     , _luerURL = Nothing
@@ -1636,7 +1636,7 @@ instance FromJSON LogUserEventRequest where
         parseJSON
           = withObject "LogUserEventRequest"
               (\ o ->
-                 LogUserEventRequest <$>
+                 LogUserEventRequest' <$>
                    (o .:? "eventCategory") <*> (o .:? "requestMetadata")
                      <*> (o .:? "url")
                      <*> (o .:? "eventScope")
@@ -1645,7 +1645,7 @@ instance FromJSON LogUserEventRequest where
                      <*> (o .:? "eventAction"))
 
 instance ToJSON LogUserEventRequest where
-        toJSON LogUserEventRequest{..}
+        toJSON LogUserEventRequest'{..}
           = object
               (catMaybes
                  [("eventCategory" .=) <$> _luerEventCategory,
@@ -1659,7 +1659,7 @@ instance ToJSON LogUserEventRequest where
 -- | Information related to ranking of results.
 --
 -- /See:/ 'rank' smart constructor.
-data Rank = Rank
+data Rank = Rank'
     { _rValue :: !(Maybe (Textual Double))
     , _rType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1674,7 +1674,7 @@ data Rank = Rank
 rank
     :: Rank
 rank =
-    Rank
+    Rank'
     { _rValue = Nothing
     , _rType = Nothing
     }
@@ -1692,10 +1692,10 @@ rType = lens _rType (\ s a -> s{_rType = a})
 instance FromJSON Rank where
         parseJSON
           = withObject "Rank"
-              (\ o -> Rank <$> (o .:? "value") <*> (o .:? "type"))
+              (\ o -> Rank' <$> (o .:? "value") <*> (o .:? "type"))
 
 instance ToJSON Rank where
-        toJSON Rank{..}
+        toJSON Rank'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _rValue, ("type" .=) <$> _rType])
@@ -1703,7 +1703,7 @@ instance ToJSON Rank where
 -- | Request message for CreateLead.
 --
 -- /See:/ 'createLeadRequest' smart constructor.
-data CreateLeadRequest = CreateLeadRequest
+data CreateLeadRequest = CreateLeadRequest'
     { _cRequestMetadata    :: !(Maybe RequestMetadata)
     , _cRecaptchaChallenge :: !(Maybe RecaptchaChallenge)
     , _cLead               :: !(Maybe Lead)
@@ -1721,7 +1721,7 @@ data CreateLeadRequest = CreateLeadRequest
 createLeadRequest
     :: CreateLeadRequest
 createLeadRequest =
-    CreateLeadRequest
+    CreateLeadRequest'
     { _cRequestMetadata = Nothing
     , _cRecaptchaChallenge = Nothing
     , _cLead = Nothing
@@ -1749,13 +1749,13 @@ instance FromJSON CreateLeadRequest where
         parseJSON
           = withObject "CreateLeadRequest"
               (\ o ->
-                 CreateLeadRequest <$>
+                 CreateLeadRequest' <$>
                    (o .:? "requestMetadata") <*>
                      (o .:? "recaptchaChallenge")
                      <*> (o .:? "lead"))
 
 instance ToJSON CreateLeadRequest where
-        toJSON CreateLeadRequest{..}
+        toJSON CreateLeadRequest'{..}
           = object
               (catMaybes
                  [("requestMetadata" .=) <$> _cRequestMetadata,

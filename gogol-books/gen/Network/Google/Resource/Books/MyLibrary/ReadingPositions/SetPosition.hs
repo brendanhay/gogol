@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type MyLibraryReadingPositionsSetPositionResource =
 -- | Sets my reading position information for a volume.
 --
 -- /See:/ 'myLibraryReadingPositionsSetPosition' smart constructor.
-data MyLibraryReadingPositionsSetPosition = MyLibraryReadingPositionsSetPosition
+data MyLibraryReadingPositionsSetPosition = MyLibraryReadingPositionsSetPosition'
     { _mlrpspDeviceCookie   :: !(Maybe Text)
     , _mlrpspContentVersion :: !(Maybe Text)
     , _mlrpspAction         :: !(Maybe MyLibraryReadingPositionsSetPositionAction)
@@ -100,7 +100,7 @@ myLibraryReadingPositionsSetPosition
     -> Text -- ^ 'mlrpspPosition'
     -> MyLibraryReadingPositionsSetPosition
 myLibraryReadingPositionsSetPosition pMlrpspVolumeId_ pMlrpspTimestamp_ pMlrpspPosition_ =
-    MyLibraryReadingPositionsSetPosition
+    MyLibraryReadingPositionsSetPosition'
     { _mlrpspDeviceCookie = Nothing
     , _mlrpspContentVersion = Nothing
     , _mlrpspAction = Nothing
@@ -153,8 +153,10 @@ mlrpspPosition
 instance GoogleRequest
          MyLibraryReadingPositionsSetPosition where
         type Rs MyLibraryReadingPositionsSetPosition = ()
+        type Scopes MyLibraryReadingPositionsSetPosition =
+             '["https://www.googleapis.com/auth/books"]
         requestClient
-          MyLibraryReadingPositionsSetPosition{..}
+          MyLibraryReadingPositionsSetPosition'{..}
           = go _mlrpspVolumeId (Just _mlrpspTimestamp)
               (Just _mlrpspPosition)
               _mlrpspDeviceCookie

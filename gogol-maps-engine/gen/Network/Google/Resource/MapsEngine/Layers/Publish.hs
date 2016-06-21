@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.Publish
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type LayersPublishResource =
 -- | Publish a layer asset.
 --
 -- /See:/ 'layersPublish' smart constructor.
-data LayersPublish = LayersPublish
+data LayersPublish = LayersPublish'
     { _lpForce :: !(Maybe Bool)
     , _lpId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ layersPublish
     :: Text -- ^ 'lpId'
     -> LayersPublish
 layersPublish pLpId_ =
-    LayersPublish
+    LayersPublish'
     { _lpForce = Nothing
     , _lpId = pLpId_
     }
@@ -88,7 +88,9 @@ lpId = lens _lpId (\ s a -> s{_lpId = a})
 
 instance GoogleRequest LayersPublish where
         type Rs LayersPublish = PublishResponse
-        requestClient LayersPublish{..}
+        type Scopes LayersPublish =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient LayersPublish'{..}
           = go _lpId _lpForce (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersPublishResource)

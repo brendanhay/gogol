@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.ChannelBanners.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,10 +67,9 @@ type ChannelBannersInsertResource =
                "insert" :>
                  QueryParam "onBehalfOfContentOwner" Text :>
                    QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" AltMedia :>
-                       MultipartRelated '[JSON] ChannelBannerResource
-                         RequestBody
-                         :> Post '[JSON] ChannelBannerResource
+                     QueryParam "uploadType" Multipart :>
+                       MultipartRelated '[JSON] ChannelBannerResource :>
+                         Post '[JSON] ChannelBannerResource
 
 -- | Uploads a channel banner image to YouTube. This method represents the
 -- first two steps in a three-step process to update the banner image for a
@@ -83,7 +82,7 @@ type ChannelBannersInsertResource =
 -- obtained in step 2.
 --
 -- /See:/ 'channelBannersInsert' smart constructor.
-data ChannelBannersInsert = ChannelBannersInsert
+data ChannelBannersInsert = ChannelBannersInsert'
     { _cbiPayload                :: !ChannelBannerResource
     , _cbiOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -99,7 +98,7 @@ channelBannersInsert
     :: ChannelBannerResource -- ^ 'cbiPayload'
     -> ChannelBannersInsert
 channelBannersInsert pCbiPayload_ =
-    ChannelBannersInsert
+    ChannelBannersInsert'
     { _cbiPayload = pCbiPayload_
     , _cbiOnBehalfOfContentOwner = Nothing
     }
@@ -126,7 +125,11 @@ cbiOnBehalfOfContentOwner
 
 instance GoogleRequest ChannelBannersInsert where
         type Rs ChannelBannersInsert = ChannelBannerResource
-        requestClient ChannelBannersInsert{..}
+        type Scopes ChannelBannersInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.upload"]
+        requestClient ChannelBannersInsert'{..}
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)
               _cbiPayload
               youTubeService
@@ -139,10 +142,12 @@ instance GoogleRequest
          (MediaUpload ChannelBannersInsert) where
         type Rs (MediaUpload ChannelBannersInsert) =
              ChannelBannerResource
+        type Scopes (MediaUpload ChannelBannersInsert) =
+             Scopes ChannelBannersInsert
         requestClient
-          (MediaUpload ChannelBannersInsert{..} body)
+          (MediaUpload ChannelBannersInsert'{..} body)
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _cbiPayload
               body
               youTubeService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.SubAccounts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsGet' request conforms to.
 type SubAccountsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
@@ -54,7 +54,7 @@ type SubAccountsGetResource =
 -- | Gets one subaccount by ID.
 --
 -- /See:/ 'subAccountsGet' smart constructor.
-data SubAccountsGet = SubAccountsGet
+data SubAccountsGet = SubAccountsGet'
     { _sagProFileId :: !(Textual Int64)
     , _sagId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ subAccountsGet
     -> Int64 -- ^ 'sagId'
     -> SubAccountsGet
 subAccountsGet pSagProFileId_ pSagId_ =
-    SubAccountsGet
+    SubAccountsGet'
     { _sagProFileId = _Coerce # pSagProFileId_
     , _sagId = _Coerce # pSagId_
     }
@@ -89,7 +89,9 @@ sagId
 
 instance GoogleRequest SubAccountsGet where
         type Rs SubAccountsGet = SubAccount
-        requestClient SubAccountsGet{..}
+        type Scopes SubAccountsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SubAccountsGet'{..}
           = go _sagProFileId _sagId (Just AltJSON)
               dFAReportingService
           where go

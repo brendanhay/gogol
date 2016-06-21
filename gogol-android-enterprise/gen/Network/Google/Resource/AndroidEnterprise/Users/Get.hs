@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Users.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves a user\'s details.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.get@.
 module Network.Google.Resource.AndroidEnterprise.Users.Get
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type UsersGetResource =
 -- | Retrieves a user\'s details.
 --
 -- /See:/ 'usersGet' smart constructor.
-data UsersGet = UsersGet
+data UsersGet = UsersGet'
     { _ugEnterpriseId :: !Text
     , _ugUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersGet
     -> Text -- ^ 'ugUserId'
     -> UsersGet
 usersGet pUgEnterpriseId_ pUgUserId_ =
-    UsersGet
+    UsersGet'
     { _ugEnterpriseId = pUgEnterpriseId_
     , _ugUserId = pUgUserId_
     }
@@ -88,7 +88,9 @@ ugUserId = lens _ugUserId (\ s a -> s{_ugUserId = a})
 
 instance GoogleRequest UsersGet where
         type Rs UsersGet = User
-        requestClient UsersGet{..}
+        type Scopes UsersGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient UsersGet'{..}
           = go _ugEnterpriseId _ugUserId (Just AltJSON)
               androidEnterpriseService
           where go

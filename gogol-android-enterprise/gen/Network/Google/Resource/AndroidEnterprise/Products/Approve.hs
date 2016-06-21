@@ -14,16 +14,19 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Products.Approve
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Approves the specified product (and the relevant app permissions, if
--- any).
+-- Approves the specified product and the relevant app permissions, if any.
+-- The maximum number of products that you can approve per enterprise
+-- customer is 1,000. To learn how to use Google Play for Work to design
+-- and create a store layout to display approved products to your users,
+-- see Store Layout Design.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.approve@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.approve@.
 module Network.Google.Resource.AndroidEnterprise.Products.Approve
     (
     -- * REST Resource
@@ -56,11 +59,14 @@ type ProductsApproveResource =
                      ReqBody '[JSON] ProductsApproveRequest :>
                        Post '[JSON] ()
 
--- | Approves the specified product (and the relevant app permissions, if
--- any).
+-- | Approves the specified product and the relevant app permissions, if any.
+-- The maximum number of products that you can approve per enterprise
+-- customer is 1,000. To learn how to use Google Play for Work to design
+-- and create a store layout to display approved products to your users,
+-- see Store Layout Design.
 --
 -- /See:/ 'productsApprove' smart constructor.
-data ProductsApprove = ProductsApprove
+data ProductsApprove = ProductsApprove'
     { _paEnterpriseId :: !Text
     , _paPayload      :: !ProductsApproveRequest
     , _paProductId    :: !Text
@@ -81,7 +87,7 @@ productsApprove
     -> Text -- ^ 'paProductId'
     -> ProductsApprove
 productsApprove pPaEnterpriseId_ pPaPayload_ pPaProductId_ =
-    ProductsApprove
+    ProductsApprove'
     { _paEnterpriseId = pPaEnterpriseId_
     , _paPayload = pPaPayload_
     , _paProductId = pPaProductId_
@@ -105,7 +111,9 @@ paProductId
 
 instance GoogleRequest ProductsApprove where
         type Rs ProductsApprove = ()
-        requestClient ProductsApprove{..}
+        type Scopes ProductsApprove =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient ProductsApprove'{..}
           = go _paEnterpriseId _paProductId (Just AltJSON)
               _paPayload
               androidEnterpriseService

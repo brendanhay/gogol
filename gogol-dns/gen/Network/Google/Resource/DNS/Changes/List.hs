@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DNS.Changes.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type ChangesListResource =
 -- | Enumerate Changes to a ResourceRecordSet collection.
 --
 -- /See:/ 'changesList' smart constructor.
-data ChangesList = ChangesList
+data ChangesList = ChangesList'
     { _clProject     :: !Text
     , _clSortOrder   :: !(Maybe Text)
     , _clPageToken   :: !(Maybe Text)
@@ -93,7 +93,7 @@ changesList
     -> Text -- ^ 'clManagedZone'
     -> ChangesList
 changesList pClProject_ pClManagedZone_ =
-    ChangesList
+    ChangesList'
     { _clProject = pClProject_
     , _clSortOrder = Nothing
     , _clPageToken = Nothing
@@ -138,7 +138,12 @@ clSortBy = lens _clSortBy (\ s a -> s{_clSortBy = a})
 
 instance GoogleRequest ChangesList where
         type Rs ChangesList = ChangesListResponse
-        requestClient ChangesList{..}
+        type Scopes ChangesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
+        requestClient ChangesList'{..}
           = go _clProject _clManagedZone _clSortOrder
               _clPageToken
               _clMaxResults

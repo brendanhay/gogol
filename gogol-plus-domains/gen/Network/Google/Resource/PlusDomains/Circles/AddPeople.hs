@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Circles.AddPeople
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type CirclesAddPeopleResource =
 -- including the number of circle adds. Learn More.
 --
 -- /See:/ 'circlesAddPeople' smart constructor.
-data CirclesAddPeople = CirclesAddPeople
+data CirclesAddPeople = CirclesAddPeople'
     { _capEmail    :: !(Maybe [Text])
     , _capUserId   :: !(Maybe [Text])
     , _capCircleId :: !Text
@@ -77,7 +77,7 @@ circlesAddPeople
     :: Text -- ^ 'capCircleId'
     -> CirclesAddPeople
 circlesAddPeople pCapCircleId_ =
-    CirclesAddPeople
+    CirclesAddPeople'
     { _capEmail = Nothing
     , _capUserId = Nothing
     , _capCircleId = pCapCircleId_
@@ -104,7 +104,10 @@ capCircleId
 
 instance GoogleRequest CirclesAddPeople where
         type Rs CirclesAddPeople = Circle
-        requestClient CirclesAddPeople{..}
+        type Scopes CirclesAddPeople =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient CirclesAddPeople'{..}
           = go _capCircleId (_capEmail ^. _Default)
               (_capUserId ^. _Default)
               (Just AltJSON)

@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.GlobalAddresses.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified address resource.
+-- Returns the specified address resource. Get a list of available
+-- addresses by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalAddresses.get@.
 module Network.Google.Resource.Compute.GlobalAddresses.Get
@@ -52,10 +53,11 @@ type GlobalAddressesGetResource =
                  Capture "address" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Address
 
--- | Returns the specified address resource.
+-- | Returns the specified address resource. Get a list of available
+-- addresses by making a list() request.
 --
 -- /See:/ 'globalAddressesGet' smart constructor.
-data GlobalAddressesGet = GlobalAddressesGet
+data GlobalAddressesGet = GlobalAddressesGet'
     { _gagProject :: !Text
     , _gagAddress :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +74,7 @@ globalAddressesGet
     -> Text -- ^ 'gagAddress'
     -> GlobalAddressesGet
 globalAddressesGet pGagProject_ pGagAddress_ =
-    GlobalAddressesGet
+    GlobalAddressesGet'
     { _gagProject = pGagProject_
     , _gagAddress = pGagAddress_
     }
@@ -89,7 +91,11 @@ gagAddress
 
 instance GoogleRequest GlobalAddressesGet where
         type Rs GlobalAddressesGet = Address
-        requestClient GlobalAddressesGet{..}
+        type Scopes GlobalAddressesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient GlobalAddressesGet'{..}
           = go _gagProject _gagAddress (Just AltJSON)
               computeService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type ManagementProFileFilterLinksListResource =
 -- | Lists all profile filter links for a profile.
 --
 -- /See:/ 'managementProFileFilterLinksList' smart constructor.
-data ManagementProFileFilterLinksList = ManagementProFileFilterLinksList
+data ManagementProFileFilterLinksList = ManagementProFileFilterLinksList'
     { _mpffllWebPropertyId :: !Text
     , _mpffllProFileId     :: !Text
     , _mpffllAccountId     :: !Text
@@ -91,7 +91,7 @@ managementProFileFilterLinksList
     -> Text -- ^ 'mpffllAccountId'
     -> ManagementProFileFilterLinksList
 managementProFileFilterLinksList pMpffllWebPropertyId_ pMpffllProFileId_ pMpffllAccountId_ =
-    ManagementProFileFilterLinksList
+    ManagementProFileFilterLinksList'
     { _mpffllWebPropertyId = pMpffllWebPropertyId_
     , _mpffllProFileId = pMpffllProFileId_
     , _mpffllAccountId = pMpffllAccountId_
@@ -140,7 +140,10 @@ instance GoogleRequest
          ManagementProFileFilterLinksList where
         type Rs ManagementProFileFilterLinksList =
              ProFileFilterLinks
-        requestClient ManagementProFileFilterLinksList{..}
+        type Scopes ManagementProFileFilterLinksList =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementProFileFilterLinksList'{..}
           = go _mpffllAccountId _mpffllWebPropertyId
               _mpffllProFileId
               _mpffllStartIndex

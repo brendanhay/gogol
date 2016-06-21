@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.PostUserInfos.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -78,7 +78,7 @@ type PostUserInfosListResource =
 -- access rights, specific to the user.
 --
 -- /See:/ 'postUserInfosList'' smart constructor.
-data PostUserInfosList' = PostUserInfosList'
+data PostUserInfosList' = PostUserInfosList''
     { _puilStatus      :: !(Maybe [PostUserInfosListStatus])
     , _puilOrderBy     :: !PostUserInfosListOrderBy
     , _puilEndDate     :: !(Maybe DateTime')
@@ -122,7 +122,7 @@ postUserInfosList'
     -> Text -- ^ 'puilUserId'
     -> PostUserInfosList'
 postUserInfosList' pPuilBlogId_ pPuilUserId_ =
-    PostUserInfosList'
+    PostUserInfosList''
     { _puilStatus = Nothing
     , _puilOrderBy = PUILOBPublished
     , _puilEndDate = Nothing
@@ -202,7 +202,10 @@ puilMaxResults
 
 instance GoogleRequest PostUserInfosList' where
         type Rs PostUserInfosList' = PostUserInfosList
-        requestClient PostUserInfosList'{..}
+        type Scopes PostUserInfosList' =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient PostUserInfosList''{..}
           = go _puilUserId _puilBlogId
               (_puilStatus ^. _Default)
               (Just _puilOrderBy)

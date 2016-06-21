@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Events.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type EventsPatchResource =
 -- | Updates an event. This method supports patch semantics.
 --
 -- /See:/ 'eventsPatch' smart constructor.
-data EventsPatch = EventsPatch
+data EventsPatch = EventsPatch'
     { _epCalendarId          :: !Text
     , _epPayload             :: !Event
     , _epMaxAttendees        :: !(Maybe (Textual Int32))
@@ -97,7 +97,7 @@ eventsPatch
     -> Text -- ^ 'epEventId'
     -> EventsPatch
 eventsPatch pEpCalendarId_ pEpPayload_ pEpEventId_ =
-    EventsPatch
+    EventsPatch'
     { _epCalendarId = pEpCalendarId_
     , _epPayload = pEpPayload_
     , _epMaxAttendees = Nothing
@@ -160,7 +160,9 @@ epEventId
 
 instance GoogleRequest EventsPatch where
         type Rs EventsPatch = Event
-        requestClient EventsPatch{..}
+        type Scopes EventsPatch =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient EventsPatch'{..}
           = go _epCalendarId _epEventId _epMaxAttendees
               _epSendNotifications
               _epSupportsAttachments

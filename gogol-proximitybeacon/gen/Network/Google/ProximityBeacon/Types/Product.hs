@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.ProximityBeacon.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,11 +24,11 @@ import           Network.Google.ProximityBeacon.Types.Sum
 -- a pair of doubles representing degrees latitude and degrees longitude.
 -- Unless specified otherwise, this must conform to the WGS84 standard.
 -- Values must be within normalized ranges. Example of normalization code
--- in Python: def NormalizeLongitude(longitude): \"\"\"Wrapsdecimal degrees
--- longitude to [-180.0, 180.0].\"\"\" q, r = divmod(longitude, 360.0) if r
--- > 180.0 or (r == 180.0 and q \<= -1.0): return r - 360.0 return r def
--- NormalizeLatLng(latitude, longitude): \"\"\"Wraps decimal degrees
--- latitude and longitude to [-180.0, 180.0] and [-90.0, 90.0],
+-- in Python: def NormalizeLongitude(longitude): \"\"\"Wraps decimal
+-- degrees longitude to [-180.0, 180.0].\"\"\" q, r = divmod(longitude,
+-- 360.0) if r > 180.0 or (r == 180.0 and q \<= -1.0): return r - 360.0
+-- return r def NormalizeLatLng(latitude, longitude): \"\"\"Wraps decimal
+-- degrees latitude and longitude to [-90.0, 90.0] and [-180.0, 180.0],
 -- respectively.\"\"\" r = latitude % 360.0 if r = 270.0: return r - 360,
 -- NormalizeLongitude(longitude) else: return 180 - r,
 -- NormalizeLongitude(longitude + 180.0) assert 180.0 ==
@@ -45,7 +45,7 @@ import           Network.Google.ProximityBeacon.Types.Sum
 -- NormalizeLatLng(-270.0, 10.0)
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng
+data LatLng = LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -60,7 +60,7 @@ data LatLng = LatLng
 latLng
     :: LatLng
 latLng =
-    LatLng
+    LatLng'
     { _llLatitude = Nothing
     , _llLongitude = Nothing
     }
@@ -81,11 +81,11 @@ instance FromJSON LatLng where
         parseJSON
           = withObject "LatLng"
               (\ o ->
-                 LatLng <$>
+                 LatLng' <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
 instance ToJSON LatLng where
-        toJSON LatLng{..}
+        toJSON LatLng'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _llLatitude,
@@ -96,8 +96,8 @@ instance ToJSON LatLng where
 -- your beacons.
 --
 -- /See:/ 'attachmentInfo' smart constructor.
-data AttachmentInfo = AttachmentInfo
-    { _aiData           :: !(Maybe (Textual Word8))
+data AttachmentInfo = AttachmentInfo'
+    { _aiData           :: !(Maybe Base64)
     , _aiNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -111,16 +111,16 @@ data AttachmentInfo = AttachmentInfo
 attachmentInfo
     :: AttachmentInfo
 attachmentInfo =
-    AttachmentInfo
+    AttachmentInfo'
     { _aiData = Nothing
     , _aiNamespacedType = Nothing
     }
 
 -- | An opaque data container for client-provided data.
-aiData :: Lens' AttachmentInfo (Maybe Word8)
+aiData :: Lens' AttachmentInfo (Maybe ByteString)
 aiData
   = lens _aiData (\ s a -> s{_aiData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Specifies what kind of attachment this is. Tells a client how to
 -- interpret the \`data\` field. Format is namespace\/type, for example
@@ -134,11 +134,11 @@ instance FromJSON AttachmentInfo where
         parseJSON
           = withObject "AttachmentInfo"
               (\ o ->
-                 AttachmentInfo <$>
+                 AttachmentInfo' <$>
                    (o .:? "data") <*> (o .:? "namespacedType"))
 
 instance ToJSON AttachmentInfo where
-        toJSON AttachmentInfo{..}
+        toJSON AttachmentInfo'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _aiData,
@@ -148,7 +148,7 @@ instance ToJSON AttachmentInfo where
 -- version. Optional.
 --
 -- /See:/ 'beaconProperties' smart constructor.
-newtype BeaconProperties = BeaconProperties
+newtype BeaconProperties = BeaconProperties'
     { _bpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -161,7 +161,7 @@ beaconProperties
     :: HashMap Text Text -- ^ 'bpAddtional'
     -> BeaconProperties
 beaconProperties pBpAddtional_ =
-    BeaconProperties
+    BeaconProperties'
     { _bpAddtional = _Coerce # pBpAddtional_
     }
 
@@ -173,7 +173,7 @@ bpAddtional
 instance FromJSON BeaconProperties where
         parseJSON
           = withObject "BeaconProperties"
-              (\ o -> BeaconProperties <$> (parseJSONObject o))
+              (\ o -> BeaconProperties' <$> (parseJSONObject o))
 
 instance ToJSON BeaconProperties where
         toJSON = toJSON . _bpAddtional
@@ -186,17 +186,17 @@ instance ToJSON BeaconProperties where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -204,7 +204,7 @@ instance ToJSON Empty where
 -- | Response for a request to delete attachments.
 --
 -- /See:/ 'deleteAttachmentsResponse' smart constructor.
-newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse
+newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse'
     { _darNumDeleted :: Maybe (Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -216,7 +216,7 @@ newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse
 deleteAttachmentsResponse
     :: DeleteAttachmentsResponse
 deleteAttachmentsResponse =
-    DeleteAttachmentsResponse
+    DeleteAttachmentsResponse'
     { _darNumDeleted = Nothing
     }
 
@@ -231,10 +231,10 @@ instance FromJSON DeleteAttachmentsResponse where
         parseJSON
           = withObject "DeleteAttachmentsResponse"
               (\ o ->
-                 DeleteAttachmentsResponse <$> (o .:? "numDeleted"))
+                 DeleteAttachmentsResponse' <$> (o .:? "numDeleted"))
 
 instance ToJSON DeleteAttachmentsResponse where
-        toJSON DeleteAttachmentsResponse{..}
+        toJSON DeleteAttachmentsResponse'{..}
           = object
               (catMaybes [("numDeleted" .=) <$> _darNumDeleted])
 
@@ -242,7 +242,7 @@ instance ToJSON DeleteAttachmentsResponse where
 -- mobile client has encountered \"in the wild\".
 --
 -- /See:/ 'getInfoForObservedBeaconsRequest' smart constructor.
-data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest
+data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest'
     { _gifobrObservations    :: !(Maybe [Observation])
     , _gifobrNamespacedTypes :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -257,7 +257,7 @@ data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest
 getInfoForObservedBeaconsRequest
     :: GetInfoForObservedBeaconsRequest
 getInfoForObservedBeaconsRequest =
-    GetInfoForObservedBeaconsRequest
+    GetInfoForObservedBeaconsRequest'
     { _gifobrObservations = Nothing
     , _gifobrNamespacedTypes = Nothing
     }
@@ -287,13 +287,13 @@ instance FromJSON GetInfoForObservedBeaconsRequest
         parseJSON
           = withObject "GetInfoForObservedBeaconsRequest"
               (\ o ->
-                 GetInfoForObservedBeaconsRequest <$>
+                 GetInfoForObservedBeaconsRequest' <$>
                    (o .:? "observations" .!= mempty) <*>
                      (o .:? "namespacedTypes" .!= mempty))
 
 instance ToJSON GetInfoForObservedBeaconsRequest
          where
-        toJSON GetInfoForObservedBeaconsRequest{..}
+        toJSON GetInfoForObservedBeaconsRequest'{..}
           = object
               (catMaybes
                  [("observations" .=) <$> _gifobrObservations,
@@ -305,7 +305,7 @@ instance ToJSON GetInfoForObservedBeaconsRequest
 -- attachments under it.
 --
 -- /See:/ 'namespace' smart constructor.
-data Namespace = Namespace
+data Namespace = Namespace'
     { _nServingVisibility :: !(Maybe Text)
     , _nNamespaceName     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -320,7 +320,7 @@ data Namespace = Namespace
 namespace
     :: Namespace
 namespace =
-    Namespace
+    Namespace'
     { _nServingVisibility = Nothing
     , _nNamespaceName = Nothing
     }
@@ -343,22 +343,167 @@ instance FromJSON Namespace where
         parseJSON
           = withObject "Namespace"
               (\ o ->
-                 Namespace <$>
+                 Namespace' <$>
                    (o .:? "servingVisibility") <*>
                      (o .:? "namespaceName"))
 
 instance ToJSON Namespace where
-        toJSON Namespace{..}
+        toJSON Namespace'{..}
           = object
               (catMaybes
                  [("servingVisibility" .=) <$> _nServingVisibility,
                   ("namespaceName" .=) <$> _nNamespaceName])
 
+-- | Write-only registration parameters for beacons using Eddystone-EID
+-- format. Two ways of securely registering an Eddystone-EID beacon with
+-- the service are supported: 1. Perform an ECDH key exchange via this API,
+-- including a previous call to \`GET \/v1beta1\/eidparams\`. In this case
+-- the fields \`beacon_ecdh_public_key\` and \`service_ecdh_public_key\`
+-- should be populated and \`beacon_identity_key\` should not be populated.
+-- This method ensures that only the two parties in the ECDH key exchange
+-- can compute the identity key, which becomes a secret between them. 2.
+-- Derive or obtain the beacon\'s identity key via other secure means
+-- (perhaps an ECDH key exchange between the beacon and a mobile device or
+-- any other secure method), and then submit the resulting identity key to
+-- the service. In this case \`beacon_identity_key\` field should be
+-- populated, and neither of \`beacon_ecdh_public_key\` nor
+-- \`service_ecdh_public_key\` fields should be. The security of this
+-- method depends on how securely the parties involved (in particular the
+-- bluetooth client) handle the identity key, and obviously on how securely
+-- the identity key was generated. See [the Eddystone
+-- specification](https:\/\/github.com\/google\/eddystone\/tree\/master\/eddystone-eid)
+-- at GitHub.
+--
+-- /See:/ 'ephemeralIdRegistration' smart constructor.
+data EphemeralIdRegistration = EphemeralIdRegistration'
+    { _eirRotationPeriodExponent :: !(Maybe (Textual Word32))
+    , _eirInitialClockValue      :: !(Maybe (Textual Word64))
+    , _eirBeaconIdentityKey      :: !(Maybe Base64)
+    , _eirBeaconEcdhPublicKey    :: !(Maybe Base64)
+    , _eirInitialEid             :: !(Maybe Base64)
+    , _eirServiceEcdhPublicKey   :: !(Maybe Base64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EphemeralIdRegistration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eirRotationPeriodExponent'
+--
+-- * 'eirInitialClockValue'
+--
+-- * 'eirBeaconIdentityKey'
+--
+-- * 'eirBeaconEcdhPublicKey'
+--
+-- * 'eirInitialEid'
+--
+-- * 'eirServiceEcdhPublicKey'
+ephemeralIdRegistration
+    :: EphemeralIdRegistration
+ephemeralIdRegistration =
+    EphemeralIdRegistration'
+    { _eirRotationPeriodExponent = Nothing
+    , _eirInitialClockValue = Nothing
+    , _eirBeaconIdentityKey = Nothing
+    , _eirBeaconEcdhPublicKey = Nothing
+    , _eirInitialEid = Nothing
+    , _eirServiceEcdhPublicKey = Nothing
+    }
+
+-- | Indicates the nominal period between each rotation of the beacon\'s
+-- ephemeral ID. \"Nominal\" because the beacon should randomize the actual
+-- interval. See [the spec at
+-- github](https:\/\/github.com\/google\/eddystone\/tree\/master\/eddystone-eid)
+-- for details. This value corresponds to a power-of-two scaler on the
+-- beacon\'s clock: when the scaler value is K, the beacon will begin
+-- broadcasting a new ephemeral ID on average every 2^K seconds.
+eirRotationPeriodExponent :: Lens' EphemeralIdRegistration (Maybe Word32)
+eirRotationPeriodExponent
+  = lens _eirRotationPeriodExponent
+      (\ s a -> s{_eirRotationPeriodExponent = a})
+      . mapping _Coerce
+
+-- | The initial clock value of the beacon. The beacon\'s clock must have
+-- begun counting at this value immediately prior to transmitting this
+-- value to the resolving service. Significant delay in transmitting this
+-- value to the service risks registration or resolution failures. If a
+-- value is not provided, the default is zero.
+eirInitialClockValue :: Lens' EphemeralIdRegistration (Maybe Word64)
+eirInitialClockValue
+  = lens _eirInitialClockValue
+      (\ s a -> s{_eirInitialClockValue = a})
+      . mapping _Coerce
+
+-- | The private key of the beacon. If this field is populated,
+-- \`beacon_ecdh_public_key\` and \`service_ecdh_public_key\` must not be
+-- populated.
+eirBeaconIdentityKey :: Lens' EphemeralIdRegistration (Maybe ByteString)
+eirBeaconIdentityKey
+  = lens _eirBeaconIdentityKey
+      (\ s a -> s{_eirBeaconIdentityKey = a})
+      . mapping _Base64
+
+-- | The beacon\'s public key used for the Elliptic curve Diffie-Hellman key
+-- exchange. When this field is populated, \`service_ecdh_public_key\` must
+-- also be populated, and \`beacon_identity_key\` must not be.
+eirBeaconEcdhPublicKey :: Lens' EphemeralIdRegistration (Maybe ByteString)
+eirBeaconEcdhPublicKey
+  = lens _eirBeaconEcdhPublicKey
+      (\ s a -> s{_eirBeaconEcdhPublicKey = a})
+      . mapping _Base64
+
+-- | An initial ephemeral ID calculated using the clock value submitted as
+-- \`initial_clock_value\`, and the secret key generated by the
+-- Diffie-Hellman key exchange using \`service_ecdh_public_key\` and
+-- \`service_ecdh_public_key\`. This initial EID value will be used by the
+-- service to confirm that the key exchange process was successful.
+eirInitialEid :: Lens' EphemeralIdRegistration (Maybe ByteString)
+eirInitialEid
+  = lens _eirInitialEid
+      (\ s a -> s{_eirInitialEid = a})
+      . mapping _Base64
+
+-- | The service\'s public key used for the Elliptic curve Diffie-Hellman key
+-- exchange. When this field is populated, \`beacon_ecdh_public_key\` must
+-- also be populated, and \`beacon_identity_key\` must not be.
+eirServiceEcdhPublicKey :: Lens' EphemeralIdRegistration (Maybe ByteString)
+eirServiceEcdhPublicKey
+  = lens _eirServiceEcdhPublicKey
+      (\ s a -> s{_eirServiceEcdhPublicKey = a})
+      . mapping _Base64
+
+instance FromJSON EphemeralIdRegistration where
+        parseJSON
+          = withObject "EphemeralIdRegistration"
+              (\ o ->
+                 EphemeralIdRegistration' <$>
+                   (o .:? "rotationPeriodExponent") <*>
+                     (o .:? "initialClockValue")
+                     <*> (o .:? "beaconIdentityKey")
+                     <*> (o .:? "beaconEcdhPublicKey")
+                     <*> (o .:? "initialEid")
+                     <*> (o .:? "serviceEcdhPublicKey"))
+
+instance ToJSON EphemeralIdRegistration where
+        toJSON EphemeralIdRegistration'{..}
+          = object
+              (catMaybes
+                 [("rotationPeriodExponent" .=) <$>
+                    _eirRotationPeriodExponent,
+                  ("initialClockValue" .=) <$> _eirInitialClockValue,
+                  ("beaconIdentityKey" .=) <$> _eirBeaconIdentityKey,
+                  ("beaconEcdhPublicKey" .=) <$>
+                    _eirBeaconEcdhPublicKey,
+                  ("initialEid" .=) <$> _eirInitialEid,
+                  ("serviceEcdhPublicKey" .=) <$>
+                    _eirServiceEcdhPublicKey])
+
 -- | Response to ListNamespacesRequest that contains all the project\'s
 -- namespaces.
 --
 -- /See:/ 'listNamespacesResponse' smart constructor.
-newtype ListNamespacesResponse = ListNamespacesResponse
+newtype ListNamespacesResponse = ListNamespacesResponse'
     { _lnrNamespaces :: Maybe [Namespace]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -370,7 +515,7 @@ newtype ListNamespacesResponse = ListNamespacesResponse
 listNamespacesResponse
     :: ListNamespacesResponse
 listNamespacesResponse =
-    ListNamespacesResponse
+    ListNamespacesResponse'
     { _lnrNamespaces = Nothing
     }
 
@@ -386,11 +531,11 @@ instance FromJSON ListNamespacesResponse where
         parseJSON
           = withObject "ListNamespacesResponse"
               (\ o ->
-                 ListNamespacesResponse <$>
+                 ListNamespacesResponse' <$>
                    (o .:? "namespaces" .!= mempty))
 
 instance ToJSON ListNamespacesResponse where
-        toJSON ListNamespacesResponse{..}
+        toJSON ListNamespacesResponse'{..}
           = object
               (catMaybes [("namespaces" .=) <$> _lnrNamespaces])
 
@@ -400,10 +545,10 @@ instance ToJSON ListNamespacesResponse where
 -- to represent a year and month where the day is not significant, e.g.
 -- credit card expiration date. The year may be 0 to represent a month and
 -- day independent of year, e.g. anniversary date. Related types are
--- [google.type.TimeOfDay][] and \`google.protobuf.Timestamp\`.
+-- google.type.TimeOfDay and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date
+data Date = Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
@@ -421,27 +566,27 @@ data Date = Date
 date
     :: Date
 date =
-    Date
+    Date'
     { _dDay = Nothing
     , _dYear = Nothing
     , _dMonth = Nothing
     }
 
 -- | Day of month. Must be from 1 to 31 and valid for the year and month, or
--- 0 if specifying a year\/month where the day is not sigificant.
+-- 0 if specifying a year\/month where the day is not significant.
 dDay :: Lens' Date (Maybe Int32)
 dDay
   = lens _dDay (\ s a -> s{_dDay = a}) .
       mapping _Coerce
 
--- | Year of date. Must be from 1 to 9,999, or 0 if specifying a date without
+-- | Year of date. Must be from 1 to 9999, or 0 if specifying a date without
 -- a year.
 dYear :: Lens' Date (Maybe Int32)
 dYear
   = lens _dYear (\ s a -> s{_dYear = a}) .
       mapping _Coerce
 
--- | Month of year of date. Must be from 1 to 12.
+-- | Month of year. Must be from 1 to 12.
 dMonth :: Lens' Date (Maybe Int32)
 dMonth
   = lens _dMonth (\ s a -> s{_dMonth = a}) .
@@ -451,11 +596,11 @@ instance FromJSON Date where
         parseJSON
           = withObject "Date"
               (\ o ->
-                 Date <$>
+                 Date' <$>
                    (o .:? "day") <*> (o .:? "year") <*> (o .:? "month"))
 
 instance ToJSON Date where
-        toJSON Date{..}
+        toJSON Date'{..}
           = object
               (catMaybes
                  [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
@@ -464,16 +609,18 @@ instance ToJSON Date where
 -- | Details of a beacon device.
 --
 -- /See:/ 'beacon' smart constructor.
-data Beacon = Beacon
-    { _bLatLng            :: !(Maybe LatLng)
-    , _bStatus            :: !(Maybe Text)
-    , _bBeaconName        :: !(Maybe Text)
-    , _bIndoorLevel       :: !(Maybe IndoorLevel)
-    , _bExpectedStability :: !(Maybe Text)
-    , _bDescription       :: !(Maybe Text)
-    , _bPlaceId           :: !(Maybe Text)
-    , _bAdvertisedId      :: !(Maybe AdvertisedId)
-    , _bProperties        :: !(Maybe BeaconProperties)
+data Beacon = Beacon'
+    { _bLatLng                  :: !(Maybe LatLng)
+    , _bStatus                  :: !(Maybe Text)
+    , _bBeaconName              :: !(Maybe Text)
+    , _bEphemeralIdRegistration :: !(Maybe EphemeralIdRegistration)
+    , _bIndoorLevel             :: !(Maybe IndoorLevel)
+    , _bExpectedStability       :: !(Maybe Text)
+    , _bProvisioningKey         :: !(Maybe Base64)
+    , _bDescription             :: !(Maybe Text)
+    , _bPlaceId                 :: !(Maybe Text)
+    , _bAdvertisedId            :: !(Maybe AdvertisedId)
+    , _bProperties              :: !(Maybe BeaconProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Beacon' with the minimum fields required to make a request.
@@ -486,9 +633,13 @@ data Beacon = Beacon
 --
 -- * 'bBeaconName'
 --
+-- * 'bEphemeralIdRegistration'
+--
 -- * 'bIndoorLevel'
 --
 -- * 'bExpectedStability'
+--
+-- * 'bProvisioningKey'
 --
 -- * 'bDescription'
 --
@@ -500,12 +651,14 @@ data Beacon = Beacon
 beacon
     :: Beacon
 beacon =
-    Beacon
+    Beacon'
     { _bLatLng = Nothing
     , _bStatus = Nothing
     , _bBeaconName = Nothing
+    , _bEphemeralIdRegistration = Nothing
     , _bIndoorLevel = Nothing
     , _bExpectedStability = Nothing
+    , _bProvisioningKey = Nothing
     , _bDescription = Nothing
     , _bPlaceId = Nothing
     , _bAdvertisedId = Nothing
@@ -533,6 +686,16 @@ bBeaconName :: Lens' Beacon (Maybe Text)
 bBeaconName
   = lens _bBeaconName (\ s a -> s{_bBeaconName = a})
 
+-- | Write-only registration parameters for beacons using Eddystone-EID
+-- (remotely resolved ephemeral ID) format. This information will not be
+-- populated in API responses. When submitting this data, the
+-- \`advertised_id\` field must contain an ID of type Eddystone-UID. Any
+-- other ID type will result in an error.
+bEphemeralIdRegistration :: Lens' Beacon (Maybe EphemeralIdRegistration)
+bEphemeralIdRegistration
+  = lens _bEphemeralIdRegistration
+      (\ s a -> s{_bEphemeralIdRegistration = a})
+
 -- | The indoor level information for this beacon, if known. As returned by
 -- the Google Maps API. Optional.
 bIndoorLevel :: Lens' Beacon (Maybe IndoorLevel)
@@ -545,6 +708,21 @@ bExpectedStability :: Lens' Beacon (Maybe Text)
 bExpectedStability
   = lens _bExpectedStability
       (\ s a -> s{_bExpectedStability = a})
+
+-- | Some beacons may require a user to provide an authorization key before
+-- changing any of its configuration (e.g. broadcast frames, transmit
+-- power). This field provides a place to store and control access to that
+-- key. This field is populated in responses to \`GET
+-- \/v1beta1\/beacons\/3!beaconId\` from users with write access to the
+-- given beacon. That is to say: If the user is authorized to write the
+-- beacon\'s confidential data in the service, the service considers them
+-- authorized to configure the beacon. Note that this key grants nothing on
+-- the service, only on the beacon itself.
+bProvisioningKey :: Lens' Beacon (Maybe ByteString)
+bProvisioningKey
+  = lens _bProvisioningKey
+      (\ s a -> s{_bProvisioningKey = a})
+      . mapping _Base64
 
 -- | Free text used to identify and describe the beacon. Maximum length 140
 -- characters. Optional.
@@ -560,7 +738,11 @@ bPlaceId = lens _bPlaceId (\ s a -> s{_bPlaceId = a})
 
 -- | The identifier of a beacon as advertised by it. This field must be
 -- populated when registering. It may be empty when updating a beacon
--- record because it is ignored in updates.
+-- record because it is ignored in updates. When registering a beacon that
+-- broadcasts Eddystone-EID, this field should contain a \"stable\"
+-- Eddystone-UID that identifies the beacon and links it to its
+-- attachments. The stable Eddystone-UID is only used for administering the
+-- beacon.
 bAdvertisedId :: Lens' Beacon (Maybe AdvertisedId)
 bAdvertisedId
   = lens _bAdvertisedId
@@ -576,25 +758,30 @@ instance FromJSON Beacon where
         parseJSON
           = withObject "Beacon"
               (\ o ->
-                 Beacon <$>
+                 Beacon' <$>
                    (o .:? "latLng") <*> (o .:? "status") <*>
                      (o .:? "beaconName")
+                     <*> (o .:? "ephemeralIdRegistration")
                      <*> (o .:? "indoorLevel")
                      <*> (o .:? "expectedStability")
+                     <*> (o .:? "provisioningKey")
                      <*> (o .:? "description")
                      <*> (o .:? "placeId")
                      <*> (o .:? "advertisedId")
                      <*> (o .:? "properties"))
 
 instance ToJSON Beacon where
-        toJSON Beacon{..}
+        toJSON Beacon'{..}
           = object
               (catMaybes
                  [("latLng" .=) <$> _bLatLng,
                   ("status" .=) <$> _bStatus,
                   ("beaconName" .=) <$> _bBeaconName,
+                  ("ephemeralIdRegistration" .=) <$>
+                    _bEphemeralIdRegistration,
                   ("indoorLevel" .=) <$> _bIndoorLevel,
                   ("expectedStability" .=) <$> _bExpectedStability,
+                  ("provisioningKey" .=) <$> _bProvisioningKey,
                   ("description" .=) <$> _bDescription,
                   ("placeId" .=) <$> _bPlaceId,
                   ("advertisedId" .=) <$> _bAdvertisedId,
@@ -603,7 +790,7 @@ instance ToJSON Beacon where
 -- | Diagnostics for a single beacon.
 --
 -- /See:/ 'diagnostics' smart constructor.
-data Diagnostics = Diagnostics
+data Diagnostics = Diagnostics'
     { _dAlerts                  :: !(Maybe [Text])
     , _dBeaconName              :: !(Maybe Text)
     , _dEstimatedLowBatteryDate :: !(Maybe Date)
@@ -621,7 +808,7 @@ data Diagnostics = Diagnostics
 diagnostics
     :: Diagnostics
 diagnostics =
-    Diagnostics
+    Diagnostics'
     { _dAlerts = Nothing
     , _dBeaconName = Nothing
     , _dEstimatedLowBatteryDate = Nothing
@@ -633,7 +820,8 @@ dAlerts
   = lens _dAlerts (\ s a -> s{_dAlerts = a}) . _Default
       . _Coerce
 
--- | Resource name of the beacon.
+-- | Resource name of the beacon. For Eddystone-EID beacons, this may be the
+-- beacon\'s current EID, or the beacon\'s \"stable\" Eddystone-UID.
 dBeaconName :: Lens' Diagnostics (Maybe Text)
 dBeaconName
   = lens _dBeaconName (\ s a -> s{_dBeaconName = a})
@@ -650,12 +838,12 @@ instance FromJSON Diagnostics where
         parseJSON
           = withObject "Diagnostics"
               (\ o ->
-                 Diagnostics <$>
+                 Diagnostics' <$>
                    (o .:? "alerts" .!= mempty) <*> (o .:? "beaconName")
                      <*> (o .:? "estimatedLowBatteryDate"))
 
 instance ToJSON Diagnostics where
-        toJSON Diagnostics{..}
+        toJSON Diagnostics'{..}
           = object
               (catMaybes
                  [("alerts" .=) <$> _dAlerts,
@@ -667,7 +855,7 @@ instance ToJSON Diagnostics where
 -- attachments.
 --
 -- /See:/ 'listBeaconAttachmentsResponse' smart constructor.
-newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse
+newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse'
     { _lbarAttachments :: Maybe [BeaconAttachment]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -679,7 +867,7 @@ newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse
 listBeaconAttachmentsResponse
     :: ListBeaconAttachmentsResponse
 listBeaconAttachmentsResponse =
-    ListBeaconAttachmentsResponse
+    ListBeaconAttachmentsResponse'
     { _lbarAttachments = Nothing
     }
 
@@ -695,11 +883,11 @@ instance FromJSON ListBeaconAttachmentsResponse where
         parseJSON
           = withObject "ListBeaconAttachmentsResponse"
               (\ o ->
-                 ListBeaconAttachmentsResponse <$>
+                 ListBeaconAttachmentsResponse' <$>
                    (o .:? "attachments" .!= mempty))
 
 instance ToJSON ListBeaconAttachmentsResponse where
-        toJSON ListBeaconAttachmentsResponse{..}
+        toJSON ListBeaconAttachmentsResponse'{..}
           = object
               (catMaybes [("attachments" .=) <$> _lbarAttachments])
 
@@ -707,7 +895,7 @@ instance ToJSON ListBeaconAttachmentsResponse where
 -- useful to indicate which floor of a building a beacon is located on.
 --
 -- /See:/ 'indoorLevel' smart constructor.
-newtype IndoorLevel = IndoorLevel
+newtype IndoorLevel = IndoorLevel'
     { _ilName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -719,7 +907,7 @@ newtype IndoorLevel = IndoorLevel
 indoorLevel
     :: IndoorLevel
 indoorLevel =
-    IndoorLevel
+    IndoorLevel'
     { _ilName = Nothing
     }
 
@@ -730,21 +918,95 @@ ilName = lens _ilName (\ s a -> s{_ilName = a})
 instance FromJSON IndoorLevel where
         parseJSON
           = withObject "IndoorLevel"
-              (\ o -> IndoorLevel <$> (o .:? "name"))
+              (\ o -> IndoorLevel' <$> (o .:? "name"))
 
 instance ToJSON IndoorLevel where
-        toJSON IndoorLevel{..}
+        toJSON IndoorLevel'{..}
           = object (catMaybes [("name" .=) <$> _ilName])
+
+-- | Information a client needs to provision and register beacons that
+-- broadcast Eddystone-EID format beacon IDs, using Elliptic curve
+-- Diffie-Hellman key exchange. See [the Eddystone
+-- specification](https:\/\/github.com\/google\/eddystone\/tree\/master\/eddystone-eid)
+-- at GitHub.
+--
+-- /See:/ 'ephemeralIdRegistrationParams' smart constructor.
+data EphemeralIdRegistrationParams = EphemeralIdRegistrationParams'
+    { _eirpMinRotationPeriodExponent :: !(Maybe (Textual Word32))
+    , _eirpMaxRotationPeriodExponent :: !(Maybe (Textual Word32))
+    , _eirpServiceEcdhPublicKey      :: !(Maybe Base64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EphemeralIdRegistrationParams' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eirpMinRotationPeriodExponent'
+--
+-- * 'eirpMaxRotationPeriodExponent'
+--
+-- * 'eirpServiceEcdhPublicKey'
+ephemeralIdRegistrationParams
+    :: EphemeralIdRegistrationParams
+ephemeralIdRegistrationParams =
+    EphemeralIdRegistrationParams'
+    { _eirpMinRotationPeriodExponent = Nothing
+    , _eirpMaxRotationPeriodExponent = Nothing
+    , _eirpServiceEcdhPublicKey = Nothing
+    }
+
+-- | Indicates the minimum rotation period supported by the service. See
+-- EddystoneEidRegistration.rotation_period_exponent
+eirpMinRotationPeriodExponent :: Lens' EphemeralIdRegistrationParams (Maybe Word32)
+eirpMinRotationPeriodExponent
+  = lens _eirpMinRotationPeriodExponent
+      (\ s a -> s{_eirpMinRotationPeriodExponent = a})
+      . mapping _Coerce
+
+-- | Indicates the maximum rotation period supported by the service. See
+-- EddystoneEidRegistration.rotation_period_exponent
+eirpMaxRotationPeriodExponent :: Lens' EphemeralIdRegistrationParams (Maybe Word32)
+eirpMaxRotationPeriodExponent
+  = lens _eirpMaxRotationPeriodExponent
+      (\ s a -> s{_eirpMaxRotationPeriodExponent = a})
+      . mapping _Coerce
+
+-- | The beacon service\'s public key for use by a beacon to derive its
+-- Identity Key using Elliptic Curve Diffie-Hellman key exchange.
+eirpServiceEcdhPublicKey :: Lens' EphemeralIdRegistrationParams (Maybe ByteString)
+eirpServiceEcdhPublicKey
+  = lens _eirpServiceEcdhPublicKey
+      (\ s a -> s{_eirpServiceEcdhPublicKey = a})
+      . mapping _Base64
+
+instance FromJSON EphemeralIdRegistrationParams where
+        parseJSON
+          = withObject "EphemeralIdRegistrationParams"
+              (\ o ->
+                 EphemeralIdRegistrationParams' <$>
+                   (o .:? "minRotationPeriodExponent") <*>
+                     (o .:? "maxRotationPeriodExponent")
+                     <*> (o .:? "serviceEcdhPublicKey"))
+
+instance ToJSON EphemeralIdRegistrationParams where
+        toJSON EphemeralIdRegistrationParams'{..}
+          = object
+              (catMaybes
+                 [("minRotationPeriodExponent" .=) <$>
+                    _eirpMinRotationPeriodExponent,
+                  ("maxRotationPeriodExponent" .=) <$>
+                    _eirpMaxRotationPeriodExponent,
+                  ("serviceEcdhPublicKey" .=) <$>
+                    _eirpServiceEcdhPublicKey])
 
 -- | A subset of beacon information served via the
 -- \`beaconinfo.getforobserved\` method, which you call when users of your
 -- app encounter your beacons.
 --
 -- /See:/ 'beaconInfo' smart constructor.
-data BeaconInfo = BeaconInfo
+data BeaconInfo = BeaconInfo'
     { _biAttachments  :: !(Maybe [AttachmentInfo])
     , _biBeaconName   :: !(Maybe Text)
-    , _biDescription  :: !(Maybe Text)
     , _biAdvertisedId :: !(Maybe AdvertisedId)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -756,16 +1018,13 @@ data BeaconInfo = BeaconInfo
 --
 -- * 'biBeaconName'
 --
--- * 'biDescription'
---
 -- * 'biAdvertisedId'
 beaconInfo
     :: BeaconInfo
 beaconInfo =
-    BeaconInfo
+    BeaconInfo'
     { _biAttachments = Nothing
     , _biBeaconName = Nothing
-    , _biDescription = Nothing
     , _biAdvertisedId = Nothing
     }
 
@@ -783,14 +1042,6 @@ biBeaconName :: Lens' BeaconInfo (Maybe Text)
 biBeaconName
   = lens _biBeaconName (\ s a -> s{_biBeaconName = a})
 
--- | Free text used to identify or describe the beacon in a registered
--- establishment. For example: \"entrance\", \"room 101\", etc. May be
--- empty.
-biDescription :: Lens' BeaconInfo (Maybe Text)
-biDescription
-  = lens _biDescription
-      (\ s a -> s{_biDescription = a})
-
 -- | The ID advertised by the beacon.
 biAdvertisedId :: Lens' BeaconInfo (Maybe AdvertisedId)
 biAdvertisedId
@@ -801,26 +1052,24 @@ instance FromJSON BeaconInfo where
         parseJSON
           = withObject "BeaconInfo"
               (\ o ->
-                 BeaconInfo <$>
+                 BeaconInfo' <$>
                    (o .:? "attachments" .!= mempty) <*>
                      (o .:? "beaconName")
-                     <*> (o .:? "description")
                      <*> (o .:? "advertisedId"))
 
 instance ToJSON BeaconInfo where
-        toJSON BeaconInfo{..}
+        toJSON BeaconInfo'{..}
           = object
               (catMaybes
                  [("attachments" .=) <$> _biAttachments,
                   ("beaconName" .=) <$> _biBeaconName,
-                  ("description" .=) <$> _biDescription,
                   ("advertisedId" .=) <$> _biAdvertisedId])
 
 -- | Represents one beacon observed once.
 --
 -- /See:/ 'observation' smart constructor.
-data Observation = Observation
-    { _oTelemetry    :: !(Maybe (Textual Word8))
+data Observation = Observation'
+    { _oTelemetry    :: !(Maybe Base64)
     , _oTimestampMs  :: !(Maybe Text)
     , _oAdvertisedId :: !(Maybe AdvertisedId)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -837,7 +1086,7 @@ data Observation = Observation
 observation
     :: Observation
 observation =
-    Observation
+    Observation'
     { _oTelemetry = Nothing
     , _oTimestampMs = Nothing
     , _oAdvertisedId = Nothing
@@ -846,18 +1095,20 @@ observation =
 -- | The array of telemetry bytes received from the beacon. The server is
 -- responsible for parsing it. This field may frequently be empty, as with
 -- a beacon that transmits telemetry only occasionally.
-oTelemetry :: Lens' Observation (Maybe Word8)
+oTelemetry :: Lens' Observation (Maybe ByteString)
 oTelemetry
   = lens _oTelemetry (\ s a -> s{_oTelemetry = a}) .
-      mapping _Coerce
+      mapping _Base64
 
--- | Time when the beacon was observed. Being sourced from a mobile device,
--- this time may be suspect.
+-- | Time when the beacon was observed.
 oTimestampMs :: Lens' Observation (Maybe Text)
 oTimestampMs
   = lens _oTimestampMs (\ s a -> s{_oTimestampMs = a})
 
--- | The ID advertised by the beacon the client has encountered. Required.
+-- | The ID advertised by the beacon the client has encountered. Clients may
+-- submit an Eddystone-EID \`advertised_id\`. If the client is not
+-- authorized to resolve the given Eddystone-EID, no data will be returned
+-- for that beacon. Required.
 oAdvertisedId :: Lens' Observation (Maybe AdvertisedId)
 oAdvertisedId
   = lens _oAdvertisedId
@@ -867,12 +1118,12 @@ instance FromJSON Observation where
         parseJSON
           = withObject "Observation"
               (\ o ->
-                 Observation <$>
+                 Observation' <$>
                    (o .:? "telemetry") <*> (o .:? "timestampMs") <*>
                      (o .:? "advertisedId"))
 
 instance ToJSON Observation where
-        toJSON Observation{..}
+        toJSON Observation'{..}
           = object
               (catMaybes
                  [("telemetry" .=) <$> _oTelemetry,
@@ -882,8 +1133,8 @@ instance ToJSON Observation where
 -- | Project-specific data associated with a beacon.
 --
 -- /See:/ 'beaconAttachment' smart constructor.
-data BeaconAttachment = BeaconAttachment
-    { _baData           :: !(Maybe (Textual Word8))
+data BeaconAttachment = BeaconAttachment'
+    { _baData           :: !(Maybe Base64)
     , _baAttachmentName :: !(Maybe Text)
     , _baNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -900,7 +1151,7 @@ data BeaconAttachment = BeaconAttachment
 beaconAttachment
     :: BeaconAttachment
 beaconAttachment =
-    BeaconAttachment
+    BeaconAttachment'
     { _baData = Nothing
     , _baAttachmentName = Nothing
     , _baNamespacedType = Nothing
@@ -910,10 +1161,10 @@ beaconAttachment =
 -- [base64](http:\/\/tools.ietf.org\/html\/rfc4648#section-4) encoded in
 -- HTTP requests, and will be so encoded (with padding) in responses.
 -- Required.
-baData :: Lens' BeaconAttachment (Maybe Word8)
+baData :: Lens' BeaconAttachment (Maybe ByteString)
 baData
   = lens _baData (\ s a -> s{_baData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Resource name of this attachment. Attachment names have the format:
 -- beacons\/beacon_id\/attachments\/attachment_id. Leave this empty on
@@ -937,12 +1188,12 @@ instance FromJSON BeaconAttachment where
         parseJSON
           = withObject "BeaconAttachment"
               (\ o ->
-                 BeaconAttachment <$>
+                 BeaconAttachment' <$>
                    (o .:? "data") <*> (o .:? "attachmentName") <*>
                      (o .:? "namespacedType"))
 
 instance ToJSON BeaconAttachment where
-        toJSON BeaconAttachment{..}
+        toJSON BeaconAttachment'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _baData,
@@ -952,7 +1203,7 @@ instance ToJSON BeaconAttachment where
 -- | Response that contains the requested diagnostics.
 --
 -- /See:/ 'listDiagnosticsResponse' smart constructor.
-data ListDiagnosticsResponse = ListDiagnosticsResponse
+data ListDiagnosticsResponse = ListDiagnosticsResponse'
     { _ldrNextPageToken :: !(Maybe Text)
     , _ldrDiagnostics   :: !(Maybe [Diagnostics])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -967,7 +1218,7 @@ data ListDiagnosticsResponse = ListDiagnosticsResponse
 listDiagnosticsResponse
     :: ListDiagnosticsResponse
 listDiagnosticsResponse =
-    ListDiagnosticsResponse
+    ListDiagnosticsResponse'
     { _ldrNextPageToken = Nothing
     , _ldrDiagnostics = Nothing
     }
@@ -991,12 +1242,12 @@ instance FromJSON ListDiagnosticsResponse where
         parseJSON
           = withObject "ListDiagnosticsResponse"
               (\ o ->
-                 ListDiagnosticsResponse <$>
+                 ListDiagnosticsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "diagnostics" .!= mempty))
 
 instance ToJSON ListDiagnosticsResponse where
-        toJSON ListDiagnosticsResponse{..}
+        toJSON ListDiagnosticsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ldrNextPageToken,
@@ -1005,8 +1256,8 @@ instance ToJSON ListDiagnosticsResponse where
 -- | Defines a unique identifier of a beacon as broadcast by the device.
 --
 -- /See:/ 'advertisedId' smart constructor.
-data AdvertisedId = AdvertisedId
-    { _aiId   :: !(Maybe (Textual Word8))
+data AdvertisedId = AdvertisedId'
+    { _aiId   :: !(Maybe Base64)
     , _aiType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1020,7 +1271,7 @@ data AdvertisedId = AdvertisedId
 advertisedId
     :: AdvertisedId
 advertisedId =
-    AdvertisedId
+    AdvertisedId'
     { _aiId = Nothing
     , _aiType = Nothing
     }
@@ -1030,10 +1281,10 @@ advertisedId =
 -- HTTP requests, and will be so encoded (with padding) in responses. The
 -- base64 encoding should be of the binary byte-stream and not any textual
 -- (such as hex) representation thereof. Required.
-aiId :: Lens' AdvertisedId (Maybe Word8)
+aiId :: Lens' AdvertisedId (Maybe ByteString)
 aiId
   = lens _aiId (\ s a -> s{_aiId = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Specifies the identifier type. Required.
 aiType :: Lens' AdvertisedId (Maybe Text)
@@ -1043,10 +1294,10 @@ instance FromJSON AdvertisedId where
         parseJSON
           = withObject "AdvertisedId"
               (\ o ->
-                 AdvertisedId <$> (o .:? "id") <*> (o .:? "type"))
+                 AdvertisedId' <$> (o .:? "id") <*> (o .:? "type"))
 
 instance ToJSON AdvertisedId where
-        toJSON AdvertisedId{..}
+        toJSON AdvertisedId'{..}
           = object
               (catMaybes
                  [("id" .=) <$> _aiId, ("type" .=) <$> _aiType])
@@ -1054,7 +1305,7 @@ instance ToJSON AdvertisedId where
 -- | Response that contains list beacon results and pagination help.
 --
 -- /See:/ 'listBeaconsResponse' smart constructor.
-data ListBeaconsResponse = ListBeaconsResponse
+data ListBeaconsResponse = ListBeaconsResponse'
     { _lbrNextPageToken :: !(Maybe Text)
     , _lbrBeacons       :: !(Maybe [Beacon])
     , _lbrTotalCount    :: !(Maybe (Textual Int64))
@@ -1072,7 +1323,7 @@ data ListBeaconsResponse = ListBeaconsResponse
 listBeaconsResponse
     :: ListBeaconsResponse
 listBeaconsResponse =
-    ListBeaconsResponse
+    ListBeaconsResponse'
     { _lbrNextPageToken = Nothing
     , _lbrBeacons = Nothing
     , _lbrTotalCount = Nothing
@@ -1104,13 +1355,13 @@ instance FromJSON ListBeaconsResponse where
         parseJSON
           = withObject "ListBeaconsResponse"
               (\ o ->
-                 ListBeaconsResponse <$>
+                 ListBeaconsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "beacons" .!= mempty)
                      <*> (o .:? "totalCount"))
 
 instance ToJSON ListBeaconsResponse where
-        toJSON ListBeaconsResponse{..}
+        toJSON ListBeaconsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lbrNextPageToken,
@@ -1121,7 +1372,7 @@ instance ToJSON ListBeaconsResponse where
 -- data.
 --
 -- /See:/ 'getInfoForObservedBeaconsResponse' smart constructor.
-newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse
+newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse'
     { _gifobrBeacons :: Maybe [BeaconInfo]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1133,7 +1384,7 @@ newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse
 getInfoForObservedBeaconsResponse
     :: GetInfoForObservedBeaconsResponse
 getInfoForObservedBeaconsResponse =
-    GetInfoForObservedBeaconsResponse
+    GetInfoForObservedBeaconsResponse'
     { _gifobrBeacons = Nothing
     }
 
@@ -1151,11 +1402,11 @@ instance FromJSON GetInfoForObservedBeaconsResponse
         parseJSON
           = withObject "GetInfoForObservedBeaconsResponse"
               (\ o ->
-                 GetInfoForObservedBeaconsResponse <$>
+                 GetInfoForObservedBeaconsResponse' <$>
                    (o .:? "beacons" .!= mempty))
 
 instance ToJSON GetInfoForObservedBeaconsResponse
          where
-        toJSON GetInfoForObservedBeaconsResponse{..}
+        toJSON GetInfoForObservedBeaconsResponse'{..}
           = object
               (catMaybes [("beacons" .=) <$> _gifobrBeacons])

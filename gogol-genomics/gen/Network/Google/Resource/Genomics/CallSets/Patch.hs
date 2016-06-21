@@ -14,15 +14,18 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.CallSets.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a call set. This method supports patch semantics.
+-- Updates a call set. For the definitions of call sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics.
 --
--- /See:/ < Genomics API Reference> for @genomics.callsets.patch@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.patch@.
 module Network.Google.Resource.Genomics.CallSets.Patch
     (
     -- * REST Resource
@@ -65,10 +68,13 @@ type CallSetsPatchResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] CallSet :> Patch '[JSON] CallSet
 
--- | Updates a call set. This method supports patch semantics.
+-- | Updates a call set. For the definitions of call sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics.
 --
 -- /See:/ 'callSetsPatch' smart constructor.
-data CallSetsPatch = CallSetsPatch
+data CallSetsPatch = CallSetsPatch'
     { _cspXgafv          :: !(Maybe Text)
     , _cspUploadProtocol :: !(Maybe Text)
     , _cspUpdateMask     :: !(Maybe Text)
@@ -109,7 +115,7 @@ callSetsPatch
     -> Text -- ^ 'cspCallSetId'
     -> CallSetsPatch
 callSetsPatch pCspPayload_ pCspCallSetId_ =
-    CallSetsPatch
+    CallSetsPatch'
     { _cspXgafv = Nothing
     , _cspUploadProtocol = Nothing
     , _cspUpdateMask = Nothing
@@ -179,7 +185,10 @@ cspCallback
 
 instance GoogleRequest CallSetsPatch where
         type Rs CallSetsPatch = CallSet
-        requestClient CallSetsPatch{..}
+        type Scopes CallSetsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient CallSetsPatch'{..}
           = go _cspCallSetId _cspXgafv _cspUploadProtocol
               _cspUpdateMask
               (Just _cspPp)

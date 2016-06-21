@@ -7,19 +7,23 @@
 
 -- |
 -- Module      : Network.Google.AppsCalendar
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you manipulate events and other calendar data.
+-- Manipulates events and other calendar data.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference>
 module Network.Google.AppsCalendar
     (
     -- * Service Configuration
       appsCalendarService
+
+    -- * OAuth Scopes
+    , calendarScope
+    , calendarReadOnlyScope
 
     -- * API Declaration
     , AppsCalendarAPI

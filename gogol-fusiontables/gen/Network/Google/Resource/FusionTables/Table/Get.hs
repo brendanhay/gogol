@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Table.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type TableGetResource =
 -- | Retrieves a specific table by its ID.
 --
 -- /See:/ 'tableGet' smart constructor.
-newtype TableGet = TableGet
+newtype TableGet = TableGet'
     { _tgTableId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ tableGet
     :: Text -- ^ 'tgTableId'
     -> TableGet
 tableGet pTgTableId_ =
-    TableGet
+    TableGet'
     { _tgTableId = pTgTableId_
     }
 
@@ -75,7 +75,10 @@ tgTableId
 
 instance GoogleRequest TableGet where
         type Rs TableGet = Table
-        requestClient TableGet{..}
+        type Scopes TableGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient TableGet'{..}
           = go _tgTableId (Just AltJSON) fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableGetResource)

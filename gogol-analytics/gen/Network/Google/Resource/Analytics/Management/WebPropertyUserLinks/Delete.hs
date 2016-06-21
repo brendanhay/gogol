@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ManagementWebPropertyUserLinksDeleteResource =
 -- | Removes a user from the given web property.
 --
 -- /See:/ 'managementWebPropertyUserLinksDelete' smart constructor.
-data ManagementWebPropertyUserLinksDelete = ManagementWebPropertyUserLinksDelete
+data ManagementWebPropertyUserLinksDelete = ManagementWebPropertyUserLinksDelete'
     { _mwpuldWebPropertyId :: !Text
     , _mwpuldAccountId     :: !Text
     , _mwpuldLinkId        :: !Text
@@ -79,7 +79,7 @@ managementWebPropertyUserLinksDelete
     -> Text -- ^ 'mwpuldLinkId'
     -> ManagementWebPropertyUserLinksDelete
 managementWebPropertyUserLinksDelete pMwpuldWebPropertyId_ pMwpuldAccountId_ pMwpuldLinkId_ =
-    ManagementWebPropertyUserLinksDelete
+    ManagementWebPropertyUserLinksDelete'
     { _mwpuldWebPropertyId = pMwpuldWebPropertyId_
     , _mwpuldAccountId = pMwpuldAccountId_
     , _mwpuldLinkId = pMwpuldLinkId_
@@ -105,8 +105,10 @@ mwpuldLinkId
 instance GoogleRequest
          ManagementWebPropertyUserLinksDelete where
         type Rs ManagementWebPropertyUserLinksDelete = ()
+        type Scopes ManagementWebPropertyUserLinksDelete =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient
-          ManagementWebPropertyUserLinksDelete{..}
+          ManagementWebPropertyUserLinksDelete'{..}
           = go _mwpuldAccountId _mwpuldWebPropertyId
               _mwpuldLinkId
               (Just AltJSON)

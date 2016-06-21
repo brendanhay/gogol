@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCode
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type RelyingPartyGetOOBConfirmationCodeResource =
 -- | Get a code for user action confirmation.
 --
 -- /See:/ 'relyingPartyGetOOBConfirmationCode' smart constructor.
-newtype RelyingPartyGetOOBConfirmationCode = RelyingPartyGetOOBConfirmationCode
+newtype RelyingPartyGetOOBConfirmationCode = RelyingPartyGetOOBConfirmationCode'
     { _rpgoobccPayload :: RelyingParty
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ relyingPartyGetOOBConfirmationCode
     :: RelyingParty -- ^ 'rpgoobccPayload'
     -> RelyingPartyGetOOBConfirmationCode
 relyingPartyGetOOBConfirmationCode pRpgoobccPayload_ =
-    RelyingPartyGetOOBConfirmationCode
+    RelyingPartyGetOOBConfirmationCode'
     { _rpgoobccPayload = pRpgoobccPayload_
     }
 
@@ -80,7 +80,8 @@ instance GoogleRequest
          RelyingPartyGetOOBConfirmationCode where
         type Rs RelyingPartyGetOOBConfirmationCode =
              GetOOBConfirmationCodeResponse
-        requestClient RelyingPartyGetOOBConfirmationCode{..}
+        type Scopes RelyingPartyGetOOBConfirmationCode = '[]
+        requestClient RelyingPartyGetOOBConfirmationCode'{..}
           = go (Just AltJSON) _rpgoobccPayload
               identityToolkitService
           where go

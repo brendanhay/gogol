@@ -14,14 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Firewalls.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a firewall resource in the specified project using the data
--- included in the request.
+-- Creates a firewall rule in the specified project using the data included
+-- in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.insert@.
 module Network.Google.Resource.Compute.Firewalls.Insert
@@ -53,11 +53,11 @@ type FirewallsInsertResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Firewall :> Post '[JSON] Operation
 
--- | Creates a firewall resource in the specified project using the data
--- included in the request.
+-- | Creates a firewall rule in the specified project using the data included
+-- in the request.
 --
 -- /See:/ 'firewallsInsert' smart constructor.
-data FirewallsInsert = FirewallsInsert
+data FirewallsInsert = FirewallsInsert'
     { _fiProject :: !Text
     , _fiPayload :: !Firewall
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ firewallsInsert
     -> Firewall -- ^ 'fiPayload'
     -> FirewallsInsert
 firewallsInsert pFiProject_ pFiPayload_ =
-    FirewallsInsert
+    FirewallsInsert'
     { _fiProject = pFiProject_
     , _fiPayload = pFiPayload_
     }
@@ -91,7 +91,10 @@ fiPayload
 
 instance GoogleRequest FirewallsInsert where
         type Rs FirewallsInsert = Operation
-        requestClient FirewallsInsert{..}
+        type Scopes FirewallsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient FirewallsInsert'{..}
           = go _fiProject (Just AltJSON) _fiPayload
               computeService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Data.Mcf.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type DataMcfGetResource =
 -- | Returns Analytics Multi-Channel Funnels data for a view (profile).
 --
 -- /See:/ 'dataMcfGet' smart constructor.
-data DataMcfGet = DataMcfGet
+data DataMcfGet = DataMcfGet'
     { _dmgMetrics       :: !Text
     , _dmgSamplingLevel :: !(Maybe DataMcfGetSamplingLevel)
     , _dmgFilters       :: !(Maybe Text)
@@ -113,7 +113,7 @@ dataMcfGet
     -> Text -- ^ 'dmgStartDate'
     -> DataMcfGet
 dataMcfGet pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
-    DataMcfGet
+    DataMcfGet'
     { _dmgMetrics = pDmgMetrics_
     , _dmgSamplingLevel = Nothing
     , _dmgFilters = Nothing
@@ -193,7 +193,10 @@ dmgStartDate
 
 instance GoogleRequest DataMcfGet where
         type Rs DataMcfGet = McfData
-        requestClient DataMcfGet{..}
+        type Scopes DataMcfGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient DataMcfGet'{..}
           = go (Just _dmgIds) (Just _dmgStartDate)
               (Just _dmgEndDate)
               (Just _dmgMetrics)

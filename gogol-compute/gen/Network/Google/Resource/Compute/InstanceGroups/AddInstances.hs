@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroups.AddInstances
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Adds a list of instances to the specified instance group. All of the
 -- instances in the instance group must be in the same network\/subnetwork.
--- TODO: Change to comment to state \"if IG is load balanced.\"
+-- Read Adding instances for more information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.addInstances@.
 module Network.Google.Resource.Compute.InstanceGroups.AddInstances
@@ -62,10 +62,10 @@ type InstanceGroupsAddInstancesResource =
 
 -- | Adds a list of instances to the specified instance group. All of the
 -- instances in the instance group must be in the same network\/subnetwork.
--- TODO: Change to comment to state \"if IG is load balanced.\"
+-- Read Adding instances for more information.
 --
 -- /See:/ 'instanceGroupsAddInstances' smart constructor.
-data InstanceGroupsAddInstances = InstanceGroupsAddInstances
+data InstanceGroupsAddInstances = InstanceGroupsAddInstances'
     { _igaiProject       :: !Text
     , _igaiZone          :: !Text
     , _igaiPayload       :: !InstanceGroupsAddInstancesRequest
@@ -90,14 +90,14 @@ instanceGroupsAddInstances
     -> Text -- ^ 'igaiInstanceGroup'
     -> InstanceGroupsAddInstances
 instanceGroupsAddInstances pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstanceGroup_ =
-    InstanceGroupsAddInstances
+    InstanceGroupsAddInstances'
     { _igaiProject = pIgaiProject_
     , _igaiZone = pIgaiZone_
     , _igaiPayload = pIgaiPayload_
     , _igaiInstanceGroup = pIgaiInstanceGroup_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igaiProject :: Lens' InstanceGroupsAddInstances Text
 igaiProject
   = lens _igaiProject (\ s a -> s{_igaiProject = a})
@@ -120,7 +120,10 @@ igaiInstanceGroup
 instance GoogleRequest InstanceGroupsAddInstances
          where
         type Rs InstanceGroupsAddInstances = Operation
-        requestClient InstanceGroupsAddInstances{..}
+        type Scopes InstanceGroupsAddInstances =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceGroupsAddInstances'{..}
           = go _igaiProject _igaiZone _igaiInstanceGroup
               (Just AltJSON)
               _igaiPayload

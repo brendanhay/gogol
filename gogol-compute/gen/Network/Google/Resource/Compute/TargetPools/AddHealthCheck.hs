@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetPools.AddHealthCheck
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds health check URL to targetPool.
+-- Adds health check URLs to a target pool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.addHealthCheck@.
 module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
@@ -58,10 +58,10 @@ type TargetPoolsAddHealthCheckResource =
                          ReqBody '[JSON] TargetPoolsAddHealthCheckRequest :>
                            Post '[JSON] Operation
 
--- | Adds health check URL to targetPool.
+-- | Adds health check URLs to a target pool.
 --
 -- /See:/ 'targetPoolsAddHealthCheck' smart constructor.
-data TargetPoolsAddHealthCheck = TargetPoolsAddHealthCheck
+data TargetPoolsAddHealthCheck = TargetPoolsAddHealthCheck'
     { _tpahcProject    :: !Text
     , _tpahcTargetPool :: !Text
     , _tpahcPayload    :: !TargetPoolsAddHealthCheckRequest
@@ -86,19 +86,19 @@ targetPoolsAddHealthCheck
     -> Text -- ^ 'tpahcRegion'
     -> TargetPoolsAddHealthCheck
 targetPoolsAddHealthCheck pTpahcProject_ pTpahcTargetPool_ pTpahcPayload_ pTpahcRegion_ =
-    TargetPoolsAddHealthCheck
+    TargetPoolsAddHealthCheck'
     { _tpahcProject = pTpahcProject_
     , _tpahcTargetPool = pTpahcTargetPool_
     , _tpahcPayload = pTpahcPayload_
     , _tpahcRegion = pTpahcRegion_
     }
 
+-- | Project ID for this request.
 tpahcProject :: Lens' TargetPoolsAddHealthCheck Text
 tpahcProject
   = lens _tpahcProject (\ s a -> s{_tpahcProject = a})
 
--- | Name of the TargetPool resource to which health_check_url is to be
--- added.
+-- | Name of the target pool to add a health check to.
 tpahcTargetPool :: Lens' TargetPoolsAddHealthCheck Text
 tpahcTargetPool
   = lens _tpahcTargetPool
@@ -117,7 +117,10 @@ tpahcRegion
 instance GoogleRequest TargetPoolsAddHealthCheck
          where
         type Rs TargetPoolsAddHealthCheck = Operation
-        requestClient TargetPoolsAddHealthCheck{..}
+        type Scopes TargetPoolsAddHealthCheck =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetPoolsAddHealthCheck'{..}
           = go _tpahcProject _tpahcRegion _tpahcTargetPool
               (Just AltJSON)
               _tpahcPayload

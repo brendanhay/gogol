@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightConfigurationsUpdate' request conforms to.
 type FloodlightConfigurationsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
@@ -55,7 +55,7 @@ type FloodlightConfigurationsUpdateResource =
 -- | Updates an existing floodlight configuration.
 --
 -- /See:/ 'floodlightConfigurationsUpdate' smart constructor.
-data FloodlightConfigurationsUpdate = FloodlightConfigurationsUpdate
+data FloodlightConfigurationsUpdate = FloodlightConfigurationsUpdate'
     { _fcuProFileId :: !(Textual Int64)
     , _fcuPayload   :: !FloodlightConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightConfigurationsUpdate
     -> FloodlightConfiguration -- ^ 'fcuPayload'
     -> FloodlightConfigurationsUpdate
 floodlightConfigurationsUpdate pFcuProFileId_ pFcuPayload_ =
-    FloodlightConfigurationsUpdate
+    FloodlightConfigurationsUpdate'
     { _fcuProFileId = _Coerce # pFcuProFileId_
     , _fcuPayload = pFcuPayload_
     }
@@ -92,7 +92,9 @@ instance GoogleRequest FloodlightConfigurationsUpdate
          where
         type Rs FloodlightConfigurationsUpdate =
              FloodlightConfiguration
-        requestClient FloodlightConfigurationsUpdate{..}
+        type Scopes FloodlightConfigurationsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightConfigurationsUpdate'{..}
           = go _fcuProFileId (Just AltJSON) _fcuPayload
               dFAReportingService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Collections.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Updates a collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.update@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.update@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Update
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type CollectionsUpdateResource =
 -- | Updates a collection.
 --
 -- /See:/ 'collectionsUpdate' smart constructor.
-data CollectionsUpdate = CollectionsUpdate
+data CollectionsUpdate = CollectionsUpdate'
     { _cuuEnterpriseId :: !Text
     , _cuuCollectionId :: !Text
     , _cuuPayload      :: !Collection
@@ -77,7 +77,7 @@ collectionsUpdate
     -> Collection -- ^ 'cuuPayload'
     -> CollectionsUpdate
 collectionsUpdate pCuuEnterpriseId_ pCuuCollectionId_ pCuuPayload_ =
-    CollectionsUpdate
+    CollectionsUpdate'
     { _cuuEnterpriseId = pCuuEnterpriseId_
     , _cuuCollectionId = pCuuCollectionId_
     , _cuuPayload = pCuuPayload_
@@ -102,7 +102,9 @@ cuuPayload
 
 instance GoogleRequest CollectionsUpdate where
         type Rs CollectionsUpdate = Collection
-        requestClient CollectionsUpdate{..}
+        type Scopes CollectionsUpdate =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient CollectionsUpdate'{..}
           = go _cuuEnterpriseId _cuuCollectionId (Just AltJSON)
               _cuuPayload
               androidEnterpriseService

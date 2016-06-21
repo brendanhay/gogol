@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type TimelineDeleteResource =
 -- | Deletes a timeline item.
 --
 -- /See:/ 'timelineDelete' smart constructor.
-newtype TimelineDelete = TimelineDelete
+newtype TimelineDelete = TimelineDelete'
     { _tdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ timelineDelete
     :: Text -- ^ 'tdId'
     -> TimelineDelete
 timelineDelete pTdId_ =
-    TimelineDelete
+    TimelineDelete'
     { _tdId = pTdId_
     }
 
@@ -74,7 +74,10 @@ tdId = lens _tdId (\ s a -> s{_tdId = a})
 
 instance GoogleRequest TimelineDelete where
         type Rs TimelineDelete = ()
-        requestClient TimelineDelete{..}
+        type Scopes TimelineDelete =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient TimelineDelete'{..}
           = go _tdId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy TimelineDeleteResource)

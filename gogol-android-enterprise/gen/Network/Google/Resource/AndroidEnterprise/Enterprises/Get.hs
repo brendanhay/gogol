@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Enterprises.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves the name and domain of an enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.get@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Get
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ type EnterprisesGetResource =
 -- | Retrieves the name and domain of an enterprise.
 --
 -- /See:/ 'enterprisesGet' smart constructor.
-newtype EnterprisesGet = EnterprisesGet
+newtype EnterprisesGet = EnterprisesGet'
     { _eEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ enterprisesGet
     :: Text -- ^ 'eEnterpriseId'
     -> EnterprisesGet
 enterprisesGet pEEnterpriseId_ =
-    EnterprisesGet
+    EnterprisesGet'
     { _eEnterpriseId = pEEnterpriseId_
     }
 
@@ -76,7 +76,9 @@ eEnterpriseId
 
 instance GoogleRequest EnterprisesGet where
         type Rs EnterprisesGet = Enterprise
-        requestClient EnterprisesGet{..}
+        type Scopes EnterprisesGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EnterprisesGet'{..}
           = go _eEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

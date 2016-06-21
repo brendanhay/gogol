@@ -14,15 +14,15 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Users.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Looks up a user by email address.
+-- Looks up a user by their primary email address.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.list@.
 module Network.Google.Resource.AndroidEnterprise.Users.List
     (
     -- * REST Resource
@@ -52,10 +52,10 @@ type UsersListResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] UsersListResponse
 
--- | Looks up a user by email address.
+-- | Looks up a user by their primary email address.
 --
 -- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
+data UsersList = UsersList'
     { _ulEmail        :: !Text
     , _ulEnterpriseId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersList
     -> Text -- ^ 'ulEnterpriseId'
     -> UsersList
 usersList pUlEmail_ pUlEnterpriseId_ =
-    UsersList
+    UsersList'
     { _ulEmail = pUlEmail_
     , _ulEnterpriseId = pUlEnterpriseId_
     }
@@ -89,7 +89,9 @@ ulEnterpriseId
 
 instance GoogleRequest UsersList where
         type Rs UsersList = UsersListResponse
-        requestClient UsersList{..}
+        type Scopes UsersList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient UsersList'{..}
           = go _ulEnterpriseId (Just _ulEmail) (Just AltJSON)
               androidEnterpriseService
           where go

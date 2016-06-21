@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.EventTags.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsUpdate' request conforms to.
 type EventTagsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -54,7 +54,7 @@ type EventTagsUpdateResource =
 -- | Updates an existing event tag.
 --
 -- /See:/ 'eventTagsUpdate' smart constructor.
-data EventTagsUpdate = EventTagsUpdate
+data EventTagsUpdate = EventTagsUpdate'
     { _etuProFileId :: !(Textual Int64)
     , _etuPayload   :: !EventTag
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ eventTagsUpdate
     -> EventTag -- ^ 'etuPayload'
     -> EventTagsUpdate
 eventTagsUpdate pEtuProFileId_ pEtuPayload_ =
-    EventTagsUpdate
+    EventTagsUpdate'
     { _etuProFileId = _Coerce # pEtuProFileId_
     , _etuPayload = pEtuPayload_
     }
@@ -89,7 +89,9 @@ etuPayload
 
 instance GoogleRequest EventTagsUpdate where
         type Rs EventTagsUpdate = EventTag
-        requestClient EventTagsUpdate{..}
+        type Scopes EventTagsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient EventTagsUpdate'{..}
           = go _etuProFileId (Just AltJSON) _etuPayload
               dFAReportingService
           where go

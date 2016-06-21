@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Installs.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,7 @@
 -- still show the app as installed on the device until it is actually
 -- removed.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.delete@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.installs.delete@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Delete
     (
     -- * REST Resource
@@ -64,7 +64,7 @@ type InstallsDeleteResource =
 -- removed.
 --
 -- /See:/ 'installsDelete' smart constructor.
-data InstallsDelete = InstallsDelete
+data InstallsDelete = InstallsDelete'
     { _idEnterpriseId :: !Text
     , _idUserId       :: !Text
     , _idInstallId    :: !Text
@@ -89,7 +89,7 @@ installsDelete
     -> Text -- ^ 'idDeviceId'
     -> InstallsDelete
 installsDelete pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
-    InstallsDelete
+    InstallsDelete'
     { _idEnterpriseId = pIdEnterpriseId_
     , _idUserId = pIdUserId_
     , _idInstallId = pIdInstallId_
@@ -119,7 +119,9 @@ idDeviceId
 
 instance GoogleRequest InstallsDelete where
         type Rs InstallsDelete = ()
-        requestClient InstallsDelete{..}
+        type Scopes InstallsDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient InstallsDelete'{..}
           = go _idEnterpriseId _idUserId _idDeviceId
               _idInstallId
               (Just AltJSON)

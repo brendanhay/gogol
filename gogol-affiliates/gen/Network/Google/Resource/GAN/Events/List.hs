@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GAN.Events.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -88,7 +88,7 @@ type EventsListResource =
 -- | Retrieves event data for a given advertiser\/publisher.
 --
 -- /See:/ 'eventsList' smart constructor.
-data EventsList = EventsList
+data EventsList = EventsList'
     { _elStatus          :: !(Maybe EventsListStatus)
     , _elEventDateMin    :: !(Maybe Text)
     , _elChargeType      :: !(Maybe EventsListChargeType)
@@ -153,7 +153,7 @@ eventsList
     -> EventsListRole -- ^ 'elRole'
     -> EventsList
 eventsList pElRoleId_ pElRole_ =
-    EventsList
+    EventsList'
     { _elStatus = Nothing
     , _elEventDateMin = Nothing
     , _elChargeType = Nothing
@@ -289,7 +289,8 @@ elMaxResults
 
 instance GoogleRequest EventsList where
         type Rs EventsList = Events
-        requestClient EventsList{..}
+        type Scopes EventsList = '[]
+        requestClient EventsList'{..}
           = go _elRole _elRoleId _elStatus _elEventDateMin
               _elChargeType
               _elMemberId

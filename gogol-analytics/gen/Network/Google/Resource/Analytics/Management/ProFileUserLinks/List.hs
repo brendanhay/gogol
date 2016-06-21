@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type ManagementProFileUserLinksListResource =
 -- | Lists profile-user links for a given view (profile).
 --
 -- /See:/ 'managementProFileUserLinksList' smart constructor.
-data ManagementProFileUserLinksList = ManagementProFileUserLinksList
+data ManagementProFileUserLinksList = ManagementProFileUserLinksList'
     { _mpfullWebPropertyId :: !Text
     , _mpfullProFileId     :: !Text
     , _mpfullAccountId     :: !Text
@@ -91,7 +91,7 @@ managementProFileUserLinksList
     -> Text -- ^ 'mpfullAccountId'
     -> ManagementProFileUserLinksList
 managementProFileUserLinksList pMpfullWebPropertyId_ pMpfullProFileId_ pMpfullAccountId_ =
-    ManagementProFileUserLinksList
+    ManagementProFileUserLinksList'
     { _mpfullWebPropertyId = pMpfullWebPropertyId_
     , _mpfullProFileId = pMpfullProFileId_
     , _mpfullAccountId = pMpfullAccountId_
@@ -140,7 +140,10 @@ instance GoogleRequest ManagementProFileUserLinksList
          where
         type Rs ManagementProFileUserLinksList =
              EntityUserLinks
-        requestClient ManagementProFileUserLinksList{..}
+        type Scopes ManagementProFileUserLinksList =
+             '["https://www.googleapis.com/auth/analytics.manage.users",
+               "https://www.googleapis.com/auth/analytics.manage.users.readonly"]
+        requestClient ManagementProFileUserLinksList'{..}
           = go _mpfullAccountId _mpfullWebPropertyId
               _mpfullProFileId
               _mpfullStartIndex

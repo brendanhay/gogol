@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Labels.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersLabelsDeleteResource =
 -- from any messages and threads that it is applied to.
 --
 -- /See:/ 'usersLabelsDelete' smart constructor.
-data UsersLabelsDelete = UsersLabelsDelete
+data UsersLabelsDelete = UsersLabelsDelete'
     { _uldUserId :: !Text
     , _uldId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,10 +70,9 @@ data UsersLabelsDelete = UsersLabelsDelete
 -- * 'uldId'
 usersLabelsDelete
     :: Text -- ^ 'uldId'
-    -> Text
     -> UsersLabelsDelete
-usersLabelsDelete pUldUserId_ pUldId_ =
-    UsersLabelsDelete
+usersLabelsDelete pUldId_ =
+    UsersLabelsDelete'
     { _uldUserId = "me"
     , _uldId = pUldId_
     }
@@ -90,7 +89,11 @@ uldId = lens _uldId (\ s a -> s{_uldId = a})
 
 instance GoogleRequest UsersLabelsDelete where
         type Rs UsersLabelsDelete = ()
-        requestClient UsersLabelsDelete{..}
+        type Scopes UsersLabelsDelete =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersLabelsDelete'{..}
           = go _uldUserId _uldId (Just AltJSON) gmailService
           where go
                   = buildClient

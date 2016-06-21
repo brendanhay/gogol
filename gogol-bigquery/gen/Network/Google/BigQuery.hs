@@ -7,7 +7,7 @@
 
 -- |
 -- Module      : Network.Google.BigQuery
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -20,6 +20,15 @@ module Network.Google.BigQuery
     (
     -- * Service Configuration
       bigQueryService
+
+    -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , storageReadOnlyScope
+    , bigQueryInsertDataScope
+    , storageReadWriteScope
+    , bigQueryScope
+    , storageFullControlScope
 
     -- * API Declaration
     , BigQueryAPI
@@ -155,6 +164,21 @@ module Network.Google.BigQuery
     , plKind
     , plProjects
 
+    -- ** ExplainQueryStep
+    , ExplainQueryStep
+    , explainQueryStep
+    , eqsSubsteps
+    , eqsKind
+
+    -- ** BigtableColumnFamily
+    , BigtableColumnFamily
+    , bigtableColumnFamily
+    , bcfFamilyId
+    , bcfColumns
+    , bcfOnlyReadLatest
+    , bcfType
+    , bcfEncoding
+
     -- ** JobStatistics
     , JobStatistics
     , jobStatistics
@@ -182,14 +206,23 @@ module Network.Google.BigQuery
     , dsDefaultTableExpirationMs
     , dsDescription
 
+    -- ** BigtableOptions
+    , BigtableOptions
+    , bigtableOptions
+    , boIgnoreUnspecifiedColumnFamilies
+    , boColumnFamilies
+
     -- ** ExternalDataConfiguration
     , ExternalDataConfiguration
     , externalDataConfiguration
+    , edcBigtableOptions
     , edcIgnoreUnknownValues
     , edcCompression
     , edcSourceFormat
     , edcSchema
     , edcMaxBadRecords
+    , edcGoogleSheetsOptions
+    , edcAutodetect
     , edcSourceURIs
     , edcCSVOptions
 
@@ -240,6 +273,7 @@ module Network.Google.BigQuery
     , qrKind
     , qrQuery
     , qrTimeoutMs
+    , qrUseLegacySQL
     , qrDryRun
     , qrMaxResults
     , qrDefaultDataSet
@@ -256,6 +290,23 @@ module Network.Google.BigQuery
     , ProjectReference
     , projectReference
     , prProjectId
+
+    -- ** ExplainQueryStage
+    , ExplainQueryStage
+    , explainQueryStage
+    , eqsWaitRatioMax
+    , eqsRecordsWritten
+    , eqsSteps
+    , eqsWriteRatioAvg
+    , eqsRecordsRead
+    , eqsComputeRatioAvg
+    , eqsName
+    , eqsReadRatioMax
+    , eqsWaitRatioAvg
+    , eqsId
+    , eqsComputeRatioMax
+    , eqsWriteRatioMax
+    , eqsReadRatioAvg
 
     -- ** JobConfigurationLoad
     , JobConfigurationLoad
@@ -274,6 +325,7 @@ module Network.Google.BigQuery
     , jclSchema
     , jclQuote
     , jclMaxBadRecords
+    , jclAutodetect
     , jclSourceURIs
     , jclEncoding
     , jclFieldDelimiter
@@ -293,6 +345,7 @@ module Network.Google.BigQuery
     , tdiarKind
     , tdiarIgnoreUnknownValues
     , tdiarRows
+    , tdiarTemplateSuffix
     , tdiarSkipInvalidRows
 
     -- ** ProjectListProjectsItem
@@ -303,6 +356,16 @@ module Network.Google.BigQuery
     , plpiProjectReference
     , plpiId
     , plpiNumericId
+
+    -- ** BigtableColumn
+    , BigtableColumn
+    , bigtableColumn
+    , bcQualifierEncoded
+    , bcFieldName
+    , bcQualifierString
+    , bcOnlyReadLatest
+    , bcType
+    , bcEncoding
 
     -- ** Streamingbuffer
     , Streamingbuffer
@@ -329,11 +392,16 @@ module Network.Google.BigQuery
     , jljiStatistics
     , jljiConfiguration
 
+    -- ** TimePartitioning
+    , TimePartitioning
+    , timePartitioning
+    , tpExpirationMs
+    , tpType
+
     -- ** JobConfiguration
     , JobConfiguration
     , jobConfiguration
     , jcCopy
-    , jcLink
     , jcLoad
     , jcQuery
     , jcExtract
@@ -351,14 +419,6 @@ module Network.Google.BigQuery
     , jId
     , jStatistics
     , jConfiguration
-
-    -- ** JobConfigurationLink
-    , JobConfigurationLink
-    , jobConfigurationLink
-    , jDestinationTable
-    , jWriteDisPosition
-    , jCreateDisPosition
-    , jSourceURI
 
     -- ** TableDataInsertAllResponseInsertErrorsItem
     , TableDataInsertAllResponseInsertErrorsItem
@@ -400,9 +460,16 @@ module Network.Google.BigQuery
     , jcqCreateDisPosition
     , jcqUserDefinedFunctionResources
     , jcqAllowLargeResults
+    , jcqMaximumBillingTier
     , jcqQuery
     , jcqFlattenResults
+    , jcqUseLegacySQL
     , jcqDefaultDataSet
+
+    -- ** GoogleSheetsOptions
+    , GoogleSheetsOptions
+    , googleSheetsOptions
+    , gsoSkipLeadingRows
 
     -- ** TableDataInsertAllRequestRowsItem
     , TableDataInsertAllRequestRowsItem
@@ -431,6 +498,7 @@ module Network.Google.BigQuery
     -- ** ViewDefinition
     , ViewDefinition
     , viewDefinition
+    , vdUserDefinedFunctionResources
     , vdQuery
 
     -- ** UserDefinedFunctionResource
@@ -442,8 +510,11 @@ module Network.Google.BigQuery
     -- ** JobStatistics2
     , JobStatistics2
     , jobStatistics2
+    , jSchema
     , jTotalBytesProcessed
     , jBillingTier
+    , jReferencedTables
+    , jQueryPlan
     , jCacheHit
     , jTotalBytesBilled
 
@@ -485,10 +556,12 @@ module Network.Google.BigQuery
     , tabSchema
     , tabStreamingBuffer
     , tabSelfLink
+    , tabTimePartitioning
     , tabNumRows
     , tabView
     , tabId
     , tabType
+    , tabNumLongTermBytes
     , tabExpirationTime
     , tabDescription
 

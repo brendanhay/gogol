@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.ChromeosDevices.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ChromeosDevicesUpdateResource =
 -- | Update Chrome OS Device
 --
 -- /See:/ 'chromeosDevicesUpdate' smart constructor.
-data ChromeosDevicesUpdate = ChromeosDevicesUpdate
+data ChromeosDevicesUpdate = ChromeosDevicesUpdate'
     { _cduPayload    :: !ChromeOSDevice
     , _cduCustomerId :: !Text
     , _cduDeviceId   :: !Text
@@ -87,7 +87,7 @@ chromeosDevicesUpdate
     -> Text -- ^ 'cduDeviceId'
     -> ChromeosDevicesUpdate
 chromeosDevicesUpdate pCduPayload_ pCduCustomerId_ pCduDeviceId_ =
-    ChromeosDevicesUpdate
+    ChromeosDevicesUpdate'
     { _cduPayload = pCduPayload_
     , _cduCustomerId = pCduCustomerId_
     , _cduDeviceId = pCduDeviceId_
@@ -118,7 +118,9 @@ cduProjection
 
 instance GoogleRequest ChromeosDevicesUpdate where
         type Rs ChromeosDevicesUpdate = ChromeOSDevice
-        requestClient ChromeosDevicesUpdate{..}
+        type Scopes ChromeosDevicesUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
+        requestClient ChromeosDevicesUpdate'{..}
           = go _cduCustomerId _cduDeviceId _cduProjection
               (Just AltJSON)
               _cduPayload

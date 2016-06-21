@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type QueriesRunQueryResource =
 -- | Runs a stored query to generate a report.
 --
 -- /See:/ 'queriesRunQuery' smart constructor.
-data QueriesRunQuery = QueriesRunQuery
+data QueriesRunQuery = QueriesRunQuery'
     { _qrqQueryId :: !(Textual Int64)
     , _qrqPayload :: !RunQueryRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ queriesRunQuery
     -> RunQueryRequest -- ^ 'qrqPayload'
     -> QueriesRunQuery
 queriesRunQuery pQrqQueryId_ pQrqPayload_ =
-    QueriesRunQuery
+    QueriesRunQuery'
     { _qrqQueryId = _Coerce # pQrqQueryId_
     , _qrqPayload = pQrqPayload_
     }
@@ -88,7 +88,8 @@ qrqPayload
 
 instance GoogleRequest QueriesRunQuery where
         type Rs QueriesRunQuery = ()
-        requestClient QueriesRunQuery{..}
+        type Scopes QueriesRunQuery = '[]
+        requestClient QueriesRunQuery'{..}
           = go _qrqQueryId (Just AltJSON) _qrqPayload
               doubleClickBidsService
           where go

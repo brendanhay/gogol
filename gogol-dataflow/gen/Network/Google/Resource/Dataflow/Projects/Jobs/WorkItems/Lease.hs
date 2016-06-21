@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type ProjectsJobsWorkItemsLeaseResource =
 -- | Leases a dataflow WorkItem to run.
 --
 -- /See:/ 'projectsJobsWorkItemsLease' smart constructor.
-data ProjectsJobsWorkItemsLease = ProjectsJobsWorkItemsLease
+data ProjectsJobsWorkItemsLease = ProjectsJobsWorkItemsLease'
     { _pjwilXgafv          :: !(Maybe Text)
     , _pjwilJobId          :: !Text
     , _pjwilUploadProtocol :: !(Maybe Text)
@@ -113,7 +113,7 @@ projectsJobsWorkItemsLease
     -> Text -- ^ 'pjwilProjectId'
     -> ProjectsJobsWorkItemsLease
 projectsJobsWorkItemsLease pPjwilJobId_ pPjwilPayload_ pPjwilProjectId_ =
-    ProjectsJobsWorkItemsLease
+    ProjectsJobsWorkItemsLease'
     { _pjwilXgafv = Nothing
     , _pjwilJobId = pPjwilJobId_
     , _pjwilUploadProtocol = Nothing
@@ -185,7 +185,10 @@ instance GoogleRequest ProjectsJobsWorkItemsLease
          where
         type Rs ProjectsJobsWorkItemsLease =
              LeaseWorkItemResponse
-        requestClient ProjectsJobsWorkItemsLease{..}
+        type Scopes ProjectsJobsWorkItemsLease =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
+        requestClient ProjectsJobsWorkItemsLease'{..}
           = go _pjwilProjectId _pjwilJobId _pjwilXgafv
               _pjwilUploadProtocol
               (Just _pjwilPp)

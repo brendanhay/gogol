@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.CalendarList.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type CalendarListDeleteResource =
 -- | Deletes an entry on the user\'s calendar list.
 --
 -- /See:/ 'calendarListDelete' smart constructor.
-newtype CalendarListDelete = CalendarListDelete
+newtype CalendarListDelete = CalendarListDelete'
     { _cldCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ calendarListDelete
     :: Text -- ^ 'cldCalendarId'
     -> CalendarListDelete
 calendarListDelete pCldCalendarId_ =
-    CalendarListDelete
+    CalendarListDelete'
     { _cldCalendarId = pCldCalendarId_
     }
 
@@ -80,7 +80,9 @@ cldCalendarId
 
 instance GoogleRequest CalendarListDelete where
         type Rs CalendarListDelete = ()
-        requestClient CalendarListDelete{..}
+        type Scopes CalendarListDelete =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient CalendarListDelete'{..}
           = go _cldCalendarId (Just AltJSON)
               appsCalendarService
           where go

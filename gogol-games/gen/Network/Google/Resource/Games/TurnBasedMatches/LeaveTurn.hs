@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.TurnBasedMatches.LeaveTurn
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -34,6 +34,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.LeaveTurn
     , TurnBasedMatchesLeaveTurn
 
     -- * Request Lenses
+    , tbmltConsistencyToken
     , tbmltLanguage
     , tbmltPendingParticipantId
     , tbmltMatchId
@@ -52,17 +53,19 @@ type TurnBasedMatchesLeaveTurnResource =
            Capture "matchId" Text :>
              "leaveTurn" :>
                QueryParam "matchVersion" (Textual Int32) :>
-                 QueryParam "language" Text :>
-                   QueryParam "pendingParticipantId" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Put '[JSON] TurnBasedMatch
+                 QueryParam "consistencyToken" (Textual Int64) :>
+                   QueryParam "language" Text :>
+                     QueryParam "pendingParticipantId" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Put '[JSON] TurnBasedMatch
 
 -- | Leave a turn-based match during the current player\'s turn, without
 -- canceling the match.
 --
 -- /See:/ 'turnBasedMatchesLeaveTurn' smart constructor.
-data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn
-    { _tbmltLanguage             :: !(Maybe Text)
+data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn'
+    { _tbmltConsistencyToken     :: !(Maybe (Textual Int64))
+    , _tbmltLanguage             :: !(Maybe Text)
     , _tbmltPendingParticipantId :: !(Maybe Text)
     , _tbmltMatchId              :: !Text
     , _tbmltMatchVersion         :: !(Textual Int32)
@@ -71,6 +74,8 @@ data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn
 -- | Creates a value of 'TurnBasedMatchesLeaveTurn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbmltConsistencyToken'
 --
 -- * 'tbmltLanguage'
 --
@@ -84,12 +89,20 @@ turnBasedMatchesLeaveTurn
     -> Int32 -- ^ 'tbmltMatchVersion'
     -> TurnBasedMatchesLeaveTurn
 turnBasedMatchesLeaveTurn pTbmltMatchId_ pTbmltMatchVersion_ =
-    TurnBasedMatchesLeaveTurn
-    { _tbmltLanguage = Nothing
+    TurnBasedMatchesLeaveTurn'
+    { _tbmltConsistencyToken = Nothing
+    , _tbmltLanguage = Nothing
     , _tbmltPendingParticipantId = Nothing
     , _tbmltMatchId = pTbmltMatchId_
     , _tbmltMatchVersion = _Coerce # pTbmltMatchVersion_
     }
+
+-- | The last-seen mutation timestamp.
+tbmltConsistencyToken :: Lens' TurnBasedMatchesLeaveTurn (Maybe Int64)
+tbmltConsistencyToken
+  = lens _tbmltConsistencyToken
+      (\ s a -> s{_tbmltConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 tbmltLanguage :: Lens' TurnBasedMatchesLeaveTurn (Maybe Text)
@@ -121,8 +134,12 @@ tbmltMatchVersion
 instance GoogleRequest TurnBasedMatchesLeaveTurn
          where
         type Rs TurnBasedMatchesLeaveTurn = TurnBasedMatch
-        requestClient TurnBasedMatchesLeaveTurn{..}
+        type Scopes TurnBasedMatchesLeaveTurn =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient TurnBasedMatchesLeaveTurn'{..}
           = go _tbmltMatchId (Just _tbmltMatchVersion)
+              _tbmltConsistencyToken
               _tbmltLanguage
               _tbmltPendingParticipantId
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.ForwardingRules.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ForwardingRulesInsertResource =
 -- using the data included in the request.
 --
 -- /See:/ 'forwardingRulesInsert' smart constructor.
-data ForwardingRulesInsert = ForwardingRulesInsert
+data ForwardingRulesInsert = ForwardingRulesInsert'
     { _friProject :: !Text
     , _friPayload :: !ForwardingRule
     , _friRegion  :: !Text
@@ -81,13 +81,13 @@ forwardingRulesInsert
     -> Text -- ^ 'friRegion'
     -> ForwardingRulesInsert
 forwardingRulesInsert pFriProject_ pFriPayload_ pFriRegion_ =
-    ForwardingRulesInsert
+    ForwardingRulesInsert'
     { _friProject = pFriProject_
     , _friPayload = pFriPayload_
     , _friRegion = pFriRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 friProject :: Lens' ForwardingRulesInsert Text
 friProject
   = lens _friProject (\ s a -> s{_friProject = a})
@@ -104,7 +104,10 @@ friRegion
 
 instance GoogleRequest ForwardingRulesInsert where
         type Rs ForwardingRulesInsert = Operation
-        requestClient ForwardingRulesInsert{..}
+        type Scopes ForwardingRulesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient ForwardingRulesInsert'{..}
           = go _friProject _friRegion (Just AltJSON)
               _friPayload
               computeService

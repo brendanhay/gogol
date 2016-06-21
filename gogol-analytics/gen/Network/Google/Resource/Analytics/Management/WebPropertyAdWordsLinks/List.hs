@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ManagementWebPropertyAdWordsLinksListResource =
 -- | Lists webProperty-AdWords links for a given web property.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksList' smart constructor.
-data ManagementWebPropertyAdWordsLinksList = ManagementWebPropertyAdWordsLinksList
+data ManagementWebPropertyAdWordsLinksList = ManagementWebPropertyAdWordsLinksList'
     { _mwpawllWebPropertyId :: !Text
     , _mwpawllAccountId     :: !Text
     , _mwpawllStartIndex    :: !(Maybe (Textual Int32))
@@ -84,7 +84,7 @@ managementWebPropertyAdWordsLinksList
     -> Text -- ^ 'mwpawllAccountId'
     -> ManagementWebPropertyAdWordsLinksList
 managementWebPropertyAdWordsLinksList pMwpawllWebPropertyId_ pMwpawllAccountId_ =
-    ManagementWebPropertyAdWordsLinksList
+    ManagementWebPropertyAdWordsLinksList'
     { _mwpawllWebPropertyId = pMwpawllWebPropertyId_
     , _mwpawllAccountId = pMwpawllAccountId_
     , _mwpawllStartIndex = Nothing
@@ -124,8 +124,11 @@ instance GoogleRequest
          ManagementWebPropertyAdWordsLinksList where
         type Rs ManagementWebPropertyAdWordsLinksList =
              EntityAdWordsLinks
+        type Scopes ManagementWebPropertyAdWordsLinksList =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient
-          ManagementWebPropertyAdWordsLinksList{..}
+          ManagementWebPropertyAdWordsLinksList'{..}
           = go _mwpawllAccountId _mwpawllWebPropertyId
               _mwpawllStartIndex
               _mwpawllMaxResults

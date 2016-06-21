@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Operations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type OperationsListResource =
 -- Cloud SQL instance in the reverse chronological order of the start time.
 --
 -- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList
+data OperationsList = OperationsList'
     { _olProject    :: !Text
     , _olPageToken  :: !(Maybe Text)
     , _olMaxResults :: !(Maybe (Textual Word32))
@@ -84,7 +84,7 @@ operationsList
     -> Text -- ^ 'olInstance'
     -> OperationsList
 operationsList pOlProject_ pOlInstance_ =
-    OperationsList
+    OperationsList'
     { _olProject = pOlProject_
     , _olPageToken = Nothing
     , _olMaxResults = Nothing
@@ -115,7 +115,10 @@ olInstance
 
 instance GoogleRequest OperationsList where
         type Rs OperationsList = OperationsListResponse
-        requestClient OperationsList{..}
+        type Scopes OperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient OperationsList'{..}
           = go _olProject (Just _olInstance) _olPageToken
               _olMaxResults
               (Just AltJSON)

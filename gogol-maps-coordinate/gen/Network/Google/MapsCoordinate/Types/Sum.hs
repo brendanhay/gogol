@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.MapsCoordinate.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -35,21 +35,21 @@ data JobsPatchProgress
     | Obsolete
       -- ^ @OBSOLETE@
       -- Obsolete
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable JobsPatchProgress
 
-instance FromText JobsPatchProgress where
-    fromText = \case
-        "COMPLETED" -> Just Completed
-        "IN_PROGRESS" -> Just InProgress
-        "NOT_ACCEPTED" -> Just NotAccepted
-        "NOT_STARTED" -> Just NotStarted
-        "OBSOLETE" -> Just Obsolete
-        _ -> Nothing
+instance FromHttpApiData JobsPatchProgress where
+    parseQueryParam = \case
+        "COMPLETED" -> Right Completed
+        "IN_PROGRESS" -> Right InProgress
+        "NOT_ACCEPTED" -> Right NotAccepted
+        "NOT_STARTED" -> Right NotStarted
+        "OBSOLETE" -> Right Obsolete
+        x -> Left ("Unable to parse JobsPatchProgress from: " <> x)
 
-instance ToText JobsPatchProgress where
-    toText = \case
+instance ToHttpApiData JobsPatchProgress where
+    toQueryParam = \case
         Completed -> "COMPLETED"
         InProgress -> "IN_PROGRESS"
         NotAccepted -> "NOT_ACCEPTED"
@@ -79,21 +79,21 @@ data JobsUpdateProgress
     | JUPObsolete
       -- ^ @OBSOLETE@
       -- Obsolete
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable JobsUpdateProgress
 
-instance FromText JobsUpdateProgress where
-    fromText = \case
-        "COMPLETED" -> Just JUPCompleted
-        "IN_PROGRESS" -> Just JUPInProgress
-        "NOT_ACCEPTED" -> Just JUPNotAccepted
-        "NOT_STARTED" -> Just JUPNotStarted
-        "OBSOLETE" -> Just JUPObsolete
-        _ -> Nothing
+instance FromHttpApiData JobsUpdateProgress where
+    parseQueryParam = \case
+        "COMPLETED" -> Right JUPCompleted
+        "IN_PROGRESS" -> Right JUPInProgress
+        "NOT_ACCEPTED" -> Right JUPNotAccepted
+        "NOT_STARTED" -> Right JUPNotStarted
+        "OBSOLETE" -> Right JUPObsolete
+        x -> Left ("Unable to parse JobsUpdateProgress from: " <> x)
 
-instance ToText JobsUpdateProgress where
-    toText = \case
+instance ToHttpApiData JobsUpdateProgress where
+    toQueryParam = \case
         JUPCompleted -> "COMPLETED"
         JUPInProgress -> "IN_PROGRESS"
         JUPNotAccepted -> "NOT_ACCEPTED"

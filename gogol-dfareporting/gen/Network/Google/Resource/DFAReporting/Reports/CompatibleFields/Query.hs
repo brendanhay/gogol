@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'ReportsCompatibleFieldsQuery' request conforms to.
 type ReportsCompatibleFieldsQueryResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -61,7 +61,7 @@ type ReportsCompatibleFieldsQueryResource =
 -- input report and user permissions.
 --
 -- /See:/ 'reportsCompatibleFieldsQuery' smart constructor.
-data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery
+data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery'
     { _rcfqProFileId :: !(Textual Int64)
     , _rcfqPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -78,7 +78,7 @@ reportsCompatibleFieldsQuery
     -> Report -- ^ 'rcfqPayload'
     -> ReportsCompatibleFieldsQuery
 reportsCompatibleFieldsQuery pRcfqProFileId_ pRcfqPayload_ =
-    ReportsCompatibleFieldsQuery
+    ReportsCompatibleFieldsQuery'
     { _rcfqProFileId = _Coerce # pRcfqProFileId_
     , _rcfqPayload = pRcfqPayload_
     }
@@ -99,7 +99,9 @@ instance GoogleRequest ReportsCompatibleFieldsQuery
          where
         type Rs ReportsCompatibleFieldsQuery =
              CompatibleFields
-        requestClient ReportsCompatibleFieldsQuery{..}
+        type Scopes ReportsCompatibleFieldsQuery =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient ReportsCompatibleFieldsQuery'{..}
           = go _rcfqProFileId (Just AltJSON) _rcfqPayload
               dFAReportingService
           where go

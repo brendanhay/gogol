@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Advertisers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersGet' request conforms to.
 type AdvertisersGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
@@ -54,7 +54,7 @@ type AdvertisersGetResource =
 -- | Gets one advertiser by ID.
 --
 -- /See:/ 'advertisersGet' smart constructor.
-data AdvertisersGet = AdvertisersGet
+data AdvertisersGet = AdvertisersGet'
     { _advProFileId :: !(Textual Int64)
     , _advId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ advertisersGet
     -> Int64 -- ^ 'advId'
     -> AdvertisersGet
 advertisersGet pAdvProFileId_ pAdvId_ =
-    AdvertisersGet
+    AdvertisersGet'
     { _advProFileId = _Coerce # pAdvProFileId_
     , _advId = _Coerce # pAdvId_
     }
@@ -89,7 +89,9 @@ advId
 
 instance GoogleRequest AdvertisersGet where
         type Rs AdvertisersGet = Advertiser
-        requestClient AdvertisersGet{..}
+        type Scopes AdvertisersGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdvertisersGet'{..}
           = go _advProFileId _advId (Just AltJSON)
               dFAReportingService
           where go

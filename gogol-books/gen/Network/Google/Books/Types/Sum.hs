@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Books.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -26,18 +26,18 @@ data VolumesListProjection
     | Lite
       -- ^ @lite@
       -- Includes a subset of fields in volumeInfo and accessInfo.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListProjection
 
-instance FromText VolumesListProjection where
-    fromText = \case
-        "full" -> Just Full
-        "lite" -> Just Lite
-        _ -> Nothing
+instance FromHttpApiData VolumesListProjection where
+    parseQueryParam = \case
+        "full" -> Right Full
+        "lite" -> Right Lite
+        x -> Left ("Unable to parse VolumesListProjection from: " <> x)
 
-instance ToText VolumesListProjection where
-    toText = \case
+instance ToHttpApiData VolumesListProjection where
+    toQueryParam = \case
         Full -> "full"
         Lite -> "lite"
 
@@ -55,18 +55,18 @@ data MyLibraryBookshelvesVolumesListProjection
     | MLBVLPLite
       -- ^ @lite@
       -- Includes a subset of fields in volumeInfo and accessInfo.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyLibraryBookshelvesVolumesListProjection
 
-instance FromText MyLibraryBookshelvesVolumesListProjection where
-    fromText = \case
-        "full" -> Just MLBVLPFull
-        "lite" -> Just MLBVLPLite
-        _ -> Nothing
+instance FromHttpApiData MyLibraryBookshelvesVolumesListProjection where
+    parseQueryParam = \case
+        "full" -> Right MLBVLPFull
+        "lite" -> Right MLBVLPLite
+        x -> Left ("Unable to parse MyLibraryBookshelvesVolumesListProjection from: " <> x)
 
-instance ToText MyLibraryBookshelvesVolumesListProjection where
-    toText = \case
+instance ToHttpApiData MyLibraryBookshelvesVolumesListProjection where
+    toQueryParam = \case
         MLBVLPFull -> "full"
         MLBVLPLite -> "lite"
 
@@ -84,18 +84,18 @@ data VolumesListOrderBy
     | Relevance
       -- ^ @relevance@
       -- Relevance to search terms.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListOrderBy
 
-instance FromText VolumesListOrderBy where
-    fromText = \case
-        "newest" -> Just Newest
-        "relevance" -> Just Relevance
-        _ -> Nothing
+instance FromHttpApiData VolumesListOrderBy where
+    parseQueryParam = \case
+        "newest" -> Right Newest
+        "relevance" -> Right Relevance
+        x -> Left ("Unable to parse VolumesListOrderBy from: " <> x)
 
-instance ToText VolumesListOrderBy where
-    toText = \case
+instance ToHttpApiData VolumesListOrderBy where
+    toQueryParam = \case
         Newest -> "newest"
         Relevance -> "relevance"
 
@@ -113,18 +113,18 @@ data VolumesListLibraryRestrict
     | NoRestrict
       -- ^ @no-restrict@
       -- Do not restrict based on user\'s library.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListLibraryRestrict
 
-instance FromText VolumesListLibraryRestrict where
-    fromText = \case
-        "my-library" -> Just MyLibrary
-        "no-restrict" -> Just NoRestrict
-        _ -> Nothing
+instance FromHttpApiData VolumesListLibraryRestrict where
+    parseQueryParam = \case
+        "my-library" -> Right MyLibrary
+        "no-restrict" -> Right NoRestrict
+        x -> Left ("Unable to parse VolumesListLibraryRestrict from: " <> x)
 
-instance ToText VolumesListLibraryRestrict where
-    toText = \case
+instance ToHttpApiData VolumesListLibraryRestrict where
+    toQueryParam = \case
         MyLibrary -> "my-library"
         NoRestrict -> "no-restrict"
 
@@ -139,17 +139,17 @@ data MyLibraryBookshelvesRemoveVolumeReason
     = Onboarding
       -- ^ @ONBOARDING@
       -- Samples removed from the Onboarding flow.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyLibraryBookshelvesRemoveVolumeReason
 
-instance FromText MyLibraryBookshelvesRemoveVolumeReason where
-    fromText = \case
-        "ONBOARDING" -> Just Onboarding
-        _ -> Nothing
+instance FromHttpApiData MyLibraryBookshelvesRemoveVolumeReason where
+    parseQueryParam = \case
+        "ONBOARDING" -> Right Onboarding
+        x -> Left ("Unable to parse MyLibraryBookshelvesRemoveVolumeReason from: " <> x)
 
-instance ToText MyLibraryBookshelvesRemoveVolumeReason where
-    toText = \case
+instance ToHttpApiData MyLibraryBookshelvesRemoveVolumeReason where
+    toQueryParam = \case
         Onboarding -> "ONBOARDING"
 
 instance FromJSON MyLibraryBookshelvesRemoveVolumeReason where
@@ -167,18 +167,18 @@ data OnboardingListCategoryVolumesMaxAllowedMaturityRating
     | NotMature
       -- ^ @not-mature@
       -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OnboardingListCategoryVolumesMaxAllowedMaturityRating
 
-instance FromText OnboardingListCategoryVolumesMaxAllowedMaturityRating where
-    fromText = \case
-        "mature" -> Just Mature
-        "not-mature" -> Just NotMature
-        _ -> Nothing
+instance FromHttpApiData OnboardingListCategoryVolumesMaxAllowedMaturityRating where
+    parseQueryParam = \case
+        "mature" -> Right Mature
+        "not-mature" -> Right NotMature
+        x -> Left ("Unable to parse OnboardingListCategoryVolumesMaxAllowedMaturityRating from: " <> x)
 
-instance ToText OnboardingListCategoryVolumesMaxAllowedMaturityRating where
-    toText = \case
+instance ToHttpApiData OnboardingListCategoryVolumesMaxAllowedMaturityRating where
+    toQueryParam = \case
         Mature -> "mature"
         NotMature -> "not-mature"
 
@@ -193,17 +193,17 @@ data VolumesListDownload
     = Epub
       -- ^ @epub@
       -- All volumes with epub.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListDownload
 
-instance FromText VolumesListDownload where
-    fromText = \case
-        "epub" -> Just Epub
-        _ -> Nothing
+instance FromHttpApiData VolumesListDownload where
+    parseQueryParam = \case
+        "epub" -> Right Epub
+        x -> Left ("Unable to parse VolumesListDownload from: " <> x)
 
-instance ToText VolumesListDownload where
-    toText = \case
+instance ToHttpApiData VolumesListDownload where
+    toQueryParam = \case
         Epub -> "epub"
 
 instance FromJSON VolumesListDownload where
@@ -220,18 +220,18 @@ data VolumesGetProjection
     | VGPLite
       -- ^ @lite@
       -- Includes a subset of fields in volumeInfo and accessInfo.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesGetProjection
 
-instance FromText VolumesGetProjection where
-    fromText = \case
-        "full" -> Just VGPFull
-        "lite" -> Just VGPLite
-        _ -> Nothing
+instance FromHttpApiData VolumesGetProjection where
+    parseQueryParam = \case
+        "full" -> Right VGPFull
+        "lite" -> Right VGPLite
+        x -> Left ("Unable to parse VolumesGetProjection from: " <> x)
 
-instance ToText VolumesGetProjection where
-    toText = \case
+instance ToHttpApiData VolumesGetProjection where
+    toQueryParam = \case
         VGPFull -> "full"
         VGPLite -> "lite"
 
@@ -252,19 +252,19 @@ data VolumesAssociatedListAssociation
     | RelatedForPlay
       -- ^ @related-for-play@
       -- Related volumes for Play Store.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesAssociatedListAssociation
 
-instance FromText VolumesAssociatedListAssociation where
-    fromText = \case
-        "end-of-sample" -> Just EndOfSample
-        "end-of-volume" -> Just EndOfVolume
-        "related-for-play" -> Just RelatedForPlay
-        _ -> Nothing
+instance FromHttpApiData VolumesAssociatedListAssociation where
+    parseQueryParam = \case
+        "end-of-sample" -> Right EndOfSample
+        "end-of-volume" -> Right EndOfVolume
+        "related-for-play" -> Right RelatedForPlay
+        x -> Left ("Unable to parse VolumesAssociatedListAssociation from: " <> x)
 
-instance ToText VolumesAssociatedListAssociation where
-    toText = \case
+instance ToHttpApiData VolumesAssociatedListAssociation where
+    toQueryParam = \case
         EndOfSample -> "end-of-sample"
         EndOfVolume -> "end-of-volume"
         RelatedForPlay -> "related-for-play"
@@ -283,18 +283,18 @@ data VolumesRecommendedRateRating
     | NotInterested
       -- ^ @NOT_INTERESTED@
       -- Rating indicating a negative dismissal of a volume.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesRecommendedRateRating
 
-instance FromText VolumesRecommendedRateRating where
-    fromText = \case
-        "HAVE_IT" -> Just HaveIt
-        "NOT_INTERESTED" -> Just NotInterested
-        _ -> Nothing
+instance FromHttpApiData VolumesRecommendedRateRating where
+    parseQueryParam = \case
+        "HAVE_IT" -> Right HaveIt
+        "NOT_INTERESTED" -> Right NotInterested
+        x -> Left ("Unable to parse VolumesRecommendedRateRating from: " <> x)
 
-instance ToText VolumesRecommendedRateRating where
-    toText = \case
+instance ToHttpApiData VolumesRecommendedRateRating where
+    toQueryParam = \case
         HaveIt -> "HAVE_IT"
         NotInterested -> "NOT_INTERESTED"
 
@@ -315,19 +315,19 @@ data VolumesUserUploadedListProcessingState
     | Running
       -- ^ @RUNNING@
       -- The volume processing is not completed.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesUserUploadedListProcessingState
 
-instance FromText VolumesUserUploadedListProcessingState where
-    fromText = \case
-        "COMPLETED_FAILED" -> Just CompletedFailed
-        "COMPLETED_SUCCESS" -> Just CompletedSuccess
-        "RUNNING" -> Just Running
-        _ -> Nothing
+instance FromHttpApiData VolumesUserUploadedListProcessingState where
+    parseQueryParam = \case
+        "COMPLETED_FAILED" -> Right CompletedFailed
+        "COMPLETED_SUCCESS" -> Right CompletedSuccess
+        "RUNNING" -> Right Running
+        x -> Left ("Unable to parse VolumesUserUploadedListProcessingState from: " <> x)
 
-instance ToText VolumesUserUploadedListProcessingState where
-    toText = \case
+instance ToHttpApiData VolumesUserUploadedListProcessingState where
+    toQueryParam = \case
         CompletedFailed -> "COMPLETED_FAILED"
         CompletedSuccess -> "COMPLETED_SUCCESS"
         Running -> "RUNNING"
@@ -343,17 +343,17 @@ data MyConfigSyncVolumeLicensesFeatures
     = Rentals
       -- ^ @RENTALS@
       -- Client supports rentals.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyConfigSyncVolumeLicensesFeatures
 
-instance FromText MyConfigSyncVolumeLicensesFeatures where
-    fromText = \case
-        "RENTALS" -> Just Rentals
-        _ -> Nothing
+instance FromHttpApiData MyConfigSyncVolumeLicensesFeatures where
+    parseQueryParam = \case
+        "RENTALS" -> Right Rentals
+        x -> Left ("Unable to parse MyConfigSyncVolumeLicensesFeatures from: " <> x)
 
-instance ToText MyConfigSyncVolumeLicensesFeatures where
-    toText = \case
+instance ToHttpApiData MyConfigSyncVolumeLicensesFeatures where
+    toQueryParam = \case
         Rentals -> "RENTALS"
 
 instance FromJSON MyConfigSyncVolumeLicensesFeatures where
@@ -371,18 +371,18 @@ data VolumesAssociatedListMaxAllowedMaturityRating
     | VALMAMRNotMature
       -- ^ @not-mature@
       -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesAssociatedListMaxAllowedMaturityRating
 
-instance FromText VolumesAssociatedListMaxAllowedMaturityRating where
-    fromText = \case
-        "mature" -> Just VALMAMRMature
-        "not-mature" -> Just VALMAMRNotMature
-        _ -> Nothing
+instance FromHttpApiData VolumesAssociatedListMaxAllowedMaturityRating where
+    parseQueryParam = \case
+        "mature" -> Right VALMAMRMature
+        "not-mature" -> Right VALMAMRNotMature
+        x -> Left ("Unable to parse VolumesAssociatedListMaxAllowedMaturityRating from: " <> x)
 
-instance ToText VolumesAssociatedListMaxAllowedMaturityRating where
-    toText = \case
+instance ToHttpApiData VolumesAssociatedListMaxAllowedMaturityRating where
+    toQueryParam = \case
         VALMAMRMature -> "mature"
         VALMAMRNotMature -> "not-mature"
 
@@ -409,21 +409,21 @@ data VolumesListFilter
     | VLFPartial
       -- ^ @partial@
       -- Public able to see parts of text.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListFilter
 
-instance FromText VolumesListFilter where
-    fromText = \case
-        "ebooks" -> Just VLFEbooks
-        "free-ebooks" -> Just VLFFreeEbooks
-        "full" -> Just VLFFull
-        "paid-ebooks" -> Just VLFPaidEbooks
-        "partial" -> Just VLFPartial
-        _ -> Nothing
+instance FromHttpApiData VolumesListFilter where
+    parseQueryParam = \case
+        "ebooks" -> Right VLFEbooks
+        "free-ebooks" -> Right VLFFreeEbooks
+        "full" -> Right VLFFull
+        "paid-ebooks" -> Right VLFPaidEbooks
+        "partial" -> Right VLFPartial
+        x -> Left ("Unable to parse VolumesListFilter from: " <> x)
 
-instance ToText VolumesListFilter where
-    toText = \case
+instance ToHttpApiData VolumesListFilter where
+    toQueryParam = \case
         VLFEbooks -> "ebooks"
         VLFFreeEbooks -> "free-ebooks"
         VLFFull -> "full"
@@ -445,18 +445,18 @@ data VolumesRecommendedListMaxAllowedMaturityRating
     | VRLMAMRNotMature
       -- ^ @not-mature@
       -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesRecommendedListMaxAllowedMaturityRating
 
-instance FromText VolumesRecommendedListMaxAllowedMaturityRating where
-    fromText = \case
-        "mature" -> Just VRLMAMRMature
-        "not-mature" -> Just VRLMAMRNotMature
-        _ -> Nothing
+instance FromHttpApiData VolumesRecommendedListMaxAllowedMaturityRating where
+    parseQueryParam = \case
+        "mature" -> Right VRLMAMRMature
+        "not-mature" -> Right VRLMAMRNotMature
+        x -> Left ("Unable to parse VolumesRecommendedListMaxAllowedMaturityRating from: " <> x)
 
-instance ToText VolumesRecommendedListMaxAllowedMaturityRating where
-    toText = \case
+instance ToHttpApiData VolumesRecommendedListMaxAllowedMaturityRating where
+    toQueryParam = \case
         VRLMAMRMature -> "mature"
         VRLMAMRNotMature -> "not-mature"
 
@@ -477,19 +477,19 @@ data MyLibraryBookshelvesAddVolumeReason
     | MLBAVROnboarding
       -- ^ @ONBOARDING@
       -- Volumes added from the Onboarding flow.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyLibraryBookshelvesAddVolumeReason
 
-instance FromText MyLibraryBookshelvesAddVolumeReason where
-    fromText = \case
-        "IOS_PREX" -> Just MLBAVRIosPrex
-        "IOS_SEARCH" -> Just MLBAVRIosSearch
-        "ONBOARDING" -> Just MLBAVROnboarding
-        _ -> Nothing
+instance FromHttpApiData MyLibraryBookshelvesAddVolumeReason where
+    parseQueryParam = \case
+        "IOS_PREX" -> Right MLBAVRIosPrex
+        "IOS_SEARCH" -> Right MLBAVRIosSearch
+        "ONBOARDING" -> Right MLBAVROnboarding
+        x -> Left ("Unable to parse MyLibraryBookshelvesAddVolumeReason from: " <> x)
 
-instance ToText MyLibraryBookshelvesAddVolumeReason where
-    toText = \case
+instance ToHttpApiData MyLibraryBookshelvesAddVolumeReason where
+    toQueryParam = \case
         MLBAVRIosPrex -> "IOS_PREX"
         MLBAVRIosSearch -> "IOS_SEARCH"
         MLBAVROnboarding -> "ONBOARDING"
@@ -523,23 +523,23 @@ data VolumesMybooksListAcquireMethod
     | Uploaded
       -- ^ @UPLOADED@
       -- User uploaded books
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesMybooksListAcquireMethod
 
-instance FromText VolumesMybooksListAcquireMethod where
-    fromText = \case
-        "PREORDERED" -> Just PreOrdered
-        "PREVIOUSLY_RENTED" -> Just PreviouslyRented
-        "PUBLIC_DOMAIN" -> Just PublicDomain
-        "PURCHASED" -> Just Purchased
-        "RENTED" -> Just Rented
-        "SAMPLE" -> Just Sample
-        "UPLOADED" -> Just Uploaded
-        _ -> Nothing
+instance FromHttpApiData VolumesMybooksListAcquireMethod where
+    parseQueryParam = \case
+        "PREORDERED" -> Right PreOrdered
+        "PREVIOUSLY_RENTED" -> Right PreviouslyRented
+        "PUBLIC_DOMAIN" -> Right PublicDomain
+        "PURCHASED" -> Right Purchased
+        "RENTED" -> Right Rented
+        "SAMPLE" -> Right Sample
+        "UPLOADED" -> Right Uploaded
+        x -> Left ("Unable to parse VolumesMybooksListAcquireMethod from: " <> x)
 
-instance ToText VolumesMybooksListAcquireMethod where
-    toText = \case
+instance ToHttpApiData VolumesMybooksListAcquireMethod where
+    toQueryParam = \case
         PreOrdered -> "PREORDERED"
         PreviouslyRented -> "PREVIOUSLY_RENTED"
         PublicDomain -> "PUBLIC_DOMAIN"
@@ -563,18 +563,18 @@ data PersonalizedstreamGetMaxAllowedMaturityRating
     | PGMAMRNotMature
       -- ^ @not-mature@
       -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PersonalizedstreamGetMaxAllowedMaturityRating
 
-instance FromText PersonalizedstreamGetMaxAllowedMaturityRating where
-    fromText = \case
-        "mature" -> Just PGMAMRMature
-        "not-mature" -> Just PGMAMRNotMature
-        _ -> Nothing
+instance FromHttpApiData PersonalizedstreamGetMaxAllowedMaturityRating where
+    parseQueryParam = \case
+        "mature" -> Right PGMAMRMature
+        "not-mature" -> Right PGMAMRNotMature
+        x -> Left ("Unable to parse PersonalizedstreamGetMaxAllowedMaturityRating from: " <> x)
 
-instance ToText PersonalizedstreamGetMaxAllowedMaturityRating where
-    toText = \case
+instance ToHttpApiData PersonalizedstreamGetMaxAllowedMaturityRating where
+    toQueryParam = \case
         PGMAMRMature -> "mature"
         PGMAMRNotMature -> "not-mature"
 
@@ -595,19 +595,19 @@ data VolumesListPrintType
     | Magazines
       -- ^ @magazines@
       -- Just magazines.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListPrintType
 
-instance FromText VolumesListPrintType where
-    fromText = \case
-        "all" -> Just All
-        "books" -> Just Books
-        "magazines" -> Just Magazines
-        _ -> Nothing
+instance FromHttpApiData VolumesListPrintType where
+    parseQueryParam = \case
+        "all" -> Right All
+        "books" -> Right Books
+        "magazines" -> Right Magazines
+        x -> Left ("Unable to parse VolumesListPrintType from: " <> x)
 
-instance ToText VolumesListPrintType where
-    toText = \case
+instance ToHttpApiData VolumesListPrintType where
+    toQueryParam = \case
         All -> "all"
         Books -> "books"
         Magazines -> "magazines"
@@ -630,19 +630,19 @@ data VolumesMybooksListProcessingState
     | VMLPSRunning
       -- ^ @RUNNING@
       -- The volume processing is not completed.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesMybooksListProcessingState
 
-instance FromText VolumesMybooksListProcessingState where
-    fromText = \case
-        "COMPLETED_FAILED" -> Just VMLPSCompletedFailed
-        "COMPLETED_SUCCESS" -> Just VMLPSCompletedSuccess
-        "RUNNING" -> Just VMLPSRunning
-        _ -> Nothing
+instance FromHttpApiData VolumesMybooksListProcessingState where
+    parseQueryParam = \case
+        "COMPLETED_FAILED" -> Right VMLPSCompletedFailed
+        "COMPLETED_SUCCESS" -> Right VMLPSCompletedSuccess
+        "RUNNING" -> Right VMLPSRunning
+        x -> Left ("Unable to parse VolumesMybooksListProcessingState from: " <> x)
 
-instance ToText VolumesMybooksListProcessingState where
-    toText = \case
+instance ToHttpApiData VolumesMybooksListProcessingState where
+    toQueryParam = \case
         VMLPSCompletedFailed -> "COMPLETED_FAILED"
         VMLPSCompletedSuccess -> "COMPLETED_SUCCESS"
         VMLPSRunning -> "RUNNING"
@@ -665,19 +665,19 @@ data MyConfigRequestAccessLicenseTypes
     | Download
       -- ^ @DOWNLOAD@
       -- Offline download access license.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyConfigRequestAccessLicenseTypes
 
-instance FromText MyConfigRequestAccessLicenseTypes where
-    fromText = \case
-        "BOTH" -> Just Both
-        "CONCURRENT" -> Just Concurrent
-        "DOWNLOAD" -> Just Download
-        _ -> Nothing
+instance FromHttpApiData MyConfigRequestAccessLicenseTypes where
+    parseQueryParam = \case
+        "BOTH" -> Right Both
+        "CONCURRENT" -> Right Concurrent
+        "DOWNLOAD" -> Right Download
+        x -> Left ("Unable to parse MyConfigRequestAccessLicenseTypes from: " <> x)
 
-instance ToText MyConfigRequestAccessLicenseTypes where
-    toText = \case
+instance ToHttpApiData MyConfigRequestAccessLicenseTypes where
+    toQueryParam = \case
         Both -> "BOTH"
         Concurrent -> "CONCURRENT"
         Download -> "DOWNLOAD"
@@ -708,22 +708,22 @@ data MyLibraryReadingPositionsSetPositionAction
     | Search
       -- ^ @search@
       -- User chose search results within volume.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyLibraryReadingPositionsSetPositionAction
 
-instance FromText MyLibraryReadingPositionsSetPositionAction where
-    fromText = \case
-        "bookmark" -> Just Bookmark
-        "chapter" -> Just Chapter
-        "next-page" -> Just NextPage
-        "prev-page" -> Just PrevPage
-        "scroll" -> Just Scroll
-        "search" -> Just Search
-        _ -> Nothing
+instance FromHttpApiData MyLibraryReadingPositionsSetPositionAction where
+    parseQueryParam = \case
+        "bookmark" -> Right Bookmark
+        "chapter" -> Right Chapter
+        "next-page" -> Right NextPage
+        "prev-page" -> Right PrevPage
+        "scroll" -> Right Scroll
+        "search" -> Right Search
+        x -> Left ("Unable to parse MyLibraryReadingPositionsSetPositionAction from: " <> x)
 
-instance ToText MyLibraryReadingPositionsSetPositionAction where
-    toText = \case
+instance ToHttpApiData MyLibraryReadingPositionsSetPositionAction where
+    toQueryParam = \case
         Bookmark -> "bookmark"
         Chapter -> "chapter"
         NextPage -> "next-page"

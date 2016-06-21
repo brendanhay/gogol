@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type InstanceGroupsSetNamedPortsResource =
 -- | Sets the named ports for the specified instance group.
 --
 -- /See:/ 'instanceGroupsSetNamedPorts' smart constructor.
-data InstanceGroupsSetNamedPorts = InstanceGroupsSetNamedPorts
+data InstanceGroupsSetNamedPorts = InstanceGroupsSetNamedPorts'
     { _igsnpProject       :: !Text
     , _igsnpZone          :: !Text
     , _igsnpPayload       :: !InstanceGroupsSetNamedPortsRequest
@@ -86,14 +86,14 @@ instanceGroupsSetNamedPorts
     -> Text -- ^ 'igsnpInstanceGroup'
     -> InstanceGroupsSetNamedPorts
 instanceGroupsSetNamedPorts pIgsnpProject_ pIgsnpZone_ pIgsnpPayload_ pIgsnpInstanceGroup_ =
-    InstanceGroupsSetNamedPorts
+    InstanceGroupsSetNamedPorts'
     { _igsnpProject = pIgsnpProject_
     , _igsnpZone = pIgsnpZone_
     , _igsnpPayload = pIgsnpPayload_
     , _igsnpInstanceGroup = pIgsnpInstanceGroup_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igsnpProject :: Lens' InstanceGroupsSetNamedPorts Text
 igsnpProject
   = lens _igsnpProject (\ s a -> s{_igsnpProject = a})
@@ -117,7 +117,10 @@ igsnpInstanceGroup
 instance GoogleRequest InstanceGroupsSetNamedPorts
          where
         type Rs InstanceGroupsSetNamedPorts = Operation
-        requestClient InstanceGroupsSetNamedPorts{..}
+        type Scopes InstanceGroupsSetNamedPorts =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceGroupsSetNamedPorts'{..}
           = go _igsnpProject _igsnpZone _igsnpInstanceGroup
               (Just AltJSON)
               _igsnpPayload

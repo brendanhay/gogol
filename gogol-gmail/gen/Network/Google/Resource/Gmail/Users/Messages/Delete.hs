@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Messages.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersMessagesDeleteResource =
 -- operation cannot be undone. Prefer messages.trash instead.
 --
 -- /See:/ 'usersMessagesDelete' smart constructor.
-data UsersMessagesDelete = UsersMessagesDelete
+data UsersMessagesDelete = UsersMessagesDelete'
     { _umdUserId :: !Text
     , _umdId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,10 +70,9 @@ data UsersMessagesDelete = UsersMessagesDelete
 -- * 'umdId'
 usersMessagesDelete
     :: Text -- ^ 'umdId'
-    -> Text
     -> UsersMessagesDelete
-usersMessagesDelete pUmdUserId_ pUmdId_ =
-    UsersMessagesDelete
+usersMessagesDelete pUmdId_ =
+    UsersMessagesDelete'
     { _umdUserId = "me"
     , _umdId = pUmdId_
     }
@@ -90,7 +89,9 @@ umdId = lens _umdId (\ s a -> s{_umdId = a})
 
 instance GoogleRequest UsersMessagesDelete where
         type Rs UsersMessagesDelete = ()
-        requestClient UsersMessagesDelete{..}
+        type Scopes UsersMessagesDelete =
+             '["https://mail.google.com/"]
+        requestClient UsersMessagesDelete'{..}
           = go _umdUserId _umdId (Just AltJSON) gmailService
           where go
                   = buildClient

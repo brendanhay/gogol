@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlacementStrategies.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesGet' request conforms to.
 type PlacementStrategiesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -55,7 +55,7 @@ type PlacementStrategiesGetResource =
 -- | Gets one placement strategy by ID.
 --
 -- /See:/ 'placementStrategiesGet' smart constructor.
-data PlacementStrategiesGet = PlacementStrategiesGet
+data PlacementStrategiesGet = PlacementStrategiesGet'
     { _psgProFileId :: !(Textual Int64)
     , _psgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementStrategiesGet
     -> Int64 -- ^ 'psgId'
     -> PlacementStrategiesGet
 placementStrategiesGet pPsgProFileId_ pPsgId_ =
-    PlacementStrategiesGet
+    PlacementStrategiesGet'
     { _psgProFileId = _Coerce # pPsgProFileId_
     , _psgId = _Coerce # pPsgId_
     }
@@ -90,7 +90,9 @@ psgId
 
 instance GoogleRequest PlacementStrategiesGet where
         type Rs PlacementStrategiesGet = PlacementStrategy
-        requestClient PlacementStrategiesGet{..}
+        type Scopes PlacementStrategiesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementStrategiesGet'{..}
           = go _psgProFileId _psgId (Just AltJSON)
               dFAReportingService
           where go

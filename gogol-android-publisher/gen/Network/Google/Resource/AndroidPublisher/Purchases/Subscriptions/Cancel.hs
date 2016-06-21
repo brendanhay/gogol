@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type PurchasesSubscriptionsCancelResource =
 -- until its expiration time.
 --
 -- /See:/ 'purchasesSubscriptionsCancel' smart constructor.
-data PurchasesSubscriptionsCancel = PurchasesSubscriptionsCancel
+data PurchasesSubscriptionsCancel = PurchasesSubscriptionsCancel'
     { _pscPackageName    :: !Text
     , _pscToken          :: !Text
     , _pscSubscriptionId :: !Text
@@ -81,7 +81,7 @@ purchasesSubscriptionsCancel
     -> Text -- ^ 'pscSubscriptionId'
     -> PurchasesSubscriptionsCancel
 purchasesSubscriptionsCancel pPscPackageName_ pPscToken_ pPscSubscriptionId_ =
-    PurchasesSubscriptionsCancel
+    PurchasesSubscriptionsCancel'
     { _pscPackageName = pPscPackageName_
     , _pscToken = pPscToken_
     , _pscSubscriptionId = pPscSubscriptionId_
@@ -108,7 +108,9 @@ pscSubscriptionId
 instance GoogleRequest PurchasesSubscriptionsCancel
          where
         type Rs PurchasesSubscriptionsCancel = ()
-        requestClient PurchasesSubscriptionsCancel{..}
+        type Scopes PurchasesSubscriptionsCancel =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient PurchasesSubscriptionsCancel'{..}
           = go _pscPackageName _pscSubscriptionId _pscToken
               (Just AltJSON)
               androidPublisherService

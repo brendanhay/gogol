@@ -14,16 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudTrace.Projects.PatchTraces
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the existing traces specified by PatchTracesRequest and inserts
--- the new traces. Any existing trace or span fields included in an update
--- are overwritten by the update, and any additional fields in an update
--- are merged with the existing trace data.
+-- Sends new traces to Stackdriver Trace or updates existing traces. If the
+-- ID of a trace that you send matches that of an existing trace, any
+-- fields in the existing trace and its spans are overwritten by the
+-- provided values, and any new fields provided are merged with the
+-- existing trace data. If the ID does not match, a new trace is created.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @cloudtrace.projects.patchTraces@.
 module Network.Google.Resource.CloudTrace.Projects.PatchTraces
@@ -67,13 +68,14 @@ type ProjectsPatchTracesResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Traces :> Patch '[JSON] Empty
 
--- | Updates the existing traces specified by PatchTracesRequest and inserts
--- the new traces. Any existing trace or span fields included in an update
--- are overwritten by the update, and any additional fields in an update
--- are merged with the existing trace data.
+-- | Sends new traces to Stackdriver Trace or updates existing traces. If the
+-- ID of a trace that you send matches that of an existing trace, any
+-- fields in the existing trace and its spans are overwritten by the
+-- provided values, and any new fields provided are merged with the
+-- existing trace data. If the ID does not match, a new trace is created.
 --
 -- /See:/ 'projectsPatchTraces' smart constructor.
-data ProjectsPatchTraces = ProjectsPatchTraces
+data ProjectsPatchTraces = ProjectsPatchTraces'
     { _pptXgafv          :: !(Maybe Text)
     , _pptUploadProtocol :: !(Maybe Text)
     , _pptPp             :: !Bool
@@ -111,7 +113,7 @@ projectsPatchTraces
     -> Text -- ^ 'pptProjectId'
     -> ProjectsPatchTraces
 projectsPatchTraces pPptPayload_ pPptProjectId_ =
-    ProjectsPatchTraces
+    ProjectsPatchTraces'
     { _pptXgafv = Nothing
     , _pptUploadProtocol = Nothing
     , _pptPp = True
@@ -160,7 +162,7 @@ pptBearerToken
   = lens _pptBearerToken
       (\ s a -> s{_pptBearerToken = a})
 
--- | The project id of the trace to patch.
+-- | ID of the Cloud project where the trace data is stored.
 pptProjectId :: Lens' ProjectsPatchTraces Text
 pptProjectId
   = lens _pptProjectId (\ s a -> s{_pptProjectId = a})
@@ -172,7 +174,10 @@ pptCallback
 
 instance GoogleRequest ProjectsPatchTraces where
         type Rs ProjectsPatchTraces = Empty
-        requestClient ProjectsPatchTraces{..}
+        type Scopes ProjectsPatchTraces =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/trace.append"]
+        requestClient ProjectsPatchTraces'{..}
           = go _pptProjectId _pptXgafv _pptUploadProtocol
               (Just _pptPp)
               _pptAccessToken

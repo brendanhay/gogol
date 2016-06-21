@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.Sitemaps.Submit
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Submits a sitemap for a site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.submit@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.submit@.
 module Network.Google.Resource.Webmasters.Sitemaps.Submit
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type SitemapsSubmitResource =
 -- | Submits a sitemap for a site.
 --
 -- /See:/ 'sitemapsSubmit' smart constructor.
-data SitemapsSubmit = SitemapsSubmit
+data SitemapsSubmit = SitemapsSubmit'
     { _ssFeedpath :: !Text
     , _ssSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitemapsSubmit
     -> Text -- ^ 'ssSiteURL'
     -> SitemapsSubmit
 sitemapsSubmit pSsFeedpath_ pSsSiteURL_ =
-    SitemapsSubmit
+    SitemapsSubmit'
     { _ssFeedpath = pSsFeedpath_
     , _ssSiteURL = pSsSiteURL_
     }
@@ -90,7 +90,9 @@ ssSiteURL
 
 instance GoogleRequest SitemapsSubmit where
         type Rs SitemapsSubmit = ()
-        requestClient SitemapsSubmit{..}
+        type Scopes SitemapsSubmit =
+             '["https://www.googleapis.com/auth/webmasters"]
+        requestClient SitemapsSubmit'{..}
           = go _ssSiteURL _ssFeedpath (Just AltJSON)
               webmasterToolsService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Tasks.Tasks.Clear
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TasksClearResource =
 -- when retrieving all tasks for a task list.
 --
 -- /See:/ 'tasksClear' smart constructor.
-newtype TasksClear = TasksClear
+newtype TasksClear = TasksClear'
     { _tcTaskList :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ tasksClear
     :: Text -- ^ 'tcTaskList'
     -> TasksClear
 tasksClear pTcTaskList_ =
-    TasksClear
+    TasksClear'
     { _tcTaskList = pTcTaskList_
     }
 
@@ -80,7 +80,9 @@ tcTaskList
 
 instance GoogleRequest TasksClear where
         type Rs TasksClear = ()
-        requestClient TasksClear{..}
+        type Scopes TasksClear =
+             '["https://www.googleapis.com/auth/tasks"]
+        requestClient TasksClear'{..}
           = go _tcTaskList (Just AltJSON) appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TasksClearResource)

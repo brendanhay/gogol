@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Maps.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type MapsCreateResource =
 -- | Create a map asset.
 --
 -- /See:/ 'mapsCreate' smart constructor.
-newtype MapsCreate = MapsCreate
+newtype MapsCreate = MapsCreate'
     { _mcPayload :: Map
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ mapsCreate
     :: Map -- ^ 'mcPayload'
     -> MapsCreate
 mapsCreate pMcPayload_ =
-    MapsCreate
+    MapsCreate'
     { _mcPayload = pMcPayload_
     }
 
@@ -75,7 +75,9 @@ mcPayload
 
 instance GoogleRequest MapsCreate where
         type Rs MapsCreate = Map
-        requestClient MapsCreate{..}
+        type Scopes MapsCreate =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient MapsCreate'{..}
           = go (Just AltJSON) _mcPayload mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsCreateResource)

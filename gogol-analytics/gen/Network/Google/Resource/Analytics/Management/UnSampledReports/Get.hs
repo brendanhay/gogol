@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.UnSampledReports.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type ManagementUnSampledReportsGetResource =
 -- | Returns a single unsampled report.
 --
 -- /See:/ 'managementUnSampledReportsGet' smart constructor.
-data ManagementUnSampledReportsGet = ManagementUnSampledReportsGet
+data ManagementUnSampledReportsGet = ManagementUnSampledReportsGet'
     { _musrgWebPropertyId     :: !Text
     , _musrgProFileId         :: !Text
     , _musrgAccountId         :: !Text
@@ -87,7 +87,7 @@ managementUnSampledReportsGet
     -> Text -- ^ 'musrgUnSampledReportId'
     -> ManagementUnSampledReportsGet
 managementUnSampledReportsGet pMusrgWebPropertyId_ pMusrgProFileId_ pMusrgAccountId_ pMusrgUnSampledReportId_ =
-    ManagementUnSampledReportsGet
+    ManagementUnSampledReportsGet'
     { _musrgWebPropertyId = pMusrgWebPropertyId_
     , _musrgProFileId = pMusrgProFileId_
     , _musrgAccountId = pMusrgAccountId_
@@ -122,7 +122,11 @@ instance GoogleRequest ManagementUnSampledReportsGet
          where
         type Rs ManagementUnSampledReportsGet =
              UnSampledReport
-        requestClient ManagementUnSampledReportsGet{..}
+        type Scopes ManagementUnSampledReportsGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementUnSampledReportsGet'{..}
           = go _musrgAccountId _musrgWebPropertyId
               _musrgProFileId
               _musrgUnSampledReportId

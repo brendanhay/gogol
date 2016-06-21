@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Features.BatchInsert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -68,7 +68,7 @@ type TablesFeaturesBatchInsertResource =
 -- guide.
 --
 -- /See:/ 'tablesFeaturesBatchInsert' smart constructor.
-data TablesFeaturesBatchInsert = TablesFeaturesBatchInsert
+data TablesFeaturesBatchInsert = TablesFeaturesBatchInsert'
     { _tfbiPayload :: !FeaturesBatchInsertRequest
     , _tfbiId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,7 +85,7 @@ tablesFeaturesBatchInsert
     -> Text -- ^ 'tfbiId'
     -> TablesFeaturesBatchInsert
 tablesFeaturesBatchInsert pTfbiPayload_ pTfbiId_ =
-    TablesFeaturesBatchInsert
+    TablesFeaturesBatchInsert'
     { _tfbiPayload = pTfbiPayload_
     , _tfbiId = pTfbiId_
     }
@@ -102,7 +102,9 @@ tfbiId = lens _tfbiId (\ s a -> s{_tfbiId = a})
 instance GoogleRequest TablesFeaturesBatchInsert
          where
         type Rs TablesFeaturesBatchInsert = ()
-        requestClient TablesFeaturesBatchInsert{..}
+        type Scopes TablesFeaturesBatchInsert =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient TablesFeaturesBatchInsert'{..}
           = go _tfbiId (Just AltJSON) _tfbiPayload
               mapsEngineService
           where go

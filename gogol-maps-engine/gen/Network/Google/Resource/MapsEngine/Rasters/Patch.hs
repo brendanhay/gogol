@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Rasters.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type RastersPatchResource =
 -- | Mutate a raster asset.
 --
 -- /See:/ 'rastersPatch' smart constructor.
-data RastersPatch = RastersPatch
+data RastersPatch = RastersPatch'
     { _rppPayload :: !Raster
     , _rppId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ rastersPatch
     -> Text -- ^ 'rppId'
     -> RastersPatch
 rastersPatch pRppPayload_ pRppId_ =
-    RastersPatch
+    RastersPatch'
     { _rppPayload = pRppPayload_
     , _rppId = pRppId_
     }
@@ -86,7 +86,9 @@ rppId = lens _rppId (\ s a -> s{_rppId = a})
 
 instance GoogleRequest RastersPatch where
         type Rs RastersPatch = ()
-        requestClient RastersPatch{..}
+        type Scopes RastersPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient RastersPatch'{..}
           = go _rppId (Just AltJSON) _rppPayload
               mapsEngineService
           where go

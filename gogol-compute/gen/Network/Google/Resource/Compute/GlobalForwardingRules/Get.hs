@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.GlobalForwardingRules.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified ForwardingRule resource.
+-- Returns the specified ForwardingRule resource. Get a list of available
+-- forwarding rules by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalForwardingRules.get@.
 module Network.Google.Resource.Compute.GlobalForwardingRules.Get
@@ -53,10 +54,11 @@ type GlobalForwardingRulesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ForwardingRule
 
--- | Returns the specified ForwardingRule resource.
+-- | Returns the specified ForwardingRule resource. Get a list of available
+-- forwarding rules by making a list() request.
 --
 -- /See:/ 'globalForwardingRulesGet' smart constructor.
-data GlobalForwardingRulesGet = GlobalForwardingRulesGet
+data GlobalForwardingRulesGet = GlobalForwardingRulesGet'
     { _gfrgProject        :: !Text
     , _gfrgForwardingRule :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,12 +75,12 @@ globalForwardingRulesGet
     -> Text -- ^ 'gfrgForwardingRule'
     -> GlobalForwardingRulesGet
 globalForwardingRulesGet pGfrgProject_ pGfrgForwardingRule_ =
-    GlobalForwardingRulesGet
+    GlobalForwardingRulesGet'
     { _gfrgProject = pGfrgProject_
     , _gfrgForwardingRule = pGfrgForwardingRule_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 gfrgProject :: Lens' GlobalForwardingRulesGet Text
 gfrgProject
   = lens _gfrgProject (\ s a -> s{_gfrgProject = a})
@@ -91,7 +93,11 @@ gfrgForwardingRule
 
 instance GoogleRequest GlobalForwardingRulesGet where
         type Rs GlobalForwardingRulesGet = ForwardingRule
-        requestClient GlobalForwardingRulesGet{..}
+        type Scopes GlobalForwardingRulesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient GlobalForwardingRulesGet'{..}
           = go _gfrgProject _gfrgForwardingRule (Just AltJSON)
               computeService
           where go

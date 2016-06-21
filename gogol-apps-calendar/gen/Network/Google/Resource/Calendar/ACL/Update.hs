@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.ACL.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type ACLUpdateResource =
 -- | Updates an access control rule.
 --
 -- /See:/ 'aclUpdate' smart constructor.
-data ACLUpdate = ACLUpdate
+data ACLUpdate = ACLUpdate'
     { _auCalendarId :: !Text
     , _auRuleId     :: !Text
     , _auPayload    :: !ACLRule
@@ -77,7 +77,7 @@ aclUpdate
     -> ACLRule -- ^ 'auPayload'
     -> ACLUpdate
 aclUpdate pAuCalendarId_ pAuRuleId_ pAuPayload_ =
-    ACLUpdate
+    ACLUpdate'
     { _auCalendarId = pAuCalendarId_
     , _auRuleId = pAuRuleId_
     , _auPayload = pAuPayload_
@@ -101,7 +101,9 @@ auPayload
 
 instance GoogleRequest ACLUpdate where
         type Rs ACLUpdate = ACLRule
-        requestClient ACLUpdate{..}
+        type Scopes ACLUpdate =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient ACLUpdate'{..}
           = go _auCalendarId _auRuleId (Just AltJSON)
               _auPayload
               appsCalendarService

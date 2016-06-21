@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Placements.Generatetags
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PlacementsGeneratetags' request conforms to.
 type PlacementsGeneratetagsResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -62,7 +62,7 @@ type PlacementsGeneratetagsResource =
 -- | Generates tags for a placement.
 --
 -- /See:/ 'placementsGeneratetags' smart constructor.
-data PlacementsGeneratetags = PlacementsGeneratetags
+data PlacementsGeneratetags = PlacementsGeneratetags'
     { _pgsTagFormats   :: !(Maybe [PlacementsGeneratetagsTagFormats])
     , _pgsCampaignId   :: !(Maybe (Textual Int64))
     , _pgsProFileId    :: !(Textual Int64)
@@ -84,7 +84,7 @@ placementsGeneratetags
     :: Int64 -- ^ 'pgsProFileId'
     -> PlacementsGeneratetags
 placementsGeneratetags pPgsProFileId_ =
-    PlacementsGeneratetags
+    PlacementsGeneratetags'
     { _pgsTagFormats = Nothing
     , _pgsCampaignId = Nothing
     , _pgsProFileId = _Coerce # pPgsProFileId_
@@ -124,7 +124,9 @@ pgsPlacementIds
 instance GoogleRequest PlacementsGeneratetags where
         type Rs PlacementsGeneratetags =
              PlacementsGenerateTagsResponse
-        requestClient PlacementsGeneratetags{..}
+        type Scopes PlacementsGeneratetags =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementsGeneratetags'{..}
           = go _pgsProFileId (_pgsTagFormats ^. _Default)
               _pgsCampaignId
               (_pgsPlacementIds ^. _Default)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type ManagementProFileUserLinksUpdateResource =
 -- | Updates permissions for an existing user on the given view (profile).
 --
 -- /See:/ 'managementProFileUserLinksUpdate' smart constructor.
-data ManagementProFileUserLinksUpdate = ManagementProFileUserLinksUpdate
+data ManagementProFileUserLinksUpdate = ManagementProFileUserLinksUpdate'
     { _mpfuluWebPropertyId :: !Text
     , _mpfuluProFileId     :: !Text
     , _mpfuluPayload       :: !EntityUserLink
@@ -93,7 +93,7 @@ managementProFileUserLinksUpdate
     -> Text -- ^ 'mpfuluLinkId'
     -> ManagementProFileUserLinksUpdate
 managementProFileUserLinksUpdate pMpfuluWebPropertyId_ pMpfuluProFileId_ pMpfuluPayload_ pMpfuluAccountId_ pMpfuluLinkId_ =
-    ManagementProFileUserLinksUpdate
+    ManagementProFileUserLinksUpdate'
     { _mpfuluWebPropertyId = pMpfuluWebPropertyId_
     , _mpfuluProFileId = pMpfuluProFileId_
     , _mpfuluPayload = pMpfuluPayload_
@@ -134,7 +134,9 @@ instance GoogleRequest
          ManagementProFileUserLinksUpdate where
         type Rs ManagementProFileUserLinksUpdate =
              EntityUserLink
-        requestClient ManagementProFileUserLinksUpdate{..}
+        type Scopes ManagementProFileUserLinksUpdate =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
+        requestClient ManagementProFileUserLinksUpdate'{..}
           = go _mpfuluAccountId _mpfuluWebPropertyId
               _mpfuluProFileId
               _mpfuluLinkId

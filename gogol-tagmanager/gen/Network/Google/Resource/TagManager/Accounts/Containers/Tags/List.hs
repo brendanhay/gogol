@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Tags.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsContainersTagsListResource =
 -- | Lists all GTM Tags of a Container.
 --
 -- /See:/ 'accountsContainersTagsList' smart constructor.
-data AccountsContainersTagsList = AccountsContainersTagsList
+data AccountsContainersTagsList = AccountsContainersTagsList'
     { _actlContainerId :: !Text
     , _actlAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsContainersTagsList
     -> Text -- ^ 'actlAccountId'
     -> AccountsContainersTagsList
 accountsContainersTagsList pActlContainerId_ pActlAccountId_ =
-    AccountsContainersTagsList
+    AccountsContainersTagsList'
     { _actlContainerId = pActlContainerId_
     , _actlAccountId = pActlAccountId_
     }
@@ -93,7 +93,10 @@ actlAccountId
 instance GoogleRequest AccountsContainersTagsList
          where
         type Rs AccountsContainersTagsList = ListTagsResponse
-        requestClient AccountsContainersTagsList{..}
+        type Scopes AccountsContainersTagsList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersTagsList'{..}
           = go _actlAccountId _actlContainerId (Just AltJSON)
               tagManagerService
           where go

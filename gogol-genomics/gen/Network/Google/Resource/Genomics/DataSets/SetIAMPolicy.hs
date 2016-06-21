@@ -14,16 +14,19 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy on the specified dataset. Replaces any
--- existing policy. See Setting a Policy for more information.
+-- existing policy. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- See Setting a Policy for more information.
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.setIamPolicy@.
 module Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
     (
     -- * REST Resource
@@ -65,10 +68,13 @@ type DataSetsSetIAMPolicyResource =
                            Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified dataset. Replaces any
--- existing policy. See Setting a Policy for more information.
+-- existing policy. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- See Setting a Policy for more information.
 --
 -- /See:/ 'dataSetsSetIAMPolicy' smart constructor.
-data DataSetsSetIAMPolicy = DataSetsSetIAMPolicy
+data DataSetsSetIAMPolicy = DataSetsSetIAMPolicy'
     { _dssipXgafv          :: !(Maybe Text)
     , _dssipUploadProtocol :: !(Maybe Text)
     , _dssipPp             :: !Bool
@@ -106,7 +112,7 @@ dataSetsSetIAMPolicy
     -> Text -- ^ 'dssipResource'
     -> DataSetsSetIAMPolicy
 dataSetsSetIAMPolicy pDssipPayload_ pDssipResource_ =
-    DataSetsSetIAMPolicy
+    DataSetsSetIAMPolicy'
     { _dssipXgafv = Nothing
     , _dssipUploadProtocol = Nothing
     , _dssipPp = True
@@ -171,7 +177,10 @@ dssipCallback
 
 instance GoogleRequest DataSetsSetIAMPolicy where
         type Rs DataSetsSetIAMPolicy = Policy
-        requestClient DataSetsSetIAMPolicy{..}
+        type Scopes DataSetsSetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient DataSetsSetIAMPolicy'{..}
           = go _dssipResource _dssipXgafv _dssipUploadProtocol
               (Just _dssipPp)
               _dssipAccessToken

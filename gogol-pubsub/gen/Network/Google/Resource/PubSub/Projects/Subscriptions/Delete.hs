@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -73,7 +73,7 @@ type ProjectsSubscriptionsDeleteResource =
 -- specified.
 --
 -- /See:/ 'projectsSubscriptionsDelete' smart constructor.
-data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete
+data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete'
     { _psdXgafv          :: !(Maybe Text)
     , _psdUploadProtocol :: !(Maybe Text)
     , _psdPp             :: !Bool
@@ -107,7 +107,7 @@ projectsSubscriptionsDelete
     :: Text -- ^ 'psdSubscription'
     -> ProjectsSubscriptionsDelete
 projectsSubscriptionsDelete pPsdSubscription_ =
-    ProjectsSubscriptionsDelete
+    ProjectsSubscriptionsDelete'
     { _psdXgafv = Nothing
     , _psdUploadProtocol = Nothing
     , _psdPp = True
@@ -164,7 +164,10 @@ psdCallback
 instance GoogleRequest ProjectsSubscriptionsDelete
          where
         type Rs ProjectsSubscriptionsDelete = Empty
-        requestClient ProjectsSubscriptionsDelete{..}
+        type Scopes ProjectsSubscriptionsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsSubscriptionsDelete'{..}
           = go _psdSubscription _psdXgafv _psdUploadProtocol
               (Just _psdPp)
               _psdAccessToken

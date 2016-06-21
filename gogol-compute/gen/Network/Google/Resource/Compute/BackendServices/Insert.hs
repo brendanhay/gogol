@@ -14,14 +14,16 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.BackendServices.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a BackendService resource in the specified project using the
--- data included in the request.
+-- data included in the request. There are several restrictions and
+-- guidelines to keep in mind when creating a backend service. Read
+-- Restrictions and Guidelines for more information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.insert@.
 module Network.Google.Resource.Compute.BackendServices.Insert
@@ -55,10 +57,12 @@ type BackendServicesInsertResource =
                      Post '[JSON] Operation
 
 -- | Creates a BackendService resource in the specified project using the
--- data included in the request.
+-- data included in the request. There are several restrictions and
+-- guidelines to keep in mind when creating a backend service. Read
+-- Restrictions and Guidelines for more information.
 --
 -- /See:/ 'backendServicesInsert' smart constructor.
-data BackendServicesInsert = BackendServicesInsert
+data BackendServicesInsert = BackendServicesInsert'
     { _bsiProject :: !Text
     , _bsiPayload :: !BackendService
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,12 +79,12 @@ backendServicesInsert
     -> BackendService -- ^ 'bsiPayload'
     -> BackendServicesInsert
 backendServicesInsert pBsiProject_ pBsiPayload_ =
-    BackendServicesInsert
+    BackendServicesInsert'
     { _bsiProject = pBsiProject_
     , _bsiPayload = pBsiPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 bsiProject :: Lens' BackendServicesInsert Text
 bsiProject
   = lens _bsiProject (\ s a -> s{_bsiProject = a})
@@ -92,7 +96,10 @@ bsiPayload
 
 instance GoogleRequest BackendServicesInsert where
         type Rs BackendServicesInsert = Operation
-        requestClient BackendServicesInsert{..}
+        type Scopes BackendServicesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient BackendServicesInsert'{..}
           = go _bsiProject (Just AltJSON) _bsiPayload
               computeService
           where go

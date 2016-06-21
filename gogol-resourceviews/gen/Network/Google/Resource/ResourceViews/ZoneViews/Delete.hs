@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ResourceViews.ZoneViews.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ZoneViewsDeleteResource =
 -- | Delete a resource view.
 --
 -- /See:/ 'zoneViewsDelete' smart constructor.
-data ZoneViewsDelete = ZoneViewsDelete
+data ZoneViewsDelete = ZoneViewsDelete'
     { _zvdResourceView :: !Text
     , _zvdProject      :: !Text
     , _zvdZone         :: !Text
@@ -78,7 +78,7 @@ zoneViewsDelete
     -> Text -- ^ 'zvdZone'
     -> ZoneViewsDelete
 zoneViewsDelete pZvdResourceView_ pZvdProject_ pZvdZone_ =
-    ZoneViewsDelete
+    ZoneViewsDelete'
     { _zvdResourceView = pZvdResourceView_
     , _zvdProject = pZvdProject_
     , _zvdZone = pZvdZone_
@@ -101,7 +101,11 @@ zvdZone = lens _zvdZone (\ s a -> s{_zvdZone = a})
 
 instance GoogleRequest ZoneViewsDelete where
         type Rs ZoneViewsDelete = Operation
-        requestClient ZoneViewsDelete{..}
+        type Scopes ZoneViewsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient ZoneViewsDelete'{..}
           = go _zvdProject _zvdZone _zvdResourceView
               (Just AltJSON)
               resourceViewsService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.ZoneOperations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ZoneOperationsGetResource =
 -- | Retrieves the specified zone-specific Operations resource.
 --
 -- /See:/ 'zoneOperationsGet' smart constructor.
-data ZoneOperationsGet = ZoneOperationsGet
+data ZoneOperationsGet = ZoneOperationsGet'
     { _zogProject   :: !Text
     , _zogOperation :: !Text
     , _zogZone      :: !Text
@@ -78,7 +78,7 @@ zoneOperationsGet
     -> Text -- ^ 'zogZone'
     -> ZoneOperationsGet
 zoneOperationsGet pZogProject_ pZogOperation_ pZogZone_ =
-    ZoneOperationsGet
+    ZoneOperationsGet'
     { _zogProject = pZogProject_
     , _zogOperation = pZogOperation_
     , _zogZone = pZogZone_
@@ -94,13 +94,17 @@ zogOperation :: Lens' ZoneOperationsGet Text
 zogOperation
   = lens _zogOperation (\ s a -> s{_zogOperation = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 zogZone :: Lens' ZoneOperationsGet Text
 zogZone = lens _zogZone (\ s a -> s{_zogZone = a})
 
 instance GoogleRequest ZoneOperationsGet where
         type Rs ZoneOperationsGet = Operation
-        requestClient ZoneOperationsGet{..}
+        type Scopes ZoneOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient ZoneOperationsGet'{..}
           = go _zogProject _zogZone _zogOperation
               (Just AltJSON)
               computeService

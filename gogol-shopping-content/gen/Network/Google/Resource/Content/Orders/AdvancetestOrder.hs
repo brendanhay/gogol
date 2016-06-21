@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.AdvancetestOrder
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type OrdersAdvancetestOrderResource =
 -- \"pendingShipment\".
 --
 -- /See:/ 'ordersAdvancetestOrder' smart constructor.
-data OrdersAdvancetestOrder = OrdersAdvancetestOrder
+data OrdersAdvancetestOrder = OrdersAdvancetestOrder'
     { _oaoMerchantId :: !(Textual Word64)
     , _oaoOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ ordersAdvancetestOrder
     -> Text -- ^ 'oaoOrderId'
     -> OrdersAdvancetestOrder
 ordersAdvancetestOrder pOaoMerchantId_ pOaoOrderId_ =
-    OrdersAdvancetestOrder
+    OrdersAdvancetestOrder'
     { _oaoMerchantId = _Coerce # pOaoMerchantId_
     , _oaoOrderId = pOaoOrderId_
     }
@@ -94,7 +94,9 @@ oaoOrderId
 instance GoogleRequest OrdersAdvancetestOrder where
         type Rs OrdersAdvancetestOrder =
              OrdersAdvanceTestOrderResponse
-        requestClient OrdersAdvancetestOrder{..}
+        type Scopes OrdersAdvancetestOrder =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersAdvancetestOrder'{..}
           = go _oaoMerchantId _oaoOrderId (Just AltJSON)
               shoppingContentService
           where go

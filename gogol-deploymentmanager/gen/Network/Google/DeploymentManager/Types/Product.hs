@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.DeploymentManager.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem
+    OperationWarningsItemDataItem'
     { _owidiValue = Nothing
     , _owidiKey = Nothing
     }
@@ -47,7 +47,13 @@ owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
 owidiValue
   = lens _owidiValue (\ s a -> s{_owidiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 owidiKey :: Lens' OperationWarningsItemDataItem (Maybe Text)
 owidiKey = lens _owidiKey (\ s a -> s{_owidiKey = a})
 
@@ -55,11 +61,11 @@ instance FromJSON OperationWarningsItemDataItem where
         parseJSON
           = withObject "OperationWarningsItemDataItem"
               (\ o ->
-                 OperationWarningsItemDataItem <$>
+                 OperationWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON OperationWarningsItemDataItem where
-        toJSON OperationWarningsItemDataItem{..}
+        toJSON OperationWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _owidiValue,
@@ -68,7 +74,7 @@ instance ToJSON OperationWarningsItemDataItem where
 -- |
 --
 -- /See:/ 'configFile' smart constructor.
-newtype ConfigFile = ConfigFile
+newtype ConfigFile = ConfigFile'
     { _cfContent :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -80,7 +86,7 @@ newtype ConfigFile = ConfigFile
 configFile
     :: ConfigFile
 configFile =
-    ConfigFile
+    ConfigFile'
     { _cfContent = Nothing
     }
 
@@ -92,17 +98,17 @@ cfContent
 instance FromJSON ConfigFile where
         parseJSON
           = withObject "ConfigFile"
-              (\ o -> ConfigFile <$> (o .:? "content"))
+              (\ o -> ConfigFile' <$> (o .:? "content"))
 
 instance ToJSON ConfigFile where
-        toJSON ConfigFile{..}
+        toJSON ConfigFile'{..}
           = object (catMaybes [("content" .=) <$> _cfContent])
 
 -- | A response containing a partial list of operations and a page token used
 -- to build the next request if the request has been truncated.
 --
 -- /See:/ 'operationsListResponse' smart constructor.
-data OperationsListResponse = OperationsListResponse
+data OperationsListResponse = OperationsListResponse'
     { _olrNextPageToken :: !(Maybe Text)
     , _olrOperations    :: !(Maybe [Operation])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -117,7 +123,7 @@ data OperationsListResponse = OperationsListResponse
 operationsListResponse
     :: OperationsListResponse
 operationsListResponse =
-    OperationsListResponse
+    OperationsListResponse'
     { _olrNextPageToken = Nothing
     , _olrOperations = Nothing
     }
@@ -140,12 +146,12 @@ instance FromJSON OperationsListResponse where
         parseJSON
           = withObject "OperationsListResponse"
               (\ o ->
-                 OperationsListResponse <$>
+                 OperationsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON OperationsListResponse where
-        toJSON OperationsListResponse{..}
+        toJSON OperationsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olrNextPageToken,
@@ -153,7 +159,7 @@ instance ToJSON OperationsListResponse where
 
 --
 -- /See:/ 'resourceUpdateWarningsItemDataItem' smart constructor.
-data ResourceUpdateWarningsItemDataItem = ResourceUpdateWarningsItemDataItem
+data ResourceUpdateWarningsItemDataItem = ResourceUpdateWarningsItemDataItem'
     { _ruwidiValue :: !(Maybe Text)
     , _ruwidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -168,7 +174,7 @@ data ResourceUpdateWarningsItemDataItem = ResourceUpdateWarningsItemDataItem
 resourceUpdateWarningsItemDataItem
     :: ResourceUpdateWarningsItemDataItem
 resourceUpdateWarningsItemDataItem =
-    ResourceUpdateWarningsItemDataItem
+    ResourceUpdateWarningsItemDataItem'
     { _ruwidiValue = Nothing
     , _ruwidiKey = Nothing
     }
@@ -178,7 +184,13 @@ ruwidiValue :: Lens' ResourceUpdateWarningsItemDataItem (Maybe Text)
 ruwidiValue
   = lens _ruwidiValue (\ s a -> s{_ruwidiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 ruwidiKey :: Lens' ResourceUpdateWarningsItemDataItem (Maybe Text)
 ruwidiKey
   = lens _ruwidiKey (\ s a -> s{_ruwidiKey = a})
@@ -188,12 +200,12 @@ instance FromJSON ResourceUpdateWarningsItemDataItem
         parseJSON
           = withObject "ResourceUpdateWarningsItemDataItem"
               (\ o ->
-                 ResourceUpdateWarningsItemDataItem <$>
+                 ResourceUpdateWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON ResourceUpdateWarningsItemDataItem
          where
-        toJSON ResourceUpdateWarningsItemDataItem{..}
+        toJSON ResourceUpdateWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _ruwidiValue,
@@ -202,7 +214,7 @@ instance ToJSON ResourceUpdateWarningsItemDataItem
 -- | A response that returns all Types supported by Deployment Manager
 --
 -- /See:/ 'typesListResponse' smart constructor.
-data TypesListResponse = TypesListResponse
+data TypesListResponse = TypesListResponse'
     { _tlrNextPageToken :: !(Maybe Text)
     , _tlrTypes         :: !(Maybe [Type])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -217,7 +229,7 @@ data TypesListResponse = TypesListResponse
 typesListResponse
     :: TypesListResponse
 typesListResponse =
-    TypesListResponse
+    TypesListResponse'
     { _tlrNextPageToken = Nothing
     , _tlrTypes = Nothing
     }
@@ -239,12 +251,12 @@ instance FromJSON TypesListResponse where
         parseJSON
           = withObject "TypesListResponse"
               (\ o ->
-                 TypesListResponse <$>
+                 TypesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "types" .!= mempty))
 
 instance ToJSON TypesListResponse where
-        toJSON TypesListResponse{..}
+        toJSON TypesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tlrNextPageToken,
@@ -253,7 +265,7 @@ instance ToJSON TypesListResponse where
 -- | An Operation resource, used to manage asynchronous API requests.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
@@ -274,6 +286,7 @@ data Operation = Operation
     , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
+    , _oDescription         :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -322,13 +335,15 @@ data Operation = Operation
 --
 -- * 'oRegion'
 --
+-- * 'oDescription'
+--
 -- * 'oTargetLink'
 --
 -- * 'oClientOperationId'
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -349,45 +364,46 @@ operation =
     , _oId = Nothing
     , _oOperationType = Nothing
     , _oRegion = Nothing
+    , _oDescription = Nothing
     , _oTargetLink = Nothing
     , _oClientOperationId = Nothing
     }
 
--- | [Output Only] Unique target ID which identifies a particular incarnation
--- of the target.
+-- | [Output Only] The unique target ID, which identifies a specific
+-- incarnation of the target resource.
 oTargetId :: Lens' Operation (Maybe Word64)
 oTargetId
   = lens _oTargetId (\ s a -> s{_oTargetId = a}) .
       mapping _Coerce
 
--- | [Output Only] Status of the operation. Can be one of the following:
--- PENDING, RUNNING, or DONE.
+-- | [Output Only] The status of the operation, which can be one of the
+-- following: PENDING, RUNNING, or DONE.
 oStatus :: Lens' Operation (Maybe Text)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 
--- | [Output Only] The time that this operation was requested. This is in
--- RFC3339 text format.
+-- | [Output Only] The time that this operation was requested. This value is
+-- in RFC3339 text format.
 oInsertTime :: Lens' Operation (Maybe Text)
 oInsertTime
   = lens _oInsertTime (\ s a -> s{_oInsertTime = a})
 
 -- | [Output Only] An optional progress indicator that ranges from 0 to 100.
 -- There is no requirement that this be linear or support any granularity
--- of operations. This should not be used to guess at when the operation
--- will be complete. This number should monotonically increase as the
--- operation progresses.
+-- of operations. This should not be used to guess when the operation will
+-- be complete. This number should monotonically increase as the operation
+-- progresses.
 oProgress :: Lens' Operation (Maybe Int32)
 oProgress
   = lens _oProgress (\ s a -> s{_oProgress = a}) .
       mapping _Coerce
 
 -- | [Output Only] The time that this operation was started by the server.
--- This is in RFC3339 text format.
+-- This value is in RFC3339 text format.
 oStartTime :: Lens' Operation (Maybe Text)
 oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
 
--- | [Output Only] Type of the resource. Always compute#Operation for
+-- | [Output Only] Type of the resource. Always compute#operation for
 -- Operation resources.
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
@@ -404,7 +420,8 @@ oHTTPErrorMessage
   = lens _oHTTPErrorMessage
       (\ s a -> s{_oHTTPErrorMessage = a})
 
--- | [Output Only] URL of the zone where the operation resides.
+-- | [Output Only] The URL of the zone where the operation resides. Only
+-- available when performing per-zone operations.
 oZone :: Lens' Operation (Maybe Text)
 oZone = lens _oZone (\ s a -> s{_oZone = a})
 
@@ -417,7 +434,8 @@ oWarnings
       . _Coerce
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
--- message that was returned, such as 404.
+-- status code that was returned. For example, a 404 means the resource was
+-- not found.
 oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
 oHTTPErrorStatusCode
   = lens _oHTTPErrorStatusCode
@@ -451,35 +469,41 @@ oCreationTimestamp
   = lens _oCreationTimestamp
       (\ s a -> s{_oCreationTimestamp = a})
 
--- | [Output Only] The time that this operation was completed. This is in
--- RFC3339 text format.
+-- | [Output Only] The time that this operation was completed. This value is
+-- in RFC3339 text format.
 oEndTime :: Lens' Operation (Maybe Text)
 oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 oId :: Lens' Operation (Maybe Word64)
 oId
   = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
--- | [Output Only] Type of the operation, such as insert, update, and delete.
+-- | [Output Only] The type of operation, such as insert, update, or delete,
+-- and so on.
 oOperationType :: Lens' Operation (Maybe Text)
 oOperationType
   = lens _oOperationType
       (\ s a -> s{_oOperationType = a})
 
--- | [Output Only] URL of the region where the operation resides. Only
--- applicable for regional resources.
+-- | [Output Only] The URL of the region where the operation resides. Only
+-- available when performing regional operations.
 oRegion :: Lens' Operation (Maybe Text)
 oRegion = lens _oRegion (\ s a -> s{_oRegion = a})
 
--- | [Output Only] URL of the resource the operation is mutating.
+-- | [Output Only] A textual description of the operation, which is set when
+-- the operation is created.
+oDescription :: Lens' Operation (Maybe Text)
+oDescription
+  = lens _oDescription (\ s a -> s{_oDescription = a})
+
+-- | [Output Only] The URL of the resource that the operation modifies.
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
 
--- | [Output Only] An optional identifier specified by the client when the
--- mutation was initiated. Must be unique for all Operation resources in
--- the project.
+-- | [Output Only] Reserved for future use.
 oClientOperationId :: Lens' Operation (Maybe Text)
 oClientOperationId
   = lens _oClientOperationId
@@ -489,7 +513,7 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "targetId") <*> (o .:? "status") <*>
                      (o .:? "insertTime")
                      <*> (o .:? "progress")
@@ -509,11 +533,12 @@ instance FromJSON Operation where
                      <*> (o .:? "id")
                      <*> (o .:? "operationType")
                      <*> (o .:? "region")
+                     <*> (o .:? "description")
                      <*> (o .:? "targetLink")
                      <*> (o .:? "clientOperationId"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("targetId" .=) <$> _oTargetId,
@@ -534,6 +559,7 @@ instance ToJSON Operation where
                   ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
                   ("operationType" .=) <$> _oOperationType,
                   ("region" .=) <$> _oRegion,
+                  ("description" .=) <$> _oDescription,
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
@@ -541,7 +567,7 @@ instance ToJSON Operation where
 -- to build the next request if the request has been truncated.
 --
 -- /See:/ 'resourcesListResponse' smart constructor.
-data ResourcesListResponse = ResourcesListResponse
+data ResourcesListResponse = ResourcesListResponse'
     { _rlrNextPageToken :: !(Maybe Text)
     , _rlrResources     :: !(Maybe [Resource])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -556,7 +582,7 @@ data ResourcesListResponse = ResourcesListResponse
 resourcesListResponse
     :: ResourcesListResponse
 resourcesListResponse =
-    ResourcesListResponse
+    ResourcesListResponse'
     { _rlrNextPageToken = Nothing
     , _rlrResources = Nothing
     }
@@ -578,12 +604,12 @@ instance FromJSON ResourcesListResponse where
         parseJSON
           = withObject "ResourcesListResponse"
               (\ o ->
-                 ResourcesListResponse <$>
+                 ResourcesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "resources" .!= mempty))
 
 instance ToJSON ResourcesListResponse where
-        toJSON ResourcesListResponse{..}
+        toJSON ResourcesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rlrNextPageToken,
@@ -592,8 +618,9 @@ instance ToJSON ResourcesListResponse where
 -- |
 --
 -- /See:/ 'deploymentUpdate' smart constructor.
-newtype DeploymentUpdate = DeploymentUpdate
-    { _duManifest :: Maybe Text
+data DeploymentUpdate = DeploymentUpdate'
+    { _duManifest :: !(Maybe Text)
+    , _duLabels   :: !(Maybe [DeploymentUpdateLabelEntry])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentUpdate' with the minimum fields required to make a request.
@@ -601,11 +628,14 @@ newtype DeploymentUpdate = DeploymentUpdate
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'duManifest'
+--
+-- * 'duLabels'
 deploymentUpdate
     :: DeploymentUpdate
 deploymentUpdate =
-    DeploymentUpdate
+    DeploymentUpdate'
     { _duManifest = Nothing
+    , _duLabels = Nothing
     }
 
 -- | [Output Only] URL of the manifest representing the update configuration
@@ -614,20 +644,36 @@ duManifest :: Lens' DeploymentUpdate (Maybe Text)
 duManifest
   = lens _duManifest (\ s a -> s{_duManifest = a})
 
+-- | [Output Only] Map of labels; provided by the client when the resource is
+-- created or updated. Specifically: Label keys must be between 1 and 63
+-- characters long and must conform to the following regular expression:
+-- [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63
+-- characters long and must conform to the regular expression
+-- ([a-z]([-a-z0-9]*[a-z0-9])?)?
+duLabels :: Lens' DeploymentUpdate [DeploymentUpdateLabelEntry]
+duLabels
+  = lens _duLabels (\ s a -> s{_duLabels = a}) .
+      _Default
+      . _Coerce
+
 instance FromJSON DeploymentUpdate where
         parseJSON
           = withObject "DeploymentUpdate"
-              (\ o -> DeploymentUpdate <$> (o .:? "manifest"))
+              (\ o ->
+                 DeploymentUpdate' <$>
+                   (o .:? "manifest") <*> (o .:? "labels" .!= mempty))
 
 instance ToJSON DeploymentUpdate where
-        toJSON DeploymentUpdate{..}
+        toJSON DeploymentUpdate'{..}
           = object
-              (catMaybes [("manifest" .=) <$> _duManifest])
+              (catMaybes
+                 [("manifest" .=) <$> _duManifest,
+                  ("labels" .=) <$> _duLabels])
 
 -- |
 --
 -- /See:/ 'resourceUpdate' smart constructor.
-data ResourceUpdate = ResourceUpdate
+data ResourceUpdate = ResourceUpdate'
     { _ruState           :: !(Maybe Text)
     , _ruError           :: !(Maybe ResourceUpdateError)
     , _ruWarnings        :: !(Maybe [ResourceUpdateWarningsItem])
@@ -657,7 +703,7 @@ data ResourceUpdate = ResourceUpdate
 resourceUpdate
     :: ResourceUpdate
 resourceUpdate =
-    ResourceUpdate
+    ResourceUpdate'
     { _ruState = Nothing
     , _ruError = Nothing
     , _ruWarnings = Nothing
@@ -711,7 +757,7 @@ instance FromJSON ResourceUpdate where
         parseJSON
           = withObject "ResourceUpdate"
               (\ o ->
-                 ResourceUpdate <$>
+                 ResourceUpdate' <$>
                    (o .:? "state") <*> (o .:? "error") <*>
                      (o .:? "warnings" .!= mempty)
                      <*> (o .:? "intent")
@@ -720,7 +766,7 @@ instance FromJSON ResourceUpdate where
                      <*> (o .:? "properties"))
 
 instance ToJSON ResourceUpdate where
-        toJSON ResourceUpdate{..}
+        toJSON ResourceUpdate'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _ruState,
@@ -731,10 +777,51 @@ instance ToJSON ResourceUpdate where
                   ("finalProperties" .=) <$> _ruFinalProperties,
                   ("properties" .=) <$> _ruProperties])
 
+--
+-- /See:/ 'deploymentLabelEntry' smart constructor.
+data DeploymentLabelEntry = DeploymentLabelEntry'
+    { _dleValue :: !(Maybe Text)
+    , _dleKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeploymentLabelEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dleValue'
+--
+-- * 'dleKey'
+deploymentLabelEntry
+    :: DeploymentLabelEntry
+deploymentLabelEntry =
+    DeploymentLabelEntry'
+    { _dleValue = Nothing
+    , _dleKey = Nothing
+    }
+
+dleValue :: Lens' DeploymentLabelEntry (Maybe Text)
+dleValue = lens _dleValue (\ s a -> s{_dleValue = a})
+
+dleKey :: Lens' DeploymentLabelEntry (Maybe Text)
+dleKey = lens _dleKey (\ s a -> s{_dleKey = a})
+
+instance FromJSON DeploymentLabelEntry where
+        parseJSON
+          = withObject "DeploymentLabelEntry"
+              (\ o ->
+                 DeploymentLabelEntry' <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON DeploymentLabelEntry where
+        toJSON DeploymentLabelEntry'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _dleValue, ("key" .=) <$> _dleKey])
+
 -- |
 --
 -- /See:/ 'manifest' smart constructor.
-data Manifest = Manifest
+data Manifest = Manifest'
     { _mInsertTime     :: !(Maybe Text)
     , _mLayout         :: !(Maybe Text)
     , _mConfig         :: !(Maybe ConfigFile)
@@ -767,7 +854,7 @@ data Manifest = Manifest
 manifest
     :: Manifest
 manifest =
-    Manifest
+    Manifest'
     { _mInsertTime = Nothing
     , _mLayout = Nothing
     , _mConfig = Nothing
@@ -824,7 +911,7 @@ instance FromJSON Manifest where
         parseJSON
           = withObject "Manifest"
               (\ o ->
-                 Manifest <$>
+                 Manifest' <$>
                    (o .:? "insertTime") <*> (o .:? "layout") <*>
                      (o .:? "config")
                      <*> (o .:? "expandedConfig")
@@ -834,7 +921,7 @@ instance FromJSON Manifest where
                      <*> (o .:? "id"))
 
 instance ToJSON Manifest where
-        toJSON Manifest{..}
+        toJSON Manifest'{..}
           = object
               (catMaybes
                  [("insertTime" .=) <$> _mInsertTime,
@@ -847,7 +934,7 @@ instance ToJSON Manifest where
 
 --
 -- /See:/ 'resourceUpdateWarningsItem' smart constructor.
-data ResourceUpdateWarningsItem = ResourceUpdateWarningsItem
+data ResourceUpdateWarningsItem = ResourceUpdateWarningsItem'
     { _ruwiData    :: !(Maybe [ResourceUpdateWarningsItemDataItem])
     , _ruwiCode    :: !(Maybe Text)
     , _ruwiMessage :: !(Maybe Text)
@@ -865,24 +952,27 @@ data ResourceUpdateWarningsItem = ResourceUpdateWarningsItem
 resourceUpdateWarningsItem
     :: ResourceUpdateWarningsItem
 resourceUpdateWarningsItem =
-    ResourceUpdateWarningsItem
+    ResourceUpdateWarningsItem'
     { _ruwiData = Nothing
     , _ruwiCode = Nothing
     , _ruwiMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 ruwiData :: Lens' ResourceUpdateWarningsItem [ResourceUpdateWarningsItemDataItem]
 ruwiData
   = lens _ruwiData (\ s a -> s{_ruwiData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 ruwiCode :: Lens' ResourceUpdateWarningsItem (Maybe Text)
 ruwiCode = lens _ruwiCode (\ s a -> s{_ruwiCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 ruwiMessage :: Lens' ResourceUpdateWarningsItem (Maybe Text)
 ruwiMessage
   = lens _ruwiMessage (\ s a -> s{_ruwiMessage = a})
@@ -891,12 +981,12 @@ instance FromJSON ResourceUpdateWarningsItem where
         parseJSON
           = withObject "ResourceUpdateWarningsItem"
               (\ o ->
-                 ResourceUpdateWarningsItem <$>
+                 ResourceUpdateWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON ResourceUpdateWarningsItem where
-        toJSON ResourceUpdateWarningsItem{..}
+        toJSON ResourceUpdateWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _ruwiData,
@@ -906,8 +996,8 @@ instance ToJSON ResourceUpdateWarningsItem where
 -- |
 --
 -- /See:/ 'deploymentsCancelPreviewRequest' smart constructor.
-newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest
-    { _dcprFingerprint :: Maybe (Textual Word8)
+newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest'
+    { _dcprFingerprint :: Maybe Base64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsCancelPreviewRequest' with the minimum fields required to make a request.
@@ -918,7 +1008,7 @@ newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest
 deploymentsCancelPreviewRequest
     :: DeploymentsCancelPreviewRequest
 deploymentsCancelPreviewRequest =
-    DeploymentsCancelPreviewRequest
+    DeploymentsCancelPreviewRequest'
     { _dcprFingerprint = Nothing
     }
 
@@ -930,30 +1020,30 @@ deploymentsCancelPreviewRequest =
 -- user attempts to cancel a preview, this would prevent one of the
 -- requests). The fingerprint is initially generated by Deployment Manager
 -- and changes after every request to modify a deployment. To get the
--- latest fingerprint value, perform a get() request to a deployment.
-dcprFingerprint :: Lens' DeploymentsCancelPreviewRequest (Maybe Word8)
+-- latest fingerprint value, perform a get() request on the deployment.
+dcprFingerprint :: Lens' DeploymentsCancelPreviewRequest (Maybe ByteString)
 dcprFingerprint
   = lens _dcprFingerprint
       (\ s a -> s{_dcprFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON DeploymentsCancelPreviewRequest
          where
         parseJSON
           = withObject "DeploymentsCancelPreviewRequest"
               (\ o ->
-                 DeploymentsCancelPreviewRequest <$>
+                 DeploymentsCancelPreviewRequest' <$>
                    (o .:? "fingerprint"))
 
 instance ToJSON DeploymentsCancelPreviewRequest where
-        toJSON DeploymentsCancelPreviewRequest{..}
+        toJSON DeploymentsCancelPreviewRequest'{..}
           = object
               (catMaybes [("fingerprint" .=) <$> _dcprFingerprint])
 
 -- |
 --
 -- /See:/ 'resource' smart constructor.
-data Resource = Resource
+data Resource = Resource'
     { _rInsertTime      :: !(Maybe Text)
     , _rURL             :: !(Maybe Text)
     , _rWarnings        :: !(Maybe [ResourceWarningsItem])
@@ -995,7 +1085,7 @@ data Resource = Resource
 resource
     :: Resource
 resource =
-    Resource
+    Resource'
     { _rInsertTime = Nothing
     , _rURL = Nothing
     , _rWarnings = Nothing
@@ -1075,7 +1165,7 @@ instance FromJSON Resource where
         parseJSON
           = withObject "Resource"
               (\ o ->
-                 Resource <$>
+                 Resource' <$>
                    (o .:? "insertTime") <*> (o .:? "url") <*>
                      (o .:? "warnings" .!= mempty)
                      <*> (o .:? "updateTime")
@@ -1088,7 +1178,7 @@ instance FromJSON Resource where
                      <*> (o .:? "properties"))
 
 instance ToJSON Resource where
-        toJSON Resource{..}
+        toJSON Resource'{..}
           = object
               (catMaybes
                  [("insertTime" .=) <$> _rInsertTime,
@@ -1102,8 +1192,51 @@ instance ToJSON Resource where
                   ("properties" .=) <$> _rProperties])
 
 --
+-- /See:/ 'deploymentUpdateLabelEntry' smart constructor.
+data DeploymentUpdateLabelEntry = DeploymentUpdateLabelEntry'
+    { _duleValue :: !(Maybe Text)
+    , _duleKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeploymentUpdateLabelEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'duleValue'
+--
+-- * 'duleKey'
+deploymentUpdateLabelEntry
+    :: DeploymentUpdateLabelEntry
+deploymentUpdateLabelEntry =
+    DeploymentUpdateLabelEntry'
+    { _duleValue = Nothing
+    , _duleKey = Nothing
+    }
+
+duleValue :: Lens' DeploymentUpdateLabelEntry (Maybe Text)
+duleValue
+  = lens _duleValue (\ s a -> s{_duleValue = a})
+
+duleKey :: Lens' DeploymentUpdateLabelEntry (Maybe Text)
+duleKey = lens _duleKey (\ s a -> s{_duleKey = a})
+
+instance FromJSON DeploymentUpdateLabelEntry where
+        parseJSON
+          = withObject "DeploymentUpdateLabelEntry"
+              (\ o ->
+                 DeploymentUpdateLabelEntry' <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON DeploymentUpdateLabelEntry where
+        toJSON DeploymentUpdateLabelEntry'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _duleValue,
+                  ("key" .=) <$> _duleKey])
+
+--
 -- /See:/ 'resourceUpdateErrorErrorsItem' smart constructor.
-data ResourceUpdateErrorErrorsItem = ResourceUpdateErrorErrorsItem
+data ResourceUpdateErrorErrorsItem = ResourceUpdateErrorErrorsItem'
     { _rueeiLocation :: !(Maybe Text)
     , _rueeiCode     :: !(Maybe Text)
     , _rueeiMessage  :: !(Maybe Text)
@@ -1121,13 +1254,13 @@ data ResourceUpdateErrorErrorsItem = ResourceUpdateErrorErrorsItem
 resourceUpdateErrorErrorsItem
     :: ResourceUpdateErrorErrorsItem
 resourceUpdateErrorErrorsItem =
-    ResourceUpdateErrorErrorsItem
+    ResourceUpdateErrorErrorsItem'
     { _rueeiLocation = Nothing
     , _rueeiCode = Nothing
     , _rueeiMessage = Nothing
     }
 
--- | [Output Only] Indicates the field in the request which caused the error.
+-- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
 rueeiLocation :: Lens' ResourceUpdateErrorErrorsItem (Maybe Text)
 rueeiLocation
@@ -1148,12 +1281,12 @@ instance FromJSON ResourceUpdateErrorErrorsItem where
         parseJSON
           = withObject "ResourceUpdateErrorErrorsItem"
               (\ o ->
-                 ResourceUpdateErrorErrorsItem <$>
+                 ResourceUpdateErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON ResourceUpdateErrorErrorsItem where
-        toJSON ResourceUpdateErrorErrorsItem{..}
+        toJSON ResourceUpdateErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _rueeiLocation,
@@ -1164,7 +1297,7 @@ instance ToJSON ResourceUpdateErrorErrorsItem where
 -- to build the next request if the request has been truncated.
 --
 -- /See:/ 'manifestsListResponse' smart constructor.
-data ManifestsListResponse = ManifestsListResponse
+data ManifestsListResponse = ManifestsListResponse'
     { _mlrNextPageToken :: !(Maybe Text)
     , _mlrManifests     :: !(Maybe [Manifest])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1179,7 +1312,7 @@ data ManifestsListResponse = ManifestsListResponse
 manifestsListResponse
     :: ManifestsListResponse
 manifestsListResponse =
-    ManifestsListResponse
+    ManifestsListResponse'
     { _mlrNextPageToken = Nothing
     , _mlrManifests = Nothing
     }
@@ -1201,12 +1334,12 @@ instance FromJSON ManifestsListResponse where
         parseJSON
           = withObject "ManifestsListResponse"
               (\ o ->
-                 ManifestsListResponse <$>
+                 ManifestsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "manifests" .!= mempty))
 
 instance ToJSON ManifestsListResponse where
-        toJSON ManifestsListResponse{..}
+        toJSON ManifestsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _mlrNextPageToken,
@@ -1216,7 +1349,7 @@ instance ToJSON ManifestsListResponse where
 -- operation, this field will be populated.
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
+newtype OperationError = OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1228,7 +1361,7 @@ newtype OperationError = OperationError
 operationError
     :: OperationError
 operationError =
-    OperationError
+    OperationError'
     { _oeErrors = Nothing
     }
 
@@ -1244,16 +1377,16 @@ instance FromJSON OperationError where
         parseJSON
           = withObject "OperationError"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 OperationError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON OperationError where
-        toJSON OperationError{..}
+        toJSON OperationError'{..}
           = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 -- | A resource type supported by Deployment Manager.
 --
 -- /See:/ 'type'' smart constructor.
-data Type = Type
+data Type = Type'
     { _tInsertTime :: !(Maybe Text)
     , _tSelfLink   :: !(Maybe Text)
     , _tName       :: !(Maybe Text)
@@ -1274,7 +1407,7 @@ data Type = Type
 type'
     :: Type
 type' =
-    Type
+    Type'
     { _tInsertTime = Nothing
     , _tSelfLink = Nothing
     , _tName = Nothing
@@ -1305,13 +1438,13 @@ instance FromJSON Type where
         parseJSON
           = withObject "Type"
               (\ o ->
-                 Type <$>
+                 Type' <$>
                    (o .:? "insertTime") <*> (o .:? "selfLink") <*>
                      (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON Type where
-        toJSON Type{..}
+        toJSON Type'{..}
           = object
               (catMaybes
                  [("insertTime" .=) <$> _tInsertTime,
@@ -1321,7 +1454,7 @@ instance ToJSON Type where
 -- |
 --
 -- /See:/ 'importFile' smart constructor.
-data ImportFile = ImportFile
+data ImportFile = ImportFile'
     { _ifContent :: !(Maybe Text)
     , _ifName    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1336,7 +1469,7 @@ data ImportFile = ImportFile
 importFile
     :: ImportFile
 importFile =
-    ImportFile
+    ImportFile'
     { _ifContent = Nothing
     , _ifName = Nothing
     }
@@ -1354,10 +1487,10 @@ instance FromJSON ImportFile where
         parseJSON
           = withObject "ImportFile"
               (\ o ->
-                 ImportFile <$> (o .:? "content") <*> (o .:? "name"))
+                 ImportFile' <$> (o .:? "content") <*> (o .:? "name"))
 
 instance ToJSON ImportFile where
-        toJSON ImportFile{..}
+        toJSON ImportFile'{..}
           = object
               (catMaybes
                  [("content" .=) <$> _ifContent,
@@ -1365,7 +1498,7 @@ instance ToJSON ImportFile where
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem
+data OperationErrorErrorsItem = OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
@@ -1383,13 +1516,13 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem
+    OperationErrorErrorsItem'
     { _oeeiLocation = Nothing
     , _oeeiCode = Nothing
     , _oeeiMessage = Nothing
     }
 
--- | [Output Only] Indicates the field in the request which caused the error.
+-- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
 oeeiLocation :: Lens' OperationErrorErrorsItem (Maybe Text)
 oeeiLocation
@@ -1408,12 +1541,12 @@ instance FromJSON OperationErrorErrorsItem where
         parseJSON
           = withObject "OperationErrorErrorsItem"
               (\ o ->
-                 OperationErrorErrorsItem <$>
+                 OperationErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationErrorErrorsItem where
-        toJSON OperationErrorErrorsItem{..}
+        toJSON OperationErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _oeeiLocation,
@@ -1423,8 +1556,8 @@ instance ToJSON OperationErrorErrorsItem where
 -- |
 --
 -- /See:/ 'deploymentsStopRequest' smart constructor.
-newtype DeploymentsStopRequest = DeploymentsStopRequest
-    { _dsrFingerprint :: Maybe (Textual Word8)
+newtype DeploymentsStopRequest = DeploymentsStopRequest'
+    { _dsrFingerprint :: Maybe Base64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsStopRequest' with the minimum fields required to make a request.
@@ -1435,7 +1568,7 @@ newtype DeploymentsStopRequest = DeploymentsStopRequest
 deploymentsStopRequest
     :: DeploymentsStopRequest
 deploymentsStopRequest =
-    DeploymentsStopRequest
+    DeploymentsStopRequest'
     { _dsrFingerprint = Nothing
     }
 
@@ -1447,27 +1580,27 @@ deploymentsStopRequest =
 -- ongoing update request, this would prevent a collision). The fingerprint
 -- is initially generated by Deployment Manager and changes after every
 -- request to modify a deployment. To get the latest fingerprint value,
--- perform a get() request to a deployment.
-dsrFingerprint :: Lens' DeploymentsStopRequest (Maybe Word8)
+-- perform a get() request on the deployment.
+dsrFingerprint :: Lens' DeploymentsStopRequest (Maybe ByteString)
 dsrFingerprint
   = lens _dsrFingerprint
       (\ s a -> s{_dsrFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON DeploymentsStopRequest where
         parseJSON
           = withObject "DeploymentsStopRequest"
               (\ o ->
-                 DeploymentsStopRequest <$> (o .:? "fingerprint"))
+                 DeploymentsStopRequest' <$> (o .:? "fingerprint"))
 
 instance ToJSON DeploymentsStopRequest where
-        toJSON DeploymentsStopRequest{..}
+        toJSON DeploymentsStopRequest'{..}
           = object
               (catMaybes [("fingerprint" .=) <$> _dsrFingerprint])
 
 --
 -- /See:/ 'resourceWarningsItemDataItem' smart constructor.
-data ResourceWarningsItemDataItem = ResourceWarningsItemDataItem
+data ResourceWarningsItemDataItem = ResourceWarningsItemDataItem'
     { _rwidiValue :: !(Maybe Text)
     , _rwidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1482,7 +1615,7 @@ data ResourceWarningsItemDataItem = ResourceWarningsItemDataItem
 resourceWarningsItemDataItem
     :: ResourceWarningsItemDataItem
 resourceWarningsItemDataItem =
-    ResourceWarningsItemDataItem
+    ResourceWarningsItemDataItem'
     { _rwidiValue = Nothing
     , _rwidiKey = Nothing
     }
@@ -1492,7 +1625,13 @@ rwidiValue :: Lens' ResourceWarningsItemDataItem (Maybe Text)
 rwidiValue
   = lens _rwidiValue (\ s a -> s{_rwidiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 rwidiKey :: Lens' ResourceWarningsItemDataItem (Maybe Text)
 rwidiKey = lens _rwidiKey (\ s a -> s{_rwidiKey = a})
 
@@ -1500,11 +1639,11 @@ instance FromJSON ResourceWarningsItemDataItem where
         parseJSON
           = withObject "ResourceWarningsItemDataItem"
               (\ o ->
-                 ResourceWarningsItemDataItem <$>
+                 ResourceWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON ResourceWarningsItemDataItem where
-        toJSON ResourceWarningsItemDataItem{..}
+        toJSON ResourceWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _rwidiValue,
@@ -1514,7 +1653,7 @@ instance ToJSON ResourceWarningsItemDataItem where
 -- this field will be populated.
 --
 -- /See:/ 'resourceUpdateError' smart constructor.
-newtype ResourceUpdateError = ResourceUpdateError
+newtype ResourceUpdateError = ResourceUpdateError'
     { _rueErrors :: Maybe [ResourceUpdateErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1526,7 +1665,7 @@ newtype ResourceUpdateError = ResourceUpdateError
 resourceUpdateError
     :: ResourceUpdateError
 resourceUpdateError =
-    ResourceUpdateError
+    ResourceUpdateError'
     { _rueErrors = Nothing
     }
 
@@ -1542,17 +1681,17 @@ instance FromJSON ResourceUpdateError where
         parseJSON
           = withObject "ResourceUpdateError"
               (\ o ->
-                 ResourceUpdateError <$> (o .:? "errors" .!= mempty))
+                 ResourceUpdateError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON ResourceUpdateError where
-        toJSON ResourceUpdateError{..}
+        toJSON ResourceUpdateError'{..}
           = object (catMaybes [("errors" .=) <$> _rueErrors])
 
 -- | A response containing a partial list of deployments and a page token
 -- used to build the next request if the request has been truncated.
 --
 -- /See:/ 'deploymentsListResponse' smart constructor.
-data DeploymentsListResponse = DeploymentsListResponse
+data DeploymentsListResponse = DeploymentsListResponse'
     { _dlrNextPageToken :: !(Maybe Text)
     , _dlrDeployments   :: !(Maybe [Deployment])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1567,7 +1706,7 @@ data DeploymentsListResponse = DeploymentsListResponse
 deploymentsListResponse
     :: DeploymentsListResponse
 deploymentsListResponse =
-    DeploymentsListResponse
+    DeploymentsListResponse'
     { _dlrNextPageToken = Nothing
     , _dlrDeployments = Nothing
     }
@@ -1590,12 +1729,12 @@ instance FromJSON DeploymentsListResponse where
         parseJSON
           = withObject "DeploymentsListResponse"
               (\ o ->
-                 DeploymentsListResponse <$>
+                 DeploymentsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "deployments" .!= mempty))
 
 instance ToJSON DeploymentsListResponse where
-        toJSON DeploymentsListResponse{..}
+        toJSON DeploymentsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dlrNextPageToken,
@@ -1603,7 +1742,7 @@ instance ToJSON DeploymentsListResponse where
 
 --
 -- /See:/ 'resourceWarningsItem' smart constructor.
-data ResourceWarningsItem = ResourceWarningsItem
+data ResourceWarningsItem = ResourceWarningsItem'
     { _rwiData    :: !(Maybe [ResourceWarningsItemDataItem])
     , _rwiCode    :: !(Maybe Text)
     , _rwiMessage :: !(Maybe Text)
@@ -1621,23 +1760,26 @@ data ResourceWarningsItem = ResourceWarningsItem
 resourceWarningsItem
     :: ResourceWarningsItem
 resourceWarningsItem =
-    ResourceWarningsItem
+    ResourceWarningsItem'
     { _rwiData = Nothing
     , _rwiCode = Nothing
     , _rwiMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 rwiData :: Lens' ResourceWarningsItem [ResourceWarningsItemDataItem]
 rwiData
   = lens _rwiData (\ s a -> s{_rwiData = a}) . _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 rwiCode :: Lens' ResourceWarningsItem (Maybe Text)
 rwiCode = lens _rwiCode (\ s a -> s{_rwiCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 rwiMessage :: Lens' ResourceWarningsItem (Maybe Text)
 rwiMessage
   = lens _rwiMessage (\ s a -> s{_rwiMessage = a})
@@ -1646,12 +1788,12 @@ instance FromJSON ResourceWarningsItem where
         parseJSON
           = withObject "ResourceWarningsItem"
               (\ o ->
-                 ResourceWarningsItem <$>
+                 ResourceWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON ResourceWarningsItem where
-        toJSON ResourceWarningsItem{..}
+        toJSON ResourceWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _rwiData, ("code" .=) <$> _rwiCode,
@@ -1660,7 +1802,7 @@ instance ToJSON ResourceWarningsItem where
 -- |
 --
 -- /See:/ 'targetConfiguration' smart constructor.
-data TargetConfiguration = TargetConfiguration
+data TargetConfiguration = TargetConfiguration'
     { _tcConfig  :: !(Maybe ConfigFile)
     , _tcImports :: !(Maybe [ImportFile])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1675,7 +1817,7 @@ data TargetConfiguration = TargetConfiguration
 targetConfiguration
     :: TargetConfiguration
 targetConfiguration =
-    TargetConfiguration
+    TargetConfiguration'
     { _tcConfig = Nothing
     , _tcImports = Nothing
     }
@@ -1697,11 +1839,11 @@ instance FromJSON TargetConfiguration where
         parseJSON
           = withObject "TargetConfiguration"
               (\ o ->
-                 TargetConfiguration <$>
+                 TargetConfiguration' <$>
                    (o .:? "config") <*> (o .:? "imports" .!= mempty))
 
 instance ToJSON TargetConfiguration where
-        toJSON TargetConfiguration{..}
+        toJSON TargetConfiguration'{..}
           = object
               (catMaybes
                  [("config" .=) <$> _tcConfig,
@@ -1709,7 +1851,7 @@ instance ToJSON TargetConfiguration where
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem
+data OperationWarningsItem = OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe Text)
     , _owiMessage :: !(Maybe Text)
@@ -1727,23 +1869,26 @@ data OperationWarningsItem = OperationWarningsItem
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem
+    OperationWarningsItem'
     { _owiData = Nothing
     , _owiCode = Nothing
     , _owiMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 owiData :: Lens' OperationWarningsItem [OperationWarningsItemDataItem]
 owiData
   = lens _owiData (\ s a -> s{_owiData = a}) . _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 owiCode :: Lens' OperationWarningsItem (Maybe Text)
 owiCode = lens _owiCode (\ s a -> s{_owiCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 owiMessage :: Lens' OperationWarningsItem (Maybe Text)
 owiMessage
   = lens _owiMessage (\ s a -> s{_owiMessage = a})
@@ -1752,12 +1897,12 @@ instance FromJSON OperationWarningsItem where
         parseJSON
           = withObject "OperationWarningsItem"
               (\ o ->
-                 OperationWarningsItem <$>
+                 OperationWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationWarningsItem where
-        toJSON OperationWarningsItem{..}
+        toJSON OperationWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,
@@ -1766,13 +1911,15 @@ instance ToJSON OperationWarningsItem where
 -- |
 --
 -- /See:/ 'deployment' smart constructor.
-data Deployment = Deployment
+data Deployment = Deployment'
     { _dInsertTime  :: !(Maybe Text)
     , _dOperation   :: !(Maybe Operation)
-    , _dFingerprint :: !(Maybe (Textual Word8))
+    , _dFingerprint :: !(Maybe Base64)
+    , _dSelfLink    :: !(Maybe Text)
     , _dName        :: !(Maybe Text)
     , _dManifest    :: !(Maybe Text)
     , _dId          :: !(Maybe (Textual Word64))
+    , _dLabels      :: !(Maybe [DeploymentLabelEntry])
     , _dDescription :: !(Maybe Text)
     , _dUpdate      :: !(Maybe DeploymentUpdate)
     , _dTarget      :: !(Maybe TargetConfiguration)
@@ -1788,11 +1935,15 @@ data Deployment = Deployment
 --
 -- * 'dFingerprint'
 --
+-- * 'dSelfLink'
+--
 -- * 'dName'
 --
 -- * 'dManifest'
 --
 -- * 'dId'
+--
+-- * 'dLabels'
 --
 -- * 'dDescription'
 --
@@ -1802,13 +1953,15 @@ data Deployment = Deployment
 deployment
     :: Deployment
 deployment =
-    Deployment
+    Deployment'
     { _dInsertTime = Nothing
     , _dOperation = Nothing
     , _dFingerprint = Nothing
+    , _dSelfLink = Nothing
     , _dName = Nothing
     , _dManifest = Nothing
     , _dId = Nothing
+    , _dLabels = Nothing
     , _dDescription = Nothing
     , _dUpdate = Nothing
     , _dTarget = Nothing
@@ -1834,10 +1987,15 @@ dOperation
 -- fingerprint is initially generated by Deployment Manager and changes
 -- after every request to modify data. To get the latest fingerprint value,
 -- perform a get() request to a deployment.
-dFingerprint :: Lens' Deployment (Maybe Word8)
+dFingerprint :: Lens' Deployment (Maybe ByteString)
 dFingerprint
   = lens _dFingerprint (\ s a -> s{_dFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
+
+-- | [Output Only] Self link for the deployment.
+dSelfLink :: Lens' Deployment (Maybe Text)
+dSelfLink
+  = lens _dSelfLink (\ s a -> s{_dSelfLink = a})
 
 -- | Name of the resource; provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -1860,6 +2018,17 @@ dId :: Lens' Deployment (Maybe Word64)
 dId
   = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
 
+-- | Map of labels; provided by the client when the resource is created or
+-- updated. Specifically: Label keys must be between 1 and 63 characters
+-- long and must conform to the following regular expression:
+-- [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63
+-- characters long and must conform to the regular expression
+-- ([a-z]([-a-z0-9]*[a-z0-9])?)?
+dLabels :: Lens' Deployment [DeploymentLabelEntry]
+dLabels
+  = lens _dLabels (\ s a -> s{_dLabels = a}) . _Default
+      . _Coerce
+
 -- | An optional user-provided description of the deployment.
 dDescription :: Lens' Deployment (Maybe Text)
 dDescription
@@ -1879,25 +2048,29 @@ instance FromJSON Deployment where
         parseJSON
           = withObject "Deployment"
               (\ o ->
-                 Deployment <$>
+                 Deployment' <$>
                    (o .:? "insertTime") <*> (o .:? "operation") <*>
                      (o .:? "fingerprint")
+                     <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "manifest")
                      <*> (o .:? "id")
+                     <*> (o .:? "labels" .!= mempty)
                      <*> (o .:? "description")
                      <*> (o .:? "update")
                      <*> (o .:? "target"))
 
 instance ToJSON Deployment where
-        toJSON Deployment{..}
+        toJSON Deployment'{..}
           = object
               (catMaybes
                  [("insertTime" .=) <$> _dInsertTime,
                   ("operation" .=) <$> _dOperation,
                   ("fingerprint" .=) <$> _dFingerprint,
+                  ("selfLink" .=) <$> _dSelfLink,
                   ("name" .=) <$> _dName,
                   ("manifest" .=) <$> _dManifest, ("id" .=) <$> _dId,
+                  ("labels" .=) <$> _dLabels,
                   ("description" .=) <$> _dDescription,
                   ("update" .=) <$> _dUpdate,
                   ("target" .=) <$> _dTarget])

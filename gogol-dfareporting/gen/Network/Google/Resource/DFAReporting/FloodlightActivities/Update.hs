@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightActivities.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesUpdate' request conforms to.
 type FloodlightActivitiesUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -55,7 +55,7 @@ type FloodlightActivitiesUpdateResource =
 -- | Updates an existing floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesUpdate' smart constructor.
-data FloodlightActivitiesUpdate = FloodlightActivitiesUpdate
+data FloodlightActivitiesUpdate = FloodlightActivitiesUpdate'
     { _fauProFileId :: !(Textual Int64)
     , _fauPayload   :: !FloodlightActivity
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivitiesUpdate
     -> FloodlightActivity -- ^ 'fauPayload'
     -> FloodlightActivitiesUpdate
 floodlightActivitiesUpdate pFauProFileId_ pFauPayload_ =
-    FloodlightActivitiesUpdate
+    FloodlightActivitiesUpdate'
     { _fauProFileId = _Coerce # pFauProFileId_
     , _fauPayload = pFauPayload_
     }
@@ -92,7 +92,9 @@ instance GoogleRequest FloodlightActivitiesUpdate
          where
         type Rs FloodlightActivitiesUpdate =
              FloodlightActivity
-        requestClient FloodlightActivitiesUpdate{..}
+        type Scopes FloodlightActivitiesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightActivitiesUpdate'{..}
           = go _fauProFileId (Just AltJSON) _fauPayload
               dFAReportingService
           where go

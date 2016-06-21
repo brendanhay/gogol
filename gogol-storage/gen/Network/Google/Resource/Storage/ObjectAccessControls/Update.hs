@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.ObjectAccessControls.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type ObjectAccessControlsUpdateResource =
 -- | Updates an ACL entry on the specified object.
 --
 -- /See:/ 'objectAccessControlsUpdate' smart constructor.
-data ObjectAccessControlsUpdate = ObjectAccessControlsUpdate
+data ObjectAccessControlsUpdate = ObjectAccessControlsUpdate'
     { _oacuBucket     :: !Text
     , _oacuPayload    :: !ObjectAccessControl
     , _oacuObject     :: !Text
@@ -90,7 +90,7 @@ objectAccessControlsUpdate
     -> Text -- ^ 'oacuEntity'
     -> ObjectAccessControlsUpdate
 objectAccessControlsUpdate pOacuBucket_ pOacuPayload_ pOacuObject_ pOacuEntity_ =
-    ObjectAccessControlsUpdate
+    ObjectAccessControlsUpdate'
     { _oacuBucket = pOacuBucket_
     , _oacuPayload = pOacuPayload_
     , _oacuObject = pOacuObject_
@@ -133,7 +133,10 @@ instance GoogleRequest ObjectAccessControlsUpdate
          where
         type Rs ObjectAccessControlsUpdate =
              ObjectAccessControl
-        requestClient ObjectAccessControlsUpdate{..}
+        type Scopes ObjectAccessControlsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient ObjectAccessControlsUpdate'{..}
           = go _oacuBucket _oacuObject _oacuEntity
               _oacuGeneration
               (Just AltJSON)

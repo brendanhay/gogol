@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeAnalytics.Reports.Query
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type ReportsQueryResource =
 -- | Retrieve your YouTube Analytics reports.
 --
 -- /See:/ 'reportsQuery' smart constructor.
-data ReportsQuery = ReportsQuery
+data ReportsQuery = ReportsQuery'
     { _rqMetrics    :: !Text
     , _rqFilters    :: !(Maybe Text)
     , _rqIds        :: !Text
@@ -114,7 +114,7 @@ reportsQuery
     -> Text -- ^ 'rqStartDate'
     -> ReportsQuery
 reportsQuery pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
-    ReportsQuery
+    ReportsQuery'
     { _rqMetrics = pRqMetrics_
     , _rqFilters = Nothing
     , _rqIds = pRqIds_
@@ -207,7 +207,12 @@ rqStartDate
 
 instance GoogleRequest ReportsQuery where
         type Rs ReportsQuery = ResultTable
-        requestClient ReportsQuery{..}
+        type Scopes ReportsQuery =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
+        requestClient ReportsQuery'{..}
           = go (Just _rqIds) (Just _rqStartDate)
               (Just _rqEndDate)
               (Just _rqMetrics)

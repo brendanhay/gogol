@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Schemas.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type SchemasGetResource =
 -- | Retrieve schema
 --
 -- /See:/ 'schemasGet' smart constructor.
-data SchemasGet = SchemasGet
+data SchemasGet = SchemasGet'
     { _sgCustomerId :: !Text
     , _sgSchemaKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ schemasGet
     -> Text -- ^ 'sgSchemaKey'
     -> SchemasGet
 schemasGet pSgCustomerId_ pSgSchemaKey_ =
-    SchemasGet
+    SchemasGet'
     { _sgCustomerId = pSgCustomerId_
     , _sgSchemaKey = pSgSchemaKey_
     }
@@ -89,7 +89,10 @@ sgSchemaKey
 
 instance GoogleRequest SchemasGet where
         type Rs SchemasGet = Schema
-        requestClient SchemasGet{..}
+        type Scopes SchemasGet =
+             '["https://www.googleapis.com/auth/admin.directory.userschema",
+               "https://www.googleapis.com/auth/admin.directory.userschema.readonly"]
+        requestClient SchemasGet'{..}
           = go _sgCustomerId _sgSchemaKey (Just AltJSON)
               directoryService
           where go

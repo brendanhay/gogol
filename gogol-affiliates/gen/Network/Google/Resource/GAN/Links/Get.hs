@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GAN.Links.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type LinksGetResource =
 -- advertisers they are in a relationship with.
 --
 -- /See:/ 'linksGet' smart constructor.
-data LinksGet = LinksGet
+data LinksGet = LinksGet'
     { _lgRoleId :: !Text
     , _lgRole   :: !LinksGetRole
     , _lgLinkId :: !(Textual Int64)
@@ -82,7 +82,7 @@ linksGet
     -> Int64 -- ^ 'lgLinkId'
     -> LinksGet
 linksGet pLgRoleId_ pLgRole_ pLgLinkId_ =
-    LinksGet
+    LinksGet'
     { _lgRoleId = pLgRoleId_
     , _lgRole = pLgRole_
     , _lgLinkId = _Coerce # pLgLinkId_
@@ -105,7 +105,8 @@ lgLinkId
 
 instance GoogleRequest LinksGet where
         type Rs LinksGet = Link
-        requestClient LinksGet{..}
+        type Scopes LinksGet = '[]
+        requestClient LinksGet'{..}
           = go _lgRole _lgRoleId _lgLinkId (Just AltJSON)
               affiliatesService
           where go

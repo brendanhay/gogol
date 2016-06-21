@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.AdClients.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type AdClientsGetResource =
 -- | Get information about one of the ad clients in the Host AdSense account.
 --
 -- /See:/ 'adClientsGet' smart constructor.
-newtype AdClientsGet = AdClientsGet
+newtype AdClientsGet = AdClientsGet'
     { _acgAdClientId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ adClientsGet
     :: Text -- ^ 'acgAdClientId'
     -> AdClientsGet
 adClientsGet pAcgAdClientId_ =
-    AdClientsGet
+    AdClientsGet'
     { _acgAdClientId = pAcgAdClientId_
     }
 
@@ -76,7 +76,9 @@ acgAdClientId
 
 instance GoogleRequest AdClientsGet where
         type Rs AdClientsGet = AdClient
-        requestClient AdClientsGet{..}
+        type Scopes AdClientsGet =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AdClientsGet'{..}
           = go _acgAdClientId (Just AltJSON) adSenseHostService
           where go
                   = buildClient (Proxy :: Proxy AdClientsGetResource)

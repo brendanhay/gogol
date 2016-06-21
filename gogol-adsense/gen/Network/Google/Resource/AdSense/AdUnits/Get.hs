@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.AdUnits.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type AdUnitsGetResource =
 -- | Gets the specified ad unit in the specified ad client.
 --
 -- /See:/ 'adUnitsGet' smart constructor.
-data AdUnitsGet = AdUnitsGet
+data AdUnitsGet = AdUnitsGet'
     { _augAdUnitId   :: !Text
     , _augAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ adUnitsGet
     -> Text -- ^ 'augAdClientId'
     -> AdUnitsGet
 adUnitsGet pAugAdUnitId_ pAugAdClientId_ =
-    AdUnitsGet
+    AdUnitsGet'
     { _augAdUnitId = pAugAdUnitId_
     , _augAdClientId = pAugAdClientId_
     }
@@ -89,7 +89,10 @@ augAdClientId
 
 instance GoogleRequest AdUnitsGet where
         type Rs AdUnitsGet = AdUnit
-        requestClient AdUnitsGet{..}
+        type Scopes AdUnitsGet =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AdUnitsGet'{..}
           = go _augAdClientId _augAdUnitId (Just AltJSON)
               adSenseService
           where go

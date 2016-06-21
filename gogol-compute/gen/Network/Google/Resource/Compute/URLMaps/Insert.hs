@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.URLMaps.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type URLMapsInsertResource =
 -- included in the request.
 --
 -- /See:/ 'urlMapsInsert' smart constructor.
-data URLMapsInsert = URLMapsInsert
+data URLMapsInsert = URLMapsInsert'
     { _umiProject :: !Text
     , _umiPayload :: !URLMap
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,12 +74,12 @@ urlMapsInsert
     -> URLMap -- ^ 'umiPayload'
     -> URLMapsInsert
 urlMapsInsert pUmiProject_ pUmiPayload_ =
-    URLMapsInsert
+    URLMapsInsert'
     { _umiProject = pUmiProject_
     , _umiPayload = pUmiPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umiProject :: Lens' URLMapsInsert Text
 umiProject
   = lens _umiProject (\ s a -> s{_umiProject = a})
@@ -91,7 +91,10 @@ umiPayload
 
 instance GoogleRequest URLMapsInsert where
         type Rs URLMapsInsert = Operation
-        requestClient URLMapsInsert{..}
+        type Scopes URLMapsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient URLMapsInsert'{..}
           = go _umiProject (Just AltJSON) _umiPayload
               computeService
           where go

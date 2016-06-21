@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reports.Activities.Watch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type ActivitiesWatchResource =
 -- | Push changes to activities
 --
 -- /See:/ 'activitiesWatch' smart constructor.
-data ActivitiesWatch = ActivitiesWatch
+data ActivitiesWatch = ActivitiesWatch'
     { _awStartTime       :: !(Maybe Text)
     , _awFilters         :: !(Maybe Text)
     , _awPayload         :: !Channel
@@ -121,7 +121,7 @@ activitiesWatch
     -> Text -- ^ 'awUserKey'
     -> ActivitiesWatch
 activitiesWatch pAwPayload_ pAwApplicationName_ pAwUserKey_ =
-    ActivitiesWatch
+    ActivitiesWatch'
     { _awStartTime = Nothing
     , _awFilters = Nothing
     , _awPayload = pAwPayload_
@@ -199,7 +199,9 @@ awMaxResults
 
 instance GoogleRequest ActivitiesWatch where
         type Rs ActivitiesWatch = Channel
-        requestClient ActivitiesWatch{..}
+        type Scopes ActivitiesWatch =
+             '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
+        requestClient ActivitiesWatch'{..}
           = go _awUserKey _awApplicationName _awStartTime
               _awFilters
               _awCustomerId

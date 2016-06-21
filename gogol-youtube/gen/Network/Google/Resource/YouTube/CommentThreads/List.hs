@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.CommentThreads.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type CommentThreadsListResource =
 -- | Returns a list of comment threads that match the API request parameters.
 --
 -- /See:/ 'commentThreadsList' smart constructor.
-data CommentThreadsList = CommentThreadsList
+data CommentThreadsList = CommentThreadsList'
     { _ctlPart                         :: !Text
     , _ctlModerationStatus             :: !CommentThreadsListModerationStatus
     , _ctlSearchTerms                  :: !(Maybe Text)
@@ -119,7 +119,7 @@ commentThreadsList
     :: Text -- ^ 'ctlPart'
     -> CommentThreadsList
 commentThreadsList pCtlPart_ =
-    CommentThreadsList
+    CommentThreadsList'
     { _ctlPart = pCtlPart_
     , _ctlModerationStatus = Published
     , _ctlSearchTerms = Nothing
@@ -216,7 +216,9 @@ ctlMaxResults
 instance GoogleRequest CommentThreadsList where
         type Rs CommentThreadsList =
              CommentThreadListResponse
-        requestClient CommentThreadsList{..}
+        type Scopes CommentThreadsList =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient CommentThreadsList'{..}
           = go (Just _ctlPart) (Just _ctlModerationStatus)
               _ctlSearchTerms
               _ctlChannelId

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Collections.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves the IDs of all the collections for an enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.list@.
 module Network.Google.Resource.AndroidEnterprise.Collections.List
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ type CollectionsListResource =
 -- | Retrieves the IDs of all the collections for an enterprise.
 --
 -- /See:/ 'collectionsList' smart constructor.
-newtype CollectionsList = CollectionsList
+newtype CollectionsList = CollectionsList'
     { _clEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ collectionsList
     :: Text -- ^ 'clEnterpriseId'
     -> CollectionsList
 collectionsList pClEnterpriseId_ =
-    CollectionsList
+    CollectionsList'
     { _clEnterpriseId = pClEnterpriseId_
     }
 
@@ -78,7 +78,9 @@ clEnterpriseId
 
 instance GoogleRequest CollectionsList where
         type Rs CollectionsList = CollectionsListResponse
-        requestClient CollectionsList{..}
+        type Scopes CollectionsList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient CollectionsList'{..}
           = go _clEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

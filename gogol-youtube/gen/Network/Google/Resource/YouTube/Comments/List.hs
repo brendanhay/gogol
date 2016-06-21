@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Comments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type CommentsListResource =
 -- | Returns a list of comments that match the API request parameters.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList
+data CommentsList = CommentsList'
     { _cllPart       :: !Text
     , _cllId         :: !(Maybe Text)
     , _cllPageToken  :: !(Maybe Text)
@@ -90,7 +90,7 @@ commentsList
     :: Text -- ^ 'cllPart'
     -> CommentsList
 commentsList pCllPart_ =
-    CommentsList
+    CommentsList'
     { _cllPart = pCllPart_
     , _cllId = Nothing
     , _cllPageToken = Nothing
@@ -144,7 +144,9 @@ cllParentId
 
 instance GoogleRequest CommentsList where
         type Rs CommentsList = CommentListResponse
-        requestClient CommentsList{..}
+        type Scopes CommentsList =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient CommentsList'{..}
           = go (Just _cllPart) _cllId _cllPageToken
               (Just _cllTextFormat)
               (Just _cllMaxResults)

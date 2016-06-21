@@ -4,7 +4,7 @@
 
 -- |
 -- Module      : Network.Google.Data.JSON
--- Copyright   : (c) 2015 Brendan Hay <brendan.g.hay@gmail.com>
+-- Copyright   : (c) 2015-2016 Brendan Hay <brendan.g.hay@gmail.com>
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
@@ -37,28 +37,39 @@ import           Data.Data
 import           Data.HashMap.Strict (HashMap)
 import           Data.Text           (Text)
 import qualified Data.Text           as Text
-import           Servant.API
+import           Web.HttpApiData     (FromHttpApiData (..), ToHttpApiData (..))
 
 type JSONValue = Value
 
 newtype Textual a = Textual a
-    deriving (Eq, Ord, Read, Show, Num, Fractional, Data, Typeable, FromText, ToText)
+    deriving
+        ( Eq
+        , Ord
+        , Read
+        , Show
+        , Num
+        , Fractional
+        , Data
+        , Typeable
+        , ToHttpApiData
+        , FromHttpApiData
+        )
 
-instance (FromJSON a, FromText a) => FromJSON (Textual a) where
+instance (FromJSON a, FromHttpApiData a) => FromJSON (Textual a) where
     parseJSON (String s) =
-        case fromText s of
-            Just x  -> pure (Textual x)
-            Nothing -> fail $ "Failed to parse value from " ++ Text.unpack s
+        either (fail . Text.unpack) (pure . Textual) (parseQueryParam s)
     parseJSON o          = Textual <$> parseJSON o
 
-instance ToText a => ToJSON (Textual a) where
-    toJSON (Textual x) = String (toText x)
+instance ToHttpApiData a => ToJSON (Textual a) where
+    toJSON (Textual x) = String (toQueryParam x)
 
 parseJSONObject :: FromJSON a => HashMap Text Value -> Parser a
 parseJSONObject = parseJSON . Object
 
-parseJSONText :: FromText a => String -> Value -> Parser a
-parseJSONText n = withText n (maybe (fail n) pure . fromText)
+parseJSONText :: FromHttpApiData a => String -> Value -> Parser a
+parseJSONText n = withText n (either (fail . f) pure . parseQueryParam)
+  where
+    f x = n ++ " - " ++ Text.unpack x
 
-toJSONText :: ToText a => a -> Value
-toJSONText = String . toText
+toJSONText :: ToHttpApiData a => a -> Value
+toJSONText = String . toQueryParam

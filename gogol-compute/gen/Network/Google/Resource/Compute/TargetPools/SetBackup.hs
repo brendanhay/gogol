@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetPools.SetBackup
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Changes backup pool configurations.
+-- Changes a backup target pool\'s configurations.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.setBackup@.
 module Network.Google.Resource.Compute.TargetPools.SetBackup
@@ -60,10 +60,10 @@ type TargetPoolsSetBackupResource =
                            ReqBody '[JSON] TargetReference :>
                              Post '[JSON] Operation
 
--- | Changes backup pool configurations.
+-- | Changes a backup target pool\'s configurations.
 --
 -- /See:/ 'targetPoolsSetBackup' smart constructor.
-data TargetPoolsSetBackup = TargetPoolsSetBackup
+data TargetPoolsSetBackup = TargetPoolsSetBackup'
     { _tpsbProject       :: !Text
     , _tpsbTargetPool    :: !Text
     , _tpsbPayload       :: !TargetReference
@@ -91,7 +91,7 @@ targetPoolsSetBackup
     -> Text -- ^ 'tpsbRegion'
     -> TargetPoolsSetBackup
 targetPoolsSetBackup pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ =
-    TargetPoolsSetBackup
+    TargetPoolsSetBackup'
     { _tpsbProject = pTpsbProject_
     , _tpsbTargetPool = pTpsbTargetPool_
     , _tpsbPayload = pTpsbPayload_
@@ -99,12 +99,12 @@ targetPoolsSetBackup pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ =
     , _tpsbRegion = pTpsbRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tpsbProject :: Lens' TargetPoolsSetBackup Text
 tpsbProject
   = lens _tpsbProject (\ s a -> s{_tpsbProject = a})
 
--- | Name of the TargetPool resource for which the backup is to be set.
+-- | Name of the TargetPool resource to set a backup pool for.
 tpsbTargetPool :: Lens' TargetPoolsSetBackup Text
 tpsbTargetPool
   = lens _tpsbTargetPool
@@ -115,7 +115,7 @@ tpsbPayload :: Lens' TargetPoolsSetBackup TargetReference
 tpsbPayload
   = lens _tpsbPayload (\ s a -> s{_tpsbPayload = a})
 
--- | New failoverRatio value for the containing target pool.
+-- | New failoverRatio value for the target pool.
 tpsbFailoverRatio :: Lens' TargetPoolsSetBackup (Maybe Double)
 tpsbFailoverRatio
   = lens _tpsbFailoverRatio
@@ -129,7 +129,10 @@ tpsbRegion
 
 instance GoogleRequest TargetPoolsSetBackup where
         type Rs TargetPoolsSetBackup = Operation
-        requestClient TargetPoolsSetBackup{..}
+        type Scopes TargetPoolsSetBackup =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetPoolsSetBackup'{..}
           = go _tpsbProject _tpsbRegion _tpsbTargetPool
               _tpsbFailoverRatio
               (Just AltJSON)

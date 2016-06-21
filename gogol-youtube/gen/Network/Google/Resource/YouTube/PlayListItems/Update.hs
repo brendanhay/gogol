@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.PlayListItems.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type PlayListItemsUpdateResource =
 -- position in the playlist.
 --
 -- /See:/ 'playListItemsUpdate' smart constructor.
-data PlayListItemsUpdate = PlayListItemsUpdate
+data PlayListItemsUpdate = PlayListItemsUpdate'
     { _pliuPart    :: !Text
     , _pliuPayload :: !PlayListItem
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ playListItemsUpdate
     -> PlayListItem -- ^ 'pliuPayload'
     -> PlayListItemsUpdate
 playListItemsUpdate pPliuPart_ pPliuPayload_ =
-    PlayListItemsUpdate
+    PlayListItemsUpdate'
     { _pliuPart = pPliuPart_
     , _pliuPayload = pPliuPayload_
     }
@@ -101,7 +101,11 @@ pliuPayload
 
 instance GoogleRequest PlayListItemsUpdate where
         type Rs PlayListItemsUpdate = PlayListItem
-        requestClient PlayListItemsUpdate{..}
+        type Scopes PlayListItemsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient PlayListItemsUpdate'{..}
           = go (Just _pliuPart) (Just AltJSON) _pliuPayload
               youTubeService
           where go

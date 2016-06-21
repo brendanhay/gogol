@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Datastore.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,9 +20,14 @@ module Network.Google.Datastore.Types
       datastoreService
 
     -- * OAuth Scopes
-    , userinfoEmailScope
     , cloudPlatformScope
     , datastoreScope
+
+    -- * LatLng
+    , LatLng
+    , latLng
+    , llLatitude
+    , llLongitude
 
     -- * PropertyOrderDirection
     , PropertyOrderDirection (..)
@@ -31,36 +37,24 @@ module Network.Google.Datastore.Types
     , rollbackRequest
     , rrTransaction
 
-    -- * Property
-    , Property
-    , property
-    , pKeyValue
-    , pBlobKeyValue
-    , pDateTimeValue
-    , pIntegerValue
-    , pEntityValue
-    , pDoubleValue
-    , pStringValue
-    , pListValue
-    , pIndexed
-    , pBooleanValue
-    , pMeaning
-    , pBlobValue
-
     -- * PartitionId
     , PartitionId
     , partitionId
-    , piNamespace
-    , piDataSetId
+    , piNamespaceId
+    , piProjectId
 
     -- * QueryResultBatch
     , QueryResultBatch
     , queryResultBatch
     , qrbSkippedResults
+    , qrbSkippedCursor
     , qrbEntityResultType
     , qrbEntityResults
     , qrbMoreResults
     , qrbEndCursor
+
+    -- * CompositeFilterOp
+    , CompositeFilterOp (..)
 
     -- * EntityProperties
     , EntityProperties
@@ -70,7 +64,6 @@ module Network.Google.Datastore.Types
     -- * BeginTransactionRequest
     , BeginTransactionRequest
     , beginTransactionRequest
-    , btrIsolationLevel
 
     -- * RunQueryRequest
     , RunQueryRequest
@@ -91,11 +84,8 @@ module Network.Google.Datastore.Types
     -- * CompositeFilter
     , CompositeFilter
     , compositeFilter
-    , cfOperator
+    , cfOp
     , cfFilters
-
-    -- * CompositeFilterOperator
-    , CompositeFilterOperator (..)
 
     -- * QueryResultBatchMoreResults
     , QueryResultBatchMoreResults (..)
@@ -104,49 +94,50 @@ module Network.Google.Datastore.Types
     , BeginTransactionResponse
     , beginTransactionResponse
     , btrTransaction
-    , btrHeader
 
     -- * MutationResult
     , MutationResult
     , mutationResult
-    , mrInsertAutoIdKeys
-    , mrIndexUpdates
+    , mrKey
 
     -- * AllocateIdsResponse
     , AllocateIdsResponse
     , allocateIdsResponse
     , aKeys
-    , aHeader
 
     -- * GqlQuery
     , GqlQuery
     , gqlQuery
-    , gqAllowLiteral
-    , gqNumberArgs
+    , gqPositionalBindings
+    , gqNamedBindings
     , gqQueryString
-    , gqNameArgs
+    , gqAllowLiterals
 
     -- * RunQueryResponse
     , RunQueryResponse
     , runQueryResponse
-    , rqrBatch
-    , rqrHeader
+    , rBatch
+    , rQuery
 
     -- * Value
     , Value
     , value
     , vKeyValue
-    , vBlobKeyValue
-    , vDateTimeValue
+    , vGeoPointValue
     , vIntegerValue
+    , vTimestampValue
     , vEntityValue
+    , vExcludeFromIndexes
     , vDoubleValue
     , vStringValue
-    , vListValue
-    , vIndexed
     , vBooleanValue
     , vMeaning
+    , vArrayValue
+    , vNullValue
     , vBlobValue
+
+    -- * ValueNullValue
+    , ValueNullValue (..)
 
     -- * LookupRequest
     , LookupRequest
@@ -161,35 +152,19 @@ module Network.Google.Datastore.Types
     , Mutation
     , mutation
     , mInsert
-    , mForce
-    , mInsertAutoId
     , mUpsert
     , mDelete
     , mUpdate
 
-    -- * ResponseHeader
-    , ResponseHeader
-    , responseHeader
-    , rhKind
-
-    -- * KeyPathElement
-    , KeyPathElement
-    , keyPathElement
-    , kpeKind
-    , kpeName
-    , kpeId
+    -- * GqlQueryNamedBindings
+    , GqlQueryNamedBindings
+    , gqlQueryNamedBindings
+    , gqnbAddtional
 
     -- * PropertyReference
     , PropertyReference
     , propertyReference
     , prName
-
-    -- * GqlQueryArg
-    , GqlQueryArg
-    , gqlQueryArg
-    , gqaCursor
-    , gqaValue
-    , gqaName
 
     -- * Key
     , Key
@@ -197,39 +172,45 @@ module Network.Google.Datastore.Types
     , kPartitionId
     , kPath
 
-    -- * PropertyFilterOperator
-    , PropertyFilterOperator (..)
-
     -- * PropertyFilter
     , PropertyFilter
     , propertyFilter
     , pfProperty
-    , pfOperator
+    , pfOp
     , pfValue
 
     -- * Query
     , Query
     , query
-    , qGroupBy
     , qStartCursor
     , qOffSet
+    , qKind
+    , qDistinctOn
     , qEndCursor
     , qLimit
     , qProjection
     , qFilter
-    , qKinds
     , qOrder
+
+    -- * ArrayValue
+    , ArrayValue
+    , arrayValue
+    , avValues
 
     -- * EntityResult
     , EntityResult
     , entityResult
+    , erCursor
     , erEntity
+
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * CommitResponse
     , CommitResponse
     , commitResponse
-    , crMutationResult
-    , crHeader
+    , crIndexUpdates
+    , crMutationResults
 
     -- * KindExpression
     , KindExpression
@@ -245,13 +226,11 @@ module Network.Google.Datastore.Types
     -- * RollbackResponse
     , RollbackResponse
     , rollbackResponse
-    , rrHeader
 
-    -- * PropertyExpression
-    , PropertyExpression
-    , propertyExpression
-    , peProperty
-    , peAggregationFunction
+    -- * Projection
+    , Projection
+    , projection
+    , pProperty
 
     -- * Filter
     , Filter
@@ -259,22 +238,25 @@ module Network.Google.Datastore.Types
     , fCompositeFilter
     , fPropertyFilter
 
-    -- * BeginTransactionRequestIsolationLevel
-    , BeginTransactionRequestIsolationLevel (..)
+    -- * PropertyFilterOp
+    , PropertyFilterOp (..)
 
     -- * CommitRequest
     , CommitRequest
     , commitRequest
+    , crMutations
     , crMode
-    , crMutation
     , crTransaction
-    , crIgnoreReadOnly
 
     -- * CommitRequestMode
     , CommitRequestMode (..)
 
-    -- * PropertyExpressionAggregationFunction
-    , PropertyExpressionAggregationFunction (..)
+    -- * PathElement
+    , PathElement
+    , pathElement
+    , peKind
+    , peName
+    , peId
 
     -- * Entity
     , Entity
@@ -288,33 +270,34 @@ module Network.Google.Datastore.Types
     , lrDeferred
     , lrFound
     , lrMissing
-    , lrHeader
 
     -- * PropertyOrder
     , PropertyOrder
     , propertyOrder
     , poProperty
     , poDirection
+
+    -- * GqlQueryParameter
+    , GqlQueryParameter
+    , gqlQueryParameter
+    , gqpCursor
+    , gqpValue
     ) where
 
 import           Network.Google.Datastore.Types.Product
 import           Network.Google.Datastore.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta2' of the Google Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
-datastoreService :: Service
+-- | Default request referring to version 'v1beta3' of the Google Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
+datastoreService :: ServiceConfig
 datastoreService
-  = defaultService (ServiceId "datastore:v1beta2")
-      "www.googleapis.com"
-
--- | View your email address
-userinfoEmailScope :: OAuthScope
-userinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+  = defaultService (ServiceId "datastore:v1beta3")
+      "datastore.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View and manage your Google Cloud Datastore data
-datastoreScope :: OAuthScope
-datastoreScope = "https://www.googleapis.com/auth/datastore";
+datastoreScope :: Proxy '["https://www.googleapis.com/auth/datastore"]
+datastoreScope = Proxy;

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.RasterCollections.Permissions.BatchUpdate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type RasterCollectionsPermissionsBatchUpdateResource
 -- is atomic.
 --
 -- /See:/ 'rasterCollectionsPermissionsBatchUpdate' smart constructor.
-data RasterCollectionsPermissionsBatchUpdate = RasterCollectionsPermissionsBatchUpdate
+data RasterCollectionsPermissionsBatchUpdate = RasterCollectionsPermissionsBatchUpdate'
     { _rcpbuPayload :: !PermissionsBatchUpdateRequest
     , _rcpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -78,7 +78,7 @@ rasterCollectionsPermissionsBatchUpdate
     -> Text -- ^ 'rcpbuId'
     -> RasterCollectionsPermissionsBatchUpdate
 rasterCollectionsPermissionsBatchUpdate pRcpbuPayload_ pRcpbuId_ =
-    RasterCollectionsPermissionsBatchUpdate
+    RasterCollectionsPermissionsBatchUpdate'
     { _rcpbuPayload = pRcpbuPayload_
     , _rcpbuId = pRcpbuId_
     }
@@ -96,8 +96,10 @@ instance GoogleRequest
          RasterCollectionsPermissionsBatchUpdate where
         type Rs RasterCollectionsPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
+        type Scopes RasterCollectionsPermissionsBatchUpdate =
+             '["https://www.googleapis.com/auth/mapsengine"]
         requestClient
-          RasterCollectionsPermissionsBatchUpdate{..}
+          RasterCollectionsPermissionsBatchUpdate'{..}
           = go _rcpbuId (Just AltJSON) _rcpbuPayload
               mapsEngineService
           where go

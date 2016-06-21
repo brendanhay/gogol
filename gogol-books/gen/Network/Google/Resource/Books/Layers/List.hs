@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Layers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type LayersListResource =
 -- | List the layer summaries for a volume.
 --
 -- /See:/ 'layersList' smart constructor.
-data LayersList = LayersList
+data LayersList = LayersList'
     { _llContentVersion :: !(Maybe Text)
     , _llVolumeId       :: !Text
     , _llSource         :: !(Maybe Text)
@@ -86,7 +86,7 @@ layersList
     :: Text -- ^ 'llVolumeId'
     -> LayersList
 layersList pLlVolumeId_ =
-    LayersList
+    LayersList'
     { _llContentVersion = Nothing
     , _llVolumeId = pLlVolumeId_
     , _llSource = Nothing
@@ -122,7 +122,9 @@ llMaxResults
 
 instance GoogleRequest LayersList where
         type Rs LayersList = Layersummaries
-        requestClient LayersList{..}
+        type Scopes LayersList =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient LayersList'{..}
           = go _llVolumeId _llContentVersion _llSource
               _llPageToken
               _llMaxResults

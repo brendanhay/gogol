@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Comments.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type CommentsUpdateResource =
 -- | Modifies a comment.
 --
 -- /See:/ 'commentsUpdate' smart constructor.
-data CommentsUpdate = CommentsUpdate
+data CommentsUpdate = CommentsUpdate'
     { _cuPart    :: !Text
     , _cuPayload :: !Comment
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ commentsUpdate
     -> Comment -- ^ 'cuPayload'
     -> CommentsUpdate
 commentsUpdate pCuPart_ pCuPayload_ =
-    CommentsUpdate
+    CommentsUpdate'
     { _cuPart = pCuPart_
     , _cuPayload = pCuPayload_
     }
@@ -89,7 +89,9 @@ cuPayload
 
 instance GoogleRequest CommentsUpdate where
         type Rs CommentsUpdate = Comment
-        requestClient CommentsUpdate{..}
+        type Scopes CommentsUpdate =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient CommentsUpdate'{..}
           = go (Just _cuPart) (Just AltJSON) _cuPayload
               youTubeService
           where go

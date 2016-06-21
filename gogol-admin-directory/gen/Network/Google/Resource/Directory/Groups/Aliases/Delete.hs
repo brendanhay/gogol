@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Groups.Aliases.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type GroupsAliasesDeleteResource =
 -- | Remove a alias for the group
 --
 -- /See:/ 'groupsAliasesDelete' smart constructor.
-data GroupsAliasesDelete = GroupsAliasesDelete
+data GroupsAliasesDelete = GroupsAliasesDelete'
     { _gadGroupKey :: !Text
     , _gadAlias    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ groupsAliasesDelete
     -> Text -- ^ 'gadAlias'
     -> GroupsAliasesDelete
 groupsAliasesDelete pGadGroupKey_ pGadAlias_ =
-    GroupsAliasesDelete
+    GroupsAliasesDelete'
     { _gadGroupKey = pGadGroupKey_
     , _gadAlias = pGadAlias_
     }
@@ -88,7 +88,9 @@ gadAlias = lens _gadAlias (\ s a -> s{_gadAlias = a})
 
 instance GoogleRequest GroupsAliasesDelete where
         type Rs GroupsAliasesDelete = ()
-        requestClient GroupsAliasesDelete{..}
+        type Scopes GroupsAliasesDelete =
+             '["https://www.googleapis.com/auth/admin.directory.group"]
+        requestClient GroupsAliasesDelete'{..}
           = go _gadGroupKey _gadAlias (Just AltJSON)
               directoryService
           where go

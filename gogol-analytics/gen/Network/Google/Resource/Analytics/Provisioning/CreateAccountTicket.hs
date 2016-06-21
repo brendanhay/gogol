@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type ProvisioningCreateAccountTicketResource =
 -- | Creates an account ticket.
 --
 -- /See:/ 'provisioningCreateAccountTicket' smart constructor.
-newtype ProvisioningCreateAccountTicket = ProvisioningCreateAccountTicket
+newtype ProvisioningCreateAccountTicket = ProvisioningCreateAccountTicket'
     { _pcatPayload :: AccountTicket
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ provisioningCreateAccountTicket
     :: AccountTicket -- ^ 'pcatPayload'
     -> ProvisioningCreateAccountTicket
 provisioningCreateAccountTicket pPcatPayload_ =
-    ProvisioningCreateAccountTicket
+    ProvisioningCreateAccountTicket'
     { _pcatPayload = pPcatPayload_
     }
 
@@ -79,7 +79,9 @@ instance GoogleRequest
          ProvisioningCreateAccountTicket where
         type Rs ProvisioningCreateAccountTicket =
              AccountTicket
-        requestClient ProvisioningCreateAccountTicket{..}
+        type Scopes ProvisioningCreateAccountTicket =
+             '["https://www.googleapis.com/auth/analytics.provision"]
+        requestClient ProvisioningCreateAccountTicket'{..}
           = go (Just AltJSON) _pcatPayload analyticsService
           where go
                   = buildClient

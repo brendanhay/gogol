@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlacementGroups.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementGroupsInsert' request conforms to.
 type PlacementGroupsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
@@ -55,7 +55,7 @@ type PlacementGroupsInsertResource =
 -- | Inserts a new placement group.
 --
 -- /See:/ 'placementGroupsInsert' smart constructor.
-data PlacementGroupsInsert = PlacementGroupsInsert
+data PlacementGroupsInsert = PlacementGroupsInsert'
     { _pgiProFileId :: !(Textual Int64)
     , _pgiPayload   :: !PlacementGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementGroupsInsert
     -> PlacementGroup -- ^ 'pgiPayload'
     -> PlacementGroupsInsert
 placementGroupsInsert pPgiProFileId_ pPgiPayload_ =
-    PlacementGroupsInsert
+    PlacementGroupsInsert'
     { _pgiProFileId = _Coerce # pPgiProFileId_
     , _pgiPayload = pPgiPayload_
     }
@@ -90,7 +90,9 @@ pgiPayload
 
 instance GoogleRequest PlacementGroupsInsert where
         type Rs PlacementGroupsInsert = PlacementGroup
-        requestClient PlacementGroupsInsert{..}
+        type Scopes PlacementGroupsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementGroupsInsert'{..}
           = go _pgiProFileId (Just AltJSON) _pgiPayload
               dFAReportingService
           where go

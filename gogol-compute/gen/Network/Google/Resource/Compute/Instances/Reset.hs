@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.Reset
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type InstancesResetResource =
 -- | Performs a hard reset on the instance.
 --
 -- /See:/ 'instancesReset' smart constructor.
-data InstancesReset = InstancesReset
+data InstancesReset = InstancesReset'
     { _irProject  :: !Text
     , _irZone     :: !Text
     , _irInstance :: !Text
@@ -79,7 +79,7 @@ instancesReset
     -> Text -- ^ 'irInstance'
     -> InstancesReset
 instancesReset pIrProject_ pIrZone_ pIrInstance_ =
-    InstancesReset
+    InstancesReset'
     { _irProject = pIrProject_
     , _irZone = pIrZone_
     , _irInstance = pIrInstance_
@@ -101,7 +101,10 @@ irInstance
 
 instance GoogleRequest InstancesReset where
         type Rs InstancesReset = Operation
-        requestClient InstancesReset{..}
+        type Scopes InstancesReset =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstancesReset'{..}
           = go _irProject _irZone _irInstance (Just AltJSON)
               computeService
           where go

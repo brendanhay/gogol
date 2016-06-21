@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.ShoppingContent.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -157,6 +158,7 @@ module Network.Google.ShoppingContent.Types
     -- * OrdersCustomBatchRequestEntryCancelLineItem
     , OrdersCustomBatchRequestEntryCancelLineItem
     , ordersCustomBatchRequestEntryCancelLineItem
+    , ocbrecliAmount
     , ocbrecliQuantity
     , ocbrecliLineItemId
     , ocbrecliReason
@@ -334,12 +336,6 @@ module Network.Google.ShoppingContent.Types
     , wValue
     , wUnit
 
-    -- * ProductInstallment
-    , ProductInstallment
-    , productInstallment
-    , piAmount
-    , piMonths
-
     -- * Error'
     , Error'
     , error'
@@ -390,11 +386,18 @@ module Network.Google.ShoppingContent.Types
     , dcbreDatafeedId
     , dcbreBatchId
 
+    -- * Installment
+    , Installment
+    , installment
+    , iAmount
+    , iMonths
+
     -- * DatafeedFetchSchedule
     , DatafeedFetchSchedule
     , datafeedFetchSchedule
     , dfsFetchURL
     , dfsUsername
+    , dfsMinuteOfHour
     , dfsPassword
     , dfsDayOfMonth
     , dfsHour
@@ -490,7 +493,9 @@ module Network.Google.ShoppingContent.Types
     -- * InventorySetRequest
     , InventorySetRequest
     , inventorySetRequest
+    , isrLoyaltyPoints
     , isrQuantity
+    , isrInstallment
     , isrSalePrice
     , isrAvailability
     , isrSalePriceEffectiveDate
@@ -507,6 +512,7 @@ module Network.Google.ShoppingContent.Types
     -- * OrdersCancelLineItemRequest
     , OrdersCancelLineItemRequest
     , ordersCancelLineItemRequest
+    , oclirAmount
     , oclirQuantity
     , oclirLineItemId
     , oclirReason
@@ -717,8 +723,10 @@ module Network.Google.ShoppingContent.Types
     -- * Inventory
     , Inventory
     , inventory
+    , iLoyaltyPoints
     , iKind
     , iQuantity
+    , iInstallment
     , iSalePrice
     , iAvailability
     , iSalePriceEffectiveDate
@@ -730,6 +738,15 @@ module Network.Google.ShoppingContent.Types
     , ordersGetByMerchantOrderIdResponse
     , ogbmoirKind
     , ogbmoirOrder
+
+    -- * OrderPromotionBenefit
+    , OrderPromotionBenefit
+    , orderPromotionBenefit
+    , opbTaxImpact
+    , opbDiscount
+    , opbOfferIds
+    , opbSubType
+    , opbType
 
     -- * OrdersCancelRequest
     , OrdersCancelRequest
@@ -763,6 +780,17 @@ module Network.Google.ShoppingContent.Types
     , ascrModifierPercent
     , ascrName
     , ascrModifierFlatRate
+
+    -- * OrderPromotion
+    , OrderPromotion
+    , orderPromotion
+    , opEffectiveDates
+    , opGenericRedemptionCode
+    , opRedemptionChannel
+    , opBenefits
+    , opLongTitle
+    , opId
+    , opProductApplicability
 
     -- * Price
     , Price
@@ -805,6 +833,7 @@ module Network.Google.ShoppingContent.Types
     , toShippingCostTax
     , toCustomer
     , toPaymentMethod
+    , toPromotions
     , toShippingCost
 
     -- * DatafeedstatusesCustomBatchResponseEntry
@@ -967,6 +996,7 @@ module Network.Google.ShoppingContent.Types
     , ppId
     , ppAdwordsLabels
     , ppPrice
+    , ppPromotionIds
     , ppSizeType
     , ppMobileLink
     , ppTitle
@@ -1088,6 +1118,7 @@ module Network.Google.ShoppingContent.Types
     , ooCustomer
     , ooId
     , ooPaymentMethod
+    , ooPromotions
     , ooPaymentStatus
     , ooShippingCost
 
@@ -1253,11 +1284,11 @@ import           Network.Google.ShoppingContent.Types.Product
 import           Network.Google.ShoppingContent.Types.Sum
 
 -- | Default request referring to version 'v2' of the Content API for Shopping. This contains the host and root path used as a starting point for constructing service requests.
-shoppingContentService :: Service
+shoppingContentService :: ServiceConfig
 shoppingContentService
   = defaultService (ServiceId "content:v2")
       "www.googleapis.com"
 
 -- | Manage your product listings and accounts for Google Shopping
-contentScope :: OAuthScope
-contentScope = "https://www.googleapis.com/auth/content";
+contentScope :: Proxy '["https://www.googleapis.com/auth/content"]
+contentScope = Proxy;

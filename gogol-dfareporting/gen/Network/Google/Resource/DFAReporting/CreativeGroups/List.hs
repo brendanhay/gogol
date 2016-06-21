@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeGroups.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsList' request conforms to.
 type CreativeGroupsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
@@ -69,7 +69,7 @@ type CreativeGroupsListResource =
 -- | Retrieves a list of creative groups, possibly filtered.
 --
 -- /See:/ 'creativeGroupsList' smart constructor.
-data CreativeGroupsList = CreativeGroupsList
+data CreativeGroupsList = CreativeGroupsList'
     { _cglSearchString  :: !(Maybe Text)
     , _cglIds           :: !(Maybe [Textual Int64])
     , _cglProFileId     :: !(Textual Int64)
@@ -106,7 +106,7 @@ creativeGroupsList
     :: Int64 -- ^ 'cglProFileId'
     -> CreativeGroupsList
 creativeGroupsList pCglProFileId_ =
-    CreativeGroupsList
+    CreativeGroupsList'
     { _cglSearchString = Nothing
     , _cglIds = Nothing
     , _cglProFileId = _Coerce # pCglProFileId_
@@ -183,7 +183,9 @@ cglMaxResults
 instance GoogleRequest CreativeGroupsList where
         type Rs CreativeGroupsList =
              CreativeGroupsListResponse
-        requestClient CreativeGroupsList{..}
+        type Scopes CreativeGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeGroupsList'{..}
           = go _cglProFileId _cglSearchString
               (_cglIds ^. _Default)
               _cglSortOrder

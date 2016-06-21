@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeAnalytics.Groups.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type GroupsDeleteResource =
 -- | Deletes a group.
 --
 -- /See:/ 'groupsDelete' smart constructor.
-data GroupsDelete = GroupsDelete
+data GroupsDelete = GroupsDelete'
     { _gdOnBehalfOfContentOwner :: !(Maybe Text)
     , _gdId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupsDelete
     :: Text -- ^ 'gdId'
     -> GroupsDelete
 groupsDelete pGdId_ =
-    GroupsDelete
+    GroupsDelete'
     { _gdOnBehalfOfContentOwner = Nothing
     , _gdId = pGdId_
     }
@@ -97,7 +97,10 @@ gdId = lens _gdId (\ s a -> s{_gdId = a})
 
 instance GoogleRequest GroupsDelete where
         type Rs GroupsDelete = ()
-        requestClient GroupsDelete{..}
+        type Scopes GroupsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient GroupsDelete'{..}
           = go (Just _gdId) _gdOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeAnalyticsService

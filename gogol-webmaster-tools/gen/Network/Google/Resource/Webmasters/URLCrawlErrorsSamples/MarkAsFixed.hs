@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@
 -- Marks the provided site\'s sample URL as fixed, and removes it from the
 -- samples list.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorssamples.markAsFixed@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.urlcrawlerrorssamples.markAsFixed@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
     (
     -- * REST Resource
@@ -63,7 +63,7 @@ type URLCrawlErrorsSamplesMarkAsFixedResource =
 -- samples list.
 --
 -- /See:/ 'urlCrawlErrorsSamplesMarkAsFixed' smart constructor.
-data URLCrawlErrorsSamplesMarkAsFixed = URLCrawlErrorsSamplesMarkAsFixed
+data URLCrawlErrorsSamplesMarkAsFixed = URLCrawlErrorsSamplesMarkAsFixed'
     { _ucesmafPlatform :: !URLCrawlErrorsSamplesMarkAsFixedPlatform
     , _ucesmafCategory :: !URLCrawlErrorsSamplesMarkAsFixedCategory
     , _ucesmafSiteURL  :: !Text
@@ -88,7 +88,7 @@ urlCrawlErrorsSamplesMarkAsFixed
     -> Text -- ^ 'ucesmafURL'
     -> URLCrawlErrorsSamplesMarkAsFixed
 urlCrawlErrorsSamplesMarkAsFixed pUcesmafPlatform_ pUcesmafCategory_ pUcesmafSiteURL_ pUcesmafURL_ =
-    URLCrawlErrorsSamplesMarkAsFixed
+    URLCrawlErrorsSamplesMarkAsFixed'
     { _ucesmafPlatform = pUcesmafPlatform_
     , _ucesmafCategory = pUcesmafCategory_
     , _ucesmafSiteURL = pUcesmafSiteURL_
@@ -125,7 +125,9 @@ ucesmafURL
 instance GoogleRequest
          URLCrawlErrorsSamplesMarkAsFixed where
         type Rs URLCrawlErrorsSamplesMarkAsFixed = ()
-        requestClient URLCrawlErrorsSamplesMarkAsFixed{..}
+        type Scopes URLCrawlErrorsSamplesMarkAsFixed =
+             '["https://www.googleapis.com/auth/webmasters"]
+        requestClient URLCrawlErrorsSamplesMarkAsFixed'{..}
           = go _ucesmafSiteURL _ucesmafURL
               (Just _ucesmafCategory)
               (Just _ucesmafPlatform)

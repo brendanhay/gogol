@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.TurnBasedMatches.Cancel
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -33,7 +33,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.Cancel
     , TurnBasedMatchesCancel
 
     -- * Request Lenses
-    , tbmcMatchId
+    , tConsistencyToken
+    , tMatchId
     ) where
 
 import           Network.Google.Games.Types
@@ -47,37 +48,52 @@ type TurnBasedMatchesCancelResource =
          "turnbasedmatches" :>
            Capture "matchId" Text :>
              "cancel" :>
-               QueryParam "alt" AltJSON :> Put '[JSON] ()
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Cancel a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesCancel' smart constructor.
-newtype TurnBasedMatchesCancel = TurnBasedMatchesCancel
-    { _tbmcMatchId :: Text
+data TurnBasedMatchesCancel = TurnBasedMatchesCancel'
+    { _tConsistencyToken :: !(Maybe (Textual Int64))
+    , _tMatchId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tbmcMatchId'
+-- * 'tConsistencyToken'
+--
+-- * 'tMatchId'
 turnBasedMatchesCancel
-    :: Text -- ^ 'tbmcMatchId'
+    :: Text -- ^ 'tMatchId'
     -> TurnBasedMatchesCancel
-turnBasedMatchesCancel pTbmcMatchId_ =
-    TurnBasedMatchesCancel
-    { _tbmcMatchId = pTbmcMatchId_
+turnBasedMatchesCancel pTMatchId_ =
+    TurnBasedMatchesCancel'
+    { _tConsistencyToken = Nothing
+    , _tMatchId = pTMatchId_
     }
 
+-- | The last-seen mutation timestamp.
+tConsistencyToken :: Lens' TurnBasedMatchesCancel (Maybe Int64)
+tConsistencyToken
+  = lens _tConsistencyToken
+      (\ s a -> s{_tConsistencyToken = a})
+      . mapping _Coerce
+
 -- | The ID of the match.
-tbmcMatchId :: Lens' TurnBasedMatchesCancel Text
-tbmcMatchId
-  = lens _tbmcMatchId (\ s a -> s{_tbmcMatchId = a})
+tMatchId :: Lens' TurnBasedMatchesCancel Text
+tMatchId = lens _tMatchId (\ s a -> s{_tMatchId = a})
 
 instance GoogleRequest TurnBasedMatchesCancel where
         type Rs TurnBasedMatchesCancel = ()
-        requestClient TurnBasedMatchesCancel{..}
-          = go _tbmcMatchId (Just AltJSON) gamesService
+        type Scopes TurnBasedMatchesCancel =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient TurnBasedMatchesCancel'{..}
+          = go _tMatchId _tConsistencyToken (Just AltJSON)
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesCancelResource)

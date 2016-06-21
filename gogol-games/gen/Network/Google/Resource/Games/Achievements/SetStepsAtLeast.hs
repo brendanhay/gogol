@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Achievements.SetStepsAtLeast
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -37,6 +37,7 @@ module Network.Google.Resource.Games.Achievements.SetStepsAtLeast
 
     -- * Request Lenses
     , assalAchievementId
+    , assalConsistencyToken
     , assalSteps
     ) where
 
@@ -52,8 +53,9 @@ type AchievementsSetStepsAtLeastResource =
            Capture "achievementId" Text :>
              "setStepsAtLeast" :>
                QueryParam "steps" (Textual Int32) :>
-                 QueryParam "alt" AltJSON :>
-                   Post '[JSON] AchievementSetStepsAtLeastResponse
+                 QueryParam "consistencyToken" (Textual Int64) :>
+                   QueryParam "alt" AltJSON :>
+                     Post '[JSON] AchievementSetStepsAtLeastResponse
 
 -- | Sets the steps for the currently authenticated player towards unlocking
 -- an achievement. If the steps parameter is less than the current number
@@ -61,9 +63,10 @@ type AchievementsSetStepsAtLeastResource =
 -- achievement is not modified.
 --
 -- /See:/ 'achievementsSetStepsAtLeast' smart constructor.
-data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast
-    { _assalAchievementId :: !Text
-    , _assalSteps         :: !(Textual Int32)
+data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast'
+    { _assalAchievementId    :: !Text
+    , _assalConsistencyToken :: !(Maybe (Textual Int64))
+    , _assalSteps            :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsSetStepsAtLeast' with the minimum fields required to make a request.
@@ -72,14 +75,17 @@ data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast
 --
 -- * 'assalAchievementId'
 --
+-- * 'assalConsistencyToken'
+--
 -- * 'assalSteps'
 achievementsSetStepsAtLeast
     :: Text -- ^ 'assalAchievementId'
     -> Int32 -- ^ 'assalSteps'
     -> AchievementsSetStepsAtLeast
 achievementsSetStepsAtLeast pAssalAchievementId_ pAssalSteps_ =
-    AchievementsSetStepsAtLeast
+    AchievementsSetStepsAtLeast'
     { _assalAchievementId = pAssalAchievementId_
+    , _assalConsistencyToken = Nothing
     , _assalSteps = _Coerce # pAssalSteps_
     }
 
@@ -88,6 +94,13 @@ assalAchievementId :: Lens' AchievementsSetStepsAtLeast Text
 assalAchievementId
   = lens _assalAchievementId
       (\ s a -> s{_assalAchievementId = a})
+
+-- | The last-seen mutation timestamp.
+assalConsistencyToken :: Lens' AchievementsSetStepsAtLeast (Maybe Int64)
+assalConsistencyToken
+  = lens _assalConsistencyToken
+      (\ s a -> s{_assalConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The minimum value to set the steps to.
 assalSteps :: Lens' AchievementsSetStepsAtLeast Int32
@@ -99,8 +112,12 @@ instance GoogleRequest AchievementsSetStepsAtLeast
          where
         type Rs AchievementsSetStepsAtLeast =
              AchievementSetStepsAtLeastResponse
-        requestClient AchievementsSetStepsAtLeast{..}
+        type Scopes AchievementsSetStepsAtLeast =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient AchievementsSetStepsAtLeast'{..}
           = go _assalAchievementId (Just _assalSteps)
+              _assalConsistencyToken
               (Just AltJSON)
               gamesService
           where go

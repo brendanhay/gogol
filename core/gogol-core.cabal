@@ -1,5 +1,5 @@
 name:                  gogol-core
-version:               0.0.1
+version:               0.1.0
 synopsis:              Core data types and functionality for Gogol libraries.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -7,7 +7,7 @@ license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015 Brendan Hay
+copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 extra-source-files:    README.md
@@ -36,7 +36,8 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Data.JSON
+          Network.Google.Data.Base64
+        , Network.Google.Data.JSON
         , Network.Google.Data.Numeric
         , Network.Google.Data.Time
         , Network.Google.Prelude
@@ -45,17 +46,20 @@ library
     build-depends:
           aeson                >= 0.8
         , attoparsec           >= 0.11.3
-        , base                 >= 4.7    && < 5
+        , base                 >= 4.7
+        , bifunctors           >= 0.1
         , bytestring           >= 0.9
         , case-insensitive     >= 1.2
         , conduit              >= 1.1
         , dlist                >= 0.7
         , exceptions           >= 0.6
         , hashable             >= 1.2
+        , http-api-data        >= 0.2
         , http-client          >= 0.4.4
         , http-media           >= 0.6
         , http-types           >= 0.8.6
         , lens                 >= 4.4
+        , memory               >= 0.8
         , resourcet            >= 1.1
         , scientific           >= 0.3
         , servant              >= 0.4.4
@@ -72,7 +76,7 @@ library
             , time       >= 1.2 && < 1.5
     else
         build-depends:
-              time       >= 1.5 && < 1.6
+              time       >= 1.5
 
 test-suite tests
     type:              exitcode-stdio-1.0

@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetPools.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetPool resource.
+-- Returns the specified target pool. Get a list of available target pools
+-- by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.get@.
 module Network.Google.Resource.Compute.TargetPools.Get
@@ -54,10 +55,11 @@ type TargetPoolsGetResource =
                    Capture "targetPool" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] TargetPool
 
--- | Returns the specified TargetPool resource.
+-- | Returns the specified target pool. Get a list of available target pools
+-- by making a list() request.
 --
 -- /See:/ 'targetPoolsGet' smart constructor.
-data TargetPoolsGet = TargetPoolsGet
+data TargetPoolsGet = TargetPoolsGet'
     { _tpgProject    :: !Text
     , _tpgTargetPool :: !Text
     , _tpgRegion     :: !Text
@@ -78,13 +80,13 @@ targetPoolsGet
     -> Text -- ^ 'tpgRegion'
     -> TargetPoolsGet
 targetPoolsGet pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
-    TargetPoolsGet
+    TargetPoolsGet'
     { _tpgProject = pTpgProject_
     , _tpgTargetPool = pTpgTargetPool_
     , _tpgRegion = pTpgRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tpgProject :: Lens' TargetPoolsGet Text
 tpgProject
   = lens _tpgProject (\ s a -> s{_tpgProject = a})
@@ -102,7 +104,11 @@ tpgRegion
 
 instance GoogleRequest TargetPoolsGet where
         type Rs TargetPoolsGet = TargetPool
-        requestClient TargetPoolsGet{..}
+        type Scopes TargetPoolsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient TargetPoolsGet'{..}
           = go _tpgProject _tpgRegion _tpgTargetPool
               (Just AltJSON)
               computeService

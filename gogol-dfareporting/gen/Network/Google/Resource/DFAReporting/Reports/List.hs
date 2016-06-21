@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'ReportsList' request conforms to.
 type ReportsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -62,7 +62,7 @@ type ReportsListResource =
 -- | Retrieves list of reports.
 --
 -- /See:/ 'reportsList' smart constructor.
-data ReportsList = ReportsList
+data ReportsList = ReportsList'
     { _rlProFileId  :: !(Textual Int64)
     , _rlSortOrder  :: !ReportsListSortOrder
     , _rlScope      :: !ReportsListScope
@@ -90,7 +90,7 @@ reportsList
     :: Int64 -- ^ 'rlProFileId'
     -> ReportsList
 reportsList pRlProFileId_ =
-    ReportsList
+    ReportsList'
     { _rlProFileId = _Coerce # pRlProFileId_
     , _rlSortOrder = RLSODescending
     , _rlScope = Mine
@@ -132,7 +132,9 @@ rlMaxResults
 
 instance GoogleRequest ReportsList where
         type Rs ReportsList = ReportList
-        requestClient ReportsList{..}
+        type Scopes ReportsList =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient ReportsList'{..}
           = go _rlProFileId (Just _rlSortOrder) (Just _rlScope)
               _rlPageToken
               (Just _rlSortField)

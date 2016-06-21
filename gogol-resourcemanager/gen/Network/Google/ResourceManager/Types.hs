@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.ResourceManager.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,6 +20,7 @@ module Network.Google.ResourceManager.Types
       resourceManagerService
 
     -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
     , cloudPlatformScope
 
     -- * ResourceId
@@ -36,11 +38,6 @@ module Network.Google.ResourceManager.Types
     -- * GetIAMPolicyRequest
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
-
-    -- * OrganizationOwner
-    , OrganizationOwner
-    , organizationOwner
-    , ooDirectoryCustomerId
 
     -- * Project
     , Project
@@ -84,37 +81,32 @@ module Network.Google.ResourceManager.Types
     , projectLabels
     , plAddtional
 
-    -- * Organization
-    , Organization
-    , organization
-    , oOwner
-    , oDisplayName
-    , oOrganizationId
+    -- * UndeleteProjectRequest
+    , UndeleteProjectRequest
+    , undeleteProjectRequest
 
     -- * Binding
     , Binding
     , binding
     , bMembers
     , bRole
-
-    -- * ListOrganizationsResponse
-    , ListOrganizationsResponse
-    , listOrganizationsResponse
-    , lorNextPageToken
-    , lorOrganizations
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types.Product
 import           Network.Google.ResourceManager.Types.Sum
 
--- | Default request referring to version 'v1beta1' of the Google Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
-resourceManagerService :: Service
+-- | Default request referring to version 'v1' of the Google Cloud Resource Manager API. This contains the host and root path used as a starting point for constructing service requests.
+resourceManagerService :: ServiceConfig
 resourceManagerService
   = defaultService
-      (ServiceId "cloudresourcemanager:v1beta1")
+      (ServiceId "cloudresourcemanager:v1")
       "cloudresourcemanager.googleapis.com"
 
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
+
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

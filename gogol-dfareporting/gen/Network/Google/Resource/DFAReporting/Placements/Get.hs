@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Placements.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementsGet' request conforms to.
 type PlacementsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -54,7 +54,7 @@ type PlacementsGetResource =
 -- | Gets one placement by ID.
 --
 -- /See:/ 'placementsGet' smart constructor.
-data PlacementsGet = PlacementsGet
+data PlacementsGet = PlacementsGet'
     { _pgProFileId :: !(Textual Int64)
     , _pgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ placementsGet
     -> Int64 -- ^ 'pgId'
     -> PlacementsGet
 placementsGet pPgProFileId_ pPgId_ =
-    PlacementsGet
+    PlacementsGet'
     { _pgProFileId = _Coerce # pPgProFileId_
     , _pgId = _Coerce # pPgId_
     }
@@ -88,7 +88,9 @@ pgId = lens _pgId (\ s a -> s{_pgId = a}) . _Coerce
 
 instance GoogleRequest PlacementsGet where
         type Rs PlacementsGet = Placement
-        requestClient PlacementsGet{..}
+        type Scopes PlacementsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementsGet'{..}
           = go _pgProFileId _pgId (Just AltJSON)
               dFAReportingService
           where go

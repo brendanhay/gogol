@@ -7,20 +7,25 @@
 
 -- |
 -- Module      : Network.Google.ReplicaPoolUpdater
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Compute Engine Instance Group Updater API provides services
--- for updating groups of Compute Engine Instances.
+-- Updates groups of Compute Engine instances.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference>
 module Network.Google.ReplicaPoolUpdater
     (
     -- * Service Configuration
       replicaPoolUpdaterService
+
+    -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , replicapoolScope
+    , replicapoolReadOnlyScope
 
     -- * API Declaration
     , ReplicaPoolUpdaterAPI

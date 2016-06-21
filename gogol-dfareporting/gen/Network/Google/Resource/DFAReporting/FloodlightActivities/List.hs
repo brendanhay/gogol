@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightActivities.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesList' request conforms to.
 type FloodlightActivitiesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -92,7 +92,7 @@ type FloodlightActivitiesListResource =
 -- | Retrieves a list of floodlight activities, possibly filtered.
 --
 -- /See:/ 'floodlightActivitiesList' smart constructor.
-data FloodlightActivitiesList = FloodlightActivitiesList
+data FloodlightActivitiesList = FloodlightActivitiesList'
     { _falTagString                        :: !(Maybe Text)
     , _falFloodlightActivityGroupTagString :: !(Maybe Text)
     , _falFloodlightConfigurationId        :: !(Maybe (Textual Int64))
@@ -144,7 +144,7 @@ floodlightActivitiesList
     :: Int64 -- ^ 'falProFileId'
     -> FloodlightActivitiesList
 floodlightActivitiesList pFalProFileId_ =
-    FloodlightActivitiesList
+    FloodlightActivitiesList'
     { _falTagString = Nothing
     , _falFloodlightActivityGroupTagString = Nothing
     , _falFloodlightConfigurationId = Nothing
@@ -267,7 +267,9 @@ falMaxResults
 instance GoogleRequest FloodlightActivitiesList where
         type Rs FloodlightActivitiesList =
              FloodlightActivitiesListResponse
-        requestClient FloodlightActivitiesList{..}
+        type Scopes FloodlightActivitiesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightActivitiesList'{..}
           = go _falProFileId _falTagString
               _falFloodlightActivityGroupTagString
               _falFloodlightConfigurationId

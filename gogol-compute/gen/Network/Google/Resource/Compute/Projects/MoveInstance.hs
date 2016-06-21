@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Projects.MoveInstance
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ProjectsMoveInstanceResource =
 -- another.
 --
 -- /See:/ 'projectsMoveInstance' smart constructor.
-data ProjectsMoveInstance = ProjectsMoveInstance
+data ProjectsMoveInstance = ProjectsMoveInstance'
     { _pmiProject :: !Text
     , _pmiPayload :: !InstanceMoveRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ projectsMoveInstance
     -> InstanceMoveRequest -- ^ 'pmiPayload'
     -> ProjectsMoveInstance
 projectsMoveInstance pPmiProject_ pPmiPayload_ =
-    ProjectsMoveInstance
+    ProjectsMoveInstance'
     { _pmiProject = pPmiProject_
     , _pmiPayload = pPmiPayload_
     }
@@ -91,7 +91,10 @@ pmiPayload
 
 instance GoogleRequest ProjectsMoveInstance where
         type Rs ProjectsMoveInstance = Operation
-        requestClient ProjectsMoveInstance{..}
+        type Scopes ProjectsMoveInstance =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient ProjectsMoveInstance'{..}
           = go _pmiProject (Just AltJSON) _pmiPayload
               computeService
           where go

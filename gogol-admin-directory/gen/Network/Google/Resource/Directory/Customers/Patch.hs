@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Customers.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type CustomersPatchResource =
 -- | Updates a customer. This method supports patch semantics.
 --
 -- /See:/ 'customersPatch' smart constructor.
-data CustomersPatch = CustomersPatch
+data CustomersPatch = CustomersPatch'
     { _cpCustomerKey :: !Text
     , _cpPayload     :: !Customer
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ customersPatch
     -> Customer -- ^ 'cpPayload'
     -> CustomersPatch
 customersPatch pCpCustomerKey_ pCpPayload_ =
-    CustomersPatch
+    CustomersPatch'
     { _cpCustomerKey = pCpCustomerKey_
     , _cpPayload = pCpPayload_
     }
@@ -89,7 +89,9 @@ cpPayload
 
 instance GoogleRequest CustomersPatch where
         type Rs CustomersPatch = Customer
-        requestClient CustomersPatch{..}
+        type Scopes CustomersPatch =
+             '["https://www.googleapis.com/auth/admin.directory.customer"]
+        requestClient CustomersPatch'{..}
           = go _cpCustomerKey (Just AltJSON) _cpPayload
               directoryService
           where go

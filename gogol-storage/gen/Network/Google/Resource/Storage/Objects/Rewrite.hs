@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Rewrite
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -120,7 +120,7 @@ type ObjectsRewriteResource =
 -- metadata.
 --
 -- /See:/ 'objectsRewrite' smart constructor.
-data ObjectsRewrite = ObjectsRewrite
+data ObjectsRewrite = ObjectsRewrite'
     { _orDestinationPredefinedACL       :: !(Maybe ObjectsRewriteDestinationPredefinedACL)
     , _orIfSourceGenerationMatch        :: !(Maybe (Textual Int64))
     , _orIfMetagenerationMatch          :: !(Maybe (Textual Int64))
@@ -188,7 +188,7 @@ objectsRewrite
     -> Text -- ^ 'orDestinationObject'
     -> ObjectsRewrite
 objectsRewrite pOrSourceObject_ pOrSourceBucket_ pOrPayload_ pOrDestinationBucket_ pOrDestinationObject_ =
-    ObjectsRewrite
+    ObjectsRewrite'
     { _orDestinationPredefinedACL = Nothing
     , _orIfSourceGenerationMatch = Nothing
     , _orIfMetagenerationMatch = Nothing
@@ -352,7 +352,11 @@ orDestinationObject
 
 instance GoogleRequest ObjectsRewrite where
         type Rs ObjectsRewrite = RewriteResponse
-        requestClient ObjectsRewrite{..}
+        type Scopes ObjectsRewrite =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient ObjectsRewrite'{..}
           = go _orSourceBucket _orSourceObject
               _orDestinationBucket
               _orDestinationObject

@@ -7,20 +7,25 @@
 
 -- |
 -- Module      : Network.Google.Debugger
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you examine the stack and variables of your running application
--- without stopping or slowing it down.
+-- Examines the call stack and variables of a running application without
+-- stopping or slowing it down.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference>
 module Network.Google.Debugger
     (
     -- * Service Configuration
       debuggerService
+
+    -- * OAuth Scopes
+    , cloudDebuggerScope
+    , cloudDebugletcontrollerScope
+    , cloudPlatformScope
 
     -- * API Declaration
     , DebuggerAPI
@@ -86,12 +91,18 @@ module Network.Google.Debugger
     , gscAliasName
     , gscRevisionId
     , gscHostURI
+    , gscAliasContext
 
     -- ** RepoId
     , RepoId
     , repoId
     , riUid
     , riProjectRepoId
+
+    -- ** ExtendedSourceContextLabels
+    , ExtendedSourceContextLabels
+    , extendedSourceContextLabels
+    , esclAddtional
 
     -- ** ProjectRepoId
     , ProjectRepoId
@@ -116,6 +127,7 @@ module Network.Google.Debugger
     , bExpressions
     , bLogMessageFormat
     , bId
+    , bLabels
     , bUserEmail
     , bVariableTable
     , bStackFrames
@@ -123,6 +135,11 @@ module Network.Google.Debugger
     , bEvaluatedExpressions
     , bCreateTime
     , bIsFinalState
+
+    -- ** BreakpointLabels
+    , BreakpointLabels
+    , breakpointLabels
+    , blAddtional
 
     -- ** GetBreakpointResponse
     , GetBreakpointResponse
@@ -137,6 +154,7 @@ module Network.Google.Debugger
     , vMembers
     , vValue
     , vName
+    , vType
 
     -- ** ListBreakpointsResponse
     , ListBreakpointsResponse
@@ -166,6 +184,13 @@ module Network.Google.Debugger
     , listActiveBreakpointsResponse
     , labrNextWaitToken
     , labrBreakpoints
+    , labrWaitExpired
+
+    -- ** ExtendedSourceContext
+    , ExtendedSourceContext
+    , extendedSourceContext
+    , escContext
+    , escLabels
 
     -- ** GitSourceContext
     , GitSourceContext
@@ -193,6 +218,7 @@ module Network.Google.Debugger
     , crscRepoId
     , crscAliasName
     , crscRevisionId
+    , crscAliasContext
 
     -- ** DebuggeeLabels
     , DebuggeeLabels
@@ -205,6 +231,7 @@ module Network.Google.Debugger
     , dStatus
     , dUniquifier
     , dProject
+    , dExtSourceContexts
     , dAgentVersion
     , dIsDisabled
     , dId
@@ -223,6 +250,12 @@ module Network.Google.Debugger
     , RegisterDebuggeeRequest
     , registerDebuggeeRequest
     , rDebuggee
+
+    -- ** AliasContext
+    , AliasContext
+    , aliasContext
+    , acKind
+    , acName
 
     -- ** CloudWorkspaceId
     , CloudWorkspaceId

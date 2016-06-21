@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Videos.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type VideosUpdateResource =
 -- | Updates a video\'s metadata.
 --
 -- /See:/ 'videosUpdate' smart constructor.
-data VideosUpdate = VideosUpdate
+data VideosUpdate = VideosUpdate'
     { _vuPart                   :: !Text
     , _vuPayload                :: !Video
     , _vuOnBehalfOfContentOwner :: !(Maybe Text)
@@ -75,7 +75,7 @@ videosUpdate
     -> Video -- ^ 'vuPayload'
     -> VideosUpdate
 videosUpdate pVuPart_ pVuPayload_ =
-    VideosUpdate
+    VideosUpdate'
     { _vuPart = pVuPart_
     , _vuPayload = pVuPayload_
     , _vuOnBehalfOfContentOwner = Nothing
@@ -123,7 +123,11 @@ vuOnBehalfOfContentOwner
 
 instance GoogleRequest VideosUpdate where
         type Rs VideosUpdate = Video
-        requestClient VideosUpdate{..}
+        type Scopes VideosUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient VideosUpdate'{..}
           = go (Just _vuPart) _vuOnBehalfOfContentOwner
               (Just AltJSON)
               _vuPayload

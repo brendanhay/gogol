@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Products.GenerateApprovalURL
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -29,7 +29,7 @@
 -- property in a Products.approve call to approve the product. This URL can
 -- only be used to display permissions for up to 1 day.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.generateApprovalUrl@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.generateApprovalUrl@.
 module Network.Google.Resource.AndroidEnterprise.Products.GenerateApprovalURL
     (
     -- * REST Resource
@@ -72,7 +72,7 @@ type ProductsGenerateApprovalURLResource =
 -- only be used to display permissions for up to 1 day.
 --
 -- /See:/ 'productsGenerateApprovalURL' smart constructor.
-data ProductsGenerateApprovalURL = ProductsGenerateApprovalURL
+data ProductsGenerateApprovalURL = ProductsGenerateApprovalURL'
     { _pgauLanguageCode :: !(Maybe Text)
     , _pgauEnterpriseId :: !Text
     , _pgauProductId    :: !Text
@@ -92,7 +92,7 @@ productsGenerateApprovalURL
     -> Text -- ^ 'pgauProductId'
     -> ProductsGenerateApprovalURL
 productsGenerateApprovalURL pPgauEnterpriseId_ pPgauProductId_ =
-    ProductsGenerateApprovalURL
+    ProductsGenerateApprovalURL'
     { _pgauLanguageCode = Nothing
     , _pgauEnterpriseId = pPgauEnterpriseId_
     , _pgauProductId = pPgauProductId_
@@ -121,7 +121,9 @@ instance GoogleRequest ProductsGenerateApprovalURL
          where
         type Rs ProductsGenerateApprovalURL =
              ProductsGenerateApprovalURLResponse
-        requestClient ProductsGenerateApprovalURL{..}
+        type Scopes ProductsGenerateApprovalURL =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient ProductsGenerateApprovalURL'{..}
           = go _pgauEnterpriseId _pgauProductId
               _pgauLanguageCode
               (Just AltJSON)

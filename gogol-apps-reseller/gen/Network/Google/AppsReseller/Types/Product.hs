@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.AppsReseller.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Trial Settings of the subscription.
 --
 -- /See:/ 'subscriptionTrialSettings' smart constructor.
-data SubscriptionTrialSettings = SubscriptionTrialSettings
+data SubscriptionTrialSettings = SubscriptionTrialSettings'
     { _stsIsInTrial    :: !(Maybe Bool)
     , _stsTrialEndTime :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data SubscriptionTrialSettings = SubscriptionTrialSettings
 subscriptionTrialSettings
     :: SubscriptionTrialSettings
 subscriptionTrialSettings =
-    SubscriptionTrialSettings
+    SubscriptionTrialSettings'
     { _stsIsInTrial = Nothing
     , _stsTrialEndTime = Nothing
     }
@@ -59,11 +59,11 @@ instance FromJSON SubscriptionTrialSettings where
         parseJSON
           = withObject "SubscriptionTrialSettings"
               (\ o ->
-                 SubscriptionTrialSettings <$>
+                 SubscriptionTrialSettings' <$>
                    (o .:? "isInTrial") <*> (o .:? "trialEndTime"))
 
 instance ToJSON SubscriptionTrialSettings where
-        toJSON SubscriptionTrialSettings{..}
+        toJSON SubscriptionTrialSettings'{..}
           = object
               (catMaybes
                  [("isInTrial" .=) <$> _stsIsInTrial,
@@ -72,7 +72,7 @@ instance ToJSON SubscriptionTrialSettings where
 -- | JSON template for address of a customer.
 --
 -- /See:/ 'address' smart constructor.
-data Address = Address
+data Address = Address'
     { _aOrganizationName :: !(Maybe Text)
     , _aKind             :: !Text
     , _aPostalCode       :: !(Maybe Text)
@@ -111,7 +111,7 @@ data Address = Address
 address
     :: Address
 address =
-    Address
+    Address'
     { _aOrganizationName = Nothing
     , _aKind = "customers#address"
     , _aPostalCode = Nothing
@@ -183,7 +183,7 @@ instance FromJSON Address where
         parseJSON
           = withObject "Address"
               (\ o ->
-                 Address <$>
+                 Address' <$>
                    (o .:? "organizationName") <*>
                      (o .:? "kind" .!= "customers#address")
                      <*> (o .:? "postalCode")
@@ -196,7 +196,7 @@ instance FromJSON Address where
                      <*> (o .:? "addressLine3"))
 
 instance ToJSON Address where
-        toJSON Address{..}
+        toJSON Address'{..}
           = object
               (catMaybes
                  [("organizationName" .=) <$> _aOrganizationName,
@@ -213,19 +213,22 @@ instance ToJSON Address where
 -- | JSON template for a customer.
 --
 -- /See:/ 'customer' smart constructor.
-data Customer = Customer
-    { _cResourceUiURL  :: !(Maybe Text)
-    , _cKind           :: !Text
-    , _cCustomerId     :: !(Maybe Text)
-    , _cAlternateEmail :: !(Maybe Text)
-    , _cCustomerDomain :: !(Maybe Text)
-    , _cPhoneNumber    :: !(Maybe Text)
-    , _cPostalAddress  :: !(Maybe Address)
+data Customer = Customer'
+    { _cCustomerDomainVerified :: !(Maybe Bool)
+    , _cResourceUiURL          :: !(Maybe Text)
+    , _cKind                   :: !Text
+    , _cCustomerId             :: !(Maybe Text)
+    , _cAlternateEmail         :: !(Maybe Text)
+    , _cCustomerDomain         :: !(Maybe Text)
+    , _cPhoneNumber            :: !(Maybe Text)
+    , _cPostalAddress          :: !(Maybe Address)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Customer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cCustomerDomainVerified'
 --
 -- * 'cResourceUiURL'
 --
@@ -243,8 +246,9 @@ data Customer = Customer
 customer
     :: Customer
 customer =
-    Customer
-    { _cResourceUiURL = Nothing
+    Customer'
+    { _cCustomerDomainVerified = Nothing
+    , _cResourceUiURL = Nothing
     , _cKind = "reseller#customer"
     , _cCustomerId = Nothing
     , _cAlternateEmail = Nothing
@@ -252,6 +256,12 @@ customer =
     , _cPhoneNumber = Nothing
     , _cPostalAddress = Nothing
     }
+
+-- | Whether the customer\'s primary domain has been verified.
+cCustomerDomainVerified :: Lens' Customer (Maybe Bool)
+cCustomerDomainVerified
+  = lens _cCustomerDomainVerified
+      (\ s a -> s{_cCustomerDomainVerified = a})
 
 -- | Ui url for customer resource.
 cResourceUiURL :: Lens' Customer (Maybe Text)
@@ -295,9 +305,10 @@ instance FromJSON Customer where
         parseJSON
           = withObject "Customer"
               (\ o ->
-                 Customer <$>
-                   (o .:? "resourceUiUrl") <*>
-                     (o .:? "kind" .!= "reseller#customer")
+                 Customer' <$>
+                   (o .:? "customerDomainVerified") <*>
+                     (o .:? "resourceUiUrl")
+                     <*> (o .:? "kind" .!= "reseller#customer")
                      <*> (o .:? "customerId")
                      <*> (o .:? "alternateEmail")
                      <*> (o .:? "customerDomain")
@@ -305,10 +316,12 @@ instance FromJSON Customer where
                      <*> (o .:? "postalAddress"))
 
 instance ToJSON Customer where
-        toJSON Customer{..}
+        toJSON Customer'{..}
           = object
               (catMaybes
-                 [("resourceUiUrl" .=) <$> _cResourceUiURL,
+                 [("customerDomainVerified" .=) <$>
+                    _cCustomerDomainVerified,
+                  ("resourceUiUrl" .=) <$> _cResourceUiURL,
                   Just ("kind" .= _cKind),
                   ("customerId" .=) <$> _cCustomerId,
                   ("alternateEmail" .=) <$> _cAlternateEmail,
@@ -319,8 +332,9 @@ instance ToJSON Customer where
 -- | JSON template for the ChangePlan rpc request.
 --
 -- /See:/ 'changePlanRequest' smart constructor.
-data ChangePlanRequest = ChangePlanRequest
+data ChangePlanRequest = ChangePlanRequest'
     { _cprKind            :: !Text
+    , _cprDealCode        :: !(Maybe Text)
     , _cprPlanName        :: !(Maybe Text)
     , _cprPurchaseOrderId :: !(Maybe Text)
     , _cprSeats           :: !(Maybe Seats)
@@ -332,6 +346,8 @@ data ChangePlanRequest = ChangePlanRequest
 --
 -- * 'cprKind'
 --
+-- * 'cprDealCode'
+--
 -- * 'cprPlanName'
 --
 -- * 'cprPurchaseOrderId'
@@ -340,8 +356,9 @@ data ChangePlanRequest = ChangePlanRequest
 changePlanRequest
     :: ChangePlanRequest
 changePlanRequest =
-    ChangePlanRequest
+    ChangePlanRequest'
     { _cprKind = "subscriptions#changePlanRequest"
+    , _cprDealCode = Nothing
     , _cprPlanName = Nothing
     , _cprPurchaseOrderId = Nothing
     , _cprSeats = Nothing
@@ -350,6 +367,12 @@ changePlanRequest =
 -- | Identifies the resource as a subscription change plan request.
 cprKind :: Lens' ChangePlanRequest Text
 cprKind = lens _cprKind (\ s a -> s{_cprKind = a})
+
+-- | External name of the deal code applicable for the subscription. This
+-- field is optional. If missing, the deal price plan won\'t be used.
+cprDealCode :: Lens' ChangePlanRequest (Maybe Text)
+cprDealCode
+  = lens _cprDealCode (\ s a -> s{_cprDealCode = a})
 
 -- | Name of the plan to change to.
 cprPlanName :: Lens' ChangePlanRequest (Maybe Text)
@@ -370,17 +393,19 @@ instance FromJSON ChangePlanRequest where
         parseJSON
           = withObject "ChangePlanRequest"
               (\ o ->
-                 ChangePlanRequest <$>
+                 ChangePlanRequest' <$>
                    (o .:? "kind" .!= "subscriptions#changePlanRequest")
+                     <*> (o .:? "dealCode")
                      <*> (o .:? "planName")
                      <*> (o .:? "purchaseOrderId")
                      <*> (o .:? "seats"))
 
 instance ToJSON ChangePlanRequest where
-        toJSON ChangePlanRequest{..}
+        toJSON ChangePlanRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cprKind),
+                  ("dealCode" .=) <$> _cprDealCode,
                   ("planName" .=) <$> _cprPlanName,
                   ("purchaseOrderId" .=) <$> _cprPurchaseOrderId,
                   ("seats" .=) <$> _cprSeats])
@@ -388,7 +413,7 @@ instance ToJSON ChangePlanRequest where
 -- | Interval of the commitment if it is a commitment plan.
 --
 -- /See:/ 'subscriptionPlanCommitmentInterval' smart constructor.
-data SubscriptionPlanCommitmentInterval = SubscriptionPlanCommitmentInterval
+data SubscriptionPlanCommitmentInterval = SubscriptionPlanCommitmentInterval'
     { _spciStartTime :: !(Maybe (Textual Int64))
     , _spciEndTime   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -403,7 +428,7 @@ data SubscriptionPlanCommitmentInterval = SubscriptionPlanCommitmentInterval
 subscriptionPlanCommitmentInterval
     :: SubscriptionPlanCommitmentInterval
 subscriptionPlanCommitmentInterval =
-    SubscriptionPlanCommitmentInterval
+    SubscriptionPlanCommitmentInterval'
     { _spciStartTime = Nothing
     , _spciEndTime = Nothing
     }
@@ -426,12 +451,12 @@ instance FromJSON SubscriptionPlanCommitmentInterval
         parseJSON
           = withObject "SubscriptionPlanCommitmentInterval"
               (\ o ->
-                 SubscriptionPlanCommitmentInterval <$>
+                 SubscriptionPlanCommitmentInterval' <$>
                    (o .:? "startTime") <*> (o .:? "endTime"))
 
 instance ToJSON SubscriptionPlanCommitmentInterval
          where
-        toJSON SubscriptionPlanCommitmentInterval{..}
+        toJSON SubscriptionPlanCommitmentInterval'{..}
           = object
               (catMaybes
                  [("startTime" .=) <$> _spciStartTime,
@@ -440,7 +465,7 @@ instance ToJSON SubscriptionPlanCommitmentInterval
 -- | Plan details of the subscription
 --
 -- /See:/ 'subscriptionPlan' smart constructor.
-data SubscriptionPlan = SubscriptionPlan
+data SubscriptionPlan = SubscriptionPlan'
     { _spCommitmentInterval :: !(Maybe SubscriptionPlanCommitmentInterval)
     , _spIsCommitmentPlan   :: !(Maybe Bool)
     , _spPlanName           :: !(Maybe Text)
@@ -458,7 +483,7 @@ data SubscriptionPlan = SubscriptionPlan
 subscriptionPlan
     :: SubscriptionPlan
 subscriptionPlan =
-    SubscriptionPlan
+    SubscriptionPlan'
     { _spCommitmentInterval = Nothing
     , _spIsCommitmentPlan = Nothing
     , _spPlanName = Nothing
@@ -485,13 +510,13 @@ instance FromJSON SubscriptionPlan where
         parseJSON
           = withObject "SubscriptionPlan"
               (\ o ->
-                 SubscriptionPlan <$>
+                 SubscriptionPlan' <$>
                    (o .:? "commitmentInterval") <*>
                      (o .:? "isCommitmentPlan")
                      <*> (o .:? "planName"))
 
 instance ToJSON SubscriptionPlan where
-        toJSON SubscriptionPlan{..}
+        toJSON SubscriptionPlan'{..}
           = object
               (catMaybes
                  [("commitmentInterval" .=) <$> _spCommitmentInterval,
@@ -501,7 +526,7 @@ instance ToJSON SubscriptionPlan where
 -- | JSON template for a subscription list.
 --
 -- /See:/ 'subscriptions' smart constructor.
-data Subscriptions = Subscriptions
+data Subscriptions = Subscriptions'
     { _sNextPageToken :: !(Maybe Text)
     , _sKind          :: !Text
     , _sSubscriptions :: !(Maybe [Subscription])
@@ -519,7 +544,7 @@ data Subscriptions = Subscriptions
 subscriptions
     :: Subscriptions
 subscriptions =
-    Subscriptions
+    Subscriptions'
     { _sNextPageToken = Nothing
     , _sKind = "reseller#subscriptions"
     , _sSubscriptions = Nothing
@@ -548,13 +573,13 @@ instance FromJSON Subscriptions where
         parseJSON
           = withObject "Subscriptions"
               (\ o ->
-                 Subscriptions <$>
+                 Subscriptions' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "reseller#subscriptions")
                      <*> (o .:? "subscriptions" .!= mempty))
 
 instance ToJSON Subscriptions where
-        toJSON Subscriptions{..}
+        toJSON Subscriptions'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _sNextPageToken,
@@ -564,7 +589,7 @@ instance ToJSON Subscriptions where
 -- | JSON template for subscription seats.
 --
 -- /See:/ 'seats' smart constructor.
-data Seats = Seats
+data Seats = Seats'
     { _seaNumberOfSeats         :: !(Maybe (Textual Int32))
     , _seaMaximumNumberOfSeats  :: !(Maybe (Textual Int32))
     , _seaLicensedNumberOfSeats :: !(Maybe (Textual Int32))
@@ -585,7 +610,7 @@ data Seats = Seats
 seats
     :: Seats
 seats =
-    Seats
+    Seats'
     { _seaNumberOfSeats = Nothing
     , _seaMaximumNumberOfSeats = Nothing
     , _seaLicensedNumberOfSeats = Nothing
@@ -626,14 +651,14 @@ instance FromJSON Seats where
         parseJSON
           = withObject "Seats"
               (\ o ->
-                 Seats <$>
+                 Seats' <$>
                    (o .:? "numberOfSeats") <*>
                      (o .:? "maximumNumberOfSeats")
                      <*> (o .:? "licensedNumberOfSeats")
                      <*> (o .:? "kind" .!= "subscriptions#seats"))
 
 instance ToJSON Seats where
-        toJSON Seats{..}
+        toJSON Seats'{..}
           = object
               (catMaybes
                  [("numberOfSeats" .=) <$> _seaNumberOfSeats,
@@ -646,7 +671,7 @@ instance ToJSON Seats where
 -- | JSON template for a subscription renewal settings.
 --
 -- /See:/ 'renewalSettings' smart constructor.
-data RenewalSettings = RenewalSettings
+data RenewalSettings = RenewalSettings'
     { _rsKind        :: !Text
     , _rsRenewalType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -661,7 +686,7 @@ data RenewalSettings = RenewalSettings
 renewalSettings
     :: RenewalSettings
 renewalSettings =
-    RenewalSettings
+    RenewalSettings'
     { _rsKind = "subscriptions#renewalSettings"
     , _rsRenewalType = Nothing
     }
@@ -680,12 +705,12 @@ instance FromJSON RenewalSettings where
         parseJSON
           = withObject "RenewalSettings"
               (\ o ->
-                 RenewalSettings <$>
+                 RenewalSettings' <$>
                    (o .:? "kind" .!= "subscriptions#renewalSettings")
                      <*> (o .:? "renewalType"))
 
 instance ToJSON RenewalSettings where
-        toJSON RenewalSettings{..}
+        toJSON RenewalSettings'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rsKind),
@@ -694,7 +719,7 @@ instance ToJSON RenewalSettings where
 -- | JSON template for a subscription.
 --
 -- /See:/ 'subscription' smart constructor.
-data Subscription = Subscription
+data Subscription = Subscription'
     { _subCreationTime      :: !(Maybe (Textual Int64))
     , _subBillingMethod     :: !(Maybe Text)
     , _subStatus            :: !(Maybe Text)
@@ -703,7 +728,9 @@ data Subscription = Subscription
     , _subKind              :: !Text
     , _subSKUId             :: !(Maybe Text)
     , _subPlan              :: !(Maybe SubscriptionPlan)
+    , _subDealCode          :: !(Maybe Text)
     , _subCustomerId        :: !(Maybe Text)
+    , _subCustomerDomain    :: !(Maybe Text)
     , _subSuspensionReasons :: !(Maybe [Text])
     , _subTransferInfo      :: !(Maybe SubscriptionTransferInfo)
     , _subPurchaseOrderId   :: !(Maybe Text)
@@ -732,7 +759,11 @@ data Subscription = Subscription
 --
 -- * 'subPlan'
 --
+-- * 'subDealCode'
+--
 -- * 'subCustomerId'
+--
+-- * 'subCustomerDomain'
 --
 -- * 'subSuspensionReasons'
 --
@@ -748,7 +779,7 @@ data Subscription = Subscription
 subscription
     :: Subscription
 subscription =
-    Subscription
+    Subscription'
     { _subCreationTime = Nothing
     , _subBillingMethod = Nothing
     , _subStatus = Nothing
@@ -757,7 +788,9 @@ subscription =
     , _subKind = "reseller#subscription"
     , _subSKUId = Nothing
     , _subPlan = Nothing
+    , _subDealCode = Nothing
     , _subCustomerId = Nothing
+    , _subCustomerDomain = Nothing
     , _subSuspensionReasons = Nothing
     , _subTransferInfo = Nothing
     , _subPurchaseOrderId = Nothing
@@ -808,13 +841,35 @@ subSKUId = lens _subSKUId (\ s a -> s{_subSKUId = a})
 subPlan :: Lens' Subscription (Maybe SubscriptionPlan)
 subPlan = lens _subPlan (\ s a -> s{_subPlan = a})
 
+-- | External name of the deal, if this subscription was provisioned under
+-- one. Otherwise this field will be empty.
+subDealCode :: Lens' Subscription (Maybe Text)
+subDealCode
+  = lens _subDealCode (\ s a -> s{_subDealCode = a})
+
 -- | The id of the customer to whom the subscription belongs.
 subCustomerId :: Lens' Subscription (Maybe Text)
 subCustomerId
   = lens _subCustomerId
       (\ s a -> s{_subCustomerId = a})
 
--- | Suspension Reasons
+-- | Primary domain name of the customer
+subCustomerDomain :: Lens' Subscription (Maybe Text)
+subCustomerDomain
+  = lens _subCustomerDomain
+      (\ s a -> s{_subCustomerDomain = a})
+
+-- | Read-only field containing an enumerable of all the current suspension
+-- reasons for a subscription. It is possible for a subscription to have
+-- many concurrent, overlapping suspension reasons. A subscription\'s
+-- STATUS is SUSPENDED until all pending suspensions are removed. Possible
+-- options include: - PENDING_TOS_ACCEPTANCE - The customer has not logged
+-- in and accepted the Google Apps Resold Terms of Services. -
+-- RENEWAL_WITH_TYPE_CANCEL - The customer\'s commitment ended and their
+-- service was cancelled at the end of their term. - RESELLER_INITIATED - A
+-- manual suspension invoked by a Reseller. - TRIAL_ENDED - The customer\'s
+-- trial expired without a plan selected. - OTHER - The customer is
+-- suspended for an internal Google reason (e.g. abuse or otherwise).
 subSuspensionReasons :: Lens' Subscription [Text]
 subSuspensionReasons
   = lens _subSuspensionReasons
@@ -854,7 +909,7 @@ instance FromJSON Subscription where
         parseJSON
           = withObject "Subscription"
               (\ o ->
-                 Subscription <$>
+                 Subscription' <$>
                    (o .:? "creationTime") <*> (o .:? "billingMethod")
                      <*> (o .:? "status")
                      <*> (o .:? "trialSettings")
@@ -862,7 +917,9 @@ instance FromJSON Subscription where
                      <*> (o .:? "kind" .!= "reseller#subscription")
                      <*> (o .:? "skuId")
                      <*> (o .:? "plan")
+                     <*> (o .:? "dealCode")
                      <*> (o .:? "customerId")
+                     <*> (o .:? "customerDomain")
                      <*> (o .:? "suspensionReasons" .!= mempty)
                      <*> (o .:? "transferInfo")
                      <*> (o .:? "purchaseOrderId")
@@ -871,7 +928,7 @@ instance FromJSON Subscription where
                      <*> (o .:? "subscriptionId"))
 
 instance ToJSON Subscription where
-        toJSON Subscription{..}
+        toJSON Subscription'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _subCreationTime,
@@ -881,7 +938,9 @@ instance ToJSON Subscription where
                   ("resourceUiUrl" .=) <$> _subResourceUiURL,
                   Just ("kind" .= _subKind),
                   ("skuId" .=) <$> _subSKUId, ("plan" .=) <$> _subPlan,
+                  ("dealCode" .=) <$> _subDealCode,
                   ("customerId" .=) <$> _subCustomerId,
+                  ("customerDomain" .=) <$> _subCustomerDomain,
                   ("suspensionReasons" .=) <$> _subSuspensionReasons,
                   ("transferInfo" .=) <$> _subTransferInfo,
                   ("purchaseOrderId" .=) <$> _subPurchaseOrderId,
@@ -892,7 +951,7 @@ instance ToJSON Subscription where
 -- | Transfer related information for the subscription.
 --
 -- /See:/ 'subscriptionTransferInfo' smart constructor.
-data SubscriptionTransferInfo = SubscriptionTransferInfo
+data SubscriptionTransferInfo = SubscriptionTransferInfo'
     { _stiTransferabilityExpirationTime :: !(Maybe (Textual Int64))
     , _stiMinimumTransferableSeats      :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -907,7 +966,7 @@ data SubscriptionTransferInfo = SubscriptionTransferInfo
 subscriptionTransferInfo
     :: SubscriptionTransferInfo
 subscriptionTransferInfo =
-    SubscriptionTransferInfo
+    SubscriptionTransferInfo'
     { _stiTransferabilityExpirationTime = Nothing
     , _stiMinimumTransferableSeats = Nothing
     }
@@ -929,12 +988,12 @@ instance FromJSON SubscriptionTransferInfo where
         parseJSON
           = withObject "SubscriptionTransferInfo"
               (\ o ->
-                 SubscriptionTransferInfo <$>
+                 SubscriptionTransferInfo' <$>
                    (o .:? "transferabilityExpirationTime") <*>
                      (o .:? "minimumTransferableSeats"))
 
 instance ToJSON SubscriptionTransferInfo where
-        toJSON SubscriptionTransferInfo{..}
+        toJSON SubscriptionTransferInfo'{..}
           = object
               (catMaybes
                  [("transferabilityExpirationTime" .=) <$>

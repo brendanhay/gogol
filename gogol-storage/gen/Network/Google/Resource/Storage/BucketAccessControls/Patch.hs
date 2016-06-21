@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.BucketAccessControls.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type BucketAccessControlsPatchResource =
 -- semantics.
 --
 -- /See:/ 'bucketAccessControlsPatch' smart constructor.
-data BucketAccessControlsPatch = BucketAccessControlsPatch
+data BucketAccessControlsPatch = BucketAccessControlsPatch'
     { _bacpBucket  :: !Text
     , _bacpPayload :: !BucketAccessControl
     , _bacpEntity  :: !Text
@@ -80,7 +80,7 @@ bucketAccessControlsPatch
     -> Text -- ^ 'bacpEntity'
     -> BucketAccessControlsPatch
 bucketAccessControlsPatch pBacpBucket_ pBacpPayload_ pBacpEntity_ =
-    BucketAccessControlsPatch
+    BucketAccessControlsPatch'
     { _bacpBucket = pBacpBucket_
     , _bacpPayload = pBacpPayload_
     , _bacpEntity = pBacpEntity_
@@ -107,7 +107,10 @@ instance GoogleRequest BucketAccessControlsPatch
          where
         type Rs BucketAccessControlsPatch =
              BucketAccessControl
-        requestClient BucketAccessControlsPatch{..}
+        type Scopes BucketAccessControlsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient BucketAccessControlsPatch'{..}
           = go _bacpBucket _bacpEntity (Just AltJSON)
               _bacpPayload
               storageService

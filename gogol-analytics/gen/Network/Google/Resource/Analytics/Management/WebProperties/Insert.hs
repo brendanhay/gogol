@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.WebProperties.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ManagementWebPropertiesInsertResource =
 -- have at least one profile.
 --
 -- /See:/ 'managementWebPropertiesInsert' smart constructor.
-data ManagementWebPropertiesInsert = ManagementWebPropertiesInsert
+data ManagementWebPropertiesInsert = ManagementWebPropertiesInsert'
     { _mwpiPayload   :: !WebProperty
     , _mwpiAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ managementWebPropertiesInsert
     -> Text -- ^ 'mwpiAccountId'
     -> ManagementWebPropertiesInsert
 managementWebPropertiesInsert pMwpiPayload_ pMwpiAccountId_ =
-    ManagementWebPropertiesInsert
+    ManagementWebPropertiesInsert'
     { _mwpiPayload = pMwpiPayload_
     , _mwpiAccountId = pMwpiAccountId_
     }
@@ -96,7 +96,9 @@ mwpiAccountId
 instance GoogleRequest ManagementWebPropertiesInsert
          where
         type Rs ManagementWebPropertiesInsert = WebProperty
-        requestClient ManagementWebPropertiesInsert{..}
+        type Scopes ManagementWebPropertiesInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementWebPropertiesInsert'{..}
           = go _mwpiAccountId (Just AltJSON) _mwpiPayload
               analyticsService
           where go

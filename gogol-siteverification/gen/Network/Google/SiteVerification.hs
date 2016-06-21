@@ -7,20 +7,23 @@
 
 -- |
 -- Module      : Network.Google.SiteVerification
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you programatically verify ownership of websites or domains with
--- Google.
+-- Verifies ownership of websites or domains with Google.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference>
 module Network.Google.SiteVerification
     (
     -- * Service Configuration
       siteVerificationService
+
+    -- * OAuth Scopes
+    , siteVerificationVerifyOnlyScope
+    , siteVerificationScope
 
     -- * API Declaration
     , SiteVerificationAPI

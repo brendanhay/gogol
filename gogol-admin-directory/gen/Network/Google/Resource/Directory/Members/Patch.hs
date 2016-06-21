@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Members.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type MembersPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'membersPatch' smart constructor.
-data MembersPatch = MembersPatch
+data MembersPatch = MembersPatch'
     { _mpMemberKey :: !Text
     , _mpGroupKey  :: !Text
     , _mpPayload   :: !Member
@@ -80,7 +80,7 @@ membersPatch
     -> Member -- ^ 'mpPayload'
     -> MembersPatch
 membersPatch pMpMemberKey_ pMpGroupKey_ pMpPayload_ =
-    MembersPatch
+    MembersPatch'
     { _mpMemberKey = pMpMemberKey_
     , _mpGroupKey = pMpGroupKey_
     , _mpPayload = pMpPayload_
@@ -105,7 +105,10 @@ mpPayload
 
 instance GoogleRequest MembersPatch where
         type Rs MembersPatch = Member
-        requestClient MembersPatch{..}
+        type Scopes MembersPatch =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member"]
+        requestClient MembersPatch'{..}
           = go _mpGroupKey _mpMemberKey (Just AltJSON)
               _mpPayload
               directoryService

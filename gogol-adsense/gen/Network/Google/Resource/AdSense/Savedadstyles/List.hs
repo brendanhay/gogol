@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Savedadstyles.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type SavedadstylesListResource =
 -- | List all saved ad styles in the user\'s account.
 --
 -- /See:/ 'savedadstylesList' smart constructor.
-data SavedadstylesList = SavedadstylesList
+data SavedadstylesList = SavedadstylesList'
     { _slPageToken  :: !(Maybe Text)
     , _slMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,7 +68,7 @@ data SavedadstylesList = SavedadstylesList
 savedadstylesList
     :: SavedadstylesList
 savedadstylesList =
-    SavedadstylesList
+    SavedadstylesList'
     { _slPageToken = Nothing
     , _slMaxResults = Nothing
     }
@@ -89,7 +89,10 @@ slMaxResults
 
 instance GoogleRequest SavedadstylesList where
         type Rs SavedadstylesList = SavedAdStyles
-        requestClient SavedadstylesList{..}
+        type Scopes SavedadstylesList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient SavedadstylesList'{..}
           = go _slPageToken _slMaxResults (Just AltJSON)
               adSenseService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Images.Deprecate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ImagesDeprecateResource =
 -- given, clears the deprecation status instead.
 --
 -- /See:/ 'imagesDeprecate' smart constructor.
-data ImagesDeprecate = ImagesDeprecate
+data ImagesDeprecate = ImagesDeprecate'
     { _imamImage   :: !Text
     , _imamProject :: !Text
     , _imamPayload :: !DeprecationStatus
@@ -82,7 +82,7 @@ imagesDeprecate
     -> DeprecationStatus -- ^ 'imamPayload'
     -> ImagesDeprecate
 imagesDeprecate pImamImage_ pImamProject_ pImamPayload_ =
-    ImagesDeprecate
+    ImagesDeprecate'
     { _imamImage = pImamImage_
     , _imamProject = pImamProject_
     , _imamPayload = pImamPayload_
@@ -105,7 +105,10 @@ imamPayload
 
 instance GoogleRequest ImagesDeprecate where
         type Rs ImagesDeprecate = Operation
-        requestClient ImagesDeprecate{..}
+        type Scopes ImagesDeprecate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient ImagesDeprecate'{..}
           = go _imamProject _imamImage (Just AltJSON)
               _imamPayload
               computeService

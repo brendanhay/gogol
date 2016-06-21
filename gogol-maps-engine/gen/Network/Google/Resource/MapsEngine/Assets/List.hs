@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Assets.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type AssetsListResource =
 -- | Return all assets readable by the current user.
 --
 -- /See:/ 'assetsList' smart constructor.
-data AssetsList = AssetsList
+data AssetsList = AssetsList'
     { _alCreatedAfter   :: !(Maybe DateTime')
     , _alCreatorEmail   :: !(Maybe Text)
     , _alRole           :: !(Maybe AssetsListRole)
@@ -124,7 +124,7 @@ data AssetsList = AssetsList
 assetsList
     :: AssetsList
 assetsList =
-    AssetsList
+    AssetsList'
     { _alCreatedAfter = Nothing
     , _alCreatorEmail = Nothing
     , _alRole = Nothing
@@ -229,7 +229,10 @@ alCreatedBefore
 
 instance GoogleRequest AssetsList where
         type Rs AssetsList = AssetsListResponse
-        requestClient AssetsList{..}
+        type Scopes AssetsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient AssetsList'{..}
           = go _alCreatedAfter _alCreatorEmail _alRole _alBbox
               _alModifiedAfter
               _alModifiedBefore

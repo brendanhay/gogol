@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Disks.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a specified persistent disk.
+-- Returns a specified persistent disk. Get a list of available persistent
+-- disks by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.get@.
 module Network.Google.Resource.Compute.Disks.Get
@@ -54,10 +55,11 @@ type DisksGetResource =
                    Capture "disk" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Disk
 
--- | Returns a specified persistent disk.
+-- | Returns a specified persistent disk. Get a list of available persistent
+-- disks by making a list() request.
 --
 -- /See:/ 'disksGet' smart constructor.
-data DisksGet = DisksGet
+data DisksGet = DisksGet'
     { _dgProject :: !Text
     , _dgDisk    :: !Text
     , _dgZone    :: !Text
@@ -78,7 +80,7 @@ disksGet
     -> Text -- ^ 'dgZone'
     -> DisksGet
 disksGet pDgProject_ pDgDisk_ pDgZone_ =
-    DisksGet
+    DisksGet'
     { _dgProject = pDgProject_
     , _dgDisk = pDgDisk_
     , _dgZone = pDgZone_
@@ -99,7 +101,11 @@ dgZone = lens _dgZone (\ s a -> s{_dgZone = a})
 
 instance GoogleRequest DisksGet where
         type Rs DisksGet = Disk
-        requestClient DisksGet{..}
+        type Scopes DisksGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient DisksGet'{..}
           = go _dgProject _dgZone _dgDisk (Just AltJSON)
               computeService
           where go

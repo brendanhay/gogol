@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.UserRoles.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolesUpdate' request conforms to.
 type UserRolesUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -54,7 +54,7 @@ type UserRolesUpdateResource =
 -- | Updates an existing user role.
 --
 -- /See:/ 'userRolesUpdate' smart constructor.
-data UserRolesUpdate = UserRolesUpdate
+data UserRolesUpdate = UserRolesUpdate'
     { _uruProFileId :: !(Textual Int64)
     , _uruPayload   :: !UserRole
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ userRolesUpdate
     -> UserRole -- ^ 'uruPayload'
     -> UserRolesUpdate
 userRolesUpdate pUruProFileId_ pUruPayload_ =
-    UserRolesUpdate
+    UserRolesUpdate'
     { _uruProFileId = _Coerce # pUruProFileId_
     , _uruPayload = pUruPayload_
     }
@@ -89,7 +89,9 @@ uruPayload
 
 instance GoogleRequest UserRolesUpdate where
         type Rs UserRolesUpdate = UserRole
-        requestClient UserRolesUpdate{..}
+        type Scopes UserRolesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient UserRolesUpdate'{..}
           = go _uruProFileId (Just AltJSON) _uruPayload
               dFAReportingService
           where go

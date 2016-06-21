@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Collectionviewers.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,7 @@
 -- collection. If the collection\'s visibility is set to viewersOnly then
 -- only such users will see the collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collectionviewers.update@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collectionviewers.update@.
 module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Update
     (
     -- * REST Resource
@@ -63,7 +63,7 @@ type CollectionviewersUpdateResource =
 -- only such users will see the collection.
 --
 -- /See:/ 'collectionviewersUpdate' smart constructor.
-data CollectionviewersUpdate = CollectionviewersUpdate
+data CollectionviewersUpdate = CollectionviewersUpdate'
     { _cuEnterpriseId :: !Text
     , _cuCollectionId :: !Text
     , _cuPayload      :: !User
@@ -88,7 +88,7 @@ collectionviewersUpdate
     -> Text -- ^ 'cuUserId'
     -> CollectionviewersUpdate
 collectionviewersUpdate pCuEnterpriseId_ pCuCollectionId_ pCuPayload_ pCuUserId_ =
-    CollectionviewersUpdate
+    CollectionviewersUpdate'
     { _cuEnterpriseId = pCuEnterpriseId_
     , _cuCollectionId = pCuCollectionId_
     , _cuPayload = pCuPayload_
@@ -118,7 +118,9 @@ cuUserId = lens _cuUserId (\ s a -> s{_cuUserId = a})
 
 instance GoogleRequest CollectionviewersUpdate where
         type Rs CollectionviewersUpdate = User
-        requestClient CollectionviewersUpdate{..}
+        type Scopes CollectionviewersUpdate =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient CollectionviewersUpdate'{..}
           = go _cuEnterpriseId _cuCollectionId _cuUserId
               (Just AltJSON)
               _cuPayload

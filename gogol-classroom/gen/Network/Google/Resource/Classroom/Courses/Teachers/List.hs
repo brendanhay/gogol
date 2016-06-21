@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Teachers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type CoursesTeachersListResource =
 -- access errors.
 --
 -- /See:/ 'coursesTeachersList' smart constructor.
-data CoursesTeachersList = CoursesTeachersList
+data CoursesTeachersList = CoursesTeachersList'
     { _ctlXgafv          :: !(Maybe Text)
     , _ctlUploadProtocol :: !(Maybe Text)
     , _ctlPp             :: !Bool
@@ -116,7 +116,7 @@ coursesTeachersList
     :: Text -- ^ 'ctlCourseId'
     -> CoursesTeachersList
 coursesTeachersList pCtlCourseId_ =
-    CoursesTeachersList
+    CoursesTeachersList'
     { _ctlXgafv = Nothing
     , _ctlUploadProtocol = Nothing
     , _ctlPp = True
@@ -188,7 +188,12 @@ ctlCallback
 
 instance GoogleRequest CoursesTeachersList where
         type Rs CoursesTeachersList = ListTeachersResponse
-        requestClient CoursesTeachersList{..}
+        type Scopes CoursesTeachersList =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
+        requestClient CoursesTeachersList'{..}
           = go _ctlCourseId _ctlXgafv _ctlUploadProtocol
               (Just _ctlPp)
               _ctlAccessToken

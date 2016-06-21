@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -80,7 +80,7 @@ type CoursesPatchResource =
 -- following request errors: * CourseNotModifiable
 --
 -- /See:/ 'coursesPatch' smart constructor.
-data CoursesPatch = CoursesPatch
+data CoursesPatch = CoursesPatch'
     { _cpXgafv          :: !(Maybe Text)
     , _cpUploadProtocol :: !(Maybe Text)
     , _cpUpdateMask     :: !(Maybe Text)
@@ -121,7 +121,7 @@ coursesPatch
     -> Text -- ^ 'cpId'
     -> CoursesPatch
 coursesPatch pCpPayload_ pCpId_ =
-    CoursesPatch
+    CoursesPatch'
     { _cpXgafv = Nothing
     , _cpUploadProtocol = Nothing
     , _cpUpdateMask = Nothing
@@ -192,7 +192,9 @@ cpCallback
 
 instance GoogleRequest CoursesPatch where
         type Rs CoursesPatch = Course
-        requestClient CoursesPatch{..}
+        type Scopes CoursesPatch =
+             '["https://www.googleapis.com/auth/classroom.courses"]
+        requestClient CoursesPatch'{..}
           = go _cpId _cpXgafv _cpUploadProtocol _cpUpdateMask
               (Just _cpPp)
               _cpAccessToken

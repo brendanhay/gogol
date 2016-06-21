@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type EditsDetailsPatchResource =
 -- | Updates app details for this edit. This method supports patch semantics.
 --
 -- /See:/ 'editsDetailsPatch' smart constructor.
-data EditsDetailsPatch = EditsDetailsPatch
+data EditsDetailsPatch = EditsDetailsPatch'
     { _edpPackageName :: !Text
     , _edpPayload     :: !AppDetails
     , _edpEditId      :: !Text
@@ -79,7 +79,7 @@ editsDetailsPatch
     -> Text -- ^ 'edpEditId'
     -> EditsDetailsPatch
 editsDetailsPatch pEdpPackageName_ pEdpPayload_ pEdpEditId_ =
-    EditsDetailsPatch
+    EditsDetailsPatch'
     { _edpPackageName = pEdpPackageName_
     , _edpPayload = pEdpPayload_
     , _edpEditId = pEdpEditId_
@@ -104,7 +104,9 @@ edpEditId
 
 instance GoogleRequest EditsDetailsPatch where
         type Rs EditsDetailsPatch = AppDetails
-        requestClient EditsDetailsPatch{..}
+        type Scopes EditsDetailsPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsDetailsPatch'{..}
           = go _edpPackageName _edpEditId (Just AltJSON)
               _edpPayload
               androidPublisherService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.Sessions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type UsersSessionsListResource =
 -- | Lists sessions previously created.
 --
 -- /See:/ 'usersSessionsList' smart constructor.
-data UsersSessionsList = UsersSessionsList
+data UsersSessionsList = UsersSessionsList'
     { _uslStartTime      :: !(Maybe Text)
     , _uslUserId         :: !Text
     , _uslEndTime        :: !(Maybe Text)
@@ -86,7 +86,7 @@ usersSessionsList
     :: Text -- ^ 'uslUserId'
     -> UsersSessionsList
 usersSessionsList pUslUserId_ =
-    UsersSessionsList
+    UsersSessionsList'
     { _uslStartTime = Nothing
     , _uslUserId = pUslUserId_
     , _uslEndTime = Nothing
@@ -129,7 +129,14 @@ uslIncludeDeleted
 
 instance GoogleRequest UsersSessionsList where
         type Rs UsersSessionsList = ListSessionsResponse
-        requestClient UsersSessionsList{..}
+        type Scopes UsersSessionsList =
+             '["https://www.googleapis.com/auth/fitness.activity.read",
+               "https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.read",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.read",
+               "https://www.googleapis.com/auth/fitness.location.write"]
+        requestClient UsersSessionsList'{..}
           = go _uslUserId _uslStartTime _uslEndTime
               _uslPageToken
               _uslIncludeDeleted

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.ACL.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ACLListResource =
 -- | Returns the rules in the access control list for the calendar.
 --
 -- /See:/ 'aclList' smart constructor.
-data ACLList = ACLList
+data ACLList = ACLList'
     { _alSyncToken   :: !(Maybe Text)
     , _alCalendarId  :: !Text
     , _alShowDeleted :: !(Maybe Bool)
@@ -85,7 +85,7 @@ aclList
     :: Text -- ^ 'alCalendarId'
     -> ACLList
 aclList pAlCalendarId_ =
-    ACLList
+    ACLList'
     { _alSyncToken = Nothing
     , _alCalendarId = pAlCalendarId_
     , _alShowDeleted = Nothing
@@ -136,7 +136,9 @@ alMaxResults
 
 instance GoogleRequest ACLList where
         type Rs ACLList = ACL
-        requestClient ACLList{..}
+        type Scopes ACLList =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient ACLList'{..}
           = go _alCalendarId _alSyncToken _alShowDeleted
               _alPageToken
               _alMaxResults

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.SSLCerts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type SSLCertsGetResource =
 -- initial creation.
 --
 -- /See:/ 'sslCertsGet' smart constructor.
-data SSLCertsGet = SSLCertsGet
+data SSLCertsGet = SSLCertsGet'
     { _scgProject         :: !Text
     , _scgSha1Fingerprint :: !Text
     , _scgInstance        :: !Text
@@ -82,7 +82,7 @@ sslCertsGet
     -> Text -- ^ 'scgInstance'
     -> SSLCertsGet
 sslCertsGet pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
-    SSLCertsGet
+    SSLCertsGet'
     { _scgProject = pScgProject_
     , _scgSha1Fingerprint = pScgSha1Fingerprint_
     , _scgInstance = pScgInstance_
@@ -106,7 +106,10 @@ scgInstance
 
 instance GoogleRequest SSLCertsGet where
         type Rs SSLCertsGet = SSLCert
-        requestClient SSLCertsGet{..}
+        type Scopes SSLCertsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient SSLCertsGet'{..}
           = go _scgProject _scgInstance _scgSha1Fingerprint
               (Just AltJSON)
               sQLAdminService

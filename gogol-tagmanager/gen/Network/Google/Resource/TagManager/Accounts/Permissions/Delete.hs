@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Permissions.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsPermissionsDeleteResource =
 -- containers.
 --
 -- /See:/ 'accountsPermissionsDelete' smart constructor.
-data AccountsPermissionsDelete = AccountsPermissionsDelete
+data AccountsPermissionsDelete = AccountsPermissionsDelete'
     { _apdAccountId    :: !Text
     , _apdPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsPermissionsDelete
     -> Text -- ^ 'apdPermissionId'
     -> AccountsPermissionsDelete
 accountsPermissionsDelete pApdAccountId_ pApdPermissionId_ =
-    AccountsPermissionsDelete
+    AccountsPermissionsDelete'
     { _apdAccountId = pApdAccountId_
     , _apdPermissionId = pApdPermissionId_
     }
@@ -92,7 +92,9 @@ apdPermissionId
 instance GoogleRequest AccountsPermissionsDelete
          where
         type Rs AccountsPermissionsDelete = ()
-        requestClient AccountsPermissionsDelete{..}
+        type Scopes AccountsPermissionsDelete =
+             '["https://www.googleapis.com/auth/tagmanager.manage.users"]
+        requestClient AccountsPermissionsDelete'{..}
           = go _apdAccountId _apdPermissionId (Just AltJSON)
               tagManagerService
           where go

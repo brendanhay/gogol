@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,13 +65,12 @@ type ImageConfigurationsUploadResource =
                      :>
                      QueryParam "alt" AltJSON :>
                        QueryParam "uploadType" AltMedia :>
-                         ReqBody '[OctetStream] RequestBody :>
-                           Post '[JSON] ImageConfiguration
+                         AltMedia :> Post '[JSON] ImageConfiguration
 
 -- | Uploads an image for a resource with the given ID and image type.
 --
 -- /See:/ 'imageConfigurationsUpload' smart constructor.
-data ImageConfigurationsUpload = ImageConfigurationsUpload
+data ImageConfigurationsUpload = ImageConfigurationsUpload'
     { _icuResourceId :: !Text
     , _icuImageType  :: !ImageConfigurationsUploadImageType
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,7 +87,7 @@ imageConfigurationsUpload
     -> ImageConfigurationsUploadImageType -- ^ 'icuImageType'
     -> ImageConfigurationsUpload
 imageConfigurationsUpload pIcuResourceId_ pIcuImageType_ =
-    ImageConfigurationsUpload
+    ImageConfigurationsUpload'
     { _icuResourceId = pIcuResourceId_
     , _icuImageType = pIcuImageType_
     }
@@ -108,7 +107,9 @@ instance GoogleRequest ImageConfigurationsUpload
          where
         type Rs ImageConfigurationsUpload =
              ImageConfiguration
-        requestClient ImageConfigurationsUpload{..}
+        type Scopes ImageConfigurationsUpload =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient ImageConfigurationsUpload'{..}
           = go _icuResourceId _icuImageType (Just AltJSON)
               gamesConfigurationService
           where go :<|> _
@@ -120,8 +121,10 @@ instance GoogleRequest
          (MediaUpload ImageConfigurationsUpload) where
         type Rs (MediaUpload ImageConfigurationsUpload) =
              ImageConfiguration
+        type Scopes (MediaUpload ImageConfigurationsUpload) =
+             Scopes ImageConfigurationsUpload
         requestClient
-          (MediaUpload ImageConfigurationsUpload{..} body)
+          (MediaUpload ImageConfigurationsUpload'{..} body)
           = go _icuResourceId _icuImageType (Just AltJSON)
               (Just AltMedia)
               body

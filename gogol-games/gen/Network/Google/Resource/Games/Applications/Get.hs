@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Applications.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -35,6 +35,7 @@ module Network.Google.Resource.Games.Applications.Get
     , ApplicationsGet
 
     -- * Request Lenses
+    , agConsistencyToken
     , agApplicationId
     , agPlatformType
     , agLanguage
@@ -50,25 +51,29 @@ type ApplicationsGetResource =
        "v1" :>
          "applications" :>
            Capture "applicationId" Text :>
-             QueryParam "platformType" ApplicationsGetPlatformType
-               :>
-               QueryParam "language" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Application
+             QueryParam "consistencyToken" (Textual Int64) :>
+               QueryParam "platformType" ApplicationsGetPlatformType
+                 :>
+                 QueryParam "language" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Retrieves the metadata of the application with the given ID. If the
 -- requested application is not available for the specified platformType,
 -- the returned response will not include any instance data.
 --
 -- /See:/ 'applicationsGet' smart constructor.
-data ApplicationsGet = ApplicationsGet
-    { _agApplicationId :: !Text
-    , _agPlatformType  :: !(Maybe ApplicationsGetPlatformType)
-    , _agLanguage      :: !(Maybe Text)
+data ApplicationsGet = ApplicationsGet'
+    { _agConsistencyToken :: !(Maybe (Textual Int64))
+    , _agApplicationId    :: !Text
+    , _agPlatformType     :: !(Maybe ApplicationsGetPlatformType)
+    , _agLanguage         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'agConsistencyToken'
 --
 -- * 'agApplicationId'
 --
@@ -79,11 +84,19 @@ applicationsGet
     :: Text -- ^ 'agApplicationId'
     -> ApplicationsGet
 applicationsGet pAgApplicationId_ =
-    ApplicationsGet
-    { _agApplicationId = pAgApplicationId_
+    ApplicationsGet'
+    { _agConsistencyToken = Nothing
+    , _agApplicationId = pAgApplicationId_
     , _agPlatformType = Nothing
     , _agLanguage = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+agConsistencyToken :: Lens' ApplicationsGet (Maybe Int64)
+agConsistencyToken
+  = lens _agConsistencyToken
+      (\ s a -> s{_agConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The application ID from the Google Play developer console.
 agApplicationId :: Lens' ApplicationsGet Text
@@ -104,8 +117,13 @@ agLanguage
 
 instance GoogleRequest ApplicationsGet where
         type Rs ApplicationsGet = Application
-        requestClient ApplicationsGet{..}
-          = go _agApplicationId _agPlatformType _agLanguage
+        type Scopes ApplicationsGet =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient ApplicationsGet'{..}
+          = go _agApplicationId _agConsistencyToken
+              _agPlatformType
+              _agLanguage
               (Just AltJSON)
               gamesService
           where go

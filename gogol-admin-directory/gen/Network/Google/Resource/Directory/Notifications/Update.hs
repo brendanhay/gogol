@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Notifications.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type NotificationsUpdateResource =
 -- | Updates a notification.
 --
 -- /See:/ 'notificationsUpdate' smart constructor.
-data NotificationsUpdate = NotificationsUpdate
+data NotificationsUpdate = NotificationsUpdate'
     { _nuPayload        :: !Notification
     , _nuCustomer       :: !Text
     , _nuNotificationId :: !Text
@@ -79,7 +79,7 @@ notificationsUpdate
     -> Text -- ^ 'nuNotificationId'
     -> NotificationsUpdate
 notificationsUpdate pNuPayload_ pNuCustomer_ pNuNotificationId_ =
-    NotificationsUpdate
+    NotificationsUpdate'
     { _nuPayload = pNuPayload_
     , _nuCustomer = pNuCustomer_
     , _nuNotificationId = pNuNotificationId_
@@ -103,7 +103,9 @@ nuNotificationId
 
 instance GoogleRequest NotificationsUpdate where
         type Rs NotificationsUpdate = Notification
-        requestClient NotificationsUpdate{..}
+        type Scopes NotificationsUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.notifications"]
+        requestClient NotificationsUpdate'{..}
           = go _nuCustomer _nuNotificationId (Just AltJSON)
               _nuPayload
               directoryService

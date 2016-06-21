@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeSeller.Accounts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type AccountsGetResource =
 -- | Get information about the selected Ad Exchange account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-newtype AccountsGet = AccountsGet
+newtype AccountsGet = AccountsGet'
     { _agAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ accountsGet
     :: Text -- ^ 'agAccountId'
     -> AccountsGet
 accountsGet pAgAccountId_ =
-    AccountsGet
+    AccountsGet'
     { _agAccountId = pAgAccountId_
     }
 
@@ -75,7 +75,10 @@ agAccountId
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
-        requestClient AccountsGet{..}
+        type Scopes AccountsGet =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
+        requestClient AccountsGet'{..}
           = go _agAccountId (Just AltJSON)
               adExchangeSellerService
           where go

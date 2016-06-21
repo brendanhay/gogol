@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickSearch.Reports.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type ReportsGetResource =
 -- | Polls for the status of a report request.
 --
 -- /See:/ 'reportsGet' smart constructor.
-newtype ReportsGet = ReportsGet
+newtype ReportsGet = ReportsGet'
     { _rgReportId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ reportsGet
     :: Text -- ^ 'rgReportId'
     -> ReportsGet
 reportsGet pRgReportId_ =
-    ReportsGet
+    ReportsGet'
     { _rgReportId = pRgReportId_
     }
 
@@ -75,7 +75,9 @@ rgReportId
 
 instance GoogleRequest ReportsGet where
         type Rs ReportsGet = Report
-        requestClient ReportsGet{..}
+        type Scopes ReportsGet =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
+        requestClient ReportsGet'{..}
           = go _rgReportId (Just AltJSON)
               doubleClickSearchService
           where go

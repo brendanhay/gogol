@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Posts.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type PostsPatchResource =
 -- | Update a post. This method supports patch semantics.
 --
 -- /See:/ 'postsPatch' smart constructor.
-data PostsPatch = PostsPatch
+data PostsPatch = PostsPatch'
     { _posoFetchBody   :: !Bool
     , _posoFetchImages :: !(Maybe Bool)
     , _posoBlogId      :: !Text
@@ -102,7 +102,7 @@ postsPatch
     -> Text -- ^ 'posoPostId'
     -> PostsPatch
 postsPatch pPosoBlogId_ pPosoPayload_ pPosoPostId_ =
-    PostsPatch
+    PostsPatch'
     { _posoFetchBody = True
     , _posoFetchImages = Nothing
     , _posoBlogId = pPosoBlogId_
@@ -163,7 +163,9 @@ posoPublish
 
 instance GoogleRequest PostsPatch where
         type Rs PostsPatch = Post'
-        requestClient PostsPatch{..}
+        type Scopes PostsPatch =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PostsPatch'{..}
           = go _posoBlogId _posoPostId (Just _posoFetchBody)
               _posoFetchImages
               _posoMaxComments

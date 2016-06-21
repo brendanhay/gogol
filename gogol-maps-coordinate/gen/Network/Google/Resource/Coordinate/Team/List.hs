@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Coordinate.Team.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TeamListResource =
 -- | Retrieves a list of teams for a user.
 --
 -- /See:/ 'teamList' smart constructor.
-data TeamList = TeamList
+data TeamList = TeamList'
     { _tlDispatcher :: !(Maybe Bool)
     , _tlAdmin      :: !(Maybe Bool)
     , _tlWorker     :: !(Maybe Bool)
@@ -74,7 +74,7 @@ data TeamList = TeamList
 teamList
     :: TeamList
 teamList =
-    TeamList
+    TeamList'
     { _tlDispatcher = Nothing
     , _tlAdmin = Nothing
     , _tlWorker = Nothing
@@ -95,7 +95,10 @@ tlWorker = lens _tlWorker (\ s a -> s{_tlWorker = a})
 
 instance GoogleRequest TeamList where
         type Rs TeamList = TeamListResponse
-        requestClient TeamList{..}
+        type Scopes TeamList =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
+        requestClient TeamList'{..}
           = go _tlDispatcher _tlAdmin _tlWorker (Just AltJSON)
               mapsCoordinateService
           where go

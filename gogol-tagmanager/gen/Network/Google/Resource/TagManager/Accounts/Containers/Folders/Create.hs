@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsContainersFoldersCreateResource =
 -- | Creates a GTM Folder.
 --
 -- /See:/ 'accountsContainersFoldersCreate' smart constructor.
-data AccountsContainersFoldersCreate = AccountsContainersFoldersCreate
+data AccountsContainersFoldersCreate = AccountsContainersFoldersCreate'
     { _acfcContainerId :: !Text
     , _acfcPayload     :: !Folder
     , _acfcAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersFoldersCreate
     -> Text -- ^ 'acfcAccountId'
     -> AccountsContainersFoldersCreate
 accountsContainersFoldersCreate pAcfcContainerId_ pAcfcPayload_ pAcfcAccountId_ =
-    AccountsContainersFoldersCreate
+    AccountsContainersFoldersCreate'
     { _acfcContainerId = pAcfcContainerId_
     , _acfcPayload = pAcfcPayload_
     , _acfcAccountId = pAcfcAccountId_
@@ -104,7 +104,9 @@ acfcAccountId
 instance GoogleRequest
          AccountsContainersFoldersCreate where
         type Rs AccountsContainersFoldersCreate = Folder
-        requestClient AccountsContainersFoldersCreate{..}
+        type Scopes AccountsContainersFoldersCreate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient AccountsContainersFoldersCreate'{..}
           = go _acfcAccountId _acfcContainerId (Just AltJSON)
               _acfcPayload
               tagManagerService

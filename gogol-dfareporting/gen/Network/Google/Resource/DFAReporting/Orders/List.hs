@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Orders.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'OrdersList' request conforms to.
 type OrdersListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -70,7 +70,7 @@ type OrdersListResource =
 -- | Retrieves a list of orders, possibly filtered.
 --
 -- /See:/ 'ordersList' smart constructor.
-data OrdersList = OrdersList
+data OrdersList = OrdersList'
     { _olSearchString :: !(Maybe Text)
     , _olIds          :: !(Maybe [Textual Int64])
     , _olProFileId    :: !(Textual Int64)
@@ -108,7 +108,7 @@ ordersList
     -> Int64 -- ^ 'olProjectId'
     -> OrdersList
 ordersList pOlProFileId_ pOlProjectId_ =
-    OrdersList
+    OrdersList'
     { _olSearchString = Nothing
     , _olIds = Nothing
     , _olProFileId = _Coerce # pOlProFileId_
@@ -179,7 +179,9 @@ olMaxResults
 
 instance GoogleRequest OrdersList where
         type Rs OrdersList = OrdersListResponse
-        requestClient OrdersList{..}
+        type Scopes OrdersList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient OrdersList'{..}
           = go _olProFileId _olProjectId _olSearchString
               (_olIds ^. _Default)
               _olSortOrder

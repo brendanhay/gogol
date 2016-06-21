@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.TurnBasedMatches.Reset
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,18 +52,21 @@ type TurnBasedMatchesResetResource =
 --
 -- /See:/ 'turnBasedMatchesReset' smart constructor.
 data TurnBasedMatchesReset =
-    TurnBasedMatchesReset
+    TurnBasedMatchesReset'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesReset' with the minimum fields required to make a request.
 --
 turnBasedMatchesReset
     :: TurnBasedMatchesReset
-turnBasedMatchesReset = TurnBasedMatchesReset
+turnBasedMatchesReset = TurnBasedMatchesReset'
 
 instance GoogleRequest TurnBasedMatchesReset where
         type Rs TurnBasedMatchesReset = ()
-        requestClient TurnBasedMatchesReset{}
+        type Scopes TurnBasedMatchesReset =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient TurnBasedMatchesReset'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

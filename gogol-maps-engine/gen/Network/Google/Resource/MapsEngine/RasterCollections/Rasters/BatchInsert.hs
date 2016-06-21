@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchInsert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type RasterCollectionsRastersBatchInsertResource =
 -- batchInsert request is atomic.
 --
 -- /See:/ 'rasterCollectionsRastersBatchInsert' smart constructor.
-data RasterCollectionsRastersBatchInsert = RasterCollectionsRastersBatchInsert
+data RasterCollectionsRastersBatchInsert = RasterCollectionsRastersBatchInsert'
     { _rcrbiPayload :: !RasterCollectionsRastersBatchInsertRequest
     , _rcrbiId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ rasterCollectionsRastersBatchInsert
     -> Text -- ^ 'rcrbiId'
     -> RasterCollectionsRastersBatchInsert
 rasterCollectionsRastersBatchInsert pRcrbiPayload_ pRcrbiId_ =
-    RasterCollectionsRastersBatchInsert
+    RasterCollectionsRastersBatchInsert'
     { _rcrbiPayload = pRcrbiPayload_
     , _rcrbiId = pRcrbiId_
     }
@@ -100,7 +100,10 @@ instance GoogleRequest
          RasterCollectionsRastersBatchInsert where
         type Rs RasterCollectionsRastersBatchInsert =
              RasterCollectionsRastersBatchInsertResponse
-        requestClient RasterCollectionsRastersBatchInsert{..}
+        type Scopes RasterCollectionsRastersBatchInsert =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient
+          RasterCollectionsRastersBatchInsert'{..}
           = go _rcrbiId (Just AltJSON) _rcrbiPayload
               mapsEngineService
           where go

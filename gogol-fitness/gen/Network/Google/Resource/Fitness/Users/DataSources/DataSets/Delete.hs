@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -73,7 +73,7 @@ type UsersDataSourcesDataSetsDeleteResource =
 -- will be deleted.
 --
 -- /See:/ 'usersDataSourcesDataSetsDelete' smart constructor.
-data UsersDataSourcesDataSetsDelete = UsersDataSourcesDataSetsDelete
+data UsersDataSourcesDataSetsDelete = UsersDataSourcesDataSetsDelete'
     { _udsdsdDataSourceId       :: !Text
     , _udsdsdUserId             :: !Text
     , _udsdsdDataSetId          :: !Text
@@ -100,7 +100,7 @@ usersDataSourcesDataSetsDelete
     -> Text -- ^ 'udsdsdDataSetId'
     -> UsersDataSourcesDataSetsDelete
 usersDataSourcesDataSetsDelete pUdsdsdDataSourceId_ pUdsdsdUserId_ pUdsdsdDataSetId_ =
-    UsersDataSourcesDataSetsDelete
+    UsersDataSourcesDataSetsDelete'
     { _udsdsdDataSourceId = pUdsdsdDataSourceId_
     , _udsdsdUserId = pUdsdsdUserId_
     , _udsdsdDataSetId = pUdsdsdDataSetId_
@@ -146,7 +146,11 @@ udsdsdCurrentTimeMillis
 instance GoogleRequest UsersDataSourcesDataSetsDelete
          where
         type Rs UsersDataSourcesDataSetsDelete = ()
-        requestClient UsersDataSourcesDataSetsDelete{..}
+        type Scopes UsersDataSourcesDataSetsDelete =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
+        requestClient UsersDataSourcesDataSetsDelete'{..}
           = go _udsdsdUserId _udsdsdDataSourceId
               _udsdsdDataSetId
               _udsdsdModifiedTimeMillis

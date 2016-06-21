@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Datafeeds.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type DatafeedsDeleteResource =
 -- | Deletes a datafeed from your Merchant Center account.
 --
 -- /See:/ 'datafeedsDelete' smart constructor.
-data DatafeedsDelete = DatafeedsDelete
+data DatafeedsDelete = DatafeedsDelete'
     { _ddMerchantId :: !(Textual Word64)
     , _ddDatafeedId :: !(Textual Word64)
     , _ddDryRun     :: !(Maybe Bool)
@@ -75,7 +75,7 @@ datafeedsDelete
     -> Word64 -- ^ 'ddDatafeedId'
     -> DatafeedsDelete
 datafeedsDelete pDdMerchantId_ pDdDatafeedId_ =
-    DatafeedsDelete
+    DatafeedsDelete'
     { _ddMerchantId = _Coerce # pDdMerchantId_
     , _ddDatafeedId = _Coerce # pDdDatafeedId_
     , _ddDryRun = Nothing
@@ -97,7 +97,9 @@ ddDryRun = lens _ddDryRun (\ s a -> s{_ddDryRun = a})
 
 instance GoogleRequest DatafeedsDelete where
         type Rs DatafeedsDelete = ()
-        requestClient DatafeedsDelete{..}
+        type Scopes DatafeedsDelete =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient DatafeedsDelete'{..}
           = go _ddMerchantId _ddDatafeedId _ddDryRun
               (Just AltJSON)
               shoppingContentService

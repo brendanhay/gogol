@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.CommentThreads.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type CommentThreadsInsertResource =
 -- use the comments.insert method instead.
 --
 -- /See:/ 'commentThreadsInsert' smart constructor.
-data CommentThreadsInsert = CommentThreadsInsert
+data CommentThreadsInsert = CommentThreadsInsert'
     { _ctiPart    :: !Text
     , _ctiPayload :: !CommentThread
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ commentThreadsInsert
     -> CommentThread -- ^ 'ctiPayload'
     -> CommentThreadsInsert
 commentThreadsInsert pCtiPart_ pCtiPayload_ =
-    CommentThreadsInsert
+    CommentThreadsInsert'
     { _ctiPart = pCtiPart_
     , _ctiPayload = pCtiPayload_
     }
@@ -91,7 +91,9 @@ ctiPayload
 
 instance GoogleRequest CommentThreadsInsert where
         type Rs CommentThreadsInsert = CommentThread
-        requestClient CommentThreadsInsert{..}
+        type Scopes CommentThreadsInsert =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient CommentThreadsInsert'{..}
           = go (Just _ctiPart) (Just AltJSON) _ctiPayload
               youTubeService
           where go

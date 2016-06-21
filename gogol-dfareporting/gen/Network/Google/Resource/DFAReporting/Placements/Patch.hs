@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Placements.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'PlacementsPatch' request conforms to.
 type PlacementsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -56,7 +56,7 @@ type PlacementsPatchResource =
 -- | Updates an existing placement. This method supports patch semantics.
 --
 -- /See:/ 'placementsPatch' smart constructor.
-data PlacementsPatch = PlacementsPatch
+data PlacementsPatch = PlacementsPatch'
     { _ppProFileId :: !(Textual Int64)
     , _ppPayload   :: !Placement
     , _ppId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ placementsPatch
     -> Int64 -- ^ 'ppId'
     -> PlacementsPatch
 placementsPatch pPpProFileId_ pPpPayload_ pPpId_ =
-    PlacementsPatch
+    PlacementsPatch'
     { _ppProFileId = _Coerce # pPpProFileId_
     , _ppPayload = pPpPayload_
     , _ppId = _Coerce # pPpId_
@@ -100,7 +100,9 @@ ppId = lens _ppId (\ s a -> s{_ppId = a}) . _Coerce
 
 instance GoogleRequest PlacementsPatch where
         type Rs PlacementsPatch = Placement
-        requestClient PlacementsPatch{..}
+        type Scopes PlacementsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementsPatch'{..}
           = go _ppProFileId (Just _ppId) (Just AltJSON)
               _ppPayload
               dFAReportingService

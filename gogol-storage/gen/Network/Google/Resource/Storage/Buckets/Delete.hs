@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Buckets.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type BucketsDeleteResource =
 -- | Permanently deletes an empty bucket.
 --
 -- /See:/ 'bucketsDelete' smart constructor.
-data BucketsDelete = BucketsDelete
+data BucketsDelete = BucketsDelete'
     { _bdIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _bdBucket                   :: !Text
     , _bdIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
@@ -74,7 +74,7 @@ bucketsDelete
     :: Text -- ^ 'bdBucket'
     -> BucketsDelete
 bucketsDelete pBdBucket_ =
-    BucketsDelete
+    BucketsDelete'
     { _bdIfMetagenerationMatch = Nothing
     , _bdBucket = pBdBucket_
     , _bdIfMetagenerationNotMatch = Nothing
@@ -102,7 +102,11 @@ bdIfMetagenerationNotMatch
 
 instance GoogleRequest BucketsDelete where
         type Rs BucketsDelete = ()
-        requestClient BucketsDelete{..}
+        type Scopes BucketsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient BucketsDelete'{..}
           = go _bdBucket _bdIfMetagenerationMatch
               _bdIfMetagenerationNotMatch
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.RemarketingLists.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListsInsert' request conforms to.
 type RemarketingListsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
@@ -55,7 +55,7 @@ type RemarketingListsInsertResource =
 -- | Inserts a new remarketing list.
 --
 -- /See:/ 'remarketingListsInsert' smart constructor.
-data RemarketingListsInsert = RemarketingListsInsert
+data RemarketingListsInsert = RemarketingListsInsert'
     { _rliProFileId :: !(Textual Int64)
     , _rliPayload   :: !RemarketingList
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ remarketingListsInsert
     -> RemarketingList -- ^ 'rliPayload'
     -> RemarketingListsInsert
 remarketingListsInsert pRliProFileId_ pRliPayload_ =
-    RemarketingListsInsert
+    RemarketingListsInsert'
     { _rliProFileId = _Coerce # pRliProFileId_
     , _rliPayload = pRliPayload_
     }
@@ -90,7 +90,9 @@ rliPayload
 
 instance GoogleRequest RemarketingListsInsert where
         type Rs RemarketingListsInsert = RemarketingList
-        requestClient RemarketingListsInsert{..}
+        type Scopes RemarketingListsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient RemarketingListsInsert'{..}
           = go _rliProFileId (Just AltJSON) _rliPayload
               dFAReportingService
           where go

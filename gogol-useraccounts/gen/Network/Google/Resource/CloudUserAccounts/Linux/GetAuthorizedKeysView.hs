@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.Linux.GetAuthorizedKeysView
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type LinuxGetAuthorizedKeysViewResource =
 -- | Returns a list of authorized public keys for a specific user account.
 --
 -- /See:/ 'linuxGetAuthorizedKeysView' smart constructor.
-data LinuxGetAuthorizedKeysView = LinuxGetAuthorizedKeysView
+data LinuxGetAuthorizedKeysView = LinuxGetAuthorizedKeysView'
     { _lgakvProject  :: !Text
     , _lgakvZone     :: !Text
     , _lgakvUser     :: !Text
@@ -90,7 +90,7 @@ linuxGetAuthorizedKeysView
     -> Text -- ^ 'lgakvInstance'
     -> LinuxGetAuthorizedKeysView
 linuxGetAuthorizedKeysView pLgakvProject_ pLgakvZone_ pLgakvUser_ pLgakvInstance_ =
-    LinuxGetAuthorizedKeysView
+    LinuxGetAuthorizedKeysView'
     { _lgakvProject = pLgakvProject_
     , _lgakvZone = pLgakvZone_
     , _lgakvUser = pLgakvUser_
@@ -129,7 +129,12 @@ instance GoogleRequest LinuxGetAuthorizedKeysView
          where
         type Rs LinuxGetAuthorizedKeysView =
              LinuxGetAuthorizedKeysViewResponse
-        requestClient LinuxGetAuthorizedKeysView{..}
+        type Scopes LinuxGetAuthorizedKeysView =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
+        requestClient LinuxGetAuthorizedKeysView'{..}
           = go _lgakvProject _lgakvZone _lgakvUser
               (Just _lgakvInstance)
               _lgakvLogin

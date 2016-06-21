@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Productstatuses.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type ProductstatusesGetResource =
 -- | Gets the status of a product from your Merchant Center account.
 --
 -- /See:/ 'productstatusesGet' smart constructor.
-data ProductstatusesGet = ProductstatusesGet
+data ProductstatusesGet = ProductstatusesGet'
     { _pgMerchantId :: !(Textual Word64)
     , _pgProductId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ productstatusesGet
     -> Text -- ^ 'pgProductId'
     -> ProductstatusesGet
 productstatusesGet pPgMerchantId_ pPgProductId_ =
-    ProductstatusesGet
+    ProductstatusesGet'
     { _pgMerchantId = _Coerce # pPgMerchantId_
     , _pgProductId = pPgProductId_
     }
@@ -88,7 +88,9 @@ pgProductId
 
 instance GoogleRequest ProductstatusesGet where
         type Rs ProductstatusesGet = ProductStatus
-        requestClient ProductstatusesGet{..}
+        type Scopes ProductstatusesGet =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient ProductstatusesGet'{..}
           = go _pgMerchantId _pgProductId (Just AltJSON)
               shoppingContentService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.RemarketingListShares.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListSharesUpdate' request conforms to.
 type RemarketingListSharesUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>
@@ -55,7 +55,7 @@ type RemarketingListSharesUpdateResource =
 -- | Updates an existing remarketing list share.
 --
 -- /See:/ 'remarketingListSharesUpdate' smart constructor.
-data RemarketingListSharesUpdate = RemarketingListSharesUpdate
+data RemarketingListSharesUpdate = RemarketingListSharesUpdate'
     { _rlsuProFileId :: !(Textual Int64)
     , _rlsuPayload   :: !RemarketingListShare
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ remarketingListSharesUpdate
     -> RemarketingListShare -- ^ 'rlsuPayload'
     -> RemarketingListSharesUpdate
 remarketingListSharesUpdate pRlsuProFileId_ pRlsuPayload_ =
-    RemarketingListSharesUpdate
+    RemarketingListSharesUpdate'
     { _rlsuProFileId = _Coerce # pRlsuProFileId_
     , _rlsuPayload = pRlsuPayload_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest RemarketingListSharesUpdate
          where
         type Rs RemarketingListSharesUpdate =
              RemarketingListShare
-        requestClient RemarketingListSharesUpdate{..}
+        type Scopes RemarketingListSharesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient RemarketingListSharesUpdate'{..}
           = go _rlsuProFileId (Just AltJSON) _rlsuPayload
               dFAReportingService
           where go

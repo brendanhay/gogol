@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type MyLibraryBookshelvesClearVolumesResource =
 -- | Clears all volumes from a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesClearVolumes' smart constructor.
-data MyLibraryBookshelvesClearVolumes = MyLibraryBookshelvesClearVolumes
+data MyLibraryBookshelvesClearVolumes = MyLibraryBookshelvesClearVolumes'
     { _mlbcvShelf  :: !Text
     , _mlbcvSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ myLibraryBookshelvesClearVolumes
     :: Text -- ^ 'mlbcvShelf'
     -> MyLibraryBookshelvesClearVolumes
 myLibraryBookshelvesClearVolumes pMlbcvShelf_ =
-    MyLibraryBookshelvesClearVolumes
+    MyLibraryBookshelvesClearVolumes'
     { _mlbcvShelf = pMlbcvShelf_
     , _mlbcvSource = Nothing
     }
@@ -89,7 +89,9 @@ mlbcvSource
 instance GoogleRequest
          MyLibraryBookshelvesClearVolumes where
         type Rs MyLibraryBookshelvesClearVolumes = ()
-        requestClient MyLibraryBookshelvesClearVolumes{..}
+        type Scopes MyLibraryBookshelvesClearVolumes =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryBookshelvesClearVolumes'{..}
           = go _mlbcvShelf _mlbcvSource (Just AltJSON)
               booksService
           where go

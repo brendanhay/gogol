@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Events.Instances
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -74,7 +74,7 @@ type EventsInstancesResource =
 -- | Returns instances of the specified recurring event.
 --
 -- /See:/ 'eventsInstances' smart constructor.
-data EventsInstances = EventsInstances
+data EventsInstances = EventsInstances'
     { _eCalendarId         :: !Text
     , _eTimeMin            :: !(Maybe DateTime')
     , _eShowDeleted        :: !(Maybe Bool)
@@ -118,7 +118,7 @@ eventsInstances
     -> Text -- ^ 'eEventId'
     -> EventsInstances
 eventsInstances pECalendarId_ pEEventId_ =
-    EventsInstances
+    EventsInstances'
     { _eCalendarId = pECalendarId_
     , _eTimeMin = Nothing
     , _eShowDeleted = Nothing
@@ -213,7 +213,10 @@ eEventId = lens _eEventId (\ s a -> s{_eEventId = a})
 
 instance GoogleRequest EventsInstances where
         type Rs EventsInstances = Events
-        requestClient EventsInstances{..}
+        type Scopes EventsInstances =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient EventsInstances'{..}
           = go _eCalendarId _eEventId _eTimeMin _eShowDeleted
               _eOriginalStart
               _eMaxAttendees

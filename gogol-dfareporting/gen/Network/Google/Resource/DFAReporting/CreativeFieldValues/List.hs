@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeFieldValues.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesList' request conforms to.
 type CreativeFieldValuesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -72,7 +72,7 @@ type CreativeFieldValuesListResource =
 -- | Retrieves a list of creative field values, possibly filtered.
 --
 -- /See:/ 'creativeFieldValuesList' smart constructor.
-data CreativeFieldValuesList = CreativeFieldValuesList
+data CreativeFieldValuesList = CreativeFieldValuesList'
     { _cfvlCreativeFieldId :: !(Textual Int64)
     , _cfvlSearchString    :: !(Maybe Text)
     , _cfvlIds             :: !(Maybe [Textual Int64])
@@ -107,7 +107,7 @@ creativeFieldValuesList
     -> Int64 -- ^ 'cfvlProFileId'
     -> CreativeFieldValuesList
 creativeFieldValuesList pCfvlCreativeFieldId_ pCfvlProFileId_ =
-    CreativeFieldValuesList
+    CreativeFieldValuesList'
     { _cfvlCreativeFieldId = _Coerce # pCfvlCreativeFieldId_
     , _cfvlSearchString = Nothing
     , _cfvlIds = Nothing
@@ -173,7 +173,9 @@ cfvlMaxResults
 instance GoogleRequest CreativeFieldValuesList where
         type Rs CreativeFieldValuesList =
              CreativeFieldValuesListResponse
-        requestClient CreativeFieldValuesList{..}
+        type Scopes CreativeFieldValuesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeFieldValuesList'{..}
           = go _cfvlProFileId _cfvlCreativeFieldId
               _cfvlSearchString
               (_cfvlIds ^. _Default)

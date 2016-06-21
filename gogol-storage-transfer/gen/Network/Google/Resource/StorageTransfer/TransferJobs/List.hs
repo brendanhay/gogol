@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.TransferJobs.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type TransferJobsListResource =
 -- | Lists transfer jobs.
 --
 -- /See:/ 'transferJobsList' smart constructor.
-data TransferJobsList = TransferJobsList
+data TransferJobsList = TransferJobsList'
     { _tjlXgafv          :: !(Maybe Text)
     , _tjlUploadProtocol :: !(Maybe Text)
     , _tjlPp             :: !Bool
@@ -108,7 +108,7 @@ data TransferJobsList = TransferJobsList
 transferJobsList
     :: TransferJobsList
 transferJobsList =
-    TransferJobsList
+    TransferJobsList'
     { _tjlXgafv = Nothing
     , _tjlUploadProtocol = Nothing
     , _tjlPp = True
@@ -183,7 +183,9 @@ tjlCallback
 
 instance GoogleRequest TransferJobsList where
         type Rs TransferJobsList = ListTransferJobsResponse
-        requestClient TransferJobsList{..}
+        type Scopes TransferJobsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TransferJobsList'{..}
           = go _tjlXgafv _tjlUploadProtocol (Just _tjlPp)
               _tjlAccessToken
               _tjlUploadType

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Students.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -75,7 +75,7 @@ type CoursesStudentsGetResource =
 -- exist.
 --
 -- /See:/ 'coursesStudentsGet' smart constructor.
-data CoursesStudentsGet = CoursesStudentsGet
+data CoursesStudentsGet = CoursesStudentsGet'
     { _csgXgafv          :: !(Maybe Text)
     , _csgUploadProtocol :: !(Maybe Text)
     , _csgPp             :: !Bool
@@ -113,7 +113,7 @@ coursesStudentsGet
     -> Text -- ^ 'csgUserId'
     -> CoursesStudentsGet
 coursesStudentsGet pCsgCourseId_ pCsgUserId_ =
-    CoursesStudentsGet
+    CoursesStudentsGet'
     { _csgXgafv = Nothing
     , _csgUploadProtocol = Nothing
     , _csgPp = True
@@ -177,7 +177,12 @@ csgCallback
 
 instance GoogleRequest CoursesStudentsGet where
         type Rs CoursesStudentsGet = Student
-        requestClient CoursesStudentsGet{..}
+        type Scopes CoursesStudentsGet =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
+        requestClient CoursesStudentsGet'{..}
           = go _csgCourseId _csgUserId _csgXgafv
               _csgUploadProtocol
               (Just _csgPp)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Entitlements.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Adds or updates an entitlement to an app for a user.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.update@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.update@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Update
     (
     -- * REST Resource
@@ -62,7 +62,7 @@ type EntitlementsUpdateResource =
 -- | Adds or updates an entitlement to an app for a user.
 --
 -- /See:/ 'entitlementsUpdate' smart constructor.
-data EntitlementsUpdate = EntitlementsUpdate
+data EntitlementsUpdate = EntitlementsUpdate'
     { _euEntitlementId :: !Text
     , _euEnterpriseId  :: !Text
     , _euPayload       :: !Entitlement
@@ -90,7 +90,7 @@ entitlementsUpdate
     -> Text -- ^ 'euUserId'
     -> EntitlementsUpdate
 entitlementsUpdate pEuEntitlementId_ pEuEnterpriseId_ pEuPayload_ pEuUserId_ =
-    EntitlementsUpdate
+    EntitlementsUpdate'
     { _euEntitlementId = pEuEntitlementId_
     , _euEnterpriseId = pEuEnterpriseId_
     , _euPayload = pEuPayload_
@@ -98,7 +98,8 @@ entitlementsUpdate pEuEntitlementId_ pEuEnterpriseId_ pEuPayload_ pEuUserId_ =
     , _euUserId = pEuUserId_
     }
 
--- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
+-- | The ID of the entitlement (a product ID), e.g.
+-- \"app:com.google.android.gm\".
 euEntitlementId :: Lens' EntitlementsUpdate Text
 euEntitlementId
   = lens _euEntitlementId
@@ -129,7 +130,9 @@ euUserId = lens _euUserId (\ s a -> s{_euUserId = a})
 
 instance GoogleRequest EntitlementsUpdate where
         type Rs EntitlementsUpdate = Entitlement
-        requestClient EntitlementsUpdate{..}
+        type Scopes EntitlementsUpdate =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EntitlementsUpdate'{..}
           = go _euEnterpriseId _euUserId _euEntitlementId
               _euInstall
               (Just AltJSON)

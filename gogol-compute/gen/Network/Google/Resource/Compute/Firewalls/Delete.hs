@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Firewalls.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified firewall resource.
+-- Deletes the specified firewall.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.delete@.
 module Network.Google.Resource.Compute.Firewalls.Delete
@@ -52,10 +52,10 @@ type FirewallsDeleteResource =
                  Capture "firewall" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified firewall resource.
+-- | Deletes the specified firewall.
 --
 -- /See:/ 'firewallsDelete' smart constructor.
-data FirewallsDelete = FirewallsDelete
+data FirewallsDelete = FirewallsDelete'
     { _fdProject  :: !Text
     , _fdFirewall :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ firewallsDelete
     -> Text -- ^ 'fdFirewall'
     -> FirewallsDelete
 firewallsDelete pFdProject_ pFdFirewall_ =
-    FirewallsDelete
+    FirewallsDelete'
     { _fdProject = pFdProject_
     , _fdFirewall = pFdFirewall_
     }
@@ -82,14 +82,17 @@ fdProject :: Lens' FirewallsDelete Text
 fdProject
   = lens _fdProject (\ s a -> s{_fdProject = a})
 
--- | Name of the firewall resource to delete.
+-- | Name of the firewall rule to delete.
 fdFirewall :: Lens' FirewallsDelete Text
 fdFirewall
   = lens _fdFirewall (\ s a -> s{_fdFirewall = a})
 
 instance GoogleRequest FirewallsDelete where
         type Rs FirewallsDelete = Operation
-        requestClient FirewallsDelete{..}
+        type Scopes FirewallsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient FirewallsDelete'{..}
           = go _fdProject _fdFirewall (Just AltJSON)
               computeService
           where go

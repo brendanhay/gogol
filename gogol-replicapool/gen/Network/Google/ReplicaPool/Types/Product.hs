@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.ReplicaPool.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.ReplicaPool.Types.Sum
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem
+    OperationWarningsItemDataItem'
     { _owidiValue = Nothing
     , _owidiKey = Nothing
     }
@@ -55,11 +55,11 @@ instance FromJSON OperationWarningsItemDataItem where
         parseJSON
           = withObject "OperationWarningsItemDataItem"
               (\ o ->
-                 OperationWarningsItemDataItem <$>
+                 OperationWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON OperationWarningsItemDataItem where
-        toJSON OperationWarningsItemDataItem{..}
+        toJSON OperationWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _owidiValue,
@@ -67,7 +67,7 @@ instance ToJSON OperationWarningsItemDataItem where
 
 --
 -- /See:/ 'instanceGroupManagersAbandonInstancesRequest' smart constructor.
-newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest
+newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest'
     { _igmairInstances :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -79,7 +79,7 @@ newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAban
 instanceGroupManagersAbandonInstancesRequest
     :: InstanceGroupManagersAbandonInstancesRequest
 instanceGroupManagersAbandonInstancesRequest =
-    InstanceGroupManagersAbandonInstancesRequest
+    InstanceGroupManagersAbandonInstancesRequest'
     { _igmairInstances = Nothing
     }
 
@@ -98,19 +98,19 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersAbandonInstancesRequest"
               (\ o ->
-                 InstanceGroupManagersAbandonInstancesRequest <$>
+                 InstanceGroupManagersAbandonInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersAbandonInstancesRequest where
         toJSON
-          InstanceGroupManagersAbandonInstancesRequest{..}
+          InstanceGroupManagersAbandonInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igmairInstances])
 
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
-newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest
+newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest'
     { _igmsitrInstanceTemplate :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -122,7 +122,7 @@ newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersS
 instanceGroupManagersSetInstanceTemplateRequest
     :: InstanceGroupManagersSetInstanceTemplateRequest
 instanceGroupManagersSetInstanceTemplateRequest =
-    InstanceGroupManagersSetInstanceTemplateRequest
+    InstanceGroupManagersSetInstanceTemplateRequest'
     { _igmsitrInstanceTemplate = Nothing
     }
 
@@ -139,13 +139,13 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersSetInstanceTemplateRequest"
               (\ o ->
-                 InstanceGroupManagersSetInstanceTemplateRequest <$>
+                 InstanceGroupManagersSetInstanceTemplateRequest' <$>
                    (o .:? "instanceTemplate"))
 
 instance ToJSON
          InstanceGroupManagersSetInstanceTemplateRequest where
         toJSON
-          InstanceGroupManagersSetInstanceTemplateRequest{..}
+          InstanceGroupManagersSetInstanceTemplateRequest'{..}
           = object
               (catMaybes
                  [("instanceTemplate" .=) <$>
@@ -153,7 +153,7 @@ instance ToJSON
 
 --
 -- /See:/ 'operationList' smart constructor.
-data OperationList = OperationList
+data OperationList = OperationList'
     { _olNextPageToken :: !(Maybe Text)
     , _olKind          :: !Text
     , _olItems         :: !(Maybe [Operation])
@@ -177,7 +177,7 @@ data OperationList = OperationList
 operationList
     :: OperationList
 operationList =
-    OperationList
+    OperationList'
     { _olNextPageToken = Nothing
     , _olKind = "replicapool#operationList"
     , _olItems = Nothing
@@ -214,7 +214,7 @@ instance FromJSON OperationList where
         parseJSON
           = withObject "OperationList"
               (\ o ->
-                 OperationList <$>
+                 OperationList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "replicapool#operationList")
                      <*> (o .:? "items" .!= mempty)
@@ -222,7 +222,7 @@ instance FromJSON OperationList where
                      <*> (o .:? "id"))
 
 instance ToJSON OperationList where
-        toJSON OperationList{..}
+        toJSON OperationList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olNextPageToken,
@@ -232,7 +232,7 @@ instance ToJSON OperationList where
 
 --
 -- /See:/ 'instanceGroupManagerList' smart constructor.
-data InstanceGroupManagerList = InstanceGroupManagerList
+data InstanceGroupManagerList = InstanceGroupManagerList'
     { _igmlNextPageToken :: !(Maybe Text)
     , _igmlKind          :: !Text
     , _igmlItems         :: !(Maybe [InstanceGroupManager])
@@ -256,7 +256,7 @@ data InstanceGroupManagerList = InstanceGroupManagerList
 instanceGroupManagerList
     :: InstanceGroupManagerList
 instanceGroupManagerList =
-    InstanceGroupManagerList
+    InstanceGroupManagerList'
     { _igmlNextPageToken = Nothing
     , _igmlKind = "replicapool#instanceGroupManagerList"
     , _igmlItems = Nothing
@@ -294,7 +294,7 @@ instance FromJSON InstanceGroupManagerList where
         parseJSON
           = withObject "InstanceGroupManagerList"
               (\ o ->
-                 InstanceGroupManagerList <$>
+                 InstanceGroupManagerList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "replicapool#instanceGroupManagerList")
@@ -303,7 +303,7 @@ instance FromJSON InstanceGroupManagerList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceGroupManagerList where
-        toJSON InstanceGroupManagerList{..}
+        toJSON InstanceGroupManagerList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _igmlNextPageToken,
@@ -315,7 +315,7 @@ instance ToJSON InstanceGroupManagerList where
 -- | An operation resource, used to manage asynchronous API requests.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe OperationStatus)
     , _oInsertTime          :: !(Maybe Text)
@@ -390,7 +390,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -551,7 +551,7 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "targetId") <*> (o .:? "status") <*>
                      (o .:? "insertTime")
                      <*> (o .:? "progress")
@@ -575,7 +575,7 @@ instance FromJSON Operation where
                      <*> (o .:? "clientOperationId"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("targetId" .=) <$> _oTargetId,
@@ -602,11 +602,11 @@ instance ToJSON Operation where
 -- | An Instance Group Manager resource.
 --
 -- /See:/ 'instanceGroupManager' smart constructor.
-data InstanceGroupManager = InstanceGroupManager
+data InstanceGroupManager = InstanceGroupManager'
     { _igmCurrentSize         :: !(Maybe (Textual Int32))
     , _igmGroup               :: !(Maybe Text)
     , _igmKind                :: !Text
-    , _igmFingerprint         :: !(Maybe (Textual Word8))
+    , _igmFingerprint         :: !(Maybe Base64)
     , _igmBaseInstanceName    :: !(Maybe Text)
     , _igmAutoHealingPolicies :: !(Maybe [ReplicaPoolAutoHealingPolicy])
     , _igmInstanceTemplate    :: !(Maybe Text)
@@ -653,7 +653,7 @@ data InstanceGroupManager = InstanceGroupManager
 instanceGroupManager
     :: InstanceGroupManager
 instanceGroupManager =
-    InstanceGroupManager
+    InstanceGroupManager'
     { _igmCurrentSize = Nothing
     , _igmGroup = Nothing
     , _igmKind = "replicapool#instanceGroupManager"
@@ -694,11 +694,11 @@ igmKind = lens _igmKind (\ s a -> s{_igmKind = a})
 -- | [Output only] Fingerprint of the instance group manager. This field is
 -- used for optimistic locking. An up-to-date fingerprint must be provided
 -- in order to modify the Instance Group Manager resource.
-igmFingerprint :: Lens' InstanceGroupManager (Maybe Word8)
+igmFingerprint :: Lens' InstanceGroupManager (Maybe ByteString)
 igmFingerprint
   = lens _igmFingerprint
       (\ s a -> s{_igmFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The base instance name to use for instances in this group. The value
 -- must be a valid RFC1035 name. Supported characters are lowercase
@@ -778,7 +778,7 @@ instance FromJSON InstanceGroupManager where
         parseJSON
           = withObject "InstanceGroupManager"
               (\ o ->
-                 InstanceGroupManager <$>
+                 InstanceGroupManager' <$>
                    (o .:? "currentSize") <*> (o .:? "group") <*>
                      (o .:? "kind" .!= "replicapool#instanceGroupManager")
                      <*> (o .:? "fingerprint")
@@ -794,7 +794,7 @@ instance FromJSON InstanceGroupManager where
                      <*> (o .:? "description"))
 
 instance ToJSON InstanceGroupManager where
-        toJSON InstanceGroupManager{..}
+        toJSON InstanceGroupManager'{..}
           = object
               (catMaybes
                  [("currentSize" .=) <$> _igmCurrentSize,
@@ -815,7 +815,7 @@ instance ToJSON InstanceGroupManager where
 
 --
 -- /See:/ 'replicaPoolAutoHealingPolicy' smart constructor.
-data ReplicaPoolAutoHealingPolicy = ReplicaPoolAutoHealingPolicy
+data ReplicaPoolAutoHealingPolicy = ReplicaPoolAutoHealingPolicy'
     { _rpahpHealthCheck :: !(Maybe Text)
     , _rpahpActionType  :: !(Maybe ReplicaPoolAutoHealingPolicyActionType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -830,7 +830,7 @@ data ReplicaPoolAutoHealingPolicy = ReplicaPoolAutoHealingPolicy
 replicaPoolAutoHealingPolicy
     :: ReplicaPoolAutoHealingPolicy
 replicaPoolAutoHealingPolicy =
-    ReplicaPoolAutoHealingPolicy
+    ReplicaPoolAutoHealingPolicy'
     { _rpahpHealthCheck = Nothing
     , _rpahpActionType = Nothing
     }
@@ -855,11 +855,11 @@ instance FromJSON ReplicaPoolAutoHealingPolicy where
         parseJSON
           = withObject "ReplicaPoolAutoHealingPolicy"
               (\ o ->
-                 ReplicaPoolAutoHealingPolicy <$>
+                 ReplicaPoolAutoHealingPolicy' <$>
                    (o .:? "healthCheck") <*> (o .:? "actionType"))
 
 instance ToJSON ReplicaPoolAutoHealingPolicy where
-        toJSON ReplicaPoolAutoHealingPolicy{..}
+        toJSON ReplicaPoolAutoHealingPolicy'{..}
           = object
               (catMaybes
                  [("healthCheck" .=) <$> _rpahpHealthCheck,
@@ -867,7 +867,7 @@ instance ToJSON ReplicaPoolAutoHealingPolicy where
 
 --
 -- /See:/ 'instanceGroupManagersRecreateInstancesRequest' smart constructor.
-newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest
+newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest'
     { _igmrirInstances :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -879,7 +879,7 @@ newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRec
 instanceGroupManagersRecreateInstancesRequest
     :: InstanceGroupManagersRecreateInstancesRequest
 instanceGroupManagersRecreateInstancesRequest =
-    InstanceGroupManagersRecreateInstancesRequest
+    InstanceGroupManagersRecreateInstancesRequest'
     { _igmrirInstances = Nothing
     }
 
@@ -898,19 +898,19 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersRecreateInstancesRequest"
               (\ o ->
-                 InstanceGroupManagersRecreateInstancesRequest <$>
+                 InstanceGroupManagersRecreateInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersRecreateInstancesRequest where
         toJSON
-          InstanceGroupManagersRecreateInstancesRequest{..}
+          InstanceGroupManagersRecreateInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igmrirInstances])
 
 --
 -- /See:/ 'instanceGroupManagersDeleteInstancesRequest' smart constructor.
-newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDeleteInstancesRequest
+newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDeleteInstancesRequest'
     { _igmdirInstances :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -922,7 +922,7 @@ newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDelet
 instanceGroupManagersDeleteInstancesRequest
     :: InstanceGroupManagersDeleteInstancesRequest
 instanceGroupManagersDeleteInstancesRequest =
-    InstanceGroupManagersDeleteInstancesRequest
+    InstanceGroupManagersDeleteInstancesRequest'
     { _igmdirInstances = Nothing
     }
 
@@ -941,13 +941,13 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersDeleteInstancesRequest"
               (\ o ->
-                 InstanceGroupManagersDeleteInstancesRequest <$>
+                 InstanceGroupManagersDeleteInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersDeleteInstancesRequest where
         toJSON
-          InstanceGroupManagersDeleteInstancesRequest{..}
+          InstanceGroupManagersDeleteInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igmdirInstances])
 
@@ -955,7 +955,7 @@ instance ToJSON
 -- this field will be populated.
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
+newtype OperationError = OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -967,7 +967,7 @@ newtype OperationError = OperationError
 operationError
     :: OperationError
 operationError =
-    OperationError
+    OperationError'
     { _oeErrors = Nothing
     }
 
@@ -983,16 +983,16 @@ instance FromJSON OperationError where
         parseJSON
           = withObject "OperationError"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 OperationError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON OperationError where
-        toJSON OperationError{..}
+        toJSON OperationError'{..}
           = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
-data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest
-    { _igmstprFingerprint :: !(Maybe (Textual Word8))
+data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest'
+    { _igmstprFingerprint :: !(Maybe Base64)
     , _igmstprTargetPools :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1006,7 +1006,7 @@ data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTarget
 instanceGroupManagersSetTargetPoolsRequest
     :: InstanceGroupManagersSetTargetPoolsRequest
 instanceGroupManagersSetTargetPoolsRequest =
-    InstanceGroupManagersSetTargetPoolsRequest
+    InstanceGroupManagersSetTargetPoolsRequest'
     { _igmstprFingerprint = Nothing
     , _igmstprTargetPools = Nothing
     }
@@ -1014,11 +1014,11 @@ instanceGroupManagersSetTargetPoolsRequest =
 -- | The current fingerprint of the Instance Group Manager resource. If this
 -- does not match the server-side fingerprint of the resource, then the
 -- request will be rejected.
-igmstprFingerprint :: Lens' InstanceGroupManagersSetTargetPoolsRequest (Maybe Word8)
+igmstprFingerprint :: Lens' InstanceGroupManagersSetTargetPoolsRequest (Maybe ByteString)
 igmstprFingerprint
   = lens _igmstprFingerprint
       (\ s a -> s{_igmstprFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | A list of fully-qualified URLs to existing Target Pool resources. New
 -- instances in the Instance Group Manager will be added to the specified
@@ -1036,13 +1036,14 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersSetTargetPoolsRequest"
               (\ o ->
-                 InstanceGroupManagersSetTargetPoolsRequest <$>
+                 InstanceGroupManagersSetTargetPoolsRequest' <$>
                    (o .:? "fingerprint") <*>
                      (o .:? "targetPools" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersSetTargetPoolsRequest where
-        toJSON InstanceGroupManagersSetTargetPoolsRequest{..}
+        toJSON
+          InstanceGroupManagersSetTargetPoolsRequest'{..}
           = object
               (catMaybes
                  [("fingerprint" .=) <$> _igmstprFingerprint,
@@ -1050,7 +1051,7 @@ instance ToJSON
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem
+data OperationErrorErrorsItem = OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
@@ -1068,7 +1069,7 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem
+    OperationErrorErrorsItem'
     { _oeeiLocation = Nothing
     , _oeeiCode = Nothing
     , _oeeiMessage = Nothing
@@ -1093,12 +1094,12 @@ instance FromJSON OperationErrorErrorsItem where
         parseJSON
           = withObject "OperationErrorErrorsItem"
               (\ o ->
-                 OperationErrorErrorsItem <$>
+                 OperationErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationErrorErrorsItem where
-        toJSON OperationErrorErrorsItem{..}
+        toJSON OperationErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _oeeiLocation,
@@ -1107,7 +1108,7 @@ instance ToJSON OperationErrorErrorsItem where
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem
+data OperationWarningsItem = OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe OperationWarningsItemCode)
     , _owiMessage :: !(Maybe Text)
@@ -1125,7 +1126,7 @@ data OperationWarningsItem = OperationWarningsItem
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem
+    OperationWarningsItem'
     { _owiData = Nothing
     , _owiCode = Nothing
     , _owiMessage = Nothing
@@ -1150,12 +1151,12 @@ instance FromJSON OperationWarningsItem where
         parseJSON
           = withObject "OperationWarningsItem"
               (\ o ->
-                 OperationWarningsItem <$>
+                 OperationWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationWarningsItem where
-        toJSON OperationWarningsItem{..}
+        toJSON OperationWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,

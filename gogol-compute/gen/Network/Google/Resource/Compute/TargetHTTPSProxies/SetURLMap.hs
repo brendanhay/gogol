@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetHTTPSProxies.SetURLMap
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type TargetHTTPSProxiesSetURLMapResource =
 -- | Changes the URL map for TargetHttpsProxy.
 --
 -- /See:/ 'targetHTTPSProxiesSetURLMap' smart constructor.
-data TargetHTTPSProxiesSetURLMap = TargetHTTPSProxiesSetURLMap
+data TargetHTTPSProxiesSetURLMap = TargetHTTPSProxiesSetURLMap'
     { _thpsumProject          :: !Text
     , _thpsumPayload          :: !URLMapReference
     , _thpsumTargetHTTPSProxy :: !Text
@@ -79,13 +79,13 @@ targetHTTPSProxiesSetURLMap
     -> Text -- ^ 'thpsumTargetHTTPSProxy'
     -> TargetHTTPSProxiesSetURLMap
 targetHTTPSProxiesSetURLMap pThpsumProject_ pThpsumPayload_ pThpsumTargetHTTPSProxy_ =
-    TargetHTTPSProxiesSetURLMap
+    TargetHTTPSProxiesSetURLMap'
     { _thpsumProject = pThpsumProject_
     , _thpsumPayload = pThpsumPayload_
     , _thpsumTargetHTTPSProxy = pThpsumTargetHTTPSProxy_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thpsumProject :: Lens' TargetHTTPSProxiesSetURLMap Text
 thpsumProject
   = lens _thpsumProject
@@ -106,7 +106,10 @@ thpsumTargetHTTPSProxy
 instance GoogleRequest TargetHTTPSProxiesSetURLMap
          where
         type Rs TargetHTTPSProxiesSetURLMap = Operation
-        requestClient TargetHTTPSProxiesSetURLMap{..}
+        type Scopes TargetHTTPSProxiesSetURLMap =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetHTTPSProxiesSetURLMap'{..}
           = go _thpsumProject _thpsumTargetHTTPSProxy
               (Just AltJSON)
               _thpsumPayload

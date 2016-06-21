@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.AndroidEnterprise.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -39,7 +39,7 @@ import           Network.Google.Prelude
 -- marking it as unapproved in Google Play.
 --
 -- /See:/ 'groupLicense' smart constructor.
-data GroupLicense = GroupLicense
+data GroupLicense = GroupLicense'
     { _glKind            :: !Text
     , _glNumProvisioned  :: !(Maybe (Textual Int32))
     , _glNumPurchased    :: !(Maybe (Textual Int32))
@@ -66,7 +66,7 @@ data GroupLicense = GroupLicense
 groupLicense
     :: GroupLicense
 groupLicense =
-    GroupLicense
+    GroupLicense'
     { _glKind = "androidenterprise#groupLicense"
     , _glNumProvisioned = Nothing
     , _glNumPurchased = Nothing
@@ -126,7 +126,7 @@ instance FromJSON GroupLicense where
         parseJSON
           = withObject "GroupLicense"
               (\ o ->
-                 GroupLicense <$>
+                 GroupLicense' <$>
                    (o .:? "kind" .!= "androidenterprise#groupLicense")
                      <*> (o .:? "numProvisioned")
                      <*> (o .:? "numPurchased")
@@ -135,7 +135,7 @@ instance FromJSON GroupLicense where
                      <*> (o .:? "acquisitionKind"))
 
 instance ToJSON GroupLicense where
-        toJSON GroupLicense{..}
+        toJSON GroupLicense'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _glKind),
@@ -145,11 +145,63 @@ instance ToJSON GroupLicense where
                   ("productId" .=) <$> _glProductId,
                   ("acquisitionKind" .=) <$> _glAcquisitionKind])
 
+-- | The store page resources for the enterprise.
+--
+-- /See:/ 'storeLayoutPagesListResponse' smart constructor.
+data StoreLayoutPagesListResponse = StoreLayoutPagesListResponse'
+    { _slplrKind :: !Text
+    , _slplrPage :: !(Maybe [StorePage])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StoreLayoutPagesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slplrKind'
+--
+-- * 'slplrPage'
+storeLayoutPagesListResponse
+    :: StoreLayoutPagesListResponse
+storeLayoutPagesListResponse =
+    StoreLayoutPagesListResponse'
+    { _slplrKind = "androidenterprise#storeLayoutPagesListResponse"
+    , _slplrPage = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#storeLayoutPagesListResponse\".
+slplrKind :: Lens' StoreLayoutPagesListResponse Text
+slplrKind
+  = lens _slplrKind (\ s a -> s{_slplrKind = a})
+
+-- | A store page of an enterprise.
+slplrPage :: Lens' StoreLayoutPagesListResponse [StorePage]
+slplrPage
+  = lens _slplrPage (\ s a -> s{_slplrPage = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON StoreLayoutPagesListResponse where
+        parseJSON
+          = withObject "StoreLayoutPagesListResponse"
+              (\ o ->
+                 StoreLayoutPagesListResponse' <$>
+                   (o .:? "kind" .!=
+                      "androidenterprise#storeLayoutPagesListResponse")
+                     <*> (o .:? "page" .!= mempty))
+
+instance ToJSON StoreLayoutPagesListResponse where
+        toJSON StoreLayoutPagesListResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _slplrKind),
+                  ("page" .=) <$> _slplrPage])
+
 -- | A service account that can be used to authenticate as the enterprise to
 -- API calls that require such authentication.
 --
 -- /See:/ 'enterpriseAccount' smart constructor.
-data EnterpriseAccount = EnterpriseAccount
+data EnterpriseAccount = EnterpriseAccount'
     { _eaKind         :: !Text
     , _eaAccountEmail :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -164,7 +216,7 @@ data EnterpriseAccount = EnterpriseAccount
 enterpriseAccount
     :: EnterpriseAccount
 enterpriseAccount =
-    EnterpriseAccount
+    EnterpriseAccount'
     { _eaKind = "androidenterprise#enterpriseAccount"
     , _eaAccountEmail = Nothing
     }
@@ -184,13 +236,13 @@ instance FromJSON EnterpriseAccount where
         parseJSON
           = withObject "EnterpriseAccount"
               (\ o ->
-                 EnterpriseAccount <$>
+                 EnterpriseAccount' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#enterpriseAccount")
                      <*> (o .:? "accountEmail"))
 
 instance ToJSON EnterpriseAccount where
-        toJSON EnterpriseAccount{..}
+        toJSON EnterpriseAccount'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _eaKind),
@@ -199,7 +251,7 @@ instance ToJSON EnterpriseAccount where
 -- | The collection resources for the enterprise.
 --
 -- /See:/ 'collectionsListResponse' smart constructor.
-data CollectionsListResponse = CollectionsListResponse
+data CollectionsListResponse = CollectionsListResponse'
     { _clrKind       :: !Text
     , _clrCollection :: !(Maybe [Collection])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -214,7 +266,7 @@ data CollectionsListResponse = CollectionsListResponse
 collectionsListResponse
     :: CollectionsListResponse
 collectionsListResponse =
-    CollectionsListResponse
+    CollectionsListResponse'
     { _clrKind = "androidenterprise#collectionsListResponse"
     , _clrCollection = Nothing
     }
@@ -237,13 +289,13 @@ instance FromJSON CollectionsListResponse where
         parseJSON
           = withObject "CollectionsListResponse"
               (\ o ->
-                 CollectionsListResponse <$>
+                 CollectionsListResponse' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#collectionsListResponse")
                      <*> (o .:? "collection" .!= mempty))
 
 instance ToJSON CollectionsListResponse where
-        toJSON CollectionsListResponse{..}
+        toJSON CollectionsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _clrKind),
@@ -252,7 +304,7 @@ instance ToJSON CollectionsListResponse where
 -- | A typed value for the restriction.
 --
 -- /See:/ 'appRestrictionsSchemaRestrictionRestrictionValue' smart constructor.
-data AppRestrictionsSchemaRestrictionRestrictionValue = AppRestrictionsSchemaRestrictionRestrictionValue
+data AppRestrictionsSchemaRestrictionRestrictionValue = AppRestrictionsSchemaRestrictionRestrictionValue'
     { _arsrrvValueMultiselect :: !(Maybe [Text])
     , _arsrrvValueBool        :: !(Maybe Bool)
     , _arsrrvValueInteger     :: !(Maybe (Textual Int32))
@@ -276,7 +328,7 @@ data AppRestrictionsSchemaRestrictionRestrictionValue = AppRestrictionsSchemaRes
 appRestrictionsSchemaRestrictionRestrictionValue
     :: AppRestrictionsSchemaRestrictionRestrictionValue
 appRestrictionsSchemaRestrictionRestrictionValue =
-    AppRestrictionsSchemaRestrictionRestrictionValue
+    AppRestrictionsSchemaRestrictionRestrictionValue'
     { _arsrrvValueMultiselect = Nothing
     , _arsrrvValueBool = Nothing
     , _arsrrvValueInteger = Nothing
@@ -325,7 +377,7 @@ instance FromJSON
           = withObject
               "AppRestrictionsSchemaRestrictionRestrictionValue"
               (\ o ->
-                 AppRestrictionsSchemaRestrictionRestrictionValue <$>
+                 AppRestrictionsSchemaRestrictionRestrictionValue' <$>
                    (o .:? "valueMultiselect" .!= mempty) <*>
                      (o .:? "valueBool")
                      <*> (o .:? "valueInteger")
@@ -336,7 +388,7 @@ instance ToJSON
          AppRestrictionsSchemaRestrictionRestrictionValue
          where
         toJSON
-          AppRestrictionsSchemaRestrictionRestrictionValue{..}
+          AppRestrictionsSchemaRestrictionRestrictionValue'{..}
           = object
               (catMaybes
                  [("valueMultiselect" .=) <$> _arsrrvValueMultiselect,
@@ -349,7 +401,7 @@ instance ToJSON
 -- methods on device resources.
 --
 -- /See:/ 'deviceState' smart constructor.
-data DeviceState = DeviceState
+data DeviceState = DeviceState'
     { _dsKind         :: !Text
     , _dsAccountState :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -364,7 +416,7 @@ data DeviceState = DeviceState
 deviceState
     :: DeviceState
 deviceState =
-    DeviceState
+    DeviceState'
     { _dsKind = "androidenterprise#deviceState"
     , _dsAccountState = Nothing
     }
@@ -387,12 +439,12 @@ instance FromJSON DeviceState where
         parseJSON
           = withObject "DeviceState"
               (\ o ->
-                 DeviceState <$>
+                 DeviceState' <$>
                    (o .:? "kind" .!= "androidenterprise#deviceState")
                      <*> (o .:? "accountState"))
 
 instance ToJSON DeviceState where
-        toJSON DeviceState{..}
+        toJSON DeviceState'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dsKind),
@@ -401,7 +453,7 @@ instance ToJSON DeviceState where
 -- | The user resources for the group license.
 --
 -- /See:/ 'groupLicenseUsersListResponse' smart constructor.
-data GroupLicenseUsersListResponse = GroupLicenseUsersListResponse
+data GroupLicenseUsersListResponse = GroupLicenseUsersListResponse'
     { _glulrKind :: !Text
     , _glulrUser :: !(Maybe [User])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -416,7 +468,7 @@ data GroupLicenseUsersListResponse = GroupLicenseUsersListResponse
 groupLicenseUsersListResponse
     :: GroupLicenseUsersListResponse
 groupLicenseUsersListResponse =
-    GroupLicenseUsersListResponse
+    GroupLicenseUsersListResponse'
     { _glulrKind = "androidenterprise#groupLicenseUsersListResponse"
     , _glulrUser = Nothing
     }
@@ -438,22 +490,69 @@ instance FromJSON GroupLicenseUsersListResponse where
         parseJSON
           = withObject "GroupLicenseUsersListResponse"
               (\ o ->
-                 GroupLicenseUsersListResponse <$>
+                 GroupLicenseUsersListResponse' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#groupLicenseUsersListResponse")
                      <*> (o .:? "user" .!= mempty))
 
 instance ToJSON GroupLicenseUsersListResponse where
-        toJSON GroupLicenseUsersListResponse{..}
+        toJSON GroupLicenseUsersListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _glulrKind),
                   ("user" .=) <$> _glulrUser])
 
+--
+-- /See:/ 'tokenPagination' smart constructor.
+data TokenPagination = TokenPagination'
+    { _tpNextPageToken     :: !(Maybe Text)
+    , _tpPreviousPageToken :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpNextPageToken'
+--
+-- * 'tpPreviousPageToken'
+tokenPagination
+    :: TokenPagination
+tokenPagination =
+    TokenPagination'
+    { _tpNextPageToken = Nothing
+    , _tpPreviousPageToken = Nothing
+    }
+
+tpNextPageToken :: Lens' TokenPagination (Maybe Text)
+tpNextPageToken
+  = lens _tpNextPageToken
+      (\ s a -> s{_tpNextPageToken = a})
+
+tpPreviousPageToken :: Lens' TokenPagination (Maybe Text)
+tpPreviousPageToken
+  = lens _tpPreviousPageToken
+      (\ s a -> s{_tpPreviousPageToken = a})
+
+instance FromJSON TokenPagination where
+        parseJSON
+          = withObject "TokenPagination"
+              (\ o ->
+                 TokenPagination' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "previousPageToken"))
+
+instance ToJSON TokenPagination where
+        toJSON TokenPagination'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tpNextPageToken,
+                  ("previousPageToken" .=) <$> _tpPreviousPageToken])
+
 -- | Information on an approval URL.
 --
 -- /See:/ 'approvalURLInfo' smart constructor.
-data ApprovalURLInfo = ApprovalURLInfo
+data ApprovalURLInfo = ApprovalURLInfo'
     { _auiApprovalURL :: !(Maybe Text)
     , _auiKind        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -468,7 +567,7 @@ data ApprovalURLInfo = ApprovalURLInfo
 approvalURLInfo
     :: ApprovalURLInfo
 approvalURLInfo =
-    ApprovalURLInfo
+    ApprovalURLInfo'
     { _auiApprovalURL = Nothing
     , _auiKind = "androidenterprise#approvalUrlInfo"
     }
@@ -489,17 +588,222 @@ instance FromJSON ApprovalURLInfo where
         parseJSON
           = withObject "ApprovalURLInfo"
               (\ o ->
-                 ApprovalURLInfo <$>
+                 ApprovalURLInfo' <$>
                    (o .:? "approvalUrl") <*>
                      (o .:? "kind" .!=
                         "androidenterprise#approvalUrlInfo"))
 
 instance ToJSON ApprovalURLInfo where
-        toJSON ApprovalURLInfo{..}
+        toJSON ApprovalURLInfo'{..}
           = object
               (catMaybes
                  [("approvalUrl" .=) <$> _auiApprovalURL,
                   Just ("kind" .= _auiKind)])
+
+-- | The store page resources for the enterprise.
+--
+-- /See:/ 'storeLayoutClustersListResponse' smart constructor.
+data StoreLayoutClustersListResponse = StoreLayoutClustersListResponse'
+    { _slclrCluster :: !(Maybe [StoreCluster])
+    , _slclrKind    :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StoreLayoutClustersListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slclrCluster'
+--
+-- * 'slclrKind'
+storeLayoutClustersListResponse
+    :: StoreLayoutClustersListResponse
+storeLayoutClustersListResponse =
+    StoreLayoutClustersListResponse'
+    { _slclrCluster = Nothing
+    , _slclrKind = "androidenterprise#storeLayoutClustersListResponse"
+    }
+
+-- | A store cluster of an enterprise.
+slclrCluster :: Lens' StoreLayoutClustersListResponse [StoreCluster]
+slclrCluster
+  = lens _slclrCluster (\ s a -> s{_slclrCluster = a})
+      . _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#storeLayoutClustersListResponse\".
+slclrKind :: Lens' StoreLayoutClustersListResponse Text
+slclrKind
+  = lens _slclrKind (\ s a -> s{_slclrKind = a})
+
+instance FromJSON StoreLayoutClustersListResponse
+         where
+        parseJSON
+          = withObject "StoreLayoutClustersListResponse"
+              (\ o ->
+                 StoreLayoutClustersListResponse' <$>
+                   (o .:? "cluster" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "androidenterprise#storeLayoutClustersListResponse"))
+
+instance ToJSON StoreLayoutClustersListResponse where
+        toJSON StoreLayoutClustersListResponse'{..}
+          = object
+              (catMaybes
+                 [("cluster" .=) <$> _slclrCluster,
+                  Just ("kind" .= _slclrKind)])
+
+-- | Definition of a Google Play for Work store cluster, a list of products
+-- displayed as part of a store page.
+--
+-- /See:/ 'storeCluster' smart constructor.
+data StoreCluster = StoreCluster'
+    { _scKind        :: !Text
+    , _scName        :: !(Maybe [LocalizedText])
+    , _scOrderInPage :: !(Maybe Text)
+    , _scId          :: !(Maybe Text)
+    , _scProductId   :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StoreCluster' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scKind'
+--
+-- * 'scName'
+--
+-- * 'scOrderInPage'
+--
+-- * 'scId'
+--
+-- * 'scProductId'
+storeCluster
+    :: StoreCluster
+storeCluster =
+    StoreCluster'
+    { _scKind = "androidenterprise#storeCluster"
+    , _scName = Nothing
+    , _scOrderInPage = Nothing
+    , _scId = Nothing
+    , _scProductId = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#storeCluster\".
+scKind :: Lens' StoreCluster Text
+scKind = lens _scKind (\ s a -> s{_scKind = a})
+
+-- | Ordered list of localized strings giving the name of this page. The text
+-- displayed is the one that best matches the user locale, or the first
+-- entry if there is no good match. There needs to be at least one entry.
+scName :: Lens' StoreCluster [LocalizedText]
+scName
+  = lens _scName (\ s a -> s{_scName = a}) . _Default .
+      _Coerce
+
+-- | String (US-ASCII only) used to determine order of this cluster within
+-- the parent page\'s elements. Page elements are sorted in lexicographic
+-- order of this field. Duplicated values are allowed, but ordering between
+-- elements with duplicate order is undefined. The value of this field is
+-- never visible to a user, it is used solely for the purpose of defining
+-- an ordering. Maximum length is 256 characters.
+scOrderInPage :: Lens' StoreCluster (Maybe Text)
+scOrderInPage
+  = lens _scOrderInPage
+      (\ s a -> s{_scOrderInPage = a})
+
+-- | Unique ID of this cluster. Assigned by the server. Immutable once
+-- assigned.
+scId :: Lens' StoreCluster (Maybe Text)
+scId = lens _scId (\ s a -> s{_scId = a})
+
+-- | List of products in the order they are displayed in the cluster. There
+-- should not be duplicates within a cluster.
+scProductId :: Lens' StoreCluster [Text]
+scProductId
+  = lens _scProductId (\ s a -> s{_scProductId = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON StoreCluster where
+        parseJSON
+          = withObject "StoreCluster"
+              (\ o ->
+                 StoreCluster' <$>
+                   (o .:? "kind" .!= "androidenterprise#storeCluster")
+                     <*> (o .:? "name" .!= mempty)
+                     <*> (o .:? "orderInPage")
+                     <*> (o .:? "id")
+                     <*> (o .:? "productId" .!= mempty))
+
+instance ToJSON StoreCluster where
+        toJSON StoreCluster'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _scKind), ("name" .=) <$> _scName,
+                  ("orderInPage" .=) <$> _scOrderInPage,
+                  ("id" .=) <$> _scId,
+                  ("productId" .=) <$> _scProductId])
+
+--
+-- /See:/ 'pageInfo' smart constructor.
+data PageInfo = PageInfo'
+    { _piResultPerPage :: !(Maybe (Textual Int32))
+    , _piTotalResults  :: !(Maybe (Textual Int32))
+    , _piStartIndex    :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piResultPerPage'
+--
+-- * 'piTotalResults'
+--
+-- * 'piStartIndex'
+pageInfo
+    :: PageInfo
+pageInfo =
+    PageInfo'
+    { _piResultPerPage = Nothing
+    , _piTotalResults = Nothing
+    , _piStartIndex = Nothing
+    }
+
+piResultPerPage :: Lens' PageInfo (Maybe Int32)
+piResultPerPage
+  = lens _piResultPerPage
+      (\ s a -> s{_piResultPerPage = a})
+      . mapping _Coerce
+
+piTotalResults :: Lens' PageInfo (Maybe Int32)
+piTotalResults
+  = lens _piTotalResults
+      (\ s a -> s{_piTotalResults = a})
+      . mapping _Coerce
+
+piStartIndex :: Lens' PageInfo (Maybe Int32)
+piStartIndex
+  = lens _piStartIndex (\ s a -> s{_piStartIndex = a})
+      . mapping _Coerce
+
+instance FromJSON PageInfo where
+        parseJSON
+          = withObject "PageInfo"
+              (\ o ->
+                 PageInfo' <$>
+                   (o .:? "resultPerPage") <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex"))
+
+instance ToJSON PageInfo where
+        toJSON PageInfo'{..}
+          = object
+              (catMaybes
+                 [("resultPerPage" .=) <$> _piResultPerPage,
+                  ("totalResults" .=) <$> _piTotalResults,
+                  ("startIndex" .=) <$> _piStartIndex])
 
 -- | A product permissions resource represents the set of permissions
 -- required by a specific app and whether or not they have been accepted by
@@ -508,7 +812,7 @@ instance ToJSON ApprovalURLInfo where
 -- accepted.
 --
 -- /See:/ 'productPermission' smart constructor.
-data ProductPermission = ProductPermission
+data ProductPermission = ProductPermission'
     { _ppState        :: !(Maybe Text)
     , _ppPermissionId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -523,7 +827,7 @@ data ProductPermission = ProductPermission
 productPermission
     :: ProductPermission
 productPermission =
-    ProductPermission
+    ProductPermission'
     { _ppState = Nothing
     , _ppPermissionId = Nothing
     }
@@ -542,23 +846,23 @@ instance FromJSON ProductPermission where
         parseJSON
           = withObject "ProductPermission"
               (\ o ->
-                 ProductPermission <$>
+                 ProductPermission' <$>
                    (o .:? "state") <*> (o .:? "permissionId"))
 
 instance ToJSON ProductPermission where
-        toJSON ProductPermission{..}
+        toJSON ProductPermission'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _ppState,
                   ("permissionId" .=) <$> _ppPermissionId])
 
--- | A device resource represents a mobile device managed by the MDM and
+-- | A device resource represents a mobile device managed by the EMM and
 -- belonging to a specific enterprise user. This collection cannot be
 -- modified via the API; it is automatically populated as devices are set
 -- up to be managed.
 --
 -- /See:/ 'device' smart constructor.
-data Device = Device
+data Device = Device'
     { _dKind           :: !Text
     , _dManagementType :: !(Maybe Text)
     , _dAndroidId      :: !(Maybe Text)
@@ -576,7 +880,7 @@ data Device = Device
 device
     :: Device
 device =
-    Device
+    Device'
     { _dKind = "androidenterprise#device"
     , _dManagementType = Nothing
     , _dAndroidId = Nothing
@@ -587,12 +891,13 @@ device =
 dKind :: Lens' Device Text
 dKind = lens _dKind (\ s a -> s{_dKind = a})
 
--- | The mechanism by which this device is managed by the MDM.
--- \"managedDevice\" means that the MDM\'s app is a device owner.
--- \"managedProfile\" means that the MDM\'s app is the profile owner (and
+-- | The mechanism by which this device is managed by the EMM.
+-- \"managedDevice\" means that the EMM\'s app is a device owner.
+-- \"managedProfile\" means that the EMM\'s app is the profile owner (and
 -- there is a separate personal profile which is not managed).
--- \"containerApp\" means that the MDM\'s app is managing the Android for
--- Work container app on the device.
+-- \"containerApp\" means that the EMM\'s app is managing the Android for
+-- Work container app on the device. ?unmanagedProfile? means that the
+-- EMM?s app is managing a managed user on an unmanaged device
 dManagementType :: Lens' Device (Maybe Text)
 dManagementType
   = lens _dManagementType
@@ -608,13 +913,13 @@ instance FromJSON Device where
         parseJSON
           = withObject "Device"
               (\ o ->
-                 Device <$>
+                 Device' <$>
                    (o .:? "kind" .!= "androidenterprise#device") <*>
                      (o .:? "managementType")
                      <*> (o .:? "androidId"))
 
 instance ToJSON Device where
-        toJSON Device{..}
+        toJSON Device'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dKind),
@@ -624,7 +929,7 @@ instance ToJSON Device where
 -- | The install resources for the device.
 --
 -- /See:/ 'installsListResponse' smart constructor.
-data InstallsListResponse = InstallsListResponse
+data InstallsListResponse = InstallsListResponse'
     { _ilrKind    :: !Text
     , _ilrInstall :: !(Maybe [Install])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -639,7 +944,7 @@ data InstallsListResponse = InstallsListResponse
 installsListResponse
     :: InstallsListResponse
 installsListResponse =
-    InstallsListResponse
+    InstallsListResponse'
     { _ilrKind = "androidenterprise#installsListResponse"
     , _ilrInstall = Nothing
     }
@@ -661,13 +966,13 @@ instance FromJSON InstallsListResponse where
         parseJSON
           = withObject "InstallsListResponse"
               (\ o ->
-                 InstallsListResponse <$>
+                 InstallsListResponse' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#installsListResponse")
                      <*> (o .:? "install" .!= mempty))
 
 instance ToJSON InstallsListResponse where
-        toJSON InstallsListResponse{..}
+        toJSON InstallsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ilrKind),
@@ -677,7 +982,7 @@ instance ToJSON InstallsListResponse where
 -- configuration that may be pre-applied.
 --
 -- /See:/ 'appRestrictionsSchemaRestriction' smart constructor.
-data AppRestrictionsSchemaRestriction = AppRestrictionsSchemaRestriction
+data AppRestrictionsSchemaRestriction = AppRestrictionsSchemaRestriction'
     { _arsrRestrictionType :: !(Maybe Text)
     , _arsrEntry           :: !(Maybe [Text])
     , _arsrKey             :: !(Maybe Text)
@@ -707,7 +1012,7 @@ data AppRestrictionsSchemaRestriction = AppRestrictionsSchemaRestriction
 appRestrictionsSchemaRestriction
     :: AppRestrictionsSchemaRestriction
 appRestrictionsSchemaRestriction =
-    AppRestrictionsSchemaRestriction
+    AppRestrictionsSchemaRestriction'
     { _arsrRestrictionType = Nothing
     , _arsrEntry = Nothing
     , _arsrKey = Nothing
@@ -768,7 +1073,7 @@ instance FromJSON AppRestrictionsSchemaRestriction
         parseJSON
           = withObject "AppRestrictionsSchemaRestriction"
               (\ o ->
-                 AppRestrictionsSchemaRestriction <$>
+                 AppRestrictionsSchemaRestriction' <$>
                    (o .:? "restrictionType") <*>
                      (o .:? "entry" .!= mempty)
                      <*> (o .:? "key")
@@ -779,7 +1084,7 @@ instance FromJSON AppRestrictionsSchemaRestriction
 
 instance ToJSON AppRestrictionsSchemaRestriction
          where
-        toJSON AppRestrictionsSchemaRestriction{..}
+        toJSON AppRestrictionsSchemaRestriction'{..}
           = object
               (catMaybes
                  [("restrictionType" .=) <$> _arsrRestrictionType,
@@ -792,7 +1097,7 @@ instance ToJSON AppRestrictionsSchemaRestriction
 -- | The matching user resources.
 --
 -- /See:/ 'usersListResponse' smart constructor.
-data UsersListResponse = UsersListResponse
+data UsersListResponse = UsersListResponse'
     { _ulrKind :: !Text
     , _ulrUser :: !(Maybe [User])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -807,7 +1112,7 @@ data UsersListResponse = UsersListResponse
 usersListResponse
     :: UsersListResponse
 usersListResponse =
-    UsersListResponse
+    UsersListResponse'
     { _ulrKind = "androidenterprise#usersListResponse"
     , _ulrUser = Nothing
     }
@@ -827,13 +1132,13 @@ instance FromJSON UsersListResponse where
         parseJSON
           = withObject "UsersListResponse"
               (\ o ->
-                 UsersListResponse <$>
+                 UsersListResponse' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#usersListResponse")
                      <*> (o .:? "user" .!= mempty))
 
 instance ToJSON UsersListResponse where
-        toJSON UsersListResponse{..}
+        toJSON UsersListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ulrKind),
@@ -842,7 +1147,7 @@ instance ToJSON UsersListResponse where
 -- | This represents a single version of the app.
 --
 -- /See:/ 'appVersion' smart constructor.
-data AppVersion = AppVersion
+data AppVersion = AppVersion'
     { _avVersionCode   :: !(Maybe (Textual Int32))
     , _avVersionString :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -857,7 +1162,7 @@ data AppVersion = AppVersion
 appVersion
     :: AppVersion
 appVersion =
-    AppVersion
+    AppVersion'
     { _avVersionCode = Nothing
     , _avVersionString = Nothing
     }
@@ -881,11 +1186,11 @@ instance FromJSON AppVersion where
         parseJSON
           = withObject "AppVersion"
               (\ o ->
-                 AppVersion <$>
+                 AppVersion' <$>
                    (o .:? "versionCode") <*> (o .:? "versionString"))
 
 instance ToJSON AppVersion where
-        toJSON AppVersion{..}
+        toJSON AppVersion'{..}
           = object
               (catMaybes
                  [("versionCode" .=) <$> _avVersionCode,
@@ -894,7 +1199,7 @@ instance ToJSON AppVersion where
 -- | The grouplicense resources for the enterprise.
 --
 -- /See:/ 'groupLicensesListResponse' smart constructor.
-data GroupLicensesListResponse = GroupLicensesListResponse
+data GroupLicensesListResponse = GroupLicensesListResponse'
     { _gllrGroupLicense :: !(Maybe [GroupLicense])
     , _gllrKind         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -909,7 +1214,7 @@ data GroupLicensesListResponse = GroupLicensesListResponse
 groupLicensesListResponse
     :: GroupLicensesListResponse
 groupLicensesListResponse =
-    GroupLicensesListResponse
+    GroupLicensesListResponse'
     { _gllrGroupLicense = Nothing
     , _gllrKind = "androidenterprise#groupLicensesListResponse"
     }
@@ -931,13 +1236,13 @@ instance FromJSON GroupLicensesListResponse where
         parseJSON
           = withObject "GroupLicensesListResponse"
               (\ o ->
-                 GroupLicensesListResponse <$>
+                 GroupLicensesListResponse' <$>
                    (o .:? "groupLicense" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "androidenterprise#groupLicensesListResponse"))
 
 instance ToJSON GroupLicensesListResponse where
-        toJSON GroupLicensesListResponse{..}
+        toJSON GroupLicensesListResponse'{..}
           = object
               (catMaybes
                  [("groupLicense" .=) <$> _gllrGroupLicense,
@@ -956,7 +1261,7 @@ instance ToJSON GroupLicensesListResponse where
 -- policies and the purpose of the apps concerned.
 --
 -- /See:/ 'collection' smart constructor.
-data Collection = Collection
+data Collection = Collection'
     { _colKind         :: !Text
     , _colCollectionId :: !(Maybe Text)
     , _colVisibility   :: !(Maybe Text)
@@ -980,7 +1285,7 @@ data Collection = Collection
 collection
     :: Collection
 collection =
-    Collection
+    Collection'
     { _colKind = "androidenterprise#collection"
     , _colCollectionId = Nothing
     , _colVisibility = Nothing
@@ -1027,7 +1332,7 @@ instance FromJSON Collection where
         parseJSON
           = withObject "Collection"
               (\ o ->
-                 Collection <$>
+                 Collection' <$>
                    (o .:? "kind" .!= "androidenterprise#collection") <*>
                      (o .:? "collectionId")
                      <*> (o .:? "visibility")
@@ -1035,7 +1340,7 @@ instance FromJSON Collection where
                      <*> (o .:? "productId" .!= mempty))
 
 instance ToJSON Collection where
-        toJSON Collection{..}
+        toJSON Collection'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _colKind),
@@ -1047,7 +1352,7 @@ instance ToJSON Collection where
 -- | A set of products.
 --
 -- /See:/ 'productSet' smart constructor.
-data ProductSet = ProductSet
+data ProductSet = ProductSet'
     { _psKind      :: !Text
     , _psProductId :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1062,7 +1367,7 @@ data ProductSet = ProductSet
 productSet
     :: ProductSet
 productSet =
-    ProductSet
+    ProductSet'
     { _psKind = "androidenterprise#productSet"
     , _psProductId = Nothing
     }
@@ -1083,12 +1388,12 @@ instance FromJSON ProductSet where
         parseJSON
           = withObject "ProductSet"
               (\ o ->
-                 ProductSet <$>
+                 ProductSet' <$>
                    (o .:? "kind" .!= "androidenterprise#productSet") <*>
                      (o .:? "productId" .!= mempty))
 
 instance ToJSON ProductSet where
-        toJSON ProductSet{..}
+        toJSON ProductSet'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _psKind),
@@ -1115,7 +1420,7 @@ instance ToJSON ProductSet where
 -- themselves.
 --
 -- /See:/ 'install' smart constructor.
-data Install = Install
+data Install = Install'
     { _iVersionCode  :: !(Maybe (Textual Int32))
     , _iKind         :: !Text
     , _iInstallState :: !(Maybe Text)
@@ -1136,7 +1441,7 @@ data Install = Install
 install
     :: Install
 install =
-    Install
+    Install'
     { _iVersionCode = Nothing
     , _iKind = "androidenterprise#install"
     , _iInstallState = Nothing
@@ -1174,14 +1479,14 @@ instance FromJSON Install where
         parseJSON
           = withObject "Install"
               (\ o ->
-                 Install <$>
+                 Install' <$>
                    (o .:? "versionCode") <*>
                      (o .:? "kind" .!= "androidenterprise#install")
                      <*> (o .:? "installState")
                      <*> (o .:? "productId"))
 
 instance ToJSON Install where
-        toJSON Install{..}
+        toJSON Install'{..}
           = object
               (catMaybes
                  [("versionCode" .=) <$> _iVersionCode,
@@ -1192,15 +1497,15 @@ instance ToJSON Install where
 -- | A user resource represents an individual user within the enterprise\'s
 -- domain. Note that each user is associated with a Google account based on
 -- the user\'s corporate email address (which must be in one of the
--- enterprise\'s domains). As part of installing an MDM app to manage a
--- device the Google account must be provisioned to the device, and so the
--- user resource must be created before that. This can be done using the
--- Google Admin SDK Directory API. The ID for a user is an opaque string.
--- It can be retrieved using the list method queried by the user\'s primary
--- email address.
+-- enterprise\'s domains). As part of installing the EMM\'s DPC app to
+-- manage a device the Google account must be provisioned to the device,
+-- and so the user resource must be created before that. This can be done
+-- using the Google Admin SDK Directory API. The ID for a user is an opaque
+-- string. It can be retrieved using the list method queried by the user\'s
+-- primary email address.
 --
 -- /See:/ 'user' smart constructor.
-data User = User
+data User = User'
     { _uKind         :: !Text
     , _uId           :: !(Maybe Text)
     , _uPrimaryEmail :: !(Maybe Text)
@@ -1218,7 +1523,7 @@ data User = User
 user
     :: User
 user =
-    User
+    User'
     { _uKind = "androidenterprise#user"
     , _uId = Nothing
     , _uPrimaryEmail = Nothing
@@ -1243,13 +1548,13 @@ instance FromJSON User where
         parseJSON
           = withObject "User"
               (\ o ->
-                 User <$>
+                 User' <$>
                    (o .:? "kind" .!= "androidenterprise#user") <*>
                      (o .:? "id")
                      <*> (o .:? "primaryEmail"))
 
 instance ToJSON User where
-        toJSON User{..}
+        toJSON User'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _uKind), ("id" .=) <$> _uId,
@@ -1257,7 +1562,7 @@ instance ToJSON User where
 
 --
 -- /See:/ 'productsGenerateApprovalURLResponse' smart constructor.
-newtype ProductsGenerateApprovalURLResponse = ProductsGenerateApprovalURLResponse
+newtype ProductsGenerateApprovalURLResponse = ProductsGenerateApprovalURLResponse'
     { _pgaurURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1269,7 +1574,7 @@ newtype ProductsGenerateApprovalURLResponse = ProductsGenerateApprovalURLRespons
 productsGenerateApprovalURLResponse
     :: ProductsGenerateApprovalURLResponse
 productsGenerateApprovalURLResponse =
-    ProductsGenerateApprovalURLResponse
+    ProductsGenerateApprovalURLResponse'
     { _pgaurURL = Nothing
     }
 
@@ -1289,17 +1594,95 @@ instance FromJSON ProductsGenerateApprovalURLResponse
         parseJSON
           = withObject "ProductsGenerateApprovalURLResponse"
               (\ o ->
-                 ProductsGenerateApprovalURLResponse <$>
+                 ProductsGenerateApprovalURLResponse' <$>
                    (o .:? "url"))
 
 instance ToJSON ProductsGenerateApprovalURLResponse
          where
-        toJSON ProductsGenerateApprovalURLResponse{..}
+        toJSON ProductsGenerateApprovalURLResponse'{..}
           = object (catMaybes [("url" .=) <$> _pgaurURL])
+
+-- | Definition of a Google Play for Work store page, made of a localized
+-- name and links to other pages. A page also contains clusters defined as
+-- a subcollection.
+--
+-- /See:/ 'storePage' smart constructor.
+data StorePage = StorePage'
+    { _spKind :: !Text
+    , _spLink :: !(Maybe [Text])
+    , _spName :: !(Maybe [LocalizedText])
+    , _spId   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StorePage' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spKind'
+--
+-- * 'spLink'
+--
+-- * 'spName'
+--
+-- * 'spId'
+storePage
+    :: StorePage
+storePage =
+    StorePage'
+    { _spKind = "androidenterprise#storePage"
+    , _spLink = Nothing
+    , _spName = Nothing
+    , _spId = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#storePage\".
+spKind :: Lens' StorePage Text
+spKind = lens _spKind (\ s a -> s{_spKind = a})
+
+-- | Ordered list of pages a user should be able to reach from this page. The
+-- pages must exist, must not be this page, and once a link is created the
+-- page linked to cannot be deleted until all links to it are removed. It
+-- is recommended that the basic pages are created first, before adding the
+-- links between pages. No attempt is made to verify that all pages are
+-- reachable from the homepage.
+spLink :: Lens' StorePage [Text]
+spLink
+  = lens _spLink (\ s a -> s{_spLink = a}) . _Default .
+      _Coerce
+
+-- | Ordered list of localized strings giving the name of this page. The text
+-- displayed is the one that best matches the user locale, or the first
+-- entry if there is no good match. There needs to be at least one entry.
+spName :: Lens' StorePage [LocalizedText]
+spName
+  = lens _spName (\ s a -> s{_spName = a}) . _Default .
+      _Coerce
+
+-- | Unique ID of this page. Assigned by the server. Immutable once assigned.
+spId :: Lens' StorePage (Maybe Text)
+spId = lens _spId (\ s a -> s{_spId = a})
+
+instance FromJSON StorePage where
+        parseJSON
+          = withObject "StorePage"
+              (\ o ->
+                 StorePage' <$>
+                   (o .:? "kind" .!= "androidenterprise#storePage") <*>
+                     (o .:? "link" .!= mempty)
+                     <*> (o .:? "name" .!= mempty)
+                     <*> (o .:? "id"))
+
+instance ToJSON StorePage where
+        toJSON StorePage'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _spKind), ("link" .=) <$> _spLink,
+                  ("name" .=) <$> _spName, ("id" .=) <$> _spId])
 
 --
 -- /See:/ 'enterprisesSendTestPushNotificationResponse' smart constructor.
-data EnterprisesSendTestPushNotificationResponse = EnterprisesSendTestPushNotificationResponse
+data EnterprisesSendTestPushNotificationResponse = EnterprisesSendTestPushNotificationResponse'
     { _estpnrTopicName :: !(Maybe Text)
     , _estpnrMessageId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1314,7 +1697,7 @@ data EnterprisesSendTestPushNotificationResponse = EnterprisesSendTestPushNotifi
 enterprisesSendTestPushNotificationResponse
     :: EnterprisesSendTestPushNotificationResponse
 enterprisesSendTestPushNotificationResponse =
-    EnterprisesSendTestPushNotificationResponse
+    EnterprisesSendTestPushNotificationResponse'
     { _estpnrTopicName = Nothing
     , _estpnrMessageId = Nothing
     }
@@ -1338,13 +1721,13 @@ instance FromJSON
           = withObject
               "EnterprisesSendTestPushNotificationResponse"
               (\ o ->
-                 EnterprisesSendTestPushNotificationResponse <$>
+                 EnterprisesSendTestPushNotificationResponse' <$>
                    (o .:? "topicName") <*> (o .:? "messageId"))
 
 instance ToJSON
          EnterprisesSendTestPushNotificationResponse where
         toJSON
-          EnterprisesSendTestPushNotificationResponse{..}
+          EnterprisesSendTestPushNotificationResponse'{..}
           = object
               (catMaybes
                  [("topicName" .=) <$> _estpnrTopicName,
@@ -1353,7 +1736,7 @@ instance ToJSON
 -- | The matching enterprise resources.
 --
 -- /See:/ 'enterprisesListResponse' smart constructor.
-data EnterprisesListResponse = EnterprisesListResponse
+data EnterprisesListResponse = EnterprisesListResponse'
     { _elrKind       :: !Text
     , _elrEnterprise :: !(Maybe [Enterprise])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1368,7 +1751,7 @@ data EnterprisesListResponse = EnterprisesListResponse
 enterprisesListResponse
     :: EnterprisesListResponse
 enterprisesListResponse =
-    EnterprisesListResponse
+    EnterprisesListResponse'
     { _elrKind = "androidenterprise#enterprisesListResponse"
     , _elrEnterprise = Nothing
     }
@@ -1390,13 +1773,13 @@ instance FromJSON EnterprisesListResponse where
         parseJSON
           = withObject "EnterprisesListResponse"
               (\ o ->
-                 EnterprisesListResponse <$>
+                 EnterprisesListResponse' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#enterprisesListResponse")
                      <*> (o .:? "enterprise" .!= mempty))
 
 instance ToJSON EnterprisesListResponse where
-        toJSON EnterprisesListResponse{..}
+        toJSON EnterprisesListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _elrKind),
@@ -1406,7 +1789,7 @@ instance ToJSON EnterprisesListResponse where
 -- for the product.
 --
 -- /See:/ 'appRestrictionsSchema' smart constructor.
-data AppRestrictionsSchema = AppRestrictionsSchema
+data AppRestrictionsSchema = AppRestrictionsSchema'
     { _arsKind         :: !Text
     , _arsRestrictions :: !(Maybe [AppRestrictionsSchemaRestriction])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1421,7 +1804,7 @@ data AppRestrictionsSchema = AppRestrictionsSchema
 appRestrictionsSchema
     :: AppRestrictionsSchema
 appRestrictionsSchema =
-    AppRestrictionsSchema
+    AppRestrictionsSchema'
     { _arsKind = "androidenterprise#appRestrictionsSchema"
     , _arsRestrictions = Nothing
     }
@@ -1443,25 +1826,70 @@ instance FromJSON AppRestrictionsSchema where
         parseJSON
           = withObject "AppRestrictionsSchema"
               (\ o ->
-                 AppRestrictionsSchema <$>
+                 AppRestrictionsSchema' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#appRestrictionsSchema")
                      <*> (o .:? "restrictions" .!= mempty))
 
 instance ToJSON AppRestrictionsSchema where
-        toJSON AppRestrictionsSchema{..}
+        toJSON AppRestrictionsSchema'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _arsKind),
                   ("restrictions" .=) <$> _arsRestrictions])
 
+-- | A localized string with its locale.
+--
+-- /See:/ 'localizedText' smart constructor.
+data LocalizedText = LocalizedText'
+    { _ltText   :: !(Maybe Text)
+    , _ltLocale :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LocalizedText' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ltText'
+--
+-- * 'ltLocale'
+localizedText
+    :: LocalizedText
+localizedText =
+    LocalizedText'
+    { _ltText = Nothing
+    , _ltLocale = Nothing
+    }
+
+-- | The text localized in the associated locale.
+ltText :: Lens' LocalizedText (Maybe Text)
+ltText = lens _ltText (\ s a -> s{_ltText = a})
+
+-- | The BCP47 tag for a locale. (e.g. \"en-US\", \"de\").
+ltLocale :: Lens' LocalizedText (Maybe Text)
+ltLocale = lens _ltLocale (\ s a -> s{_ltLocale = a})
+
+instance FromJSON LocalizedText where
+        parseJSON
+          = withObject "LocalizedText"
+              (\ o ->
+                 LocalizedText' <$>
+                   (o .:? "text") <*> (o .:? "locale"))
+
+instance ToJSON LocalizedText where
+        toJSON LocalizedText'{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _ltText,
+                  ("locale" .=) <$> _ltLocale])
+
 -- | A UserToken is used by a user when setting up a managed device or
 -- profile with their work account on a device. When the user enters their
--- email address and token (activation code) the appropriate MDM app can be
+-- email address and token (activation code) the appropriate EMM app can be
 -- automatically downloaded.
 --
 -- /See:/ 'userToken' smart constructor.
-data UserToken = UserToken
+data UserToken = UserToken'
     { _utKind   :: !Text
     , _utToken  :: !(Maybe Text)
     , _utUserId :: !(Maybe Text)
@@ -1479,7 +1907,7 @@ data UserToken = UserToken
 userToken
     :: UserToken
 userToken =
-    UserToken
+    UserToken'
     { _utKind = "androidenterprise#userToken"
     , _utToken = Nothing
     , _utUserId = Nothing
@@ -1503,13 +1931,13 @@ instance FromJSON UserToken where
         parseJSON
           = withObject "UserToken"
               (\ o ->
-                 UserToken <$>
+                 UserToken' <$>
                    (o .:? "kind" .!= "androidenterprise#userToken") <*>
                      (o .:? "token")
                      <*> (o .:? "userId"))
 
 instance ToJSON UserToken where
-        toJSON UserToken{..}
+        toJSON UserToken'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _utKind), ("token" .=) <$> _utToken,
@@ -1518,7 +1946,7 @@ instance ToJSON UserToken where
 -- | The device resources for the user.
 --
 -- /See:/ 'devicesListResponse' smart constructor.
-data DevicesListResponse = DevicesListResponse
+data DevicesListResponse = DevicesListResponse'
     { _dlrKind   :: !Text
     , _dlrDevice :: !(Maybe [Device])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1533,7 +1961,7 @@ data DevicesListResponse = DevicesListResponse
 devicesListResponse
     :: DevicesListResponse
 devicesListResponse =
-    DevicesListResponse
+    DevicesListResponse'
     { _dlrKind = "androidenterprise#devicesListResponse"
     , _dlrDevice = Nothing
     }
@@ -1554,33 +1982,33 @@ instance FromJSON DevicesListResponse where
         parseJSON
           = withObject "DevicesListResponse"
               (\ o ->
-                 DevicesListResponse <$>
+                 DevicesListResponse' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#devicesListResponse")
                      <*> (o .:? "device" .!= mempty))
 
 instance ToJSON DevicesListResponse where
-        toJSON DevicesListResponse{..}
+        toJSON DevicesListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dlrKind),
                   ("device" .=) <$> _dlrDevice])
 
--- | An enterprise resource represents a binding between an organisation and
--- their MDM. To create an enterprise, an admin of the enterprise must
+-- | An enterprise resource represents a binding between an organization and
+-- their EMM. To create an enterprise, an admin of the enterprise must
 -- first go through a Play for Work sign-up flow. At the end of this the
 -- admin will be presented with a token (a short opaque alphanumeric
--- string). They must then present this to the MDM, who then supplies it to
--- the enroll method. Until this is done the MDM will not have any access
--- to the enterprise. After calling enroll the MDM should call setAccount
+-- string). They must then present this to the EMM, who then supplies it to
+-- the enroll method. Until this is done the EMM will not have any access
+-- to the enterprise. After calling enroll the EMM should call setAccount
 -- to specify the service account that will be allowed to act on behalf of
 -- the enterprise, which will be required for access to the enterprise\'s
 -- data through this API. Only one call of setAccount is allowed for a
 -- given enterprise; the only way to change the account later is to
 -- unenroll the enterprise and enroll it again (obtaining a new token). The
--- MDM can unenroll an enterprise in order to sever the binding between
+-- EMM can unenroll an enterprise in order to sever the binding between
 -- them. Re-enrolling an enterprise is possible, but requires a new token
--- to be retrieved. Enterprises.unenroll requires the MDM\'s credentials
+-- to be retrieved. Enterprises.unenroll requires the EMM\'s credentials
 -- (as enroll does), not the enterprise\'s. Enterprises.unenroll can only
 -- be used for enterprises that were previously enrolled with the enroll
 -- call. Any enterprises that were enrolled using the (deprecated)
@@ -1591,7 +2019,7 @@ instance ToJSON DevicesListResponse where
 -- the list method.
 --
 -- /See:/ 'enterprise' smart constructor.
-data Enterprise = Enterprise
+data Enterprise = Enterprise'
     { _eKind          :: !Text
     , _ePrimaryDomain :: !(Maybe Text)
     , _eName          :: !(Maybe Text)
@@ -1612,7 +2040,7 @@ data Enterprise = Enterprise
 enterprise
     :: Enterprise
 enterprise =
-    Enterprise
+    Enterprise'
     { _eKind = "androidenterprise#enterprise"
     , _ePrimaryDomain = Nothing
     , _eName = Nothing
@@ -1642,35 +2070,90 @@ instance FromJSON Enterprise where
         parseJSON
           = withObject "Enterprise"
               (\ o ->
-                 Enterprise <$>
+                 Enterprise' <$>
                    (o .:? "kind" .!= "androidenterprise#enterprise") <*>
                      (o .:? "primaryDomain")
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON Enterprise where
-        toJSON Enterprise{..}
+        toJSON Enterprise'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _eKind),
                   ("primaryDomain" .=) <$> _ePrimaryDomain,
                   ("name" .=) <$> _eName, ("id" .=) <$> _eId])
 
+-- | General setting for the Google Play for Work store layout, currently
+-- only specifying the page to display the first time the store is opened.
+--
+-- /See:/ 'storeLayout' smart constructor.
+data StoreLayout = StoreLayout'
+    { _slKind       :: !Text
+    , _slHomepageId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StoreLayout' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slKind'
+--
+-- * 'slHomepageId'
+storeLayout
+    :: StoreLayout
+storeLayout =
+    StoreLayout'
+    { _slKind = "androidenterprise#storeLayout"
+    , _slHomepageId = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#storeLayout\".
+slKind :: Lens' StoreLayout Text
+slKind = lens _slKind (\ s a -> s{_slKind = a})
+
+-- | The ID of the store page to be used as the homepage. The homepage will
+-- be used as the first page shown in the Google Play for Work store. If
+-- there is no homepage set, an empty store is shown. The homepage can be
+-- unset (by not specifying it) to empty the store. If there exists at
+-- least one page, this field must be set to the ID of a valid page.
+slHomepageId :: Lens' StoreLayout (Maybe Text)
+slHomepageId
+  = lens _slHomepageId (\ s a -> s{_slHomepageId = a})
+
+instance FromJSON StoreLayout where
+        parseJSON
+          = withObject "StoreLayout"
+              (\ o ->
+                 StoreLayout' <$>
+                   (o .:? "kind" .!= "androidenterprise#storeLayout")
+                     <*> (o .:? "homepageId"))
+
+instance ToJSON StoreLayout where
+        toJSON StoreLayout'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _slKind),
+                  ("homepageId" .=) <$> _slHomepageId])
+
 -- | A product represents an app in the Google Play Store that is available
 -- to at least some users in the enterprise. (Some apps are restricted to a
 -- single enterprise, and no information about them is made available
 -- outside that enterprise.) The information provided for each product
 -- (localized name, icon, link to the full Google Play details page) is
--- intended to allow a basic representation of the product within an MDM
+-- intended to allow a basic representation of the product within an EMM
 -- user interface.
 --
 -- /See:/ 'product' smart constructor.
-data Product = Product
-    { _pAuthorName           :: !(Maybe Text)
+data Product = Product'
+    { _pSmallIconURL         :: !(Maybe Text)
+    , _pAuthorName           :: !(Maybe Text)
     , _pKind                 :: !Text
     , _pWorkDetailsURL       :: !(Maybe Text)
     , _pRequiresContainerApp :: !(Maybe Bool)
     , _pAppVersion           :: !(Maybe [AppVersion])
+    , _pProductPricing       :: !(Maybe Text)
     , _pDistributionChannel  :: !(Maybe Text)
     , _pIconURL              :: !(Maybe Text)
     , _pTitle                :: !(Maybe Text)
@@ -1682,6 +2165,8 @@ data Product = Product
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pSmallIconURL'
+--
 -- * 'pAuthorName'
 --
 -- * 'pKind'
@@ -1691,6 +2176,8 @@ data Product = Product
 -- * 'pRequiresContainerApp'
 --
 -- * 'pAppVersion'
+--
+-- * 'pProductPricing'
 --
 -- * 'pDistributionChannel'
 --
@@ -1704,18 +2191,27 @@ data Product = Product
 product
     :: Product
 product =
-    Product
-    { _pAuthorName = Nothing
+    Product'
+    { _pSmallIconURL = Nothing
+    , _pAuthorName = Nothing
     , _pKind = "androidenterprise#product"
     , _pWorkDetailsURL = Nothing
     , _pRequiresContainerApp = Nothing
     , _pAppVersion = Nothing
+    , _pProductPricing = Nothing
     , _pDistributionChannel = Nothing
     , _pIconURL = Nothing
     , _pTitle = Nothing
     , _pProductId = Nothing
     , _pDetailsURL = Nothing
     }
+
+-- | A link to a smaller image that can be used as an icon for the product.
+-- This image is suitable for use at up to 128px x 128px.
+pSmallIconURL :: Lens' Product (Maybe Text)
+pSmallIconURL
+  = lens _pSmallIconURL
+      (\ s a -> s{_pSmallIconURL = a})
 
 -- | The name of the author of the product (e.g. the app developer).
 pAuthorName :: Lens' Product (Maybe Text)
@@ -1749,6 +2245,12 @@ pAppVersion
       _Default
       . _Coerce
 
+-- | Whether this product is free, free with in-app purchases, or paid.
+pProductPricing :: Lens' Product (Maybe Text)
+pProductPricing
+  = lens _pProductPricing
+      (\ s a -> s{_pProductPricing = a})
+
 -- | How and to whom the package is made available. The value
 -- publicGoogleHosted means that the package is available through the Play
 -- Store and not restricted to a specific enterprise. The value
@@ -1761,7 +2263,8 @@ pDistributionChannel
   = lens _pDistributionChannel
       (\ s a -> s{_pDistributionChannel = a})
 
--- | A link to an image that can be used as an icon for the product.
+-- | A link to an image that can be used as an icon for the product. This
+-- image is suitable for use at up to 512px x 512px.
 pIconURL :: Lens' Product (Maybe Text)
 pIconURL = lens _pIconURL (\ s a -> s{_pIconURL = a})
 
@@ -1784,12 +2287,13 @@ instance FromJSON Product where
         parseJSON
           = withObject "Product"
               (\ o ->
-                 Product <$>
-                   (o .:? "authorName") <*>
+                 Product' <$>
+                   (o .:? "smallIconUrl") <*> (o .:? "authorName") <*>
                      (o .:? "kind" .!= "androidenterprise#product")
                      <*> (o .:? "workDetailsUrl")
                      <*> (o .:? "requiresContainerApp")
                      <*> (o .:? "appVersion" .!= mempty)
+                     <*> (o .:? "productPricing")
                      <*> (o .:? "distributionChannel")
                      <*> (o .:? "iconUrl")
                      <*> (o .:? "title")
@@ -1797,15 +2301,17 @@ instance FromJSON Product where
                      <*> (o .:? "detailsUrl"))
 
 instance ToJSON Product where
-        toJSON Product{..}
+        toJSON Product'{..}
           = object
               (catMaybes
-                 [("authorName" .=) <$> _pAuthorName,
+                 [("smallIconUrl" .=) <$> _pSmallIconURL,
+                  ("authorName" .=) <$> _pAuthorName,
                   Just ("kind" .= _pKind),
                   ("workDetailsUrl" .=) <$> _pWorkDetailsURL,
                   ("requiresContainerApp" .=) <$>
                     _pRequiresContainerApp,
                   ("appVersion" .=) <$> _pAppVersion,
+                  ("productPricing" .=) <$> _pProductPricing,
                   ("distributionChannel" .=) <$> _pDistributionChannel,
                   ("iconUrl" .=) <$> _pIconURL,
                   ("title" .=) <$> _pTitle,
@@ -1815,7 +2321,7 @@ instance ToJSON Product where
 -- | The entitlement resources for the user.
 --
 -- /See:/ 'entitlementsListResponse' smart constructor.
-data EntitlementsListResponse = EntitlementsListResponse
+data EntitlementsListResponse = EntitlementsListResponse'
     { _entKind        :: !Text
     , _entEntitlement :: !(Maybe [Entitlement])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1830,7 +2336,7 @@ data EntitlementsListResponse = EntitlementsListResponse
 entitlementsListResponse
     :: EntitlementsListResponse
 entitlementsListResponse =
-    EntitlementsListResponse
+    EntitlementsListResponse'
     { _entKind = "androidenterprise#entitlementsListResponse"
     , _entEntitlement = Nothing
     }
@@ -1854,13 +2360,13 @@ instance FromJSON EntitlementsListResponse where
         parseJSON
           = withObject "EntitlementsListResponse"
               (\ o ->
-                 EntitlementsListResponse <$>
+                 EntitlementsListResponse' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#entitlementsListResponse")
                      <*> (o .:? "entitlement" .!= mempty))
 
 instance ToJSON EntitlementsListResponse where
-        toJSON EntitlementsListResponse{..}
+        toJSON EntitlementsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _entKind),
@@ -1870,7 +2376,7 @@ instance ToJSON EntitlementsListResponse where
 -- they have been accepted by the enterprise.
 --
 -- /See:/ 'productPermissions' smart constructor.
-data ProductPermissions = ProductPermissions
+data ProductPermissions = ProductPermissions'
     { _ppKind       :: !Text
     , _ppPermission :: !(Maybe [ProductPermission])
     , _ppProductId  :: !(Maybe Text)
@@ -1888,7 +2394,7 @@ data ProductPermissions = ProductPermissions
 productPermissions
     :: ProductPermissions
 productPermissions =
-    ProductPermissions
+    ProductPermissions'
     { _ppKind = "androidenterprise#productPermissions"
     , _ppPermission = Nothing
     , _ppProductId = Nothing
@@ -1916,14 +2422,14 @@ instance FromJSON ProductPermissions where
         parseJSON
           = withObject "ProductPermissions"
               (\ o ->
-                 ProductPermissions <$>
+                 ProductPermissions' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#productPermissions")
                      <*> (o .:? "permission" .!= mempty)
                      <*> (o .:? "productId"))
 
 instance ToJSON ProductPermissions where
-        toJSON ProductPermissions{..}
+        toJSON ProductPermissions'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ppKind),
@@ -1935,11 +2441,11 @@ instance ToJSON ProductPermissions where
 -- consent to these permissions on behalf of their users before an
 -- entitlement for the app can be created. The permissions collection is
 -- read-only. The information provided for each permission (localized name
--- and description) is intended to be used in the MDM user interface when
+-- and description) is intended to be used in the EMM user interface when
 -- obtaining consent from the enterprise.
 --
 -- /See:/ 'permission' smart constructor.
-data Permission = Permission
+data Permission = Permission'
     { _perKind         :: !Text
     , _perName         :: !(Maybe Text)
     , _perDescription  :: !(Maybe Text)
@@ -1960,7 +2466,7 @@ data Permission = Permission
 permission
     :: Permission
 permission =
-    Permission
+    Permission'
     { _perKind = "androidenterprise#permission"
     , _perName = Nothing
     , _perDescription = Nothing
@@ -1993,14 +2499,14 @@ instance FromJSON Permission where
         parseJSON
           = withObject "Permission"
               (\ o ->
-                 Permission <$>
+                 Permission' <$>
                    (o .:? "kind" .!= "androidenterprise#permission") <*>
                      (o .:? "name")
                      <*> (o .:? "description")
                      <*> (o .:? "permissionId"))
 
 instance ToJSON Permission where
-        toJSON Permission{..}
+        toJSON Permission'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _perKind), ("name" .=) <$> _perName,
@@ -2009,7 +2515,7 @@ instance ToJSON Permission where
 
 --
 -- /See:/ 'productsApproveRequest' smart constructor.
-newtype ProductsApproveRequest = ProductsApproveRequest
+newtype ProductsApproveRequest = ProductsApproveRequest'
     { _parApprovalURLInfo :: Maybe ApprovalURLInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2021,7 +2527,7 @@ newtype ProductsApproveRequest = ProductsApproveRequest
 productsApproveRequest
     :: ProductsApproveRequest
 productsApproveRequest =
-    ProductsApproveRequest
+    ProductsApproveRequest'
     { _parApprovalURLInfo = Nothing
     }
 
@@ -2040,10 +2546,11 @@ instance FromJSON ProductsApproveRequest where
         parseJSON
           = withObject "ProductsApproveRequest"
               (\ o ->
-                 ProductsApproveRequest <$> (o .:? "approvalUrlInfo"))
+                 ProductsApproveRequest' <$>
+                   (o .:? "approvalUrlInfo"))
 
 instance ToJSON ProductsApproveRequest where
-        toJSON ProductsApproveRequest{..}
+        toJSON ProductsApproveRequest'{..}
           = object
               (catMaybes
                  [("approvalUrlInfo" .=) <$> _parApprovalURLInfo])
@@ -2051,7 +2558,7 @@ instance ToJSON ProductsApproveRequest where
 -- | The user resources for the collection.
 --
 -- /See:/ 'collectionViewersListResponse' smart constructor.
-data CollectionViewersListResponse = CollectionViewersListResponse
+data CollectionViewersListResponse = CollectionViewersListResponse'
     { _cvlrKind :: !Text
     , _cvlrUser :: !(Maybe [User])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2066,7 +2573,7 @@ data CollectionViewersListResponse = CollectionViewersListResponse
 collectionViewersListResponse
     :: CollectionViewersListResponse
 collectionViewersListResponse =
-    CollectionViewersListResponse
+    CollectionViewersListResponse'
     { _cvlrKind = "androidenterprise#collectionViewersListResponse"
     , _cvlrUser = Nothing
     }
@@ -2087,13 +2594,13 @@ instance FromJSON CollectionViewersListResponse where
         parseJSON
           = withObject "CollectionViewersListResponse"
               (\ o ->
-                 CollectionViewersListResponse <$>
+                 CollectionViewersListResponse' <$>
                    (o .:? "kind" .!=
                       "androidenterprise#collectionViewersListResponse")
                      <*> (o .:? "user" .!= mempty))
 
 instance ToJSON CollectionViewersListResponse where
-        toJSON CollectionViewersListResponse{..}
+        toJSON CollectionViewersListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cvlrKind),
@@ -2106,7 +2613,7 @@ instance ToJSON CollectionViewersListResponse where
 -- true that a user has an app installed on one of their devices only if
 -- they have an entitlement to it. So if an entitlement is deleted, the app
 -- will be uninstalled from all devices. Similarly if the user installs an
--- app (and is permitted to do so), or the MDM triggers an install of the
+-- app (and is permitted to do so), or the EMM triggers an install of the
 -- app, an entitlement to that app is automatically created. If this is
 -- impossible - e.g. the enterprise has not purchased sufficient licenses -
 -- then installation fails. Note that entitlements are always user
@@ -2125,7 +2632,7 @@ instance ToJSON CollectionViewersListResponse where
 -- cannot be removed via the API.
 --
 -- /See:/ 'entitlement' smart constructor.
-data Entitlement = Entitlement
+data Entitlement = Entitlement'
     { _eeKind      :: !Text
     , _eeReason    :: !(Maybe Text)
     , _eeProductId :: !(Maybe Text)
@@ -2143,7 +2650,7 @@ data Entitlement = Entitlement
 entitlement
     :: Entitlement
 entitlement =
-    Entitlement
+    Entitlement'
     { _eeKind = "androidenterprise#entitlement"
     , _eeReason = Nothing
     , _eeProductId = Nothing
@@ -2170,15 +2677,89 @@ instance FromJSON Entitlement where
         parseJSON
           = withObject "Entitlement"
               (\ o ->
-                 Entitlement <$>
+                 Entitlement' <$>
                    (o .:? "kind" .!= "androidenterprise#entitlement")
                      <*> (o .:? "reason")
                      <*> (o .:? "productId"))
 
 instance ToJSON Entitlement where
-        toJSON Entitlement{..}
+        toJSON Entitlement'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _eeKind),
                   ("reason" .=) <$> _eeReason,
                   ("productId" .=) <$> _eeProductId])
+
+-- | The matching products.
+--
+-- /See:/ 'productsListResponse' smart constructor.
+data ProductsListResponse = ProductsListResponse'
+    { _plrTokenPagination :: !(Maybe TokenPagination)
+    , _plrPageInfo        :: !(Maybe PageInfo)
+    , _plrKind            :: !Text
+    , _plrProduct         :: !(Maybe [Product])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProductsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plrTokenPagination'
+--
+-- * 'plrPageInfo'
+--
+-- * 'plrKind'
+--
+-- * 'plrProduct'
+productsListResponse
+    :: ProductsListResponse
+productsListResponse =
+    ProductsListResponse'
+    { _plrTokenPagination = Nothing
+    , _plrPageInfo = Nothing
+    , _plrKind = "androidenterprise#productsListResponse"
+    , _plrProduct = Nothing
+    }
+
+-- | Pagination information for token pagination.
+plrTokenPagination :: Lens' ProductsListResponse (Maybe TokenPagination)
+plrTokenPagination
+  = lens _plrTokenPagination
+      (\ s a -> s{_plrTokenPagination = a})
+
+-- | General pagination information.
+plrPageInfo :: Lens' ProductsListResponse (Maybe PageInfo)
+plrPageInfo
+  = lens _plrPageInfo (\ s a -> s{_plrPageInfo = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#productsListResponse\".
+plrKind :: Lens' ProductsListResponse Text
+plrKind = lens _plrKind (\ s a -> s{_plrKind = a})
+
+-- | Information about a product (e.g. an app) in the Google Play Store, for
+-- display to an enterprise admin.
+plrProduct :: Lens' ProductsListResponse [Product]
+plrProduct
+  = lens _plrProduct (\ s a -> s{_plrProduct = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ProductsListResponse where
+        parseJSON
+          = withObject "ProductsListResponse"
+              (\ o ->
+                 ProductsListResponse' <$>
+                   (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
+                     (o .:? "kind" .!=
+                        "androidenterprise#productsListResponse")
+                     <*> (o .:? "product" .!= mempty))
+
+instance ToJSON ProductsListResponse where
+        toJSON ProductsListResponse'{..}
+          = object
+              (catMaybes
+                 [("tokenPagination" .=) <$> _plrTokenPagination,
+                  ("pageInfo" .=) <$> _plrPageInfo,
+                  Just ("kind" .= _plrKind),
+                  ("product" .=) <$> _plrProduct])

@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.FreebaseSearch.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -38,22 +38,22 @@ data FreebaseSearchFormat
     | Mids
       -- ^ @mids@
       -- Ordered list of freebase mids.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FreebaseSearchFormat
 
-instance FromText FreebaseSearchFormat where
-    fromText = \case
-        "ac" -> Just AC
-        "classic" -> Just Classic
-        "entity" -> Just Entity
-        "guids" -> Just Guids
-        "ids" -> Just Ids
-        "mids" -> Just Mids
-        _ -> Nothing
+instance FromHttpApiData FreebaseSearchFormat where
+    parseQueryParam = \case
+        "ac" -> Right AC
+        "classic" -> Right Classic
+        "entity" -> Right Entity
+        "guids" -> Right Guids
+        "ids" -> Right Ids
+        "mids" -> Right Mids
+        x -> Left ("Unable to parse FreebaseSearchFormat from: " <> x)
 
-instance ToText FreebaseSearchFormat where
-    toText = \case
+instance ToHttpApiData FreebaseSearchFormat where
+    toQueryParam = \case
         AC -> "ac"
         Classic -> "classic"
         Entity -> "entity"
@@ -78,19 +78,19 @@ data FreebaseSearchScoring
     | FSSSchema
       -- ^ @schema@
       -- Use schema ranking for properties and types.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FreebaseSearchScoring
 
-instance FromText FreebaseSearchScoring where
-    fromText = \case
-        "entity" -> Just FSSEntity
-        "freebase" -> Just FSSFreebase
-        "schema" -> Just FSSSchema
-        _ -> Nothing
+instance FromHttpApiData FreebaseSearchScoring where
+    parseQueryParam = \case
+        "entity" -> Right FSSEntity
+        "freebase" -> Right FSSFreebase
+        "schema" -> Right FSSSchema
+        x -> Left ("Unable to parse FreebaseSearchScoring from: " <> x)
 
-instance ToText FreebaseSearchScoring where
-    toText = \case
+instance ToHttpApiData FreebaseSearchScoring where
+    toQueryParam = \case
         FSSEntity -> "entity"
         FSSFreebase -> "freebase"
         FSSSchema -> "schema"
@@ -112,18 +112,18 @@ data FreebaseSearchEncode
       -- ^ @off@
       -- No encoding of the response. You should not print the results directly
       -- on an web page without html-escaping the content first.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FreebaseSearchEncode
 
-instance FromText FreebaseSearchEncode where
-    fromText = \case
-        "html" -> Just HTML
-        "off" -> Just Off
-        _ -> Nothing
+instance FromHttpApiData FreebaseSearchEncode where
+    parseQueryParam = \case
+        "html" -> Right HTML
+        "off" -> Right Off
+        x -> Left ("Unable to parse FreebaseSearchEncode from: " <> x)
 
-instance ToText FreebaseSearchEncode where
-    toText = \case
+instance ToHttpApiData FreebaseSearchEncode where
+    toQueryParam = \case
         HTML -> "html"
         Off -> "off"
 
@@ -146,19 +146,19 @@ data FreebaseSearchHelp
       -- ^ @predicates@
       -- The predicates and path-terminating properties supported by the filter
       -- and output request parameters.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FreebaseSearchHelp
 
-instance FromText FreebaseSearchHelp where
-    fromText = \case
-        "langs" -> Just Langs
-        "mappings" -> Just MAppings
-        "predicates" -> Just Predicates
-        _ -> Nothing
+instance FromHttpApiData FreebaseSearchHelp where
+    parseQueryParam = \case
+        "langs" -> Right Langs
+        "mappings" -> Right MAppings
+        "predicates" -> Right Predicates
+        x -> Left ("Unable to parse FreebaseSearchHelp from: " <> x)
 
-instance ToText FreebaseSearchHelp where
-    toText = \case
+instance ToHttpApiData FreebaseSearchHelp where
+    toQueryParam = \case
         Langs -> "langs"
         MAppings -> "mappings"
         Predicates -> "predicates"
@@ -181,19 +181,19 @@ data FreebaseSearchSpell
     | NoSpelling
       -- ^ @no_spelling@
       -- Don\'t request spelling suggestions.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FreebaseSearchSpell
 
-instance FromText FreebaseSearchSpell where
-    fromText = \case
-        "always" -> Just Always
-        "no_results" -> Just NoResults
-        "no_spelling" -> Just NoSpelling
-        _ -> Nothing
+instance FromHttpApiData FreebaseSearchSpell where
+    parseQueryParam = \case
+        "always" -> Right Always
+        "no_results" -> Right NoResults
+        "no_spelling" -> Right NoSpelling
+        x -> Left ("Unable to parse FreebaseSearchSpell from: " <> x)
 
-instance ToText FreebaseSearchSpell where
-    toText = \case
+instance ToHttpApiData FreebaseSearchSpell where
+    toQueryParam = \case
         Always -> "always"
         NoResults -> "no_results"
         NoSpelling -> "no_spelling"

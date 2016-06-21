@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,10 @@
 -- has a unique attachment name (\`attachmentName\`) which is returned when
 -- you fetch the attachment data via this API. You specify this with the
 -- delete request to control which attachment is removed. This operation
--- cannot be undone.
+-- cannot be undone. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.delete@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
@@ -44,6 +47,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
     , badUploadType
     , badAttachmentName
     , badBearerToken
+    , badProjectId
     , badCallback
     ) where
 
@@ -61,17 +65,21 @@ type BeaconsAttachmentsDeleteResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Delete '[JSON] Empty
+                     QueryParam "projectId" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
 -- | Deletes the specified attachment for the given beacon. Each attachment
 -- has a unique attachment name (\`attachmentName\`) which is returned when
 -- you fetch the attachment data via this API. You specify this with the
 -- delete request to control which attachment is removed. This operation
--- cannot be undone.
+-- cannot be undone. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ 'beaconsAttachmentsDelete' smart constructor.
-data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete
+data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete'
     { _badXgafv          :: !(Maybe Text)
     , _badUploadProtocol :: !(Maybe Text)
     , _badPp             :: !Bool
@@ -79,6 +87,7 @@ data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete
     , _badUploadType     :: !(Maybe Text)
     , _badAttachmentName :: !Text
     , _badBearerToken    :: !(Maybe Text)
+    , _badProjectId      :: !(Maybe Text)
     , _badCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,12 +109,14 @@ data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete
 --
 -- * 'badBearerToken'
 --
+-- * 'badProjectId'
+--
 -- * 'badCallback'
 beaconsAttachmentsDelete
     :: Text -- ^ 'badAttachmentName'
     -> BeaconsAttachmentsDelete
 beaconsAttachmentsDelete pBadAttachmentName_ =
-    BeaconsAttachmentsDelete
+    BeaconsAttachmentsDelete'
     { _badXgafv = Nothing
     , _badUploadProtocol = Nothing
     , _badPp = True
@@ -113,6 +124,7 @@ beaconsAttachmentsDelete pBadAttachmentName_ =
     , _badUploadType = Nothing
     , _badAttachmentName = pBadAttachmentName_
     , _badBearerToken = Nothing
+    , _badProjectId = Nothing
     , _badCallback = Nothing
     }
 
@@ -144,8 +156,9 @@ badUploadType
 
 -- | The attachment name (\`attachmentName\`) of the attachment to remove.
 -- For example:
--- \`beacons\/3!893737abc9\/attachments\/c5e937-af0-494-959-ec49d12738\`
--- Required.
+-- \`beacons\/3!893737abc9\/attachments\/c5e937-af0-494-959-ec49d12738\`.
+-- For Eddystone-EID beacons, the beacon ID portion (\`3!893737abc9\`) may
+-- be the beacon\'s current EID, or its \"stable\" Eddystone-UID. Required.
 badAttachmentName :: Lens' BeaconsAttachmentsDelete Text
 badAttachmentName
   = lens _badAttachmentName
@@ -157,6 +170,12 @@ badBearerToken
   = lens _badBearerToken
       (\ s a -> s{_badBearerToken = a})
 
+-- | The project id of the attachment to delete. If not provided, the project
+-- that is making the request is used. Optional.
+badProjectId :: Lens' BeaconsAttachmentsDelete (Maybe Text)
+badProjectId
+  = lens _badProjectId (\ s a -> s{_badProjectId = a})
+
 -- | JSONP
 badCallback :: Lens' BeaconsAttachmentsDelete (Maybe Text)
 badCallback
@@ -164,12 +183,15 @@ badCallback
 
 instance GoogleRequest BeaconsAttachmentsDelete where
         type Rs BeaconsAttachmentsDelete = Empty
-        requestClient BeaconsAttachmentsDelete{..}
+        type Scopes BeaconsAttachmentsDelete =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+        requestClient BeaconsAttachmentsDelete'{..}
           = go _badAttachmentName _badXgafv _badUploadProtocol
               (Just _badPp)
               _badAccessToken
               _badUploadType
               _badBearerToken
+              _badProjectId
               _badCallback
               (Just AltJSON)
               proximityBeaconService

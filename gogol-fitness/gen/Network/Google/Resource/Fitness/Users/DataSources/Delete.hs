@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.DataSources.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type UsersDataSourcesDeleteResource =
 -- | Delete the data source if there are no datapoints associated with it
 --
 -- /See:/ 'usersDataSourcesDelete' smart constructor.
-data UsersDataSourcesDelete = UsersDataSourcesDelete
+data UsersDataSourcesDelete = UsersDataSourcesDelete'
     { _udsdDataSourceId :: !Text
     , _udsdUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersDataSourcesDelete
     -> Text -- ^ 'udsdUserId'
     -> UsersDataSourcesDelete
 usersDataSourcesDelete pUdsdDataSourceId_ pUdsdUserId_ =
-    UsersDataSourcesDelete
+    UsersDataSourcesDelete'
     { _udsdDataSourceId = pUdsdDataSourceId_
     , _udsdUserId = pUdsdUserId_
     }
@@ -90,7 +90,11 @@ udsdUserId
 
 instance GoogleRequest UsersDataSourcesDelete where
         type Rs UsersDataSourcesDelete = DataSource
-        requestClient UsersDataSourcesDelete{..}
+        type Scopes UsersDataSourcesDelete =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
+        requestClient UsersDataSourcesDelete'{..}
           = go _udsdUserId _udsdDataSourceId (Just AltJSON)
               fitnessService
           where go

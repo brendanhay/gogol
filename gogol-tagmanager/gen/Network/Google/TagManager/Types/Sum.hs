@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.TagManager.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,29 +46,29 @@ data TriggerType
       -- ^ @windowLoaded@
     | YouTube
       -- ^ @youTube@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TriggerType
 
-instance FromText TriggerType where
-    fromText = \case
-        "ajaxSubmission" -> Just AjaxSubmission
-        "always" -> Just Always
-        "click" -> Just Click
-        "customEvent" -> Just CustomEvent
-        "domReady" -> Just DomReady
-        "formSubmission" -> Just FormSubmission
-        "historyChange" -> Just HistoryChange
-        "jsError" -> Just JsError
-        "linkClick" -> Just LinkClick
-        "pageview" -> Just Pageview
-        "timer" -> Just Timer
-        "windowLoaded" -> Just WindowLoaded
-        "youTube" -> Just YouTube
-        _ -> Nothing
+instance FromHttpApiData TriggerType where
+    parseQueryParam = \case
+        "ajaxSubmission" -> Right AjaxSubmission
+        "always" -> Right Always
+        "click" -> Right Click
+        "customEvent" -> Right CustomEvent
+        "domReady" -> Right DomReady
+        "formSubmission" -> Right FormSubmission
+        "historyChange" -> Right HistoryChange
+        "jsError" -> Right JsError
+        "linkClick" -> Right LinkClick
+        "pageview" -> Right Pageview
+        "timer" -> Right Timer
+        "windowLoaded" -> Right WindowLoaded
+        "youTube" -> Right YouTube
+        x -> Left ("Unable to parse TriggerType from: " <> x)
 
-instance ToText TriggerType where
-    toText = \case
+instance ToHttpApiData TriggerType where
+    toQueryParam = \case
         AjaxSubmission -> "ajaxSubmission"
         Always -> "always"
         Click -> "click"
@@ -122,6 +122,8 @@ data ContainerEnabledBuiltInVariableItem
       -- ^ @debugMode@
     | CEBIVIDeviceName
       -- ^ @deviceName@
+    | CEBIVIEnvironmentName
+      -- ^ @environmentName@
     | CEBIVIErrorLine
       -- ^ @errorLine@
     | CEBIVIErrorMessage
@@ -174,58 +176,59 @@ data ContainerEnabledBuiltInVariableItem
       -- ^ @resolution@
     | CEBIVISdkVersion
       -- ^ @sdkVersion@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContainerEnabledBuiltInVariableItem
 
-instance FromText ContainerEnabledBuiltInVariableItem where
-    fromText = \case
-        "advertiserId" -> Just CEBIVIAdvertiserId
-        "advertisingTrackingEnabled" -> Just CEBIVIAdvertisingTrackingEnabled
-        "appId" -> Just CEBIVIAppId
-        "appName" -> Just CEBIVIAppName
-        "appVersionCode" -> Just CEBIVIAppVersionCode
-        "appVersionName" -> Just CEBIVIAppVersionName
-        "clickClasses" -> Just CEBIVIClickClasses
-        "clickElement" -> Just CEBIVIClickElement
-        "clickId" -> Just CEBIVIClickId
-        "clickTarget" -> Just CEBIVIClickTarget
-        "clickText" -> Just CEBIVIClickText
-        "clickUrl" -> Just CEBIVIClickURL
-        "containerId" -> Just CEBIVIContainerId
-        "containerVersion" -> Just CEBIVIContainerVersion
-        "debugMode" -> Just CEBIVIDebugMode
-        "deviceName" -> Just CEBIVIDeviceName
-        "errorLine" -> Just CEBIVIErrorLine
-        "errorMessage" -> Just CEBIVIErrorMessage
-        "errorUrl" -> Just CEBIVIErrorURL
-        "event" -> Just CEBIVIEvent
-        "formClasses" -> Just CEBIVIFormClasses
-        "formElement" -> Just CEBIVIFormElement
-        "formId" -> Just CEBIVIFormId
-        "formTarget" -> Just CEBIVIFormTarget
-        "formText" -> Just CEBIVIFormText
-        "formUrl" -> Just CEBIVIFormURL
-        "historySource" -> Just CEBIVIHistorySource
-        "htmlId" -> Just CEBIVIHTMLId
-        "language" -> Just CEBIVILanguage
-        "newHistoryFragment" -> Just CEBIVINewHistoryFragment
-        "newHistoryState" -> Just CEBIVINewHistoryState
-        "oldHistoryFragment" -> Just CEBIVIOldHistoryFragment
-        "oldHistoryState" -> Just CEBIVIOldHistoryState
-        "osVersion" -> Just CEBIVIOSVersion
-        "pageHostname" -> Just CEBIVIPageHostname
-        "pagePath" -> Just CEBIVIPagePath
-        "pageUrl" -> Just CEBIVIPageURL
-        "platform" -> Just CEBIVIPlatform
-        "randomNumber" -> Just CEBIVIRandomNumber
-        "referrer" -> Just CEBIVIReferrer
-        "resolution" -> Just CEBIVIResolution
-        "sdkVersion" -> Just CEBIVISdkVersion
-        _ -> Nothing
+instance FromHttpApiData ContainerEnabledBuiltInVariableItem where
+    parseQueryParam = \case
+        "advertiserId" -> Right CEBIVIAdvertiserId
+        "advertisingTrackingEnabled" -> Right CEBIVIAdvertisingTrackingEnabled
+        "appId" -> Right CEBIVIAppId
+        "appName" -> Right CEBIVIAppName
+        "appVersionCode" -> Right CEBIVIAppVersionCode
+        "appVersionName" -> Right CEBIVIAppVersionName
+        "clickClasses" -> Right CEBIVIClickClasses
+        "clickElement" -> Right CEBIVIClickElement
+        "clickId" -> Right CEBIVIClickId
+        "clickTarget" -> Right CEBIVIClickTarget
+        "clickText" -> Right CEBIVIClickText
+        "clickUrl" -> Right CEBIVIClickURL
+        "containerId" -> Right CEBIVIContainerId
+        "containerVersion" -> Right CEBIVIContainerVersion
+        "debugMode" -> Right CEBIVIDebugMode
+        "deviceName" -> Right CEBIVIDeviceName
+        "environmentName" -> Right CEBIVIEnvironmentName
+        "errorLine" -> Right CEBIVIErrorLine
+        "errorMessage" -> Right CEBIVIErrorMessage
+        "errorUrl" -> Right CEBIVIErrorURL
+        "event" -> Right CEBIVIEvent
+        "formClasses" -> Right CEBIVIFormClasses
+        "formElement" -> Right CEBIVIFormElement
+        "formId" -> Right CEBIVIFormId
+        "formTarget" -> Right CEBIVIFormTarget
+        "formText" -> Right CEBIVIFormText
+        "formUrl" -> Right CEBIVIFormURL
+        "historySource" -> Right CEBIVIHistorySource
+        "htmlId" -> Right CEBIVIHTMLId
+        "language" -> Right CEBIVILanguage
+        "newHistoryFragment" -> Right CEBIVINewHistoryFragment
+        "newHistoryState" -> Right CEBIVINewHistoryState
+        "oldHistoryFragment" -> Right CEBIVIOldHistoryFragment
+        "oldHistoryState" -> Right CEBIVIOldHistoryState
+        "osVersion" -> Right CEBIVIOSVersion
+        "pageHostname" -> Right CEBIVIPageHostname
+        "pagePath" -> Right CEBIVIPagePath
+        "pageUrl" -> Right CEBIVIPageURL
+        "platform" -> Right CEBIVIPlatform
+        "randomNumber" -> Right CEBIVIRandomNumber
+        "referrer" -> Right CEBIVIReferrer
+        "resolution" -> Right CEBIVIResolution
+        "sdkVersion" -> Right CEBIVISdkVersion
+        x -> Left ("Unable to parse ContainerEnabledBuiltInVariableItem from: " <> x)
 
-instance ToText ContainerEnabledBuiltInVariableItem where
-    toText = \case
+instance ToHttpApiData ContainerEnabledBuiltInVariableItem where
+    toQueryParam = \case
         CEBIVIAdvertiserId -> "advertiserId"
         CEBIVIAdvertisingTrackingEnabled -> "advertisingTrackingEnabled"
         CEBIVIAppId -> "appId"
@@ -242,6 +245,7 @@ instance ToText ContainerEnabledBuiltInVariableItem where
         CEBIVIContainerVersion -> "containerVersion"
         CEBIVIDebugMode -> "debugMode"
         CEBIVIDeviceName -> "deviceName"
+        CEBIVIEnvironmentName -> "environmentName"
         CEBIVIErrorLine -> "errorLine"
         CEBIVIErrorMessage -> "errorMessage"
         CEBIVIErrorURL -> "errorUrl"
@@ -286,21 +290,21 @@ data ContainerUsageContextItem
       -- ^ @iosSdk5@
     | Web
       -- ^ @web@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContainerUsageContextItem
 
-instance FromText ContainerUsageContextItem where
-    fromText = \case
-        "android" -> Just Android
-        "androidSdk5" -> Just ANDROIdSDK5
-        "ios" -> Just Ios
-        "iosSdk5" -> Just IOSSDK5
-        "web" -> Just Web
-        _ -> Nothing
+instance FromHttpApiData ContainerUsageContextItem where
+    parseQueryParam = \case
+        "android" -> Right Android
+        "androidSdk5" -> Right ANDROIdSDK5
+        "ios" -> Right Ios
+        "iosSdk5" -> Right IOSSDK5
+        "web" -> Right Web
+        x -> Left ("Unable to parse ContainerUsageContextItem from: " <> x)
 
-instance ToText ContainerUsageContextItem where
-    toText = \case
+instance ToHttpApiData ContainerUsageContextItem where
+    toQueryParam = \case
         Android -> "android"
         ANDROIdSDK5 -> "androidSdk5"
         Ios -> "ios"
@@ -337,27 +341,27 @@ data ConditionType
       -- ^ @startsWith@
     | URLMatches
       -- ^ @urlMatches@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ConditionType
 
-instance FromText ConditionType where
-    fromText = \case
-        "contains" -> Just Contains
-        "cssSelector" -> Just CssSelector
-        "endsWith" -> Just EndsWith
-        "equals" -> Just Equals
-        "greater" -> Just Greater
-        "greaterOrEquals" -> Just GreaterOrEquals
-        "less" -> Just Less
-        "lessOrEquals" -> Just LessOrEquals
-        "matchRegex" -> Just MatchRegex
-        "startsWith" -> Just StartsWith
-        "urlMatches" -> Just URLMatches
-        _ -> Nothing
+instance FromHttpApiData ConditionType where
+    parseQueryParam = \case
+        "contains" -> Right Contains
+        "cssSelector" -> Right CssSelector
+        "endsWith" -> Right EndsWith
+        "equals" -> Right Equals
+        "greater" -> Right Greater
+        "greaterOrEquals" -> Right GreaterOrEquals
+        "less" -> Right Less
+        "lessOrEquals" -> Right LessOrEquals
+        "matchRegex" -> Right MatchRegex
+        "startsWith" -> Right StartsWith
+        "urlMatches" -> Right URLMatches
+        x -> Left ("Unable to parse ConditionType from: " <> x)
 
-instance ToText ConditionType where
-    toText = \case
+instance ToHttpApiData ConditionType where
+    toQueryParam = \case
         Contains -> "contains"
         CssSelector -> "cssSelector"
         EndsWith -> "endsWith"
@@ -387,21 +391,21 @@ data AccountAccessPermissionItem
       -- ^ @publish@
     | Read'
       -- ^ @read@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountAccessPermissionItem
 
-instance FromText AccountAccessPermissionItem where
-    fromText = \case
-        "delete" -> Just Delete'
-        "edit" -> Just Edit
-        "manage" -> Just Manage
-        "publish" -> Just Publish
-        "read" -> Just Read'
-        _ -> Nothing
+instance FromHttpApiData AccountAccessPermissionItem where
+    parseQueryParam = \case
+        "delete" -> Right Delete'
+        "edit" -> Right Edit
+        "manage" -> Right Manage
+        "publish" -> Right Publish
+        "read" -> Right Read'
+        x -> Left ("Unable to parse AccountAccessPermissionItem from: " <> x)
 
-instance ToText AccountAccessPermissionItem where
-    toText = \case
+instance ToHttpApiData AccountAccessPermissionItem where
+    toQueryParam = \case
         Delete' -> "delete"
         Edit -> "edit"
         Manage -> "manage"
@@ -422,19 +426,19 @@ data TagTagFiringOption
       -- ^ @oncePerLoad@
     | Unlimited
       -- ^ @unlimited@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TagTagFiringOption
 
-instance FromText TagTagFiringOption where
-    fromText = \case
-        "oncePerEvent" -> Just OncePerEvent
-        "oncePerLoad" -> Just OncePerLoad
-        "unlimited" -> Just Unlimited
-        _ -> Nothing
+instance FromHttpApiData TagTagFiringOption where
+    parseQueryParam = \case
+        "oncePerEvent" -> Right OncePerEvent
+        "oncePerLoad" -> Right OncePerLoad
+        "unlimited" -> Right Unlimited
+        x -> Left ("Unable to parse TagTagFiringOption from: " <> x)
 
-instance ToText TagTagFiringOption where
-    toText = \case
+instance ToHttpApiData TagTagFiringOption where
+    toQueryParam = \case
         OncePerEvent -> "oncePerEvent"
         OncePerLoad -> "oncePerLoad"
         Unlimited -> "unlimited"
@@ -463,21 +467,21 @@ data ParameterType
       -- ^ @map@
     | Template
       -- ^ @template@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ParameterType
 
-instance FromText ParameterType where
-    fromText = \case
-        "boolean" -> Just Boolean
-        "integer" -> Just Integer
-        "list" -> Just List
-        "map" -> Just Map
-        "template" -> Just Template
-        _ -> Nothing
+instance FromHttpApiData ParameterType where
+    parseQueryParam = \case
+        "boolean" -> Right Boolean
+        "integer" -> Right Integer
+        "list" -> Right List
+        "map" -> Right Map
+        "template" -> Right Template
+        x -> Left ("Unable to parse ParameterType from: " <> x)
 
-instance ToText ParameterType where
-    toText = \case
+instance ToHttpApiData ParameterType where
+    toQueryParam = \case
         Boolean -> "boolean"
         Integer -> "integer"
         List -> "list"
@@ -501,21 +505,21 @@ data ContainerAccessPermissionItem
       -- ^ @publish@
     | CAPIRead'
       -- ^ @read@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContainerAccessPermissionItem
 
-instance FromText ContainerAccessPermissionItem where
-    fromText = \case
-        "delete" -> Just CAPIDelete'
-        "edit" -> Just CAPIEdit
-        "manage" -> Just CAPIManage
-        "publish" -> Just CAPIPublish
-        "read" -> Just CAPIRead'
-        _ -> Nothing
+instance FromHttpApiData ContainerAccessPermissionItem where
+    parseQueryParam = \case
+        "delete" -> Right CAPIDelete'
+        "edit" -> Right CAPIEdit
+        "manage" -> Right CAPIManage
+        "publish" -> Right CAPIPublish
+        "read" -> Right CAPIRead'
+        x -> Left ("Unable to parse ContainerAccessPermissionItem from: " <> x)
 
-instance ToText ContainerAccessPermissionItem where
-    toText = \case
+instance ToHttpApiData ContainerAccessPermissionItem where
+    toQueryParam = \case
         CAPIDelete' -> "delete"
         CAPIEdit -> "edit"
         CAPIManage -> "manage"
@@ -526,4 +530,39 @@ instance FromJSON ContainerAccessPermissionItem where
     parseJSON = parseJSONText "ContainerAccessPermissionItem"
 
 instance ToJSON ContainerAccessPermissionItem where
+    toJSON = toJSONText
+
+-- | The type of this environment.
+data EnvironmentType
+    = Draft
+      -- ^ @draft@
+    | Latest
+      -- ^ @latest@
+    | Live
+      -- ^ @live@
+    | User
+      -- ^ @user@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EnvironmentType
+
+instance FromHttpApiData EnvironmentType where
+    parseQueryParam = \case
+        "draft" -> Right Draft
+        "latest" -> Right Latest
+        "live" -> Right Live
+        "user" -> Right User
+        x -> Left ("Unable to parse EnvironmentType from: " <> x)
+
+instance ToHttpApiData EnvironmentType where
+    toQueryParam = \case
+        Draft -> "draft"
+        Latest -> "latest"
+        Live -> "live"
+        User -> "user"
+
+instance FromJSON EnvironmentType where
+    parseJSON = parseJSONText "EnvironmentType"
+
+instance ToJSON EnvironmentType where
     toJSON = toJSONText

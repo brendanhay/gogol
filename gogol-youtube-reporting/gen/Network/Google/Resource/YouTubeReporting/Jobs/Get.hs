@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeReporting.Jobs.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type JobsGetResource =
 -- | Gets a job.
 --
 -- /See:/ 'jobsGet' smart constructor.
-data JobsGet = JobsGet
+data JobsGet = JobsGet'
     { _jgXgafv                  :: !(Maybe Text)
     , _jgJobId                  :: !Text
     , _jgUploadProtocol         :: !(Maybe Text)
@@ -103,7 +103,7 @@ jobsGet
     :: Text -- ^ 'jgJobId'
     -> JobsGet
 jobsGet pJgJobId_ =
-    JobsGet
+    JobsGet'
     { _jgXgafv = Nothing
     , _jgJobId = pJgJobId_
     , _jgUploadProtocol = Nothing
@@ -164,7 +164,10 @@ jgCallback
 
 instance GoogleRequest JobsGet where
         type Rs JobsGet = Job
-        requestClient JobsGet{..}
+        type Scopes JobsGet =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
+        requestClient JobsGet'{..}
           = go _jgJobId _jgXgafv _jgUploadProtocol (Just _jgPp)
               _jgAccessToken
               _jgUploadType

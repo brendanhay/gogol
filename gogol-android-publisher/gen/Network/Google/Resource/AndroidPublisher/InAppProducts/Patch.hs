@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type InAppProductsPatchResource =
 -- semantics.
 --
 -- /See:/ 'inAppProductsPatch' smart constructor.
-data InAppProductsPatch = InAppProductsPatch
+data InAppProductsPatch = InAppProductsPatch'
     { _iAppAutoConvertMissingPrices :: !(Maybe Bool)
     , _iAppPackageName              :: !Text
     , _iAppPayload                  :: !InAppProduct
@@ -85,7 +85,7 @@ inAppProductsPatch
     -> Text -- ^ 'iAppSKU'
     -> InAppProductsPatch
 inAppProductsPatch pIAppPackageName_ pIAppPayload_ pIAppSKU_ =
-    InAppProductsPatch
+    InAppProductsPatch'
     { _iAppAutoConvertMissingPrices = Nothing
     , _iAppPackageName = pIAppPackageName_
     , _iAppPayload = pIAppPayload_
@@ -119,7 +119,9 @@ iAppSKU = lens _iAppSKU (\ s a -> s{_iAppSKU = a})
 
 instance GoogleRequest InAppProductsPatch where
         type Rs InAppProductsPatch = InAppProduct
-        requestClient InAppProductsPatch{..}
+        type Scopes InAppProductsPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient InAppProductsPatch'{..}
           = go _iAppPackageName _iAppSKU
               _iAppAutoConvertMissingPrices
               (Just AltJSON)

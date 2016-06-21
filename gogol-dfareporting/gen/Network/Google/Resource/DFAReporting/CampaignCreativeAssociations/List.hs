@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'CampaignCreativeAssociationsList' request conforms to.
 type CampaignCreativeAssociationsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -66,7 +66,7 @@ type CampaignCreativeAssociationsListResource =
 -- campaign.
 --
 -- /See:/ 'campaignCreativeAssociationsList' smart constructor.
-data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList
+data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList'
     { _ccalCampaignId :: !(Textual Int64)
     , _ccalProFileId  :: !(Textual Int64)
     , _ccalSortOrder  :: !(Maybe CampaignCreativeAssociationsListSortOrder)
@@ -92,7 +92,7 @@ campaignCreativeAssociationsList
     -> Int64 -- ^ 'ccalProFileId'
     -> CampaignCreativeAssociationsList
 campaignCreativeAssociationsList pCcalCampaignId_ pCcalProFileId_ =
-    CampaignCreativeAssociationsList
+    CampaignCreativeAssociationsList'
     { _ccalCampaignId = _Coerce # pCcalCampaignId_
     , _ccalProFileId = _Coerce # pCcalProFileId_
     , _ccalSortOrder = Nothing
@@ -137,7 +137,9 @@ instance GoogleRequest
          CampaignCreativeAssociationsList where
         type Rs CampaignCreativeAssociationsList =
              CampaignCreativeAssociationsListResponse
-        requestClient CampaignCreativeAssociationsList{..}
+        type Scopes CampaignCreativeAssociationsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CampaignCreativeAssociationsList'{..}
           = go _ccalProFileId _ccalCampaignId _ccalSortOrder
               _ccalPageToken
               _ccalMaxResults

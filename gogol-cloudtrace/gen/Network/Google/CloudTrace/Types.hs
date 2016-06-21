@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.CloudTrace.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,6 +20,8 @@ module Network.Google.CloudTrace.Types
       cloudTraceService
 
     -- * OAuth Scopes
+    , traceAppendScope
+    , traceReadOnlyScope
     , cloudPlatformScope
 
     -- * Empty
@@ -65,11 +68,19 @@ import           Network.Google.CloudTrace.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Cloud Trace API. This contains the host and root path used as a starting point for constructing service requests.
-cloudTraceService :: Service
+cloudTraceService :: ServiceConfig
 cloudTraceService
   = defaultService (ServiceId "cloudtrace:v1")
       "cloudtrace.googleapis.com"
 
+-- | Write Trace data for a project or application
+traceAppendScope :: Proxy '["https://www.googleapis.com/auth/trace.append"]
+traceAppendScope = Proxy;
+
+-- | Read Trace data for a project or application
+traceReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/trace.readonly"]
+traceReadOnlyScope = Proxy;
+
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

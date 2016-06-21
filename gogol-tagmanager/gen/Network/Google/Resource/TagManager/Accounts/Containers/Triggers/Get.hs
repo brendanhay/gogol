@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsContainersTriggersGetResource =
 -- | Gets a GTM Trigger.
 --
 -- /See:/ 'accountsContainersTriggersGet' smart constructor.
-data AccountsContainersTriggersGet = AccountsContainersTriggersGet
+data AccountsContainersTriggersGet = AccountsContainersTriggersGet'
     { _actgcContainerId :: !Text
     , _actgcTriggerId   :: !Text
     , _actgcAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersTriggersGet
     -> Text -- ^ 'actgcAccountId'
     -> AccountsContainersTriggersGet
 accountsContainersTriggersGet pActgcContainerId_ pActgcTriggerId_ pActgcAccountId_ =
-    AccountsContainersTriggersGet
+    AccountsContainersTriggersGet'
     { _actgcContainerId = pActgcContainerId_
     , _actgcTriggerId = pActgcTriggerId_
     , _actgcAccountId = pActgcAccountId_
@@ -105,7 +105,10 @@ actgcAccountId
 instance GoogleRequest AccountsContainersTriggersGet
          where
         type Rs AccountsContainersTriggersGet = Trigger
-        requestClient AccountsContainersTriggersGet{..}
+        type Scopes AccountsContainersTriggersGet =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersTriggersGet'{..}
           = go _actgcAccountId _actgcContainerId
               _actgcTriggerId
               (Just AltJSON)

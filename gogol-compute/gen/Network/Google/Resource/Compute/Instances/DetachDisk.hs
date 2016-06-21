@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.DetachDisk
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type InstancesDetachDiskResource =
 -- | Detaches a disk from an instance.
 --
 -- /See:/ 'instancesDetachDisk' smart constructor.
-data InstancesDetachDisk = InstancesDetachDisk
+data InstancesDetachDisk = InstancesDetachDisk'
     { _iddProject    :: !Text
     , _iddZone       :: !Text
     , _iddDeviceName :: !Text
@@ -85,7 +85,7 @@ instancesDetachDisk
     -> Text -- ^ 'iddInstance'
     -> InstancesDetachDisk
 instancesDetachDisk pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
-    InstancesDetachDisk
+    InstancesDetachDisk'
     { _iddProject = pIddProject_
     , _iddZone = pIddZone_
     , _iddDeviceName = pIddDeviceName_
@@ -114,7 +114,10 @@ iddInstance
 
 instance GoogleRequest InstancesDetachDisk where
         type Rs InstancesDetachDisk = Operation
-        requestClient InstancesDetachDisk{..}
+        type Scopes InstancesDetachDisk =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstancesDetachDisk'{..}
           = go _iddProject _iddZone _iddInstance
               (Just _iddDeviceName)
               (Just AltJSON)

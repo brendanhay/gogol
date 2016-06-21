@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Users.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type UsersDeleteResource =
 -- | Deletes a user from a Cloud SQL instance.
 --
 -- /See:/ 'usersDelete' smart constructor.
-data UsersDelete = UsersDelete
+data UsersDelete = UsersDelete'
     { _udProject  :: !Text
     , _udName     :: !Text
     , _udHost     :: !Text
@@ -84,7 +84,7 @@ usersDelete
     -> Text -- ^ 'udInstance'
     -> UsersDelete
 usersDelete pUdProject_ pUdName_ pUdHost_ pUdInstance_ =
-    UsersDelete
+    UsersDelete'
     { _udProject = pUdProject_
     , _udName = pUdName_
     , _udHost = pUdHost_
@@ -111,7 +111,10 @@ udInstance
 
 instance GoogleRequest UsersDelete where
         type Rs UsersDelete = Operation
-        requestClient UsersDelete{..}
+        type Scopes UsersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient UsersDelete'{..}
           = go _udProject _udInstance (Just _udHost)
               (Just _udName)
               (Just AltJSON)

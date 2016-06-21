@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type QueriesGetQueryResource =
 -- | Retrieves a stored query.
 --
 -- /See:/ 'queriesGetQuery' smart constructor.
-newtype QueriesGetQuery = QueriesGetQuery
+newtype QueriesGetQuery = QueriesGetQuery'
     { _qgqQueryId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ queriesGetQuery
     :: Int64 -- ^ 'qgqQueryId'
     -> QueriesGetQuery
 queriesGetQuery pQgqQueryId_ =
-    QueriesGetQuery
+    QueriesGetQuery'
     { _qgqQueryId = _Coerce # pQgqQueryId_
     }
 
@@ -76,7 +76,8 @@ qgqQueryId
 
 instance GoogleRequest QueriesGetQuery where
         type Rs QueriesGetQuery = Query
-        requestClient QueriesGetQuery{..}
+        type Scopes QueriesGetQuery = '[]
+        requestClient QueriesGetQuery'{..}
           = go _qgqQueryId (Just AltJSON)
               doubleClickBidsService
           where go

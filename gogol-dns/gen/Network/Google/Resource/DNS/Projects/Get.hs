@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DNS.Projects.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type ProjectsGetResource =
 -- | Fetch the representation of an existing Project.
 --
 -- /See:/ 'projectsGet' smart constructor.
-newtype ProjectsGet = ProjectsGet
+newtype ProjectsGet = ProjectsGet'
     { _pgProject :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ projectsGet
     :: Text -- ^ 'pgProject'
     -> ProjectsGet
 projectsGet pPgProject_ =
-    ProjectsGet
+    ProjectsGet'
     { _pgProject = pPgProject_
     }
 
@@ -75,7 +75,12 @@ pgProject
 
 instance GoogleRequest ProjectsGet where
         type Rs ProjectsGet = Project
-        requestClient ProjectsGet{..}
+        type Scopes ProjectsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
+        requestClient ProjectsGet'{..}
           = go _pgProject (Just AltJSON) dNSService
           where go
                   = buildClient (Proxy :: Proxy ProjectsGetResource)

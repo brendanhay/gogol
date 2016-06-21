@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Invitations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type InvitationsGetResource =
 -- invitation exists with the requested ID.
 --
 -- /See:/ 'invitationsGet' smart constructor.
-data InvitationsGet = InvitationsGet
+data InvitationsGet = InvitationsGet'
     { _igXgafv          :: !(Maybe Text)
     , _igUploadProtocol :: !(Maybe Text)
     , _igPp             :: !Bool
@@ -104,7 +104,7 @@ invitationsGet
     :: Text -- ^ 'igId'
     -> InvitationsGet
 invitationsGet pIgId_ =
-    InvitationsGet
+    InvitationsGet'
     { _igXgafv = Nothing
     , _igUploadProtocol = Nothing
     , _igPp = True
@@ -157,7 +157,10 @@ igCallback
 
 instance GoogleRequest InvitationsGet where
         type Rs InvitationsGet = Invitation
-        requestClient InvitationsGet{..}
+        type Scopes InvitationsGet =
+             '["https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
+        requestClient InvitationsGet'{..}
           = go _igId _igXgafv _igUploadProtocol (Just _igPp)
               _igAccessToken
               _igUploadType

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.Creatives.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type CreativesListResource =
 -- creative will be available 30-40 minutes after submission.
 --
 -- /See:/ 'creativesList'' smart constructor.
-data CreativesList' = CreativesList'
+data CreativesList' = CreativesList''
     { _clBuyerCreativeId         :: !(Maybe [Text])
     , _clOpenAuctionStatusFilter :: !(Maybe CreativesListOpenAuctionStatusFilter)
     , _clAccountId               :: !(Maybe [Textual Int32])
@@ -94,7 +94,7 @@ data CreativesList' = CreativesList'
 creativesList'
     :: CreativesList'
 creativesList' =
-    CreativesList'
+    CreativesList''
     { _clBuyerCreativeId = Nothing
     , _clOpenAuctionStatusFilter = Nothing
     , _clAccountId = Nothing
@@ -133,7 +133,7 @@ clPageToken :: Lens' CreativesList' (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
--- | When specified, only creatives having the given direct deals status are
+-- | When specified, only creatives having the given deals status are
 -- returned.
 clDealsStatusFilter :: Lens' CreativesList' (Maybe CreativesListDealsStatusFilter)
 clDealsStatusFilter
@@ -149,7 +149,9 @@ clMaxResults
 
 instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesList
-        requestClient CreativesList'{..}
+        type Scopes CreativesList' =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient CreativesList''{..}
           = go (_clBuyerCreativeId ^. _Default)
               _clOpenAuctionStatusFilter
               (_clAccountId ^. _Default)

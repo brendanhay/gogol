@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Method.Freebase.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -145,7 +145,7 @@ type SearchMethod =
 -- | Search Freebase open data.
 --
 -- /See:/ 'search' smart constructor.
-data Search = Search
+data Search = Search'
     { _sWithout   :: !(Maybe [Text])
     , _sCursor    :: !(Maybe (Textual Int32))
     , _sWith      :: !(Maybe [Text])
@@ -223,7 +223,7 @@ data Search = Search
 search
     :: Search
 search =
-    Search
+    Search'
     { _sWithout = Nothing
     , _sCursor = Nothing
     , _sWith = Nothing
@@ -366,7 +366,8 @@ sCallback
 
 instance GoogleRequest Search where
         type Rs Search = ()
-        requestClient Search{..}
+        type Scopes Search = '[]
+        requestClient Search'{..}
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
               (_sDomain ^. _Default)
@@ -396,7 +397,8 @@ instance GoogleRequest Search where
 
 instance GoogleRequest (MediaDownload Search) where
         type Rs (MediaDownload Search) = Stream
-        requestClient (MediaDownload Search{..})
+        type Scopes (MediaDownload Search) = Scopes Search
+        requestClient (MediaDownload Search'{..})
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
               (_sDomain ^. _Default)

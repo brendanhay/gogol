@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Calendars.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type CalendarsDeleteResource =
 -- events on primary calendars.
 --
 -- /See:/ 'calendarsDelete' smart constructor.
-newtype CalendarsDelete = CalendarsDelete
+newtype CalendarsDelete = CalendarsDelete'
     { _cdCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ calendarsDelete
     :: Text -- ^ 'cdCalendarId'
     -> CalendarsDelete
 calendarsDelete pCdCalendarId_ =
-    CalendarsDelete
+    CalendarsDelete'
     { _cdCalendarId = pCdCalendarId_
     }
 
@@ -79,7 +79,9 @@ cdCalendarId
 
 instance GoogleRequest CalendarsDelete where
         type Rs CalendarsDelete = ()
-        requestClient CalendarsDelete{..}
+        type Scopes CalendarsDelete =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient CalendarsDelete'{..}
           = go _cdCalendarId (Just AltJSON) appsCalendarService
           where go
                   = buildClient

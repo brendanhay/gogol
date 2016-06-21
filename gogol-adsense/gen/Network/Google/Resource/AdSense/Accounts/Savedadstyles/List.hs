@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsSavedadstylesListResource =
 -- | List all saved ad styles in the specified account.
 --
 -- /See:/ 'accountsSavedadstylesList' smart constructor.
-data AccountsSavedadstylesList = AccountsSavedadstylesList
+data AccountsSavedadstylesList = AccountsSavedadstylesList'
     { _aslAccountId  :: !Text
     , _aslPageToken  :: !(Maybe Text)
     , _aslMaxResults :: !(Maybe (Textual Int32))
@@ -75,7 +75,7 @@ accountsSavedadstylesList
     :: Text -- ^ 'aslAccountId'
     -> AccountsSavedadstylesList
 accountsSavedadstylesList pAslAccountId_ =
-    AccountsSavedadstylesList
+    AccountsSavedadstylesList'
     { _aslAccountId = pAslAccountId_
     , _aslPageToken = Nothing
     , _aslMaxResults = Nothing
@@ -104,7 +104,10 @@ aslMaxResults
 instance GoogleRequest AccountsSavedadstylesList
          where
         type Rs AccountsSavedadstylesList = SavedAdStyles
-        requestClient AccountsSavedadstylesList{..}
+        type Scopes AccountsSavedadstylesList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AccountsSavedadstylesList'{..}
           = go _aslAccountId _aslPageToken _aslMaxResults
               (Just AltJSON)
               adSenseService

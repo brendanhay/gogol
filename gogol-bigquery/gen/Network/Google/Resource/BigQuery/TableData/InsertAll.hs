@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.TableData.InsertAll
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type TableDataInsertAllResource =
 -- load job. Requires the WRITER dataset role.
 --
 -- /See:/ 'tableDataInsertAll' smart constructor.
-data TableDataInsertAll = TableDataInsertAll
+data TableDataInsertAll = TableDataInsertAll'
     { _tdiaPayload   :: !TableDataInsertAllRequest
     , _tdiaDataSetId :: !Text
     , _tdiaProjectId :: !Text
@@ -88,7 +88,7 @@ tableDataInsertAll
     -> Text -- ^ 'tdiaTableId'
     -> TableDataInsertAll
 tableDataInsertAll pTdiaPayload_ pTdiaDataSetId_ pTdiaProjectId_ pTdiaTableId_ =
-    TableDataInsertAll
+    TableDataInsertAll'
     { _tdiaPayload = pTdiaPayload_
     , _tdiaDataSetId = pTdiaDataSetId_
     , _tdiaProjectId = pTdiaProjectId_
@@ -120,7 +120,11 @@ tdiaTableId
 instance GoogleRequest TableDataInsertAll where
         type Rs TableDataInsertAll =
              TableDataInsertAllResponse
-        requestClient TableDataInsertAll{..}
+        type Scopes TableDataInsertAll =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/bigquery.insertdata",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TableDataInsertAll'{..}
           = go _tdiaProjectId _tdiaDataSetId _tdiaTableId
               (Just AltJSON)
               _tdiaPayload

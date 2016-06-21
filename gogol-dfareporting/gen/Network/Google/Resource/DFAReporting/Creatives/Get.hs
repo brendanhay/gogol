@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Creatives.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativesGet' request conforms to.
 type CreativesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
@@ -54,7 +54,7 @@ type CreativesGetResource =
 -- | Gets one creative by ID.
 --
 -- /See:/ 'creativesGet' smart constructor.
-data CreativesGet = CreativesGet
+data CreativesGet = CreativesGet'
     { _ccProFileId :: !(Textual Int64)
     , _ccId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativesGet
     -> Int64 -- ^ 'ccId'
     -> CreativesGet
 creativesGet pCcProFileId_ pCcId_ =
-    CreativesGet
+    CreativesGet'
     { _ccProFileId = _Coerce # pCcProFileId_
     , _ccId = _Coerce # pCcId_
     }
@@ -88,7 +88,9 @@ ccId = lens _ccId (\ s a -> s{_ccId = a}) . _Coerce
 
 instance GoogleRequest CreativesGet where
         type Rs CreativesGet = Creative
-        requestClient CreativesGet{..}
+        type Scopes CreativesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativesGet'{..}
           = go _ccProFileId _ccId (Just AltJSON)
               dFAReportingService
           where go

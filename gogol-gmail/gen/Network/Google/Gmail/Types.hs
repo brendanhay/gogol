@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Gmail.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,13 +20,18 @@ module Network.Google.Gmail.Types
       gmailService
 
     -- * OAuth Scopes
-    , gmailAllScope
+    , mailGoogleComScope
     , gmailModifyScope
     , gmailLabelsScope
     , gmailSendScope
     , gmailInsertScope
     , gmailComposeScope
-    , gmailReadonlyScope
+    , gmailReadOnlyScope
+
+    -- * BatchDeleteMessagesRequest
+    , BatchDeleteMessagesRequest
+    , batchDeleteMessagesRequest
+    , bdmrIds
 
     -- * UsersMessagesGetFormat
     , UsersMessagesGetFormat (..)
@@ -221,35 +227,35 @@ import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Gmail API. This contains the host and root path used as a starting point for constructing service requests.
-gmailService :: Service
+gmailService :: ServiceConfig
 gmailService
   = defaultService (ServiceId "gmail:v1")
       "www.googleapis.com"
 
 -- | View and manage your mail
-gmailAllScope :: OAuthScope
-gmailAllScope = "https://mail.google.com/";
+mailGoogleComScope :: Proxy '["https://mail.google.com/"]
+mailGoogleComScope = Proxy;
 
 -- | View and modify but not delete your email
-gmailModifyScope :: OAuthScope
-gmailModifyScope = "https://www.googleapis.com/auth/gmail.modify";
+gmailModifyScope :: Proxy '["https://www.googleapis.com/auth/gmail.modify"]
+gmailModifyScope = Proxy;
 
 -- | Manage mailbox labels
-gmailLabelsScope :: OAuthScope
-gmailLabelsScope = "https://www.googleapis.com/auth/gmail.labels";
+gmailLabelsScope :: Proxy '["https://www.googleapis.com/auth/gmail.labels"]
+gmailLabelsScope = Proxy;
 
 -- | Send email on your behalf
-gmailSendScope :: OAuthScope
-gmailSendScope = "https://www.googleapis.com/auth/gmail.send";
+gmailSendScope :: Proxy '["https://www.googleapis.com/auth/gmail.send"]
+gmailSendScope = Proxy;
 
 -- | Insert mail into your mailbox
-gmailInsertScope :: OAuthScope
-gmailInsertScope = "https://www.googleapis.com/auth/gmail.insert";
+gmailInsertScope :: Proxy '["https://www.googleapis.com/auth/gmail.insert"]
+gmailInsertScope = Proxy;
 
 -- | Manage drafts and send emails
-gmailComposeScope :: OAuthScope
-gmailComposeScope = "https://www.googleapis.com/auth/gmail.compose";
+gmailComposeScope :: Proxy '["https://www.googleapis.com/auth/gmail.compose"]
+gmailComposeScope = Proxy;
 
 -- | View your emails messages and settings
-gmailReadonlyScope :: OAuthScope
-gmailReadonlyScope = "https://www.googleapis.com/auth/gmail.readonly";
+gmailReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/gmail.readonly"]
+gmailReadOnlyScope = Proxy;

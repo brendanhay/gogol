@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.ContentCategories.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesGet' request conforms to.
 type ContentCategoriesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -55,7 +55,7 @@ type ContentCategoriesGetResource =
 -- | Gets one content category by ID.
 --
 -- /See:/ 'contentCategoriesGet' smart constructor.
-data ContentCategoriesGet = ContentCategoriesGet
+data ContentCategoriesGet = ContentCategoriesGet'
     { _ccgProFileId :: !(Textual Int64)
     , _ccgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ contentCategoriesGet
     -> Int64 -- ^ 'ccgId'
     -> ContentCategoriesGet
 contentCategoriesGet pCcgProFileId_ pCcgId_ =
-    ContentCategoriesGet
+    ContentCategoriesGet'
     { _ccgProFileId = _Coerce # pCcgProFileId_
     , _ccgId = _Coerce # pCcgId_
     }
@@ -90,7 +90,9 @@ ccgId
 
 instance GoogleRequest ContentCategoriesGet where
         type Rs ContentCategoriesGet = ContentCategory
-        requestClient ContentCategoriesGet{..}
+        type Scopes ContentCategoriesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ContentCategoriesGet'{..}
           = go _ccgProFileId _ccgId (Just AltJSON)
               dFAReportingService
           where go

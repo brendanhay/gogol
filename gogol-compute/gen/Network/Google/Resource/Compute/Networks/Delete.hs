@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Networks.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified network resource.
+-- Deletes the specified network.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.networks.delete@.
 module Network.Google.Resource.Compute.Networks.Delete
@@ -52,10 +52,10 @@ type NetworksDeleteResource =
                  Capture "network" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified network resource.
+-- | Deletes the specified network.
 --
 -- /See:/ 'networksDelete' smart constructor.
-data NetworksDelete = NetworksDelete
+data NetworksDelete = NetworksDelete'
     { _ndProject :: !Text
     , _ndNetwork :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ networksDelete
     -> Text -- ^ 'ndNetwork'
     -> NetworksDelete
 networksDelete pNdProject_ pNdNetwork_ =
-    NetworksDelete
+    NetworksDelete'
     { _ndProject = pNdProject_
     , _ndNetwork = pNdNetwork_
     }
@@ -82,14 +82,17 @@ ndProject :: Lens' NetworksDelete Text
 ndProject
   = lens _ndProject (\ s a -> s{_ndProject = a})
 
--- | Name of the network resource to delete.
+-- | Name of the network to delete.
 ndNetwork :: Lens' NetworksDelete Text
 ndNetwork
   = lens _ndNetwork (\ s a -> s{_ndNetwork = a})
 
 instance GoogleRequest NetworksDelete where
         type Rs NetworksDelete = Operation
-        requestClient NetworksDelete{..}
+        type Scopes NetworksDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient NetworksDelete'{..}
           = go _ndProject _ndNetwork (Just AltJSON)
               computeService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.SSLCertificates.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type SSLCertificatesDeleteResource =
 -- | Deletes the specified SslCertificate resource.
 --
 -- /See:/ 'sslCertificatesDelete' smart constructor.
-data SSLCertificatesDelete = SSLCertificatesDelete
+data SSLCertificatesDelete = SSLCertificatesDelete'
     { _scdProject        :: !Text
     , _scdSSLCertificate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,12 +72,12 @@ sslCertificatesDelete
     -> Text -- ^ 'scdSSLCertificate'
     -> SSLCertificatesDelete
 sslCertificatesDelete pScdProject_ pScdSSLCertificate_ =
-    SSLCertificatesDelete
+    SSLCertificatesDelete'
     { _scdProject = pScdProject_
     , _scdSSLCertificate = pScdSSLCertificate_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 scdProject :: Lens' SSLCertificatesDelete Text
 scdProject
   = lens _scdProject (\ s a -> s{_scdProject = a})
@@ -90,7 +90,10 @@ scdSSLCertificate
 
 instance GoogleRequest SSLCertificatesDelete where
         type Rs SSLCertificatesDelete = Operation
-        requestClient SSLCertificatesDelete{..}
+        type Scopes SSLCertificatesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient SSLCertificatesDelete'{..}
           = go _scdProject _scdSSLCertificate (Just AltJSON)
               computeService
           where go

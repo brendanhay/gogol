@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DeploymentManager.Deployments.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type DeploymentsInsertResource =
 -- deployment manifest.
 --
 -- /See:/ 'deploymentsInsert' smart constructor.
-data DeploymentsInsert = DeploymentsInsert
+data DeploymentsInsert = DeploymentsInsert'
     { _diProject :: !Text
     , _diPayload :: !Deployment
     , _diPreview :: !(Maybe Bool)
@@ -79,7 +79,7 @@ deploymentsInsert
     -> Deployment -- ^ 'diPayload'
     -> DeploymentsInsert
 deploymentsInsert pDiProject_ pDiPayload_ =
-    DeploymentsInsert
+    DeploymentsInsert'
     { _diProject = pDiProject_
     , _diPayload = pDiPayload_
     , _diPreview = Nothing
@@ -109,7 +109,10 @@ diPreview
 
 instance GoogleRequest DeploymentsInsert where
         type Rs DeploymentsInsert = Operation
-        requestClient DeploymentsInsert{..}
+        type Scopes DeploymentsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient DeploymentsInsert'{..}
           = go _diProject _diPreview (Just AltJSON) _diPayload
               deploymentManagerService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.SubAccounts.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsPatch' request conforms to.
 type SubAccountsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
@@ -57,7 +57,7 @@ type SubAccountsPatchResource =
 -- | Updates an existing subaccount. This method supports patch semantics.
 --
 -- /See:/ 'subAccountsPatch' smart constructor.
-data SubAccountsPatch = SubAccountsPatch
+data SubAccountsPatch = SubAccountsPatch'
     { _sapProFileId :: !(Textual Int64)
     , _sapPayload   :: !SubAccount
     , _sapId        :: !(Textual Int64)
@@ -78,7 +78,7 @@ subAccountsPatch
     -> Int64 -- ^ 'sapId'
     -> SubAccountsPatch
 subAccountsPatch pSapProFileId_ pSapPayload_ pSapId_ =
-    SubAccountsPatch
+    SubAccountsPatch'
     { _sapProFileId = _Coerce # pSapProFileId_
     , _sapPayload = pSapPayload_
     , _sapId = _Coerce # pSapId_
@@ -102,7 +102,9 @@ sapId
 
 instance GoogleRequest SubAccountsPatch where
         type Rs SubAccountsPatch = SubAccount
-        requestClient SubAccountsPatch{..}
+        type Scopes SubAccountsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SubAccountsPatch'{..}
           = go _sapProFileId (Just _sapId) (Just AltJSON)
               _sapPayload
               dFAReportingService

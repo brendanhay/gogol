@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Circles.RemovePeople
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type CirclesRemovePeopleResource =
 -- | Remove a person from a circle.
 --
 -- /See:/ 'circlesRemovePeople' smart constructor.
-data CirclesRemovePeople = CirclesRemovePeople
+data CirclesRemovePeople = CirclesRemovePeople'
     { _crpEmail    :: !(Maybe [Text])
     , _crpUserId   :: !(Maybe [Text])
     , _crpCircleId :: !Text
@@ -75,7 +75,7 @@ circlesRemovePeople
     :: Text -- ^ 'crpCircleId'
     -> CirclesRemovePeople
 circlesRemovePeople pCrpCircleId_ =
-    CirclesRemovePeople
+    CirclesRemovePeople'
     { _crpEmail = Nothing
     , _crpUserId = Nothing
     , _crpCircleId = pCrpCircleId_
@@ -102,7 +102,10 @@ crpCircleId
 
 instance GoogleRequest CirclesRemovePeople where
         type Rs CirclesRemovePeople = ()
-        requestClient CirclesRemovePeople{..}
+        type Scopes CirclesRemovePeople =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient CirclesRemovePeople'{..}
           = go _crpCircleId (_crpEmail ^. _Default)
               (_crpUserId ^. _Default)
               (Just AltJSON)

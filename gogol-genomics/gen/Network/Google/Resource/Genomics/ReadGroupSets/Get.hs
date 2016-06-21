@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.ReadGroupSets.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a read group set by ID.
+-- Gets a read group set by ID. For the definitions of read group sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.readgroupsets.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.get@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Get
     (
     -- * REST Resource
@@ -61,10 +63,12 @@ type ReadGroupSetsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ReadGroupSet
 
--- | Gets a read group set by ID.
+-- | Gets a read group set by ID. For the definitions of read group sets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'readGroupSetsGet' smart constructor.
-data ReadGroupSetsGet = ReadGroupSetsGet
+data ReadGroupSetsGet = ReadGroupSetsGet'
     { _rgsgXgafv          :: !(Maybe Text)
     , _rgsgReadGroupSetId :: !Text
     , _rgsgUploadProtocol :: !(Maybe Text)
@@ -98,7 +102,7 @@ readGroupSetsGet
     :: Text -- ^ 'rgsgReadGroupSetId'
     -> ReadGroupSetsGet
 readGroupSetsGet pRgsgReadGroupSetId_ =
-    ReadGroupSetsGet
+    ReadGroupSetsGet'
     { _rgsgXgafv = Nothing
     , _rgsgReadGroupSetId = pRgsgReadGroupSetId_
     , _rgsgUploadProtocol = Nothing
@@ -155,7 +159,11 @@ rgsgCallback
 
 instance GoogleRequest ReadGroupSetsGet where
         type Rs ReadGroupSetsGet = ReadGroupSet
-        requestClient ReadGroupSetsGet{..}
+        type Scopes ReadGroupSetsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient ReadGroupSetsGet'{..}
           = go _rgsgReadGroupSetId _rgsgXgafv
               _rgsgUploadProtocol
               (Just _rgsgPp)

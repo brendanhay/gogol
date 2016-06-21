@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Sizes.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SizesGet' request conforms to.
 type SizesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sizes" :>
@@ -54,7 +54,7 @@ type SizesGetResource =
 -- | Gets one size by ID.
 --
 -- /See:/ 'sizesGet' smart constructor.
-data SizesGet = SizesGet
+data SizesGet = SizesGet'
     { _sgProFileId :: !(Textual Int64)
     , _sgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sizesGet
     -> Int64 -- ^ 'sgId'
     -> SizesGet
 sizesGet pSgProFileId_ pSgId_ =
-    SizesGet
+    SizesGet'
     { _sgProFileId = _Coerce # pSgProFileId_
     , _sgId = _Coerce # pSgId_
     }
@@ -88,7 +88,9 @@ sgId = lens _sgId (\ s a -> s{_sgId = a}) . _Coerce
 
 instance GoogleRequest SizesGet where
         type Rs SizesGet = Size
-        requestClient SizesGet{..}
+        type Scopes SizesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SizesGet'{..}
           = go _sgProFileId _sgId (Just AltJSON)
               dFAReportingService
           where go

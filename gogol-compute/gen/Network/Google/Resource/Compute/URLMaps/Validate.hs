@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.URLMaps.Validate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Run static validation for the UrlMap. In particular, the tests of the
+-- Runs static validation for the UrlMap. In particular, the tests of the
 -- provided UrlMap will be run. Calling this method does NOT create the
 -- UrlMap.
 --
@@ -58,12 +58,12 @@ type URLMapsValidateResource =
                        ReqBody '[JSON] URLMapsValidateRequest :>
                          Post '[JSON] URLMapsValidateResponse
 
--- | Run static validation for the UrlMap. In particular, the tests of the
+-- | Runs static validation for the UrlMap. In particular, the tests of the
 -- provided UrlMap will be run. Calling this method does NOT create the
 -- UrlMap.
 --
 -- /See:/ 'urlMapsValidate' smart constructor.
-data URLMapsValidate = URLMapsValidate
+data URLMapsValidate = URLMapsValidate'
     { _umvURLMap  :: !Text
     , _umvProject :: !Text
     , _umvPayload :: !URLMapsValidateRequest
@@ -84,7 +84,7 @@ urlMapsValidate
     -> URLMapsValidateRequest -- ^ 'umvPayload'
     -> URLMapsValidate
 urlMapsValidate pUmvURLMap_ pUmvProject_ pUmvPayload_ =
-    URLMapsValidate
+    URLMapsValidate'
     { _umvURLMap = pUmvURLMap_
     , _umvProject = pUmvProject_
     , _umvPayload = pUmvPayload_
@@ -95,7 +95,7 @@ umvURLMap :: Lens' URLMapsValidate Text
 umvURLMap
   = lens _umvURLMap (\ s a -> s{_umvURLMap = a})
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umvProject :: Lens' URLMapsValidate Text
 umvProject
   = lens _umvProject (\ s a -> s{_umvProject = a})
@@ -107,7 +107,10 @@ umvPayload
 
 instance GoogleRequest URLMapsValidate where
         type Rs URLMapsValidate = URLMapsValidateResponse
-        requestClient URLMapsValidate{..}
+        type Scopes URLMapsValidate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient URLMapsValidate'{..}
           = go _umvProject _umvURLMap (Just AltJSON)
               _umvPayload
               computeService

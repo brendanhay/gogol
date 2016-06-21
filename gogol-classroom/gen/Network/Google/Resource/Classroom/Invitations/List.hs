@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Invitations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -79,7 +79,7 @@ type InvitationsListResource =
 -- \`PERMISSION_DENIED\` for access errors.
 --
 -- /See:/ 'invitationsList' smart constructor.
-data InvitationsList = InvitationsList
+data InvitationsList = InvitationsList'
     { _ilXgafv          :: !(Maybe Text)
     , _ilUploadProtocol :: !(Maybe Text)
     , _ilPp             :: !Bool
@@ -121,7 +121,7 @@ data InvitationsList = InvitationsList
 invitationsList
     :: InvitationsList
 invitationsList =
-    InvitationsList
+    InvitationsList'
     { _ilXgafv = Nothing
     , _ilUploadProtocol = Nothing
     , _ilPp = True
@@ -200,7 +200,10 @@ ilCallback
 
 instance GoogleRequest InvitationsList where
         type Rs InvitationsList = ListInvitationsResponse
-        requestClient InvitationsList{..}
+        type Scopes InvitationsList =
+             '["https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
+        requestClient InvitationsList'{..}
           = go _ilXgafv _ilUploadProtocol (Just _ilPp)
               _ilCourseId
               _ilAccessToken

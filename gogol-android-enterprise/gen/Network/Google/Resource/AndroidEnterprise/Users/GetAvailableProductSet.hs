@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves the set of products a user is entitled to access.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.getAvailableProductSet@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.getAvailableProductSet@.
 module Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet
     (
     -- * REST Resource
@@ -55,7 +55,7 @@ type UsersGetAvailableProductSetResource =
 -- | Retrieves the set of products a user is entitled to access.
 --
 -- /See:/ 'usersGetAvailableProductSet' smart constructor.
-data UsersGetAvailableProductSet = UsersGetAvailableProductSet
+data UsersGetAvailableProductSet = UsersGetAvailableProductSet'
     { _ugapsEnterpriseId :: !Text
     , _ugapsUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersGetAvailableProductSet
     -> Text -- ^ 'ugapsUserId'
     -> UsersGetAvailableProductSet
 usersGetAvailableProductSet pUgapsEnterpriseId_ pUgapsUserId_ =
-    UsersGetAvailableProductSet
+    UsersGetAvailableProductSet'
     { _ugapsEnterpriseId = pUgapsEnterpriseId_
     , _ugapsUserId = pUgapsUserId_
     }
@@ -91,7 +91,9 @@ ugapsUserId
 instance GoogleRequest UsersGetAvailableProductSet
          where
         type Rs UsersGetAvailableProductSet = ProductSet
-        requestClient UsersGetAvailableProductSet{..}
+        type Scopes UsersGetAvailableProductSet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient UsersGetAvailableProductSet'{..}
           = go _ugapsEnterpriseId _ugapsUserId (Just AltJSON)
               androidEnterpriseService
           where go

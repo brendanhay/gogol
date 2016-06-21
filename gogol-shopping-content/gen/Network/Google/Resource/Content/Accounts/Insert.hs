@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accounts.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type AccountsInsertResource =
 -- | Creates a Merchant Center sub-account.
 --
 -- /See:/ 'accountsInsert' smart constructor.
-data AccountsInsert = AccountsInsert
+data AccountsInsert = AccountsInsert'
     { _aMerchantId :: !(Textual Word64)
     , _aPayload    :: !Account
     , _aDryRun     :: !(Maybe Bool)
@@ -75,7 +75,7 @@ accountsInsert
     -> Account -- ^ 'aPayload'
     -> AccountsInsert
 accountsInsert pAMerchantId_ pAPayload_ =
-    AccountsInsert
+    AccountsInsert'
     { _aMerchantId = _Coerce # pAMerchantId_
     , _aPayload = pAPayload_
     , _aDryRun = Nothing
@@ -97,7 +97,9 @@ aDryRun = lens _aDryRun (\ s a -> s{_aDryRun = a})
 
 instance GoogleRequest AccountsInsert where
         type Rs AccountsInsert = Account
-        requestClient AccountsInsert{..}
+        type Scopes AccountsInsert =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountsInsert'{..}
           = go _aMerchantId _aDryRun (Just AltJSON) _aPayload
               shoppingContentService
           where go

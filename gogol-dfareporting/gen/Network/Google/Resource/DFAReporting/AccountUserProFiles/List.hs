@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AccountUserProFiles.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesList' request conforms to.
 type AccountUserProFilesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
@@ -75,7 +75,7 @@ type AccountUserProFilesListResource =
 -- | Retrieves a list of account user profiles, possibly filtered.
 --
 -- /See:/ 'accountUserProFilesList' smart constructor.
-data AccountUserProFilesList = AccountUserProFilesList
+data AccountUserProFilesList = AccountUserProFilesList'
     { _aupflUserRoleId   :: !(Maybe (Textual Int64))
     , _aupflSearchString :: !(Maybe Text)
     , _aupflIds          :: !(Maybe [Textual Int64])
@@ -115,7 +115,7 @@ accountUserProFilesList
     :: Int64 -- ^ 'aupflProFileId'
     -> AccountUserProFilesList
 accountUserProFilesList pAupflProFileId_ =
-    AccountUserProFilesList
+    AccountUserProFilesList'
     { _aupflUserRoleId = Nothing
     , _aupflSearchString = Nothing
     , _aupflIds = Nothing
@@ -201,7 +201,9 @@ aupflMaxResults
 instance GoogleRequest AccountUserProFilesList where
         type Rs AccountUserProFilesList =
              AccountUserProFilesListResponse
-        requestClient AccountUserProFilesList{..}
+        type Scopes AccountUserProFilesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountUserProFilesList'{..}
           = go _aupflProFileId _aupflUserRoleId
               _aupflSearchString
               (_aupflIds ^. _Default)

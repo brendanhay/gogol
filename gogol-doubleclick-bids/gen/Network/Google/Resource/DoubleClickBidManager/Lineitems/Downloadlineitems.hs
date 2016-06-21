@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type LineitemsDownloadlineitemsResource =
 -- | Retrieves line items in CSV format.
 --
 -- /See:/ 'lineitemsDownloadlineitems' smart constructor.
-newtype LineitemsDownloadlineitems = LineitemsDownloadlineitems
+newtype LineitemsDownloadlineitems = LineitemsDownloadlineitems'
     { _ldPayload :: DownloadLineItemsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ lineitemsDownloadlineitems
     :: DownloadLineItemsRequest -- ^ 'ldPayload'
     -> LineitemsDownloadlineitems
 lineitemsDownloadlineitems pLdPayload_ =
-    LineitemsDownloadlineitems
+    LineitemsDownloadlineitems'
     { _ldPayload = pLdPayload_
     }
 
@@ -79,7 +79,8 @@ instance GoogleRequest LineitemsDownloadlineitems
          where
         type Rs LineitemsDownloadlineitems =
              DownloadLineItemsResponse
-        requestClient LineitemsDownloadlineitems{..}
+        type Scopes LineitemsDownloadlineitems = '[]
+        requestClient LineitemsDownloadlineitems'{..}
           = go (Just AltJSON) _ldPayload doubleClickBidsService
           where go
                   = buildClient

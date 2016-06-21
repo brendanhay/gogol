@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Quests.Reset
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type QuestsResetResource =
 -- whitelisted tester accounts for your application.
 --
 -- /See:/ 'questsReset' smart constructor.
-newtype QuestsReset = QuestsReset
+newtype QuestsReset = QuestsReset'
     { _qrQuestId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ questsReset
     :: Text -- ^ 'qrQuestId'
     -> QuestsReset
 questsReset pQrQuestId_ =
-    QuestsReset
+    QuestsReset'
     { _qrQuestId = pQrQuestId_
     }
 
@@ -80,7 +80,10 @@ qrQuestId
 
 instance GoogleRequest QuestsReset where
         type Rs QuestsReset = ()
-        requestClient QuestsReset{..}
+        type Scopes QuestsReset =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient QuestsReset'{..}
           = go _qrQuestId (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy QuestsResetResource)

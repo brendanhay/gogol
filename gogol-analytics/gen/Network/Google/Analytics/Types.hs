@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Analytics.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,9 +22,9 @@ module Network.Google.Analytics.Types
     -- * OAuth Scopes
     , analyticsManageUsersScope
     , analyticsProvisionScope
-    , analyticsManageUsersReadonlyScope
+    , analyticsManageUsersReadOnlyScope
     , analyticsScope
-    , analyticsReadonlyScope
+    , analyticsReadOnlyScope
     , analyticsEditScope
 
     -- * UnSampledReports
@@ -334,8 +335,10 @@ module Network.Google.Analytics.Types
     , pCreated
     , pSelfLink
     , pAccountId
+    , pBotFilteringEnabled
     , pName
     , pCurrency
+    , pStarred
     , pInternalWebPropertyId
     , pId
     , pUpdated
@@ -372,6 +375,7 @@ module Network.Google.Analytics.Types
     , wpsKind
     , wpsProFiles
     , wpsName
+    , wpsStarred
     , wpsInternalWebPropertyId
     , wpsId
     , wpsWebsiteURL
@@ -481,6 +485,7 @@ module Network.Google.Analytics.Types
     , accCreated
     , accSelfLink
     , accName
+    , accStarred
     , accId
     , accUpdated
     , accPermissions
@@ -649,6 +654,7 @@ module Network.Google.Analytics.Types
     , proFileSummary
     , pfsKind
     , pfsName
+    , pfsStarred
     , pfsId
     , pfsType
 
@@ -669,6 +675,7 @@ module Network.Google.Analytics.Types
     , wSelfLink
     , wAccountId
     , wName
+    , wStarred
     , wInternalWebPropertyId
     , wId
     , wUpdated
@@ -761,6 +768,7 @@ module Network.Google.Analytics.Types
     , assKind
     , assWebProperties
     , assName
+    , assStarred
     , assId
 
     -- * RealtimeDataQuery
@@ -1018,32 +1026,32 @@ import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
-analyticsService :: Service
+analyticsService :: ServiceConfig
 analyticsService
   = defaultService (ServiceId "analytics:v3")
       "www.googleapis.com"
 
 -- | Manage Google Analytics Account users by email address
-analyticsManageUsersScope :: OAuthScope
-analyticsManageUsersScope = "https://www.googleapis.com/auth/analytics.manage.users";
+analyticsManageUsersScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users"]
+analyticsManageUsersScope = Proxy;
 
 -- | Create a new Google Analytics account along with its default property
 -- and view
-analyticsProvisionScope :: OAuthScope
-analyticsProvisionScope = "https://www.googleapis.com/auth/analytics.provision";
+analyticsProvisionScope :: Proxy '["https://www.googleapis.com/auth/analytics.provision"]
+analyticsProvisionScope = Proxy;
 
 -- | View Google Analytics user permissions
-analyticsManageUsersReadonlyScope :: OAuthScope
-analyticsManageUsersReadonlyScope = "https://www.googleapis.com/auth/analytics.manage.users.readonly";
+analyticsManageUsersReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users.readonly"]
+analyticsManageUsersReadOnlyScope = Proxy;
 
 -- | View and manage your Google Analytics data
-analyticsScope :: OAuthScope
-analyticsScope = "https://www.googleapis.com/auth/analytics";
+analyticsScope :: Proxy '["https://www.googleapis.com/auth/analytics"]
+analyticsScope = Proxy;
 
 -- | View your Google Analytics data
-analyticsReadonlyScope :: OAuthScope
-analyticsReadonlyScope = "https://www.googleapis.com/auth/analytics.readonly";
+analyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
+analyticsReadOnlyScope = Proxy;
 
 -- | Edit Google Analytics management entities
-analyticsEditScope :: OAuthScope
-analyticsEditScope = "https://www.googleapis.com/auth/analytics.edit";
+analyticsEditScope :: Proxy '["https://www.googleapis.com/auth/analytics.edit"]
+analyticsEditScope = Proxy;

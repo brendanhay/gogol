@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyConfig.RequestAccess
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type MyConfigRequestAccessResource =
 -- | Request concurrent and download access restrictions.
 --
 -- /See:/ 'myConfigRequestAccess' smart constructor.
-data MyConfigRequestAccess = MyConfigRequestAccess
+data MyConfigRequestAccess = MyConfigRequestAccess'
     { _mcraCpksver      :: !Text
     , _mcraLocale       :: !(Maybe Text)
     , _mcraLicenseTypes :: !(Maybe MyConfigRequestAccessLicenseTypes)
@@ -96,7 +96,7 @@ myConfigRequestAccess
     -> Text -- ^ 'mcraNonce'
     -> MyConfigRequestAccess
 myConfigRequestAccess pMcraCpksver_ pMcraVolumeId_ pMcraSource_ pMcraNonce_ =
-    MyConfigRequestAccess
+    MyConfigRequestAccess'
     { _mcraCpksver = pMcraCpksver_
     , _mcraLocale = Nothing
     , _mcraLicenseTypes = Nothing
@@ -139,7 +139,9 @@ mcraNonce
 
 instance GoogleRequest MyConfigRequestAccess where
         type Rs MyConfigRequestAccess = RequestAccess
-        requestClient MyConfigRequestAccess{..}
+        type Scopes MyConfigRequestAccess =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyConfigRequestAccess'{..}
           = go (Just _mcraSource) (Just _mcraVolumeId)
               (Just _mcraNonce)
               (Just _mcraCpksver)

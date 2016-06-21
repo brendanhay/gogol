@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.DataSources.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type UsersDataSourcesUpdateResource =
 -- identified by their data stream ID.
 --
 -- /See:/ 'usersDataSourcesUpdate' smart constructor.
-data UsersDataSourcesUpdate = UsersDataSourcesUpdate
+data UsersDataSourcesUpdate = UsersDataSourcesUpdate'
     { _udsuDataSourceId :: !Text
     , _udsuPayload      :: !DataSource
     , _udsuUserId       :: !Text
@@ -85,7 +85,7 @@ usersDataSourcesUpdate
     -> Text -- ^ 'udsuUserId'
     -> UsersDataSourcesUpdate
 usersDataSourcesUpdate pUdsuDataSourceId_ pUdsuPayload_ pUdsuUserId_ =
-    UsersDataSourcesUpdate
+    UsersDataSourcesUpdate'
     { _udsuDataSourceId = pUdsuDataSourceId_
     , _udsuPayload = pUdsuPayload_
     , _udsuUserId = pUdsuUserId_
@@ -110,7 +110,11 @@ udsuUserId
 
 instance GoogleRequest UsersDataSourcesUpdate where
         type Rs UsersDataSourcesUpdate = DataSource
-        requestClient UsersDataSourcesUpdate{..}
+        type Scopes UsersDataSourcesUpdate =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
+        requestClient UsersDataSourcesUpdate'{..}
           = go _udsuUserId _udsuDataSourceId (Just AltJSON)
               _udsuPayload
               fitnessService

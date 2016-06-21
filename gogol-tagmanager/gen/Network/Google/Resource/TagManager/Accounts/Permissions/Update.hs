@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Permissions.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsPermissionsUpdateResource =
 -- | Updates a user\'s Account & Container Permissions.
 --
 -- /See:/ 'accountsPermissionsUpdate' smart constructor.
-data AccountsPermissionsUpdate = AccountsPermissionsUpdate
+data AccountsPermissionsUpdate = AccountsPermissionsUpdate'
     { _apuPayload      :: !UserAccess
     , _apuAccountId    :: !Text
     , _apuPermissionId :: !Text
@@ -77,7 +77,7 @@ accountsPermissionsUpdate
     -> Text -- ^ 'apuPermissionId'
     -> AccountsPermissionsUpdate
 accountsPermissionsUpdate pApuPayload_ pApuAccountId_ pApuPermissionId_ =
-    AccountsPermissionsUpdate
+    AccountsPermissionsUpdate'
     { _apuPayload = pApuPayload_
     , _apuAccountId = pApuAccountId_
     , _apuPermissionId = pApuPermissionId_
@@ -102,7 +102,9 @@ apuPermissionId
 instance GoogleRequest AccountsPermissionsUpdate
          where
         type Rs AccountsPermissionsUpdate = UserAccess
-        requestClient AccountsPermissionsUpdate{..}
+        type Scopes AccountsPermissionsUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.manage.users"]
+        requestClient AccountsPermissionsUpdate'{..}
           = go _apuAccountId _apuPermissionId (Just AltJSON)
               _apuPayload
               tagManagerService

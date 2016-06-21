@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.Run
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsRun' request conforms to.
 type ReportsRunResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -57,7 +57,7 @@ type ReportsRunResource =
 -- | Runs a report.
 --
 -- /See:/ 'reportsRun' smart constructor.
-data ReportsRun = ReportsRun
+data ReportsRun = ReportsRun'
     { _rrSynchronous :: !(Maybe Bool)
     , _rrReportId    :: !(Textual Int64)
     , _rrProFileId   :: !(Textual Int64)
@@ -77,7 +77,7 @@ reportsRun
     -> Int64 -- ^ 'rrProFileId'
     -> ReportsRun
 reportsRun pRrReportId_ pRrProFileId_ =
-    ReportsRun
+    ReportsRun'
     { _rrSynchronous = Nothing
     , _rrReportId = _Coerce # pRrReportId_
     , _rrProFileId = _Coerce # pRrProFileId_
@@ -103,7 +103,9 @@ rrProFileId
 
 instance GoogleRequest ReportsRun where
         type Rs ReportsRun = File
-        requestClient ReportsRun{..}
+        type Scopes ReportsRun =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient ReportsRun'{..}
           = go _rrProFileId _rrReportId _rrSynchronous
               (Just AltJSON)
               dFAReportingService

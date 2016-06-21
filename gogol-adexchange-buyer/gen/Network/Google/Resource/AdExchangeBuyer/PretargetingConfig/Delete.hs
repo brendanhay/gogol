@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type PretargetingConfigDeleteResource =
 -- | Deletes an existing pretargeting config.
 --
 -- /See:/ 'pretargetingConfigDelete' smart constructor.
-data PretargetingConfigDelete = PretargetingConfigDelete
+data PretargetingConfigDelete = PretargetingConfigDelete'
     { _pcdAccountId :: !(Textual Int64)
     , _pcdConfigId  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ pretargetingConfigDelete
     -> Int64 -- ^ 'pcdConfigId'
     -> PretargetingConfigDelete
 pretargetingConfigDelete pPcdAccountId_ pPcdConfigId_ =
-    PretargetingConfigDelete
+    PretargetingConfigDelete'
     { _pcdAccountId = _Coerce # pPcdAccountId_
     , _pcdConfigId = _Coerce # pPcdConfigId_
     }
@@ -89,7 +89,9 @@ pcdConfigId
 
 instance GoogleRequest PretargetingConfigDelete where
         type Rs PretargetingConfigDelete = ()
-        requestClient PretargetingConfigDelete{..}
+        type Scopes PretargetingConfigDelete =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient PretargetingConfigDelete'{..}
           = go _pcdAccountId _pcdConfigId (Just AltJSON)
               adExchangeBuyerService
           where go

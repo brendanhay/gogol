@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.LatencyTest.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'intValue' smart constructor.
-data IntValue = IntValue
+data IntValue = IntValue'
     { _ivValue :: !(Maybe (Textual Int64))
     , _ivLabel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data IntValue = IntValue
 intValue
     :: IntValue
 intValue =
-    IntValue
+    IntValue'
     { _ivValue = Nothing
     , _ivLabel = Nothing
     }
@@ -54,10 +54,10 @@ instance FromJSON IntValue where
         parseJSON
           = withObject "IntValue"
               (\ o ->
-                 IntValue <$> (o .:? "value") <*> (o .:? "label"))
+                 IntValue' <$> (o .:? "value") <*> (o .:? "label"))
 
 instance ToJSON IntValue where
-        toJSON IntValue{..}
+        toJSON IntValue'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _ivValue,
@@ -65,7 +65,7 @@ instance ToJSON IntValue where
 
 --
 -- /See:/ 'doubleValue' smart constructor.
-data DoubleValue = DoubleValue
+data DoubleValue = DoubleValue'
     { _dvValue :: !(Maybe (Textual Double))
     , _dvLabel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ data DoubleValue = DoubleValue
 doubleValue
     :: DoubleValue
 doubleValue =
-    DoubleValue
+    DoubleValue'
     { _dvValue = Nothing
     , _dvLabel = Nothing
     }
@@ -97,10 +97,10 @@ instance FromJSON DoubleValue where
         parseJSON
           = withObject "DoubleValue"
               (\ o ->
-                 DoubleValue <$> (o .:? "value") <*> (o .:? "label"))
+                 DoubleValue' <$> (o .:? "value") <*> (o .:? "label"))
 
 instance ToJSON DoubleValue where
-        toJSON DoubleValue{..}
+        toJSON DoubleValue'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _dvValue,
@@ -108,7 +108,7 @@ instance ToJSON DoubleValue where
 
 --
 -- /See:/ 'stringValue' smart constructor.
-data StringValue = StringValue
+data StringValue = StringValue'
     { _svValue :: !(Maybe Text)
     , _svLabel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -123,7 +123,7 @@ data StringValue = StringValue
 stringValue
     :: StringValue
 stringValue =
-    StringValue
+    StringValue'
     { _svValue = Nothing
     , _svLabel = Nothing
     }
@@ -138,10 +138,10 @@ instance FromJSON StringValue where
         parseJSON
           = withObject "StringValue"
               (\ o ->
-                 StringValue <$> (o .:? "value") <*> (o .:? "label"))
+                 StringValue' <$> (o .:? "value") <*> (o .:? "label"))
 
 instance ToJSON StringValue where
-        toJSON StringValue{..}
+        toJSON StringValue'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _svValue,
@@ -149,7 +149,7 @@ instance ToJSON StringValue where
 
 --
 -- /See:/ 'aggregatedStatsReply' smart constructor.
-newtype AggregatedStatsReply = AggregatedStatsReply
+newtype AggregatedStatsReply = AggregatedStatsReply'
     { _asrTestValue :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -161,7 +161,7 @@ newtype AggregatedStatsReply = AggregatedStatsReply
 aggregatedStatsReply
     :: AggregatedStatsReply
 aggregatedStatsReply =
-    AggregatedStatsReply
+    AggregatedStatsReply'
     { _asrTestValue = Nothing
     }
 
@@ -172,16 +172,17 @@ asrTestValue
 instance FromJSON AggregatedStatsReply where
         parseJSON
           = withObject "AggregatedStatsReply"
-              (\ o -> AggregatedStatsReply <$> (o .:? "testValue"))
+              (\ o ->
+                 AggregatedStatsReply' <$> (o .:? "testValue"))
 
 instance ToJSON AggregatedStatsReply where
-        toJSON AggregatedStatsReply{..}
+        toJSON AggregatedStatsReply'{..}
           = object
               (catMaybes [("testValue" .=) <$> _asrTestValue])
 
 --
 -- /See:/ 'stats' smart constructor.
-data Stats = Stats
+data Stats = Stats'
     { _sTime         :: !(Maybe (Textual Double))
     , _sDoubleValues :: !(Maybe [DoubleValue])
     , _sStringValues :: !(Maybe [StringValue])
@@ -202,7 +203,7 @@ data Stats = Stats
 stats
     :: Stats
 stats =
-    Stats
+    Stats'
     { _sTime = Nothing
     , _sDoubleValues = Nothing
     , _sStringValues = Nothing
@@ -238,13 +239,13 @@ instance FromJSON Stats where
         parseJSON
           = withObject "Stats"
               (\ o ->
-                 Stats <$>
+                 Stats' <$>
                    (o .:? "time") <*> (o .:? "doubleValues" .!= mempty)
                      <*> (o .:? "stringValues" .!= mempty)
                      <*> (o .:? "intValues" .!= mempty))
 
 instance ToJSON Stats where
-        toJSON Stats{..}
+        toJSON Stats'{..}
           = object
               (catMaybes
                  [("time" .=) <$> _sTime,
@@ -254,7 +255,7 @@ instance ToJSON Stats where
 
 --
 -- /See:/ 'aggregatedStats' smart constructor.
-newtype AggregatedStats = AggregatedStats
+newtype AggregatedStats = AggregatedStats'
     { _asStats :: Maybe [Stats]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -266,7 +267,7 @@ newtype AggregatedStats = AggregatedStats
 aggregatedStats
     :: AggregatedStats
 aggregatedStats =
-    AggregatedStats
+    AggregatedStats'
     { _asStats = Nothing
     }
 
@@ -279,15 +280,15 @@ instance FromJSON AggregatedStats where
         parseJSON
           = withObject "AggregatedStats"
               (\ o ->
-                 AggregatedStats <$> (o .:? "stats" .!= mempty))
+                 AggregatedStats' <$> (o .:? "stats" .!= mempty))
 
 instance ToJSON AggregatedStats where
-        toJSON AggregatedStats{..}
+        toJSON AggregatedStats'{..}
           = object (catMaybes [("stats" .=) <$> _asStats])
 
 --
 -- /See:/ 'statsReply' smart constructor.
-newtype StatsReply = StatsReply
+newtype StatsReply = StatsReply'
     { _srTestValue :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -299,7 +300,7 @@ newtype StatsReply = StatsReply
 statsReply
     :: StatsReply
 statsReply =
-    StatsReply
+    StatsReply'
     { _srTestValue = Nothing
     }
 
@@ -310,9 +311,9 @@ srTestValue
 instance FromJSON StatsReply where
         parseJSON
           = withObject "StatsReply"
-              (\ o -> StatsReply <$> (o .:? "testValue"))
+              (\ o -> StatsReply' <$> (o .:? "testValue"))
 
 instance ToJSON StatsReply where
-        toJSON StatsReply{..}
+        toJSON StatsReply'{..}
           = object
               (catMaybes [("testValue" .=) <$> _srTestValue])

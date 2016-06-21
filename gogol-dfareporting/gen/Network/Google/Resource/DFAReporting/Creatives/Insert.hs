@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Creatives.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativesInsert' request conforms to.
 type CreativesInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
@@ -54,7 +54,7 @@ type CreativesInsertResource =
 -- | Inserts a new creative.
 --
 -- /See:/ 'creativesInsert' smart constructor.
-data CreativesInsert = CreativesInsert
+data CreativesInsert = CreativesInsert'
     { _ciProFileId :: !(Textual Int64)
     , _ciPayload   :: !Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativesInsert
     -> Creative -- ^ 'ciPayload'
     -> CreativesInsert
 creativesInsert pCiProFileId_ pCiPayload_ =
-    CreativesInsert
+    CreativesInsert'
     { _ciProFileId = _Coerce # pCiProFileId_
     , _ciPayload = pCiPayload_
     }
@@ -89,7 +89,9 @@ ciPayload
 
 instance GoogleRequest CreativesInsert where
         type Rs CreativesInsert = Creative
-        requestClient CreativesInsert{..}
+        type Scopes CreativesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativesInsert'{..}
           = go _ciProFileId (Just AltJSON) _ciPayload
               dFAReportingService
           where go

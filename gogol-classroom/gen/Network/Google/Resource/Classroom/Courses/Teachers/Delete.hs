@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Teachers.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -77,7 +77,7 @@ type CoursesTeachersDeleteResource =
 -- primary teacher of this course.
 --
 -- /See:/ 'coursesTeachersDelete' smart constructor.
-data CoursesTeachersDelete = CoursesTeachersDelete
+data CoursesTeachersDelete = CoursesTeachersDelete'
     { _ctdXgafv          :: !(Maybe Text)
     , _ctdUploadProtocol :: !(Maybe Text)
     , _ctdPp             :: !Bool
@@ -115,7 +115,7 @@ coursesTeachersDelete
     -> Text -- ^ 'ctdUserId'
     -> CoursesTeachersDelete
 coursesTeachersDelete pCtdCourseId_ pCtdUserId_ =
-    CoursesTeachersDelete
+    CoursesTeachersDelete'
     { _ctdXgafv = Nothing
     , _ctdUploadProtocol = Nothing
     , _ctdPp = True
@@ -179,7 +179,9 @@ ctdCallback
 
 instance GoogleRequest CoursesTeachersDelete where
         type Rs CoursesTeachersDelete = Empty
-        requestClient CoursesTeachersDelete{..}
+        type Scopes CoursesTeachersDelete =
+             '["https://www.googleapis.com/auth/classroom.rosters"]
+        requestClient CoursesTeachersDelete'{..}
           = go _ctdCourseId _ctdUserId _ctdXgafv
               _ctdUploadProtocol
               (Just _ctdPp)

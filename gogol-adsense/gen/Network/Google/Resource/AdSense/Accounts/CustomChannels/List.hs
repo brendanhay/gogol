@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Accounts.CustomChannels.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type AccountsCustomChannelsListResource =
 -- account.
 --
 -- /See:/ 'accountsCustomChannelsList' smart constructor.
-data AccountsCustomChannelsList = AccountsCustomChannelsList
+data AccountsCustomChannelsList = AccountsCustomChannelsList'
     { _acclAdClientId :: !Text
     , _acclAccountId  :: !Text
     , _acclPageToken  :: !(Maybe Text)
@@ -85,7 +85,7 @@ accountsCustomChannelsList
     -> Text -- ^ 'acclAccountId'
     -> AccountsCustomChannelsList
 accountsCustomChannelsList pAcclAdClientId_ pAcclAccountId_ =
-    AccountsCustomChannelsList
+    AccountsCustomChannelsList'
     { _acclAdClientId = pAcclAdClientId_
     , _acclAccountId = pAcclAccountId_
     , _acclPageToken = Nothing
@@ -123,7 +123,10 @@ acclMaxResults
 instance GoogleRequest AccountsCustomChannelsList
          where
         type Rs AccountsCustomChannelsList = CustomChannels
-        requestClient AccountsCustomChannelsList{..}
+        type Scopes AccountsCustomChannelsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AccountsCustomChannelsList'{..}
           = go _acclAccountId _acclAdClientId _acclPageToken
               _acclMaxResults
               (Just AltJSON)

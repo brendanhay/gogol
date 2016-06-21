@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.ResetSSLConfig
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type InstancesResetSSLConfigResource =
 -- will need to call this once to set a server certificate.
 --
 -- /See:/ 'instancesResetSSLConfig' smart constructor.
-data InstancesResetSSLConfig = InstancesResetSSLConfig
+data InstancesResetSSLConfig = InstancesResetSSLConfig'
     { _irscProject  :: !Text
     , _irscInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -78,7 +78,7 @@ instancesResetSSLConfig
     -> Text -- ^ 'irscInstance'
     -> InstancesResetSSLConfig
 instancesResetSSLConfig pIrscProject_ pIrscInstance_ =
-    InstancesResetSSLConfig
+    InstancesResetSSLConfig'
     { _irscProject = pIrscProject_
     , _irscInstance = pIrscInstance_
     }
@@ -95,7 +95,10 @@ irscInstance
 
 instance GoogleRequest InstancesResetSSLConfig where
         type Rs InstancesResetSSLConfig = Operation
-        requestClient InstancesResetSSLConfig{..}
+        type Scopes InstancesResetSSLConfig =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient InstancesResetSSLConfig'{..}
           = go _irscProject _irscInstance (Just AltJSON)
               sQLAdminService
           where go

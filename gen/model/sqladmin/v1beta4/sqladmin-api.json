@@ -1,14 +1,14 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"ye6orv2F-1npMW3u9suM3a7C5Bo/dmM5e1LsyAJYfrXQoy2C4h3tVuA\"",
+ "etag": "\"jQLIOHBVnDZie4rQHGH1WJF-INE/o_-sS2PEVGnMkQqyJ497hboiLWw\"",
  "discoveryVersion": "v1",
  "id": "sqladmin:v1beta4",
  "name": "sqladmin",
  "canonicalName": "SQL Admin",
  "version": "v1beta4",
- "revision": "20151013",
+ "revision": "20160509",
  "title": "Cloud SQL Administration API",
- "description": "API for Cloud SQL database instance management.",
+ "description": "Creates and configures Cloud SQL instances, which provide fully-managed MySQL databases.",
  "ownerDomain": "google.com",
  "ownerName": "Google",
  "icons": {
@@ -321,18 +321,36 @@
    "type": "object",
    "description": "A Cloud SQL instance resource.",
    "properties": {
+    "backendType": {
+     "type": "string",
+     "description": "FIRST_GEN: Basic Cloud SQL instance that runs in a Google-managed container.\nSECOND_GEN: A newer Cloud SQL backend that runs in a Compute Engine VM.\nEXTERNAL: A MySQL server that is not managed by Google."
+    },
     "currentDiskSize": {
      "type": "string",
-     "description": "The current disk usage of the instance in bytes.",
+     "description": "The current disk usage of the instance in bytes. This property has been deprecated. Users should use the \"cloudsql.googleapis.com/database/disk/bytes_used\" metric in Cloud Monitoring API instead. Please see https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ for details.",
      "format": "int64"
     },
     "databaseVersion": {
      "type": "string",
-     "description": "The database engine type and version. Can be MYSQL_5_5 or MYSQL_5_6. Defaults to MYSQL_5_5. The databaseVersion can not be changed after instance creation."
+     "description": "The database engine type and version. The databaseVersion can not be changed after instance creation. Can be MYSQL_5_5, MYSQL_5_6 or MYSQL_5_7. Defaults to MYSQL_5_6. MYSQL_5_7 is applicable only to Second Generation instances."
     },
     "etag": {
      "type": "string",
      "description": "HTTP 1.1 Entity tag for the resource."
+    },
+    "failoverReplica": {
+     "type": "object",
+     "description": "The name and status of the failover replica. This property is applicable only to Second Generation instances.",
+     "properties": {
+      "available": {
+       "type": "boolean",
+       "description": "The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The master can only failover to the falover replica when the status is true."
+      },
+      "name": {
+       "type": "string",
+       "description": "The name of the failover replica."
+      }
+     }
     },
     "instanceType": {
      "type": "string",
@@ -347,7 +365,7 @@
     },
     "ipv6Address": {
      "type": "string",
-     "description": "The IPv6 address assigned to the instance."
+     "description": "The IPv6 address assigned to the instance. This property is applicable only to First Generation instances."
     },
     "kind": {
      "type": "string",
@@ -382,7 +400,7 @@
     },
     "region": {
      "type": "string",
-     "description": "The geographical region. Can be us-central, asia-east1 or europe-west1. Defaults to us-central. The region can not be changed after instance creation."
+     "description": "The geographical region. Can be us-central (FIRST_GEN instances only), us-central1 (SECOND_GEN instances only), asia-east1 or europe-west1. Defaults to us-central or us-central1 depending on the instance type (First Generation or Second Generation). The region can not be changed after instance creation."
     },
     "replicaConfiguration": {
      "$ref": "ReplicaConfiguration",
@@ -405,7 +423,7 @@
     },
     "serviceAccountEmailAddress": {
      "type": "string",
-     "description": "The service account email address assigned to the instance."
+     "description": "The service account email address assigned to the instance. This property is applicable only to Second Generation instances."
     },
     "settings": {
      "$ref": "Settings",
@@ -420,6 +438,13 @@
     "state": {
      "type": "string",
      "description": "The current serving state of the Cloud SQL instance. This can be one of the following.\nRUNNABLE: The instance is running, or is ready to run when accessed.\nSUSPENDED: The instance is not available, for example due to problems with billing.\nPENDING_CREATE: The instance is being created.\nMAINTENANCE: The instance is down for maintenance.\nFAILED: The instance creation failed.\nUNKNOWN_STATE: The state of the instance is unknown."
+    },
+    "suspensionReason": {
+     "type": "array",
+     "description": "If the instance state is SUSPENDED, the reason for the suspension.",
+     "items": {
+      "type": "string"
+     }
     }
    }
   },
@@ -527,7 +552,7 @@
     },
     "appliesTo": {
      "type": "array",
-     "description": "The database version this flag applies to. Can be MYSQL_5_5, MYSQL_5_6, or both.",
+     "description": "The database version this flag applies to. Can be MYSQL_5_5, MYSQL_5_6, or MYSQL_5_7. MYSQL_5_7 is applicable only to Second Generation instances.",
      "items": {
       "type": "string"
      }
@@ -550,6 +575,10 @@
     "name": {
      "type": "string",
      "description": "This is the name of the flag. Flag names always use underscores, not hyphens, e.g. max_allowed_packet"
+    },
+    "requiresRestart": {
+     "type": "boolean",
+     "description": "Indicates whether changing this flag will trigger a database restart. Only applicable to Second Generation instances."
     },
     "type": {
      "type": "string",
@@ -750,6 +779,31 @@
     "zone": {
      "type": "string",
      "description": "The preferred Compute Engine zone (e.g. us-centra1-a, us-central1-b, etc.)."
+    }
+   }
+  },
+  "MaintenanceWindow": {
+   "id": "MaintenanceWindow",
+   "type": "object",
+   "description": "Maintenance window. This specifies when a v2 Cloud SQL instance should preferably be restarted for system maintenance puruposes.",
+   "properties": {
+    "day": {
+     "type": "integer",
+     "description": "day of week (1-7), starting on Monday.",
+     "format": "int32"
+    },
+    "hour": {
+     "type": "integer",
+     "description": "hour of day - 0 to 23.",
+     "format": "int32"
+    },
+    "kind": {
+     "type": "string",
+     "description": "This is always sql#maintenanceWindow.",
+     "default": "sql#maintenanceWindow"
+    },
+    "updateTrack": {
+     "type": "string"
     }
    }
   },
@@ -1009,11 +1063,11 @@
    "properties": {
     "activationPolicy": {
      "type": "string",
-     "description": "The activation policy for this instance. This specifies when the instance should be activated and is applicable only when the instance state is RUNNABLE. This can be one of the following.\nALWAYS: The instance should always be active.\nNEVER: The instance should never be activated.\nON_DEMAND: The instance is activated upon receiving requests."
+     "description": "The activation policy for this instance. This specifies when the instance should be activated and is applicable only when the instance state is RUNNABLE. This can be one of the following.\nALWAYS: The instance should always be active.\nNEVER: The instance should never be activated.\nON_DEMAND: The instance is activated upon receiving requests; only applicable to First Generation instances."
     },
     "authorizedGaeApplications": {
      "type": "array",
-     "description": "The App Engine app IDs that can access this instance.",
+     "description": "The App Engine app IDs that can access this instance. This property is only applicable to First Generation instances.",
      "items": {
       "type": "string"
      }
@@ -1024,12 +1078,16 @@
     },
     "crashSafeReplicationEnabled": {
      "type": "boolean",
-     "description": "Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled."
+     "description": "Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled. This property is only applicable to First Generation instances."
     },
     "dataDiskSizeGb": {
      "type": "string",
-     "description": "The size of data disk for the performance instance, specified in GB. Setting this value for non-performance instances will result in an error.",
+     "description": "The size of data disk, in GB. The data disk size minimum is 10GB. Applies only to Second Generation instances.",
      "format": "int64"
+    },
+    "dataDiskType": {
+     "type": "string",
+     "description": "The type of data disk. Only supported for Second Generation instances. The default type is PD_SSD. Applies only to Second Generation instances."
     },
     "databaseFlags": {
      "type": "array",
@@ -1044,7 +1102,7 @@
     },
     "ipConfiguration": {
      "$ref": "IpConfiguration",
-     "description": "The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance."
+     "description": "The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance. The IPv4 address cannot be disabled for Second Generation instances."
     },
     "kind": {
      "type": "string",
@@ -1053,15 +1111,19 @@
     },
     "locationPreference": {
      "$ref": "LocationPreference",
-     "description": "The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance."
+     "description": "The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance. App Engine co-location is only applicable to First Generation instances."
+    },
+    "maintenanceWindow": {
+     "$ref": "MaintenanceWindow",
+     "description": "The maintenance window for this instance. This specifies when the instance may be restarted for maintenance purposes. Applies only to Second Generation instances."
     },
     "pricingPlan": {
      "type": "string",
-     "description": "The pricing plan for this instance. This can be either PER_USE or PACKAGE."
+     "description": "The pricing plan for this instance. This can be either PER_USE or PACKAGE. Only PER_USE is supported for Second Generation instances."
     },
     "replicationType": {
      "type": "string",
-     "description": "The type of replication this instance uses. This can be either ASYNCHRONOUS or SYNCHRONOUS."
+     "description": "The type of replication this instance uses. This can be either ASYNCHRONOUS or SYNCHRONOUS. This property is only applicable to First Generation instances."
     },
     "settingsVersion": {
      "type": "string",
@@ -1072,6 +1134,10 @@
        "sql.instances.update"
       ]
      }
+    },
+    "storageAutoResize": {
+     "type": "boolean",
+     "description": "Configuration to increase storage size automatically. The default value is false. Applies only to Second Generation instances."
     },
     "tier": {
      "type": "string",
@@ -1175,12 +1241,16 @@
    "properties": {
     "clientCert": {
      "$ref": "SslCertDetail",
-     "description": "The new client certificate and private key. The new certificate will not work until the instance is restarted."
+     "description": "The new client certificate and private key. The new certificate will not work until the instance is restarted for First Generation instances."
     },
     "kind": {
      "type": "string",
      "description": "This is always sql#sslCertsInsert.",
      "default": "sql#sslCertsInsert"
+    },
+    "operation": {
+     "$ref": "Operation",
+     "description": "The operation to track the ssl certs insert request."
     },
     "serverCaCert": {
      "$ref": "SslCert",
@@ -1270,7 +1340,7 @@
     },
     "host": {
      "type": "string",
-     "description": "The host name from which the user can connect. For insert operations, host defaults to an empty string. For update operations, host is specified as part of the request URL. The host name is not mutable with this API."
+     "description": "The host name from which the user can connect. For insert operations, host defaults to an empty string. For update operations, host is specified as part of the request URL. The host name cannot be updated after insertion."
     },
     "instance": {
      "type": "string",
@@ -1450,7 +1520,7 @@
      "id": "sql.databases.delete",
      "path": "projects/{project}/instances/{instance}/databases/{database}",
      "httpMethod": "DELETE",
-     "description": "Deletes a resource containing information about a database inside a Cloud SQL instance.",
+     "description": "Deletes a database from a Cloud SQL instance.",
      "parameters": {
       "database": {
        "type": "string",
@@ -1694,7 +1764,7 @@
      "id": "sql.instances.clone",
      "path": "projects/{project}/instances/{instance}/clone",
      "httpMethod": "POST",
-     "description": "Creates a Cloud SQL instance as a clone of the source instance.",
+     "description": "Creates a Cloud SQL instance as a clone of the source instance. The API is not ready for Second Generation instances yet.",
      "parameters": {
       "instance": {
        "type": "string",

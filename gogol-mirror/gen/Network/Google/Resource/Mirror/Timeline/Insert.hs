@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,14 +54,14 @@ type TimelineInsertResource =
            "v1" :>
              "timeline" :>
                QueryParam "alt" AltJSON :>
-                 QueryParam "uploadType" AltMedia :>
-                   MultipartRelated '[JSON] TimelineItem RequestBody :>
+                 QueryParam "uploadType" Multipart :>
+                   MultipartRelated '[JSON] TimelineItem :>
                      Post '[JSON] TimelineItem
 
 -- | Inserts a new item into the timeline.
 --
 -- /See:/ 'timelineInsert' smart constructor.
-newtype TimelineInsert = TimelineInsert
+newtype TimelineInsert = TimelineInsert'
     { _tiPayload :: TimelineItem
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -74,7 +74,7 @@ timelineInsert
     :: TimelineItem -- ^ 'tiPayload'
     -> TimelineInsert
 timelineInsert pTiPayload_ =
-    TimelineInsert
+    TimelineInsert'
     { _tiPayload = pTiPayload_
     }
 
@@ -85,7 +85,10 @@ tiPayload
 
 instance GoogleRequest TimelineInsert where
         type Rs TimelineInsert = TimelineItem
-        requestClient TimelineInsert{..}
+        type Scopes TimelineInsert =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient TimelineInsert'{..}
           = go (Just AltJSON) _tiPayload mirrorService
           where go :<|> _
                   = buildClient (Proxy :: Proxy TimelineInsertResource)
@@ -94,8 +97,10 @@ instance GoogleRequest TimelineInsert where
 instance GoogleRequest (MediaUpload TimelineInsert)
          where
         type Rs (MediaUpload TimelineInsert) = TimelineItem
-        requestClient (MediaUpload TimelineInsert{..} body)
-          = go (Just AltJSON) (Just AltMedia) _tiPayload body
+        type Scopes (MediaUpload TimelineInsert) =
+             Scopes TimelineInsert
+        requestClient (MediaUpload TimelineInsert'{..} body)
+          = go (Just AltJSON) (Just Multipart) _tiPayload body
               mirrorService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy TimelineInsertResource)

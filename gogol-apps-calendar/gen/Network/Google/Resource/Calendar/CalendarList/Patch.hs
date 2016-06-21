@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.CalendarList.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type CalendarListPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'calendarListPatch' smart constructor.
-data CalendarListPatch = CalendarListPatch
+data CalendarListPatch = CalendarListPatch'
     { _clpCalendarId     :: !Text
     , _clpPayload        :: !CalendarListEntry
     , _clpColorRgbFormat :: !(Maybe Bool)
@@ -80,7 +80,7 @@ calendarListPatch
     -> CalendarListEntry -- ^ 'clpPayload'
     -> CalendarListPatch
 calendarListPatch pClpCalendarId_ pClpPayload_ =
-    CalendarListPatch
+    CalendarListPatch'
     { _clpCalendarId = pClpCalendarId_
     , _clpPayload = pClpPayload_
     , _clpColorRgbFormat = Nothing
@@ -110,7 +110,9 @@ clpColorRgbFormat
 
 instance GoogleRequest CalendarListPatch where
         type Rs CalendarListPatch = CalendarListEntry
-        requestClient CalendarListPatch{..}
+        type Scopes CalendarListPatch =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient CalendarListPatch'{..}
           = go _clpCalendarId _clpColorRgbFormat (Just AltJSON)
               _clpPayload
               appsCalendarService

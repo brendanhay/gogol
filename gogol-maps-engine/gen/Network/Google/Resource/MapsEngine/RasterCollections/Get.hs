@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.RasterCollections.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type RasterCollectionsGetResource =
 -- | Return metadata for a particular raster collection.
 --
 -- /See:/ 'rasterCollectionsGet' smart constructor.
-newtype RasterCollectionsGet = RasterCollectionsGet
+newtype RasterCollectionsGet = RasterCollectionsGet'
     { _rcgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ rasterCollectionsGet
     :: Text -- ^ 'rcgId'
     -> RasterCollectionsGet
 rasterCollectionsGet pRcgId_ =
-    RasterCollectionsGet
+    RasterCollectionsGet'
     { _rcgId = pRcgId_
     }
 
@@ -75,7 +75,10 @@ rcgId = lens _rcgId (\ s a -> s{_rcgId = a})
 
 instance GoogleRequest RasterCollectionsGet where
         type Rs RasterCollectionsGet = RasterCollection
-        requestClient RasterCollectionsGet{..}
+        type Scopes RasterCollectionsGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient RasterCollectionsGet'{..}
           = go _rcgId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

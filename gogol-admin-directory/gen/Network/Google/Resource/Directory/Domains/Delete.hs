@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Domains.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type DomainsDeleteResource =
 -- | Deletes a domain of the customer.
 --
 -- /See:/ 'domainsDelete' smart constructor.
-data DomainsDelete = DomainsDelete
+data DomainsDelete = DomainsDelete'
     { _ddCustomer   :: !Text
     , _ddDomainName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ domainsDelete
     -> Text -- ^ 'ddDomainName'
     -> DomainsDelete
 domainsDelete pDdCustomer_ pDdDomainName_ =
-    DomainsDelete
+    DomainsDelete'
     { _ddCustomer = pDdCustomer_
     , _ddDomainName = pDdDomainName_
     }
@@ -89,7 +89,9 @@ ddDomainName
 
 instance GoogleRequest DomainsDelete where
         type Rs DomainsDelete = ()
-        requestClient DomainsDelete{..}
+        type Scopes DomainsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.domain"]
+        requestClient DomainsDelete'{..}
           = go _ddCustomer _ddDomainName (Just AltJSON)
               directoryService
           where go

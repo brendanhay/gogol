@@ -14,14 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Databases.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a resource containing information about a database inside a
--- Cloud SQL instance.
+-- Deletes a database from a Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.databases.delete@.
 module Network.Google.Resource.SQL.Databases.Delete
@@ -55,11 +54,10 @@ type DatabasesDeleteResource =
                    Capture "database" Text :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes a resource containing information about a database inside a
--- Cloud SQL instance.
+-- | Deletes a database from a Cloud SQL instance.
 --
 -- /See:/ 'databasesDelete' smart constructor.
-data DatabasesDelete = DatabasesDelete
+data DatabasesDelete = DatabasesDelete'
     { _ddProject  :: !Text
     , _ddDatabase :: !Text
     , _ddInstance :: !Text
@@ -80,7 +78,7 @@ databasesDelete
     -> Text -- ^ 'ddInstance'
     -> DatabasesDelete
 databasesDelete pDdProject_ pDdDatabase_ pDdInstance_ =
-    DatabasesDelete
+    DatabasesDelete'
     { _ddProject = pDdProject_
     , _ddDatabase = pDdDatabase_
     , _ddInstance = pDdInstance_
@@ -103,7 +101,10 @@ ddInstance
 
 instance GoogleRequest DatabasesDelete where
         type Rs DatabasesDelete = Operation
-        requestClient DatabasesDelete{..}
+        type Scopes DatabasesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient DatabasesDelete'{..}
           = go _ddProject _ddInstance _ddDatabase
               (Just AltJSON)
               sQLAdminService

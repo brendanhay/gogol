@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.ChannelSections.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type ChannelSectionsDeleteResource =
 -- | Deletes a channelSection.
 --
 -- /See:/ 'channelSectionsDelete' smart constructor.
-data ChannelSectionsDelete = ChannelSectionsDelete
+data ChannelSectionsDelete = ChannelSectionsDelete'
     { _csdOnBehalfOfContentOwner :: !(Maybe Text)
     , _csdId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ channelSectionsDelete
     :: Text -- ^ 'csdId'
     -> ChannelSectionsDelete
 channelSectionsDelete pCsdId_ =
-    ChannelSectionsDelete
+    ChannelSectionsDelete'
     { _csdOnBehalfOfContentOwner = Nothing
     , _csdId = pCsdId_
     }
@@ -97,7 +97,11 @@ csdId = lens _csdId (\ s a -> s{_csdId = a})
 
 instance GoogleRequest ChannelSectionsDelete where
         type Rs ChannelSectionsDelete = ()
-        requestClient ChannelSectionsDelete{..}
+        type Scopes ChannelSectionsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient ChannelSectionsDelete'{..}
           = go (Just _csdId) _csdOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

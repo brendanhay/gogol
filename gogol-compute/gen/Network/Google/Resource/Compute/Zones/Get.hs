@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Zones.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified zone resource.
+-- Returns the specified Zone resource. Get a list of available zones by
+-- making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.zones.get@.
 module Network.Google.Resource.Compute.Zones.Get
@@ -51,10 +52,11 @@ type ZonesGetResource =
                Capture "zone" Text :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Zone
 
--- | Returns the specified zone resource.
+-- | Returns the specified Zone resource. Get a list of available zones by
+-- making a list() request.
 --
 -- /See:/ 'zonesGet' smart constructor.
-data ZonesGet = ZonesGet
+data ZonesGet = ZonesGet'
     { _zgProject :: !Text
     , _zgZone    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +73,7 @@ zonesGet
     -> Text -- ^ 'zgZone'
     -> ZonesGet
 zonesGet pZgProject_ pZgZone_ =
-    ZonesGet
+    ZonesGet'
     { _zgProject = pZgProject_
     , _zgZone = pZgZone_
     }
@@ -87,7 +89,11 @@ zgZone = lens _zgZone (\ s a -> s{_zgZone = a})
 
 instance GoogleRequest ZonesGet where
         type Rs ZonesGet = Zone
-        requestClient ZonesGet{..}
+        type Scopes ZonesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient ZonesGet'{..}
           = go _zgProject _zgZone (Just AltJSON) computeService
           where go
                   = buildClient (Proxy :: Proxy ZonesGetResource)

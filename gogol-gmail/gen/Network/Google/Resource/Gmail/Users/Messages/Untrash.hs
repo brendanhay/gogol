@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Messages.Untrash
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersMessagesUntrashResource =
 -- | Removes the specified message from the trash.
 --
 -- /See:/ 'usersMessagesUntrash' smart constructor.
-data UsersMessagesUntrash = UsersMessagesUntrash
+data UsersMessagesUntrash = UsersMessagesUntrash'
     { _umuUserId :: !Text
     , _umuId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,10 +69,9 @@ data UsersMessagesUntrash = UsersMessagesUntrash
 -- * 'umuId'
 usersMessagesUntrash
     :: Text -- ^ 'umuId'
-    -> Text
     -> UsersMessagesUntrash
-usersMessagesUntrash pUmuUserId_ pUmuId_ =
-    UsersMessagesUntrash
+usersMessagesUntrash pUmuId_ =
+    UsersMessagesUntrash'
     { _umuUserId = "me"
     , _umuId = pUmuId_
     }
@@ -89,7 +88,10 @@ umuId = lens _umuId (\ s a -> s{_umuId = a})
 
 instance GoogleRequest UsersMessagesUntrash where
         type Rs UsersMessagesUntrash = Message
-        requestClient UsersMessagesUntrash{..}
+        type Scopes UsersMessagesUntrash =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersMessagesUntrash'{..}
           = go _umuUserId _umuId (Just AltJSON) gmailService
           where go
                   = buildClient

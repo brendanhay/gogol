@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List all the deals for a given order
+-- List all the deals for a given proposal
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplacedeals.list@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
@@ -33,7 +33,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
     , MarketplaceDealsList
 
     -- * Request Lenses
-    , mdlOrderId
+    , mdlProposalId
+    , mdlPqlQuery
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -44,41 +45,55 @@ import           Network.Google.Prelude
 type MarketplaceDealsListResource =
      "adexchangebuyer" :>
        "v1.4" :>
-         "marketplaceOrders" :>
-           Capture "orderId" Text :>
+         "proposals" :>
+           Capture "proposalId" Text :>
              "deals" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] GetOrderDealsResponse
+               QueryParam "pqlQuery" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] GetOrderDealsResponse
 
--- | List all the deals for a given order
+-- | List all the deals for a given proposal
 --
 -- /See:/ 'marketplaceDealsList' smart constructor.
-newtype MarketplaceDealsList = MarketplaceDealsList
-    { _mdlOrderId :: Text
+data MarketplaceDealsList = MarketplaceDealsList'
+    { _mdlProposalId :: !Text
+    , _mdlPqlQuery   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mdlOrderId'
+-- * 'mdlProposalId'
+--
+-- * 'mdlPqlQuery'
 marketplaceDealsList
-    :: Text -- ^ 'mdlOrderId'
+    :: Text -- ^ 'mdlProposalId'
     -> MarketplaceDealsList
-marketplaceDealsList pMdlOrderId_ =
-    MarketplaceDealsList
-    { _mdlOrderId = pMdlOrderId_
+marketplaceDealsList pMdlProposalId_ =
+    MarketplaceDealsList'
+    { _mdlProposalId = pMdlProposalId_
+    , _mdlPqlQuery = Nothing
     }
 
--- | The orderId to get deals for.
-mdlOrderId :: Lens' MarketplaceDealsList Text
-mdlOrderId
-  = lens _mdlOrderId (\ s a -> s{_mdlOrderId = a})
+-- | The proposalId to get deals for. To search across proposals specify
+-- order_id = \'-\' as part of the URL.
+mdlProposalId :: Lens' MarketplaceDealsList Text
+mdlProposalId
+  = lens _mdlProposalId
+      (\ s a -> s{_mdlProposalId = a})
+
+-- | Query string to retrieve specific deals.
+mdlPqlQuery :: Lens' MarketplaceDealsList (Maybe Text)
+mdlPqlQuery
+  = lens _mdlPqlQuery (\ s a -> s{_mdlPqlQuery = a})
 
 instance GoogleRequest MarketplaceDealsList where
         type Rs MarketplaceDealsList = GetOrderDealsResponse
-        requestClient MarketplaceDealsList{..}
-          = go _mdlOrderId (Just AltJSON)
+        type Scopes MarketplaceDealsList =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient MarketplaceDealsList'{..}
+          = go _mdlProposalId _mdlPqlQuery (Just AltJSON)
               adExchangeBuyerService
           where go
                   = buildClient

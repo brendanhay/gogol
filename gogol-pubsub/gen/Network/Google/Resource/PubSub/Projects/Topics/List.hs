@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Topics.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type ProjectsTopicsListResource =
 -- | Lists matching topics.
 --
 -- /See:/ 'projectsTopicsList' smart constructor.
-data ProjectsTopicsList = ProjectsTopicsList
+data ProjectsTopicsList = ProjectsTopicsList'
     { _ptlXgafv          :: !(Maybe Text)
     , _ptlUploadProtocol :: !(Maybe Text)
     , _ptlProject        :: !Text
@@ -109,7 +109,7 @@ projectsTopicsList
     :: Text -- ^ 'ptlProject'
     -> ProjectsTopicsList
 projectsTopicsList pPtlProject_ =
-    ProjectsTopicsList
+    ProjectsTopicsList'
     { _ptlXgafv = Nothing
     , _ptlUploadProtocol = Nothing
     , _ptlProject = pPtlProject_
@@ -179,7 +179,10 @@ ptlCallback
 
 instance GoogleRequest ProjectsTopicsList where
         type Rs ProjectsTopicsList = ListTopicsResponse
-        requestClient ProjectsTopicsList{..}
+        type Scopes ProjectsTopicsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsTopicsList'{..}
           = go _ptlProject _ptlXgafv _ptlUploadProtocol
               (Just _ptlPp)
               _ptlAccessToken

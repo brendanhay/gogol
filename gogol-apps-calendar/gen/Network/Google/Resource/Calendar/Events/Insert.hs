@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Events.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type EventsInsertResource =
 -- | Creates an event.
 --
 -- /See:/ 'eventsInsert' smart constructor.
-data EventsInsert = EventsInsert
+data EventsInsert = EventsInsert'
     { _eveCalendarId          :: !Text
     , _evePayload             :: !Event
     , _eveMaxAttendees        :: !(Maybe (Textual Int32))
@@ -86,7 +86,7 @@ eventsInsert
     -> Event -- ^ 'evePayload'
     -> EventsInsert
 eventsInsert pEveCalendarId_ pEvePayload_ =
-    EventsInsert
+    EventsInsert'
     { _eveCalendarId = pEveCalendarId_
     , _evePayload = pEvePayload_
     , _eveMaxAttendees = Nothing
@@ -132,7 +132,9 @@ eveSupportsAttachments
 
 instance GoogleRequest EventsInsert where
         type Rs EventsInsert = Event
-        requestClient EventsInsert{..}
+        type Scopes EventsInsert =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient EventsInsert'{..}
           = go _eveCalendarId _eveMaxAttendees
               _eveSendNotifications
               _eveSupportsAttachments

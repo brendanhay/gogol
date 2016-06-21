@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Accounts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ManagementAccountsListResource =
 -- | Lists all accounts to which the user has access.
 --
 -- /See:/ 'managementAccountsList' smart constructor.
-data ManagementAccountsList = ManagementAccountsList
+data ManagementAccountsList = ManagementAccountsList'
     { _malStartIndex :: !(Maybe (Textual Int32))
     , _malMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ data ManagementAccountsList = ManagementAccountsList
 managementAccountsList
     :: ManagementAccountsList
 managementAccountsList =
-    ManagementAccountsList
+    ManagementAccountsList'
     { _malStartIndex = Nothing
     , _malMaxResults = Nothing
     }
@@ -91,7 +91,11 @@ malMaxResults
 
 instance GoogleRequest ManagementAccountsList where
         type Rs ManagementAccountsList = Accounts
-        requestClient ManagementAccountsList{..}
+        type Scopes ManagementAccountsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementAccountsList'{..}
           = go _malStartIndex _malMaxResults (Just AltJSON)
               analyticsService
           where go

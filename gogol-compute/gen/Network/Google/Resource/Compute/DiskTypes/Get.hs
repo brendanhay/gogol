@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.DiskTypes.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified disk type resource.
+-- Returns the specified disk type. Get a list of available disk types by
+-- making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.diskTypes.get@.
 module Network.Google.Resource.Compute.DiskTypes.Get
@@ -54,10 +55,11 @@ type DiskTypesGetResource =
                    Capture "diskType" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] DiskType
 
--- | Returns the specified disk type resource.
+-- | Returns the specified disk type. Get a list of available disk types by
+-- making a list() request.
 --
 -- /See:/ 'diskTypesGet' smart constructor.
-data DiskTypesGet = DiskTypesGet
+data DiskTypesGet = DiskTypesGet'
     { _dtgProject  :: !Text
     , _dtgZone     :: !Text
     , _dtgDiskType :: !Text
@@ -78,7 +80,7 @@ diskTypesGet
     -> Text -- ^ 'dtgDiskType'
     -> DiskTypesGet
 diskTypesGet pDtgProject_ pDtgZone_ pDtgDiskType_ =
-    DiskTypesGet
+    DiskTypesGet'
     { _dtgProject = pDtgProject_
     , _dtgZone = pDtgZone_
     , _dtgDiskType = pDtgDiskType_
@@ -93,14 +95,18 @@ dtgProject
 dtgZone :: Lens' DiskTypesGet Text
 dtgZone = lens _dtgZone (\ s a -> s{_dtgZone = a})
 
--- | Name of the disk type resource to return.
+-- | Name of the disk type to return.
 dtgDiskType :: Lens' DiskTypesGet Text
 dtgDiskType
   = lens _dtgDiskType (\ s a -> s{_dtgDiskType = a})
 
 instance GoogleRequest DiskTypesGet where
         type Rs DiskTypesGet = DiskType
-        requestClient DiskTypesGet{..}
+        type Scopes DiskTypesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient DiskTypesGet'{..}
           = go _dtgProject _dtgZone _dtgDiskType (Just AltJSON)
               computeService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AdvertiserGroups.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsList' request conforms to.
 type AdvertiserGroupsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -67,7 +67,7 @@ type AdvertiserGroupsListResource =
 -- | Retrieves a list of advertiser groups, possibly filtered.
 --
 -- /See:/ 'advertiserGroupsList' smart constructor.
-data AdvertiserGroupsList = AdvertiserGroupsList
+data AdvertiserGroupsList = AdvertiserGroupsList'
     { _aglSearchString :: !(Maybe Text)
     , _aglIds          :: !(Maybe [Textual Int64])
     , _aglProFileId    :: !(Textual Int64)
@@ -98,7 +98,7 @@ advertiserGroupsList
     :: Int64 -- ^ 'aglProFileId'
     -> AdvertiserGroupsList
 advertiserGroupsList pAglProFileId_ =
-    AdvertiserGroupsList
+    AdvertiserGroupsList'
     { _aglSearchString = Nothing
     , _aglIds = Nothing
     , _aglProFileId = _Coerce # pAglProFileId_
@@ -158,7 +158,9 @@ aglMaxResults
 instance GoogleRequest AdvertiserGroupsList where
         type Rs AdvertiserGroupsList =
              AdvertiserGroupsListResponse
-        requestClient AdvertiserGroupsList{..}
+        type Scopes AdvertiserGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdvertiserGroupsList'{..}
           = go _aglProFileId _aglSearchString
               (_aglIds ^. _Default)
               _aglSortOrder

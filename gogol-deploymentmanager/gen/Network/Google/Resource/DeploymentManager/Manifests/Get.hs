@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DeploymentManager.Manifests.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ManifestsGetResource =
 -- | Gets information about a specific manifest.
 --
 -- /See:/ 'manifestsGet' smart constructor.
-data ManifestsGet = ManifestsGet
+data ManifestsGet = ManifestsGet'
     { _mgProject    :: !Text
     , _mgManifest   :: !Text
     , _mgDeployment :: !Text
@@ -79,7 +79,7 @@ manifestsGet
     -> Text -- ^ 'mgDeployment'
     -> ManifestsGet
 manifestsGet pMgProject_ pMgManifest_ pMgDeployment_ =
-    ManifestsGet
+    ManifestsGet'
     { _mgProject = pMgProject_
     , _mgManifest = pMgManifest_
     , _mgDeployment = pMgDeployment_
@@ -102,7 +102,12 @@ mgDeployment
 
 instance GoogleRequest ManifestsGet where
         type Rs ManifestsGet = Manifest
-        requestClient ManifestsGet{..}
+        type Scopes ManifestsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+        requestClient ManifestsGet'{..}
           = go _mgProject _mgDeployment _mgManifest
               (Just AltJSON)
               deploymentManagerService

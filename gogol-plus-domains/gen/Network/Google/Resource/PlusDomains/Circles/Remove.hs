@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Circles.Remove
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type CirclesRemoveResource =
 -- | Delete a circle.
 --
 -- /See:/ 'circlesRemove' smart constructor.
-newtype CirclesRemove = CirclesRemove
+newtype CirclesRemove = CirclesRemove'
     { _crCircleId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ circlesRemove
     :: Text -- ^ 'crCircleId'
     -> CirclesRemove
 circlesRemove pCrCircleId_ =
-    CirclesRemove
+    CirclesRemove'
     { _crCircleId = pCrCircleId_
     }
 
@@ -75,7 +75,10 @@ crCircleId
 
 instance GoogleRequest CirclesRemove where
         type Rs CirclesRemove = ()
-        requestClient CirclesRemove{..}
+        type Scopes CirclesRemove =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient CirclesRemove'{..}
           = go _crCircleId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CirclesRemoveResource)

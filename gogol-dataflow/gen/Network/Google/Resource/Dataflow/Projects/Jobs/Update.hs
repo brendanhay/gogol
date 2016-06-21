@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Dataflow.Projects.Jobs.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type ProjectsJobsUpdateResource =
 -- | Updates the state of an existing dataflow job.
 --
 -- /See:/ 'projectsJobsUpdate' smart constructor.
-data ProjectsJobsUpdate = ProjectsJobsUpdate
+data ProjectsJobsUpdate = ProjectsJobsUpdate'
     { _pjuXgafv          :: !(Maybe Text)
     , _pjuJobId          :: !Text
     , _pjuUploadProtocol :: !(Maybe Text)
@@ -111,7 +111,7 @@ projectsJobsUpdate
     -> Text -- ^ 'pjuProjectId'
     -> ProjectsJobsUpdate
 projectsJobsUpdate pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
-    ProjectsJobsUpdate
+    ProjectsJobsUpdate'
     { _pjuXgafv = Nothing
     , _pjuJobId = pPjuJobId_
     , _pjuUploadProtocol = Nothing
@@ -177,7 +177,10 @@ pjuCallback
 
 instance GoogleRequest ProjectsJobsUpdate where
         type Rs ProjectsJobsUpdate = Job
-        requestClient ProjectsJobsUpdate{..}
+        type Scopes ProjectsJobsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
+        requestClient ProjectsJobsUpdate'{..}
           = go _pjuProjectId _pjuJobId _pjuXgafv
               _pjuUploadProtocol
               (Just _pjuPp)

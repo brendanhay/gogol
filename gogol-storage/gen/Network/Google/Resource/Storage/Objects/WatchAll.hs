@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.WatchAll
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type ObjectsWatchAllResource =
 -- | Watch for changes on all objects in a bucket.
 --
 -- /See:/ 'objectsWatchAll' smart constructor.
-data ObjectsWatchAll = ObjectsWatchAll
+data ObjectsWatchAll = ObjectsWatchAll'
     { _owaPrefix     :: !(Maybe Text)
     , _owaBucket     :: !Text
     , _owaPayload    :: !Channel
@@ -102,7 +102,7 @@ objectsWatchAll
     -> Channel -- ^ 'owaPayload'
     -> ObjectsWatchAll
 objectsWatchAll pOwaBucket_ pOwaPayload_ =
-    ObjectsWatchAll
+    ObjectsWatchAll'
     { _owaPrefix = Nothing
     , _owaBucket = pOwaBucket_
     , _owaPayload = pOwaPayload_
@@ -166,7 +166,13 @@ owaMaxResults
 
 instance GoogleRequest ObjectsWatchAll where
         type Rs ObjectsWatchAll = Channel
-        requestClient ObjectsWatchAll{..}
+        type Scopes ObjectsWatchAll =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient ObjectsWatchAll'{..}
           = go _owaBucket _owaPrefix _owaVersions
               _owaProjection
               _owaPageToken

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Language.Detections.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type DetectionsListResource =
 -- | Detect the language of text.
 --
 -- /See:/ 'detectionsList' smart constructor.
-newtype DetectionsList = DetectionsList
+newtype DetectionsList = DetectionsList'
     { _dlQ :: [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ detectionsList
     :: [Text] -- ^ 'dlQ'
     -> DetectionsList
 detectionsList pDlQ_ =
-    DetectionsList
+    DetectionsList'
     { _dlQ = _Coerce # pDlQ_
     }
 
@@ -76,7 +76,8 @@ dlQ = lens _dlQ (\ s a -> s{_dlQ = a}) . _Coerce
 
 instance GoogleRequest DetectionsList where
         type Rs DetectionsList = DetectionsListResponse
-        requestClient DetectionsList{..}
+        type Scopes DetectionsList = '[]
+        requestClient DetectionsList'{..}
           = go _dlQ (Just AltJSON) translateService
           where go
                   = buildClient (Proxy :: Proxy DetectionsListResource)

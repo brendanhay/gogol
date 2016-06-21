@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightActivities.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesInsert' request conforms to.
 type FloodlightActivitiesInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -55,7 +55,7 @@ type FloodlightActivitiesInsertResource =
 -- | Inserts a new floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesInsert' smart constructor.
-data FloodlightActivitiesInsert = FloodlightActivitiesInsert
+data FloodlightActivitiesInsert = FloodlightActivitiesInsert'
     { _faiProFileId :: !(Textual Int64)
     , _faiPayload   :: !FloodlightActivity
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivitiesInsert
     -> FloodlightActivity -- ^ 'faiPayload'
     -> FloodlightActivitiesInsert
 floodlightActivitiesInsert pFaiProFileId_ pFaiPayload_ =
-    FloodlightActivitiesInsert
+    FloodlightActivitiesInsert'
     { _faiProFileId = _Coerce # pFaiProFileId_
     , _faiPayload = pFaiPayload_
     }
@@ -92,7 +92,9 @@ instance GoogleRequest FloodlightActivitiesInsert
          where
         type Rs FloodlightActivitiesInsert =
              FloodlightActivity
-        requestClient FloodlightActivitiesInsert{..}
+        type Scopes FloodlightActivitiesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightActivitiesInsert'{..}
           = go _faiProFileId (Just AltJSON) _faiPayload
               dFAReportingService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Experiments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ManagementExperimentsListResource =
 -- | Lists experiments to which the user has access.
 --
 -- /See:/ 'managementExperimentsList' smart constructor.
-data ManagementExperimentsList = ManagementExperimentsList
+data ManagementExperimentsList = ManagementExperimentsList'
     { _melWebPropertyId :: !Text
     , _melProFileId     :: !Text
     , _melAccountId     :: !Text
@@ -90,7 +90,7 @@ managementExperimentsList
     -> Text -- ^ 'melAccountId'
     -> ManagementExperimentsList
 managementExperimentsList pMelWebPropertyId_ pMelProFileId_ pMelAccountId_ =
-    ManagementExperimentsList
+    ManagementExperimentsList'
     { _melWebPropertyId = pMelWebPropertyId_
     , _melProFileId = pMelProFileId_
     , _melAccountId = pMelAccountId_
@@ -132,7 +132,11 @@ melMaxResults
 instance GoogleRequest ManagementExperimentsList
          where
         type Rs ManagementExperimentsList = Experiments
-        requestClient ManagementExperimentsList{..}
+        type Scopes ManagementExperimentsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementExperimentsList'{..}
           = go _melAccountId _melWebPropertyId _melProFileId
               _melStartIndex
               _melMaxResults

@@ -7,7 +7,7 @@
 
 -- |
 -- Module      : Network.Google.GroupsSettings
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -20,6 +20,9 @@ module Network.Google.GroupsSettings
     (
     -- * Service Configuration
       groupsSettingsService
+
+    -- * OAuth Scopes
+    , appsGroupsSettingsScope
 
     -- * API Declaration
     , GroupsSettingsAPI
@@ -61,6 +64,7 @@ module Network.Google.GroupsSettings
     , gMessageDisplayFont
     , gCustomReplyTo
     , gWhoCanContactOwner
+    , gWhoCanAdd
     , gWhoCanInvite
     , gWhoCanLeaveGroup
     , gAllowGoogleCommunication

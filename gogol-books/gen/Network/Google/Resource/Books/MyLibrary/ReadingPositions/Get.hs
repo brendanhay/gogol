@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type MyLibraryReadingPositionsGetResource =
 -- | Retrieves my reading position information for a volume.
 --
 -- /See:/ 'myLibraryReadingPositionsGet' smart constructor.
-data MyLibraryReadingPositionsGet = MyLibraryReadingPositionsGet
+data MyLibraryReadingPositionsGet = MyLibraryReadingPositionsGet'
     { _mlrpgContentVersion :: !(Maybe Text)
     , _mlrpgVolumeId       :: !Text
     , _mlrpgSource         :: !(Maybe Text)
@@ -76,7 +76,7 @@ myLibraryReadingPositionsGet
     :: Text -- ^ 'mlrpgVolumeId'
     -> MyLibraryReadingPositionsGet
 myLibraryReadingPositionsGet pMlrpgVolumeId_ =
-    MyLibraryReadingPositionsGet
+    MyLibraryReadingPositionsGet'
     { _mlrpgContentVersion = Nothing
     , _mlrpgVolumeId = pMlrpgVolumeId_
     , _mlrpgSource = Nothing
@@ -103,7 +103,9 @@ instance GoogleRequest MyLibraryReadingPositionsGet
          where
         type Rs MyLibraryReadingPositionsGet =
              ReadingPosition
-        requestClient MyLibraryReadingPositionsGet{..}
+        type Scopes MyLibraryReadingPositionsGet =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryReadingPositionsGet'{..}
           = go _mlrpgVolumeId _mlrpgContentVersion _mlrpgSource
               (Just AltJSON)
               booksService

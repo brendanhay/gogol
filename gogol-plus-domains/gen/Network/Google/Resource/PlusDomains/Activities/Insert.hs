@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Activities.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type ActivitiesInsertResource =
 -- | Create a new activity for the authenticated user.
 --
 -- /See:/ 'activitiesInsert' smart constructor.
-data ActivitiesInsert = ActivitiesInsert
+data ActivitiesInsert = ActivitiesInsert'
     { _aiPayload :: !Activity
     , _aiUserId  :: !Text
     , _aiPreview :: !(Maybe Bool)
@@ -76,7 +76,7 @@ activitiesInsert
     -> Text -- ^ 'aiUserId'
     -> ActivitiesInsert
 activitiesInsert pAiPayload_ pAiUserId_ =
-    ActivitiesInsert
+    ActivitiesInsert'
     { _aiPayload = pAiPayload_
     , _aiUserId = pAiUserId_
     , _aiPreview = Nothing
@@ -101,7 +101,11 @@ aiPreview
 
 instance GoogleRequest ActivitiesInsert where
         type Rs ActivitiesInsert = Activity
-        requestClient ActivitiesInsert{..}
+        type Scopes ActivitiesInsert =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me",
+               "https://www.googleapis.com/auth/plus.stream.write"]
+        requestClient ActivitiesInsert'{..}
           = go _aiUserId _aiPreview (Just AltJSON) _aiPayload
               plusDomainsService
           where go

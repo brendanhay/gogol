@@ -7,25 +7,66 @@
 
 -- |
 -- Module      : Network.Google.Genomics
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API to store, process, explore, and share DNA sequence reads,
--- reference-based alignments, and variant calls.
+-- Stores, processes, explores and shares genomic data. This API implements
+-- the Global Alliance for Genomics and Health (GA4GH) v0.5.1 API as well
+-- as several extensions.
 --
--- /See:/ < Genomics API Reference>
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference>
 module Network.Google.Genomics
     (
     -- * Service Configuration
       genomicsService
 
+    -- * OAuth Scopes
+    , genomicsScope
+    , cloudPlatformScope
+    , genomicsReadOnlyScope
+    , storageReadWriteScope
+    , bigQueryScope
+
     -- * API Declaration
     , GenomicsAPI
 
     -- * Resources
+
+    -- ** genomics.annotations.batchCreate
+    , module Network.Google.Resource.Genomics.Annotations.BatchCreate
+
+    -- ** genomics.annotations.create
+    , module Network.Google.Resource.Genomics.Annotations.Create
+
+    -- ** genomics.annotations.delete
+    , module Network.Google.Resource.Genomics.Annotations.Delete
+
+    -- ** genomics.annotations.get
+    , module Network.Google.Resource.Genomics.Annotations.Get
+
+    -- ** genomics.annotations.search
+    , module Network.Google.Resource.Genomics.Annotations.Search
+
+    -- ** genomics.annotations.update
+    , module Network.Google.Resource.Genomics.Annotations.Update
+
+    -- ** genomics.annotationsets.create
+    , module Network.Google.Resource.Genomics.AnnotationSets.Create
+
+    -- ** genomics.annotationsets.delete
+    , module Network.Google.Resource.Genomics.AnnotationSets.Delete
+
+    -- ** genomics.annotationsets.get
+    , module Network.Google.Resource.Genomics.AnnotationSets.Get
+
+    -- ** genomics.annotationsets.search
+    , module Network.Google.Resource.Genomics.AnnotationSets.Search
+
+    -- ** genomics.annotationsets.update
+    , module Network.Google.Resource.Genomics.AnnotationSets.Update
 
     -- ** genomics.callsets.create
     , module Network.Google.Resource.Genomics.CallSets.Create
@@ -72,9 +113,6 @@ module Network.Google.Genomics
     -- ** genomics.operations.cancel
     , module Network.Google.Resource.Genomics.Operations.Cancel
 
-    -- ** genomics.operations.delete
-    , module Network.Google.Resource.Genomics.Operations.Delete
-
     -- ** genomics.operations.get
     , module Network.Google.Resource.Genomics.Operations.Get
 
@@ -105,6 +143,9 @@ module Network.Google.Genomics
     -- ** genomics.reads.search
     , module Network.Google.Resource.Genomics.Reads.Search
 
+    -- ** genomics.reads.stream
+    , module Network.Google.Resource.Genomics.Reads.Stream
+
     -- ** genomics.references.bases.list
     , module Network.Google.Resource.Genomics.References.Bases.List
 
@@ -132,11 +173,17 @@ module Network.Google.Genomics
     -- ** genomics.variants.import
     , module Network.Google.Resource.Genomics.Variants.Import
 
+    -- ** genomics.variants.merge
+    , module Network.Google.Resource.Genomics.Variants.Merge
+
     -- ** genomics.variants.patch
     , module Network.Google.Resource.Genomics.Variants.Patch
 
     -- ** genomics.variants.search
     , module Network.Google.Resource.Genomics.Variants.Search
+
+    -- ** genomics.variants.stream
+    , module Network.Google.Resource.Genomics.Variants.Stream
 
     -- ** genomics.variantsets.create
     , module Network.Google.Resource.Genomics.VariantSets.Create
@@ -158,10 +205,22 @@ module Network.Google.Genomics
 
     -- * Types
 
+    -- ** ImportVariantsRequestInfoMergeConfig
+    , ImportVariantsRequestInfoMergeConfig
+    , importVariantsRequestInfoMergeConfig
+    , ivrimcAddtional
+
     -- ** ReadInfo
     , ReadInfo
     , readInfo
     , riAddtional
+
+    -- ** Exon
+    , Exon
+    , exon
+    , eStart
+    , eEnd
+    , eFrame
 
     -- ** Status
     , Status
@@ -191,6 +250,22 @@ module Network.Google.Genomics
     , vFilter
     , vInfo
     , vCalls
+
+    -- ** Annotation
+    , Annotation
+    , annotation
+    , aVariant
+    , aAnnotationSetId
+    , aStart
+    , aReverseStrand
+    , aReferenceId
+    , aReferenceName
+    , aName
+    , aEnd
+    , aId
+    , aType
+    , aTranscript
+    , aInfo
 
     -- ** ListBasesResponse
     , ListBasesResponse
@@ -251,6 +326,18 @@ module Network.Google.Genomics
     , vcCallSetId
     , vcGenotype
     , vcInfo
+
+    -- ** BatchCreateAnnotationsRequest
+    , BatchCreateAnnotationsRequest
+    , batchCreateAnnotationsRequest
+    , bcarAnnotations
+
+    -- ** MergeVariantsRequest
+    , MergeVariantsRequest
+    , mergeVariantsRequest
+    , mvrVariants
+    , mvrVariantSetId
+    , mvrInfoMergeConfig
 
     -- ** ReadGroup
     , ReadGroup
@@ -321,6 +408,17 @@ module Network.Google.Genomics
     , cbRange
     , cbMeanCoverage
 
+    -- ** VariantAnnotation
+    , VariantAnnotation
+    , variantAnnotation
+    , vaEffect
+    , vaClinicalSignificance
+    , vaAlternateBases
+    , vaGeneId
+    , vaConditions
+    , vaType
+    , vaTranscriptIds
+
     -- ** SearchReadGroupSetsRequest
     , SearchReadGroupSetsRequest
     , searchReadGroupSetsRequest
@@ -350,10 +448,20 @@ module Network.Google.Genomics
     , readGroupInfo
     , rgiAddtional
 
+    -- ** StreamVariantsResponse
+    , StreamVariantsResponse
+    , streamVariantsResponse
+    , svrVariants
+
     -- ** StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- ** StreamReadsResponse
+    , StreamReadsResponse
+    , streamReadsResponse
+    , srrAlignments
 
     -- ** SearchCallSetsResponse
     , SearchCallSetsResponse
@@ -382,6 +490,11 @@ module Network.Google.Genomics
     , operationMetadataRequest
     , omrAddtional
 
+    -- ** MergeVariantsRequestInfoMergeConfig
+    , MergeVariantsRequestInfoMergeConfig
+    , mergeVariantsRequestInfoMergeConfig
+    , mvrimcAddtional
+
     -- ** VariantInfo
     , VariantInfo
     , variantInfo
@@ -402,11 +515,51 @@ module Network.Google.Genomics
     , svsrPageToken
     , svsrPageSize
 
+    -- ** AnnotationInfo
+    , AnnotationInfo
+    , annotationInfo
+    , aiAddtional
+
+    -- ** SearchAnnotationsResponse
+    , SearchAnnotationsResponse
+    , searchAnnotationsResponse
+    , sarAnnotations
+    , sarNextPageToken
+
+    -- ** SearchAnnotationSetsRequest
+    , SearchAnnotationSetsRequest
+    , searchAnnotationSetsRequest
+    , sasrReferenceSetId
+    , sasrTypes
+    , sasrDataSetIds
+    , sasrName
+    , sasrPageToken
+    , sasrPageSize
+
     -- ** SearchVariantsResponse
     , SearchVariantsResponse
     , searchVariantsResponse
-    , svrVariants
-    , svrNextPageToken
+    , sVariants
+    , sNextPageToken
+
+    -- ** ClinicalCondition
+    , ClinicalCondition
+    , clinicalCondition
+    , ccExternalIds
+    , ccNames
+    , ccConceptId
+    , ccOmimId
+
+    -- ** StreamReadsRequest
+    , StreamReadsRequest
+    , streamReadsRequest
+    , sShard
+    , sReadGroupSetId
+    , sTotalShards
+    , sStart
+    , sReferenceName
+    , sEnd
+    , sProjectId
 
     -- ** SearchCallSetsRequest
     , SearchCallSetsRequest
@@ -416,11 +569,17 @@ module Network.Google.Genomics
     , scsrVariantSetIds
     , scsrPageSize
 
+    -- ** Entry
+    , Entry
+    , entry
+    , eStatus
+    , eAnnotation
+
     -- ** SearchReadsResponse
     , SearchReadsResponse
     , searchReadsResponse
-    , sNextPageToken
-    , sAlignments
+    , seaNextPageToken
+    , seaAlignments
 
     -- ** Program
     , Program
@@ -439,6 +598,17 @@ module Network.Google.Genomics
     , sAccessions
     , sPageToken
     , sPageSize
+
+    -- ** BatchCreateAnnotationsResponse
+    , BatchCreateAnnotationsResponse
+    , batchCreateAnnotationsResponse
+    , bcarEntries
+
+    -- ** CodingSequence
+    , CodingSequence
+    , codingSequence
+    , csStart
+    , csEnd
 
     -- ** SearchReferenceSetsResponse
     , SearchReferenceSetsResponse
@@ -500,13 +670,27 @@ module Network.Google.Genomics
     , laMAppingQuality
     , laPosition
 
+    -- ** AnnotationSet
+    , AnnotationSet
+    , annotationSet
+    , asReferenceSetId
+    , asName
+    , asDataSetId
+    , asId
+    , asType
+    , asSourceURI
+    , asInfo
+
     -- ** VariantSet
     , VariantSet
     , variantSet
+    , vsReferenceSetId
+    , vsName
     , vsDataSetId
     , vsReferenceBounds
     , vsMetadata
     , vsId
+    , vsDescription
 
     -- ** TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -532,8 +716,15 @@ module Network.Google.Genomics
     , importVariantsRequest
     , ivrVariantSetId
     , ivrFormat
+    , ivrInfoMergeConfig
     , ivrNormalizeReferenceNames
     , ivrSourceURIs
+
+    -- ** ExternalId
+    , ExternalId
+    , externalId
+    , eiSourceName
+    , eiId
 
     -- ** CigarUnit
     , CigarUnit
@@ -562,9 +753,21 @@ module Network.Google.Genomics
     , OperationMetadata
     , operationMetadata
     , omEvents
+    , omEndTime
     , omProjectId
     , omCreateTime
     , omRequest
+
+    -- ** SearchAnnotationsRequest
+    , SearchAnnotationsRequest
+    , searchAnnotationsRequest
+    , sarStart
+    , sarReferenceId
+    , sarReferenceName
+    , sarEnd
+    , sarPageToken
+    , sarAnnotationSetIds
+    , sarPageSize
 
     -- ** SearchVariantSetsResponse
     , SearchVariantSetsResponse
@@ -585,6 +788,17 @@ module Network.Google.Genomics
     , svrVariantSetIds
     , svrPageSize
 
+    -- ** AnnotationSetInfo
+    , AnnotationSetInfo
+    , annotationSetInfo
+    , asiAddtional
+
+    -- ** SearchAnnotationSetsResponse
+    , SearchAnnotationSetsResponse
+    , searchAnnotationSetsResponse
+    , sasrNextPageToken
+    , sasrAnnotationSets
+
     -- ** CallSetInfo
     , CallSetInfo
     , callSetInfo
@@ -600,10 +814,27 @@ module Network.Google.Genomics
     , operationResponse
     , orAddtional
 
+    -- ** Transcript
+    , Transcript
+    , transcript
+    , tGeneId
+    , tCodingSequence
+    , tExons
+
     -- ** OperationEvent
     , OperationEvent
     , operationEvent
     , oeDescription
+
+    -- ** StreamVariantsRequest
+    , StreamVariantsRequest
+    , streamVariantsRequest
+    , strVariantSetId
+    , strStart
+    , strCallSetIds
+    , strReferenceName
+    , strEnd
+    , strProjectId
 
     -- ** ReferenceBound
     , ReferenceBound
@@ -654,6 +885,17 @@ module Network.Google.Genomics
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.Genomics.Annotations.BatchCreate
+import           Network.Google.Resource.Genomics.Annotations.Create
+import           Network.Google.Resource.Genomics.Annotations.Delete
+import           Network.Google.Resource.Genomics.Annotations.Get
+import           Network.Google.Resource.Genomics.Annotations.Search
+import           Network.Google.Resource.Genomics.Annotations.Update
+import           Network.Google.Resource.Genomics.AnnotationSets.Create
+import           Network.Google.Resource.Genomics.AnnotationSets.Delete
+import           Network.Google.Resource.Genomics.AnnotationSets.Get
+import           Network.Google.Resource.Genomics.AnnotationSets.Search
+import           Network.Google.Resource.Genomics.AnnotationSets.Update
 import           Network.Google.Resource.Genomics.CallSets.Create
 import           Network.Google.Resource.Genomics.CallSets.Delete
 import           Network.Google.Resource.Genomics.CallSets.Get
@@ -669,7 +911,6 @@ import           Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
 import           Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
 import           Network.Google.Resource.Genomics.DataSets.Undelete
 import           Network.Google.Resource.Genomics.Operations.Cancel
-import           Network.Google.Resource.Genomics.Operations.Delete
 import           Network.Google.Resource.Genomics.Operations.Get
 import           Network.Google.Resource.Genomics.Operations.List
 import           Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
@@ -680,6 +921,7 @@ import           Network.Google.Resource.Genomics.ReadGroupSets.Import
 import           Network.Google.Resource.Genomics.ReadGroupSets.Patch
 import           Network.Google.Resource.Genomics.ReadGroupSets.Search
 import           Network.Google.Resource.Genomics.Reads.Search
+import           Network.Google.Resource.Genomics.Reads.Stream
 import           Network.Google.Resource.Genomics.References.Bases.List
 import           Network.Google.Resource.Genomics.References.Get
 import           Network.Google.Resource.Genomics.References.Search
@@ -689,8 +931,10 @@ import           Network.Google.Resource.Genomics.Variants.Create
 import           Network.Google.Resource.Genomics.Variants.Delete
 import           Network.Google.Resource.Genomics.Variants.Get
 import           Network.Google.Resource.Genomics.Variants.Import
+import           Network.Google.Resource.Genomics.Variants.Merge
 import           Network.Google.Resource.Genomics.Variants.Patch
 import           Network.Google.Resource.Genomics.Variants.Search
+import           Network.Google.Resource.Genomics.Variants.Stream
 import           Network.Google.Resource.Genomics.VariantSets.Create
 import           Network.Google.Resource.Genomics.VariantSets.Delete
 import           Network.Google.Resource.Genomics.VariantSets.Export
@@ -704,9 +948,17 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Genomics API service.
 type GenomicsAPI =
-     VariantsPatchResource :<|> VariantsGetResource :<|>
-       VariantsCreateResource
+     AnnotationsGetResource :<|> AnnotationsCreateResource
+       :<|> AnnotationsBatchCreateResource
+       :<|> AnnotationsSearchResource
+       :<|> AnnotationsDeleteResource
+       :<|> AnnotationsUpdateResource
+       :<|> VariantsStreamResource
+       :<|> VariantsPatchResource
+       :<|> VariantsGetResource
+       :<|> VariantsCreateResource
        :<|> VariantsImportResource
+       :<|> VariantsMergeResource
        :<|> VariantsSearchResource
        :<|> VariantsDeleteResource
        :<|> ReferencesBasesListResource
@@ -718,6 +970,11 @@ type GenomicsAPI =
        :<|> VariantSetsCreateResource
        :<|> VariantSetsSearchResource
        :<|> VariantSetsDeleteResource
+       :<|> AnnotationSetsGetResource
+       :<|> AnnotationSetsCreateResource
+       :<|> AnnotationSetsSearchResource
+       :<|> AnnotationSetsDeleteResource
+       :<|> AnnotationSetsUpdateResource
        :<|> ReadGroupSetsCoverageBucketsListResource
        :<|> ReadGroupSetsExportResource
        :<|> ReadGroupSetsPatchResource
@@ -735,7 +992,7 @@ type GenomicsAPI =
        :<|> OperationsListResource
        :<|> OperationsGetResource
        :<|> OperationsCancelResource
-       :<|> OperationsDeleteResource
+       :<|> ReadsStreamResource
        :<|> ReadsSearchResource
        :<|> DataSetsListResource
        :<|> DataSetsUndeleteResource

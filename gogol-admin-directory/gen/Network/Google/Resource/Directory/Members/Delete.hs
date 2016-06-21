@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Members.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type MembersDeleteResource =
 -- | Remove membership.
 --
 -- /See:/ 'membersDelete' smart constructor.
-data MembersDelete = MembersDelete
+data MembersDelete = MembersDelete'
     { _mdMemberKey :: !Text
     , _mdGroupKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ membersDelete
     -> Text -- ^ 'mdGroupKey'
     -> MembersDelete
 membersDelete pMdMemberKey_ pMdGroupKey_ =
-    MembersDelete
+    MembersDelete'
     { _mdMemberKey = pMdMemberKey_
     , _mdGroupKey = pMdGroupKey_
     }
@@ -89,7 +89,10 @@ mdGroupKey
 
 instance GoogleRequest MembersDelete where
         type Rs MembersDelete = ()
-        requestClient MembersDelete{..}
+        type Scopes MembersDelete =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member"]
+        requestClient MembersDelete'{..}
           = go _mdGroupKey _mdMemberKey (Just AltJSON)
               directoryService
           where go

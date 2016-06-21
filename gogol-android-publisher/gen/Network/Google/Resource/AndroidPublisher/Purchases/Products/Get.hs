@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type PurchasesProductsGetResource =
 -- | Checks the purchase and consumption status of an inapp item.
 --
 -- /See:/ 'purchasesProductsGet' smart constructor.
-data PurchasesProductsGet = PurchasesProductsGet
+data PurchasesProductsGet = PurchasesProductsGet'
     { _ppgPackageName :: !Text
     , _ppgToken       :: !Text
     , _ppgProductId   :: !Text
@@ -80,7 +80,7 @@ purchasesProductsGet
     -> Text -- ^ 'ppgProductId'
     -> PurchasesProductsGet
 purchasesProductsGet pPpgPackageName_ pPpgToken_ pPpgProductId_ =
-    PurchasesProductsGet
+    PurchasesProductsGet'
     { _ppgPackageName = pPpgPackageName_
     , _ppgToken = pPpgToken_
     , _ppgProductId = pPpgProductId_
@@ -105,7 +105,9 @@ ppgProductId
 
 instance GoogleRequest PurchasesProductsGet where
         type Rs PurchasesProductsGet = ProductPurchase
-        requestClient PurchasesProductsGet{..}
+        type Scopes PurchasesProductsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient PurchasesProductsGet'{..}
           = go _ppgPackageName _ppgProductId _ppgToken
               (Just AltJSON)
               androidPublisherService

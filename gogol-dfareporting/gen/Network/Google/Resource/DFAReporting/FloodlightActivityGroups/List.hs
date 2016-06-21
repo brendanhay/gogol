@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivityGroupsList' request conforms to.
 type FloodlightActivityGroupsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>
@@ -79,7 +79,7 @@ type FloodlightActivityGroupsListResource =
 -- | Retrieves a list of floodlight activity groups, possibly filtered.
 --
 -- /See:/ 'floodlightActivityGroupsList' smart constructor.
-data FloodlightActivityGroupsList = FloodlightActivityGroupsList
+data FloodlightActivityGroupsList = FloodlightActivityGroupsList'
     { _faglFloodlightConfigurationId :: !(Maybe (Textual Int64))
     , _faglAdvertiserId              :: !(Maybe (Textual Int64))
     , _faglSearchString              :: !(Maybe Text)
@@ -119,7 +119,7 @@ floodlightActivityGroupsList
     :: Int64 -- ^ 'faglProFileId'
     -> FloodlightActivityGroupsList
 floodlightActivityGroupsList pFaglProFileId_ =
-    FloodlightActivityGroupsList
+    FloodlightActivityGroupsList'
     { _faglFloodlightConfigurationId = Nothing
     , _faglAdvertiserId = Nothing
     , _faglSearchString = Nothing
@@ -213,7 +213,9 @@ instance GoogleRequest FloodlightActivityGroupsList
          where
         type Rs FloodlightActivityGroupsList =
              FloodlightActivityGroupsListResponse
-        requestClient FloodlightActivityGroupsList{..}
+        type Scopes FloodlightActivityGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightActivityGroupsList'{..}
           = go _faglProFileId _faglFloodlightConfigurationId
               _faglAdvertiserId
               _faglSearchString

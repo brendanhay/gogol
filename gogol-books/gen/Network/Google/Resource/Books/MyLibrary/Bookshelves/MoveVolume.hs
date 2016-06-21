@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type MyLibraryBookshelvesMoveVolumeResource =
 -- | Moves a volume within a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesMoveVolume' smart constructor.
-data MyLibraryBookshelvesMoveVolume = MyLibraryBookshelvesMoveVolume
+data MyLibraryBookshelvesMoveVolume = MyLibraryBookshelvesMoveVolume'
     { _mlbmvShelf          :: !Text
     , _mlbmvVolumeId       :: !Text
     , _mlbmvSource         :: !(Maybe Text)
@@ -83,7 +83,7 @@ myLibraryBookshelvesMoveVolume
     -> Int32 -- ^ 'mlbmvVolumePosition'
     -> MyLibraryBookshelvesMoveVolume
 myLibraryBookshelvesMoveVolume pMlbmvShelf_ pMlbmvVolumeId_ pMlbmvVolumePosition_ =
-    MyLibraryBookshelvesMoveVolume
+    MyLibraryBookshelvesMoveVolume'
     { _mlbmvShelf = pMlbmvShelf_
     , _mlbmvVolumeId = pMlbmvVolumeId_
     , _mlbmvSource = Nothing
@@ -117,7 +117,9 @@ mlbmvVolumePosition
 instance GoogleRequest MyLibraryBookshelvesMoveVolume
          where
         type Rs MyLibraryBookshelvesMoveVolume = ()
-        requestClient MyLibraryBookshelvesMoveVolume{..}
+        type Scopes MyLibraryBookshelvesMoveVolume =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryBookshelvesMoveVolume'{..}
           = go _mlbmvShelf (Just _mlbmvVolumeId)
               (Just _mlbmvVolumePosition)
               _mlbmvSource

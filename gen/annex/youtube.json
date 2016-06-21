@@ -51,6 +51,28 @@
                     }
                 }
             }
+        },
+        "liveBroadcasts": {
+            "methods": {
+                "list": {
+                    "parameters": {
+                        "broadcastType": {
+                            "default": "event"
+                        }
+                    }
+                }
+            }
+        },
+        "sponsors": {
+            "methods": {
+                "list": {
+                    "parameters": {
+                        "filter": {
+                            "default": "newest"
+                        }
+                    }
+                }
+            }
         }
     }
 }

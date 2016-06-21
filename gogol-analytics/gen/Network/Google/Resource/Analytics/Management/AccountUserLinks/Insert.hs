@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type ManagementAccountUserLinksInsertResource =
 -- | Adds a new user to the given account.
 --
 -- /See:/ 'managementAccountUserLinksInsert' smart constructor.
-data ManagementAccountUserLinksInsert = ManagementAccountUserLinksInsert
+data ManagementAccountUserLinksInsert = ManagementAccountUserLinksInsert'
     { _mauliPayload   :: !EntityUserLink
     , _mauliAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ managementAccountUserLinksInsert
     -> Text -- ^ 'mauliAccountId'
     -> ManagementAccountUserLinksInsert
 managementAccountUserLinksInsert pMauliPayload_ pMauliAccountId_ =
-    ManagementAccountUserLinksInsert
+    ManagementAccountUserLinksInsert'
     { _mauliPayload = pMauliPayload_
     , _mauliAccountId = pMauliAccountId_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest
          ManagementAccountUserLinksInsert where
         type Rs ManagementAccountUserLinksInsert =
              EntityUserLink
-        requestClient ManagementAccountUserLinksInsert{..}
+        type Scopes ManagementAccountUserLinksInsert =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
+        requestClient ManagementAccountUserLinksInsert'{..}
           = go _mauliAccountId (Just AltJSON) _mauliPayload
               analyticsService
           where go

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.GamesManagement.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -109,14 +110,24 @@ module Network.Google.GamesManagement.Types
     -- * Player
     , Player
     , player
+    , pBannerURLLandscape
     , pLastPlayedWith
     , pAvatarImageURL
     , pKind
     , pExperienceInfo
     , pName
+    , pOriginalPlayerId
     , pDisplayName
     , pTitle
+    , pBannerURLPortrait
     , pPlayerId
+    , pProFileSettings
+
+    -- * ProFileSettings
+    , ProFileSettings
+    , proFileSettings
+    , pfsProFileVisible
+    , pfsKind
 
     -- * AchievementResetResponse
     , AchievementResetResponse
@@ -132,17 +143,17 @@ import           Network.Google.GamesManagement.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1management' of the Google Play Game Services Management API. This contains the host and root path used as a starting point for constructing service requests.
-gamesManagementService :: Service
+gamesManagementService :: ServiceConfig
 gamesManagementService
   = defaultService
       (ServiceId "gamesManagement:v1management")
       "www.googleapis.com"
 
--- | Know your basic profile info and list of people in your circles.
-plusLoginScope :: OAuthScope
-plusLoginScope = "https://www.googleapis.com/auth/plus.login";
+-- | Know the list of people in your circles, your age range, and language
+plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
+plusLoginScope = Proxy;
 
 -- | Share your Google+ profile information and view and manage your game
 -- activity
-gamesScope :: OAuthScope
-gamesScope = "https://www.googleapis.com/auth/games";
+gamesScope :: Proxy '["https://www.googleapis.com/auth/games"]
+gamesScope = Proxy;

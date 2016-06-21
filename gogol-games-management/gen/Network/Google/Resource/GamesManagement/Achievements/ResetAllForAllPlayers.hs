@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Achievements.ResetAllForAllPlayers
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,19 +52,22 @@ type AchievementsResetAllForAllPlayersResource =
 --
 -- /See:/ 'achievementsResetAllForAllPlayers' smart constructor.
 data AchievementsResetAllForAllPlayers =
-    AchievementsResetAllForAllPlayers
+    AchievementsResetAllForAllPlayers'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsResetAllForAllPlayers' with the minimum fields required to make a request.
 --
 achievementsResetAllForAllPlayers
     :: AchievementsResetAllForAllPlayers
-achievementsResetAllForAllPlayers = AchievementsResetAllForAllPlayers
+achievementsResetAllForAllPlayers = AchievementsResetAllForAllPlayers'
 
 instance GoogleRequest
          AchievementsResetAllForAllPlayers where
         type Rs AchievementsResetAllForAllPlayers = ()
-        requestClient AchievementsResetAllForAllPlayers{}
+        type Scopes AchievementsResetAllForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient AchievementsResetAllForAllPlayers'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Channels.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type ChannelsUpdateResource =
 -- invideoPromotion objects and their child properties.
 --
 -- /See:/ 'channelsUpdate' smart constructor.
-data ChannelsUpdate = ChannelsUpdate
+data ChannelsUpdate = ChannelsUpdate'
     { _chaPart                   :: !Text
     , _chaPayload                :: !Channel
     , _chaOnBehalfOfContentOwner :: !(Maybe Text)
@@ -79,7 +79,7 @@ channelsUpdate
     -> Channel -- ^ 'chaPayload'
     -> ChannelsUpdate
 channelsUpdate pChaPart_ pChaPayload_ =
-    ChannelsUpdate
+    ChannelsUpdate'
     { _chaPart = pChaPart_
     , _chaPayload = pChaPayload_
     , _chaOnBehalfOfContentOwner = Nothing
@@ -116,7 +116,11 @@ chaOnBehalfOfContentOwner
 
 instance GoogleRequest ChannelsUpdate where
         type Rs ChannelsUpdate = Channel
-        requestClient ChannelsUpdate{..}
+        type Scopes ChannelsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient ChannelsUpdate'{..}
           = go (Just _chaPart) _chaOnBehalfOfContentOwner
               (Just AltJSON)
               _chaPayload

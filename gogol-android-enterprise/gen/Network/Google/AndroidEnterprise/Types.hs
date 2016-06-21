@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AndroidEnterprise.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,7 +20,7 @@ module Network.Google.AndroidEnterprise.Types
       androidEnterpriseService
 
     -- * OAuth Scopes
-    , androidenterpriseScope
+    , androidEnterpriseScope
 
     -- * GroupLicense
     , GroupLicense
@@ -30,6 +31,12 @@ module Network.Google.AndroidEnterprise.Types
     , glApproval
     , glProductId
     , glAcquisitionKind
+
+    -- * StoreLayoutPagesListResponse
+    , StoreLayoutPagesListResponse
+    , storeLayoutPagesListResponse
+    , slplrKind
+    , slplrPage
 
     -- * EnterpriseAccount
     , EnterpriseAccount
@@ -64,11 +71,39 @@ module Network.Google.AndroidEnterprise.Types
     , glulrKind
     , glulrUser
 
+    -- * TokenPagination
+    , TokenPagination
+    , tokenPagination
+    , tpNextPageToken
+    , tpPreviousPageToken
+
     -- * ApprovalURLInfo
     , ApprovalURLInfo
     , approvalURLInfo
     , auiApprovalURL
     , auiKind
+
+    -- * StoreLayoutClustersListResponse
+    , StoreLayoutClustersListResponse
+    , storeLayoutClustersListResponse
+    , slclrCluster
+    , slclrKind
+
+    -- * StoreCluster
+    , StoreCluster
+    , storeCluster
+    , scKind
+    , scName
+    , scOrderInPage
+    , scId
+    , scProductId
+
+    -- * PageInfo
+    , PageInfo
+    , pageInfo
+    , piResultPerPage
+    , piTotalResults
+    , piStartIndex
 
     -- * ProductPermission
     , ProductPermission
@@ -153,6 +188,14 @@ module Network.Google.AndroidEnterprise.Types
     , productsGenerateApprovalURLResponse
     , pgaurURL
 
+    -- * StorePage
+    , StorePage
+    , storePage
+    , spKind
+    , spLink
+    , spName
+    , spId
+
     -- * EnterprisesSendTestPushNotificationResponse
     , EnterprisesSendTestPushNotificationResponse
     , enterprisesSendTestPushNotificationResponse
@@ -170,6 +213,12 @@ module Network.Google.AndroidEnterprise.Types
     , appRestrictionsSchema
     , arsKind
     , arsRestrictions
+
+    -- * LocalizedText
+    , LocalizedText
+    , localizedText
+    , ltText
+    , ltLocale
 
     -- * UserToken
     , UserToken
@@ -192,14 +241,22 @@ module Network.Google.AndroidEnterprise.Types
     , eName
     , eId
 
+    -- * StoreLayout
+    , StoreLayout
+    , storeLayout
+    , slKind
+    , slHomepageId
+
     -- * Product
     , Product
     , product
+    , pSmallIconURL
     , pAuthorName
     , pKind
     , pWorkDetailsURL
     , pRequiresContainerApp
     , pAppVersion
+    , pProductPricing
     , pDistributionChannel
     , pIconURL
     , pTitle
@@ -244,6 +301,14 @@ module Network.Google.AndroidEnterprise.Types
     , eeKind
     , eeReason
     , eeProductId
+
+    -- * ProductsListResponse
+    , ProductsListResponse
+    , productsListResponse
+    , plrTokenPagination
+    , plrPageInfo
+    , plrKind
+    , plrProduct
     ) where
 
 import           Network.Google.AndroidEnterprise.Types.Product
@@ -251,11 +316,11 @@ import           Network.Google.AndroidEnterprise.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play EMM API. This contains the host and root path used as a starting point for constructing service requests.
-androidEnterpriseService :: Service
+androidEnterpriseService :: ServiceConfig
 androidEnterpriseService
   = defaultService (ServiceId "androidenterprise:v1")
       "www.googleapis.com"
 
 -- | Manage corporate Android devices
-androidenterpriseScope :: OAuthScope
-androidenterpriseScope = "https://www.googleapis.com/auth/androidenterprise";
+androidEnterpriseScope :: Proxy '["https://www.googleapis.com/auth/androidenterprise"]
+androidEnterpriseScope = Proxy;

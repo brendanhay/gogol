@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.HTTPHealthChecks.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type HTTPHealthChecksPatchResource =
 -- data included in the request. This method supports patch semantics.
 --
 -- /See:/ 'hTTPHealthChecksPatch' smart constructor.
-data HTTPHealthChecksPatch = HTTPHealthChecksPatch
+data HTTPHealthChecksPatch = HTTPHealthChecksPatch'
     { _httphcpProject         :: !Text
     , _httphcpPayload         :: !HTTPHealthCheck
     , _httphcpHTTPHealthCheck :: !Text
@@ -81,13 +81,13 @@ hTTPHealthChecksPatch
     -> Text -- ^ 'httphcpHTTPHealthCheck'
     -> HTTPHealthChecksPatch
 hTTPHealthChecksPatch pHttphcpProject_ pHttphcpPayload_ pHttphcpHTTPHealthCheck_ =
-    HTTPHealthChecksPatch
+    HTTPHealthChecksPatch'
     { _httphcpProject = pHttphcpProject_
     , _httphcpPayload = pHttphcpPayload_
     , _httphcpHTTPHealthCheck = pHttphcpHTTPHealthCheck_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 httphcpProject :: Lens' HTTPHealthChecksPatch Text
 httphcpProject
   = lens _httphcpProject
@@ -107,7 +107,10 @@ httphcpHTTPHealthCheck
 
 instance GoogleRequest HTTPHealthChecksPatch where
         type Rs HTTPHealthChecksPatch = Operation
-        requestClient HTTPHealthChecksPatch{..}
+        type Scopes HTTPHealthChecksPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient HTTPHealthChecksPatch'{..}
           = go _httphcpProject _httphcpHTTPHealthCheck
               (Just AltJSON)
               _httphcpPayload

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.MobileDevices.Action
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type MobileDevicesActionResource =
 -- | Take action on Mobile Device
 --
 -- /See:/ 'mobileDevicesAction' smart constructor.
-data MobileDevicesAction = MobileDevicesAction
+data MobileDevicesAction = MobileDevicesAction'
     { _mdaResourceId :: !Text
     , _mdaPayload    :: !MobileDeviceAction
     , _mdaCustomerId :: !Text
@@ -80,7 +80,7 @@ mobileDevicesAction
     -> Text -- ^ 'mdaCustomerId'
     -> MobileDevicesAction
 mobileDevicesAction pMdaResourceId_ pMdaPayload_ pMdaCustomerId_ =
-    MobileDevicesAction
+    MobileDevicesAction'
     { _mdaResourceId = pMdaResourceId_
     , _mdaPayload = pMdaPayload_
     , _mdaCustomerId = pMdaCustomerId_
@@ -105,7 +105,10 @@ mdaCustomerId
 
 instance GoogleRequest MobileDevicesAction where
         type Rs MobileDevicesAction = ()
-        requestClient MobileDevicesAction{..}
+        type Scopes MobileDevicesAction =
+             '["https://www.googleapis.com/auth/admin.directory.device.mobile",
+               "https://www.googleapis.com/auth/admin.directory.device.mobile.action"]
+        requestClient MobileDevicesAction'{..}
           = go _mdaCustomerId _mdaResourceId (Just AltJSON)
               _mdaPayload
               directoryService

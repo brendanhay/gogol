@@ -7,14 +7,14 @@
 
 -- |
 -- Module      : Network.Google.Discovery
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you discover information about other Google APIs, such as what APIs
--- are available, the resource and method details for each API.
+-- Provides information about other Google APIs, such as what APIs are
+-- available, the resource, and method details for each API.
 --
 -- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference>
 module Network.Google.Discovery
@@ -166,6 +166,7 @@ module Network.Google.Discovery
     , rdName
     , rdPackagePath
     , rdFeatures
+    , rdVersionModule
     , rdVersion
     , rdParameters
     , rdDocumentationLink

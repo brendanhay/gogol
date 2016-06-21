@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type RelyingPartyDeleteAccountResource =
 -- | Delete user account.
 --
 -- /See:/ 'relyingPartyDeleteAccount' smart constructor.
-newtype RelyingPartyDeleteAccount = RelyingPartyDeleteAccount
+newtype RelyingPartyDeleteAccount = RelyingPartyDeleteAccount'
     { _rPayload :: IdentitytoolkitRelyingPartyDeleteAccountRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyDeleteAccount
     :: IdentitytoolkitRelyingPartyDeleteAccountRequest -- ^ 'rPayload'
     -> RelyingPartyDeleteAccount
 relyingPartyDeleteAccount pRPayload_ =
-    RelyingPartyDeleteAccount
+    RelyingPartyDeleteAccount'
     { _rPayload = pRPayload_
     }
 
@@ -79,7 +79,8 @@ instance GoogleRequest RelyingPartyDeleteAccount
          where
         type Rs RelyingPartyDeleteAccount =
              DeleteAccountResponse
-        requestClient RelyingPartyDeleteAccount{..}
+        type Scopes RelyingPartyDeleteAccount = '[]
+        requestClient RelyingPartyDeleteAccount'{..}
           = go (Just AltJSON) _rPayload identityToolkitService
           where go
                   = buildClient

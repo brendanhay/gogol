@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.ZoneOperations.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ZoneOperationsDeleteResource =
 -- | Deletes the specified zone-specific Operations resource.
 --
 -- /See:/ 'zoneOperationsDelete' smart constructor.
-data ZoneOperationsDelete = ZoneOperationsDelete
+data ZoneOperationsDelete = ZoneOperationsDelete'
     { _zodProject   :: !Text
     , _zodOperation :: !Text
     , _zodZone      :: !Text
@@ -78,7 +78,7 @@ zoneOperationsDelete
     -> Text -- ^ 'zodZone'
     -> ZoneOperationsDelete
 zoneOperationsDelete pZodProject_ pZodOperation_ pZodZone_ =
-    ZoneOperationsDelete
+    ZoneOperationsDelete'
     { _zodProject = pZodProject_
     , _zodOperation = pZodOperation_
     , _zodZone = pZodZone_
@@ -94,13 +94,16 @@ zodOperation :: Lens' ZoneOperationsDelete Text
 zodOperation
   = lens _zodOperation (\ s a -> s{_zodOperation = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 zodZone :: Lens' ZoneOperationsDelete Text
 zodZone = lens _zodZone (\ s a -> s{_zodZone = a})
 
 instance GoogleRequest ZoneOperationsDelete where
         type Rs ZoneOperationsDelete = ()
-        requestClient ZoneOperationsDelete{..}
+        type Scopes ZoneOperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient ZoneOperationsDelete'{..}
           = go _zodProject _zodZone _zodOperation
               (Just AltJSON)
               computeService

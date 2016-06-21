@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeSeller.Accounts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AccountsListResource =
 -- | List all accounts available to this Ad Exchange account.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
+data AccountsList = AccountsList'
     { _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,7 +68,7 @@ data AccountsList = AccountsList
 accountsList
     :: AccountsList
 accountsList =
-    AccountsList
+    AccountsList'
     { _alPageToken = Nothing
     , _alMaxResults = Nothing
     }
@@ -89,7 +89,10 @@ alMaxResults
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = Accounts
-        requestClient AccountsList{..}
+        type Scopes AccountsList =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
+        requestClient AccountsList'{..}
           = go _alPageToken _alMaxResults (Just AltJSON)
               adExchangeSellerService
           where go

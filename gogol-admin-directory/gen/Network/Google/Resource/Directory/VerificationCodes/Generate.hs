@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.VerificationCodes.Generate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type VerificationCodesGenerateResource =
 -- | Generate new backup verification codes for the user.
 --
 -- /See:/ 'verificationCodesGenerate' smart constructor.
-newtype VerificationCodesGenerate = VerificationCodesGenerate
+newtype VerificationCodesGenerate = VerificationCodesGenerate'
     { _vcgUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ verificationCodesGenerate
     :: Text -- ^ 'vcgUserKey'
     -> VerificationCodesGenerate
 verificationCodesGenerate pVcgUserKey_ =
-    VerificationCodesGenerate
+    VerificationCodesGenerate'
     { _vcgUserKey = pVcgUserKey_
     }
 
@@ -79,7 +79,9 @@ vcgUserKey
 instance GoogleRequest VerificationCodesGenerate
          where
         type Rs VerificationCodesGenerate = ()
-        requestClient VerificationCodesGenerate{..}
+        type Scopes VerificationCodesGenerate =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
+        requestClient VerificationCodesGenerate'{..}
           = go _vcgUserKey (Just AltJSON) directoryService
           where go
                   = buildClient

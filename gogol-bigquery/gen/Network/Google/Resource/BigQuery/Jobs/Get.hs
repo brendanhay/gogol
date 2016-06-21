@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Jobs.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type JobsGetResource =
 -- who ran the job, or have the Is Owner project role.
 --
 -- /See:/ 'jobsGet' smart constructor.
-data JobsGet = JobsGet
+data JobsGet = JobsGet'
     { _jgJobId     :: !Text
     , _jgProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,23 +75,27 @@ jobsGet
     -> Text -- ^ 'jgProjectId'
     -> JobsGet
 jobsGet pJgJobId_ pJgProjectId_ =
-    JobsGet
+    JobsGet'
     { _jgJobId = pJgJobId_
     , _jgProjectId = pJgProjectId_
     }
 
--- | Job ID of the requested job
+-- | [Required] Job ID of the requested job
 jgJobId :: Lens' JobsGet Text
 jgJobId = lens _jgJobId (\ s a -> s{_jgJobId = a})
 
--- | Project ID of the requested job
+-- | [Required] Project ID of the requested job
 jgProjectId :: Lens' JobsGet Text
 jgProjectId
   = lens _jgProjectId (\ s a -> s{_jgProjectId = a})
 
 instance GoogleRequest JobsGet where
         type Rs JobsGet = Job
-        requestClient JobsGet{..}
+        type Scopes JobsGet =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient JobsGet'{..}
           = go _jgProjectId _jgJobId (Just AltJSON)
               bigQueryService
           where go

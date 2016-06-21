@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.UserRolePermissions.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolePermissionsGet' request conforms to.
 type UserRolePermissionsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRolePermissions" :>
@@ -55,7 +55,7 @@ type UserRolePermissionsGetResource =
 -- | Gets one user role permission by ID.
 --
 -- /See:/ 'userRolePermissionsGet' smart constructor.
-data UserRolePermissionsGet = UserRolePermissionsGet
+data UserRolePermissionsGet = UserRolePermissionsGet'
     { _uProFileId :: !(Textual Int64)
     , _uId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ userRolePermissionsGet
     -> Int64 -- ^ 'uId'
     -> UserRolePermissionsGet
 userRolePermissionsGet pUProFileId_ pUId_ =
-    UserRolePermissionsGet
+    UserRolePermissionsGet'
     { _uProFileId = _Coerce # pUProFileId_
     , _uId = _Coerce # pUId_
     }
@@ -89,7 +89,9 @@ uId = lens _uId (\ s a -> s{_uId = a}) . _Coerce
 
 instance GoogleRequest UserRolePermissionsGet where
         type Rs UserRolePermissionsGet = UserRolePermission
-        requestClient UserRolePermissionsGet{..}
+        type Scopes UserRolePermissionsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient UserRolePermissionsGet'{..}
           = go _uProFileId _uId (Just AltJSON)
               dFAReportingService
           where go

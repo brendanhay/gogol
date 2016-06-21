@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Comments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type CommentsListResource =
 -- | Retrieves the comments for a post, possibly filtered.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList
+data CommentsList = CommentsList'
     { _clStatus      :: !(Maybe [CommentsListStatus])
     , _clEndDate     :: !(Maybe DateTime')
     , _clBlogId      :: !Text
@@ -108,7 +108,7 @@ commentsList
     -> Text -- ^ 'clPostId'
     -> CommentsList
 commentsList pClBlogId_ pClPostId_ =
-    CommentsList
+    CommentsList'
     { _clStatus = Nothing
     , _clEndDate = Nothing
     , _clBlogId = pClBlogId_
@@ -170,7 +170,10 @@ clMaxResults
 
 instance GoogleRequest CommentsList where
         type Rs CommentsList = CommentList
-        requestClient CommentsList{..}
+        type Scopes CommentsList =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient CommentsList'{..}
           = go _clBlogId _clPostId (_clStatus ^. _Default)
               _clEndDate
               _clStartDate

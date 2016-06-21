@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Scores.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -37,6 +37,7 @@ module Network.Google.Resource.Games.Scores.Get
     , ScoresGet
 
     -- * Request Lenses
+    , sgConsistencyToken
     , sgTimeSpan
     , sgLeaderboardId
     , sgIncludeRankType
@@ -60,13 +61,14 @@ type ScoresGetResource =
                Capture "leaderboardId" Text :>
                  "scores" :>
                    Capture "timeSpan" ScoresGetTimeSpan :>
-                     QueryParam "includeRankType" ScoresGetIncludeRankType
-                       :>
-                       QueryParam "language" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" (Textual Int32) :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] PlayerLeaderboardScoreListResponse
+                     QueryParam "consistencyToken" (Textual Int64) :>
+                       QueryParam "includeRankType" ScoresGetIncludeRankType
+                         :>
+                         QueryParam "language" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" (Textual Int32) :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] PlayerLeaderboardScoreListResponse
 
 -- | Get high scores, and optionally ranks, in leaderboards for the currently
 -- authenticated player. For a specific time span, leaderboardId can be set
@@ -75,19 +77,22 @@ type ScoresGetResource =
 -- same request; only one parameter may be set to \'ALL\'.
 --
 -- /See:/ 'scoresGet' smart constructor.
-data ScoresGet = ScoresGet
-    { _sgTimeSpan        :: !ScoresGetTimeSpan
-    , _sgLeaderboardId   :: !Text
-    , _sgIncludeRankType :: !(Maybe ScoresGetIncludeRankType)
-    , _sgLanguage        :: !(Maybe Text)
-    , _sgPageToken       :: !(Maybe Text)
-    , _sgPlayerId        :: !Text
-    , _sgMaxResults      :: !(Maybe (Textual Int32))
+data ScoresGet = ScoresGet'
+    { _sgConsistencyToken :: !(Maybe (Textual Int64))
+    , _sgTimeSpan         :: !ScoresGetTimeSpan
+    , _sgLeaderboardId    :: !Text
+    , _sgIncludeRankType  :: !(Maybe ScoresGetIncludeRankType)
+    , _sgLanguage         :: !(Maybe Text)
+    , _sgPageToken        :: !(Maybe Text)
+    , _sgPlayerId         :: !Text
+    , _sgMaxResults       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sgConsistencyToken'
 --
 -- * 'sgTimeSpan'
 --
@@ -108,8 +113,9 @@ scoresGet
     -> Text -- ^ 'sgPlayerId'
     -> ScoresGet
 scoresGet pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
-    ScoresGet
-    { _sgTimeSpan = pSgTimeSpan_
+    ScoresGet'
+    { _sgConsistencyToken = Nothing
+    , _sgTimeSpan = pSgTimeSpan_
     , _sgLeaderboardId = pSgLeaderboardId_
     , _sgIncludeRankType = Nothing
     , _sgLanguage = Nothing
@@ -117,6 +123,13 @@ scoresGet pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
     , _sgPlayerId = pSgPlayerId_
     , _sgMaxResults = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+sgConsistencyToken :: Lens' ScoresGet (Maybe Int64)
+sgConsistencyToken
+  = lens _sgConsistencyToken
+      (\ s a -> s{_sgConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The time span for the scores and ranks you\'re requesting.
 sgTimeSpan :: Lens' ScoresGet ScoresGetTimeSpan
@@ -164,8 +177,12 @@ sgMaxResults
 instance GoogleRequest ScoresGet where
         type Rs ScoresGet =
              PlayerLeaderboardScoreListResponse
-        requestClient ScoresGet{..}
+        type Scopes ScoresGet =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient ScoresGet'{..}
           = go _sgPlayerId _sgLeaderboardId _sgTimeSpan
+              _sgConsistencyToken
               _sgIncludeRankType
               _sgLanguage
               _sgPageToken

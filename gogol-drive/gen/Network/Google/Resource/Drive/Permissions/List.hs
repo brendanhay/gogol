@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Permissions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'PermissionsList' request conforms to.
 type PermissionsListResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "permissions" :>
@@ -53,7 +53,7 @@ type PermissionsListResource =
 -- | Lists a file\'s permissions.
 --
 -- /See:/ 'permissionsList' smart constructor.
-newtype PermissionsList = PermissionsList
+newtype PermissionsList = PermissionsList'
     { _plFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,17 +66,24 @@ permissionsList
     :: Text -- ^ 'plFileId'
     -> PermissionsList
 permissionsList pPlFileId_ =
-    PermissionsList
+    PermissionsList'
     { _plFileId = pPlFileId_
     }
 
--- | The ID for the file.
+-- | The ID of the file.
 plFileId :: Lens' PermissionsList Text
 plFileId = lens _plFileId (\ s a -> s{_plFileId = a})
 
 instance GoogleRequest PermissionsList where
         type Rs PermissionsList = PermissionList
-        requestClient PermissionsList{..}
+        type Scopes PermissionsList =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
+        requestClient PermissionsList'{..}
           = go _plFileId (Just AltJSON) driveService
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type InstanceGroupManagersRecreateInstancesResource =
 -- status of the recreating action with the listmanagedinstances method.
 --
 -- /See:/ 'instanceGroupManagersRecreateInstances' smart constructor.
-data InstanceGroupManagersRecreateInstances = InstanceGroupManagersRecreateInstances
+data InstanceGroupManagersRecreateInstances = InstanceGroupManagersRecreateInstances'
     { _igmriProject              :: !Text
     , _igmriInstanceGroupManager :: !Text
     , _igmriZone                 :: !Text
@@ -97,14 +97,14 @@ instanceGroupManagersRecreateInstances
     -> InstanceGroupManagersRecreateInstancesRequest -- ^ 'igmriPayload'
     -> InstanceGroupManagersRecreateInstances
 instanceGroupManagersRecreateInstances pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriZone_ pIgmriPayload_ =
-    InstanceGroupManagersRecreateInstances
+    InstanceGroupManagersRecreateInstances'
     { _igmriProject = pIgmriProject_
     , _igmriInstanceGroupManager = pIgmriInstanceGroupManager_
     , _igmriZone = pIgmriZone_
     , _igmriPayload = pIgmriPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmriProject :: Lens' InstanceGroupManagersRecreateInstances Text
 igmriProject
   = lens _igmriProject (\ s a -> s{_igmriProject = a})
@@ -129,8 +129,11 @@ instance GoogleRequest
          InstanceGroupManagersRecreateInstances where
         type Rs InstanceGroupManagersRecreateInstances =
              Operation
+        type Scopes InstanceGroupManagersRecreateInstances =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient
-          InstanceGroupManagersRecreateInstances{..}
+          InstanceGroupManagersRecreateInstances'{..}
           = go _igmriProject _igmriZone
               _igmriInstanceGroupManager
               (Just AltJSON)

@@ -7,7 +7,7 @@
 
 -- |
 -- Module      : Network.Google.AndroidPublisher
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -20,6 +20,9 @@ module Network.Google.AndroidPublisher
     (
     -- * Service Configuration
       androidPublisherService
+
+    -- * OAuth Scopes
+    , androidPublisherScope
 
     -- * API Declaration
     , AndroidPublisherAPI
@@ -182,6 +185,15 @@ module Network.Google.AndroidPublisher
     -- ** androidpublisher.purchases.subscriptions.revoke
     , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
 
+    -- ** androidpublisher.reviews.get
+    , module Network.Google.Resource.AndroidPublisher.Reviews.Get
+
+    -- ** androidpublisher.reviews.list
+    , module Network.Google.Resource.AndroidPublisher.Reviews.List
+
+    -- ** androidpublisher.reviews.reply
+    , module Network.Google.Resource.AndroidPublisher.Reviews.Reply
+
     -- * Types
 
     -- ** InAppProductListings
@@ -251,6 +263,18 @@ module Network.Google.AndroidPublisher
     -- ** EditsTracksPatchTrack
     , EditsTracksPatchTrack (..)
 
+    -- ** UserComment
+    , UserComment
+    , userComment
+    , ucAndroidOSVersion
+    , ucText
+    , ucDevice
+    , ucAppVersionCode
+    , ucAppVersionName
+    , ucReviewerLanguage
+    , ucStarRating
+    , ucLastModified
+
     -- ** Testers
     , Testers
     , testers
@@ -294,6 +318,7 @@ module Network.Google.AndroidPublisher
     , season
     , sStart
     , sEnd
+    , sProrations
 
     -- ** PageInfo
     , PageInfo
@@ -322,6 +347,13 @@ module Network.Google.AndroidPublisher
     , ppPurchaseTimeMillis
     , ppDeveloperPayload
 
+    -- ** ReviewsListResponse
+    , ReviewsListResponse
+    , reviewsListResponse
+    , rlrTokenPagination
+    , rlrPageInfo
+    , rlrReviews
+
     -- ** SubscriptionPurchasesDeferResponse
     , SubscriptionPurchasesDeferResponse
     , subscriptionPurchasesDeferResponse
@@ -336,9 +368,15 @@ module Network.Google.AndroidPublisher
     -- ** SubscriptionPurchase
     , SubscriptionPurchase
     , subscriptionPurchase
+    , spPaymentState
     , spKind
     , spExpiryTimeMillis
     , spAutoRenewing
+    , spPriceCurrencyCode
+    , spCancelReason
+    , spCountryCode
+    , spDeveloperPayload
+    , spPriceAmountMicros
     , spStartTimeMillis
 
     -- ** AppDetails
@@ -400,6 +438,12 @@ module Network.Google.AndroidPublisher
     -- ** EditsImagesUploadImageType
     , EditsImagesUploadImageType (..)
 
+    -- ** Prorate
+    , Prorate
+    , prorate
+    , pStart
+    , pDefaultPrice
+
     -- ** InAppProductsListResponse
     , InAppProductsListResponse
     , inAppProductsListResponse
@@ -416,6 +460,13 @@ module Network.Google.AndroidPublisher
     , aPKListingsListResponse
     , apkllrKind
     , apkllrListings
+
+    -- ** Review
+    , Review
+    , review
+    , rReviewId
+    , rAuthorName
+    , rComments
 
     -- ** InAppProductsInsertResponse
     , InAppProductsInsertResponse
@@ -436,11 +487,22 @@ module Network.Google.AndroidPublisher
     -- ** EditsExpansionFilesGetExpansionFileType
     , EditsExpansionFilesGetExpansionFileType (..)
 
+    -- ** ReviewsReplyRequest
+    , ReviewsReplyRequest
+    , reviewsReplyRequest
+    , rrrReplyText
+
     -- ** EditsExpansionFilesPatchExpansionFileType
     , EditsExpansionFilesPatchExpansionFileType (..)
 
     -- ** EditsExpansionFilesUpdateExpansionFileType
     , EditsExpansionFilesUpdateExpansionFileType (..)
+
+    -- ** DeveloperComment
+    , DeveloperComment
+    , developerComment
+    , dcText
+    , dcLastModified
 
     -- ** InAppProduct
     , InAppProduct
@@ -484,6 +546,11 @@ module Network.Google.AndroidPublisher
     , apklrKind
     , apklrAPKs
 
+    -- ** ReviewsReplyResponse
+    , ReviewsReplyResponse
+    , reviewsReplyResponse
+    , rrrResult
+
     -- ** ExternallyHostedAPKUsesPermission
     , ExternallyHostedAPKUsesPermission
     , externallyHostedAPKUsesPermission
@@ -513,6 +580,12 @@ module Network.Google.AndroidPublisher
     , elrPageInfo
     , elrResources
 
+    -- ** Comment
+    , Comment
+    , comment
+    , cUserComment
+    , cDeveloperComment
+
     -- ** EditsTestersUpdateTrack
     , EditsTestersUpdateTrack (..)
 
@@ -520,6 +593,18 @@ module Network.Google.AndroidPublisher
     , InAppProductsUpdateRequest
     , inAppProductsUpdateRequest
     , inInAppProduct
+
+    -- ** Timestamp
+    , Timestamp
+    , timestamp
+    , tNanos
+    , tSeconds
+
+    -- ** ReviewReplyResult
+    , ReviewReplyResult
+    , reviewReplyResult
+    , rReplyText
+    , rLastEdited
 
     -- ** Entitlement
     , Entitlement
@@ -590,6 +675,9 @@ import           Network.Google.Resource.AndroidPublisher.Purchases.Subscription
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
+import           Network.Google.Resource.AndroidPublisher.Reviews.Get
+import           Network.Google.Resource.AndroidPublisher.Reviews.List
+import           Network.Google.Resource.AndroidPublisher.Reviews.Reply
 
 {- $resources
 TODO
@@ -604,6 +692,9 @@ type AndroidPublisherAPI =
        :<|> InAppProductsGetResource
        :<|> InAppProductsDeleteResource
        :<|> InAppProductsUpdateResource
+       :<|> ReviewsReplyResource
+       :<|> ReviewsListResource
+       :<|> ReviewsGetResource
        :<|> EditsImagesListResource
        :<|> EditsImagesDeleteallResource
        :<|> EditsImagesUploadResource

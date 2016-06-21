@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Comments.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type CommentsDeleteResource =
 -- | Deletes a comment.
 --
 -- /See:/ 'commentsDelete' smart constructor.
-newtype CommentsDelete = CommentsDelete
+newtype CommentsDelete = CommentsDelete'
     { _cdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ commentsDelete
     :: Text -- ^ 'cdId'
     -> CommentsDelete
 commentsDelete pCdId_ =
-    CommentsDelete
+    CommentsDelete'
     { _cdId = pCdId_
     }
 
@@ -75,7 +75,9 @@ cdId = lens _cdId (\ s a -> s{_cdId = a})
 
 instance GoogleRequest CommentsDelete where
         type Rs CommentsDelete = ()
-        requestClient CommentsDelete{..}
+        type Scopes CommentsDelete =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient CommentsDelete'{..}
           = go (Just _cdId) (Just AltJSON) youTubeService
           where go
                   = buildClient (Proxy :: Proxy CommentsDeleteResource)

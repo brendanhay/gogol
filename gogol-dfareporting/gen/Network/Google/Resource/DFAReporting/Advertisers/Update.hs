@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Advertisers.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersUpdate' request conforms to.
 type AdvertisersUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
@@ -54,7 +54,7 @@ type AdvertisersUpdateResource =
 -- | Updates an existing advertiser.
 --
 -- /See:/ 'advertisersUpdate' smart constructor.
-data AdvertisersUpdate = AdvertisersUpdate
+data AdvertisersUpdate = AdvertisersUpdate'
     { _auProFileId :: !(Textual Int64)
     , _auPayload   :: !Advertiser
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ advertisersUpdate
     -> Advertiser -- ^ 'auPayload'
     -> AdvertisersUpdate
 advertisersUpdate pAuProFileId_ pAuPayload_ =
-    AdvertisersUpdate
+    AdvertisersUpdate'
     { _auProFileId = _Coerce # pAuProFileId_
     , _auPayload = pAuPayload_
     }
@@ -89,7 +89,9 @@ auPayload
 
 instance GoogleRequest AdvertisersUpdate where
         type Rs AdvertisersUpdate = Advertiser
-        requestClient AdvertisersUpdate{..}
+        type Scopes AdvertisersUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdvertisersUpdate'{..}
           = go _auProFileId (Just AltJSON) _auPayload
               dFAReportingService
           where go

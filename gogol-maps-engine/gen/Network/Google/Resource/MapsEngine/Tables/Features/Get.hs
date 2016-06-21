@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Features.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type TablesFeaturesGetResource =
 -- | Return a single feature, given its ID.
 --
 -- /See:/ 'tablesFeaturesGet' smart constructor.
-data TablesFeaturesGet = TablesFeaturesGet
+data TablesFeaturesGet = TablesFeaturesGet'
     { _tfgVersion :: !(Maybe TablesFeaturesGetVersion)
     , _tfgId      :: !Text
     , _tfgSelect  :: !(Maybe Text)
@@ -81,7 +81,7 @@ tablesFeaturesGet
     -> Text -- ^ 'tfgTableId'
     -> TablesFeaturesGet
 tablesFeaturesGet pTfgId_ pTfgTableId_ =
-    TablesFeaturesGet
+    TablesFeaturesGet'
     { _tfgVersion = Nothing
     , _tfgId = pTfgId_
     , _tfgSelect = Nothing
@@ -110,7 +110,10 @@ tfgTableId
 
 instance GoogleRequest TablesFeaturesGet where
         type Rs TablesFeaturesGet = Feature
-        requestClient TablesFeaturesGet{..}
+        type Scopes TablesFeaturesGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient TablesFeaturesGet'{..}
           = go _tfgTableId _tfgId _tfgVersion _tfgSelect
               (Just AltJSON)
               mapsEngineService

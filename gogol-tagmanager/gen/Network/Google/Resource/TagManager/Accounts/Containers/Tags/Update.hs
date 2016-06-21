@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Tags.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type AccountsContainersTagsUpdateResource =
 -- | Updates a GTM Tag.
 --
 -- /See:/ 'accountsContainersTagsUpdate' smart constructor.
-data AccountsContainersTagsUpdate = AccountsContainersTagsUpdate
+data AccountsContainersTagsUpdate = AccountsContainersTagsUpdate'
     { _actucContainerId :: !Text
     , _actucFingerprint :: !(Maybe Text)
     , _actucPayload     :: !Tag
@@ -89,7 +89,7 @@ accountsContainersTagsUpdate
     -> Text -- ^ 'actucTagId'
     -> AccountsContainersTagsUpdate
 accountsContainersTagsUpdate pActucContainerId_ pActucPayload_ pActucAccountId_ pActucTagId_ =
-    AccountsContainersTagsUpdate
+    AccountsContainersTagsUpdate'
     { _actucContainerId = pActucContainerId_
     , _actucFingerprint = Nothing
     , _actucPayload = pActucPayload_
@@ -129,7 +129,9 @@ actucTagId
 instance GoogleRequest AccountsContainersTagsUpdate
          where
         type Rs AccountsContainersTagsUpdate = Tag
-        requestClient AccountsContainersTagsUpdate{..}
+        type Scopes AccountsContainersTagsUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient AccountsContainersTagsUpdate'{..}
           = go _actucAccountId _actucContainerId _actucTagId
               _actucFingerprint
               (Just AltJSON)

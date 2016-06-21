@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Photos.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersPhotosUpdateResource =
 -- | Add a photo for the user
 --
 -- /See:/ 'usersPhotosUpdate' smart constructor.
-data UsersPhotosUpdate = UsersPhotosUpdate
+data UsersPhotosUpdate = UsersPhotosUpdate'
     { _upuPayload :: !UserPhoto
     , _upuUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ usersPhotosUpdate
     -> Text -- ^ 'upuUserKey'
     -> UsersPhotosUpdate
 usersPhotosUpdate pUpuPayload_ pUpuUserKey_ =
-    UsersPhotosUpdate
+    UsersPhotosUpdate'
     { _upuPayload = pUpuPayload_
     , _upuUserKey = pUpuUserKey_
     }
@@ -90,7 +90,9 @@ upuUserKey
 
 instance GoogleRequest UsersPhotosUpdate where
         type Rs UsersPhotosUpdate = UserPhoto
-        requestClient UsersPhotosUpdate{..}
+        type Scopes UsersPhotosUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
+        requestClient UsersPhotosUpdate'{..}
           = go _upuUserKey (Just AltJSON) _upuPayload
               directoryService
           where go

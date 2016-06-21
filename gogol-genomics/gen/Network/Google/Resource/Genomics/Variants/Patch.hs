@@ -14,16 +14,19 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Variants.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a variant. This method supports patch semantics. Returns the
--- modified variant without its calls.
+-- Updates a variant. For the definitions of variants and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics. Returns the modified variant
+-- without its calls.
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.patch@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.patch@.
 module Network.Google.Resource.Genomics.Variants.Patch
     (
     -- * REST Resource
@@ -66,11 +69,14 @@ type VariantsPatchResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Variant :> Patch '[JSON] Variant
 
--- | Updates a variant. This method supports patch semantics. Returns the
--- modified variant without its calls.
+-- | Updates a variant. For the definitions of variants and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- This method supports patch semantics. Returns the modified variant
+-- without its calls.
 --
 -- /See:/ 'variantsPatch' smart constructor.
-data VariantsPatch = VariantsPatch
+data VariantsPatch = VariantsPatch'
     { _vpXgafv          :: !(Maybe Text)
     , _vpUploadProtocol :: !(Maybe Text)
     , _vpUpdateMask     :: !(Maybe Text)
@@ -111,7 +117,7 @@ variantsPatch
     -> Text -- ^ 'vpVariantId'
     -> VariantsPatch
 variantsPatch pVpPayload_ pVpVariantId_ =
-    VariantsPatch
+    VariantsPatch'
     { _vpXgafv = Nothing
     , _vpUploadProtocol = Nothing
     , _vpUpdateMask = Nothing
@@ -179,7 +185,10 @@ vpCallback
 
 instance GoogleRequest VariantsPatch where
         type Rs VariantsPatch = Variant
-        requestClient VariantsPatch{..}
+        type Scopes VariantsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient VariantsPatch'{..}
           = go _vpVariantId _vpXgafv _vpUploadProtocol
               _vpUpdateMask
               (Just _vpPp)

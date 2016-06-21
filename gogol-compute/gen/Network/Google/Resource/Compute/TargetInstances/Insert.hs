@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetInstances.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type TargetInstancesInsertResource =
 -- using the data included in the request.
 --
 -- /See:/ 'targetInstancesInsert' smart constructor.
-data TargetInstancesInsert = TargetInstancesInsert
+data TargetInstancesInsert = TargetInstancesInsert'
     { _tiiProject :: !Text
     , _tiiZone    :: !Text
     , _tiiPayload :: !TargetInstance
@@ -81,13 +81,13 @@ targetInstancesInsert
     -> TargetInstance -- ^ 'tiiPayload'
     -> TargetInstancesInsert
 targetInstancesInsert pTiiProject_ pTiiZone_ pTiiPayload_ =
-    TargetInstancesInsert
+    TargetInstancesInsert'
     { _tiiProject = pTiiProject_
     , _tiiZone = pTiiZone_
     , _tiiPayload = pTiiPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 tiiProject :: Lens' TargetInstancesInsert Text
 tiiProject
   = lens _tiiProject (\ s a -> s{_tiiProject = a})
@@ -103,7 +103,10 @@ tiiPayload
 
 instance GoogleRequest TargetInstancesInsert where
         type Rs TargetInstancesInsert = Operation
-        requestClient TargetInstancesInsert{..}
+        type Scopes TargetInstancesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetInstancesInsert'{..}
           = go _tiiProject _tiiZone (Just AltJSON) _tiiPayload
               computeService
           where go

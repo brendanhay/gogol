@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Container.Projects.Zones.Operations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type ProjectsZonesOperationsGetResource =
 -- | Gets the specified operation.
 --
 -- /See:/ 'projectsZonesOperationsGet' smart constructor.
-data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet
+data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet'
     { _pzogXgafv          :: !(Maybe Text)
     , _pzogUploadProtocol :: !(Maybe Text)
     , _pzogPp             :: !Bool
@@ -113,7 +113,7 @@ projectsZonesOperationsGet
     -> Text -- ^ 'pzogOperationId'
     -> ProjectsZonesOperationsGet
 projectsZonesOperationsGet pPzogZone_ pPzogProjectId_ pPzogOperationId_ =
-    ProjectsZonesOperationsGet
+    ProjectsZonesOperationsGet'
     { _pzogXgafv = Nothing
     , _pzogUploadProtocol = Nothing
     , _pzogPp = True
@@ -165,7 +165,7 @@ pzogBearerToken
       (\ s a -> s{_pzogBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzogProjectId :: Lens' ProjectsZonesOperationsGet Text
 pzogProjectId
   = lens _pzogProjectId
@@ -185,7 +185,9 @@ pzogCallback
 instance GoogleRequest ProjectsZonesOperationsGet
          where
         type Rs ProjectsZonesOperationsGet = Operation
-        requestClient ProjectsZonesOperationsGet{..}
+        type Scopes ProjectsZonesOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsZonesOperationsGet'{..}
           = go _pzogProjectId _pzogZone _pzogOperationId
               _pzogXgafv
               _pzogUploadProtocol

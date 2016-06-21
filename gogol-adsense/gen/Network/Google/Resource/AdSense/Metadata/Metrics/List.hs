@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Metadata.Metrics.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,18 +50,21 @@ type MetadataMetricsListResource =
 --
 -- /See:/ 'metadataMetricsList' smart constructor.
 data MetadataMetricsList =
-    MetadataMetricsList
+    MetadataMetricsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataMetricsList' with the minimum fields required to make a request.
 --
 metadataMetricsList
     :: MetadataMetricsList
-metadataMetricsList = MetadataMetricsList
+metadataMetricsList = MetadataMetricsList'
 
 instance GoogleRequest MetadataMetricsList where
         type Rs MetadataMetricsList = Metadata
-        requestClient MetadataMetricsList{}
+        type Scopes MetadataMetricsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient MetadataMetricsList'{}
           = go (Just AltJSON) adSenseService
           where go
                   = buildClient

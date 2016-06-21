@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Accounts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AccountsGetResource =
 -- | Get information about the selected AdSense account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet
+data AccountsGet = AccountsGet'
     { _agTree      :: !(Maybe Bool)
     , _agAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ accountsGet
     :: Text -- ^ 'agAccountId'
     -> AccountsGet
 accountsGet pAgAccountId_ =
-    AccountsGet
+    AccountsGet'
     { _agTree = Nothing
     , _agAccountId = pAgAccountId_
     }
@@ -85,7 +85,10 @@ agAccountId
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
-        requestClient AccountsGet{..}
+        type Scopes AccountsGet =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AccountsGet'{..}
           = go _agAccountId _agTree (Just AltJSON)
               adSenseService
           where go

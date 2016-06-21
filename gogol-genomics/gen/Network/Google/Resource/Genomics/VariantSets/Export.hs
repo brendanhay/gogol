@@ -14,15 +14,18 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.VariantSets.Export
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Exports variant set data to an external destination.
+-- Exports variant set data to an external destination. For the definitions
+-- of variant sets and other genomics resources, see [Fundamentals of
+-- Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.export@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.export@.
 module Network.Google.Resource.Genomics.VariantSets.Export
     (
     -- * REST Resource
@@ -64,10 +67,13 @@ type VariantSetsExportResource =
                            ReqBody '[JSON] ExportVariantSetRequest :>
                              Post '[JSON] Operation
 
--- | Exports variant set data to an external destination.
+-- | Exports variant set data to an external destination. For the definitions
+-- of variant sets and other genomics resources, see [Fundamentals of
+-- Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSetsExport' smart constructor.
-data VariantSetsExport = VariantSetsExport
+data VariantSetsExport = VariantSetsExport'
     { _vseXgafv          :: !(Maybe Text)
     , _vseUploadProtocol :: !(Maybe Text)
     , _vsePp             :: !Bool
@@ -105,7 +111,7 @@ variantSetsExport
     -> ExportVariantSetRequest -- ^ 'vsePayload'
     -> VariantSetsExport
 variantSetsExport pVseVariantSetId_ pVsePayload_ =
-    VariantSetsExport
+    VariantSetsExport'
     { _vseXgafv = Nothing
     , _vseUploadProtocol = Nothing
     , _vsePp = True
@@ -169,7 +175,11 @@ vseCallback
 
 instance GoogleRequest VariantSetsExport where
         type Rs VariantSetsExport = Operation
-        requestClient VariantSetsExport{..}
+        type Scopes VariantSetsExport =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient VariantSetsExport'{..}
           = go _vseVariantSetId _vseXgafv _vseUploadProtocol
               (Just _vsePp)
               _vseAccessToken

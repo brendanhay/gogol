@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Members.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type MembersListResource =
 -- | Retrieve all members in a group (paginated)
 --
 -- /See:/ 'membersList' smart constructor.
-data MembersList = MembersList
+data MembersList = MembersList'
     { _mlRoles      :: !(Maybe Text)
     , _mlGroupKey   :: !Text
     , _mlPageToken  :: !(Maybe Text)
@@ -81,7 +81,7 @@ membersList
     :: Text -- ^ 'mlGroupKey'
     -> MembersList
 membersList pMlGroupKey_ =
-    MembersList
+    MembersList'
     { _mlRoles = Nothing
     , _mlGroupKey = pMlGroupKey_
     , _mlPageToken = Nothing
@@ -110,7 +110,12 @@ mlMaxResults
 
 instance GoogleRequest MembersList where
         type Rs MembersList = Members
-        requestClient MembersList{..}
+        type Scopes MembersList =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member",
+               "https://www.googleapis.com/auth/admin.directory.group.member.readonly",
+               "https://www.googleapis.com/auth/admin.directory.group.readonly"]
+        requestClient MembersList'{..}
           = go _mlGroupKey _mlRoles _mlPageToken _mlMaxResults
               (Just AltJSON)
               directoryService

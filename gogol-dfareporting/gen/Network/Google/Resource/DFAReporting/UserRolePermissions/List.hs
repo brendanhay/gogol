@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.UserRolePermissions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolePermissionsList' request conforms to.
 type UserRolePermissionsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRolePermissions" :>
@@ -55,7 +55,7 @@ type UserRolePermissionsListResource =
 -- | Gets a list of user role permissions, possibly filtered.
 --
 -- /See:/ 'userRolePermissionsList' smart constructor.
-data UserRolePermissionsList = UserRolePermissionsList
+data UserRolePermissionsList = UserRolePermissionsList'
     { _urplIds       :: !(Maybe [Textual Int64])
     , _urplProFileId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ userRolePermissionsList
     :: Int64 -- ^ 'urplProFileId'
     -> UserRolePermissionsList
 userRolePermissionsList pUrplProFileId_ =
-    UserRolePermissionsList
+    UserRolePermissionsList'
     { _urplIds = Nothing
     , _urplProFileId = _Coerce # pUrplProFileId_
     }
@@ -92,7 +92,9 @@ urplProFileId
 instance GoogleRequest UserRolePermissionsList where
         type Rs UserRolePermissionsList =
              UserRolePermissionsListResponse
-        requestClient UserRolePermissionsList{..}
+        type Scopes UserRolePermissionsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient UserRolePermissionsList'{..}
           = go _urplProFileId (_urplIds ^. _Default)
               (Just AltJSON)
               dFAReportingService

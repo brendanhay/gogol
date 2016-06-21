@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Addresses.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AddressesDeleteResource =
 -- | Deletes the specified address resource.
 --
 -- /See:/ 'addressesDelete' smart constructor.
-data AddressesDelete = AddressesDelete
+data AddressesDelete = AddressesDelete'
     { _aaProject :: !Text
     , _aaAddress :: !Text
     , _aaRegion  :: !Text
@@ -78,7 +78,7 @@ addressesDelete
     -> Text -- ^ 'aaRegion'
     -> AddressesDelete
 addressesDelete pAaProject_ pAaAddress_ pAaRegion_ =
-    AddressesDelete
+    AddressesDelete'
     { _aaProject = pAaProject_
     , _aaAddress = pAaAddress_
     , _aaRegion = pAaRegion_
@@ -94,13 +94,16 @@ aaAddress :: Lens' AddressesDelete Text
 aaAddress
   = lens _aaAddress (\ s a -> s{_aaAddress = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 aaRegion :: Lens' AddressesDelete Text
 aaRegion = lens _aaRegion (\ s a -> s{_aaRegion = a})
 
 instance GoogleRequest AddressesDelete where
         type Rs AddressesDelete = Operation
-        requestClient AddressesDelete{..}
+        type Scopes AddressesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient AddressesDelete'{..}
           = go _aaProject _aaRegion _aaAddress (Just AltJSON)
               computeService
           where go

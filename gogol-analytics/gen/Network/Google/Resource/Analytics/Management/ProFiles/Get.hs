@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFiles.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ManagementProFilesGetResource =
 -- | Gets a view (profile) to which the user has access.
 --
 -- /See:/ 'managementProFilesGet' smart constructor.
-data ManagementProFilesGet = ManagementProFilesGet
+data ManagementProFilesGet = ManagementProFilesGet'
     { _mpfgWebPropertyId :: !Text
     , _mpfgProFileId     :: !Text
     , _mpfgAccountId     :: !Text
@@ -79,25 +79,25 @@ managementProFilesGet
     -> Text -- ^ 'mpfgAccountId'
     -> ManagementProFilesGet
 managementProFilesGet pMpfgWebPropertyId_ pMpfgProFileId_ pMpfgAccountId_ =
-    ManagementProFilesGet
+    ManagementProFilesGet'
     { _mpfgWebPropertyId = pMpfgWebPropertyId_
     , _mpfgProFileId = pMpfgProFileId_
     , _mpfgAccountId = pMpfgAccountId_
     }
 
--- | Web property ID to retrieve the goal for.
+-- | Web property ID to retrieve the view (profile) for.
 mpfgWebPropertyId :: Lens' ManagementProFilesGet Text
 mpfgWebPropertyId
   = lens _mpfgWebPropertyId
       (\ s a -> s{_mpfgWebPropertyId = a})
 
--- | View (Profile) ID to retrieve the goal for.
+-- | View (Profile) ID to retrieve the view (profile) for.
 mpfgProFileId :: Lens' ManagementProFilesGet Text
 mpfgProFileId
   = lens _mpfgProFileId
       (\ s a -> s{_mpfgProFileId = a})
 
--- | Account ID to retrieve the goal for.
+-- | Account ID to retrieve the view (profile) for.
 mpfgAccountId :: Lens' ManagementProFilesGet Text
 mpfgAccountId
   = lens _mpfgAccountId
@@ -105,7 +105,10 @@ mpfgAccountId
 
 instance GoogleRequest ManagementProFilesGet where
         type Rs ManagementProFilesGet = ProFile
-        requestClient ManagementProFilesGet{..}
+        type Scopes ManagementProFilesGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementProFilesGet'{..}
           = go _mpfgAccountId _mpfgWebPropertyId _mpfgProFileId
               (Just AltJSON)
               analyticsService

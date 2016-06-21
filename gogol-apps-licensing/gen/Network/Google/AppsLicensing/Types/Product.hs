@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.AppsLicensing.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Template for LicenseAssignment Insert request
 --
 -- /See:/ 'licenseAssignmentInsert' smart constructor.
-newtype LicenseAssignmentInsert = LicenseAssignmentInsert
+newtype LicenseAssignmentInsert = LicenseAssignmentInsert'
     { _laiUserId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -35,7 +35,7 @@ newtype LicenseAssignmentInsert = LicenseAssignmentInsert
 licenseAssignmentInsert
     :: LicenseAssignmentInsert
 licenseAssignmentInsert =
-    LicenseAssignmentInsert
+    LicenseAssignmentInsert'
     { _laiUserId = Nothing
     }
 
@@ -47,16 +47,17 @@ laiUserId
 instance FromJSON LicenseAssignmentInsert where
         parseJSON
           = withObject "LicenseAssignmentInsert"
-              (\ o -> LicenseAssignmentInsert <$> (o .:? "userId"))
+              (\ o ->
+                 LicenseAssignmentInsert' <$> (o .:? "userId"))
 
 instance ToJSON LicenseAssignmentInsert where
-        toJSON LicenseAssignmentInsert{..}
+        toJSON LicenseAssignmentInsert'{..}
           = object (catMaybes [("userId" .=) <$> _laiUserId])
 
 -- | LicesnseAssignment List for a given product\/sku for a customer.
 --
 -- /See:/ 'licenseAssignmentList' smart constructor.
-data LicenseAssignmentList = LicenseAssignmentList
+data LicenseAssignmentList = LicenseAssignmentList'
     { _lalEtag          :: !(Maybe Text)
     , _lalNextPageToken :: !(Maybe Text)
     , _lalKind          :: !Text
@@ -77,7 +78,7 @@ data LicenseAssignmentList = LicenseAssignmentList
 licenseAssignmentList
     :: LicenseAssignmentList
 licenseAssignmentList =
-    LicenseAssignmentList
+    LicenseAssignmentList'
     { _lalEtag = Nothing
     , _lalNextPageToken = Nothing
     , _lalKind = "licensing#licenseAssignmentList"
@@ -110,13 +111,13 @@ instance FromJSON LicenseAssignmentList where
         parseJSON
           = withObject "LicenseAssignmentList"
               (\ o ->
-                 LicenseAssignmentList <$>
+                 LicenseAssignmentList' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "licensing#licenseAssignmentList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON LicenseAssignmentList where
-        toJSON LicenseAssignmentList{..}
+        toJSON LicenseAssignmentList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _lalEtag,
@@ -127,7 +128,7 @@ instance ToJSON LicenseAssignmentList where
 -- | Template for LiscenseAssignment Resource
 --
 -- /See:/ 'licenseAssignment' smart constructor.
-data LicenseAssignment = LicenseAssignment
+data LicenseAssignment = LicenseAssignment'
     { _laEtags     :: !(Maybe Text)
     , _laKind      :: !Text
     , _laSKUId     :: !(Maybe Text)
@@ -154,7 +155,7 @@ data LicenseAssignment = LicenseAssignment
 licenseAssignment
     :: LicenseAssignment
 licenseAssignment =
-    LicenseAssignment
+    LicenseAssignment'
     { _laEtags = Nothing
     , _laKind = "licensing#licenseAssignment"
     , _laSKUId = Nothing
@@ -193,7 +194,7 @@ instance FromJSON LicenseAssignment where
         parseJSON
           = withObject "LicenseAssignment"
               (\ o ->
-                 LicenseAssignment <$>
+                 LicenseAssignment' <$>
                    (o .:? "etags") <*>
                      (o .:? "kind" .!= "licensing#licenseAssignment")
                      <*> (o .:? "skuId")
@@ -202,7 +203,7 @@ instance FromJSON LicenseAssignment where
                      <*> (o .:? "productId"))
 
 instance ToJSON LicenseAssignment where
-        toJSON LicenseAssignment{..}
+        toJSON LicenseAssignment'{..}
           = object
               (catMaybes
                  [("etags" .=) <$> _laEtags, Just ("kind" .= _laKind),

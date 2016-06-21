@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.LiveBroadcasts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -38,6 +38,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.List
     , lblMine
     , lblBroadcastStatus
     , lblOnBehalfOfContentOwner
+    , lblBroadcastType
     , lblOnBehalfOfContentOwnerChannel
     , lblId
     , lblPageToken
@@ -59,22 +60,26 @@ type LiveBroadcastsListResource =
                  LiveBroadcastsListBroadcastStatus
                  :>
                  QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "id" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] LiveBroadcastListResponse
+                   QueryParam "broadcastType"
+                     LiveBroadcastsListBroadcastType
+                     :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] LiveBroadcastListResponse
 
 -- | Returns a list of YouTube broadcasts that match the API request
 -- parameters.
 --
 -- /See:/ 'liveBroadcastsList' smart constructor.
-data LiveBroadcastsList = LiveBroadcastsList
+data LiveBroadcastsList = LiveBroadcastsList'
     { _lblPart                          :: !Text
     , _lblMine                          :: !(Maybe Bool)
     , _lblBroadcastStatus               :: !(Maybe LiveBroadcastsListBroadcastStatus)
     , _lblOnBehalfOfContentOwner        :: !(Maybe Text)
+    , _lblBroadcastType                 :: !LiveBroadcastsListBroadcastType
     , _lblOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lblId                            :: !(Maybe Text)
     , _lblPageToken                     :: !(Maybe Text)
@@ -93,6 +98,8 @@ data LiveBroadcastsList = LiveBroadcastsList
 --
 -- * 'lblOnBehalfOfContentOwner'
 --
+-- * 'lblBroadcastType'
+--
 -- * 'lblOnBehalfOfContentOwnerChannel'
 --
 -- * 'lblId'
@@ -104,11 +111,12 @@ liveBroadcastsList
     :: Text -- ^ 'lblPart'
     -> LiveBroadcastsList
 liveBroadcastsList pLblPart_ =
-    LiveBroadcastsList
+    LiveBroadcastsList'
     { _lblPart = pLblPart_
     , _lblMine = Nothing
     , _lblBroadcastStatus = Nothing
     , _lblOnBehalfOfContentOwner = Nothing
+    , _lblBroadcastType = Event
     , _lblOnBehalfOfContentOwnerChannel = Nothing
     , _lblId = Nothing
     , _lblPageToken = Nothing
@@ -149,6 +157,14 @@ lblOnBehalfOfContentOwner :: Lens' LiveBroadcastsList (Maybe Text)
 lblOnBehalfOfContentOwner
   = lens _lblOnBehalfOfContentOwner
       (\ s a -> s{_lblOnBehalfOfContentOwner = a})
+
+-- | The broadcastType parameter filters the API response to only include
+-- broadcasts with the specified type. This is only compatible with the
+-- mine filter for now.
+lblBroadcastType :: Lens' LiveBroadcastsList LiveBroadcastsListBroadcastType
+lblBroadcastType
+  = lens _lblBroadcastType
+      (\ s a -> s{_lblBroadcastType = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
 -- This parameter is intended exclusively for YouTube content partners. The
@@ -195,9 +211,14 @@ lblMaxResults
 instance GoogleRequest LiveBroadcastsList where
         type Rs LiveBroadcastsList =
              LiveBroadcastListResponse
-        requestClient LiveBroadcastsList{..}
+        type Scopes LiveBroadcastsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
+        requestClient LiveBroadcastsList'{..}
           = go (Just _lblPart) _lblMine _lblBroadcastStatus
               _lblOnBehalfOfContentOwner
+              (Just _lblBroadcastType)
               _lblOnBehalfOfContentOwnerChannel
               _lblId
               _lblPageToken

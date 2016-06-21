@@ -7,19 +7,26 @@
 
 -- |
 -- Module      : Network.Google.YouTubeAnalytics
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieve your YouTube Analytics reports.
+-- Retrieves your YouTube Analytics data.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference>
 module Network.Google.YouTubeAnalytics
     (
     -- * Service Configuration
       youTubeAnalyticsService
+
+    -- * OAuth Scopes
+    , youTubeScope
+    , youTubeAnalyticsReadOnlyScope
+    , youTubePartnerScope
+    , youTubeAnalyticsMonetaryReadOnlyScope
+    , youTubeReadOnlyScope
 
     -- * API Declaration
     , YouTubeAnalyticsAPI
@@ -163,6 +170,7 @@ module Network.Google.YouTubeAnalytics
     , GroupListResponse
     , groupListResponse
     , glrEtag
+    , glrNextPageToken
     , glrKind
     , glrItems
     ) where

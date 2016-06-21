@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -78,7 +78,7 @@ type LayersListResource =
 -- | Return all layers readable by the current user.
 --
 -- /See:/ 'layersList' smart constructor.
-data LayersList = LayersList
+data LayersList = LayersList'
     { _llCreatedAfter     :: !(Maybe DateTime')
     , _llCreatorEmail     :: !(Maybe Text)
     , _llRole             :: !(Maybe LayersListRole)
@@ -126,7 +126,7 @@ data LayersList = LayersList
 layersList
     :: LayersList
 layersList =
-    LayersList
+    LayersList'
     { _llCreatedAfter = Nothing
     , _llCreatorEmail = Nothing
     , _llRole = Nothing
@@ -230,7 +230,10 @@ llCreatedBefore
 
 instance GoogleRequest LayersList where
         type Rs LayersList = LayersListResponse
-        requestClient LayersList{..}
+        type Scopes LayersList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient LayersList'{..}
           = go _llCreatedAfter _llCreatorEmail _llRole _llBbox
               _llProcessingStatus
               _llModifiedAfter

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type DefaultObjectAccessControlsUpdateResource =
 -- | Updates a default object ACL entry on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsUpdate' smart constructor.
-data DefaultObjectAccessControlsUpdate = DefaultObjectAccessControlsUpdate
+data DefaultObjectAccessControlsUpdate = DefaultObjectAccessControlsUpdate'
     { _doacuBucket  :: !Text
     , _doacuPayload :: !ObjectAccessControl
     , _doacuEntity  :: !Text
@@ -78,7 +78,7 @@ defaultObjectAccessControlsUpdate
     -> Text -- ^ 'doacuEntity'
     -> DefaultObjectAccessControlsUpdate
 defaultObjectAccessControlsUpdate pDoacuBucket_ pDoacuPayload_ pDoacuEntity_ =
-    DefaultObjectAccessControlsUpdate
+    DefaultObjectAccessControlsUpdate'
     { _doacuBucket = pDoacuBucket_
     , _doacuPayload = pDoacuPayload_
     , _doacuEntity = pDoacuEntity_
@@ -105,7 +105,10 @@ instance GoogleRequest
          DefaultObjectAccessControlsUpdate where
         type Rs DefaultObjectAccessControlsUpdate =
              ObjectAccessControl
-        requestClient DefaultObjectAccessControlsUpdate{..}
+        type Scopes DefaultObjectAccessControlsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient DefaultObjectAccessControlsUpdate'{..}
           = go _doacuBucket _doacuEntity (Just AltJSON)
               _doacuPayload
               storageService

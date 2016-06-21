@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type InstancesInsertResource =
 -- | Creates a new Cloud SQL instance.
 --
 -- /See:/ 'instancesInsert' smart constructor.
-data InstancesInsert = InstancesInsert
+data InstancesInsert = InstancesInsert'
     { _insProject :: !Text
     , _insPayload :: !DatabaseInstance
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ instancesInsert
     -> DatabaseInstance -- ^ 'insPayload'
     -> InstancesInsert
 instancesInsert pInsProject_ pInsPayload_ =
-    InstancesInsert
+    InstancesInsert'
     { _insProject = pInsProject_
     , _insPayload = pInsPayload_
     }
@@ -90,7 +90,10 @@ insPayload
 
 instance GoogleRequest InstancesInsert where
         type Rs InstancesInsert = Operation
-        requestClient InstancesInsert{..}
+        type Scopes InstancesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient InstancesInsert'{..}
           = go _insProject (Just AltJSON) _insPayload
               sQLAdminService
           where go

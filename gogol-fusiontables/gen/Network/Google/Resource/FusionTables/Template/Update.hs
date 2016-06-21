@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Template.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TemplateUpdateResource =
 -- | Updates an existing template
 --
 -- /See:/ 'templateUpdate' smart constructor.
-data TemplateUpdate = TemplateUpdate
+data TemplateUpdate = TemplateUpdate'
     { _tuTemplateId :: !(Textual Int32)
     , _tuPayload    :: !Template
     , _tuTableId    :: !Text
@@ -77,7 +77,7 @@ templateUpdate
     -> Text -- ^ 'tuTableId'
     -> TemplateUpdate
 templateUpdate pTuTemplateId_ pTuPayload_ pTuTableId_ =
-    TemplateUpdate
+    TemplateUpdate'
     { _tuTemplateId = _Coerce # pTuTemplateId_
     , _tuPayload = pTuPayload_
     , _tuTableId = pTuTableId_
@@ -101,7 +101,9 @@ tuTableId
 
 instance GoogleRequest TemplateUpdate where
         type Rs TemplateUpdate = Template
-        requestClient TemplateUpdate{..}
+        type Scopes TemplateUpdate =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient TemplateUpdate'{..}
           = go _tuTableId _tuTemplateId (Just AltJSON)
               _tuPayload
               fusionTablesService

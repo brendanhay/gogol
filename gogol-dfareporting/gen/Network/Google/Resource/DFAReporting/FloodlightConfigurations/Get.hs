@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightConfigurationsGet' request conforms to.
 type FloodlightConfigurationsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
@@ -55,7 +55,7 @@ type FloodlightConfigurationsGetResource =
 -- | Gets one floodlight configuration by ID.
 --
 -- /See:/ 'floodlightConfigurationsGet' smart constructor.
-data FloodlightConfigurationsGet = FloodlightConfigurationsGet
+data FloodlightConfigurationsGet = FloodlightConfigurationsGet'
     { _fcgProFileId :: !(Textual Int64)
     , _fcgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightConfigurationsGet
     -> Int64 -- ^ 'fcgId'
     -> FloodlightConfigurationsGet
 floodlightConfigurationsGet pFcgProFileId_ pFcgId_ =
-    FloodlightConfigurationsGet
+    FloodlightConfigurationsGet'
     { _fcgProFileId = _Coerce # pFcgProFileId_
     , _fcgId = _Coerce # pFcgId_
     }
@@ -92,7 +92,9 @@ instance GoogleRequest FloodlightConfigurationsGet
          where
         type Rs FloodlightConfigurationsGet =
              FloodlightConfiguration
-        requestClient FloodlightConfigurationsGet{..}
+        type Scopes FloodlightConfigurationsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightConfigurationsGet'{..}
           = go _fcgProFileId _fcgId (Just AltJSON)
               dFAReportingService
           where go

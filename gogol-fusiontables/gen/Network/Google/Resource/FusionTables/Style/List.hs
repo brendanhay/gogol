@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Style.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type StyleListResource =
 -- | Retrieves a list of styles.
 --
 -- /See:/ 'styleList' smart constructor.
-data StyleList = StyleList
+data StyleList = StyleList'
     { _slPageToken  :: !(Maybe Text)
     , _slTableId    :: !Text
     , _slMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ styleList
     :: Text -- ^ 'slTableId'
     -> StyleList
 styleList pSlTableId_ =
-    StyleList
+    StyleList'
     { _slPageToken = Nothing
     , _slTableId = pSlTableId_
     , _slMaxResults = Nothing
@@ -100,7 +100,10 @@ slMaxResults
 
 instance GoogleRequest StyleList where
         type Rs StyleList = StyleSettingList
-        requestClient StyleList{..}
+        type Scopes StyleList =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient StyleList'{..}
           = go _slTableId _slPageToken _slMaxResults
               (Just AltJSON)
               fusionTablesService

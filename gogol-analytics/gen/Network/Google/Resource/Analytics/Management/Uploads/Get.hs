@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Uploads.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ManagementUploadsGetResource =
 -- | List uploads to which the user has access.
 --
 -- /See:/ 'managementUploadsGet' smart constructor.
-data ManagementUploadsGet = ManagementUploadsGet
+data ManagementUploadsGet = ManagementUploadsGet'
     { _mugWebPropertyId      :: !Text
     , _mugCustomDataSourceId :: !Text
     , _mugAccountId          :: !Text
@@ -86,7 +86,7 @@ managementUploadsGet
     -> Text -- ^ 'mugUploadId'
     -> ManagementUploadsGet
 managementUploadsGet pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ pMugUploadId_ =
-    ManagementUploadsGet
+    ManagementUploadsGet'
     { _mugWebPropertyId = pMugWebPropertyId_
     , _mugCustomDataSourceId = pMugCustomDataSourceId_
     , _mugAccountId = pMugAccountId_
@@ -117,7 +117,11 @@ mugUploadId
 
 instance GoogleRequest ManagementUploadsGet where
         type Rs ManagementUploadsGet = Upload
-        requestClient ManagementUploadsGet{..}
+        type Scopes ManagementUploadsGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementUploadsGet'{..}
           = go _mugAccountId _mugWebPropertyId
               _mugCustomDataSourceId
               _mugUploadId

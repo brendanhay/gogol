@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,18 +50,19 @@ type QueriesListqueriesResource =
 --
 -- /See:/ 'queriesListqueries' smart constructor.
 data QueriesListqueries =
-    QueriesListqueries
+    QueriesListqueries'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesListqueries' with the minimum fields required to make a request.
 --
 queriesListqueries
     :: QueriesListqueries
-queriesListqueries = QueriesListqueries
+queriesListqueries = QueriesListqueries'
 
 instance GoogleRequest QueriesListqueries where
         type Rs QueriesListqueries = ListQueriesResponse
-        requestClient QueriesListqueries{}
+        type Scopes QueriesListqueries = '[]
+        requestClient QueriesListqueries'{}
           = go (Just AltJSON) doubleClickBidsService
           where go
                   = buildClient

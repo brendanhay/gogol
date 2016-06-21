@@ -7,19 +7,24 @@
 
 -- |
 -- Module      : Network.Google.SQLAdmin
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for Cloud SQL database instance management.
+-- Creates and configures Cloud SQL instances, which provide fully-managed
+-- MySQL databases.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference>
 module Network.Google.SQLAdmin
     (
     -- * Service Configuration
       sQLAdminService
+
+    -- * OAuth Scopes
+    , sqlServiceAdminScope
+    , cloudPlatformScope
 
     -- * API Declaration
     , SQLAdminAPI
@@ -210,6 +215,7 @@ module Network.Google.SQLAdmin
     -- ** Settings
     , Settings
     , settings
+    , sStorageAutoResize
     , sReplicationType
     , sActivationPolicy
     , sSettingsVersion
@@ -218,9 +224,11 @@ module Network.Google.SQLAdmin
     , sKind
     , sPricingPlan
     , sIPConfiguration
+    , sMaintenanceWindow
     , sDatabaseReplicationEnabled
     , sTier
     , sDatabaseFlags
+    , sDataDiskType
     , sCrashSafeReplicationEnabled
     , sLocationPreference
     , sBackupConfiguration
@@ -254,6 +262,12 @@ module Network.Google.SQLAdmin
     , blcBinLogPosition
     , blcKind
     , blcBinLogFileName
+
+    -- ** DatabaseInstanceFailoverReplica
+    , DatabaseInstanceFailoverReplica
+    , databaseInstanceFailoverReplica
+    , difrName
+    , difrAvailable
 
     -- ** TiersListResponse
     , TiersListResponse
@@ -302,6 +316,14 @@ module Network.Google.SQLAdmin
     , icRequireSSL
     , icIPv4Enabled
 
+    -- ** MaintenanceWindow
+    , MaintenanceWindow
+    , maintenanceWindow
+    , mwKind
+    , mwDay
+    , mwHour
+    , mwUpdateTrack
+
     -- ** ImportContextCSVImportOptions
     , ImportContextCSVImportOptions
     , importContextCSVImportOptions
@@ -327,6 +349,7 @@ module Network.Google.SQLAdmin
     -- ** DatabaseInstance
     , DatabaseInstance
     , databaseInstance
+    , datBackendType
     , datMaxDiskSize
     , datOnPremisesConfiguration
     , datEtag
@@ -341,12 +364,14 @@ module Network.Google.SQLAdmin
     , datInstanceType
     , datReplicaNames
     , datSelfLink
+    , datFailoverReplica
     , datName
     , datMasterInstanceName
     , datReplicaConfiguration
     , datRegion
     , datServiceAccountEmailAddress
     , datIPAddresses
+    , datSuspensionReason
 
     -- ** CloneContext
     , CloneContext
@@ -365,6 +390,7 @@ module Network.Google.SQLAdmin
     , fAllowedStringValues
     , fType
     , fMinValue
+    , fRequiresRestart
 
     -- ** InstancesFailoverRequest
     , InstancesFailoverRequest
@@ -382,7 +408,7 @@ module Network.Google.SQLAdmin
     , brSelfLink
     , brEndTime
     , brId
-    , brEnqueuedTime
+    , brEnQueuedTime
     , brInstance
 
     -- ** ACLEntry
@@ -470,6 +496,7 @@ module Network.Google.SQLAdmin
     , SSLCertsInsertResponse
     , sslCertsInsertResponse
     , scirServerCaCert
+    , scirOperation
     , scirKind
     , scirClientCert
 

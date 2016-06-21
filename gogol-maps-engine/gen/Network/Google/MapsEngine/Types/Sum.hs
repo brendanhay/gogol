@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.MapsEngine.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -30,21 +30,21 @@ data RasterProcessingStatus
       -- ^ @processing@
     | Ready
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterProcessingStatus
 
-instance FromText RasterProcessingStatus where
-    fromText = \case
-        "complete" -> Just Complete
-        "failed" -> Just Failed
-        "notReady" -> Just NotReady
-        "processing" -> Just Processing
-        "ready" -> Just Ready
-        _ -> Nothing
+instance FromHttpApiData RasterProcessingStatus where
+    parseQueryParam = \case
+        "complete" -> Right Complete
+        "failed" -> Right Failed
+        "notReady" -> Right NotReady
+        "processing" -> Right Processing
+        "ready" -> Right Ready
+        x -> Left ("Unable to parse RasterProcessingStatus from: " <> x)
 
-instance ToText RasterProcessingStatus where
-    toText = \case
+instance ToHttpApiData RasterProcessingStatus where
+    toQueryParam = \case
         Complete -> "complete"
         Failed -> "failed"
         NotReady -> "notReady"
@@ -69,21 +69,21 @@ data LayerProcessingStatus
       -- ^ @processing@
     | LPSReady
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayerProcessingStatus
 
-instance FromText LayerProcessingStatus where
-    fromText = \case
-        "complete" -> Just LPSComplete
-        "failed" -> Just LPSFailed
-        "notReady" -> Just LPSNotReady
-        "processing" -> Just LPSProcessing
-        "ready" -> Just LPSReady
-        _ -> Nothing
+instance FromHttpApiData LayerProcessingStatus where
+    parseQueryParam = \case
+        "complete" -> Right LPSComplete
+        "failed" -> Right LPSFailed
+        "notReady" -> Right LPSNotReady
+        "processing" -> Right LPSProcessing
+        "ready" -> Right LPSReady
+        x -> Left ("Unable to parse LayerProcessingStatus from: " <> x)
 
-instance ToText LayerProcessingStatus where
-    toText = \case
+instance ToHttpApiData LayerProcessingStatus where
+    toQueryParam = \case
         LPSComplete -> "complete"
         LPSFailed -> "failed"
         LPSNotReady -> "notReady"
@@ -100,17 +100,17 @@ instance ToJSON LayerProcessingStatus where
 data ScaledShapeShape
     = Circle
       -- ^ @circle@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScaledShapeShape
 
-instance FromText ScaledShapeShape where
-    fromText = \case
-        "circle" -> Just Circle
-        _ -> Nothing
+instance FromHttpApiData ScaledShapeShape where
+    parseQueryParam = \case
+        "circle" -> Right Circle
+        x -> Left ("Unable to parse ScaledShapeShape from: " <> x)
 
-instance ToText ScaledShapeShape where
-    toText = \case
+instance ToHttpApiData ScaledShapeShape where
+    toQueryParam = \case
         Circle -> "circle"
 
 instance FromJSON ScaledShapeShape where
@@ -123,17 +123,17 @@ instance ToJSON ScaledShapeShape where
 data GeoJSONMultiLineStringType
     = MultiLineString
       -- ^ @MultiLineString@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONMultiLineStringType
 
-instance FromText GeoJSONMultiLineStringType where
-    fromText = \case
-        "MultiLineString" -> Just MultiLineString
-        _ -> Nothing
+instance FromHttpApiData GeoJSONMultiLineStringType where
+    parseQueryParam = \case
+        "MultiLineString" -> Right MultiLineString
+        x -> Left ("Unable to parse GeoJSONMultiLineStringType from: " <> x)
 
-instance ToText GeoJSONMultiLineStringType where
-    toText = \case
+instance ToHttpApiData GeoJSONMultiLineStringType where
+    toQueryParam = \case
         MultiLineString -> "MultiLineString"
 
 instance FromJSON GeoJSONMultiLineStringType where
@@ -152,20 +152,20 @@ data PermissionRole
       -- ^ @viewer@
     | Writer
       -- ^ @writer@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PermissionRole
 
-instance FromText PermissionRole where
-    fromText = \case
-        "owner" -> Just Owner
-        "reader" -> Just Reader
-        "viewer" -> Just Viewer
-        "writer" -> Just Writer
-        _ -> Nothing
+instance FromHttpApiData PermissionRole where
+    parseQueryParam = \case
+        "owner" -> Right Owner
+        "reader" -> Right Reader
+        "viewer" -> Right Viewer
+        "writer" -> Right Writer
+        x -> Left ("Unable to parse PermissionRole from: " <> x)
 
-instance ToText PermissionRole where
-    toText = \case
+instance ToHttpApiData PermissionRole where
+    toQueryParam = \case
         Owner -> "owner"
         Reader -> "reader"
         Viewer -> "viewer"
@@ -191,22 +191,22 @@ data AcquisitionTimePrecision
       -- ^ @second@
     | Year
       -- ^ @year@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AcquisitionTimePrecision
 
-instance FromText AcquisitionTimePrecision where
-    fromText = \case
-        "day" -> Just Day
-        "hour" -> Just Hour
-        "minute" -> Just Minute
-        "month" -> Just Month
-        "second" -> Just Second
-        "year" -> Just Year
-        _ -> Nothing
+instance FromHttpApiData AcquisitionTimePrecision where
+    parseQueryParam = \case
+        "day" -> Right Day
+        "hour" -> Right Hour
+        "minute" -> Right Minute
+        "month" -> Right Month
+        "second" -> Right Second
+        "year" -> Right Year
+        x -> Left ("Unable to parse AcquisitionTimePrecision from: " <> x)
 
-instance ToText AcquisitionTimePrecision where
-    toText = \case
+instance ToHttpApiData AcquisitionTimePrecision where
+    toQueryParam = \case
         Day -> "day"
         Hour -> "hour"
         Minute -> "minute"
@@ -227,18 +227,18 @@ data ScalingFunctionScalingType
       -- ^ @linear@
     | Sqrt
       -- ^ @sqrt@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScalingFunctionScalingType
 
-instance FromText ScalingFunctionScalingType where
-    fromText = \case
-        "linear" -> Just Linear
-        "sqrt" -> Just Sqrt
-        _ -> Nothing
+instance FromHttpApiData ScalingFunctionScalingType where
+    parseQueryParam = \case
+        "linear" -> Right Linear
+        "sqrt" -> Right Sqrt
+        x -> Left ("Unable to parse ScalingFunctionScalingType from: " <> x)
 
-instance ToText ScalingFunctionScalingType where
-    toText = \case
+instance ToHttpApiData ScalingFunctionScalingType where
+    toQueryParam = \case
         Linear -> "linear"
         Sqrt -> "sqrt"
 
@@ -260,19 +260,19 @@ data AssetsListRole
     | ALRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AssetsListRole
 
-instance FromText AssetsListRole where
-    fromText = \case
-        "owner" -> Just ALROwner
-        "reader" -> Just ALRReader
-        "writer" -> Just ALRWriter
-        _ -> Nothing
+instance FromHttpApiData AssetsListRole where
+    parseQueryParam = \case
+        "owner" -> Right ALROwner
+        "reader" -> Right ALRReader
+        "writer" -> Right ALRWriter
+        x -> Left ("Unable to parse AssetsListRole from: " <> x)
 
-instance ToText AssetsListRole where
-    toText = \case
+instance ToHttpApiData AssetsListRole where
+    toQueryParam = \case
         ALROwner -> "owner"
         ALRReader -> "reader"
         ALRWriter -> "writer"
@@ -299,21 +299,21 @@ data RastersListProcessingStatus
     | RLPSReady
       -- ^ @ready@
       -- The raster is ready for processing.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RastersListProcessingStatus
 
-instance FromText RastersListProcessingStatus where
-    fromText = \case
-        "complete" -> Just RLPSComplete
-        "failed" -> Just RLPSFailed
-        "notReady" -> Just RLPSNotReady
-        "processing" -> Just RLPSProcessing
-        "ready" -> Just RLPSReady
-        _ -> Nothing
+instance FromHttpApiData RastersListProcessingStatus where
+    parseQueryParam = \case
+        "complete" -> Right RLPSComplete
+        "failed" -> Right RLPSFailed
+        "notReady" -> Right RLPSNotReady
+        "processing" -> Right RLPSProcessing
+        "ready" -> Right RLPSReady
+        x -> Left ("Unable to parse RastersListProcessingStatus from: " <> x)
 
-instance ToText RastersListProcessingStatus where
-    toText = \case
+instance ToHttpApiData RastersListProcessingStatus where
+    toQueryParam = \case
         RLPSComplete -> "complete"
         RLPSFailed -> "failed"
         RLPSNotReady -> "notReady"
@@ -342,21 +342,21 @@ data LayersListProcessingStatus
     | LLPSReady
       -- ^ @ready@
       -- The layer is ready for processing.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayersListProcessingStatus
 
-instance FromText LayersListProcessingStatus where
-    fromText = \case
-        "complete" -> Just LLPSComplete
-        "failed" -> Just LLPSFailed
-        "notReady" -> Just LLPSNotReady
-        "processing" -> Just LLPSProcessing
-        "ready" -> Just LLPSReady
-        _ -> Nothing
+instance FromHttpApiData LayersListProcessingStatus where
+    parseQueryParam = \case
+        "complete" -> Right LLPSComplete
+        "failed" -> Right LLPSFailed
+        "notReady" -> Right LLPSNotReady
+        "processing" -> Right LLPSProcessing
+        "ready" -> Right LLPSReady
+        x -> Left ("Unable to parse LayersListProcessingStatus from: " <> x)
 
-instance ToText LayersListProcessingStatus where
-    toText = \case
+instance ToHttpApiData LayersListProcessingStatus where
+    toQueryParam = \case
         LLPSComplete -> "complete"
         LLPSFailed -> "failed"
         LLPSNotReady -> "notReady"
@@ -381,19 +381,19 @@ data RasterCollectionsRastersListRole
     | RCRLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterCollectionsRastersListRole
 
-instance FromText RasterCollectionsRastersListRole where
-    fromText = \case
-        "owner" -> Just RCRLROwner
-        "reader" -> Just RCRLRReader
-        "writer" -> Just RCRLRWriter
-        _ -> Nothing
+instance FromHttpApiData RasterCollectionsRastersListRole where
+    parseQueryParam = \case
+        "owner" -> Right RCRLROwner
+        "reader" -> Right RCRLRReader
+        "writer" -> Right RCRLRWriter
+        x -> Left ("Unable to parse RasterCollectionsRastersListRole from: " <> x)
 
-instance ToText RasterCollectionsRastersListRole where
-    toText = \case
+instance ToHttpApiData RasterCollectionsRastersListRole where
+    toQueryParam = \case
         RCRLROwner -> "owner"
         RCRLRReader -> "reader"
         RCRLRWriter -> "writer"
@@ -408,17 +408,17 @@ instance ToJSON RasterCollectionsRastersListRole where
 data GeoJSONMultiPolygonType
     = MultiPolygon
       -- ^ @MultiPolygon@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONMultiPolygonType
 
-instance FromText GeoJSONMultiPolygonType where
-    fromText = \case
-        "MultiPolygon" -> Just MultiPolygon
-        _ -> Nothing
+instance FromHttpApiData GeoJSONMultiPolygonType where
+    parseQueryParam = \case
+        "MultiPolygon" -> Right MultiPolygon
+        x -> Left ("Unable to parse GeoJSONMultiPolygonType from: " <> x)
 
-instance ToText GeoJSONMultiPolygonType where
-    toText = \case
+instance ToHttpApiData GeoJSONMultiPolygonType where
+    toQueryParam = \case
         MultiPolygon -> "MultiPolygon"
 
 instance FromJSON GeoJSONMultiPolygonType where
@@ -431,17 +431,17 @@ instance ToJSON GeoJSONMultiPolygonType where
 data GeoJSONMultiPointType
     = MultiPoint
       -- ^ @MultiPoint@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONMultiPointType
 
-instance FromText GeoJSONMultiPointType where
-    fromText = \case
-        "MultiPoint" -> Just MultiPoint
-        _ -> Nothing
+instance FromHttpApiData GeoJSONMultiPointType where
+    parseQueryParam = \case
+        "MultiPoint" -> Right MultiPoint
+        x -> Left ("Unable to parse GeoJSONMultiPointType from: " <> x)
 
-instance ToText GeoJSONMultiPointType where
-    toText = \case
+instance ToHttpApiData GeoJSONMultiPointType where
+    toQueryParam = \case
         MultiPoint -> "MultiPoint"
 
 instance FromJSON GeoJSONMultiPointType where
@@ -458,18 +458,18 @@ data PublishedLayerLayerType
       -- ^ @image@
     | Vector
       -- ^ @vector@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PublishedLayerLayerType
 
-instance FromText PublishedLayerLayerType where
-    fromText = \case
-        "image" -> Just Image
-        "vector" -> Just Vector
-        _ -> Nothing
+instance FromHttpApiData PublishedLayerLayerType where
+    parseQueryParam = \case
+        "image" -> Right Image
+        "vector" -> Right Vector
+        x -> Left ("Unable to parse PublishedLayerLayerType from: " <> x)
 
-instance ToText PublishedLayerLayerType where
-    toText = \case
+instance ToHttpApiData PublishedLayerLayerType where
+    toQueryParam = \case
         Image -> "image"
         Vector -> "vector"
 
@@ -495,21 +495,21 @@ data TablesListProcessingStatus
     | TLPSReady
       -- ^ @ready@
       -- The table is ready for processing.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TablesListProcessingStatus
 
-instance FromText TablesListProcessingStatus where
-    fromText = \case
-        "complete" -> Just TLPSComplete
-        "failed" -> Just TLPSFailed
-        "notReady" -> Just TLPSNotReady
-        "processing" -> Just TLPSProcessing
-        "ready" -> Just TLPSReady
-        _ -> Nothing
+instance FromHttpApiData TablesListProcessingStatus where
+    parseQueryParam = \case
+        "complete" -> Right TLPSComplete
+        "failed" -> Right TLPSFailed
+        "notReady" -> Right TLPSNotReady
+        "processing" -> Right TLPSProcessing
+        "ready" -> Right TLPSReady
+        x -> Left ("Unable to parse TablesListProcessingStatus from: " <> x)
 
-instance ToText TablesListProcessingStatus where
-    toText = \case
+instance ToHttpApiData TablesListProcessingStatus where
+    toQueryParam = \case
         TLPSComplete -> "complete"
         TLPSFailed -> "failed"
         TLPSNotReady -> "notReady"
@@ -530,18 +530,18 @@ data LayerLayerType
       -- ^ @image@
     | LLTVector
       -- ^ @vector@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayerLayerType
 
-instance FromText LayerLayerType where
-    fromText = \case
-        "image" -> Just LLTImage
-        "vector" -> Just LLTVector
-        _ -> Nothing
+instance FromHttpApiData LayerLayerType where
+    parseQueryParam = \case
+        "image" -> Right LLTImage
+        "vector" -> Right LLTVector
+        x -> Left ("Unable to parse LayerLayerType from: " <> x)
 
-instance ToText LayerLayerType where
-    toText = \case
+instance ToHttpApiData LayerLayerType where
+    toQueryParam = \case
         LLTImage -> "image"
         LLTVector -> "vector"
 
@@ -559,19 +559,19 @@ data PermissionType
       -- ^ @group@
     | User
       -- ^ @user@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PermissionType
 
-instance FromText PermissionType where
-    fromText = \case
-        "anyone" -> Just Anyone
-        "group" -> Just Group
-        "user" -> Just User
-        _ -> Nothing
+instance FromHttpApiData PermissionType where
+    parseQueryParam = \case
+        "anyone" -> Right Anyone
+        "group" -> Right Group
+        "user" -> Right User
+        x -> Left ("Unable to parse PermissionType from: " <> x)
 
-instance ToText PermissionType where
-    toText = \case
+instance ToHttpApiData PermissionType where
+    toQueryParam = \case
         Anyone -> "anyone"
         Group -> "group"
         User -> "user"
@@ -595,21 +595,21 @@ data MapProcessingStatus
       -- ^ @processing@
     | MPSReady
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapProcessingStatus
 
-instance FromText MapProcessingStatus where
-    fromText = \case
-        "complete" -> Just MPSComplete
-        "failed" -> Just MPSFailed
-        "notReady" -> Just MPSNotReady
-        "processing" -> Just MPSProcessing
-        "ready" -> Just MPSReady
-        _ -> Nothing
+instance FromHttpApiData MapProcessingStatus where
+    parseQueryParam = \case
+        "complete" -> Right MPSComplete
+        "failed" -> Right MPSFailed
+        "notReady" -> Right MPSNotReady
+        "processing" -> Right MPSProcessing
+        "ready" -> Right MPSReady
+        x -> Left ("Unable to parse MapProcessingStatus from: " <> x)
 
-instance ToText MapProcessingStatus where
-    toText = \case
+instance ToHttpApiData MapProcessingStatus where
+    toQueryParam = \case
         MPSComplete -> "complete"
         MPSFailed -> "failed"
         MPSNotReady -> "notReady"
@@ -633,18 +633,18 @@ data MapsGetVersion
     | Published
       -- ^ @published@
       -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapsGetVersion
 
-instance FromText MapsGetVersion where
-    fromText = \case
-        "draft" -> Just Draft
-        "published" -> Just Published
-        _ -> Nothing
+instance FromHttpApiData MapsGetVersion where
+    parseQueryParam = \case
+        "draft" -> Right Draft
+        "published" -> Right Published
+        x -> Left ("Unable to parse MapsGetVersion from: " <> x)
 
-instance ToText MapsGetVersion where
-    toText = \case
+instance ToHttpApiData MapsGetVersion where
+    toQueryParam = \case
         Draft -> "draft"
         Published -> "published"
 
@@ -666,19 +666,19 @@ data TablesListRole
     | TLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TablesListRole
 
-instance FromText TablesListRole where
-    fromText = \case
-        "owner" -> Just TLROwner
-        "reader" -> Just TLRReader
-        "writer" -> Just TLRWriter
-        _ -> Nothing
+instance FromHttpApiData TablesListRole where
+    parseQueryParam = \case
+        "owner" -> Right TLROwner
+        "reader" -> Right TLRReader
+        "writer" -> Right TLRWriter
+        x -> Left ("Unable to parse TablesListRole from: " <> x)
 
-instance ToText TablesListRole where
-    toText = \case
+instance ToHttpApiData TablesListRole where
+    toQueryParam = \case
         TLROwner -> "owner"
         TLRReader -> "reader"
         TLRWriter -> "writer"
@@ -693,17 +693,17 @@ instance ToJSON TablesListRole where
 data VectorStyleType
     = VSTDisplayRule
       -- ^ @displayRule@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VectorStyleType
 
-instance FromText VectorStyleType where
-    fromText = \case
-        "displayRule" -> Just VSTDisplayRule
-        _ -> Nothing
+instance FromHttpApiData VectorStyleType where
+    parseQueryParam = \case
+        "displayRule" -> Right VSTDisplayRule
+        x -> Left ("Unable to parse VectorStyleType from: " <> x)
 
-instance ToText VectorStyleType where
-    toText = \case
+instance ToHttpApiData VectorStyleType where
+    toQueryParam = \case
         VSTDisplayRule -> "displayRule"
 
 instance FromJSON VectorStyleType where
@@ -716,17 +716,17 @@ instance ToJSON VectorStyleType where
 data GeoJSONLineStringType
     = LineString
       -- ^ @LineString@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONLineStringType
 
-instance FromText GeoJSONLineStringType where
-    fromText = \case
-        "LineString" -> Just LineString
-        _ -> Nothing
+instance FromHttpApiData GeoJSONLineStringType where
+    parseQueryParam = \case
+        "LineString" -> Right LineString
+        x -> Left ("Unable to parse GeoJSONLineStringType from: " <> x)
 
-instance ToText GeoJSONLineStringType where
-    toText = \case
+instance ToHttpApiData GeoJSONLineStringType where
+    toQueryParam = \case
         LineString -> "LineString"
 
 instance FromJSON GeoJSONLineStringType where
@@ -741,18 +741,18 @@ data LayerPublishingStatus
       -- ^ @notPublished@
     | LPSPublished
       -- ^ @published@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayerPublishingStatus
 
-instance FromText LayerPublishingStatus where
-    fromText = \case
-        "notPublished" -> Just LPSNotPublished
-        "published" -> Just LPSPublished
-        _ -> Nothing
+instance FromHttpApiData LayerPublishingStatus where
+    parseQueryParam = \case
+        "notPublished" -> Right LPSNotPublished
+        "published" -> Right LPSPublished
+        x -> Left ("Unable to parse LayerPublishingStatus from: " <> x)
 
-instance ToText LayerPublishingStatus where
-    toText = \case
+instance ToHttpApiData LayerPublishingStatus where
+    toQueryParam = \case
         LPSNotPublished -> "notPublished"
         LPSPublished -> "published"
 
@@ -766,17 +766,17 @@ instance ToJSON LayerPublishingStatus where
 data MapKmlLinkType
     = KmlLink
       -- ^ @kmlLink@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapKmlLinkType
 
-instance FromText MapKmlLinkType where
-    fromText = \case
-        "kmlLink" -> Just KmlLink
-        _ -> Nothing
+instance FromHttpApiData MapKmlLinkType where
+    parseQueryParam = \case
+        "kmlLink" -> Right KmlLink
+        x -> Left ("Unable to parse MapKmlLinkType from: " <> x)
 
-instance ToText MapKmlLinkType where
-    toText = \case
+instance ToHttpApiData MapKmlLinkType where
+    toQueryParam = \case
         KmlLink -> "kmlLink"
 
 instance FromJSON MapKmlLinkType where
@@ -793,18 +793,18 @@ data LayerDatasourceType
       -- ^ @image@
     | LDTTable
       -- ^ @table@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayerDatasourceType
 
-instance FromText LayerDatasourceType where
-    fromText = \case
-        "image" -> Just LDTImage
-        "table" -> Just LDTTable
-        _ -> Nothing
+instance FromHttpApiData LayerDatasourceType where
+    parseQueryParam = \case
+        "image" -> Right LDTImage
+        "table" -> Right LDTTable
+        x -> Left ("Unable to parse LayerDatasourceType from: " <> x)
 
-instance ToText LayerDatasourceType where
-    toText = \case
+instance ToHttpApiData LayerDatasourceType where
+    toQueryParam = \case
         LDTImage -> "image"
         LDTTable -> "table"
 
@@ -818,17 +818,17 @@ instance ToJSON LayerDatasourceType where
 data GeoJSONGeometryCollectionType
     = GeometryCollection
       -- ^ @GeometryCollection@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONGeometryCollectionType
 
-instance FromText GeoJSONGeometryCollectionType where
-    fromText = \case
-        "GeometryCollection" -> Just GeometryCollection
-        _ -> Nothing
+instance FromHttpApiData GeoJSONGeometryCollectionType where
+    parseQueryParam = \case
+        "GeometryCollection" -> Right GeometryCollection
+        x -> Left ("Unable to parse GeoJSONGeometryCollectionType from: " <> x)
 
-instance ToText GeoJSONGeometryCollectionType where
-    toText = \case
+instance ToHttpApiData GeoJSONGeometryCollectionType where
+    toQueryParam = \case
         GeometryCollection -> "GeometryCollection"
 
 instance FromJSON GeoJSONGeometryCollectionType where
@@ -841,17 +841,17 @@ instance ToJSON GeoJSONGeometryCollectionType where
 data GeoJSONPointType
     = Point
       -- ^ @Point@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONPointType
 
-instance FromText GeoJSONPointType where
-    fromText = \case
-        "Point" -> Just Point
-        _ -> Nothing
+instance FromHttpApiData GeoJSONPointType where
+    parseQueryParam = \case
+        "Point" -> Right Point
+        x -> Left ("Unable to parse GeoJSONPointType from: " <> x)
 
-instance ToText GeoJSONPointType where
-    toText = \case
+instance ToHttpApiData GeoJSONPointType where
+    toQueryParam = \case
         Point -> "Point"
 
 instance FromJSON GeoJSONPointType where
@@ -864,17 +864,17 @@ instance ToJSON GeoJSONPointType where
 data GeoJSONPolygonType
     = Polygon
       -- ^ @Polygon@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONPolygonType
 
-instance FromText GeoJSONPolygonType where
-    fromText = \case
-        "Polygon" -> Just Polygon
-        _ -> Nothing
+instance FromHttpApiData GeoJSONPolygonType where
+    parseQueryParam = \case
+        "Polygon" -> Right Polygon
+        x -> Left ("Unable to parse GeoJSONPolygonType from: " <> x)
 
-instance ToText GeoJSONPolygonType where
-    toText = \case
+instance ToHttpApiData GeoJSONPolygonType where
+    toQueryParam = \case
         Polygon -> "Polygon"
 
 instance FromJSON GeoJSONPolygonType where
@@ -894,18 +894,18 @@ data LayersGetVersion
     | LGVPublished
       -- ^ @published@
       -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayersGetVersion
 
-instance FromText LayersGetVersion where
-    fromText = \case
-        "draft" -> Just LGVDraft
-        "published" -> Just LGVPublished
-        _ -> Nothing
+instance FromHttpApiData LayersGetVersion where
+    parseQueryParam = \case
+        "draft" -> Right LGVDraft
+        "published" -> Right LGVPublished
+        x -> Left ("Unable to parse LayersGetVersion from: " <> x)
 
-instance ToText LayersGetVersion where
-    toText = \case
+instance ToHttpApiData LayersGetVersion where
+    toQueryParam = \case
         LGVDraft -> "draft"
         LGVPublished -> "published"
 
@@ -919,17 +919,17 @@ instance ToJSON LayersGetVersion where
 data MapLayerType
     = MLTLayer
       -- ^ @layer@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapLayerType
 
-instance FromText MapLayerType where
-    fromText = \case
-        "layer" -> Just MLTLayer
-        _ -> Nothing
+instance FromHttpApiData MapLayerType where
+    parseQueryParam = \case
+        "layer" -> Right MLTLayer
+        x -> Left ("Unable to parse MapLayerType from: " <> x)
 
-instance ToText MapLayerType where
-    toText = \case
+instance ToHttpApiData MapLayerType where
+    toQueryParam = \case
         MLTLayer -> "layer"
 
 instance FromJSON MapLayerType where
@@ -944,18 +944,18 @@ data LabelStyleFontWeight
       -- ^ @bold@
     | Normal
       -- ^ @normal@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelStyleFontWeight
 
-instance FromText LabelStyleFontWeight where
-    fromText = \case
-        "bold" -> Just Bold
-        "normal" -> Just Normal
-        _ -> Nothing
+instance FromHttpApiData LabelStyleFontWeight where
+    parseQueryParam = \case
+        "bold" -> Right Bold
+        "normal" -> Right Normal
+        x -> Left ("Unable to parse LabelStyleFontWeight from: " <> x)
 
-instance ToText LabelStyleFontWeight where
-    toText = \case
+instance ToHttpApiData LabelStyleFontWeight where
+    toQueryParam = \case
         Bold -> "bold"
         Normal -> "normal"
 
@@ -969,17 +969,17 @@ instance ToJSON LabelStyleFontWeight where
 data MapFolderType
     = Folder
       -- ^ @folder@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapFolderType
 
-instance FromText MapFolderType where
-    fromText = \case
-        "folder" -> Just Folder
-        _ -> Nothing
+instance FromHttpApiData MapFolderType where
+    parseQueryParam = \case
+        "folder" -> Right Folder
+        x -> Left ("Unable to parse MapFolderType from: " <> x)
 
-instance ToText MapFolderType where
-    toText = \case
+instance ToHttpApiData MapFolderType where
+    toQueryParam = \case
         Folder -> "folder"
 
 instance FromJSON MapFolderType where
@@ -1000,21 +1000,21 @@ data RasterCollectionProcessingStatus
       -- ^ @processing@
     | RCPSReady
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterCollectionProcessingStatus
 
-instance FromText RasterCollectionProcessingStatus where
-    fromText = \case
-        "complete" -> Just RCPSComplete
-        "failed" -> Just RCPSFailed
-        "notReady" -> Just RCPSNotReady
-        "processing" -> Just RCPSProcessing
-        "ready" -> Just RCPSReady
-        _ -> Nothing
+instance FromHttpApiData RasterCollectionProcessingStatus where
+    parseQueryParam = \case
+        "complete" -> Right RCPSComplete
+        "failed" -> Right RCPSFailed
+        "notReady" -> Right RCPSNotReady
+        "processing" -> Right RCPSProcessing
+        "ready" -> Right RCPSReady
+        x -> Left ("Unable to parse RasterCollectionProcessingStatus from: " <> x)
 
-instance ToText RasterCollectionProcessingStatus where
-    toText = \case
+instance ToHttpApiData RasterCollectionProcessingStatus where
+    toQueryParam = \case
         RCPSComplete -> "complete"
         RCPSFailed -> "failed"
         RCPSNotReady -> "notReady"
@@ -1035,18 +1035,18 @@ data TablesFeaturesListVersion
     | TFLVPublished
       -- ^ @published@
       -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TablesFeaturesListVersion
 
-instance FromText TablesFeaturesListVersion where
-    fromText = \case
-        "draft" -> Just TFLVDraft
-        "published" -> Just TFLVPublished
-        _ -> Nothing
+instance FromHttpApiData TablesFeaturesListVersion where
+    parseQueryParam = \case
+        "draft" -> Right TFLVDraft
+        "published" -> Right TFLVPublished
+        x -> Left ("Unable to parse TablesFeaturesListVersion from: " <> x)
 
-instance ToText TablesFeaturesListVersion where
-    toText = \case
+instance ToHttpApiData TablesFeaturesListVersion where
+    toQueryParam = \case
         TFLVDraft -> "draft"
         TFLVPublished -> "published"
 
@@ -1069,20 +1069,20 @@ data MapsListProcessingStatus
     | MLPSProcessing
       -- ^ @processing@
       -- The map is processing.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapsListProcessingStatus
 
-instance FromText MapsListProcessingStatus where
-    fromText = \case
-        "complete" -> Just MLPSComplete
-        "failed" -> Just MLPSFailed
-        "notReady" -> Just MLPSNotReady
-        "processing" -> Just MLPSProcessing
-        _ -> Nothing
+instance FromHttpApiData MapsListProcessingStatus where
+    parseQueryParam = \case
+        "complete" -> Right MLPSComplete
+        "failed" -> Right MLPSFailed
+        "notReady" -> Right MLPSNotReady
+        "processing" -> Right MLPSProcessing
+        x -> Left ("Unable to parse MapsListProcessingStatus from: " <> x)
 
-instance ToText MapsListProcessingStatus where
-    toText = \case
+instance ToHttpApiData MapsListProcessingStatus where
+    toQueryParam = \case
         MLPSComplete -> "complete"
         MLPSFailed -> "failed"
         MLPSNotReady -> "notReady"
@@ -1100,18 +1100,18 @@ data LabelStyleFontStyle
       -- ^ @italic@
     | LSFSNormal
       -- ^ @normal@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelStyleFontStyle
 
-instance FromText LabelStyleFontStyle where
-    fromText = \case
-        "italic" -> Just LSFSItalic
-        "normal" -> Just LSFSNormal
-        _ -> Nothing
+instance FromHttpApiData LabelStyleFontStyle where
+    parseQueryParam = \case
+        "italic" -> Right LSFSItalic
+        "normal" -> Right LSFSNormal
+        x -> Left ("Unable to parse LabelStyleFontStyle from: " <> x)
 
-instance ToText LabelStyleFontStyle where
-    toText = \case
+instance ToHttpApiData LabelStyleFontStyle where
+    toQueryParam = \case
         LSFSItalic -> "italic"
         LSFSNormal -> "normal"
 
@@ -1134,21 +1134,21 @@ data AssetType
       -- ^ @rasterCollection@
     | ATTable
       -- ^ @table@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AssetType
 
-instance FromText AssetType where
-    fromText = \case
-        "layer" -> Just ATLayer
-        "map" -> Just ATMap
-        "raster" -> Just ATRaster
-        "rasterCollection" -> Just ATRasterCollection
-        "table" -> Just ATTable
-        _ -> Nothing
+instance FromHttpApiData AssetType where
+    parseQueryParam = \case
+        "layer" -> Right ATLayer
+        "map" -> Right ATMap
+        "raster" -> Right ATRaster
+        "rasterCollection" -> Right ATRasterCollection
+        "table" -> Right ATTable
+        x -> Left ("Unable to parse AssetType from: " <> x)
 
-instance ToText AssetType where
-    toText = \case
+instance ToHttpApiData AssetType where
+    toQueryParam = \case
         ATLayer -> "layer"
         ATMap -> "map"
         ATRaster -> "raster"
@@ -1165,17 +1165,17 @@ instance ToJSON AssetType where
 data RasterRasterType
     = RRTImage
       -- ^ @image@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterRasterType
 
-instance FromText RasterRasterType where
-    fromText = \case
-        "image" -> Just RRTImage
-        _ -> Nothing
+instance FromHttpApiData RasterRasterType where
+    parseQueryParam = \case
+        "image" -> Right RRTImage
+        x -> Left ("Unable to parse RasterRasterType from: " <> x)
 
-instance ToText RasterRasterType where
-    toText = \case
+instance ToHttpApiData RasterRasterType where
+    toQueryParam = \case
         RRTImage -> "image"
 
 instance FromJSON RasterRasterType where
@@ -1196,19 +1196,19 @@ data RasterCollectionsListRole
     | RCLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterCollectionsListRole
 
-instance FromText RasterCollectionsListRole where
-    fromText = \case
-        "owner" -> Just RCLROwner
-        "reader" -> Just RCLRReader
-        "writer" -> Just RCLRWriter
-        _ -> Nothing
+instance FromHttpApiData RasterCollectionsListRole where
+    parseQueryParam = \case
+        "owner" -> Right RCLROwner
+        "reader" -> Right RCLRReader
+        "writer" -> Right RCLRWriter
+        x -> Left ("Unable to parse RasterCollectionsListRole from: " <> x)
 
-instance ToText RasterCollectionsListRole where
-    toText = \case
+instance ToHttpApiData RasterCollectionsListRole where
+    toQueryParam = \case
         RCLROwner -> "owner"
         RCLRReader -> "reader"
         RCLRWriter -> "writer"
@@ -1239,25 +1239,25 @@ data FilterOperator
       -- ^ @endsWith@
     | StartsWith
       -- ^ @startsWith@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilterOperator
 
-instance FromText FilterOperator where
-    fromText = \case
-        "!=" -> Just NotEqual
-        "<" -> Just Less
-        "<=" -> Just LessOrEqual
-        "==" -> Just Equal
-        ">" -> Just Greater
-        ">=" -> Just GreaterEqual
-        "contains" -> Just Contains
-        "endsWith" -> Just EndsWith
-        "startsWith" -> Just StartsWith
-        _ -> Nothing
+instance FromHttpApiData FilterOperator where
+    parseQueryParam = \case
+        "!=" -> Right NotEqual
+        "<" -> Right Less
+        "<=" -> Right LessOrEqual
+        "==" -> Right Equal
+        ">" -> Right Greater
+        ">=" -> Right GreaterEqual
+        "contains" -> Right Contains
+        "endsWith" -> Right EndsWith
+        "startsWith" -> Right StartsWith
+        x -> Left ("Unable to parse FilterOperator from: " <> x)
 
-instance ToText FilterOperator where
-    toText = \case
+instance ToHttpApiData FilterOperator where
+    toQueryParam = \case
         NotEqual -> "!="
         Less -> "<"
         LessOrEqual -> "<="
@@ -1292,24 +1292,24 @@ data TableColumnType
       -- ^ @polygons@
     | String
       -- ^ @string@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TableColumnType
 
-instance FromText TableColumnType where
-    fromText = \case
-        "datetime" -> Just Datetime
-        "double" -> Just Double
-        "integer" -> Just Integer
-        "lineStrings" -> Just LineStrings
-        "mixedGeometry" -> Just MixedGeometry
-        "points" -> Just Points
-        "polygons" -> Just Polygons
-        "string" -> Just String
-        _ -> Nothing
+instance FromHttpApiData TableColumnType where
+    parseQueryParam = \case
+        "datetime" -> Right Datetime
+        "double" -> Right Double
+        "integer" -> Right Integer
+        "lineStrings" -> Right LineStrings
+        "mixedGeometry" -> Right MixedGeometry
+        "points" -> Right Points
+        "polygons" -> Right Polygons
+        "string" -> Right String
+        x -> Left ("Unable to parse TableColumnType from: " <> x)
 
-instance ToText TableColumnType where
-    toText = \case
+instance ToHttpApiData TableColumnType where
+    toQueryParam = \case
         Datetime -> "datetime"
         Double -> "double"
         Integer -> "integer"
@@ -1341,21 +1341,21 @@ data RasterCollectionsListProcessingStatus
     | RCLPSReady
       -- ^ @ready@
       -- The raster collection is ready for processing.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterCollectionsListProcessingStatus
 
-instance FromText RasterCollectionsListProcessingStatus where
-    fromText = \case
-        "complete" -> Just RCLPSComplete
-        "failed" -> Just RCLPSFailed
-        "notReady" -> Just RCLPSNotReady
-        "processing" -> Just RCLPSProcessing
-        "ready" -> Just RCLPSReady
-        _ -> Nothing
+instance FromHttpApiData RasterCollectionsListProcessingStatus where
+    parseQueryParam = \case
+        "complete" -> Right RCLPSComplete
+        "failed" -> Right RCLPSFailed
+        "notReady" -> Right RCLPSNotReady
+        "processing" -> Right RCLPSProcessing
+        "ready" -> Right RCLPSReady
+        x -> Left ("Unable to parse RasterCollectionsListProcessingStatus from: " <> x)
 
-instance ToText RasterCollectionsListProcessingStatus where
-    toText = \case
+instance ToHttpApiData RasterCollectionsListProcessingStatus where
+    toQueryParam = \case
         RCLPSComplete -> "complete"
         RCLPSFailed -> "failed"
         RCLPSNotReady -> "notReady"
@@ -1380,19 +1380,19 @@ data LayersListRole
     | LLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayersListRole
 
-instance FromText LayersListRole where
-    fromText = \case
-        "owner" -> Just LLROwner
-        "reader" -> Just LLRReader
-        "writer" -> Just LLRWriter
-        _ -> Nothing
+instance FromHttpApiData LayersListRole where
+    parseQueryParam = \case
+        "owner" -> Right LLROwner
+        "reader" -> Right LLRReader
+        "writer" -> Right LLRWriter
+        x -> Left ("Unable to parse LayersListRole from: " <> x)
 
-instance ToText LayersListRole where
-    toText = \case
+instance ToHttpApiData LayersListRole where
+    toQueryParam = \case
         LLROwner -> "owner"
         LLRReader -> "reader"
         LLRWriter -> "writer"
@@ -1411,18 +1411,18 @@ data TablesFeaturesGetVersion
     | TFGVPublished
       -- ^ @published@
       -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TablesFeaturesGetVersion
 
-instance FromText TablesFeaturesGetVersion where
-    fromText = \case
-        "draft" -> Just TFGVDraft
-        "published" -> Just TFGVPublished
-        _ -> Nothing
+instance FromHttpApiData TablesFeaturesGetVersion where
+    parseQueryParam = \case
+        "draft" -> Right TFGVDraft
+        "published" -> Right TFGVPublished
+        x -> Left ("Unable to parse TablesFeaturesGetVersion from: " <> x)
 
-instance ToText TablesFeaturesGetVersion where
-    toText = \case
+instance ToHttpApiData TablesFeaturesGetVersion where
+    toQueryParam = \case
         TFGVDraft -> "draft"
         TFGVPublished -> "published"
 
@@ -1436,17 +1436,17 @@ instance ToJSON TablesFeaturesGetVersion where
 data RasterCollectionRasterType
     = RCRTImage
       -- ^ @image@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterCollectionRasterType
 
-instance FromText RasterCollectionRasterType where
-    fromText = \case
-        "image" -> Just RCRTImage
-        _ -> Nothing
+instance FromHttpApiData RasterCollectionRasterType where
+    parseQueryParam = \case
+        "image" -> Right RCRTImage
+        x -> Left ("Unable to parse RasterCollectionRasterType from: " <> x)
 
-instance ToText RasterCollectionRasterType where
-    toText = \case
+instance ToHttpApiData RasterCollectionRasterType where
+    toQueryParam = \case
         RCRTImage -> "image"
 
 instance FromJSON RasterCollectionRasterType where
@@ -1467,19 +1467,19 @@ data RastersListRole
     | RLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RastersListRole
 
-instance FromText RastersListRole where
-    fromText = \case
-        "owner" -> Just RLROwner
-        "reader" -> Just RLRReader
-        "writer" -> Just RLRWriter
-        _ -> Nothing
+instance FromHttpApiData RastersListRole where
+    parseQueryParam = \case
+        "owner" -> Right RLROwner
+        "reader" -> Right RLRReader
+        "writer" -> Right RLRWriter
+        x -> Left ("Unable to parse RastersListRole from: " <> x)
 
-instance ToText RastersListRole where
-    toText = \case
+instance ToHttpApiData RastersListRole where
+    toQueryParam = \case
         RLROwner -> "owner"
         RLRReader -> "reader"
         RLRWriter -> "writer"
@@ -1496,18 +1496,18 @@ data MapPublishingStatus
       -- ^ @notPublished@
     | MPSPublished
       -- ^ @published@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapPublishingStatus
 
-instance FromText MapPublishingStatus where
-    fromText = \case
-        "notPublished" -> Just MPSNotPublished
-        "published" -> Just MPSPublished
-        _ -> Nothing
+instance FromHttpApiData MapPublishingStatus where
+    parseQueryParam = \case
+        "notPublished" -> Right MPSNotPublished
+        "published" -> Right MPSPublished
+        x -> Left ("Unable to parse MapPublishingStatus from: " <> x)
 
-instance ToText MapPublishingStatus where
-    toText = \case
+instance ToHttpApiData MapPublishingStatus where
+    toQueryParam = \case
         MPSNotPublished -> "notPublished"
         MPSPublished -> "published"
 
@@ -1527,20 +1527,20 @@ data FileUploadStatus
       -- ^ @failed@
     | FUSInProgress
       -- ^ @inProgress@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FileUploadStatus
 
-instance FromText FileUploadStatus where
-    fromText = \case
-        "canceled" -> Just FUSCanceled
-        "complete" -> Just FUSComplete
-        "failed" -> Just FUSFailed
-        "inProgress" -> Just FUSInProgress
-        _ -> Nothing
+instance FromHttpApiData FileUploadStatus where
+    parseQueryParam = \case
+        "canceled" -> Right FUSCanceled
+        "complete" -> Right FUSComplete
+        "failed" -> Right FUSFailed
+        "inProgress" -> Right FUSInProgress
+        x -> Left ("Unable to parse FileUploadStatus from: " <> x)
 
-instance ToText FileUploadStatus where
-    toText = \case
+instance ToHttpApiData FileUploadStatus where
+    toQueryParam = \case
         FUSCanceled -> "canceled"
         FUSComplete -> "complete"
         FUSFailed -> "failed"
@@ -1564,19 +1564,19 @@ data MapsListRole
     | MLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapsListRole
 
-instance FromText MapsListRole where
-    fromText = \case
-        "owner" -> Just MLROwner
-        "reader" -> Just MLRReader
-        "writer" -> Just MLRWriter
-        _ -> Nothing
+instance FromHttpApiData MapsListRole where
+    parseQueryParam = \case
+        "owner" -> Right MLROwner
+        "reader" -> Right MLRReader
+        "writer" -> Right MLRWriter
+        x -> Left ("Unable to parse MapsListRole from: " <> x)
 
-instance ToText MapsListRole where
-    toText = \case
+instance ToHttpApiData MapsListRole where
+    toQueryParam = \case
         MLROwner -> "owner"
         MLRReader -> "reader"
         MLRWriter -> "writer"
@@ -1594,18 +1594,18 @@ data TablesGetVersion
     | TGVPublished
       -- ^ @published@
       -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TablesGetVersion
 
-instance FromText TablesGetVersion where
-    fromText = \case
-        "draft" -> Just TGVDraft
-        "published" -> Just TGVPublished
-        _ -> Nothing
+instance FromHttpApiData TablesGetVersion where
+    parseQueryParam = \case
+        "draft" -> Right TGVDraft
+        "published" -> Right TGVPublished
+        x -> Left ("Unable to parse TablesGetVersion from: " <> x)
 
-instance ToText TablesGetVersion where
-    toText = \case
+instance ToHttpApiData TablesGetVersion where
+    toQueryParam = \case
         TGVDraft -> "draft"
         TGVPublished -> "published"
 
@@ -1627,21 +1627,21 @@ data TableProcessingStatus
       -- ^ @processing@
     | TPSReady
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TableProcessingStatus
 
-instance FromText TableProcessingStatus where
-    fromText = \case
-        "complete" -> Just TPSComplete
-        "failed" -> Just TPSFailed
-        "notReady" -> Just TPSNotReady
-        "processing" -> Just TPSProcessing
-        "ready" -> Just TPSReady
-        _ -> Nothing
+instance FromHttpApiData TableProcessingStatus where
+    parseQueryParam = \case
+        "complete" -> Right TPSComplete
+        "failed" -> Right TPSFailed
+        "notReady" -> Right TPSNotReady
+        "processing" -> Right TPSProcessing
+        "ready" -> Right TPSReady
+        x -> Left ("Unable to parse TableProcessingStatus from: " <> x)
 
-instance ToText TableProcessingStatus where
-    toText = \case
+instance ToHttpApiData TableProcessingStatus where
+    toQueryParam = \case
         TPSComplete -> "complete"
         TPSFailed -> "failed"
         TPSNotReady -> "notReady"

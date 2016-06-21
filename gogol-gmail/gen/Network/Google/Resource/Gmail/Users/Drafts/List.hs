@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Drafts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -34,6 +34,7 @@ module Network.Google.Resource.Gmail.Users.Drafts.List
 
     -- * Request Lenses
     , udlUserId
+    , udlIncludeSpamTrash
     , udlPageToken
     , udlMaxResults
     ) where
@@ -49,18 +50,20 @@ type UsersDraftsListResource =
          "users" :>
            Capture "userId" Text :>
              "drafts" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" (Textual Word32) :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] ListDraftsResponse
+               QueryParam "includeSpamTrash" Bool :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "maxResults" (Textual Word32) :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] ListDraftsResponse
 
 -- | Lists the drafts in the user\'s mailbox.
 --
 -- /See:/ 'usersDraftsList' smart constructor.
-data UsersDraftsList = UsersDraftsList
-    { _udlUserId     :: !Text
-    , _udlPageToken  :: !(Maybe Text)
-    , _udlMaxResults :: !(Textual Word32)
+data UsersDraftsList = UsersDraftsList'
+    { _udlUserId           :: !Text
+    , _udlIncludeSpamTrash :: !Bool
+    , _udlPageToken        :: !(Maybe Text)
+    , _udlMaxResults       :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsList' with the minimum fields required to make a request.
@@ -69,15 +72,17 @@ data UsersDraftsList = UsersDraftsList
 --
 -- * 'udlUserId'
 --
+-- * 'udlIncludeSpamTrash'
+--
 -- * 'udlPageToken'
 --
 -- * 'udlMaxResults'
 usersDraftsList
-    :: Text
-    -> UsersDraftsList
-usersDraftsList pUdlUserId_ =
-    UsersDraftsList
+    :: UsersDraftsList
+usersDraftsList =
+    UsersDraftsList'
     { _udlUserId = "me"
+    , _udlIncludeSpamTrash = False
     , _udlPageToken = Nothing
     , _udlMaxResults = 100
     }
@@ -87,6 +92,12 @@ usersDraftsList pUdlUserId_ =
 udlUserId :: Lens' UsersDraftsList Text
 udlUserId
   = lens _udlUserId (\ s a -> s{_udlUserId = a})
+
+-- | Include drafts from SPAM and TRASH in the results.
+udlIncludeSpamTrash :: Lens' UsersDraftsList Bool
+udlIncludeSpamTrash
+  = lens _udlIncludeSpamTrash
+      (\ s a -> s{_udlIncludeSpamTrash = a})
 
 -- | Page token to retrieve a specific page of results in the list.
 udlPageToken :: Lens' UsersDraftsList (Maybe Text)
@@ -102,8 +113,15 @@ udlMaxResults
 
 instance GoogleRequest UsersDraftsList where
         type Rs UsersDraftsList = ListDraftsResponse
-        requestClient UsersDraftsList{..}
-          = go _udlUserId _udlPageToken (Just _udlMaxResults)
+        type Scopes UsersDraftsList =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersDraftsList'{..}
+          = go _udlUserId (Just _udlIncludeSpamTrash)
+              _udlPageToken
+              (Just _udlMaxResults)
               (Just AltJSON)
               gmailService
           where go

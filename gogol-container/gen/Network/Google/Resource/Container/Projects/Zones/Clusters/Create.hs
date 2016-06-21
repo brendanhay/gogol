@@ -14,21 +14,21 @@
 
 -- |
 -- Module      : Network.Google.Resource.Container.Projects.Zones.Clusters.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a cluster, consisting of the specified number and type of Google
--- Compute Engine instances, plus a Kubernetes master endpoint. By default,
--- the cluster is created in the project\'s [default
--- network](\/compute\/docs\/networking#networks_1). One firewall is added
--- for the cluster. After cluster creation, the cluster creates routes for
--- each node to allow the containers on that node to communicate with all
--- other instances in the cluster. Finally, an entry is added to the
--- project\'s global metadata indicating which CIDR range is being used by
--- the cluster.
+-- Compute Engine instances. By default, the cluster is created in the
+-- project\'s [default
+-- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
+-- is added for the cluster. After cluster creation, the cluster creates
+-- routes for each node to allow the containers on that node to communicate
+-- with all other instances in the cluster. Finally, an entry is added to
+-- the project\'s global metadata indicating which CIDR range is being used
+-- by the cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.create@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
@@ -77,17 +77,17 @@ type ProjectsZonesClustersCreateResource =
                                    Post '[JSON] Operation
 
 -- | Creates a cluster, consisting of the specified number and type of Google
--- Compute Engine instances, plus a Kubernetes master endpoint. By default,
--- the cluster is created in the project\'s [default
--- network](\/compute\/docs\/networking#networks_1). One firewall is added
--- for the cluster. After cluster creation, the cluster creates routes for
--- each node to allow the containers on that node to communicate with all
--- other instances in the cluster. Finally, an entry is added to the
--- project\'s global metadata indicating which CIDR range is being used by
--- the cluster.
+-- Compute Engine instances. By default, the cluster is created in the
+-- project\'s [default
+-- network](\/compute\/docs\/networks-and-firewalls#networks). One firewall
+-- is added for the cluster. After cluster creation, the cluster creates
+-- routes for each node to allow the containers on that node to communicate
+-- with all other instances in the cluster. Finally, an entry is added to
+-- the project\'s global metadata indicating which CIDR range is being used
+-- by the cluster.
 --
 -- /See:/ 'projectsZonesClustersCreate' smart constructor.
-data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate
+data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate'
     { _pzccXgafv          :: !(Maybe Text)
     , _pzccUploadProtocol :: !(Maybe Text)
     , _pzccPp             :: !Bool
@@ -129,7 +129,7 @@ projectsZonesClustersCreate
     -> Text -- ^ 'pzccProjectId'
     -> ProjectsZonesClustersCreate
 projectsZonesClustersCreate pPzccZone_ pPzccPayload_ pPzccProjectId_ =
-    ProjectsZonesClustersCreate
+    ProjectsZonesClustersCreate'
     { _pzccXgafv = Nothing
     , _pzccUploadProtocol = Nothing
     , _pzccPp = True
@@ -186,7 +186,7 @@ pzccBearerToken
       (\ s a -> s{_pzccBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzccProjectId :: Lens' ProjectsZonesClustersCreate Text
 pzccProjectId
   = lens _pzccProjectId
@@ -200,7 +200,9 @@ pzccCallback
 instance GoogleRequest ProjectsZonesClustersCreate
          where
         type Rs ProjectsZonesClustersCreate = Operation
-        requestClient ProjectsZonesClustersCreate{..}
+        type Scopes ProjectsZonesClustersCreate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsZonesClustersCreate'{..}
           = go _pzccProjectId _pzccZone _pzccXgafv
               _pzccUploadProtocol
               (Just _pzccPp)

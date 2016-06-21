@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type ManagementWebPropertyAdWordsLinksUpdateResource
 -- | Updates an existing webProperty-AdWords link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksUpdate' smart constructor.
-data ManagementWebPropertyAdWordsLinksUpdate = ManagementWebPropertyAdWordsLinksUpdate
+data ManagementWebPropertyAdWordsLinksUpdate = ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluWebPropertyId            :: !Text
     , _mwpawluPayload                  :: !EntityAdWordsLink
     , _mwpawluAccountId                :: !Text
@@ -87,7 +87,7 @@ managementWebPropertyAdWordsLinksUpdate
     -> Text -- ^ 'mwpawluWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksUpdate
 managementWebPropertyAdWordsLinksUpdate pMwpawluWebPropertyId_ pMwpawluPayload_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksUpdate
+    ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluWebPropertyId = pMwpawluWebPropertyId_
     , _mwpawluPayload = pMwpawluPayload_
     , _mwpawluAccountId = pMwpawluAccountId_
@@ -122,8 +122,10 @@ instance GoogleRequest
          ManagementWebPropertyAdWordsLinksUpdate where
         type Rs ManagementWebPropertyAdWordsLinksUpdate =
              EntityAdWordsLink
+        type Scopes ManagementWebPropertyAdWordsLinksUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient
-          ManagementWebPropertyAdWordsLinksUpdate{..}
+          ManagementWebPropertyAdWordsLinksUpdate'{..}
           = go _mwpawluAccountId _mwpawluWebPropertyId
               _mwpawluWebPropertyAdWordsLinkId
               (Just AltJSON)

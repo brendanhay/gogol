@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Rooms.Join
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -34,6 +34,7 @@ module Network.Google.Resource.Games.Rooms.Join
     , RoomsJoin
 
     -- * Request Lenses
+    , rjConsistencyToken
     , rjPayload
     , rjRoomId
     , rjLanguage
@@ -50,23 +51,27 @@ type RoomsJoinResource =
          "rooms" :>
            Capture "roomId" Text :>
              "join" :>
-               QueryParam "language" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] RoomJoinRequest :> Post '[JSON] Room
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "language" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] RoomJoinRequest :> Post '[JSON] Room
 
 -- | Join a room. For internal use by the Games SDK only. Calling this method
 -- directly is unsupported.
 --
 -- /See:/ 'roomsJoin' smart constructor.
-data RoomsJoin = RoomsJoin
-    { _rjPayload  :: !RoomJoinRequest
-    , _rjRoomId   :: !Text
-    , _rjLanguage :: !(Maybe Text)
+data RoomsJoin = RoomsJoin'
+    { _rjConsistencyToken :: !(Maybe (Textual Int64))
+    , _rjPayload          :: !RoomJoinRequest
+    , _rjRoomId           :: !Text
+    , _rjLanguage         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsJoin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rjConsistencyToken'
 --
 -- * 'rjPayload'
 --
@@ -78,11 +83,19 @@ roomsJoin
     -> Text -- ^ 'rjRoomId'
     -> RoomsJoin
 roomsJoin pRjPayload_ pRjRoomId_ =
-    RoomsJoin
-    { _rjPayload = pRjPayload_
+    RoomsJoin'
+    { _rjConsistencyToken = Nothing
+    , _rjPayload = pRjPayload_
     , _rjRoomId = pRjRoomId_
     , _rjLanguage = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+rjConsistencyToken :: Lens' RoomsJoin (Maybe Int64)
+rjConsistencyToken
+  = lens _rjConsistencyToken
+      (\ s a -> s{_rjConsistencyToken = a})
+      . mapping _Coerce
 
 -- | Multipart request metadata.
 rjPayload :: Lens' RoomsJoin RoomJoinRequest
@@ -100,8 +113,13 @@ rjLanguage
 
 instance GoogleRequest RoomsJoin where
         type Rs RoomsJoin = Room
-        requestClient RoomsJoin{..}
-          = go _rjRoomId _rjLanguage (Just AltJSON) _rjPayload
+        type Scopes RoomsJoin =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient RoomsJoin'{..}
+          = go _rjRoomId _rjConsistencyToken _rjLanguage
+              (Just AltJSON)
+              _rjPayload
               gamesService
           where go
                   = buildClient (Proxy :: Proxy RoomsJoinResource)

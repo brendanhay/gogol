@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type AchievementConfigurationsGetResource =
 -- ID.
 --
 -- /See:/ 'achievementConfigurationsGet' smart constructor.
-newtype AchievementConfigurationsGet = AchievementConfigurationsGet
+newtype AchievementConfigurationsGet = AchievementConfigurationsGet'
     { _acgAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ achievementConfigurationsGet
     :: Text -- ^ 'acgAchievementId'
     -> AchievementConfigurationsGet
 achievementConfigurationsGet pAcgAchievementId_ =
-    AchievementConfigurationsGet
+    AchievementConfigurationsGet'
     { _acgAchievementId = pAcgAchievementId_
     }
 
@@ -81,7 +81,9 @@ instance GoogleRequest AchievementConfigurationsGet
          where
         type Rs AchievementConfigurationsGet =
              AchievementConfiguration
-        requestClient AchievementConfigurationsGet{..}
+        type Scopes AchievementConfigurationsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient AchievementConfigurationsGet'{..}
           = go _acgAchievementId (Just AltJSON)
               gamesConfigurationService
           where go

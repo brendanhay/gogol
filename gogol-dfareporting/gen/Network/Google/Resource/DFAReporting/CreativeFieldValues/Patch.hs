@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesPatch' request conforms to.
 type CreativeFieldValuesPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -62,7 +62,7 @@ type CreativeFieldValuesPatchResource =
 -- semantics.
 --
 -- /See:/ 'creativeFieldValuesPatch' smart constructor.
-data CreativeFieldValuesPatch = CreativeFieldValuesPatch
+data CreativeFieldValuesPatch = CreativeFieldValuesPatch'
     { _cfvpCreativeFieldId :: !(Textual Int64)
     , _cfvpProFileId       :: !(Textual Int64)
     , _cfvpPayload         :: !CreativeFieldValue
@@ -87,7 +87,7 @@ creativeFieldValuesPatch
     -> Int64 -- ^ 'cfvpId'
     -> CreativeFieldValuesPatch
 creativeFieldValuesPatch pCfvpCreativeFieldId_ pCfvpProFileId_ pCfvpPayload_ pCfvpId_ =
-    CreativeFieldValuesPatch
+    CreativeFieldValuesPatch'
     { _cfvpCreativeFieldId = _Coerce # pCfvpCreativeFieldId_
     , _cfvpProFileId = _Coerce # pCfvpProFileId_
     , _cfvpPayload = pCfvpPayload_
@@ -120,7 +120,9 @@ cfvpId
 
 instance GoogleRequest CreativeFieldValuesPatch where
         type Rs CreativeFieldValuesPatch = CreativeFieldValue
-        requestClient CreativeFieldValuesPatch{..}
+        type Scopes CreativeFieldValuesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeFieldValuesPatch'{..}
           = go _cfvpProFileId _cfvpCreativeFieldId
               (Just _cfvpId)
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'CampaignCreativeAssociationsInsert' request conforms to.
 type CampaignCreativeAssociationsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -62,7 +62,7 @@ type CampaignCreativeAssociationsInsertResource =
 -- a default ad does not exist already.
 --
 -- /See:/ 'campaignCreativeAssociationsInsert' smart constructor.
-data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert
+data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert'
     { _ccaiCampaignId :: !(Textual Int64)
     , _ccaiProFileId  :: !(Textual Int64)
     , _ccaiPayload    :: !CampaignCreativeAssociation
@@ -83,7 +83,7 @@ campaignCreativeAssociationsInsert
     -> CampaignCreativeAssociation -- ^ 'ccaiPayload'
     -> CampaignCreativeAssociationsInsert
 campaignCreativeAssociationsInsert pCcaiCampaignId_ pCcaiProFileId_ pCcaiPayload_ =
-    CampaignCreativeAssociationsInsert
+    CampaignCreativeAssociationsInsert'
     { _ccaiCampaignId = _Coerce # pCcaiCampaignId_
     , _ccaiProFileId = _Coerce # pCcaiProFileId_
     , _ccaiPayload = pCcaiPayload_
@@ -112,7 +112,9 @@ instance GoogleRequest
          CampaignCreativeAssociationsInsert where
         type Rs CampaignCreativeAssociationsInsert =
              CampaignCreativeAssociation
-        requestClient CampaignCreativeAssociationsInsert{..}
+        type Scopes CampaignCreativeAssociationsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CampaignCreativeAssociationsInsert'{..}
           = go _ccaiProFileId _ccaiCampaignId (Just AltJSON)
               _ccaiPayload
               dFAReportingService

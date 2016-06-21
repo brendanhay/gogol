@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPool.InstanceGroupManagers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type InstanceGroupManagersListResource =
 -- the specified zone.
 --
 -- /See:/ 'instanceGroupManagersList' smart constructor.
-data InstanceGroupManagersList = InstanceGroupManagersList
+data InstanceGroupManagersList = InstanceGroupManagersList'
     { _igmlProject    :: !Text
     , _igmlZone       :: !Text
     , _igmlFilter     :: !(Maybe Text)
@@ -90,7 +90,7 @@ instanceGroupManagersList
     -> Text -- ^ 'igmlZone'
     -> InstanceGroupManagersList
 instanceGroupManagersList pIgmlProject_ pIgmlZone_ =
-    InstanceGroupManagersList
+    InstanceGroupManagersList'
     { _igmlProject = pIgmlProject_
     , _igmlZone = pIgmlZone_
     , _igmlFilter = Nothing
@@ -131,7 +131,12 @@ instance GoogleRequest InstanceGroupManagersList
          where
         type Rs InstanceGroupManagersList =
              InstanceGroupManagerList
-        requestClient InstanceGroupManagersList{..}
+        type Scopes InstanceGroupManagersList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient InstanceGroupManagersList'{..}
           = go _igmlProject _igmlZone _igmlFilter
               _igmlPageToken
               (Just _igmlMaxResults)

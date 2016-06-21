@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Copy
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -159,7 +159,7 @@ type ObjectsCopyResource =
 -- metadata.
 --
 -- /See:/ 'objectsCopy' smart constructor.
-data ObjectsCopy = ObjectsCopy
+data ObjectsCopy = ObjectsCopy'
     { _ocDestinationPredefinedACL       :: !(Maybe ObjectsCopyDestinationPredefinedACL)
     , _ocIfSourceGenerationMatch        :: !(Maybe (Textual Int64))
     , _ocIfMetagenerationMatch          :: !(Maybe (Textual Int64))
@@ -221,7 +221,7 @@ objectsCopy
     -> Text -- ^ 'ocDestinationObject'
     -> ObjectsCopy
 objectsCopy pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_ pOcDestinationObject_ =
-    ObjectsCopy
+    ObjectsCopy'
     { _ocDestinationPredefinedACL = Nothing
     , _ocIfSourceGenerationMatch = Nothing
     , _ocIfMetagenerationMatch = Nothing
@@ -360,7 +360,11 @@ ocDestinationObject
 
 instance GoogleRequest ObjectsCopy where
         type Rs ObjectsCopy = Object
-        requestClient ObjectsCopy{..}
+        type Scopes ObjectsCopy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient ObjectsCopy'{..}
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject
@@ -385,7 +389,9 @@ instance GoogleRequest ObjectsCopy where
 instance GoogleRequest (MediaDownload ObjectsCopy)
          where
         type Rs (MediaDownload ObjectsCopy) = Stream
-        requestClient (MediaDownload ObjectsCopy{..})
+        type Scopes (MediaDownload ObjectsCopy) =
+             Scopes ObjectsCopy
+        requestClient (MediaDownload ObjectsCopy'{..})
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject

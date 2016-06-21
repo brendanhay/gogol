@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeAnalytics.Groups.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -38,6 +38,7 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.List
     , glMine
     , glOnBehalfOfContentOwner
     , glId
+    , glPageToken
     ) where
 
 import           Network.Google.Prelude
@@ -53,18 +54,20 @@ type GroupsListResource =
              QueryParam "mine" Bool :>
                QueryParam "onBehalfOfContentOwner" Text :>
                  QueryParam "id" Text :>
-                   QueryParam "alt" AltJSON :>
-                     Get '[JSON] GroupListResponse
+                   QueryParam "pageToken" Text :>
+                     QueryParam "alt" AltJSON :>
+                       Get '[JSON] GroupListResponse
 
 -- | Returns a collection of groups that match the API request parameters.
 -- For example, you can retrieve all groups that the authenticated user
 -- owns, or you can retrieve one or more groups by their unique IDs.
 --
 -- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList
+data GroupsList = GroupsList'
     { _glMine                   :: !(Maybe Bool)
     , _glOnBehalfOfContentOwner :: !(Maybe Text)
     , _glId                     :: !(Maybe Text)
+    , _glPageToken              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList' with the minimum fields required to make a request.
@@ -76,13 +79,16 @@ data GroupsList = GroupsList
 -- * 'glOnBehalfOfContentOwner'
 --
 -- * 'glId'
+--
+-- * 'glPageToken'
 groupsList
     :: GroupsList
 groupsList =
-    GroupsList
+    GroupsList'
     { _glMine = Nothing
     , _glOnBehalfOfContentOwner = Nothing
     , _glId = Nothing
+    , _glPageToken = Nothing
     }
 
 -- | Set this parameter\'s value to true to instruct the API to only return
@@ -111,10 +117,23 @@ glOnBehalfOfContentOwner
 glId :: Lens' GroupsList (Maybe Text)
 glId = lens _glId (\ s a -> s{_glId = a})
 
+-- | The pageToken parameter identifies a specific page in the result set
+-- that should be returned. In an API response, the nextPageToken property
+-- identifies the next page that can be retrieved.
+glPageToken :: Lens' GroupsList (Maybe Text)
+glPageToken
+  = lens _glPageToken (\ s a -> s{_glPageToken = a})
+
 instance GoogleRequest GroupsList where
         type Rs GroupsList = GroupListResponse
-        requestClient GroupsList{..}
+        type Scopes GroupsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
+        requestClient GroupsList'{..}
           = go _glMine _glOnBehalfOfContentOwner _glId
+              _glPageToken
               (Just AltJSON)
               youTubeAnalyticsService
           where go

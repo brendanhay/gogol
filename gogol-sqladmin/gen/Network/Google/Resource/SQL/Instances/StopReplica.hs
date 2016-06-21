@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.StopReplica
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type InstancesStopReplicaResource =
 -- | Stops the replication in the read replica instance.
 --
 -- /See:/ 'instancesStopReplica' smart constructor.
-data InstancesStopReplica = InstancesStopReplica
+data InstancesStopReplica = InstancesStopReplica'
     { _isrProject  :: !Text
     , _isrInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ instancesStopReplica
     -> Text -- ^ 'isrInstance'
     -> InstancesStopReplica
 instancesStopReplica pIsrProject_ pIsrInstance_ =
-    InstancesStopReplica
+    InstancesStopReplica'
     { _isrProject = pIsrProject_
     , _isrInstance = pIsrInstance_
     }
@@ -89,7 +89,10 @@ isrInstance
 
 instance GoogleRequest InstancesStopReplica where
         type Rs InstancesStopReplica = Operation
-        requestClient InstancesStopReplica{..}
+        type Scopes InstancesStopReplica =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient InstancesStopReplica'{..}
           = go _isrProject _isrInstance (Just AltJSON)
               sQLAdminService
           where go

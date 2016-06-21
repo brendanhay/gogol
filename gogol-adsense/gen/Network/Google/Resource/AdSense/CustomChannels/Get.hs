@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.CustomChannels.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type CustomChannelsGetResource =
 -- | Get the specified custom channel from the specified ad client.
 --
 -- /See:/ 'customChannelsGet' smart constructor.
-data CustomChannelsGet = CustomChannelsGet
+data CustomChannelsGet = CustomChannelsGet'
     { _ccgCustomChannelId :: !Text
     , _ccgAdClientId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ customChannelsGet
     -> Text -- ^ 'ccgAdClientId'
     -> CustomChannelsGet
 customChannelsGet pCcgCustomChannelId_ pCcgAdClientId_ =
-    CustomChannelsGet
+    CustomChannelsGet'
     { _ccgCustomChannelId = pCcgCustomChannelId_
     , _ccgAdClientId = pCcgAdClientId_
     }
@@ -90,7 +90,10 @@ ccgAdClientId
 
 instance GoogleRequest CustomChannelsGet where
         type Rs CustomChannelsGet = CustomChannel
-        requestClient CustomChannelsGet{..}
+        type Scopes CustomChannelsGet =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient CustomChannelsGet'{..}
           = go _ccgAdClientId _ccgCustomChannelId
               (Just AltJSON)
               adSenseService

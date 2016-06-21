@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TaskQueue.Tasks.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -34,7 +34,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Patch
     , TasksPatch
 
     -- * Request Lenses
-    , tpTaskqueue
+    , tpTaskQueue
     , tpProject
     , tpPayload
     , tpTask
@@ -63,8 +63,8 @@ type TasksPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'tasksPatch' smart constructor.
-data TasksPatch = TasksPatch
-    { _tpTaskqueue       :: !Text
+data TasksPatch = TasksPatch'
+    { _tpTaskQueue       :: !Text
     , _tpProject         :: !Text
     , _tpPayload         :: !Task
     , _tpTask            :: !Text
@@ -75,7 +75,7 @@ data TasksPatch = TasksPatch
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tpTaskqueue'
+-- * 'tpTaskQueue'
 --
 -- * 'tpProject'
 --
@@ -85,24 +85,24 @@ data TasksPatch = TasksPatch
 --
 -- * 'tpNewLeaseSeconds'
 tasksPatch
-    :: Text -- ^ 'tpTaskqueue'
+    :: Text -- ^ 'tpTaskQueue'
     -> Text -- ^ 'tpProject'
     -> Task -- ^ 'tpPayload'
     -> Text -- ^ 'tpTask'
     -> Int32 -- ^ 'tpNewLeaseSeconds'
     -> TasksPatch
-tasksPatch pTpTaskqueue_ pTpProject_ pTpPayload_ pTpTask_ pTpNewLeaseSeconds_ =
-    TasksPatch
-    { _tpTaskqueue = pTpTaskqueue_
+tasksPatch pTpTaskQueue_ pTpProject_ pTpPayload_ pTpTask_ pTpNewLeaseSeconds_ =
+    TasksPatch'
+    { _tpTaskQueue = pTpTaskQueue_
     , _tpProject = pTpProject_
     , _tpPayload = pTpPayload_
     , _tpTask = pTpTask_
     , _tpNewLeaseSeconds = _Coerce # pTpNewLeaseSeconds_
     }
 
-tpTaskqueue :: Lens' TasksPatch Text
-tpTaskqueue
-  = lens _tpTaskqueue (\ s a -> s{_tpTaskqueue = a})
+tpTaskQueue :: Lens' TasksPatch Text
+tpTaskQueue
+  = lens _tpTaskQueue (\ s a -> s{_tpTaskQueue = a})
 
 -- | The project under which the queue lies.
 tpProject :: Lens' TasksPatch Text
@@ -126,8 +126,11 @@ tpNewLeaseSeconds
 
 instance GoogleRequest TasksPatch where
         type Rs TasksPatch = Task
-        requestClient TasksPatch{..}
-          = go _tpProject _tpTaskqueue _tpTask
+        type Scopes TasksPatch =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
+        requestClient TasksPatch'{..}
+          = go _tpProject _tpTaskQueue _tpTask
               (Just _tpNewLeaseSeconds)
               (Just AltJSON)
               _tpPayload

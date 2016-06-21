@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Experiments.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type ManagementExperimentsPatchResource =
 -- | Update an existing experiment. This method supports patch semantics.
 --
 -- /See:/ 'managementExperimentsPatch' smart constructor.
-data ManagementExperimentsPatch = ManagementExperimentsPatch
+data ManagementExperimentsPatch = ManagementExperimentsPatch'
     { _mepWebPropertyId :: !Text
     , _mepProFileId     :: !Text
     , _mepPayload       :: !Experiment
@@ -93,7 +93,7 @@ managementExperimentsPatch
     -> Text -- ^ 'mepExperimentId'
     -> ManagementExperimentsPatch
 managementExperimentsPatch pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ =
-    ManagementExperimentsPatch
+    ManagementExperimentsPatch'
     { _mepWebPropertyId = pMepWebPropertyId_
     , _mepProFileId = pMepProFileId_
     , _mepPayload = pMepPayload_
@@ -131,7 +131,10 @@ mepExperimentId
 instance GoogleRequest ManagementExperimentsPatch
          where
         type Rs ManagementExperimentsPatch = Experiment
-        requestClient ManagementExperimentsPatch{..}
+        type Scopes ManagementExperimentsPatch =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementExperimentsPatch'{..}
           = go _mepAccountId _mepWebPropertyId _mepProFileId
               _mepExperimentId
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.WebProperties.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ManagementWebPropertiesListResource =
 -- | Lists web properties to which the user has access.
 --
 -- /See:/ 'managementWebPropertiesList' smart constructor.
-data ManagementWebPropertiesList = ManagementWebPropertiesList
+data ManagementWebPropertiesList = ManagementWebPropertiesList'
     { _mwplAccountId  :: !Text
     , _mwplStartIndex :: !(Maybe (Textual Int32))
     , _mwplMaxResults :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ managementWebPropertiesList
     :: Text -- ^ 'mwplAccountId'
     -> ManagementWebPropertiesList
 managementWebPropertiesList pMwplAccountId_ =
-    ManagementWebPropertiesList
+    ManagementWebPropertiesList'
     { _mwplAccountId = pMwplAccountId_
     , _mwplStartIndex = Nothing
     , _mwplMaxResults = Nothing
@@ -108,7 +108,11 @@ mwplMaxResults
 instance GoogleRequest ManagementWebPropertiesList
          where
         type Rs ManagementWebPropertiesList = WebProperties
-        requestClient ManagementWebPropertiesList{..}
+        type Scopes ManagementWebPropertiesList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementWebPropertiesList'{..}
           = go _mwplAccountId _mwplStartIndex _mwplMaxResults
               (Just AltJSON)
               analyticsService

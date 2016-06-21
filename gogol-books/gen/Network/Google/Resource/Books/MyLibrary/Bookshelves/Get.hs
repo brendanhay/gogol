@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type MyLibraryBookshelvesGetResource =
 -- authenticated user.
 --
 -- /See:/ 'myLibraryBookshelvesGet' smart constructor.
-data MyLibraryBookshelvesGet = MyLibraryBookshelvesGet
+data MyLibraryBookshelvesGet = MyLibraryBookshelvesGet'
     { _mlbgShelf  :: !Text
     , _mlbgSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ myLibraryBookshelvesGet
     :: Text -- ^ 'mlbgShelf'
     -> MyLibraryBookshelvesGet
 myLibraryBookshelvesGet pMlbgShelf_ =
-    MyLibraryBookshelvesGet
+    MyLibraryBookshelvesGet'
     { _mlbgShelf = pMlbgShelf_
     , _mlbgSource = Nothing
     }
@@ -89,7 +89,9 @@ mlbgSource
 
 instance GoogleRequest MyLibraryBookshelvesGet where
         type Rs MyLibraryBookshelvesGet = Bookshelf
-        requestClient MyLibraryBookshelvesGet{..}
+        type Scopes MyLibraryBookshelvesGet =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryBookshelvesGet'{..}
           = go _mlbgShelf _mlbgSource (Just AltJSON)
               booksService
           where go

@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Comments.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing comment.
+-- Updates a comment with patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.comments.update@.
 module Network.Google.Resource.Drive.Comments.Update
@@ -45,18 +45,18 @@ import           Network.Google.Prelude
 -- 'CommentsUpdate' request conforms to.
 type CommentsUpdateResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>
                Capture "commentId" Text :>
                  QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] Comment :> Put '[JSON] Comment
+                   ReqBody '[JSON] Comment :> Patch '[JSON] Comment
 
--- | Updates an existing comment.
+-- | Updates a comment with patch semantics.
 --
 -- /See:/ 'commentsUpdate' smart constructor.
-data CommentsUpdate = CommentsUpdate
+data CommentsUpdate = CommentsUpdate'
     { _cuPayload   :: !Comment
     , _cuFileId    :: !Text
     , _cuCommentId :: !Text
@@ -77,7 +77,7 @@ commentsUpdate
     -> Text -- ^ 'cuCommentId'
     -> CommentsUpdate
 commentsUpdate pCuPayload_ pCuFileId_ pCuCommentId_ =
-    CommentsUpdate
+    CommentsUpdate'
     { _cuPayload = pCuPayload_
     , _cuFileId = pCuFileId_
     , _cuCommentId = pCuCommentId_
@@ -99,7 +99,10 @@ cuCommentId
 
 instance GoogleRequest CommentsUpdate where
         type Rs CommentsUpdate = Comment
-        requestClient CommentsUpdate{..}
+        type Scopes CommentsUpdate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
+        requestClient CommentsUpdate'{..}
           = go _cuFileId _cuCommentId (Just AltJSON) _cuPayload
               driveService
           where go

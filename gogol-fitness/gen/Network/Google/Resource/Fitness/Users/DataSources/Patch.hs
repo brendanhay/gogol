@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.DataSources.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type UsersDataSourcesPatchResource =
 -- semantics.
 --
 -- /See:/ 'usersDataSourcesPatch' smart constructor.
-data UsersDataSourcesPatch = UsersDataSourcesPatch
+data UsersDataSourcesPatch = UsersDataSourcesPatch'
     { _udspDataSourceId :: !Text
     , _udspPayload      :: !DataSource
     , _udspUserId       :: !Text
@@ -88,7 +88,7 @@ usersDataSourcesPatch
     -> Text -- ^ 'udspUserId'
     -> UsersDataSourcesPatch
 usersDataSourcesPatch pUdspDataSourceId_ pUdspPayload_ pUdspUserId_ =
-    UsersDataSourcesPatch
+    UsersDataSourcesPatch'
     { _udspDataSourceId = pUdspDataSourceId_
     , _udspPayload = pUdspPayload_
     , _udspUserId = pUdspUserId_
@@ -113,7 +113,11 @@ udspUserId
 
 instance GoogleRequest UsersDataSourcesPatch where
         type Rs UsersDataSourcesPatch = DataSource
-        requestClient UsersDataSourcesPatch{..}
+        type Scopes UsersDataSourcesPatch =
+             '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.write"]
+        requestClient UsersDataSourcesPatch'{..}
           = go _udspUserId _udspDataSourceId (Just AltJSON)
               _udspPayload
               fitnessService

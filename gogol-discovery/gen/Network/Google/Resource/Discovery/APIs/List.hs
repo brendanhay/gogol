@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Discovery.APIs.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type APIsListResource =
 -- | Retrieve the list of APIs supported at this endpoint.
 --
 -- /See:/ 'apisList' smart constructor.
-data APIsList = APIsList
+data APIsList = APIsList'
     { _alPreferred :: !Bool
     , _alName      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,7 +68,7 @@ data APIsList = APIsList
 apisList
     :: APIsList
 apisList =
-    APIsList
+    APIsList'
     { _alPreferred = False
     , _alName = Nothing
     }
@@ -84,7 +84,8 @@ alName = lens _alName (\ s a -> s{_alName = a})
 
 instance GoogleRequest APIsList where
         type Rs APIsList = DirectoryList
-        requestClient APIsList{..}
+        type Scopes APIsList = '[]
+        requestClient APIsList'{..}
           = go (Just _alPreferred) _alName (Just AltJSON)
               discoveryService
           where go

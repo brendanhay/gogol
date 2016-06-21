@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'projectsSubscriptionsTestIAMPermissions' smart constructor.
-data ProjectsSubscriptionsTestIAMPermissions = ProjectsSubscriptionsTestIAMPermissions
+data ProjectsSubscriptionsTestIAMPermissions = ProjectsSubscriptionsTestIAMPermissions'
     { _pstipXgafv          :: !(Maybe Text)
     , _pstipUploadProtocol :: !(Maybe Text)
     , _pstipPp             :: !Bool
@@ -105,7 +105,7 @@ projectsSubscriptionsTestIAMPermissions
     -> Text -- ^ 'pstipResource'
     -> ProjectsSubscriptionsTestIAMPermissions
 projectsSubscriptionsTestIAMPermissions pPstipPayload_ pPstipResource_ =
-    ProjectsSubscriptionsTestIAMPermissions
+    ProjectsSubscriptionsTestIAMPermissions'
     { _pstipXgafv = Nothing
     , _pstipUploadProtocol = Nothing
     , _pstipPp = True
@@ -155,9 +155,11 @@ pstipBearerToken
   = lens _pstipBearerToken
       (\ s a -> s{_pstipBearerToken = a})
 
--- | REQUIRED: The resource for which policy detail is being requested.
--- \`resource\` is usually specified as a path, such as,
--- \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy detail is being requested.
+-- \`resource\` is usually specified as a path, such as
+-- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
+-- the path specified in this value is resource specific and is specified
+-- in the \`testIamPermissions\` documentation.
 pstipResource :: Lens' ProjectsSubscriptionsTestIAMPermissions Text
 pstipResource
   = lens _pstipResource
@@ -173,8 +175,11 @@ instance GoogleRequest
          ProjectsSubscriptionsTestIAMPermissions where
         type Rs ProjectsSubscriptionsTestIAMPermissions =
              TestIAMPermissionsResponse
+        type Scopes ProjectsSubscriptionsTestIAMPermissions =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient
-          ProjectsSubscriptionsTestIAMPermissions{..}
+          ProjectsSubscriptionsTestIAMPermissions'{..}
           = go _pstipResource _pstipXgafv _pstipUploadProtocol
               (Just _pstipPp)
               _pstipAccessToken

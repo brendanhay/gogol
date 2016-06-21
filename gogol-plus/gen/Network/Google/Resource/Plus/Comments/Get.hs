@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Plus.Comments.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type CommentsGetResource =
 -- | Get a comment.
 --
 -- /See:/ 'commentsGet' smart constructor.
-newtype CommentsGet = CommentsGet
+newtype CommentsGet = CommentsGet'
     { _cgCommentId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ commentsGet
     :: Text -- ^ 'cgCommentId'
     -> CommentsGet
 commentsGet pCgCommentId_ =
-    CommentsGet
+    CommentsGet'
     { _cgCommentId = pCgCommentId_
     }
 
@@ -75,7 +75,10 @@ cgCommentId
 
 instance GoogleRequest CommentsGet where
         type Rs CommentsGet = Comment
-        requestClient CommentsGet{..}
+        type Scopes CommentsGet =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient CommentsGet'{..}
           = go _cgCommentId (Just AltJSON) plusService
           where go
                   = buildClient (Proxy :: Proxy CommentsGetResource)

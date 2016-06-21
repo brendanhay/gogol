@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Changes.Watch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Subscribe to changes for a user.
+-- Subscribes to changes for a user.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.changes.watch@.
 module Network.Google.Resource.Drive.Changes.Watch
@@ -33,13 +33,12 @@ module Network.Google.Resource.Drive.Changes.Watch
     , ChangesWatch
 
     -- * Request Lenses
-    , cwIncludeSubscribed
-    , cwStartChangeId
     , cwPayload
+    , cwRestrictToMyDrive
     , cwSpaces
     , cwPageToken
-    , cwMaxResults
-    , cwIncludeDeleted
+    , cwPageSize
+    , cwIncludeRemoved
     ) where
 
 import           Network.Google.Drive.Types
@@ -49,112 +48,111 @@ import           Network.Google.Prelude
 -- 'ChangesWatch' request conforms to.
 type ChangesWatchResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "changes" :>
            "watch" :>
-             QueryParam "includeSubscribed" Bool :>
-               QueryParam "startChangeId" (Textual Int64) :>
+             QueryParam "pageToken" Text :>
+               QueryParam "restrictToMyDrive" Bool :>
                  QueryParam "spaces" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Int32) :>
-                       QueryParam "includeDeleted" Bool :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] Channel :> Post '[JSON] Channel
+                   QueryParam "pageSize" (Textual Int32) :>
+                     QueryParam "includeRemoved" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
--- | Subscribe to changes for a user.
+-- | Subscribes to changes for a user.
 --
 -- /See:/ 'changesWatch' smart constructor.
-data ChangesWatch = ChangesWatch
-    { _cwIncludeSubscribed :: !Bool
-    , _cwStartChangeId     :: !(Maybe (Textual Int64))
-    , _cwPayload           :: !Channel
-    , _cwSpaces            :: !(Maybe Text)
-    , _cwPageToken         :: !(Maybe Text)
-    , _cwMaxResults        :: !(Textual Int32)
-    , _cwIncludeDeleted    :: !Bool
+data ChangesWatch = ChangesWatch'
+    { _cwPayload           :: !Channel
+    , _cwRestrictToMyDrive :: !Bool
+    , _cwSpaces            :: !Text
+    , _cwPageToken         :: !Text
+    , _cwPageSize          :: !(Textual Int32)
+    , _cwIncludeRemoved    :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cwIncludeSubscribed'
---
--- * 'cwStartChangeId'
---
 -- * 'cwPayload'
+--
+-- * 'cwRestrictToMyDrive'
 --
 -- * 'cwSpaces'
 --
 -- * 'cwPageToken'
 --
--- * 'cwMaxResults'
+-- * 'cwPageSize'
 --
--- * 'cwIncludeDeleted'
+-- * 'cwIncludeRemoved'
 changesWatch
     :: Channel -- ^ 'cwPayload'
+    -> Text -- ^ 'cwPageToken'
     -> ChangesWatch
-changesWatch pCwPayload_ =
-    ChangesWatch
-    { _cwIncludeSubscribed = True
-    , _cwStartChangeId = Nothing
-    , _cwPayload = pCwPayload_
-    , _cwSpaces = Nothing
-    , _cwPageToken = Nothing
-    , _cwMaxResults = 100
-    , _cwIncludeDeleted = True
+changesWatch pCwPayload_ pCwPageToken_ =
+    ChangesWatch'
+    { _cwPayload = pCwPayload_
+    , _cwRestrictToMyDrive = False
+    , _cwSpaces = "drive"
+    , _cwPageToken = pCwPageToken_
+    , _cwPageSize = 100
+    , _cwIncludeRemoved = True
     }
-
--- | Whether to include public files the user has opened and shared files.
--- When set to false, the list only includes owned files plus any shared or
--- public files the user has explicitly added to a folder they own.
-cwIncludeSubscribed :: Lens' ChangesWatch Bool
-cwIncludeSubscribed
-  = lens _cwIncludeSubscribed
-      (\ s a -> s{_cwIncludeSubscribed = a})
-
--- | Change ID to start listing changes from.
-cwStartChangeId :: Lens' ChangesWatch (Maybe Int64)
-cwStartChangeId
-  = lens _cwStartChangeId
-      (\ s a -> s{_cwStartChangeId = a})
-      . mapping _Coerce
 
 -- | Multipart request metadata.
 cwPayload :: Lens' ChangesWatch Channel
 cwPayload
   = lens _cwPayload (\ s a -> s{_cwPayload = a})
 
--- | A comma-separated list of spaces to query. Supported values are
--- \'drive\', \'appDataFolder\' and \'photos\'.
-cwSpaces :: Lens' ChangesWatch (Maybe Text)
+-- | Whether to restrict the results to changes inside the My Drive
+-- hierarchy. This omits changes to files such as those in the Application
+-- Data folder or shared files which have not been added to My Drive.
+cwRestrictToMyDrive :: Lens' ChangesWatch Bool
+cwRestrictToMyDrive
+  = lens _cwRestrictToMyDrive
+      (\ s a -> s{_cwRestrictToMyDrive = a})
+
+-- | A comma-separated list of spaces to query within the user corpus.
+-- Supported values are \'drive\', \'appDataFolder\' and \'photos\'.
+cwSpaces :: Lens' ChangesWatch Text
 cwSpaces = lens _cwSpaces (\ s a -> s{_cwSpaces = a})
 
--- | Page token for changes.
-cwPageToken :: Lens' ChangesWatch (Maybe Text)
+-- | The token for continuing a previous list request on the next page. This
+-- should be set to the value of \'nextPageToken\' from the previous
+-- response or to the response from the getStartPageToken method.
+cwPageToken :: Lens' ChangesWatch Text
 cwPageToken
   = lens _cwPageToken (\ s a -> s{_cwPageToken = a})
 
--- | Maximum number of changes to return.
-cwMaxResults :: Lens' ChangesWatch Int32
-cwMaxResults
-  = lens _cwMaxResults (\ s a -> s{_cwMaxResults = a})
-      . _Coerce
+-- | The maximum number of changes to return per page.
+cwPageSize :: Lens' ChangesWatch Int32
+cwPageSize
+  = lens _cwPageSize (\ s a -> s{_cwPageSize = a}) .
+      _Coerce
 
--- | Whether to include deleted items.
-cwIncludeDeleted :: Lens' ChangesWatch Bool
-cwIncludeDeleted
-  = lens _cwIncludeDeleted
-      (\ s a -> s{_cwIncludeDeleted = a})
+-- | Whether to include changes indicating that items have left the view of
+-- the changes list, for example by deletion or lost access.
+cwIncludeRemoved :: Lens' ChangesWatch Bool
+cwIncludeRemoved
+  = lens _cwIncludeRemoved
+      (\ s a -> s{_cwIncludeRemoved = a})
 
 instance GoogleRequest ChangesWatch where
         type Rs ChangesWatch = Channel
-        requestClient ChangesWatch{..}
-          = go (Just _cwIncludeSubscribed) _cwStartChangeId
-              _cwSpaces
-              _cwPageToken
-              (Just _cwMaxResults)
-              (Just _cwIncludeDeleted)
+        type Scopes ChangesWatch =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
+        requestClient ChangesWatch'{..}
+          = go (Just _cwPageToken) (Just _cwRestrictToMyDrive)
+              (Just _cwSpaces)
+              (Just _cwPageSize)
+              (Just _cwIncludeRemoved)
               (Just AltJSON)
               _cwPayload
               driveService

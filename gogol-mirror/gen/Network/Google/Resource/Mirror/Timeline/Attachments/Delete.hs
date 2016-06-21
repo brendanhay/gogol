@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.Attachments.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type TimelineAttachmentsDeleteResource =
 -- | Deletes an attachment from a timeline item.
 --
 -- /See:/ 'timelineAttachmentsDelete' smart constructor.
-data TimelineAttachmentsDelete = TimelineAttachmentsDelete
+data TimelineAttachmentsDelete = TimelineAttachmentsDelete'
     { _tadItemId       :: !Text
     , _tadAttachmentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ timelineAttachmentsDelete
     -> Text -- ^ 'tadAttachmentId'
     -> TimelineAttachmentsDelete
 timelineAttachmentsDelete pTadItemId_ pTadAttachmentId_ =
-    TimelineAttachmentsDelete
+    TimelineAttachmentsDelete'
     { _tadItemId = pTadItemId_
     , _tadAttachmentId = pTadAttachmentId_
     }
@@ -90,7 +90,9 @@ tadAttachmentId
 instance GoogleRequest TimelineAttachmentsDelete
          where
         type Rs TimelineAttachmentsDelete = ()
-        requestClient TimelineAttachmentsDelete{..}
+        type Scopes TimelineAttachmentsDelete =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient TimelineAttachmentsDelete'{..}
           = go _tadItemId _tadAttachmentId (Just AltJSON)
               mirrorService
           where go

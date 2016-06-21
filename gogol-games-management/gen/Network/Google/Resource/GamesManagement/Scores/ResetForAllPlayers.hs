@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Scores.ResetForAllPlayers
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ScoresResetForAllPlayersResource =
 -- console. Only draft leaderboards can be reset.
 --
 -- /See:/ 'scoresResetForAllPlayers' smart constructor.
-newtype ScoresResetForAllPlayers = ScoresResetForAllPlayers
+newtype ScoresResetForAllPlayers = ScoresResetForAllPlayers'
     { _srfapLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ scoresResetForAllPlayers
     :: Text -- ^ 'srfapLeaderboardId'
     -> ScoresResetForAllPlayers
 scoresResetForAllPlayers pSrfapLeaderboardId_ =
-    ScoresResetForAllPlayers
+    ScoresResetForAllPlayers'
     { _srfapLeaderboardId = pSrfapLeaderboardId_
     }
 
@@ -82,7 +82,10 @@ srfapLeaderboardId
 
 instance GoogleRequest ScoresResetForAllPlayers where
         type Rs ScoresResetForAllPlayers = ()
-        requestClient ScoresResetForAllPlayers{..}
+        type Scopes ScoresResetForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient ScoresResetForAllPlayers'{..}
           = go _srfapLeaderboardId (Just AltJSON)
               gamesManagementService
           where go

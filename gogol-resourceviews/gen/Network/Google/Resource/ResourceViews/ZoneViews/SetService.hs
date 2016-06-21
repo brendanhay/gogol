@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ResourceViews.ZoneViews.SetService
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ZoneViewsSetServiceResource =
 -- | Update the service information of a resource view or a resource.
 --
 -- /See:/ 'zoneViewsSetService' smart constructor.
-data ZoneViewsSetService = ZoneViewsSetService
+data ZoneViewsSetService = ZoneViewsSetService'
     { _zvssResourceView :: !Text
     , _zvssProject      :: !Text
     , _zvssZone         :: !Text
@@ -86,7 +86,7 @@ zoneViewsSetService
     -> ZoneViewsSetServiceRequest -- ^ 'zvssPayload'
     -> ZoneViewsSetService
 zoneViewsSetService pZvssResourceView_ pZvssProject_ pZvssZone_ pZvssPayload_ =
-    ZoneViewsSetService
+    ZoneViewsSetService'
     { _zvssResourceView = pZvssResourceView_
     , _zvssProject = pZvssProject_
     , _zvssZone = pZvssZone_
@@ -115,7 +115,11 @@ zvssPayload
 
 instance GoogleRequest ZoneViewsSetService where
         type Rs ZoneViewsSetService = Operation
-        requestClient ZoneViewsSetService{..}
+        type Scopes ZoneViewsSetService =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient ZoneViewsSetService'{..}
           = go _zvssProject _zvssZone _zvssResourceView
               (Just AltJSON)
               _zvssPayload

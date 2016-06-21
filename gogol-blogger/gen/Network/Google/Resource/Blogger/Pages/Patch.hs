@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Pages.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type PagesPatchResource =
 -- | Update a page. This method supports patch semantics.
 --
 -- /See:/ 'pagesPatch' smart constructor.
-data PagesPatch = PagesPatch
+data PagesPatch = PagesPatch'
     { _ppBlogId  :: !Text
     , _ppPageId  :: !Text
     , _ppPayload :: !Page
@@ -87,7 +87,7 @@ pagesPatch
     -> Page -- ^ 'ppPayload'
     -> PagesPatch
 pagesPatch pPpBlogId_ pPpPageId_ pPpPayload_ =
-    PagesPatch
+    PagesPatch'
     { _ppBlogId = pPpBlogId_
     , _ppPageId = pPpPageId_
     , _ppPayload = pPpPayload_
@@ -121,7 +121,9 @@ ppPublish
 
 instance GoogleRequest PagesPatch where
         type Rs PagesPatch = Page
-        requestClient PagesPatch{..}
+        type Scopes PagesPatch =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PagesPatch'{..}
           = go _ppBlogId _ppPageId _ppRevert _ppPublish
               (Just AltJSON)
               _ppPayload

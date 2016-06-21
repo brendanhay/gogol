@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.Accounts.AdClients.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsAdClientsGetResource =
 -- publisher\'s AdSense account.
 --
 -- /See:/ 'accountsAdClientsGet' smart constructor.
-data AccountsAdClientsGet = AccountsAdClientsGet
+data AccountsAdClientsGet = AccountsAdClientsGet'
     { _aacgAdClientId :: !Text
     , _aacgAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsAdClientsGet
     -> Text -- ^ 'aacgAccountId'
     -> AccountsAdClientsGet
 accountsAdClientsGet pAacgAdClientId_ pAacgAccountId_ =
-    AccountsAdClientsGet
+    AccountsAdClientsGet'
     { _aacgAdClientId = pAacgAdClientId_
     , _aacgAccountId = pAacgAccountId_
     }
@@ -92,7 +92,9 @@ aacgAccountId
 
 instance GoogleRequest AccountsAdClientsGet where
         type Rs AccountsAdClientsGet = AdClient
-        requestClient AccountsAdClientsGet{..}
+        type Scopes AccountsAdClientsGet =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AccountsAdClientsGet'{..}
           = go _aacgAccountId _aacgAdClientId (Just AltJSON)
               adSenseHostService
           where go

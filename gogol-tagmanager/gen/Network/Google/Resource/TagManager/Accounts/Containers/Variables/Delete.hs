@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsContainersVariablesDeleteResource =
 -- | Deletes a GTM Variable.
 --
 -- /See:/ 'accountsContainersVariablesDelete' smart constructor.
-data AccountsContainersVariablesDelete = AccountsContainersVariablesDelete
+data AccountsContainersVariablesDelete = AccountsContainersVariablesDelete'
     { _acvdContainerId :: !Text
     , _acvdVariableId  :: !Text
     , _acvdAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersVariablesDelete
     -> Text -- ^ 'acvdAccountId'
     -> AccountsContainersVariablesDelete
 accountsContainersVariablesDelete pAcvdContainerId_ pAcvdVariableId_ pAcvdAccountId_ =
-    AccountsContainersVariablesDelete
+    AccountsContainersVariablesDelete'
     { _acvdContainerId = pAcvdContainerId_
     , _acvdVariableId = pAcvdVariableId_
     , _acvdAccountId = pAcvdAccountId_
@@ -105,7 +105,9 @@ acvdAccountId
 instance GoogleRequest
          AccountsContainersVariablesDelete where
         type Rs AccountsContainersVariablesDelete = ()
-        requestClient AccountsContainersVariablesDelete{..}
+        type Scopes AccountsContainersVariablesDelete =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient AccountsContainersVariablesDelete'{..}
           = go _acvdAccountId _acvdContainerId _acvdVariableId
               (Just AltJSON)
               tagManagerService

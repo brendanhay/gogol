@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Rasters.Parents.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type RastersParentsListResource =
 -- | Return all parent ids of the specified rasters.
 --
 -- /See:/ 'rastersParentsList' smart constructor.
-data RastersParentsList = RastersParentsList
+data RastersParentsList = RastersParentsList'
     { _rId         :: !Text
     , _rPageToken  :: !(Maybe Text)
     , _rMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ rastersParentsList
     :: Text -- ^ 'rId'
     -> RastersParentsList
 rastersParentsList pRId_ =
-    RastersParentsList
+    RastersParentsList'
     { _rId = pRId_
     , _rPageToken = Nothing
     , _rMaxResults = Nothing
@@ -102,7 +102,10 @@ rMaxResults
 
 instance GoogleRequest RastersParentsList where
         type Rs RastersParentsList = ParentsListResponse
-        requestClient RastersParentsList{..}
+        type Scopes RastersParentsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient RastersParentsList'{..}
           = go _rId _rPageToken _rMaxResults (Just AltJSON)
               mapsEngineService
           where go

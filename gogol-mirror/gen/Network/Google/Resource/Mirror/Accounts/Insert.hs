@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Accounts.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsInsertResource =
 -- | Inserts a new account for a user
 --
 -- /See:/ 'accountsInsert' smart constructor.
-data AccountsInsert = AccountsInsert
+data AccountsInsert = AccountsInsert'
     { _aiAccountName :: !Text
     , _aiPayload     :: !Account
     , _aiUserToken   :: !Text
@@ -82,7 +82,7 @@ accountsInsert
     -> Text -- ^ 'aiAccountType'
     -> AccountsInsert
 accountsInsert pAiAccountName_ pAiPayload_ pAiUserToken_ pAiAccountType_ =
-    AccountsInsert
+    AccountsInsert'
     { _aiAccountName = pAiAccountName_
     , _aiPayload = pAiPayload_
     , _aiUserToken = pAiUserToken_
@@ -113,7 +113,8 @@ aiAccountType
 
 instance GoogleRequest AccountsInsert where
         type Rs AccountsInsert = Account
-        requestClient AccountsInsert{..}
+        type Scopes AccountsInsert = '[]
+        requestClient AccountsInsert'{..}
           = go _aiUserToken _aiAccountType _aiAccountName
               (Just AltJSON)
               _aiPayload

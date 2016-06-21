@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickSearch.Reports.Request
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type ReportsRequestResource =
 -- | Inserts a report request into the reporting system.
 --
 -- /See:/ 'reportsRequest' smart constructor.
-newtype ReportsRequest = ReportsRequest
+newtype ReportsRequest = ReportsRequest'
     { _rrPayload :: ReportRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ reportsRequest
     :: ReportRequest -- ^ 'rrPayload'
     -> ReportsRequest
 reportsRequest pRrPayload_ =
-    ReportsRequest
+    ReportsRequest'
     { _rrPayload = pRrPayload_
     }
 
@@ -75,7 +75,9 @@ rrPayload
 
 instance GoogleRequest ReportsRequest where
         type Rs ReportsRequest = Report
-        requestClient ReportsRequest{..}
+        type Scopes ReportsRequest =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
+        requestClient ReportsRequest'{..}
           = go (Just AltJSON) _rrPayload
               doubleClickSearchService
           where go

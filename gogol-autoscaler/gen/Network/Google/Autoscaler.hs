@@ -7,7 +7,7 @@
 
 -- |
 -- Module      : Network.Google.Autoscaler
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,6 +21,10 @@ module Network.Google.Autoscaler
     (
     -- * Service Configuration
       autoscalerService
+
+    -- * OAuth Scopes
+    , computeScope
+    , computeReadOnlyScope
 
     -- * API Declaration
     , AutoscalerAPI
@@ -113,6 +117,7 @@ module Network.Google.Autoscaler
     , oId
     , oOperationType
     , oRegion
+    , oDescription
     , oTargetLink
     , oClientOperationId
 
@@ -125,7 +130,6 @@ module Network.Google.Autoscaler
     , Zone
     , zone
     , zStatus
-    , zMaintenanceWindows
     , zKind
     , zSelfLink
     , zName
@@ -134,14 +138,6 @@ module Network.Google.Autoscaler
     , zRegion
     , zDescription
     , zDeprecated
-
-    -- ** ZoneMaintenanceWindowsItem
-    , ZoneMaintenanceWindowsItem
-    , zoneMaintenanceWindowsItem
-    , zmwiBeginTime
-    , zmwiName
-    , zmwiEndTime
-    , zmwiDescription
 
     -- ** ZoneList
     , ZoneList

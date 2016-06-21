@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Events.Move
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type EventsMoveResource =
 -- | Moves an event to another calendar, i.e. changes an event\'s organizer.
 --
 -- /See:/ 'eventsMove' smart constructor.
-data EventsMove = EventsMove
+data EventsMove = EventsMove'
     { _emDestination       :: !Text
     , _emCalendarId        :: !Text
     , _emSendNotifications :: !(Maybe Bool)
@@ -83,7 +83,7 @@ eventsMove
     -> Text -- ^ 'emEventId'
     -> EventsMove
 eventsMove pEmDestination_ pEmCalendarId_ pEmEventId_ =
-    EventsMove
+    EventsMove'
     { _emDestination = pEmDestination_
     , _emCalendarId = pEmCalendarId_
     , _emSendNotifications = Nothing
@@ -117,7 +117,9 @@ emEventId
 
 instance GoogleRequest EventsMove where
         type Rs EventsMove = Event
-        requestClient EventsMove{..}
+        type Scopes EventsMove =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient EventsMove'{..}
           = go _emCalendarId _emEventId (Just _emDestination)
               _emSendNotifications
               (Just AltJSON)

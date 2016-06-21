@@ -7,20 +7,26 @@
 
 -- |
 -- Module      : Network.Google.DeploymentManager
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Deployment Manager API allows users to declaratively configure,
--- deploy and run complex solutions on the Google Cloud Platform.
+-- Declares, configures, and deploys complex solutions on Google Cloud
+-- Platform.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference>
 module Network.Google.DeploymentManager
     (
     -- * Service Configuration
       deploymentManagerService
+
+    -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , ndevCloudmanScope
+    , ndevCloudmanReadOnlyScope
 
     -- * API Declaration
     , DeploymentManagerAPI
@@ -135,6 +141,7 @@ module Network.Google.DeploymentManager
     , oId
     , oOperationType
     , oRegion
+    , oDescription
     , oTargetLink
     , oClientOperationId
 
@@ -151,6 +158,7 @@ module Network.Google.DeploymentManager
     , DeploymentUpdate
     , deploymentUpdate
     , duManifest
+    , duLabels
 
     -- ** ResourceUpdate
     , ResourceUpdate
@@ -162,6 +170,12 @@ module Network.Google.DeploymentManager
     , ruManifest
     , ruFinalProperties
     , ruProperties
+
+    -- ** DeploymentLabelEntry
+    , DeploymentLabelEntry
+    , deploymentLabelEntry
+    , dleValue
+    , dleKey
 
     -- ** Manifest
     , Manifest
@@ -201,6 +215,12 @@ module Network.Google.DeploymentManager
     , rType
     , rUpdate
     , rProperties
+
+    -- ** DeploymentUpdateLabelEntry
+    , DeploymentUpdateLabelEntry
+    , deploymentUpdateLabelEntry
+    , duleValue
+    , duleKey
 
     -- ** ResourceUpdateErrorErrorsItem
     , ResourceUpdateErrorErrorsItem
@@ -289,9 +309,11 @@ module Network.Google.DeploymentManager
     , dInsertTime
     , dOperation
     , dFingerprint
+    , dSelfLink
     , dName
     , dManifest
     , dId
+    , dLabels
     , dDescription
     , dUpdate
     , dTarget

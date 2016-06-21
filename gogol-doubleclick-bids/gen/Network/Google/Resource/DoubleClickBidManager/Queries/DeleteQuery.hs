@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type QueriesDeleteQueryResource =
 -- | Deletes a stored query as well as the associated stored reports.
 --
 -- /See:/ 'queriesDeleteQuery' smart constructor.
-newtype QueriesDeleteQuery = QueriesDeleteQuery
+newtype QueriesDeleteQuery = QueriesDeleteQuery'
     { _qdqQueryId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ queriesDeleteQuery
     :: Int64 -- ^ 'qdqQueryId'
     -> QueriesDeleteQuery
 queriesDeleteQuery pQdqQueryId_ =
-    QueriesDeleteQuery
+    QueriesDeleteQuery'
     { _qdqQueryId = _Coerce # pQdqQueryId_
     }
 
@@ -76,7 +76,8 @@ qdqQueryId
 
 instance GoogleRequest QueriesDeleteQuery where
         type Rs QueriesDeleteQuery = ()
-        requestClient QueriesDeleteQuery{..}
+        type Scopes QueriesDeleteQuery = '[]
+        requestClient QueriesDeleteQuery'{..}
           = go _qdqQueryId (Just AltJSON)
               doubleClickBidsService
           where go

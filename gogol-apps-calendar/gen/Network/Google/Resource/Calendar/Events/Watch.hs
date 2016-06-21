@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Events.Watch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -97,7 +97,7 @@ type EventsWatchResource =
 -- | Watch for changes to Events resources.
 --
 -- /See:/ 'eventsWatch' smart constructor.
-data EventsWatch = EventsWatch
+data EventsWatch = EventsWatch'
     { _ewSyncToken               :: !(Maybe Text)
     , _ewCalendarId              :: !Text
     , _ewTimeMin                 :: !(Maybe DateTime')
@@ -165,7 +165,7 @@ eventsWatch
     -> Channel -- ^ 'ewPayload'
     -> EventsWatch
 eventsWatch pEwCalendarId_ pEwPayload_ =
-    EventsWatch
+    EventsWatch'
     { _ewSyncToken = Nothing
     , _ewCalendarId = pEwCalendarId_
     , _ewTimeMin = Nothing
@@ -348,7 +348,10 @@ ewTimeMax
 
 instance GoogleRequest EventsWatch where
         type Rs EventsWatch = Channel
-        requestClient EventsWatch{..}
+        type Scopes EventsWatch =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient EventsWatch'{..}
           = go _ewCalendarId _ewSyncToken _ewTimeMin _ewOrderBy
               _ewSingleEvents
               (_ewPrivateExtendedProperty ^. _Default)

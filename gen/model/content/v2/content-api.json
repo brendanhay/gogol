@@ -1,14 +1,14 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"ye6orv2F-1npMW3u9suM3a7C5Bo/qCLRcKBvpHXy_56JLKWSx1mf1Qs\"",
+ "etag": "\"jQLIOHBVnDZie4rQHGH1WJF-INE/hqrMddPMFaU74nL8Pb566O2vUwc\"",
  "discoveryVersion": "v1",
  "id": "content:v2",
  "name": "content",
  "canonicalName": "Shopping Content",
  "version": "v2",
- "revision": "20150915",
+ "revision": "20160419",
  "title": "Content API for Shopping",
- "description": "Manage product items, inventory, and Merchant Center accounts for Google Shopping.",
+ "description": "Manages product items, inventory, and Merchant Center accounts for Google Shopping.",
  "ownerDomain": "google.com",
  "ownerName": "Google",
  "icons": {
@@ -1137,7 +1137,7 @@
     },
     "contentLanguage": {
      "type": "string",
-     "description": "The two-letter ISO 639-1 language of the items in the feed.",
+     "description": "The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountry.",
      "annotations": {
       "required": [
        "content.datafeeds.insert"
@@ -1231,7 +1231,12 @@
     },
     "hour": {
      "type": "integer",
-     "description": "The hour of the day the feed file should be fetched (0-24).",
+     "description": "The hour of the day the feed file should be fetched (0-23).",
+     "format": "uint32"
+    },
+    "minuteOfHour": {
+     "type": "integer",
+     "description": "The minute of the hour the feed file should be fetched (0-59). Read-only.",
      "format": "uint32"
     },
     "password": {
@@ -1606,6 +1611,21 @@
     }
    }
   },
+  "Installment": {
+   "id": "Installment",
+   "type": "object",
+   "properties": {
+    "amount": {
+     "$ref": "Price",
+     "description": "The amount the buyer has to pay per month."
+    },
+    "months": {
+     "type": "string",
+     "description": "The number of installments the buyer has to pay.",
+     "format": "int64"
+    }
+   }
+  },
   "Inventory": {
    "id": "Inventory",
    "type": "object",
@@ -1614,10 +1634,18 @@
      "type": "string",
      "description": "The availability of the product."
     },
+    "installment": {
+     "$ref": "Installment",
+     "description": "Number and amount of installments to pay for an item. Brazil only."
+    },
     "kind": {
      "type": "string",
      "description": "Identifies what kind of resource this is. Value: the fixed string \"content#inventory\".",
      "default": "content#inventory"
+    },
+    "loyaltyPoints": {
+     "$ref": "LoyaltyPoints",
+     "description": "Loyalty points that users receive after purchasing the item. Japan only."
     },
     "price": {
      "$ref": "Price",
@@ -1732,6 +1760,14 @@
      "type": "string",
      "description": "The availability of the product."
     },
+    "installment": {
+     "$ref": "Installment",
+     "description": "Number and amount of installments to pay for an item. Brazil only."
+    },
+    "loyaltyPoints": {
+     "$ref": "LoyaltyPoints",
+     "description": "Loyalty points that users receive after purchasing the item. Japan only."
+    },
     "price": {
      "$ref": "Price",
      "description": "The price of the product."
@@ -1843,6 +1879,13 @@
      "type": "string",
      "description": "The date when the order was placed, in ISO 8601 format."
     },
+    "promotions": {
+     "type": "array",
+     "description": "The details of the merchant provided promotions applied to the order. More details about the program are  here.",
+     "items": {
+      "$ref": "OrderPromotion"
+     }
+    },
     "refunds": {
      "type": "array",
      "description": "Refunds for the order.",
@@ -1938,7 +1981,7 @@
     },
     "reason": {
      "type": "string",
-     "description": "The reason for the cancellation."
+     "description": "The reason for the cancellation. Orders that are cancelled with a noIventory reason will lead to the removal of the product from POG until you make an update to that product. This will not affect your Shopping ads."
     },
     "reasonText": {
      "type": "string",
@@ -1956,7 +1999,7 @@
     },
     "explicitMarketingPreference": {
      "type": "boolean",
-     "description": "If set, this indicates the user had a choice to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow."
+     "description": "If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow."
     },
     "fullName": {
      "type": "string",
@@ -2273,6 +2316,71 @@
     }
    }
   },
+  "OrderPromotion": {
+   "id": "OrderPromotion",
+   "type": "object",
+   "properties": {
+    "benefits": {
+     "type": "array",
+     "items": {
+      "$ref": "OrderPromotionBenefit"
+     }
+    },
+    "effectiveDates": {
+     "type": "string",
+     "description": "The date and time frame when the promotion is active and ready for validation review. Note that the promotion live time may be delayed for a few hours due to the validation review.\nStart date and end date are separated by a forward slash (/). The start date is specified by the format (YYYY-MM-DD), followed by the letter ?T?, the time of the day when the sale starts (in Greenwich Mean Time, GMT), followed by an expression of the time zone for the sale. The end date is in the same format."
+    },
+    "genericRedemptionCode": {
+     "type": "string",
+     "description": "Optional. The text code that corresponds to the promotion when applied on the retailer?s website."
+    },
+    "id": {
+     "type": "string",
+     "description": "The unique ID of the promotion."
+    },
+    "longTitle": {
+     "type": "string",
+     "description": "The full title of the promotion."
+    },
+    "productApplicability": {
+     "type": "string",
+     "description": "Whether the promotion is applicable to all products or only specific products."
+    },
+    "redemptionChannel": {
+     "type": "string",
+     "description": "Indicates that the promotion is valid online."
+    }
+   }
+  },
+  "OrderPromotionBenefit": {
+   "id": "OrderPromotionBenefit",
+   "type": "object",
+   "properties": {
+    "discount": {
+     "$ref": "Price",
+     "description": "The discount in the order price when the promotion is applied."
+    },
+    "offerIds": {
+     "type": "array",
+     "description": "The OfferId(s) that were purchased in this order and map to this specific benefit of the promotion.",
+     "items": {
+      "type": "string"
+     }
+    },
+    "subType": {
+     "type": "string",
+     "description": "Further describes the benefit of the promotion. Note that we will expand on this enumeration as we support new promotion sub-types."
+    },
+    "taxImpact": {
+     "$ref": "Price",
+     "description": "The impact on tax when the promotion is applied."
+    },
+    "type": {
+     "type": "string",
+     "description": "Describes whether the promotion applies to products (e.g. 20% off) or to shipping (e.g. Free Shipping)."
+    }
+   }
+  },
   "OrderRefund": {
    "id": "OrderRefund",
    "type": "object",
@@ -2418,6 +2526,10 @@
    "id": "OrdersCancelLineItemRequest",
    "type": "object",
    "properties": {
+    "amount": {
+     "$ref": "Price",
+     "description": "Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order."
+    },
     "lineItemId": {
      "type": "string",
      "description": "The ID of the line item to cancel."
@@ -2605,6 +2717,10 @@
    "id": "OrdersCustomBatchRequestEntryCancelLineItem",
    "type": "object",
    "properties": {
+    "amount": {
+     "$ref": "Price",
+     "description": "Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order."
+    },
     "lineItemId": {
      "type": "string",
      "description": "The ID of the line item to cancel."
@@ -3198,7 +3314,7 @@
      "description": "URL of an image of the item."
     },
     "installment": {
-     "$ref": "ProductInstallment",
+     "$ref": "Installment",
      "description": "Number and amount of installments to pay for an item. Brazil only."
     },
     "isBundle": {
@@ -3241,7 +3357,7 @@
     },
     "offerId": {
      "type": "string",
-     "description": "An identifier of the item.",
+     "description": "An identifier of the item. Leading and trailing whitespaces are stripped and multiple whitespaces are replaced by a single whitespace upon submission. Only valid unicode characters are accepted. See the products feed specification for details.",
      "annotations": {
       "required": [
        "content.products.insert"
@@ -3262,7 +3378,14 @@
     },
     "productType": {
      "type": "string",
-     "description": "Your category of the item (formatted as in product feeds specification)."
+     "description": "Your category of the item (formatted as in products feed specification)."
+    },
+    "promotionIds": {
+     "type": "array",
+     "description": "The unique ID of a promotion.",
+     "items": {
+      "type": "string"
+     }
     },
     "salePrice": {
      "$ref": "Price",
@@ -3270,7 +3393,7 @@
     },
     "salePriceEffectiveDate": {
      "type": "string",
-     "description": "Date range during which the item is on sale (see product feed specifications)."
+     "description": "Date range during which the item is on sale (see products feed specification)."
     },
     "sellOnGoogleQuantity": {
      "type": "string",
@@ -3431,21 +3554,6 @@
     "intention": {
      "type": "string",
      "description": "Whether the destination is required, excluded or should be validated."
-    }
-   }
-  },
-  "ProductInstallment": {
-   "id": "ProductInstallment",
-   "type": "object",
-   "properties": {
-    "amount": {
-     "$ref": "Price",
-     "description": "The amount the buyer has to pay per month."
-    },
-    "months": {
-     "type": "string",
-     "description": "The number of installments the buyer has to pay.",
-     "format": "int64"
     }
    }
   },
@@ -3931,6 +4039,13 @@
       ]
      }
     },
+    "promotions": {
+     "type": "array",
+     "description": "The details of the merchant provided promotions applied to the order. More details about the program are  here.",
+     "items": {
+      "$ref": "OrderPromotion"
+     }
+    },
     "shippingCost": {
      "$ref": "Price",
      "description": "The total cost of shipping for all items.",
@@ -3975,7 +4090,7 @@
     },
     "explicitMarketingPreference": {
      "type": "boolean",
-     "description": "If set, this indicates the user had a choice to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow. Optional."
+     "description": "If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow. Optional."
     },
     "fullName": {
      "type": "string",
@@ -5514,9 +5629,13 @@
        "required": true,
        "enum": [
         "template1",
+        "template1a",
+        "template1b",
         "template2"
        ],
        "enumDescriptions": [
+        "",
+        "",
         "",
         ""
        ],
@@ -5927,6 +6046,11 @@
      "httpMethod": "GET",
      "description": "Lists the products in your Merchant Center account.",
      "parameters": {
+      "includeInvalidInsertedItems": {
+       "type": "boolean",
+       "description": "Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).",
+       "location": "query"
+      },
       "maxResults": {
        "type": "integer",
        "description": "The maximum number of products to return in the response, used for paging.",
@@ -6012,6 +6136,11 @@
      "httpMethod": "GET",
      "description": "Lists the statuses of the products in your Merchant Center account.",
      "parameters": {
+      "includeInvalidInsertedItems": {
+       "type": "boolean",
+       "description": "Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).",
+       "location": "query"
+      },
       "maxResults": {
        "type": "integer",
        "description": "The maximum number of product statuses to return in the response, used for paging.",

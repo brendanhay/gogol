@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Autoscalers.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified autoscaler resource.
+-- Deletes the specified autoscaler.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.delete@.
 module Network.Google.Resource.Compute.Autoscalers.Delete
@@ -54,10 +54,10 @@ type AutoscalersDeleteResource =
                    Capture "autoscaler" Text :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified autoscaler resource.
+-- | Deletes the specified autoscaler.
 --
 -- /See:/ 'autoscalersDelete' smart constructor.
-data AutoscalersDelete = AutoscalersDelete
+data AutoscalersDelete = AutoscalersDelete'
     { _adProject    :: !Text
     , _adZone       :: !Text
     , _adAutoscaler :: !Text
@@ -78,29 +78,32 @@ autoscalersDelete
     -> Text -- ^ 'adAutoscaler'
     -> AutoscalersDelete
 autoscalersDelete pAdProject_ pAdZone_ pAdAutoscaler_ =
-    AutoscalersDelete
+    AutoscalersDelete'
     { _adProject = pAdProject_
     , _adZone = pAdZone_
     , _adAutoscaler = pAdAutoscaler_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 adProject :: Lens' AutoscalersDelete Text
 adProject
   = lens _adProject (\ s a -> s{_adProject = a})
 
--- | Name of the zone scoping this request.
+-- | Name of the zone for this request.
 adZone :: Lens' AutoscalersDelete Text
 adZone = lens _adZone (\ s a -> s{_adZone = a})
 
--- | Name of the persistent autoscaler resource to delete.
+-- | Name of the autoscaler to delete.
 adAutoscaler :: Lens' AutoscalersDelete Text
 adAutoscaler
   = lens _adAutoscaler (\ s a -> s{_adAutoscaler = a})
 
 instance GoogleRequest AutoscalersDelete where
         type Rs AutoscalersDelete = Operation
-        requestClient AutoscalersDelete{..}
+        type Scopes AutoscalersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient AutoscalersDelete'{..}
           = go _adProject _adZone _adAutoscaler (Just AltJSON)
               computeService
           where go

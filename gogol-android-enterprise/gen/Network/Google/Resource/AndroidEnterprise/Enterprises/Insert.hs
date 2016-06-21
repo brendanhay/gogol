@@ -14,16 +14,16 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Establishes the binding between the MDM and an enterprise. This is now
+-- Establishes the binding between the EMM and an enterprise. This is now
 -- deprecated; use enroll instead.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.insert@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.insert@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
     (
     -- * REST Resource
@@ -51,11 +51,11 @@ type EnterprisesInsertResource =
              QueryParam "alt" AltJSON :>
                ReqBody '[JSON] Enterprise :> Post '[JSON] Enterprise
 
--- | Establishes the binding between the MDM and an enterprise. This is now
+-- | Establishes the binding between the EMM and an enterprise. This is now
 -- deprecated; use enroll instead.
 --
 -- /See:/ 'enterprisesInsert' smart constructor.
-data EnterprisesInsert = EnterprisesInsert
+data EnterprisesInsert = EnterprisesInsert'
     { _eiToken   :: !Text
     , _eiPayload :: !Enterprise
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,12 +72,12 @@ enterprisesInsert
     -> Enterprise -- ^ 'eiPayload'
     -> EnterprisesInsert
 enterprisesInsert pEiToken_ pEiPayload_ =
-    EnterprisesInsert
+    EnterprisesInsert'
     { _eiToken = pEiToken_
     , _eiPayload = pEiPayload_
     }
 
--- | The token provided by the enterprise to register the MDM.
+-- | The token provided by the enterprise to register the EMM.
 eiToken :: Lens' EnterprisesInsert Text
 eiToken = lens _eiToken (\ s a -> s{_eiToken = a})
 
@@ -88,7 +88,9 @@ eiPayload
 
 instance GoogleRequest EnterprisesInsert where
         type Rs EnterprisesInsert = Enterprise
-        requestClient EnterprisesInsert{..}
+        type Scopes EnterprisesInsert =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EnterprisesInsert'{..}
           = go (Just _eiToken) (Just AltJSON) _eiPayload
               androidEnterpriseService
           where go

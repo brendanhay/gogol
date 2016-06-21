@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Projects.MoveDisk
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ProjectsMoveDiskResource =
 -- | Moves a persistent disk from one zone to another.
 --
 -- /See:/ 'projectsMoveDisk' smart constructor.
-data ProjectsMoveDisk = ProjectsMoveDisk
+data ProjectsMoveDisk = ProjectsMoveDisk'
     { _pmdProject :: !Text
     , _pmdPayload :: !DiskMoveRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ projectsMoveDisk
     -> DiskMoveRequest -- ^ 'pmdPayload'
     -> ProjectsMoveDisk
 projectsMoveDisk pPmdProject_ pPmdPayload_ =
-    ProjectsMoveDisk
+    ProjectsMoveDisk'
     { _pmdProject = pPmdProject_
     , _pmdPayload = pPmdPayload_
     }
@@ -89,7 +89,10 @@ pmdPayload
 
 instance GoogleRequest ProjectsMoveDisk where
         type Rs ProjectsMoveDisk = Operation
-        requestClient ProjectsMoveDisk{..}
+        type Scopes ProjectsMoveDisk =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient ProjectsMoveDisk'{..}
           = go _pmdProject (Just AltJSON) _pmdPayload
               computeService
           where go

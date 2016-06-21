@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeReporting.Jobs.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type JobsCreateResource =
 -- | Creates a job and returns it.
 --
 -- /See:/ 'jobsCreate' smart constructor.
-data JobsCreate = JobsCreate
+data JobsCreate = JobsCreate'
     { _jcXgafv                  :: !(Maybe Text)
     , _jcUploadProtocol         :: !(Maybe Text)
     , _jcPp                     :: !Bool
@@ -103,7 +103,7 @@ jobsCreate
     :: Job -- ^ 'jcPayload'
     -> JobsCreate
 jobsCreate pJcPayload_ =
-    JobsCreate
+    JobsCreate'
     { _jcXgafv = Nothing
     , _jcUploadProtocol = Nothing
     , _jcPp = True
@@ -165,7 +165,10 @@ jcCallback
 
 instance GoogleRequest JobsCreate where
         type Rs JobsCreate = Job
-        requestClient JobsCreate{..}
+        type Scopes JobsCreate =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
+        requestClient JobsCreate'{..}
           = go _jcXgafv _jcUploadProtocol (Just _jcPp)
               _jcAccessToken
               _jcUploadType

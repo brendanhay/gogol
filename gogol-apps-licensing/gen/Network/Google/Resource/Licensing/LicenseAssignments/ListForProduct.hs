@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type LicenseAssignmentsListForProductResource =
 -- | List license assignments for given product of the customer.
 --
 -- /See:/ 'licenseAssignmentsListForProduct' smart constructor.
-data LicenseAssignmentsListForProduct = LicenseAssignmentsListForProduct
+data LicenseAssignmentsListForProduct = LicenseAssignmentsListForProduct'
     { _lalfpCustomerId :: !Text
     , _lalfpPageToken  :: !Text
     , _lalfpProductId  :: !Text
@@ -83,7 +83,7 @@ licenseAssignmentsListForProduct
     -> Text -- ^ 'lalfpProductId'
     -> LicenseAssignmentsListForProduct
 licenseAssignmentsListForProduct pLalfpCustomerId_ pLalfpProductId_ =
-    LicenseAssignmentsListForProduct
+    LicenseAssignmentsListForProduct'
     { _lalfpCustomerId = pLalfpCustomerId_
     , _lalfpPageToken = ""
     , _lalfpProductId = pLalfpProductId_
@@ -122,7 +122,9 @@ instance GoogleRequest
          LicenseAssignmentsListForProduct where
         type Rs LicenseAssignmentsListForProduct =
              LicenseAssignmentList
-        requestClient LicenseAssignmentsListForProduct{..}
+        type Scopes LicenseAssignmentsListForProduct =
+             '["https://www.googleapis.com/auth/apps.licensing"]
+        requestClient LicenseAssignmentsListForProduct'{..}
           = go _lalfpProductId (Just _lalfpCustomerId)
               (Just _lalfpPageToken)
               (Just _lalfpMaxResults)

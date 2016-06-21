@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Notifications.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type NotificationsPatchResource =
 -- | Updates a notification. This method supports patch semantics.
 --
 -- /See:/ 'notificationsPatch' smart constructor.
-data NotificationsPatch = NotificationsPatch
+data NotificationsPatch = NotificationsPatch'
     { _npPayload        :: !Notification
     , _npCustomer       :: !Text
     , _npNotificationId :: !Text
@@ -79,7 +79,7 @@ notificationsPatch
     -> Text -- ^ 'npNotificationId'
     -> NotificationsPatch
 notificationsPatch pNpPayload_ pNpCustomer_ pNpNotificationId_ =
-    NotificationsPatch
+    NotificationsPatch'
     { _npPayload = pNpPayload_
     , _npCustomer = pNpCustomer_
     , _npNotificationId = pNpNotificationId_
@@ -103,7 +103,9 @@ npNotificationId
 
 instance GoogleRequest NotificationsPatch where
         type Rs NotificationsPatch = Notification
-        requestClient NotificationsPatch{..}
+        type Scopes NotificationsPatch =
+             '["https://www.googleapis.com/auth/admin.directory.notifications"]
+        requestClient NotificationsPatch'{..}
           = go _npCustomer _npNotificationId (Just AltJSON)
               _npPayload
               directoryService

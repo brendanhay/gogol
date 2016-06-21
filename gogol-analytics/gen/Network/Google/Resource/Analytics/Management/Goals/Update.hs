@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Goals.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing view (profile).
+-- Updates an existing goal.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.goals.update@.
 module Network.Google.Resource.Analytics.Management.Goals.Update
@@ -60,10 +60,10 @@ type ManagementGoalsUpdateResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Goal :> Put '[JSON] Goal
 
--- | Updates an existing view (profile).
+-- | Updates an existing goal.
 --
 -- /See:/ 'managementGoalsUpdate' smart constructor.
-data ManagementGoalsUpdate = ManagementGoalsUpdate
+data ManagementGoalsUpdate = ManagementGoalsUpdate'
     { _mguWebPropertyId :: !Text
     , _mguGoalId        :: !Text
     , _mguProFileId     :: !Text
@@ -92,7 +92,7 @@ managementGoalsUpdate
     -> Text -- ^ 'mguAccountId'
     -> ManagementGoalsUpdate
 managementGoalsUpdate pMguWebPropertyId_ pMguGoalId_ pMguProFileId_ pMguPayload_ pMguAccountId_ =
-    ManagementGoalsUpdate
+    ManagementGoalsUpdate'
     { _mguWebPropertyId = pMguWebPropertyId_
     , _mguGoalId = pMguGoalId_
     , _mguProFileId = pMguProFileId_
@@ -128,7 +128,9 @@ mguAccountId
 
 instance GoogleRequest ManagementGoalsUpdate where
         type Rs ManagementGoalsUpdate = Goal
-        requestClient ManagementGoalsUpdate{..}
+        type Scopes ManagementGoalsUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementGoalsUpdate'{..}
           = go _mguAccountId _mguWebPropertyId _mguProFileId
               _mguGoalId
               (Just AltJSON)

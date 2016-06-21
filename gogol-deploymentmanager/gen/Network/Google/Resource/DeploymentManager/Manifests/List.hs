@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DeploymentManager.Manifests.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ManifestsListResource =
 -- | Lists all manifests for a given deployment.
 --
 -- /See:/ 'manifestsList' smart constructor.
-data ManifestsList = ManifestsList
+data ManifestsList = ManifestsList'
     { _mlProject    :: !Text
     , _mlFilter     :: !(Maybe Text)
     , _mlPageToken  :: !(Maybe Text)
@@ -89,7 +89,7 @@ manifestsList
     -> Text -- ^ 'mlDeployment'
     -> ManifestsList
 manifestsList pMlProject_ pMlDeployment_ =
-    ManifestsList
+    ManifestsList'
     { _mlProject = pMlProject_
     , _mlFilter = Nothing
     , _mlPageToken = Nothing
@@ -103,27 +103,39 @@ mlProject
   = lens _mlProject (\ s a -> s{_mlProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
--- filter={expression}. Your {expression} must be in the format: FIELD_NAME
--- COMPARISON_STRING LITERAL_STRING. The FIELD_NAME is the name of the
+-- filter={expression}. Your {expression} must be in the format: field_name
+-- comparison_string literal_string. The field_name is the name of the
 -- field you want to compare. Only atomic field types are supported
--- (string, number, boolean). The COMPARISON_STRING must be either eq
--- (equals) or ne (not equals). The LITERAL_STRING is the string value to
--- filter to. The literal value must be valid for the type of field
--- (string, number, boolean). For string fields, the literal value is
--- interpreted as a regular expression using RE2 syntax. The literal value
--- must match the entire field. For example, filter=name ne
--- example-instance.
+-- (string, number, boolean). The comparison_string must be either eq
+-- (equals) or ne (not equals). The literal_string is the string value to
+-- filter to. The literal value must be valid for the type of field you are
+-- filtering by (string, number, boolean). For string fields, the literal
+-- value is interpreted as a regular expression using RE2 syntax. The
+-- literal value must match the entire field. For example, to filter for
+-- instances that do not have a name of example-instance, you would use
+-- filter=name ne example-instance. Compute Engine Beta API Only: When
+-- filtering in the Beta API, you can also filter on nested fields. For
+-- example, you could filter on instances that have set the
+-- scheduling.automaticRestart field to true. Use filtering on nested
+-- fields to take advantage of labels to organize and search for results
+-- based on label values. The Beta API also supports filtering on multiple
+-- expressions by providing each separate expression within parentheses.
+-- For example, (scheduling.automaticRestart eq true) (zone eq
+-- us-central1-f). Multiple expressions are treated as AND expressions,
+-- meaning that resources must match all expressions to pass the filters.
 mlFilter :: Lens' ManifestsList (Maybe Text)
 mlFilter = lens _mlFilter (\ s a -> s{_mlFilter = a})
 
--- | Specifies a page token to use. Use this parameter if you want to list
--- the next page of results. Set pageToken to the nextPageToken returned by
--- a previous list request.
+-- | Specifies a page token to use. Set pageToken to the nextPageToken
+-- returned by a previous list request to get the next page of results.
 mlPageToken :: Lens' ManifestsList (Maybe Text)
 mlPageToken
   = lens _mlPageToken (\ s a -> s{_mlPageToken = a})
 
--- | Maximum count of results to be returned.
+-- | The maximum number of results per page that should be returned. If the
+-- number of available results is larger than maxResults, Compute Engine
+-- returns a nextPageToken that can be used to get the next page of results
+-- in subsequent list requests.
 mlMaxResults :: Lens' ManifestsList Word32
 mlMaxResults
   = lens _mlMaxResults (\ s a -> s{_mlMaxResults = a})
@@ -136,7 +148,12 @@ mlDeployment
 
 instance GoogleRequest ManifestsList where
         type Rs ManifestsList = ManifestsListResponse
-        requestClient ManifestsList{..}
+        type Scopes ManifestsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+        requestClient ManifestsList'{..}
           = go _mlProject _mlDeployment _mlFilter _mlPageToken
               (Just _mlMaxResults)
               (Just AltJSON)

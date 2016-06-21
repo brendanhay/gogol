@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightActivities.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesGet' request conforms to.
 type FloodlightActivitiesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -55,7 +55,7 @@ type FloodlightActivitiesGetResource =
 -- | Gets one floodlight activity by ID.
 --
 -- /See:/ 'floodlightActivitiesGet' smart constructor.
-data FloodlightActivitiesGet = FloodlightActivitiesGet
+data FloodlightActivitiesGet = FloodlightActivitiesGet'
     { _fProFileId :: !(Textual Int64)
     , _fId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivitiesGet
     -> Int64 -- ^ 'fId'
     -> FloodlightActivitiesGet
 floodlightActivitiesGet pFProFileId_ pFId_ =
-    FloodlightActivitiesGet
+    FloodlightActivitiesGet'
     { _fProFileId = _Coerce # pFProFileId_
     , _fId = _Coerce # pFId_
     }
@@ -89,7 +89,9 @@ fId = lens _fId (\ s a -> s{_fId = a}) . _Coerce
 
 instance GoogleRequest FloodlightActivitiesGet where
         type Rs FloodlightActivitiesGet = FloodlightActivity
-        requestClient FloodlightActivitiesGet{..}
+        type Scopes FloodlightActivitiesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightActivitiesGet'{..}
           = go _fProFileId _fId (Just AltJSON)
               dFAReportingService
           where go

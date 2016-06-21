@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Removes an entitlement to an app for a user and uninstalls it.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.delete@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.delete@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type EntitlementsDeleteResource =
 -- | Removes an entitlement to an app for a user and uninstalls it.
 --
 -- /See:/ 'entitlementsDelete' smart constructor.
-data EntitlementsDelete = EntitlementsDelete
+data EntitlementsDelete = EntitlementsDelete'
     { _entEntitlementId :: !Text
     , _entEnterpriseId  :: !Text
     , _entUserId        :: !Text
@@ -78,13 +78,14 @@ entitlementsDelete
     -> Text -- ^ 'entUserId'
     -> EntitlementsDelete
 entitlementsDelete pEntEntitlementId_ pEntEnterpriseId_ pEntUserId_ =
-    EntitlementsDelete
+    EntitlementsDelete'
     { _entEntitlementId = pEntEntitlementId_
     , _entEnterpriseId = pEntEnterpriseId_
     , _entUserId = pEntUserId_
     }
 
--- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
+-- | The ID of the entitlement (a product ID), e.g.
+-- \"app:com.google.android.gm\".
 entEntitlementId :: Lens' EntitlementsDelete Text
 entEntitlementId
   = lens _entEntitlementId
@@ -103,7 +104,9 @@ entUserId
 
 instance GoogleRequest EntitlementsDelete where
         type Rs EntitlementsDelete = ()
-        requestClient EntitlementsDelete{..}
+        type Scopes EntitlementsDelete =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EntitlementsDelete'{..}
           = go _entEnterpriseId _entUserId _entEntitlementId
               (Just AltJSON)
               androidEnterpriseService

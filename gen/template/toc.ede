@@ -14,6 +14,13 @@ module {{ moduleName }}
     (
     -- * Service Configuration
       {{ api.url.name }}
+  {% for scope in api.scopes %}
+    {% if scope.first %}
+
+    -- * OAuth Scopes
+    {% endif %}
+    , {{ scope.value.name }}
+  {% endfor %}
 
     -- * API Declaration
     , {{ api.aliasName }}

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Query.SQL
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type QuerySQLResource =
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
 --
 -- /See:/ 'querySQL' smart constructor.
-data QuerySQL = QuerySQL
+data QuerySQL = QuerySQL'
     { _qsqlTyped :: !(Maybe Bool)
     , _qsqlHdrs  :: !(Maybe Bool)
     , _qsqlSQL   :: !Text
@@ -85,7 +85,7 @@ querySQL
     :: Text -- ^ 'qsqlSQL'
     -> QuerySQL
 querySQL pQsqlSQL_ =
-    QuerySQL
+    QuerySQL'
     { _qsqlTyped = Nothing
     , _qsqlHdrs = Nothing
     , _qsqlSQL = pQsqlSQL_
@@ -108,7 +108,10 @@ qsqlSQL = lens _qsqlSQL (\ s a -> s{_qsqlSQL = a})
 
 instance GoogleRequest QuerySQL where
         type Rs QuerySQL = SQLresponse
-        requestClient QuerySQL{..}
+        type Scopes QuerySQL =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient QuerySQL'{..}
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               (Just AltJSON)
               fusionTablesService
@@ -118,7 +121,9 @@ instance GoogleRequest QuerySQL where
 
 instance GoogleRequest (MediaDownload QuerySQL) where
         type Rs (MediaDownload QuerySQL) = Stream
-        requestClient (MediaDownload QuerySQL{..})
+        type Scopes (MediaDownload QuerySQL) =
+             Scopes QuerySQL
+        requestClient (MediaDownload QuerySQL'{..})
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               (Just AltMedia)
               fusionTablesService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.ForwardingRules.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ForwardingRulesDeleteResource =
 -- | Deletes the specified ForwardingRule resource.
 --
 -- /See:/ 'forwardingRulesDelete' smart constructor.
-data ForwardingRulesDelete = ForwardingRulesDelete
+data ForwardingRulesDelete = ForwardingRulesDelete'
     { _frdProject        :: !Text
     , _frdForwardingRule :: !Text
     , _frdRegion         :: !Text
@@ -78,13 +78,13 @@ forwardingRulesDelete
     -> Text -- ^ 'frdRegion'
     -> ForwardingRulesDelete
 forwardingRulesDelete pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
-    ForwardingRulesDelete
+    ForwardingRulesDelete'
     { _frdProject = pFrdProject_
     , _frdForwardingRule = pFrdForwardingRule_
     , _frdRegion = pFrdRegion_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 frdProject :: Lens' ForwardingRulesDelete Text
 frdProject
   = lens _frdProject (\ s a -> s{_frdProject = a})
@@ -102,7 +102,10 @@ frdRegion
 
 instance GoogleRequest ForwardingRulesDelete where
         type Rs ForwardingRulesDelete = Operation
-        requestClient ForwardingRulesDelete{..}
+        type Scopes ForwardingRulesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient ForwardingRulesDelete'{..}
           = go _frdProject _frdRegion _frdForwardingRule
               (Just AltJSON)
               computeService

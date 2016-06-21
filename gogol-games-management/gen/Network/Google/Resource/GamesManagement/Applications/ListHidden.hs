@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Applications.ListHidden
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ApplicationsListHiddenResource =
 -- is only available to user accounts for your developer console.
 --
 -- /See:/ 'applicationsListHidden' smart constructor.
-data ApplicationsListHidden = ApplicationsListHidden
+data ApplicationsListHidden = ApplicationsListHidden'
     { _alhApplicationId :: !Text
     , _alhPageToken     :: !(Maybe Text)
     , _alhMaxResults    :: !(Maybe (Textual Int32))
@@ -79,7 +79,7 @@ applicationsListHidden
     :: Text -- ^ 'alhApplicationId'
     -> ApplicationsListHidden
 applicationsListHidden pAlhApplicationId_ =
-    ApplicationsListHidden
+    ApplicationsListHidden'
     { _alhApplicationId = pAlhApplicationId_
     , _alhPageToken = Nothing
     , _alhMaxResults = Nothing
@@ -107,7 +107,10 @@ alhMaxResults
 
 instance GoogleRequest ApplicationsListHidden where
         type Rs ApplicationsListHidden = HiddenPlayerList
-        requestClient ApplicationsListHidden{..}
+        type Scopes ApplicationsListHidden =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient ApplicationsListHidden'{..}
           = go _alhApplicationId _alhPageToken _alhMaxResults
               (Just AltJSON)
               gamesManagementService

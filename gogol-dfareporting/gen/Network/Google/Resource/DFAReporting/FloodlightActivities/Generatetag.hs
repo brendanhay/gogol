@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesGeneratetag' request conforms to.
 type FloodlightActivitiesGeneratetagResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -56,7 +56,7 @@ type FloodlightActivitiesGeneratetagResource =
 -- | Generates a tag for a floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesGeneratetag' smart constructor.
-data FloodlightActivitiesGeneratetag = FloodlightActivitiesGeneratetag
+data FloodlightActivitiesGeneratetag = FloodlightActivitiesGeneratetag'
     { _fagFloodlightActivityId :: !(Maybe (Textual Int64))
     , _fagProFileId            :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivitiesGeneratetag
     :: Int64 -- ^ 'fagProFileId'
     -> FloodlightActivitiesGeneratetag
 floodlightActivitiesGeneratetag pFagProFileId_ =
-    FloodlightActivitiesGeneratetag
+    FloodlightActivitiesGeneratetag'
     { _fagFloodlightActivityId = Nothing
     , _fagProFileId = _Coerce # pFagProFileId_
     }
@@ -94,7 +94,9 @@ instance GoogleRequest
          FloodlightActivitiesGeneratetag where
         type Rs FloodlightActivitiesGeneratetag =
              FloodlightActivitiesGenerateTagResponse
-        requestClient FloodlightActivitiesGeneratetag{..}
+        type Scopes FloodlightActivitiesGeneratetag =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightActivitiesGeneratetag'{..}
           = go _fagProFileId _fagFloodlightActivityId
               (Just AltJSON)
               dFAReportingService

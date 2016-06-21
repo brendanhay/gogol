@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.DataSets.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type DataSetsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'dataSetsPatch' smart constructor.
-data DataSetsPatch = DataSetsPatch
+data DataSetsPatch = DataSetsPatch'
     { _dspPayload   :: !DataSet
     , _dspDataSetId :: !Text
     , _dspProjectId :: !Text
@@ -83,7 +83,7 @@ dataSetsPatch
     -> Text -- ^ 'dspProjectId'
     -> DataSetsPatch
 dataSetsPatch pDspPayload_ pDspDataSetId_ pDspProjectId_ =
-    DataSetsPatch
+    DataSetsPatch'
     { _dspPayload = pDspPayload_
     , _dspDataSetId = pDspDataSetId_
     , _dspProjectId = pDspProjectId_
@@ -106,7 +106,10 @@ dspProjectId
 
 instance GoogleRequest DataSetsPatch where
         type Rs DataSetsPatch = DataSet
-        requestClient DataSetsPatch{..}
+        type Scopes DataSetsPatch =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient DataSetsPatch'{..}
           = go _dspProjectId _dspDataSetId (Just AltJSON)
               _dspPayload
               bigQueryService

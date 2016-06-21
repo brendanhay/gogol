@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -74,7 +74,7 @@ type InstanceGroupManagersDeleteInstancesResource =
 -- status of the deleting action with the listmanagedinstances method.
 --
 -- /See:/ 'instanceGroupManagersDeleteInstances' smart constructor.
-data InstanceGroupManagersDeleteInstances = InstanceGroupManagersDeleteInstances
+data InstanceGroupManagersDeleteInstances = InstanceGroupManagersDeleteInstances'
     { _igmdiProject              :: !Text
     , _igmdiInstanceGroupManager :: !Text
     , _igmdiZone                 :: !Text
@@ -99,14 +99,14 @@ instanceGroupManagersDeleteInstances
     -> InstanceGroupManagersDeleteInstancesRequest -- ^ 'igmdiPayload'
     -> InstanceGroupManagersDeleteInstances
 instanceGroupManagersDeleteInstances pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ pIgmdiPayload_ =
-    InstanceGroupManagersDeleteInstances
+    InstanceGroupManagersDeleteInstances'
     { _igmdiProject = pIgmdiProject_
     , _igmdiInstanceGroupManager = pIgmdiInstanceGroupManager_
     , _igmdiZone = pIgmdiZone_
     , _igmdiPayload = pIgmdiPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmdiProject :: Lens' InstanceGroupManagersDeleteInstances Text
 igmdiProject
   = lens _igmdiProject (\ s a -> s{_igmdiProject = a})
@@ -131,8 +131,11 @@ instance GoogleRequest
          InstanceGroupManagersDeleteInstances where
         type Rs InstanceGroupManagersDeleteInstances =
              Operation
+        type Scopes InstanceGroupManagersDeleteInstances =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient
-          InstanceGroupManagersDeleteInstances{..}
+          InstanceGroupManagersDeleteInstances'{..}
           = go _igmdiProject _igmdiZone
               _igmdiInstanceGroupManager
               (Just AltJSON)

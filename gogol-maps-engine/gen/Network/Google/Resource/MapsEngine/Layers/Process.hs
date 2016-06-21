@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.Process
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type LayersProcessResource =
 -- | Process a layer asset.
 --
 -- /See:/ 'layersProcess' smart constructor.
-newtype LayersProcess = LayersProcess
+newtype LayersProcess = LayersProcess'
     { _lpsId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ layersProcess
     :: Text -- ^ 'lpsId'
     -> LayersProcess
 layersProcess pLpsId_ =
-    LayersProcess
+    LayersProcess'
     { _lpsId = pLpsId_
     }
 
@@ -76,7 +76,9 @@ lpsId = lens _lpsId (\ s a -> s{_lpsId = a})
 
 instance GoogleRequest LayersProcess where
         type Rs LayersProcess = ProcessResponse
-        requestClient LayersProcess{..}
+        type Scopes LayersProcess =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient LayersProcess'{..}
           = go _lpsId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersProcessResource)

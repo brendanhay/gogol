@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.RemarketingLists.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListsList' request conforms to.
 type RemarketingListsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
@@ -71,7 +71,7 @@ type RemarketingListsListResource =
 -- | Retrieves a list of remarketing lists, possibly filtered.
 --
 -- /See:/ 'remarketingListsList' smart constructor.
-data RemarketingListsList = RemarketingListsList
+data RemarketingListsList = RemarketingListsList'
     { _rllFloodlightActivityId :: !(Maybe (Textual Int64))
     , _rllAdvertiserId         :: !(Textual Int64)
     , _rllProFileId            :: !(Textual Int64)
@@ -109,7 +109,7 @@ remarketingListsList
     -> Int64 -- ^ 'rllProFileId'
     -> RemarketingListsList
 remarketingListsList pRllAdvertiserId_ pRllProFileId_ =
-    RemarketingListsList
+    RemarketingListsList'
     { _rllFloodlightActivityId = Nothing
     , _rllAdvertiserId = _Coerce # pRllAdvertiserId_
     , _rllProFileId = _Coerce # pRllProFileId_
@@ -182,7 +182,9 @@ rllMaxResults
 instance GoogleRequest RemarketingListsList where
         type Rs RemarketingListsList =
              RemarketingListsListResponse
-        requestClient RemarketingListsList{..}
+        type Scopes RemarketingListsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient RemarketingListsList'{..}
           = go _rllProFileId (Just _rllAdvertiserId)
               _rllFloodlightActivityId
               _rllSortOrder

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.Users.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type UsersInsertResource =
 -- in the request.
 --
 -- /See:/ 'usersInsert' smart constructor.
-data UsersInsert = UsersInsert
+data UsersInsert = UsersInsert'
     { _uiProject :: !Text
     , _uiPayload :: !User
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ usersInsert
     -> User -- ^ 'uiPayload'
     -> UsersInsert
 usersInsert pUiProject_ pUiPayload_ =
-    UsersInsert
+    UsersInsert'
     { _uiProject = pUiProject_
     , _uiPayload = pUiPayload_
     }
@@ -91,7 +91,10 @@ uiPayload
 
 instance GoogleRequest UsersInsert where
         type Rs UsersInsert = Operation
-        requestClient UsersInsert{..}
+        type Scopes UsersInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
+        requestClient UsersInsert'{..}
           = go _uiProject (Just AltJSON) _uiPayload
               userAccountsService
           where go

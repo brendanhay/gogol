@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.URLChannels.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type URLChannelsListResource =
 -- | List all host URL channels in the host AdSense account.
 --
 -- /See:/ 'urlChannelsList' smart constructor.
-data URLChannelsList = URLChannelsList
+data URLChannelsList = URLChannelsList'
     { _uclAdClientId :: !Text
     , _uclPageToken  :: !(Maybe Text)
     , _uclMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ urlChannelsList
     :: Text -- ^ 'uclAdClientId'
     -> URLChannelsList
 urlChannelsList pUclAdClientId_ =
-    URLChannelsList
+    URLChannelsList'
     { _uclAdClientId = pUclAdClientId_
     , _uclPageToken = Nothing
     , _uclMaxResults = Nothing
@@ -104,7 +104,9 @@ uclMaxResults
 
 instance GoogleRequest URLChannelsList where
         type Rs URLChannelsList = URLChannels
-        requestClient URLChannelsList{..}
+        type Scopes URLChannelsList =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient URLChannelsList'{..}
           = go _uclAdClientId _uclPageToken _uclMaxResults
               (Just AltJSON)
               adSenseHostService

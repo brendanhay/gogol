@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.OrgUnits.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type OrgUnitsInsertResource =
 -- | Add Organization Unit
 --
 -- /See:/ 'orgUnitsInsert' smart constructor.
-data OrgUnitsInsert = OrgUnitsInsert
+data OrgUnitsInsert = OrgUnitsInsert'
     { _ouiPayload    :: !OrgUnit
     , _ouiCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ orgUnitsInsert
     -> Text -- ^ 'ouiCustomerId'
     -> OrgUnitsInsert
 orgUnitsInsert pOuiPayload_ pOuiCustomerId_ =
-    OrgUnitsInsert
+    OrgUnitsInsert'
     { _ouiPayload = pOuiPayload_
     , _ouiCustomerId = pOuiCustomerId_
     }
@@ -90,7 +90,9 @@ ouiCustomerId
 
 instance GoogleRequest OrgUnitsInsert where
         type Rs OrgUnitsInsert = OrgUnit
-        requestClient OrgUnitsInsert{..}
+        type Scopes OrgUnitsInsert =
+             '["https://www.googleapis.com/auth/admin.directory.orgunit"]
+        requestClient OrgUnitsInsert'{..}
           = go _ouiCustomerId (Just AltJSON) _ouiPayload
               directoryService
           where go

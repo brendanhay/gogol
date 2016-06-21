@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.ContentCategories.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesInsert' request conforms to.
 type ContentCategoriesInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -55,7 +55,7 @@ type ContentCategoriesInsertResource =
 -- | Inserts a new content category.
 --
 -- /See:/ 'contentCategoriesInsert' smart constructor.
-data ContentCategoriesInsert = ContentCategoriesInsert
+data ContentCategoriesInsert = ContentCategoriesInsert'
     { _cciProFileId :: !(Textual Int64)
     , _cciPayload   :: !ContentCategory
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ contentCategoriesInsert
     -> ContentCategory -- ^ 'cciPayload'
     -> ContentCategoriesInsert
 contentCategoriesInsert pCciProFileId_ pCciPayload_ =
-    ContentCategoriesInsert
+    ContentCategoriesInsert'
     { _cciProFileId = _Coerce # pCciProFileId_
     , _cciPayload = pCciPayload_
     }
@@ -90,7 +90,9 @@ cciPayload
 
 instance GoogleRequest ContentCategoriesInsert where
         type Rs ContentCategoriesInsert = ContentCategory
-        requestClient ContentCategoriesInsert{..}
+        type Scopes ContentCategoriesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ContentCategoriesInsert'{..}
           = go _cciProFileId (Just AltJSON) _cciPayload
               dFAReportingService
           where go

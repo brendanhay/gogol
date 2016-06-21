@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type PurchasesSubscriptionsGetResource =
 -- expiry time.
 --
 -- /See:/ 'purchasesSubscriptionsGet' smart constructor.
-data PurchasesSubscriptionsGet = PurchasesSubscriptionsGet
+data PurchasesSubscriptionsGet = PurchasesSubscriptionsGet'
     { _psgPackageName    :: !Text
     , _psgToken          :: !Text
     , _psgSubscriptionId :: !Text
@@ -82,7 +82,7 @@ purchasesSubscriptionsGet
     -> Text -- ^ 'psgSubscriptionId'
     -> PurchasesSubscriptionsGet
 purchasesSubscriptionsGet pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
-    PurchasesSubscriptionsGet
+    PurchasesSubscriptionsGet'
     { _psgPackageName = pPsgPackageName_
     , _psgToken = pPsgToken_
     , _psgSubscriptionId = pPsgSubscriptionId_
@@ -110,7 +110,9 @@ instance GoogleRequest PurchasesSubscriptionsGet
          where
         type Rs PurchasesSubscriptionsGet =
              SubscriptionPurchase
-        requestClient PurchasesSubscriptionsGet{..}
+        type Scopes PurchasesSubscriptionsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient PurchasesSubscriptionsGet'{..}
           = go _psgPackageName _psgSubscriptionId _psgToken
               (Just AltJSON)
               androidPublisherService

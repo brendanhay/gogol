@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.OrgUnits.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type OrgUnitsDeleteResource =
 -- | Remove Organization Unit
 --
 -- /See:/ 'orgUnitsDelete' smart constructor.
-data OrgUnitsDelete = OrgUnitsDelete
+data OrgUnitsDelete = OrgUnitsDelete'
     { _oudOrgUnitPath :: ![Text]
     , _oudCustomerId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ orgUnitsDelete
     -> Text -- ^ 'oudCustomerId'
     -> OrgUnitsDelete
 orgUnitsDelete pOudOrgUnitPath_ pOudCustomerId_ =
-    OrgUnitsDelete
+    OrgUnitsDelete'
     { _oudOrgUnitPath = _Coerce # pOudOrgUnitPath_
     , _oudCustomerId = pOudCustomerId_
     }
@@ -92,7 +92,9 @@ oudCustomerId
 
 instance GoogleRequest OrgUnitsDelete where
         type Rs OrgUnitsDelete = ()
-        requestClient OrgUnitsDelete{..}
+        type Scopes OrgUnitsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.orgunit"]
+        requestClient OrgUnitsDelete'{..}
           = go _oudCustomerId _oudOrgUnitPath (Just AltJSON)
               directoryService
           where go

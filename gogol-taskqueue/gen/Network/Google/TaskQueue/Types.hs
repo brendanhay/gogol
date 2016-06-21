@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.TaskQueue.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,8 +20,8 @@ module Network.Google.TaskQueue.Types
       taskQueueService
 
     -- * OAuth Scopes
-    , taskqueueConsumerScope
-    , taskqueueScope
+    , taskQueueConsumerScope
+    , taskQueueScope
 
     -- * Tasks2
     , Tasks2
@@ -62,7 +63,7 @@ module Network.Google.TaskQueue.Types
     , Task
     , task
     , ttRetryCount
-    , ttEnqueueTimestamp
+    , ttEnQueueTimestamp
     , ttTag
     , ttKind
     , ttQueueName
@@ -76,15 +77,15 @@ import           Network.Google.TaskQueue.Types.Product
 import           Network.Google.TaskQueue.Types.Sum
 
 -- | Default request referring to version 'v1beta2' of the TaskQueue API. This contains the host and root path used as a starting point for constructing service requests.
-taskQueueService :: Service
+taskQueueService :: ServiceConfig
 taskQueueService
   = defaultService (ServiceId "taskqueue:v1beta2")
       "www.googleapis.com"
 
 -- | Consume Tasks from your Taskqueues
-taskqueueConsumerScope :: OAuthScope
-taskqueueConsumerScope = "https://www.googleapis.com/auth/taskqueue.consumer";
+taskQueueConsumerScope :: Proxy '["https://www.googleapis.com/auth/taskqueue.consumer"]
+taskQueueConsumerScope = Proxy;
 
 -- | Manage your Tasks and Taskqueues
-taskqueueScope :: OAuthScope
-taskqueueScope = "https://www.googleapis.com/auth/taskqueue";
+taskQueueScope :: Proxy '["https://www.googleapis.com/auth/taskqueue"]
+taskQueueScope = Proxy;

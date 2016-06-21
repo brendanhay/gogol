@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.Files.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsFilesGet' request conforms to.
 type ReportsFilesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -55,7 +55,7 @@ type ReportsFilesGetResource =
                      QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
-         "v2.2" :>
+         "v2.5" :>
            "userprofiles" :>
              Capture "profileId" (Textual Int64) :>
                "reports" :>
@@ -68,7 +68,7 @@ type ReportsFilesGetResource =
 -- | Retrieves a report file.
 --
 -- /See:/ 'reportsFilesGet' smart constructor.
-data ReportsFilesGet = ReportsFilesGet
+data ReportsFilesGet = ReportsFilesGet'
     { _rfgReportId  :: !(Textual Int64)
     , _rfgProFileId :: !(Textual Int64)
     , _rfgFileId    :: !(Textual Int64)
@@ -89,7 +89,7 @@ reportsFilesGet
     -> Int64 -- ^ 'rfgFileId'
     -> ReportsFilesGet
 reportsFilesGet pRfgReportId_ pRfgProFileId_ pRfgFileId_ =
-    ReportsFilesGet
+    ReportsFilesGet'
     { _rfgReportId = _Coerce # pRfgReportId_
     , _rfgProFileId = _Coerce # pRfgProFileId_
     , _rfgFileId = _Coerce # pRfgFileId_
@@ -115,7 +115,9 @@ rfgFileId
 
 instance GoogleRequest ReportsFilesGet where
         type Rs ReportsFilesGet = File
-        requestClient ReportsFilesGet{..}
+        type Scopes ReportsFilesGet =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient ReportsFilesGet'{..}
           = go _rfgProFileId _rfgReportId _rfgFileId
               (Just AltJSON)
               dFAReportingService
@@ -127,7 +129,9 @@ instance GoogleRequest ReportsFilesGet where
 instance GoogleRequest
          (MediaDownload ReportsFilesGet) where
         type Rs (MediaDownload ReportsFilesGet) = Stream
-        requestClient (MediaDownload ReportsFilesGet{..})
+        type Scopes (MediaDownload ReportsFilesGet) =
+             Scopes ReportsFilesGet
+        requestClient (MediaDownload ReportsFilesGet'{..})
           = go _rfgProFileId _rfgReportId _rfgFileId
               (Just AltMedia)
               dFAReportingService

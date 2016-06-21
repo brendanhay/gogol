@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type InstanceGroupManagersSetTargetPoolsResource =
 -- all of the instances in the group depending on the size of the group.
 --
 -- /See:/ 'instanceGroupManagersSetTargetPools' smart constructor.
-data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools
+data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools'
     { _igmstpProject              :: !Text
     , _igmstpInstanceGroupManager :: !Text
     , _igmstpZone                 :: !Text
@@ -97,14 +97,14 @@ instanceGroupManagersSetTargetPools
     -> InstanceGroupManagersSetTargetPoolsRequest -- ^ 'igmstpPayload'
     -> InstanceGroupManagersSetTargetPools
 instanceGroupManagersSetTargetPools pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ pIgmstpPayload_ =
-    InstanceGroupManagersSetTargetPools
+    InstanceGroupManagersSetTargetPools'
     { _igmstpProject = pIgmstpProject_
     , _igmstpInstanceGroupManager = pIgmstpInstanceGroupManager_
     , _igmstpZone = pIgmstpZone_
     , _igmstpPayload = pIgmstpPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmstpProject :: Lens' InstanceGroupManagersSetTargetPools Text
 igmstpProject
   = lens _igmstpProject
@@ -131,7 +131,11 @@ instance GoogleRequest
          InstanceGroupManagersSetTargetPools where
         type Rs InstanceGroupManagersSetTargetPools =
              Operation
-        requestClient InstanceGroupManagersSetTargetPools{..}
+        type Scopes InstanceGroupManagersSetTargetPools =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient
+          InstanceGroupManagersSetTargetPools'{..}
           = go _igmstpProject _igmstpZone
               _igmstpInstanceGroupManager
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.URLMaps.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type URLMapsDeleteResource =
 -- | Deletes the specified UrlMap resource.
 --
 -- /See:/ 'urlMapsDelete' smart constructor.
-data URLMapsDelete = URLMapsDelete
+data URLMapsDelete = URLMapsDelete'
     { _umdURLMap  :: !Text
     , _umdProject :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ urlMapsDelete
     -> Text -- ^ 'umdProject'
     -> URLMapsDelete
 urlMapsDelete pUmdURLMap_ pUmdProject_ =
-    URLMapsDelete
+    URLMapsDelete'
     { _umdURLMap = pUmdURLMap_
     , _umdProject = pUmdProject_
     }
@@ -82,14 +82,17 @@ umdURLMap :: Lens' URLMapsDelete Text
 umdURLMap
   = lens _umdURLMap (\ s a -> s{_umdURLMap = a})
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umdProject :: Lens' URLMapsDelete Text
 umdProject
   = lens _umdProject (\ s a -> s{_umdProject = a})
 
 instance GoogleRequest URLMapsDelete where
         type Rs URLMapsDelete = Operation
-        requestClient URLMapsDelete{..}
+        type Scopes URLMapsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient URLMapsDelete'{..}
           = go _umdProject _umdURLMap (Just AltJSON)
               computeService
           where go

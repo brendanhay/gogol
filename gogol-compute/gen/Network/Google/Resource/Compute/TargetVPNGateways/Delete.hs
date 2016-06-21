@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetVPNGateways.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified TargetVpnGateway resource.
+-- Deletes the specified target VPN gateway.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.delete@.
 module Network.Google.Resource.Compute.TargetVPNGateways.Delete
@@ -54,10 +54,10 @@ type TargetVPNGatewaysDeleteResource =
                    Capture "targetVpnGateway" Text :>
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified TargetVpnGateway resource.
+-- | Deletes the specified target VPN gateway.
 --
 -- /See:/ 'targetVPNGatewaysDelete' smart constructor.
-data TargetVPNGatewaysDelete = TargetVPNGatewaysDelete
+data TargetVPNGatewaysDelete = TargetVPNGatewaysDelete'
     { _tvgdProject          :: !Text
     , _tvgdTargetVPNGateway :: !Text
     , _tvgdRegion           :: !Text
@@ -78,7 +78,7 @@ targetVPNGatewaysDelete
     -> Text -- ^ 'tvgdRegion'
     -> TargetVPNGatewaysDelete
 targetVPNGatewaysDelete pTvgdProject_ pTvgdTargetVPNGateway_ pTvgdRegion_ =
-    TargetVPNGatewaysDelete
+    TargetVPNGatewaysDelete'
     { _tvgdProject = pTvgdProject_
     , _tvgdTargetVPNGateway = pTvgdTargetVPNGateway_
     , _tvgdRegion = pTvgdRegion_
@@ -89,20 +89,23 @@ tvgdProject :: Lens' TargetVPNGatewaysDelete Text
 tvgdProject
   = lens _tvgdProject (\ s a -> s{_tvgdProject = a})
 
--- | Name of the TargetVpnGateway resource to delete.
+-- | Name of the target VPN gateway to delete.
 tvgdTargetVPNGateway :: Lens' TargetVPNGatewaysDelete Text
 tvgdTargetVPNGateway
   = lens _tvgdTargetVPNGateway
       (\ s a -> s{_tvgdTargetVPNGateway = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 tvgdRegion :: Lens' TargetVPNGatewaysDelete Text
 tvgdRegion
   = lens _tvgdRegion (\ s a -> s{_tvgdRegion = a})
 
 instance GoogleRequest TargetVPNGatewaysDelete where
         type Rs TargetVPNGatewaysDelete = Operation
-        requestClient TargetVPNGatewaysDelete{..}
+        type Scopes TargetVPNGatewaysDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetVPNGatewaysDelete'{..}
           = go _tvgdProject _tvgdRegion _tvgdTargetVPNGateway
               (Just AltJSON)
               computeService

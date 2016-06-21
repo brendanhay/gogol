@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified instance resource.
+-- Returns the specified Instance resource. Get a list of available
+-- instances by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.get@.
 module Network.Google.Resource.Compute.Instances.Get
@@ -54,10 +55,11 @@ type InstancesGetResource =
                    Capture "instance" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] Instance
 
--- | Returns the specified instance resource.
+-- | Returns the specified Instance resource. Get a list of available
+-- instances by making a list() request.
 --
 -- /See:/ 'instancesGet' smart constructor.
-data InstancesGet = InstancesGet
+data InstancesGet = InstancesGet'
     { _igProject  :: !Text
     , _igZone     :: !Text
     , _igInstance :: !Text
@@ -78,7 +80,7 @@ instancesGet
     -> Text -- ^ 'igInstance'
     -> InstancesGet
 instancesGet pIgProject_ pIgZone_ pIgInstance_ =
-    InstancesGet
+    InstancesGet'
     { _igProject = pIgProject_
     , _igZone = pIgZone_
     , _igInstance = pIgInstance_
@@ -100,7 +102,11 @@ igInstance
 
 instance GoogleRequest InstancesGet where
         type Rs InstancesGet = Instance
-        requestClient InstancesGet{..}
+        type Scopes InstancesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient InstancesGet'{..}
           = go _igProject _igZone _igInstance (Just AltJSON)
               computeService
           where go

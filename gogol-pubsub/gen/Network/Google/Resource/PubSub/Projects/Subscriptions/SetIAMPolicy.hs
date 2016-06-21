@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -68,7 +68,7 @@ type ProjectsSubscriptionsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsSubscriptionsSetIAMPolicy' smart constructor.
-data ProjectsSubscriptionsSetIAMPolicy = ProjectsSubscriptionsSetIAMPolicy
+data ProjectsSubscriptionsSetIAMPolicy = ProjectsSubscriptionsSetIAMPolicy'
     { _pssipXgafv          :: !(Maybe Text)
     , _pssipUploadProtocol :: !(Maybe Text)
     , _pssipPp             :: !Bool
@@ -106,7 +106,7 @@ projectsSubscriptionsSetIAMPolicy
     -> Text -- ^ 'pssipResource'
     -> ProjectsSubscriptionsSetIAMPolicy
 projectsSubscriptionsSetIAMPolicy pPssipPayload_ pPssipResource_ =
-    ProjectsSubscriptionsSetIAMPolicy
+    ProjectsSubscriptionsSetIAMPolicy'
     { _pssipXgafv = Nothing
     , _pssipUploadProtocol = Nothing
     , _pssipPp = True
@@ -156,9 +156,11 @@ pssipBearerToken
   = lens _pssipBearerToken
       (\ s a -> s{_pssipBearerToken = a})
 
--- | REQUIRED: The resource for which policy is being specified. \`resource\`
--- is usually specified as a path, such as,
--- \`projects\/{project}\/zones\/{zone}\/disks\/{disk}\`.
+-- | REQUIRED: The resource for which the policy is being specified.
+-- \`resource\` is usually specified as a path, such as
+-- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
+-- the path specified in this value is resource specific and is specified
+-- in the \`setIamPolicy\` documentation.
 pssipResource :: Lens' ProjectsSubscriptionsSetIAMPolicy Text
 pssipResource
   = lens _pssipResource
@@ -173,7 +175,10 @@ pssipCallback
 instance GoogleRequest
          ProjectsSubscriptionsSetIAMPolicy where
         type Rs ProjectsSubscriptionsSetIAMPolicy = Policy
-        requestClient ProjectsSubscriptionsSetIAMPolicy{..}
+        type Scopes ProjectsSubscriptionsSetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsSubscriptionsSetIAMPolicy'{..}
           = go _pssipResource _pssipXgafv _pssipUploadProtocol
               (Just _pssipPp)
               _pssipAccessToken

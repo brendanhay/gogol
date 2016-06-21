@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Products.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type ProductsGetResource =
 -- | Retrieves a product from your Merchant Center account.
 --
 -- /See:/ 'productsGet' smart constructor.
-data ProductsGet = ProductsGet
+data ProductsGet = ProductsGet'
     { _pggMerchantId :: !(Textual Word64)
     , _pggProductId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ productsGet
     -> Text -- ^ 'pggProductId'
     -> ProductsGet
 productsGet pPggMerchantId_ pPggProductId_ =
-    ProductsGet
+    ProductsGet'
     { _pggMerchantId = _Coerce # pPggMerchantId_
     , _pggProductId = pPggProductId_
     }
@@ -89,7 +89,9 @@ pggProductId
 
 instance GoogleRequest ProductsGet where
         type Rs ProductsGet = Product
-        requestClient ProductsGet{..}
+        type Scopes ProductsGet =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient ProductsGet'{..}
           = go _pggMerchantId _pggProductId (Just AltJSON)
               shoppingContentService
           where go

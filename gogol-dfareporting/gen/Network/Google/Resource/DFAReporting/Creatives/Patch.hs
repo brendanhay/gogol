@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Creatives.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativesPatch' request conforms to.
 type CreativesPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
@@ -56,7 +56,7 @@ type CreativesPatchResource =
 -- | Updates an existing creative. This method supports patch semantics.
 --
 -- /See:/ 'creativesPatch' smart constructor.
-data CreativesPatch = CreativesPatch
+data CreativesPatch = CreativesPatch'
     { _cppProFileId :: !(Textual Int64)
     , _cppPayload   :: !Creative
     , _cppId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ creativesPatch
     -> Int64 -- ^ 'cppId'
     -> CreativesPatch
 creativesPatch pCppProFileId_ pCppPayload_ pCppId_ =
-    CreativesPatch
+    CreativesPatch'
     { _cppProFileId = _Coerce # pCppProFileId_
     , _cppPayload = pCppPayload_
     , _cppId = _Coerce # pCppId_
@@ -101,7 +101,9 @@ cppId
 
 instance GoogleRequest CreativesPatch where
         type Rs CreativesPatch = Creative
-        requestClient CreativesPatch{..}
+        type Scopes CreativesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativesPatch'{..}
           = go _cppProFileId (Just _cppId) (Just AltJSON)
               _cppPayload
               dFAReportingService

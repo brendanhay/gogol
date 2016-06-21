@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Tasks.TaskLists.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type TaskListsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'taskListsPatch' smart constructor.
-data TaskListsPatch = TaskListsPatch
+data TaskListsPatch = TaskListsPatch'
     { _tlpPayload  :: !TaskList
     , _tlpTaskList :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ taskListsPatch
     -> Text -- ^ 'tlpTaskList'
     -> TaskListsPatch
 taskListsPatch pTlpPayload_ pTlpTaskList_ =
-    TaskListsPatch
+    TaskListsPatch'
     { _tlpPayload = pTlpPayload_
     , _tlpTaskList = pTlpTaskList_
     }
@@ -91,7 +91,9 @@ tlpTaskList
 
 instance GoogleRequest TaskListsPatch where
         type Rs TaskListsPatch = TaskList
-        requestClient TaskListsPatch{..}
+        type Scopes TaskListsPatch =
+             '["https://www.googleapis.com/auth/tasks"]
+        requestClient TaskListsPatch'{..}
           = go _tlpTaskList (Just AltJSON) _tlpPayload
               appsTasksService
           where go

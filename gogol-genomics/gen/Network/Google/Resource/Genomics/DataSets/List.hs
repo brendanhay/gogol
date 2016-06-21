@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.DataSets.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists datasets within a project.
+-- Lists datasets within a project. For the definitions of datasets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.list@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.list@.
 module Network.Google.Resource.Genomics.DataSets.List
     (
     -- * REST Resource
@@ -66,10 +68,12 @@ type DataSetsListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListDataSetsResponse
 
--- | Lists datasets within a project.
+-- | Lists datasets within a project. For the definitions of datasets and
+-- other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsList' smart constructor.
-data DataSetsList = DataSetsList
+data DataSetsList = DataSetsList'
     { _dslXgafv          :: !(Maybe Text)
     , _dslUploadProtocol :: !(Maybe Text)
     , _dslPp             :: !Bool
@@ -108,7 +112,7 @@ data DataSetsList = DataSetsList
 dataSetsList
     :: DataSetsList
 dataSetsList =
-    DataSetsList
+    DataSetsList'
     { _dslXgafv = Nothing
     , _dslUploadProtocol = Nothing
     , _dslPp = True
@@ -165,8 +169,8 @@ dslProjectId :: Lens' DataSetsList (Maybe Text)
 dslProjectId
   = lens _dslProjectId (\ s a -> s{_dslProjectId = a})
 
--- | The maximum number of results returned by this request. If unspecified,
--- defaults to 50. The maximum value is 1024.
+-- | The maximum number of results to return in a single page. If
+-- unspecified, defaults to 50. The maximum value is 1024.
 dslPageSize :: Lens' DataSetsList (Maybe Int32)
 dslPageSize
   = lens _dslPageSize (\ s a -> s{_dslPageSize = a}) .
@@ -179,7 +183,11 @@ dslCallback
 
 instance GoogleRequest DataSetsList where
         type Rs DataSetsList = ListDataSetsResponse
-        requestClient DataSetsList{..}
+        type Scopes DataSetsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient DataSetsList'{..}
           = go _dslXgafv _dslUploadProtocol (Just _dslPp)
               _dslAccessToken
               _dslUploadType

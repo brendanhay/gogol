@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Leaderboards.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -33,6 +33,7 @@ module Network.Google.Resource.Games.Leaderboards.List
     , LeaderboardsList
 
     -- * Request Lenses
+    , llConsistencyToken
     , llLanguage
     , llPageToken
     , llMaxResults
@@ -47,24 +48,28 @@ type LeaderboardsListResource =
      "games" :>
        "v1" :>
          "leaderboards" :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" (Textual Int32) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] LeaderboardListResponse
+           QueryParam "consistencyToken" (Textual Int64) :>
+             QueryParam "language" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" (Textual Int32) :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] LeaderboardListResponse
 
 -- | Lists all the leaderboard metadata for your application.
 --
 -- /See:/ 'leaderboardsList' smart constructor.
-data LeaderboardsList = LeaderboardsList
-    { _llLanguage   :: !(Maybe Text)
-    , _llPageToken  :: !(Maybe Text)
-    , _llMaxResults :: !(Maybe (Textual Int32))
+data LeaderboardsList = LeaderboardsList'
+    { _llConsistencyToken :: !(Maybe (Textual Int64))
+    , _llLanguage         :: !(Maybe Text)
+    , _llPageToken        :: !(Maybe Text)
+    , _llMaxResults       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llConsistencyToken'
 --
 -- * 'llLanguage'
 --
@@ -74,11 +79,19 @@ data LeaderboardsList = LeaderboardsList
 leaderboardsList
     :: LeaderboardsList
 leaderboardsList =
-    LeaderboardsList
-    { _llLanguage = Nothing
+    LeaderboardsList'
+    { _llConsistencyToken = Nothing
+    , _llLanguage = Nothing
     , _llPageToken = Nothing
     , _llMaxResults = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+llConsistencyToken :: Lens' LeaderboardsList (Maybe Int64)
+llConsistencyToken
+  = lens _llConsistencyToken
+      (\ s a -> s{_llConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 llLanguage :: Lens' LeaderboardsList (Maybe Text)
@@ -100,8 +113,12 @@ llMaxResults
 
 instance GoogleRequest LeaderboardsList where
         type Rs LeaderboardsList = LeaderboardListResponse
-        requestClient LeaderboardsList{..}
-          = go _llLanguage _llPageToken _llMaxResults
+        type Scopes LeaderboardsList =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient LeaderboardsList'{..}
+          = go _llConsistencyToken _llLanguage _llPageToken
+              _llMaxResults
               (Just AltJSON)
               gamesService
           where go

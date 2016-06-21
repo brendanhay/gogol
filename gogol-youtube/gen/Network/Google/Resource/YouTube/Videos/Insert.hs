@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Videos.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,14 +71,14 @@ type VideosInsertResource =
                        QueryParam "notifySubscribers" Bool :>
                          QueryParam "autoLevels" Bool :>
                            QueryParam "alt" AltJSON :>
-                             QueryParam "uploadType" AltMedia :>
-                               MultipartRelated '[JSON] Video RequestBody :>
+                             QueryParam "uploadType" Multipart :>
+                               MultipartRelated '[JSON] Video :>
                                  Post '[JSON] Video
 
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
 --
 -- /See:/ 'videosInsert' smart constructor.
-data VideosInsert = VideosInsert
+data VideosInsert = VideosInsert'
     { _viPart                          :: !Text
     , _viStabilize                     :: !(Maybe Bool)
     , _viPayload                       :: !Video
@@ -110,7 +110,7 @@ videosInsert
     -> Video -- ^ 'viPayload'
     -> VideosInsert
 videosInsert pViPart_ pViPayload_ =
-    VideosInsert
+    VideosInsert'
     { _viPart = pViPart_
     , _viStabilize = Nothing
     , _viPayload = pViPayload_
@@ -198,7 +198,12 @@ viAutoLevels
 
 instance GoogleRequest VideosInsert where
         type Rs VideosInsert = Video
-        requestClient VideosInsert{..}
+        type Scopes VideosInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.upload",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient VideosInsert'{..}
           = go (Just _viPart) _viStabilize
               _viOnBehalfOfContentOwner
               _viOnBehalfOfContentOwnerChannel
@@ -214,14 +219,16 @@ instance GoogleRequest VideosInsert where
 instance GoogleRequest (MediaUpload VideosInsert)
          where
         type Rs (MediaUpload VideosInsert) = Video
-        requestClient (MediaUpload VideosInsert{..} body)
+        type Scopes (MediaUpload VideosInsert) =
+             Scopes VideosInsert
+        requestClient (MediaUpload VideosInsert'{..} body)
           = go (Just _viPart) _viStabilize
               _viOnBehalfOfContentOwner
               _viOnBehalfOfContentOwnerChannel
               (Just _viNotifySubscribers)
               _viAutoLevels
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _viPayload
               body
               youTubeService

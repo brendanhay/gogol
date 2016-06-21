@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Datafeeds.Custombatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type DatafeedsCustombatchResource =
 
 --
 -- /See:/ 'datafeedsCustombatch' smart constructor.
-data DatafeedsCustombatch = DatafeedsCustombatch
+data DatafeedsCustombatch = DatafeedsCustombatch'
     { _dPayload :: !DatafeedsCustomBatchRequest
     , _dDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,7 +68,7 @@ datafeedsCustombatch
     :: DatafeedsCustomBatchRequest -- ^ 'dPayload'
     -> DatafeedsCustombatch
 datafeedsCustombatch pDPayload_ =
-    DatafeedsCustombatch
+    DatafeedsCustombatch'
     { _dPayload = pDPayload_
     , _dDryRun = Nothing
     }
@@ -84,7 +84,9 @@ dDryRun = lens _dDryRun (\ s a -> s{_dDryRun = a})
 instance GoogleRequest DatafeedsCustombatch where
         type Rs DatafeedsCustombatch =
              DatafeedsCustomBatchResponse
-        requestClient DatafeedsCustombatch{..}
+        type Scopes DatafeedsCustombatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient DatafeedsCustombatch'{..}
           = go _dDryRun (Just AltJSON) _dPayload
               shoppingContentService
           where go

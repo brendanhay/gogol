@@ -14,17 +14,20 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.References.Bases.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the bases in a reference, optionally restricted to a range.
+-- Lists the bases in a reference, optionally restricted to a range. For
+-- the definitions of references and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 -- Implements
 -- [GlobalAllianceApi.getReferenceBases](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L221).
 --
--- /See:/ < Genomics API Reference> for @genomics.references.bases.list@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.references.bases.list@.
 module Network.Google.Resource.Genomics.References.Bases.List
     (
     -- * REST Resource
@@ -73,12 +76,15 @@ type ReferencesBasesListResource =
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ListBasesResponse
 
--- | Lists the bases in a reference, optionally restricted to a range.
+-- | Lists the bases in a reference, optionally restricted to a range. For
+-- the definitions of references and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 -- Implements
 -- [GlobalAllianceApi.getReferenceBases](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L221).
 --
 -- /See:/ 'referencesBasesList' smart constructor.
-data ReferencesBasesList = ReferencesBasesList
+data ReferencesBasesList = ReferencesBasesList'
     { _rblXgafv          :: !(Maybe Text)
     , _rblUploadProtocol :: !(Maybe Text)
     , _rblPp             :: !Bool
@@ -124,7 +130,7 @@ referencesBasesList
     :: Text -- ^ 'rblReferenceId'
     -> ReferencesBasesList
 referencesBasesList pRblReferenceId_ =
-    ReferencesBasesList
+    ReferencesBasesList'
     { _rblXgafv = Nothing
     , _rblUploadProtocol = Nothing
     , _rblPp = True
@@ -197,7 +203,9 @@ rblPageToken :: Lens' ReferencesBasesList (Maybe Text)
 rblPageToken
   = lens _rblPageToken (\ s a -> s{_rblPageToken = a})
 
--- | Specifies the maximum number of bases to return in a single page.
+-- | The maximum number of bases to return in a single page. If unspecified,
+-- defaults to 200Kbp (kilo base pairs). The maximum value is 10Mbp (mega
+-- base pairs).
 rblPageSize :: Lens' ReferencesBasesList (Maybe Int32)
 rblPageSize
   = lens _rblPageSize (\ s a -> s{_rblPageSize = a}) .
@@ -210,7 +218,11 @@ rblCallback
 
 instance GoogleRequest ReferencesBasesList where
         type Rs ReferencesBasesList = ListBasesResponse
-        requestClient ReferencesBasesList{..}
+        type Scopes ReferencesBasesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient ReferencesBasesList'{..}
           = go _rblReferenceId _rblXgafv _rblUploadProtocol
               (Just _rblPp)
               _rblAccessToken

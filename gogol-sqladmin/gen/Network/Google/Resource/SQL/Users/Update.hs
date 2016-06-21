@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Users.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type UsersUpdateResource =
 -- | Updates an existing user in a Cloud SQL instance.
 --
 -- /See:/ 'usersUpdate' smart constructor.
-data UsersUpdate = UsersUpdate
+data UsersUpdate = UsersUpdate'
     { _uuProject  :: !Text
     , _uuPayload  :: !User
     , _uuName     :: !Text
@@ -90,7 +90,7 @@ usersUpdate
     -> Text -- ^ 'uuInstance'
     -> UsersUpdate
 usersUpdate pUuProject_ pUuPayload_ pUuName_ pUuHost_ pUuInstance_ =
-    UsersUpdate
+    UsersUpdate'
     { _uuProject = pUuProject_
     , _uuPayload = pUuPayload_
     , _uuName = pUuName_
@@ -123,7 +123,10 @@ uuInstance
 
 instance GoogleRequest UsersUpdate where
         type Rs UsersUpdate = Operation
-        requestClient UsersUpdate{..}
+        type Scopes UsersUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient UsersUpdate'{..}
           = go _uuProject _uuInstance (Just _uuHost)
               (Just _uuName)
               (Just AltJSON)

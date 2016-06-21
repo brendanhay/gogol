@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SiteVerification.WebResource.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type WebResourcePatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'webResourcePatch' smart constructor.
-data WebResourcePatch = WebResourcePatch
+data WebResourcePatch = WebResourcePatch'
     { _wrpPayload :: !SiteVerificationWebResourceResource
     , _wrpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ webResourcePatch
     -> Text -- ^ 'wrpId'
     -> WebResourcePatch
 webResourcePatch pWrpPayload_ pWrpId_ =
-    WebResourcePatch
+    WebResourcePatch'
     { _wrpPayload = pWrpPayload_
     , _wrpId = pWrpId_
     }
@@ -90,7 +90,9 @@ wrpId = lens _wrpId (\ s a -> s{_wrpId = a})
 instance GoogleRequest WebResourcePatch where
         type Rs WebResourcePatch =
              SiteVerificationWebResourceResource
-        requestClient WebResourcePatch{..}
+        type Scopes WebResourcePatch =
+             '["https://www.googleapis.com/auth/siteverification"]
+        requestClient WebResourcePatch'{..}
           = go _wrpId (Just AltJSON) _wrpPayload
               siteVerificationService
           where go

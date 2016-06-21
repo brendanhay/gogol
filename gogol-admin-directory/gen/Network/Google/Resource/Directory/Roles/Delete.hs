@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Roles.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type RolesDeleteResource =
 -- | Deletes a role.
 --
 -- /See:/ 'rolesDelete' smart constructor.
-data RolesDelete = RolesDelete
+data RolesDelete = RolesDelete'
     { _rdRoleId   :: !Text
     , _rdCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ rolesDelete
     -> Text -- ^ 'rdCustomer'
     -> RolesDelete
 rolesDelete pRdRoleId_ pRdCustomer_ =
-    RolesDelete
+    RolesDelete'
     { _rdRoleId = pRdRoleId_
     , _rdCustomer = pRdCustomer_
     }
@@ -88,7 +88,9 @@ rdCustomer
 
 instance GoogleRequest RolesDelete where
         type Rs RolesDelete = ()
-        requestClient RolesDelete{..}
+        type Scopes RolesDelete =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
+        requestClient RolesDelete'{..}
           = go _rdCustomer _rdRoleId (Just AltJSON)
               directoryService
           where go

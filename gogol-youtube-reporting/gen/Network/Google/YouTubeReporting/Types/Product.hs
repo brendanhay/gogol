@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.YouTubeReporting.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.YouTubeReporting.Types.Sum
 -- | Response message for ReportingService.ListReports.
 --
 -- /See:/ 'listReportsResponse' smart constructor.
-data ListReportsResponse = ListReportsResponse
+data ListReportsResponse = ListReportsResponse'
     { _lrrNextPageToken :: !(Maybe Text)
     , _lrrReports       :: !(Maybe [Report])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data ListReportsResponse = ListReportsResponse
 listReportsResponse
     :: ListReportsResponse
 listReportsResponse =
-    ListReportsResponse
+    ListReportsResponse'
     { _lrrNextPageToken = Nothing
     , _lrrReports = Nothing
     }
@@ -62,12 +62,12 @@ instance FromJSON ListReportsResponse where
         parseJSON
           = withObject "ListReportsResponse"
               (\ o ->
-                 ListReportsResponse <$>
+                 ListReportsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "reports" .!= mempty))
 
 instance ToJSON ListReportsResponse where
-        toJSON ListReportsResponse{..}
+        toJSON ListReportsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lrrNextPageToken,
@@ -81,17 +81,17 @@ instance ToJSON ListReportsResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -100,13 +100,14 @@ instance ToJSON Empty where
 -- be downloaded.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report
-    { _rJobId       :: !(Maybe Text)
-    , _rStartTime   :: !(Maybe Text)
-    , _rDownloadURL :: !(Maybe Text)
-    , _rEndTime     :: !(Maybe Text)
-    , _rId          :: !(Maybe Text)
-    , _rCreateTime  :: !(Maybe Text)
+data Report = Report'
+    { _rJobId         :: !(Maybe Text)
+    , _rStartTime     :: !(Maybe Text)
+    , _rDownloadURL   :: !(Maybe Text)
+    , _rEndTime       :: !(Maybe Text)
+    , _rId            :: !(Maybe Text)
+    , _rCreateTime    :: !(Maybe Text)
+    , _rJobExpireTime :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
@@ -124,16 +125,19 @@ data Report = Report
 -- * 'rId'
 --
 -- * 'rCreateTime'
+--
+-- * 'rJobExpireTime'
 report
     :: Report
 report =
-    Report
+    Report'
     { _rJobId = Nothing
     , _rStartTime = Nothing
     , _rDownloadURL = Nothing
     , _rEndTime = Nothing
     , _rId = Nothing
     , _rCreateTime = Nothing
+    , _rJobExpireTime = Nothing
     }
 
 -- | The ID of the job that created this report.
@@ -165,31 +169,39 @@ rCreateTime :: Lens' Report (Maybe Text)
 rCreateTime
   = lens _rCreateTime (\ s a -> s{_rCreateTime = a})
 
+-- | The date\/time when the job this report belongs to will expire\/expired.
+rJobExpireTime :: Lens' Report (Maybe Text)
+rJobExpireTime
+  = lens _rJobExpireTime
+      (\ s a -> s{_rJobExpireTime = a})
+
 instance FromJSON Report where
         parseJSON
           = withObject "Report"
               (\ o ->
-                 Report <$>
+                 Report' <$>
                    (o .:? "jobId") <*> (o .:? "startTime") <*>
                      (o .:? "downloadUrl")
                      <*> (o .:? "endTime")
                      <*> (o .:? "id")
-                     <*> (o .:? "createTime"))
+                     <*> (o .:? "createTime")
+                     <*> (o .:? "jobExpireTime"))
 
 instance ToJSON Report where
-        toJSON Report{..}
+        toJSON Report'{..}
           = object
               (catMaybes
                  [("jobId" .=) <$> _rJobId,
                   ("startTime" .=) <$> _rStartTime,
                   ("downloadUrl" .=) <$> _rDownloadURL,
                   ("endTime" .=) <$> _rEndTime, ("id" .=) <$> _rId,
-                  ("createTime" .=) <$> _rCreateTime])
+                  ("createTime" .=) <$> _rCreateTime,
+                  ("jobExpireTime" .=) <$> _rJobExpireTime])
 
 -- | Response message for ReportingService.ListReportTypes.
 --
 -- /See:/ 'listReportTypesResponse' smart constructor.
-data ListReportTypesResponse = ListReportTypesResponse
+data ListReportTypesResponse = ListReportTypesResponse'
     { _lrtrNextPageToken :: !(Maybe Text)
     , _lrtrReportTypes   :: !(Maybe [ReportType])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -204,7 +216,7 @@ data ListReportTypesResponse = ListReportTypesResponse
 listReportTypesResponse
     :: ListReportTypesResponse
 listReportTypesResponse =
-    ListReportTypesResponse
+    ListReportTypesResponse'
     { _lrtrNextPageToken = Nothing
     , _lrtrReportTypes = Nothing
     }
@@ -229,12 +241,12 @@ instance FromJSON ListReportTypesResponse where
         parseJSON
           = withObject "ListReportTypesResponse"
               (\ o ->
-                 ListReportTypesResponse <$>
+                 ListReportTypesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "reportTypes" .!= mempty))
 
 instance ToJSON ListReportTypesResponse where
-        toJSON ListReportTypesResponse{..}
+        toJSON ListReportTypesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lrtrNextPageToken,
@@ -243,7 +255,7 @@ instance ToJSON ListReportTypesResponse where
 -- | Media resource.
 --
 -- /See:/ 'media' smart constructor.
-newtype Media = Media
+newtype Media = Media'
     { _mResourceName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -255,7 +267,7 @@ newtype Media = Media
 media
     :: Media
 media =
-    Media
+    Media'
     { _mResourceName = Nothing
     }
 
@@ -268,21 +280,23 @@ mResourceName
 instance FromJSON Media where
         parseJSON
           = withObject "Media"
-              (\ o -> Media <$> (o .:? "resourceName"))
+              (\ o -> Media' <$> (o .:? "resourceName"))
 
 instance ToJSON Media where
-        toJSON Media{..}
+        toJSON Media'{..}
           = object
               (catMaybes [("resourceName" .=) <$> _mResourceName])
 
 -- | A job creating reports of a specific type.
 --
 -- /See:/ 'job' smart constructor.
-data Job = Job
-    { _jName         :: !(Maybe Text)
-    , _jId           :: !(Maybe Text)
-    , _jReportTypeId :: !(Maybe Text)
-    , _jCreateTime   :: !(Maybe Text)
+data Job = Job'
+    { _jName          :: !(Maybe Text)
+    , _jId            :: !(Maybe Text)
+    , _jSystemManaged :: !(Maybe Bool)
+    , _jReportTypeId  :: !(Maybe Text)
+    , _jExpireTime    :: !(Maybe Text)
+    , _jCreateTime    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
@@ -293,21 +307,26 @@ data Job = Job
 --
 -- * 'jId'
 --
+-- * 'jSystemManaged'
+--
 -- * 'jReportTypeId'
+--
+-- * 'jExpireTime'
 --
 -- * 'jCreateTime'
 job
     :: Job
 job =
-    Job
+    Job'
     { _jName = Nothing
     , _jId = Nothing
+    , _jSystemManaged = Nothing
     , _jReportTypeId = Nothing
+    , _jExpireTime = Nothing
     , _jCreateTime = Nothing
     }
 
--- | The name of the job (max. 100 characters). TODO(lanthaler) Clarify what
--- this will actually be used for
+-- | The name of the job (max. 100 characters).
 jName :: Lens' Job (Maybe Text)
 jName = lens _jName (\ s a -> s{_jName = a})
 
@@ -315,12 +334,25 @@ jName = lens _jName (\ s a -> s{_jName = a})
 jId :: Lens' Job (Maybe Text)
 jId = lens _jId (\ s a -> s{_jId = a})
 
+-- | True if this a system-managed job that cannot be modified by the user;
+-- otherwise false.
+jSystemManaged :: Lens' Job (Maybe Bool)
+jSystemManaged
+  = lens _jSystemManaged
+      (\ s a -> s{_jSystemManaged = a})
+
 -- | The type of reports this job creates. Corresponds to the ID of a
 -- ReportType.
 jReportTypeId :: Lens' Job (Maybe Text)
 jReportTypeId
   = lens _jReportTypeId
       (\ s a -> s{_jReportTypeId = a})
+
+-- | The date\/time when this job will expire\/expired. After a job expired,
+-- no new reports are generated.
+jExpireTime :: Lens' Job (Maybe Text)
+jExpireTime
+  = lens _jExpireTime (\ s a -> s{_jExpireTime = a})
 
 -- | The creation date\/time of the job.
 jCreateTime :: Lens' Job (Maybe Text)
@@ -331,23 +363,27 @@ instance FromJSON Job where
         parseJSON
           = withObject "Job"
               (\ o ->
-                 Job <$>
+                 Job' <$>
                    (o .:? "name") <*> (o .:? "id") <*>
-                     (o .:? "reportTypeId")
+                     (o .:? "systemManaged")
+                     <*> (o .:? "reportTypeId")
+                     <*> (o .:? "expireTime")
                      <*> (o .:? "createTime"))
 
 instance ToJSON Job where
-        toJSON Job{..}
+        toJSON Job'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _jName, ("id" .=) <$> _jId,
+                  ("systemManaged" .=) <$> _jSystemManaged,
                   ("reportTypeId" .=) <$> _jReportTypeId,
+                  ("expireTime" .=) <$> _jExpireTime,
                   ("createTime" .=) <$> _jCreateTime])
 
 -- | Response message for ReportingService.ListJobs.
 --
 -- /See:/ 'listJobsResponse' smart constructor.
-data ListJobsResponse = ListJobsResponse
+data ListJobsResponse = ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
     , _ljrJobs          :: !(Maybe [Job])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -362,7 +398,7 @@ data ListJobsResponse = ListJobsResponse
 listJobsResponse
     :: ListJobsResponse
 listJobsResponse =
-    ListJobsResponse
+    ListJobsResponse'
     { _ljrNextPageToken = Nothing
     , _ljrJobs = Nothing
     }
@@ -385,12 +421,12 @@ instance FromJSON ListJobsResponse where
         parseJSON
           = withObject "ListJobsResponse"
               (\ o ->
-                 ListJobsResponse <$>
+                 ListJobsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "jobs" .!= mempty))
 
 instance ToJSON ListJobsResponse where
-        toJSON ListJobsResponse{..}
+        toJSON ListJobsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ljrNextPageToken,
@@ -399,9 +435,11 @@ instance ToJSON ListJobsResponse where
 -- | A report type.
 --
 -- /See:/ 'reportType' smart constructor.
-data ReportType = ReportType
-    { _rtName :: !(Maybe Text)
-    , _rtId   :: !(Maybe Text)
+data ReportType = ReportType'
+    { _rtName          :: !(Maybe Text)
+    , _rtId            :: !(Maybe Text)
+    , _rtDeprecateTime :: !(Maybe Text)
+    , _rtSystemManaged :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportType' with the minimum fields required to make a request.
@@ -411,12 +449,18 @@ data ReportType = ReportType
 -- * 'rtName'
 --
 -- * 'rtId'
+--
+-- * 'rtDeprecateTime'
+--
+-- * 'rtSystemManaged'
 reportType
     :: ReportType
 reportType =
-    ReportType
+    ReportType'
     { _rtName = Nothing
     , _rtId = Nothing
+    , _rtDeprecateTime = Nothing
+    , _rtSystemManaged = Nothing
     }
 
 -- | The name of the report type (max. 100 characters).
@@ -427,14 +471,33 @@ rtName = lens _rtName (\ s a -> s{_rtName = a})
 rtId :: Lens' ReportType (Maybe Text)
 rtId = lens _rtId (\ s a -> s{_rtId = a})
 
+-- | The date\/time when this report type was\/will be deprecated.
+rtDeprecateTime :: Lens' ReportType (Maybe Text)
+rtDeprecateTime
+  = lens _rtDeprecateTime
+      (\ s a -> s{_rtDeprecateTime = a})
+
+-- | True if this a system-managed report type; otherwise false. Reporting
+-- jobs for system-managed report types are created automatically and can
+-- thus not be used in the \`CreateJob\` method.
+rtSystemManaged :: Lens' ReportType (Maybe Bool)
+rtSystemManaged
+  = lens _rtSystemManaged
+      (\ s a -> s{_rtSystemManaged = a})
+
 instance FromJSON ReportType where
         parseJSON
           = withObject "ReportType"
               (\ o ->
-                 ReportType <$> (o .:? "name") <*> (o .:? "id"))
+                 ReportType' <$>
+                   (o .:? "name") <*> (o .:? "id") <*>
+                     (o .:? "deprecateTime")
+                     <*> (o .:? "systemManaged"))
 
 instance ToJSON ReportType where
-        toJSON ReportType{..}
+        toJSON ReportType'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _rtName, ("id" .=) <$> _rtId])
+                 [("name" .=) <$> _rtName, ("id" .=) <$> _rtId,
+                  ("deprecateTime" .=) <$> _rtDeprecateTime,
+                  ("systemManaged" .=) <$> _rtSystemManaged])

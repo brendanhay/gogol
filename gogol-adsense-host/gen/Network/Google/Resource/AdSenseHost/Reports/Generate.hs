@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.Reports.Generate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type ReportsGenerateResource =
 -- specify \"alt=csv\" as a query parameter.
 --
 -- /See:/ 'reportsGenerate' smart constructor.
-data ReportsGenerate = ReportsGenerate
+data ReportsGenerate = ReportsGenerate'
     { _rgDimension  :: !(Maybe [Text])
     , _rgLocale     :: !(Maybe Text)
     , _rgEndDate    :: !Text
@@ -109,7 +109,7 @@ reportsGenerate
     -> Text -- ^ 'rgStartDate'
     -> ReportsGenerate
 reportsGenerate pRgEndDate_ pRgStartDate_ =
-    ReportsGenerate
+    ReportsGenerate'
     { _rgDimension = Nothing
     , _rgLocale = Nothing
     , _rgEndDate = pRgEndDate_
@@ -180,7 +180,9 @@ rgMaxResults
 
 instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate = Report
-        requestClient ReportsGenerate{..}
+        type Scopes ReportsGenerate =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient ReportsGenerate'{..}
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale

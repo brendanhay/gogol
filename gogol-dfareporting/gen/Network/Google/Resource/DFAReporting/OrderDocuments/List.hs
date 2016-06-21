@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.OrderDocuments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'OrderDocumentsList' request conforms to.
 type OrderDocumentsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -74,7 +74,7 @@ type OrderDocumentsListResource =
 -- | Retrieves a list of order documents, possibly filtered.
 --
 -- /See:/ 'orderDocumentsList' smart constructor.
-data OrderDocumentsList = OrderDocumentsList
+data OrderDocumentsList = OrderDocumentsList'
     { _odlSearchString :: !(Maybe Text)
     , _odlIds          :: !(Maybe [Textual Int64])
     , _odlProFileId    :: !(Textual Int64)
@@ -118,7 +118,7 @@ orderDocumentsList
     -> Int64 -- ^ 'odlProjectId'
     -> OrderDocumentsList
 orderDocumentsList pOdlProFileId_ pOdlProjectId_ =
-    OrderDocumentsList
+    OrderDocumentsList'
     { _odlSearchString = Nothing
     , _odlIds = Nothing
     , _odlProFileId = _Coerce # pOdlProFileId_
@@ -208,7 +208,9 @@ odlMaxResults
 instance GoogleRequest OrderDocumentsList where
         type Rs OrderDocumentsList =
              OrderDocumentsListResponse
-        requestClient OrderDocumentsList{..}
+        type Scopes OrderDocumentsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient OrderDocumentsList'{..}
           = go _odlProFileId _odlProjectId _odlSearchString
               (_odlIds ^. _Default)
               _odlSortOrder

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Folders.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsContainersFoldersListResource =
 -- | Lists all GTM Folders of a Container.
 --
 -- /See:/ 'accountsContainersFoldersList' smart constructor.
-data AccountsContainersFoldersList = AccountsContainersFoldersList
+data AccountsContainersFoldersList = AccountsContainersFoldersList'
     { _acflContainerId :: !Text
     , _acflAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsContainersFoldersList
     -> Text -- ^ 'acflAccountId'
     -> AccountsContainersFoldersList
 accountsContainersFoldersList pAcflContainerId_ pAcflAccountId_ =
-    AccountsContainersFoldersList
+    AccountsContainersFoldersList'
     { _acflContainerId = pAcflContainerId_
     , _acflAccountId = pAcflAccountId_
     }
@@ -94,7 +94,10 @@ instance GoogleRequest AccountsContainersFoldersList
          where
         type Rs AccountsContainersFoldersList =
              ListFoldersResponse
-        requestClient AccountsContainersFoldersList{..}
+        type Scopes AccountsContainersFoldersList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersFoldersList'{..}
           = go _acflAccountId _acflContainerId (Just AltJSON)
               tagManagerService
           where go

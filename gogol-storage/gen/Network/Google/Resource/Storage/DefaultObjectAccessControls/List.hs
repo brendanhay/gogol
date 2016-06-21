@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.DefaultObjectAccessControls.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type DefaultObjectAccessControlsListResource =
 -- | Retrieves default object ACL entries on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsList' smart constructor.
-data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList
+data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList'
     { _doaclIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _doaclBucket                   :: !Text
     , _doaclIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
@@ -77,7 +77,7 @@ defaultObjectAccessControlsList
     :: Text -- ^ 'doaclBucket'
     -> DefaultObjectAccessControlsList
 defaultObjectAccessControlsList pDoaclBucket_ =
-    DefaultObjectAccessControlsList
+    DefaultObjectAccessControlsList'
     { _doaclIfMetagenerationMatch = Nothing
     , _doaclBucket = pDoaclBucket_
     , _doaclIfMetagenerationNotMatch = Nothing
@@ -108,7 +108,10 @@ instance GoogleRequest
          DefaultObjectAccessControlsList where
         type Rs DefaultObjectAccessControlsList =
              ObjectAccessControls
-        requestClient DefaultObjectAccessControlsList{..}
+        type Scopes DefaultObjectAccessControlsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient DefaultObjectAccessControlsList'{..}
           = go _doaclBucket _doaclIfMetagenerationMatch
               _doaclIfMetagenerationNotMatch
               (Just AltJSON)

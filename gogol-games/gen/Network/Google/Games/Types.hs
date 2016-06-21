@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Games.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,7 +22,7 @@ module Network.Google.Games.Types
     -- * OAuth Scopes
     , plusLoginScope
     , gamesScope
-    , driveAppdataScope
+    , driveAppDataScope
 
     -- * PlayersListCollection
     , PlayersListCollection (..)
@@ -822,14 +823,18 @@ module Network.Google.Games.Types
     -- * Player
     , Player
     , player
+    , plaBannerURLLandscape
     , plaLastPlayedWith
     , plaAvatarImageURL
     , plaKind
     , plaExperienceInfo
     , plaName
+    , plaOriginalPlayerId
     , plaDisplayName
     , plaTitle
+    , plaBannerURLPortrait
     , plaPlayerId
+    , plaProFileSettings
 
     -- * GamesAchievementIncrement
     , GamesAchievementIncrement
@@ -864,6 +869,13 @@ module Network.Google.Games.Types
     , ecKind
     , ecChildId
 
+    -- * ApplicationVerifyResponse
+    , ApplicationVerifyResponse
+    , applicationVerifyResponse
+    , avrKind
+    , avrAlternatePlayerId
+    , avrPlayerId
+
     -- * PlayerEventListResponse
     , PlayerEventListResponse
     , playerEventListResponse
@@ -876,6 +888,12 @@ module Network.Google.Games.Types
     , turnBasedMatchDataRequest
     , tbmdrKind
     , tbmdrData
+
+    -- * ProFileSettings
+    , ProFileSettings
+    , proFileSettings
+    , pfsProFileVisible
+    , pfsKind
 
     -- * EventPeriodRange
     , EventPeriodRange
@@ -922,20 +940,20 @@ import           Network.Google.Games.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Play Game Services API. This contains the host and root path used as a starting point for constructing service requests.
-gamesService :: Service
+gamesService :: ServiceConfig
 gamesService
   = defaultService (ServiceId "games:v1")
       "www.googleapis.com"
 
--- | Know your basic profile info and list of people in your circles.
-plusLoginScope :: OAuthScope
-plusLoginScope = "https://www.googleapis.com/auth/plus.login";
+-- | Know the list of people in your circles, your age range, and language
+plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
+plusLoginScope = Proxy;
 
 -- | Share your Google+ profile information and view and manage your game
 -- activity
-gamesScope :: OAuthScope
-gamesScope = "https://www.googleapis.com/auth/games";
+gamesScope :: Proxy '["https://www.googleapis.com/auth/games"]
+gamesScope = Proxy;
 
 -- | View and manage its own configuration data in your Google Drive
-driveAppdataScope :: OAuthScope
-driveAppdataScope = "https://www.googleapis.com/auth/drive.appdata";
+driveAppDataScope :: Proxy '["https://www.googleapis.com/auth/drive.appdata"]
+driveAppDataScope = Proxy;

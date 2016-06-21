@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type SubscriptionsChangeRenewalSettingsResource =
 -- | Changes the renewal settings of a subscription
 --
 -- /See:/ 'subscriptionsChangeRenewalSettings' smart constructor.
-data SubscriptionsChangeRenewalSettings = SubscriptionsChangeRenewalSettings
+data SubscriptionsChangeRenewalSettings = SubscriptionsChangeRenewalSettings'
     { _scrsPayload        :: !RenewalSettings
     , _scrsCustomerId     :: !Text
     , _scrsSubscriptionId :: !Text
@@ -80,7 +80,7 @@ subscriptionsChangeRenewalSettings
     -> Text -- ^ 'scrsSubscriptionId'
     -> SubscriptionsChangeRenewalSettings
 subscriptionsChangeRenewalSettings pScrsPayload_ pScrsCustomerId_ pScrsSubscriptionId_ =
-    SubscriptionsChangeRenewalSettings
+    SubscriptionsChangeRenewalSettings'
     { _scrsPayload = pScrsPayload_
     , _scrsCustomerId = pScrsCustomerId_
     , _scrsSubscriptionId = pScrsSubscriptionId_
@@ -107,7 +107,9 @@ instance GoogleRequest
          SubscriptionsChangeRenewalSettings where
         type Rs SubscriptionsChangeRenewalSettings =
              Subscription
-        requestClient SubscriptionsChangeRenewalSettings{..}
+        type Scopes SubscriptionsChangeRenewalSettings =
+             '["https://www.googleapis.com/auth/apps.order"]
+        requestClient SubscriptionsChangeRenewalSettings'{..}
           = go _scrsCustomerId _scrsSubscriptionId
               (Just AltJSON)
               _scrsPayload

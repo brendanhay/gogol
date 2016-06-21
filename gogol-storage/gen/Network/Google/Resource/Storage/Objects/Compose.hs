@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Compose
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -82,7 +82,7 @@ type ObjectsComposeResource =
 -- bucket.
 --
 -- /See:/ 'objectsCompose' smart constructor.
-data ObjectsCompose = ObjectsCompose
+data ObjectsCompose = ObjectsCompose'
     { _oDestinationPredefinedACL :: !(Maybe ObjectsComposeDestinationPredefinedACL)
     , _oIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _oIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -112,7 +112,7 @@ objectsCompose
     -> Text -- ^ 'oDestinationObject'
     -> ObjectsCompose
 objectsCompose pOPayload_ pODestinationBucket_ pODestinationObject_ =
-    ObjectsCompose
+    ObjectsCompose'
     { _oDestinationPredefinedACL = Nothing
     , _oIfMetagenerationMatch = Nothing
     , _oIfGenerationMatch = Nothing
@@ -162,7 +162,11 @@ oDestinationObject
 
 instance GoogleRequest ObjectsCompose where
         type Rs ObjectsCompose = Object
-        requestClient ObjectsCompose{..}
+        type Scopes ObjectsCompose =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient ObjectsCompose'{..}
           = go _oDestinationBucket _oDestinationObject
               _oDestinationPredefinedACL
               _oIfMetagenerationMatch
@@ -177,7 +181,9 @@ instance GoogleRequest ObjectsCompose where
 instance GoogleRequest (MediaDownload ObjectsCompose)
          where
         type Rs (MediaDownload ObjectsCompose) = Stream
-        requestClient (MediaDownload ObjectsCompose{..})
+        type Scopes (MediaDownload ObjectsCompose) =
+             Scopes ObjectsCompose
+        requestClient (MediaDownload ObjectsCompose'{..})
           = go _oDestinationBucket _oDestinationObject
               _oDestinationPredefinedACL
               _oIfMetagenerationMatch

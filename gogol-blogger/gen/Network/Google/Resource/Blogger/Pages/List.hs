@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Pages.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type PagesListResource =
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
 --
 -- /See:/ 'pagesList' smart constructor.
-data PagesList = PagesList
+data PagesList = PagesList'
     { _plStatus      :: !(Maybe [PagesListStatus])
     , _plBlogId      :: !Text
     , _plFetchBodies :: !(Maybe Bool)
@@ -90,7 +90,7 @@ pagesList
     :: Text -- ^ 'plBlogId'
     -> PagesList
 pagesList pPlBlogId_ =
-    PagesList
+    PagesList'
     { _plStatus = Nothing
     , _plBlogId = pPlBlogId_
     , _plFetchBodies = Nothing
@@ -133,7 +133,10 @@ plMaxResults
 
 instance GoogleRequest PagesList where
         type Rs PagesList = PageList
-        requestClient PagesList{..}
+        type Scopes PagesList =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient PagesList'{..}
           = go _plBlogId (_plStatus ^. _Default) _plFetchBodies
               _plView
               _plPageToken

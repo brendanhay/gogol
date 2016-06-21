@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.I18nRegions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type I18nRegionsListResource =
 -- | Returns a list of content regions that the YouTube website supports.
 --
 -- /See:/ 'i18nRegionsList' smart constructor.
-data I18nRegionsList = I18nRegionsList
+data I18nRegionsList = I18nRegionsList'
     { _irlPart :: !Text
     , _irlHl   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ i18nRegionsList
     :: Text -- ^ 'irlPart'
     -> I18nRegionsList
 i18nRegionsList pIrlPart_ =
-    I18nRegionsList
+    I18nRegionsList'
     { _irlPart = pIrlPart_
     , _irlHl = "en_US"
     }
@@ -87,7 +87,12 @@ irlHl = lens _irlHl (\ s a -> s{_irlHl = a})
 
 instance GoogleRequest I18nRegionsList where
         type Rs I18nRegionsList = I18nRegionListResponse
-        requestClient I18nRegionsList{..}
+        type Scopes I18nRegionsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient I18nRegionsList'{..}
           = go (Just _irlPart) (Just _irlHl) (Just AltJSON)
               youTubeService
           where go

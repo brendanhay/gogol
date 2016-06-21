@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type AchievementConfigurationsDeleteResource =
 -- | Delete the achievement configuration with the given ID.
 --
 -- /See:/ 'achievementConfigurationsDelete' smart constructor.
-newtype AchievementConfigurationsDelete = AchievementConfigurationsDelete
+newtype AchievementConfigurationsDelete = AchievementConfigurationsDelete'
     { _acdAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ achievementConfigurationsDelete
     :: Text -- ^ 'acdAchievementId'
     -> AchievementConfigurationsDelete
 achievementConfigurationsDelete pAcdAchievementId_ =
-    AchievementConfigurationsDelete
+    AchievementConfigurationsDelete'
     { _acdAchievementId = pAcdAchievementId_
     }
 
@@ -77,7 +77,9 @@ acdAchievementId
 instance GoogleRequest
          AchievementConfigurationsDelete where
         type Rs AchievementConfigurationsDelete = ()
-        requestClient AchievementConfigurationsDelete{..}
+        type Scopes AchievementConfigurationsDelete =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient AchievementConfigurationsDelete'{..}
           = go _acdAchievementId (Just AltJSON)
               gamesConfigurationService
           where go

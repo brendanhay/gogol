@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.CommentThreads.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type CommentThreadsUpdateResource =
 -- | Modifies the top-level comment in a comment thread.
 --
 -- /See:/ 'commentThreadsUpdate' smart constructor.
-data CommentThreadsUpdate = CommentThreadsUpdate
+data CommentThreadsUpdate = CommentThreadsUpdate'
     { _ctuPart    :: !Text
     , _ctuPayload :: !CommentThread
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ commentThreadsUpdate
     -> CommentThread -- ^ 'ctuPayload'
     -> CommentThreadsUpdate
 commentThreadsUpdate pCtuPart_ pCtuPayload_ =
-    CommentThreadsUpdate
+    CommentThreadsUpdate'
     { _ctuPart = pCtuPart_
     , _ctuPayload = pCtuPayload_
     }
@@ -90,7 +90,9 @@ ctuPayload
 
 instance GoogleRequest CommentThreadsUpdate where
         type Rs CommentThreadsUpdate = CommentThread
-        requestClient CommentThreadsUpdate{..}
+        type Scopes CommentThreadsUpdate =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient CommentThreadsUpdate'{..}
           = go (Just _ctuPart) (Just AltJSON) _ctuPayload
               youTubeService
           where go

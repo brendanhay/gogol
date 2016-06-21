@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.ChannelSections.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type ChannelSectionsListResource =
 -- | Returns channelSection resources that match the API request criteria.
 --
 -- /See:/ 'channelSectionsList' smart constructor.
-data ChannelSectionsList = ChannelSectionsList
+data ChannelSectionsList = ChannelSectionsList'
     { _cslPart                   :: !Text
     , _cslMine                   :: !(Maybe Bool)
     , _cslChannelId              :: !(Maybe Text)
@@ -90,7 +90,7 @@ channelSectionsList
     :: Text -- ^ 'cslPart'
     -> ChannelSectionsList
 channelSectionsList pCslPart_ =
-    ChannelSectionsList
+    ChannelSectionsList'
     { _cslPart = pCslPart_
     , _cslMine = Nothing
     , _cslChannelId = Nothing
@@ -158,7 +158,12 @@ cslId = lens _cslId (\ s a -> s{_cslId = a})
 instance GoogleRequest ChannelSectionsList where
         type Rs ChannelSectionsList =
              ChannelSectionListResponse
-        requestClient ChannelSectionsList{..}
+        type Scopes ChannelSectionsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient ChannelSectionsList'{..}
           = go (Just _cslPart) _cslMine _cslChannelId _cslHl
               _cslOnBehalfOfContentOwner
               _cslId

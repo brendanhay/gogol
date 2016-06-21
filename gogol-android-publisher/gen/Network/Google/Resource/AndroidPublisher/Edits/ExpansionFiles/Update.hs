@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type EditsExpansionFilesUpdateResource =
 -- method.
 --
 -- /See:/ 'editsExpansionFilesUpdate' smart constructor.
-data EditsExpansionFilesUpdate = EditsExpansionFilesUpdate
+data EditsExpansionFilesUpdate = EditsExpansionFilesUpdate'
     { _eefuPackageName       :: !Text
     , _eefuAPKVersionCode    :: !(Textual Int32)
     , _eefuPayload           :: !ExpansionFile
@@ -98,7 +98,7 @@ editsExpansionFilesUpdate
     -> Text -- ^ 'eefuEditId'
     -> EditsExpansionFilesUpdate
 editsExpansionFilesUpdate pEefuPackageName_ pEefuAPKVersionCode_ pEefuPayload_ pEefuExpansionFileType_ pEefuEditId_ =
-    EditsExpansionFilesUpdate
+    EditsExpansionFilesUpdate'
     { _eefuPackageName = pEefuPackageName_
     , _eefuAPKVersionCode = _Coerce # pEefuAPKVersionCode_
     , _eefuPayload = pEefuPayload_
@@ -139,7 +139,9 @@ eefuEditId
 instance GoogleRequest EditsExpansionFilesUpdate
          where
         type Rs EditsExpansionFilesUpdate = ExpansionFile
-        requestClient EditsExpansionFilesUpdate{..}
+        type Scopes EditsExpansionFilesUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsExpansionFilesUpdate'{..}
           = go _eefuPackageName _eefuEditId _eefuAPKVersionCode
               _eefuExpansionFileType
               (Just AltJSON)

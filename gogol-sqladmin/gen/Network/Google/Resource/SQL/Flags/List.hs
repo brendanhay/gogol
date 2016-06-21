@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Flags.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,18 +50,21 @@ type FlagsListResource =
 --
 -- /See:/ 'flagsList' smart constructor.
 data FlagsList =
-    FlagsList
+    FlagsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FlagsList' with the minimum fields required to make a request.
 --
 flagsList
     :: FlagsList
-flagsList = FlagsList
+flagsList = FlagsList'
 
 instance GoogleRequest FlagsList where
         type Rs FlagsList = FlagsListResponse
-        requestClient FlagsList{}
+        type Scopes FlagsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient FlagsList'{}
           = go (Just AltJSON) sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy FlagsListResource)

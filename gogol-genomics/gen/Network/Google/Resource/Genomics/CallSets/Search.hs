@@ -14,16 +14,19 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.CallSets.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a list of call sets matching the criteria. Implements
+-- Gets a list of call sets matching the criteria. For the definitions of
+-- call sets and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchCallSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L178).
 --
--- /See:/ < Genomics API Reference> for @genomics.callsets.search@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.search@.
 module Network.Google.Resource.Genomics.CallSets.Search
     (
     -- * REST Resource
@@ -64,11 +67,14 @@ type CallSetsSearchResource =
                            ReqBody '[JSON] SearchCallSetsRequest :>
                              Post '[JSON] SearchCallSetsResponse
 
--- | Gets a list of call sets matching the criteria. Implements
+-- | Gets a list of call sets matching the criteria. For the definitions of
+-- call sets and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchCallSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L178).
 --
 -- /See:/ 'callSetsSearch' smart constructor.
-data CallSetsSearch = CallSetsSearch
+data CallSetsSearch = CallSetsSearch'
     { _cssXgafv          :: !(Maybe Text)
     , _cssUploadProtocol :: !(Maybe Text)
     , _cssPp             :: !Bool
@@ -102,7 +108,7 @@ callSetsSearch
     :: SearchCallSetsRequest -- ^ 'cssPayload'
     -> CallSetsSearch
 callSetsSearch pCssPayload_ =
-    CallSetsSearch
+    CallSetsSearch'
     { _cssXgafv = Nothing
     , _cssUploadProtocol = Nothing
     , _cssPp = True
@@ -157,7 +163,11 @@ cssCallback
 
 instance GoogleRequest CallSetsSearch where
         type Rs CallSetsSearch = SearchCallSetsResponse
-        requestClient CallSetsSearch{..}
+        type Scopes CallSetsSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient CallSetsSearch'{..}
           = go _cssXgafv _cssUploadProtocol (Just _cssPp)
               _cssAccessToken
               _cssUploadType

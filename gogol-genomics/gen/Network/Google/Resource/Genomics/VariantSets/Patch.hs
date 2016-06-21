@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.VariantSets.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a variant set. This method supports patch semantics.
+-- Updates a variant set using patch semantics. For the definitions of
+-- variant sets and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.patch@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.patch@.
 module Network.Google.Resource.Genomics.VariantSets.Patch
     (
     -- * REST Resource
@@ -66,10 +68,12 @@ type VariantSetsPatchResource =
                              ReqBody '[JSON] VariantSet :>
                                Patch '[JSON] VariantSet
 
--- | Updates a variant set. This method supports patch semantics.
+-- | Updates a variant set using patch semantics. For the definitions of
+-- variant sets and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSetsPatch' smart constructor.
-data VariantSetsPatch = VariantSetsPatch
+data VariantSetsPatch = VariantSetsPatch'
     { _vspXgafv          :: !(Maybe Text)
     , _vspUploadProtocol :: !(Maybe Text)
     , _vspUpdateMask     :: !(Maybe Text)
@@ -110,7 +114,7 @@ variantSetsPatch
     -> VariantSet -- ^ 'vspPayload'
     -> VariantSetsPatch
 variantSetsPatch pVspVariantSetId_ pVspPayload_ =
-    VariantSetsPatch
+    VariantSetsPatch'
     { _vspXgafv = Nothing
     , _vspUploadProtocol = Nothing
     , _vspUpdateMask = Nothing
@@ -133,9 +137,9 @@ vspUploadProtocol
   = lens _vspUploadProtocol
       (\ s a -> s{_vspUploadProtocol = a})
 
--- | An optional mask specifying which fields to update. At this time, the
--- only mutable field is metadata. The only acceptable value is
--- \"metadata\". If unspecified, all mutable fields will be updated.
+-- | An optional mask specifying which fields to update. Supported fields: *
+-- metadata. * name. * description. Leaving \`updateMask\` unset is
+-- equivalent to specifying all mutable fields.
 vspUpdateMask :: Lens' VariantSetsPatch (Maybe Text)
 vspUpdateMask
   = lens _vspUpdateMask
@@ -181,7 +185,10 @@ vspCallback
 
 instance GoogleRequest VariantSetsPatch where
         type Rs VariantSetsPatch = VariantSet
-        requestClient VariantSetsPatch{..}
+        type Scopes VariantSetsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient VariantSetsPatch'{..}
           = go _vspVariantSetId _vspXgafv _vspUploadProtocol
               _vspUpdateMask
               (Just _vspPp)

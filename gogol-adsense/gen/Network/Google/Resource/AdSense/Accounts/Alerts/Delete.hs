@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Accounts.Alerts.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsAlertsDeleteResource =
 -- AdSense account.
 --
 -- /See:/ 'accountsAlertsDelete' smart constructor.
-data AccountsAlertsDelete = AccountsAlertsDelete
+data AccountsAlertsDelete = AccountsAlertsDelete'
     { _aadAlertId   :: !Text
     , _aadAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsAlertsDelete
     -> Text -- ^ 'aadAccountId'
     -> AccountsAlertsDelete
 accountsAlertsDelete pAadAlertId_ pAadAccountId_ =
-    AccountsAlertsDelete
+    AccountsAlertsDelete'
     { _aadAlertId = pAadAlertId_
     , _aadAccountId = pAadAccountId_
     }
@@ -90,7 +90,9 @@ aadAccountId
 
 instance GoogleRequest AccountsAlertsDelete where
         type Rs AccountsAlertsDelete = ()
-        requestClient AccountsAlertsDelete{..}
+        type Scopes AccountsAlertsDelete =
+             '["https://www.googleapis.com/auth/adsense"]
+        requestClient AccountsAlertsDelete'{..}
           = go _aadAccountId _aadAlertId (Just AltJSON)
               adSenseService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.BackupRuns.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type BackupRunsDeleteResource =
 -- | Deletes the backup taken by a backup run.
 --
 -- /See:/ 'backupRunsDelete' smart constructor.
-data BackupRunsDelete = BackupRunsDelete
+data BackupRunsDelete = BackupRunsDelete'
     { _brdProject  :: !Text
     , _brdId       :: !(Textual Int64)
     , _brdInstance :: !Text
@@ -78,7 +78,7 @@ backupRunsDelete
     -> Text -- ^ 'brdInstance'
     -> BackupRunsDelete
 backupRunsDelete pBrdProject_ pBrdId_ pBrdInstance_ =
-    BackupRunsDelete
+    BackupRunsDelete'
     { _brdProject = pBrdProject_
     , _brdId = _Coerce # pBrdId_
     , _brdInstance = pBrdInstance_
@@ -102,7 +102,10 @@ brdInstance
 
 instance GoogleRequest BackupRunsDelete where
         type Rs BackupRunsDelete = Operation
-        requestClient BackupRunsDelete{..}
+        type Scopes BackupRunsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient BackupRunsDelete'{..}
           = go _brdProject _brdInstance _brdId (Just AltJSON)
               sQLAdminService
           where go

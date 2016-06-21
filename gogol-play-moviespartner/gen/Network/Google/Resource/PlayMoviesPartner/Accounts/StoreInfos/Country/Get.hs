@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -75,7 +75,7 @@ type AccountsStoreInfosCountryGetResource =
 -- this method.
 --
 -- /See:/ 'accountsStoreInfosCountryGet' smart constructor.
-data AccountsStoreInfosCountryGet = AccountsStoreInfosCountryGet
+data AccountsStoreInfosCountryGet = AccountsStoreInfosCountryGet'
     { _asicgXgafv          :: !(Maybe Text)
     , _asicgUploadProtocol :: !(Maybe Text)
     , _asicgCountry        :: !Text
@@ -117,7 +117,7 @@ accountsStoreInfosCountryGet
     -> Text -- ^ 'asicgAccountId'
     -> AccountsStoreInfosCountryGet
 accountsStoreInfosCountryGet pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
-    AccountsStoreInfosCountryGet
+    AccountsStoreInfosCountryGet'
     { _asicgXgafv = Nothing
     , _asicgUploadProtocol = Nothing
     , _asicgCountry = pAsicgCountry_
@@ -188,7 +188,9 @@ asicgCallback
 instance GoogleRequest AccountsStoreInfosCountryGet
          where
         type Rs AccountsStoreInfosCountryGet = StoreInfo
-        requestClient AccountsStoreInfosCountryGet{..}
+        type Scopes AccountsStoreInfosCountryGet =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+        requestClient AccountsStoreInfosCountryGet'{..}
           = go _asicgAccountId _asicgVideoId _asicgCountry
               _asicgXgafv
               _asicgUploadProtocol

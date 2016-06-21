@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type AccountsOrdersGetResource =
 -- and _Get methods rules_ for more information about this method.
 --
 -- /See:/ 'accountsOrdersGet' smart constructor.
-data AccountsOrdersGet = AccountsOrdersGet
+data AccountsOrdersGet = AccountsOrdersGet'
     { _aogXgafv          :: !(Maybe Text)
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogPp             :: !Bool
@@ -107,7 +107,7 @@ accountsOrdersGet
     -> Text -- ^ 'aogOrderId'
     -> AccountsOrdersGet
 accountsOrdersGet pAogAccountId_ pAogOrderId_ =
-    AccountsOrdersGet
+    AccountsOrdersGet'
     { _aogXgafv = Nothing
     , _aogUploadProtocol = Nothing
     , _aogPp = True
@@ -168,7 +168,9 @@ aogCallback
 
 instance GoogleRequest AccountsOrdersGet where
         type Rs AccountsOrdersGet = Order
-        requestClient AccountsOrdersGet{..}
+        type Scopes AccountsOrdersGet =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+        requestClient AccountsOrdersGet'{..}
           = go _aogAccountId _aogOrderId _aogXgafv
               _aogUploadProtocol
               (Just _aogPp)

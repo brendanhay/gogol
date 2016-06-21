@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.GetSerialPortOutput
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type InstancesGetSerialPortOutputResource =
 -- | Returns the specified instance\'s serial port output.
 --
 -- /See:/ 'instancesGetSerialPortOutput' smart constructor.
-data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput
+data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput'
     { _igspoProject  :: !Text
     , _igspoZone     :: !Text
     , _igspoPort     :: !(Textual Int32)
@@ -85,7 +85,7 @@ instancesGetSerialPortOutput
     -> Text -- ^ 'igspoInstance'
     -> InstancesGetSerialPortOutput
 instancesGetSerialPortOutput pIgspoProject_ pIgspoZone_ pIgspoInstance_ =
-    InstancesGetSerialPortOutput
+    InstancesGetSerialPortOutput'
     { _igspoProject = pIgspoProject_
     , _igspoZone = pIgspoZone_
     , _igspoPort = 1
@@ -118,7 +118,11 @@ instance GoogleRequest InstancesGetSerialPortOutput
          where
         type Rs InstancesGetSerialPortOutput =
              SerialPortOutput
-        requestClient InstancesGetSerialPortOutput{..}
+        type Scopes InstancesGetSerialPortOutput =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient InstancesGetSerialPortOutput'{..}
           = go _igspoProject _igspoZone _igspoInstance
               (Just _igspoPort)
               (Just AltJSON)

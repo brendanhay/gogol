@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Notifications.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type NotificationsGetResource =
 -- | Retrieves a notification.
 --
 -- /See:/ 'notificationsGet' smart constructor.
-data NotificationsGet = NotificationsGet
+data NotificationsGet = NotificationsGet'
     { _ngCustomer       :: !Text
     , _ngNotificationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ notificationsGet
     -> Text -- ^ 'ngNotificationId'
     -> NotificationsGet
 notificationsGet pNgCustomer_ pNgNotificationId_ =
-    NotificationsGet
+    NotificationsGet'
     { _ngCustomer = pNgCustomer_
     , _ngNotificationId = pNgNotificationId_
     }
@@ -91,7 +91,9 @@ ngNotificationId
 
 instance GoogleRequest NotificationsGet where
         type Rs NotificationsGet = Notification
-        requestClient NotificationsGet{..}
+        type Scopes NotificationsGet =
+             '["https://www.googleapis.com/auth/admin.directory.notifications"]
+        requestClient NotificationsGet'{..}
           = go _ngCustomer _ngNotificationId (Just AltJSON)
               directoryService
           where go

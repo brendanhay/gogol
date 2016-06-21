@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type DefaultObjectAccessControlsGetResource =
 -- specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsGet' smart constructor.
-data DefaultObjectAccessControlsGet = DefaultObjectAccessControlsGet
+data DefaultObjectAccessControlsGet = DefaultObjectAccessControlsGet'
     { _doacgBucket :: !Text
     , _doacgEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ defaultObjectAccessControlsGet
     -> Text -- ^ 'doacgEntity'
     -> DefaultObjectAccessControlsGet
 defaultObjectAccessControlsGet pDoacgBucket_ pDoacgEntity_ =
-    DefaultObjectAccessControlsGet
+    DefaultObjectAccessControlsGet'
     { _doacgBucket = pDoacgBucket_
     , _doacgEntity = pDoacgEntity_
     }
@@ -95,7 +95,10 @@ instance GoogleRequest DefaultObjectAccessControlsGet
          where
         type Rs DefaultObjectAccessControlsGet =
              ObjectAccessControl
-        requestClient DefaultObjectAccessControlsGet{..}
+        type Scopes DefaultObjectAccessControlsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient DefaultObjectAccessControlsGet'{..}
           = go _doacgBucket _doacgEntity (Just AltJSON)
               storageService
           where go

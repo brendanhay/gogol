@@ -3,7 +3,7 @@ LIBRARIES ?= core gogol $(SERVICES)
 FORWARD   := sdist upload candidate
 
 build:
-	stack --docker --docker-run-args '--memory=3G --cpuset-cpus=0,1' build
+	stack build --fast
 
 clean:
 	stack clean
@@ -22,10 +22,10 @@ $(foreach c,$(FORWARD),$(eval $(call forward, $c)))
 .PHONY: $(LIBRARIES)
 
 gogol:
-	stack build gogol
+	stack build --fast gogol
 
 core:
-	stack build gogol-core
+	stack build --fast gogol-core
 
 $(SERVICES):
-	stack build $@
+	stack build --fast $@

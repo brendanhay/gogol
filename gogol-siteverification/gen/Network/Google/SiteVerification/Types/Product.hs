@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.SiteVerification.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.SiteVerification.Types.Sum
 -- | The site for which a verification token will be generated.
 --
 -- /See:/ 'siteVerificationWebResourceGettokenRequestSite' smart constructor.
-data SiteVerificationWebResourceGettokenRequestSite = SiteVerificationWebResourceGettokenRequestSite
+data SiteVerificationWebResourceGettokenRequestSite = SiteVerificationWebResourceGettokenRequestSite'
     { _svwrgrsIdentifier :: !(Maybe Text)
     , _svwrgrsType       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data SiteVerificationWebResourceGettokenRequestSite = SiteVerificationWebResourc
 siteVerificationWebResourceGettokenRequestSite
     :: SiteVerificationWebResourceGettokenRequestSite
 siteVerificationWebResourceGettokenRequestSite =
-    SiteVerificationWebResourceGettokenRequestSite
+    SiteVerificationWebResourceGettokenRequestSite'
     { _svwrgrsIdentifier = Nothing
     , _svwrgrsType = Nothing
     }
@@ -63,13 +63,13 @@ instance FromJSON
           = withObject
               "SiteVerificationWebResourceGettokenRequestSite"
               (\ o ->
-                 SiteVerificationWebResourceGettokenRequestSite <$>
+                 SiteVerificationWebResourceGettokenRequestSite' <$>
                    (o .:? "identifier") <*> (o .:? "type"))
 
 instance ToJSON
          SiteVerificationWebResourceGettokenRequestSite where
         toJSON
-          SiteVerificationWebResourceGettokenRequestSite{..}
+          SiteVerificationWebResourceGettokenRequestSite'{..}
           = object
               (catMaybes
                  [("identifier" .=) <$> _svwrgrsIdentifier,
@@ -77,7 +77,7 @@ instance ToJSON
 
 --
 -- /See:/ 'siteVerificationWebResourceGettokenResponse' smart constructor.
-data SiteVerificationWebResourceGettokenResponse = SiteVerificationWebResourceGettokenResponse
+data SiteVerificationWebResourceGettokenResponse = SiteVerificationWebResourceGettokenResponse'
     { _svwrgrToken  :: !(Maybe Text)
     , _svwrgrMethod :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -92,7 +92,7 @@ data SiteVerificationWebResourceGettokenResponse = SiteVerificationWebResourceGe
 siteVerificationWebResourceGettokenResponse
     :: SiteVerificationWebResourceGettokenResponse
 siteVerificationWebResourceGettokenResponse =
-    SiteVerificationWebResourceGettokenResponse
+    SiteVerificationWebResourceGettokenResponse'
     { _svwrgrToken = Nothing
     , _svwrgrMethod = Nothing
     }
@@ -118,13 +118,13 @@ instance FromJSON
           = withObject
               "SiteVerificationWebResourceGettokenResponse"
               (\ o ->
-                 SiteVerificationWebResourceGettokenResponse <$>
+                 SiteVerificationWebResourceGettokenResponse' <$>
                    (o .:? "token") <*> (o .:? "method"))
 
 instance ToJSON
          SiteVerificationWebResourceGettokenResponse where
         toJSON
-          SiteVerificationWebResourceGettokenResponse{..}
+          SiteVerificationWebResourceGettokenResponse'{..}
           = object
               (catMaybes
                  [("token" .=) <$> _svwrgrToken,
@@ -132,7 +132,7 @@ instance ToJSON
 
 --
 -- /See:/ 'siteVerificationWebResourceListResponse' smart constructor.
-newtype SiteVerificationWebResourceListResponse = SiteVerificationWebResourceListResponse
+newtype SiteVerificationWebResourceListResponse = SiteVerificationWebResourceListResponse'
     { _svwrlrItems :: Maybe [SiteVerificationWebResourceResource]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -144,7 +144,7 @@ newtype SiteVerificationWebResourceListResponse = SiteVerificationWebResourceLis
 siteVerificationWebResourceListResponse
     :: SiteVerificationWebResourceListResponse
 siteVerificationWebResourceListResponse =
-    SiteVerificationWebResourceListResponse
+    SiteVerificationWebResourceListResponse'
     { _svwrlrItems = Nothing
     }
 
@@ -161,18 +161,18 @@ instance FromJSON
           = withObject
               "SiteVerificationWebResourceListResponse"
               (\ o ->
-                 SiteVerificationWebResourceListResponse <$>
+                 SiteVerificationWebResourceListResponse' <$>
                    (o .:? "items" .!= mempty))
 
 instance ToJSON
          SiteVerificationWebResourceListResponse where
-        toJSON SiteVerificationWebResourceListResponse{..}
+        toJSON SiteVerificationWebResourceListResponse'{..}
           = object (catMaybes [("items" .=) <$> _svwrlrItems])
 
 -- | The address and type of a site that is verified or will be verified.
 --
 -- /See:/ 'siteVerificationWebResourceResourceSite' smart constructor.
-data SiteVerificationWebResourceResourceSite = SiteVerificationWebResourceResourceSite
+data SiteVerificationWebResourceResourceSite = SiteVerificationWebResourceResourceSite'
     { _svwrrsIdentifier :: !(Maybe Text)
     , _svwrrsType       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -187,7 +187,7 @@ data SiteVerificationWebResourceResourceSite = SiteVerificationWebResourceResour
 siteVerificationWebResourceResourceSite
     :: SiteVerificationWebResourceResourceSite
 siteVerificationWebResourceResourceSite =
-    SiteVerificationWebResourceResourceSite
+    SiteVerificationWebResourceResourceSite'
     { _svwrrsIdentifier = Nothing
     , _svwrrsType = Nothing
     }
@@ -211,12 +211,12 @@ instance FromJSON
           = withObject
               "SiteVerificationWebResourceResourceSite"
               (\ o ->
-                 SiteVerificationWebResourceResourceSite <$>
+                 SiteVerificationWebResourceResourceSite' <$>
                    (o .:? "identifier") <*> (o .:? "type"))
 
 instance ToJSON
          SiteVerificationWebResourceResourceSite where
-        toJSON SiteVerificationWebResourceResourceSite{..}
+        toJSON SiteVerificationWebResourceResourceSite'{..}
           = object
               (catMaybes
                  [("identifier" .=) <$> _svwrrsIdentifier,
@@ -224,7 +224,7 @@ instance ToJSON
 
 --
 -- /See:/ 'siteVerificationWebResourceGettokenRequest' smart constructor.
-data SiteVerificationWebResourceGettokenRequest = SiteVerificationWebResourceGettokenRequest
+data SiteVerificationWebResourceGettokenRequest = SiteVerificationWebResourceGettokenRequest'
     { _svwrgrSite               :: !(Maybe SiteVerificationWebResourceGettokenRequestSite)
     , _svwrgrVerificationMethod :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -239,7 +239,7 @@ data SiteVerificationWebResourceGettokenRequest = SiteVerificationWebResourceGet
 siteVerificationWebResourceGettokenRequest
     :: SiteVerificationWebResourceGettokenRequest
 siteVerificationWebResourceGettokenRequest =
-    SiteVerificationWebResourceGettokenRequest
+    SiteVerificationWebResourceGettokenRequest'
     { _svwrgrSite = Nothing
     , _svwrgrVerificationMethod = Nothing
     }
@@ -263,12 +263,13 @@ instance FromJSON
           = withObject
               "SiteVerificationWebResourceGettokenRequest"
               (\ o ->
-                 SiteVerificationWebResourceGettokenRequest <$>
+                 SiteVerificationWebResourceGettokenRequest' <$>
                    (o .:? "site") <*> (o .:? "verificationMethod"))
 
 instance ToJSON
          SiteVerificationWebResourceGettokenRequest where
-        toJSON SiteVerificationWebResourceGettokenRequest{..}
+        toJSON
+          SiteVerificationWebResourceGettokenRequest'{..}
           = object
               (catMaybes
                  [("site" .=) <$> _svwrgrSite,
@@ -277,7 +278,7 @@ instance ToJSON
 
 --
 -- /See:/ 'siteVerificationWebResourceResource' smart constructor.
-data SiteVerificationWebResourceResource = SiteVerificationWebResourceResource
+data SiteVerificationWebResourceResource = SiteVerificationWebResourceResource'
     { _svwrrOwners :: !(Maybe [Text])
     , _svwrrId     :: !(Maybe Text)
     , _svwrrSite   :: !(Maybe SiteVerificationWebResourceResourceSite)
@@ -295,7 +296,7 @@ data SiteVerificationWebResourceResource = SiteVerificationWebResourceResource
 siteVerificationWebResourceResource
     :: SiteVerificationWebResourceResource
 siteVerificationWebResourceResource =
-    SiteVerificationWebResourceResource
+    SiteVerificationWebResourceResource'
     { _svwrrOwners = Nothing
     , _svwrrId = Nothing
     , _svwrrSite = Nothing
@@ -324,13 +325,13 @@ instance FromJSON SiteVerificationWebResourceResource
         parseJSON
           = withObject "SiteVerificationWebResourceResource"
               (\ o ->
-                 SiteVerificationWebResourceResource <$>
+                 SiteVerificationWebResourceResource' <$>
                    (o .:? "owners" .!= mempty) <*> (o .:? "id") <*>
                      (o .:? "site"))
 
 instance ToJSON SiteVerificationWebResourceResource
          where
-        toJSON SiteVerificationWebResourceResource{..}
+        toJSON SiteVerificationWebResourceResource'{..}
           = object
               (catMaybes
                  [("owners" .=) <$> _svwrrOwners,

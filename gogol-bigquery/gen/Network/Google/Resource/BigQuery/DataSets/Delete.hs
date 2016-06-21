@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.DataSets.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type DataSetsDeleteResource =
 -- another dataset with the same name.
 --
 -- /See:/ 'dataSetsDelete' smart constructor.
-data DataSetsDelete = DataSetsDelete
+data DataSetsDelete = DataSetsDelete'
     { _dsdDataSetId      :: !Text
     , _dsdProjectId      :: !Text
     , _dsdDeleteContents :: !(Maybe Bool)
@@ -82,7 +82,7 @@ dataSetsDelete
     -> Text -- ^ 'dsdProjectId'
     -> DataSetsDelete
 dataSetsDelete pDsdDataSetId_ pDsdProjectId_ =
-    DataSetsDelete
+    DataSetsDelete'
     { _dsdDataSetId = pDsdDataSetId_
     , _dsdProjectId = pDsdProjectId_
     , _dsdDeleteContents = Nothing
@@ -107,7 +107,10 @@ dsdDeleteContents
 
 instance GoogleRequest DataSetsDelete where
         type Rs DataSetsDelete = ()
-        requestClient DataSetsDelete{..}
+        type Scopes DataSetsDelete =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient DataSetsDelete'{..}
           = go _dsdProjectId _dsdDataSetId _dsdDeleteContents
               (Just AltJSON)
               bigQueryService

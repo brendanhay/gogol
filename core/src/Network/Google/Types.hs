@@ -3,6 +3,7 @@
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE KindSignatures             #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE MultiParamTypeClasses      #-}
 {-# LANGUAGE OverloadedStrings          #-}
@@ -15,7 +16,7 @@
 
 -- |
 -- Module      : Network.Google.Types
--- Copyright   : (c) 2015 Brendan Hay <brendan.g.hay@gmail.com>
+-- Copyright   : (c) 2015-2016 Brendan Hay <brendan.g.hay@gmail.com>
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
@@ -24,66 +25,145 @@
 module Network.Google.Types where
 
 import           Control.Applicative
-import           Control.Exception.Lens                (exception)
-import           Control.Lens                          hiding (coerce)
+import           Control.Exception.Lens       (exception)
+import           Control.Lens
 import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Aeson
-import           Data.ByteString                       (ByteString)
-import qualified Data.ByteString.Char8                 as BS8
-import qualified Data.ByteString.Lazy                  as LBS
-import qualified Data.CaseInsensitive                  as CI
+import           Data.ByteString              (ByteString)
+import qualified Data.ByteString.Char8        as BS8
+import qualified Data.ByteString.Lazy         as LBS
+import qualified Data.CaseInsensitive         as CI
 import           Data.Coerce
 import           Data.Conduit
-import qualified Data.Conduit.List                     as CL
+import qualified Data.Conduit.List            as CL
 import           Data.Data
-import           Data.DList                            (DList)
-import qualified Data.DList                            as DList
-import           Data.Foldable                         (foldl')
+import           Data.DList                   (DList)
+import qualified Data.DList                   as DList
+import           Data.Foldable                (foldl')
 import           Data.Monoid
 import           Data.String
-import           Data.Text                             (Text)
-import qualified Data.Text.Encoding                    as Text
-import           Data.Text.Lazy.Builder                (Builder)
-import qualified Data.Text.Lazy.Builder                as Build
+import           Data.Text                    (Text)
+import qualified Data.Text.Encoding           as Text
+import           Data.Text.Lazy.Builder       (Builder)
+import qualified Data.Text.Lazy.Builder       as Build
 import           GHC.Generics
 import           GHC.TypeLits
-import           Network.HTTP.Client                   (HttpException, RequestBody (..))
-import           Network.HTTP.Media                    hiding (Accept)
-import           Network.HTTP.Types                    hiding (Header)
-import qualified Network.HTTP.Types                    as HTTP
+import           Network.HTTP.Client          (HttpException, RequestBody (..))
+import           Network.HTTP.Media           hiding (Accept)
+import           Network.HTTP.Types           hiding (Header)
+import qualified Network.HTTP.Types           as HTTP
 import           Servant.API
+import           Web.HttpApiData
 
-data AltJSON = AltJSON
-    deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data AltJSON   = AltJSON   deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data AltMedia  = AltMedia  deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data Multipart = Multipart deriving (Eq, Ord, Show, Read, Generic, Typeable)
 
-instance ToText AltJSON where
-   toText = const "json"
+instance ToHttpApiData AltJSON   where toQueryParam = const "json"
+instance ToHttpApiData AltMedia  where toQueryParam = const "media"
+instance ToHttpApiData Multipart where toQueryParam = const "multipart"
 
-data AltMedia = AltMedia
-    deriving (Eq, Ord, Show, Read, Generic, Typeable)
+-- | An OAuth2 scope.
+newtype OAuthScope = OAuthScope Text
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromHttpApiData
+        , ToHttpApiData
+        , FromJSON
+        , ToJSON
+        )
 
-instance ToText AltMedia where
-   toText = const "media"
+-- | An OAuth2 access token.
+newtype AccessToken = AccessToken Text
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromHttpApiData
+        , ToHttpApiData
+        , FromJSON
+        , ToJSON
+        )
 
-newtype AuthKey = AuthKey Text
-    deriving (Eq, Ord, Show, Read, Generic, Typeable, ToText, FromJSON, ToJSON)
+-- | An OAuth2 refresh token.
+newtype RefreshToken = RefreshToken Text
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromHttpApiData
+        , ToHttpApiData
+        , FromJSON
+        , ToJSON
+        )
 
-newtype OAuthScope = OAuthScope { scopeToText :: Text }
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
+-- | A client identifier.
+newtype ClientId = ClientId Text
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromHttpApiData
+        , ToHttpApiData
+        , FromJSON
+        , ToJSON
+        )
 
-newtype OAuthToken = OAuthToken { tokenToBS :: ByteString }
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable)
+-- | A service identifier.
+newtype ServiceId = ServiceId Text
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromHttpApiData
+        , ToHttpApiData
+        , FromJSON
+        , ToJSON
+        )
 
-instance FromJSON OAuthToken where
-    parseJSON = withText "oauth_token" (pure . OAuthToken . Text.encodeUtf8)
+-- | An opaque client secret.
+newtype Secret = Secret Text
+    deriving
+        ( Eq
+        , Ord
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromHttpApiData
+        , ToHttpApiData
+        , FromJSON
+        , ToJSON
+        )
 
-instance ToJSON OAuthToken where
-    toJSON = toJSON . Text.decodeUtf8 . tokenToBS
+instance Show Secret where
+    show = const "*****"
 
 newtype MediaDownload a = MediaDownload a
-
-data MediaUpload a = MediaUpload a RequestBody
+data    MediaUpload   a = MediaUpload   a Body
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce
@@ -97,12 +177,6 @@ _Default = iso f Just
     f Nothing  = mempty
 
 type Stream = ResumableSource (ResourceT IO) ByteString
-
-newtype ClientId = ClientId { clientIdToText :: Text }
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
-
-newtype ServiceId = ServiceId { serviceIdToText :: Text }
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 data Error
     = TransportError HttpException
@@ -163,7 +237,7 @@ instance AsError Error where
         ServiceError e -> Right e
         x              -> Left  x
 
-data Service = Service
+data ServiceConfig = ServiceConfig
     { _svcId      :: !ServiceId
     , _svcHost    :: !ByteString
     , _svcPath    :: !Builder
@@ -172,8 +246,8 @@ data Service = Service
     , _svcTimeout :: !(Maybe Seconds)
     }
 
-defaultService :: ServiceId -> ByteString -> Service
-defaultService i h = Service
+defaultService :: ServiceId -> ByteString -> ServiceConfig
+defaultService i h = ServiceConfig
     { _svcId      = i
     , _svcHost    = h
     , _svcPath    = mempty
@@ -182,48 +256,65 @@ defaultService i h = Service
     , _svcTimeout = Just 70
     }
 
-serviceHost :: Lens' Service ByteString
+-- | The remote host name, used for both the IP address to connect to and the
+-- host request header.
+serviceHost :: Lens' ServiceConfig ByteString
 serviceHost = lens _svcHost (\s a -> s { _svcHost = a })
 
-servicePath :: Lens' Service Builder
-servicePath = lens _svcPath (\s a -> s { _svcPath = a })
-
-servicePort :: Lens' Service Int
+-- | The remote port to connect to.
+--
+-- Defaults to @443@.
+servicePort :: Lens' ServiceConfig Int
 servicePort = lens _svcPort (\s a -> s { _svcPort = a })
 
-serviceSecure :: Lens' Service Bool
+-- | A path prefix that is prepended to any sent HTTP request.
+--
+-- Defaults to @mempty@.
+servicePath :: Lens' ServiceConfig Builder
+servicePath = lens _svcPath (\s a -> s { _svcPath = a })
+
+-- | Whether to use HTTPS/SSL.
+--
+-- Defaults to @True@.
+serviceSecure :: Lens' ServiceConfig Bool
 serviceSecure = lens _svcSecure (\s a -> s { _svcSecure = a })
 
-serviceTimeout :: Lens' Service (Maybe Seconds)
+-- | Number of seconds to wait for a response.
+serviceTimeout :: Lens' ServiceConfig (Maybe Seconds)
 serviceTimeout = lens _svcTimeout (\s a -> s { _svcTimeout = a })
 
--- | A single part of a multipart message.
-data Part = Part MediaType [(HeaderName, ByteString)] RequestBody
+-- | A single part of a (potentially multipart) request body.
+--
+-- /Note:/ The 'IsString' instance defaults to a @text/plain@ MIME type.
+data Body = Body !MediaType !RequestBody
 
-data Payload
-    = Body    !MediaType !RequestBody
-    | Related ![Part]
+instance IsString Body where
+    fromString = Body ("text" // "plain") . fromString
+
+-- | A lens into the 'MediaType' of a request 'Body'.
+bodyContentType :: Lens' Body MediaType
+bodyContentType = lens (\(Body m _) -> m) (\(Body _ b) m -> Body m b)
 
 -- | An intermediary request builder.
 data Request = Request
     { _rqPath    :: !Builder
     , _rqQuery   :: !(DList (ByteString, Maybe ByteString))
     , _rqHeaders :: !(DList (HeaderName, ByteString))
-    , _rqBody    :: !(Maybe Payload)
+    , _rqBody    :: ![Body]
     }
 
 instance Monoid Request where
-    mempty      = Request mempty mempty mempty Nothing
+    mempty      = Request mempty mempty mempty mempty
     mappend a b = Request
-        (_rqPath    a <>  "/" <> _rqPath b)
-        (_rqQuery   a <>  _rqQuery b)
-        (_rqHeaders a <>  _rqHeaders b)
-        (_rqBody    b <|> _rqBody a)
+        (_rqPath    a <> "/" <> _rqPath b)
+        (_rqQuery   a <> _rqQuery b)
+        (_rqHeaders a <> _rqHeaders b)
+        (_rqBody    b <> _rqBody a)
 
 appendPath :: Request -> Builder -> Request
 appendPath rq x = rq { _rqPath = _rqPath rq <> "/" <> x }
 
-appendPaths :: ToText a => Request -> [a] -> Request
+appendPaths :: ToHttpApiData a => Request -> [a] -> Request
 appendPaths rq = appendPath rq . foldMap (mappend "/" . buildText)
 
 appendQuery :: Request -> ByteString -> Maybe Text -> Request
@@ -237,29 +328,36 @@ appendHeader rq k (Just v) = rq
     { _rqHeaders = DList.snoc (_rqHeaders rq) (k, Text.encodeUtf8 v)
     }
 
-setBody :: Request -> MediaType -> RequestBody -> Request
-setBody rq c x = rq { _rqBody = Just (Body c x) }
-
-setRelated :: Request -> [Part] -> Request
-setRelated rq ps = rq { _rqBody = Just (Related ps) }
+setBody :: Request -> [Body] -> Request
+setBody rq bs = rq { _rqBody = bs }
 
 -- | A materialised 'http-client' request and associated response parser.
 data Client a = Client
     { _cliAccept   :: !(Maybe MediaType)
     , _cliMethod   :: !Method
     , _cliCheck    :: !(Status -> Bool)
-    , _cliService  :: !Service
+    , _cliService  :: !ServiceConfig
     , _cliRequest  :: !Request
     , _cliResponse :: !(Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
     }
 
-clientService :: Lens' (Client a) Service
+clientService :: Lens' (Client a) ServiceConfig
 clientService = lens _cliService (\s a -> s { _cliService = a })
 
-mime :: FromStream c a => Proxy c -> Method -> [Int] -> Request -> Service -> Client a
+mime :: FromStream c a
+     => Proxy c
+     -> Method
+     -> [Int]
+     -> Request
+     -> ServiceConfig
+     -> Client a
 mime p = client (fromStream p) (Just (contentType p))
 
-discard :: Method -> [Int] -> Request -> Service -> Client ()
+discard :: Method
+        -> [Int]
+        -> Request
+        -> ServiceConfig
+        -> Client ()
 discard = client (\b -> closeResumableSource b >> pure (Right ())) Nothing
 
 client :: (Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
@@ -267,7 +365,7 @@ client :: (Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
        -> Method
        -> [Int]
        -> Request
-       -> Service
+       -> ServiceConfig
        -> Client a
 client f cs m ns rq s = Client
     { _cliAccept   = cs
@@ -279,25 +377,22 @@ client f cs m ns rq s = Client
     }
 
 class Accept c => ToBody c a where
-    toBody :: Proxy c -> a -> RequestBody
-
-instance ToBody OctetStream RequestBody where
-    toBody Proxy = id
+    toBody :: Proxy c -> a -> Body
 
 instance ToBody OctetStream ByteString where
-    toBody Proxy = RequestBodyBS
+    toBody p = Body (contentType p) . RequestBodyBS
 
 instance ToBody OctetStream LBS.ByteString where
-    toBody Proxy = RequestBodyLBS
+    toBody p = Body (contentType p) . RequestBodyLBS
 
 instance ToBody PlainText ByteString where
-    toBody Proxy = RequestBodyBS
+    toBody p = Body (contentType p) . RequestBodyBS
 
 instance ToBody PlainText LBS.ByteString where
-    toBody Proxy = RequestBodyLBS
+    toBody p = Body (contentType p) . RequestBodyLBS
 
 instance ToJSON a => ToBody JSON a where
-    toBody Proxy = RequestBodyLBS . encode
+    toBody p = Body (contentType p) . RequestBodyLBS . encode
 
 class Accept c => FromStream c a where
     fromStream :: Proxy c
@@ -315,7 +410,8 @@ instance FromJSON a => FromStream JSON a where
             Right x -> pure $! Right x
 
 class GoogleRequest a where
-    type Rs a :: *
+    type Rs     a :: *
+    type Scopes a :: [Symbol]
 
     requestClient :: a -> Client (Rs a)
 
@@ -332,23 +428,24 @@ data Captures (s :: Symbol) a
 data CaptureMode (s :: Symbol) (m :: Symbol) a
     deriving (Typeable)
 
-data MultipartRelated (cs :: [*]) m b
+data MultipartRelated (cs :: [*]) m
     deriving (Typeable)
 
 instance ( ToBody c m
-         , ToBody OctetStream b
          , GoogleClient fn
-         ) => GoogleClient (MultipartRelated (c ': cs) m b :> fn) where
-    type Fn (MultipartRelated (c ': cs) m b :> fn) = m -> b -> Fn fn
+         ) => GoogleClient (MultipartRelated (c ': cs) m :> fn) where
+    type Fn (MultipartRelated (c ': cs) m :> fn) = m -> Body -> Fn fn
 
-    buildClient Proxy rq m b = buildClient (Proxy :: Proxy fn) $
-        setRelated rq
-            [ Part (contentType mc) [] (toBody mc m)
-            , Part (contentType mb) [] (toBody mb b)
-            ]
-          where
-            mc = Proxy :: Proxy c
-            mb = Proxy :: Proxy OctetStream
+    buildClient Proxy rq m b =
+        buildClient (Proxy :: Proxy fn) $
+           setBody rq [toBody (Proxy :: Proxy c) m, b]
+
+instance GoogleClient fn => GoogleClient (AltMedia :> fn) where
+    type Fn (AltMedia :> fn) = Body -> Fn fn
+
+    buildClient Proxy rq b =
+        buildClient (Proxy :: Proxy fn) $
+           setBody rq [b]
 
 instance (KnownSymbol s, GoogleClient fn) => GoogleClient (s :> fn) where
     type Fn (s :> fn) = Fn fn
@@ -363,9 +460,9 @@ instance (GoogleClient a, GoogleClient b) => GoogleClient (a :<|> b) where
              buildClient (Proxy :: Proxy a) rq
         :<|> buildClient (Proxy :: Proxy b) rq
 
-instance ( KnownSymbol  s
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (Capture s a :> fn) where
     type Fn (Capture s a :> fn) = a -> Fn fn
 
@@ -373,19 +470,19 @@ instance ( KnownSymbol  s
         . appendPath rq
         . buildText
 
-instance ( KnownSymbol  s
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (Captures s a :> fn) where
     type Fn (Captures s a :> fn) = [a] -> Fn fn
 
     buildClient Proxy rq = buildClient (Proxy :: Proxy fn)
         . appendPaths rq
 
-instance ( KnownSymbol  s
-         , KnownSymbol  m
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , KnownSymbol   m
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (CaptureMode s m a :> fn) where
     type Fn (CaptureMode s m a :> fn) = a -> Fn fn
 
@@ -393,9 +490,9 @@ instance ( KnownSymbol  s
         . appendPath rq
         $ buildText x <> buildSymbol (Proxy :: Proxy m)
 
-instance ( KnownSymbol  s
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (QueryParam s a :> fn) where
     type Fn (QueryParam s a :> fn) = Maybe a -> Fn fn
 
@@ -405,23 +502,23 @@ instance ( KnownSymbol  s
             Just x  -> appendQuery rq k v
               where
                 k = byteSymbol (Proxy :: Proxy s)
-                v = Just (toText x)
+                v = Just (toQueryParam x)
 
-instance ( KnownSymbol  s
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (QueryParams s a :> fn) where
     type Fn (QueryParams s a :> fn) = [a] -> Fn fn
 
     buildClient Proxy rq = buildClient (Proxy :: Proxy fn) . foldl' go rq
       where
-        go r = appendQuery r k . Just . toText
+        go r = appendQuery r k . Just . toQueryParam
 
         k = byteSymbol (Proxy :: Proxy s)
 
-instance ( KnownSymbol  s
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (Header s a :> fn) where
     type Fn (Header s a :> fn) = Maybe a -> Fn fn
 
@@ -431,84 +528,82 @@ instance ( KnownSymbol  s
             Just x  -> appendHeader rq (CI.mk k) v
               where
                 k = byteSymbol (Proxy :: Proxy s)
-                v = Just (toText x)
+                v = Just (toQueryParam x)
 
 instance ( ToBody c a
          , GoogleClient fn
          ) => GoogleClient (ReqBody (c ': cs) a :> fn) where
     type Fn (ReqBody (c ': cs) a :> fn) = a -> Fn fn
 
-    buildClient Proxy rq = buildClient (Proxy :: Proxy fn)
-        . setBody rq (contentType p)
-        . toBody p
-      where
-        p = Proxy :: Proxy c
+    buildClient Proxy rq x =
+        buildClient (Proxy :: Proxy fn) $
+            setBody rq [toBody (Proxy :: Proxy c) x]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Get (c ': cs) a) where
-    type Fn (Get (c ': cs) a) = Service -> Client a
+    type Fn (Get (c ': cs) a) = ServiceConfig -> Client a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodGet [200, 203]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Get (c ': cs) ()) where
-    type Fn (Get (c ': cs) ()) = Service -> Client ()
+    type Fn (Get (c ': cs) ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodGet [204]
 
 instance {-# OVERLAPPABLE #-}
   (FromStream c a, cs' ~ (c ': cs)) => GoogleClient (Post cs' a) where
-    type Fn (Post cs' a) = Service -> Client a
+    type Fn (Post cs' a) = ServiceConfig -> Client a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodPost [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Post cs ()) where
-    type Fn (Post cs ()) = Service -> Client ()
+    type Fn (Post cs ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodPost [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Put (c ': cs) a) where
-    type Fn (Put (c ': cs) a) = Service -> Client a
+    type Fn (Put (c ': cs) a) = ServiceConfig -> Client a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodPut [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Put (c ': cs) ()) where
-    type Fn (Put (c ': cs) ()) = Service -> Client ()
+    type Fn (Put (c ': cs) ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodPut [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Patch (c ': cs) a) where
-    type Fn (Patch (c ': cs) a) = Service -> Client a
+    type Fn (Patch (c ': cs) a) = ServiceConfig -> Client a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodPatch [200, 201]
 
 instance {-# OVERLAPPING #-}
   GoogleClient (Patch (c ': cs) ()) where
-    type Fn (Patch (c ': cs) ()) = Service -> Client ()
+    type Fn (Patch (c ': cs) ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodPatch [204]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Delete (c ': cs) a) where
-    type Fn (Delete (c ': cs) a) = Service -> Client a
+    type Fn (Delete (c ': cs) a) = ServiceConfig -> Client a
 
     buildClient Proxy = mime (Proxy :: Proxy c) methodDelete [200, 202]
 
 instance {-# OVERLAPPING #-}
-   GoogleClient (Delete (c ': cs) ()) where
-    type Fn (Delete (c ': cs) ()) = Service -> Client ()
+  GoogleClient (Delete (c ': cs) ()) where
+    type Fn (Delete (c ': cs) ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodDelete [204]
 
 sinkLBS :: Stream -> ResourceT IO LBS.ByteString
 sinkLBS = fmap LBS.fromChunks . ($$+- CL.consume)
 
-buildText :: ToText a => a -> Builder
-buildText = Build.fromText . toText
+buildText :: ToHttpApiData a => a -> Builder
+buildText = Build.fromText . toQueryParam
 
 buildSymbol :: forall n proxy. KnownSymbol n => proxy n -> Builder
 buildSymbol = Build.fromString . symbolVal
@@ -540,3 +635,19 @@ seconds (Seconds n)
 
 microseconds :: Seconds -> Int
 microseconds =  (1000000 *) . seconds
+
+newtype FieldMask = FieldMask Text
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Data
+        , Typeable
+        , FromHttpApiData
+        , ToHttpApiData
+        , FromJSON
+        , ToJSON
+        )

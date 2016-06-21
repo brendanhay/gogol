@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Labels.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type UsersLabelsCreateResource =
 -- | Creates a new label.
 --
 -- /See:/ 'usersLabelsCreate' smart constructor.
-data UsersLabelsCreate = UsersLabelsCreate
+data UsersLabelsCreate = UsersLabelsCreate'
     { _ulcPayload :: !Label
     , _ulcUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,10 +68,9 @@ data UsersLabelsCreate = UsersLabelsCreate
 -- * 'ulcUserId'
 usersLabelsCreate
     :: Label -- ^ 'ulcPayload'
-    -> Text
     -> UsersLabelsCreate
-usersLabelsCreate pUlcPayload_ pUlcUserId_ =
-    UsersLabelsCreate
+usersLabelsCreate pUlcPayload_ =
+    UsersLabelsCreate'
     { _ulcPayload = pUlcPayload_
     , _ulcUserId = "me"
     }
@@ -89,7 +88,11 @@ ulcUserId
 
 instance GoogleRequest UsersLabelsCreate where
         type Rs UsersLabelsCreate = Label
-        requestClient UsersLabelsCreate{..}
+        type Scopes UsersLabelsCreate =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersLabelsCreate'{..}
           = go _ulcUserId (Just AltJSON) _ulcPayload
               gmailService
           where go

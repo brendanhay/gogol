@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.Sessions.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type UsersSessionsUpdateResource =
 -- | Updates or insert a given session.
 --
 -- /See:/ 'usersSessionsUpdate' smart constructor.
-data UsersSessionsUpdate = UsersSessionsUpdate
+data UsersSessionsUpdate = UsersSessionsUpdate'
     { _usuPayload           :: !Session
     , _usuUserId            :: !Text
     , _usuCurrentTimeMillis :: !(Maybe (Textual Int64))
@@ -82,7 +82,7 @@ usersSessionsUpdate
     -> Text -- ^ 'usuSessionId'
     -> UsersSessionsUpdate
 usersSessionsUpdate pUsuPayload_ pUsuUserId_ pUsuSessionId_ =
-    UsersSessionsUpdate
+    UsersSessionsUpdate'
     { _usuPayload = pUsuPayload_
     , _usuUserId = pUsuUserId_
     , _usuCurrentTimeMillis = Nothing
@@ -114,7 +114,9 @@ usuSessionId
 
 instance GoogleRequest UsersSessionsUpdate where
         type Rs UsersSessionsUpdate = Session
-        requestClient UsersSessionsUpdate{..}
+        type Scopes UsersSessionsUpdate =
+             '["https://www.googleapis.com/auth/fitness.activity.write"]
+        requestClient UsersSessionsUpdate'{..}
           = go _usuUserId _usuSessionId _usuCurrentTimeMillis
               (Just AltJSON)
               _usuPayload

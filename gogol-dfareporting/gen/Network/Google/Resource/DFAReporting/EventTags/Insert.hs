@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.EventTags.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsInsert' request conforms to.
 type EventTagsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -54,7 +54,7 @@ type EventTagsInsertResource =
 -- | Inserts a new event tag.
 --
 -- /See:/ 'eventTagsInsert' smart constructor.
-data EventTagsInsert = EventTagsInsert
+data EventTagsInsert = EventTagsInsert'
     { _etiProFileId :: !(Textual Int64)
     , _etiPayload   :: !EventTag
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ eventTagsInsert
     -> EventTag -- ^ 'etiPayload'
     -> EventTagsInsert
 eventTagsInsert pEtiProFileId_ pEtiPayload_ =
-    EventTagsInsert
+    EventTagsInsert'
     { _etiProFileId = _Coerce # pEtiProFileId_
     , _etiPayload = pEtiPayload_
     }
@@ -89,7 +89,9 @@ etiPayload
 
 instance GoogleRequest EventTagsInsert where
         type Rs EventTagsInsert = EventTag
-        requestClient EventTagsInsert{..}
+        type Scopes EventTagsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient EventTagsInsert'{..}
           = go _etiProFileId (Just AltJSON) _etiPayload
               dFAReportingService
           where go

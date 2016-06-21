@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudBilling.BillingAccounts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type BillingAccountsListResource =
 -- [owns](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
 -- /See:/ 'billingAccountsList' smart constructor.
-data BillingAccountsList = BillingAccountsList
+data BillingAccountsList = BillingAccountsList'
     { _balXgafv          :: !(Maybe Text)
     , _balUploadProtocol :: !(Maybe Text)
     , _balPp             :: !Bool
@@ -105,7 +105,7 @@ data BillingAccountsList = BillingAccountsList
 billingAccountsList
     :: BillingAccountsList
 billingAccountsList =
-    BillingAccountsList
+    BillingAccountsList'
     { _balXgafv = Nothing
     , _balUploadProtocol = Nothing
     , _balPp = True
@@ -172,7 +172,9 @@ balCallback
 instance GoogleRequest BillingAccountsList where
         type Rs BillingAccountsList =
              ListBillingAccountsResponse
-        requestClient BillingAccountsList{..}
+        type Scopes BillingAccountsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient BillingAccountsList'{..}
           = go _balXgafv _balUploadProtocol (Just _balPp)
               _balAccessToken
               _balUploadType

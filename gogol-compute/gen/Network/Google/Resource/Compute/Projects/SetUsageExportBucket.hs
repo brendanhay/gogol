@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Projects.SetUsageExportBucket
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type ProjectsSetUsageExportBucketResource =
 -- method, the usage export feature will be disabled.
 --
 -- /See:/ 'projectsSetUsageExportBucket' smart constructor.
-data ProjectsSetUsageExportBucket = ProjectsSetUsageExportBucket
+data ProjectsSetUsageExportBucket = ProjectsSetUsageExportBucket'
     { _psuebProject :: !Text
     , _psuebPayload :: !UsageExportLocation
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -76,7 +76,7 @@ projectsSetUsageExportBucket
     -> UsageExportLocation -- ^ 'psuebPayload'
     -> ProjectsSetUsageExportBucket
 projectsSetUsageExportBucket pPsuebProject_ pPsuebPayload_ =
-    ProjectsSetUsageExportBucket
+    ProjectsSetUsageExportBucket'
     { _psuebProject = pPsuebProject_
     , _psuebPayload = pPsuebPayload_
     }
@@ -94,7 +94,13 @@ psuebPayload
 instance GoogleRequest ProjectsSetUsageExportBucket
          where
         type Rs ProjectsSetUsageExportBucket = Operation
-        requestClient ProjectsSetUsageExportBucket{..}
+        type Scopes ProjectsSetUsageExportBucket =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient ProjectsSetUsageExportBucket'{..}
           = go _psuebProject (Just AltJSON) _psuebPayload
               computeService
           where go

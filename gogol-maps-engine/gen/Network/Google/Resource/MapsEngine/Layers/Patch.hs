@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type LayersPatchResource =
 -- | Mutate a layer asset.
 --
 -- /See:/ 'layersPatch' smart constructor.
-data LayersPatch = LayersPatch
+data LayersPatch = LayersPatch'
     { _lppPayload :: !Layer
     , _lppId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ layersPatch
     -> Text -- ^ 'lppId'
     -> LayersPatch
 layersPatch pLppPayload_ pLppId_ =
-    LayersPatch
+    LayersPatch'
     { _lppPayload = pLppPayload_
     , _lppId = pLppId_
     }
@@ -86,7 +86,9 @@ lppId = lens _lppId (\ s a -> s{_lppId = a})
 
 instance GoogleRequest LayersPatch where
         type Rs LayersPatch = ()
-        requestClient LayersPatch{..}
+        type Scopes LayersPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient LayersPatch'{..}
           = go _lppId (Just AltJSON) _lppPayload
               mapsEngineService
           where go

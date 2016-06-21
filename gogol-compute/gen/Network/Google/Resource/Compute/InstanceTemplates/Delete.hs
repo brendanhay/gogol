@@ -14,13 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceTemplates.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the specified instance template.
+-- Deletes the specified instance template. If you delete an instance
+-- template that is being referenced from another instance group, the
+-- instance group will not be able to create or recreate virtual machine
+-- instances. Deleting an instance template is permanent and cannot be
+-- undone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.delete@.
 module Network.Google.Resource.Compute.InstanceTemplates.Delete
@@ -52,10 +56,14 @@ type InstanceTemplatesDeleteResource =
                  Capture "instanceTemplate" Text :>
                    QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified instance template.
+-- | Deletes the specified instance template. If you delete an instance
+-- template that is being referenced from another instance group, the
+-- instance group will not be able to create or recreate virtual machine
+-- instances. Deleting an instance template is permanent and cannot be
+-- undone.
 --
 -- /See:/ 'instanceTemplatesDelete' smart constructor.
-data InstanceTemplatesDelete = InstanceTemplatesDelete
+data InstanceTemplatesDelete = InstanceTemplatesDelete'
     { _itdProject          :: !Text
     , _itdInstanceTemplate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,12 +80,12 @@ instanceTemplatesDelete
     -> Text -- ^ 'itdInstanceTemplate'
     -> InstanceTemplatesDelete
 instanceTemplatesDelete pItdProject_ pItdInstanceTemplate_ =
-    InstanceTemplatesDelete
+    InstanceTemplatesDelete'
     { _itdProject = pItdProject_
     , _itdInstanceTemplate = pItdInstanceTemplate_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 itdProject :: Lens' InstanceTemplatesDelete Text
 itdProject
   = lens _itdProject (\ s a -> s{_itdProject = a})
@@ -90,7 +98,10 @@ itdInstanceTemplate
 
 instance GoogleRequest InstanceTemplatesDelete where
         type Rs InstanceTemplatesDelete = Operation
-        requestClient InstanceTemplatesDelete{..}
+        type Scopes InstanceTemplatesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceTemplatesDelete'{..}
           = go _itdProject _itdInstanceTemplate (Just AltJSON)
               computeService
           where go

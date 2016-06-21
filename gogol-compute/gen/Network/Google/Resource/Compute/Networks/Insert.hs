@@ -14,14 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Networks.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a network resource in the specified project using the data
--- included in the request.
+-- Creates a network in the specified project using the data included in
+-- the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.networks.insert@.
 module Network.Google.Resource.Compute.Networks.Insert
@@ -53,11 +53,11 @@ type NetworksInsertResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Network :> Post '[JSON] Operation
 
--- | Creates a network resource in the specified project using the data
--- included in the request.
+-- | Creates a network in the specified project using the data included in
+-- the request.
 --
 -- /See:/ 'networksInsert' smart constructor.
-data NetworksInsert = NetworksInsert
+data NetworksInsert = NetworksInsert'
     { _niProject :: !Text
     , _niPayload :: !Network
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ networksInsert
     -> Network -- ^ 'niPayload'
     -> NetworksInsert
 networksInsert pNiProject_ pNiPayload_ =
-    NetworksInsert
+    NetworksInsert'
     { _niProject = pNiProject_
     , _niPayload = pNiPayload_
     }
@@ -91,7 +91,10 @@ niPayload
 
 instance GoogleRequest NetworksInsert where
         type Rs NetworksInsert = Operation
-        requestClient NetworksInsert{..}
+        type Scopes NetworksInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient NetworksInsert'{..}
           = go _niProject (Just AltJSON) _niPayload
               computeService
           where go

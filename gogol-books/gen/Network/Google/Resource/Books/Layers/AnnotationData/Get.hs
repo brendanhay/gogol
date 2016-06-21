@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Layers.AnnotationData.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type LayersAnnotationDataGetResource =
 -- | Gets the annotation data.
 --
 -- /See:/ 'layersAnnotationDataGet' smart constructor.
-data LayersAnnotationDataGet = LayersAnnotationDataGet
+data LayersAnnotationDataGet = LayersAnnotationDataGet'
     { _ladgW                   :: !(Maybe (Textual Int32))
     , _ladgScale               :: !(Maybe (Textual Int32))
     , _ladgLocale              :: !(Maybe Text)
@@ -115,7 +115,7 @@ layersAnnotationDataGet
     -> Text -- ^ 'ladgLayerId'
     -> LayersAnnotationDataGet
 layersAnnotationDataGet pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeId_ pLadgLayerId_ =
-    LayersAnnotationDataGet
+    LayersAnnotationDataGet'
     { _ladgW = Nothing
     , _ladgScale = Nothing
     , _ladgLocale = Nothing
@@ -189,7 +189,9 @@ ladgLayerId
 
 instance GoogleRequest LayersAnnotationDataGet where
         type Rs LayersAnnotationDataGet = AnnotationData
-        requestClient LayersAnnotationDataGet{..}
+        type Scopes LayersAnnotationDataGet =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient LayersAnnotationDataGet'{..}
           = go _ladgVolumeId _ladgLayerId _ladgAnnotationDataId
               (Just _ladgContentVersion)
               _ladgW

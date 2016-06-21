@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickSearch.SavedColumns.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type SavedColumnsListResource =
 -- | Retrieve the list of saved columns for a specified advertiser.
 --
 -- /See:/ 'savedColumnsList' smart constructor.
-data SavedColumnsList = SavedColumnsList
+data SavedColumnsList = SavedColumnsList'
     { _sclAgencyId     :: !(Textual Int64)
     , _sclAdvertiserId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ savedColumnsList
     -> Int64 -- ^ 'sclAdvertiserId'
     -> SavedColumnsList
 savedColumnsList pSclAgencyId_ pSclAdvertiserId_ =
-    SavedColumnsList
+    SavedColumnsList'
     { _sclAgencyId = _Coerce # pSclAgencyId_
     , _sclAdvertiserId = _Coerce # pSclAdvertiserId_
     }
@@ -93,7 +93,9 @@ sclAdvertiserId
 
 instance GoogleRequest SavedColumnsList where
         type Rs SavedColumnsList = SavedColumnList
-        requestClient SavedColumnsList{..}
+        type Scopes SavedColumnsList =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
+        requestClient SavedColumnsList'{..}
           = go _sclAgencyId _sclAdvertiserId (Just AltJSON)
               doubleClickSearchService
           where go

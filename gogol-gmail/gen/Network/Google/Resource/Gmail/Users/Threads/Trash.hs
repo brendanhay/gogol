@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Threads.Trash
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersThreadsTrashResource =
 -- | Moves the specified thread to the trash.
 --
 -- /See:/ 'usersThreadsTrash' smart constructor.
-data UsersThreadsTrash = UsersThreadsTrash
+data UsersThreadsTrash = UsersThreadsTrash'
     { _uttUserId :: !Text
     , _uttId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,10 +69,9 @@ data UsersThreadsTrash = UsersThreadsTrash
 -- * 'uttId'
 usersThreadsTrash
     :: Text -- ^ 'uttId'
-    -> Text
     -> UsersThreadsTrash
-usersThreadsTrash pUttUserId_ pUttId_ =
-    UsersThreadsTrash
+usersThreadsTrash pUttId_ =
+    UsersThreadsTrash'
     { _uttUserId = "me"
     , _uttId = pUttId_
     }
@@ -89,7 +88,10 @@ uttId = lens _uttId (\ s a -> s{_uttId = a})
 
 instance GoogleRequest UsersThreadsTrash where
         type Rs UsersThreadsTrash = Thread
-        requestClient UsersThreadsTrash{..}
+        type Scopes UsersThreadsTrash =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersThreadsTrash'{..}
           = go _uttUserId _uttId (Just AltJSON) gmailService
           where go
                   = buildClient

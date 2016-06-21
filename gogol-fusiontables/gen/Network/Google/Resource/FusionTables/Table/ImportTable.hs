@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Table.ImportTable
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,13 +63,12 @@ type TableImportTableResource =
                      QueryParam "encoding" Text :>
                        QueryParam "alt" AltJSON :>
                          QueryParam "uploadType" AltMedia :>
-                           ReqBody '[OctetStream] RequestBody :>
-                             Post '[JSON] Table
+                           AltMedia :> Post '[JSON] Table
 
 -- | Imports a new table.
 --
 -- /See:/ 'tableImportTable' smart constructor.
-data TableImportTable = TableImportTable
+data TableImportTable = TableImportTable'
     { _titName      :: !Text
     , _titDelimiter :: !(Maybe Text)
     , _titEncoding  :: !(Maybe Text)
@@ -88,7 +87,7 @@ tableImportTable
     :: Text -- ^ 'titName'
     -> TableImportTable
 tableImportTable pTitName_ =
-    TableImportTable
+    TableImportTable'
     { _titName = pTitName_
     , _titDelimiter = Nothing
     , _titEncoding = Nothing
@@ -112,7 +111,9 @@ titEncoding
 
 instance GoogleRequest TableImportTable where
         type Rs TableImportTable = Table
-        requestClient TableImportTable{..}
+        type Scopes TableImportTable =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient TableImportTable'{..}
           = go (Just _titName) _titDelimiter _titEncoding
               (Just AltJSON)
               fusionTablesService
@@ -124,7 +125,10 @@ instance GoogleRequest TableImportTable where
 instance GoogleRequest (MediaUpload TableImportTable)
          where
         type Rs (MediaUpload TableImportTable) = Table
-        requestClient (MediaUpload TableImportTable{..} body)
+        type Scopes (MediaUpload TableImportTable) =
+             Scopes TableImportTable
+        requestClient
+          (MediaUpload TableImportTable'{..} body)
           = go (Just _titName) _titDelimiter _titEncoding
               (Just AltJSON)
               (Just AltMedia)

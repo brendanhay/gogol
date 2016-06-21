@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.TransferOperations.Pause
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type TransferOperationsPauseResource =
 -- | Pauses a transfer operation.
 --
 -- /See:/ 'transferOperationsPause' smart constructor.
-data TransferOperationsPause = TransferOperationsPause
+data TransferOperationsPause = TransferOperationsPause'
     { _topXgafv          :: !(Maybe Text)
     , _topUploadProtocol :: !(Maybe Text)
     , _topPp             :: !Bool
@@ -104,7 +104,7 @@ transferOperationsPause
     -> Text -- ^ 'topName'
     -> TransferOperationsPause
 transferOperationsPause pTopPayload_ pTopName_ =
-    TransferOperationsPause
+    TransferOperationsPause'
     { _topXgafv = Nothing
     , _topUploadProtocol = Nothing
     , _topPp = True
@@ -164,7 +164,9 @@ topCallback
 
 instance GoogleRequest TransferOperationsPause where
         type Rs TransferOperationsPause = Empty
-        requestClient TransferOperationsPause{..}
+        type Scopes TransferOperationsPause =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TransferOperationsPause'{..}
           = go _topName _topXgafv _topUploadProtocol
               (Just _topPp)
               _topAccessToken

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Container.Projects.Zones.Operations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type ProjectsZonesOperationsListResource =
 -- | Lists all operations in a project in a specific zone or all zones.
 --
 -- /See:/ 'projectsZonesOperationsList' smart constructor.
-data ProjectsZonesOperationsList = ProjectsZonesOperationsList
+data ProjectsZonesOperationsList = ProjectsZonesOperationsList'
     { _pzolXgafv          :: !(Maybe Text)
     , _pzolUploadProtocol :: !(Maybe Text)
     , _pzolPp             :: !Bool
@@ -107,7 +107,7 @@ projectsZonesOperationsList
     -> Text -- ^ 'pzolProjectId'
     -> ProjectsZonesOperationsList
 projectsZonesOperationsList pPzolZone_ pPzolProjectId_ =
-    ProjectsZonesOperationsList
+    ProjectsZonesOperationsList'
     { _pzolXgafv = Nothing
     , _pzolUploadProtocol = Nothing
     , _pzolPp = True
@@ -148,7 +148,7 @@ pzolUploadType
 
 -- | The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) to return operations for, or
--- \"-\" for all zones.
+-- \`-\` for all zones.
 pzolZone :: Lens' ProjectsZonesOperationsList Text
 pzolZone = lens _pzolZone (\ s a -> s{_pzolZone = a})
 
@@ -159,7 +159,7 @@ pzolBearerToken
       (\ s a -> s{_pzolBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzolProjectId :: Lens' ProjectsZonesOperationsList Text
 pzolProjectId
   = lens _pzolProjectId
@@ -174,7 +174,9 @@ instance GoogleRequest ProjectsZonesOperationsList
          where
         type Rs ProjectsZonesOperationsList =
              ListOperationsResponse
-        requestClient ProjectsZonesOperationsList{..}
+        type Scopes ProjectsZonesOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsZonesOperationsList'{..}
           = go _pzolProjectId _pzolZone _pzolXgafv
               _pzolUploadProtocol
               (Just _pzolPp)

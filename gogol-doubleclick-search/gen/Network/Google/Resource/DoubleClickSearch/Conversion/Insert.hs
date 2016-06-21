@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickSearch.Conversion.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type ConversionInsertResource =
 -- | Inserts a batch of new conversions into DoubleClick Search.
 --
 -- /See:/ 'conversionInsert' smart constructor.
-newtype ConversionInsert = ConversionInsert
+newtype ConversionInsert = ConversionInsert'
     { _ciPayload :: ConversionList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ conversionInsert
     :: ConversionList -- ^ 'ciPayload'
     -> ConversionInsert
 conversionInsert pCiPayload_ =
-    ConversionInsert
+    ConversionInsert'
     { _ciPayload = pCiPayload_
     }
 
@@ -76,7 +76,9 @@ ciPayload
 
 instance GoogleRequest ConversionInsert where
         type Rs ConversionInsert = ConversionList
-        requestClient ConversionInsert{..}
+        type Scopes ConversionInsert =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
+        requestClient ConversionInsert'{..}
           = go (Just AltJSON) _ciPayload
               doubleClickSearchService
           where go

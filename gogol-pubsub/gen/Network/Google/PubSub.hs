@@ -7,7 +7,7 @@
 
 -- |
 -- Module      : Network.Google.PubSub
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,6 +21,10 @@ module Network.Google.PubSub
     (
     -- * Service Configuration
       pubSubService
+
+    -- * OAuth Scopes
+    , cloudPlatformScope
+    , pubSubScope
 
     -- * API Declaration
     , PubSubAPI
@@ -120,6 +124,7 @@ module Network.Google.PubSub
     , PubsubMessage
     , pubsubMessage
     , pmData
+    , pmPublishTime
     , pmAttributes
     , pmMessageId
 

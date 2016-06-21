@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.ResourceViews.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -28,19 +28,19 @@ data ZoneViewsListResourcesFormat
       -- ^ @URL@
     | URLPort
       -- ^ @URL_PORT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ZoneViewsListResourcesFormat
 
-instance FromText ZoneViewsListResourcesFormat where
-    fromText = \case
-        "NONE" -> Just None
-        "URL" -> Just URL
-        "URL_PORT" -> Just URLPort
-        _ -> Nothing
+instance FromHttpApiData ZoneViewsListResourcesFormat where
+    parseQueryParam = \case
+        "NONE" -> Right None
+        "URL" -> Right URL
+        "URL_PORT" -> Right URLPort
+        x -> Left ("Unable to parse ZoneViewsListResourcesFormat from: " <> x)
 
-instance ToText ZoneViewsListResourcesFormat where
-    toText = \case
+instance ToHttpApiData ZoneViewsListResourcesFormat where
+    toQueryParam = \case
         None -> "NONE"
         URL -> "URL"
         URLPort -> "URL_PORT"
@@ -57,18 +57,18 @@ data ZoneViewsListResourcesListState
       -- ^ @ALL@
     | Running
       -- ^ @RUNNING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ZoneViewsListResourcesListState
 
-instance FromText ZoneViewsListResourcesListState where
-    fromText = \case
-        "ALL" -> Just All
-        "RUNNING" -> Just Running
-        _ -> Nothing
+instance FromHttpApiData ZoneViewsListResourcesListState where
+    parseQueryParam = \case
+        "ALL" -> Right All
+        "RUNNING" -> Right Running
+        x -> Left ("Unable to parse ZoneViewsListResourcesListState from: " <> x)
 
-instance ToText ZoneViewsListResourcesListState where
-    toText = \case
+instance ToHttpApiData ZoneViewsListResourcesListState where
+    toQueryParam = \case
         All -> "ALL"
         Running -> "RUNNING"
 

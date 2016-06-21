@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Datafeeds.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type DatafeedsPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'datafeedsPatch' smart constructor.
-data DatafeedsPatch = DatafeedsPatch
+data DatafeedsPatch = DatafeedsPatch'
     { _dpMerchantId :: !(Textual Word64)
     , _dpPayload    :: !Datafeed
     , _dpDatafeedId :: !(Textual Word64)
@@ -83,7 +83,7 @@ datafeedsPatch
     -> Word64 -- ^ 'dpDatafeedId'
     -> DatafeedsPatch
 datafeedsPatch pDpMerchantId_ pDpPayload_ pDpDatafeedId_ =
-    DatafeedsPatch
+    DatafeedsPatch'
     { _dpMerchantId = _Coerce # pDpMerchantId_
     , _dpPayload = pDpPayload_
     , _dpDatafeedId = _Coerce # pDpDatafeedId_
@@ -111,7 +111,9 @@ dpDryRun = lens _dpDryRun (\ s a -> s{_dpDryRun = a})
 
 instance GoogleRequest DatafeedsPatch where
         type Rs DatafeedsPatch = Datafeed
-        requestClient DatafeedsPatch{..}
+        type Scopes DatafeedsPatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient DatafeedsPatch'{..}
           = go _dpMerchantId _dpDatafeedId _dpDryRun
               (Just AltJSON)
               _dpPayload

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.ObjectAccessControls.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ObjectAccessControlsInsertResource =
 -- | Creates a new ACL entry on the specified object.
 --
 -- /See:/ 'objectAccessControlsInsert' smart constructor.
-data ObjectAccessControlsInsert = ObjectAccessControlsInsert
+data ObjectAccessControlsInsert = ObjectAccessControlsInsert'
     { _oaciBucket     :: !Text
     , _oaciPayload    :: !ObjectAccessControl
     , _oaciObject     :: !Text
@@ -84,7 +84,7 @@ objectAccessControlsInsert
     -> Text -- ^ 'oaciObject'
     -> ObjectAccessControlsInsert
 objectAccessControlsInsert pOaciBucket_ pOaciPayload_ pOaciObject_ =
-    ObjectAccessControlsInsert
+    ObjectAccessControlsInsert'
     { _oaciBucket = pOaciBucket_
     , _oaciPayload = pOaciPayload_
     , _oaciObject = pOaciObject_
@@ -119,7 +119,10 @@ instance GoogleRequest ObjectAccessControlsInsert
          where
         type Rs ObjectAccessControlsInsert =
              ObjectAccessControl
-        requestClient ObjectAccessControlsInsert{..}
+        type Scopes ObjectAccessControlsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient ObjectAccessControlsInsert'{..}
           = go _oaciBucket _oaciObject _oaciGeneration
               (Just AltJSON)
               _oaciPayload

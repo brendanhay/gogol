@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Maps.UnPublish
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type MapsUnPublishResource =
 -- | Unpublish a map asset.
 --
 -- /See:/ 'mapsUnPublish' smart constructor.
-newtype MapsUnPublish = MapsUnPublish
+newtype MapsUnPublish = MapsUnPublish'
     { _mupId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ mapsUnPublish
     :: Text -- ^ 'mupId'
     -> MapsUnPublish
 mapsUnPublish pMupId_ =
-    MapsUnPublish
+    MapsUnPublish'
     { _mupId = pMupId_
     }
 
@@ -76,7 +76,9 @@ mupId = lens _mupId (\ s a -> s{_mupId = a})
 
 instance GoogleRequest MapsUnPublish where
         type Rs MapsUnPublish = PublishResponse
-        requestClient MapsUnPublish{..}
+        type Scopes MapsUnPublish =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient MapsUnPublish'{..}
           = go _mupId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsUnPublishResource)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Search.CSE.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -145,7 +145,7 @@ type CSEListResource =
 -- search engine used for the search, and the search results.
 --
 -- /See:/ 'cSEList' smart constructor.
-data CSEList = CSEList
+data CSEList = CSEList'
     { _cselImgDominantColor :: !(Maybe CSEListImgDominantColor)
     , _cselSiteSearchFilter :: !(Maybe CSEListSiteSearchFilter)
     , _cselC2coff           :: !(Maybe Text)
@@ -251,7 +251,7 @@ cSEList
     :: Text -- ^ 'cselQ'
     -> CSEList
 cSEList pCselQ_ =
-    CSEList
+    CSEList'
     { _cselImgDominantColor = Nothing
     , _cselSiteSearchFilter = Nothing
     , _cselC2coff = Nothing
@@ -466,7 +466,8 @@ cselHighRange
 
 instance GoogleRequest CSEList where
         type Rs CSEList = Search
-        requestClient CSEList{..}
+        type Scopes CSEList = '[]
+        requestClient CSEList'{..}
           = go (Just _cselQ) _cselImgDominantColor
               _cselSiteSearchFilter
               _cselC2coff

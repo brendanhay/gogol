@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type TargetHTTPProxiesSetURLMapResource =
 -- | Changes the URL map for TargetHttpProxy.
 --
 -- /See:/ 'targetHTTPProxiesSetURLMap' smart constructor.
-data TargetHTTPProxiesSetURLMap = TargetHTTPProxiesSetURLMap
+data TargetHTTPProxiesSetURLMap = TargetHTTPProxiesSetURLMap'
     { _thttppsumProject         :: !Text
     , _thttppsumPayload         :: !URLMapReference
     , _thttppsumTargetHTTPProxy :: !Text
@@ -79,13 +79,13 @@ targetHTTPProxiesSetURLMap
     -> Text -- ^ 'thttppsumTargetHTTPProxy'
     -> TargetHTTPProxiesSetURLMap
 targetHTTPProxiesSetURLMap pThttppsumProject_ pThttppsumPayload_ pThttppsumTargetHTTPProxy_ =
-    TargetHTTPProxiesSetURLMap
+    TargetHTTPProxiesSetURLMap'
     { _thttppsumProject = pThttppsumProject_
     , _thttppsumPayload = pThttppsumPayload_
     , _thttppsumTargetHTTPProxy = pThttppsumTargetHTTPProxy_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thttppsumProject :: Lens' TargetHTTPProxiesSetURLMap Text
 thttppsumProject
   = lens _thttppsumProject
@@ -97,7 +97,7 @@ thttppsumPayload
   = lens _thttppsumPayload
       (\ s a -> s{_thttppsumPayload = a})
 
--- | Name of the TargetHttpProxy resource whose URL map is to be set.
+-- | Name of the TargetHttpProxy to set a URL map for.
 thttppsumTargetHTTPProxy :: Lens' TargetHTTPProxiesSetURLMap Text
 thttppsumTargetHTTPProxy
   = lens _thttppsumTargetHTTPProxy
@@ -106,7 +106,10 @@ thttppsumTargetHTTPProxy
 instance GoogleRequest TargetHTTPProxiesSetURLMap
          where
         type Rs TargetHTTPProxiesSetURLMap = Operation
-        requestClient TargetHTTPProxiesSetURLMap{..}
+        type Scopes TargetHTTPProxiesSetURLMap =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetHTTPProxiesSetURLMap'{..}
           = go _thttppsumProject _thttppsumTargetHTTPProxy
               (Just AltJSON)
               _thttppsumPayload

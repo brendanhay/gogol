@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.WebmasterTools.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.WebmasterTools.Types.Sum
 -- | Information about the various content types in the sitemap.
 --
 -- /See:/ 'wmxSitemapContent' smart constructor.
-data WmxSitemapContent = WmxSitemapContent
+data WmxSitemapContent = WmxSitemapContent'
     { _wscIndexed   :: !(Maybe (Textual Int64))
     , _wscType      :: !(Maybe Text)
     , _wscSubmitted :: !(Maybe (Textual Int64))
@@ -41,7 +41,7 @@ data WmxSitemapContent = WmxSitemapContent
 wmxSitemapContent
     :: WmxSitemapContent
 wmxSitemapContent =
-    WmxSitemapContent
+    WmxSitemapContent'
     { _wscIndexed = Nothing
     , _wscType = Nothing
     , _wscSubmitted = Nothing
@@ -68,12 +68,12 @@ instance FromJSON WmxSitemapContent where
         parseJSON
           = withObject "WmxSitemapContent"
               (\ o ->
-                 WmxSitemapContent <$>
+                 WmxSitemapContent' <$>
                    (o .:? "indexed") <*> (o .:? "type") <*>
                      (o .:? "submitted"))
 
 instance ToJSON WmxSitemapContent where
-        toJSON WmxSitemapContent{..}
+        toJSON WmxSitemapContent'{..}
           = object
               (catMaybes
                  [("indexed" .=) <$> _wscIndexed,
@@ -82,7 +82,7 @@ instance ToJSON WmxSitemapContent where
 
 --
 -- /See:/ 'apidimensionFilterGroup' smart constructor.
-data APIdimensionFilterGroup = APIdimensionFilterGroup
+data APIdimensionFilterGroup = APIdimensionFilterGroup'
     { _afgFilters   :: !(Maybe [APIdimensionFilter])
     , _afgGroupType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -97,7 +97,7 @@ data APIdimensionFilterGroup = APIdimensionFilterGroup
 apidimensionFilterGroup
     :: APIdimensionFilterGroup
 apidimensionFilterGroup =
-    APIdimensionFilterGroup
+    APIdimensionFilterGroup'
     { _afgFilters = Nothing
     , _afgGroupType = Nothing
     }
@@ -116,11 +116,11 @@ instance FromJSON APIdimensionFilterGroup where
         parseJSON
           = withObject "APIdimensionFilterGroup"
               (\ o ->
-                 APIdimensionFilterGroup <$>
+                 APIdimensionFilterGroup' <$>
                    (o .:? "filters" .!= mempty) <*> (o .:? "groupType"))
 
 instance ToJSON APIdimensionFilterGroup where
-        toJSON APIdimensionFilterGroup{..}
+        toJSON APIdimensionFilterGroup'{..}
           = object
               (catMaybes
                  [("filters" .=) <$> _afgFilters,
@@ -129,7 +129,7 @@ instance ToJSON APIdimensionFilterGroup where
 -- | Additional details about the URL, set only when calling get().
 --
 -- /See:/ 'urlSampleDetails' smart constructor.
-data URLSampleDetails = URLSampleDetails
+data URLSampleDetails = URLSampleDetails'
     { _usdLinkedFromURLs     :: !(Maybe [Text])
     , _usdContainingSitemaps :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ data URLSampleDetails = URLSampleDetails
 urlSampleDetails
     :: URLSampleDetails
 urlSampleDetails =
-    URLSampleDetails
+    URLSampleDetails'
     { _usdLinkedFromURLs = Nothing
     , _usdContainingSitemaps = Nothing
     }
@@ -169,12 +169,12 @@ instance FromJSON URLSampleDetails where
         parseJSON
           = withObject "URLSampleDetails"
               (\ o ->
-                 URLSampleDetails <$>
+                 URLSampleDetails' <$>
                    (o .:? "linkedFromUrls" .!= mempty) <*>
                      (o .:? "containingSitemaps" .!= mempty))
 
 instance ToJSON URLSampleDetails where
-        toJSON URLSampleDetails{..}
+        toJSON URLSampleDetails'{..}
           = object
               (catMaybes
                  [("linkedFromUrls" .=) <$> _usdLinkedFromURLs,
@@ -185,7 +185,7 @@ instance ToJSON URLSampleDetails where
 -- and category).
 --
 -- /See:/ 'urlCrawlErrorCountsPerType' smart constructor.
-data URLCrawlErrorCountsPerType = URLCrawlErrorCountsPerType
+data URLCrawlErrorCountsPerType = URLCrawlErrorCountsPerType'
     { _ucecptPlatform :: !(Maybe Text)
     , _ucecptEntries  :: !(Maybe [URLCrawlErrorCount])
     , _ucecptCategory :: !(Maybe Text)
@@ -203,7 +203,7 @@ data URLCrawlErrorCountsPerType = URLCrawlErrorCountsPerType
 urlCrawlErrorCountsPerType
     :: URLCrawlErrorCountsPerType
 urlCrawlErrorCountsPerType =
-    URLCrawlErrorCountsPerType
+    URLCrawlErrorCountsPerType'
     { _ucecptPlatform = Nothing
     , _ucecptEntries = Nothing
     , _ucecptCategory = Nothing
@@ -234,12 +234,12 @@ instance FromJSON URLCrawlErrorCountsPerType where
         parseJSON
           = withObject "URLCrawlErrorCountsPerType"
               (\ o ->
-                 URLCrawlErrorCountsPerType <$>
+                 URLCrawlErrorCountsPerType' <$>
                    (o .:? "platform") <*> (o .:? "entries" .!= mempty)
                      <*> (o .:? "category"))
 
 instance ToJSON URLCrawlErrorCountsPerType where
-        toJSON URLCrawlErrorCountsPerType{..}
+        toJSON URLCrawlErrorCountsPerType'{..}
           = object
               (catMaybes
                  [("platform" .=) <$> _ucecptPlatform,
@@ -248,7 +248,7 @@ instance ToJSON URLCrawlErrorCountsPerType where
 
 --
 -- /See:/ 'apiDataRow' smart constructor.
-data APIDataRow = APIDataRow
+data APIDataRow = APIDataRow'
     { _adrImpressions :: !(Maybe (Textual Double))
     , _adrKeys        :: !(Maybe [Text])
     , _adrCtr         :: !(Maybe (Textual Double))
@@ -272,7 +272,7 @@ data APIDataRow = APIDataRow
 apiDataRow
     :: APIDataRow
 apiDataRow =
-    APIDataRow
+    APIDataRow'
     { _adrImpressions = Nothing
     , _adrKeys = Nothing
     , _adrCtr = Nothing
@@ -310,14 +310,14 @@ instance FromJSON APIDataRow where
         parseJSON
           = withObject "APIDataRow"
               (\ o ->
-                 APIDataRow <$>
+                 APIDataRow' <$>
                    (o .:? "impressions") <*> (o .:? "keys" .!= mempty)
                      <*> (o .:? "ctr")
                      <*> (o .:? "clicks")
                      <*> (o .:? "position"))
 
 instance ToJSON APIDataRow where
-        toJSON APIDataRow{..}
+        toJSON APIDataRow'{..}
           = object
               (catMaybes
                  [("impressions" .=) <$> _adrImpressions,
@@ -327,7 +327,7 @@ instance ToJSON APIDataRow where
 
 --
 -- /See:/ 'apidimensionFilter' smart constructor.
-data APIdimensionFilter = APIdimensionFilter
+data APIdimensionFilter = APIdimensionFilter'
     { _afOperator   :: !(Maybe Text)
     , _afDimension  :: !(Maybe Text)
     , _afExpression :: !(Maybe Text)
@@ -345,7 +345,7 @@ data APIdimensionFilter = APIdimensionFilter
 apidimensionFilter
     :: APIdimensionFilter
 apidimensionFilter =
-    APIdimensionFilter
+    APIdimensionFilter'
     { _afOperator = Nothing
     , _afDimension = Nothing
     , _afExpression = Nothing
@@ -367,12 +367,12 @@ instance FromJSON APIdimensionFilter where
         parseJSON
           = withObject "APIdimensionFilter"
               (\ o ->
-                 APIdimensionFilter <$>
+                 APIdimensionFilter' <$>
                    (o .:? "operator") <*> (o .:? "dimension") <*>
                      (o .:? "expression"))
 
 instance ToJSON APIdimensionFilter where
-        toJSON APIdimensionFilter{..}
+        toJSON APIdimensionFilter'{..}
           = object
               (catMaybes
                  [("operator" .=) <$> _afOperator,
@@ -382,7 +382,7 @@ instance ToJSON APIdimensionFilter where
 -- | An entry in a URL crawl errors time series.
 --
 -- /See:/ 'urlCrawlErrorCount' smart constructor.
-data URLCrawlErrorCount = URLCrawlErrorCount
+data URLCrawlErrorCount = URLCrawlErrorCount'
     { _ucecCount     :: !(Maybe (Textual Int64))
     , _ucecTimestamp :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -397,7 +397,7 @@ data URLCrawlErrorCount = URLCrawlErrorCount
 urlCrawlErrorCount
     :: URLCrawlErrorCount
 urlCrawlErrorCount =
-    URLCrawlErrorCount
+    URLCrawlErrorCount'
     { _ucecCount = Nothing
     , _ucecTimestamp = Nothing
     }
@@ -419,11 +419,11 @@ instance FromJSON URLCrawlErrorCount where
         parseJSON
           = withObject "URLCrawlErrorCount"
               (\ o ->
-                 URLCrawlErrorCount <$>
+                 URLCrawlErrorCount' <$>
                    (o .:? "count") <*> (o .:? "timestamp"))
 
 instance ToJSON URLCrawlErrorCount where
-        toJSON URLCrawlErrorCount{..}
+        toJSON URLCrawlErrorCount'{..}
           = object
               (catMaybes
                  [("count" .=) <$> _ucecCount,
@@ -434,7 +434,7 @@ instance ToJSON URLCrawlErrorCount where
 -- as specified by the aggregation type parameter.
 --
 -- /See:/ 'searchAnalyticsQueryResponse' smart constructor.
-data SearchAnalyticsQueryResponse = SearchAnalyticsQueryResponse
+data SearchAnalyticsQueryResponse = SearchAnalyticsQueryResponse'
     { _saqrRows                    :: !(Maybe [APIDataRow])
     , _saqrResponseAggregationType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -449,7 +449,7 @@ data SearchAnalyticsQueryResponse = SearchAnalyticsQueryResponse
 searchAnalyticsQueryResponse
     :: SearchAnalyticsQueryResponse
 searchAnalyticsQueryResponse =
-    SearchAnalyticsQueryResponse
+    SearchAnalyticsQueryResponse'
     { _saqrRows = Nothing
     , _saqrResponseAggregationType = Nothing
     }
@@ -472,12 +472,12 @@ instance FromJSON SearchAnalyticsQueryResponse where
         parseJSON
           = withObject "SearchAnalyticsQueryResponse"
               (\ o ->
-                 SearchAnalyticsQueryResponse <$>
+                 SearchAnalyticsQueryResponse' <$>
                    (o .:? "rows" .!= mempty) <*>
                      (o .:? "responseAggregationType"))
 
 instance ToJSON SearchAnalyticsQueryResponse where
-        toJSON SearchAnalyticsQueryResponse{..}
+        toJSON SearchAnalyticsQueryResponse'{..}
           = object
               (catMaybes
                  [("rows" .=) <$> _saqrRows,
@@ -487,7 +487,7 @@ instance ToJSON SearchAnalyticsQueryResponse where
 -- | List of crawl error samples.
 --
 -- /See:/ 'urlCrawlErrorsSamplesListResponse' smart constructor.
-newtype URLCrawlErrorsSamplesListResponse = URLCrawlErrorsSamplesListResponse
+newtype URLCrawlErrorsSamplesListResponse = URLCrawlErrorsSamplesListResponse'
     { _uceslrURLCrawlErrorSample :: Maybe [URLCrawlErrorsSample]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -499,7 +499,7 @@ newtype URLCrawlErrorsSamplesListResponse = URLCrawlErrorsSamplesListResponse
 urlCrawlErrorsSamplesListResponse
     :: URLCrawlErrorsSamplesListResponse
 urlCrawlErrorsSamplesListResponse =
-    URLCrawlErrorsSamplesListResponse
+    URLCrawlErrorsSamplesListResponse'
     { _uceslrURLCrawlErrorSample = Nothing
     }
 
@@ -516,12 +516,12 @@ instance FromJSON URLCrawlErrorsSamplesListResponse
         parseJSON
           = withObject "URLCrawlErrorsSamplesListResponse"
               (\ o ->
-                 URLCrawlErrorsSamplesListResponse <$>
+                 URLCrawlErrorsSamplesListResponse' <$>
                    (o .:? "urlCrawlErrorSample" .!= mempty))
 
 instance ToJSON URLCrawlErrorsSamplesListResponse
          where
-        toJSON URLCrawlErrorsSamplesListResponse{..}
+        toJSON URLCrawlErrorsSamplesListResponse'{..}
           = object
               (catMaybes
                  [("urlCrawlErrorSample" .=) <$>
@@ -531,7 +531,7 @@ instance ToJSON URLCrawlErrorsSamplesListResponse
 -- platform.
 --
 -- /See:/ 'urlCrawlErrorsCountsQueryResponse' smart constructor.
-newtype URLCrawlErrorsCountsQueryResponse = URLCrawlErrorsCountsQueryResponse
+newtype URLCrawlErrorsCountsQueryResponse = URLCrawlErrorsCountsQueryResponse'
     { _ucecqrCountPerTypes :: Maybe [URLCrawlErrorCountsPerType]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -543,7 +543,7 @@ newtype URLCrawlErrorsCountsQueryResponse = URLCrawlErrorsCountsQueryResponse
 urlCrawlErrorsCountsQueryResponse
     :: URLCrawlErrorsCountsQueryResponse
 urlCrawlErrorsCountsQueryResponse =
-    URLCrawlErrorsCountsQueryResponse
+    URLCrawlErrorsCountsQueryResponse'
     { _ucecqrCountPerTypes = Nothing
     }
 
@@ -561,12 +561,12 @@ instance FromJSON URLCrawlErrorsCountsQueryResponse
         parseJSON
           = withObject "URLCrawlErrorsCountsQueryResponse"
               (\ o ->
-                 URLCrawlErrorsCountsQueryResponse <$>
+                 URLCrawlErrorsCountsQueryResponse' <$>
                    (o .:? "countPerTypes" .!= mempty))
 
 instance ToJSON URLCrawlErrorsCountsQueryResponse
          where
-        toJSON URLCrawlErrorsCountsQueryResponse{..}
+        toJSON URLCrawlErrorsCountsQueryResponse'{..}
           = object
               (catMaybes
                  [("countPerTypes" .=) <$> _ucecqrCountPerTypes])
@@ -574,7 +574,7 @@ instance ToJSON URLCrawlErrorsCountsQueryResponse
 -- | Contains information about specific crawl errors.
 --
 -- /See:/ 'urlCrawlErrorsSample' smart constructor.
-data URLCrawlErrorsSample = URLCrawlErrorsSample
+data URLCrawlErrorsSample = URLCrawlErrorsSample'
     { _ucesResponseCode  :: !(Maybe (Textual Int32))
     , _ucesURLDetails    :: !(Maybe URLSampleDetails)
     , _ucesLastCrawled   :: !(Maybe DateTime')
@@ -598,7 +598,7 @@ data URLCrawlErrorsSample = URLCrawlErrorsSample
 urlCrawlErrorsSample
     :: URLCrawlErrorsSample
 urlCrawlErrorsSample =
-    URLCrawlErrorsSample
+    URLCrawlErrorsSample'
     { _ucesResponseCode = Nothing
     , _ucesURLDetails = Nothing
     , _ucesLastCrawled = Nothing
@@ -642,14 +642,14 @@ instance FromJSON URLCrawlErrorsSample where
         parseJSON
           = withObject "URLCrawlErrorsSample"
               (\ o ->
-                 URLCrawlErrorsSample <$>
+                 URLCrawlErrorsSample' <$>
                    (o .:? "responseCode") <*> (o .:? "urlDetails") <*>
                      (o .:? "last_crawled")
                      <*> (o .:? "pageUrl")
                      <*> (o .:? "first_detected"))
 
 instance ToJSON URLCrawlErrorsSample where
-        toJSON URLCrawlErrorsSample{..}
+        toJSON URLCrawlErrorsSample'{..}
           = object
               (catMaybes
                  [("responseCode" .=) <$> _ucesResponseCode,
@@ -662,7 +662,7 @@ instance ToJSON URLCrawlErrorsSample where
 -- sitemap.
 --
 -- /See:/ 'wmxSitemap' smart constructor.
-data WmxSitemap = WmxSitemap
+data WmxSitemap = WmxSitemap'
     { _wsContents        :: !(Maybe [WmxSitemapContent])
     , _wsPath            :: !(Maybe Text)
     , _wsIsSitemapsIndex :: !(Maybe Bool)
@@ -698,7 +698,7 @@ data WmxSitemap = WmxSitemap
 wmxSitemap
     :: WmxSitemap
 wmxSitemap =
-    WmxSitemap
+    WmxSitemap'
     { _wsContents = Nothing
     , _wsPath = Nothing
     , _wsIsSitemapsIndex = Nothing
@@ -770,7 +770,7 @@ instance FromJSON WmxSitemap where
         parseJSON
           = withObject "WmxSitemap"
               (\ o ->
-                 WmxSitemap <$>
+                 WmxSitemap' <$>
                    (o .:? "contents" .!= mempty) <*> (o .:? "path") <*>
                      (o .:? "isSitemapsIndex")
                      <*> (o .:? "lastSubmitted")
@@ -781,7 +781,7 @@ instance FromJSON WmxSitemap where
                      <*> (o .:? "errors"))
 
 instance ToJSON WmxSitemap where
-        toJSON WmxSitemap{..}
+        toJSON WmxSitemap'{..}
           = object
               (catMaybes
                  [("contents" .=) <$> _wsContents,
@@ -797,7 +797,7 @@ instance ToJSON WmxSitemap where
 -- | List of sitemaps.
 --
 -- /See:/ 'sitemapsListResponse' smart constructor.
-newtype SitemapsListResponse = SitemapsListResponse
+newtype SitemapsListResponse = SitemapsListResponse'
     { _slrSitemap :: Maybe [WmxSitemap]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -809,7 +809,7 @@ newtype SitemapsListResponse = SitemapsListResponse
 sitemapsListResponse
     :: SitemapsListResponse
 sitemapsListResponse =
-    SitemapsListResponse
+    SitemapsListResponse'
     { _slrSitemap = Nothing
     }
 
@@ -825,22 +825,23 @@ instance FromJSON SitemapsListResponse where
         parseJSON
           = withObject "SitemapsListResponse"
               (\ o ->
-                 SitemapsListResponse <$>
+                 SitemapsListResponse' <$>
                    (o .:? "sitemap" .!= mempty))
 
 instance ToJSON SitemapsListResponse where
-        toJSON SitemapsListResponse{..}
+        toJSON SitemapsListResponse'{..}
           = object (catMaybes [("sitemap" .=) <$> _slrSitemap])
 
 --
 -- /See:/ 'searchAnalyticsQueryRequest' smart constructor.
-data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest
+data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest'
     { _saqrAggregationType       :: !(Maybe Text)
     , _saqrRowLimit              :: !(Maybe (Textual Int32))
     , _saqrEndDate               :: !(Maybe Text)
     , _saqrSearchType            :: !(Maybe Text)
     , _saqrDimensionFilterGroups :: !(Maybe [APIdimensionFilterGroup])
     , _saqrStartDate             :: !(Maybe Text)
+    , _saqrStartRow              :: !(Maybe (Textual Int32))
     , _saqrDimensions            :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -860,17 +861,20 @@ data SearchAnalyticsQueryRequest = SearchAnalyticsQueryRequest
 --
 -- * 'saqrStartDate'
 --
+-- * 'saqrStartRow'
+--
 -- * 'saqrDimensions'
 searchAnalyticsQueryRequest
     :: SearchAnalyticsQueryRequest
 searchAnalyticsQueryRequest =
-    SearchAnalyticsQueryRequest
+    SearchAnalyticsQueryRequest'
     { _saqrAggregationType = Nothing
     , _saqrRowLimit = Nothing
     , _saqrEndDate = Nothing
     , _saqrSearchType = Nothing
     , _saqrDimensionFilterGroups = Nothing
     , _saqrStartDate = Nothing
+    , _saqrStartRow = Nothing
     , _saqrDimensions = Nothing
     }
 
@@ -929,6 +933,13 @@ saqrStartDate
   = lens _saqrStartDate
       (\ s a -> s{_saqrStartDate = a})
 
+-- | [Optional; Default is 0] Zero-based index of the first row in the
+-- response. Must be a non-negative number.
+saqrStartRow :: Lens' SearchAnalyticsQueryRequest (Maybe Int32)
+saqrStartRow
+  = lens _saqrStartRow (\ s a -> s{_saqrStartRow = a})
+      . mapping _Coerce
+
 -- | [Optional] Zero or more dimensions to group results by. Dimensions are
 -- the group-by values in the Search Analytics page. Dimensions are
 -- combined to create a unique row key for each row. Results are grouped in
@@ -944,16 +955,17 @@ instance FromJSON SearchAnalyticsQueryRequest where
         parseJSON
           = withObject "SearchAnalyticsQueryRequest"
               (\ o ->
-                 SearchAnalyticsQueryRequest <$>
+                 SearchAnalyticsQueryRequest' <$>
                    (o .:? "aggregationType") <*> (o .:? "rowLimit") <*>
                      (o .:? "endDate")
                      <*> (o .:? "searchType")
                      <*> (o .:? "dimensionFilterGroups" .!= mempty)
                      <*> (o .:? "startDate")
+                     <*> (o .:? "startRow")
                      <*> (o .:? "dimensions" .!= mempty))
 
 instance ToJSON SearchAnalyticsQueryRequest where
-        toJSON SearchAnalyticsQueryRequest{..}
+        toJSON SearchAnalyticsQueryRequest'{..}
           = object
               (catMaybes
                  [("aggregationType" .=) <$> _saqrAggregationType,
@@ -963,12 +975,13 @@ instance ToJSON SearchAnalyticsQueryRequest where
                   ("dimensionFilterGroups" .=) <$>
                     _saqrDimensionFilterGroups,
                   ("startDate" .=) <$> _saqrStartDate,
+                  ("startRow" .=) <$> _saqrStartRow,
                   ("dimensions" .=) <$> _saqrDimensions])
 
 -- | List of sites with access level information.
 --
 -- /See:/ 'sitesListResponse' smart constructor.
-newtype SitesListResponse = SitesListResponse
+newtype SitesListResponse = SitesListResponse'
     { _slrSiteEntry :: Maybe [WmxSite]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -980,12 +993,12 @@ newtype SitesListResponse = SitesListResponse
 sitesListResponse
     :: SitesListResponse
 sitesListResponse =
-    SitesListResponse
+    SitesListResponse'
     { _slrSiteEntry = Nothing
     }
 
--- | Contains permission level information about a Webmaster Tools site. For
--- more information, see Permissions in Webmaster Tools.
+-- | Contains permission level information about a Search Console site. For
+-- more information, see Permissions in Search Console.
 slrSiteEntry :: Lens' SitesListResponse [WmxSite]
 slrSiteEntry
   = lens _slrSiteEntry (\ s a -> s{_slrSiteEntry = a})
@@ -996,18 +1009,19 @@ instance FromJSON SitesListResponse where
         parseJSON
           = withObject "SitesListResponse"
               (\ o ->
-                 SitesListResponse <$> (o .:? "siteEntry" .!= mempty))
+                 SitesListResponse' <$>
+                   (o .:? "siteEntry" .!= mempty))
 
 instance ToJSON SitesListResponse where
-        toJSON SitesListResponse{..}
+        toJSON SitesListResponse'{..}
           = object
               (catMaybes [("siteEntry" .=) <$> _slrSiteEntry])
 
--- | Contains permission level information about a Webmaster Tools site. For
--- more information, see Permissions in Webmaster Tools.
+-- | Contains permission level information about a Search Console site. For
+-- more information, see Permissions in Search Console.
 --
 -- /See:/ 'wmxSite' smart constructor.
-data WmxSite = WmxSite
+data WmxSite = WmxSite'
     { _wsPermissionLevel :: !(Maybe Text)
     , _wsSiteURL         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1022,7 +1036,7 @@ data WmxSite = WmxSite
 wmxSite
     :: WmxSite
 wmxSite =
-    WmxSite
+    WmxSite'
     { _wsPermissionLevel = Nothing
     , _wsSiteURL = Nothing
     }
@@ -1042,11 +1056,11 @@ instance FromJSON WmxSite where
         parseJSON
           = withObject "WmxSite"
               (\ o ->
-                 WmxSite <$>
+                 WmxSite' <$>
                    (o .:? "permissionLevel") <*> (o .:? "siteUrl"))
 
 instance ToJSON WmxSite where
-        toJSON WmxSite{..}
+        toJSON WmxSite'{..}
           = object
               (catMaybes
                  [("permissionLevel" .=) <$> _wsPermissionLevel,

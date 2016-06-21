@@ -14,16 +14,18 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns permissions that a caller has on the specified resource. See
--- Testing Permissions for more information.
+-- Testing Permissions for more information. For the definitions of
+-- datasets and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.testIamPermissions@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.testIamPermissions@.
 module Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
     (
     -- * REST Resource
@@ -65,10 +67,12 @@ type DataSetsTestIAMPermissionsResource =
                            Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource. See
--- Testing Permissions for more information.
+-- Testing Permissions for more information. For the definitions of
+-- datasets and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsTestIAMPermissions' smart constructor.
-data DataSetsTestIAMPermissions = DataSetsTestIAMPermissions
+data DataSetsTestIAMPermissions = DataSetsTestIAMPermissions'
     { _dstipXgafv          :: !(Maybe Text)
     , _dstipUploadProtocol :: !(Maybe Text)
     , _dstipPp             :: !Bool
@@ -106,7 +110,7 @@ dataSetsTestIAMPermissions
     -> Text -- ^ 'dstipResource'
     -> DataSetsTestIAMPermissions
 dataSetsTestIAMPermissions pDstipPayload_ pDstipResource_ =
-    DataSetsTestIAMPermissions
+    DataSetsTestIAMPermissions'
     { _dstipXgafv = Nothing
     , _dstipUploadProtocol = Nothing
     , _dstipPp = True
@@ -173,7 +177,10 @@ instance GoogleRequest DataSetsTestIAMPermissions
          where
         type Rs DataSetsTestIAMPermissions =
              TestIAMPermissionsResponse
-        requestClient DataSetsTestIAMPermissions{..}
+        type Scopes DataSetsTestIAMPermissions =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient DataSetsTestIAMPermissions'{..}
           = go _dstipResource _dstipXgafv _dstipUploadProtocol
               (Just _dstipPp)
               _dstipAccessToken

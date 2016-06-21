@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type TimelineGetResource =
 -- | Gets a single timeline item by ID.
 --
 -- /See:/ 'timelineGet' smart constructor.
-newtype TimelineGet = TimelineGet
+newtype TimelineGet = TimelineGet'
     { _tgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ timelineGet
     :: Text -- ^ 'tgId'
     -> TimelineGet
 timelineGet pTgId_ =
-    TimelineGet
+    TimelineGet'
     { _tgId = pTgId_
     }
 
@@ -74,7 +74,10 @@ tgId = lens _tgId (\ s a -> s{_tgId = a})
 
 instance GoogleRequest TimelineGet where
         type Rs TimelineGet = TimelineItem
-        requestClient TimelineGet{..}
+        type Scopes TimelineGet =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient TimelineGet'{..}
           = go _tgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy TimelineGetResource)

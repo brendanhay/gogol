@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Admin.Channels.Stop
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ChannelsStopResource =
 -- | Stop watching resources through this channel
 --
 -- /See:/ 'channelsStop' smart constructor.
-newtype ChannelsStop = ChannelsStop
+newtype ChannelsStop = ChannelsStop'
     { _csPayload :: Channel
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ channelsStop
     :: Channel -- ^ 'csPayload'
     -> ChannelsStop
 channelsStop pCsPayload_ =
-    ChannelsStop
+    ChannelsStop'
     { _csPayload = pCsPayload_
     }
 
@@ -79,7 +79,9 @@ csPayload
 
 instance GoogleRequest ChannelsStop where
         type Rs ChannelsStop = ()
-        requestClient ChannelsStop{..}
+        type Scopes ChannelsStop =
+             '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
+        requestClient ChannelsStop'{..}
           = go (Just AltJSON) _csPayload reportsService
           where go
                   = buildClient (Proxy :: Proxy ChannelsStopResource)

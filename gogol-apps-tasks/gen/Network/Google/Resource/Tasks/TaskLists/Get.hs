@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Tasks.TaskLists.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type TaskListsGetResource =
 -- | Returns the authenticated user\'s specified task list.
 --
 -- /See:/ 'taskListsGet' smart constructor.
-newtype TaskListsGet = TaskListsGet
+newtype TaskListsGet = TaskListsGet'
     { _tlgTaskList :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ taskListsGet
     :: Text -- ^ 'tlgTaskList'
     -> TaskListsGet
 taskListsGet pTlgTaskList_ =
-    TaskListsGet
+    TaskListsGet'
     { _tlgTaskList = pTlgTaskList_
     }
 
@@ -77,7 +77,10 @@ tlgTaskList
 
 instance GoogleRequest TaskListsGet where
         type Rs TaskListsGet = TaskList
-        requestClient TaskListsGet{..}
+        type Scopes TaskListsGet =
+             '["https://www.googleapis.com/auth/tasks",
+               "https://www.googleapis.com/auth/tasks.readonly"]
+        requestClient TaskListsGet'{..}
           = go _tlgTaskList (Just AltJSON) appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TaskListsGetResource)

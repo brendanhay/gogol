@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.DomainAliases.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type DomainAliasesInsertResource =
 -- | Inserts a Domain alias of the customer.
 --
 -- /See:/ 'domainAliasesInsert' smart constructor.
-data DomainAliasesInsert = DomainAliasesInsert
+data DomainAliasesInsert = DomainAliasesInsert'
     { _daiPayload  :: !DomainAlias
     , _daiCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ domainAliasesInsert
     -> Text -- ^ 'daiCustomer'
     -> DomainAliasesInsert
 domainAliasesInsert pDaiPayload_ pDaiCustomer_ =
-    DomainAliasesInsert
+    DomainAliasesInsert'
     { _daiPayload = pDaiPayload_
     , _daiCustomer = pDaiCustomer_
     }
@@ -90,7 +90,9 @@ daiCustomer
 
 instance GoogleRequest DomainAliasesInsert where
         type Rs DomainAliasesInsert = DomainAlias
-        requestClient DomainAliasesInsert{..}
+        type Scopes DomainAliasesInsert =
+             '["https://www.googleapis.com/auth/admin.directory.domain"]
+        requestClient DomainAliasesInsert'{..}
           = go _daiCustomer (Just AltJSON) _daiPayload
               directoryService
           where go

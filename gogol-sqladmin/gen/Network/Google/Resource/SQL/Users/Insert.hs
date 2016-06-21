@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Users.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type UsersInsertResource =
 -- | Creates a new user in a Cloud SQL instance.
 --
 -- /See:/ 'usersInsert' smart constructor.
-data UsersInsert = UsersInsert
+data UsersInsert = UsersInsert'
     { _uiProject  :: !Text
     , _uiPayload  :: !User
     , _uiInstance :: !Text
@@ -78,7 +78,7 @@ usersInsert
     -> Text -- ^ 'uiInstance'
     -> UsersInsert
 usersInsert pUiProject_ pUiPayload_ pUiInstance_ =
-    UsersInsert
+    UsersInsert'
     { _uiProject = pUiProject_
     , _uiPayload = pUiPayload_
     , _uiInstance = pUiInstance_
@@ -101,7 +101,10 @@ uiInstance
 
 instance GoogleRequest UsersInsert where
         type Rs UsersInsert = Operation
-        requestClient UsersInsert{..}
+        type Scopes UsersInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient UsersInsert'{..}
           = go _uiProject _uiInstance (Just AltJSON) _uiPayload
               sQLAdminService
           where go

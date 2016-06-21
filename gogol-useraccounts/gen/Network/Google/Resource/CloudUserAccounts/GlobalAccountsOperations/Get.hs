@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type GlobalAccountsOperationsGetResource =
 -- | Retrieves the specified operation resource.
 --
 -- /See:/ 'globalAccountsOperationsGet' smart constructor.
-data GlobalAccountsOperationsGet = GlobalAccountsOperationsGet
+data GlobalAccountsOperationsGet = GlobalAccountsOperationsGet'
     { _gaogProject   :: !Text
     , _gaogOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ globalAccountsOperationsGet
     -> Text -- ^ 'gaogOperation'
     -> GlobalAccountsOperationsGet
 globalAccountsOperationsGet pGaogProject_ pGaogOperation_ =
-    GlobalAccountsOperationsGet
+    GlobalAccountsOperationsGet'
     { _gaogProject = pGaogProject_
     , _gaogOperation = pGaogOperation_
     }
@@ -91,7 +91,12 @@ gaogOperation
 instance GoogleRequest GlobalAccountsOperationsGet
          where
         type Rs GlobalAccountsOperationsGet = Operation
-        requestClient GlobalAccountsOperationsGet{..}
+        type Scopes GlobalAccountsOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
+        requestClient GlobalAccountsOperationsGet'{..}
           = go _gaogProject _gaogOperation (Just AltJSON)
               userAccountsService
           where go

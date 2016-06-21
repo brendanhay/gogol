@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Groups.Aliases.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type GroupsAliasesInsertResource =
 -- | Add a alias for the group
 --
 -- /See:/ 'groupsAliasesInsert' smart constructor.
-data GroupsAliasesInsert = GroupsAliasesInsert
+data GroupsAliasesInsert = GroupsAliasesInsert'
     { _gaiGroupKey :: !Text
     , _gaiPayload  :: !Alias
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ groupsAliasesInsert
     -> Alias -- ^ 'gaiPayload'
     -> GroupsAliasesInsert
 groupsAliasesInsert pGaiGroupKey_ pGaiPayload_ =
-    GroupsAliasesInsert
+    GroupsAliasesInsert'
     { _gaiGroupKey = pGaiGroupKey_
     , _gaiPayload = pGaiPayload_
     }
@@ -89,7 +89,9 @@ gaiPayload
 
 instance GoogleRequest GroupsAliasesInsert where
         type Rs GroupsAliasesInsert = Alias
-        requestClient GroupsAliasesInsert{..}
+        type Scopes GroupsAliasesInsert =
+             '["https://www.googleapis.com/auth/admin.directory.group"]
+        requestClient GroupsAliasesInsert'{..}
           = go _gaiGroupKey (Just AltJSON) _gaiPayload
               directoryService
           where go

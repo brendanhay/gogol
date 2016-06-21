@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type GroupItemsDeleteResource =
 -- | Removes an item from a group.
 --
 -- /See:/ 'groupItemsDelete' smart constructor.
-data GroupItemsDelete = GroupItemsDelete
+data GroupItemsDelete = GroupItemsDelete'
     { _gidOnBehalfOfContentOwner :: !(Maybe Text)
     , _gidId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupItemsDelete
     :: Text -- ^ 'gidId'
     -> GroupItemsDelete
 groupItemsDelete pGidId_ =
-    GroupItemsDelete
+    GroupItemsDelete'
     { _gidOnBehalfOfContentOwner = Nothing
     , _gidId = pGidId_
     }
@@ -97,7 +97,10 @@ gidId = lens _gidId (\ s a -> s{_gidId = a})
 
 instance GoogleRequest GroupItemsDelete where
         type Rs GroupItemsDelete = ()
-        requestClient GroupItemsDelete{..}
+        type Scopes GroupItemsDelete =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient GroupItemsDelete'{..}
           = go (Just _gidId) _gidOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeAnalyticsService

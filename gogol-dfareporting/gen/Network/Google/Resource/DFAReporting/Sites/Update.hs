@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Sites.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SitesUpdate' request conforms to.
 type SitesUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -54,7 +54,7 @@ type SitesUpdateResource =
 -- | Updates an existing site.
 --
 -- /See:/ 'sitesUpdate' smart constructor.
-data SitesUpdate = SitesUpdate
+data SitesUpdate = SitesUpdate'
     { _suProFileId :: !(Textual Int64)
     , _suPayload   :: !Site
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitesUpdate
     -> Site -- ^ 'suPayload'
     -> SitesUpdate
 sitesUpdate pSuProFileId_ pSuPayload_ =
-    SitesUpdate
+    SitesUpdate'
     { _suProFileId = _Coerce # pSuProFileId_
     , _suPayload = pSuPayload_
     }
@@ -89,7 +89,9 @@ suPayload
 
 instance GoogleRequest SitesUpdate where
         type Rs SitesUpdate = Site
-        requestClient SitesUpdate{..}
+        type Scopes SitesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SitesUpdate'{..}
           = go _suProFileId (Just AltJSON) _suPayload
               dFAReportingService
           where go

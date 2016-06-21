@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Settings.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type SettingsListResource =
 -- | Returns all user settings for the authenticated user.
 --
 -- /See:/ 'settingsList' smart constructor.
-data SettingsList = SettingsList
+data SettingsList = SettingsList'
     { _slSyncToken  :: !(Maybe Text)
     , _slPageToken  :: !(Maybe Text)
     , _slMaxResults :: !(Maybe (Textual Int32))
@@ -75,7 +75,7 @@ data SettingsList = SettingsList
 settingsList
     :: SettingsList
 settingsList =
-    SettingsList
+    SettingsList'
     { _slSyncToken = Nothing
     , _slPageToken = Nothing
     , _slMaxResults = Nothing
@@ -107,7 +107,10 @@ slMaxResults
 
 instance GoogleRequest SettingsList where
         type Rs SettingsList = Settings
-        requestClient SettingsList{..}
+        type Scopes SettingsList =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient SettingsList'{..}
           = go _slSyncToken _slPageToken _slMaxResults
               (Just AltJSON)
               appsCalendarService

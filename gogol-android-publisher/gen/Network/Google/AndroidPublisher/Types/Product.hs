@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.AndroidPublisher.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | List of localized title and description data.
 --
 -- /See:/ 'inAppProductListings' smart constructor.
-newtype InAppProductListings = InAppProductListings
+newtype InAppProductListings = InAppProductListings'
     { _iaplAddtional :: HashMap Text InAppProductListing
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -36,7 +36,7 @@ inAppProductListings
     :: HashMap Text InAppProductListing -- ^ 'iaplAddtional'
     -> InAppProductListings
 inAppProductListings pIaplAddtional_ =
-    InAppProductListings
+    InAppProductListings'
     { _iaplAddtional = _Coerce # pIaplAddtional_
     }
 
@@ -51,14 +51,15 @@ iaplAddtional
 instance FromJSON InAppProductListings where
         parseJSON
           = withObject "InAppProductListings"
-              (\ o -> InAppProductListings <$> (parseJSONObject o))
+              (\ o ->
+                 InAppProductListings' <$> (parseJSONObject o))
 
 instance ToJSON InAppProductListings where
         toJSON = toJSON . _iaplAddtional
 
 --
 -- /See:/ 'inAppProductsUpdateResponse' smart constructor.
-newtype InAppProductsUpdateResponse = InAppProductsUpdateResponse
+newtype InAppProductsUpdateResponse = InAppProductsUpdateResponse'
     { _iapurInAppProduct :: Maybe InAppProduct
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +71,7 @@ newtype InAppProductsUpdateResponse = InAppProductsUpdateResponse
 inAppProductsUpdateResponse
     :: InAppProductsUpdateResponse
 inAppProductsUpdateResponse =
-    InAppProductsUpdateResponse
+    InAppProductsUpdateResponse'
     { _iapurInAppProduct = Nothing
     }
 
@@ -83,18 +84,18 @@ instance FromJSON InAppProductsUpdateResponse where
         parseJSON
           = withObject "InAppProductsUpdateResponse"
               (\ o ->
-                 InAppProductsUpdateResponse <$>
+                 InAppProductsUpdateResponse' <$>
                    (o .:? "inappproduct"))
 
 instance ToJSON InAppProductsUpdateResponse where
-        toJSON InAppProductsUpdateResponse{..}
+        toJSON InAppProductsUpdateResponse'{..}
           = object
               (catMaybes
                  [("inappproduct" .=) <$> _iapurInAppProduct])
 
 --
 -- /See:/ 'monthDay' smart constructor.
-data MonthDay = MonthDay
+data MonthDay = MonthDay'
     { _mdDay   :: !(Maybe (Textual Word32))
     , _mdMonth :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -109,7 +110,7 @@ data MonthDay = MonthDay
 monthDay
     :: MonthDay
 monthDay =
-    MonthDay
+    MonthDay'
     { _mdDay = Nothing
     , _mdMonth = Nothing
     }
@@ -131,17 +132,17 @@ instance FromJSON MonthDay where
         parseJSON
           = withObject "MonthDay"
               (\ o ->
-                 MonthDay <$> (o .:? "day") <*> (o .:? "month"))
+                 MonthDay' <$> (o .:? "day") <*> (o .:? "month"))
 
 instance ToJSON MonthDay where
-        toJSON MonthDay{..}
+        toJSON MonthDay'{..}
           = object
               (catMaybes
                  [("day" .=) <$> _mdDay, ("month" .=) <$> _mdMonth])
 
 --
 -- /See:/ 'track' smart constructor.
-data Track = Track
+data Track = Track'
     { _tVersionCodes :: !(Maybe [Textual Int32])
     , _tTrack        :: !(Maybe Text)
     , _tUserFraction :: !(Maybe (Textual Double))
@@ -159,7 +160,7 @@ data Track = Track
 track
     :: Track
 track =
-    Track
+    Track'
     { _tVersionCodes = Nothing
     , _tTrack = Nothing
     , _tUserFraction = Nothing
@@ -185,12 +186,12 @@ instance FromJSON Track where
         parseJSON
           = withObject "Track"
               (\ o ->
-                 Track <$>
+                 Track' <$>
                    (o .:? "versionCodes" .!= mempty) <*> (o .:? "track")
                      <*> (o .:? "userFraction"))
 
 instance ToJSON Track where
-        toJSON Track{..}
+        toJSON Track'{..}
           = object
               (catMaybes
                  [("versionCodes" .=) <$> _tVersionCodes,
@@ -199,7 +200,7 @@ instance ToJSON Track where
 
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image
+data Image = Image'
     { _iURL  :: !(Maybe Text)
     , _iSha1 :: !(Maybe Text)
     , _iId   :: !(Maybe Text)
@@ -217,7 +218,7 @@ data Image = Image
 image
     :: Image
 image =
-    Image
+    Image'
     { _iURL = Nothing
     , _iSha1 = Nothing
     , _iId = Nothing
@@ -239,11 +240,11 @@ instance FromJSON Image where
         parseJSON
           = withObject "Image"
               (\ o ->
-                 Image <$>
+                 Image' <$>
                    (o .:? "url") <*> (o .:? "sha1") <*> (o .:? "id"))
 
 instance ToJSON Image where
-        toJSON Image{..}
+        toJSON Image'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _iURL, ("sha1" .=) <$> _iSha1,
@@ -251,7 +252,7 @@ instance ToJSON Image where
 
 --
 -- /See:/ 'inAppProductsBatchRequestEntry' smart constructor.
-data InAppProductsBatchRequestEntry = InAppProductsBatchRequestEntry
+data InAppProductsBatchRequestEntry = InAppProductsBatchRequestEntry'
     { _iapbreMethodName                 :: !(Maybe Text)
     , _iapbreInAppProductsinsertrequest :: !(Maybe InAppProductsInsertRequest)
     , _iapbreInAppProductsupdaterequest :: !(Maybe InAppProductsUpdateRequest)
@@ -272,7 +273,7 @@ data InAppProductsBatchRequestEntry = InAppProductsBatchRequestEntry
 inAppProductsBatchRequestEntry
     :: InAppProductsBatchRequestEntry
 inAppProductsBatchRequestEntry =
-    InAppProductsBatchRequestEntry
+    InAppProductsBatchRequestEntry'
     { _iapbreMethodName = Nothing
     , _iapbreInAppProductsinsertrequest = Nothing
     , _iapbreInAppProductsupdaterequest = Nothing
@@ -305,14 +306,14 @@ instance FromJSON InAppProductsBatchRequestEntry
         parseJSON
           = withObject "InAppProductsBatchRequestEntry"
               (\ o ->
-                 InAppProductsBatchRequestEntry <$>
+                 InAppProductsBatchRequestEntry' <$>
                    (o .:? "methodName") <*>
                      (o .:? "inappproductsinsertrequest")
                      <*> (o .:? "inappproductsupdaterequest")
                      <*> (o .:? "batchId"))
 
 instance ToJSON InAppProductsBatchRequestEntry where
-        toJSON InAppProductsBatchRequestEntry{..}
+        toJSON InAppProductsBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("methodName" .=) <$> _iapbreMethodName,
@@ -324,7 +325,7 @@ instance ToJSON InAppProductsBatchRequestEntry where
 
 --
 -- /See:/ 'inAppProductListing' smart constructor.
-data InAppProductListing = InAppProductListing
+data InAppProductListing = InAppProductListing'
     { _iaplTitle       :: !(Maybe Text)
     , _iaplDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -339,7 +340,7 @@ data InAppProductListing = InAppProductListing
 inAppProductListing
     :: InAppProductListing
 inAppProductListing =
-    InAppProductListing
+    InAppProductListing'
     { _iaplTitle = Nothing
     , _iaplDescription = Nothing
     }
@@ -357,11 +358,11 @@ instance FromJSON InAppProductListing where
         parseJSON
           = withObject "InAppProductListing"
               (\ o ->
-                 InAppProductListing <$>
+                 InAppProductListing' <$>
                    (o .:? "title") <*> (o .:? "description"))
 
 instance ToJSON InAppProductListing where
-        toJSON InAppProductListing{..}
+        toJSON InAppProductListing'{..}
           = object
               (catMaybes
                  [("title" .=) <$> _iaplTitle,
@@ -369,7 +370,7 @@ instance ToJSON InAppProductListing where
 
 --
 -- /See:/ 'imagesDeleteAllResponse' smart constructor.
-newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse
+newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse'
     { _idarDeleted :: Maybe [Image]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -381,7 +382,7 @@ newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse
 imagesDeleteAllResponse
     :: ImagesDeleteAllResponse
 imagesDeleteAllResponse =
-    ImagesDeleteAllResponse
+    ImagesDeleteAllResponse'
     { _idarDeleted = Nothing
     }
 
@@ -395,17 +396,17 @@ instance FromJSON ImagesDeleteAllResponse where
         parseJSON
           = withObject "ImagesDeleteAllResponse"
               (\ o ->
-                 ImagesDeleteAllResponse <$>
+                 ImagesDeleteAllResponse' <$>
                    (o .:? "deleted" .!= mempty))
 
 instance ToJSON ImagesDeleteAllResponse where
-        toJSON ImagesDeleteAllResponse{..}
+        toJSON ImagesDeleteAllResponse'{..}
           = object
               (catMaybes [("deleted" .=) <$> _idarDeleted])
 
 --
 -- /See:/ 'tokenPagination' smart constructor.
-data TokenPagination = TokenPagination
+data TokenPagination = TokenPagination'
     { _tpNextPageToken     :: !(Maybe Text)
     , _tpPreviousPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -420,7 +421,7 @@ data TokenPagination = TokenPagination
 tokenPagination
     :: TokenPagination
 tokenPagination =
-    TokenPagination
+    TokenPagination'
     { _tpNextPageToken = Nothing
     , _tpPreviousPageToken = Nothing
     }
@@ -439,12 +440,12 @@ instance FromJSON TokenPagination where
         parseJSON
           = withObject "TokenPagination"
               (\ o ->
-                 TokenPagination <$>
+                 TokenPagination' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "previousPageToken"))
 
 instance ToJSON TokenPagination where
-        toJSON TokenPagination{..}
+        toJSON TokenPagination'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tpNextPageToken,
@@ -452,7 +453,7 @@ instance ToJSON TokenPagination where
 
 --
 -- /See:/ 'expansionFile' smart constructor.
-data ExpansionFile = ExpansionFile
+data ExpansionFile = ExpansionFile'
     { _efFileSize          :: !(Maybe (Textual Int64))
     , _efReferencesVersion :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -467,7 +468,7 @@ data ExpansionFile = ExpansionFile
 expansionFile
     :: ExpansionFile
 expansionFile =
-    ExpansionFile
+    ExpansionFile'
     { _efFileSize = Nothing
     , _efReferencesVersion = Nothing
     }
@@ -492,19 +493,143 @@ instance FromJSON ExpansionFile where
         parseJSON
           = withObject "ExpansionFile"
               (\ o ->
-                 ExpansionFile <$>
+                 ExpansionFile' <$>
                    (o .:? "fileSize") <*> (o .:? "referencesVersion"))
 
 instance ToJSON ExpansionFile where
-        toJSON ExpansionFile{..}
+        toJSON ExpansionFile'{..}
           = object
               (catMaybes
                  [("fileSize" .=) <$> _efFileSize,
                   ("referencesVersion" .=) <$> _efReferencesVersion])
 
 --
+-- /See:/ 'userComment' smart constructor.
+data UserComment = UserComment'
+    { _ucAndroidOSVersion :: !(Maybe (Textual Int32))
+    , _ucText             :: !(Maybe Text)
+    , _ucDevice           :: !(Maybe Text)
+    , _ucAppVersionCode   :: !(Maybe (Textual Int32))
+    , _ucAppVersionName   :: !(Maybe Text)
+    , _ucReviewerLanguage :: !(Maybe Text)
+    , _ucStarRating       :: !(Maybe (Textual Int32))
+    , _ucLastModified     :: !(Maybe Timestamp)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserComment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ucAndroidOSVersion'
+--
+-- * 'ucText'
+--
+-- * 'ucDevice'
+--
+-- * 'ucAppVersionCode'
+--
+-- * 'ucAppVersionName'
+--
+-- * 'ucReviewerLanguage'
+--
+-- * 'ucStarRating'
+--
+-- * 'ucLastModified'
+userComment
+    :: UserComment
+userComment =
+    UserComment'
+    { _ucAndroidOSVersion = Nothing
+    , _ucText = Nothing
+    , _ucDevice = Nothing
+    , _ucAppVersionCode = Nothing
+    , _ucAppVersionName = Nothing
+    , _ucReviewerLanguage = Nothing
+    , _ucStarRating = Nothing
+    , _ucLastModified = Nothing
+    }
+
+-- | Integer Android SDK version of the user\'s device at the time the review
+-- was written, e.g. 23 is Marshmallow. May be absent.
+ucAndroidOSVersion :: Lens' UserComment (Maybe Int32)
+ucAndroidOSVersion
+  = lens _ucAndroidOSVersion
+      (\ s a -> s{_ucAndroidOSVersion = a})
+      . mapping _Coerce
+
+-- | The content of the comment, i.e. review body. In some cases users have
+-- been able to write a review with separate title and body; in those cases
+-- the title and body are concatenated and separated by a tab character.
+ucText :: Lens' UserComment (Maybe Text)
+ucText = lens _ucText (\ s a -> s{_ucText = a})
+
+-- | Codename for the reviewer\'s device, e.g. klte, flounder. May be absent.
+ucDevice :: Lens' UserComment (Maybe Text)
+ucDevice = lens _ucDevice (\ s a -> s{_ucDevice = a})
+
+-- | Integer version code of the app as installed at the time the review was
+-- written. May be absent.
+ucAppVersionCode :: Lens' UserComment (Maybe Int32)
+ucAppVersionCode
+  = lens _ucAppVersionCode
+      (\ s a -> s{_ucAppVersionCode = a})
+      . mapping _Coerce
+
+-- | String version name of the app as installed at the time the review was
+-- written. May be absent.
+ucAppVersionName :: Lens' UserComment (Maybe Text)
+ucAppVersionName
+  = lens _ucAppVersionName
+      (\ s a -> s{_ucAppVersionName = a})
+
+-- | Language code for the reviewer. This is taken from the device settings
+-- so is not guaranteed to match the language the review is written in. May
+-- be absent.
+ucReviewerLanguage :: Lens' UserComment (Maybe Text)
+ucReviewerLanguage
+  = lens _ucReviewerLanguage
+      (\ s a -> s{_ucReviewerLanguage = a})
+
+-- | The star rating associated with the review, from 1 to 5.
+ucStarRating :: Lens' UserComment (Maybe Int32)
+ucStarRating
+  = lens _ucStarRating (\ s a -> s{_ucStarRating = a})
+      . mapping _Coerce
+
+-- | The last time at which this comment was updated.
+ucLastModified :: Lens' UserComment (Maybe Timestamp)
+ucLastModified
+  = lens _ucLastModified
+      (\ s a -> s{_ucLastModified = a})
+
+instance FromJSON UserComment where
+        parseJSON
+          = withObject "UserComment"
+              (\ o ->
+                 UserComment' <$>
+                   (o .:? "androidOsVersion") <*> (o .:? "text") <*>
+                     (o .:? "device")
+                     <*> (o .:? "appVersionCode")
+                     <*> (o .:? "appVersionName")
+                     <*> (o .:? "reviewerLanguage")
+                     <*> (o .:? "starRating")
+                     <*> (o .:? "lastModified"))
+
+instance ToJSON UserComment where
+        toJSON UserComment'{..}
+          = object
+              (catMaybes
+                 [("androidOsVersion" .=) <$> _ucAndroidOSVersion,
+                  ("text" .=) <$> _ucText, ("device" .=) <$> _ucDevice,
+                  ("appVersionCode" .=) <$> _ucAppVersionCode,
+                  ("appVersionName" .=) <$> _ucAppVersionName,
+                  ("reviewerLanguage" .=) <$> _ucReviewerLanguage,
+                  ("starRating" .=) <$> _ucStarRating,
+                  ("lastModified" .=) <$> _ucLastModified])
+
+--
 -- /See:/ 'testers' smart constructor.
-data Testers = Testers
+data Testers = Testers'
     { _tGooglePlusCommUnities :: !(Maybe [Text])
     , _tGoogleGroups          :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -519,7 +644,7 @@ data Testers = Testers
 testers
     :: Testers
 testers =
-    Testers
+    Testers'
     { _tGooglePlusCommUnities = Nothing
     , _tGoogleGroups = Nothing
     }
@@ -542,12 +667,12 @@ instance FromJSON Testers where
         parseJSON
           = withObject "Testers"
               (\ o ->
-                 Testers <$>
+                 Testers' <$>
                    (o .:? "googlePlusCommunities" .!= mempty) <*>
                      (o .:? "googleGroups" .!= mempty))
 
 instance ToJSON Testers where
-        toJSON Testers{..}
+        toJSON Testers'{..}
           = object
               (catMaybes
                  [("googlePlusCommunities" .=) <$>
@@ -556,7 +681,7 @@ instance ToJSON Testers where
 
 --
 -- /See:/ 'listing' smart constructor.
-data Listing = Listing
+data Listing = Listing'
     { _lFullDescription  :: !(Maybe Text)
     , _lVideo            :: !(Maybe Text)
     , _lShortDescription :: !(Maybe Text)
@@ -580,7 +705,7 @@ data Listing = Listing
 listing
     :: Listing
 listing =
-    Listing
+    Listing'
     { _lFullDescription = Nothing
     , _lVideo = Nothing
     , _lShortDescription = Nothing
@@ -619,14 +744,14 @@ instance FromJSON Listing where
         parseJSON
           = withObject "Listing"
               (\ o ->
-                 Listing <$>
+                 Listing' <$>
                    (o .:? "fullDescription") <*> (o .:? "video") <*>
                      (o .:? "shortDescription")
                      <*> (o .:? "language")
                      <*> (o .:? "title"))
 
 instance ToJSON Listing where
-        toJSON Listing{..}
+        toJSON Listing'{..}
           = object
               (catMaybes
                  [("fullDescription" .=) <$> _lFullDescription,
@@ -637,7 +762,7 @@ instance ToJSON Listing where
 
 --
 -- /See:/ 'aPK' smart constructor.
-data APK = APK
+data APK = APK'
     { _aVersionCode :: !(Maybe (Textual Int32))
     , _aBinary      :: !(Maybe APKBinary)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -652,7 +777,7 @@ data APK = APK
 aPK
     :: APK
 aPK =
-    APK
+    APK'
     { _aVersionCode = Nothing
     , _aBinary = Nothing
     }
@@ -671,10 +796,10 @@ instance FromJSON APK where
         parseJSON
           = withObject "APK"
               (\ o ->
-                 APK <$> (o .:? "versionCode") <*> (o .:? "binary"))
+                 APK' <$> (o .:? "versionCode") <*> (o .:? "binary"))
 
 instance ToJSON APK where
-        toJSON APK{..}
+        toJSON APK'{..}
           = object
               (catMaybes
                  [("versionCode" .=) <$> _aVersionCode,
@@ -682,7 +807,7 @@ instance ToJSON APK where
 
 --
 -- /See:/ 'subscriptionPurchasesDeferRequest' smart constructor.
-newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest
+newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest'
     { _spdrDeferralInfo :: Maybe SubscriptionDeferralInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -694,7 +819,7 @@ newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest
 subscriptionPurchasesDeferRequest
     :: SubscriptionPurchasesDeferRequest
 subscriptionPurchasesDeferRequest =
-    SubscriptionPurchasesDeferRequest
+    SubscriptionPurchasesDeferRequest'
     { _spdrDeferralInfo = Nothing
     }
 
@@ -709,19 +834,19 @@ instance FromJSON SubscriptionPurchasesDeferRequest
         parseJSON
           = withObject "SubscriptionPurchasesDeferRequest"
               (\ o ->
-                 SubscriptionPurchasesDeferRequest <$>
+                 SubscriptionPurchasesDeferRequest' <$>
                    (o .:? "deferralInfo"))
 
 instance ToJSON SubscriptionPurchasesDeferRequest
          where
-        toJSON SubscriptionPurchasesDeferRequest{..}
+        toJSON SubscriptionPurchasesDeferRequest'{..}
           = object
               (catMaybes
                  [("deferralInfo" .=) <$> _spdrDeferralInfo])
 
 --
 -- /See:/ 'tracksListResponse' smart constructor.
-data TracksListResponse = TracksListResponse
+data TracksListResponse = TracksListResponse'
     { _tlrTracks :: !(Maybe [Track])
     , _tlrKind   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -736,7 +861,7 @@ data TracksListResponse = TracksListResponse
 tracksListResponse
     :: TracksListResponse
 tracksListResponse =
-    TracksListResponse
+    TracksListResponse'
     { _tlrTracks = Nothing
     , _tlrKind = "androidpublisher#tracksListResponse"
     }
@@ -756,13 +881,13 @@ instance FromJSON TracksListResponse where
         parseJSON
           = withObject "TracksListResponse"
               (\ o ->
-                 TracksListResponse <$>
+                 TracksListResponse' <$>
                    (o .:? "tracks" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "androidpublisher#tracksListResponse"))
 
 instance ToJSON TracksListResponse where
-        toJSON TracksListResponse{..}
+        toJSON TracksListResponse'{..}
           = object
               (catMaybes
                  [("tracks" .=) <$> _tlrTracks,
@@ -770,9 +895,10 @@ instance ToJSON TracksListResponse where
 
 --
 -- /See:/ 'season' smart constructor.
-data Season = Season
-    { _sStart :: !(Maybe MonthDay)
-    , _sEnd   :: !(Maybe MonthDay)
+data Season = Season'
+    { _sStart      :: !(Maybe MonthDay)
+    , _sEnd        :: !(Maybe MonthDay)
+    , _sProrations :: !(Maybe [Prorate])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Season' with the minimum fields required to make a request.
@@ -782,12 +908,15 @@ data Season = Season
 -- * 'sStart'
 --
 -- * 'sEnd'
+--
+-- * 'sProrations'
 season
     :: Season
 season =
-    Season
+    Season'
     { _sStart = Nothing
     , _sEnd = Nothing
+    , _sProrations = Nothing
     }
 
 -- | Inclusive start date of the recurrence period.
@@ -798,20 +927,34 @@ sStart = lens _sStart (\ s a -> s{_sStart = a})
 sEnd :: Lens' Season (Maybe MonthDay)
 sEnd = lens _sEnd (\ s a -> s{_sEnd = a})
 
+-- | Optionally present list of prorations for the season. Each proration is
+-- a one-off discounted entry into a subscription. Each proration contains
+-- the first date on which the discount is available and the new pricing
+-- information.
+sProrations :: Lens' Season [Prorate]
+sProrations
+  = lens _sProrations (\ s a -> s{_sProrations = a}) .
+      _Default
+      . _Coerce
+
 instance FromJSON Season where
         parseJSON
           = withObject "Season"
-              (\ o -> Season <$> (o .:? "start") <*> (o .:? "end"))
+              (\ o ->
+                 Season' <$>
+                   (o .:? "start") <*> (o .:? "end") <*>
+                     (o .:? "prorations" .!= mempty))
 
 instance ToJSON Season where
-        toJSON Season{..}
+        toJSON Season'{..}
           = object
               (catMaybes
-                 [("start" .=) <$> _sStart, ("end" .=) <$> _sEnd])
+                 [("start" .=) <$> _sStart, ("end" .=) <$> _sEnd,
+                  ("prorations" .=) <$> _sProrations])
 
 --
 -- /See:/ 'pageInfo' smart constructor.
-data PageInfo = PageInfo
+data PageInfo = PageInfo'
     { _piResultPerPage :: !(Maybe (Textual Int32))
     , _piTotalResults  :: !(Maybe (Textual Int32))
     , _piStartIndex    :: !(Maybe (Textual Int32))
@@ -829,7 +972,7 @@ data PageInfo = PageInfo
 pageInfo
     :: PageInfo
 pageInfo =
-    PageInfo
+    PageInfo'
     { _piResultPerPage = Nothing
     , _piTotalResults = Nothing
     , _piStartIndex = Nothing
@@ -856,12 +999,12 @@ instance FromJSON PageInfo where
         parseJSON
           = withObject "PageInfo"
               (\ o ->
-                 PageInfo <$>
+                 PageInfo' <$>
                    (o .:? "resultPerPage") <*> (o .:? "totalResults")
                      <*> (o .:? "startIndex"))
 
 instance ToJSON PageInfo where
-        toJSON PageInfo{..}
+        toJSON PageInfo'{..}
           = object
               (catMaybes
                  [("resultPerPage" .=) <$> _piResultPerPage,
@@ -870,7 +1013,7 @@ instance ToJSON PageInfo where
 
 --
 -- /See:/ 'imagesListResponse' smart constructor.
-newtype ImagesListResponse = ImagesListResponse
+newtype ImagesListResponse = ImagesListResponse'
     { _ilrImages :: Maybe [Image]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -882,7 +1025,7 @@ newtype ImagesListResponse = ImagesListResponse
 imagesListResponse
     :: ImagesListResponse
 imagesListResponse =
-    ImagesListResponse
+    ImagesListResponse'
     { _ilrImages = Nothing
     }
 
@@ -896,17 +1039,17 @@ instance FromJSON ImagesListResponse where
         parseJSON
           = withObject "ImagesListResponse"
               (\ o ->
-                 ImagesListResponse <$> (o .:? "images" .!= mempty))
+                 ImagesListResponse' <$> (o .:? "images" .!= mempty))
 
 instance ToJSON ImagesListResponse where
-        toJSON ImagesListResponse{..}
+        toJSON ImagesListResponse'{..}
           = object (catMaybes [("images" .=) <$> _ilrImages])
 
 -- | Represents an edit of an app. An edit allows clients to make multiple
 -- changes before committing them in one operation.
 --
 -- /See:/ 'appEdit' smart constructor.
-data AppEdit = AppEdit
+data AppEdit = AppEdit'
     { _aeId                :: !(Maybe Text)
     , _aeExpiryTimeSeconds :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -921,7 +1064,7 @@ data AppEdit = AppEdit
 appEdit
     :: AppEdit
 appEdit =
-    AppEdit
+    AppEdit'
     { _aeId = Nothing
     , _aeExpiryTimeSeconds = Nothing
     }
@@ -941,11 +1084,11 @@ instance FromJSON AppEdit where
         parseJSON
           = withObject "AppEdit"
               (\ o ->
-                 AppEdit <$>
+                 AppEdit' <$>
                    (o .:? "id") <*> (o .:? "expiryTimeSeconds"))
 
 instance ToJSON AppEdit where
-        toJSON AppEdit{..}
+        toJSON AppEdit'{..}
           = object
               (catMaybes
                  [("id" .=) <$> _aeId,
@@ -955,7 +1098,7 @@ instance ToJSON AppEdit where
 -- product purchase.
 --
 -- /See:/ 'productPurchase' smart constructor.
-data ProductPurchase = ProductPurchase
+data ProductPurchase = ProductPurchase'
     { _ppPurchaseState      :: !(Maybe (Textual Int32))
     , _ppConsumptionState   :: !(Maybe (Textual Int32))
     , _ppKind               :: !Text
@@ -979,7 +1122,7 @@ data ProductPurchase = ProductPurchase
 productPurchase
     :: ProductPurchase
 productPurchase =
-    ProductPurchase
+    ProductPurchase'
     { _ppPurchaseState = Nothing
     , _ppConsumptionState = Nothing
     , _ppKind = "androidpublisher#productPurchase"
@@ -1027,7 +1170,7 @@ instance FromJSON ProductPurchase where
         parseJSON
           = withObject "ProductPurchase"
               (\ o ->
-                 ProductPurchase <$>
+                 ProductPurchase' <$>
                    (o .:? "purchaseState") <*>
                      (o .:? "consumptionState")
                      <*>
@@ -1036,7 +1179,7 @@ instance FromJSON ProductPurchase where
                      <*> (o .:? "developerPayload"))
 
 instance ToJSON ProductPurchase where
-        toJSON ProductPurchase{..}
+        toJSON ProductPurchase'{..}
           = object
               (catMaybes
                  [("purchaseState" .=) <$> _ppPurchaseState,
@@ -1046,8 +1189,65 @@ instance ToJSON ProductPurchase where
                   ("developerPayload" .=) <$> _ppDeveloperPayload])
 
 --
+-- /See:/ 'reviewsListResponse' smart constructor.
+data ReviewsListResponse = ReviewsListResponse'
+    { _rlrTokenPagination :: !(Maybe TokenPagination)
+    , _rlrPageInfo        :: !(Maybe PageInfo)
+    , _rlrReviews         :: !(Maybe [Review])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReviewsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rlrTokenPagination'
+--
+-- * 'rlrPageInfo'
+--
+-- * 'rlrReviews'
+reviewsListResponse
+    :: ReviewsListResponse
+reviewsListResponse =
+    ReviewsListResponse'
+    { _rlrTokenPagination = Nothing
+    , _rlrPageInfo = Nothing
+    , _rlrReviews = Nothing
+    }
+
+rlrTokenPagination :: Lens' ReviewsListResponse (Maybe TokenPagination)
+rlrTokenPagination
+  = lens _rlrTokenPagination
+      (\ s a -> s{_rlrTokenPagination = a})
+
+rlrPageInfo :: Lens' ReviewsListResponse (Maybe PageInfo)
+rlrPageInfo
+  = lens _rlrPageInfo (\ s a -> s{_rlrPageInfo = a})
+
+rlrReviews :: Lens' ReviewsListResponse [Review]
+rlrReviews
+  = lens _rlrReviews (\ s a -> s{_rlrReviews = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ReviewsListResponse where
+        parseJSON
+          = withObject "ReviewsListResponse"
+              (\ o ->
+                 ReviewsListResponse' <$>
+                   (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
+                     (o .:? "reviews" .!= mempty))
+
+instance ToJSON ReviewsListResponse where
+        toJSON ReviewsListResponse'{..}
+          = object
+              (catMaybes
+                 [("tokenPagination" .=) <$> _rlrTokenPagination,
+                  ("pageInfo" .=) <$> _rlrPageInfo,
+                  ("reviews" .=) <$> _rlrReviews])
+
+--
 -- /See:/ 'subscriptionPurchasesDeferResponse' smart constructor.
-newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse
+newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse'
     { _spdrNewExpiryTimeMillis :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1059,7 +1259,7 @@ newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse
 subscriptionPurchasesDeferResponse
     :: SubscriptionPurchasesDeferResponse
 subscriptionPurchasesDeferResponse =
-    SubscriptionPurchasesDeferResponse
+    SubscriptionPurchasesDeferResponse'
     { _spdrNewExpiryTimeMillis = Nothing
     }
 
@@ -1076,12 +1276,12 @@ instance FromJSON SubscriptionPurchasesDeferResponse
         parseJSON
           = withObject "SubscriptionPurchasesDeferResponse"
               (\ o ->
-                 SubscriptionPurchasesDeferResponse <$>
+                 SubscriptionPurchasesDeferResponse' <$>
                    (o .:? "newExpiryTimeMillis"))
 
 instance ToJSON SubscriptionPurchasesDeferResponse
          where
-        toJSON SubscriptionPurchasesDeferResponse{..}
+        toJSON SubscriptionPurchasesDeferResponse'{..}
           = object
               (catMaybes
                  [("newExpiryTimeMillis" .=) <$>
@@ -1089,7 +1289,7 @@ instance ToJSON SubscriptionPurchasesDeferResponse
 
 --
 -- /See:/ 'aPKListing' smart constructor.
-data APKListing = APKListing
+data APKListing = APKListing'
     { _apklLanguage      :: !(Maybe Text)
     , _apklRecentChanges :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1104,7 +1304,7 @@ data APKListing = APKListing
 aPKListing
     :: APKListing
 aPKListing =
-    APKListing
+    APKListing'
     { _apklLanguage = Nothing
     , _apklRecentChanges = Nothing
     }
@@ -1124,11 +1324,11 @@ instance FromJSON APKListing where
         parseJSON
           = withObject "APKListing"
               (\ o ->
-                 APKListing <$>
+                 APKListing' <$>
                    (o .:? "language") <*> (o .:? "recentChanges"))
 
 instance ToJSON APKListing where
-        toJSON APKListing{..}
+        toJSON APKListing'{..}
           = object
               (catMaybes
                  [("language" .=) <$> _apklLanguage,
@@ -1138,16 +1338,24 @@ instance ToJSON APKListing where
 -- subscription purchase.
 --
 -- /See:/ 'subscriptionPurchase' smart constructor.
-data SubscriptionPurchase = SubscriptionPurchase
-    { _spKind             :: !Text
-    , _spExpiryTimeMillis :: !(Maybe (Textual Int64))
-    , _spAutoRenewing     :: !(Maybe Bool)
-    , _spStartTimeMillis  :: !(Maybe (Textual Int64))
+data SubscriptionPurchase = SubscriptionPurchase'
+    { _spPaymentState      :: !(Maybe (Textual Int32))
+    , _spKind              :: !Text
+    , _spExpiryTimeMillis  :: !(Maybe (Textual Int64))
+    , _spAutoRenewing      :: !(Maybe Bool)
+    , _spPriceCurrencyCode :: !(Maybe Text)
+    , _spCancelReason      :: !(Maybe (Textual Int32))
+    , _spCountryCode       :: !(Maybe Text)
+    , _spDeveloperPayload  :: !(Maybe Text)
+    , _spPriceAmountMicros :: !(Maybe (Textual Int64))
+    , _spStartTimeMillis   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPurchase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spPaymentState'
 --
 -- * 'spKind'
 --
@@ -1155,16 +1363,40 @@ data SubscriptionPurchase = SubscriptionPurchase
 --
 -- * 'spAutoRenewing'
 --
+-- * 'spPriceCurrencyCode'
+--
+-- * 'spCancelReason'
+--
+-- * 'spCountryCode'
+--
+-- * 'spDeveloperPayload'
+--
+-- * 'spPriceAmountMicros'
+--
 -- * 'spStartTimeMillis'
 subscriptionPurchase
     :: SubscriptionPurchase
 subscriptionPurchase =
-    SubscriptionPurchase
-    { _spKind = "androidpublisher#subscriptionPurchase"
+    SubscriptionPurchase'
+    { _spPaymentState = Nothing
+    , _spKind = "androidpublisher#subscriptionPurchase"
     , _spExpiryTimeMillis = Nothing
     , _spAutoRenewing = Nothing
+    , _spPriceCurrencyCode = Nothing
+    , _spCancelReason = Nothing
+    , _spCountryCode = Nothing
+    , _spDeveloperPayload = Nothing
+    , _spPriceAmountMicros = Nothing
     , _spStartTimeMillis = Nothing
     }
+
+-- | The payment state of the subscription. Possible values are: - Payment
+-- pending - Payment received
+spPaymentState :: Lens' SubscriptionPurchase (Maybe Int32)
+spPaymentState
+  = lens _spPaymentState
+      (\ s a -> s{_spPaymentState = a})
+      . mapping _Coerce
 
 -- | This kind represents a subscriptionPurchase object in the
 -- androidpublisher service.
@@ -1185,6 +1417,48 @@ spAutoRenewing
   = lens _spAutoRenewing
       (\ s a -> s{_spAutoRenewing = a})
 
+-- | ISO 4217 currency code for the subscription price. For example, if the
+-- price is specified in British pounds sterling, price_currency_code is
+-- \"GBP\".
+spPriceCurrencyCode :: Lens' SubscriptionPurchase (Maybe Text)
+spPriceCurrencyCode
+  = lens _spPriceCurrencyCode
+      (\ s a -> s{_spPriceCurrencyCode = a})
+
+-- | The cancel reason of the subscription, if the subscription is not auto
+-- renewing. Possible values are: - User cancelled the subscription -
+-- Subscription was cancelled by the system, for example because of a
+-- billing problem
+spCancelReason :: Lens' SubscriptionPurchase (Maybe Int32)
+spCancelReason
+  = lens _spCancelReason
+      (\ s a -> s{_spCancelReason = a})
+      . mapping _Coerce
+
+-- | ISO 3166-1 alpha-2 billing country\/region code of the user at the time
+-- the subscription was granted.
+spCountryCode :: Lens' SubscriptionPurchase (Maybe Text)
+spCountryCode
+  = lens _spCountryCode
+      (\ s a -> s{_spCountryCode = a})
+
+-- | A developer-specified string that contains supplemental information
+-- about an order.
+spDeveloperPayload :: Lens' SubscriptionPurchase (Maybe Text)
+spDeveloperPayload
+  = lens _spDeveloperPayload
+      (\ s a -> s{_spDeveloperPayload = a})
+
+-- | Price of the subscription, not including tax. Price is expressed in
+-- micro-units, where 1,000,000 micro-units equal one unit of the currency.
+-- For example, if the subscription price is €1.99, price_amount_micros is
+-- 1990000.
+spPriceAmountMicros :: Lens' SubscriptionPurchase (Maybe Int64)
+spPriceAmountMicros
+  = lens _spPriceAmountMicros
+      (\ s a -> s{_spPriceAmountMicros = a})
+      . mapping _Coerce
+
 -- | Time at which the subscription was granted, in milliseconds since Epoch.
 spStartTimeMillis :: Lens' SubscriptionPurchase (Maybe Int64)
 spStartTimeMillis
@@ -1196,25 +1470,37 @@ instance FromJSON SubscriptionPurchase where
         parseJSON
           = withObject "SubscriptionPurchase"
               (\ o ->
-                 SubscriptionPurchase <$>
-                   (o .:? "kind" .!=
-                      "androidpublisher#subscriptionPurchase")
+                 SubscriptionPurchase' <$>
+                   (o .:? "paymentState") <*>
+                     (o .:? "kind" .!=
+                        "androidpublisher#subscriptionPurchase")
                      <*> (o .:? "expiryTimeMillis")
                      <*> (o .:? "autoRenewing")
+                     <*> (o .:? "priceCurrencyCode")
+                     <*> (o .:? "cancelReason")
+                     <*> (o .:? "countryCode")
+                     <*> (o .:? "developerPayload")
+                     <*> (o .:? "priceAmountMicros")
                      <*> (o .:? "startTimeMillis"))
 
 instance ToJSON SubscriptionPurchase where
-        toJSON SubscriptionPurchase{..}
+        toJSON SubscriptionPurchase'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _spKind),
+                 [("paymentState" .=) <$> _spPaymentState,
+                  Just ("kind" .= _spKind),
                   ("expiryTimeMillis" .=) <$> _spExpiryTimeMillis,
                   ("autoRenewing" .=) <$> _spAutoRenewing,
+                  ("priceCurrencyCode" .=) <$> _spPriceCurrencyCode,
+                  ("cancelReason" .=) <$> _spCancelReason,
+                  ("countryCode" .=) <$> _spCountryCode,
+                  ("developerPayload" .=) <$> _spDeveloperPayload,
+                  ("priceAmountMicros" .=) <$> _spPriceAmountMicros,
                   ("startTimeMillis" .=) <$> _spStartTimeMillis])
 
 --
 -- /See:/ 'appDetails' smart constructor.
-data AppDetails = AppDetails
+data AppDetails = AppDetails'
     { _adContactPhone    :: !(Maybe Text)
     , _adContactEmail    :: !(Maybe Text)
     , _adContactWebsite  :: !(Maybe Text)
@@ -1235,7 +1521,7 @@ data AppDetails = AppDetails
 appDetails
     :: AppDetails
 appDetails =
-    AppDetails
+    AppDetails'
     { _adContactPhone = Nothing
     , _adContactEmail = Nothing
     , _adContactWebsite = Nothing
@@ -1270,13 +1556,13 @@ instance FromJSON AppDetails where
         parseJSON
           = withObject "AppDetails"
               (\ o ->
-                 AppDetails <$>
+                 AppDetails' <$>
                    (o .:? "contactPhone") <*> (o .:? "contactEmail") <*>
                      (o .:? "contactWebsite")
                      <*> (o .:? "defaultLanguage"))
 
 instance ToJSON AppDetails where
-        toJSON AppDetails{..}
+        toJSON AppDetails'{..}
           = object
               (catMaybes
                  [("contactPhone" .=) <$> _adContactPhone,
@@ -1288,7 +1574,7 @@ instance ToJSON AppDetails where
 -- products can never be free.
 --
 -- /See:/ 'inAppProductPrices' smart constructor.
-newtype InAppProductPrices = InAppProductPrices
+newtype InAppProductPrices = InAppProductPrices'
     { _iAppAddtional :: HashMap Text Price
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1301,7 +1587,7 @@ inAppProductPrices
     :: HashMap Text Price -- ^ 'iAppAddtional'
     -> InAppProductPrices
 inAppProductPrices pIAppAddtional_ =
-    InAppProductPrices
+    InAppProductPrices'
     { _iAppAddtional = _Coerce # pIAppAddtional_
     }
 
@@ -1315,14 +1601,14 @@ iAppAddtional
 instance FromJSON InAppProductPrices where
         parseJSON
           = withObject "InAppProductPrices"
-              (\ o -> InAppProductPrices <$> (parseJSONObject o))
+              (\ o -> InAppProductPrices' <$> (parseJSONObject o))
 
 instance ToJSON InAppProductPrices where
         toJSON = toJSON . _iAppAddtional
 
 --
 -- /See:/ 'inAppProductsBatchRequest' smart constructor.
-newtype InAppProductsBatchRequest = InAppProductsBatchRequest
+newtype InAppProductsBatchRequest = InAppProductsBatchRequest'
     { _iapbrEntrys :: Maybe [InAppProductsBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1334,7 +1620,7 @@ newtype InAppProductsBatchRequest = InAppProductsBatchRequest
 inAppProductsBatchRequest
     :: InAppProductsBatchRequest
 inAppProductsBatchRequest =
-    InAppProductsBatchRequest
+    InAppProductsBatchRequest'
     { _iapbrEntrys = Nothing
     }
 
@@ -1348,11 +1634,11 @@ instance FromJSON InAppProductsBatchRequest where
         parseJSON
           = withObject "InAppProductsBatchRequest"
               (\ o ->
-                 InAppProductsBatchRequest <$>
+                 InAppProductsBatchRequest' <$>
                    (o .:? "entrys" .!= mempty))
 
 instance ToJSON InAppProductsBatchRequest where
-        toJSON InAppProductsBatchRequest{..}
+        toJSON InAppProductsBatchRequest'{..}
           = object (catMaybes [("entrys" .=) <$> _iapbrEntrys])
 
 -- | Defines an APK available for this application that is hosted externally
@@ -1361,7 +1647,7 @@ instance ToJSON InAppProductsBatchRequest where
 -- restricted to the enterprise private channel
 --
 -- /See:/ 'externallyHostedAPK' smart constructor.
-data ExternallyHostedAPK = ExternallyHostedAPK
+data ExternallyHostedAPK = ExternallyHostedAPK'
     { _ehapkApplicationLabel    :: !(Maybe Text)
     , _ehapkMaximumSdk          :: !(Maybe (Textual Int32))
     , _ehapkNATiveCodes         :: !(Maybe [Text])
@@ -1415,7 +1701,7 @@ data ExternallyHostedAPK = ExternallyHostedAPK
 externallyHostedAPK
     :: ExternallyHostedAPK
 externallyHostedAPK =
-    ExternallyHostedAPK
+    ExternallyHostedAPK'
     { _ehapkApplicationLabel = Nothing
     , _ehapkMaximumSdk = Nothing
     , _ehapkNATiveCodes = Nothing
@@ -1542,7 +1828,7 @@ instance FromJSON ExternallyHostedAPK where
         parseJSON
           = withObject "ExternallyHostedAPK"
               (\ o ->
-                 ExternallyHostedAPK <$>
+                 ExternallyHostedAPK' <$>
                    (o .:? "applicationLabel") <*> (o .:? "maximumSdk")
                      <*> (o .:? "nativeCodes" .!= mempty)
                      <*> (o .:? "versionCode")
@@ -1559,7 +1845,7 @@ instance FromJSON ExternallyHostedAPK where
                      <*> (o .:? "certificateBase64s" .!= mempty))
 
 instance ToJSON ExternallyHostedAPK where
-        toJSON ExternallyHostedAPK{..}
+        toJSON ExternallyHostedAPK'{..}
           = object
               (catMaybes
                  [("applicationLabel" .=) <$> _ehapkApplicationLabel,
@@ -1582,7 +1868,7 @@ instance ToJSON ExternallyHostedAPK where
 
 --
 -- /See:/ 'expansionFilesUploadResponse' smart constructor.
-newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse
+newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse'
     { _efurExpansionFile :: Maybe ExpansionFile
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1594,7 +1880,7 @@ newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse
 expansionFilesUploadResponse
     :: ExpansionFilesUploadResponse
 expansionFilesUploadResponse =
-    ExpansionFilesUploadResponse
+    ExpansionFilesUploadResponse'
     { _efurExpansionFile = Nothing
     }
 
@@ -1607,18 +1893,18 @@ instance FromJSON ExpansionFilesUploadResponse where
         parseJSON
           = withObject "ExpansionFilesUploadResponse"
               (\ o ->
-                 ExpansionFilesUploadResponse <$>
+                 ExpansionFilesUploadResponse' <$>
                    (o .:? "expansionFile"))
 
 instance ToJSON ExpansionFilesUploadResponse where
-        toJSON ExpansionFilesUploadResponse{..}
+        toJSON ExpansionFilesUploadResponse'{..}
           = object
               (catMaybes
                  [("expansionFile" .=) <$> _efurExpansionFile])
 
 --
 -- /See:/ 'imagesUploadResponse' smart constructor.
-newtype ImagesUploadResponse = ImagesUploadResponse
+newtype ImagesUploadResponse = ImagesUploadResponse'
     { _iurImage :: Maybe Image
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1630,7 +1916,7 @@ newtype ImagesUploadResponse = ImagesUploadResponse
 imagesUploadResponse
     :: ImagesUploadResponse
 imagesUploadResponse =
-    ImagesUploadResponse
+    ImagesUploadResponse'
     { _iurImage = Nothing
     }
 
@@ -1640,15 +1926,64 @@ iurImage = lens _iurImage (\ s a -> s{_iurImage = a})
 instance FromJSON ImagesUploadResponse where
         parseJSON
           = withObject "ImagesUploadResponse"
-              (\ o -> ImagesUploadResponse <$> (o .:? "image"))
+              (\ o -> ImagesUploadResponse' <$> (o .:? "image"))
 
 instance ToJSON ImagesUploadResponse where
-        toJSON ImagesUploadResponse{..}
+        toJSON ImagesUploadResponse'{..}
           = object (catMaybes [("image" .=) <$> _iurImage])
 
 --
+-- /See:/ 'prorate' smart constructor.
+data Prorate = Prorate'
+    { _pStart        :: !(Maybe MonthDay)
+    , _pDefaultPrice :: !(Maybe Price)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Prorate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pStart'
+--
+-- * 'pDefaultPrice'
+prorate
+    :: Prorate
+prorate =
+    Prorate'
+    { _pStart = Nothing
+    , _pDefaultPrice = Nothing
+    }
+
+-- | Defines the first day on which the price takes effect.
+pStart :: Lens' Prorate (Maybe MonthDay)
+pStart = lens _pStart (\ s a -> s{_pStart = a})
+
+-- | Default price cannot be zero and must be less than the full subscription
+-- price. Default price is always in the developer\'s Checkout merchant
+-- currency. Targeted countries have their prices set automatically based
+-- on the default_price.
+pDefaultPrice :: Lens' Prorate (Maybe Price)
+pDefaultPrice
+  = lens _pDefaultPrice
+      (\ s a -> s{_pDefaultPrice = a})
+
+instance FromJSON Prorate where
+        parseJSON
+          = withObject "Prorate"
+              (\ o ->
+                 Prorate' <$>
+                   (o .:? "start") <*> (o .:? "defaultPrice"))
+
+instance ToJSON Prorate where
+        toJSON Prorate'{..}
+          = object
+              (catMaybes
+                 [("start" .=) <$> _pStart,
+                  ("defaultPrice" .=) <$> _pDefaultPrice])
+
+--
 -- /See:/ 'inAppProductsListResponse' smart constructor.
-data InAppProductsListResponse = InAppProductsListResponse
+data InAppProductsListResponse = InAppProductsListResponse'
     { _iaplrTokenPagination :: !(Maybe TokenPagination)
     , _iaplrPageInfo        :: !(Maybe PageInfo)
     , _iaplrKind            :: !Text
@@ -1669,7 +2004,7 @@ data InAppProductsListResponse = InAppProductsListResponse
 inAppProductsListResponse
     :: InAppProductsListResponse
 inAppProductsListResponse =
-    InAppProductsListResponse
+    InAppProductsListResponse'
     { _iaplrTokenPagination = Nothing
     , _iaplrPageInfo = Nothing
     , _iaplrKind = "androidpublisher#inappproductsListResponse"
@@ -1703,14 +2038,14 @@ instance FromJSON InAppProductsListResponse where
         parseJSON
           = withObject "InAppProductsListResponse"
               (\ o ->
-                 InAppProductsListResponse <$>
+                 InAppProductsListResponse' <$>
                    (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
                      (o .:? "kind" .!=
                         "androidpublisher#inappproductsListResponse")
                      <*> (o .:? "inappproduct" .!= mempty))
 
 instance ToJSON InAppProductsListResponse where
-        toJSON InAppProductsListResponse{..}
+        toJSON InAppProductsListResponse'{..}
           = object
               (catMaybes
                  [("tokenPagination" .=) <$> _iaplrTokenPagination,
@@ -1720,7 +2055,7 @@ instance ToJSON InAppProductsListResponse where
 
 --
 -- /See:/ 'aPKListingsListResponse' smart constructor.
-data APKListingsListResponse = APKListingsListResponse
+data APKListingsListResponse = APKListingsListResponse'
     { _apkllrKind     :: !Text
     , _apkllrListings :: !(Maybe [APKListing])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1735,7 +2070,7 @@ data APKListingsListResponse = APKListingsListResponse
 aPKListingsListResponse
     :: APKListingsListResponse
 aPKListingsListResponse =
-    APKListingsListResponse
+    APKListingsListResponse'
     { _apkllrKind = "androidpublisher#apkListingsListResponse"
     , _apkllrListings = Nothing
     }
@@ -1757,21 +2092,80 @@ instance FromJSON APKListingsListResponse where
         parseJSON
           = withObject "APKListingsListResponse"
               (\ o ->
-                 APKListingsListResponse <$>
+                 APKListingsListResponse' <$>
                    (o .:? "kind" .!=
                       "androidpublisher#apkListingsListResponse")
                      <*> (o .:? "listings" .!= mempty))
 
 instance ToJSON APKListingsListResponse where
-        toJSON APKListingsListResponse{..}
+        toJSON APKListingsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _apkllrKind),
                   ("listings" .=) <$> _apkllrListings])
 
 --
+-- /See:/ 'review' smart constructor.
+data Review = Review'
+    { _rReviewId   :: !(Maybe Text)
+    , _rAuthorName :: !(Maybe Text)
+    , _rComments   :: !(Maybe [Comment])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Review' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rReviewId'
+--
+-- * 'rAuthorName'
+--
+-- * 'rComments'
+review
+    :: Review
+review =
+    Review'
+    { _rReviewId = Nothing
+    , _rAuthorName = Nothing
+    , _rComments = Nothing
+    }
+
+-- | Unique identifier for this review.
+rReviewId :: Lens' Review (Maybe Text)
+rReviewId
+  = lens _rReviewId (\ s a -> s{_rReviewId = a})
+
+-- | The name of the user who wrote the review.
+rAuthorName :: Lens' Review (Maybe Text)
+rAuthorName
+  = lens _rAuthorName (\ s a -> s{_rAuthorName = a})
+
+-- | A repeated field containing comments for the review.
+rComments :: Lens' Review [Comment]
+rComments
+  = lens _rComments (\ s a -> s{_rComments = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Review where
+        parseJSON
+          = withObject "Review"
+              (\ o ->
+                 Review' <$>
+                   (o .:? "reviewId") <*> (o .:? "authorName") <*>
+                     (o .:? "comments" .!= mempty))
+
+instance ToJSON Review where
+        toJSON Review'{..}
+          = object
+              (catMaybes
+                 [("reviewId" .=) <$> _rReviewId,
+                  ("authorName" .=) <$> _rAuthorName,
+                  ("comments" .=) <$> _rComments])
+
+--
 -- /See:/ 'inAppProductsInsertResponse' smart constructor.
-newtype InAppProductsInsertResponse = InAppProductsInsertResponse
+newtype InAppProductsInsertResponse = InAppProductsInsertResponse'
     { _iapirInAppProduct :: Maybe InAppProduct
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1783,7 +2177,7 @@ newtype InAppProductsInsertResponse = InAppProductsInsertResponse
 inAppProductsInsertResponse
     :: InAppProductsInsertResponse
 inAppProductsInsertResponse =
-    InAppProductsInsertResponse
+    InAppProductsInsertResponse'
     { _iapirInAppProduct = Nothing
     }
 
@@ -1796,18 +2190,18 @@ instance FromJSON InAppProductsInsertResponse where
         parseJSON
           = withObject "InAppProductsInsertResponse"
               (\ o ->
-                 InAppProductsInsertResponse <$>
+                 InAppProductsInsertResponse' <$>
                    (o .:? "inappproduct"))
 
 instance ToJSON InAppProductsInsertResponse where
-        toJSON InAppProductsInsertResponse{..}
+        toJSON InAppProductsInsertResponse'{..}
           = object
               (catMaybes
                  [("inappproduct" .=) <$> _iapirInAppProduct])
 
 --
 -- /See:/ 'aPKsAddExternallyHostedResponse' smart constructor.
-newtype APKsAddExternallyHostedResponse = APKsAddExternallyHostedResponse
+newtype APKsAddExternallyHostedResponse = APKsAddExternallyHostedResponse'
     { _apkaehrExternallyHostedAPK :: Maybe ExternallyHostedAPK
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1819,7 +2213,7 @@ newtype APKsAddExternallyHostedResponse = APKsAddExternallyHostedResponse
 aPKsAddExternallyHostedResponse
     :: APKsAddExternallyHostedResponse
 aPKsAddExternallyHostedResponse =
-    APKsAddExternallyHostedResponse
+    APKsAddExternallyHostedResponse'
     { _apkaehrExternallyHostedAPK = Nothing
     }
 
@@ -1834,11 +2228,11 @@ instance FromJSON APKsAddExternallyHostedResponse
         parseJSON
           = withObject "APKsAddExternallyHostedResponse"
               (\ o ->
-                 APKsAddExternallyHostedResponse <$>
+                 APKsAddExternallyHostedResponse' <$>
                    (o .:? "externallyHostedApk"))
 
 instance ToJSON APKsAddExternallyHostedResponse where
-        toJSON APKsAddExternallyHostedResponse{..}
+        toJSON APKsAddExternallyHostedResponse'{..}
           = object
               (catMaybes
                  [("externallyHostedApk" .=) <$>
@@ -1848,7 +2242,7 @@ instance ToJSON APKsAddExternallyHostedResponse where
 -- subscription purchase to a future expiry time.
 --
 -- /See:/ 'subscriptionDeferralInfo' smart constructor.
-data SubscriptionDeferralInfo = SubscriptionDeferralInfo
+data SubscriptionDeferralInfo = SubscriptionDeferralInfo'
     { _sdiDesiredExpiryTimeMillis  :: !(Maybe (Textual Int64))
     , _sdiExpectedExpiryTimeMillis :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1863,7 +2257,7 @@ data SubscriptionDeferralInfo = SubscriptionDeferralInfo
 subscriptionDeferralInfo
     :: SubscriptionDeferralInfo
 subscriptionDeferralInfo =
-    SubscriptionDeferralInfo
+    SubscriptionDeferralInfo'
     { _sdiDesiredExpiryTimeMillis = Nothing
     , _sdiExpectedExpiryTimeMillis = Nothing
     }
@@ -1890,12 +2284,12 @@ instance FromJSON SubscriptionDeferralInfo where
         parseJSON
           = withObject "SubscriptionDeferralInfo"
               (\ o ->
-                 SubscriptionDeferralInfo <$>
+                 SubscriptionDeferralInfo' <$>
                    (o .:? "desiredExpiryTimeMillis") <*>
                      (o .:? "expectedExpiryTimeMillis"))
 
 instance ToJSON SubscriptionDeferralInfo where
-        toJSON SubscriptionDeferralInfo{..}
+        toJSON SubscriptionDeferralInfo'{..}
           = object
               (catMaybes
                  [("desiredExpiryTimeMillis" .=) <$>
@@ -1904,8 +2298,88 @@ instance ToJSON SubscriptionDeferralInfo where
                     _sdiExpectedExpiryTimeMillis])
 
 --
+-- /See:/ 'reviewsReplyRequest' smart constructor.
+newtype ReviewsReplyRequest = ReviewsReplyRequest'
+    { _rrrReplyText :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReviewsReplyRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrrReplyText'
+reviewsReplyRequest
+    :: ReviewsReplyRequest
+reviewsReplyRequest =
+    ReviewsReplyRequest'
+    { _rrrReplyText = Nothing
+    }
+
+-- | The text to set as the reply. Replies of more than approximately 350
+-- characters will be rejected. HTML tags will be stripped.
+rrrReplyText :: Lens' ReviewsReplyRequest (Maybe Text)
+rrrReplyText
+  = lens _rrrReplyText (\ s a -> s{_rrrReplyText = a})
+
+instance FromJSON ReviewsReplyRequest where
+        parseJSON
+          = withObject "ReviewsReplyRequest"
+              (\ o -> ReviewsReplyRequest' <$> (o .:? "replyText"))
+
+instance ToJSON ReviewsReplyRequest where
+        toJSON ReviewsReplyRequest'{..}
+          = object
+              (catMaybes [("replyText" .=) <$> _rrrReplyText])
+
+--
+-- /See:/ 'developerComment' smart constructor.
+data DeveloperComment = DeveloperComment'
+    { _dcText         :: !(Maybe Text)
+    , _dcLastModified :: !(Maybe Timestamp)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeveloperComment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dcText'
+--
+-- * 'dcLastModified'
+developerComment
+    :: DeveloperComment
+developerComment =
+    DeveloperComment'
+    { _dcText = Nothing
+    , _dcLastModified = Nothing
+    }
+
+-- | The content of the comment, i.e. reply body.
+dcText :: Lens' DeveloperComment (Maybe Text)
+dcText = lens _dcText (\ s a -> s{_dcText = a})
+
+-- | The last time at which this comment was updated.
+dcLastModified :: Lens' DeveloperComment (Maybe Timestamp)
+dcLastModified
+  = lens _dcLastModified
+      (\ s a -> s{_dcLastModified = a})
+
+instance FromJSON DeveloperComment where
+        parseJSON
+          = withObject "DeveloperComment"
+              (\ o ->
+                 DeveloperComment' <$>
+                   (o .:? "text") <*> (o .:? "lastModified"))
+
+instance ToJSON DeveloperComment where
+        toJSON DeveloperComment'{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _dcText,
+                  ("lastModified" .=) <$> _dcLastModified])
+
+--
 -- /See:/ 'inAppProduct' smart constructor.
-data InAppProduct = InAppProduct
+data InAppProduct = InAppProduct'
     { _iapStatus             :: !(Maybe Text)
     , _iapTrialPeriod        :: !(Maybe Text)
     , _iapPackageName        :: !(Maybe Text)
@@ -1947,7 +2421,7 @@ data InAppProduct = InAppProduct
 inAppProduct
     :: InAppProduct
 inAppProduct =
-    InAppProduct
+    InAppProduct'
     { _iapStatus = Nothing
     , _iapTrialPeriod = Nothing
     , _iapPackageName = Nothing
@@ -1992,7 +2466,8 @@ iapPurchaseType
       (\ s a -> s{_iapPurchaseType = a})
 
 -- | Subscription period, specified in ISO 8601 format. Acceptable values are
--- \"P1W\" (one week), \"P1M\" (one month) and \"P1Y\" (one year).
+-- \"P1W\" (one week), \"P1M\" (one month), \"P3M\" (three months), \"P6M\"
+-- (six months), and \"P1Y\" (one year).
 iapSubscriptionPeriod :: Lens' InAppProduct (Maybe Text)
 iapSubscriptionPeriod
   = lens _iapSubscriptionPeriod
@@ -2031,7 +2506,7 @@ instance FromJSON InAppProduct where
         parseJSON
           = withObject "InAppProduct"
               (\ o ->
-                 InAppProduct <$>
+                 InAppProduct' <$>
                    (o .:? "status") <*> (o .:? "trialPeriod") <*>
                      (o .:? "packageName")
                      <*> (o .:? "season")
@@ -2044,7 +2519,7 @@ instance FromJSON InAppProduct where
                      <*> (o .:? "defaultLanguage"))
 
 instance ToJSON InAppProduct where
-        toJSON InAppProduct{..}
+        toJSON InAppProduct'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _iapStatus,
@@ -2060,7 +2535,7 @@ instance ToJSON InAppProduct where
 
 --
 -- /See:/ 'inAppProductsBatchResponseEntry' smart constructor.
-data InAppProductsBatchResponseEntry = InAppProductsBatchResponseEntry
+data InAppProductsBatchResponseEntry = InAppProductsBatchResponseEntry'
     { _iInAppProductsupdateresponse :: !(Maybe InAppProductsUpdateResponse)
     , _iInAppProductsinsertresponse :: !(Maybe InAppProductsInsertResponse)
     , _iBatchId                     :: !(Maybe (Textual Word32))
@@ -2078,7 +2553,7 @@ data InAppProductsBatchResponseEntry = InAppProductsBatchResponseEntry
 inAppProductsBatchResponseEntry
     :: InAppProductsBatchResponseEntry
 inAppProductsBatchResponseEntry =
-    InAppProductsBatchResponseEntry
+    InAppProductsBatchResponseEntry'
     { _iInAppProductsupdateresponse = Nothing
     , _iInAppProductsinsertresponse = Nothing
     , _iBatchId = Nothing
@@ -2104,13 +2579,13 @@ instance FromJSON InAppProductsBatchResponseEntry
         parseJSON
           = withObject "InAppProductsBatchResponseEntry"
               (\ o ->
-                 InAppProductsBatchResponseEntry <$>
+                 InAppProductsBatchResponseEntry' <$>
                    (o .:? "inappproductsupdateresponse") <*>
                      (o .:? "inappproductsinsertresponse")
                      <*> (o .:? "batchId"))
 
 instance ToJSON InAppProductsBatchResponseEntry where
-        toJSON InAppProductsBatchResponseEntry{..}
+        toJSON InAppProductsBatchResponseEntry'{..}
           = object
               (catMaybes
                  [("inappproductsupdateresponse" .=) <$>
@@ -2121,7 +2596,7 @@ instance ToJSON InAppProductsBatchResponseEntry where
 
 --
 -- /See:/ 'price' smart constructor.
-data Price = Price
+data Price = Price'
     { _pPriceMicros :: !(Maybe Text)
     , _pCurrency    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2136,7 +2611,7 @@ data Price = Price
 price
     :: Price
 price =
-    Price
+    Price'
     { _pPriceMicros = Nothing
     , _pCurrency = Nothing
     }
@@ -2156,11 +2631,11 @@ instance FromJSON Price where
         parseJSON
           = withObject "Price"
               (\ o ->
-                 Price <$>
+                 Price' <$>
                    (o .:? "priceMicros") <*> (o .:? "currency"))
 
 instance ToJSON Price where
-        toJSON Price{..}
+        toJSON Price'{..}
           = object
               (catMaybes
                  [("priceMicros" .=) <$> _pPriceMicros,
@@ -2169,7 +2644,7 @@ instance ToJSON Price where
 -- | Represents the binary payload of an APK.
 --
 -- /See:/ 'aPKBinary' smart constructor.
-newtype APKBinary = APKBinary
+newtype APKBinary = APKBinary'
     { _apkbSha1 :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2181,7 +2656,7 @@ newtype APKBinary = APKBinary
 aPKBinary
     :: APKBinary
 aPKBinary =
-    APKBinary
+    APKBinary'
     { _apkbSha1 = Nothing
     }
 
@@ -2193,15 +2668,15 @@ apkbSha1 = lens _apkbSha1 (\ s a -> s{_apkbSha1 = a})
 instance FromJSON APKBinary where
         parseJSON
           = withObject "APKBinary"
-              (\ o -> APKBinary <$> (o .:? "sha1"))
+              (\ o -> APKBinary' <$> (o .:? "sha1"))
 
 instance ToJSON APKBinary where
-        toJSON APKBinary{..}
+        toJSON APKBinary'{..}
           = object (catMaybes [("sha1" .=) <$> _apkbSha1])
 
 --
 -- /See:/ 'aPKsListResponse' smart constructor.
-data APKsListResponse = APKsListResponse
+data APKsListResponse = APKsListResponse'
     { _apklrKind :: !Text
     , _apklrAPKs :: !(Maybe [APK])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2216,7 +2691,7 @@ data APKsListResponse = APKsListResponse
 aPKsListResponse
     :: APKsListResponse
 aPKsListResponse =
-    APKsListResponse
+    APKsListResponse'
     { _apklrKind = "androidpublisher#apksListResponse"
     , _apklrAPKs = Nothing
     }
@@ -2237,22 +2712,53 @@ instance FromJSON APKsListResponse where
         parseJSON
           = withObject "APKsListResponse"
               (\ o ->
-                 APKsListResponse <$>
+                 APKsListResponse' <$>
                    (o .:? "kind" .!=
                       "androidpublisher#apksListResponse")
                      <*> (o .:? "apks" .!= mempty))
 
 instance ToJSON APKsListResponse where
-        toJSON APKsListResponse{..}
+        toJSON APKsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _apklrKind),
                   ("apks" .=) <$> _apklrAPKs])
 
+--
+-- /See:/ 'reviewsReplyResponse' smart constructor.
+newtype ReviewsReplyResponse = ReviewsReplyResponse'
+    { _rrrResult :: Maybe ReviewReplyResult
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReviewsReplyResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrrResult'
+reviewsReplyResponse
+    :: ReviewsReplyResponse
+reviewsReplyResponse =
+    ReviewsReplyResponse'
+    { _rrrResult = Nothing
+    }
+
+rrrResult :: Lens' ReviewsReplyResponse (Maybe ReviewReplyResult)
+rrrResult
+  = lens _rrrResult (\ s a -> s{_rrrResult = a})
+
+instance FromJSON ReviewsReplyResponse where
+        parseJSON
+          = withObject "ReviewsReplyResponse"
+              (\ o -> ReviewsReplyResponse' <$> (o .:? "result"))
+
+instance ToJSON ReviewsReplyResponse where
+        toJSON ReviewsReplyResponse'{..}
+          = object (catMaybes [("result" .=) <$> _rrrResult])
+
 -- | A permission used by this APK.
 --
 -- /See:/ 'externallyHostedAPKUsesPermission' smart constructor.
-data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission
+data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission'
     { _ehapkupName          :: !(Maybe Text)
     , _ehapkupMaxSdkVersion :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2267,7 +2773,7 @@ data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission
 externallyHostedAPKUsesPermission
     :: ExternallyHostedAPKUsesPermission
 externallyHostedAPKUsesPermission =
-    ExternallyHostedAPKUsesPermission
+    ExternallyHostedAPKUsesPermission'
     { _ehapkupName = Nothing
     , _ehapkupMaxSdkVersion = Nothing
     }
@@ -2290,12 +2796,12 @@ instance FromJSON ExternallyHostedAPKUsesPermission
         parseJSON
           = withObject "ExternallyHostedAPKUsesPermission"
               (\ o ->
-                 ExternallyHostedAPKUsesPermission <$>
+                 ExternallyHostedAPKUsesPermission' <$>
                    (o .:? "name") <*> (o .:? "maxSdkVersion"))
 
 instance ToJSON ExternallyHostedAPKUsesPermission
          where
-        toJSON ExternallyHostedAPKUsesPermission{..}
+        toJSON ExternallyHostedAPKUsesPermission'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _ehapkupName,
@@ -2303,7 +2809,7 @@ instance ToJSON ExternallyHostedAPKUsesPermission
 
 --
 -- /See:/ 'listingsListResponse' smart constructor.
-data ListingsListResponse = ListingsListResponse
+data ListingsListResponse = ListingsListResponse'
     { _llrKind     :: !Text
     , _llrListings :: !(Maybe [Listing])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2318,7 +2824,7 @@ data ListingsListResponse = ListingsListResponse
 listingsListResponse
     :: ListingsListResponse
 listingsListResponse =
-    ListingsListResponse
+    ListingsListResponse'
     { _llrKind = "androidpublisher#listingsListResponse"
     , _llrListings = Nothing
     }
@@ -2338,13 +2844,13 @@ instance FromJSON ListingsListResponse where
         parseJSON
           = withObject "ListingsListResponse"
               (\ o ->
-                 ListingsListResponse <$>
+                 ListingsListResponse' <$>
                    (o .:? "kind" .!=
                       "androidpublisher#listingsListResponse")
                      <*> (o .:? "listings" .!= mempty))
 
 instance ToJSON ListingsListResponse where
-        toJSON ListingsListResponse{..}
+        toJSON ListingsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _llrKind),
@@ -2352,7 +2858,7 @@ instance ToJSON ListingsListResponse where
 
 --
 -- /See:/ 'aPKsAddExternallyHostedRequest' smart constructor.
-newtype APKsAddExternallyHostedRequest = APKsAddExternallyHostedRequest
+newtype APKsAddExternallyHostedRequest = APKsAddExternallyHostedRequest'
     { _aExternallyHostedAPK :: Maybe ExternallyHostedAPK
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2364,7 +2870,7 @@ newtype APKsAddExternallyHostedRequest = APKsAddExternallyHostedRequest
 aPKsAddExternallyHostedRequest
     :: APKsAddExternallyHostedRequest
 aPKsAddExternallyHostedRequest =
-    APKsAddExternallyHostedRequest
+    APKsAddExternallyHostedRequest'
     { _aExternallyHostedAPK = Nothing
     }
 
@@ -2379,11 +2885,11 @@ instance FromJSON APKsAddExternallyHostedRequest
         parseJSON
           = withObject "APKsAddExternallyHostedRequest"
               (\ o ->
-                 APKsAddExternallyHostedRequest <$>
+                 APKsAddExternallyHostedRequest' <$>
                    (o .:? "externallyHostedApk"))
 
 instance ToJSON APKsAddExternallyHostedRequest where
-        toJSON APKsAddExternallyHostedRequest{..}
+        toJSON APKsAddExternallyHostedRequest'{..}
           = object
               (catMaybes
                  [("externallyHostedApk" .=) <$>
@@ -2391,7 +2897,7 @@ instance ToJSON APKsAddExternallyHostedRequest where
 
 --
 -- /See:/ 'inAppProductsInsertRequest' smart constructor.
-newtype InAppProductsInsertRequest = InAppProductsInsertRequest
+newtype InAppProductsInsertRequest = InAppProductsInsertRequest'
     { _iInAppProduct :: Maybe InAppProduct
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2403,7 +2909,7 @@ newtype InAppProductsInsertRequest = InAppProductsInsertRequest
 inAppProductsInsertRequest
     :: InAppProductsInsertRequest
 inAppProductsInsertRequest =
-    InAppProductsInsertRequest
+    InAppProductsInsertRequest'
     { _iInAppProduct = Nothing
     }
 
@@ -2416,17 +2922,17 @@ instance FromJSON InAppProductsInsertRequest where
         parseJSON
           = withObject "InAppProductsInsertRequest"
               (\ o ->
-                 InAppProductsInsertRequest <$>
+                 InAppProductsInsertRequest' <$>
                    (o .:? "inappproduct"))
 
 instance ToJSON InAppProductsInsertRequest where
-        toJSON InAppProductsInsertRequest{..}
+        toJSON InAppProductsInsertRequest'{..}
           = object
               (catMaybes [("inappproduct" .=) <$> _iInAppProduct])
 
 --
 -- /See:/ 'entitlementsListResponse' smart constructor.
-data EntitlementsListResponse = EntitlementsListResponse
+data EntitlementsListResponse = EntitlementsListResponse'
     { _elrTokenPagination :: !(Maybe TokenPagination)
     , _elrPageInfo        :: !(Maybe PageInfo)
     , _elrResources       :: !(Maybe [Entitlement])
@@ -2444,7 +2950,7 @@ data EntitlementsListResponse = EntitlementsListResponse
 entitlementsListResponse
     :: EntitlementsListResponse
 entitlementsListResponse =
-    EntitlementsListResponse
+    EntitlementsListResponse'
     { _elrTokenPagination = Nothing
     , _elrPageInfo = Nothing
     , _elrResources = Nothing
@@ -2469,12 +2975,12 @@ instance FromJSON EntitlementsListResponse where
         parseJSON
           = withObject "EntitlementsListResponse"
               (\ o ->
-                 EntitlementsListResponse <$>
+                 EntitlementsListResponse' <$>
                    (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
                      (o .:? "resources" .!= mempty))
 
 instance ToJSON EntitlementsListResponse where
-        toJSON EntitlementsListResponse{..}
+        toJSON EntitlementsListResponse'{..}
           = object
               (catMaybes
                  [("tokenPagination" .=) <$> _elrTokenPagination,
@@ -2482,8 +2988,55 @@ instance ToJSON EntitlementsListResponse where
                   ("resources" .=) <$> _elrResources])
 
 --
+-- /See:/ 'comment' smart constructor.
+data Comment = Comment'
+    { _cUserComment      :: !(Maybe UserComment)
+    , _cDeveloperComment :: !(Maybe DeveloperComment)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Comment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cUserComment'
+--
+-- * 'cDeveloperComment'
+comment
+    :: Comment
+comment =
+    Comment'
+    { _cUserComment = Nothing
+    , _cDeveloperComment = Nothing
+    }
+
+-- | A comment from a user.
+cUserComment :: Lens' Comment (Maybe UserComment)
+cUserComment
+  = lens _cUserComment (\ s a -> s{_cUserComment = a})
+
+-- | A comment from a developer.
+cDeveloperComment :: Lens' Comment (Maybe DeveloperComment)
+cDeveloperComment
+  = lens _cDeveloperComment
+      (\ s a -> s{_cDeveloperComment = a})
+
+instance FromJSON Comment where
+        parseJSON
+          = withObject "Comment"
+              (\ o ->
+                 Comment' <$>
+                   (o .:? "userComment") <*> (o .:? "developerComment"))
+
+instance ToJSON Comment where
+        toJSON Comment'{..}
+          = object
+              (catMaybes
+                 [("userComment" .=) <$> _cUserComment,
+                  ("developerComment" .=) <$> _cDeveloperComment])
+
+--
 -- /See:/ 'inAppProductsUpdateRequest' smart constructor.
-newtype InAppProductsUpdateRequest = InAppProductsUpdateRequest
+newtype InAppProductsUpdateRequest = InAppProductsUpdateRequest'
     { _inInAppProduct :: Maybe InAppProduct
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2495,7 +3048,7 @@ newtype InAppProductsUpdateRequest = InAppProductsUpdateRequest
 inAppProductsUpdateRequest
     :: InAppProductsUpdateRequest
 inAppProductsUpdateRequest =
-    InAppProductsUpdateRequest
+    InAppProductsUpdateRequest'
     { _inInAppProduct = Nothing
     }
 
@@ -2508,19 +3061,110 @@ instance FromJSON InAppProductsUpdateRequest where
         parseJSON
           = withObject "InAppProductsUpdateRequest"
               (\ o ->
-                 InAppProductsUpdateRequest <$>
+                 InAppProductsUpdateRequest' <$>
                    (o .:? "inappproduct"))
 
 instance ToJSON InAppProductsUpdateRequest where
-        toJSON InAppProductsUpdateRequest{..}
+        toJSON InAppProductsUpdateRequest'{..}
           = object
               (catMaybes [("inappproduct" .=) <$> _inInAppProduct])
+
+--
+-- /See:/ 'timestamp' smart constructor.
+data Timestamp = Timestamp'
+    { _tNanos   :: !(Maybe (Textual Int32))
+    , _tSeconds :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Timestamp' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tNanos'
+--
+-- * 'tSeconds'
+timestamp
+    :: Timestamp
+timestamp =
+    Timestamp'
+    { _tNanos = Nothing
+    , _tSeconds = Nothing
+    }
+
+tNanos :: Lens' Timestamp (Maybe Int32)
+tNanos
+  = lens _tNanos (\ s a -> s{_tNanos = a}) .
+      mapping _Coerce
+
+tSeconds :: Lens' Timestamp (Maybe Int64)
+tSeconds
+  = lens _tSeconds (\ s a -> s{_tSeconds = a}) .
+      mapping _Coerce
+
+instance FromJSON Timestamp where
+        parseJSON
+          = withObject "Timestamp"
+              (\ o ->
+                 Timestamp' <$> (o .:? "nanos") <*> (o .:? "seconds"))
+
+instance ToJSON Timestamp where
+        toJSON Timestamp'{..}
+          = object
+              (catMaybes
+                 [("nanos" .=) <$> _tNanos,
+                  ("seconds" .=) <$> _tSeconds])
+
+--
+-- /See:/ 'reviewReplyResult' smart constructor.
+data ReviewReplyResult = ReviewReplyResult'
+    { _rReplyText  :: !(Maybe Text)
+    , _rLastEdited :: !(Maybe Timestamp)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReviewReplyResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rReplyText'
+--
+-- * 'rLastEdited'
+reviewReplyResult
+    :: ReviewReplyResult
+reviewReplyResult =
+    ReviewReplyResult'
+    { _rReplyText = Nothing
+    , _rLastEdited = Nothing
+    }
+
+-- | The reply text that was applied.
+rReplyText :: Lens' ReviewReplyResult (Maybe Text)
+rReplyText
+  = lens _rReplyText (\ s a -> s{_rReplyText = a})
+
+-- | The time at which the reply took effect.
+rLastEdited :: Lens' ReviewReplyResult (Maybe Timestamp)
+rLastEdited
+  = lens _rLastEdited (\ s a -> s{_rLastEdited = a})
+
+instance FromJSON ReviewReplyResult where
+        parseJSON
+          = withObject "ReviewReplyResult"
+              (\ o ->
+                 ReviewReplyResult' <$>
+                   (o .:? "replyText") <*> (o .:? "lastEdited"))
+
+instance ToJSON ReviewReplyResult where
+        toJSON ReviewReplyResult'{..}
+          = object
+              (catMaybes
+                 [("replyText" .=) <$> _rReplyText,
+                  ("lastEdited" .=) <$> _rLastEdited])
 
 -- | An Entitlement resource indicates a user\'s current entitlement to an
 -- inapp item or subscription.
 --
 -- /See:/ 'entitlement' smart constructor.
-data Entitlement = Entitlement
+data Entitlement = Entitlement'
     { _eKind        :: !Text
     , _eProductType :: !(Maybe Text)
     , _eToken       :: !(Maybe Text)
@@ -2541,7 +3185,7 @@ data Entitlement = Entitlement
 entitlement
     :: Entitlement
 entitlement =
-    Entitlement
+    Entitlement'
     { _eKind = "androidpublisher#entitlement"
     , _eProductType = Nothing
     , _eToken = Nothing
@@ -2572,14 +3216,14 @@ instance FromJSON Entitlement where
         parseJSON
           = withObject "Entitlement"
               (\ o ->
-                 Entitlement <$>
+                 Entitlement' <$>
                    (o .:? "kind" .!= "androidpublisher#entitlement") <*>
                      (o .:? "productType")
                      <*> (o .:? "token")
                      <*> (o .:? "productId"))
 
 instance ToJSON Entitlement where
-        toJSON Entitlement{..}
+        toJSON Entitlement'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _eKind),
@@ -2589,7 +3233,7 @@ instance ToJSON Entitlement where
 
 --
 -- /See:/ 'inAppProductsBatchResponse' smart constructor.
-data InAppProductsBatchResponse = InAppProductsBatchResponse
+data InAppProductsBatchResponse = InAppProductsBatchResponse'
     { _iEntrys :: !(Maybe [InAppProductsBatchResponseEntry])
     , _iKind   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2604,7 +3248,7 @@ data InAppProductsBatchResponse = InAppProductsBatchResponse
 inAppProductsBatchResponse
     :: InAppProductsBatchResponse
 inAppProductsBatchResponse =
-    InAppProductsBatchResponse
+    InAppProductsBatchResponse'
     { _iEntrys = Nothing
     , _iKind = "androidpublisher#inappproductsBatchResponse"
     }
@@ -2623,13 +3267,13 @@ instance FromJSON InAppProductsBatchResponse where
         parseJSON
           = withObject "InAppProductsBatchResponse"
               (\ o ->
-                 InAppProductsBatchResponse <$>
+                 InAppProductsBatchResponse' <$>
                    (o .:? "entrys" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "androidpublisher#inappproductsBatchResponse"))
 
 instance ToJSON InAppProductsBatchResponse where
-        toJSON InAppProductsBatchResponse{..}
+        toJSON InAppProductsBatchResponse'{..}
           = object
               (catMaybes
                  [("entrys" .=) <$> _iEntrys,

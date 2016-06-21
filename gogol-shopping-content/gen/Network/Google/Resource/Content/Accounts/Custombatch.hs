@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accounts.Custombatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsCustombatchResource =
 -- (sub-)accounts in a single request.
 --
 -- /See:/ 'accountsCustombatch' smart constructor.
-data AccountsCustombatch = AccountsCustombatch
+data AccountsCustombatch = AccountsCustombatch'
     { _aaPayload :: !AccountsCustomBatchRequest
     , _aaDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsCustombatch
     :: AccountsCustomBatchRequest -- ^ 'aaPayload'
     -> AccountsCustombatch
 accountsCustombatch pAaPayload_ =
-    AccountsCustombatch
+    AccountsCustombatch'
     { _aaPayload = pAaPayload_
     , _aaDryRun = Nothing
     }
@@ -90,7 +90,9 @@ aaDryRun = lens _aaDryRun (\ s a -> s{_aaDryRun = a})
 instance GoogleRequest AccountsCustombatch where
         type Rs AccountsCustombatch =
              AccountsCustomBatchResponse
-        requestClient AccountsCustombatch{..}
+        type Scopes AccountsCustombatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountsCustombatch'{..}
           = go _aaDryRun (Just AltJSON) _aaPayload
               shoppingContentService
           where go

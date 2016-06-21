@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Invitations.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type InvitationsDeleteResource =
 -- invitation exists with the requested ID.
 --
 -- /See:/ 'invitationsDelete' smart constructor.
-data InvitationsDelete = InvitationsDelete
+data InvitationsDelete = InvitationsDelete'
     { _idXgafv          :: !(Maybe Text)
     , _idUploadProtocol :: !(Maybe Text)
     , _idPp             :: !Bool
@@ -104,7 +104,7 @@ invitationsDelete
     :: Text -- ^ 'idId'
     -> InvitationsDelete
 invitationsDelete pIdId_ =
-    InvitationsDelete
+    InvitationsDelete'
     { _idXgafv = Nothing
     , _idUploadProtocol = Nothing
     , _idPp = True
@@ -157,7 +157,9 @@ idCallback
 
 instance GoogleRequest InvitationsDelete where
         type Rs InvitationsDelete = Empty
-        requestClient InvitationsDelete{..}
+        type Scopes InvitationsDelete =
+             '["https://www.googleapis.com/auth/classroom.rosters"]
+        requestClient InvitationsDelete'{..}
           = go _idId _idXgafv _idUploadProtocol (Just _idPp)
               _idAccessToken
               _idUploadType

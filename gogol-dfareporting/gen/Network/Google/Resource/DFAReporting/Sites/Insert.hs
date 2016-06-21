@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Sites.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SitesInsert' request conforms to.
 type SitesInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -54,7 +54,7 @@ type SitesInsertResource =
 -- | Inserts a new site.
 --
 -- /See:/ 'sitesInsert' smart constructor.
-data SitesInsert = SitesInsert
+data SitesInsert = SitesInsert'
     { _sProFileId :: !(Textual Int64)
     , _sPayload   :: !Site
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitesInsert
     -> Site -- ^ 'sPayload'
     -> SitesInsert
 sitesInsert pSProFileId_ pSPayload_ =
-    SitesInsert
+    SitesInsert'
     { _sProFileId = _Coerce # pSProFileId_
     , _sPayload = pSPayload_
     }
@@ -88,7 +88,9 @@ sPayload = lens _sPayload (\ s a -> s{_sPayload = a})
 
 instance GoogleRequest SitesInsert where
         type Rs SitesInsert = Site
-        requestClient SitesInsert{..}
+        type Scopes SitesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SitesInsert'{..}
           = go _sProFileId (Just AltJSON) _sPayload
               dFAReportingService
           where go

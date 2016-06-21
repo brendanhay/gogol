@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type AccountsMetadataDimensionsListResource =
 -- account.
 --
 -- /See:/ 'accountsMetadataDimensionsList' smart constructor.
-newtype AccountsMetadataDimensionsList = AccountsMetadataDimensionsList
+newtype AccountsMetadataDimensionsList = AccountsMetadataDimensionsList'
     { _amdlAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ accountsMetadataDimensionsList
     :: Text -- ^ 'amdlAccountId'
     -> AccountsMetadataDimensionsList
 accountsMetadataDimensionsList pAmdlAccountId_ =
-    AccountsMetadataDimensionsList
+    AccountsMetadataDimensionsList'
     { _amdlAccountId = pAmdlAccountId_
     }
 
@@ -81,7 +81,10 @@ amdlAccountId
 instance GoogleRequest AccountsMetadataDimensionsList
          where
         type Rs AccountsMetadataDimensionsList = Metadata
-        requestClient AccountsMetadataDimensionsList{..}
+        type Scopes AccountsMetadataDimensionsList =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
+        requestClient AccountsMetadataDimensionsList'{..}
           = go _amdlAccountId (Just AltJSON)
               adExchangeSellerService
           where go

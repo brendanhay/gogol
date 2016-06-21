@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.Compute.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Contains a list of TargetHttpsProxy resources.
 --
 -- /See:/ 'targetHTTPSProxyList' smart constructor.
-data TargetHTTPSProxyList = TargetHTTPSProxyList
+data TargetHTTPSProxyList = TargetHTTPSProxyList'
     { _thplNextPageToken :: !(Maybe Text)
     , _thplKind          :: !Text
     , _thplItems         :: !(Maybe [TargetHTTPSProxy])
@@ -47,7 +47,7 @@ data TargetHTTPSProxyList = TargetHTTPSProxyList
 targetHTTPSProxyList
     :: TargetHTTPSProxyList
 targetHTTPSProxyList =
-    TargetHTTPSProxyList
+    TargetHTTPSProxyList'
     { _thplNextPageToken = Nothing
     , _thplKind = "compute#targetHttpsProxyList"
     , _thplItems = Nothing
@@ -55,13 +55,18 @@ targetHTTPSProxyList =
     , _thplId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 thplNextPageToken :: Lens' TargetHTTPSProxyList (Maybe Text)
 thplNextPageToken
   = lens _thplNextPageToken
       (\ s a -> s{_thplNextPageToken = a})
 
--- | Type of resource.
+-- | Type of resource. Always compute#targetHttpsProxyList for lists of
+-- target HTTPS proxies.
 thplKind :: Lens' TargetHTTPSProxyList Text
 thplKind = lens _thplKind (\ s a -> s{_thplKind = a})
 
@@ -77,7 +82,8 @@ thplSelfLink :: Lens' TargetHTTPSProxyList (Maybe Text)
 thplSelfLink
   = lens _thplSelfLink (\ s a -> s{_thplSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 thplId :: Lens' TargetHTTPSProxyList (Maybe Text)
 thplId = lens _thplId (\ s a -> s{_thplId = a})
 
@@ -85,7 +91,7 @@ instance FromJSON TargetHTTPSProxyList where
         parseJSON
           = withObject "TargetHTTPSProxyList"
               (\ o ->
-                 TargetHTTPSProxyList <$>
+                 TargetHTTPSProxyList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetHttpsProxyList")
                      <*> (o .:? "items" .!= mempty)
@@ -93,7 +99,7 @@ instance FromJSON TargetHTTPSProxyList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetHTTPSProxyList where
-        toJSON TargetHTTPSProxyList{..}
+        toJSON TargetHTTPSProxyList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _thplNextPageToken,
@@ -104,7 +110,7 @@ instance ToJSON TargetHTTPSProxyList where
 
 --
 -- /See:/ 'addressesScopedList' smart constructor.
-data AddressesScopedList = AddressesScopedList
+data AddressesScopedList = AddressesScopedList'
     { _aslAddresses :: !(Maybe [Address])
     , _aslWarning   :: !(Maybe AddressesScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -119,7 +125,7 @@ data AddressesScopedList = AddressesScopedList
 addressesScopedList
     :: AddressesScopedList
 addressesScopedList =
-    AddressesScopedList
+    AddressesScopedList'
     { _aslAddresses = Nothing
     , _aslWarning = Nothing
     }
@@ -141,11 +147,11 @@ instance FromJSON AddressesScopedList where
         parseJSON
           = withObject "AddressesScopedList"
               (\ o ->
-                 AddressesScopedList <$>
+                 AddressesScopedList' <$>
                    (o .:? "addresses" .!= mempty) <*> (o .:? "warning"))
 
 instance ToJSON AddressesScopedList where
-        toJSON AddressesScopedList{..}
+        toJSON AddressesScopedList'{..}
           = object
               (catMaybes
                  [("addresses" .=) <$> _aslAddresses,
@@ -153,7 +159,7 @@ instance ToJSON AddressesScopedList where
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -168,7 +174,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem
+    OperationWarningsItemDataItem'
     { _owidiValue = Nothing
     , _owidiKey = Nothing
     }
@@ -178,7 +184,13 @@ owidiValue :: Lens' OperationWarningsItemDataItem (Maybe Text)
 owidiValue
   = lens _owidiValue (\ s a -> s{_owidiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 owidiKey :: Lens' OperationWarningsItemDataItem (Maybe Text)
 owidiKey = lens _owidiKey (\ s a -> s{_owidiKey = a})
 
@@ -186,11 +198,11 @@ instance FromJSON OperationWarningsItemDataItem where
         parseJSON
           = withObject "OperationWarningsItemDataItem"
               (\ o ->
-                 OperationWarningsItemDataItem <$>
+                 OperationWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON OperationWarningsItemDataItem where
-        toJSON OperationWarningsItemDataItem{..}
+        toJSON OperationWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _owidiValue,
@@ -198,7 +210,7 @@ instance ToJSON OperationWarningsItemDataItem where
 
 --
 -- /See:/ 'instanceGroupManagersAbandonInstancesRequest' smart constructor.
-newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest
+newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest'
     { _igmairInstances :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -210,7 +222,7 @@ newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAban
 instanceGroupManagersAbandonInstancesRequest
     :: InstanceGroupManagersAbandonInstancesRequest
 instanceGroupManagersAbandonInstancesRequest =
-    InstanceGroupManagersAbandonInstancesRequest
+    InstanceGroupManagersAbandonInstancesRequest'
     { _igmairInstances = Nothing
     }
 
@@ -229,20 +241,20 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersAbandonInstancesRequest"
               (\ o ->
-                 InstanceGroupManagersAbandonInstancesRequest <$>
+                 InstanceGroupManagersAbandonInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersAbandonInstancesRequest where
         toJSON
-          InstanceGroupManagersAbandonInstancesRequest{..}
+          InstanceGroupManagersAbandonInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igmairInstances])
 
 -- | [Output Only] A map of scoped machine type lists.
 --
 -- /See:/ 'machineTypeAggregatedListItems' smart constructor.
-newtype MachineTypeAggregatedListItems = MachineTypeAggregatedListItems
+newtype MachineTypeAggregatedListItems = MachineTypeAggregatedListItems'
     { _mtaliAddtional :: HashMap Text MachineTypesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -255,7 +267,7 @@ machineTypeAggregatedListItems
     :: HashMap Text MachineTypesScopedList -- ^ 'mtaliAddtional'
     -> MachineTypeAggregatedListItems
 machineTypeAggregatedListItems pMtaliAddtional_ =
-    MachineTypeAggregatedListItems
+    MachineTypeAggregatedListItems'
     { _mtaliAddtional = _Coerce # pMtaliAddtional_
     }
 
@@ -271,7 +283,7 @@ instance FromJSON MachineTypeAggregatedListItems
         parseJSON
           = withObject "MachineTypeAggregatedListItems"
               (\ o ->
-                 MachineTypeAggregatedListItems <$>
+                 MachineTypeAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON MachineTypeAggregatedListItems where
@@ -280,7 +292,7 @@ instance ToJSON MachineTypeAggregatedListItems where
 -- | [Output Only] A map of scoped disk type lists.
 --
 -- /See:/ 'diskTypeAggregatedListItems' smart constructor.
-newtype DiskTypeAggregatedListItems = DiskTypeAggregatedListItems
+newtype DiskTypeAggregatedListItems = DiskTypeAggregatedListItems'
     { _dtaliAddtional :: HashMap Text DiskTypesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -293,7 +305,7 @@ diskTypeAggregatedListItems
     :: HashMap Text DiskTypesScopedList -- ^ 'dtaliAddtional'
     -> DiskTypeAggregatedListItems
 diskTypeAggregatedListItems pDtaliAddtional_ =
-    DiskTypeAggregatedListItems
+    DiskTypeAggregatedListItems'
     { _dtaliAddtional = _Coerce # pDtaliAddtional_
     }
 
@@ -308,15 +320,15 @@ instance FromJSON DiskTypeAggregatedListItems where
         parseJSON
           = withObject "DiskTypeAggregatedListItems"
               (\ o ->
-                 DiskTypeAggregatedListItems <$> (parseJSONObject o))
+                 DiskTypeAggregatedListItems' <$> (parseJSONObject o))
 
 instance ToJSON DiskTypeAggregatedListItems where
         toJSON = toJSON . _dtaliAddtional
 
--- | Contains a list of Firewall resources.
+-- | Contains a list of firewalls.
 --
 -- /See:/ 'firewallList' smart constructor.
-data FirewallList = FirewallList
+data FirewallList = FirewallList'
     { _flNextPageToken :: !(Maybe Text)
     , _flKind          :: !Text
     , _flItems         :: !(Maybe [Firewall])
@@ -340,7 +352,7 @@ data FirewallList = FirewallList
 firewallList
     :: FirewallList
 firewallList =
-    FirewallList
+    FirewallList'
     { _flNextPageToken = Nothing
     , _flKind = "compute#firewallList"
     , _flItems = Nothing
@@ -348,7 +360,11 @@ firewallList =
     , _flId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 flNextPageToken :: Lens' FirewallList (Maybe Text)
 flNextPageToken
   = lens _flNextPageToken
@@ -370,7 +386,8 @@ flSelfLink :: Lens' FirewallList (Maybe Text)
 flSelfLink
   = lens _flSelfLink (\ s a -> s{_flSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 flId :: Lens' FirewallList (Maybe Text)
 flId = lens _flId (\ s a -> s{_flId = a})
 
@@ -378,7 +395,7 @@ instance FromJSON FirewallList where
         parseJSON
           = withObject "FirewallList"
               (\ o ->
-                 FirewallList <$>
+                 FirewallList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#firewallList")
                      <*> (o .:? "items" .!= mempty)
@@ -386,7 +403,7 @@ instance FromJSON FirewallList where
                      <*> (o .:? "id"))
 
 instance ToJSON FirewallList where
-        toJSON FirewallList{..}
+        toJSON FirewallList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _flNextPageToken,
@@ -398,7 +415,7 @@ instance ToJSON FirewallList where
 -- when the list is empty.
 --
 -- /See:/ 'instancesScopedListWarning' smart constructor.
-data InstancesScopedListWarning = InstancesScopedListWarning
+data InstancesScopedListWarning = InstancesScopedListWarning'
     { _islwData    :: !(Maybe [InstancesScopedListWarningDataItem])
     , _islwCode    :: !(Maybe InstancesScopedListWarningCode)
     , _islwMessage :: !(Maybe Text)
@@ -416,24 +433,27 @@ data InstancesScopedListWarning = InstancesScopedListWarning
 instancesScopedListWarning
     :: InstancesScopedListWarning
 instancesScopedListWarning =
-    InstancesScopedListWarning
+    InstancesScopedListWarning'
     { _islwData = Nothing
     , _islwCode = Nothing
     , _islwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 islwData :: Lens' InstancesScopedListWarning [InstancesScopedListWarningDataItem]
 islwData
   = lens _islwData (\ s a -> s{_islwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 islwCode :: Lens' InstancesScopedListWarning (Maybe InstancesScopedListWarningCode)
 islwCode = lens _islwCode (\ s a -> s{_islwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 islwMessage :: Lens' InstancesScopedListWarning (Maybe Text)
 islwMessage
   = lens _islwMessage (\ s a -> s{_islwMessage = a})
@@ -442,12 +462,12 @@ instance FromJSON InstancesScopedListWarning where
         parseJSON
           = withObject "InstancesScopedListWarning"
               (\ o ->
-                 InstancesScopedListWarning <$>
+                 InstancesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON InstancesScopedListWarning where
-        toJSON InstancesScopedListWarning{..}
+        toJSON InstancesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _islwData,
@@ -457,7 +477,7 @@ instance ToJSON InstancesScopedListWarning where
 -- | A list of InstanceGroup resources.
 --
 -- /See:/ 'instanceGroupList' smart constructor.
-data InstanceGroupList = InstanceGroupList
+data InstanceGroupList = InstanceGroupList'
     { _iglNextPageToken :: !(Maybe Text)
     , _iglKind          :: !Text
     , _iglItems         :: !(Maybe [InstanceGroup])
@@ -481,7 +501,7 @@ data InstanceGroupList = InstanceGroupList
 instanceGroupList
     :: InstanceGroupList
 instanceGroupList =
-    InstanceGroupList
+    InstanceGroupList'
     { _iglNextPageToken = Nothing
     , _iglKind = "compute#instanceGroupList"
     , _iglItems = Nothing
@@ -489,7 +509,11 @@ instanceGroupList =
     , _iglId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 iglNextPageToken :: Lens' InstanceGroupList (Maybe Text)
 iglNextPageToken
   = lens _iglNextPageToken
@@ -522,7 +546,7 @@ instance FromJSON InstanceGroupList where
         parseJSON
           = withObject "InstanceGroupList"
               (\ o ->
-                 InstanceGroupList <$>
+                 InstanceGroupList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#instanceGroupList")
                      <*> (o .:? "items" .!= mempty)
@@ -530,7 +554,7 @@ instance FromJSON InstanceGroupList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceGroupList where
-        toJSON InstanceGroupList{..}
+        toJSON InstanceGroupList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _iglNextPageToken,
@@ -539,10 +563,50 @@ instance ToJSON InstanceGroupList where
                   ("selfLink" .=) <$> _iglSelfLink,
                   ("id" .=) <$> _iglId])
 
+--
+-- /See:/ 'instancesSetMachineTypeRequest' smart constructor.
+newtype InstancesSetMachineTypeRequest = InstancesSetMachineTypeRequest'
+    { _ismtrMachineType :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesSetMachineTypeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ismtrMachineType'
+instancesSetMachineTypeRequest
+    :: InstancesSetMachineTypeRequest
+instancesSetMachineTypeRequest =
+    InstancesSetMachineTypeRequest'
+    { _ismtrMachineType = Nothing
+    }
+
+-- | Full or partial URL of the machine type resource. See Machine Types for
+-- a full list of machine types. For example:
+-- zones\/us-central1-f\/machineTypes\/n1-standard-1
+ismtrMachineType :: Lens' InstancesSetMachineTypeRequest (Maybe Text)
+ismtrMachineType
+  = lens _ismtrMachineType
+      (\ s a -> s{_ismtrMachineType = a})
+
+instance FromJSON InstancesSetMachineTypeRequest
+         where
+        parseJSON
+          = withObject "InstancesSetMachineTypeRequest"
+              (\ o ->
+                 InstancesSetMachineTypeRequest' <$>
+                   (o .:? "machineType"))
+
+instance ToJSON InstancesSetMachineTypeRequest where
+        toJSON InstancesSetMachineTypeRequest'{..}
+          = object
+              (catMaybes
+                 [("machineType" .=) <$> _ismtrMachineType])
+
 -- | A map of scoped autoscaler lists.
 --
 -- /See:/ 'autoscalerAggregatedListItems' smart constructor.
-newtype AutoscalerAggregatedListItems = AutoscalerAggregatedListItems
+newtype AutoscalerAggregatedListItems = AutoscalerAggregatedListItems'
     { _aaliAddtional :: HashMap Text AutoscalersScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -555,11 +619,11 @@ autoscalerAggregatedListItems
     :: HashMap Text AutoscalersScopedList -- ^ 'aaliAddtional'
     -> AutoscalerAggregatedListItems
 autoscalerAggregatedListItems pAaliAddtional_ =
-    AutoscalerAggregatedListItems
+    AutoscalerAggregatedListItems'
     { _aaliAddtional = _Coerce # pAaliAddtional_
     }
 
--- | Name of the scope containing this set of autoscalers.
+-- | [Output Only] Name of the scope containing this set of autoscalers.
 aaliAddtional :: Lens' AutoscalerAggregatedListItems (HashMap Text AutoscalersScopedList)
 aaliAddtional
   = lens _aaliAddtional
@@ -570,7 +634,7 @@ instance FromJSON AutoscalerAggregatedListItems where
         parseJSON
           = withObject "AutoscalerAggregatedListItems"
               (\ o ->
-                 AutoscalerAggregatedListItems <$>
+                 AutoscalerAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON AutoscalerAggregatedListItems where
@@ -578,7 +642,7 @@ instance ToJSON AutoscalerAggregatedListItems where
 
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
-newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest
+newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest'
     { _igmsitrInstanceTemplate :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -590,7 +654,7 @@ newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersS
 instanceGroupManagersSetInstanceTemplateRequest
     :: InstanceGroupManagersSetInstanceTemplateRequest
 instanceGroupManagersSetInstanceTemplateRequest =
-    InstanceGroupManagersSetInstanceTemplateRequest
+    InstanceGroupManagersSetInstanceTemplateRequest'
     { _igmsitrInstanceTemplate = Nothing
     }
 
@@ -608,13 +672,13 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersSetInstanceTemplateRequest"
               (\ o ->
-                 InstanceGroupManagersSetInstanceTemplateRequest <$>
+                 InstanceGroupManagersSetInstanceTemplateRequest' <$>
                    (o .:? "instanceTemplate"))
 
 instance ToJSON
          InstanceGroupManagersSetInstanceTemplateRequest where
         toJSON
-          InstanceGroupManagersSetInstanceTemplateRequest{..}
+          InstanceGroupManagersSetInstanceTemplateRequest'{..}
           = object
               (catMaybes
                  [("instanceTemplate" .=) <$>
@@ -623,7 +687,7 @@ instance ToJSON
 -- | Deprecation status for a public resource.
 --
 -- /See:/ 'deprecationStatus' smart constructor.
-data DeprecationStatus = DeprecationStatus
+data DeprecationStatus = DeprecationStatus'
     { _dsState       :: !(Maybe DeprecationStatusState)
     , _dsDeleted     :: !(Maybe Text)
     , _dsReplacement :: !(Maybe Text)
@@ -647,7 +711,7 @@ data DeprecationStatus = DeprecationStatus
 deprecationStatus
     :: DeprecationStatus
 deprecationStatus =
-    DeprecationStatus
+    DeprecationStatus'
     { _dsState = Nothing
     , _dsDeleted = Nothing
     , _dsReplacement = Nothing
@@ -694,14 +758,14 @@ instance FromJSON DeprecationStatus where
         parseJSON
           = withObject "DeprecationStatus"
               (\ o ->
-                 DeprecationStatus <$>
+                 DeprecationStatus' <$>
                    (o .:? "state") <*> (o .:? "deleted") <*>
                      (o .:? "replacement")
                      <*> (o .:? "obsolete")
                      <*> (o .:? "deprecated"))
 
 instance ToJSON DeprecationStatus where
-        toJSON DeprecationStatus{..}
+        toJSON DeprecationStatus'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _dsState,
@@ -713,7 +777,7 @@ instance ToJSON DeprecationStatus where
 -- | A persistent disk snapshot resource.
 --
 -- /See:/ 'snapshot' smart constructor.
-data Snapshot = Snapshot
+data Snapshot = Snapshot'
     { _sStorageBytesStatus :: !(Maybe SnapshotStorageBytesStatus)
     , _sStatus             :: !(Maybe SnapshotStatus)
     , _sDiskSizeGb         :: !(Maybe (Textual Int64))
@@ -761,7 +825,7 @@ data Snapshot = Snapshot
 snapshot
     :: Snapshot
 snapshot =
-    Snapshot
+    Snapshot'
     { _sStorageBytesStatus = Nothing
     , _sStatus = Nothing
     , _sDiskSizeGb = Nothing
@@ -778,13 +842,16 @@ snapshot =
     }
 
 -- | [Output Only] An indicator whether storageBytes is in a stable state or
--- it is being adjusted as a result of shared storage reallocation.
+-- it is being adjusted as a result of shared storage reallocation. This
+-- status can either be UPDATING, meaning the size of the snapshot is being
+-- updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
 sStorageBytesStatus :: Lens' Snapshot (Maybe SnapshotStorageBytesStatus)
 sStorageBytesStatus
   = lens _sStorageBytesStatus
       (\ s a -> s{_sStorageBytesStatus = a})
 
--- | [Output Only] The status of the snapshot.
+-- | [Output Only] The status of the snapshot. This can be CREATING,
+-- DELETING, FAILED, READY, or UPLOADING.
 sStatus :: Lens' Snapshot (Maybe SnapshotStatus)
 sStatus = lens _sStatus (\ s a -> s{_sStatus = a})
 
@@ -837,25 +904,28 @@ sCreationTimestamp
   = lens _sCreationTimestamp
       (\ s a -> s{_sCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 sId :: Lens' Snapshot (Maybe Word64)
 sId
   = lens _sId (\ s a -> s{_sId = a}) . mapping _Coerce
 
--- | Public visible licenses.
+-- | [Output Only] A list of public visible licenses that apply to this
+-- snapshot. This can be because the original image had licenses attached
+-- (such as a Windows image).
 sLicenses :: Lens' Snapshot [Text]
 sLicenses
   = lens _sLicenses (\ s a -> s{_sLicenses = a}) .
       _Default
       . _Coerce
 
--- | The source disk used to create this snapshot.
+-- | [Output Only] The source disk used to create this snapshot.
 sSourceDisk :: Lens' Snapshot (Maybe Text)
 sSourceDisk
   = lens _sSourceDisk (\ s a -> s{_sSourceDisk = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 sDescription :: Lens' Snapshot (Maybe Text)
 sDescription
   = lens _sDescription (\ s a -> s{_sDescription = a})
@@ -864,7 +934,7 @@ instance FromJSON Snapshot where
         parseJSON
           = withObject "Snapshot"
               (\ o ->
-                 Snapshot <$>
+                 Snapshot' <$>
                    (o .:? "storageBytesStatus") <*> (o .:? "status") <*>
                      (o .:? "diskSizeGb")
                      <*> (o .:? "sourceDiskId")
@@ -879,7 +949,7 @@ instance FromJSON Snapshot where
                      <*> (o .:? "description"))
 
 instance ToJSON Snapshot where
-        toJSON Snapshot{..}
+        toJSON Snapshot'{..}
           = object
               (catMaybes
                  [("storageBytesStatus" .=) <$> _sStorageBytesStatus,
@@ -898,7 +968,7 @@ instance ToJSON Snapshot where
 -- | Custom utilization metric policy.
 --
 -- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
-data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
+data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization'
     { _apcmuUtilizationTarget     :: !(Maybe (Textual Double))
     , _apcmuMetric                :: !(Maybe Text)
     , _apcmuUtilizationTargetType :: !(Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
@@ -916,13 +986,13 @@ data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUti
 autoscalingPolicyCustomMetricUtilization
     :: AutoscalingPolicyCustomMetricUtilization
 autoscalingPolicyCustomMetricUtilization =
-    AutoscalingPolicyCustomMetricUtilization
+    AutoscalingPolicyCustomMetricUtilization'
     { _apcmuUtilizationTarget = Nothing
     , _apcmuMetric = Nothing
     , _apcmuUtilizationTargetType = Nothing
     }
 
--- | Target value of the metric which Autoscaler should maintain. Must be a
+-- | Target value of the metric which autoscaler should maintain. Must be a
 -- positive value.
 apcmuUtilizationTarget :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Double)
 apcmuUtilizationTarget
@@ -930,16 +1000,23 @@ apcmuUtilizationTarget
       (\ s a -> s{_apcmuUtilizationTarget = a})
       . mapping _Coerce
 
--- | Identifier of the metric. It should be a Cloud Monitoring metric. The
--- metric can not have negative values. The metric should be an utilization
--- metric (increasing number of VMs handling requests x times should reduce
--- average value of the metric roughly x times). For example you could use:
--- compute.googleapis.com\/instance\/network\/received_bytes_count.
+-- | The identifier of the Cloud Monitoring metric. The metric cannot have
+-- negative values and should be a utilization metric, which means that the
+-- number of virtual machines handling requests should increase or decrease
+-- proportionally to the metric. The metric must also have a label of
+-- compute.googleapis.com\/resource_id with the value of the instance\'s
+-- unique ID, although this alone does not guarantee that the metric is
+-- valid. For example, the following is a valid metric:
+-- compute.googleapis.com\/instance\/network\/received_bytes_count The
+-- following is not a valid metric because it does not increase or decrease
+-- based on usage: compute.googleapis.com\/instance\/cpu\/reserved_cores
 apcmuMetric :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
 apcmuMetric
   = lens _apcmuMetric (\ s a -> s{_apcmuMetric = a})
 
--- | Defines type in which utilization_target is expressed.
+-- | Defines how target utilization value is expressed for a Cloud Monitoring
+-- metric. Either GAUGE, DELTA_PER_SECOND, or DELTA_PER_MINUTE. If not
+-- specified, the default is GAUGE.
 apcmuUtilizationTargetType :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
 apcmuUtilizationTargetType
   = lens _apcmuUtilizationTargetType
@@ -951,13 +1028,13 @@ instance FromJSON
           = withObject
               "AutoscalingPolicyCustomMetricUtilization"
               (\ o ->
-                 AutoscalingPolicyCustomMetricUtilization <$>
+                 AutoscalingPolicyCustomMetricUtilization' <$>
                    (o .:? "utilizationTarget") <*> (o .:? "metric") <*>
                      (o .:? "utilizationTargetType"))
 
 instance ToJSON
          AutoscalingPolicyCustomMetricUtilization where
-        toJSON AutoscalingPolicyCustomMetricUtilization{..}
+        toJSON AutoscalingPolicyCustomMetricUtilization'{..}
           = object
               (catMaybes
                  [("utilizationTarget" .=) <$>
@@ -969,7 +1046,7 @@ instance ToJSON
 -- | Contains a list of ForwardingRule resources.
 --
 -- /See:/ 'forwardingRuleList' smart constructor.
-data ForwardingRuleList = ForwardingRuleList
+data ForwardingRuleList = ForwardingRuleList'
     { _frlNextPageToken :: !(Maybe Text)
     , _frlKind          :: !Text
     , _frlItems         :: !(Maybe [ForwardingRule])
@@ -993,7 +1070,7 @@ data ForwardingRuleList = ForwardingRuleList
 forwardingRuleList
     :: ForwardingRuleList
 forwardingRuleList =
-    ForwardingRuleList
+    ForwardingRuleList'
     { _frlNextPageToken = Nothing
     , _frlKind = "compute#forwardingRuleList"
     , _frlItems = Nothing
@@ -1001,7 +1078,11 @@ forwardingRuleList =
     , _frlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 frlNextPageToken :: Lens' ForwardingRuleList (Maybe Text)
 frlNextPageToken
   = lens _frlNextPageToken
@@ -1031,7 +1112,7 @@ instance FromJSON ForwardingRuleList where
         parseJSON
           = withObject "ForwardingRuleList"
               (\ o ->
-                 ForwardingRuleList <$>
+                 ForwardingRuleList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#forwardingRuleList")
                      <*> (o .:? "items" .!= mempty)
@@ -1039,7 +1120,7 @@ instance FromJSON ForwardingRuleList where
                      <*> (o .:? "id"))
 
 instance ToJSON ForwardingRuleList where
-        toJSON ForwardingRuleList{..}
+        toJSON ForwardingRuleList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _frlNextPageToken,
@@ -1050,7 +1131,7 @@ instance ToJSON ForwardingRuleList where
 
 --
 -- /See:/ 'vpnTunnelsScopedList' smart constructor.
-data VPNTunnelsScopedList = VPNTunnelsScopedList
+data VPNTunnelsScopedList = VPNTunnelsScopedList'
     { _vtslVPNTunnels :: !(Maybe [VPNTunnel])
     , _vtslWarning    :: !(Maybe VPNTunnelsScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1065,7 +1146,7 @@ data VPNTunnelsScopedList = VPNTunnelsScopedList
 vpnTunnelsScopedList
     :: VPNTunnelsScopedList
 vpnTunnelsScopedList =
-    VPNTunnelsScopedList
+    VPNTunnelsScopedList'
     { _vtslVPNTunnels = Nothing
     , _vtslWarning = Nothing
     }
@@ -1088,12 +1169,12 @@ instance FromJSON VPNTunnelsScopedList where
         parseJSON
           = withObject "VPNTunnelsScopedList"
               (\ o ->
-                 VPNTunnelsScopedList <$>
+                 VPNTunnelsScopedList' <$>
                    (o .:? "vpnTunnels" .!= mempty) <*>
                      (o .:? "warning"))
 
 instance ToJSON VPNTunnelsScopedList where
-        toJSON VPNTunnelsScopedList{..}
+        toJSON VPNTunnelsScopedList'{..}
           = object
               (catMaybes
                  [("vpnTunnels" .=) <$> _vtslVPNTunnels,
@@ -1101,8 +1182,8 @@ instance ToJSON VPNTunnelsScopedList where
 
 --
 -- /See:/ 'instanceGroupsSetNamedPortsRequest' smart constructor.
-data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest
-    { _igsnprFingerprint :: !(Maybe (Textual Word8))
+data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest'
+    { _igsnprFingerprint :: !(Maybe Base64)
     , _igsnprNamedPorts  :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1116,7 +1197,7 @@ data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest
 instanceGroupsSetNamedPortsRequest
     :: InstanceGroupsSetNamedPortsRequest
 instanceGroupsSetNamedPortsRequest =
-    InstanceGroupsSetNamedPortsRequest
+    InstanceGroupsSetNamedPortsRequest'
     { _igsnprFingerprint = Nothing
     , _igsnprNamedPorts = Nothing
     }
@@ -1127,11 +1208,11 @@ instanceGroupsSetNamedPortsRequest =
 -- with the instanceGroups.get method. Then, include the fingerprint in
 -- your request to ensure that you do not overwrite changes that were
 -- applied from another concurrent request.
-igsnprFingerprint :: Lens' InstanceGroupsSetNamedPortsRequest (Maybe Word8)
+igsnprFingerprint :: Lens' InstanceGroupsSetNamedPortsRequest (Maybe ByteString)
 igsnprFingerprint
   = lens _igsnprFingerprint
       (\ s a -> s{_igsnprFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The list of named ports to set for this instance group.
 igsnprNamedPorts :: Lens' InstanceGroupsSetNamedPortsRequest [NamedPort]
@@ -1146,13 +1227,13 @@ instance FromJSON InstanceGroupsSetNamedPortsRequest
         parseJSON
           = withObject "InstanceGroupsSetNamedPortsRequest"
               (\ o ->
-                 InstanceGroupsSetNamedPortsRequest <$>
+                 InstanceGroupsSetNamedPortsRequest' <$>
                    (o .:? "fingerprint") <*>
                      (o .:? "namedPorts" .!= mempty))
 
 instance ToJSON InstanceGroupsSetNamedPortsRequest
          where
-        toJSON InstanceGroupsSetNamedPortsRequest{..}
+        toJSON InstanceGroupsSetNamedPortsRequest'{..}
           = object
               (catMaybes
                  [("fingerprint" .=) <$> _igsnprFingerprint,
@@ -1161,7 +1242,7 @@ instance ToJSON InstanceGroupsSetNamedPortsRequest
 -- | Contains a list of Operation resources.
 --
 -- /See:/ 'operationList' smart constructor.
-data OperationList = OperationList
+data OperationList = OperationList'
     { _olNextPageToken :: !(Maybe Text)
     , _olKind          :: !Text
     , _olItems         :: !(Maybe [Operation])
@@ -1185,7 +1266,7 @@ data OperationList = OperationList
 operationList
     :: OperationList
 operationList =
-    OperationList
+    OperationList'
     { _olNextPageToken = Nothing
     , _olKind = "compute#operationList"
     , _olItems = Nothing
@@ -1193,7 +1274,11 @@ operationList =
     , _olId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncate.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 olNextPageToken :: Lens' OperationList (Maybe Text)
 olNextPageToken
   = lens _olNextPageToken
@@ -1204,7 +1289,7 @@ olNextPageToken
 olKind :: Lens' OperationList Text
 olKind = lens _olKind (\ s a -> s{_olKind = a})
 
--- | [Output Only] The Operation resources.
+-- | [Output Only] A list of Operation resources.
 olItems :: Lens' OperationList [Operation]
 olItems
   = lens _olItems (\ s a -> s{_olItems = a}) . _Default
@@ -1215,7 +1300,8 @@ olSelfLink :: Lens' OperationList (Maybe Text)
 olSelfLink
   = lens _olSelfLink (\ s a -> s{_olSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 olId :: Lens' OperationList (Maybe Text)
 olId = lens _olId (\ s a -> s{_olId = a})
 
@@ -1223,7 +1309,7 @@ instance FromJSON OperationList where
         parseJSON
           = withObject "OperationList"
               (\ o ->
-                 OperationList <$>
+                 OperationList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#operationList")
                      <*> (o .:? "items" .!= mempty)
@@ -1231,7 +1317,7 @@ instance FromJSON OperationList where
                      <*> (o .:? "id"))
 
 instance ToJSON OperationList where
-        toJSON OperationList{..}
+        toJSON OperationList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olNextPageToken,
@@ -1242,7 +1328,7 @@ instance ToJSON OperationList where
 -- | A list of Disk resources.
 --
 -- /See:/ 'diskList' smart constructor.
-data DiskList = DiskList
+data DiskList = DiskList'
     { _dlNextPageToken :: !(Maybe Text)
     , _dlKind          :: !Text
     , _dlItems         :: !(Maybe [Disk])
@@ -1266,7 +1352,7 @@ data DiskList = DiskList
 diskList
     :: DiskList
 diskList =
-    DiskList
+    DiskList'
     { _dlNextPageToken = Nothing
     , _dlKind = "compute#diskList"
     , _dlItems = Nothing
@@ -1274,7 +1360,11 @@ diskList =
     , _dlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 dlNextPageToken :: Lens' DiskList (Maybe Text)
 dlNextPageToken
   = lens _dlNextPageToken
@@ -1296,7 +1386,8 @@ dlSelfLink :: Lens' DiskList (Maybe Text)
 dlSelfLink
   = lens _dlSelfLink (\ s a -> s{_dlSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dlId :: Lens' DiskList (Maybe Text)
 dlId = lens _dlId (\ s a -> s{_dlId = a})
 
@@ -1304,7 +1395,7 @@ instance FromJSON DiskList where
         parseJSON
           = withObject "DiskList"
               (\ o ->
-                 DiskList <$>
+                 DiskList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#diskList")
                      <*> (o .:? "items" .!= mempty)
@@ -1312,7 +1403,7 @@ instance FromJSON DiskList where
                      <*> (o .:? "id"))
 
 instance ToJSON DiskList where
-        toJSON DiskList{..}
+        toJSON DiskList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dlNextPageToken,
@@ -1322,7 +1413,7 @@ instance ToJSON DiskList where
 
 --
 -- /See:/ 'targetPoolsAddInstanceRequest' smart constructor.
-newtype TargetPoolsAddInstanceRequest = TargetPoolsAddInstanceRequest
+newtype TargetPoolsAddInstanceRequest = TargetPoolsAddInstanceRequest'
     { _tpairInstances :: Maybe [InstanceReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1334,11 +1425,16 @@ newtype TargetPoolsAddInstanceRequest = TargetPoolsAddInstanceRequest
 targetPoolsAddInstanceRequest
     :: TargetPoolsAddInstanceRequest
 targetPoolsAddInstanceRequest =
-    TargetPoolsAddInstanceRequest
+    TargetPoolsAddInstanceRequest'
     { _tpairInstances = Nothing
     }
 
--- | URLs of the instances to be added to targetPool.
+-- | A full or partial URL to an instance to add to this target pool. This
+-- can be a full or partial URL. For example, the following are valid URLs:
+-- -
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project-id\/zones\/zone\/instances\/instance-name
+-- - projects\/project-id\/zones\/zone\/instances\/instance-name -
+-- zones\/zone\/instances\/instance-name
 tpairInstances :: Lens' TargetPoolsAddInstanceRequest [InstanceReference]
 tpairInstances
   = lens _tpairInstances
@@ -1350,17 +1446,17 @@ instance FromJSON TargetPoolsAddInstanceRequest where
         parseJSON
           = withObject "TargetPoolsAddInstanceRequest"
               (\ o ->
-                 TargetPoolsAddInstanceRequest <$>
+                 TargetPoolsAddInstanceRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON TargetPoolsAddInstanceRequest where
-        toJSON TargetPoolsAddInstanceRequest{..}
+        toJSON TargetPoolsAddInstanceRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _tpairInstances])
 
 --
 -- /See:/ 'instanceGroupsAddInstancesRequest' smart constructor.
-newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest
+newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest'
     { _igairInstances :: Maybe [InstanceReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1372,7 +1468,7 @@ newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest
 instanceGroupsAddInstancesRequest
     :: InstanceGroupsAddInstancesRequest
 instanceGroupsAddInstancesRequest =
-    InstanceGroupsAddInstancesRequest
+    InstanceGroupsAddInstancesRequest'
     { _igairInstances = Nothing
     }
 
@@ -1389,19 +1485,19 @@ instance FromJSON InstanceGroupsAddInstancesRequest
         parseJSON
           = withObject "InstanceGroupsAddInstancesRequest"
               (\ o ->
-                 InstanceGroupsAddInstancesRequest <$>
+                 InstanceGroupsAddInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON InstanceGroupsAddInstancesRequest
          where
-        toJSON InstanceGroupsAddInstancesRequest{..}
+        toJSON InstanceGroupsAddInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igairInstances])
 
 -- | [Output Only] A list of managed instance groups.
 --
 -- /See:/ 'instanceGroupManagerList' smart constructor.
-data InstanceGroupManagerList = InstanceGroupManagerList
+data InstanceGroupManagerList = InstanceGroupManagerList'
     { _igmlNextPageToken :: !(Maybe Text)
     , _igmlKind          :: !Text
     , _igmlItems         :: !(Maybe [InstanceGroupManager])
@@ -1425,7 +1521,7 @@ data InstanceGroupManagerList = InstanceGroupManagerList
 instanceGroupManagerList
     :: InstanceGroupManagerList
 instanceGroupManagerList =
-    InstanceGroupManagerList
+    InstanceGroupManagerList'
     { _igmlNextPageToken = Nothing
     , _igmlKind = "compute#instanceGroupManagerList"
     , _igmlItems = Nothing
@@ -1433,7 +1529,11 @@ instanceGroupManagerList =
     , _igmlId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 igmlNextPageToken :: Lens' InstanceGroupManagerList (Maybe Text)
 igmlNextPageToken
   = lens _igmlNextPageToken
@@ -1466,7 +1566,7 @@ instance FromJSON InstanceGroupManagerList where
         parseJSON
           = withObject "InstanceGroupManagerList"
               (\ o ->
-                 InstanceGroupManagerList <$>
+                 InstanceGroupManagerList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#instanceGroupManagerList")
                      <*> (o .:? "items" .!= mempty)
@@ -1474,7 +1574,7 @@ instance FromJSON InstanceGroupManagerList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceGroupManagerList where
-        toJSON InstanceGroupManagerList{..}
+        toJSON InstanceGroupManagerList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _igmlNextPageToken,
@@ -1483,16 +1583,80 @@ instance ToJSON InstanceGroupManagerList where
                   ("selfLink" .=) <$> _igmlSelfLink,
                   ("id" .=) <$> _igmlId])
 
+-- | An informational warning that appears when the list of addresses is
+-- empty.
+--
+-- /See:/ 'subnetworksScopedListWarning' smart constructor.
+data SubnetworksScopedListWarning = SubnetworksScopedListWarning'
+    { _sslwData    :: !(Maybe [SubnetworksScopedListWarningDataItem])
+    , _sslwCode    :: !(Maybe SubnetworksScopedListWarningCode)
+    , _sslwMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworksScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sslwData'
+--
+-- * 'sslwCode'
+--
+-- * 'sslwMessage'
+subnetworksScopedListWarning
+    :: SubnetworksScopedListWarning
+subnetworksScopedListWarning =
+    SubnetworksScopedListWarning'
+    { _sslwData = Nothing
+    , _sslwCode = Nothing
+    , _sslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
+sslwData :: Lens' SubnetworksScopedListWarning [SubnetworksScopedListWarningDataItem]
+sslwData
+  = lens _sslwData (\ s a -> s{_sslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+sslwCode :: Lens' SubnetworksScopedListWarning (Maybe SubnetworksScopedListWarningCode)
+sslwCode = lens _sslwCode (\ s a -> s{_sslwCode = a})
+
+-- | [Output Only] A human-readable description of the warning code.
+sslwMessage :: Lens' SubnetworksScopedListWarning (Maybe Text)
+sslwMessage
+  = lens _sslwMessage (\ s a -> s{_sslwMessage = a})
+
+instance FromJSON SubnetworksScopedListWarning where
+        parseJSON
+          = withObject "SubnetworksScopedListWarning"
+              (\ o ->
+                 SubnetworksScopedListWarning' <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON SubnetworksScopedListWarning where
+        toJSON SubnetworksScopedListWarning'{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _sslwData,
+                  ("code" .=) <$> _sslwCode,
+                  ("message" .=) <$> _sslwMessage])
+
 -- | An Image resource.
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image
+data Image = Image'
     { _iStatus            :: !(Maybe ImageStatus)
     , _iDiskSizeGb        :: !(Maybe (Textual Int64))
     , _iSourceType        :: !ImageSourceType
     , _iSourceDiskId      :: !(Maybe Text)
     , _iKind              :: !Text
     , _iArchiveSizeBytes  :: !(Maybe (Textual Int64))
+    , _iFamily            :: !(Maybe Text)
     , _iRawDisk           :: !(Maybe ImageRawDisk)
     , _iSelfLink          :: !(Maybe Text)
     , _iName              :: !(Maybe Text)
@@ -1520,6 +1684,8 @@ data Image = Image
 --
 -- * 'iArchiveSizeBytes'
 --
+-- * 'iFamily'
+--
 -- * 'iRawDisk'
 --
 -- * 'iSelfLink'
@@ -1540,13 +1706,14 @@ data Image = Image
 image
     :: Image
 image =
-    Image
+    Image'
     { _iStatus = Nothing
     , _iDiskSizeGb = Nothing
     , _iSourceType = Raw
     , _iSourceDiskId = Nothing
     , _iKind = "compute#image"
     , _iArchiveSizeBytes = Nothing
+    , _iFamily = Nothing
     , _iRawDisk = Nothing
     , _iSelfLink = Nothing
     , _iName = Nothing
@@ -1597,6 +1764,12 @@ iArchiveSizeBytes
       (\ s a -> s{_iArchiveSizeBytes = a})
       . mapping _Coerce
 
+-- | The name of the image family to which this image belongs. You can create
+-- disks by specifying an image family instead of a specific image name.
+-- The image family always returns its latest image that is not deprecated.
+iFamily :: Lens' Image (Maybe Text)
+iFamily = lens _iFamily (\ s a -> s{_iFamily = a})
+
 -- | The parameters of the raw disk image.
 iRawDisk :: Lens' Image (Maybe ImageRawDisk)
 iRawDisk = lens _iRawDisk (\ s a -> s{_iRawDisk = a})
@@ -1622,7 +1795,8 @@ iCreationTimestamp
   = lens _iCreationTimestamp
       (\ s a -> s{_iCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 iId :: Lens' Image (Maybe Word64)
 iId
   = lens _iId (\ s a -> s{_iId = a}) . mapping _Coerce
@@ -1644,8 +1818,8 @@ iSourceDisk :: Lens' Image (Maybe Text)
 iSourceDisk
   = lens _iSourceDisk (\ s a -> s{_iSourceDisk = a})
 
--- | Textual description of the resource; provided by the client when the
--- resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 iDescription :: Lens' Image (Maybe Text)
 iDescription
   = lens _iDescription (\ s a -> s{_iDescription = a})
@@ -1659,12 +1833,13 @@ instance FromJSON Image where
         parseJSON
           = withObject "Image"
               (\ o ->
-                 Image <$>
+                 Image' <$>
                    (o .:? "status") <*> (o .:? "diskSizeGb") <*>
                      (o .:? "sourceType" .!= Raw)
                      <*> (o .:? "sourceDiskId")
                      <*> (o .:? "kind" .!= "compute#image")
                      <*> (o .:? "archiveSizeBytes")
+                     <*> (o .:? "family")
                      <*> (o .:? "rawDisk")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
@@ -1676,7 +1851,7 @@ instance FromJSON Image where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON Image where
-        toJSON Image{..}
+        toJSON Image'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _iStatus,
@@ -1685,6 +1860,7 @@ instance ToJSON Image where
                   ("sourceDiskId" .=) <$> _iSourceDiskId,
                   Just ("kind" .= _iKind),
                   ("archiveSizeBytes" .=) <$> _iArchiveSizeBytes,
+                  ("family" .=) <$> _iFamily,
                   ("rawDisk" .=) <$> _iRawDisk,
                   ("selfLink" .=) <$> _iSelfLink,
                   ("name" .=) <$> _iName,
@@ -1699,10 +1875,10 @@ instance ToJSON Image where
 -- host and path.
 --
 -- /See:/ 'urlMap' smart constructor.
-data URLMap = URLMap
+data URLMap = URLMap'
     { _umTests             :: !(Maybe [URLMapTest])
     , _umKind              :: !Text
-    , _umFingerprint       :: !(Maybe (Textual Word8))
+    , _umFingerprint       :: !(Maybe Base64)
     , _umDefaultService    :: !(Maybe Text)
     , _umSelfLink          :: !(Maybe Text)
     , _umName              :: !(Maybe Text)
@@ -1741,7 +1917,7 @@ data URLMap = URLMap
 urlMap
     :: URLMap
 urlMap =
-    URLMap
+    URLMap'
     { _umTests = Nothing
     , _umKind = "compute#urlMap"
     , _umFingerprint = Nothing
@@ -1756,13 +1932,13 @@ urlMap =
     }
 
 -- | The list of expected URL mappings. Request to update this UrlMap will
--- succeed only all of the test cases pass.
+-- succeed only if all of the test cases pass.
 umTests :: Lens' URLMap [URLMapTest]
 umTests
   = lens _umTests (\ s a -> s{_umTests = a}) . _Default
       . _Coerce
 
--- | Type of the resource.
+-- | [Output Only] Type of the resource. Always compute#urlMaps for url maps.
 umKind :: Lens' URLMap Text
 umKind = lens _umKind (\ s a -> s{_umKind = a})
 
@@ -1770,11 +1946,11 @@ umKind = lens _umKind (\ s a -> s{_umKind = a})
 -- object. This field is used in optimistic locking. This field will be
 -- ignored when inserting a UrlMap. An up-to-date fingerprint must be
 -- provided in order to update the UrlMap.
-umFingerprint :: Lens' URLMap (Maybe Word8)
+umFingerprint :: Lens' URLMap (Maybe ByteString)
 umFingerprint
   = lens _umFingerprint
       (\ s a -> s{_umFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The URL of the BackendService resource if none of the hostRules match.
 umDefaultService :: Lens' URLMap (Maybe Text)
@@ -1811,7 +1987,8 @@ umPathMatchers
       . _Default
       . _Coerce
 
--- | [Output Only] Unique identifier for the resource. Set by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 umId :: Lens' URLMap (Maybe Word64)
 umId
   = lens _umId (\ s a -> s{_umId = a}) .
@@ -1824,8 +2001,8 @@ umHostRules
       _Default
       . _Coerce
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 umDescription :: Lens' URLMap (Maybe Text)
 umDescription
   = lens _umDescription
@@ -1835,7 +2012,7 @@ instance FromJSON URLMap where
         parseJSON
           = withObject "URLMap"
               (\ o ->
-                 URLMap <$>
+                 URLMap' <$>
                    (o .:? "tests" .!= mempty) <*>
                      (o .:? "kind" .!= "compute#urlMap")
                      <*> (o .:? "fingerprint")
@@ -1849,7 +2026,7 @@ instance FromJSON URLMap where
                      <*> (o .:? "description"))
 
 instance ToJSON URLMap where
-        toJSON URLMap{..}
+        toJSON URLMap'{..}
           = object
               (catMaybes
                  [("tests" .=) <$> _umTests, Just ("kind" .= _umKind),
@@ -1866,7 +2043,7 @@ instance ToJSON URLMap where
 -- | A map of scoped instance group lists.
 --
 -- /See:/ 'instanceGroupAggregatedListItems' smart constructor.
-newtype InstanceGroupAggregatedListItems = InstanceGroupAggregatedListItems
+newtype InstanceGroupAggregatedListItems = InstanceGroupAggregatedListItems'
     { _igaliAddtional :: HashMap Text InstanceGroupsScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1879,7 +2056,7 @@ instanceGroupAggregatedListItems
     :: HashMap Text InstanceGroupsScopedList -- ^ 'igaliAddtional'
     -> InstanceGroupAggregatedListItems
 instanceGroupAggregatedListItems pIgaliAddtional_ =
-    InstanceGroupAggregatedListItems
+    InstanceGroupAggregatedListItems'
     { _igaliAddtional = _Coerce # pIgaliAddtional_
     }
 
@@ -1895,7 +2072,7 @@ instance FromJSON InstanceGroupAggregatedListItems
         parseJSON
           = withObject "InstanceGroupAggregatedListItems"
               (\ o ->
-                 InstanceGroupAggregatedListItems <$>
+                 InstanceGroupAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON InstanceGroupAggregatedListItems
@@ -1905,7 +2082,7 @@ instance ToJSON InstanceGroupAggregatedListItems
 -- | Contains a list of TargetPool resources.
 --
 -- /See:/ 'targetPoolList' smart constructor.
-data TargetPoolList = TargetPoolList
+data TargetPoolList = TargetPoolList'
     { _tplNextPageToken :: !(Maybe Text)
     , _tplKind          :: !Text
     , _tplItems         :: !(Maybe [TargetPool])
@@ -1929,7 +2106,7 @@ data TargetPoolList = TargetPoolList
 targetPoolList
     :: TargetPoolList
 targetPoolList =
-    TargetPoolList
+    TargetPoolList'
     { _tplNextPageToken = Nothing
     , _tplKind = "compute#targetPoolList"
     , _tplItems = Nothing
@@ -1937,13 +2114,18 @@ targetPoolList =
     , _tplId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tplNextPageToken :: Lens' TargetPoolList (Maybe Text)
 tplNextPageToken
   = lens _tplNextPageToken
       (\ s a -> s{_tplNextPageToken = a})
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always compute#targetPoolList for lists
+-- of target pools.
 tplKind :: Lens' TargetPoolList Text
 tplKind = lens _tplKind (\ s a -> s{_tplKind = a})
 
@@ -1967,7 +2149,7 @@ instance FromJSON TargetPoolList where
         parseJSON
           = withObject "TargetPoolList"
               (\ o ->
-                 TargetPoolList <$>
+                 TargetPoolList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetPoolList")
                      <*> (o .:? "items" .!= mempty)
@@ -1975,7 +2157,7 @@ instance FromJSON TargetPoolList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetPoolList where
-        toJSON TargetPoolList{..}
+        toJSON TargetPoolList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tplNextPageToken,
@@ -1986,7 +2168,7 @@ instance ToJSON TargetPoolList where
 
 --
 -- /See:/ 'targetInstanceAggregatedList' smart constructor.
-data TargetInstanceAggregatedList = TargetInstanceAggregatedList
+data TargetInstanceAggregatedList = TargetInstanceAggregatedList'
     { _tialNextPageToken :: !(Maybe Text)
     , _tialKind          :: !Text
     , _tialItems         :: !(Maybe TargetInstanceAggregatedListItems)
@@ -2010,7 +2192,7 @@ data TargetInstanceAggregatedList = TargetInstanceAggregatedList
 targetInstanceAggregatedList
     :: TargetInstanceAggregatedList
 targetInstanceAggregatedList =
-    TargetInstanceAggregatedList
+    TargetInstanceAggregatedList'
     { _tialNextPageToken = Nothing
     , _tialKind = "compute#targetInstanceAggregatedList"
     , _tialItems = Nothing
@@ -2018,7 +2200,11 @@ targetInstanceAggregatedList =
     , _tialId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tialNextPageToken :: Lens' TargetInstanceAggregatedList (Maybe Text)
 tialNextPageToken
   = lens _tialNextPageToken
@@ -2046,7 +2232,7 @@ instance FromJSON TargetInstanceAggregatedList where
         parseJSON
           = withObject "TargetInstanceAggregatedList"
               (\ o ->
-                 TargetInstanceAggregatedList <$>
+                 TargetInstanceAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#targetInstanceAggregatedList")
@@ -2055,7 +2241,7 @@ instance FromJSON TargetInstanceAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetInstanceAggregatedList where
-        toJSON TargetInstanceAggregatedList{..}
+        toJSON TargetInstanceAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tialNextPageToken,
@@ -2066,7 +2252,7 @@ instance ToJSON TargetInstanceAggregatedList where
 
 --
 -- /See:/ 'disksScopedList' smart constructor.
-data DisksScopedList = DisksScopedList
+data DisksScopedList = DisksScopedList'
     { _dslWarning :: !(Maybe DisksScopedListWarning)
     , _dslDisks   :: !(Maybe [Disk])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2081,7 +2267,7 @@ data DisksScopedList = DisksScopedList
 disksScopedList
     :: DisksScopedList
 disksScopedList =
-    DisksScopedList
+    DisksScopedList'
     { _dslWarning = Nothing
     , _dslDisks = Nothing
     }
@@ -2103,11 +2289,11 @@ instance FromJSON DisksScopedList where
         parseJSON
           = withObject "DisksScopedList"
               (\ o ->
-                 DisksScopedList <$>
+                 DisksScopedList' <$>
                    (o .:? "warning") <*> (o .:? "disks" .!= mempty))
 
 instance ToJSON DisksScopedList where
-        toJSON DisksScopedList{..}
+        toJSON DisksScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _dslWarning,
@@ -2115,7 +2301,7 @@ instance ToJSON DisksScopedList where
 
 --
 -- /See:/ 'instanceGroupManagersScopedList' smart constructor.
-data InstanceGroupManagersScopedList = InstanceGroupManagersScopedList
+data InstanceGroupManagersScopedList = InstanceGroupManagersScopedList'
     { _igmslWarning               :: !(Maybe InstanceGroupManagersScopedListWarning)
     , _igmslInstanceGroupManagers :: !(Maybe [InstanceGroupManager])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2130,7 +2316,7 @@ data InstanceGroupManagersScopedList = InstanceGroupManagersScopedList
 instanceGroupManagersScopedList
     :: InstanceGroupManagersScopedList
 instanceGroupManagersScopedList =
-    InstanceGroupManagersScopedList
+    InstanceGroupManagersScopedList'
     { _igmslWarning = Nothing
     , _igmslInstanceGroupManagers = Nothing
     }
@@ -2155,12 +2341,12 @@ instance FromJSON InstanceGroupManagersScopedList
         parseJSON
           = withObject "InstanceGroupManagersScopedList"
               (\ o ->
-                 InstanceGroupManagersScopedList <$>
+                 InstanceGroupManagersScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "instanceGroupManagers" .!= mempty))
 
 instance ToJSON InstanceGroupManagersScopedList where
-        toJSON InstanceGroupManagersScopedList{..}
+        toJSON InstanceGroupManagersScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _igmslWarning,
@@ -2169,7 +2355,7 @@ instance ToJSON InstanceGroupManagersScopedList where
 
 --
 -- /See:/ 'diskAggregatedList' smart constructor.
-data DiskAggregatedList = DiskAggregatedList
+data DiskAggregatedList = DiskAggregatedList'
     { _dalNextPageToken :: !(Maybe Text)
     , _dalKind          :: !Text
     , _dalItems         :: !(Maybe DiskAggregatedListItems)
@@ -2193,7 +2379,7 @@ data DiskAggregatedList = DiskAggregatedList
 diskAggregatedList
     :: DiskAggregatedList
 diskAggregatedList =
-    DiskAggregatedList
+    DiskAggregatedList'
     { _dalNextPageToken = Nothing
     , _dalKind = "compute#diskAggregatedList"
     , _dalItems = Nothing
@@ -2201,7 +2387,11 @@ diskAggregatedList =
     , _dalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 dalNextPageToken :: Lens' DiskAggregatedList (Maybe Text)
 dalNextPageToken
   = lens _dalNextPageToken
@@ -2221,7 +2411,8 @@ dalSelfLink :: Lens' DiskAggregatedList (Maybe Text)
 dalSelfLink
   = lens _dalSelfLink (\ s a -> s{_dalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dalId :: Lens' DiskAggregatedList (Maybe Text)
 dalId = lens _dalId (\ s a -> s{_dalId = a})
 
@@ -2229,7 +2420,7 @@ instance FromJSON DiskAggregatedList where
         parseJSON
           = withObject "DiskAggregatedList"
               (\ o ->
-                 DiskAggregatedList <$>
+                 DiskAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#diskAggregatedList")
                      <*> (o .:? "items")
@@ -2237,7 +2428,7 @@ instance FromJSON DiskAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON DiskAggregatedList where
-        toJSON DiskAggregatedList{..}
+        toJSON DiskAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dalNextPageToken,
@@ -2248,7 +2439,7 @@ instance ToJSON DiskAggregatedList where
 
 --
 -- /See:/ 'instanceWithNamedPorts' smart constructor.
-data InstanceWithNamedPorts = InstanceWithNamedPorts
+data InstanceWithNamedPorts = InstanceWithNamedPorts'
     { _iwnpStatus     :: !(Maybe InstanceWithNamedPortsStatus)
     , _iwnpNamedPorts :: !(Maybe [NamedPort])
     , _iwnpInstance   :: !(Maybe Text)
@@ -2266,7 +2457,7 @@ data InstanceWithNamedPorts = InstanceWithNamedPorts
 instanceWithNamedPorts
     :: InstanceWithNamedPorts
 instanceWithNamedPorts =
-    InstanceWithNamedPorts
+    InstanceWithNamedPorts'
     { _iwnpStatus = Nothing
     , _iwnpNamedPorts = Nothing
     , _iwnpInstance = Nothing
@@ -2294,12 +2485,12 @@ instance FromJSON InstanceWithNamedPorts where
         parseJSON
           = withObject "InstanceWithNamedPorts"
               (\ o ->
-                 InstanceWithNamedPorts <$>
+                 InstanceWithNamedPorts' <$>
                    (o .:? "status") <*> (o .:? "namedPorts" .!= mempty)
                      <*> (o .:? "instance"))
 
 instance ToJSON InstanceWithNamedPorts where
-        toJSON InstanceWithNamedPorts{..}
+        toJSON InstanceWithNamedPorts'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _iwnpStatus,
@@ -2308,7 +2499,7 @@ instance ToJSON InstanceWithNamedPorts where
 
 --
 -- /See:/ 'forwardingRulesScopedList' smart constructor.
-data ForwardingRulesScopedList = ForwardingRulesScopedList
+data ForwardingRulesScopedList = ForwardingRulesScopedList'
     { _frslWarning         :: !(Maybe ForwardingRulesScopedListWarning)
     , _frslForwardingRules :: !(Maybe [ForwardingRule])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2323,7 +2514,7 @@ data ForwardingRulesScopedList = ForwardingRulesScopedList
 forwardingRulesScopedList
     :: ForwardingRulesScopedList
 forwardingRulesScopedList =
-    ForwardingRulesScopedList
+    ForwardingRulesScopedList'
     { _frslWarning = Nothing
     , _frslForwardingRules = Nothing
     }
@@ -2346,12 +2537,12 @@ instance FromJSON ForwardingRulesScopedList where
         parseJSON
           = withObject "ForwardingRulesScopedList"
               (\ o ->
-                 ForwardingRulesScopedList <$>
+                 ForwardingRulesScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "forwardingRules" .!= mempty))
 
 instance ToJSON ForwardingRulesScopedList where
-        toJSON ForwardingRulesScopedList{..}
+        toJSON ForwardingRulesScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _frslWarning,
@@ -2359,7 +2550,7 @@ instance ToJSON ForwardingRulesScopedList where
 
 --
 -- /See:/ 'instanceReference' smart constructor.
-newtype InstanceReference = InstanceReference
+newtype InstanceReference = InstanceReference'
     { _iInstance :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2371,7 +2562,7 @@ newtype InstanceReference = InstanceReference
 instanceReference
     :: InstanceReference
 instanceReference =
-    InstanceReference
+    InstanceReference'
     { _iInstance = Nothing
     }
 
@@ -2383,15 +2574,15 @@ iInstance
 instance FromJSON InstanceReference where
         parseJSON
           = withObject "InstanceReference"
-              (\ o -> InstanceReference <$> (o .:? "instance"))
+              (\ o -> InstanceReference' <$> (o .:? "instance"))
 
 instance ToJSON InstanceReference where
-        toJSON InstanceReference{..}
+        toJSON InstanceReference'{..}
           = object (catMaybes [("instance" .=) <$> _iInstance])
 
 --
 -- /See:/ 'operationAggregatedList' smart constructor.
-data OperationAggregatedList = OperationAggregatedList
+data OperationAggregatedList = OperationAggregatedList'
     { _oalNextPageToken :: !(Maybe Text)
     , _oalKind          :: !Text
     , _oalItems         :: !(Maybe OperationAggregatedListItems)
@@ -2415,7 +2606,7 @@ data OperationAggregatedList = OperationAggregatedList
 operationAggregatedList
     :: OperationAggregatedList
 operationAggregatedList =
-    OperationAggregatedList
+    OperationAggregatedList'
     { _oalNextPageToken = Nothing
     , _oalKind = "compute#operationAggregatedList"
     , _oalItems = Nothing
@@ -2423,7 +2614,11 @@ operationAggregatedList =
     , _oalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 oalNextPageToken :: Lens' OperationAggregatedList (Maybe Text)
 oalNextPageToken
   = lens _oalNextPageToken
@@ -2443,7 +2638,8 @@ oalSelfLink :: Lens' OperationAggregatedList (Maybe Text)
 oalSelfLink
   = lens _oalSelfLink (\ s a -> s{_oalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 oalId :: Lens' OperationAggregatedList (Maybe Text)
 oalId = lens _oalId (\ s a -> s{_oalId = a})
 
@@ -2451,7 +2647,7 @@ instance FromJSON OperationAggregatedList where
         parseJSON
           = withObject "OperationAggregatedList"
               (\ o ->
-                 OperationAggregatedList <$>
+                 OperationAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#operationAggregatedList")
                      <*> (o .:? "items")
@@ -2459,7 +2655,7 @@ instance FromJSON OperationAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON OperationAggregatedList where
-        toJSON OperationAggregatedList{..}
+        toJSON OperationAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _oalNextPageToken,
@@ -2470,7 +2666,7 @@ instance ToJSON OperationAggregatedList where
 
 --
 -- /See:/ 'operationsScopedList' smart constructor.
-data OperationsScopedList = OperationsScopedList
+data OperationsScopedList = OperationsScopedList'
     { _oslWarning    :: !(Maybe OperationsScopedListWarning)
     , _oslOperations :: !(Maybe [Operation])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2485,7 +2681,7 @@ data OperationsScopedList = OperationsScopedList
 operationsScopedList
     :: OperationsScopedList
 operationsScopedList =
-    OperationsScopedList
+    OperationsScopedList'
     { _oslWarning = Nothing
     , _oslOperations = Nothing
     }
@@ -2508,12 +2704,12 @@ instance FromJSON OperationsScopedList where
         parseJSON
           = withObject "OperationsScopedList"
               (\ o ->
-                 OperationsScopedList <$>
+                 OperationsScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON OperationsScopedList where
-        toJSON OperationsScopedList{..}
+        toJSON OperationsScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _oslWarning,
@@ -2522,7 +2718,7 @@ instance ToJSON OperationsScopedList where
 -- | The named port. For example: .
 --
 -- /See:/ 'namedPort' smart constructor.
-data NamedPort = NamedPort
+data NamedPort = NamedPort'
     { _npName :: !(Maybe Text)
     , _npPort :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2537,7 +2733,7 @@ data NamedPort = NamedPort
 namedPort
     :: NamedPort
 namedPort =
-    NamedPort
+    NamedPort'
     { _npName = Nothing
     , _npPort = Nothing
     }
@@ -2557,10 +2753,10 @@ instance FromJSON NamedPort where
         parseJSON
           = withObject "NamedPort"
               (\ o ->
-                 NamedPort <$> (o .:? "name") <*> (o .:? "port"))
+                 NamedPort' <$> (o .:? "name") <*> (o .:? "port"))
 
 instance ToJSON NamedPort where
-        toJSON NamedPort{..}
+        toJSON NamedPort'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _npName, ("port" .=) <$> _npPort])
@@ -2568,7 +2764,7 @@ instance ToJSON NamedPort where
 -- | Contains a list of TargetInstance resources.
 --
 -- /See:/ 'targetInstanceList' smart constructor.
-data TargetInstanceList = TargetInstanceList
+data TargetInstanceList = TargetInstanceList'
     { _tilNextPageToken :: !(Maybe Text)
     , _tilKind          :: !Text
     , _tilItems         :: !(Maybe [TargetInstance])
@@ -2592,7 +2788,7 @@ data TargetInstanceList = TargetInstanceList
 targetInstanceList
     :: TargetInstanceList
 targetInstanceList =
-    TargetInstanceList
+    TargetInstanceList'
     { _tilNextPageToken = Nothing
     , _tilKind = "compute#targetInstanceList"
     , _tilItems = Nothing
@@ -2600,7 +2796,11 @@ targetInstanceList =
     , _tilId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tilNextPageToken :: Lens' TargetInstanceList (Maybe Text)
 tilNextPageToken
   = lens _tilNextPageToken
@@ -2622,7 +2822,8 @@ tilSelfLink :: Lens' TargetInstanceList (Maybe Text)
 tilSelfLink
   = lens _tilSelfLink (\ s a -> s{_tilSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tilId :: Lens' TargetInstanceList (Maybe Text)
 tilId = lens _tilId (\ s a -> s{_tilId = a})
 
@@ -2630,7 +2831,7 @@ instance FromJSON TargetInstanceList where
         parseJSON
           = withObject "TargetInstanceList"
               (\ o ->
-                 TargetInstanceList <$>
+                 TargetInstanceList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetInstanceList")
                      <*> (o .:? "items" .!= mempty)
@@ -2638,7 +2839,7 @@ instance FromJSON TargetInstanceList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetInstanceList where
-        toJSON TargetInstanceList{..}
+        toJSON TargetInstanceList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tilNextPageToken,
@@ -2649,7 +2850,7 @@ instance ToJSON TargetInstanceList where
 
 --
 -- /See:/ 'instanceGroupManagerAggregatedList' smart constructor.
-data InstanceGroupManagerAggregatedList = InstanceGroupManagerAggregatedList
+data InstanceGroupManagerAggregatedList = InstanceGroupManagerAggregatedList'
     { _igmalNextPageToken :: !(Maybe Text)
     , _igmalKind          :: !Text
     , _igmalItems         :: !(Maybe InstanceGroupManagerAggregatedListItems)
@@ -2673,7 +2874,7 @@ data InstanceGroupManagerAggregatedList = InstanceGroupManagerAggregatedList
 instanceGroupManagerAggregatedList
     :: InstanceGroupManagerAggregatedList
 instanceGroupManagerAggregatedList =
-    InstanceGroupManagerAggregatedList
+    InstanceGroupManagerAggregatedList'
     { _igmalNextPageToken = Nothing
     , _igmalKind = "compute#instanceGroupManagerAggregatedList"
     , _igmalItems = Nothing
@@ -2681,7 +2882,11 @@ instanceGroupManagerAggregatedList =
     , _igmalId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 igmalNextPageToken :: Lens' InstanceGroupManagerAggregatedList (Maybe Text)
 igmalNextPageToken
   = lens _igmalNextPageToken
@@ -2716,7 +2921,7 @@ instance FromJSON InstanceGroupManagerAggregatedList
         parseJSON
           = withObject "InstanceGroupManagerAggregatedList"
               (\ o ->
-                 InstanceGroupManagerAggregatedList <$>
+                 InstanceGroupManagerAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#instanceGroupManagerAggregatedList")
@@ -2726,7 +2931,7 @@ instance FromJSON InstanceGroupManagerAggregatedList
 
 instance ToJSON InstanceGroupManagerAggregatedList
          where
-        toJSON InstanceGroupManagerAggregatedList{..}
+        toJSON InstanceGroupManagerAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _igmalNextPageToken,
@@ -2737,7 +2942,7 @@ instance ToJSON InstanceGroupManagerAggregatedList
 
 --
 -- /See:/ 'targetPoolsScopedList' smart constructor.
-data TargetPoolsScopedList = TargetPoolsScopedList
+data TargetPoolsScopedList = TargetPoolsScopedList'
     { _tpslWarning     :: !(Maybe TargetPoolsScopedListWarning)
     , _tpslTargetPools :: !(Maybe [TargetPool])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2752,7 +2957,7 @@ data TargetPoolsScopedList = TargetPoolsScopedList
 targetPoolsScopedList
     :: TargetPoolsScopedList
 targetPoolsScopedList =
-    TargetPoolsScopedList
+    TargetPoolsScopedList'
     { _tpslWarning = Nothing
     , _tpslTargetPools = Nothing
     }
@@ -2775,12 +2980,12 @@ instance FromJSON TargetPoolsScopedList where
         parseJSON
           = withObject "TargetPoolsScopedList"
               (\ o ->
-                 TargetPoolsScopedList <$>
+                 TargetPoolsScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "targetPools" .!= mempty))
 
 instance ToJSON TargetPoolsScopedList where
-        toJSON TargetPoolsScopedList{..}
+        toJSON TargetPoolsScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _tpslWarning,
@@ -2788,7 +2993,7 @@ instance ToJSON TargetPoolsScopedList where
 
 --
 -- /See:/ 'forwardingRuleAggregatedList' smart constructor.
-data ForwardingRuleAggregatedList = ForwardingRuleAggregatedList
+data ForwardingRuleAggregatedList = ForwardingRuleAggregatedList'
     { _fralNextPageToken :: !(Maybe Text)
     , _fralKind          :: !Text
     , _fralItems         :: !(Maybe ForwardingRuleAggregatedListItems)
@@ -2812,7 +3017,7 @@ data ForwardingRuleAggregatedList = ForwardingRuleAggregatedList
 forwardingRuleAggregatedList
     :: ForwardingRuleAggregatedList
 forwardingRuleAggregatedList =
-    ForwardingRuleAggregatedList
+    ForwardingRuleAggregatedList'
     { _fralNextPageToken = Nothing
     , _fralKind = "compute#forwardingRuleAggregatedList"
     , _fralItems = Nothing
@@ -2820,13 +3025,18 @@ forwardingRuleAggregatedList =
     , _fralId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 fralNextPageToken :: Lens' ForwardingRuleAggregatedList (Maybe Text)
 fralNextPageToken
   = lens _fralNextPageToken
       (\ s a -> s{_fralNextPageToken = a})
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always
+-- compute#forwardingRuleAggregatedList for lists of forwarding rules.
 fralKind :: Lens' ForwardingRuleAggregatedList Text
 fralKind = lens _fralKind (\ s a -> s{_fralKind = a})
 
@@ -2840,7 +3050,8 @@ fralSelfLink :: Lens' ForwardingRuleAggregatedList (Maybe Text)
 fralSelfLink
   = lens _fralSelfLink (\ s a -> s{_fralSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 fralId :: Lens' ForwardingRuleAggregatedList (Maybe Text)
 fralId = lens _fralId (\ s a -> s{_fralId = a})
 
@@ -2848,7 +3059,7 @@ instance FromJSON ForwardingRuleAggregatedList where
         parseJSON
           = withObject "ForwardingRuleAggregatedList"
               (\ o ->
-                 ForwardingRuleAggregatedList <$>
+                 ForwardingRuleAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#forwardingRuleAggregatedList")
@@ -2857,7 +3068,7 @@ instance FromJSON ForwardingRuleAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON ForwardingRuleAggregatedList where
-        toJSON ForwardingRuleAggregatedList{..}
+        toJSON ForwardingRuleAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _fralNextPageToken,
@@ -2868,7 +3079,7 @@ instance ToJSON ForwardingRuleAggregatedList where
 
 --
 -- /See:/ 'targetReference' smart constructor.
-newtype TargetReference = TargetReference
+newtype TargetReference = TargetReference'
     { _trTarget :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2880,7 +3091,7 @@ newtype TargetReference = TargetReference
 targetReference
     :: TargetReference
 targetReference =
-    TargetReference
+    TargetReference'
     { _trTarget = Nothing
     }
 
@@ -2890,15 +3101,15 @@ trTarget = lens _trTarget (\ s a -> s{_trTarget = a})
 instance FromJSON TargetReference where
         parseJSON
           = withObject "TargetReference"
-              (\ o -> TargetReference <$> (o .:? "target"))
+              (\ o -> TargetReference' <$> (o .:? "target"))
 
 instance ToJSON TargetReference where
-        toJSON TargetReference{..}
+        toJSON TargetReference'{..}
           = object (catMaybes [("target" .=) <$> _trTarget])
 
 --
 -- /See:/ 'targetPoolAggregatedList' smart constructor.
-data TargetPoolAggregatedList = TargetPoolAggregatedList
+data TargetPoolAggregatedList = TargetPoolAggregatedList'
     { _tpalNextPageToken :: !(Maybe Text)
     , _tpalKind          :: !Text
     , _tpalItems         :: !(Maybe TargetPoolAggregatedListItems)
@@ -2922,7 +3133,7 @@ data TargetPoolAggregatedList = TargetPoolAggregatedList
 targetPoolAggregatedList
     :: TargetPoolAggregatedList
 targetPoolAggregatedList =
-    TargetPoolAggregatedList
+    TargetPoolAggregatedList'
     { _tpalNextPageToken = Nothing
     , _tpalKind = "compute#targetPoolAggregatedList"
     , _tpalItems = Nothing
@@ -2930,17 +3141,22 @@ targetPoolAggregatedList =
     , _tpalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tpalNextPageToken :: Lens' TargetPoolAggregatedList (Maybe Text)
 tpalNextPageToken
   = lens _tpalNextPageToken
       (\ s a -> s{_tpalNextPageToken = a})
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always compute#targetPoolAggregatedList
+-- for aggregated lists of target pools.
 tpalKind :: Lens' TargetPoolAggregatedList Text
 tpalKind = lens _tpalKind (\ s a -> s{_tpalKind = a})
 
--- | A map of scoped target pool lists.
+-- | [Output Only] A map of scoped target pool lists.
 tpalItems :: Lens' TargetPoolAggregatedList (Maybe TargetPoolAggregatedListItems)
 tpalItems
   = lens _tpalItems (\ s a -> s{_tpalItems = a})
@@ -2958,7 +3174,7 @@ instance FromJSON TargetPoolAggregatedList where
         parseJSON
           = withObject "TargetPoolAggregatedList"
               (\ o ->
-                 TargetPoolAggregatedList <$>
+                 TargetPoolAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetPoolAggregatedList")
                      <*> (o .:? "items")
@@ -2966,7 +3182,7 @@ instance FromJSON TargetPoolAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetPoolAggregatedList where
-        toJSON TargetPoolAggregatedList{..}
+        toJSON TargetPoolAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tpalNextPageToken,
@@ -2977,7 +3193,7 @@ instance ToJSON TargetPoolAggregatedList where
 
 --
 -- /See:/ 'operationsScopedListWarningDataItem' smart constructor.
-data OperationsScopedListWarningDataItem = OperationsScopedListWarningDataItem
+data OperationsScopedListWarningDataItem = OperationsScopedListWarningDataItem'
     { _oslwdiValue :: !(Maybe Text)
     , _oslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2992,7 +3208,7 @@ data OperationsScopedListWarningDataItem = OperationsScopedListWarningDataItem
 operationsScopedListWarningDataItem
     :: OperationsScopedListWarningDataItem
 operationsScopedListWarningDataItem =
-    OperationsScopedListWarningDataItem
+    OperationsScopedListWarningDataItem'
     { _oslwdiValue = Nothing
     , _oslwdiKey = Nothing
     }
@@ -3002,7 +3218,13 @@ oslwdiValue :: Lens' OperationsScopedListWarningDataItem (Maybe Text)
 oslwdiValue
   = lens _oslwdiValue (\ s a -> s{_oslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 oslwdiKey :: Lens' OperationsScopedListWarningDataItem (Maybe Text)
 oslwdiKey
   = lens _oslwdiKey (\ s a -> s{_oslwdiKey = a})
@@ -3012,22 +3234,22 @@ instance FromJSON OperationsScopedListWarningDataItem
         parseJSON
           = withObject "OperationsScopedListWarningDataItem"
               (\ o ->
-                 OperationsScopedListWarningDataItem <$>
+                 OperationsScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON OperationsScopedListWarningDataItem
          where
-        toJSON OperationsScopedListWarningDataItem{..}
+        toJSON OperationsScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _oslwdiValue,
                   ("key" .=) <$> _oslwdiKey])
 
 -- | A TargetPool resource. This resource defines a pool of instances,
--- associated HttpHealthCheck resources, and the fallback TargetPool.
+-- associated HttpHealthCheck resources, and the fallback target pool.
 --
 -- /See:/ 'targetPool' smart constructor.
-data TargetPool = TargetPool
+data TargetPool = TargetPool'
     { _tpSessionAffinity   :: !(Maybe TargetPoolSessionAffinity)
     , _tpBackupPool        :: !(Maybe Text)
     , _tpKind              :: !Text
@@ -3072,7 +3294,7 @@ data TargetPool = TargetPool
 targetPool
     :: TargetPool
 targetPool =
-    TargetPool
+    TargetPool'
     { _tpSessionAffinity = Nothing
     , _tpBackupPool = Nothing
     , _tpKind = "compute#targetPool"
@@ -3114,7 +3336,8 @@ tpBackupPool :: Lens' TargetPool (Maybe Text)
 tpBackupPool
   = lens _tpBackupPool (\ s a -> s{_tpBackupPool = a})
 
--- | Type of the resource.
+-- | [Output Only] Type of the resource. Always compute#targetPool for target
+-- pools.
 tpKind :: Lens' TargetPool Text
 tpKind = lens _tpKind (\ s a -> s{_tpKind = a})
 
@@ -3139,7 +3362,7 @@ tpCreationTimestamp
   = lens _tpCreationTimestamp
       (\ s a -> s{_tpCreationTimestamp = a})
 
--- | A list of resource URLs to the member virtual machines serving this
+-- | A list of resource URLs to the virtual machine instances serving this
 -- pool. They must live in zones contained in the same region as this pool.
 tpInstances :: Lens' TargetPool [Text]
 tpInstances
@@ -3147,7 +3370,8 @@ tpInstances
       _Default
       . _Coerce
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tpId :: Lens' TargetPool (Maybe Word64)
 tpId
   = lens _tpId (\ s a -> s{_tpId = a}) .
@@ -3175,8 +3399,8 @@ tpFailoverRatio
 tpRegion :: Lens' TargetPool (Maybe Text)
 tpRegion = lens _tpRegion (\ s a -> s{_tpRegion = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 tpDescription :: Lens' TargetPool (Maybe Text)
 tpDescription
   = lens _tpDescription
@@ -3197,7 +3421,7 @@ instance FromJSON TargetPool where
         parseJSON
           = withObject "TargetPool"
               (\ o ->
-                 TargetPool <$>
+                 TargetPool' <$>
                    (o .:? "sessionAffinity") <*> (o .:? "backupPool")
                      <*> (o .:? "kind" .!= "compute#targetPool")
                      <*> (o .:? "selfLink")
@@ -3211,7 +3435,7 @@ instance FromJSON TargetPool where
                      <*> (o .:? "healthChecks" .!= mempty))
 
 instance ToJSON TargetPool where
-        toJSON TargetPool{..}
+        toJSON TargetPool'{..}
           = object
               (catMaybes
                  [("sessionAffinity" .=) <$> _tpSessionAffinity,
@@ -3227,10 +3451,10 @@ instance ToJSON TargetPool where
                   ("description" .=) <$> _tpDescription,
                   ("healthChecks" .=) <$> _tpHealthChecks])
 
--- | Contains a list of Image resources.
+-- | Contains a list of images.
 --
 -- /See:/ 'imageList' smart constructor.
-data ImageList = ImageList
+data ImageList = ImageList'
     { _ilNextPageToken :: !(Maybe Text)
     , _ilKind          :: !Text
     , _ilItems         :: !(Maybe [Image])
@@ -3254,7 +3478,7 @@ data ImageList = ImageList
 imageList
     :: ImageList
 imageList =
-    ImageList
+    ImageList'
     { _ilNextPageToken = Nothing
     , _ilKind = "compute#imageList"
     , _ilItems = Nothing
@@ -3262,7 +3486,11 @@ imageList =
     , _ilId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 ilNextPageToken :: Lens' ImageList (Maybe Text)
 ilNextPageToken
   = lens _ilNextPageToken
@@ -3283,7 +3511,8 @@ ilSelfLink :: Lens' ImageList (Maybe Text)
 ilSelfLink
   = lens _ilSelfLink (\ s a -> s{_ilSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 ilId :: Lens' ImageList (Maybe Text)
 ilId = lens _ilId (\ s a -> s{_ilId = a})
 
@@ -3291,7 +3520,7 @@ instance FromJSON ImageList where
         parseJSON
           = withObject "ImageList"
               (\ o ->
-                 ImageList <$>
+                 ImageList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#imageList")
                      <*> (o .:? "items" .!= mempty)
@@ -3299,7 +3528,7 @@ instance FromJSON ImageList where
                      <*> (o .:? "id"))
 
 instance ToJSON ImageList where
-        toJSON ImageList{..}
+        toJSON ImageList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ilNextPageToken,
@@ -3311,7 +3540,7 @@ instance ToJSON ImageList where
 -- is empty.
 --
 -- /See:/ 'vpnTunnelsScopedListWarning' smart constructor.
-data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning
+data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning'
     { _vtslwData    :: !(Maybe [VPNTunnelsScopedListWarningDataItem])
     , _vtslwCode    :: !(Maybe VPNTunnelsScopedListWarningCode)
     , _vtslwMessage :: !(Maybe Text)
@@ -3329,25 +3558,28 @@ data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning
 vpnTunnelsScopedListWarning
     :: VPNTunnelsScopedListWarning
 vpnTunnelsScopedListWarning =
-    VPNTunnelsScopedListWarning
+    VPNTunnelsScopedListWarning'
     { _vtslwData = Nothing
     , _vtslwCode = Nothing
     , _vtslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 vtslwData :: Lens' VPNTunnelsScopedListWarning [VPNTunnelsScopedListWarningDataItem]
 vtslwData
   = lens _vtslwData (\ s a -> s{_vtslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 vtslwCode :: Lens' VPNTunnelsScopedListWarning (Maybe VPNTunnelsScopedListWarningCode)
 vtslwCode
   = lens _vtslwCode (\ s a -> s{_vtslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 vtslwMessage :: Lens' VPNTunnelsScopedListWarning (Maybe Text)
 vtslwMessage
   = lens _vtslwMessage (\ s a -> s{_vtslwMessage = a})
@@ -3356,12 +3588,12 @@ instance FromJSON VPNTunnelsScopedListWarning where
         parseJSON
           = withObject "VPNTunnelsScopedListWarning"
               (\ o ->
-                 VPNTunnelsScopedListWarning <$>
+                 VPNTunnelsScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON VPNTunnelsScopedListWarning where
-        toJSON VPNTunnelsScopedListWarning{..}
+        toJSON VPNTunnelsScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _vtslwData,
@@ -3373,7 +3605,7 @@ instance ToJSON VPNTunnelsScopedListWarning where
 -- given [IPAddress, IPProtocol, portRange] tuple.
 --
 -- /See:/ 'forwardingRule' smart constructor.
-data ForwardingRule = ForwardingRule
+data ForwardingRule = ForwardingRule'
     { _frIPAddress         :: !(Maybe Text)
     , _frKind              :: !Text
     , _frPortRange         :: !(Maybe Text)
@@ -3415,7 +3647,7 @@ data ForwardingRule = ForwardingRule
 forwardingRule
     :: ForwardingRule
 forwardingRule =
-    ForwardingRule
+    ForwardingRule'
     { _frIPAddress = Nothing
     , _frKind = "compute#forwardingRule"
     , _frPortRange = Nothing
@@ -3438,14 +3670,15 @@ frIPAddress :: Lens' ForwardingRule (Maybe Text)
 frIPAddress
   = lens _frIPAddress (\ s a -> s{_frIPAddress = a})
 
--- | [Output Only] Type of the resource. Always compute#forwardingRule.
+-- | [Output Only] Type of the resource. Always compute#forwardingRule for
+-- Forwarding Rule resources.
 frKind :: Lens' ForwardingRule Text
 frKind = lens _frKind (\ s a -> s{_frKind = a})
 
 -- | Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets
 -- addressed to ports in the specified range will be forwarded to target.
--- Forwarding rules with the same \`[IPAddress, IPProtocol]\` pair must
--- have disjoint port ranges.
+-- Forwarding rules with the same [IPAddress, IPProtocol] pair must have
+-- disjoint port ranges.
 frPortRange :: Lens' ForwardingRule (Maybe Text)
 frPortRange
   = lens _frPortRange (\ s a -> s{_frPortRange = a})
@@ -3466,7 +3699,7 @@ frName :: Lens' ForwardingRule (Maybe Text)
 frName = lens _frName (\ s a -> s{_frName = a})
 
 -- | The IP protocol to which this rule applies. Valid options are TCP, UDP,
--- ESP, AH or SCTP.
+-- ESP, AH, SCTP or ICMP.
 frIPProtocol :: Lens' ForwardingRule (Maybe ForwardingRuleIPProtocol)
 frIPProtocol
   = lens _frIPProtocol (\ s a -> s{_frIPProtocol = a})
@@ -3477,7 +3710,8 @@ frCreationTimestamp
   = lens _frCreationTimestamp
       (\ s a -> s{_frCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 frId :: Lens' ForwardingRule (Maybe Word64)
 frId
   = lens _frId (\ s a -> s{_frId = a}) .
@@ -3488,8 +3722,8 @@ frId
 frRegion :: Lens' ForwardingRule (Maybe Text)
 frRegion = lens _frRegion (\ s a -> s{_frRegion = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 frDescription :: Lens' ForwardingRule (Maybe Text)
 frDescription
   = lens _frDescription
@@ -3498,7 +3732,10 @@ frDescription
 -- | The URL of the target resource to receive the matched traffic. For
 -- regional forwarding rules, this target must live in the same region as
 -- the forwarding rule. For global forwarding rules, this target must be a
--- global TargetHttpProxy or TargetHttpsProxy resource.
+-- global TargetHttpProxy or TargetHttpsProxy resource. The forwarded
+-- traffic must be of a type appropriate to the target object. For example,
+-- TargetHttpProxy requires HTTP traffic, and TargetHttpsProxy requires
+-- HTTPS traffic.
 frTarget :: Lens' ForwardingRule (Maybe Text)
 frTarget = lens _frTarget (\ s a -> s{_frTarget = a})
 
@@ -3506,7 +3743,7 @@ instance FromJSON ForwardingRule where
         parseJSON
           = withObject "ForwardingRule"
               (\ o ->
-                 ForwardingRule <$>
+                 ForwardingRule' <$>
                    (o .:? "IPAddress") <*>
                      (o .:? "kind" .!= "compute#forwardingRule")
                      <*> (o .:? "portRange")
@@ -3520,7 +3757,7 @@ instance FromJSON ForwardingRule where
                      <*> (o .:? "target"))
 
 instance ToJSON ForwardingRule where
-        toJSON ForwardingRule{..}
+        toJSON ForwardingRule'{..}
           = object
               (catMaybes
                  [("IPAddress" .=) <$> _frIPAddress,
@@ -3537,7 +3774,7 @@ instance ToJSON ForwardingRule where
 -- | Contains a list of UrlMap resources.
 --
 -- /See:/ 'urlMapList' smart constructor.
-data URLMapList = URLMapList
+data URLMapList = URLMapList'
     { _umlNextPageToken :: !(Maybe Text)
     , _umlKind          :: !Text
     , _umlItems         :: !(Maybe [URLMap])
@@ -3561,7 +3798,7 @@ data URLMapList = URLMapList
 urlMapList
     :: URLMapList
 urlMapList =
-    URLMapList
+    URLMapList'
     { _umlNextPageToken = Nothing
     , _umlKind = "compute#urlMapList"
     , _umlItems = Nothing
@@ -3569,7 +3806,11 @@ urlMapList =
     , _umlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 umlNextPageToken :: Lens' URLMapList (Maybe Text)
 umlNextPageToken
   = lens _umlNextPageToken
@@ -3599,7 +3840,7 @@ instance FromJSON URLMapList where
         parseJSON
           = withObject "URLMapList"
               (\ o ->
-                 URLMapList <$>
+                 URLMapList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#urlMapList")
                      <*> (o .:? "items" .!= mempty)
@@ -3607,7 +3848,7 @@ instance FromJSON URLMapList where
                      <*> (o .:? "id"))
 
 instance ToJSON URLMapList where
-        toJSON URLMapList{..}
+        toJSON URLMapList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _umlNextPageToken,
@@ -3618,7 +3859,7 @@ instance ToJSON URLMapList where
 
 --
 -- /See:/ 'forwardingRulesScopedListWarningDataItem' smart constructor.
-data ForwardingRulesScopedListWarningDataItem = ForwardingRulesScopedListWarningDataItem
+data ForwardingRulesScopedListWarningDataItem = ForwardingRulesScopedListWarningDataItem'
     { _frslwdiValue :: !(Maybe Text)
     , _frslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3633,7 +3874,7 @@ data ForwardingRulesScopedListWarningDataItem = ForwardingRulesScopedListWarning
 forwardingRulesScopedListWarningDataItem
     :: ForwardingRulesScopedListWarningDataItem
 forwardingRulesScopedListWarningDataItem =
-    ForwardingRulesScopedListWarningDataItem
+    ForwardingRulesScopedListWarningDataItem'
     { _frslwdiValue = Nothing
     , _frslwdiKey = Nothing
     }
@@ -3643,7 +3884,13 @@ frslwdiValue :: Lens' ForwardingRulesScopedListWarningDataItem (Maybe Text)
 frslwdiValue
   = lens _frslwdiValue (\ s a -> s{_frslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 frslwdiKey :: Lens' ForwardingRulesScopedListWarningDataItem (Maybe Text)
 frslwdiKey
   = lens _frslwdiKey (\ s a -> s{_frslwdiKey = a})
@@ -3654,12 +3901,12 @@ instance FromJSON
           = withObject
               "ForwardingRulesScopedListWarningDataItem"
               (\ o ->
-                 ForwardingRulesScopedListWarningDataItem <$>
+                 ForwardingRulesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
          ForwardingRulesScopedListWarningDataItem where
-        toJSON ForwardingRulesScopedListWarningDataItem{..}
+        toJSON ForwardingRulesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _frslwdiValue,
@@ -3667,7 +3914,7 @@ instance ToJSON
 
 --
 -- /See:/ 'instanceGroupManagersScopedListWarningDataItem' smart constructor.
-data InstanceGroupManagersScopedListWarningDataItem = InstanceGroupManagersScopedListWarningDataItem
+data InstanceGroupManagersScopedListWarningDataItem = InstanceGroupManagersScopedListWarningDataItem'
     { _igmslwdiValue :: !(Maybe Text)
     , _igmslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3682,7 +3929,7 @@ data InstanceGroupManagersScopedListWarningDataItem = InstanceGroupManagersScope
 instanceGroupManagersScopedListWarningDataItem
     :: InstanceGroupManagersScopedListWarningDataItem
 instanceGroupManagersScopedListWarningDataItem =
-    InstanceGroupManagersScopedListWarningDataItem
+    InstanceGroupManagersScopedListWarningDataItem'
     { _igmslwdiValue = Nothing
     , _igmslwdiKey = Nothing
     }
@@ -3693,7 +3940,13 @@ igmslwdiValue
   = lens _igmslwdiValue
       (\ s a -> s{_igmslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 igmslwdiKey :: Lens' InstanceGroupManagersScopedListWarningDataItem (Maybe Text)
 igmslwdiKey
   = lens _igmslwdiKey (\ s a -> s{_igmslwdiKey = a})
@@ -3704,24 +3957,75 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersScopedListWarningDataItem"
               (\ o ->
-                 InstanceGroupManagersScopedListWarningDataItem <$>
+                 InstanceGroupManagersScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
          InstanceGroupManagersScopedListWarningDataItem where
         toJSON
-          InstanceGroupManagersScopedListWarningDataItem{..}
+          InstanceGroupManagersScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _igmslwdiValue,
                   ("key" .=) <$> _igmslwdiKey])
 
--- | A Project resource. Projects can only be created in the Google
--- Developers Console. Unless marked otherwise, values can only be modified
+--
+-- /See:/ 'subnetworksScopedList' smart constructor.
+data SubnetworksScopedList = SubnetworksScopedList'
+    { _sslSubnetworks :: !(Maybe [Subnetwork])
+    , _sslWarning     :: !(Maybe SubnetworksScopedListWarning)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworksScopedList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sslSubnetworks'
+--
+-- * 'sslWarning'
+subnetworksScopedList
+    :: SubnetworksScopedList
+subnetworksScopedList =
+    SubnetworksScopedList'
+    { _sslSubnetworks = Nothing
+    , _sslWarning = Nothing
+    }
+
+-- | List of subnetworks contained in this scope.
+sslSubnetworks :: Lens' SubnetworksScopedList [Subnetwork]
+sslSubnetworks
+  = lens _sslSubnetworks
+      (\ s a -> s{_sslSubnetworks = a})
+      . _Default
+      . _Coerce
+
+-- | An informational warning that appears when the list of addresses is
+-- empty.
+sslWarning :: Lens' SubnetworksScopedList (Maybe SubnetworksScopedListWarning)
+sslWarning
+  = lens _sslWarning (\ s a -> s{_sslWarning = a})
+
+instance FromJSON SubnetworksScopedList where
+        parseJSON
+          = withObject "SubnetworksScopedList"
+              (\ o ->
+                 SubnetworksScopedList' <$>
+                   (o .:? "subnetworks" .!= mempty) <*>
+                     (o .:? "warning"))
+
+instance ToJSON SubnetworksScopedList where
+        toJSON SubnetworksScopedList'{..}
+          = object
+              (catMaybes
+                 [("subnetworks" .=) <$> _sslSubnetworks,
+                  ("warning" .=) <$> _sslWarning])
+
+-- | A Project resource. Projects can only be created in the Google Cloud
+-- Platform Console. Unless marked otherwise, values can only be modified
 -- in the console.
 --
 -- /See:/ 'project' smart constructor.
-data Project = Project
+data Project = Project'
     { _pKind                   :: !Text
     , _pUsageExportLocation    :: !(Maybe UsageExportLocation)
     , _pSelfLink               :: !(Maybe Text)
@@ -3760,7 +4064,7 @@ data Project = Project
 project
     :: Project
 project =
-    Project
+    Project'
     { _pKind = "compute#project"
     , _pUsageExportLocation = Nothing
     , _pSelfLink = Nothing
@@ -3777,8 +4081,8 @@ project =
 pKind :: Lens' Project Text
 pKind = lens _pKind (\ s a -> s{_pKind = a})
 
--- | The location in Cloud Storage and naming method of the daily usage
--- report.
+-- | The naming prefix for daily usage reports and the Google Cloud Storage
+-- bucket where they are stored.
 pUsageExportLocation :: Lens' Project (Maybe UsageExportLocation)
 pUsageExportLocation
   = lens _pUsageExportLocation
@@ -3789,7 +4093,8 @@ pSelfLink :: Lens' Project (Maybe Text)
 pSelfLink
   = lens _pSelfLink (\ s a -> s{_pSelfLink = a})
 
--- | Name of the resource.
+-- | The project ID. For example: my-example-project. Use the project ID to
+-- make requests to Compute Engine.
 pName :: Lens' Project (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
@@ -3813,7 +4118,9 @@ pQuotas
   = lens _pQuotas (\ s a -> s{_pQuotas = a}) . _Default
       . _Coerce
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server. This is not the project ID, and is just a unique
+-- ID used by Compute Engine to identify resources.
 pId :: Lens' Project (Maybe Word64)
 pId
   = lens _pId (\ s a -> s{_pId = a}) . mapping _Coerce
@@ -3834,7 +4141,7 @@ instance FromJSON Project where
         parseJSON
           = withObject "Project"
               (\ o ->
-                 Project <$>
+                 Project' <$>
                    (o .:? "kind" .!= "compute#project") <*>
                      (o .:? "usageExportLocation")
                      <*> (o .:? "selfLink")
@@ -3847,7 +4154,7 @@ instance FromJSON Project where
                      <*> (o .:? "commonInstanceMetadata"))
 
 instance ToJSON Project where
-        toJSON Project{..}
+        toJSON Project'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pKind),
@@ -3864,7 +4171,7 @@ instance ToJSON Project where
 -- | An Operation resource, used to manage asynchronous API requests.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe OperationStatus)
     , _oInsertTime          :: !(Maybe Text)
@@ -3885,6 +4192,7 @@ data Operation = Operation
     , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
+    , _oDescription         :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3933,13 +4241,15 @@ data Operation = Operation
 --
 -- * 'oRegion'
 --
+-- * 'oDescription'
+--
 -- * 'oTargetLink'
 --
 -- * 'oClientOperationId'
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -3960,40 +4270,41 @@ operation =
     , _oId = Nothing
     , _oOperationType = Nothing
     , _oRegion = Nothing
+    , _oDescription = Nothing
     , _oTargetLink = Nothing
     , _oClientOperationId = Nothing
     }
 
--- | [Output Only] Unique target ID which identifies a particular incarnation
--- of the target.
+-- | [Output Only] The unique target ID, which identifies a specific
+-- incarnation of the target resource.
 oTargetId :: Lens' Operation (Maybe Word64)
 oTargetId
   = lens _oTargetId (\ s a -> s{_oTargetId = a}) .
       mapping _Coerce
 
--- | [Output Only] Status of the operation. Can be one of the following:
--- PENDING, RUNNING, or DONE.
+-- | [Output Only] The status of the operation, which can be one of the
+-- following: PENDING, RUNNING, or DONE.
 oStatus :: Lens' Operation (Maybe OperationStatus)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 
--- | [Output Only] The time that this operation was requested. This is in
--- RFC3339 text format.
+-- | [Output Only] The time that this operation was requested. This value is
+-- in RFC3339 text format.
 oInsertTime :: Lens' Operation (Maybe Text)
 oInsertTime
   = lens _oInsertTime (\ s a -> s{_oInsertTime = a})
 
 -- | [Output Only] An optional progress indicator that ranges from 0 to 100.
 -- There is no requirement that this be linear or support any granularity
--- of operations. This should not be used to guess at when the operation
--- will be complete. This number should monotonically increase as the
--- operation progresses.
+-- of operations. This should not be used to guess when the operation will
+-- be complete. This number should monotonically increase as the operation
+-- progresses.
 oProgress :: Lens' Operation (Maybe Int32)
 oProgress
   = lens _oProgress (\ s a -> s{_oProgress = a}) .
       mapping _Coerce
 
 -- | [Output Only] The time that this operation was started by the server.
--- This is in RFC3339 text format.
+-- This value is in RFC3339 text format.
 oStartTime :: Lens' Operation (Maybe Text)
 oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
@@ -4015,7 +4326,8 @@ oHTTPErrorMessage
   = lens _oHTTPErrorMessage
       (\ s a -> s{_oHTTPErrorMessage = a})
 
--- | [Output Only] URL of the zone where the operation resides.
+-- | [Output Only] The URL of the zone where the operation resides. Only
+-- available when performing per-zone operations.
 oZone :: Lens' Operation (Maybe Text)
 oZone = lens _oZone (\ s a -> s{_oZone = a})
 
@@ -4028,7 +4340,8 @@ oWarnings
       . _Coerce
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
--- message that was returned, such as 404.
+-- status code that was returned. For example, a 404 means the resource was
+-- not found.
 oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
 oHTTPErrorStatusCode
   = lens _oHTTPErrorStatusCode
@@ -4062,36 +4375,41 @@ oCreationTimestamp
   = lens _oCreationTimestamp
       (\ s a -> s{_oCreationTimestamp = a})
 
--- | [Output Only] The time that this operation was completed. This is in
--- RFC3339 text format.
+-- | [Output Only] The time that this operation was completed. This value is
+-- in RFC3339 text format.
 oEndTime :: Lens' Operation (Maybe Text)
 oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 oId :: Lens' Operation (Maybe Word64)
 oId
   = lens _oId (\ s a -> s{_oId = a}) . mapping _Coerce
 
--- | [Output Only] Type of the operation, such as insert,
--- compute.instanceGroups.update, or compute.instanceGroups.delete.
+-- | [Output Only] The type of operation, such as insert, update, or delete,
+-- and so on.
 oOperationType :: Lens' Operation (Maybe Text)
 oOperationType
   = lens _oOperationType
       (\ s a -> s{_oOperationType = a})
 
--- | [Output Only] URL of the region where the operation resides. Only
--- applicable for regional resources.
+-- | [Output Only] The URL of the region where the operation resides. Only
+-- available when performing regional operations.
 oRegion :: Lens' Operation (Maybe Text)
 oRegion = lens _oRegion (\ s a -> s{_oRegion = a})
 
--- | [Output Only] URL of the resource the operation is mutating.
+-- | [Output Only] A textual description of the operation, which is set when
+-- the operation is created.
+oDescription :: Lens' Operation (Maybe Text)
+oDescription
+  = lens _oDescription (\ s a -> s{_oDescription = a})
+
+-- | [Output Only] The URL of the resource that the operation modifies.
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
 
--- | [Output Only] An optional identifier specified by the client when the
--- mutation was initiated. Must be unique for all Operation resources in
--- the project.
+-- | [Output Only] Reserved for future use.
 oClientOperationId :: Lens' Operation (Maybe Text)
 oClientOperationId
   = lens _oClientOperationId
@@ -4101,7 +4419,7 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "targetId") <*> (o .:? "status") <*>
                      (o .:? "insertTime")
                      <*> (o .:? "progress")
@@ -4121,11 +4439,12 @@ instance FromJSON Operation where
                      <*> (o .:? "id")
                      <*> (o .:? "operationType")
                      <*> (o .:? "region")
+                     <*> (o .:? "description")
                      <*> (o .:? "targetLink")
                      <*> (o .:? "clientOperationId"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("targetId" .=) <$> _oTargetId,
@@ -4146,12 +4465,13 @@ instance ToJSON Operation where
                   ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
                   ("operationType" .=) <$> _oOperationType,
                   ("region" .=) <$> _oRegion,
+                  ("description" .=) <$> _oDescription,
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
 --
 -- /See:/ 'disksScopedListWarningDataItem' smart constructor.
-data DisksScopedListWarningDataItem = DisksScopedListWarningDataItem
+data DisksScopedListWarningDataItem = DisksScopedListWarningDataItem'
     { _dslwdiValue :: !(Maybe Text)
     , _dslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4166,7 +4486,7 @@ data DisksScopedListWarningDataItem = DisksScopedListWarningDataItem
 disksScopedListWarningDataItem
     :: DisksScopedListWarningDataItem
 disksScopedListWarningDataItem =
-    DisksScopedListWarningDataItem
+    DisksScopedListWarningDataItem'
     { _dslwdiValue = Nothing
     , _dslwdiKey = Nothing
     }
@@ -4176,7 +4496,13 @@ dslwdiValue :: Lens' DisksScopedListWarningDataItem (Maybe Text)
 dslwdiValue
   = lens _dslwdiValue (\ s a -> s{_dslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 dslwdiKey :: Lens' DisksScopedListWarningDataItem (Maybe Text)
 dslwdiKey
   = lens _dslwdiKey (\ s a -> s{_dslwdiKey = a})
@@ -4186,11 +4512,11 @@ instance FromJSON DisksScopedListWarningDataItem
         parseJSON
           = withObject "DisksScopedListWarningDataItem"
               (\ o ->
-                 DisksScopedListWarningDataItem <$>
+                 DisksScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON DisksScopedListWarningDataItem where
-        toJSON DisksScopedListWarningDataItem{..}
+        toJSON DisksScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _dslwdiValue,
@@ -4199,7 +4525,7 @@ instance ToJSON DisksScopedListWarningDataItem where
 -- | A Disk resource.
 --
 -- /See:/ 'disk' smart constructor.
-data Disk = Disk
+data Disk = Disk'
     { _dStatus              :: !(Maybe DiskStatus)
     , _dSourceSnapshotId    :: !(Maybe Text)
     , _dLastAttachTimestamp :: !(Maybe Text)
@@ -4265,7 +4591,7 @@ data Disk = Disk
 disk
     :: Disk
 disk =
-    Disk
+    Disk'
     { _dStatus = Nothing
     , _dSourceSnapshotId = Nothing
     , _dLastAttachTimestamp = Nothing
@@ -4309,24 +4635,25 @@ dLastAttachTimestamp
   = lens _dLastAttachTimestamp
       (\ s a -> s{_dLastAttachTimestamp = a})
 
--- | Links to the users of the disk (attached instances) in form:
--- project\/zones\/zone\/instances\/instance
+-- | [Output Only] Links to the users of the disk (attached instances) in
+-- form: project\/zones\/zone\/instances\/instance
 dUsers :: Lens' Disk [Text]
 dUsers
   = lens _dUsers (\ s a -> s{_dUsers = a}) . _Default .
       _Coerce
 
 -- | The source image used to create this disk. If the source image is
--- deleted from the system, this field will not be set, even if an image
--- with the same name has been re-created. When creating a disk, you can
--- provide a private (custom) image using the following input, and Compute
--- Engine will use the corresponding image from your project. For example:
--- global\/images\/my-private-image Or you can provide an image from a
--- publicly-available project. For example, to use a Debian image from the
--- debian-cloud project, make sure to include the project in the URL:
--- projects\/debian-cloud\/global\/images\/debian-7-wheezy-vYYYYMMDD where
--- vYYYYMMDD is the image version. The fully-qualified URL will also work
--- in both cases.
+-- deleted, this field will not be set. To create a disk with one of the
+-- public operating system images, specify the image by its family name.
+-- For example, specify family\/debian-8 to use the latest Debian 8 image:
+-- projects\/debian-cloud\/global\/images\/family\/debian-8 Alternatively,
+-- use a specific version of a public operating system image:
+-- projects\/debian-cloud\/global\/images\/debian-8-jessie-vYYYYMMDD To
+-- create a disk with a private image that you created, specify the image
+-- name in the following format: global\/images\/my-private-image You can
+-- also specify a private image by its image family, which returns the
+-- latest version of the image in that family. Replace the image name with
+-- family\/family-name: global\/images\/family\/my-private-family
 dSourceImage :: Lens' Disk (Maybe Text)
 dSourceImage
   = lens _dSourceImage (\ s a -> s{_dSourceImage = a})
@@ -4361,7 +4688,7 @@ dSelfLink :: Lens' Disk (Maybe Text)
 dSelfLink
   = lens _dSelfLink (\ s a -> s{_dSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -4371,10 +4698,10 @@ dSelfLink
 dName :: Lens' Disk (Maybe Text)
 dName = lens _dName (\ s a -> s{_dName = a})
 
--- | The ID value of the image used to create this disk. This value
--- identifies the exact image that was used to create this persistent disk.
--- For example, if you created the persistent disk from an image that was
--- later deleted and recreated under the same name, the source image ID
+-- | [Output Only] The ID value of the image used to create this disk. This
+-- value identifies the exact image that was used to create this persistent
+-- disk. For example, if you created the persistent disk from an image that
+-- was later deleted and recreated under the same name, the source image ID
 -- would identify the exact version of the image that was used.
 dSourceImageId :: Lens' Disk (Maybe Text)
 dSourceImageId
@@ -4387,12 +4714,13 @@ dCreationTimestamp
   = lens _dCreationTimestamp
       (\ s a -> s{_dCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dId :: Lens' Disk (Maybe Word64)
 dId
   = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
 
--- | Any applicable publicly visible licenses.
+-- | [Output Only] Any applicable publicly visible licenses.
 dLicenses :: Lens' Disk [Text]
 dLicenses
   = lens _dLicenses (\ s a -> s{_dLicenses = a}) .
@@ -4404,12 +4732,12 @@ dOptions :: Lens' Disk (Maybe Text)
 dOptions = lens _dOptions (\ s a -> s{_dOptions = a})
 
 -- | URL of the disk type resource describing which disk type to use to
--- create the disk; provided by the client when the disk is created.
+-- create the disk. Provide this when creating the disk.
 dType :: Lens' Disk (Maybe Text)
 dType = lens _dType (\ s a -> s{_dType = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 dDescription :: Lens' Disk (Maybe Text)
 dDescription
   = lens _dDescription (\ s a -> s{_dDescription = a})
@@ -4429,7 +4757,7 @@ instance FromJSON Disk where
         parseJSON
           = withObject "Disk"
               (\ o ->
-                 Disk <$>
+                 Disk' <$>
                    (o .:? "status") <*> (o .:? "sourceSnapshotId") <*>
                      (o .:? "lastAttachTimestamp")
                      <*> (o .:? "users" .!= mempty)
@@ -4450,7 +4778,7 @@ instance FromJSON Disk where
                      <*> (o .:? "sourceSnapshot"))
 
 instance ToJSON Disk where
-        toJSON Disk{..}
+        toJSON Disk'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _dStatus,
@@ -4472,7 +4800,7 @@ instance ToJSON Disk where
 
 --
 -- /See:/ 'diskMoveRequest' smart constructor.
-data DiskMoveRequest = DiskMoveRequest
+data DiskMoveRequest = DiskMoveRequest'
     { _dmrTargetDisk      :: !(Maybe Text)
     , _dmrDestinationZone :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4487,7 +4815,7 @@ data DiskMoveRequest = DiskMoveRequest
 diskMoveRequest
     :: DiskMoveRequest
 diskMoveRequest =
-    DiskMoveRequest
+    DiskMoveRequest'
     { _dmrTargetDisk = Nothing
     , _dmrDestinationZone = Nothing
     }
@@ -4501,9 +4829,8 @@ dmrTargetDisk
   = lens _dmrTargetDisk
       (\ s a -> s{_dmrTargetDisk = a})
 
--- | The URL of the destination zone to move the disk to. This can be a full
--- or partial URL. For example, the following are all valid URLs to a zone:
--- -
+-- | The URL of the destination zone to move the disk. This can be a full or
+-- partial URL. For example, the following are all valid URLs to a zone: -
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone
 -- - projects\/project\/zones\/zone - zones\/zone
 dmrDestinationZone :: Lens' DiskMoveRequest (Maybe Text)
@@ -4515,20 +4842,20 @@ instance FromJSON DiskMoveRequest where
         parseJSON
           = withObject "DiskMoveRequest"
               (\ o ->
-                 DiskMoveRequest <$>
+                 DiskMoveRequest' <$>
                    (o .:? "targetDisk") <*> (o .:? "destinationZone"))
 
 instance ToJSON DiskMoveRequest where
-        toJSON DiskMoveRequest{..}
+        toJSON DiskMoveRequest'{..}
           = object
               (catMaybes
                  [("targetDisk" .=) <$> _dmrTargetDisk,
                   ("destinationZone" .=) <$> _dmrDestinationZone])
 
--- | Load balancing utilization policy.
+-- | Configuration parameters of autoscaling based on load balancing.
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
-newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization
+newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization'
     { _aplbuUtilizationTarget :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4540,16 +4867,13 @@ newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalanci
 autoscalingPolicyLoadBalancingUtilization
     :: AutoscalingPolicyLoadBalancingUtilization
 autoscalingPolicyLoadBalancingUtilization =
-    AutoscalingPolicyLoadBalancingUtilization
+    AutoscalingPolicyLoadBalancingUtilization'
     { _aplbuUtilizationTarget = Nothing
     }
 
--- | Fraction of backend capacity utilization (set in HTTP load balancing
--- configuration) that Autoscaler should maintain. Must be a positive float
--- value. If not defined, the default is 0.8. For example if your
--- maxRatePerInstance capacity (in HTTP Load Balancing configuration) is
--- set at 10 and you would like to keep number of instances such that each
--- instance receives 7 QPS on average, set this to 0.7.
+-- | Fraction of backend capacity utilization (set in HTTP(s) load balancing
+-- configuration) that autoscaler should maintain. Must be a positive float
+-- value. If not defined, the default is 0.8.
 aplbuUtilizationTarget :: Lens' AutoscalingPolicyLoadBalancingUtilization (Maybe Double)
 aplbuUtilizationTarget
   = lens _aplbuUtilizationTarget
@@ -4562,12 +4886,12 @@ instance FromJSON
           = withObject
               "AutoscalingPolicyLoadBalancingUtilization"
               (\ o ->
-                 AutoscalingPolicyLoadBalancingUtilization <$>
+                 AutoscalingPolicyLoadBalancingUtilization' <$>
                    (o .:? "utilizationTarget"))
 
 instance ToJSON
          AutoscalingPolicyLoadBalancingUtilization where
-        toJSON AutoscalingPolicyLoadBalancingUtilization{..}
+        toJSON AutoscalingPolicyLoadBalancingUtilization'{..}
           = object
               (catMaybes
                  [("utilizationTarget" .=) <$>
@@ -4575,7 +4899,7 @@ instance ToJSON
 
 --
 -- /See:/ 'targetPoolsScopedListWarningDataItem' smart constructor.
-data TargetPoolsScopedListWarningDataItem = TargetPoolsScopedListWarningDataItem
+data TargetPoolsScopedListWarningDataItem = TargetPoolsScopedListWarningDataItem'
     { _tpslwdiValue :: !(Maybe Text)
     , _tpslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4590,7 +4914,7 @@ data TargetPoolsScopedListWarningDataItem = TargetPoolsScopedListWarningDataItem
 targetPoolsScopedListWarningDataItem
     :: TargetPoolsScopedListWarningDataItem
 targetPoolsScopedListWarningDataItem =
-    TargetPoolsScopedListWarningDataItem
+    TargetPoolsScopedListWarningDataItem'
     { _tpslwdiValue = Nothing
     , _tpslwdiKey = Nothing
     }
@@ -4600,7 +4924,13 @@ tpslwdiValue :: Lens' TargetPoolsScopedListWarningDataItem (Maybe Text)
 tpslwdiValue
   = lens _tpslwdiValue (\ s a -> s{_tpslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 tpslwdiKey :: Lens' TargetPoolsScopedListWarningDataItem (Maybe Text)
 tpslwdiKey
   = lens _tpslwdiKey (\ s a -> s{_tpslwdiKey = a})
@@ -4610,23 +4940,22 @@ instance FromJSON
         parseJSON
           = withObject "TargetPoolsScopedListWarningDataItem"
               (\ o ->
-                 TargetPoolsScopedListWarningDataItem <$>
+                 TargetPoolsScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON TargetPoolsScopedListWarningDataItem
          where
-        toJSON TargetPoolsScopedListWarningDataItem{..}
+        toJSON TargetPoolsScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _tpslwdiValue,
                   ("key" .=) <$> _tpslwdiKey])
 
--- | InstanceGroupManagers Next available tag: 19
 --
 -- /See:/ 'instanceGroupManager' smart constructor.
-data InstanceGroupManager = InstanceGroupManager
+data InstanceGroupManager = InstanceGroupManager'
     { _igmKind              :: !Text
-    , _igmFingerprint       :: !(Maybe (Textual Word8))
+    , _igmFingerprint       :: !(Maybe Base64)
     , _igmBaseInstanceName  :: !(Maybe Text)
     , _igmZone              :: !(Maybe Text)
     , _igmInstanceTemplate  :: !(Maybe Text)
@@ -4639,6 +4968,7 @@ data InstanceGroupManager = InstanceGroupManager
     , _igmTargetPools       :: !(Maybe [Text])
     , _igmDescription       :: !(Maybe Text)
     , _igmInstanceGroup     :: !(Maybe Text)
+    , _igmNamedPorts        :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManager' with the minimum fields required to make a request.
@@ -4672,10 +5002,12 @@ data InstanceGroupManager = InstanceGroupManager
 -- * 'igmDescription'
 --
 -- * 'igmInstanceGroup'
+--
+-- * 'igmNamedPorts'
 instanceGroupManager
     :: InstanceGroupManager
 instanceGroupManager =
-    InstanceGroupManager
+    InstanceGroupManager'
     { _igmKind = "compute#instanceGroupManager"
     , _igmFingerprint = Nothing
     , _igmBaseInstanceName = Nothing
@@ -4690,6 +5022,7 @@ instanceGroupManager =
     , _igmTargetPools = Nothing
     , _igmDescription = Nothing
     , _igmInstanceGroup = Nothing
+    , _igmNamedPorts = Nothing
     }
 
 -- | [Output Only] The resource type, which is always
@@ -4697,14 +5030,13 @@ instanceGroupManager =
 igmKind :: Lens' InstanceGroupManager Text
 igmKind = lens _igmKind (\ s a -> s{_igmKind = a})
 
--- | [Output Only] The fingerprint of the target pools information. You can
--- use this optional field for optimistic locking when you update the
--- target pool entries.
-igmFingerprint :: Lens' InstanceGroupManager (Maybe Word8)
+-- | [Output Only] The fingerprint of the resource data. You can use this
+-- optional field for optimistic locking when you update the resource.
+igmFingerprint :: Lens' InstanceGroupManager (Maybe ByteString)
 igmFingerprint
   = lens _igmFingerprint
       (\ s a -> s{_igmFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The base instance name to use for instances in this group. The value
 -- must be 1-58 characters long. Instances are named by appending a hyphen
@@ -4779,7 +5111,8 @@ igmTargetPools
       . _Default
       . _Coerce
 
--- | An optional text description for the managed instance group.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 igmDescription :: Lens' InstanceGroupManager (Maybe Text)
 igmDescription
   = lens _igmDescription
@@ -4791,11 +5124,20 @@ igmInstanceGroup
   = lens _igmInstanceGroup
       (\ s a -> s{_igmInstanceGroup = a})
 
+-- | Named ports configured for the Instance Groups complementary to this
+-- Instance Group Manager.
+igmNamedPorts :: Lens' InstanceGroupManager [NamedPort]
+igmNamedPorts
+  = lens _igmNamedPorts
+      (\ s a -> s{_igmNamedPorts = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON InstanceGroupManager where
         parseJSON
           = withObject "InstanceGroupManager"
               (\ o ->
-                 InstanceGroupManager <$>
+                 InstanceGroupManager' <$>
                    (o .:? "kind" .!= "compute#instanceGroupManager") <*>
                      (o .:? "fingerprint")
                      <*> (o .:? "baseInstanceName")
@@ -4809,10 +5151,11 @@ instance FromJSON InstanceGroupManager where
                      <*> (o .:? "id")
                      <*> (o .:? "targetPools" .!= mempty)
                      <*> (o .:? "description")
-                     <*> (o .:? "instanceGroup"))
+                     <*> (o .:? "instanceGroup")
+                     <*> (o .:? "namedPorts" .!= mempty))
 
 instance ToJSON InstanceGroupManager where
-        toJSON InstanceGroupManager{..}
+        toJSON InstanceGroupManager'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _igmKind),
@@ -4828,11 +5171,12 @@ instance ToJSON InstanceGroupManager where
                   ("id" .=) <$> _igmId,
                   ("targetPools" .=) <$> _igmTargetPools,
                   ("description" .=) <$> _igmDescription,
-                  ("instanceGroup" .=) <$> _igmInstanceGroup])
+                  ("instanceGroup" .=) <$> _igmInstanceGroup,
+                  ("namedPorts" .=) <$> _igmNamedPorts])
 
 --
 -- /See:/ 'instanceGroupsRemoveInstancesRequest' smart constructor.
-newtype InstanceGroupsRemoveInstancesRequest = InstanceGroupsRemoveInstancesRequest
+newtype InstanceGroupsRemoveInstancesRequest = InstanceGroupsRemoveInstancesRequest'
     { _igrirInstances :: Maybe [InstanceReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4844,7 +5188,7 @@ newtype InstanceGroupsRemoveInstancesRequest = InstanceGroupsRemoveInstancesRequ
 instanceGroupsRemoveInstancesRequest
     :: InstanceGroupsRemoveInstancesRequest
 instanceGroupsRemoveInstancesRequest =
-    InstanceGroupsRemoveInstancesRequest
+    InstanceGroupsRemoveInstancesRequest'
     { _igrirInstances = Nothing
     }
 
@@ -4861,18 +5205,18 @@ instance FromJSON
         parseJSON
           = withObject "InstanceGroupsRemoveInstancesRequest"
               (\ o ->
-                 InstanceGroupsRemoveInstancesRequest <$>
+                 InstanceGroupsRemoveInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON InstanceGroupsRemoveInstancesRequest
          where
-        toJSON InstanceGroupsRemoveInstancesRequest{..}
+        toJSON InstanceGroupsRemoveInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igrirInstances])
 
 --
 -- /See:/ 'routeWarningsItemDataItem' smart constructor.
-data RouteWarningsItemDataItem = RouteWarningsItemDataItem
+data RouteWarningsItemDataItem = RouteWarningsItemDataItem'
     { _rwidiValue :: !(Maybe Text)
     , _rwidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4887,7 +5231,7 @@ data RouteWarningsItemDataItem = RouteWarningsItemDataItem
 routeWarningsItemDataItem
     :: RouteWarningsItemDataItem
 routeWarningsItemDataItem =
-    RouteWarningsItemDataItem
+    RouteWarningsItemDataItem'
     { _rwidiValue = Nothing
     , _rwidiKey = Nothing
     }
@@ -4897,7 +5241,13 @@ rwidiValue :: Lens' RouteWarningsItemDataItem (Maybe Text)
 rwidiValue
   = lens _rwidiValue (\ s a -> s{_rwidiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 rwidiKey :: Lens' RouteWarningsItemDataItem (Maybe Text)
 rwidiKey = lens _rwidiKey (\ s a -> s{_rwidiKey = a})
 
@@ -4905,11 +5255,11 @@ instance FromJSON RouteWarningsItemDataItem where
         parseJSON
           = withObject "RouteWarningsItemDataItem"
               (\ o ->
-                 RouteWarningsItemDataItem <$>
+                 RouteWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON RouteWarningsItemDataItem where
-        toJSON RouteWarningsItemDataItem{..}
+        toJSON RouteWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _rwidiValue,
@@ -4918,7 +5268,7 @@ instance ToJSON RouteWarningsItemDataItem where
 -- | [Output Only] A map of scoped instance lists.
 --
 -- /See:/ 'instanceAggregatedListItems' smart constructor.
-newtype InstanceAggregatedListItems = InstanceAggregatedListItems
+newtype InstanceAggregatedListItems = InstanceAggregatedListItems'
     { _ialiAddtional :: HashMap Text InstancesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4931,11 +5281,11 @@ instanceAggregatedListItems
     :: HashMap Text InstancesScopedList -- ^ 'ialiAddtional'
     -> InstanceAggregatedListItems
 instanceAggregatedListItems pIaliAddtional_ =
-    InstanceAggregatedListItems
+    InstanceAggregatedListItems'
     { _ialiAddtional = _Coerce # pIaliAddtional_
     }
 
--- | Name of the scope containing this set of instances.
+-- | [Output Only] Name of the scope containing this set of instances.
 ialiAddtional :: Lens' InstanceAggregatedListItems (HashMap Text InstancesScopedList)
 ialiAddtional
   = lens _ialiAddtional
@@ -4946,16 +5296,16 @@ instance FromJSON InstanceAggregatedListItems where
         parseJSON
           = withObject "InstanceAggregatedListItems"
               (\ o ->
-                 InstanceAggregatedListItems <$> (parseJSONObject o))
+                 InstanceAggregatedListItems' <$> (parseJSONObject o))
 
 instance ToJSON InstanceAggregatedListItems where
         toJSON = toJSON . _ialiAddtional
 
--- | Informational warning which replaces the list of autoscalers when the
--- list is empty.
+-- | [Output Only] Informational warning which replaces the list of
+-- autoscalers when the list is empty.
 --
 -- /See:/ 'autoscalersScopedListWarning' smart constructor.
-data AutoscalersScopedListWarning = AutoscalersScopedListWarning
+data AutoscalersScopedListWarning = AutoscalersScopedListWarning'
     { _aslwData    :: !(Maybe [AutoscalersScopedListWarningDataItem])
     , _aslwCode    :: !(Maybe AutoscalersScopedListWarningCode)
     , _aslwMessage :: !(Maybe Text)
@@ -4973,24 +5323,27 @@ data AutoscalersScopedListWarning = AutoscalersScopedListWarning
 autoscalersScopedListWarning
     :: AutoscalersScopedListWarning
 autoscalersScopedListWarning =
-    AutoscalersScopedListWarning
+    AutoscalersScopedListWarning'
     { _aslwData = Nothing
     , _aslwCode = Nothing
     , _aslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 aslwData :: Lens' AutoscalersScopedListWarning [AutoscalersScopedListWarningDataItem]
 aslwData
   = lens _aslwData (\ s a -> s{_aslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 aslwCode :: Lens' AutoscalersScopedListWarning (Maybe AutoscalersScopedListWarningCode)
 aslwCode = lens _aslwCode (\ s a -> s{_aslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 aslwMessage :: Lens' AutoscalersScopedListWarning (Maybe Text)
 aslwMessage
   = lens _aslwMessage (\ s a -> s{_aslwMessage = a})
@@ -4999,12 +5352,12 @@ instance FromJSON AutoscalersScopedListWarning where
         parseJSON
           = withObject "AutoscalersScopedListWarning"
               (\ o ->
-                 AutoscalersScopedListWarning <$>
+                 AutoscalersScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON AutoscalersScopedListWarning where
-        toJSON AutoscalersScopedListWarning{..}
+        toJSON AutoscalersScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _aslwData,
@@ -5015,7 +5368,7 @@ instance ToJSON AutoscalersScopedListWarning where
 -- delete the instance.
 --
 -- /See:/ 'managedInstanceLastAttemptErrors' smart constructor.
-newtype ManagedInstanceLastAttemptErrors = ManagedInstanceLastAttemptErrors
+newtype ManagedInstanceLastAttemptErrors = ManagedInstanceLastAttemptErrors'
     { _milaeErrors :: Maybe [ManagedInstanceLastAttemptErrorsErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5027,7 +5380,7 @@ newtype ManagedInstanceLastAttemptErrors = ManagedInstanceLastAttemptErrors
 managedInstanceLastAttemptErrors
     :: ManagedInstanceLastAttemptErrors
 managedInstanceLastAttemptErrors =
-    ManagedInstanceLastAttemptErrors
+    ManagedInstanceLastAttemptErrors'
     { _milaeErrors = Nothing
     }
 
@@ -5044,17 +5397,17 @@ instance FromJSON ManagedInstanceLastAttemptErrors
         parseJSON
           = withObject "ManagedInstanceLastAttemptErrors"
               (\ o ->
-                 ManagedInstanceLastAttemptErrors <$>
+                 ManagedInstanceLastAttemptErrors' <$>
                    (o .:? "errors" .!= mempty))
 
 instance ToJSON ManagedInstanceLastAttemptErrors
          where
-        toJSON ManagedInstanceLastAttemptErrors{..}
+        toJSON ManagedInstanceLastAttemptErrors'{..}
           = object (catMaybes [("errors" .=) <$> _milaeErrors])
 
 --
 -- /See:/ 'targetPoolsRemoveInstanceRequest' smart constructor.
-newtype TargetPoolsRemoveInstanceRequest = TargetPoolsRemoveInstanceRequest
+newtype TargetPoolsRemoveInstanceRequest = TargetPoolsRemoveInstanceRequest'
     { _tprirInstances :: Maybe [InstanceReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5066,11 +5419,11 @@ newtype TargetPoolsRemoveInstanceRequest = TargetPoolsRemoveInstanceRequest
 targetPoolsRemoveInstanceRequest
     :: TargetPoolsRemoveInstanceRequest
 targetPoolsRemoveInstanceRequest =
-    TargetPoolsRemoveInstanceRequest
+    TargetPoolsRemoveInstanceRequest'
     { _tprirInstances = Nothing
     }
 
--- | URLs of the instances to be removed from targetPool.
+-- | URLs of the instances to be removed from target pool.
 tprirInstances :: Lens' TargetPoolsRemoveInstanceRequest [InstanceReference]
 tprirInstances
   = lens _tprirInstances
@@ -5083,18 +5436,18 @@ instance FromJSON TargetPoolsRemoveInstanceRequest
         parseJSON
           = withObject "TargetPoolsRemoveInstanceRequest"
               (\ o ->
-                 TargetPoolsRemoveInstanceRequest <$>
+                 TargetPoolsRemoveInstanceRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON TargetPoolsRemoveInstanceRequest
          where
-        toJSON TargetPoolsRemoveInstanceRequest{..}
+        toJSON TargetPoolsRemoveInstanceRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _tprirInstances])
 
 --
 -- /See:/ 'targetInstancesScopedListWarningDataItem' smart constructor.
-data TargetInstancesScopedListWarningDataItem = TargetInstancesScopedListWarningDataItem
+data TargetInstancesScopedListWarningDataItem = TargetInstancesScopedListWarningDataItem'
     { _tislwdiValue :: !(Maybe Text)
     , _tislwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5109,7 +5462,7 @@ data TargetInstancesScopedListWarningDataItem = TargetInstancesScopedListWarning
 targetInstancesScopedListWarningDataItem
     :: TargetInstancesScopedListWarningDataItem
 targetInstancesScopedListWarningDataItem =
-    TargetInstancesScopedListWarningDataItem
+    TargetInstancesScopedListWarningDataItem'
     { _tislwdiValue = Nothing
     , _tislwdiKey = Nothing
     }
@@ -5119,7 +5472,13 @@ tislwdiValue :: Lens' TargetInstancesScopedListWarningDataItem (Maybe Text)
 tislwdiValue
   = lens _tislwdiValue (\ s a -> s{_tislwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 tislwdiKey :: Lens' TargetInstancesScopedListWarningDataItem (Maybe Text)
 tislwdiKey
   = lens _tislwdiKey (\ s a -> s{_tislwdiKey = a})
@@ -5130,12 +5489,12 @@ instance FromJSON
           = withObject
               "TargetInstancesScopedListWarningDataItem"
               (\ o ->
-                 TargetInstancesScopedListWarningDataItem <$>
+                 TargetInstancesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
          TargetInstancesScopedListWarningDataItem where
-        toJSON TargetInstancesScopedListWarningDataItem{..}
+        toJSON TargetInstancesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _tislwdiValue,
@@ -5145,7 +5504,7 @@ instance ToJSON
 -- types list is empty.
 --
 -- /See:/ 'machineTypesScopedListWarning' smart constructor.
-data MachineTypesScopedListWarning = MachineTypesScopedListWarning
+data MachineTypesScopedListWarning = MachineTypesScopedListWarning'
     { _mtslwData    :: !(Maybe [MachineTypesScopedListWarningDataItem])
     , _mtslwCode    :: !(Maybe MachineTypesScopedListWarningCode)
     , _mtslwMessage :: !(Maybe Text)
@@ -5163,25 +5522,28 @@ data MachineTypesScopedListWarning = MachineTypesScopedListWarning
 machineTypesScopedListWarning
     :: MachineTypesScopedListWarning
 machineTypesScopedListWarning =
-    MachineTypesScopedListWarning
+    MachineTypesScopedListWarning'
     { _mtslwData = Nothing
     , _mtslwCode = Nothing
     , _mtslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 mtslwData :: Lens' MachineTypesScopedListWarning [MachineTypesScopedListWarningDataItem]
 mtslwData
   = lens _mtslwData (\ s a -> s{_mtslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 mtslwCode :: Lens' MachineTypesScopedListWarning (Maybe MachineTypesScopedListWarningCode)
 mtslwCode
   = lens _mtslwCode (\ s a -> s{_mtslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 mtslwMessage :: Lens' MachineTypesScopedListWarning (Maybe Text)
 mtslwMessage
   = lens _mtslwMessage (\ s a -> s{_mtslwMessage = a})
@@ -5190,12 +5552,12 @@ instance FromJSON MachineTypesScopedListWarning where
         parseJSON
           = withObject "MachineTypesScopedListWarning"
               (\ o ->
-                 MachineTypesScopedListWarning <$>
+                 MachineTypesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON MachineTypesScopedListWarning where
-        toJSON MachineTypesScopedListWarning{..}
+        toJSON MachineTypesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _mtslwData,
@@ -5206,7 +5568,7 @@ instance ToJSON MachineTypesScopedListWarning where
 -- that terminates traffic of certain protocols.
 --
 -- /See:/ 'targetInstance' smart constructor.
-data TargetInstance = TargetInstance
+data TargetInstance = TargetInstance'
     { _tiKind              :: !Text
     , _tiNATPolicy         :: !(Maybe TargetInstanceNATPolicy)
     , _tiZone              :: !(Maybe Text)
@@ -5242,7 +5604,7 @@ data TargetInstance = TargetInstance
 targetInstance
     :: TargetInstance
 targetInstance =
-    TargetInstance
+    TargetInstance'
     { _tiKind = "compute#targetInstance"
     , _tiNATPolicy = Nothing
     , _tiZone = Nothing
@@ -5254,7 +5616,8 @@ targetInstance =
     , _tiInstance = Nothing
     }
 
--- | Type of the resource.
+-- | [Output Only] The type of the resource. Always compute#targetInstance
+-- for target instances.
 tiKind :: Lens' TargetInstance Text
 tiKind = lens _tiKind (\ s a -> s{_tiKind = a})
 
@@ -5289,20 +5652,27 @@ tiCreationTimestamp
   = lens _tiCreationTimestamp
       (\ s a -> s{_tiCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tiId :: Lens' TargetInstance (Maybe Word64)
 tiId
   = lens _tiId (\ s a -> s{_tiId = a}) .
       mapping _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 tiDescription :: Lens' TargetInstance (Maybe Text)
 tiDescription
   = lens _tiDescription
       (\ s a -> s{_tiDescription = a})
 
--- | The URL to the instance that terminates the relevant traffic.
+-- | A URL to the virtual machine instance that handles traffic for this
+-- target instance. When creating a target instance, you can provide the
+-- fully-qualified URL or a valid partial URL to the desired virtual
+-- machine. For example, the following are all valid URLs: -
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/instances\/instance
+-- - projects\/project\/zones\/zone\/instances\/instance -
+-- zones\/zone\/instances\/instance
 tiInstance :: Lens' TargetInstance (Maybe Text)
 tiInstance
   = lens _tiInstance (\ s a -> s{_tiInstance = a})
@@ -5311,7 +5681,7 @@ instance FromJSON TargetInstance where
         parseJSON
           = withObject "TargetInstance"
               (\ o ->
-                 TargetInstance <$>
+                 TargetInstance' <$>
                    (o .:? "kind" .!= "compute#targetInstance") <*>
                      (o .:? "natPolicy")
                      <*> (o .:? "zone")
@@ -5323,7 +5693,7 @@ instance FromJSON TargetInstance where
                      <*> (o .:? "instance"))
 
 instance ToJSON TargetInstance where
-        toJSON TargetInstance{..}
+        toJSON TargetInstance'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tiKind),
@@ -5338,7 +5708,7 @@ instance ToJSON TargetInstance where
 
 --
 -- /See:/ 'targetPoolInstanceHealth' smart constructor.
-data TargetPoolInstanceHealth = TargetPoolInstanceHealth
+data TargetPoolInstanceHealth = TargetPoolInstanceHealth'
     { _tpihKind         :: !Text
     , _tpihHealthStatus :: !(Maybe [HealthStatus])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5353,12 +5723,13 @@ data TargetPoolInstanceHealth = TargetPoolInstanceHealth
 targetPoolInstanceHealth
     :: TargetPoolInstanceHealth
 targetPoolInstanceHealth =
-    TargetPoolInstanceHealth
+    TargetPoolInstanceHealth'
     { _tpihKind = "compute#targetPoolInstanceHealth"
     , _tpihHealthStatus = Nothing
     }
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always compute#targetPoolInstanceHealth
+-- when checking the health of an instance.
 tpihKind :: Lens' TargetPoolInstanceHealth Text
 tpihKind = lens _tpihKind (\ s a -> s{_tpihKind = a})
 
@@ -5373,12 +5744,12 @@ instance FromJSON TargetPoolInstanceHealth where
         parseJSON
           = withObject "TargetPoolInstanceHealth"
               (\ o ->
-                 TargetPoolInstanceHealth <$>
+                 TargetPoolInstanceHealth' <$>
                    (o .:? "kind" .!= "compute#targetPoolInstanceHealth")
                      <*> (o .:? "healthStatus" .!= mempty))
 
 instance ToJSON TargetPoolInstanceHealth where
-        toJSON TargetPoolInstanceHealth{..}
+        toJSON TargetPoolInstanceHealth'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tpihKind),
@@ -5386,7 +5757,7 @@ instance ToJSON TargetPoolInstanceHealth where
 
 --
 -- /See:/ 'instanceGroupManagersListManagedInstancesResponse' smart constructor.
-newtype InstanceGroupManagersListManagedInstancesResponse = InstanceGroupManagersListManagedInstancesResponse
+newtype InstanceGroupManagersListManagedInstancesResponse = InstanceGroupManagersListManagedInstancesResponse'
     { _igmlmirManagedInstances :: Maybe [ManagedInstance]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5398,7 +5769,7 @@ newtype InstanceGroupManagersListManagedInstancesResponse = InstanceGroupManager
 instanceGroupManagersListManagedInstancesResponse
     :: InstanceGroupManagersListManagedInstancesResponse
 instanceGroupManagersListManagedInstancesResponse =
-    InstanceGroupManagersListManagedInstancesResponse
+    InstanceGroupManagersListManagedInstancesResponse'
     { _igmlmirManagedInstances = Nothing
     }
 
@@ -5417,14 +5788,14 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersListManagedInstancesResponse"
               (\ o ->
-                 InstanceGroupManagersListManagedInstancesResponse <$>
-                   (o .:? "managedInstances" .!= mempty))
+                 InstanceGroupManagersListManagedInstancesResponse'
+                   <$> (o .:? "managedInstances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersListManagedInstancesResponse
          where
         toJSON
-          InstanceGroupManagersListManagedInstancesResponse{..}
+          InstanceGroupManagersListManagedInstancesResponse'{..}
           = object
               (catMaybes
                  [("managedInstances" .=) <$>
@@ -5433,7 +5804,7 @@ instance ToJSON
 -- |
 --
 -- /See:/ 'instanceProperties' smart constructor.
-data InstanceProperties = InstanceProperties
+data InstanceProperties = InstanceProperties'
     { _ipServiceAccounts   :: !(Maybe [ServiceAccount])
     , _ipNetworkInterfaces :: !(Maybe [NetworkInterface])
     , _ipMachineType       :: !(Maybe Text)
@@ -5469,7 +5840,7 @@ data InstanceProperties = InstanceProperties
 instanceProperties
     :: InstanceProperties
 instanceProperties =
-    InstanceProperties
+    InstanceProperties'
     { _ipServiceAccounts = Nothing
     , _ipNetworkInterfaces = Nothing
     , _ipMachineType = Nothing
@@ -5556,7 +5927,7 @@ instance FromJSON InstanceProperties where
         parseJSON
           = withObject "InstanceProperties"
               (\ o ->
-                 InstanceProperties <$>
+                 InstanceProperties' <$>
                    (o .:? "serviceAccounts" .!= mempty) <*>
                      (o .:? "networkInterfaces" .!= mempty)
                      <*> (o .:? "machineType")
@@ -5568,7 +5939,7 @@ instance FromJSON InstanceProperties where
                      <*> (o .:? "tags"))
 
 instance ToJSON InstanceProperties where
-        toJSON InstanceProperties{..}
+        toJSON InstanceProperties'{..}
           = object
               (catMaybes
                  [("serviceAccounts" .=) <$> _ipServiceAccounts,
@@ -5585,7 +5956,7 @@ instance ToJSON InstanceProperties where
 -- types when the list is empty.
 --
 -- /See:/ 'diskTypesScopedListWarning' smart constructor.
-data DiskTypesScopedListWarning = DiskTypesScopedListWarning
+data DiskTypesScopedListWarning = DiskTypesScopedListWarning'
     { _dtslwData    :: !(Maybe [DiskTypesScopedListWarningDataItem])
     , _dtslwCode    :: !(Maybe DiskTypesScopedListWarningCode)
     , _dtslwMessage :: !(Maybe Text)
@@ -5603,25 +5974,28 @@ data DiskTypesScopedListWarning = DiskTypesScopedListWarning
 diskTypesScopedListWarning
     :: DiskTypesScopedListWarning
 diskTypesScopedListWarning =
-    DiskTypesScopedListWarning
+    DiskTypesScopedListWarning'
     { _dtslwData = Nothing
     , _dtslwCode = Nothing
     , _dtslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 dtslwData :: Lens' DiskTypesScopedListWarning [DiskTypesScopedListWarningDataItem]
 dtslwData
   = lens _dtslwData (\ s a -> s{_dtslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 dtslwCode :: Lens' DiskTypesScopedListWarning (Maybe DiskTypesScopedListWarningCode)
 dtslwCode
   = lens _dtslwCode (\ s a -> s{_dtslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 dtslwMessage :: Lens' DiskTypesScopedListWarning (Maybe Text)
 dtslwMessage
   = lens _dtslwMessage (\ s a -> s{_dtslwMessage = a})
@@ -5630,12 +6004,12 @@ instance FromJSON DiskTypesScopedListWarning where
         parseJSON
           = withObject "DiskTypesScopedListWarning"
               (\ o ->
-                 DiskTypesScopedListWarning <$>
+                 DiskTypesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON DiskTypesScopedListWarning where
-        toJSON DiskTypesScopedListWarning{..}
+        toJSON DiskTypesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _dtslwData,
@@ -5649,7 +6023,7 @@ instance ToJSON DiskTypesScopedListWarning where
 -- define one or the other, but not both.
 --
 -- /See:/ 'attachedDiskInitializeParams' smart constructor.
-data AttachedDiskInitializeParams = AttachedDiskInitializeParams
+data AttachedDiskInitializeParams = AttachedDiskInitializeParams'
     { _adipSourceImage :: !(Maybe Text)
     , _adipDiskSizeGb  :: !(Maybe (Textual Int64))
     , _adipDiskName    :: !(Maybe Text)
@@ -5670,22 +6044,25 @@ data AttachedDiskInitializeParams = AttachedDiskInitializeParams
 attachedDiskInitializeParams
     :: AttachedDiskInitializeParams
 attachedDiskInitializeParams =
-    AttachedDiskInitializeParams
+    AttachedDiskInitializeParams'
     { _adipSourceImage = Nothing
     , _adipDiskSizeGb = Nothing
     , _adipDiskName = Nothing
     , _adipDiskType = Nothing
     }
 
--- | A source image used to create the disk. You can provide a private
--- (custom) image, and Compute Engine will use the corresponding image from
--- your project. For example: global\/images\/my-private-image Or you can
--- provide an image from a publicly-available project. For example, to use
--- a Debian image from the debian-cloud project, make sure to include the
--- project in the URL:
--- projects\/debian-cloud\/global\/images\/debian-7-wheezy-vYYYYMMDD where
--- vYYYYMMDD is the image version. The fully-qualified URL will also work
--- in both cases.
+-- | The source image used to create this disk. If the source image is
+-- deleted, this field will not be set. To create a disk with one of the
+-- public operating system images, specify the image by its family name.
+-- For example, specify family\/debian-8 to use the latest Debian 8 image:
+-- projects\/debian-cloud\/global\/images\/family\/debian-8 Alternatively,
+-- use a specific version of a public operating system image:
+-- projects\/debian-cloud\/global\/images\/debian-8-jessie-vYYYYMMDD To
+-- create a disk with a private image that you created, specify the image
+-- name in the following format: global\/images\/my-private-image You can
+-- also specify a private image by its image family, which returns the
+-- latest version of the image in that family. Replace the image name with
+-- family\/family-name: global\/images\/family\/my-private-family
 adipSourceImage :: Lens' AttachedDiskInitializeParams (Maybe Text)
 adipSourceImage
   = lens _adipSourceImage
@@ -5721,13 +6098,13 @@ instance FromJSON AttachedDiskInitializeParams where
         parseJSON
           = withObject "AttachedDiskInitializeParams"
               (\ o ->
-                 AttachedDiskInitializeParams <$>
+                 AttachedDiskInitializeParams' <$>
                    (o .:? "sourceImage") <*> (o .:? "diskSizeGb") <*>
                      (o .:? "diskName")
                      <*> (o .:? "diskType"))
 
 instance ToJSON AttachedDiskInitializeParams where
-        toJSON AttachedDiskInitializeParams{..}
+        toJSON AttachedDiskInitializeParams'{..}
           = object
               (catMaybes
                  [("sourceImage" .=) <$> _adipSourceImage,
@@ -5737,7 +6114,7 @@ instance ToJSON AttachedDiskInitializeParams where
 
 --
 -- /See:/ 'addressesScopedListWarningDataItem' smart constructor.
-data AddressesScopedListWarningDataItem = AddressesScopedListWarningDataItem
+data AddressesScopedListWarningDataItem = AddressesScopedListWarningDataItem'
     { _aslwdiValue :: !(Maybe Text)
     , _aslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5752,7 +6129,7 @@ data AddressesScopedListWarningDataItem = AddressesScopedListWarningDataItem
 addressesScopedListWarningDataItem
     :: AddressesScopedListWarningDataItem
 addressesScopedListWarningDataItem =
-    AddressesScopedListWarningDataItem
+    AddressesScopedListWarningDataItem'
     { _aslwdiValue = Nothing
     , _aslwdiKey = Nothing
     }
@@ -5762,7 +6139,13 @@ aslwdiValue :: Lens' AddressesScopedListWarningDataItem (Maybe Text)
 aslwdiValue
   = lens _aslwdiValue (\ s a -> s{_aslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 aslwdiKey :: Lens' AddressesScopedListWarningDataItem (Maybe Text)
 aslwdiKey
   = lens _aslwdiKey (\ s a -> s{_aslwdiKey = a})
@@ -5772,12 +6155,12 @@ instance FromJSON AddressesScopedListWarningDataItem
         parseJSON
           = withObject "AddressesScopedListWarningDataItem"
               (\ o ->
-                 AddressesScopedListWarningDataItem <$>
+                 AddressesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON AddressesScopedListWarningDataItem
          where
-        toJSON AddressesScopedListWarningDataItem{..}
+        toJSON AddressesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _aslwdiValue,
@@ -5786,10 +6169,11 @@ instance ToJSON AddressesScopedListWarningDataItem
 -- | A network interface resource attached to an instance.
 --
 -- /See:/ 'networkInterface' smart constructor.
-data NetworkInterface = NetworkInterface
+data NetworkInterface = NetworkInterface'
     { _niNetwork       :: !(Maybe Text)
     , _niName          :: !(Maybe Text)
     , _niNetworkIP     :: !(Maybe Text)
+    , _niSubnetwork    :: !(Maybe Text)
     , _niAccessConfigs :: !(Maybe [AccessConfig])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5803,14 +6187,17 @@ data NetworkInterface = NetworkInterface
 --
 -- * 'niNetworkIP'
 --
+-- * 'niSubnetwork'
+--
 -- * 'niAccessConfigs'
 networkInterface
     :: NetworkInterface
 networkInterface =
-    NetworkInterface
+    NetworkInterface'
     { _niNetwork = Nothing
     , _niName = Nothing
     , _niNetworkIP = Nothing
+    , _niSubnetwork = Nothing
     , _niAccessConfigs = Nothing
     }
 
@@ -5832,11 +6219,24 @@ niNetwork
 niName :: Lens' NetworkInterface (Maybe Text)
 niName = lens _niName (\ s a -> s{_niName = a})
 
--- | [Output Only] An optional IPV4 internal network address assigned to the
--- instance for this network interface.
+-- | An IPv4 internal network address to assign to the instance for this
+-- network interface. If not specified by the user, an unused internal IP
+-- is assigned by the system.
 niNetworkIP :: Lens' NetworkInterface (Maybe Text)
 niNetworkIP
   = lens _niNetworkIP (\ s a -> s{_niNetworkIP = a})
+
+-- | The URL of the Subnetwork resource for this instance. If the network
+-- resource is in legacy mode, do not provide this property. If the network
+-- is in auto subnet mode, providing the subnetwork is optional. If the
+-- network is in custom subnet mode, then this field should be specified.
+-- If you specify this property, you can specify the subnetwork as a full
+-- or partial URL. For example, the following are all valid URLs: -
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/regions\/region\/subnetworks\/subnetwork
+-- - regions\/region\/subnetworks\/subnetwork
+niSubnetwork :: Lens' NetworkInterface (Maybe Text)
+niSubnetwork
+  = lens _niSubnetwork (\ s a -> s{_niSubnetwork = a})
 
 -- | An array of configurations for this interface. Currently, ONE_TO_ONE_NAT
 -- is the only access config supported. If there are no accessConfigs
@@ -5852,23 +6252,25 @@ instance FromJSON NetworkInterface where
         parseJSON
           = withObject "NetworkInterface"
               (\ o ->
-                 NetworkInterface <$>
+                 NetworkInterface' <$>
                    (o .:? "network") <*> (o .:? "name") <*>
                      (o .:? "networkIP")
+                     <*> (o .:? "subnetwork")
                      <*> (o .:? "accessConfigs" .!= mempty))
 
 instance ToJSON NetworkInterface where
-        toJSON NetworkInterface{..}
+        toJSON NetworkInterface'{..}
           = object
               (catMaybes
                  [("network" .=) <$> _niNetwork,
                   ("name" .=) <$> _niName,
                   ("networkIP" .=) <$> _niNetworkIP,
+                  ("subnetwork" .=) <$> _niSubnetwork,
                   ("accessConfigs" .=) <$> _niAccessConfigs])
 
 --
 -- /See:/ 'targetPoolsRemoveHealthCheckRequest' smart constructor.
-newtype TargetPoolsRemoveHealthCheckRequest = TargetPoolsRemoveHealthCheckRequest
+newtype TargetPoolsRemoveHealthCheckRequest = TargetPoolsRemoveHealthCheckRequest'
     { _tprhcrHealthChecks :: Maybe [HealthCheckReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5880,11 +6282,15 @@ newtype TargetPoolsRemoveHealthCheckRequest = TargetPoolsRemoveHealthCheckReques
 targetPoolsRemoveHealthCheckRequest
     :: TargetPoolsRemoveHealthCheckRequest
 targetPoolsRemoveHealthCheckRequest =
-    TargetPoolsRemoveHealthCheckRequest
+    TargetPoolsRemoveHealthCheckRequest'
     { _tprhcrHealthChecks = Nothing
     }
 
--- | Health check URLs to be removed from targetPool.
+-- | Health check URL to be removed. This can be a full or valid partial URL.
+-- For example, the following are valid URLs: -
+-- https:\/\/www.googleapis.com\/compute\/beta\/projects\/project\/global\/httpHealthChecks\/health-check
+-- - projects\/project\/global\/httpHealthChecks\/health-check -
+-- global\/httpHealthChecks\/health-check
 tprhcrHealthChecks :: Lens' TargetPoolsRemoveHealthCheckRequest [HealthCheckReference]
 tprhcrHealthChecks
   = lens _tprhcrHealthChecks
@@ -5897,12 +6303,12 @@ instance FromJSON TargetPoolsRemoveHealthCheckRequest
         parseJSON
           = withObject "TargetPoolsRemoveHealthCheckRequest"
               (\ o ->
-                 TargetPoolsRemoveHealthCheckRequest <$>
+                 TargetPoolsRemoveHealthCheckRequest' <$>
                    (o .:? "healthChecks" .!= mempty))
 
 instance ToJSON TargetPoolsRemoveHealthCheckRequest
          where
-        toJSON TargetPoolsRemoveHealthCheckRequest{..}
+        toJSON TargetPoolsRemoveHealthCheckRequest'{..}
           = object
               (catMaybes
                  [("healthChecks" .=) <$> _tprhcrHealthChecks])
@@ -5910,7 +6316,7 @@ instance ToJSON TargetPoolsRemoveHealthCheckRequest
 -- | A list of instance templates.
 --
 -- /See:/ 'instanceTemplateList' smart constructor.
-data InstanceTemplateList = InstanceTemplateList
+data InstanceTemplateList = InstanceTemplateList'
     { _itlNextPageToken :: !(Maybe Text)
     , _itlKind          :: !Text
     , _itlItems         :: !(Maybe [InstanceTemplate])
@@ -5934,7 +6340,7 @@ data InstanceTemplateList = InstanceTemplateList
 instanceTemplateList
     :: InstanceTemplateList
 instanceTemplateList =
-    InstanceTemplateList
+    InstanceTemplateList'
     { _itlNextPageToken = Nothing
     , _itlKind = "compute#instanceTemplateList"
     , _itlItems = Nothing
@@ -5942,7 +6348,11 @@ instanceTemplateList =
     , _itlId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 itlNextPageToken :: Lens' InstanceTemplateList (Maybe Text)
 itlNextPageToken
   = lens _itlNextPageToken
@@ -5975,7 +6385,7 @@ instance FromJSON InstanceTemplateList where
         parseJSON
           = withObject "InstanceTemplateList"
               (\ o ->
-                 InstanceTemplateList <$>
+                 InstanceTemplateList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#instanceTemplateList")
                      <*> (o .:? "items" .!= mempty)
@@ -5983,7 +6393,7 @@ instance FromJSON InstanceTemplateList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceTemplateList where
-        toJSON InstanceTemplateList{..}
+        toJSON InstanceTemplateList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _itlNextPageToken,
@@ -5992,10 +6402,10 @@ instance ToJSON InstanceTemplateList where
                   ("selfLink" .=) <$> _itlSelfLink,
                   ("id" .=) <$> _itlId])
 
--- | Contains a list of route resources.
+-- | Contains a list of Route resources.
 --
 -- /See:/ 'routeList' smart constructor.
-data RouteList = RouteList
+data RouteList = RouteList'
     { _rlNextPageToken :: !(Maybe Text)
     , _rlKind          :: !Text
     , _rlItems         :: !(Maybe [Route])
@@ -6019,7 +6429,7 @@ data RouteList = RouteList
 routeList
     :: RouteList
 routeList =
-    RouteList
+    RouteList'
     { _rlNextPageToken = Nothing
     , _rlKind = "compute#routeList"
     , _rlItems = Nothing
@@ -6027,7 +6437,11 @@ routeList =
     , _rlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 rlNextPageToken :: Lens' RouteList (Maybe Text)
 rlNextPageToken
   = lens _rlNextPageToken
@@ -6037,7 +6451,7 @@ rlNextPageToken
 rlKind :: Lens' RouteList Text
 rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
 
--- | A list of Route resources.
+-- | [Output Only] A list of Route resources.
 rlItems :: Lens' RouteList [Route]
 rlItems
   = lens _rlItems (\ s a -> s{_rlItems = a}) . _Default
@@ -6056,7 +6470,7 @@ instance FromJSON RouteList where
         parseJSON
           = withObject "RouteList"
               (\ o ->
-                 RouteList <$>
+                 RouteList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#routeList")
                      <*> (o .:? "items" .!= mempty)
@@ -6064,7 +6478,7 @@ instance FromJSON RouteList where
                      <*> (o .:? "id"))
 
 instance ToJSON RouteList where
-        toJSON RouteList{..}
+        toJSON RouteList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rlNextPageToken,
@@ -6075,7 +6489,7 @@ instance ToJSON RouteList where
 -- | Contains a list of TargetVpnGateway resources.
 --
 -- /See:/ 'targetVPNGatewayList' smart constructor.
-data TargetVPNGatewayList = TargetVPNGatewayList
+data TargetVPNGatewayList = TargetVPNGatewayList'
     { _tvglNextPageToken :: !(Maybe Text)
     , _tvglKind          :: !Text
     , _tvglItems         :: !(Maybe [TargetVPNGateway])
@@ -6099,7 +6513,7 @@ data TargetVPNGatewayList = TargetVPNGatewayList
 targetVPNGatewayList
     :: TargetVPNGatewayList
 targetVPNGatewayList =
-    TargetVPNGatewayList
+    TargetVPNGatewayList'
     { _tvglNextPageToken = Nothing
     , _tvglKind = "compute#targetVpnGatewayList"
     , _tvglItems = Nothing
@@ -6107,7 +6521,11 @@ targetVPNGatewayList =
     , _tvglId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tvglNextPageToken :: Lens' TargetVPNGatewayList (Maybe Text)
 tvglNextPageToken
   = lens _tvglNextPageToken
@@ -6130,7 +6548,8 @@ tvglSelfLink :: Lens' TargetVPNGatewayList (Maybe Text)
 tvglSelfLink
   = lens _tvglSelfLink (\ s a -> s{_tvglSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tvglId :: Lens' TargetVPNGatewayList (Maybe Text)
 tvglId = lens _tvglId (\ s a -> s{_tvglId = a})
 
@@ -6138,7 +6557,7 @@ instance FromJSON TargetVPNGatewayList where
         parseJSON
           = withObject "TargetVPNGatewayList"
               (\ o ->
-                 TargetVPNGatewayList <$>
+                 TargetVPNGatewayList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetVpnGatewayList")
                      <*> (o .:? "items" .!= mempty)
@@ -6146,7 +6565,7 @@ instance FromJSON TargetVPNGatewayList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetVPNGatewayList where
-        toJSON TargetVPNGatewayList{..}
+        toJSON TargetVPNGatewayList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tvglNextPageToken,
@@ -6158,7 +6577,7 @@ instance ToJSON TargetVPNGatewayList where
 -- | Contains a list of SslCertificate resources.
 --
 -- /See:/ 'sslCertificateList' smart constructor.
-data SSLCertificateList = SSLCertificateList
+data SSLCertificateList = SSLCertificateList'
     { _sclNextPageToken :: !(Maybe Text)
     , _sclKind          :: !Text
     , _sclItems         :: !(Maybe [SSLCertificate])
@@ -6182,7 +6601,7 @@ data SSLCertificateList = SSLCertificateList
 sslCertificateList
     :: SSLCertificateList
 sslCertificateList =
-    SSLCertificateList
+    SSLCertificateList'
     { _sclNextPageToken = Nothing
     , _sclKind = "compute#sslCertificateList"
     , _sclItems = Nothing
@@ -6190,7 +6609,11 @@ sslCertificateList =
     , _sclId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 sclNextPageToken :: Lens' SSLCertificateList (Maybe Text)
 sclNextPageToken
   = lens _sclNextPageToken
@@ -6220,7 +6643,7 @@ instance FromJSON SSLCertificateList where
         parseJSON
           = withObject "SSLCertificateList"
               (\ o ->
-                 SSLCertificateList <$>
+                 SSLCertificateList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#sslCertificateList")
                      <*> (o .:? "items" .!= mempty)
@@ -6228,7 +6651,7 @@ instance FromJSON SSLCertificateList where
                      <*> (o .:? "id"))
 
 instance ToJSON SSLCertificateList where
-        toJSON SSLCertificateList{..}
+        toJSON SSLCertificateList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _sclNextPageToken,
@@ -6239,7 +6662,7 @@ instance ToJSON SSLCertificateList where
 
 --
 -- /See:/ 'firewallAllowedItem' smart constructor.
-data FirewallAllowedItem = FirewallAllowedItem
+data FirewallAllowedItem = FirewallAllowedItem'
     { _faiIPProtocol :: !(Maybe Text)
     , _faiPorts      :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6254,15 +6677,15 @@ data FirewallAllowedItem = FirewallAllowedItem
 firewallAllowedItem
     :: FirewallAllowedItem
 firewallAllowedItem =
-    FirewallAllowedItem
+    FirewallAllowedItem'
     { _faiIPProtocol = Nothing
     , _faiPorts = Nothing
     }
 
 -- | The IP protocol that is allowed for this rule. The protocol type is
--- required when creating a firewall. This value can either be one of the
--- following well known protocol strings (tcp, udp, icmp, esp, ah, sctp),
--- or the IP protocol number.
+-- required when creating a firewall rule. This value can either be one of
+-- the following well known protocol strings (tcp, udp, icmp, esp, ah,
+-- sctp), or the IP protocol number.
 faiIPProtocol :: Lens' FirewallAllowedItem (Maybe Text)
 faiIPProtocol
   = lens _faiIPProtocol
@@ -6283,35 +6706,42 @@ instance FromJSON FirewallAllowedItem where
         parseJSON
           = withObject "FirewallAllowedItem"
               (\ o ->
-                 FirewallAllowedItem <$>
+                 FirewallAllowedItem' <$>
                    (o .:? "IPProtocol") <*> (o .:? "ports" .!= mempty))
 
 instance ToJSON FirewallAllowedItem where
-        toJSON FirewallAllowedItem{..}
+        toJSON FirewallAllowedItem'{..}
           = object
               (catMaybes
                  [("IPProtocol" .=) <$> _faiIPProtocol,
                   ("ports" .=) <$> _faiPorts])
 
--- | A network resource.
+-- | Represents a Network resource. Read Networks and Firewalls for more
+-- information.
 --
 -- /See:/ 'network' smart constructor.
-data Network = Network
-    { _nKind              :: !Text
-    , _nIPv4Range         :: !(Maybe Text)
-    , _nSelfLink          :: !(Maybe Text)
-    , _nName              :: !(Maybe Text)
-    , _nCreationTimestamp :: !(Maybe Text)
-    , _nId                :: !(Maybe (Textual Word64))
-    , _nGatewayIPv4       :: !(Maybe Text)
-    , _nDescription       :: !(Maybe Text)
+data Network = Network'
+    { _nAutoCreateSubnetworks :: !(Maybe Bool)
+    , _nKind                  :: !Text
+    , _nSubnetworks           :: !(Maybe [Text])
+    , _nIPv4Range             :: !(Maybe Text)
+    , _nSelfLink              :: !(Maybe Text)
+    , _nName                  :: !(Maybe Text)
+    , _nCreationTimestamp     :: !(Maybe Text)
+    , _nId                    :: !(Maybe (Textual Word64))
+    , _nGatewayIPv4           :: !(Maybe Text)
+    , _nDescription           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'nAutoCreateSubnetworks'
+--
 -- * 'nKind'
+--
+-- * 'nSubnetworks'
 --
 -- * 'nIPv4Range'
 --
@@ -6329,8 +6759,10 @@ data Network = Network
 network
     :: Network
 network =
-    Network
-    { _nKind = "compute#network"
+    Network'
+    { _nAutoCreateSubnetworks = Nothing
+    , _nKind = "compute#network"
+    , _nSubnetworks = Nothing
     , _nIPv4Range = Nothing
     , _nSelfLink = Nothing
     , _nName = Nothing
@@ -6340,9 +6772,26 @@ network =
     , _nDescription = Nothing
     }
 
+-- | When set to true, the network is created in \"auto subnet mode\". When
+-- set to false, the network is in \"custom subnet mode\". In \"auto subnet
+-- mode\", a newly created network is assigned the default CIDR of
+-- 10.128.0.0\/9 and it automatically creates one subnetwork per region.
+nAutoCreateSubnetworks :: Lens' Network (Maybe Bool)
+nAutoCreateSubnetworks
+  = lens _nAutoCreateSubnetworks
+      (\ s a -> s{_nAutoCreateSubnetworks = a})
+
 -- | [Output Only] Type of the resource. Always compute#network for networks.
 nKind :: Lens' Network Text
 nKind = lens _nKind (\ s a -> s{_nKind = a})
+
+-- | [Output Only] Server-defined fully-qualified URLs for all subnetworks in
+-- this network.
+nSubnetworks :: Lens' Network [Text]
+nSubnetworks
+  = lens _nSubnetworks (\ s a -> s{_nSubnetworks = a})
+      . _Default
+      . _Coerce
 
 -- | The range of internal addresses that are legal on this network. This
 -- range is a CIDR specification, for example: 192.168.0.0\/16. Provided by
@@ -6372,7 +6821,8 @@ nCreationTimestamp
   = lens _nCreationTimestamp
       (\ s a -> s{_nCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 nId :: Lens' Network (Maybe Word64)
 nId
   = lens _nId (\ s a -> s{_nId = a}) . mapping _Coerce
@@ -6384,8 +6834,8 @@ nGatewayIPv4 :: Lens' Network (Maybe Text)
 nGatewayIPv4
   = lens _nGatewayIPv4 (\ s a -> s{_nGatewayIPv4 = a})
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 nDescription :: Lens' Network (Maybe Text)
 nDescription
   = lens _nDescription (\ s a -> s{_nDescription = a})
@@ -6394,9 +6844,11 @@ instance FromJSON Network where
         parseJSON
           = withObject "Network"
               (\ o ->
-                 Network <$>
-                   (o .:? "kind" .!= "compute#network") <*>
-                     (o .:? "IPv4Range")
+                 Network' <$>
+                   (o .:? "autoCreateSubnetworks") <*>
+                     (o .:? "kind" .!= "compute#network")
+                     <*> (o .:? "subnetworks" .!= mempty)
+                     <*> (o .:? "IPv4Range")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
@@ -6405,10 +6857,13 @@ instance FromJSON Network where
                      <*> (o .:? "description"))
 
 instance ToJSON Network where
-        toJSON Network{..}
+        toJSON Network'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _nKind),
+                 [("autoCreateSubnetworks" .=) <$>
+                    _nAutoCreateSubnetworks,
+                  Just ("kind" .= _nKind),
+                  ("subnetworks" .=) <$> _nSubnetworks,
                   ("IPv4Range" .=) <$> _nIPv4Range,
                   ("selfLink" .=) <$> _nSelfLink,
                   ("name" .=) <$> _nName,
@@ -6421,7 +6876,7 @@ instance ToJSON Network where
 -- when the list is empty.
 --
 -- /See:/ 'addressesScopedListWarning' smart constructor.
-data AddressesScopedListWarning = AddressesScopedListWarning
+data AddressesScopedListWarning = AddressesScopedListWarning'
     { _aData    :: !(Maybe [AddressesScopedListWarningDataItem])
     , _aCode    :: !(Maybe AddressesScopedListWarningCode)
     , _aMessage :: !(Maybe Text)
@@ -6439,23 +6894,26 @@ data AddressesScopedListWarning = AddressesScopedListWarning
 addressesScopedListWarning
     :: AddressesScopedListWarning
 addressesScopedListWarning =
-    AddressesScopedListWarning
+    AddressesScopedListWarning'
     { _aData = Nothing
     , _aCode = Nothing
     , _aMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 aData :: Lens' AddressesScopedListWarning [AddressesScopedListWarningDataItem]
 aData
   = lens _aData (\ s a -> s{_aData = a}) . _Default .
       _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 aCode :: Lens' AddressesScopedListWarning (Maybe AddressesScopedListWarningCode)
 aCode = lens _aCode (\ s a -> s{_aCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 aMessage :: Lens' AddressesScopedListWarning (Maybe Text)
 aMessage = lens _aMessage (\ s a -> s{_aMessage = a})
 
@@ -6463,12 +6921,12 @@ instance FromJSON AddressesScopedListWarning where
         parseJSON
           = withObject "AddressesScopedListWarning"
               (\ o ->
-                 AddressesScopedListWarning <$>
+                 AddressesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON AddressesScopedListWarning where
-        toJSON AddressesScopedListWarning{..}
+        toJSON AddressesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _aData, ("code" .=) <$> _aCode,
@@ -6477,7 +6935,7 @@ instance ToJSON AddressesScopedListWarning where
 -- | The parameters of the raw disk image.
 --
 -- /See:/ 'imageRawDisk' smart constructor.
-data ImageRawDisk = ImageRawDisk
+data ImageRawDisk = ImageRawDisk'
     { _irdContainerType :: !(Maybe ImageRawDiskContainerType)
     , _irdSource        :: !(Maybe Text)
     , _irdSha1Checksum  :: !(Maybe Text)
@@ -6495,7 +6953,7 @@ data ImageRawDisk = ImageRawDisk
 imageRawDisk
     :: ImageRawDisk
 imageRawDisk =
-    ImageRawDisk
+    ImageRawDisk'
     { _irdContainerType = Nothing
     , _irdSource = Nothing
     , _irdSha1Checksum = Nothing
@@ -6527,12 +6985,12 @@ instance FromJSON ImageRawDisk where
         parseJSON
           = withObject "ImageRawDisk"
               (\ o ->
-                 ImageRawDisk <$>
+                 ImageRawDisk' <$>
                    (o .:? "containerType") <*> (o .:? "source") <*>
                      (o .:? "sha1Checksum"))
 
 instance ToJSON ImageRawDisk where
-        toJSON ImageRawDisk{..}
+        toJSON ImageRawDisk'{..}
           = object
               (catMaybes
                  [("containerType" .=) <$> _irdContainerType,
@@ -6541,7 +6999,7 @@ instance ToJSON ImageRawDisk where
 
 --
 -- /See:/ 'instanceAggregatedList' smart constructor.
-data InstanceAggregatedList = InstanceAggregatedList
+data InstanceAggregatedList = InstanceAggregatedList'
     { _ialNextPageToken :: !(Maybe Text)
     , _ialKind          :: !Text
     , _ialItems         :: !(Maybe InstanceAggregatedListItems)
@@ -6565,7 +7023,7 @@ data InstanceAggregatedList = InstanceAggregatedList
 instanceAggregatedList
     :: InstanceAggregatedList
 instanceAggregatedList =
-    InstanceAggregatedList
+    InstanceAggregatedList'
     { _ialNextPageToken = Nothing
     , _ialKind = "compute#instanceAggregatedList"
     , _ialItems = Nothing
@@ -6573,7 +7031,11 @@ instanceAggregatedList =
     , _ialId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 ialNextPageToken :: Lens' InstanceAggregatedList (Maybe Text)
 ialNextPageToken
   = lens _ialNextPageToken
@@ -6588,12 +7050,13 @@ ialKind = lens _ialKind (\ s a -> s{_ialKind = a})
 ialItems :: Lens' InstanceAggregatedList (Maybe InstanceAggregatedListItems)
 ialItems = lens _ialItems (\ s a -> s{_ialItems = a})
 
--- | [Output Only] Server defined URL for this resource.
+-- | [Output Only] Server-defined URL for this resource.
 ialSelfLink :: Lens' InstanceAggregatedList (Maybe Text)
 ialSelfLink
   = lens _ialSelfLink (\ s a -> s{_ialSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 ialId :: Lens' InstanceAggregatedList (Maybe Text)
 ialId = lens _ialId (\ s a -> s{_ialId = a})
 
@@ -6601,7 +7064,7 @@ instance FromJSON InstanceAggregatedList where
         parseJSON
           = withObject "InstanceAggregatedList"
               (\ o ->
-                 InstanceAggregatedList <$>
+                 InstanceAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#instanceAggregatedList")
                      <*> (o .:? "items")
@@ -6609,7 +7072,7 @@ instance FromJSON InstanceAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceAggregatedList where
-        toJSON InstanceAggregatedList{..}
+        toJSON InstanceAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ialNextPageToken,
@@ -6621,7 +7084,7 @@ instance ToJSON InstanceAggregatedList where
 -- | A reserved address resource.
 --
 -- /See:/ 'address' smart constructor.
-data Address = Address
+data Address = Address'
     { _aStatus            :: !(Maybe AddressStatus)
     , _aUsers             :: !(Maybe [Text])
     , _aKind              :: !Text
@@ -6660,7 +7123,7 @@ data Address = Address
 address
     :: Address
 address =
-    Address
+    Address'
     { _aStatus = Nothing
     , _aUsers = Nothing
     , _aKind = "compute#address"
@@ -6700,7 +7163,7 @@ aSelfLink :: Lens' Address (Maybe Text)
 aSelfLink
   = lens _aSelfLink (\ s a -> s{_aSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -6716,7 +7179,8 @@ aCreationTimestamp
   = lens _aCreationTimestamp
       (\ s a -> s{_aCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 aId :: Lens' Address (Maybe Word64)
 aId
   = lens _aId (\ s a -> s{_aId = a}) . mapping _Coerce
@@ -6726,8 +7190,8 @@ aId
 aRegion :: Lens' Address (Maybe Text)
 aRegion = lens _aRegion (\ s a -> s{_aRegion = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 aDescription :: Lens' Address (Maybe Text)
 aDescription
   = lens _aDescription (\ s a -> s{_aDescription = a})
@@ -6736,7 +7200,7 @@ instance FromJSON Address where
         parseJSON
           = withObject "Address"
               (\ o ->
-                 Address <$>
+                 Address' <$>
                    (o .:? "status") <*> (o .:? "users" .!= mempty) <*>
                      (o .:? "kind" .!= "compute#address")
                      <*> (o .:? "address")
@@ -6748,7 +7212,7 @@ instance FromJSON Address where
                      <*> (o .:? "description"))
 
 instance ToJSON Address where
-        toJSON Address{..}
+        toJSON Address'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _aStatus,
@@ -6763,17 +7227,16 @@ instance ToJSON Address where
 -- | A Zone resource.
 --
 -- /See:/ 'zone' smart constructor.
-data Zone = Zone
-    { _zStatus             :: !(Maybe ZoneStatus)
-    , _zMaintenanceWindows :: !(Maybe [ZoneMaintenanceWindowsItem])
-    , _zKind               :: !Text
-    , _zSelfLink           :: !(Maybe Text)
-    , _zName               :: !(Maybe Text)
-    , _zCreationTimestamp  :: !(Maybe Text)
-    , _zId                 :: !(Maybe (Textual Word64))
-    , _zRegion             :: !(Maybe Text)
-    , _zDescription        :: !(Maybe Text)
-    , _zDeprecated         :: !(Maybe DeprecationStatus)
+data Zone = Zone'
+    { _zStatus            :: !(Maybe ZoneStatus)
+    , _zKind              :: !Text
+    , _zSelfLink          :: !(Maybe Text)
+    , _zName              :: !(Maybe Text)
+    , _zCreationTimestamp :: !(Maybe Text)
+    , _zId                :: !(Maybe (Textual Word64))
+    , _zRegion            :: !(Maybe Text)
+    , _zDescription       :: !(Maybe Text)
+    , _zDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Zone' with the minimum fields required to make a request.
@@ -6781,8 +7244,6 @@ data Zone = Zone
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'zStatus'
---
--- * 'zMaintenanceWindows'
 --
 -- * 'zKind'
 --
@@ -6802,9 +7263,8 @@ data Zone = Zone
 zone
     :: Zone
 zone =
-    Zone
+    Zone'
     { _zStatus = Nothing
-    , _zMaintenanceWindows = Nothing
     , _zKind = "compute#zone"
     , _zSelfLink = Nothing
     , _zName = Nothing
@@ -6819,17 +7279,7 @@ zone =
 zStatus :: Lens' Zone (Maybe ZoneStatus)
 zStatus = lens _zStatus (\ s a -> s{_zStatus = a})
 
--- | [Output Only] Any scheduled maintenance windows for this zone. When the
--- zone is in a maintenance window, all resources which reside in the zone
--- will be unavailable. For more information, see Maintenance Windows
-zMaintenanceWindows :: Lens' Zone [ZoneMaintenanceWindowsItem]
-zMaintenanceWindows
-  = lens _zMaintenanceWindows
-      (\ s a -> s{_zMaintenanceWindows = a})
-      . _Default
-      . _Coerce
-
--- | [Output Only] Type of the resource. Always kind#zone for zones.
+-- | [Output Only] Type of the resource. Always compute#zone for zones.
 zKind :: Lens' Zone Text
 zKind = lens _zKind (\ s a -> s{_zKind = a})
 
@@ -6848,7 +7298,8 @@ zCreationTimestamp
   = lens _zCreationTimestamp
       (\ s a -> s{_zCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 zId :: Lens' Zone (Maybe Word64)
 zId
   = lens _zId (\ s a -> s{_zId = a}) . mapping _Coerce
@@ -6871,10 +7322,9 @@ instance FromJSON Zone where
         parseJSON
           = withObject "Zone"
               (\ o ->
-                 Zone <$>
+                 Zone' <$>
                    (o .:? "status") <*>
-                     (o .:? "maintenanceWindows" .!= mempty)
-                     <*> (o .:? "kind" .!= "compute#zone")
+                     (o .:? "kind" .!= "compute#zone")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
@@ -6884,12 +7334,10 @@ instance FromJSON Zone where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON Zone where
-        toJSON Zone{..}
+        toJSON Zone'{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _zStatus,
-                  ("maintenanceWindows" .=) <$> _zMaintenanceWindows,
-                  Just ("kind" .= _zKind),
+                 [("status" .=) <$> _zStatus, Just ("kind" .= _zKind),
                   ("selfLink" .=) <$> _zSelfLink,
                   ("name" .=) <$> _zName,
                   ("creationTimestamp" .=) <$> _zCreationTimestamp,
@@ -6899,7 +7347,7 @@ instance ToJSON Zone where
 
 --
 -- /See:/ 'instanceGroupManagersRecreateInstancesRequest' smart constructor.
-newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest
+newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest'
     { _igmrirInstances :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6911,7 +7359,7 @@ newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRec
 instanceGroupManagersRecreateInstancesRequest
     :: InstanceGroupManagersRecreateInstancesRequest
 instanceGroupManagersRecreateInstancesRequest =
-    InstanceGroupManagersRecreateInstancesRequest
+    InstanceGroupManagersRecreateInstancesRequest'
     { _igmrirInstances = Nothing
     }
 
@@ -6929,19 +7377,19 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersRecreateInstancesRequest"
               (\ o ->
-                 InstanceGroupManagersRecreateInstancesRequest <$>
+                 InstanceGroupManagersRecreateInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersRecreateInstancesRequest where
         toJSON
-          InstanceGroupManagersRecreateInstancesRequest{..}
+          InstanceGroupManagersRecreateInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igmrirInstances])
 
 --
 -- /See:/ 'instancesScopedList' smart constructor.
-data InstancesScopedList = InstancesScopedList
+data InstancesScopedList = InstancesScopedList'
     { _islWarning   :: !(Maybe InstancesScopedListWarning)
     , _islInstances :: !(Maybe [Instance])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6956,7 +7404,7 @@ data InstancesScopedList = InstancesScopedList
 instancesScopedList
     :: InstancesScopedList
 instancesScopedList =
-    InstancesScopedList
+    InstancesScopedList'
     { _islWarning = Nothing
     , _islInstances = Nothing
     }
@@ -6978,19 +7426,24 @@ instance FromJSON InstancesScopedList where
         parseJSON
           = withObject "InstancesScopedList"
               (\ o ->
-                 InstancesScopedList <$>
+                 InstancesScopedList' <$>
                    (o .:? "warning") <*> (o .:? "instances" .!= mempty))
 
 instance ToJSON InstancesScopedList where
-        toJSON InstancesScopedList{..}
+        toJSON InstancesScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _islWarning,
                   ("instances" .=) <$> _islInstances])
 
+-- | A full or valid partial URL to a health check. For example, the
+-- following are valid URLs: -
+-- https:\/\/www.googleapis.com\/compute\/beta\/projects\/project-id\/global\/httpHealthChecks\/health-check
+-- - projects\/project-id\/global\/httpHealthChecks\/health-check -
+-- global\/httpHealthChecks\/health-check
 --
 -- /See:/ 'healthCheckReference' smart constructor.
-newtype HealthCheckReference = HealthCheckReference
+newtype HealthCheckReference = HealthCheckReference'
     { _hcrHealthCheck :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7002,7 +7455,7 @@ newtype HealthCheckReference = HealthCheckReference
 healthCheckReference
     :: HealthCheckReference
 healthCheckReference =
-    HealthCheckReference
+    HealthCheckReference'
     { _hcrHealthCheck = Nothing
     }
 
@@ -7015,17 +7468,17 @@ instance FromJSON HealthCheckReference where
         parseJSON
           = withObject "HealthCheckReference"
               (\ o ->
-                 HealthCheckReference <$> (o .:? "healthCheck"))
+                 HealthCheckReference' <$> (o .:? "healthCheck"))
 
 instance ToJSON HealthCheckReference where
-        toJSON HealthCheckReference{..}
+        toJSON HealthCheckReference'{..}
           = object
               (catMaybes [("healthCheck" .=) <$> _hcrHealthCheck])
 
 -- | A map of scoped target instance lists.
 --
 -- /See:/ 'targetInstanceAggregatedListItems' smart constructor.
-newtype TargetInstanceAggregatedListItems = TargetInstanceAggregatedListItems
+newtype TargetInstanceAggregatedListItems = TargetInstanceAggregatedListItems'
     { _tialiAddtional :: HashMap Text TargetInstancesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7038,7 +7491,7 @@ targetInstanceAggregatedListItems
     :: HashMap Text TargetInstancesScopedList -- ^ 'tialiAddtional'
     -> TargetInstanceAggregatedListItems
 targetInstanceAggregatedListItems pTialiAddtional_ =
-    TargetInstanceAggregatedListItems
+    TargetInstanceAggregatedListItems'
     { _tialiAddtional = _Coerce # pTialiAddtional_
     }
 
@@ -7054,7 +7507,7 @@ instance FromJSON TargetInstanceAggregatedListItems
         parseJSON
           = withObject "TargetInstanceAggregatedListItems"
               (\ o ->
-                 TargetInstanceAggregatedListItems <$>
+                 TargetInstanceAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON TargetInstanceAggregatedListItems
@@ -7063,7 +7516,7 @@ instance ToJSON TargetInstanceAggregatedListItems
 
 --
 -- /See:/ 'instanceGroupAggregatedList' smart constructor.
-data InstanceGroupAggregatedList = InstanceGroupAggregatedList
+data InstanceGroupAggregatedList = InstanceGroupAggregatedList'
     { _igalNextPageToken :: !(Maybe Text)
     , _igalKind          :: !Text
     , _igalItems         :: !(Maybe InstanceGroupAggregatedListItems)
@@ -7087,7 +7540,7 @@ data InstanceGroupAggregatedList = InstanceGroupAggregatedList
 instanceGroupAggregatedList
     :: InstanceGroupAggregatedList
 instanceGroupAggregatedList =
-    InstanceGroupAggregatedList
+    InstanceGroupAggregatedList'
     { _igalNextPageToken = Nothing
     , _igalKind = "compute#instanceGroupAggregatedList"
     , _igalItems = Nothing
@@ -7095,7 +7548,11 @@ instanceGroupAggregatedList =
     , _igalId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 igalNextPageToken :: Lens' InstanceGroupAggregatedList (Maybe Text)
 igalNextPageToken
   = lens _igalNextPageToken
@@ -7127,7 +7584,7 @@ instance FromJSON InstanceGroupAggregatedList where
         parseJSON
           = withObject "InstanceGroupAggregatedList"
               (\ o ->
-                 InstanceGroupAggregatedList <$>
+                 InstanceGroupAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#instanceGroupAggregatedList")
@@ -7136,7 +7593,7 @@ instance FromJSON InstanceGroupAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceGroupAggregatedList where
-        toJSON InstanceGroupAggregatedList{..}
+        toJSON InstanceGroupAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _igalNextPageToken,
@@ -7145,23 +7602,23 @@ instance ToJSON InstanceGroupAggregatedList where
                   ("selfLink" .=) <$> _igalSelfLink,
                   ("id" .=) <$> _igalId])
 
--- | The route resource. A Route is a rule that specifies how certain packets
--- should be handled by the virtual network. Routes are associated with
--- instances by tag and the set of Routes for a particular instance is
--- called its routing table. For each packet leaving a instance, the system
--- searches that instance\'s routing table for a single best matching
--- Route. Routes match packets by destination IP address, preferring
--- smaller or more specific ranges over larger ones. If there is a tie, the
--- system selects the Route with the smallest priority value. If there is
--- still a tie, it uses the layer three and four packet headers to select
--- just one of the remaining matching Routes. The packet is then forwarded
--- as specified by the nextHop field of the winning Route -- either to
--- another instance destination, a instance gateway or a Google Compute
--- Engien-operated gateway. Packets that do not match any Route in the
--- sending instance\'s routing table are dropped.
+-- | Represents a Route resource. A route specifies how certain packets
+-- should be handled by the network. Routes are associated with instances
+-- by tags and the set of routes for a particular instance is called its
+-- routing table. For each packet leaving a instance, the system searches
+-- that instance\'s routing table for a single best matching route. Routes
+-- match packets by destination IP address, preferring smaller or more
+-- specific ranges over larger ones. If there is a tie, the system selects
+-- the route with the smallest priority value. If there is still a tie, it
+-- uses the layer three and four packet headers to select just one of the
+-- remaining matching routes. The packet is then forwarded as specified by
+-- the nextHop field of the winning route - either to another instance
+-- destination, a instance gateway or a Google Compute Engine-operated
+-- gateway. Packets that do not match any route in the sending instance\'s
+-- routing table are dropped.
 --
 -- /See:/ 'route' smart constructor.
-data Route = Route
+data Route = Route'
     { _rPriority          :: !(Maybe (Textual Word32))
     , _rKind              :: !Text
     , _rNextHopGateway    :: !(Maybe Text)
@@ -7218,7 +7675,7 @@ data Route = Route
 route
     :: Route
 route =
-    Route
+    Route'
     { _rPriority = Nothing
     , _rKind = "compute#route"
     , _rNextHopGateway = Nothing
@@ -7237,9 +7694,11 @@ route =
     , _rNextHopInstance = Nothing
     }
 
--- | Breaks ties between Routes of equal specificity. Routes with smaller
--- values win when tied with routes with larger values. Default value is
--- 1000. A valid range is between 0 and 65535.
+-- | The priority of this route. Priority is used to break ties in cases
+-- where there is more than one matching route of equal prefix length. In
+-- the case of two routes with equal prefix length, the one with the
+-- lowest-numbered priority value wins. Default value is 1000. Valid range
+-- is 0 through 65535.
 rPriority :: Lens' Route (Maybe Word32)
 rPriority
   = lens _rPriority (\ s a -> s{_rPriority = a}) .
@@ -7250,8 +7709,8 @@ rPriority
 rKind :: Lens' Route Text
 rKind = lens _rKind (\ s a -> s{_rKind = a})
 
--- | The URL to a gateway that should handle matching packets. Currently,
--- this is only the internet gateway:
+-- | The URL to a gateway that should handle matching packets. You can only
+-- specify the internet gateway using a full or partial valid URL:
 -- projects\/\/global\/gateways\/default-internet-gateway
 rNextHopGateway :: Lens' Route (Maybe Text)
 rNextHopGateway
@@ -7292,7 +7751,7 @@ rSelfLink :: Lens' Route (Maybe Text)
 rSelfLink
   = lens _rSelfLink (\ s a -> s{_rSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -7308,7 +7767,8 @@ rCreationTimestamp
   = lens _rCreationTimestamp
       (\ s a -> s{_rCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 rId :: Lens' Route (Maybe Word64)
 rId
   = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
@@ -7319,8 +7779,8 @@ rNextHopVPNTunnel
   = lens _rNextHopVPNTunnel
       (\ s a -> s{_rNextHopVPNTunnel = a})
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 rDescription :: Lens' Route (Maybe Text)
 rDescription
   = lens _rDescription (\ s a -> s{_rDescription = a})
@@ -7331,8 +7791,8 @@ rTags
   = lens _rTags (\ s a -> s{_rTags = a}) . _Default .
       _Coerce
 
--- | The fully-qualified URL to an instance that should handle matching
--- packets. For example:
+-- | The URL to an instance that should handle matching packets. You can
+-- specify this as a full or partial URL. For example:
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/instances\/
 rNextHopInstance :: Lens' Route (Maybe Text)
 rNextHopInstance
@@ -7343,7 +7803,7 @@ instance FromJSON Route where
         parseJSON
           = withObject "Route"
               (\ o ->
-                 Route <$>
+                 Route' <$>
                    (o .:? "priority") <*>
                      (o .:? "kind" .!= "compute#route")
                      <*> (o .:? "nextHopGateway")
@@ -7362,7 +7822,7 @@ instance FromJSON Route where
                      <*> (o .:? "nextHopInstance"))
 
 instance ToJSON Route where
-        toJSON Route{..}
+        toJSON Route'{..}
           = object
               (catMaybes
                  [("priority" .=) <$> _rPriority,
@@ -7384,7 +7844,7 @@ instance ToJSON Route where
 
 --
 -- /See:/ 'targetVPNGatewaysScopedListWarningDataItem' smart constructor.
-data TargetVPNGatewaysScopedListWarningDataItem = TargetVPNGatewaysScopedListWarningDataItem
+data TargetVPNGatewaysScopedListWarningDataItem = TargetVPNGatewaysScopedListWarningDataItem'
     { _tvgslwdiValue :: !(Maybe Text)
     , _tvgslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7399,7 +7859,7 @@ data TargetVPNGatewaysScopedListWarningDataItem = TargetVPNGatewaysScopedListWar
 targetVPNGatewaysScopedListWarningDataItem
     :: TargetVPNGatewaysScopedListWarningDataItem
 targetVPNGatewaysScopedListWarningDataItem =
-    TargetVPNGatewaysScopedListWarningDataItem
+    TargetVPNGatewaysScopedListWarningDataItem'
     { _tvgslwdiValue = Nothing
     , _tvgslwdiKey = Nothing
     }
@@ -7410,7 +7870,13 @@ tvgslwdiValue
   = lens _tvgslwdiValue
       (\ s a -> s{_tvgslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 tvgslwdiKey :: Lens' TargetVPNGatewaysScopedListWarningDataItem (Maybe Text)
 tvgslwdiKey
   = lens _tvgslwdiKey (\ s a -> s{_tvgslwdiKey = a})
@@ -7421,12 +7887,13 @@ instance FromJSON
           = withObject
               "TargetVPNGatewaysScopedListWarningDataItem"
               (\ o ->
-                 TargetVPNGatewaysScopedListWarningDataItem <$>
+                 TargetVPNGatewaysScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
          TargetVPNGatewaysScopedListWarningDataItem where
-        toJSON TargetVPNGatewaysScopedListWarningDataItem{..}
+        toJSON
+          TargetVPNGatewaysScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _tvgslwdiValue,
@@ -7434,7 +7901,7 @@ instance ToJSON
 
 --
 -- /See:/ 'targetHTTPSProxiesSetSSLCertificatesRequest' smart constructor.
-newtype TargetHTTPSProxiesSetSSLCertificatesRequest = TargetHTTPSProxiesSetSSLCertificatesRequest
+newtype TargetHTTPSProxiesSetSSLCertificatesRequest = TargetHTTPSProxiesSetSSLCertificatesRequest'
     { _thpsscrSSLCertificates :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7446,13 +7913,13 @@ newtype TargetHTTPSProxiesSetSSLCertificatesRequest = TargetHTTPSProxiesSetSSLCe
 targetHTTPSProxiesSetSSLCertificatesRequest
     :: TargetHTTPSProxiesSetSSLCertificatesRequest
 targetHTTPSProxiesSetSSLCertificatesRequest =
-    TargetHTTPSProxiesSetSSLCertificatesRequest
+    TargetHTTPSProxiesSetSSLCertificatesRequest'
     { _thpsscrSSLCertificates = Nothing
     }
 
--- | New set of URLs to SslCertificate resources to associate with this
--- TargetHttpProxy. Currently exactly one ssl certificate must be
--- specified.
+-- | New set of SslCertificate resources to associate with this
+-- TargetHttpsProxy resource. Currently exactly one SslCertificate resource
+-- must be specified.
 thpsscrSSLCertificates :: Lens' TargetHTTPSProxiesSetSSLCertificatesRequest [Text]
 thpsscrSSLCertificates
   = lens _thpsscrSSLCertificates
@@ -7466,13 +7933,13 @@ instance FromJSON
           = withObject
               "TargetHTTPSProxiesSetSSLCertificatesRequest"
               (\ o ->
-                 TargetHTTPSProxiesSetSSLCertificatesRequest <$>
+                 TargetHTTPSProxiesSetSSLCertificatesRequest' <$>
                    (o .:? "sslCertificates" .!= mempty))
 
 instance ToJSON
          TargetHTTPSProxiesSetSSLCertificatesRequest where
         toJSON
-          TargetHTTPSProxiesSetSSLCertificatesRequest{..}
+          TargetHTTPSProxiesSetSSLCertificatesRequest'{..}
           = object
               (catMaybes
                  [("sslCertificates" .=) <$> _thpsscrSSLCertificates])
@@ -7480,7 +7947,7 @@ instance ToJSON
 -- | An Instance Template resource.
 --
 -- /See:/ 'instanceTemplate' smart constructor.
-data InstanceTemplate = InstanceTemplate
+data InstanceTemplate = InstanceTemplate'
     { _itKind              :: !Text
     , _itSelfLink          :: !(Maybe Text)
     , _itName              :: !(Maybe Text)
@@ -7510,7 +7977,7 @@ data InstanceTemplate = InstanceTemplate
 instanceTemplate
     :: InstanceTemplate
 instanceTemplate =
-    InstanceTemplate
+    InstanceTemplate'
     { _itKind = "compute#instanceTemplate"
     , _itSelfLink = Nothing
     , _itName = Nothing
@@ -7555,7 +8022,8 @@ itId
   = lens _itId (\ s a -> s{_itId = a}) .
       mapping _Coerce
 
--- | An optional text description for the instance template.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 itDescription :: Lens' InstanceTemplate (Maybe Text)
 itDescription
   = lens _itDescription
@@ -7570,7 +8038,7 @@ instance FromJSON InstanceTemplate where
         parseJSON
           = withObject "InstanceTemplate"
               (\ o ->
-                 InstanceTemplate <$>
+                 InstanceTemplate' <$>
                    (o .:? "kind" .!= "compute#instanceTemplate") <*>
                      (o .:? "selfLink")
                      <*> (o .:? "name")
@@ -7580,7 +8048,7 @@ instance FromJSON InstanceTemplate where
                      <*> (o .:? "properties"))
 
 instance ToJSON InstanceTemplate where
-        toJSON InstanceTemplate{..}
+        toJSON InstanceTemplate'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _itKind),
@@ -7591,79 +8059,10 @@ instance ToJSON InstanceTemplate where
                   ("description" .=) <$> _itDescription,
                   ("properties" .=) <$> _itProperties])
 
---
--- /See:/ 'zoneMaintenanceWindowsItem' smart constructor.
-data ZoneMaintenanceWindowsItem = ZoneMaintenanceWindowsItem
-    { _zmwiBeginTime   :: !(Maybe Text)
-    , _zmwiName        :: !(Maybe Text)
-    , _zmwiEndTime     :: !(Maybe Text)
-    , _zmwiDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ZoneMaintenanceWindowsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'zmwiBeginTime'
---
--- * 'zmwiName'
---
--- * 'zmwiEndTime'
---
--- * 'zmwiDescription'
-zoneMaintenanceWindowsItem
-    :: ZoneMaintenanceWindowsItem
-zoneMaintenanceWindowsItem =
-    ZoneMaintenanceWindowsItem
-    { _zmwiBeginTime = Nothing
-    , _zmwiName = Nothing
-    , _zmwiEndTime = Nothing
-    , _zmwiDescription = Nothing
-    }
-
--- | [Output Only] Starting time of the maintenance window, in RFC3339
--- format.
-zmwiBeginTime :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiBeginTime
-  = lens _zmwiBeginTime
-      (\ s a -> s{_zmwiBeginTime = a})
-
--- | [Output Only] Name of the maintenance window.
-zmwiName :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiName = lens _zmwiName (\ s a -> s{_zmwiName = a})
-
--- | [Output Only] Ending time of the maintenance window, in RFC3339 format.
-zmwiEndTime :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiEndTime
-  = lens _zmwiEndTime (\ s a -> s{_zmwiEndTime = a})
-
--- | [Output Only] Textual description of the maintenance window.
-zmwiDescription :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiDescription
-  = lens _zmwiDescription
-      (\ s a -> s{_zmwiDescription = a})
-
-instance FromJSON ZoneMaintenanceWindowsItem where
-        parseJSON
-          = withObject "ZoneMaintenanceWindowsItem"
-              (\ o ->
-                 ZoneMaintenanceWindowsItem <$>
-                   (o .:? "beginTime") <*> (o .:? "name") <*>
-                     (o .:? "endTime")
-                     <*> (o .:? "description"))
-
-instance ToJSON ZoneMaintenanceWindowsItem where
-        toJSON ZoneMaintenanceWindowsItem{..}
-          = object
-              (catMaybes
-                 [("beginTime" .=) <$> _zmwiBeginTime,
-                  ("name" .=) <$> _zmwiName,
-                  ("endTime" .=) <$> _zmwiEndTime,
-                  ("description" .=) <$> _zmwiDescription])
-
+-- | Represents a Target VPN gateway resource.
 --
 -- /See:/ 'targetVPNGateway' smart constructor.
-data TargetVPNGateway = TargetVPNGateway
+data TargetVPNGateway = TargetVPNGateway'
     { _tvgStatus            :: !(Maybe TargetVPNGatewayStatus)
     , _tvgKind              :: !Text
     , _tvgNetwork           :: !(Maybe Text)
@@ -7705,7 +8104,7 @@ data TargetVPNGateway = TargetVPNGateway
 targetVPNGateway
     :: TargetVPNGateway
 targetVPNGateway =
-    TargetVPNGateway
+    TargetVPNGateway'
     { _tvgStatus = Nothing
     , _tvgKind = "compute#targetVpnGateway"
     , _tvgNetwork = Nothing
@@ -7740,7 +8139,7 @@ tvgSelfLink :: Lens' TargetVPNGateway (Maybe Text)
 tvgSelfLink
   = lens _tvgSelfLink (\ s a -> s{_tvgSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -7756,7 +8155,8 @@ tvgCreationTimestamp
   = lens _tvgCreationTimestamp
       (\ s a -> s{_tvgCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tvgId :: Lens' TargetVPNGateway (Maybe Word64)
 tvgId
   = lens _tvgId (\ s a -> s{_tvgId = a}) .
@@ -7768,15 +8168,16 @@ tvgRegion
   = lens _tvgRegion (\ s a -> s{_tvgRegion = a})
 
 -- | [Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are
--- created using compute.vpntunnels.insert and associated to a VPN gateway.
+-- created using compute.vpntunnels.insert method and associated to a VPN
+-- gateway.
 tvgTunnels :: Lens' TargetVPNGateway [Text]
 tvgTunnels
   = lens _tvgTunnels (\ s a -> s{_tvgTunnels = a}) .
       _Default
       . _Coerce
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 tvgDescription :: Lens' TargetVPNGateway (Maybe Text)
 tvgDescription
   = lens _tvgDescription
@@ -7796,7 +8197,7 @@ instance FromJSON TargetVPNGateway where
         parseJSON
           = withObject "TargetVPNGateway"
               (\ o ->
-                 TargetVPNGateway <$>
+                 TargetVPNGateway' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "compute#targetVpnGateway")
                      <*> (o .:? "network")
@@ -7810,7 +8211,7 @@ instance FromJSON TargetVPNGateway where
                      <*> (o .:? "forwardingRules" .!= mempty))
 
 instance ToJSON TargetVPNGateway where
-        toJSON TargetVPNGateway{..}
+        toJSON TargetVPNGateway'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _tvgStatus,
@@ -7826,7 +8227,7 @@ instance ToJSON TargetVPNGateway where
 
 --
 -- /See:/ 'urlMapsValidateResponse' smart constructor.
-newtype URLMapsValidateResponse = URLMapsValidateResponse
+newtype URLMapsValidateResponse = URLMapsValidateResponse'
     { _umvrResult :: Maybe URLMapValidationResult
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7838,7 +8239,7 @@ newtype URLMapsValidateResponse = URLMapsValidateResponse
 urlMapsValidateResponse
     :: URLMapsValidateResponse
 urlMapsValidateResponse =
-    URLMapsValidateResponse
+    URLMapsValidateResponse'
     { _umvrResult = Nothing
     }
 
@@ -7849,18 +8250,19 @@ umvrResult
 instance FromJSON URLMapsValidateResponse where
         parseJSON
           = withObject "URLMapsValidateResponse"
-              (\ o -> URLMapsValidateResponse <$> (o .:? "result"))
+              (\ o ->
+                 URLMapsValidateResponse' <$> (o .:? "result"))
 
 instance ToJSON URLMapsValidateResponse where
-        toJSON URLMapsValidateResponse{..}
+        toJSON URLMapsValidateResponse'{..}
           = object (catMaybes [("result" .=) <$> _umvrResult])
 
 -- | An SslCertificate resource. This resource provides a mechanism to upload
--- an SSL key and certificate to global HTTPS loadbalancer to serve secure
--- connections.
+-- an SSL key and certificate to the load balancer to serve secure
+-- connections from the user.
 --
 -- /See:/ 'sslCertificate' smart constructor.
-data SSLCertificate = SSLCertificate
+data SSLCertificate = SSLCertificate'
     { _scPrivateKey        :: !(Maybe Text)
     , _scKind              :: !Text
     , _scSelfLink          :: !(Maybe Text)
@@ -7893,7 +8295,7 @@ data SSLCertificate = SSLCertificate
 sslCertificate
     :: SSLCertificate
 sslCertificate =
-    SSLCertificate
+    SSLCertificate'
     { _scPrivateKey = Nothing
     , _scKind = "compute#sslCertificate"
     , _scSelfLink = Nothing
@@ -7936,7 +8338,8 @@ scCreationTimestamp
   = lens _scCreationTimestamp
       (\ s a -> s{_scCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 scId :: Lens' SSLCertificate (Maybe Word64)
 scId
   = lens _scId (\ s a -> s{_scId = a}) .
@@ -7950,8 +8353,8 @@ scCertificate
   = lens _scCertificate
       (\ s a -> s{_scCertificate = a})
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 scDescription :: Lens' SSLCertificate (Maybe Text)
 scDescription
   = lens _scDescription
@@ -7961,7 +8364,7 @@ instance FromJSON SSLCertificate where
         parseJSON
           = withObject "SSLCertificate"
               (\ o ->
-                 SSLCertificate <$>
+                 SSLCertificate' <$>
                    (o .:? "privateKey") <*>
                      (o .:? "kind" .!= "compute#sslCertificate")
                      <*> (o .:? "selfLink")
@@ -7972,7 +8375,7 @@ instance FromJSON SSLCertificate where
                      <*> (o .:? "description"))
 
 instance ToJSON SSLCertificate where
-        toJSON SSLCertificate{..}
+        toJSON SSLCertificate'{..}
           = object
               (catMaybes
                  [("privateKey" .=) <$> _scPrivateKey,
@@ -7986,7 +8389,7 @@ instance ToJSON SSLCertificate where
 
 --
 -- /See:/ 'urlMapReference' smart constructor.
-newtype URLMapReference = URLMapReference
+newtype URLMapReference = URLMapReference'
     { _umrURLMap :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7998,7 +8401,7 @@ newtype URLMapReference = URLMapReference
 urlMapReference
     :: URLMapReference
 urlMapReference =
-    URLMapReference
+    URLMapReference'
     { _umrURLMap = Nothing
     }
 
@@ -8009,15 +8412,15 @@ umrURLMap
 instance FromJSON URLMapReference where
         parseJSON
           = withObject "URLMapReference"
-              (\ o -> URLMapReference <$> (o .:? "urlMap"))
+              (\ o -> URLMapReference' <$> (o .:? "urlMap"))
 
 instance ToJSON URLMapReference where
-        toJSON URLMapReference{..}
+        toJSON URLMapReference'{..}
           = object (catMaybes [("urlMap" .=) <$> _umrURLMap])
 
 --
 -- /See:/ 'targetPoolsAddHealthCheckRequest' smart constructor.
-newtype TargetPoolsAddHealthCheckRequest = TargetPoolsAddHealthCheckRequest
+newtype TargetPoolsAddHealthCheckRequest = TargetPoolsAddHealthCheckRequest'
     { _tpahcrHealthChecks :: Maybe [HealthCheckReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8029,11 +8432,11 @@ newtype TargetPoolsAddHealthCheckRequest = TargetPoolsAddHealthCheckRequest
 targetPoolsAddHealthCheckRequest
     :: TargetPoolsAddHealthCheckRequest
 targetPoolsAddHealthCheckRequest =
-    TargetPoolsAddHealthCheckRequest
+    TargetPoolsAddHealthCheckRequest'
     { _tpahcrHealthChecks = Nothing
     }
 
--- | Health check URLs to be added to targetPool.
+-- | A list of HttpHealthCheck resources to add to the target pool.
 tpahcrHealthChecks :: Lens' TargetPoolsAddHealthCheckRequest [HealthCheckReference]
 tpahcrHealthChecks
   = lens _tpahcrHealthChecks
@@ -8046,12 +8449,12 @@ instance FromJSON TargetPoolsAddHealthCheckRequest
         parseJSON
           = withObject "TargetPoolsAddHealthCheckRequest"
               (\ o ->
-                 TargetPoolsAddHealthCheckRequest <$>
+                 TargetPoolsAddHealthCheckRequest' <$>
                    (o .:? "healthChecks" .!= mempty))
 
 instance ToJSON TargetPoolsAddHealthCheckRequest
          where
-        toJSON TargetPoolsAddHealthCheckRequest{..}
+        toJSON TargetPoolsAddHealthCheckRequest'{..}
           = object
               (catMaybes
                  [("healthChecks" .=) <$> _tpahcrHealthChecks])
@@ -8059,7 +8462,7 @@ instance ToJSON TargetPoolsAddHealthCheckRequest
 -- | [Output Only] A map of scoped disk lists.
 --
 -- /See:/ 'diskAggregatedListItems' smart constructor.
-newtype DiskAggregatedListItems = DiskAggregatedListItems
+newtype DiskAggregatedListItems = DiskAggregatedListItems'
     { _daliAddtional :: HashMap Text DisksScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8072,7 +8475,7 @@ diskAggregatedListItems
     :: HashMap Text DisksScopedList -- ^ 'daliAddtional'
     -> DiskAggregatedListItems
 diskAggregatedListItems pDaliAddtional_ =
-    DiskAggregatedListItems
+    DiskAggregatedListItems'
     { _daliAddtional = _Coerce # pDaliAddtional_
     }
 
@@ -8087,7 +8490,7 @@ instance FromJSON DiskAggregatedListItems where
         parseJSON
           = withObject "DiskAggregatedListItems"
               (\ o ->
-                 DiskAggregatedListItems <$> (parseJSONObject o))
+                 DiskAggregatedListItems' <$> (parseJSONObject o))
 
 instance ToJSON DiskAggregatedListItems where
         toJSON = toJSON . _daliAddtional
@@ -8096,7 +8499,7 @@ instance ToJSON DiskAggregatedListItems where
 -- report. Contains bucket_name and report_name prefix.
 --
 -- /See:/ 'usageExportLocation' smart constructor.
-data UsageExportLocation = UsageExportLocation
+data UsageExportLocation = UsageExportLocation'
     { _uelReportNamePrefix :: !(Maybe Text)
     , _uelBucketName       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8111,7 +8514,7 @@ data UsageExportLocation = UsageExportLocation
 usageExportLocation
     :: UsageExportLocation
 usageExportLocation =
-    UsageExportLocation
+    UsageExportLocation'
     { _uelReportNamePrefix = Nothing
     , _uelBucketName = Nothing
     }
@@ -8128,8 +8531,10 @@ uelReportNamePrefix
 
 -- | The name of an existing bucket in Cloud Storage where the usage report
 -- object is stored. The Google Service Account is granted write access to
--- this bucket. This is just the bucket name, with no gs:\/\/ or
--- https:\/\/storage.googleapis.com\/ in front of it.
+-- this bucket. This can either be the bucket name by itself, such as
+-- example-bucket, or the bucket name with gs:\/\/ or
+-- https:\/\/storage.googleapis.com\/ in front of it, such as
+-- gs:\/\/example-bucket.
 uelBucketName :: Lens' UsageExportLocation (Maybe Text)
 uelBucketName
   = lens _uelBucketName
@@ -8139,11 +8544,11 @@ instance FromJSON UsageExportLocation where
         parseJSON
           = withObject "UsageExportLocation"
               (\ o ->
-                 UsageExportLocation <$>
+                 UsageExportLocation' <$>
                    (o .:? "reportNamePrefix") <*> (o .:? "bucketName"))
 
 instance ToJSON UsageExportLocation where
-        toJSON UsageExportLocation{..}
+        toJSON UsageExportLocation'{..}
           = object
               (catMaybes
                  [("reportNamePrefix" .=) <$> _uelReportNamePrefix,
@@ -8152,7 +8557,7 @@ instance ToJSON UsageExportLocation where
 -- | Contains a list of zone resources.
 --
 -- /See:/ 'zoneList' smart constructor.
-data ZoneList = ZoneList
+data ZoneList = ZoneList'
     { _zlNextPageToken :: !(Maybe Text)
     , _zlKind          :: !Text
     , _zlItems         :: !(Maybe [Zone])
@@ -8176,7 +8581,7 @@ data ZoneList = ZoneList
 zoneList
     :: ZoneList
 zoneList =
-    ZoneList
+    ZoneList'
     { _zlNextPageToken = Nothing
     , _zlKind = "compute#zoneList"
     , _zlItems = Nothing
@@ -8184,7 +8589,11 @@ zoneList =
     , _zlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 zlNextPageToken :: Lens' ZoneList (Maybe Text)
 zlNextPageToken
   = lens _zlNextPageToken
@@ -8213,7 +8622,7 @@ instance FromJSON ZoneList where
         parseJSON
           = withObject "ZoneList"
               (\ o ->
-                 ZoneList <$>
+                 ZoneList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#zoneList")
                      <*> (o .:? "items" .!= mempty)
@@ -8221,7 +8630,7 @@ instance FromJSON ZoneList where
                      <*> (o .:? "id"))
 
 instance ToJSON ZoneList where
-        toJSON ZoneList{..}
+        toJSON ZoneList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _zlNextPageToken,
@@ -8231,7 +8640,7 @@ instance ToJSON ZoneList where
 
 --
 -- /See:/ 'managedInstance' smart constructor.
-data ManagedInstance = ManagedInstance
+data ManagedInstance = ManagedInstance'
     { _miLastAttempt    :: !(Maybe ManagedInstanceLastAttempt)
     , _miCurrentAction  :: !(Maybe ManagedInstanceCurrentAction)
     , _miId             :: !(Maybe (Textual Word64))
@@ -8255,7 +8664,7 @@ data ManagedInstance = ManagedInstance
 managedInstance
     :: ManagedInstance
 managedInstance =
-    ManagedInstance
+    ManagedInstance'
     { _miLastAttempt = Nothing
     , _miCurrentAction = Nothing
     , _miId = Nothing
@@ -8274,16 +8683,20 @@ miLastAttempt
 -- scheduled for the instance. Possible values: - NONE The instance is
 -- running, and the managed instance group does not have any scheduled
 -- actions for this instance. - CREATING The managed instance group is
--- creating this instance. - RECREATING The managed instance group is
--- recreating this instance. - DELETING The managed instance group is
--- permanently deleting this instance. - ABANDONING The managed instance
--- group is abandoning this instance. The instance will be removed from the
--- instance group and from any target pools that are associated with this
--- group. - RESTARTING The managed instance group is restarting the
--- instance. - REFRESHING The managed instance group is applying
--- configuration changes to the instance without stopping it. For example,
--- the group can update the target pool list for an instance without
--- stopping that instance.
+-- creating this instance. If the group fails to create this instance, it
+-- will try again until it is successful. - CREATING_WITHOUT_RETRIES The
+-- managed instance group is attempting to create this instance only once.
+-- If the group fails to create this instance, it does not try again and
+-- the group\'s target_size value is decreased. - RECREATING The managed
+-- instance group is recreating this instance. - DELETING The managed
+-- instance group is permanently deleting this instance. - ABANDONING The
+-- managed instance group is abandoning this instance. The instance will be
+-- removed from the instance group and from any target pools that are
+-- associated with this group. - RESTARTING The managed instance group is
+-- restarting the instance. - REFRESHING The managed instance group is
+-- applying configuration changes to the instance without stopping it. For
+-- example, the group can update the target pool list for an instance
+-- without stopping that instance.
 miCurrentAction :: Lens' ManagedInstance (Maybe ManagedInstanceCurrentAction)
 miCurrentAction
   = lens _miCurrentAction
@@ -8313,14 +8726,14 @@ instance FromJSON ManagedInstance where
         parseJSON
           = withObject "ManagedInstance"
               (\ o ->
-                 ManagedInstance <$>
+                 ManagedInstance' <$>
                    (o .:? "lastAttempt") <*> (o .:? "currentAction") <*>
                      (o .:? "id")
                      <*> (o .:? "instanceStatus")
                      <*> (o .:? "instance"))
 
 instance ToJSON ManagedInstance where
-        toJSON ManagedInstance{..}
+        toJSON ManagedInstance'{..}
           = object
               (catMaybes
                  [("lastAttempt" .=) <$> _miLastAttempt,
@@ -8332,7 +8745,7 @@ instance ToJSON ManagedInstance where
 -- | [Output Only] A map of filtered managed instance group lists.
 --
 -- /See:/ 'instanceGroupManagerAggregatedListItems' smart constructor.
-newtype InstanceGroupManagerAggregatedListItems = InstanceGroupManagerAggregatedListItems
+newtype InstanceGroupManagerAggregatedListItems = InstanceGroupManagerAggregatedListItems'
     { _igmaliAddtional :: HashMap Text InstanceGroupManagersScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8345,7 +8758,7 @@ instanceGroupManagerAggregatedListItems
     :: HashMap Text InstanceGroupManagersScopedList -- ^ 'igmaliAddtional'
     -> InstanceGroupManagerAggregatedListItems
 instanceGroupManagerAggregatedListItems pIgmaliAddtional_ =
-    InstanceGroupManagerAggregatedListItems
+    InstanceGroupManagerAggregatedListItems'
     { _igmaliAddtional = _Coerce # pIgmaliAddtional_
     }
 
@@ -8363,7 +8776,7 @@ instance FromJSON
           = withObject
               "InstanceGroupManagerAggregatedListItems"
               (\ o ->
-                 InstanceGroupManagerAggregatedListItems <$>
+                 InstanceGroupManagerAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON
@@ -8372,7 +8785,7 @@ instance ToJSON
 
 --
 -- /See:/ 'instanceGroupManagersDeleteInstancesRequest' smart constructor.
-newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDeleteInstancesRequest
+newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDeleteInstancesRequest'
     { _igmdirInstances :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8384,7 +8797,7 @@ newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDelet
 instanceGroupManagersDeleteInstancesRequest
     :: InstanceGroupManagersDeleteInstancesRequest
 instanceGroupManagersDeleteInstancesRequest =
-    InstanceGroupManagersDeleteInstancesRequest
+    InstanceGroupManagersDeleteInstancesRequest'
     { _igmdirInstances = Nothing
     }
 
@@ -8403,20 +8816,20 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersDeleteInstancesRequest"
               (\ o ->
-                 InstanceGroupManagersDeleteInstancesRequest <$>
+                 InstanceGroupManagersDeleteInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersDeleteInstancesRequest where
         toJSON
-          InstanceGroupManagersDeleteInstancesRequest{..}
+          InstanceGroupManagersDeleteInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igmdirInstances])
 
 -- | Message containing information of one individual backend.
 --
 -- /See:/ 'backend' smart constructor.
-data Backend = Backend
+data Backend = Backend'
     { _bGroup              :: !(Maybe Text)
     , _bBalancingMode      :: !(Maybe BackendBalancingMode)
     , _bMaxUtilization     :: !(Maybe (Textual Double))
@@ -8446,7 +8859,7 @@ data Backend = Backend
 backend
     :: Backend
 backend =
-    Backend
+    Backend'
     { _bGroup = Nothing
     , _bBalancingMode = Nothing
     , _bMaxUtilization = Nothing
@@ -8466,8 +8879,9 @@ backend =
 bGroup :: Lens' Backend (Maybe Text)
 bGroup = lens _bGroup (\ s a -> s{_bGroup = a})
 
--- | Specifies the balancing mode for this backend. The default is
--- UTILIZATION but available values are UTILIZATION and RATE.
+-- | Specifies the balancing mode for this backend. For global HTTP(S) load
+-- balancing, the default is UTILIZATION. Valid values are UTILIZATION and
+-- RATE.
 bBalancingMode :: Lens' Backend (Maybe BackendBalancingMode)
 bBalancingMode
   = lens _bBalancingMode
@@ -8482,25 +8896,26 @@ bMaxUtilization
       (\ s a -> s{_bMaxUtilization = a})
       . mapping _Coerce
 
--- | The max RPS of the group. Can be used with either balancing mode, but
--- required if RATE mode. For RATE mode, either maxRate or
--- maxRatePerInstance must be set.
+-- | The max requests per second (RPS) of the group. Can be used with either
+-- RATE or UTILIZATION balancing modes, but required if RATE mode. For RATE
+-- mode, either maxRate or maxRatePerInstance must be set.
 bMaxRate :: Lens' Backend (Maybe Int32)
 bMaxRate
   = lens _bMaxRate (\ s a -> s{_bMaxRate = a}) .
       mapping _Coerce
 
--- | The max RPS that a single backed instance can handle. This is used to
--- calculate the capacity of the group. Can be used in either balancing
--- mode. For RATE mode, either maxRate or maxRatePerInstance must be set.
+-- | The max requests per second (RPS) that a single backend instance can
+-- handle.This is used to calculate the capacity of the group. Can be used
+-- in either balancing mode. For RATE mode, either maxRate or
+-- maxRatePerInstance must be set.
 bMaxRatePerInstance :: Lens' Backend (Maybe Double)
 bMaxRatePerInstance
   = lens _bMaxRatePerInstance
       (\ s a -> s{_bMaxRatePerInstance = a})
       . mapping _Coerce
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 bDescription :: Lens' Backend (Maybe Text)
 bDescription
   = lens _bDescription (\ s a -> s{_bDescription = a})
@@ -8520,7 +8935,7 @@ instance FromJSON Backend where
         parseJSON
           = withObject "Backend"
               (\ o ->
-                 Backend <$>
+                 Backend' <$>
                    (o .:? "group") <*> (o .:? "balancingMode") <*>
                      (o .:? "maxUtilization")
                      <*> (o .:? "maxRate")
@@ -8529,7 +8944,7 @@ instance FromJSON Backend where
                      <*> (o .:? "capacityScaler"))
 
 instance ToJSON Backend where
-        toJSON Backend{..}
+        toJSON Backend'{..}
           = object
               (catMaybes
                  [("group" .=) <$> _bGroup,
@@ -8544,7 +8959,7 @@ instance ToJSON Backend where
 -- when the list is empty.
 --
 -- /See:/ 'targetVPNGatewaysScopedListWarning' smart constructor.
-data TargetVPNGatewaysScopedListWarning = TargetVPNGatewaysScopedListWarning
+data TargetVPNGatewaysScopedListWarning = TargetVPNGatewaysScopedListWarning'
     { _tvgslwData    :: !(Maybe [TargetVPNGatewaysScopedListWarningDataItem])
     , _tvgslwCode    :: !(Maybe TargetVPNGatewaysScopedListWarningCode)
     , _tvgslwMessage :: !(Maybe Text)
@@ -8562,25 +8977,28 @@ data TargetVPNGatewaysScopedListWarning = TargetVPNGatewaysScopedListWarning
 targetVPNGatewaysScopedListWarning
     :: TargetVPNGatewaysScopedListWarning
 targetVPNGatewaysScopedListWarning =
-    TargetVPNGatewaysScopedListWarning
+    TargetVPNGatewaysScopedListWarning'
     { _tvgslwData = Nothing
     , _tvgslwCode = Nothing
     , _tvgslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 tvgslwData :: Lens' TargetVPNGatewaysScopedListWarning [TargetVPNGatewaysScopedListWarningDataItem]
 tvgslwData
   = lens _tvgslwData (\ s a -> s{_tvgslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 tvgslwCode :: Lens' TargetVPNGatewaysScopedListWarning (Maybe TargetVPNGatewaysScopedListWarningCode)
 tvgslwCode
   = lens _tvgslwCode (\ s a -> s{_tvgslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 tvgslwMessage :: Lens' TargetVPNGatewaysScopedListWarning (Maybe Text)
 tvgslwMessage
   = lens _tvgslwMessage
@@ -8591,23 +9009,23 @@ instance FromJSON TargetVPNGatewaysScopedListWarning
         parseJSON
           = withObject "TargetVPNGatewaysScopedListWarning"
               (\ o ->
-                 TargetVPNGatewaysScopedListWarning <$>
+                 TargetVPNGatewaysScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON TargetVPNGatewaysScopedListWarning
          where
-        toJSON TargetVPNGatewaysScopedListWarning{..}
+        toJSON TargetVPNGatewaysScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _tvgslwData,
                   ("code" .=) <$> _tvgslwCode,
                   ("message" .=) <$> _tvgslwMessage])
 
--- | Contains a list of address resources.
+-- | Contains a list of addresses.
 --
 -- /See:/ 'addressList' smart constructor.
-data AddressList = AddressList
+data AddressList = AddressList'
     { _alNextPageToken :: !(Maybe Text)
     , _alKind          :: !Text
     , _alItems         :: !(Maybe [Address])
@@ -8631,7 +9049,7 @@ data AddressList = AddressList
 addressList
     :: AddressList
 addressList =
-    AddressList
+    AddressList'
     { _alNextPageToken = Nothing
     , _alKind = "compute#addressList"
     , _alItems = Nothing
@@ -8639,7 +9057,11 @@ addressList =
     , _alId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 alNextPageToken :: Lens' AddressList (Maybe Text)
 alNextPageToken
   = lens _alNextPageToken
@@ -8650,7 +9072,7 @@ alNextPageToken
 alKind :: Lens' AddressList Text
 alKind = lens _alKind (\ s a -> s{_alKind = a})
 
--- | [Output Only] A list of Address resources.
+-- | [Output Only] A list of addresses.
 alItems :: Lens' AddressList [Address]
 alItems
   = lens _alItems (\ s a -> s{_alItems = a}) . _Default
@@ -8661,7 +9083,8 @@ alSelfLink :: Lens' AddressList (Maybe Text)
 alSelfLink
   = lens _alSelfLink (\ s a -> s{_alSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 alId :: Lens' AddressList (Maybe Text)
 alId = lens _alId (\ s a -> s{_alId = a})
 
@@ -8669,7 +9092,7 @@ instance FromJSON AddressList where
         parseJSON
           = withObject "AddressList"
               (\ o ->
-                 AddressList <$>
+                 AddressList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#addressList")
                      <*> (o .:? "items" .!= mempty)
@@ -8677,7 +9100,7 @@ instance FromJSON AddressList where
                      <*> (o .:? "id"))
 
 instance ToJSON AddressList where
-        toJSON AddressList{..}
+        toJSON AddressList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _alNextPageToken,
@@ -8688,7 +9111,7 @@ instance ToJSON AddressList where
 -- | A map of scoped forwarding rule lists.
 --
 -- /See:/ 'forwardingRuleAggregatedListItems' smart constructor.
-newtype ForwardingRuleAggregatedListItems = ForwardingRuleAggregatedListItems
+newtype ForwardingRuleAggregatedListItems = ForwardingRuleAggregatedListItems'
     { _fraliAddtional :: HashMap Text ForwardingRulesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8701,7 +9124,7 @@ forwardingRuleAggregatedListItems
     :: HashMap Text ForwardingRulesScopedList -- ^ 'fraliAddtional'
     -> ForwardingRuleAggregatedListItems
 forwardingRuleAggregatedListItems pFraliAddtional_ =
-    ForwardingRuleAggregatedListItems
+    ForwardingRuleAggregatedListItems'
     { _fraliAddtional = _Coerce # pFraliAddtional_
     }
 
@@ -8717,7 +9140,7 @@ instance FromJSON ForwardingRuleAggregatedListItems
         parseJSON
           = withObject "ForwardingRuleAggregatedListItems"
               (\ o ->
-                 ForwardingRuleAggregatedListItems <$>
+                 ForwardingRuleAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON ForwardingRuleAggregatedListItems
@@ -8727,7 +9150,7 @@ instance ToJSON ForwardingRuleAggregatedListItems
 -- | [Output Only] A map of scoped operation lists.
 --
 -- /See:/ 'operationAggregatedListItems' smart constructor.
-newtype OperationAggregatedListItems = OperationAggregatedListItems
+newtype OperationAggregatedListItems = OperationAggregatedListItems'
     { _oaliAddtional :: HashMap Text OperationsScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8740,7 +9163,7 @@ operationAggregatedListItems
     :: HashMap Text OperationsScopedList -- ^ 'oaliAddtional'
     -> OperationAggregatedListItems
 operationAggregatedListItems pOaliAddtional_ =
-    OperationAggregatedListItems
+    OperationAggregatedListItems'
     { _oaliAddtional = _Coerce # pOaliAddtional_
     }
 
@@ -8755,14 +9178,15 @@ instance FromJSON OperationAggregatedListItems where
         parseJSON
           = withObject "OperationAggregatedListItems"
               (\ o ->
-                 OperationAggregatedListItems <$> (parseJSONObject o))
+                 OperationAggregatedListItems' <$>
+                   (parseJSONObject o))
 
 instance ToJSON OperationAggregatedListItems where
         toJSON = toJSON . _oaliAddtional
 
 --
 -- /See:/ 'instanceGroupManagerActionsSummary' smart constructor.
-data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary
+data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary'
     { _igmasDeleting   :: !(Maybe (Textual Int32))
     , _igmasRestarting :: !(Maybe (Textual Int32))
     , _igmasNone       :: !(Maybe (Textual Int32))
@@ -8792,7 +9216,7 @@ data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary
 instanceGroupManagerActionsSummary
     :: InstanceGroupManagerActionsSummary
 instanceGroupManagerActionsSummary =
-    InstanceGroupManagerActionsSummary
+    InstanceGroupManagerActionsSummary'
     { _igmasDeleting = Nothing
     , _igmasRestarting = Nothing
     , _igmasNone = Nothing
@@ -8826,7 +9250,9 @@ igmasNone
       mapping _Coerce
 
 -- | [Output Only] The number of instances in the managed instance group that
--- are scheduled to be created or are currently being created.
+-- are scheduled to be created or are currently being created. If the group
+-- fails to create one of these instances, it tries again until it creates
+-- the instance successfully.
 igmasCreating :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasCreating
   = lens _igmasCreating
@@ -8868,7 +9294,7 @@ instance FromJSON InstanceGroupManagerActionsSummary
         parseJSON
           = withObject "InstanceGroupManagerActionsSummary"
               (\ o ->
-                 InstanceGroupManagerActionsSummary <$>
+                 InstanceGroupManagerActionsSummary' <$>
                    (o .:? "deleting") <*> (o .:? "restarting") <*>
                      (o .:? "none")
                      <*> (o .:? "creating")
@@ -8878,7 +9304,7 @@ instance FromJSON InstanceGroupManagerActionsSummary
 
 instance ToJSON InstanceGroupManagerActionsSummary
          where
-        toJSON InstanceGroupManagerActionsSummary{..}
+        toJSON InstanceGroupManagerActionsSummary'{..}
           = object
               (catMaybes
                  [("deleting" .=) <$> _igmasDeleting,
@@ -8892,7 +9318,7 @@ instance ToJSON InstanceGroupManagerActionsSummary
 -- | A service account.
 --
 -- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount
+data ServiceAccount = ServiceAccount'
     { _saEmail  :: !(Maybe Text)
     , _saScopes :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8907,7 +9333,7 @@ data ServiceAccount = ServiceAccount
 serviceAccount
     :: ServiceAccount
 serviceAccount =
-    ServiceAccount
+    ServiceAccount'
     { _saEmail = Nothing
     , _saScopes = Nothing
     }
@@ -8927,20 +9353,20 @@ instance FromJSON ServiceAccount where
         parseJSON
           = withObject "ServiceAccount"
               (\ o ->
-                 ServiceAccount <$>
+                 ServiceAccount' <$>
                    (o .:? "email") <*> (o .:? "scopes" .!= mempty))
 
 instance ToJSON ServiceAccount where
-        toJSON ServiceAccount{..}
+        toJSON ServiceAccount'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _saEmail,
                   ("scopes" .=) <$> _saScopes])
 
--- | Contains a list of Network resources.
+-- | Contains a list of networks.
 --
 -- /See:/ 'networkList' smart constructor.
-data NetworkList = NetworkList
+data NetworkList = NetworkList'
     { _nlNextPageToken :: !(Maybe Text)
     , _nlKind          :: !Text
     , _nlItems         :: !(Maybe [Network])
@@ -8964,7 +9390,7 @@ data NetworkList = NetworkList
 networkList
     :: NetworkList
 networkList =
-    NetworkList
+    NetworkList'
     { _nlNextPageToken = Nothing
     , _nlKind = "compute#networkList"
     , _nlItems = Nothing
@@ -8972,7 +9398,11 @@ networkList =
     , _nlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 nlNextPageToken :: Lens' NetworkList (Maybe Text)
 nlNextPageToken
   = lens _nlNextPageToken
@@ -8994,7 +9424,8 @@ nlSelfLink :: Lens' NetworkList (Maybe Text)
 nlSelfLink
   = lens _nlSelfLink (\ s a -> s{_nlSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 nlId :: Lens' NetworkList (Maybe Text)
 nlId = lens _nlId (\ s a -> s{_nlId = a})
 
@@ -9002,7 +9433,7 @@ instance FromJSON NetworkList where
         parseJSON
           = withObject "NetworkList"
               (\ o ->
-                 NetworkList <$>
+                 NetworkList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#networkList")
                      <*> (o .:? "items" .!= mempty)
@@ -9010,7 +9441,7 @@ instance FromJSON NetworkList where
                      <*> (o .:? "id"))
 
 instance ToJSON NetworkList where
-        toJSON NetworkList{..}
+        toJSON NetworkList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _nlNextPageToken,
@@ -9020,7 +9451,7 @@ instance ToJSON NetworkList where
 
 --
 -- /See:/ 'instanceGroupsListInstancesRequest' smart constructor.
-newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest
+newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest'
     { _iglirInstanceState :: Maybe InstanceGroupsListInstancesRequestInstanceState
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9032,7 +9463,7 @@ newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest
 instanceGroupsListInstancesRequest
     :: InstanceGroupsListInstancesRequest
 instanceGroupsListInstancesRequest =
-    InstanceGroupsListInstancesRequest
+    InstanceGroupsListInstancesRequest'
     { _iglirInstanceState = Nothing
     }
 
@@ -9049,20 +9480,20 @@ instance FromJSON InstanceGroupsListInstancesRequest
         parseJSON
           = withObject "InstanceGroupsListInstancesRequest"
               (\ o ->
-                 InstanceGroupsListInstancesRequest <$>
+                 InstanceGroupsListInstancesRequest' <$>
                    (o .:? "instanceState"))
 
 instance ToJSON InstanceGroupsListInstancesRequest
          where
-        toJSON InstanceGroupsListInstancesRequest{..}
+        toJSON InstanceGroupsListInstancesRequest'{..}
           = object
               (catMaybes
                  [("instanceState" .=) <$> _iglirInstanceState])
 
--- | A map of scoped target pool lists.
+-- | [Output Only] A map of scoped target pool lists.
 --
 -- /See:/ 'targetPoolAggregatedListItems' smart constructor.
-newtype TargetPoolAggregatedListItems = TargetPoolAggregatedListItems
+newtype TargetPoolAggregatedListItems = TargetPoolAggregatedListItems'
     { _tpaliAddtional :: HashMap Text TargetPoolsScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9075,7 +9506,7 @@ targetPoolAggregatedListItems
     :: HashMap Text TargetPoolsScopedList -- ^ 'tpaliAddtional'
     -> TargetPoolAggregatedListItems
 targetPoolAggregatedListItems pTpaliAddtional_ =
-    TargetPoolAggregatedListItems
+    TargetPoolAggregatedListItems'
     { _tpaliAddtional = _Coerce # pTpaliAddtional_
     }
 
@@ -9090,7 +9521,7 @@ instance FromJSON TargetPoolAggregatedListItems where
         parseJSON
           = withObject "TargetPoolAggregatedListItems"
               (\ o ->
-                 TargetPoolAggregatedListItems <$>
+                 TargetPoolAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON TargetPoolAggregatedListItems where
@@ -9098,7 +9529,7 @@ instance ToJSON TargetPoolAggregatedListItems where
 
 --
 -- /See:/ 'targetInstancesScopedList' smart constructor.
-data TargetInstancesScopedList = TargetInstancesScopedList
+data TargetInstancesScopedList = TargetInstancesScopedList'
     { _tislWarning         :: !(Maybe TargetInstancesScopedListWarning)
     , _tislTargetInstances :: !(Maybe [TargetInstance])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9113,7 +9544,7 @@ data TargetInstancesScopedList = TargetInstancesScopedList
 targetInstancesScopedList
     :: TargetInstancesScopedList
 targetInstancesScopedList =
-    TargetInstancesScopedList
+    TargetInstancesScopedList'
     { _tislWarning = Nothing
     , _tislTargetInstances = Nothing
     }
@@ -9136,12 +9567,12 @@ instance FromJSON TargetInstancesScopedList where
         parseJSON
           = withObject "TargetInstancesScopedList"
               (\ o ->
-                 TargetInstancesScopedList <$>
+                 TargetInstancesScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "targetInstances" .!= mempty))
 
 instance ToJSON TargetInstancesScopedList where
-        toJSON TargetInstancesScopedList{..}
+        toJSON TargetInstancesScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _tislWarning,
@@ -9150,7 +9581,7 @@ instance ToJSON TargetInstancesScopedList where
 -- | [Output Only] A map of scoped address lists.
 --
 -- /See:/ 'addressAggregatedListItems' smart constructor.
-newtype AddressAggregatedListItems = AddressAggregatedListItems
+newtype AddressAggregatedListItems = AddressAggregatedListItems'
     { _aAddtional :: HashMap Text AddressesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9163,7 +9594,7 @@ addressAggregatedListItems
     :: HashMap Text AddressesScopedList -- ^ 'aAddtional'
     -> AddressAggregatedListItems
 addressAggregatedListItems pAAddtional_ =
-    AddressAggregatedListItems
+    AddressAggregatedListItems'
     { _aAddtional = _Coerce # pAAddtional_
     }
 
@@ -9177,15 +9608,15 @@ instance FromJSON AddressAggregatedListItems where
         parseJSON
           = withObject "AddressAggregatedListItems"
               (\ o ->
-                 AddressAggregatedListItems <$> (parseJSONObject o))
+                 AddressAggregatedListItems' <$> (parseJSONObject o))
 
 instance ToJSON AddressAggregatedListItems where
         toJSON = toJSON . _aAddtional
 
--- | Contains a list of persistent autoscaler resources.
+-- | Contains a list of Autoscaler resources.
 --
 -- /See:/ 'autoscalerList' smart constructor.
-data AutoscalerList = AutoscalerList
+data AutoscalerList = AutoscalerList'
     { _autNextPageToken :: !(Maybe Text)
     , _autKind          :: !Text
     , _autItems         :: !(Maybe [Autoscaler])
@@ -9209,7 +9640,7 @@ data AutoscalerList = AutoscalerList
 autoscalerList
     :: AutoscalerList
 autoscalerList =
-    AutoscalerList
+    AutoscalerList'
     { _autNextPageToken = Nothing
     , _autKind = "compute#autoscalerList"
     , _autItems = Nothing
@@ -9217,13 +9648,18 @@ autoscalerList =
     , _autId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 autNextPageToken :: Lens' AutoscalerList (Maybe Text)
 autNextPageToken
   = lens _autNextPageToken
       (\ s a -> s{_autNextPageToken = a})
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always compute#autoscalerList for lists
+-- of autoscalers.
 autKind :: Lens' AutoscalerList Text
 autKind = lens _autKind (\ s a -> s{_autKind = a})
 
@@ -9239,7 +9675,8 @@ autSelfLink :: Lens' AutoscalerList (Maybe Text)
 autSelfLink
   = lens _autSelfLink (\ s a -> s{_autSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 autId :: Lens' AutoscalerList (Maybe Text)
 autId = lens _autId (\ s a -> s{_autId = a})
 
@@ -9247,7 +9684,7 @@ instance FromJSON AutoscalerList where
         parseJSON
           = withObject "AutoscalerList"
               (\ o ->
-                 AutoscalerList <$>
+                 AutoscalerList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#autoscalerList")
                      <*> (o .:? "items" .!= mempty)
@@ -9255,7 +9692,7 @@ instance FromJSON AutoscalerList where
                      <*> (o .:? "id"))
 
 instance ToJSON AutoscalerList where
-        toJSON AutoscalerList{..}
+        toJSON AutoscalerList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _autNextPageToken,
@@ -9266,7 +9703,7 @@ instance ToJSON AutoscalerList where
 
 --
 -- /See:/ 'vpnTunnelAggregatedList' smart constructor.
-data VPNTunnelAggregatedList = VPNTunnelAggregatedList
+data VPNTunnelAggregatedList = VPNTunnelAggregatedList'
     { _vtalNextPageToken :: !(Maybe Text)
     , _vtalKind          :: !Text
     , _vtalItems         :: !(Maybe VPNTunnelAggregatedListItems)
@@ -9290,7 +9727,7 @@ data VPNTunnelAggregatedList = VPNTunnelAggregatedList
 vpnTunnelAggregatedList
     :: VPNTunnelAggregatedList
 vpnTunnelAggregatedList =
-    VPNTunnelAggregatedList
+    VPNTunnelAggregatedList'
     { _vtalNextPageToken = Nothing
     , _vtalKind = "compute#vpnTunnelAggregatedList"
     , _vtalItems = Nothing
@@ -9298,7 +9735,11 @@ vpnTunnelAggregatedList =
     , _vtalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 vtalNextPageToken :: Lens' VPNTunnelAggregatedList (Maybe Text)
 vtalNextPageToken
   = lens _vtalNextPageToken
@@ -9319,7 +9760,8 @@ vtalSelfLink :: Lens' VPNTunnelAggregatedList (Maybe Text)
 vtalSelfLink
   = lens _vtalSelfLink (\ s a -> s{_vtalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 vtalId :: Lens' VPNTunnelAggregatedList (Maybe Text)
 vtalId = lens _vtalId (\ s a -> s{_vtalId = a})
 
@@ -9327,7 +9769,7 @@ instance FromJSON VPNTunnelAggregatedList where
         parseJSON
           = withObject "VPNTunnelAggregatedList"
               (\ o ->
-                 VPNTunnelAggregatedList <$>
+                 VPNTunnelAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#vpnTunnelAggregatedList")
                      <*> (o .:? "items")
@@ -9335,7 +9777,7 @@ instance FromJSON VPNTunnelAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON VPNTunnelAggregatedList where
-        toJSON VPNTunnelAggregatedList{..}
+        toJSON VPNTunnelAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _vtalNextPageToken,
@@ -9347,7 +9789,7 @@ instance ToJSON VPNTunnelAggregatedList where
 -- | An instance-attached disk resource.
 --
 -- /See:/ 'attachedDisk' smart constructor.
-data AttachedDisk = AttachedDisk
+data AttachedDisk = AttachedDisk'
     { _adKind             :: !Text
     , _adMode             :: !(Maybe AttachedDiskMode)
     , _adBoot             :: !(Maybe Bool)
@@ -9389,7 +9831,7 @@ data AttachedDisk = AttachedDisk
 attachedDisk
     :: AttachedDisk
 attachedDisk =
-    AttachedDisk
+    AttachedDisk'
     { _adKind = "compute#attachedDisk"
     , _adMode = Nothing
     , _adBoot = Nothing
@@ -9446,9 +9888,12 @@ adDeviceName :: Lens' AttachedDisk (Maybe Text)
 adDeviceName
   = lens _adDeviceName (\ s a -> s{_adDeviceName = a})
 
--- | Specifies the disk interface to use for attaching this disk, either SCSI
--- or NVME. The default is SCSI. For performance characteristics of SCSI
--- over NVMe, see Local SSD performance.
+-- | Specifies the disk interface to use for attaching this disk, which is
+-- either SCSI or NVME. The default is SCSI. Persistent disks must always
+-- use SCSI and the request will fail if you attempt to attach a persistent
+-- disk in any other format than SCSI. Local SSDs can use either NVME or
+-- SCSI. For performance characteristics of SCSI over NVMe, see Local SSD
+-- performance.
 adInterface :: Lens' AttachedDisk (Maybe AttachedDiskInterface)
 adInterface
   = lens _adInterface (\ s a -> s{_adInterface = a})
@@ -9483,7 +9928,7 @@ instance FromJSON AttachedDisk where
         parseJSON
           = withObject "AttachedDisk"
               (\ o ->
-                 AttachedDisk <$>
+                 AttachedDisk' <$>
                    (o .:? "kind" .!= "compute#attachedDisk") <*>
                      (o .:? "mode")
                      <*> (o .:? "boot")
@@ -9497,7 +9942,7 @@ instance FromJSON AttachedDisk where
                      <*> (o .:? "index"))
 
 instance ToJSON AttachedDisk where
-        toJSON AttachedDisk{..}
+        toJSON AttachedDisk'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _adKind), ("mode" .=) <$> _adMode,
@@ -9510,10 +9955,10 @@ instance ToJSON AttachedDisk where
                   ("licenses" .=) <$> _adLicenses,
                   ("type" .=) <$> _adType, ("index" .=) <$> _adIndex])
 
--- | Contains a list of disk type resources.
+-- | Contains a list of disk types.
 --
 -- /See:/ 'diskTypeList' smart constructor.
-data DiskTypeList = DiskTypeList
+data DiskTypeList = DiskTypeList'
     { _dtlNextPageToken :: !(Maybe Text)
     , _dtlKind          :: !Text
     , _dtlItems         :: !(Maybe [DiskType])
@@ -9537,7 +9982,7 @@ data DiskTypeList = DiskTypeList
 diskTypeList
     :: DiskTypeList
 diskTypeList =
-    DiskTypeList
+    DiskTypeList'
     { _dtlNextPageToken = Nothing
     , _dtlKind = "compute#diskTypeList"
     , _dtlItems = Nothing
@@ -9545,7 +9990,11 @@ diskTypeList =
     , _dtlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 dtlNextPageToken :: Lens' DiskTypeList (Maybe Text)
 dtlNextPageToken
   = lens _dtlNextPageToken
@@ -9568,7 +10017,8 @@ dtlSelfLink :: Lens' DiskTypeList (Maybe Text)
 dtlSelfLink
   = lens _dtlSelfLink (\ s a -> s{_dtlSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dtlId :: Lens' DiskTypeList (Maybe Text)
 dtlId = lens _dtlId (\ s a -> s{_dtlId = a})
 
@@ -9576,7 +10026,7 @@ instance FromJSON DiskTypeList where
         parseJSON
           = withObject "DiskTypeList"
               (\ o ->
-                 DiskTypeList <$>
+                 DiskTypeList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#diskTypeList")
                      <*> (o .:? "items" .!= mempty)
@@ -9584,7 +10034,7 @@ instance FromJSON DiskTypeList where
                      <*> (o .:? "id"))
 
 instance ToJSON DiskTypeList where
-        toJSON DiskTypeList{..}
+        toJSON DiskTypeList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dtlNextPageToken,
@@ -9593,10 +10043,10 @@ instance ToJSON DiskTypeList where
                   ("selfLink" .=) <$> _dtlSelfLink,
                   ("id" .=) <$> _dtlId])
 
--- | Contains a list of Machine Type resources.
+-- | Contains a list of machine types.
 --
 -- /See:/ 'machineTypeList' smart constructor.
-data MachineTypeList = MachineTypeList
+data MachineTypeList = MachineTypeList'
     { _mtlNextPageToken :: !(Maybe Text)
     , _mtlKind          :: !Text
     , _mtlItems         :: !(Maybe [MachineType])
@@ -9620,7 +10070,7 @@ data MachineTypeList = MachineTypeList
 machineTypeList
     :: MachineTypeList
 machineTypeList =
-    MachineTypeList
+    MachineTypeList'
     { _mtlNextPageToken = Nothing
     , _mtlKind = "compute#machineTypeList"
     , _mtlItems = Nothing
@@ -9628,7 +10078,11 @@ machineTypeList =
     , _mtlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 mtlNextPageToken :: Lens' MachineTypeList (Maybe Text)
 mtlNextPageToken
   = lens _mtlNextPageToken
@@ -9651,7 +10105,8 @@ mtlSelfLink :: Lens' MachineTypeList (Maybe Text)
 mtlSelfLink
   = lens _mtlSelfLink (\ s a -> s{_mtlSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 mtlId :: Lens' MachineTypeList (Maybe Text)
 mtlId = lens _mtlId (\ s a -> s{_mtlId = a})
 
@@ -9659,7 +10114,7 @@ instance FromJSON MachineTypeList where
         parseJSON
           = withObject "MachineTypeList"
               (\ o ->
-                 MachineTypeList <$>
+                 MachineTypeList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#machineTypeList")
                      <*> (o .:? "items" .!= mempty)
@@ -9667,7 +10122,7 @@ instance FromJSON MachineTypeList where
                      <*> (o .:? "id"))
 
 instance ToJSON MachineTypeList where
-        toJSON MachineTypeList{..}
+        toJSON MachineTypeList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _mtlNextPageToken,
@@ -9679,7 +10134,7 @@ instance ToJSON MachineTypeList where
 -- | A list of TargetHttpProxy resources.
 --
 -- /See:/ 'targetHTTPProxyList' smart constructor.
-data TargetHTTPProxyList = TargetHTTPProxyList
+data TargetHTTPProxyList = TargetHTTPProxyList'
     { _thttpplNextPageToken :: !(Maybe Text)
     , _thttpplKind          :: !Text
     , _thttpplItems         :: !(Maybe [TargetHTTPProxy])
@@ -9703,7 +10158,7 @@ data TargetHTTPProxyList = TargetHTTPProxyList
 targetHTTPProxyList
     :: TargetHTTPProxyList
 targetHTTPProxyList =
-    TargetHTTPProxyList
+    TargetHTTPProxyList'
     { _thttpplNextPageToken = Nothing
     , _thttpplKind = "compute#targetHttpProxyList"
     , _thttpplItems = Nothing
@@ -9711,13 +10166,17 @@ targetHTTPProxyList =
     , _thttpplId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 thttpplNextPageToken :: Lens' TargetHTTPProxyList (Maybe Text)
 thttpplNextPageToken
   = lens _thttpplNextPageToken
       (\ s a -> s{_thttpplNextPageToken = a})
 
--- | Type of resource. Always compute#targetHttpProxyList for lists of Target
+-- | Type of resource. Always compute#targetHttpProxyList for lists of target
 -- HTTP proxies.
 thttpplKind :: Lens' TargetHTTPProxyList Text
 thttpplKind
@@ -9736,7 +10195,8 @@ thttpplSelfLink
   = lens _thttpplSelfLink
       (\ s a -> s{_thttpplSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 thttpplId :: Lens' TargetHTTPProxyList (Maybe Text)
 thttpplId
   = lens _thttpplId (\ s a -> s{_thttpplId = a})
@@ -9745,7 +10205,7 @@ instance FromJSON TargetHTTPProxyList where
         parseJSON
           = withObject "TargetHTTPProxyList"
               (\ o ->
-                 TargetHTTPProxyList <$>
+                 TargetHTTPProxyList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetHttpProxyList")
                      <*> (o .:? "items" .!= mempty)
@@ -9753,7 +10213,7 @@ instance FromJSON TargetHTTPProxyList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetHTTPProxyList where
-        toJSON TargetHTTPProxyList{..}
+        toJSON TargetHTTPProxyList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _thttpplNextPageToken,
@@ -9764,7 +10224,7 @@ instance ToJSON TargetHTTPProxyList where
 
 --
 -- /See:/ 'diskTypesScopedList' smart constructor.
-data DiskTypesScopedList = DiskTypesScopedList
+data DiskTypesScopedList = DiskTypesScopedList'
     { _dtslDiskTypes :: !(Maybe [DiskType])
     , _dtslWarning   :: !(Maybe DiskTypesScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9779,7 +10239,7 @@ data DiskTypesScopedList = DiskTypesScopedList
 diskTypesScopedList
     :: DiskTypesScopedList
 diskTypesScopedList =
-    DiskTypesScopedList
+    DiskTypesScopedList'
     { _dtslDiskTypes = Nothing
     , _dtslWarning = Nothing
     }
@@ -9802,11 +10262,11 @@ instance FromJSON DiskTypesScopedList where
         parseJSON
           = withObject "DiskTypesScopedList"
               (\ o ->
-                 DiskTypesScopedList <$>
+                 DiskTypesScopedList' <$>
                    (o .:? "diskTypes" .!= mempty) <*> (o .:? "warning"))
 
 instance ToJSON DiskTypesScopedList where
-        toJSON DiskTypesScopedList{..}
+        toJSON DiskTypesScopedList'{..}
           = object
               (catMaybes
                  [("diskTypes" .=) <$> _dtslDiskTypes,
@@ -9814,7 +10274,7 @@ instance ToJSON DiskTypesScopedList where
 
 --
 -- /See:/ 'diskTypeAggregatedList' smart constructor.
-data DiskTypeAggregatedList = DiskTypeAggregatedList
+data DiskTypeAggregatedList = DiskTypeAggregatedList'
     { _dtalNextPageToken :: !(Maybe Text)
     , _dtalKind          :: !Text
     , _dtalItems         :: !(Maybe DiskTypeAggregatedListItems)
@@ -9838,7 +10298,7 @@ data DiskTypeAggregatedList = DiskTypeAggregatedList
 diskTypeAggregatedList
     :: DiskTypeAggregatedList
 diskTypeAggregatedList =
-    DiskTypeAggregatedList
+    DiskTypeAggregatedList'
     { _dtalNextPageToken = Nothing
     , _dtalKind = "compute#diskTypeAggregatedList"
     , _dtalItems = Nothing
@@ -9846,7 +10306,11 @@ diskTypeAggregatedList =
     , _dtalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 dtalNextPageToken :: Lens' DiskTypeAggregatedList (Maybe Text)
 dtalNextPageToken
   = lens _dtalNextPageToken
@@ -9866,7 +10330,8 @@ dtalSelfLink :: Lens' DiskTypeAggregatedList (Maybe Text)
 dtalSelfLink
   = lens _dtalSelfLink (\ s a -> s{_dtalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dtalId :: Lens' DiskTypeAggregatedList (Maybe Text)
 dtalId = lens _dtalId (\ s a -> s{_dtalId = a})
 
@@ -9874,7 +10339,7 @@ instance FromJSON DiskTypeAggregatedList where
         parseJSON
           = withObject "DiskTypeAggregatedList"
               (\ o ->
-                 DiskTypeAggregatedList <$>
+                 DiskTypeAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#diskTypeAggregatedList")
                      <*> (o .:? "items")
@@ -9882,7 +10347,7 @@ instance FromJSON DiskTypeAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON DiskTypeAggregatedList where
-        toJSON DiskTypeAggregatedList{..}
+        toJSON DiskTypeAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dtalNextPageToken,
@@ -9895,7 +10360,7 @@ instance ToJSON DiskTypeAggregatedList where
 -- individual instances should be checked for health, via HTTP.
 --
 -- /See:/ 'hTTPHealthCheck' smart constructor.
-data HTTPHealthCheck = HTTPHealthCheck
+data HTTPHealthCheck = HTTPHealthCheck'
     { _httphcHealthyThreshold   :: !(Maybe (Textual Int32))
     , _httphcKind               :: !Text
     , _httphcRequestPath        :: !(Maybe Text)
@@ -9943,7 +10408,7 @@ data HTTPHealthCheck = HTTPHealthCheck
 hTTPHealthCheck
     :: HTTPHealthCheck
 hTTPHealthCheck =
-    HTTPHealthCheck
+    HTTPHealthCheck'
     { _httphcHealthyThreshold = Nothing
     , _httphcKind = "compute#httpHealthCheck"
     , _httphcRequestPath = Nothing
@@ -9967,13 +10432,14 @@ httphcHealthyThreshold
       (\ s a -> s{_httphcHealthyThreshold = a})
       . mapping _Coerce
 
--- | Type of the resource.
+-- | [Output Only] Type of the resource. Always compute#httpHealthCheck for
+-- HTTP health checks.
 httphcKind :: Lens' HTTPHealthCheck Text
 httphcKind
   = lens _httphcKind (\ s a -> s{_httphcKind = a})
 
 -- | The request path of the HTTP health check request. The default value is
--- \"\/\".
+-- \/.
 httphcRequestPath :: Lens' HTTPHealthCheck (Maybe Text)
 httphcRequestPath
   = lens _httphcRequestPath
@@ -10010,7 +10476,8 @@ httphcCreationTimestamp
   = lens _httphcCreationTimestamp
       (\ s a -> s{_httphcCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 httphcId :: Lens' HTTPHealthCheck (Maybe Word64)
 httphcId
   = lens _httphcId (\ s a -> s{_httphcId = a}) .
@@ -10032,8 +10499,8 @@ httphcTimeoutSec
       (\ s a -> s{_httphcTimeoutSec = a})
       . mapping _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 httphcDescription :: Lens' HTTPHealthCheck (Maybe Text)
 httphcDescription
   = lens _httphcDescription
@@ -10058,7 +10525,7 @@ instance FromJSON HTTPHealthCheck where
         parseJSON
           = withObject "HTTPHealthCheck"
               (\ o ->
-                 HTTPHealthCheck <$>
+                 HTTPHealthCheck' <$>
                    (o .:? "healthyThreshold") <*>
                      (o .:? "kind" .!= "compute#httpHealthCheck")
                      <*> (o .:? "requestPath")
@@ -10074,7 +10541,7 @@ instance FromJSON HTTPHealthCheck where
                      <*> (o .:? "port"))
 
 instance ToJSON HTTPHealthCheck where
-        toJSON HTTPHealthCheck{..}
+        toJSON HTTPHealthCheck'{..}
           = object
               (catMaybes
                  [("healthyThreshold" .=) <$> _httphcHealthyThreshold,
@@ -10094,7 +10561,7 @@ instance ToJSON HTTPHealthCheck where
 
 --
 -- /See:/ 'backendServiceGroupHealth' smart constructor.
-data BackendServiceGroupHealth = BackendServiceGroupHealth
+data BackendServiceGroupHealth = BackendServiceGroupHealth'
     { _bsghKind         :: !Text
     , _bsghHealthStatus :: !(Maybe [HealthStatus])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10109,7 +10576,7 @@ data BackendServiceGroupHealth = BackendServiceGroupHealth
 backendServiceGroupHealth
     :: BackendServiceGroupHealth
 backendServiceGroupHealth =
-    BackendServiceGroupHealth
+    BackendServiceGroupHealth'
     { _bsghKind = "compute#backendServiceGroupHealth"
     , _bsghHealthStatus = Nothing
     }
@@ -10130,13 +10597,13 @@ instance FromJSON BackendServiceGroupHealth where
         parseJSON
           = withObject "BackendServiceGroupHealth"
               (\ o ->
-                 BackendServiceGroupHealth <$>
+                 BackendServiceGroupHealth' <$>
                    (o .:? "kind" .!=
                       "compute#backendServiceGroupHealth")
                      <*> (o .:? "healthStatus" .!= mempty))
 
 instance ToJSON BackendServiceGroupHealth where
-        toJSON BackendServiceGroupHealth{..}
+        toJSON BackendServiceGroupHealth'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _bsghKind),
@@ -10144,7 +10611,7 @@ instance ToJSON BackendServiceGroupHealth where
 
 --
 -- /See:/ 'autoscalersScopedList' smart constructor.
-data AutoscalersScopedList = AutoscalersScopedList
+data AutoscalersScopedList = AutoscalersScopedList'
     { _aAutoscalers :: !(Maybe [Autoscaler])
     , _aWarning     :: !(Maybe AutoscalersScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10159,20 +10626,20 @@ data AutoscalersScopedList = AutoscalersScopedList
 autoscalersScopedList
     :: AutoscalersScopedList
 autoscalersScopedList =
-    AutoscalersScopedList
+    AutoscalersScopedList'
     { _aAutoscalers = Nothing
     , _aWarning = Nothing
     }
 
--- | List of autoscalers contained in this scope.
+-- | [Output Only] List of autoscalers contained in this scope.
 aAutoscalers :: Lens' AutoscalersScopedList [Autoscaler]
 aAutoscalers
   = lens _aAutoscalers (\ s a -> s{_aAutoscalers = a})
       . _Default
       . _Coerce
 
--- | Informational warning which replaces the list of autoscalers when the
--- list is empty.
+-- | [Output Only] Informational warning which replaces the list of
+-- autoscalers when the list is empty.
 aWarning :: Lens' AutoscalersScopedList (Maybe AutoscalersScopedListWarning)
 aWarning = lens _aWarning (\ s a -> s{_aWarning = a})
 
@@ -10180,12 +10647,12 @@ instance FromJSON AutoscalersScopedList where
         parseJSON
           = withObject "AutoscalersScopedList"
               (\ o ->
-                 AutoscalersScopedList <$>
+                 AutoscalersScopedList' <$>
                    (o .:? "autoscalers" .!= mempty) <*>
                      (o .:? "warning"))
 
 instance ToJSON AutoscalersScopedList where
-        toJSON AutoscalersScopedList{..}
+        toJSON AutoscalersScopedList'{..}
           = object
               (catMaybes
                  [("autoscalers" .=) <$> _aAutoscalers,
@@ -10193,7 +10660,7 @@ instance ToJSON AutoscalersScopedList where
 
 --
 -- /See:/ 'autoscalerAggregatedList' smart constructor.
-data AutoscalerAggregatedList = AutoscalerAggregatedList
+data AutoscalerAggregatedList = AutoscalerAggregatedList'
     { _aalNextPageToken :: !(Maybe Text)
     , _aalKind          :: !Text
     , _aalItems         :: !(Maybe AutoscalerAggregatedListItems)
@@ -10217,7 +10684,7 @@ data AutoscalerAggregatedList = AutoscalerAggregatedList
 autoscalerAggregatedList
     :: AutoscalerAggregatedList
 autoscalerAggregatedList =
-    AutoscalerAggregatedList
+    AutoscalerAggregatedList'
     { _aalNextPageToken = Nothing
     , _aalKind = "compute#autoscalerAggregatedList"
     , _aalItems = Nothing
@@ -10225,13 +10692,18 @@ autoscalerAggregatedList =
     , _aalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 aalNextPageToken :: Lens' AutoscalerAggregatedList (Maybe Text)
 aalNextPageToken
   = lens _aalNextPageToken
       (\ s a -> s{_aalNextPageToken = a})
 
--- | Type of resource.
+-- | [Output Only] Type of resource. Always compute#autoscalerAggregatedList
+-- for aggregated lists of autoscalers.
 aalKind :: Lens' AutoscalerAggregatedList Text
 aalKind = lens _aalKind (\ s a -> s{_aalKind = a})
 
@@ -10244,7 +10716,8 @@ aalSelfLink :: Lens' AutoscalerAggregatedList (Maybe Text)
 aalSelfLink
   = lens _aalSelfLink (\ s a -> s{_aalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 aalId :: Lens' AutoscalerAggregatedList (Maybe Text)
 aalId = lens _aalId (\ s a -> s{_aalId = a})
 
@@ -10252,7 +10725,7 @@ instance FromJSON AutoscalerAggregatedList where
         parseJSON
           = withObject "AutoscalerAggregatedList"
               (\ o ->
-                 AutoscalerAggregatedList <$>
+                 AutoscalerAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#autoscalerAggregatedList")
                      <*> (o .:? "items")
@@ -10260,7 +10733,7 @@ instance FromJSON AutoscalerAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON AutoscalerAggregatedList where
-        toJSON AutoscalerAggregatedList{..}
+        toJSON AutoscalerAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _aalNextPageToken,
@@ -10272,7 +10745,7 @@ instance ToJSON AutoscalerAggregatedList where
 -- | Cloud Autoscaler policy.
 --
 -- /See:/ 'autoscalingPolicy' smart constructor.
-data AutoscalingPolicy = AutoscalingPolicy
+data AutoscalingPolicy = AutoscalingPolicy'
     { _apCustomMetricUtilizations :: !(Maybe [AutoscalingPolicyCustomMetricUtilization])
     , _apMaxNumReplicas           :: !(Maybe (Textual Int32))
     , _apCPUUtilization           :: !(Maybe AutoscalingPolicyCPUUtilization)
@@ -10299,7 +10772,7 @@ data AutoscalingPolicy = AutoscalingPolicy
 autoscalingPolicy
     :: AutoscalingPolicy
 autoscalingPolicy =
-    AutoscalingPolicy
+    AutoscalingPolicy'
     { _apCustomMetricUtilizations = Nothing
     , _apMaxNumReplicas = Nothing
     , _apCPUUtilization = Nothing
@@ -10308,7 +10781,7 @@ autoscalingPolicy =
     , _apCoolDownPeriodSec = Nothing
     }
 
--- | Configuration parameters of autoscaling based on custom metric.
+-- | Configuration parameters of autoscaling based on a custom metric.
 apCustomMetricUtilizations :: Lens' AutoscalingPolicy [AutoscalingPolicyCustomMetricUtilization]
 apCustomMetricUtilizations
   = lens _apCustomMetricUtilizations
@@ -10316,19 +10789,17 @@ apCustomMetricUtilizations
       . _Default
       . _Coerce
 
--- | The maximum number of replicas that the Autoscaler can scale up to. This
--- field is required for config to be effective. Maximum number of replicas
--- should be not lower than minimal number of replicas. Absolute limit for
--- this value is defined in Autoscaler backend.
+-- | The maximum number of instances that the autoscaler can scale up to.
+-- This is required when creating or updating an autoscaler. The maximum
+-- number of replicas should not be lower than minimal number of replicas.
 apMaxNumReplicas :: Lens' AutoscalingPolicy (Maybe Int32)
 apMaxNumReplicas
   = lens _apMaxNumReplicas
       (\ s a -> s{_apMaxNumReplicas = a})
       . mapping _Coerce
 
--- | TODO(jbartosik): Add support for scaling based on muliple utilization
--- metrics (take max recommendation). Exactly one utilization policy should
--- be provided. Configuration parameters of CPU based autoscaling policy.
+-- | Defines the CPU utilization policy that allows the autoscaler to scale
+-- based on the average CPU utilization of a managed instance group.
 apCPUUtilization :: Lens' AutoscalingPolicy (Maybe AutoscalingPolicyCPUUtilization)
 apCPUUtilization
   = lens _apCPUUtilization
@@ -10340,20 +10811,23 @@ apLoadBalancingUtilization
   = lens _apLoadBalancingUtilization
       (\ s a -> s{_apLoadBalancingUtilization = a})
 
--- | The minimum number of replicas that the Autoscaler can scale down to.
--- Can\'t be less than 0. If not provided Autoscaler will choose default
--- value depending on maximal number of replicas.
+-- | The minimum number of replicas that the autoscaler can scale down to.
+-- This cannot be less than 0. If not provided, autoscaler will choose a
+-- default value depending on maximum number of instances allowed.
 apMinNumReplicas :: Lens' AutoscalingPolicy (Maybe Int32)
 apMinNumReplicas
   = lens _apMinNumReplicas
       (\ s a -> s{_apMinNumReplicas = a})
       . mapping _Coerce
 
--- | The number of seconds that the Autoscaler should wait between two
--- succeeding changes to the number of virtual machines. You should define
--- an interval that is at least as long as the initialization time of a
--- virtual machine and the time it may take for replica pool to create the
--- virtual machine. The default is 60 seconds.
+-- | The number of seconds that the autoscaler should wait before it starts
+-- collecting information from a new instance. This prevents the autoscaler
+-- from collecting information when the instance is initializing, during
+-- which the collected usage would not be reliable. The default time
+-- autoscaler waits is 60 seconds. Virtual machine initialization times
+-- might vary because of numerous factors. We recommend that you test how
+-- long an instance may take to initialize. To do this, create an instance
+-- and time the startup process.
 apCoolDownPeriodSec :: Lens' AutoscalingPolicy (Maybe Int32)
 apCoolDownPeriodSec
   = lens _apCoolDownPeriodSec
@@ -10364,7 +10838,7 @@ instance FromJSON AutoscalingPolicy where
         parseJSON
           = withObject "AutoscalingPolicy"
               (\ o ->
-                 AutoscalingPolicy <$>
+                 AutoscalingPolicy' <$>
                    (o .:? "customMetricUtilizations" .!= mempty) <*>
                      (o .:? "maxNumReplicas")
                      <*> (o .:? "cpuUtilization")
@@ -10373,7 +10847,7 @@ instance FromJSON AutoscalingPolicy where
                      <*> (o .:? "coolDownPeriodSec"))
 
 instance ToJSON AutoscalingPolicy where
-        toJSON AutoscalingPolicy{..}
+        toJSON AutoscalingPolicy'{..}
           = object
               (catMaybes
                  [("customMetricUtilizations" .=) <$>
@@ -10388,7 +10862,7 @@ instance ToJSON AutoscalingPolicy where
 -- | Contains a list of region resources.
 --
 -- /See:/ 'regionList' smart constructor.
-data RegionList = RegionList
+data RegionList = RegionList'
     { _regNextPageToken :: !(Maybe Text)
     , _regKind          :: !Text
     , _regItems         :: !(Maybe [Region])
@@ -10412,7 +10886,7 @@ data RegionList = RegionList
 regionList
     :: RegionList
 regionList =
-    RegionList
+    RegionList'
     { _regNextPageToken = Nothing
     , _regKind = "compute#regionList"
     , _regItems = Nothing
@@ -10420,7 +10894,11 @@ regionList =
     , _regId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 regNextPageToken :: Lens' RegionList (Maybe Text)
 regNextPageToken
   = lens _regNextPageToken
@@ -10443,7 +10921,8 @@ regSelfLink :: Lens' RegionList (Maybe Text)
 regSelfLink
   = lens _regSelfLink (\ s a -> s{_regSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 regId :: Lens' RegionList (Maybe Text)
 regId = lens _regId (\ s a -> s{_regId = a})
 
@@ -10451,7 +10930,7 @@ instance FromJSON RegionList where
         parseJSON
           = withObject "RegionList"
               (\ o ->
-                 RegionList <$>
+                 RegionList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#regionList")
                      <*> (o .:? "items" .!= mempty)
@@ -10459,7 +10938,7 @@ instance FromJSON RegionList where
                      <*> (o .:? "id"))
 
 instance ToJSON RegionList where
-        toJSON RegionList{..}
+        toJSON RegionList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _regNextPageToken,
@@ -10471,7 +10950,7 @@ instance ToJSON RegionList where
 -- | Contains a list of VpnTunnel resources.
 --
 -- /See:/ 'vpnTunnelList' smart constructor.
-data VPNTunnelList = VPNTunnelList
+data VPNTunnelList = VPNTunnelList'
     { _vtlNextPageToken :: !(Maybe Text)
     , _vtlKind          :: !Text
     , _vtlItems         :: !(Maybe [VPNTunnel])
@@ -10495,7 +10974,7 @@ data VPNTunnelList = VPNTunnelList
 vpnTunnelList
     :: VPNTunnelList
 vpnTunnelList =
-    VPNTunnelList
+    VPNTunnelList'
     { _vtlNextPageToken = Nothing
     , _vtlKind = "compute#vpnTunnelList"
     , _vtlItems = Nothing
@@ -10503,7 +10982,11 @@ vpnTunnelList =
     , _vtlId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 vtlNextPageToken :: Lens' VPNTunnelList (Maybe Text)
 vtlNextPageToken
   = lens _vtlNextPageToken
@@ -10526,7 +11009,8 @@ vtlSelfLink :: Lens' VPNTunnelList (Maybe Text)
 vtlSelfLink
   = lens _vtlSelfLink (\ s a -> s{_vtlSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 vtlId :: Lens' VPNTunnelList (Maybe Text)
 vtlId = lens _vtlId (\ s a -> s{_vtlId = a})
 
@@ -10534,7 +11018,7 @@ instance FromJSON VPNTunnelList where
         parseJSON
           = withObject "VPNTunnelList"
               (\ o ->
-                 VPNTunnelList <$>
+                 VPNTunnelList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#vpnTunnelList")
                      <*> (o .:? "items" .!= mempty)
@@ -10542,7 +11026,7 @@ instance FromJSON VPNTunnelList where
                      <*> (o .:? "id"))
 
 instance ToJSON VPNTunnelList where
-        toJSON VPNTunnelList{..}
+        toJSON VPNTunnelList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _vtlNextPageToken,
@@ -10553,7 +11037,7 @@ instance ToJSON VPNTunnelList where
 
 --
 -- /See:/ 'machineTypeScratchDisksItem' smart constructor.
-newtype MachineTypeScratchDisksItem = MachineTypeScratchDisksItem
+newtype MachineTypeScratchDisksItem = MachineTypeScratchDisksItem'
     { _mtsdiDiskGb :: Maybe (Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10565,7 +11049,7 @@ newtype MachineTypeScratchDisksItem = MachineTypeScratchDisksItem
 machineTypeScratchDisksItem
     :: MachineTypeScratchDisksItem
 machineTypeScratchDisksItem =
-    MachineTypeScratchDisksItem
+    MachineTypeScratchDisksItem'
     { _mtsdiDiskGb = Nothing
     }
 
@@ -10579,15 +11063,69 @@ instance FromJSON MachineTypeScratchDisksItem where
         parseJSON
           = withObject "MachineTypeScratchDisksItem"
               (\ o ->
-                 MachineTypeScratchDisksItem <$> (o .:? "diskGb"))
+                 MachineTypeScratchDisksItem' <$> (o .:? "diskGb"))
 
 instance ToJSON MachineTypeScratchDisksItem where
-        toJSON MachineTypeScratchDisksItem{..}
+        toJSON MachineTypeScratchDisksItem'{..}
           = object (catMaybes [("diskGb" .=) <$> _mtsdiDiskGb])
 
 --
+-- /See:/ 'subnetworksScopedListWarningDataItem' smart constructor.
+data SubnetworksScopedListWarningDataItem = SubnetworksScopedListWarningDataItem'
+    { _sslwdiValue :: !(Maybe Text)
+    , _sslwdiKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworksScopedListWarningDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sslwdiValue'
+--
+-- * 'sslwdiKey'
+subnetworksScopedListWarningDataItem
+    :: SubnetworksScopedListWarningDataItem
+subnetworksScopedListWarningDataItem =
+    SubnetworksScopedListWarningDataItem'
+    { _sslwdiValue = Nothing
+    , _sslwdiKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+sslwdiValue :: Lens' SubnetworksScopedListWarningDataItem (Maybe Text)
+sslwdiValue
+  = lens _sslwdiValue (\ s a -> s{_sslwdiValue = a})
+
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
+sslwdiKey :: Lens' SubnetworksScopedListWarningDataItem (Maybe Text)
+sslwdiKey
+  = lens _sslwdiKey (\ s a -> s{_sslwdiKey = a})
+
+instance FromJSON
+         SubnetworksScopedListWarningDataItem where
+        parseJSON
+          = withObject "SubnetworksScopedListWarningDataItem"
+              (\ o ->
+                 SubnetworksScopedListWarningDataItem' <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON SubnetworksScopedListWarningDataItem
+         where
+        toJSON SubnetworksScopedListWarningDataItem'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _sslwdiValue,
+                  ("key" .=) <$> _sslwdiKey])
+
+--
 -- /See:/ 'machineTypesScopedList' smart constructor.
-data MachineTypesScopedList = MachineTypesScopedList
+data MachineTypesScopedList = MachineTypesScopedList'
     { _mtslMachineTypes :: !(Maybe [MachineType])
     , _mtslWarning      :: !(Maybe MachineTypesScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10602,7 +11140,7 @@ data MachineTypesScopedList = MachineTypesScopedList
 machineTypesScopedList
     :: MachineTypesScopedList
 machineTypesScopedList =
-    MachineTypesScopedList
+    MachineTypesScopedList'
     { _mtslMachineTypes = Nothing
     , _mtslWarning = Nothing
     }
@@ -10625,20 +11163,173 @@ instance FromJSON MachineTypesScopedList where
         parseJSON
           = withObject "MachineTypesScopedList"
               (\ o ->
-                 MachineTypesScopedList <$>
+                 MachineTypesScopedList' <$>
                    (o .:? "machineTypes" .!= mempty) <*>
                      (o .:? "warning"))
 
 instance ToJSON MachineTypesScopedList where
-        toJSON MachineTypesScopedList{..}
+        toJSON MachineTypesScopedList'{..}
           = object
               (catMaybes
                  [("machineTypes" .=) <$> _mtslMachineTypes,
                   ("warning" .=) <$> _mtslWarning])
 
+-- | A Subnetwork resource.
+--
+-- /See:/ 'subnetwork' smart constructor.
+data Subnetwork = Subnetwork'
+    { _subKind              :: !Text
+    , _subNetwork           :: !(Maybe Text)
+    , _subGatewayAddress    :: !(Maybe Text)
+    , _subSelfLink          :: !(Maybe Text)
+    , _subName              :: !(Maybe Text)
+    , _subCreationTimestamp :: !(Maybe Text)
+    , _subIPCIdRRange       :: !(Maybe Text)
+    , _subId                :: !(Maybe (Textual Word64))
+    , _subRegion            :: !(Maybe Text)
+    , _subDescription       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Subnetwork' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'subKind'
+--
+-- * 'subNetwork'
+--
+-- * 'subGatewayAddress'
+--
+-- * 'subSelfLink'
+--
+-- * 'subName'
+--
+-- * 'subCreationTimestamp'
+--
+-- * 'subIPCIdRRange'
+--
+-- * 'subId'
+--
+-- * 'subRegion'
+--
+-- * 'subDescription'
+subnetwork
+    :: Subnetwork
+subnetwork =
+    Subnetwork'
+    { _subKind = "compute#subnetwork"
+    , _subNetwork = Nothing
+    , _subGatewayAddress = Nothing
+    , _subSelfLink = Nothing
+    , _subName = Nothing
+    , _subCreationTimestamp = Nothing
+    , _subIPCIdRRange = Nothing
+    , _subId = Nothing
+    , _subRegion = Nothing
+    , _subDescription = Nothing
+    }
+
+-- | [Output Only] Type of the resource. Always compute#subnetwork for
+-- Subnetwork resources.
+subKind :: Lens' Subnetwork Text
+subKind = lens _subKind (\ s a -> s{_subKind = a})
+
+-- | The URL of the network to which this subnetwork belongs, provided by the
+-- client when initially creating the subnetwork. Only networks that are in
+-- the distributed mode can have subnetworks.
+subNetwork :: Lens' Subnetwork (Maybe Text)
+subNetwork
+  = lens _subNetwork (\ s a -> s{_subNetwork = a})
+
+-- | [Output Only] The gateway address for default routes to reach
+-- destination addresses outside this subnetwork.
+subGatewayAddress :: Lens' Subnetwork (Maybe Text)
+subGatewayAddress
+  = lens _subGatewayAddress
+      (\ s a -> s{_subGatewayAddress = a})
+
+-- | [Output Only] Server-defined URL for the resource.
+subSelfLink :: Lens' Subnetwork (Maybe Text)
+subSelfLink
+  = lens _subSelfLink (\ s a -> s{_subSelfLink = a})
+
+-- | The name of the resource, provided by the client when initially creating
+-- the resource. The name must be 1-63 characters long, and comply with
+-- RFC1035. Specifically, the name must be 1-63 characters long and match
+-- the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash.
+subName :: Lens' Subnetwork (Maybe Text)
+subName = lens _subName (\ s a -> s{_subName = a})
+
+-- | [Output Only] Creation timestamp in RFC3339 text format.
+subCreationTimestamp :: Lens' Subnetwork (Maybe Text)
+subCreationTimestamp
+  = lens _subCreationTimestamp
+      (\ s a -> s{_subCreationTimestamp = a})
+
+-- | The range of internal addresses that are owned by this subnetwork.
+-- Provide this property when you create the subnetwork. For example,
+-- 10.0.0.0\/8 or 192.168.0.0\/16. Ranges must be unique and
+-- non-overlapping within a network.
+subIPCIdRRange :: Lens' Subnetwork (Maybe Text)
+subIPCIdRRange
+  = lens _subIPCIdRRange
+      (\ s a -> s{_subIPCIdRRange = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+subId :: Lens' Subnetwork (Maybe Word64)
+subId
+  = lens _subId (\ s a -> s{_subId = a}) .
+      mapping _Coerce
+
+-- | URL of the region where the Subnetwork resides.
+subRegion :: Lens' Subnetwork (Maybe Text)
+subRegion
+  = lens _subRegion (\ s a -> s{_subRegion = a})
+
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
+subDescription :: Lens' Subnetwork (Maybe Text)
+subDescription
+  = lens _subDescription
+      (\ s a -> s{_subDescription = a})
+
+instance FromJSON Subnetwork where
+        parseJSON
+          = withObject "Subnetwork"
+              (\ o ->
+                 Subnetwork' <$>
+                   (o .:? "kind" .!= "compute#subnetwork") <*>
+                     (o .:? "network")
+                     <*> (o .:? "gatewayAddress")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "ipCidrRange")
+                     <*> (o .:? "id")
+                     <*> (o .:? "region")
+                     <*> (o .:? "description"))
+
+instance ToJSON Subnetwork where
+        toJSON Subnetwork'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _subKind),
+                  ("network" .=) <$> _subNetwork,
+                  ("gatewayAddress" .=) <$> _subGatewayAddress,
+                  ("selfLink" .=) <$> _subSelfLink,
+                  ("name" .=) <$> _subName,
+                  ("creationTimestamp" .=) <$> _subCreationTimestamp,
+                  ("ipCidrRange" .=) <$> _subIPCIdRRange,
+                  ("id" .=) <$> _subId, ("region" .=) <$> _subRegion,
+                  ("description" .=) <$> _subDescription])
+
 --
 -- /See:/ 'machineTypeAggregatedList' smart constructor.
-data MachineTypeAggregatedList = MachineTypeAggregatedList
+data MachineTypeAggregatedList = MachineTypeAggregatedList'
     { _mtalNextPageToken :: !(Maybe Text)
     , _mtalKind          :: !Text
     , _mtalItems         :: !(Maybe MachineTypeAggregatedListItems)
@@ -10662,7 +11353,7 @@ data MachineTypeAggregatedList = MachineTypeAggregatedList
 machineTypeAggregatedList
     :: MachineTypeAggregatedList
 machineTypeAggregatedList =
-    MachineTypeAggregatedList
+    MachineTypeAggregatedList'
     { _mtalNextPageToken = Nothing
     , _mtalKind = "compute#machineTypeAggregatedList"
     , _mtalItems = Nothing
@@ -10670,7 +11361,11 @@ machineTypeAggregatedList =
     , _mtalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 mtalNextPageToken :: Lens' MachineTypeAggregatedList (Maybe Text)
 mtalNextPageToken
   = lens _mtalNextPageToken
@@ -10691,7 +11386,8 @@ mtalSelfLink :: Lens' MachineTypeAggregatedList (Maybe Text)
 mtalSelfLink
   = lens _mtalSelfLink (\ s a -> s{_mtalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 mtalId :: Lens' MachineTypeAggregatedList (Maybe Text)
 mtalId = lens _mtalId (\ s a -> s{_mtalId = a})
 
@@ -10699,7 +11395,7 @@ instance FromJSON MachineTypeAggregatedList where
         parseJSON
           = withObject "MachineTypeAggregatedList"
               (\ o ->
-                 MachineTypeAggregatedList <$>
+                 MachineTypeAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#machineTypeAggregatedList")
@@ -10708,7 +11404,7 @@ instance FromJSON MachineTypeAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON MachineTypeAggregatedList where
-        toJSON MachineTypeAggregatedList{..}
+        toJSON MachineTypeAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _mtalNextPageToken,
@@ -10717,10 +11413,10 @@ instance ToJSON MachineTypeAggregatedList where
                   ("selfLink" .=) <$> _mtalSelfLink,
                   ("id" .=) <$> _mtalId])
 
--- | A disk type resource.
+-- | A DiskType resource.
 --
 -- /See:/ 'diskType' smart constructor.
-data DiskType = DiskType
+data DiskType = DiskType'
     { _dtKind              :: !Text
     , _dtZone              :: !(Maybe Text)
     , _dtSelfLink          :: !(Maybe Text)
@@ -10759,7 +11455,7 @@ data DiskType = DiskType
 diskType
     :: DiskType
 diskType =
-    DiskType
+    DiskType'
     { _dtKind = "compute#diskType"
     , _dtZone = Nothing
     , _dtSelfLink = Nothing
@@ -10796,7 +11492,8 @@ dtCreationTimestamp
   = lens _dtCreationTimestamp
       (\ s a -> s{_dtCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 dtId :: Lens' DiskType (Maybe Word64)
 dtId
   = lens _dtId (\ s a -> s{_dtId = a}) .
@@ -10809,7 +11506,7 @@ dtValidDiskSize
   = lens _dtValidDiskSize
       (\ s a -> s{_dtValidDiskSize = a})
 
--- | [Output Only] An optional textual description of the resource.
+-- | [Output Only] An optional description of this resource.
 dtDescription :: Lens' DiskType (Maybe Text)
 dtDescription
   = lens _dtDescription
@@ -10831,7 +11528,7 @@ instance FromJSON DiskType where
         parseJSON
           = withObject "DiskType"
               (\ o ->
-                 DiskType <$>
+                 DiskType' <$>
                    (o .:? "kind" .!= "compute#diskType") <*>
                      (o .:? "zone")
                      <*> (o .:? "selfLink")
@@ -10844,7 +11541,7 @@ instance FromJSON DiskType where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON DiskType where
-        toJSON DiskType{..}
+        toJSON DiskType'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dtKind), ("zone" .=) <$> _dtZone,
@@ -10860,7 +11557,7 @@ instance ToJSON DiskType where
 -- | Message representing the validation result for a UrlMap.
 --
 -- /See:/ 'urlMapValidationResult' smart constructor.
-data URLMapValidationResult = URLMapValidationResult
+data URLMapValidationResult = URLMapValidationResult'
     { _umvrLoadErrors    :: !(Maybe [Text])
     , _umvrLoadSucceeded :: !(Maybe Bool)
     , _umvrTestPassed    :: !(Maybe Bool)
@@ -10881,7 +11578,7 @@ data URLMapValidationResult = URLMapValidationResult
 urlMapValidationResult
     :: URLMapValidationResult
 urlMapValidationResult =
-    URLMapValidationResult
+    URLMapValidationResult'
     { _umvrLoadErrors = Nothing
     , _umvrLoadSucceeded = Nothing
     , _umvrTestPassed = Nothing
@@ -10920,14 +11617,14 @@ instance FromJSON URLMapValidationResult where
         parseJSON
           = withObject "URLMapValidationResult"
               (\ o ->
-                 URLMapValidationResult <$>
+                 URLMapValidationResult' <$>
                    (o .:? "loadErrors" .!= mempty) <*>
                      (o .:? "loadSucceeded")
                      <*> (o .:? "testPassed")
                      <*> (o .:? "testFailures" .!= mempty))
 
 instance ToJSON URLMapValidationResult where
-        toJSON URLMapValidationResult{..}
+        toJSON URLMapValidationResult'{..}
           = object
               (catMaybes
                  [("loadErrors" .=) <$> _umvrLoadErrors,
@@ -10938,9 +11635,9 @@ instance ToJSON URLMapValidationResult where
 -- | A metadata key\/value entry.
 --
 -- /See:/ 'metadata' smart constructor.
-data Metadata = Metadata
+data Metadata = Metadata'
     { _mKind        :: !Text
-    , _mFingerprint :: !(Maybe (Textual Word8))
+    , _mFingerprint :: !(Maybe Base64)
     , _mItems       :: !(Maybe [MetadataItemsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10956,7 +11653,7 @@ data Metadata = Metadata
 metadata
     :: Metadata
 metadata =
-    Metadata
+    Metadata'
     { _mKind = "compute#metadata"
     , _mFingerprint = Nothing
     , _mItems = Nothing
@@ -10972,10 +11669,10 @@ mKind = lens _mKind (\ s a -> s{_mKind = a})
 -- fingerprint is initially generated by Compute Engine and changes after
 -- every request to modify or update metadata. You must always provide an
 -- up-to-date fingerprint hash in order to update or change metadata.
-mFingerprint :: Lens' Metadata (Maybe Word8)
+mFingerprint :: Lens' Metadata (Maybe ByteString)
 mFingerprint
   = lens _mFingerprint (\ s a -> s{_mFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Array of key\/value pairs. The total size of all keys and values must be
 -- less than 512 KB.
@@ -10988,13 +11685,13 @@ instance FromJSON Metadata where
         parseJSON
           = withObject "Metadata"
               (\ o ->
-                 Metadata <$>
+                 Metadata' <$>
                    (o .:? "kind" .!= "compute#metadata") <*>
                      (o .:? "fingerprint")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Metadata where
-        toJSON Metadata{..}
+        toJSON Metadata'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mKind),
@@ -11003,7 +11700,7 @@ instance ToJSON Metadata where
 
 --
 -- /See:/ 'routeWarningsItem' smart constructor.
-data RouteWarningsItem = RouteWarningsItem
+data RouteWarningsItem = RouteWarningsItem'
     { _rwiData    :: !(Maybe [RouteWarningsItemDataItem])
     , _rwiCode    :: !(Maybe RouteWarningsItemCode)
     , _rwiMessage :: !(Maybe Text)
@@ -11021,23 +11718,26 @@ data RouteWarningsItem = RouteWarningsItem
 routeWarningsItem
     :: RouteWarningsItem
 routeWarningsItem =
-    RouteWarningsItem
+    RouteWarningsItem'
     { _rwiData = Nothing
     , _rwiCode = Nothing
     , _rwiMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 rwiData :: Lens' RouteWarningsItem [RouteWarningsItemDataItem]
 rwiData
   = lens _rwiData (\ s a -> s{_rwiData = a}) . _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 rwiCode :: Lens' RouteWarningsItem (Maybe RouteWarningsItemCode)
 rwiCode = lens _rwiCode (\ s a -> s{_rwiCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 rwiMessage :: Lens' RouteWarningsItem (Maybe Text)
 rwiMessage
   = lens _rwiMessage (\ s a -> s{_rwiMessage = a})
@@ -11046,12 +11746,12 @@ instance FromJSON RouteWarningsItem where
         parseJSON
           = withObject "RouteWarningsItem"
               (\ o ->
-                 RouteWarningsItem <$>
+                 RouteWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON RouteWarningsItem where
-        toJSON RouteWarningsItem{..}
+        toJSON RouteWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _rwiData, ("code" .=) <$> _rwiCode,
@@ -11059,7 +11759,7 @@ instance ToJSON RouteWarningsItem where
 
 --
 -- /See:/ 'machineTypesScopedListWarningDataItem' smart constructor.
-data MachineTypesScopedListWarningDataItem = MachineTypesScopedListWarningDataItem
+data MachineTypesScopedListWarningDataItem = MachineTypesScopedListWarningDataItem'
     { _mtslwdiValue :: !(Maybe Text)
     , _mtslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11074,7 +11774,7 @@ data MachineTypesScopedListWarningDataItem = MachineTypesScopedListWarningDataIt
 machineTypesScopedListWarningDataItem
     :: MachineTypesScopedListWarningDataItem
 machineTypesScopedListWarningDataItem =
-    MachineTypesScopedListWarningDataItem
+    MachineTypesScopedListWarningDataItem'
     { _mtslwdiValue = Nothing
     , _mtslwdiKey = Nothing
     }
@@ -11084,7 +11784,13 @@ mtslwdiValue :: Lens' MachineTypesScopedListWarningDataItem (Maybe Text)
 mtslwdiValue
   = lens _mtslwdiValue (\ s a -> s{_mtslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 mtslwdiKey :: Lens' MachineTypesScopedListWarningDataItem (Maybe Text)
 mtslwdiKey
   = lens _mtslwdiKey (\ s a -> s{_mtslwdiKey = a})
@@ -11094,12 +11800,12 @@ instance FromJSON
         parseJSON
           = withObject "MachineTypesScopedListWarningDataItem"
               (\ o ->
-                 MachineTypesScopedListWarningDataItem <$>
+                 MachineTypesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON MachineTypesScopedListWarningDataItem
          where
-        toJSON MachineTypesScopedListWarningDataItem{..}
+        toJSON MachineTypesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _mtslwdiValue,
@@ -11107,7 +11813,7 @@ instance ToJSON MachineTypesScopedListWarningDataItem
 
 --
 -- /See:/ 'diskTypesScopedListWarningDataItem' smart constructor.
-data DiskTypesScopedListWarningDataItem = DiskTypesScopedListWarningDataItem
+data DiskTypesScopedListWarningDataItem = DiskTypesScopedListWarningDataItem'
     { _dtslwdiValue :: !(Maybe Text)
     , _dtslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11122,7 +11828,7 @@ data DiskTypesScopedListWarningDataItem = DiskTypesScopedListWarningDataItem
 diskTypesScopedListWarningDataItem
     :: DiskTypesScopedListWarningDataItem
 diskTypesScopedListWarningDataItem =
-    DiskTypesScopedListWarningDataItem
+    DiskTypesScopedListWarningDataItem'
     { _dtslwdiValue = Nothing
     , _dtslwdiKey = Nothing
     }
@@ -11132,7 +11838,13 @@ dtslwdiValue :: Lens' DiskTypesScopedListWarningDataItem (Maybe Text)
 dtslwdiValue
   = lens _dtslwdiValue (\ s a -> s{_dtslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 dtslwdiKey :: Lens' DiskTypesScopedListWarningDataItem (Maybe Text)
 dtslwdiKey
   = lens _dtslwdiKey (\ s a -> s{_dtslwdiKey = a})
@@ -11142,12 +11854,12 @@ instance FromJSON DiskTypesScopedListWarningDataItem
         parseJSON
           = withObject "DiskTypesScopedListWarningDataItem"
               (\ o ->
-                 DiskTypesScopedListWarningDataItem <$>
+                 DiskTypesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON DiskTypesScopedListWarningDataItem
          where
-        toJSON DiskTypesScopedListWarningDataItem{..}
+        toJSON DiskTypesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _dtslwdiValue,
@@ -11156,7 +11868,7 @@ instance ToJSON DiskTypesScopedListWarningDataItem
 -- | A TargetHttpProxy resource. This resource defines an HTTP proxy.
 --
 -- /See:/ 'targetHTTPProxy' smart constructor.
-data TargetHTTPProxy = TargetHTTPProxy
+data TargetHTTPProxy = TargetHTTPProxy'
     { _thttppURLMap            :: !(Maybe Text)
     , _thttppKind              :: !Text
     , _thttppSelfLink          :: !(Maybe Text)
@@ -11186,7 +11898,7 @@ data TargetHTTPProxy = TargetHTTPProxy
 targetHTTPProxy
     :: TargetHTTPProxy
 targetHTTPProxy =
-    TargetHTTPProxy
+    TargetHTTPProxy'
     { _thttppURLMap = Nothing
     , _thttppKind = "compute#targetHttpProxy"
     , _thttppSelfLink = Nothing
@@ -11202,8 +11914,8 @@ thttppURLMap :: Lens' TargetHTTPProxy (Maybe Text)
 thttppURLMap
   = lens _thttppURLMap (\ s a -> s{_thttppURLMap = a})
 
--- | [Output Only] Type of resource. Always compute#operation for Operation
--- resources.
+-- | [Output Only] Type of resource. Always compute#targetHttpProxy for
+-- target HTTP proxies.
 thttppKind :: Lens' TargetHTTPProxy Text
 thttppKind
   = lens _thttppKind (\ s a -> s{_thttppKind = a})
@@ -11214,7 +11926,7 @@ thttppSelfLink
   = lens _thttppSelfLink
       (\ s a -> s{_thttppSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -11231,14 +11943,15 @@ thttppCreationTimestamp
   = lens _thttppCreationTimestamp
       (\ s a -> s{_thttppCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 thttppId :: Lens' TargetHTTPProxy (Maybe Word64)
 thttppId
   = lens _thttppId (\ s a -> s{_thttppId = a}) .
       mapping _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 thttppDescription :: Lens' TargetHTTPProxy (Maybe Text)
 thttppDescription
   = lens _thttppDescription
@@ -11248,7 +11961,7 @@ instance FromJSON TargetHTTPProxy where
         parseJSON
           = withObject "TargetHTTPProxy"
               (\ o ->
-                 TargetHTTPProxy <$>
+                 TargetHTTPProxy' <$>
                    (o .:? "urlMap") <*>
                      (o .:? "kind" .!= "compute#targetHttpProxy")
                      <*> (o .:? "selfLink")
@@ -11258,7 +11971,7 @@ instance FromJSON TargetHTTPProxy where
                      <*> (o .:? "description"))
 
 instance ToJSON TargetHTTPProxy where
-        toJSON TargetHTTPProxy{..}
+        toJSON TargetHTTPProxy'{..}
           = object
               (catMaybes
                  [("urlMap" .=) <$> _thttppURLMap,
@@ -11273,7 +11986,7 @@ instance ToJSON TargetHTTPProxy where
 -- | A Machine Type resource.
 --
 -- /See:/ 'machineType' smart constructor.
-data MachineType = MachineType
+data MachineType = MachineType'
     { _mtKind                         :: !Text
     , _mtImageSpaceGb                 :: !(Maybe (Textual Int32))
     , _mtZone                         :: !(Maybe Text)
@@ -11324,7 +12037,7 @@ data MachineType = MachineType
 machineType
     :: MachineType
 machineType =
-    MachineType
+    MachineType'
     { _mtKind = "compute#machineType"
     , _mtImageSpaceGb = Nothing
     , _mtZone = Nothing
@@ -11341,7 +12054,8 @@ machineType =
     , _mtDeprecated = Nothing
     }
 
--- | Type of the resource.
+-- | [Output Only] The type of the resource. Always compute#machineType for
+-- machine types.
 mtKind :: Lens' MachineType Text
 mtKind = lens _mtKind (\ s a -> s{_mtKind = a})
 
@@ -11381,13 +12095,15 @@ mtScratchDisks
       . _Default
       . _Coerce
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 mtId :: Lens' MachineType (Maybe Word64)
 mtId
   = lens _mtId (\ s a -> s{_mtId = a}) .
       mapping _Coerce
 
--- | [Output Only] The tumber of CPUs exposed to the instance.
+-- | [Output Only] The number of virtual CPUs that are available to the
+-- instance.
 mtGuestCPUs :: Lens' MachineType (Maybe Int32)
 mtGuestCPUs
   = lens _mtGuestCPUs (\ s a -> s{_mtGuestCPUs = a}) .
@@ -11429,7 +12145,7 @@ instance FromJSON MachineType where
         parseJSON
           = withObject "MachineType"
               (\ o ->
-                 MachineType <$>
+                 MachineType' <$>
                    (o .:? "kind" .!= "compute#machineType") <*>
                      (o .:? "imageSpaceGb")
                      <*> (o .:? "zone")
@@ -11446,7 +12162,7 @@ instance FromJSON MachineType where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON MachineType where
-        toJSON MachineType{..}
+        toJSON MachineType'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mtKind),
@@ -11470,7 +12186,7 @@ instance ToJSON MachineType where
 -- operation, this field will be populated.
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
+newtype OperationError = OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11482,7 +12198,7 @@ newtype OperationError = OperationError
 operationError
     :: OperationError
 operationError =
-    OperationError
+    OperationError'
     { _oeErrors = Nothing
     }
 
@@ -11498,17 +12214,17 @@ instance FromJSON OperationError where
         parseJSON
           = withObject "OperationError"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 OperationError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON OperationError where
-        toJSON OperationError{..}
+        toJSON OperationError'{..}
           = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
 --
 -- /See:/ 'targetInstancesScopedListWarning' smart constructor.
-data TargetInstancesScopedListWarning = TargetInstancesScopedListWarning
+data TargetInstancesScopedListWarning = TargetInstancesScopedListWarning'
     { _tislwData    :: !(Maybe [TargetInstancesScopedListWarningDataItem])
     , _tislwCode    :: !(Maybe TargetInstancesScopedListWarningCode)
     , _tislwMessage :: !(Maybe Text)
@@ -11526,25 +12242,28 @@ data TargetInstancesScopedListWarning = TargetInstancesScopedListWarning
 targetInstancesScopedListWarning
     :: TargetInstancesScopedListWarning
 targetInstancesScopedListWarning =
-    TargetInstancesScopedListWarning
+    TargetInstancesScopedListWarning'
     { _tislwData = Nothing
     , _tislwCode = Nothing
     , _tislwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 tislwData :: Lens' TargetInstancesScopedListWarning [TargetInstancesScopedListWarningDataItem]
 tislwData
   = lens _tislwData (\ s a -> s{_tislwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 tislwCode :: Lens' TargetInstancesScopedListWarning (Maybe TargetInstancesScopedListWarningCode)
 tislwCode
   = lens _tislwCode (\ s a -> s{_tislwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 tislwMessage :: Lens' TargetInstancesScopedListWarning (Maybe Text)
 tislwMessage
   = lens _tislwMessage (\ s a -> s{_tislwMessage = a})
@@ -11554,13 +12273,13 @@ instance FromJSON TargetInstancesScopedListWarning
         parseJSON
           = withObject "TargetInstancesScopedListWarning"
               (\ o ->
-                 TargetInstancesScopedListWarning <$>
+                 TargetInstancesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON TargetInstancesScopedListWarning
          where
-        toJSON TargetInstancesScopedListWarning{..}
+        toJSON TargetInstancesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _tislwData,
@@ -11568,8 +12287,125 @@ instance ToJSON TargetInstancesScopedListWarning
                   ("message" .=) <$> _tislwMessage])
 
 --
+-- /See:/ 'subnetworkAggregatedList' smart constructor.
+data SubnetworkAggregatedList = SubnetworkAggregatedList'
+    { _salNextPageToken :: !(Maybe Text)
+    , _salKind          :: !Text
+    , _salItems         :: !(Maybe SubnetworkAggregatedListItems)
+    , _salSelfLink      :: !(Maybe Text)
+    , _salId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworkAggregatedList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'salNextPageToken'
+--
+-- * 'salKind'
+--
+-- * 'salItems'
+--
+-- * 'salSelfLink'
+--
+-- * 'salId'
+subnetworkAggregatedList
+    :: SubnetworkAggregatedList
+subnetworkAggregatedList =
+    SubnetworkAggregatedList'
+    { _salNextPageToken = Nothing
+    , _salKind = "compute#subnetworkAggregatedList"
+    , _salItems = Nothing
+    , _salSelfLink = Nothing
+    , _salId = Nothing
+    }
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+salNextPageToken :: Lens' SubnetworkAggregatedList (Maybe Text)
+salNextPageToken
+  = lens _salNextPageToken
+      (\ s a -> s{_salNextPageToken = a})
+
+-- | [Output Only] Type of resource. Always compute#subnetworkAggregatedList
+-- for aggregated lists of subnetworks.
+salKind :: Lens' SubnetworkAggregatedList Text
+salKind = lens _salKind (\ s a -> s{_salKind = a})
+
+-- | [Output] A map of scoped Subnetwork lists.
+salItems :: Lens' SubnetworkAggregatedList (Maybe SubnetworkAggregatedListItems)
+salItems = lens _salItems (\ s a -> s{_salItems = a})
+
+-- | [Output Only] Server-defined URL for this resource.
+salSelfLink :: Lens' SubnetworkAggregatedList (Maybe Text)
+salSelfLink
+  = lens _salSelfLink (\ s a -> s{_salSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+salId :: Lens' SubnetworkAggregatedList (Maybe Text)
+salId = lens _salId (\ s a -> s{_salId = a})
+
+instance FromJSON SubnetworkAggregatedList where
+        parseJSON
+          = withObject "SubnetworkAggregatedList"
+              (\ o ->
+                 SubnetworkAggregatedList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#subnetworkAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON SubnetworkAggregatedList where
+        toJSON SubnetworkAggregatedList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _salNextPageToken,
+                  Just ("kind" .= _salKind),
+                  ("items" .=) <$> _salItems,
+                  ("selfLink" .=) <$> _salSelfLink,
+                  ("id" .=) <$> _salId])
+
+--
+-- /See:/ 'disksResizeRequest' smart constructor.
+newtype DisksResizeRequest = DisksResizeRequest'
+    { _drrSizeGb :: Maybe (Textual Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DisksResizeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drrSizeGb'
+disksResizeRequest
+    :: DisksResizeRequest
+disksResizeRequest =
+    DisksResizeRequest'
+    { _drrSizeGb = Nothing
+    }
+
+-- | The new size of the persistent disk, which is specified in GB.
+drrSizeGb :: Lens' DisksResizeRequest (Maybe Int64)
+drrSizeGb
+  = lens _drrSizeGb (\ s a -> s{_drrSizeGb = a}) .
+      mapping _Coerce
+
+instance FromJSON DisksResizeRequest where
+        parseJSON
+          = withObject "DisksResizeRequest"
+              (\ o -> DisksResizeRequest' <$> (o .:? "sizeGb"))
+
+instance ToJSON DisksResizeRequest where
+        toJSON DisksResizeRequest'{..}
+          = object (catMaybes [("sizeGb" .=) <$> _drrSizeGb])
+
+--
 -- /See:/ 'autoscalersScopedListWarningDataItem' smart constructor.
-data AutoscalersScopedListWarningDataItem = AutoscalersScopedListWarningDataItem
+data AutoscalersScopedListWarningDataItem = AutoscalersScopedListWarningDataItem'
     { _aValue :: !(Maybe Text)
     , _aKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11584,7 +12420,7 @@ data AutoscalersScopedListWarningDataItem = AutoscalersScopedListWarningDataItem
 autoscalersScopedListWarningDataItem
     :: AutoscalersScopedListWarningDataItem
 autoscalersScopedListWarningDataItem =
-    AutoscalersScopedListWarningDataItem
+    AutoscalersScopedListWarningDataItem'
     { _aValue = Nothing
     , _aKey = Nothing
     }
@@ -11593,7 +12429,13 @@ autoscalersScopedListWarningDataItem =
 aValue :: Lens' AutoscalersScopedListWarningDataItem (Maybe Text)
 aValue = lens _aValue (\ s a -> s{_aValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 aKey :: Lens' AutoscalersScopedListWarningDataItem (Maybe Text)
 aKey = lens _aKey (\ s a -> s{_aKey = a})
 
@@ -11602,19 +12444,19 @@ instance FromJSON
         parseJSON
           = withObject "AutoscalersScopedListWarningDataItem"
               (\ o ->
-                 AutoscalersScopedListWarningDataItem <$>
+                 AutoscalersScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON AutoscalersScopedListWarningDataItem
          where
-        toJSON AutoscalersScopedListWarningDataItem{..}
+        toJSON AutoscalersScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _aValue, ("key" .=) <$> _aKey])
 
 --
 -- /See:/ 'instanceGroupsListInstances' smart constructor.
-data InstanceGroupsListInstances = InstanceGroupsListInstances
+data InstanceGroupsListInstances = InstanceGroupsListInstances'
     { _igliNextPageToken :: !(Maybe Text)
     , _igliKind          :: !Text
     , _igliItems         :: !(Maybe [InstanceWithNamedPorts])
@@ -11638,7 +12480,7 @@ data InstanceGroupsListInstances = InstanceGroupsListInstances
 instanceGroupsListInstances
     :: InstanceGroupsListInstances
 instanceGroupsListInstances =
-    InstanceGroupsListInstances
+    InstanceGroupsListInstances'
     { _igliNextPageToken = Nothing
     , _igliKind = "compute#instanceGroupsListInstances"
     , _igliItems = Nothing
@@ -11646,7 +12488,11 @@ instanceGroupsListInstances =
     , _igliId = Nothing
     }
 
--- | [Output Only] A token that is used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 igliNextPageToken :: Lens' InstanceGroupsListInstances (Maybe Text)
 igliNextPageToken
   = lens _igliNextPageToken
@@ -11680,7 +12526,7 @@ instance FromJSON InstanceGroupsListInstances where
         parseJSON
           = withObject "InstanceGroupsListInstances"
               (\ o ->
-                 InstanceGroupsListInstances <$>
+                 InstanceGroupsListInstances' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#instanceGroupsListInstances")
@@ -11689,7 +12535,7 @@ instance FromJSON InstanceGroupsListInstances where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceGroupsListInstances where
-        toJSON InstanceGroupsListInstances{..}
+        toJSON InstanceGroupsListInstances'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _igliNextPageToken,
@@ -11698,9 +12544,13 @@ instance ToJSON InstanceGroupsListInstances where
                   ("selfLink" .=) <$> _igliSelfLink,
                   ("id" .=) <$> _igliId])
 
+-- | Represents an Autoscaler resource. Autoscalers allow you to
+-- automatically scale virtual machine instances in managed instance groups
+-- according to an autoscaling policy that you define. For more
+-- information, read Autoscaling Groups of Instances.
 --
 -- /See:/ 'autoscaler' smart constructor.
-data Autoscaler = Autoscaler
+data Autoscaler = Autoscaler'
     { _aaKind              :: !Text
     , _aaZone              :: !(Maybe Text)
     , _aaSelfLink          :: !(Maybe Text)
@@ -11736,7 +12586,7 @@ data Autoscaler = Autoscaler
 autoscaler
     :: Autoscaler
 autoscaler =
-    Autoscaler
+    Autoscaler'
     { _aaKind = "compute#autoscaler"
     , _aaZone = Nothing
     , _aaSelfLink = Nothing
@@ -11748,7 +12598,8 @@ autoscaler =
     , _aaTarget = Nothing
     }
 
--- | Type of the resource.
+-- | [Output Only] Type of the resource. Always compute#autoscaler for
+-- autoscalers.
 aaKind :: Lens' Autoscaler Text
 aaKind = lens _aaKind (\ s a -> s{_aaKind = a})
 
@@ -11777,27 +12628,31 @@ aaCreationTimestamp
   = lens _aaCreationTimestamp
       (\ s a -> s{_aaCreationTimestamp = a})
 
--- | Autoscaling configuration.
+-- | The configuration parameters for the autoscaling algorithm. You can
+-- define one or more of the policies for an autoscaler: cpuUtilization,
+-- customMetricUtilizations, and loadBalancingUtilization. If none of these
+-- are specified, the default will be to autoscale based on cpuUtilization
+-- to 0.8 or 80%.
 aaAutoscalingPolicy :: Lens' Autoscaler (Maybe AutoscalingPolicy)
 aaAutoscalingPolicy
   = lens _aaAutoscalingPolicy
       (\ s a -> s{_aaAutoscalingPolicy = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 aaId :: Lens' Autoscaler (Maybe Word64)
 aaId
   = lens _aaId (\ s a -> s{_aaId = a}) .
       mapping _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 aaDescription :: Lens' Autoscaler (Maybe Text)
 aaDescription
   = lens _aaDescription
       (\ s a -> s{_aaDescription = a})
 
--- | URL of Instance Group Manager or Replica Pool which will be controlled
--- by Autoscaler.
+-- | URL of the managed instance group that this autoscaler will scale.
 aaTarget :: Lens' Autoscaler (Maybe Text)
 aaTarget = lens _aaTarget (\ s a -> s{_aaTarget = a})
 
@@ -11805,7 +12660,7 @@ instance FromJSON Autoscaler where
         parseJSON
           = withObject "Autoscaler"
               (\ o ->
-                 Autoscaler <$>
+                 Autoscaler' <$>
                    (o .:? "kind" .!= "compute#autoscaler") <*>
                      (o .:? "zone")
                      <*> (o .:? "selfLink")
@@ -11817,7 +12672,7 @@ instance FromJSON Autoscaler where
                      <*> (o .:? "target"))
 
 instance ToJSON Autoscaler where
-        toJSON Autoscaler{..}
+        toJSON Autoscaler'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aaKind), ("zone" .=) <$> _aaZone,
@@ -11833,7 +12688,7 @@ instance ToJSON Autoscaler where
 -- when the list is empty.
 --
 -- /See:/ 'disksScopedListWarning' smart constructor.
-data DisksScopedListWarning = DisksScopedListWarning
+data DisksScopedListWarning = DisksScopedListWarning'
     { _dslwData    :: !(Maybe [DisksScopedListWarningDataItem])
     , _dslwCode    :: !(Maybe DisksScopedListWarningCode)
     , _dslwMessage :: !(Maybe Text)
@@ -11851,24 +12706,27 @@ data DisksScopedListWarning = DisksScopedListWarning
 disksScopedListWarning
     :: DisksScopedListWarning
 disksScopedListWarning =
-    DisksScopedListWarning
+    DisksScopedListWarning'
     { _dslwData = Nothing
     , _dslwCode = Nothing
     , _dslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 dslwData :: Lens' DisksScopedListWarning [DisksScopedListWarningDataItem]
 dslwData
   = lens _dslwData (\ s a -> s{_dslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 dslwCode :: Lens' DisksScopedListWarning (Maybe DisksScopedListWarningCode)
 dslwCode = lens _dslwCode (\ s a -> s{_dslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 dslwMessage :: Lens' DisksScopedListWarning (Maybe Text)
 dslwMessage
   = lens _dslwMessage (\ s a -> s{_dslwMessage = a})
@@ -11877,12 +12735,12 @@ instance FromJSON DisksScopedListWarning where
         parseJSON
           = withObject "DisksScopedListWarning"
               (\ o ->
-                 DisksScopedListWarning <$>
+                 DisksScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON DisksScopedListWarning where
-        toJSON DisksScopedListWarning{..}
+        toJSON DisksScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _dslwData,
@@ -11892,7 +12750,7 @@ instance ToJSON DisksScopedListWarning where
 -- | A map of scoped target vpn gateway lists.
 --
 -- /See:/ 'targetVPNGatewayAggregatedListItems' smart constructor.
-newtype TargetVPNGatewayAggregatedListItems = TargetVPNGatewayAggregatedListItems
+newtype TargetVPNGatewayAggregatedListItems = TargetVPNGatewayAggregatedListItems'
     { _tvgaliAddtional :: HashMap Text TargetVPNGatewaysScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11905,11 +12763,11 @@ targetVPNGatewayAggregatedListItems
     :: HashMap Text TargetVPNGatewaysScopedList -- ^ 'tvgaliAddtional'
     -> TargetVPNGatewayAggregatedListItems
 targetVPNGatewayAggregatedListItems pTvgaliAddtional_ =
-    TargetVPNGatewayAggregatedListItems
+    TargetVPNGatewayAggregatedListItems'
     { _tvgaliAddtional = _Coerce # pTvgaliAddtional_
     }
 
--- | [Output Only] Name of the scope containing this set of target vpn
+-- | [Output Only] Name of the scope containing this set of target VPN
 -- gateways.
 tvgaliAddtional :: Lens' TargetVPNGatewayAggregatedListItems (HashMap Text TargetVPNGatewaysScopedList)
 tvgaliAddtional
@@ -11922,7 +12780,7 @@ instance FromJSON TargetVPNGatewayAggregatedListItems
         parseJSON
           = withObject "TargetVPNGatewayAggregatedListItems"
               (\ o ->
-                 TargetVPNGatewayAggregatedListItems <$>
+                 TargetVPNGatewayAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON TargetVPNGatewayAggregatedListItems
@@ -11933,7 +12791,7 @@ instance ToJSON TargetVPNGatewayAggregatedListItems
 -- is empty.
 --
 -- /See:/ 'targetPoolsScopedListWarning' smart constructor.
-data TargetPoolsScopedListWarning = TargetPoolsScopedListWarning
+data TargetPoolsScopedListWarning = TargetPoolsScopedListWarning'
     { _tpslwData    :: !(Maybe [TargetPoolsScopedListWarningDataItem])
     , _tpslwCode    :: !(Maybe TargetPoolsScopedListWarningCode)
     , _tpslwMessage :: !(Maybe Text)
@@ -11951,25 +12809,28 @@ data TargetPoolsScopedListWarning = TargetPoolsScopedListWarning
 targetPoolsScopedListWarning
     :: TargetPoolsScopedListWarning
 targetPoolsScopedListWarning =
-    TargetPoolsScopedListWarning
+    TargetPoolsScopedListWarning'
     { _tpslwData = Nothing
     , _tpslwCode = Nothing
     , _tpslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 tpslwData :: Lens' TargetPoolsScopedListWarning [TargetPoolsScopedListWarningDataItem]
 tpslwData
   = lens _tpslwData (\ s a -> s{_tpslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 tpslwCode :: Lens' TargetPoolsScopedListWarning (Maybe TargetPoolsScopedListWarningCode)
 tpslwCode
   = lens _tpslwCode (\ s a -> s{_tpslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 tpslwMessage :: Lens' TargetPoolsScopedListWarning (Maybe Text)
 tpslwMessage
   = lens _tpslwMessage (\ s a -> s{_tpslwMessage = a})
@@ -11978,12 +12839,12 @@ instance FromJSON TargetPoolsScopedListWarning where
         parseJSON
           = withObject "TargetPoolsScopedListWarning"
               (\ o ->
-                 TargetPoolsScopedListWarning <$>
+                 TargetPoolsScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON TargetPoolsScopedListWarning where
-        toJSON TargetPoolsScopedListWarning{..}
+        toJSON TargetPoolsScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _tpslwData,
@@ -11992,7 +12853,7 @@ instance ToJSON TargetPoolsScopedListWarning where
 
 --
 -- /See:/ 'healthStatus' smart constructor.
-data HealthStatus = HealthStatus
+data HealthStatus = HealthStatus'
     { _hsIPAddress   :: !(Maybe Text)
     , _hsHealthState :: !(Maybe HealthStatusHealthState)
     , _hsPort        :: !(Maybe (Textual Int32))
@@ -12013,7 +12874,7 @@ data HealthStatus = HealthStatus
 healthStatus
     :: HealthStatus
 healthStatus =
-    HealthStatus
+    HealthStatus'
     { _hsIPAddress = Nothing
     , _hsHealthState = Nothing
     , _hsPort = Nothing
@@ -12046,13 +12907,13 @@ instance FromJSON HealthStatus where
         parseJSON
           = withObject "HealthStatus"
               (\ o ->
-                 HealthStatus <$>
+                 HealthStatus' <$>
                    (o .:? "ipAddress") <*> (o .:? "healthState") <*>
                      (o .:? "port")
                      <*> (o .:? "instance"))
 
 instance ToJSON HealthStatus where
-        toJSON HealthStatus{..}
+        toJSON HealthStatus'{..}
           = object
               (catMaybes
                  [("ipAddress" .=) <$> _hsIPAddress,
@@ -12063,7 +12924,7 @@ instance ToJSON HealthStatus where
 -- | Region resource.
 --
 -- /See:/ 'region' smart constructor.
-data Region = Region
+data Region = Region'
     { _rrStatus            :: !(Maybe RegionStatus)
     , _rrZones             :: !(Maybe [Text])
     , _rrKind              :: !Text
@@ -12102,7 +12963,7 @@ data Region = Region
 region
     :: Region
 region =
-    Region
+    Region'
     { _rrStatus = Nothing
     , _rrZones = Nothing
     , _rrKind = "compute#region"
@@ -12152,8 +13013,8 @@ rrQuotas
       _Default
       . _Coerce
 
--- | [Output Only] Unique identifier for the resource; defined by the server
--- .
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 rrId :: Lens' Region (Maybe Word64)
 rrId
   = lens _rrId (\ s a -> s{_rrId = a}) .
@@ -12174,7 +13035,7 @@ instance FromJSON Region where
         parseJSON
           = withObject "Region"
               (\ o ->
-                 Region <$>
+                 Region' <$>
                    (o .:? "status") <*> (o .:? "zones" .!= mempty) <*>
                      (o .:? "kind" .!= "compute#region")
                      <*> (o .:? "selfLink")
@@ -12186,7 +13047,7 @@ instance FromJSON Region where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON Region where
-        toJSON Region{..}
+        toJSON Region'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _rrStatus,
@@ -12200,21 +13061,22 @@ instance ToJSON Region where
 
 --
 -- /See:/ 'vpnTunnel' smart constructor.
-data VPNTunnel = VPNTunnel
-    { _vtDetailedStatus    :: !(Maybe Text)
-    , _vtStatus            :: !(Maybe VPNTunnelStatus)
-    , _vtKind              :: !Text
-    , _vtPeerIP            :: !(Maybe Text)
-    , _vtTargetVPNGateway  :: !(Maybe Text)
-    , _vtSelfLink          :: !(Maybe Text)
-    , _vtSharedSecret      :: !(Maybe Text)
-    , _vtName              :: !(Maybe Text)
-    , _vtCreationTimestamp :: !(Maybe Text)
-    , _vtSharedSecretHash  :: !(Maybe Text)
-    , _vtId                :: !(Maybe (Textual Word64))
-    , _vtIkeVersion        :: !(Maybe (Textual Int32))
-    , _vtRegion            :: !(Maybe Text)
-    , _vtDescription       :: !(Maybe Text)
+data VPNTunnel = VPNTunnel'
+    { _vtDetailedStatus       :: !(Maybe Text)
+    , _vtStatus               :: !(Maybe VPNTunnelStatus)
+    , _vtLocalTrafficSelector :: !(Maybe [Text])
+    , _vtKind                 :: !Text
+    , _vtPeerIP               :: !(Maybe Text)
+    , _vtTargetVPNGateway     :: !(Maybe Text)
+    , _vtSelfLink             :: !(Maybe Text)
+    , _vtSharedSecret         :: !(Maybe Text)
+    , _vtName                 :: !(Maybe Text)
+    , _vtCreationTimestamp    :: !(Maybe Text)
+    , _vtSharedSecretHash     :: !(Maybe Text)
+    , _vtId                   :: !(Maybe (Textual Word64))
+    , _vtIkeVersion           :: !(Maybe (Textual Int32))
+    , _vtRegion               :: !(Maybe Text)
+    , _vtDescription          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnel' with the minimum fields required to make a request.
@@ -12224,6 +13086,8 @@ data VPNTunnel = VPNTunnel
 -- * 'vtDetailedStatus'
 --
 -- * 'vtStatus'
+--
+-- * 'vtLocalTrafficSelector'
 --
 -- * 'vtKind'
 --
@@ -12251,9 +13115,10 @@ data VPNTunnel = VPNTunnel
 vpnTunnel
     :: VPNTunnel
 vpnTunnel =
-    VPNTunnel
+    VPNTunnel'
     { _vtDetailedStatus = Nothing
     , _vtStatus = Nothing
+    , _vtLocalTrafficSelector = Nothing
     , _vtKind = "compute#vpnTunnel"
     , _vtPeerIP = Nothing
     , _vtTargetVPNGateway = Nothing
@@ -12278,6 +13143,16 @@ vtDetailedStatus
 vtStatus :: Lens' VPNTunnel (Maybe VPNTunnelStatus)
 vtStatus = lens _vtStatus (\ s a -> s{_vtStatus = a})
 
+-- | Local traffic selector to use when establishing the VPN tunnel with peer
+-- VPN gateway. The value should be a CIDR formatted string, for example:
+-- 192.168.0.0\/16. The ranges should be disjoint.
+vtLocalTrafficSelector :: Lens' VPNTunnel [Text]
+vtLocalTrafficSelector
+  = lens _vtLocalTrafficSelector
+      (\ s a -> s{_vtLocalTrafficSelector = a})
+      . _Default
+      . _Coerce
+
 -- | [Output Only] Type of resource. Always compute#vpnTunnel for VPN
 -- tunnels.
 vtKind :: Lens' VPNTunnel Text
@@ -12287,8 +13162,8 @@ vtKind = lens _vtKind (\ s a -> s{_vtKind = a})
 vtPeerIP :: Lens' VPNTunnel (Maybe Text)
 vtPeerIP = lens _vtPeerIP (\ s a -> s{_vtPeerIP = a})
 
--- | URL of the VPN gateway to which this VPN tunnel is associated. Provided
--- by the client when the VPN tunnel is created.
+-- | URL of the VPN gateway with which this VPN tunnel is associated.
+-- Provided by the client when the VPN tunnel is created.
 vtTargetVPNGateway :: Lens' VPNTunnel (Maybe Text)
 vtTargetVPNGateway
   = lens _vtTargetVPNGateway
@@ -12299,14 +13174,14 @@ vtSelfLink :: Lens' VPNTunnel (Maybe Text)
 vtSelfLink
   = lens _vtSelfLink (\ s a -> s{_vtSelfLink = a})
 
--- | Shared secret used to set the secure session between the GCE VPN gateway
--- and the peer VPN gateway.
+-- | Shared secret used to set the secure session between the Cloud VPN
+-- gateway and the peer VPN gateway.
 vtSharedSecret :: Lens' VPNTunnel (Maybe Text)
 vtSharedSecret
   = lens _vtSharedSecret
       (\ s a -> s{_vtSharedSecret = a})
 
--- | Name of the resource; provided by the client when the resource is
+-- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
 -- Specifically, the name must be 1-63 characters long and match the
 -- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
@@ -12328,7 +13203,8 @@ vtSharedSecretHash
   = lens _vtSharedSecretHash
       (\ s a -> s{_vtSharedSecretHash = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 vtId :: Lens' VPNTunnel (Maybe Word64)
 vtId
   = lens _vtId (\ s a -> s{_vtId = a}) .
@@ -12345,8 +13221,8 @@ vtIkeVersion
 vtRegion :: Lens' VPNTunnel (Maybe Text)
 vtRegion = lens _vtRegion (\ s a -> s{_vtRegion = a})
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 vtDescription :: Lens' VPNTunnel (Maybe Text)
 vtDescription
   = lens _vtDescription
@@ -12356,9 +13232,10 @@ instance FromJSON VPNTunnel where
         parseJSON
           = withObject "VPNTunnel"
               (\ o ->
-                 VPNTunnel <$>
+                 VPNTunnel' <$>
                    (o .:? "detailedStatus") <*> (o .:? "status") <*>
-                     (o .:? "kind" .!= "compute#vpnTunnel")
+                     (o .:? "localTrafficSelector" .!= mempty)
+                     <*> (o .:? "kind" .!= "compute#vpnTunnel")
                      <*> (o .:? "peerIp")
                      <*> (o .:? "targetVpnGateway")
                      <*> (o .:? "selfLink")
@@ -12372,11 +13249,13 @@ instance FromJSON VPNTunnel where
                      <*> (o .:? "description"))
 
 instance ToJSON VPNTunnel where
-        toJSON VPNTunnel{..}
+        toJSON VPNTunnel'{..}
           = object
               (catMaybes
                  [("detailedStatus" .=) <$> _vtDetailedStatus,
                   ("status" .=) <$> _vtStatus,
+                  ("localTrafficSelector" .=) <$>
+                    _vtLocalTrafficSelector,
                   Just ("kind" .= _vtKind),
                   ("peerIp" .=) <$> _vtPeerIP,
                   ("targetVpnGateway" .=) <$> _vtTargetVPNGateway,
@@ -12394,7 +13273,7 @@ instance ToJSON VPNTunnel where
 -- operations when the list is empty.
 --
 -- /See:/ 'operationsScopedListWarning' smart constructor.
-data OperationsScopedListWarning = OperationsScopedListWarning
+data OperationsScopedListWarning = OperationsScopedListWarning'
     { _oslwData    :: !(Maybe [OperationsScopedListWarningDataItem])
     , _oslwCode    :: !(Maybe OperationsScopedListWarningCode)
     , _oslwMessage :: !(Maybe Text)
@@ -12412,24 +13291,27 @@ data OperationsScopedListWarning = OperationsScopedListWarning
 operationsScopedListWarning
     :: OperationsScopedListWarning
 operationsScopedListWarning =
-    OperationsScopedListWarning
+    OperationsScopedListWarning'
     { _oslwData = Nothing
     , _oslwCode = Nothing
     , _oslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 oslwData :: Lens' OperationsScopedListWarning [OperationsScopedListWarningDataItem]
 oslwData
   = lens _oslwData (\ s a -> s{_oslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 oslwCode :: Lens' OperationsScopedListWarning (Maybe OperationsScopedListWarningCode)
 oslwCode = lens _oslwCode (\ s a -> s{_oslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 oslwMessage :: Lens' OperationsScopedListWarning (Maybe Text)
 oslwMessage
   = lens _oslwMessage (\ s a -> s{_oslwMessage = a})
@@ -12438,12 +13320,12 @@ instance FromJSON OperationsScopedListWarning where
         parseJSON
           = withObject "OperationsScopedListWarning"
               (\ o ->
-                 OperationsScopedListWarning <$>
+                 OperationsScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationsScopedListWarning where
-        toJSON OperationsScopedListWarning{..}
+        toJSON OperationsScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _oslwData,
@@ -12453,7 +13335,7 @@ instance ToJSON OperationsScopedListWarning where
 -- | Sets the scheduling options for an Instance.
 --
 -- /See:/ 'scheduling' smart constructor.
-data Scheduling = Scheduling
+data Scheduling = Scheduling'
     { _sAutomaticRestart  :: !(Maybe Bool)
     , _sOnHostMaintenance :: !(Maybe SchedulingOnHostMaintenance)
     , _sPreemptible       :: !(Maybe Bool)
@@ -12471,7 +13353,7 @@ data Scheduling = Scheduling
 scheduling
     :: Scheduling
 scheduling =
-    Scheduling
+    Scheduling'
     { _sAutomaticRestart = Nothing
     , _sOnHostMaintenance = Nothing
     , _sPreemptible = Nothing
@@ -12489,7 +13371,7 @@ sAutomaticRestart
 -- | Defines the maintenance behavior for this instance. For standard
 -- instances, the default behavior is MIGRATE. For preemptible instances,
 -- the default and only possible behavior is TERMINATE. For more
--- information, see Setting maintenance behavior.
+-- information, see Setting Instance Scheduling Options.
 sOnHostMaintenance :: Lens' Scheduling (Maybe SchedulingOnHostMaintenance)
 sOnHostMaintenance
   = lens _sOnHostMaintenance
@@ -12504,13 +13386,13 @@ instance FromJSON Scheduling where
         parseJSON
           = withObject "Scheduling"
               (\ o ->
-                 Scheduling <$>
+                 Scheduling' <$>
                    (o .:? "automaticRestart") <*>
                      (o .:? "onHostMaintenance")
                      <*> (o .:? "preemptible"))
 
 instance ToJSON Scheduling where
-        toJSON Scheduling{..}
+        toJSON Scheduling'{..}
           = object
               (catMaybes
                  [("automaticRestart" .=) <$> _sAutomaticRestart,
@@ -12519,7 +13401,7 @@ instance ToJSON Scheduling where
 
 --
 -- /See:/ 'vpnTunnelsScopedListWarningDataItem' smart constructor.
-data VPNTunnelsScopedListWarningDataItem = VPNTunnelsScopedListWarningDataItem
+data VPNTunnelsScopedListWarningDataItem = VPNTunnelsScopedListWarningDataItem'
     { _vtslwdiValue :: !(Maybe Text)
     , _vtslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12534,7 +13416,7 @@ data VPNTunnelsScopedListWarningDataItem = VPNTunnelsScopedListWarningDataItem
 vpnTunnelsScopedListWarningDataItem
     :: VPNTunnelsScopedListWarningDataItem
 vpnTunnelsScopedListWarningDataItem =
-    VPNTunnelsScopedListWarningDataItem
+    VPNTunnelsScopedListWarningDataItem'
     { _vtslwdiValue = Nothing
     , _vtslwdiKey = Nothing
     }
@@ -12544,7 +13426,13 @@ vtslwdiValue :: Lens' VPNTunnelsScopedListWarningDataItem (Maybe Text)
 vtslwdiValue
   = lens _vtslwdiValue (\ s a -> s{_vtslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 vtslwdiKey :: Lens' VPNTunnelsScopedListWarningDataItem (Maybe Text)
 vtslwdiKey
   = lens _vtslwdiKey (\ s a -> s{_vtslwdiKey = a})
@@ -12554,22 +13442,108 @@ instance FromJSON VPNTunnelsScopedListWarningDataItem
         parseJSON
           = withObject "VPNTunnelsScopedListWarningDataItem"
               (\ o ->
-                 VPNTunnelsScopedListWarningDataItem <$>
+                 VPNTunnelsScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON VPNTunnelsScopedListWarningDataItem
          where
-        toJSON VPNTunnelsScopedListWarningDataItem{..}
+        toJSON VPNTunnelsScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _vtslwdiValue,
                   ("key" .=) <$> _vtslwdiKey])
 
+-- | Contains a list of Subnetwork resources.
+--
+-- /See:/ 'subnetworkList' smart constructor.
+data SubnetworkList = SubnetworkList'
+    { _slNextPageToken :: !(Maybe Text)
+    , _slKind          :: !Text
+    , _slItems         :: !(Maybe [Subnetwork])
+    , _slSelfLink      :: !(Maybe Text)
+    , _slId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworkList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slNextPageToken'
+--
+-- * 'slKind'
+--
+-- * 'slItems'
+--
+-- * 'slSelfLink'
+--
+-- * 'slId'
+subnetworkList
+    :: SubnetworkList
+subnetworkList =
+    SubnetworkList'
+    { _slNextPageToken = Nothing
+    , _slKind = "compute#subnetworkList"
+    , _slItems = Nothing
+    , _slSelfLink = Nothing
+    , _slId = Nothing
+    }
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+slNextPageToken :: Lens' SubnetworkList (Maybe Text)
+slNextPageToken
+  = lens _slNextPageToken
+      (\ s a -> s{_slNextPageToken = a})
+
+-- | [Output Only] Type of resource. Always compute#subnetworkList for lists
+-- of subnetworks.
+slKind :: Lens' SubnetworkList Text
+slKind = lens _slKind (\ s a -> s{_slKind = a})
+
+-- | The Subnetwork resources.
+slItems :: Lens' SubnetworkList [Subnetwork]
+slItems
+  = lens _slItems (\ s a -> s{_slItems = a}) . _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for this resource.
+slSelfLink :: Lens' SubnetworkList (Maybe Text)
+slSelfLink
+  = lens _slSelfLink (\ s a -> s{_slSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+slId :: Lens' SubnetworkList (Maybe Text)
+slId = lens _slId (\ s a -> s{_slId = a})
+
+instance FromJSON SubnetworkList where
+        parseJSON
+          = withObject "SubnetworkList"
+              (\ o ->
+                 SubnetworkList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#subnetworkList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON SubnetworkList where
+        toJSON SubnetworkList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _slNextPageToken,
+                  Just ("kind" .= _slKind), ("items" .=) <$> _slItems,
+                  ("selfLink" .=) <$> _slSelfLink,
+                  ("id" .=) <$> _slId])
+
 -- | Informational warning which replaces the list of forwarding rules when
 -- the list is empty.
 --
 -- /See:/ 'forwardingRulesScopedListWarning' smart constructor.
-data ForwardingRulesScopedListWarning = ForwardingRulesScopedListWarning
+data ForwardingRulesScopedListWarning = ForwardingRulesScopedListWarning'
     { _frslwData    :: !(Maybe [ForwardingRulesScopedListWarningDataItem])
     , _frslwCode    :: !(Maybe ForwardingRulesScopedListWarningCode)
     , _frslwMessage :: !(Maybe Text)
@@ -12587,25 +13561,28 @@ data ForwardingRulesScopedListWarning = ForwardingRulesScopedListWarning
 forwardingRulesScopedListWarning
     :: ForwardingRulesScopedListWarning
 forwardingRulesScopedListWarning =
-    ForwardingRulesScopedListWarning
+    ForwardingRulesScopedListWarning'
     { _frslwData = Nothing
     , _frslwCode = Nothing
     , _frslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 frslwData :: Lens' ForwardingRulesScopedListWarning [ForwardingRulesScopedListWarningDataItem]
 frslwData
   = lens _frslwData (\ s a -> s{_frslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 frslwCode :: Lens' ForwardingRulesScopedListWarning (Maybe ForwardingRulesScopedListWarningCode)
 frslwCode
   = lens _frslwCode (\ s a -> s{_frslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 frslwMessage :: Lens' ForwardingRulesScopedListWarning (Maybe Text)
 frslwMessage
   = lens _frslwMessage (\ s a -> s{_frslwMessage = a})
@@ -12615,13 +13592,13 @@ instance FromJSON ForwardingRulesScopedListWarning
         parseJSON
           = withObject "ForwardingRulesScopedListWarning"
               (\ o ->
-                 ForwardingRulesScopedListWarning <$>
+                 ForwardingRulesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON ForwardingRulesScopedListWarning
          where
-        toJSON ForwardingRulesScopedListWarning{..}
+        toJSON ForwardingRulesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _frslwData,
@@ -12631,7 +13608,7 @@ instance ToJSON ForwardingRulesScopedListWarning
 -- | Contains a list of HttpHealthCheck resources.
 --
 -- /See:/ 'hTTPHealthCheckList' smart constructor.
-data HTTPHealthCheckList = HTTPHealthCheckList
+data HTTPHealthCheckList = HTTPHealthCheckList'
     { _httphclNextPageToken :: !(Maybe Text)
     , _httphclKind          :: !Text
     , _httphclItems         :: !(Maybe [HTTPHealthCheck])
@@ -12655,7 +13632,7 @@ data HTTPHealthCheckList = HTTPHealthCheckList
 hTTPHealthCheckList
     :: HTTPHealthCheckList
 hTTPHealthCheckList =
-    HTTPHealthCheckList
+    HTTPHealthCheckList'
     { _httphclNextPageToken = Nothing
     , _httphclKind = "compute#httpHealthCheckList"
     , _httphclItems = Nothing
@@ -12663,7 +13640,11 @@ hTTPHealthCheckList =
     , _httphclId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 httphclNextPageToken :: Lens' HTTPHealthCheckList (Maybe Text)
 httphclNextPageToken
   = lens _httphclNextPageToken
@@ -12696,7 +13677,7 @@ instance FromJSON HTTPHealthCheckList where
         parseJSON
           = withObject "HTTPHealthCheckList"
               (\ o ->
-                 HTTPHealthCheckList <$>
+                 HTTPHealthCheckList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#httpHealthCheckList")
                      <*> (o .:? "items" .!= mempty)
@@ -12704,7 +13685,7 @@ instance FromJSON HTTPHealthCheckList where
                      <*> (o .:? "id"))
 
 instance ToJSON HTTPHealthCheckList where
-        toJSON HTTPHealthCheckList{..}
+        toJSON HTTPHealthCheckList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _httphclNextPageToken,
@@ -12717,7 +13698,7 @@ instance ToJSON HTTPHealthCheckList where
 -- groups when the list is empty.
 --
 -- /See:/ 'instanceGroupManagersScopedListWarning' smart constructor.
-data InstanceGroupManagersScopedListWarning = InstanceGroupManagersScopedListWarning
+data InstanceGroupManagersScopedListWarning = InstanceGroupManagersScopedListWarning'
     { _igmslwData    :: !(Maybe [InstanceGroupManagersScopedListWarningDataItem])
     , _igmslwCode    :: !(Maybe InstanceGroupManagersScopedListWarningCode)
     , _igmslwMessage :: !(Maybe Text)
@@ -12735,25 +13716,28 @@ data InstanceGroupManagersScopedListWarning = InstanceGroupManagersScopedListWar
 instanceGroupManagersScopedListWarning
     :: InstanceGroupManagersScopedListWarning
 instanceGroupManagersScopedListWarning =
-    InstanceGroupManagersScopedListWarning
+    InstanceGroupManagersScopedListWarning'
     { _igmslwData = Nothing
     , _igmslwCode = Nothing
     , _igmslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 igmslwData :: Lens' InstanceGroupManagersScopedListWarning [InstanceGroupManagersScopedListWarningDataItem]
 igmslwData
   = lens _igmslwData (\ s a -> s{_igmslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 igmslwCode :: Lens' InstanceGroupManagersScopedListWarning (Maybe InstanceGroupManagersScopedListWarningCode)
 igmslwCode
   = lens _igmslwCode (\ s a -> s{_igmslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 igmslwMessage :: Lens' InstanceGroupManagersScopedListWarning (Maybe Text)
 igmslwMessage
   = lens _igmslwMessage
@@ -12764,13 +13748,13 @@ instance FromJSON
         parseJSON
           = withObject "InstanceGroupManagersScopedListWarning"
               (\ o ->
-                 InstanceGroupManagersScopedListWarning <$>
+                 InstanceGroupManagersScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON
          InstanceGroupManagersScopedListWarning where
-        toJSON InstanceGroupManagersScopedListWarning{..}
+        toJSON InstanceGroupManagersScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _igmslwData,
@@ -12779,7 +13763,7 @@ instance ToJSON
 
 --
 -- /See:/ 'urlMapsValidateRequest' smart constructor.
-newtype URLMapsValidateRequest = URLMapsValidateRequest
+newtype URLMapsValidateRequest = URLMapsValidateRequest'
     { _umvrResource :: Maybe URLMap
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -12791,7 +13775,7 @@ newtype URLMapsValidateRequest = URLMapsValidateRequest
 urlMapsValidateRequest
     :: URLMapsValidateRequest
 urlMapsValidateRequest =
-    URLMapsValidateRequest
+    URLMapsValidateRequest'
     { _umvrResource = Nothing
     }
 
@@ -12804,17 +13788,17 @@ instance FromJSON URLMapsValidateRequest where
         parseJSON
           = withObject "URLMapsValidateRequest"
               (\ o ->
-                 URLMapsValidateRequest <$> (o .:? "resource"))
+                 URLMapsValidateRequest' <$> (o .:? "resource"))
 
 instance ToJSON URLMapsValidateRequest where
-        toJSON URLMapsValidateRequest{..}
+        toJSON URLMapsValidateRequest'{..}
           = object
               (catMaybes [("resource" .=) <$> _umvrResource])
 
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
-data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest
-    { _igmstprFingerprint :: !(Maybe (Textual Word8))
+data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest'
+    { _igmstprFingerprint :: !(Maybe Base64)
     , _igmstprTargetPools :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -12828,7 +13812,7 @@ data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTarget
 instanceGroupManagersSetTargetPoolsRequest
     :: InstanceGroupManagersSetTargetPoolsRequest
 instanceGroupManagersSetTargetPoolsRequest =
-    InstanceGroupManagersSetTargetPoolsRequest
+    InstanceGroupManagersSetTargetPoolsRequest'
     { _igmstprFingerprint = Nothing
     , _igmstprTargetPools = Nothing
     }
@@ -12839,11 +13823,11 @@ instanceGroupManagersSetTargetPoolsRequest =
 -- instanceGroupManagers.get method. Then, include the fingerprint in your
 -- request to ensure that you do not overwrite changes that were applied
 -- from another concurrent request.
-igmstprFingerprint :: Lens' InstanceGroupManagersSetTargetPoolsRequest (Maybe Word8)
+igmstprFingerprint :: Lens' InstanceGroupManagersSetTargetPoolsRequest (Maybe ByteString)
 igmstprFingerprint
   = lens _igmstprFingerprint
       (\ s a -> s{_igmstprFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The list of target pool URLs that instances in this managed instance
 -- group belong to. The managed instance group applies these target pools
@@ -12862,13 +13846,14 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersSetTargetPoolsRequest"
               (\ o ->
-                 InstanceGroupManagersSetTargetPoolsRequest <$>
+                 InstanceGroupManagersSetTargetPoolsRequest' <$>
                    (o .:? "fingerprint") <*>
                      (o .:? "targetPools" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersSetTargetPoolsRequest where
-        toJSON InstanceGroupManagersSetTargetPoolsRequest{..}
+        toJSON
+          InstanceGroupManagersSetTargetPoolsRequest'{..}
           = object
               (catMaybes
                  [("fingerprint" .=) <$> _igmstprFingerprint,
@@ -12877,7 +13862,7 @@ instance ToJSON
 -- | Contains a list of HttpsHealthCheck resources.
 --
 -- /See:/ 'httpsHealthCheckList' smart constructor.
-data HTTPSHealthCheckList = HTTPSHealthCheckList
+data HTTPSHealthCheckList = HTTPSHealthCheckList'
     { _hhclNextPageToken :: !(Maybe Text)
     , _hhclKind          :: !Text
     , _hhclItems         :: !(Maybe [HTTPSHealthCheck])
@@ -12901,7 +13886,7 @@ data HTTPSHealthCheckList = HTTPSHealthCheckList
 httpsHealthCheckList
     :: HTTPSHealthCheckList
 httpsHealthCheckList =
-    HTTPSHealthCheckList
+    HTTPSHealthCheckList'
     { _hhclNextPageToken = Nothing
     , _hhclKind = "compute#httpsHealthCheckList"
     , _hhclItems = Nothing
@@ -12909,7 +13894,11 @@ httpsHealthCheckList =
     , _hhclId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 hhclNextPageToken :: Lens' HTTPSHealthCheckList (Maybe Text)
 hhclNextPageToken
   = lens _hhclNextPageToken
@@ -12939,7 +13928,7 @@ instance FromJSON HTTPSHealthCheckList where
         parseJSON
           = withObject "HTTPSHealthCheckList"
               (\ o ->
-                 HTTPSHealthCheckList <$>
+                 HTTPSHealthCheckList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#httpsHealthCheckList")
                      <*> (o .:? "items" .!= mempty)
@@ -12947,7 +13936,7 @@ instance FromJSON HTTPSHealthCheckList where
                      <*> (o .:? "id"))
 
 instance ToJSON HTTPSHealthCheckList where
-        toJSON HTTPSHealthCheckList{..}
+        toJSON HTTPSHealthCheckList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _hhclNextPageToken,
@@ -12958,7 +13947,7 @@ instance ToJSON HTTPSHealthCheckList where
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem
+data OperationErrorErrorsItem = OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
@@ -12976,13 +13965,13 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem
+    OperationErrorErrorsItem'
     { _oeeiLocation = Nothing
     , _oeeiCode = Nothing
     , _oeeiMessage = Nothing
     }
 
--- | [Output Only] Indicates the field in the request which caused the error.
+-- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
 oeeiLocation :: Lens' OperationErrorErrorsItem (Maybe Text)
 oeeiLocation
@@ -13001,12 +13990,12 @@ instance FromJSON OperationErrorErrorsItem where
         parseJSON
           = withObject "OperationErrorErrorsItem"
               (\ o ->
-                 OperationErrorErrorsItem <$>
+                 OperationErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationErrorErrorsItem where
-        toJSON OperationErrorErrorsItem{..}
+        toJSON OperationErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _oeeiLocation,
@@ -13016,7 +14005,7 @@ instance ToJSON OperationErrorErrorsItem where
 -- | A license resource.
 --
 -- /See:/ 'license' smart constructor.
-data License = License
+data License = License'
     { _lChargesUseFee :: !(Maybe Bool)
     , _lKind          :: !Text
     , _lSelfLink      :: !(Maybe Text)
@@ -13037,15 +14026,15 @@ data License = License
 license
     :: License
 license =
-    License
+    License'
     { _lChargesUseFee = Nothing
     , _lKind = "compute#license"
     , _lSelfLink = Nothing
     , _lName = Nothing
     }
 
--- | If true, the customer will be charged license fee for running software
--- that contains this license on an instance.
+-- | [Output Only] If true, the customer will be charged license fee for
+-- running software that contains this license on an instance.
 lChargesUseFee :: Lens' License (Maybe Bool)
 lChargesUseFee
   = lens _lChargesUseFee
@@ -13069,14 +14058,14 @@ instance FromJSON License where
         parseJSON
           = withObject "License"
               (\ o ->
-                 License <$>
+                 License' <$>
                    (o .:? "chargesUseFee") <*>
                      (o .:? "kind" .!= "compute#license")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name"))
 
 instance ToJSON License where
-        toJSON License{..}
+        toJSON License'{..}
           = object
               (catMaybes
                  [("chargesUseFee" .=) <$> _lChargesUseFee,
@@ -13088,7 +14077,7 @@ instance ToJSON License where
 -- BackendService to handle the traffic arriving at this URL.
 --
 -- /See:/ 'pathRule' smart constructor.
-data PathRule = PathRule
+data PathRule = PathRule'
     { _prService :: !(Maybe Text)
     , _prPaths   :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13103,7 +14092,7 @@ data PathRule = PathRule
 pathRule
     :: PathRule
 pathRule =
-    PathRule
+    PathRule'
     { _prService = Nothing
     , _prPaths = Nothing
     }
@@ -13126,20 +14115,20 @@ instance FromJSON PathRule where
         parseJSON
           = withObject "PathRule"
               (\ o ->
-                 PathRule <$>
+                 PathRule' <$>
                    (o .:? "service") <*> (o .:? "paths" .!= mempty))
 
 instance ToJSON PathRule where
-        toJSON PathRule{..}
+        toJSON PathRule'{..}
           = object
               (catMaybes
                  [("service" .=) <$> _prService,
                   ("paths" .=) <$> _prPaths])
 
--- | Contains a list of instance resources.
+-- | Contains a list of instances.
 --
 -- /See:/ 'instanceList' smart constructor.
-data InstanceList = InstanceList
+data InstanceList = InstanceList'
     { _insNextPageToken :: !(Maybe Text)
     , _insKind          :: !Text
     , _insItems         :: !(Maybe [Instance])
@@ -13163,7 +14152,7 @@ data InstanceList = InstanceList
 instanceList
     :: InstanceList
 instanceList =
-    InstanceList
+    InstanceList'
     { _insNextPageToken = Nothing
     , _insKind = "compute#instanceList"
     , _insItems = Nothing
@@ -13171,7 +14160,11 @@ instanceList =
     , _insId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 insNextPageToken :: Lens' InstanceList (Maybe Text)
 insNextPageToken
   = lens _insNextPageToken
@@ -13182,19 +14175,20 @@ insNextPageToken
 insKind :: Lens' InstanceList Text
 insKind = lens _insKind (\ s a -> s{_insKind = a})
 
--- | [Output Only] A list of Instance resources.
+-- | [Output Only] A list of instances.
 insItems :: Lens' InstanceList [Instance]
 insItems
   = lens _insItems (\ s a -> s{_insItems = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] Server defined URL for this resource.
+-- | [Output Only] Server-defined URL for this resource.
 insSelfLink :: Lens' InstanceList (Maybe Text)
 insSelfLink
   = lens _insSelfLink (\ s a -> s{_insSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 insId :: Lens' InstanceList (Maybe Text)
 insId = lens _insId (\ s a -> s{_insId = a})
 
@@ -13202,7 +14196,7 @@ instance FromJSON InstanceList where
         parseJSON
           = withObject "InstanceList"
               (\ o ->
-                 InstanceList <$>
+                 InstanceList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#instanceList")
                      <*> (o .:? "items" .!= mempty)
@@ -13210,7 +14204,7 @@ instance FromJSON InstanceList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceList where
-        toJSON InstanceList{..}
+        toJSON InstanceList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _insNextPageToken,
@@ -13219,9 +14213,46 @@ instance ToJSON InstanceList where
                   ("selfLink" .=) <$> _insSelfLink,
                   ("id" .=) <$> _insId])
 
+-- | [Output] A map of scoped Subnetwork lists.
+--
+-- /See:/ 'subnetworkAggregatedListItems' smart constructor.
+newtype SubnetworkAggregatedListItems = SubnetworkAggregatedListItems'
+    { _saliAddtional :: HashMap Text SubnetworksScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworkAggregatedListItems' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'saliAddtional'
+subnetworkAggregatedListItems
+    :: HashMap Text SubnetworksScopedList -- ^ 'saliAddtional'
+    -> SubnetworkAggregatedListItems
+subnetworkAggregatedListItems pSaliAddtional_ =
+    SubnetworkAggregatedListItems'
+    { _saliAddtional = _Coerce # pSaliAddtional_
+    }
+
+-- | Name of the scope containing this set of Subnetworks.
+saliAddtional :: Lens' SubnetworkAggregatedListItems (HashMap Text SubnetworksScopedList)
+saliAddtional
+  = lens _saliAddtional
+      (\ s a -> s{_saliAddtional = a})
+      . _Coerce
+
+instance FromJSON SubnetworkAggregatedListItems where
+        parseJSON
+          = withObject "SubnetworkAggregatedListItems"
+              (\ o ->
+                 SubnetworkAggregatedListItems' <$>
+                   (parseJSONObject o))
+
+instance ToJSON SubnetworkAggregatedListItems where
+        toJSON = toJSON . _saliAddtional
+
 --
 -- /See:/ 'managedInstanceLastAttempt' smart constructor.
-newtype ManagedInstanceLastAttempt = ManagedInstanceLastAttempt
+newtype ManagedInstanceLastAttempt = ManagedInstanceLastAttempt'
     { _milaErrors :: Maybe ManagedInstanceLastAttemptErrors
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -13233,7 +14264,7 @@ newtype ManagedInstanceLastAttempt = ManagedInstanceLastAttempt
 managedInstanceLastAttempt
     :: ManagedInstanceLastAttempt
 managedInstanceLastAttempt =
-    ManagedInstanceLastAttempt
+    ManagedInstanceLastAttempt'
     { _milaErrors = Nothing
     }
 
@@ -13247,16 +14278,16 @@ instance FromJSON ManagedInstanceLastAttempt where
         parseJSON
           = withObject "ManagedInstanceLastAttempt"
               (\ o ->
-                 ManagedInstanceLastAttempt <$> (o .:? "errors"))
+                 ManagedInstanceLastAttempt' <$> (o .:? "errors"))
 
 instance ToJSON ManagedInstanceLastAttempt where
-        toJSON ManagedInstanceLastAttempt{..}
+        toJSON ManagedInstanceLastAttempt'{..}
           = object (catMaybes [("errors" .=) <$> _milaErrors])
 
 -- | Contains a list of BackendService resources.
 --
 -- /See:/ 'backendServiceList' smart constructor.
-data BackendServiceList = BackendServiceList
+data BackendServiceList = BackendServiceList'
     { _bslNextPageToken :: !(Maybe Text)
     , _bslKind          :: !Text
     , _bslItems         :: !(Maybe [BackendService])
@@ -13280,7 +14311,7 @@ data BackendServiceList = BackendServiceList
 backendServiceList
     :: BackendServiceList
 backendServiceList =
-    BackendServiceList
+    BackendServiceList'
     { _bslNextPageToken = Nothing
     , _bslKind = "compute#backendServiceList"
     , _bslItems = Nothing
@@ -13288,7 +14319,11 @@ backendServiceList =
     , _bslId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 bslNextPageToken :: Lens' BackendServiceList (Maybe Text)
 bslNextPageToken
   = lens _bslNextPageToken
@@ -13311,7 +14346,8 @@ bslSelfLink :: Lens' BackendServiceList (Maybe Text)
 bslSelfLink
   = lens _bslSelfLink (\ s a -> s{_bslSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 bslId :: Lens' BackendServiceList (Maybe Text)
 bslId = lens _bslId (\ s a -> s{_bslId = a})
 
@@ -13319,7 +14355,7 @@ instance FromJSON BackendServiceList where
         parseJSON
           = withObject "BackendServiceList"
               (\ o ->
-                 BackendServiceList <$>
+                 BackendServiceList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#backendServiceList")
                      <*> (o .:? "items" .!= mempty)
@@ -13327,7 +14363,7 @@ instance FromJSON BackendServiceList where
                      <*> (o .:? "id"))
 
 instance ToJSON BackendServiceList where
-        toJSON BackendServiceList{..}
+        toJSON BackendServiceList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _bslNextPageToken,
@@ -13340,7 +14376,7 @@ instance ToJSON BackendServiceList where
 -- instance groups when the list is empty.
 --
 -- /See:/ 'instanceGroupsScopedListWarning' smart constructor.
-data InstanceGroupsScopedListWarning = InstanceGroupsScopedListWarning
+data InstanceGroupsScopedListWarning = InstanceGroupsScopedListWarning'
     { _igslwData    :: !(Maybe [InstanceGroupsScopedListWarningDataItem])
     , _igslwCode    :: !(Maybe InstanceGroupsScopedListWarningCode)
     , _igslwMessage :: !(Maybe Text)
@@ -13358,25 +14394,28 @@ data InstanceGroupsScopedListWarning = InstanceGroupsScopedListWarning
 instanceGroupsScopedListWarning
     :: InstanceGroupsScopedListWarning
 instanceGroupsScopedListWarning =
-    InstanceGroupsScopedListWarning
+    InstanceGroupsScopedListWarning'
     { _igslwData = Nothing
     , _igslwCode = Nothing
     , _igslwMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 igslwData :: Lens' InstanceGroupsScopedListWarning [InstanceGroupsScopedListWarningDataItem]
 igslwData
   = lens _igslwData (\ s a -> s{_igslwData = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 igslwCode :: Lens' InstanceGroupsScopedListWarning (Maybe InstanceGroupsScopedListWarningCode)
 igslwCode
   = lens _igslwCode (\ s a -> s{_igslwCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 igslwMessage :: Lens' InstanceGroupsScopedListWarning (Maybe Text)
 igslwMessage
   = lens _igslwMessage (\ s a -> s{_igslwMessage = a})
@@ -13386,12 +14425,12 @@ instance FromJSON InstanceGroupsScopedListWarning
         parseJSON
           = withObject "InstanceGroupsScopedListWarning"
               (\ o ->
-                 InstanceGroupsScopedListWarning <$>
+                 InstanceGroupsScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON InstanceGroupsScopedListWarning where
-        toJSON InstanceGroupsScopedListWarning{..}
+        toJSON InstanceGroupsScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _igslwData,
@@ -13401,7 +14440,7 @@ instance ToJSON InstanceGroupsScopedListWarning where
 -- | CPU utilization policy.
 --
 -- /See:/ 'autoscalingPolicyCPUUtilization' smart constructor.
-newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization
+newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization'
     { _apcuUtilizationTarget :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -13413,14 +14452,19 @@ newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization
 autoscalingPolicyCPUUtilization
     :: AutoscalingPolicyCPUUtilization
 autoscalingPolicyCPUUtilization =
-    AutoscalingPolicyCPUUtilization
+    AutoscalingPolicyCPUUtilization'
     { _apcuUtilizationTarget = Nothing
     }
 
--- | The target utilization that the Autoscaler should maintain. It is
--- represented as a fraction of used cores. For example: 6 cores used in
--- 8-core VM are represented here as 0.75. Must be a float value between
--- (0, 1]. If not defined, the default is 0.8.
+-- | The target CPU utilization that the autoscaler should maintain. Must be
+-- a float value in the range (0, 1]. If not specified, the default is 0.8.
+-- If the CPU level is below the target utilization, the autoscaler scales
+-- down the number of instances until it reaches the minimum number of
+-- instances you specified or until the average CPU of your instances
+-- reaches the target utilization. If the average CPU is above the target
+-- utilization, the autoscaler scales up until it reaches the maximum
+-- number of instances you specified or until the average utilization
+-- reaches the target utilization.
 apcuUtilizationTarget :: Lens' AutoscalingPolicyCPUUtilization (Maybe Double)
 apcuUtilizationTarget
   = lens _apcuUtilizationTarget
@@ -13432,11 +14476,11 @@ instance FromJSON AutoscalingPolicyCPUUtilization
         parseJSON
           = withObject "AutoscalingPolicyCPUUtilization"
               (\ o ->
-                 AutoscalingPolicyCPUUtilization <$>
+                 AutoscalingPolicyCPUUtilization' <$>
                    (o .:? "utilizationTarget"))
 
 instance ToJSON AutoscalingPolicyCPUUtilization where
-        toJSON AutoscalingPolicyCPUUtilization{..}
+        toJSON AutoscalingPolicyCPUUtilization'{..}
           = object
               (catMaybes
                  [("utilizationTarget" .=) <$>
@@ -13444,7 +14488,7 @@ instance ToJSON AutoscalingPolicyCPUUtilization where
 
 --
 -- /See:/ 'instanceGroupsScopedListWarningDataItem' smart constructor.
-data InstanceGroupsScopedListWarningDataItem = InstanceGroupsScopedListWarningDataItem
+data InstanceGroupsScopedListWarningDataItem = InstanceGroupsScopedListWarningDataItem'
     { _igslwdiValue :: !(Maybe Text)
     , _igslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13459,7 +14503,7 @@ data InstanceGroupsScopedListWarningDataItem = InstanceGroupsScopedListWarningDa
 instanceGroupsScopedListWarningDataItem
     :: InstanceGroupsScopedListWarningDataItem
 instanceGroupsScopedListWarningDataItem =
-    InstanceGroupsScopedListWarningDataItem
+    InstanceGroupsScopedListWarningDataItem'
     { _igslwdiValue = Nothing
     , _igslwdiKey = Nothing
     }
@@ -13469,7 +14513,13 @@ igslwdiValue :: Lens' InstanceGroupsScopedListWarningDataItem (Maybe Text)
 igslwdiValue
   = lens _igslwdiValue (\ s a -> s{_igslwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 igslwdiKey :: Lens' InstanceGroupsScopedListWarningDataItem (Maybe Text)
 igslwdiKey
   = lens _igslwdiKey (\ s a -> s{_igslwdiKey = a})
@@ -13480,12 +14530,12 @@ instance FromJSON
           = withObject
               "InstanceGroupsScopedListWarningDataItem"
               (\ o ->
-                 InstanceGroupsScopedListWarningDataItem <$>
+                 InstanceGroupsScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
          InstanceGroupsScopedListWarningDataItem where
-        toJSON InstanceGroupsScopedListWarningDataItem{..}
+        toJSON InstanceGroupsScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _igslwdiValue,
@@ -13493,7 +14543,7 @@ instance ToJSON
 
 --
 -- /See:/ 'resourceGroupReference' smart constructor.
-newtype ResourceGroupReference = ResourceGroupReference
+newtype ResourceGroupReference = ResourceGroupReference'
     { _rgrGroup :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -13505,7 +14555,7 @@ newtype ResourceGroupReference = ResourceGroupReference
 resourceGroupReference
     :: ResourceGroupReference
 resourceGroupReference =
-    ResourceGroupReference
+    ResourceGroupReference'
     { _rgrGroup = Nothing
     }
 
@@ -13517,16 +14567,16 @@ rgrGroup = lens _rgrGroup (\ s a -> s{_rgrGroup = a})
 instance FromJSON ResourceGroupReference where
         parseJSON
           = withObject "ResourceGroupReference"
-              (\ o -> ResourceGroupReference <$> (o .:? "group"))
+              (\ o -> ResourceGroupReference' <$> (o .:? "group"))
 
 instance ToJSON ResourceGroupReference where
-        toJSON ResourceGroupReference{..}
+        toJSON ResourceGroupReference'{..}
           = object (catMaybes [("group" .=) <$> _rgrGroup])
 
--- | A Firewall resource.
+-- | Represents a Firewall resource.
 --
 -- /See:/ 'firewall' smart constructor.
-data Firewall = Firewall
+data Firewall = Firewall'
     { _fSourceTags        :: !(Maybe [Text])
     , _fKind              :: !Text
     , _fTargetTags        :: !(Maybe [Text])
@@ -13568,7 +14618,7 @@ data Firewall = Firewall
 firewall
     :: Firewall
 firewall =
-    Firewall
+    Firewall'
     { _fSourceTags = Nothing
     , _fKind = "compute#firewall"
     , _fTargetTags = Nothing
@@ -13586,7 +14636,11 @@ firewall =
 -- sourceRanges and sourceTags may be set. If both properties are set, an
 -- inbound connection is allowed if the range matches the sourceRanges OR
 -- the tag of the source matches the sourceTags property. The connection
--- does not need to match both properties.
+-- does not need to match both properties. Source tags cannot be used to
+-- allow access to an instance\'s external IP address. Because tags are
+-- associated with an instance, not an IP address, source tags can only be
+-- used to control traffic traveling from an instance inside the same
+-- network as the firewall.
 fSourceTags :: Lens' Firewall [Text]
 fSourceTags
   = lens _fSourceTags (\ s a -> s{_fSourceTags = a}) .
@@ -13608,12 +14662,11 @@ fTargetTags
       _Default
       . _Coerce
 
--- | URL of the network resource for this firewall rule. This field is
--- required for creating an instance but optional when creating a firewall
--- rule. If not specified when creating a firewall rule, the default
--- network is used: global\/networks\/default If you choose to specify this
--- property, you can specify the network as a full or partial URL. For
--- example, the following are all valid URLs: -
+-- | URL of the network resource for this firewall rule. If not specified
+-- when creating a firewall rule, the default network is used:
+-- global\/networks\/default If you choose to specify this property, you
+-- can specify the network as a full or partial URL. For example, the
+-- following are all valid URLs: -
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/myproject\/global\/networks\/my-network
 -- - projects\/myproject\/global\/networks\/my-network -
 -- global\/networks\/default
@@ -13653,7 +14706,8 @@ fCreationTimestamp
   = lens _fCreationTimestamp
       (\ s a -> s{_fCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 fId :: Lens' Firewall (Maybe Word64)
 fId
   = lens _fId (\ s a -> s{_fId = a}) . mapping _Coerce
@@ -13666,8 +14720,8 @@ fAllowed
       _Default
       . _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 fDescription :: Lens' Firewall (Maybe Text)
 fDescription
   = lens _fDescription (\ s a -> s{_fDescription = a})
@@ -13676,7 +14730,7 @@ instance FromJSON Firewall where
         parseJSON
           = withObject "Firewall"
               (\ o ->
-                 Firewall <$>
+                 Firewall' <$>
                    (o .:? "sourceTags" .!= mempty) <*>
                      (o .:? "kind" .!= "compute#firewall")
                      <*> (o .:? "targetTags" .!= mempty)
@@ -13690,7 +14744,7 @@ instance FromJSON Firewall where
                      <*> (o .:? "description"))
 
 instance ToJSON Firewall where
-        toJSON Firewall{..}
+        toJSON Firewall'{..}
           = object
               (catMaybes
                  [("sourceTags" .=) <$> _fSourceTags,
@@ -13708,7 +14762,7 @@ instance ToJSON Firewall where
 -- PathMatcher to select the BackendService.
 --
 -- /See:/ 'hostRule' smart constructor.
-data HostRule = HostRule
+data HostRule = HostRule'
     { _hrHosts       :: !(Maybe [Text])
     , _hrDescription :: !(Maybe Text)
     , _hrPathMatcher :: !(Maybe Text)
@@ -13726,7 +14780,7 @@ data HostRule = HostRule
 hostRule
     :: HostRule
 hostRule =
-    HostRule
+    HostRule'
     { _hrHosts = Nothing
     , _hrDescription = Nothing
     , _hrPathMatcher = Nothing
@@ -13740,7 +14794,8 @@ hrHosts
   = lens _hrHosts (\ s a -> s{_hrHosts = a}) . _Default
       . _Coerce
 
--- | An optional textual description.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 hrDescription :: Lens' HostRule (Maybe Text)
 hrDescription
   = lens _hrDescription
@@ -13757,12 +14812,12 @@ instance FromJSON HostRule where
         parseJSON
           = withObject "HostRule"
               (\ o ->
-                 HostRule <$>
+                 HostRule' <$>
                    (o .:? "hosts" .!= mempty) <*> (o .:? "description")
                      <*> (o .:? "pathMatcher"))
 
 instance ToJSON HostRule where
-        toJSON HostRule{..}
+        toJSON HostRule'{..}
           = object
               (catMaybes
                  [("hosts" .=) <$> _hrHosts,
@@ -13772,7 +14827,7 @@ instance ToJSON HostRule where
 -- | A quotas entry.
 --
 -- /See:/ 'quota' smart constructor.
-data Quota = Quota
+data Quota = Quota'
     { _qMetric :: !(Maybe QuotaMetric)
     , _qLimit  :: !(Maybe (Textual Double))
     , _qUsage  :: !(Maybe (Textual Double))
@@ -13790,7 +14845,7 @@ data Quota = Quota
 quota
     :: Quota
 quota =
-    Quota
+    Quota'
     { _qMetric = Nothing
     , _qLimit = Nothing
     , _qUsage = Nothing
@@ -13816,12 +14871,12 @@ instance FromJSON Quota where
         parseJSON
           = withObject "Quota"
               (\ o ->
-                 Quota <$>
+                 Quota' <$>
                    (o .:? "metric") <*> (o .:? "limit") <*>
                      (o .:? "usage"))
 
 instance ToJSON Quota where
-        toJSON Quota{..}
+        toJSON Quota'{..}
           = object
               (catMaybes
                  [("metric" .=) <$> _qMetric,
@@ -13829,15 +14884,16 @@ instance ToJSON Quota where
 
 --
 -- /See:/ 'instanceGroup' smart constructor.
-data InstanceGroup = InstanceGroup
+data InstanceGroup = InstanceGroup'
     { _iiSize              :: !(Maybe (Textual Int32))
     , _iiKind              :: !Text
-    , _iiFingerprint       :: !(Maybe (Textual Word8))
+    , _iiFingerprint       :: !(Maybe Base64)
     , _iiNetwork           :: !(Maybe Text)
     , _iiZone              :: !(Maybe Text)
     , _iiSelfLink          :: !(Maybe Text)
     , _iiName              :: !(Maybe Text)
     , _iiCreationTimestamp :: !(Maybe Text)
+    , _iiSubnetwork        :: !(Maybe Text)
     , _iiId                :: !(Maybe (Textual Word64))
     , _iiDescription       :: !(Maybe Text)
     , _iiNamedPorts        :: !(Maybe [NamedPort])
@@ -13863,6 +14919,8 @@ data InstanceGroup = InstanceGroup
 --
 -- * 'iiCreationTimestamp'
 --
+-- * 'iiSubnetwork'
+--
 -- * 'iiId'
 --
 -- * 'iiDescription'
@@ -13871,7 +14929,7 @@ data InstanceGroup = InstanceGroup
 instanceGroup
     :: InstanceGroup
 instanceGroup =
-    InstanceGroup
+    InstanceGroup'
     { _iiSize = Nothing
     , _iiKind = "compute#instanceGroup"
     , _iiFingerprint = Nothing
@@ -13880,6 +14938,7 @@ instanceGroup =
     , _iiSelfLink = Nothing
     , _iiName = Nothing
     , _iiCreationTimestamp = Nothing
+    , _iiSubnetwork = Nothing
     , _iiId = Nothing
     , _iiDescription = Nothing
     , _iiNamedPorts = Nothing
@@ -13899,14 +14958,14 @@ iiKind = lens _iiKind (\ s a -> s{_iiKind = a})
 -- | [Output Only] The fingerprint of the named ports. The system uses this
 -- fingerprint to detect conflicts when multiple users change the named
 -- ports concurrently.
-iiFingerprint :: Lens' InstanceGroup (Maybe Word8)
+iiFingerprint :: Lens' InstanceGroup (Maybe ByteString)
 iiFingerprint
   = lens _iiFingerprint
       (\ s a -> s{_iiFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
--- | [Output Only] The URL of the network to which all instances in the
--- instance group belong.
+-- | The URL of the network to which all instances in the instance group
+-- belong.
 iiNetwork :: Lens' InstanceGroup (Maybe Text)
 iiNetwork
   = lens _iiNetwork (\ s a -> s{_iiNetwork = a})
@@ -13933,6 +14992,12 @@ iiCreationTimestamp
   = lens _iiCreationTimestamp
       (\ s a -> s{_iiCreationTimestamp = a})
 
+-- | The URL of the subnetwork to which all instances in the instance group
+-- belong.
+iiSubnetwork :: Lens' InstanceGroup (Maybe Text)
+iiSubnetwork
+  = lens _iiSubnetwork (\ s a -> s{_iiSubnetwork = a})
+
 -- | [Output Only] A unique identifier for this resource type. The server
 -- generates this identifier.
 iiId :: Lens' InstanceGroup (Maybe Word64)
@@ -13940,7 +15005,8 @@ iiId
   = lens _iiId (\ s a -> s{_iiId = a}) .
       mapping _Coerce
 
--- | An optional text description for the instance group.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 iiDescription :: Lens' InstanceGroup (Maybe Text)
 iiDescription
   = lens _iiDescription
@@ -13961,7 +15027,7 @@ instance FromJSON InstanceGroup where
         parseJSON
           = withObject "InstanceGroup"
               (\ o ->
-                 InstanceGroup <$>
+                 InstanceGroup' <$>
                    (o .:? "size") <*>
                      (o .:? "kind" .!= "compute#instanceGroup")
                      <*> (o .:? "fingerprint")
@@ -13970,12 +15036,13 @@ instance FromJSON InstanceGroup where
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "subnetwork")
                      <*> (o .:? "id")
                      <*> (o .:? "description")
                      <*> (o .:? "namedPorts" .!= mempty))
 
 instance ToJSON InstanceGroup where
-        toJSON InstanceGroup{..}
+        toJSON InstanceGroup'{..}
           = object
               (catMaybes
                  [("size" .=) <$> _iiSize, Just ("kind" .= _iiKind),
@@ -13985,6 +15052,7 @@ instance ToJSON InstanceGroup where
                   ("selfLink" .=) <$> _iiSelfLink,
                   ("name" .=) <$> _iiName,
                   ("creationTimestamp" .=) <$> _iiCreationTimestamp,
+                  ("subnetwork" .=) <$> _iiSubnetwork,
                   ("id" .=) <$> _iiId,
                   ("description" .=) <$> _iiDescription,
                   ("namedPorts" .=) <$> _iiNamedPorts])
@@ -13992,68 +15060,74 @@ instance ToJSON InstanceGroup where
 -- | Contains a list of Snapshot resources.
 --
 -- /See:/ 'snapshotList' smart constructor.
-data SnapshotList = SnapshotList
-    { _slNextPageToken :: !(Maybe Text)
-    , _slKind          :: !Text
-    , _slItems         :: !(Maybe [Snapshot])
-    , _slSelfLink      :: !(Maybe Text)
-    , _slId            :: !(Maybe Text)
+data SnapshotList = SnapshotList'
+    { _snaNextPageToken :: !(Maybe Text)
+    , _snaKind          :: !Text
+    , _snaItems         :: !(Maybe [Snapshot])
+    , _snaSelfLink      :: !(Maybe Text)
+    , _snaId            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'slNextPageToken'
+-- * 'snaNextPageToken'
 --
--- * 'slKind'
+-- * 'snaKind'
 --
--- * 'slItems'
+-- * 'snaItems'
 --
--- * 'slSelfLink'
+-- * 'snaSelfLink'
 --
--- * 'slId'
+-- * 'snaId'
 snapshotList
     :: SnapshotList
 snapshotList =
-    SnapshotList
-    { _slNextPageToken = Nothing
-    , _slKind = "compute#snapshotList"
-    , _slItems = Nothing
-    , _slSelfLink = Nothing
-    , _slId = Nothing
+    SnapshotList'
+    { _snaNextPageToken = Nothing
+    , _snaKind = "compute#snapshotList"
+    , _snaItems = Nothing
+    , _snaSelfLink = Nothing
+    , _snaId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
-slNextPageToken :: Lens' SnapshotList (Maybe Text)
-slNextPageToken
-  = lens _slNextPageToken
-      (\ s a -> s{_slNextPageToken = a})
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+snaNextPageToken :: Lens' SnapshotList (Maybe Text)
+snaNextPageToken
+  = lens _snaNextPageToken
+      (\ s a -> s{_snaNextPageToken = a})
 
 -- | Type of resource.
-slKind :: Lens' SnapshotList Text
-slKind = lens _slKind (\ s a -> s{_slKind = a})
+snaKind :: Lens' SnapshotList Text
+snaKind = lens _snaKind (\ s a -> s{_snaKind = a})
 
--- | A list of Snapshot resources.
-slItems :: Lens' SnapshotList [Snapshot]
-slItems
-  = lens _slItems (\ s a -> s{_slItems = a}) . _Default
+-- | [Output Only] A list of Snapshot resources.
+snaItems :: Lens' SnapshotList [Snapshot]
+snaItems
+  = lens _snaItems (\ s a -> s{_snaItems = a}) .
+      _Default
       . _Coerce
 
 -- | [Output Only] Server-defined URL for this resource.
-slSelfLink :: Lens' SnapshotList (Maybe Text)
-slSelfLink
-  = lens _slSelfLink (\ s a -> s{_slSelfLink = a})
+snaSelfLink :: Lens' SnapshotList (Maybe Text)
+snaSelfLink
+  = lens _snaSelfLink (\ s a -> s{_snaSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
-slId :: Lens' SnapshotList (Maybe Text)
-slId = lens _slId (\ s a -> s{_slId = a})
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+snaId :: Lens' SnapshotList (Maybe Text)
+snaId = lens _snaId (\ s a -> s{_snaId = a})
 
 instance FromJSON SnapshotList where
         parseJSON
           = withObject "SnapshotList"
               (\ o ->
-                 SnapshotList <$>
+                 SnapshotList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#snapshotList")
                      <*> (o .:? "items" .!= mempty)
@@ -14061,17 +15135,18 @@ instance FromJSON SnapshotList where
                      <*> (o .:? "id"))
 
 instance ToJSON SnapshotList where
-        toJSON SnapshotList{..}
+        toJSON SnapshotList'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _slNextPageToken,
-                  Just ("kind" .= _slKind), ("items" .=) <$> _slItems,
-                  ("selfLink" .=) <$> _slSelfLink,
-                  ("id" .=) <$> _slId])
+                 [("nextPageToken" .=) <$> _snaNextPageToken,
+                  Just ("kind" .= _snaKind),
+                  ("items" .=) <$> _snaItems,
+                  ("selfLink" .=) <$> _snaSelfLink,
+                  ("id" .=) <$> _snaId])
 
 --
 -- /See:/ 'testFailure' smart constructor.
-data TestFailure = TestFailure
+data TestFailure = TestFailure'
     { _tfPath            :: !(Maybe Text)
     , _tfExpectedService :: !(Maybe Text)
     , _tfHost            :: !(Maybe Text)
@@ -14092,7 +15167,7 @@ data TestFailure = TestFailure
 testFailure
     :: TestFailure
 testFailure =
-    TestFailure
+    TestFailure'
     { _tfPath = Nothing
     , _tfExpectedService = Nothing
     , _tfHost = Nothing
@@ -14119,13 +15194,13 @@ instance FromJSON TestFailure where
         parseJSON
           = withObject "TestFailure"
               (\ o ->
-                 TestFailure <$>
+                 TestFailure' <$>
                    (o .:? "path") <*> (o .:? "expectedService") <*>
                      (o .:? "host")
                      <*> (o .:? "actualService"))
 
 instance ToJSON TestFailure where
-        toJSON TestFailure{..}
+        toJSON TestFailure'{..}
           = object
               (catMaybes
                  [("path" .=) <$> _tfPath,
@@ -14136,7 +15211,7 @@ instance ToJSON TestFailure where
 -- | An instance\'s serial console output.
 --
 -- /See:/ 'serialPortOutput' smart constructor.
-data SerialPortOutput = SerialPortOutput
+data SerialPortOutput = SerialPortOutput'
     { _spoContents :: !(Maybe Text)
     , _spoKind     :: !Text
     , _spoSelfLink :: !(Maybe Text)
@@ -14154,7 +15229,7 @@ data SerialPortOutput = SerialPortOutput
 serialPortOutput
     :: SerialPortOutput
 serialPortOutput =
-    SerialPortOutput
+    SerialPortOutput'
     { _spoContents = Nothing
     , _spoKind = "compute#serialPortOutput"
     , _spoSelfLink = Nothing
@@ -14170,7 +15245,7 @@ spoContents
 spoKind :: Lens' SerialPortOutput Text
 spoKind = lens _spoKind (\ s a -> s{_spoKind = a})
 
--- | [Output Only] Server defined URL for the resource.
+-- | [Output Only] Server-defined URL for the resource.
 spoSelfLink :: Lens' SerialPortOutput (Maybe Text)
 spoSelfLink
   = lens _spoSelfLink (\ s a -> s{_spoSelfLink = a})
@@ -14179,13 +15254,13 @@ instance FromJSON SerialPortOutput where
         parseJSON
           = withObject "SerialPortOutput"
               (\ o ->
-                 SerialPortOutput <$>
+                 SerialPortOutput' <$>
                    (o .:? "contents") <*>
                      (o .:? "kind" .!= "compute#serialPortOutput")
                      <*> (o .:? "selfLink"))
 
 instance ToJSON SerialPortOutput where
-        toJSON SerialPortOutput{..}
+        toJSON SerialPortOutput'{..}
           = object
               (catMaybes
                  [("contents" .=) <$> _spoContents,
@@ -14194,7 +15269,7 @@ instance ToJSON SerialPortOutput where
 
 --
 -- /See:/ 'targetVPNGatewayAggregatedList' smart constructor.
-data TargetVPNGatewayAggregatedList = TargetVPNGatewayAggregatedList
+data TargetVPNGatewayAggregatedList = TargetVPNGatewayAggregatedList'
     { _tvgalNextPageToken :: !(Maybe Text)
     , _tvgalKind          :: !Text
     , _tvgalItems         :: !(Maybe TargetVPNGatewayAggregatedListItems)
@@ -14218,7 +15293,7 @@ data TargetVPNGatewayAggregatedList = TargetVPNGatewayAggregatedList
 targetVPNGatewayAggregatedList
     :: TargetVPNGatewayAggregatedList
 targetVPNGatewayAggregatedList =
-    TargetVPNGatewayAggregatedList
+    TargetVPNGatewayAggregatedList'
     { _tvgalNextPageToken = Nothing
     , _tvgalKind = "compute#targetVpnGatewayAggregatedList"
     , _tvgalItems = Nothing
@@ -14226,7 +15301,11 @@ targetVPNGatewayAggregatedList =
     , _tvgalId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 tvgalNextPageToken :: Lens' TargetVPNGatewayAggregatedList (Maybe Text)
 tvgalNextPageToken
   = lens _tvgalNextPageToken
@@ -14249,7 +15328,8 @@ tvgalSelfLink
   = lens _tvgalSelfLink
       (\ s a -> s{_tvgalSelfLink = a})
 
--- | [Output Only] Unique identifier for the resource. Defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 tvgalId :: Lens' TargetVPNGatewayAggregatedList (Maybe Text)
 tvgalId = lens _tvgalId (\ s a -> s{_tvgalId = a})
 
@@ -14258,7 +15338,7 @@ instance FromJSON TargetVPNGatewayAggregatedList
         parseJSON
           = withObject "TargetVPNGatewayAggregatedList"
               (\ o ->
-                 TargetVPNGatewayAggregatedList <$>
+                 TargetVPNGatewayAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#targetVpnGatewayAggregatedList")
@@ -14267,7 +15347,7 @@ instance FromJSON TargetVPNGatewayAggregatedList
                      <*> (o .:? "id"))
 
 instance ToJSON TargetVPNGatewayAggregatedList where
-        toJSON TargetVPNGatewayAggregatedList{..}
+        toJSON TargetVPNGatewayAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tvgalNextPageToken,
@@ -14278,7 +15358,7 @@ instance ToJSON TargetVPNGatewayAggregatedList where
 
 --
 -- /See:/ 'metadataItemsItem' smart constructor.
-data MetadataItemsItem = MetadataItemsItem
+data MetadataItemsItem = MetadataItemsItem'
     { _miiValue :: !(Maybe Text)
     , _miiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -14293,7 +15373,7 @@ data MetadataItemsItem = MetadataItemsItem
 metadataItemsItem
     :: MetadataItemsItem
 metadataItemsItem =
-    MetadataItemsItem
+    MetadataItemsItem'
     { _miiValue = Nothing
     , _miiKey = Nothing
     }
@@ -14317,11 +15397,11 @@ instance FromJSON MetadataItemsItem where
         parseJSON
           = withObject "MetadataItemsItem"
               (\ o ->
-                 MetadataItemsItem <$>
+                 MetadataItemsItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON MetadataItemsItem where
-        toJSON MetadataItemsItem{..}
+        toJSON MetadataItemsItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _miiValue, ("key" .=) <$> _miiKey])
@@ -14329,7 +15409,7 @@ instance ToJSON MetadataItemsItem where
 -- | A TargetHttpsProxy resource. This resource defines an HTTPS proxy.
 --
 -- /See:/ 'targetHTTPSProxy' smart constructor.
-data TargetHTTPSProxy = TargetHTTPSProxy
+data TargetHTTPSProxy = TargetHTTPSProxy'
     { _thpURLMap            :: !(Maybe Text)
     , _thpSSLCertificates   :: !(Maybe [Text])
     , _thpKind              :: !Text
@@ -14362,7 +15442,7 @@ data TargetHTTPSProxy = TargetHTTPSProxy
 targetHTTPSProxy
     :: TargetHTTPSProxy
 targetHTTPSProxy =
-    TargetHTTPSProxy
+    TargetHTTPSProxy'
     { _thpURLMap = Nothing
     , _thpSSLCertificates = Nothing
     , _thpKind = "compute#targetHttpsProxy"
@@ -14373,15 +15453,18 @@ targetHTTPSProxy =
     , _thpDescription = Nothing
     }
 
--- | URL to the UrlMap resource that defines the mapping from URL to the
--- BackendService.
+-- | A fully-qualified or valid partial URL to the UrlMap resource that
+-- defines the mapping from URL to the BackendService. For example, the
+-- following are all valid URLs for specifying a URL map: -
+-- https:\/\/www.googleapis.compute\/v1\/projects\/project\/global\/urlMaps\/url-map
+-- - projects\/project\/global\/urlMaps\/url-map - global\/urlMaps\/url-map
 thpURLMap :: Lens' TargetHTTPSProxy (Maybe Text)
 thpURLMap
   = lens _thpURLMap (\ s a -> s{_thpURLMap = a})
 
 -- | URLs to SslCertificate resources that are used to authenticate
--- connections to Backends. Currently exactly one SSL certificate must be
--- specified.
+-- connections between users and the load balancer. Currently, exactly one
+-- SSL certificate must be specified.
 thpSSLCertificates :: Lens' TargetHTTPSProxy [Text]
 thpSSLCertificates
   = lens _thpSSLCertificates
@@ -14389,7 +15472,8 @@ thpSSLCertificates
       . _Default
       . _Coerce
 
--- | Type of the resource.
+-- | [Output Only] Type of resource. Always compute#targetHttpsProxy for
+-- target HTTPS proxies.
 thpKind :: Lens' TargetHTTPSProxy Text
 thpKind = lens _thpKind (\ s a -> s{_thpKind = a})
 
@@ -14414,14 +15498,15 @@ thpCreationTimestamp
   = lens _thpCreationTimestamp
       (\ s a -> s{_thpCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 thpId :: Lens' TargetHTTPSProxy (Maybe Word64)
 thpId
   = lens _thpId (\ s a -> s{_thpId = a}) .
       mapping _Coerce
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 thpDescription :: Lens' TargetHTTPSProxy (Maybe Text)
 thpDescription
   = lens _thpDescription
@@ -14431,7 +15516,7 @@ instance FromJSON TargetHTTPSProxy where
         parseJSON
           = withObject "TargetHTTPSProxy"
               (\ o ->
-                 TargetHTTPSProxy <$>
+                 TargetHTTPSProxy' <$>
                    (o .:? "urlMap") <*>
                      (o .:? "sslCertificates" .!= mempty)
                      <*> (o .:? "kind" .!= "compute#targetHttpsProxy")
@@ -14442,7 +15527,7 @@ instance FromJSON TargetHTTPSProxy where
                      <*> (o .:? "description"))
 
 instance ToJSON TargetHTTPSProxy where
-        toJSON TargetHTTPSProxy{..}
+        toJSON TargetHTTPSProxy'{..}
           = object
               (catMaybes
                  [("urlMap" .=) <$> _thpURLMap,
@@ -14456,7 +15541,7 @@ instance ToJSON TargetHTTPSProxy where
 
 --
 -- /See:/ 'targetVPNGatewaysScopedList' smart constructor.
-data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList
+data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList'
     { _tvgslTargetVPNGateways :: !(Maybe [TargetVPNGateway])
     , _tvgslWarning           :: !(Maybe TargetVPNGatewaysScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -14471,7 +15556,7 @@ data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList
 targetVPNGatewaysScopedList
     :: TargetVPNGatewaysScopedList
 targetVPNGatewaysScopedList =
-    TargetVPNGatewaysScopedList
+    TargetVPNGatewaysScopedList'
     { _tvgslTargetVPNGateways = Nothing
     , _tvgslWarning = Nothing
     }
@@ -14494,12 +15579,12 @@ instance FromJSON TargetVPNGatewaysScopedList where
         parseJSON
           = withObject "TargetVPNGatewaysScopedList"
               (\ o ->
-                 TargetVPNGatewaysScopedList <$>
+                 TargetVPNGatewaysScopedList' <$>
                    (o .:? "targetVpnGateways" .!= mempty) <*>
                      (o .:? "warning"))
 
 instance ToJSON TargetVPNGatewaysScopedList where
-        toJSON TargetVPNGatewaysScopedList{..}
+        toJSON TargetVPNGatewaysScopedList'{..}
           = object
               (catMaybes
                  [("targetVpnGateways" .=) <$>
@@ -14509,7 +15594,7 @@ instance ToJSON TargetVPNGatewaysScopedList where
 -- | An access configuration attached to an instance\'s network interface.
 --
 -- /See:/ 'accessConfig' smart constructor.
-data AccessConfig = AccessConfig
+data AccessConfig = AccessConfig'
     { _acKind  :: !Text
     , _acName  :: !(Maybe Text)
     , _acNATIP :: !(Maybe Text)
@@ -14530,7 +15615,7 @@ data AccessConfig = AccessConfig
 accessConfig
     :: AccessConfig
 accessConfig =
-    AccessConfig
+    AccessConfig'
     { _acKind = "compute#accessConfig"
     , _acName = Nothing
     , _acNATIP = Nothing
@@ -14563,14 +15648,14 @@ instance FromJSON AccessConfig where
         parseJSON
           = withObject "AccessConfig"
               (\ o ->
-                 AccessConfig <$>
+                 AccessConfig' <$>
                    (o .:? "kind" .!= "compute#accessConfig") <*>
                      (o .:? "name")
                      <*> (o .:? "natIP")
                      <*> (o .:? "type" .!= OneToOneNAT))
 
 instance ToJSON AccessConfig where
-        toJSON AccessConfig{..}
+        toJSON AccessConfig'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _acKind), ("name" .=) <$> _acName,
@@ -14578,7 +15663,7 @@ instance ToJSON AccessConfig where
 
 --
 -- /See:/ 'managedInstanceLastAttemptErrorsErrorsItem' smart constructor.
-data ManagedInstanceLastAttemptErrorsErrorsItem = ManagedInstanceLastAttemptErrorsErrorsItem
+data ManagedInstanceLastAttemptErrorsErrorsItem = ManagedInstanceLastAttemptErrorsErrorsItem'
     { _milaeeiLocation :: !(Maybe Text)
     , _milaeeiCode     :: !(Maybe Text)
     , _milaeeiMessage  :: !(Maybe Text)
@@ -14596,13 +15681,13 @@ data ManagedInstanceLastAttemptErrorsErrorsItem = ManagedInstanceLastAttemptErro
 managedInstanceLastAttemptErrorsErrorsItem
     :: ManagedInstanceLastAttemptErrorsErrorsItem
 managedInstanceLastAttemptErrorsErrorsItem =
-    ManagedInstanceLastAttemptErrorsErrorsItem
+    ManagedInstanceLastAttemptErrorsErrorsItem'
     { _milaeeiLocation = Nothing
     , _milaeeiCode = Nothing
     , _milaeeiMessage = Nothing
     }
 
--- | [Output Only] Indicates the field in the request which caused the error.
+-- | [Output Only] Indicates the field in the request that caused the error.
 -- This property is optional.
 milaeeiLocation :: Lens' ManagedInstanceLastAttemptErrorsErrorsItem (Maybe Text)
 milaeeiLocation
@@ -14626,13 +15711,14 @@ instance FromJSON
           = withObject
               "ManagedInstanceLastAttemptErrorsErrorsItem"
               (\ o ->
-                 ManagedInstanceLastAttemptErrorsErrorsItem <$>
+                 ManagedInstanceLastAttemptErrorsErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON
          ManagedInstanceLastAttemptErrorsErrorsItem where
-        toJSON ManagedInstanceLastAttemptErrorsErrorsItem{..}
+        toJSON
+          ManagedInstanceLastAttemptErrorsErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _milaeeiLocation,
@@ -14641,7 +15727,7 @@ instance ToJSON
 
 --
 -- /See:/ 'instancesScopedListWarningDataItem' smart constructor.
-data InstancesScopedListWarningDataItem = InstancesScopedListWarningDataItem
+data InstancesScopedListWarningDataItem = InstancesScopedListWarningDataItem'
     { _islwdiValue :: !(Maybe Text)
     , _islwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -14656,7 +15742,7 @@ data InstancesScopedListWarningDataItem = InstancesScopedListWarningDataItem
 instancesScopedListWarningDataItem
     :: InstancesScopedListWarningDataItem
 instancesScopedListWarningDataItem =
-    InstancesScopedListWarningDataItem
+    InstancesScopedListWarningDataItem'
     { _islwdiValue = Nothing
     , _islwdiKey = Nothing
     }
@@ -14666,7 +15752,13 @@ islwdiValue :: Lens' InstancesScopedListWarningDataItem (Maybe Text)
 islwdiValue
   = lens _islwdiValue (\ s a -> s{_islwdiValue = a})
 
--- | [Output Only] A key for the warning data.
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
 islwdiKey :: Lens' InstancesScopedListWarningDataItem (Maybe Text)
 islwdiKey
   = lens _islwdiKey (\ s a -> s{_islwdiKey = a})
@@ -14676,30 +15768,31 @@ instance FromJSON InstancesScopedListWarningDataItem
         parseJSON
           = withObject "InstancesScopedListWarningDataItem"
               (\ o ->
-                 InstancesScopedListWarningDataItem <$>
+                 InstancesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON InstancesScopedListWarningDataItem
          where
-        toJSON InstancesScopedListWarningDataItem{..}
+        toJSON InstancesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _islwdiValue,
                   ("key" .=) <$> _islwdiKey])
 
 -- | A BackendService resource. This resource defines a group of backend
--- virtual machines together with their serving capacity.
+-- virtual machines and their serving capacity.
 --
 -- /See:/ 'backendService' smart constructor.
-data BackendService = BackendService
+data BackendService = BackendService'
     { _bsBackends          :: !(Maybe [Backend])
     , _bsKind              :: !Text
-    , _bsFingerprint       :: !(Maybe (Textual Word8))
+    , _bsFingerprint       :: !(Maybe Base64)
     , _bsProtocol          :: !(Maybe BackendServiceProtocol)
     , _bsSelfLink          :: !(Maybe Text)
     , _bsName              :: !(Maybe Text)
     , _bsCreationTimestamp :: !(Maybe Text)
     , _bsId                :: !(Maybe (Textual Word64))
+    , _bsRegion            :: !(Maybe Text)
     , _bsTimeoutSec        :: !(Maybe (Textual Int32))
     , _bsDescription       :: !(Maybe Text)
     , _bsPortName          :: !(Maybe Text)
@@ -14727,6 +15820,8 @@ data BackendService = BackendService
 --
 -- * 'bsId'
 --
+-- * 'bsRegion'
+--
 -- * 'bsTimeoutSec'
 --
 -- * 'bsDescription'
@@ -14739,7 +15834,7 @@ data BackendService = BackendService
 backendService
     :: BackendService
 backendService =
-    BackendService
+    BackendService'
     { _bsBackends = Nothing
     , _bsKind = "compute#backendService"
     , _bsFingerprint = Nothing
@@ -14748,6 +15843,7 @@ backendService =
     , _bsName = Nothing
     , _bsCreationTimestamp = Nothing
     , _bsId = Nothing
+    , _bsRegion = Nothing
     , _bsTimeoutSec = Nothing
     , _bsDescription = Nothing
     , _bsPortName = Nothing
@@ -14771,12 +15867,14 @@ bsKind = lens _bsKind (\ s a -> s{_bsKind = a})
 -- object. This field is used in optimistic locking. This field will be
 -- ignored when inserting a BackendService. An up-to-date fingerprint must
 -- be provided in order to update the BackendService.
-bsFingerprint :: Lens' BackendService (Maybe Word8)
+bsFingerprint :: Lens' BackendService (Maybe ByteString)
 bsFingerprint
   = lens _bsFingerprint
       (\ s a -> s{_bsFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
+-- | The protocol this BackendService uses to communicate with backends.
+-- Possible values are HTTP, HTTPS, HTTP2, TCP and SSL.
 bsProtocol :: Lens' BackendService (Maybe BackendServiceProtocol)
 bsProtocol
   = lens _bsProtocol (\ s a -> s{_bsProtocol = a})
@@ -14802,11 +15900,17 @@ bsCreationTimestamp
   = lens _bsCreationTimestamp
       (\ s a -> s{_bsCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 bsId :: Lens' BackendService (Maybe Word64)
 bsId
   = lens _bsId (\ s a -> s{_bsId = a}) .
       mapping _Coerce
+
+-- | [Output Only] URL of the region where the regional backend service
+-- resides. This field is not applicable to global backend services.
+bsRegion :: Lens' BackendService (Maybe Text)
+bsRegion = lens _bsRegion (\ s a -> s{_bsRegion = a})
 
 -- | How many seconds to wait for the backend before considering it a failed
 -- request. Default is 30 seconds.
@@ -14815,22 +15919,22 @@ bsTimeoutSec
   = lens _bsTimeoutSec (\ s a -> s{_bsTimeoutSec = a})
       . mapping _Coerce
 
--- | An optional textual description of the resource. Provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 bsDescription :: Lens' BackendService (Maybe Text)
 bsDescription
   = lens _bsDescription
       (\ s a -> s{_bsDescription = a})
 
--- | Name of backend port. The same name should appear in the resource views
+-- | Name of backend port. The same name should appear in the instance groups
 -- referenced by this service. Required.
 bsPortName :: Lens' BackendService (Maybe Text)
 bsPortName
   = lens _bsPortName (\ s a -> s{_bsPortName = a})
 
--- | The list of URLs to the HttpHealthCheck resource for health checking
--- this BackendService. Currently at most one health check can be
--- specified, and a health check is required.
+-- | The list of URLs to the HttpHealthCheck or HttpsHealthCheck resource for
+-- health checking this BackendService. Currently at most one health check
+-- can be specified, and a health check is required.
 bsHealthChecks :: Lens' BackendService [Text]
 bsHealthChecks
   = lens _bsHealthChecks
@@ -14838,8 +15942,8 @@ bsHealthChecks
       . _Default
       . _Coerce
 
--- | Deprecated in favor of port name. The TCP port to connect on the
--- backend. The default value is 80.
+-- | Deprecated in favor of portName. The TCP port to connect on the backend.
+-- The default value is 80.
 bsPort :: Lens' BackendService (Maybe Int32)
 bsPort
   = lens _bsPort (\ s a -> s{_bsPort = a}) .
@@ -14849,7 +15953,7 @@ instance FromJSON BackendService where
         parseJSON
           = withObject "BackendService"
               (\ o ->
-                 BackendService <$>
+                 BackendService' <$>
                    (o .:? "backends" .!= mempty) <*>
                      (o .:? "kind" .!= "compute#backendService")
                      <*> (o .:? "fingerprint")
@@ -14858,6 +15962,7 @@ instance FromJSON BackendService where
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
                      <*> (o .:? "id")
+                     <*> (o .:? "region")
                      <*> (o .:? "timeoutSec")
                      <*> (o .:? "description")
                      <*> (o .:? "portName")
@@ -14865,7 +15970,7 @@ instance FromJSON BackendService where
                      <*> (o .:? "port"))
 
 instance ToJSON BackendService where
-        toJSON BackendService{..}
+        toJSON BackendService'{..}
           = object
               (catMaybes
                  [("backends" .=) <$> _bsBackends,
@@ -14875,7 +15980,7 @@ instance ToJSON BackendService where
                   ("selfLink" .=) <$> _bsSelfLink,
                   ("name" .=) <$> _bsName,
                   ("creationTimestamp" .=) <$> _bsCreationTimestamp,
-                  ("id" .=) <$> _bsId,
+                  ("id" .=) <$> _bsId, ("region" .=) <$> _bsRegion,
                   ("timeoutSec" .=) <$> _bsTimeoutSec,
                   ("description" .=) <$> _bsDescription,
                   ("portName" .=) <$> _bsPortName,
@@ -14884,7 +15989,7 @@ instance ToJSON BackendService where
 
 --
 -- /See:/ 'instanceMoveRequest' smart constructor.
-data InstanceMoveRequest = InstanceMoveRequest
+data InstanceMoveRequest = InstanceMoveRequest'
     { _imrTargetInstance  :: !(Maybe Text)
     , _imrDestinationZone :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -14899,7 +16004,7 @@ data InstanceMoveRequest = InstanceMoveRequest
 instanceMoveRequest
     :: InstanceMoveRequest
 instanceMoveRequest =
-    InstanceMoveRequest
+    InstanceMoveRequest'
     { _imrTargetInstance = Nothing
     , _imrDestinationZone = Nothing
     }
@@ -14914,9 +16019,9 @@ imrTargetInstance
   = lens _imrTargetInstance
       (\ s a -> s{_imrTargetInstance = a})
 
--- | The URL of the destination zone to move the instance to. This can be a
--- full or partial URL. For example, the following are all valid URLs to a
--- zone: -
+-- | The URL of the destination zone to move the instance. This can be a full
+-- or partial URL. For example, the following are all valid URLs to a zone:
+-- -
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone
 -- - projects\/project\/zones\/zone - zones\/zone
 imrDestinationZone :: Lens' InstanceMoveRequest (Maybe Text)
@@ -14928,12 +16033,12 @@ instance FromJSON InstanceMoveRequest where
         parseJSON
           = withObject "InstanceMoveRequest"
               (\ o ->
-                 InstanceMoveRequest <$>
+                 InstanceMoveRequest' <$>
                    (o .:? "targetInstance") <*>
                      (o .:? "destinationZone"))
 
 instance ToJSON InstanceMoveRequest where
-        toJSON InstanceMoveRequest{..}
+        toJSON InstanceMoveRequest'{..}
           = object
               (catMaybes
                  [("targetInstance" .=) <$> _imrTargetInstance,
@@ -14941,7 +16046,7 @@ instance ToJSON InstanceMoveRequest where
 
 --
 -- /See:/ 'instanceGroupsScopedList' smart constructor.
-data InstanceGroupsScopedList = InstanceGroupsScopedList
+data InstanceGroupsScopedList = InstanceGroupsScopedList'
     { _igslWarning        :: !(Maybe InstanceGroupsScopedListWarning)
     , _igslInstanceGroups :: !(Maybe [InstanceGroup])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -14956,7 +16061,7 @@ data InstanceGroupsScopedList = InstanceGroupsScopedList
 instanceGroupsScopedList
     :: InstanceGroupsScopedList
 instanceGroupsScopedList =
-    InstanceGroupsScopedList
+    InstanceGroupsScopedList'
     { _igslWarning = Nothing
     , _igslInstanceGroups = Nothing
     }
@@ -14980,12 +16085,12 @@ instance FromJSON InstanceGroupsScopedList where
         parseJSON
           = withObject "InstanceGroupsScopedList"
               (\ o ->
-                 InstanceGroupsScopedList <$>
+                 InstanceGroupsScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "instanceGroups" .!= mempty))
 
 instance ToJSON InstanceGroupsScopedList where
-        toJSON InstanceGroupsScopedList{..}
+        toJSON InstanceGroupsScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _igslWarning,
@@ -14995,7 +16100,7 @@ instance ToJSON InstanceGroupsScopedList where
 -- individual instances should be checked for health, via HTTPS.
 --
 -- /See:/ 'httpsHealthCheck' smart constructor.
-data HTTPSHealthCheck = HTTPSHealthCheck
+data HTTPSHealthCheck = HTTPSHealthCheck'
     { _hhcHealthyThreshold   :: !(Maybe (Textual Int32))
     , _hhcKind               :: !Text
     , _hhcRequestPath        :: !(Maybe Text)
@@ -15043,7 +16148,7 @@ data HTTPSHealthCheck = HTTPSHealthCheck
 httpsHealthCheck
     :: HTTPSHealthCheck
 httpsHealthCheck =
-    HTTPSHealthCheck
+    HTTPSHealthCheck'
     { _hhcHealthyThreshold = Nothing
     , _hhcKind = "compute#httpsHealthCheck"
     , _hhcRequestPath = Nothing
@@ -15107,7 +16212,8 @@ hhcCreationTimestamp
   = lens _hhcCreationTimestamp
       (\ s a -> s{_hhcCreationTimestamp = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 hhcId :: Lens' HTTPSHealthCheck (Maybe Word64)
 hhcId
   = lens _hhcId (\ s a -> s{_hhcId = a}) .
@@ -15128,8 +16234,8 @@ hhcTimeoutSec
       (\ s a -> s{_hhcTimeoutSec = a})
       . mapping _Coerce
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 hhcDescription :: Lens' HTTPSHealthCheck (Maybe Text)
 hhcDescription
   = lens _hhcDescription
@@ -15154,7 +16260,7 @@ instance FromJSON HTTPSHealthCheck where
         parseJSON
           = withObject "HTTPSHealthCheck"
               (\ o ->
-                 HTTPSHealthCheck <$>
+                 HTTPSHealthCheck' <$>
                    (o .:? "healthyThreshold") <*>
                      (o .:? "kind" .!= "compute#httpsHealthCheck")
                      <*> (o .:? "requestPath")
@@ -15170,7 +16276,7 @@ instance FromJSON HTTPSHealthCheck where
                      <*> (o .:? "port"))
 
 instance ToJSON HTTPSHealthCheck where
-        toJSON HTTPSHealthCheck{..}
+        toJSON HTTPSHealthCheck'{..}
           = object
               (catMaybes
                  [("healthyThreshold" .=) <$> _hhcHealthyThreshold,
@@ -15189,7 +16295,7 @@ instance ToJSON HTTPSHealthCheck where
 -- | [Output Only] A map of scoped vpn tunnel lists.
 --
 -- /See:/ 'vpnTunnelAggregatedListItems' smart constructor.
-newtype VPNTunnelAggregatedListItems = VPNTunnelAggregatedListItems
+newtype VPNTunnelAggregatedListItems = VPNTunnelAggregatedListItems'
     { _vtaliAddtional :: HashMap Text VPNTunnelsScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -15202,7 +16308,7 @@ vpnTunnelAggregatedListItems
     :: HashMap Text VPNTunnelsScopedList -- ^ 'vtaliAddtional'
     -> VPNTunnelAggregatedListItems
 vpnTunnelAggregatedListItems pVtaliAddtional_ =
-    VPNTunnelAggregatedListItems
+    VPNTunnelAggregatedListItems'
     { _vtaliAddtional = _Coerce # pVtaliAddtional_
     }
 
@@ -15217,7 +16323,8 @@ instance FromJSON VPNTunnelAggregatedListItems where
         parseJSON
           = withObject "VPNTunnelAggregatedListItems"
               (\ o ->
-                 VPNTunnelAggregatedListItems <$> (parseJSONObject o))
+                 VPNTunnelAggregatedListItems' <$>
+                   (parseJSONObject o))
 
 instance ToJSON VPNTunnelAggregatedListItems where
         toJSON = toJSON . _vtaliAddtional
@@ -15225,8 +16332,8 @@ instance ToJSON VPNTunnelAggregatedListItems where
 -- | A set of instance tags.
 --
 -- /See:/ 'tags' smart constructor.
-data Tags = Tags
-    { _tFingerprint :: !(Maybe (Textual Word8))
+data Tags = Tags'
+    { _tFingerprint :: !(Maybe Base64)
     , _tItems       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -15240,7 +16347,7 @@ data Tags = Tags
 tags
     :: Tags
 tags =
-    Tags
+    Tags'
     { _tFingerprint = Nothing
     , _tItems = Nothing
     }
@@ -15251,10 +16358,10 @@ tags =
 -- every request to modify or update metadata. You must always provide an
 -- up-to-date fingerprint hash in order to update or change metadata. To
 -- see the latest fingerprint, make get() request to the instance.
-tFingerprint :: Lens' Tags (Maybe Word8)
+tFingerprint :: Lens' Tags (Maybe ByteString)
 tFingerprint
   = lens _tFingerprint (\ s a -> s{_tFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | An array of tags. Each tag must be 1-63 characters long, and comply with
 -- RFC1035.
@@ -15267,11 +16374,11 @@ instance FromJSON Tags where
         parseJSON
           = withObject "Tags"
               (\ o ->
-                 Tags <$>
+                 Tags' <$>
                    (o .:? "fingerprint") <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Tags where
-        toJSON Tags{..}
+        toJSON Tags'{..}
           = object
               (catMaybes
                  [("fingerprint" .=) <$> _tFingerprint,
@@ -15279,7 +16386,7 @@ instance ToJSON Tags where
 
 --
 -- /See:/ 'addressAggregatedList' smart constructor.
-data AddressAggregatedList = AddressAggregatedList
+data AddressAggregatedList = AddressAggregatedList'
     { _addNextPageToken :: !(Maybe Text)
     , _addKind          :: !Text
     , _addItems         :: !(Maybe AddressAggregatedListItems)
@@ -15303,7 +16410,7 @@ data AddressAggregatedList = AddressAggregatedList
 addressAggregatedList
     :: AddressAggregatedList
 addressAggregatedList =
-    AddressAggregatedList
+    AddressAggregatedList'
     { _addNextPageToken = Nothing
     , _addKind = "compute#addressAggregatedList"
     , _addItems = Nothing
@@ -15311,7 +16418,11 @@ addressAggregatedList =
     , _addId = Nothing
     }
 
--- | [Output Only] A token used to continue a truncated list request.
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
 addNextPageToken :: Lens' AddressAggregatedList (Maybe Text)
 addNextPageToken
   = lens _addNextPageToken
@@ -15339,7 +16450,7 @@ instance FromJSON AddressAggregatedList where
         parseJSON
           = withObject "AddressAggregatedList"
               (\ o ->
-                 AddressAggregatedList <$>
+                 AddressAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#addressAggregatedList")
                      <*> (o .:? "items")
@@ -15347,7 +16458,7 @@ instance FromJSON AddressAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON AddressAggregatedList where
-        toJSON AddressAggregatedList{..}
+        toJSON AddressAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _addNextPageToken,
@@ -15358,7 +16469,7 @@ instance ToJSON AddressAggregatedList where
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem
+data OperationWarningsItem = OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe OperationWarningsItemCode)
     , _owiMessage :: !(Maybe Text)
@@ -15376,23 +16487,26 @@ data OperationWarningsItem = OperationWarningsItem
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem
+    OperationWarningsItem'
     { _owiData = Nothing
     , _owiCode = Nothing
     , _owiMessage = Nothing
     }
 
--- | [Output Only] Metadata for this warning in key: value format.
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
 owiData :: Lens' OperationWarningsItem [OperationWarningsItemDataItem]
 owiData
   = lens _owiData (\ s a -> s{_owiData = a}) . _Default
       . _Coerce
 
--- | [Output Only] The warning type identifier for this warning.
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 owiCode :: Lens' OperationWarningsItem (Maybe OperationWarningsItemCode)
 owiCode = lens _owiCode (\ s a -> s{_owiCode = a})
 
--- | [Output Only] Optional human-readable details for this warning.
+-- | [Output Only] A human-readable description of the warning code.
 owiMessage :: Lens' OperationWarningsItem (Maybe Text)
 owiMessage
   = lens _owiMessage (\ s a -> s{_owiMessage = a})
@@ -15401,12 +16515,12 @@ instance FromJSON OperationWarningsItem where
         parseJSON
           = withObject "OperationWarningsItem"
               (\ o ->
-                 OperationWarningsItem <$>
+                 OperationWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationWarningsItem where
-        toJSON OperationWarningsItem{..}
+        toJSON OperationWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,
@@ -15415,7 +16529,7 @@ instance ToJSON OperationWarningsItem where
 -- | Message for the expected URL mappings.
 --
 -- /See:/ 'urlMapTest' smart constructor.
-data URLMapTest = URLMapTest
+data URLMapTest = URLMapTest'
     { _umtPath        :: !(Maybe Text)
     , _umtService     :: !(Maybe Text)
     , _umtHost        :: !(Maybe Text)
@@ -15436,7 +16550,7 @@ data URLMapTest = URLMapTest
 urlMapTest
     :: URLMapTest
 urlMapTest =
-    URLMapTest
+    URLMapTest'
     { _umtPath = Nothing
     , _umtService = Nothing
     , _umtHost = Nothing
@@ -15466,13 +16580,13 @@ instance FromJSON URLMapTest where
         parseJSON
           = withObject "URLMapTest"
               (\ o ->
-                 URLMapTest <$>
+                 URLMapTest' <$>
                    (o .:? "path") <*> (o .:? "service") <*>
                      (o .:? "host")
                      <*> (o .:? "description"))
 
 instance ToJSON URLMapTest where
-        toJSON URLMapTest{..}
+        toJSON URLMapTest'{..}
           = object
               (catMaybes
                  [("path" .=) <$> _umtPath,
@@ -15483,7 +16597,7 @@ instance ToJSON URLMapTest where
 -- | An Instance resource.
 --
 -- /See:/ 'instance'' smart constructor.
-data Instance = Instance
+data Instance = Instance'
     { _insnStatus            :: !(Maybe InstanceStatus)
     , _insnServiceAccounts   :: !(Maybe [ServiceAccount])
     , _insnNetworkInterfaces :: !(Maybe [NetworkInterface])
@@ -15546,7 +16660,7 @@ data Instance = Instance
 instance'
     :: Instance
 instance' =
-    Instance
+    Instance'
     { _insnStatus = Nothing
     , _insnServiceAccounts = Nothing
     , _insnNetworkInterfaces = Nothing
@@ -15610,18 +16724,18 @@ insnCPUPlatform
   = lens _insnCPUPlatform
       (\ s a -> s{_insnCPUPlatform = a})
 
--- | [Output Only] Server defined URL for this resource.
+-- | [Output Only] Server-defined URL for this resource.
 insnSelfLink :: Lens' Instance (Maybe Text)
 insnSelfLink
   = lens _insnSelfLink (\ s a -> s{_insnSelfLink = a})
 
--- | Name of the resource; provided by the client when the resource is
--- created. The name must be 1-63 characters long, and comply with RFC1035.
--- Specifically, the name must be 1-63 characters long and match the
--- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
--- character must be a lowercase letter, and all following characters must
--- be a dash, lowercase letter, or digit, except the last character, which
--- cannot be a dash.
+-- | The name of the resource, provided by the client when initially creating
+-- the resource. The resource name must be 1-63 characters long, and comply
+-- with RFC1035. Specifically, the name must be 1-63 characters long and
+-- match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the
+-- first character must be a lowercase letter, and all following characters
+-- must be a dash, lowercase letter, or digit, except the last character,
+-- which cannot be a dash.
 insnName :: Lens' Instance (Maybe Text)
 insnName = lens _insnName (\ s a -> s{_insnName = a})
 
@@ -15638,9 +16752,17 @@ insnCreationTimestamp
       (\ s a -> s{_insnCreationTimestamp = a})
 
 -- | Full or partial URL of the machine type resource to use for this
--- instance. This is provided by the client when the instance is created.
--- For example, the following is a valid partial url:
--- zones\/zone\/machineTypes\/machine-type
+-- instance, in the format: zones\/zone\/machineTypes\/machine-type. This
+-- is provided by the client when the instance is created. For example, the
+-- following is a valid partial url to a predefined machine type:
+-- zones\/us-central1-f\/machineTypes\/n1-standard-1 To create a custom
+-- machine type, provide a URL to a machine type in the following format,
+-- where CPUS is 1 or an even number up to 32 (2, 4, 6, ... 24, etc), and
+-- MEMORY is the total memory for this instance. Memory must be a multiple
+-- of 256 MB and must be supplied in MB (e.g. 5 GB of memory is 5120 MB):
+-- zones\/zone\/machineTypes\/custom-CPUS-MEMORY For example:
+-- zones\/us-central1-f\/machineTypes\/custom-4-5120 For a full list of
+-- restrictions, read the Specifications for custom machine types.
 insnMachineType :: Lens' Instance (Maybe Text)
 insnMachineType
   = lens _insnMachineType
@@ -15652,7 +16774,8 @@ insnMetadata :: Lens' Instance (Maybe Metadata)
 insnMetadata
   = lens _insnMetadata (\ s a -> s{_insnMetadata = a})
 
--- | [Output Only] Unique identifier for the resource; defined by the server.
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
 insnId :: Lens' Instance (Maybe Word64)
 insnId
   = lens _insnId (\ s a -> s{_insnId = a}) .
@@ -15681,17 +16804,17 @@ insnCanIPForward
   = lens _insnCanIPForward
       (\ s a -> s{_insnCanIPForward = a})
 
--- | An optional textual description of the resource; provided by the client
--- when the resource is created.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 insnDescription :: Lens' Instance (Maybe Text)
 insnDescription
   = lens _insnDescription
       (\ s a -> s{_insnDescription = a})
 
--- | A list of tags to appy to this instance. Tags are used to identify valid
--- sources or targets for network firewalls and are specified by the client
--- during instance creation. The tags can be later modified by the setTags
--- method. Each tag within the list must comply with RFC1035.
+-- | A list of tags to apply to this instance. Tags are used to identify
+-- valid sources or targets for network firewalls and are specified by the
+-- client during instance creation. The tags can be later modified by the
+-- setTags method. Each tag within the list must comply with RFC1035.
 insnTags :: Lens' Instance (Maybe Tags)
 insnTags = lens _insnTags (\ s a -> s{_insnTags = a})
 
@@ -15699,7 +16822,7 @@ instance FromJSON Instance where
         parseJSON
           = withObject "Instance"
               (\ o ->
-                 Instance <$>
+                 Instance' <$>
                    (o .:? "status") <*>
                      (o .:? "serviceAccounts" .!= mempty)
                      <*> (o .:? "networkInterfaces" .!= mempty)
@@ -15720,7 +16843,7 @@ instance FromJSON Instance where
                      <*> (o .:? "tags"))
 
 instance ToJSON Instance where
-        toJSON Instance{..}
+        toJSON Instance'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _insnStatus,
@@ -15747,7 +16870,7 @@ instance ToJSON Instance where
 -- default service will be used.
 --
 -- /See:/ 'pathMatcher' smart constructor.
-data PathMatcher = PathMatcher
+data PathMatcher = PathMatcher'
     { _pmDefaultService :: !(Maybe Text)
     , _pmName           :: !(Maybe Text)
     , _pmPathRules      :: !(Maybe [PathRule])
@@ -15768,16 +16891,21 @@ data PathMatcher = PathMatcher
 pathMatcher
     :: PathMatcher
 pathMatcher =
-    PathMatcher
+    PathMatcher'
     { _pmDefaultService = Nothing
     , _pmName = Nothing
     , _pmPathRules = Nothing
     , _pmDescription = Nothing
     }
 
--- | The URL to the BackendService resource. This will be used if none of the
--- \'pathRules\' defined by this PathMatcher is met by the URL\'s path
--- portion.
+-- | The full or partial URL to the BackendService resource. This will be
+-- used if none of the pathRules defined by this PathMatcher is matched by
+-- the URL\'s path portion. For example, the following are all valid URLs
+-- to a BackendService resource: -
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/global\/backendServices\/backendService
+-- -
+-- compute\/v1\/projects\/project\/global\/backendServices\/backendService
+-- - global\/backendServices\/backendService
 pmDefaultService :: Lens' PathMatcher (Maybe Text)
 pmDefaultService
   = lens _pmDefaultService
@@ -15794,7 +16922,8 @@ pmPathRules
       _Default
       . _Coerce
 
--- | An optional textual description of the resource.
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
 pmDescription :: Lens' PathMatcher (Maybe Text)
 pmDescription
   = lens _pmDescription
@@ -15804,13 +16933,13 @@ instance FromJSON PathMatcher where
         parseJSON
           = withObject "PathMatcher"
               (\ o ->
-                 PathMatcher <$>
+                 PathMatcher' <$>
                    (o .:? "defaultService") <*> (o .:? "name") <*>
                      (o .:? "pathRules" .!= mempty)
                      <*> (o .:? "description"))
 
 instance ToJSON PathMatcher where
-        toJSON PathMatcher{..}
+        toJSON PathMatcher'{..}
           = object
               (catMaybes
                  [("defaultService" .=) <$> _pmDefaultService,

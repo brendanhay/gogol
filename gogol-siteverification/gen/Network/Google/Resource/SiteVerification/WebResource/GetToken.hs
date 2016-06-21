@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SiteVerification.WebResource.GetToken
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type WebResourceGetTokenResource =
 -- | Get a verification token for placing on a website or domain.
 --
 -- /See:/ 'webResourceGetToken' smart constructor.
-newtype WebResourceGetToken = WebResourceGetToken
+newtype WebResourceGetToken = WebResourceGetToken'
     { _wrgtPayload :: SiteVerificationWebResourceGettokenRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ webResourceGetToken
     :: SiteVerificationWebResourceGettokenRequest -- ^ 'wrgtPayload'
     -> WebResourceGetToken
 webResourceGetToken pWrgtPayload_ =
-    WebResourceGetToken
+    WebResourceGetToken'
     { _wrgtPayload = pWrgtPayload_
     }
 
@@ -80,7 +80,10 @@ wrgtPayload
 instance GoogleRequest WebResourceGetToken where
         type Rs WebResourceGetToken =
              SiteVerificationWebResourceGettokenResponse
-        requestClient WebResourceGetToken{..}
+        type Scopes WebResourceGetToken =
+             '["https://www.googleapis.com/auth/siteverification",
+               "https://www.googleapis.com/auth/siteverification.verify_only"]
+        requestClient WebResourceGetToken'{..}
           = go (Just AltJSON) _wrgtPayload
               siteVerificationService
           where go

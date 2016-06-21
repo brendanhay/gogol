@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -36,6 +36,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
     , acvlContainerId
     , acvlHeaders
     , acvlAccountId
+    , acvlIncludeDeleted
     ) where
 
 import           Network.Google.Prelude
@@ -52,16 +53,18 @@ type AccountsContainersVersionsListResource =
                Capture "containerId" Text :>
                  "versions" :>
                    QueryParam "headers" Bool :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] ListContainerVersionsResponse
+                     QueryParam "includeDeleted" Bool :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ListContainerVersionsResponse
 
 -- | Lists all Container Versions of a GTM Container.
 --
 -- /See:/ 'accountsContainersVersionsList' smart constructor.
-data AccountsContainersVersionsList = AccountsContainersVersionsList
-    { _acvlContainerId :: !Text
-    , _acvlHeaders     :: !Bool
-    , _acvlAccountId   :: !Text
+data AccountsContainersVersionsList = AccountsContainersVersionsList'
+    { _acvlContainerId    :: !Text
+    , _acvlHeaders        :: !Bool
+    , _acvlAccountId      :: !Text
+    , _acvlIncludeDeleted :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsList' with the minimum fields required to make a request.
@@ -73,15 +76,18 @@ data AccountsContainersVersionsList = AccountsContainersVersionsList
 -- * 'acvlHeaders'
 --
 -- * 'acvlAccountId'
+--
+-- * 'acvlIncludeDeleted'
 accountsContainersVersionsList
     :: Text -- ^ 'acvlContainerId'
     -> Text -- ^ 'acvlAccountId'
     -> AccountsContainersVersionsList
 accountsContainersVersionsList pAcvlContainerId_ pAcvlAccountId_ =
-    AccountsContainersVersionsList
+    AccountsContainersVersionsList'
     { _acvlContainerId = pAcvlContainerId_
     , _acvlHeaders = False
     , _acvlAccountId = pAcvlAccountId_
+    , _acvlIncludeDeleted = False
     }
 
 -- | The GTM Container ID.
@@ -101,13 +107,24 @@ acvlAccountId
   = lens _acvlAccountId
       (\ s a -> s{_acvlAccountId = a})
 
+-- | Also retrieve deleted (archived) versions when true.
+acvlIncludeDeleted :: Lens' AccountsContainersVersionsList Bool
+acvlIncludeDeleted
+  = lens _acvlIncludeDeleted
+      (\ s a -> s{_acvlIncludeDeleted = a})
+
 instance GoogleRequest AccountsContainersVersionsList
          where
         type Rs AccountsContainersVersionsList =
              ListContainerVersionsResponse
-        requestClient AccountsContainersVersionsList{..}
+        type Scopes AccountsContainersVersionsList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.edit.containerversions",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersVersionsList'{..}
           = go _acvlAccountId _acvlContainerId
               (Just _acvlHeaders)
+              (Just _acvlIncludeDeleted)
               (Just AltJSON)
               tagManagerService
           where go

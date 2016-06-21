@@ -7,7 +7,7 @@
 
 -- |
 -- Module      : Network.Google.Directory
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,6 +22,35 @@ module Network.Google.Directory
     (
     -- * Service Configuration
       directoryService
+
+    -- * OAuth Scopes
+    , adminDirectoryRoleManagementReadOnlyScope
+    , adminDirectoryGroupReadOnlyScope
+    , adminDirectoryDeviceChromeosReadOnlyScope
+    , adminDirectoryDeviceChromeosScope
+    , adminDirectoryUserScope
+    , adminDirectoryGroupMemberReadOnlyScope
+    , adminDirectoryUserAliasScope
+    , adminDirectoryResourceCalendarScope
+    , adminDirectoryDeviceMobileActionScope
+    , adminDirectoryResourceCalendarReadOnlyScope
+    , adminDirectoryDomainReadOnlyScope
+    , adminDirectoryUserschemaScope
+    , adminDirectoryUserschemaReadOnlyScope
+    , adminDirectoryDomainScope
+    , adminDirectoryRoleManagementScope
+    , adminDirectoryGroupScope
+    , adminDirectoryOrgUnitReadOnlyScope
+    , adminDirectoryCustomerScope
+    , adminDirectoryCustomerReadOnlyScope
+    , adminDirectoryOrgUnitScope
+    , adminDirectoryUserReadOnlyScope
+    , adminDirectoryUserAliasReadOnlyScope
+    , adminDirectoryUserSecurityScope
+    , adminDirectoryGroupMemberScope
+    , adminDirectoryNotificationsScope
+    , adminDirectoryDeviceMobileScope
+    , adminDirectoryDeviceMobileReadOnlyScope
 
     -- * API Declaration
     , DirectoryAPI
@@ -177,6 +206,24 @@ module Network.Google.Directory
 
     -- ** directory.privileges.list
     , module Network.Google.Resource.Directory.Privileges.List
+
+    -- ** directory.resources.calendars.delete
+    , module Network.Google.Resource.Directory.Resources.Calendars.Delete
+
+    -- ** directory.resources.calendars.get
+    , module Network.Google.Resource.Directory.Resources.Calendars.Get
+
+    -- ** directory.resources.calendars.insert
+    , module Network.Google.Resource.Directory.Resources.Calendars.Insert
+
+    -- ** directory.resources.calendars.list
+    , module Network.Google.Resource.Directory.Resources.Calendars.List
+
+    -- ** directory.resources.calendars.patch
+    , module Network.Google.Resource.Directory.Resources.Calendars.Patch
+
+    -- ** directory.resources.calendars.update
+    , module Network.Google.Resource.Directory.Resources.Calendars.Update
 
     -- ** directory.roleAssignments.delete
     , module Network.Google.Resource.Directory.RoleAssignments.Delete
@@ -560,6 +607,17 @@ module Network.Google.Directory
     , aliKind
     , aliAliases
 
+    -- ** CalendarResource
+    , CalendarResource
+    , calendarResource
+    , crEtags
+    , crResourceId
+    , crResourceType
+    , crResourceName
+    , crKind
+    , crResourceEmail
+    , crResourceDescription
+
     -- ** UserUndelete
     , UserUndelete
     , userUndelete
@@ -698,7 +756,7 @@ module Network.Google.Directory
 
     -- ** Role
     , Role
-    , role
+    , role'
     , rrEtag
     , rrKind
     , rrRoleName
@@ -895,6 +953,14 @@ module Network.Google.Directory
     , domDomainName
     , domIsPrimary
 
+    -- ** CalendarResources
+    , CalendarResources
+    , calendarResources
+    , crsEtag
+    , crsNextPageToken
+    , crsKind
+    , crsItems
+
     -- ** ChromeosDevicesListOrderBy
     , ChromeosDevicesListOrderBy (..)
 
@@ -1031,6 +1097,12 @@ import           Network.Google.Resource.Directory.OrgUnits.List
 import           Network.Google.Resource.Directory.OrgUnits.Patch
 import           Network.Google.Resource.Directory.OrgUnits.Update
 import           Network.Google.Resource.Directory.Privileges.List
+import           Network.Google.Resource.Directory.Resources.Calendars.Delete
+import           Network.Google.Resource.Directory.Resources.Calendars.Get
+import           Network.Google.Resource.Directory.Resources.Calendars.Insert
+import           Network.Google.Resource.Directory.Resources.Calendars.List
+import           Network.Google.Resource.Directory.Resources.Calendars.Patch
+import           Network.Google.Resource.Directory.Resources.Calendars.Update
 import           Network.Google.Resource.Directory.RoleAssignments.Delete
 import           Network.Google.Resource.Directory.RoleAssignments.Get
 import           Network.Google.Resource.Directory.RoleAssignments.Insert
@@ -1141,6 +1213,12 @@ type DirectoryAPI =
        :<|> MobileDevicesGetResource
        :<|> MobileDevicesActionResource
        :<|> MobileDevicesDeleteResource
+       :<|> ResourcesCalendarsInsertResource
+       :<|> ResourcesCalendarsListResource
+       :<|> ResourcesCalendarsPatchResource
+       :<|> ResourcesCalendarsGetResource
+       :<|> ResourcesCalendarsDeleteResource
+       :<|> ResourcesCalendarsUpdateResource
        :<|> OrgUnitsInsertResource
        :<|> OrgUnitsListResource
        :<|> OrgUnitsPatchResource

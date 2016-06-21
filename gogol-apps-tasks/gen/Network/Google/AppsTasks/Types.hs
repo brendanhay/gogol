@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AppsTasks.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,7 +20,7 @@ module Network.Google.AppsTasks.Types
       appsTasksService
 
     -- * OAuth Scopes
-    , tasksReadonlyScope
+    , tasksReadOnlyScope
     , tasksScope
 
     -- * TaskLinksItem
@@ -80,15 +81,15 @@ import           Network.Google.AppsTasks.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Tasks API. This contains the host and root path used as a starting point for constructing service requests.
-appsTasksService :: Service
+appsTasksService :: ServiceConfig
 appsTasksService
   = defaultService (ServiceId "tasks:v1")
       "www.googleapis.com"
 
 -- | View your tasks
-tasksReadonlyScope :: OAuthScope
-tasksReadonlyScope = "https://www.googleapis.com/auth/tasks.readonly";
+tasksReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tasks.readonly"]
+tasksReadOnlyScope = Proxy;
 
 -- | Manage your tasks
-tasksScope :: OAuthScope
-tasksScope = "https://www.googleapis.com/auth/tasks";
+tasksScope :: Proxy '["https://www.googleapis.com/auth/tasks"]
+tasksScope = Proxy;

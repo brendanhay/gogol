@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.BucketAccessControls.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type BucketAccessControlsDeleteResource =
 -- specified bucket.
 --
 -- /See:/ 'bucketAccessControlsDelete' smart constructor.
-data BucketAccessControlsDelete = BucketAccessControlsDelete
+data BucketAccessControlsDelete = BucketAccessControlsDelete'
     { _bacdBucket :: !Text
     , _bacdEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ bucketAccessControlsDelete
     -> Text -- ^ 'bacdEntity'
     -> BucketAccessControlsDelete
 bucketAccessControlsDelete pBacdBucket_ pBacdEntity_ =
-    BucketAccessControlsDelete
+    BucketAccessControlsDelete'
     { _bacdBucket = pBacdBucket_
     , _bacdEntity = pBacdEntity_
     }
@@ -93,7 +93,10 @@ bacdEntity
 instance GoogleRequest BucketAccessControlsDelete
          where
         type Rs BucketAccessControlsDelete = ()
-        requestClient BucketAccessControlsDelete{..}
+        type Scopes BucketAccessControlsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient BucketAccessControlsDelete'{..}
           = go _bacdBucket _bacdEntity (Just AltJSON)
               storageService
           where go

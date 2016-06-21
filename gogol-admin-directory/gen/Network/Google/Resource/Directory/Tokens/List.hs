@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Tokens.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type TokensListResource =
 -- applications.
 --
 -- /See:/ 'tokensList' smart constructor.
-newtype TokensList = TokensList
+newtype TokensList = TokensList'
     { _tlUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ tokensList
     :: Text -- ^ 'tlUserKey'
     -> TokensList
 tokensList pTlUserKey_ =
-    TokensList
+    TokensList'
     { _tlUserKey = pTlUserKey_
     }
 
@@ -80,7 +80,9 @@ tlUserKey
 
 instance GoogleRequest TokensList where
         type Rs TokensList = Tokens
-        requestClient TokensList{..}
+        type Scopes TokensList =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
+        requestClient TokensList'{..}
           = go _tlUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy TokensListResource)

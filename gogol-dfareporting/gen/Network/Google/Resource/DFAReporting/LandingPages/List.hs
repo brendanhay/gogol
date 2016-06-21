@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.LandingPages.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'LandingPagesList' request conforms to.
 type LandingPagesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -56,7 +56,7 @@ type LandingPagesListResource =
 -- | Retrieves the list of landing pages for the specified campaign.
 --
 -- /See:/ 'landingPagesList' smart constructor.
-data LandingPagesList = LandingPagesList
+data LandingPagesList = LandingPagesList'
     { _lplCampaignId :: !(Textual Int64)
     , _lplProFileId  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ landingPagesList
     -> Int64 -- ^ 'lplProFileId'
     -> LandingPagesList
 landingPagesList pLplCampaignId_ pLplProFileId_ =
-    LandingPagesList
+    LandingPagesList'
     { _lplCampaignId = _Coerce # pLplCampaignId_
     , _lplProFileId = _Coerce # pLplProFileId_
     }
@@ -93,7 +93,9 @@ lplProFileId
 
 instance GoogleRequest LandingPagesList where
         type Rs LandingPagesList = LandingPagesListResponse
-        requestClient LandingPagesList{..}
+        type Scopes LandingPagesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient LandingPagesList'{..}
           = go _lplProFileId _lplCampaignId (Just AltJSON)
               dFAReportingService
           where go

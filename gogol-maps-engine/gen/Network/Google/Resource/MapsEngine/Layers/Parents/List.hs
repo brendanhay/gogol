@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.Parents.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type LayersParentsListResource =
 -- | Return all parent ids of the specified layer.
 --
 -- /See:/ 'layersParentsList' smart constructor.
-data LayersParentsList = LayersParentsList
+data LayersParentsList = LayersParentsList'
     { _lId         :: !Text
     , _lPageToken  :: !(Maybe Text)
     , _lMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ layersParentsList
     :: Text -- ^ 'lId'
     -> LayersParentsList
 layersParentsList pLId_ =
-    LayersParentsList
+    LayersParentsList'
     { _lId = pLId_
     , _lPageToken = Nothing
     , _lMaxResults = Nothing
@@ -102,7 +102,10 @@ lMaxResults
 
 instance GoogleRequest LayersParentsList where
         type Rs LayersParentsList = ParentsListResponse
-        requestClient LayersParentsList{..}
+        type Scopes LayersParentsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient LayersParentsList'{..}
           = go _lId _lPageToken _lMaxResults (Just AltJSON)
               mapsEngineService
           where go

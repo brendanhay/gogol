@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type InstanceGroupsRemoveInstancesResource =
 -- does not delete those instances.
 --
 -- /See:/ 'instanceGroupsRemoveInstances' smart constructor.
-data InstanceGroupsRemoveInstances = InstanceGroupsRemoveInstances
+data InstanceGroupsRemoveInstances = InstanceGroupsRemoveInstances'
     { _igriProject       :: !Text
     , _igriZone          :: !Text
     , _igriPayload       :: !InstanceGroupsRemoveInstancesRequest
@@ -88,14 +88,14 @@ instanceGroupsRemoveInstances
     -> Text -- ^ 'igriInstanceGroup'
     -> InstanceGroupsRemoveInstances
 instanceGroupsRemoveInstances pIgriProject_ pIgriZone_ pIgriPayload_ pIgriInstanceGroup_ =
-    InstanceGroupsRemoveInstances
+    InstanceGroupsRemoveInstances'
     { _igriProject = pIgriProject_
     , _igriZone = pIgriZone_
     , _igriPayload = pIgriPayload_
     , _igriInstanceGroup = pIgriInstanceGroup_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igriProject :: Lens' InstanceGroupsRemoveInstances Text
 igriProject
   = lens _igriProject (\ s a -> s{_igriProject = a})
@@ -119,7 +119,10 @@ igriInstanceGroup
 instance GoogleRequest InstanceGroupsRemoveInstances
          where
         type Rs InstanceGroupsRemoveInstances = Operation
-        requestClient InstanceGroupsRemoveInstances{..}
+        type Scopes InstanceGroupsRemoveInstances =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceGroupsRemoveInstances'{..}
           = go _igriProject _igriZone _igriInstanceGroup
               (Just AltJSON)
               _igriPayload

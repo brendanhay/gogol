@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Messages.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,8 +70,8 @@ type UsersMessagesInsertResource =
                        UsersMessagesInsertInternalDateSource
                        :>
                        QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" AltMedia :>
-                           MultipartRelated '[JSON] Message RequestBody :>
+                         QueryParam "uploadType" Multipart :>
+                           MultipartRelated '[JSON] Message :>
                              Post '[JSON] Message
 
 -- | Directly inserts a message into only this user\'s mailbox similar to
@@ -79,7 +79,7 @@ type UsersMessagesInsertResource =
 -- message.
 --
 -- /See:/ 'usersMessagesInsert' smart constructor.
-data UsersMessagesInsert = UsersMessagesInsert
+data UsersMessagesInsert = UsersMessagesInsert'
     { _uPayload            :: !Message
     , _uUserId             :: !Text
     , _uDeleted            :: !Bool
@@ -99,10 +99,9 @@ data UsersMessagesInsert = UsersMessagesInsert
 -- * 'uInternalDateSource'
 usersMessagesInsert
     :: Message -- ^ 'uPayload'
-    -> Text
     -> UsersMessagesInsert
-usersMessagesInsert pUPayload_ pUUserId_ =
-    UsersMessagesInsert
+usersMessagesInsert pUPayload_ =
+    UsersMessagesInsert'
     { _uPayload = pUPayload_
     , _uUserId = "me"
     , _uDeleted = False
@@ -132,7 +131,11 @@ uInternalDateSource
 
 instance GoogleRequest UsersMessagesInsert where
         type Rs UsersMessagesInsert = Message
-        requestClient UsersMessagesInsert{..}
+        type Scopes UsersMessagesInsert =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.insert",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersMessagesInsert'{..}
           = go _uUserId (Just _uDeleted)
               (Just _uInternalDateSource)
               (Just AltJSON)
@@ -146,12 +149,14 @@ instance GoogleRequest UsersMessagesInsert where
 instance GoogleRequest
          (MediaUpload UsersMessagesInsert) where
         type Rs (MediaUpload UsersMessagesInsert) = Message
+        type Scopes (MediaUpload UsersMessagesInsert) =
+             Scopes UsersMessagesInsert
         requestClient
-          (MediaUpload UsersMessagesInsert{..} body)
+          (MediaUpload UsersMessagesInsert'{..} body)
           = go _uUserId (Just _uDeleted)
               (Just _uInternalDateSource)
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _uPayload
               body
               gmailService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFiles.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ManagementProFilesInsertResource =
 -- | Create a new view (profile).
 --
 -- /See:/ 'managementProFilesInsert' smart constructor.
-data ManagementProFilesInsert = ManagementProFilesInsert
+data ManagementProFilesInsert = ManagementProFilesInsert'
     { _mpfiWebPropertyId :: !Text
     , _mpfiPayload       :: !ProFile
     , _mpfiAccountId     :: !Text
@@ -79,7 +79,7 @@ managementProFilesInsert
     -> Text -- ^ 'mpfiAccountId'
     -> ManagementProFilesInsert
 managementProFilesInsert pMpfiWebPropertyId_ pMpfiPayload_ pMpfiAccountId_ =
-    ManagementProFilesInsert
+    ManagementProFilesInsert'
     { _mpfiWebPropertyId = pMpfiWebPropertyId_
     , _mpfiPayload = pMpfiPayload_
     , _mpfiAccountId = pMpfiAccountId_
@@ -104,7 +104,9 @@ mpfiAccountId
 
 instance GoogleRequest ManagementProFilesInsert where
         type Rs ManagementProFilesInsert = ProFile
-        requestClient ManagementProFilesInsert{..}
+        type Scopes ManagementProFilesInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementProFilesInsert'{..}
           = go _mpfiAccountId _mpfiWebPropertyId (Just AltJSON)
               _mpfiPayload
               analyticsService

@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.MachineTypes.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified machine type resource.
+-- Returns the specified machine type. Get a list of available machine
+-- types by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.machineTypes.get@.
 module Network.Google.Resource.Compute.MachineTypes.Get
@@ -54,10 +55,11 @@ type MachineTypesGetResource =
                    Capture "machineType" Text :>
                      QueryParam "alt" AltJSON :> Get '[JSON] MachineType
 
--- | Returns the specified machine type resource.
+-- | Returns the specified machine type. Get a list of available machine
+-- types by making a list() request.
 --
 -- /See:/ 'machineTypesGet' smart constructor.
-data MachineTypesGet = MachineTypesGet
+data MachineTypesGet = MachineTypesGet'
     { _mtgProject     :: !Text
     , _mtgZone        :: !Text
     , _mtgMachineType :: !Text
@@ -78,7 +80,7 @@ machineTypesGet
     -> Text -- ^ 'mtgMachineType'
     -> MachineTypesGet
 machineTypesGet pMtgProject_ pMtgZone_ pMtgMachineType_ =
-    MachineTypesGet
+    MachineTypesGet'
     { _mtgProject = pMtgProject_
     , _mtgZone = pMtgZone_
     , _mtgMachineType = pMtgMachineType_
@@ -93,7 +95,7 @@ mtgProject
 mtgZone :: Lens' MachineTypesGet Text
 mtgZone = lens _mtgZone (\ s a -> s{_mtgZone = a})
 
--- | Name of the machine type resource to return.
+-- | Name of the machine type to return.
 mtgMachineType :: Lens' MachineTypesGet Text
 mtgMachineType
   = lens _mtgMachineType
@@ -101,7 +103,11 @@ mtgMachineType
 
 instance GoogleRequest MachineTypesGet where
         type Rs MachineTypesGet = MachineType
-        requestClient MachineTypesGet{..}
+        type Scopes MachineTypesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient MachineTypesGet'{..}
           = go _mtgProject _mtgZone _mtgMachineType
               (Just AltJSON)
               computeService

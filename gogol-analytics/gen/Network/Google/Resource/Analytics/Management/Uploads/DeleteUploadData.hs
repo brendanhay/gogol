@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ManagementUploadsDeleteUploadDataResource =
 -- | Delete data associated with a previous upload.
 --
 -- /See:/ 'managementUploadsDeleteUploadData' smart constructor.
-data ManagementUploadsDeleteUploadData = ManagementUploadsDeleteUploadData
+data ManagementUploadsDeleteUploadData = ManagementUploadsDeleteUploadData'
     { _mududWebPropertyId      :: !Text
     , _mududCustomDataSourceId :: !Text
     , _mududPayload            :: !AnalyticsDataimportDeleteUploadDataRequest
@@ -88,7 +88,7 @@ managementUploadsDeleteUploadData
     -> Text -- ^ 'mududAccountId'
     -> ManagementUploadsDeleteUploadData
 managementUploadsDeleteUploadData pMududWebPropertyId_ pMududCustomDataSourceId_ pMududPayload_ pMududAccountId_ =
-    ManagementUploadsDeleteUploadData
+    ManagementUploadsDeleteUploadData'
     { _mududWebPropertyId = pMududWebPropertyId_
     , _mududCustomDataSourceId = pMududCustomDataSourceId_
     , _mududPayload = pMududPayload_
@@ -121,7 +121,10 @@ mududAccountId
 instance GoogleRequest
          ManagementUploadsDeleteUploadData where
         type Rs ManagementUploadsDeleteUploadData = ()
-        requestClient ManagementUploadsDeleteUploadData{..}
+        type Scopes ManagementUploadsDeleteUploadData =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementUploadsDeleteUploadData'{..}
           = go _mududAccountId _mududWebPropertyId
               _mududCustomDataSourceId
               (Just AltJSON)

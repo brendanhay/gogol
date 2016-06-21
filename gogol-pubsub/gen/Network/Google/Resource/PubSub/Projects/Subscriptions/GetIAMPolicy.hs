@@ -14,14 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for a \`resource\`. Is empty if the
--- policy or the resource does not exist.
+-- Gets the access control policy for a \`resource\`. Returns an empty
+-- policy if the resource exists and does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.getIamPolicy@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
@@ -61,11 +61,11 @@ type ProjectsSubscriptionsGetIAMPolicyResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
--- | Gets the access control policy for a \`resource\`. Is empty if the
--- policy or the resource does not exist.
+-- | Gets the access control policy for a \`resource\`. Returns an empty
+-- policy if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsSubscriptionsGetIAMPolicy' smart constructor.
-data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy
+data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy'
     { _psgipXgafv          :: !(Maybe Text)
     , _psgipUploadProtocol :: !(Maybe Text)
     , _psgipPp             :: !Bool
@@ -99,7 +99,7 @@ projectsSubscriptionsGetIAMPolicy
     :: Text -- ^ 'psgipResource'
     -> ProjectsSubscriptionsGetIAMPolicy
 projectsSubscriptionsGetIAMPolicy pPsgipResource_ =
-    ProjectsSubscriptionsGetIAMPolicy
+    ProjectsSubscriptionsGetIAMPolicy'
     { _psgipXgafv = Nothing
     , _psgipUploadProtocol = Nothing
     , _psgipPp = True
@@ -143,8 +143,11 @@ psgipBearerToken
   = lens _psgipBearerToken
       (\ s a -> s{_psgipBearerToken = a})
 
--- | REQUIRED: The resource for which policy is being requested. Resource is
--- usually specified as a path, such as, \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy is being requested.
+-- \`resource\` is usually specified as a path, such as
+-- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
+-- the path specified in this value is resource specific and is specified
+-- in the \`getIamPolicy\` documentation.
 psgipResource :: Lens' ProjectsSubscriptionsGetIAMPolicy Text
 psgipResource
   = lens _psgipResource
@@ -159,7 +162,10 @@ psgipCallback
 instance GoogleRequest
          ProjectsSubscriptionsGetIAMPolicy where
         type Rs ProjectsSubscriptionsGetIAMPolicy = Policy
-        requestClient ProjectsSubscriptionsGetIAMPolicy{..}
+        type Scopes ProjectsSubscriptionsGetIAMPolicy =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsSubscriptionsGetIAMPolicy'{..}
           = go _psgipResource _psgipXgafv _psgipUploadProtocol
               (Just _psgipPp)
               _psgipAccessToken

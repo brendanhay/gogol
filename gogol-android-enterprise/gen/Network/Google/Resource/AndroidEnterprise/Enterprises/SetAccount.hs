@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@
 -- Set the account that will be used to authenticate to the API as the
 -- enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.setAccount@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.setAccount@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type EnterprisesSetAccountResource =
 -- enterprise.
 --
 -- /See:/ 'enterprisesSetAccount' smart constructor.
-data EnterprisesSetAccount = EnterprisesSetAccount
+data EnterprisesSetAccount = EnterprisesSetAccount'
     { _esaEnterpriseId :: !Text
     , _esaPayload      :: !EnterpriseAccount
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ enterprisesSetAccount
     -> EnterpriseAccount -- ^ 'esaPayload'
     -> EnterprisesSetAccount
 enterprisesSetAccount pEsaEnterpriseId_ pEsaPayload_ =
-    EnterprisesSetAccount
+    EnterprisesSetAccount'
     { _esaEnterpriseId = pEsaEnterpriseId_
     , _esaPayload = pEsaPayload_
     }
@@ -92,7 +92,9 @@ esaPayload
 
 instance GoogleRequest EnterprisesSetAccount where
         type Rs EnterprisesSetAccount = EnterpriseAccount
-        requestClient EnterprisesSetAccount{..}
+        type Scopes EnterprisesSetAccount =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EnterprisesSetAccount'{..}
           = go _esaEnterpriseId (Just AltJSON) _esaPayload
               androidEnterpriseService
           where go

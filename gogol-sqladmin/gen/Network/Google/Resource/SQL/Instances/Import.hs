@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.Import
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type InstancesImportResource =
 -- Cloud Storage.
 --
 -- /See:/ 'instancesImport' smart constructor.
-data InstancesImport = InstancesImport
+data InstancesImport = InstancesImport'
     { _iiProject  :: !Text
     , _iiPayload  :: !InstancesImportRequest
     , _iiInstance :: !Text
@@ -81,7 +81,7 @@ instancesImport
     -> Text -- ^ 'iiInstance'
     -> InstancesImport
 instancesImport pIiProject_ pIiPayload_ pIiInstance_ =
-    InstancesImport
+    InstancesImport'
     { _iiProject = pIiProject_
     , _iiPayload = pIiPayload_
     , _iiInstance = pIiInstance_
@@ -104,7 +104,9 @@ iiInstance
 
 instance GoogleRequest InstancesImport where
         type Rs InstancesImport = Operation
-        requestClient InstancesImport{..}
+        type Scopes InstancesImport =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient InstancesImport'{..}
           = go _iiProject _iiInstance (Just AltJSON) _iiPayload
               sQLAdminService
           where go

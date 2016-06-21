@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Spectrum.Paws.Init
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type PawsInitResource =
 -- database.
 --
 -- /See:/ 'pawsInit' smart constructor.
-newtype PawsInit = PawsInit
+newtype PawsInit = PawsInit'
     { _piPayload :: PawsInitRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ pawsInit
     :: PawsInitRequest -- ^ 'piPayload'
     -> PawsInit
 pawsInit pPiPayload_ =
-    PawsInit
+    PawsInit'
     { _piPayload = pPiPayload_
     }
 
@@ -79,7 +79,8 @@ piPayload
 
 instance GoogleRequest PawsInit where
         type Rs PawsInit = PawsInitResponse
-        requestClient PawsInit{..}
+        type Scopes PawsInit = '[]
+        requestClient PawsInit'{..}
           = go (Just AltJSON) _piPayload spectrumService
           where go
                   = buildClient (Proxy :: Proxy PawsInitResource)

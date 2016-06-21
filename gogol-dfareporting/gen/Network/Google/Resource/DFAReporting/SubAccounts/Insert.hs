@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.SubAccounts.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsInsert' request conforms to.
 type SubAccountsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>
@@ -54,7 +54,7 @@ type SubAccountsInsertResource =
 -- | Inserts a new subaccount.
 --
 -- /See:/ 'subAccountsInsert' smart constructor.
-data SubAccountsInsert = SubAccountsInsert
+data SubAccountsInsert = SubAccountsInsert'
     { _saiProFileId :: !(Textual Int64)
     , _saiPayload   :: !SubAccount
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ subAccountsInsert
     -> SubAccount -- ^ 'saiPayload'
     -> SubAccountsInsert
 subAccountsInsert pSaiProFileId_ pSaiPayload_ =
-    SubAccountsInsert
+    SubAccountsInsert'
     { _saiProFileId = _Coerce # pSaiProFileId_
     , _saiPayload = pSaiPayload_
     }
@@ -89,7 +89,9 @@ saiPayload
 
 instance GoogleRequest SubAccountsInsert where
         type Rs SubAccountsInsert = SubAccount
-        requestClient SubAccountsInsert{..}
+        type Scopes SubAccountsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SubAccountsInsert'{..}
           = go _saiProFileId (Just AltJSON) _saiPayload
               dFAReportingService
           where go

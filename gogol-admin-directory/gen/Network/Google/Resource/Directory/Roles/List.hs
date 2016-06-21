@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Roles.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type RolesListResource =
 -- | Retrieves a paginated list of all the roles in a domain.
 --
 -- /See:/ 'rolesList' smart constructor.
-data RolesList = RolesList
+data RolesList = RolesList'
     { _rlCustomer   :: !Text
     , _rlPageToken  :: !(Maybe Text)
     , _rlMaxResults :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ rolesList
     :: Text -- ^ 'rlCustomer'
     -> RolesList
 rolesList pRlCustomer_ =
-    RolesList
+    RolesList'
     { _rlCustomer = pRlCustomer_
     , _rlPageToken = Nothing
     , _rlMaxResults = Nothing
@@ -100,7 +100,10 @@ rlMaxResults
 
 instance GoogleRequest RolesList where
         type Rs RolesList = Roles
-        requestClient RolesList{..}
+        type Scopes RolesList =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
+               "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
+        requestClient RolesList'{..}
           = go _rlCustomer _rlPageToken _rlMaxResults
               (Just AltJSON)
               directoryService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type AccountsContainersGetResource =
 -- | Gets a Container.
 --
 -- /See:/ 'accountsContainersGet' smart constructor.
-data AccountsContainersGet = AccountsContainersGet
+data AccountsContainersGet = AccountsContainersGet'
     { _acgContainerId :: !Text
     , _acgAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsContainersGet
     -> Text -- ^ 'acgAccountId'
     -> AccountsContainersGet
 accountsContainersGet pAcgContainerId_ pAcgAccountId_ =
-    AccountsContainersGet
+    AccountsContainersGet'
     { _acgContainerId = pAcgContainerId_
     , _acgAccountId = pAcgAccountId_
     }
@@ -89,7 +89,10 @@ acgAccountId
 
 instance GoogleRequest AccountsContainersGet where
         type Rs AccountsContainersGet = Container
-        requestClient AccountsContainersGet{..}
+        type Scopes AccountsContainersGet =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersGet'{..}
           = go _acgAccountId _acgContainerId (Just AltJSON)
               tagManagerService
           where go

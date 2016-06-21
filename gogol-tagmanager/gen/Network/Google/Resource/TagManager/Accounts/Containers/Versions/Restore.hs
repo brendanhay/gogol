@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type AccountsContainersVersionsRestoreResource =
 -- (i.e. the published version).
 --
 -- /See:/ 'accountsContainersVersionsRestore' smart constructor.
-data AccountsContainersVersionsRestore = AccountsContainersVersionsRestore
+data AccountsContainersVersionsRestore = AccountsContainersVersionsRestore'
     { _acvrContainerId        :: !Text
     , _acvrContainerVersionId :: !Text
     , _acvrAccountId          :: !Text
@@ -86,7 +86,7 @@ accountsContainersVersionsRestore
     -> Text -- ^ 'acvrAccountId'
     -> AccountsContainersVersionsRestore
 accountsContainersVersionsRestore pAcvrContainerId_ pAcvrContainerVersionId_ pAcvrAccountId_ =
-    AccountsContainersVersionsRestore
+    AccountsContainersVersionsRestore'
     { _acvrContainerId = pAcvrContainerId_
     , _acvrContainerVersionId = pAcvrContainerVersionId_
     , _acvrAccountId = pAcvrAccountId_
@@ -114,7 +114,9 @@ instance GoogleRequest
          AccountsContainersVersionsRestore where
         type Rs AccountsContainersVersionsRestore =
              ContainerVersion
-        requestClient AccountsContainersVersionsRestore{..}
+        type Scopes AccountsContainersVersionsRestore =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient AccountsContainersVersionsRestore'{..}
           = go _acvrAccountId _acvrContainerId
               _acvrContainerVersionId
               (Just AltJSON)

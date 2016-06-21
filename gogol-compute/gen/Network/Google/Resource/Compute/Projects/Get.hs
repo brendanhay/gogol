@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Projects.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified project resource.
+-- Returns the specified Project resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.projects.get@.
 module Network.Google.Resource.Compute.Projects.Get
@@ -48,10 +48,10 @@ type ProjectsGetResource =
            Capture "project" Text :>
              QueryParam "alt" AltJSON :> Get '[JSON] Project
 
--- | Returns the specified project resource.
+-- | Returns the specified Project resource.
 --
 -- /See:/ 'projectsGet' smart constructor.
-newtype ProjectsGet = ProjectsGet
+newtype ProjectsGet = ProjectsGet'
     { _pgProject :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ projectsGet
     :: Text -- ^ 'pgProject'
     -> ProjectsGet
 projectsGet pPgProject_ =
-    ProjectsGet
+    ProjectsGet'
     { _pgProject = pPgProject_
     }
 
@@ -75,7 +75,11 @@ pgProject
 
 instance GoogleRequest ProjectsGet where
         type Rs ProjectsGet = Project
-        requestClient ProjectsGet{..}
+        type Scopes ProjectsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient ProjectsGet'{..}
           = go _pgProject (Just AltJSON) computeService
           where go
                   = buildClient (Proxy :: Proxy ProjectsGetResource)

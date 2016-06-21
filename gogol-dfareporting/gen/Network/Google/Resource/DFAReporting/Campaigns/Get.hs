@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Campaigns.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CampaignsGet' request conforms to.
 type CampaignsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -54,7 +54,7 @@ type CampaignsGetResource =
 -- | Gets one campaign by ID.
 --
 -- /See:/ 'campaignsGet' smart constructor.
-data CampaignsGet = CampaignsGet
+data CampaignsGet = CampaignsGet'
     { _cggProFileId :: !(Textual Int64)
     , _cggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ campaignsGet
     -> Int64 -- ^ 'cggId'
     -> CampaignsGet
 campaignsGet pCggProFileId_ pCggId_ =
-    CampaignsGet
+    CampaignsGet'
     { _cggProFileId = _Coerce # pCggProFileId_
     , _cggId = _Coerce # pCggId_
     }
@@ -89,7 +89,9 @@ cggId
 
 instance GoogleRequest CampaignsGet where
         type Rs CampaignsGet = Campaign
-        requestClient CampaignsGet{..}
+        type Scopes CampaignsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CampaignsGet'{..}
           = go _cggProFileId _cggId (Just AltJSON)
               dFAReportingService
           where go

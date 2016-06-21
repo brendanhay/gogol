@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsDelete' request conforms to.
 type AdvertiserGroupsDeleteResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -54,7 +54,7 @@ type AdvertiserGroupsDeleteResource =
 -- | Deletes an existing advertiser group.
 --
 -- /See:/ 'advertiserGroupsDelete' smart constructor.
-data AdvertiserGroupsDelete = AdvertiserGroupsDelete
+data AdvertiserGroupsDelete = AdvertiserGroupsDelete'
     { _agdProFileId :: !(Textual Int64)
     , _agdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ advertiserGroupsDelete
     -> Int64 -- ^ 'agdId'
     -> AdvertiserGroupsDelete
 advertiserGroupsDelete pAgdProFileId_ pAgdId_ =
-    AdvertiserGroupsDelete
+    AdvertiserGroupsDelete'
     { _agdProFileId = _Coerce # pAgdProFileId_
     , _agdId = _Coerce # pAgdId_
     }
@@ -89,7 +89,9 @@ agdId
 
 instance GoogleRequest AdvertiserGroupsDelete where
         type Rs AdvertiserGroupsDelete = ()
-        requestClient AdvertiserGroupsDelete{..}
+        type Scopes AdvertiserGroupsDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdvertiserGroupsDelete'{..}
           = go _agdProFileId _agdId (Just AltJSON)
               dFAReportingService
           where go

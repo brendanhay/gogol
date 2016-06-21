@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Cloudlatencytest.Statscollection.Updatestats
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type StatscollectionUpdatestatsResource =
 -- | RPC to update the new TCP stats.
 --
 -- /See:/ 'statscollectionUpdatestats' smart constructor.
-newtype StatscollectionUpdatestats = StatscollectionUpdatestats
+newtype StatscollectionUpdatestats = StatscollectionUpdatestats'
     { _suPayload :: Stats
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ statscollectionUpdatestats
     :: Stats -- ^ 'suPayload'
     -> StatscollectionUpdatestats
 statscollectionUpdatestats pSuPayload_ =
-    StatscollectionUpdatestats
+    StatscollectionUpdatestats'
     { _suPayload = pSuPayload_
     }
 
@@ -76,7 +76,9 @@ suPayload
 instance GoogleRequest StatscollectionUpdatestats
          where
         type Rs StatscollectionUpdatestats = StatsReply
-        requestClient StatscollectionUpdatestats{..}
+        type Scopes StatscollectionUpdatestats =
+             '["https://www.googleapis.com/auth/monitoring.readonly"]
+        requestClient StatscollectionUpdatestats'{..}
           = go (Just AltJSON) _suPayload latencyTestService
           where go
                   = buildClient

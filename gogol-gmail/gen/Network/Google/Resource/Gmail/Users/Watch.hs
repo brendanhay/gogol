@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Watch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersWatchResource =
 -- | Set up or update a push notification watch on the given user mailbox.
 --
 -- /See:/ 'usersWatch' smart constructor.
-data UsersWatch = UsersWatch
+data UsersWatch = UsersWatch'
     { _uwPayload :: !WatchRequest
     , _uwUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,10 +69,9 @@ data UsersWatch = UsersWatch
 -- * 'uwUserId'
 usersWatch
     :: WatchRequest -- ^ 'uwPayload'
-    -> Text
     -> UsersWatch
-usersWatch pUwPayload_ pUwUserId_ =
-    UsersWatch
+usersWatch pUwPayload_ =
+    UsersWatch'
     { _uwPayload = pUwPayload_
     , _uwUserId = "me"
     }
@@ -89,7 +88,11 @@ uwUserId = lens _uwUserId (\ s a -> s{_uwUserId = a})
 
 instance GoogleRequest UsersWatch where
         type Rs UsersWatch = WatchResponse
-        requestClient UsersWatch{..}
+        type Scopes UsersWatch =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersWatch'{..}
           = go _uwUserId (Just AltJSON) _uwPayload gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersWatchResource)

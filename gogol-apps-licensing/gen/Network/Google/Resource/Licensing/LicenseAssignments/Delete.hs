@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Licensing.LicenseAssignments.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type LicenseAssignmentsDeleteResource =
 -- | Revoke License.
 --
 -- /See:/ 'licenseAssignmentsDelete' smart constructor.
-data LicenseAssignmentsDelete = LicenseAssignmentsDelete
+data LicenseAssignmentsDelete = LicenseAssignmentsDelete'
     { _ladSKUId     :: !Text
     , _ladUserId    :: !Text
     , _ladProductId :: !Text
@@ -79,7 +79,7 @@ licenseAssignmentsDelete
     -> Text -- ^ 'ladProductId'
     -> LicenseAssignmentsDelete
 licenseAssignmentsDelete pLadSKUId_ pLadUserId_ pLadProductId_ =
-    LicenseAssignmentsDelete
+    LicenseAssignmentsDelete'
     { _ladSKUId = pLadSKUId_
     , _ladUserId = pLadUserId_
     , _ladProductId = pLadProductId_
@@ -101,7 +101,9 @@ ladProductId
 
 instance GoogleRequest LicenseAssignmentsDelete where
         type Rs LicenseAssignmentsDelete = ()
-        requestClient LicenseAssignmentsDelete{..}
+        type Scopes LicenseAssignmentsDelete =
+             '["https://www.googleapis.com/auth/apps.licensing"]
+        requestClient LicenseAssignmentsDelete'{..}
           = go _ladProductId _ladSKUId _ladUserId
               (Just AltJSON)
               appsLicensingService

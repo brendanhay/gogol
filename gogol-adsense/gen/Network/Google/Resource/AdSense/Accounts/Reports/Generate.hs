@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Accounts.Reports.Generate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -99,7 +99,7 @@ type AccountsReportsGenerateResource =
 -- specify \"alt=csv\" as a query parameter.
 --
 -- /See:/ 'accountsReportsGenerate' smart constructor.
-data AccountsReportsGenerate = AccountsReportsGenerate
+data AccountsReportsGenerate = AccountsReportsGenerate'
     { _argDimension            :: !(Maybe [Text])
     , _argLocale               :: !(Maybe Text)
     , _argEndDate              :: !Text
@@ -147,7 +147,7 @@ accountsReportsGenerate
     -> Text -- ^ 'argAccountId'
     -> AccountsReportsGenerate
 accountsReportsGenerate pArgEndDate_ pArgStartDate_ pArgAccountId_ =
-    AccountsReportsGenerate
+    AccountsReportsGenerate'
     { _argDimension = Nothing
     , _argLocale = Nothing
     , _argEndDate = pArgEndDate_
@@ -243,7 +243,10 @@ argMaxResults
 instance GoogleRequest AccountsReportsGenerate where
         type Rs AccountsReportsGenerate =
              AdsenseReportsGenerateResponse
-        requestClient AccountsReportsGenerate{..}
+        type Scopes AccountsReportsGenerate =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AccountsReportsGenerate'{..}
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
               (_argDimension ^. _Default)
@@ -266,8 +269,10 @@ instance GoogleRequest
          (MediaDownload AccountsReportsGenerate) where
         type Rs (MediaDownload AccountsReportsGenerate) =
              Stream
+        type Scopes (MediaDownload AccountsReportsGenerate) =
+             Scopes AccountsReportsGenerate
         requestClient
-          (MediaDownload AccountsReportsGenerate{..})
+          (MediaDownload AccountsReportsGenerate'{..})
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
               (_argDimension ^. _Default)

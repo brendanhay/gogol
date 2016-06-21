@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Collections.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves the details of a collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.get@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Get
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type CollectionsGetResource =
 -- | Retrieves the details of a collection.
 --
 -- /See:/ 'collectionsGet' smart constructor.
-data CollectionsGet = CollectionsGet
+data CollectionsGet = CollectionsGet'
     { _cgEnterpriseId :: !Text
     , _cgCollectionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ collectionsGet
     -> Text -- ^ 'cgCollectionId'
     -> CollectionsGet
 collectionsGet pCgEnterpriseId_ pCgCollectionId_ =
-    CollectionsGet
+    CollectionsGet'
     { _cgEnterpriseId = pCgEnterpriseId_
     , _cgCollectionId = pCgCollectionId_
     }
@@ -90,7 +90,9 @@ cgCollectionId
 
 instance GoogleRequest CollectionsGet where
         type Rs CollectionsGet = Collection
-        requestClient CollectionsGet{..}
+        type Scopes CollectionsGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient CollectionsGet'{..}
           = go _cgEnterpriseId _cgCollectionId (Just AltJSON)
               androidEnterpriseService
           where go

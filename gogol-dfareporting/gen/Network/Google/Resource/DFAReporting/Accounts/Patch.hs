@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Accounts.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'AccountsPatch' request conforms to.
 type AccountsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
@@ -56,7 +56,7 @@ type AccountsPatchResource =
 -- | Updates an existing account. This method supports patch semantics.
 --
 -- /See:/ 'accountsPatch' smart constructor.
-data AccountsPatch = AccountsPatch
+data AccountsPatch = AccountsPatch'
     { _appProFileId :: !(Textual Int64)
     , _appPayload   :: !Account
     , _appId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ accountsPatch
     -> Int64 -- ^ 'appId'
     -> AccountsPatch
 accountsPatch pAppProFileId_ pAppPayload_ pAppId_ =
-    AccountsPatch
+    AccountsPatch'
     { _appProFileId = _Coerce # pAppProFileId_
     , _appPayload = pAppPayload_
     , _appId = _Coerce # pAppId_
@@ -101,7 +101,9 @@ appId
 
 instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account
-        requestClient AccountsPatch{..}
+        type Scopes AccountsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountsPatch'{..}
           = go _appProFileId (Just _appId) (Just AltJSON)
               _appPayload
               dFAReportingService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Calendars.Clear
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type CalendarsClearResource =
 -- with the primary calendar of an account.
 --
 -- /See:/ 'calendarsClear' smart constructor.
-newtype CalendarsClear = CalendarsClear
+newtype CalendarsClear = CalendarsClear'
     { _ccCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ calendarsClear
     :: Text -- ^ 'ccCalendarId'
     -> CalendarsClear
 calendarsClear pCcCalendarId_ =
-    CalendarsClear
+    CalendarsClear'
     { _ccCalendarId = pCcCalendarId_
     }
 
@@ -80,7 +80,9 @@ ccCalendarId
 
 instance GoogleRequest CalendarsClear where
         type Rs CalendarsClear = ()
-        requestClient CalendarsClear{..}
+        type Scopes CalendarsClear =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient CalendarsClear'{..}
           = go _ccCalendarId (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy CalendarsClearResource)

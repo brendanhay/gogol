@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Experiments.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type ManagementExperimentsUpdateResource =
 -- | Update an existing experiment.
 --
 -- /See:/ 'managementExperimentsUpdate' smart constructor.
-data ManagementExperimentsUpdate = ManagementExperimentsUpdate
+data ManagementExperimentsUpdate = ManagementExperimentsUpdate'
     { _meuWebPropertyId :: !Text
     , _meuProFileId     :: !Text
     , _meuPayload       :: !Experiment
@@ -93,7 +93,7 @@ managementExperimentsUpdate
     -> Text -- ^ 'meuExperimentId'
     -> ManagementExperimentsUpdate
 managementExperimentsUpdate pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
-    ManagementExperimentsUpdate
+    ManagementExperimentsUpdate'
     { _meuWebPropertyId = pMeuWebPropertyId_
     , _meuProFileId = pMeuProFileId_
     , _meuPayload = pMeuPayload_
@@ -131,7 +131,10 @@ meuExperimentId
 instance GoogleRequest ManagementExperimentsUpdate
          where
         type Rs ManagementExperimentsUpdate = Experiment
-        requestClient ManagementExperimentsUpdate{..}
+        type Scopes ManagementExperimentsUpdate =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementExperimentsUpdate'{..}
           = go _meuAccountId _meuWebPropertyId _meuProFileId
               _meuExperimentId
               (Just AltJSON)

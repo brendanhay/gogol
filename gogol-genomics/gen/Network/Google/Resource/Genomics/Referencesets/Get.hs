@@ -14,16 +14,19 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Referencesets.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a reference set. Implements
+-- Gets a reference set. For the definitions of references and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.getReferenceSet](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L83).
 --
--- /See:/ < Genomics API Reference> for @genomics.referencesets.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.referencesets.get@.
 module Network.Google.Resource.Genomics.Referencesets.Get
     (
     -- * REST Resource
@@ -62,11 +65,14 @@ type ReferencesetsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] ReferenceSet
 
--- | Gets a reference set. Implements
+-- | Gets a reference set. For the definitions of references and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.getReferenceSet](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L83).
 --
 -- /See:/ 'referencesetsGet' smart constructor.
-data ReferencesetsGet = ReferencesetsGet
+data ReferencesetsGet = ReferencesetsGet'
     { _rgReferenceSetId :: !Text
     , _rgXgafv          :: !(Maybe Text)
     , _rgUploadProtocol :: !(Maybe Text)
@@ -100,7 +106,7 @@ referencesetsGet
     :: Text -- ^ 'rgReferenceSetId'
     -> ReferencesetsGet
 referencesetsGet pRgReferenceSetId_ =
-    ReferencesetsGet
+    ReferencesetsGet'
     { _rgReferenceSetId = pRgReferenceSetId_
     , _rgXgafv = Nothing
     , _rgUploadProtocol = Nothing
@@ -155,7 +161,11 @@ rgCallback
 
 instance GoogleRequest ReferencesetsGet where
         type Rs ReferencesetsGet = ReferenceSet
-        requestClient ReferencesetsGet{..}
+        type Scopes ReferencesetsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient ReferencesetsGet'{..}
           = go _rgReferenceSetId _rgXgafv _rgUploadProtocol
               (Just _rgPp)
               _rgAccessToken

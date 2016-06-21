@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Achievements.Reset
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AchievementsResetResource =
 -- for your application.
 --
 -- /See:/ 'achievementsReset' smart constructor.
-newtype AchievementsReset = AchievementsReset
+newtype AchievementsReset = AchievementsReset'
     { _arAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ achievementsReset
     :: Text -- ^ 'arAchievementId'
     -> AchievementsReset
 achievementsReset pArAchievementId_ =
-    AchievementsReset
+    AchievementsReset'
     { _arAchievementId = pArAchievementId_
     }
 
@@ -82,7 +82,10 @@ arAchievementId
 
 instance GoogleRequest AchievementsReset where
         type Rs AchievementsReset = AchievementResetResponse
-        requestClient AchievementsReset{..}
+        type Scopes AchievementsReset =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient AchievementsReset'{..}
           = go _arAchievementId (Just AltJSON)
               gamesManagementService
           where go

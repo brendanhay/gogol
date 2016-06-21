@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Contacts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type ContactsGetResource =
 -- | Gets a single contact by ID.
 --
 -- /See:/ 'contactsGet' smart constructor.
-newtype ContactsGet = ContactsGet
+newtype ContactsGet = ContactsGet'
     { _cgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ contactsGet
     :: Text -- ^ 'cgId'
     -> ContactsGet
 contactsGet pCgId_ =
-    ContactsGet
+    ContactsGet'
     { _cgId = pCgId_
     }
 
@@ -74,7 +74,9 @@ cgId = lens _cgId (\ s a -> s{_cgId = a})
 
 instance GoogleRequest ContactsGet where
         type Rs ContactsGet = Contact
-        requestClient ContactsGet{..}
+        type Scopes ContactsGet =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient ContactsGet'{..}
           = go _cgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsGetResource)

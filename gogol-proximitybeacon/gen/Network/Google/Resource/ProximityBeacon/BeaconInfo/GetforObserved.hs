@@ -14,14 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Given one or more beacon observations, returns any beacon information
--- and attachments accessible to your application.
+-- and attachments accessible to your application. Authorize by using the
+-- [API
+-- key](https:\/\/developers.google.com\/beacons\/proximity\/how-tos\/authorizing#APIKey)
+-- for the application.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beaconinfo.getforobserved@.
 module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
@@ -64,10 +67,13 @@ type BeaconInfoGetforObservedResource =
                            Post '[JSON] GetInfoForObservedBeaconsResponse
 
 -- | Given one or more beacon observations, returns any beacon information
--- and attachments accessible to your application.
+-- and attachments accessible to your application. Authorize by using the
+-- [API
+-- key](https:\/\/developers.google.com\/beacons\/proximity\/how-tos\/authorizing#APIKey)
+-- for the application.
 --
 -- /See:/ 'beaconInfoGetforObserved' smart constructor.
-data BeaconInfoGetforObserved = BeaconInfoGetforObserved
+data BeaconInfoGetforObserved = BeaconInfoGetforObserved'
     { _bigoXgafv          :: !(Maybe Text)
     , _bigoUploadProtocol :: !(Maybe Text)
     , _bigoPp             :: !Bool
@@ -101,7 +107,7 @@ beaconInfoGetforObserved
     :: GetInfoForObservedBeaconsRequest -- ^ 'bigoPayload'
     -> BeaconInfoGetforObserved
 beaconInfoGetforObserved pBigoPayload_ =
-    BeaconInfoGetforObserved
+    BeaconInfoGetforObserved'
     { _bigoXgafv = Nothing
     , _bigoUploadProtocol = Nothing
     , _bigoPp = True
@@ -158,7 +164,8 @@ bigoCallback
 instance GoogleRequest BeaconInfoGetforObserved where
         type Rs BeaconInfoGetforObserved =
              GetInfoForObservedBeaconsResponse
-        requestClient BeaconInfoGetforObserved{..}
+        type Scopes BeaconInfoGetforObserved = '[]
+        requestClient BeaconInfoGetforObserved'{..}
           = go _bigoXgafv _bigoUploadProtocol (Just _bigoPp)
               _bigoAccessToken
               _bigoUploadType

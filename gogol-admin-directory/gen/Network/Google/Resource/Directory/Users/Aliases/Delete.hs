@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Aliases.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersAliasesDeleteResource =
 -- | Remove a alias for the user
 --
 -- /See:/ 'usersAliasesDelete' smart constructor.
-data UsersAliasesDelete = UsersAliasesDelete
+data UsersAliasesDelete = UsersAliasesDelete'
     { _uadAlias   :: !Text
     , _uadUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersAliasesDelete
     -> Text -- ^ 'uadUserKey'
     -> UsersAliasesDelete
 usersAliasesDelete pUadAlias_ pUadUserKey_ =
-    UsersAliasesDelete
+    UsersAliasesDelete'
     { _uadAlias = pUadAlias_
     , _uadUserKey = pUadUserKey_
     }
@@ -88,7 +88,10 @@ uadUserKey
 
 instance GoogleRequest UsersAliasesDelete where
         type Rs UsersAliasesDelete = ()
-        requestClient UsersAliasesDelete{..}
+        type Scopes UsersAliasesDelete =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.alias"]
+        requestClient UsersAliasesDelete'{..}
           = go _uadUserKey _uadAlias (Just AltJSON)
               directoryService
           where go

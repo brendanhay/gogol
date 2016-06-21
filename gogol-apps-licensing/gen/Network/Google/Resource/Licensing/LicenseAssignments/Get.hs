@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Licensing.LicenseAssignments.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type LicenseAssignmentsGetResource =
 -- | Get license assignment of a particular product and sku for a user
 --
 -- /See:/ 'licenseAssignmentsGet' smart constructor.
-data LicenseAssignmentsGet = LicenseAssignmentsGet
+data LicenseAssignmentsGet = LicenseAssignmentsGet'
     { _lagSKUId     :: !Text
     , _lagUserId    :: !Text
     , _lagProductId :: !Text
@@ -80,7 +80,7 @@ licenseAssignmentsGet
     -> Text -- ^ 'lagProductId'
     -> LicenseAssignmentsGet
 licenseAssignmentsGet pLagSKUId_ pLagUserId_ pLagProductId_ =
-    LicenseAssignmentsGet
+    LicenseAssignmentsGet'
     { _lagSKUId = pLagSKUId_
     , _lagUserId = pLagUserId_
     , _lagProductId = pLagProductId_
@@ -102,7 +102,9 @@ lagProductId
 
 instance GoogleRequest LicenseAssignmentsGet where
         type Rs LicenseAssignmentsGet = LicenseAssignment
-        requestClient LicenseAssignmentsGet{..}
+        type Scopes LicenseAssignmentsGet =
+             '["https://www.googleapis.com/auth/apps.licensing"]
+        requestClient LicenseAssignmentsGet'{..}
           = go _lagProductId _lagSKUId _lagUserId
               (Just AltJSON)
               appsLicensingService

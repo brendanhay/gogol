@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Thumbnails.Set
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,13 +61,12 @@ type ThumbnailsSetResource =
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "alt" AltJSON :>
                        QueryParam "uploadType" AltMedia :>
-                         ReqBody '[OctetStream] RequestBody :>
-                           Post '[JSON] ThumbnailSetResponse
+                         AltMedia :> Post '[JSON] ThumbnailSetResponse
 
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
 --
 -- /See:/ 'thumbnailsSet' smart constructor.
-data ThumbnailsSet = ThumbnailsSet
+data ThumbnailsSet = ThumbnailsSet'
     { _tsOnBehalfOfContentOwner :: !(Maybe Text)
     , _tsVideoId                :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -83,7 +82,7 @@ thumbnailsSet
     :: Text -- ^ 'tsVideoId'
     -> ThumbnailsSet
 thumbnailsSet pTsVideoId_ =
-    ThumbnailsSet
+    ThumbnailsSet'
     { _tsOnBehalfOfContentOwner = Nothing
     , _tsVideoId = pTsVideoId_
     }
@@ -111,7 +110,12 @@ tsVideoId
 
 instance GoogleRequest ThumbnailsSet where
         type Rs ThumbnailsSet = ThumbnailSetResponse
-        requestClient ThumbnailsSet{..}
+        type Scopes ThumbnailsSet =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.upload",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient ThumbnailsSet'{..}
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService
@@ -123,7 +127,9 @@ instance GoogleRequest (MediaUpload ThumbnailsSet)
          where
         type Rs (MediaUpload ThumbnailsSet) =
              ThumbnailSetResponse
-        requestClient (MediaUpload ThumbnailsSet{..} body)
+        type Scopes (MediaUpload ThumbnailsSet) =
+             Scopes ThumbnailsSet
+        requestClient (MediaUpload ThumbnailsSet'{..} body)
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               (Just AltJSON)
               (Just AltMedia)

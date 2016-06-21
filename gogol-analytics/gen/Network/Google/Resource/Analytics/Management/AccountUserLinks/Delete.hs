@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ManagementAccountUserLinksDeleteResource =
 -- | Removes a user from the given account.
 --
 -- /See:/ 'managementAccountUserLinksDelete' smart constructor.
-data ManagementAccountUserLinksDelete = ManagementAccountUserLinksDelete
+data ManagementAccountUserLinksDelete = ManagementAccountUserLinksDelete'
     { _mauldAccountId :: !Text
     , _mauldLinkId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ managementAccountUserLinksDelete
     -> Text -- ^ 'mauldLinkId'
     -> ManagementAccountUserLinksDelete
 managementAccountUserLinksDelete pMauldAccountId_ pMauldLinkId_ =
-    ManagementAccountUserLinksDelete
+    ManagementAccountUserLinksDelete'
     { _mauldAccountId = pMauldAccountId_
     , _mauldLinkId = pMauldLinkId_
     }
@@ -91,7 +91,9 @@ mauldLinkId
 instance GoogleRequest
          ManagementAccountUserLinksDelete where
         type Rs ManagementAccountUserLinksDelete = ()
-        requestClient ManagementAccountUserLinksDelete{..}
+        type Scopes ManagementAccountUserLinksDelete =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
+        requestClient ManagementAccountUserLinksDelete'{..}
           = go _mauldAccountId _mauldLinkId (Just AltJSON)
               analyticsService
           where go

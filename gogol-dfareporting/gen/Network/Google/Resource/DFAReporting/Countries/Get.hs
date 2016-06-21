@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Countries.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CountriesGet' request conforms to.
 type CountriesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "countries" :>
@@ -54,7 +54,7 @@ type CountriesGetResource =
 -- | Gets one country by ID.
 --
 -- /See:/ 'countriesGet' smart constructor.
-data CountriesGet = CountriesGet
+data CountriesGet = CountriesGet'
     { _cgProFileId :: !(Textual Int64)
     , _cgDartId    :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ countriesGet
     -> Int64 -- ^ 'cgDartId'
     -> CountriesGet
 countriesGet pCgProFileId_ pCgDartId_ =
-    CountriesGet
+    CountriesGet'
     { _cgProFileId = _Coerce # pCgProFileId_
     , _cgDartId = _Coerce # pCgDartId_
     }
@@ -90,7 +90,9 @@ cgDartId
 
 instance GoogleRequest CountriesGet where
         type Rs CountriesGet = Country
-        requestClient CountriesGet{..}
+        type Scopes CountriesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CountriesGet'{..}
           = go _cgProFileId _cgDartId (Just AltJSON)
               dFAReportingService
           where go

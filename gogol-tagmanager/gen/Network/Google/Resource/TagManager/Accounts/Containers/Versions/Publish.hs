@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type AccountsContainersVersionsPublishResource =
 -- | Publishes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsPublish' smart constructor.
-data AccountsContainersVersionsPublish = AccountsContainersVersionsPublish
+data AccountsContainersVersionsPublish = AccountsContainersVersionsPublish'
     { _acvpContainerId        :: !Text
     , _acvpFingerprint        :: !(Maybe Text)
     , _acvpContainerVersionId :: !Text
@@ -85,7 +85,7 @@ accountsContainersVersionsPublish
     -> Text -- ^ 'acvpAccountId'
     -> AccountsContainersVersionsPublish
 accountsContainersVersionsPublish pAcvpContainerId_ pAcvpContainerVersionId_ pAcvpAccountId_ =
-    AccountsContainersVersionsPublish
+    AccountsContainersVersionsPublish'
     { _acvpContainerId = pAcvpContainerId_
     , _acvpFingerprint = Nothing
     , _acvpContainerVersionId = pAcvpContainerVersionId_
@@ -121,7 +121,9 @@ instance GoogleRequest
          AccountsContainersVersionsPublish where
         type Rs AccountsContainersVersionsPublish =
              PublishContainerVersionResponse
-        requestClient AccountsContainersVersionsPublish{..}
+        type Scopes AccountsContainersVersionsPublish =
+             '["https://www.googleapis.com/auth/tagmanager.publish"]
+        requestClient AccountsContainersVersionsPublish'{..}
           = go _acvpAccountId _acvpContainerId
               _acvpContainerVersionId
               _acvpFingerprint

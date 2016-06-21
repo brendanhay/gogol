@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes health check URL from targetPool.
+-- Removes health check URL from a target pool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.removeHealthCheck@.
 module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
@@ -58,10 +58,10 @@ type TargetPoolsRemoveHealthCheckResource =
                          ReqBody '[JSON] TargetPoolsRemoveHealthCheckRequest
                            :> Post '[JSON] Operation
 
--- | Removes health check URL from targetPool.
+-- | Removes health check URL from a target pool.
 --
 -- /See:/ 'targetPoolsRemoveHealthCheck' smart constructor.
-data TargetPoolsRemoveHealthCheck = TargetPoolsRemoveHealthCheck
+data TargetPoolsRemoveHealthCheck = TargetPoolsRemoveHealthCheck'
     { _tprhcProject    :: !Text
     , _tprhcTargetPool :: !Text
     , _tprhcPayload    :: !TargetPoolsRemoveHealthCheckRequest
@@ -86,19 +86,19 @@ targetPoolsRemoveHealthCheck
     -> Text -- ^ 'tprhcRegion'
     -> TargetPoolsRemoveHealthCheck
 targetPoolsRemoveHealthCheck pTprhcProject_ pTprhcTargetPool_ pTprhcPayload_ pTprhcRegion_ =
-    TargetPoolsRemoveHealthCheck
+    TargetPoolsRemoveHealthCheck'
     { _tprhcProject = pTprhcProject_
     , _tprhcTargetPool = pTprhcTargetPool_
     , _tprhcPayload = pTprhcPayload_
     , _tprhcRegion = pTprhcRegion_
     }
 
+-- | Project ID for this request.
 tprhcProject :: Lens' TargetPoolsRemoveHealthCheck Text
 tprhcProject
   = lens _tprhcProject (\ s a -> s{_tprhcProject = a})
 
--- | Name of the TargetPool resource to which health_check_url is to be
--- removed.
+-- | Name of the target pool to remove health checks from.
 tprhcTargetPool :: Lens' TargetPoolsRemoveHealthCheck Text
 tprhcTargetPool
   = lens _tprhcTargetPool
@@ -109,7 +109,7 @@ tprhcPayload :: Lens' TargetPoolsRemoveHealthCheck TargetPoolsRemoveHealthCheckR
 tprhcPayload
   = lens _tprhcPayload (\ s a -> s{_tprhcPayload = a})
 
--- | Name of the region scoping this request.
+-- | Name of the region for this request.
 tprhcRegion :: Lens' TargetPoolsRemoveHealthCheck Text
 tprhcRegion
   = lens _tprhcRegion (\ s a -> s{_tprhcRegion = a})
@@ -117,7 +117,10 @@ tprhcRegion
 instance GoogleRequest TargetPoolsRemoveHealthCheck
          where
         type Rs TargetPoolsRemoveHealthCheck = Operation
-        requestClient TargetPoolsRemoveHealthCheck{..}
+        type Scopes TargetPoolsRemoveHealthCheck =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetPoolsRemoveHealthCheck'{..}
           = go _tprhcProject _tprhcRegion _tprhcTargetPool
               (Just AltJSON)
               _tprhcPayload

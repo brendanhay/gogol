@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Pages.Revert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type PagesRevertResource =
 -- | Revert a published or scheduled page to draft state.
 --
 -- /See:/ 'pagesRevert' smart constructor.
-data PagesRevert = PagesRevert
+data PagesRevert = PagesRevert'
     { _pagBlogId :: !Text
     , _pagPageId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ pagesRevert
     -> Text -- ^ 'pagPageId'
     -> PagesRevert
 pagesRevert pPagBlogId_ pPagPageId_ =
-    PagesRevert
+    PagesRevert'
     { _pagBlogId = pPagBlogId_
     , _pagPageId = pPagPageId_
     }
@@ -89,7 +89,9 @@ pagPageId
 
 instance GoogleRequest PagesRevert where
         type Rs PagesRevert = Page
-        requestClient PagesRevert{..}
+        type Scopes PagesRevert =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PagesRevert'{..}
           = go _pagBlogId _pagPageId (Just AltJSON)
               bloggerService
           where go

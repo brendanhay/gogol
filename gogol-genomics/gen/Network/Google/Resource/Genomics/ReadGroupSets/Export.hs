@@ -14,19 +14,22 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.ReadGroupSets.Export
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Exports a read group set to a BAM file in Google Cloud Storage. Note
--- that currently there may be some differences between exported BAM files
--- and the original BAM file at the time of import. See
+-- Exports a read group set to a BAM file in Google Cloud Storage. For the
+-- definitions of read group sets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Note that currently there may be some differences between exported BAM
+-- files and the original BAM file at the time of import. See
 -- [ImportReadGroupSets](google.genomics.v1.ReadServiceV1.ImportReadGroupSets)
 -- for caveats.
 --
--- /See:/ < Genomics API Reference> for @genomics.readgroupsets.export@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.export@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Export
     (
     -- * REST Resource
@@ -68,14 +71,17 @@ type ReadGroupSetsExportResource =
                            ReqBody '[JSON] ExportReadGroupSetRequest :>
                              Post '[JSON] Operation
 
--- | Exports a read group set to a BAM file in Google Cloud Storage. Note
--- that currently there may be some differences between exported BAM files
--- and the original BAM file at the time of import. See
+-- | Exports a read group set to a BAM file in Google Cloud Storage. For the
+-- definitions of read group sets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Note that currently there may be some differences between exported BAM
+-- files and the original BAM file at the time of import. See
 -- [ImportReadGroupSets](google.genomics.v1.ReadServiceV1.ImportReadGroupSets)
 -- for caveats.
 --
 -- /See:/ 'readGroupSetsExport' smart constructor.
-data ReadGroupSetsExport = ReadGroupSetsExport
+data ReadGroupSetsExport = ReadGroupSetsExport'
     { _rgseXgafv          :: !(Maybe Text)
     , _rgseReadGroupSetId :: !Text
     , _rgseUploadProtocol :: !(Maybe Text)
@@ -113,7 +119,7 @@ readGroupSetsExport
     -> ExportReadGroupSetRequest -- ^ 'rgsePayload'
     -> ReadGroupSetsExport
 readGroupSetsExport pRgseReadGroupSetId_ pRgsePayload_ =
-    ReadGroupSetsExport
+    ReadGroupSetsExport'
     { _rgseXgafv = Nothing
     , _rgseReadGroupSetId = pRgseReadGroupSetId_
     , _rgseUploadProtocol = Nothing
@@ -130,7 +136,8 @@ rgseXgafv :: Lens' ReadGroupSetsExport (Maybe Text)
 rgseXgafv
   = lens _rgseXgafv (\ s a -> s{_rgseXgafv = a})
 
--- | Required. The ID of the read group set to export.
+-- | Required. The ID of the read group set to export. The caller must have
+-- READ access to this read group set.
 rgseReadGroupSetId :: Lens' ReadGroupSetsExport Text
 rgseReadGroupSetId
   = lens _rgseReadGroupSetId
@@ -176,7 +183,11 @@ rgseCallback
 
 instance GoogleRequest ReadGroupSetsExport where
         type Rs ReadGroupSetsExport = Operation
-        requestClient ReadGroupSetsExport{..}
+        type Scopes ReadGroupSetsExport =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.read_write",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient ReadGroupSetsExport'{..}
           = go _rgseReadGroupSetId _rgseXgafv
               _rgseUploadProtocol
               (Just _rgsePp)

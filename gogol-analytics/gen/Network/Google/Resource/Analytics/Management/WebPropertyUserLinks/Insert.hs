@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type ManagementWebPropertyUserLinksInsertResource =
 -- | Adds a new user to the given web property.
 --
 -- /See:/ 'managementWebPropertyUserLinksInsert' smart constructor.
-data ManagementWebPropertyUserLinksInsert = ManagementWebPropertyUserLinksInsert
+data ManagementWebPropertyUserLinksInsert = ManagementWebPropertyUserLinksInsert'
     { _mwpuliWebPropertyId :: !Text
     , _mwpuliPayload       :: !EntityUserLink
     , _mwpuliAccountId     :: !Text
@@ -80,7 +80,7 @@ managementWebPropertyUserLinksInsert
     -> Text -- ^ 'mwpuliAccountId'
     -> ManagementWebPropertyUserLinksInsert
 managementWebPropertyUserLinksInsert pMwpuliWebPropertyId_ pMwpuliPayload_ pMwpuliAccountId_ =
-    ManagementWebPropertyUserLinksInsert
+    ManagementWebPropertyUserLinksInsert'
     { _mwpuliWebPropertyId = pMwpuliWebPropertyId_
     , _mwpuliPayload = pMwpuliPayload_
     , _mwpuliAccountId = pMwpuliAccountId_
@@ -108,8 +108,10 @@ instance GoogleRequest
          ManagementWebPropertyUserLinksInsert where
         type Rs ManagementWebPropertyUserLinksInsert =
              EntityUserLink
+        type Scopes ManagementWebPropertyUserLinksInsert =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient
-          ManagementWebPropertyUserLinksInsert{..}
+          ManagementWebPropertyUserLinksInsert'{..}
           = go _mwpuliAccountId _mwpuliWebPropertyId
               (Just AltJSON)
               _mwpuliPayload

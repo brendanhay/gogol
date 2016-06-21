@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Comments.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type CommentsGetResource =
 -- | Gets one comment by ID.
 --
 -- /See:/ 'commentsGet' smart constructor.
-data CommentsGet = CommentsGet
+data CommentsGet = CommentsGet'
     { _cgBlogId    :: !Text
     , _cgView      :: !(Maybe CommentsGetView)
     , _cgPostId    :: !Text
@@ -83,7 +83,7 @@ commentsGet
     -> Text -- ^ 'cgCommentId'
     -> CommentsGet
 commentsGet pCgBlogId_ pCgPostId_ pCgCommentId_ =
-    CommentsGet
+    CommentsGet'
     { _cgBlogId = pCgBlogId_
     , _cgView = Nothing
     , _cgPostId = pCgPostId_
@@ -112,7 +112,10 @@ cgCommentId
 
 instance GoogleRequest CommentsGet where
         type Rs CommentsGet = Comment
-        requestClient CommentsGet{..}
+        type Scopes CommentsGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient CommentsGet'{..}
           = go _cgBlogId _cgPostId _cgCommentId _cgView
               (Just AltJSON)
               bloggerService

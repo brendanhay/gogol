@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Circles.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type CirclesListResource =
 -- | List all of the circles for a user.
 --
 -- /See:/ 'circlesList' smart constructor.
-data CirclesList = CirclesList
+data CirclesList = CirclesList'
     { _cUserId     :: !Text
     , _cPageToken  :: !(Maybe Text)
     , _cMaxResults :: !(Textual Word32)
@@ -75,7 +75,7 @@ circlesList
     :: Text -- ^ 'cUserId'
     -> CirclesList
 circlesList pCUserId_ =
-    CirclesList
+    CirclesList'
     { _cUserId = pCUserId_
     , _cPageToken = Nothing
     , _cMaxResults = 20
@@ -103,7 +103,11 @@ cMaxResults
 
 instance GoogleRequest CirclesList where
         type Rs CirclesList = CircleFeed
-        requestClient CirclesList{..}
+        type Scopes CirclesList =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient CirclesList'{..}
           = go _cUserId _cPageToken (Just _cMaxResults)
               (Just AltJSON)
               plusDomainsService

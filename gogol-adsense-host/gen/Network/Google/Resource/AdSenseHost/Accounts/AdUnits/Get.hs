@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsAdUnitsGetResource =
 -- | Get the specified host ad unit in this AdSense account.
 --
 -- /See:/ 'accountsAdUnitsGet' smart constructor.
-data AccountsAdUnitsGet = AccountsAdUnitsGet
+data AccountsAdUnitsGet = AccountsAdUnitsGet'
     { _aaugAdUnitId   :: !Text
     , _aaugAdClientId :: !Text
     , _aaugAccountId  :: !Text
@@ -78,7 +78,7 @@ accountsAdUnitsGet
     -> Text -- ^ 'aaugAccountId'
     -> AccountsAdUnitsGet
 accountsAdUnitsGet pAaugAdUnitId_ pAaugAdClientId_ pAaugAccountId_ =
-    AccountsAdUnitsGet
+    AccountsAdUnitsGet'
     { _aaugAdUnitId = pAaugAdUnitId_
     , _aaugAdClientId = pAaugAdClientId_
     , _aaugAccountId = pAaugAccountId_
@@ -103,7 +103,9 @@ aaugAccountId
 
 instance GoogleRequest AccountsAdUnitsGet where
         type Rs AccountsAdUnitsGet = AdUnit
-        requestClient AccountsAdUnitsGet{..}
+        type Scopes AccountsAdUnitsGet =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AccountsAdUnitsGet'{..}
           = go _aaugAccountId _aaugAdClientId _aaugAdUnitId
               (Just AltJSON)
               adSenseHostService

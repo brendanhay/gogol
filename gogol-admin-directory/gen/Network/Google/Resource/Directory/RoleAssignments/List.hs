@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.RoleAssignments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type RoleAssignmentsListResource =
 -- | Retrieves a paginated list of all roleAssignments.
 --
 -- /See:/ 'roleAssignmentsList' smart constructor.
-data RoleAssignmentsList = RoleAssignmentsList
+data RoleAssignmentsList = RoleAssignmentsList'
     { _ralRoleId     :: !(Maybe Text)
     , _ralCustomer   :: !Text
     , _ralPageToken  :: !(Maybe Text)
@@ -87,7 +87,7 @@ roleAssignmentsList
     :: Text -- ^ 'ralCustomer'
     -> RoleAssignmentsList
 roleAssignmentsList pRalCustomer_ =
-    RoleAssignmentsList
+    RoleAssignmentsList'
     { _ralRoleId = Nothing
     , _ralCustomer = pRalCustomer_
     , _ralPageToken = Nothing
@@ -127,7 +127,10 @@ ralMaxResults
 
 instance GoogleRequest RoleAssignmentsList where
         type Rs RoleAssignmentsList = RoleAssignments
-        requestClient RoleAssignmentsList{..}
+        type Scopes RoleAssignmentsList =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
+               "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
+        requestClient RoleAssignmentsList'{..}
           = go _ralCustomer _ralRoleId _ralPageToken
               _ralUserKey
               _ralMaxResults

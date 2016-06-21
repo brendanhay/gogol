@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Threads.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type UsersThreadsGetResource =
 -- | Gets the specified thread.
 --
 -- /See:/ 'usersThreadsGet' smart constructor.
-data UsersThreadsGet = UsersThreadsGet
+data UsersThreadsGet = UsersThreadsGet'
     { _utgFormat          :: !UsersThreadsGetFormat
     , _utgUserId          :: !Text
     , _utgId              :: !Text
@@ -78,10 +78,9 @@ data UsersThreadsGet = UsersThreadsGet
 -- * 'utgMetadataHeaders'
 usersThreadsGet
     :: Text -- ^ 'utgId'
-    -> Text
     -> UsersThreadsGet
-usersThreadsGet pUtgUserId_ pUtgId_ =
-    UsersThreadsGet
+usersThreadsGet pUtgId_ =
+    UsersThreadsGet'
     { _utgFormat = UTGFFull
     , _utgUserId = "me"
     , _utgId = pUtgId_
@@ -113,7 +112,11 @@ utgMetadataHeaders
 
 instance GoogleRequest UsersThreadsGet where
         type Rs UsersThreadsGet = Thread
-        requestClient UsersThreadsGet{..}
+        type Scopes UsersThreadsGet =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersThreadsGet'{..}
           = go _utgUserId _utgId (Just _utgFormat)
               (_utgMetadataHeaders ^. _Default)
               (Just AltJSON)

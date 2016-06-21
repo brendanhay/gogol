@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Events.QuickAdd
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type EventsQuickAddResource =
 -- | Creates an event based on a simple text string.
 --
 -- /See:/ 'eventsQuickAdd' smart constructor.
-data EventsQuickAdd = EventsQuickAdd
+data EventsQuickAdd = EventsQuickAdd'
     { _eqaCalendarId        :: !Text
     , _eqaText              :: !Text
     , _eqaSendNotifications :: !(Maybe Bool)
@@ -77,7 +77,7 @@ eventsQuickAdd
     -> Text -- ^ 'eqaText'
     -> EventsQuickAdd
 eventsQuickAdd pEqaCalendarId_ pEqaText_ =
-    EventsQuickAdd
+    EventsQuickAdd'
     { _eqaCalendarId = pEqaCalendarId_
     , _eqaText = pEqaText_
     , _eqaSendNotifications = Nothing
@@ -104,7 +104,9 @@ eqaSendNotifications
 
 instance GoogleRequest EventsQuickAdd where
         type Rs EventsQuickAdd = Event
-        requestClient EventsQuickAdd{..}
+        type Scopes EventsQuickAdd =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient EventsQuickAdd'{..}
           = go _eqaCalendarId (Just _eqaText)
               _eqaSendNotifications
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeAnalytics.GroupItems.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type GroupItemsListResource =
 -- parameters.
 --
 -- /See:/ 'groupItemsList' smart constructor.
-data GroupItemsList = GroupItemsList
+data GroupItemsList = GroupItemsList'
     { _gilOnBehalfOfContentOwner :: !(Maybe Text)
     , _gilGroupId                :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ groupItemsList
     :: Text -- ^ 'gilGroupId'
     -> GroupItemsList
 groupItemsList pGilGroupId_ =
-    GroupItemsList
+    GroupItemsList'
     { _gilOnBehalfOfContentOwner = Nothing
     , _gilGroupId = pGilGroupId_
     }
@@ -101,7 +101,12 @@ gilGroupId
 
 instance GoogleRequest GroupItemsList where
         type Rs GroupItemsList = GroupItemListResponse
-        requestClient GroupItemsList{..}
+        type Scopes GroupItemsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
+        requestClient GroupItemsList'{..}
           = go (Just _gilGroupId) _gilOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeAnalyticsService

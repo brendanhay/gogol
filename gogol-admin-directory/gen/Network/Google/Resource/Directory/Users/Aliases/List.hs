@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Aliases.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersAliasesListResource =
 -- | List all aliases for a user
 --
 -- /See:/ 'usersAliasesList' smart constructor.
-data UsersAliasesList = UsersAliasesList
+data UsersAliasesList = UsersAliasesList'
     { _ualEvent   :: !(Maybe UsersAliasesListEvent)
     , _ualUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersAliasesList
     :: Text -- ^ 'ualUserKey'
     -> UsersAliasesList
 usersAliasesList pUalUserKey_ =
-    UsersAliasesList
+    UsersAliasesList'
     { _ualEvent = Nothing
     , _ualUserKey = pUalUserKey_
     }
@@ -87,7 +87,12 @@ ualUserKey
 
 instance GoogleRequest UsersAliasesList where
         type Rs UsersAliasesList = Aliases
-        requestClient UsersAliasesList{..}
+        type Scopes UsersAliasesList =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.alias",
+               "https://www.googleapis.com/auth/admin.directory.user.alias.readonly",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
+        requestClient UsersAliasesList'{..}
           = go _ualUserKey _ualEvent (Just AltJSON)
               directoryService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,9 @@
 --
 -- Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
--- are also deleted.
+-- are also deleted. Other Google Compute Engine resources that might be in
+-- use by the cluster (e.g. load balancer resources) will not be deleted if
+-- they weren\'t present at the initial create time.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.delete@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
@@ -72,10 +74,12 @@ type ProjectsZonesClustersDeleteResource =
 
 -- | Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
--- are also deleted.
+-- are also deleted. Other Google Compute Engine resources that might be in
+-- use by the cluster (e.g. load balancer resources) will not be deleted if
+-- they weren\'t present at the initial create time.
 --
 -- /See:/ 'projectsZonesClustersDelete' smart constructor.
-data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete
+data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete'
     { _pzcdXgafv          :: !(Maybe Text)
     , _pzcdUploadProtocol :: !(Maybe Text)
     , _pzcdPp             :: !Bool
@@ -117,7 +121,7 @@ projectsZonesClustersDelete
     -> Text -- ^ 'pzcdProjectId'
     -> ProjectsZonesClustersDelete
 projectsZonesClustersDelete pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
-    ProjectsZonesClustersDelete
+    ProjectsZonesClustersDelete'
     { _pzcdXgafv = Nothing
     , _pzcdUploadProtocol = Nothing
     , _pzcdPp = True
@@ -175,7 +179,7 @@ pzcdClusterId
       (\ s a -> s{_pzcdClusterId = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzcdProjectId :: Lens' ProjectsZonesClustersDelete Text
 pzcdProjectId
   = lens _pzcdProjectId
@@ -189,7 +193,9 @@ pzcdCallback
 instance GoogleRequest ProjectsZonesClustersDelete
          where
         type Rs ProjectsZonesClustersDelete = Operation
-        requestClient ProjectsZonesClustersDelete{..}
+        type Scopes ProjectsZonesClustersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsZonesClustersDelete'{..}
           = go _pzcdProjectId _pzcdZone _pzcdClusterId
               _pzcdXgafv
               _pzcdUploadProtocol

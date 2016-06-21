@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type AccountsContainersFoldersUpdateResource =
 -- | Updates a GTM Folder.
 --
 -- /See:/ 'accountsContainersFoldersUpdate' smart constructor.
-data AccountsContainersFoldersUpdate = AccountsContainersFoldersUpdate
+data AccountsContainersFoldersUpdate = AccountsContainersFoldersUpdate'
     { _acfuContainerId :: !Text
     , _acfuFingerprint :: !(Maybe Text)
     , _acfuFolderId    :: !Text
@@ -89,7 +89,7 @@ accountsContainersFoldersUpdate
     -> Text -- ^ 'acfuAccountId'
     -> AccountsContainersFoldersUpdate
 accountsContainersFoldersUpdate pAcfuContainerId_ pAcfuFolderId_ pAcfuPayload_ pAcfuAccountId_ =
-    AccountsContainersFoldersUpdate
+    AccountsContainersFoldersUpdate'
     { _acfuContainerId = pAcfuContainerId_
     , _acfuFingerprint = Nothing
     , _acfuFolderId = pAcfuFolderId_
@@ -129,7 +129,9 @@ acfuAccountId
 instance GoogleRequest
          AccountsContainersFoldersUpdate where
         type Rs AccountsContainersFoldersUpdate = Folder
-        requestClient AccountsContainersFoldersUpdate{..}
+        type Scopes AccountsContainersFoldersUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient AccountsContainersFoldersUpdate'{..}
           = go _acfuAccountId _acfuContainerId _acfuFolderId
               _acfuFingerprint
               (Just AltJSON)

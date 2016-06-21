@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.Annotations.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type MyLibraryAnnotationsDeleteResource =
 -- | Deletes an annotation.
 --
 -- /See:/ 'myLibraryAnnotationsDelete' smart constructor.
-data MyLibraryAnnotationsDelete = MyLibraryAnnotationsDelete
+data MyLibraryAnnotationsDelete = MyLibraryAnnotationsDelete'
     { _mladAnnotationId :: !Text
     , _mladSource       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ myLibraryAnnotationsDelete
     :: Text -- ^ 'mladAnnotationId'
     -> MyLibraryAnnotationsDelete
 myLibraryAnnotationsDelete pMladAnnotationId_ =
-    MyLibraryAnnotationsDelete
+    MyLibraryAnnotationsDelete'
     { _mladAnnotationId = pMladAnnotationId_
     , _mladSource = Nothing
     }
@@ -89,7 +89,9 @@ mladSource
 instance GoogleRequest MyLibraryAnnotationsDelete
          where
         type Rs MyLibraryAnnotationsDelete = ()
-        requestClient MyLibraryAnnotationsDelete{..}
+        type Scopes MyLibraryAnnotationsDelete =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryAnnotationsDelete'{..}
           = go _mladAnnotationId _mladSource (Just AltJSON)
               booksService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves details about crawl errors for a site\'s sample URL.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorssamples.get@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.urlcrawlerrorssamples.get@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
     (
     -- * REST Resource
@@ -63,7 +63,7 @@ type URLCrawlErrorsSamplesGetResource =
 -- | Retrieves details about crawl errors for a site\'s sample URL.
 --
 -- /See:/ 'urlCrawlErrorsSamplesGet' smart constructor.
-data URLCrawlErrorsSamplesGet = URLCrawlErrorsSamplesGet
+data URLCrawlErrorsSamplesGet = URLCrawlErrorsSamplesGet'
     { _ucesgPlatform :: !URLCrawlErrorsSamplesGetPlatform
     , _ucesgCategory :: !URLCrawlErrorsSamplesGetCategory
     , _ucesgSiteURL  :: !Text
@@ -88,7 +88,7 @@ urlCrawlErrorsSamplesGet
     -> Text -- ^ 'ucesgURL'
     -> URLCrawlErrorsSamplesGet
 urlCrawlErrorsSamplesGet pUcesgPlatform_ pUcesgCategory_ pUcesgSiteURL_ pUcesgURL_ =
-    URLCrawlErrorsSamplesGet
+    URLCrawlErrorsSamplesGet'
     { _ucesgPlatform = pUcesgPlatform_
     , _ucesgCategory = pUcesgCategory_
     , _ucesgSiteURL = pUcesgSiteURL_
@@ -123,7 +123,10 @@ ucesgURL = lens _ucesgURL (\ s a -> s{_ucesgURL = a})
 instance GoogleRequest URLCrawlErrorsSamplesGet where
         type Rs URLCrawlErrorsSamplesGet =
              URLCrawlErrorsSample
-        requestClient URLCrawlErrorsSamplesGet{..}
+        type Scopes URLCrawlErrorsSamplesGet =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
+        requestClient URLCrawlErrorsSamplesGet'{..}
           = go _ucesgSiteURL _ucesgURL (Just _ucesgCategory)
               (Just _ucesgPlatform)
               (Just AltJSON)

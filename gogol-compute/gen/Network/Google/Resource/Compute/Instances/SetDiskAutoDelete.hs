@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type InstancesSetDiskAutoDeleteResource =
 -- | Sets the auto-delete flag for a disk attached to an instance.
 --
 -- /See:/ 'instancesSetDiskAutoDelete' smart constructor.
-data InstancesSetDiskAutoDelete = InstancesSetDiskAutoDelete
+data InstancesSetDiskAutoDelete = InstancesSetDiskAutoDelete'
     { _isdadProject    :: !Text
     , _isdadAutoDelete :: !Bool
     , _isdadZone       :: !Text
@@ -91,7 +91,7 @@ instancesSetDiskAutoDelete
     -> Text -- ^ 'isdadInstance'
     -> InstancesSetDiskAutoDelete
 instancesSetDiskAutoDelete pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadDeviceName_ pIsdadInstance_ =
-    InstancesSetDiskAutoDelete
+    InstancesSetDiskAutoDelete'
     { _isdadProject = pIsdadProject_
     , _isdadAutoDelete = pIsdadAutoDelete_
     , _isdadZone = pIsdadZone_
@@ -130,7 +130,10 @@ isdadInstance
 instance GoogleRequest InstancesSetDiskAutoDelete
          where
         type Rs InstancesSetDiskAutoDelete = Operation
-        requestClient InstancesSetDiskAutoDelete{..}
+        type Scopes InstancesSetDiskAutoDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstancesSetDiskAutoDelete'{..}
           = go _isdadProject _isdadZone _isdadInstance
               (Just _isdadAutoDelete)
               (Just _isdadDeviceName)

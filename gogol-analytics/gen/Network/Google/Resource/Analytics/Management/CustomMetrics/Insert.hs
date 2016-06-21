@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type ManagementCustomMetricsInsertResource =
 -- | Create a new custom metric.
 --
 -- /See:/ 'managementCustomMetricsInsert' smart constructor.
-data ManagementCustomMetricsInsert = ManagementCustomMetricsInsert
+data ManagementCustomMetricsInsert = ManagementCustomMetricsInsert'
     { _mcmiWebPropertyId :: !Text
     , _mcmiPayload       :: !CustomMetric
     , _mcmiAccountId     :: !Text
@@ -80,7 +80,7 @@ managementCustomMetricsInsert
     -> Text -- ^ 'mcmiAccountId'
     -> ManagementCustomMetricsInsert
 managementCustomMetricsInsert pMcmiWebPropertyId_ pMcmiPayload_ pMcmiAccountId_ =
-    ManagementCustomMetricsInsert
+    ManagementCustomMetricsInsert'
     { _mcmiWebPropertyId = pMcmiWebPropertyId_
     , _mcmiPayload = pMcmiPayload_
     , _mcmiAccountId = pMcmiAccountId_
@@ -106,7 +106,9 @@ mcmiAccountId
 instance GoogleRequest ManagementCustomMetricsInsert
          where
         type Rs ManagementCustomMetricsInsert = CustomMetric
-        requestClient ManagementCustomMetricsInsert{..}
+        type Scopes ManagementCustomMetricsInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementCustomMetricsInsert'{..}
           = go _mcmiAccountId _mcmiWebPropertyId (Just AltJSON)
               _mcmiPayload
               analyticsService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Orders.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'OrdersGet' request conforms to.
 type OrdersGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -57,7 +57,7 @@ type OrdersGetResource =
 -- | Gets one order by ID.
 --
 -- /See:/ 'ordersGet' smart constructor.
-data OrdersGet = OrdersGet
+data OrdersGet = OrdersGet'
     { _ogProFileId :: !(Textual Int64)
     , _ogId        :: !(Textual Int64)
     , _ogProjectId :: !(Textual Int64)
@@ -78,7 +78,7 @@ ordersGet
     -> Int64 -- ^ 'ogProjectId'
     -> OrdersGet
 ordersGet pOgProFileId_ pOgId_ pOgProjectId_ =
-    OrdersGet
+    OrdersGet'
     { _ogProFileId = _Coerce # pOgProFileId_
     , _ogId = _Coerce # pOgId_
     , _ogProjectId = _Coerce # pOgProjectId_
@@ -102,7 +102,9 @@ ogProjectId
 
 instance GoogleRequest OrdersGet where
         type Rs OrdersGet = Order
-        requestClient OrdersGet{..}
+        type Scopes OrdersGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient OrdersGet'{..}
           = go _ogProFileId _ogProjectId _ogId (Just AltJSON)
               dFAReportingService
           where go

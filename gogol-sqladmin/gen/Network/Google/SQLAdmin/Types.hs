@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.SQLAdmin.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,7 +20,7 @@ module Network.Google.SQLAdmin.Types
       sQLAdminService
 
     -- * OAuth Scopes
-    , sqlserviceAdminScope
+    , sqlServiceAdminScope
     , cloudPlatformScope
 
     -- * SSLCert
@@ -90,6 +91,7 @@ module Network.Google.SQLAdmin.Types
     -- * Settings
     , Settings
     , settings
+    , sStorageAutoResize
     , sReplicationType
     , sActivationPolicy
     , sSettingsVersion
@@ -98,9 +100,11 @@ module Network.Google.SQLAdmin.Types
     , sKind
     , sPricingPlan
     , sIPConfiguration
+    , sMaintenanceWindow
     , sDatabaseReplicationEnabled
     , sTier
     , sDatabaseFlags
+    , sDataDiskType
     , sCrashSafeReplicationEnabled
     , sLocationPreference
     , sBackupConfiguration
@@ -134,6 +138,12 @@ module Network.Google.SQLAdmin.Types
     , blcBinLogPosition
     , blcKind
     , blcBinLogFileName
+
+    -- * DatabaseInstanceFailoverReplica
+    , DatabaseInstanceFailoverReplica
+    , databaseInstanceFailoverReplica
+    , difrName
+    , difrAvailable
 
     -- * TiersListResponse
     , TiersListResponse
@@ -182,6 +192,14 @@ module Network.Google.SQLAdmin.Types
     , icRequireSSL
     , icIPv4Enabled
 
+    -- * MaintenanceWindow
+    , MaintenanceWindow
+    , maintenanceWindow
+    , mwKind
+    , mwDay
+    , mwHour
+    , mwUpdateTrack
+
     -- * ImportContextCSVImportOptions
     , ImportContextCSVImportOptions
     , importContextCSVImportOptions
@@ -207,6 +225,7 @@ module Network.Google.SQLAdmin.Types
     -- * DatabaseInstance
     , DatabaseInstance
     , databaseInstance
+    , datBackendType
     , datMaxDiskSize
     , datOnPremisesConfiguration
     , datEtag
@@ -221,12 +240,14 @@ module Network.Google.SQLAdmin.Types
     , datInstanceType
     , datReplicaNames
     , datSelfLink
+    , datFailoverReplica
     , datName
     , datMasterInstanceName
     , datReplicaConfiguration
     , datRegion
     , datServiceAccountEmailAddress
     , datIPAddresses
+    , datSuspensionReason
 
     -- * CloneContext
     , CloneContext
@@ -245,6 +266,7 @@ module Network.Google.SQLAdmin.Types
     , fAllowedStringValues
     , fType
     , fMinValue
+    , fRequiresRestart
 
     -- * InstancesFailoverRequest
     , InstancesFailoverRequest
@@ -262,7 +284,7 @@ module Network.Google.SQLAdmin.Types
     , brSelfLink
     , brEndTime
     , brId
-    , brEnqueuedTime
+    , brEnQueuedTime
     , brInstance
 
     -- * ACLEntry
@@ -350,6 +372,7 @@ module Network.Google.SQLAdmin.Types
     , SSLCertsInsertResponse
     , sslCertsInsertResponse
     , scirServerCaCert
+    , scirOperation
     , scirKind
     , scirClientCert
 
@@ -405,15 +428,15 @@ import           Network.Google.SQLAdmin.Types.Product
 import           Network.Google.SQLAdmin.Types.Sum
 
 -- | Default request referring to version 'v1beta4' of the Cloud SQL Administration API. This contains the host and root path used as a starting point for constructing service requests.
-sQLAdminService :: Service
+sQLAdminService :: ServiceConfig
 sQLAdminService
   = defaultService (ServiceId "sqladmin:v1beta4")
       "www.googleapis.com"
 
 -- | Manage your Google SQL Service instances
-sqlserviceAdminScope :: OAuthScope
-sqlserviceAdminScope = "https://www.googleapis.com/auth/sqlservice.admin";
+sqlServiceAdminScope :: Proxy '["https://www.googleapis.com/auth/sqlservice.admin"]
+sqlServiceAdminScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

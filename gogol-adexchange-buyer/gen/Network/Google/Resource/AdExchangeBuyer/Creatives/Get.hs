@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.Creatives.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type CreativesGetResource =
 -- 30-40 minutes after submission.
 --
 -- /See:/ 'creativesGet' smart constructor.
-data CreativesGet = CreativesGet
+data CreativesGet = CreativesGet'
     { _cgBuyerCreativeId :: !Text
     , _cgAccountId       :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ creativesGet
     -> Int32 -- ^ 'cgAccountId'
     -> CreativesGet
 creativesGet pCgBuyerCreativeId_ pCgAccountId_ =
-    CreativesGet
+    CreativesGet'
     { _cgBuyerCreativeId = pCgBuyerCreativeId_
     , _cgAccountId = _Coerce # pCgAccountId_
     }
@@ -91,7 +91,9 @@ cgAccountId
 
 instance GoogleRequest CreativesGet where
         type Rs CreativesGet = Creative
-        requestClient CreativesGet{..}
+        type Scopes CreativesGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient CreativesGet'{..}
           = go _cgAccountId _cgBuyerCreativeId (Just AltJSON)
               adExchangeBuyerService
           where go

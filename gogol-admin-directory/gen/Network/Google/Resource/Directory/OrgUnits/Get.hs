@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.OrgUnits.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type OrgUnitsGetResource =
 -- | Retrieve Organization Unit
 --
 -- /See:/ 'orgUnitsGet' smart constructor.
-data OrgUnitsGet = OrgUnitsGet
+data OrgUnitsGet = OrgUnitsGet'
     { _ougOrgUnitPath :: ![Text]
     , _ougCustomerId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ orgUnitsGet
     -> Text -- ^ 'ougCustomerId'
     -> OrgUnitsGet
 orgUnitsGet pOugOrgUnitPath_ pOugCustomerId_ =
-    OrgUnitsGet
+    OrgUnitsGet'
     { _ougOrgUnitPath = _Coerce # pOugOrgUnitPath_
     , _ougCustomerId = pOugCustomerId_
     }
@@ -92,7 +92,10 @@ ougCustomerId
 
 instance GoogleRequest OrgUnitsGet where
         type Rs OrgUnitsGet = OrgUnit
-        requestClient OrgUnitsGet{..}
+        type Scopes OrgUnitsGet =
+             '["https://www.googleapis.com/auth/admin.directory.orgunit",
+               "https://www.googleapis.com/auth/admin.directory.orgunit.readonly"]
+        requestClient OrgUnitsGet'{..}
           = go _ougCustomerId _ougOrgUnitPath (Just AltJSON)
               directoryService
           where go

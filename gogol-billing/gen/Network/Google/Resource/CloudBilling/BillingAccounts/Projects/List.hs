@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -73,7 +73,7 @@ type BillingAccountsProjectsListResource =
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
 -- /See:/ 'billingAccountsProjectsList' smart constructor.
-data BillingAccountsProjectsList = BillingAccountsProjectsList
+data BillingAccountsProjectsList = BillingAccountsProjectsList'
     { _baplXgafv          :: !(Maybe Text)
     , _baplUploadProtocol :: !(Maybe Text)
     , _baplPp             :: !Bool
@@ -113,7 +113,7 @@ billingAccountsProjectsList
     :: Text -- ^ 'baplName'
     -> BillingAccountsProjectsList
 billingAccountsProjectsList pBaplName_ =
-    BillingAccountsProjectsList
+    BillingAccountsProjectsList'
     { _baplXgafv = Nothing
     , _baplUploadProtocol = Nothing
     , _baplPp = True
@@ -190,7 +190,9 @@ instance GoogleRequest BillingAccountsProjectsList
          where
         type Rs BillingAccountsProjectsList =
              ListProjectBillingInfoResponse
-        requestClient BillingAccountsProjectsList{..}
+        type Scopes BillingAccountsProjectsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient BillingAccountsProjectsList'{..}
           = go _baplName _baplXgafv _baplUploadProtocol
               (Just _baplPp)
               _baplAccessToken

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Files.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FilesGet' request conforms to.
 type FilesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "reports" :>
            Capture "reportId" (Textual Int64) :>
              "files" :>
@@ -52,7 +52,7 @@ type FilesGetResource =
                  QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
-         "v2.2" :>
+         "v2.5" :>
            "reports" :>
              Capture "reportId" (Textual Int64) :>
                "files" :>
@@ -63,7 +63,7 @@ type FilesGetResource =
 -- | Retrieves a report file by its report ID and file ID.
 --
 -- /See:/ 'filesGet' smart constructor.
-data FilesGet = FilesGet
+data FilesGet = FilesGet'
     { _fgReportId :: !(Textual Int64)
     , _fgFileId   :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ filesGet
     -> Int64 -- ^ 'fgFileId'
     -> FilesGet
 filesGet pFgReportId_ pFgFileId_ =
-    FilesGet
+    FilesGet'
     { _fgReportId = _Coerce # pFgReportId_
     , _fgFileId = _Coerce # pFgFileId_
     }
@@ -99,7 +99,9 @@ fgFileId
 
 instance GoogleRequest FilesGet where
         type Rs FilesGet = File
-        requestClient FilesGet{..}
+        type Scopes FilesGet =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient FilesGet'{..}
           = go _fgReportId _fgFileId (Just AltJSON)
               dFAReportingService
           where go :<|> _
@@ -108,7 +110,9 @@ instance GoogleRequest FilesGet where
 
 instance GoogleRequest (MediaDownload FilesGet) where
         type Rs (MediaDownload FilesGet) = Stream
-        requestClient (MediaDownload FilesGet{..})
+        type Scopes (MediaDownload FilesGet) =
+             Scopes FilesGet
+        requestClient (MediaDownload FilesGet'{..})
           = go _fgReportId _fgFileId (Just AltMedia)
               dFAReportingService
           where _ :<|> go

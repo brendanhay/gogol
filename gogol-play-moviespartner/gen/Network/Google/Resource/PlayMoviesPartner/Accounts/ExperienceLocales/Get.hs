@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type AccountsExperienceLocalesGetResource =
 -- this method.
 --
 -- /See:/ 'accountsExperienceLocalesGet' smart constructor.
-data AccountsExperienceLocalesGet = AccountsExperienceLocalesGet
+data AccountsExperienceLocalesGet = AccountsExperienceLocalesGet'
     { _aelgXgafv          :: !(Maybe Text)
     , _aelgUploadProtocol :: !(Maybe Text)
     , _aelgPp             :: !Bool
@@ -110,7 +110,7 @@ accountsExperienceLocalesGet
     -> Text -- ^ 'aelgAccountId'
     -> AccountsExperienceLocalesGet
 accountsExperienceLocalesGet pAelgElId_ pAelgAccountId_ =
-    AccountsExperienceLocalesGet
+    AccountsExperienceLocalesGet'
     { _aelgXgafv = Nothing
     , _aelgUploadProtocol = Nothing
     , _aelgPp = True
@@ -174,7 +174,9 @@ instance GoogleRequest AccountsExperienceLocalesGet
          where
         type Rs AccountsExperienceLocalesGet =
              ExperienceLocale
-        requestClient AccountsExperienceLocalesGet{..}
+        type Scopes AccountsExperienceLocalesGet =
+             '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
+        requestClient AccountsExperienceLocalesGet'{..}
           = go _aelgAccountId _aelgElId _aelgXgafv
               _aelgUploadProtocol
               (Just _aelgPp)

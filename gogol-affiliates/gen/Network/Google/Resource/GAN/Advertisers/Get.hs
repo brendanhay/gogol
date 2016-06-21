@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GAN.Advertisers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type AdvertisersGetResource =
 -- omitting the advertiserId query parameter.
 --
 -- /See:/ 'advertisersGet' smart constructor.
-data AdvertisersGet = AdvertisersGet
+data AdvertisersGet = AdvertisersGet'
     { _agAdvertiserId :: !(Maybe Text)
     , _agRoleId       :: !Text
     , _agRole         :: !AdvertisersGetRole
@@ -81,7 +81,7 @@ advertisersGet
     -> AdvertisersGetRole -- ^ 'agRole'
     -> AdvertisersGet
 advertisersGet pAgRoleId_ pAgRole_ =
-    AdvertisersGet
+    AdvertisersGet'
     { _agAdvertiserId = Nothing
     , _agRoleId = pAgRoleId_
     , _agRole = pAgRole_
@@ -104,7 +104,8 @@ agRole = lens _agRole (\ s a -> s{_agRole = a})
 
 instance GoogleRequest AdvertisersGet where
         type Rs AdvertisersGet = Advertiser
-        requestClient AdvertisersGet{..}
+        type Scopes AdvertisersGet = '[]
+        requestClient AdvertisersGet'{..}
           = go _agRole _agRoleId _agAdvertiserId (Just AltJSON)
               affiliatesService
           where go

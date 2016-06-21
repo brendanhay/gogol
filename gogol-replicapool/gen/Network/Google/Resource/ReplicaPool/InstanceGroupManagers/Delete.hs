@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type InstanceGroupManagersDeleteResource =
 -- must first abandon the instances to remove them from the group.
 --
 -- /See:/ 'instanceGroupManagersDelete' smart constructor.
-data InstanceGroupManagersDelete = InstanceGroupManagersDelete
+data InstanceGroupManagersDelete = InstanceGroupManagersDelete'
     { _igmdProject              :: !Text
     , _igmdInstanceGroupManager :: !Text
     , _igmdZone                 :: !Text
@@ -82,7 +82,7 @@ instanceGroupManagersDelete
     -> Text -- ^ 'igmdZone'
     -> InstanceGroupManagersDelete
 instanceGroupManagersDelete pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ =
-    InstanceGroupManagersDelete
+    InstanceGroupManagersDelete'
     { _igmdProject = pIgmdProject_
     , _igmdInstanceGroupManager = pIgmdInstanceGroupManager_
     , _igmdZone = pIgmdZone_
@@ -106,7 +106,10 @@ igmdZone = lens _igmdZone (\ s a -> s{_igmdZone = a})
 instance GoogleRequest InstanceGroupManagersDelete
          where
         type Rs InstanceGroupManagersDelete = Operation
-        requestClient InstanceGroupManagersDelete{..}
+        type Scopes InstanceGroupManagersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceGroupManagersDelete'{..}
           = go _igmdProject _igmdZone _igmdInstanceGroupManager
               (Just AltJSON)
               replicaPoolService

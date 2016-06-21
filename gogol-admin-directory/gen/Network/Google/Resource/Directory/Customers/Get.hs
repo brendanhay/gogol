@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Customers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type CustomersGetResource =
 -- | Retrives a customer.
 --
 -- /See:/ 'customersGet' smart constructor.
-newtype CustomersGet = CustomersGet
+newtype CustomersGet = CustomersGet'
     { _cgCustomerKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ customersGet
     :: Text -- ^ 'cgCustomerKey'
     -> CustomersGet
 customersGet pCgCustomerKey_ =
-    CustomersGet
+    CustomersGet'
     { _cgCustomerKey = pCgCustomerKey_
     }
 
@@ -77,7 +77,10 @@ cgCustomerKey
 
 instance GoogleRequest CustomersGet where
         type Rs CustomersGet = Customer
-        requestClient CustomersGet{..}
+        type Scopes CustomersGet =
+             '["https://www.googleapis.com/auth/admin.directory.customer",
+               "https://www.googleapis.com/auth/admin.directory.customer.readonly"]
+        requestClient CustomersGet'{..}
           = go _cgCustomerKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy CustomersGetResource)

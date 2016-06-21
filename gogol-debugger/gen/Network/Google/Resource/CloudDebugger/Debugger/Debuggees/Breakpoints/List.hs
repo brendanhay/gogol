@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all breakpoints of the debuggee that the user has access to.
+-- Lists all breakpoints for the debuggee.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.list@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
@@ -45,6 +45,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
     , ddblIncludeAllUsers
     , ddblWaitToken
     , ddblDebuggeeId
+    , ddblClientVersion
     , ddblCallback
     ) where
 
@@ -70,14 +71,15 @@ type DebuggerDebuggeesBreakpointsListResource =
                                QueryParam "bearer_token" Text :>
                                  QueryParam "includeAllUsers" Bool :>
                                    QueryParam "waitToken" Text :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListBreakpointsResponse
+                                     QueryParam "clientVersion" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] ListBreakpointsResponse
 
--- | Lists all breakpoints of the debuggee that the user has access to.
+-- | Lists all breakpoints for the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsList' smart constructor.
-data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList
+data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList'
     { _ddblXgafv           :: !(Maybe Text)
     , _ddblIncludeInactive :: !(Maybe Bool)
     , _ddblUploadProtocol  :: !(Maybe Text)
@@ -90,6 +92,7 @@ data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList
     , _ddblIncludeAllUsers :: !(Maybe Bool)
     , _ddblWaitToken       :: !(Maybe Text)
     , _ddblDebuggeeId      :: !Text
+    , _ddblClientVersion   :: !(Maybe Text)
     , _ddblCallback        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -121,12 +124,14 @@ data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList
 --
 -- * 'ddblDebuggeeId'
 --
+-- * 'ddblClientVersion'
+--
 -- * 'ddblCallback'
 debuggerDebuggeesBreakpointsList
     :: Text -- ^ 'ddblDebuggeeId'
     -> DebuggerDebuggeesBreakpointsList
 debuggerDebuggeesBreakpointsList pDdblDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsList
+    DebuggerDebuggeesBreakpointsList'
     { _ddblXgafv = Nothing
     , _ddblIncludeInactive = Nothing
     , _ddblUploadProtocol = Nothing
@@ -139,6 +144,7 @@ debuggerDebuggeesBreakpointsList pDdblDebuggeeId_ =
     , _ddblIncludeAllUsers = Nothing
     , _ddblWaitToken = Nothing
     , _ddblDebuggeeId = pDdblDebuggeeId_
+    , _ddblClientVersion = Nothing
     , _ddblCallback = Nothing
     }
 
@@ -147,8 +153,8 @@ ddblXgafv :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblXgafv
   = lens _ddblXgafv (\ s a -> s{_ddblXgafv = a})
 
--- | When set to true the response includes active and inactive breakpoints,
--- otherwise only active breakpoints are returned.
+-- | When set to \`true\`, the response includes active and inactive
+-- breakpoints. Otherwise, it includes only active breakpoints.
 ddblIncludeInactive :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Bool)
 ddblIncludeInactive
   = lens _ddblIncludeInactive
@@ -182,8 +188,9 @@ ddblUploadType
   = lens _ddblUploadType
       (\ s a -> s{_ddblUploadType = a})
 
--- | When set to true the response breakpoints will be stripped of the
--- results fields: stack_frames, evaluated_expressions and variable_table.
+-- | When set to \`true\`, the response breakpoints are stripped of the
+-- results fields: \`stack_frames\`, \`evaluated_expressions\` and
+-- \`variable_table\`.
 ddblStripResults :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Bool)
 ddblStripResults
   = lens _ddblStripResults
@@ -195,8 +202,8 @@ ddblBearerToken
   = lens _ddblBearerToken
       (\ s a -> s{_ddblBearerToken = a})
 
--- | When set to true the response includes the list of breakpoints set by
--- any user, otherwise only breakpoints set by the caller.
+-- | When set to \`true\`, the response includes the list of breakpoints set
+-- by any user. Otherwise, it includes only breakpoints set by the caller.
 ddblIncludeAllUsers :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Bool)
 ddblIncludeAllUsers
   = lens _ddblIncludeAllUsers
@@ -204,19 +211,26 @@ ddblIncludeAllUsers
 
 -- | A wait token that, if specified, blocks the call until the breakpoints
 -- list has changed, or a server selected timeout has expired. The value
--- should be set from the last response to ListBreakpoints. The error code
--- ABORTED is returned on wait timeout, which should be called again with
--- the same wait_token.
+-- should be set from the last response. The error code
+-- \`google.rpc.Code.ABORTED\` (RPC) is returned on wait timeout, which
+-- should be called again with the same \`wait_token\`.
 ddblWaitToken :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblWaitToken
   = lens _ddblWaitToken
       (\ s a -> s{_ddblWaitToken = a})
 
--- | The debuggee id to list breakpoint from.
+-- | ID of the debuggee whose breakpoints to list.
 ddblDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsList Text
 ddblDebuggeeId
   = lens _ddblDebuggeeId
       (\ s a -> s{_ddblDebuggeeId = a})
+
+-- | The client version making the call. Following: \`domain\/type\/version\`
+-- (e.g., \`google.com\/intellij\/v1\`).
+ddblClientVersion :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
+ddblClientVersion
+  = lens _ddblClientVersion
+      (\ s a -> s{_ddblClientVersion = a})
 
 -- | JSONP
 ddblCallback :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
@@ -227,7 +241,10 @@ instance GoogleRequest
          DebuggerDebuggeesBreakpointsList where
         type Rs DebuggerDebuggeesBreakpointsList =
              ListBreakpointsResponse
-        requestClient DebuggerDebuggeesBreakpointsList{..}
+        type Scopes DebuggerDebuggeesBreakpointsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud_debugger"]
+        requestClient DebuggerDebuggeesBreakpointsList'{..}
           = go _ddblDebuggeeId _ddblXgafv _ddblIncludeInactive
               _ddblUploadProtocol
               (Just _ddblPp)
@@ -238,6 +255,7 @@ instance GoogleRequest
               _ddblBearerToken
               _ddblIncludeAllUsers
               _ddblWaitToken
+              _ddblClientVersion
               _ddblCallback
               (Just AltJSON)
               debuggerService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type ProjectsTopicsSubscriptionsListResource =
 -- | Lists the name of the subscriptions for this topic.
 --
 -- /See:/ 'projectsTopicsSubscriptionsList' smart constructor.
-data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList
+data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList'
     { _ptslXgafv          :: !(Maybe Text)
     , _ptslUploadProtocol :: !(Maybe Text)
     , _ptslPp             :: !Bool
@@ -109,7 +109,7 @@ projectsTopicsSubscriptionsList
     :: Text -- ^ 'ptslTopic'
     -> ProjectsTopicsSubscriptionsList
 projectsTopicsSubscriptionsList pPtslTopic_ =
-    ProjectsTopicsSubscriptionsList
+    ProjectsTopicsSubscriptionsList'
     { _ptslXgafv = Nothing
     , _ptslUploadProtocol = Nothing
     , _ptslPp = True
@@ -184,7 +184,10 @@ instance GoogleRequest
          ProjectsTopicsSubscriptionsList where
         type Rs ProjectsTopicsSubscriptionsList =
              ListTopicSubscriptionsResponse
-        requestClient ProjectsTopicsSubscriptionsList{..}
+        type Scopes ProjectsTopicsSubscriptionsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsTopicsSubscriptionsList'{..}
           = go _ptslTopic _ptslXgafv _ptslUploadProtocol
               (Just _ptslPp)
               _ptslAccessToken

@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Regions.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified region resource.
+-- Returns the specified Region resource. Get a list of available regions
+-- by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regions.get@.
 module Network.Google.Resource.Compute.Regions.Get
@@ -51,10 +52,11 @@ type RegionsGetResource =
                Capture "region" Text :>
                  QueryParam "alt" AltJSON :> Get '[JSON] Region
 
--- | Returns the specified region resource.
+-- | Returns the specified Region resource. Get a list of available regions
+-- by making a list() request.
 --
 -- /See:/ 'regionsGet' smart constructor.
-data RegionsGet = RegionsGet
+data RegionsGet = RegionsGet'
     { _rgProject :: !Text
     , _rgRegion  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +73,7 @@ regionsGet
     -> Text -- ^ 'rgRegion'
     -> RegionsGet
 regionsGet pRgProject_ pRgRegion_ =
-    RegionsGet
+    RegionsGet'
     { _rgProject = pRgProject_
     , _rgRegion = pRgRegion_
     }
@@ -87,7 +89,11 @@ rgRegion = lens _rgRegion (\ s a -> s{_rgRegion = a})
 
 instance GoogleRequest RegionsGet where
         type Rs RegionsGet = Region
-        requestClient RegionsGet{..}
+        type Scopes RegionsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient RegionsGet'{..}
           = go _rgProject _rgRegion (Just AltJSON)
               computeService
           where go

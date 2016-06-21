@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Devices.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves the details of a device.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.devices.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.devices.get@.
 module Network.Google.Resource.AndroidEnterprise.Devices.Get
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type DevicesGetResource =
 -- | Retrieves the details of a device.
 --
 -- /See:/ 'devicesGet' smart constructor.
-data DevicesGet = DevicesGet
+data DevicesGet = DevicesGet'
     { _dgEnterpriseId :: !Text
     , _dgUserId       :: !Text
     , _dgDeviceId     :: !Text
@@ -78,7 +78,7 @@ devicesGet
     -> Text -- ^ 'dgDeviceId'
     -> DevicesGet
 devicesGet pDgEnterpriseId_ pDgUserId_ pDgDeviceId_ =
-    DevicesGet
+    DevicesGet'
     { _dgEnterpriseId = pDgEnterpriseId_
     , _dgUserId = pDgUserId_
     , _dgDeviceId = pDgDeviceId_
@@ -101,7 +101,9 @@ dgDeviceId
 
 instance GoogleRequest DevicesGet where
         type Rs DevicesGet = Device
-        requestClient DevicesGet{..}
+        type Scopes DevicesGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient DevicesGet'{..}
           = go _dgEnterpriseId _dgUserId _dgDeviceId
               (Just AltJSON)
               androidEnterpriseService

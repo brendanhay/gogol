@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Folders.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsContainersFoldersGetResource =
 -- | Gets a GTM Folder.
 --
 -- /See:/ 'accountsContainersFoldersGet' smart constructor.
-data AccountsContainersFoldersGet = AccountsContainersFoldersGet
+data AccountsContainersFoldersGet = AccountsContainersFoldersGet'
     { _acfgContainerId :: !Text
     , _acfgFolderId    :: !Text
     , _acfgAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersFoldersGet
     -> Text -- ^ 'acfgAccountId'
     -> AccountsContainersFoldersGet
 accountsContainersFoldersGet pAcfgContainerId_ pAcfgFolderId_ pAcfgAccountId_ =
-    AccountsContainersFoldersGet
+    AccountsContainersFoldersGet'
     { _acfgContainerId = pAcfgContainerId_
     , _acfgFolderId = pAcfgFolderId_
     , _acfgAccountId = pAcfgAccountId_
@@ -104,7 +104,10 @@ acfgAccountId
 instance GoogleRequest AccountsContainersFoldersGet
          where
         type Rs AccountsContainersFoldersGet = Folder
-        requestClient AccountsContainersFoldersGet{..}
+        type Scopes AccountsContainersFoldersGet =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersFoldersGet'{..}
           = go _acfgAccountId _acfgContainerId _acfgFolderId
               (Just AltJSON)
               tagManagerService

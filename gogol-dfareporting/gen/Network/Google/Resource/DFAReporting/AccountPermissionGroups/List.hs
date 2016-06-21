@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'AccountPermissionGroupsList' request conforms to.
 type AccountPermissionGroupsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountPermissionGroups" :>
@@ -53,7 +53,7 @@ type AccountPermissionGroupsListResource =
 -- | Retrieves the list of account permission groups.
 --
 -- /See:/ 'accountPermissionGroupsList' smart constructor.
-newtype AccountPermissionGroupsList = AccountPermissionGroupsList
+newtype AccountPermissionGroupsList = AccountPermissionGroupsList'
     { _apglProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountPermissionGroupsList
     :: Int64 -- ^ 'apglProFileId'
     -> AccountPermissionGroupsList
 accountPermissionGroupsList pApglProFileId_ =
-    AccountPermissionGroupsList
+    AccountPermissionGroupsList'
     { _apglProFileId = _Coerce # pApglProFileId_
     }
 
@@ -81,7 +81,9 @@ instance GoogleRequest AccountPermissionGroupsList
          where
         type Rs AccountPermissionGroupsList =
              AccountPermissionGroupsListResponse
-        requestClient AccountPermissionGroupsList{..}
+        type Scopes AccountPermissionGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountPermissionGroupsList'{..}
           = go _apglProFileId (Just AltJSON)
               dFAReportingService
           where go

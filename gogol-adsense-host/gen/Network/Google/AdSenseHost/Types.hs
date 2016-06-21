@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AdSenseHost.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,7 +20,7 @@ module Network.Google.AdSenseHost.Types
       adSenseHostService
 
     -- * OAuth Scopes
-    , adsensehostScope
+    , adSenseHostScope
 
     -- * AdClients
     , AdClients
@@ -195,11 +196,11 @@ import           Network.Google.AdSenseHost.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v4.1' of the AdSense Host API. This contains the host and root path used as a starting point for constructing service requests.
-adSenseHostService :: Service
+adSenseHostService :: ServiceConfig
 adSenseHostService
   = defaultService (ServiceId "adsensehost:v4.1")
       "www.googleapis.com"
 
 -- | View and manage your AdSense host data and associated accounts
-adsensehostScope :: OAuthScope
-adsensehostScope = "https://www.googleapis.com/auth/adsensehost";
+adSenseHostScope :: Proxy '["https://www.googleapis.com/auth/adsensehost"]
+adSenseHostScope = Proxy;

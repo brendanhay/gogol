@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Sizes.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SizesInsert' request conforms to.
 type SizesInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sizes" :>
@@ -54,7 +54,7 @@ type SizesInsertResource =
 -- | Inserts a new size.
 --
 -- /See:/ 'sizesInsert' smart constructor.
-data SizesInsert = SizesInsert
+data SizesInsert = SizesInsert'
     { _siProFileId :: !(Textual Int64)
     , _siPayload   :: !Size
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sizesInsert
     -> Size -- ^ 'siPayload'
     -> SizesInsert
 sizesInsert pSiProFileId_ pSiPayload_ =
-    SizesInsert
+    SizesInsert'
     { _siProFileId = _Coerce # pSiProFileId_
     , _siPayload = pSiPayload_
     }
@@ -89,7 +89,9 @@ siPayload
 
 instance GoogleRequest SizesInsert where
         type Rs SizesInsert = Size
-        requestClient SizesInsert{..}
+        type Scopes SizesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SizesInsert'{..}
           = go _siProFileId (Just AltJSON) _siPayload
               dFAReportingService
           where go

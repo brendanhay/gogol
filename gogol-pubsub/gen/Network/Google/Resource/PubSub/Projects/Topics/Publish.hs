@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Topics.Publish
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type ProjectsTopicsPublishResource =
 -- contain either a non-empty data field, or at least one attribute.
 --
 -- /See:/ 'projectsTopicsPublish' smart constructor.
-data ProjectsTopicsPublish = ProjectsTopicsPublish
+data ProjectsTopicsPublish = ProjectsTopicsPublish'
     { _ptpXgafv          :: !(Maybe Text)
     , _ptpUploadProtocol :: !(Maybe Text)
     , _ptpPp             :: !Bool
@@ -108,7 +108,7 @@ projectsTopicsPublish
     -> Text -- ^ 'ptpTopic'
     -> ProjectsTopicsPublish
 projectsTopicsPublish pPtpPayload_ pPtpTopic_ =
-    ProjectsTopicsPublish
+    ProjectsTopicsPublish'
     { _ptpXgafv = Nothing
     , _ptpUploadProtocol = Nothing
     , _ptpPp = True
@@ -168,7 +168,10 @@ ptpCallback
 
 instance GoogleRequest ProjectsTopicsPublish where
         type Rs ProjectsTopicsPublish = PublishResponse
-        requestClient ProjectsTopicsPublish{..}
+        type Scopes ProjectsTopicsPublish =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsTopicsPublish'{..}
           = go _ptpTopic _ptpXgafv _ptpUploadProtocol
               (Just _ptpPp)
               _ptpAccessToken

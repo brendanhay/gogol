@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Features.BatchPatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -78,7 +78,7 @@ type TablesFeaturesBatchPatchResource =
 -- read Updating features in the Google Maps Engine developer\'s guide.
 --
 -- /See:/ 'tablesFeaturesBatchPatch' smart constructor.
-data TablesFeaturesBatchPatch = TablesFeaturesBatchPatch
+data TablesFeaturesBatchPatch = TablesFeaturesBatchPatch'
     { _tfbpPayload :: !FeaturesBatchPatchRequest
     , _tfbpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,7 +95,7 @@ tablesFeaturesBatchPatch
     -> Text -- ^ 'tfbpId'
     -> TablesFeaturesBatchPatch
 tablesFeaturesBatchPatch pTfbpPayload_ pTfbpId_ =
-    TablesFeaturesBatchPatch
+    TablesFeaturesBatchPatch'
     { _tfbpPayload = pTfbpPayload_
     , _tfbpId = pTfbpId_
     }
@@ -111,7 +111,9 @@ tfbpId = lens _tfbpId (\ s a -> s{_tfbpId = a})
 
 instance GoogleRequest TablesFeaturesBatchPatch where
         type Rs TablesFeaturesBatchPatch = ()
-        requestClient TablesFeaturesBatchPatch{..}
+        type Scopes TablesFeaturesBatchPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient TablesFeaturesBatchPatch'{..}
           = go _tfbpId (Just AltJSON) _tfbpPayload
               mapsEngineService
           where go

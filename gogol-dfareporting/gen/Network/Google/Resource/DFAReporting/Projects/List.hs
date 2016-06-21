@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Projects.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'ProjectsList' request conforms to.
 type ProjectsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -67,7 +67,7 @@ type ProjectsListResource =
 -- | Retrieves a list of projects, possibly filtered.
 --
 -- /See:/ 'projectsList' smart constructor.
-data ProjectsList = ProjectsList
+data ProjectsList = ProjectsList'
     { _plSearchString  :: !(Maybe Text)
     , _plIds           :: !(Maybe [Textual Int64])
     , _plProFileId     :: !(Textual Int64)
@@ -101,7 +101,7 @@ projectsList
     :: Int64 -- ^ 'plProFileId'
     -> ProjectsList
 projectsList pPlProFileId_ =
-    ProjectsList
+    ProjectsList'
     { _plSearchString = Nothing
     , _plIds = Nothing
     , _plProFileId = _Coerce # pPlProFileId_
@@ -167,7 +167,9 @@ plMaxResults
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectsListResponse
-        requestClient ProjectsList{..}
+        type Scopes ProjectsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ProjectsList'{..}
           = go _plProFileId _plSearchString
               (_plIds ^. _Default)
               _plSortOrder

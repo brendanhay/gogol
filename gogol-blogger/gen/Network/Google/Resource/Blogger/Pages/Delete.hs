@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Pages.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type PagesDeleteResource =
 -- | Delete a page by ID.
 --
 -- /See:/ 'pagesDelete' smart constructor.
-data PagesDelete = PagesDelete
+data PagesDelete = PagesDelete'
     { _pddBlogId :: !Text
     , _pddPageId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ pagesDelete
     -> Text -- ^ 'pddPageId'
     -> PagesDelete
 pagesDelete pPddBlogId_ pPddPageId_ =
-    PagesDelete
+    PagesDelete'
     { _pddBlogId = pPddBlogId_
     , _pddPageId = pPddPageId_
     }
@@ -88,7 +88,9 @@ pddPageId
 
 instance GoogleRequest PagesDelete where
         type Rs PagesDelete = ()
-        requestClient PagesDelete{..}
+        type Scopes PagesDelete =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PagesDelete'{..}
           = go _pddBlogId _pddPageId (Just AltJSON)
               bloggerService
           where go

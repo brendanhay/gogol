@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.DomainAliases.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type DomainAliasesDeleteResource =
 -- | Deletes a Domain Alias of the customer.
 --
 -- /See:/ 'domainAliasesDelete' smart constructor.
-data DomainAliasesDelete = DomainAliasesDelete
+data DomainAliasesDelete = DomainAliasesDelete'
     { _dadDomainAliasName :: !Text
     , _dadCustomer        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ domainAliasesDelete
     -> Text -- ^ 'dadCustomer'
     -> DomainAliasesDelete
 domainAliasesDelete pDadDomainAliasName_ pDadCustomer_ =
-    DomainAliasesDelete
+    DomainAliasesDelete'
     { _dadDomainAliasName = pDadDomainAliasName_
     , _dadCustomer = pDadCustomer_
     }
@@ -90,7 +90,9 @@ dadCustomer
 
 instance GoogleRequest DomainAliasesDelete where
         type Rs DomainAliasesDelete = ()
-        requestClient DomainAliasesDelete{..}
+        type Scopes DomainAliasesDelete =
+             '["https://www.googleapis.com/auth/admin.directory.domain"]
+        requestClient DomainAliasesDelete'{..}
           = go _dadCustomer _dadDomainAliasName (Just AltJSON)
               directoryService
           where go

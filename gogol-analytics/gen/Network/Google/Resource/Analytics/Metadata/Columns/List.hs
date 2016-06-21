@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Metadata.Columns.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type MetadataColumnsListResource =
 -- | Lists all columns for a report type
 --
 -- /See:/ 'metadataColumnsList' smart constructor.
-newtype MetadataColumnsList = MetadataColumnsList
+newtype MetadataColumnsList = MetadataColumnsList'
     { _mclReportType :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ metadataColumnsList
     :: Text -- ^ 'mclReportType'
     -> MetadataColumnsList
 metadataColumnsList pMclReportType_ =
-    MetadataColumnsList
+    MetadataColumnsList'
     { _mclReportType = pMclReportType_
     }
 
@@ -78,7 +78,11 @@ mclReportType
 
 instance GoogleRequest MetadataColumnsList where
         type Rs MetadataColumnsList = Columns
-        requestClient MetadataColumnsList{..}
+        type Scopes MetadataColumnsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient MetadataColumnsList'{..}
           = go _mclReportType (Just AltJSON) analyticsService
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.UserRoles.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'UserRolesPatch' request conforms to.
 type UserRolesPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -56,7 +56,7 @@ type UserRolesPatchResource =
 -- | Updates an existing user role. This method supports patch semantics.
 --
 -- /See:/ 'userRolesPatch' smart constructor.
-data UserRolesPatch = UserRolesPatch
+data UserRolesPatch = UserRolesPatch'
     { _urpProFileId :: !(Textual Int64)
     , _urpPayload   :: !UserRole
     , _urpId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ userRolesPatch
     -> Int64 -- ^ 'urpId'
     -> UserRolesPatch
 userRolesPatch pUrpProFileId_ pUrpPayload_ pUrpId_ =
-    UserRolesPatch
+    UserRolesPatch'
     { _urpProFileId = _Coerce # pUrpProFileId_
     , _urpPayload = pUrpPayload_
     , _urpId = _Coerce # pUrpId_
@@ -101,7 +101,9 @@ urpId
 
 instance GoogleRequest UserRolesPatch where
         type Rs UserRolesPatch = UserRole
-        requestClient UserRolesPatch{..}
+        type Scopes UserRolesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient UserRolesPatch'{..}
           = go _urpProFileId (Just _urpId) (Just AltJSON)
               _urpPayload
               dFAReportingService

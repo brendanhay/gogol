@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.Sites.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves information about specific site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.get@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sites.get@.
 module Network.Google.Resource.Webmasters.Sites.Get
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ type SitesGetResource =
 -- | Retrieves information about specific site.
 --
 -- /See:/ 'sitesGet' smart constructor.
-newtype SitesGet = SitesGet
+newtype SitesGet = SitesGet'
     { _sitSiteURL :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ sitesGet
     :: Text -- ^ 'sitSiteURL'
     -> SitesGet
 sitesGet pSitSiteURL_ =
-    SitesGet
+    SitesGet'
     { _sitSiteURL = pSitSiteURL_
     }
 
@@ -76,7 +76,10 @@ sitSiteURL
 
 instance GoogleRequest SitesGet where
         type Rs SitesGet = WmxSite
-        requestClient SitesGet{..}
+        type Scopes SitesGet =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
+        requestClient SitesGet'{..}
           = go _sitSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesGetResource)

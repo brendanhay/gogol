@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type SubscriptionsChangeSeatsResource =
 -- | Changes the seats configuration of a subscription
 --
 -- /See:/ 'subscriptionsChangeSeats' smart constructor.
-data SubscriptionsChangeSeats = SubscriptionsChangeSeats
+data SubscriptionsChangeSeats = SubscriptionsChangeSeats'
     { _scsPayload        :: !Seats
     , _scsCustomerId     :: !Text
     , _scsSubscriptionId :: !Text
@@ -79,7 +79,7 @@ subscriptionsChangeSeats
     -> Text -- ^ 'scsSubscriptionId'
     -> SubscriptionsChangeSeats
 subscriptionsChangeSeats pScsPayload_ pScsCustomerId_ pScsSubscriptionId_ =
-    SubscriptionsChangeSeats
+    SubscriptionsChangeSeats'
     { _scsPayload = pScsPayload_
     , _scsCustomerId = pScsCustomerId_
     , _scsSubscriptionId = pScsSubscriptionId_
@@ -104,7 +104,9 @@ scsSubscriptionId
 
 instance GoogleRequest SubscriptionsChangeSeats where
         type Rs SubscriptionsChangeSeats = Subscription
-        requestClient SubscriptionsChangeSeats{..}
+        type Scopes SubscriptionsChangeSeats =
+             '["https://www.googleapis.com/auth/apps.order"]
+        requestClient SubscriptionsChangeSeats'{..}
           = go _scsCustomerId _scsSubscriptionId (Just AltJSON)
               _scsPayload
               appsResellerService

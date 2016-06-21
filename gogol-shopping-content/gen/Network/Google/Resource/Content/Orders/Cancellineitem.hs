@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.Cancellineitem
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type OrdersCancellineitemResource =
 -- | Cancels a line item.
 --
 -- /See:/ 'ordersCancellineitem' smart constructor.
-data OrdersCancellineitem = OrdersCancellineitem
+data OrdersCancellineitem = OrdersCancellineitem'
     { _ordMerchantId :: !(Textual Word64)
     , _ordPayload    :: !OrdersCancelLineItemRequest
     , _ordOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersCancellineitem
     -> Text -- ^ 'ordOrderId'
     -> OrdersCancellineitem
 ordersCancellineitem pOrdMerchantId_ pOrdPayload_ pOrdOrderId_ =
-    OrdersCancellineitem
+    OrdersCancellineitem'
     { _ordMerchantId = _Coerce # pOrdMerchantId_
     , _ordPayload = pOrdPayload_
     , _ordOrderId = pOrdOrderId_
@@ -104,7 +104,9 @@ ordOrderId
 instance GoogleRequest OrdersCancellineitem where
         type Rs OrdersCancellineitem =
              OrdersCancelLineItemResponse
-        requestClient OrdersCancellineitem{..}
+        type Scopes OrdersCancellineitem =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersCancellineitem'{..}
           = go _ordMerchantId _ordOrderId (Just AltJSON)
               _ordPayload
               shoppingContentService

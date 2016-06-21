@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.APKListings.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type EditsAPKListingsDeleteResource =
 -- language code.
 --
 -- /See:/ 'editsAPKListingsDelete' smart constructor.
-data EditsAPKListingsDelete = EditsAPKListingsDelete
+data EditsAPKListingsDelete = EditsAPKListingsDelete'
     { _eapkldPackageName    :: !Text
     , _eapkldAPKVersionCode :: !(Textual Int32)
     , _eapkldLanguage       :: !Text
@@ -87,7 +87,7 @@ editsAPKListingsDelete
     -> Text -- ^ 'eapkldEditId'
     -> EditsAPKListingsDelete
 editsAPKListingsDelete pEapkldPackageName_ pEapkldAPKVersionCode_ pEapkldLanguage_ pEapkldEditId_ =
-    EditsAPKListingsDelete
+    EditsAPKListingsDelete'
     { _eapkldPackageName = pEapkldPackageName_
     , _eapkldAPKVersionCode = _Coerce # pEapkldAPKVersionCode_
     , _eapkldLanguage = pEapkldLanguage_
@@ -124,7 +124,9 @@ eapkldEditId
 
 instance GoogleRequest EditsAPKListingsDelete where
         type Rs EditsAPKListingsDelete = ()
-        requestClient EditsAPKListingsDelete{..}
+        type Scopes EditsAPKListingsDelete =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsAPKListingsDelete'{..}
           = go _eapkldPackageName _eapkldEditId
               _eapkldAPKVersionCode
               _eapkldLanguage

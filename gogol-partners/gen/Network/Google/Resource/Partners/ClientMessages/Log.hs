@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Partners.ClientMessages.Log
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type ClientMessagesLogResource =
 -- have accessed this result.\`, etc.
 --
 -- /See:/ 'clientMessagesLog' smart constructor.
-data ClientMessagesLog = ClientMessagesLog
+data ClientMessagesLog = ClientMessagesLog'
     { _cmlXgafv          :: !(Maybe Text)
     , _cmlUploadProtocol :: !(Maybe Text)
     , _cmlPp             :: !Bool
@@ -103,7 +103,7 @@ clientMessagesLog
     :: LogMessageRequest -- ^ 'cmlPayload'
     -> ClientMessagesLog
 clientMessagesLog pCmlPayload_ =
-    ClientMessagesLog
+    ClientMessagesLog'
     { _cmlXgafv = Nothing
     , _cmlUploadProtocol = Nothing
     , _cmlPp = True
@@ -158,7 +158,8 @@ cmlCallback
 
 instance GoogleRequest ClientMessagesLog where
         type Rs ClientMessagesLog = LogMessageResponse
-        requestClient ClientMessagesLog{..}
+        type Scopes ClientMessagesLog = '[]
+        requestClient ClientMessagesLog'{..}
           = go _cmlXgafv _cmlUploadProtocol (Just _cmlPp)
               _cmlAccessToken
               _cmlUploadType

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.LandingPages.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'LandingPagesGet' request conforms to.
 type LandingPagesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -57,7 +57,7 @@ type LandingPagesGetResource =
 -- | Gets one campaign landing page by ID.
 --
 -- /See:/ 'landingPagesGet' smart constructor.
-data LandingPagesGet = LandingPagesGet
+data LandingPagesGet = LandingPagesGet'
     { _lpgCampaignId :: !(Textual Int64)
     , _lpgProFileId  :: !(Textual Int64)
     , _lpgId         :: !(Textual Int64)
@@ -78,7 +78,7 @@ landingPagesGet
     -> Int64 -- ^ 'lpgId'
     -> LandingPagesGet
 landingPagesGet pLpgCampaignId_ pLpgProFileId_ pLpgId_ =
-    LandingPagesGet
+    LandingPagesGet'
     { _lpgCampaignId = _Coerce # pLpgCampaignId_
     , _lpgProFileId = _Coerce # pLpgProFileId_
     , _lpgId = _Coerce # pLpgId_
@@ -104,7 +104,9 @@ lpgId
 
 instance GoogleRequest LandingPagesGet where
         type Rs LandingPagesGet = LandingPage
-        requestClient LandingPagesGet{..}
+        type Scopes LandingPagesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient LandingPagesGet'{..}
           = go _lpgProFileId _lpgCampaignId _lpgId
               (Just AltJSON)
               dFAReportingService

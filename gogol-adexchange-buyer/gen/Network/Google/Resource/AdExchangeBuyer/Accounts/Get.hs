@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.Accounts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type AccountsGetResource =
 -- | Gets one account by ID.
 --
 -- /See:/ 'accountsGet' smart constructor.
-newtype AccountsGet = AccountsGet
+newtype AccountsGet = AccountsGet'
     { _agId :: Textual Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ accountsGet
     :: Int32 -- ^ 'agId'
     -> AccountsGet
 accountsGet pAgId_ =
-    AccountsGet
+    AccountsGet'
     { _agId = _Coerce # pAgId_
     }
 
@@ -74,7 +74,9 @@ agId = lens _agId (\ s a -> s{_agId = a}) . _Coerce
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
-        requestClient AccountsGet{..}
+        type Scopes AccountsGet =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient AccountsGet'{..}
           = go _agId (Just AltJSON) adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)

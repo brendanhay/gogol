@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.LandingPages.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'LandingPagesUpdate' request conforms to.
 type LandingPagesUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -58,7 +58,7 @@ type LandingPagesUpdateResource =
 -- | Updates an existing campaign landing page.
 --
 -- /See:/ 'landingPagesUpdate' smart constructor.
-data LandingPagesUpdate = LandingPagesUpdate
+data LandingPagesUpdate = LandingPagesUpdate'
     { _lpuCampaignId :: !(Textual Int64)
     , _lpuProFileId  :: !(Textual Int64)
     , _lpuPayload    :: !LandingPage
@@ -79,7 +79,7 @@ landingPagesUpdate
     -> LandingPage -- ^ 'lpuPayload'
     -> LandingPagesUpdate
 landingPagesUpdate pLpuCampaignId_ pLpuProFileId_ pLpuPayload_ =
-    LandingPagesUpdate
+    LandingPagesUpdate'
     { _lpuCampaignId = _Coerce # pLpuCampaignId_
     , _lpuProFileId = _Coerce # pLpuProFileId_
     , _lpuPayload = pLpuPayload_
@@ -105,7 +105,9 @@ lpuPayload
 
 instance GoogleRequest LandingPagesUpdate where
         type Rs LandingPagesUpdate = LandingPage
-        requestClient LandingPagesUpdate{..}
+        type Scopes LandingPagesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient LandingPagesUpdate'{..}
           = go _lpuProFileId _lpuCampaignId (Just AltJSON)
               _lpuPayload
               dFAReportingService

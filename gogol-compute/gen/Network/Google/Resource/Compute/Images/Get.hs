@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Images.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified image resource.
+-- Returns the specified image. Get a list of available images by making a
+-- list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.get@.
 module Network.Google.Resource.Compute.Images.Get
@@ -52,10 +53,11 @@ type ImagesGetResource =
                  Capture "image" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Image
 
--- | Returns the specified image resource.
+-- | Returns the specified image. Get a list of available images by making a
+-- list() request.
 --
 -- /See:/ 'imagesGet' smart constructor.
-data ImagesGet = ImagesGet
+data ImagesGet = ImagesGet'
     { _iImage   :: !Text
     , _iProject :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +74,7 @@ imagesGet
     -> Text -- ^ 'iProject'
     -> ImagesGet
 imagesGet pIImage_ pIProject_ =
-    ImagesGet
+    ImagesGet'
     { _iImage = pIImage_
     , _iProject = pIProject_
     }
@@ -87,7 +89,11 @@ iProject = lens _iProject (\ s a -> s{_iProject = a})
 
 instance GoogleRequest ImagesGet where
         type Rs ImagesGet = Image
-        requestClient ImagesGet{..}
+        type Scopes ImagesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient ImagesGet'{..}
           = go _iProject _iImage (Just AltJSON) computeService
           where go
                   = buildClient (Proxy :: Proxy ImagesGetResource)

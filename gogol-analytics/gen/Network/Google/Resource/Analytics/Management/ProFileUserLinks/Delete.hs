@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ManagementProFileUserLinksDeleteResource =
 -- | Removes a user from the given view (profile).
 --
 -- /See:/ 'managementProFileUserLinksDelete' smart constructor.
-data ManagementProFileUserLinksDelete = ManagementProFileUserLinksDelete
+data ManagementProFileUserLinksDelete = ManagementProFileUserLinksDelete'
     { _mpfuldWebPropertyId :: !Text
     , _mpfuldProFileId     :: !Text
     , _mpfuldAccountId     :: !Text
@@ -86,7 +86,7 @@ managementProFileUserLinksDelete
     -> Text -- ^ 'mpfuldLinkId'
     -> ManagementProFileUserLinksDelete
 managementProFileUserLinksDelete pMpfuldWebPropertyId_ pMpfuldProFileId_ pMpfuldAccountId_ pMpfuldLinkId_ =
-    ManagementProFileUserLinksDelete
+    ManagementProFileUserLinksDelete'
     { _mpfuldWebPropertyId = pMpfuldWebPropertyId_
     , _mpfuldProFileId = pMpfuldProFileId_
     , _mpfuldAccountId = pMpfuldAccountId_
@@ -119,7 +119,9 @@ mpfuldLinkId
 instance GoogleRequest
          ManagementProFileUserLinksDelete where
         type Rs ManagementProFileUserLinksDelete = ()
-        requestClient ManagementProFileUserLinksDelete{..}
+        type Scopes ManagementProFileUserLinksDelete =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
+        requestClient ManagementProFileUserLinksDelete'{..}
           = go _mpfuldAccountId _mpfuldWebPropertyId
               _mpfuldProFileId
               _mpfuldLinkId

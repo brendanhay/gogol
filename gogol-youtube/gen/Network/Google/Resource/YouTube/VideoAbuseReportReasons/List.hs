@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type VideoAbuseReportReasonsListResource =
 -- videos.
 --
 -- /See:/ 'videoAbuseReportReasonsList' smart constructor.
-data VideoAbuseReportReasonsList = VideoAbuseReportReasonsList
+data VideoAbuseReportReasonsList = VideoAbuseReportReasonsList'
     { _varrlPart :: !Text
     , _varrlHl   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ videoAbuseReportReasonsList
     :: Text -- ^ 'varrlPart'
     -> VideoAbuseReportReasonsList
 videoAbuseReportReasonsList pVarrlPart_ =
-    VideoAbuseReportReasonsList
+    VideoAbuseReportReasonsList'
     { _varrlPart = pVarrlPart_
     , _varrlHl = "en_US"
     }
@@ -92,7 +92,11 @@ instance GoogleRequest VideoAbuseReportReasonsList
          where
         type Rs VideoAbuseReportReasonsList =
              VideoAbuseReportReasonListResponse
-        requestClient VideoAbuseReportReasonsList{..}
+        type Scopes VideoAbuseReportReasonsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly"]
+        requestClient VideoAbuseReportReasonsList'{..}
           = go (Just _varrlPart) (Just _varrlHl) (Just AltJSON)
               youTubeService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.MobileCarriers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'MobileCarriersList' request conforms to.
 type MobileCarriersListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "mobileCarriers" :>
@@ -53,7 +53,7 @@ type MobileCarriersListResource =
 -- | Retrieves a list of mobile carriers.
 --
 -- /See:/ 'mobileCarriersList' smart constructor.
-newtype MobileCarriersList = MobileCarriersList
+newtype MobileCarriersList = MobileCarriersList'
     { _mclProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ mobileCarriersList
     :: Int64 -- ^ 'mclProFileId'
     -> MobileCarriersList
 mobileCarriersList pMclProFileId_ =
-    MobileCarriersList
+    MobileCarriersList'
     { _mclProFileId = _Coerce # pMclProFileId_
     }
 
@@ -79,7 +79,9 @@ mclProFileId
 instance GoogleRequest MobileCarriersList where
         type Rs MobileCarriersList =
              MobileCarriersListResponse
-        requestClient MobileCarriersList{..}
+        type Scopes MobileCarriersList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient MobileCarriersList'{..}
           = go _mclProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.SSLCertificates.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type SSLCertificatesInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'sslCertificatesInsert' smart constructor.
-data SSLCertificatesInsert = SSLCertificatesInsert
+data SSLCertificatesInsert = SSLCertificatesInsert'
     { _sciProject :: !Text
     , _sciPayload :: !SSLCertificate
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,12 +75,12 @@ sslCertificatesInsert
     -> SSLCertificate -- ^ 'sciPayload'
     -> SSLCertificatesInsert
 sslCertificatesInsert pSciProject_ pSciPayload_ =
-    SSLCertificatesInsert
+    SSLCertificatesInsert'
     { _sciProject = pSciProject_
     , _sciPayload = pSciPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 sciProject :: Lens' SSLCertificatesInsert Text
 sciProject
   = lens _sciProject (\ s a -> s{_sciProject = a})
@@ -92,7 +92,10 @@ sciPayload
 
 instance GoogleRequest SSLCertificatesInsert where
         type Rs SSLCertificatesInsert = Operation
-        requestClient SSLCertificatesInsert{..}
+        type Scopes SSLCertificatesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient SSLCertificatesInsert'{..}
           = go _sciProject (Just AltJSON) _sciPayload
               computeService
           where go

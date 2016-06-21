@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Scores.Submit
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -34,6 +34,7 @@ module Network.Google.Resource.Games.Scores.Submit
 
     -- * Request Lenses
     , ssScoreTag
+    , ssConsistencyToken
     , ssScore
     , ssLeaderboardId
     , ssLanguage
@@ -52,18 +53,20 @@ type ScoresSubmitResource =
              "scores" :>
                QueryParam "score" (Textual Int64) :>
                  QueryParam "scoreTag" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "alt" AltJSON :>
-                       Post '[JSON] PlayerScoreResponse
+                   QueryParam "consistencyToken" (Textual Int64) :>
+                     QueryParam "language" Text :>
+                       QueryParam "alt" AltJSON :>
+                         Post '[JSON] PlayerScoreResponse
 
 -- | Submits a score to the specified leaderboard.
 --
 -- /See:/ 'scoresSubmit' smart constructor.
-data ScoresSubmit = ScoresSubmit
-    { _ssScoreTag      :: !(Maybe Text)
-    , _ssScore         :: !(Textual Int64)
-    , _ssLeaderboardId :: !Text
-    , _ssLanguage      :: !(Maybe Text)
+data ScoresSubmit = ScoresSubmit'
+    { _ssScoreTag         :: !(Maybe Text)
+    , _ssConsistencyToken :: !(Maybe (Textual Int64))
+    , _ssScore            :: !(Textual Int64)
+    , _ssLeaderboardId    :: !Text
+    , _ssLanguage         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresSubmit' with the minimum fields required to make a request.
@@ -71,6 +74,8 @@ data ScoresSubmit = ScoresSubmit
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ssScoreTag'
+--
+-- * 'ssConsistencyToken'
 --
 -- * 'ssScore'
 --
@@ -82,8 +87,9 @@ scoresSubmit
     -> Text -- ^ 'ssLeaderboardId'
     -> ScoresSubmit
 scoresSubmit pSsScore_ pSsLeaderboardId_ =
-    ScoresSubmit
+    ScoresSubmit'
     { _ssScoreTag = Nothing
+    , _ssConsistencyToken = Nothing
     , _ssScore = _Coerce # pSsScore_
     , _ssLeaderboardId = pSsLeaderboardId_
     , _ssLanguage = Nothing
@@ -95,6 +101,13 @@ scoresSubmit pSsScore_ pSsLeaderboardId_ =
 ssScoreTag :: Lens' ScoresSubmit (Maybe Text)
 ssScoreTag
   = lens _ssScoreTag (\ s a -> s{_ssScoreTag = a})
+
+-- | The last-seen mutation timestamp.
+ssConsistencyToken :: Lens' ScoresSubmit (Maybe Int64)
+ssConsistencyToken
+  = lens _ssConsistencyToken
+      (\ s a -> s{_ssConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The score you\'re submitting. The submitted score is ignored if it is
 -- worse than a previously submitted score, where worse depends on the
@@ -119,8 +132,12 @@ ssLanguage
 
 instance GoogleRequest ScoresSubmit where
         type Rs ScoresSubmit = PlayerScoreResponse
-        requestClient ScoresSubmit{..}
+        type Scopes ScoresSubmit =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient ScoresSubmit'{..}
           = go _ssLeaderboardId (Just _ssScore) _ssScoreTag
+              _ssConsistencyToken
               _ssLanguage
               (Just AltJSON)
               gamesService

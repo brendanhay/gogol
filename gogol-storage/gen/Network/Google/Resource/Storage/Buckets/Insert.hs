@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Buckets.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type BucketsInsertResource =
 -- | Creates a new bucket.
 --
 -- /See:/ 'bucketsInsert' smart constructor.
-data BucketsInsert = BucketsInsert
+data BucketsInsert = BucketsInsert'
     { _biProject                    :: !Text
     , _biPredefinedACL              :: !(Maybe BucketsInsertPredefinedACL)
     , _biPayload                    :: !Bucket
@@ -88,7 +88,7 @@ bucketsInsert
     -> Bucket -- ^ 'biPayload'
     -> BucketsInsert
 bucketsInsert pBiProject_ pBiPayload_ =
-    BucketsInsert
+    BucketsInsert'
     { _biProject = pBiProject_
     , _biPredefinedACL = Nothing
     , _biPayload = pBiPayload_
@@ -127,7 +127,11 @@ biProjection
 
 instance GoogleRequest BucketsInsert where
         type Rs BucketsInsert = Bucket
-        requestClient BucketsInsert{..}
+        type Scopes BucketsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient BucketsInsert'{..}
           = go (Just _biProject) _biPredefinedACL
               _biPredefinedDefaultObjectACL
               _biProjection

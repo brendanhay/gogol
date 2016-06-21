@@ -1,25 +1,32 @@
 name:                  gogol-monitoring
-version:               0.0.1
-synopsis:              Google Cloud Monitoring SDK.
+version:               0.1.0
+synopsis:              Google Monitoring SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015 Brendan Hay
+copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    API for accessing Google Cloud and API monitoring data.
+    Manages your Stackdriver monitoring data and configurations. Projects
+    must be associated with a Stackdriver account, except for the following
+    methods:
+    [monitoredResourceDescriptors.list](v3\/projects.monitoredResourceDescriptors\/list),
+    [monitoredResourceDescriptors.get](v3\/projects.monitoredResourceDescriptors\/get),
+    [metricDescriptors.list](v3\/projects.metricDescriptors\/list),
+    [metricDescriptors.get](v3\/projects.metricDescriptors\/get), and
+    [timeSeries.list](v3\/projects.timeSeries\/list).
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2beta2@
+    This library is compatible with version @v3@
     of the API.
 
 source-repository head
@@ -35,17 +42,26 @@ library
     exposed-modules:
           Network.Google.Monitoring
         , Network.Google.Monitoring.Types
-        , Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
-        , Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
-        , Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
-        , Network.Google.Resource.CloudMonitoring.Timeseries.List
-        , Network.Google.Resource.CloudMonitoring.Timeseries.Write
-        , Network.Google.Resource.CloudMonitoring.TimeseriesDescriptors.List
+        , Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
+        , Network.Google.Resource.Monitoring.Projects.Groups.Create
+        , Network.Google.Resource.Monitoring.Projects.Groups.Delete
+        , Network.Google.Resource.Monitoring.Projects.Groups.Get
+        , Network.Google.Resource.Monitoring.Projects.Groups.List
+        , Network.Google.Resource.Monitoring.Projects.Groups.Members.List
+        , Network.Google.Resource.Monitoring.Projects.Groups.Update
+        , Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Create
+        , Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Delete
+        , Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Get
+        , Network.Google.Resource.Monitoring.Projects.MetricDescriptors.List
+        , Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.Get
+        , Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.List
+        , Network.Google.Resource.Monitoring.Projects.TimeSeries.Create
+        , Network.Google.Resource.Monitoring.Projects.TimeSeries.List
 
     other-modules:
           Network.Google.Monitoring.Types.Product
         , Network.Google.Monitoring.Types.Sum
 
     build-depends:
-          gogol-core == 0.0.1.*
-        , base       >= 4.7 && < 5
+          gogol-core == 0.1.0.*
+        , base       >= 4.7

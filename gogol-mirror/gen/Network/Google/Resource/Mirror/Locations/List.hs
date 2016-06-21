@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Locations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,18 +50,21 @@ type LocationsListResource =
 --
 -- /See:/ 'locationsList' smart constructor.
 data LocationsList =
-    LocationsList
+    LocationsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationsList' with the minimum fields required to make a request.
 --
 locationsList
     :: LocationsList
-locationsList = LocationsList
+locationsList = LocationsList'
 
 instance GoogleRequest LocationsList where
         type Rs LocationsList = LocationsListResponse
-        requestClient LocationsList{}
+        type Scopes LocationsList =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient LocationsList'{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy LocationsListResource)

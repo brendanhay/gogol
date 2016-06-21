@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.SSLCerts.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type SSLCertsDeleteResource =
 -- instance is restarted.
 --
 -- /See:/ 'sslCertsDelete' smart constructor.
-data SSLCertsDelete = SSLCertsDelete
+data SSLCertsDelete = SSLCertsDelete'
     { _scdProject         :: !Text
     , _scdSha1Fingerprint :: !Text
     , _scdInstance        :: !Text
@@ -80,7 +80,7 @@ sslCertsDelete
     -> Text -- ^ 'scdInstance'
     -> SSLCertsDelete
 sslCertsDelete pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
-    SSLCertsDelete
+    SSLCertsDelete'
     { _scdProject = pScdProject_
     , _scdSha1Fingerprint = pScdSha1Fingerprint_
     , _scdInstance = pScdInstance_
@@ -104,7 +104,10 @@ scdInstance
 
 instance GoogleRequest SSLCertsDelete where
         type Rs SSLCertsDelete = Operation
-        requestClient SSLCertsDelete{..}
+        type Scopes SSLCertsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient SSLCertsDelete'{..}
           = go _scdProject _scdInstance _scdSha1Fingerprint
               (Just AltJSON)
               sQLAdminService

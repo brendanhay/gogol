@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.QPXExpress.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.QPXExpress.Types.Sum
 -- | A QPX Express search response.
 --
 -- /See:/ 'tripOptionsResponse' smart constructor.
-data TripOptionsResponse = TripOptionsResponse
+data TripOptionsResponse = TripOptionsResponse'
     { _torRequestId  :: !(Maybe Text)
     , _torKind       :: !Text
     , _torData       :: !(Maybe Data')
@@ -44,7 +44,7 @@ data TripOptionsResponse = TripOptionsResponse
 tripOptionsResponse
     :: TripOptionsResponse
 tripOptionsResponse =
-    TripOptionsResponse
+    TripOptionsResponse'
     { _torRequestId = Nothing
     , _torKind = "qpxexpress#tripOptions"
     , _torData = Nothing
@@ -77,14 +77,14 @@ instance FromJSON TripOptionsResponse where
         parseJSON
           = withObject "TripOptionsResponse"
               (\ o ->
-                 TripOptionsResponse <$>
+                 TripOptionsResponse' <$>
                    (o .:? "requestId") <*>
                      (o .:? "kind" .!= "qpxexpress#tripOptions")
                      <*> (o .:? "data")
                      <*> (o .:? "tripOption" .!= mempty))
 
 instance ToJSON TripOptionsResponse where
-        toJSON TripOptionsResponse{..}
+        toJSON TripOptionsResponse'{..}
           = object
               (catMaybes
                  [("requestId" .=) <$> _torRequestId,
@@ -95,7 +95,7 @@ instance ToJSON TripOptionsResponse where
 -- that might be useful to display to an end-user.
 --
 -- /See:/ 'carrierData' smart constructor.
-data CarrierData = CarrierData
+data CarrierData = CarrierData'
     { _cdKind :: !Text
     , _cdName :: !(Maybe Text)
     , _cdCode :: !(Maybe Text)
@@ -113,7 +113,7 @@ data CarrierData = CarrierData
 carrierData
     :: CarrierData
 carrierData =
-    CarrierData
+    CarrierData'
     { _cdKind = "qpxexpress#carrierData"
     , _cdName = Nothing
     , _cdCode = Nothing
@@ -137,13 +137,13 @@ instance FromJSON CarrierData where
         parseJSON
           = withObject "CarrierData"
               (\ o ->
-                 CarrierData <$>
+                 CarrierData' <$>
                    (o .:? "kind" .!= "qpxexpress#carrierData") <*>
                      (o .:? "name")
                      <*> (o .:? "code"))
 
 instance ToJSON CarrierData where
-        toJSON CarrierData{..}
+        toJSON CarrierData'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cdKind), ("name" .=) <$> _cdName,
@@ -152,7 +152,7 @@ instance ToJSON CarrierData where
 -- | Information about free baggage allowed on one segment of a trip.
 --
 -- /See:/ 'freeBaggageAllowance' smart constructor.
-data FreeBaggageAllowance = FreeBaggageAllowance
+data FreeBaggageAllowance = FreeBaggageAllowance'
     { _fbaKind          :: !Text
     , _fbaPounds        :: !(Maybe (Textual Int32))
     , _fbaBagDescriptor :: !(Maybe [BagDescriptor])
@@ -179,7 +179,7 @@ data FreeBaggageAllowance = FreeBaggageAllowance
 freeBaggageAllowance
     :: FreeBaggageAllowance
 freeBaggageAllowance =
-    FreeBaggageAllowance
+    FreeBaggageAllowance'
     { _fbaKind = "qpxexpress#freeBaggageAllowance"
     , _fbaPounds = Nothing
     , _fbaBagDescriptor = Nothing
@@ -231,7 +231,7 @@ instance FromJSON FreeBaggageAllowance where
         parseJSON
           = withObject "FreeBaggageAllowance"
               (\ o ->
-                 FreeBaggageAllowance <$>
+                 FreeBaggageAllowance' <$>
                    (o .:? "kind" .!= "qpxexpress#freeBaggageAllowance")
                      <*> (o .:? "pounds")
                      <*> (o .:? "bagDescriptor" .!= mempty)
@@ -240,7 +240,7 @@ instance FromJSON FreeBaggageAllowance where
                      <*> (o .:? "pieces"))
 
 instance ToJSON FreeBaggageAllowance where
-        toJSON FreeBaggageAllowance{..}
+        toJSON FreeBaggageAllowance'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _fbaKind),
@@ -253,7 +253,7 @@ instance ToJSON FreeBaggageAllowance where
 -- | Two times in a single day defining a time range.
 --
 -- /See:/ 'timeOfDayRange' smart constructor.
-data TimeOfDayRange = TimeOfDayRange
+data TimeOfDayRange = TimeOfDayRange'
     { _todrKind         :: !Text
     , _todrLatestTime   :: !(Maybe Text)
     , _todrEarliestTime :: !(Maybe Text)
@@ -271,7 +271,7 @@ data TimeOfDayRange = TimeOfDayRange
 timeOfDayRange
     :: TimeOfDayRange
 timeOfDayRange =
-    TimeOfDayRange
+    TimeOfDayRange'
     { _todrKind = "qpxexpress#timeOfDayRange"
     , _todrLatestTime = Nothing
     , _todrEarliestTime = Nothing
@@ -299,13 +299,13 @@ instance FromJSON TimeOfDayRange where
         parseJSON
           = withObject "TimeOfDayRange"
               (\ o ->
-                 TimeOfDayRange <$>
+                 TimeOfDayRange' <$>
                    (o .:? "kind" .!= "qpxexpress#timeOfDayRange") <*>
                      (o .:? "latestTime")
                      <*> (o .:? "earliestTime"))
 
 instance ToJSON TimeOfDayRange where
-        toJSON TimeOfDayRange{..}
+        toJSON TimeOfDayRange'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _todrKind),
@@ -317,7 +317,7 @@ instance ToJSON TimeOfDayRange where
 -- aircraft.
 --
 -- /See:/ 'data'' smart constructor.
-data Data' = Data'
+data Data' = Data''
     { _dCarrier  :: !(Maybe [CarrierData])
     , _dKind     :: !Text
     , _dAircraft :: !(Maybe [AircraftData])
@@ -344,7 +344,7 @@ data Data' = Data'
 data'
     :: Data'
 data' =
-    Data'
+    Data''
     { _dCarrier = Nothing
     , _dKind = "qpxexpress#data"
     , _dAircraft = Nothing
@@ -397,7 +397,7 @@ instance FromJSON Data' where
         parseJSON
           = withObject "Data"
               (\ o ->
-                 Data' <$>
+                 Data'' <$>
                    (o .:? "carrier" .!= mempty) <*>
                      (o .:? "kind" .!= "qpxexpress#data")
                      <*> (o .:? "aircraft" .!= mempty)
@@ -406,7 +406,7 @@ instance FromJSON Data' where
                      <*> (o .:? "tax" .!= mempty))
 
 instance ToJSON Data' where
-        toJSON Data'{..}
+        toJSON Data''{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _dCarrier,
@@ -418,7 +418,7 @@ instance ToJSON Data' where
 -- | The make, model, and type of an aircraft.
 --
 -- /See:/ 'aircraftData' smart constructor.
-data AircraftData = AircraftData
+data AircraftData = AircraftData'
     { _adKind :: !Text
     , _adName :: !(Maybe Text)
     , _adCode :: !(Maybe Text)
@@ -436,7 +436,7 @@ data AircraftData = AircraftData
 aircraftData
     :: AircraftData
 aircraftData =
-    AircraftData
+    AircraftData'
     { _adKind = "qpxexpress#aircraftData"
     , _adName = Nothing
     , _adCode = Nothing
@@ -459,13 +459,13 @@ instance FromJSON AircraftData where
         parseJSON
           = withObject "AircraftData"
               (\ o ->
-                 AircraftData <$>
+                 AircraftData' <$>
                    (o .:? "kind" .!= "qpxexpress#aircraftData") <*>
                      (o .:? "name")
                      <*> (o .:? "code"))
 
 instance ToJSON AircraftData where
-        toJSON AircraftData{..}
+        toJSON AircraftData'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _adKind), ("name" .=) <$> _adName,
@@ -476,7 +476,7 @@ instance ToJSON AircraftData where
 -- points on a particular carrier with a particular flight number.)
 --
 -- /See:/ 'legInfo' smart constructor.
-data LegInfo = LegInfo
+data LegInfo = LegInfo'
     { _liDestination         :: !(Maybe Text)
     , _liOrigin              :: !(Maybe Text)
     , _liSecure              :: !(Maybe Bool)
@@ -536,7 +536,7 @@ data LegInfo = LegInfo
 legInfo
     :: LegInfo
 legInfo =
-    LegInfo
+    LegInfo'
     { _liDestination = Nothing
     , _liOrigin = Nothing
     , _liSecure = Nothing
@@ -666,7 +666,7 @@ instance FromJSON LegInfo where
         parseJSON
           = withObject "LegInfo"
               (\ o ->
-                 LegInfo <$>
+                 LegInfo' <$>
                    (o .:? "destination") <*> (o .:? "origin") <*>
                      (o .:? "secure")
                      <*> (o .:? "kind" .!= "qpxexpress#legInfo")
@@ -685,7 +685,7 @@ instance FromJSON LegInfo where
                      <*> (o .:? "departureTime"))
 
 instance ToJSON LegInfo where
-        toJSON LegInfo{..}
+        toJSON LegInfo'{..}
           = object
               (catMaybes
                  [("destination" .=) <$> _liDestination,
@@ -710,7 +710,7 @@ instance ToJSON LegInfo where
 -- | An airport.
 --
 -- /See:/ 'airportData' smart constructor.
-data AirportData = AirportData
+data AirportData = AirportData'
     { _aKind :: !Text
     , _aName :: !(Maybe Text)
     , _aCity :: !(Maybe Text)
@@ -731,7 +731,7 @@ data AirportData = AirportData
 airportData
     :: AirportData
 airportData =
-    AirportData
+    AirportData'
     { _aKind = "qpxexpress#airportData"
     , _aName = Nothing
     , _aCity = Nothing
@@ -761,14 +761,14 @@ instance FromJSON AirportData where
         parseJSON
           = withObject "AirportData"
               (\ o ->
-                 AirportData <$>
+                 AirportData' <$>
                    (o .:? "kind" .!= "qpxexpress#airportData") <*>
                      (o .:? "name")
                      <*> (o .:? "city")
                      <*> (o .:? "code"))
 
 instance ToJSON AirportData where
-        toJSON AirportData{..}
+        toJSON AirportData'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aKind), ("name" .=) <$> _aName,
@@ -777,7 +777,7 @@ instance ToJSON AirportData where
 -- | The price of this segment.
 --
 -- /See:/ 'segmentPricing' smart constructor.
-data SegmentPricing = SegmentPricing
+data SegmentPricing = SegmentPricing'
     { _spFreeBaggageOption :: !(Maybe [FreeBaggageAllowance])
     , _spKind              :: !Text
     , _spFareId            :: !(Maybe Text)
@@ -798,7 +798,7 @@ data SegmentPricing = SegmentPricing
 segmentPricing
     :: SegmentPricing
 segmentPricing =
-    SegmentPricing
+    SegmentPricing'
     { _spFreeBaggageOption = Nothing
     , _spKind = "qpxexpress#segmentPricing"
     , _spFareId = Nothing
@@ -832,14 +832,14 @@ instance FromJSON SegmentPricing where
         parseJSON
           = withObject "SegmentPricing"
               (\ o ->
-                 SegmentPricing <$>
+                 SegmentPricing' <$>
                    (o .:? "freeBaggageOption" .!= mempty) <*>
                      (o .:? "kind" .!= "qpxexpress#segmentPricing")
                      <*> (o .:? "fareId")
                      <*> (o .:? "segmentId"))
 
 instance ToJSON SegmentPricing where
-        toJSON SegmentPricing{..}
+        toJSON SegmentPricing'{..}
           = object
               (catMaybes
                  [("freeBaggageOption" .=) <$> _spFreeBaggageOption,
@@ -856,7 +856,7 @@ instance ToJSON SegmentPricing where
 -- SYD | BOS | March 22, 2007 | then this is a three slice trip.
 --
 -- /See:/ 'sliceInfo' smart constructor.
-data SliceInfo = SliceInfo
+data SliceInfo = SliceInfo'
     { _siKind     :: !Text
     , _siSegment  :: !(Maybe [SegmentInfo])
     , _siDuration :: !(Maybe (Textual Int32))
@@ -874,7 +874,7 @@ data SliceInfo = SliceInfo
 sliceInfo
     :: SliceInfo
 sliceInfo =
-    SliceInfo
+    SliceInfo'
     { _siKind = "qpxexpress#sliceInfo"
     , _siSegment = Nothing
     , _siDuration = Nothing
@@ -905,13 +905,13 @@ instance FromJSON SliceInfo where
         parseJSON
           = withObject "SliceInfo"
               (\ o ->
-                 SliceInfo <$>
+                 SliceInfo' <$>
                    (o .:? "kind" .!= "qpxexpress#sliceInfo") <*>
                      (o .:? "segment" .!= mempty)
                      <*> (o .:? "duration"))
 
 instance ToJSON SliceInfo where
-        toJSON SliceInfo{..}
+        toJSON SliceInfo'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _siKind),
@@ -921,7 +921,7 @@ instance ToJSON SliceInfo where
 -- | A QPX Express search response.
 --
 -- /See:/ 'tripsSearchResponse' smart constructor.
-data TripsSearchResponse = TripsSearchResponse
+data TripsSearchResponse = TripsSearchResponse'
     { _tsrTrips :: !(Maybe TripOptionsResponse)
     , _tsrKind  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -936,7 +936,7 @@ data TripsSearchResponse = TripsSearchResponse
 tripsSearchResponse
     :: TripsSearchResponse
 tripsSearchResponse =
-    TripsSearchResponse
+    TripsSearchResponse'
     { _tsrTrips = Nothing
     , _tsrKind = "qpxExpress#tripsSearch"
     }
@@ -954,12 +954,12 @@ instance FromJSON TripsSearchResponse where
         parseJSON
           = withObject "TripsSearchResponse"
               (\ o ->
-                 TripsSearchResponse <$>
+                 TripsSearchResponse' <$>
                    (o .:? "trips") <*>
                      (o .:? "kind" .!= "qpxExpress#tripsSearch"))
 
 instance ToJSON TripsSearchResponse where
-        toJSON TripsSearchResponse{..}
+        toJSON TripsSearchResponse'{..}
           = object
               (catMaybes
                  [("trips" .=) <$> _tsrTrips,
@@ -968,7 +968,7 @@ instance ToJSON TripsSearchResponse where
 -- | Trip information.
 --
 -- /See:/ 'tripOption' smart constructor.
-data TripOption = TripOption
+data TripOption = TripOption'
     { _toPricing   :: !(Maybe [PricingInfo])
     , _toKind      :: !Text
     , _toId        :: !(Maybe Text)
@@ -992,7 +992,7 @@ data TripOption = TripOption
 tripOption
     :: TripOption
 tripOption =
-    TripOption
+    TripOption'
     { _toPricing = Nothing
     , _toKind = "qpxexpress#tripOption"
     , _toId = Nothing
@@ -1032,7 +1032,7 @@ instance FromJSON TripOption where
         parseJSON
           = withObject "TripOption"
               (\ o ->
-                 TripOption <$>
+                 TripOption' <$>
                    (o .:? "pricing" .!= mempty) <*>
                      (o .:? "kind" .!= "qpxexpress#tripOption")
                      <*> (o .:? "id")
@@ -1040,7 +1040,7 @@ instance FromJSON TripOption where
                      <*> (o .:? "saleTotal"))
 
 instance ToJSON TripOption where
-        toJSON TripOption{..}
+        toJSON TripOption'{..}
           = object
               (catMaybes
                  [("pricing" .=) <$> _toPricing,
@@ -1051,7 +1051,7 @@ instance ToJSON TripOption where
 -- | Information about an item of baggage.
 --
 -- /See:/ 'bagDescriptor' smart constructor.
-data BagDescriptor = BagDescriptor
+data BagDescriptor = BagDescriptor'
     { _bdKind           :: !Text
     , _bdCommercialName :: !(Maybe Text)
     , _bdCount          :: !(Maybe (Textual Int32))
@@ -1075,7 +1075,7 @@ data BagDescriptor = BagDescriptor
 bagDescriptor
     :: BagDescriptor
 bagDescriptor =
-    BagDescriptor
+    BagDescriptor'
     { _bdKind = "qpxexpress#bagDescriptor"
     , _bdCommercialName = Nothing
     , _bdCount = Nothing
@@ -1117,7 +1117,7 @@ instance FromJSON BagDescriptor where
         parseJSON
           = withObject "BagDescriptor"
               (\ o ->
-                 BagDescriptor <$>
+                 BagDescriptor' <$>
                    (o .:? "kind" .!= "qpxexpress#bagDescriptor") <*>
                      (o .:? "commercialName")
                      <*> (o .:? "count")
@@ -1125,7 +1125,7 @@ instance FromJSON BagDescriptor where
                      <*> (o .:? "subcode"))
 
 instance ToJSON BagDescriptor where
-        toJSON BagDescriptor{..}
+        toJSON BagDescriptor'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _bdKind),
@@ -1138,7 +1138,7 @@ instance ToJSON BagDescriptor where
 -- the city of an airport.
 --
 -- /See:/ 'cityData' smart constructor.
-data CityData = CityData
+data CityData = CityData'
     { _cCountry :: !(Maybe Text)
     , _cKind    :: !Text
     , _cName    :: !(Maybe Text)
@@ -1159,7 +1159,7 @@ data CityData = CityData
 cityData
     :: CityData
 cityData =
-    CityData
+    CityData'
     { _cCountry = Nothing
     , _cKind = "qpxexpress#cityData"
     , _cName = Nothing
@@ -1188,14 +1188,14 @@ instance FromJSON CityData where
         parseJSON
           = withObject "CityData"
               (\ o ->
-                 CityData <$>
+                 CityData' <$>
                    (o .:? "country") <*>
                      (o .:? "kind" .!= "qpxexpress#cityData")
                      <*> (o .:? "name")
                      <*> (o .:? "code"))
 
 instance ToJSON CityData where
-        toJSON CityData{..}
+        toJSON CityData'{..}
           = object
               (catMaybes
                  [("country" .=) <$> _cCountry,
@@ -1207,7 +1207,7 @@ instance ToJSON CityData where
 -- reservation systems.
 --
 -- /See:/ 'passengerCounts' smart constructor.
-data PassengerCounts = PassengerCounts
+data PassengerCounts = PassengerCounts'
     { _pcSeniorCount       :: !(Maybe (Textual Int32))
     , _pcKind              :: !Text
     , _pcInfantInLapCount  :: !(Maybe (Textual Int32))
@@ -1234,7 +1234,7 @@ data PassengerCounts = PassengerCounts
 passengerCounts
     :: PassengerCounts
 passengerCounts =
-    PassengerCounts
+    PassengerCounts'
     { _pcSeniorCount = Nothing
     , _pcKind = "qpxexpress#passengerCounts"
     , _pcInfantInLapCount = Nothing
@@ -1286,7 +1286,7 @@ instance FromJSON PassengerCounts where
         parseJSON
           = withObject "PassengerCounts"
               (\ o ->
-                 PassengerCounts <$>
+                 PassengerCounts' <$>
                    (o .:? "seniorCount") <*>
                      (o .:? "kind" .!= "qpxexpress#passengerCounts")
                      <*> (o .:? "infantInLapCount")
@@ -1295,7 +1295,7 @@ instance FromJSON PassengerCounts where
                      <*> (o .:? "adultCount"))
 
 instance ToJSON PassengerCounts where
-        toJSON PassengerCounts{..}
+        toJSON PassengerCounts'{..}
           = object
               (catMaybes
                  [("seniorCount" .=) <$> _pcSeniorCount,
@@ -1311,7 +1311,7 @@ instance ToJSON PassengerCounts where
 -- HNL to OGG (leg 2), and DFW to OGG (legs 1 and 2).
 --
 -- /See:/ 'segmentInfo' smart constructor.
-data SegmentInfo = SegmentInfo
+data SegmentInfo = SegmentInfo'
     { _sBookingCode                 :: !(Maybe Text)
     , _sCabin                       :: !(Maybe Text)
     , _sBookingCodeCount            :: !(Maybe (Textual Int32))
@@ -1353,7 +1353,7 @@ data SegmentInfo = SegmentInfo
 segmentInfo
     :: SegmentInfo
 segmentInfo =
-    SegmentInfo
+    SegmentInfo'
     { _sBookingCode = Nothing
     , _sCabin = Nothing
     , _sBookingCodeCount = Nothing
@@ -1444,7 +1444,7 @@ instance FromJSON SegmentInfo where
         parseJSON
           = withObject "SegmentInfo"
               (\ o ->
-                 SegmentInfo <$>
+                 SegmentInfo' <$>
                    (o .:? "bookingCode") <*> (o .:? "cabin") <*>
                      (o .:? "bookingCodeCount")
                      <*> (o .:? "subjectToGovernmentApproval")
@@ -1457,7 +1457,7 @@ instance FromJSON SegmentInfo where
                      <*> (o .:? "leg" .!= mempty))
 
 instance ToJSON SegmentInfo where
-        toJSON SegmentInfo{..}
+        toJSON SegmentInfo'{..}
           = object
               (catMaybes
                  [("bookingCode" .=) <$> _sBookingCode,
@@ -1475,7 +1475,7 @@ instance ToJSON SegmentInfo where
 -- | Tax data.
 --
 -- /See:/ 'taxData' smart constructor.
-data TaxData = TaxData
+data TaxData = TaxData'
     { _tdKind :: !Text
     , _tdName :: !(Maybe Text)
     , _tdId   :: !(Maybe Text)
@@ -1493,7 +1493,7 @@ data TaxData = TaxData
 taxData
     :: TaxData
 taxData =
-    TaxData
+    TaxData'
     { _tdKind = "qpxexpress#taxData"
     , _tdName = Nothing
     , _tdId = Nothing
@@ -1516,13 +1516,13 @@ instance FromJSON TaxData where
         parseJSON
           = withObject "TaxData"
               (\ o ->
-                 TaxData <$>
+                 TaxData' <$>
                    (o .:? "kind" .!= "qpxexpress#taxData") <*>
                      (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON TaxData where
-        toJSON TaxData{..}
+        toJSON TaxData'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tdKind), ("name" .=) <$> _tdName,
@@ -1531,7 +1531,7 @@ instance ToJSON TaxData where
 -- | A QPX Express search request.
 --
 -- /See:/ 'tripsSearchRequest' smart constructor.
-newtype TripsSearchRequest = TripsSearchRequest
+newtype TripsSearchRequest = TripsSearchRequest'
     { _tsrRequest :: Maybe TripOptionsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1543,7 +1543,7 @@ newtype TripsSearchRequest = TripsSearchRequest
 tripsSearchRequest
     :: TripsSearchRequest
 tripsSearchRequest =
-    TripsSearchRequest
+    TripsSearchRequest'
     { _tsrRequest = Nothing
     }
 
@@ -1556,16 +1556,16 @@ tsrRequest
 instance FromJSON TripsSearchRequest where
         parseJSON
           = withObject "TripsSearchRequest"
-              (\ o -> TripsSearchRequest <$> (o .:? "request"))
+              (\ o -> TripsSearchRequest' <$> (o .:? "request"))
 
 instance ToJSON TripsSearchRequest where
-        toJSON TripsSearchRequest{..}
+        toJSON TripsSearchRequest'{..}
           = object (catMaybes [("request" .=) <$> _tsrRequest])
 
 -- | Tax information.
 --
 -- /See:/ 'taxInfo' smart constructor.
-data TaxInfo = TaxInfo
+data TaxInfo = TaxInfo'
     { _tiChargeType :: !(Maybe Text)
     , _tiCountry    :: !(Maybe Text)
     , _tiKind       :: !Text
@@ -1592,7 +1592,7 @@ data TaxInfo = TaxInfo
 taxInfo
     :: TaxInfo
 taxInfo =
-    TaxInfo
+    TaxInfo'
     { _tiChargeType = Nothing
     , _tiCountry = Nothing
     , _tiKind = "qpxexpress#taxInfo"
@@ -1634,7 +1634,7 @@ instance FromJSON TaxInfo where
         parseJSON
           = withObject "TaxInfo"
               (\ o ->
-                 TaxInfo <$>
+                 TaxInfo' <$>
                    (o .:? "chargeType") <*> (o .:? "country") <*>
                      (o .:? "kind" .!= "qpxexpress#taxInfo")
                      <*> (o .:? "salePrice")
@@ -1642,7 +1642,7 @@ instance FromJSON TaxInfo where
                      <*> (o .:? "id"))
 
 instance ToJSON TaxInfo where
-        toJSON TaxInfo{..}
+        toJSON TaxInfo'{..}
           = object
               (catMaybes
                  [("chargeType" .=) <$> _tiChargeType,
@@ -1657,7 +1657,7 @@ instance ToJSON TaxInfo where
 -- defaults to that of the journey origin country.
 --
 -- /See:/ 'pricingInfo' smart constructor.
-data PricingInfo = PricingInfo
+data PricingInfo = PricingInfo'
     { _piSaleTaxTotal        :: !(Maybe Text)
     , _piRefundable          :: !(Maybe Bool)
     , _piPtc                 :: !(Maybe Text)
@@ -1705,7 +1705,7 @@ data PricingInfo = PricingInfo
 pricingInfo
     :: PricingInfo
 pricingInfo =
-    PricingInfo
+    PricingInfo'
     { _piSaleTaxTotal = Nothing
     , _piRefundable = Nothing
     , _piPtc = Nothing
@@ -1808,7 +1808,7 @@ instance FromJSON PricingInfo where
         parseJSON
           = withObject "PricingInfo"
               (\ o ->
-                 PricingInfo <$>
+                 PricingInfo' <$>
                    (o .:? "saleTaxTotal") <*> (o .:? "refundable") <*>
                      (o .:? "ptc")
                      <*> (o .:? "baseFareTotal")
@@ -1823,7 +1823,7 @@ instance FromJSON PricingInfo where
                      <*> (o .:? "saleFareTotal"))
 
 instance ToJSON PricingInfo where
-        toJSON PricingInfo{..}
+        toJSON PricingInfo'{..}
           = object
               (catMaybes
                  [("saleTaxTotal" .=) <$> _piSaleTaxTotal,
@@ -1849,7 +1849,7 @@ instance ToJSON PricingInfo where
 -- flights that require a change of aircraft between legs.
 --
 -- /See:/ 'flightInfo' smart constructor.
-data FlightInfo = FlightInfo
+data FlightInfo = FlightInfo'
     { _fiCarrier :: !(Maybe Text)
     , _fiNumber  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1864,7 +1864,7 @@ data FlightInfo = FlightInfo
 flightInfo
     :: FlightInfo
 flightInfo =
-    FlightInfo
+    FlightInfo'
     { _fiCarrier = Nothing
     , _fiNumber = Nothing
     }
@@ -1881,11 +1881,11 @@ instance FromJSON FlightInfo where
         parseJSON
           = withObject "FlightInfo"
               (\ o ->
-                 FlightInfo <$>
+                 FlightInfo' <$>
                    (o .:? "carrier") <*> (o .:? "number"))
 
 instance ToJSON FlightInfo where
-        toJSON FlightInfo{..}
+        toJSON FlightInfo'{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _fiCarrier,
@@ -1898,7 +1898,7 @@ instance ToJSON FlightInfo where
 -- is a one-to-eight character alphanumeric code used to identify a fare.)
 --
 -- /See:/ 'fareInfo' smart constructor.
-data FareInfo = FareInfo
+data FareInfo = FareInfo'
     { _fCarrier     :: !(Maybe Text)
     , _fDestination :: !(Maybe Text)
     , _fOrigin      :: !(Maybe Text)
@@ -1928,7 +1928,7 @@ data FareInfo = FareInfo
 fareInfo
     :: FareInfo
 fareInfo =
-    FareInfo
+    FareInfo'
     { _fCarrier = Nothing
     , _fDestination = Nothing
     , _fOrigin = Nothing
@@ -1974,7 +1974,7 @@ instance FromJSON FareInfo where
         parseJSON
           = withObject "FareInfo"
               (\ o ->
-                 FareInfo <$>
+                 FareInfo' <$>
                    (o .:? "carrier") <*> (o .:? "destination") <*>
                      (o .:? "origin")
                      <*> (o .:? "private")
@@ -1983,7 +1983,7 @@ instance FromJSON FareInfo where
                      <*> (o .:? "id"))
 
 instance ToJSON FareInfo where
-        toJSON FareInfo{..}
+        toJSON FareInfo'{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _fCarrier,
@@ -1997,7 +1997,7 @@ instance ToJSON FareInfo where
 -- | A QPX Express search request, which will yield one or more solutions.
 --
 -- /See:/ 'tripOptionsRequest' smart constructor.
-data TripOptionsRequest = TripOptionsRequest
+data TripOptionsRequest = TripOptionsRequest'
     { _torRefundable  :: !(Maybe Bool)
     , _torSaleCountry :: !(Maybe Text)
     , _torPassengers  :: !(Maybe PassengerCounts)
@@ -2024,7 +2024,7 @@ data TripOptionsRequest = TripOptionsRequest
 tripOptionsRequest
     :: TripOptionsRequest
 tripOptionsRequest =
-    TripOptionsRequest
+    TripOptionsRequest'
     { _torRefundable = Nothing
     , _torSaleCountry = Nothing
     , _torPassengers = Nothing
@@ -2082,7 +2082,7 @@ instance FromJSON TripOptionsRequest where
         parseJSON
           = withObject "TripOptionsRequest"
               (\ o ->
-                 TripOptionsRequest <$>
+                 TripOptionsRequest' <$>
                    (o .:? "refundable") <*> (o .:? "saleCountry") <*>
                      (o .:? "passengers")
                      <*> (o .:? "solutions")
@@ -2090,7 +2090,7 @@ instance FromJSON TripOptionsRequest where
                      <*> (o .:? "maxPrice"))
 
 instance ToJSON TripOptionsRequest where
-        toJSON TripOptionsRequest{..}
+        toJSON TripOptionsRequest'{..}
           = object
               (catMaybes
                  [("refundable" .=) <$> _torRefundable,
@@ -2103,7 +2103,7 @@ instance ToJSON TripOptionsRequest where
 -- | Criteria a desired slice must satisfy.
 --
 -- /See:/ 'sliceInput' smart constructor.
-data SliceInput = SliceInput
+data SliceInput = SliceInput'
     { _sliDestination            :: !(Maybe Text)
     , _sliOrigin                 :: !(Maybe Text)
     , _sliMaxStops               :: !(Maybe (Textual Int32))
@@ -2145,7 +2145,7 @@ data SliceInput = SliceInput
 sliceInput
     :: SliceInput
 sliceInput =
-    SliceInput
+    SliceInput'
     { _sliDestination = Nothing
     , _sliOrigin = Nothing
     , _sliMaxStops = Nothing
@@ -2237,7 +2237,7 @@ instance FromJSON SliceInput where
         parseJSON
           = withObject "SliceInput"
               (\ o ->
-                 SliceInput <$>
+                 SliceInput' <$>
                    (o .:? "destination") <*> (o .:? "origin") <*>
                      (o .:? "maxStops")
                      <*> (o .:? "kind" .!= "qpxexpress#sliceInput")
@@ -2250,7 +2250,7 @@ instance FromJSON SliceInput where
                      <*> (o .:? "alliance"))
 
 instance ToJSON SliceInput where
-        toJSON SliceInput{..}
+        toJSON SliceInput'{..}
           = object
               (catMaybes
                  [("destination" .=) <$> _sliDestination,

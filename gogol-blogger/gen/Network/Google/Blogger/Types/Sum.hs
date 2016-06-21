@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Blogger.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -26,18 +26,18 @@ data PostsListOrderBy
     | Updated
       -- ^ @updated@
       -- Order by the date the post was last updated
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsListOrderBy
 
-instance FromText PostsListOrderBy where
-    fromText = \case
-        "published" -> Just Published
-        "updated" -> Just Updated
-        _ -> Nothing
+instance FromHttpApiData PostsListOrderBy where
+    parseQueryParam = \case
+        "published" -> Right Published
+        "updated" -> Right Updated
+        x -> Left ("Unable to parse PostsListOrderBy from: " <> x)
 
-instance ToText PostsListOrderBy where
-    toText = \case
+instance ToHttpApiData PostsListOrderBy where
+    toQueryParam = \case
         Published -> "published"
         Updated -> "updated"
 
@@ -59,19 +59,19 @@ data PostsListView
     | Reader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsListView
 
-instance FromText PostsListView where
-    fromText = \case
-        "ADMIN" -> Just Admin
-        "AUTHOR" -> Just Author
-        "READER" -> Just Reader
-        _ -> Nothing
+instance FromHttpApiData PostsListView where
+    parseQueryParam = \case
+        "ADMIN" -> Right Admin
+        "AUTHOR" -> Right Author
+        "READER" -> Right Reader
+        x -> Left ("Unable to parse PostsListView from: " <> x)
 
-instance ToText PostsListView where
-    toText = \case
+instance ToHttpApiData PostsListView where
+    toQueryParam = \case
         Admin -> "ADMIN"
         Author -> "AUTHOR"
         Reader -> "READER"
@@ -92,19 +92,19 @@ data PageViewsGetRange
     | PVGRAll
       -- ^ @all@
       -- Total page view counts from all time.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PageViewsGetRange
 
-instance FromText PageViewsGetRange where
-    fromText = \case
-        "30DAYS" -> Just PVGR30DAYS
-        "7DAYS" -> Just PVGR7DAYS
-        "all" -> Just PVGRAll
-        _ -> Nothing
+instance FromHttpApiData PageViewsGetRange where
+    parseQueryParam = \case
+        "30DAYS" -> Right PVGR30DAYS
+        "7DAYS" -> Right PVGR7DAYS
+        "all" -> Right PVGRAll
+        x -> Left ("Unable to parse PageViewsGetRange from: " <> x)
 
-instance ToText PageViewsGetRange where
-    toText = \case
+instance ToHttpApiData PageViewsGetRange where
+    toQueryParam = \case
         PVGR30DAYS -> "30DAYS"
         PVGR7DAYS -> "7DAYS"
         PVGRAll -> "all"
@@ -127,19 +127,19 @@ data CommentsListView
     | CLVReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsListView
 
-instance FromText CommentsListView where
-    fromText = \case
-        "ADMIN" -> Just CLVAdmin
-        "AUTHOR" -> Just CLVAuthor
-        "READER" -> Just CLVReader
-        _ -> Nothing
+instance FromHttpApiData CommentsListView where
+    parseQueryParam = \case
+        "ADMIN" -> Right CLVAdmin
+        "AUTHOR" -> Right CLVAuthor
+        "READER" -> Right CLVReader
+        x -> Left ("Unable to parse CommentsListView from: " <> x)
 
-instance ToText CommentsListView where
-    toText = \case
+instance ToHttpApiData CommentsListView where
+    toQueryParam = \case
         CLVAdmin -> "ADMIN"
         CLVAuthor -> "AUTHOR"
         CLVReader -> "READER"
@@ -160,19 +160,19 @@ data PostUserInfosListStatus
     | Scheduled
       -- ^ @scheduled@
       -- Posts that are scheduled to publish in future.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostUserInfosListStatus
 
-instance FromText PostUserInfosListStatus where
-    fromText = \case
-        "draft" -> Just Draft
-        "live" -> Just Live
-        "scheduled" -> Just Scheduled
-        _ -> Nothing
+instance FromHttpApiData PostUserInfosListStatus where
+    parseQueryParam = \case
+        "draft" -> Right Draft
+        "live" -> Right Live
+        "scheduled" -> Right Scheduled
+        x -> Left ("Unable to parse PostUserInfosListStatus from: " <> x)
 
-instance ToText PostUserInfosListStatus where
-    toText = \case
+instance ToHttpApiData PostUserInfosListStatus where
+    toQueryParam = \case
         Draft -> "draft"
         Live -> "live"
         Scheduled -> "scheduled"
@@ -195,19 +195,19 @@ data PostsGetView
     | PGVReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsGetView
 
-instance FromText PostsGetView where
-    fromText = \case
-        "ADMIN" -> Just PGVAdmin
-        "AUTHOR" -> Just PGVAuthor
-        "READER" -> Just PGVReader
-        _ -> Nothing
+instance FromHttpApiData PostsGetView where
+    parseQueryParam = \case
+        "ADMIN" -> Right PGVAdmin
+        "AUTHOR" -> Right PGVAuthor
+        "READER" -> Right PGVReader
+        x -> Left ("Unable to parse PostsGetView from: " <> x)
 
-instance ToText PostsGetView where
-    toText = \case
+instance ToHttpApiData PostsGetView where
+    toQueryParam = \case
         PGVAdmin -> "ADMIN"
         PGVAuthor -> "AUTHOR"
         PGVReader -> "READER"
@@ -226,18 +226,18 @@ data PostsSearchOrderBy
     | PSOBUpdated
       -- ^ @updated@
       -- Order by the date the post was last updated
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsSearchOrderBy
 
-instance FromText PostsSearchOrderBy where
-    fromText = \case
-        "published" -> Just PSOBPublished
-        "updated" -> Just PSOBUpdated
-        _ -> Nothing
+instance FromHttpApiData PostsSearchOrderBy where
+    parseQueryParam = \case
+        "published" -> Right PSOBPublished
+        "updated" -> Right PSOBUpdated
+        x -> Left ("Unable to parse PostsSearchOrderBy from: " <> x)
 
-instance ToText PostsSearchOrderBy where
-    toText = \case
+instance ToHttpApiData PostsSearchOrderBy where
+    toQueryParam = \case
         PSOBPublished -> "published"
         PSOBUpdated -> "updated"
 
@@ -260,20 +260,20 @@ data CommentsListByBlogStatus
     | CLBBSSpam
       -- ^ @spam@
       -- Comments marked as spam by the administrator
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsListByBlogStatus
 
-instance FromText CommentsListByBlogStatus where
-    fromText = \case
-        "emptied" -> Just CLBBSEmptied
-        "live" -> Just CLBBSLive
-        "pending" -> Just CLBBSPending
-        "spam" -> Just CLBBSSpam
-        _ -> Nothing
+instance FromHttpApiData CommentsListByBlogStatus where
+    parseQueryParam = \case
+        "emptied" -> Right CLBBSEmptied
+        "live" -> Right CLBBSLive
+        "pending" -> Right CLBBSPending
+        "spam" -> Right CLBBSSpam
+        x -> Left ("Unable to parse CommentsListByBlogStatus from: " <> x)
 
-instance ToText CommentsListByBlogStatus where
-    toText = \case
+instance ToHttpApiData CommentsListByBlogStatus where
+    toQueryParam = \case
         CLBBSEmptied -> "emptied"
         CLBBSLive -> "live"
         CLBBSPending -> "pending"
@@ -295,19 +295,19 @@ data PagesGetView
     | PReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PagesGetView
 
-instance FromText PagesGetView where
-    fromText = \case
-        "ADMIN" -> Just PAdmin
-        "AUTHOR" -> Just PAuthor
-        "READER" -> Just PReader
-        _ -> Nothing
+instance FromHttpApiData PagesGetView where
+    parseQueryParam = \case
+        "ADMIN" -> Right PAdmin
+        "AUTHOR" -> Right PAuthor
+        "READER" -> Right PReader
+        x -> Left ("Unable to parse PagesGetView from: " <> x)
 
-instance ToText PagesGetView where
-    toText = \case
+instance ToHttpApiData PagesGetView where
+    toQueryParam = \case
         PAdmin -> "ADMIN"
         PAuthor -> "AUTHOR"
         PReader -> "READER"
@@ -326,18 +326,18 @@ data PostUserInfosListOrderBy
     | PUILOBUpdated
       -- ^ @updated@
       -- Order by the date the post was last updated
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostUserInfosListOrderBy
 
-instance FromText PostUserInfosListOrderBy where
-    fromText = \case
-        "published" -> Just PUILOBPublished
-        "updated" -> Just PUILOBUpdated
-        _ -> Nothing
+instance FromHttpApiData PostUserInfosListOrderBy where
+    parseQueryParam = \case
+        "published" -> Right PUILOBPublished
+        "updated" -> Right PUILOBUpdated
+        x -> Left ("Unable to parse PostUserInfosListOrderBy from: " <> x)
 
-instance ToText PostUserInfosListOrderBy where
-    toText = \case
+instance ToHttpApiData PostUserInfosListOrderBy where
+    toQueryParam = \case
         PUILOBPublished -> "published"
         PUILOBUpdated -> "updated"
 
@@ -359,19 +359,19 @@ data BlogsGetView
     | BGVReader
       -- ^ @READER@
       -- Reader level detail.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlogsGetView
 
-instance FromText BlogsGetView where
-    fromText = \case
-        "ADMIN" -> Just BGVAdmin
-        "AUTHOR" -> Just BGVAuthor
-        "READER" -> Just BGVReader
-        _ -> Nothing
+instance FromHttpApiData BlogsGetView where
+    parseQueryParam = \case
+        "ADMIN" -> Right BGVAdmin
+        "AUTHOR" -> Right BGVAuthor
+        "READER" -> Right BGVReader
+        x -> Left ("Unable to parse BlogsGetView from: " <> x)
 
-instance ToText BlogsGetView where
-    toText = \case
+instance ToHttpApiData BlogsGetView where
+    toQueryParam = \case
         BGVAdmin -> "ADMIN"
         BGVAuthor -> "AUTHOR"
         BGVReader -> "READER"
@@ -394,19 +394,19 @@ data BlogsGetByURLView
     | BGBUVReader
       -- ^ @READER@
       -- Reader level detail.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlogsGetByURLView
 
-instance FromText BlogsGetByURLView where
-    fromText = \case
-        "ADMIN" -> Just BGBUVAdmin
-        "AUTHOR" -> Just BGBUVAuthor
-        "READER" -> Just BGBUVReader
-        _ -> Nothing
+instance FromHttpApiData BlogsGetByURLView where
+    parseQueryParam = \case
+        "ADMIN" -> Right BGBUVAdmin
+        "AUTHOR" -> Right BGBUVAuthor
+        "READER" -> Right BGBUVReader
+        x -> Left ("Unable to parse BlogsGetByURLView from: " <> x)
 
-instance ToText BlogsGetByURLView where
-    toText = \case
+instance ToHttpApiData BlogsGetByURLView where
+    toQueryParam = \case
         BGBUVAdmin -> "ADMIN"
         BGBUVAuthor -> "AUTHOR"
         BGBUVReader -> "READER"
@@ -430,20 +430,20 @@ data CommentsListStatus
     | CLSSpam
       -- ^ @spam@
       -- Comments marked as spam by the administrator
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsListStatus
 
-instance FromText CommentsListStatus where
-    fromText = \case
-        "emptied" -> Just CLSEmptied
-        "live" -> Just CLSLive
-        "pending" -> Just CLSPending
-        "spam" -> Just CLSSpam
-        _ -> Nothing
+instance FromHttpApiData CommentsListStatus where
+    parseQueryParam = \case
+        "emptied" -> Right CLSEmptied
+        "live" -> Right CLSLive
+        "pending" -> Right CLSPending
+        "spam" -> Right CLSSpam
+        x -> Left ("Unable to parse CommentsListStatus from: " <> x)
 
-instance ToText CommentsListStatus where
-    toText = \case
+instance ToHttpApiData CommentsListStatus where
+    toQueryParam = \case
         CLSEmptied -> "emptied"
         CLSLive -> "live"
         CLSPending -> "pending"
@@ -464,18 +464,18 @@ data BlogsListByUserStatus
     | BLBUSLive
       -- ^ @LIVE@
       -- Blog is currently live.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlogsListByUserStatus
 
-instance FromText BlogsListByUserStatus where
-    fromText = \case
-        "DELETED" -> Just BLBUSDeleted
-        "LIVE" -> Just BLBUSLive
-        _ -> Nothing
+instance FromHttpApiData BlogsListByUserStatus where
+    parseQueryParam = \case
+        "DELETED" -> Right BLBUSDeleted
+        "LIVE" -> Right BLBUSLive
+        x -> Left ("Unable to parse BlogsListByUserStatus from: " <> x)
 
-instance ToText BlogsListByUserStatus where
-    toText = \case
+instance ToHttpApiData BlogsListByUserStatus where
+    toQueryParam = \case
         BLBUSDeleted -> "DELETED"
         BLBUSLive -> "LIVE"
 
@@ -497,19 +497,19 @@ data PagesListView
     | PLVReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PagesListView
 
-instance FromText PagesListView where
-    fromText = \case
-        "ADMIN" -> Just PLVAdmin
-        "AUTHOR" -> Just PLVAuthor
-        "READER" -> Just PLVReader
-        _ -> Nothing
+instance FromHttpApiData PagesListView where
+    parseQueryParam = \case
+        "ADMIN" -> Right PLVAdmin
+        "AUTHOR" -> Right PLVAuthor
+        "READER" -> Right PLVReader
+        x -> Left ("Unable to parse PagesListView from: " <> x)
 
-instance ToText PagesListView where
-    toText = \case
+instance ToHttpApiData PagesListView where
+    toQueryParam = \case
         PLVAdmin -> "ADMIN"
         PLVAuthor -> "AUTHOR"
         PLVReader -> "READER"
@@ -531,19 +531,19 @@ data PostsListStatus
     | PLSScheduled
       -- ^ @scheduled@
       -- Posts that are scheduled to publish in the future.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsListStatus
 
-instance FromText PostsListStatus where
-    fromText = \case
-        "draft" -> Just PLSDraft
-        "live" -> Just PLSLive
-        "scheduled" -> Just PLSScheduled
-        _ -> Nothing
+instance FromHttpApiData PostsListStatus where
+    parseQueryParam = \case
+        "draft" -> Right PLSDraft
+        "live" -> Right PLSLive
+        "scheduled" -> Right PLSScheduled
+        x -> Left ("Unable to parse PostsListStatus from: " <> x)
 
-instance ToText PostsListStatus where
-    toText = \case
+instance ToHttpApiData PostsListStatus where
+    toQueryParam = \case
         PLSDraft -> "draft"
         PLSLive -> "live"
         PLSScheduled -> "scheduled"
@@ -566,19 +566,19 @@ data BlogsListByUserView
     | BLBUVReader
       -- ^ @READER@
       -- Reader level detail.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlogsListByUserView
 
-instance FromText BlogsListByUserView where
-    fromText = \case
-        "ADMIN" -> Just BLBUVAdmin
-        "AUTHOR" -> Just BLBUVAuthor
-        "READER" -> Just BLBUVReader
-        _ -> Nothing
+instance FromHttpApiData BlogsListByUserView where
+    parseQueryParam = \case
+        "ADMIN" -> Right BLBUVAdmin
+        "AUTHOR" -> Right BLBUVAuthor
+        "READER" -> Right BLBUVReader
+        x -> Left ("Unable to parse BlogsListByUserView from: " <> x)
 
-instance ToText BlogsListByUserView where
-    toText = \case
+instance ToHttpApiData BlogsListByUserView where
+    toQueryParam = \case
         BLBUVAdmin -> "ADMIN"
         BLBUVAuthor -> "AUTHOR"
         BLBUVReader -> "READER"
@@ -601,19 +601,19 @@ data PostUserInfosListView
     | PUILVReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostUserInfosListView
 
-instance FromText PostUserInfosListView where
-    fromText = \case
-        "ADMIN" -> Just PUILVAdmin
-        "AUTHOR" -> Just PUILVAuthor
-        "READER" -> Just PUILVReader
-        _ -> Nothing
+instance FromHttpApiData PostUserInfosListView where
+    parseQueryParam = \case
+        "ADMIN" -> Right PUILVAdmin
+        "AUTHOR" -> Right PUILVAuthor
+        "READER" -> Right PUILVReader
+        x -> Left ("Unable to parse PostUserInfosListView from: " <> x)
 
-instance ToText PostUserInfosListView where
-    toText = \case
+instance ToHttpApiData PostUserInfosListView where
+    toQueryParam = \case
         PUILVAdmin -> "ADMIN"
         PUILVAuthor -> "AUTHOR"
         PUILVReader -> "READER"
@@ -638,19 +638,19 @@ data CommentsGetView
     | CGVReader
       -- ^ @READER@
       -- Admin level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsGetView
 
-instance FromText CommentsGetView where
-    fromText = \case
-        "ADMIN" -> Just CGVAdmin
-        "AUTHOR" -> Just CGVAuthor
-        "READER" -> Just CGVReader
-        _ -> Nothing
+instance FromHttpApiData CommentsGetView where
+    parseQueryParam = \case
+        "ADMIN" -> Right CGVAdmin
+        "AUTHOR" -> Right CGVAuthor
+        "READER" -> Right CGVReader
+        x -> Left ("Unable to parse CommentsGetView from: " <> x)
 
-instance ToText CommentsGetView where
-    toText = \case
+instance ToHttpApiData CommentsGetView where
+    toQueryParam = \case
         CGVAdmin -> "ADMIN"
         CGVAuthor -> "AUTHOR"
         CGVReader -> "READER"
@@ -673,19 +673,19 @@ data PostsGetByPathView
     | PGBPVReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsGetByPathView
 
-instance FromText PostsGetByPathView where
-    fromText = \case
-        "ADMIN" -> Just PGBPVAdmin
-        "AUTHOR" -> Just PGBPVAuthor
-        "READER" -> Just PGBPVReader
-        _ -> Nothing
+instance FromHttpApiData PostsGetByPathView where
+    parseQueryParam = \case
+        "ADMIN" -> Right PGBPVAdmin
+        "AUTHOR" -> Right PGBPVAuthor
+        "READER" -> Right PGBPVReader
+        x -> Left ("Unable to parse PostsGetByPathView from: " <> x)
 
-instance ToText PostsGetByPathView where
-    toText = \case
+instance ToHttpApiData PostsGetByPathView where
+    toQueryParam = \case
         PGBPVAdmin -> "ADMIN"
         PGBPVAuthor -> "AUTHOR"
         PGBPVReader -> "READER"
@@ -703,18 +703,18 @@ data PagesListStatus
     | PLive
       -- ^ @live@
       -- Pages that are publicly visible
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PagesListStatus
 
-instance FromText PagesListStatus where
-    fromText = \case
-        "draft" -> Just PDraft
-        "live" -> Just PLive
-        _ -> Nothing
+instance FromHttpApiData PagesListStatus where
+    parseQueryParam = \case
+        "draft" -> Right PDraft
+        "live" -> Right PLive
+        x -> Left ("Unable to parse PagesListStatus from: " <> x)
 
-instance ToText PagesListStatus where
-    toText = \case
+instance ToHttpApiData PagesListStatus where
+    toQueryParam = \case
         PDraft -> "draft"
         PLive -> "live"
 
@@ -738,19 +738,19 @@ data BlogsListByUserRole
       -- ^ @READER@
       -- Reader role - Blogs where the user has Reader level access (to a private
       -- blog).
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlogsListByUserRole
 
-instance FromText BlogsListByUserRole where
-    fromText = \case
-        "ADMIN" -> Just BLBURAdmin
-        "AUTHOR" -> Just BLBURAuthor
-        "READER" -> Just BLBURReader
-        _ -> Nothing
+instance FromHttpApiData BlogsListByUserRole where
+    parseQueryParam = \case
+        "ADMIN" -> Right BLBURAdmin
+        "AUTHOR" -> Right BLBURAuthor
+        "READER" -> Right BLBURReader
+        x -> Left ("Unable to parse BlogsListByUserRole from: " <> x)
 
-instance ToText BlogsListByUserRole where
-    toText = \case
+instance ToHttpApiData BlogsListByUserRole where
+    toQueryParam = \case
         BLBURAdmin -> "ADMIN"
         BLBURAuthor -> "AUTHOR"
         BLBURReader -> "READER"

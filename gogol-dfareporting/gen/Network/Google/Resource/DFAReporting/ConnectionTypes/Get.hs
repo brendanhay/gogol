@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.ConnectionTypes.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ConnectionTypesGet' request conforms to.
 type ConnectionTypesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "connectionTypes" :>
@@ -55,7 +55,7 @@ type ConnectionTypesGetResource =
 -- | Gets one connection type by ID.
 --
 -- /See:/ 'connectionTypesGet' smart constructor.
-data ConnectionTypesGet = ConnectionTypesGet
+data ConnectionTypesGet = ConnectionTypesGet'
     { _ctgProFileId :: !(Textual Int64)
     , _ctgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ connectionTypesGet
     -> Int64 -- ^ 'ctgId'
     -> ConnectionTypesGet
 connectionTypesGet pCtgProFileId_ pCtgId_ =
-    ConnectionTypesGet
+    ConnectionTypesGet'
     { _ctgProFileId = _Coerce # pCtgProFileId_
     , _ctgId = _Coerce # pCtgId_
     }
@@ -90,7 +90,9 @@ ctgId
 
 instance GoogleRequest ConnectionTypesGet where
         type Rs ConnectionTypesGet = ConnectionType
-        requestClient ConnectionTypesGet{..}
+        type Scopes ConnectionTypesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ConnectionTypesGet'{..}
           = go _ctgProFileId _ctgId (Just AltJSON)
               dFAReportingService
           where go

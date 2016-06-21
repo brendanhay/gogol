@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Data.Realtime.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type DataRealtimeGetResource =
 -- | Returns real time data for a view (profile).
 --
 -- /See:/ 'dataRealtimeGet' smart constructor.
-data DataRealtimeGet = DataRealtimeGet
+data DataRealtimeGet = DataRealtimeGet'
     { _drgMetrics    :: !Text
     , _drgFilters    :: !(Maybe Text)
     , _drgIds        :: !Text
@@ -91,7 +91,7 @@ dataRealtimeGet
     -> Text -- ^ 'drgIds'
     -> DataRealtimeGet
 dataRealtimeGet pDrgMetrics_ pDrgIds_ =
-    DataRealtimeGet
+    DataRealtimeGet'
     { _drgMetrics = pDrgMetrics_
     , _drgFilters = Nothing
     , _drgIds = pDrgIds_
@@ -138,7 +138,10 @@ drgMaxResults
 
 instance GoogleRequest DataRealtimeGet where
         type Rs DataRealtimeGet = RealtimeData
-        requestClient DataRealtimeGet{..}
+        type Scopes DataRealtimeGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient DataRealtimeGet'{..}
           = go (Just _drgIds) (Just _drgMetrics) _drgFilters
               _drgSort
               _drgDimensions

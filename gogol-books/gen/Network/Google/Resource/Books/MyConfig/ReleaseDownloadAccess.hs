@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type MyConfigReleaseDownloadAccessResource =
 -- | Release downloaded content access restriction.
 --
 -- /See:/ 'myConfigReleaseDownloadAccess' smart constructor.
-data MyConfigReleaseDownloadAccess = MyConfigReleaseDownloadAccess
+data MyConfigReleaseDownloadAccess = MyConfigReleaseDownloadAccess'
     { _mcrdaCpksver   :: !Text
     , _mcrdaLocale    :: !(Maybe Text)
     , _mcrdaVolumeIds :: ![Text]
@@ -82,7 +82,7 @@ myConfigReleaseDownloadAccess
     -> [Text] -- ^ 'mcrdaVolumeIds'
     -> MyConfigReleaseDownloadAccess
 myConfigReleaseDownloadAccess pMcrdaCpksver_ pMcrdaVolumeIds_ =
-    MyConfigReleaseDownloadAccess
+    MyConfigReleaseDownloadAccess'
     { _mcrdaCpksver = pMcrdaCpksver_
     , _mcrdaLocale = Nothing
     , _mcrdaVolumeIds = _Coerce # pMcrdaVolumeIds_
@@ -115,7 +115,9 @@ instance GoogleRequest MyConfigReleaseDownloadAccess
          where
         type Rs MyConfigReleaseDownloadAccess =
              DownloadAccesses
-        requestClient MyConfigReleaseDownloadAccess{..}
+        type Scopes MyConfigReleaseDownloadAccess =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyConfigReleaseDownloadAccess'{..}
           = go _mcrdaVolumeIds (Just _mcrdaCpksver)
               _mcrdaLocale
               _mcrdaSource

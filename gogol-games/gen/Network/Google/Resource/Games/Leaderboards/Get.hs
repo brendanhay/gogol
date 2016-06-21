@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Leaderboards.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -33,6 +33,7 @@ module Network.Google.Resource.Games.Leaderboards.Get
     , LeaderboardsGet
 
     -- * Request Lenses
+    , lgConsistencyToken
     , lgLeaderboardId
     , lgLanguage
     ) where
@@ -47,20 +48,24 @@ type LeaderboardsGetResource =
        "v1" :>
          "leaderboards" :>
            Capture "leaderboardId" Text :>
-             QueryParam "language" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Leaderboard
+             QueryParam "consistencyToken" (Textual Int64) :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Leaderboard
 
 -- | Retrieves the metadata of the leaderboard with the given ID.
 --
 -- /See:/ 'leaderboardsGet' smart constructor.
-data LeaderboardsGet = LeaderboardsGet
-    { _lgLeaderboardId :: !Text
-    , _lgLanguage      :: !(Maybe Text)
+data LeaderboardsGet = LeaderboardsGet'
+    { _lgConsistencyToken :: !(Maybe (Textual Int64))
+    , _lgLeaderboardId    :: !Text
+    , _lgLanguage         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lgConsistencyToken'
 --
 -- * 'lgLeaderboardId'
 --
@@ -69,10 +74,18 @@ leaderboardsGet
     :: Text -- ^ 'lgLeaderboardId'
     -> LeaderboardsGet
 leaderboardsGet pLgLeaderboardId_ =
-    LeaderboardsGet
-    { _lgLeaderboardId = pLgLeaderboardId_
+    LeaderboardsGet'
+    { _lgConsistencyToken = Nothing
+    , _lgLeaderboardId = pLgLeaderboardId_
     , _lgLanguage = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+lgConsistencyToken :: Lens' LeaderboardsGet (Maybe Int64)
+lgConsistencyToken
+  = lens _lgConsistencyToken
+      (\ s a -> s{_lgConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The ID of the leaderboard.
 lgLeaderboardId :: Lens' LeaderboardsGet Text
@@ -87,8 +100,12 @@ lgLanguage
 
 instance GoogleRequest LeaderboardsGet where
         type Rs LeaderboardsGet = Leaderboard
-        requestClient LeaderboardsGet{..}
-          = go _lgLeaderboardId _lgLanguage (Just AltJSON)
+        type Scopes LeaderboardsGet =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient LeaderboardsGet'{..}
+          = go _lgLeaderboardId _lgConsistencyToken _lgLanguage
+              (Just AltJSON)
               gamesService
           where go
                   = buildClient

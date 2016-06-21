@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Comments.SetModerationStatus
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type CommentsSetModerationStatusResource =
 -- comments.
 --
 -- /See:/ 'commentsSetModerationStatus' smart constructor.
-data CommentsSetModerationStatus = CommentsSetModerationStatus
+data CommentsSetModerationStatus = CommentsSetModerationStatus'
     { _csmsBanAuthor        :: !Bool
     , _csmsModerationStatus :: !CommentsSetModerationStatusModerationStatus
     , _csmsId               :: !Text
@@ -82,7 +82,7 @@ commentsSetModerationStatus
     -> Text -- ^ 'csmsId'
     -> CommentsSetModerationStatus
 commentsSetModerationStatus pCsmsModerationStatus_ pCsmsId_ =
-    CommentsSetModerationStatus
+    CommentsSetModerationStatus'
     { _csmsBanAuthor = False
     , _csmsModerationStatus = pCsmsModerationStatus_
     , _csmsId = pCsmsId_
@@ -111,7 +111,9 @@ csmsId = lens _csmsId (\ s a -> s{_csmsId = a})
 instance GoogleRequest CommentsSetModerationStatus
          where
         type Rs CommentsSetModerationStatus = ()
-        requestClient CommentsSetModerationStatus{..}
+        type Scopes CommentsSetModerationStatus =
+             '["https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient CommentsSetModerationStatus'{..}
           = go (Just _csmsId) (Just _csmsModerationStatus)
               (Just _csmsBanAuthor)
               (Just AltJSON)

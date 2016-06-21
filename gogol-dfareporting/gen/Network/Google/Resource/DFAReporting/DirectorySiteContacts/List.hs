@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'DirectorySiteContactsList' request conforms to.
 type DirectorySiteContactsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySiteContacts" :>
@@ -71,7 +71,7 @@ type DirectorySiteContactsListResource =
 -- | Retrieves a list of directory site contacts, possibly filtered.
 --
 -- /See:/ 'directorySiteContactsList' smart constructor.
-data DirectorySiteContactsList = DirectorySiteContactsList
+data DirectorySiteContactsList = DirectorySiteContactsList'
     { _dsclSearchString     :: !(Maybe Text)
     , _dsclIds              :: !(Maybe [Textual Int64])
     , _dsclProFileId        :: !(Textual Int64)
@@ -105,7 +105,7 @@ directorySiteContactsList
     :: Int64 -- ^ 'dsclProFileId'
     -> DirectorySiteContactsList
 directorySiteContactsList pDsclProFileId_ =
-    DirectorySiteContactsList
+    DirectorySiteContactsList'
     { _dsclSearchString = Nothing
     , _dsclIds = Nothing
     , _dsclProFileId = _Coerce # pDsclProFileId_
@@ -181,7 +181,9 @@ instance GoogleRequest DirectorySiteContactsList
          where
         type Rs DirectorySiteContactsList =
              DirectorySiteContactsListResponse
-        requestClient DirectorySiteContactsList{..}
+        type Scopes DirectorySiteContactsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient DirectorySiteContactsList'{..}
           = go _dsclProFileId _dsclSearchString
               (_dsclIds ^. _Default)
               (_dsclDirectorySiteIds ^. _Default)

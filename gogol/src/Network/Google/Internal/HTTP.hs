@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
@@ -6,7 +7,7 @@
 
 -- |
 -- Module      : Network.Google.Internal.HTTP
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
@@ -14,25 +15,27 @@
 --
 module Network.Google.Internal.HTTP where
 
-
-import           Control.Lens
+import           Control.Lens                      ((%~), (&))
 import           Control.Monad.Catch
-import           Control.Monad.IO.Class
-import           Control.Monad.Trans.Resource
-import           Data.Default.Class
-import           Data.Monoid
+import           Control.Monad.IO.Class            (MonadIO)
+import           Control.Monad.Trans.Resource      (MonadResource (..))
+import qualified Data.ByteString.Lazy              as LBS
+import           Data.Conduit                      (($$+-))
+import qualified Data.Conduit.List                 as Conduit
+import           Data.Default.Class                (Default (..))
+import           Data.Monoid                       (Dual (..), Endo (..), (<>))
 import qualified Data.Text.Encoding                as Text
 import qualified Data.Text.Lazy                    as LText
 import qualified Data.Text.Lazy.Builder            as Build
 import           GHC.Exts                          (toList)
-import           Network.Google.Auth
+import           Network.Google.Auth               (AllowScopes, authorize)
 import           Network.Google.Env                (Env (..))
-import           Network.Google.Internal.Logger
+import           Network.Google.Internal.Logger    (logDebug)
 import           Network.Google.Internal.Multipart
 import           Network.Google.Types
 import qualified Network.HTTP.Client.Conduit       as Client
 import           Network.HTTP.Conduit
-import           Network.HTTP.Media
+import           Network.HTTP.Media                (RenderHeader (..))
 import           Network.HTTP.Types
 
 -- FIXME: "mediaType" param also comes/calculated from the request body?
@@ -43,27 +46,28 @@ import           Network.HTTP.Types
 --
 -- "resumable" or "multipart" needs to go into the "uploadType" param
 
-perform :: (MonadCatch m, MonadResource m, GoogleRequest a)
-        => Env
+perform :: (MonadCatch m, MonadResource m, AllowScopes s, GoogleRequest a)
+        => Env s
         -> a
         -> m (Either Error (Rs a))
 perform Env{..} x = catches go handlers
   where
-    Request {..} = _cliRequest
-    Service {..} = _cliService
-
-    Client  {..} = requestClient x
+    Request       {..} = _cliRequest
+    ServiceConfig {..} = _cliService
+    Client        {..} = requestClient x
         & clientService %~ appEndo (getDual _envOverride)
 
     go = liftResourceT $ do
         (ct, b) <- getContent _rqBody
-        rq      <- authorise _envLogger _envManager (request ct b) _envAuth
+        rq      <- authorize (request ct b) _envStore _envLogger _envManager
 
         logDebug _envLogger rq -- debug:ClientRequest
 
         rs      <- http rq _envManager
 
         logDebug _envLogger rs -- debug:ClientResponse
+
+        statusCheck rs
 
         r       <- _cliResponse (responseBody rs)
 
@@ -81,7 +85,7 @@ perform Env{..} x = catches go handlers
         { Client.host            = _svcHost
         , Client.port            = _svcPort
         , Client.secure          = _svcSecure
-        , Client.checkStatus     = status
+        , Client.checkStatus     = \_ _ _ -> Nothing
         , Client.responseTimeout = timeout
         , Client.method          = _cliMethod
         , Client.path            = path
@@ -98,14 +102,16 @@ perform Env{..} x = catches go handlers
          . LText.toStrict
          $ Build.toLazyText (_svcPath <> _rqPath)
 
-    status s hs _
-         | _cliCheck s = Nothing
-         | otherwise   = Just . toException . ServiceError $ ServiceError'
-             { _serviceId      = _svcId
-             , _serviceStatus  = s
-             , _serviceHeaders = hs
-             , _serviceBody    = Nothing
-             }
+    statusCheck rs
+        | _cliCheck (responseStatus rs) = pure ()
+        | otherwise                     = do
+                b <- LBS.fromChunks <$> (responseBody rs $$+- Conduit.consume)
+                throwM . toException . ServiceError $ ServiceError'
+                    { _serviceId      = _svcId
+                    , _serviceStatus  = responseStatus rs
+                    , _serviceHeaders = responseHeaders rs
+                    , _serviceBody    = Just b
+                    }
 
     timeout = microseconds <$> _svcTimeout
 
@@ -117,13 +123,12 @@ perform Env{..} x = catches go handlers
         err e = return (Left e)
 
 getContent :: MonadIO m
-           => Maybe Payload
+           => [Body]
            -> m ([Header] -> [Header], RequestBody)
-getContent = \case
-    Nothing           -> pure (id, mempty)
-    Just (Body t s)   -> pure (((hContentType, renderHeader t) :), s)
-    Just (Related ps) -> do
-        b <- genBoundary
-        pure ( (multipartHeader b :)
-             , renderParts b ps
-             )
+getContent []         = pure (id, mempty)
+getContent [Body t s] = pure (((hContentType, renderHeader t) :), s)
+getContent bs         = do
+    b <- genBoundary
+    pure ( (multipartHeader b :)
+         , renderParts b bs
+         )

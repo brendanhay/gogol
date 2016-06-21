@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Container.Projects.Zones.Clusters.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update settings of a specific cluster.
+-- Updates the settings of a specific cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.update@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Update
@@ -70,10 +70,10 @@ type ProjectsZonesClustersUpdateResource =
                                    ReqBody '[JSON] UpdateClusterRequest :>
                                      Put '[JSON] Operation
 
--- | Update settings of a specific cluster.
+-- | Updates the settings of a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersUpdate' smart constructor.
-data ProjectsZonesClustersUpdate = ProjectsZonesClustersUpdate
+data ProjectsZonesClustersUpdate = ProjectsZonesClustersUpdate'
     { _pzcuXgafv          :: !(Maybe Text)
     , _pzcuUploadProtocol :: !(Maybe Text)
     , _pzcuPp             :: !Bool
@@ -119,7 +119,7 @@ projectsZonesClustersUpdate
     -> Text -- ^ 'pzcuProjectId'
     -> ProjectsZonesClustersUpdate
 projectsZonesClustersUpdate pPzcuZone_ pPzcuPayload_ pPzcuClusterId_ pPzcuProjectId_ =
-    ProjectsZonesClustersUpdate
+    ProjectsZonesClustersUpdate'
     { _pzcuXgafv = Nothing
     , _pzcuUploadProtocol = Nothing
     , _pzcuPp = True
@@ -183,7 +183,7 @@ pzcuClusterId
       (\ s a -> s{_pzcuClusterId = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzcuProjectId :: Lens' ProjectsZonesClustersUpdate Text
 pzcuProjectId
   = lens _pzcuProjectId
@@ -197,7 +197,9 @@ pzcuCallback
 instance GoogleRequest ProjectsZonesClustersUpdate
          where
         type Rs ProjectsZonesClustersUpdate = Operation
-        requestClient ProjectsZonesClustersUpdate{..}
+        type Scopes ProjectsZonesClustersUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsZonesClustersUpdate'{..}
           = go _pzcuProjectId _pzcuZone _pzcuClusterId
               _pzcuXgafv
               _pzcuUploadProtocol

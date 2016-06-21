@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.CalendarList.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type CalendarListGetResource =
 -- | Returns an entry on the user\'s calendar list.
 --
 -- /See:/ 'calendarListGet' smart constructor.
-newtype CalendarListGet = CalendarListGet
+newtype CalendarListGet = CalendarListGet'
     { _clgCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ calendarListGet
     :: Text -- ^ 'clgCalendarId'
     -> CalendarListGet
 calendarListGet pClgCalendarId_ =
-    CalendarListGet
+    CalendarListGet'
     { _clgCalendarId = pClgCalendarId_
     }
 
@@ -81,7 +81,10 @@ clgCalendarId
 
 instance GoogleRequest CalendarListGet where
         type Rs CalendarListGet = CalendarListEntry
-        requestClient CalendarListGet{..}
+        type Scopes CalendarListGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient CalendarListGet'{..}
           = go _clgCalendarId (Just AltJSON)
               appsCalendarService
           where go

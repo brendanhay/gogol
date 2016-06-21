@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Databases.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type DatabasesListResource =
 -- | Lists databases in the specified Cloud SQL instance.
 --
 -- /See:/ 'databasesList' smart constructor.
-data DatabasesList = DatabasesList
+data DatabasesList = DatabasesList'
     { _dlProject  :: !Text
     , _dlInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ databasesList
     -> Text -- ^ 'dlInstance'
     -> DatabasesList
 databasesList pDlProject_ pDlInstance_ =
-    DatabasesList
+    DatabasesList'
     { _dlProject = pDlProject_
     , _dlInstance = pDlInstance_
     }
@@ -90,7 +90,10 @@ dlInstance
 
 instance GoogleRequest DatabasesList where
         type Rs DatabasesList = DatabasesListResponse
-        requestClient DatabasesList{..}
+        type Scopes DatabasesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient DatabasesList'{..}
           = go _dlProject _dlInstance (Just AltJSON)
               sQLAdminService
           where go

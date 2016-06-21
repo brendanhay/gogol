@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.GetbymerchantOrderid
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type OrdersGetbymerchantOrderidResource =
 -- | Retrieves an order using merchant order id.
 --
 -- /See:/ 'ordersGetbymerchantOrderid' smart constructor.
-data OrdersGetbymerchantOrderid = OrdersGetbymerchantOrderid
+data OrdersGetbymerchantOrderid = OrdersGetbymerchantOrderid'
     { _ogogMerchantId      :: !(Textual Word64)
     , _ogogMerchantOrderId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ ordersGetbymerchantOrderid
     -> Text -- ^ 'ogogMerchantOrderId'
     -> OrdersGetbymerchantOrderid
 ordersGetbymerchantOrderid pOgogMerchantId_ pOgogMerchantOrderId_ =
-    OrdersGetbymerchantOrderid
+    OrdersGetbymerchantOrderid'
     { _ogogMerchantId = _Coerce # pOgogMerchantId_
     , _ogogMerchantOrderId = pOgogMerchantOrderId_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest OrdersGetbymerchantOrderid
          where
         type Rs OrdersGetbymerchantOrderid =
              OrdersGetByMerchantOrderIdResponse
-        requestClient OrdersGetbymerchantOrderid{..}
+        type Scopes OrdersGetbymerchantOrderid =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersGetbymerchantOrderid'{..}
           = go _ogogMerchantId _ogogMerchantOrderId
               (Just AltJSON)
               shoppingContentService

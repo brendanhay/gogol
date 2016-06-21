@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Style.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type StyleDeleteResource =
 -- | Deletes a style.
 --
 -- /See:/ 'styleDelete' smart constructor.
-data StyleDelete = StyleDelete
+data StyleDelete = StyleDelete'
     { _sdStyleId :: !(Textual Int32)
     , _sdTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ styleDelete
     -> Text -- ^ 'sdTableId'
     -> StyleDelete
 styleDelete pSdStyleId_ pSdTableId_ =
-    StyleDelete
+    StyleDelete'
     { _sdStyleId = _Coerce # pSdStyleId_
     , _sdTableId = pSdTableId_
     }
@@ -89,7 +89,9 @@ sdTableId
 
 instance GoogleRequest StyleDelete where
         type Rs StyleDelete = ()
-        requestClient StyleDelete{..}
+        type Scopes StyleDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient StyleDelete'{..}
           = go _sdTableId _sdStyleId (Just AltJSON)
               fusionTablesService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Photos.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type UsersPhotosGetResource =
 -- | Retrieve photo of a user
 --
 -- /See:/ 'usersPhotosGet' smart constructor.
-newtype UsersPhotosGet = UsersPhotosGet
+newtype UsersPhotosGet = UsersPhotosGet'
     { _upgUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ usersPhotosGet
     :: Text -- ^ 'upgUserKey'
     -> UsersPhotosGet
 usersPhotosGet pUpgUserKey_ =
-    UsersPhotosGet
+    UsersPhotosGet'
     { _upgUserKey = pUpgUserKey_
     }
 
@@ -78,7 +78,10 @@ upgUserKey
 
 instance GoogleRequest UsersPhotosGet where
         type Rs UsersPhotosGet = UserPhoto
-        requestClient UsersPhotosGet{..}
+        type Scopes UsersPhotosGet =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.readonly"]
+        requestClient UsersPhotosGet'{..}
           = go _upgUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersPhotosGetResource)

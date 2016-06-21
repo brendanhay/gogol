@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesUpdate' request conforms to.
 type AccountUserProFilesUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
@@ -55,7 +55,7 @@ type AccountUserProFilesUpdateResource =
 -- | Updates an existing account user profile.
 --
 -- /See:/ 'accountUserProFilesUpdate' smart constructor.
-data AccountUserProFilesUpdate = AccountUserProFilesUpdate
+data AccountUserProFilesUpdate = AccountUserProFilesUpdate'
     { _aupfuProFileId :: !(Textual Int64)
     , _aupfuPayload   :: !AccountUserProFile
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ accountUserProFilesUpdate
     -> AccountUserProFile -- ^ 'aupfuPayload'
     -> AccountUserProFilesUpdate
 accountUserProFilesUpdate pAupfuProFileId_ pAupfuPayload_ =
-    AccountUserProFilesUpdate
+    AccountUserProFilesUpdate'
     { _aupfuProFileId = _Coerce # pAupfuProFileId_
     , _aupfuPayload = pAupfuPayload_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest AccountUserProFilesUpdate
          where
         type Rs AccountUserProFilesUpdate =
              AccountUserProFile
-        requestClient AccountUserProFilesUpdate{..}
+        type Scopes AccountUserProFilesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountUserProFilesUpdate'{..}
           = go _aupfuProFileId (Just AltJSON) _aupfuPayload
               dFAReportingService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Partners.Companies.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -160,7 +160,7 @@ type CompaniesListResource =
 -- | Lists companies.
 --
 -- /See:/ 'companiesList' smart constructor.
-data CompaniesList = CompaniesList
+data CompaniesList = CompaniesList'
     { _clLanguageCodes                               :: !(Maybe [Text])
     , _clXgafv                                       :: !(Maybe Text)
     , _clMaxMonthlyBudgetUnits                       :: !(Maybe (Textual Int64))
@@ -262,7 +262,7 @@ data CompaniesList = CompaniesList
 companiesList
     :: CompaniesList
 companiesList =
-    CompaniesList
+    CompaniesList'
     { _clLanguageCodes = Nothing
     , _clXgafv = Nothing
     , _clMaxMonthlyBudgetUnits = Nothing
@@ -515,7 +515,8 @@ clCallback
 
 instance GoogleRequest CompaniesList where
         type Rs CompaniesList = ListCompaniesResponse
-        requestClient CompaniesList{..}
+        type Scopes CompaniesList = '[]
+        requestClient CompaniesList'{..}
           = go (_clLanguageCodes ^. _Default) _clXgafv
               _clMaxMonthlyBudgetUnits
               _clUploadProtocol

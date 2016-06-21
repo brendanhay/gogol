@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Prediction.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,10 +20,11 @@ module Network.Google.Prediction.Types
       predictionService
 
     -- * OAuth Scopes
-    , devstorageReadOnlyScope
-    , devstorageReadWriteScope
+    , cloudPlatformScope
+    , storageReadOnlyScope
+    , storageReadWriteScope
     , predictionScope
-    , devstorageFullControlScope
+    , storageFullControlScope
 
     -- * Insert2ModelInfo
     , Insert2ModelInfo
@@ -212,23 +214,27 @@ import           Network.Google.Prediction.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1.6' of the Prediction API. This contains the host and root path used as a starting point for constructing service requests.
-predictionService :: Service
+predictionService :: ServiceConfig
 predictionService
   = defaultService (ServiceId "prediction:v1.6")
       "www.googleapis.com"
 
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
+
 -- | View your data in Google Cloud Storage
-devstorageReadOnlyScope :: OAuthScope
-devstorageReadOnlyScope = "https://www.googleapis.com/auth/devstorage.read_only";
+storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+storageReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: OAuthScope
-devstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+storageReadWriteScope = Proxy;
 
 -- | Manage your data in the Google Prediction API
-predictionScope :: OAuthScope
-predictionScope = "https://www.googleapis.com/auth/prediction";
+predictionScope :: Proxy '["https://www.googleapis.com/auth/prediction"]
+predictionScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-devstorageFullControlScope :: OAuthScope
-devstorageFullControlScope = "https://www.googleapis.com/auth/devstorage.full_control";
+storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+storageFullControlScope = Proxy;

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@
 -- Retrieves a time series of the number of URL crawl errors per error
 -- category and platform.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorscounts.query@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.urlcrawlerrorscounts.query@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
     (
     -- * REST Resource
@@ -66,7 +66,7 @@ type URLCrawlErrorscountsQueryResource =
 -- category and platform.
 --
 -- /See:/ 'urlCrawlErrorscountsQuery' smart constructor.
-data URLCrawlErrorscountsQuery = URLCrawlErrorscountsQuery
+data URLCrawlErrorscountsQuery = URLCrawlErrorscountsQuery'
     { _uceqPlatform         :: !(Maybe URLCrawlErrorscountsQueryPlatform)
     , _uceqCategory         :: !(Maybe URLCrawlErrorscountsQueryCategory)
     , _uceqSiteURL          :: !Text
@@ -88,7 +88,7 @@ urlCrawlErrorscountsQuery
     :: Text -- ^ 'uceqSiteURL'
     -> URLCrawlErrorscountsQuery
 urlCrawlErrorscountsQuery pUceqSiteURL_ =
-    URLCrawlErrorscountsQuery
+    URLCrawlErrorscountsQuery'
     { _uceqPlatform = Nothing
     , _uceqCategory = Nothing
     , _uceqSiteURL = pUceqSiteURL_
@@ -123,7 +123,10 @@ instance GoogleRequest URLCrawlErrorscountsQuery
          where
         type Rs URLCrawlErrorscountsQuery =
              URLCrawlErrorsCountsQueryResponse
-        requestClient URLCrawlErrorscountsQuery{..}
+        type Scopes URLCrawlErrorscountsQuery =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
+        requestClient URLCrawlErrorscountsQuery'{..}
           = go _uceqSiteURL _uceqPlatform _uceqCategory
               (Just _uceqLatestCountsOnly)
               (Just AltJSON)

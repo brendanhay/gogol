@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Coordinate.Worker.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type WorkerListResource =
 -- | Retrieves a list of workers in a team.
 --
 -- /See:/ 'workerList' smart constructor.
-newtype WorkerList = WorkerList
+newtype WorkerList = WorkerList'
     { _wlTeamId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ workerList
     :: Text -- ^ 'wlTeamId'
     -> WorkerList
 workerList pWlTeamId_ =
-    WorkerList
+    WorkerList'
     { _wlTeamId = pWlTeamId_
     }
 
@@ -76,7 +76,10 @@ wlTeamId = lens _wlTeamId (\ s a -> s{_wlTeamId = a})
 
 instance GoogleRequest WorkerList where
         type Rs WorkerList = WorkerListResponse
-        requestClient WorkerList{..}
+        type Scopes WorkerList =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
+        requestClient WorkerList'{..}
           = go _wlTeamId (Just AltJSON) mapsCoordinateService
           where go
                   = buildClient (Proxy :: Proxy WorkerListResource)

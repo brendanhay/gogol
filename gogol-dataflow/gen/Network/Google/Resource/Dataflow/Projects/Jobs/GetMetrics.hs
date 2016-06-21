@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type ProjectsJobsGetMetricsResource =
 -- | Request the job status.
 --
 -- /See:/ 'projectsJobsGetMetrics' smart constructor.
-data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics
+data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics'
     { _pjgmXgafv          :: !(Maybe Text)
     , _pjgmJobId          :: !Text
     , _pjgmUploadProtocol :: !(Maybe Text)
@@ -112,7 +112,7 @@ projectsJobsGetMetrics
     -> Text -- ^ 'pjgmProjectId'
     -> ProjectsJobsGetMetrics
 projectsJobsGetMetrics pPjgmJobId_ pPjgmProjectId_ =
-    ProjectsJobsGetMetrics
+    ProjectsJobsGetMetrics'
     { _pjgmXgafv = Nothing
     , _pjgmJobId = pPjgmJobId_
     , _pjgmUploadProtocol = Nothing
@@ -183,7 +183,10 @@ pjgmCallback
 
 instance GoogleRequest ProjectsJobsGetMetrics where
         type Rs ProjectsJobsGetMetrics = JobMetrics
-        requestClient ProjectsJobsGetMetrics{..}
+        type Scopes ProjectsJobsGetMetrics =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
+        requestClient ProjectsJobsGetMetrics'{..}
           = go _pjgmProjectId _pjgmJobId _pjgmXgafv
               _pjgmUploadProtocol
               _pjgmStartTime

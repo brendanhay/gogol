@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Videos.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type VideosListResource =
 -- | Returns a list of videos that match the API request parameters.
 --
 -- /See:/ 'videosList' smart constructor.
-data VideosList = VideosList
+data VideosList = VideosList'
     { _vlChart                  :: !(Maybe VideosListChart)
     , _vlPart                   :: !Text
     , _vlRegionCode             :: !(Maybe Text)
@@ -115,7 +115,7 @@ videosList
     :: Text -- ^ 'vlPart'
     -> VideosList
 videosList pVlPart_ =
-    VideosList
+    VideosList'
     { _vlChart = Nothing
     , _vlPart = pVlPart_
     , _vlRegionCode = Nothing
@@ -223,7 +223,12 @@ vlMaxResults
 
 instance GoogleRequest VideosList where
         type Rs VideosList = VideoListResponse
-        requestClient VideosList{..}
+        type Scopes VideosList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient VideosList'{..}
           = go (Just _vlPart) _vlChart _vlRegionCode _vlLocale
               _vlMyRating
               _vlHl

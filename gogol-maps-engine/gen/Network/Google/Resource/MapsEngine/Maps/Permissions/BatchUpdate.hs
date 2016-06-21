@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Maps.Permissions.BatchUpdate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type MapsPermissionsBatchUpdateResource =
 -- is atomic.
 --
 -- /See:/ 'mapsPermissionsBatchUpdate' smart constructor.
-data MapsPermissionsBatchUpdate = MapsPermissionsBatchUpdate
+data MapsPermissionsBatchUpdate = MapsPermissionsBatchUpdate'
     { _mpbuPayload :: !PermissionsBatchUpdateRequest
     , _mpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ mapsPermissionsBatchUpdate
     -> Text -- ^ 'mpbuId'
     -> MapsPermissionsBatchUpdate
 mapsPermissionsBatchUpdate pMpbuPayload_ pMpbuId_ =
-    MapsPermissionsBatchUpdate
+    MapsPermissionsBatchUpdate'
     { _mpbuPayload = pMpbuPayload_
     , _mpbuId = pMpbuId_
     }
@@ -95,7 +95,9 @@ instance GoogleRequest MapsPermissionsBatchUpdate
          where
         type Rs MapsPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
-        requestClient MapsPermissionsBatchUpdate{..}
+        type Scopes MapsPermissionsBatchUpdate =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient MapsPermissionsBatchUpdate'{..}
           = go _mpbuId (Just AltJSON) _mpbuPayload
               mapsEngineService
           where go

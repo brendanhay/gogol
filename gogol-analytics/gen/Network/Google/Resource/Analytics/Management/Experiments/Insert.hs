@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Experiments.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ManagementExperimentsInsertResource =
 -- | Create a new experiment.
 --
 -- /See:/ 'managementExperimentsInsert' smart constructor.
-data ManagementExperimentsInsert = ManagementExperimentsInsert
+data ManagementExperimentsInsert = ManagementExperimentsInsert'
     { _meiWebPropertyId :: !Text
     , _meiProFileId     :: !Text
     , _meiPayload       :: !Experiment
@@ -86,7 +86,7 @@ managementExperimentsInsert
     -> Text -- ^ 'meiAccountId'
     -> ManagementExperimentsInsert
 managementExperimentsInsert pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMeiAccountId_ =
-    ManagementExperimentsInsert
+    ManagementExperimentsInsert'
     { _meiWebPropertyId = pMeiWebPropertyId_
     , _meiProFileId = pMeiProFileId_
     , _meiPayload = pMeiPayload_
@@ -117,7 +117,10 @@ meiAccountId
 instance GoogleRequest ManagementExperimentsInsert
          where
         type Rs ManagementExperimentsInsert = Experiment
-        requestClient ManagementExperimentsInsert{..}
+        type Scopes ManagementExperimentsInsert =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementExperimentsInsert'{..}
           = go _meiAccountId _meiWebPropertyId _meiProFileId
               (Just AltJSON)
               _meiPayload

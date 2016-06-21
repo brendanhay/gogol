@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type AccountsContainersDeleteResource =
 -- | Deletes a Container.
 --
 -- /See:/ 'accountsContainersDelete' smart constructor.
-data AccountsContainersDelete = AccountsContainersDelete
+data AccountsContainersDelete = AccountsContainersDelete'
     { _acdContainerId :: !Text
     , _acdAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsContainersDelete
     -> Text -- ^ 'acdAccountId'
     -> AccountsContainersDelete
 accountsContainersDelete pAcdContainerId_ pAcdAccountId_ =
-    AccountsContainersDelete
+    AccountsContainersDelete'
     { _acdContainerId = pAcdContainerId_
     , _acdAccountId = pAcdAccountId_
     }
@@ -89,7 +89,9 @@ acdAccountId
 
 instance GoogleRequest AccountsContainersDelete where
         type Rs AccountsContainersDelete = ()
-        requestClient AccountsContainersDelete{..}
+        type Scopes AccountsContainersDelete =
+             '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
+        requestClient AccountsContainersDelete'{..}
           = go _acdAccountId _acdContainerId (Just AltJSON)
               tagManagerService
           where go

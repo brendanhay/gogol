@@ -14,14 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Tests the specified permissions against the IAM access control policy
--- for the specified project.
+-- Returns permissions that a caller has on the specified Project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.testIamPermissions@.
 module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
@@ -51,7 +50,7 @@ import           Network.Google.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.projects.testIamPermissions@ method which the
 -- 'ProjectsTestIAMPermissions' request conforms to.
 type ProjectsTestIAMPermissionsResource =
-     "v1beta1" :>
+     "v1" :>
        "projects" :>
          CaptureMode "resource" "testIamPermissions" Text :>
            QueryParam "$.xgafv" Text :>
@@ -65,11 +64,10 @@ type ProjectsTestIAMPermissionsResource =
                            ReqBody '[JSON] TestIAMPermissionsRequest :>
                              Post '[JSON] TestIAMPermissionsResponse
 
--- | Tests the specified permissions against the IAM access control policy
--- for the specified project.
+-- | Returns permissions that a caller has on the specified Project.
 --
 -- /See:/ 'projectsTestIAMPermissions' smart constructor.
-data ProjectsTestIAMPermissions = ProjectsTestIAMPermissions
+data ProjectsTestIAMPermissions = ProjectsTestIAMPermissions'
     { _ptipXgafv          :: !(Maybe Text)
     , _ptipUploadProtocol :: !(Maybe Text)
     , _ptipPp             :: !Bool
@@ -107,7 +105,7 @@ projectsTestIAMPermissions
     -> Text -- ^ 'ptipResource'
     -> ProjectsTestIAMPermissions
 projectsTestIAMPermissions pPtipPayload_ pPtipResource_ =
-    ProjectsTestIAMPermissions
+    ProjectsTestIAMPermissions'
     { _ptipXgafv = Nothing
     , _ptipUploadProtocol = Nothing
     , _ptipPp = True
@@ -157,9 +155,11 @@ ptipBearerToken
   = lens _ptipBearerToken
       (\ s a -> s{_ptipBearerToken = a})
 
--- | REQUIRED: The resource for which policy detail is being requested.
--- \`resource\` is usually specified as a path, such as,
--- \`projects\/{project}\`.
+-- | REQUIRED: The resource for which the policy detail is being requested.
+-- \`resource\` is usually specified as a path, such as
+-- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
+-- the path specified in this value is resource specific and is specified
+-- in the \`testIamPermissions\` documentation.
 ptipResource :: Lens' ProjectsTestIAMPermissions Text
 ptipResource
   = lens _ptipResource (\ s a -> s{_ptipResource = a})
@@ -173,7 +173,10 @@ instance GoogleRequest ProjectsTestIAMPermissions
          where
         type Rs ProjectsTestIAMPermissions =
              TestIAMPermissionsResponse
-        requestClient ProjectsTestIAMPermissions{..}
+        type Scopes ProjectsTestIAMPermissions =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient ProjectsTestIAMPermissions'{..}
           = go _ptipResource _ptipXgafv _ptipUploadProtocol
               (Just _ptipPp)
               _ptipAccessToken

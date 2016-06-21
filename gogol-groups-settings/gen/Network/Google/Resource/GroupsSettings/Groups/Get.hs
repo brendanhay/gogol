@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GroupsSettings.Groups.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type GroupsGetResource =
 -- | Gets one resource by id.
 --
 -- /See:/ 'groupsGet' smart constructor.
-newtype GroupsGet = GroupsGet
+newtype GroupsGet = GroupsGet'
     { _ggGroupUniqueId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ groupsGet
     :: Text -- ^ 'ggGroupUniqueId'
     -> GroupsGet
 groupsGet pGgGroupUniqueId_ =
-    GroupsGet
+    GroupsGet'
     { _ggGroupUniqueId = pGgGroupUniqueId_
     }
 
@@ -76,7 +76,9 @@ ggGroupUniqueId
 
 instance GoogleRequest GroupsGet where
         type Rs GroupsGet = Groups
-        requestClient GroupsGet{..}
+        type Scopes GroupsGet =
+             '["https://www.googleapis.com/auth/apps.groups.settings"]
+        requestClient GroupsGet'{..}
           = go _ggGroupUniqueId (Just AltJSON)
               groupsSettingsService
           where go

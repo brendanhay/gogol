@@ -1,5 +1,5 @@
 name:                  gogol-tagmanager
-version:               0.0.1
+version:               0.1.0
 synopsis:              Google Tag Manager SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -7,14 +7,14 @@ license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015 Brendan Hay
+copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    API for accessing Tag Manager accounts and containers.
+    Accesses Tag Manager accounts and containers.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -35,6 +35,12 @@ library
     exposed-modules:
           Network.Google.Resource.TagManager.Accounts.Containers.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Patch
+        , Network.Google.Resource.TagManager.Accounts.Containers.Environments.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.List
@@ -44,6 +50,7 @@ library
         , Network.Google.Resource.TagManager.Accounts.Containers.Get
         , Network.Google.Resource.TagManager.Accounts.Containers.List
         , Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.ReauthorizeEnvironments.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get
@@ -84,5 +91,5 @@ library
         , Network.Google.TagManager.Types.Sum
 
     build-depends:
-          gogol-core == 0.0.1.*
-        , base       >= 4.7 && < 5
+          gogol-core == 0.1.0.*
+        , base       >= 4.7

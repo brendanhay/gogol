@@ -14,15 +14,15 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.Sites.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes a site from the set of the user\'s Webmaster Tools sites.
+-- Removes a site from the set of the user\'s Search Console sites.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.delete@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sites.delete@.
 module Network.Google.Resource.Webmasters.Sites.Delete
     (
     -- * REST Resource
@@ -48,10 +48,10 @@ type SitesDeleteResource =
            Capture "siteUrl" Text :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Removes a site from the set of the user\'s Webmaster Tools sites.
+-- | Removes a site from the set of the user\'s Search Console sites.
 --
 -- /See:/ 'sitesDelete' smart constructor.
-newtype SitesDelete = SitesDelete
+newtype SitesDelete = SitesDelete'
     { _sSiteURL :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ sitesDelete
     :: Text -- ^ 'sSiteURL'
     -> SitesDelete
 sitesDelete pSSiteURL_ =
-    SitesDelete
+    SitesDelete'
     { _sSiteURL = pSSiteURL_
     }
 
@@ -75,7 +75,9 @@ sSiteURL = lens _sSiteURL (\ s a -> s{_sSiteURL = a})
 
 instance GoogleRequest SitesDelete where
         type Rs SitesDelete = ()
-        requestClient SitesDelete{..}
+        type Scopes SitesDelete =
+             '["https://www.googleapis.com/auth/webmasters"]
+        requestClient SitesDelete'{..}
           = go _sSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesDeleteResource)

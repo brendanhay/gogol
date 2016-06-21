@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type AccountsContainersVersionsUpdateResource =
 -- | Updates a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsUpdate' smart constructor.
-data AccountsContainersVersionsUpdate = AccountsContainersVersionsUpdate
+data AccountsContainersVersionsUpdate = AccountsContainersVersionsUpdate'
     { _acccContainerId        :: !Text
     , _acccFingerprint        :: !(Maybe Text)
     , _acccContainerVersionId :: !Text
@@ -90,7 +90,7 @@ accountsContainersVersionsUpdate
     -> Text -- ^ 'acccAccountId'
     -> AccountsContainersVersionsUpdate
 accountsContainersVersionsUpdate pAcccContainerId_ pAcccContainerVersionId_ pAcccPayload_ pAcccAccountId_ =
-    AccountsContainersVersionsUpdate
+    AccountsContainersVersionsUpdate'
     { _acccContainerId = pAcccContainerId_
     , _acccFingerprint = Nothing
     , _acccContainerVersionId = pAcccContainerVersionId_
@@ -132,7 +132,9 @@ instance GoogleRequest
          AccountsContainersVersionsUpdate where
         type Rs AccountsContainersVersionsUpdate =
              ContainerVersion
-        requestClient AccountsContainersVersionsUpdate{..}
+        type Scopes AccountsContainersVersionsUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
+        requestClient AccountsContainersVersionsUpdate'{..}
           = go _acccAccountId _acccContainerId
               _acccContainerVersionId
               _acccFingerprint

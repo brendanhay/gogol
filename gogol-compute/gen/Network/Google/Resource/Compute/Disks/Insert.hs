@@ -14,14 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Disks.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a persistent disk in the specified project using the data
--- included in the request.
+-- Creates a persistent disk in the specified project using the data in the
+-- request. You can create a disk with a sourceImage, a sourceSnapshot, or
+-- create an empty 500 GB data disk by omitting all properties. You can
+-- also create a disk that is larger than the default size by specifying
+-- the sizeGb property.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.insert@.
 module Network.Google.Resource.Compute.Disks.Insert
@@ -57,11 +60,14 @@ type DisksInsertResource =
                      QueryParam "alt" AltJSON :>
                        ReqBody '[JSON] Disk :> Post '[JSON] Operation
 
--- | Creates a persistent disk in the specified project using the data
--- included in the request.
+-- | Creates a persistent disk in the specified project using the data in the
+-- request. You can create a disk with a sourceImage, a sourceSnapshot, or
+-- create an empty 500 GB data disk by omitting all properties. You can
+-- also create a disk that is larger than the default size by specifying
+-- the sizeGb property.
 --
 -- /See:/ 'disksInsert' smart constructor.
-data DisksInsert = DisksInsert
+data DisksInsert = DisksInsert'
     { _diSourceImage :: !(Maybe Text)
     , _diProject     :: !Text
     , _diZone        :: !Text
@@ -85,7 +91,7 @@ disksInsert
     -> Disk -- ^ 'diPayload'
     -> DisksInsert
 disksInsert pDiProject_ pDiZone_ pDiPayload_ =
-    DisksInsert
+    DisksInsert'
     { _diSourceImage = Nothing
     , _diProject = pDiProject_
     , _diZone = pDiZone_
@@ -114,7 +120,10 @@ diPayload
 
 instance GoogleRequest DisksInsert where
         type Rs DisksInsert = Operation
-        requestClient DisksInsert{..}
+        type Scopes DisksInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient DisksInsert'{..}
           = go _diProject _diZone _diSourceImage (Just AltJSON)
               _diPayload
               computeService

@@ -7,13 +7,13 @@
 
 -- |
 -- Module      : Network.Google.TaskQueue
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you access a Google App Engine Pull Task Queue over REST.
+-- Accesses a Google App Engine Pull Task Queue over REST.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference>
 module Network.Google.TaskQueue
@@ -21,13 +21,17 @@ module Network.Google.TaskQueue
     -- * Service Configuration
       taskQueueService
 
+    -- * OAuth Scopes
+    , taskQueueConsumerScope
+    , taskQueueScope
+
     -- * API Declaration
     , TaskQueueAPI
 
     -- * Resources
 
     -- ** taskqueue.taskqueues.get
-    , module Network.Google.Resource.TaskQueue.Taskqueues.Get
+    , module Network.Google.Resource.TaskQueue.TaskQueues.Get
 
     -- ** taskqueue.tasks.delete
     , module Network.Google.Resource.TaskQueue.Tasks.Delete
@@ -92,7 +96,7 @@ module Network.Google.TaskQueue
     , Task
     , task
     , ttRetryCount
-    , ttEnqueueTimestamp
+    , ttEnQueueTimestamp
     , ttTag
     , ttKind
     , ttQueueName
@@ -102,7 +106,7 @@ module Network.Google.TaskQueue
     ) where
 
 import           Network.Google.Prelude
-import           Network.Google.Resource.TaskQueue.Taskqueues.Get
+import           Network.Google.Resource.TaskQueue.TaskQueues.Get
 import           Network.Google.Resource.TaskQueue.Tasks.Delete
 import           Network.Google.Resource.TaskQueue.Tasks.Get
 import           Network.Google.Resource.TaskQueue.Tasks.Insert
@@ -124,4 +128,4 @@ type TaskQueueAPI =
        :<|> TasksLeaseResource
        :<|> TasksDeleteResource
        :<|> TasksUpdateResource
-       :<|> TaskqueuesGetResource
+       :<|> TaskQueuesGetResource

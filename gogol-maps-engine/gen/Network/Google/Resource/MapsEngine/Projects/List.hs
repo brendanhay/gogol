@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Projects.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,18 +50,21 @@ type ProjectsListResource =
 --
 -- /See:/ 'projectsList' smart constructor.
 data ProjectsList =
-    ProjectsList
+    ProjectsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
 --
 projectsList
     :: ProjectsList
-projectsList = ProjectsList
+projectsList = ProjectsList'
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectsListResponse
-        requestClient ProjectsList{}
+        type Scopes ProjectsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient ProjectsList'{}
           = go (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy ProjectsListResource)

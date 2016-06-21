@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SiteVerification.WebResource.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type WebResourceDeleteResource =
 -- | Relinquish ownership of a website or domain.
 --
 -- /See:/ 'webResourceDelete' smart constructor.
-newtype WebResourceDelete = WebResourceDelete
+newtype WebResourceDelete = WebResourceDelete'
     { _wrdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ webResourceDelete
     :: Text -- ^ 'wrdId'
     -> WebResourceDelete
 webResourceDelete pWrdId_ =
-    WebResourceDelete
+    WebResourceDelete'
     { _wrdId = pWrdId_
     }
 
@@ -74,7 +74,9 @@ wrdId = lens _wrdId (\ s a -> s{_wrdId = a})
 
 instance GoogleRequest WebResourceDelete where
         type Rs WebResourceDelete = ()
-        requestClient WebResourceDelete{..}
+        type Scopes WebResourceDelete =
+             '["https://www.googleapis.com/auth/siteverification"]
+        requestClient WebResourceDelete'{..}
           = go _wrdId (Just AltJSON) siteVerificationService
           where go
                   = buildClient

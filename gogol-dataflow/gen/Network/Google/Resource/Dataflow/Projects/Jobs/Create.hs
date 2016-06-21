@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Dataflow.Projects.Jobs.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type ProjectsJobsCreateResource =
 -- | Creates a dataflow job.
 --
 -- /See:/ 'projectsJobsCreate' smart constructor.
-data ProjectsJobsCreate = ProjectsJobsCreate
+data ProjectsJobsCreate = ProjectsJobsCreate'
     { _pjcXgafv          :: !(Maybe Text)
     , _pjcUploadProtocol :: !(Maybe Text)
     , _pjcPp             :: !Bool
@@ -115,7 +115,7 @@ projectsJobsCreate
     -> Text -- ^ 'pjcProjectId'
     -> ProjectsJobsCreate
 projectsJobsCreate pPjcPayload_ pPjcProjectId_ =
-    ProjectsJobsCreate
+    ProjectsJobsCreate'
     { _pjcXgafv = Nothing
     , _pjcUploadProtocol = Nothing
     , _pjcPp = True
@@ -188,7 +188,10 @@ pjcCallback
 
 instance GoogleRequest ProjectsJobsCreate where
         type Rs ProjectsJobsCreate = Job
-        requestClient ProjectsJobsCreate{..}
+        type Scopes ProjectsJobsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
+        requestClient ProjectsJobsCreate'{..}
           = go _pjcProjectId _pjcXgafv _pjcUploadProtocol
               (Just _pjcPp)
               _pjcAccessToken

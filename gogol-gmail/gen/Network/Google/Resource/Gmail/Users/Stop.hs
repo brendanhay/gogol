@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Stop
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type UsersStopResource =
 -- | Stop receiving push notifications for the given user mailbox.
 --
 -- /See:/ 'usersStop' smart constructor.
-newtype UsersStop = UsersStop
+newtype UsersStop = UsersStop'
     { _usUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -61,10 +61,9 @@ newtype UsersStop = UsersStop
 --
 -- * 'usUserId'
 usersStop
-    :: Text
-    -> UsersStop
-usersStop pUsUserId_ =
-    UsersStop
+    :: UsersStop
+usersStop =
+    UsersStop'
     { _usUserId = "me"
     }
 
@@ -75,7 +74,11 @@ usUserId = lens _usUserId (\ s a -> s{_usUserId = a})
 
 instance GoogleRequest UsersStop where
         type Rs UsersStop = ()
-        requestClient UsersStop{..}
+        type Scopes UsersStop =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersStop'{..}
           = go _usUserId (Just AltJSON) gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersStopResource)

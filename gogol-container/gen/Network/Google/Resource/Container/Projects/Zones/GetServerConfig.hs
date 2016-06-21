@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Container.Projects.Zones.GetServerConfig
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type ProjectsZonesGetServerConfigResource =
 -- | Returns configuration info about the Container Engine service.
 --
 -- /See:/ 'projectsZonesGetServerConfig' smart constructor.
-data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig
+data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig'
     { _pzgscXgafv          :: !(Maybe Text)
     , _pzgscUploadProtocol :: !(Maybe Text)
     , _pzgscPp             :: !Bool
@@ -107,7 +107,7 @@ projectsZonesGetServerConfig
     -> Text -- ^ 'pzgscProjectId'
     -> ProjectsZonesGetServerConfig
 projectsZonesGetServerConfig pPzgscZone_ pPzgscProjectId_ =
-    ProjectsZonesGetServerConfig
+    ProjectsZonesGetServerConfig'
     { _pzgscXgafv = Nothing
     , _pzgscUploadProtocol = Nothing
     , _pzgscPp = True
@@ -147,8 +147,7 @@ pzgscUploadType
       (\ s a -> s{_pzgscUploadType = a})
 
 -- | The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) to return operations for, or
--- \"-\" for all zones.
+-- [zone](\/compute\/docs\/zones#available) to return operations for.
 pzgscZone :: Lens' ProjectsZonesGetServerConfig Text
 pzgscZone
   = lens _pzgscZone (\ s a -> s{_pzgscZone = a})
@@ -160,7 +159,7 @@ pzgscBearerToken
       (\ s a -> s{_pzgscBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzgscProjectId :: Lens' ProjectsZonesGetServerConfig Text
 pzgscProjectId
   = lens _pzgscProjectId
@@ -175,7 +174,9 @@ pzgscCallback
 instance GoogleRequest ProjectsZonesGetServerConfig
          where
         type Rs ProjectsZonesGetServerConfig = ServerConfig
-        requestClient ProjectsZonesGetServerConfig{..}
+        type Scopes ProjectsZonesGetServerConfig =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsZonesGetServerConfig'{..}
           = go _pzgscProjectId _pzgscZone _pzgscXgafv
               _pzgscUploadProtocol
               (Just _pzgscPp)

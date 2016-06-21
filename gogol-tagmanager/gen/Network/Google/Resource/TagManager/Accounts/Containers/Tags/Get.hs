@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsContainersTagsGetResource =
 -- | Gets a GTM Tag.
 --
 -- /See:/ 'accountsContainersTagsGet' smart constructor.
-data AccountsContainersTagsGet = AccountsContainersTagsGet
+data AccountsContainersTagsGet = AccountsContainersTagsGet'
     { _actgContainerId :: !Text
     , _actgAccountId   :: !Text
     , _actgTagId       :: !Text
@@ -78,7 +78,7 @@ accountsContainersTagsGet
     -> Text -- ^ 'actgTagId'
     -> AccountsContainersTagsGet
 accountsContainersTagsGet pActgContainerId_ pActgAccountId_ pActgTagId_ =
-    AccountsContainersTagsGet
+    AccountsContainersTagsGet'
     { _actgContainerId = pActgContainerId_
     , _actgAccountId = pActgAccountId_
     , _actgTagId = pActgTagId_
@@ -104,7 +104,10 @@ actgTagId
 instance GoogleRequest AccountsContainersTagsGet
          where
         type Rs AccountsContainersTagsGet = Tag
-        requestClient AccountsContainersTagsGet{..}
+        type Scopes AccountsContainersTagsGet =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersTagsGet'{..}
           = go _actgAccountId _actgContainerId _actgTagId
               (Just AltJSON)
               tagManagerService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.CustomChannels.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type CustomChannelsListResource =
 -- | List all host custom channels in this AdSense account.
 --
 -- /See:/ 'customChannelsList' smart constructor.
-data CustomChannelsList = CustomChannelsList
+data CustomChannelsList = CustomChannelsList'
     { _cclAdClientId :: !Text
     , _cclPageToken  :: !(Maybe Text)
     , _cclMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ customChannelsList
     :: Text -- ^ 'cclAdClientId'
     -> CustomChannelsList
 customChannelsList pCclAdClientId_ =
-    CustomChannelsList
+    CustomChannelsList'
     { _cclAdClientId = pCclAdClientId_
     , _cclPageToken = Nothing
     , _cclMaxResults = Nothing
@@ -105,7 +105,9 @@ cclMaxResults
 
 instance GoogleRequest CustomChannelsList where
         type Rs CustomChannelsList = CustomChannels
-        requestClient CustomChannelsList{..}
+        type Scopes CustomChannelsList =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient CustomChannelsList'{..}
           = go _cclAdClientId _cclPageToken _cclMaxResults
               (Just AltJSON)
               adSenseHostService

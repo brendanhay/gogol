@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Logging.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -17,6 +18,71 @@ module Network.Google.Logging.Types
     (
     -- * Service Configuration
       loggingService
+
+    -- * OAuth Scopes
+    , loggingAdminScope
+    , loggingReadScope
+    , loggingWriteScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+
+    -- * MonitoredResourceDescriptor
+    , MonitoredResourceDescriptor
+    , monitoredResourceDescriptor
+    , mrdName
+    , mrdDisplayName
+    , mrdLabels
+    , mrdType
+    , mrdDescription
+
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- * ListLogEntriesResponse
+    , ListLogEntriesResponse
+    , listLogEntriesResponse
+    , llerNextPageToken
+    , llerEntries
+    , llerProjectIdErrors
+
+    -- * MonitoredResourceLabels
+    , MonitoredResourceLabels
+    , monitoredResourceLabels
+    , mrlAddtional
+
+    -- * ListLogMetricsResponse
+    , ListLogMetricsResponse
+    , listLogMetricsResponse
+    , llmrMetrics
+    , llmrNextPageToken
+
+    -- * WriteLogEntriesRequest
+    , WriteLogEntriesRequest
+    , writeLogEntriesRequest
+    , wlerEntries
+    , wlerPartialSuccess
+    , wlerResource
+    , wlerLabels
+    , wlerLogName
+
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * LogEntryLabels
+    , LogEntryLabels
+    , logEntryLabels
+    , lelAddtional
+
+    -- * ListSinksResponse
+    , ListSinksResponse
+    , listSinksResponse
+    , lsrSinks
+    , lsrNextPageToken
 
     -- * RequestLog
     , RequestLog
@@ -32,6 +98,7 @@ module Network.Google.Logging.Types
     , rlTaskName
     , rlPendingTime
     , rlWasLoadingRequest
+    , rlFirst
     , rlStartTime
     , rlLatency
     , rlURLMapEntry
@@ -53,6 +120,66 @@ module Network.Google.Logging.Types
     , rlSourceReference
     , rlAppEngineRelease
 
+    -- * LogEntryProtoPayload
+    , LogEntryProtoPayload
+    , logEntryProtoPayload
+    , leppAddtional
+
+    -- * WriteLogEntriesResponse
+    , WriteLogEntriesResponse
+    , writeLogEntriesResponse
+
+    -- * LogSink
+    , LogSink
+    , logSink
+    , lsDestination
+    , lsOutputVersionFormat
+    , lsName
+    , lsFilter
+
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
+
+    -- * ListMonitoredResourceDescriptorsResponse
+    , ListMonitoredResourceDescriptorsResponse
+    , listMonitoredResourceDescriptorsResponse
+    , lmrdrNextPageToken
+    , lmrdrResourceDescriptors
+
+    -- * HTTPRequest
+    , HTTPRequest
+    , hTTPRequest
+    , httprStatus
+    , httprRequestURL
+    , httprCacheFillBytes
+    , httprRemoteIP
+    , httprRequestSize
+    , httprCacheValidatedWithOriginServer
+    , httprUserAgent
+    , httprCacheLookup
+    , httprResponseSize
+    , httprRequestMethod
+    , httprCacheHit
+    , httprReferer
+
+    -- * ListLogEntriesResponseProjectIdErrors
+    , ListLogEntriesResponseProjectIdErrors
+    , listLogEntriesResponseProjectIdErrors
+    , llerpieAddtional
+
+    -- * WriteLogEntriesRequestLabels
+    , WriteLogEntriesRequestLabels
+    , writeLogEntriesRequestLabels
+    , wlerlAddtional
+
+    -- * MonitoredResource
+    , MonitoredResource
+    , monitoredResource
+    , mrLabels
+    , mrType
+
     -- * LogLine
     , LogLine
     , logLine
@@ -60,6 +187,53 @@ module Network.Google.Logging.Types
     , llSeverity
     , llLogMessage
     , llSourceLocation
+
+    -- * LabelDescriptor
+    , LabelDescriptor
+    , labelDescriptor
+    , ldKey
+    , ldValueType
+    , ldDescription
+
+    -- * ListLogEntriesRequest
+    , ListLogEntriesRequest
+    , listLogEntriesRequest
+    , llerOrderBy
+    , llerPartialSuccess
+    , llerProjectIds
+    , llerFilter
+    , llerPageToken
+    , llerPageSize
+
+    -- * LogEntryOperation
+    , LogEntryOperation
+    , logEntryOperation
+    , leoFirst
+    , leoProducer
+    , leoLast
+    , leoId
+
+    -- * LogMetric
+    , LogMetric
+    , logMetric
+    , lmName
+    , lmFilter
+    , lmDescription
+
+    -- * LogEntry
+    , LogEntry
+    , logEntry
+    , leOperation
+    , leSeverity
+    , leTextPayload
+    , leJSONPayload
+    , leHTTPRequest
+    , leResource
+    , leInsertId
+    , leLabels
+    , leProtoPayload
+    , leLogName
+    , leTimestamp
 
     -- * SourceLocation
     , SourceLocation
@@ -73,6 +247,11 @@ module Network.Google.Logging.Types
     , sourceReference
     , srRepository
     , srRevisionId
+
+    -- * LogEntryJSONPayload
+    , LogEntryJSONPayload
+    , logEntryJSONPayload
+    , lejpAddtional
     ) where
 
 import           Network.Google.Logging.Types.Product
@@ -80,7 +259,27 @@ import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2beta1' of the Google Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
-loggingService :: Service
+loggingService :: ServiceConfig
 loggingService
   = defaultService (ServiceId "logging:v2beta1")
       "logging.googleapis.com"
+
+-- | Administrate log data for your projects
+loggingAdminScope :: Proxy '["https://www.googleapis.com/auth/logging.admin"]
+loggingAdminScope = Proxy;
+
+-- | View log data for your projects
+loggingReadScope :: Proxy '["https://www.googleapis.com/auth/logging.read"]
+loggingReadScope = Proxy;
+
+-- | Submit log data for your projects
+loggingWriteScope :: Proxy '["https://www.googleapis.com/auth/logging.write"]
+loggingWriteScope = Proxy;
+
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

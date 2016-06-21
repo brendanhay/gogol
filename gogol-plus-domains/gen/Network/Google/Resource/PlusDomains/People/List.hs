@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.People.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type PeopleListResource =
 -- | List all of the people in the specified collection.
 --
 -- /See:/ 'peopleList' smart constructor.
-data PeopleList = PeopleList
+data PeopleList = PeopleList'
     { _plOrderBy    :: !(Maybe PeopleListOrderBy)
     , _plCollection :: !PeopleListCollection
     , _plUserId     :: !Text
@@ -86,7 +86,7 @@ peopleList
     -> Text -- ^ 'plUserId'
     -> PeopleList
 peopleList pPlCollection_ pPlUserId_ =
-    PeopleList
+    PeopleList'
     { _plOrderBy = Nothing
     , _plCollection = pPlCollection_
     , _plUserId = pPlUserId_
@@ -126,7 +126,11 @@ plMaxResults
 
 instance GoogleRequest PeopleList where
         type Rs PeopleList = PeopleFeed
-        requestClient PeopleList{..}
+        type Scopes PeopleList =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient PeopleList'{..}
           = go _plUserId _plCollection _plOrderBy _plPageToken
               (Just _plMaxResults)
               (Just AltJSON)

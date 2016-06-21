@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type RelyingPartyResetPasswordResource =
 -- | Reset password for a user.
 --
 -- /See:/ 'relyingPartyResetPassword' smart constructor.
-newtype RelyingPartyResetPassword = RelyingPartyResetPassword
+newtype RelyingPartyResetPassword = RelyingPartyResetPassword'
     { _rprpPayload :: IdentitytoolkitRelyingPartyResetPasswordRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyResetPassword
     :: IdentitytoolkitRelyingPartyResetPasswordRequest -- ^ 'rprpPayload'
     -> RelyingPartyResetPassword
 relyingPartyResetPassword pRprpPayload_ =
-    RelyingPartyResetPassword
+    RelyingPartyResetPassword'
     { _rprpPayload = pRprpPayload_
     }
 
@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartyResetPassword
          where
         type Rs RelyingPartyResetPassword =
              ResetPasswordResponse
-        requestClient RelyingPartyResetPassword{..}
+        type Scopes RelyingPartyResetPassword = '[]
+        requestClient RelyingPartyResetPassword'{..}
           = go (Just AltJSON) _rprpPayload
               identityToolkitService
           where go

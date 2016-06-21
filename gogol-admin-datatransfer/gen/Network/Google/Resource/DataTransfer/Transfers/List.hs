@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DataTransfer.Transfers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type TransfersListResource =
 -- status.
 --
 -- /See:/ 'transfersList' smart constructor.
-data TransfersList = TransfersList
+data TransfersList = TransfersList'
     { _tlStatus         :: !(Maybe Text)
     , _tlOldOwnerUserId :: !(Maybe Text)
     , _tlNewOwnerUserId :: !(Maybe Text)
@@ -92,7 +92,7 @@ data TransfersList = TransfersList
 transfersList
     :: TransfersList
 transfersList =
-    TransfersList
+    TransfersList'
     { _tlStatus = Nothing
     , _tlOldOwnerUserId = Nothing
     , _tlNewOwnerUserId = Nothing
@@ -135,7 +135,10 @@ tlMaxResults
 
 instance GoogleRequest TransfersList where
         type Rs TransfersList = DataTransfersListResponse
-        requestClient TransfersList{..}
+        type Scopes TransfersList =
+             '["https://www.googleapis.com/auth/admin.datatransfer",
+               "https://www.googleapis.com/auth/admin.datatransfer.readonly"]
+        requestClient TransfersList'{..}
           = go _tlStatus _tlOldOwnerUserId _tlNewOwnerUserId
               _tlCustomerId
               _tlPageToken

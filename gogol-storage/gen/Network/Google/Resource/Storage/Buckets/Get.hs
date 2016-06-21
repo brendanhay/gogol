@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Buckets.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type BucketsGetResource =
 -- | Returns metadata for the specified bucket.
 --
 -- /See:/ 'bucketsGet' smart constructor.
-data BucketsGet = BucketsGet
+data BucketsGet = BucketsGet'
     { _bgIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _bgBucket                   :: !Text
     , _bgIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
@@ -80,7 +80,7 @@ bucketsGet
     :: Text -- ^ 'bgBucket'
     -> BucketsGet
 bucketsGet pBgBucket_ =
-    BucketsGet
+    BucketsGet'
     { _bgIfMetagenerationMatch = Nothing
     , _bgBucket = pBgBucket_
     , _bgIfMetagenerationNotMatch = Nothing
@@ -114,7 +114,13 @@ bgProjection
 
 instance GoogleRequest BucketsGet where
         type Rs BucketsGet = Bucket
-        requestClient BucketsGet{..}
+        type Scopes BucketsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient BucketsGet'{..}
           = go _bgBucket _bgIfMetagenerationMatch
               _bgIfMetagenerationNotMatch
               _bgProjection

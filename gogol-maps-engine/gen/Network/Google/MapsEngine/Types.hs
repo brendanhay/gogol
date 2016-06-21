@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.MapsEngine.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,8 +20,8 @@ module Network.Google.MapsEngine.Types
       mapsEngineService
 
     -- * OAuth Scopes
-    , mapsengineScope
-    , mapsengineReadonlyScope
+    , mapsEngineScope
+    , mapsEngineReadOnlyScope
 
     -- * ValueRange
     , ValueRange
@@ -763,15 +764,15 @@ import           Network.Google.MapsEngine.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Maps Engine API. This contains the host and root path used as a starting point for constructing service requests.
-mapsEngineService :: Service
+mapsEngineService :: ServiceConfig
 mapsEngineService
   = defaultService (ServiceId "mapsengine:v1")
       "www.googleapis.com"
 
 -- | View and manage your Google My Maps data
-mapsengineScope :: OAuthScope
-mapsengineScope = "https://www.googleapis.com/auth/mapsengine";
+mapsEngineScope :: Proxy '["https://www.googleapis.com/auth/mapsengine"]
+mapsEngineScope = Proxy;
 
 -- | View your Google My Maps data
-mapsengineReadonlyScope :: OAuthScope
-mapsengineReadonlyScope = "https://www.googleapis.com/auth/mapsengine.readonly";
+mapsEngineReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/mapsengine.readonly"]
+mapsEngineReadOnlyScope = Proxy;

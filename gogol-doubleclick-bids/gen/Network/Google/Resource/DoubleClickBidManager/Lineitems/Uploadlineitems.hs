@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type LineitemsUploadlineitemsResource =
 -- | Uploads line items in CSV format.
 --
 -- /See:/ 'lineitemsUploadlineitems' smart constructor.
-newtype LineitemsUploadlineitems = LineitemsUploadlineitems
+newtype LineitemsUploadlineitems = LineitemsUploadlineitems'
     { _luPayload :: UploadLineItemsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ lineitemsUploadlineitems
     :: UploadLineItemsRequest -- ^ 'luPayload'
     -> LineitemsUploadlineitems
 lineitemsUploadlineitems pLuPayload_ =
-    LineitemsUploadlineitems
+    LineitemsUploadlineitems'
     { _luPayload = pLuPayload_
     }
 
@@ -78,7 +78,8 @@ luPayload
 instance GoogleRequest LineitemsUploadlineitems where
         type Rs LineitemsUploadlineitems =
              UploadLineItemsResponse
-        requestClient LineitemsUploadlineitems{..}
+        type Scopes LineitemsUploadlineitems = '[]
+        requestClient LineitemsUploadlineitems'{..}
           = go (Just AltJSON) _luPayload doubleClickBidsService
           where go
                   = buildClient

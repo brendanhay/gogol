@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type CreativesInsertResource =
 -- | Submit a new creative.
 --
 -- /See:/ 'creativesInsert' smart constructor.
-newtype CreativesInsert = CreativesInsert
+newtype CreativesInsert = CreativesInsert'
     { _ciPayload :: Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ creativesInsert
     :: Creative -- ^ 'ciPayload'
     -> CreativesInsert
 creativesInsert pCiPayload_ =
-    CreativesInsert
+    CreativesInsert'
     { _ciPayload = pCiPayload_
     }
 
@@ -75,7 +75,9 @@ ciPayload
 
 instance GoogleRequest CreativesInsert where
         type Rs CreativesInsert = Creative
-        requestClient CreativesInsert{..}
+        type Scopes CreativesInsert =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient CreativesInsert'{..}
           = go (Just AltJSON) _ciPayload adExchangeBuyerService
           where go
                   = buildClient

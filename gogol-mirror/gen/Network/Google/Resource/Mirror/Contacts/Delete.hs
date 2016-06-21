@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Contacts.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type ContactsDeleteResource =
 -- | Deletes a contact.
 --
 -- /See:/ 'contactsDelete' smart constructor.
-newtype ContactsDelete = ContactsDelete
+newtype ContactsDelete = ContactsDelete'
     { _cdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ contactsDelete
     :: Text -- ^ 'cdId'
     -> ContactsDelete
 contactsDelete pCdId_ =
-    ContactsDelete
+    ContactsDelete'
     { _cdId = pCdId_
     }
 
@@ -74,7 +74,9 @@ cdId = lens _cdId (\ s a -> s{_cdId = a})
 
 instance GoogleRequest ContactsDelete where
         type Rs ContactsDelete = ()
-        requestClient ContactsDelete{..}
+        type Scopes ContactsDelete =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient ContactsDelete'{..}
           = go _cdId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsDeleteResource)

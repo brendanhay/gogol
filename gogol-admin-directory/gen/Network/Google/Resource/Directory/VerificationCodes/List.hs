@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.VerificationCodes.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type VerificationCodesListResource =
 -- specified user.
 --
 -- /See:/ 'verificationCodesList' smart constructor.
-newtype VerificationCodesList = VerificationCodesList
+newtype VerificationCodesList = VerificationCodesList'
     { _vclUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ verificationCodesList
     :: Text -- ^ 'vclUserKey'
     -> VerificationCodesList
 verificationCodesList pVclUserKey_ =
-    VerificationCodesList
+    VerificationCodesList'
     { _vclUserKey = pVclUserKey_
     }
 
@@ -81,7 +81,9 @@ vclUserKey
 
 instance GoogleRequest VerificationCodesList where
         type Rs VerificationCodesList = VerificationCodes
-        requestClient VerificationCodesList{..}
+        type Scopes VerificationCodesList =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
+        requestClient VerificationCodesList'{..}
           = go _vclUserKey (Just AltJSON) directoryService
           where go
                   = buildClient

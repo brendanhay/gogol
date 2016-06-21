@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Plus.Comments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type CommentsListResource =
 -- | List all of the comments for an activity.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList
+data CommentsList = CommentsList'
     { _clActivityId :: !Text
     , _clSortOrder  :: !CommentsListSortOrder
     , _clPageToken  :: !(Maybe Text)
@@ -80,7 +80,7 @@ commentsList
     :: Text -- ^ 'clActivityId'
     -> CommentsList
 commentsList pClActivityId_ =
-    CommentsList
+    CommentsList'
     { _clActivityId = pClActivityId_
     , _clSortOrder = Ascending
     , _clPageToken = Nothing
@@ -114,7 +114,10 @@ clMaxResults
 
 instance GoogleRequest CommentsList where
         type Rs CommentsList = CommentFeed
-        requestClient CommentsList{..}
+        type Scopes CommentsList =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient CommentsList'{..}
           = go _clActivityId (Just _clSortOrder) _clPageToken
               (Just _clMaxResults)
               (Just AltJSON)

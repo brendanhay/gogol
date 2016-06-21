@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.URLChannels.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type URLChannelsInsertResource =
 -- | Add a new URL channel to the host AdSense account.
 --
 -- /See:/ 'urlChannelsInsert' smart constructor.
-data URLChannelsInsert = URLChannelsInsert
+data URLChannelsInsert = URLChannelsInsert'
     { _uciPayload    :: !URLChannel
     , _uciAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ urlChannelsInsert
     -> Text -- ^ 'uciAdClientId'
     -> URLChannelsInsert
 urlChannelsInsert pUciPayload_ pUciAdClientId_ =
-    URLChannelsInsert
+    URLChannelsInsert'
     { _uciPayload = pUciPayload_
     , _uciAdClientId = pUciAdClientId_
     }
@@ -89,7 +89,9 @@ uciAdClientId
 
 instance GoogleRequest URLChannelsInsert where
         type Rs URLChannelsInsert = URLChannel
-        requestClient URLChannelsInsert{..}
+        type Scopes URLChannelsInsert =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient URLChannelsInsert'{..}
           = go _uciAdClientId (Just AltJSON) _uciPayload
               adSenseHostService
           where go

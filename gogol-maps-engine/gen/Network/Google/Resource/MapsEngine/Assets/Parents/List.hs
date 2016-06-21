@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Assets.Parents.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AssetsParentsListResource =
 -- | Return all parent ids of the specified asset.
 --
 -- /See:/ 'assetsParentsList' smart constructor.
-data AssetsParentsList = AssetsParentsList
+data AssetsParentsList = AssetsParentsList'
     { _aplId         :: !Text
     , _aplPageToken  :: !(Maybe Text)
     , _aplMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ assetsParentsList
     :: Text -- ^ 'aplId'
     -> AssetsParentsList
 assetsParentsList pAplId_ =
-    AssetsParentsList
+    AssetsParentsList'
     { _aplId = pAplId_
     , _aplPageToken = Nothing
     , _aplMaxResults = Nothing
@@ -103,7 +103,10 @@ aplMaxResults
 
 instance GoogleRequest AssetsParentsList where
         type Rs AssetsParentsList = ParentsListResponse
-        requestClient AssetsParentsList{..}
+        type Scopes AssetsParentsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient AssetsParentsList'{..}
           = go _aplId _aplPageToken _aplMaxResults
               (Just AltJSON)
               mapsEngineService

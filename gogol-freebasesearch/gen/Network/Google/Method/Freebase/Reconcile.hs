@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Method.Freebase.Reconcile
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ReconcileMethod =
 -- | Reconcile entities to Freebase open data.
 --
 -- /See:/ 'reconcile' smart constructor.
-data Reconcile = Reconcile
+data Reconcile = Reconcile'
     { _rKind       :: !(Maybe [Text])
     , _rLang       :: !(Maybe [Text])
     , _rConfidence :: !(Textual Double)
@@ -88,7 +88,7 @@ data Reconcile = Reconcile
 reconcile
     :: Reconcile
 reconcile =
-    Reconcile
+    Reconcile'
     { _rKind = Nothing
     , _rLang = Nothing
     , _rConfidence = 0.99
@@ -133,7 +133,8 @@ rProp
 
 instance GoogleRequest Reconcile where
         type Rs Reconcile = ReconcileGet
-        requestClient Reconcile{..}
+        type Scopes Reconcile = '[]
+        requestClient Reconcile'{..}
           = go (_rKind ^. _Default) (_rLang ^. _Default)
               (Just _rConfidence)
               _rName

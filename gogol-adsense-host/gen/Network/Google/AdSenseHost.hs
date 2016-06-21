@@ -7,20 +7,23 @@
 
 -- |
 -- Module      : Network.Google.AdSenseHost
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gives AdSense Hosts access to report generation, ad code generation, and
--- publisher management capabilities.
+-- Generates performance reports, generates ad codes, and provides
+-- publisher management capabilities for AdSense Hosts.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference>
 module Network.Google.AdSenseHost
     (
     -- * Service Configuration
       adSenseHostService
+
+    -- * OAuth Scopes
+    , adSenseHostScope
 
     -- * API Declaration
     , AdSenseHostAPI

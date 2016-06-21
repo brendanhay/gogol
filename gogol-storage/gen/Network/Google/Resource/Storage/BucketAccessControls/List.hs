@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.BucketAccessControls.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type BucketAccessControlsListResource =
 -- | Retrieves ACL entries on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsList' smart constructor.
-newtype BucketAccessControlsList = BucketAccessControlsList
+newtype BucketAccessControlsList = BucketAccessControlsList'
     { _baclBucket :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ bucketAccessControlsList
     :: Text -- ^ 'baclBucket'
     -> BucketAccessControlsList
 bucketAccessControlsList pBaclBucket_ =
-    BucketAccessControlsList
+    BucketAccessControlsList'
     { _baclBucket = pBaclBucket_
     }
 
@@ -78,7 +78,10 @@ baclBucket
 instance GoogleRequest BucketAccessControlsList where
         type Rs BucketAccessControlsList =
              BucketAccessControls
-        requestClient BucketAccessControlsList{..}
+        type Scopes BucketAccessControlsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient BucketAccessControlsList'{..}
           = go _baclBucket (Just AltJSON) storageService
           where go
                   = buildClient

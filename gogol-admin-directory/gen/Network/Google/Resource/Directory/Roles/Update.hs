@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Roles.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type RolesUpdateResource =
 -- | Updates a role.
 --
 -- /See:/ 'rolesUpdate' smart constructor.
-data RolesUpdate = RolesUpdate
+data RolesUpdate = RolesUpdate'
     { _ruPayload  :: !Role
     , _ruRoleId   :: !Text
     , _ruCustomer :: !Text
@@ -78,7 +78,7 @@ rolesUpdate
     -> Text -- ^ 'ruCustomer'
     -> RolesUpdate
 rolesUpdate pRuPayload_ pRuRoleId_ pRuCustomer_ =
-    RolesUpdate
+    RolesUpdate'
     { _ruPayload = pRuPayload_
     , _ruRoleId = pRuRoleId_
     , _ruCustomer = pRuCustomer_
@@ -100,7 +100,9 @@ ruCustomer
 
 instance GoogleRequest RolesUpdate where
         type Rs RolesUpdate = Role
-        requestClient RolesUpdate{..}
+        type Scopes RolesUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
+        requestClient RolesUpdate'{..}
           = go _ruCustomer _ruRoleId (Just AltJSON) _ruPayload
               directoryService
           where go

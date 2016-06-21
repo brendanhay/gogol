@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.HTTPHealthChecks.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type HTTPHealthChecksInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'hTTPHealthChecksInsert' smart constructor.
-data HTTPHealthChecksInsert = HTTPHealthChecksInsert
+data HTTPHealthChecksInsert = HTTPHealthChecksInsert'
     { _httphciProject :: !Text
     , _httphciPayload :: !HTTPHealthCheck
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,12 +75,12 @@ hTTPHealthChecksInsert
     -> HTTPHealthCheck -- ^ 'httphciPayload'
     -> HTTPHealthChecksInsert
 hTTPHealthChecksInsert pHttphciProject_ pHttphciPayload_ =
-    HTTPHealthChecksInsert
+    HTTPHealthChecksInsert'
     { _httphciProject = pHttphciProject_
     , _httphciPayload = pHttphciPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 httphciProject :: Lens' HTTPHealthChecksInsert Text
 httphciProject
   = lens _httphciProject
@@ -94,7 +94,10 @@ httphciPayload
 
 instance GoogleRequest HTTPHealthChecksInsert where
         type Rs HTTPHealthChecksInsert = Operation
-        requestClient HTTPHealthChecksInsert{..}
+        type Scopes HTTPHealthChecksInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient HTTPHealthChecksInsert'{..}
           = go _httphciProject (Just AltJSON) _httphciPayload
               computeService
           where go

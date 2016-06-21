@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type TablesPatchResource =
 -- | Mutate a table asset.
 --
 -- /See:/ 'tablesPatch' smart constructor.
-data TablesPatch = TablesPatch
+data TablesPatch = TablesPatch'
     { _tpPayload :: !Table
     , _tpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ tablesPatch
     -> Text -- ^ 'tpId'
     -> TablesPatch
 tablesPatch pTpPayload_ pTpId_ =
-    TablesPatch
+    TablesPatch'
     { _tpPayload = pTpPayload_
     , _tpId = pTpId_
     }
@@ -86,7 +86,9 @@ tpId = lens _tpId (\ s a -> s{_tpId = a})
 
 instance GoogleRequest TablesPatch where
         type Rs TablesPatch = ()
-        requestClient TablesPatch{..}
+        type Scopes TablesPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient TablesPatch'{..}
           = go _tpId (Just AltJSON) _tpPayload
               mapsEngineService
           where go

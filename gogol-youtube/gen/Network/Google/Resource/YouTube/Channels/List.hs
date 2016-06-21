@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Channels.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -74,7 +74,7 @@ type ChannelsListResource =
 -- request criteria.
 --
 -- /See:/ 'channelsList' smart constructor.
-data ChannelsList = ChannelsList
+data ChannelsList = ChannelsList'
     { _cPart                   :: !Text
     , _cMine                   :: !(Maybe Bool)
     , _cForUsername            :: !(Maybe Text)
@@ -117,7 +117,7 @@ channelsList
     :: Text -- ^ 'cPart'
     -> ChannelsList
 channelsList pCPart_ =
-    ChannelsList
+    ChannelsList'
     { _cPart = pCPart_
     , _cMine = Nothing
     , _cForUsername = Nothing
@@ -217,7 +217,13 @@ cMaxResults
 
 instance GoogleRequest ChannelsList where
         type Rs ChannelsList = ChannelListResponse
-        requestClient ChannelsList{..}
+        type Scopes ChannelsList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner",
+               "https://www.googleapis.com/auth/youtubepartner-channel-audit"]
+        requestClient ChannelsList'{..}
           = go (Just _cPart) _cMine _cForUsername _cHl
               _cOnBehalfOfContentOwner
               _cCategoryId

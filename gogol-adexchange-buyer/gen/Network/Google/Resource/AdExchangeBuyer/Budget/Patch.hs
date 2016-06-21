@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.Budget.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type BudgetPatchResource =
 -- method supports patch semantics.
 --
 -- /See:/ 'budgetPatch' smart constructor.
-data BudgetPatch = BudgetPatch
+data BudgetPatch = BudgetPatch'
     { _bpPayload   :: !Budget
     , _bpAccountId :: !(Textual Int64)
     , _bpBillingId :: !(Textual Int64)
@@ -80,7 +80,7 @@ budgetPatch
     -> Int64 -- ^ 'bpBillingId'
     -> BudgetPatch
 budgetPatch pBpPayload_ pBpAccountId_ pBpBillingId_ =
-    BudgetPatch
+    BudgetPatch'
     { _bpPayload = pBpPayload_
     , _bpAccountId = _Coerce # pBpAccountId_
     , _bpBillingId = _Coerce # pBpBillingId_
@@ -105,7 +105,9 @@ bpBillingId
 
 instance GoogleRequest BudgetPatch where
         type Rs BudgetPatch = Budget
-        requestClient BudgetPatch{..}
+        type Scopes BudgetPatch =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient BudgetPatch'{..}
           = go _bpAccountId _bpBillingId (Just AltJSON)
               _bpPayload
               adExchangeBuyerService

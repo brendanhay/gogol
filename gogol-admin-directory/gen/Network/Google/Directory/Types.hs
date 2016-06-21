@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Directory.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,31 +20,33 @@ module Network.Google.Directory.Types
       directoryService
 
     -- * OAuth Scopes
-    , adminDirectoryRolemanagementReadonlyScope
-    , adminDirectoryGroupReadonlyScope
-    , adminDirectoryDeviceChromeosReadonlyScope
+    , adminDirectoryRoleManagementReadOnlyScope
+    , adminDirectoryGroupReadOnlyScope
+    , adminDirectoryDeviceChromeosReadOnlyScope
     , adminDirectoryDeviceChromeosScope
     , adminDirectoryUserScope
-    , adminDirectoryGroupMemberReadonlyScope
+    , adminDirectoryGroupMemberReadOnlyScope
     , adminDirectoryUserAliasScope
+    , adminDirectoryResourceCalendarScope
     , adminDirectoryDeviceMobileActionScope
-    , adminDirectoryDomainReadonlyScope
+    , adminDirectoryResourceCalendarReadOnlyScope
+    , adminDirectoryDomainReadOnlyScope
     , adminDirectoryUserschemaScope
-    , adminDirectoryUserschemaReadonlyScope
+    , adminDirectoryUserschemaReadOnlyScope
     , adminDirectoryDomainScope
-    , adminDirectoryRolemanagementScope
+    , adminDirectoryRoleManagementScope
     , adminDirectoryGroupScope
-    , adminDirectoryOrgunitReadonlyScope
+    , adminDirectoryOrgUnitReadOnlyScope
     , adminDirectoryCustomerScope
-    , adminDirectoryCustomerReadonlyScope
-    , adminDirectoryOrgunitScope
-    , adminDirectoryUserReadonlyScope
-    , adminDirectoryUserAliasReadonlyScope
+    , adminDirectoryCustomerReadOnlyScope
+    , adminDirectoryOrgUnitScope
+    , adminDirectoryUserReadOnlyScope
+    , adminDirectoryUserAliasReadOnlyScope
     , adminDirectoryUserSecurityScope
     , adminDirectoryGroupMemberScope
     , adminDirectoryNotificationsScope
     , adminDirectoryDeviceMobileScope
-    , adminDirectoryDeviceMobileReadonlyScope
+    , adminDirectoryDeviceMobileReadOnlyScope
 
     -- * VerificationCode
     , VerificationCode
@@ -308,6 +311,17 @@ module Network.Google.Directory.Types
     , aliKind
     , aliAliases
 
+    -- * CalendarResource
+    , CalendarResource
+    , calendarResource
+    , crEtags
+    , crResourceId
+    , crResourceType
+    , crResourceName
+    , crKind
+    , crResourceEmail
+    , crResourceDescription
+
     -- * UserUndelete
     , UserUndelete
     , userUndelete
@@ -446,7 +460,7 @@ module Network.Google.Directory.Types
 
     -- * Role
     , Role
-    , role
+    , role'
     , rrEtag
     , rrKind
     , rrRoleName
@@ -643,6 +657,14 @@ module Network.Google.Directory.Types
     , domDomainName
     , domIsPrimary
 
+    -- * CalendarResources
+    , CalendarResources
+    , calendarResources
+    , crsEtag
+    , crsNextPageToken
+    , crsKind
+    , crsItems
+
     -- * ChromeosDevicesListOrderBy
     , ChromeosDevicesListOrderBy (..)
 
@@ -732,107 +754,115 @@ import           Network.Google.Directory.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'directory_v1' of the Admin Directory API. This contains the host and root path used as a starting point for constructing service requests.
-directoryService :: Service
+directoryService :: ServiceConfig
 directoryService
   = defaultService (ServiceId "admin:directory_v1")
       "www.googleapis.com"
 
 -- | View delegated admin roles for your domain
-adminDirectoryRolemanagementReadonlyScope :: OAuthScope
-adminDirectoryRolemanagementReadonlyScope = "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly";
+adminDirectoryRoleManagementReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
+adminDirectoryRoleManagementReadOnlyScope = Proxy;
 
 -- | View groups on your domain
-adminDirectoryGroupReadonlyScope :: OAuthScope
-adminDirectoryGroupReadonlyScope = "https://www.googleapis.com/auth/admin.directory.group.readonly";
+adminDirectoryGroupReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.group.readonly"]
+adminDirectoryGroupReadOnlyScope = Proxy;
 
 -- | View your Chrome OS devices\' metadata
-adminDirectoryDeviceChromeosReadonlyScope :: OAuthScope
-adminDirectoryDeviceChromeosReadonlyScope = "https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly";
+adminDirectoryDeviceChromeosReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly"]
+adminDirectoryDeviceChromeosReadOnlyScope = Proxy;
 
 -- | View and manage your Chrome OS devices\' metadata
-adminDirectoryDeviceChromeosScope :: OAuthScope
-adminDirectoryDeviceChromeosScope = "https://www.googleapis.com/auth/admin.directory.device.chromeos";
+adminDirectoryDeviceChromeosScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
+adminDirectoryDeviceChromeosScope = Proxy;
 
 -- | View and manage the provisioning of users on your domain
-adminDirectoryUserScope :: OAuthScope
-adminDirectoryUserScope = "https://www.googleapis.com/auth/admin.directory.user";
+adminDirectoryUserScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.user"]
+adminDirectoryUserScope = Proxy;
 
 -- | View group subscriptions on your domain
-adminDirectoryGroupMemberReadonlyScope :: OAuthScope
-adminDirectoryGroupMemberReadonlyScope = "https://www.googleapis.com/auth/admin.directory.group.member.readonly";
+adminDirectoryGroupMemberReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.group.member.readonly"]
+adminDirectoryGroupMemberReadOnlyScope = Proxy;
 
 -- | View and manage user aliases on your domain
-adminDirectoryUserAliasScope :: OAuthScope
-adminDirectoryUserAliasScope = "https://www.googleapis.com/auth/admin.directory.user.alias";
+adminDirectoryUserAliasScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.user.alias"]
+adminDirectoryUserAliasScope = Proxy;
+
+-- | View and manage the provisioning of calendar resources on your domain
+adminDirectoryResourceCalendarScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
+adminDirectoryResourceCalendarScope = Proxy;
 
 -- | Manage your mobile devices by performing administrative tasks
-adminDirectoryDeviceMobileActionScope :: OAuthScope
-adminDirectoryDeviceMobileActionScope = "https://www.googleapis.com/auth/admin.directory.device.mobile.action";
+adminDirectoryDeviceMobileActionScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.device.mobile.action"]
+adminDirectoryDeviceMobileActionScope = Proxy;
+
+-- | View calendar resources on your domain
+adminDirectoryResourceCalendarReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"]
+adminDirectoryResourceCalendarReadOnlyScope = Proxy;
 
 -- | View domains related to your customers
-adminDirectoryDomainReadonlyScope :: OAuthScope
-adminDirectoryDomainReadonlyScope = "https://www.googleapis.com/auth/admin.directory.domain.readonly";
+adminDirectoryDomainReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.domain.readonly"]
+adminDirectoryDomainReadOnlyScope = Proxy;
 
 -- | View and manage the provisioning of user schemas on your domain
-adminDirectoryUserschemaScope :: OAuthScope
-adminDirectoryUserschemaScope = "https://www.googleapis.com/auth/admin.directory.userschema";
+adminDirectoryUserschemaScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.userschema"]
+adminDirectoryUserschemaScope = Proxy;
 
 -- | View user schemas on your domain
-adminDirectoryUserschemaReadonlyScope :: OAuthScope
-adminDirectoryUserschemaReadonlyScope = "https://www.googleapis.com/auth/admin.directory.userschema.readonly";
+adminDirectoryUserschemaReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.userschema.readonly"]
+adminDirectoryUserschemaReadOnlyScope = Proxy;
 
 -- | View and manage the provisioning of domains for your customers
-adminDirectoryDomainScope :: OAuthScope
-adminDirectoryDomainScope = "https://www.googleapis.com/auth/admin.directory.domain";
+adminDirectoryDomainScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.domain"]
+adminDirectoryDomainScope = Proxy;
 
 -- | Manage delegated admin roles for your domain
-adminDirectoryRolemanagementScope :: OAuthScope
-adminDirectoryRolemanagementScope = "https://www.googleapis.com/auth/admin.directory.rolemanagement";
+adminDirectoryRoleManagementScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
+adminDirectoryRoleManagementScope = Proxy;
 
 -- | View and manage the provisioning of groups on your domain
-adminDirectoryGroupScope :: OAuthScope
-adminDirectoryGroupScope = "https://www.googleapis.com/auth/admin.directory.group";
+adminDirectoryGroupScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.group"]
+adminDirectoryGroupScope = Proxy;
 
 -- | View organization units on your domain
-adminDirectoryOrgunitReadonlyScope :: OAuthScope
-adminDirectoryOrgunitReadonlyScope = "https://www.googleapis.com/auth/admin.directory.orgunit.readonly";
+adminDirectoryOrgUnitReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.orgunit.readonly"]
+adminDirectoryOrgUnitReadOnlyScope = Proxy;
 
 -- | View and manage customer related information
-adminDirectoryCustomerScope :: OAuthScope
-adminDirectoryCustomerScope = "https://www.googleapis.com/auth/admin.directory.customer";
+adminDirectoryCustomerScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.customer"]
+adminDirectoryCustomerScope = Proxy;
 
 -- | View customer related information
-adminDirectoryCustomerReadonlyScope :: OAuthScope
-adminDirectoryCustomerReadonlyScope = "https://www.googleapis.com/auth/admin.directory.customer.readonly";
+adminDirectoryCustomerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.customer.readonly"]
+adminDirectoryCustomerReadOnlyScope = Proxy;
 
 -- | View and manage organization units on your domain
-adminDirectoryOrgunitScope :: OAuthScope
-adminDirectoryOrgunitScope = "https://www.googleapis.com/auth/admin.directory.orgunit";
+adminDirectoryOrgUnitScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.orgunit"]
+adminDirectoryOrgUnitScope = Proxy;
 
 -- | View users on your domain
-adminDirectoryUserReadonlyScope :: OAuthScope
-adminDirectoryUserReadonlyScope = "https://www.googleapis.com/auth/admin.directory.user.readonly";
+adminDirectoryUserReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.user.readonly"]
+adminDirectoryUserReadOnlyScope = Proxy;
 
 -- | View user aliases on your domain
-adminDirectoryUserAliasReadonlyScope :: OAuthScope
-adminDirectoryUserAliasReadonlyScope = "https://www.googleapis.com/auth/admin.directory.user.alias.readonly";
+adminDirectoryUserAliasReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.user.alias.readonly"]
+adminDirectoryUserAliasReadOnlyScope = Proxy;
 
 -- | Manage data access permissions for users on your domain
-adminDirectoryUserSecurityScope :: OAuthScope
-adminDirectoryUserSecurityScope = "https://www.googleapis.com/auth/admin.directory.user.security";
+adminDirectoryUserSecurityScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.user.security"]
+adminDirectoryUserSecurityScope = Proxy;
 
 -- | View and manage group subscriptions on your domain
-adminDirectoryGroupMemberScope :: OAuthScope
-adminDirectoryGroupMemberScope = "https://www.googleapis.com/auth/admin.directory.group.member";
+adminDirectoryGroupMemberScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.group.member"]
+adminDirectoryGroupMemberScope = Proxy;
 
 -- | View and manage notifications received on your domain
-adminDirectoryNotificationsScope :: OAuthScope
-adminDirectoryNotificationsScope = "https://www.googleapis.com/auth/admin.directory.notifications";
+adminDirectoryNotificationsScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.notifications"]
+adminDirectoryNotificationsScope = Proxy;
 
 -- | View and manage your mobile devices\' metadata
-adminDirectoryDeviceMobileScope :: OAuthScope
-adminDirectoryDeviceMobileScope = "https://www.googleapis.com/auth/admin.directory.device.mobile";
+adminDirectoryDeviceMobileScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.device.mobile"]
+adminDirectoryDeviceMobileScope = Proxy;
 
 -- | View your mobile devices\' metadata
-adminDirectoryDeviceMobileReadonlyScope :: OAuthScope
-adminDirectoryDeviceMobileReadonlyScope = "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly";
+adminDirectoryDeviceMobileReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"]
+adminDirectoryDeviceMobileReadOnlyScope = Proxy;

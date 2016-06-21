@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Blogs.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type BlogsGetResource =
 -- | Gets one blog by ID.
 --
 -- /See:/ 'blogsGet' smart constructor.
-data BlogsGet = BlogsGet
+data BlogsGet = BlogsGet'
     { _bgBlogId   :: !Text
     , _bgMaxPosts :: !(Maybe (Textual Word32))
     , _bgView     :: !(Maybe BlogsGetView)
@@ -74,7 +74,7 @@ blogsGet
     :: Text -- ^ 'bgBlogId'
     -> BlogsGet
 blogsGet pBgBlogId_ =
-    BlogsGet
+    BlogsGet'
     { _bgBlogId = pBgBlogId_
     , _bgMaxPosts = Nothing
     , _bgView = Nothing
@@ -97,7 +97,10 @@ bgView = lens _bgView (\ s a -> s{_bgView = a})
 
 instance GoogleRequest BlogsGet where
         type Rs BlogsGet = Blog
-        requestClient BlogsGet{..}
+        type Scopes BlogsGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient BlogsGet'{..}
           = go _bgBlogId _bgMaxPosts _bgView (Just AltJSON)
               bloggerService
           where go

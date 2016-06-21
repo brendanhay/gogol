@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Campaigns.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CampaignsPatch' request conforms to.
 type CampaignsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -56,7 +56,7 @@ type CampaignsPatchResource =
 -- | Updates an existing campaign. This method supports patch semantics.
 --
 -- /See:/ 'campaignsPatch' smart constructor.
-data CampaignsPatch = CampaignsPatch
+data CampaignsPatch = CampaignsPatch'
     { _cpProFileId :: !(Textual Int64)
     , _cpPayload   :: !Campaign
     , _cpId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ campaignsPatch
     -> Int64 -- ^ 'cpId'
     -> CampaignsPatch
 campaignsPatch pCpProFileId_ pCpPayload_ pCpId_ =
-    CampaignsPatch
+    CampaignsPatch'
     { _cpProFileId = _Coerce # pCpProFileId_
     , _cpPayload = pCpPayload_
     , _cpId = _Coerce # pCpId_
@@ -100,7 +100,9 @@ cpId = lens _cpId (\ s a -> s{_cpId = a}) . _Coerce
 
 instance GoogleRequest CampaignsPatch where
         type Rs CampaignsPatch = Campaign
-        requestClient CampaignsPatch{..}
+        type Scopes CampaignsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CampaignsPatch'{..}
           = go _cpProFileId (Just _cpId) (Just AltJSON)
               _cpPayload
               dFAReportingService

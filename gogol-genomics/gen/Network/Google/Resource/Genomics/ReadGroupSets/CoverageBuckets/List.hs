@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,14 +22,17 @@
 --
 -- Lists fixed width coverage buckets for a read group set, each of which
 -- correspond to a range of a reference sequence. Each bucket summarizes
--- coverage information across its corresponding genomic range. Coverage is
--- defined as the number of reads which are aligned to a given base in the
--- reference sequence. Coverage buckets are available at several
--- precomputed bucket widths, enabling retrieval of various coverage \'zoom
--- levels\'. The caller must have READ permissions for the target read
--- group set.
+-- coverage information across its corresponding genomic range. For the
+-- definitions of read group sets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Coverage is defined as the number of reads which are aligned to a given
+-- base in the reference sequence. Coverage buckets are available at
+-- several precomputed bucket widths, enabling retrieval of various
+-- coverage \'zoom levels\'. The caller must have READ permissions for the
+-- target read group set.
 --
--- /See:/ < Genomics API Reference> for @genomics.readgroupsets.coveragebuckets.list@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.coveragebuckets.list@.
 module Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
     (
     -- * REST Resource
@@ -84,15 +87,18 @@ type ReadGroupSetsCoverageBucketsListResource =
 
 -- | Lists fixed width coverage buckets for a read group set, each of which
 -- correspond to a range of a reference sequence. Each bucket summarizes
--- coverage information across its corresponding genomic range. Coverage is
--- defined as the number of reads which are aligned to a given base in the
--- reference sequence. Coverage buckets are available at several
--- precomputed bucket widths, enabling retrieval of various coverage \'zoom
--- levels\'. The caller must have READ permissions for the target read
--- group set.
+-- coverage information across its corresponding genomic range. For the
+-- definitions of read group sets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Coverage is defined as the number of reads which are aligned to a given
+-- base in the reference sequence. Coverage buckets are available at
+-- several precomputed bucket widths, enabling retrieval of various
+-- coverage \'zoom levels\'. The caller must have READ permissions for the
+-- target read group set.
 --
 -- /See:/ 'readGroupSetsCoverageBucketsList' smart constructor.
-data ReadGroupSetsCoverageBucketsList = ReadGroupSetsCoverageBucketsList
+data ReadGroupSetsCoverageBucketsList = ReadGroupSetsCoverageBucketsList'
     { _rgscblXgafv             :: !(Maybe Text)
     , _rgscblReadGroupSetId    :: !Text
     , _rgscblUploadProtocol    :: !(Maybe Text)
@@ -144,7 +150,7 @@ readGroupSetsCoverageBucketsList
     :: Text -- ^ 'rgscblReadGroupSetId'
     -> ReadGroupSetsCoverageBucketsList
 readGroupSetsCoverageBucketsList pRgscblReadGroupSetId_ =
-    ReadGroupSetsCoverageBucketsList
+    ReadGroupSetsCoverageBucketsList'
     { _rgscblXgafv = Nothing
     , _rgscblReadGroupSetId = pRgscblReadGroupSetId_
     , _rgscblUploadProtocol = Nothing
@@ -260,7 +266,11 @@ instance GoogleRequest
          ReadGroupSetsCoverageBucketsList where
         type Rs ReadGroupSetsCoverageBucketsList =
              ListCoverageBucketsResponse
-        requestClient ReadGroupSetsCoverageBucketsList{..}
+        type Scopes ReadGroupSetsCoverageBucketsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient ReadGroupSetsCoverageBucketsList'{..}
           = go _rgscblReadGroupSetId _rgscblXgafv
               _rgscblUploadProtocol
               (Just _rgscblPp)

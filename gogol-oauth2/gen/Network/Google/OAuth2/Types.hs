@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.OAuth2.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,9 +20,9 @@ module Network.Google.OAuth2.Types
       oAuth2Service
 
     -- * OAuth Scopes
-    , userinfoProfileScope
+    , userInfoProFileScope
     , plusLoginScope
-    , userinfoEmailScope
+    , userInfoEmailScope
     , plusMeScope
 
     -- * TokenInfo
@@ -73,23 +74,23 @@ import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google OAuth2 API. This contains the host and root path used as a starting point for constructing service requests.
-oAuth2Service :: Service
+oAuth2Service :: ServiceConfig
 oAuth2Service
   = defaultService (ServiceId "oauth2:v2")
       "www.googleapis.com"
 
 -- | View your basic profile info
-userinfoProfileScope :: OAuthScope
-userinfoProfileScope = "https://www.googleapis.com/auth/userinfo.profile";
+userInfoProFileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
+userInfoProFileScope = Proxy;
 
--- | Know your basic profile info and list of people in your circles.
-plusLoginScope :: OAuthScope
-plusLoginScope = "https://www.googleapis.com/auth/plus.login";
+-- | Know the list of people in your circles, your age range, and language
+plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
+plusLoginScope = Proxy;
 
 -- | View your email address
-userinfoEmailScope :: OAuthScope
-userinfoEmailScope = "https://www.googleapis.com/auth/userinfo.email";
+userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+userInfoEmailScope = Proxy;
 
 -- | Know who you are on Google
-plusMeScope :: OAuthScope
-plusMeScope = "https://www.googleapis.com/auth/plus.me";
+plusMeScope :: Proxy '["https://www.googleapis.com/auth/plus.me"]
+plusMeScope = Proxy;

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.Users.AddPublicKey
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type UsersAddPublicKeyResource =
 -- in the request.
 --
 -- /See:/ 'usersAddPublicKey' smart constructor.
-data UsersAddPublicKey = UsersAddPublicKey
+data UsersAddPublicKey = UsersAddPublicKey'
     { _uapkProject :: !Text
     , _uapkPayload :: !PublicKey
     , _uapkUser    :: !Text
@@ -81,7 +81,7 @@ usersAddPublicKey
     -> Text -- ^ 'uapkUser'
     -> UsersAddPublicKey
 usersAddPublicKey pUapkProject_ pUapkPayload_ pUapkUser_ =
-    UsersAddPublicKey
+    UsersAddPublicKey'
     { _uapkProject = pUapkProject_
     , _uapkPayload = pUapkPayload_
     , _uapkUser = pUapkUser_
@@ -103,7 +103,10 @@ uapkUser = lens _uapkUser (\ s a -> s{_uapkUser = a})
 
 instance GoogleRequest UsersAddPublicKey where
         type Rs UsersAddPublicKey = Operation
-        requestClient UsersAddPublicKey{..}
+        type Scopes UsersAddPublicKey =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
+        requestClient UsersAddPublicKey'{..}
           = go _uapkProject _uapkUser (Just AltJSON)
               _uapkPayload
               userAccountsService

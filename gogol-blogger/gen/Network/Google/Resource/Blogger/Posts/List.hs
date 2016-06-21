@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Posts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -73,7 +73,7 @@ type PostsListResource =
 -- | Retrieves a list of posts, possibly filtered.
 --
 -- /See:/ 'postsList' smart constructor.
-data PostsList = PostsList
+data PostsList = PostsList'
     { _pllStatus      :: !(Maybe [PostsListStatus])
     , _pllOrderBy     :: !PostsListOrderBy
     , _pllFetchImages :: !(Maybe Bool)
@@ -116,7 +116,7 @@ postsList
     :: Text -- ^ 'pllBlogId'
     -> PostsList
 postsList pPllBlogId_ =
-    PostsList
+    PostsList'
     { _pllStatus = Nothing
     , _pllOrderBy = Published
     , _pllFetchImages = Nothing
@@ -197,7 +197,10 @@ pllMaxResults
 
 instance GoogleRequest PostsList where
         type Rs PostsList = PostList
-        requestClient PostsList{..}
+        type Scopes PostsList =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient PostsList'{..}
           = go _pllBlogId (_pllStatus ^. _Default)
               (Just _pllOrderBy)
               _pllFetchImages

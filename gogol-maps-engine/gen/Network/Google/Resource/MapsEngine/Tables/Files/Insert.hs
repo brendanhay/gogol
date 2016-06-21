@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Files.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type TablesFilesInsertResource =
                    QueryParam "filename" Text :>
                      QueryParam "alt" AltJSON :>
                        QueryParam "uploadType" AltMedia :>
-                         ReqBody '[OctetStream] RequestBody :> Post '[JSON] ()
+                         AltMedia :> Post '[JSON] ()
 
 -- | Upload a file to a placeholder table asset. See Table Upload in the
 -- Developer\'s Guide for more information. Supported file types are listed
@@ -71,7 +71,7 @@ type TablesFilesInsertResource =
 -- Engine help center.
 --
 -- /See:/ 'tablesFilesInsert' smart constructor.
-data TablesFilesInsert = TablesFilesInsert
+data TablesFilesInsert = TablesFilesInsert'
     { _tfiId       :: !Text
     , _tfiFilename :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,7 +88,7 @@ tablesFilesInsert
     -> Text -- ^ 'tfiFilename'
     -> TablesFilesInsert
 tablesFilesInsert pTfiId_ pTfiFilename_ =
-    TablesFilesInsert
+    TablesFilesInsert'
     { _tfiId = pTfiId_
     , _tfiFilename = pTfiFilename_
     }
@@ -104,7 +104,9 @@ tfiFilename
 
 instance GoogleRequest TablesFilesInsert where
         type Rs TablesFilesInsert = ()
-        requestClient TablesFilesInsert{..}
+        type Scopes TablesFilesInsert =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient TablesFilesInsert'{..}
           = go _tfiId (Just _tfiFilename) (Just AltJSON)
               mapsEngineService
           where go :<|> _
@@ -115,8 +117,10 @@ instance GoogleRequest TablesFilesInsert where
 instance GoogleRequest
          (MediaUpload TablesFilesInsert) where
         type Rs (MediaUpload TablesFilesInsert) = ()
+        type Scopes (MediaUpload TablesFilesInsert) =
+             Scopes TablesFilesInsert
         requestClient
-          (MediaUpload TablesFilesInsert{..} body)
+          (MediaUpload TablesFilesInsert'{..} body)
           = go _tfiId (Just _tfiFilename) (Just AltJSON)
               (Just AltMedia)
               body

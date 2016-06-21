@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type ProjectsGetBillingInfoResource =
 -- ).
 --
 -- /See:/ 'projectsGetBillingInfo' smart constructor.
-data ProjectsGetBillingInfo = ProjectsGetBillingInfo
+data ProjectsGetBillingInfo = ProjectsGetBillingInfo'
     { _pgbiXgafv          :: !(Maybe Text)
     , _pgbiUploadProtocol :: !(Maybe Text)
     , _pgbiPp             :: !Bool
@@ -105,7 +105,7 @@ projectsGetBillingInfo
     :: Text -- ^ 'pgbiName'
     -> ProjectsGetBillingInfo
 projectsGetBillingInfo pPgbiName_ =
-    ProjectsGetBillingInfo
+    ProjectsGetBillingInfo'
     { _pgbiXgafv = Nothing
     , _pgbiUploadProtocol = Nothing
     , _pgbiPp = True
@@ -161,7 +161,9 @@ pgbiCallback
 
 instance GoogleRequest ProjectsGetBillingInfo where
         type Rs ProjectsGetBillingInfo = ProjectBillingInfo
-        requestClient ProjectsGetBillingInfo{..}
+        type Scopes ProjectsGetBillingInfo =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsGetBillingInfo'{..}
           = go _pgbiName _pgbiXgafv _pgbiUploadProtocol
               (Just _pgbiPp)
               _pgbiAccessToken

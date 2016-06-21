@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Subscriptions.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type SubscriptionsInsertResource =
 -- | Adds a subscription for the authenticated user\'s channel.
 --
 -- /See:/ 'subscriptionsInsert' smart constructor.
-data SubscriptionsInsert = SubscriptionsInsert
+data SubscriptionsInsert = SubscriptionsInsert'
     { _siPart    :: !Text
     , _siPayload :: !Subscription
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ subscriptionsInsert
     -> Subscription -- ^ 'siPayload'
     -> SubscriptionsInsert
 subscriptionsInsert pSiPart_ pSiPayload_ =
-    SubscriptionsInsert
+    SubscriptionsInsert'
     { _siPart = pSiPart_
     , _siPayload = pSiPayload_
     }
@@ -89,7 +89,11 @@ siPayload
 
 instance GoogleRequest SubscriptionsInsert where
         type Rs SubscriptionsInsert = Subscription
-        requestClient SubscriptionsInsert{..}
+        type Scopes SubscriptionsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient SubscriptionsInsert'{..}
           = go (Just _siPart) (Just AltJSON) _siPayload
               youTubeService
           where go

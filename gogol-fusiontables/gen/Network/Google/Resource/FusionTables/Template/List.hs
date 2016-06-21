@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Template.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TemplateListResource =
 -- | Retrieves a list of templates.
 --
 -- /See:/ 'templateList'' smart constructor.
-data TemplateList' = TemplateList'
+data TemplateList' = TemplateList''
     { _tllPageToken  :: !(Maybe Text)
     , _tllTableId    :: !Text
     , _tllMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ templateList'
     :: Text -- ^ 'tllTableId'
     -> TemplateList'
 templateList' pTllTableId_ =
-    TemplateList'
+    TemplateList''
     { _tllPageToken = Nothing
     , _tllTableId = pTllTableId_
     , _tllMaxResults = Nothing
@@ -100,7 +100,10 @@ tllMaxResults
 
 instance GoogleRequest TemplateList' where
         type Rs TemplateList' = TemplateList
-        requestClient TemplateList'{..}
+        type Scopes TemplateList' =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient TemplateList''{..}
           = go _tllTableId _tllPageToken _tllMaxResults
               (Just AltJSON)
               fusionTablesService

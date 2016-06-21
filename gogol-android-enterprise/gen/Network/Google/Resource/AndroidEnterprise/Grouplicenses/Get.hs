@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Grouplicenses.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves details of an enterprise\'s group license for a product.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.grouplicenses.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.grouplicenses.get@.
 module Network.Google.Resource.AndroidEnterprise.Grouplicenses.Get
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type GrouplicensesGetResource =
 -- | Retrieves details of an enterprise\'s group license for a product.
 --
 -- /See:/ 'grouplicensesGet' smart constructor.
-data GrouplicensesGet = GrouplicensesGet
+data GrouplicensesGet = GrouplicensesGet'
     { _ggEnterpriseId   :: !Text
     , _ggGroupLicenseId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ grouplicensesGet
     -> Text -- ^ 'ggGroupLicenseId'
     -> GrouplicensesGet
 grouplicensesGet pGgEnterpriseId_ pGgGroupLicenseId_ =
-    GrouplicensesGet
+    GrouplicensesGet'
     { _ggEnterpriseId = pGgEnterpriseId_
     , _ggGroupLicenseId = pGgGroupLicenseId_
     }
@@ -91,7 +91,9 @@ ggGroupLicenseId
 
 instance GoogleRequest GrouplicensesGet where
         type Rs GrouplicensesGet = GroupLicense
-        requestClient GrouplicensesGet{..}
+        type Scopes GrouplicensesGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient GrouplicensesGet'{..}
           = go _ggEnterpriseId _ggGroupLicenseId (Just AltJSON)
               androidEnterpriseService
           where go

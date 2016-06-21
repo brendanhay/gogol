@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Products.Custombatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ProductsCustombatchResource =
 -- | Retrieves, inserts, and deletes multiple products in a single request.
 --
 -- /See:/ 'productsCustombatch' smart constructor.
-data ProductsCustombatch = ProductsCustombatch
+data ProductsCustombatch = ProductsCustombatch'
     { _pcPayload :: !ProductsCustomBatchRequest
     , _pcDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ productsCustombatch
     :: ProductsCustomBatchRequest -- ^ 'pcPayload'
     -> ProductsCustombatch
 productsCustombatch pPcPayload_ =
-    ProductsCustombatch
+    ProductsCustombatch'
     { _pcPayload = pPcPayload_
     , _pcDryRun = Nothing
     }
@@ -88,7 +88,9 @@ pcDryRun = lens _pcDryRun (\ s a -> s{_pcDryRun = a})
 instance GoogleRequest ProductsCustombatch where
         type Rs ProductsCustombatch =
              ProductsCustomBatchResponse
-        requestClient ProductsCustombatch{..}
+        type Scopes ProductsCustombatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient ProductsCustombatch'{..}
           = go _pcDryRun (Just AltJSON) _pcPayload
               shoppingContentService
           where go

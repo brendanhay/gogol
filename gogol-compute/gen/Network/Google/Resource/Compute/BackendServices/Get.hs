@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.BackendServices.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified BackendService resource.
+-- Returns the specified BackendService resource. Get a list of available
+-- backend services by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.get@.
 module Network.Google.Resource.Compute.BackendServices.Get
@@ -53,10 +54,11 @@ type BackendServicesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] BackendService
 
--- | Returns the specified BackendService resource.
+-- | Returns the specified BackendService resource. Get a list of available
+-- backend services by making a list() request.
 --
 -- /See:/ 'backendServicesGet' smart constructor.
-data BackendServicesGet = BackendServicesGet
+data BackendServicesGet = BackendServicesGet'
     { _bsgProject        :: !Text
     , _bsgBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,12 +75,12 @@ backendServicesGet
     -> Text -- ^ 'bsgBackendService'
     -> BackendServicesGet
 backendServicesGet pBsgProject_ pBsgBackendService_ =
-    BackendServicesGet
+    BackendServicesGet'
     { _bsgProject = pBsgProject_
     , _bsgBackendService = pBsgBackendService_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 bsgProject :: Lens' BackendServicesGet Text
 bsgProject
   = lens _bsgProject (\ s a -> s{_bsgProject = a})
@@ -91,7 +93,11 @@ bsgBackendService
 
 instance GoogleRequest BackendServicesGet where
         type Rs BackendServicesGet = BackendService
-        requestClient BackendServicesGet{..}
+        type Scopes BackendServicesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient BackendServicesGet'{..}
           = go _bsgProject _bsgBackendService (Just AltJSON)
               computeService
           where go

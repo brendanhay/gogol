@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.People.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type PeopleGetResource =
 -- | Get a person\'s profile.
 --
 -- /See:/ 'peopleGet' smart constructor.
-newtype PeopleGet = PeopleGet
+newtype PeopleGet = PeopleGet'
     { _pgUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ peopleGet
     :: Text -- ^ 'pgUserId'
     -> PeopleGet
 peopleGet pPgUserId_ =
-    PeopleGet
+    PeopleGet'
     { _pgUserId = pPgUserId_
     }
 
@@ -75,7 +75,13 @@ pgUserId = lens _pgUserId (\ s a -> s{_pgUserId = a})
 
 instance GoogleRequest PeopleGet where
         type Rs PeopleGet = Person
-        requestClient PeopleGet{..}
+        type Scopes PeopleGet =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me",
+               "https://www.googleapis.com/auth/plus.profiles.read",
+               "https://www.googleapis.com/auth/userinfo.email",
+               "https://www.googleapis.com/auth/userinfo.profile"]
+        requestClient PeopleGet'{..}
           = go _pgUserId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy PeopleGetResource)

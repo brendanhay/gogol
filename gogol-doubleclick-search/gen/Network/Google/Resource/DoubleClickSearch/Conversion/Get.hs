@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickSearch.Conversion.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -77,7 +77,7 @@ type ConversionGetResource =
 -- account.
 --
 -- /See:/ 'conversionGet' smart constructor.
-data ConversionGet = ConversionGet
+data ConversionGet = ConversionGet'
     { _cgAdGroupId       :: !(Maybe (Textual Int64))
     , _cgEngineAccountId :: !(Textual Int64)
     , _cgAgencyId        :: !(Textual Int64)
@@ -126,7 +126,7 @@ conversionGet
     -> Int32 -- ^ 'cgRowCount'
     -> ConversionGet
 conversionGet pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgStartDate_ pCgStartRow_ pCgRowCount_ =
-    ConversionGet
+    ConversionGet'
     { _cgAdGroupId = Nothing
     , _cgEngineAccountId = _Coerce # pCgEngineAccountId_
     , _cgAgencyId = _Coerce # pCgAgencyId_
@@ -213,7 +213,9 @@ cgRowCount
 
 instance GoogleRequest ConversionGet where
         type Rs ConversionGet = ConversionList
-        requestClient ConversionGet{..}
+        type Scopes ConversionGet =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
+        requestClient ConversionGet'{..}
           = go _cgAgencyId _cgAdvertiserId _cgEngineAccountId
               (Just _cgEndDate)
               (Just _cgRowCount)

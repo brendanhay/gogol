@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Plus.People.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type PeopleSearchResource =
 -- | Search all public profiles.
 --
 -- /See:/ 'peopleSearch' smart constructor.
-data PeopleSearch = PeopleSearch
+data PeopleSearch = PeopleSearch'
     { _psQuery      :: !Text
     , _psLanguage   :: !Text
     , _psPageToken  :: !(Maybe Text)
@@ -79,7 +79,7 @@ peopleSearch
     :: Text -- ^ 'psQuery'
     -> PeopleSearch
 peopleSearch pPsQuery_ =
-    PeopleSearch
+    PeopleSearch'
     { _psQuery = pPsQuery_
     , _psLanguage = "en-US"
     , _psPageToken = Nothing
@@ -115,7 +115,10 @@ psMaxResults
 
 instance GoogleRequest PeopleSearch where
         type Rs PeopleSearch = PeopleFeed
-        requestClient PeopleSearch{..}
+        type Scopes PeopleSearch =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient PeopleSearch'{..}
           = go (Just _psQuery) (Just _psLanguage) _psPageToken
               (Just _psMaxResults)
               (Just AltJSON)

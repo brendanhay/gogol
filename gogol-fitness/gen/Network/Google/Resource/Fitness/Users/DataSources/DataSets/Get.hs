@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type UsersDataSourcesDataSetsGetResource =
 -- or equal to the dataset start time.
 --
 -- /See:/ 'usersDataSourcesDataSetsGet' smart constructor.
-data UsersDataSourcesDataSetsGet = UsersDataSourcesDataSetsGet
+data UsersDataSourcesDataSetsGet = UsersDataSourcesDataSetsGet'
     { _udsdsgDataSourceId :: !Text
     , _udsdsgUserId       :: !Text
     , _udsdsgDataSetId    :: !Text
@@ -96,7 +96,7 @@ usersDataSourcesDataSetsGet
     -> Text -- ^ 'udsdsgDataSetId'
     -> UsersDataSourcesDataSetsGet
 usersDataSourcesDataSetsGet pUdsdsgDataSourceId_ pUdsdsgUserId_ pUdsdsgDataSetId_ =
-    UsersDataSourcesDataSetsGet
+    UsersDataSourcesDataSetsGet'
     { _udsdsgDataSourceId = pUdsdsgDataSourceId_
     , _udsdsgUserId = pUdsdsgUserId_
     , _udsdsgDataSetId = pUdsdsgDataSetId_
@@ -146,7 +146,14 @@ udsdsgPageToken
 instance GoogleRequest UsersDataSourcesDataSetsGet
          where
         type Rs UsersDataSourcesDataSetsGet = DataSet
-        requestClient UsersDataSourcesDataSetsGet{..}
+        type Scopes UsersDataSourcesDataSetsGet =
+             '["https://www.googleapis.com/auth/fitness.activity.read",
+               "https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.read",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.read",
+               "https://www.googleapis.com/auth/fitness.location.write"]
+        requestClient UsersDataSourcesDataSetsGet'{..}
           = go _udsdsgUserId _udsdsgDataSourceId
               _udsdsgDataSetId
               _udsdsgLimit

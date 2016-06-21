@@ -16,7 +16,7 @@
 {-# LANGUAGE TemplateHaskell            #-}
 
 -- Module      : Gen.Types.Schema
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
@@ -38,7 +38,6 @@ import           Data.Semigroup       ((<>))
 import           Data.Text            (Text)
 import qualified Data.Text            as Text
 import           Data.Text.Manipulate
-import           Debug.Trace
 import           Gen.Orphans          ()
 import           Gen.Text
 import           Gen.TH
@@ -199,6 +198,8 @@ data Lit
     | Time
     | Date
     | DateTime
+    | FieldMask
+
     -- Core types.
     | RqBody
     | RsBody
@@ -211,22 +212,25 @@ instance FromJSON Lit where
         t <- o .: "format" <|> o .: "type"
         case t of
             -- Types
-            "string"    -> pure Text
-            "boolean"   -> pure Bool
+            "string"           -> pure Text
+            "boolean"          -> pure Bool
 
             -- Formats
-            "float"     -> pure Float
-            "double"    -> pure Double
-            "byte"      -> pure Byte
-            "uint32"    -> pure UInt32
-            "uint64"    -> pure UInt64
-            "int32"     -> pure Int32
-            "int64"     -> pure Int64
-            "time"      -> pure Time
-            "date"      -> pure Date
-            "date-time" -> pure DateTime
+            "float"            -> pure Float
+            "double"           -> pure Double
+            "byte"             -> pure Byte
+            "uint32"           -> pure UInt32
+            "uint64"           -> pure UInt64
+            "int32"            -> pure Int32
+            "int64"            -> pure Int64
+            "time"             -> pure Time
+            "date"             -> pure Date
+            "date-time"        -> pure DateTime
 
-            _           -> fail $
+            "google-datetime"  -> pure DateTime
+            "google-fieldmask" -> pure FieldMask
+
+            _                 -> fail $
                 "Unable to parse Literal from: " ++ Text.unpack t
 
 newtype Enm = Enm { _eValues :: [(Text, Help)] }
@@ -438,11 +442,37 @@ serviceName :: Service a -> String
 serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
 
 scopeName :: Service a -> Text -> String
-scopeName s k =
-    let y = _sCanonicalName s <> "AllScope"
-     in Text.unpack . toCamel $
-        case Text.split (== '/') k of
-            [] -> y
-            xs -> case last xs of
-                "" -> y
-                x  -> x <> "Scope"
+scopeName s k = Text.unpack . lowerHead . lowerFirstAcronym $
+    case breakParts k of
+        []  -> _sCanonicalName s <> "AllScope"
+        xs  -> foldMap named xs <> "Scope"
+  where
+    breakParts =
+          concatMap (Text.split split)
+        . filter (not . ignore)
+        . Text.split (== '/')
+
+    split x =
+           dot x
+        || separator x
+
+    ignore x =
+           Text.null x
+        || "auth" == x
+        || Text.isPrefixOf "http" x
+        || Text.isPrefixOf "www"  x
+
+    named x
+        | x == lower = pascal
+        | otherwise  = upperHead (upperAcronym (replaceAll x special))
+
+    pascal = toPascal (_sCanonicalName s)
+    lower  = Text.toLower (_sCanonicalName s)
+
+    special =
+        [ ("only",       "Only")
+        , ("manage",     "Manage")
+        , ("devstorage", "Storage")
+        , ("number",     "Number")
+        , ("^yt$",       "youtube")
+        ]

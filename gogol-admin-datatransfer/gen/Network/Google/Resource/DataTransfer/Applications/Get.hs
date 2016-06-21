@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DataTransfer.Applications.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type ApplicationsGetResource =
 -- | Retrieves information about an application for the given application ID.
 --
 -- /See:/ 'applicationsGet' smart constructor.
-newtype ApplicationsGet = ApplicationsGet
+newtype ApplicationsGet = ApplicationsGet'
     { _agApplicationId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ applicationsGet
     :: Int64 -- ^ 'agApplicationId'
     -> ApplicationsGet
 applicationsGet pAgApplicationId_ =
-    ApplicationsGet
+    ApplicationsGet'
     { _agApplicationId = _Coerce # pAgApplicationId_
     }
 
@@ -78,7 +78,10 @@ agApplicationId
 
 instance GoogleRequest ApplicationsGet where
         type Rs ApplicationsGet = Application
-        requestClient ApplicationsGet{..}
+        type Scopes ApplicationsGet =
+             '["https://www.googleapis.com/auth/admin.datatransfer",
+               "https://www.googleapis.com/auth/admin.datatransfer.readonly"]
+        requestClient ApplicationsGet'{..}
           = go _agApplicationId (Just AltJSON)
               dataTransferService
           where go

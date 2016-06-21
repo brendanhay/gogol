@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyConfig.UpdateUserSettings
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type MyConfigUpdateUserSettingsResource =
 -- sub-objects will retain the existing value.
 --
 -- /See:/ 'myConfigUpdateUserSettings' smart constructor.
-newtype MyConfigUpdateUserSettings = MyConfigUpdateUserSettings
+newtype MyConfigUpdateUserSettings = MyConfigUpdateUserSettings'
     { _mcuusPayload :: UserSettings
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ myConfigUpdateUserSettings
     :: UserSettings -- ^ 'mcuusPayload'
     -> MyConfigUpdateUserSettings
 myConfigUpdateUserSettings pMcuusPayload_ =
-    MyConfigUpdateUserSettings
+    MyConfigUpdateUserSettings'
     { _mcuusPayload = pMcuusPayload_
     }
 
@@ -82,7 +82,9 @@ mcuusPayload
 instance GoogleRequest MyConfigUpdateUserSettings
          where
         type Rs MyConfigUpdateUserSettings = UserSettings
-        requestClient MyConfigUpdateUserSettings{..}
+        type Scopes MyConfigUpdateUserSettings =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyConfigUpdateUserSettings'{..}
           = go (Just AltJSON) _mcuusPayload booksService
           where go
                   = buildClient

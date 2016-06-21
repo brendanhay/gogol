@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.Annotations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type MyLibraryAnnotationsListResource =
 -- | Retrieves a list of annotations, possibly filtered.
 --
 -- /See:/ 'myLibraryAnnotationsList' smart constructor.
-data MyLibraryAnnotationsList = MyLibraryAnnotationsList
+data MyLibraryAnnotationsList = MyLibraryAnnotationsList'
     { _mlalContentVersion :: !(Maybe Text)
     , _mlalShowDeleted    :: !(Maybe Bool)
     , _mlalUpdatedMax     :: !(Maybe Text)
@@ -110,7 +110,7 @@ data MyLibraryAnnotationsList = MyLibraryAnnotationsList
 myLibraryAnnotationsList
     :: MyLibraryAnnotationsList
 myLibraryAnnotationsList =
-    MyLibraryAnnotationsList
+    MyLibraryAnnotationsList'
     { _mlalContentVersion = Nothing
     , _mlalShowDeleted = Nothing
     , _mlalUpdatedMax = Nothing
@@ -187,7 +187,9 @@ mlalMaxResults
 
 instance GoogleRequest MyLibraryAnnotationsList where
         type Rs MyLibraryAnnotationsList = Annotations
-        requestClient MyLibraryAnnotationsList{..}
+        type Scopes MyLibraryAnnotationsList =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryAnnotationsList'{..}
           = go _mlalContentVersion _mlalShowDeleted
               _mlalUpdatedMax
               _mlalUpdatedMin

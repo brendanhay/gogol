@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Buckets.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type BucketsUpdateResource =
 -- | Updates a bucket.
 --
 -- /See:/ 'bucketsUpdate' smart constructor.
-data BucketsUpdate = BucketsUpdate
+data BucketsUpdate = BucketsUpdate'
     { _buIfMetagenerationMatch      :: !(Maybe (Textual Int64))
     , _buPredefinedACL              :: !(Maybe BucketsUpdatePredefinedACL)
     , _buBucket                     :: !Text
@@ -99,7 +99,7 @@ bucketsUpdate
     -> Bucket -- ^ 'buPayload'
     -> BucketsUpdate
 bucketsUpdate pBuBucket_ pBuPayload_ =
-    BucketsUpdate
+    BucketsUpdate'
     { _buIfMetagenerationMatch = Nothing
     , _buPredefinedACL = Nothing
     , _buBucket = pBuBucket_
@@ -153,7 +153,10 @@ buProjection
 
 instance GoogleRequest BucketsUpdate where
         type Rs BucketsUpdate = Bucket
-        requestClient BucketsUpdate{..}
+        type Scopes BucketsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient BucketsUpdate'{..}
           = go _buBucket _buIfMetagenerationMatch
               _buPredefinedACL
               _buPredefinedDefaultObjectACL

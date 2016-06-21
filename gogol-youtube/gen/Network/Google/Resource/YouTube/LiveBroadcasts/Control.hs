@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.LiveBroadcasts.Control
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type LiveBroadcastsControlResource =
 -- stream.
 --
 -- /See:/ 'liveBroadcastsControl' smart constructor.
-data LiveBroadcastsControl = LiveBroadcastsControl
+data LiveBroadcastsControl = LiveBroadcastsControl'
     { _lbcPart                          :: !Text
     , _lbcOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbcOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -99,7 +99,7 @@ liveBroadcastsControl
     -> Text -- ^ 'lbcId'
     -> LiveBroadcastsControl
 liveBroadcastsControl pLbcPart_ pLbcId_ =
-    LiveBroadcastsControl
+    LiveBroadcastsControl'
     { _lbcPart = pLbcPart_
     , _lbcOnBehalfOfContentOwner = Nothing
     , _lbcOnBehalfOfContentOwnerChannel = Nothing
@@ -190,7 +190,10 @@ lbcOffSetTimeMs
 
 instance GoogleRequest LiveBroadcastsControl where
         type Rs LiveBroadcastsControl = LiveBroadcast
-        requestClient LiveBroadcastsControl{..}
+        type Scopes LiveBroadcastsControl =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient LiveBroadcastsControl'{..}
           = go (Just _lbcId) (Just _lbcPart)
               _lbcOnBehalfOfContentOwner
               _lbcOnBehalfOfContentOwnerChannel

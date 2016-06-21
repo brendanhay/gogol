@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Partners.UserStates.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -88,7 +88,7 @@ type UserStatesListResource =
 -- | Lists states for current user.
 --
 -- /See:/ 'userStatesList' smart constructor.
-data UserStatesList = UserStatesList
+data UserStatesList = UserStatesList'
     { _uslXgafv                                       :: !(Maybe Text)
     , _uslUploadProtocol                              :: !(Maybe Text)
     , _uslPp                                          :: !Bool
@@ -139,7 +139,7 @@ data UserStatesList = UserStatesList
 userStatesList
     :: UserStatesList
 userStatesList =
-    UserStatesList
+    UserStatesList'
     { _uslXgafv = Nothing
     , _uslUploadProtocol = Nothing
     , _uslPp = True
@@ -249,7 +249,8 @@ uslCallback
 
 instance GoogleRequest UserStatesList where
         type Rs UserStatesList = ListUserStatesResponse
-        requestClient UserStatesList{..}
+        type Scopes UserStatesList = '[]
+        requestClient UserStatesList'{..}
           = go _uslXgafv _uslUploadProtocol (Just _uslPp)
               _uslAccessToken
               _uslUploadType

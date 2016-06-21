@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accounttax.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type AccounttaxListResource =
 -- account.
 --
 -- /See:/ 'accounttaxList' smart constructor.
-data AccounttaxList = AccounttaxList
+data AccounttaxList = AccounttaxList'
     { _allMerchantId :: !(Textual Word64)
     , _allPageToken  :: !(Maybe Text)
     , _allMaxResults :: !(Maybe (Textual Word32))
@@ -77,7 +77,7 @@ accounttaxList
     :: Word64 -- ^ 'allMerchantId'
     -> AccounttaxList
 accounttaxList pAllMerchantId_ =
-    AccounttaxList
+    AccounttaxList'
     { _allMerchantId = _Coerce # pAllMerchantId_
     , _allPageToken = Nothing
     , _allMaxResults = Nothing
@@ -105,7 +105,9 @@ allMaxResults
 
 instance GoogleRequest AccounttaxList where
         type Rs AccounttaxList = AccounttaxListResponse
-        requestClient AccounttaxList{..}
+        type Scopes AccounttaxList =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccounttaxList'{..}
           = go _allMerchantId _allPageToken _allMaxResults
               (Just AltJSON)
               shoppingContentService

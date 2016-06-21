@@ -14,16 +14,19 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Variants.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a list of variants matching the criteria. Implements
+-- Gets a list of variants matching the criteria. For the definitions of
+-- variants and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchVariants](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L126).
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.search@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.search@.
 module Network.Google.Resource.Genomics.Variants.Search
     (
     -- * REST Resource
@@ -64,11 +67,14 @@ type VariantsSearchResource =
                            ReqBody '[JSON] SearchVariantsRequest :>
                              Post '[JSON] SearchVariantsResponse
 
--- | Gets a list of variants matching the criteria. Implements
+-- | Gets a list of variants matching the criteria. For the definitions of
+-- variants and other genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchVariants](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L126).
 --
 -- /See:/ 'variantsSearch' smart constructor.
-data VariantsSearch = VariantsSearch
+data VariantsSearch = VariantsSearch'
     { _vsXgafv          :: !(Maybe Text)
     , _vsUploadProtocol :: !(Maybe Text)
     , _vsPp             :: !Bool
@@ -102,7 +108,7 @@ variantsSearch
     :: SearchVariantsRequest -- ^ 'vsPayload'
     -> VariantsSearch
 variantsSearch pVsPayload_ =
-    VariantsSearch
+    VariantsSearch'
     { _vsXgafv = Nothing
     , _vsUploadProtocol = Nothing
     , _vsPp = True
@@ -156,7 +162,11 @@ vsCallback
 
 instance GoogleRequest VariantsSearch where
         type Rs VariantsSearch = SearchVariantsResponse
-        requestClient VariantsSearch{..}
+        type Scopes VariantsSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient VariantsSearch'{..}
           = go _vsXgafv _vsUploadProtocol (Just _vsPp)
               _vsAccessToken
               _vsUploadType

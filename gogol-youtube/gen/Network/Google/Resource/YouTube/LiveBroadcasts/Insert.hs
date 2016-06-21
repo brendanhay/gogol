@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.LiveBroadcasts.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type LiveBroadcastsInsertResource =
 -- | Creates a broadcast.
 --
 -- /See:/ 'liveBroadcastsInsert' smart constructor.
-data LiveBroadcastsInsert = LiveBroadcastsInsert
+data LiveBroadcastsInsert = LiveBroadcastsInsert'
     { _lbiPart                          :: !Text
     , _lbiPayload                       :: !LiveBroadcast
     , _lbiOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -81,7 +81,7 @@ liveBroadcastsInsert
     -> LiveBroadcast -- ^ 'lbiPayload'
     -> LiveBroadcastsInsert
 liveBroadcastsInsert pLbiPart_ pLbiPayload_ =
-    LiveBroadcastsInsert
+    LiveBroadcastsInsert'
     { _lbiPart = pLbiPart_
     , _lbiPayload = pLbiPayload_
     , _lbiOnBehalfOfContentOwner = Nothing
@@ -139,7 +139,10 @@ lbiOnBehalfOfContentOwnerChannel
 
 instance GoogleRequest LiveBroadcastsInsert where
         type Rs LiveBroadcastsInsert = LiveBroadcast
-        requestClient LiveBroadcastsInsert{..}
+        type Scopes LiveBroadcastsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl"]
+        requestClient LiveBroadcastsInsert'{..}
           = go (Just _lbiPart) _lbiOnBehalfOfContentOwner
               _lbiOnBehalfOfContentOwnerChannel
               (Just AltJSON)

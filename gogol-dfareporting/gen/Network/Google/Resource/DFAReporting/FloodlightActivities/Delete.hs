@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesDelete' request conforms to.
 type FloodlightActivitiesDeleteResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>
@@ -54,7 +54,7 @@ type FloodlightActivitiesDeleteResource =
 -- | Deletes an existing floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesDelete' smart constructor.
-data FloodlightActivitiesDelete = FloodlightActivitiesDelete
+data FloodlightActivitiesDelete = FloodlightActivitiesDelete'
     { _fadProFileId :: !(Textual Int64)
     , _fadId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ floodlightActivitiesDelete
     -> Int64 -- ^ 'fadId'
     -> FloodlightActivitiesDelete
 floodlightActivitiesDelete pFadProFileId_ pFadId_ =
-    FloodlightActivitiesDelete
+    FloodlightActivitiesDelete'
     { _fadProFileId = _Coerce # pFadProFileId_
     , _fadId = _Coerce # pFadId_
     }
@@ -90,7 +90,9 @@ fadId
 instance GoogleRequest FloodlightActivitiesDelete
          where
         type Rs FloodlightActivitiesDelete = ()
-        requestClient FloodlightActivitiesDelete{..}
+        type Scopes FloodlightActivitiesDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightActivitiesDelete'{..}
           = go _fadProFileId _fadId (Just AltJSON)
               dFAReportingService
           where go

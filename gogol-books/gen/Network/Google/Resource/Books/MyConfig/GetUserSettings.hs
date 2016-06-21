@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyConfig.GetUserSettings
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,18 +50,20 @@ type MyConfigGetUserSettingsResource =
 --
 -- /See:/ 'myConfigGetUserSettings' smart constructor.
 data MyConfigGetUserSettings =
-    MyConfigGetUserSettings
+    MyConfigGetUserSettings'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyConfigGetUserSettings' with the minimum fields required to make a request.
 --
 myConfigGetUserSettings
     :: MyConfigGetUserSettings
-myConfigGetUserSettings = MyConfigGetUserSettings
+myConfigGetUserSettings = MyConfigGetUserSettings'
 
 instance GoogleRequest MyConfigGetUserSettings where
         type Rs MyConfigGetUserSettings = UserSettings
-        requestClient MyConfigGetUserSettings{}
+        type Scopes MyConfigGetUserSettings =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyConfigGetUserSettings'{}
           = go (Just AltJSON) booksService
           where go
                   = buildClient

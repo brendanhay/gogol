@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.Accounts.AdClients.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsAdClientsListResource =
 -- | List all hosted ad clients in the specified hosted account.
 --
 -- /See:/ 'accountsAdClientsList' smart constructor.
-data AccountsAdClientsList = AccountsAdClientsList
+data AccountsAdClientsList = AccountsAdClientsList'
     { _aaclAccountId  :: !Text
     , _aaclPageToken  :: !(Maybe Text)
     , _aaclMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ accountsAdClientsList
     :: Text -- ^ 'aaclAccountId'
     -> AccountsAdClientsList
 accountsAdClientsList pAaclAccountId_ =
-    AccountsAdClientsList
+    AccountsAdClientsList'
     { _aaclAccountId = pAaclAccountId_
     , _aaclPageToken = Nothing
     , _aaclMaxResults = Nothing
@@ -105,7 +105,9 @@ aaclMaxResults
 
 instance GoogleRequest AccountsAdClientsList where
         type Rs AccountsAdClientsList = AdClients
-        requestClient AccountsAdClientsList{..}
+        type Scopes AccountsAdClientsList =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AccountsAdClientsList'{..}
           = go _aaclAccountId _aaclPageToken _aaclMaxResults
               (Just AltJSON)
               adSenseHostService

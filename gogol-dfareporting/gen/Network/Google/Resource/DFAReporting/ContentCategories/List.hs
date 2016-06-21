@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.ContentCategories.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'ContentCategoriesList' request conforms to.
 type ContentCategoriesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "contentCategories" :>
@@ -67,7 +67,7 @@ type ContentCategoriesListResource =
 -- | Retrieves a list of content categories, possibly filtered.
 --
 -- /See:/ 'contentCategoriesList' smart constructor.
-data ContentCategoriesList = ContentCategoriesList
+data ContentCategoriesList = ContentCategoriesList'
     { _cclSearchString :: !(Maybe Text)
     , _cclIds          :: !(Maybe [Textual Int64])
     , _cclProFileId    :: !(Textual Int64)
@@ -98,7 +98,7 @@ contentCategoriesList
     :: Int64 -- ^ 'cclProFileId'
     -> ContentCategoriesList
 contentCategoriesList pCclProFileId_ =
-    ContentCategoriesList
+    ContentCategoriesList'
     { _cclSearchString = Nothing
     , _cclIds = Nothing
     , _cclProFileId = _Coerce # pCclProFileId_
@@ -158,7 +158,9 @@ cclMaxResults
 instance GoogleRequest ContentCategoriesList where
         type Rs ContentCategoriesList =
              ContentCategoriesListResponse
-        requestClient ContentCategoriesList{..}
+        type Scopes ContentCategoriesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ContentCategoriesList'{..}
           = go _cclProFileId _cclSearchString
               (_cclIds ^. _Default)
               _cclSortOrder

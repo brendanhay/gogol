@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.CustomDimensions.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ManagementCustomDimensionsUpdateResource =
 -- | Updates an existing custom dimension.
 --
 -- /See:/ 'managementCustomDimensionsUpdate' smart constructor.
-data ManagementCustomDimensionsUpdate = ManagementCustomDimensionsUpdate
+data ManagementCustomDimensionsUpdate = ManagementCustomDimensionsUpdate'
     { _mcduWebPropertyId               :: !Text
     , _mcduIgnoreCustomDataSourceLinks :: !Bool
     , _mcduPayload                     :: !CustomDimension
@@ -91,7 +91,7 @@ managementCustomDimensionsUpdate
     -> Text -- ^ 'mcduCustomDimensionId'
     -> ManagementCustomDimensionsUpdate
 managementCustomDimensionsUpdate pMcduWebPropertyId_ pMcduPayload_ pMcduAccountId_ pMcduCustomDimensionId_ =
-    ManagementCustomDimensionsUpdate
+    ManagementCustomDimensionsUpdate'
     { _mcduWebPropertyId = pMcduWebPropertyId_
     , _mcduIgnoreCustomDataSourceLinks = False
     , _mcduPayload = pMcduPayload_
@@ -133,7 +133,9 @@ instance GoogleRequest
          ManagementCustomDimensionsUpdate where
         type Rs ManagementCustomDimensionsUpdate =
              CustomDimension
-        requestClient ManagementCustomDimensionsUpdate{..}
+        type Scopes ManagementCustomDimensionsUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementCustomDimensionsUpdate'{..}
           = go _mcduAccountId _mcduWebPropertyId
               _mcduCustomDimensionId
               (Just _mcduIgnoreCustomDataSourceLinks)

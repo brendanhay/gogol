@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.Applications.Played
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -33,6 +33,8 @@ module Network.Google.Resource.Games.Applications.Played
     , applicationsPlayed
     , ApplicationsPlayed
 
+    -- * Request Lenses
+    , apConsistencyToken
     ) where
 
 import           Network.Google.Games.Types
@@ -45,26 +47,43 @@ type ApplicationsPlayedResource =
        "v1" :>
          "applications" :>
            "played" :>
-             QueryParam "alt" AltJSON :> Post '[JSON] ()
+             QueryParam "consistencyToken" (Textual Int64) :>
+               QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Indicate that the the currently authenticated user is playing your
 -- application.
 --
 -- /See:/ 'applicationsPlayed' smart constructor.
-data ApplicationsPlayed =
-    ApplicationsPlayed
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ApplicationsPlayed = ApplicationsPlayed'
+    { _apConsistencyToken :: Maybe (Textual Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsPlayed' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apConsistencyToken'
 applicationsPlayed
     :: ApplicationsPlayed
-applicationsPlayed = ApplicationsPlayed
+applicationsPlayed =
+    ApplicationsPlayed'
+    { _apConsistencyToken = Nothing
+    }
+
+-- | The last-seen mutation timestamp.
+apConsistencyToken :: Lens' ApplicationsPlayed (Maybe Int64)
+apConsistencyToken
+  = lens _apConsistencyToken
+      (\ s a -> s{_apConsistencyToken = a})
+      . mapping _Coerce
 
 instance GoogleRequest ApplicationsPlayed where
         type Rs ApplicationsPlayed = ()
-        requestClient ApplicationsPlayed{}
-          = go (Just AltJSON) gamesService
+        type Scopes ApplicationsPlayed =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient ApplicationsPlayed'{..}
+          = go _apConsistencyToken (Just AltJSON) gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy ApplicationsPlayedResource)

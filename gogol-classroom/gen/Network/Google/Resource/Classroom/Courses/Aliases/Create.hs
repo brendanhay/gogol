@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Aliases.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -74,7 +74,7 @@ type CoursesAliasesCreateResource =
 -- does not exist. * \`ALREADY_EXISTS\` if the alias already exists.
 --
 -- /See:/ 'coursesAliasesCreate' smart constructor.
-data CoursesAliasesCreate = CoursesAliasesCreate
+data CoursesAliasesCreate = CoursesAliasesCreate'
     { _cacXgafv          :: !(Maybe Text)
     , _cacUploadProtocol :: !(Maybe Text)
     , _cacPp             :: !Bool
@@ -112,7 +112,7 @@ coursesAliasesCreate
     -> CourseAlias -- ^ 'cacPayload'
     -> CoursesAliasesCreate
 coursesAliasesCreate pCacCourseId_ pCacPayload_ =
-    CoursesAliasesCreate
+    CoursesAliasesCreate'
     { _cacXgafv = Nothing
     , _cacUploadProtocol = Nothing
     , _cacPp = True
@@ -174,7 +174,9 @@ cacCallback
 
 instance GoogleRequest CoursesAliasesCreate where
         type Rs CoursesAliasesCreate = CourseAlias
-        requestClient CoursesAliasesCreate{..}
+        type Scopes CoursesAliasesCreate =
+             '["https://www.googleapis.com/auth/classroom.courses"]
+        requestClient CoursesAliasesCreate'{..}
           = go _cacCourseId _cacXgafv _cacUploadProtocol
               (Just _cacPp)
               _cacAccessToken

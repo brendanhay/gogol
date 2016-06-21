@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.DeploymentManager.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,18 +24,18 @@ data DeploymentsUpdateCreatePolicy
       -- ^ @ACQUIRE@
     | CreateOrAcquire
       -- ^ @CREATE_OR_ACQUIRE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeploymentsUpdateCreatePolicy
 
-instance FromText DeploymentsUpdateCreatePolicy where
-    fromText = \case
-        "ACQUIRE" -> Just Acquire
-        "CREATE_OR_ACQUIRE" -> Just CreateOrAcquire
-        _ -> Nothing
+instance FromHttpApiData DeploymentsUpdateCreatePolicy where
+    parseQueryParam = \case
+        "ACQUIRE" -> Right Acquire
+        "CREATE_OR_ACQUIRE" -> Right CreateOrAcquire
+        x -> Left ("Unable to parse DeploymentsUpdateCreatePolicy from: " <> x)
 
-instance ToText DeploymentsUpdateCreatePolicy where
-    toText = \case
+instance ToHttpApiData DeploymentsUpdateCreatePolicy where
+    toQueryParam = \case
         Acquire -> "ACQUIRE"
         CreateOrAcquire -> "CREATE_OR_ACQUIRE"
 
@@ -51,18 +51,18 @@ data DeploymentsUpdateDeletePolicy
       -- ^ @ABANDON@
     | Delete'
       -- ^ @DELETE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeploymentsUpdateDeletePolicy
 
-instance FromText DeploymentsUpdateDeletePolicy where
-    fromText = \case
-        "ABANDON" -> Just Abandon
-        "DELETE" -> Just Delete'
-        _ -> Nothing
+instance FromHttpApiData DeploymentsUpdateDeletePolicy where
+    parseQueryParam = \case
+        "ABANDON" -> Right Abandon
+        "DELETE" -> Right Delete'
+        x -> Left ("Unable to parse DeploymentsUpdateDeletePolicy from: " <> x)
 
-instance ToText DeploymentsUpdateDeletePolicy where
-    toText = \case
+instance ToHttpApiData DeploymentsUpdateDeletePolicy where
+    toQueryParam = \case
         Abandon -> "ABANDON"
         Delete' -> "DELETE"
 
@@ -78,18 +78,18 @@ data DeploymentsPatchDeletePolicy
       -- ^ @ABANDON@
     | DPDPDelete'
       -- ^ @DELETE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeploymentsPatchDeletePolicy
 
-instance FromText DeploymentsPatchDeletePolicy where
-    fromText = \case
-        "ABANDON" -> Just DPDPAbandon
-        "DELETE" -> Just DPDPDelete'
-        _ -> Nothing
+instance FromHttpApiData DeploymentsPatchDeletePolicy where
+    parseQueryParam = \case
+        "ABANDON" -> Right DPDPAbandon
+        "DELETE" -> Right DPDPDelete'
+        x -> Left ("Unable to parse DeploymentsPatchDeletePolicy from: " <> x)
 
-instance ToText DeploymentsPatchDeletePolicy where
-    toText = \case
+instance ToHttpApiData DeploymentsPatchDeletePolicy where
+    toQueryParam = \case
         DPDPAbandon -> "ABANDON"
         DPDPDelete' -> "DELETE"
 
@@ -105,18 +105,18 @@ data DeploymentsPatchCreatePolicy
       -- ^ @ACQUIRE@
     | DPCPCreateOrAcquire
       -- ^ @CREATE_OR_ACQUIRE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeploymentsPatchCreatePolicy
 
-instance FromText DeploymentsPatchCreatePolicy where
-    fromText = \case
-        "ACQUIRE" -> Just DPCPAcquire
-        "CREATE_OR_ACQUIRE" -> Just DPCPCreateOrAcquire
-        _ -> Nothing
+instance FromHttpApiData DeploymentsPatchCreatePolicy where
+    parseQueryParam = \case
+        "ACQUIRE" -> Right DPCPAcquire
+        "CREATE_OR_ACQUIRE" -> Right DPCPCreateOrAcquire
+        x -> Left ("Unable to parse DeploymentsPatchCreatePolicy from: " <> x)
 
-instance ToText DeploymentsPatchCreatePolicy where
-    toText = \case
+instance ToHttpApiData DeploymentsPatchCreatePolicy where
+    toQueryParam = \case
         DPCPAcquire -> "ACQUIRE"
         DPCPCreateOrAcquire -> "CREATE_OR_ACQUIRE"
 

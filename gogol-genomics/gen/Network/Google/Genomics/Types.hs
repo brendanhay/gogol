@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Genomics.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,14 +22,26 @@ module Network.Google.Genomics.Types
     -- * OAuth Scopes
     , genomicsScope
     , cloudPlatformScope
-    , genomicsReadonlyScope
-    , devstorageReadWriteScope
-    , bigqueryScope
+    , genomicsReadOnlyScope
+    , storageReadWriteScope
+    , bigQueryScope
+
+    -- * ImportVariantsRequestInfoMergeConfig
+    , ImportVariantsRequestInfoMergeConfig
+    , importVariantsRequestInfoMergeConfig
+    , ivrimcAddtional
 
     -- * ReadInfo
     , ReadInfo
     , readInfo
     , riAddtional
+
+    -- * Exon
+    , Exon
+    , exon
+    , eStart
+    , eEnd
+    , eFrame
 
     -- * Status
     , Status
@@ -58,6 +71,22 @@ module Network.Google.Genomics.Types
     , vFilter
     , vInfo
     , vCalls
+
+    -- * Annotation
+    , Annotation
+    , annotation
+    , aVariant
+    , aAnnotationSetId
+    , aStart
+    , aReverseStrand
+    , aReferenceId
+    , aReferenceName
+    , aName
+    , aEnd
+    , aId
+    , aType
+    , aTranscript
+    , aInfo
 
     -- * ListBasesResponse
     , ListBasesResponse
@@ -118,6 +147,18 @@ module Network.Google.Genomics.Types
     , vcCallSetId
     , vcGenotype
     , vcInfo
+
+    -- * BatchCreateAnnotationsRequest
+    , BatchCreateAnnotationsRequest
+    , batchCreateAnnotationsRequest
+    , bcarAnnotations
+
+    -- * MergeVariantsRequest
+    , MergeVariantsRequest
+    , mergeVariantsRequest
+    , mvrVariants
+    , mvrVariantSetId
+    , mvrInfoMergeConfig
 
     -- * ReadGroup
     , ReadGroup
@@ -188,6 +229,17 @@ module Network.Google.Genomics.Types
     , cbRange
     , cbMeanCoverage
 
+    -- * VariantAnnotation
+    , VariantAnnotation
+    , variantAnnotation
+    , vaEffect
+    , vaClinicalSignificance
+    , vaAlternateBases
+    , vaGeneId
+    , vaConditions
+    , vaType
+    , vaTranscriptIds
+
     -- * SearchReadGroupSetsRequest
     , SearchReadGroupSetsRequest
     , searchReadGroupSetsRequest
@@ -217,10 +269,20 @@ module Network.Google.Genomics.Types
     , readGroupInfo
     , rgiAddtional
 
+    -- * StreamVariantsResponse
+    , StreamVariantsResponse
+    , streamVariantsResponse
+    , svrVariants
+
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
+
+    -- * StreamReadsResponse
+    , StreamReadsResponse
+    , streamReadsResponse
+    , srrAlignments
 
     -- * SearchCallSetsResponse
     , SearchCallSetsResponse
@@ -249,6 +311,11 @@ module Network.Google.Genomics.Types
     , operationMetadataRequest
     , omrAddtional
 
+    -- * MergeVariantsRequestInfoMergeConfig
+    , MergeVariantsRequestInfoMergeConfig
+    , mergeVariantsRequestInfoMergeConfig
+    , mvrimcAddtional
+
     -- * VariantInfo
     , VariantInfo
     , variantInfo
@@ -269,11 +336,51 @@ module Network.Google.Genomics.Types
     , svsrPageToken
     , svsrPageSize
 
+    -- * AnnotationInfo
+    , AnnotationInfo
+    , annotationInfo
+    , aiAddtional
+
+    -- * SearchAnnotationsResponse
+    , SearchAnnotationsResponse
+    , searchAnnotationsResponse
+    , sarAnnotations
+    , sarNextPageToken
+
+    -- * SearchAnnotationSetsRequest
+    , SearchAnnotationSetsRequest
+    , searchAnnotationSetsRequest
+    , sasrReferenceSetId
+    , sasrTypes
+    , sasrDataSetIds
+    , sasrName
+    , sasrPageToken
+    , sasrPageSize
+
     -- * SearchVariantsResponse
     , SearchVariantsResponse
     , searchVariantsResponse
-    , svrVariants
-    , svrNextPageToken
+    , sVariants
+    , sNextPageToken
+
+    -- * ClinicalCondition
+    , ClinicalCondition
+    , clinicalCondition
+    , ccExternalIds
+    , ccNames
+    , ccConceptId
+    , ccOmimId
+
+    -- * StreamReadsRequest
+    , StreamReadsRequest
+    , streamReadsRequest
+    , sShard
+    , sReadGroupSetId
+    , sTotalShards
+    , sStart
+    , sReferenceName
+    , sEnd
+    , sProjectId
 
     -- * SearchCallSetsRequest
     , SearchCallSetsRequest
@@ -283,11 +390,17 @@ module Network.Google.Genomics.Types
     , scsrVariantSetIds
     , scsrPageSize
 
+    -- * Entry
+    , Entry
+    , entry
+    , eStatus
+    , eAnnotation
+
     -- * SearchReadsResponse
     , SearchReadsResponse
     , searchReadsResponse
-    , sNextPageToken
-    , sAlignments
+    , seaNextPageToken
+    , seaAlignments
 
     -- * Program
     , Program
@@ -306,6 +419,17 @@ module Network.Google.Genomics.Types
     , sAccessions
     , sPageToken
     , sPageSize
+
+    -- * BatchCreateAnnotationsResponse
+    , BatchCreateAnnotationsResponse
+    , batchCreateAnnotationsResponse
+    , bcarEntries
+
+    -- * CodingSequence
+    , CodingSequence
+    , codingSequence
+    , csStart
+    , csEnd
 
     -- * SearchReferenceSetsResponse
     , SearchReferenceSetsResponse
@@ -367,13 +491,27 @@ module Network.Google.Genomics.Types
     , laMAppingQuality
     , laPosition
 
+    -- * AnnotationSet
+    , AnnotationSet
+    , annotationSet
+    , asReferenceSetId
+    , asName
+    , asDataSetId
+    , asId
+    , asType
+    , asSourceURI
+    , asInfo
+
     -- * VariantSet
     , VariantSet
     , variantSet
+    , vsReferenceSetId
+    , vsName
     , vsDataSetId
     , vsReferenceBounds
     , vsMetadata
     , vsId
+    , vsDescription
 
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -399,8 +537,15 @@ module Network.Google.Genomics.Types
     , importVariantsRequest
     , ivrVariantSetId
     , ivrFormat
+    , ivrInfoMergeConfig
     , ivrNormalizeReferenceNames
     , ivrSourceURIs
+
+    -- * ExternalId
+    , ExternalId
+    , externalId
+    , eiSourceName
+    , eiId
 
     -- * CigarUnit
     , CigarUnit
@@ -429,9 +574,21 @@ module Network.Google.Genomics.Types
     , OperationMetadata
     , operationMetadata
     , omEvents
+    , omEndTime
     , omProjectId
     , omCreateTime
     , omRequest
+
+    -- * SearchAnnotationsRequest
+    , SearchAnnotationsRequest
+    , searchAnnotationsRequest
+    , sarStart
+    , sarReferenceId
+    , sarReferenceName
+    , sarEnd
+    , sarPageToken
+    , sarAnnotationSetIds
+    , sarPageSize
 
     -- * SearchVariantSetsResponse
     , SearchVariantSetsResponse
@@ -452,6 +609,17 @@ module Network.Google.Genomics.Types
     , svrVariantSetIds
     , svrPageSize
 
+    -- * AnnotationSetInfo
+    , AnnotationSetInfo
+    , annotationSetInfo
+    , asiAddtional
+
+    -- * SearchAnnotationSetsResponse
+    , SearchAnnotationSetsResponse
+    , searchAnnotationSetsResponse
+    , sasrNextPageToken
+    , sasrAnnotationSets
+
     -- * CallSetInfo
     , CallSetInfo
     , callSetInfo
@@ -467,10 +635,27 @@ module Network.Google.Genomics.Types
     , operationResponse
     , orAddtional
 
+    -- * Transcript
+    , Transcript
+    , transcript
+    , tGeneId
+    , tCodingSequence
+    , tExons
+
     -- * OperationEvent
     , OperationEvent
     , operationEvent
     , oeDescription
+
+    -- * StreamVariantsRequest
+    , StreamVariantsRequest
+    , streamVariantsRequest
+    , strVariantSetId
+    , strStart
+    , strCallSetIds
+    , strReferenceName
+    , strEnd
+    , strProjectId
 
     -- * ReferenceBound
     , ReferenceBound
@@ -524,27 +709,27 @@ import           Network.Google.Genomics.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Genomics API. This contains the host and root path used as a starting point for constructing service requests.
-genomicsService :: Service
+genomicsService :: ServiceConfig
 genomicsService
   = defaultService (ServiceId "genomics:v1")
       "genomics.googleapis.com"
 
 -- | View and manage Genomics data
-genomicsScope :: OAuthScope
-genomicsScope = "https://www.googleapis.com/auth/genomics";
+genomicsScope :: Proxy '["https://www.googleapis.com/auth/genomics"]
+genomicsScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View Genomics data
-genomicsReadonlyScope :: OAuthScope
-genomicsReadonlyScope = "https://www.googleapis.com/auth/genomics.readonly";
+genomicsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/genomics.readonly"]
+genomicsReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: OAuthScope
-devstorageReadWriteScope = "https://www.googleapis.com/auth/devstorage.read_write";
+storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+storageReadWriteScope = Proxy;
 
 -- | View and manage your data in Google BigQuery
-bigqueryScope :: OAuthScope
-bigqueryScope = "https://www.googleapis.com/auth/bigquery";
+bigQueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
+bigQueryScope = Proxy;

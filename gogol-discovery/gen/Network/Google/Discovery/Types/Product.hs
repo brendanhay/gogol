@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.Discovery.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | The schema for the response.
 --
 -- /See:/ 'restMethodResponse' smart constructor.
-newtype RestMethodResponse = RestMethodResponse
+newtype RestMethodResponse = RestMethodResponse'
     { _rmrRef :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -35,7 +35,7 @@ newtype RestMethodResponse = RestMethodResponse
 restMethodResponse
     :: RestMethodResponse
 restMethodResponse =
-    RestMethodResponse
+    RestMethodResponse'
     { _rmrRef = Nothing
     }
 
@@ -46,16 +46,16 @@ rmrRef = lens _rmrRef (\ s a -> s{_rmrRef = a})
 instance FromJSON RestMethodResponse where
         parseJSON
           = withObject "RestMethodResponse"
-              (\ o -> RestMethodResponse <$> (o .:? "$ref"))
+              (\ o -> RestMethodResponse' <$> (o .:? "$ref"))
 
 instance ToJSON RestMethodResponse where
-        toJSON RestMethodResponse{..}
+        toJSON RestMethodResponse'{..}
           = object (catMaybes [("$ref" .=) <$> _rmrRef])
 
 -- | Common parameters that apply across all apis.
 --
 -- /See:/ 'restDescriptionParameters' smart constructor.
-newtype RestDescriptionParameters = RestDescriptionParameters
+newtype RestDescriptionParameters = RestDescriptionParameters'
     { _rdpAddtional :: HashMap Text JSONSchema
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ restDescriptionParameters
     :: HashMap Text JSONSchema -- ^ 'rdpAddtional'
     -> RestDescriptionParameters
 restDescriptionParameters pRdpAddtional_ =
-    RestDescriptionParameters
+    RestDescriptionParameters'
     { _rdpAddtional = _Coerce # pRdpAddtional_
     }
 
@@ -82,14 +82,14 @@ instance FromJSON RestDescriptionParameters where
         parseJSON
           = withObject "RestDescriptionParameters"
               (\ o ->
-                 RestDescriptionParameters <$> (parseJSONObject o))
+                 RestDescriptionParameters' <$> (parseJSONObject o))
 
 instance ToJSON RestDescriptionParameters where
         toJSON = toJSON . _rdpAddtional
 
 --
 -- /See:/ 'restMethod' smart constructor.
-data RestMethod = RestMethod
+data RestMethod = RestMethod'
     { _rmSupportsMediaDownload   :: !(Maybe Bool)
     , _rmParameterOrder          :: !(Maybe [Text])
     , _rmMediaUpload             :: !(Maybe RestMethodMediaUpload)
@@ -143,7 +143,7 @@ data RestMethod = RestMethod
 restMethod
     :: RestMethod
 restMethod =
-    RestMethod
+    RestMethod'
     { _rmSupportsMediaDownload = Nothing
     , _rmParameterOrder = Nothing
     , _rmMediaUpload = Nothing
@@ -257,7 +257,7 @@ instance FromJSON RestMethod where
         parseJSON
           = withObject "RestMethod"
               (\ o ->
-                 RestMethod <$>
+                 RestMethod' <$>
                    (o .:? "supportsMediaDownload") <*>
                      (o .:? "parameterOrder" .!= mempty)
                      <*> (o .:? "mediaUpload")
@@ -275,7 +275,7 @@ instance FromJSON RestMethod where
                      <*> (o .:? "request"))
 
 instance ToJSON RestMethod where
-        toJSON RestMethod{..}
+        toJSON RestMethod'{..}
           = object
               (catMaybes
                  [("supportsMediaDownload" .=) <$>
@@ -300,7 +300,7 @@ instance ToJSON RestMethod where
 
 --
 -- /See:/ 'restResource' smart constructor.
-data RestResource = RestResource
+data RestResource = RestResource'
     { _rrResources :: !(Maybe RestResourceResources)
     , _rrMethods   :: !(Maybe RestResourceMethods)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -315,7 +315,7 @@ data RestResource = RestResource
 restResource
     :: RestResource
 restResource =
-    RestResource
+    RestResource'
     { _rrResources = Nothing
     , _rrMethods = Nothing
     }
@@ -334,11 +334,11 @@ instance FromJSON RestResource where
         parseJSON
           = withObject "RestResource"
               (\ o ->
-                 RestResource <$>
+                 RestResource' <$>
                    (o .:? "resources") <*> (o .:? "methods"))
 
 instance ToJSON RestResource where
-        toJSON RestResource{..}
+        toJSON RestResource'{..}
           = object
               (catMaybes
                  [("resources" .=) <$> _rrResources,
@@ -347,7 +347,7 @@ instance ToJSON RestResource where
 -- | Available OAuth 2.0 scopes.
 --
 -- /See:/ 'restDescriptionAuthOAuth2Scopes' smart constructor.
-newtype RestDescriptionAuthOAuth2Scopes = RestDescriptionAuthOAuth2Scopes
+newtype RestDescriptionAuthOAuth2Scopes = RestDescriptionAuthOAuth2Scopes'
     { _rdaoasAddtional :: HashMap Text RestDescriptionAuthOAuth2ScopesAdditional
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -360,7 +360,7 @@ restDescriptionAuthOAuth2Scopes
     :: HashMap Text RestDescriptionAuthOAuth2ScopesAdditional -- ^ 'rdaoasAddtional'
     -> RestDescriptionAuthOAuth2Scopes
 restDescriptionAuthOAuth2Scopes pRdaoasAddtional_ =
-    RestDescriptionAuthOAuth2Scopes
+    RestDescriptionAuthOAuth2Scopes'
     { _rdaoasAddtional = _Coerce # pRdaoasAddtional_
     }
 
@@ -376,7 +376,7 @@ instance FromJSON RestDescriptionAuthOAuth2Scopes
         parseJSON
           = withObject "RestDescriptionAuthOAuth2Scopes"
               (\ o ->
-                 RestDescriptionAuthOAuth2Scopes <$>
+                 RestDescriptionAuthOAuth2Scopes' <$>
                    (parseJSONObject o))
 
 instance ToJSON RestDescriptionAuthOAuth2Scopes where
@@ -385,7 +385,7 @@ instance ToJSON RestDescriptionAuthOAuth2Scopes where
 -- | API-level methods for this API.
 --
 -- /See:/ 'restDescriptionMethods' smart constructor.
-newtype RestDescriptionMethods = RestDescriptionMethods
+newtype RestDescriptionMethods = RestDescriptionMethods'
     { _rdmAddtional :: HashMap Text RestMethod
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -398,7 +398,7 @@ restDescriptionMethods
     :: HashMap Text RestMethod -- ^ 'rdmAddtional'
     -> RestDescriptionMethods
 restDescriptionMethods pRdmAddtional_ =
-    RestDescriptionMethods
+    RestDescriptionMethods'
     { _rdmAddtional = _Coerce # pRdmAddtional_
     }
 
@@ -412,14 +412,14 @@ instance FromJSON RestDescriptionMethods where
         parseJSON
           = withObject "RestDescriptionMethods"
               (\ o ->
-                 RestDescriptionMethods <$> (parseJSONObject o))
+                 RestDescriptionMethods' <$> (parseJSONObject o))
 
 instance ToJSON RestDescriptionMethods where
         toJSON = toJSON . _rdmAddtional
 
 --
 -- /See:/ 'directoryListItemsItem' smart constructor.
-data DirectoryListItemsItem = DirectoryListItemsItem
+data DirectoryListItemsItem = DirectoryListItemsItem'
     { _dliiDiscoveryLink     :: !(Maybe Text)
     , _dliiPreferred         :: !(Maybe Bool)
     , _dliiKind              :: !Text
@@ -464,7 +464,7 @@ data DirectoryListItemsItem = DirectoryListItemsItem
 directoryListItemsItem
     :: DirectoryListItemsItem
 directoryListItemsItem =
-    DirectoryListItemsItem
+    DirectoryListItemsItem'
     { _dliiDiscoveryLink = Nothing
     , _dliiPreferred = Nothing
     , _dliiKind = "discovery#directoryItem"
@@ -547,7 +547,7 @@ instance FromJSON DirectoryListItemsItem where
         parseJSON
           = withObject "DirectoryListItemsItem"
               (\ o ->
-                 DirectoryListItemsItem <$>
+                 DirectoryListItemsItem' <$>
                    (o .:? "discoveryLink") <*> (o .:? "preferred") <*>
                      (o .:? "kind" .!= "discovery#directoryItem")
                      <*> (o .:? "icons")
@@ -561,7 +561,7 @@ instance FromJSON DirectoryListItemsItem where
                      <*> (o .:? "discoveryRestUrl"))
 
 instance ToJSON DirectoryListItemsItem where
-        toJSON DirectoryListItemsItem{..}
+        toJSON DirectoryListItemsItem'{..}
           = object
               (catMaybes
                  [("discoveryLink" .=) <$> _dliiDiscoveryLink,
@@ -579,7 +579,7 @@ instance ToJSON DirectoryListItemsItem where
 -- | Links to 16x16 and 32x32 icons representing the API.
 --
 -- /See:/ 'directoryListItemsItemIcons' smart constructor.
-data DirectoryListItemsItemIcons = DirectoryListItemsItemIcons
+data DirectoryListItemsItemIcons = DirectoryListItemsItemIcons'
     { _dliiiX16 :: !(Maybe Text)
     , _dliiiX32 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -594,7 +594,7 @@ data DirectoryListItemsItemIcons = DirectoryListItemsItemIcons
 directoryListItemsItemIcons
     :: DirectoryListItemsItemIcons
 directoryListItemsItemIcons =
-    DirectoryListItemsItemIcons
+    DirectoryListItemsItemIcons'
     { _dliiiX16 = Nothing
     , _dliiiX32 = Nothing
     }
@@ -611,11 +611,11 @@ instance FromJSON DirectoryListItemsItemIcons where
         parseJSON
           = withObject "DirectoryListItemsItemIcons"
               (\ o ->
-                 DirectoryListItemsItemIcons <$>
+                 DirectoryListItemsItemIcons' <$>
                    (o .:? "x16") <*> (o .:? "x32"))
 
 instance ToJSON DirectoryListItemsItemIcons where
-        toJSON DirectoryListItemsItemIcons{..}
+        toJSON DirectoryListItemsItemIcons'{..}
           = object
               (catMaybes
                  [("x16" .=) <$> _dliiiX16, ("x32" .=) <$> _dliiiX32])
@@ -623,7 +623,7 @@ instance ToJSON DirectoryListItemsItemIcons where
 -- | Sub-resources on this resource.
 --
 -- /See:/ 'restResourceResources' smart constructor.
-newtype RestResourceResources = RestResourceResources
+newtype RestResourceResources = RestResourceResources'
     { _rrrAddtional :: HashMap Text RestResource
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -636,7 +636,7 @@ restResourceResources
     :: HashMap Text RestResource -- ^ 'rrrAddtional'
     -> RestResourceResources
 restResourceResources pRrrAddtional_ =
-    RestResourceResources
+    RestResourceResources'
     { _rrrAddtional = _Coerce # pRrrAddtional_
     }
 
@@ -650,7 +650,7 @@ instance FromJSON RestResourceResources where
         parseJSON
           = withObject "RestResourceResources"
               (\ o ->
-                 RestResourceResources <$> (parseJSONObject o))
+                 RestResourceResources' <$> (parseJSONObject o))
 
 instance ToJSON RestResourceResources where
         toJSON = toJSON . _rrrAddtional
@@ -658,7 +658,7 @@ instance ToJSON RestResourceResources where
 -- | OAuth 2.0 authentication information.
 --
 -- /See:/ 'restDescriptionAuthOAuth2' smart constructor.
-newtype RestDescriptionAuthOAuth2 = RestDescriptionAuthOAuth2
+newtype RestDescriptionAuthOAuth2 = RestDescriptionAuthOAuth2'
     { _rdaoaScopes :: Maybe RestDescriptionAuthOAuth2Scopes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -670,7 +670,7 @@ newtype RestDescriptionAuthOAuth2 = RestDescriptionAuthOAuth2
 restDescriptionAuthOAuth2
     :: RestDescriptionAuthOAuth2
 restDescriptionAuthOAuth2 =
-    RestDescriptionAuthOAuth2
+    RestDescriptionAuthOAuth2'
     { _rdaoaScopes = Nothing
     }
 
@@ -683,16 +683,16 @@ instance FromJSON RestDescriptionAuthOAuth2 where
         parseJSON
           = withObject "RestDescriptionAuthOAuth2"
               (\ o ->
-                 RestDescriptionAuthOAuth2 <$> (o .:? "scopes"))
+                 RestDescriptionAuthOAuth2' <$> (o .:? "scopes"))
 
 instance ToJSON RestDescriptionAuthOAuth2 where
-        toJSON RestDescriptionAuthOAuth2{..}
+        toJSON RestDescriptionAuthOAuth2'{..}
           = object (catMaybes [("scopes" .=) <$> _rdaoaScopes])
 
 -- | The scope value.
 --
 -- /See:/ 'restDescriptionAuthOAuth2ScopesAdditional' smart constructor.
-newtype RestDescriptionAuthOAuth2ScopesAdditional = RestDescriptionAuthOAuth2ScopesAdditional
+newtype RestDescriptionAuthOAuth2ScopesAdditional = RestDescriptionAuthOAuth2ScopesAdditional'
     { _rdaoasaDescription :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -704,7 +704,7 @@ newtype RestDescriptionAuthOAuth2ScopesAdditional = RestDescriptionAuthOAuth2Sco
 restDescriptionAuthOAuth2ScopesAdditional
     :: RestDescriptionAuthOAuth2ScopesAdditional
 restDescriptionAuthOAuth2ScopesAdditional =
-    RestDescriptionAuthOAuth2ScopesAdditional
+    RestDescriptionAuthOAuth2ScopesAdditional'
     { _rdaoasaDescription = Nothing
     }
 
@@ -720,12 +720,12 @@ instance FromJSON
           = withObject
               "RestDescriptionAuthOAuth2ScopesAdditional"
               (\ o ->
-                 RestDescriptionAuthOAuth2ScopesAdditional <$>
+                 RestDescriptionAuthOAuth2ScopesAdditional' <$>
                    (o .:? "description"))
 
 instance ToJSON
          RestDescriptionAuthOAuth2ScopesAdditional where
-        toJSON RestDescriptionAuthOAuth2ScopesAdditional{..}
+        toJSON RestDescriptionAuthOAuth2ScopesAdditional'{..}
           = object
               (catMaybes
                  [("description" .=) <$> _rdaoasaDescription])
@@ -733,7 +733,7 @@ instance ToJSON
 -- | Supports uploading as a single HTTP request.
 --
 -- /See:/ 'restMethodMediaUploadProtocolsSimple' smart constructor.
-data RestMethodMediaUploadProtocolsSimple = RestMethodMediaUploadProtocolsSimple
+data RestMethodMediaUploadProtocolsSimple = RestMethodMediaUploadProtocolsSimple'
     { _rmmupsPath      :: !(Maybe Text)
     , _rmmupsMultiPart :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -748,7 +748,7 @@ data RestMethodMediaUploadProtocolsSimple = RestMethodMediaUploadProtocolsSimple
 restMethodMediaUploadProtocolsSimple
     :: RestMethodMediaUploadProtocolsSimple
 restMethodMediaUploadProtocolsSimple =
-    RestMethodMediaUploadProtocolsSimple
+    RestMethodMediaUploadProtocolsSimple'
     { _rmmupsPath = Nothing
     , _rmmupsMultiPart = True
     }
@@ -770,12 +770,12 @@ instance FromJSON
         parseJSON
           = withObject "RestMethodMediaUploadProtocolsSimple"
               (\ o ->
-                 RestMethodMediaUploadProtocolsSimple <$>
+                 RestMethodMediaUploadProtocolsSimple' <$>
                    (o .:? "path") <*> (o .:? "multipart" .!= True))
 
 instance ToJSON RestMethodMediaUploadProtocolsSimple
          where
-        toJSON RestMethodMediaUploadProtocolsSimple{..}
+        toJSON RestMethodMediaUploadProtocolsSimple'{..}
           = object
               (catMaybes
                  [("path" .=) <$> _rmmupsPath,
@@ -784,7 +784,7 @@ instance ToJSON RestMethodMediaUploadProtocolsSimple
 -- | Links to 16x16 and 32x32 icons representing the API.
 --
 -- /See:/ 'restDescriptionIcons' smart constructor.
-data RestDescriptionIcons = RestDescriptionIcons
+data RestDescriptionIcons = RestDescriptionIcons'
     { _rdiX16 :: !(Maybe Text)
     , _rdiX32 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -799,7 +799,7 @@ data RestDescriptionIcons = RestDescriptionIcons
 restDescriptionIcons
     :: RestDescriptionIcons
 restDescriptionIcons =
-    RestDescriptionIcons
+    RestDescriptionIcons'
     { _rdiX16 = Nothing
     , _rdiX32 = Nothing
     }
@@ -816,11 +816,11 @@ instance FromJSON RestDescriptionIcons where
         parseJSON
           = withObject "RestDescriptionIcons"
               (\ o ->
-                 RestDescriptionIcons <$>
+                 RestDescriptionIcons' <$>
                    (o .:? "x16") <*> (o .:? "x32"))
 
 instance ToJSON RestDescriptionIcons where
-        toJSON RestDescriptionIcons{..}
+        toJSON RestDescriptionIcons'{..}
           = object
               (catMaybes
                  [("x16" .=) <$> _rdiX16, ("x32" .=) <$> _rdiX32])
@@ -830,7 +830,7 @@ instance ToJSON RestDescriptionIcons where
 -- descriminant values to schema names.
 --
 -- /See:/ 'jsonSchemaVariant' smart constructor.
-data JSONSchemaVariant = JSONSchemaVariant
+data JSONSchemaVariant = JSONSchemaVariant'
     { _jsvDiscriminant :: !(Maybe Text)
     , _jsvMap          :: !(Maybe [JSONSchemaVariantMapItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -845,7 +845,7 @@ data JSONSchemaVariant = JSONSchemaVariant
 jsonSchemaVariant
     :: JSONSchemaVariant
 jsonSchemaVariant =
-    JSONSchemaVariant
+    JSONSchemaVariant'
     { _jsvDiscriminant = Nothing
     , _jsvMap = Nothing
     }
@@ -866,11 +866,11 @@ instance FromJSON JSONSchemaVariant where
         parseJSON
           = withObject "JSONSchemaVariant"
               (\ o ->
-                 JSONSchemaVariant <$>
+                 JSONSchemaVariant' <$>
                    (o .:? "discriminant") <*> (o .:? "map" .!= mempty))
 
 instance ToJSON JSONSchemaVariant where
-        toJSON JSONSchemaVariant{..}
+        toJSON JSONSchemaVariant'{..}
           = object
               (catMaybes
                  [("discriminant" .=) <$> _jsvDiscriminant,
@@ -879,7 +879,7 @@ instance ToJSON JSONSchemaVariant where
 -- | Methods on this resource.
 --
 -- /See:/ 'restResourceMethods' smart constructor.
-newtype RestResourceMethods = RestResourceMethods
+newtype RestResourceMethods = RestResourceMethods'
     { _rrmAddtional :: HashMap Text RestMethod
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -892,7 +892,7 @@ restResourceMethods
     :: HashMap Text RestMethod -- ^ 'rrmAddtional'
     -> RestResourceMethods
 restResourceMethods pRrmAddtional_ =
-    RestResourceMethods
+    RestResourceMethods'
     { _rrmAddtional = _Coerce # pRrmAddtional_
     }
 
@@ -905,7 +905,7 @@ rrmAddtional
 instance FromJSON RestResourceMethods where
         parseJSON
           = withObject "RestResourceMethods"
-              (\ o -> RestResourceMethods <$> (parseJSONObject o))
+              (\ o -> RestResourceMethods' <$> (parseJSONObject o))
 
 instance ToJSON RestResourceMethods where
         toJSON = toJSON . _rrmAddtional
@@ -913,7 +913,7 @@ instance ToJSON RestResourceMethods where
 -- | Authentication information.
 --
 -- /See:/ 'restDescriptionAuth' smart constructor.
-newtype RestDescriptionAuth = RestDescriptionAuth
+newtype RestDescriptionAuth = RestDescriptionAuth'
     { _rdaOAuth2 :: Maybe RestDescriptionAuthOAuth2
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -925,7 +925,7 @@ newtype RestDescriptionAuth = RestDescriptionAuth
 restDescriptionAuth
     :: RestDescriptionAuth
 restDescriptionAuth =
-    RestDescriptionAuth
+    RestDescriptionAuth'
     { _rdaOAuth2 = Nothing
     }
 
@@ -937,15 +937,15 @@ rdaOAuth2
 instance FromJSON RestDescriptionAuth where
         parseJSON
           = withObject "RestDescriptionAuth"
-              (\ o -> RestDescriptionAuth <$> (o .:? "oauth2"))
+              (\ o -> RestDescriptionAuth' <$> (o .:? "oauth2"))
 
 instance ToJSON RestDescriptionAuth where
-        toJSON RestDescriptionAuth{..}
+        toJSON RestDescriptionAuth'{..}
           = object (catMaybes [("oauth2" .=) <$> _rdaOAuth2])
 
 --
 -- /See:/ 'restDescription' smart constructor.
-data RestDescription = RestDescription
+data RestDescription = RestDescription'
     { _rdEtag                      :: !(Maybe Text)
     , _rdSchemas                   :: !(Maybe RestDescriptionSchemas)
     , _rdServicePath               :: !(Maybe Text)
@@ -964,6 +964,7 @@ data RestDescription = RestDescription
     , _rdName                      :: !(Maybe Text)
     , _rdPackagePath               :: !(Maybe Text)
     , _rdFeatures                  :: !(Maybe [Text])
+    , _rdVersionModule             :: !(Maybe Bool)
     , _rdVersion                   :: !(Maybe Text)
     , _rdParameters                :: !(Maybe RestDescriptionParameters)
     , _rdDocumentationLink         :: !(Maybe Text)
@@ -1017,6 +1018,8 @@ data RestDescription = RestDescription
 --
 -- * 'rdFeatures'
 --
+-- * 'rdVersionModule'
+--
 -- * 'rdVersion'
 --
 -- * 'rdParameters'
@@ -1041,7 +1044,7 @@ data RestDescription = RestDescription
 restDescription
     :: RestDescription
 restDescription =
-    RestDescription
+    RestDescription'
     { _rdEtag = Nothing
     , _rdSchemas = Nothing
     , _rdServicePath = Nothing
@@ -1060,6 +1063,7 @@ restDescription =
     , _rdName = Nothing
     , _rdPackagePath = Nothing
     , _rdFeatures = Nothing
+    , _rdVersionModule = Nothing
     , _rdVersion = Nothing
     , _rdParameters = Nothing
     , _rdDocumentationLink = Nothing
@@ -1167,6 +1171,11 @@ rdFeatures
       _Default
       . _Coerce
 
+rdVersionModule :: Lens' RestDescription (Maybe Bool)
+rdVersionModule
+  = lens _rdVersionModule
+      (\ s a -> s{_rdVersionModule = a})
+
 -- | The version of this API.
 rdVersion :: Lens' RestDescription (Maybe Text)
 rdVersion
@@ -1231,7 +1240,7 @@ instance FromJSON RestDescription where
         parseJSON
           = withObject "RestDescription"
               (\ o ->
-                 RestDescription <$>
+                 RestDescription' <$>
                    (o .:? "etag") <*> (o .:? "schemas") <*>
                      (o .:? "servicePath")
                      <*> (o .:? "basePath")
@@ -1249,6 +1258,7 @@ instance FromJSON RestDescription where
                      <*> (o .:? "name")
                      <*> (o .:? "packagePath")
                      <*> (o .:? "features" .!= mempty)
+                     <*> (o .:? "version_module")
                      <*> (o .:? "version")
                      <*> (o .:? "parameters")
                      <*> (o .:? "documentationLink")
@@ -1262,7 +1272,7 @@ instance FromJSON RestDescription where
                      <*> (o .:? "description"))
 
 instance ToJSON RestDescription where
-        toJSON RestDescription{..}
+        toJSON RestDescription'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _rdEtag,
@@ -1283,6 +1293,7 @@ instance ToJSON RestDescription where
                   ("name" .=) <$> _rdName,
                   ("packagePath" .=) <$> _rdPackagePath,
                   ("features" .=) <$> _rdFeatures,
+                  ("version_module" .=) <$> _rdVersionModule,
                   ("version" .=) <$> _rdVersion,
                   ("parameters" .=) <$> _rdParameters,
                   ("documentationLink" .=) <$> _rdDocumentationLink,
@@ -1296,7 +1307,7 @@ instance ToJSON RestDescription where
 
 --
 -- /See:/ 'jsonSchema' smart constructor.
-data JSONSchema = JSONSchema
+data JSONSchema = JSONSchema'
     { _jsAnnotations          :: !(Maybe JSONSchemaAnnotations)
     , _jsVariant              :: !(Maybe JSONSchemaVariant)
     , _jsLocation             :: !(Maybe Text)
@@ -1365,7 +1376,7 @@ data JSONSchema = JSONSchema
 jsonSchema
     :: JSONSchema
 jsonSchema =
-    JSONSchema
+    JSONSchema'
     { _jsAnnotations = Nothing
     , _jsVariant = Nothing
     , _jsLocation = Nothing
@@ -1508,7 +1519,7 @@ instance FromJSON JSONSchema where
         parseJSON
           = withObject "JSONSchema"
               (\ o ->
-                 JSONSchema <$>
+                 JSONSchema' <$>
                    (o .:? "annotations") <*> (o .:? "variant") <*>
                      (o .:? "location")
                      <*> (o .:? "$ref")
@@ -1530,7 +1541,7 @@ instance FromJSON JSONSchema where
                      <*> (o .:? "properties"))
 
 instance ToJSON JSONSchema where
-        toJSON JSONSchema{..}
+        toJSON JSONSchema'{..}
           = object
               (catMaybes
                  [("annotations" .=) <$> _jsAnnotations,
@@ -1556,7 +1567,7 @@ instance ToJSON JSONSchema where
 -- | The schemas for this API.
 --
 -- /See:/ 'restDescriptionSchemas' smart constructor.
-newtype RestDescriptionSchemas = RestDescriptionSchemas
+newtype RestDescriptionSchemas = RestDescriptionSchemas'
     { _rdsAddtional :: HashMap Text JSONSchema
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1569,7 +1580,7 @@ restDescriptionSchemas
     :: HashMap Text JSONSchema -- ^ 'rdsAddtional'
     -> RestDescriptionSchemas
 restDescriptionSchemas pRdsAddtional_ =
-    RestDescriptionSchemas
+    RestDescriptionSchemas'
     { _rdsAddtional = _Coerce # pRdsAddtional_
     }
 
@@ -1583,14 +1594,14 @@ instance FromJSON RestDescriptionSchemas where
         parseJSON
           = withObject "RestDescriptionSchemas"
               (\ o ->
-                 RestDescriptionSchemas <$> (parseJSONObject o))
+                 RestDescriptionSchemas' <$> (parseJSONObject o))
 
 instance ToJSON RestDescriptionSchemas where
         toJSON = toJSON . _rdsAddtional
 
 --
 -- /See:/ 'jsonSchemaVariantMapItem' smart constructor.
-data JSONSchemaVariantMapItem = JSONSchemaVariantMapItem
+data JSONSchemaVariantMapItem = JSONSchemaVariantMapItem'
     { _jsvmiRef       :: !(Maybe Text)
     , _jsvmiTypeValue :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1605,7 +1616,7 @@ data JSONSchemaVariantMapItem = JSONSchemaVariantMapItem
 jsonSchemaVariantMapItem
     :: JSONSchemaVariantMapItem
 jsonSchemaVariantMapItem =
-    JSONSchemaVariantMapItem
+    JSONSchemaVariantMapItem'
     { _jsvmiRef = Nothing
     , _jsvmiTypeValue = Nothing
     }
@@ -1622,11 +1633,11 @@ instance FromJSON JSONSchemaVariantMapItem where
         parseJSON
           = withObject "JSONSchemaVariantMapItem"
               (\ o ->
-                 JSONSchemaVariantMapItem <$>
+                 JSONSchemaVariantMapItem' <$>
                    (o .:? "$ref") <*> (o .:? "type_value"))
 
 instance ToJSON JSONSchemaVariantMapItem where
-        toJSON JSONSchemaVariantMapItem{..}
+        toJSON JSONSchemaVariantMapItem'{..}
           = object
               (catMaybes
                  [("$ref" .=) <$> _jsvmiRef,
@@ -1635,7 +1646,7 @@ instance ToJSON JSONSchemaVariantMapItem where
 -- | The resources in this API.
 --
 -- /See:/ 'restDescriptionResources' smart constructor.
-newtype RestDescriptionResources = RestDescriptionResources
+newtype RestDescriptionResources = RestDescriptionResources'
     { _rdrAddtional :: HashMap Text RestResource
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1648,7 +1659,7 @@ restDescriptionResources
     :: HashMap Text RestResource -- ^ 'rdrAddtional'
     -> RestDescriptionResources
 restDescriptionResources pRdrAddtional_ =
-    RestDescriptionResources
+    RestDescriptionResources'
     { _rdrAddtional = _Coerce # pRdrAddtional_
     }
 
@@ -1663,7 +1674,7 @@ instance FromJSON RestDescriptionResources where
         parseJSON
           = withObject "RestDescriptionResources"
               (\ o ->
-                 RestDescriptionResources <$> (parseJSONObject o))
+                 RestDescriptionResources' <$> (parseJSONObject o))
 
 instance ToJSON RestDescriptionResources where
         toJSON = toJSON . _rdrAddtional
@@ -1671,7 +1682,7 @@ instance ToJSON RestDescriptionResources where
 -- | Supported upload protocols.
 --
 -- /See:/ 'restMethodMediaUploadProtocols' smart constructor.
-data RestMethodMediaUploadProtocols = RestMethodMediaUploadProtocols
+data RestMethodMediaUploadProtocols = RestMethodMediaUploadProtocols'
     { _rmmupSimple    :: !(Maybe RestMethodMediaUploadProtocolsSimple)
     , _rmmupResumable :: !(Maybe RestMethodMediaUploadProtocolsResumable)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1686,7 +1697,7 @@ data RestMethodMediaUploadProtocols = RestMethodMediaUploadProtocols
 restMethodMediaUploadProtocols
     :: RestMethodMediaUploadProtocols
 restMethodMediaUploadProtocols =
-    RestMethodMediaUploadProtocols
+    RestMethodMediaUploadProtocols'
     { _rmmupSimple = Nothing
     , _rmmupResumable = Nothing
     }
@@ -1707,11 +1718,11 @@ instance FromJSON RestMethodMediaUploadProtocols
         parseJSON
           = withObject "RestMethodMediaUploadProtocols"
               (\ o ->
-                 RestMethodMediaUploadProtocols <$>
+                 RestMethodMediaUploadProtocols' <$>
                    (o .:? "simple") <*> (o .:? "resumable"))
 
 instance ToJSON RestMethodMediaUploadProtocols where
-        toJSON RestMethodMediaUploadProtocols{..}
+        toJSON RestMethodMediaUploadProtocols'{..}
           = object
               (catMaybes
                  [("simple" .=) <$> _rmmupSimple,
@@ -1720,7 +1731,7 @@ instance ToJSON RestMethodMediaUploadProtocols where
 -- | Additional information about this property.
 --
 -- /See:/ 'jsonSchemaAnnotations' smart constructor.
-newtype JSONSchemaAnnotations = JSONSchemaAnnotations
+newtype JSONSchemaAnnotations = JSONSchemaAnnotations'
     { _jsaRequired :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1732,7 +1743,7 @@ newtype JSONSchemaAnnotations = JSONSchemaAnnotations
 jsonSchemaAnnotations
     :: JSONSchemaAnnotations
 jsonSchemaAnnotations =
-    JSONSchemaAnnotations
+    JSONSchemaAnnotations'
     { _jsaRequired = Nothing
     }
 
@@ -1747,18 +1758,18 @@ instance FromJSON JSONSchemaAnnotations where
         parseJSON
           = withObject "JSONSchemaAnnotations"
               (\ o ->
-                 JSONSchemaAnnotations <$>
+                 JSONSchemaAnnotations' <$>
                    (o .:? "required" .!= mempty))
 
 instance ToJSON JSONSchemaAnnotations where
-        toJSON JSONSchemaAnnotations{..}
+        toJSON JSONSchemaAnnotations'{..}
           = object
               (catMaybes [("required" .=) <$> _jsaRequired])
 
 -- | Details for all parameters in this method.
 --
 -- /See:/ 'restMethodParameters' smart constructor.
-newtype RestMethodParameters = RestMethodParameters
+newtype RestMethodParameters = RestMethodParameters'
     { _rmpAddtional :: HashMap Text JSONSchema
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1771,7 +1782,7 @@ restMethodParameters
     :: HashMap Text JSONSchema -- ^ 'rmpAddtional'
     -> RestMethodParameters
 restMethodParameters pRmpAddtional_ =
-    RestMethodParameters
+    RestMethodParameters'
     { _rmpAddtional = _Coerce # pRmpAddtional_
     }
 
@@ -1784,7 +1795,8 @@ rmpAddtional
 instance FromJSON RestMethodParameters where
         parseJSON
           = withObject "RestMethodParameters"
-              (\ o -> RestMethodParameters <$> (parseJSONObject o))
+              (\ o ->
+                 RestMethodParameters' <$> (parseJSONObject o))
 
 instance ToJSON RestMethodParameters where
         toJSON = toJSON . _rmpAddtional
@@ -1792,7 +1804,7 @@ instance ToJSON RestMethodParameters where
 -- | Media upload parameters.
 --
 -- /See:/ 'restMethodMediaUpload' smart constructor.
-data RestMethodMediaUpload = RestMethodMediaUpload
+data RestMethodMediaUpload = RestMethodMediaUpload'
     { _rmmuProtocols :: !(Maybe RestMethodMediaUploadProtocols)
     , _rmmuAccept    :: !(Maybe [Text])
     , _rmmuMaxSize   :: !(Maybe Text)
@@ -1810,7 +1822,7 @@ data RestMethodMediaUpload = RestMethodMediaUpload
 restMethodMediaUpload
     :: RestMethodMediaUpload
 restMethodMediaUpload =
-    RestMethodMediaUpload
+    RestMethodMediaUpload'
     { _rmmuProtocols = Nothing
     , _rmmuAccept = Nothing
     , _rmmuMaxSize = Nothing
@@ -1838,12 +1850,12 @@ instance FromJSON RestMethodMediaUpload where
         parseJSON
           = withObject "RestMethodMediaUpload"
               (\ o ->
-                 RestMethodMediaUpload <$>
+                 RestMethodMediaUpload' <$>
                    (o .:? "protocols") <*> (o .:? "accept" .!= mempty)
                      <*> (o .:? "maxSize"))
 
 instance ToJSON RestMethodMediaUpload where
-        toJSON RestMethodMediaUpload{..}
+        toJSON RestMethodMediaUpload'{..}
           = object
               (catMaybes
                  [("protocols" .=) <$> _rmmuProtocols,
@@ -1854,7 +1866,7 @@ instance ToJSON RestMethodMediaUpload where
 -- this object.
 --
 -- /See:/ 'jsonSchemaProperties' smart constructor.
-newtype JSONSchemaProperties = JSONSchemaProperties
+newtype JSONSchemaProperties = JSONSchemaProperties'
     { _jspAddtional :: HashMap Text JSONSchema
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1867,7 +1879,7 @@ jsonSchemaProperties
     :: HashMap Text JSONSchema -- ^ 'jspAddtional'
     -> JSONSchemaProperties
 jsonSchemaProperties pJspAddtional_ =
-    JSONSchemaProperties
+    JSONSchemaProperties'
     { _jspAddtional = _Coerce # pJspAddtional_
     }
 
@@ -1881,7 +1893,8 @@ jspAddtional
 instance FromJSON JSONSchemaProperties where
         parseJSON
           = withObject "JSONSchemaProperties"
-              (\ o -> JSONSchemaProperties <$> (parseJSONObject o))
+              (\ o ->
+                 JSONSchemaProperties' <$> (parseJSONObject o))
 
 instance ToJSON JSONSchemaProperties where
         toJSON = toJSON . _jspAddtional
@@ -1889,7 +1902,7 @@ instance ToJSON JSONSchemaProperties where
 -- | Supports the Resumable Media Upload protocol.
 --
 -- /See:/ 'restMethodMediaUploadProtocolsResumable' smart constructor.
-data RestMethodMediaUploadProtocolsResumable = RestMethodMediaUploadProtocolsResumable
+data RestMethodMediaUploadProtocolsResumable = RestMethodMediaUploadProtocolsResumable'
     { _rmmuprPath      :: !(Maybe Text)
     , _rmmuprMultiPart :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1904,7 +1917,7 @@ data RestMethodMediaUploadProtocolsResumable = RestMethodMediaUploadProtocolsRes
 restMethodMediaUploadProtocolsResumable
     :: RestMethodMediaUploadProtocolsResumable
 restMethodMediaUploadProtocolsResumable =
-    RestMethodMediaUploadProtocolsResumable
+    RestMethodMediaUploadProtocolsResumable'
     { _rmmuprPath = Nothing
     , _rmmuprMultiPart = True
     }
@@ -1927,12 +1940,12 @@ instance FromJSON
           = withObject
               "RestMethodMediaUploadProtocolsResumable"
               (\ o ->
-                 RestMethodMediaUploadProtocolsResumable <$>
+                 RestMethodMediaUploadProtocolsResumable' <$>
                    (o .:? "path") <*> (o .:? "multipart" .!= True))
 
 instance ToJSON
          RestMethodMediaUploadProtocolsResumable where
-        toJSON RestMethodMediaUploadProtocolsResumable{..}
+        toJSON RestMethodMediaUploadProtocolsResumable'{..}
           = object
               (catMaybes
                  [("path" .=) <$> _rmmuprPath,
@@ -1940,7 +1953,7 @@ instance ToJSON
 
 --
 -- /See:/ 'directoryList' smart constructor.
-data DirectoryList = DirectoryList
+data DirectoryList = DirectoryList'
     { _dlKind             :: !Text
     , _dlItems            :: !(Maybe [DirectoryListItemsItem])
     , _dlDiscoveryVersion :: !Text
@@ -1958,7 +1971,7 @@ data DirectoryList = DirectoryList
 directoryList
     :: DirectoryList
 directoryList =
-    DirectoryList
+    DirectoryList'
     { _dlKind = "discovery#directoryList"
     , _dlItems = Nothing
     , _dlDiscoveryVersion = "v1"
@@ -1984,13 +1997,13 @@ instance FromJSON DirectoryList where
         parseJSON
           = withObject "DirectoryList"
               (\ o ->
-                 DirectoryList <$>
+                 DirectoryList' <$>
                    (o .:? "kind" .!= "discovery#directoryList") <*>
                      (o .:? "items" .!= mempty)
                      <*> (o .:? "discoveryVersion" .!= "v1"))
 
 instance ToJSON DirectoryList where
-        toJSON DirectoryList{..}
+        toJSON DirectoryList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dlKind), ("items" .=) <$> _dlItems,
@@ -1999,7 +2012,7 @@ instance ToJSON DirectoryList where
 -- | The schema for the request.
 --
 -- /See:/ 'restMethodRequest' smart constructor.
-data RestMethodRequest = RestMethodRequest
+data RestMethodRequest = RestMethodRequest'
     { _rRef           :: !(Maybe Text)
     , _rParameterName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2014,7 +2027,7 @@ data RestMethodRequest = RestMethodRequest
 restMethodRequest
     :: RestMethodRequest
 restMethodRequest =
-    RestMethodRequest
+    RestMethodRequest'
     { _rRef = Nothing
     , _rParameterName = Nothing
     }
@@ -2033,11 +2046,11 @@ instance FromJSON RestMethodRequest where
         parseJSON
           = withObject "RestMethodRequest"
               (\ o ->
-                 RestMethodRequest <$>
+                 RestMethodRequest' <$>
                    (o .:? "$ref") <*> (o .:? "parameterName"))
 
 instance ToJSON RestMethodRequest where
-        toJSON RestMethodRequest{..}
+        toJSON RestMethodRequest'{..}
           = object
               (catMaybes
                  [("$ref" .=) <$> _rRef,

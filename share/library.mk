@@ -16,6 +16,4 @@ candidate:
  http://hackage.haskell.org/packages/candidates/
 
 upload:
-	@echo "noop"
-
-
+	cabal upload dist/$(NAME)-$(VERSION).tar.gz

@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.Autoscaler.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem
+    OperationWarningsItemDataItem'
     { _owidiValue = Nothing
     , _owidiKey = Nothing
     }
@@ -53,11 +53,11 @@ instance FromJSON OperationWarningsItemDataItem where
         parseJSON
           = withObject "OperationWarningsItemDataItem"
               (\ o ->
-                 OperationWarningsItemDataItem <$>
+                 OperationWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON OperationWarningsItemDataItem where
-        toJSON OperationWarningsItemDataItem{..}
+        toJSON OperationWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _owidiValue,
@@ -65,7 +65,7 @@ instance ToJSON OperationWarningsItemDataItem where
 
 --
 -- /See:/ 'deprecationStatus' smart constructor.
-data DeprecationStatus = DeprecationStatus
+data DeprecationStatus = DeprecationStatus'
     { _dsState       :: !(Maybe Text)
     , _dsDeleted     :: !(Maybe Text)
     , _dsReplacement :: !(Maybe Text)
@@ -89,7 +89,7 @@ data DeprecationStatus = DeprecationStatus
 deprecationStatus
     :: DeprecationStatus
 deprecationStatus =
-    DeprecationStatus
+    DeprecationStatus'
     { _dsState = Nothing
     , _dsDeleted = Nothing
     , _dsReplacement = Nothing
@@ -121,14 +121,14 @@ instance FromJSON DeprecationStatus where
         parseJSON
           = withObject "DeprecationStatus"
               (\ o ->
-                 DeprecationStatus <$>
+                 DeprecationStatus' <$>
                    (o .:? "state") <*> (o .:? "deleted") <*>
                      (o .:? "replacement")
                      <*> (o .:? "obsolete")
                      <*> (o .:? "deprecated"))
 
 instance ToJSON DeprecationStatus where
-        toJSON DeprecationStatus{..}
+        toJSON DeprecationStatus'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _dsState,
@@ -140,7 +140,7 @@ instance ToJSON DeprecationStatus where
 -- | Custom utilization metric policy.
 --
 -- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
-data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
+data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization'
     { _apcmuUtilizationTarget     :: !(Maybe (Textual Double))
     , _apcmuMetric                :: !(Maybe Text)
     , _apcmuUtilizationTargetType :: !(Maybe Text)
@@ -158,7 +158,7 @@ data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUti
 autoscalingPolicyCustomMetricUtilization
     :: AutoscalingPolicyCustomMetricUtilization
 autoscalingPolicyCustomMetricUtilization =
-    AutoscalingPolicyCustomMetricUtilization
+    AutoscalingPolicyCustomMetricUtilization'
     { _apcmuUtilizationTarget = Nothing
     , _apcmuMetric = Nothing
     , _apcmuUtilizationTargetType = Nothing
@@ -193,13 +193,13 @@ instance FromJSON
           = withObject
               "AutoscalingPolicyCustomMetricUtilization"
               (\ o ->
-                 AutoscalingPolicyCustomMetricUtilization <$>
+                 AutoscalingPolicyCustomMetricUtilization' <$>
                    (o .:? "utilizationTarget") <*> (o .:? "metric") <*>
                      (o .:? "utilizationTargetType"))
 
 instance ToJSON
          AutoscalingPolicyCustomMetricUtilization where
-        toJSON AutoscalingPolicyCustomMetricUtilization{..}
+        toJSON AutoscalingPolicyCustomMetricUtilization'{..}
           = object
               (catMaybes
                  [("utilizationTarget" .=) <$>
@@ -210,7 +210,7 @@ instance ToJSON
 
 --
 -- /See:/ 'operationList' smart constructor.
-data OperationList = OperationList
+data OperationList = OperationList'
     { _olNextPageToken :: !(Maybe Text)
     , _olKind          :: !Text
     , _olItems         :: !(Maybe [Operation])
@@ -234,7 +234,7 @@ data OperationList = OperationList
 operationList
     :: OperationList
 operationList =
-    OperationList
+    OperationList'
     { _olNextPageToken = Nothing
     , _olKind = "autoscaler#operationList"
     , _olItems = Nothing
@@ -268,7 +268,7 @@ instance FromJSON OperationList where
         parseJSON
           = withObject "OperationList"
               (\ o ->
-                 OperationList <$>
+                 OperationList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "autoscaler#operationList")
                      <*> (o .:? "items" .!= mempty)
@@ -276,7 +276,7 @@ instance FromJSON OperationList where
                      <*> (o .:? "id"))
 
 instance ToJSON OperationList where
-        toJSON OperationList{..}
+        toJSON OperationList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olNextPageToken,
@@ -286,7 +286,7 @@ instance ToJSON OperationList where
 
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
@@ -307,6 +307,7 @@ data Operation = Operation
     , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
+    , _oDescription         :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -355,13 +356,15 @@ data Operation = Operation
 --
 -- * 'oRegion'
 --
+-- * 'oDescription'
+--
 -- * 'oTargetLink'
 --
 -- * 'oClientOperationId'
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -382,6 +385,7 @@ operation =
     , _oId = Nothing
     , _oOperationType = Nothing
     , _oRegion = Nothing
+    , _oDescription = Nothing
     , _oTargetLink = Nothing
     , _oClientOperationId = Nothing
     }
@@ -407,7 +411,7 @@ oStartTime :: Lens' Operation (Maybe Text)
 oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
 
--- | [Output Only] Type of the resource. Always compute#Operation for
+-- | [Output Only] Type of the resource. Always compute#operation for
 -- Operation resources.
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
@@ -470,6 +474,10 @@ oOperationType
 oRegion :: Lens' Operation (Maybe Text)
 oRegion = lens _oRegion (\ s a -> s{_oRegion = a})
 
+oDescription :: Lens' Operation (Maybe Text)
+oDescription
+  = lens _oDescription (\ s a -> s{_oDescription = a})
+
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
@@ -483,7 +491,7 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "targetId") <*> (o .:? "status") <*>
                      (o .:? "insertTime")
                      <*> (o .:? "progress")
@@ -503,11 +511,12 @@ instance FromJSON Operation where
                      <*> (o .:? "id")
                      <*> (o .:? "operationType")
                      <*> (o .:? "region")
+                     <*> (o .:? "description")
                      <*> (o .:? "targetLink")
                      <*> (o .:? "clientOperationId"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("targetId" .=) <$> _oTargetId,
@@ -528,13 +537,14 @@ instance ToJSON Operation where
                   ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
                   ("operationType" .=) <$> _oOperationType,
                   ("region" .=) <$> _oRegion,
+                  ("description" .=) <$> _oDescription,
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
 -- | Load balancing utilization policy.
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
-newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization
+newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization'
     { _aplbuUtilizationTarget :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -546,7 +556,7 @@ newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalanci
 autoscalingPolicyLoadBalancingUtilization
     :: AutoscalingPolicyLoadBalancingUtilization
 autoscalingPolicyLoadBalancingUtilization =
-    AutoscalingPolicyLoadBalancingUtilization
+    AutoscalingPolicyLoadBalancingUtilization'
     { _aplbuUtilizationTarget = Nothing
     }
 
@@ -568,12 +578,12 @@ instance FromJSON
           = withObject
               "AutoscalingPolicyLoadBalancingUtilization"
               (\ o ->
-                 AutoscalingPolicyLoadBalancingUtilization <$>
+                 AutoscalingPolicyLoadBalancingUtilization' <$>
                    (o .:? "utilizationTarget"))
 
 instance ToJSON
          AutoscalingPolicyLoadBalancingUtilization where
-        toJSON AutoscalingPolicyLoadBalancingUtilization{..}
+        toJSON AutoscalingPolicyLoadBalancingUtilization'{..}
           = object
               (catMaybes
                  [("utilizationTarget" .=) <$>
@@ -581,17 +591,16 @@ instance ToJSON
 
 --
 -- /See:/ 'zone' smart constructor.
-data Zone = Zone
-    { _zStatus             :: !(Maybe Text)
-    , _zMaintenanceWindows :: !(Maybe [ZoneMaintenanceWindowsItem])
-    , _zKind               :: !Text
-    , _zSelfLink           :: !(Maybe Text)
-    , _zName               :: !(Maybe Text)
-    , _zCreationTimestamp  :: !(Maybe Text)
-    , _zId                 :: !(Maybe (Textual Word64))
-    , _zRegion             :: !(Maybe Text)
-    , _zDescription        :: !(Maybe Text)
-    , _zDeprecated         :: !(Maybe DeprecationStatus)
+data Zone = Zone'
+    { _zStatus            :: !(Maybe Text)
+    , _zKind              :: !Text
+    , _zSelfLink          :: !(Maybe Text)
+    , _zName              :: !(Maybe Text)
+    , _zCreationTimestamp :: !(Maybe Text)
+    , _zId                :: !(Maybe (Textual Word64))
+    , _zRegion            :: !(Maybe Text)
+    , _zDescription       :: !(Maybe Text)
+    , _zDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Zone' with the minimum fields required to make a request.
@@ -599,8 +608,6 @@ data Zone = Zone
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'zStatus'
---
--- * 'zMaintenanceWindows'
 --
 -- * 'zKind'
 --
@@ -620,9 +627,8 @@ data Zone = Zone
 zone
     :: Zone
 zone =
-    Zone
+    Zone'
     { _zStatus = Nothing
-    , _zMaintenanceWindows = Nothing
     , _zKind = "autoscaler#zone"
     , _zSelfLink = Nothing
     , _zName = Nothing
@@ -636,18 +642,10 @@ zone =
 zStatus :: Lens' Zone (Maybe Text)
 zStatus = lens _zStatus (\ s a -> s{_zStatus = a})
 
-zMaintenanceWindows :: Lens' Zone [ZoneMaintenanceWindowsItem]
-zMaintenanceWindows
-  = lens _zMaintenanceWindows
-      (\ s a -> s{_zMaintenanceWindows = a})
-      . _Default
-      . _Coerce
-
--- | [Output Only] Type of the resource. Always kind#zone for zones.
+-- | [Output Only] Type of the resource. Always compute#zone for zones.
 zKind :: Lens' Zone Text
 zKind = lens _zKind (\ s a -> s{_zKind = a})
 
--- | [Output Only] Server defined URL for the resource.
 zSelfLink :: Lens' Zone (Maybe Text)
 zSelfLink
   = lens _zSelfLink (\ s a -> s{_zSelfLink = a})
@@ -679,10 +677,9 @@ instance FromJSON Zone where
         parseJSON
           = withObject "Zone"
               (\ o ->
-                 Zone <$>
+                 Zone' <$>
                    (o .:? "status") <*>
-                     (o .:? "maintenanceWindows" .!= mempty)
-                     <*> (o .:? "kind" .!= "autoscaler#zone")
+                     (o .:? "kind" .!= "autoscaler#zone")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
@@ -692,12 +689,10 @@ instance FromJSON Zone where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON Zone where
-        toJSON Zone{..}
+        toJSON Zone'{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _zStatus,
-                  ("maintenanceWindows" .=) <$> _zMaintenanceWindows,
-                  Just ("kind" .= _zKind),
+                 [("status" .=) <$> _zStatus, Just ("kind" .= _zKind),
                   ("selfLink" .=) <$> _zSelfLink,
                   ("name" .=) <$> _zName,
                   ("creationTimestamp" .=) <$> _zCreationTimestamp,
@@ -706,73 +701,8 @@ instance ToJSON Zone where
                   ("deprecated" .=) <$> _zDeprecated])
 
 --
--- /See:/ 'zoneMaintenanceWindowsItem' smart constructor.
-data ZoneMaintenanceWindowsItem = ZoneMaintenanceWindowsItem
-    { _zmwiBeginTime   :: !(Maybe Text)
-    , _zmwiName        :: !(Maybe Text)
-    , _zmwiEndTime     :: !(Maybe Text)
-    , _zmwiDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ZoneMaintenanceWindowsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'zmwiBeginTime'
---
--- * 'zmwiName'
---
--- * 'zmwiEndTime'
---
--- * 'zmwiDescription'
-zoneMaintenanceWindowsItem
-    :: ZoneMaintenanceWindowsItem
-zoneMaintenanceWindowsItem =
-    ZoneMaintenanceWindowsItem
-    { _zmwiBeginTime = Nothing
-    , _zmwiName = Nothing
-    , _zmwiEndTime = Nothing
-    , _zmwiDescription = Nothing
-    }
-
-zmwiBeginTime :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiBeginTime
-  = lens _zmwiBeginTime
-      (\ s a -> s{_zmwiBeginTime = a})
-
-zmwiName :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiName = lens _zmwiName (\ s a -> s{_zmwiName = a})
-
-zmwiEndTime :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiEndTime
-  = lens _zmwiEndTime (\ s a -> s{_zmwiEndTime = a})
-
-zmwiDescription :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiDescription
-  = lens _zmwiDescription
-      (\ s a -> s{_zmwiDescription = a})
-
-instance FromJSON ZoneMaintenanceWindowsItem where
-        parseJSON
-          = withObject "ZoneMaintenanceWindowsItem"
-              (\ o ->
-                 ZoneMaintenanceWindowsItem <$>
-                   (o .:? "beginTime") <*> (o .:? "name") <*>
-                     (o .:? "endTime")
-                     <*> (o .:? "description"))
-
-instance ToJSON ZoneMaintenanceWindowsItem where
-        toJSON ZoneMaintenanceWindowsItem{..}
-          = object
-              (catMaybes
-                 [("beginTime" .=) <$> _zmwiBeginTime,
-                  ("name" .=) <$> _zmwiName,
-                  ("endTime" .=) <$> _zmwiEndTime,
-                  ("description" .=) <$> _zmwiDescription])
-
---
 -- /See:/ 'zoneList' smart constructor.
-data ZoneList = ZoneList
+data ZoneList = ZoneList'
     { _zlNextPageToken :: !(Maybe Text)
     , _zlKind          :: !Text
     , _zlItems         :: !(Maybe [Zone])
@@ -796,7 +726,7 @@ data ZoneList = ZoneList
 zoneList
     :: ZoneList
 zoneList =
-    ZoneList
+    ZoneList'
     { _zlNextPageToken = Nothing
     , _zlKind = "autoscaler#zoneList"
     , _zlItems = Nothing
@@ -818,7 +748,7 @@ zlItems
   = lens _zlItems (\ s a -> s{_zlItems = a}) . _Default
       . _Coerce
 
--- | Server defined URL for this resource (output only).
+-- | [Output Only] Server-defined URL for this resource.
 zlSelfLink :: Lens' ZoneList (Maybe Text)
 zlSelfLink
   = lens _zlSelfLink (\ s a -> s{_zlSelfLink = a})
@@ -830,7 +760,7 @@ instance FromJSON ZoneList where
         parseJSON
           = withObject "ZoneList"
               (\ o ->
-                 ZoneList <$>
+                 ZoneList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "autoscaler#zoneList")
                      <*> (o .:? "items" .!= mempty)
@@ -838,7 +768,7 @@ instance FromJSON ZoneList where
                      <*> (o .:? "id"))
 
 instance ToJSON ZoneList where
-        toJSON ZoneList{..}
+        toJSON ZoneList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _zlNextPageToken,
@@ -848,7 +778,7 @@ instance ToJSON ZoneList where
 
 --
 -- /See:/ 'autoscalerListResponse' smart constructor.
-data AutoscalerListResponse = AutoscalerListResponse
+data AutoscalerListResponse = AutoscalerListResponse'
     { _alrNextPageToken :: !(Maybe Text)
     , _alrKind          :: !Text
     , _alrItems         :: !(Maybe [Autoscaler])
@@ -866,7 +796,7 @@ data AutoscalerListResponse = AutoscalerListResponse
 autoscalerListResponse
     :: AutoscalerListResponse
 autoscalerListResponse =
-    AutoscalerListResponse
+    AutoscalerListResponse'
     { _alrNextPageToken = Nothing
     , _alrKind = "compute#autoscalerList"
     , _alrItems = Nothing
@@ -893,13 +823,13 @@ instance FromJSON AutoscalerListResponse where
         parseJSON
           = withObject "AutoscalerListResponse"
               (\ o ->
-                 AutoscalerListResponse <$>
+                 AutoscalerListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#autoscalerList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON AutoscalerListResponse where
-        toJSON AutoscalerListResponse{..}
+        toJSON AutoscalerListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _alrNextPageToken,
@@ -909,7 +839,7 @@ instance ToJSON AutoscalerListResponse where
 -- | Cloud Autoscaler policy.
 --
 -- /See:/ 'autoscalingPolicy' smart constructor.
-data AutoscalingPolicy = AutoscalingPolicy
+data AutoscalingPolicy = AutoscalingPolicy'
     { _apCustomMetricUtilizations :: !(Maybe [AutoscalingPolicyCustomMetricUtilization])
     , _apMaxNumReplicas           :: !(Maybe (Textual Int32))
     , _apCPUUtilization           :: !(Maybe AutoscalingPolicyCPUUtilization)
@@ -936,7 +866,7 @@ data AutoscalingPolicy = AutoscalingPolicy
 autoscalingPolicy
     :: AutoscalingPolicy
 autoscalingPolicy =
-    AutoscalingPolicy
+    AutoscalingPolicy'
     { _apCustomMetricUtilizations = Nothing
     , _apMaxNumReplicas = Nothing
     , _apCPUUtilization = Nothing
@@ -960,8 +890,7 @@ apMaxNumReplicas
       (\ s a -> s{_apMaxNumReplicas = a})
       . mapping _Coerce
 
--- | Exactly one utilization policy should be provided. Configuration
--- parameters of CPU based autoscaling policy.
+-- | Configuration parameters of CPU based autoscaling policy.
 apCPUUtilization :: Lens' AutoscalingPolicy (Maybe AutoscalingPolicyCPUUtilization)
 apCPUUtilization
   = lens _apCPUUtilization
@@ -995,7 +924,7 @@ instance FromJSON AutoscalingPolicy where
         parseJSON
           = withObject "AutoscalingPolicy"
               (\ o ->
-                 AutoscalingPolicy <$>
+                 AutoscalingPolicy' <$>
                    (o .:? "customMetricUtilizations" .!= mempty) <*>
                      (o .:? "maxNumReplicas")
                      <*> (o .:? "cpuUtilization")
@@ -1004,7 +933,7 @@ instance FromJSON AutoscalingPolicy where
                      <*> (o .:? "coolDownPeriodSec"))
 
 instance ToJSON AutoscalingPolicy where
-        toJSON AutoscalingPolicy{..}
+        toJSON AutoscalingPolicy'{..}
           = object
               (catMaybes
                  [("customMetricUtilizations" .=) <$>
@@ -1018,7 +947,7 @@ instance ToJSON AutoscalingPolicy where
 
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
+newtype OperationError = OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1030,7 +959,7 @@ newtype OperationError = OperationError
 operationError
     :: OperationError
 operationError =
-    OperationError
+    OperationError'
     { _oeErrors = Nothing
     }
 
@@ -1044,16 +973,16 @@ instance FromJSON OperationError where
         parseJSON
           = withObject "OperationError"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 OperationError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON OperationError where
-        toJSON OperationError{..}
+        toJSON OperationError'{..}
           = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 -- | Cloud Autoscaler resource.
 --
 -- /See:/ 'autoscaler' smart constructor.
-data Autoscaler = Autoscaler
+data Autoscaler = Autoscaler'
     { _aKind              :: !Text
     , _aSelfLink          :: !(Maybe Text)
     , _aName              :: !(Maybe Text)
@@ -1086,7 +1015,7 @@ data Autoscaler = Autoscaler
 autoscaler
     :: Autoscaler
 autoscaler =
-    Autoscaler
+    Autoscaler'
     { _aKind = "compute#autoscaler"
     , _aSelfLink = Nothing
     , _aName = Nothing
@@ -1142,7 +1071,7 @@ instance FromJSON Autoscaler where
         parseJSON
           = withObject "Autoscaler"
               (\ o ->
-                 Autoscaler <$>
+                 Autoscaler' <$>
                    (o .:? "kind" .!= "compute#autoscaler") <*>
                      (o .:? "selfLink")
                      <*> (o .:? "name")
@@ -1153,7 +1082,7 @@ instance FromJSON Autoscaler where
                      <*> (o .:? "target"))
 
 instance ToJSON Autoscaler where
-        toJSON Autoscaler{..}
+        toJSON Autoscaler'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aKind),
@@ -1167,7 +1096,7 @@ instance ToJSON Autoscaler where
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem
+data OperationErrorErrorsItem = OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
@@ -1185,7 +1114,7 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem
+    OperationErrorErrorsItem'
     { _oeeiLocation = Nothing
     , _oeeiCode = Nothing
     , _oeeiMessage = Nothing
@@ -1206,12 +1135,12 @@ instance FromJSON OperationErrorErrorsItem where
         parseJSON
           = withObject "OperationErrorErrorsItem"
               (\ o ->
-                 OperationErrorErrorsItem <$>
+                 OperationErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationErrorErrorsItem where
-        toJSON OperationErrorErrorsItem{..}
+        toJSON OperationErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _oeeiLocation,
@@ -1221,7 +1150,7 @@ instance ToJSON OperationErrorErrorsItem where
 -- | CPU utilization policy.
 --
 -- /See:/ 'autoscalingPolicyCPUUtilization' smart constructor.
-newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization
+newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization'
     { _apcuUtilizationTarget :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1233,7 +1162,7 @@ newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization
 autoscalingPolicyCPUUtilization
     :: AutoscalingPolicyCPUUtilization
 autoscalingPolicyCPUUtilization =
-    AutoscalingPolicyCPUUtilization
+    AutoscalingPolicyCPUUtilization'
     { _apcuUtilizationTarget = Nothing
     }
 
@@ -1252,11 +1181,11 @@ instance FromJSON AutoscalingPolicyCPUUtilization
         parseJSON
           = withObject "AutoscalingPolicyCPUUtilization"
               (\ o ->
-                 AutoscalingPolicyCPUUtilization <$>
+                 AutoscalingPolicyCPUUtilization' <$>
                    (o .:? "utilizationTarget"))
 
 instance ToJSON AutoscalingPolicyCPUUtilization where
-        toJSON AutoscalingPolicyCPUUtilization{..}
+        toJSON AutoscalingPolicyCPUUtilization'{..}
           = object
               (catMaybes
                  [("utilizationTarget" .=) <$>
@@ -1264,7 +1193,7 @@ instance ToJSON AutoscalingPolicyCPUUtilization where
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem
+data OperationWarningsItem = OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe Text)
     , _owiMessage :: !(Maybe Text)
@@ -1282,7 +1211,7 @@ data OperationWarningsItem = OperationWarningsItem
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem
+    OperationWarningsItem'
     { _owiData = Nothing
     , _owiCode = Nothing
     , _owiMessage = Nothing
@@ -1304,12 +1233,12 @@ instance FromJSON OperationWarningsItem where
         parseJSON
           = withObject "OperationWarningsItem"
               (\ o ->
-                 OperationWarningsItem <$>
+                 OperationWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationWarningsItem where
-        toJSON OperationWarningsItem{..}
+        toJSON OperationWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Container.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,10 +22,16 @@ module Network.Google.Container.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * HorizontalPodAutoscaling
+    , HorizontalPodAutoscaling
+    , horizontalPodAutoscaling
+    , hpaDisabled
+
     -- * ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
     , lorOperations
+    , lorMissingZones
 
     -- * CreateClusterRequest
     , CreateClusterRequest
@@ -35,6 +42,7 @@ module Network.Google.Container.Types
     , Cluster
     , cluster
     , cStatus
+    , cNodePools
     , cNodeConfig
     , cNodeIPv4CIdRSize
     , cClusterIPv4CIdR
@@ -43,13 +51,17 @@ module Network.Google.Container.Types
     , cNetwork
     , cInitialClusterVersion
     , cZone
+    , cAddonsConfig
     , cServicesIPv4CIdR
     , cMasterAuth
     , cSelfLink
     , cName
     , cCurrentMasterVersion
     , cStatusMessage
+    , cSubnetwork
+    , cCurrentNodeCount
     , cEndpoint
+    , cLocations
     , cLoggingService
     , cDescription
     , cInstanceGroupURLs
@@ -67,6 +79,12 @@ module Network.Google.Container.Types
     , ncDiskSizeGb
     , ncOAuthScopes
     , ncMachineType
+    , ncMetadata
+
+    -- * HTTPLoadBalancing
+    , HTTPLoadBalancing
+    , hTTPLoadBalancing
+    , httplbDisabled
 
     -- * Operation
     , Operation
@@ -78,6 +96,25 @@ module Network.Google.Container.Types
     , oStatusMessage
     , oOperationType
     , oTargetLink
+    , oDetail
+
+    -- * AddonsConfig
+    , AddonsConfig
+    , addonsConfig
+    , acHorizontalPodAutoscaling
+    , acHTTPLoadBalancing
+
+    -- * NodePool
+    , NodePool
+    , nodePool
+    , npStatus
+    , npConfig
+    , npInitialNodeCount
+    , npSelfLink
+    , npName
+    , npStatusMessage
+    , npVersion
+    , npInstanceGroupURLs
 
     -- * MasterAuth
     , MasterAuth
@@ -88,21 +125,43 @@ module Network.Google.Container.Types
     , maPassword
     , maClusterCaCertificate
 
+    -- * NodeConfigMetadata
+    , NodeConfigMetadata
+    , nodeConfigMetadata
+    , ncmAddtional
+
     -- * ServerConfig
     , ServerConfig
     , serverConfig
     , scValidNodeVersions
+    , scDefaultImageFamily
+    , scValidImageFamilies
     , scDefaultClusterVersion
 
     -- * ListClustersResponse
     , ListClustersResponse
     , listClustersResponse
     , lcrClusters
+    , lcrMissingZones
 
     -- * ClusterUpdate
     , ClusterUpdate
     , clusterUpdate
+    , cuDesiredAddonsConfig
+    , cuDesiredNodePoolId
     , cuDesiredNodeVersion
+    , cuDesiredMasterVersion
+    , cuDesiredMonitoringService
+
+    -- * ListNodePoolsResponse
+    , ListNodePoolsResponse
+    , listNodePoolsResponse
+    , lnprNodePools
+
+    -- * CreateNodePoolRequest
+    , CreateNodePoolRequest
+    , createNodePoolRequest
+    , cnprNodePool
     ) where
 
 import           Network.Google.Container.Types.Product
@@ -110,11 +169,11 @@ import           Network.Google.Container.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Container Engine API. This contains the host and root path used as a starting point for constructing service requests.
-containerService :: Service
+containerService :: ServiceConfig
 containerService
   = defaultService (ServiceId "container:v1")
       "container.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

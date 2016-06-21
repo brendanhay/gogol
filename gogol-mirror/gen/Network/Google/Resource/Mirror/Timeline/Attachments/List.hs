@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.Attachments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type TimelineAttachmentsListResource =
 -- | Returns a list of attachments for a timeline item.
 --
 -- /See:/ 'timelineAttachmentsList' smart constructor.
-newtype TimelineAttachmentsList = TimelineAttachmentsList
+newtype TimelineAttachmentsList = TimelineAttachmentsList'
     { _talItemId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ timelineAttachmentsList
     :: Text -- ^ 'talItemId'
     -> TimelineAttachmentsList
 timelineAttachmentsList pTalItemId_ =
-    TimelineAttachmentsList
+    TimelineAttachmentsList'
     { _talItemId = pTalItemId_
     }
 
@@ -78,7 +78,9 @@ talItemId
 instance GoogleRequest TimelineAttachmentsList where
         type Rs TimelineAttachmentsList =
              AttachmentsListResponse
-        requestClient TimelineAttachmentsList{..}
+        type Scopes TimelineAttachmentsList =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient TimelineAttachmentsList'{..}
           = go _talItemId (Just AltJSON) mirrorService
           where go
                   = buildClient

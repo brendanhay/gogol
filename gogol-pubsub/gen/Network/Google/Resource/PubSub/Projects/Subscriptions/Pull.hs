@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -72,7 +72,7 @@ type ProjectsSubscriptionsPullResource =
 -- subscription.
 --
 -- /See:/ 'projectsSubscriptionsPull' smart constructor.
-data ProjectsSubscriptionsPull = ProjectsSubscriptionsPull
+data ProjectsSubscriptionsPull = ProjectsSubscriptionsPull'
     { _pspXgafv          :: !(Maybe Text)
     , _pspUploadProtocol :: !(Maybe Text)
     , _pspPp             :: !Bool
@@ -110,7 +110,7 @@ projectsSubscriptionsPull
     -> Text -- ^ 'pspSubscription'
     -> ProjectsSubscriptionsPull
 projectsSubscriptionsPull pPspPayload_ pPspSubscription_ =
-    ProjectsSubscriptionsPull
+    ProjectsSubscriptionsPull'
     { _pspXgafv = Nothing
     , _pspUploadProtocol = Nothing
     , _pspPp = True
@@ -173,7 +173,10 @@ pspCallback
 instance GoogleRequest ProjectsSubscriptionsPull
          where
         type Rs ProjectsSubscriptionsPull = PullResponse
-        requestClient ProjectsSubscriptionsPull{..}
+        type Scopes ProjectsSubscriptionsPull =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsSubscriptionsPull'{..}
           = go _pspSubscription _pspXgafv _pspUploadProtocol
               (Just _pspPp)
               _pspAccessToken

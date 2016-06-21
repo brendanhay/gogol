@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Template.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type TemplateDeleteResource =
 -- | Deletes a template
 --
 -- /See:/ 'templateDelete' smart constructor.
-data TemplateDelete = TemplateDelete
+data TemplateDelete = TemplateDelete'
     { _tTemplateId :: !(Textual Int32)
     , _tTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ templateDelete
     -> Text -- ^ 'tTableId'
     -> TemplateDelete
 templateDelete pTTemplateId_ pTTableId_ =
-    TemplateDelete
+    TemplateDelete'
     { _tTemplateId = _Coerce # pTTemplateId_
     , _tTableId = pTTableId_
     }
@@ -88,7 +88,9 @@ tTableId = lens _tTableId (\ s a -> s{_tTableId = a})
 
 instance GoogleRequest TemplateDelete where
         type Rs TemplateDelete = ()
-        requestClient TemplateDelete{..}
+        type Scopes TemplateDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient TemplateDelete'{..}
           = go _tTableId _tTemplateId (Just AltJSON)
               fusionTablesService
           where go

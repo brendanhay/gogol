@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.CustomChannels.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type CustomChannelsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'customChannelsPatch' smart constructor.
-data CustomChannelsPatch = CustomChannelsPatch
+data CustomChannelsPatch = CustomChannelsPatch'
     { _ccpCustomChannelId :: !Text
     , _ccpPayload         :: !CustomChannel
     , _ccpAdClientId      :: !Text
@@ -80,7 +80,7 @@ customChannelsPatch
     -> Text -- ^ 'ccpAdClientId'
     -> CustomChannelsPatch
 customChannelsPatch pCcpCustomChannelId_ pCcpPayload_ pCcpAdClientId_ =
-    CustomChannelsPatch
+    CustomChannelsPatch'
     { _ccpCustomChannelId = pCcpCustomChannelId_
     , _ccpPayload = pCcpPayload_
     , _ccpAdClientId = pCcpAdClientId_
@@ -105,7 +105,9 @@ ccpAdClientId
 
 instance GoogleRequest CustomChannelsPatch where
         type Rs CustomChannelsPatch = CustomChannel
-        requestClient CustomChannelsPatch{..}
+        type Scopes CustomChannelsPatch =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient CustomChannelsPatch'{..}
           = go _ccpAdClientId (Just _ccpCustomChannelId)
               (Just AltJSON)
               _ccpPayload

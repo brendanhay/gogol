@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Captions.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,14 +65,14 @@ type CaptionsInsertResource =
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "sync" Bool :>
                        QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" AltMedia :>
-                           MultipartRelated '[JSON] Caption RequestBody :>
+                         QueryParam "uploadType" Multipart :>
+                           MultipartRelated '[JSON] Caption :>
                              Post '[JSON] Caption
 
 -- | Uploads a caption track.
 --
 -- /See:/ 'captionsInsert' smart constructor.
-data CaptionsInsert = CaptionsInsert
+data CaptionsInsert = CaptionsInsert'
     { _ciOnBehalfOf             :: !(Maybe Text)
     , _ciPart                   :: !Text
     , _ciPayload                :: !Caption
@@ -98,7 +98,7 @@ captionsInsert
     -> Caption -- ^ 'ciPayload'
     -> CaptionsInsert
 captionsInsert pCiPart_ pCiPayload_ =
-    CaptionsInsert
+    CaptionsInsert'
     { _ciOnBehalfOf = Nothing
     , _ciPart = pCiPart_
     , _ciPayload = pCiPayload_
@@ -149,7 +149,10 @@ ciSync = lens _ciSync (\ s a -> s{_ciSync = a})
 
 instance GoogleRequest CaptionsInsert where
         type Rs CaptionsInsert = Caption
-        requestClient CaptionsInsert{..}
+        type Scopes CaptionsInsert =
+             '["https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient CaptionsInsert'{..}
           = go (Just _ciPart) _ciOnBehalfOf
               _ciOnBehalfOfContentOwner
               _ciSync
@@ -163,12 +166,14 @@ instance GoogleRequest CaptionsInsert where
 instance GoogleRequest (MediaUpload CaptionsInsert)
          where
         type Rs (MediaUpload CaptionsInsert) = Caption
-        requestClient (MediaUpload CaptionsInsert{..} body)
+        type Scopes (MediaUpload CaptionsInsert) =
+             Scopes CaptionsInsert
+        requestClient (MediaUpload CaptionsInsert'{..} body)
           = go (Just _ciPart) _ciOnBehalfOf
               _ciOnBehalfOfContentOwner
               _ciSync
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _ciPayload
               body
               youTubeService

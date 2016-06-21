@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Quests.ResetAll
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,18 +54,21 @@ type QuestsResetAllResource =
 --
 -- /See:/ 'questsResetAll' smart constructor.
 data QuestsResetAll =
-    QuestsResetAll
+    QuestsResetAll'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsResetAll' with the minimum fields required to make a request.
 --
 questsResetAll
     :: QuestsResetAll
-questsResetAll = QuestsResetAll
+questsResetAll = QuestsResetAll'
 
 instance GoogleRequest QuestsResetAll where
         type Rs QuestsResetAll = ()
-        requestClient QuestsResetAll{}
+        type Scopes QuestsResetAll =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient QuestsResetAll'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy QuestsResetAllResource)

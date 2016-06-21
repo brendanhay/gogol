@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesInsert' request conforms to.
 type PlacementStrategiesInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -55,7 +55,7 @@ type PlacementStrategiesInsertResource =
 -- | Inserts a new placement strategy.
 --
 -- /See:/ 'placementStrategiesInsert' smart constructor.
-data PlacementStrategiesInsert = PlacementStrategiesInsert
+data PlacementStrategiesInsert = PlacementStrategiesInsert'
     { _psiProFileId :: !(Textual Int64)
     , _psiPayload   :: !PlacementStrategy
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementStrategiesInsert
     -> PlacementStrategy -- ^ 'psiPayload'
     -> PlacementStrategiesInsert
 placementStrategiesInsert pPsiProFileId_ pPsiPayload_ =
-    PlacementStrategiesInsert
+    PlacementStrategiesInsert'
     { _psiProFileId = _Coerce # pPsiProFileId_
     , _psiPayload = pPsiPayload_
     }
@@ -91,7 +91,9 @@ psiPayload
 instance GoogleRequest PlacementStrategiesInsert
          where
         type Rs PlacementStrategiesInsert = PlacementStrategy
-        requestClient PlacementStrategiesInsert{..}
+        type Scopes PlacementStrategiesInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementStrategiesInsert'{..}
           = go _psiProFileId (Just AltJSON) _psiPayload
               dFAReportingService
           where go

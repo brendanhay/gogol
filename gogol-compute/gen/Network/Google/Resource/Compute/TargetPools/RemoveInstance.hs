@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetPools.RemoveInstance
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Removes instance URL from targetPool.
+-- Removes instance URL from a target pool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.removeInstance@.
 module Network.Google.Resource.Compute.TargetPools.RemoveInstance
@@ -58,10 +58,10 @@ type TargetPoolsRemoveInstanceResource =
                          ReqBody '[JSON] TargetPoolsRemoveInstanceRequest :>
                            Post '[JSON] Operation
 
--- | Removes instance URL from targetPool.
+-- | Removes instance URL from a target pool.
 --
 -- /See:/ 'targetPoolsRemoveInstance' smart constructor.
-data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance
+data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance'
     { _tpriProject    :: !Text
     , _tpriTargetPool :: !Text
     , _tpriPayload    :: !TargetPoolsRemoveInstanceRequest
@@ -86,18 +86,19 @@ targetPoolsRemoveInstance
     -> Text -- ^ 'tpriRegion'
     -> TargetPoolsRemoveInstance
 targetPoolsRemoveInstance pTpriProject_ pTpriTargetPool_ pTpriPayload_ pTpriRegion_ =
-    TargetPoolsRemoveInstance
+    TargetPoolsRemoveInstance'
     { _tpriProject = pTpriProject_
     , _tpriTargetPool = pTpriTargetPool_
     , _tpriPayload = pTpriPayload_
     , _tpriRegion = pTpriRegion_
     }
 
+-- | Project ID for this request.
 tpriProject :: Lens' TargetPoolsRemoveInstance Text
 tpriProject
   = lens _tpriProject (\ s a -> s{_tpriProject = a})
 
--- | Name of the TargetPool resource to which instance_url is to be removed.
+-- | Name of the TargetPool resource to remove instances from.
 tpriTargetPool :: Lens' TargetPoolsRemoveInstance Text
 tpriTargetPool
   = lens _tpriTargetPool
@@ -116,7 +117,10 @@ tpriRegion
 instance GoogleRequest TargetPoolsRemoveInstance
          where
         type Rs TargetPoolsRemoveInstance = Operation
-        requestClient TargetPoolsRemoveInstance{..}
+        type Scopes TargetPoolsRemoveInstance =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetPoolsRemoveInstance'{..}
           = go _tpriProject _tpriRegion _tpriTargetPool
               (Just AltJSON)
               _tpriPayload

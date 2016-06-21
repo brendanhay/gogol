@@ -14,14 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the specified Instance resource. For more information, see
--- Shutting down an instance.
+-- Stopping or Deleting an Instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.delete@.
 module Network.Google.Resource.Compute.Instances.Delete
@@ -56,10 +56,10 @@ type InstancesDeleteResource =
                      QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Instance resource. For more information, see
--- Shutting down an instance.
+-- Stopping or Deleting an Instance.
 --
 -- /See:/ 'instancesDelete' smart constructor.
-data InstancesDelete = InstancesDelete
+data InstancesDelete = InstancesDelete'
     { _idProject  :: !Text
     , _idZone     :: !Text
     , _idInstance :: !Text
@@ -80,7 +80,7 @@ instancesDelete
     -> Text -- ^ 'idInstance'
     -> InstancesDelete
 instancesDelete pIdProject_ pIdZone_ pIdInstance_ =
-    InstancesDelete
+    InstancesDelete'
     { _idProject = pIdProject_
     , _idZone = pIdZone_
     , _idInstance = pIdInstance_
@@ -102,7 +102,10 @@ idInstance
 
 instance GoogleRequest InstancesDelete where
         type Rs InstancesDelete = Operation
-        requestClient InstancesDelete{..}
+        type Scopes InstancesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstancesDelete'{..}
           = go _idProject _idZone _idInstance (Just AltJSON)
               computeService
           where go

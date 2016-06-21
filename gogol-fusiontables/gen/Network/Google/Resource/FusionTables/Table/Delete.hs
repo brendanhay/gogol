@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Table.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type TableDeleteResource =
 -- | Deletes a table.
 --
 -- /See:/ 'tableDelete' smart constructor.
-newtype TableDelete = TableDelete
+newtype TableDelete = TableDelete'
     { _tddTableId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ tableDelete
     :: Text -- ^ 'tddTableId'
     -> TableDelete
 tableDelete pTddTableId_ =
-    TableDelete
+    TableDelete'
     { _tddTableId = pTddTableId_
     }
 
@@ -75,7 +75,9 @@ tddTableId
 
 instance GoogleRequest TableDelete where
         type Rs TableDelete = ()
-        requestClient TableDelete{..}
+        type Scopes TableDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient TableDelete'{..}
           = go _tddTableId (Just AltJSON) fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableDeleteResource)

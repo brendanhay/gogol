@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Entitlements.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type EntitlementsListResource =
 -- | Lists the user\'s current inapp item or subscription entitlements
 --
 -- /See:/ 'entitlementsList' smart constructor.
-data EntitlementsList = EntitlementsList
+data EntitlementsList = EntitlementsList'
     { _elPackageName :: !Text
     , _elToken       :: !(Maybe Text)
     , _elStartIndex  :: !(Maybe (Textual Word32))
@@ -86,7 +86,7 @@ entitlementsList
     :: Text -- ^ 'elPackageName'
     -> EntitlementsList
 entitlementsList pElPackageName_ =
-    EntitlementsList
+    EntitlementsList'
     { _elPackageName = pElPackageName_
     , _elToken = Nothing
     , _elStartIndex = Nothing
@@ -122,7 +122,8 @@ elMaxResults
 
 instance GoogleRequest EntitlementsList where
         type Rs EntitlementsList = EntitlementsListResponse
-        requestClient EntitlementsList{..}
+        type Scopes EntitlementsList = '[]
+        requestClient EntitlementsList'{..}
           = go _elPackageName _elToken _elStartIndex
               _elProductId
               _elMaxResults

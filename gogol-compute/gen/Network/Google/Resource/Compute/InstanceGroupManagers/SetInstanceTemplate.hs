@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type InstanceGroupManagersSetInstanceTemplateResource
 -- change unless you recreate them.
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplate' smart constructor.
-data InstanceGroupManagersSetInstanceTemplate = InstanceGroupManagersSetInstanceTemplate
+data InstanceGroupManagersSetInstanceTemplate = InstanceGroupManagersSetInstanceTemplate'
     { _igmsitProject              :: !Text
     , _igmsitInstanceGroupManager :: !Text
     , _igmsitZone                 :: !Text
@@ -92,14 +92,14 @@ instanceGroupManagersSetInstanceTemplate
     -> InstanceGroupManagersSetInstanceTemplateRequest -- ^ 'igmsitPayload'
     -> InstanceGroupManagersSetInstanceTemplate
 instanceGroupManagersSetInstanceTemplate pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ pIgmsitPayload_ =
-    InstanceGroupManagersSetInstanceTemplate
+    InstanceGroupManagersSetInstanceTemplate'
     { _igmsitProject = pIgmsitProject_
     , _igmsitInstanceGroupManager = pIgmsitInstanceGroupManager_
     , _igmsitZone = pIgmsitZone_
     , _igmsitPayload = pIgmsitPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmsitProject :: Lens' InstanceGroupManagersSetInstanceTemplate Text
 igmsitProject
   = lens _igmsitProject
@@ -126,8 +126,12 @@ instance GoogleRequest
          InstanceGroupManagersSetInstanceTemplate where
         type Rs InstanceGroupManagersSetInstanceTemplate =
              Operation
+        type Scopes InstanceGroupManagersSetInstanceTemplate
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient
-          InstanceGroupManagersSetInstanceTemplate{..}
+          InstanceGroupManagersSetInstanceTemplate'{..}
           = go _igmsitProject _igmsitZone
               _igmsitInstanceGroupManager
               (Just AltJSON)

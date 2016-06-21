@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Calendars.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type CalendarsUpdateResource =
 -- | Updates metadata for a calendar.
 --
 -- /See:/ 'calendarsUpdate' smart constructor.
-data CalendarsUpdate = CalendarsUpdate
+data CalendarsUpdate = CalendarsUpdate'
     { _cuCalendarId :: !Text
     , _cuPayload    :: !Calendar
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ calendarsUpdate
     -> Calendar -- ^ 'cuPayload'
     -> CalendarsUpdate
 calendarsUpdate pCuCalendarId_ pCuPayload_ =
-    CalendarsUpdate
+    CalendarsUpdate'
     { _cuCalendarId = pCuCalendarId_
     , _cuPayload = pCuPayload_
     }
@@ -89,7 +89,9 @@ cuPayload
 
 instance GoogleRequest CalendarsUpdate where
         type Rs CalendarsUpdate = Calendar
-        requestClient CalendarsUpdate{..}
+        type Scopes CalendarsUpdate =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient CalendarsUpdate'{..}
           = go _cuCalendarId (Just AltJSON) _cuPayload
               appsCalendarService
           where go

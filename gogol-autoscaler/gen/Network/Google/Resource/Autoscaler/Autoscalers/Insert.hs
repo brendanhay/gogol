@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Autoscaler.Autoscalers.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AutoscalersInsertResource =
 -- | Adds new Autoscaler resource.
 --
 -- /See:/ 'autoscalersInsert' smart constructor.
-data AutoscalersInsert = AutoscalersInsert
+data AutoscalersInsert = AutoscalersInsert'
     { _aiProject :: !Text
     , _aiZone    :: !Text
     , _aiPayload :: !Autoscaler
@@ -78,7 +78,7 @@ autoscalersInsert
     -> Autoscaler -- ^ 'aiPayload'
     -> AutoscalersInsert
 autoscalersInsert pAiProject_ pAiZone_ pAiPayload_ =
-    AutoscalersInsert
+    AutoscalersInsert'
     { _aiProject = pAiProject_
     , _aiZone = pAiZone_
     , _aiPayload = pAiPayload_
@@ -100,7 +100,9 @@ aiPayload
 
 instance GoogleRequest AutoscalersInsert where
         type Rs AutoscalersInsert = Operation
-        requestClient AutoscalersInsert{..}
+        type Scopes AutoscalersInsert =
+             '["https://www.googleapis.com/auth/compute"]
+        requestClient AutoscalersInsert'{..}
           = go _aiProject _aiZone (Just AltJSON) _aiPayload
               autoscalerService
           where go

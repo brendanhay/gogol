@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Contacts.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type ContactsInsertResource =
 -- | Inserts a new contact.
 --
 -- /See:/ 'contactsInsert' smart constructor.
-newtype ContactsInsert = ContactsInsert
+newtype ContactsInsert = ContactsInsert'
     { _ciPayload :: Contact
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ contactsInsert
     :: Contact -- ^ 'ciPayload'
     -> ContactsInsert
 contactsInsert pCiPayload_ =
-    ContactsInsert
+    ContactsInsert'
     { _ciPayload = pCiPayload_
     }
 
@@ -75,7 +75,9 @@ ciPayload
 
 instance GoogleRequest ContactsInsert where
         type Rs ContactsInsert = Contact
-        requestClient ContactsInsert{..}
+        type Scopes ContactsInsert =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient ContactsInsert'{..}
           = go (Just AltJSON) _ciPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsInsertResource)

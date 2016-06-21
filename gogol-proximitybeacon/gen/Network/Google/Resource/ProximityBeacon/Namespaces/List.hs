@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ProximityBeacon.Namespaces.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,6 +23,10 @@
 -- Lists all attachment namespaces owned by your Google Developers Console
 -- project. Attachment data associated with a beacon must include a
 -- namespaced type, and the namespace must be owned by your project.
+-- Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **viewer**, **Is owner** or **Can edit**
+-- permissions in the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.namespaces.list@.
 module Network.Google.Resource.ProximityBeacon.Namespaces.List
@@ -41,6 +45,7 @@ module Network.Google.Resource.ProximityBeacon.Namespaces.List
     , nlAccessToken
     , nlUploadType
     , nlBearerToken
+    , nlProjectId
     , nlCallback
     ) where
 
@@ -58,22 +63,28 @@ type NamespacesListResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ListNamespacesResponse
+                     QueryParam "projectId" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ListNamespacesResponse
 
 -- | Lists all attachment namespaces owned by your Google Developers Console
 -- project. Attachment data associated with a beacon must include a
 -- namespaced type, and the namespace must be owned by your project.
+-- Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **viewer**, **Is owner** or **Can edit**
+-- permissions in the Google Developers Console project.
 --
 -- /See:/ 'namespacesList' smart constructor.
-data NamespacesList = NamespacesList
+data NamespacesList = NamespacesList'
     { _nlXgafv          :: !(Maybe Text)
     , _nlUploadProtocol :: !(Maybe Text)
     , _nlPp             :: !Bool
     , _nlAccessToken    :: !(Maybe Text)
     , _nlUploadType     :: !(Maybe Text)
     , _nlBearerToken    :: !(Maybe Text)
+    , _nlProjectId      :: !(Maybe Text)
     , _nlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -93,17 +104,20 @@ data NamespacesList = NamespacesList
 --
 -- * 'nlBearerToken'
 --
+-- * 'nlProjectId'
+--
 -- * 'nlCallback'
 namespacesList
     :: NamespacesList
 namespacesList =
-    NamespacesList
+    NamespacesList'
     { _nlXgafv = Nothing
     , _nlUploadProtocol = Nothing
     , _nlPp = True
     , _nlAccessToken = Nothing
     , _nlUploadType = Nothing
     , _nlBearerToken = Nothing
+    , _nlProjectId = Nothing
     , _nlCallback = Nothing
     }
 
@@ -138,6 +152,11 @@ nlBearerToken
   = lens _nlBearerToken
       (\ s a -> s{_nlBearerToken = a})
 
+-- | The project id to list namespaces under. Optional.
+nlProjectId :: Lens' NamespacesList (Maybe Text)
+nlProjectId
+  = lens _nlProjectId (\ s a -> s{_nlProjectId = a})
+
 -- | JSONP
 nlCallback :: Lens' NamespacesList (Maybe Text)
 nlCallback
@@ -145,11 +164,14 @@ nlCallback
 
 instance GoogleRequest NamespacesList where
         type Rs NamespacesList = ListNamespacesResponse
-        requestClient NamespacesList{..}
+        type Scopes NamespacesList =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+        requestClient NamespacesList'{..}
           = go _nlXgafv _nlUploadProtocol (Just _nlPp)
               _nlAccessToken
               _nlUploadType
               _nlBearerToken
+              _nlProjectId
               _nlCallback
               (Just AltJSON)
               proximityBeaconService

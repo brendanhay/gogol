@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.URLShortener.URL.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type URLGetResource =
 -- | Expands a short URL or gets creation time and analytics.
 --
 -- /See:/ 'urlGet' smart constructor.
-data URLGet = URLGet
+data URLGet = URLGet'
     { _ugProjection :: !(Maybe URLGetProjection)
     , _ugShortURL   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ urlGet
     :: Text -- ^ 'ugShortURL'
     -> URLGet
 urlGet pUgShortURL_ =
-    URLGet
+    URLGet'
     { _ugProjection = Nothing
     , _ugShortURL = pUgShortURL_
     }
@@ -86,7 +86,9 @@ ugShortURL
 
 instance GoogleRequest URLGet where
         type Rs URLGet = URL
-        requestClient URLGet{..}
+        type Scopes URLGet =
+             '["https://www.googleapis.com/auth/urlshortener"]
+        requestClient URLGet'{..}
           = go (Just _ugShortURL) _ugProjection (Just AltJSON)
               uRLShortenerService
           where go

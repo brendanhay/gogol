@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.YouTubeReporting.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,8 +20,8 @@ module Network.Google.YouTubeReporting.Types
       youTubeReportingService
 
     -- * OAuth Scopes
-    , ytAnalyticsReadonlyScope
-    , ytAnalyticsMonetaryReadonlyScope
+    , youTubeAnalyticsReadOnlyScope
+    , youTubeAnalyticsMonetaryReadOnlyScope
 
     -- * ListReportsResponse
     , ListReportsResponse
@@ -41,6 +42,7 @@ module Network.Google.YouTubeReporting.Types
     , rEndTime
     , rId
     , rCreateTime
+    , rJobExpireTime
 
     -- * ListReportTypesResponse
     , ListReportTypesResponse
@@ -58,7 +60,9 @@ module Network.Google.YouTubeReporting.Types
     , job
     , jName
     , jId
+    , jSystemManaged
     , jReportTypeId
+    , jExpireTime
     , jCreateTime
 
     -- * ListJobsResponse
@@ -72,6 +76,8 @@ module Network.Google.YouTubeReporting.Types
     , reportType
     , rtName
     , rtId
+    , rtDeprecateTime
+    , rtSystemManaged
     ) where
 
 import           Network.Google.Prelude
@@ -79,16 +85,16 @@ import           Network.Google.YouTubeReporting.Types.Product
 import           Network.Google.YouTubeReporting.Types.Sum
 
 -- | Default request referring to version 'v1' of the YouTube Reporting API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeReportingService :: Service
+youTubeReportingService :: ServiceConfig
 youTubeReportingService
   = defaultService (ServiceId "youtubereporting:v1")
       "youtubereporting.googleapis.com"
 
 -- | View YouTube Analytics reports for your YouTube content
-ytAnalyticsReadonlyScope :: OAuthScope
-ytAnalyticsReadonlyScope = "https://www.googleapis.com/auth/yt-analytics.readonly";
+youTubeAnalyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
+youTubeAnalyticsReadOnlyScope = Proxy;
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
-ytAnalyticsMonetaryReadonlyScope :: OAuthScope
-ytAnalyticsMonetaryReadonlyScope = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly";
+youTubeAnalyticsMonetaryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
+youTubeAnalyticsMonetaryReadOnlyScope = Proxy;

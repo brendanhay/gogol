@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AchievementConfigurationsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'achievementConfigurationsPatch' smart constructor.
-data AchievementConfigurationsPatch = AchievementConfigurationsPatch
+data AchievementConfigurationsPatch = AchievementConfigurationsPatch'
     { _acpAchievementId :: !Text
     , _acpPayload       :: !AchievementConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ achievementConfigurationsPatch
     -> AchievementConfiguration -- ^ 'acpPayload'
     -> AchievementConfigurationsPatch
 achievementConfigurationsPatch pAcpAchievementId_ pAcpPayload_ =
-    AchievementConfigurationsPatch
+    AchievementConfigurationsPatch'
     { _acpAchievementId = pAcpAchievementId_
     , _acpPayload = pAcpPayload_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest AchievementConfigurationsPatch
          where
         type Rs AchievementConfigurationsPatch =
              AchievementConfiguration
-        requestClient AchievementConfigurationsPatch{..}
+        type Scopes AchievementConfigurationsPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient AchievementConfigurationsPatch'{..}
           = go _acpAchievementId (Just AltJSON) _acpPayload
               gamesConfigurationService
           where go

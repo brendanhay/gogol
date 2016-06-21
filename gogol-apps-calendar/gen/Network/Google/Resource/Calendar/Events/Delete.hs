@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Events.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type EventsDeleteResource =
 -- | Deletes an event.
 --
 -- /See:/ 'eventsDelete' smart constructor.
-data EventsDelete = EventsDelete
+data EventsDelete = EventsDelete'
     { _edCalendarId        :: !Text
     , _edSendNotifications :: !(Maybe Bool)
     , _edEventId           :: !Text
@@ -76,7 +76,7 @@ eventsDelete
     -> Text -- ^ 'edEventId'
     -> EventsDelete
 eventsDelete pEdCalendarId_ pEdEventId_ =
-    EventsDelete
+    EventsDelete'
     { _edCalendarId = pEdCalendarId_
     , _edSendNotifications = Nothing
     , _edEventId = pEdEventId_
@@ -103,7 +103,9 @@ edEventId
 
 instance GoogleRequest EventsDelete where
         type Rs EventsDelete = ()
-        requestClient EventsDelete{..}
+        type Scopes EventsDelete =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient EventsDelete'{..}
           = go _edCalendarId _edEventId _edSendNotifications
               (Just AltJSON)
               appsCalendarService

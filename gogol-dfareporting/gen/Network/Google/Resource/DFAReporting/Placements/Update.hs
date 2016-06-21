@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Placements.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementsUpdate' request conforms to.
 type PlacementsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -54,7 +54,7 @@ type PlacementsUpdateResource =
 -- | Updates an existing placement.
 --
 -- /See:/ 'placementsUpdate' smart constructor.
-data PlacementsUpdate = PlacementsUpdate
+data PlacementsUpdate = PlacementsUpdate'
     { _puProFileId :: !(Textual Int64)
     , _puPayload   :: !Placement
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ placementsUpdate
     -> Placement -- ^ 'puPayload'
     -> PlacementsUpdate
 placementsUpdate pPuProFileId_ pPuPayload_ =
-    PlacementsUpdate
+    PlacementsUpdate'
     { _puProFileId = _Coerce # pPuProFileId_
     , _puPayload = pPuPayload_
     }
@@ -89,7 +89,9 @@ puPayload
 
 instance GoogleRequest PlacementsUpdate where
         type Rs PlacementsUpdate = Placement
-        requestClient PlacementsUpdate{..}
+        type Scopes PlacementsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementsUpdate'{..}
           = go _puProFileId (Just AltJSON) _puPayload
               dFAReportingService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type PerformanceReportListResource =
 -- | Retrieves the authenticated user\'s list of performance metrics.
 --
 -- /See:/ 'performanceReportList'' smart constructor.
-data PerformanceReportList' = PerformanceReportList'
+data PerformanceReportList' = PerformanceReportList''
     { _prlAccountId     :: !(Textual Int64)
     , _prlPageToken     :: !(Maybe Text)
     , _prlEndDateTime   :: !Text
@@ -87,7 +87,7 @@ performanceReportList'
     -> Text -- ^ 'prlStartDateTime'
     -> PerformanceReportList'
 performanceReportList' pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
-    PerformanceReportList'
+    PerformanceReportList''
     { _prlAccountId = _Coerce # pPrlAccountId_
     , _prlPageToken = Nothing
     , _prlEndDateTime = pPrlEndDateTime_
@@ -131,7 +131,9 @@ prlStartDateTime
 instance GoogleRequest PerformanceReportList' where
         type Rs PerformanceReportList' =
              PerformanceReportList
-        requestClient PerformanceReportList'{..}
+        type Scopes PerformanceReportList' =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient PerformanceReportList''{..}
           = go (Just _prlAccountId) (Just _prlEndDateTime)
               (Just _prlStartDateTime)
               _prlPageToken

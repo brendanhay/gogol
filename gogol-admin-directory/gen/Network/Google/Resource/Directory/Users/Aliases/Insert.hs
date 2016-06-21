@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Aliases.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersAliasesInsertResource =
 -- | Add a alias for the user
 --
 -- /See:/ 'usersAliasesInsert' smart constructor.
-data UsersAliasesInsert = UsersAliasesInsert
+data UsersAliasesInsert = UsersAliasesInsert'
     { _uaiPayload :: !Alias
     , _uaiUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersAliasesInsert
     -> Text -- ^ 'uaiUserKey'
     -> UsersAliasesInsert
 usersAliasesInsert pUaiPayload_ pUaiUserKey_ =
-    UsersAliasesInsert
+    UsersAliasesInsert'
     { _uaiPayload = pUaiPayload_
     , _uaiUserKey = pUaiUserKey_
     }
@@ -89,7 +89,10 @@ uaiUserKey
 
 instance GoogleRequest UsersAliasesInsert where
         type Rs UsersAliasesInsert = Alias
-        requestClient UsersAliasesInsert{..}
+        type Scopes UsersAliasesInsert =
+             '["https://www.googleapis.com/auth/admin.directory.user",
+               "https://www.googleapis.com/auth/admin.directory.user.alias"]
+        requestClient UsersAliasesInsert'{..}
           = go _uaiUserKey (Just AltJSON) _uaiPayload
               directoryService
           where go

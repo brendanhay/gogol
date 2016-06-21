@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Users.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersListResource =
 -- | Lists users in the specified Cloud SQL instance.
 --
 -- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
+data UsersList = UsersList'
     { _ulProject  :: !Text
     , _ulInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ usersList
     -> Text -- ^ 'ulInstance'
     -> UsersList
 usersList pUlProject_ pUlInstance_ =
-    UsersList
+    UsersList'
     { _ulProject = pUlProject_
     , _ulInstance = pUlInstance_
     }
@@ -90,7 +90,10 @@ ulInstance
 
 instance GoogleRequest UsersList where
         type Rs UsersList = UsersListResponse
-        requestClient UsersList{..}
+        type Scopes UsersList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient UsersList'{..}
           = go _ulProject _ulInstance (Just AltJSON)
               sQLAdminService
           where go

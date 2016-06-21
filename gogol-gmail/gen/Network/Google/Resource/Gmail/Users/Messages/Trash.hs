@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Messages.Trash
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersMessagesTrashResource =
 -- | Moves the specified message to the trash.
 --
 -- /See:/ 'usersMessagesTrash' smart constructor.
-data UsersMessagesTrash = UsersMessagesTrash
+data UsersMessagesTrash = UsersMessagesTrash'
     { _umtUserId :: !Text
     , _umtId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,10 +69,9 @@ data UsersMessagesTrash = UsersMessagesTrash
 -- * 'umtId'
 usersMessagesTrash
     :: Text -- ^ 'umtId'
-    -> Text
     -> UsersMessagesTrash
-usersMessagesTrash pUmtUserId_ pUmtId_ =
-    UsersMessagesTrash
+usersMessagesTrash pUmtId_ =
+    UsersMessagesTrash'
     { _umtUserId = "me"
     , _umtId = pUmtId_
     }
@@ -89,7 +88,10 @@ umtId = lens _umtId (\ s a -> s{_umtId = a})
 
 instance GoogleRequest UsersMessagesTrash where
         type Rs UsersMessagesTrash = Message
-        requestClient UsersMessagesTrash{..}
+        type Scopes UsersMessagesTrash =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersMessagesTrash'{..}
           = go _umtUserId _umtId (Just AltJSON) gmailService
           where go
                   = buildClient

@@ -14,15 +14,15 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Unenrolls an enterprise from the calling MDM.
+-- Unenrolls an enterprise from the calling EMM.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.unenroll@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.unenroll@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
     (
     -- * REST Resource
@@ -49,10 +49,10 @@ type EnterprisesUnenrollResource =
              "unenroll" :>
                QueryParam "alt" AltJSON :> Post '[JSON] ()
 
--- | Unenrolls an enterprise from the calling MDM.
+-- | Unenrolls an enterprise from the calling EMM.
 --
 -- /See:/ 'enterprisesUnenroll' smart constructor.
-newtype EnterprisesUnenroll = EnterprisesUnenroll
+newtype EnterprisesUnenroll = EnterprisesUnenroll'
     { _euuEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ enterprisesUnenroll
     :: Text -- ^ 'euuEnterpriseId'
     -> EnterprisesUnenroll
 enterprisesUnenroll pEuuEnterpriseId_ =
-    EnterprisesUnenroll
+    EnterprisesUnenroll'
     { _euuEnterpriseId = pEuuEnterpriseId_
     }
 
@@ -77,7 +77,9 @@ euuEnterpriseId
 
 instance GoogleRequest EnterprisesUnenroll where
         type Rs EnterprisesUnenroll = ()
-        requestClient EnterprisesUnenroll{..}
+        type Scopes EnterprisesUnenroll =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EnterprisesUnenroll'{..}
           = go _euuEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

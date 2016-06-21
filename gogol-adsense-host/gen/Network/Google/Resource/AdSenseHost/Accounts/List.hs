@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.Accounts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AccountsListResource =
 -- id.
 --
 -- /See:/ 'accountsList' smart constructor.
-newtype AccountsList = AccountsList
+newtype AccountsList = AccountsList'
     { _alFilterAdClientId :: [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountsList
     :: [Text] -- ^ 'alFilterAdClientId'
     -> AccountsList
 accountsList pAlFilterAdClientId_ =
-    AccountsList
+    AccountsList'
     { _alFilterAdClientId = _Coerce # pAlFilterAdClientId_
     }
 
@@ -79,7 +79,9 @@ alFilterAdClientId
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = Accounts
-        requestClient AccountsList{..}
+        type Scopes AccountsList =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AccountsList'{..}
           = go _alFilterAdClientId (Just AltJSON)
               adSenseHostService
           where go

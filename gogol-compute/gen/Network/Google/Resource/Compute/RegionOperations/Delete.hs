@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.RegionOperations.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type RegionOperationsDeleteResource =
 -- | Deletes the specified region-specific Operations resource.
 --
 -- /See:/ 'regionOperationsDelete' smart constructor.
-data RegionOperationsDelete = RegionOperationsDelete
+data RegionOperationsDelete = RegionOperationsDelete'
     { _rodProject   :: !Text
     , _rodOperation :: !Text
     , _rodRegion    :: !Text
@@ -78,7 +78,7 @@ regionOperationsDelete
     -> Text -- ^ 'rodRegion'
     -> RegionOperationsDelete
 regionOperationsDelete pRodProject_ pRodOperation_ pRodRegion_ =
-    RegionOperationsDelete
+    RegionOperationsDelete'
     { _rodProject = pRodProject_
     , _rodOperation = pRodOperation_
     , _rodRegion = pRodRegion_
@@ -94,14 +94,17 @@ rodOperation :: Lens' RegionOperationsDelete Text
 rodOperation
   = lens _rodOperation (\ s a -> s{_rodOperation = a})
 
--- | Name of the region scoping this request.
+-- | Name of the region for this request.
 rodRegion :: Lens' RegionOperationsDelete Text
 rodRegion
   = lens _rodRegion (\ s a -> s{_rodRegion = a})
 
 instance GoogleRequest RegionOperationsDelete where
         type Rs RegionOperationsDelete = ()
-        requestClient RegionOperationsDelete{..}
+        type Scopes RegionOperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient RegionOperationsDelete'{..}
           = go _rodProject _rodRegion _rodOperation
               (Just AltJSON)
               computeService

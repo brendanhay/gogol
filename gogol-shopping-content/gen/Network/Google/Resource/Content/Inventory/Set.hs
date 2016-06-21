@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Inventory.Set
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type InventorySetResource =
 -- product.
 --
 -- /See:/ 'inventorySet' smart constructor.
-data InventorySet = InventorySet
+data InventorySet = InventorySet'
     { _isMerchantId :: !(Textual Word64)
     , _isStoreCode  :: !Text
     , _isPayload    :: !InventorySetRequest
@@ -93,7 +93,7 @@ inventorySet
     -> Text -- ^ 'isProductId'
     -> InventorySet
 inventorySet pIsMerchantId_ pIsStoreCode_ pIsPayload_ pIsProductId_ =
-    InventorySet
+    InventorySet'
     { _isMerchantId = _Coerce # pIsMerchantId_
     , _isStoreCode = pIsStoreCode_
     , _isPayload = pIsPayload_
@@ -129,7 +129,9 @@ isDryRun = lens _isDryRun (\ s a -> s{_isDryRun = a})
 
 instance GoogleRequest InventorySet where
         type Rs InventorySet = InventorySetResponse
-        requestClient InventorySet{..}
+        type Scopes InventorySet =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient InventorySet'{..}
           = go _isMerchantId _isStoreCode _isProductId
               _isDryRun
               (Just AltJSON)

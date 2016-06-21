@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Comments.MarkAsSpam
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type CommentsMarkAsSpamResource =
 -- | Marks a comment as spam.
 --
 -- /See:/ 'commentsMarkAsSpam' smart constructor.
-data CommentsMarkAsSpam = CommentsMarkAsSpam
+data CommentsMarkAsSpam = CommentsMarkAsSpam'
     { _cmasBlogId    :: !Text
     , _cmasPostId    :: !Text
     , _cmasCommentId :: !Text
@@ -79,7 +79,7 @@ commentsMarkAsSpam
     -> Text -- ^ 'cmasCommentId'
     -> CommentsMarkAsSpam
 commentsMarkAsSpam pCmasBlogId_ pCmasPostId_ pCmasCommentId_ =
-    CommentsMarkAsSpam
+    CommentsMarkAsSpam'
     { _cmasBlogId = pCmasBlogId_
     , _cmasPostId = pCmasPostId_
     , _cmasCommentId = pCmasCommentId_
@@ -103,7 +103,9 @@ cmasCommentId
 
 instance GoogleRequest CommentsMarkAsSpam where
         type Rs CommentsMarkAsSpam = Comment
-        requestClient CommentsMarkAsSpam{..}
+        type Scopes CommentsMarkAsSpam =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient CommentsMarkAsSpam'{..}
           = go _cmasBlogId _cmasPostId _cmasCommentId
               (Just AltJSON)
               bloggerService

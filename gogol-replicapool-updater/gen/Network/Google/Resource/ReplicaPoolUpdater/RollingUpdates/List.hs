@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type RollingUpdatesListResource =
 -- chronological order and paginated format.
 --
 -- /See:/ 'rollingUpdatesList' smart constructor.
-data RollingUpdatesList = RollingUpdatesList
+data RollingUpdatesList = RollingUpdatesList'
     { _rulProject    :: !Text
     , _rulZone       :: !Text
     , _rulFilter     :: !(Maybe Text)
@@ -90,7 +90,7 @@ rollingUpdatesList
     -> Text -- ^ 'rulZone'
     -> RollingUpdatesList
 rollingUpdatesList pRulProject_ pRulZone_ =
-    RollingUpdatesList
+    RollingUpdatesList'
     { _rulProject = pRulProject_
     , _rulZone = pRulZone_
     , _rulFilter = Nothing
@@ -128,7 +128,12 @@ rulMaxResults
 
 instance GoogleRequest RollingUpdatesList where
         type Rs RollingUpdatesList = RollingUpdateList
-        requestClient RollingUpdatesList{..}
+        type Scopes RollingUpdatesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/replicapool",
+               "https://www.googleapis.com/auth/replicapool.readonly"]
+        requestClient RollingUpdatesList'{..}
           = go _rulProject _rulZone _rulFilter _rulPageToken
               (Just _rulMaxResults)
               (Just AltJSON)

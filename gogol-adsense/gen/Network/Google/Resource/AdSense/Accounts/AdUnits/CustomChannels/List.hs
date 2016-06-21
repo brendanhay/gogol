@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type AccountsAdUnitsCustomChannelsListResource =
 -- | List all custom channels which the specified ad unit belongs to.
 --
 -- /See:/ 'accountsAdUnitsCustomChannelsList' smart constructor.
-data AccountsAdUnitsCustomChannelsList = AccountsAdUnitsCustomChannelsList
+data AccountsAdUnitsCustomChannelsList = AccountsAdUnitsCustomChannelsList'
     { _aaucclAdUnitId   :: !Text
     , _aaucclAdClientId :: !Text
     , _aaucclAccountId  :: !Text
@@ -90,7 +90,7 @@ accountsAdUnitsCustomChannelsList
     -> Text -- ^ 'aaucclAccountId'
     -> AccountsAdUnitsCustomChannelsList
 accountsAdUnitsCustomChannelsList pAaucclAdUnitId_ pAaucclAdClientId_ pAaucclAccountId_ =
-    AccountsAdUnitsCustomChannelsList
+    AccountsAdUnitsCustomChannelsList'
     { _aaucclAdUnitId = pAaucclAdUnitId_
     , _aaucclAdClientId = pAaucclAdClientId_
     , _aaucclAccountId = pAaucclAccountId_
@@ -136,7 +136,10 @@ instance GoogleRequest
          AccountsAdUnitsCustomChannelsList where
         type Rs AccountsAdUnitsCustomChannelsList =
              CustomChannels
-        requestClient AccountsAdUnitsCustomChannelsList{..}
+        type Scopes AccountsAdUnitsCustomChannelsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AccountsAdUnitsCustomChannelsList'{..}
           = go _aaucclAccountId _aaucclAdClientId
               _aaucclAdUnitId
               _aaucclPageToken

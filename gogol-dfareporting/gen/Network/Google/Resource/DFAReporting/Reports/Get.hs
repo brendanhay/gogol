@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ReportsGet' request conforms to.
 type ReportsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -54,7 +54,7 @@ type ReportsGetResource =
 -- | Retrieves a report by its ID.
 --
 -- /See:/ 'reportsGet' smart constructor.
-data ReportsGet = ReportsGet
+data ReportsGet = ReportsGet'
     { _rgReportId  :: !(Textual Int64)
     , _rgProFileId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ reportsGet
     -> Int64 -- ^ 'rgProFileId'
     -> ReportsGet
 reportsGet pRgReportId_ pRgProFileId_ =
-    ReportsGet
+    ReportsGet'
     { _rgReportId = _Coerce # pRgReportId_
     , _rgProFileId = _Coerce # pRgProFileId_
     }
@@ -90,7 +90,9 @@ rgProFileId
 
 instance GoogleRequest ReportsGet where
         type Rs ReportsGet = Report
-        requestClient ReportsGet{..}
+        type Scopes ReportsGet =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient ReportsGet'{..}
           = go _rgProFileId _rgReportId (Just AltJSON)
               dFAReportingService
           where go

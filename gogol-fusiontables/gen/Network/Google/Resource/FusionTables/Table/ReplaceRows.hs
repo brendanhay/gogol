@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Table.ReplaceRows
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -73,14 +73,13 @@ type TableReplaceRowsResource =
                            QueryParam "isStrict" Bool :>
                              QueryParam "alt" AltJSON :>
                                QueryParam "uploadType" AltMedia :>
-                                 ReqBody '[OctetStream] RequestBody :>
-                                   Post '[JSON] Task
+                                 AltMedia :> Post '[JSON] Task
 
 -- | Replaces rows of an existing table. Current rows remain visible until
 -- all replacement rows are ready.
 --
 -- /See:/ 'tableReplaceRows' smart constructor.
-data TableReplaceRows = TableReplaceRows
+data TableReplaceRows = TableReplaceRows'
     { _trrStartLine :: !(Maybe (Textual Int32))
     , _trrEndLine   :: !(Maybe (Textual Int32))
     , _trrTableId   :: !Text
@@ -108,7 +107,7 @@ tableReplaceRows
     :: Text -- ^ 'trrTableId'
     -> TableReplaceRows
 tableReplaceRows pTrrTableId_ =
-    TableReplaceRows
+    TableReplaceRows'
     { _trrStartLine = Nothing
     , _trrEndLine = Nothing
     , _trrTableId = pTrrTableId_
@@ -160,7 +159,9 @@ trrIsStrict
 
 instance GoogleRequest TableReplaceRows where
         type Rs TableReplaceRows = Task
-        requestClient TableReplaceRows{..}
+        type Scopes TableReplaceRows =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient TableReplaceRows'{..}
           = go _trrTableId _trrStartLine _trrEndLine
               _trrDelimiter
               _trrEncoding
@@ -175,7 +176,10 @@ instance GoogleRequest TableReplaceRows where
 instance GoogleRequest (MediaUpload TableReplaceRows)
          where
         type Rs (MediaUpload TableReplaceRows) = Task
-        requestClient (MediaUpload TableReplaceRows{..} body)
+        type Scopes (MediaUpload TableReplaceRows) =
+             Scopes TableReplaceRows
+        requestClient
+          (MediaUpload TableReplaceRows'{..} body)
           = go _trrTableId _trrStartLine _trrEndLine
               _trrDelimiter
               _trrEncoding

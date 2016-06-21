@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@
 -- Retrieves the IDs of the users who have been granted entitlements under
 -- the license.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.grouplicenseusers.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.grouplicenseusers.list@.
 module Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
     (
     -- * REST Resource
@@ -58,7 +58,7 @@ type GrouplicenseUsersListResource =
 -- the license.
 --
 -- /See:/ 'grouplicenseUsersList' smart constructor.
-data GrouplicenseUsersList = GrouplicenseUsersList
+data GrouplicenseUsersList = GrouplicenseUsersList'
     { _gulEnterpriseId   :: !Text
     , _gulGroupLicenseId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ grouplicenseUsersList
     -> Text -- ^ 'gulGroupLicenseId'
     -> GrouplicenseUsersList
 grouplicenseUsersList pGulEnterpriseId_ pGulGroupLicenseId_ =
-    GrouplicenseUsersList
+    GrouplicenseUsersList'
     { _gulEnterpriseId = pGulEnterpriseId_
     , _gulGroupLicenseId = pGulGroupLicenseId_
     }
@@ -96,7 +96,9 @@ gulGroupLicenseId
 instance GoogleRequest GrouplicenseUsersList where
         type Rs GrouplicenseUsersList =
              GroupLicenseUsersListResponse
-        requestClient GrouplicenseUsersList{..}
+        type Scopes GrouplicenseUsersList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient GrouplicenseUsersList'{..}
           = go _gulEnterpriseId _gulGroupLicenseId
               (Just AltJSON)
               androidEnterpriseService

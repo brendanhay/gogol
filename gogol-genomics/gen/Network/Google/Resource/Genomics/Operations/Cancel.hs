@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Operations.Cancel
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -26,7 +26,7 @@
 -- Operations.ListOperations to check whether the cancellation succeeded or
 -- the operation completed despite cancellation.
 --
--- /See:/ < Genomics API Reference> for @genomics.operations.cancel@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.operations.cancel@.
 module Network.Google.Resource.Genomics.Operations.Cancel
     (
     -- * REST Resource
@@ -74,7 +74,7 @@ type OperationsCancelResource =
 -- the operation completed despite cancellation.
 --
 -- /See:/ 'operationsCancel' smart constructor.
-data OperationsCancel = OperationsCancel
+data OperationsCancel = OperationsCancel'
     { _ocXgafv          :: !(Maybe Text)
     , _ocUploadProtocol :: !(Maybe Text)
     , _ocPp             :: !Bool
@@ -112,7 +112,7 @@ operationsCancel
     -> Text -- ^ 'ocName'
     -> OperationsCancel
 operationsCancel pOcPayload_ pOcName_ =
-    OperationsCancel
+    OperationsCancel'
     { _ocXgafv = Nothing
     , _ocUploadProtocol = Nothing
     , _ocPp = True
@@ -171,7 +171,10 @@ ocCallback
 
 instance GoogleRequest OperationsCancel where
         type Rs OperationsCancel = Empty
-        requestClient OperationsCancel{..}
+        type Scopes OperationsCancel =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient OperationsCancel'{..}
           = go _ocName _ocXgafv _ocUploadProtocol (Just _ocPp)
               _ocAccessToken
               _ocUploadType

@@ -7,20 +7,23 @@
 
 -- |
 -- Module      : Network.Google.DataTransfer
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Admin Data Transfer API lets you transfer user data from one user to
--- another.
+-- Transfers user data from one user to another.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference>
 module Network.Google.DataTransfer
     (
     -- * Service Configuration
       dataTransferService
+
+    -- * OAuth Scopes
+    , adminDataTransferReadOnlyScope
+    , adminDataTransferScope
 
     -- * API Declaration
     , DataTransferAPI

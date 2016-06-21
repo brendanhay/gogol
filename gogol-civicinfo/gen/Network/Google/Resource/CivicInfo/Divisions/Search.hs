@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CivicInfo.Divisions.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type DivisionsSearchResource =
 -- | Searches for political divisions by their natural name or OCD ID.
 --
 -- /See:/ 'divisionsSearch' smart constructor.
-newtype DivisionsSearch = DivisionsSearch
+newtype DivisionsSearch = DivisionsSearch'
     { _dsQuery :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ newtype DivisionsSearch = DivisionsSearch
 divisionsSearch
     :: DivisionsSearch
 divisionsSearch =
-    DivisionsSearch
+    DivisionsSearch'
     { _dsQuery = Nothing
     }
 
@@ -78,7 +78,8 @@ dsQuery = lens _dsQuery (\ s a -> s{_dsQuery = a})
 
 instance GoogleRequest DivisionsSearch where
         type Rs DivisionsSearch = DivisionSearchResponse
-        requestClient DivisionsSearch{..}
+        type Scopes DivisionsSearch = '[]
+        requestClient DivisionsSearch'{..}
           = go _dsQuery (Just AltJSON) civicInfoService
           where go
                   = buildClient

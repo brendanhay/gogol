@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ResourceViews.ZoneViews.AddResources
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ZoneViewsAddResourcesResource =
 -- | Add resources to the view.
 --
 -- /See:/ 'zoneViewsAddResources' smart constructor.
-data ZoneViewsAddResources = ZoneViewsAddResources
+data ZoneViewsAddResources = ZoneViewsAddResources'
     { _zvarResourceView :: !Text
     , _zvarProject      :: !Text
     , _zvarZone         :: !Text
@@ -86,7 +86,7 @@ zoneViewsAddResources
     -> ZoneViewsAddResourcesRequest -- ^ 'zvarPayload'
     -> ZoneViewsAddResources
 zoneViewsAddResources pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarPayload_ =
-    ZoneViewsAddResources
+    ZoneViewsAddResources'
     { _zvarResourceView = pZvarResourceView_
     , _zvarProject = pZvarProject_
     , _zvarZone = pZvarZone_
@@ -115,7 +115,11 @@ zvarPayload
 
 instance GoogleRequest ZoneViewsAddResources where
         type Rs ZoneViewsAddResources = Operation
-        requestClient ZoneViewsAddResources{..}
+        type Scopes ZoneViewsAddResources =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient ZoneViewsAddResources'{..}
           = go _zvarProject _zvarZone _zvarResourceView
               (Just AltJSON)
               _zvarPayload

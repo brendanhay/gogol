@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeReporting.Jobs.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -38,6 +38,7 @@ module Network.Google.Resource.YouTubeReporting.Jobs.List
     , jlPp
     , jlAccessToken
     , jlUploadType
+    , jlIncludeSystemManaged
     , jlOnBehalfOfContentOwner
     , jlBearerToken
     , jlPageToken
@@ -58,23 +59,25 @@ type JobsListResource =
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListJobsResponse
+                   QueryParam "includeSystemManaged" Bool :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListJobsResponse
 
 -- | Lists jobs.
 --
 -- /See:/ 'jobsList' smart constructor.
-data JobsList = JobsList
+data JobsList = JobsList'
     { _jlXgafv                  :: !(Maybe Text)
     , _jlUploadProtocol         :: !(Maybe Text)
     , _jlPp                     :: !Bool
     , _jlAccessToken            :: !(Maybe Text)
     , _jlUploadType             :: !(Maybe Text)
+    , _jlIncludeSystemManaged   :: !(Maybe Bool)
     , _jlOnBehalfOfContentOwner :: !(Maybe Text)
     , _jlBearerToken            :: !(Maybe Text)
     , _jlPageToken              :: !(Maybe Text)
@@ -96,6 +99,8 @@ data JobsList = JobsList
 --
 -- * 'jlUploadType'
 --
+-- * 'jlIncludeSystemManaged'
+--
 -- * 'jlOnBehalfOfContentOwner'
 --
 -- * 'jlBearerToken'
@@ -108,12 +113,13 @@ data JobsList = JobsList
 jobsList
     :: JobsList
 jobsList =
-    JobsList
+    JobsList'
     { _jlXgafv = Nothing
     , _jlUploadProtocol = Nothing
     , _jlPp = True
     , _jlAccessToken = Nothing
     , _jlUploadType = Nothing
+    , _jlIncludeSystemManaged = Nothing
     , _jlOnBehalfOfContentOwner = Nothing
     , _jlBearerToken = Nothing
     , _jlPageToken = Nothing
@@ -145,6 +151,14 @@ jlAccessToken
 jlUploadType :: Lens' JobsList (Maybe Text)
 jlUploadType
   = lens _jlUploadType (\ s a -> s{_jlUploadType = a})
+
+-- | If set to true, also system-managed jobs will be returned; otherwise
+-- only user-created jobs will be returned. System-managed jobs can neither
+-- be modified nor deleted.
+jlIncludeSystemManaged :: Lens' JobsList (Maybe Bool)
+jlIncludeSystemManaged
+  = lens _jlIncludeSystemManaged
+      (\ s a -> s{_jlIncludeSystemManaged = a})
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).
@@ -180,10 +194,14 @@ jlCallback
 
 instance GoogleRequest JobsList where
         type Rs JobsList = ListJobsResponse
-        requestClient JobsList{..}
+        type Scopes JobsList =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
+        requestClient JobsList'{..}
           = go _jlXgafv _jlUploadProtocol (Just _jlPp)
               _jlAccessToken
               _jlUploadType
+              _jlIncludeSystemManaged
               _jlOnBehalfOfContentOwner
               _jlBearerToken
               _jlPageToken

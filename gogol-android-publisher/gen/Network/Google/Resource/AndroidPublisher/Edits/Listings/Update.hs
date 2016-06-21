@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Listings.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type EditsListingsUpdateResource =
 -- | Creates or updates a localized store listing.
 --
 -- /See:/ 'editsListingsUpdate' smart constructor.
-data EditsListingsUpdate = EditsListingsUpdate
+data EditsListingsUpdate = EditsListingsUpdate'
     { _eluPackageName :: !Text
     , _eluPayload     :: !Listing
     , _eluLanguage    :: !Text
@@ -84,7 +84,7 @@ editsListingsUpdate
     -> Text -- ^ 'eluEditId'
     -> EditsListingsUpdate
 editsListingsUpdate pEluPackageName_ pEluPayload_ pEluLanguage_ pEluEditId_ =
-    EditsListingsUpdate
+    EditsListingsUpdate'
     { _eluPackageName = pEluPackageName_
     , _eluPayload = pEluPayload_
     , _eluLanguage = pEluLanguage_
@@ -116,7 +116,9 @@ eluEditId
 
 instance GoogleRequest EditsListingsUpdate where
         type Rs EditsListingsUpdate = Listing
-        requestClient EditsListingsUpdate{..}
+        type Scopes EditsListingsUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsListingsUpdate'{..}
           = go _eluPackageName _eluEditId _eluLanguage
               (Just AltJSON)
               _eluPayload

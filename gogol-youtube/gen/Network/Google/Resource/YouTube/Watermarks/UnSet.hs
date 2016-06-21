@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Watermarks.UnSet
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type WatermarksUnSetResource =
 -- | Deletes a channel\'s watermark image.
 --
 -- /See:/ 'watermarksUnSet' smart constructor.
-data WatermarksUnSet = WatermarksUnSet
+data WatermarksUnSet = WatermarksUnSet'
     { _wusChannelId              :: !Text
     , _wusOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ watermarksUnSet
     :: Text -- ^ 'wusChannelId'
     -> WatermarksUnSet
 watermarksUnSet pWusChannelId_ =
-    WatermarksUnSet
+    WatermarksUnSet'
     { _wusChannelId = pWusChannelId_
     , _wusOnBehalfOfContentOwner = Nothing
     }
@@ -98,7 +98,11 @@ wusOnBehalfOfContentOwner
 
 instance GoogleRequest WatermarksUnSet where
         type Rs WatermarksUnSet = ()
-        requestClient WatermarksUnSet{..}
+        type Scopes WatermarksUnSet =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient WatermarksUnSet'{..}
           = go (Just _wusChannelId) _wusOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

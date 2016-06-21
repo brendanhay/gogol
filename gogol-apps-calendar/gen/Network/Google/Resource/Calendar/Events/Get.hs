@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Events.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type EventsGetResource =
 -- | Returns an event.
 --
 -- /See:/ 'eventsGet' smart constructor.
-data EventsGet = EventsGet
+data EventsGet = EventsGet'
     { _egCalendarId         :: !Text
     , _egMaxAttendees       :: !(Maybe (Textual Int32))
     , _egTimeZone           :: !(Maybe Text)
@@ -86,7 +86,7 @@ eventsGet
     -> Text -- ^ 'egEventId'
     -> EventsGet
 eventsGet pEgCalendarId_ pEgEventId_ =
-    EventsGet
+    EventsGet'
     { _egCalendarId = pEgCalendarId_
     , _egMaxAttendees = Nothing
     , _egTimeZone = Nothing
@@ -134,7 +134,10 @@ egEventId
 
 instance GoogleRequest EventsGet where
         type Rs EventsGet = Event
-        requestClient EventsGet{..}
+        type Scopes EventsGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient EventsGet'{..}
           = go _egCalendarId _egEventId _egMaxAttendees
               _egTimeZone
               _egAlwaysIncludeEmail

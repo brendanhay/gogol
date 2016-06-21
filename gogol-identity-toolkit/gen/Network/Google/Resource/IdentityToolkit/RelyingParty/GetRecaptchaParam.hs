@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,20 +51,21 @@ type RelyingPartyGetRecaptchaParamResource =
 --
 -- /See:/ 'relyingPartyGetRecaptchaParam' smart constructor.
 data RelyingPartyGetRecaptchaParam =
-    RelyingPartyGetRecaptchaParam
+    RelyingPartyGetRecaptchaParam'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyGetRecaptchaParam' with the minimum fields required to make a request.
 --
 relyingPartyGetRecaptchaParam
     :: RelyingPartyGetRecaptchaParam
-relyingPartyGetRecaptchaParam = RelyingPartyGetRecaptchaParam
+relyingPartyGetRecaptchaParam = RelyingPartyGetRecaptchaParam'
 
 instance GoogleRequest RelyingPartyGetRecaptchaParam
          where
         type Rs RelyingPartyGetRecaptchaParam =
              GetRecaptchaParamResponse
-        requestClient RelyingPartyGetRecaptchaParam{}
+        type Scopes RelyingPartyGetRecaptchaParam = '[]
+        requestClient RelyingPartyGetRecaptchaParam'{}
           = go (Just AltJSON) identityToolkitService
           where go
                   = buildClient

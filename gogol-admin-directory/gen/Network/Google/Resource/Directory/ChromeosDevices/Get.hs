@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.ChromeosDevices.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ChromeosDevicesGetResource =
 -- | Retrieve Chrome OS Device
 --
 -- /See:/ 'chromeosDevicesGet' smart constructor.
-data ChromeosDevicesGet = ChromeosDevicesGet
+data ChromeosDevicesGet = ChromeosDevicesGet'
     { _cdgCustomerId :: !Text
     , _cdgDeviceId   :: !Text
     , _cdgProjection :: !(Maybe ChromeosDevicesGetProjection)
@@ -80,7 +80,7 @@ chromeosDevicesGet
     -> Text -- ^ 'cdgDeviceId'
     -> ChromeosDevicesGet
 chromeosDevicesGet pCdgCustomerId_ pCdgDeviceId_ =
-    ChromeosDevicesGet
+    ChromeosDevicesGet'
     { _cdgCustomerId = pCdgCustomerId_
     , _cdgDeviceId = pCdgDeviceId_
     , _cdgProjection = Nothing
@@ -105,7 +105,10 @@ cdgProjection
 
 instance GoogleRequest ChromeosDevicesGet where
         type Rs ChromeosDevicesGet = ChromeOSDevice
-        requestClient ChromeosDevicesGet{..}
+        type Scopes ChromeosDevicesGet =
+             '["https://www.googleapis.com/auth/admin.directory.device.chromeos",
+               "https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly"]
+        requestClient ChromeosDevicesGet'{..}
           = go _cdgCustomerId _cdgDeviceId _cdgProjection
               (Just AltJSON)
               directoryService

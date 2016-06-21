@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Topics.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -73,7 +73,7 @@ type ProjectsTopicsDeleteResource =
 -- \`_deleted-topic_\`.
 --
 -- /See:/ 'projectsTopicsDelete' smart constructor.
-data ProjectsTopicsDelete = ProjectsTopicsDelete
+data ProjectsTopicsDelete = ProjectsTopicsDelete'
     { _ptdXgafv          :: !(Maybe Text)
     , _ptdUploadProtocol :: !(Maybe Text)
     , _ptdPp             :: !Bool
@@ -107,7 +107,7 @@ projectsTopicsDelete
     :: Text -- ^ 'ptdTopic'
     -> ProjectsTopicsDelete
 projectsTopicsDelete pPtdTopic_ =
-    ProjectsTopicsDelete
+    ProjectsTopicsDelete'
     { _ptdXgafv = Nothing
     , _ptdUploadProtocol = Nothing
     , _ptdPp = True
@@ -161,7 +161,10 @@ ptdCallback
 
 instance GoogleRequest ProjectsTopicsDelete where
         type Rs ProjectsTopicsDelete = Empty
-        requestClient ProjectsTopicsDelete{..}
+        type Scopes ProjectsTopicsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsTopicsDelete'{..}
           = go _ptdTopic _ptdXgafv _ptdUploadProtocol
               (Just _ptdPp)
               _ptdAccessToken

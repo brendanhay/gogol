@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.CustomSearch.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'promotionImage' smart constructor.
-data PromotionImage = PromotionImage
+data PromotionImage = PromotionImage'
     { _piHeight :: !(Maybe (Textual Int32))
     , _piWidth  :: !(Maybe (Textual Int32))
     , _piSource :: !(Maybe Text)
@@ -40,7 +40,7 @@ data PromotionImage = PromotionImage
 promotionImage
     :: PromotionImage
 promotionImage =
-    PromotionImage
+    PromotionImage'
     { _piHeight = Nothing
     , _piWidth = Nothing
     , _piSource = Nothing
@@ -63,12 +63,12 @@ instance FromJSON PromotionImage where
         parseJSON
           = withObject "PromotionImage"
               (\ o ->
-                 PromotionImage <$>
+                 PromotionImage' <$>
                    (o .:? "height") <*> (o .:? "width") <*>
                      (o .:? "source"))
 
 instance ToJSON PromotionImage where
-        toJSON PromotionImage{..}
+        toJSON PromotionImage'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _piHeight,
@@ -77,7 +77,7 @@ instance ToJSON PromotionImage where
 
 --
 -- /See:/ 'context' smart constructor.
-data Context = Context
+data Context = Context'
     { _cFacets :: !(Maybe [[ContextFacetsItemItem]])
     , _cTitle  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -92,7 +92,7 @@ data Context = Context
 context
     :: Context
 context =
-    Context
+    Context'
     { _cFacets = Nothing
     , _cTitle = Nothing
     }
@@ -109,11 +109,11 @@ instance FromJSON Context where
         parseJSON
           = withObject "Context"
               (\ o ->
-                 Context <$>
+                 Context' <$>
                    (o .:? "facets" .!= mempty) <*> (o .:? "title"))
 
 instance ToJSON Context where
-        toJSON Context{..}
+        toJSON Context'{..}
           = object
               (catMaybes
                  [("facets" .=) <$> _cFacets,
@@ -121,7 +121,7 @@ instance ToJSON Context where
 
 --
 -- /See:/ 'searchQueries' smart constructor.
-newtype SearchQueries = SearchQueries
+newtype SearchQueries = SearchQueries'
     { _sqAddtional :: HashMap Text [Query]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -134,7 +134,7 @@ searchQueries
     :: HashMap Text [Query] -- ^ 'sqAddtional'
     -> SearchQueries
 searchQueries pSqAddtional_ =
-    SearchQueries
+    SearchQueries'
     { _sqAddtional = _Coerce # pSqAddtional_
     }
 
@@ -146,14 +146,14 @@ sqAddtional
 instance FromJSON SearchQueries where
         parseJSON
           = withObject "SearchQueries"
-              (\ o -> SearchQueries <$> (parseJSONObject o))
+              (\ o -> SearchQueries' <$> (parseJSONObject o))
 
 instance ToJSON SearchQueries where
         toJSON = toJSON . _sqAddtional
 
 --
 -- /See:/ 'resultPagemapAdditionalItem' smart constructor.
-newtype ResultPagemapAdditionalItem = ResultPagemapAdditionalItem
+newtype ResultPagemapAdditionalItem = ResultPagemapAdditionalItem'
     { _rpaiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -166,7 +166,7 @@ resultPagemapAdditionalItem
     :: HashMap Text JSONValue -- ^ 'rpaiAddtional'
     -> ResultPagemapAdditionalItem
 resultPagemapAdditionalItem pRpaiAddtional_ =
-    ResultPagemapAdditionalItem
+    ResultPagemapAdditionalItem'
     { _rpaiAddtional = _Coerce # pRpaiAddtional_
     }
 
@@ -180,14 +180,14 @@ instance FromJSON ResultPagemapAdditionalItem where
         parseJSON
           = withObject "ResultPagemapAdditionalItem"
               (\ o ->
-                 ResultPagemapAdditionalItem <$> (parseJSONObject o))
+                 ResultPagemapAdditionalItem' <$> (parseJSONObject o))
 
 instance ToJSON ResultPagemapAdditionalItem where
         toJSON = toJSON . _rpaiAddtional
 
 --
 -- /See:/ 'searchURL' smart constructor.
-data SearchURL = SearchURL
+data SearchURL = SearchURL'
     { _suType     :: !Text
     , _suTemplate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -202,7 +202,7 @@ data SearchURL = SearchURL
 searchURL
     :: SearchURL
 searchURL =
-    SearchURL
+    SearchURL'
     { _suType = "application/json"
     , _suTemplate = "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
     }
@@ -218,13 +218,13 @@ instance FromJSON SearchURL where
         parseJSON
           = withObject "SearchURL"
               (\ o ->
-                 SearchURL <$>
+                 SearchURL' <$>
                    (o .:? "type" .!= "application/json") <*>
                      (o .:? "template" .!=
                         "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"))
 
 instance ToJSON SearchURL where
-        toJSON SearchURL{..}
+        toJSON SearchURL'{..}
           = object
               (catMaybes
                  [Just ("type" .= _suType),
@@ -232,7 +232,7 @@ instance ToJSON SearchURL where
 
 --
 -- /See:/ 'searchSpelling' smart constructor.
-data SearchSpelling = SearchSpelling
+data SearchSpelling = SearchSpelling'
     { _ssCorrectedQuery     :: !(Maybe Text)
     , _ssHTMLCorrectedQuery :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -247,7 +247,7 @@ data SearchSpelling = SearchSpelling
 searchSpelling
     :: SearchSpelling
 searchSpelling =
-    SearchSpelling
+    SearchSpelling'
     { _ssCorrectedQuery = Nothing
     , _ssHTMLCorrectedQuery = Nothing
     }
@@ -266,12 +266,12 @@ instance FromJSON SearchSpelling where
         parseJSON
           = withObject "SearchSpelling"
               (\ o ->
-                 SearchSpelling <$>
+                 SearchSpelling' <$>
                    (o .:? "correctedQuery") <*>
                      (o .:? "htmlCorrectedQuery"))
 
 instance ToJSON SearchSpelling where
-        toJSON SearchSpelling{..}
+        toJSON SearchSpelling'{..}
           = object
               (catMaybes
                  [("correctedQuery" .=) <$> _ssCorrectedQuery,
@@ -279,7 +279,7 @@ instance ToJSON SearchSpelling where
 
 --
 -- /See:/ 'resultImage' smart constructor.
-data ResultImage = ResultImage
+data ResultImage = ResultImage'
     { _riThumbnailLink   :: !(Maybe Text)
     , _riHeight          :: !(Maybe (Textual Int32))
     , _riByteSize        :: !(Maybe (Textual Int32))
@@ -309,7 +309,7 @@ data ResultImage = ResultImage
 resultImage
     :: ResultImage
 resultImage =
-    ResultImage
+    ResultImage'
     { _riThumbnailLink = Nothing
     , _riHeight = Nothing
     , _riByteSize = Nothing
@@ -360,7 +360,7 @@ instance FromJSON ResultImage where
         parseJSON
           = withObject "ResultImage"
               (\ o ->
-                 ResultImage <$>
+                 ResultImage' <$>
                    (o .:? "thumbnailLink") <*> (o .:? "height") <*>
                      (o .:? "byteSize")
                      <*> (o .:? "contextLink")
@@ -369,7 +369,7 @@ instance FromJSON ResultImage where
                      <*> (o .:? "thumbnailWidth"))
 
 instance ToJSON ResultImage where
-        toJSON ResultImage{..}
+        toJSON ResultImage'{..}
           = object
               (catMaybes
                  [("thumbnailLink" .=) <$> _riThumbnailLink,
@@ -382,7 +382,7 @@ instance ToJSON ResultImage where
 
 --
 -- /See:/ 'resultPagemap' smart constructor.
-newtype ResultPagemap = ResultPagemap
+newtype ResultPagemap = ResultPagemap'
     { _rpAddtional :: HashMap Text [ResultPagemapAdditionalItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -395,7 +395,7 @@ resultPagemap
     :: HashMap Text [ResultPagemapAdditionalItem] -- ^ 'rpAddtional'
     -> ResultPagemap
 resultPagemap pRpAddtional_ =
-    ResultPagemap
+    ResultPagemap'
     { _rpAddtional = _Coerce # pRpAddtional_
     }
 
@@ -407,14 +407,14 @@ rpAddtional
 instance FromJSON ResultPagemap where
         parseJSON
           = withObject "ResultPagemap"
-              (\ o -> ResultPagemap <$> (parseJSONObject o))
+              (\ o -> ResultPagemap' <$> (parseJSONObject o))
 
 instance ToJSON ResultPagemap where
         toJSON = toJSON . _rpAddtional
 
 --
 -- /See:/ 'result' smart constructor.
-data Result = Result
+data Result = Result'
     { _rMime             :: !(Maybe Text)
     , _rImage            :: !(Maybe ResultImage)
     , _rPagemap          :: !(Maybe ResultPagemap)
@@ -468,7 +468,7 @@ data Result = Result
 result
     :: Result
 result =
-    Result
+    Result'
     { _rMime = Nothing
     , _rImage = Nothing
     , _rPagemap = Nothing
@@ -545,7 +545,7 @@ instance FromJSON Result where
         parseJSON
           = withObject "Result"
               (\ o ->
-                 Result <$>
+                 Result' <$>
                    (o .:? "mime") <*> (o .:? "image") <*>
                      (o .:? "pagemap")
                      <*> (o .:? "displayLink")
@@ -562,7 +562,7 @@ instance FromJSON Result where
                      <*> (o .:? "title"))
 
 instance ToJSON Result where
-        toJSON Result{..}
+        toJSON Result'{..}
           = object
               (catMaybes
                  [("mime" .=) <$> _rMime, ("image" .=) <$> _rImage,
@@ -581,7 +581,7 @@ instance ToJSON Result where
 
 --
 -- /See:/ 'resultLabelsItem' smart constructor.
-data ResultLabelsItem = ResultLabelsItem
+data ResultLabelsItem = ResultLabelsItem'
     { _rliName        :: !(Maybe Text)
     , _rliDisplayName :: !(Maybe Text)
     , _rliLabelWithOp :: !(Maybe Text)
@@ -599,7 +599,7 @@ data ResultLabelsItem = ResultLabelsItem
 resultLabelsItem
     :: ResultLabelsItem
 resultLabelsItem =
-    ResultLabelsItem
+    ResultLabelsItem'
     { _rliName = Nothing
     , _rliDisplayName = Nothing
     , _rliLabelWithOp = Nothing
@@ -622,12 +622,12 @@ instance FromJSON ResultLabelsItem where
         parseJSON
           = withObject "ResultLabelsItem"
               (\ o ->
-                 ResultLabelsItem <$>
+                 ResultLabelsItem' <$>
                    (o .:? "name") <*> (o .:? "displayName") <*>
                      (o .:? "label_with_op"))
 
 instance ToJSON ResultLabelsItem where
-        toJSON ResultLabelsItem{..}
+        toJSON ResultLabelsItem'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _rliName,
@@ -636,7 +636,7 @@ instance ToJSON ResultLabelsItem where
 
 --
 -- /See:/ 'searchSearchInformation' smart constructor.
-data SearchSearchInformation = SearchSearchInformation
+data SearchSearchInformation = SearchSearchInformation'
     { _ssiSearchTime            :: !(Maybe (Textual Double))
     , _ssiFormattedSearchTime   :: !(Maybe Text)
     , _ssiTotalResults          :: !(Maybe (Textual Int64))
@@ -657,7 +657,7 @@ data SearchSearchInformation = SearchSearchInformation
 searchSearchInformation
     :: SearchSearchInformation
 searchSearchInformation =
-    SearchSearchInformation
+    SearchSearchInformation'
     { _ssiSearchTime = Nothing
     , _ssiFormattedSearchTime = Nothing
     , _ssiTotalResults = Nothing
@@ -690,14 +690,14 @@ instance FromJSON SearchSearchInformation where
         parseJSON
           = withObject "SearchSearchInformation"
               (\ o ->
-                 SearchSearchInformation <$>
+                 SearchSearchInformation' <$>
                    (o .:? "searchTime") <*>
                      (o .:? "formattedSearchTime")
                      <*> (o .:? "totalResults")
                      <*> (o .:? "formattedTotalResults"))
 
 instance ToJSON SearchSearchInformation where
-        toJSON SearchSearchInformation{..}
+        toJSON SearchSearchInformation'{..}
           = object
               (catMaybes
                  [("searchTime" .=) <$> _ssiSearchTime,
@@ -709,7 +709,7 @@ instance ToJSON SearchSearchInformation where
 
 --
 -- /See:/ 'query' smart constructor.
-data Query = Query
+data Query = Query'
     { _qImgDominantColor       :: !(Maybe Text)
     , _qOutputEncoding         :: !(Maybe Text)
     , _qSiteSearchFilter       :: !(Maybe Text)
@@ -829,7 +829,7 @@ data Query = Query
 query
     :: Query
 query =
-    Query
+    Query'
     { _qImgDominantColor = Nothing
     , _qOutputEncoding = Nothing
     , _qSiteSearchFilter = Nothing
@@ -1020,7 +1020,7 @@ instance FromJSON Query where
         parseJSON
           = withObject "Query"
               (\ o ->
-                 Query <$>
+                 Query' <$>
                    (o .:? "imgDominantColor") <*>
                      (o .:? "outputEncoding")
                      <*> (o .:? "siteSearchFilter")
@@ -1060,7 +1060,7 @@ instance FromJSON Query where
                      <*> (o .:? "highRange"))
 
 instance ToJSON Query where
-        toJSON Query{..}
+        toJSON Query'{..}
           = object
               (catMaybes
                  [("imgDominantColor" .=) <$> _qImgDominantColor,
@@ -1100,7 +1100,7 @@ instance ToJSON Query where
 
 --
 -- /See:/ 'promotionBodyLinesItem' smart constructor.
-data PromotionBodyLinesItem = PromotionBodyLinesItem
+data PromotionBodyLinesItem = PromotionBodyLinesItem'
     { _pbliLink      :: !(Maybe Text)
     , _pbliURL       :: !(Maybe Text)
     , _pbliHTMLTitle :: !(Maybe Text)
@@ -1121,7 +1121,7 @@ data PromotionBodyLinesItem = PromotionBodyLinesItem
 promotionBodyLinesItem
     :: PromotionBodyLinesItem
 promotionBodyLinesItem =
-    PromotionBodyLinesItem
+    PromotionBodyLinesItem'
     { _pbliLink = Nothing
     , _pbliURL = Nothing
     , _pbliHTMLTitle = Nothing
@@ -1147,13 +1147,13 @@ instance FromJSON PromotionBodyLinesItem where
         parseJSON
           = withObject "PromotionBodyLinesItem"
               (\ o ->
-                 PromotionBodyLinesItem <$>
+                 PromotionBodyLinesItem' <$>
                    (o .:? "link") <*> (o .:? "url") <*>
                      (o .:? "htmlTitle")
                      <*> (o .:? "title"))
 
 instance ToJSON PromotionBodyLinesItem where
-        toJSON PromotionBodyLinesItem{..}
+        toJSON PromotionBodyLinesItem'{..}
           = object
               (catMaybes
                  [("link" .=) <$> _pbliLink, ("url" .=) <$> _pbliURL,
@@ -1162,7 +1162,7 @@ instance ToJSON PromotionBodyLinesItem where
 
 --
 -- /See:/ 'promotion' smart constructor.
-data Promotion = Promotion
+data Promotion = Promotion'
     { _pImage       :: !(Maybe PromotionImage)
     , _pDisplayLink :: !(Maybe Text)
     , _pBodyLines   :: !(Maybe [PromotionBodyLinesItem])
@@ -1189,7 +1189,7 @@ data Promotion = Promotion
 promotion
     :: Promotion
 promotion =
-    Promotion
+    Promotion'
     { _pImage = Nothing
     , _pDisplayLink = Nothing
     , _pBodyLines = Nothing
@@ -1225,7 +1225,7 @@ instance FromJSON Promotion where
         parseJSON
           = withObject "Promotion"
               (\ o ->
-                 Promotion <$>
+                 Promotion' <$>
                    (o .:? "image") <*> (o .:? "displayLink") <*>
                      (o .:? "bodyLines" .!= mempty)
                      <*> (o .:? "link")
@@ -1233,7 +1233,7 @@ instance FromJSON Promotion where
                      <*> (o .:? "title"))
 
 instance ToJSON Promotion where
-        toJSON Promotion{..}
+        toJSON Promotion'{..}
           = object
               (catMaybes
                  [("image" .=) <$> _pImage,
@@ -1245,7 +1245,7 @@ instance ToJSON Promotion where
 
 --
 -- /See:/ 'search' smart constructor.
-data Search = Search
+data Search = Search'
     { _sQueries           :: !(Maybe SearchQueries)
     , _sContext           :: !(Maybe Context)
     , _sKind              :: !Text
@@ -1278,7 +1278,7 @@ data Search = Search
 search
     :: Search
 search =
-    Search
+    Search'
     { _sQueries = Nothing
     , _sContext = Nothing
     , _sKind = "customsearch#search"
@@ -1325,7 +1325,7 @@ instance FromJSON Search where
         parseJSON
           = withObject "Search"
               (\ o ->
-                 Search <$>
+                 Search' <$>
                    (o .:? "queries") <*> (o .:? "context") <*>
                      (o .:? "kind" .!= "customsearch#search")
                      <*> (o .:? "url")
@@ -1335,7 +1335,7 @@ instance FromJSON Search where
                      <*> (o .:? "spelling"))
 
 instance ToJSON Search where
-        toJSON Search{..}
+        toJSON Search'{..}
           = object
               (catMaybes
                  [("queries" .=) <$> _sQueries,
@@ -1348,7 +1348,7 @@ instance ToJSON Search where
 
 --
 -- /See:/ 'contextFacetsItemItem' smart constructor.
-data ContextFacetsItemItem = ContextFacetsItemItem
+data ContextFacetsItemItem = ContextFacetsItemItem'
     { _cfiiAnchor      :: !(Maybe Text)
     , _cfiiLabelWithOp :: !(Maybe Text)
     , _cfiiLabel       :: !(Maybe Text)
@@ -1366,7 +1366,7 @@ data ContextFacetsItemItem = ContextFacetsItemItem
 contextFacetsItemItem
     :: ContextFacetsItemItem
 contextFacetsItemItem =
-    ContextFacetsItemItem
+    ContextFacetsItemItem'
     { _cfiiAnchor = Nothing
     , _cfiiLabelWithOp = Nothing
     , _cfiiLabel = Nothing
@@ -1389,12 +1389,12 @@ instance FromJSON ContextFacetsItemItem where
         parseJSON
           = withObject "ContextFacetsItemItem"
               (\ o ->
-                 ContextFacetsItemItem <$>
+                 ContextFacetsItemItem' <$>
                    (o .:? "anchor") <*> (o .:? "label_with_op") <*>
                      (o .:? "label"))
 
 instance ToJSON ContextFacetsItemItem where
-        toJSON ContextFacetsItemItem{..}
+        toJSON ContextFacetsItemItem'{..}
           = object
               (catMaybes
                  [("anchor" .=) <$> _cfiiAnchor,

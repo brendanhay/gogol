@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Projects.Icons.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ProjectsIconsListResource =
 -- | Return all icons in the current project
 --
 -- /See:/ 'projectsIconsList' smart constructor.
-data ProjectsIconsList = ProjectsIconsList
+data ProjectsIconsList = ProjectsIconsList'
     { _pilPageToken  :: !(Maybe Text)
     , _pilProjectId  :: !Text
     , _pilMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ projectsIconsList
     :: Text -- ^ 'pilProjectId'
     -> ProjectsIconsList
 projectsIconsList pPilProjectId_ =
-    ProjectsIconsList
+    ProjectsIconsList'
     { _pilPageToken = Nothing
     , _pilProjectId = pPilProjectId_
     , _pilMaxResults = Nothing
@@ -104,7 +104,10 @@ pilMaxResults
 
 instance GoogleRequest ProjectsIconsList where
         type Rs ProjectsIconsList = IconsListResponse
-        requestClient ProjectsIconsList{..}
+        type Scopes ProjectsIconsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient ProjectsIconsList'{..}
           = go _pilProjectId _pilPageToken _pilMaxResults
               (Just AltJSON)
               mapsEngineService

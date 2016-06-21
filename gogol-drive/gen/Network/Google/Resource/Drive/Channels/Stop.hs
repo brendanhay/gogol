@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Channels.Stop
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'ChannelsStop' request conforms to.
 type ChannelsStopResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "channels" :>
            "stop" :>
              QueryParam "alt" AltJSON :>
@@ -52,7 +52,7 @@ type ChannelsStopResource =
 -- | Stop watching resources through this channel
 --
 -- /See:/ 'channelsStop' smart constructor.
-newtype ChannelsStop = ChannelsStop
+newtype ChannelsStop = ChannelsStop'
     { _csPayload :: Channel
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ channelsStop
     :: Channel -- ^ 'csPayload'
     -> ChannelsStop
 channelsStop pCsPayload_ =
-    ChannelsStop
+    ChannelsStop'
     { _csPayload = pCsPayload_
     }
 
@@ -76,7 +76,15 @@ csPayload
 
 instance GoogleRequest ChannelsStop where
         type Rs ChannelsStop = ()
-        requestClient ChannelsStop{..}
+        type Scopes ChannelsStop =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
+        requestClient ChannelsStop'{..}
           = go (Just AltJSON) _csPayload driveService
           where go
                   = buildClient (Proxy :: Proxy ChannelsStopResource)

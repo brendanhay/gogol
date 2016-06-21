@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Maps.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type MapsDeleteResource =
 -- | Delete a map.
 --
 -- /See:/ 'mapsDelete' smart constructor.
-newtype MapsDelete = MapsDelete
+newtype MapsDelete = MapsDelete'
     { _mdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ mapsDelete
     :: Text -- ^ 'mdId'
     -> MapsDelete
 mapsDelete pMdId_ =
-    MapsDelete
+    MapsDelete'
     { _mdId = pMdId_
     }
 
@@ -76,7 +76,9 @@ mdId = lens _mdId (\ s a -> s{_mdId = a})
 
 instance GoogleRequest MapsDelete where
         type Rs MapsDelete = ()
-        requestClient MapsDelete{..}
+        type Scopes MapsDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient MapsDelete'{..}
           = go _mdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsDeleteResource)

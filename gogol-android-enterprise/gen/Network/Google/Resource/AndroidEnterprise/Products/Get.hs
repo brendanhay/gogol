@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Products.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves details of a product for display to an enterprise admin.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.get@.
 module Network.Google.Resource.AndroidEnterprise.Products.Get
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type ProductsGetResource =
 -- | Retrieves details of a product for display to an enterprise admin.
 --
 -- /See:/ 'productsGet' smart constructor.
-data ProductsGet = ProductsGet
+data ProductsGet = ProductsGet'
     { _proEnterpriseId :: !Text
     , _proLanguage     :: !(Maybe Text)
     , _proProductId    :: !Text
@@ -76,7 +76,7 @@ productsGet
     -> Text -- ^ 'proProductId'
     -> ProductsGet
 productsGet pProEnterpriseId_ pProProductId_ =
-    ProductsGet
+    ProductsGet'
     { _proEnterpriseId = pProEnterpriseId_
     , _proLanguage = Nothing
     , _proProductId = pProProductId_
@@ -101,7 +101,9 @@ proProductId
 
 instance GoogleRequest ProductsGet where
         type Rs ProductsGet = Product
-        requestClient ProductsGet{..}
+        type Scopes ProductsGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient ProductsGet'{..}
           = go _proEnterpriseId _proProductId _proLanguage
               (Just AltJSON)
               androidEnterpriseService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type ManagementCustomDimensionsInsertResource =
 -- | Create a new custom dimension.
 --
 -- /See:/ 'managementCustomDimensionsInsert' smart constructor.
-data ManagementCustomDimensionsInsert = ManagementCustomDimensionsInsert
+data ManagementCustomDimensionsInsert = ManagementCustomDimensionsInsert'
     { _mcdiWebPropertyId :: !Text
     , _mcdiPayload       :: !CustomDimension
     , _mcdiAccountId     :: !Text
@@ -80,7 +80,7 @@ managementCustomDimensionsInsert
     -> Text -- ^ 'mcdiAccountId'
     -> ManagementCustomDimensionsInsert
 managementCustomDimensionsInsert pMcdiWebPropertyId_ pMcdiPayload_ pMcdiAccountId_ =
-    ManagementCustomDimensionsInsert
+    ManagementCustomDimensionsInsert'
     { _mcdiWebPropertyId = pMcdiWebPropertyId_
     , _mcdiPayload = pMcdiPayload_
     , _mcdiAccountId = pMcdiAccountId_
@@ -107,7 +107,9 @@ instance GoogleRequest
          ManagementCustomDimensionsInsert where
         type Rs ManagementCustomDimensionsInsert =
              CustomDimension
-        requestClient ManagementCustomDimensionsInsert{..}
+        type Scopes ManagementCustomDimensionsInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementCustomDimensionsInsert'{..}
           = go _mcdiAccountId _mcdiWebPropertyId (Just AltJSON)
               _mcdiPayload
               analyticsService

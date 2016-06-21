@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'OperatingSystemVersionsList' request conforms to.
 type OperatingSystemVersionsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystemVersions" :>
@@ -53,7 +53,7 @@ type OperatingSystemVersionsListResource =
 -- | Retrieves a list of operating system versions.
 --
 -- /See:/ 'operatingSystemVersionsList' smart constructor.
-newtype OperatingSystemVersionsList = OperatingSystemVersionsList
+newtype OperatingSystemVersionsList = OperatingSystemVersionsList'
     { _osvlProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ operatingSystemVersionsList
     :: Int64 -- ^ 'osvlProFileId'
     -> OperatingSystemVersionsList
 operatingSystemVersionsList pOsvlProFileId_ =
-    OperatingSystemVersionsList
+    OperatingSystemVersionsList'
     { _osvlProFileId = _Coerce # pOsvlProFileId_
     }
 
@@ -81,7 +81,9 @@ instance GoogleRequest OperatingSystemVersionsList
          where
         type Rs OperatingSystemVersionsList =
              OperatingSystemVersionsListResponse
-        requestClient OperatingSystemVersionsList{..}
+        type Scopes OperatingSystemVersionsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient OperatingSystemVersionsList'{..}
           = go _osvlProFileId (Just AltJSON)
               dFAReportingService
           where go

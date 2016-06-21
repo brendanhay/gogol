@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Threads.Modify
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type UsersThreadsModifyResource =
 -- in the thread.
 --
 -- /See:/ 'usersThreadsModify' smart constructor.
-data UsersThreadsModify = UsersThreadsModify
+data UsersThreadsModify = UsersThreadsModify'
     { _utmPayload :: !ModifyThreadRequest
     , _utmUserId  :: !Text
     , _utmId      :: !Text
@@ -78,10 +78,9 @@ data UsersThreadsModify = UsersThreadsModify
 usersThreadsModify
     :: ModifyThreadRequest -- ^ 'utmPayload'
     -> Text -- ^ 'utmId'
-    -> Text
     -> UsersThreadsModify
-usersThreadsModify pUtmPayload_ pUtmUserId_ pUtmId_ =
-    UsersThreadsModify
+usersThreadsModify pUtmPayload_ pUtmId_ =
+    UsersThreadsModify'
     { _utmPayload = pUtmPayload_
     , _utmUserId = "me"
     , _utmId = pUtmId_
@@ -104,7 +103,10 @@ utmId = lens _utmId (\ s a -> s{_utmId = a})
 
 instance GoogleRequest UsersThreadsModify where
         type Rs UsersThreadsModify = Thread
-        requestClient UsersThreadsModify{..}
+        type Scopes UsersThreadsModify =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersThreadsModify'{..}
           = go _utmUserId _utmId (Just AltJSON) _utmPayload
               gmailService
           where go

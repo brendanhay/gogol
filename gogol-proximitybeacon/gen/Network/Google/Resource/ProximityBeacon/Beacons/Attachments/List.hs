@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -25,7 +25,10 @@
 -- returned, you add the \`namespacedType\` query parameter to the request.
 -- You must either use \`*\/*\`, to return all attachments, or the
 -- namespace must be one of the ones returned from the \`namespaces\`
--- endpoint.
+-- endpoint. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **viewer**, **Is owner** or **Can edit**
+-- permissions in the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.list@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
@@ -46,6 +49,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
     , balUploadType
     , balBearerToken
     , balNamespacedType
+    , balProjectId
     , balCallback
     ) where
 
@@ -65,19 +69,23 @@ type BeaconsAttachmentsListResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "namespacedType" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ListBeaconAttachmentsResponse
+                         QueryParam "projectId" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ListBeaconAttachmentsResponse
 
 -- | Returns the attachments for the specified beacon that match the
 -- specified namespaced-type pattern. To control which namespaced types are
 -- returned, you add the \`namespacedType\` query parameter to the request.
 -- You must either use \`*\/*\`, to return all attachments, or the
 -- namespace must be one of the ones returned from the \`namespaces\`
--- endpoint.
+-- endpoint. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **viewer**, **Is owner** or **Can edit**
+-- permissions in the Google Developers Console project.
 --
 -- /See:/ 'beaconsAttachmentsList' smart constructor.
-data BeaconsAttachmentsList = BeaconsAttachmentsList
+data BeaconsAttachmentsList = BeaconsAttachmentsList'
     { _balXgafv          :: !(Maybe Text)
     , _balUploadProtocol :: !(Maybe Text)
     , _balPp             :: !Bool
@@ -86,6 +94,7 @@ data BeaconsAttachmentsList = BeaconsAttachmentsList
     , _balUploadType     :: !(Maybe Text)
     , _balBearerToken    :: !(Maybe Text)
     , _balNamespacedType :: !(Maybe Text)
+    , _balProjectId      :: !(Maybe Text)
     , _balCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -109,12 +118,14 @@ data BeaconsAttachmentsList = BeaconsAttachmentsList
 --
 -- * 'balNamespacedType'
 --
+-- * 'balProjectId'
+--
 -- * 'balCallback'
 beaconsAttachmentsList
     :: Text -- ^ 'balBeaconName'
     -> BeaconsAttachmentsList
 beaconsAttachmentsList pBalBeaconName_ =
-    BeaconsAttachmentsList
+    BeaconsAttachmentsList'
     { _balXgafv = Nothing
     , _balUploadProtocol = Nothing
     , _balPp = True
@@ -123,6 +134,7 @@ beaconsAttachmentsList pBalBeaconName_ =
     , _balUploadType = Nothing
     , _balBearerToken = Nothing
     , _balNamespacedType = Nothing
+    , _balProjectId = Nothing
     , _balCallback = Nothing
     }
 
@@ -146,7 +158,12 @@ balAccessToken
   = lens _balAccessToken
       (\ s a -> s{_balAccessToken = a})
 
--- | The beacon whose attachments are to be fetched. Required.
+-- | Beacon whose attachments should be fetched. A beacon name has the format
+-- \"beacons\/N!beaconId\" where the beaconId is the base16 ID broadcast by
+-- the beacon and N is a code for the beacon\'s type. Possible values are
+-- \`3\` for Eddystone-UID, \`4\` for Eddystone-EID, \`1\` for iBeacon, or
+-- \`5\` for AltBeacon. For Eddystone-EID beacons, you may use either the
+-- current EID or the beacon\'s \"stable\" UID. Required.
 balBeaconName :: Lens' BeaconsAttachmentsList Text
 balBeaconName
   = lens _balBeaconName
@@ -172,6 +189,15 @@ balNamespacedType
   = lens _balNamespacedType
       (\ s a -> s{_balNamespacedType = a})
 
+-- | The project id to list beacon attachments under. This field can be used
+-- when \"*\" is specified to mean all attachment namespaces. Projects may
+-- have multiple attachments with multiple namespaces. If \"*\" is
+-- specified and the projectId string is empty, then the project making the
+-- request is used. Optional.
+balProjectId :: Lens' BeaconsAttachmentsList (Maybe Text)
+balProjectId
+  = lens _balProjectId (\ s a -> s{_balProjectId = a})
+
 -- | JSONP
 balCallback :: Lens' BeaconsAttachmentsList (Maybe Text)
 balCallback
@@ -180,13 +206,16 @@ balCallback
 instance GoogleRequest BeaconsAttachmentsList where
         type Rs BeaconsAttachmentsList =
              ListBeaconAttachmentsResponse
-        requestClient BeaconsAttachmentsList{..}
+        type Scopes BeaconsAttachmentsList =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+        requestClient BeaconsAttachmentsList'{..}
           = go _balBeaconName _balXgafv _balUploadProtocol
               (Just _balPp)
               _balAccessToken
               _balUploadType
               _balBearerToken
               _balNamespacedType
+              _balProjectId
               _balCallback
               (Just AltJSON)
               proximityBeaconService

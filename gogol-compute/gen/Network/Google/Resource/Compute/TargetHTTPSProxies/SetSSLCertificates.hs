@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type TargetHTTPSProxiesSetSSLCertificatesResource =
 -- | Replaces SslCertificates for TargetHttpsProxy.
 --
 -- /See:/ 'targetHTTPSProxiesSetSSLCertificates' smart constructor.
-data TargetHTTPSProxiesSetSSLCertificates = TargetHTTPSProxiesSetSSLCertificates
+data TargetHTTPSProxiesSetSSLCertificates = TargetHTTPSProxiesSetSSLCertificates'
     { _thpsscProject          :: !Text
     , _thpsscPayload          :: !TargetHTTPSProxiesSetSSLCertificatesRequest
     , _thpsscTargetHTTPSProxy :: !Text
@@ -80,13 +80,13 @@ targetHTTPSProxiesSetSSLCertificates
     -> Text -- ^ 'thpsscTargetHTTPSProxy'
     -> TargetHTTPSProxiesSetSSLCertificates
 targetHTTPSProxiesSetSSLCertificates pThpsscProject_ pThpsscPayload_ pThpsscTargetHTTPSProxy_ =
-    TargetHTTPSProxiesSetSSLCertificates
+    TargetHTTPSProxiesSetSSLCertificates'
     { _thpsscProject = pThpsscProject_
     , _thpsscPayload = pThpsscPayload_
     , _thpsscTargetHTTPSProxy = pThpsscTargetHTTPSProxy_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thpsscProject :: Lens' TargetHTTPSProxiesSetSSLCertificates Text
 thpsscProject
   = lens _thpsscProject
@@ -98,7 +98,8 @@ thpsscPayload
   = lens _thpsscPayload
       (\ s a -> s{_thpsscPayload = a})
 
--- | Name of the TargetHttpsProxy resource whose URL map is to be set.
+-- | Name of the TargetHttpsProxy resource to set an SslCertificates resource
+-- for.
 thpsscTargetHTTPSProxy :: Lens' TargetHTTPSProxiesSetSSLCertificates Text
 thpsscTargetHTTPSProxy
   = lens _thpsscTargetHTTPSProxy
@@ -108,8 +109,11 @@ instance GoogleRequest
          TargetHTTPSProxiesSetSSLCertificates where
         type Rs TargetHTTPSProxiesSetSSLCertificates =
              Operation
+        type Scopes TargetHTTPSProxiesSetSSLCertificates =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient
-          TargetHTTPSProxiesSetSSLCertificates{..}
+          TargetHTTPSProxiesSetSSLCertificates'{..}
           = go _thpsscProject _thpsscTargetHTTPSProxy
               (Just AltJSON)
               _thpsscPayload

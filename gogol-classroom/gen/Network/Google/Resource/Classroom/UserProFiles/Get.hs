@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.UserProFiles.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type UserProFilesGetResource =
 -- access errors.
 --
 -- /See:/ 'userProFilesGet' smart constructor.
-data UserProFilesGet = UserProFilesGet
+data UserProFilesGet = UserProFilesGet'
     { _upfgXgafv          :: !(Maybe Text)
     , _upfgUploadProtocol :: !(Maybe Text)
     , _upfgPp             :: !Bool
@@ -104,7 +104,7 @@ userProFilesGet
     :: Text -- ^ 'upfgUserId'
     -> UserProFilesGet
 userProFilesGet pUpfgUserId_ =
-    UserProFilesGet
+    UserProFilesGet'
     { _upfgXgafv = Nothing
     , _upfgUploadProtocol = Nothing
     , _upfgPp = True
@@ -162,7 +162,12 @@ upfgCallback
 
 instance GoogleRequest UserProFilesGet where
         type Rs UserProFilesGet = UserProFile
-        requestClient UserProFilesGet{..}
+        type Scopes UserProFilesGet =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
+        requestClient UserProFilesGet'{..}
           = go _upfgUserId _upfgXgafv _upfgUploadProtocol
               (Just _upfgPp)
               _upfgAccessToken

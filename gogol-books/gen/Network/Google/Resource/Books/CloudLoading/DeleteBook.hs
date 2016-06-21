@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.CloudLoading.DeleteBook
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type CloudLoadingDeleteBookResource =
 -- | Remove the book and its contents
 --
 -- /See:/ 'cloudLoadingDeleteBook' smart constructor.
-newtype CloudLoadingDeleteBook = CloudLoadingDeleteBook
+newtype CloudLoadingDeleteBook = CloudLoadingDeleteBook'
     { _cldbVolumeId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ cloudLoadingDeleteBook
     :: Text -- ^ 'cldbVolumeId'
     -> CloudLoadingDeleteBook
 cloudLoadingDeleteBook pCldbVolumeId_ =
-    CloudLoadingDeleteBook
+    CloudLoadingDeleteBook'
     { _cldbVolumeId = pCldbVolumeId_
     }
 
@@ -76,7 +76,9 @@ cldbVolumeId
 
 instance GoogleRequest CloudLoadingDeleteBook where
         type Rs CloudLoadingDeleteBook = ()
-        requestClient CloudLoadingDeleteBook{..}
+        type Scopes CloudLoadingDeleteBook =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient CloudLoadingDeleteBook'{..}
           = go (Just _cldbVolumeId) (Just AltJSON) booksService
           where go
                   = buildClient

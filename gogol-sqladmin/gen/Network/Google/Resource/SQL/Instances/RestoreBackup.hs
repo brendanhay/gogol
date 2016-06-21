@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.RestoreBackup
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type InstancesRestoreBackupResource =
 -- | Restores a backup of a Cloud SQL instance.
 --
 -- /See:/ 'instancesRestoreBackup' smart constructor.
-data InstancesRestoreBackup = InstancesRestoreBackup
+data InstancesRestoreBackup = InstancesRestoreBackup'
     { _irbProject  :: !Text
     , _irbPayload  :: !InstancesRestoreBackupRequest
     , _irbInstance :: !Text
@@ -79,7 +79,7 @@ instancesRestoreBackup
     -> Text -- ^ 'irbInstance'
     -> InstancesRestoreBackup
 instancesRestoreBackup pIrbProject_ pIrbPayload_ pIrbInstance_ =
-    InstancesRestoreBackup
+    InstancesRestoreBackup'
     { _irbProject = pIrbProject_
     , _irbPayload = pIrbPayload_
     , _irbInstance = pIrbInstance_
@@ -102,7 +102,10 @@ irbInstance
 
 instance GoogleRequest InstancesRestoreBackup where
         type Rs InstancesRestoreBackup = Operation
-        requestClient InstancesRestoreBackup{..}
+        type Scopes InstancesRestoreBackup =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient InstancesRestoreBackup'{..}
           = go _irbProject _irbInstance (Just AltJSON)
               _irbPayload
               sQLAdminService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Task.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TaskDeleteResource =
 -- running.
 --
 -- /See:/ 'taskDelete' smart constructor.
-data TaskDelete = TaskDelete
+data TaskDelete = TaskDelete'
     { _tdTaskId  :: !Text
     , _tdTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ taskDelete
     -> Text -- ^ 'tdTableId'
     -> TaskDelete
 taskDelete pTdTaskId_ pTdTableId_ =
-    TaskDelete
+    TaskDelete'
     { _tdTaskId = pTdTaskId_
     , _tdTableId = pTdTableId_
     }
@@ -89,7 +89,9 @@ tdTableId
 
 instance GoogleRequest TaskDelete where
         type Rs TaskDelete = ()
-        requestClient TaskDelete{..}
+        type Scopes TaskDelete =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient TaskDelete'{..}
           = go _tdTableId _tdTaskId (Just AltJSON)
               fusionTablesService
           where go

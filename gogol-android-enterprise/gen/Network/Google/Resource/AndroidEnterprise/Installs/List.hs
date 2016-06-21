@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Installs.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves the details of all apps installed on the specified device.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.installs.list@.
 module Network.Google.Resource.AndroidEnterprise.Installs.List
     (
     -- * REST Resource
@@ -59,7 +59,7 @@ type InstallsListResource =
 -- | Retrieves the details of all apps installed on the specified device.
 --
 -- /See:/ 'installsList' smart constructor.
-data InstallsList = InstallsList
+data InstallsList = InstallsList'
     { _ilEnterpriseId :: !Text
     , _ilUserId       :: !Text
     , _ilDeviceId     :: !Text
@@ -80,7 +80,7 @@ installsList
     -> Text -- ^ 'ilDeviceId'
     -> InstallsList
 installsList pIlEnterpriseId_ pIlUserId_ pIlDeviceId_ =
-    InstallsList
+    InstallsList'
     { _ilEnterpriseId = pIlEnterpriseId_
     , _ilUserId = pIlUserId_
     , _ilDeviceId = pIlDeviceId_
@@ -103,7 +103,9 @@ ilDeviceId
 
 instance GoogleRequest InstallsList where
         type Rs InstallsList = InstallsListResponse
-        requestClient InstallsList{..}
+        type Scopes InstallsList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient InstallsList'{..}
           = go _ilEnterpriseId _ilUserId _ilDeviceId
               (Just AltJSON)
               androidEnterpriseService

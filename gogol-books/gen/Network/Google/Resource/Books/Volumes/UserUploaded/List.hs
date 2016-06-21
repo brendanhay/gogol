@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Volumes.UserUploaded.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type VolumesUserUploadedListResource =
 -- | Return a list of books uploaded by the current user.
 --
 -- /See:/ 'volumesUserUploadedList' smart constructor.
-data VolumesUserUploadedList = VolumesUserUploadedList
+data VolumesUserUploadedList = VolumesUserUploadedList'
     { _vuulProcessingState :: !(Maybe [VolumesUserUploadedListProcessingState])
     , _vuulLocale          :: !(Maybe Text)
     , _vuulVolumeId        :: !(Maybe [Text])
@@ -91,7 +91,7 @@ data VolumesUserUploadedList = VolumesUserUploadedList
 volumesUserUploadedList
     :: VolumesUserUploadedList
 volumesUserUploadedList =
-    VolumesUserUploadedList
+    VolumesUserUploadedList'
     { _vuulProcessingState = Nothing
     , _vuulLocale = Nothing
     , _vuulVolumeId = Nothing
@@ -143,7 +143,9 @@ vuulMaxResults
 
 instance GoogleRequest VolumesUserUploadedList where
         type Rs VolumesUserUploadedList = Volumes
-        requestClient VolumesUserUploadedList{..}
+        type Scopes VolumesUserUploadedList =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient VolumesUserUploadedList'{..}
           = go (_vuulProcessingState ^. _Default) _vuulLocale
               (_vuulVolumeId ^. _Default)
               _vuulSource

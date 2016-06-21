@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsContainersTagsDeleteResource =
 -- | Deletes a GTM Tag.
 --
 -- /See:/ 'accountsContainersTagsDelete' smart constructor.
-data AccountsContainersTagsDelete = AccountsContainersTagsDelete
+data AccountsContainersTagsDelete = AccountsContainersTagsDelete'
     { _actdcContainerId :: !Text
     , _actdcAccountId   :: !Text
     , _actdcTagId       :: !Text
@@ -78,7 +78,7 @@ accountsContainersTagsDelete
     -> Text -- ^ 'actdcTagId'
     -> AccountsContainersTagsDelete
 accountsContainersTagsDelete pActdcContainerId_ pActdcAccountId_ pActdcTagId_ =
-    AccountsContainersTagsDelete
+    AccountsContainersTagsDelete'
     { _actdcContainerId = pActdcContainerId_
     , _actdcAccountId = pActdcAccountId_
     , _actdcTagId = pActdcTagId_
@@ -104,7 +104,9 @@ actdcTagId
 instance GoogleRequest AccountsContainersTagsDelete
          where
         type Rs AccountsContainersTagsDelete = ()
-        requestClient AccountsContainersTagsDelete{..}
+        type Scopes AccountsContainersTagsDelete =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient AccountsContainersTagsDelete'{..}
           = go _actdcAccountId _actdcContainerId _actdcTagId
               (Just AltJSON)
               tagManagerService

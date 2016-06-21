@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Autoscaler.Autoscalers.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type AutoscalersPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'autoscalersPatch' smart constructor.
-data AutoscalersPatch = AutoscalersPatch
+data AutoscalersPatch = AutoscalersPatch'
     { _apProject    :: !Text
     , _apZone       :: !Text
     , _apPayload    :: !Autoscaler
@@ -86,7 +86,7 @@ autoscalersPatch
     -> Text -- ^ 'apAutoscaler'
     -> AutoscalersPatch
 autoscalersPatch pApProject_ pApZone_ pApPayload_ pApAutoscaler_ =
-    AutoscalersPatch
+    AutoscalersPatch'
     { _apProject = pApProject_
     , _apZone = pApZone_
     , _apPayload = pApPayload_
@@ -114,7 +114,9 @@ apAutoscaler
 
 instance GoogleRequest AutoscalersPatch where
         type Rs AutoscalersPatch = Operation
-        requestClient AutoscalersPatch{..}
+        type Scopes AutoscalersPatch =
+             '["https://www.googleapis.com/auth/compute"]
+        requestClient AutoscalersPatch'{..}
           = go _apProject _apZone _apAutoscaler (Just AltJSON)
               _apPayload
               autoscalerService

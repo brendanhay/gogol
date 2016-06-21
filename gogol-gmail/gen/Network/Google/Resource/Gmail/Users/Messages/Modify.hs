@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Messages.Modify
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type UsersMessagesModifyResource =
 -- | Modifies the labels on the specified message.
 --
 -- /See:/ 'usersMessagesModify' smart constructor.
-data UsersMessagesModify = UsersMessagesModify
+data UsersMessagesModify = UsersMessagesModify'
     { _ummPayload :: !ModifyMessageRequest
     , _ummUserId  :: !Text
     , _ummId      :: !Text
@@ -76,10 +76,9 @@ data UsersMessagesModify = UsersMessagesModify
 usersMessagesModify
     :: ModifyMessageRequest -- ^ 'ummPayload'
     -> Text -- ^ 'ummId'
-    -> Text
     -> UsersMessagesModify
-usersMessagesModify pUmmPayload_ pUmmUserId_ pUmmId_ =
-    UsersMessagesModify
+usersMessagesModify pUmmPayload_ pUmmId_ =
+    UsersMessagesModify'
     { _ummPayload = pUmmPayload_
     , _ummUserId = "me"
     , _ummId = pUmmId_
@@ -102,7 +101,10 @@ ummId = lens _ummId (\ s a -> s{_ummId = a})
 
 instance GoogleRequest UsersMessagesModify where
         type Rs UsersMessagesModify = Message
-        requestClient UsersMessagesModify{..}
+        type Scopes UsersMessagesModify =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersMessagesModify'{..}
           = go _ummUserId _ummId (Just AltJSON) _ummPayload
               gmailService
           where go

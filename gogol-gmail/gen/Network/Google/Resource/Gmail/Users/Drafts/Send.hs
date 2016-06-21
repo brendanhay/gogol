@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Drafts.Send
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,15 +61,15 @@ type UsersDraftsSendResource =
                  "drafts" :>
                    "send" :>
                      QueryParam "alt" AltJSON :>
-                       QueryParam "uploadType" AltMedia :>
-                         MultipartRelated '[JSON] Draft RequestBody :>
+                       QueryParam "uploadType" Multipart :>
+                         MultipartRelated '[JSON] Draft :>
                            Post '[JSON] Message
 
 -- | Sends the specified, existing draft to the recipients in the To, Cc, and
 -- Bcc headers.
 --
 -- /See:/ 'usersDraftsSend' smart constructor.
-data UsersDraftsSend = UsersDraftsSend
+data UsersDraftsSend = UsersDraftsSend'
     { _udsPayload :: !Draft
     , _udsUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -83,10 +83,9 @@ data UsersDraftsSend = UsersDraftsSend
 -- * 'udsUserId'
 usersDraftsSend
     :: Draft -- ^ 'udsPayload'
-    -> Text
     -> UsersDraftsSend
-usersDraftsSend pUdsPayload_ pUdsUserId_ =
-    UsersDraftsSend
+usersDraftsSend pUdsPayload_ =
+    UsersDraftsSend'
     { _udsPayload = pUdsPayload_
     , _udsUserId = "me"
     }
@@ -104,7 +103,11 @@ udsUserId
 
 instance GoogleRequest UsersDraftsSend where
         type Rs UsersDraftsSend = Message
-        requestClient UsersDraftsSend{..}
+        type Scopes UsersDraftsSend =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersDraftsSend'{..}
           = go _udsUserId (Just AltJSON) _udsPayload
               gmailService
           where go :<|> _
@@ -115,8 +118,10 @@ instance GoogleRequest UsersDraftsSend where
 instance GoogleRequest (MediaUpload UsersDraftsSend)
          where
         type Rs (MediaUpload UsersDraftsSend) = Message
-        requestClient (MediaUpload UsersDraftsSend{..} body)
-          = go _udsUserId (Just AltJSON) (Just AltMedia)
+        type Scopes (MediaUpload UsersDraftsSend) =
+             Scopes UsersDraftsSend
+        requestClient (MediaUpload UsersDraftsSend'{..} body)
+          = go _udsUserId (Just AltJSON) (Just Multipart)
               _udsPayload
               body
               gmailService

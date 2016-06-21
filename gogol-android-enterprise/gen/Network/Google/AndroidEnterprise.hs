@@ -7,20 +7,22 @@
 
 -- |
 -- Module      : Network.Google.AndroidEnterprise
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Allows MDMs\/EMMs and enterprises to manage the deployment of apps to
--- Android for Work users.
+-- Manages the deployment of apps to Android for Work users.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference>
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference>
 module Network.Google.AndroidEnterprise
     (
     -- * Service Configuration
       androidEnterpriseService
+
+    -- * OAuth Scopes
+    , androidEnterpriseScope
 
     -- * API Declaration
     , AndroidEnterpriseAPI
@@ -81,6 +83,9 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.enterprises.get
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.Get
 
+    -- ** androidenterprise.enterprises.getStoreLayout
+    , module Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
+
     -- ** androidenterprise.enterprises.insert
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
 
@@ -92,6 +97,9 @@ module Network.Google.AndroidEnterprise
 
     -- ** androidenterprise.enterprises.setAccount
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
+
+    -- ** androidenterprise.enterprises.setStoreLayout
+    , module Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
 
     -- ** androidenterprise.enterprises.unenroll
     , module Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
@@ -153,8 +161,47 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.products.getPermissions
     , module Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
 
+    -- ** androidenterprise.products.list
+    , module Network.Google.Resource.AndroidEnterprise.Products.List
+
     -- ** androidenterprise.products.updatePermissions
     , module Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
+
+    -- ** androidenterprise.storelayoutclusters.delete
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Delete
+
+    -- ** androidenterprise.storelayoutclusters.get
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Get
+
+    -- ** androidenterprise.storelayoutclusters.insert
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Insert
+
+    -- ** androidenterprise.storelayoutclusters.list
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.List
+
+    -- ** androidenterprise.storelayoutclusters.patch
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Patch
+
+    -- ** androidenterprise.storelayoutclusters.update
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Update
+
+    -- ** androidenterprise.storelayoutpages.delete
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Delete
+
+    -- ** androidenterprise.storelayoutpages.get
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Get
+
+    -- ** androidenterprise.storelayoutpages.insert
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Insert
+
+    -- ** androidenterprise.storelayoutpages.list
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutpages.List
+
+    -- ** androidenterprise.storelayoutpages.patch
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Patch
+
+    -- ** androidenterprise.storelayoutpages.update
+    , module Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Update
 
     -- ** androidenterprise.users.generateToken
     , module Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
@@ -185,6 +232,12 @@ module Network.Google.AndroidEnterprise
     , glApproval
     , glProductId
     , glAcquisitionKind
+
+    -- ** StoreLayoutPagesListResponse
+    , StoreLayoutPagesListResponse
+    , storeLayoutPagesListResponse
+    , slplrKind
+    , slplrPage
 
     -- ** EnterpriseAccount
     , EnterpriseAccount
@@ -219,11 +272,39 @@ module Network.Google.AndroidEnterprise
     , glulrKind
     , glulrUser
 
+    -- ** TokenPagination
+    , TokenPagination
+    , tokenPagination
+    , tpNextPageToken
+    , tpPreviousPageToken
+
     -- ** ApprovalURLInfo
     , ApprovalURLInfo
     , approvalURLInfo
     , auiApprovalURL
     , auiKind
+
+    -- ** StoreLayoutClustersListResponse
+    , StoreLayoutClustersListResponse
+    , storeLayoutClustersListResponse
+    , slclrCluster
+    , slclrKind
+
+    -- ** StoreCluster
+    , StoreCluster
+    , storeCluster
+    , scKind
+    , scName
+    , scOrderInPage
+    , scId
+    , scProductId
+
+    -- ** PageInfo
+    , PageInfo
+    , pageInfo
+    , piResultPerPage
+    , piTotalResults
+    , piStartIndex
 
     -- ** ProductPermission
     , ProductPermission
@@ -308,6 +389,14 @@ module Network.Google.AndroidEnterprise
     , productsGenerateApprovalURLResponse
     , pgaurURL
 
+    -- ** StorePage
+    , StorePage
+    , storePage
+    , spKind
+    , spLink
+    , spName
+    , spId
+
     -- ** EnterprisesSendTestPushNotificationResponse
     , EnterprisesSendTestPushNotificationResponse
     , enterprisesSendTestPushNotificationResponse
@@ -325,6 +414,12 @@ module Network.Google.AndroidEnterprise
     , appRestrictionsSchema
     , arsKind
     , arsRestrictions
+
+    -- ** LocalizedText
+    , LocalizedText
+    , localizedText
+    , ltText
+    , ltLocale
 
     -- ** UserToken
     , UserToken
@@ -347,14 +442,22 @@ module Network.Google.AndroidEnterprise
     , eName
     , eId
 
+    -- ** StoreLayout
+    , StoreLayout
+    , storeLayout
+    , slKind
+    , slHomepageId
+
     -- ** Product
     , Product
     , product
+    , pSmallIconURL
     , pAuthorName
     , pKind
     , pWorkDetailsURL
     , pRequiresContainerApp
     , pAppVersion
+    , pProductPricing
     , pDistributionChannel
     , pIconURL
     , pTitle
@@ -399,6 +502,14 @@ module Network.Google.AndroidEnterprise
     , eeKind
     , eeReason
     , eeProductId
+
+    -- ** ProductsListResponse
+    , ProductsListResponse
+    , productsListResponse
+    , plrTokenPagination
+    , plrPageInfo
+    , plrKind
+    , plrProduct
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -421,10 +532,12 @@ import           Network.Google.Resource.AndroidEnterprise.Devices.SetState
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Delete
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Get
+import           Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.List
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotification
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
+import           Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
 import           Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
 import           Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
 import           Network.Google.Resource.AndroidEnterprise.Entitlements.Get
@@ -445,7 +558,20 @@ import           Network.Google.Resource.AndroidEnterprise.Products.GenerateAppr
 import           Network.Google.Resource.AndroidEnterprise.Products.Get
 import           Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
 import           Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
+import           Network.Google.Resource.AndroidEnterprise.Products.List
 import           Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Delete
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Get
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Insert
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.List
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Patch
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Update
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Delete
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Get
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Insert
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutpages.List
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Patch
+import           Network.Google.Resource.AndroidEnterprise.Storelayoutpages.Update
 import           Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
 import           Network.Google.Resource.AndroidEnterprise.Users.Get
 import           Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet
@@ -459,8 +585,14 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Play EMM API service.
 type AndroidEnterpriseAPI =
-     CollectionviewersListResource :<|>
-       CollectionviewersPatchResource
+     StorelayoutclustersInsertResource :<|>
+       StorelayoutclustersListResource
+       :<|> StorelayoutclustersPatchResource
+       :<|> StorelayoutclustersGetResource
+       :<|> StorelayoutclustersDeleteResource
+       :<|> StorelayoutclustersUpdateResource
+       :<|> CollectionviewersListResource
+       :<|> CollectionviewersPatchResource
        :<|> CollectionviewersGetResource
        :<|> CollectionviewersDeleteResource
        :<|> CollectionviewersUpdateResource
@@ -475,6 +607,12 @@ type AndroidEnterpriseAPI =
        :<|> InstallsGetResource
        :<|> InstallsDeleteResource
        :<|> InstallsUpdateResource
+       :<|> StorelayoutpagesInsertResource
+       :<|> StorelayoutpagesListResource
+       :<|> StorelayoutpagesPatchResource
+       :<|> StorelayoutpagesGetResource
+       :<|> StorelayoutpagesDeleteResource
+       :<|> StorelayoutpagesUpdateResource
        :<|> CollectionsInsertResource
        :<|> CollectionsListResource
        :<|> CollectionsPatchResource
@@ -484,10 +622,12 @@ type AndroidEnterpriseAPI =
        :<|> EnterprisesInsertResource
        :<|> EnterprisesListResource
        :<|> EnterprisesUnenrollResource
+       :<|> EnterprisesGetStoreLayoutResource
        :<|> EnterprisesSetAccountResource
        :<|> EnterprisesEnrollResource
        :<|> EnterprisesGetResource
        :<|> EnterprisesSendTestPushNotificationResource
+       :<|> EnterprisesSetStoreLayoutResource
        :<|> EnterprisesDeleteResource
        :<|> GrouplicensesListResource
        :<|> GrouplicensesGetResource
@@ -498,6 +638,7 @@ type AndroidEnterpriseAPI =
        :<|> EntitlementsUpdateResource
        :<|> PermissionsGetResource
        :<|> ProductsGenerateApprovalURLResource
+       :<|> ProductsListResource
        :<|> ProductsGetResource
        :<|> ProductsGetAppRestrictionsSchemaResource
        :<|> ProductsApproveResource

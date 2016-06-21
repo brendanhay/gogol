@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.GetProFile
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type UsersGetProFileResource =
 -- | Gets the current user\'s Gmail profile.
 --
 -- /See:/ 'usersGetProFile' smart constructor.
-newtype UsersGetProFile = UsersGetProFile
+newtype UsersGetProFile = UsersGetProFile'
     { _ugpfUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -62,10 +62,9 @@ newtype UsersGetProFile = UsersGetProFile
 --
 -- * 'ugpfUserId'
 usersGetProFile
-    :: Text
-    -> UsersGetProFile
-usersGetProFile pUgpfUserId_ =
-    UsersGetProFile
+    :: UsersGetProFile
+usersGetProFile =
+    UsersGetProFile'
     { _ugpfUserId = "me"
     }
 
@@ -77,7 +76,12 @@ ugpfUserId
 
 instance GoogleRequest UsersGetProFile where
         type Rs UsersGetProFile = ProFile
-        requestClient UsersGetProFile{..}
+        type Scopes UsersGetProFile =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersGetProFile'{..}
           = go _ugpfUserId (Just AltJSON) gmailService
           where go
                   = buildClient

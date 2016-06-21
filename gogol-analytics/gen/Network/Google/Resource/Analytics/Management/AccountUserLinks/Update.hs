@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ManagementAccountUserLinksUpdateResource =
 -- | Updates permissions for an existing user on the given account.
 --
 -- /See:/ 'managementAccountUserLinksUpdate' smart constructor.
-data ManagementAccountUserLinksUpdate = ManagementAccountUserLinksUpdate
+data ManagementAccountUserLinksUpdate = ManagementAccountUserLinksUpdate'
     { _mauluPayload   :: !EntityUserLink
     , _mauluAccountId :: !Text
     , _mauluLinkId    :: !Text
@@ -79,7 +79,7 @@ managementAccountUserLinksUpdate
     -> Text -- ^ 'mauluLinkId'
     -> ManagementAccountUserLinksUpdate
 managementAccountUserLinksUpdate pMauluPayload_ pMauluAccountId_ pMauluLinkId_ =
-    ManagementAccountUserLinksUpdate
+    ManagementAccountUserLinksUpdate'
     { _mauluPayload = pMauluPayload_
     , _mauluAccountId = pMauluAccountId_
     , _mauluLinkId = pMauluLinkId_
@@ -105,7 +105,9 @@ instance GoogleRequest
          ManagementAccountUserLinksUpdate where
         type Rs ManagementAccountUserLinksUpdate =
              EntityUserLink
-        requestClient ManagementAccountUserLinksUpdate{..}
+        type Scopes ManagementAccountUserLinksUpdate =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
+        requestClient ManagementAccountUserLinksUpdate'{..}
           = go _mauluAccountId _mauluLinkId (Just AltJSON)
               _mauluPayload
               analyticsService

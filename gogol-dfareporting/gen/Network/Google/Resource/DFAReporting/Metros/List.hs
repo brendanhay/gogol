@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Metros.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'MetrosList' request conforms to.
 type MetrosListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "metros" :>
@@ -53,7 +53,7 @@ type MetrosListResource =
 -- | Retrieves a list of metros.
 --
 -- /See:/ 'metrosList' smart constructor.
-newtype MetrosList = MetrosList
+newtype MetrosList = MetrosList'
     { _mlProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ metrosList
     :: Int64 -- ^ 'mlProFileId'
     -> MetrosList
 metrosList pMlProFileId_ =
-    MetrosList
+    MetrosList'
     { _mlProFileId = _Coerce # pMlProFileId_
     }
 
@@ -78,7 +78,9 @@ mlProFileId
 
 instance GoogleRequest MetrosList where
         type Rs MetrosList = MetrosListResponse
-        requestClient MetrosList{..}
+        type Scopes MetrosList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient MetrosList'{..}
           = go _mlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy MetrosListResource)

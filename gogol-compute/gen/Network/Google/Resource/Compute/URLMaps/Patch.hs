@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.URLMaps.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the entire content of the UrlMap resource. This method supports
+-- Updates the entire content of the UrlMap resource. This method supports
 -- patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.patch@.
@@ -55,11 +55,11 @@ type URLMapsPatchResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] URLMap :> Patch '[JSON] Operation
 
--- | Update the entire content of the UrlMap resource. This method supports
+-- | Updates the entire content of the UrlMap resource. This method supports
 -- patch semantics.
 --
 -- /See:/ 'urlMapsPatch' smart constructor.
-data URLMapsPatch = URLMapsPatch
+data URLMapsPatch = URLMapsPatch'
     { _umpURLMap  :: !Text
     , _umpProject :: !Text
     , _umpPayload :: !URLMap
@@ -80,7 +80,7 @@ urlMapsPatch
     -> URLMap -- ^ 'umpPayload'
     -> URLMapsPatch
 urlMapsPatch pUmpURLMap_ pUmpProject_ pUmpPayload_ =
-    URLMapsPatch
+    URLMapsPatch'
     { _umpURLMap = pUmpURLMap_
     , _umpProject = pUmpProject_
     , _umpPayload = pUmpPayload_
@@ -91,7 +91,7 @@ umpURLMap :: Lens' URLMapsPatch Text
 umpURLMap
   = lens _umpURLMap (\ s a -> s{_umpURLMap = a})
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umpProject :: Lens' URLMapsPatch Text
 umpProject
   = lens _umpProject (\ s a -> s{_umpProject = a})
@@ -103,7 +103,10 @@ umpPayload
 
 instance GoogleRequest URLMapsPatch where
         type Rs URLMapsPatch = Operation
-        requestClient URLMapsPatch{..}
+        type Scopes URLMapsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient URLMapsPatch'{..}
           = go _umpProject _umpURLMap (Just AltJSON)
               _umpPayload
               computeService

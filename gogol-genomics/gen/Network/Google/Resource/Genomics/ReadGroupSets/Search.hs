@@ -14,16 +14,20 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.ReadGroupSets.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Searches for read group sets matching the criteria. Implements
+-- Searches for read group sets matching the criteria. For the definitions
+-- of read group sets and other genomics resources, see [Fundamentals of
+-- Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchReadGroupSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L135).
 --
--- /See:/ < Genomics API Reference> for @genomics.readgroupsets.search@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.search@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Search
     (
     -- * REST Resource
@@ -64,11 +68,15 @@ type ReadGroupSetsSearchResource =
                            ReqBody '[JSON] SearchReadGroupSetsRequest :>
                              Post '[JSON] SearchReadGroupSetsResponse
 
--- | Searches for read group sets matching the criteria. Implements
+-- | Searches for read group sets matching the criteria. For the definitions
+-- of read group sets and other genomics resources, see [Fundamentals of
+-- Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchReadGroupSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L135).
 --
 -- /See:/ 'readGroupSetsSearch' smart constructor.
-data ReadGroupSetsSearch = ReadGroupSetsSearch
+data ReadGroupSetsSearch = ReadGroupSetsSearch'
     { _rgssXgafv          :: !(Maybe Text)
     , _rgssUploadProtocol :: !(Maybe Text)
     , _rgssPp             :: !Bool
@@ -102,7 +110,7 @@ readGroupSetsSearch
     :: SearchReadGroupSetsRequest -- ^ 'rgssPayload'
     -> ReadGroupSetsSearch
 readGroupSetsSearch pRgssPayload_ =
-    ReadGroupSetsSearch
+    ReadGroupSetsSearch'
     { _rgssXgafv = Nothing
     , _rgssUploadProtocol = Nothing
     , _rgssPp = True
@@ -159,7 +167,11 @@ rgssCallback
 instance GoogleRequest ReadGroupSetsSearch where
         type Rs ReadGroupSetsSearch =
              SearchReadGroupSetsResponse
-        requestClient ReadGroupSetsSearch{..}
+        type Scopes ReadGroupSetsSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient ReadGroupSetsSearch'{..}
           = go _rgssXgafv _rgssUploadProtocol (Just _rgssPp)
               _rgssAccessToken
               _rgssUploadType

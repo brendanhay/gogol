@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.AppsCalendar.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'calendarListEntry' smart constructor.
-data CalendarListEntry = CalendarListEntry
+data CalendarListEntry = CalendarListEntry'
     { _cleSummary              :: !(Maybe Text)
     , _cleEtag                 :: !(Maybe Text)
     , _cleLocation             :: !(Maybe Text)
@@ -85,7 +85,7 @@ data CalendarListEntry = CalendarListEntry
 calendarListEntry
     :: CalendarListEntry
 calendarListEntry =
-    CalendarListEntry
+    CalendarListEntry'
     { _cleSummary = Nothing
     , _cleEtag = Nothing
     , _cleLocation = Nothing
@@ -231,7 +231,7 @@ instance FromJSON CalendarListEntry where
         parseJSON
           = withObject "CalendarListEntry"
               (\ o ->
-                 CalendarListEntry <$>
+                 CalendarListEntry' <$>
                    (o .:? "summary") <*> (o .:? "etag") <*>
                      (o .:? "location")
                      <*> (o .:? "kind" .!= "calendar#calendarListEntry")
@@ -251,7 +251,7 @@ instance FromJSON CalendarListEntry where
                      <*> (o .:? "description"))
 
 instance ToJSON CalendarListEntry where
-        toJSON CalendarListEntry{..}
+        toJSON CalendarListEntry'{..}
           = object
               (catMaybes
                  [("summary" .=) <$> _cleSummary,
@@ -275,7 +275,7 @@ instance ToJSON CalendarListEntry where
 
 --
 -- /See:/ 'event' smart constructor.
-data Event = Event
+data Event = Event'
     { _eSummary                 :: !(Maybe Text)
     , _eOriginalStartTime       :: !(Maybe EventDateTime)
     , _eCreator                 :: !(Maybe EventCreator)
@@ -395,7 +395,7 @@ data Event = Event
 event
     :: Event
 event =
-    Event
+    Event'
     { _eSummary = Nothing
     , _eOriginalStartTime = Nothing
     , _eCreator = Nothing
@@ -658,8 +658,8 @@ eUpdated
 eColorId :: Lens' Event (Maybe Text)
 eColorId = lens _eColorId (\ s a -> s{_eColorId = a})
 
--- | Whether anyone can invite themselves to the event. Optional. The default
--- is False.
+-- | Whether anyone can invite themselves to the event (currently works for
+-- Google+ events only). Optional. The default is False.
 eAnyoneCanAddSelf :: Lens' Event Bool
 eAnyoneCanAddSelf
   = lens _eAnyoneCanAddSelf
@@ -695,7 +695,7 @@ instance FromJSON Event where
         parseJSON
           = withObject "Event"
               (\ o ->
-                 Event <$>
+                 Event' <$>
                    (o .:? "summary") <*> (o .:? "originalStartTime") <*>
                      (o .:? "creator")
                      <*> (o .:? "status")
@@ -734,7 +734,7 @@ instance FromJSON Event where
                      <*> (o .:? "organizer"))
 
 instance ToJSON Event where
-        toJSON Event{..}
+        toJSON Event'{..}
           = object
               (catMaybes
                  [("summary" .=) <$> _eSummary,
@@ -780,7 +780,7 @@ instance ToJSON Event where
 -- calendar.
 --
 -- /See:/ 'calendarListEntryNotificationSettings' smart constructor.
-newtype CalendarListEntryNotificationSettings = CalendarListEntryNotificationSettings
+newtype CalendarListEntryNotificationSettings = CalendarListEntryNotificationSettings'
     { _clensNotifications :: Maybe [CalendarNotification]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -792,7 +792,7 @@ newtype CalendarListEntryNotificationSettings = CalendarListEntryNotificationSet
 calendarListEntryNotificationSettings
     :: CalendarListEntryNotificationSettings
 calendarListEntryNotificationSettings =
-    CalendarListEntryNotificationSettings
+    CalendarListEntryNotificationSettings'
     { _clensNotifications = Nothing
     }
 
@@ -809,12 +809,12 @@ instance FromJSON
         parseJSON
           = withObject "CalendarListEntryNotificationSettings"
               (\ o ->
-                 CalendarListEntryNotificationSettings <$>
+                 CalendarListEntryNotificationSettings' <$>
                    (o .:? "notifications" .!= mempty))
 
 instance ToJSON CalendarListEntryNotificationSettings
          where
-        toJSON CalendarListEntryNotificationSettings{..}
+        toJSON CalendarListEntryNotificationSettings'{..}
           = object
               (catMaybes
                  [("notifications" .=) <$> _clensNotifications])
@@ -822,7 +822,7 @@ instance ToJSON CalendarListEntryNotificationSettings
 -- | The scope of the rule.
 --
 -- /See:/ 'aclRuleScope' smart constructor.
-data ACLRuleScope = ACLRuleScope
+data ACLRuleScope = ACLRuleScope'
     { _arsValue :: !(Maybe Text)
     , _arsType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -837,7 +837,7 @@ data ACLRuleScope = ACLRuleScope
 aclRuleScope
     :: ACLRuleScope
 aclRuleScope =
-    ACLRuleScope
+    ACLRuleScope'
     { _arsValue = Nothing
     , _arsType = Nothing
     }
@@ -859,10 +859,10 @@ instance FromJSON ACLRuleScope where
         parseJSON
           = withObject "ACLRuleScope"
               (\ o ->
-                 ACLRuleScope <$> (o .:? "value") <*> (o .:? "type"))
+                 ACLRuleScope' <$> (o .:? "value") <*> (o .:? "type"))
 
 instance ToJSON ACLRuleScope where
-        toJSON ACLRuleScope{..}
+        toJSON ACLRuleScope'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _arsValue,
@@ -873,7 +873,7 @@ instance ToJSON ACLRuleScope where
 -- color field. Read-only.
 --
 -- /See:/ 'colorsEvent' smart constructor.
-newtype ColorsEvent = ColorsEvent
+newtype ColorsEvent = ColorsEvent'
     { _ceAddtional :: HashMap Text ColorDefinition
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -886,7 +886,7 @@ colorsEvent
     :: HashMap Text ColorDefinition -- ^ 'ceAddtional'
     -> ColorsEvent
 colorsEvent pCeAddtional_ =
-    ColorsEvent
+    ColorsEvent'
     { _ceAddtional = _Coerce # pCeAddtional_
     }
 
@@ -899,14 +899,14 @@ ceAddtional
 instance FromJSON ColorsEvent where
         parseJSON
           = withObject "ColorsEvent"
-              (\ o -> ColorsEvent <$> (parseJSONObject o))
+              (\ o -> ColorsEvent' <$> (parseJSONObject o))
 
 instance ToJSON ColorsEvent where
         toJSON = toJSON . _ceAddtional
 
 --
 -- /See:/ 'settings' smart constructor.
-data Settings = Settings
+data Settings = Settings'
     { _sEtag          :: !(Maybe Text)
     , _sNextPageToken :: !(Maybe Text)
     , _sKind          :: !Text
@@ -930,7 +930,7 @@ data Settings = Settings
 settings
     :: Settings
 settings =
-    Settings
+    Settings'
     { _sEtag = Nothing
     , _sNextPageToken = Nothing
     , _sKind = "calendar#settings"
@@ -971,14 +971,14 @@ instance FromJSON Settings where
         parseJSON
           = withObject "Settings"
               (\ o ->
-                 Settings <$>
+                 Settings' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "calendar#settings")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "nextSyncToken"))
 
 instance ToJSON Settings where
-        toJSON Settings{..}
+        toJSON Settings'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _sEtag,
@@ -988,7 +988,7 @@ instance ToJSON Settings where
 
 --
 -- /See:/ 'freeBusyRequestItem' smart constructor.
-newtype FreeBusyRequestItem = FreeBusyRequestItem
+newtype FreeBusyRequestItem = FreeBusyRequestItem'
     { _fbriId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1000,7 +1000,7 @@ newtype FreeBusyRequestItem = FreeBusyRequestItem
 freeBusyRequestItem
     :: FreeBusyRequestItem
 freeBusyRequestItem =
-    FreeBusyRequestItem
+    FreeBusyRequestItem'
     { _fbriId = Nothing
     }
 
@@ -1011,15 +1011,15 @@ fbriId = lens _fbriId (\ s a -> s{_fbriId = a})
 instance FromJSON FreeBusyRequestItem where
         parseJSON
           = withObject "FreeBusyRequestItem"
-              (\ o -> FreeBusyRequestItem <$> (o .:? "id"))
+              (\ o -> FreeBusyRequestItem' <$> (o .:? "id"))
 
 instance ToJSON FreeBusyRequestItem where
-        toJSON FreeBusyRequestItem{..}
+        toJSON FreeBusyRequestItem'{..}
           = object (catMaybes [("id" .=) <$> _fbriId])
 
 --
 -- /See:/ 'eventAttachment' smart constructor.
-data EventAttachment = EventAttachment
+data EventAttachment = EventAttachment'
     { _eaFileURL  :: !(Maybe Text)
     , _eaIconLink :: !(Maybe Text)
     , _eaMimeType :: !(Maybe Text)
@@ -1043,7 +1043,7 @@ data EventAttachment = EventAttachment
 eventAttachment
     :: EventAttachment
 eventAttachment =
-    EventAttachment
+    EventAttachment'
     { _eaFileURL = Nothing
     , _eaIconLink = Nothing
     , _eaMimeType = Nothing
@@ -1081,14 +1081,14 @@ instance FromJSON EventAttachment where
         parseJSON
           = withObject "EventAttachment"
               (\ o ->
-                 EventAttachment <$>
+                 EventAttachment' <$>
                    (o .:? "fileUrl") <*> (o .:? "iconLink") <*>
                      (o .:? "mimeType")
                      <*> (o .:? "title")
                      <*> (o .:? "fileId"))
 
 instance ToJSON EventAttachment where
-        toJSON EventAttachment{..}
+        toJSON EventAttachment'{..}
           = object
               (catMaybes
                  [("fileUrl" .=) <$> _eaFileURL,
@@ -1099,7 +1099,7 @@ instance ToJSON EventAttachment where
 
 --
 -- /See:/ 'timePeriod' smart constructor.
-data TimePeriod = TimePeriod
+data TimePeriod = TimePeriod'
     { _tpStart :: !(Maybe DateTime')
     , _tpEnd   :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1114,7 +1114,7 @@ data TimePeriod = TimePeriod
 timePeriod
     :: TimePeriod
 timePeriod =
-    TimePeriod
+    TimePeriod'
     { _tpStart = Nothing
     , _tpEnd = Nothing
     }
@@ -1135,10 +1135,10 @@ instance FromJSON TimePeriod where
         parseJSON
           = withObject "TimePeriod"
               (\ o ->
-                 TimePeriod <$> (o .:? "start") <*> (o .:? "end"))
+                 TimePeriod' <$> (o .:? "start") <*> (o .:? "end"))
 
 instance ToJSON TimePeriod where
-        toJSON TimePeriod{..}
+        toJSON TimePeriod'{..}
           = object
               (catMaybes
                  [("start" .=) <$> _tpStart, ("end" .=) <$> _tpEnd])
@@ -1146,7 +1146,7 @@ instance ToJSON TimePeriod where
 -- | The creator of the event. Read-only.
 --
 -- /See:/ 'eventCreator' smart constructor.
-data EventCreator = EventCreator
+data EventCreator = EventCreator'
     { _ecEmail       :: !(Maybe Text)
     , _ecSelf        :: !Bool
     , _ecDisplayName :: !(Maybe Text)
@@ -1167,7 +1167,7 @@ data EventCreator = EventCreator
 eventCreator
     :: EventCreator
 eventCreator =
-    EventCreator
+    EventCreator'
     { _ecEmail = Nothing
     , _ecSelf = False
     , _ecDisplayName = Nothing
@@ -1198,13 +1198,13 @@ instance FromJSON EventCreator where
         parseJSON
           = withObject "EventCreator"
               (\ o ->
-                 EventCreator <$>
+                 EventCreator' <$>
                    (o .:? "email") <*> (o .:? "self" .!= False) <*>
                      (o .:? "displayName")
                      <*> (o .:? "id"))
 
 instance ToJSON EventCreator where
-        toJSON EventCreator{..}
+        toJSON EventCreator'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _ecEmail, Just ("self" .= _ecSelf),
@@ -1213,7 +1213,7 @@ instance ToJSON EventCreator where
 
 --
 -- /See:/ 'error'' smart constructor.
-data Error' = Error'
+data Error' = Error''
     { _eDomain :: !(Maybe Text)
     , _eReason :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1228,7 +1228,7 @@ data Error' = Error'
 error'
     :: Error'
 error' =
-    Error'
+    Error''
     { _eDomain = Nothing
     , _eReason = Nothing
     }
@@ -1252,10 +1252,10 @@ instance FromJSON Error' where
         parseJSON
           = withObject "Error"
               (\ o ->
-                 Error' <$> (o .:? "domain") <*> (o .:? "reason"))
+                 Error'' <$> (o .:? "domain") <*> (o .:? "reason"))
 
 instance ToJSON Error' where
-        toJSON Error'{..}
+        toJSON Error''{..}
           = object
               (catMaybes
                  [("domain" .=) <$> _eDomain,
@@ -1263,7 +1263,7 @@ instance ToJSON Error' where
 
 --
 -- /See:/ 'colorDefinition' smart constructor.
-data ColorDefinition = ColorDefinition
+data ColorDefinition = ColorDefinition'
     { _cdForegRound :: !(Maybe Text)
     , _cdBackgRound :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1278,7 +1278,7 @@ data ColorDefinition = ColorDefinition
 colorDefinition
     :: ColorDefinition
 colorDefinition =
-    ColorDefinition
+    ColorDefinition'
     { _cdForegRound = Nothing
     , _cdBackgRound = Nothing
     }
@@ -1298,11 +1298,11 @@ instance FromJSON ColorDefinition where
         parseJSON
           = withObject "ColorDefinition"
               (\ o ->
-                 ColorDefinition <$>
+                 ColorDefinition' <$>
                    (o .:? "foreground") <*> (o .:? "background"))
 
 instance ToJSON ColorDefinition where
-        toJSON ColorDefinition{..}
+        toJSON ColorDefinition'{..}
           = object
               (catMaybes
                  [("foreground" .=) <$> _cdForegRound,
@@ -1310,7 +1310,7 @@ instance ToJSON ColorDefinition where
 
 --
 -- /See:/ 'channel' smart constructor.
-data Channel = Channel
+data Channel = Channel'
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
@@ -1349,7 +1349,7 @@ data Channel = Channel
 channel
     :: Channel
 channel =
-    Channel
+    Channel'
     { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
@@ -1414,7 +1414,7 @@ instance FromJSON Channel where
         parseJSON
           = withObject "Channel"
               (\ o ->
-                 Channel <$>
+                 Channel' <$>
                    (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
                      (o .:? "kind" .!= "api#channel")
                      <*> (o .:? "expiration")
@@ -1426,7 +1426,7 @@ instance FromJSON Channel where
                      <*> (o .:? "type"))
 
 instance ToJSON Channel where
-        toJSON Channel{..}
+        toJSON Channel'{..}
           = object
               (catMaybes
                  [("resourceUri" .=) <$> _cResourceURI,
@@ -1441,7 +1441,7 @@ instance ToJSON Channel where
 
 --
 -- /See:/ 'freeBusyCalendar' smart constructor.
-data FreeBusyCalendar = FreeBusyCalendar
+data FreeBusyCalendar = FreeBusyCalendar'
     { _fbcBusy   :: !(Maybe [TimePeriod])
     , _fbcErrors :: !(Maybe [Error'])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1456,7 +1456,7 @@ data FreeBusyCalendar = FreeBusyCalendar
 freeBusyCalendar
     :: FreeBusyCalendar
 freeBusyCalendar =
-    FreeBusyCalendar
+    FreeBusyCalendar'
     { _fbcBusy = Nothing
     , _fbcErrors = Nothing
     }
@@ -1479,12 +1479,12 @@ instance FromJSON FreeBusyCalendar where
         parseJSON
           = withObject "FreeBusyCalendar"
               (\ o ->
-                 FreeBusyCalendar <$>
+                 FreeBusyCalendar' <$>
                    (o .:? "busy" .!= mempty) <*>
                      (o .:? "errors" .!= mempty))
 
 instance ToJSON FreeBusyCalendar where
-        toJSON FreeBusyCalendar{..}
+        toJSON FreeBusyCalendar'{..}
           = object
               (catMaybes
                  [("busy" .=) <$> _fbcBusy,
@@ -1492,7 +1492,7 @@ instance ToJSON FreeBusyCalendar where
 
 --
 -- /See:/ 'setting' smart constructor.
-data Setting = Setting
+data Setting = Setting'
     { _setEtag  :: !(Maybe Text)
     , _setKind  :: !Text
     , _setValue :: !(Maybe Text)
@@ -1513,7 +1513,7 @@ data Setting = Setting
 setting
     :: Setting
 setting =
-    Setting
+    Setting'
     { _setEtag = Nothing
     , _setKind = "calendar#setting"
     , _setValue = Nothing
@@ -1542,14 +1542,14 @@ instance FromJSON Setting where
         parseJSON
           = withObject "Setting"
               (\ o ->
-                 Setting <$>
+                 Setting' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "calendar#setting")
                      <*> (o .:? "value")
                      <*> (o .:? "id"))
 
 instance ToJSON Setting where
-        toJSON Setting{..}
+        toJSON Setting'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _setEtag, Just ("kind" .= _setKind),
@@ -1558,7 +1558,7 @@ instance ToJSON Setting where
 -- | Expansion of groups.
 --
 -- /See:/ 'freeBusyResponseGroups' smart constructor.
-newtype FreeBusyResponseGroups = FreeBusyResponseGroups
+newtype FreeBusyResponseGroups = FreeBusyResponseGroups'
     { _fbrgAddtional :: HashMap Text FreeBusyGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1571,7 +1571,7 @@ freeBusyResponseGroups
     :: HashMap Text FreeBusyGroup -- ^ 'fbrgAddtional'
     -> FreeBusyResponseGroups
 freeBusyResponseGroups pFbrgAddtional_ =
-    FreeBusyResponseGroups
+    FreeBusyResponseGroups'
     { _fbrgAddtional = _Coerce # pFbrgAddtional_
     }
 
@@ -1586,7 +1586,7 @@ instance FromJSON FreeBusyResponseGroups where
         parseJSON
           = withObject "FreeBusyResponseGroups"
               (\ o ->
-                 FreeBusyResponseGroups <$> (parseJSONObject o))
+                 FreeBusyResponseGroups' <$> (parseJSONObject o))
 
 instance ToJSON FreeBusyResponseGroups where
         toJSON = toJSON . _fbrgAddtional
@@ -1594,7 +1594,7 @@ instance ToJSON FreeBusyResponseGroups where
 -- | Information about the event\'s reminders for the authenticated user.
 --
 -- /See:/ 'eventReminders' smart constructor.
-data EventReminders = EventReminders
+data EventReminders = EventReminders'
     { _erOverrides  :: !(Maybe [EventReminder])
     , _erUseDefault :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1609,7 +1609,7 @@ data EventReminders = EventReminders
 eventReminders
     :: EventReminders
 eventReminders =
-    EventReminders
+    EventReminders'
     { _erOverrides = Nothing
     , _erUseDefault = Nothing
     }
@@ -1633,12 +1633,12 @@ instance FromJSON EventReminders where
         parseJSON
           = withObject "EventReminders"
               (\ o ->
-                 EventReminders <$>
+                 EventReminders' <$>
                    (o .:? "overrides" .!= mempty) <*>
                      (o .:? "useDefault"))
 
 instance ToJSON EventReminders where
-        toJSON EventReminders{..}
+        toJSON EventReminders'{..}
           = object
               (catMaybes
                  [("overrides" .=) <$> _erOverrides,
@@ -1649,7 +1649,7 @@ instance ToJSON EventReminders where
 -- IDs in its color field. Read-only.
 --
 -- /See:/ 'colorsCalendar' smart constructor.
-newtype ColorsCalendar = ColorsCalendar
+newtype ColorsCalendar = ColorsCalendar'
     { _ccAddtional :: HashMap Text ColorDefinition
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1662,7 +1662,7 @@ colorsCalendar
     :: HashMap Text ColorDefinition -- ^ 'ccAddtional'
     -> ColorsCalendar
 colorsCalendar pCcAddtional_ =
-    ColorsCalendar
+    ColorsCalendar'
     { _ccAddtional = _Coerce # pCcAddtional_
     }
 
@@ -1675,14 +1675,14 @@ ccAddtional
 instance FromJSON ColorsCalendar where
         parseJSON
           = withObject "ColorsCalendar"
-              (\ o -> ColorsCalendar <$> (parseJSONObject o))
+              (\ o -> ColorsCalendar' <$> (parseJSONObject o))
 
 instance ToJSON ColorsCalendar where
         toJSON = toJSON . _ccAddtional
 
 --
 -- /See:/ 'calendarNotification' smart constructor.
-data CalendarNotification = CalendarNotification
+data CalendarNotification = CalendarNotification'
     { _cnMethod :: !(Maybe Text)
     , _cnType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1697,7 +1697,7 @@ data CalendarNotification = CalendarNotification
 calendarNotification
     :: CalendarNotification
 calendarNotification =
-    CalendarNotification
+    CalendarNotification'
     { _cnMethod = Nothing
     , _cnType = Nothing
     }
@@ -1724,11 +1724,11 @@ instance FromJSON CalendarNotification where
         parseJSON
           = withObject "CalendarNotification"
               (\ o ->
-                 CalendarNotification <$>
+                 CalendarNotification' <$>
                    (o .:? "method") <*> (o .:? "type"))
 
 instance ToJSON CalendarNotification where
-        toJSON CalendarNotification{..}
+        toJSON CalendarNotification'{..}
           = object
               (catMaybes
                  [("method" .=) <$> _cnMethod,
@@ -1738,7 +1738,7 @@ instance ToJSON CalendarNotification where
 -- this calendar.
 --
 -- /See:/ 'eventExtendedPropertiesPrivate' smart constructor.
-newtype EventExtendedPropertiesPrivate = EventExtendedPropertiesPrivate
+newtype EventExtendedPropertiesPrivate = EventExtendedPropertiesPrivate'
     { _eeppAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1751,7 +1751,7 @@ eventExtendedPropertiesPrivate
     :: HashMap Text Text -- ^ 'eeppAddtional'
     -> EventExtendedPropertiesPrivate
 eventExtendedPropertiesPrivate pEeppAddtional_ =
-    EventExtendedPropertiesPrivate
+    EventExtendedPropertiesPrivate'
     { _eeppAddtional = _Coerce # pEeppAddtional_
     }
 
@@ -1767,7 +1767,7 @@ instance FromJSON EventExtendedPropertiesPrivate
         parseJSON
           = withObject "EventExtendedPropertiesPrivate"
               (\ o ->
-                 EventExtendedPropertiesPrivate <$>
+                 EventExtendedPropertiesPrivate' <$>
                    (parseJSONObject o))
 
 instance ToJSON EventExtendedPropertiesPrivate where
@@ -1776,7 +1776,7 @@ instance ToJSON EventExtendedPropertiesPrivate where
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-newtype ChannelParams = ChannelParams
+newtype ChannelParams = ChannelParams'
     { _cpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1789,7 +1789,7 @@ channelParams
     :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
-    ChannelParams
+    ChannelParams'
     { _cpAddtional = _Coerce # pCpAddtional_
     }
 
@@ -1802,14 +1802,14 @@ cpAddtional
 instance FromJSON ChannelParams where
         parseJSON
           = withObject "ChannelParams"
-              (\ o -> ChannelParams <$> (parseJSONObject o))
+              (\ o -> ChannelParams' <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
         toJSON = toJSON . _cpAddtional
 
 --
 -- /See:/ 'events' smart constructor.
-data Events = Events
+data Events = Events'
     { _eveSummary          :: !(Maybe Text)
     , _eveEtag             :: !(Maybe Text)
     , _eveNextPageToken    :: !(Maybe Text)
@@ -1851,7 +1851,7 @@ data Events = Events
 events
     :: Events
 events =
-    Events
+    Events'
     { _eveSummary = Nothing
     , _eveEtag = Nothing
     , _eveNextPageToken = Nothing
@@ -1947,7 +1947,7 @@ instance FromJSON Events where
         parseJSON
           = withObject "Events"
               (\ o ->
-                 Events <$>
+                 Events' <$>
                    (o .:? "summary") <*> (o .:? "etag") <*>
                      (o .:? "nextPageToken")
                      <*> (o .:? "kind" .!= "calendar#events")
@@ -1960,7 +1960,7 @@ instance FromJSON Events where
                      <*> (o .:? "description"))
 
 instance ToJSON Events where
-        toJSON Events{..}
+        toJSON Events'{..}
           = object
               (catMaybes
                  [("summary" .=) <$> _eveSummary,
@@ -1977,7 +1977,7 @@ instance ToJSON Events where
 
 --
 -- /See:/ 'eventAttendee' smart constructor.
-data EventAttendee = EventAttendee
+data EventAttendee = EventAttendee'
     { _eaEmail            :: !(Maybe Text)
     , _eaResponseStatus   :: !(Maybe Text)
     , _eaSelf             :: !Bool
@@ -2016,7 +2016,7 @@ data EventAttendee = EventAttendee
 eventAttendee
     :: EventAttendee
 eventAttendee =
-    EventAttendee
+    EventAttendee'
     { _eaEmail = Nothing
     , _eaResponseStatus = Nothing
     , _eaSelf = False
@@ -2093,7 +2093,7 @@ instance FromJSON EventAttendee where
         parseJSON
           = withObject "EventAttendee"
               (\ o ->
-                 EventAttendee <$>
+                 EventAttendee' <$>
                    (o .:? "email") <*> (o .:? "responseStatus") <*>
                      (o .:? "self" .!= False)
                      <*> (o .:? "resource" .!= False)
@@ -2105,7 +2105,7 @@ instance FromJSON EventAttendee where
                      <*> (o .:? "organizer"))
 
 instance ToJSON EventAttendee where
-        toJSON EventAttendee{..}
+        toJSON EventAttendee'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _eaEmail,
@@ -2120,7 +2120,7 @@ instance ToJSON EventAttendee where
 
 --
 -- /See:/ 'calendar' smart constructor.
-data Calendar = Calendar
+data Calendar = Calendar'
     { _calSummary     :: !(Maybe Text)
     , _calEtag        :: !(Maybe Text)
     , _calLocation    :: !(Maybe Text)
@@ -2150,7 +2150,7 @@ data Calendar = Calendar
 calendar
     :: Calendar
 calendar =
-    Calendar
+    Calendar'
     { _calSummary = Nothing
     , _calEtag = Nothing
     , _calLocation = Nothing
@@ -2199,7 +2199,7 @@ instance FromJSON Calendar where
         parseJSON
           = withObject "Calendar"
               (\ o ->
-                 Calendar <$>
+                 Calendar' <$>
                    (o .:? "summary") <*> (o .:? "etag") <*>
                      (o .:? "location")
                      <*> (o .:? "kind" .!= "calendar#calendar")
@@ -2208,7 +2208,7 @@ instance FromJSON Calendar where
                      <*> (o .:? "description"))
 
 instance ToJSON Calendar where
-        toJSON Calendar{..}
+        toJSON Calendar'{..}
           = object
               (catMaybes
                  [("summary" .=) <$> _calSummary,
@@ -2220,7 +2220,7 @@ instance ToJSON Calendar where
 
 --
 -- /See:/ 'freeBusyResponse' smart constructor.
-data FreeBusyResponse = FreeBusyResponse
+data FreeBusyResponse = FreeBusyResponse'
     { _fbrGroups    :: !(Maybe FreeBusyResponseGroups)
     , _fbrTimeMin   :: !(Maybe DateTime')
     , _fbrKind      :: !Text
@@ -2244,7 +2244,7 @@ data FreeBusyResponse = FreeBusyResponse
 freeBusyResponse
     :: FreeBusyResponse
 freeBusyResponse =
-    FreeBusyResponse
+    FreeBusyResponse'
     { _fbrGroups = Nothing
     , _fbrTimeMin = Nothing
     , _fbrKind = "calendar#freeBusy"
@@ -2282,14 +2282,14 @@ instance FromJSON FreeBusyResponse where
         parseJSON
           = withObject "FreeBusyResponse"
               (\ o ->
-                 FreeBusyResponse <$>
+                 FreeBusyResponse' <$>
                    (o .:? "groups") <*> (o .:? "timeMin") <*>
                      (o .:? "kind" .!= "calendar#freeBusy")
                      <*> (o .:? "calendars")
                      <*> (o .:? "timeMax"))
 
 instance ToJSON FreeBusyResponse where
-        toJSON FreeBusyResponse{..}
+        toJSON FreeBusyResponse'{..}
           = object
               (catMaybes
                  [("groups" .=) <$> _fbrGroups,
@@ -2300,7 +2300,7 @@ instance ToJSON FreeBusyResponse where
 
 --
 -- /See:/ 'eventReminder' smart constructor.
-data EventReminder = EventReminder
+data EventReminder = EventReminder'
     { _erMethod  :: !(Maybe Text)
     , _erMinutes :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2315,7 +2315,7 @@ data EventReminder = EventReminder
 eventReminder
     :: EventReminder
 eventReminder =
-    EventReminder
+    EventReminder'
     { _erMethod = Nothing
     , _erMinutes = Nothing
     }
@@ -2339,11 +2339,11 @@ instance FromJSON EventReminder where
         parseJSON
           = withObject "EventReminder"
               (\ o ->
-                 EventReminder <$>
+                 EventReminder' <$>
                    (o .:? "method") <*> (o .:? "minutes"))
 
 instance ToJSON EventReminder where
-        toJSON EventReminder{..}
+        toJSON EventReminder'{..}
           = object
               (catMaybes
                  [("method" .=) <$> _erMethod,
@@ -2352,7 +2352,7 @@ instance ToJSON EventReminder where
 -- | Extended properties of the event.
 --
 -- /See:/ 'eventExtendedProperties' smart constructor.
-data EventExtendedProperties = EventExtendedProperties
+data EventExtendedProperties = EventExtendedProperties'
     { _eepPrivate :: !(Maybe EventExtendedPropertiesPrivate)
     , _eepShared  :: !(Maybe EventExtendedPropertiesShared)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2367,7 +2367,7 @@ data EventExtendedProperties = EventExtendedProperties
 eventExtendedProperties
     :: EventExtendedProperties
 eventExtendedProperties =
-    EventExtendedProperties
+    EventExtendedProperties'
     { _eepPrivate = Nothing
     , _eepShared = Nothing
     }
@@ -2388,11 +2388,11 @@ instance FromJSON EventExtendedProperties where
         parseJSON
           = withObject "EventExtendedProperties"
               (\ o ->
-                 EventExtendedProperties <$>
+                 EventExtendedProperties' <$>
                    (o .:? "private") <*> (o .:? "shared"))
 
 instance ToJSON EventExtendedProperties where
-        toJSON EventExtendedProperties{..}
+        toJSON EventExtendedProperties'{..}
           = object
               (catMaybes
                  [("private" .=) <$> _eepPrivate,
@@ -2400,7 +2400,7 @@ instance ToJSON EventExtendedProperties where
 
 --
 -- /See:/ 'eventDateTime' smart constructor.
-data EventDateTime = EventDateTime
+data EventDateTime = EventDateTime'
     { _edtDate     :: !(Maybe Date')
     , _edtTimeZone :: !(Maybe Text)
     , _edtDateTime :: !(Maybe DateTime')
@@ -2418,7 +2418,7 @@ data EventDateTime = EventDateTime
 eventDateTime
     :: EventDateTime
 eventDateTime =
-    EventDateTime
+    EventDateTime'
     { _edtDate = Nothing
     , _edtTimeZone = Nothing
     , _edtDateTime = Nothing
@@ -2451,12 +2451,12 @@ instance FromJSON EventDateTime where
         parseJSON
           = withObject "EventDateTime"
               (\ o ->
-                 EventDateTime <$>
+                 EventDateTime' <$>
                    (o .:? "date") <*> (o .:? "timeZone") <*>
                      (o .:? "dateTime"))
 
 instance ToJSON EventDateTime where
-        toJSON EventDateTime{..}
+        toJSON EventDateTime'{..}
           = object
               (catMaybes
                  [("date" .=) <$> _edtDate,
@@ -2469,7 +2469,7 @@ instance ToJSON EventDateTime where
 -- except when importing an event.
 --
 -- /See:/ 'eventOrganizer' smart constructor.
-data EventOrganizer = EventOrganizer
+data EventOrganizer = EventOrganizer'
     { _eoEmail       :: !(Maybe Text)
     , _eoSelf        :: !Bool
     , _eoDisplayName :: !(Maybe Text)
@@ -2490,7 +2490,7 @@ data EventOrganizer = EventOrganizer
 eventOrganizer
     :: EventOrganizer
 eventOrganizer =
-    EventOrganizer
+    EventOrganizer'
     { _eoEmail = Nothing
     , _eoSelf = False
     , _eoDisplayName = Nothing
@@ -2522,13 +2522,13 @@ instance FromJSON EventOrganizer where
         parseJSON
           = withObject "EventOrganizer"
               (\ o ->
-                 EventOrganizer <$>
+                 EventOrganizer' <$>
                    (o .:? "email") <*> (o .:? "self" .!= False) <*>
                      (o .:? "displayName")
                      <*> (o .:? "id"))
 
 instance ToJSON EventOrganizer where
-        toJSON EventOrganizer{..}
+        toJSON EventOrganizer'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _eoEmail, Just ("self" .= _eoSelf),
@@ -2537,7 +2537,7 @@ instance ToJSON EventOrganizer where
 
 --
 -- /See:/ 'calendarList' smart constructor.
-data CalendarList = CalendarList
+data CalendarList = CalendarList'
     { _clEtag          :: !(Maybe Text)
     , _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
@@ -2561,7 +2561,7 @@ data CalendarList = CalendarList
 calendarList
     :: CalendarList
 calendarList =
-    CalendarList
+    CalendarList'
     { _clEtag = Nothing
     , _clNextPageToken = Nothing
     , _clKind = "calendar#calendarList"
@@ -2602,14 +2602,14 @@ instance FromJSON CalendarList where
         parseJSON
           = withObject "CalendarList"
               (\ o ->
-                 CalendarList <$>
+                 CalendarList' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "calendar#calendarList")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "nextSyncToken"))
 
 instance ToJSON CalendarList where
-        toJSON CalendarList{..}
+        toJSON CalendarList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _clEtag,
@@ -2620,7 +2620,7 @@ instance ToJSON CalendarList where
 -- | A gadget that extends this event.
 --
 -- /See:/ 'eventGadget' smart constructor.
-data EventGadget = EventGadget
+data EventGadget = EventGadget'
     { _egHeight      :: !(Maybe (Textual Int32))
     , _egDisplay     :: !(Maybe Text)
     , _egPreferences :: !(Maybe EventGadgetPreferences)
@@ -2653,7 +2653,7 @@ data EventGadget = EventGadget
 eventGadget
     :: EventGadget
 eventGadget =
-    EventGadget
+    EventGadget'
     { _egHeight = Nothing
     , _egDisplay = Nothing
     , _egPreferences = Nothing
@@ -2712,7 +2712,7 @@ instance FromJSON EventGadget where
         parseJSON
           = withObject "EventGadget"
               (\ o ->
-                 EventGadget <$>
+                 EventGadget' <$>
                    (o .:? "height") <*> (o .:? "display") <*>
                      (o .:? "preferences")
                      <*> (o .:? "link")
@@ -2722,7 +2722,7 @@ instance FromJSON EventGadget where
                      <*> (o .:? "type"))
 
 instance ToJSON EventGadget where
-        toJSON EventGadget{..}
+        toJSON EventGadget'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _egHeight,
@@ -2736,7 +2736,7 @@ instance ToJSON EventGadget where
 -- | Preferences.
 --
 -- /See:/ 'eventGadgetPreferences' smart constructor.
-newtype EventGadgetPreferences = EventGadgetPreferences
+newtype EventGadgetPreferences = EventGadgetPreferences'
     { _egpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2749,7 +2749,7 @@ eventGadgetPreferences
     :: HashMap Text Text -- ^ 'egpAddtional'
     -> EventGadgetPreferences
 eventGadgetPreferences pEgpAddtional_ =
-    EventGadgetPreferences
+    EventGadgetPreferences'
     { _egpAddtional = _Coerce # pEgpAddtional_
     }
 
@@ -2763,14 +2763,14 @@ instance FromJSON EventGadgetPreferences where
         parseJSON
           = withObject "EventGadgetPreferences"
               (\ o ->
-                 EventGadgetPreferences <$> (parseJSONObject o))
+                 EventGadgetPreferences' <$> (parseJSONObject o))
 
 instance ToJSON EventGadgetPreferences where
         toJSON = toJSON . _egpAddtional
 
 --
 -- /See:/ 'freeBusyRequest' smart constructor.
-data FreeBusyRequest = FreeBusyRequest
+data FreeBusyRequest = FreeBusyRequest'
     { _fCalendarExpansionMax :: !(Maybe (Textual Int32))
     , _fTimeMin              :: !(Maybe DateTime')
     , _fItems                :: !(Maybe [FreeBusyRequestItem])
@@ -2797,7 +2797,7 @@ data FreeBusyRequest = FreeBusyRequest
 freeBusyRequest
     :: FreeBusyRequest
 freeBusyRequest =
-    FreeBusyRequest
+    FreeBusyRequest'
     { _fCalendarExpansionMax = Nothing
     , _fTimeMin = Nothing
     , _fItems = Nothing
@@ -2850,7 +2850,7 @@ instance FromJSON FreeBusyRequest where
         parseJSON
           = withObject "FreeBusyRequest"
               (\ o ->
-                 FreeBusyRequest <$>
+                 FreeBusyRequest' <$>
                    (o .:? "calendarExpansionMax") <*> (o .:? "timeMin")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "groupExpansionMax")
@@ -2858,7 +2858,7 @@ instance FromJSON FreeBusyRequest where
                      <*> (o .:? "timeMax"))
 
 instance ToJSON FreeBusyRequest where
-        toJSON FreeBusyRequest{..}
+        toJSON FreeBusyRequest'{..}
           = object
               (catMaybes
                  [("calendarExpansionMax" .=) <$>
@@ -2871,7 +2871,7 @@ instance ToJSON FreeBusyRequest where
 
 --
 -- /See:/ 'aclRule' smart constructor.
-data ACLRule = ACLRule
+data ACLRule = ACLRule'
     { _arEtag  :: !(Maybe Text)
     , _arKind  :: !Text
     , _arRole  :: !(Maybe Text)
@@ -2895,7 +2895,7 @@ data ACLRule = ACLRule
 aclRule
     :: ACLRule
 aclRule =
-    ACLRule
+    ACLRule'
     { _arEtag = Nothing
     , _arKind = "calendar#aclRule"
     , _arRole = Nothing
@@ -2935,7 +2935,7 @@ instance FromJSON ACLRule where
         parseJSON
           = withObject "ACLRule"
               (\ o ->
-                 ACLRule <$>
+                 ACLRule' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "calendar#aclRule")
                      <*> (o .:? "role")
@@ -2943,7 +2943,7 @@ instance FromJSON ACLRule where
                      <*> (o .:? "id"))
 
 instance ToJSON ACLRule where
-        toJSON ACLRule{..}
+        toJSON ACLRule'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _arEtag, Just ("kind" .= _arKind),
@@ -2954,7 +2954,7 @@ instance ToJSON ACLRule where
 -- attendees\' calendars.
 --
 -- /See:/ 'eventExtendedPropertiesShared' smart constructor.
-newtype EventExtendedPropertiesShared = EventExtendedPropertiesShared
+newtype EventExtendedPropertiesShared = EventExtendedPropertiesShared'
     { _eepsAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2967,7 +2967,7 @@ eventExtendedPropertiesShared
     :: HashMap Text Text -- ^ 'eepsAddtional'
     -> EventExtendedPropertiesShared
 eventExtendedPropertiesShared pEepsAddtional_ =
-    EventExtendedPropertiesShared
+    EventExtendedPropertiesShared'
     { _eepsAddtional = _Coerce # pEepsAddtional_
     }
 
@@ -2982,7 +2982,7 @@ instance FromJSON EventExtendedPropertiesShared where
         parseJSON
           = withObject "EventExtendedPropertiesShared"
               (\ o ->
-                 EventExtendedPropertiesShared <$>
+                 EventExtendedPropertiesShared' <$>
                    (parseJSONObject o))
 
 instance ToJSON EventExtendedPropertiesShared where
@@ -2991,7 +2991,7 @@ instance ToJSON EventExtendedPropertiesShared where
 -- | List of free\/busy information for calendars.
 --
 -- /See:/ 'freeBusyResponseCalendars' smart constructor.
-newtype FreeBusyResponseCalendars = FreeBusyResponseCalendars
+newtype FreeBusyResponseCalendars = FreeBusyResponseCalendars'
     { _fbrcAddtional :: HashMap Text FreeBusyCalendar
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3004,7 +3004,7 @@ freeBusyResponseCalendars
     :: HashMap Text FreeBusyCalendar -- ^ 'fbrcAddtional'
     -> FreeBusyResponseCalendars
 freeBusyResponseCalendars pFbrcAddtional_ =
-    FreeBusyResponseCalendars
+    FreeBusyResponseCalendars'
     { _fbrcAddtional = _Coerce # pFbrcAddtional_
     }
 
@@ -3019,14 +3019,14 @@ instance FromJSON FreeBusyResponseCalendars where
         parseJSON
           = withObject "FreeBusyResponseCalendars"
               (\ o ->
-                 FreeBusyResponseCalendars <$> (parseJSONObject o))
+                 FreeBusyResponseCalendars' <$> (parseJSONObject o))
 
 instance ToJSON FreeBusyResponseCalendars where
         toJSON = toJSON . _fbrcAddtional
 
 --
 -- /See:/ 'acl' smart constructor.
-data ACL = ACL
+data ACL = ACL'
     { _aEtag          :: !(Maybe Text)
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
@@ -3050,7 +3050,7 @@ data ACL = ACL
 acl
     :: ACL
 acl =
-    ACL
+    ACL'
     { _aEtag = Nothing
     , _aNextPageToken = Nothing
     , _aKind = "calendar#acl"
@@ -3091,14 +3091,14 @@ instance FromJSON ACL where
         parseJSON
           = withObject "ACL"
               (\ o ->
-                 ACL <$>
+                 ACL' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "calendar#acl")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "nextSyncToken"))
 
 instance ToJSON ACL where
-        toJSON ACL{..}
+        toJSON ACL'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _aEtag,
@@ -3108,7 +3108,7 @@ instance ToJSON ACL where
 
 --
 -- /See:/ 'colors' smart constructor.
-data Colors = Colors
+data Colors = Colors'
     { _colEvent    :: !(Maybe ColorsEvent)
     , _colKind     :: !Text
     , _colCalendar :: !(Maybe ColorsCalendar)
@@ -3129,7 +3129,7 @@ data Colors = Colors
 colors
     :: Colors
 colors =
-    Colors
+    Colors'
     { _colEvent = Nothing
     , _colKind = "calendar#colors"
     , _colCalendar = Nothing
@@ -3164,14 +3164,14 @@ instance FromJSON Colors where
         parseJSON
           = withObject "Colors"
               (\ o ->
-                 Colors <$>
+                 Colors' <$>
                    (o .:? "event") <*>
                      (o .:? "kind" .!= "calendar#colors")
                      <*> (o .:? "calendar")
                      <*> (o .:? "updated"))
 
 instance ToJSON Colors where
-        toJSON Colors{..}
+        toJSON Colors'{..}
           = object
               (catMaybes
                  [("event" .=) <$> _colEvent,
@@ -3181,7 +3181,7 @@ instance ToJSON Colors where
 
 --
 -- /See:/ 'freeBusyGroup' smart constructor.
-data FreeBusyGroup = FreeBusyGroup
+data FreeBusyGroup = FreeBusyGroup'
     { _fbgCalendars :: !(Maybe [Text])
     , _fbgErrors    :: !(Maybe [Error'])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3196,7 +3196,7 @@ data FreeBusyGroup = FreeBusyGroup
 freeBusyGroup
     :: FreeBusyGroup
 freeBusyGroup =
-    FreeBusyGroup
+    FreeBusyGroup'
     { _fbgCalendars = Nothing
     , _fbgErrors = Nothing
     }
@@ -3219,12 +3219,12 @@ instance FromJSON FreeBusyGroup where
         parseJSON
           = withObject "FreeBusyGroup"
               (\ o ->
-                 FreeBusyGroup <$>
+                 FreeBusyGroup' <$>
                    (o .:? "calendars" .!= mempty) <*>
                      (o .:? "errors" .!= mempty))
 
 instance ToJSON FreeBusyGroup where
-        toJSON FreeBusyGroup{..}
+        toJSON FreeBusyGroup'{..}
           = object
               (catMaybes
                  [("calendars" .=) <$> _fbgCalendars,
@@ -3235,7 +3235,7 @@ instance ToJSON FreeBusyGroup where
 -- scheme. Can only be seen or modified by the creator of the event.
 --
 -- /See:/ 'eventSource' smart constructor.
-data EventSource = EventSource
+data EventSource = EventSource'
     { _esURL   :: !(Maybe Text)
     , _esTitle :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3250,7 +3250,7 @@ data EventSource = EventSource
 eventSource
     :: EventSource
 eventSource =
-    EventSource
+    EventSource'
     { _esURL = Nothing
     , _esTitle = Nothing
     }
@@ -3269,10 +3269,10 @@ instance FromJSON EventSource where
         parseJSON
           = withObject "EventSource"
               (\ o ->
-                 EventSource <$> (o .:? "url") <*> (o .:? "title"))
+                 EventSource' <$> (o .:? "url") <*> (o .:? "title"))
 
 instance ToJSON EventSource where
-        toJSON EventSource{..}
+        toJSON EventSource'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _esURL, ("title" .=) <$> _esTitle])

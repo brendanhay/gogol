@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.PlayLists.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type PlayListsUpdateResource =
 -- description, or privacy status.
 --
 -- /See:/ 'playListsUpdate' smart constructor.
-data PlayListsUpdate = PlayListsUpdate
+data PlayListsUpdate = PlayListsUpdate'
     { _pluPart                   :: !Text
     , _pluPayload                :: !PlayList
     , _pluOnBehalfOfContentOwner :: !(Maybe Text)
@@ -77,7 +77,7 @@ playListsUpdate
     -> PlayList -- ^ 'pluPayload'
     -> PlayListsUpdate
 playListsUpdate pPluPart_ pPluPayload_ =
-    PlayListsUpdate
+    PlayListsUpdate'
     { _pluPart = pPluPart_
     , _pluPayload = pPluPayload_
     , _pluOnBehalfOfContentOwner = Nothing
@@ -117,7 +117,11 @@ pluOnBehalfOfContentOwner
 
 instance GoogleRequest PlayListsUpdate where
         type Rs PlayListsUpdate = PlayList
-        requestClient PlayListsUpdate{..}
+        type Scopes PlayListsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient PlayListsUpdate'{..}
           = go (Just _pluPart) _pluOnBehalfOfContentOwner
               (Just AltJSON)
               _pluPayload

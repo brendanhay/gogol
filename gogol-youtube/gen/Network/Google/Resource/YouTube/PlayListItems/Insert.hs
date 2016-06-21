@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.PlayListItems.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type PlayListItemsInsertResource =
 -- | Adds a resource to a playlist.
 --
 -- /See:/ 'playListItemsInsert' smart constructor.
-data PlayListItemsInsert = PlayListItemsInsert
+data PlayListItemsInsert = PlayListItemsInsert'
     { _pliiPart                   :: !Text
     , _pliiPayload                :: !PlayListItem
     , _pliiOnBehalfOfContentOwner :: !(Maybe Text)
@@ -76,7 +76,7 @@ playListItemsInsert
     -> PlayListItem -- ^ 'pliiPayload'
     -> PlayListItemsInsert
 playListItemsInsert pPliiPart_ pPliiPayload_ =
-    PlayListItemsInsert
+    PlayListItemsInsert'
     { _pliiPart = pPliiPart_
     , _pliiPayload = pPliiPayload_
     , _pliiOnBehalfOfContentOwner = Nothing
@@ -110,7 +110,11 @@ pliiOnBehalfOfContentOwner
 
 instance GoogleRequest PlayListItemsInsert where
         type Rs PlayListItemsInsert = PlayListItem
-        requestClient PlayListItemsInsert{..}
+        type Scopes PlayListItemsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient PlayListItemsInsert'{..}
           = go (Just _pliiPart) _pliiOnBehalfOfContentOwner
               (Just AltJSON)
               _pliiPayload

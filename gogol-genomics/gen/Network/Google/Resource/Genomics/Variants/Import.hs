@@ -14,26 +14,27 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Variants.Import
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates variant data by asynchronously importing the provided
--- information. The variants for import will be merged with any existing
--- variant that matches its reference sequence, start, end, reference
--- bases, and alternative bases. If no such variant exists, a new one will
--- be created. When variants are merged, the call information from the new
--- variant is added to the existing variant, and other fields (such as
--- key\/value pairs) are discarded. In particular, this means for merged
--- VCF variants that have conflicting INFO fields, some data will be
--- arbitrarily discarded. As a special case, for single-sample VCF files,
--- QUAL and FILTER fields will be moved to the call level; these are
+-- information. For the definitions of variant sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- The variants for import will be merged with any existing variant that
+-- matches its reference sequence, start, end, reference bases, and
+-- alternative bases. If no such variant exists, a new one will be created.
+-- When variants are merged, the call information from the new variant is
+-- added to the existing variant, and Variant info fields are merged as
+-- specified in infoMergeConfig. As a special case, for single-sample VCF
+-- files, QUAL and FILTER fields will be moved to the call level; these are
 -- sometimes interpreted in a call-specific context. Imported VCF headers
 -- are appended to the metadata already in a variant set.
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.import@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.import@.
 module Network.Google.Resource.Genomics.Variants.Import
     (
     -- * REST Resource
@@ -74,20 +75,21 @@ type VariantsImportResource =
                            Post '[JSON] Operation
 
 -- | Creates variant data by asynchronously importing the provided
--- information. The variants for import will be merged with any existing
--- variant that matches its reference sequence, start, end, reference
--- bases, and alternative bases. If no such variant exists, a new one will
--- be created. When variants are merged, the call information from the new
--- variant is added to the existing variant, and other fields (such as
--- key\/value pairs) are discarded. In particular, this means for merged
--- VCF variants that have conflicting INFO fields, some data will be
--- arbitrarily discarded. As a special case, for single-sample VCF files,
--- QUAL and FILTER fields will be moved to the call level; these are
+-- information. For the definitions of variant sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- The variants for import will be merged with any existing variant that
+-- matches its reference sequence, start, end, reference bases, and
+-- alternative bases. If no such variant exists, a new one will be created.
+-- When variants are merged, the call information from the new variant is
+-- added to the existing variant, and Variant info fields are merged as
+-- specified in infoMergeConfig. As a special case, for single-sample VCF
+-- files, QUAL and FILTER fields will be moved to the call level; these are
 -- sometimes interpreted in a call-specific context. Imported VCF headers
 -- are appended to the metadata already in a variant set.
 --
 -- /See:/ 'variantsImport' smart constructor.
-data VariantsImport = VariantsImport
+data VariantsImport = VariantsImport'
     { _viXgafv          :: !(Maybe Text)
     , _viUploadProtocol :: !(Maybe Text)
     , _viPp             :: !Bool
@@ -121,7 +123,7 @@ variantsImport
     :: ImportVariantsRequest -- ^ 'viPayload'
     -> VariantsImport
 variantsImport pViPayload_ =
-    VariantsImport
+    VariantsImport'
     { _viXgafv = Nothing
     , _viUploadProtocol = Nothing
     , _viPp = True
@@ -175,7 +177,11 @@ viCallback
 
 instance GoogleRequest VariantsImport where
         type Rs VariantsImport = Operation
-        requestClient VariantsImport{..}
+        type Scopes VariantsImport =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.read_write",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient VariantsImport'{..}
           = go _viXgafv _viUploadProtocol (Just _viPp)
               _viAccessToken
               _viUploadType

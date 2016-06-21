@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.URLShortener.URL.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type URLInsertResource =
 -- | Creates a new short URL.
 --
 -- /See:/ 'urlInsert' smart constructor.
-newtype URLInsert = URLInsert
+newtype URLInsert = URLInsert'
     { _uiPayload :: URL
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ urlInsert
     :: URL -- ^ 'uiPayload'
     -> URLInsert
 urlInsert pUiPayload_ =
-    URLInsert
+    URLInsert'
     { _uiPayload = pUiPayload_
     }
 
@@ -75,7 +75,9 @@ uiPayload
 
 instance GoogleRequest URLInsert where
         type Rs URLInsert = URL
-        requestClient URLInsert{..}
+        type Scopes URLInsert =
+             '["https://www.googleapis.com/auth/urlshortener"]
+        requestClient URLInsert'{..}
           = go (Just AltJSON) _uiPayload uRLShortenerService
           where go
                   = buildClient (Proxy :: Proxy URLInsertResource)

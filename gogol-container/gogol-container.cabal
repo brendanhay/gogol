@@ -1,5 +1,5 @@
 name:                  gogol-container
-version:               0.0.1
+version:               0.1.0
 synopsis:              Google Container Engine SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -7,16 +7,15 @@ license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015 Brendan Hay
+copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    The Google Container Engine API is used for building and managing
-    container based applications, powered by the open source Kubernetes
-    technology.
+    Builds and manages clusters that run container-based applications,
+    powered by open source Kubernetes technology.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -41,6 +40,10 @@ library
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Get
         , Network.Google.Resource.Container.Projects.Zones.Clusters.List
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Create
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Delete
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.List
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Update
         , Network.Google.Resource.Container.Projects.Zones.GetServerConfig
         , Network.Google.Resource.Container.Projects.Zones.Operations.Get
@@ -51,5 +54,5 @@ library
         , Network.Google.Container.Types.Sum
 
     build-depends:
-          gogol-core == 0.0.1.*
-        , base       >= 4.7 && < 5
+          gogol-core == 0.1.0.*
+        , base       >= 4.7

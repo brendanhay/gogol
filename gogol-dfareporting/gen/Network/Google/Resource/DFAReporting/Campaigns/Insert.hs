@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Campaigns.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'CampaignsInsert' request conforms to.
 type CampaignsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -58,7 +58,7 @@ type CampaignsInsertResource =
 -- | Inserts a new campaign.
 --
 -- /See:/ 'campaignsInsert' smart constructor.
-data CampaignsInsert = CampaignsInsert
+data CampaignsInsert = CampaignsInsert'
     { _camProFileId              :: !(Textual Int64)
     , _camPayload                :: !Campaign
     , _camDefaultLandingPageURL  :: !Text
@@ -83,7 +83,7 @@ campaignsInsert
     -> Text -- ^ 'camDefaultLandingPageName'
     -> CampaignsInsert
 campaignsInsert pCamProFileId_ pCamPayload_ pCamDefaultLandingPageURL_ pCamDefaultLandingPageName_ =
-    CampaignsInsert
+    CampaignsInsert'
     { _camProFileId = _Coerce # pCamProFileId_
     , _camPayload = pCamPayload_
     , _camDefaultLandingPageURL = pCamDefaultLandingPageURL_
@@ -116,7 +116,9 @@ camDefaultLandingPageName
 
 instance GoogleRequest CampaignsInsert where
         type Rs CampaignsInsert = Campaign
-        requestClient CampaignsInsert{..}
+        type Scopes CampaignsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CampaignsInsert'{..}
           = go _camProFileId (Just _camDefaultLandingPageName)
               (Just _camDefaultLandingPageURL)
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Databases.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type DatabasesInsertResource =
 -- Cloud SQL instance.
 --
 -- /See:/ 'databasesInsert' smart constructor.
-data DatabasesInsert = DatabasesInsert
+data DatabasesInsert = DatabasesInsert'
     { _diProject  :: !Text
     , _diPayload  :: !Database
     , _diInstance :: !Text
@@ -80,7 +80,7 @@ databasesInsert
     -> Text -- ^ 'diInstance'
     -> DatabasesInsert
 databasesInsert pDiProject_ pDiPayload_ pDiInstance_ =
-    DatabasesInsert
+    DatabasesInsert'
     { _diProject = pDiProject_
     , _diPayload = pDiPayload_
     , _diInstance = pDiInstance_
@@ -103,7 +103,10 @@ diInstance
 
 instance GoogleRequest DatabasesInsert where
         type Rs DatabasesInsert = Operation
-        requestClient DatabasesInsert{..}
+        type Scopes DatabasesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient DatabasesInsert'{..}
           = go _diProject _diInstance (Just AltJSON) _diPayload
               sQLAdminService
           where go

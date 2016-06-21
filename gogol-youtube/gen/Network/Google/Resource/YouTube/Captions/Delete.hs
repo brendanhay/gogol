@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Captions.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type CaptionsDeleteResource =
 -- | Deletes a specified caption track.
 --
 -- /See:/ 'captionsDelete' smart constructor.
-data CaptionsDelete = CaptionsDelete
+data CaptionsDelete = CaptionsDelete'
     { _cddOnBehalfOf             :: !(Maybe Text)
     , _cddOnBehalfOfContentOwner :: !(Maybe Text)
     , _cddId                     :: !Text
@@ -74,7 +74,7 @@ captionsDelete
     :: Text -- ^ 'cddId'
     -> CaptionsDelete
 captionsDelete pCddId_ =
-    CaptionsDelete
+    CaptionsDelete'
     { _cddOnBehalfOf = Nothing
     , _cddOnBehalfOfContentOwner = Nothing
     , _cddId = pCddId_
@@ -110,7 +110,10 @@ cddId = lens _cddId (\ s a -> s{_cddId = a})
 
 instance GoogleRequest CaptionsDelete where
         type Rs CaptionsDelete = ()
-        requestClient CaptionsDelete{..}
+        type Scopes CaptionsDelete =
+             '["https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient CaptionsDelete'{..}
           = go (Just _cddId) _cddOnBehalfOf
               _cddOnBehalfOfContentOwner
               (Just AltJSON)

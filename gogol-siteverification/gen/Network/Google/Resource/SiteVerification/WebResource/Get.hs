@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SiteVerification.WebResource.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type WebResourceGetResource =
 -- | Get the most current data for a website or domain.
 --
 -- /See:/ 'webResourceGet' smart constructor.
-newtype WebResourceGet = WebResourceGet
+newtype WebResourceGet = WebResourceGet'
     { _wrgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ webResourceGet
     :: Text -- ^ 'wrgId'
     -> WebResourceGet
 webResourceGet pWrgId_ =
-    WebResourceGet
+    WebResourceGet'
     { _wrgId = pWrgId_
     }
 
@@ -76,7 +76,9 @@ wrgId = lens _wrgId (\ s a -> s{_wrgId = a})
 instance GoogleRequest WebResourceGet where
         type Rs WebResourceGet =
              SiteVerificationWebResourceResource
-        requestClient WebResourceGet{..}
+        type Scopes WebResourceGet =
+             '["https://www.googleapis.com/auth/siteverification"]
+        requestClient WebResourceGet'{..}
           = go _wrgId (Just AltJSON) siteVerificationService
           where go
                   = buildClient (Proxy :: Proxy WebResourceGetResource)

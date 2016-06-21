@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.HTTPHealthChecks.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified HttpHealthCheck resource.
+-- Returns the specified HttpHealthCheck resource. Get a list of available
+-- HTTP health checks by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.httpHealthChecks.get@.
 module Network.Google.Resource.Compute.HTTPHealthChecks.Get
@@ -53,10 +54,11 @@ type HTTPHealthChecksGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] HTTPHealthCheck
 
--- | Returns the specified HttpHealthCheck resource.
+-- | Returns the specified HttpHealthCheck resource. Get a list of available
+-- HTTP health checks by making a list() request.
 --
 -- /See:/ 'hTTPHealthChecksGet' smart constructor.
-data HTTPHealthChecksGet = HTTPHealthChecksGet
+data HTTPHealthChecksGet = HTTPHealthChecksGet'
     { _httphcgProject         :: !Text
     , _httphcgHTTPHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,12 +75,12 @@ hTTPHealthChecksGet
     -> Text -- ^ 'httphcgHTTPHealthCheck'
     -> HTTPHealthChecksGet
 hTTPHealthChecksGet pHttphcgProject_ pHttphcgHTTPHealthCheck_ =
-    HTTPHealthChecksGet
+    HTTPHealthChecksGet'
     { _httphcgProject = pHttphcgProject_
     , _httphcgHTTPHealthCheck = pHttphcgHTTPHealthCheck_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 httphcgProject :: Lens' HTTPHealthChecksGet Text
 httphcgProject
   = lens _httphcgProject
@@ -92,7 +94,11 @@ httphcgHTTPHealthCheck
 
 instance GoogleRequest HTTPHealthChecksGet where
         type Rs HTTPHealthChecksGet = HTTPHealthCheck
-        requestClient HTTPHealthChecksGet{..}
+        type Scopes HTTPHealthChecksGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient HTTPHealthChecksGet'{..}
           = go _httphcgProject _httphcgHTTPHealthCheck
               (Just AltJSON)
               computeService

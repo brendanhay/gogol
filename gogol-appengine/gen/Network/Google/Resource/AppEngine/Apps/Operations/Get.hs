@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AppEngine.Apps.Operations.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.operations.get@.
+-- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.operations.get@.
 module Network.Google.Resource.AppEngine.Apps.Operations.Get
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.operations.get@ method which the
 -- 'AppsOperationsGet' request conforms to.
 type AppsOperationsGetResource =
-     "v1beta4" :>
+     "v1beta5" :>
        "apps" :>
          Capture "appsId" Text :>
            "operations" :>
@@ -71,7 +71,7 @@ type AppsOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'appsOperationsGet' smart constructor.
-data AppsOperationsGet = AppsOperationsGet
+data AppsOperationsGet = AppsOperationsGet'
     { _aogXgafv          :: !(Maybe Text)
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogPp             :: !Bool
@@ -109,7 +109,7 @@ appsOperationsGet
     -> Text -- ^ 'aogOperationsId'
     -> AppsOperationsGet
 appsOperationsGet pAogAppsId_ pAogOperationsId_ =
-    AppsOperationsGet
+    AppsOperationsGet'
     { _aogXgafv = Nothing
     , _aogUploadProtocol = Nothing
     , _aogPp = True
@@ -171,7 +171,9 @@ aogCallback
 
 instance GoogleRequest AppsOperationsGet where
         type Rs AppsOperationsGet = Operation
-        requestClient AppsOperationsGet{..}
+        type Scopes AppsOperationsGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient AppsOperationsGet'{..}
           = go _aogAppsId _aogOperationsId _aogXgafv
               _aogUploadProtocol
               (Just _aogPp)

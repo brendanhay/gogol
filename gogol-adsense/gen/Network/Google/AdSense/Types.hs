@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AdSense.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,8 +20,8 @@ module Network.Google.AdSense.Types
       adSenseService
 
     -- * OAuth Scopes
-    , adsenseReadonlyScope
-    , adsenseScope
+    , adSenseReadOnlyScope
+    , adSenseScope
 
     -- * AdClients
     , AdClients
@@ -191,7 +192,6 @@ module Network.Google.AdSense.Types
     , adSupportsReporting
     , adId
     , adProductCode
-    , adArcReviewMode
 
     -- * SavedAdStyle
     , SavedAdStyle
@@ -285,15 +285,15 @@ import           Network.Google.AdSense.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1.4' of the AdSense Management API. This contains the host and root path used as a starting point for constructing service requests.
-adSenseService :: Service
+adSenseService :: ServiceConfig
 adSenseService
   = defaultService (ServiceId "adsense:v1.4")
       "www.googleapis.com"
 
 -- | View your AdSense data
-adsenseReadonlyScope :: OAuthScope
-adsenseReadonlyScope = "https://www.googleapis.com/auth/adsense.readonly";
+adSenseReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/adsense.readonly"]
+adSenseReadOnlyScope = Proxy;
 
 -- | View and manage your AdSense data
-adsenseScope :: OAuthScope
-adsenseScope = "https://www.googleapis.com/auth/adsense";
+adSenseScope :: Proxy '["https://www.googleapis.com/auth/adsense"]
+adSenseScope = Proxy;

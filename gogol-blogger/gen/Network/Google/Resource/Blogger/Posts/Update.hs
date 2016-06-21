@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Posts.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type PostsUpdateResource =
 -- | Update a post.
 --
 -- /See:/ 'postsUpdate' smart constructor.
-data PostsUpdate = PostsUpdate
+data PostsUpdate = PostsUpdate'
     { _puFetchBody   :: !Bool
     , _puFetchImages :: !(Maybe Bool)
     , _puBlogId      :: !Text
@@ -102,7 +102,7 @@ postsUpdate
     -> Text -- ^ 'puPostId'
     -> PostsUpdate
 postsUpdate pPuBlogId_ pPuPayload_ pPuPostId_ =
-    PostsUpdate
+    PostsUpdate'
     { _puFetchBody = True
     , _puFetchImages = Nothing
     , _puBlogId = pPuBlogId_
@@ -159,7 +159,9 @@ puPublish
 
 instance GoogleRequest PostsUpdate where
         type Rs PostsUpdate = Post'
-        requestClient PostsUpdate{..}
+        type Scopes PostsUpdate =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PostsUpdate'{..}
           = go _puBlogId _puPostId (Just _puFetchBody)
               _puFetchImages
               _puMaxComments

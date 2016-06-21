@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Tokens.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type TokensDeleteResource =
 -- | Delete all access tokens issued by a user for an application.
 --
 -- /See:/ 'tokensDelete' smart constructor.
-data TokensDelete = TokensDelete
+data TokensDelete = TokensDelete'
     { _tdClientId :: !Text
     , _tdUserKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ tokensDelete
     -> Text -- ^ 'tdUserKey'
     -> TokensDelete
 tokensDelete pTdClientId_ pTdUserKey_ =
-    TokensDelete
+    TokensDelete'
     { _tdClientId = pTdClientId_
     , _tdUserKey = pTdUserKey_
     }
@@ -90,7 +90,9 @@ tdUserKey
 
 instance GoogleRequest TokensDelete where
         type Rs TokensDelete = ()
-        requestClient TokensDelete{..}
+        type Scopes TokensDelete =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
+        requestClient TokensDelete'{..}
           = go _tdUserKey _tdClientId (Just AltJSON)
               directoryService
           where go

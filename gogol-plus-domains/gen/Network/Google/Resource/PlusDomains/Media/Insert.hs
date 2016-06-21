@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Media.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,9 +64,8 @@ type MediaInsertResource =
                  "media" :>
                    Capture "collection" MediaInsertCollection :>
                      QueryParam "alt" AltJSON :>
-                       QueryParam "uploadType" AltMedia :>
-                         MultipartRelated '[JSON] Media RequestBody :>
-                           Post '[JSON] Media
+                       QueryParam "uploadType" Multipart :>
+                         MultipartRelated '[JSON] Media :> Post '[JSON] Media
 
 -- | Add a new media item to an album. The current upload size limitations
 -- are 36MB for a photo and 1GB for a video. Uploads do not count against
@@ -74,7 +73,7 @@ type MediaInsertResource =
 -- videos are less than 15 minutes in length.
 --
 -- /See:/ 'mediaInsert' smart constructor.
-data MediaInsert = MediaInsert
+data MediaInsert = MediaInsert'
     { _miCollection :: !MediaInsertCollection
     , _miPayload    :: !Media
     , _miUserId     :: !Text
@@ -95,7 +94,7 @@ mediaInsert
     -> Text -- ^ 'miUserId'
     -> MediaInsert
 mediaInsert pMiCollection_ pMiPayload_ pMiUserId_ =
-    MediaInsert
+    MediaInsert'
     { _miCollection = pMiCollection_
     , _miPayload = pMiPayload_
     , _miUserId = pMiUserId_
@@ -116,7 +115,11 @@ miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 
 instance GoogleRequest MediaInsert where
         type Rs MediaInsert = Media
-        requestClient MediaInsert{..}
+        type Scopes MediaInsert =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me",
+               "https://www.googleapis.com/auth/plus.media.upload"]
+        requestClient MediaInsert'{..}
           = go _miUserId _miCollection (Just AltJSON)
               _miPayload
               plusDomainsService
@@ -127,9 +130,11 @@ instance GoogleRequest MediaInsert where
 instance GoogleRequest (MediaUpload MediaInsert)
          where
         type Rs (MediaUpload MediaInsert) = Media
-        requestClient (MediaUpload MediaInsert{..} body)
+        type Scopes (MediaUpload MediaInsert) =
+             Scopes MediaInsert
+        requestClient (MediaUpload MediaInsert'{..} body)
           = go _miUserId _miCollection (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _miPayload
               body
               plusDomainsService

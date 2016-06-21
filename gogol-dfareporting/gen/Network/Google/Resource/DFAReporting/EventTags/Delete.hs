@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.EventTags.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'EventTagsDelete' request conforms to.
 type EventTagsDeleteResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -54,7 +54,7 @@ type EventTagsDeleteResource =
 -- | Deletes an existing event tag.
 --
 -- /See:/ 'eventTagsDelete' smart constructor.
-data EventTagsDelete = EventTagsDelete
+data EventTagsDelete = EventTagsDelete'
     { _etdProFileId :: !(Textual Int64)
     , _etdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ eventTagsDelete
     -> Int64 -- ^ 'etdId'
     -> EventTagsDelete
 eventTagsDelete pEtdProFileId_ pEtdId_ =
-    EventTagsDelete
+    EventTagsDelete'
     { _etdProFileId = _Coerce # pEtdProFileId_
     , _etdId = _Coerce # pEtdId_
     }
@@ -89,7 +89,9 @@ etdId
 
 instance GoogleRequest EventTagsDelete where
         type Rs EventTagsDelete = ()
-        requestClient EventTagsDelete{..}
+        type Scopes EventTagsDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient EventTagsDelete'{..}
           = go _etdProFileId _etdId (Just AltJSON)
               dFAReportingService
           where go

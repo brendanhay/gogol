@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.FusionTables.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Represents a list of columns in a table.
 --
 -- /See:/ 'columnList' smart constructor.
-data ColumnList = ColumnList
+data ColumnList = ColumnList'
     { _clTotalItems    :: !(Maybe (Textual Int32))
     , _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
@@ -44,7 +44,7 @@ data ColumnList = ColumnList
 columnList
     :: ColumnList
 columnList =
-    ColumnList
+    ColumnList'
     { _clTotalItems = Nothing
     , _clNextPageToken = Nothing
     , _clKind = "fusiontables#columnList"
@@ -79,13 +79,13 @@ instance FromJSON ColumnList where
         parseJSON
           = withObject "ColumnList"
               (\ o ->
-                 ColumnList <$>
+                 ColumnList' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "fusiontables#columnList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON ColumnList where
-        toJSON ColumnList{..}
+        toJSON ColumnList'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _clTotalItems,
@@ -95,7 +95,7 @@ instance ToJSON ColumnList where
 -- | Represents a list of tables.
 --
 -- /See:/ 'tableList' smart constructor.
-data TableList = TableList
+data TableList = TableList'
     { _tlNextPageToken :: !(Maybe Text)
     , _tlKind          :: !Text
     , _tlItems         :: !(Maybe [Table])
@@ -113,7 +113,7 @@ data TableList = TableList
 tableList
     :: TableList
 tableList =
-    TableList
+    TableList'
     { _tlNextPageToken = Nothing
     , _tlKind = "fusiontables#tableList"
     , _tlItems = Nothing
@@ -141,13 +141,13 @@ instance FromJSON TableList where
         parseJSON
           = withObject "TableList"
               (\ o ->
-                 TableList <$>
+                 TableList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "fusiontables#tableList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON TableList where
-        toJSON TableList{..}
+        toJSON TableList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tlNextPageToken,
@@ -156,7 +156,7 @@ instance ToJSON TableList where
 -- | Represents a StyleFunction within a StyleSetting
 --
 -- /See:/ 'styleFunction' smart constructor.
-data StyleFunction = StyleFunction
+data StyleFunction = StyleFunction'
     { _sfBuckets    :: !(Maybe [Bucket])
     , _sfKind       :: !(Maybe Text)
     , _sfGradient   :: !(Maybe StyleFunctionGradient)
@@ -177,7 +177,7 @@ data StyleFunction = StyleFunction
 styleFunction
     :: StyleFunction
 styleFunction =
-    StyleFunction
+    StyleFunction'
     { _sfBuckets = Nothing
     , _sfKind = Nothing
     , _sfGradient = Nothing
@@ -217,13 +217,13 @@ instance FromJSON StyleFunction where
         parseJSON
           = withObject "StyleFunction"
               (\ o ->
-                 StyleFunction <$>
+                 StyleFunction' <$>
                    (o .:? "buckets" .!= mempty) <*> (o .:? "kind") <*>
                      (o .:? "gradient")
                      <*> (o .:? "columnName"))
 
 instance ToJSON StyleFunction where
-        toJSON StyleFunction{..}
+        toJSON StyleFunction'{..}
           = object
               (catMaybes
                  [("buckets" .=) <$> _sfBuckets,
@@ -235,7 +235,7 @@ instance ToJSON StyleFunction where
 -- the specified base column.
 --
 -- /See:/ 'columnBaseColumn' smart constructor.
-data ColumnBaseColumn = ColumnBaseColumn
+data ColumnBaseColumn = ColumnBaseColumn'
     { _cbcTableIndex :: !(Maybe (Textual Int32))
     , _cbcColumnId   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -250,7 +250,7 @@ data ColumnBaseColumn = ColumnBaseColumn
 columnBaseColumn
     :: ColumnBaseColumn
 columnBaseColumn =
-    ColumnBaseColumn
+    ColumnBaseColumn'
     { _cbcTableIndex = Nothing
     , _cbcColumnId = Nothing
     }
@@ -273,11 +273,11 @@ instance FromJSON ColumnBaseColumn where
         parseJSON
           = withObject "ColumnBaseColumn"
               (\ o ->
-                 ColumnBaseColumn <$>
+                 ColumnBaseColumn' <$>
                    (o .:? "tableIndex") <*> (o .:? "columnId"))
 
 instance ToJSON ColumnBaseColumn where
-        toJSON ColumnBaseColumn{..}
+        toJSON ColumnBaseColumn'{..}
           = object
               (catMaybes
                  [("tableIndex" .=) <$> _cbcTableIndex,
@@ -286,7 +286,7 @@ instance ToJSON ColumnBaseColumn where
 -- | Represents a response to a SQL statement.
 --
 -- /See:/ 'sQLresponse' smart constructor.
-data SQLresponse = SQLresponse
+data SQLresponse = SQLresponse'
     { _sqlKind    :: !Text
     , _sqlRows    :: !(Maybe [[JSONValue]])
     , _sqlColumns :: !(Maybe [Text])
@@ -304,7 +304,7 @@ data SQLresponse = SQLresponse
 sQLresponse
     :: SQLresponse
 sQLresponse =
-    SQLresponse
+    SQLresponse'
     { _sqlKind = "fusiontables#sqlresponse"
     , _sqlRows = Nothing
     , _sqlColumns = Nothing
@@ -334,13 +334,13 @@ instance FromJSON SQLresponse where
         parseJSON
           = withObject "SQLresponse"
               (\ o ->
-                 SQLresponse <$>
+                 SQLresponse' <$>
                    (o .:? "kind" .!= "fusiontables#sqlresponse") <*>
                      (o .:? "rows" .!= mempty)
                      <*> (o .:? "columns" .!= mempty))
 
 instance ToJSON SQLresponse where
-        toJSON SQLresponse{..}
+        toJSON SQLresponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _sqlKind), ("rows" .=) <$> _sqlRows,
@@ -348,7 +348,7 @@ instance ToJSON SQLresponse where
 
 --
 -- /See:/ 'styleFunctionGradientColorsItem' smart constructor.
-data StyleFunctionGradientColorsItem = StyleFunctionGradientColorsItem
+data StyleFunctionGradientColorsItem = StyleFunctionGradientColorsItem'
     { _sfgciColor   :: !(Maybe Text)
     , _sfgciOpacity :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -363,7 +363,7 @@ data StyleFunctionGradientColorsItem = StyleFunctionGradientColorsItem
 styleFunctionGradientColorsItem
     :: StyleFunctionGradientColorsItem
 styleFunctionGradientColorsItem =
-    StyleFunctionGradientColorsItem
+    StyleFunctionGradientColorsItem'
     { _sfgciColor = Nothing
     , _sfgciOpacity = Nothing
     }
@@ -384,11 +384,11 @@ instance FromJSON StyleFunctionGradientColorsItem
         parseJSON
           = withObject "StyleFunctionGradientColorsItem"
               (\ o ->
-                 StyleFunctionGradientColorsItem <$>
+                 StyleFunctionGradientColorsItem' <$>
                    (o .:? "color") <*> (o .:? "opacity"))
 
 instance ToJSON StyleFunctionGradientColorsItem where
-        toJSON StyleFunctionGradientColorsItem{..}
+        toJSON StyleFunctionGradientColorsItem'{..}
           = object
               (catMaybes
                  [("color" .=) <$> _sfgciColor,
@@ -397,7 +397,7 @@ instance ToJSON StyleFunctionGradientColorsItem where
 -- | Represents a list of styles for a given table.
 --
 -- /See:/ 'styleSettingList' smart constructor.
-data StyleSettingList = StyleSettingList
+data StyleSettingList = StyleSettingList'
     { _sslTotalItems    :: !(Maybe (Textual Int32))
     , _sslNextPageToken :: !(Maybe Text)
     , _sslKind          :: !Text
@@ -418,7 +418,7 @@ data StyleSettingList = StyleSettingList
 styleSettingList
     :: StyleSettingList
 styleSettingList =
-    StyleSettingList
+    StyleSettingList'
     { _sslTotalItems = Nothing
     , _sslNextPageToken = Nothing
     , _sslKind = "fusiontables#styleSettingList"
@@ -455,13 +455,13 @@ instance FromJSON StyleSettingList where
         parseJSON
           = withObject "StyleSettingList"
               (\ o ->
-                 StyleSettingList <$>
+                 StyleSettingList' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "fusiontables#styleSettingList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON StyleSettingList where
-        toJSON StyleSettingList{..}
+        toJSON StyleSettingList'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _sslTotalItems,
@@ -473,7 +473,7 @@ instance ToJSON StyleSettingList where
 -- weight of a bucket within a StyleSetting.
 --
 -- /See:/ 'bucket' smart constructor.
-data Bucket = Bucket
+data Bucket = Bucket'
     { _bMax     :: !(Maybe (Textual Double))
     , _bColor   :: !(Maybe Text)
     , _bWeight  :: !(Maybe (Textual Int32))
@@ -500,7 +500,7 @@ data Bucket = Bucket
 bucket
     :: Bucket
 bucket =
-    Bucket
+    Bucket'
     { _bMax = Nothing
     , _bColor = Nothing
     , _bWeight = Nothing
@@ -547,7 +547,7 @@ instance FromJSON Bucket where
         parseJSON
           = withObject "Bucket"
               (\ o ->
-                 Bucket <$>
+                 Bucket' <$>
                    (o .:? "max") <*> (o .:? "color") <*>
                      (o .:? "weight")
                      <*> (o .:? "icon")
@@ -555,7 +555,7 @@ instance FromJSON Bucket where
                      <*> (o .:? "min"))
 
 instance ToJSON Bucket where
-        toJSON Bucket{..}
+        toJSON Bucket'{..}
           = object
               (catMaybes
                  [("max" .=) <$> _bMax, ("color" .=) <$> _bColor,
@@ -565,7 +565,7 @@ instance ToJSON Bucket where
 -- | Represents a line geometry.
 --
 -- /See:/ 'line' smart constructor.
-data Line = Line
+data Line = Line'
     { _lCoordinates :: !(Maybe [[Textual Double]])
     , _lType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -580,7 +580,7 @@ data Line = Line
 line
     :: Line
 line =
-    Line
+    Line'
     { _lCoordinates = Nothing
     , _lType = "LineString"
     }
@@ -600,12 +600,12 @@ instance FromJSON Line where
         parseJSON
           = withObject "Line"
               (\ o ->
-                 Line <$>
+                 Line' <$>
                    (o .:? "coordinates" .!= mempty) <*>
                      (o .:? "type" .!= "LineString"))
 
 instance ToJSON Line where
-        toJSON Line{..}
+        toJSON Line'{..}
           = object
               (catMaybes
                  [("coordinates" .=) <$> _lCoordinates,
@@ -615,7 +615,7 @@ instance ToJSON Line where
 -- combination of the tableId and a styleId.
 --
 -- /See:/ 'styleSetting' smart constructor.
-data StyleSetting = StyleSetting
+data StyleSetting = StyleSetting'
     { _ssPolylineOptions :: !(Maybe LineStyle)
     , _ssPolygonOptions  :: !(Maybe PolygonStyle)
     , _ssMarkerOptions   :: !(Maybe PointStyle)
@@ -645,7 +645,7 @@ data StyleSetting = StyleSetting
 styleSetting
     :: StyleSetting
 styleSetting =
-    StyleSetting
+    StyleSetting'
     { _ssPolylineOptions = Nothing
     , _ssPolygonOptions = Nothing
     , _ssMarkerOptions = Nothing
@@ -699,7 +699,7 @@ instance FromJSON StyleSetting where
         parseJSON
           = withObject "StyleSetting"
               (\ o ->
-                 StyleSetting <$>
+                 StyleSetting' <$>
                    (o .:? "polylineOptions") <*>
                      (o .:? "polygonOptions")
                      <*> (o .:? "markerOptions")
@@ -709,7 +709,7 @@ instance FromJSON StyleSetting where
                      <*> (o .:? "tableId"))
 
 instance ToJSON StyleSetting where
-        toJSON StyleSetting{..}
+        toJSON StyleSetting'{..}
           = object
               (catMaybes
                  [("polylineOptions" .=) <$> _ssPolylineOptions,
@@ -722,7 +722,7 @@ instance ToJSON StyleSetting where
 -- | Represents a point object.
 --
 -- /See:/ 'point' smart constructor.
-data Point = Point
+data Point = Point'
     { _pCoordinates :: !(Maybe [Textual Double])
     , _pType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -737,7 +737,7 @@ data Point = Point
 point
     :: Point
 point =
-    Point
+    Point'
     { _pCoordinates = Nothing
     , _pType = "Point"
     }
@@ -757,12 +757,12 @@ instance FromJSON Point where
         parseJSON
           = withObject "Point"
               (\ o ->
-                 Point <$>
+                 Point' <$>
                    (o .:? "coordinates" .!= mempty) <*>
                      (o .:? "type" .!= "Point"))
 
 instance ToJSON Point where
-        toJSON Point{..}
+        toJSON Point'{..}
           = object
               (catMaybes
                  [("coordinates" .=) <$> _pCoordinates,
@@ -771,7 +771,7 @@ instance ToJSON Point where
 -- | Represents a polygon object.
 --
 -- /See:/ 'polygon' smart constructor.
-data Polygon = Polygon
+data Polygon = Polygon'
     { _polCoordinates :: !(Maybe [[[Textual Double]]])
     , _polType        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -786,7 +786,7 @@ data Polygon = Polygon
 polygon
     :: Polygon
 polygon =
-    Polygon
+    Polygon'
     { _polCoordinates = Nothing
     , _polType = "Polygon"
     }
@@ -807,12 +807,12 @@ instance FromJSON Polygon where
         parseJSON
           = withObject "Polygon"
               (\ o ->
-                 Polygon <$>
+                 Polygon' <$>
                    (o .:? "coordinates" .!= mempty) <*>
                      (o .:? "type" .!= "Polygon"))
 
 instance ToJSON Polygon where
-        toJSON Polygon{..}
+        toJSON Polygon'{..}
           = object
               (catMaybes
                  [("coordinates" .=) <$> _polCoordinates,
@@ -821,7 +821,7 @@ instance ToJSON Polygon where
 -- | Represents a list of tasks for a table.
 --
 -- /See:/ 'taskList' smart constructor.
-data TaskList = TaskList
+data TaskList = TaskList'
     { _tTotalItems    :: !(Maybe (Textual Int32))
     , _tNextPageToken :: !(Maybe Text)
     , _tKind          :: !Text
@@ -842,7 +842,7 @@ data TaskList = TaskList
 taskList
     :: TaskList
 taskList =
-    TaskList
+    TaskList'
     { _tTotalItems = Nothing
     , _tNextPageToken = Nothing
     , _tKind = "fusiontables#taskList"
@@ -876,13 +876,13 @@ instance FromJSON TaskList where
         parseJSON
           = withObject "TaskList"
               (\ o ->
-                 TaskList <$>
+                 TaskList' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "fusiontables#taskList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON TaskList where
-        toJSON TaskList{..}
+        toJSON TaskList'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _tTotalItems,
@@ -892,7 +892,7 @@ instance ToJSON TaskList where
 -- | Represents a Geometry object.
 --
 -- /See:/ 'geometry' smart constructor.
-data Geometry = Geometry
+data Geometry = Geometry'
     { _gGeometries :: !(Maybe [JSONValue])
     , _gGeometry   :: !(Maybe JSONValue)
     , _gType       :: !Text
@@ -910,7 +910,7 @@ data Geometry = Geometry
 geometry
     :: Geometry
 geometry =
-    Geometry
+    Geometry'
     { _gGeometries = Nothing
     , _gGeometry = Nothing
     , _gType = "GeometryCollection"
@@ -935,13 +935,13 @@ instance FromJSON Geometry where
         parseJSON
           = withObject "Geometry"
               (\ o ->
-                 Geometry <$>
+                 Geometry' <$>
                    (o .:? "geometries" .!= mempty) <*>
                      (o .:? "geometry")
                      <*> (o .:? "type" .!= "GeometryCollection"))
 
 instance ToJSON Geometry where
-        toJSON Geometry{..}
+        toJSON Geometry'{..}
           = object
               (catMaybes
                  [("geometries" .=) <$> _gGeometries,
@@ -951,7 +951,7 @@ instance ToJSON Geometry where
 -- | Represents a list of templates for a given table.
 --
 -- /See:/ 'templateList' smart constructor.
-data TemplateList = TemplateList
+data TemplateList = TemplateList'
     { _temTotalItems    :: !(Maybe (Textual Int32))
     , _temNextPageToken :: !(Maybe Text)
     , _temKind          :: !Text
@@ -972,7 +972,7 @@ data TemplateList = TemplateList
 templateList
     :: TemplateList
 templateList =
-    TemplateList
+    TemplateList'
     { _temTotalItems = Nothing
     , _temNextPageToken = Nothing
     , _temKind = "fusiontables#templateList"
@@ -1009,13 +1009,13 @@ instance FromJSON TemplateList where
         parseJSON
           = withObject "TemplateList"
               (\ o ->
-                 TemplateList <$>
+                 TemplateList' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "fusiontables#templateList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON TemplateList where
-        toJSON TemplateList{..}
+        toJSON TemplateList'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _temTotalItems,
@@ -1026,7 +1026,7 @@ instance ToJSON TemplateList where
 -- | Represents an import request.
 --
 -- /See:/ 'import'' smart constructor.
-data Import = Import
+data Import = Import'
     { _iKind            :: !Text
     , _iNumRowsReceived :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1041,7 +1041,7 @@ data Import = Import
 import'
     :: Import
 import' =
-    Import
+    Import'
     { _iKind = "fusiontables#import"
     , _iNumRowsReceived = Nothing
     }
@@ -1062,12 +1062,12 @@ instance FromJSON Import where
         parseJSON
           = withObject "Import"
               (\ o ->
-                 Import <$>
+                 Import' <$>
                    (o .:? "kind" .!= "fusiontables#import") <*>
                      (o .:? "numRowsReceived"))
 
 instance ToJSON Import where
-        toJSON Import{..}
+        toJSON Import'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _iKind),
@@ -1077,7 +1077,7 @@ instance ToJSON Import where
 -- operations such as changing column types or deleting all rows.
 --
 -- /See:/ 'task' smart constructor.
-data Task = Task
+data Task = Task'
     { _tasProgress :: !(Maybe Text)
     , _tasTaskId   :: !(Maybe (Textual Int64))
     , _tasKind     :: !Text
@@ -1101,7 +1101,7 @@ data Task = Task
 task
     :: Task
 task =
-    Task
+    Task'
     { _tasProgress = Nothing
     , _tasTaskId = Nothing
     , _tasKind = "fusiontables#task"
@@ -1138,14 +1138,14 @@ instance FromJSON Task where
         parseJSON
           = withObject "Task"
               (\ o ->
-                 Task <$>
+                 Task' <$>
                    (o .:? "progress") <*> (o .:? "taskId") <*>
                      (o .:? "kind" .!= "fusiontables#task")
                      <*> (o .:? "type")
                      <*> (o .:? "started"))
 
 instance ToJSON Task where
-        toJSON Task{..}
+        toJSON Task'{..}
           = object
               (catMaybes
                  [("progress" .=) <$> _tasProgress,
@@ -1156,7 +1156,7 @@ instance ToJSON Task where
 -- | Represents the contents of InfoWindow templates.
 --
 -- /See:/ 'template' smart constructor.
-data Template = Template
+data Template = Template'
     { _ttAutomaticColumnNames :: !(Maybe [Text])
     , _ttTemplateId           :: !(Maybe (Textual Int32))
     , _ttKind                 :: !Text
@@ -1183,7 +1183,7 @@ data Template = Template
 template
     :: Template
 template =
-    Template
+    Template'
     { _ttAutomaticColumnNames = Nothing
     , _ttTemplateId = Nothing
     , _ttKind = "fusiontables#template"
@@ -1233,7 +1233,7 @@ instance FromJSON Template where
         parseJSON
           = withObject "Template"
               (\ o ->
-                 Template <$>
+                 Template' <$>
                    (o .:? "automaticColumnNames" .!= mempty) <*>
                      (o .:? "templateId")
                      <*> (o .:? "kind" .!= "fusiontables#template")
@@ -1242,7 +1242,7 @@ instance FromJSON Template where
                      <*> (o .:? "tableId"))
 
 instance ToJSON Template where
-        toJSON Template{..}
+        toJSON Template'{..}
           = object
               (catMaybes
                  [("automaticColumnNames" .=) <$>
@@ -1255,7 +1255,7 @@ instance ToJSON Template where
 -- | Represents a PointStyle within a StyleSetting
 --
 -- /See:/ 'pointStyle' smart constructor.
-data PointStyle = PointStyle
+data PointStyle = PointStyle'
     { _psIconName   :: !(Maybe Text)
     , _psIconStyler :: !(Maybe StyleFunction)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1270,7 +1270,7 @@ data PointStyle = PointStyle
 pointStyle
     :: PointStyle
 pointStyle =
-    PointStyle
+    PointStyle'
     { _psIconName = Nothing
     , _psIconStyler = Nothing
     }
@@ -1290,11 +1290,11 @@ instance FromJSON PointStyle where
         parseJSON
           = withObject "PointStyle"
               (\ o ->
-                 PointStyle <$>
+                 PointStyle' <$>
                    (o .:? "iconName") <*> (o .:? "iconStyler"))
 
 instance ToJSON PointStyle where
-        toJSON PointStyle{..}
+        toJSON PointStyle'{..}
           = object
               (catMaybes
                  [("iconName" .=) <$> _psIconName,
@@ -1303,7 +1303,7 @@ instance ToJSON PointStyle where
 -- | Represents a PolygonStyle within a StyleSetting
 --
 -- /See:/ 'polygonStyle' smart constructor.
-data PolygonStyle = PolygonStyle
+data PolygonStyle = PolygonStyle'
     { _psFillColorStyler    :: !(Maybe StyleFunction)
     , _psFillColor          :: !(Maybe Text)
     , _psStrokeColorStyler  :: !(Maybe StyleFunction)
@@ -1336,7 +1336,7 @@ data PolygonStyle = PolygonStyle
 polygonStyle
     :: PolygonStyle
 polygonStyle =
-    PolygonStyle
+    PolygonStyle'
     { _psFillColorStyler = Nothing
     , _psFillColor = Nothing
     , _psStrokeColorStyler = Nothing
@@ -1405,7 +1405,7 @@ instance FromJSON PolygonStyle where
         parseJSON
           = withObject "PolygonStyle"
               (\ o ->
-                 PolygonStyle <$>
+                 PolygonStyle' <$>
                    (o .:? "fillColorStyler") <*> (o .:? "fillColor") <*>
                      (o .:? "strokeColorStyler")
                      <*> (o .:? "strokeWeight")
@@ -1415,7 +1415,7 @@ instance FromJSON PolygonStyle where
                      <*> (o .:? "strokeColor"))
 
 instance ToJSON PolygonStyle where
-        toJSON PolygonStyle{..}
+        toJSON PolygonStyle'{..}
           = object
               (catMaybes
                  [("fillColorStyler" .=) <$> _psFillColorStyler,
@@ -1431,7 +1431,7 @@ instance ToJSON PolygonStyle where
 -- value.
 --
 -- /See:/ 'styleFunctionGradient' smart constructor.
-data StyleFunctionGradient = StyleFunctionGradient
+data StyleFunctionGradient = StyleFunctionGradient'
     { _sfgMax    :: !(Maybe (Textual Double))
     , _sfgMin    :: !(Maybe (Textual Double))
     , _sfgColors :: !(Maybe [StyleFunctionGradientColorsItem])
@@ -1449,7 +1449,7 @@ data StyleFunctionGradient = StyleFunctionGradient
 styleFunctionGradient
     :: StyleFunctionGradient
 styleFunctionGradient =
-    StyleFunctionGradient
+    StyleFunctionGradient'
     { _sfgMax = Nothing
     , _sfgMin = Nothing
     , _sfgColors = Nothing
@@ -1480,12 +1480,12 @@ instance FromJSON StyleFunctionGradient where
         parseJSON
           = withObject "StyleFunctionGradient"
               (\ o ->
-                 StyleFunctionGradient <$>
+                 StyleFunctionGradient' <$>
                    (o .:? "max") <*> (o .:? "min") <*>
                      (o .:? "colors" .!= mempty))
 
 instance ToJSON StyleFunctionGradient where
-        toJSON StyleFunctionGradient{..}
+        toJSON StyleFunctionGradient'{..}
           = object
               (catMaybes
                  [("max" .=) <$> _sfgMax, ("min" .=) <$> _sfgMin,
@@ -1494,7 +1494,7 @@ instance ToJSON StyleFunctionGradient where
 -- | Specifies the details of a column in a table.
 --
 -- /See:/ 'column' smart constructor.
-data Column = Column
+data Column = Column'
     { _cColumnJSONSchema     :: !(Maybe Text)
     , _cGraphPredicate       :: !(Maybe Text)
     , _cKind                 :: !Text
@@ -1539,7 +1539,7 @@ data Column = Column
 column
     :: Column
 column =
-    Column
+    Column'
     { _cColumnJSONSchema = Nothing
     , _cGraphPredicate = Nothing
     , _cKind = "fusiontables#column"
@@ -1651,7 +1651,7 @@ instance FromJSON Column where
         parseJSON
           = withObject "Column"
               (\ o ->
-                 Column <$>
+                 Column' <$>
                    (o .:? "columnJsonSchema") <*>
                      (o .:? "graphPredicate")
                      <*> (o .:? "kind" .!= "fusiontables#column")
@@ -1666,7 +1666,7 @@ instance FromJSON Column where
                      <*> (o .:? "description"))
 
 instance ToJSON Column where
-        toJSON Column{..}
+        toJSON Column'{..}
           = object
               (catMaybes
                  [("columnJsonSchema" .=) <$> _cColumnJSONSchema,
@@ -1685,7 +1685,7 @@ instance ToJSON Column where
 -- | Represents a table.
 --
 -- /See:/ 'table' smart constructor.
-data Table = Table
+data Table = Table'
     { _tabaIsExportable               :: !(Maybe Bool)
     , _tabaKind                       :: !Text
     , _tabaColumnPropertiesJSONSchema :: !(Maybe Text)
@@ -1733,7 +1733,7 @@ data Table = Table
 table
     :: Table
 table =
-    Table
+    Table'
     { _tabaIsExportable = Nothing
     , _tabaKind = "fusiontables#table"
     , _tabaColumnPropertiesJSONSchema = Nothing
@@ -1828,7 +1828,7 @@ instance FromJSON Table where
         parseJSON
           = withObject "Table"
               (\ o ->
-                 Table <$>
+                 Table' <$>
                    (o .:? "isExportable") <*>
                      (o .:? "kind" .!= "fusiontables#table")
                      <*> (o .:? "columnPropertiesJsonSchema")
@@ -1844,7 +1844,7 @@ instance FromJSON Table where
                      <*> (o .:? "attributionLink"))
 
 instance ToJSON Table where
-        toJSON Table{..}
+        toJSON Table'{..}
           = object
               (catMaybes
                  [("isExportable" .=) <$> _tabaIsExportable,
@@ -1867,7 +1867,7 @@ instance ToJSON Table where
 -- | Represents a LineStyle within a StyleSetting
 --
 -- /See:/ 'lineStyle' smart constructor.
-data LineStyle = LineStyle
+data LineStyle = LineStyle'
     { _lsStrokeColorStyler  :: !(Maybe StyleFunction)
     , _lsStrokeWeight       :: !(Maybe (Textual Int32))
     , _lsStrokeOpacity      :: !(Maybe (Textual Double))
@@ -1891,7 +1891,7 @@ data LineStyle = LineStyle
 lineStyle
     :: LineStyle
 lineStyle =
-    LineStyle
+    LineStyle'
     { _lsStrokeColorStyler = Nothing
     , _lsStrokeWeight = Nothing
     , _lsStrokeOpacity = Nothing
@@ -1937,7 +1937,7 @@ instance FromJSON LineStyle where
         parseJSON
           = withObject "LineStyle"
               (\ o ->
-                 LineStyle <$>
+                 LineStyle' <$>
                    (o .:? "strokeColorStyler") <*>
                      (o .:? "strokeWeight")
                      <*> (o .:? "strokeOpacity")
@@ -1945,7 +1945,7 @@ instance FromJSON LineStyle where
                      <*> (o .:? "strokeColor"))
 
 instance ToJSON LineStyle where
-        toJSON LineStyle{..}
+        toJSON LineStyle'{..}
           = object
               (catMaybes
                  [("strokeColorStyler" .=) <$> _lsStrokeColorStyler,

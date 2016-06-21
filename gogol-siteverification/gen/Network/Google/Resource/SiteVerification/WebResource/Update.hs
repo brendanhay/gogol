@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SiteVerification.WebResource.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type WebResourceUpdateResource =
 -- | Modify the list of owners for your website or domain.
 --
 -- /See:/ 'webResourceUpdate' smart constructor.
-data WebResourceUpdate = WebResourceUpdate
+data WebResourceUpdate = WebResourceUpdate'
     { _wruPayload :: !SiteVerificationWebResourceResource
     , _wruId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ webResourceUpdate
     -> Text -- ^ 'wruId'
     -> WebResourceUpdate
 webResourceUpdate pWruPayload_ pWruId_ =
-    WebResourceUpdate
+    WebResourceUpdate'
     { _wruPayload = pWruPayload_
     , _wruId = pWruId_
     }
@@ -88,7 +88,9 @@ wruId = lens _wruId (\ s a -> s{_wruId = a})
 instance GoogleRequest WebResourceUpdate where
         type Rs WebResourceUpdate =
              SiteVerificationWebResourceResource
-        requestClient WebResourceUpdate{..}
+        type Scopes WebResourceUpdate =
+             '["https://www.googleapis.com/auth/siteverification"]
+        requestClient WebResourceUpdate'{..}
           = go _wruId (Just AltJSON) _wruPayload
               siteVerificationService
           where go

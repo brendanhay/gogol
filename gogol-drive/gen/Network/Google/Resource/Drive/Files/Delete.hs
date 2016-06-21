@@ -14,14 +14,15 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Files.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Permanently deletes a file by ID. Skips the trash. The currently
--- authenticated user must own the file.
+-- Permanently deletes a file owned by the user without moving it to the
+-- trash. If the target is a folder, all descendants owned by the user are
+-- also deleted.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.delete@.
 module Network.Google.Resource.Drive.Files.Delete
@@ -44,16 +45,17 @@ import           Network.Google.Prelude
 -- 'FilesDelete' request conforms to.
 type FilesDeleteResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Permanently deletes a file by ID. Skips the trash. The currently
--- authenticated user must own the file.
+-- | Permanently deletes a file owned by the user without moving it to the
+-- trash. If the target is a folder, all descendants owned by the user are
+-- also deleted.
 --
 -- /See:/ 'filesDelete' smart constructor.
-newtype FilesDelete = FilesDelete
+newtype FilesDelete = FilesDelete'
     { _fdFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,17 +68,21 @@ filesDelete
     :: Text -- ^ 'fdFileId'
     -> FilesDelete
 filesDelete pFdFileId_ =
-    FilesDelete
+    FilesDelete'
     { _fdFileId = pFdFileId_
     }
 
--- | The ID of the file to delete.
+-- | The ID of the file.
 fdFileId :: Lens' FilesDelete Text
 fdFileId = lens _fdFileId (\ s a -> s{_fdFileId = a})
 
 instance GoogleRequest FilesDelete where
         type Rs FilesDelete = ()
-        requestClient FilesDelete{..}
+        type Scopes FilesDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file"]
+        requestClient FilesDelete'{..}
           = go _fdFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy FilesDeleteResource)

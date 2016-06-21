@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Undelete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersUndeleteResource =
 -- | Undelete a deleted user
 --
 -- /See:/ 'usersUndelete' smart constructor.
-data UsersUndelete = UsersUndelete
+data UsersUndelete = UsersUndelete'
     { _uuPayload :: !UserUndelete
     , _uuUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersUndelete
     -> Text -- ^ 'uuUserKey'
     -> UsersUndelete
 usersUndelete pUuPayload_ pUuUserKey_ =
-    UsersUndelete
+    UsersUndelete'
     { _uuPayload = pUuPayload_
     , _uuUserKey = pUuUserKey_
     }
@@ -89,7 +89,9 @@ uuUserKey
 
 instance GoogleRequest UsersUndelete where
         type Rs UsersUndelete = ()
-        requestClient UsersUndelete{..}
+        type Scopes UsersUndelete =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
+        requestClient UsersUndelete'{..}
           = go _uuUserKey (Just AltJSON) _uuPayload
               directoryService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ManagementProFileFilterLinksDeleteResource =
 -- | Delete a profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksDelete' smart constructor.
-data ManagementProFileFilterLinksDelete = ManagementProFileFilterLinksDelete
+data ManagementProFileFilterLinksDelete = ManagementProFileFilterLinksDelete'
     { _mpffldWebPropertyId :: !Text
     , _mpffldProFileId     :: !Text
     , _mpffldAccountId     :: !Text
@@ -86,7 +86,7 @@ managementProFileFilterLinksDelete
     -> Text -- ^ 'mpffldLinkId'
     -> ManagementProFileFilterLinksDelete
 managementProFileFilterLinksDelete pMpffldWebPropertyId_ pMpffldProFileId_ pMpffldAccountId_ pMpffldLinkId_ =
-    ManagementProFileFilterLinksDelete
+    ManagementProFileFilterLinksDelete'
     { _mpffldWebPropertyId = pMpffldWebPropertyId_
     , _mpffldProFileId = pMpffldProFileId_
     , _mpffldAccountId = pMpffldAccountId_
@@ -119,7 +119,9 @@ mpffldLinkId
 instance GoogleRequest
          ManagementProFileFilterLinksDelete where
         type Rs ManagementProFileFilterLinksDelete = ()
-        requestClient ManagementProFileFilterLinksDelete{..}
+        type Scopes ManagementProFileFilterLinksDelete =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementProFileFilterLinksDelete'{..}
           = go _mpffldAccountId _mpffldWebPropertyId
               _mpffldProFileId
               _mpffldLinkId

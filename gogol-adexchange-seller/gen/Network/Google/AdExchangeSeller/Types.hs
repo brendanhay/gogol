@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AdExchangeSeller.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,8 +20,8 @@ module Network.Google.AdExchangeSeller.Types
       adExchangeSellerService
 
     -- * OAuth Scopes
-    , adexchangeSellerReadonlyScope
-    , adexchangeSellerScope
+    , adExchangeSellerReadOnlyScope
+    , adExchangeSellerScope
 
     -- * AdClients
     , AdClients
@@ -183,15 +184,15 @@ import           Network.Google.AdExchangeSeller.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2.0' of the Ad Exchange Seller API. This contains the host and root path used as a starting point for constructing service requests.
-adExchangeSellerService :: Service
+adExchangeSellerService :: ServiceConfig
 adExchangeSellerService
   = defaultService (ServiceId "adexchangeseller:v2.0")
       "www.googleapis.com"
 
 -- | View your Ad Exchange data
-adexchangeSellerReadonlyScope :: OAuthScope
-adexchangeSellerReadonlyScope = "https://www.googleapis.com/auth/adexchange.seller.readonly";
+adExchangeSellerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller.readonly"]
+adExchangeSellerReadOnlyScope = Proxy;
 
 -- | View and manage your Ad Exchange data
-adexchangeSellerScope :: OAuthScope
-adexchangeSellerScope = "https://www.googleapis.com/auth/adexchange.seller";
+adExchangeSellerScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller"]
+adExchangeSellerScope = Proxy;

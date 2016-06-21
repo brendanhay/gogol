@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.CustomMetrics.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ManagementCustomMetricsListResource =
 -- | Lists custom metrics to which the user has access.
 --
 -- /See:/ 'managementCustomMetricsList' smart constructor.
-data ManagementCustomMetricsList = ManagementCustomMetricsList
+data ManagementCustomMetricsList = ManagementCustomMetricsList'
     { _mcmlWebPropertyId :: !Text
     , _mcmlAccountId     :: !Text
     , _mcmlStartIndex    :: !(Maybe (Textual Int32))
@@ -83,7 +83,7 @@ managementCustomMetricsList
     -> Text -- ^ 'mcmlAccountId'
     -> ManagementCustomMetricsList
 managementCustomMetricsList pMcmlWebPropertyId_ pMcmlAccountId_ =
-    ManagementCustomMetricsList
+    ManagementCustomMetricsList'
     { _mcmlWebPropertyId = pMcmlWebPropertyId_
     , _mcmlAccountId = pMcmlAccountId_
     , _mcmlStartIndex = Nothing
@@ -120,7 +120,10 @@ mcmlMaxResults
 instance GoogleRequest ManagementCustomMetricsList
          where
         type Rs ManagementCustomMetricsList = CustomMetrics
-        requestClient ManagementCustomMetricsList{..}
+        type Scopes ManagementCustomMetricsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementCustomMetricsList'{..}
           = go _mcmlAccountId _mcmlWebPropertyId
               _mcmlStartIndex
               _mcmlMaxResults

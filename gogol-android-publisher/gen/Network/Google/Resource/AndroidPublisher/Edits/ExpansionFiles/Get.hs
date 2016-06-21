@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type EditsExpansionFilesGetResource =
 -- | Fetches the Expansion File configuration for the APK specified.
 --
 -- /See:/ 'editsExpansionFilesGet' smart constructor.
-data EditsExpansionFilesGet = EditsExpansionFilesGet
+data EditsExpansionFilesGet = EditsExpansionFilesGet'
     { _eefgPackageName       :: !Text
     , _eefgAPKVersionCode    :: !(Textual Int32)
     , _eefgExpansionFileType :: !EditsExpansionFilesGetExpansionFileType
@@ -87,7 +87,7 @@ editsExpansionFilesGet
     -> Text -- ^ 'eefgEditId'
     -> EditsExpansionFilesGet
 editsExpansionFilesGet pEefgPackageName_ pEefgAPKVersionCode_ pEefgExpansionFileType_ pEefgEditId_ =
-    EditsExpansionFilesGet
+    EditsExpansionFilesGet'
     { _eefgPackageName = pEefgPackageName_
     , _eefgAPKVersionCode = _Coerce # pEefgAPKVersionCode_
     , _eefgExpansionFileType = pEefgExpansionFileType_
@@ -121,7 +121,9 @@ eefgEditId
 
 instance GoogleRequest EditsExpansionFilesGet where
         type Rs EditsExpansionFilesGet = ExpansionFile
-        requestClient EditsExpansionFilesGet{..}
+        type Scopes EditsExpansionFilesGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsExpansionFilesGet'{..}
           = go _eefgPackageName _eefgEditId _eefgAPKVersionCode
               _eefgExpansionFileType
               (Just AltJSON)

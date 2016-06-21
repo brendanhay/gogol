@@ -1,13 +1,13 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"ye6orv2F-1npMW3u9suM3a7C5Bo/j3Wwh3EWBgWZwRehTCtXuS9oPH4\"",
+ "etag": "\"jQLIOHBVnDZie4rQHGH1WJF-INE/UPUy71zSavKXqWFDrZOhX79TDks\"",
  "discoveryVersion": "v1",
  "id": "drive:v2",
  "name": "drive",
  "version": "v2",
- "revision": "20151008",
+ "revision": "20160425",
  "title": "Drive API",
- "description": "The API to interact with Drive.",
+ "description": "Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.",
  "ownerDomain": "google.com",
  "ownerName": "Google",
  "icons": {
@@ -682,7 +682,7 @@
   "Comment": {
    "id": "Comment",
    "type": "object",
-   "description": "A JSON representation of a comment on a file in Google Drive.",
+   "description": "A comment on a file in Google Drive.",
    "properties": {
     "anchor": {
      "type": "string",
@@ -771,7 +771,7 @@
   "CommentList": {
    "id": "CommentList",
    "type": "object",
-   "description": "A JSON representation of a list of comments on a file in Google Drive.",
+   "description": "A list of comments on a file in Google Drive.",
    "properties": {
     "items": {
      "type": "array",
@@ -802,7 +802,7 @@
   "CommentReply": {
    "id": "CommentReply",
    "type": "object",
-   "description": "A JSON representation of a reply to a comment on a file in Google Drive.",
+   "description": "A comment on a file in Google Drive.",
    "properties": {
     "author": {
      "$ref": "User",
@@ -853,7 +853,7 @@
   "CommentReplyList": {
    "id": "CommentReplyList",
    "type": "object",
-   "description": "A JSON representation of a list of replies to a comment on a file in Google Drive.",
+   "description": "A list of replies to a comment on a file in Google Drive.",
    "properties": {
     "items": {
      "type": "array",
@@ -897,6 +897,10 @@
     "canComment": {
      "type": "boolean",
      "description": "Whether the current user can comment on the file."
+    },
+    "canReadRevisions": {
+     "type": "boolean",
+     "description": "Whether the current user has read access to the Revisions resource of the file."
     },
     "copyable": {
      "type": "boolean",
@@ -1098,6 +1102,10 @@
       }
      }
     },
+    "isAppAuthorized": {
+     "type": "boolean",
+     "description": "Whether the file was created or opened by the requesting app."
+    },
     "kind": {
      "type": "string",
      "description": "The type of file. This is always drive#file.",
@@ -1174,7 +1182,7 @@
     },
     "originalFilename": {
      "type": "string",
-     "description": "The original filename if the file was uploaded manually, or the original title if the file was inserted through the API. Note that renames of the title will not change the original filename. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files."
+     "description": "The original filename of the uploaded content if available, or else the original value of the title field. This is only available for files with binary content in Drive."
     },
     "ownedByMe": {
      "type": "boolean",
@@ -1728,7 +1736,7 @@
   "User": {
    "id": "User",
    "type": "object",
-   "description": "The JSON template for a user.",
+   "description": "Information about a Drive user.",
    "properties": {
     "displayName": {
      "type": "string",
@@ -2523,6 +2531,36 @@
       "https://www.googleapis.com/auth/drive"
      ]
     },
+    "export": {
+     "id": "drive.files.export",
+     "path": "files/{fileId}/export",
+     "httpMethod": "GET",
+     "description": "Exports a Google Doc to the requested MIME type and returns the exported content.",
+     "parameters": {
+      "fileId": {
+       "type": "string",
+       "description": "The ID of the file.",
+       "required": true,
+       "location": "path"
+      },
+      "mimeType": {
+       "type": "string",
+       "description": "The MIME type of the format requested for this export.",
+       "required": true,
+       "location": "query"
+      }
+     },
+     "parameterOrder": [
+      "fileId",
+      "mimeType"
+     ],
+     "scopes": [
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/drive.file",
+      "https://www.googleapis.com/auth/drive.readonly"
+     ],
+     "supportsMediaDownload": true
+    },
     "generateIds": {
      "id": "drive.files.generateIds",
      "path": "files/generateIds",
@@ -2606,7 +2644,6 @@
      "scopes": [
       "https://www.googleapis.com/auth/drive",
       "https://www.googleapis.com/auth/drive.appdata",
-      "https://www.googleapis.com/auth/drive.apps.readonly",
       "https://www.googleapis.com/auth/drive.file",
       "https://www.googleapis.com/auth/drive.metadata",
       "https://www.googleapis.com/auth/drive.metadata.readonly",
@@ -2614,6 +2651,7 @@
       "https://www.googleapis.com/auth/drive.readonly"
      ],
      "supportsMediaDownload": true,
+     "useMediaDownloadService": true,
      "supportsSubscription": true
     },
     "insert": {
@@ -3172,7 +3210,6 @@
      "scopes": [
       "https://www.googleapis.com/auth/drive",
       "https://www.googleapis.com/auth/drive.appdata",
-      "https://www.googleapis.com/auth/drive.apps.readonly",
       "https://www.googleapis.com/auth/drive.file",
       "https://www.googleapis.com/auth/drive.metadata",
       "https://www.googleapis.com/auth/drive.metadata.readonly",
@@ -3180,6 +3217,7 @@
       "https://www.googleapis.com/auth/drive.readonly"
      ],
      "supportsMediaDownload": true,
+     "useMediaDownloadService": true,
      "supportsSubscription": true
     }
    }
@@ -3636,7 +3674,7 @@
      "id": "drive.properties.insert",
      "path": "files/{fileId}/properties",
      "httpMethod": "POST",
-     "description": "Adds a property to a file.",
+     "description": "Adds a property to a file, or updates it if it already exists.",
      "parameters": {
       "fileId": {
        "type": "string",
@@ -3694,7 +3732,7 @@
      "id": "drive.properties.patch",
      "path": "files/{fileId}/properties/{propertyKey}",
      "httpMethod": "PATCH",
-     "description": "Updates a property. This method supports patch semantics.",
+     "description": "Updates a property, or adds it if it doesn't exist. This method supports patch semantics.",
      "parameters": {
       "fileId": {
        "type": "string",
@@ -3736,7 +3774,7 @@
      "id": "drive.properties.update",
      "path": "files/{fileId}/properties/{propertyKey}",
      "httpMethod": "PUT",
-     "description": "Updates a property.",
+     "description": "Updates a property, or adds it if it doesn't exist.",
      "parameters": {
       "fileId": {
        "type": "string",

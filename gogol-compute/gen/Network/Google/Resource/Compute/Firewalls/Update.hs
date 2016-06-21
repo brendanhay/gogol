@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Firewalls.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified firewall resource with the data included in the
+-- Updates the specified firewall rule with the data included in the
 -- request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.update@.
@@ -55,11 +55,11 @@ type FirewallsUpdateResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] Firewall :> Put '[JSON] Operation
 
--- | Updates the specified firewall resource with the data included in the
+-- | Updates the specified firewall rule with the data included in the
 -- request.
 --
 -- /See:/ 'firewallsUpdate' smart constructor.
-data FirewallsUpdate = FirewallsUpdate
+data FirewallsUpdate = FirewallsUpdate'
     { _fuProject  :: !Text
     , _fuPayload  :: !Firewall
     , _fuFirewall :: !Text
@@ -80,7 +80,7 @@ firewallsUpdate
     -> Text -- ^ 'fuFirewall'
     -> FirewallsUpdate
 firewallsUpdate pFuProject_ pFuPayload_ pFuFirewall_ =
-    FirewallsUpdate
+    FirewallsUpdate'
     { _fuProject = pFuProject_
     , _fuPayload = pFuPayload_
     , _fuFirewall = pFuFirewall_
@@ -96,14 +96,17 @@ fuPayload :: Lens' FirewallsUpdate Firewall
 fuPayload
   = lens _fuPayload (\ s a -> s{_fuPayload = a})
 
--- | Name of the firewall resource to update.
+-- | Name of the firewall rule to update.
 fuFirewall :: Lens' FirewallsUpdate Text
 fuFirewall
   = lens _fuFirewall (\ s a -> s{_fuFirewall = a})
 
 instance GoogleRequest FirewallsUpdate where
         type Rs FirewallsUpdate = Operation
-        requestClient FirewallsUpdate{..}
+        type Scopes FirewallsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient FirewallsUpdate'{..}
           = go _fuProject _fuFirewall (Just AltJSON) _fuPayload
               computeService
           where go

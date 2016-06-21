@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.DirectorySites.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ import           Network.Google.Prelude
 -- 'DirectorySitesList' request conforms to.
 type DirectorySitesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>
@@ -84,7 +84,7 @@ type DirectorySitesListResource =
 -- | Retrieves a list of directory sites, possibly filtered.
 --
 -- /See:/ 'directorySitesList' smart constructor.
-data DirectorySitesList = DirectorySitesList
+data DirectorySitesList = DirectorySitesList'
     { _dslSearchString                   :: !(Maybe Text)
     , _dslAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
@@ -136,7 +136,7 @@ directorySitesList
     :: Int64 -- ^ 'dslProFileId'
     -> DirectorySitesList
 directorySitesList pDslProFileId_ =
-    DirectorySitesList
+    DirectorySitesList'
     { _dslSearchString = Nothing
     , _dslAcceptsInterstitialPlacements = Nothing
     , _dslAcceptsPublisherPaidPlacements = Nothing
@@ -248,7 +248,9 @@ dslDfpNetworkCode
 instance GoogleRequest DirectorySitesList where
         type Rs DirectorySitesList =
              DirectorySitesListResponse
-        requestClient DirectorySitesList{..}
+        type Scopes DirectorySitesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient DirectorySitesList'{..}
           = go _dslProFileId _dslSearchString
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements

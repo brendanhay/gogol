@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Tiers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type TiersListResource =
 -- D2. For related information, see Pricing.
 --
 -- /See:/ 'tiersList' smart constructor.
-newtype TiersList = TiersList
+newtype TiersList = TiersList'
     { _tlProject :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ tiersList
     :: Text -- ^ 'tlProject'
     -> TiersList
 tiersList pTlProject_ =
-    TiersList
+    TiersList'
     { _tlProject = pTlProject_
     }
 
@@ -79,7 +79,10 @@ tlProject
 
 instance GoogleRequest TiersList where
         type Rs TiersList = TiersListResponse
-        requestClient TiersList{..}
+        type Scopes TiersList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient TiersList'{..}
           = go _tlProject (Just AltJSON) sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy TiersListResource)

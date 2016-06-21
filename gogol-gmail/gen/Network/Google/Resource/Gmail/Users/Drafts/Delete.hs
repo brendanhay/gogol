@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Drafts.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersDraftsDeleteResource =
 -- trash it.
 --
 -- /See:/ 'usersDraftsDelete' smart constructor.
-data UsersDraftsDelete = UsersDraftsDelete
+data UsersDraftsDelete = UsersDraftsDelete'
     { _uddUserId :: !Text
     , _uddId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,10 +70,9 @@ data UsersDraftsDelete = UsersDraftsDelete
 -- * 'uddId'
 usersDraftsDelete
     :: Text -- ^ 'uddId'
-    -> Text
     -> UsersDraftsDelete
-usersDraftsDelete pUddUserId_ pUddId_ =
-    UsersDraftsDelete
+usersDraftsDelete pUddId_ =
+    UsersDraftsDelete'
     { _uddUserId = "me"
     , _uddId = pUddId_
     }
@@ -90,7 +89,11 @@ uddId = lens _uddId (\ s a -> s{_uddId = a})
 
 instance GoogleRequest UsersDraftsDelete where
         type Rs UsersDraftsDelete = ()
-        requestClient UsersDraftsDelete{..}
+        type Scopes UsersDraftsDelete =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersDraftsDelete'{..}
           = go _uddUserId _uddId (Just AltJSON) gmailService
           where go
                   = buildClient

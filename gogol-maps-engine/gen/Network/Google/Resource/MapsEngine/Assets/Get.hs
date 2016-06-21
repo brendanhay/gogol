@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Assets.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type AssetsGetResource =
 -- | Return metadata for a particular asset.
 --
 -- /See:/ 'assetsGet' smart constructor.
-newtype AssetsGet = AssetsGet
+newtype AssetsGet = AssetsGet'
     { _agId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ assetsGet
     :: Text -- ^ 'agId'
     -> AssetsGet
 assetsGet pAgId_ =
-    AssetsGet
+    AssetsGet'
     { _agId = pAgId_
     }
 
@@ -74,7 +74,10 @@ agId = lens _agId (\ s a -> s{_agId = a})
 
 instance GoogleRequest AssetsGet where
         type Rs AssetsGet = Asset
-        requestClient AssetsGet{..}
+        type Scopes AssetsGet =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient AssetsGet'{..}
           = go _agId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy AssetsGetResource)

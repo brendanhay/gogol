@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Storage.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -26,19 +26,19 @@ data ObjectsInsertProjection
       -- Include all properties.
     | NoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit the owner, acl property.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsInsertProjection
 
-instance FromText ObjectsInsertProjection where
-    fromText = \case
-        "full" -> Just Full
-        "noAcl" -> Just NoACL
-        _ -> Nothing
+instance FromHttpApiData ObjectsInsertProjection where
+    parseQueryParam = \case
+        "full" -> Right Full
+        "noAcl" -> Right NoACL
+        x -> Left ("Unable to parse ObjectsInsertProjection from: " <> x)
 
-instance ToText ObjectsInsertProjection where
-    toText = \case
+instance ToHttpApiData ObjectsInsertProjection where
+    toQueryParam = \case
         Full -> "full"
         NoACL -> "noAcl"
 
@@ -72,22 +72,22 @@ data BucketsUpdatePredefinedDefaultObjectACL
     | PublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsUpdatePredefinedDefaultObjectACL
 
-instance FromText BucketsUpdatePredefinedDefaultObjectACL where
-    fromText = \case
-        "authenticatedRead" -> Just AuthenticatedRead
-        "bucketOwnerFullControl" -> Just BucketOwnerFullControl
-        "bucketOwnerRead" -> Just BucketOwnerRead
-        "private" -> Just Private
-        "projectPrivate" -> Just ProjectPrivate
-        "publicRead" -> Just PublicRead
-        _ -> Nothing
+instance FromHttpApiData BucketsUpdatePredefinedDefaultObjectACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right AuthenticatedRead
+        "bucketOwnerFullControl" -> Right BucketOwnerFullControl
+        "bucketOwnerRead" -> Right BucketOwnerRead
+        "private" -> Right Private
+        "projectPrivate" -> Right ProjectPrivate
+        "publicRead" -> Right PublicRead
+        x -> Left ("Unable to parse BucketsUpdatePredefinedDefaultObjectACL from: " <> x)
 
-instance ToText BucketsUpdatePredefinedDefaultObjectACL where
-    toText = \case
+instance ToHttpApiData BucketsUpdatePredefinedDefaultObjectACL where
+    toQueryParam = \case
         AuthenticatedRead -> "authenticatedRead"
         BucketOwnerFullControl -> "bucketOwnerFullControl"
         BucketOwnerRead -> "bucketOwnerRead"
@@ -125,22 +125,22 @@ data ObjectsComposeDestinationPredefinedACL
     | OCDPAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsComposeDestinationPredefinedACL
 
-instance FromText ObjectsComposeDestinationPredefinedACL where
-    fromText = \case
-        "authenticatedRead" -> Just OCDPAAuthenticatedRead
-        "bucketOwnerFullControl" -> Just OCDPABucketOwnerFullControl
-        "bucketOwnerRead" -> Just OCDPABucketOwnerRead
-        "private" -> Just OCDPAPrivate
-        "projectPrivate" -> Just OCDPAProjectPrivate
-        "publicRead" -> Just OCDPAPublicRead
-        _ -> Nothing
+instance FromHttpApiData ObjectsComposeDestinationPredefinedACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right OCDPAAuthenticatedRead
+        "bucketOwnerFullControl" -> Right OCDPABucketOwnerFullControl
+        "bucketOwnerRead" -> Right OCDPABucketOwnerRead
+        "private" -> Right OCDPAPrivate
+        "projectPrivate" -> Right OCDPAProjectPrivate
+        "publicRead" -> Right OCDPAPublicRead
+        x -> Left ("Unable to parse ObjectsComposeDestinationPredefinedACL from: " <> x)
 
-instance ToText ObjectsComposeDestinationPredefinedACL where
-    toText = \case
+instance ToHttpApiData ObjectsComposeDestinationPredefinedACL where
+    toQueryParam = \case
         OCDPAAuthenticatedRead -> "authenticatedRead"
         OCDPABucketOwnerFullControl -> "bucketOwnerFullControl"
         OCDPABucketOwnerRead -> "bucketOwnerRead"
@@ -172,21 +172,21 @@ data BucketsInsertPredefinedACL
     | BIPAPublicReadWrite
       -- ^ @publicReadWrite@
       -- Project team owners get OWNER access, and allUsers get WRITER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsInsertPredefinedACL
 
-instance FromText BucketsInsertPredefinedACL where
-    fromText = \case
-        "authenticatedRead" -> Just BIPAAuthenticatedRead
-        "private" -> Just BIPAPrivate
-        "projectPrivate" -> Just BIPAProjectPrivate
-        "publicRead" -> Just BIPAPublicRead
-        "publicReadWrite" -> Just BIPAPublicReadWrite
-        _ -> Nothing
+instance FromHttpApiData BucketsInsertPredefinedACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right BIPAAuthenticatedRead
+        "private" -> Right BIPAPrivate
+        "projectPrivate" -> Right BIPAProjectPrivate
+        "publicRead" -> Right BIPAPublicRead
+        "publicReadWrite" -> Right BIPAPublicReadWrite
+        x -> Left ("Unable to parse BucketsInsertPredefinedACL from: " <> x)
 
-instance ToText BucketsInsertPredefinedACL where
-    toText = \case
+instance ToHttpApiData BucketsInsertPredefinedACL where
+    toQueryParam = \case
         BIPAAuthenticatedRead -> "authenticatedRead"
         BIPAPrivate -> "private"
         BIPAProjectPrivate -> "projectPrivate"
@@ -223,22 +223,22 @@ data ObjectsPatchPredefinedACL
     | OPPAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsPatchPredefinedACL
 
-instance FromText ObjectsPatchPredefinedACL where
-    fromText = \case
-        "authenticatedRead" -> Just OPPAAuthenticatedRead
-        "bucketOwnerFullControl" -> Just OPPABucketOwnerFullControl
-        "bucketOwnerRead" -> Just OPPABucketOwnerRead
-        "private" -> Just OPPAPrivate
-        "projectPrivate" -> Just OPPAProjectPrivate
-        "publicRead" -> Just OPPAPublicRead
-        _ -> Nothing
+instance FromHttpApiData ObjectsPatchPredefinedACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right OPPAAuthenticatedRead
+        "bucketOwnerFullControl" -> Right OPPABucketOwnerFullControl
+        "bucketOwnerRead" -> Right OPPABucketOwnerRead
+        "private" -> Right OPPAPrivate
+        "projectPrivate" -> Right OPPAProjectPrivate
+        "publicRead" -> Right OPPAPublicRead
+        x -> Left ("Unable to parse ObjectsPatchPredefinedACL from: " <> x)
 
-instance ToText ObjectsPatchPredefinedACL where
-    toText = \case
+instance ToHttpApiData ObjectsPatchPredefinedACL where
+    toQueryParam = \case
         OPPAAuthenticatedRead -> "authenticatedRead"
         OPPABucketOwnerFullControl -> "bucketOwnerFullControl"
         OPPABucketOwnerRead -> "bucketOwnerRead"
@@ -276,22 +276,22 @@ data ObjectsRewriteDestinationPredefinedACL
     | ORDPAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsRewriteDestinationPredefinedACL
 
-instance FromText ObjectsRewriteDestinationPredefinedACL where
-    fromText = \case
-        "authenticatedRead" -> Just ORDPAAuthenticatedRead
-        "bucketOwnerFullControl" -> Just ORDPABucketOwnerFullControl
-        "bucketOwnerRead" -> Just ORDPABucketOwnerRead
-        "private" -> Just ORDPAPrivate
-        "projectPrivate" -> Just ORDPAProjectPrivate
-        "publicRead" -> Just ORDPAPublicRead
-        _ -> Nothing
+instance FromHttpApiData ObjectsRewriteDestinationPredefinedACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right ORDPAAuthenticatedRead
+        "bucketOwnerFullControl" -> Right ORDPABucketOwnerFullControl
+        "bucketOwnerRead" -> Right ORDPABucketOwnerRead
+        "private" -> Right ORDPAPrivate
+        "projectPrivate" -> Right ORDPAProjectPrivate
+        "publicRead" -> Right ORDPAPublicRead
+        x -> Left ("Unable to parse ObjectsRewriteDestinationPredefinedACL from: " <> x)
 
-instance ToText ObjectsRewriteDestinationPredefinedACL where
-    toText = \case
+instance ToHttpApiData ObjectsRewriteDestinationPredefinedACL where
+    toQueryParam = \case
         ORDPAAuthenticatedRead -> "authenticatedRead"
         ORDPABucketOwnerFullControl -> "bucketOwnerFullControl"
         ORDPABucketOwnerRead -> "bucketOwnerRead"
@@ -312,19 +312,19 @@ data ObjectsWatchAllProjection
       -- Include all properties.
     | OWAPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit the owner, acl property.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsWatchAllProjection
 
-instance FromText ObjectsWatchAllProjection where
-    fromText = \case
-        "full" -> Just OWAPFull
-        "noAcl" -> Just OWAPNoACL
-        _ -> Nothing
+instance FromHttpApiData ObjectsWatchAllProjection where
+    parseQueryParam = \case
+        "full" -> Right OWAPFull
+        "noAcl" -> Right OWAPNoACL
+        x -> Left ("Unable to parse ObjectsWatchAllProjection from: " <> x)
 
-instance ToText ObjectsWatchAllProjection where
-    toText = \case
+instance ToHttpApiData ObjectsWatchAllProjection where
+    toQueryParam = \case
         OWAPFull -> "full"
         OWAPNoACL -> "noAcl"
 
@@ -341,19 +341,19 @@ data BucketsGetProjection
       -- Include all properties.
     | BGPNoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit owner, acl and defaultObjectAcl properties.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsGetProjection
 
-instance FromText BucketsGetProjection where
-    fromText = \case
-        "full" -> Just BGPFull
-        "noAcl" -> Just BGPNoACL
-        _ -> Nothing
+instance FromHttpApiData BucketsGetProjection where
+    parseQueryParam = \case
+        "full" -> Right BGPFull
+        "noAcl" -> Right BGPNoACL
+        x -> Left ("Unable to parse BucketsGetProjection from: " <> x)
 
-instance ToText BucketsGetProjection where
-    toText = \case
+instance ToHttpApiData BucketsGetProjection where
+    toQueryParam = \case
         BGPFull -> "full"
         BGPNoACL -> "noAcl"
 
@@ -370,19 +370,19 @@ data BucketsPatchProjection
       -- Include all properties.
     | BPPNoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit owner, acl and defaultObjectAcl properties.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsPatchProjection
 
-instance FromText BucketsPatchProjection where
-    fromText = \case
-        "full" -> Just BPPFull
-        "noAcl" -> Just BPPNoACL
-        _ -> Nothing
+instance FromHttpApiData BucketsPatchProjection where
+    parseQueryParam = \case
+        "full" -> Right BPPFull
+        "noAcl" -> Right BPPNoACL
+        x -> Left ("Unable to parse BucketsPatchProjection from: " <> x)
 
-instance ToText BucketsPatchProjection where
-    toText = \case
+instance ToHttpApiData BucketsPatchProjection where
+    toQueryParam = \case
         BPPFull -> "full"
         BPPNoACL -> "noAcl"
 
@@ -399,19 +399,19 @@ data BucketsUpdateProjection
       -- Include all properties.
     | BUPNoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit owner, acl and defaultObjectAcl properties.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsUpdateProjection
 
-instance FromText BucketsUpdateProjection where
-    fromText = \case
-        "full" -> Just BUPFull
-        "noAcl" -> Just BUPNoACL
-        _ -> Nothing
+instance FromHttpApiData BucketsUpdateProjection where
+    parseQueryParam = \case
+        "full" -> Right BUPFull
+        "noAcl" -> Right BUPNoACL
+        x -> Left ("Unable to parse BucketsUpdateProjection from: " <> x)
 
-instance ToText BucketsUpdateProjection where
-    toText = \case
+instance ToHttpApiData BucketsUpdateProjection where
+    toQueryParam = \case
         BUPFull -> "full"
         BUPNoACL -> "noAcl"
 
@@ -445,22 +445,22 @@ data ObjectsInsertPredefinedACL
     | OIPAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsInsertPredefinedACL
 
-instance FromText ObjectsInsertPredefinedACL where
-    fromText = \case
-        "authenticatedRead" -> Just OIPAAuthenticatedRead
-        "bucketOwnerFullControl" -> Just OIPABucketOwnerFullControl
-        "bucketOwnerRead" -> Just OIPABucketOwnerRead
-        "private" -> Just OIPAPrivate
-        "projectPrivate" -> Just OIPAProjectPrivate
-        "publicRead" -> Just OIPAPublicRead
-        _ -> Nothing
+instance FromHttpApiData ObjectsInsertPredefinedACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right OIPAAuthenticatedRead
+        "bucketOwnerFullControl" -> Right OIPABucketOwnerFullControl
+        "bucketOwnerRead" -> Right OIPABucketOwnerRead
+        "private" -> Right OIPAPrivate
+        "projectPrivate" -> Right OIPAProjectPrivate
+        "publicRead" -> Right OIPAPublicRead
+        x -> Left ("Unable to parse ObjectsInsertPredefinedACL from: " <> x)
 
-instance ToText ObjectsInsertPredefinedACL where
-    toText = \case
+instance ToHttpApiData ObjectsInsertPredefinedACL where
+    toQueryParam = \case
         OIPAAuthenticatedRead -> "authenticatedRead"
         OIPABucketOwnerFullControl -> "bucketOwnerFullControl"
         OIPABucketOwnerRead -> "bucketOwnerRead"
@@ -481,19 +481,19 @@ data ObjectsListProjection
       -- Include all properties.
     | OLPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit the owner, acl property.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsListProjection
 
-instance FromText ObjectsListProjection where
-    fromText = \case
-        "full" -> Just OLPFull
-        "noAcl" -> Just OLPNoACL
-        _ -> Nothing
+instance FromHttpApiData ObjectsListProjection where
+    parseQueryParam = \case
+        "full" -> Right OLPFull
+        "noAcl" -> Right OLPNoACL
+        x -> Left ("Unable to parse ObjectsListProjection from: " <> x)
 
-instance ToText ObjectsListProjection where
-    toText = \case
+instance ToHttpApiData ObjectsListProjection where
+    toQueryParam = \case
         OLPFull -> "full"
         OLPNoACL -> "noAcl"
 
@@ -527,22 +527,22 @@ data BucketsInsertPredefinedDefaultObjectACL
     | BIPDOAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsInsertPredefinedDefaultObjectACL
 
-instance FromText BucketsInsertPredefinedDefaultObjectACL where
-    fromText = \case
-        "authenticatedRead" -> Just BIPDOAAuthenticatedRead
-        "bucketOwnerFullControl" -> Just BIPDOABucketOwnerFullControl
-        "bucketOwnerRead" -> Just BIPDOABucketOwnerRead
-        "private" -> Just BIPDOAPrivate
-        "projectPrivate" -> Just BIPDOAProjectPrivate
-        "publicRead" -> Just BIPDOAPublicRead
-        _ -> Nothing
+instance FromHttpApiData BucketsInsertPredefinedDefaultObjectACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right BIPDOAAuthenticatedRead
+        "bucketOwnerFullControl" -> Right BIPDOABucketOwnerFullControl
+        "bucketOwnerRead" -> Right BIPDOABucketOwnerRead
+        "private" -> Right BIPDOAPrivate
+        "projectPrivate" -> Right BIPDOAProjectPrivate
+        "publicRead" -> Right BIPDOAPublicRead
+        x -> Left ("Unable to parse BucketsInsertPredefinedDefaultObjectACL from: " <> x)
 
-instance ToText BucketsInsertPredefinedDefaultObjectACL where
-    toText = \case
+instance ToHttpApiData BucketsInsertPredefinedDefaultObjectACL where
+    toQueryParam = \case
         BIPDOAAuthenticatedRead -> "authenticatedRead"
         BIPDOABucketOwnerFullControl -> "bucketOwnerFullControl"
         BIPDOABucketOwnerRead -> "bucketOwnerRead"
@@ -574,21 +574,21 @@ data BucketsUpdatePredefinedACL
     | BUPAPublicReadWrite
       -- ^ @publicReadWrite@
       -- Project team owners get OWNER access, and allUsers get WRITER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsUpdatePredefinedACL
 
-instance FromText BucketsUpdatePredefinedACL where
-    fromText = \case
-        "authenticatedRead" -> Just BUPAAuthenticatedRead
-        "private" -> Just BUPAPrivate
-        "projectPrivate" -> Just BUPAProjectPrivate
-        "publicRead" -> Just BUPAPublicRead
-        "publicReadWrite" -> Just BUPAPublicReadWrite
-        _ -> Nothing
+instance FromHttpApiData BucketsUpdatePredefinedACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right BUPAAuthenticatedRead
+        "private" -> Right BUPAPrivate
+        "projectPrivate" -> Right BUPAProjectPrivate
+        "publicRead" -> Right BUPAPublicRead
+        "publicReadWrite" -> Right BUPAPublicReadWrite
+        x -> Left ("Unable to parse BucketsUpdatePredefinedACL from: " <> x)
 
-instance ToText BucketsUpdatePredefinedACL where
-    toText = \case
+instance ToHttpApiData BucketsUpdatePredefinedACL where
+    toQueryParam = \case
         BUPAAuthenticatedRead -> "authenticatedRead"
         BUPAPrivate -> "private"
         BUPAProjectPrivate -> "projectPrivate"
@@ -625,22 +625,22 @@ data ObjectsCopyDestinationPredefinedACL
     | OCDPACLPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsCopyDestinationPredefinedACL
 
-instance FromText ObjectsCopyDestinationPredefinedACL where
-    fromText = \case
-        "authenticatedRead" -> Just OCDPACLAuthenticatedRead
-        "bucketOwnerFullControl" -> Just OCDPACLBucketOwnerFullControl
-        "bucketOwnerRead" -> Just OCDPACLBucketOwnerRead
-        "private" -> Just OCDPACLPrivate
-        "projectPrivate" -> Just OCDPACLProjectPrivate
-        "publicRead" -> Just OCDPACLPublicRead
-        _ -> Nothing
+instance FromHttpApiData ObjectsCopyDestinationPredefinedACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right OCDPACLAuthenticatedRead
+        "bucketOwnerFullControl" -> Right OCDPACLBucketOwnerFullControl
+        "bucketOwnerRead" -> Right OCDPACLBucketOwnerRead
+        "private" -> Right OCDPACLPrivate
+        "projectPrivate" -> Right OCDPACLProjectPrivate
+        "publicRead" -> Right OCDPACLPublicRead
+        x -> Left ("Unable to parse ObjectsCopyDestinationPredefinedACL from: " <> x)
 
-instance ToText ObjectsCopyDestinationPredefinedACL where
-    toText = \case
+instance ToHttpApiData ObjectsCopyDestinationPredefinedACL where
+    toQueryParam = \case
         OCDPACLAuthenticatedRead -> "authenticatedRead"
         OCDPACLBucketOwnerFullControl -> "bucketOwnerFullControl"
         OCDPACLBucketOwnerRead -> "bucketOwnerRead"
@@ -678,22 +678,22 @@ data ObjectsUpdatePredefinedACL
     | OUPAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsUpdatePredefinedACL
 
-instance FromText ObjectsUpdatePredefinedACL where
-    fromText = \case
-        "authenticatedRead" -> Just OUPAAuthenticatedRead
-        "bucketOwnerFullControl" -> Just OUPABucketOwnerFullControl
-        "bucketOwnerRead" -> Just OUPABucketOwnerRead
-        "private" -> Just OUPAPrivate
-        "projectPrivate" -> Just OUPAProjectPrivate
-        "publicRead" -> Just OUPAPublicRead
-        _ -> Nothing
+instance FromHttpApiData ObjectsUpdatePredefinedACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right OUPAAuthenticatedRead
+        "bucketOwnerFullControl" -> Right OUPABucketOwnerFullControl
+        "bucketOwnerRead" -> Right OUPABucketOwnerRead
+        "private" -> Right OUPAPrivate
+        "projectPrivate" -> Right OUPAProjectPrivate
+        "publicRead" -> Right OUPAPublicRead
+        x -> Left ("Unable to parse ObjectsUpdatePredefinedACL from: " <> x)
 
-instance ToText ObjectsUpdatePredefinedACL where
-    toText = \case
+instance ToHttpApiData ObjectsUpdatePredefinedACL where
+    toQueryParam = \case
         OUPAAuthenticatedRead -> "authenticatedRead"
         OUPABucketOwnerFullControl -> "bucketOwnerFullControl"
         OUPABucketOwnerRead -> "bucketOwnerRead"
@@ -716,19 +716,19 @@ data BucketsInsertProjection
       -- Include all properties.
     | BIPNoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit owner, acl and defaultObjectAcl properties.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsInsertProjection
 
-instance FromText BucketsInsertProjection where
-    fromText = \case
-        "full" -> Just BIPFull
-        "noAcl" -> Just BIPNoACL
-        _ -> Nothing
+instance FromHttpApiData BucketsInsertProjection where
+    parseQueryParam = \case
+        "full" -> Right BIPFull
+        "noAcl" -> Right BIPNoACL
+        x -> Left ("Unable to parse BucketsInsertProjection from: " <> x)
 
-instance ToText BucketsInsertProjection where
-    toText = \case
+instance ToHttpApiData BucketsInsertProjection where
+    toQueryParam = \case
         BIPFull -> "full"
         BIPNoACL -> "noAcl"
 
@@ -745,19 +745,19 @@ data BucketsListProjection
       -- Include all properties.
     | BLPNoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit owner, acl and defaultObjectAcl properties.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsListProjection
 
-instance FromText BucketsListProjection where
-    fromText = \case
-        "full" -> Just BLPFull
-        "noAcl" -> Just BLPNoACL
-        _ -> Nothing
+instance FromHttpApiData BucketsListProjection where
+    parseQueryParam = \case
+        "full" -> Right BLPFull
+        "noAcl" -> Right BLPNoACL
+        x -> Left ("Unable to parse BucketsListProjection from: " <> x)
 
-instance ToText BucketsListProjection where
-    toText = \case
+instance ToHttpApiData BucketsListProjection where
+    toQueryParam = \case
         BLPFull -> "full"
         BLPNoACL -> "noAcl"
 
@@ -774,19 +774,19 @@ data ObjectsUpdateProjection
       -- Include all properties.
     | OUPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit the owner, acl property.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsUpdateProjection
 
-instance FromText ObjectsUpdateProjection where
-    fromText = \case
-        "full" -> Just OUPFull
-        "noAcl" -> Just OUPNoACL
-        _ -> Nothing
+instance FromHttpApiData ObjectsUpdateProjection where
+    parseQueryParam = \case
+        "full" -> Right OUPFull
+        "noAcl" -> Right OUPNoACL
+        x -> Left ("Unable to parse ObjectsUpdateProjection from: " <> x)
 
-instance ToText ObjectsUpdateProjection where
-    toText = \case
+instance ToHttpApiData ObjectsUpdateProjection where
+    toQueryParam = \case
         OUPFull -> "full"
         OUPNoACL -> "noAcl"
 
@@ -803,19 +803,19 @@ data ObjectsPatchProjection
       -- Include all properties.
     | OPPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit the owner, acl property.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsPatchProjection
 
-instance FromText ObjectsPatchProjection where
-    fromText = \case
-        "full" -> Just OPPFull
-        "noAcl" -> Just OPPNoACL
-        _ -> Nothing
+instance FromHttpApiData ObjectsPatchProjection where
+    parseQueryParam = \case
+        "full" -> Right OPPFull
+        "noAcl" -> Right OPPNoACL
+        x -> Left ("Unable to parse ObjectsPatchProjection from: " <> x)
 
-instance ToText ObjectsPatchProjection where
-    toText = \case
+instance ToHttpApiData ObjectsPatchProjection where
+    toQueryParam = \case
         OPPFull -> "full"
         OPPNoACL -> "noAcl"
 
@@ -832,19 +832,19 @@ data ObjectsGetProjection
       -- Include all properties.
     | OGPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit the owner, acl property.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsGetProjection
 
-instance FromText ObjectsGetProjection where
-    fromText = \case
-        "full" -> Just OGPFull
-        "noAcl" -> Just OGPNoACL
-        _ -> Nothing
+instance FromHttpApiData ObjectsGetProjection where
+    parseQueryParam = \case
+        "full" -> Right OGPFull
+        "noAcl" -> Right OGPNoACL
+        x -> Left ("Unable to parse ObjectsGetProjection from: " <> x)
 
-instance ToText ObjectsGetProjection where
-    toText = \case
+instance ToHttpApiData ObjectsGetProjection where
+    toQueryParam = \case
         OGPFull -> "full"
         OGPNoACL -> "noAcl"
 
@@ -878,22 +878,22 @@ data BucketsPatchPredefinedDefaultObjectACL
     | BPPDOAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsPatchPredefinedDefaultObjectACL
 
-instance FromText BucketsPatchPredefinedDefaultObjectACL where
-    fromText = \case
-        "authenticatedRead" -> Just BPPDOAAuthenticatedRead
-        "bucketOwnerFullControl" -> Just BPPDOABucketOwnerFullControl
-        "bucketOwnerRead" -> Just BPPDOABucketOwnerRead
-        "private" -> Just BPPDOAPrivate
-        "projectPrivate" -> Just BPPDOAProjectPrivate
-        "publicRead" -> Just BPPDOAPublicRead
-        _ -> Nothing
+instance FromHttpApiData BucketsPatchPredefinedDefaultObjectACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right BPPDOAAuthenticatedRead
+        "bucketOwnerFullControl" -> Right BPPDOABucketOwnerFullControl
+        "bucketOwnerRead" -> Right BPPDOABucketOwnerRead
+        "private" -> Right BPPDOAPrivate
+        "projectPrivate" -> Right BPPDOAProjectPrivate
+        "publicRead" -> Right BPPDOAPublicRead
+        x -> Left ("Unable to parse BucketsPatchPredefinedDefaultObjectACL from: " <> x)
 
-instance ToText BucketsPatchPredefinedDefaultObjectACL where
-    toText = \case
+instance ToHttpApiData BucketsPatchPredefinedDefaultObjectACL where
+    toQueryParam = \case
         BPPDOAAuthenticatedRead -> "authenticatedRead"
         BPPDOABucketOwnerFullControl -> "bucketOwnerFullControl"
         BPPDOABucketOwnerRead -> "bucketOwnerRead"
@@ -925,21 +925,21 @@ data BucketsPatchPredefinedACL
     | BPPAPublicReadWrite
       -- ^ @publicReadWrite@
       -- Project team owners get OWNER access, and allUsers get WRITER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsPatchPredefinedACL
 
-instance FromText BucketsPatchPredefinedACL where
-    fromText = \case
-        "authenticatedRead" -> Just BPPAAuthenticatedRead
-        "private" -> Just BPPAPrivate
-        "projectPrivate" -> Just BPPAProjectPrivate
-        "publicRead" -> Just BPPAPublicRead
-        "publicReadWrite" -> Just BPPAPublicReadWrite
-        _ -> Nothing
+instance FromHttpApiData BucketsPatchPredefinedACL where
+    parseQueryParam = \case
+        "authenticatedRead" -> Right BPPAAuthenticatedRead
+        "private" -> Right BPPAPrivate
+        "projectPrivate" -> Right BPPAProjectPrivate
+        "publicRead" -> Right BPPAPublicRead
+        "publicReadWrite" -> Right BPPAPublicReadWrite
+        x -> Left ("Unable to parse BucketsPatchPredefinedACL from: " <> x)
 
-instance ToText BucketsPatchPredefinedACL where
-    toText = \case
+instance ToHttpApiData BucketsPatchPredefinedACL where
+    toQueryParam = \case
         BPPAAuthenticatedRead -> "authenticatedRead"
         BPPAPrivate -> "private"
         BPPAProjectPrivate -> "projectPrivate"
@@ -960,19 +960,19 @@ data ObjectsCopyProjection
       -- Include all properties.
     | OCPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit the owner, acl property.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsCopyProjection
 
-instance FromText ObjectsCopyProjection where
-    fromText = \case
-        "full" -> Just OCPFull
-        "noAcl" -> Just OCPNoACL
-        _ -> Nothing
+instance FromHttpApiData ObjectsCopyProjection where
+    parseQueryParam = \case
+        "full" -> Right OCPFull
+        "noAcl" -> Right OCPNoACL
+        x -> Left ("Unable to parse ObjectsCopyProjection from: " <> x)
 
-instance ToText ObjectsCopyProjection where
-    toText = \case
+instance ToHttpApiData ObjectsCopyProjection where
+    toQueryParam = \case
         OCPFull -> "full"
         OCPNoACL -> "noAcl"
 
@@ -990,19 +990,19 @@ data ObjectsRewriteProjection
       -- Include all properties.
     | ORPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      -- Omit the owner, acl property.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsRewriteProjection
 
-instance FromText ObjectsRewriteProjection where
-    fromText = \case
-        "full" -> Just ORPFull
-        "noAcl" -> Just ORPNoACL
-        _ -> Nothing
+instance FromHttpApiData ObjectsRewriteProjection where
+    parseQueryParam = \case
+        "full" -> Right ORPFull
+        "noAcl" -> Right ORPNoACL
+        x -> Left ("Unable to parse ObjectsRewriteProjection from: " <> x)
 
-instance ToText ObjectsRewriteProjection where
-    toText = \case
+instance ToHttpApiData ObjectsRewriteProjection where
+    toQueryParam = \case
         ORPFull -> "full"
         ORPNoACL -> "noAcl"
 

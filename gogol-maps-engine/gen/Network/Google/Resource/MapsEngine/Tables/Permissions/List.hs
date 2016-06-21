@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Permissions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type TablesPermissionsListResource =
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ 'tablesPermissionsList' smart constructor.
-newtype TablesPermissionsList = TablesPermissionsList
+newtype TablesPermissionsList = TablesPermissionsList'
     { _tplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ tablesPermissionsList
     :: Text -- ^ 'tplId'
     -> TablesPermissionsList
 tablesPermissionsList pTplId_ =
-    TablesPermissionsList
+    TablesPermissionsList'
     { _tplId = pTplId_
     }
 
@@ -77,7 +77,10 @@ tplId = lens _tplId (\ s a -> s{_tplId = a})
 instance GoogleRequest TablesPermissionsList where
         type Rs TablesPermissionsList =
              PermissionsListResponse
-        requestClient TablesPermissionsList{..}
+        type Scopes TablesPermissionsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient TablesPermissionsList'{..}
           = go _tplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

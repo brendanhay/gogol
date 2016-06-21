@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Quests.ResetMultipleForAllPlayers
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type QuestsResetMultipleForAllPlayersResource =
 -- may be reset.
 --
 -- /See:/ 'questsResetMultipleForAllPlayers' smart constructor.
-newtype QuestsResetMultipleForAllPlayers = QuestsResetMultipleForAllPlayers
+newtype QuestsResetMultipleForAllPlayers = QuestsResetMultipleForAllPlayers'
     { _qrmfapPayload :: QuestsResetMultipleForAllRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ questsResetMultipleForAllPlayers
     :: QuestsResetMultipleForAllRequest -- ^ 'qrmfapPayload'
     -> QuestsResetMultipleForAllPlayers
 questsResetMultipleForAllPlayers pQrmfapPayload_ =
-    QuestsResetMultipleForAllPlayers
+    QuestsResetMultipleForAllPlayers'
     { _qrmfapPayload = pQrmfapPayload_
     }
 
@@ -83,7 +83,10 @@ qrmfapPayload
 instance GoogleRequest
          QuestsResetMultipleForAllPlayers where
         type Rs QuestsResetMultipleForAllPlayers = ()
-        requestClient QuestsResetMultipleForAllPlayers{..}
+        type Scopes QuestsResetMultipleForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient QuestsResetMultipleForAllPlayers'{..}
           = go (Just AltJSON) _qrmfapPayload
               gamesManagementService
           where go

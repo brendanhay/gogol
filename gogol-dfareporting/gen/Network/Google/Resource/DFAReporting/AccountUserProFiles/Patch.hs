@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AccountUserProFiles.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesPatch' request conforms to.
 type AccountUserProFilesPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
@@ -59,7 +59,7 @@ type AccountUserProFilesPatchResource =
 -- semantics.
 --
 -- /See:/ 'accountUserProFilesPatch' smart constructor.
-data AccountUserProFilesPatch = AccountUserProFilesPatch
+data AccountUserProFilesPatch = AccountUserProFilesPatch'
     { _aupfpProFileId :: !(Textual Int64)
     , _aupfpPayload   :: !AccountUserProFile
     , _aupfpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ accountUserProFilesPatch
     -> Int64 -- ^ 'aupfpId'
     -> AccountUserProFilesPatch
 accountUserProFilesPatch pAupfpProFileId_ pAupfpPayload_ pAupfpId_ =
-    AccountUserProFilesPatch
+    AccountUserProFilesPatch'
     { _aupfpProFileId = _Coerce # pAupfpProFileId_
     , _aupfpPayload = pAupfpPayload_
     , _aupfpId = _Coerce # pAupfpId_
@@ -105,7 +105,9 @@ aupfpId
 
 instance GoogleRequest AccountUserProFilesPatch where
         type Rs AccountUserProFilesPatch = AccountUserProFile
-        requestClient AccountUserProFilesPatch{..}
+        type Scopes AccountUserProFilesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountUserProFilesPatch'{..}
           = go _aupfpProFileId (Just _aupfpId) (Just AltJSON)
               _aupfpPayload
               dFAReportingService

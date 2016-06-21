@@ -7,13 +7,13 @@
 
 -- |
 -- Module      : Network.Google.DoubleClickSearch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Report and modify your advertising data in DoubleClick Search (for
+-- Reports and modifies your advertising data in DoubleClick Search (for
 -- example, campaigns, ad groups, keywords, and conversions).
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference>
@@ -21,6 +21,9 @@ module Network.Google.DoubleClickSearch
     (
     -- * Service Configuration
       doubleClickSearchService
+
+    -- * OAuth Scopes
+    , doubleClickSearchScope
 
     -- * API Declaration
     , DoubleClickSearchAPI

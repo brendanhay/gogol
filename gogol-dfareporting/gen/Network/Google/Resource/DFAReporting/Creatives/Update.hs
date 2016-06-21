@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Creatives.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativesUpdate' request conforms to.
 type CreativesUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
@@ -54,7 +54,7 @@ type CreativesUpdateResource =
 -- | Updates an existing creative.
 --
 -- /See:/ 'creativesUpdate' smart constructor.
-data CreativesUpdate = CreativesUpdate
+data CreativesUpdate = CreativesUpdate'
     { _creProFileId :: !(Textual Int64)
     , _crePayload   :: !Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativesUpdate
     -> Creative -- ^ 'crePayload'
     -> CreativesUpdate
 creativesUpdate pCreProFileId_ pCrePayload_ =
-    CreativesUpdate
+    CreativesUpdate'
     { _creProFileId = _Coerce # pCreProFileId_
     , _crePayload = pCrePayload_
     }
@@ -89,7 +89,9 @@ crePayload
 
 instance GoogleRequest CreativesUpdate where
         type Rs CreativesUpdate = Creative
-        requestClient CreativesUpdate{..}
+        type Scopes CreativesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativesUpdate'{..}
           = go _creProFileId (Just AltJSON) _crePayload
               dFAReportingService
           where go

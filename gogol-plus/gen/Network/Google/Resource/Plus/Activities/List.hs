@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Plus.Activities.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ActivitiesListResource =
 -- user.
 --
 -- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList
+data ActivitiesList = ActivitiesList'
     { _alCollection :: !ActivitiesListCollection
     , _alUserId     :: !Text
     , _alPageToken  :: !(Maybe Text)
@@ -83,7 +83,7 @@ activitiesList
     -> Text -- ^ 'alUserId'
     -> ActivitiesList
 activitiesList pAlCollection_ pAlUserId_ =
-    ActivitiesList
+    ActivitiesList'
     { _alCollection = pAlCollection_
     , _alUserId = pAlUserId_
     , _alPageToken = Nothing
@@ -117,7 +117,10 @@ alMaxResults
 
 instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = ActivityFeed
-        requestClient ActivitiesList{..}
+        type Scopes ActivitiesList =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient ActivitiesList'{..}
           = go _alUserId _alCollection _alPageToken
               (Just _alMaxResults)
               (Just AltJSON)

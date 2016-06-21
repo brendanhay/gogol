@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,14 +57,14 @@ type TimelineUpdateResource =
              "timeline" :>
                Capture "id" Text :>
                  QueryParam "alt" AltJSON :>
-                   QueryParam "uploadType" AltMedia :>
-                     MultipartRelated '[JSON] TimelineItem RequestBody :>
+                   QueryParam "uploadType" Multipart :>
+                     MultipartRelated '[JSON] TimelineItem :>
                        Put '[JSON] TimelineItem
 
 -- | Updates a timeline item in place.
 --
 -- /See:/ 'timelineUpdate' smart constructor.
-data TimelineUpdate = TimelineUpdate
+data TimelineUpdate = TimelineUpdate'
     { _tuPayload :: !TimelineItem
     , _tuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -81,7 +81,7 @@ timelineUpdate
     -> Text -- ^ 'tuId'
     -> TimelineUpdate
 timelineUpdate pTuPayload_ pTuId_ =
-    TimelineUpdate
+    TimelineUpdate'
     { _tuPayload = pTuPayload_
     , _tuId = pTuId_
     }
@@ -97,7 +97,10 @@ tuId = lens _tuId (\ s a -> s{_tuId = a})
 
 instance GoogleRequest TimelineUpdate where
         type Rs TimelineUpdate = TimelineItem
-        requestClient TimelineUpdate{..}
+        type Scopes TimelineUpdate =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient TimelineUpdate'{..}
           = go _tuId (Just AltJSON) _tuPayload mirrorService
           where go :<|> _
                   = buildClient (Proxy :: Proxy TimelineUpdateResource)
@@ -106,8 +109,10 @@ instance GoogleRequest TimelineUpdate where
 instance GoogleRequest (MediaUpload TimelineUpdate)
          where
         type Rs (MediaUpload TimelineUpdate) = TimelineItem
-        requestClient (MediaUpload TimelineUpdate{..} body)
-          = go _tuId (Just AltJSON) (Just AltMedia) _tuPayload
+        type Scopes (MediaUpload TimelineUpdate) =
+             Scopes TimelineUpdate
+        requestClient (MediaUpload TimelineUpdate'{..} body)
+          = go _tuId (Just AltJSON) (Just Multipart) _tuPayload
               body
               mirrorService
           where _ :<|> go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Devices.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves the IDs of all of a user\'s devices.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.devices.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.devices.list@.
 module Network.Google.Resource.AndroidEnterprise.Devices.List
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type DevicesListResource =
 -- | Retrieves the IDs of all of a user\'s devices.
 --
 -- /See:/ 'devicesList' smart constructor.
-data DevicesList = DevicesList
+data DevicesList = DevicesList'
     { _dlEnterpriseId :: !Text
     , _dlUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ devicesList
     -> Text -- ^ 'dlUserId'
     -> DevicesList
 devicesList pDlEnterpriseId_ pDlUserId_ =
-    DevicesList
+    DevicesList'
     { _dlEnterpriseId = pDlEnterpriseId_
     , _dlUserId = pDlUserId_
     }
@@ -90,7 +90,9 @@ dlUserId = lens _dlUserId (\ s a -> s{_dlUserId = a})
 
 instance GoogleRequest DevicesList where
         type Rs DevicesList = DevicesListResponse
-        requestClient DevicesList{..}
+        type Scopes DevicesList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient DevicesList'{..}
           = go _dlEnterpriseId _dlUserId (Just AltJSON)
               androidEnterpriseService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.Sitemaps.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Deletes a sitemap from this site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.delete@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.delete@.
 module Network.Google.Resource.Webmasters.Sitemaps.Delete
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type SitemapsDeleteResource =
 -- | Deletes a sitemap from this site.
 --
 -- /See:/ 'sitemapsDelete' smart constructor.
-data SitemapsDelete = SitemapsDelete
+data SitemapsDelete = SitemapsDelete'
     { _sdFeedpath :: !Text
     , _sdSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitemapsDelete
     -> Text -- ^ 'sdSiteURL'
     -> SitemapsDelete
 sitemapsDelete pSdFeedpath_ pSdSiteURL_ =
-    SitemapsDelete
+    SitemapsDelete'
     { _sdFeedpath = pSdFeedpath_
     , _sdSiteURL = pSdSiteURL_
     }
@@ -90,7 +90,9 @@ sdSiteURL
 
 instance GoogleRequest SitemapsDelete where
         type Rs SitemapsDelete = ()
-        requestClient SitemapsDelete{..}
+        type Scopes SitemapsDelete =
+             '["https://www.googleapis.com/auth/webmasters"]
+        requestClient SitemapsDelete'{..}
           = go _sdSiteURL _sdFeedpath (Just AltJSON)
               webmasterToolsService
           where go

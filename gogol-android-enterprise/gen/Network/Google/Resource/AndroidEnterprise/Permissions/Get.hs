@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Permissions.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@
 -- Retrieves details of an Android app permission for display to an
 -- enterprise admin.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.permissions.get@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.permissions.get@.
 module Network.Google.Resource.AndroidEnterprise.Permissions.Get
     (
     -- * REST Resource
@@ -55,7 +55,7 @@ type PermissionsGetResource =
 -- enterprise admin.
 --
 -- /See:/ 'permissionsGet' smart constructor.
-data PermissionsGet = PermissionsGet
+data PermissionsGet = PermissionsGet'
     { _pgLanguage     :: !(Maybe Text)
     , _pgPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ permissionsGet
     :: Text -- ^ 'pgPermissionId'
     -> PermissionsGet
 permissionsGet pPgPermissionId_ =
-    PermissionsGet
+    PermissionsGet'
     { _pgLanguage = Nothing
     , _pgPermissionId = pPgPermissionId_
     }
@@ -90,7 +90,9 @@ pgPermissionId
 
 instance GoogleRequest PermissionsGet where
         type Rs PermissionsGet = Permission
-        requestClient PermissionsGet{..}
+        type Scopes PermissionsGet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient PermissionsGet'{..}
           = go _pgPermissionId _pgLanguage (Just AltJSON)
               androidEnterpriseService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.Export
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type InstancesExportResource =
 -- as a MySQL dump file.
 --
 -- /See:/ 'instancesExport' smart constructor.
-data InstancesExport = InstancesExport
+data InstancesExport = InstancesExport'
     { _ieProject  :: !Text
     , _iePayload  :: !InstancesExportRequest
     , _ieInstance :: !Text
@@ -81,7 +81,7 @@ instancesExport
     -> Text -- ^ 'ieInstance'
     -> InstancesExport
 instancesExport pIeProject_ pIePayload_ pIeInstance_ =
-    InstancesExport
+    InstancesExport'
     { _ieProject = pIeProject_
     , _iePayload = pIePayload_
     , _ieInstance = pIeInstance_
@@ -104,7 +104,9 @@ ieInstance
 
 instance GoogleRequest InstancesExport where
         type Rs InstancesExport = Operation
-        requestClient InstancesExport{..}
+        type Scopes InstancesExport =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient InstancesExport'{..}
           = go _ieProject _ieInstance (Just AltJSON) _iePayload
               sQLAdminService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Invitations.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -80,7 +80,7 @@ type InvitationsCreateResource =
 -- specified user and course already exists.
 --
 -- /See:/ 'invitationsCreate' smart constructor.
-data InvitationsCreate = InvitationsCreate
+data InvitationsCreate = InvitationsCreate'
     { _icXgafv          :: !(Maybe Text)
     , _icUploadProtocol :: !(Maybe Text)
     , _icPp             :: !Bool
@@ -114,7 +114,7 @@ invitationsCreate
     :: Invitation -- ^ 'icPayload'
     -> InvitationsCreate
 invitationsCreate pIcPayload_ =
-    InvitationsCreate
+    InvitationsCreate'
     { _icXgafv = Nothing
     , _icUploadProtocol = Nothing
     , _icPp = True
@@ -168,7 +168,9 @@ icCallback
 
 instance GoogleRequest InvitationsCreate where
         type Rs InvitationsCreate = Invitation
-        requestClient InvitationsCreate{..}
+        type Scopes InvitationsCreate =
+             '["https://www.googleapis.com/auth/classroom.rosters"]
+        requestClient InvitationsCreate'{..}
           = go _icXgafv _icUploadProtocol (Just _icPp)
               _icAccessToken
               _icUploadType

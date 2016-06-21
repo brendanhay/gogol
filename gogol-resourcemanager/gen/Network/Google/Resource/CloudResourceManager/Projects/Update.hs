@@ -14,15 +14,15 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudResourceManager.Projects.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the attributes of the project identified by the specified
+-- Updates the attributes of the Project identified by the specified
 -- \`project_id\` (for example, \`my-project-123\`). The caller must have
--- modify permissions for this project.
+-- modify permissions for this Project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.update@.
 module Network.Google.Resource.CloudResourceManager.Projects.Update
@@ -52,7 +52,7 @@ import           Network.Google.ResourceManager.Types
 -- | A resource alias for @cloudresourcemanager.projects.update@ method which the
 -- 'ProjectsUpdate' request conforms to.
 type ProjectsUpdateResource =
-     "v1beta1" :>
+     "v1" :>
        "projects" :>
          Capture "projectId" Text :>
            QueryParam "$.xgafv" Text :>
@@ -65,12 +65,12 @@ type ProjectsUpdateResource =
                          QueryParam "alt" AltJSON :>
                            ReqBody '[JSON] Project :> Put '[JSON] Project
 
--- | Updates the attributes of the project identified by the specified
+-- | Updates the attributes of the Project identified by the specified
 -- \`project_id\` (for example, \`my-project-123\`). The caller must have
--- modify permissions for this project.
+-- modify permissions for this Project.
 --
 -- /See:/ 'projectsUpdate' smart constructor.
-data ProjectsUpdate = ProjectsUpdate
+data ProjectsUpdate = ProjectsUpdate'
     { _proXgafv          :: !(Maybe Text)
     , _proUploadProtocol :: !(Maybe Text)
     , _proPp             :: !Bool
@@ -108,7 +108,7 @@ projectsUpdate
     -> Text -- ^ 'proProjectId'
     -> ProjectsUpdate
 projectsUpdate pProPayload_ pProProjectId_ =
-    ProjectsUpdate
+    ProjectsUpdate'
     { _proXgafv = Nothing
     , _proUploadProtocol = Nothing
     , _proPp = True
@@ -169,7 +169,9 @@ proCallback
 
 instance GoogleRequest ProjectsUpdate where
         type Rs ProjectsUpdate = Project
-        requestClient ProjectsUpdate{..}
+        type Scopes ProjectsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsUpdate'{..}
           = go _proProjectId _proXgafv _proUploadProtocol
               (Just _proPp)
               _proAccessToken

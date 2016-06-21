@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Task.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type TaskGetResource =
 -- | Retrieves a specific task by its ID.
 --
 -- /See:/ 'taskGet' smart constructor.
-data TaskGet = TaskGet
+data TaskGet = TaskGet'
     { _tggTaskId  :: !Text
     , _tggTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ taskGet
     -> Text -- ^ 'tggTableId'
     -> TaskGet
 taskGet pTggTaskId_ pTggTableId_ =
-    TaskGet
+    TaskGet'
     { _tggTaskId = pTggTaskId_
     , _tggTableId = pTggTableId_
     }
@@ -88,7 +88,10 @@ tggTableId
 
 instance GoogleRequest TaskGet where
         type Rs TaskGet = Task
-        requestClient TaskGet{..}
+        type Scopes TaskGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient TaskGet'{..}
           = go _tggTableId _tggTaskId (Just AltJSON)
               fusionTablesService
           where go

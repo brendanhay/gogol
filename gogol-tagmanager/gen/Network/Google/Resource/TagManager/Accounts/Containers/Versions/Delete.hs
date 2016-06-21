@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsContainersVersionsDeleteResource =
 -- | Deletes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsDelete' smart constructor.
-data AccountsContainersVersionsDelete = AccountsContainersVersionsDelete
+data AccountsContainersVersionsDelete = AccountsContainersVersionsDelete'
     { _acvdcContainerId        :: !Text
     , _acvdcContainerVersionId :: !Text
     , _acvdcAccountId          :: !Text
@@ -78,7 +78,7 @@ accountsContainersVersionsDelete
     -> Text -- ^ 'acvdcAccountId'
     -> AccountsContainersVersionsDelete
 accountsContainersVersionsDelete pAcvdcContainerId_ pAcvdcContainerVersionId_ pAcvdcAccountId_ =
-    AccountsContainersVersionsDelete
+    AccountsContainersVersionsDelete'
     { _acvdcContainerId = pAcvdcContainerId_
     , _acvdcContainerVersionId = pAcvdcContainerVersionId_
     , _acvdcAccountId = pAcvdcAccountId_
@@ -105,7 +105,9 @@ acvdcAccountId
 instance GoogleRequest
          AccountsContainersVersionsDelete where
         type Rs AccountsContainersVersionsDelete = ()
-        requestClient AccountsContainersVersionsDelete{..}
+        type Scopes AccountsContainersVersionsDelete =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
+        requestClient AccountsContainersVersionsDelete'{..}
           = go _acvdcAccountId _acvdcContainerId
               _acvdcContainerVersionId
               (Just AltJSON)

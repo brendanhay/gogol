@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reports.UserUsageReport.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type UserUsageReportGetResource =
 -- a set of users.
 --
 -- /See:/ 'userUsageReportGet' smart constructor.
-data UserUsageReportGet = UserUsageReportGet
+data UserUsageReportGet = UserUsageReportGet'
     { _uurgFilters    :: !(Maybe Text)
     , _uurgCustomerId :: !(Maybe Text)
     , _uurgDate       :: !Text
@@ -101,7 +101,7 @@ userUsageReportGet
     -> Text -- ^ 'uurgUserKey'
     -> UserUsageReportGet
 userUsageReportGet pUurgDate_ pUurgUserKey_ =
-    UserUsageReportGet
+    UserUsageReportGet'
     { _uurgFilters = Nothing
     , _uurgCustomerId = Nothing
     , _uurgDate = pUurgDate_
@@ -155,7 +155,9 @@ uurgMaxResults
 
 instance GoogleRequest UserUsageReportGet where
         type Rs UserUsageReportGet = UsageReports
-        requestClient UserUsageReportGet{..}
+        type Scopes UserUsageReportGet =
+             '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
+        requestClient UserUsageReportGet'{..}
           = go _uurgUserKey _uurgDate _uurgFilters
               _uurgCustomerId
               _uurgParameters

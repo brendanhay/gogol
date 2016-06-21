@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type MyLibraryBookshelvesVolumesListResource =
 -- | Gets volume information for volumes on a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesVolumesList' smart constructor.
-data MyLibraryBookshelvesVolumesList = MyLibraryBookshelvesVolumesList
+data MyLibraryBookshelvesVolumesList = MyLibraryBookshelvesVolumesList'
     { _mlbvlCountry       :: !(Maybe Text)
     , _mlbvlQ             :: !(Maybe Text)
     , _mlbvlShelf         :: !Text
@@ -103,7 +103,7 @@ myLibraryBookshelvesVolumesList
     :: Text -- ^ 'mlbvlShelf'
     -> MyLibraryBookshelvesVolumesList
 myLibraryBookshelvesVolumesList pMlbvlShelf_ =
-    MyLibraryBookshelvesVolumesList
+    MyLibraryBookshelvesVolumesList'
     { _mlbvlCountry = Nothing
     , _mlbvlQ = Nothing
     , _mlbvlShelf = pMlbvlShelf_
@@ -162,7 +162,9 @@ mlbvlShowPreOrders
 instance GoogleRequest
          MyLibraryBookshelvesVolumesList where
         type Rs MyLibraryBookshelvesVolumesList = Volumes
-        requestClient MyLibraryBookshelvesVolumesList{..}
+        type Scopes MyLibraryBookshelvesVolumesList =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryBookshelvesVolumesList'{..}
           = go _mlbvlShelf _mlbvlCountry _mlbvlQ _mlbvlSource
               _mlbvlProjection
               _mlbvlStartIndex

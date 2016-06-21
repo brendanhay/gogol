@@ -7,20 +7,31 @@
 
 -- |
 -- Module      : Network.Google.PlusDomains
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google+ API enables developers to build on top of the Google+
--- platform.
+-- Builds on top of the Google+ platform for Google Apps Domains.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference>
 module Network.Google.PlusDomains
     (
     -- * Service Configuration
       plusDomainsService
+
+    -- * OAuth Scopes
+    , userInfoProFileScope
+    , plusLoginScope
+    , plusProFilesReadScope
+    , userInfoEmailScope
+    , plusStreamWriteScope
+    , plusStreamReadScope
+    , plusMeScope
+    , plusCirclesReadScope
+    , plusMediaUploadScope
+    , plusCirclesWriteScope
 
     -- * API Declaration
     , PlusDomainsAPI

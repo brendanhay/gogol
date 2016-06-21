@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.VPNTunnels.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the list of VpnTunnel resources contained in the specified
+-- Retrieves a list of VpnTunnel resources contained in the specified
 -- project and region.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.vpnTunnels.list@.
@@ -59,11 +59,11 @@ type VPNTunnelsListResource =
                        QueryParam "maxResults" (Textual Word32) :>
                          QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnelList
 
--- | Retrieves the list of VpnTunnel resources contained in the specified
+-- | Retrieves a list of VpnTunnel resources contained in the specified
 -- project and region.
 --
 -- /See:/ 'vpnTunnelsList' smart constructor.
-data VPNTunnelsList = VPNTunnelsList
+data VPNTunnelsList = VPNTunnelsList'
     { _vtlProject    :: !Text
     , _vtlFilter     :: !(Maybe Text)
     , _vtlRegion     :: !Text
@@ -89,7 +89,7 @@ vpnTunnelsList
     -> Text -- ^ 'vtlRegion'
     -> VPNTunnelsList
 vpnTunnelsList pVtlProject_ pVtlRegion_ =
-    VPNTunnelsList
+    VPNTunnelsList'
     { _vtlProject = pVtlProject_
     , _vtlFilter = Nothing
     , _vtlRegion = pVtlRegion_
@@ -103,33 +103,45 @@ vtlProject
   = lens _vtlProject (\ s a -> s{_vtlProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
--- filter={expression}. Your {expression} must be in the format: FIELD_NAME
--- COMPARISON_STRING LITERAL_STRING. The FIELD_NAME is the name of the
+-- filter={expression}. Your {expression} must be in the format: field_name
+-- comparison_string literal_string. The field_name is the name of the
 -- field you want to compare. Only atomic field types are supported
--- (string, number, boolean). The COMPARISON_STRING must be either eq
--- (equals) or ne (not equals). The LITERAL_STRING is the string value to
--- filter to. The literal value must be valid for the type of field
--- (string, number, boolean). For string fields, the literal value is
--- interpreted as a regular expression using RE2 syntax. The literal value
--- must match the entire field. For example, filter=name ne
--- example-instance.
+-- (string, number, boolean). The comparison_string must be either eq
+-- (equals) or ne (not equals). The literal_string is the string value to
+-- filter to. The literal value must be valid for the type of field you are
+-- filtering by (string, number, boolean). For string fields, the literal
+-- value is interpreted as a regular expression using RE2 syntax. The
+-- literal value must match the entire field. For example, to filter for
+-- instances that do not have a name of example-instance, you would use
+-- filter=name ne example-instance. Compute Engine Beta API Only: When
+-- filtering in the Beta API, you can also filter on nested fields. For
+-- example, you could filter on instances that have set the
+-- scheduling.automaticRestart field to true. Use filtering on nested
+-- fields to take advantage of labels to organize and search for results
+-- based on label values. The Beta API also supports filtering on multiple
+-- expressions by providing each separate expression within parentheses.
+-- For example, (scheduling.automaticRestart eq true) (zone eq
+-- us-central1-f). Multiple expressions are treated as AND expressions,
+-- meaning that resources must match all expressions to pass the filters.
 vtlFilter :: Lens' VPNTunnelsList (Maybe Text)
 vtlFilter
   = lens _vtlFilter (\ s a -> s{_vtlFilter = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 vtlRegion :: Lens' VPNTunnelsList Text
 vtlRegion
   = lens _vtlRegion (\ s a -> s{_vtlRegion = a})
 
--- | Specifies a page token to use. Use this parameter if you want to list
--- the next page of results. Set pageToken to the nextPageToken returned by
--- a previous list request.
+-- | Specifies a page token to use. Set pageToken to the nextPageToken
+-- returned by a previous list request to get the next page of results.
 vtlPageToken :: Lens' VPNTunnelsList (Maybe Text)
 vtlPageToken
   = lens _vtlPageToken (\ s a -> s{_vtlPageToken = a})
 
--- | Maximum count of results to be returned.
+-- | The maximum number of results per page that should be returned. If the
+-- number of available results is larger than maxResults, Compute Engine
+-- returns a nextPageToken that can be used to get the next page of results
+-- in subsequent list requests.
 vtlMaxResults :: Lens' VPNTunnelsList Word32
 vtlMaxResults
   = lens _vtlMaxResults
@@ -138,7 +150,11 @@ vtlMaxResults
 
 instance GoogleRequest VPNTunnelsList where
         type Rs VPNTunnelsList = VPNTunnelList
-        requestClient VPNTunnelsList{..}
+        type Scopes VPNTunnelsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient VPNTunnelsList'{..}
           = go _vtlProject _vtlRegion _vtlFilter _vtlPageToken
               (Just _vtlMaxResults)
               (Just AltJSON)

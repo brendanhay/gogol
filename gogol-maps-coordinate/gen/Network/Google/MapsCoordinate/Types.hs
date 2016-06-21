@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.MapsCoordinate.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -20,7 +21,7 @@ module Network.Google.MapsCoordinate.Types
 
     -- * OAuth Scopes
     , coordinateScope
-    , coordinateReadonlyScope
+    , coordinateReadOnlyScope
 
     -- * LocationListResponse
     , LocationListResponse
@@ -172,15 +173,15 @@ import           Network.Google.MapsCoordinate.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Google Maps Coordinate API. This contains the host and root path used as a starting point for constructing service requests.
-mapsCoordinateService :: Service
+mapsCoordinateService :: ServiceConfig
 mapsCoordinateService
   = defaultService (ServiceId "coordinate:v1")
       "www.googleapis.com"
 
 -- | View and manage your Google Maps Coordinate jobs
-coordinateScope :: OAuthScope
-coordinateScope = "https://www.googleapis.com/auth/coordinate";
+coordinateScope :: Proxy '["https://www.googleapis.com/auth/coordinate"]
+coordinateScope = Proxy;
 
 -- | View your Google Coordinate jobs
-coordinateReadonlyScope :: OAuthScope
-coordinateReadonlyScope = "https://www.googleapis.com/auth/coordinate.readonly";
+coordinateReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/coordinate.readonly"]
+coordinateReadOnlyScope = Proxy;

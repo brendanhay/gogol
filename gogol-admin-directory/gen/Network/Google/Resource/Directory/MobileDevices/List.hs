@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.MobileDevices.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -68,7 +68,7 @@ type MobileDevicesListResource =
 -- | Retrieve all Mobile Devices of a customer (paginated)
 --
 -- /See:/ 'mobileDevicesList' smart constructor.
-data MobileDevicesList = MobileDevicesList
+data MobileDevicesList = MobileDevicesList'
     { _mdlOrderBy    :: !(Maybe MobileDevicesListOrderBy)
     , _mdlCustomerId :: !Text
     , _mdlSortOrder  :: !(Maybe MobileDevicesListSortOrder)
@@ -99,7 +99,7 @@ mobileDevicesList
     :: Text -- ^ 'mdlCustomerId'
     -> MobileDevicesList
 mobileDevicesList pMdlCustomerId_ =
-    MobileDevicesList
+    MobileDevicesList'
     { _mdlOrderBy = Nothing
     , _mdlCustomerId = pMdlCustomerId_
     , _mdlSortOrder = Nothing
@@ -151,7 +151,11 @@ mdlMaxResults
 
 instance GoogleRequest MobileDevicesList where
         type Rs MobileDevicesList = MobileDevices
-        requestClient MobileDevicesList{..}
+        type Scopes MobileDevicesList =
+             '["https://www.googleapis.com/auth/admin.directory.device.mobile",
+               "https://www.googleapis.com/auth/admin.directory.device.mobile.action",
+               "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"]
+        requestClient MobileDevicesList'{..}
           = go _mdlCustomerId _mdlOrderBy _mdlSortOrder
               _mdlQuery
               _mdlProjection

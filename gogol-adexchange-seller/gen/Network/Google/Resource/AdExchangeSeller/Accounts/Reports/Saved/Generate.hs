@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type AccountsReportsSavedGenerateResource =
 -- query parameters.
 --
 -- /See:/ 'accountsReportsSavedGenerate' smart constructor.
-data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate
+data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate'
     { _arsgLocale        :: !(Maybe Text)
     , _arsgSavedReportId :: !Text
     , _arsgAccountId     :: !Text
@@ -88,7 +88,7 @@ accountsReportsSavedGenerate
     -> Text -- ^ 'arsgAccountId'
     -> AccountsReportsSavedGenerate
 accountsReportsSavedGenerate pArsgSavedReportId_ pArsgAccountId_ =
-    AccountsReportsSavedGenerate
+    AccountsReportsSavedGenerate'
     { _arsgLocale = Nothing
     , _arsgSavedReportId = pArsgSavedReportId_
     , _arsgAccountId = pArsgAccountId_
@@ -131,7 +131,10 @@ arsgMaxResults
 instance GoogleRequest AccountsReportsSavedGenerate
          where
         type Rs AccountsReportsSavedGenerate = Report
-        requestClient AccountsReportsSavedGenerate{..}
+        type Scopes AccountsReportsSavedGenerate =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
+        requestClient AccountsReportsSavedGenerate'{..}
           = go _arsgAccountId _arsgSavedReportId _arsgLocale
               _arsgStartIndex
               _arsgMaxResults

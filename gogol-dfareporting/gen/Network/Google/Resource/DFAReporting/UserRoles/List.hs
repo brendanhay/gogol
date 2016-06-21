@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.UserRoles.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- 'UserRolesList' request conforms to.
 type UserRolesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -69,7 +69,7 @@ type UserRolesListResource =
 -- | Retrieves a list of user roles, possibly filtered.
 --
 -- /See:/ 'userRolesList' smart constructor.
-data UserRolesList = UserRolesList
+data UserRolesList = UserRolesList'
     { _urlSearchString        :: !(Maybe Text)
     , _urlIds                 :: !(Maybe [Textual Int64])
     , _urlProFileId           :: !(Textual Int64)
@@ -106,7 +106,7 @@ userRolesList
     :: Int64 -- ^ 'urlProFileId'
     -> UserRolesList
 userRolesList pUrlProFileId_ =
-    UserRolesList
+    UserRolesList'
     { _urlSearchString = Nothing
     , _urlIds = Nothing
     , _urlProFileId = _Coerce # pUrlProFileId_
@@ -180,7 +180,9 @@ urlMaxResults
 
 instance GoogleRequest UserRolesList where
         type Rs UserRolesList = UserRolesListResponse
-        requestClient UserRolesList{..}
+        type Scopes UserRolesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient UserRolesList'{..}
           = go _urlProFileId _urlSearchString
               (_urlIds ^. _Default)
               _urlSortOrder

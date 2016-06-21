@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.DirectorySites.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'DirectorySitesGet' request conforms to.
 type DirectorySitesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>
@@ -54,7 +54,7 @@ type DirectorySitesGetResource =
 -- | Gets one directory site by ID.
 --
 -- /See:/ 'directorySitesGet' smart constructor.
-data DirectorySitesGet = DirectorySitesGet
+data DirectorySitesGet = DirectorySitesGet'
     { _dsgProFileId :: !(Textual Int64)
     , _dsgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ directorySitesGet
     -> Int64 -- ^ 'dsgId'
     -> DirectorySitesGet
 directorySitesGet pDsgProFileId_ pDsgId_ =
-    DirectorySitesGet
+    DirectorySitesGet'
     { _dsgProFileId = _Coerce # pDsgProFileId_
     , _dsgId = _Coerce # pDsgId_
     }
@@ -89,7 +89,9 @@ dsgId
 
 instance GoogleRequest DirectorySitesGet where
         type Rs DirectorySitesGet = DirectorySite
-        requestClient DirectorySitesGet{..}
+        type Scopes DirectorySitesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient DirectorySitesGet'{..}
           = go _dsgProFileId _dsgId (Just AltJSON)
               dFAReportingService
           where go

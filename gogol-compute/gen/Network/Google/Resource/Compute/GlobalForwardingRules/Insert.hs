@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.GlobalForwardingRules.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type GlobalForwardingRulesInsertResource =
 -- using the data included in the request.
 --
 -- /See:/ 'globalForwardingRulesInsert' smart constructor.
-data GlobalForwardingRulesInsert = GlobalForwardingRulesInsert
+data GlobalForwardingRulesInsert = GlobalForwardingRulesInsert'
     { _gfriProject :: !Text
     , _gfriPayload :: !ForwardingRule
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,12 +75,12 @@ globalForwardingRulesInsert
     -> ForwardingRule -- ^ 'gfriPayload'
     -> GlobalForwardingRulesInsert
 globalForwardingRulesInsert pGfriProject_ pGfriPayload_ =
-    GlobalForwardingRulesInsert
+    GlobalForwardingRulesInsert'
     { _gfriProject = pGfriProject_
     , _gfriPayload = pGfriPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 gfriProject :: Lens' GlobalForwardingRulesInsert Text
 gfriProject
   = lens _gfriProject (\ s a -> s{_gfriProject = a})
@@ -93,7 +93,10 @@ gfriPayload
 instance GoogleRequest GlobalForwardingRulesInsert
          where
         type Rs GlobalForwardingRulesInsert = Operation
-        requestClient GlobalForwardingRulesInsert{..}
+        type Scopes GlobalForwardingRulesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient GlobalForwardingRulesInsert'{..}
           = go _gfriProject (Just AltJSON) _gfriPayload
               computeService
           where go

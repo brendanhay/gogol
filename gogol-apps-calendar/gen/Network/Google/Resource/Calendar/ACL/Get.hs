@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.ACL.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ACLGetResource =
 -- | Returns an access control rule.
 --
 -- /See:/ 'aclGet' smart constructor.
-data ACLGet = ACLGet
+data ACLGet = ACLGet'
     { _agCalendarId :: !Text
     , _agRuleId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ aclGet
     -> Text -- ^ 'agRuleId'
     -> ACLGet
 aclGet pAgCalendarId_ pAgRuleId_ =
-    ACLGet
+    ACLGet'
     { _agCalendarId = pAgCalendarId_
     , _agRuleId = pAgRuleId_
     }
@@ -89,7 +89,10 @@ agRuleId = lens _agRuleId (\ s a -> s{_agRuleId = a})
 
 instance GoogleRequest ACLGet where
         type Rs ACLGet = ACLRule
-        requestClient ACLGet{..}
+        type Scopes ACLGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient ACLGet'{..}
           = go _agCalendarId _agRuleId (Just AltJSON)
               appsCalendarService
           where go

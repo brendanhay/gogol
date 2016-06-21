@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.CallSets.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new call set.
+-- Creates a new call set. For the definitions of call sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.callsets.create@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.create@.
 module Network.Google.Resource.Genomics.CallSets.Create
     (
     -- * REST Resource
@@ -61,10 +63,12 @@ type CallSetsCreateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] CallSet :> Post '[JSON] CallSet
 
--- | Creates a new call set.
+-- | Creates a new call set. For the definitions of call sets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSetsCreate' smart constructor.
-data CallSetsCreate = CallSetsCreate
+data CallSetsCreate = CallSetsCreate'
     { _cscXgafv          :: !(Maybe Text)
     , _cscUploadProtocol :: !(Maybe Text)
     , _cscPp             :: !Bool
@@ -98,7 +102,7 @@ callSetsCreate
     :: CallSet -- ^ 'cscPayload'
     -> CallSetsCreate
 callSetsCreate pCscPayload_ =
-    CallSetsCreate
+    CallSetsCreate'
     { _cscXgafv = Nothing
     , _cscUploadProtocol = Nothing
     , _cscPp = True
@@ -153,7 +157,10 @@ cscCallback
 
 instance GoogleRequest CallSetsCreate where
         type Rs CallSetsCreate = CallSet
-        requestClient CallSetsCreate{..}
+        type Scopes CallSetsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient CallSetsCreate'{..}
           = go _cscXgafv _cscUploadProtocol (Just _cscPp)
               _cscAccessToken
               _cscUploadType

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type UsersUpdateResource =
 -- | update user
 --
 -- /See:/ 'usersUpdate' smart constructor.
-data UsersUpdate = UsersUpdate
+data UsersUpdate = UsersUpdate'
     { _uPayload :: !User
     , _uUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersUpdate
     -> Text -- ^ 'uUserKey'
     -> UsersUpdate
 usersUpdate pUPayload_ pUUserKey_ =
-    UsersUpdate
+    UsersUpdate'
     { _uPayload = pUPayload_
     , _uUserKey = pUUserKey_
     }
@@ -87,7 +87,9 @@ uUserKey = lens _uUserKey (\ s a -> s{_uUserKey = a})
 
 instance GoogleRequest UsersUpdate where
         type Rs UsersUpdate = User
-        requestClient UsersUpdate{..}
+        type Scopes UsersUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
+        requestClient UsersUpdate'{..}
           = go _uUserKey (Just AltJSON) _uPayload
               directoryService
           where go

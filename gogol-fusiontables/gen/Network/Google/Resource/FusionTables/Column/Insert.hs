@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Column.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ColumnInsertResource =
 -- | Adds a new column to the table.
 --
 -- /See:/ 'columnInsert' smart constructor.
-data ColumnInsert = ColumnInsert
+data ColumnInsert = ColumnInsert'
     { _ciPayload :: !Column
     , _ciTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ columnInsert
     -> Text -- ^ 'ciTableId'
     -> ColumnInsert
 columnInsert pCiPayload_ pCiTableId_ =
-    ColumnInsert
+    ColumnInsert'
     { _ciPayload = pCiPayload_
     , _ciTableId = pCiTableId_
     }
@@ -88,7 +88,9 @@ ciTableId
 
 instance GoogleRequest ColumnInsert where
         type Rs ColumnInsert = Column
-        requestClient ColumnInsert{..}
+        type Scopes ColumnInsert =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient ColumnInsert'{..}
           = go _ciTableId (Just AltJSON) _ciPayload
               fusionTablesService
           where go

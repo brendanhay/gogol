@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.Custombatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type OrdersCustombatchResource =
 -- | Retrieves or modifies multiple orders in a single request.
 --
 -- /See:/ 'ordersCustombatch' smart constructor.
-newtype OrdersCustombatch = OrdersCustombatch
+newtype OrdersCustombatch = OrdersCustombatch'
     { _ocPayload :: OrdersCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ ordersCustombatch
     :: OrdersCustomBatchRequest -- ^ 'ocPayload'
     -> OrdersCustombatch
 ordersCustombatch pOcPayload_ =
-    OrdersCustombatch
+    OrdersCustombatch'
     { _ocPayload = pOcPayload_
     }
 
@@ -77,7 +77,9 @@ ocPayload
 
 instance GoogleRequest OrdersCustombatch where
         type Rs OrdersCustombatch = OrdersCustomBatchResponse
-        requestClient OrdersCustombatch{..}
+        type Scopes OrdersCustombatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersCustombatch'{..}
           = go (Just AltJSON) _ocPayload shoppingContentService
           where go
                   = buildClient

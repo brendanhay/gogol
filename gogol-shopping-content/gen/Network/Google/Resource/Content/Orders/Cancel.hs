@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.Cancel
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type OrdersCancelResource =
 -- | Cancels all line items in an order.
 --
 -- /See:/ 'ordersCancel' smart constructor.
-data OrdersCancel = OrdersCancel
+data OrdersCancel = OrdersCancel'
     { _occMerchantId :: !(Textual Word64)
     , _occPayload    :: !OrdersCancelRequest
     , _occOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersCancel
     -> Text -- ^ 'occOrderId'
     -> OrdersCancel
 ordersCancel pOccMerchantId_ pOccPayload_ pOccOrderId_ =
-    OrdersCancel
+    OrdersCancel'
     { _occMerchantId = _Coerce # pOccMerchantId_
     , _occPayload = pOccPayload_
     , _occOrderId = pOccOrderId_
@@ -103,7 +103,9 @@ occOrderId
 
 instance GoogleRequest OrdersCancel where
         type Rs OrdersCancel = OrdersCancelResponse
-        requestClient OrdersCancel{..}
+        type Scopes OrdersCancel =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersCancel'{..}
           = go _occMerchantId _occOrderId (Just AltJSON)
               _occPayload
               shoppingContentService

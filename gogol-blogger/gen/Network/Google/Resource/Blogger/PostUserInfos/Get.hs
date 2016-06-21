@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.PostUserInfos.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type PostUserInfosGetResource =
 -- rights, specific to the user.
 --
 -- /See:/ 'postUserInfosGet' smart constructor.
-data PostUserInfosGet = PostUserInfosGet
+data PostUserInfosGet = PostUserInfosGet'
     { _puigBlogId      :: !Text
     , _puigMaxComments :: !(Maybe (Textual Word32))
     , _puigUserId      :: !Text
@@ -87,7 +87,7 @@ postUserInfosGet
     -> Text -- ^ 'puigPostId'
     -> PostUserInfosGet
 postUserInfosGet pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
-    PostUserInfosGet
+    PostUserInfosGet'
     { _puigBlogId = pPuigBlogId_
     , _puigMaxComments = Nothing
     , _puigUserId = pPuigUserId_
@@ -119,7 +119,10 @@ puigPostId
 
 instance GoogleRequest PostUserInfosGet where
         type Rs PostUserInfosGet = PostUserInfo
-        requestClient PostUserInfosGet{..}
+        type Scopes PostUserInfosGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient PostUserInfosGet'{..}
           = go _puigUserId _puigBlogId _puigPostId
               _puigMaxComments
               (Just AltJSON)

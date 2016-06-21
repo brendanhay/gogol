@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.OrgUnits.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type OrgUnitsUpdateResource =
 -- | Update Organization Unit
 --
 -- /See:/ 'orgUnitsUpdate' smart constructor.
-data OrgUnitsUpdate = OrgUnitsUpdate
+data OrgUnitsUpdate = OrgUnitsUpdate'
     { _ouuPayload     :: !OrgUnit
     , _ouuOrgUnitPath :: ![Text]
     , _ouuCustomerId  :: !Text
@@ -78,7 +78,7 @@ orgUnitsUpdate
     -> Text -- ^ 'ouuCustomerId'
     -> OrgUnitsUpdate
 orgUnitsUpdate pOuuPayload_ pOuuOrgUnitPath_ pOuuCustomerId_ =
-    OrgUnitsUpdate
+    OrgUnitsUpdate'
     { _ouuPayload = pOuuPayload_
     , _ouuOrgUnitPath = _Coerce # pOuuOrgUnitPath_
     , _ouuCustomerId = pOuuCustomerId_
@@ -104,7 +104,9 @@ ouuCustomerId
 
 instance GoogleRequest OrgUnitsUpdate where
         type Rs OrgUnitsUpdate = OrgUnit
-        requestClient OrgUnitsUpdate{..}
+        type Scopes OrgUnitsUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.orgunit"]
+        requestClient OrgUnitsUpdate'{..}
           = go _ouuCustomerId _ouuOrgUnitPath (Just AltJSON)
               _ouuPayload
               directoryService

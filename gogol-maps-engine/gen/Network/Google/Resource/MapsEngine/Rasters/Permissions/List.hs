@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Rasters.Permissions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type RastersPermissionsListResource =
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ 'rastersPermissionsList' smart constructor.
-newtype RastersPermissionsList = RastersPermissionsList
+newtype RastersPermissionsList = RastersPermissionsList'
     { _rplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ rastersPermissionsList
     :: Text -- ^ 'rplId'
     -> RastersPermissionsList
 rastersPermissionsList pRplId_ =
-    RastersPermissionsList
+    RastersPermissionsList'
     { _rplId = pRplId_
     }
 
@@ -77,7 +77,10 @@ rplId = lens _rplId (\ s a -> s{_rplId = a})
 instance GoogleRequest RastersPermissionsList where
         type Rs RastersPermissionsList =
              PermissionsListResponse
-        requestClient RastersPermissionsList{..}
+        type Scopes RastersPermissionsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient RastersPermissionsList'{..}
           = go _rplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetHTTPProxies.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type TargetHTTPProxiesDeleteResource =
 -- | Deletes the specified TargetHttpProxy resource.
 --
 -- /See:/ 'targetHTTPProxiesDelete' smart constructor.
-data TargetHTTPProxiesDelete = TargetHTTPProxiesDelete
+data TargetHTTPProxiesDelete = TargetHTTPProxiesDelete'
     { _thttppdProject         :: !Text
     , _thttppdTargetHTTPProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,12 +72,12 @@ targetHTTPProxiesDelete
     -> Text -- ^ 'thttppdTargetHTTPProxy'
     -> TargetHTTPProxiesDelete
 targetHTTPProxiesDelete pThttppdProject_ pThttppdTargetHTTPProxy_ =
-    TargetHTTPProxiesDelete
+    TargetHTTPProxiesDelete'
     { _thttppdProject = pThttppdProject_
     , _thttppdTargetHTTPProxy = pThttppdTargetHTTPProxy_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thttppdProject :: Lens' TargetHTTPProxiesDelete Text
 thttppdProject
   = lens _thttppdProject
@@ -91,7 +91,10 @@ thttppdTargetHTTPProxy
 
 instance GoogleRequest TargetHTTPProxiesDelete where
         type Rs TargetHTTPProxiesDelete = Operation
-        requestClient TargetHTTPProxiesDelete{..}
+        type Scopes TargetHTTPProxiesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient TargetHTTPProxiesDelete'{..}
           = go _thttppdProject _thttppdTargetHTTPProxy
               (Just AltJSON)
               computeService

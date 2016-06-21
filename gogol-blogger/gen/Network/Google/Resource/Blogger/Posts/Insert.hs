@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Posts.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type PostsInsertResource =
 -- | Add a post.
 --
 -- /See:/ 'postsInsert' smart constructor.
-data PostsInsert = PostsInsert
+data PostsInsert = PostsInsert'
     { _posFetchBody   :: !Bool
     , _posIsDraft     :: !(Maybe Bool)
     , _posFetchImages :: !(Maybe Bool)
@@ -86,7 +86,7 @@ postsInsert
     -> Post' -- ^ 'posPayload'
     -> PostsInsert
 postsInsert pPosBlogId_ pPosPayload_ =
-    PostsInsert
+    PostsInsert'
     { _posFetchBody = True
     , _posIsDraft = Nothing
     , _posFetchImages = Nothing
@@ -124,7 +124,9 @@ posPayload
 
 instance GoogleRequest PostsInsert where
         type Rs PostsInsert = Post'
-        requestClient PostsInsert{..}
+        type Scopes PostsInsert =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PostsInsert'{..}
           = go _posBlogId (Just _posFetchBody) _posIsDraft
               _posFetchImages
               (Just AltJSON)

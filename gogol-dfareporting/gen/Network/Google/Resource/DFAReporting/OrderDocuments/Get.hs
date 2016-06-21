@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.OrderDocuments.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'OrderDocumentsGet' request conforms to.
 type OrderDocumentsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -57,7 +57,7 @@ type OrderDocumentsGetResource =
 -- | Gets one order document by ID.
 --
 -- /See:/ 'orderDocumentsGet' smart constructor.
-data OrderDocumentsGet = OrderDocumentsGet
+data OrderDocumentsGet = OrderDocumentsGet'
     { _odgProFileId :: !(Textual Int64)
     , _odgId        :: !(Textual Int64)
     , _odgProjectId :: !(Textual Int64)
@@ -78,7 +78,7 @@ orderDocumentsGet
     -> Int64 -- ^ 'odgProjectId'
     -> OrderDocumentsGet
 orderDocumentsGet pOdgProFileId_ pOdgId_ pOdgProjectId_ =
-    OrderDocumentsGet
+    OrderDocumentsGet'
     { _odgProFileId = _Coerce # pOdgProFileId_
     , _odgId = _Coerce # pOdgId_
     , _odgProjectId = _Coerce # pOdgProjectId_
@@ -103,7 +103,9 @@ odgProjectId
 
 instance GoogleRequest OrderDocumentsGet where
         type Rs OrderDocumentsGet = OrderDocument
-        requestClient OrderDocumentsGet{..}
+        type Scopes OrderDocumentsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient OrderDocumentsGet'{..}
           = go _odgProFileId _odgProjectId _odgId
               (Just AltJSON)
               dFAReportingService

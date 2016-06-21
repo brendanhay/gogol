@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ConversionUpdateAvailabilityResource =
 -- DoubleClick Search.
 --
 -- /See:/ 'conversionUpdateAvailability' smart constructor.
-newtype ConversionUpdateAvailability = ConversionUpdateAvailability
+newtype ConversionUpdateAvailability = ConversionUpdateAvailability'
     { _cuaPayload :: UpdateAvailabilityRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ conversionUpdateAvailability
     :: UpdateAvailabilityRequest -- ^ 'cuaPayload'
     -> ConversionUpdateAvailability
 conversionUpdateAvailability pCuaPayload_ =
-    ConversionUpdateAvailability
+    ConversionUpdateAvailability'
     { _cuaPayload = pCuaPayload_
     }
 
@@ -81,7 +81,9 @@ instance GoogleRequest ConversionUpdateAvailability
          where
         type Rs ConversionUpdateAvailability =
              UpdateAvailabilityResponse
-        requestClient ConversionUpdateAvailability{..}
+        type Scopes ConversionUpdateAvailability =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
+        requestClient ConversionUpdateAvailability'{..}
           = go (Just AltJSON) _cuaPayload
               doubleClickSearchService
           where go

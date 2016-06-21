@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Drafts.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,14 +61,13 @@ type UsersDraftsUpdateResource =
                  "drafts" :>
                    Capture "id" Text :>
                      QueryParam "alt" AltJSON :>
-                       QueryParam "uploadType" AltMedia :>
-                         MultipartRelated '[JSON] Draft RequestBody :>
-                           Put '[JSON] Draft
+                       QueryParam "uploadType" Multipart :>
+                         MultipartRelated '[JSON] Draft :> Put '[JSON] Draft
 
 -- | Replaces a draft\'s content.
 --
 -- /See:/ 'usersDraftsUpdate' smart constructor.
-data UsersDraftsUpdate = UsersDraftsUpdate
+data UsersDraftsUpdate = UsersDraftsUpdate'
     { _uduPayload :: !Draft
     , _uduUserId  :: !Text
     , _uduId      :: !Text
@@ -86,10 +85,9 @@ data UsersDraftsUpdate = UsersDraftsUpdate
 usersDraftsUpdate
     :: Draft -- ^ 'uduPayload'
     -> Text -- ^ 'uduId'
-    -> Text
     -> UsersDraftsUpdate
-usersDraftsUpdate pUduPayload_ pUduUserId_ pUduId_ =
-    UsersDraftsUpdate
+usersDraftsUpdate pUduPayload_ pUduId_ =
+    UsersDraftsUpdate'
     { _uduPayload = pUduPayload_
     , _uduUserId = "me"
     , _uduId = pUduId_
@@ -112,7 +110,11 @@ uduId = lens _uduId (\ s a -> s{_uduId = a})
 
 instance GoogleRequest UsersDraftsUpdate where
         type Rs UsersDraftsUpdate = Draft
-        requestClient UsersDraftsUpdate{..}
+        type Scopes UsersDraftsUpdate =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersDraftsUpdate'{..}
           = go _uduUserId _uduId (Just AltJSON) _uduPayload
               gmailService
           where go :<|> _
@@ -123,9 +125,12 @@ instance GoogleRequest UsersDraftsUpdate where
 instance GoogleRequest
          (MediaUpload UsersDraftsUpdate) where
         type Rs (MediaUpload UsersDraftsUpdate) = Draft
+        type Scopes (MediaUpload UsersDraftsUpdate) =
+             Scopes UsersDraftsUpdate
         requestClient
-          (MediaUpload UsersDraftsUpdate{..} body)
-          = go _uduUserId _uduId (Just AltJSON) (Just AltMedia)
+          (MediaUpload UsersDraftsUpdate'{..} body)
+          = go _uduUserId _uduId (Just AltJSON)
+              (Just Multipart)
               _uduPayload
               body
               gmailService

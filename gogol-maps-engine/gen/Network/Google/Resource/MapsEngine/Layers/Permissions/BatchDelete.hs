@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.Permissions.BatchDelete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type LayersPermissionsBatchDeleteResource =
 -- | Remove permission entries from an already existing asset.
 --
 -- /See:/ 'layersPermissionsBatchDelete' smart constructor.
-data LayersPermissionsBatchDelete = LayersPermissionsBatchDelete
+data LayersPermissionsBatchDelete = LayersPermissionsBatchDelete'
     { _lpbdPayload :: !PermissionsBatchDeleteRequest
     , _lpbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ layersPermissionsBatchDelete
     -> Text -- ^ 'lpbdId'
     -> LayersPermissionsBatchDelete
 layersPermissionsBatchDelete pLpbdPayload_ pLpbdId_ =
-    LayersPermissionsBatchDelete
+    LayersPermissionsBatchDelete'
     { _lpbdPayload = pLpbdPayload_
     , _lpbdId = pLpbdId_
     }
@@ -91,7 +91,9 @@ instance GoogleRequest LayersPermissionsBatchDelete
          where
         type Rs LayersPermissionsBatchDelete =
              PermissionsBatchDeleteResponse
-        requestClient LayersPermissionsBatchDelete{..}
+        type Scopes LayersPermissionsBatchDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient LayersPermissionsBatchDelete'{..}
           = go _lpbdId (Just AltJSON) _lpbdPayload
               mapsEngineService
           where go

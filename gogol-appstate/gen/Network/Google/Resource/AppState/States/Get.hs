@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AppState.States.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type StatesGetResource =
 -- exist on the server, an HTTP 404 will be returned.
 --
 -- /See:/ 'statesGet' smart constructor.
-newtype StatesGet = StatesGet
+newtype StatesGet = StatesGet'
     { _sgStateKey :: Textual Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ statesGet
     :: Int32 -- ^ 'sgStateKey'
     -> StatesGet
 statesGet pSgStateKey_ =
-    StatesGet
+    StatesGet'
     { _sgStateKey = _Coerce # pSgStateKey_
     }
 
@@ -78,7 +78,9 @@ sgStateKey
 
 instance GoogleRequest StatesGet where
         type Rs StatesGet = GetResponse
-        requestClient StatesGet{..}
+        type Scopes StatesGet =
+             '["https://www.googleapis.com/auth/appstate"]
+        requestClient StatesGet'{..}
           = go _sgStateKey (Just AltJSON) appStateService
           where go
                   = buildClient (Proxy :: Proxy StatesGetResource)

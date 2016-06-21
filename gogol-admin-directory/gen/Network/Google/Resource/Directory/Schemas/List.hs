@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Schemas.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type SchemasListResource =
 -- | Retrieve all schemas for a customer
 --
 -- /See:/ 'schemasList' smart constructor.
-newtype SchemasList = SchemasList
+newtype SchemasList = SchemasList'
     { _slCustomerId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ schemasList
     :: Text -- ^ 'slCustomerId'
     -> SchemasList
 schemasList pSlCustomerId_ =
-    SchemasList
+    SchemasList'
     { _slCustomerId = pSlCustomerId_
     }
 
@@ -77,7 +77,10 @@ slCustomerId
 
 instance GoogleRequest SchemasList where
         type Rs SchemasList = Schemas
-        requestClient SchemasList{..}
+        type Scopes SchemasList =
+             '["https://www.googleapis.com/auth/admin.directory.userschema",
+               "https://www.googleapis.com/auth/admin.directory.userschema.readonly"]
+        requestClient SchemasList'{..}
           = go _slCustomerId (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy SchemasListResource)

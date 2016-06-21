@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.Clone
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a Cloud SQL instance as a clone of the source instance.
+-- Creates a Cloud SQL instance as a clone of the source instance. The API
+-- is not ready for Second Generation instances yet.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.clone@.
 module Network.Google.Resource.SQL.Instances.Clone
@@ -55,10 +56,11 @@ type InstancesCloneResource =
                      ReqBody '[JSON] InstancesCloneRequest :>
                        Post '[JSON] Operation
 
--- | Creates a Cloud SQL instance as a clone of the source instance.
+-- | Creates a Cloud SQL instance as a clone of the source instance. The API
+-- is not ready for Second Generation instances yet.
 --
 -- /See:/ 'instancesClone' smart constructor.
-data InstancesClone = InstancesClone
+data InstancesClone = InstancesClone'
     { _icProject  :: !Text
     , _icPayload  :: !InstancesCloneRequest
     , _icInstance :: !Text
@@ -79,7 +81,7 @@ instancesClone
     -> Text -- ^ 'icInstance'
     -> InstancesClone
 instancesClone pIcProject_ pIcPayload_ pIcInstance_ =
-    InstancesClone
+    InstancesClone'
     { _icProject = pIcProject_
     , _icPayload = pIcPayload_
     , _icInstance = pIcInstance_
@@ -103,7 +105,10 @@ icInstance
 
 instance GoogleRequest InstancesClone where
         type Rs InstancesClone = Operation
-        requestClient InstancesClone{..}
+        type Scopes InstancesClone =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient InstancesClone'{..}
           = go _icProject _icInstance (Just AltJSON) _icPayload
               sQLAdminService
           where go

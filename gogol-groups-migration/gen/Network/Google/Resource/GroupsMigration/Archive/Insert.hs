@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GroupsMigration.Archive.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,13 +57,12 @@ type ArchiveInsertResource =
                  "archive" :>
                    QueryParam "alt" AltJSON :>
                      QueryParam "uploadType" AltMedia :>
-                       ReqBody '[OctetStream] RequestBody :>
-                         Post '[JSON] Groups
+                       AltMedia :> Post '[JSON] Groups
 
 -- | Inserts a new mail into the archive of the Google group.
 --
 -- /See:/ 'archiveInsert' smart constructor.
-newtype ArchiveInsert = ArchiveInsert
+newtype ArchiveInsert = ArchiveInsert'
     { _aiGroupId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -76,7 +75,7 @@ archiveInsert
     :: Text -- ^ 'aiGroupId'
     -> ArchiveInsert
 archiveInsert pAiGroupId_ =
-    ArchiveInsert
+    ArchiveInsert'
     { _aiGroupId = pAiGroupId_
     }
 
@@ -87,7 +86,9 @@ aiGroupId
 
 instance GoogleRequest ArchiveInsert where
         type Rs ArchiveInsert = Groups
-        requestClient ArchiveInsert{..}
+        type Scopes ArchiveInsert =
+             '["https://www.googleapis.com/auth/apps.groups.migration"]
+        requestClient ArchiveInsert'{..}
           = go _aiGroupId (Just AltJSON) groupsMigrationService
           where go :<|> _
                   = buildClient (Proxy :: Proxy ArchiveInsertResource)
@@ -96,7 +97,9 @@ instance GoogleRequest ArchiveInsert where
 instance GoogleRequest (MediaUpload ArchiveInsert)
          where
         type Rs (MediaUpload ArchiveInsert) = Groups
-        requestClient (MediaUpload ArchiveInsert{..} body)
+        type Scopes (MediaUpload ArchiveInsert) =
+             Scopes ArchiveInsert
+        requestClient (MediaUpload ArchiveInsert'{..} body)
           = go _aiGroupId (Just AltJSON) (Just AltMedia) body
               groupsMigrationService
           where _ :<|> go

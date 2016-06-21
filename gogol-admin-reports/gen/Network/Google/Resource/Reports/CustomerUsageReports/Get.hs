@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reports.CustomerUsageReports.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type CustomerUsageReportsGetResource =
 -- a specific customer.
 --
 -- /See:/ 'customerUsageReportsGet' smart constructor.
-data CustomerUsageReportsGet = CustomerUsageReportsGet
+data CustomerUsageReportsGet = CustomerUsageReportsGet'
     { _curgCustomerId :: !(Maybe Text)
     , _curgDate       :: !Text
     , _curgParameters :: !(Maybe Text)
@@ -83,7 +83,7 @@ customerUsageReportsGet
     :: Text -- ^ 'curgDate'
     -> CustomerUsageReportsGet
 customerUsageReportsGet pCurgDate_ =
-    CustomerUsageReportsGet
+    CustomerUsageReportsGet'
     { _curgCustomerId = Nothing
     , _curgDate = pCurgDate_
     , _curgParameters = Nothing
@@ -116,7 +116,9 @@ curgPageToken
 
 instance GoogleRequest CustomerUsageReportsGet where
         type Rs CustomerUsageReportsGet = UsageReports
-        requestClient CustomerUsageReportsGet{..}
+        type Scopes CustomerUsageReportsGet =
+             '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
+        requestClient CustomerUsageReportsGet'{..}
           = go _curgDate _curgCustomerId _curgParameters
               _curgPageToken
               (Just AltJSON)

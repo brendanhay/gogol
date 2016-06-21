@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.ObjectAccessControls.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type ObjectAccessControlsPatchResource =
 -- semantics.
 --
 -- /See:/ 'objectAccessControlsPatch' smart constructor.
-data ObjectAccessControlsPatch = ObjectAccessControlsPatch
+data ObjectAccessControlsPatch = ObjectAccessControlsPatch'
     { _oacpBucket     :: !Text
     , _oacpPayload    :: !ObjectAccessControl
     , _oacpObject     :: !Text
@@ -92,7 +92,7 @@ objectAccessControlsPatch
     -> Text -- ^ 'oacpEntity'
     -> ObjectAccessControlsPatch
 objectAccessControlsPatch pOacpBucket_ pOacpPayload_ pOacpObject_ pOacpEntity_ =
-    ObjectAccessControlsPatch
+    ObjectAccessControlsPatch'
     { _oacpBucket = pOacpBucket_
     , _oacpPayload = pOacpPayload_
     , _oacpObject = pOacpObject_
@@ -135,7 +135,10 @@ instance GoogleRequest ObjectAccessControlsPatch
          where
         type Rs ObjectAccessControlsPatch =
              ObjectAccessControl
-        requestClient ObjectAccessControlsPatch{..}
+        type Scopes ObjectAccessControlsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient ObjectAccessControlsPatch'{..}
           = go _oacpBucket _oacpObject _oacpEntity
               _oacpGeneration
               (Just AltJSON)

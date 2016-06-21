@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Topics.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type ProjectsTopicsCreateResource =
 -- | Creates the given topic with the given name.
 --
 -- /See:/ 'projectsTopicsCreate' smart constructor.
-data ProjectsTopicsCreate = ProjectsTopicsCreate
+data ProjectsTopicsCreate = ProjectsTopicsCreate'
     { _ptcXgafv          :: !(Maybe Text)
     , _ptcUploadProtocol :: !(Maybe Text)
     , _ptcPp             :: !Bool
@@ -103,7 +103,7 @@ projectsTopicsCreate
     -> Text -- ^ 'ptcName'
     -> ProjectsTopicsCreate
 projectsTopicsCreate pPtcPayload_ pPtcName_ =
-    ProjectsTopicsCreate
+    ProjectsTopicsCreate'
     { _ptcXgafv = Nothing
     , _ptcUploadProtocol = Nothing
     , _ptcPp = True
@@ -169,7 +169,10 @@ ptcCallback
 
 instance GoogleRequest ProjectsTopicsCreate where
         type Rs ProjectsTopicsCreate = Topic
-        requestClient ProjectsTopicsCreate{..}
+        type Scopes ProjectsTopicsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsTopicsCreate'{..}
           = go _ptcName _ptcXgafv _ptcUploadProtocol
               (Just _ptcPp)
               _ptcAccessToken

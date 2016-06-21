@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.RasterCollections.Rasters.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type RasterCollectionsRastersListResource =
 -- | Return all rasters within a raster collection.
 --
 -- /See:/ 'rasterCollectionsRastersList' smart constructor.
-data RasterCollectionsRastersList = RasterCollectionsRastersList
+data RasterCollectionsRastersList = RasterCollectionsRastersList'
     { _rcrlCreatedAfter   :: !(Maybe DateTime')
     , _rcrlCreatorEmail   :: !(Maybe Text)
     , _rcrlRole           :: !(Maybe RasterCollectionsRastersListRole)
@@ -122,7 +122,7 @@ rasterCollectionsRastersList
     :: Text -- ^ 'rcrlId'
     -> RasterCollectionsRastersList
 rasterCollectionsRastersList pRcrlId_ =
-    RasterCollectionsRastersList
+    RasterCollectionsRastersList'
     { _rcrlCreatedAfter = Nothing
     , _rcrlCreatorEmail = Nothing
     , _rcrlRole = Nothing
@@ -221,7 +221,10 @@ instance GoogleRequest RasterCollectionsRastersList
          where
         type Rs RasterCollectionsRastersList =
              RasterCollectionsRastersListResponse
-        requestClient RasterCollectionsRastersList{..}
+        type Scopes RasterCollectionsRastersList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient RasterCollectionsRastersList'{..}
           = go _rcrlId _rcrlCreatedAfter _rcrlCreatorEmail
               _rcrlRole
               _rcrlBbox

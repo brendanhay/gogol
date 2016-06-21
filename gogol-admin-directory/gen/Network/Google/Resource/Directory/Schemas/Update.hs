@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Schemas.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type SchemasUpdateResource =
 -- | Update schema
 --
 -- /See:/ 'schemasUpdate' smart constructor.
-data SchemasUpdate = SchemasUpdate
+data SchemasUpdate = SchemasUpdate'
     { _suPayload    :: !Schema
     , _suCustomerId :: !Text
     , _suSchemaKey  :: !Text
@@ -78,7 +78,7 @@ schemasUpdate
     -> Text -- ^ 'suSchemaKey'
     -> SchemasUpdate
 schemasUpdate pSuPayload_ pSuCustomerId_ pSuSchemaKey_ =
-    SchemasUpdate
+    SchemasUpdate'
     { _suPayload = pSuPayload_
     , _suCustomerId = pSuCustomerId_
     , _suSchemaKey = pSuSchemaKey_
@@ -101,7 +101,9 @@ suSchemaKey
 
 instance GoogleRequest SchemasUpdate where
         type Rs SchemasUpdate = Schema
-        requestClient SchemasUpdate{..}
+        type Scopes SchemasUpdate =
+             '["https://www.googleapis.com/auth/admin.directory.userschema"]
+        requestClient SchemasUpdate'{..}
           = go _suCustomerId _suSchemaKey (Just AltJSON)
               _suPayload
               directoryService

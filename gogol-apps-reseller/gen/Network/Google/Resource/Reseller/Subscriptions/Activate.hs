@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Subscriptions.Activate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type SubscriptionsActivateResource =
 -- | Activates a subscription previously suspended by the reseller
 --
 -- /See:/ 'subscriptionsActivate' smart constructor.
-data SubscriptionsActivate = SubscriptionsActivate
+data SubscriptionsActivate = SubscriptionsActivate'
     { _saCustomerId     :: !Text
     , _saSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ subscriptionsActivate
     -> Text -- ^ 'saSubscriptionId'
     -> SubscriptionsActivate
 subscriptionsActivate pSaCustomerId_ pSaSubscriptionId_ =
-    SubscriptionsActivate
+    SubscriptionsActivate'
     { _saCustomerId = pSaCustomerId_
     , _saSubscriptionId = pSaSubscriptionId_
     }
@@ -91,7 +91,9 @@ saSubscriptionId
 
 instance GoogleRequest SubscriptionsActivate where
         type Rs SubscriptionsActivate = Subscription
-        requestClient SubscriptionsActivate{..}
+        type Scopes SubscriptionsActivate =
+             '["https://www.googleapis.com/auth/apps.order"]
+        requestClient SubscriptionsActivate'{..}
           = go _saCustomerId _saSubscriptionId (Just AltJSON)
               appsResellerService
           where go

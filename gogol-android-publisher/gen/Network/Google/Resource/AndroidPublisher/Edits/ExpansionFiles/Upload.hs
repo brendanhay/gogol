@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -75,13 +75,13 @@ type EditsExpansionFilesUploadResource =
                              :>
                              QueryParam "alt" AltJSON :>
                                QueryParam "uploadType" AltMedia :>
-                                 ReqBody '[OctetStream] RequestBody :>
+                                 AltMedia :>
                                    Post '[JSON] ExpansionFilesUploadResponse
 
 -- | Uploads and attaches a new Expansion File to the APK specified.
 --
 -- /See:/ 'editsExpansionFilesUpload' smart constructor.
-data EditsExpansionFilesUpload = EditsExpansionFilesUpload
+data EditsExpansionFilesUpload = EditsExpansionFilesUpload'
     { _ePackageName       :: !Text
     , _eAPKVersionCode    :: !(Textual Int32)
     , _eExpansionFileType :: !EditsExpansionFilesUploadExpansionFileType
@@ -106,7 +106,7 @@ editsExpansionFilesUpload
     -> Text -- ^ 'eEditId'
     -> EditsExpansionFilesUpload
 editsExpansionFilesUpload pEPackageName_ pEAPKVersionCode_ pEExpansionFileType_ pEEditId_ =
-    EditsExpansionFilesUpload
+    EditsExpansionFilesUpload'
     { _ePackageName = pEPackageName_
     , _eAPKVersionCode = _Coerce # pEAPKVersionCode_
     , _eExpansionFileType = pEExpansionFileType_
@@ -140,7 +140,9 @@ instance GoogleRequest EditsExpansionFilesUpload
          where
         type Rs EditsExpansionFilesUpload =
              ExpansionFilesUploadResponse
-        requestClient EditsExpansionFilesUpload{..}
+        type Scopes EditsExpansionFilesUpload =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsExpansionFilesUpload'{..}
           = go _ePackageName _eEditId _eAPKVersionCode
               _eExpansionFileType
               (Just AltJSON)
@@ -154,8 +156,10 @@ instance GoogleRequest
          (MediaUpload EditsExpansionFilesUpload) where
         type Rs (MediaUpload EditsExpansionFilesUpload) =
              ExpansionFilesUploadResponse
+        type Scopes (MediaUpload EditsExpansionFilesUpload) =
+             Scopes EditsExpansionFilesUpload
         requestClient
-          (MediaUpload EditsExpansionFilesUpload{..} body)
+          (MediaUpload EditsExpansionFilesUpload'{..} body)
           = go _ePackageName _eEditId _eAPKVersionCode
               _eExpansionFileType
               (Just AltJSON)

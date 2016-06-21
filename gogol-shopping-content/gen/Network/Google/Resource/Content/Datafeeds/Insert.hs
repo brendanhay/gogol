@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Datafeeds.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type DatafeedsInsertResource =
 -- | Registers a datafeed with your Merchant Center account.
 --
 -- /See:/ 'datafeedsInsert' smart constructor.
-data DatafeedsInsert = DatafeedsInsert
+data DatafeedsInsert = DatafeedsInsert'
     { _diMerchantId :: !(Textual Word64)
     , _diPayload    :: !Datafeed
     , _diDryRun     :: !(Maybe Bool)
@@ -75,7 +75,7 @@ datafeedsInsert
     -> Datafeed -- ^ 'diPayload'
     -> DatafeedsInsert
 datafeedsInsert pDiMerchantId_ pDiPayload_ =
-    DatafeedsInsert
+    DatafeedsInsert'
     { _diMerchantId = _Coerce # pDiMerchantId_
     , _diPayload = pDiPayload_
     , _diDryRun = Nothing
@@ -97,7 +97,9 @@ diDryRun = lens _diDryRun (\ s a -> s{_diDryRun = a})
 
 instance GoogleRequest DatafeedsInsert where
         type Rs DatafeedsInsert = Datafeed
-        requestClient DatafeedsInsert{..}
+        type Scopes DatafeedsInsert =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient DatafeedsInsert'{..}
           = go _diMerchantId _diDryRun (Just AltJSON)
               _diPayload
               shoppingContentService

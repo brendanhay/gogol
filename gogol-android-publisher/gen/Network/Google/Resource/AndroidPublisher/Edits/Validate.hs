@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Validate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type EditsValidateResource =
 -- are not applied to the live app.
 --
 -- /See:/ 'editsValidate' smart constructor.
-data EditsValidate = EditsValidate
+data EditsValidate = EditsValidate'
     { _evPackageName :: !Text
     , _evEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ editsValidate
     -> Text -- ^ 'evEditId'
     -> EditsValidate
 editsValidate pEvPackageName_ pEvEditId_ =
-    EditsValidate
+    EditsValidate'
     { _evPackageName = pEvPackageName_
     , _evEditId = pEvEditId_
     }
@@ -91,7 +91,9 @@ evEditId = lens _evEditId (\ s a -> s{_evEditId = a})
 
 instance GoogleRequest EditsValidate where
         type Rs EditsValidate = AppEdit
-        requestClient EditsValidate{..}
+        type Scopes EditsValidate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsValidate'{..}
           = go _evPackageName _evEditId (Just AltJSON)
               androidPublisherService
           where go

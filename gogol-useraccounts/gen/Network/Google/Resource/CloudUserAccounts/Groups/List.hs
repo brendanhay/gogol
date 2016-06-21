@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.Groups.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type GroupsListResource =
 -- | Retrieves the list of groups contained within the specified project.
 --
 -- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList
+data GroupsList = GroupsList'
     { _glOrderBy    :: !(Maybe Text)
     , _glProject    :: !Text
     , _glFilter     :: !(Maybe Text)
@@ -86,7 +86,7 @@ groupsList
     :: Text -- ^ 'glProject'
     -> GroupsList
 groupsList pGlProject_ =
-    GroupsList
+    GroupsList'
     { _glOrderBy = Nothing
     , _glProject = pGlProject_
     , _glFilter = Nothing
@@ -112,27 +112,40 @@ glProject
   = lens _glProject (\ s a -> s{_glProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
--- filter={expression}. Your {expression} must be in the format: FIELD_NAME
--- COMPARISON_STRING LITERAL_STRING. The FIELD_NAME is the name of the
+-- filter={expression}. Your {expression} must be in the format: field_name
+-- comparison_string literal_string. The field_name is the name of the
 -- field you want to compare. Only atomic field types are supported
--- (string, number, boolean). The COMPARISON_STRING must be either eq
--- (equals) or ne (not equals). The LITERAL_STRING is the string value to
--- filter to. The literal value must be valid for the type of field
--- (string, number, boolean). For string fields, the literal value is
--- interpreted as a regular expression using RE2 syntax. The literal value
--- must match the entire field. For example, filter=name ne
--- example-instance.
+-- (string, number, boolean). The comparison_string must be either eq
+-- (equals) or ne (not equals). The literal_string is the string value to
+-- filter to. The literal value must be valid for the type of field you are
+-- filtering by (string, number, boolean). For string fields, the literal
+-- value is interpreted as a regular expression using RE2 syntax. The
+-- literal value must match the entire field. For example, to filter for
+-- instances that do not have a name of example-instance, you would use
+-- filter=name ne example-instance. Compute Engine Beta API Only: If you
+-- use filtering in the Beta API, you can also filter on nested fields. For
+-- example, you could filter on instances that have set the
+-- scheduling.automaticRestart field to true. In particular, use filtering
+-- on nested fields to take advantage of instance labels to organize and
+-- filter results based on label values. The Beta API also supports
+-- filtering on multiple expressions by providing each separate expression
+-- within parentheses. For example, (scheduling.automaticRestart eq true)
+-- (zone eq us-central1-f). Multiple expressions are treated as AND
+-- expressions, meaning that resources must match all expressions to pass
+-- the filters.
 glFilter :: Lens' GroupsList (Maybe Text)
 glFilter = lens _glFilter (\ s a -> s{_glFilter = a})
 
--- | Specifies a page token to use. Use this parameter if you want to list
--- the next page of results. Set pageToken to the nextPageToken returned by
--- a previous list request.
+-- | Specifies a page token to use. Set pageToken to the nextPageToken
+-- returned by a previous list request to get the next page of results.
 glPageToken :: Lens' GroupsList (Maybe Text)
 glPageToken
   = lens _glPageToken (\ s a -> s{_glPageToken = a})
 
--- | Maximum count of results to be returned.
+-- | The maximum number of results per page that should be returned. If the
+-- number of available results is larger than maxResults, Compute Engine
+-- returns a nextPageToken that can be used to get the next page of results
+-- in subsequent list requests.
 glMaxResults :: Lens' GroupsList Word32
 glMaxResults
   = lens _glMaxResults (\ s a -> s{_glMaxResults = a})
@@ -140,7 +153,12 @@ glMaxResults
 
 instance GoogleRequest GroupsList where
         type Rs GroupsList = GroupList
-        requestClient GroupsList{..}
+        type Scopes GroupsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
+        requestClient GroupsList'{..}
           = go _glProject _glOrderBy _glFilter _glPageToken
               (Just _glMaxResults)
               (Just AltJSON)

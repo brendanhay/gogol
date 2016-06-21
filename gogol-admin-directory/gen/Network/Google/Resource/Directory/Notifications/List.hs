@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Notifications.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type NotificationsListResource =
 -- | Retrieves a list of notifications.
 --
 -- /See:/ 'notificationsList' smart constructor.
-data NotificationsList = NotificationsList
+data NotificationsList = NotificationsList'
     { _nlCustomer   :: !Text
     , _nlLanguage   :: !(Maybe Text)
     , _nlPageToken  :: !(Maybe Text)
@@ -81,7 +81,7 @@ notificationsList
     :: Text -- ^ 'nlCustomer'
     -> NotificationsList
 notificationsList pNlCustomer_ =
-    NotificationsList
+    NotificationsList'
     { _nlCustomer = pNlCustomer_
     , _nlLanguage = Nothing
     , _nlPageToken = Nothing
@@ -112,7 +112,9 @@ nlMaxResults
 
 instance GoogleRequest NotificationsList where
         type Rs NotificationsList = Notifications
-        requestClient NotificationsList{..}
+        type Scopes NotificationsList =
+             '["https://www.googleapis.com/auth/admin.directory.notifications"]
+        requestClient NotificationsList'{..}
           = go _nlCustomer _nlLanguage _nlPageToken
               _nlMaxResults
               (Just AltJSON)

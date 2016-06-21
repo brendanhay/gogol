@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Circles.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type CirclesInsertResource =
 -- | Create a new circle for the authenticated user.
 --
 -- /See:/ 'circlesInsert' smart constructor.
-data CirclesInsert = CirclesInsert
+data CirclesInsert = CirclesInsert'
     { _ciPayload :: !Circle
     , _ciUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ circlesInsert
     -> Text -- ^ 'ciUserId'
     -> CirclesInsert
 circlesInsert pCiPayload_ pCiUserId_ =
-    CirclesInsert
+    CirclesInsert'
     { _ciPayload = pCiPayload_
     , _ciUserId = pCiUserId_
     }
@@ -88,7 +88,11 @@ ciUserId = lens _ciUserId (\ s a -> s{_ciUserId = a})
 
 instance GoogleRequest CirclesInsert where
         type Rs CirclesInsert = Circle
-        requestClient CirclesInsert{..}
+        type Scopes CirclesInsert =
+             '["https://www.googleapis.com/auth/plus.circles.write",
+               "https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient CirclesInsert'{..}
           = go _ciUserId (Just AltJSON) _ciPayload
               plusDomainsService
           where go

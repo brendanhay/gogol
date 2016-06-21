@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Permissions.BatchUpdate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type TablesPermissionsBatchUpdateResource =
 -- is atomic.
 --
 -- /See:/ 'tablesPermissionsBatchUpdate' smart constructor.
-data TablesPermissionsBatchUpdate = TablesPermissionsBatchUpdate
+data TablesPermissionsBatchUpdate = TablesPermissionsBatchUpdate'
     { _tpbuPayload :: !PermissionsBatchUpdateRequest
     , _tpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ tablesPermissionsBatchUpdate
     -> Text -- ^ 'tpbuId'
     -> TablesPermissionsBatchUpdate
 tablesPermissionsBatchUpdate pTpbuPayload_ pTpbuId_ =
-    TablesPermissionsBatchUpdate
+    TablesPermissionsBatchUpdate'
     { _tpbuPayload = pTpbuPayload_
     , _tpbuId = pTpbuId_
     }
@@ -95,7 +95,9 @@ instance GoogleRequest TablesPermissionsBatchUpdate
          where
         type Rs TablesPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
-        requestClient TablesPermissionsBatchUpdate{..}
+        type Scopes TablesPermissionsBatchUpdate =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient TablesPermissionsBatchUpdate'{..}
           = go _tpbuId (Just AltJSON) _tpbuPayload
               mapsEngineService
           where go

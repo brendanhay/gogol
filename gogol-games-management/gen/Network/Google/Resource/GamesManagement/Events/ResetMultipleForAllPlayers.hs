@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Events.ResetMultipleForAllPlayers
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type EventsResetMultipleForAllPlayersResource =
 -- may be reset. All quests that use any of the events will also be reset.
 --
 -- /See:/ 'eventsResetMultipleForAllPlayers' smart constructor.
-newtype EventsResetMultipleForAllPlayers = EventsResetMultipleForAllPlayers
+newtype EventsResetMultipleForAllPlayers = EventsResetMultipleForAllPlayers'
     { _ermfapPayload :: EventsResetMultipleForAllRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ eventsResetMultipleForAllPlayers
     :: EventsResetMultipleForAllRequest -- ^ 'ermfapPayload'
     -> EventsResetMultipleForAllPlayers
 eventsResetMultipleForAllPlayers pErmfapPayload_ =
-    EventsResetMultipleForAllPlayers
+    EventsResetMultipleForAllPlayers'
     { _ermfapPayload = pErmfapPayload_
     }
 
@@ -83,7 +83,10 @@ ermfapPayload
 instance GoogleRequest
          EventsResetMultipleForAllPlayers where
         type Rs EventsResetMultipleForAllPlayers = ()
-        requestClient EventsResetMultipleForAllPlayers{..}
+        type Scopes EventsResetMultipleForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient EventsResetMultipleForAllPlayers'{..}
           = go (Just AltJSON) _ermfapPayload
               gamesManagementService
           where go

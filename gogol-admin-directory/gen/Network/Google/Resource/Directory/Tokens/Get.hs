@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Tokens.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type TokensGetResource =
 -- | Get information about an access token issued by a user.
 --
 -- /See:/ 'tokensGet' smart constructor.
-data TokensGet = TokensGet
+data TokensGet = TokensGet'
     { _tgClientId :: !Text
     , _tgUserKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ tokensGet
     -> Text -- ^ 'tgUserKey'
     -> TokensGet
 tokensGet pTgClientId_ pTgUserKey_ =
-    TokensGet
+    TokensGet'
     { _tgClientId = pTgClientId_
     , _tgUserKey = pTgUserKey_
     }
@@ -90,7 +90,9 @@ tgUserKey
 
 instance GoogleRequest TokensGet where
         type Rs TokensGet = Token
-        requestClient TokensGet{..}
+        type Scopes TokensGet =
+             '["https://www.googleapis.com/auth/admin.directory.user.security"]
+        requestClient TokensGet'{..}
           = go _tgUserKey _tgClientId (Just AltJSON)
               directoryService
           where go

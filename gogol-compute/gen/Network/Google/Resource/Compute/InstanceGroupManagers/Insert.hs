@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroupManagers.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type InstanceGroupManagersInsertResource =
 -- listmanagedinstances method.
 --
 -- /See:/ 'instanceGroupManagersInsert' smart constructor.
-data InstanceGroupManagersInsert = InstanceGroupManagersInsert
+data InstanceGroupManagersInsert = InstanceGroupManagersInsert'
     { _igmiProject :: !Text
     , _igmiZone    :: !Text
     , _igmiPayload :: !InstanceGroupManager
@@ -91,13 +91,13 @@ instanceGroupManagersInsert
     -> InstanceGroupManager -- ^ 'igmiPayload'
     -> InstanceGroupManagersInsert
 instanceGroupManagersInsert pIgmiProject_ pIgmiZone_ pIgmiPayload_ =
-    InstanceGroupManagersInsert
+    InstanceGroupManagersInsert'
     { _igmiProject = pIgmiProject_
     , _igmiZone = pIgmiZone_
     , _igmiPayload = pIgmiPayload_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmiProject :: Lens' InstanceGroupManagersInsert Text
 igmiProject
   = lens _igmiProject (\ s a -> s{_igmiProject = a})
@@ -115,7 +115,10 @@ igmiPayload
 instance GoogleRequest InstanceGroupManagersInsert
          where
         type Rs InstanceGroupManagersInsert = Operation
-        requestClient InstanceGroupManagersInsert{..}
+        type Scopes InstanceGroupManagersInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceGroupManagersInsert'{..}
           = go _igmiProject _igmiZone (Just AltJSON)
               _igmiPayload
               computeService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Style.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type StylePatchResource =
 -- | Updates an existing style. This method supports patch semantics.
 --
 -- /See:/ 'stylePatch' smart constructor.
-data StylePatch = StylePatch
+data StylePatch = StylePatch'
     { _spPayload :: !StyleSetting
     , _spStyleId :: !(Textual Int32)
     , _spTableId :: !Text
@@ -78,7 +78,7 @@ stylePatch
     -> Text -- ^ 'spTableId'
     -> StylePatch
 stylePatch pSpPayload_ pSpStyleId_ pSpTableId_ =
-    StylePatch
+    StylePatch'
     { _spPayload = pSpPayload_
     , _spStyleId = _Coerce # pSpStyleId_
     , _spTableId = pSpTableId_
@@ -102,7 +102,9 @@ spTableId
 
 instance GoogleRequest StylePatch where
         type Rs StylePatch = StyleSetting
-        requestClient StylePatch{..}
+        type Scopes StylePatch =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient StylePatch'{..}
           = go _spTableId _spStyleId (Just AltJSON) _spPayload
               fusionTablesService
           where go

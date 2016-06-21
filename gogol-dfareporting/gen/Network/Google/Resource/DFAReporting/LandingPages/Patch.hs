@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.LandingPages.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'LandingPagesPatch' request conforms to.
 type LandingPagesPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -62,7 +62,7 @@ type LandingPagesPatchResource =
 -- semantics.
 --
 -- /See:/ 'landingPagesPatch' smart constructor.
-data LandingPagesPatch = LandingPagesPatch
+data LandingPagesPatch = LandingPagesPatch'
     { _lppCampaignId :: !(Textual Int64)
     , _lppProFileId  :: !(Textual Int64)
     , _lppPayload    :: !LandingPage
@@ -87,7 +87,7 @@ landingPagesPatch
     -> Int64 -- ^ 'lppId'
     -> LandingPagesPatch
 landingPagesPatch pLppCampaignId_ pLppProFileId_ pLppPayload_ pLppId_ =
-    LandingPagesPatch
+    LandingPagesPatch'
     { _lppCampaignId = _Coerce # pLppCampaignId_
     , _lppProFileId = _Coerce # pLppProFileId_
     , _lppPayload = pLppPayload_
@@ -119,7 +119,9 @@ lppId
 
 instance GoogleRequest LandingPagesPatch where
         type Rs LandingPagesPatch = LandingPage
-        requestClient LandingPagesPatch{..}
+        type Scopes LandingPagesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient LandingPagesPatch'{..}
           = go _lppProFileId _lppCampaignId (Just _lppId)
               (Just AltJSON)
               _lppPayload

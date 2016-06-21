@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.DataSets.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type DataSetsGetResource =
 -- | Returns the dataset specified by datasetID.
 --
 -- /See:/ 'dataSetsGet' smart constructor.
-data DataSetsGet = DataSetsGet
+data DataSetsGet = DataSetsGet'
     { _dsgDataSetId :: !Text
     , _dsgProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ dataSetsGet
     -> Text -- ^ 'dsgProjectId'
     -> DataSetsGet
 dataSetsGet pDsgDataSetId_ pDsgProjectId_ =
-    DataSetsGet
+    DataSetsGet'
     { _dsgDataSetId = pDsgDataSetId_
     , _dsgProjectId = pDsgProjectId_
     }
@@ -88,7 +88,11 @@ dsgProjectId
 
 instance GoogleRequest DataSetsGet where
         type Rs DataSetsGet = DataSet
-        requestClient DataSetsGet{..}
+        type Scopes DataSetsGet =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient DataSetsGet'{..}
           = go _dsgProjectId _dsgDataSetId (Just AltJSON)
               bigQueryService
           where go

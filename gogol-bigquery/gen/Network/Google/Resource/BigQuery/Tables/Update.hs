@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Tables.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type TablesUpdateResource =
 -- that are provided in the submitted table resource.
 --
 -- /See:/ 'tablesUpdate' smart constructor.
-data TablesUpdate = TablesUpdate
+data TablesUpdate = TablesUpdate'
     { _tuPayload   :: !Table
     , _tuDataSetId :: !Text
     , _tuProjectId :: !Text
@@ -88,7 +88,7 @@ tablesUpdate
     -> Text -- ^ 'tuTableId'
     -> TablesUpdate
 tablesUpdate pTuPayload_ pTuDataSetId_ pTuProjectId_ pTuTableId_ =
-    TablesUpdate
+    TablesUpdate'
     { _tuPayload = pTuPayload_
     , _tuDataSetId = pTuDataSetId_
     , _tuProjectId = pTuProjectId_
@@ -117,7 +117,10 @@ tuTableId
 
 instance GoogleRequest TablesUpdate where
         type Rs TablesUpdate = Table
-        requestClient TablesUpdate{..}
+        type Scopes TablesUpdate =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TablesUpdate'{..}
           = go _tuProjectId _tuDataSetId _tuTableId
               (Just AltJSON)
               _tuPayload

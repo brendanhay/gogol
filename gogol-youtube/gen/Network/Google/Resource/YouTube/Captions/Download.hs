@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Captions.Download
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type CaptionsDownloadResource =
 -- tlang parameter.
 --
 -- /See:/ 'captionsDownload' smart constructor.
-data CaptionsDownload = CaptionsDownload
+data CaptionsDownload = CaptionsDownload'
     { _capaOnBehalfOf             :: !(Maybe Text)
     , _capaTlang                  :: !(Maybe Text)
     , _capaOnBehalfOfContentOwner :: !(Maybe Text)
@@ -101,7 +101,7 @@ captionsDownload
     :: Text -- ^ 'capaId'
     -> CaptionsDownload
 captionsDownload pCapaId_ =
-    CaptionsDownload
+    CaptionsDownload'
     { _capaOnBehalfOf = Nothing
     , _capaTlang = Nothing
     , _capaOnBehalfOfContentOwner = Nothing
@@ -154,7 +154,10 @@ capaTfmt = lens _capaTfmt (\ s a -> s{_capaTfmt = a})
 
 instance GoogleRequest CaptionsDownload where
         type Rs CaptionsDownload = ()
-        requestClient CaptionsDownload{..}
+        type Scopes CaptionsDownload =
+             '["https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient CaptionsDownload'{..}
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
               _capaTfmt
@@ -168,7 +171,9 @@ instance GoogleRequest CaptionsDownload where
 instance GoogleRequest
          (MediaDownload CaptionsDownload) where
         type Rs (MediaDownload CaptionsDownload) = Stream
-        requestClient (MediaDownload CaptionsDownload{..})
+        type Scopes (MediaDownload CaptionsDownload) =
+             Scopes CaptionsDownload
+        requestClient (MediaDownload CaptionsDownload'{..})
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
               _capaTfmt

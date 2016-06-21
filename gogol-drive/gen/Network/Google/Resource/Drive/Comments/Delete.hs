@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Comments.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CommentsDelete' request conforms to.
 type CommentsDeleteResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>
@@ -54,7 +54,7 @@ type CommentsDeleteResource =
 -- | Deletes a comment.
 --
 -- /See:/ 'commentsDelete' smart constructor.
-data CommentsDelete = CommentsDelete
+data CommentsDelete = CommentsDelete'
     { _cdFileId    :: !Text
     , _cdCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ commentsDelete
     -> Text -- ^ 'cdCommentId'
     -> CommentsDelete
 commentsDelete pCdFileId_ pCdCommentId_ =
-    CommentsDelete
+    CommentsDelete'
     { _cdFileId = pCdFileId_
     , _cdCommentId = pCdCommentId_
     }
@@ -87,7 +87,10 @@ cdCommentId
 
 instance GoogleRequest CommentsDelete where
         type Rs CommentsDelete = ()
-        requestClient CommentsDelete{..}
+        type Scopes CommentsDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
+        requestClient CommentsDelete'{..}
           = go _cdFileId _cdCommentId (Just AltJSON)
               driveService
           where go

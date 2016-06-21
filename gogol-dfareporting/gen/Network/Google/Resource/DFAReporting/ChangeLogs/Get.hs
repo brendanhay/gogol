@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.ChangeLogs.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ChangeLogsGet' request conforms to.
 type ChangeLogsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "changeLogs" :>
@@ -54,7 +54,7 @@ type ChangeLogsGetResource =
 -- | Gets one change log by ID.
 --
 -- /See:/ 'changeLogsGet' smart constructor.
-data ChangeLogsGet = ChangeLogsGet
+data ChangeLogsGet = ChangeLogsGet'
     { _clgProFileId :: !(Textual Int64)
     , _clgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ changeLogsGet
     -> Int64 -- ^ 'clgId'
     -> ChangeLogsGet
 changeLogsGet pClgProFileId_ pClgId_ =
-    ChangeLogsGet
+    ChangeLogsGet'
     { _clgProFileId = _Coerce # pClgProFileId_
     , _clgId = _Coerce # pClgId_
     }
@@ -89,7 +89,9 @@ clgId
 
 instance GoogleRequest ChangeLogsGet where
         type Rs ChangeLogsGet = ChangeLog
-        requestClient ChangeLogsGet{..}
+        type Scopes ChangeLogsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ChangeLogsGet'{..}
           = go _clgProFileId _clgId (Just AltJSON)
               dFAReportingService
           where go

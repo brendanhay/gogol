@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Filters.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ManagementFiltersUpdateResource =
 -- | Updates an existing filter.
 --
 -- /See:/ 'managementFiltersUpdate' smart constructor.
-data ManagementFiltersUpdate = ManagementFiltersUpdate
+data ManagementFiltersUpdate = ManagementFiltersUpdate'
     { _mfuFilterId  :: !Text
     , _mfuPayload   :: !Filter
     , _mfuAccountId :: !Text
@@ -78,7 +78,7 @@ managementFiltersUpdate
     -> Text -- ^ 'mfuAccountId'
     -> ManagementFiltersUpdate
 managementFiltersUpdate pMfuFilterId_ pMfuPayload_ pMfuAccountId_ =
-    ManagementFiltersUpdate
+    ManagementFiltersUpdate'
     { _mfuFilterId = pMfuFilterId_
     , _mfuPayload = pMfuPayload_
     , _mfuAccountId = pMfuAccountId_
@@ -101,7 +101,9 @@ mfuAccountId
 
 instance GoogleRequest ManagementFiltersUpdate where
         type Rs ManagementFiltersUpdate = Filter
-        requestClient ManagementFiltersUpdate{..}
+        type Scopes ManagementFiltersUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementFiltersUpdate'{..}
           = go _mfuAccountId _mfuFilterId (Just AltJSON)
               _mfuPayload
               analyticsService

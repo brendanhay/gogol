@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.OperatingSystems.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'OperatingSystemsGet' request conforms to.
 type OperatingSystemsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystems" :>
@@ -55,7 +55,7 @@ type OperatingSystemsGetResource =
 -- | Gets one operating system by DART ID.
 --
 -- /See:/ 'operatingSystemsGet' smart constructor.
-data OperatingSystemsGet = OperatingSystemsGet
+data OperatingSystemsGet = OperatingSystemsGet'
     { _osgProFileId :: !(Textual Int64)
     , _osgDartId    :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ operatingSystemsGet
     -> Int64 -- ^ 'osgDartId'
     -> OperatingSystemsGet
 operatingSystemsGet pOsgProFileId_ pOsgDartId_ =
-    OperatingSystemsGet
+    OperatingSystemsGet'
     { _osgProFileId = _Coerce # pOsgProFileId_
     , _osgDartId = _Coerce # pOsgDartId_
     }
@@ -91,7 +91,9 @@ osgDartId
 
 instance GoogleRequest OperatingSystemsGet where
         type Rs OperatingSystemsGet = OperatingSystem
-        requestClient OperatingSystemsGet{..}
+        type Scopes OperatingSystemsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient OperatingSystemsGet'{..}
           = go _osgProFileId _osgDartId (Just AltJSON)
               dFAReportingService
           where go

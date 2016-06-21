@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Users.MakeAdmin
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersMakeAdminResource =
 -- | change admin status of a user
 --
 -- /See:/ 'usersMakeAdmin' smart constructor.
-data UsersMakeAdmin = UsersMakeAdmin
+data UsersMakeAdmin = UsersMakeAdmin'
     { _umaPayload :: !UserMakeAdmin
     , _umaUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersMakeAdmin
     -> Text -- ^ 'umaUserKey'
     -> UsersMakeAdmin
 usersMakeAdmin pUmaPayload_ pUmaUserKey_ =
-    UsersMakeAdmin
+    UsersMakeAdmin'
     { _umaPayload = pUmaPayload_
     , _umaUserKey = pUmaUserKey_
     }
@@ -89,7 +89,9 @@ umaUserKey
 
 instance GoogleRequest UsersMakeAdmin where
         type Rs UsersMakeAdmin = ()
-        requestClient UsersMakeAdmin{..}
+        type Scopes UsersMakeAdmin =
+             '["https://www.googleapis.com/auth/admin.directory.user"]
+        requestClient UsersMakeAdmin'{..}
           = go _umaUserKey (Just AltJSON) _umaPayload
               directoryService
           where go

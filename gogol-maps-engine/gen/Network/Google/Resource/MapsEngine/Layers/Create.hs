@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type LayersCreateResource =
 -- | Create a layer asset.
 --
 -- /See:/ 'layersCreate' smart constructor.
-data LayersCreate = LayersCreate
+data LayersCreate = LayersCreate'
     { _lcProcess :: !(Maybe Bool)
     , _lcPayload :: !Layer
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ layersCreate
     :: Layer -- ^ 'lcPayload'
     -> LayersCreate
 layersCreate pLcPayload_ =
-    LayersCreate
+    LayersCreate'
     { _lcProcess = Nothing
     , _lcPayload = pLcPayload_
     }
@@ -86,7 +86,9 @@ lcPayload
 
 instance GoogleRequest LayersCreate where
         type Rs LayersCreate = Layer
-        requestClient LayersCreate{..}
+        type Scopes LayersCreate =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient LayersCreate'{..}
           = go _lcProcess (Just AltJSON) _lcPayload
               mapsEngineService
           where go

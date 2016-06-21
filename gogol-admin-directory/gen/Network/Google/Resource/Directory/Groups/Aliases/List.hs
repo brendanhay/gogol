@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Groups.Aliases.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type GroupsAliasesListResource =
 -- | List all aliases for a group
 --
 -- /See:/ 'groupsAliasesList' smart constructor.
-newtype GroupsAliasesList = GroupsAliasesList
+newtype GroupsAliasesList = GroupsAliasesList'
     { _galGroupKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ groupsAliasesList
     :: Text -- ^ 'galGroupKey'
     -> GroupsAliasesList
 groupsAliasesList pGalGroupKey_ =
-    GroupsAliasesList
+    GroupsAliasesList'
     { _galGroupKey = pGalGroupKey_
     }
 
@@ -77,7 +77,10 @@ galGroupKey
 
 instance GoogleRequest GroupsAliasesList where
         type Rs GroupsAliasesList = Aliases
-        requestClient GroupsAliasesList{..}
+        type Scopes GroupsAliasesList =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.readonly"]
+        requestClient GroupsAliasesList'{..}
           = go _galGroupKey (Just AltJSON) directoryService
           where go
                   = buildClient

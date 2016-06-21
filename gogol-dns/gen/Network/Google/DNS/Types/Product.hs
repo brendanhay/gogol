@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.DNS.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- collection.
 --
 -- /See:/ 'changesListResponse' smart constructor.
-data ChangesListResponse = ChangesListResponse
+data ChangesListResponse = ChangesListResponse'
     { _clrNextPageToken :: !(Maybe Text)
     , _clrChanges       :: !(Maybe [Change])
     , _clrKind          :: !Text
@@ -42,7 +42,7 @@ data ChangesListResponse = ChangesListResponse
 changesListResponse
     :: ChangesListResponse
 changesListResponse =
-    ChangesListResponse
+    ChangesListResponse'
     { _clrNextPageToken = Nothing
     , _clrChanges = Nothing
     , _clrKind = "dns#changesListResponse"
@@ -77,13 +77,13 @@ instance FromJSON ChangesListResponse where
         parseJSON
           = withObject "ChangesListResponse"
               (\ o ->
-                 ChangesListResponse <$>
+                 ChangesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "changes" .!= mempty)
                      <*> (o .:? "kind" .!= "dns#changesListResponse"))
 
 instance ToJSON ChangesListResponse where
-        toJSON ChangesListResponse{..}
+        toJSON ChangesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _clrNextPageToken,
@@ -95,7 +95,7 @@ instance ToJSON ChangesListResponse where
 -- APIs console.
 --
 -- /See:/ 'project' smart constructor.
-data Project = Project
+data Project = Project'
     { _pKind   :: !Text
     , _pId     :: !(Maybe Text)
     , _pNumber :: !(Maybe (Textual Word64))
@@ -116,7 +116,7 @@ data Project = Project
 project
     :: Project
 project =
-    Project
+    Project'
     { _pKind = "dns#project"
     , _pId = Nothing
     , _pNumber = Nothing
@@ -147,13 +147,13 @@ instance FromJSON Project where
         parseJSON
           = withObject "Project"
               (\ o ->
-                 Project <$>
+                 Project' <$>
                    (o .:? "kind" .!= "dns#project") <*> (o .:? "id") <*>
                      (o .:? "number")
                      <*> (o .:? "quota"))
 
 instance ToJSON Project where
-        toJSON Project{..}
+        toJSON Project'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pKind), ("id" .=) <$> _pId,
@@ -163,7 +163,7 @@ instance ToJSON Project where
 -- | An atomic update to a collection of ResourceRecordSets.
 --
 -- /See:/ 'change' smart constructor.
-data Change = Change
+data Change = Change'
     { _cStatus    :: !(Maybe ChangeStatus)
     , _cAdditions :: !(Maybe [ResourceRecordSet])
     , _cStartTime :: !(Maybe Text)
@@ -190,7 +190,7 @@ data Change = Change
 change
     :: Change
 change =
-    Change
+    Change'
     { _cStatus = Nothing
     , _cAdditions = Nothing
     , _cStartTime = Nothing
@@ -210,8 +210,8 @@ cAdditions
       _Default
       . _Coerce
 
--- | The time that this operation was started by the server. This is in
--- RFC3339 text format.
+-- | The time that this operation was started by the server (output only).
+-- This is in RFC3339 text format.
 cStartTime :: Lens' Change (Maybe Text)
 cStartTime
   = lens _cStartTime (\ s a -> s{_cStartTime = a})
@@ -236,7 +236,7 @@ instance FromJSON Change where
         parseJSON
           = withObject "Change"
               (\ o ->
-                 Change <$>
+                 Change' <$>
                    (o .:? "status") <*> (o .:? "additions" .!= mempty)
                      <*> (o .:? "startTime")
                      <*> (o .:? "kind" .!= "dns#change")
@@ -244,7 +244,7 @@ instance FromJSON Change where
                      <*> (o .:? "id"))
 
 instance ToJSON Change where
-        toJSON Change{..}
+        toJSON Change'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _cStatus,
@@ -256,7 +256,7 @@ instance ToJSON Change where
 
 --
 -- /See:/ 'resourceRecordSetsListResponse' smart constructor.
-data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse
+data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse'
     { _rrslrNextPageToken :: !(Maybe Text)
     , _rrslrKind          :: !Text
     , _rrslrRrSets        :: !(Maybe [ResourceRecordSet])
@@ -274,7 +274,7 @@ data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse
 resourceRecordSetsListResponse
     :: ResourceRecordSetsListResponse
 resourceRecordSetsListResponse =
-    ResourceRecordSetsListResponse
+    ResourceRecordSetsListResponse'
     { _rrslrNextPageToken = Nothing
     , _rrslrKind = "dns#resourceRecordSetsListResponse"
     , _rrslrRrSets = Nothing
@@ -311,14 +311,14 @@ instance FromJSON ResourceRecordSetsListResponse
         parseJSON
           = withObject "ResourceRecordSetsListResponse"
               (\ o ->
-                 ResourceRecordSetsListResponse <$>
+                 ResourceRecordSetsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dns#resourceRecordSetsListResponse")
                      <*> (o .:? "rrsets" .!= mempty))
 
 instance ToJSON ResourceRecordSetsListResponse where
-        toJSON ResourceRecordSetsListResponse{..}
+        toJSON ResourceRecordSetsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rrslrNextPageToken,
@@ -328,7 +328,7 @@ instance ToJSON ResourceRecordSetsListResponse where
 -- | A unit of data that will be returned by the DNS servers.
 --
 -- /See:/ 'resourceRecordSet' smart constructor.
-data ResourceRecordSet = ResourceRecordSet
+data ResourceRecordSet = ResourceRecordSet'
     { _rrsTtl     :: !(Maybe (Textual Int32))
     , _rrsKind    :: !Text
     , _rrsName    :: !(Maybe Text)
@@ -352,7 +352,7 @@ data ResourceRecordSet = ResourceRecordSet
 resourceRecordSet
     :: ResourceRecordSet
 resourceRecordSet =
-    ResourceRecordSet
+    ResourceRecordSet'
     { _rrsTtl = Nothing
     , _rrsKind = "dns#resourceRecordSet"
     , _rrsName = Nothing
@@ -392,7 +392,7 @@ instance FromJSON ResourceRecordSet where
         parseJSON
           = withObject "ResourceRecordSet"
               (\ o ->
-                 ResourceRecordSet <$>
+                 ResourceRecordSet' <$>
                    (o .:? "ttl") <*>
                      (o .:? "kind" .!= "dns#resourceRecordSet")
                      <*> (o .:? "name")
@@ -400,7 +400,7 @@ instance FromJSON ResourceRecordSet where
                      <*> (o .:? "rrdatas" .!= mempty))
 
 instance ToJSON ResourceRecordSet where
-        toJSON ResourceRecordSet{..}
+        toJSON ResourceRecordSet'{..}
           = object
               (catMaybes
                  [("ttl" .=) <$> _rrsTtl, Just ("kind" .= _rrsKind),
@@ -412,7 +412,7 @@ instance ToJSON ResourceRecordSet where
 -- hosted by the Cloud DNS service.
 --
 -- /See:/ 'managedZone' smart constructor.
-data ManagedZone = ManagedZone
+data ManagedZone = ManagedZone'
     { _mzCreationTime  :: !(Maybe Text)
     , _mzKind          :: !Text
     , _mzNameServerSet :: !(Maybe Text)
@@ -445,7 +445,7 @@ data ManagedZone = ManagedZone
 managedZone
     :: ManagedZone
 managedZone =
-    ManagedZone
+    ManagedZone'
     { _mzCreationTime = Nothing
     , _mzKind = "dns#managedZone"
     , _mzNameServerSet = Nothing
@@ -515,7 +515,7 @@ instance FromJSON ManagedZone where
         parseJSON
           = withObject "ManagedZone"
               (\ o ->
-                 ManagedZone <$>
+                 ManagedZone' <$>
                    (o .:? "creationTime") <*>
                      (o .:? "kind" .!= "dns#managedZone")
                      <*> (o .:? "nameServerSet")
@@ -526,7 +526,7 @@ instance FromJSON ManagedZone where
                      <*> (o .:? "nameServers" .!= mempty))
 
 instance ToJSON ManagedZone where
-        toJSON ManagedZone{..}
+        toJSON ManagedZone'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _mzCreationTime,
@@ -540,7 +540,7 @@ instance ToJSON ManagedZone where
 -- | Limits associated with a Project.
 --
 -- /See:/ 'quota' smart constructor.
-data Quota = Quota
+data Quota = Quota'
     { _qRrSetDeletionsPerChange  :: !(Maybe (Textual Int32))
     , _qRrSetsPerManagedZone     :: !(Maybe (Textual Int32))
     , _qKind                     :: !Text
@@ -570,7 +570,7 @@ data Quota = Quota
 quota
     :: Quota
 quota =
-    Quota
+    Quota'
     { _qRrSetDeletionsPerChange = Nothing
     , _qRrSetsPerManagedZone = Nothing
     , _qKind = "dns#quota"
@@ -634,7 +634,7 @@ instance FromJSON Quota where
         parseJSON
           = withObject "Quota"
               (\ o ->
-                 Quota <$>
+                 Quota' <$>
                    (o .:? "rrsetDeletionsPerChange") <*>
                      (o .:? "rrsetsPerManagedZone")
                      <*> (o .:? "kind" .!= "dns#quota")
@@ -644,7 +644,7 @@ instance FromJSON Quota where
                      <*> (o .:? "totalRrdataSizePerChange"))
 
 instance ToJSON Quota where
-        toJSON Quota{..}
+        toJSON Quota'{..}
           = object
               (catMaybes
                  [("rrsetDeletionsPerChange" .=) <$>
@@ -662,7 +662,7 @@ instance ToJSON Quota where
 
 --
 -- /See:/ 'managedZonesListResponse' smart constructor.
-data ManagedZonesListResponse = ManagedZonesListResponse
+data ManagedZonesListResponse = ManagedZonesListResponse'
     { _mzlrNextPageToken :: !(Maybe Text)
     , _mzlrKind          :: !Text
     , _mzlrManagedZones  :: !(Maybe [ManagedZone])
@@ -680,7 +680,7 @@ data ManagedZonesListResponse = ManagedZonesListResponse
 managedZonesListResponse
     :: ManagedZonesListResponse
 managedZonesListResponse =
-    ManagedZonesListResponse
+    ManagedZonesListResponse'
     { _mzlrNextPageToken = Nothing
     , _mzlrKind = "dns#managedZonesListResponse"
     , _mzlrManagedZones = Nothing
@@ -716,13 +716,13 @@ instance FromJSON ManagedZonesListResponse where
         parseJSON
           = withObject "ManagedZonesListResponse"
               (\ o ->
-                 ManagedZonesListResponse <$>
+                 ManagedZonesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "dns#managedZonesListResponse")
                      <*> (o .:? "managedZones" .!= mempty))
 
 instance ToJSON ManagedZonesListResponse where
-        toJSON ManagedZonesListResponse{..}
+        toJSON ManagedZonesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _mzlrNextPageToken,

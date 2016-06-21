@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.RasterCollections.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type RasterCollectionsDeleteResource =
 -- | Delete a raster collection.
 --
 -- /See:/ 'rasterCollectionsDelete' smart constructor.
-newtype RasterCollectionsDelete = RasterCollectionsDelete
+newtype RasterCollectionsDelete = RasterCollectionsDelete'
     { _rcdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ rasterCollectionsDelete
     :: Text -- ^ 'rcdId'
     -> RasterCollectionsDelete
 rasterCollectionsDelete pRcdId_ =
-    RasterCollectionsDelete
+    RasterCollectionsDelete'
     { _rcdId = pRcdId_
     }
 
@@ -77,7 +77,9 @@ rcdId = lens _rcdId (\ s a -> s{_rcdId = a})
 
 instance GoogleRequest RasterCollectionsDelete where
         type Rs RasterCollectionsDelete = ()
-        requestClient RasterCollectionsDelete{..}
+        type Scopes RasterCollectionsDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient RasterCollectionsDelete'{..}
           = go _rcdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

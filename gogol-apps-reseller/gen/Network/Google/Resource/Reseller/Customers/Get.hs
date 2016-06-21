@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Customers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type CustomersGetResource =
 -- | Gets a customer resource if one exists and is owned by the reseller.
 --
 -- /See:/ 'customersGet' smart constructor.
-newtype CustomersGet = CustomersGet
+newtype CustomersGet = CustomersGet'
     { _cgCustomerId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ customersGet
     :: Text -- ^ 'cgCustomerId'
     -> CustomersGet
 customersGet pCgCustomerId_ =
-    CustomersGet
+    CustomersGet'
     { _cgCustomerId = pCgCustomerId_
     }
 
@@ -76,7 +76,10 @@ cgCustomerId
 
 instance GoogleRequest CustomersGet where
         type Rs CustomersGet = Customer
-        requestClient CustomersGet{..}
+        type Scopes CustomersGet =
+             '["https://www.googleapis.com/auth/apps.order",
+               "https://www.googleapis.com/auth/apps.order.readonly"]
+        requestClient CustomersGet'{..}
           = go _cgCustomerId (Just AltJSON) appsResellerService
           where go
                   = buildClient (Proxy :: Proxy CustomersGetResource)

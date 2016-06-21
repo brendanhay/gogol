@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.Permissions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type LayersPermissionsListResource =
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ 'layersPermissionsList' smart constructor.
-newtype LayersPermissionsList = LayersPermissionsList
+newtype LayersPermissionsList = LayersPermissionsList'
     { _lplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ layersPermissionsList
     :: Text -- ^ 'lplId'
     -> LayersPermissionsList
 layersPermissionsList pLplId_ =
-    LayersPermissionsList
+    LayersPermissionsList'
     { _lplId = pLplId_
     }
 
@@ -77,7 +77,10 @@ lplId = lens _lplId (\ s a -> s{_lplId = a})
 instance GoogleRequest LayersPermissionsList where
         type Rs LayersPermissionsList =
              PermissionsListResponse
-        requestClient LayersPermissionsList{..}
+        type Scopes LayersPermissionsList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient LayersPermissionsList'{..}
           = go _lplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Personalizedstream.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type PersonalizedstreamGetResource =
 -- | Returns a stream of personalized book clusters
 --
 -- /See:/ 'personalizedstreamGet' smart constructor.
-data PersonalizedstreamGet = PersonalizedstreamGet
+data PersonalizedstreamGet = PersonalizedstreamGet'
     { _pgLocale                   :: !(Maybe Text)
     , _pgMaxAllowedMaturityRating :: !(Maybe PersonalizedstreamGetMaxAllowedMaturityRating)
     , _pgSource                   :: !(Maybe Text)
@@ -77,7 +77,7 @@ data PersonalizedstreamGet = PersonalizedstreamGet
 personalizedstreamGet
     :: PersonalizedstreamGet
 personalizedstreamGet =
-    PersonalizedstreamGet
+    PersonalizedstreamGet'
     { _pgLocale = Nothing
     , _pgMaxAllowedMaturityRating = Nothing
     , _pgSource = Nothing
@@ -101,7 +101,9 @@ pgSource = lens _pgSource (\ s a -> s{_pgSource = a})
 
 instance GoogleRequest PersonalizedstreamGet where
         type Rs PersonalizedstreamGet = Discoveryclusters
-        requestClient PersonalizedstreamGet{..}
+        type Scopes PersonalizedstreamGet =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient PersonalizedstreamGet'{..}
           = go _pgLocale _pgMaxAllowedMaturityRating _pgSource
               (Just AltJSON)
               booksService

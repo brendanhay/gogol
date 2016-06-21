@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Container.Projects.Zones.Clusters.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type ProjectsZonesClustersListResource =
 -- all zones.
 --
 -- /See:/ 'projectsZonesClustersList' smart constructor.
-data ProjectsZonesClustersList = ProjectsZonesClustersList
+data ProjectsZonesClustersList = ProjectsZonesClustersList'
     { _pzclXgafv          :: !(Maybe Text)
     , _pzclUploadProtocol :: !(Maybe Text)
     , _pzclPp             :: !Bool
@@ -109,7 +109,7 @@ projectsZonesClustersList
     -> Text -- ^ 'pzclProjectId'
     -> ProjectsZonesClustersList
 projectsZonesClustersList pPzclZone_ pPzclProjectId_ =
-    ProjectsZonesClustersList
+    ProjectsZonesClustersList'
     { _pzclXgafv = Nothing
     , _pzclUploadProtocol = Nothing
     , _pzclPp = True
@@ -161,7 +161,7 @@ pzclBearerToken
       (\ s a -> s{_pzclBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzclProjectId :: Lens' ProjectsZonesClustersList Text
 pzclProjectId
   = lens _pzclProjectId
@@ -176,7 +176,9 @@ instance GoogleRequest ProjectsZonesClustersList
          where
         type Rs ProjectsZonesClustersList =
              ListClustersResponse
-        requestClient ProjectsZonesClustersList{..}
+        type Scopes ProjectsZonesClustersList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsZonesClustersList'{..}
           = go _pzclProjectId _pzclZone _pzclXgafv
               _pzclUploadProtocol
               (Just _pzclPp)

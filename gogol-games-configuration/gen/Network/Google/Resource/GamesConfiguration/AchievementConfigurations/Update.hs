@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type AchievementConfigurationsUpdateResource =
 -- | Update the metadata of the achievement configuration with the given ID.
 --
 -- /See:/ 'achievementConfigurationsUpdate' smart constructor.
-data AchievementConfigurationsUpdate = AchievementConfigurationsUpdate
+data AchievementConfigurationsUpdate = AchievementConfigurationsUpdate'
     { _acuAchievementId :: !Text
     , _acuPayload       :: !AchievementConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ achievementConfigurationsUpdate
     -> AchievementConfiguration -- ^ 'acuPayload'
     -> AchievementConfigurationsUpdate
 achievementConfigurationsUpdate pAcuAchievementId_ pAcuPayload_ =
-    AchievementConfigurationsUpdate
+    AchievementConfigurationsUpdate'
     { _acuAchievementId = pAcuAchievementId_
     , _acuPayload = pAcuPayload_
     }
@@ -91,7 +91,9 @@ instance GoogleRequest
          AchievementConfigurationsUpdate where
         type Rs AchievementConfigurationsUpdate =
              AchievementConfiguration
-        requestClient AchievementConfigurationsUpdate{..}
+        type Scopes AchievementConfigurationsUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient AchievementConfigurationsUpdate'{..}
           = go _acuAchievementId (Just AltJSON) _acuPayload
               gamesConfigurationService
           where go

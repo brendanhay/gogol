@@ -14,14 +14,16 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.BackendServices.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the entire content of the BackendService resource. This method
--- supports patch semantics.
+-- Updates the entire content of the BackendService resource. There are
+-- several restrictions and guidelines to keep in mind when updating a
+-- backend service. Read Restrictions and Guidelines for more information.
+-- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.patch@.
 module Network.Google.Resource.Compute.BackendServices.Patch
@@ -56,11 +58,13 @@ type BackendServicesPatchResource =
                      ReqBody '[JSON] BackendService :>
                        Patch '[JSON] Operation
 
--- | Update the entire content of the BackendService resource. This method
--- supports patch semantics.
+-- | Updates the entire content of the BackendService resource. There are
+-- several restrictions and guidelines to keep in mind when updating a
+-- backend service. Read Restrictions and Guidelines for more information.
+-- This method supports patch semantics.
 --
 -- /See:/ 'backendServicesPatch' smart constructor.
-data BackendServicesPatch = BackendServicesPatch
+data BackendServicesPatch = BackendServicesPatch'
     { _bspProject        :: !Text
     , _bspPayload        :: !BackendService
     , _bspBackendService :: !Text
@@ -81,13 +85,13 @@ backendServicesPatch
     -> Text -- ^ 'bspBackendService'
     -> BackendServicesPatch
 backendServicesPatch pBspProject_ pBspPayload_ pBspBackendService_ =
-    BackendServicesPatch
+    BackendServicesPatch'
     { _bspProject = pBspProject_
     , _bspPayload = pBspPayload_
     , _bspBackendService = pBspBackendService_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 bspProject :: Lens' BackendServicesPatch Text
 bspProject
   = lens _bspProject (\ s a -> s{_bspProject = a})
@@ -105,7 +109,10 @@ bspBackendService
 
 instance GoogleRequest BackendServicesPatch where
         type Rs BackendServicesPatch = Operation
-        requestClient BackendServicesPatch{..}
+        type Scopes BackendServicesPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient BackendServicesPatch'{..}
           = go _bspProject _bspBackendService (Just AltJSON)
               _bspPayload
               computeService

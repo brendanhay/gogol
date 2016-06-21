@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Placements.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementsInsert' request conforms to.
 type PlacementsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -54,7 +54,7 @@ type PlacementsInsertResource =
 -- | Inserts a new placement.
 --
 -- /See:/ 'placementsInsert' smart constructor.
-data PlacementsInsert = PlacementsInsert
+data PlacementsInsert = PlacementsInsert'
     { _piProFileId :: !(Textual Int64)
     , _piPayload   :: !Placement
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ placementsInsert
     -> Placement -- ^ 'piPayload'
     -> PlacementsInsert
 placementsInsert pPiProFileId_ pPiPayload_ =
-    PlacementsInsert
+    PlacementsInsert'
     { _piProFileId = _Coerce # pPiProFileId_
     , _piPayload = pPiPayload_
     }
@@ -89,7 +89,9 @@ piPayload
 
 instance GoogleRequest PlacementsInsert where
         type Rs PlacementsInsert = Placement
-        requestClient PlacementsInsert{..}
+        type Scopes PlacementsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementsInsert'{..}
           = go _piProFileId (Just AltJSON) _piPayload
               dFAReportingService
           where go

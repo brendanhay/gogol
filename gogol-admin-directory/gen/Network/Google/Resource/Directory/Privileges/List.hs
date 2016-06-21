@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Privileges.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type PrivilegesListResource =
 -- | Retrieves a paginated list of all privileges for a customer.
 --
 -- /See:/ 'privilegesList' smart constructor.
-newtype PrivilegesList = PrivilegesList
+newtype PrivilegesList = PrivilegesList'
     { _plCustomer :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ privilegesList
     :: Text -- ^ 'plCustomer'
     -> PrivilegesList
 privilegesList pPlCustomer_ =
-    PrivilegesList
+    PrivilegesList'
     { _plCustomer = pPlCustomer_
     }
 
@@ -79,7 +79,10 @@ plCustomer
 
 instance GoogleRequest PrivilegesList where
         type Rs PrivilegesList = Privileges
-        requestClient PrivilegesList{..}
+        type Scopes PrivilegesList =
+             '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
+               "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
+        requestClient PrivilegesList'{..}
           = go _plCustomer (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy PrivilegesListResource)

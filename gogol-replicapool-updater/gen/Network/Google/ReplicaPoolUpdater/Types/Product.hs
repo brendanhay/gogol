@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.ReplicaPoolUpdater.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.ReplicaPoolUpdater.Types.Sum
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem
+    OperationWarningsItemDataItem'
     { _owidiValue = Nothing
     , _owidiKey = Nothing
     }
@@ -55,11 +55,11 @@ instance FromJSON OperationWarningsItemDataItem where
         parseJSON
           = withObject "OperationWarningsItemDataItem"
               (\ o ->
-                 OperationWarningsItemDataItem <$>
+                 OperationWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON OperationWarningsItemDataItem where
-        toJSON OperationWarningsItemDataItem{..}
+        toJSON OperationWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _owidiValue,
@@ -69,7 +69,7 @@ instance ToJSON OperationWarningsItemDataItem where
 -- of a group of instances to the given template.
 --
 -- /See:/ 'rollingUpdate' smart constructor.
-data RollingUpdate = RollingUpdate
+data RollingUpdate = RollingUpdate'
     { _ruStatus               :: !(Maybe Text)
     , _ruProgress             :: !(Maybe (Textual Int32))
     , _ruInstanceGroupManager :: !(Maybe Text)
@@ -126,7 +126,7 @@ data RollingUpdate = RollingUpdate
 rollingUpdate
     :: RollingUpdate
 rollingUpdate =
-    RollingUpdate
+    RollingUpdate'
     { _ruStatus = Nothing
     , _ruProgress = Nothing
     , _ruInstanceGroupManager = Nothing
@@ -252,7 +252,7 @@ instance FromJSON RollingUpdate where
         parseJSON
           = withObject "RollingUpdate"
               (\ o ->
-                 RollingUpdate <$>
+                 RollingUpdate' <$>
                    (o .:? "status") <*> (o .:? "progress") <*>
                      (o .:? "instanceGroupManager")
                      <*>
@@ -271,7 +271,7 @@ instance FromJSON RollingUpdate where
                      <*> (o .:? "instanceGroup"))
 
 instance ToJSON RollingUpdate where
-        toJSON RollingUpdate{..}
+        toJSON RollingUpdate'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _ruStatus,
@@ -294,7 +294,7 @@ instance ToJSON RollingUpdate where
 -- | [Output Only] Errors that occurred during the rolling update.
 --
 -- /See:/ 'rollingUpdateError' smart constructor.
-newtype RollingUpdateError = RollingUpdateError
+newtype RollingUpdateError = RollingUpdateError'
     { _rueErrors :: Maybe [RollingUpdateErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -306,7 +306,7 @@ newtype RollingUpdateError = RollingUpdateError
 rollingUpdateError
     :: RollingUpdateError
 rollingUpdateError =
-    RollingUpdateError
+    RollingUpdateError'
     { _rueErrors = Nothing
     }
 
@@ -322,16 +322,16 @@ instance FromJSON RollingUpdateError where
         parseJSON
           = withObject "RollingUpdateError"
               (\ o ->
-                 RollingUpdateError <$> (o .:? "errors" .!= mempty))
+                 RollingUpdateError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON RollingUpdateError where
-        toJSON RollingUpdateError{..}
+        toJSON RollingUpdateError'{..}
           = object (catMaybes [("errors" .=) <$> _rueErrors])
 
 -- | Contains a list of Operation resources.
 --
 -- /See:/ 'operationList' smart constructor.
-data OperationList = OperationList
+data OperationList = OperationList'
     { _olNextPageToken :: !(Maybe Text)
     , _olKind          :: !Text
     , _olItems         :: !(Maybe [Operation])
@@ -355,7 +355,7 @@ data OperationList = OperationList
 operationList
     :: OperationList
 operationList =
-    OperationList
+    OperationList'
     { _olNextPageToken = Nothing
     , _olKind = "replicapoolupdater#operationList"
     , _olItems = Nothing
@@ -369,8 +369,8 @@ olNextPageToken
   = lens _olNextPageToken
       (\ s a -> s{_olNextPageToken = a})
 
--- | [Output Only] Type of resource. Always replicapoolupdater#operations for
--- Operations resource.
+-- | [Output Only] Type of resource. Always replicapoolupdater#operationList
+-- for OperationList resources.
 olKind :: Lens' OperationList Text
 olKind = lens _olKind (\ s a -> s{_olKind = a})
 
@@ -380,7 +380,7 @@ olItems
   = lens _olItems (\ s a -> s{_olItems = a}) . _Default
       . _Coerce
 
--- | [Output Only] Server-defined URL for this resource.
+-- | [Output Only] The fully qualified URL for the resource.
 olSelfLink :: Lens' OperationList (Maybe Text)
 olSelfLink
   = lens _olSelfLink (\ s a -> s{_olSelfLink = a})
@@ -393,7 +393,7 @@ instance FromJSON OperationList where
         parseJSON
           = withObject "OperationList"
               (\ o ->
-                 OperationList <$>
+                 OperationList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "replicapoolupdater#operationList")
                      <*> (o .:? "items" .!= mempty)
@@ -401,7 +401,7 @@ instance FromJSON OperationList where
                      <*> (o .:? "id"))
 
 instance ToJSON OperationList where
-        toJSON OperationList{..}
+        toJSON OperationList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olNextPageToken,
@@ -412,7 +412,7 @@ instance ToJSON OperationList where
 -- | Response returned by ListInstanceUpdates method.
 --
 -- /See:/ 'instanceUpdateList' smart constructor.
-data InstanceUpdateList = InstanceUpdateList
+data InstanceUpdateList = InstanceUpdateList'
     { _iulNextPageToken :: !(Maybe Text)
     , _iulKind          :: !Text
     , _iulItems         :: !(Maybe [InstanceUpdate])
@@ -433,7 +433,7 @@ data InstanceUpdateList = InstanceUpdateList
 instanceUpdateList
     :: InstanceUpdateList
 instanceUpdateList =
-    InstanceUpdateList
+    InstanceUpdateList'
     { _iulNextPageToken = Nothing
     , _iulKind = "replicapoolupdater#instanceUpdateList"
     , _iulItems = Nothing
@@ -466,7 +466,7 @@ instance FromJSON InstanceUpdateList where
         parseJSON
           = withObject "InstanceUpdateList"
               (\ o ->
-                 InstanceUpdateList <$>
+                 InstanceUpdateList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "replicapoolupdater#instanceUpdateList")
@@ -474,7 +474,7 @@ instance FromJSON InstanceUpdateList where
                      <*> (o .:? "selfLink"))
 
 instance ToJSON InstanceUpdateList where
-        toJSON InstanceUpdateList{..}
+        toJSON InstanceUpdateList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _iulNextPageToken,
@@ -484,7 +484,7 @@ instance ToJSON InstanceUpdateList where
 
 --
 -- /See:/ 'rollingUpdateErrorErrorsItem' smart constructor.
-data RollingUpdateErrorErrorsItem = RollingUpdateErrorErrorsItem
+data RollingUpdateErrorErrorsItem = RollingUpdateErrorErrorsItem'
     { _rueeiLocation :: !(Maybe Text)
     , _rueeiCode     :: !(Maybe Text)
     , _rueeiMessage  :: !(Maybe Text)
@@ -502,7 +502,7 @@ data RollingUpdateErrorErrorsItem = RollingUpdateErrorErrorsItem
 rollingUpdateErrorErrorsItem
     :: RollingUpdateErrorErrorsItem
 rollingUpdateErrorErrorsItem =
-    RollingUpdateErrorErrorsItem
+    RollingUpdateErrorErrorsItem'
     { _rueeiLocation = Nothing
     , _rueeiCode = Nothing
     , _rueeiMessage = Nothing
@@ -529,12 +529,12 @@ instance FromJSON RollingUpdateErrorErrorsItem where
         parseJSON
           = withObject "RollingUpdateErrorErrorsItem"
               (\ o ->
-                 RollingUpdateErrorErrorsItem <$>
+                 RollingUpdateErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON RollingUpdateErrorErrorsItem where
-        toJSON RollingUpdateErrorErrorsItem{..}
+        toJSON RollingUpdateErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _rueeiLocation,
@@ -544,7 +544,7 @@ instance ToJSON RollingUpdateErrorErrorsItem where
 -- | An operation resource, used to manage asynchronous API requests.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
@@ -619,7 +619,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -707,7 +707,7 @@ oHTTPErrorStatusCode
 oUser :: Lens' Operation (Maybe Text)
 oUser = lens _oUser (\ s a -> s{_oUser = a})
 
--- | [Output Only] Server defined URL for the resource.
+-- | [Output Only] The fully qualified URL for the resource.
 oSelfLink :: Lens' Operation (Maybe Text)
 oSelfLink
   = lens _oSelfLink (\ s a -> s{_oSelfLink = a})
@@ -760,7 +760,7 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "targetId") <*> (o .:? "status") <*>
                      (o .:? "insertTime")
                      <*> (o .:? "progress")
@@ -784,7 +784,7 @@ instance FromJSON Operation where
                      <*> (o .:? "clientOperationId"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("targetId" .=) <$> _oTargetId,
@@ -811,7 +811,7 @@ instance ToJSON Operation where
 -- | Update of a single instance.
 --
 -- /See:/ 'instanceUpdate' smart constructor.
-data InstanceUpdate = InstanceUpdate
+data InstanceUpdate = InstanceUpdate'
     { _iuStatus   :: !(Maybe Text)
     , _iuError    :: !(Maybe InstanceUpdateError)
     , _iuInstance :: !(Maybe Text)
@@ -829,7 +829,7 @@ data InstanceUpdate = InstanceUpdate
 instanceUpdate
     :: InstanceUpdate
 instanceUpdate =
-    InstanceUpdate
+    InstanceUpdate'
     { _iuStatus = Nothing
     , _iuError = Nothing
     , _iuInstance = Nothing
@@ -861,12 +861,12 @@ instance FromJSON InstanceUpdate where
         parseJSON
           = withObject "InstanceUpdate"
               (\ o ->
-                 InstanceUpdate <$>
+                 InstanceUpdate' <$>
                    (o .:? "status") <*> (o .:? "error") <*>
                      (o .:? "instance"))
 
 instance ToJSON InstanceUpdate where
-        toJSON InstanceUpdate{..}
+        toJSON InstanceUpdate'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _iuStatus,
@@ -876,7 +876,7 @@ instance ToJSON InstanceUpdate where
 -- | Errors that occurred during the instance update.
 --
 -- /See:/ 'instanceUpdateError' smart constructor.
-newtype InstanceUpdateError = InstanceUpdateError
+newtype InstanceUpdateError = InstanceUpdateError'
     { _iueErrors :: Maybe [InstanceUpdateErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -888,7 +888,7 @@ newtype InstanceUpdateError = InstanceUpdateError
 instanceUpdateError
     :: InstanceUpdateError
 instanceUpdateError =
-    InstanceUpdateError
+    InstanceUpdateError'
     { _iueErrors = Nothing
     }
 
@@ -904,16 +904,16 @@ instance FromJSON InstanceUpdateError where
         parseJSON
           = withObject "InstanceUpdateError"
               (\ o ->
-                 InstanceUpdateError <$> (o .:? "errors" .!= mempty))
+                 InstanceUpdateError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON InstanceUpdateError where
-        toJSON InstanceUpdateError{..}
+        toJSON InstanceUpdateError'{..}
           = object (catMaybes [("errors" .=) <$> _iueErrors])
 
 -- | Parameters of the update process.
 --
 -- /See:/ 'rollingUpdatePolicy' smart constructor.
-data RollingUpdatePolicy = RollingUpdatePolicy
+data RollingUpdatePolicy = RollingUpdatePolicy'
     { _rupMinInstanceUpdateTimeSec  :: !(Maybe (Textual Int32))
     , _rupInstanceStartupTimeoutSec :: !(Maybe (Textual Int32))
     , _rupMaxNumFailedInstances     :: !(Maybe (Textual Int32))
@@ -937,7 +937,7 @@ data RollingUpdatePolicy = RollingUpdatePolicy
 rollingUpdatePolicy
     :: RollingUpdatePolicy
 rollingUpdatePolicy =
-    RollingUpdatePolicy
+    RollingUpdatePolicy'
     { _rupMinInstanceUpdateTimeSec = Nothing
     , _rupInstanceStartupTimeoutSec = Nothing
     , _rupMaxNumFailedInstances = Nothing
@@ -999,7 +999,7 @@ instance FromJSON RollingUpdatePolicy where
         parseJSON
           = withObject "RollingUpdatePolicy"
               (\ o ->
-                 RollingUpdatePolicy <$>
+                 RollingUpdatePolicy' <$>
                    (o .:? "minInstanceUpdateTimeSec") <*>
                      (o .:? "instanceStartupTimeoutSec")
                      <*> (o .:? "maxNumFailedInstances")
@@ -1007,7 +1007,7 @@ instance FromJSON RollingUpdatePolicy where
                      <*> (o .:? "maxNumConcurrentInstances"))
 
 instance ToJSON RollingUpdatePolicy where
-        toJSON RollingUpdatePolicy{..}
+        toJSON RollingUpdatePolicy'{..}
           = object
               (catMaybes
                  [("minInstanceUpdateTimeSec" .=) <$>
@@ -1025,7 +1025,7 @@ instance ToJSON RollingUpdatePolicy where
 -- this field will be populated.
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
+newtype OperationError = OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1037,7 +1037,7 @@ newtype OperationError = OperationError
 operationError
     :: OperationError
 operationError =
-    OperationError
+    OperationError'
     { _oeErrors = Nothing
     }
 
@@ -1053,15 +1053,15 @@ instance FromJSON OperationError where
         parseJSON
           = withObject "OperationError"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 OperationError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON OperationError where
-        toJSON OperationError{..}
+        toJSON OperationError'{..}
           = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem
+data OperationErrorErrorsItem = OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
@@ -1079,7 +1079,7 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem
+    OperationErrorErrorsItem'
     { _oeeiLocation = Nothing
     , _oeeiCode = Nothing
     , _oeeiMessage = Nothing
@@ -1104,12 +1104,12 @@ instance FromJSON OperationErrorErrorsItem where
         parseJSON
           = withObject "OperationErrorErrorsItem"
               (\ o ->
-                 OperationErrorErrorsItem <$>
+                 OperationErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationErrorErrorsItem where
-        toJSON OperationErrorErrorsItem{..}
+        toJSON OperationErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _oeeiLocation,
@@ -1118,7 +1118,7 @@ instance ToJSON OperationErrorErrorsItem where
 
 --
 -- /See:/ 'instanceUpdateErrorErrorsItem' smart constructor.
-data InstanceUpdateErrorErrorsItem = InstanceUpdateErrorErrorsItem
+data InstanceUpdateErrorErrorsItem = InstanceUpdateErrorErrorsItem'
     { _iueeiLocation :: !(Maybe Text)
     , _iueeiCode     :: !(Maybe Text)
     , _iueeiMessage  :: !(Maybe Text)
@@ -1136,7 +1136,7 @@ data InstanceUpdateErrorErrorsItem = InstanceUpdateErrorErrorsItem
 instanceUpdateErrorErrorsItem
     :: InstanceUpdateErrorErrorsItem
 instanceUpdateErrorErrorsItem =
-    InstanceUpdateErrorErrorsItem
+    InstanceUpdateErrorErrorsItem'
     { _iueeiLocation = Nothing
     , _iueeiCode = Nothing
     , _iueeiMessage = Nothing
@@ -1163,12 +1163,12 @@ instance FromJSON InstanceUpdateErrorErrorsItem where
         parseJSON
           = withObject "InstanceUpdateErrorErrorsItem"
               (\ o ->
-                 InstanceUpdateErrorErrorsItem <$>
+                 InstanceUpdateErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON InstanceUpdateErrorErrorsItem where
-        toJSON InstanceUpdateErrorErrorsItem{..}
+        toJSON InstanceUpdateErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _iueeiLocation,
@@ -1178,7 +1178,7 @@ instance ToJSON InstanceUpdateErrorErrorsItem where
 -- | Response returned by List method.
 --
 -- /See:/ 'rollingUpdateList' smart constructor.
-data RollingUpdateList = RollingUpdateList
+data RollingUpdateList = RollingUpdateList'
     { _rulNextPageToken :: !(Maybe Text)
     , _rulKind          :: !Text
     , _rulItems         :: !(Maybe [RollingUpdate])
@@ -1199,7 +1199,7 @@ data RollingUpdateList = RollingUpdateList
 rollingUpdateList
     :: RollingUpdateList
 rollingUpdateList =
-    RollingUpdateList
+    RollingUpdateList'
     { _rulNextPageToken = Nothing
     , _rulKind = "replicapoolupdater#rollingUpdateList"
     , _rulItems = Nothing
@@ -1232,7 +1232,7 @@ instance FromJSON RollingUpdateList where
         parseJSON
           = withObject "RollingUpdateList"
               (\ o ->
-                 RollingUpdateList <$>
+                 RollingUpdateList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "replicapoolupdater#rollingUpdateList")
@@ -1240,7 +1240,7 @@ instance FromJSON RollingUpdateList where
                      <*> (o .:? "selfLink"))
 
 instance ToJSON RollingUpdateList where
-        toJSON RollingUpdateList{..}
+        toJSON RollingUpdateList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rulNextPageToken,
@@ -1250,7 +1250,7 @@ instance ToJSON RollingUpdateList where
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem
+data OperationWarningsItem = OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe Text)
     , _owiMessage :: !(Maybe Text)
@@ -1268,7 +1268,7 @@ data OperationWarningsItem = OperationWarningsItem
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem
+    OperationWarningsItem'
     { _owiData = Nothing
     , _owiCode = Nothing
     , _owiMessage = Nothing
@@ -1293,12 +1293,12 @@ instance FromJSON OperationWarningsItem where
         parseJSON
           = withObject "OperationWarningsItem"
               (\ o ->
-                 OperationWarningsItem <$>
+                 OperationWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationWarningsItem where
-        toJSON OperationWarningsItem{..}
+        toJSON OperationWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,

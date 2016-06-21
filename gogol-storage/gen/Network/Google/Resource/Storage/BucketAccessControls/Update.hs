@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.BucketAccessControls.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type BucketAccessControlsUpdateResource =
 -- | Updates an ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsUpdate' smart constructor.
-data BucketAccessControlsUpdate = BucketAccessControlsUpdate
+data BucketAccessControlsUpdate = BucketAccessControlsUpdate'
     { _bacuBucket  :: !Text
     , _bacuPayload :: !BucketAccessControl
     , _bacuEntity  :: !Text
@@ -78,7 +78,7 @@ bucketAccessControlsUpdate
     -> Text -- ^ 'bacuEntity'
     -> BucketAccessControlsUpdate
 bucketAccessControlsUpdate pBacuBucket_ pBacuPayload_ pBacuEntity_ =
-    BucketAccessControlsUpdate
+    BucketAccessControlsUpdate'
     { _bacuBucket = pBacuBucket_
     , _bacuPayload = pBacuPayload_
     , _bacuEntity = pBacuEntity_
@@ -105,7 +105,10 @@ instance GoogleRequest BucketAccessControlsUpdate
          where
         type Rs BucketAccessControlsUpdate =
              BucketAccessControl
-        requestClient BucketAccessControlsUpdate{..}
+        type Scopes BucketAccessControlsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient BucketAccessControlsUpdate'{..}
           = go _bacuBucket _bacuEntity (Just AltJSON)
               _bacuPayload
               storageService

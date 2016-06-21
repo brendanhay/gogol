@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Permissions.BatchDelete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TablesPermissionsBatchDeleteResource =
 -- | Remove permission entries from an already existing asset.
 --
 -- /See:/ 'tablesPermissionsBatchDelete' smart constructor.
-data TablesPermissionsBatchDelete = TablesPermissionsBatchDelete
+data TablesPermissionsBatchDelete = TablesPermissionsBatchDelete'
     { _tpbdPayload :: !PermissionsBatchDeleteRequest
     , _tpbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ tablesPermissionsBatchDelete
     -> Text -- ^ 'tpbdId'
     -> TablesPermissionsBatchDelete
 tablesPermissionsBatchDelete pTpbdPayload_ pTpbdId_ =
-    TablesPermissionsBatchDelete
+    TablesPermissionsBatchDelete'
     { _tpbdPayload = pTpbdPayload_
     , _tpbdId = pTpbdId_
     }
@@ -91,7 +91,9 @@ instance GoogleRequest TablesPermissionsBatchDelete
          where
         type Rs TablesPermissionsBatchDelete =
              PermissionsBatchDeleteResponse
-        requestClient TablesPermissionsBatchDelete{..}
+        type Scopes TablesPermissionsBatchDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient TablesPermissionsBatchDelete'{..}
           = go _tpbdId (Just AltJSON) _tpbdPayload
               mapsEngineService
           where go

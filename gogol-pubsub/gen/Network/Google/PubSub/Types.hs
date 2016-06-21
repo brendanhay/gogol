@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.PubSub.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -20,7 +21,7 @@ module Network.Google.PubSub.Types
 
     -- * OAuth Scopes
     , cloudPlatformScope
-    , pubsubScope
+    , pubSubScope
 
     -- * PushConfig
     , PushConfig
@@ -53,6 +54,7 @@ module Network.Google.PubSub.Types
     , PubsubMessage
     , pubsubMessage
     , pmData
+    , pmPublishTime
     , pmAttributes
     , pmMessageId
 
@@ -157,15 +159,15 @@ import           Network.Google.PubSub.Types.Product
 import           Network.Google.PubSub.Types.Sum
 
 -- | Default request referring to version 'v1' of the Google Cloud Pub/Sub API. This contains the host and root path used as a starting point for constructing service requests.
-pubSubService :: Service
+pubSubService :: ServiceConfig
 pubSubService
   = defaultService (ServiceId "pubsub:v1")
       "pubsub.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View and manage Pub\/Sub topics and subscriptions
-pubsubScope :: OAuthScope
-pubsubScope = "https://www.googleapis.com/auth/pubsub";
+pubSubScope :: Proxy '["https://www.googleapis.com/auth/pubsub"]
+pubSubScope = Proxy;

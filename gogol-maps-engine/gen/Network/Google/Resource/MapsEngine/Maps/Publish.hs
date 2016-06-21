@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Maps.Publish
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type MapsPublishResource =
 -- | Publish a map asset.
 --
 -- /See:/ 'mapsPublish' smart constructor.
-data MapsPublish = MapsPublish
+data MapsPublish = MapsPublish'
     { _mapForce :: !(Maybe Bool)
     , _mapId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ mapsPublish
     :: Text -- ^ 'mapId'
     -> MapsPublish
 mapsPublish pMapId_ =
-    MapsPublish
+    MapsPublish'
     { _mapForce = Nothing
     , _mapId = pMapId_
     }
@@ -88,7 +88,9 @@ mapId = lens _mapId (\ s a -> s{_mapId = a})
 
 instance GoogleRequest MapsPublish where
         type Rs MapsPublish = PublishResponse
-        requestClient MapsPublish{..}
+        type Scopes MapsPublish =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient MapsPublish'{..}
           = go _mapId _mapForce (Just AltJSON)
               mapsEngineService
           where go

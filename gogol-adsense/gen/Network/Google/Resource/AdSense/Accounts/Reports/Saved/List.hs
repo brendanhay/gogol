@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsReportsSavedListResource =
 -- | List all saved reports in the specified AdSense account.
 --
 -- /See:/ 'accountsReportsSavedList' smart constructor.
-data AccountsReportsSavedList = AccountsReportsSavedList
+data AccountsReportsSavedList = AccountsReportsSavedList'
     { _arslAccountId  :: !Text
     , _arslPageToken  :: !(Maybe Text)
     , _arslMaxResults :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ accountsReportsSavedList
     :: Text -- ^ 'arslAccountId'
     -> AccountsReportsSavedList
 accountsReportsSavedList pArslAccountId_ =
-    AccountsReportsSavedList
+    AccountsReportsSavedList'
     { _arslAccountId = pArslAccountId_
     , _arslPageToken = Nothing
     , _arslMaxResults = Nothing
@@ -106,7 +106,10 @@ arslMaxResults
 
 instance GoogleRequest AccountsReportsSavedList where
         type Rs AccountsReportsSavedList = SavedReports
-        requestClient AccountsReportsSavedList{..}
+        type Scopes AccountsReportsSavedList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AccountsReportsSavedList'{..}
           = go _arslAccountId _arslPageToken _arslMaxResults
               (Just AltJSON)
               adSenseService

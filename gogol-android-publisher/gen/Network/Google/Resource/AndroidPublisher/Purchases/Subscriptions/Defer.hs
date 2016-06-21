@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type PurchasesSubscriptionsDeferResource =
 -- expiration time.
 --
 -- /See:/ 'purchasesSubscriptionsDefer' smart constructor.
-data PurchasesSubscriptionsDefer = PurchasesSubscriptionsDefer
+data PurchasesSubscriptionsDefer = PurchasesSubscriptionsDefer'
     { _psdPackageName    :: !Text
     , _psdToken          :: !Text
     , _psdPayload        :: !SubscriptionPurchasesDeferRequest
@@ -88,7 +88,7 @@ purchasesSubscriptionsDefer
     -> Text -- ^ 'psdSubscriptionId'
     -> PurchasesSubscriptionsDefer
 purchasesSubscriptionsDefer pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscriptionId_ =
-    PurchasesSubscriptionsDefer
+    PurchasesSubscriptionsDefer'
     { _psdPackageName = pPsdPackageName_
     , _psdToken = pPsdToken_
     , _psdPayload = pPsdPayload_
@@ -122,7 +122,9 @@ instance GoogleRequest PurchasesSubscriptionsDefer
          where
         type Rs PurchasesSubscriptionsDefer =
              SubscriptionPurchasesDeferResponse
-        requestClient PurchasesSubscriptionsDefer{..}
+        type Scopes PurchasesSubscriptionsDefer =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient PurchasesSubscriptionsDefer'{..}
           = go _psdPackageName _psdSubscriptionId _psdToken
               (Just AltJSON)
               _psdPayload

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Reports.Saved.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ReportsSavedListResource =
 -- | List all saved reports in this AdSense account.
 --
 -- /See:/ 'reportsSavedList' smart constructor.
-data ReportsSavedList = ReportsSavedList
+data ReportsSavedList = ReportsSavedList'
     { _rslPageToken  :: !(Maybe Text)
     , _rslMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ data ReportsSavedList = ReportsSavedList
 reportsSavedList
     :: ReportsSavedList
 reportsSavedList =
-    ReportsSavedList
+    ReportsSavedList'
     { _rslPageToken = Nothing
     , _rslMaxResults = Nothing
     }
@@ -91,7 +91,10 @@ rslMaxResults
 
 instance GoogleRequest ReportsSavedList where
         type Rs ReportsSavedList = SavedReports
-        requestClient ReportsSavedList{..}
+        type Scopes ReportsSavedList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient ReportsSavedList'{..}
           = go _rslPageToken _rslMaxResults (Just AltJSON)
               adSenseService
           where go

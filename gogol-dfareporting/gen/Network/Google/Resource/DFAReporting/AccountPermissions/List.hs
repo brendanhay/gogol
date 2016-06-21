@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AccountPermissions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'AccountPermissionsList' request conforms to.
 type AccountPermissionsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountPermissions" :>
@@ -53,7 +53,7 @@ type AccountPermissionsListResource =
 -- | Retrieves the list of account permissions.
 --
 -- /See:/ 'accountPermissionsList' smart constructor.
-newtype AccountPermissionsList = AccountPermissionsList
+newtype AccountPermissionsList = AccountPermissionsList'
     { _aplProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountPermissionsList
     :: Int64 -- ^ 'aplProFileId'
     -> AccountPermissionsList
 accountPermissionsList pAplProFileId_ =
-    AccountPermissionsList
+    AccountPermissionsList'
     { _aplProFileId = _Coerce # pAplProFileId_
     }
 
@@ -79,7 +79,9 @@ aplProFileId
 instance GoogleRequest AccountPermissionsList where
         type Rs AccountPermissionsList =
              AccountPermissionsListResponse
-        requestClient AccountPermissionsList{..}
+        type Scopes AccountPermissionsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountPermissionsList'{..}
           = go _aplProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

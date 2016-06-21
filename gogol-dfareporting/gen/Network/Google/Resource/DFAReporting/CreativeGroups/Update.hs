@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeGroups.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsUpdate' request conforms to.
 type CreativeGroupsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
@@ -55,7 +55,7 @@ type CreativeGroupsUpdateResource =
 -- | Updates an existing creative group.
 --
 -- /See:/ 'creativeGroupsUpdate' smart constructor.
-data CreativeGroupsUpdate = CreativeGroupsUpdate
+data CreativeGroupsUpdate = CreativeGroupsUpdate'
     { _cguProFileId :: !(Textual Int64)
     , _cguPayload   :: !CreativeGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ creativeGroupsUpdate
     -> CreativeGroup -- ^ 'cguPayload'
     -> CreativeGroupsUpdate
 creativeGroupsUpdate pCguProFileId_ pCguPayload_ =
-    CreativeGroupsUpdate
+    CreativeGroupsUpdate'
     { _cguProFileId = _Coerce # pCguProFileId_
     , _cguPayload = pCguPayload_
     }
@@ -90,7 +90,9 @@ cguPayload
 
 instance GoogleRequest CreativeGroupsUpdate where
         type Rs CreativeGroupsUpdate = CreativeGroup
-        requestClient CreativeGroupsUpdate{..}
+        type Scopes CreativeGroupsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeGroupsUpdate'{..}
           = go _cguProFileId (Just AltJSON) _cguPayload
               dFAReportingService
           where go

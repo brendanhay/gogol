@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Features.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type TablesFeaturesListResource =
 -- | Return all features readable by the current user.
 --
 -- /See:/ 'tablesFeaturesList' smart constructor.
-data TablesFeaturesList = TablesFeaturesList
+data TablesFeaturesList = TablesFeaturesList'
     { _tflInclude    :: !(Maybe Text)
     , _tflWhere      :: !(Maybe Text)
     , _tflOrderBy    :: !(Maybe Text)
@@ -111,7 +111,7 @@ tablesFeaturesList
     :: Text -- ^ 'tflId'
     -> TablesFeaturesList
 tablesFeaturesList pTflId_ =
-    TablesFeaturesList
+    TablesFeaturesList'
     { _tflInclude = Nothing
     , _tflWhere = Nothing
     , _tflOrderBy = Nothing
@@ -185,7 +185,10 @@ tflMaxResults
 
 instance GoogleRequest TablesFeaturesList where
         type Rs TablesFeaturesList = FeaturesListResponse
-        requestClient TablesFeaturesList{..}
+        type Scopes TablesFeaturesList =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient TablesFeaturesList'{..}
           = go _tflId _tflInclude _tflWhere _tflOrderBy
               _tflVersion
               _tflLimit

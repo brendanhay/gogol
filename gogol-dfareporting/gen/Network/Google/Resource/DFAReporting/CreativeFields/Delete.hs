@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeFields.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsDelete' request conforms to.
 type CreativeFieldsDeleteResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -54,7 +54,7 @@ type CreativeFieldsDeleteResource =
 -- | Deletes an existing creative field.
 --
 -- /See:/ 'creativeFieldsDelete' smart constructor.
-data CreativeFieldsDelete = CreativeFieldsDelete
+data CreativeFieldsDelete = CreativeFieldsDelete'
     { _cfdProFileId :: !(Textual Int64)
     , _cfdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativeFieldsDelete
     -> Int64 -- ^ 'cfdId'
     -> CreativeFieldsDelete
 creativeFieldsDelete pCfdProFileId_ pCfdId_ =
-    CreativeFieldsDelete
+    CreativeFieldsDelete'
     { _cfdProFileId = _Coerce # pCfdProFileId_
     , _cfdId = _Coerce # pCfdId_
     }
@@ -89,7 +89,9 @@ cfdId
 
 instance GoogleRequest CreativeFieldsDelete where
         type Rs CreativeFieldsDelete = ()
-        requestClient CreativeFieldsDelete{..}
+        type Scopes CreativeFieldsDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeFieldsDelete'{..}
           = go _cfdProFileId _cfdId (Just AltJSON)
               dFAReportingService
           where go

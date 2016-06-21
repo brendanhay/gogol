@@ -1,5 +1,5 @@
 name:                  gogol-play-moviespartner
-version:               0.0.1
+version:               0.1.0
 synopsis:              Google Play Movies Partner SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -7,15 +7,14 @@ license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015 Brendan Hay
+copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Lets Google Play Movies Partners get the delivery status of their
-    titles.
+    Gets the delivery status of titles for Google Play Movies Partners.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -36,7 +35,10 @@ library
     exposed-modules:
           Network.Google.PlayMoviesPartner
         , Network.Google.PlayMoviesPartner.Types
+        , Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.Get
         , Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
+        , Network.Google.Resource.PlayMoviesPartner.Accounts.Components.List
+        , Network.Google.Resource.PlayMoviesPartner.Accounts.Components.Type.Get
         , Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
         , Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
         , Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
@@ -49,5 +51,5 @@ library
         , Network.Google.PlayMoviesPartner.Types.Sum
 
     build-depends:
-          gogol-core == 0.0.1.*
-        , base       >= 4.7 && < 5
+          gogol-core == 0.1.0.*
+        , base       >= 4.7

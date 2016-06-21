@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickSearch.Conversion.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -68,7 +68,7 @@ type ConversionPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'conversionPatch' smart constructor.
-data ConversionPatch = ConversionPatch
+data ConversionPatch = ConversionPatch'
     { _cpEngineAccountId :: !(Textual Int64)
     , _cpAgencyId        :: !(Textual Int64)
     , _cpAdvertiserId    :: !(Textual Int64)
@@ -109,7 +109,7 @@ conversionPatch
     -> Int32 -- ^ 'cpRowCount'
     -> ConversionPatch
 conversionPatch pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpPayload_ pCpStartDate_ pCpStartRow_ pCpRowCount_ =
-    ConversionPatch
+    ConversionPatch'
     { _cpEngineAccountId = _Coerce # pCpEngineAccountId_
     , _cpAgencyId = _Coerce # pCpAgencyId_
     , _cpAdvertiserId = _Coerce # pCpAdvertiserId_
@@ -173,7 +173,9 @@ cpRowCount
 
 instance GoogleRequest ConversionPatch where
         type Rs ConversionPatch = ConversionList
-        requestClient ConversionPatch{..}
+        type Scopes ConversionPatch =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
+        requestClient ConversionPatch'{..}
           = go (Just _cpAdvertiserId) (Just _cpAgencyId)
               (Just _cpEndDate)
               (Just _cpEngineAccountId)

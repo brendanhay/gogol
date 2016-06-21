@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Volumes.Associated.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type VolumesAssociatedListResource =
 -- | Return a list of associated books.
 --
 -- /See:/ 'volumesAssociatedList' smart constructor.
-data VolumesAssociatedList = VolumesAssociatedList
+data VolumesAssociatedList = VolumesAssociatedList'
     { _valLocale                   :: !(Maybe Text)
     , _valMaxAllowedMaturityRating :: !(Maybe VolumesAssociatedListMaxAllowedMaturityRating)
     , _valVolumeId                 :: !Text
@@ -88,7 +88,7 @@ volumesAssociatedList
     :: Text -- ^ 'valVolumeId'
     -> VolumesAssociatedList
 volumesAssociatedList pValVolumeId_ =
-    VolumesAssociatedList
+    VolumesAssociatedList'
     { _valLocale = Nothing
     , _valMaxAllowedMaturityRating = Nothing
     , _valVolumeId = pValVolumeId_
@@ -127,7 +127,9 @@ valAssociation
 
 instance GoogleRequest VolumesAssociatedList where
         type Rs VolumesAssociatedList = Volumes
-        requestClient VolumesAssociatedList{..}
+        type Scopes VolumesAssociatedList =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient VolumesAssociatedList'{..}
           = go _valVolumeId _valLocale
               _valMaxAllowedMaturityRating
               _valSource

@@ -14,14 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.Start
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This method starts an instance that was stopped using the using the
--- instances().stop method. For more information, see Restart an instance.
+-- Starts an instance that was stopped using the using the instances().stop
+-- method. For more information, see Restart an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.start@.
 module Network.Google.Resource.Compute.Instances.Start
@@ -56,11 +56,11 @@ type InstancesStartResource =
                      "start" :>
                        QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
--- | This method starts an instance that was stopped using the using the
--- instances().stop method. For more information, see Restart an instance.
+-- | Starts an instance that was stopped using the using the instances().stop
+-- method. For more information, see Restart an instance.
 --
 -- /See:/ 'instancesStart' smart constructor.
-data InstancesStart = InstancesStart
+data InstancesStart = InstancesStart'
     { _insProject  :: !Text
     , _insZone     :: !Text
     , _insInstance :: !Text
@@ -81,7 +81,7 @@ instancesStart
     -> Text -- ^ 'insInstance'
     -> InstancesStart
 instancesStart pInsProject_ pInsZone_ pInsInstance_ =
-    InstancesStart
+    InstancesStart'
     { _insProject = pInsProject_
     , _insZone = pInsZone_
     , _insInstance = pInsInstance_
@@ -103,7 +103,10 @@ insInstance
 
 instance GoogleRequest InstancesStart where
         type Rs InstancesStart = Operation
-        requestClient InstancesStart{..}
+        type Scopes InstancesStart =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstancesStart'{..}
           = go _insProject _insZone _insInstance (Just AltJSON)
               computeService
           where go

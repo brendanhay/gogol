@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeAssets.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativeAssetsInsert' request conforms to.
 type CreativeAssetsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeAssets" :>
@@ -57,22 +57,21 @@ type CreativeAssetsInsertResource =
        :<|>
        "upload" :>
          "dfareporting" :>
-           "v2.2" :>
+           "v2.5" :>
              "userprofiles" :>
                Capture "profileId" (Textual Int64) :>
                  "creativeAssets" :>
                    Capture "advertiserId" (Textual Int64) :>
                      "creativeAssets" :>
                        QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" AltMedia :>
-                           MultipartRelated '[JSON] CreativeAssetMetadata
-                             RequestBody
-                             :> Post '[JSON] CreativeAssetMetadata
+                         QueryParam "uploadType" Multipart :>
+                           MultipartRelated '[JSON] CreativeAssetMetadata :>
+                             Post '[JSON] CreativeAssetMetadata
 
 -- | Inserts a new creative asset.
 --
 -- /See:/ 'creativeAssetsInsert' smart constructor.
-data CreativeAssetsInsert = CreativeAssetsInsert
+data CreativeAssetsInsert = CreativeAssetsInsert'
     { _caiAdvertiserId :: !(Textual Int64)
     , _caiProFileId    :: !(Textual Int64)
     , _caiPayload      :: !CreativeAssetMetadata
@@ -93,7 +92,7 @@ creativeAssetsInsert
     -> CreativeAssetMetadata -- ^ 'caiPayload'
     -> CreativeAssetsInsert
 creativeAssetsInsert pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ =
-    CreativeAssetsInsert
+    CreativeAssetsInsert'
     { _caiAdvertiserId = _Coerce # pCaiAdvertiserId_
     , _caiProFileId = _Coerce # pCaiProFileId_
     , _caiPayload = pCaiPayload_
@@ -119,7 +118,9 @@ caiPayload
 
 instance GoogleRequest CreativeAssetsInsert where
         type Rs CreativeAssetsInsert = CreativeAssetMetadata
-        requestClient CreativeAssetsInsert{..}
+        type Scopes CreativeAssetsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeAssetsInsert'{..}
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)
               _caiPayload
               dFAReportingService
@@ -132,10 +133,12 @@ instance GoogleRequest
          (MediaUpload CreativeAssetsInsert) where
         type Rs (MediaUpload CreativeAssetsInsert) =
              CreativeAssetMetadata
+        type Scopes (MediaUpload CreativeAssetsInsert) =
+             Scopes CreativeAssetsInsert
         requestClient
-          (MediaUpload CreativeAssetsInsert{..} body)
+          (MediaUpload CreativeAssetsInsert'{..} body)
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _caiPayload
               body
               dFAReportingService

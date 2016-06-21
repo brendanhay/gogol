@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Variants.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new variant.
+-- Creates a new variant. For the definitions of variants and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.create@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.create@.
 module Network.Google.Resource.Genomics.Variants.Create
     (
     -- * REST Resource
@@ -61,10 +63,12 @@ type VariantsCreateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Variant :> Post '[JSON] Variant
 
--- | Creates a new variant.
+-- | Creates a new variant. For the definitions of variants and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantsCreate' smart constructor.
-data VariantsCreate = VariantsCreate
+data VariantsCreate = VariantsCreate'
     { _vcXgafv          :: !(Maybe Text)
     , _vcUploadProtocol :: !(Maybe Text)
     , _vcPp             :: !Bool
@@ -98,7 +102,7 @@ variantsCreate
     :: Variant -- ^ 'vcPayload'
     -> VariantsCreate
 variantsCreate pVcPayload_ =
-    VariantsCreate
+    VariantsCreate'
     { _vcXgafv = Nothing
     , _vcUploadProtocol = Nothing
     , _vcPp = True
@@ -152,7 +156,10 @@ vcCallback
 
 instance GoogleRequest VariantsCreate where
         type Rs VariantsCreate = Variant
-        requestClient VariantsCreate{..}
+        type Scopes VariantsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient VariantsCreate'{..}
           = go _vcXgafv _vcUploadProtocol (Just _vcPp)
               _vcAccessToken
               _vcUploadType

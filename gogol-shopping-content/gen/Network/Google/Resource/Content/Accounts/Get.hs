@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accounts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AccountsGetResource =
 -- | Retrieves a Merchant Center account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet
+data AccountsGet = AccountsGet'
     { _agMerchantId :: !(Textual Word64)
     , _agAccountId  :: !(Textual Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ accountsGet
     -> Word64 -- ^ 'agAccountId'
     -> AccountsGet
 accountsGet pAgMerchantId_ pAgAccountId_ =
-    AccountsGet
+    AccountsGet'
     { _agMerchantId = _Coerce # pAgMerchantId_
     , _agAccountId = _Coerce # pAgAccountId_
     }
@@ -89,7 +89,9 @@ agAccountId
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
-        requestClient AccountsGet{..}
+        type Scopes AccountsGet =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountsGet'{..}
           = go _agMerchantId _agAccountId (Just AltJSON)
               shoppingContentService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'FloodlightConfigurationsPatch' request conforms to.
 type FloodlightConfigurationsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>
@@ -59,7 +59,7 @@ type FloodlightConfigurationsPatchResource =
 -- semantics.
 --
 -- /See:/ 'floodlightConfigurationsPatch' smart constructor.
-data FloodlightConfigurationsPatch = FloodlightConfigurationsPatch
+data FloodlightConfigurationsPatch = FloodlightConfigurationsPatch'
     { _fcpProFileId :: !(Textual Int64)
     , _fcpPayload   :: !FloodlightConfiguration
     , _fcpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ floodlightConfigurationsPatch
     -> Int64 -- ^ 'fcpId'
     -> FloodlightConfigurationsPatch
 floodlightConfigurationsPatch pFcpProFileId_ pFcpPayload_ pFcpId_ =
-    FloodlightConfigurationsPatch
+    FloodlightConfigurationsPatch'
     { _fcpProFileId = _Coerce # pFcpProFileId_
     , _fcpPayload = pFcpPayload_
     , _fcpId = _Coerce # pFcpId_
@@ -106,7 +106,9 @@ instance GoogleRequest FloodlightConfigurationsPatch
          where
         type Rs FloodlightConfigurationsPatch =
              FloodlightConfiguration
-        requestClient FloodlightConfigurationsPatch{..}
+        type Scopes FloodlightConfigurationsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightConfigurationsPatch'{..}
           = go _fcpProFileId (Just _fcpId) (Just AltJSON)
               _fcpPayload
               dFAReportingService

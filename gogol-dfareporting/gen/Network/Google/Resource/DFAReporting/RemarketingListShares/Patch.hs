@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListSharesPatch' request conforms to.
 type RemarketingListSharesPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>
@@ -59,7 +59,7 @@ type RemarketingListSharesPatchResource =
 -- semantics.
 --
 -- /See:/ 'remarketingListSharesPatch' smart constructor.
-data RemarketingListSharesPatch = RemarketingListSharesPatch
+data RemarketingListSharesPatch = RemarketingListSharesPatch'
     { _rlspProFileId         :: !(Textual Int64)
     , _rlspPayload           :: !RemarketingListShare
     , _rlspRemarketingListId :: !(Textual Int64)
@@ -80,7 +80,7 @@ remarketingListSharesPatch
     -> Int64 -- ^ 'rlspRemarketingListId'
     -> RemarketingListSharesPatch
 remarketingListSharesPatch pRlspProFileId_ pRlspPayload_ pRlspRemarketingListId_ =
-    RemarketingListSharesPatch
+    RemarketingListSharesPatch'
     { _rlspProFileId = _Coerce # pRlspProFileId_
     , _rlspPayload = pRlspPayload_
     , _rlspRemarketingListId = _Coerce # pRlspRemarketingListId_
@@ -109,7 +109,9 @@ instance GoogleRequest RemarketingListSharesPatch
          where
         type Rs RemarketingListSharesPatch =
              RemarketingListShare
-        requestClient RemarketingListSharesPatch{..}
+        type Scopes RemarketingListSharesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient RemarketingListSharesPatch'{..}
           = go _rlspProFileId (Just _rlspRemarketingListId)
               (Just AltJSON)
               _rlspPayload

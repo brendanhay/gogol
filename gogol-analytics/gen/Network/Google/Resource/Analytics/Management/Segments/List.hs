@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Segments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ManagementSegmentsListResource =
 -- | Lists segments to which the user has access.
 --
 -- /See:/ 'managementSegmentsList' smart constructor.
-data ManagementSegmentsList = ManagementSegmentsList
+data ManagementSegmentsList = ManagementSegmentsList'
     { _mslStartIndex :: !(Maybe (Textual Int32))
     , _mslMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ data ManagementSegmentsList = ManagementSegmentsList
 managementSegmentsList
     :: ManagementSegmentsList
 managementSegmentsList =
-    ManagementSegmentsList
+    ManagementSegmentsList'
     { _mslStartIndex = Nothing
     , _mslMaxResults = Nothing
     }
@@ -91,7 +91,11 @@ mslMaxResults
 
 instance GoogleRequest ManagementSegmentsList where
         type Rs ManagementSegmentsList = Segments
-        requestClient ManagementSegmentsList{..}
+        type Scopes ManagementSegmentsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementSegmentsList'{..}
           = go _mslStartIndex _mslMaxResults (Just AltJSON)
               analyticsService
           where go

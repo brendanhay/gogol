@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.UserProFiles.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 -- 'UserProFilesList' request conforms to.
 type UserProFilesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            QueryParam "alt" AltJSON :>
              Get '[JSON] UserProFileList
@@ -50,18 +50,21 @@ type UserProFilesListResource =
 --
 -- /See:/ 'userProFilesList' smart constructor.
 data UserProFilesList =
-    UserProFilesList
+    UserProFilesList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProFilesList' with the minimum fields required to make a request.
 --
 userProFilesList
     :: UserProFilesList
-userProFilesList = UserProFilesList
+userProFilesList = UserProFilesList'
 
 instance GoogleRequest UserProFilesList where
         type Rs UserProFilesList = UserProFileList
-        requestClient UserProFilesList{}
+        type Scopes UserProFilesList =
+             '["https://www.googleapis.com/auth/dfareporting",
+               "https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient UserProFilesList'{}
           = go (Just AltJSON) dFAReportingService
           where go
                   = buildClient

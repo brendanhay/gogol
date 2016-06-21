@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Jobs.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type JobsListResource =
 -- set the allUsers property.
 --
 -- /See:/ 'jobsList' smart constructor.
-data JobsList = JobsList
+data JobsList = JobsList'
     { _jlStateFilter :: !(Maybe [JobsListStateFilter])
     , _jlProjection  :: !(Maybe JobsListProjection)
     , _jlPageToken   :: !(Maybe Text)
@@ -98,7 +98,7 @@ jobsList
     :: Text -- ^ 'jlProjectId'
     -> JobsList
 jobsList pJlProjectId_ =
-    JobsList
+    JobsList'
     { _jlStateFilter = Nothing
     , _jlProjection = Nothing
     , _jlPageToken = Nothing
@@ -144,7 +144,11 @@ jlMaxResults
 
 instance GoogleRequest JobsList where
         type Rs JobsList = JobList
-        requestClient JobsList{..}
+        type Scopes JobsList =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient JobsList'{..}
           = go _jlProjectId (_jlStateFilter ^. _Default)
               _jlProjection
               _jlPageToken

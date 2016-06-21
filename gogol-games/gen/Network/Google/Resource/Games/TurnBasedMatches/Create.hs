@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.TurnBasedMatches.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -33,6 +33,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Create
     , TurnBasedMatchesCreate
 
     -- * Request Lenses
+    , tbmcConsistencyToken
     , tbmcPayload
     , tbmcLanguage
     ) where
@@ -47,22 +48,26 @@ type TurnBasedMatchesCreateResource =
        "v1" :>
          "turnbasedmatches" :>
            "create" :>
-             QueryParam "language" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] TurnBasedMatchCreateRequest :>
-                   Post '[JSON] TurnBasedMatch
+             QueryParam "consistencyToken" (Textual Int64) :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] TurnBasedMatchCreateRequest :>
+                     Post '[JSON] TurnBasedMatch
 
 -- | Create a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesCreate' smart constructor.
-data TurnBasedMatchesCreate = TurnBasedMatchesCreate
-    { _tbmcPayload  :: !TurnBasedMatchCreateRequest
-    , _tbmcLanguage :: !(Maybe Text)
+data TurnBasedMatchesCreate = TurnBasedMatchesCreate'
+    { _tbmcConsistencyToken :: !(Maybe (Textual Int64))
+    , _tbmcPayload          :: !TurnBasedMatchCreateRequest
+    , _tbmcLanguage         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbmcConsistencyToken'
 --
 -- * 'tbmcPayload'
 --
@@ -71,10 +76,18 @@ turnBasedMatchesCreate
     :: TurnBasedMatchCreateRequest -- ^ 'tbmcPayload'
     -> TurnBasedMatchesCreate
 turnBasedMatchesCreate pTbmcPayload_ =
-    TurnBasedMatchesCreate
-    { _tbmcPayload = pTbmcPayload_
+    TurnBasedMatchesCreate'
+    { _tbmcConsistencyToken = Nothing
+    , _tbmcPayload = pTbmcPayload_
     , _tbmcLanguage = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+tbmcConsistencyToken :: Lens' TurnBasedMatchesCreate (Maybe Int64)
+tbmcConsistencyToken
+  = lens _tbmcConsistencyToken
+      (\ s a -> s{_tbmcConsistencyToken = a})
+      . mapping _Coerce
 
 -- | Multipart request metadata.
 tbmcPayload :: Lens' TurnBasedMatchesCreate TurnBasedMatchCreateRequest
@@ -88,8 +101,13 @@ tbmcLanguage
 
 instance GoogleRequest TurnBasedMatchesCreate where
         type Rs TurnBasedMatchesCreate = TurnBasedMatch
-        requestClient TurnBasedMatchesCreate{..}
-          = go _tbmcLanguage (Just AltJSON) _tbmcPayload
+        type Scopes TurnBasedMatchesCreate =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient TurnBasedMatchesCreate'{..}
+          = go _tbmcConsistencyToken _tbmcLanguage
+              (Just AltJSON)
+              _tbmcPayload
               gamesService
           where go
                   = buildClient

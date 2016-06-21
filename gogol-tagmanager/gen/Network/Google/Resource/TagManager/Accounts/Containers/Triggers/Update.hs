@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type AccountsContainersTriggersUpdateResource =
 -- | Updates a GTM Trigger.
 --
 -- /See:/ 'accountsContainersTriggersUpdate' smart constructor.
-data AccountsContainersTriggersUpdate = AccountsContainersTriggersUpdate
+data AccountsContainersTriggersUpdate = AccountsContainersTriggersUpdate'
     { _actuContainerId :: !Text
     , _actuTriggerId   :: !Text
     , _actuFingerprint :: !(Maybe Text)
@@ -89,7 +89,7 @@ accountsContainersTriggersUpdate
     -> Text -- ^ 'actuAccountId'
     -> AccountsContainersTriggersUpdate
 accountsContainersTriggersUpdate pActuContainerId_ pActuTriggerId_ pActuPayload_ pActuAccountId_ =
-    AccountsContainersTriggersUpdate
+    AccountsContainersTriggersUpdate'
     { _actuContainerId = pActuContainerId_
     , _actuTriggerId = pActuTriggerId_
     , _actuFingerprint = Nothing
@@ -130,7 +130,9 @@ actuAccountId
 instance GoogleRequest
          AccountsContainersTriggersUpdate where
         type Rs AccountsContainersTriggersUpdate = Trigger
-        requestClient AccountsContainersTriggersUpdate{..}
+        type Scopes AccountsContainersTriggersUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+        requestClient AccountsContainersTriggersUpdate'{..}
           = go _actuAccountId _actuContainerId _actuTriggerId
               _actuFingerprint
               (Just AltJSON)

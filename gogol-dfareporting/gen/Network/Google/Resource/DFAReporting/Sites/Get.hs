@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Sites.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SitesGet' request conforms to.
 type SitesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -54,7 +54,7 @@ type SitesGetResource =
 -- | Gets one site by ID.
 --
 -- /See:/ 'sitesGet' smart constructor.
-data SitesGet = SitesGet
+data SitesGet = SitesGet'
     { _sggProFileId :: !(Textual Int64)
     , _sggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitesGet
     -> Int64 -- ^ 'sggId'
     -> SitesGet
 sitesGet pSggProFileId_ pSggId_ =
-    SitesGet
+    SitesGet'
     { _sggProFileId = _Coerce # pSggProFileId_
     , _sggId = _Coerce # pSggId_
     }
@@ -89,7 +89,9 @@ sggId
 
 instance GoogleRequest SitesGet where
         type Rs SitesGet = Site
-        requestClient SitesGet{..}
+        type Scopes SitesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SitesGet'{..}
           = go _sggProFileId _sggId (Just AltJSON)
               dFAReportingService
           where go

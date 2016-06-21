@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Prediction.TrainedModels.Predict
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type TrainedModelsPredictResource =
 -- | Submit model id and request a prediction.
 --
 -- /See:/ 'trainedModelsPredict' smart constructor.
-data TrainedModelsPredict = TrainedModelsPredict
+data TrainedModelsPredict = TrainedModelsPredict'
     { _tmpProject :: !Text
     , _tmpPayload :: !Input
     , _tmpId      :: !Text
@@ -78,7 +78,7 @@ trainedModelsPredict
     -> Text -- ^ 'tmpId'
     -> TrainedModelsPredict
 trainedModelsPredict pTmpProject_ pTmpPayload_ pTmpId_ =
-    TrainedModelsPredict
+    TrainedModelsPredict'
     { _tmpProject = pTmpProject_
     , _tmpPayload = pTmpPayload_
     , _tmpId = pTmpId_
@@ -100,7 +100,10 @@ tmpId = lens _tmpId (\ s a -> s{_tmpId = a})
 
 instance GoogleRequest TrainedModelsPredict where
         type Rs TrainedModelsPredict = Output
-        requestClient TrainedModelsPredict{..}
+        type Scopes TrainedModelsPredict =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/prediction"]
+        requestClient TrainedModelsPredict'{..}
           = go _tmpProject _tmpId (Just AltJSON) _tmpPayload
               predictionService
           where go

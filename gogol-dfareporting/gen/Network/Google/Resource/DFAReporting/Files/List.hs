@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Files.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'FilesList' request conforms to.
 type FilesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "files" :>
@@ -62,7 +62,7 @@ type FilesListResource =
 -- | Lists files for a user profile.
 --
 -- /See:/ 'filesList' smart constructor.
-data FilesList = FilesList
+data FilesList = FilesList'
     { _flProFileId  :: !(Textual Int64)
     , _flSortOrder  :: !FilesListSortOrder
     , _flScope      :: !FilesListScope
@@ -90,7 +90,7 @@ filesList
     :: Int64 -- ^ 'flProFileId'
     -> FilesList
 filesList pFlProFileId_ =
-    FilesList
+    FilesList'
     { _flProFileId = _Coerce # pFlProFileId_
     , _flSortOrder = FLSODescending
     , _flScope = FLSMine
@@ -132,7 +132,9 @@ flMaxResults
 
 instance GoogleRequest FilesList where
         type Rs FilesList = FileList
-        requestClient FilesList{..}
+        type Scopes FilesList =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient FilesList'{..}
           = go _flProFileId (Just _flSortOrder) (Just _flScope)
               _flPageToken
               (Just _flSortField)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Settings.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type SettingsGetResource =
 -- | Returns a single user setting.
 --
 -- /See:/ 'settingsGet' smart constructor.
-newtype SettingsGet = SettingsGet
+newtype SettingsGet = SettingsGet'
     { _sgSetting :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ settingsGet
     :: Text -- ^ 'sgSetting'
     -> SettingsGet
 settingsGet pSgSetting_ =
-    SettingsGet
+    SettingsGet'
     { _sgSetting = pSgSetting_
     }
 
@@ -77,7 +77,10 @@ sgSetting
 
 instance GoogleRequest SettingsGet where
         type Rs SettingsGet = Setting
-        requestClient SettingsGet{..}
+        type Scopes SettingsGet =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient SettingsGet'{..}
           = go _sgSetting (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy SettingsGetResource)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -90,7 +90,7 @@ type ObjectsUpdateResource =
 -- | Updates an object\'s metadata.
 --
 -- /See:/ 'objectsUpdate' smart constructor.
-data ObjectsUpdate = ObjectsUpdate
+data ObjectsUpdate = ObjectsUpdate'
     { _ouIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _ouIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _ouIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -132,7 +132,7 @@ objectsUpdate
     -> Text -- ^ 'ouObject'
     -> ObjectsUpdate
 objectsUpdate pOuBucket_ pOuPayload_ pOuObject_ =
-    ObjectsUpdate
+    ObjectsUpdate'
     { _ouIfMetagenerationMatch = Nothing
     , _ouIfGenerationNotMatch = Nothing
     , _ouIfGenerationMatch = Nothing
@@ -211,7 +211,10 @@ ouGeneration
 
 instance GoogleRequest ObjectsUpdate where
         type Rs ObjectsUpdate = Object
-        requestClient ObjectsUpdate{..}
+        type Scopes ObjectsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient ObjectsUpdate'{..}
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch
@@ -229,7 +232,9 @@ instance GoogleRequest ObjectsUpdate where
 instance GoogleRequest (MediaDownload ObjectsUpdate)
          where
         type Rs (MediaDownload ObjectsUpdate) = Stream
-        requestClient (MediaDownload ObjectsUpdate{..})
+        type Scopes (MediaDownload ObjectsUpdate) =
+             Scopes ObjectsUpdate
+        requestClient (MediaDownload ObjectsUpdate'{..})
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch

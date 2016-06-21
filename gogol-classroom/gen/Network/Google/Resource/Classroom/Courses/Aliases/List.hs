@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Aliases.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type CoursesAliasesListResource =
 -- if the course does not exist.
 --
 -- /See:/ 'coursesAliasesList' smart constructor.
-data CoursesAliasesList = CoursesAliasesList
+data CoursesAliasesList = CoursesAliasesList'
     { _calXgafv          :: !(Maybe Text)
     , _calUploadProtocol :: !(Maybe Text)
     , _calPp             :: !Bool
@@ -116,7 +116,7 @@ coursesAliasesList
     :: Text -- ^ 'calCourseId'
     -> CoursesAliasesList
 coursesAliasesList pCalCourseId_ =
-    CoursesAliasesList
+    CoursesAliasesList'
     { _calXgafv = Nothing
     , _calUploadProtocol = Nothing
     , _calPp = True
@@ -190,7 +190,10 @@ calCallback
 instance GoogleRequest CoursesAliasesList where
         type Rs CoursesAliasesList =
              ListCourseAliasesResponse
-        requestClient CoursesAliasesList{..}
+        type Scopes CoursesAliasesList =
+             '["https://www.googleapis.com/auth/classroom.courses",
+               "https://www.googleapis.com/auth/classroom.courses.readonly"]
+        requestClient CoursesAliasesList'{..}
           = go _calCourseId _calXgafv _calUploadProtocol
               (Just _calPp)
               _calAccessToken

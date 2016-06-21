@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type RollingUpdatesRollbackResource =
 -- effect if invoked when the state of the update is ROLLED_BACK.
 --
 -- /See:/ 'rollingUpdatesRollback' smart constructor.
-data RollingUpdatesRollback = RollingUpdatesRollback
+data RollingUpdatesRollback = RollingUpdatesRollback'
     { _rurRollingUpdate :: !Text
     , _rurProject       :: !Text
     , _rurZone          :: !Text
@@ -81,7 +81,7 @@ rollingUpdatesRollback
     -> Text -- ^ 'rurZone'
     -> RollingUpdatesRollback
 rollingUpdatesRollback pRurRollingUpdate_ pRurProject_ pRurZone_ =
-    RollingUpdatesRollback
+    RollingUpdatesRollback'
     { _rurRollingUpdate = pRurRollingUpdate_
     , _rurProject = pRurProject_
     , _rurZone = pRurZone_
@@ -104,7 +104,10 @@ rurZone = lens _rurZone (\ s a -> s{_rurZone = a})
 
 instance GoogleRequest RollingUpdatesRollback where
         type Rs RollingUpdatesRollback = Operation
-        requestClient RollingUpdatesRollback{..}
+        type Scopes RollingUpdatesRollback =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/replicapool"]
+        requestClient RollingUpdatesRollback'{..}
           = go _rurProject _rurZone _rurRollingUpdate
               (Just AltJSON)
               replicaPoolUpdaterService

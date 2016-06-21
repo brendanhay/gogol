@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.YouTube.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,12 +20,24 @@ module Network.Google.YouTube.Types
       youTubeService
 
     -- * OAuth Scopes
-    , youtubeUploadScope
-    , youtubeScope
-    , youtubepartnerScope
-    , youtubeForceSslScope
-    , youtubeReadonlyScope
-    , youtubepartnerChannelAuditScope
+    , youTubeUploadScope
+    , youTubeScope
+    , youTubePartnerScope
+    , youTubeForceSslScope
+    , youTubeReadOnlyScope
+    , youTubePartnerChannelAuditScope
+
+    -- * LiveChatMessageAuthorDetails
+    , LiveChatMessageAuthorDetails
+    , liveChatMessageAuthorDetails
+    , lcmadIsVerified
+    , lcmadIsChatOwner
+    , lcmadChannelId
+    , lcmadProFileImageURL
+    , lcmadIsChatModerator
+    , lcmadDisplayName
+    , lcmadIsChatSponsor
+    , lcmadChannelURL
 
     -- * ContentRatingCceRating
     , ContentRatingCceRating (..)
@@ -80,12 +93,22 @@ module Network.Google.YouTube.Types
     -- * ChannelConversionPingContext
     , ChannelConversionPingContext (..)
 
+    -- * LiveChatTextMessageDetails
+    , LiveChatTextMessageDetails
+    , liveChatTextMessageDetails
+    , lctmdMessageText
+
     -- * ActivityContentDetailsRecommendation
     , ActivityContentDetailsRecommendation
     , activityContentDetailsRecommendation
     , acdrResourceId
     , acdrSeedResourceId
     , acdrReason
+
+    -- * LiveChatMessageRetractedDetails
+    , LiveChatMessageRetractedDetails
+    , liveChatMessageRetractedDetails
+    , lcmrdRetractedMessageId
 
     -- * ContentRatingRcnofRating
     , ContentRatingRcnofRating (..)
@@ -137,6 +160,9 @@ module Network.Google.YouTube.Types
     , piPromotedByContentOwner
     , piId
     , piTiming
+
+    -- * LiveChatUserBannedMessageDetailsBanType
+    , LiveChatUserBannedMessageDetailsBanType (..)
 
     -- * VideoProcessingDetailsProcessingFailureReason
     , VideoProcessingDetailsProcessingFailureReason (..)
@@ -191,6 +217,7 @@ module Network.Google.YouTube.Types
     , slrEtag
     , slrTokenPagination
     , slrNextPageToken
+    , slrRegionCode
     , slrPageInfo
     , slrKind
     , slrItems
@@ -210,6 +237,20 @@ module Network.Google.YouTube.Types
     , PlayListStatus
     , playListStatus
     , plsPrivacyStatus
+
+    -- * LiveChatMessageListResponse
+    , LiveChatMessageListResponse
+    , liveChatMessageListResponse
+    , lcmlrOfflineAt
+    , lcmlrEtag
+    , lcmlrTokenPagination
+    , lcmlrNextPageToken
+    , lcmlrPageInfo
+    , lcmlrKind
+    , lcmlrItems
+    , lcmlrVisitorId
+    , lcmlrPollingIntervalMillis
+    , lcmlrEventId
 
     -- * ChannelListResponse
     , ChannelListResponse
@@ -233,6 +274,14 @@ module Network.Google.YouTube.Types
     -- * ContentRatingPefilmRating
     , ContentRatingPefilmRating (..)
 
+    -- * ChannelProFileDetails
+    , ChannelProFileDetails
+    , channelProFileDetails
+    , cpfdChannelId
+    , cpfdProFileImageURL
+    , cpfdDisplayName
+    , cpfdChannelURL
+
     -- * VideoAbuseReportReasonListResponse
     , VideoAbuseReportReasonListResponse
     , videoAbuseReportReasonListResponse
@@ -242,6 +291,16 @@ module Network.Google.YouTube.Types
     , varrlrVisitorId
     , varrlrEventId
 
+    -- * CdnSettingsResolution
+    , CdnSettingsResolution (..)
+
+    -- * LiveChatUserBannedMessageDetails
+    , LiveChatUserBannedMessageDetails
+    , liveChatUserBannedMessageDetails
+    , lcubmdBanType
+    , lcubmdBannedUserDetails
+    , lcubmdBanDurationSeconds
+
     -- * SearchResultSnippetLiveBroadcastContent
     , SearchResultSnippetLiveBroadcastContent (..)
 
@@ -250,12 +309,15 @@ module Network.Google.YouTube.Types
     , liveBroadcastContentDetails
     , lbcdEnableContentEncryption
     , lbcdEnableLowLatency
+    , lbcdClosedCaptionsType
     , lbcdEnableEmbed
     , lbcdStartWithSlate
+    , lbcdProjection
     , lbcdMonitorStream
     , lbcdBoundStreamId
     , lbcdRecordFromStart
     , lbcdEnableClosedCaptions
+    , lbcdBoundStreamLastUpdateTimeMs
     , lbcdEnableDvr
 
     -- * ContentRatingAnatelRating
@@ -311,6 +373,7 @@ module Network.Google.YouTube.Types
     , vcdDimension
     , vcdCaption
     , vcdRegionRestriction
+    , vcdProjection
     , vcdDuration
     , vcdContentRating
     , vcdLicensedContent
@@ -395,6 +458,14 @@ module Network.Google.YouTube.Types
 
     -- * ContentRatingCnaRating
     , ContentRatingCnaRating (..)
+
+    -- * LiveChatBan
+    , LiveChatBan
+    , liveChatBan
+    , lcbEtag
+    , lcbSnippet
+    , lcbKind
+    , lcbId
 
     -- * ContentRatingChvrsRating
     , ContentRatingChvrsRating (..)
@@ -527,6 +598,19 @@ module Network.Google.YouTube.Types
     , vstsTag
     , vstsCategoryRestricts
 
+    -- * LiveChatModeratorListResponse
+    , LiveChatModeratorListResponse
+    , liveChatModeratorListResponse
+    , lEtag
+    , lTokenPagination
+    , lNextPageToken
+    , lPageInfo
+    , lKind
+    , lItems
+    , lVisitorId
+    , lEventId
+    , lPrevPageToken
+
     -- * ActivitySnippet
     , ActivitySnippet
     , activitySnippet
@@ -543,6 +627,9 @@ module Network.Google.YouTube.Types
     , ChannelTopicDetails
     , channelTopicDetails
     , ctdTopicIds
+
+    -- * LiveChatBanSnippetType
+    , LiveChatBanSnippetType (..)
 
     -- * ContentRatingBfvcRating
     , ContentRatingBfvcRating (..)
@@ -621,6 +708,15 @@ module Network.Google.YouTube.Types
     , lsciReason
     , lsciType
     , lsciDescription
+
+    -- * LiveChatMessage
+    , LiveChatMessage
+    , liveChatMessage
+    , lcmEtag
+    , lcmSnippet
+    , lcmKind
+    , lcmAuthorDetails
+    , lcmId
 
     -- * Channel
     , Channel
@@ -754,6 +850,7 @@ module Network.Google.YouTube.Types
     , csCountry
     , csThumbnails
     , csLocalized
+    , csCustomURL
     , csTitle
     , csDescription
     , csDefaultLanguage
@@ -773,6 +870,21 @@ module Network.Google.YouTube.Types
     , msiBroadcastStreamDelayMs
     , msiEmbedHTML
     , msiEnableMonitorStream
+
+    -- * LiveChatMessageSnippet
+    , LiveChatMessageSnippet
+    , liveChatMessageSnippet
+    , lcmsMessageDeletedDetails
+    , lcmsLiveChatId
+    , lcmsPublishedAt
+    , lcmsUserBannedDetails
+    , lcmsTextMessageDetails
+    , lcmsMessageRetractedDetails
+    , lcmsType
+    , lcmsAuthorChannelId
+    , lcmsFanFundingEventDetails
+    , lcmsHasDisplayContent
+    , lcmsDisplayMessage
 
     -- * ContentRatingRussiaRating
     , ContentRatingRussiaRating (..)
@@ -803,10 +915,13 @@ module Network.Google.YouTube.Types
     , csHiddenSubscriberCount
     , csViewCount
 
-    -- * ChannelId
-    , ChannelId
-    , channelId
-    , ciValue
+    -- * LiveChatFanFundingEventDetails
+    , LiveChatFanFundingEventDetails
+    , liveChatFanFundingEventDetails
+    , lcffedUserComment
+    , lcffedAmountMicros
+    , lcffedAmountDisplayString
+    , lcffedCurrency
 
     -- * ContentRatingNbcRating
     , ContentRatingNbcRating (..)
@@ -871,7 +986,6 @@ module Network.Google.YouTube.Types
     , vKind
     , vTopicDetails
     , vContentDetails
-    , vConversionPings
     , vAgeGating
     , vFileDetails
     , vSuggestions
@@ -898,11 +1012,25 @@ module Network.Google.YouTube.Types
     -- * ChannelStatusLongUploadsStatus
     , ChannelStatusLongUploadsStatus (..)
 
+    -- * LiveChatModerator
+    , LiveChatModerator
+    , liveChatModerator
+    , livEtag
+    , livSnippet
+    , livKind
+    , livId
+
     -- * LiveStreamContentDetails
     , LiveStreamContentDetails
     , liveStreamContentDetails
     , lscdClosedCaptionsIngestionURL
     , lscdIsReusable
+
+    -- * LiveChatModeratorSnippet
+    , LiveChatModeratorSnippet
+    , liveChatModeratorSnippet
+    , lLiveChatId
+    , lModeratorDetails
 
     -- * ContentRatingCscfRating
     , ContentRatingCscfRating (..)
@@ -938,6 +1066,14 @@ module Network.Google.YouTube.Types
     , vsTags
     , vsDefaultLanguage
 
+    -- * FanFundingEvent
+    , FanFundingEvent
+    , fanFundingEvent
+    , ffeEtag
+    , ffeSnippet
+    , ffeKind
+    , ffeId
+
     -- * CommentThreadsListModerationStatus
     , CommentThreadsListModerationStatus (..)
 
@@ -965,6 +1101,19 @@ module Network.Google.YouTube.Types
     , apException
     , apAllowed
 
+    -- * Sponsor
+    , Sponsor
+    , sponsor
+    , sEtag
+    , sSnippet
+    , sKind
+    , sId
+
+    -- * LiveChatMessageDeletedDetails
+    , LiveChatMessageDeletedDetails
+    , liveChatMessageDeletedDetails
+    , lcmddDeletedMessageId
+
     -- * ContentRatingYtRating
     , ContentRatingYtRating (..)
 
@@ -991,7 +1140,9 @@ module Network.Google.YouTube.Types
     , CdnSettings
     , cdnSettings
     , csIngestionInfo
+    , csFrameRate
     , csFormat
+    , csResolution
     , csIngestionType
 
     -- * VideoContentDetailsCaption
@@ -1060,6 +1211,9 @@ module Network.Google.YouTube.Types
     , activityContentDetailsBulletin
     , acdbResourceId
 
+    -- * LiveBroadcastContentDetailsProjection
+    , LiveBroadcastContentDetailsProjection (..)
+
     -- * CaptionSnippetStatus
     , CaptionSnippetStatus (..)
 
@@ -1077,6 +1231,9 @@ module Network.Google.YouTube.Types
 
     -- * ChannelSectionSnippetType
     , ChannelSectionSnippetType (..)
+
+    -- * LiveBroadcastsListBroadcastType
+    , LiveBroadcastsListBroadcastType (..)
 
     -- * VideoProcessingDetailsProcessingStatus
     , VideoProcessingDetailsProcessingStatus (..)
@@ -1139,6 +1296,12 @@ module Network.Google.YouTube.Types
     , ipCornerPosition
     , ipType
 
+    -- * ContentRatingEcbmctRating
+    , ContentRatingEcbmctRating (..)
+
+    -- * VideoContentDetailsProjection
+    , VideoContentDetailsProjection (..)
+
     -- * ContentRatingGrfilmRating
     , ContentRatingGrfilmRating (..)
 
@@ -1163,15 +1326,15 @@ module Network.Google.YouTube.Types
     -- * SubscriptionListResponse
     , SubscriptionListResponse
     , subscriptionListResponse
-    , sEtag
-    , sTokenPagination
-    , sNextPageToken
-    , sPageInfo
-    , sKind
-    , sItems
-    , sVisitorId
-    , sEventId
-    , sPrevPageToken
+    , subEtag
+    , subTokenPagination
+    , subNextPageToken
+    , subPageInfo
+    , subKind
+    , subItems
+    , subVisitorId
+    , subEventId
+    , subPrevPageToken
 
     -- * ContentRatingNbcplRating
     , ContentRatingNbcplRating (..)
@@ -1249,11 +1412,6 @@ module Network.Google.YouTube.Types
     , gcKind
     , gcId
 
-    -- * VideoConversionPings
-    , VideoConversionPings
-    , videoConversionPings
-    , vcpPings
-
     -- * SearchResultSnippet
     , SearchResultSnippet
     , searchResultSnippet
@@ -1279,6 +1437,21 @@ module Network.Google.YouTube.Types
 
     -- * ContentRatingFpbRating
     , ContentRatingFpbRating (..)
+
+    -- * SponsorListResponse
+    , SponsorListResponse
+    , sponsorListResponse
+    , spoEtag
+    , spoTokenPagination
+    , spoNextPageToken
+    , spoPageInfo
+    , spoKind
+    , spoItems
+    , spoVisitorId
+    , spoEventId
+
+    -- * LiveBroadcastContentDetailsClosedCaptionsType
+    , LiveBroadcastContentDetailsClosedCaptionsType (..)
 
     -- * SearchListVideoDimension
     , SearchListVideoDimension (..)
@@ -1317,6 +1490,9 @@ module Network.Google.YouTube.Types
     , ibTiming
     , ibImageBytes
     , ibPosition
+
+    -- * SponsorsListFilter
+    , SponsorsListFilter (..)
 
     -- * ChannelBannerResource
     , ChannelBannerResource
@@ -1368,6 +1544,18 @@ module Network.Google.YouTube.Types
     , ctReplies
     , ctId
 
+    -- * FanFundingEventListResponse
+    , FanFundingEventListResponse
+    , fanFundingEventListResponse
+    , ffelrEtag
+    , ffelrTokenPagination
+    , ffelrNextPageToken
+    , ffelrPageInfo
+    , ffelrKind
+    , ffelrItems
+    , ffelrVisitorId
+    , ffelrEventId
+
     -- * PlayListLocalization
     , PlayListLocalization
     , playListLocalization
@@ -1376,6 +1564,14 @@ module Network.Google.YouTube.Types
 
     -- * ContentRatingMccypRating
     , ContentRatingMccypRating (..)
+
+    -- * LiveChatBanSnippet
+    , LiveChatBanSnippet
+    , liveChatBanSnippet
+    , lcbsLiveChatId
+    , lcbsBannedUserDetails
+    , lcbsBanDurationSeconds
+    , lcbsType
 
     -- * PlayListStatusPrivacyStatus
     , PlayListStatusPrivacyStatus (..)
@@ -1535,6 +1731,9 @@ module Network.Google.YouTube.Types
     , csIsEasyReader
     , csAudioTrackType
 
+    -- * CdnSettingsFrameRate
+    , CdnSettingsFrameRate (..)
+
     -- * Comment
     , Comment
     , comment
@@ -1558,12 +1757,12 @@ module Network.Google.YouTube.Types
     -- * Subscription
     , Subscription
     , subscription
-    , subEtag
-    , subSubscriberSnippet
-    , subSnippet
-    , subKind
-    , subContentDetails
-    , subId
+    , ssEtag
+    , ssSubscriberSnippet
+    , ssSnippet
+    , ssKind
+    , ssContentDetails
+    , ssId
 
     -- * SearchListVideoSyndicated
     , SearchListVideoSyndicated (..)
@@ -1627,9 +1826,6 @@ module Network.Google.YouTube.Types
     , vsEditorSuggestions
     , vsProcessingWarnings
     , vsTagSuggestions
-
-    -- * VideoConversionPingContext
-    , VideoConversionPingContext (..)
 
     -- * CommentSnippetModerationStatus
     , CommentSnippetModerationStatus (..)
@@ -1719,6 +1915,7 @@ module Network.Google.YouTube.Types
     , crFpbRating
     , crLsfRating
     , crBfvcRating
+    , crEcbmctRating
     , crCNCRating
     , crSkfilmRating
     , crOflcRating
@@ -1735,6 +1932,9 @@ module Network.Google.YouTube.Types
     , plId
     , plLocalizations
     , plPlayer
+
+    -- * LiveChatMessageSnippetType
+    , LiveChatMessageSnippetType (..)
 
     -- * LiveStreamStatusStreamStatus
     , LiveStreamStatusStreamStatus (..)
@@ -1782,6 +1982,18 @@ module Network.Google.YouTube.Types
     , vlsdScheduledEndTime
     , vlsdScheduledStartTime
     , vlsdActualStartTime
+    , vlsdActiveLiveChatId
+
+    -- * FanFundingEventSnippet
+    , FanFundingEventSnippet
+    , fanFundingEventSnippet
+    , ffesDisplayString
+    , ffesSupporterDetails
+    , ffesCreatedAt
+    , ffesAmountMicros
+    , ffesChannelId
+    , ffesCommentText
+    , ffesCurrency
 
     -- * ContentRatingMdaRating
     , ContentRatingMdaRating (..)
@@ -1803,11 +2015,12 @@ module Network.Google.YouTube.Types
     -- * ContentRatingAcbRating
     , ContentRatingAcbRating (..)
 
-    -- * VideoConversionPing
-    , VideoConversionPing
-    , videoConversionPing
-    , vcpContext
-    , vcpConversionURL
+    -- * SponsorSnippet
+    , SponsorSnippet
+    , sponsorSnippet
+    , sChannelId
+    , sSponsorDetails
+    , sSponsorSince
 
     -- * ContentRatingDjctqRating
     , ContentRatingDjctqRating (..)
@@ -1859,32 +2072,32 @@ import           Network.Google.YouTube.Types.Product
 import           Network.Google.YouTube.Types.Sum
 
 -- | Default request referring to version 'v3' of the YouTube Data API. This contains the host and root path used as a starting point for constructing service requests.
-youTubeService :: Service
+youTubeService :: ServiceConfig
 youTubeService
   = defaultService (ServiceId "youtube:v3")
       "www.googleapis.com"
 
 -- | Manage your YouTube videos
-youtubeUploadScope :: OAuthScope
-youtubeUploadScope = "https://www.googleapis.com/auth/youtube.upload";
+youTubeUploadScope :: Proxy '["https://www.googleapis.com/auth/youtube.upload"]
+youTubeUploadScope = Proxy;
 
 -- | Manage your YouTube account
-youtubeScope :: OAuthScope
-youtubeScope = "https://www.googleapis.com/auth/youtube";
+youTubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
+youTubeScope = Proxy;
 
 -- | View and manage your assets and associated content on YouTube
-youtubepartnerScope :: OAuthScope
-youtubepartnerScope = "https://www.googleapis.com/auth/youtubepartner";
+youTubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
+youTubePartnerScope = Proxy;
 
 -- | Manage your YouTube account
-youtubeForceSslScope :: OAuthScope
-youtubeForceSslScope = "https://www.googleapis.com/auth/youtube.force-ssl";
+youTubeForceSslScope :: Proxy '["https://www.googleapis.com/auth/youtube.force-ssl"]
+youTubeForceSslScope = Proxy;
 
 -- | View your YouTube account
-youtubeReadonlyScope :: OAuthScope
-youtubeReadonlyScope = "https://www.googleapis.com/auth/youtube.readonly";
+youTubeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
+youTubeReadOnlyScope = Proxy;
 
 -- | View private information of your YouTube channel relevant during the
 -- audit process with a YouTube partner
-youtubepartnerChannelAuditScope :: OAuthScope
-youtubepartnerChannelAuditScope = "https://www.googleapis.com/auth/youtubepartner-channel-audit";
+youTubePartnerChannelAuditScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner-channel-audit"]
+youTubePartnerChannelAuditScope = Proxy;

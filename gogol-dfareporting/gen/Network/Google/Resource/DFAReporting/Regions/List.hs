@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Regions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'RegionsList' request conforms to.
 type RegionsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "regions" :>
@@ -53,7 +53,7 @@ type RegionsListResource =
 -- | Retrieves a list of regions.
 --
 -- /See:/ 'regionsList' smart constructor.
-newtype RegionsList = RegionsList
+newtype RegionsList = RegionsList'
     { _rProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ regionsList
     :: Int64 -- ^ 'rProFileId'
     -> RegionsList
 regionsList pRProFileId_ =
-    RegionsList
+    RegionsList'
     { _rProFileId = _Coerce # pRProFileId_
     }
 
@@ -78,7 +78,9 @@ rProFileId
 
 instance GoogleRequest RegionsList where
         type Rs RegionsList = RegionsListResponse
-        requestClient RegionsList{..}
+        type Scopes RegionsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient RegionsList'{..}
           = go _rProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy RegionsListResource)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Coordinate.CustomFieldDef.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type CustomFieldDefListResource =
 -- | Retrieves a list of custom field definitions for a team.
 --
 -- /See:/ 'customFieldDefList' smart constructor.
-newtype CustomFieldDefList = CustomFieldDefList
+newtype CustomFieldDefList = CustomFieldDefList'
     { _cfdlTeamId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ customFieldDefList
     :: Text -- ^ 'cfdlTeamId'
     -> CustomFieldDefList
 customFieldDefList pCfdlTeamId_ =
-    CustomFieldDefList
+    CustomFieldDefList'
     { _cfdlTeamId = pCfdlTeamId_
     }
 
@@ -78,7 +78,10 @@ cfdlTeamId
 instance GoogleRequest CustomFieldDefList where
         type Rs CustomFieldDefList =
              CustomFieldDefListResponse
-        requestClient CustomFieldDefList{..}
+        type Scopes CustomFieldDefList =
+             '["https://www.googleapis.com/auth/coordinate",
+               "https://www.googleapis.com/auth/coordinate.readonly"]
+        requestClient CustomFieldDefList'{..}
           = go _cfdlTeamId (Just AltJSON) mapsCoordinateService
           where go
                   = buildClient

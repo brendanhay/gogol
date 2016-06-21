@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type InstancesDeleteResource =
 -- | Deletes a Cloud SQL instance.
 --
 -- /See:/ 'instancesDelete' smart constructor.
-data InstancesDelete = InstancesDelete
+data InstancesDelete = InstancesDelete'
     { _idProject  :: !Text
     , _idInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ instancesDelete
     -> Text -- ^ 'idInstance'
     -> InstancesDelete
 instancesDelete pIdProject_ pIdInstance_ =
-    InstancesDelete
+    InstancesDelete'
     { _idProject = pIdProject_
     , _idInstance = pIdInstance_
     }
@@ -88,7 +88,10 @@ idInstance
 
 instance GoogleRequest InstancesDelete where
         type Rs InstancesDelete = Operation
-        requestClient InstancesDelete{..}
+        type Scopes InstancesDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient InstancesDelete'{..}
           = go _idProject _idInstance (Just AltJSON)
               sQLAdminService
           where go

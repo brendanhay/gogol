@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Datafeeds.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type DatafeedsListResource =
 -- | Lists the datafeeds in your Merchant Center account.
 --
 -- /See:/ 'datafeedsList' smart constructor.
-data DatafeedsList = DatafeedsList
+data DatafeedsList = DatafeedsList'
     { _datMerchantId :: !(Textual Word64)
     , _datPageToken  :: !(Maybe Text)
     , _datMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ datafeedsList
     :: Word64 -- ^ 'datMerchantId'
     -> DatafeedsList
 datafeedsList pDatMerchantId_ =
-    DatafeedsList
+    DatafeedsList'
     { _datMerchantId = _Coerce # pDatMerchantId_
     , _datPageToken = Nothing
     , _datMaxResults = Nothing
@@ -103,7 +103,9 @@ datMaxResults
 
 instance GoogleRequest DatafeedsList where
         type Rs DatafeedsList = DatafeedsListResponse
-        requestClient DatafeedsList{..}
+        type Scopes DatafeedsList =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient DatafeedsList'{..}
           = go _datMerchantId _datPageToken _datMaxResults
               (Just AltJSON)
               shoppingContentService

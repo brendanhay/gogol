@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Projects.Icons.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,14 +58,13 @@ type ProjectsIconsCreateResource =
                Capture "projectId" Text :>
                  "icons" :>
                    QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" AltMedia :>
-                       MultipartRelated '[JSON] Icon RequestBody :>
-                         Post '[JSON] Icon
+                     QueryParam "uploadType" Multipart :>
+                       MultipartRelated '[JSON] Icon :> Post '[JSON] Icon
 
 -- | Create an icon.
 --
 -- /See:/ 'projectsIconsCreate' smart constructor.
-data ProjectsIconsCreate = ProjectsIconsCreate
+data ProjectsIconsCreate = ProjectsIconsCreate'
     { _picPayload   :: !Icon
     , _picProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +81,7 @@ projectsIconsCreate
     -> Text -- ^ 'picProjectId'
     -> ProjectsIconsCreate
 projectsIconsCreate pPicPayload_ pPicProjectId_ =
-    ProjectsIconsCreate
+    ProjectsIconsCreate'
     { _picPayload = pPicPayload_
     , _picProjectId = pPicProjectId_
     }
@@ -99,7 +98,9 @@ picProjectId
 
 instance GoogleRequest ProjectsIconsCreate where
         type Rs ProjectsIconsCreate = Icon
-        requestClient ProjectsIconsCreate{..}
+        type Scopes ProjectsIconsCreate =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient ProjectsIconsCreate'{..}
           = go _picProjectId (Just AltJSON) _picPayload
               mapsEngineService
           where go :<|> _
@@ -110,9 +111,11 @@ instance GoogleRequest ProjectsIconsCreate where
 instance GoogleRequest
          (MediaUpload ProjectsIconsCreate) where
         type Rs (MediaUpload ProjectsIconsCreate) = Icon
+        type Scopes (MediaUpload ProjectsIconsCreate) =
+             Scopes ProjectsIconsCreate
         requestClient
-          (MediaUpload ProjectsIconsCreate{..} body)
-          = go _picProjectId (Just AltJSON) (Just AltMedia)
+          (MediaUpload ProjectsIconsCreate'{..} body)
+          = go _picProjectId (Just AltJSON) (Just Multipart)
               _picPayload
               body
               mapsEngineService

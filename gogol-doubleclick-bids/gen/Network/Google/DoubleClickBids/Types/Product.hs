@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.DoubleClickBids.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | List reports response.
 --
 -- /See:/ 'listReportsResponse' smart constructor.
-data ListReportsResponse = ListReportsResponse
+data ListReportsResponse = ListReportsResponse'
     { _lrrReports :: !(Maybe [Report])
     , _lrrKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data ListReportsResponse = ListReportsResponse
 listReportsResponse
     :: ListReportsResponse
 listReportsResponse =
-    ListReportsResponse
+    ListReportsResponse'
     { _lrrReports = Nothing
     , _lrrKind = "doubleclickbidmanager#listReportsResponse"
     }
@@ -59,13 +59,13 @@ instance FromJSON ListReportsResponse where
         parseJSON
           = withObject "ListReportsResponse"
               (\ o ->
-                 ListReportsResponse <$>
+                 ListReportsResponse' <$>
                    (o .:? "reports" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "doubleclickbidmanager#listReportsResponse"))
 
 instance ToJSON ListReportsResponse where
-        toJSON ListReportsResponse{..}
+        toJSON ListReportsResponse'{..}
           = object
               (catMaybes
                  [("reports" .=) <$> _lrrReports,
@@ -74,7 +74,7 @@ instance ToJSON ListReportsResponse where
 -- | Query metadata.
 --
 -- /See:/ 'queryMetadata' smart constructor.
-data QueryMetadata = QueryMetadata
+data QueryMetadata = QueryMetadata'
     { _qmGoogleCloudStoragePathForLatestReport :: !(Maybe Text)
     , _qmLocale                                :: !(Maybe Text)
     , _qmFormat                                :: !(Maybe QueryMetadataFormat)
@@ -116,7 +116,7 @@ data QueryMetadata = QueryMetadata
 queryMetadata
     :: QueryMetadata
 queryMetadata =
-    QueryMetadata
+    QueryMetadata'
     { _qmGoogleCloudStoragePathForLatestReport = Nothing
     , _qmLocale = Nothing
     , _qmFormat = Nothing
@@ -204,7 +204,7 @@ instance FromJSON QueryMetadata where
         parseJSON
           = withObject "QueryMetadata"
               (\ o ->
-                 QueryMetadata <$>
+                 QueryMetadata' <$>
                    (o .:? "googleCloudStoragePathForLatestReport") <*>
                      (o .:? "locale")
                      <*> (o .:? "format")
@@ -218,7 +218,7 @@ instance FromJSON QueryMetadata where
                      <*> (o .:? "sendNotification"))
 
 instance ToJSON QueryMetadata where
-        toJSON QueryMetadata{..}
+        toJSON QueryMetadata'{..}
           = object
               (catMaybes
                  [("googleCloudStoragePathForLatestReport" .=) <$>
@@ -239,7 +239,7 @@ instance ToJSON QueryMetadata where
 -- | Request to run a stored query to generate a report.
 --
 -- /See:/ 'runQueryRequest' smart constructor.
-data RunQueryRequest = RunQueryRequest
+data RunQueryRequest = RunQueryRequest'
     { _rqrReportDataEndTimeMs   :: !(Maybe (Textual Int64))
     , _rqrDataRange             :: !(Maybe RunQueryRequestDataRange)
     , _rqrReportDataStartTimeMs :: !(Maybe (Textual Int64))
@@ -260,7 +260,7 @@ data RunQueryRequest = RunQueryRequest
 runQueryRequest
     :: RunQueryRequest
 runQueryRequest =
-    RunQueryRequest
+    RunQueryRequest'
     { _rqrReportDataEndTimeMs = Nothing
     , _rqrDataRange = Nothing
     , _rqrReportDataStartTimeMs = Nothing
@@ -301,13 +301,13 @@ instance FromJSON RunQueryRequest where
         parseJSON
           = withObject "RunQueryRequest"
               (\ o ->
-                 RunQueryRequest <$>
+                 RunQueryRequest' <$>
                    (o .:? "reportDataEndTimeMs") <*> (o .:? "dataRange")
                      <*> (o .:? "reportDataStartTimeMs")
                      <*> (o .:? "timezoneCode"))
 
 instance ToJSON RunQueryRequest where
-        toJSON RunQueryRequest{..}
+        toJSON RunQueryRequest'{..}
           = object
               (catMaybes
                  [("reportDataEndTimeMs" .=) <$>
@@ -320,7 +320,7 @@ instance ToJSON RunQueryRequest where
 -- | Filter used to match traffic data in your report.
 --
 -- /See:/ 'filterPair' smart constructor.
-data FilterPair = FilterPair
+data FilterPair = FilterPair'
     { _fpValue :: !(Maybe Text)
     , _fpType  :: !(Maybe FilterPairType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -335,7 +335,7 @@ data FilterPair = FilterPair
 filterPair
     :: FilterPair
 filterPair =
-    FilterPair
+    FilterPair'
     { _fpValue = Nothing
     , _fpType = Nothing
     }
@@ -352,10 +352,10 @@ instance FromJSON FilterPair where
         parseJSON
           = withObject "FilterPair"
               (\ o ->
-                 FilterPair <$> (o .:? "value") <*> (o .:? "type"))
+                 FilterPair' <$> (o .:? "value") <*> (o .:? "type"))
 
 instance ToJSON FilterPair where
-        toJSON FilterPair{..}
+        toJSON FilterPair'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _fpValue, ("type" .=) <$> _fpType])
@@ -363,7 +363,7 @@ instance ToJSON FilterPair where
 -- | Request to upload line items.
 --
 -- /See:/ 'uploadLineItemsRequest' smart constructor.
-data UploadLineItemsRequest = UploadLineItemsRequest
+data UploadLineItemsRequest = UploadLineItemsRequest'
     { _ulirLineItems :: !(Maybe Text)
     , _ulirFormat    :: !(Maybe UploadLineItemsRequestFormat)
     , _ulirDryRun    :: !(Maybe Bool)
@@ -381,7 +381,7 @@ data UploadLineItemsRequest = UploadLineItemsRequest
 uploadLineItemsRequest
     :: UploadLineItemsRequest
 uploadLineItemsRequest =
-    UploadLineItemsRequest
+    UploadLineItemsRequest'
     { _ulirLineItems = Nothing
     , _ulirFormat = Nothing
     , _ulirDryRun = Nothing
@@ -409,12 +409,12 @@ instance FromJSON UploadLineItemsRequest where
         parseJSON
           = withObject "UploadLineItemsRequest"
               (\ o ->
-                 UploadLineItemsRequest <$>
+                 UploadLineItemsRequest' <$>
                    (o .:? "lineItems") <*> (o .:? "format") <*>
                      (o .:? "dryRun"))
 
 instance ToJSON UploadLineItemsRequest where
-        toJSON UploadLineItemsRequest{..}
+        toJSON UploadLineItemsRequest'{..}
           = object
               (catMaybes
                  [("lineItems" .=) <$> _ulirLineItems,
@@ -424,7 +424,7 @@ instance ToJSON UploadLineItemsRequest where
 -- | Request to fetch stored line items.
 --
 -- /See:/ 'downloadLineItemsRequest' smart constructor.
-data DownloadLineItemsRequest = DownloadLineItemsRequest
+data DownloadLineItemsRequest = DownloadLineItemsRequest'
     { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
     , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
     , _dlirFileSpec   :: !(Maybe DownloadLineItemsRequestFileSpec)
@@ -445,7 +445,7 @@ data DownloadLineItemsRequest = DownloadLineItemsRequest
 downloadLineItemsRequest
     :: DownloadLineItemsRequest
 downloadLineItemsRequest =
-    DownloadLineItemsRequest
+    DownloadLineItemsRequest'
     { _dlirFilterType = Nothing
     , _dlirFormat = Nothing
     , _dlirFileSpec = Nothing
@@ -482,13 +482,13 @@ instance FromJSON DownloadLineItemsRequest where
         parseJSON
           = withObject "DownloadLineItemsRequest"
               (\ o ->
-                 DownloadLineItemsRequest <$>
+                 DownloadLineItemsRequest' <$>
                    (o .:? "filterType") <*> (o .:? "format") <*>
                      (o .:? "fileSpec")
                      <*> (o .:? "filterIds" .!= mempty))
 
 instance ToJSON DownloadLineItemsRequest where
-        toJSON DownloadLineItemsRequest{..}
+        toJSON DownloadLineItemsRequest'{..}
           = object
               (catMaybes
                  [("filterType" .=) <$> _dlirFilterType,
@@ -499,7 +499,7 @@ instance ToJSON DownloadLineItemsRequest where
 -- | List queries response.
 --
 -- /See:/ 'listQueriesResponse' smart constructor.
-data ListQueriesResponse = ListQueriesResponse
+data ListQueriesResponse = ListQueriesResponse'
     { _lqrQueries :: !(Maybe [Query])
     , _lqrKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -514,7 +514,7 @@ data ListQueriesResponse = ListQueriesResponse
 listQueriesResponse
     :: ListQueriesResponse
 listQueriesResponse =
-    ListQueriesResponse
+    ListQueriesResponse'
     { _lqrQueries = Nothing
     , _lqrKind = "doubleclickbidmanager#listQueriesResponse"
     }
@@ -535,13 +535,13 @@ instance FromJSON ListQueriesResponse where
         parseJSON
           = withObject "ListQueriesResponse"
               (\ o ->
-                 ListQueriesResponse <$>
+                 ListQueriesResponse' <$>
                    (o .:? "queries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "doubleclickbidmanager#listQueriesResponse"))
 
 instance ToJSON ListQueriesResponse where
-        toJSON ListQueriesResponse{..}
+        toJSON ListQueriesResponse'{..}
           = object
               (catMaybes
                  [("queries" .=) <$> _lqrQueries,
@@ -550,7 +550,7 @@ instance ToJSON ListQueriesResponse where
 -- | Upload line items response.
 --
 -- /See:/ 'uploadLineItemsResponse' smart constructor.
-newtype UploadLineItemsResponse = UploadLineItemsResponse
+newtype UploadLineItemsResponse = UploadLineItemsResponse'
     { _ulirUploadStatus :: Maybe UploadStatus
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -562,7 +562,7 @@ newtype UploadLineItemsResponse = UploadLineItemsResponse
 uploadLineItemsResponse
     :: UploadLineItemsResponse
 uploadLineItemsResponse =
-    UploadLineItemsResponse
+    UploadLineItemsResponse'
     { _ulirUploadStatus = Nothing
     }
 
@@ -576,18 +576,95 @@ instance FromJSON UploadLineItemsResponse where
         parseJSON
           = withObject "UploadLineItemsResponse"
               (\ o ->
-                 UploadLineItemsResponse <$> (o .:? "uploadStatus"))
+                 UploadLineItemsResponse' <$> (o .:? "uploadStatus"))
 
 instance ToJSON UploadLineItemsResponse where
-        toJSON UploadLineItemsResponse{..}
+        toJSON UploadLineItemsResponse'{..}
           = object
               (catMaybes
                  [("uploadStatus" .=) <$> _ulirUploadStatus])
 
+-- | Publisher comment from Rubicon.
+--
+-- /See:/ 'note' smart constructor.
+data Note = Note'
+    { _nUsername  :: !(Maybe Text)
+    , _nSource    :: !(Maybe Text)
+    , _nId        :: !(Maybe (Textual Int64))
+    , _nMessage   :: !(Maybe Text)
+    , _nTimestamp :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Note' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nUsername'
+--
+-- * 'nSource'
+--
+-- * 'nId'
+--
+-- * 'nMessage'
+--
+-- * 'nTimestamp'
+note
+    :: Note
+note =
+    Note'
+    { _nUsername = Nothing
+    , _nSource = Nothing
+    , _nId = Nothing
+    , _nMessage = Nothing
+    , _nTimestamp = Nothing
+    }
+
+-- | Publisher user name.
+nUsername :: Lens' Note (Maybe Text)
+nUsername
+  = lens _nUsername (\ s a -> s{_nUsername = a})
+
+-- | Equals \"publisher\" for notification from Rubicon.
+nSource :: Lens' Note (Maybe Text)
+nSource = lens _nSource (\ s a -> s{_nSource = a})
+
+-- | Note id.
+nId :: Lens' Note (Maybe Int64)
+nId
+  = lens _nId (\ s a -> s{_nId = a}) . mapping _Coerce
+
+-- | Message from publisher.
+nMessage :: Lens' Note (Maybe Text)
+nMessage = lens _nMessage (\ s a -> s{_nMessage = a})
+
+-- | Time when the note was added, e.g. \"2015-12-16T17:25:35.000-08:00\".
+nTimestamp :: Lens' Note (Maybe Text)
+nTimestamp
+  = lens _nTimestamp (\ s a -> s{_nTimestamp = a})
+
+instance FromJSON Note where
+        parseJSON
+          = withObject "Note"
+              (\ o ->
+                 Note' <$>
+                   (o .:? "username") <*> (o .:? "source") <*>
+                     (o .:? "id")
+                     <*> (o .:? "message")
+                     <*> (o .:? "timestamp"))
+
+instance ToJSON Note where
+        toJSON Note'{..}
+          = object
+              (catMaybes
+                 [("username" .=) <$> _nUsername,
+                  ("source" .=) <$> _nSource, ("id" .=) <$> _nId,
+                  ("message" .=) <$> _nMessage,
+                  ("timestamp" .=) <$> _nTimestamp])
+
 -- | Report metadata.
 --
 -- /See:/ 'reportMetadata' smart constructor.
-data ReportMetadata = ReportMetadata
+data ReportMetadata = ReportMetadata'
     { _rmStatus                 :: !(Maybe ReportStatus)
     , _rmReportDataEndTimeMs    :: !(Maybe (Textual Int64))
     , _rmGoogleCloudStoragePath :: !(Maybe Text)
@@ -608,7 +685,7 @@ data ReportMetadata = ReportMetadata
 reportMetadata
     :: ReportMetadata
 reportMetadata =
-    ReportMetadata
+    ReportMetadata'
     { _rmStatus = Nothing
     , _rmReportDataEndTimeMs = Nothing
     , _rmGoogleCloudStoragePath = Nothing
@@ -644,13 +721,13 @@ instance FromJSON ReportMetadata where
         parseJSON
           = withObject "ReportMetadata"
               (\ o ->
-                 ReportMetadata <$>
+                 ReportMetadata' <$>
                    (o .:? "status") <*> (o .:? "reportDataEndTimeMs")
                      <*> (o .:? "googleCloudStoragePath")
                      <*> (o .:? "reportDataStartTimeMs"))
 
 instance ToJSON ReportMetadata where
-        toJSON ReportMetadata{..}
+        toJSON ReportMetadata'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _rmStatus,
@@ -664,7 +741,7 @@ instance ToJSON ReportMetadata where
 -- | Represents a report.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report
+data Report = Report'
     { _rParams   :: !(Maybe Parameters)
     , _rKey      :: !(Maybe ReportKey)
     , _rMetadata :: !(Maybe ReportMetadata)
@@ -682,7 +759,7 @@ data Report = Report
 report
     :: Report
 report =
-    Report
+    Report'
     { _rParams = Nothing
     , _rKey = Nothing
     , _rMetadata = Nothing
@@ -705,12 +782,12 @@ instance FromJSON Report where
         parseJSON
           = withObject "Report"
               (\ o ->
-                 Report <$>
+                 Report' <$>
                    (o .:? "params") <*> (o .:? "key") <*>
                      (o .:? "metadata"))
 
 instance ToJSON Report where
-        toJSON Report{..}
+        toJSON Report'{..}
           = object
               (catMaybes
                  [("params" .=) <$> _rParams, ("key" .=) <$> _rKey,
@@ -719,7 +796,7 @@ instance ToJSON Report where
 -- | Represents the upload status of a row in the request.
 --
 -- /See:/ 'rowStatus' smart constructor.
-data RowStatus = RowStatus
+data RowStatus = RowStatus'
     { _rsEntityName :: !(Maybe Text)
     , _rsChanged    :: !(Maybe Bool)
     , _rsPersisted  :: !(Maybe Bool)
@@ -746,7 +823,7 @@ data RowStatus = RowStatus
 rowStatus
     :: RowStatus
 rowStatus =
-    RowStatus
+    RowStatus'
     { _rsEntityName = Nothing
     , _rsChanged = Nothing
     , _rsPersisted = Nothing
@@ -793,7 +870,7 @@ instance FromJSON RowStatus where
         parseJSON
           = withObject "RowStatus"
               (\ o ->
-                 RowStatus <$>
+                 RowStatus' <$>
                    (o .:? "entityName") <*> (o .:? "changed") <*>
                      (o .:? "persisted")
                      <*> (o .:? "rowNumber")
@@ -801,7 +878,7 @@ instance FromJSON RowStatus where
                      <*> (o .:? "entityId"))
 
 instance ToJSON RowStatus where
-        toJSON RowStatus{..}
+        toJSON RowStatus'{..}
           = object
               (catMaybes
                  [("entityName" .=) <$> _rsEntityName,
@@ -814,7 +891,7 @@ instance ToJSON RowStatus where
 -- | Key used to identify a report.
 --
 -- /See:/ 'reportKey' smart constructor.
-data ReportKey = ReportKey
+data ReportKey = ReportKey'
     { _rkQueryId  :: !(Maybe (Textual Int64))
     , _rkReportId :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -829,7 +906,7 @@ data ReportKey = ReportKey
 reportKey
     :: ReportKey
 reportKey =
-    ReportKey
+    ReportKey'
     { _rkQueryId = Nothing
     , _rkReportId = Nothing
     }
@@ -850,11 +927,11 @@ instance FromJSON ReportKey where
         parseJSON
           = withObject "ReportKey"
               (\ o ->
-                 ReportKey <$>
+                 ReportKey' <$>
                    (o .:? "queryId") <*> (o .:? "reportId"))
 
 instance ToJSON ReportKey where
-        toJSON ReportKey{..}
+        toJSON ReportKey'{..}
           = object
               (catMaybes
                  [("queryId" .=) <$> _rkQueryId,
@@ -863,7 +940,7 @@ instance ToJSON ReportKey where
 -- | Represents the status of upload.
 --
 -- /See:/ 'uploadStatus' smart constructor.
-data UploadStatus = UploadStatus
+data UploadStatus = UploadStatus'
     { _usRowStatus :: !(Maybe [RowStatus])
     , _usErrors    :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -878,7 +955,7 @@ data UploadStatus = UploadStatus
 uploadStatus
     :: UploadStatus
 uploadStatus =
-    UploadStatus
+    UploadStatus'
     { _usRowStatus = Nothing
     , _usErrors = Nothing
     }
@@ -901,12 +978,12 @@ instance FromJSON UploadStatus where
         parseJSON
           = withObject "UploadStatus"
               (\ o ->
-                 UploadStatus <$>
+                 UploadStatus' <$>
                    (o .:? "rowStatus" .!= mempty) <*>
                      (o .:? "errors" .!= mempty))
 
 instance ToJSON UploadStatus where
-        toJSON UploadStatus{..}
+        toJSON UploadStatus'{..}
           = object
               (catMaybes
                  [("rowStatus" .=) <$> _usRowStatus,
@@ -915,7 +992,7 @@ instance ToJSON UploadStatus where
 -- | Information on how frequently and when to run a query.
 --
 -- /See:/ 'querySchedule' smart constructor.
-data QuerySchedule = QuerySchedule
+data QuerySchedule = QuerySchedule'
     { _qsFrequency           :: !(Maybe QueryScheduleFrequency)
     , _qsEndTimeMs           :: !(Maybe (Textual Int64))
     , _qsNextRunMinuteOfDay  :: !(Maybe (Textual Int32))
@@ -936,7 +1013,7 @@ data QuerySchedule = QuerySchedule
 querySchedule
     :: QuerySchedule
 querySchedule =
-    QuerySchedule
+    QuerySchedule'
     { _qsFrequency = Nothing
     , _qsEndTimeMs = Nothing
     , _qsNextRunMinuteOfDay = Nothing
@@ -974,13 +1051,13 @@ instance FromJSON QuerySchedule where
         parseJSON
           = withObject "QuerySchedule"
               (\ o ->
-                 QuerySchedule <$>
+                 QuerySchedule' <$>
                    (o .:? "frequency") <*> (o .:? "endTimeMs") <*>
                      (o .:? "nextRunMinuteOfDay")
                      <*> (o .:? "nextRunTimezoneCode"))
 
 instance ToJSON QuerySchedule where
-        toJSON QuerySchedule{..}
+        toJSON QuerySchedule'{..}
           = object
               (catMaybes
                  [("frequency" .=) <$> _qsFrequency,
@@ -992,7 +1069,7 @@ instance ToJSON QuerySchedule where
 -- | Download line items response.
 --
 -- /See:/ 'downloadLineItemsResponse' smart constructor.
-newtype DownloadLineItemsResponse = DownloadLineItemsResponse
+newtype DownloadLineItemsResponse = DownloadLineItemsResponse'
     { _dlirLineItems :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1004,7 +1081,7 @@ newtype DownloadLineItemsResponse = DownloadLineItemsResponse
 downloadLineItemsResponse
     :: DownloadLineItemsResponse
 downloadLineItemsResponse =
-    DownloadLineItemsResponse
+    DownloadLineItemsResponse'
     { _dlirLineItems = Nothing
     }
 
@@ -1019,17 +1096,17 @@ instance FromJSON DownloadLineItemsResponse where
         parseJSON
           = withObject "DownloadLineItemsResponse"
               (\ o ->
-                 DownloadLineItemsResponse <$> (o .:? "lineItems"))
+                 DownloadLineItemsResponse' <$> (o .:? "lineItems"))
 
 instance ToJSON DownloadLineItemsResponse where
-        toJSON DownloadLineItemsResponse{..}
+        toJSON DownloadLineItemsResponse'{..}
           = object
               (catMaybes [("lineItems" .=) <$> _dlirLineItems])
 
 -- | Report status.
 --
 -- /See:/ 'reportStatus' smart constructor.
-data ReportStatus = ReportStatus
+data ReportStatus = ReportStatus'
     { _rsState        :: !(Maybe ReportStatusState)
     , _rsFinishTimeMs :: !(Maybe (Textual Int64))
     , _rsFormat       :: !(Maybe ReportStatusFormat)
@@ -1050,7 +1127,7 @@ data ReportStatus = ReportStatus
 reportStatus
     :: ReportStatus
 reportStatus =
-    ReportStatus
+    ReportStatus'
     { _rsState = Nothing
     , _rsFinishTimeMs = Nothing
     , _rsFormat = Nothing
@@ -1081,13 +1158,13 @@ instance FromJSON ReportStatus where
         parseJSON
           = withObject "ReportStatus"
               (\ o ->
-                 ReportStatus <$>
+                 ReportStatus' <$>
                    (o .:? "state") <*> (o .:? "finishTimeMs") <*>
                      (o .:? "format")
                      <*> (o .:? "failure"))
 
 instance ToJSON ReportStatus where
-        toJSON ReportStatus{..}
+        toJSON ReportStatus'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _rsState,
@@ -1098,7 +1175,7 @@ instance ToJSON ReportStatus where
 -- | Represents a query.
 --
 -- /See:/ 'query' smart constructor.
-data Query = Query
+data Query = Query'
     { _qQueryId               :: !(Maybe (Textual Int64))
     , _qReportDataEndTimeMs   :: !(Maybe (Textual Int64))
     , _qSchedule              :: !(Maybe QuerySchedule)
@@ -1131,7 +1208,7 @@ data Query = Query
 query
     :: Query
 query =
-    Query
+    Query'
     { _qQueryId = Nothing
     , _qReportDataEndTimeMs = Nothing
     , _qSchedule = Nothing
@@ -1196,7 +1273,7 @@ instance FromJSON Query where
         parseJSON
           = withObject "Query"
               (\ o ->
-                 Query <$>
+                 Query' <$>
                    (o .:? "queryId") <*> (o .:? "reportDataEndTimeMs")
                      <*> (o .:? "schedule")
                      <*> (o .:? "kind" .!= "doubleclickbidmanager#query")
@@ -1206,7 +1283,7 @@ instance FromJSON Query where
                      <*> (o .:? "timezoneCode"))
 
 instance ToJSON Query where
-        toJSON Query{..}
+        toJSON Query'{..}
           = object
               (catMaybes
                  [("queryId" .=) <$> _qQueryId,
@@ -1221,7 +1298,7 @@ instance ToJSON Query where
 -- | Parameters of a query or report.
 --
 -- /See:/ 'parameters' smart constructor.
-data Parameters = Parameters
+data Parameters = Parameters'
     { _pMetrics           :: !(Maybe [ParametersMetricsItem])
     , _pIncludeInviteData :: !(Maybe Bool)
     , _pFilters           :: !(Maybe [FilterPair])
@@ -1245,7 +1322,7 @@ data Parameters = Parameters
 parameters
     :: Parameters
 parameters =
-    Parameters
+    Parameters'
     { _pMetrics = Nothing
     , _pIncludeInviteData = Nothing
     , _pFilters = Nothing
@@ -1288,7 +1365,7 @@ instance FromJSON Parameters where
         parseJSON
           = withObject "Parameters"
               (\ o ->
-                 Parameters <$>
+                 Parameters' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "includeInviteData")
                      <*> (o .:? "filters" .!= mempty)
@@ -1296,7 +1373,7 @@ instance FromJSON Parameters where
                      <*> (o .:? "type"))
 
 instance ToJSON Parameters where
-        toJSON Parameters{..}
+        toJSON Parameters'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _pMetrics,
@@ -1305,10 +1382,91 @@ instance ToJSON Parameters where
                   ("groupBys" .=) <$> _pGroupBys,
                   ("type" .=) <$> _pType])
 
+-- | NotifyProposalChange request.
+--
+-- /See:/ 'notifyProposalChangeRequest' smart constructor.
+data NotifyProposalChangeRequest = NotifyProposalChangeRequest'
+    { _npcrToken  :: !(Maybe Text)
+    , _npcrAction :: !(Maybe Text)
+    , _npcrHref   :: !(Maybe Text)
+    , _npcrId     :: !(Maybe (Textual Int64))
+    , _npcrNotes  :: !(Maybe [Note])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NotifyProposalChangeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'npcrToken'
+--
+-- * 'npcrAction'
+--
+-- * 'npcrHref'
+--
+-- * 'npcrId'
+--
+-- * 'npcrNotes'
+notifyProposalChangeRequest
+    :: NotifyProposalChangeRequest
+notifyProposalChangeRequest =
+    NotifyProposalChangeRequest'
+    { _npcrToken = Nothing
+    , _npcrAction = Nothing
+    , _npcrHref = Nothing
+    , _npcrId = Nothing
+    , _npcrNotes = Nothing
+    }
+
+-- | Deal token, available when proposal is accepted by publisher.
+npcrToken :: Lens' NotifyProposalChangeRequest (Maybe Text)
+npcrToken
+  = lens _npcrToken (\ s a -> s{_npcrToken = a})
+
+-- | Action taken by publisher. One of: Accept, Decline, Append
+npcrAction :: Lens' NotifyProposalChangeRequest (Maybe Text)
+npcrAction
+  = lens _npcrAction (\ s a -> s{_npcrAction = a})
+
+-- | URL to access proposal detail.
+npcrHref :: Lens' NotifyProposalChangeRequest (Maybe Text)
+npcrHref = lens _npcrHref (\ s a -> s{_npcrHref = a})
+
+-- | Below are contents of notification from Rubicon. Proposal id.
+npcrId :: Lens' NotifyProposalChangeRequest (Maybe Int64)
+npcrId
+  = lens _npcrId (\ s a -> s{_npcrId = a}) .
+      mapping _Coerce
+
+-- | Notes from publisher
+npcrNotes :: Lens' NotifyProposalChangeRequest [Note]
+npcrNotes
+  = lens _npcrNotes (\ s a -> s{_npcrNotes = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON NotifyProposalChangeRequest where
+        parseJSON
+          = withObject "NotifyProposalChangeRequest"
+              (\ o ->
+                 NotifyProposalChangeRequest' <$>
+                   (o .:? "token") <*> (o .:? "action") <*>
+                     (o .:? "href")
+                     <*> (o .:? "id")
+                     <*> (o .:? "notes" .!= mempty))
+
+instance ToJSON NotifyProposalChangeRequest where
+        toJSON NotifyProposalChangeRequest'{..}
+          = object
+              (catMaybes
+                 [("token" .=) <$> _npcrToken,
+                  ("action" .=) <$> _npcrAction,
+                  ("href" .=) <$> _npcrHref, ("id" .=) <$> _npcrId,
+                  ("notes" .=) <$> _npcrNotes])
+
 -- | An explanation of a report failure.
 --
 -- /See:/ 'reportFailure' smart constructor.
-newtype ReportFailure = ReportFailure
+newtype ReportFailure = ReportFailure'
     { _rfErrorCode :: Maybe ReportFailureErrorCode
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1320,7 +1478,7 @@ newtype ReportFailure = ReportFailure
 reportFailure
     :: ReportFailure
 reportFailure =
-    ReportFailure
+    ReportFailure'
     { _rfErrorCode = Nothing
     }
 
@@ -1332,9 +1490,9 @@ rfErrorCode
 instance FromJSON ReportFailure where
         parseJSON
           = withObject "ReportFailure"
-              (\ o -> ReportFailure <$> (o .:? "errorCode"))
+              (\ o -> ReportFailure' <$> (o .:? "errorCode"))
 
 instance ToJSON ReportFailure where
-        toJSON ReportFailure{..}
+        toJSON ReportFailure'{..}
           = object
               (catMaybes [("errorCode" .=) <$> _rfErrorCode])

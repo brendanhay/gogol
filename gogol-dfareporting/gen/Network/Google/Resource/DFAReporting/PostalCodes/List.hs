@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PostalCodes.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'PostalCodesList' request conforms to.
 type PostalCodesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "postalCodes" :>
@@ -53,7 +53,7 @@ type PostalCodesListResource =
 -- | Retrieves a list of postal codes.
 --
 -- /See:/ 'postalCodesList' smart constructor.
-newtype PostalCodesList = PostalCodesList
+newtype PostalCodesList = PostalCodesList'
     { _pclProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ postalCodesList
     :: Int64 -- ^ 'pclProFileId'
     -> PostalCodesList
 postalCodesList pPclProFileId_ =
-    PostalCodesList
+    PostalCodesList'
     { _pclProFileId = _Coerce # pPclProFileId_
     }
 
@@ -78,7 +78,9 @@ pclProFileId
 
 instance GoogleRequest PostalCodesList where
         type Rs PostalCodesList = PostalCodesListResponse
-        requestClient PostalCodesList{..}
+        type Scopes PostalCodesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PostalCodesList'{..}
           = go _pclProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

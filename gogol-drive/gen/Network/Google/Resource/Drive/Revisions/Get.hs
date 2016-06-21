@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Revisions.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a specific revision.
+-- Gets a revision\'s metadata or content by ID.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.revisions.get@.
 module Network.Google.Resource.Drive.Revisions.Get
@@ -33,6 +33,7 @@ module Network.Google.Resource.Drive.Revisions.Get
     , RevisionsGet
 
     -- * Request Lenses
+    , rggAcknowledgeAbuse
     , rggFileId
     , rggRevisionId
     ) where
@@ -44,24 +45,38 @@ import           Network.Google.Prelude
 -- 'RevisionsGet' request conforms to.
 type RevisionsGetResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "revisions" :>
                Capture "revisionId" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] Revision
+                 QueryParam "acknowledgeAbuse" Bool :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] Revision
+       :<|>
+       "drive" :>
+         "v3" :>
+           "files" :>
+             Capture "fileId" Text :>
+               "revisions" :>
+                 Capture "revisionId" Text :>
+                   QueryParam "acknowledgeAbuse" Bool :>
+                     QueryParam "alt" AltMedia :>
+                       Get '[OctetStream] Stream
 
--- | Gets a specific revision.
+-- | Gets a revision\'s metadata or content by ID.
 --
 -- /See:/ 'revisionsGet' smart constructor.
-data RevisionsGet = RevisionsGet
-    { _rggFileId     :: !Text
-    , _rggRevisionId :: !Text
+data RevisionsGet = RevisionsGet'
+    { _rggAcknowledgeAbuse :: !Bool
+    , _rggFileId           :: !Text
+    , _rggRevisionId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rggAcknowledgeAbuse'
 --
 -- * 'rggFileId'
 --
@@ -71,10 +86,18 @@ revisionsGet
     -> Text -- ^ 'rggRevisionId'
     -> RevisionsGet
 revisionsGet pRggFileId_ pRggRevisionId_ =
-    RevisionsGet
-    { _rggFileId = pRggFileId_
+    RevisionsGet'
+    { _rggAcknowledgeAbuse = False
+    , _rggFileId = pRggFileId_
     , _rggRevisionId = pRggRevisionId_
     }
+
+-- | Whether the user is acknowledging the risk of downloading known malware
+-- or other abusive files. This is only applicable when alt=media.
+rggAcknowledgeAbuse :: Lens' RevisionsGet Bool
+rggAcknowledgeAbuse
+  = lens _rggAcknowledgeAbuse
+      (\ s a -> s{_rggAcknowledgeAbuse = a})
 
 -- | The ID of the file.
 rggFileId :: Lens' RevisionsGet Text
@@ -89,9 +112,33 @@ rggRevisionId
 
 instance GoogleRequest RevisionsGet where
         type Rs RevisionsGet = Revision
-        requestClient RevisionsGet{..}
-          = go _rggFileId _rggRevisionId (Just AltJSON)
+        type Scopes RevisionsGet =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.appdata",
+               "https://www.googleapis.com/auth/drive.file",
+               "https://www.googleapis.com/auth/drive.metadata",
+               "https://www.googleapis.com/auth/drive.metadata.readonly",
+               "https://www.googleapis.com/auth/drive.photos.readonly",
+               "https://www.googleapis.com/auth/drive.readonly"]
+        requestClient RevisionsGet'{..}
+          = go _rggFileId _rggRevisionId
+              (Just _rggAcknowledgeAbuse)
+              (Just AltJSON)
               driveService
-          where go
+          where go :<|> _
+                  = buildClient (Proxy :: Proxy RevisionsGetResource)
+                      mempty
+
+instance GoogleRequest (MediaDownload RevisionsGet)
+         where
+        type Rs (MediaDownload RevisionsGet) = Stream
+        type Scopes (MediaDownload RevisionsGet) =
+             Scopes RevisionsGet
+        requestClient (MediaDownload RevisionsGet'{..})
+          = go _rggFileId _rggRevisionId
+              (Just _rggAcknowledgeAbuse)
+              (Just AltMedia)
+              driveService
+          where _ :<|> go
                   = buildClient (Proxy :: Proxy RevisionsGetResource)
                       mempty

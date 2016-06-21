@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.FreebaseSearch.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'reconcileGetWarningItem' smart constructor.
-data ReconcileGetWarningItem = ReconcileGetWarningItem
+data ReconcileGetWarningItem = ReconcileGetWarningItem'
     { _rgwiLocation :: !(Maybe Text)
     , _rgwiReason   :: !(Maybe Text)
     , _rgwiMessage  :: !(Maybe Text)
@@ -40,7 +40,7 @@ data ReconcileGetWarningItem = ReconcileGetWarningItem
 reconcileGetWarningItem
     :: ReconcileGetWarningItem
 reconcileGetWarningItem =
-    ReconcileGetWarningItem
+    ReconcileGetWarningItem'
     { _rgwiLocation = Nothing
     , _rgwiReason = Nothing
     , _rgwiMessage = Nothing
@@ -65,12 +65,12 @@ instance FromJSON ReconcileGetWarningItem where
         parseJSON
           = withObject "ReconcileGetWarningItem"
               (\ o ->
-                 ReconcileGetWarningItem <$>
+                 ReconcileGetWarningItem' <$>
                    (o .:? "location") <*> (o .:? "reason") <*>
                      (o .:? "message"))
 
 instance ToJSON ReconcileGetWarningItem where
-        toJSON ReconcileGetWarningItem{..}
+        toJSON ReconcileGetWarningItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _rgwiLocation,
@@ -80,7 +80,7 @@ instance ToJSON ReconcileGetWarningItem where
 -- | Server costs for reconciling.
 --
 -- /See:/ 'reconcileGetCosts' smart constructor.
-data ReconcileGetCosts = ReconcileGetCosts
+data ReconcileGetCosts = ReconcileGetCosts'
     { _rgcHits :: !(Maybe (Textual Int32))
     , _rgcMs   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,7 +95,7 @@ data ReconcileGetCosts = ReconcileGetCosts
 reconcileGetCosts
     :: ReconcileGetCosts
 reconcileGetCosts =
-    ReconcileGetCosts
+    ReconcileGetCosts'
     { _rgcHits = Nothing
     , _rgcMs = Nothing
     }
@@ -116,18 +116,18 @@ instance FromJSON ReconcileGetCosts where
         parseJSON
           = withObject "ReconcileGetCosts"
               (\ o ->
-                 ReconcileGetCosts <$>
+                 ReconcileGetCosts' <$>
                    (o .:? "hits") <*> (o .:? "ms"))
 
 instance ToJSON ReconcileGetCosts where
-        toJSON ReconcileGetCosts{..}
+        toJSON ReconcileGetCosts'{..}
           = object
               (catMaybes
                  [("hits" .=) <$> _rgcHits, ("ms" .=) <$> _rgcMs])
 
 --
 -- /See:/ 'reconcileGet' smart constructor.
-data ReconcileGet = ReconcileGet
+data ReconcileGet = ReconcileGet'
     { _rgCandidate :: !(Maybe [ReconcileCandidate])
     , _rgCosts     :: !(Maybe ReconcileGetCosts)
     , _rgWarning   :: !(Maybe [ReconcileGetWarningItem])
@@ -148,7 +148,7 @@ data ReconcileGet = ReconcileGet
 reconcileGet
     :: ReconcileGet
 reconcileGet =
-    ReconcileGet
+    ReconcileGet'
     { _rgCandidate = Nothing
     , _rgCosts = Nothing
     , _rgWarning = Nothing
@@ -189,13 +189,13 @@ instance FromJSON ReconcileGet where
         parseJSON
           = withObject "ReconcileGet"
               (\ o ->
-                 ReconcileGet <$>
+                 ReconcileGet' <$>
                    (o .:? "candidate" .!= mempty) <*> (o .:? "costs")
                      <*> (o .:? "warning" .!= mempty)
                      <*> (o .:? "match"))
 
 instance ToJSON ReconcileGet where
-        toJSON ReconcileGet{..}
+        toJSON ReconcileGet'{..}
           = object
               (catMaybes
                  [("candidate" .=) <$> _rgCandidate,
@@ -206,7 +206,7 @@ instance ToJSON ReconcileGet where
 -- | Type or profession the candidate is notable for.
 --
 -- /See:/ 'reconcileCandidateNotable' smart constructor.
-data ReconcileCandidateNotable = ReconcileCandidateNotable
+data ReconcileCandidateNotable = ReconcileCandidateNotable'
     { _rcnName :: !(Maybe Text)
     , _rcnId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -221,7 +221,7 @@ data ReconcileCandidateNotable = ReconcileCandidateNotable
 reconcileCandidateNotable
     :: ReconcileCandidateNotable
 reconcileCandidateNotable =
-    ReconcileCandidateNotable
+    ReconcileCandidateNotable'
     { _rcnName = Nothing
     , _rcnId = Nothing
     }
@@ -238,18 +238,18 @@ instance FromJSON ReconcileCandidateNotable where
         parseJSON
           = withObject "ReconcileCandidateNotable"
               (\ o ->
-                 ReconcileCandidateNotable <$>
+                 ReconcileCandidateNotable' <$>
                    (o .:? "name") <*> (o .:? "id"))
 
 instance ToJSON ReconcileCandidateNotable where
-        toJSON ReconcileCandidateNotable{..}
+        toJSON ReconcileCandidateNotable'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _rcnName, ("id" .=) <$> _rcnId])
 
 --
 -- /See:/ 'reconcileCandidate' smart constructor.
-data ReconcileCandidate = ReconcileCandidate
+data ReconcileCandidate = ReconcileCandidate'
     { _rcLang       :: !(Maybe Text)
     , _rcConfidence :: !(Maybe (Textual Double))
     , _rcName       :: !(Maybe Text)
@@ -273,7 +273,7 @@ data ReconcileCandidate = ReconcileCandidate
 reconcileCandidate
     :: ReconcileCandidate
 reconcileCandidate =
-    ReconcileCandidate
+    ReconcileCandidate'
     { _rcLang = Nothing
     , _rcConfidence = Nothing
     , _rcName = Nothing
@@ -309,14 +309,14 @@ instance FromJSON ReconcileCandidate where
         parseJSON
           = withObject "ReconcileCandidate"
               (\ o ->
-                 ReconcileCandidate <$>
+                 ReconcileCandidate' <$>
                    (o .:? "lang") <*> (o .:? "confidence") <*>
                      (o .:? "name")
                      <*> (o .:? "notable")
                      <*> (o .:? "mid"))
 
 instance ToJSON ReconcileCandidate where
-        toJSON ReconcileCandidate{..}
+        toJSON ReconcileCandidate'{..}
           = object
               (catMaybes
                  [("lang" .=) <$> _rcLang,

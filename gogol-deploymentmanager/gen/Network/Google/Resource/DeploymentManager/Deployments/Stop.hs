@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DeploymentManager.Deployments.Stop
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type DeploymentsStopResource =
 -- already been completed, but prevents any new work from being started.
 --
 -- /See:/ 'deploymentsStop' smart constructor.
-data DeploymentsStop = DeploymentsStop
+data DeploymentsStop = DeploymentsStop'
     { _dsProject    :: !Text
     , _dsPayload    :: !DeploymentsStopRequest
     , _dsDeployment :: !Text
@@ -82,7 +82,7 @@ deploymentsStop
     -> Text -- ^ 'dsDeployment'
     -> DeploymentsStop
 deploymentsStop pDsProject_ pDsPayload_ pDsDeployment_ =
-    DeploymentsStop
+    DeploymentsStop'
     { _dsProject = pDsProject_
     , _dsPayload = pDsPayload_
     , _dsDeployment = pDsDeployment_
@@ -105,7 +105,10 @@ dsDeployment
 
 instance GoogleRequest DeploymentsStop where
         type Rs DeploymentsStop = Operation
-        requestClient DeploymentsStop{..}
+        type Scopes DeploymentsStop =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient DeploymentsStop'{..}
           = go _dsProject _dsDeployment (Just AltJSON)
               _dsPayload
               deploymentManagerService

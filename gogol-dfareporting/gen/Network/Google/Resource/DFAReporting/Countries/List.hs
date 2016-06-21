@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Countries.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'CountriesList' request conforms to.
 type CountriesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "countries" :>
@@ -53,7 +53,7 @@ type CountriesListResource =
 -- | Retrieves a list of countries.
 --
 -- /See:/ 'countriesList' smart constructor.
-newtype CountriesList = CountriesList
+newtype CountriesList = CountriesList'
     { _couProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ countriesList
     :: Int64 -- ^ 'couProFileId'
     -> CountriesList
 countriesList pCouProFileId_ =
-    CountriesList
+    CountriesList'
     { _couProFileId = _Coerce # pCouProFileId_
     }
 
@@ -78,7 +78,9 @@ couProFileId
 
 instance GoogleRequest CountriesList where
         type Rs CountriesList = CountriesListResponse
-        requestClient CountriesList{..}
+        type Scopes CountriesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CountriesList'{..}
           = go _couProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CountriesListResource)

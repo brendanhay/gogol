@@ -1,5 +1,5 @@
 name:                  gogol-logging
-version:               0.0.1
+version:               0.1.0
 synopsis:              Google Cloud Logging SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -7,15 +7,15 @@ license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015 Brendan Hay
+copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Google Cloud Logging API lets you create logs, ingest log entries, and
-    manage log sinks.
+    Writes log entries and manages your logs, log sinks, and logs-based
+    metrics.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -36,11 +36,25 @@ library
     exposed-modules:
           Network.Google.Logging
         , Network.Google.Logging.Types
+        , Network.Google.Resource.Logging.Entries.List
+        , Network.Google.Resource.Logging.Entries.Write
+        , Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
+        , Network.Google.Resource.Logging.Projects.Logs.Delete
+        , Network.Google.Resource.Logging.Projects.Metrics.Create
+        , Network.Google.Resource.Logging.Projects.Metrics.Delete
+        , Network.Google.Resource.Logging.Projects.Metrics.Get
+        , Network.Google.Resource.Logging.Projects.Metrics.List
+        , Network.Google.Resource.Logging.Projects.Metrics.Update
+        , Network.Google.Resource.Logging.Projects.Sinks.Create
+        , Network.Google.Resource.Logging.Projects.Sinks.Delete
+        , Network.Google.Resource.Logging.Projects.Sinks.Get
+        , Network.Google.Resource.Logging.Projects.Sinks.List
+        , Network.Google.Resource.Logging.Projects.Sinks.Update
 
     other-modules:
           Network.Google.Logging.Types.Product
         , Network.Google.Logging.Types.Sum
 
     build-depends:
-          gogol-core == 0.0.1.*
-        , base       >= 4.7 && < 5
+          gogol-core == 0.1.0.*
+        , base       >= 4.7

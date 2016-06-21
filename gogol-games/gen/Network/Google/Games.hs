@@ -7,7 +7,7 @@
 
 -- |
 -- Module      : Network.Google.Games
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -20,6 +20,11 @@ module Network.Google.Games
     (
     -- * Service Configuration
       gamesService
+
+    -- * OAuth Scopes
+    , plusLoginScope
+    , gamesScope
+    , driveAppDataScope
 
     -- * API Declaration
     , GamesAPI
@@ -52,6 +57,9 @@ module Network.Google.Games
 
     -- ** games.applications.played
     , module Network.Google.Resource.Games.Applications.Played
+
+    -- ** games.applications.verify
+    , module Network.Google.Resource.Games.Applications.Verify
 
     -- ** games.events.listByPlayer
     , module Network.Google.Resource.Games.Events.ListByPlayer
@@ -983,14 +991,18 @@ module Network.Google.Games
     -- ** Player
     , Player
     , player
+    , plaBannerURLLandscape
     , plaLastPlayedWith
     , plaAvatarImageURL
     , plaKind
     , plaExperienceInfo
     , plaName
+    , plaOriginalPlayerId
     , plaDisplayName
     , plaTitle
+    , plaBannerURLPortrait
     , plaPlayerId
+    , plaProFileSettings
 
     -- ** GamesAchievementIncrement
     , GamesAchievementIncrement
@@ -1025,6 +1037,13 @@ module Network.Google.Games
     , ecKind
     , ecChildId
 
+    -- ** ApplicationVerifyResponse
+    , ApplicationVerifyResponse
+    , applicationVerifyResponse
+    , avrKind
+    , avrAlternatePlayerId
+    , avrPlayerId
+
     -- ** PlayerEventListResponse
     , PlayerEventListResponse
     , playerEventListResponse
@@ -1037,6 +1056,12 @@ module Network.Google.Games
     , turnBasedMatchDataRequest
     , tbmdrKind
     , tbmdrData
+
+    -- ** ProFileSettings
+    , ProFileSettings
+    , proFileSettings
+    , pfsProFileVisible
+    , pfsKind
 
     -- ** EventPeriodRange
     , EventPeriodRange
@@ -1089,6 +1114,7 @@ import           Network.Google.Resource.Games.Achievements.Unlock
 import           Network.Google.Resource.Games.Achievements.UpdateMultiple
 import           Network.Google.Resource.Games.Applications.Get
 import           Network.Google.Resource.Games.Applications.Played
+import           Network.Google.Resource.Games.Applications.Verify
 import           Network.Google.Resource.Games.Events.ListByPlayer
 import           Network.Google.Resource.Games.Events.ListDefinitions
 import           Network.Google.Resource.Games.Events.Record
@@ -1188,5 +1214,6 @@ type GamesAPI =
        :<|> TurnBasedMatchesDismissResource
        :<|> TurnBasedMatchesLeaveResource
        :<|> TurnBasedMatchesCancelResource
+       :<|> ApplicationsVerifyResource
        :<|> ApplicationsGetResource
        :<|> ApplicationsPlayedResource

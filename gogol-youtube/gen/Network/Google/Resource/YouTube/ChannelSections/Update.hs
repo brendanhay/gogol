@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.ChannelSections.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type ChannelSectionsUpdateResource =
 -- | Update a channelSection.
 --
 -- /See:/ 'channelSectionsUpdate' smart constructor.
-data ChannelSectionsUpdate = ChannelSectionsUpdate
+data ChannelSectionsUpdate = ChannelSectionsUpdate'
     { _csuPart                   :: !Text
     , _csuPayload                :: !ChannelSection
     , _csuOnBehalfOfContentOwner :: !(Maybe Text)
@@ -76,7 +76,7 @@ channelSectionsUpdate
     -> ChannelSection -- ^ 'csuPayload'
     -> ChannelSectionsUpdate
 channelSectionsUpdate pCsuPart_ pCsuPayload_ =
-    ChannelSectionsUpdate
+    ChannelSectionsUpdate'
     { _csuPart = pCsuPart_
     , _csuPayload = pCsuPayload_
     , _csuOnBehalfOfContentOwner = Nothing
@@ -111,7 +111,11 @@ csuOnBehalfOfContentOwner
 
 instance GoogleRequest ChannelSectionsUpdate where
         type Rs ChannelSectionsUpdate = ChannelSection
-        requestClient ChannelSectionsUpdate{..}
+        type Scopes ChannelSectionsUpdate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient ChannelSectionsUpdate'{..}
           = go (Just _csuPart) _csuOnBehalfOfContentOwner
               (Just AltJSON)
               _csuPayload

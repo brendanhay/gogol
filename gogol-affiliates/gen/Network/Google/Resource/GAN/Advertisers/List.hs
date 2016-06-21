@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GAN.Advertisers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type AdvertisersListResource =
 -- advertiser\/publisher has access to.
 --
 -- /See:/ 'advertisersList' smart constructor.
-data AdvertisersList = AdvertisersList
+data AdvertisersList = AdvertisersList'
     { _alRelationshipStatus :: !(Maybe AdvertisersListRelationshipStatus)
     , _alMinSevenDayEpc     :: !(Maybe (Textual Double))
     , _alRoleId             :: !Text
@@ -109,7 +109,7 @@ advertisersList
     -> AdvertisersListRole -- ^ 'alRole'
     -> AdvertisersList
 advertisersList pAlRoleId_ pAlRole_ =
-    AdvertisersList
+    AdvertisersList'
     { _alRelationshipStatus = Nothing
     , _alMinSevenDayEpc = Nothing
     , _alRoleId = pAlRoleId_
@@ -187,7 +187,8 @@ alMaxResults
 
 instance GoogleRequest AdvertisersList where
         type Rs AdvertisersList = Advertisers
-        requestClient AdvertisersList{..}
+        type Scopes AdvertisersList = '[]
+        requestClient AdvertisersList'{..}
           = go _alRole _alRoleId _alRelationshipStatus
               _alMinSevenDayEpc
               _alMinNinetyDayEpc

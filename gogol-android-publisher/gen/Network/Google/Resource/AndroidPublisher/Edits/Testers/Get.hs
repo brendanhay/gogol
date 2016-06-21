@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Testers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type EditsTestersGetResource =
 
 --
 -- /See:/ 'editsTestersGet' smart constructor.
-data EditsTestersGet = EditsTestersGet
+data EditsTestersGet = EditsTestersGet'
     { _etgTrack       :: !EditsTestersGetTrack
     , _etgPackageName :: !Text
     , _etgEditId      :: !Text
@@ -75,7 +75,7 @@ editsTestersGet
     -> Text -- ^ 'etgEditId'
     -> EditsTestersGet
 editsTestersGet pEtgTrack_ pEtgPackageName_ pEtgEditId_ =
-    EditsTestersGet
+    EditsTestersGet'
     { _etgTrack = pEtgTrack_
     , _etgPackageName = pEtgPackageName_
     , _etgEditId = pEtgEditId_
@@ -98,7 +98,9 @@ etgEditId
 
 instance GoogleRequest EditsTestersGet where
         type Rs EditsTestersGet = Testers
-        requestClient EditsTestersGet{..}
+        type Scopes EditsTestersGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsTestersGet'{..}
           = go _etgPackageName _etgEditId _etgTrack
               (Just AltJSON)
               androidPublisherService

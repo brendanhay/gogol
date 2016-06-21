@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Debugger.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,12 +57,18 @@ module Network.Google.Debugger.Types
     , gscAliasName
     , gscRevisionId
     , gscHostURI
+    , gscAliasContext
 
     -- * RepoId
     , RepoId
     , repoId
     , riUid
     , riProjectRepoId
+
+    -- * ExtendedSourceContextLabels
+    , ExtendedSourceContextLabels
+    , extendedSourceContextLabels
+    , esclAddtional
 
     -- * ProjectRepoId
     , ProjectRepoId
@@ -86,6 +93,7 @@ module Network.Google.Debugger.Types
     , bExpressions
     , bLogMessageFormat
     , bId
+    , bLabels
     , bUserEmail
     , bVariableTable
     , bStackFrames
@@ -93,6 +101,11 @@ module Network.Google.Debugger.Types
     , bEvaluatedExpressions
     , bCreateTime
     , bIsFinalState
+
+    -- * BreakpointLabels
+    , BreakpointLabels
+    , breakpointLabels
+    , blAddtional
 
     -- * GetBreakpointResponse
     , GetBreakpointResponse
@@ -107,6 +120,7 @@ module Network.Google.Debugger.Types
     , vMembers
     , vValue
     , vName
+    , vType
 
     -- * ListBreakpointsResponse
     , ListBreakpointsResponse
@@ -136,6 +150,13 @@ module Network.Google.Debugger.Types
     , listActiveBreakpointsResponse
     , labrNextWaitToken
     , labrBreakpoints
+    , labrWaitExpired
+
+    -- * ExtendedSourceContext
+    , ExtendedSourceContext
+    , extendedSourceContext
+    , escContext
+    , escLabels
 
     -- * GitSourceContext
     , GitSourceContext
@@ -163,6 +184,7 @@ module Network.Google.Debugger.Types
     , crscRepoId
     , crscAliasName
     , crscRevisionId
+    , crscAliasContext
 
     -- * DebuggeeLabels
     , DebuggeeLabels
@@ -175,6 +197,7 @@ module Network.Google.Debugger.Types
     , dStatus
     , dUniquifier
     , dProject
+    , dExtSourceContexts
     , dAgentVersion
     , dIsDisabled
     , dId
@@ -194,6 +217,12 @@ module Network.Google.Debugger.Types
     , registerDebuggeeRequest
     , rDebuggee
 
+    -- * AliasContext
+    , AliasContext
+    , aliasContext
+    , acKind
+    , acName
+
     -- * CloudWorkspaceId
     , CloudWorkspaceId
     , cloudWorkspaceId
@@ -206,19 +235,19 @@ import           Network.Google.Debugger.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Cloud Debugger API. This contains the host and root path used as a starting point for constructing service requests.
-debuggerService :: Service
+debuggerService :: ServiceConfig
 debuggerService
   = defaultService (ServiceId "clouddebugger:v2")
       "clouddebugger.googleapis.com"
 
 -- | Manage cloud debugger
-cloudDebuggerScope :: OAuthScope
-cloudDebuggerScope = "https://www.googleapis.com/auth/cloud_debugger";
+cloudDebuggerScope :: Proxy '["https://www.googleapis.com/auth/cloud_debugger"]
+cloudDebuggerScope = Proxy;
 
 -- | Manage active breakpoints in cloud debugger
-cloudDebugletcontrollerScope :: OAuthScope
-cloudDebugletcontrollerScope = "https://www.googleapis.com/auth/cloud_debugletcontroller";
+cloudDebugletcontrollerScope :: Proxy '["https://www.googleapis.com/auth/cloud_debugletcontroller"]
+cloudDebugletcontrollerScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-cloudPlatformScope :: OAuthScope
-cloudPlatformScope = "https://www.googleapis.com/auth/cloud-platform";
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

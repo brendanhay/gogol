@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Commit
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type EditsCommitResource =
 -- | Commits\/applies the changes made in this edit back to the app.
 --
 -- /See:/ 'editsCommit' smart constructor.
-data EditsCommit = EditsCommit
+data EditsCommit = EditsCommit'
     { _ecPackageName :: !Text
     , _ecEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ editsCommit
     -> Text -- ^ 'ecEditId'
     -> EditsCommit
 editsCommit pEcPackageName_ pEcEditId_ =
-    EditsCommit
+    EditsCommit'
     { _ecPackageName = pEcPackageName_
     , _ecEditId = pEcEditId_
     }
@@ -89,7 +89,9 @@ ecEditId = lens _ecEditId (\ s a -> s{_ecEditId = a})
 
 instance GoogleRequest EditsCommit where
         type Rs EditsCommit = AppEdit
-        requestClient EditsCommit{..}
+        type Scopes EditsCommit =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsCommit'{..}
           = go _ecPackageName _ecEditId (Just AltJSON)
               androidPublisherService
           where go

@@ -14,16 +14,20 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.VariantSets.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of all variant sets matching search criteria. Implements
+-- Returns a list of all variant sets matching search criteria. For the
+-- definitions of variant sets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchVariantSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L49).
 --
--- /See:/ < Genomics API Reference> for @genomics.variantsets.search@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.search@.
 module Network.Google.Resource.Genomics.VariantSets.Search
     (
     -- * REST Resource
@@ -64,11 +68,15 @@ type VariantSetsSearchResource =
                            ReqBody '[JSON] SearchVariantSetsRequest :>
                              Post '[JSON] SearchVariantSetsResponse
 
--- | Returns a list of all variant sets matching search criteria. Implements
+-- | Returns a list of all variant sets matching search criteria. For the
+-- definitions of variant sets and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchVariantSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L49).
 --
 -- /See:/ 'variantSetsSearch' smart constructor.
-data VariantSetsSearch = VariantSetsSearch
+data VariantSetsSearch = VariantSetsSearch'
     { _vssXgafv          :: !(Maybe Text)
     , _vssUploadProtocol :: !(Maybe Text)
     , _vssPp             :: !Bool
@@ -102,7 +110,7 @@ variantSetsSearch
     :: SearchVariantSetsRequest -- ^ 'vssPayload'
     -> VariantSetsSearch
 variantSetsSearch pVssPayload_ =
-    VariantSetsSearch
+    VariantSetsSearch'
     { _vssXgafv = Nothing
     , _vssUploadProtocol = Nothing
     , _vssPp = True
@@ -157,7 +165,11 @@ vssCallback
 
 instance GoogleRequest VariantSetsSearch where
         type Rs VariantSetsSearch = SearchVariantSetsResponse
-        requestClient VariantSetsSearch{..}
+        type Scopes VariantSetsSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient VariantSetsSearch'{..}
           = go _vssXgafv _vssUploadProtocol (Just _vssPp)
               _vssAccessToken
               _vssUploadType

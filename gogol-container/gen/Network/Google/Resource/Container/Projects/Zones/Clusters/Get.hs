@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Container.Projects.Zones.Clusters.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a specific cluster.
+-- Gets the details of a specific cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.get@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
@@ -67,10 +67,10 @@ type ProjectsZonesClustersGetResource =
                                QueryParam "callback" Text :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Cluster
 
--- | Gets a specific cluster.
+-- | Gets the details of a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersGet' smart constructor.
-data ProjectsZonesClustersGet = ProjectsZonesClustersGet
+data ProjectsZonesClustersGet = ProjectsZonesClustersGet'
     { _pzcgXgafv          :: !(Maybe Text)
     , _pzcgUploadProtocol :: !(Maybe Text)
     , _pzcgPp             :: !Bool
@@ -112,7 +112,7 @@ projectsZonesClustersGet
     -> Text -- ^ 'pzcgProjectId'
     -> ProjectsZonesClustersGet
 projectsZonesClustersGet pPzcgZone_ pPzcgClusterId_ pPzcgProjectId_ =
-    ProjectsZonesClustersGet
+    ProjectsZonesClustersGet'
     { _pzcgXgafv = Nothing
     , _pzcgUploadProtocol = Nothing
     , _pzcgPp = True
@@ -170,7 +170,7 @@ pzcgClusterId
       (\ s a -> s{_pzcgClusterId = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzcgProjectId :: Lens' ProjectsZonesClustersGet Text
 pzcgProjectId
   = lens _pzcgProjectId
@@ -183,7 +183,9 @@ pzcgCallback
 
 instance GoogleRequest ProjectsZonesClustersGet where
         type Rs ProjectsZonesClustersGet = Cluster
-        requestClient ProjectsZonesClustersGet{..}
+        type Scopes ProjectsZonesClustersGet =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsZonesClustersGet'{..}
           = go _pzcgProjectId _pzcgZone _pzcgClusterId
               _pzcgXgafv
               _pzcgUploadProtocol

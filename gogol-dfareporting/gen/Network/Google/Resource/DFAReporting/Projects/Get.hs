@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Projects.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ProjectsGet' request conforms to.
 type ProjectsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -54,7 +54,7 @@ type ProjectsGetResource =
 -- | Gets one project by ID.
 --
 -- /See:/ 'projectsGet' smart constructor.
-data ProjectsGet = ProjectsGet
+data ProjectsGet = ProjectsGet'
     { _proProFileId :: !(Textual Int64)
     , _proId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ projectsGet
     -> Int64 -- ^ 'proId'
     -> ProjectsGet
 projectsGet pProProFileId_ pProId_ =
-    ProjectsGet
+    ProjectsGet'
     { _proProFileId = _Coerce # pProProFileId_
     , _proId = _Coerce # pProId_
     }
@@ -89,7 +89,9 @@ proId
 
 instance GoogleRequest ProjectsGet where
         type Rs ProjectsGet = Project
-        requestClient ProjectsGet{..}
+        type Scopes ProjectsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient ProjectsGet'{..}
           = go _proProFileId _proId (Just AltJSON)
               dFAReportingService
           where go

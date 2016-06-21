@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AdExchangeBuyer.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,17 +20,7 @@ module Network.Google.AdExchangeBuyer.Types
       adExchangeBuyerService
 
     -- * OAuth Scopes
-    , adexchangeBuyerScope
-
-    -- * BrandDTO
-    , BrandDTO
-    , brandDTO
-    , bdtoAdvertiserId
-    , bdtoName
-    , bdtoId
-
-    -- * MarketplaceOrdersUpdateUpdateAction
-    , MarketplaceOrdersUpdateUpdateAction (..)
+    , adExchangeBuyerScope
 
     -- * MarketplaceNote
     , MarketplaceNote
@@ -37,11 +28,11 @@ module Network.Google.AdExchangeBuyer.Types
     , mnNote
     , mnKind
     , mnTimestampMs
+    , mnProposalId
     , mnDealId
+    , mnProposalRevisionNumber
     , mnNoteId
     , mnCreatorRole
-    , mnOrderId
-    , mnOrderRevisionNumber
 
     -- * CreativeNATiveAd
     , CreativeNATiveAd
@@ -63,6 +54,7 @@ module Network.Google.AdExchangeBuyer.Types
     , EditAllOrderDealsResponse
     , editAllOrderDealsResponse
     , eaodrDeals
+    , eaodrOrderRevisionNumber
 
     -- * CreativesList
     , CreativesList
@@ -79,41 +71,10 @@ module Network.Google.AdExchangeBuyer.Types
     , csriciAuctionType
     , csriciGeoCriteriaId
 
-    -- * TermsDTO
-    , TermsDTO
-    , termsDTO
-    , tdtoFinalizeAutomatically
-    , tdtoBuyerBillingType
-    , tdtoTargetingAllAdSlots
-    , tdtoURLs
-    , tdtoEndDate
-    , tdtoCpm
-    , tdtoEstimatedSpend
-    , tdtoAdvertisers
-    , tdtoEstimatedImpressionsPerDay
-    , tdtoMonetizerType
-    , tdtoAudienceSegmentDescription
-    , tdtoCreativeReviewPolicy
-    , tdtoMinimumTrueLooks
-    , tdtoStartDate
-    , tdtoCreativeBlockingLevel
-    , tdtoSemiTransparent
-    , tdtoAudienceSegment
-    , tdtoDealPremium
-    , tdtoIsReservation
-    , tdtoAdSlots
-    , tdtoTermsAttributes
-    , tdtoInventorySegmentTargeting
-    , tdtoDescriptiveName
-    , tdtoMinimumSpendMicros
-    , tdtoTargetByDealId
-    , tdtoBillingTerms
-    , tdtoDescription
-
     -- * CreateOrdersResponse
     , CreateOrdersResponse
     , createOrdersResponse
-    , corOrders
+    , corProposals
 
     -- * AccountBidderLocationItem
     , AccountBidderLocationItem
@@ -121,6 +82,7 @@ module Network.Google.AdExchangeBuyer.Types
     , abliURL
     , abliMaximumQps
     , abliRegion
+    , abliBidProtocol
 
     -- * PrivateData
     , PrivateData
@@ -143,32 +105,12 @@ module Network.Google.AdExchangeBuyer.Types
     , addOrderNotesRequest
     , aonrNotes
 
-    -- * GetFinalizedNegotiationByExternalDealIdRequest
-    , GetFinalizedNegotiationByExternalDealIdRequest
-    , getFinalizedNegotiationByExternalDealIdRequest
-    , gfnbedirIncludePrivateAuctions
-
     -- * DeliveryControlFrequencyCap
     , DeliveryControlFrequencyCap
     , deliveryControlFrequencyCap
     , dcfcMaxImpressions
     , dcfcNumTimeUnits
     , dcfcTimeUnitType
-
-    -- * DealPartyDTO
-    , DealPartyDTO
-    , dealPartyDTO
-    , dpdtoBuyerSellerRole
-    , dpdtoCustomerId
-    , dpdtoName
-    , dpdtoWebProperty
-    , dpdtoBuyer
-
-    -- * GetNegotiationsResponse
-    , GetNegotiationsResponse
-    , getNegotiationsResponse
-    , gnrKind
-    , gnrNegotiations
 
     -- * MarketplaceDealParty
     , MarketplaceDealParty
@@ -181,16 +123,10 @@ module Network.Google.AdExchangeBuyer.Types
     , getOrderNotesResponse
     , gonrNotes
 
-    -- * RuleKeyValuePair
-    , RuleKeyValuePair
-    , ruleKeyValuePair
-    , rkvpKeyName
-    , rkvpValue
-
     -- * GetOrdersResponse
     , GetOrdersResponse
     , getOrdersResponse
-    , gorOrders
+    , gorProposals
 
     -- * CreativeServingRestrictionsItemDisApprovalReasonsItem
     , CreativeServingRestrictionsItemDisApprovalReasonsItem
@@ -204,20 +140,17 @@ module Network.Google.AdExchangeBuyer.Types
     , alKind
     , alItems
 
+    -- * Dimension
+    , Dimension
+    , dimension
+    , dDimensionValues
+    , dDimensionType
+
     -- * CreateOrdersRequest
     , CreateOrdersRequest
     , createOrdersRequest
+    , cProposals
     , cWebPropertyCode
-    , cOrders
-
-    -- * AdSize
-    , AdSize
-    , adSize
-    , asHeight
-    , asWidth
-
-    -- * MarketplaceOrdersPatchUpdateAction
-    , MarketplaceOrdersPatchUpdateAction (..)
 
     -- * CreativeCorrectionsItem
     , CreativeCorrectionsItem
@@ -225,15 +158,21 @@ module Network.Google.AdExchangeBuyer.Types
     , cciReason
     , cciDetails
 
+    -- * DealServingMetadata
+    , DealServingMetadata
+    , dealServingMetadata
+    , dsmDealPauseStatus
+
     -- * AddOrderDealsResponse
     , AddOrderDealsResponse
     , addOrderDealsResponse
     , aodrDeals
-    , aodrOrderRevisionNumber
+    , aodrProposalRevisionNumber
 
     -- * DeliveryControl
     , DeliveryControl
     , deliveryControl
+    , dcCreativeBlockingLevel
     , dcFrequencyCaps
     , dcDeliveryRateType
 
@@ -241,6 +180,7 @@ module Network.Google.AdExchangeBuyer.Types
     , PricePerBuyer
     , pricePerBuyer
     , ppbPrice
+    , ppbAuctionTier
     , ppbBuyer
 
     -- * Creative
@@ -251,6 +191,7 @@ module Network.Google.AdExchangeBuyer.Types
     , cHeight
     , cBuyerCreativeId
     , cAdvertiserName
+    , cAdChoicesDestinationURL
     , cAgencyId
     , cCorrections
     , cProductCategories
@@ -281,32 +222,17 @@ module Network.Google.AdExchangeBuyer.Types
     , tvdptdpDayOfWeek
     , tvdptdpEndMinute
 
+    -- * DimensionDimensionValue
+    , DimensionDimensionValue
+    , dimensionDimensionValue
+    , ddvName
+    , ddvId
+
     -- * PretargetingConfigList
     , PretargetingConfigList
     , pretargetingConfigList
     , pclKind
     , pclItems
-
-    -- * BuyerDTO
-    , BuyerDTO
-    , buyerDTO
-    , buySponsorAccountId
-    , buyEnabledForInterestTargetingDeals
-    , buyCustomerId
-    , buyEnabledForPreferredDeals
-    , buyAccountId
-    , buyDisplayName
-    , buyId
-
-    -- * AdSlotDTO
-    , AdSlotDTO
-    , adSlotDTO
-    , asdtoWebPropertyId
-    , asdtoSize
-    , asdtoChannelCode
-    , asdtoChannelId
-    , asdtoName
-    , asdtoDescription
 
     -- * DealTermsNonGuaranteedFixedPriceTerms
     , DealTermsNonGuaranteedFixedPriceTerms
@@ -368,7 +294,7 @@ module Network.Google.AdExchangeBuyer.Types
     , deleteOrderDealsRequest
     , dodrUpdateAction
     , dodrDealIds
-    , dodrOrderRevisionNumber
+    , dodrProposalRevisionNumber
 
     -- * CreativesListOpenAuctionStatusFilter
     , CreativesListOpenAuctionStatusFilter (..)
@@ -411,6 +337,7 @@ module Network.Google.AdExchangeBuyer.Types
     , pcMobileDevices
     , pcLanguages
     , pcVerticals
+    , pcVideoPlayerSizes
     , pcConfigId
     , pcPlacements
     , pcExcludedUserLists
@@ -437,77 +364,49 @@ module Network.Google.AdExchangeBuyer.Types
     , tvcsCompanionSizes
     , tvcsCreativeSizeType
 
-    -- * NegotiationDTO
-    , NegotiationDTO
-    , negotiationDTO
-    , ndtoNegotiationState
-    , ndtoExternalDealId
-    , ndtoStatus
-    , ndtoDealType
-    , ndtoNegotiationRounds
-    , ndtoKind
-    , ndtoBilledBuyer
-    , ndtoBuyerEmailContacts
-    , ndtoStats
-    , ndtoSeller
-    , ndtoLabelNames
-    , ndtoOfferId
-    , ndtoNegotiationId
-    , ndtoSellerEmailContacts
-    , ndtoBuyer
+    -- * DealTermsGuaranteedFixedPriceTermsBillingInfo
+    , DealTermsGuaranteedFixedPriceTermsBillingInfo
+    , dealTermsGuaranteedFixedPriceTermsBillingInfo
+    , dtgfptbiCurrencyConversionTimeMs
+    , dtgfptbiPrice
+    , dtgfptbiOriginalContractedQuantity
 
-    -- * OfferDTO
-    , OfferDTO
-    , offerDTO
-    , odtoCreator
-    , odtoStatus
-    , odtoOfferState
-    , odtoPointOfContact
-    , odtoTerms
-    , odtoKind
-    , odtoBilledBuyer
-    , odtoOpenToDealParties
-    , odtoEmailContacts
-    , odtoLabelNames
-    , odtoOfferId
-    , odtoClosedToDealParties
-    , odtoAnonymous
-    , odtoIsOpen
+    -- * GetPublisherProFilesByAccountIdResponse
+    , GetPublisherProFilesByAccountIdResponse
+    , getPublisherProFilesByAccountIdResponse
+    , gppfbairProFiles
 
-    -- * AudienceSegment
-    , AudienceSegment
-    , audienceSegment
-    , asNumCookies
-    , asName
-    , asId
-    , asDescription
+    -- * Proposal
+    , Proposal
+    , proposal
+    , pBuyerPrivateData
+    , pIsSetupComplete
+    , pInventorySource
+    , pBuyerContacts
+    , pKind
+    , pOriginatorRole
+    , pRevisionNumber
+    , pBilledBuyer
+    , pPrivateAuctionId
+    , pIsRenegotiating
+    , pHasSellerSignedOff
+    , pSeller
+    , pProposalId
+    , pName
+    , pSellerContacts
+    , pLabels
+    , pRevisionTimeMs
+    , pProposalState
+    , pLastUpdaterOrCommentorRole
+    , pNegotiationId
+    , pHasBuyerSignedOff
+    , pBuyer
 
     -- * BillingInfoList
     , BillingInfoList
     , billingInfoList
     , bilKind
     , bilItems
-
-    -- * MarketplaceOffer
-    , MarketplaceOffer
-    , marketplaceOffer
-    , moState
-    , moWebPropertyCode
-    , moCreationTimeMs
-    , moTerms
-    , moLastUpdateTimeMs
-    , moKind
-    , moRevisionNumber
-    , moHasCreatorSignedOff
-    , moFlightStartTimeMs
-    , moSharedTargetings
-    , moSeller
-    , moSyndicationProduct
-    , moFlightEndTimeMs
-    , moName
-    , moCreatorContacts
-    , moOfferId
-    , moLabels
 
     -- * AddOrderNotesResponse
     , AddOrderNotesResponse
@@ -520,29 +419,13 @@ module Network.Google.AdExchangeBuyer.Types
     , tvsHeight
     , tvsWidth
 
-    -- * GetNegotiationsRequest
-    , GetNegotiationsRequest
-    , getNegotiationsRequest
-    , gnrSinceTimestampMillis
-    , gnrFinalized
-    , gnrIncludePrivateAuctions
-
-    -- * MoneyDTO
-    , MoneyDTO
-    , moneyDTO
-    , mdtoCurrencyCode
-    , mdtoMicros
-
-    -- * GetNegotiationByIdRequest
-    , GetNegotiationByIdRequest
-    , getNegotiationByIdRequest
-    , gnbirIncludePrivateAuctions
-
-    -- * ListOffersResponse
-    , ListOffersResponse
-    , listOffersResponse
-    , lorKind
-    , lorOffers
+    -- * UpdatePrivateAuctionProposalRequest
+    , UpdatePrivateAuctionProposalRequest
+    , updatePrivateAuctionProposalRequest
+    , upaprExternalDealId
+    , upaprUpdateAction
+    , upaprNote
+    , upaprProposalRevisionNumber
 
     -- * PretargetingConfigDimensionsItem
     , PretargetingConfigDimensionsItem
@@ -550,18 +433,12 @@ module Network.Google.AdExchangeBuyer.Types
     , pcdiHeight
     , pcdiWidth
 
-    -- * AdvertiserDTO
-    , AdvertiserDTO
-    , advertiserDTO
-    , adtoStatus
-    , adtoBrands
-    , adtoName
-    , adtoId
-
-    -- * ListClientAccessCapabilitiesResponse
-    , ListClientAccessCapabilitiesResponse
-    , listClientAccessCapabilitiesResponse
-    , lcacrClientAccessPermissions
+    -- * PublisherProvidedForecast
+    , PublisherProvidedForecast
+    , publisherProvidedForecast
+    , ppfWeeklyImpressions
+    , ppfWeeklyUniques
+    , ppfDimensions
 
     -- * TargetingValue
     , TargetingValue
@@ -583,14 +460,22 @@ module Network.Google.AdExchangeBuyer.Types
     , price
     , pCurrencyCode
     , pAmountMicros
+    , pPricingType
+
+    -- * PretargetingConfigVideoPlayerSizesItem
+    , PretargetingConfigVideoPlayerSizesItem
+    , pretargetingConfigVideoPlayerSizesItem
+    , pcvpsiMinWidth
+    , pcvpsiAspectRatio
+    , pcvpsiMinHeight
 
     -- * EditAllOrderDealsRequest
     , EditAllOrderDealsRequest
     , editAllOrderDealsRequest
     , eUpdateAction
     , eDeals
-    , eOrder
-    , eOrderRevisionNumber
+    , eProposalRevisionNumber
+    , eProposal
 
     -- * BillingInfo
     , BillingInfo
@@ -613,51 +498,6 @@ module Network.Google.AdExchangeBuyer.Types
     , stExclusions
     , stInclusions
 
-    -- * ListClientAccessCapabilitiesRequest
-    , ListClientAccessCapabilitiesRequest
-    , listClientAccessCapabilitiesRequest
-    , lcacrSponsorAccountId
-
-    -- * InventorySegmentTargeting
-    , InventorySegmentTargeting
-    , inventorySegmentTargeting
-    , istNegativeVideoDurationSegments
-    , istNegativeIcmBrands
-    , istNegativeKeyValues
-    , istPositiveAudienceSegments
-    , istPositiveXfpPlacements
-    , istNegativeXfpAdSlots
-    , istPositiveOperatingSystemVersions
-    , istPositiveSizes
-    , istPositiveDeviceCategories
-    , istPositiveLocations
-    , istNegativeAdSizes
-    , istPositiveOperatingSystems
-    , istPositiveSiteURLs
-    , istNegativeInventorySlots
-    , istNegativeVideoAdPositionSegments
-    , istPositiveAdTypeSegments
-    , istPositiveIcmInterests
-    , istPositiveMobileApps
-    , istPositiveKeyValues
-    , istPositiveIcmBrands
-    , istPositiveVideoDurationSegments
-    , istNegativeAudienceSegments
-    , istNegativeXfpPlacements
-    , istPositiveXfpAdSlots
-    , istNegativeOperatingSystemVersions
-    , istNegativeSizes
-    , istNegativeLocations
-    , istNegativeDeviceCategories
-    , istNegativeOperatingSystems
-    , istPositiveAdSizes
-    , istNegativeSiteURLs
-    , istNegativeAdTypeSegments
-    , istPositiveVideoAdPositionSegments
-    , istPositiveInventorySlots
-    , istNegativeMobileApps
-    , istNegativeIcmInterests
-
     -- * CreativeNATiveAdImage
     , CreativeNATiveAdImage
     , creativeNATiveAdImage
@@ -665,27 +505,32 @@ module Network.Google.AdExchangeBuyer.Types
     , cnataiURL
     , cnataiWidth
 
-    -- * WebPropertyDTO
-    , WebPropertyDTO
-    , webPropertyDTO
-    , wpdtoEnabledForPreferredDeals
-    , wpdtoSyndicationProduct
-    , wpdtoName
-    , wpdtoPropertyCode
-    , wpdtoId
-    , wpdtoSiteURLs
-    , wpdtoAllowInterestTargetedAds
-
-    -- * ListOffersRequest
-    , ListOffersRequest
-    , listOffersRequest
-    , lorSinceTimestampMillis
-
-    -- * ClientAccessCapabilities
-    , ClientAccessCapabilities
-    , clientAccessCapabilities
-    , cacClientAccountId
-    , cacCapabilities
+    -- * Product
+    , Product
+    , product
+    , proState
+    , proInventorySource
+    , proWebPropertyCode
+    , proCreationTimeMs
+    , proTerms
+    , proLastUpdateTimeMs
+    , proKind
+    , proRevisionNumber
+    , proPrivateAuctionId
+    , proDeliveryControl
+    , proHasCreatorSignedOff
+    , proFlightStartTimeMs
+    , proSharedTargetings
+    , proSeller
+    , proSyndicationProduct
+    , proFlightEndTimeMs
+    , proName
+    , proCreatorContacts
+    , proPublisherProvidedForecast
+    , proLabels
+    , proPublisherProFileId
+    , proLegacyOfferId
+    , proProductId
 
     -- * CreativeServingRestrictionsItem
     , CreativeServingRestrictionsItem
@@ -698,13 +543,40 @@ module Network.Google.AdExchangeBuyer.Types
     , DeleteOrderDealsResponse
     , deleteOrderDealsResponse
     , dDeals
-    , dOrderRevisionNumber
+    , dProposalRevisionNumber
 
     -- * PretargetingConfigPlacementsItem
     , PretargetingConfigPlacementsItem
     , pretargetingConfigPlacementsItem
     , pcpiToken
     , pcpiType
+
+    -- * PublisherProFileAPIProto
+    , PublisherProFileAPIProto
+    , publisherProFileAPIProto
+    , ppfapAudience
+    , ppfapState
+    , ppfapMediaKitLink
+    , ppfapDirectContact
+    , ppfapSamplePageLink
+    , ppfapLogoURL
+    , ppfapKind
+    , ppfapExchange
+    , ppfapOverview
+    , ppfapGooglePlusLink
+    , ppfapProFileId
+    , ppfapIsParent
+    , ppfapSeller
+    , ppfapAccountId
+    , ppfapName
+    , ppfapBuyerPitchStatement
+    , ppfapPublisherProvidedForecast
+    , ppfapIsPublished
+    , ppfapPublisherDomains
+    , ppfapPublisherProFileId
+    , ppfapRateCardInfoLink
+    , ppfapTopHeadlines
+    , ppfapProgrammaticContact
 
     -- * MarketplaceDeal
     , MarketplaceDeal
@@ -714,41 +586,35 @@ module Network.Google.AdExchangeBuyer.Types
     , mdWebPropertyCode
     , mdCreationTimeMs
     , mdTerms
-    , mdOfferRevisionNumber
     , mdLastUpdateTimeMs
     , mdKind
     , mdDeliveryControl
+    , mdDealServingMetadata
     , mdFlightStartTimeMs
     , mdSharedTargetings
+    , mdProposalId
     , mdDealId
     , mdInventoryDescription
     , mdSyndicationProduct
     , mdFlightEndTimeMs
     , mdName
     , mdSellerContacts
-    , mdOfferId
-    , mdOrderId
+    , mdProgrammaticCreativeSource
+    , mdCreativePreApprovalPolicy
+    , mdProductRevisionNumber
+    , mdProductId
+    , mdCreativeSafeFrameCompatibility
 
     -- * GetOffersResponse
     , GetOffersResponse
     , getOffersResponse
-    , gorOffers
-
-    -- * StatsDTO
-    , StatsDTO
-    , statsDTO
-    , sdtoBids
-    , sdtoSpend
-    , sdtoImpressions
-    , sdtoGoodBids
-    , sdtoRevenue
-    , sdtoRequests
+    , gorProducts
 
     -- * DealTermsNonGuaranteedAuctionTerms
     , DealTermsNonGuaranteedAuctionTerms
     , dealTermsNonGuaranteedAuctionTerms
     , dtngatReservePricePerBuyers
-    , dtngatPrivateAuctionId
+    , dtngatAutoOptimizePrivateAuction
 
     -- * CreativeFilteringReasonsReasonsItem
     , CreativeFilteringReasonsReasonsItem
@@ -756,18 +622,8 @@ module Network.Google.AdExchangeBuyer.Types
     , cfrriFilteringStatus
     , cfrriFilteringCount
 
-    -- * NegotiationRoundDTO
-    , NegotiationRoundDTO
-    , negotiationRoundDTO
-    , nrdtoTerms
-    , nrdtoKind
-    , nrdtoOriginatorRole
-    , nrdtoAction
-    , nrdtoDBmPartnerId
-    , nrdtoNotes
-    , nrdtoNegotiationId
-    , nrdtoEditHistory
-    , nrdtoRoundNumber
+    -- * ProposalsPatchUpdateAction
+    , ProposalsPatchUpdateAction (..)
 
     -- * CreativesListDealsStatusFilter
     , CreativesListDealsStatusFilter (..)
@@ -775,21 +631,14 @@ module Network.Google.AdExchangeBuyer.Types
     -- * DealTerms
     , DealTerms
     , dealTerms
+    , dtEstimatedGrossSpend
     , dtNonGuaranteedFixedPriceTerms
     , dtNonGuaranteedAuctionTerms
+    , dtBrandingType
+    , dtEstimatedImpressionsPerDay
+    , dtSellerTimeZone
     , dtGuaranteedFixedPriceTerms
     , dtDescription
-
-    -- * DateTime
-    , DateTime
-    , dateTime
-    , dtSecond
-    , dtDay
-    , dtYear
-    , dtHour
-    , dtMonth
-    , dtMinute
-    , dtTimeZoneId
 
     -- * MarketplaceLabel
     , MarketplaceLabel
@@ -799,55 +648,34 @@ module Network.Google.AdExchangeBuyer.Types
     , mlCreateTimeMs
     , mlLabel
 
-    -- * EditHistoryDTO
-    , EditHistoryDTO
-    , editHistoryDTO
-    , ehdtoLastUpdatedByLoginName
-    , ehdtoCreatedByLoginName
-    , ehdtoLastUpdateTimeStamp
-    , ehdtoCreatedTimeStamp
-
     -- * Buyer
     , Buyer
     , buyer
-    , bbAccountId
+    , buyAccountId
 
-    -- * MarketplaceOrder
-    , MarketplaceOrder
-    , marketplaceOrder
-    , mBuyerPrivateData
-    , mIsSetupComplete
-    , mBuyerContacts
-    , mKind
-    , mOriginatorRole
-    , mRevisionNumber
-    , mBilledBuyer
-    , mIsRenegotiating
-    , mHasSellerSignedOff
-    , mSeller
-    , mOrderState
-    , mName
-    , mSellerContacts
-    , mLastUpdaterRole
-    , mLabels
-    , mRevisionTimeMs
-    , mOrderId
-    , mLastUpdaterOrCommentorRole
-    , mHasBuyerSignedOff
-    , mBuyer
+    -- * ProposalsUpdateUpdateAction
+    , ProposalsUpdateUpdateAction (..)
 
     -- * AddOrderDealsRequest
     , AddOrderDealsRequest
     , addOrderDealsRequest
     , aUpdateAction
     , aDeals
-    , aOrderRevisionNumber
+    , aProposalRevisionNumber
+
+    -- * DealServingMetadataDealPauseStatus
+    , DealServingMetadataDealPauseStatus
+    , dealServingMetadataDealPauseStatus
+    , dsmdpsFirstPausedBy
+    , dsmdpsHasBuyerPaused
+    , dsmdpsHasSellerPaused
 
     -- * DealTermsGuaranteedFixedPriceTerms
     , DealTermsGuaranteedFixedPriceTerms
     , dealTermsGuaranteedFixedPriceTerms
     , dtgfptGuaranteedLooks
     , dtgfptGuaranteedImpressions
+    , dtgfptBillingInfo
     , dtgfptFixedPrices
     ) where
 
@@ -856,11 +684,11 @@ import           Network.Google.AdExchangeBuyer.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1.4' of the Ad Exchange Buyer API. This contains the host and root path used as a starting point for constructing service requests.
-adExchangeBuyerService :: Service
+adExchangeBuyerService :: ServiceConfig
 adExchangeBuyerService
   = defaultService (ServiceId "adexchangebuyer:v1.4")
       "www.googleapis.com"
 
 -- | Manage your Ad Exchange buyer account configuration
-adexchangeBuyerScope :: OAuthScope
-adexchangeBuyerScope = "https://www.googleapis.com/auth/adexchange.buyer";
+adExchangeBuyerScope :: Proxy '["https://www.googleapis.com/auth/adexchange.buyer"]
+adExchangeBuyerScope = Proxy;

@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Fonts.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -35,21 +35,21 @@ data WebfontsListSort
     | Trending
       -- ^ @trending@
       -- Sort by trending
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable WebfontsListSort
 
-instance FromText WebfontsListSort where
-    fromText = \case
-        "alpha" -> Just Alpha
-        "date" -> Just Date
-        "popularity" -> Just Popularity
-        "style" -> Just Style
-        "trending" -> Just Trending
-        _ -> Nothing
+instance FromHttpApiData WebfontsListSort where
+    parseQueryParam = \case
+        "alpha" -> Right Alpha
+        "date" -> Right Date
+        "popularity" -> Right Popularity
+        "style" -> Right Style
+        "trending" -> Right Trending
+        x -> Left ("Unable to parse WebfontsListSort from: " <> x)
 
-instance ToText WebfontsListSort where
-    toText = \case
+instance ToHttpApiData WebfontsListSort where
+    toQueryParam = \case
         Alpha -> "alpha"
         Date -> "date"
         Popularity -> "popularity"

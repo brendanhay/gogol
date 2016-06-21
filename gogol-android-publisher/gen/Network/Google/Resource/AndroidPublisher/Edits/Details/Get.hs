@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Details.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type EditsDetailsGetResource =
 -- and developer support contact information.
 --
 -- /See:/ 'editsDetailsGet' smart constructor.
-data EditsDetailsGet = EditsDetailsGet
+data EditsDetailsGet = EditsDetailsGet'
     { _edgPackageName :: !Text
     , _edgEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ editsDetailsGet
     -> Text -- ^ 'edgEditId'
     -> EditsDetailsGet
 editsDetailsGet pEdgPackageName_ pEdgEditId_ =
-    EditsDetailsGet
+    EditsDetailsGet'
     { _edgPackageName = pEdgPackageName_
     , _edgEditId = pEdgEditId_
     }
@@ -93,7 +93,9 @@ edgEditId
 
 instance GoogleRequest EditsDetailsGet where
         type Rs EditsDetailsGet = AppDetails
-        requestClient EditsDetailsGet{..}
+        type Scopes EditsDetailsGet =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsDetailsGet'{..}
           = go _edgPackageName _edgEditId (Just AltJSON)
               androidPublisherService
           where go

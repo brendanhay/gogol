@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Prediction.TrainedModels.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TrainedModelsUpdateResource =
 -- | Add new data to a trained model.
 --
 -- /See:/ 'trainedModelsUpdate' smart constructor.
-data TrainedModelsUpdate = TrainedModelsUpdate
+data TrainedModelsUpdate = TrainedModelsUpdate'
     { _tmuProject :: !Text
     , _tmuPayload :: !Update
     , _tmuId      :: !Text
@@ -77,7 +77,7 @@ trainedModelsUpdate
     -> Text -- ^ 'tmuId'
     -> TrainedModelsUpdate
 trainedModelsUpdate pTmuProject_ pTmuPayload_ pTmuId_ =
-    TrainedModelsUpdate
+    TrainedModelsUpdate'
     { _tmuProject = pTmuProject_
     , _tmuPayload = pTmuPayload_
     , _tmuId = pTmuId_
@@ -99,7 +99,10 @@ tmuId = lens _tmuId (\ s a -> s{_tmuId = a})
 
 instance GoogleRequest TrainedModelsUpdate where
         type Rs TrainedModelsUpdate = Insert2
-        requestClient TrainedModelsUpdate{..}
+        type Scopes TrainedModelsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/prediction"]
+        requestClient TrainedModelsUpdate'{..}
           = go _tmuProject _tmuId (Just AltJSON) _tmuPayload
               predictionService
           where go

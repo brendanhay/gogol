@@ -14,16 +14,19 @@
 
 -- |
 -- Module      : Network.Google.Resource.ProximityBeacon.Beacons.Activate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- (Re)activates a beacon. A beacon that is active will return information
--- and attachment data when queried via \`beaconinfo.getforobserved\`.
--- Calling this method on an already active beacon will do nothing (but
--- will return a successful response code).
+-- Activates a beacon. A beacon that is active will return information and
+-- attachment data when queried via \`beaconinfo.getforobserved\`. Calling
+-- this method on an already active beacon will do nothing (but will return
+-- a successful response code). Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.activate@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Activate
@@ -43,6 +46,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Activate
     , baBeaconName
     , baUploadType
     , baBearerToken
+    , baProjectId
     , baCallback
     ) where
 
@@ -60,16 +64,20 @@ type BeaconsActivateResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Empty
+                     QueryParam "projectId" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
--- | (Re)activates a beacon. A beacon that is active will return information
--- and attachment data when queried via \`beaconinfo.getforobserved\`.
--- Calling this method on an already active beacon will do nothing (but
--- will return a successful response code).
+-- | Activates a beacon. A beacon that is active will return information and
+-- attachment data when queried via \`beaconinfo.getforobserved\`. Calling
+-- this method on an already active beacon will do nothing (but will return
+-- a successful response code). Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ 'beaconsActivate' smart constructor.
-data BeaconsActivate = BeaconsActivate
+data BeaconsActivate = BeaconsActivate'
     { _baXgafv          :: !(Maybe Text)
     , _baUploadProtocol :: !(Maybe Text)
     , _baPp             :: !Bool
@@ -77,6 +85,7 @@ data BeaconsActivate = BeaconsActivate
     , _baBeaconName     :: !Text
     , _baUploadType     :: !(Maybe Text)
     , _baBearerToken    :: !(Maybe Text)
+    , _baProjectId      :: !(Maybe Text)
     , _baCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -98,12 +107,14 @@ data BeaconsActivate = BeaconsActivate
 --
 -- * 'baBearerToken'
 --
+-- * 'baProjectId'
+--
 -- * 'baCallback'
 beaconsActivate
     :: Text -- ^ 'baBeaconName'
     -> BeaconsActivate
 beaconsActivate pBaBeaconName_ =
-    BeaconsActivate
+    BeaconsActivate'
     { _baXgafv = Nothing
     , _baUploadProtocol = Nothing
     , _baPp = True
@@ -111,6 +122,7 @@ beaconsActivate pBaBeaconName_ =
     , _baBeaconName = pBaBeaconName_
     , _baUploadType = Nothing
     , _baBearerToken = Nothing
+    , _baProjectId = Nothing
     , _baCallback = Nothing
     }
 
@@ -134,7 +146,12 @@ baAccessToken
   = lens _baAccessToken
       (\ s a -> s{_baAccessToken = a})
 
--- | The beacon to activate. Required.
+-- | Beacon that should be activated. A beacon name has the format
+-- \"beacons\/N!beaconId\" where the beaconId is the base16 ID broadcast by
+-- the beacon and N is a code for the beacon\'s type. Possible values are
+-- \`3\` for Eddystone-UID, \`4\` for Eddystone-EID, \`1\` for iBeacon, or
+-- \`5\` for AltBeacon. For Eddystone-EID beacons, you may use either the
+-- current EID or the beacon\'s \"stable\" UID. Required.
 baBeaconName :: Lens' BeaconsActivate Text
 baBeaconName
   = lens _baBeaconName (\ s a -> s{_baBeaconName = a})
@@ -150,6 +167,13 @@ baBearerToken
   = lens _baBearerToken
       (\ s a -> s{_baBearerToken = a})
 
+-- | The project id of the beacon to activate. If the project id is not
+-- specified then the project making the request is used. The project id
+-- must match the project that owns the beacon. Optional.
+baProjectId :: Lens' BeaconsActivate (Maybe Text)
+baProjectId
+  = lens _baProjectId (\ s a -> s{_baProjectId = a})
+
 -- | JSONP
 baCallback :: Lens' BeaconsActivate (Maybe Text)
 baCallback
@@ -157,12 +181,15 @@ baCallback
 
 instance GoogleRequest BeaconsActivate where
         type Rs BeaconsActivate = Empty
-        requestClient BeaconsActivate{..}
+        type Scopes BeaconsActivate =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+        requestClient BeaconsActivate'{..}
           = go _baBeaconName _baXgafv _baUploadProtocol
               (Just _baPp)
               _baAccessToken
               _baUploadType
               _baBearerToken
+              _baProjectId
               _baCallback
               (Just AltJSON)
               proximityBeaconService

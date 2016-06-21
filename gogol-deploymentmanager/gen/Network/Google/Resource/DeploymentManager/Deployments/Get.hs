@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DeploymentManager.Deployments.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type DeploymentsGetResource =
 -- | Gets information about a specific deployment.
 --
 -- /See:/ 'deploymentsGet' smart constructor.
-data DeploymentsGet = DeploymentsGet
+data DeploymentsGet = DeploymentsGet'
     { _dgProject    :: !Text
     , _dgDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ deploymentsGet
     -> Text -- ^ 'dgDeployment'
     -> DeploymentsGet
 deploymentsGet pDgProject_ pDgDeployment_ =
-    DeploymentsGet
+    DeploymentsGet'
     { _dgProject = pDgProject_
     , _dgDeployment = pDgDeployment_
     }
@@ -89,7 +89,12 @@ dgDeployment
 
 instance GoogleRequest DeploymentsGet where
         type Rs DeploymentsGet = Deployment
-        requestClient DeploymentsGet{..}
+        type Scopes DeploymentsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+        requestClient DeploymentsGet'{..}
           = go _dgProject _dgDeployment (Just AltJSON)
               deploymentManagerService
           where go

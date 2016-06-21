@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeReporting.Jobs.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type JobsDeleteResource =
 -- | Deletes a job.
 --
 -- /See:/ 'jobsDelete' smart constructor.
-data JobsDelete = JobsDelete
+data JobsDelete = JobsDelete'
     { _jdXgafv                  :: !(Maybe Text)
     , _jdJobId                  :: !Text
     , _jdUploadProtocol         :: !(Maybe Text)
@@ -103,7 +103,7 @@ jobsDelete
     :: Text -- ^ 'jdJobId'
     -> JobsDelete
 jobsDelete pJdJobId_ =
-    JobsDelete
+    JobsDelete'
     { _jdXgafv = Nothing
     , _jdJobId = pJdJobId_
     , _jdUploadProtocol = Nothing
@@ -164,7 +164,10 @@ jdCallback
 
 instance GoogleRequest JobsDelete where
         type Rs JobsDelete = Empty
-        requestClient JobsDelete{..}
+        type Scopes JobsDelete =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
+        requestClient JobsDelete'{..}
           = go _jdJobId _jdXgafv _jdUploadProtocol (Just _jdPp)
               _jdAccessToken
               _jdUploadType

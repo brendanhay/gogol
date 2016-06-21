@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type RelyingPartyCreateAuthURIResource =
 -- | Creates the URI used by the IdP to authenticate the user.
 --
 -- /See:/ 'relyingPartyCreateAuthURI' smart constructor.
-newtype RelyingPartyCreateAuthURI = RelyingPartyCreateAuthURI
+newtype RelyingPartyCreateAuthURI = RelyingPartyCreateAuthURI'
     { _rpcauPayload :: IdentitytoolkitRelyingPartyCreateAuthURIRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyCreateAuthURI
     :: IdentitytoolkitRelyingPartyCreateAuthURIRequest -- ^ 'rpcauPayload'
     -> RelyingPartyCreateAuthURI
 relyingPartyCreateAuthURI pRpcauPayload_ =
-    RelyingPartyCreateAuthURI
+    RelyingPartyCreateAuthURI'
     { _rpcauPayload = pRpcauPayload_
     }
 
@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartyCreateAuthURI
          where
         type Rs RelyingPartyCreateAuthURI =
              CreateAuthURIResponse
-        requestClient RelyingPartyCreateAuthURI{..}
+        type Scopes RelyingPartyCreateAuthURI = '[]
+        requestClient RelyingPartyCreateAuthURI'{..}
           = go (Just AltJSON) _rpcauPayload
               identityToolkitService
           where go

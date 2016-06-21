@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type InstancesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'instancesInsert' smart constructor.
-data InstancesInsert = InstancesInsert
+data InstancesInsert = InstancesInsert'
     { _iiiProject :: !Text
     , _iiiZone    :: !Text
     , _iiiPayload :: !Instance
@@ -80,7 +80,7 @@ instancesInsert
     -> Instance -- ^ 'iiiPayload'
     -> InstancesInsert
 instancesInsert pIiiProject_ pIiiZone_ pIiiPayload_ =
-    InstancesInsert
+    InstancesInsert'
     { _iiiProject = pIiiProject_
     , _iiiZone = pIiiZone_
     , _iiiPayload = pIiiPayload_
@@ -102,7 +102,10 @@ iiiPayload
 
 instance GoogleRequest InstancesInsert where
         type Rs InstancesInsert = Operation
-        requestClient InstancesInsert{..}
+        type Scopes InstancesInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstancesInsert'{..}
           = go _iiiProject _iiiZone (Just AltJSON) _iiiPayload
               computeService
           where go

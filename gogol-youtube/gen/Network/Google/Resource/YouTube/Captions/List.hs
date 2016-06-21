@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Captions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type CaptionsListResource =
 -- caption track.
 --
 -- /See:/ 'captionsList' smart constructor.
-data CaptionsList = CaptionsList
+data CaptionsList = CaptionsList'
     { _clOnBehalfOf             :: !(Maybe Text)
     , _clPart                   :: !Text
     , _clOnBehalfOfContentOwner :: !(Maybe Text)
@@ -92,7 +92,7 @@ captionsList
     -> Text -- ^ 'clVideoId'
     -> CaptionsList
 captionsList pClPart_ pClVideoId_ =
-    CaptionsList
+    CaptionsList'
     { _clOnBehalfOf = Nothing
     , _clPart = pClPart_
     , _clOnBehalfOfContentOwner = Nothing
@@ -140,7 +140,10 @@ clId = lens _clId (\ s a -> s{_clId = a})
 
 instance GoogleRequest CaptionsList where
         type Rs CaptionsList = CaptionListResponse
-        requestClient CaptionsList{..}
+        type Scopes CaptionsList =
+             '["https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient CaptionsList'{..}
           = go (Just _clPart) (Just _clVideoId) _clOnBehalfOf
               _clOnBehalfOfContentOwner
               _clId

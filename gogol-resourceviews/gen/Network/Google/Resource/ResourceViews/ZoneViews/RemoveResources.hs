@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ResourceViews.ZoneViews.RemoveResources
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ZoneViewsRemoveResourcesResource =
 -- | Remove resources from the view.
 --
 -- /See:/ 'zoneViewsRemoveResources' smart constructor.
-data ZoneViewsRemoveResources = ZoneViewsRemoveResources
+data ZoneViewsRemoveResources = ZoneViewsRemoveResources'
     { _zvrrResourceView :: !Text
     , _zvrrProject      :: !Text
     , _zvrrZone         :: !Text
@@ -86,7 +86,7 @@ zoneViewsRemoveResources
     -> ZoneViewsRemoveResourcesRequest -- ^ 'zvrrPayload'
     -> ZoneViewsRemoveResources
 zoneViewsRemoveResources pZvrrResourceView_ pZvrrProject_ pZvrrZone_ pZvrrPayload_ =
-    ZoneViewsRemoveResources
+    ZoneViewsRemoveResources'
     { _zvrrResourceView = pZvrrResourceView_
     , _zvrrProject = pZvrrProject_
     , _zvrrZone = pZvrrZone_
@@ -115,7 +115,11 @@ zvrrPayload
 
 instance GoogleRequest ZoneViewsRemoveResources where
         type Rs ZoneViewsRemoveResources = Operation
-        requestClient ZoneViewsRemoveResources{..}
+        type Scopes ZoneViewsRemoveResources =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient ZoneViewsRemoveResources'{..}
           = go _zvrrProject _zvrrZone _zvrrResourceView
               (Just AltJSON)
               _zvrrPayload

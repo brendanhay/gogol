@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Tasks.TaskLists.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type TaskListsUpdateResource =
 -- | Updates the authenticated user\'s specified task list.
 --
 -- /See:/ 'taskListsUpdate' smart constructor.
-data TaskListsUpdate = TaskListsUpdate
+data TaskListsUpdate = TaskListsUpdate'
     { _tluPayload  :: !TaskList
     , _tluTaskList :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ taskListsUpdate
     -> Text -- ^ 'tluTaskList'
     -> TaskListsUpdate
 taskListsUpdate pTluPayload_ pTluTaskList_ =
-    TaskListsUpdate
+    TaskListsUpdate'
     { _tluPayload = pTluPayload_
     , _tluTaskList = pTluTaskList_
     }
@@ -89,7 +89,9 @@ tluTaskList
 
 instance GoogleRequest TaskListsUpdate where
         type Rs TaskListsUpdate = TaskList
-        requestClient TaskListsUpdate{..}
+        type Scopes TaskListsUpdate =
+             '["https://www.googleapis.com/auth/tasks"]
+        requestClient TaskListsUpdate'{..}
           = go _tluTaskList (Just AltJSON) _tluPayload
               appsTasksService
           where go

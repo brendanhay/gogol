@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type EditsTracksPatchResource =
 -- semantics.
 --
 -- /See:/ 'editsTracksPatch' smart constructor.
-data EditsTracksPatch = EditsTracksPatch
+data EditsTracksPatch = EditsTracksPatch'
     { _etptTrack       :: !EditsTracksPatchTrack
     , _etptPackageName :: !Text
     , _etptPayload     :: !Track
@@ -90,7 +90,7 @@ editsTracksPatch
     -> Text -- ^ 'etptEditId'
     -> EditsTracksPatch
 editsTracksPatch pEtptTrack_ pEtptPackageName_ pEtptPayload_ pEtptEditId_ =
-    EditsTracksPatch
+    EditsTracksPatch'
     { _etptTrack = pEtptTrack_
     , _etptPackageName = pEtptPackageName_
     , _etptPayload = pEtptPayload_
@@ -121,7 +121,9 @@ etptEditId
 
 instance GoogleRequest EditsTracksPatch where
         type Rs EditsTracksPatch = Track
-        requestClient EditsTracksPatch{..}
+        type Scopes EditsTracksPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsTracksPatch'{..}
           = go _etptPackageName _etptEditId _etptTrack
               (Just AltJSON)
               _etptPayload

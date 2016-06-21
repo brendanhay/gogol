@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.Attachments.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,13 +57,12 @@ type TimelineAttachmentsInsertResource =
                  "attachments" :>
                    QueryParam "alt" AltJSON :>
                      QueryParam "uploadType" AltMedia :>
-                       ReqBody '[OctetStream] RequestBody :>
-                         Post '[JSON] Attachment
+                       AltMedia :> Post '[JSON] Attachment
 
 -- | Adds a new attachment to a timeline item.
 --
 -- /See:/ 'timelineAttachmentsInsert' smart constructor.
-newtype TimelineAttachmentsInsert = TimelineAttachmentsInsert
+newtype TimelineAttachmentsInsert = TimelineAttachmentsInsert'
     { _taiItemId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -76,7 +75,7 @@ timelineAttachmentsInsert
     :: Text -- ^ 'taiItemId'
     -> TimelineAttachmentsInsert
 timelineAttachmentsInsert pTaiItemId_ =
-    TimelineAttachmentsInsert
+    TimelineAttachmentsInsert'
     { _taiItemId = pTaiItemId_
     }
 
@@ -88,7 +87,9 @@ taiItemId
 instance GoogleRequest TimelineAttachmentsInsert
          where
         type Rs TimelineAttachmentsInsert = Attachment
-        requestClient TimelineAttachmentsInsert{..}
+        type Scopes TimelineAttachmentsInsert =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient TimelineAttachmentsInsert'{..}
           = go _taiItemId (Just AltJSON) mirrorService
           where go :<|> _
                   = buildClient
@@ -99,8 +100,10 @@ instance GoogleRequest
          (MediaUpload TimelineAttachmentsInsert) where
         type Rs (MediaUpload TimelineAttachmentsInsert) =
              Attachment
+        type Scopes (MediaUpload TimelineAttachmentsInsert) =
+             Scopes TimelineAttachmentsInsert
         requestClient
-          (MediaUpload TimelineAttachmentsInsert{..} body)
+          (MediaUpload TimelineAttachmentsInsert'{..} body)
           = go _taiItemId (Just AltJSON) (Just AltMedia) body
               mirrorService
           where _ :<|> go

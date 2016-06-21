@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.CloudLoading.AddBook
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type CloudLoadingAddBookResource =
 -- |
 --
 -- /See:/ 'cloudLoadingAddBook' smart constructor.
-data CloudLoadingAddBook = CloudLoadingAddBook
+data CloudLoadingAddBook = CloudLoadingAddBook'
     { _clabMimeType          :: !(Maybe Text)
     , _clabUploadClientToken :: !(Maybe Text)
     , _clabName              :: !(Maybe Text)
@@ -80,7 +80,7 @@ data CloudLoadingAddBook = CloudLoadingAddBook
 cloudLoadingAddBook
     :: CloudLoadingAddBook
 cloudLoadingAddBook =
-    CloudLoadingAddBook
+    CloudLoadingAddBook'
     { _clabMimeType = Nothing
     , _clabUploadClientToken = Nothing
     , _clabName = Nothing
@@ -111,7 +111,9 @@ clabDriveDocumentId
 instance GoogleRequest CloudLoadingAddBook where
         type Rs CloudLoadingAddBook =
              BooksCloudLoadingResource
-        requestClient CloudLoadingAddBook{..}
+        type Scopes CloudLoadingAddBook =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient CloudLoadingAddBook'{..}
           = go _clabMimeType _clabUploadClientToken _clabName
               _clabDriveDocumentId
               (Just AltJSON)

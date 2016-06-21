@@ -14,15 +14,20 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.DataSets.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a dataset.
+-- Deletes a dataset and all of its contents (all read group sets,
+-- reference sets, variant sets, call sets, annotation sets, etc.) This is
+-- reversible (up to one week after the deletion) via the datasets.undelete
+-- operation. For the definitions of datasets and other genomics resources,
+-- see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.delete@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.delete@.
 module Network.Google.Resource.Genomics.DataSets.Delete
     (
     -- * REST Resource
@@ -61,10 +66,15 @@ type DataSetsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a dataset.
+-- | Deletes a dataset and all of its contents (all read group sets,
+-- reference sets, variant sets, call sets, annotation sets, etc.) This is
+-- reversible (up to one week after the deletion) via the datasets.undelete
+-- operation. For the definitions of datasets and other genomics resources,
+-- see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsDelete' smart constructor.
-data DataSetsDelete = DataSetsDelete
+data DataSetsDelete = DataSetsDelete'
     { _dsdXgafv          :: !(Maybe Text)
     , _dsdUploadProtocol :: !(Maybe Text)
     , _dsdPp             :: !Bool
@@ -98,7 +108,7 @@ dataSetsDelete
     :: Text -- ^ 'dsdDataSetId'
     -> DataSetsDelete
 dataSetsDelete pDsdDataSetId_ =
-    DataSetsDelete
+    DataSetsDelete'
     { _dsdXgafv = Nothing
     , _dsdUploadProtocol = Nothing
     , _dsdPp = True
@@ -153,7 +163,10 @@ dsdCallback
 
 instance GoogleRequest DataSetsDelete where
         type Rs DataSetsDelete = Empty
-        requestClient DataSetsDelete{..}
+        type Scopes DataSetsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient DataSetsDelete'{..}
           = go _dsdDataSetId _dsdXgafv _dsdUploadProtocol
               (Just _dsdPp)
               _dsdAccessToken

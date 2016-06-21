@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Members.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type MembersInsertResource =
 -- | Add user to the specified group.
 --
 -- /See:/ 'membersInsert' smart constructor.
-data MembersInsert = MembersInsert
+data MembersInsert = MembersInsert'
     { _miGroupKey :: !Text
     , _miPayload  :: !Member
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ membersInsert
     -> Member -- ^ 'miPayload'
     -> MembersInsert
 membersInsert pMiGroupKey_ pMiPayload_ =
-    MembersInsert
+    MembersInsert'
     { _miGroupKey = pMiGroupKey_
     , _miPayload = pMiPayload_
     }
@@ -89,7 +89,10 @@ miPayload
 
 instance GoogleRequest MembersInsert where
         type Rs MembersInsert = Member
-        requestClient MembersInsert{..}
+        type Scopes MembersInsert =
+             '["https://www.googleapis.com/auth/admin.directory.group",
+               "https://www.googleapis.com/auth/admin.directory.group.member"]
+        requestClient MembersInsert'{..}
           = go _miGroupKey (Just AltJSON) _miPayload
               directoryService
           where go

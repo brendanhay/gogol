@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Column.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type ColumnUpdateResource =
 -- | Updates the name or type of an existing column.
 --
 -- /See:/ 'columnUpdate' smart constructor.
-data ColumnUpdate = ColumnUpdate
+data ColumnUpdate = ColumnUpdate'
     { _cuPayload  :: !Column
     , _cuTableId  :: !Text
     , _cuColumnId :: !Text
@@ -77,7 +77,7 @@ columnUpdate
     -> Text -- ^ 'cuColumnId'
     -> ColumnUpdate
 columnUpdate pCuPayload_ pCuTableId_ pCuColumnId_ =
-    ColumnUpdate
+    ColumnUpdate'
     { _cuPayload = pCuPayload_
     , _cuTableId = pCuTableId_
     , _cuColumnId = pCuColumnId_
@@ -100,7 +100,9 @@ cuColumnId
 
 instance GoogleRequest ColumnUpdate where
         type Rs ColumnUpdate = Column
-        requestClient ColumnUpdate{..}
+        type Scopes ColumnUpdate =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient ColumnUpdate'{..}
           = go _cuTableId _cuColumnId (Just AltJSON) _cuPayload
               fusionTablesService
           where go

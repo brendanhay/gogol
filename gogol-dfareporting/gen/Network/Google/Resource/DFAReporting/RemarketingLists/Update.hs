@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.RemarketingLists.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListsUpdate' request conforms to.
 type RemarketingListsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
@@ -55,7 +55,7 @@ type RemarketingListsUpdateResource =
 -- | Updates an existing remarketing list.
 --
 -- /See:/ 'remarketingListsUpdate' smart constructor.
-data RemarketingListsUpdate = RemarketingListsUpdate
+data RemarketingListsUpdate = RemarketingListsUpdate'
     { _rluProFileId :: !(Textual Int64)
     , _rluPayload   :: !RemarketingList
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ remarketingListsUpdate
     -> RemarketingList -- ^ 'rluPayload'
     -> RemarketingListsUpdate
 remarketingListsUpdate pRluProFileId_ pRluPayload_ =
-    RemarketingListsUpdate
+    RemarketingListsUpdate'
     { _rluProFileId = _Coerce # pRluProFileId_
     , _rluPayload = pRluPayload_
     }
@@ -90,7 +90,9 @@ rluPayload
 
 instance GoogleRequest RemarketingListsUpdate where
         type Rs RemarketingListsUpdate = RemarketingList
-        requestClient RemarketingListsUpdate{..}
+        type Scopes RemarketingListsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient RemarketingListsUpdate'{..}
           = go _rluProFileId (Just AltJSON) _rluPayload
               dFAReportingService
           where go

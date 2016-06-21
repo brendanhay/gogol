@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type UsersMessagesAttachmentsGetResource =
 -- | Gets the specified message attachment.
 --
 -- /See:/ 'usersMessagesAttachmentsGet' smart constructor.
-data UsersMessagesAttachmentsGet = UsersMessagesAttachmentsGet
+data UsersMessagesAttachmentsGet = UsersMessagesAttachmentsGet'
     { _umagUserId    :: !Text
     , _umagId        :: !Text
     , _umagMessageId :: !Text
@@ -76,10 +76,9 @@ data UsersMessagesAttachmentsGet = UsersMessagesAttachmentsGet
 usersMessagesAttachmentsGet
     :: Text -- ^ 'umagId'
     -> Text -- ^ 'umagMessageId'
-    -> Text
     -> UsersMessagesAttachmentsGet
-usersMessagesAttachmentsGet pUmagUserId_ pUmagId_ pUmagMessageId_ =
-    UsersMessagesAttachmentsGet
+usersMessagesAttachmentsGet pUmagId_ pUmagMessageId_ =
+    UsersMessagesAttachmentsGet'
     { _umagUserId = "me"
     , _umagId = pUmagId_
     , _umagMessageId = pUmagMessageId_
@@ -104,7 +103,11 @@ umagMessageId
 instance GoogleRequest UsersMessagesAttachmentsGet
          where
         type Rs UsersMessagesAttachmentsGet = MessagePartBody
-        requestClient UsersMessagesAttachmentsGet{..}
+        type Scopes UsersMessagesAttachmentsGet =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersMessagesAttachmentsGet'{..}
           = go _umagUserId _umagMessageId _umagId
               (Just AltJSON)
               gmailService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.GetPublished
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type LayersGetPublishedResource =
 -- | Return the published metadata for a particular layer.
 --
 -- /See:/ 'layersGetPublished' smart constructor.
-newtype LayersGetPublished = LayersGetPublished
+newtype LayersGetPublished = LayersGetPublished'
     { _lgpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ layersGetPublished
     :: Text -- ^ 'lgpId'
     -> LayersGetPublished
 layersGetPublished pLgpId_ =
-    LayersGetPublished
+    LayersGetPublished'
     { _lgpId = pLgpId_
     }
 
@@ -76,7 +76,10 @@ lgpId = lens _lgpId (\ s a -> s{_lgpId = a})
 
 instance GoogleRequest LayersGetPublished where
         type Rs LayersGetPublished = PublishedLayer
-        requestClient LayersGetPublished{..}
+        type Scopes LayersGetPublished =
+             '["https://www.googleapis.com/auth/mapsengine",
+               "https://www.googleapis.com/auth/mapsengine.readonly"]
+        requestClient LayersGetPublished'{..}
           = go _lgpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

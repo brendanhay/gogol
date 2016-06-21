@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Students.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -85,7 +85,7 @@ type CoursesStudentsCreateResource =
 -- course.
 --
 -- /See:/ 'coursesStudentsCreate' smart constructor.
-data CoursesStudentsCreate = CoursesStudentsCreate
+data CoursesStudentsCreate = CoursesStudentsCreate'
     { _cscXgafv          :: !(Maybe Text)
     , _cscUploadProtocol :: !(Maybe Text)
     , _cscPp             :: !Bool
@@ -126,7 +126,7 @@ coursesStudentsCreate
     -> Student -- ^ 'cscPayload'
     -> CoursesStudentsCreate
 coursesStudentsCreate pCscCourseId_ pCscPayload_ =
-    CoursesStudentsCreate
+    CoursesStudentsCreate'
     { _cscXgafv = Nothing
     , _cscUploadProtocol = Nothing
     , _cscPp = True
@@ -198,7 +198,11 @@ cscCallback
 
 instance GoogleRequest CoursesStudentsCreate where
         type Rs CoursesStudentsCreate = Student
-        requestClient CoursesStudentsCreate{..}
+        type Scopes CoursesStudentsCreate =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters"]
+        requestClient CoursesStudentsCreate'{..}
           = go _cscCourseId _cscXgafv _cscUploadProtocol
               (Just _cscPp)
               _cscAccessToken

@@ -7,20 +7,26 @@
 
 -- |
 -- Module      : Network.Google.ReplicaPool
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Compute Engine Instance Group Manager API provides groups of
--- homogenous Compute Engine Instances.
+-- [Deprecated. Please use Instance Group Manager in Compute API] Provides
+-- groups of homogenous Compute Engine instances.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference>
 module Network.Google.ReplicaPool
     (
     -- * Service Configuration
       replicaPoolService
+
+    -- * OAuth Scopes
+    , computeScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , computeReadOnlyScope
 
     -- * API Declaration
     , ReplicaPoolAPI

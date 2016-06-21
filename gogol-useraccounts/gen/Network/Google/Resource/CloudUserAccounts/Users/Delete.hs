@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.Users.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersDeleteResource =
 -- | Deletes the specified User resource.
 --
 -- /See:/ 'usersDelete' smart constructor.
-data UsersDelete = UsersDelete
+data UsersDelete = UsersDelete'
     { _udProject :: !Text
     , _udUser    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersDelete
     -> Text -- ^ 'udUser'
     -> UsersDelete
 usersDelete pUdProject_ pUdUser_ =
-    UsersDelete
+    UsersDelete'
     { _udProject = pUdProject_
     , _udUser = pUdUser_
     }
@@ -88,7 +88,10 @@ udUser = lens _udUser (\ s a -> s{_udUser = a})
 
 instance GoogleRequest UsersDelete where
         type Rs UsersDelete = Operation
-        requestClient UsersDelete{..}
+        type Scopes UsersDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
+        requestClient UsersDelete'{..}
           = go _udProject _udUser (Just AltJSON)
               userAccountsService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Scores.ResetAll
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,18 +55,21 @@ type ScoresResetAllResource =
 --
 -- /See:/ 'scoresResetAll' smart constructor.
 data ScoresResetAll =
-    ScoresResetAll
+    ScoresResetAll'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresResetAll' with the minimum fields required to make a request.
 --
 scoresResetAll
     :: ScoresResetAll
-scoresResetAll = ScoresResetAll
+scoresResetAll = ScoresResetAll'
 
 instance GoogleRequest ScoresResetAll where
         type Rs ScoresResetAll = PlayerScoreResetAllResponse
-        requestClient ScoresResetAll{}
+        type Scopes ScoresResetAll =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient ScoresResetAll'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy ScoresResetAllResource)

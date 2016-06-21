@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.Annotations.Summary
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type MyLibraryAnnotationsSummaryResource =
 -- | Gets the summary of specified layers.
 --
 -- /See:/ 'myLibraryAnnotationsSummary' smart constructor.
-data MyLibraryAnnotationsSummary = MyLibraryAnnotationsSummary
+data MyLibraryAnnotationsSummary = MyLibraryAnnotationsSummary'
     { _mlasLayerIds :: ![Text]
     , _mlasVolumeId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ myLibraryAnnotationsSummary
     -> Text -- ^ 'mlasVolumeId'
     -> MyLibraryAnnotationsSummary
 myLibraryAnnotationsSummary pMlasLayerIds_ pMlasVolumeId_ =
-    MyLibraryAnnotationsSummary
+    MyLibraryAnnotationsSummary'
     { _mlasLayerIds = _Coerce # pMlasLayerIds_
     , _mlasVolumeId = pMlasVolumeId_
     }
@@ -93,7 +93,9 @@ instance GoogleRequest MyLibraryAnnotationsSummary
          where
         type Rs MyLibraryAnnotationsSummary =
              AnnotationsSummary
-        requestClient MyLibraryAnnotationsSummary{..}
+        type Scopes MyLibraryAnnotationsSummary =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryAnnotationsSummary'{..}
           = go _mlasLayerIds (Just _mlasVolumeId)
               (Just AltJSON)
               booksService

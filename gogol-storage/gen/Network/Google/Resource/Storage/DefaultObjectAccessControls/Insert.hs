@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type DefaultObjectAccessControlsInsertResource =
 -- | Creates a new default object ACL entry on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsInsert' smart constructor.
-data DefaultObjectAccessControlsInsert = DefaultObjectAccessControlsInsert
+data DefaultObjectAccessControlsInsert = DefaultObjectAccessControlsInsert'
     { _doaciBucket  :: !Text
     , _doaciPayload :: !ObjectAccessControl
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ defaultObjectAccessControlsInsert
     -> ObjectAccessControl -- ^ 'doaciPayload'
     -> DefaultObjectAccessControlsInsert
 defaultObjectAccessControlsInsert pDoaciBucket_ pDoaciPayload_ =
-    DefaultObjectAccessControlsInsert
+    DefaultObjectAccessControlsInsert'
     { _doaciBucket = pDoaciBucket_
     , _doaciPayload = pDoaciPayload_
     }
@@ -91,7 +91,10 @@ instance GoogleRequest
          DefaultObjectAccessControlsInsert where
         type Rs DefaultObjectAccessControlsInsert =
              ObjectAccessControl
-        requestClient DefaultObjectAccessControlsInsert{..}
+        type Scopes DefaultObjectAccessControlsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient DefaultObjectAccessControlsInsert'{..}
           = go _doaciBucket (Just AltJSON) _doaciPayload
               storageService
           where go

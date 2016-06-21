@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.GamesConfiguration.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -26,18 +26,18 @@ data ImageConfigurationsUploadImageType
     | LeaderboardIcon
       -- ^ @LEADERBOARD_ICON@
       -- The icon image for a leaderboard resource.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ImageConfigurationsUploadImageType
 
-instance FromText ImageConfigurationsUploadImageType where
-    fromText = \case
-        "ACHIEVEMENT_ICON" -> Just AchievementIcon
-        "LEADERBOARD_ICON" -> Just LeaderboardIcon
-        _ -> Nothing
+instance FromHttpApiData ImageConfigurationsUploadImageType where
+    parseQueryParam = \case
+        "ACHIEVEMENT_ICON" -> Right AchievementIcon
+        "LEADERBOARD_ICON" -> Right LeaderboardIcon
+        x -> Left ("Unable to parse ImageConfigurationsUploadImageType from: " <> x)
 
-instance ToText ImageConfigurationsUploadImageType where
-    toText = \case
+instance ToHttpApiData ImageConfigurationsUploadImageType where
+    toQueryParam = \case
         AchievementIcon -> "ACHIEVEMENT_ICON"
         LeaderboardIcon -> "LEADERBOARD_ICON"
 

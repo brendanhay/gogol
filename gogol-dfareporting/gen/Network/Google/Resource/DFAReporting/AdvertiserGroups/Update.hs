@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsUpdate' request conforms to.
 type AdvertiserGroupsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -55,7 +55,7 @@ type AdvertiserGroupsUpdateResource =
 -- | Updates an existing advertiser group.
 --
 -- /See:/ 'advertiserGroupsUpdate' smart constructor.
-data AdvertiserGroupsUpdate = AdvertiserGroupsUpdate
+data AdvertiserGroupsUpdate = AdvertiserGroupsUpdate'
     { _aguProFileId :: !(Textual Int64)
     , _aguPayload   :: !AdvertiserGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ advertiserGroupsUpdate
     -> AdvertiserGroup -- ^ 'aguPayload'
     -> AdvertiserGroupsUpdate
 advertiserGroupsUpdate pAguProFileId_ pAguPayload_ =
-    AdvertiserGroupsUpdate
+    AdvertiserGroupsUpdate'
     { _aguProFileId = _Coerce # pAguProFileId_
     , _aguPayload = pAguPayload_
     }
@@ -90,7 +90,9 @@ aguPayload
 
 instance GoogleRequest AdvertiserGroupsUpdate where
         type Rs AdvertiserGroupsUpdate = AdvertiserGroup
-        requestClient AdvertiserGroupsUpdate{..}
+        type Scopes AdvertiserGroupsUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdvertiserGroupsUpdate'{..}
           = go _aguProFileId (Just AltJSON) _aguPayload
               dFAReportingService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Events.Reset
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type EventsResetResource =
 -- player that use the event will also be reset.
 --
 -- /See:/ 'eventsReset' smart constructor.
-newtype EventsReset = EventsReset
+newtype EventsReset = EventsReset'
     { _erEventId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -71,7 +71,7 @@ eventsReset
     :: Text -- ^ 'erEventId'
     -> EventsReset
 eventsReset pErEventId_ =
-    EventsReset
+    EventsReset'
     { _erEventId = pErEventId_
     }
 
@@ -82,7 +82,10 @@ erEventId
 
 instance GoogleRequest EventsReset where
         type Rs EventsReset = ()
-        requestClient EventsReset{..}
+        type Scopes EventsReset =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient EventsReset'{..}
           = go _erEventId (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy EventsResetResource)

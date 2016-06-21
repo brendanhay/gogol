@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Table.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type TableUpdateResource =
 -- description, and attribution will be updated.
 --
 -- /See:/ 'tableUpdate' smart constructor.
-data TableUpdate = TableUpdate
+data TableUpdate = TableUpdate'
     { _tabPayload               :: !Table
     , _tabReplaceViewDefinition :: !(Maybe Bool)
     , _tabTableId               :: !Text
@@ -77,7 +77,7 @@ tableUpdate
     -> Text -- ^ 'tabTableId'
     -> TableUpdate
 tableUpdate pTabPayload_ pTabTableId_ =
-    TableUpdate
+    TableUpdate'
     { _tabPayload = pTabPayload_
     , _tabReplaceViewDefinition = Nothing
     , _tabTableId = pTabTableId_
@@ -103,7 +103,9 @@ tabTableId
 
 instance GoogleRequest TableUpdate where
         type Rs TableUpdate = Table
-        requestClient TableUpdate{..}
+        type Scopes TableUpdate =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient TableUpdate'{..}
           = go _tabTableId _tabReplaceViewDefinition
               (Just AltJSON)
               _tabPayload

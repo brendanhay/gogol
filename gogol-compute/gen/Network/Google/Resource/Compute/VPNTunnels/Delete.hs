@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.VPNTunnels.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type VPNTunnelsDeleteResource =
 -- | Deletes the specified VpnTunnel resource.
 --
 -- /See:/ 'vpnTunnelsDelete' smart constructor.
-data VPNTunnelsDelete = VPNTunnelsDelete
+data VPNTunnelsDelete = VPNTunnelsDelete'
     { _vtdProject   :: !Text
     , _vtdVPNTunnel :: !Text
     , _vtdRegion    :: !Text
@@ -78,7 +78,7 @@ vpnTunnelsDelete
     -> Text -- ^ 'vtdRegion'
     -> VPNTunnelsDelete
 vpnTunnelsDelete pVtdProject_ pVtdVPNTunnel_ pVtdRegion_ =
-    VPNTunnelsDelete
+    VPNTunnelsDelete'
     { _vtdProject = pVtdProject_
     , _vtdVPNTunnel = pVtdVPNTunnel_
     , _vtdRegion = pVtdRegion_
@@ -94,14 +94,17 @@ vtdVPNTunnel :: Lens' VPNTunnelsDelete Text
 vtdVPNTunnel
   = lens _vtdVPNTunnel (\ s a -> s{_vtdVPNTunnel = a})
 
--- | The name of the region for this request.
+-- | Name of the region for this request.
 vtdRegion :: Lens' VPNTunnelsDelete Text
 vtdRegion
   = lens _vtdRegion (\ s a -> s{_vtdRegion = a})
 
 instance GoogleRequest VPNTunnelsDelete where
         type Rs VPNTunnelsDelete = Operation
-        requestClient VPNTunnelsDelete{..}
+        type Scopes VPNTunnelsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient VPNTunnelsDelete'{..}
           = go _vtdProject _vtdRegion _vtdVPNTunnel
               (Just AltJSON)
               computeService

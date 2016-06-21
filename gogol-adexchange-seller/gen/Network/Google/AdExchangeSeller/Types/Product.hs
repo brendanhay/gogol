@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.AdExchangeSeller.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'adClients' smart constructor.
-data AdClients = AdClients
+data AdClients = AdClients'
     { _acEtag          :: !(Maybe Text)
     , _acNextPageToken :: !(Maybe Text)
     , _acKind          :: !Text
@@ -43,7 +43,7 @@ data AdClients = AdClients
 adClients
     :: AdClients
 adClients =
-    AdClients
+    AdClients'
     { _acEtag = Nothing
     , _acNextPageToken = Nothing
     , _acKind = "adexchangeseller#adClients"
@@ -75,13 +75,13 @@ instance FromJSON AdClients where
         parseJSON
           = withObject "AdClients"
               (\ o ->
-                 AdClients <$>
+                 AdClients' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "adexchangeseller#adClients")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON AdClients where
-        toJSON AdClients{..}
+        toJSON AdClients'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _acEtag,
@@ -90,7 +90,7 @@ instance ToJSON AdClients where
 
 --
 -- /See:/ 'reportingMetadataEntry' smart constructor.
-data ReportingMetadataEntry = ReportingMetadataEntry
+data ReportingMetadataEntry = ReportingMetadataEntry'
     { _rmeKind                 :: !Text
     , _rmeRequiredMetrics      :: !(Maybe [Text])
     , _rmeCompatibleMetrics    :: !(Maybe [Text])
@@ -120,7 +120,7 @@ data ReportingMetadataEntry = ReportingMetadataEntry
 reportingMetadataEntry
     :: ReportingMetadataEntry
 reportingMetadataEntry =
-    ReportingMetadataEntry
+    ReportingMetadataEntry'
     { _rmeKind = "adexchangeseller#reportingMetadataEntry"
     , _rmeRequiredMetrics = Nothing
     , _rmeCompatibleMetrics = Nothing
@@ -194,7 +194,7 @@ instance FromJSON ReportingMetadataEntry where
         parseJSON
           = withObject "ReportingMetadataEntry"
               (\ o ->
-                 ReportingMetadataEntry <$>
+                 ReportingMetadataEntry' <$>
                    (o .:? "kind" .!=
                       "adexchangeseller#reportingMetadataEntry")
                      <*> (o .:? "requiredMetrics" .!= mempty)
@@ -205,7 +205,7 @@ instance FromJSON ReportingMetadataEntry where
                      <*> (o .:? "supportedProducts" .!= mempty))
 
 instance ToJSON ReportingMetadataEntry where
-        toJSON ReportingMetadataEntry{..}
+        toJSON ReportingMetadataEntry'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rmeKind),
@@ -219,7 +219,7 @@ instance ToJSON ReportingMetadataEntry where
 
 --
 -- /See:/ 'accounts' smart constructor.
-data Accounts = Accounts
+data Accounts = Accounts'
     { _aEtag          :: !(Maybe Text)
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
@@ -240,7 +240,7 @@ data Accounts = Accounts
 accounts
     :: Accounts
 accounts =
-    Accounts
+    Accounts'
     { _aEtag = Nothing
     , _aNextPageToken = Nothing
     , _aKind = "adexchangeseller#accounts"
@@ -272,13 +272,13 @@ instance FromJSON Accounts where
         parseJSON
           = withObject "Accounts"
               (\ o ->
-                 Accounts <$>
+                 Accounts' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "adexchangeseller#accounts")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Accounts where
-        toJSON Accounts{..}
+        toJSON Accounts'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _aEtag,
@@ -287,7 +287,7 @@ instance ToJSON Accounts where
 
 --
 -- /See:/ 'alerts' smart constructor.
-data Alerts = Alerts
+data Alerts = Alerts'
     { _aleKind  :: !Text
     , _aleItems :: !(Maybe [Alert])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -302,7 +302,7 @@ data Alerts = Alerts
 alerts
     :: Alerts
 alerts =
-    Alerts
+    Alerts'
     { _aleKind = "adexchangeseller#alerts"
     , _aleItems = Nothing
     }
@@ -322,12 +322,12 @@ instance FromJSON Alerts where
         parseJSON
           = withObject "Alerts"
               (\ o ->
-                 Alerts <$>
+                 Alerts' <$>
                    (o .:? "kind" .!= "adexchangeseller#alerts") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON Alerts where
-        toJSON Alerts{..}
+        toJSON Alerts'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aleKind),
@@ -335,7 +335,7 @@ instance ToJSON Alerts where
 
 --
 -- /See:/ 'savedReports' smart constructor.
-data SavedReports = SavedReports
+data SavedReports = SavedReports'
     { _srEtag          :: !(Maybe Text)
     , _srNextPageToken :: !(Maybe Text)
     , _srKind          :: !Text
@@ -356,7 +356,7 @@ data SavedReports = SavedReports
 savedReports
     :: SavedReports
 savedReports =
-    SavedReports
+    SavedReports'
     { _srEtag = Nothing
     , _srNextPageToken = Nothing
     , _srKind = "adexchangeseller#savedReports"
@@ -389,13 +389,13 @@ instance FromJSON SavedReports where
         parseJSON
           = withObject "SavedReports"
               (\ o ->
-                 SavedReports <$>
+                 SavedReports' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "adexchangeseller#savedReports")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON SavedReports where
-        toJSON SavedReports{..}
+        toJSON SavedReports'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _srEtag,
@@ -404,7 +404,7 @@ instance ToJSON SavedReports where
 
 --
 -- /See:/ 'savedReport' smart constructor.
-data SavedReport = SavedReport
+data SavedReport = SavedReport'
     { _sKind :: !Text
     , _sName :: !(Maybe Text)
     , _sId   :: !(Maybe Text)
@@ -422,7 +422,7 @@ data SavedReport = SavedReport
 savedReport
     :: SavedReport
 savedReport =
-    SavedReport
+    SavedReport'
     { _sKind = "adexchangeseller#savedReport"
     , _sName = Nothing
     , _sId = Nothing
@@ -444,13 +444,13 @@ instance FromJSON SavedReport where
         parseJSON
           = withObject "SavedReport"
               (\ o ->
-                 SavedReport <$>
+                 SavedReport' <$>
                    (o .:? "kind" .!= "adexchangeseller#savedReport") <*>
                      (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON SavedReport where
-        toJSON SavedReport{..}
+        toJSON SavedReport'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _sKind), ("name" .=) <$> _sName,
@@ -458,7 +458,7 @@ instance ToJSON SavedReport where
 
 --
 -- /See:/ 'urlChannels' smart constructor.
-data URLChannels = URLChannels
+data URLChannels = URLChannels'
     { _ucEtag          :: !(Maybe Text)
     , _ucNextPageToken :: !(Maybe Text)
     , _ucKind          :: !Text
@@ -479,7 +479,7 @@ data URLChannels = URLChannels
 urlChannels
     :: URLChannels
 urlChannels =
-    URLChannels
+    URLChannels'
     { _ucEtag = Nothing
     , _ucNextPageToken = Nothing
     , _ucKind = "adexchangeseller#urlChannels"
@@ -512,13 +512,13 @@ instance FromJSON URLChannels where
         parseJSON
           = withObject "URLChannels"
               (\ o ->
-                 URLChannels <$>
+                 URLChannels' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "adexchangeseller#urlChannels")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON URLChannels where
-        toJSON URLChannels{..}
+        toJSON URLChannels'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _ucEtag,
@@ -527,7 +527,7 @@ instance ToJSON URLChannels where
 
 --
 -- /See:/ 'customChannels' smart constructor.
-data CustomChannels = CustomChannels
+data CustomChannels = CustomChannels'
     { _ccEtag          :: !(Maybe Text)
     , _ccNextPageToken :: !(Maybe Text)
     , _ccKind          :: !Text
@@ -548,7 +548,7 @@ data CustomChannels = CustomChannels
 customChannels
     :: CustomChannels
 customChannels =
-    CustomChannels
+    CustomChannels'
     { _ccEtag = Nothing
     , _ccNextPageToken = Nothing
     , _ccKind = "adexchangeseller#customChannels"
@@ -581,13 +581,13 @@ instance FromJSON CustomChannels where
         parseJSON
           = withObject "CustomChannels"
               (\ o ->
-                 CustomChannels <$>
+                 CustomChannels' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "adexchangeseller#customChannels")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON CustomChannels where
-        toJSON CustomChannels{..}
+        toJSON CustomChannels'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _ccEtag,
@@ -596,7 +596,7 @@ instance ToJSON CustomChannels where
 
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report
+data Report = Report'
     { _rKind             :: !Text
     , _rAverages         :: !(Maybe [Text])
     , _rWarnings         :: !(Maybe [Text])
@@ -626,7 +626,7 @@ data Report = Report
 report
     :: Report
 report =
-    Report
+    Report'
     { _rKind = "adexchangeseller#report"
     , _rAverages = Nothing
     , _rWarnings = Nothing
@@ -693,7 +693,7 @@ instance FromJSON Report where
         parseJSON
           = withObject "Report"
               (\ o ->
-                 Report <$>
+                 Report' <$>
                    (o .:? "kind" .!= "adexchangeseller#report") <*>
                      (o .:? "averages" .!= mempty)
                      <*> (o .:? "warnings" .!= mempty)
@@ -703,7 +703,7 @@ instance FromJSON Report where
                      <*> (o .:? "totalMatchedRows"))
 
 instance ToJSON Report where
-        toJSON Report{..}
+        toJSON Report'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rKind),
@@ -715,7 +715,7 @@ instance ToJSON Report where
 
 --
 -- /See:/ 'alert' smart constructor.
-data Alert = Alert
+data Alert = Alert'
     { _aaKind     :: !Text
     , _aaSeverity :: !(Maybe Text)
     , _aaId       :: !(Maybe Text)
@@ -739,7 +739,7 @@ data Alert = Alert
 alert
     :: Alert
 alert =
-    Alert
+    Alert'
     { _aaKind = "adexchangeseller#alert"
     , _aaSeverity = Nothing
     , _aaId = Nothing
@@ -776,7 +776,7 @@ instance FromJSON Alert where
         parseJSON
           = withObject "Alert"
               (\ o ->
-                 Alert <$>
+                 Alert' <$>
                    (o .:? "kind" .!= "adexchangeseller#alert") <*>
                      (o .:? "severity")
                      <*> (o .:? "id")
@@ -784,7 +784,7 @@ instance FromJSON Alert where
                      <*> (o .:? "message"))
 
 instance ToJSON Alert where
-        toJSON Alert{..}
+        toJSON Alert'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aaKind),
@@ -794,7 +794,7 @@ instance ToJSON Alert where
 
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account
+data Account = Account'
     { _accKind :: !Text
     , _accName :: !(Maybe Text)
     , _accId   :: !(Maybe Text)
@@ -812,7 +812,7 @@ data Account = Account
 account
     :: Account
 account =
-    Account
+    Account'
     { _accKind = "adexchangeseller#account"
     , _accName = Nothing
     , _accId = Nothing
@@ -834,13 +834,13 @@ instance FromJSON Account where
         parseJSON
           = withObject "Account"
               (\ o ->
-                 Account <$>
+                 Account' <$>
                    (o .:? "kind" .!= "adexchangeseller#account") <*>
                      (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON Account where
-        toJSON Account{..}
+        toJSON Account'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _accKind), ("name" .=) <$> _accName,
@@ -848,7 +848,7 @@ instance ToJSON Account where
 
 --
 -- /See:/ 'adClient' smart constructor.
-data AdClient = AdClient
+data AdClient = AdClient'
     { _adKind              :: !Text
     , _adArcOptIn          :: !(Maybe Bool)
     , _adSupportsReporting :: !(Maybe Bool)
@@ -872,7 +872,7 @@ data AdClient = AdClient
 adClient
     :: AdClient
 adClient =
-    AdClient
+    AdClient'
     { _adKind = "adexchangeseller#adClient"
     , _adArcOptIn = Nothing
     , _adSupportsReporting = Nothing
@@ -910,7 +910,7 @@ instance FromJSON AdClient where
         parseJSON
           = withObject "AdClient"
               (\ o ->
-                 AdClient <$>
+                 AdClient' <$>
                    (o .:? "kind" .!= "adexchangeseller#adClient") <*>
                      (o .:? "arcOptIn")
                      <*> (o .:? "supportsReporting")
@@ -918,7 +918,7 @@ instance FromJSON AdClient where
                      <*> (o .:? "productCode"))
 
 instance ToJSON AdClient where
-        toJSON AdClient{..}
+        toJSON AdClient'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _adKind),
@@ -929,7 +929,7 @@ instance ToJSON AdClient where
 
 --
 -- /See:/ 'reportHeadersItem' smart constructor.
-data ReportHeadersItem = ReportHeadersItem
+data ReportHeadersItem = ReportHeadersItem'
     { _rhiName     :: !(Maybe Text)
     , _rhiCurrency :: !(Maybe Text)
     , _rhiType     :: !(Maybe Text)
@@ -947,7 +947,7 @@ data ReportHeadersItem = ReportHeadersItem
 reportHeadersItem
     :: ReportHeadersItem
 reportHeadersItem =
-    ReportHeadersItem
+    ReportHeadersItem'
     { _rhiName = Nothing
     , _rhiCurrency = Nothing
     , _rhiType = Nothing
@@ -972,12 +972,12 @@ instance FromJSON ReportHeadersItem where
         parseJSON
           = withObject "ReportHeadersItem"
               (\ o ->
-                 ReportHeadersItem <$>
+                 ReportHeadersItem' <$>
                    (o .:? "name") <*> (o .:? "currency") <*>
                      (o .:? "type"))
 
 instance ToJSON ReportHeadersItem where
-        toJSON ReportHeadersItem{..}
+        toJSON ReportHeadersItem'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _rhiName,
@@ -987,7 +987,7 @@ instance ToJSON ReportHeadersItem where
 -- | The targeting information of this custom channel, if activated.
 --
 -- /See:/ 'customChannelTargetingInfo' smart constructor.
-data CustomChannelTargetingInfo = CustomChannelTargetingInfo
+data CustomChannelTargetingInfo = CustomChannelTargetingInfo'
     { _cctiLocation     :: !(Maybe Text)
     , _cctiSiteLanguage :: !(Maybe Text)
     , _cctiAdsAppearOn  :: !(Maybe Text)
@@ -1008,7 +1008,7 @@ data CustomChannelTargetingInfo = CustomChannelTargetingInfo
 customChannelTargetingInfo
     :: CustomChannelTargetingInfo
 customChannelTargetingInfo =
-    CustomChannelTargetingInfo
+    CustomChannelTargetingInfo'
     { _cctiLocation = Nothing
     , _cctiSiteLanguage = Nothing
     , _cctiAdsAppearOn = Nothing
@@ -1047,13 +1047,13 @@ instance FromJSON CustomChannelTargetingInfo where
         parseJSON
           = withObject "CustomChannelTargetingInfo"
               (\ o ->
-                 CustomChannelTargetingInfo <$>
+                 CustomChannelTargetingInfo' <$>
                    (o .:? "location") <*> (o .:? "siteLanguage") <*>
                      (o .:? "adsAppearOn")
                      <*> (o .:? "description"))
 
 instance ToJSON CustomChannelTargetingInfo where
-        toJSON CustomChannelTargetingInfo{..}
+        toJSON CustomChannelTargetingInfo'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _cctiLocation,
@@ -1063,7 +1063,7 @@ instance ToJSON CustomChannelTargetingInfo where
 
 --
 -- /See:/ 'preferredDeals' smart constructor.
-data PreferredDeals = PreferredDeals
+data PreferredDeals = PreferredDeals'
     { _pdKind  :: !Text
     , _pdItems :: !(Maybe [PreferredDeal])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1078,7 +1078,7 @@ data PreferredDeals = PreferredDeals
 preferredDeals
     :: PreferredDeals
 preferredDeals =
-    PreferredDeals
+    PreferredDeals'
     { _pdKind = "adexchangeseller#preferredDeals"
     , _pdItems = Nothing
     }
@@ -1097,12 +1097,12 @@ instance FromJSON PreferredDeals where
         parseJSON
           = withObject "PreferredDeals"
               (\ o ->
-                 PreferredDeals <$>
+                 PreferredDeals' <$>
                    (o .:? "kind" .!= "adexchangeseller#preferredDeals")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON PreferredDeals where
-        toJSON PreferredDeals{..}
+        toJSON PreferredDeals'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pdKind),
@@ -1110,7 +1110,7 @@ instance ToJSON PreferredDeals where
 
 --
 -- /See:/ 'metadata' smart constructor.
-data Metadata = Metadata
+data Metadata = Metadata'
     { _mKind  :: !Text
     , _mItems :: !(Maybe [ReportingMetadataEntry])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1125,7 +1125,7 @@ data Metadata = Metadata
 metadata
     :: Metadata
 metadata =
-    Metadata
+    Metadata'
     { _mKind = "adexchangeseller#metadata"
     , _mItems = Nothing
     }
@@ -1143,19 +1143,19 @@ instance FromJSON Metadata where
         parseJSON
           = withObject "Metadata"
               (\ o ->
-                 Metadata <$>
+                 Metadata' <$>
                    (o .:? "kind" .!= "adexchangeseller#metadata") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON Metadata where
-        toJSON Metadata{..}
+        toJSON Metadata'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mKind), ("items" .=) <$> _mItems])
 
 --
 -- /See:/ 'customChannel' smart constructor.
-data CustomChannel = CustomChannel
+data CustomChannel = CustomChannel'
     { _cTargetingInfo :: !(Maybe CustomChannelTargetingInfo)
     , _cKind          :: !Text
     , _cName          :: !(Maybe Text)
@@ -1179,7 +1179,7 @@ data CustomChannel = CustomChannel
 customChannel
     :: CustomChannel
 customChannel =
-    CustomChannel
+    CustomChannel'
     { _cTargetingInfo = Nothing
     , _cKind = "adexchangeseller#customChannel"
     , _cName = Nothing
@@ -1215,7 +1215,7 @@ instance FromJSON CustomChannel where
         parseJSON
           = withObject "CustomChannel"
               (\ o ->
-                 CustomChannel <$>
+                 CustomChannel' <$>
                    (o .:? "targetingInfo") <*>
                      (o .:? "kind" .!= "adexchangeseller#customChannel")
                      <*> (o .:? "name")
@@ -1223,7 +1223,7 @@ instance FromJSON CustomChannel where
                      <*> (o .:? "id"))
 
 instance ToJSON CustomChannel where
-        toJSON CustomChannel{..}
+        toJSON CustomChannel'{..}
           = object
               (catMaybes
                  [("targetingInfo" .=) <$> _cTargetingInfo,
@@ -1232,7 +1232,7 @@ instance ToJSON CustomChannel where
 
 --
 -- /See:/ 'urlChannel' smart constructor.
-data URLChannel = URLChannel
+data URLChannel = URLChannel'
     { _urlcKind       :: !Text
     , _urlcId         :: !(Maybe Text)
     , _urlcURLPattern :: !(Maybe Text)
@@ -1250,7 +1250,7 @@ data URLChannel = URLChannel
 urlChannel
     :: URLChannel
 urlChannel =
-    URLChannel
+    URLChannel'
     { _urlcKind = "adexchangeseller#urlChannel"
     , _urlcId = Nothing
     , _urlcURLPattern = Nothing
@@ -1277,13 +1277,13 @@ instance FromJSON URLChannel where
         parseJSON
           = withObject "URLChannel"
               (\ o ->
-                 URLChannel <$>
+                 URLChannel' <$>
                    (o .:? "kind" .!= "adexchangeseller#urlChannel") <*>
                      (o .:? "id")
                      <*> (o .:? "urlPattern"))
 
 instance ToJSON URLChannel where
-        toJSON URLChannel{..}
+        toJSON URLChannel'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _urlcKind), ("id" .=) <$> _urlcId,
@@ -1291,7 +1291,7 @@ instance ToJSON URLChannel where
 
 --
 -- /See:/ 'preferredDeal' smart constructor.
-data PreferredDeal = PreferredDeal
+data PreferredDeal = PreferredDeal'
     { _pAdvertiserName   :: !(Maybe Text)
     , _pCurrencyCode     :: !(Maybe Text)
     , _pStartTime        :: !(Maybe (Textual Word64))
@@ -1324,7 +1324,7 @@ data PreferredDeal = PreferredDeal
 preferredDeal
     :: PreferredDeal
 preferredDeal =
-    PreferredDeal
+    PreferredDeal'
     { _pAdvertiserName = Nothing
     , _pCurrencyCode = Nothing
     , _pStartTime = Nothing
@@ -1391,7 +1391,7 @@ instance FromJSON PreferredDeal where
         parseJSON
           = withObject "PreferredDeal"
               (\ o ->
-                 PreferredDeal <$>
+                 PreferredDeal' <$>
                    (o .:? "advertiserName") <*> (o .:? "currencyCode")
                      <*> (o .:? "startTime")
                      <*>
@@ -1402,7 +1402,7 @@ instance FromJSON PreferredDeal where
                      <*> (o .:? "fixedCpm"))
 
 instance ToJSON PreferredDeal where
-        toJSON PreferredDeal{..}
+        toJSON PreferredDeal'{..}
           = object
               (catMaybes
                  [("advertiserName" .=) <$> _pAdvertiserName,

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFiles.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ManagementProFilesDeleteResource =
 -- | Deletes a view (profile).
 --
 -- /See:/ 'managementProFilesDelete' smart constructor.
-data ManagementProFilesDelete = ManagementProFilesDelete
+data ManagementProFilesDelete = ManagementProFilesDelete'
     { _mpfdWebPropertyId :: !Text
     , _mpfdProFileId     :: !Text
     , _mpfdAccountId     :: !Text
@@ -79,7 +79,7 @@ managementProFilesDelete
     -> Text -- ^ 'mpfdAccountId'
     -> ManagementProFilesDelete
 managementProFilesDelete pMpfdWebPropertyId_ pMpfdProFileId_ pMpfdAccountId_ =
-    ManagementProFilesDelete
+    ManagementProFilesDelete'
     { _mpfdWebPropertyId = pMpfdWebPropertyId_
     , _mpfdProFileId = pMpfdProFileId_
     , _mpfdAccountId = pMpfdAccountId_
@@ -105,7 +105,9 @@ mpfdAccountId
 
 instance GoogleRequest ManagementProFilesDelete where
         type Rs ManagementProFilesDelete = ()
-        requestClient ManagementProFilesDelete{..}
+        type Scopes ManagementProFilesDelete =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementProFilesDelete'{..}
           = go _mpfdAccountId _mpfdWebPropertyId _mpfdProFileId
               (Just AltJSON)
               analyticsService

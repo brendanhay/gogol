@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Experiments.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ManagementExperimentsGetResource =
 -- | Returns an experiment to which the user has access.
 --
 -- /See:/ 'managementExperimentsGet' smart constructor.
-data ManagementExperimentsGet = ManagementExperimentsGet
+data ManagementExperimentsGet = ManagementExperimentsGet'
     { _megWebPropertyId :: !Text
     , _megProFileId     :: !Text
     , _megAccountId     :: !Text
@@ -86,7 +86,7 @@ managementExperimentsGet
     -> Text -- ^ 'megExperimentId'
     -> ManagementExperimentsGet
 managementExperimentsGet pMegWebPropertyId_ pMegProFileId_ pMegAccountId_ pMegExperimentId_ =
-    ManagementExperimentsGet
+    ManagementExperimentsGet'
     { _megWebPropertyId = pMegWebPropertyId_
     , _megProFileId = pMegProFileId_
     , _megAccountId = pMegAccountId_
@@ -117,7 +117,11 @@ megExperimentId
 
 instance GoogleRequest ManagementExperimentsGet where
         type Rs ManagementExperimentsGet = Experiment
-        requestClient ManagementExperimentsGet{..}
+        type Scopes ManagementExperimentsGet =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementExperimentsGet'{..}
           = go _megAccountId _megWebPropertyId _megProFileId
               _megExperimentId
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Autoscaler.Autoscalers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AutoscalersGetResource =
 -- | Gets the specified Autoscaler resource.
 --
 -- /See:/ 'autoscalersGet' smart constructor.
-data AutoscalersGet = AutoscalersGet
+data AutoscalersGet = AutoscalersGet'
     { _agProject    :: !Text
     , _agZone       :: !Text
     , _agAutoscaler :: !Text
@@ -78,7 +78,7 @@ autoscalersGet
     -> Text -- ^ 'agAutoscaler'
     -> AutoscalersGet
 autoscalersGet pAgProject_ pAgZone_ pAgAutoscaler_ =
-    AutoscalersGet
+    AutoscalersGet'
     { _agProject = pAgProject_
     , _agZone = pAgZone_
     , _agAutoscaler = pAgAutoscaler_
@@ -100,7 +100,10 @@ agAutoscaler
 
 instance GoogleRequest AutoscalersGet where
         type Rs AutoscalersGet = Autoscaler
-        requestClient AutoscalersGet{..}
+        type Scopes AutoscalersGet =
+             '["https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient AutoscalersGet'{..}
           = go _agProject _agZone _agAutoscaler (Just AltJSON)
               autoscalerService
           where go

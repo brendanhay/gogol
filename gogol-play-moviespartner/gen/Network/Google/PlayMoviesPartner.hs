@@ -7,14 +7,13 @@
 
 -- |
 -- Module      : Network.Google.PlayMoviesPartner
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets Google Play Movies Partners get the delivery status of their
--- titles.
+-- Gets the delivery status of titles for Google Play Movies Partners.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference>
 module Network.Google.PlayMoviesPartner
@@ -22,13 +21,25 @@ module Network.Google.PlayMoviesPartner
     -- * Service Configuration
       playMoviesPartnerService
 
+    -- * OAuth Scopes
+    , playmoviesPartnerReadOnlyScope
+
     -- * API Declaration
     , PlayMoviesPartnerAPI
 
     -- * Resources
 
+    -- ** playmoviespartner.accounts.avails.get
+    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.Get
+
     -- ** playmoviespartner.accounts.avails.list
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
+
+    -- ** playmoviespartner.accounts.components.list
+    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Components.List
+
+    -- ** playmoviespartner.accounts.components.type.get
+    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Components.Type.Get
 
     -- ** playmoviespartner.accounts.experienceLocales.get
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
@@ -50,6 +61,39 @@ module Network.Google.PlayMoviesPartner
 
     -- * Types
 
+    -- ** Component
+    , Component
+    , component
+    , cStatus
+    , cPphName
+    , cStudioName
+    , cElIds
+    , cReceivedTime
+    , cPriority
+    , cCustomIds
+    , cAltCutIds
+    , cProcessingErrors
+    , cPlayableUnitType
+    , cEditLevelEidrs
+    , cApprovedTime
+    , cName
+    , cTitleLevelEidrs
+    , cRejectionNote
+    , cComponentId
+    , cLanguage
+    , cStatusDetail
+    , cType
+    , cNormalizedPriority
+    , cComponentDetailType
+    , cFilename
+
+    -- ** ListComponentsResponse
+    , ListComponentsResponse
+    , listComponentsResponse
+    , lcrComponents
+    , lcrNextPageToken
+    , lcrTotalSize
+
     -- ** Avail
     , Avail
     , avail
@@ -66,6 +110,7 @@ module Network.Google.PlayMoviesPartner
     , aTerritory
     , aEpisodeTitleInternalAlias
     , aLicenseType
+    , aAvailId
     , aSeasonNumber
     , aWorkType
     , aRatingValue
@@ -91,23 +136,27 @@ module Network.Google.PlayMoviesPartner
     , listAvailsResponse
     , larNextPageToken
     , larAvails
+    , larTotalSize
 
     -- ** ListExperienceLocalesResponse
     , ListExperienceLocalesResponse
     , listExperienceLocalesResponse
     , lelrNextPageToken
+    , lelrTotalSize
     , lelrExperienceLocales
 
     -- ** ListOrdersResponse
     , ListOrdersResponse
     , listOrdersResponse
     , lorNextPageToken
+    , lorTotalSize
     , lorOrders
 
     -- ** ListStoreInfosResponse
     , ListStoreInfosResponse
     , listStoreInfosResponse
     , lsirNextPageToken
+    , lsirTotalSize
     , lsirStoreInfos
 
     -- ** Order
@@ -196,7 +245,10 @@ module Network.Google.PlayMoviesPartner
 
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.Get
 import           Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
+import           Network.Google.Resource.PlayMoviesPartner.Accounts.Components.List
+import           Network.Google.Resource.PlayMoviesPartner.Accounts.Components.Type.Get
 import           Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
 import           Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
 import           Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
@@ -210,8 +262,11 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Play Movies Partner API service.
 type PlayMoviesPartnerAPI =
-     AccountsAvailsListResource :<|>
-       AccountsStoreInfosCountryGetResource
+     AccountsComponentsTypeGetResource :<|>
+       AccountsComponentsListResource
+       :<|> AccountsAvailsListResource
+       :<|> AccountsAvailsGetResource
+       :<|> AccountsStoreInfosCountryGetResource
        :<|> AccountsStoreInfosListResource
        :<|> AccountsOrdersListResource
        :<|> AccountsOrdersGetResource

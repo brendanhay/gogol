@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -33,6 +33,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
     , TurnBasedMatchesTakeTurn
 
     -- * Request Lenses
+    , tbmttConsistencyToken
     , tbmttPayload
     , tbmttLanguage
     , tbmttMatchId
@@ -49,23 +50,27 @@ type TurnBasedMatchesTakeTurnResource =
          "turnbasedmatches" :>
            Capture "matchId" Text :>
              "turn" :>
-               QueryParam "language" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] TurnBasedMatchTurn :>
-                     Put '[JSON] TurnBasedMatch
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "language" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] TurnBasedMatchTurn :>
+                       Put '[JSON] TurnBasedMatch
 
 -- | Commit the results of a player turn.
 --
 -- /See:/ 'turnBasedMatchesTakeTurn' smart constructor.
-data TurnBasedMatchesTakeTurn = TurnBasedMatchesTakeTurn
-    { _tbmttPayload  :: !TurnBasedMatchTurn
-    , _tbmttLanguage :: !(Maybe Text)
-    , _tbmttMatchId  :: !Text
+data TurnBasedMatchesTakeTurn = TurnBasedMatchesTakeTurn'
+    { _tbmttConsistencyToken :: !(Maybe (Textual Int64))
+    , _tbmttPayload          :: !TurnBasedMatchTurn
+    , _tbmttLanguage         :: !(Maybe Text)
+    , _tbmttMatchId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesTakeTurn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbmttConsistencyToken'
 --
 -- * 'tbmttPayload'
 --
@@ -77,11 +82,19 @@ turnBasedMatchesTakeTurn
     -> Text -- ^ 'tbmttMatchId'
     -> TurnBasedMatchesTakeTurn
 turnBasedMatchesTakeTurn pTbmttPayload_ pTbmttMatchId_ =
-    TurnBasedMatchesTakeTurn
-    { _tbmttPayload = pTbmttPayload_
+    TurnBasedMatchesTakeTurn'
+    { _tbmttConsistencyToken = Nothing
+    , _tbmttPayload = pTbmttPayload_
     , _tbmttLanguage = Nothing
     , _tbmttMatchId = pTbmttMatchId_
     }
+
+-- | The last-seen mutation timestamp.
+tbmttConsistencyToken :: Lens' TurnBasedMatchesTakeTurn (Maybe Int64)
+tbmttConsistencyToken
+  = lens _tbmttConsistencyToken
+      (\ s a -> s{_tbmttConsistencyToken = a})
+      . mapping _Coerce
 
 -- | Multipart request metadata.
 tbmttPayload :: Lens' TurnBasedMatchesTakeTurn TurnBasedMatchTurn
@@ -101,8 +114,13 @@ tbmttMatchId
 
 instance GoogleRequest TurnBasedMatchesTakeTurn where
         type Rs TurnBasedMatchesTakeTurn = TurnBasedMatch
-        requestClient TurnBasedMatchesTakeTurn{..}
-          = go _tbmttMatchId _tbmttLanguage (Just AltJSON)
+        type Scopes TurnBasedMatchesTakeTurn =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient TurnBasedMatchesTakeTurn'{..}
+          = go _tbmttMatchId _tbmttConsistencyToken
+              _tbmttLanguage
+              (Just AltJSON)
               _tbmttPayload
               gamesService
           where go

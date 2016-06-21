@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Buckets.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,7 +67,7 @@ type BucketsPatchResource =
 -- | Updates a bucket. This method supports patch semantics.
 --
 -- /See:/ 'bucketsPatch' smart constructor.
-data BucketsPatch = BucketsPatch
+data BucketsPatch = BucketsPatch'
     { _bpIfMetagenerationMatch      :: !(Maybe (Textual Int64))
     , _bpPredefinedACL              :: !(Maybe BucketsPatchPredefinedACL)
     , _bpBucket                     :: !Text
@@ -99,7 +99,7 @@ bucketsPatch
     -> Bucket -- ^ 'bpPayload'
     -> BucketsPatch
 bucketsPatch pBpBucket_ pBpPayload_ =
-    BucketsPatch
+    BucketsPatch'
     { _bpIfMetagenerationMatch = Nothing
     , _bpPredefinedACL = Nothing
     , _bpBucket = pBpBucket_
@@ -153,7 +153,10 @@ bpProjection
 
 instance GoogleRequest BucketsPatch where
         type Rs BucketsPatch = Bucket
-        requestClient BucketsPatch{..}
+        type Scopes BucketsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient BucketsPatch'{..}
           = go _bpBucket _bpIfMetagenerationMatch
               _bpPredefinedACL
               _bpPredefinedDefaultObjectACL

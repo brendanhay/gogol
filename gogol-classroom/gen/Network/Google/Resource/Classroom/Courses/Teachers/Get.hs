@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Teachers.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -75,7 +75,7 @@ type CoursesTeachersGetResource =
 -- exist.
 --
 -- /See:/ 'coursesTeachersGet' smart constructor.
-data CoursesTeachersGet = CoursesTeachersGet
+data CoursesTeachersGet = CoursesTeachersGet'
     { _ctgXgafv          :: !(Maybe Text)
     , _ctgUploadProtocol :: !(Maybe Text)
     , _ctgPp             :: !Bool
@@ -113,7 +113,7 @@ coursesTeachersGet
     -> Text -- ^ 'ctgUserId'
     -> CoursesTeachersGet
 coursesTeachersGet pCtgCourseId_ pCtgUserId_ =
-    CoursesTeachersGet
+    CoursesTeachersGet'
     { _ctgXgafv = Nothing
     , _ctgUploadProtocol = Nothing
     , _ctgPp = True
@@ -177,7 +177,12 @@ ctgCallback
 
 instance GoogleRequest CoursesTeachersGet where
         type Rs CoursesTeachersGet = Teacher
-        requestClient CoursesTeachersGet{..}
+        type Scopes CoursesTeachersGet =
+             '["https://www.googleapis.com/auth/classroom.profile.emails",
+               "https://www.googleapis.com/auth/classroom.profile.photos",
+               "https://www.googleapis.com/auth/classroom.rosters",
+               "https://www.googleapis.com/auth/classroom.rosters.readonly"]
+        requestClient CoursesTeachersGet'{..}
           = go _ctgCourseId _ctgUserId _ctgXgafv
               _ctgUploadProtocol
               (Just _ctgPp)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Rasters.Files.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,12 +60,12 @@ type RastersFilesInsertResource =
                    QueryParam "filename" Text :>
                      QueryParam "alt" AltJSON :>
                        QueryParam "uploadType" AltMedia :>
-                         ReqBody '[OctetStream] RequestBody :> Post '[JSON] ()
+                         AltMedia :> Post '[JSON] ()
 
 -- | Upload a file to a raster asset.
 --
 -- /See:/ 'rastersFilesInsert' smart constructor.
-data RastersFilesInsert = RastersFilesInsert
+data RastersFilesInsert = RastersFilesInsert'
     { _rfiId       :: !Text
     , _rfiFilename :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ rastersFilesInsert
     -> Text -- ^ 'rfiFilename'
     -> RastersFilesInsert
 rastersFilesInsert pRfiId_ pRfiFilename_ =
-    RastersFilesInsert
+    RastersFilesInsert'
     { _rfiId = pRfiId_
     , _rfiFilename = pRfiFilename_
     }
@@ -98,7 +98,9 @@ rfiFilename
 
 instance GoogleRequest RastersFilesInsert where
         type Rs RastersFilesInsert = ()
-        requestClient RastersFilesInsert{..}
+        type Scopes RastersFilesInsert =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient RastersFilesInsert'{..}
           = go _rfiId (Just _rfiFilename) (Just AltJSON)
               mapsEngineService
           where go :<|> _
@@ -109,8 +111,10 @@ instance GoogleRequest RastersFilesInsert where
 instance GoogleRequest
          (MediaUpload RastersFilesInsert) where
         type Rs (MediaUpload RastersFilesInsert) = ()
+        type Scopes (MediaUpload RastersFilesInsert) =
+             Scopes RastersFilesInsert
         requestClient
-          (MediaUpload RastersFilesInsert{..} body)
+          (MediaUpload RastersFilesInsert'{..} body)
           = go _rfiId (Just _rfiFilename) (Just AltJSON)
               (Just AltMedia)
               body

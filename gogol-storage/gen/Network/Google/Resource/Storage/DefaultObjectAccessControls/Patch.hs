@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type DefaultObjectAccessControlsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'defaultObjectAccessControlsPatch' smart constructor.
-data DefaultObjectAccessControlsPatch = DefaultObjectAccessControlsPatch
+data DefaultObjectAccessControlsPatch = DefaultObjectAccessControlsPatch'
     { _doacpBucket  :: !Text
     , _doacpPayload :: !ObjectAccessControl
     , _doacpEntity  :: !Text
@@ -80,7 +80,7 @@ defaultObjectAccessControlsPatch
     -> Text -- ^ 'doacpEntity'
     -> DefaultObjectAccessControlsPatch
 defaultObjectAccessControlsPatch pDoacpBucket_ pDoacpPayload_ pDoacpEntity_ =
-    DefaultObjectAccessControlsPatch
+    DefaultObjectAccessControlsPatch'
     { _doacpBucket = pDoacpBucket_
     , _doacpPayload = pDoacpPayload_
     , _doacpEntity = pDoacpEntity_
@@ -107,7 +107,10 @@ instance GoogleRequest
          DefaultObjectAccessControlsPatch where
         type Rs DefaultObjectAccessControlsPatch =
              ObjectAccessControl
-        requestClient DefaultObjectAccessControlsPatch{..}
+        type Scopes DefaultObjectAccessControlsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control"]
+        requestClient DefaultObjectAccessControlsPatch'{..}
           = go _doacpBucket _doacpEntity (Just AltJSON)
               _doacpPayload
               storageService

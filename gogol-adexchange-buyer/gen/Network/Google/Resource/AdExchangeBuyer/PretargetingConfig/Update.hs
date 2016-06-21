@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type PretargetingConfigUpdateResource =
 -- | Updates an existing pretargeting config.
 --
 -- /See:/ 'pretargetingConfigUpdate' smart constructor.
-data PretargetingConfigUpdate = PretargetingConfigUpdate
+data PretargetingConfigUpdate = PretargetingConfigUpdate'
     { _pcuPayload   :: !PretargetingConfig
     , _pcuAccountId :: !(Textual Int64)
     , _pcuConfigId  :: !(Textual Int64)
@@ -77,7 +77,7 @@ pretargetingConfigUpdate
     -> Int64 -- ^ 'pcuConfigId'
     -> PretargetingConfigUpdate
 pretargetingConfigUpdate pPcuPayload_ pPcuAccountId_ pPcuConfigId_ =
-    PretargetingConfigUpdate
+    PretargetingConfigUpdate'
     { _pcuPayload = pPcuPayload_
     , _pcuAccountId = _Coerce # pPcuAccountId_
     , _pcuConfigId = _Coerce # pPcuConfigId_
@@ -102,7 +102,9 @@ pcuConfigId
 
 instance GoogleRequest PretargetingConfigUpdate where
         type Rs PretargetingConfigUpdate = PretargetingConfig
-        requestClient PretargetingConfigUpdate{..}
+        type Scopes PretargetingConfigUpdate =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient PretargetingConfigUpdate'{..}
           = go _pcuAccountId _pcuConfigId (Just AltJSON)
               _pcuPayload
               adExchangeBuyerService

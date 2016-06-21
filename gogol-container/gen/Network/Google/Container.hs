@@ -7,21 +7,23 @@
 
 -- |
 -- Module      : Network.Google.Container
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Container Engine API is used for building and managing
--- container based applications, powered by the open source Kubernetes
--- technology.
+-- Builds and manages clusters that run container-based applications,
+-- powered by open source Kubernetes technology.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference>
 module Network.Google.Container
     (
     -- * Service Configuration
       containerService
+
+    -- * OAuth Scopes
+    , cloudPlatformScope
 
     -- * API Declaration
     , ContainerAPI
@@ -40,6 +42,18 @@ module Network.Google.Container
     -- ** container.projects.zones.clusters.list
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.List
 
+    -- ** container.projects.zones.clusters.nodePools.create
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Create
+
+    -- ** container.projects.zones.clusters.nodePools.delete
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Delete
+
+    -- ** container.projects.zones.clusters.nodePools.get
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
+
+    -- ** container.projects.zones.clusters.nodePools.list
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.List
+
     -- ** container.projects.zones.clusters.update
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.Update
 
@@ -54,10 +68,16 @@ module Network.Google.Container
 
     -- * Types
 
+    -- ** HorizontalPodAutoscaling
+    , HorizontalPodAutoscaling
+    , horizontalPodAutoscaling
+    , hpaDisabled
+
     -- ** ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
     , lorOperations
+    , lorMissingZones
 
     -- ** CreateClusterRequest
     , CreateClusterRequest
@@ -68,6 +88,7 @@ module Network.Google.Container
     , Cluster
     , cluster
     , cStatus
+    , cNodePools
     , cNodeConfig
     , cNodeIPv4CIdRSize
     , cClusterIPv4CIdR
@@ -76,13 +97,17 @@ module Network.Google.Container
     , cNetwork
     , cInitialClusterVersion
     , cZone
+    , cAddonsConfig
     , cServicesIPv4CIdR
     , cMasterAuth
     , cSelfLink
     , cName
     , cCurrentMasterVersion
     , cStatusMessage
+    , cSubnetwork
+    , cCurrentNodeCount
     , cEndpoint
+    , cLocations
     , cLoggingService
     , cDescription
     , cInstanceGroupURLs
@@ -100,6 +125,12 @@ module Network.Google.Container
     , ncDiskSizeGb
     , ncOAuthScopes
     , ncMachineType
+    , ncMetadata
+
+    -- ** HTTPLoadBalancing
+    , HTTPLoadBalancing
+    , hTTPLoadBalancing
+    , httplbDisabled
 
     -- ** Operation
     , Operation
@@ -111,6 +142,25 @@ module Network.Google.Container
     , oStatusMessage
     , oOperationType
     , oTargetLink
+    , oDetail
+
+    -- ** AddonsConfig
+    , AddonsConfig
+    , addonsConfig
+    , acHorizontalPodAutoscaling
+    , acHTTPLoadBalancing
+
+    -- ** NodePool
+    , NodePool
+    , nodePool
+    , npStatus
+    , npConfig
+    , npInitialNodeCount
+    , npSelfLink
+    , npName
+    , npStatusMessage
+    , npVersion
+    , npInstanceGroupURLs
 
     -- ** MasterAuth
     , MasterAuth
@@ -121,21 +171,43 @@ module Network.Google.Container
     , maPassword
     , maClusterCaCertificate
 
+    -- ** NodeConfigMetadata
+    , NodeConfigMetadata
+    , nodeConfigMetadata
+    , ncmAddtional
+
     -- ** ServerConfig
     , ServerConfig
     , serverConfig
     , scValidNodeVersions
+    , scDefaultImageFamily
+    , scValidImageFamilies
     , scDefaultClusterVersion
 
     -- ** ListClustersResponse
     , ListClustersResponse
     , listClustersResponse
     , lcrClusters
+    , lcrMissingZones
 
     -- ** ClusterUpdate
     , ClusterUpdate
     , clusterUpdate
+    , cuDesiredAddonsConfig
+    , cuDesiredNodePoolId
     , cuDesiredNodeVersion
+    , cuDesiredMasterVersion
+    , cuDesiredMonitoringService
+
+    -- ** ListNodePoolsResponse
+    , ListNodePoolsResponse
+    , listNodePoolsResponse
+    , lnprNodePools
+
+    -- ** CreateNodePoolRequest
+    , CreateNodePoolRequest
+    , createNodePoolRequest
+    , cnprNodePool
     ) where
 
 import           Network.Google.Container.Types
@@ -144,6 +216,10 @@ import           Network.Google.Resource.Container.Projects.Zones.Clusters.Creat
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.Get
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.List
+import           Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Create
+import           Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Delete
+import           Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
+import           Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.List
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.Update
 import           Network.Google.Resource.Container.Projects.Zones.GetServerConfig
 import           Network.Google.Resource.Container.Projects.Zones.Operations.Get
@@ -157,6 +233,10 @@ TODO
 type ContainerAPI =
      ProjectsZonesOperationsListResource :<|>
        ProjectsZonesOperationsGetResource
+       :<|> ProjectsZonesClustersNodePoolsListResource
+       :<|> ProjectsZonesClustersNodePoolsGetResource
+       :<|> ProjectsZonesClustersNodePoolsCreateResource
+       :<|> ProjectsZonesClustersNodePoolsDeleteResource
        :<|> ProjectsZonesClustersListResource
        :<|> ProjectsZonesClustersGetResource
        :<|> ProjectsZonesClustersCreateResource

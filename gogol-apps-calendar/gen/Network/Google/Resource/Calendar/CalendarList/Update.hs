@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.CalendarList.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type CalendarListUpdateResource =
 -- | Updates an entry on the user\'s calendar list.
 --
 -- /See:/ 'calendarListUpdate' smart constructor.
-data CalendarListUpdate = CalendarListUpdate
+data CalendarListUpdate = CalendarListUpdate'
     { _cluCalendarId     :: !Text
     , _cluPayload        :: !CalendarListEntry
     , _cluColorRgbFormat :: !(Maybe Bool)
@@ -78,7 +78,7 @@ calendarListUpdate
     -> CalendarListEntry -- ^ 'cluPayload'
     -> CalendarListUpdate
 calendarListUpdate pCluCalendarId_ pCluPayload_ =
-    CalendarListUpdate
+    CalendarListUpdate'
     { _cluCalendarId = pCluCalendarId_
     , _cluPayload = pCluPayload_
     , _cluColorRgbFormat = Nothing
@@ -108,7 +108,9 @@ cluColorRgbFormat
 
 instance GoogleRequest CalendarListUpdate where
         type Rs CalendarListUpdate = CalendarListEntry
-        requestClient CalendarListUpdate{..}
+        type Scopes CalendarListUpdate =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient CalendarListUpdate'{..}
           = go _cluCalendarId _cluColorRgbFormat (Just AltJSON)
               _cluPayload
               appsCalendarService

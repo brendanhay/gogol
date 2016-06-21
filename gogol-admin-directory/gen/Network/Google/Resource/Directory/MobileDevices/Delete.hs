@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.MobileDevices.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type MobileDevicesDeleteResource =
 -- | Delete Mobile Device
 --
 -- /See:/ 'mobileDevicesDelete' smart constructor.
-data MobileDevicesDelete = MobileDevicesDelete
+data MobileDevicesDelete = MobileDevicesDelete'
     { _mddResourceId :: !Text
     , _mddCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ mobileDevicesDelete
     -> Text -- ^ 'mddCustomerId'
     -> MobileDevicesDelete
 mobileDevicesDelete pMddResourceId_ pMddCustomerId_ =
-    MobileDevicesDelete
+    MobileDevicesDelete'
     { _mddResourceId = pMddResourceId_
     , _mddCustomerId = pMddCustomerId_
     }
@@ -92,7 +92,9 @@ mddCustomerId
 
 instance GoogleRequest MobileDevicesDelete where
         type Rs MobileDevicesDelete = ()
-        requestClient MobileDevicesDelete{..}
+        type Scopes MobileDevicesDelete =
+             '["https://www.googleapis.com/auth/admin.directory.device.mobile"]
+        requestClient MobileDevicesDelete'{..}
           = go _mddCustomerId _mddResourceId (Just AltJSON)
               directoryService
           where go

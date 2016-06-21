@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Payments.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -49,18 +49,21 @@ type PaymentsListResource =
 --
 -- /See:/ 'paymentsList' smart constructor.
 data PaymentsList =
-    PaymentsList
+    PaymentsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PaymentsList' with the minimum fields required to make a request.
 --
 paymentsList
     :: PaymentsList
-paymentsList = PaymentsList
+paymentsList = PaymentsList'
 
 instance GoogleRequest PaymentsList where
         type Rs PaymentsList = Payments
-        requestClient PaymentsList{}
+        type Scopes PaymentsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient PaymentsList'{}
           = go (Just AltJSON) adSenseService
           where go
                   = buildClient (Proxy :: Proxy PaymentsListResource)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,14 +70,13 @@ type EditsImagesUploadResource =
                          Capture "imageType" EditsImagesUploadImageType :>
                            QueryParam "alt" AltJSON :>
                              QueryParam "uploadType" AltMedia :>
-                               ReqBody '[OctetStream] RequestBody :>
-                                 Post '[JSON] ImagesUploadResponse
+                               AltMedia :> Post '[JSON] ImagesUploadResponse
 
 -- | Uploads a new image and adds it to the list of images for the specified
 -- language and image type.
 --
 -- /See:/ 'editsImagesUpload' smart constructor.
-data EditsImagesUpload = EditsImagesUpload
+data EditsImagesUpload = EditsImagesUpload'
     { _eiuPackageName :: !Text
     , _eiuImageType   :: !EditsImagesUploadImageType
     , _eiuLanguage    :: !Text
@@ -102,7 +101,7 @@ editsImagesUpload
     -> Text -- ^ 'eiuEditId'
     -> EditsImagesUpload
 editsImagesUpload pEiuPackageName_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
-    EditsImagesUpload
+    EditsImagesUpload'
     { _eiuPackageName = pEiuPackageName_
     , _eiuImageType = pEiuImageType_
     , _eiuLanguage = pEiuLanguage_
@@ -134,7 +133,9 @@ eiuEditId
 
 instance GoogleRequest EditsImagesUpload where
         type Rs EditsImagesUpload = ImagesUploadResponse
-        requestClient EditsImagesUpload{..}
+        type Scopes EditsImagesUpload =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsImagesUpload'{..}
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
               (Just AltJSON)
@@ -148,8 +149,10 @@ instance GoogleRequest
          (MediaUpload EditsImagesUpload) where
         type Rs (MediaUpload EditsImagesUpload) =
              ImagesUploadResponse
+        type Scopes (MediaUpload EditsImagesUpload) =
+             Scopes EditsImagesUpload
         requestClient
-          (MediaUpload EditsImagesUpload{..} body)
+          (MediaUpload EditsImagesUpload'{..} body)
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
               (Just AltJSON)

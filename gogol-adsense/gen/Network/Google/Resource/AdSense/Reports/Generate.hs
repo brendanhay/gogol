@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Reports.Generate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -96,7 +96,7 @@ type ReportsGenerateResource =
 -- specify \"alt=csv\" as a query parameter.
 --
 -- /See:/ 'reportsGenerate' smart constructor.
-data ReportsGenerate = ReportsGenerate
+data ReportsGenerate = ReportsGenerate'
     { _rgDimension            :: !(Maybe [Text])
     , _rgLocale               :: !(Maybe Text)
     , _rgEndDate              :: !Text
@@ -143,7 +143,7 @@ reportsGenerate
     -> Text -- ^ 'rgStartDate'
     -> ReportsGenerate
 reportsGenerate pRgEndDate_ pRgStartDate_ =
-    ReportsGenerate
+    ReportsGenerate'
     { _rgDimension = Nothing
     , _rgLocale = Nothing
     , _rgEndDate = pRgEndDate_
@@ -238,7 +238,10 @@ rgMaxResults
 instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate =
              AdsenseReportsGenerateResponse
-        requestClient ReportsGenerate{..}
+        type Scopes ReportsGenerate =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient ReportsGenerate'{..}
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale
@@ -260,7 +263,9 @@ instance GoogleRequest ReportsGenerate where
 instance GoogleRequest
          (MediaDownload ReportsGenerate) where
         type Rs (MediaDownload ReportsGenerate) = Stream
-        requestClient (MediaDownload ReportsGenerate{..})
+        type Scopes (MediaDownload ReportsGenerate) =
+             Scopes ReportsGenerate
+        requestClient (MediaDownload ReportsGenerate'{..})
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale

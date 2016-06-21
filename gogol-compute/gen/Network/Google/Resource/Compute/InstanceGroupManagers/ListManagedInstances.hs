@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstances
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type InstanceGroupManagersListManagedInstancesResource
 -- failed action.
 --
 -- /See:/ 'instanceGroupManagersListManagedInstances' smart constructor.
-data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManagedInstances
+data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManagedInstances'
     { _igmlmiProject              :: !Text
     , _igmlmiInstanceGroupManager :: !Text
     , _igmlmiZone                 :: !Text
@@ -92,13 +92,13 @@ instanceGroupManagersListManagedInstances
     -> Text -- ^ 'igmlmiZone'
     -> InstanceGroupManagersListManagedInstances
 instanceGroupManagersListManagedInstances pIgmlmiProject_ pIgmlmiInstanceGroupManager_ pIgmlmiZone_ =
-    InstanceGroupManagersListManagedInstances
+    InstanceGroupManagersListManagedInstances'
     { _igmlmiProject = pIgmlmiProject_
     , _igmlmiInstanceGroupManager = pIgmlmiInstanceGroupManager_
     , _igmlmiZone = pIgmlmiZone_
     }
 
--- | The project ID for this request.
+-- | Project ID for this request.
 igmlmiProject :: Lens' InstanceGroupManagersListManagedInstances Text
 igmlmiProject
   = lens _igmlmiProject
@@ -119,8 +119,13 @@ instance GoogleRequest
          InstanceGroupManagersListManagedInstances where
         type Rs InstanceGroupManagersListManagedInstances =
              InstanceGroupManagersListManagedInstancesResponse
+        type Scopes InstanceGroupManagersListManagedInstances
+             =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
         requestClient
-          InstanceGroupManagersListManagedInstances{..}
+          InstanceGroupManagersListManagedInstances'{..}
           = go _igmlmiProject _igmlmiZone
               _igmlmiInstanceGroupManager
               (Just AltJSON)

@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.Gmail.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -21,8 +21,43 @@ import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'batchDeleteMessagesRequest' smart constructor.
+newtype BatchDeleteMessagesRequest = BatchDeleteMessagesRequest'
+    { _bdmrIds :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchDeleteMessagesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bdmrIds'
+batchDeleteMessagesRequest
+    :: BatchDeleteMessagesRequest
+batchDeleteMessagesRequest =
+    BatchDeleteMessagesRequest'
+    { _bdmrIds = Nothing
+    }
+
+-- | The IDs of the messages to delete.
+bdmrIds :: Lens' BatchDeleteMessagesRequest [Text]
+bdmrIds
+  = lens _bdmrIds (\ s a -> s{_bdmrIds = a}) . _Default
+      . _Coerce
+
+instance FromJSON BatchDeleteMessagesRequest where
+        parseJSON
+          = withObject "BatchDeleteMessagesRequest"
+              (\ o ->
+                 BatchDeleteMessagesRequest' <$>
+                   (o .:? "ids" .!= mempty))
+
+instance ToJSON BatchDeleteMessagesRequest where
+        toJSON BatchDeleteMessagesRequest'{..}
+          = object (catMaybes [("ids" .=) <$> _bdmrIds])
+
+--
 -- /See:/ 'modifyThreadRequest' smart constructor.
-data ModifyThreadRequest = ModifyThreadRequest
+data ModifyThreadRequest = ModifyThreadRequest'
     { _mtrRemoveLabelIds :: !(Maybe [Text])
     , _mtrAddLabelIds    :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +72,7 @@ data ModifyThreadRequest = ModifyThreadRequest
 modifyThreadRequest
     :: ModifyThreadRequest
 modifyThreadRequest =
-    ModifyThreadRequest
+    ModifyThreadRequest'
     { _mtrRemoveLabelIds = Nothing
     , _mtrAddLabelIds = Nothing
     }
@@ -62,12 +97,12 @@ instance FromJSON ModifyThreadRequest where
         parseJSON
           = withObject "ModifyThreadRequest"
               (\ o ->
-                 ModifyThreadRequest <$>
+                 ModifyThreadRequest' <$>
                    (o .:? "removeLabelIds" .!= mempty) <*>
                      (o .:? "addLabelIds" .!= mempty))
 
 instance ToJSON ModifyThreadRequest where
-        toJSON ModifyThreadRequest{..}
+        toJSON ModifyThreadRequest'{..}
           = object
               (catMaybes
                  [("removeLabelIds" .=) <$> _mtrRemoveLabelIds,
@@ -75,7 +110,7 @@ instance ToJSON ModifyThreadRequest where
 
 --
 -- /See:/ 'modifyMessageRequest' smart constructor.
-data ModifyMessageRequest = ModifyMessageRequest
+data ModifyMessageRequest = ModifyMessageRequest'
     { _mmrRemoveLabelIds :: !(Maybe [Text])
     , _mmrAddLabelIds    :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -90,7 +125,7 @@ data ModifyMessageRequest = ModifyMessageRequest
 modifyMessageRequest
     :: ModifyMessageRequest
 modifyMessageRequest =
-    ModifyMessageRequest
+    ModifyMessageRequest'
     { _mmrRemoveLabelIds = Nothing
     , _mmrAddLabelIds = Nothing
     }
@@ -115,12 +150,12 @@ instance FromJSON ModifyMessageRequest where
         parseJSON
           = withObject "ModifyMessageRequest"
               (\ o ->
-                 ModifyMessageRequest <$>
+                 ModifyMessageRequest' <$>
                    (o .:? "removeLabelIds" .!= mempty) <*>
                      (o .:? "addLabelIds" .!= mempty))
 
 instance ToJSON ModifyMessageRequest where
-        toJSON ModifyMessageRequest{..}
+        toJSON ModifyMessageRequest'{..}
           = object
               (catMaybes
                  [("removeLabelIds" .=) <$> _mmrRemoveLabelIds,
@@ -130,7 +165,7 @@ instance ToJSON ModifyMessageRequest where
 -- affect multiple messages in multiple ways.
 --
 -- /See:/ 'history' smart constructor.
-data History = History
+data History = History'
     { _hLabelsRemoved   :: !(Maybe [HistoryLabelRemoved])
     , _hMessagesDeleted :: !(Maybe [HistoryMessageDeleted])
     , _hMessagesAdded   :: !(Maybe [HistoryMessageAdded])
@@ -157,7 +192,7 @@ data History = History
 history
     :: History
 history =
-    History
+    History'
     { _hLabelsRemoved = Nothing
     , _hMessagesDeleted = Nothing
     , _hMessagesAdded = Nothing
@@ -216,7 +251,7 @@ instance FromJSON History where
         parseJSON
           = withObject "History"
               (\ o ->
-                 History <$>
+                 History' <$>
                    (o .:? "labelsRemoved" .!= mempty) <*>
                      (o .:? "messagesDeleted" .!= mempty)
                      <*> (o .:? "messagesAdded" .!= mempty)
@@ -225,7 +260,7 @@ instance FromJSON History where
                      <*> (o .:? "messages" .!= mempty))
 
 instance ToJSON History where
-        toJSON History{..}
+        toJSON History'{..}
           = object
               (catMaybes
                  [("labelsRemoved" .=) <$> _hLabelsRemoved,
@@ -237,7 +272,7 @@ instance ToJSON History where
 -- | Profile for a Gmail user.
 --
 -- /See:/ 'proFile' smart constructor.
-data ProFile = ProFile
+data ProFile = ProFile'
     { _pfMessagesTotal :: !(Maybe (Textual Int32))
     , _pfThreadsTotal  :: !(Maybe (Textual Int32))
     , _pfHistoryId     :: !(Maybe (Textual Word64))
@@ -258,7 +293,7 @@ data ProFile = ProFile
 proFile
     :: ProFile
 proFile =
-    ProFile
+    ProFile'
     { _pfMessagesTotal = Nothing
     , _pfThreadsTotal = Nothing
     , _pfHistoryId = Nothing
@@ -295,13 +330,13 @@ instance FromJSON ProFile where
         parseJSON
           = withObject "ProFile"
               (\ o ->
-                 ProFile <$>
+                 ProFile' <$>
                    (o .:? "messagesTotal") <*> (o .:? "threadsTotal")
                      <*> (o .:? "historyId")
                      <*> (o .:? "emailAddress"))
 
 instance ToJSON ProFile where
-        toJSON ProFile{..}
+        toJSON ProFile'{..}
           = object
               (catMaybes
                  [("messagesTotal" .=) <$> _pfMessagesTotal,
@@ -311,7 +346,7 @@ instance ToJSON ProFile where
 
 --
 -- /See:/ 'messagePartHeader' smart constructor.
-data MessagePartHeader = MessagePartHeader
+data MessagePartHeader = MessagePartHeader'
     { _mphValue :: !(Maybe Text)
     , _mphName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -326,7 +361,7 @@ data MessagePartHeader = MessagePartHeader
 messagePartHeader
     :: MessagePartHeader
 messagePartHeader =
-    MessagePartHeader
+    MessagePartHeader'
     { _mphValue = Nothing
     , _mphName = Nothing
     }
@@ -344,11 +379,11 @@ instance FromJSON MessagePartHeader where
         parseJSON
           = withObject "MessagePartHeader"
               (\ o ->
-                 MessagePartHeader <$>
+                 MessagePartHeader' <$>
                    (o .:? "value") <*> (o .:? "name"))
 
 instance ToJSON MessagePartHeader where
-        toJSON MessagePartHeader{..}
+        toJSON MessagePartHeader'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _mphValue,
@@ -356,7 +391,7 @@ instance ToJSON MessagePartHeader where
 
 --
 -- /See:/ 'listHistoryResponse' smart constructor.
-data ListHistoryResponse = ListHistoryResponse
+data ListHistoryResponse = ListHistoryResponse'
     { _lhrNextPageToken :: !(Maybe Text)
     , _lhrHistory       :: !(Maybe [History])
     , _lhrHistoryId     :: !(Maybe (Textual Word64))
@@ -374,7 +409,7 @@ data ListHistoryResponse = ListHistoryResponse
 listHistoryResponse
     :: ListHistoryResponse
 listHistoryResponse =
-    ListHistoryResponse
+    ListHistoryResponse'
     { _lhrNextPageToken = Nothing
     , _lhrHistory = Nothing
     , _lhrHistoryId = Nothing
@@ -404,13 +439,13 @@ instance FromJSON ListHistoryResponse where
         parseJSON
           = withObject "ListHistoryResponse"
               (\ o ->
-                 ListHistoryResponse <$>
+                 ListHistoryResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "history" .!= mempty)
                      <*> (o .:? "historyId"))
 
 instance ToJSON ListHistoryResponse where
-        toJSON ListHistoryResponse{..}
+        toJSON ListHistoryResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lhrNextPageToken,
@@ -419,7 +454,7 @@ instance ToJSON ListHistoryResponse where
 
 --
 -- /See:/ 'listThreadsResponse' smart constructor.
-data ListThreadsResponse = ListThreadsResponse
+data ListThreadsResponse = ListThreadsResponse'
     { _ltrNextPageToken      :: !(Maybe Text)
     , _ltrResultSizeEstimate :: !(Maybe (Textual Word32))
     , _ltrThreads            :: !(Maybe [Thread])
@@ -437,7 +472,7 @@ data ListThreadsResponse = ListThreadsResponse
 listThreadsResponse
     :: ListThreadsResponse
 listThreadsResponse =
-    ListThreadsResponse
+    ListThreadsResponse'
     { _ltrNextPageToken = Nothing
     , _ltrResultSizeEstimate = Nothing
     , _ltrThreads = Nothing
@@ -467,13 +502,13 @@ instance FromJSON ListThreadsResponse where
         parseJSON
           = withObject "ListThreadsResponse"
               (\ o ->
-                 ListThreadsResponse <$>
+                 ListThreadsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "resultSizeEstimate")
                      <*> (o .:? "threads" .!= mempty))
 
 instance ToJSON ListThreadsResponse where
-        toJSON ListThreadsResponse{..}
+        toJSON ListThreadsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ltrNextPageToken,
@@ -483,7 +518,7 @@ instance ToJSON ListThreadsResponse where
 -- | A single MIME message part.
 --
 -- /See:/ 'messagePart' smart constructor.
-data MessagePart = MessagePart
+data MessagePart = MessagePart'
     { _mpParts    :: !(Maybe [MessagePart])
     , _mpBody     :: !(Maybe MessagePartBody)
     , _mpMimeType :: !(Maybe Text)
@@ -510,7 +545,7 @@ data MessagePart = MessagePart
 messagePart
     :: MessagePart
 messagePart =
-    MessagePart
+    MessagePart'
     { _mpParts = Nothing
     , _mpBody = Nothing
     , _mpMimeType = Nothing
@@ -561,7 +596,7 @@ instance FromJSON MessagePart where
         parseJSON
           = withObject "MessagePart"
               (\ o ->
-                 MessagePart <$>
+                 MessagePart' <$>
                    (o .:? "parts" .!= mempty) <*> (o .:? "body") <*>
                      (o .:? "mimeType")
                      <*> (o .:? "headers" .!= mempty)
@@ -569,7 +604,7 @@ instance FromJSON MessagePart where
                      <*> (o .:? "filename"))
 
 instance ToJSON MessagePart where
-        toJSON MessagePart{..}
+        toJSON MessagePart'{..}
           = object
               (catMaybes
                  [("parts" .=) <$> _mpParts, ("body" .=) <$> _mpBody,
@@ -580,7 +615,7 @@ instance ToJSON MessagePart where
 
 --
 -- /See:/ 'historyLabelAdded' smart constructor.
-data HistoryLabelAdded = HistoryLabelAdded
+data HistoryLabelAdded = HistoryLabelAdded'
     { _hlaLabelIds :: !(Maybe [Text])
     , _hlaMessage  :: !(Maybe Message)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -595,7 +630,7 @@ data HistoryLabelAdded = HistoryLabelAdded
 historyLabelAdded
     :: HistoryLabelAdded
 historyLabelAdded =
-    HistoryLabelAdded
+    HistoryLabelAdded'
     { _hlaLabelIds = Nothing
     , _hlaMessage = Nothing
     }
@@ -615,11 +650,11 @@ instance FromJSON HistoryLabelAdded where
         parseJSON
           = withObject "HistoryLabelAdded"
               (\ o ->
-                 HistoryLabelAdded <$>
+                 HistoryLabelAdded' <$>
                    (o .:? "labelIds" .!= mempty) <*> (o .:? "message"))
 
 instance ToJSON HistoryLabelAdded where
-        toJSON HistoryLabelAdded{..}
+        toJSON HistoryLabelAdded'{..}
           = object
               (catMaybes
                  [("labelIds" .=) <$> _hlaLabelIds,
@@ -627,7 +662,7 @@ instance ToJSON HistoryLabelAdded where
 
 --
 -- /See:/ 'listLabelsResponse' smart constructor.
-newtype ListLabelsResponse = ListLabelsResponse
+newtype ListLabelsResponse = ListLabelsResponse'
     { _llrLabels :: Maybe [Label]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -639,7 +674,7 @@ newtype ListLabelsResponse = ListLabelsResponse
 listLabelsResponse
     :: ListLabelsResponse
 listLabelsResponse =
-    ListLabelsResponse
+    ListLabelsResponse'
     { _llrLabels = Nothing
     }
 
@@ -654,15 +689,15 @@ instance FromJSON ListLabelsResponse where
         parseJSON
           = withObject "ListLabelsResponse"
               (\ o ->
-                 ListLabelsResponse <$> (o .:? "labels" .!= mempty))
+                 ListLabelsResponse' <$> (o .:? "labels" .!= mempty))
 
 instance ToJSON ListLabelsResponse where
-        toJSON ListLabelsResponse{..}
+        toJSON ListLabelsResponse'{..}
           = object (catMaybes [("labels" .=) <$> _llrLabels])
 
 --
 -- /See:/ 'historyMessageDeleted' smart constructor.
-newtype HistoryMessageDeleted = HistoryMessageDeleted
+newtype HistoryMessageDeleted = HistoryMessageDeleted'
     { _hmdMessage :: Maybe Message
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -674,7 +709,7 @@ newtype HistoryMessageDeleted = HistoryMessageDeleted
 historyMessageDeleted
     :: HistoryMessageDeleted
 historyMessageDeleted =
-    HistoryMessageDeleted
+    HistoryMessageDeleted'
     { _hmdMessage = Nothing
     }
 
@@ -685,18 +720,18 @@ hmdMessage
 instance FromJSON HistoryMessageDeleted where
         parseJSON
           = withObject "HistoryMessageDeleted"
-              (\ o -> HistoryMessageDeleted <$> (o .:? "message"))
+              (\ o -> HistoryMessageDeleted' <$> (o .:? "message"))
 
 instance ToJSON HistoryMessageDeleted where
-        toJSON HistoryMessageDeleted{..}
+        toJSON HistoryMessageDeleted'{..}
           = object (catMaybes [("message" .=) <$> _hmdMessage])
 
 -- | The body of a single MIME message part.
 --
 -- /See:/ 'messagePartBody' smart constructor.
-data MessagePartBody = MessagePartBody
+data MessagePartBody = MessagePartBody'
     { _mpbSize         :: !(Maybe (Textual Int32))
-    , _mpbData         :: !(Maybe (Textual Word8))
+    , _mpbData         :: !(Maybe Base64)
     , _mpbAttachmentId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -712,7 +747,7 @@ data MessagePartBody = MessagePartBody
 messagePartBody
     :: MessagePartBody
 messagePartBody =
-    MessagePartBody
+    MessagePartBody'
     { _mpbSize = Nothing
     , _mpbData = Nothing
     , _mpbAttachmentId = Nothing
@@ -728,10 +763,10 @@ mpbSize
 -- types that have no message body or when the body data is sent as a
 -- separate attachment. An attachment ID is present if the body data is
 -- contained in a separate attachment.
-mpbData :: Lens' MessagePartBody (Maybe Word8)
+mpbData :: Lens' MessagePartBody (Maybe ByteString)
 mpbData
   = lens _mpbData (\ s a -> s{_mpbData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | When present, contains the ID of an external attachment that can be
 -- retrieved in a separate messages.attachments.get request. When not
@@ -746,12 +781,12 @@ instance FromJSON MessagePartBody where
         parseJSON
           = withObject "MessagePartBody"
               (\ o ->
-                 MessagePartBody <$>
+                 MessagePartBody' <$>
                    (o .:? "size") <*> (o .:? "data") <*>
                      (o .:? "attachmentId"))
 
 instance ToJSON MessagePartBody where
-        toJSON MessagePartBody{..}
+        toJSON MessagePartBody'{..}
           = object
               (catMaybes
                  [("size" .=) <$> _mpbSize, ("data" .=) <$> _mpbData,
@@ -759,7 +794,7 @@ instance ToJSON MessagePartBody where
 
 --
 -- /See:/ 'listDraftsResponse' smart constructor.
-data ListDraftsResponse = ListDraftsResponse
+data ListDraftsResponse = ListDraftsResponse'
     { _ldrNextPageToken      :: !(Maybe Text)
     , _ldrResultSizeEstimate :: !(Maybe (Textual Word32))
     , _ldrDrafts             :: !(Maybe [Draft])
@@ -777,7 +812,7 @@ data ListDraftsResponse = ListDraftsResponse
 listDraftsResponse
     :: ListDraftsResponse
 listDraftsResponse =
-    ListDraftsResponse
+    ListDraftsResponse'
     { _ldrNextPageToken = Nothing
     , _ldrResultSizeEstimate = Nothing
     , _ldrDrafts = Nothing
@@ -807,13 +842,13 @@ instance FromJSON ListDraftsResponse where
         parseJSON
           = withObject "ListDraftsResponse"
               (\ o ->
-                 ListDraftsResponse <$>
+                 ListDraftsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "resultSizeEstimate")
                      <*> (o .:? "drafts" .!= mempty))
 
 instance ToJSON ListDraftsResponse where
-        toJSON ListDraftsResponse{..}
+        toJSON ListDraftsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ldrNextPageToken,
@@ -823,7 +858,7 @@ instance ToJSON ListDraftsResponse where
 -- | Push notification watch response.
 --
 -- /See:/ 'watchResponse' smart constructor.
-data WatchResponse = WatchResponse
+data WatchResponse = WatchResponse'
     { _wrExpiration :: !(Maybe (Textual Int64))
     , _wrHistoryId  :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -838,7 +873,7 @@ data WatchResponse = WatchResponse
 watchResponse
     :: WatchResponse
 watchResponse =
-    WatchResponse
+    WatchResponse'
     { _wrExpiration = Nothing
     , _wrHistoryId = Nothing
     }
@@ -860,11 +895,11 @@ instance FromJSON WatchResponse where
         parseJSON
           = withObject "WatchResponse"
               (\ o ->
-                 WatchResponse <$>
+                 WatchResponse' <$>
                    (o .:? "expiration") <*> (o .:? "historyId"))
 
 instance ToJSON WatchResponse where
-        toJSON WatchResponse{..}
+        toJSON WatchResponse'{..}
           = object
               (catMaybes
                  [("expiration" .=) <$> _wrExpiration,
@@ -873,7 +908,7 @@ instance ToJSON WatchResponse where
 -- | A draft email in the user\'s mailbox.
 --
 -- /See:/ 'draft' smart constructor.
-data Draft = Draft
+data Draft = Draft'
     { _dId      :: !(Maybe Text)
     , _dMessage :: !(Maybe Message)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -888,7 +923,7 @@ data Draft = Draft
 draft
     :: Draft
 draft =
-    Draft
+    Draft'
     { _dId = Nothing
     , _dMessage = Nothing
     }
@@ -904,10 +939,11 @@ dMessage = lens _dMessage (\ s a -> s{_dMessage = a})
 instance FromJSON Draft where
         parseJSON
           = withObject "Draft"
-              (\ o -> Draft <$> (o .:? "id") <*> (o .:? "message"))
+              (\ o ->
+                 Draft' <$> (o .:? "id") <*> (o .:? "message"))
 
 instance ToJSON Draft where
-        toJSON Draft{..}
+        toJSON Draft'{..}
           = object
               (catMaybes
                  [("id" .=) <$> _dId, ("message" .=) <$> _dMessage])
@@ -915,7 +951,7 @@ instance ToJSON Draft where
 -- | Set up or update a new push notification watch on this user\'s mailbox.
 --
 -- /See:/ 'watchRequest' smart constructor.
-data WatchRequest = WatchRequest
+data WatchRequest = WatchRequest'
     { _wrLabelFilterAction :: !(Maybe WatchRequestLabelFilterAction)
     , _wrTopicName         :: !(Maybe Text)
     , _wrLabelIds          :: !(Maybe [Text])
@@ -933,7 +969,7 @@ data WatchRequest = WatchRequest
 watchRequest
     :: WatchRequest
 watchRequest =
-    WatchRequest
+    WatchRequest'
     { _wrLabelFilterAction = Nothing
     , _wrTopicName = Nothing
     , _wrLabelIds = Nothing
@@ -949,9 +985,9 @@ wrLabelFilterAction
 -- events to. This topic name **must** already exist in Cloud Pub\/Sub and
 -- you **must** have already granted gmail \"publish\" permission on it.
 -- For example, \"projects\/my-project-identifier\/topics\/my-topic-name\"
--- (using the new Cloud Pub\/Sub \"v1beta2\" topic naming format). Note
--- that the \"my-project-identifier\" portion must exactly match your
--- Google developer project id (the one executing this watch request).
+-- (using the Cloud Pub\/Sub \"v1\" topic naming format). Note that the
+-- \"my-project-identifier\" portion must exactly match your Google
+-- developer project id (the one executing this watch request).
 wrTopicName :: Lens' WatchRequest (Maybe Text)
 wrTopicName
   = lens _wrTopicName (\ s a -> s{_wrTopicName = a})
@@ -969,12 +1005,12 @@ instance FromJSON WatchRequest where
         parseJSON
           = withObject "WatchRequest"
               (\ o ->
-                 WatchRequest <$>
+                 WatchRequest' <$>
                    (o .:? "labelFilterAction") <*> (o .:? "topicName")
                      <*> (o .:? "labelIds" .!= mempty))
 
 instance ToJSON WatchRequest where
-        toJSON WatchRequest{..}
+        toJSON WatchRequest'{..}
           = object
               (catMaybes
                  [("labelFilterAction" .=) <$> _wrLabelFilterAction,
@@ -984,8 +1020,8 @@ instance ToJSON WatchRequest where
 -- | An email message.
 --
 -- /See:/ 'message' smart constructor.
-data Message = Message
-    { _mRaw          :: !(Maybe (Textual Word8))
+data Message = Message'
+    { _mRaw          :: !(Maybe Base64)
     , _mSnippet      :: !(Maybe Text)
     , _mSizeEstimate :: !(Maybe (Textual Int32))
     , _mPayload      :: !(Maybe MessagePart)
@@ -1020,7 +1056,7 @@ data Message = Message
 message
     :: Message
 message =
-    Message
+    Message'
     { _mRaw = Nothing
     , _mSnippet = Nothing
     , _mSizeEstimate = Nothing
@@ -1035,10 +1071,10 @@ message =
 -- | The entire email message in an RFC 2822 formatted and base64url encoded
 -- string. Returned in messages.get and drafts.get responses when the
 -- format=RAW parameter is supplied.
-mRaw :: Lens' Message (Maybe Word8)
+mRaw :: Lens' Message (Maybe ByteString)
 mRaw
   = lens _mRaw (\ s a -> s{_mRaw = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | A short part of the message text.
 mSnippet :: Lens' Message (Maybe Text)
@@ -1097,7 +1133,7 @@ instance FromJSON Message where
         parseJSON
           = withObject "Message"
               (\ o ->
-                 Message <$>
+                 Message' <$>
                    (o .:? "raw") <*> (o .:? "snippet") <*>
                      (o .:? "sizeEstimate")
                      <*> (o .:? "payload")
@@ -1108,7 +1144,7 @@ instance FromJSON Message where
                      <*> (o .:? "internalDate"))
 
 instance ToJSON Message where
-        toJSON Message{..}
+        toJSON Message'{..}
           = object
               (catMaybes
                  [("raw" .=) <$> _mRaw, ("snippet" .=) <$> _mSnippet,
@@ -1121,7 +1157,7 @@ instance ToJSON Message where
 
 --
 -- /See:/ 'historyLabelRemoved' smart constructor.
-data HistoryLabelRemoved = HistoryLabelRemoved
+data HistoryLabelRemoved = HistoryLabelRemoved'
     { _hlrLabelIds :: !(Maybe [Text])
     , _hlrMessage  :: !(Maybe Message)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1136,7 +1172,7 @@ data HistoryLabelRemoved = HistoryLabelRemoved
 historyLabelRemoved
     :: HistoryLabelRemoved
 historyLabelRemoved =
-    HistoryLabelRemoved
+    HistoryLabelRemoved'
     { _hlrLabelIds = Nothing
     , _hlrMessage = Nothing
     }
@@ -1156,11 +1192,11 @@ instance FromJSON HistoryLabelRemoved where
         parseJSON
           = withObject "HistoryLabelRemoved"
               (\ o ->
-                 HistoryLabelRemoved <$>
+                 HistoryLabelRemoved' <$>
                    (o .:? "labelIds" .!= mempty) <*> (o .:? "message"))
 
 instance ToJSON HistoryLabelRemoved where
-        toJSON HistoryLabelRemoved{..}
+        toJSON HistoryLabelRemoved'{..}
           = object
               (catMaybes
                  [("labelIds" .=) <$> _hlrLabelIds,
@@ -1169,7 +1205,7 @@ instance ToJSON HistoryLabelRemoved where
 -- | A collection of messages representing a conversation.
 --
 -- /See:/ 'thread' smart constructor.
-data Thread = Thread
+data Thread = Thread'
     { _tSnippet   :: !(Maybe Text)
     , _tHistoryId :: !(Maybe (Textual Word64))
     , _tId        :: !(Maybe Text)
@@ -1190,7 +1226,7 @@ data Thread = Thread
 thread
     :: Thread
 thread =
-    Thread
+    Thread'
     { _tSnippet = Nothing
     , _tHistoryId = Nothing
     , _tId = Nothing
@@ -1222,13 +1258,13 @@ instance FromJSON Thread where
         parseJSON
           = withObject "Thread"
               (\ o ->
-                 Thread <$>
+                 Thread' <$>
                    (o .:? "snippet") <*> (o .:? "historyId") <*>
                      (o .:? "id")
                      <*> (o .:? "messages" .!= mempty))
 
 instance ToJSON Thread where
-        toJSON Thread{..}
+        toJSON Thread'{..}
           = object
               (catMaybes
                  [("snippet" .=) <$> _tSnippet,
@@ -1239,7 +1275,7 @@ instance ToJSON Thread where
 -- mailbox.
 --
 -- /See:/ 'label' smart constructor.
-data Label = Label
+data Label = Label'
     { _lThreadsUnread         :: !(Maybe (Textual Int32))
     , _lMessageListVisibility :: !(Maybe LabelMessageListVisibility)
     , _lMessagesTotal         :: !(Maybe (Textual Int32))
@@ -1275,7 +1311,7 @@ data Label = Label
 label
     :: Label
 label =
-    Label
+    Label'
     { _lThreadsUnread = Nothing
     , _lMessageListVisibility = Nothing
     , _lMessagesTotal = Nothing
@@ -1352,7 +1388,7 @@ instance FromJSON Label where
         parseJSON
           = withObject "Label"
               (\ o ->
-                 Label <$>
+                 Label' <$>
                    (o .:? "threadsUnread") <*>
                      (o .:? "messageListVisibility")
                      <*> (o .:? "messagesTotal")
@@ -1364,7 +1400,7 @@ instance FromJSON Label where
                      <*> (o .:? "type"))
 
 instance ToJSON Label where
-        toJSON Label{..}
+        toJSON Label'{..}
           = object
               (catMaybes
                  [("threadsUnread" .=) <$> _lThreadsUnread,
@@ -1379,7 +1415,7 @@ instance ToJSON Label where
 
 --
 -- /See:/ 'listMessagesResponse' smart constructor.
-data ListMessagesResponse = ListMessagesResponse
+data ListMessagesResponse = ListMessagesResponse'
     { _lmrNextPageToken      :: !(Maybe Text)
     , _lmrResultSizeEstimate :: !(Maybe (Textual Word32))
     , _lmrMessages           :: !(Maybe [Message])
@@ -1397,7 +1433,7 @@ data ListMessagesResponse = ListMessagesResponse
 listMessagesResponse
     :: ListMessagesResponse
 listMessagesResponse =
-    ListMessagesResponse
+    ListMessagesResponse'
     { _lmrNextPageToken = Nothing
     , _lmrResultSizeEstimate = Nothing
     , _lmrMessages = Nothing
@@ -1427,13 +1463,13 @@ instance FromJSON ListMessagesResponse where
         parseJSON
           = withObject "ListMessagesResponse"
               (\ o ->
-                 ListMessagesResponse <$>
+                 ListMessagesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "resultSizeEstimate")
                      <*> (o .:? "messages" .!= mempty))
 
 instance ToJSON ListMessagesResponse where
-        toJSON ListMessagesResponse{..}
+        toJSON ListMessagesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lmrNextPageToken,
@@ -1442,7 +1478,7 @@ instance ToJSON ListMessagesResponse where
 
 --
 -- /See:/ 'historyMessageAdded' smart constructor.
-newtype HistoryMessageAdded = HistoryMessageAdded
+newtype HistoryMessageAdded = HistoryMessageAdded'
     { _hmaMessage :: Maybe Message
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1454,7 +1490,7 @@ newtype HistoryMessageAdded = HistoryMessageAdded
 historyMessageAdded
     :: HistoryMessageAdded
 historyMessageAdded =
-    HistoryMessageAdded
+    HistoryMessageAdded'
     { _hmaMessage = Nothing
     }
 
@@ -1465,8 +1501,8 @@ hmaMessage
 instance FromJSON HistoryMessageAdded where
         parseJSON
           = withObject "HistoryMessageAdded"
-              (\ o -> HistoryMessageAdded <$> (o .:? "message"))
+              (\ o -> HistoryMessageAdded' <$> (o .:? "message"))
 
 instance ToJSON HistoryMessageAdded where
-        toJSON HistoryMessageAdded{..}
+        toJSON HistoryMessageAdded'{..}
           = object (catMaybes [("message" .=) <$> _hmaMessage])

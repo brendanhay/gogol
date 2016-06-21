@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Messages.Send
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,15 +61,15 @@ type UsersMessagesSendResource =
                  "messages" :>
                    "send" :>
                      QueryParam "alt" AltJSON :>
-                       QueryParam "uploadType" AltMedia :>
-                         MultipartRelated '[JSON] Message RequestBody :>
+                       QueryParam "uploadType" Multipart :>
+                         MultipartRelated '[JSON] Message :>
                            Post '[JSON] Message
 
 -- | Sends the specified message to the recipients in the To, Cc, and Bcc
 -- headers.
 --
 -- /See:/ 'usersMessagesSend' smart constructor.
-data UsersMessagesSend = UsersMessagesSend
+data UsersMessagesSend = UsersMessagesSend'
     { _umsPayload :: !Message
     , _umsUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -83,10 +83,9 @@ data UsersMessagesSend = UsersMessagesSend
 -- * 'umsUserId'
 usersMessagesSend
     :: Message -- ^ 'umsPayload'
-    -> Text
     -> UsersMessagesSend
-usersMessagesSend pUmsPayload_ pUmsUserId_ =
-    UsersMessagesSend
+usersMessagesSend pUmsPayload_ =
+    UsersMessagesSend'
     { _umsPayload = pUmsPayload_
     , _umsUserId = "me"
     }
@@ -104,7 +103,12 @@ umsUserId
 
 instance GoogleRequest UsersMessagesSend where
         type Rs UsersMessagesSend = Message
-        requestClient UsersMessagesSend{..}
+        type Scopes UsersMessagesSend =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.send"]
+        requestClient UsersMessagesSend'{..}
           = go _umsUserId (Just AltJSON) _umsPayload
               gmailService
           where go :<|> _
@@ -115,9 +119,11 @@ instance GoogleRequest UsersMessagesSend where
 instance GoogleRequest
          (MediaUpload UsersMessagesSend) where
         type Rs (MediaUpload UsersMessagesSend) = Message
+        type Scopes (MediaUpload UsersMessagesSend) =
+             Scopes UsersMessagesSend
         requestClient
-          (MediaUpload UsersMessagesSend{..} body)
-          = go _umsUserId (Just AltJSON) (Just AltMedia)
+          (MediaUpload UsersMessagesSend'{..} body)
+          = go _umsUserId (Just AltJSON) (Just Multipart)
               _umsPayload
               body
               gmailService

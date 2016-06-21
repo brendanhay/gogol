@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.MapsEngine.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- drawn as shapes with the min\/max size.
 --
 -- /See:/ 'valueRange' smart constructor.
-data ValueRange = ValueRange
+data ValueRange = ValueRange'
     { _vrMax :: !(Maybe (Textual Double))
     , _vrMin :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -39,7 +39,7 @@ data ValueRange = ValueRange
 valueRange
     :: ValueRange
 valueRange =
-    ValueRange
+    ValueRange'
     { _vrMax = Nothing
     , _vrMin = Nothing
     }
@@ -60,10 +60,10 @@ instance FromJSON ValueRange where
         parseJSON
           = withObject "ValueRange"
               (\ o ->
-                 ValueRange <$> (o .:? "max") <*> (o .:? "min"))
+                 ValueRange' <$> (o .:? "max") <*> (o .:? "min"))
 
 instance ToJSON ValueRange where
-        toJSON ValueRange{..}
+        toJSON ValueRange'{..}
           = object
               (catMaybes
                  [("max" .=) <$> _vrMax, ("min" .=) <$> _vrMin])
@@ -71,7 +71,7 @@ instance ToJSON ValueRange where
 -- | The properties associated with a feature.
 --
 -- /See:/ 'geoJSONProperties' smart constructor.
-newtype GeoJSONProperties = GeoJSONProperties
+newtype GeoJSONProperties = GeoJSONProperties'
     { _gjpAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,7 +84,7 @@ geoJSONProperties
     :: HashMap Text JSONValue -- ^ 'gjpAddtional'
     -> GeoJSONProperties
 geoJSONProperties pGjpAddtional_ =
-    GeoJSONProperties
+    GeoJSONProperties'
     { _gjpAddtional = _Coerce # pGjpAddtional_
     }
 
@@ -99,7 +99,7 @@ gjpAddtional
 instance FromJSON GeoJSONProperties where
         parseJSON
           = withObject "GeoJSONProperties"
-              (\ o -> GeoJSONProperties <$> (parseJSONObject o))
+              (\ o -> GeoJSONProperties' <$> (parseJSONObject o))
 
 instance ToJSON GeoJSONProperties where
         toJSON = toJSON . _gjpAddtional
@@ -107,7 +107,7 @@ instance ToJSON GeoJSONProperties where
 -- | A feature within a table.
 --
 -- /See:/ 'feature' smart constructor.
-data Feature = Feature
+data Feature = Feature'
     { _fGeometry   :: !(Maybe GeoJSONGeometry)
     , _fType       :: !Text
     , _fProperties :: !(Maybe GeoJSONProperties)
@@ -125,7 +125,7 @@ data Feature = Feature
 feature
     :: Feature
 feature =
-    Feature
+    Feature'
     { _fGeometry = Nothing
     , _fType = "Feature"
     , _fProperties = Nothing
@@ -149,12 +149,12 @@ instance FromJSON Feature where
         parseJSON
           = withObject "Feature"
               (\ o ->
-                 Feature <$>
+                 Feature' <$>
                    (o .:? "geometry") <*> (o .:? "type" .!= "Feature")
                      <*> (o .:? "properties"))
 
 instance ToJSON Feature where
-        toJSON Feature{..}
+        toJSON Feature'{..}
           = object
               (catMaybes
                  [("geometry" .=) <$> _fGeometry,
@@ -164,7 +164,7 @@ instance ToJSON Feature where
 -- | A list of the parents of an asset.
 --
 -- /See:/ 'parent' smart constructor.
-newtype Parent = Parent
+newtype Parent = Parent'
     { _pId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -176,7 +176,7 @@ newtype Parent = Parent
 parent
     :: Parent
 parent =
-    Parent
+    Parent'
     { _pId = Nothing
     }
 
@@ -187,16 +187,16 @@ pId = lens _pId (\ s a -> s{_pId = a})
 instance FromJSON Parent where
         parseJSON
           = withObject "Parent"
-              (\ o -> Parent <$> (o .:? "id"))
+              (\ o -> Parent' <$> (o .:? "id"))
 
 instance ToJSON Parent where
-        toJSON Parent{..}
+        toJSON Parent'{..}
           = object (catMaybes [("id" .=) <$> _pId])
 
 -- | The request sent to features.BatchPatch.
 --
 -- /See:/ 'featuresBatchPatchRequest' smart constructor.
-data FeaturesBatchPatchRequest = FeaturesBatchPatchRequest
+data FeaturesBatchPatchRequest = FeaturesBatchPatchRequest'
     { _fbprFeatures            :: !(Maybe [Feature])
     , _fbprNormalizeGeometries :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -211,7 +211,7 @@ data FeaturesBatchPatchRequest = FeaturesBatchPatchRequest
 featuresBatchPatchRequest
     :: FeaturesBatchPatchRequest
 featuresBatchPatchRequest =
-    FeaturesBatchPatchRequest
+    FeaturesBatchPatchRequest'
     { _fbprFeatures = Nothing
     , _fbprNormalizeGeometries = True
     }
@@ -236,12 +236,12 @@ instance FromJSON FeaturesBatchPatchRequest where
         parseJSON
           = withObject "FeaturesBatchPatchRequest"
               (\ o ->
-                 FeaturesBatchPatchRequest <$>
+                 FeaturesBatchPatchRequest' <$>
                    (o .:? "features" .!= mempty) <*>
                      (o .:? "normalizeGeometries" .!= True))
 
 instance ToJSON FeaturesBatchPatchRequest where
-        toJSON FeaturesBatchPatchRequest{..}
+        toJSON FeaturesBatchPatchRequest'{..}
           = object
               (catMaybes
                  [("features" .=) <$> _fbprFeatures,
@@ -251,7 +251,7 @@ instance ToJSON FeaturesBatchPatchRequest where
 -- | The request sent to mapsengine.permissions.batchUpdate.
 --
 -- /See:/ 'permissionsBatchUpdateRequest' smart constructor.
-newtype PermissionsBatchUpdateRequest = PermissionsBatchUpdateRequest
+newtype PermissionsBatchUpdateRequest = PermissionsBatchUpdateRequest'
     { _pburPermissions :: Maybe [Permission]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -263,7 +263,7 @@ newtype PermissionsBatchUpdateRequest = PermissionsBatchUpdateRequest
 permissionsBatchUpdateRequest
     :: PermissionsBatchUpdateRequest
 permissionsBatchUpdateRequest =
-    PermissionsBatchUpdateRequest
+    PermissionsBatchUpdateRequest'
     { _pburPermissions = Nothing
     }
 
@@ -279,18 +279,18 @@ instance FromJSON PermissionsBatchUpdateRequest where
         parseJSON
           = withObject "PermissionsBatchUpdateRequest"
               (\ o ->
-                 PermissionsBatchUpdateRequest <$>
+                 PermissionsBatchUpdateRequest' <$>
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON PermissionsBatchUpdateRequest where
-        toJSON PermissionsBatchUpdateRequest{..}
+        toJSON PermissionsBatchUpdateRequest'{..}
           = object
               (catMaybes [("permissions" .=) <$> _pburPermissions])
 
 -- | The request sent to mapsengine.permissions.batchDelete.
 --
 -- /See:/ 'permissionsBatchDeleteRequest' smart constructor.
-newtype PermissionsBatchDeleteRequest = PermissionsBatchDeleteRequest
+newtype PermissionsBatchDeleteRequest = PermissionsBatchDeleteRequest'
     { _pbdrIds :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -302,7 +302,7 @@ newtype PermissionsBatchDeleteRequest = PermissionsBatchDeleteRequest
 permissionsBatchDeleteRequest
     :: PermissionsBatchDeleteRequest
 permissionsBatchDeleteRequest =
-    PermissionsBatchDeleteRequest
+    PermissionsBatchDeleteRequest'
     { _pbdrIds = Nothing
     }
 
@@ -318,11 +318,11 @@ instance FromJSON PermissionsBatchDeleteRequest where
         parseJSON
           = withObject "PermissionsBatchDeleteRequest"
               (\ o ->
-                 PermissionsBatchDeleteRequest <$>
+                 PermissionsBatchDeleteRequest' <$>
                    (o .:? "ids" .!= mempty))
 
 instance ToJSON PermissionsBatchDeleteRequest where
-        toJSON PermissionsBatchDeleteRequest{..}
+        toJSON PermissionsBatchDeleteRequest'{..}
           = object (catMaybes [("ids" .=) <$> _pbdrIds])
 
 -- | The response returned by a call to raster_collections.List. Note: The
@@ -332,8 +332,8 @@ instance ToJSON PermissionsBatchDeleteRequest where
 -- request to retrieve the additional fields for each raster collection.
 --
 -- /See:/ 'rasterCollectionsListResponse' smart constructor.
-data RasterCollectionsListResponse = RasterCollectionsListResponse
-    { _rclrNextPageToken     :: !(Maybe (Textual Word8))
+data RasterCollectionsListResponse = RasterCollectionsListResponse'
+    { _rclrNextPageToken     :: !(Maybe Base64)
     , _rclrRasterCollections :: !(Maybe [RasterCollection])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -347,17 +347,17 @@ data RasterCollectionsListResponse = RasterCollectionsListResponse
 rasterCollectionsListResponse
     :: RasterCollectionsListResponse
 rasterCollectionsListResponse =
-    RasterCollectionsListResponse
+    RasterCollectionsListResponse'
     { _rclrNextPageToken = Nothing
     , _rclrRasterCollections = Nothing
     }
 
 -- | Next page token.
-rclrNextPageToken :: Lens' RasterCollectionsListResponse (Maybe Word8)
+rclrNextPageToken :: Lens' RasterCollectionsListResponse (Maybe ByteString)
 rclrNextPageToken
   = lens _rclrNextPageToken
       (\ s a -> s{_rclrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Resources returned.
 rclrRasterCollections :: Lens' RasterCollectionsListResponse [RasterCollection]
@@ -371,12 +371,12 @@ instance FromJSON RasterCollectionsListResponse where
         parseJSON
           = withObject "RasterCollectionsListResponse"
               (\ o ->
-                 RasterCollectionsListResponse <$>
+                 RasterCollectionsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "rasterCollections" .!= mempty))
 
 instance ToJSON RasterCollectionsListResponse where
-        toJSON RasterCollectionsListResponse{..}
+        toJSON RasterCollectionsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rclrNextPageToken,
@@ -385,7 +385,7 @@ instance ToJSON RasterCollectionsListResponse where
 -- | The response returned by a call to projects.List.
 --
 -- /See:/ 'projectsListResponse' smart constructor.
-newtype ProjectsListResponse = ProjectsListResponse
+newtype ProjectsListResponse = ProjectsListResponse'
     { _plrProjects :: Maybe [Project]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -397,7 +397,7 @@ newtype ProjectsListResponse = ProjectsListResponse
 projectsListResponse
     :: ProjectsListResponse
 projectsListResponse =
-    ProjectsListResponse
+    ProjectsListResponse'
     { _plrProjects = Nothing
     }
 
@@ -412,37 +412,37 @@ instance FromJSON ProjectsListResponse where
         parseJSON
           = withObject "ProjectsListResponse"
               (\ o ->
-                 ProjectsListResponse <$>
+                 ProjectsListResponse' <$>
                    (o .:? "projects" .!= mempty))
 
 instance ToJSON ProjectsListResponse where
-        toJSON ProjectsListResponse{..}
+        toJSON ProjectsListResponse'{..}
           = object
               (catMaybes [("projects" .=) <$> _plrProjects])
 
 --
 -- /See:/ 'geoJSONGeometry' smart constructor.
 data GeoJSONGeometry =
-    GeoJSONGeometry
+    GeoJSONGeometry'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoJSONGeometry' with the minimum fields required to make a request.
 --
 geoJSONGeometry
     :: GeoJSONGeometry
-geoJSONGeometry = GeoJSONGeometry
+geoJSONGeometry = GeoJSONGeometry'
 
 instance FromJSON GeoJSONGeometry where
         parseJSON
           = withObject "GeoJSONGeometry"
-              (\ o -> pure GeoJSONGeometry)
+              (\ o -> pure GeoJSONGeometry')
 
 instance ToJSON GeoJSONGeometry where
         toJSON = const emptyObject
 
 --
 -- /See:/ 'mapLayer' smart constructor.
-data MapLayer = MapLayer
+data MapLayer = MapLayer'
     { _mlDefaultViewport :: !(Maybe [Textual Double])
     , _mlVisibility      :: !(Maybe Text)
     , _mlKey             :: !(Maybe Text)
@@ -469,7 +469,7 @@ data MapLayer = MapLayer
 mapLayer
     :: MapLayer
 mapLayer =
-    MapLayer
+    MapLayer'
     { _mlDefaultViewport = Nothing
     , _mlVisibility = Nothing
     , _mlKey = Nothing
@@ -515,7 +515,7 @@ instance FromJSON MapLayer where
         parseJSON
           = withObject "MapLayer"
               (\ o ->
-                 MapLayer <$>
+                 MapLayer' <$>
                    (o .:? "defaultViewport" .!= mempty) <*>
                      (o .:? "visibility")
                      <*> (o .:? "key")
@@ -524,7 +524,7 @@ instance FromJSON MapLayer where
                      <*> (o .:? "type"))
 
 instance ToJSON MapLayer where
-        toJSON MapLayer{..}
+        toJSON MapLayer'{..}
           = object
               (catMaybes
                  [("defaultViewport" .=) <$> _mlDefaultViewport,
@@ -536,7 +536,7 @@ instance ToJSON MapLayer where
 -- inclusive.
 --
 -- /See:/ 'zoomLevels' smart constructor.
-data ZoomLevels = ZoomLevels
+data ZoomLevels = ZoomLevels'
     { _zlMax :: !(Maybe (Textual Int32))
     , _zlMin :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -551,7 +551,7 @@ data ZoomLevels = ZoomLevels
 zoomLevels
     :: ZoomLevels
 zoomLevels =
-    ZoomLevels
+    ZoomLevels'
     { _zlMax = Nothing
     , _zlMin = Nothing
     }
@@ -572,10 +572,10 @@ instance FromJSON ZoomLevels where
         parseJSON
           = withObject "ZoomLevels"
               (\ o ->
-                 ZoomLevels <$> (o .:? "max") <*> (o .:? "min"))
+                 ZoomLevels' <$> (o .:? "max") <*> (o .:? "min"))
 
 instance ToJSON ZoomLevels where
-        toJSON ZoomLevels{..}
+        toJSON ZoomLevels'{..}
           = object
               (catMaybes
                  [("max" .=) <$> _zlMax, ("min" .=) <$> _zlMin])
@@ -583,7 +583,7 @@ instance ToJSON ZoomLevels where
 -- | A feature info contains information about individual feature.
 --
 -- /See:/ 'featureInfo' smart constructor.
-newtype FeatureInfo = FeatureInfo
+newtype FeatureInfo = FeatureInfo'
     { _fiContent :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -595,7 +595,7 @@ newtype FeatureInfo = FeatureInfo
 featureInfo
     :: FeatureInfo
 featureInfo =
-    FeatureInfo
+    FeatureInfo'
     { _fiContent = Nothing
     }
 
@@ -608,17 +608,17 @@ fiContent
 instance FromJSON FeatureInfo where
         parseJSON
           = withObject "FeatureInfo"
-              (\ o -> FeatureInfo <$> (o .:? "content"))
+              (\ o -> FeatureInfo' <$> (o .:? "content"))
 
 instance ToJSON FeatureInfo where
-        toJSON FeatureInfo{..}
+        toJSON FeatureInfo'{..}
           = object (catMaybes [("content" .=) <$> _fiContent])
 
 -- | Scaled shape size range in pixels. For circles, size corresponds to
 -- diameter.
 --
 -- /See:/ 'sizeRange' smart constructor.
-data SizeRange = SizeRange
+data SizeRange = SizeRange'
     { _srMax :: !(Maybe (Textual Double))
     , _srMin :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -633,7 +633,7 @@ data SizeRange = SizeRange
 sizeRange
     :: SizeRange
 sizeRange =
-    SizeRange
+    SizeRange'
     { _srMax = Nothing
     , _srMin = Nothing
     }
@@ -654,17 +654,17 @@ instance FromJSON SizeRange where
         parseJSON
           = withObject "SizeRange"
               (\ o ->
-                 SizeRange <$> (o .:? "max") <*> (o .:? "min"))
+                 SizeRange' <$> (o .:? "max") <*> (o .:? "min"))
 
 instance ToJSON SizeRange where
-        toJSON SizeRange{..}
+        toJSON SizeRange'{..}
           = object
               (catMaybes
                  [("max" .=) <$> _srMax, ("min" .=) <$> _srMin])
 
 --
 -- /See:/ 'mapFolder' smart constructor.
-data MapFolder = MapFolder
+data MapFolder = MapFolder'
     { _mfExpandable      :: !(Maybe Bool)
     , _mfDefaultViewport :: !(Maybe [Textual Double])
     , _mfContents        :: !(Maybe [MapItem])
@@ -694,7 +694,7 @@ data MapFolder = MapFolder
 mapFolder
     :: MapFolder
 mapFolder =
-    MapFolder
+    MapFolder'
     { _mfExpandable = Nothing
     , _mfDefaultViewport = Nothing
     , _mfContents = Nothing
@@ -748,7 +748,7 @@ instance FromJSON MapFolder where
         parseJSON
           = withObject "MapFolder"
               (\ o ->
-                 MapFolder <$>
+                 MapFolder' <$>
                    (o .:? "expandable") <*>
                      (o .:? "defaultViewport" .!= mempty)
                      <*> (o .:? "contents" .!= mempty)
@@ -758,7 +758,7 @@ instance FromJSON MapFolder where
                      <*> (o .:? "type"))
 
 instance ToJSON MapFolder where
-        toJSON MapFolder{..}
+        toJSON MapFolder'{..}
           = object
               (catMaybes
                  [("expandable" .=) <$> _mfExpandable,
@@ -771,7 +771,7 @@ instance ToJSON MapFolder where
 -- | A Maps Engine project groups a collection of resources.
 --
 -- /See:/ 'project' smart constructor.
-data Project = Project
+data Project = Project'
     { _proName :: !(Maybe Text)
     , _proId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -786,7 +786,7 @@ data Project = Project
 project
     :: Project
 project =
-    Project
+    Project'
     { _proName = Nothing
     , _proId = Nothing
     }
@@ -802,10 +802,10 @@ proId = lens _proId (\ s a -> s{_proId = a})
 instance FromJSON Project where
         parseJSON
           = withObject "Project"
-              (\ o -> Project <$> (o .:? "name") <*> (o .:? "id"))
+              (\ o -> Project' <$> (o .:? "name") <*> (o .:? "id"))
 
 instance ToJSON Project where
-        toJSON Project{..}
+        toJSON Project'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _proName, ("id" .=) <$> _proId])
@@ -813,7 +813,7 @@ instance ToJSON Project where
 -- | Basic color used in styling.
 --
 -- /See:/ 'color' smart constructor.
-data Color = Color
+data Color = Color'
     { _cColor   :: !(Maybe Text)
     , _cOpacity :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -828,7 +828,7 @@ data Color = Color
 color
     :: Color
 color =
-    Color
+    Color'
     { _cColor = Nothing
     , _cOpacity = Nothing
     }
@@ -847,10 +847,10 @@ instance FromJSON Color where
         parseJSON
           = withObject "Color"
               (\ o ->
-                 Color <$> (o .:? "color") <*> (o .:? "opacity"))
+                 Color' <$> (o .:? "color") <*> (o .:? "opacity"))
 
 instance ToJSON Color where
-        toJSON Color{..}
+        toJSON Color'{..}
           = object
               (catMaybes
                  [("color" .=) <$> _cColor,
@@ -860,7 +860,7 @@ instance ToJSON Color where
 -- Layer.
 --
 -- /See:/ 'rasterCollection' smart constructor.
-data RasterCollection = RasterCollection
+data RasterCollection = RasterCollection'
     { _rcCreationTime              :: !(Maybe DateTime')
     , _rcWritersCanEditPermissions :: !(Maybe Bool)
     , _rcEtag                      :: !(Maybe Text)
@@ -920,7 +920,7 @@ data RasterCollection = RasterCollection
 rasterCollection
     :: RasterCollection
 rasterCollection =
-    RasterCollection
+    RasterCollection'
     { _rcCreationTime = Nothing
     , _rcWritersCanEditPermissions = Nothing
     , _rcEtag = Nothing
@@ -1057,7 +1057,7 @@ instance FromJSON RasterCollection where
         parseJSON
           = withObject "RasterCollection"
               (\ o ->
-                 RasterCollection <$>
+                 RasterCollection' <$>
                    (o .:? "creationTime") <*>
                      (o .:? "writersCanEditPermissions")
                      <*> (o .:? "etag")
@@ -1077,7 +1077,7 @@ instance FromJSON RasterCollection where
                      <*> (o .:? "tags"))
 
 instance ToJSON RasterCollection where
-        toJSON RasterCollection{..}
+        toJSON RasterCollection'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _rcCreationTime,
@@ -1100,7 +1100,7 @@ instance ToJSON RasterCollection where
 -- | Stroke of the line.
 --
 -- /See:/ 'lineStyleStroke' smart constructor.
-data LineStyleStroke = LineStyleStroke
+data LineStyleStroke = LineStyleStroke'
     { _lssColor   :: !(Maybe Text)
     , _lssWidth   :: !(Maybe (Textual Double))
     , _lssOpacity :: !(Maybe (Textual Double))
@@ -1118,7 +1118,7 @@ data LineStyleStroke = LineStyleStroke
 lineStyleStroke
     :: LineStyleStroke
 lineStyleStroke =
-    LineStyleStroke
+    LineStyleStroke'
     { _lssColor = Nothing
     , _lssWidth = Nothing
     , _lssOpacity = Nothing
@@ -1145,12 +1145,12 @@ instance FromJSON LineStyleStroke where
         parseJSON
           = withObject "LineStyleStroke"
               (\ o ->
-                 LineStyleStroke <$>
+                 LineStyleStroke' <$>
                    (o .:? "color") <*> (o .:? "width") <*>
                      (o .:? "opacity"))
 
 instance ToJSON LineStyleStroke where
-        toJSON LineStyleStroke{..}
+        toJSON LineStyleStroke'{..}
           = object
               (catMaybes
                  [("color" .=) <$> _lssColor,
@@ -1162,7 +1162,7 @@ instance ToJSON LineStyleStroke where
 --
 -- /See:/ 'rasterCollectionsRastersBatchDeleteResponse' smart constructor.
 data RasterCollectionsRastersBatchDeleteResponse =
-    RasterCollectionsRastersBatchDeleteResponse
+    RasterCollectionsRastersBatchDeleteResponse'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersBatchDeleteResponse' with the minimum fields required to make a request.
@@ -1170,7 +1170,7 @@ data RasterCollectionsRastersBatchDeleteResponse =
 rasterCollectionsRastersBatchDeleteResponse
     :: RasterCollectionsRastersBatchDeleteResponse
 rasterCollectionsRastersBatchDeleteResponse =
-    RasterCollectionsRastersBatchDeleteResponse
+    RasterCollectionsRastersBatchDeleteResponse'
 
 instance FromJSON
          RasterCollectionsRastersBatchDeleteResponse where
@@ -1178,7 +1178,7 @@ instance FromJSON
           = withObject
               "RasterCollectionsRastersBatchDeleteResponse"
               (\ o ->
-                 pure RasterCollectionsRastersBatchDeleteResponse)
+                 pure RasterCollectionsRastersBatchDeleteResponse')
 
 instance ToJSON
          RasterCollectionsRastersBatchDeleteResponse where
@@ -1188,26 +1188,26 @@ instance ToJSON
 --
 -- /See:/ 'processResponse' smart constructor.
 data ProcessResponse =
-    ProcessResponse
+    ProcessResponse'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProcessResponse' with the minimum fields required to make a request.
 --
 processResponse
     :: ProcessResponse
-processResponse = ProcessResponse
+processResponse = ProcessResponse'
 
 instance FromJSON ProcessResponse where
         parseJSON
           = withObject "ProcessResponse"
-              (\ o -> pure ProcessResponse)
+              (\ o -> pure ProcessResponse')
 
 instance ToJSON ProcessResponse where
         toJSON = const emptyObject
 
 --
 -- /See:/ 'tableColumn' smart constructor.
-data TableColumn = TableColumn
+data TableColumn = TableColumn'
     { _tcName :: !(Maybe Text)
     , _tcType :: !(Maybe TableColumnType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1222,7 +1222,7 @@ data TableColumn = TableColumn
 tableColumn
     :: TableColumn
 tableColumn =
-    TableColumn
+    TableColumn'
     { _tcName = Nothing
     , _tcType = Nothing
     }
@@ -1239,10 +1239,10 @@ instance FromJSON TableColumn where
         parseJSON
           = withObject "TableColumn"
               (\ o ->
-                 TableColumn <$> (o .:? "name") <*> (o .:? "type"))
+                 TableColumn' <$> (o .:? "name") <*> (o .:? "type"))
 
 instance ToJSON TableColumn where
-        toJSON TableColumn{..}
+        toJSON TableColumn'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _tcName, ("type" .=) <$> _tcType])
@@ -1254,7 +1254,7 @@ instance ToJSON TableColumn where
 -- particular endpoint.
 --
 -- /See:/ 'asset' smart constructor.
-data Asset = Asset
+data Asset = Asset'
     { _aCreationTime              :: !(Maybe DateTime')
     , _aWritersCanEditPermissions :: !(Maybe Bool)
     , _aEtag                      :: !(Maybe Text)
@@ -1305,7 +1305,7 @@ data Asset = Asset
 asset
     :: Asset
 asset =
-    Asset
+    Asset'
     { _aCreationTime = Nothing
     , _aWritersCanEditPermissions = Nothing
     , _aEtag = Nothing
@@ -1411,7 +1411,7 @@ instance FromJSON Asset where
         parseJSON
           = withObject "Asset"
               (\ o ->
-                 Asset <$>
+                 Asset' <$>
                    (o .:? "creationTime") <*>
                      (o .:? "writersCanEditPermissions")
                      <*> (o .:? "etag")
@@ -1428,7 +1428,7 @@ instance FromJSON Asset where
                      <*> (o .:? "tags" .!= mempty))
 
 instance ToJSON Asset where
-        toJSON Asset{..}
+        toJSON Asset'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _aCreationTime,
@@ -1448,7 +1448,7 @@ instance ToJSON Asset where
 -- | Parameters for styling points as scaled shapes.
 --
 -- /See:/ 'scaledShape' smart constructor.
-data ScaledShape = ScaledShape
+data ScaledShape = ScaledShape'
     { _ssBOrder :: !(Maybe BOrder)
     , _ssFill   :: !(Maybe Color)
     , _ssShape  :: !(Maybe ScaledShapeShape)
@@ -1466,7 +1466,7 @@ data ScaledShape = ScaledShape
 scaledShape
     :: ScaledShape
 scaledShape =
-    ScaledShape
+    ScaledShape'
     { _ssBOrder = Nothing
     , _ssFill = Nothing
     , _ssShape = Nothing
@@ -1490,12 +1490,12 @@ instance FromJSON ScaledShape where
         parseJSON
           = withObject "ScaledShape"
               (\ o ->
-                 ScaledShape <$>
+                 ScaledShape' <$>
                    (o .:? "border") <*> (o .:? "fill") <*>
                      (o .:? "shape"))
 
 instance ToJSON ScaledShape where
-        toJSON ScaledShape{..}
+        toJSON ScaledShape'{..}
           = object
               (catMaybes
                  [("border" .=) <$> _ssBOrder,
@@ -1504,7 +1504,7 @@ instance ToJSON ScaledShape where
 -- | The request sent to features.BatchDelete.
 --
 -- /See:/ 'featuresBatchDeleteRequest' smart constructor.
-data FeaturesBatchDeleteRequest = FeaturesBatchDeleteRequest
+data FeaturesBatchDeleteRequest = FeaturesBatchDeleteRequest'
     { _fbdrPrimaryKeys :: !(Maybe [Text])
     , _fbdrGxIds       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1519,7 +1519,7 @@ data FeaturesBatchDeleteRequest = FeaturesBatchDeleteRequest
 featuresBatchDeleteRequest
     :: FeaturesBatchDeleteRequest
 featuresBatchDeleteRequest =
-    FeaturesBatchDeleteRequest
+    FeaturesBatchDeleteRequest'
     { _fbdrPrimaryKeys = Nothing
     , _fbdrGxIds = Nothing
     }
@@ -1541,12 +1541,12 @@ instance FromJSON FeaturesBatchDeleteRequest where
         parseJSON
           = withObject "FeaturesBatchDeleteRequest"
               (\ o ->
-                 FeaturesBatchDeleteRequest <$>
+                 FeaturesBatchDeleteRequest' <$>
                    (o .:? "primaryKeys" .!= mempty) <*>
                      (o .:? "gx_ids" .!= mempty))
 
 instance ToJSON FeaturesBatchDeleteRequest where
-        toJSON FeaturesBatchDeleteRequest{..}
+        toJSON FeaturesBatchDeleteRequest'{..}
           = object
               (catMaybes
                  [("primaryKeys" .=) <$> _fbdrPrimaryKeys,
@@ -1556,7 +1556,7 @@ instance ToJSON FeaturesBatchDeleteRequest where
 -- geometries.
 --
 -- /See:/ 'icon' smart constructor.
-data Icon = Icon
+data Icon = Icon'
     { _iName        :: !(Maybe Text)
     , _iId          :: !(Maybe Text)
     , _iDescription :: !(Maybe Text)
@@ -1574,7 +1574,7 @@ data Icon = Icon
 icon
     :: Icon
 icon =
-    Icon
+    Icon'
     { _iName = Nothing
     , _iId = Nothing
     , _iDescription = Nothing
@@ -1597,12 +1597,12 @@ instance FromJSON Icon where
         parseJSON
           = withObject "Icon"
               (\ o ->
-                 Icon <$>
+                 Icon' <$>
                    (o .:? "name") <*> (o .:? "id") <*>
                      (o .:? "description"))
 
 instance ToJSON Icon where
-        toJSON Icon{..}
+        toJSON Icon'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _iName, ("id" .=) <$> _iId,
@@ -1611,7 +1611,7 @@ instance ToJSON Icon where
 -- | The response returned by a call to parents.List.
 --
 -- /See:/ 'parentsListResponse' smart constructor.
-data ParentsListResponse = ParentsListResponse
+data ParentsListResponse = ParentsListResponse'
     { _plrNextPageToken :: !(Maybe Text)
     , _plrParents       :: !(Maybe [Parent])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1626,7 +1626,7 @@ data ParentsListResponse = ParentsListResponse
 parentsListResponse
     :: ParentsListResponse
 parentsListResponse =
-    ParentsListResponse
+    ParentsListResponse'
     { _plrNextPageToken = Nothing
     , _plrParents = Nothing
     }
@@ -1648,12 +1648,12 @@ instance FromJSON ParentsListResponse where
         parseJSON
           = withObject "ParentsListResponse"
               (\ o ->
-                 ParentsListResponse <$>
+                 ParentsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "parents" .!= mempty))
 
 instance ToJSON ParentsListResponse where
-        toJSON ParentsListResponse{..}
+        toJSON ParentsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _plrNextPageToken,
@@ -1662,7 +1662,7 @@ instance ToJSON ParentsListResponse where
 -- | The response returned by a call to features.List.
 --
 -- /See:/ 'featuresListResponse' smart constructor.
-data FeaturesListResponse = FeaturesListResponse
+data FeaturesListResponse = FeaturesListResponse'
     { _flrNextPageToken           :: !(Maybe Text)
     , _flrAllowedQueriesPerSecond :: !(Maybe (Textual Double))
     , _flrSchema                  :: !(Maybe Schema)
@@ -1686,7 +1686,7 @@ data FeaturesListResponse = FeaturesListResponse
 featuresListResponse
     :: FeaturesListResponse
 featuresListResponse =
-    FeaturesListResponse
+    FeaturesListResponse'
     { _flrNextPageToken = Nothing
     , _flrAllowedQueriesPerSecond = Nothing
     , _flrSchema = Nothing
@@ -1727,7 +1727,7 @@ instance FromJSON FeaturesListResponse where
         parseJSON
           = withObject "FeaturesListResponse"
               (\ o ->
-                 FeaturesListResponse <$>
+                 FeaturesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "allowedQueriesPerSecond")
                      <*> (o .:? "schema")
@@ -1735,7 +1735,7 @@ instance FromJSON FeaturesListResponse where
                      <*> (o .:? "type" .!= "FeatureCollection"))
 
 instance ToJSON FeaturesListResponse where
-        toJSON FeaturesListResponse{..}
+        toJSON FeaturesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _flrNextPageToken,
@@ -1750,7 +1750,7 @@ instance ToJSON FeaturesListResponse where
 --
 -- /See:/ 'rasterCollectionsRastersBatchInsertResponse' smart constructor.
 data RasterCollectionsRastersBatchInsertResponse =
-    RasterCollectionsRastersBatchInsertResponse
+    RasterCollectionsRastersBatchInsertResponse'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersBatchInsertResponse' with the minimum fields required to make a request.
@@ -1758,7 +1758,7 @@ data RasterCollectionsRastersBatchInsertResponse =
 rasterCollectionsRastersBatchInsertResponse
     :: RasterCollectionsRastersBatchInsertResponse
 rasterCollectionsRastersBatchInsertResponse =
-    RasterCollectionsRastersBatchInsertResponse
+    RasterCollectionsRastersBatchInsertResponse'
 
 instance FromJSON
          RasterCollectionsRastersBatchInsertResponse where
@@ -1766,7 +1766,7 @@ instance FromJSON
           = withObject
               "RasterCollectionsRastersBatchInsertResponse"
               (\ o ->
-                 pure RasterCollectionsRastersBatchInsertResponse)
+                 pure RasterCollectionsRastersBatchInsertResponse')
 
 instance ToJSON
          RasterCollectionsRastersBatchInsertResponse where
@@ -1775,7 +1775,7 @@ instance ToJSON
 -- | The response returned by a call to icons.List.
 --
 -- /See:/ 'iconsListResponse' smart constructor.
-data IconsListResponse = IconsListResponse
+data IconsListResponse = IconsListResponse'
     { _ilrNextPageToken :: !(Maybe Text)
     , _ilrIcons         :: !(Maybe [Icon])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1790,7 +1790,7 @@ data IconsListResponse = IconsListResponse
 iconsListResponse
     :: IconsListResponse
 iconsListResponse =
-    IconsListResponse
+    IconsListResponse'
     { _ilrNextPageToken = Nothing
     , _ilrIcons = Nothing
     }
@@ -1812,12 +1812,12 @@ instance FromJSON IconsListResponse where
         parseJSON
           = withObject "IconsListResponse"
               (\ o ->
-                 IconsListResponse <$>
+                 IconsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "icons" .!= mempty))
 
 instance ToJSON IconsListResponse where
-        toJSON IconsListResponse{..}
+        toJSON IconsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ilrNextPageToken,
@@ -1826,7 +1826,7 @@ instance ToJSON IconsListResponse where
 -- | Text label style.
 --
 -- /See:/ 'labelStyle' smart constructor.
-data LabelStyle = LabelStyle
+data LabelStyle = LabelStyle'
     { _lsFontStyle  :: !(Maybe LabelStyleFontStyle)
     , _lsColor      :: !(Maybe Text)
     , _lsSize       :: !(Maybe (Textual Double))
@@ -1856,7 +1856,7 @@ data LabelStyle = LabelStyle
 labelStyle
     :: LabelStyle
 labelStyle =
-    LabelStyle
+    LabelStyle'
     { _lsFontStyle = Nothing
     , _lsColor = Nothing
     , _lsSize = Nothing
@@ -1906,7 +1906,7 @@ instance FromJSON LabelStyle where
         parseJSON
           = withObject "LabelStyle"
               (\ o ->
-                 LabelStyle <$>
+                 LabelStyle' <$>
                    (o .:? "fontStyle") <*> (o .:? "color") <*>
                      (o .:? "size")
                      <*> (o .:? "opacity")
@@ -1915,7 +1915,7 @@ instance FromJSON LabelStyle where
                      <*> (o .:? "column"))
 
 instance ToJSON LabelStyle where
-        toJSON LabelStyle{..}
+        toJSON LabelStyle'{..}
           = object
               (catMaybes
                  [("fontStyle" .=) <$> _lsFontStyle,
@@ -1928,7 +1928,7 @@ instance ToJSON LabelStyle where
 -- | The request sent to rasterCollections.Rasters.BatchDelete.
 --
 -- /See:/ 'rasterCollectionsRasterBatchDeleteRequest' smart constructor.
-newtype RasterCollectionsRasterBatchDeleteRequest = RasterCollectionsRasterBatchDeleteRequest
+newtype RasterCollectionsRasterBatchDeleteRequest = RasterCollectionsRasterBatchDeleteRequest'
     { _rcrbdrIds :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1940,7 +1940,7 @@ newtype RasterCollectionsRasterBatchDeleteRequest = RasterCollectionsRasterBatch
 rasterCollectionsRasterBatchDeleteRequest
     :: RasterCollectionsRasterBatchDeleteRequest
 rasterCollectionsRasterBatchDeleteRequest =
-    RasterCollectionsRasterBatchDeleteRequest
+    RasterCollectionsRasterBatchDeleteRequest'
     { _rcrbdrIds = Nothing
     }
 
@@ -1957,19 +1957,19 @@ instance FromJSON
           = withObject
               "RasterCollectionsRasterBatchDeleteRequest"
               (\ o ->
-                 RasterCollectionsRasterBatchDeleteRequest <$>
+                 RasterCollectionsRasterBatchDeleteRequest' <$>
                    (o .:? "ids" .!= mempty))
 
 instance ToJSON
          RasterCollectionsRasterBatchDeleteRequest where
-        toJSON RasterCollectionsRasterBatchDeleteRequest{..}
+        toJSON RasterCollectionsRasterBatchDeleteRequest'{..}
           = object (catMaybes [("ids" .=) <$> _rcrbdrIds])
 
 -- | A schema indicating the properties which may be associated with features
 -- within a Table, and the types of those properties.
 --
 -- /See:/ 'schema' smart constructor.
-data Schema = Schema
+data Schema = Schema'
     { _sPrimaryKey      :: !(Maybe Text)
     , _sColumns         :: !(Maybe [TableColumn])
     , _sPrimaryGeometry :: !(Maybe Text)
@@ -1987,7 +1987,7 @@ data Schema = Schema
 schema
     :: Schema
 schema =
-    Schema
+    Schema'
     { _sPrimaryKey = Nothing
     , _sColumns = Nothing
     , _sPrimaryGeometry = Nothing
@@ -2020,12 +2020,12 @@ instance FromJSON Schema where
         parseJSON
           = withObject "Schema"
               (\ o ->
-                 Schema <$>
+                 Schema' <$>
                    (o .:? "primaryKey") <*> (o .:? "columns" .!= mempty)
                      <*> (o .:? "primaryGeometry"))
 
 instance ToJSON Schema where
-        toJSON Schema{..}
+        toJSON Schema'{..}
           = object
               (catMaybes
                  [("primaryKey" .=) <$> _sPrimaryKey,
@@ -2035,18 +2035,18 @@ instance ToJSON Schema where
 --
 -- /See:/ 'mapItem' smart constructor.
 data MapItem =
-    MapItem
+    MapItem'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapItem' with the minimum fields required to make a request.
 --
 mapItem
     :: MapItem
-mapItem = MapItem
+mapItem = MapItem'
 
 instance FromJSON MapItem where
         parseJSON
-          = withObject "MapItem" (\ o -> pure MapItem)
+          = withObject "MapItem" (\ o -> pure MapItem')
 
 instance ToJSON MapItem where
         toJSON = const emptyObject
@@ -2054,7 +2054,7 @@ instance ToJSON MapItem where
 -- | The request sent to rasterCollections.Rasters.BatchInsert.
 --
 -- /See:/ 'rasterCollectionsRastersBatchInsertRequest' smart constructor.
-newtype RasterCollectionsRastersBatchInsertRequest = RasterCollectionsRastersBatchInsertRequest
+newtype RasterCollectionsRastersBatchInsertRequest = RasterCollectionsRastersBatchInsertRequest'
     { _rcrbirIds :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2066,7 +2066,7 @@ newtype RasterCollectionsRastersBatchInsertRequest = RasterCollectionsRastersBat
 rasterCollectionsRastersBatchInsertRequest
     :: RasterCollectionsRastersBatchInsertRequest
 rasterCollectionsRastersBatchInsertRequest =
-    RasterCollectionsRastersBatchInsertRequest
+    RasterCollectionsRastersBatchInsertRequest'
     { _rcrbirIds = Nothing
     }
 
@@ -2083,18 +2083,19 @@ instance FromJSON
           = withObject
               "RasterCollectionsRastersBatchInsertRequest"
               (\ o ->
-                 RasterCollectionsRastersBatchInsertRequest <$>
+                 RasterCollectionsRastersBatchInsertRequest' <$>
                    (o .:? "ids" .!= mempty))
 
 instance ToJSON
          RasterCollectionsRastersBatchInsertRequest where
-        toJSON RasterCollectionsRastersBatchInsertRequest{..}
+        toJSON
+          RasterCollectionsRastersBatchInsertRequest'{..}
           = object (catMaybes [("ids" .=) <$> _rcrbirIds])
 
 -- | The published version of a map asset.
 --
 -- /See:/ 'publishedMap' smart constructor.
-data PublishedMap = PublishedMap
+data PublishedMap = PublishedMap'
     { _pmDefaultViewport :: !(Maybe [Textual Double])
     , _pmContents        :: !(Maybe [MapItem])
     , _pmName            :: !(Maybe Text)
@@ -2121,7 +2122,7 @@ data PublishedMap = PublishedMap
 publishedMap
     :: PublishedMap
 publishedMap =
-    PublishedMap
+    PublishedMap'
     { _pmDefaultViewport = Nothing
     , _pmContents = Nothing
     , _pmName = Nothing
@@ -2170,7 +2171,7 @@ instance FromJSON PublishedMap where
         parseJSON
           = withObject "PublishedMap"
               (\ o ->
-                 PublishedMap <$>
+                 PublishedMap' <$>
                    (o .:? "defaultViewport") <*> (o .:? "contents") <*>
                      (o .:? "name")
                      <*> (o .:? "id")
@@ -2178,7 +2179,7 @@ instance FromJSON PublishedMap where
                      <*> (o .:? "description"))
 
 instance ToJSON PublishedMap where
-        toJSON PublishedMap{..}
+        toJSON PublishedMap'{..}
           = object
               (catMaybes
                  [("defaultViewport" .=) <$> _pmDefaultViewport,
@@ -2190,7 +2191,7 @@ instance ToJSON PublishedMap where
 -- | Acquisition time represents acquired time of a raster.
 --
 -- /See:/ 'acquisitionTime' smart constructor.
-data AcquisitionTime = AcquisitionTime
+data AcquisitionTime = AcquisitionTime'
     { _atStart     :: !(Maybe DateTime')
     , _atPrecision :: !(Maybe AcquisitionTimePrecision)
     , _atEnd       :: !(Maybe DateTime')
@@ -2208,7 +2209,7 @@ data AcquisitionTime = AcquisitionTime
 acquisitionTime
     :: AcquisitionTime
 acquisitionTime =
-    AcquisitionTime
+    AcquisitionTime'
     { _atStart = Nothing
     , _atPrecision = Nothing
     , _atEnd = Nothing
@@ -2237,12 +2238,12 @@ instance FromJSON AcquisitionTime where
         parseJSON
           = withObject "AcquisitionTime"
               (\ o ->
-                 AcquisitionTime <$>
+                 AcquisitionTime' <$>
                    (o .:? "start") <*> (o .:? "precision") <*>
                      (o .:? "end"))
 
 instance ToJSON AcquisitionTime where
-        toJSON AcquisitionTime{..}
+        toJSON AcquisitionTime'{..}
           = object
               (catMaybes
                  [("start" .=) <$> _atStart,
@@ -2256,8 +2257,8 @@ instance ToJSON AcquisitionTime where
 -- each table.
 --
 -- /See:/ 'tablesListResponse' smart constructor.
-data TablesListResponse = TablesListResponse
-    { _tlrNextPageToken :: !(Maybe (Textual Word8))
+data TablesListResponse = TablesListResponse'
+    { _tlrNextPageToken :: !(Maybe Base64)
     , _tlrTables        :: !(Maybe [Table])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2271,17 +2272,17 @@ data TablesListResponse = TablesListResponse
 tablesListResponse
     :: TablesListResponse
 tablesListResponse =
-    TablesListResponse
+    TablesListResponse'
     { _tlrNextPageToken = Nothing
     , _tlrTables = Nothing
     }
 
 -- | Next page token.
-tlrNextPageToken :: Lens' TablesListResponse (Maybe Word8)
+tlrNextPageToken :: Lens' TablesListResponse (Maybe ByteString)
 tlrNextPageToken
   = lens _tlrNextPageToken
       (\ s a -> s{_tlrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Resources returned.
 tlrTables :: Lens' TablesListResponse [Table]
@@ -2294,12 +2295,12 @@ instance FromJSON TablesListResponse where
         parseJSON
           = withObject "TablesListResponse"
               (\ o ->
-                 TablesListResponse <$>
+                 TablesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "tables" .!= mempty))
 
 instance ToJSON TablesListResponse where
-        toJSON TablesListResponse{..}
+        toJSON TablesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tlrNextPageToken,
@@ -2308,7 +2309,7 @@ instance ToJSON TablesListResponse where
 -- | Style for icon, this is part of point style.
 --
 -- /See:/ 'iconStyle' smart constructor.
-data IconStyle = IconStyle
+data IconStyle = IconStyle'
     { _isScaledShape     :: !(Maybe ScaledShape)
     , _isScalingFunction :: !(Maybe ScalingFunction)
     , _isName            :: !(Maybe Text)
@@ -2329,7 +2330,7 @@ data IconStyle = IconStyle
 iconStyle
     :: IconStyle
 iconStyle =
-    IconStyle
+    IconStyle'
     { _isScaledShape = Nothing
     , _isScalingFunction = Nothing
     , _isName = Nothing
@@ -2363,13 +2364,13 @@ instance FromJSON IconStyle where
         parseJSON
           = withObject "IconStyle"
               (\ o ->
-                 IconStyle <$>
+                 IconStyle' <$>
                    (o .:? "scaledShape") <*> (o .:? "scalingFunction")
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON IconStyle where
-        toJSON IconStyle{..}
+        toJSON IconStyle'{..}
           = object
               (catMaybes
                  [("scaledShape" .=) <$> _isScaledShape,
@@ -2379,7 +2380,7 @@ instance ToJSON IconStyle where
 -- | A display rule of the vector style.
 --
 -- /See:/ 'displayRule' smart constructor.
-data DisplayRule = DisplayRule
+data DisplayRule = DisplayRule'
     { _drPointOptions   :: !(Maybe PointStyle)
     , _drPolygonOptions :: !(Maybe PolygonStyle)
     , _drZoomLevels     :: !(Maybe ZoomLevels)
@@ -2406,7 +2407,7 @@ data DisplayRule = DisplayRule
 displayRule
     :: DisplayRule
 displayRule =
-    DisplayRule
+    DisplayRule'
     { _drPointOptions = Nothing
     , _drPolygonOptions = Nothing
     , _drZoomLevels = Nothing
@@ -2456,7 +2457,7 @@ instance FromJSON DisplayRule where
         parseJSON
           = withObject "DisplayRule"
               (\ o ->
-                 DisplayRule <$>
+                 DisplayRule' <$>
                    (o .:? "pointOptions") <*> (o .:? "polygonOptions")
                      <*> (o .:? "zoomLevels")
                      <*> (o .:? "filters" .!= mempty)
@@ -2464,7 +2465,7 @@ instance FromJSON DisplayRule where
                      <*> (o .:? "lineOptions"))
 
 instance ToJSON DisplayRule where
-        toJSON DisplayRule{..}
+        toJSON DisplayRule'{..}
           = object
               (catMaybes
                  [("pointOptions" .=) <$> _drPointOptions,
@@ -2477,7 +2478,7 @@ instance ToJSON DisplayRule where
 -- | Border in line style. Both color and width are required.
 --
 -- /See:/ 'bOrder' smart constructor.
-data BOrder = BOrder
+data BOrder = BOrder'
     { _boColor   :: !(Maybe Text)
     , _boWidth   :: !(Maybe (Textual Double))
     , _boOpacity :: !(Maybe (Textual Double))
@@ -2495,7 +2496,7 @@ data BOrder = BOrder
 bOrder
     :: BOrder
 bOrder =
-    BOrder
+    BOrder'
     { _boColor = Nothing
     , _boWidth = Nothing
     , _boOpacity = Nothing
@@ -2521,12 +2522,12 @@ instance FromJSON BOrder where
         parseJSON
           = withObject "BOrder"
               (\ o ->
-                 BOrder <$>
+                 BOrder' <$>
                    (o .:? "color") <*> (o .:? "width") <*>
                      (o .:? "opacity"))
 
 instance ToJSON BOrder where
-        toJSON BOrder{..}
+        toJSON BOrder'{..}
           = object
               (catMaybes
                  [("color" .=) <$> _boColor,
@@ -2536,7 +2537,7 @@ instance ToJSON BOrder where
 -- | A Map is a collection of Layers, optionally contained within folders.
 --
 -- /See:/ 'map'' smart constructor.
-data Map = Map
+data Map = Map'
     { _mCreationTime              :: !(Maybe DateTime')
     , _mWritersCanEditPermissions :: !(Maybe Bool)
     , _mEtag                      :: !(Maybe Text)
@@ -2602,7 +2603,7 @@ data Map = Map
 map'
     :: Map
 map' =
-    Map
+    Map'
     { _mCreationTime = Nothing
     , _mWritersCanEditPermissions = Nothing
     , _mEtag = Nothing
@@ -2767,7 +2768,7 @@ instance FromJSON Map where
         parseJSON
           = withObject "Map"
               (\ o ->
-                 Map <$>
+                 Map' <$>
                    (o .:? "creationTime") <*>
                      (o .:? "writersCanEditPermissions")
                      <*> (o .:? "etag")
@@ -2789,7 +2790,7 @@ instance FromJSON Map where
                      <*> (o .:? "tags"))
 
 instance ToJSON Map where
-        toJSON Map{..}
+        toJSON Map'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _mCreationTime,
@@ -2814,7 +2815,7 @@ instance ToJSON Map where
 -- | The response returned by a call to rasterCollections.rasters.List.
 --
 -- /See:/ 'rasterCollectionsRastersListResponse' smart constructor.
-data RasterCollectionsRastersListResponse = RasterCollectionsRastersListResponse
+data RasterCollectionsRastersListResponse = RasterCollectionsRastersListResponse'
     { _rcrlrNextPageToken :: !(Maybe Text)
     , _rcrlrRasters       :: !(Maybe [RasterCollectionsRaster])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2829,7 +2830,7 @@ data RasterCollectionsRastersListResponse = RasterCollectionsRastersListResponse
 rasterCollectionsRastersListResponse
     :: RasterCollectionsRastersListResponse
 rasterCollectionsRastersListResponse =
-    RasterCollectionsRastersListResponse
+    RasterCollectionsRastersListResponse'
     { _rcrlrNextPageToken = Nothing
     , _rcrlrRasters = Nothing
     }
@@ -2852,13 +2853,13 @@ instance FromJSON
         parseJSON
           = withObject "RasterCollectionsRastersListResponse"
               (\ o ->
-                 RasterCollectionsRastersListResponse <$>
+                 RasterCollectionsRastersListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "rasters" .!= mempty))
 
 instance ToJSON RasterCollectionsRastersListResponse
          where
-        toJSON RasterCollectionsRastersListResponse{..}
+        toJSON RasterCollectionsRastersListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rcrlrNextPageToken,
@@ -2867,7 +2868,7 @@ instance ToJSON RasterCollectionsRastersListResponse
 -- | Multi Line String
 --
 -- /See:/ 'geoJSONMultiLineString' smart constructor.
-data GeoJSONMultiLineString = GeoJSONMultiLineString
+data GeoJSONMultiLineString = GeoJSONMultiLineString'
     { _gjmlsCoordinates :: !(Maybe [[[Textual Double]]])
     , _gjmlsType        :: !(Maybe GeoJSONMultiLineStringType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2882,7 +2883,7 @@ data GeoJSONMultiLineString = GeoJSONMultiLineString
 geoJSONMultiLineString
     :: GeoJSONMultiLineString
 geoJSONMultiLineString =
-    GeoJSONMultiLineString
+    GeoJSONMultiLineString'
     { _gjmlsCoordinates = Nothing
     , _gjmlsType = Nothing
     }
@@ -2904,11 +2905,11 @@ instance FromJSON GeoJSONMultiLineString where
         parseJSON
           = withObject "GeoJSONMultiLineString"
               (\ o ->
-                 GeoJSONMultiLineString <$>
+                 GeoJSONMultiLineString' <$>
                    (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
 
 instance ToJSON GeoJSONMultiLineString where
-        toJSON GeoJSONMultiLineString{..}
+        toJSON GeoJSONMultiLineString'{..}
           = object
               (catMaybes
                  [("coordinates" .=) <$> _gjmlsCoordinates,
@@ -2917,7 +2918,7 @@ instance ToJSON GeoJSONMultiLineString where
 -- | Parameters for scaling scaled shapes.
 --
 -- /See:/ 'scalingFunction' smart constructor.
-data ScalingFunction = ScalingFunction
+data ScalingFunction = ScalingFunction'
     { _sfValueRange  :: !(Maybe ValueRange)
     , _sfSizeRange   :: !(Maybe SizeRange)
     , _sfScalingType :: !(Maybe ScalingFunctionScalingType)
@@ -2938,7 +2939,7 @@ data ScalingFunction = ScalingFunction
 scalingFunction
     :: ScalingFunction
 scalingFunction =
-    ScalingFunction
+    ScalingFunction'
     { _sfValueRange = Nothing
     , _sfSizeRange = Nothing
     , _sfScalingType = Nothing
@@ -2971,13 +2972,13 @@ instance FromJSON ScalingFunction where
         parseJSON
           = withObject "ScalingFunction"
               (\ o ->
-                 ScalingFunction <$>
+                 ScalingFunction' <$>
                    (o .:? "valueRange") <*> (o .:? "sizeRange") <*>
                      (o .:? "scalingType")
                      <*> (o .:? "column"))
 
 instance ToJSON ScalingFunction where
-        toJSON ScalingFunction{..}
+        toJSON ScalingFunction'{..}
           = object
               (catMaybes
                  [("valueRange" .=) <$> _sfValueRange,
@@ -2988,8 +2989,8 @@ instance ToJSON ScalingFunction where
 -- | The response returned by a call to resources.List.
 --
 -- /See:/ 'assetsListResponse' smart constructor.
-data AssetsListResponse = AssetsListResponse
-    { _alrNextPageToken :: !(Maybe (Textual Word8))
+data AssetsListResponse = AssetsListResponse'
+    { _alrNextPageToken :: !(Maybe Base64)
     , _alrAssets        :: !(Maybe [Asset])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3003,17 +3004,17 @@ data AssetsListResponse = AssetsListResponse
 assetsListResponse
     :: AssetsListResponse
 assetsListResponse =
-    AssetsListResponse
+    AssetsListResponse'
     { _alrNextPageToken = Nothing
     , _alrAssets = Nothing
     }
 
 -- | Next page token.
-alrNextPageToken :: Lens' AssetsListResponse (Maybe Word8)
+alrNextPageToken :: Lens' AssetsListResponse (Maybe ByteString)
 alrNextPageToken
   = lens _alrNextPageToken
       (\ s a -> s{_alrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Assets returned.
 alrAssets :: Lens' AssetsListResponse [Asset]
@@ -3026,12 +3027,12 @@ instance FromJSON AssetsListResponse where
         parseJSON
           = withObject "AssetsListResponse"
               (\ o ->
-                 AssetsListResponse <$>
+                 AssetsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "assets" .!= mempty))
 
 instance ToJSON AssetsListResponse where
-        toJSON AssetsListResponse{..}
+        toJSON AssetsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _alrNextPageToken,
@@ -3041,19 +3042,19 @@ instance ToJSON AssetsListResponse where
 --
 -- /See:/ 'publishResponse' smart constructor.
 data PublishResponse =
-    PublishResponse
+    PublishResponse'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishResponse' with the minimum fields required to make a request.
 --
 publishResponse
     :: PublishResponse
-publishResponse = PublishResponse
+publishResponse = PublishResponse'
 
 instance FromJSON PublishResponse where
         parseJSON
           = withObject "PublishResponse"
-              (\ o -> pure PublishResponse)
+              (\ o -> pure PublishResponse')
 
 instance ToJSON PublishResponse where
         toJSON = const emptyObject
@@ -3061,7 +3062,7 @@ instance ToJSON PublishResponse where
 -- | The request sent to features.Insert.
 --
 -- /See:/ 'featuresBatchInsertRequest' smart constructor.
-data FeaturesBatchInsertRequest = FeaturesBatchInsertRequest
+data FeaturesBatchInsertRequest = FeaturesBatchInsertRequest'
     { _fbirFeatures            :: !(Maybe [Feature])
     , _fbirNormalizeGeometries :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3076,7 +3077,7 @@ data FeaturesBatchInsertRequest = FeaturesBatchInsertRequest
 featuresBatchInsertRequest
     :: FeaturesBatchInsertRequest
 featuresBatchInsertRequest =
-    FeaturesBatchInsertRequest
+    FeaturesBatchInsertRequest'
     { _fbirFeatures = Nothing
     , _fbirNormalizeGeometries = True
     }
@@ -3101,12 +3102,12 @@ instance FromJSON FeaturesBatchInsertRequest where
         parseJSON
           = withObject "FeaturesBatchInsertRequest"
               (\ o ->
-                 FeaturesBatchInsertRequest <$>
+                 FeaturesBatchInsertRequest' <$>
                    (o .:? "features" .!= mempty) <*>
                      (o .:? "normalizeGeometries" .!= True))
 
 instance ToJSON FeaturesBatchInsertRequest where
-        toJSON FeaturesBatchInsertRequest{..}
+        toJSON FeaturesBatchInsertRequest'{..}
           = object
               (catMaybes
                  [("features" .=) <$> _fbirFeatures,
@@ -3115,7 +3116,7 @@ instance ToJSON FeaturesBatchInsertRequest where
 
 --
 -- /See:/ 'datasource' smart constructor.
-newtype Datasource = Datasource
+newtype Datasource = Datasource'
     { _dId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3127,7 +3128,7 @@ newtype Datasource = Datasource
 datasource
     :: Datasource
 datasource =
-    Datasource
+    Datasource'
     { _dId = Nothing
     }
 
@@ -3138,16 +3139,16 @@ dId = lens _dId (\ s a -> s{_dId = a})
 instance FromJSON Datasource where
         parseJSON
           = withObject "Datasource"
-              (\ o -> Datasource <$> (o .:? "id"))
+              (\ o -> Datasource' <$> (o .:? "id"))
 
 instance ToJSON Datasource where
-        toJSON Datasource{..}
+        toJSON Datasource'{..}
           = object (catMaybes [("id" .=) <$> _dId])
 
 -- | A raster resource.
 --
 -- /See:/ 'rasterCollectionsRaster' smart constructor.
-data RasterCollectionsRaster = RasterCollectionsRaster
+data RasterCollectionsRaster = RasterCollectionsRaster'
     { _rcrCreationTime     :: !(Maybe DateTime')
     , _rcrRasterType       :: !Text
     , _rcrLastModifiedTime :: !(Maybe DateTime')
@@ -3183,7 +3184,7 @@ data RasterCollectionsRaster = RasterCollectionsRaster
 rasterCollectionsRaster
     :: RasterCollectionsRaster
 rasterCollectionsRaster =
-    RasterCollectionsRaster
+    RasterCollectionsRaster'
     { _rcrCreationTime = Nothing
     , _rcrRasterType = "image"
     , _rcrLastModifiedTime = Nothing
@@ -3254,7 +3255,7 @@ instance FromJSON RasterCollectionsRaster where
         parseJSON
           = withObject "RasterCollectionsRaster"
               (\ o ->
-                 RasterCollectionsRaster <$>
+                 RasterCollectionsRaster' <$>
                    (o .:? "creationTime") <*>
                      (o .:? "rasterType" .!= "image")
                      <*> (o .:? "lastModifiedTime")
@@ -3266,7 +3267,7 @@ instance FromJSON RasterCollectionsRaster where
                      <*> (o .:? "tags" .!= mempty))
 
 instance ToJSON RasterCollectionsRaster where
-        toJSON RasterCollectionsRaster{..}
+        toJSON RasterCollectionsRaster'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _rcrCreationTime,
@@ -3281,7 +3282,7 @@ instance ToJSON RasterCollectionsRaster where
 -- | Conditions for filtering features.
 --
 -- /See:/ 'filter'' smart constructor.
-data Filter = Filter
+data Filter = Filter'
     { _fOperator :: !(Maybe FilterOperator)
     , _fValue    :: !(Maybe JSONValue)
     , _fColumn   :: !(Maybe Text)
@@ -3299,7 +3300,7 @@ data Filter = Filter
 filter'
     :: Filter
 filter' =
-    Filter
+    Filter'
     { _fOperator = Nothing
     , _fValue = Nothing
     , _fColumn = Nothing
@@ -3322,12 +3323,12 @@ instance FromJSON Filter where
         parseJSON
           = withObject "Filter"
               (\ o ->
-                 Filter <$>
+                 Filter' <$>
                    (o .:? "operator") <*> (o .:? "value") <*>
                      (o .:? "column"))
 
 instance ToJSON Filter where
-        toJSON Filter{..}
+        toJSON Filter'{..}
           = object
               (catMaybes
                  [("operator" .=) <$> _fOperator,
@@ -3336,7 +3337,7 @@ instance ToJSON Filter where
 
 --
 -- /See:/ 'geoJSONMultiPoint' smart constructor.
-data GeoJSONMultiPoint = GeoJSONMultiPoint
+data GeoJSONMultiPoint = GeoJSONMultiPoint'
     { _gjmpCoordinates :: !(Maybe [[Textual Double]])
     , _gjmpType        :: !(Maybe GeoJSONMultiPointType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3351,7 +3352,7 @@ data GeoJSONMultiPoint = GeoJSONMultiPoint
 geoJSONMultiPoint
     :: GeoJSONMultiPoint
 geoJSONMultiPoint =
-    GeoJSONMultiPoint
+    GeoJSONMultiPoint'
     { _gjmpCoordinates = Nothing
     , _gjmpType = Nothing
     }
@@ -3372,11 +3373,11 @@ instance FromJSON GeoJSONMultiPoint where
         parseJSON
           = withObject "GeoJSONMultiPoint"
               (\ o ->
-                 GeoJSONMultiPoint <$>
+                 GeoJSONMultiPoint' <$>
                    (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
 
 instance ToJSON GeoJSONMultiPoint where
-        toJSON GeoJSONMultiPoint{..}
+        toJSON GeoJSONMultiPoint'{..}
           = object
               (catMaybes
                  [("coordinates" .=) <$> _gjmpCoordinates,
@@ -3384,7 +3385,7 @@ instance ToJSON GeoJSONMultiPoint where
 
 --
 -- /See:/ 'geoJSONMultiPolygon' smart constructor.
-data GeoJSONMultiPolygon = GeoJSONMultiPolygon
+data GeoJSONMultiPolygon = GeoJSONMultiPolygon'
     { _gjsonmpCoordinates :: !(Maybe [[[[Textual Double]]]])
     , _gjsonmpType        :: !(Maybe GeoJSONMultiPolygonType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3399,7 +3400,7 @@ data GeoJSONMultiPolygon = GeoJSONMultiPolygon
 geoJSONMultiPolygon
     :: GeoJSONMultiPolygon
 geoJSONMultiPolygon =
-    GeoJSONMultiPolygon
+    GeoJSONMultiPolygon'
     { _gjsonmpCoordinates = Nothing
     , _gjsonmpType = Nothing
     }
@@ -3421,11 +3422,11 @@ instance FromJSON GeoJSONMultiPolygon where
         parseJSON
           = withObject "GeoJSONMultiPolygon"
               (\ o ->
-                 GeoJSONMultiPolygon <$>
+                 GeoJSONMultiPolygon' <$>
                    (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
 
 instance ToJSON GeoJSONMultiPolygon where
-        toJSON GeoJSONMultiPolygon{..}
+        toJSON GeoJSONMultiPolygon'{..}
           = object
               (catMaybes
                  [("coordinates" .=) <$> _gjsonmpCoordinates,
@@ -3435,7 +3436,7 @@ instance ToJSON GeoJSONMultiPolygon where
 -- presentation on a map.
 --
 -- /See:/ 'layer' smart constructor.
-data Layer = Layer
+data Layer = Layer'
     { _layCreationTime              :: !(Maybe DateTime')
     , _layWritersCanEditPermissions :: !(Maybe Bool)
     , _layStyle                     :: !(Maybe VectorStyle)
@@ -3504,7 +3505,7 @@ data Layer = Layer
 layer
     :: Layer
 layer =
-    Layer
+    Layer'
     { _layCreationTime = Nothing
     , _layWritersCanEditPermissions = Nothing
     , _layStyle = Nothing
@@ -3679,7 +3680,7 @@ instance FromJSON Layer where
         parseJSON
           = withObject "Layer"
               (\ o ->
-                 Layer <$>
+                 Layer' <$>
                    (o .:? "creationTime") <*>
                      (o .:? "writersCanEditPermissions")
                      <*> (o .:? "style")
@@ -3702,7 +3703,7 @@ instance FromJSON Layer where
                      <*> (o .:? "tags"))
 
 instance ToJSON Layer where
-        toJSON Layer{..}
+        toJSON Layer'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _layCreationTime,
@@ -3729,7 +3730,7 @@ instance ToJSON Layer where
 -- | Style for points.
 --
 -- /See:/ 'pointStyle' smart constructor.
-data PointStyle = PointStyle
+data PointStyle = PointStyle'
     { _psIcon  :: !(Maybe IconStyle)
     , _psLabel :: !(Maybe LabelStyle)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3744,7 +3745,7 @@ data PointStyle = PointStyle
 pointStyle
     :: PointStyle
 pointStyle =
-    PointStyle
+    PointStyle'
     { _psIcon = Nothing
     , _psLabel = Nothing
     }
@@ -3762,10 +3763,10 @@ instance FromJSON PointStyle where
         parseJSON
           = withObject "PointStyle"
               (\ o ->
-                 PointStyle <$> (o .:? "icon") <*> (o .:? "label"))
+                 PointStyle' <$> (o .:? "icon") <*> (o .:? "label"))
 
 instance ToJSON PointStyle where
-        toJSON PointStyle{..}
+        toJSON PointStyle'{..}
           = object
               (catMaybes
                  [("icon" .=) <$> _psIcon, ("label" .=) <$> _psLabel])
@@ -3773,7 +3774,7 @@ instance ToJSON PointStyle where
 -- | A geo-referenced raster.
 --
 -- /See:/ 'raster' smart constructor.
-data Raster = Raster
+data Raster = Raster'
     { _rrCreationTime              :: !(Maybe DateTime')
     , _rrWritersCanEditPermissions :: !(Maybe Bool)
     , _rrMaskType                  :: !Text
@@ -3839,7 +3840,7 @@ data Raster = Raster
 raster
     :: Raster
 raster =
-    Raster
+    Raster'
     { _rrCreationTime = Nothing
     , _rrWritersCanEditPermissions = Nothing
     , _rrMaskType = "autoMask"
@@ -3986,7 +3987,7 @@ instance FromJSON Raster where
         parseJSON
           = withObject "Raster"
               (\ o ->
-                 Raster <$>
+                 Raster' <$>
                    (o .:? "creationTime") <*>
                      (o .:? "writersCanEditPermissions")
                      <*> (o .:? "maskType" .!= "autoMask")
@@ -4008,7 +4009,7 @@ instance FromJSON Raster where
                      <*> (o .:? "tags"))
 
 instance ToJSON Raster where
-        toJSON Raster{..}
+        toJSON Raster'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _rrCreationTime,
@@ -4033,7 +4034,7 @@ instance ToJSON Raster where
 -- | Style for polygons.
 --
 -- /See:/ 'polygonStyle' smart constructor.
-data PolygonStyle = PolygonStyle
+data PolygonStyle = PolygonStyle'
     { _pStroke :: !(Maybe BOrder)
     , _pFill   :: !(Maybe Color)
     , _pLabel  :: !(Maybe LabelStyle)
@@ -4051,7 +4052,7 @@ data PolygonStyle = PolygonStyle
 polygonStyle
     :: PolygonStyle
 polygonStyle =
-    PolygonStyle
+    PolygonStyle'
     { _pStroke = Nothing
     , _pFill = Nothing
     , _pLabel = Nothing
@@ -4074,12 +4075,12 @@ instance FromJSON PolygonStyle where
         parseJSON
           = withObject "PolygonStyle"
               (\ o ->
-                 PolygonStyle <$>
+                 PolygonStyle' <$>
                    (o .:? "stroke") <*> (o .:? "fill") <*>
                      (o .:? "label"))
 
 instance ToJSON PolygonStyle where
-        toJSON PolygonStyle{..}
+        toJSON PolygonStyle'{..}
           = object
               (catMaybes
                  [("stroke" .=) <$> _pStroke, ("fill" .=) <$> _pFill,
@@ -4089,7 +4090,7 @@ instance ToJSON PolygonStyle where
 -- the type of access they have.
 --
 -- /See:/ 'permission' smart constructor.
-data Permission = Permission
+data Permission = Permission'
     { _perRole         :: !(Maybe PermissionRole)
     , _perId           :: !(Maybe Text)
     , _perType         :: !(Maybe PermissionType)
@@ -4110,7 +4111,7 @@ data Permission = Permission
 permission
     :: Permission
 permission =
-    Permission
+    Permission'
     { _perRole = Nothing
     , _perId = Nothing
     , _perType = Nothing
@@ -4143,12 +4144,12 @@ instance FromJSON Permission where
         parseJSON
           = withObject "Permission"
               (\ o ->
-                 Permission <$>
+                 Permission' <$>
                    (o .:? "role") <*> (o .:? "id") <*> (o .:? "type")
                      <*> (o .:? "discoverable"))
 
 instance ToJSON Permission where
-        toJSON Permission{..}
+        toJSON Permission'{..}
           = object
               (catMaybes
                  [("role" .=) <$> _perRole, ("id" .=) <$> _perId,
@@ -4158,7 +4159,7 @@ instance ToJSON Permission where
 -- | The published version of a layer.
 --
 -- /See:/ 'publishedLayer' smart constructor.
-data PublishedLayer = PublishedLayer
+data PublishedLayer = PublishedLayer'
     { _plLayerType   :: !(Maybe PublishedLayerLayerType)
     , _plName        :: !(Maybe Text)
     , _plId          :: !(Maybe Text)
@@ -4182,7 +4183,7 @@ data PublishedLayer = PublishedLayer
 publishedLayer
     :: PublishedLayer
 publishedLayer =
-    PublishedLayer
+    PublishedLayer'
     { _plLayerType = Nothing
     , _plName = Nothing
     , _plId = Nothing
@@ -4220,14 +4221,14 @@ instance FromJSON PublishedLayer where
         parseJSON
           = withObject "PublishedLayer"
               (\ o ->
-                 PublishedLayer <$>
+                 PublishedLayer' <$>
                    (o .:? "layerType") <*> (o .:? "name") <*>
                      (o .:? "id")
                      <*> (o .:? "projectId")
                      <*> (o .:? "description"))
 
 instance ToJSON PublishedLayer where
-        toJSON PublishedLayer{..}
+        toJSON PublishedLayer'{..}
           = object
               (catMaybes
                  [("layerType" .=) <$> _plLayerType,
@@ -4238,7 +4239,7 @@ instance ToJSON PublishedLayer where
 -- | A collection of geographic features, and associated metadata.
 --
 -- /See:/ 'table' smart constructor.
-data Table = Table
+data Table = Table'
     { _tabCreationTime              :: !(Maybe DateTime')
     , _tabWritersCanEditPermissions :: !(Maybe Bool)
     , _tabEtag                      :: !(Maybe Text)
@@ -4301,7 +4302,7 @@ data Table = Table
 table
     :: Table
 table =
-    Table
+    Table'
     { _tabCreationTime = Nothing
     , _tabWritersCanEditPermissions = Nothing
     , _tabEtag = Nothing
@@ -4457,7 +4458,7 @@ instance FromJSON Table where
         parseJSON
           = withObject "Table"
               (\ o ->
-                 Table <$>
+                 Table' <$>
                    (o .:? "creationTime") <*>
                      (o .:? "writersCanEditPermissions")
                      <*> (o .:? "etag")
@@ -4478,7 +4479,7 @@ instance FromJSON Table where
                      <*> (o .:? "tags"))
 
 instance ToJSON Table where
-        toJSON Table{..}
+        toJSON Table'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _tabCreationTime,
@@ -4503,7 +4504,7 @@ instance ToJSON Table where
 -- | A single File, which is a component of an Asset.
 --
 -- /See:/ 'file' smart constructor.
-data File = File
+data File = File'
     { _fSize         :: !(Maybe (Textual Int64))
     , _fUploadStatus :: !(Maybe FileUploadStatus)
     , _fFilename     :: !(Maybe Text)
@@ -4521,7 +4522,7 @@ data File = File
 file
     :: File
 file =
-    File
+    File'
     { _fSize = Nothing
     , _fUploadStatus = Nothing
     , _fFilename = Nothing
@@ -4548,12 +4549,12 @@ instance FromJSON File where
         parseJSON
           = withObject "File"
               (\ o ->
-                 File <$>
+                 File' <$>
                    (o .:? "size") <*> (o .:? "uploadStatus") <*>
                      (o .:? "filename"))
 
 instance ToJSON File where
-        toJSON File{..}
+        toJSON File'{..}
           = object
               (catMaybes
                  [("size" .=) <$> _fSize,
@@ -4563,7 +4564,7 @@ instance ToJSON File where
 -- | A vector style contains styling information for vector layer.
 --
 -- /See:/ 'vectorStyle' smart constructor.
-data VectorStyle = VectorStyle
+data VectorStyle = VectorStyle'
     { _vsDisplayRules :: !(Maybe [DisplayRule])
     , _vsFeatureInfo  :: !(Maybe FeatureInfo)
     , _vsType         :: !(Maybe VectorStyleType)
@@ -4581,7 +4582,7 @@ data VectorStyle = VectorStyle
 vectorStyle
     :: VectorStyle
 vectorStyle =
-    VectorStyle
+    VectorStyle'
     { _vsDisplayRules = Nothing
     , _vsFeatureInfo = Nothing
     , _vsType = Nothing
@@ -4610,13 +4611,13 @@ instance FromJSON VectorStyle where
         parseJSON
           = withObject "VectorStyle"
               (\ o ->
-                 VectorStyle <$>
+                 VectorStyle' <$>
                    (o .:? "displayRules" .!= mempty) <*>
                      (o .:? "featureInfo")
                      <*> (o .:? "type"))
 
 instance ToJSON VectorStyle where
-        toJSON VectorStyle{..}
+        toJSON VectorStyle'{..}
           = object
               (catMaybes
                  [("displayRules" .=) <$> _vsDisplayRules,
@@ -4627,27 +4628,27 @@ instance ToJSON VectorStyle where
 --
 -- /See:/ 'permissionsBatchDeleteResponse' smart constructor.
 data PermissionsBatchDeleteResponse =
-    PermissionsBatchDeleteResponse
+    PermissionsBatchDeleteResponse'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsBatchDeleteResponse' with the minimum fields required to make a request.
 --
 permissionsBatchDeleteResponse
     :: PermissionsBatchDeleteResponse
-permissionsBatchDeleteResponse = PermissionsBatchDeleteResponse
+permissionsBatchDeleteResponse = PermissionsBatchDeleteResponse'
 
 instance FromJSON PermissionsBatchDeleteResponse
          where
         parseJSON
           = withObject "PermissionsBatchDeleteResponse"
-              (\ o -> pure PermissionsBatchDeleteResponse)
+              (\ o -> pure PermissionsBatchDeleteResponse')
 
 instance ToJSON PermissionsBatchDeleteResponse where
         toJSON = const emptyObject
 
 --
 -- /See:/ 'mapKmlLink' smart constructor.
-data MapKmlLink = MapKmlLink
+data MapKmlLink = MapKmlLink'
     { _mklDefaultViewport :: !(Maybe [Textual Double])
     , _mklVisibility      :: !(Maybe Text)
     , _mklName            :: !(Maybe Text)
@@ -4671,7 +4672,7 @@ data MapKmlLink = MapKmlLink
 mapKmlLink
     :: MapKmlLink
 mapKmlLink =
-    MapKmlLink
+    MapKmlLink'
     { _mklDefaultViewport = Nothing
     , _mklVisibility = Nothing
     , _mklName = Nothing
@@ -4713,7 +4714,7 @@ instance FromJSON MapKmlLink where
         parseJSON
           = withObject "MapKmlLink"
               (\ o ->
-                 MapKmlLink <$>
+                 MapKmlLink' <$>
                    (o .:? "defaultViewport" .!= mempty) <*>
                      (o .:? "visibility")
                      <*> (o .:? "name")
@@ -4721,7 +4722,7 @@ instance FromJSON MapKmlLink where
                      <*> (o .:? "kmlUrl"))
 
 instance ToJSON MapKmlLink where
-        toJSON MapKmlLink{..}
+        toJSON MapKmlLink'{..}
           = object
               (catMaybes
                  [("defaultViewport" .=) <$> _mklDefaultViewport,
@@ -4733,27 +4734,27 @@ instance ToJSON MapKmlLink where
 --
 -- /See:/ 'permissionsBatchUpdateResponse' smart constructor.
 data PermissionsBatchUpdateResponse =
-    PermissionsBatchUpdateResponse
+    PermissionsBatchUpdateResponse'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsBatchUpdateResponse' with the minimum fields required to make a request.
 --
 permissionsBatchUpdateResponse
     :: PermissionsBatchUpdateResponse
-permissionsBatchUpdateResponse = PermissionsBatchUpdateResponse
+permissionsBatchUpdateResponse = PermissionsBatchUpdateResponse'
 
 instance FromJSON PermissionsBatchUpdateResponse
          where
         parseJSON
           = withObject "PermissionsBatchUpdateResponse"
-              (\ o -> pure PermissionsBatchUpdateResponse)
+              (\ o -> pure PermissionsBatchUpdateResponse')
 
 instance ToJSON PermissionsBatchUpdateResponse where
         toJSON = const emptyObject
 
 --
 -- /See:/ 'geoJSONLineString' smart constructor.
-data GeoJSONLineString = GeoJSONLineString
+data GeoJSONLineString = GeoJSONLineString'
     { _gjlsCoordinates :: !(Maybe [[Textual Double]])
     , _gjlsType        :: !(Maybe GeoJSONLineStringType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4768,7 +4769,7 @@ data GeoJSONLineString = GeoJSONLineString
 geoJSONLineString
     :: GeoJSONLineString
 geoJSONLineString =
-    GeoJSONLineString
+    GeoJSONLineString'
     { _gjlsCoordinates = Nothing
     , _gjlsType = Nothing
     }
@@ -4789,11 +4790,11 @@ instance FromJSON GeoJSONLineString where
         parseJSON
           = withObject "GeoJSONLineString"
               (\ o ->
-                 GeoJSONLineString <$>
+                 GeoJSONLineString' <$>
                    (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
 
 instance ToJSON GeoJSONLineString where
-        toJSON GeoJSONLineString{..}
+        toJSON GeoJSONLineString'{..}
           = object
               (catMaybes
                  [("coordinates" .=) <$> _gjlsCoordinates,
@@ -4802,9 +4803,9 @@ instance ToJSON GeoJSONLineString where
 -- | The response returned by a call to maps.List.published.
 --
 -- /See:/ 'publishedMapsListResponse' smart constructor.
-data PublishedMapsListResponse = PublishedMapsListResponse
+data PublishedMapsListResponse = PublishedMapsListResponse'
     { _pmlrMaps          :: !(Maybe [PublishedMap])
-    , _pmlrNextPageToken :: !(Maybe (Textual Word8))
+    , _pmlrNextPageToken :: !(Maybe Base64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishedMapsListResponse' with the minimum fields required to make a request.
@@ -4817,7 +4818,7 @@ data PublishedMapsListResponse = PublishedMapsListResponse
 publishedMapsListResponse
     :: PublishedMapsListResponse
 publishedMapsListResponse =
-    PublishedMapsListResponse
+    PublishedMapsListResponse'
     { _pmlrMaps = Nothing
     , _pmlrNextPageToken = Nothing
     }
@@ -4830,22 +4831,22 @@ pmlrMaps
       . _Coerce
 
 -- | Next page token.
-pmlrNextPageToken :: Lens' PublishedMapsListResponse (Maybe Word8)
+pmlrNextPageToken :: Lens' PublishedMapsListResponse (Maybe ByteString)
 pmlrNextPageToken
   = lens _pmlrNextPageToken
       (\ s a -> s{_pmlrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON PublishedMapsListResponse where
         parseJSON
           = withObject "PublishedMapsListResponse"
               (\ o ->
-                 PublishedMapsListResponse <$>
+                 PublishedMapsListResponse' <$>
                    (o .:? "maps" .!= mempty) <*>
                      (o .:? "nextPageToken"))
 
 instance ToJSON PublishedMapsListResponse where
-        toJSON PublishedMapsListResponse{..}
+        toJSON PublishedMapsListResponse'{..}
           = object
               (catMaybes
                  [("maps" .=) <$> _pmlrMaps,
@@ -4854,9 +4855,9 @@ instance ToJSON PublishedMapsListResponse where
 -- | The response returned by a call to maps.List.
 --
 -- /See:/ 'mapsListResponse' smart constructor.
-data MapsListResponse = MapsListResponse
+data MapsListResponse = MapsListResponse'
     { _mlrMaps          :: !(Maybe [Map])
-    , _mlrNextPageToken :: !(Maybe (Textual Word8))
+    , _mlrNextPageToken :: !(Maybe Base64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsListResponse' with the minimum fields required to make a request.
@@ -4869,7 +4870,7 @@ data MapsListResponse = MapsListResponse
 mapsListResponse
     :: MapsListResponse
 mapsListResponse =
-    MapsListResponse
+    MapsListResponse'
     { _mlrMaps = Nothing
     , _mlrNextPageToken = Nothing
     }
@@ -4881,22 +4882,22 @@ mlrMaps
       . _Coerce
 
 -- | Next page token.
-mlrNextPageToken :: Lens' MapsListResponse (Maybe Word8)
+mlrNextPageToken :: Lens' MapsListResponse (Maybe ByteString)
 mlrNextPageToken
   = lens _mlrNextPageToken
       (\ s a -> s{_mlrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON MapsListResponse where
         parseJSON
           = withObject "MapsListResponse"
               (\ o ->
-                 MapsListResponse <$>
+                 MapsListResponse' <$>
                    (o .:? "maps" .!= mempty) <*>
                      (o .:? "nextPageToken"))
 
 instance ToJSON MapsListResponse where
-        toJSON MapsListResponse{..}
+        toJSON MapsListResponse'{..}
           = object
               (catMaybes
                  [("maps" .=) <$> _mlrMaps,
@@ -4905,7 +4906,7 @@ instance ToJSON MapsListResponse where
 -- | A heterogenous collection of GeoJsonGeometry objects.
 --
 -- /See:/ 'geoJSONGeometryCollection' smart constructor.
-data GeoJSONGeometryCollection = GeoJSONGeometryCollection
+data GeoJSONGeometryCollection = GeoJSONGeometryCollection'
     { _gjgcGeometries :: !(Maybe [GeoJSONGeometry])
     , _gjgcType       :: !(Maybe GeoJSONGeometryCollectionType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4920,7 +4921,7 @@ data GeoJSONGeometryCollection = GeoJSONGeometryCollection
 geoJSONGeometryCollection
     :: GeoJSONGeometryCollection
 geoJSONGeometryCollection =
-    GeoJSONGeometryCollection
+    GeoJSONGeometryCollection'
     { _gjgcGeometries = Nothing
     , _gjgcType = Nothing
     }
@@ -4942,11 +4943,11 @@ instance FromJSON GeoJSONGeometryCollection where
         parseJSON
           = withObject "GeoJSONGeometryCollection"
               (\ o ->
-                 GeoJSONGeometryCollection <$>
+                 GeoJSONGeometryCollection' <$>
                    (o .:? "geometries" .!= mempty) <*> (o .:? "type"))
 
 instance ToJSON GeoJSONGeometryCollection where
-        toJSON GeoJSONGeometryCollection{..}
+        toJSON GeoJSONGeometryCollection'{..}
           = object
               (catMaybes
                  [("geometries" .=) <$> _gjgcGeometries,
@@ -4954,7 +4955,7 @@ instance ToJSON GeoJSONGeometryCollection where
 
 --
 -- /See:/ 'geoJSONPolygon' smart constructor.
-data GeoJSONPolygon = GeoJSONPolygon
+data GeoJSONPolygon = GeoJSONPolygon'
     { _gjpCoordinates :: !(Maybe [[[Textual Double]]])
     , _gjpType        :: !(Maybe GeoJSONPolygonType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4969,7 +4970,7 @@ data GeoJSONPolygon = GeoJSONPolygon
 geoJSONPolygon
     :: GeoJSONPolygon
 geoJSONPolygon =
-    GeoJSONPolygon
+    GeoJSONPolygon'
     { _gjpCoordinates = Nothing
     , _gjpType = Nothing
     }
@@ -4994,11 +4995,11 @@ instance FromJSON GeoJSONPolygon where
         parseJSON
           = withObject "GeoJSONPolygon"
               (\ o ->
-                 GeoJSONPolygon <$>
+                 GeoJSONPolygon' <$>
                    (o .:? "coordinates" .!= mempty) <*> (o .:? "type"))
 
 instance ToJSON GeoJSONPolygon where
-        toJSON GeoJSONPolygon{..}
+        toJSON GeoJSONPolygon'{..}
           = object
               (catMaybes
                  [("coordinates" .=) <$> _gjpCoordinates,
@@ -5006,7 +5007,7 @@ instance ToJSON GeoJSONPolygon where
 
 --
 -- /See:/ 'geoJSONPoint' smart constructor.
-data GeoJSONPoint = GeoJSONPoint
+data GeoJSONPoint = GeoJSONPoint'
     { _gjsonpCoordinates :: !(Maybe [Textual Double])
     , _gjsonpType        :: !(Maybe GeoJSONPointType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5021,7 +5022,7 @@ data GeoJSONPoint = GeoJSONPoint
 geoJSONPoint
     :: GeoJSONPoint
 geoJSONPoint =
-    GeoJSONPoint
+    GeoJSONPoint'
     { _gjsonpCoordinates = Nothing
     , _gjsonpType = Nothing
     }
@@ -5043,11 +5044,11 @@ instance FromJSON GeoJSONPoint where
         parseJSON
           = withObject "GeoJSONPoint"
               (\ o ->
-                 GeoJSONPoint <$>
+                 GeoJSONPoint' <$>
                    (o .:? "coordinates") <*> (o .:? "type"))
 
 instance ToJSON GeoJSONPoint where
-        toJSON GeoJSONPoint{..}
+        toJSON GeoJSONPoint'{..}
           = object
               (catMaybes
                  [("coordinates" .=) <$> _gjsonpCoordinates,
@@ -5060,8 +5061,8 @@ instance ToJSON GeoJSONPoint where
 -- each layer.
 --
 -- /See:/ 'layersListResponse' smart constructor.
-data LayersListResponse = LayersListResponse
-    { _llrNextPageToken :: !(Maybe (Textual Word8))
+data LayersListResponse = LayersListResponse'
+    { _llrNextPageToken :: !(Maybe Base64)
     , _llrLayers        :: !(Maybe [Layer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5075,17 +5076,17 @@ data LayersListResponse = LayersListResponse
 layersListResponse
     :: LayersListResponse
 layersListResponse =
-    LayersListResponse
+    LayersListResponse'
     { _llrNextPageToken = Nothing
     , _llrLayers = Nothing
     }
 
 -- | Next page token.
-llrNextPageToken :: Lens' LayersListResponse (Maybe Word8)
+llrNextPageToken :: Lens' LayersListResponse (Maybe ByteString)
 llrNextPageToken
   = lens _llrNextPageToken
       (\ s a -> s{_llrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Resources returned.
 llrLayers :: Lens' LayersListResponse [Layer]
@@ -5098,12 +5099,12 @@ instance FromJSON LayersListResponse where
         parseJSON
           = withObject "LayersListResponse"
               (\ o ->
-                 LayersListResponse <$>
+                 LayersListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "layers" .!= mempty))
 
 instance ToJSON LayersListResponse where
-        toJSON LayersListResponse{..}
+        toJSON LayersListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _llrNextPageToken,
@@ -5112,7 +5113,7 @@ instance ToJSON LayersListResponse where
 -- | The response returned by a call to rasters.List.
 --
 -- /See:/ 'rastersListResponse' smart constructor.
-data RastersListResponse = RastersListResponse
+data RastersListResponse = RastersListResponse'
     { _rlrNextPageToken :: !(Maybe Text)
     , _rlrRasters       :: !(Maybe [Raster])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5127,7 +5128,7 @@ data RastersListResponse = RastersListResponse
 rastersListResponse
     :: RastersListResponse
 rastersListResponse =
-    RastersListResponse
+    RastersListResponse'
     { _rlrNextPageToken = Nothing
     , _rlrRasters = Nothing
     }
@@ -5149,12 +5150,12 @@ instance FromJSON RastersListResponse where
         parseJSON
           = withObject "RastersListResponse"
               (\ o ->
-                 RastersListResponse <$>
+                 RastersListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "rasters" .!= mempty))
 
 instance ToJSON RastersListResponse where
-        toJSON RastersListResponse{..}
+        toJSON RastersListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rlrNextPageToken,
@@ -5162,7 +5163,7 @@ instance ToJSON RastersListResponse where
 
 --
 -- /See:/ 'permissionsListResponse' smart constructor.
-newtype PermissionsListResponse = PermissionsListResponse
+newtype PermissionsListResponse = PermissionsListResponse'
     { _plrPermissions :: Maybe [Permission]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5174,7 +5175,7 @@ newtype PermissionsListResponse = PermissionsListResponse
 permissionsListResponse
     :: PermissionsListResponse
 permissionsListResponse =
-    PermissionsListResponse
+    PermissionsListResponse'
     { _plrPermissions = Nothing
     }
 
@@ -5190,18 +5191,18 @@ instance FromJSON PermissionsListResponse where
         parseJSON
           = withObject "PermissionsListResponse"
               (\ o ->
-                 PermissionsListResponse <$>
+                 PermissionsListResponse' <$>
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON PermissionsListResponse where
-        toJSON PermissionsListResponse{..}
+        toJSON PermissionsListResponse'{..}
           = object
               (catMaybes [("permissions" .=) <$> _plrPermissions])
 
 -- | Style for lines.
 --
 -- /See:/ 'lineStyle' smart constructor.
-data LineStyle = LineStyle
+data LineStyle = LineStyle'
     { _lsStroke :: !(Maybe LineStyleStroke)
     , _lsBOrder :: !(Maybe BOrder)
     , _lsDash   :: !(Maybe [Textual Double])
@@ -5222,7 +5223,7 @@ data LineStyle = LineStyle
 lineStyle
     :: LineStyle
 lineStyle =
-    LineStyle
+    LineStyle'
     { _lsStroke = Nothing
     , _lsBOrder = Nothing
     , _lsDash = Nothing
@@ -5254,13 +5255,13 @@ instance FromJSON LineStyle where
         parseJSON
           = withObject "LineStyle"
               (\ o ->
-                 LineStyle <$>
+                 LineStyle' <$>
                    (o .:? "stroke") <*> (o .:? "border") <*>
                      (o .:? "dash" .!= mempty)
                      <*> (o .:? "label"))
 
 instance ToJSON LineStyle where
-        toJSON LineStyle{..}
+        toJSON LineStyle'{..}
           = object
               (catMaybes
                  [("stroke" .=) <$> _lsStroke,
@@ -5270,8 +5271,8 @@ instance ToJSON LineStyle where
 -- | The response returned by a call to layers.List.published.
 --
 -- /See:/ 'publishedLayersListResponse' smart constructor.
-data PublishedLayersListResponse = PublishedLayersListResponse
-    { _pllrNextPageToken :: !(Maybe (Textual Word8))
+data PublishedLayersListResponse = PublishedLayersListResponse'
+    { _pllrNextPageToken :: !(Maybe Base64)
     , _pllrLayers        :: !(Maybe [PublishedLayer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5285,17 +5286,17 @@ data PublishedLayersListResponse = PublishedLayersListResponse
 publishedLayersListResponse
     :: PublishedLayersListResponse
 publishedLayersListResponse =
-    PublishedLayersListResponse
+    PublishedLayersListResponse'
     { _pllrNextPageToken = Nothing
     , _pllrLayers = Nothing
     }
 
 -- | Next page token.
-pllrNextPageToken :: Lens' PublishedLayersListResponse (Maybe Word8)
+pllrNextPageToken :: Lens' PublishedLayersListResponse (Maybe ByteString)
 pllrNextPageToken
   = lens _pllrNextPageToken
       (\ s a -> s{_pllrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Resources returned.
 pllrLayers :: Lens' PublishedLayersListResponse [PublishedLayer]
@@ -5308,12 +5309,12 @@ instance FromJSON PublishedLayersListResponse where
         parseJSON
           = withObject "PublishedLayersListResponse"
               (\ o ->
-                 PublishedLayersListResponse <$>
+                 PublishedLayersListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "layers" .!= mempty))
 
 instance ToJSON PublishedLayersListResponse where
-        toJSON PublishedLayersListResponse{..}
+        toJSON PublishedLayersListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _pllrNextPageToken,

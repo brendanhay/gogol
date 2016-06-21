@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Tables.Features.BatchDelete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TablesFeaturesBatchDeleteResource =
 -- | Delete all features matching the given IDs.
 --
 -- /See:/ 'tablesFeaturesBatchDelete' smart constructor.
-data TablesFeaturesBatchDelete = TablesFeaturesBatchDelete
+data TablesFeaturesBatchDelete = TablesFeaturesBatchDelete'
     { _tfbdPayload :: !FeaturesBatchDeleteRequest
     , _tfbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ tablesFeaturesBatchDelete
     -> Text -- ^ 'tfbdId'
     -> TablesFeaturesBatchDelete
 tablesFeaturesBatchDelete pTfbdPayload_ pTfbdId_ =
-    TablesFeaturesBatchDelete
+    TablesFeaturesBatchDelete'
     { _tfbdPayload = pTfbdPayload_
     , _tfbdId = pTfbdId_
     }
@@ -90,7 +90,9 @@ tfbdId = lens _tfbdId (\ s a -> s{_tfbdId = a})
 instance GoogleRequest TablesFeaturesBatchDelete
          where
         type Rs TablesFeaturesBatchDelete = ()
-        requestClient TablesFeaturesBatchDelete{..}
+        type Scopes TablesFeaturesBatchDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient TablesFeaturesBatchDelete'{..}
           = go _tfbdId (Just AltJSON) _tfbdPayload
               mapsEngineService
           where go

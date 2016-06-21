@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Translate.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -26,18 +26,18 @@ data TranslationsListFormat
     | Text
       -- ^ @text@
       -- Specifies the input is in plain textual format
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TranslationsListFormat
 
-instance FromText TranslationsListFormat where
-    fromText = \case
-        "html" -> Just HTML
-        "text" -> Just Text
-        _ -> Nothing
+instance FromHttpApiData TranslationsListFormat where
+    parseQueryParam = \case
+        "html" -> Right HTML
+        "text" -> Right Text
+        x -> Left ("Unable to parse TranslationsListFormat from: " <> x)
 
-instance ToText TranslationsListFormat where
-    toText = \case
+instance ToHttpApiData TranslationsListFormat where
+    toQueryParam = \case
         HTML -> "html"
         Text -> "text"
 

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,10 @@
 -- information nor attachment data for the beacon when queried via
 -- \`beaconinfo.getforobserved\`. Calling this method on an already
 -- inactive beacon will do nothing (but will return a successful response
--- code).
+-- code). Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.deactivate@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
@@ -44,6 +47,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
     , bdBeaconName
     , bdUploadType
     , bdBearerToken
+    , bdProjectId
     , bdCallback
     ) where
 
@@ -61,17 +65,21 @@ type BeaconsDeactivateResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Empty
+                     QueryParam "projectId" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Deactivates a beacon. Once deactivated, the API will not return
 -- information nor attachment data for the beacon when queried via
 -- \`beaconinfo.getforobserved\`. Calling this method on an already
 -- inactive beacon will do nothing (but will return a successful response
--- code).
+-- code). Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ 'beaconsDeactivate' smart constructor.
-data BeaconsDeactivate = BeaconsDeactivate
+data BeaconsDeactivate = BeaconsDeactivate'
     { _bdXgafv          :: !(Maybe Text)
     , _bdUploadProtocol :: !(Maybe Text)
     , _bdPp             :: !Bool
@@ -79,6 +87,7 @@ data BeaconsDeactivate = BeaconsDeactivate
     , _bdBeaconName     :: !Text
     , _bdUploadType     :: !(Maybe Text)
     , _bdBearerToken    :: !(Maybe Text)
+    , _bdProjectId      :: !(Maybe Text)
     , _bdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -100,12 +109,14 @@ data BeaconsDeactivate = BeaconsDeactivate
 --
 -- * 'bdBearerToken'
 --
+-- * 'bdProjectId'
+--
 -- * 'bdCallback'
 beaconsDeactivate
     :: Text -- ^ 'bdBeaconName'
     -> BeaconsDeactivate
 beaconsDeactivate pBdBeaconName_ =
-    BeaconsDeactivate
+    BeaconsDeactivate'
     { _bdXgafv = Nothing
     , _bdUploadProtocol = Nothing
     , _bdPp = True
@@ -113,6 +124,7 @@ beaconsDeactivate pBdBeaconName_ =
     , _bdBeaconName = pBdBeaconName_
     , _bdUploadType = Nothing
     , _bdBearerToken = Nothing
+    , _bdProjectId = Nothing
     , _bdCallback = Nothing
     }
 
@@ -136,7 +148,12 @@ bdAccessToken
   = lens _bdAccessToken
       (\ s a -> s{_bdAccessToken = a})
 
--- | The beacon name of this beacon.
+-- | Beacon that should be deactivated. A beacon name has the format
+-- \"beacons\/N!beaconId\" where the beaconId is the base16 ID broadcast by
+-- the beacon and N is a code for the beacon\'s type. Possible values are
+-- \`3\` for Eddystone-UID, \`4\` for Eddystone-EID, \`1\` for iBeacon, or
+-- \`5\` for AltBeacon. For Eddystone-EID beacons, you may use either the
+-- current EID or the beacon\'s \"stable\" UID. Required.
 bdBeaconName :: Lens' BeaconsDeactivate Text
 bdBeaconName
   = lens _bdBeaconName (\ s a -> s{_bdBeaconName = a})
@@ -152,6 +169,13 @@ bdBearerToken
   = lens _bdBearerToken
       (\ s a -> s{_bdBearerToken = a})
 
+-- | The project id of the beacon to deactivate. If the project id is not
+-- specified then the project making the request is used. The project id
+-- must match the project that owns the beacon. Optional.
+bdProjectId :: Lens' BeaconsDeactivate (Maybe Text)
+bdProjectId
+  = lens _bdProjectId (\ s a -> s{_bdProjectId = a})
+
 -- | JSONP
 bdCallback :: Lens' BeaconsDeactivate (Maybe Text)
 bdCallback
@@ -159,12 +183,15 @@ bdCallback
 
 instance GoogleRequest BeaconsDeactivate where
         type Rs BeaconsDeactivate = Empty
-        requestClient BeaconsDeactivate{..}
+        type Scopes BeaconsDeactivate =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+        requestClient BeaconsDeactivate'{..}
           = go _bdBeaconName _bdXgafv _bdUploadProtocol
               (Just _bdPp)
               _bdAccessToken
               _bdUploadType
               _bdBearerToken
+              _bdProjectId
               _bdCallback
               (Just AltJSON)
               proximityBeaconService

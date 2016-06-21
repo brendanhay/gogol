@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,11 @@
 --
 -- List the diagnostics for a single beacon. You can also list diagnostics
 -- for all the beacons owned by your Google Developers Console project by
--- using the beacon name \`beacons\/-\`.
+-- using the beacon name \`beacons\/-\`. Authenticate using an [OAuth
+-- access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **viewer**, **Is owner** or **Can edit**
+-- permissions in the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.diagnostics.list@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
@@ -43,6 +47,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
     , bdlUploadType
     , bdlBearerToken
     , bdlPageToken
+    , bdlProjectId
     , bdlPageSize
     , bdlAlertFilter
     , bdlCallback
@@ -64,18 +69,23 @@ type BeaconsDiagnosticsListResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "alertFilter" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListDiagnosticsResponse
+                         QueryParam "projectId" Text :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "alertFilter" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ListDiagnosticsResponse
 
 -- | List the diagnostics for a single beacon. You can also list diagnostics
 -- for all the beacons owned by your Google Developers Console project by
--- using the beacon name \`beacons\/-\`.
+-- using the beacon name \`beacons\/-\`. Authenticate using an [OAuth
+-- access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **viewer**, **Is owner** or **Can edit**
+-- permissions in the Google Developers Console project.
 --
 -- /See:/ 'beaconsDiagnosticsList' smart constructor.
-data BeaconsDiagnosticsList = BeaconsDiagnosticsList
+data BeaconsDiagnosticsList = BeaconsDiagnosticsList'
     { _bdlXgafv          :: !(Maybe Text)
     , _bdlUploadProtocol :: !(Maybe Text)
     , _bdlPp             :: !Bool
@@ -84,6 +94,7 @@ data BeaconsDiagnosticsList = BeaconsDiagnosticsList
     , _bdlUploadType     :: !(Maybe Text)
     , _bdlBearerToken    :: !(Maybe Text)
     , _bdlPageToken      :: !(Maybe Text)
+    , _bdlProjectId      :: !(Maybe Text)
     , _bdlPageSize       :: !(Maybe (Textual Int32))
     , _bdlAlertFilter    :: !(Maybe Text)
     , _bdlCallback       :: !(Maybe Text)
@@ -109,6 +120,8 @@ data BeaconsDiagnosticsList = BeaconsDiagnosticsList
 --
 -- * 'bdlPageToken'
 --
+-- * 'bdlProjectId'
+--
 -- * 'bdlPageSize'
 --
 -- * 'bdlAlertFilter'
@@ -118,7 +131,7 @@ beaconsDiagnosticsList
     :: Text -- ^ 'bdlBeaconName'
     -> BeaconsDiagnosticsList
 beaconsDiagnosticsList pBdlBeaconName_ =
-    BeaconsDiagnosticsList
+    BeaconsDiagnosticsList'
     { _bdlXgafv = Nothing
     , _bdlUploadProtocol = Nothing
     , _bdlPp = True
@@ -127,6 +140,7 @@ beaconsDiagnosticsList pBdlBeaconName_ =
     , _bdlUploadType = Nothing
     , _bdlBearerToken = Nothing
     , _bdlPageToken = Nothing
+    , _bdlProjectId = Nothing
     , _bdlPageSize = Nothing
     , _bdlAlertFilter = Nothing
     , _bdlCallback = Nothing
@@ -176,6 +190,13 @@ bdlPageToken :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlPageToken
   = lens _bdlPageToken (\ s a -> s{_bdlPageToken = a})
 
+-- | Requests only diagnostic records for the given project id. If not set,
+-- then the project making the request will be used for looking up
+-- diagnostic records. Optional.
+bdlProjectId :: Lens' BeaconsDiagnosticsList (Maybe Text)
+bdlProjectId
+  = lens _bdlProjectId (\ s a -> s{_bdlProjectId = a})
+
 -- | Specifies the maximum number of results to return. Defaults to 10.
 -- Maximum 1000. Optional.
 bdlPageSize :: Lens' BeaconsDiagnosticsList (Maybe Int32)
@@ -198,13 +219,16 @@ bdlCallback
 instance GoogleRequest BeaconsDiagnosticsList where
         type Rs BeaconsDiagnosticsList =
              ListDiagnosticsResponse
-        requestClient BeaconsDiagnosticsList{..}
+        type Scopes BeaconsDiagnosticsList =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+        requestClient BeaconsDiagnosticsList'{..}
           = go _bdlBeaconName _bdlXgafv _bdlUploadProtocol
               (Just _bdlPp)
               _bdlAccessToken
               _bdlUploadType
               _bdlBearerToken
               _bdlPageToken
+              _bdlProjectId
               _bdlPageSize
               _bdlAlertFilter
               _bdlCallback

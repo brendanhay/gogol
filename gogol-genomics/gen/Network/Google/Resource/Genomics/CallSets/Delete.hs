@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.CallSets.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a call set.
+-- Deletes a call set. For the definitions of call sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.callsets.delete@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.delete@.
 module Network.Google.Resource.Genomics.CallSets.Delete
     (
     -- * REST Resource
@@ -61,10 +63,12 @@ type CallSetsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a call set.
+-- | Deletes a call set. For the definitions of call sets and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSetsDelete' smart constructor.
-data CallSetsDelete = CallSetsDelete
+data CallSetsDelete = CallSetsDelete'
     { _csdXgafv          :: !(Maybe Text)
     , _csdUploadProtocol :: !(Maybe Text)
     , _csdPp             :: !Bool
@@ -98,7 +102,7 @@ callSetsDelete
     :: Text -- ^ 'csdCallSetId'
     -> CallSetsDelete
 callSetsDelete pCsdCallSetId_ =
-    CallSetsDelete
+    CallSetsDelete'
     { _csdXgafv = Nothing
     , _csdUploadProtocol = Nothing
     , _csdPp = True
@@ -153,7 +157,10 @@ csdCallback
 
 instance GoogleRequest CallSetsDelete where
         type Rs CallSetsDelete = Empty
-        requestClient CallSetsDelete{..}
+        type Scopes CallSetsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient CallSetsDelete'{..}
           = go _csdCallSetId _csdXgafv _csdUploadProtocol
               (Just _csdPp)
               _csdAccessToken

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type ProjectsSubscriptionsListResource =
 -- | Lists matching subscriptions.
 --
 -- /See:/ 'projectsSubscriptionsList' smart constructor.
-data ProjectsSubscriptionsList = ProjectsSubscriptionsList
+data ProjectsSubscriptionsList = ProjectsSubscriptionsList'
     { _pslXgafv          :: !(Maybe Text)
     , _pslUploadProtocol :: !(Maybe Text)
     , _pslProject        :: !Text
@@ -109,7 +109,7 @@ projectsSubscriptionsList
     :: Text -- ^ 'pslProject'
     -> ProjectsSubscriptionsList
 projectsSubscriptionsList pPslProject_ =
-    ProjectsSubscriptionsList
+    ProjectsSubscriptionsList'
     { _pslXgafv = Nothing
     , _pslUploadProtocol = Nothing
     , _pslProject = pPslProject_
@@ -181,7 +181,10 @@ instance GoogleRequest ProjectsSubscriptionsList
          where
         type Rs ProjectsSubscriptionsList =
              ListSubscriptionsResponse
-        requestClient ProjectsSubscriptionsList{..}
+        type Scopes ProjectsSubscriptionsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
+        requestClient ProjectsSubscriptionsList'{..}
           = go _pslProject _pslXgafv _pslUploadProtocol
               (Just _pslPp)
               _pslAccessToken

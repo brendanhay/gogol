@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Entitlements.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- List of all entitlements for the specified user. Only the ID is set.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.entitlements.list@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.List
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type EntitlementsListResource =
 -- | List of all entitlements for the specified user. Only the ID is set.
 --
 -- /See:/ 'entitlementsList' smart constructor.
-data EntitlementsList = EntitlementsList
+data EntitlementsList = EntitlementsList'
     { _elEnterpriseId :: !Text
     , _elUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ entitlementsList
     -> Text -- ^ 'elUserId'
     -> EntitlementsList
 entitlementsList pElEnterpriseId_ pElUserId_ =
-    EntitlementsList
+    EntitlementsList'
     { _elEnterpriseId = pElEnterpriseId_
     , _elUserId = pElUserId_
     }
@@ -90,7 +90,9 @@ elUserId = lens _elUserId (\ s a -> s{_elUserId = a})
 
 instance GoogleRequest EntitlementsList where
         type Rs EntitlementsList = EntitlementsListResponse
-        requestClient EntitlementsList{..}
+        type Scopes EntitlementsList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EntitlementsList'{..}
           = go _elEnterpriseId _elUserId (Just AltJSON)
               androidEnterpriseService
           where go

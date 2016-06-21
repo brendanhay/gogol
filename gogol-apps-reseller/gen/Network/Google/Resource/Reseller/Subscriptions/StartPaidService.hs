@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Subscriptions.StartPaidService
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type SubscriptionsStartPaidServiceResource =
 -- | Starts paid service of a trial subscription
 --
 -- /See:/ 'subscriptionsStartPaidService' smart constructor.
-data SubscriptionsStartPaidService = SubscriptionsStartPaidService
+data SubscriptionsStartPaidService = SubscriptionsStartPaidService'
     { _sspsCustomerId     :: !Text
     , _sspsSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ subscriptionsStartPaidService
     -> Text -- ^ 'sspsSubscriptionId'
     -> SubscriptionsStartPaidService
 subscriptionsStartPaidService pSspsCustomerId_ pSspsSubscriptionId_ =
-    SubscriptionsStartPaidService
+    SubscriptionsStartPaidService'
     { _sspsCustomerId = pSspsCustomerId_
     , _sspsSubscriptionId = pSspsSubscriptionId_
     }
@@ -93,7 +93,9 @@ sspsSubscriptionId
 instance GoogleRequest SubscriptionsStartPaidService
          where
         type Rs SubscriptionsStartPaidService = Subscription
-        requestClient SubscriptionsStartPaidService{..}
+        type Scopes SubscriptionsStartPaidService =
+             '["https://www.googleapis.com/auth/apps.order"]
+        requestClient SubscriptionsStartPaidService'{..}
           = go _sspsCustomerId _sspsSubscriptionId
               (Just AltJSON)
               appsResellerService

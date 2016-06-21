@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.Users.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type UsersGetResource =
 -- | Returns the specified User resource.
 --
 -- /See:/ 'usersGet' smart constructor.
-data UsersGet = UsersGet
+data UsersGet = UsersGet'
     { _ugProject :: !Text
     , _ugUser    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersGet
     -> Text -- ^ 'ugUser'
     -> UsersGet
 usersGet pUgProject_ pUgUser_ =
-    UsersGet
+    UsersGet'
     { _ugProject = pUgProject_
     , _ugUser = pUgUser_
     }
@@ -88,7 +88,12 @@ ugUser = lens _ugUser (\ s a -> s{_ugUser = a})
 
 instance GoogleRequest UsersGet where
         type Rs UsersGet = User
-        requestClient UsersGet{..}
+        type Scopes UsersGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/cloud.useraccounts",
+               "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
+        requestClient UsersGet'{..}
           = go _ugProject _ugUser (Just AltJSON)
               userAccountsService
           where go

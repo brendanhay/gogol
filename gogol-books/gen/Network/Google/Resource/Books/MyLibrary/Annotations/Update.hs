@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.MyLibrary.Annotations.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type MyLibraryAnnotationsUpdateResource =
 -- | Updates an existing annotation.
 --
 -- /See:/ 'myLibraryAnnotationsUpdate' smart constructor.
-data MyLibraryAnnotationsUpdate = MyLibraryAnnotationsUpdate
+data MyLibraryAnnotationsUpdate = MyLibraryAnnotationsUpdate'
     { _mlauPayload      :: !Annotation
     , _mlauAnnotationId :: !Text
     , _mlauSource       :: !(Maybe Text)
@@ -76,7 +76,7 @@ myLibraryAnnotationsUpdate
     -> Text -- ^ 'mlauAnnotationId'
     -> MyLibraryAnnotationsUpdate
 myLibraryAnnotationsUpdate pMlauPayload_ pMlauAnnotationId_ =
-    MyLibraryAnnotationsUpdate
+    MyLibraryAnnotationsUpdate'
     { _mlauPayload = pMlauPayload_
     , _mlauAnnotationId = pMlauAnnotationId_
     , _mlauSource = Nothing
@@ -101,7 +101,9 @@ mlauSource
 instance GoogleRequest MyLibraryAnnotationsUpdate
          where
         type Rs MyLibraryAnnotationsUpdate = Annotation
-        requestClient MyLibraryAnnotationsUpdate{..}
+        type Scopes MyLibraryAnnotationsUpdate =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient MyLibraryAnnotationsUpdate'{..}
           = go _mlauAnnotationId _mlauSource (Just AltJSON)
               _mlauPayload
               booksService

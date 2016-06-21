@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AppsReseller.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,7 +20,7 @@ module Network.Google.AppsReseller.Types
       appsResellerService
 
     -- * OAuth Scopes
-    , appsOrderReadonlyScope
+    , appsOrderReadOnlyScope
     , appsOrderScope
 
     -- * SubscriptionTrialSettings
@@ -45,6 +46,7 @@ module Network.Google.AppsReseller.Types
     -- * Customer
     , Customer
     , customer
+    , cCustomerDomainVerified
     , cResourceUiURL
     , cKind
     , cCustomerId
@@ -57,6 +59,7 @@ module Network.Google.AppsReseller.Types
     , ChangePlanRequest
     , changePlanRequest
     , cprKind
+    , cprDealCode
     , cprPlanName
     , cprPurchaseOrderId
     , cprSeats
@@ -109,7 +112,9 @@ module Network.Google.AppsReseller.Types
     , subKind
     , subSKUId
     , subPlan
+    , subDealCode
     , subCustomerId
+    , subCustomerDomain
     , subSuspensionReasons
     , subTransferInfo
     , subPurchaseOrderId
@@ -129,15 +134,15 @@ import           Network.Google.AppsReseller.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v1' of the Enterprise Apps Reseller API. This contains the host and root path used as a starting point for constructing service requests.
-appsResellerService :: Service
+appsResellerService :: ServiceConfig
 appsResellerService
   = defaultService (ServiceId "reseller:v1")
       "www.googleapis.com"
 
 -- | Manage users on your domain
-appsOrderReadonlyScope :: OAuthScope
-appsOrderReadonlyScope = "https://www.googleapis.com/auth/apps.order.readonly";
+appsOrderReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/apps.order.readonly"]
+appsOrderReadOnlyScope = Proxy;
 
 -- | Manage users on your domain
-appsOrderScope :: OAuthScope
-appsOrderScope = "https://www.googleapis.com/auth/apps.order";
+appsOrderScope :: Proxy '["https://www.googleapis.com/auth/apps.order"]
+appsOrderScope = Proxy;

@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AppsActivity.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -42,27 +42,27 @@ data EventPrimaryEventType
       -- ^ @untrash@
     | EPETUpload
       -- ^ @upload@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventPrimaryEventType
 
-instance FromText EventPrimaryEventType where
-    fromText = \case
-        "comment" -> Just EPETComment
-        "create" -> Just EPETCreate
-        "edit" -> Just EPETEdit
-        "emptyTrash" -> Just EPETEmptyTrash
-        "move" -> Just EPETMove
-        "permissionChange" -> Just EPETPermissionChange
-        "rename" -> Just EPETRename
-        "trash" -> Just EPETTrash
-        "unknown" -> Just EPETUnknown
-        "untrash" -> Just EPETUntrash
-        "upload" -> Just EPETUpload
-        _ -> Nothing
+instance FromHttpApiData EventPrimaryEventType where
+    parseQueryParam = \case
+        "comment" -> Right EPETComment
+        "create" -> Right EPETCreate
+        "edit" -> Right EPETEdit
+        "emptyTrash" -> Right EPETEmptyTrash
+        "move" -> Right EPETMove
+        "permissionChange" -> Right EPETPermissionChange
+        "rename" -> Right EPETRename
+        "trash" -> Right EPETTrash
+        "unknown" -> Right EPETUnknown
+        "untrash" -> Right EPETUntrash
+        "upload" -> Right EPETUpload
+        x -> Left ("Unable to parse EventPrimaryEventType from: " <> x)
 
-instance ToText EventPrimaryEventType where
-    toText = \case
+instance ToHttpApiData EventPrimaryEventType where
+    toQueryParam = \case
         EPETComment -> "comment"
         EPETCreate -> "create"
         EPETEdit -> "edit"
@@ -92,20 +92,20 @@ data PermissionRole
       -- ^ @reader@
     | Writer
       -- ^ @writer@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PermissionRole
 
-instance FromText PermissionRole where
-    fromText = \case
-        "commenter" -> Just Commenter
-        "owner" -> Just Owner
-        "reader" -> Just Reader
-        "writer" -> Just Writer
-        _ -> Nothing
+instance FromHttpApiData PermissionRole where
+    parseQueryParam = \case
+        "commenter" -> Right Commenter
+        "owner" -> Right Owner
+        "reader" -> Right Reader
+        "writer" -> Right Writer
+        x -> Left ("Unable to parse PermissionRole from: " <> x)
 
-instance ToText PermissionRole where
-    toText = \case
+instance ToHttpApiData PermissionRole where
+    toQueryParam = \case
         Commenter -> "commenter"
         Owner -> "owner"
         Reader -> "reader"
@@ -127,20 +127,20 @@ data PermissionType
       -- ^ @group@
     | PTUser
       -- ^ @user@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PermissionType
 
-instance FromText PermissionType where
-    fromText = \case
-        "anyone" -> Just PTAnyone
-        "domain" -> Just PTDomain
-        "group" -> Just PTGroup
-        "user" -> Just PTUser
-        _ -> Nothing
+instance FromHttpApiData PermissionType where
+    parseQueryParam = \case
+        "anyone" -> Right PTAnyone
+        "domain" -> Right PTDomain
+        "group" -> Right PTGroup
+        "user" -> Right PTUser
+        x -> Left ("Unable to parse PermissionType from: " <> x)
 
-instance ToText PermissionType where
-    toText = \case
+instance ToHttpApiData PermissionType where
+    toQueryParam = \case
         PTAnyone -> "anyone"
         PTDomain -> "domain"
         PTGroup -> "group"
@@ -175,27 +175,27 @@ data EventAdditionalEventTypesItem
       -- ^ @untrash@
     | EAETIUpload
       -- ^ @upload@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventAdditionalEventTypesItem
 
-instance FromText EventAdditionalEventTypesItem where
-    fromText = \case
-        "comment" -> Just EAETIComment
-        "create" -> Just EAETICreate
-        "edit" -> Just EAETIEdit
-        "emptyTrash" -> Just EAETIEmptyTrash
-        "move" -> Just EAETIMove
-        "permissionChange" -> Just EAETIPermissionChange
-        "rename" -> Just EAETIRename
-        "trash" -> Just EAETITrash
-        "unknown" -> Just EAETIUnknown
-        "untrash" -> Just EAETIUntrash
-        "upload" -> Just EAETIUpload
-        _ -> Nothing
+instance FromHttpApiData EventAdditionalEventTypesItem where
+    parseQueryParam = \case
+        "comment" -> Right EAETIComment
+        "create" -> Right EAETICreate
+        "edit" -> Right EAETIEdit
+        "emptyTrash" -> Right EAETIEmptyTrash
+        "move" -> Right EAETIMove
+        "permissionChange" -> Right EAETIPermissionChange
+        "rename" -> Right EAETIRename
+        "trash" -> Right EAETITrash
+        "unknown" -> Right EAETIUnknown
+        "untrash" -> Right EAETIUntrash
+        "upload" -> Right EAETIUpload
+        x -> Left ("Unable to parse EventAdditionalEventTypesItem from: " <> x)
 
-instance ToText EventAdditionalEventTypesItem where
-    toText = \case
+instance ToHttpApiData EventAdditionalEventTypesItem where
+    toQueryParam = \case
         EAETIComment -> "comment"
         EAETICreate -> "create"
         EAETIEdit -> "edit"
@@ -221,18 +221,18 @@ data ActivitiesListGroupingStrategy
       -- ^ @driveUi@
     | None
       -- ^ @none@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivitiesListGroupingStrategy
 
-instance FromText ActivitiesListGroupingStrategy where
-    fromText = \case
-        "driveUi" -> Just DriveUi
-        "none" -> Just None
-        _ -> Nothing
+instance FromHttpApiData ActivitiesListGroupingStrategy where
+    parseQueryParam = \case
+        "driveUi" -> Right DriveUi
+        "none" -> Right None
+        x -> Left ("Unable to parse ActivitiesListGroupingStrategy from: " <> x)
 
-instance ToText ActivitiesListGroupingStrategy where
-    toText = \case
+instance ToHttpApiData ActivitiesListGroupingStrategy where
+    toQueryParam = \case
         DriveUi -> "driveUi"
         None -> "none"
 

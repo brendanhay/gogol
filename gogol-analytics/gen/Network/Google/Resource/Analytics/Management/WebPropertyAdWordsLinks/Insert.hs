@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type ManagementWebPropertyAdWordsLinksInsertResource
 -- | Creates a webProperty-AdWords link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksInsert' smart constructor.
-data ManagementWebPropertyAdWordsLinksInsert = ManagementWebPropertyAdWordsLinksInsert
+data ManagementWebPropertyAdWordsLinksInsert = ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliWebPropertyId :: !Text
     , _mwpawliPayload       :: !EntityAdWordsLink
     , _mwpawliAccountId     :: !Text
@@ -81,7 +81,7 @@ managementWebPropertyAdWordsLinksInsert
     -> Text -- ^ 'mwpawliAccountId'
     -> ManagementWebPropertyAdWordsLinksInsert
 managementWebPropertyAdWordsLinksInsert pMwpawliWebPropertyId_ pMwpawliPayload_ pMwpawliAccountId_ =
-    ManagementWebPropertyAdWordsLinksInsert
+    ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliWebPropertyId = pMwpawliWebPropertyId_
     , _mwpawliPayload = pMwpawliPayload_
     , _mwpawliAccountId = pMwpawliAccountId_
@@ -109,8 +109,10 @@ instance GoogleRequest
          ManagementWebPropertyAdWordsLinksInsert where
         type Rs ManagementWebPropertyAdWordsLinksInsert =
              EntityAdWordsLink
+        type Scopes ManagementWebPropertyAdWordsLinksInsert =
+             '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient
-          ManagementWebPropertyAdWordsLinksInsert{..}
+          ManagementWebPropertyAdWordsLinksInsert'{..}
           = go _mwpawliAccountId _mwpawliWebPropertyId
               (Just AltJSON)
               _mwpawliPayload

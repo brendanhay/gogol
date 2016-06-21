@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Layers.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type LayersDeleteResource =
 -- | Delete a layer.
 --
 -- /See:/ 'layersDelete' smart constructor.
-newtype LayersDelete = LayersDelete
+newtype LayersDelete = LayersDelete'
     { _ldId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ layersDelete
     :: Text -- ^ 'ldId'
     -> LayersDelete
 layersDelete pLdId_ =
-    LayersDelete
+    LayersDelete'
     { _ldId = pLdId_
     }
 
@@ -77,7 +77,9 @@ ldId = lens _ldId (\ s a -> s{_ldId = a})
 
 instance GoogleRequest LayersDelete where
         type Rs LayersDelete = ()
-        requestClient LayersDelete{..}
+        type Scopes LayersDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient LayersDelete'{..}
           = go _ldId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersDeleteResource)

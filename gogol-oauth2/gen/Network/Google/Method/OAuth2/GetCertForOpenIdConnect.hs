@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Method.OAuth2.GetCertForOpenIdConnect
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,18 +46,19 @@ type GetCertForOpenIdConnectMethod =
 --
 -- /See:/ 'getCertForOpenIdConnect' smart constructor.
 data GetCertForOpenIdConnect =
-    GetCertForOpenIdConnect
+    GetCertForOpenIdConnect'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetCertForOpenIdConnect' with the minimum fields required to make a request.
 --
 getCertForOpenIdConnect
     :: GetCertForOpenIdConnect
-getCertForOpenIdConnect = GetCertForOpenIdConnect
+getCertForOpenIdConnect = GetCertForOpenIdConnect'
 
 instance GoogleRequest GetCertForOpenIdConnect where
         type Rs GetCertForOpenIdConnect = JWK
-        requestClient GetCertForOpenIdConnect{}
+        type Scopes GetCertForOpenIdConnect = '[]
+        requestClient GetCertForOpenIdConnect'{}
           = go (Just AltJSON) oAuth2Service
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.TransferJobs.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type TransferJobsPatchResource =
 -- a job is not allowed.
 --
 -- /See:/ 'transferJobsPatch' smart constructor.
-data TransferJobsPatch = TransferJobsPatch
+data TransferJobsPatch = TransferJobsPatch'
     { _tjpXgafv          :: !(Maybe Text)
     , _tjpUploadProtocol :: !(Maybe Text)
     , _tjpPp             :: !Bool
@@ -108,7 +108,7 @@ transferJobsPatch
     -> UpdateTransferJobRequest -- ^ 'tjpPayload'
     -> TransferJobsPatch
 transferJobsPatch pTjpJobName_ pTjpPayload_ =
-    TransferJobsPatch
+    TransferJobsPatch'
     { _tjpXgafv = Nothing
     , _tjpUploadProtocol = Nothing
     , _tjpPp = True
@@ -169,7 +169,9 @@ tjpCallback
 
 instance GoogleRequest TransferJobsPatch where
         type Rs TransferJobsPatch = TransferJob
-        requestClient TransferJobsPatch{..}
+        type Scopes TransferJobsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TransferJobsPatch'{..}
           = go _tjpJobName _tjpXgafv _tjpUploadProtocol
               (Just _tjpPp)
               _tjpAccessToken

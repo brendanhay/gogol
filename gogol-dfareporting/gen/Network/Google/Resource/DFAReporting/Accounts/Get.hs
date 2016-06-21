@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Accounts.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountsGet' request conforms to.
 type AccountsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
@@ -54,7 +54,7 @@ type AccountsGetResource =
 -- | Gets one account by ID.
 --
 -- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet
+data AccountsGet = AccountsGet'
     { _aggProFileId :: !(Textual Int64)
     , _aggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsGet
     -> Int64 -- ^ 'aggId'
     -> AccountsGet
 accountsGet pAggProFileId_ pAggId_ =
-    AccountsGet
+    AccountsGet'
     { _aggProFileId = _Coerce # pAggProFileId_
     , _aggId = _Coerce # pAggId_
     }
@@ -89,7 +89,9 @@ aggId
 
 instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
-        requestClient AccountsGet{..}
+        type Scopes AccountsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountsGet'{..}
           = go _aggProFileId _aggId (Just AltJSON)
               dFAReportingService
           where go

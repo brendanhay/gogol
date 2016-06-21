@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Videos.Rate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type VideosRateResource =
 -- | Add a like or dislike rating to a video or remove a rating from a video.
 --
 -- /See:/ 'videosRate' smart constructor.
-data VideosRate = VideosRate
+data VideosRate = VideosRate'
     { _vrRating :: !VideosRateRating
     , _vrId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ videosRate
     -> Text -- ^ 'vrId'
     -> VideosRate
 videosRate pVrRating_ pVrId_ =
-    VideosRate
+    VideosRate'
     { _vrRating = pVrRating_
     , _vrId = pVrId_
     }
@@ -87,7 +87,11 @@ vrId = lens _vrId (\ s a -> s{_vrId = a})
 
 instance GoogleRequest VideosRate where
         type Rs VideosRate = ()
-        requestClient VideosRate{..}
+        type Scopes VideosRate =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient VideosRate'{..}
           = go (Just _vrId) (Just _vrRating) (Just AltJSON)
               youTubeService
           where go

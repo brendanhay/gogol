@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPool.InstanceGroupManagers.AbandonInstances
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type InstanceGroupManagersAbandonInstancesResource =
 -- instances.
 --
 -- /See:/ 'instanceGroupManagersAbandonInstances' smart constructor.
-data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstances
+data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstances'
     { _igmaiProject              :: !Text
     , _igmaiInstanceGroupManager :: !Text
     , _igmaiZone                 :: !Text
@@ -91,7 +91,7 @@ instanceGroupManagersAbandonInstances
     -> InstanceGroupManagersAbandonInstancesRequest -- ^ 'igmaiPayload'
     -> InstanceGroupManagersAbandonInstances
 instanceGroupManagersAbandonInstances pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ pIgmaiPayload_ =
-    InstanceGroupManagersAbandonInstances
+    InstanceGroupManagersAbandonInstances'
     { _igmaiProject = pIgmaiProject_
     , _igmaiInstanceGroupManager = pIgmaiInstanceGroupManager_
     , _igmaiZone = pIgmaiZone_
@@ -123,8 +123,11 @@ instance GoogleRequest
          InstanceGroupManagersAbandonInstances where
         type Rs InstanceGroupManagersAbandonInstances =
              Operation
+        type Scopes InstanceGroupManagersAbandonInstances =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
         requestClient
-          InstanceGroupManagersAbandonInstances{..}
+          InstanceGroupManagersAbandonInstances'{..}
           = go _igmaiProject _igmaiZone
               _igmaiInstanceGroupManager
               (Just AltJSON)

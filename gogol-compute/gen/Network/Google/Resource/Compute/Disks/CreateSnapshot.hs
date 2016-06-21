@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Disks.CreateSnapshot
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a snapshot of this disk.
+-- Creates a snapshot of a specified persistent disk.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.createSnapshot@.
 module Network.Google.Resource.Compute.Disks.CreateSnapshot
@@ -57,10 +57,10 @@ type DisksCreateSnapshotResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Snapshot :> Post '[JSON] Operation
 
--- | Creates a snapshot of this disk.
+-- | Creates a snapshot of a specified persistent disk.
 --
 -- /See:/ 'disksCreateSnapshot' smart constructor.
-data DisksCreateSnapshot = DisksCreateSnapshot
+data DisksCreateSnapshot = DisksCreateSnapshot'
     { _dcsProject :: !Text
     , _dcsDisk    :: !Text
     , _dcsZone    :: !Text
@@ -85,7 +85,7 @@ disksCreateSnapshot
     -> Snapshot -- ^ 'dcsPayload'
     -> DisksCreateSnapshot
 disksCreateSnapshot pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
-    DisksCreateSnapshot
+    DisksCreateSnapshot'
     { _dcsProject = pDcsProject_
     , _dcsDisk = pDcsDisk_
     , _dcsZone = pDcsZone_
@@ -112,7 +112,10 @@ dcsPayload
 
 instance GoogleRequest DisksCreateSnapshot where
         type Rs DisksCreateSnapshot = Operation
-        requestClient DisksCreateSnapshot{..}
+        type Scopes DisksCreateSnapshot =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient DisksCreateSnapshot'{..}
           = go _dcsProject _dcsZone _dcsDisk (Just AltJSON)
               _dcsPayload
               computeService

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.CustomDimensions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ManagementCustomDimensionsListResource =
 -- | Lists custom dimensions to which the user has access.
 --
 -- /See:/ 'managementCustomDimensionsList' smart constructor.
-data ManagementCustomDimensionsList = ManagementCustomDimensionsList
+data ManagementCustomDimensionsList = ManagementCustomDimensionsList'
     { _mcdlWebPropertyId :: !Text
     , _mcdlAccountId     :: !Text
     , _mcdlStartIndex    :: !(Maybe (Textual Int32))
@@ -84,7 +84,7 @@ managementCustomDimensionsList
     -> Text -- ^ 'mcdlAccountId'
     -> ManagementCustomDimensionsList
 managementCustomDimensionsList pMcdlWebPropertyId_ pMcdlAccountId_ =
-    ManagementCustomDimensionsList
+    ManagementCustomDimensionsList'
     { _mcdlWebPropertyId = pMcdlWebPropertyId_
     , _mcdlAccountId = pMcdlAccountId_
     , _mcdlStartIndex = Nothing
@@ -122,7 +122,10 @@ instance GoogleRequest ManagementCustomDimensionsList
          where
         type Rs ManagementCustomDimensionsList =
              CustomDimensions
-        requestClient ManagementCustomDimensionsList{..}
+        type Scopes ManagementCustomDimensionsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementCustomDimensionsList'{..}
           = go _mcdlAccountId _mcdlWebPropertyId
               _mcdlStartIndex
               _mcdlMaxResults

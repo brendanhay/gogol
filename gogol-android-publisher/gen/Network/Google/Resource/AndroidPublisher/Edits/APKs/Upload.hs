@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,12 +60,11 @@ type EditsAPKsUploadResource =
                      "apks" :>
                        QueryParam "alt" AltJSON :>
                          QueryParam "uploadType" AltMedia :>
-                           ReqBody '[OctetStream] RequestBody :>
-                             Post '[JSON] APK
+                           AltMedia :> Post '[JSON] APK
 
 --
 -- /See:/ 'editsAPKsUpload' smart constructor.
-data EditsAPKsUpload = EditsAPKsUpload
+data EditsAPKsUpload = EditsAPKsUpload'
     { _eapkuPackageName :: !Text
     , _eapkuEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +81,7 @@ editsAPKsUpload
     -> Text -- ^ 'eapkuEditId'
     -> EditsAPKsUpload
 editsAPKsUpload pEapkuPackageName_ pEapkuEditId_ =
-    EditsAPKsUpload
+    EditsAPKsUpload'
     { _eapkuPackageName = pEapkuPackageName_
     , _eapkuEditId = pEapkuEditId_
     }
@@ -101,7 +100,9 @@ eapkuEditId
 
 instance GoogleRequest EditsAPKsUpload where
         type Rs EditsAPKsUpload = APK
-        requestClient EditsAPKsUpload{..}
+        type Scopes EditsAPKsUpload =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsAPKsUpload'{..}
           = go _eapkuPackageName _eapkuEditId (Just AltJSON)
               androidPublisherService
           where go :<|> _
@@ -112,7 +113,9 @@ instance GoogleRequest EditsAPKsUpload where
 instance GoogleRequest (MediaUpload EditsAPKsUpload)
          where
         type Rs (MediaUpload EditsAPKsUpload) = APK
-        requestClient (MediaUpload EditsAPKsUpload{..} body)
+        type Scopes (MediaUpload EditsAPKsUpload) =
+             Scopes EditsAPKsUpload
+        requestClient (MediaUpload EditsAPKsUpload'{..} body)
           = go _eapkuPackageName _eapkuEditId (Just AltJSON)
               (Just AltMedia)
               body

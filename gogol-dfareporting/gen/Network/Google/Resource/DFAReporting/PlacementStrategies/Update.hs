@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlacementStrategies.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesUpdate' request conforms to.
 type PlacementStrategiesUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -55,7 +55,7 @@ type PlacementStrategiesUpdateResource =
 -- | Updates an existing placement strategy.
 --
 -- /See:/ 'placementStrategiesUpdate' smart constructor.
-data PlacementStrategiesUpdate = PlacementStrategiesUpdate
+data PlacementStrategiesUpdate = PlacementStrategiesUpdate'
     { _psuProFileId :: !(Textual Int64)
     , _psuPayload   :: !PlacementStrategy
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementStrategiesUpdate
     -> PlacementStrategy -- ^ 'psuPayload'
     -> PlacementStrategiesUpdate
 placementStrategiesUpdate pPsuProFileId_ pPsuPayload_ =
-    PlacementStrategiesUpdate
+    PlacementStrategiesUpdate'
     { _psuProFileId = _Coerce # pPsuProFileId_
     , _psuPayload = pPsuPayload_
     }
@@ -91,7 +91,9 @@ psuPayload
 instance GoogleRequest PlacementStrategiesUpdate
          where
         type Rs PlacementStrategiesUpdate = PlacementStrategy
-        requestClient PlacementStrategiesUpdate{..}
+        type Scopes PlacementStrategiesUpdate =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementStrategiesUpdate'{..}
           = go _psuProFileId (Just AltJSON) _psuPayload
               dFAReportingService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Datafeedstatuses.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type DatafeedstatusesListResource =
 -- | Lists the statuses of the datafeeds in your Merchant Center account.
 --
 -- /See:/ 'datafeedstatusesList' smart constructor.
-data DatafeedstatusesList = DatafeedstatusesList
+data DatafeedstatusesList = DatafeedstatusesList'
     { _dlMerchantId :: !(Textual Word64)
     , _dlPageToken  :: !(Maybe Text)
     , _dlMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ datafeedstatusesList
     :: Word64 -- ^ 'dlMerchantId'
     -> DatafeedstatusesList
 datafeedstatusesList pDlMerchantId_ =
-    DatafeedstatusesList
+    DatafeedstatusesList'
     { _dlMerchantId = _Coerce # pDlMerchantId_
     , _dlPageToken = Nothing
     , _dlMaxResults = Nothing
@@ -102,7 +102,9 @@ dlMaxResults
 instance GoogleRequest DatafeedstatusesList where
         type Rs DatafeedstatusesList =
              DatafeedstatusesListResponse
-        requestClient DatafeedstatusesList{..}
+        type Scopes DatafeedstatusesList =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient DatafeedstatusesList'{..}
           = go _dlMerchantId _dlPageToken _dlMaxResults
               (Just AltJSON)
               shoppingContentService

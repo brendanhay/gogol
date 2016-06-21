@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Sites.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ import           Network.Google.Prelude
 -- 'SitesList' request conforms to.
 type SitesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -87,7 +87,7 @@ type SitesListResource =
 -- | Retrieves a list of sites, possibly filtered.
 --
 -- /See:/ 'sitesList' smart constructor.
-data SitesList = SitesList
+data SitesList = SitesList'
     { _sitUnmAppedSite                   :: !(Maybe Bool)
     , _sitCampaignIds                    :: !(Maybe [Textual Int64])
     , _sitSearchString                   :: !(Maybe Text)
@@ -145,7 +145,7 @@ sitesList
     :: Int64 -- ^ 'sitProFileId'
     -> SitesList
 sitesList pSitProFileId_ =
-    SitesList
+    SitesList'
     { _sitUnmAppedSite = Nothing
     , _sitCampaignIds = Nothing
     , _sitSearchString = Nothing
@@ -271,7 +271,9 @@ sitMaxResults
 
 instance GoogleRequest SitesList where
         type Rs SitesList = SitesListResponse
-        requestClient SitesList{..}
+        type Scopes SitesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient SitesList'{..}
           = go _sitProFileId _sitUnmAppedSite
               (_sitCampaignIds ^. _Default)
               _sitSearchString

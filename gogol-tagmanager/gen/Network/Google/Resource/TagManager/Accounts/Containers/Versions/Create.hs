@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type AccountsContainersVersionsCreateResource =
 -- | Creates a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsCreate' smart constructor.
-data AccountsContainersVersionsCreate = AccountsContainersVersionsCreate
+data AccountsContainersVersionsCreate = AccountsContainersVersionsCreate'
     { _aContainerId :: !Text
     , _aPayload     :: !CreateContainerVersionRequestVersionOptions
     , _aAccountId   :: !Text
@@ -80,7 +80,7 @@ accountsContainersVersionsCreate
     -> Text -- ^ 'aAccountId'
     -> AccountsContainersVersionsCreate
 accountsContainersVersionsCreate pAContainerId_ pAPayload_ pAAccountId_ =
-    AccountsContainersVersionsCreate
+    AccountsContainersVersionsCreate'
     { _aContainerId = pAContainerId_
     , _aPayload = pAPayload_
     , _aAccountId = pAAccountId_
@@ -104,7 +104,9 @@ instance GoogleRequest
          AccountsContainersVersionsCreate where
         type Rs AccountsContainersVersionsCreate =
              CreateContainerVersionResponse
-        requestClient AccountsContainersVersionsCreate{..}
+        type Scopes AccountsContainersVersionsCreate =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
+        requestClient AccountsContainersVersionsCreate'{..}
           = go _aAccountId _aContainerId (Just AltJSON)
               _aPayload
               tagManagerService

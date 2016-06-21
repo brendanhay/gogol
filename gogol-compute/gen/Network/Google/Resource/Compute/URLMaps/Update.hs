@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.URLMaps.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update the entire content of the UrlMap resource.
+-- Updates the entire content of the UrlMap resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.update@.
 module Network.Google.Resource.Compute.URLMaps.Update
@@ -54,10 +54,10 @@ type URLMapsUpdateResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] URLMap :> Put '[JSON] Operation
 
--- | Update the entire content of the UrlMap resource.
+-- | Updates the entire content of the UrlMap resource.
 --
 -- /See:/ 'urlMapsUpdate' smart constructor.
-data URLMapsUpdate = URLMapsUpdate
+data URLMapsUpdate = URLMapsUpdate'
     { _umuURLMap  :: !Text
     , _umuProject :: !Text
     , _umuPayload :: !URLMap
@@ -78,7 +78,7 @@ urlMapsUpdate
     -> URLMap -- ^ 'umuPayload'
     -> URLMapsUpdate
 urlMapsUpdate pUmuURLMap_ pUmuProject_ pUmuPayload_ =
-    URLMapsUpdate
+    URLMapsUpdate'
     { _umuURLMap = pUmuURLMap_
     , _umuProject = pUmuProject_
     , _umuPayload = pUmuPayload_
@@ -89,7 +89,7 @@ umuURLMap :: Lens' URLMapsUpdate Text
 umuURLMap
   = lens _umuURLMap (\ s a -> s{_umuURLMap = a})
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 umuProject :: Lens' URLMapsUpdate Text
 umuProject
   = lens _umuProject (\ s a -> s{_umuProject = a})
@@ -101,7 +101,10 @@ umuPayload
 
 instance GoogleRequest URLMapsUpdate where
         type Rs URLMapsUpdate = Operation
-        requestClient URLMapsUpdate{..}
+        type Scopes URLMapsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient URLMapsUpdate'{..}
           = go _umuProject _umuURLMap (Just AltJSON)
               _umuPayload
               computeService

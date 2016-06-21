@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Creatives.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ import           Network.Google.Prelude
 -- 'CreativesList' request conforms to.
 type CreativesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>
@@ -94,7 +94,7 @@ type CreativesListResource =
 -- | Retrieves a list of creatives, possibly filtered.
 --
 -- /See:/ 'creativesList' smart constructor.
-data CreativesList = CreativesList
+data CreativesList = CreativesList'
     { _cRenderingIds         :: !(Maybe [Textual Int64])
     , _cAdvertiserId         :: !(Maybe (Textual Int64))
     , _cSearchString         :: !(Maybe Text)
@@ -155,7 +155,7 @@ creativesList
     :: Int64 -- ^ 'cProFileId'
     -> CreativesList
 creativesList pCProFileId_ =
-    CreativesList
+    CreativesList'
     { _cRenderingIds = Nothing
     , _cAdvertiserId = Nothing
     , _cSearchString = Nothing
@@ -290,7 +290,9 @@ cMaxResults
 
 instance GoogleRequest CreativesList where
         type Rs CreativesList = CreativesListResponse
-        requestClient CreativesList{..}
+        type Scopes CreativesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativesList'{..}
           = go _cProFileId (_cRenderingIds ^. _Default)
               _cAdvertiserId
               _cSearchString

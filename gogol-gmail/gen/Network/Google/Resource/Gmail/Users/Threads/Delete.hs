@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Threads.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersThreadsDeleteResource =
 -- cannot be undone. Prefer threads.trash instead.
 --
 -- /See:/ 'usersThreadsDelete' smart constructor.
-data UsersThreadsDelete = UsersThreadsDelete
+data UsersThreadsDelete = UsersThreadsDelete'
     { _utdUserId :: !Text
     , _utdId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,10 +70,9 @@ data UsersThreadsDelete = UsersThreadsDelete
 -- * 'utdId'
 usersThreadsDelete
     :: Text -- ^ 'utdId'
-    -> Text
     -> UsersThreadsDelete
-usersThreadsDelete pUtdUserId_ pUtdId_ =
-    UsersThreadsDelete
+usersThreadsDelete pUtdId_ =
+    UsersThreadsDelete'
     { _utdUserId = "me"
     , _utdId = pUtdId_
     }
@@ -90,7 +89,9 @@ utdId = lens _utdId (\ s a -> s{_utdId = a})
 
 instance GoogleRequest UsersThreadsDelete where
         type Rs UsersThreadsDelete = ()
-        requestClient UsersThreadsDelete{..}
+        type Scopes UsersThreadsDelete =
+             '["https://mail.google.com/"]
+        requestClient UsersThreadsDelete'{..}
           = go _utdUserId _utdId (Just AltJSON) gmailService
           where go
                   = buildClient

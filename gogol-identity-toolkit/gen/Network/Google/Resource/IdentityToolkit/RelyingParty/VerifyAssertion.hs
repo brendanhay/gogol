@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type RelyingPartyVerifyAssertionResource =
 -- | Verifies the assertion returned by the IdP.
 --
 -- /See:/ 'relyingPartyVerifyAssertion' smart constructor.
-newtype RelyingPartyVerifyAssertion = RelyingPartyVerifyAssertion
+newtype RelyingPartyVerifyAssertion = RelyingPartyVerifyAssertion'
     { _rpvaPayload :: IdentitytoolkitRelyingPartyVerifyAssertionRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyVerifyAssertion
     :: IdentitytoolkitRelyingPartyVerifyAssertionRequest -- ^ 'rpvaPayload'
     -> RelyingPartyVerifyAssertion
 relyingPartyVerifyAssertion pRpvaPayload_ =
-    RelyingPartyVerifyAssertion
+    RelyingPartyVerifyAssertion'
     { _rpvaPayload = pRpvaPayload_
     }
 
@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartyVerifyAssertion
          where
         type Rs RelyingPartyVerifyAssertion =
              VerifyAssertionResponse
-        requestClient RelyingPartyVerifyAssertion{..}
+        type Scopes RelyingPartyVerifyAssertion = '[]
+        requestClient RelyingPartyVerifyAssertion'{..}
           = go (Just AltJSON) _rpvaPayload
               identityToolkitService
           where go

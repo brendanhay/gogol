@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TaskQueue.Tasks.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -33,7 +33,7 @@ module Network.Google.Resource.TaskQueue.Tasks.List
     , TasksList
 
     -- * Request Lenses
-    , tTaskqueue
+    , tTaskQueue
     , tProject
     ) where
 
@@ -55,8 +55,8 @@ type TasksListResource =
 -- | List Tasks in a TaskQueue
 --
 -- /See:/ 'tasksList' smart constructor.
-data TasksList = TasksList
-    { _tTaskqueue :: !Text
+data TasksList = TasksList'
+    { _tTaskQueue :: !Text
     , _tProject   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,23 +64,23 @@ data TasksList = TasksList
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tTaskqueue'
+-- * 'tTaskQueue'
 --
 -- * 'tProject'
 tasksList
-    :: Text -- ^ 'tTaskqueue'
+    :: Text -- ^ 'tTaskQueue'
     -> Text -- ^ 'tProject'
     -> TasksList
-tasksList pTTaskqueue_ pTProject_ =
-    TasksList
-    { _tTaskqueue = pTTaskqueue_
+tasksList pTTaskQueue_ pTProject_ =
+    TasksList'
+    { _tTaskQueue = pTTaskQueue_
     , _tProject = pTProject_
     }
 
 -- | The id of the taskqueue to list tasks from.
-tTaskqueue :: Lens' TasksList Text
-tTaskqueue
-  = lens _tTaskqueue (\ s a -> s{_tTaskqueue = a})
+tTaskQueue :: Lens' TasksList Text
+tTaskQueue
+  = lens _tTaskQueue (\ s a -> s{_tTaskQueue = a})
 
 -- | The project under which the queue lies.
 tProject :: Lens' TasksList Text
@@ -88,8 +88,11 @@ tProject = lens _tProject (\ s a -> s{_tProject = a})
 
 instance GoogleRequest TasksList where
         type Rs TasksList = Tasks2
-        requestClient TasksList{..}
-          = go _tProject _tTaskqueue (Just AltJSON)
+        type Scopes TasksList =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
+        requestClient TasksList'{..}
+          = go _tProject _tTaskQueue (Just AltJSON)
               taskQueueService
           where go
                   = buildClient (Proxy :: Proxy TasksListResource)

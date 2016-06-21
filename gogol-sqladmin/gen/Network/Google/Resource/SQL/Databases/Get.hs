@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Databases.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type DatabasesGetResource =
 -- Cloud SQL instance.
 --
 -- /See:/ 'databasesGet' smart constructor.
-data DatabasesGet = DatabasesGet
+data DatabasesGet = DatabasesGet'
     { _dgProject  :: !Text
     , _dgDatabase :: !Text
     , _dgInstance :: !Text
@@ -80,7 +80,7 @@ databasesGet
     -> Text -- ^ 'dgInstance'
     -> DatabasesGet
 databasesGet pDgProject_ pDgDatabase_ pDgInstance_ =
-    DatabasesGet
+    DatabasesGet'
     { _dgProject = pDgProject_
     , _dgDatabase = pDgDatabase_
     , _dgInstance = pDgInstance_
@@ -103,7 +103,10 @@ dgInstance
 
 instance GoogleRequest DatabasesGet where
         type Rs DatabasesGet = Database
-        requestClient DatabasesGet{..}
+        type Scopes DatabasesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient DatabasesGet'{..}
           = go _dgProject _dgInstance _dgDatabase
               (Just AltJSON)
               sQLAdminService

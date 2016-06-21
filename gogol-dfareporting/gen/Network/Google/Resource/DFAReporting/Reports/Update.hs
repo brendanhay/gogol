@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsUpdate' request conforms to.
 type ReportsUpdateResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -56,7 +56,7 @@ type ReportsUpdateResource =
 -- | Updates a report.
 --
 -- /See:/ 'reportsUpdate' smart constructor.
-data ReportsUpdate = ReportsUpdate
+data ReportsUpdate = ReportsUpdate'
     { _ruReportId  :: !(Textual Int64)
     , _ruProFileId :: !(Textual Int64)
     , _ruPayload   :: !Report
@@ -77,7 +77,7 @@ reportsUpdate
     -> Report -- ^ 'ruPayload'
     -> ReportsUpdate
 reportsUpdate pRuReportId_ pRuProFileId_ pRuPayload_ =
-    ReportsUpdate
+    ReportsUpdate'
     { _ruReportId = _Coerce # pRuReportId_
     , _ruProFileId = _Coerce # pRuProFileId_
     , _ruPayload = pRuPayload_
@@ -102,7 +102,9 @@ ruPayload
 
 instance GoogleRequest ReportsUpdate where
         type Rs ReportsUpdate = Report
-        requestClient ReportsUpdate{..}
+        type Scopes ReportsUpdate =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient ReportsUpdate'{..}
           = go _ruProFileId _ruReportId (Just AltJSON)
               _ruPayload
               dFAReportingService

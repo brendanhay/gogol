@@ -7,19 +7,22 @@
 
 -- |
 -- Module      : Network.Google.LatencyTest
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- A Test API to report latency data.
+-- Reports latency data.
 --
 -- /See:/ < Google Cloud Network Performance Monitoring API Reference>
 module Network.Google.LatencyTest
     (
     -- * Service Configuration
       latencyTestService
+
+    -- * OAuth Scopes
+    , monitoringReadOnlyScope
 
     -- * API Declaration
     , LatencyTestAPI

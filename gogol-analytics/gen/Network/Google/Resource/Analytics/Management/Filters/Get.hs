@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Filters.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ManagementFiltersGetResource =
 -- | Returns a filters to which the user has access.
 --
 -- /See:/ 'managementFiltersGet' smart constructor.
-data ManagementFiltersGet = ManagementFiltersGet
+data ManagementFiltersGet = ManagementFiltersGet'
     { _mfgFilterId  :: !Text
     , _mfgAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ managementFiltersGet
     -> Text -- ^ 'mfgAccountId'
     -> ManagementFiltersGet
 managementFiltersGet pMfgFilterId_ pMfgAccountId_ =
-    ManagementFiltersGet
+    ManagementFiltersGet'
     { _mfgFilterId = pMfgFilterId_
     , _mfgAccountId = pMfgAccountId_
     }
@@ -89,7 +89,10 @@ mfgAccountId
 
 instance GoogleRequest ManagementFiltersGet where
         type Rs ManagementFiltersGet = Filter
-        requestClient ManagementFiltersGet{..}
+        type Scopes ManagementFiltersGet =
+             '["https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementFiltersGet'{..}
           = go _mfgAccountId _mfgFilterId (Just AltJSON)
               analyticsService
           where go

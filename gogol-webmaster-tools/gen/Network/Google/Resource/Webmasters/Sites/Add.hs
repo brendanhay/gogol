@@ -14,15 +14,15 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.Sites.Add
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds a site to the set of the user\'s sites in Webmaster Tools.
+-- Adds a site to the set of the user\'s sites in Search Console.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.add@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sites.add@.
 module Network.Google.Resource.Webmasters.Sites.Add
     (
     -- * REST Resource
@@ -48,10 +48,10 @@ type SitesAddResource =
            Capture "siteUrl" Text :>
              QueryParam "alt" AltJSON :> Put '[JSON] ()
 
--- | Adds a site to the set of the user\'s sites in Webmaster Tools.
+-- | Adds a site to the set of the user\'s sites in Search Console.
 --
 -- /See:/ 'sitesAdd' smart constructor.
-newtype SitesAdd = SitesAdd
+newtype SitesAdd = SitesAdd'
     { _saSiteURL :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ sitesAdd
     :: Text -- ^ 'saSiteURL'
     -> SitesAdd
 sitesAdd pSaSiteURL_ =
-    SitesAdd
+    SitesAdd'
     { _saSiteURL = pSaSiteURL_
     }
 
@@ -75,7 +75,9 @@ saSiteURL
 
 instance GoogleRequest SitesAdd where
         type Rs SitesAdd = ()
-        requestClient SitesAdd{..}
+        type Scopes SitesAdd =
+             '["https://www.googleapis.com/auth/webmasters"]
+        requestClient SitesAdd'{..}
           = go _saSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesAddResource)

@@ -12,7 +12,7 @@
 {-# LANGUAGE ViewPatterns               #-}
 
 -- Module      : Gen.AST.Render
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
@@ -25,17 +25,13 @@ module Gen.AST.Render
 import           Control.Applicative
 import           Control.Error
 import           Control.Lens                 hiding (enum, lens)
-import           Control.Monad.Except
 import           Data.Char                    (isSpace)
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
 import           Data.Semigroup               ((<>))
 import           Data.String
-import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
-import           Data.Text.Manipulate
-import           Debug.Trace
 import           Gen.AST.Solve                (getSolved)
 import           Gen.Formatting
 import           Gen.Syntax
@@ -74,9 +70,9 @@ renderSchema s = go (_schema s)
 
     object i (Obj aps ps) = do
         a <- traverse getSolved aps
-        p <- traverse getSolved ps
-        let ap = setAdditional <$> a
-            ts = maybe p (flip (Map.insert "addtional") p) ap
+        b <- traverse getSolved ps
+        let ab = setAdditional <$> a
+            ts = maybe b (flip (Map.insert "addtional") b) ab
         prod ts
       where
         prod ts = Prod (dname k) (i ^. iDescription)
@@ -110,23 +106,23 @@ renderAPI s = do
 
     API alias d rs ms
        <$> svc
-       <*> traverse scp (maybe mempty (Map.toList . scopes) (s ^. dAuth))
+       <*> traverse scope (maybe mempty (Map.toList . scopes) (s ^. dAuth))
   where
     alias = aname (_sCanonicalName s)
 
     url = name (serviceName s)
 
     svc = Fun' url (Just (rawHelpText h))
-        <$> pp None  (urlSig url)
-        <*> pp Print (urlDecl s url)
+        <$> pp None  (serviceSig    url)
+        <*> pp Print (serviceDecl s url)
       where
         h = sformat ("Default request referring to version @" % stext %
                      "@ of the " % stext % ". This contains the host and root path used as a starting point for constructing service requests.")
                      (s ^. dVersion) (s ^. dTitle)
 
-    scp (k, h) = Fun' n (Just h)
-        <$> pp None (scopeSig  n)
-        <*> pp None (scopeDecl n k)
+    scope (k, h) = Fun' n (Just h)
+        <$> pp None (scopeSig  n k)
+        <*> pp None (scopeDecl n)
       where
         n = name (scopeName s k)
 
@@ -172,14 +168,14 @@ data PP
     | None
       deriving (Eq)
 
-pp :: Pretty a => PP -> a -> AST Rendered
+pp :: (Pretty a, Show a) => PP -> a -> AST Rendered
 pp i x
     | i == Indent = result (reformat johanTibell Nothing p)
     | otherwise   = pure p
   where
     result = hoistEither . bimap e Build.toLazyText
 
-    e = flip mappend (", when formatting: " <> p) . LText.pack
+    e = flip mappend ("\nSyntax:\n" <> p <> "\nAST:\n" <> LText.pack (show x)) . LText.pack
 
     p = LText.dropWhile isSpace
       . LText.pack

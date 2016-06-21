@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Table.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type TableListResource =
 -- | Retrieves a list of tables a user owns.
 --
 -- /See:/ 'tableList'' smart constructor.
-data TableList' = TableList'
+data TableList' = TableList''
     { _tPageToken  :: !(Maybe Text)
     , _tMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,7 +68,7 @@ data TableList' = TableList'
 tableList'
     :: TableList'
 tableList' =
-    TableList'
+    TableList''
     { _tPageToken = Nothing
     , _tMaxResults = Nothing
     }
@@ -86,7 +86,10 @@ tMaxResults
 
 instance GoogleRequest TableList' where
         type Rs TableList' = TableList
-        requestClient TableList'{..}
+        type Scopes TableList' =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient TableList''{..}
           = go _tPageToken _tMaxResults (Just AltJSON)
               fusionTablesService
           where go

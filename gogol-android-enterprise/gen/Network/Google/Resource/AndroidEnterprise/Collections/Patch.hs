@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Collections.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Updates a collection. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.patch@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.collections.patch@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Patch
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type CollectionsPatchResource =
 -- | Updates a collection. This method supports patch semantics.
 --
 -- /See:/ 'collectionsPatch' smart constructor.
-data CollectionsPatch = CollectionsPatch
+data CollectionsPatch = CollectionsPatch'
     { _cpEnterpriseId :: !Text
     , _cpCollectionId :: !Text
     , _cpPayload      :: !Collection
@@ -78,7 +78,7 @@ collectionsPatch
     -> Collection -- ^ 'cpPayload'
     -> CollectionsPatch
 collectionsPatch pCpEnterpriseId_ pCpCollectionId_ pCpPayload_ =
-    CollectionsPatch
+    CollectionsPatch'
     { _cpEnterpriseId = pCpEnterpriseId_
     , _cpCollectionId = pCpCollectionId_
     , _cpPayload = pCpPayload_
@@ -103,7 +103,9 @@ cpPayload
 
 instance GoogleRequest CollectionsPatch where
         type Rs CollectionsPatch = Collection
-        requestClient CollectionsPatch{..}
+        type Scopes CollectionsPatch =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient CollectionsPatch'{..}
           = go _cpEnterpriseId _cpCollectionId (Just AltJSON)
               _cpPayload
               androidEnterpriseService

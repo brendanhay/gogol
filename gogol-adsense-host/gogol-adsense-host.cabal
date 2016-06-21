@@ -1,5 +1,5 @@
 name:                  gogol-adsense-host
-version:               0.0.1
+version:               0.1.0
 synopsis:              Google AdSense Host SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -7,15 +7,15 @@ license:               OtherLicense
 license-file:          LICENSE
 author:                Brendan Hay
 maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
-copyright:             Copyright (c) 2015 Brendan Hay
+copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Gives AdSense Hosts access to report generation, ad code generation, and
-    publisher management capabilities.
+    Generates performance reports, generates ad codes, and provides
+    publisher management capabilities for AdSense Hosts.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -72,5 +72,5 @@ library
         , Network.Google.AdSenseHost.Types.Sum
 
     build-depends:
-          gogol-core == 0.0.1.*
-        , base       >= 4.7 && < 5
+          gogol-core == 0.1.0.*
+        , base       >= 4.7

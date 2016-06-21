@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GroupsSettings.Groups.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type GroupsPatchResource =
 -- | Updates an existing resource. This method supports patch semantics.
 --
 -- /See:/ 'groupsPatch' smart constructor.
-data GroupsPatch = GroupsPatch
+data GroupsPatch = GroupsPatch'
     { _gpPayload       :: !Groups
     , _gpGroupUniqueId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupsPatch
     -> Text -- ^ 'gpGroupUniqueId'
     -> GroupsPatch
 groupsPatch pGpPayload_ pGpGroupUniqueId_ =
-    GroupsPatch
+    GroupsPatch'
     { _gpPayload = pGpPayload_
     , _gpGroupUniqueId = pGpGroupUniqueId_
     }
@@ -88,7 +88,9 @@ gpGroupUniqueId
 
 instance GoogleRequest GroupsPatch where
         type Rs GroupsPatch = Groups
-        requestClient GroupsPatch{..}
+        type Scopes GroupsPatch =
+             '["https://www.googleapis.com/auth/apps.groups.settings"]
+        requestClient GroupsPatch'{..}
           = go _gpGroupUniqueId (Just AltJSON) _gpPayload
               groupsSettingsService
           where go

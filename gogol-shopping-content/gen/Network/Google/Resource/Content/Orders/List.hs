@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type OrdersListResource =
 -- | Lists the orders in your Merchant Center account.
 --
 -- /See:/ 'ordersList' smart constructor.
-data OrdersList = OrdersList
+data OrdersList = OrdersList'
     { _olPlacedDateEnd   :: !(Maybe Text)
     , _olMerchantId      :: !(Textual Word64)
     , _olOrderBy         :: !(Maybe OrdersListOrderBy)
@@ -100,7 +100,7 @@ ordersList
     :: Word64 -- ^ 'olMerchantId'
     -> OrdersList
 ordersList pOlMerchantId_ =
-    OrdersList
+    OrdersList'
     { _olPlacedDateEnd = Nothing
     , _olMerchantId = _Coerce # pOlMerchantId_
     , _olOrderBy = Nothing
@@ -177,7 +177,9 @@ olMaxResults
 
 instance GoogleRequest OrdersList where
         type Rs OrdersList = OrdersListResponse
-        requestClient OrdersList{..}
+        type Scopes OrdersList =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersList'{..}
           = go _olMerchantId _olPlacedDateEnd _olOrderBy
               _olAcknowledged
               (_olStatuses ^. _Default)

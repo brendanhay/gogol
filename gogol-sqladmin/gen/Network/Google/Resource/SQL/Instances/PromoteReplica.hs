@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.SQL.Instances.PromoteReplica
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type InstancesPromoteReplicaResource =
 -- instance.
 --
 -- /See:/ 'instancesPromoteReplica' smart constructor.
-data InstancesPromoteReplica = InstancesPromoteReplica
+data InstancesPromoteReplica = InstancesPromoteReplica'
     { _iprProject  :: !Text
     , _iprInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ instancesPromoteReplica
     -> Text -- ^ 'iprInstance'
     -> InstancesPromoteReplica
 instancesPromoteReplica pIprProject_ pIprInstance_ =
-    InstancesPromoteReplica
+    InstancesPromoteReplica'
     { _iprProject = pIprProject_
     , _iprInstance = pIprInstance_
     }
@@ -91,7 +91,10 @@ iprInstance
 
 instance GoogleRequest InstancesPromoteReplica where
         type Rs InstancesPromoteReplica = Operation
-        requestClient InstancesPromoteReplica{..}
+        type Scopes InstancesPromoteReplica =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/sqlservice.admin"]
+        requestClient InstancesPromoteReplica'{..}
           = go _iprProject _iprInstance (Just AltJSON)
               sQLAdminService
           where go

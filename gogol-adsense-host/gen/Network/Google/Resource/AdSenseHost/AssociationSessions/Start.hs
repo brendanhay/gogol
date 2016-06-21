@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.AssociationSessions.Start
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type AssociationSessionsStartResource =
 -- AdSense user.
 --
 -- /See:/ 'associationSessionsStart' smart constructor.
-data AssociationSessionsStart = AssociationSessionsStart
+data AssociationSessionsStart = AssociationSessionsStart'
     { _assWebsiteLocale :: !(Maybe Text)
     , _assUserLocale    :: !(Maybe Text)
     , _assWebsiteURL    :: !Text
@@ -86,7 +86,7 @@ associationSessionsStart
     -> [AssociationSessionsStartProductCode] -- ^ 'assProductCode'
     -> AssociationSessionsStart
 associationSessionsStart pAssWebsiteURL_ pAssProductCode_ =
-    AssociationSessionsStart
+    AssociationSessionsStart'
     { _assWebsiteLocale = Nothing
     , _assUserLocale = Nothing
     , _assWebsiteURL = pAssWebsiteURL_
@@ -120,7 +120,9 @@ assProductCode
 
 instance GoogleRequest AssociationSessionsStart where
         type Rs AssociationSessionsStart = AssociationSession
-        requestClient AssociationSessionsStart{..}
+        type Scopes AssociationSessionsStart =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AssociationSessionsStart'{..}
           = go _assProductCode (Just _assWebsiteURL)
               _assWebsiteLocale
               _assUserLocale

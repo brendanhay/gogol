@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GAN.Publishers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type PublishersListResource =
 -- advertiser\/publisher has access to.
 --
 -- /See:/ 'publishersList' smart constructor.
-data PublishersList = PublishersList
+data PublishersList = PublishersList'
     { _plRelationshipStatus :: !(Maybe PublishersListRelationshipStatus)
     , _plMinSevenDayEpc     :: !(Maybe (Textual Double))
     , _plRoleId             :: !Text
@@ -109,7 +109,7 @@ publishersList
     -> PublishersListRole -- ^ 'plRole'
     -> PublishersList
 publishersList pPlRoleId_ pPlRole_ =
-    PublishersList
+    PublishersList'
     { _plRelationshipStatus = Nothing
     , _plMinSevenDayEpc = Nothing
     , _plRoleId = pPlRoleId_
@@ -186,7 +186,8 @@ plMaxResults
 
 instance GoogleRequest PublishersList where
         type Rs PublishersList = Publishers
-        requestClient PublishersList{..}
+        type Scopes PublishersList = '[]
+        requestClient PublishersList'{..}
           = go _plRole _plRoleId _plRelationshipStatus
               _plMinSevenDayEpc
               _plMinNinetyDayEpc

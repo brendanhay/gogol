@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.YouTubeAnalytics.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.YouTubeAnalytics.Types.Sum
 
 --
 -- /See:/ 'groupContentDetails' smart constructor.
-data GroupContentDetails = GroupContentDetails
+data GroupContentDetails = GroupContentDetails'
     { _gcdItemType  :: !(Maybe Text)
     , _gcdItemCount :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data GroupContentDetails = GroupContentDetails
 groupContentDetails
     :: GroupContentDetails
 groupContentDetails =
-    GroupContentDetails
+    GroupContentDetails'
     { _gcdItemType = Nothing
     , _gcdItemCount = Nothing
     }
@@ -55,11 +55,11 @@ instance FromJSON GroupContentDetails where
         parseJSON
           = withObject "GroupContentDetails"
               (\ o ->
-                 GroupContentDetails <$>
+                 GroupContentDetails' <$>
                    (o .:? "itemType") <*> (o .:? "itemCount"))
 
 instance ToJSON GroupContentDetails where
-        toJSON GroupContentDetails{..}
+        toJSON GroupContentDetails'{..}
           = object
               (catMaybes
                  [("itemType" .=) <$> _gcdItemType,
@@ -67,7 +67,7 @@ instance ToJSON GroupContentDetails where
 
 --
 -- /See:/ 'group'' smart constructor.
-data Group = Group
+data Group = Group'
     { _gEtag           :: !(Maybe Text)
     , _gSnippet        :: !(Maybe GroupSnippet)
     , _gKind           :: !Text
@@ -91,7 +91,7 @@ data Group = Group
 group'
     :: Group
 group' =
-    Group
+    Group'
     { _gEtag = Nothing
     , _gSnippet = Nothing
     , _gKind = "youtube#group"
@@ -120,14 +120,14 @@ instance FromJSON Group where
         parseJSON
           = withObject "Group"
               (\ o ->
-                 Group <$>
+                 Group' <$>
                    (o .:? "etag") <*> (o .:? "snippet") <*>
                      (o .:? "kind" .!= "youtube#group")
                      <*> (o .:? "contentDetails")
                      <*> (o .:? "id"))
 
 instance ToJSON Group where
-        toJSON Group{..}
+        toJSON Group'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _gEtag,
@@ -138,7 +138,7 @@ instance ToJSON Group where
 
 --
 -- /See:/ 'groupItemResource' smart constructor.
-data GroupItemResource = GroupItemResource
+data GroupItemResource = GroupItemResource'
     { _girKind :: !(Maybe Text)
     , _girId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -153,7 +153,7 @@ data GroupItemResource = GroupItemResource
 groupItemResource
     :: GroupItemResource
 groupItemResource =
-    GroupItemResource
+    GroupItemResource'
     { _girKind = Nothing
     , _girId = Nothing
     }
@@ -168,18 +168,18 @@ instance FromJSON GroupItemResource where
         parseJSON
           = withObject "GroupItemResource"
               (\ o ->
-                 GroupItemResource <$>
+                 GroupItemResource' <$>
                    (o .:? "kind") <*> (o .:? "id"))
 
 instance ToJSON GroupItemResource where
-        toJSON GroupItemResource{..}
+        toJSON GroupItemResource'{..}
           = object
               (catMaybes
                  [("kind" .=) <$> _girKind, ("id" .=) <$> _girId])
 
 --
 -- /See:/ 'resultTableColumnHeadersItem' smart constructor.
-data ResultTableColumnHeadersItem = ResultTableColumnHeadersItem
+data ResultTableColumnHeadersItem = ResultTableColumnHeadersItem'
     { _rtchiColumnType :: !(Maybe Text)
     , _rtchiName       :: !(Maybe Text)
     , _rtchiDataType   :: !(Maybe Text)
@@ -197,7 +197,7 @@ data ResultTableColumnHeadersItem = ResultTableColumnHeadersItem
 resultTableColumnHeadersItem
     :: ResultTableColumnHeadersItem
 resultTableColumnHeadersItem =
-    ResultTableColumnHeadersItem
+    ResultTableColumnHeadersItem'
     { _rtchiColumnType = Nothing
     , _rtchiName = Nothing
     , _rtchiDataType = Nothing
@@ -224,12 +224,12 @@ instance FromJSON ResultTableColumnHeadersItem where
         parseJSON
           = withObject "ResultTableColumnHeadersItem"
               (\ o ->
-                 ResultTableColumnHeadersItem <$>
+                 ResultTableColumnHeadersItem' <$>
                    (o .:? "columnType") <*> (o .:? "name") <*>
                      (o .:? "dataType"))
 
 instance ToJSON ResultTableColumnHeadersItem where
-        toJSON ResultTableColumnHeadersItem{..}
+        toJSON ResultTableColumnHeadersItem'{..}
           = object
               (catMaybes
                  [("columnType" .=) <$> _rtchiColumnType,
@@ -242,7 +242,7 @@ instance ToJSON ResultTableColumnHeadersItem where
 -- country code) or a number (number of views or number of likes).
 --
 -- /See:/ 'resultTable' smart constructor.
-data ResultTable = ResultTable
+data ResultTable = ResultTable'
     { _rtKind          :: !Text
     , _rtRows          :: !(Maybe [[JSONValue]])
     , _rtColumnHeaders :: !(Maybe [ResultTableColumnHeadersItem])
@@ -260,7 +260,7 @@ data ResultTable = ResultTable
 resultTable
     :: ResultTable
 resultTable =
-    ResultTable
+    ResultTable'
     { _rtKind = "youtubeAnalytics#resultTable"
     , _rtRows = Nothing
     , _rtColumnHeaders = Nothing
@@ -305,13 +305,13 @@ instance FromJSON ResultTable where
         parseJSON
           = withObject "ResultTable"
               (\ o ->
-                 ResultTable <$>
+                 ResultTable' <$>
                    (o .:? "kind" .!= "youtubeAnalytics#resultTable") <*>
                      (o .:? "rows" .!= mempty)
                      <*> (o .:? "columnHeaders" .!= mempty))
 
 instance ToJSON ResultTable where
-        toJSON ResultTable{..}
+        toJSON ResultTable'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rtKind), ("rows" .=) <$> _rtRows,
@@ -320,7 +320,7 @@ instance ToJSON ResultTable where
 -- | Contains single batchReportDefinition resource.
 --
 -- /See:/ 'batchReportDefinition' smart constructor.
-data BatchReportDefinition = BatchReportDefinition
+data BatchReportDefinition = BatchReportDefinition'
     { _brdStatus :: !(Maybe Text)
     , _brdKind   :: !Text
     , _brdName   :: !(Maybe Text)
@@ -344,7 +344,7 @@ data BatchReportDefinition = BatchReportDefinition
 batchReportDefinition
     :: BatchReportDefinition
 batchReportDefinition =
-    BatchReportDefinition
+    BatchReportDefinition'
     { _brdStatus = Nothing
     , _brdKind = "youtubeAnalytics#batchReportDefinition"
     , _brdName = Nothing
@@ -380,7 +380,7 @@ instance FromJSON BatchReportDefinition where
         parseJSON
           = withObject "BatchReportDefinition"
               (\ o ->
-                 BatchReportDefinition <$>
+                 BatchReportDefinition' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!=
                         "youtubeAnalytics#batchReportDefinition")
@@ -389,7 +389,7 @@ instance FromJSON BatchReportDefinition where
                      <*> (o .:? "type"))
 
 instance ToJSON BatchReportDefinition where
-        toJSON BatchReportDefinition{..}
+        toJSON BatchReportDefinition'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _brdStatus,
@@ -399,7 +399,7 @@ instance ToJSON BatchReportDefinition where
 -- | Contains single batchReport resource.
 --
 -- /See:/ 'batchReport' smart constructor.
-data BatchReport = BatchReport
+data BatchReport = BatchReport'
     { _brTimeUpdated :: !(Maybe DateTime')
     , _brKind        :: !Text
     , _brReportId    :: !(Maybe Text)
@@ -426,7 +426,7 @@ data BatchReport = BatchReport
 batchReport
     :: BatchReport
 batchReport =
-    BatchReport
+    BatchReport'
     { _brTimeUpdated = Nothing
     , _brKind = "youtubeAnalytics#batchReport"
     , _brReportId = Nothing
@@ -473,7 +473,7 @@ instance FromJSON BatchReport where
         parseJSON
           = withObject "BatchReport"
               (\ o ->
-                 BatchReport <$>
+                 BatchReport' <$>
                    (o .:? "timeUpdated") <*>
                      (o .:? "kind" .!= "youtubeAnalytics#batchReport")
                      <*> (o .:? "reportId")
@@ -482,7 +482,7 @@ instance FromJSON BatchReport where
                      <*> (o .:? "id"))
 
 instance ToJSON BatchReport where
-        toJSON BatchReport{..}
+        toJSON BatchReport'{..}
           = object
               (catMaybes
                  [("timeUpdated" .=) <$> _brTimeUpdated,
@@ -493,7 +493,7 @@ instance ToJSON BatchReport where
 
 --
 -- /See:/ 'groupSnippet' smart constructor.
-data GroupSnippet = GroupSnippet
+data GroupSnippet = GroupSnippet'
     { _gsPublishedAt :: !(Maybe DateTime')
     , _gsTitle       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -508,7 +508,7 @@ data GroupSnippet = GroupSnippet
 groupSnippet
     :: GroupSnippet
 groupSnippet =
-    GroupSnippet
+    GroupSnippet'
     { _gsPublishedAt = Nothing
     , _gsTitle = Nothing
     }
@@ -526,11 +526,11 @@ instance FromJSON GroupSnippet where
         parseJSON
           = withObject "GroupSnippet"
               (\ o ->
-                 GroupSnippet <$>
+                 GroupSnippet' <$>
                    (o .:? "publishedAt") <*> (o .:? "title"))
 
 instance ToJSON GroupSnippet where
-        toJSON GroupSnippet{..}
+        toJSON GroupSnippet'{..}
           = object
               (catMaybes
                  [("publishedAt" .=) <$> _gsPublishedAt,
@@ -538,7 +538,7 @@ instance ToJSON GroupSnippet where
 
 --
 -- /See:/ 'groupItem' smart constructor.
-data GroupItem = GroupItem
+data GroupItem = GroupItem'
     { _giEtag     :: !(Maybe Text)
     , _giKind     :: !Text
     , _giResource :: !(Maybe GroupItemResource)
@@ -562,7 +562,7 @@ data GroupItem = GroupItem
 groupItem
     :: GroupItem
 groupItem =
-    GroupItem
+    GroupItem'
     { _giEtag = Nothing
     , _giKind = "youtube#groupItem"
     , _giResource = Nothing
@@ -591,7 +591,7 @@ instance FromJSON GroupItem where
         parseJSON
           = withObject "GroupItem"
               (\ o ->
-                 GroupItem <$>
+                 GroupItem' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "youtube#groupItem")
                      <*> (o .:? "resource")
@@ -599,7 +599,7 @@ instance FromJSON GroupItem where
                      <*> (o .:? "id"))
 
 instance ToJSON GroupItem where
-        toJSON GroupItem{..}
+        toJSON GroupItem'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _giEtag, Just ("kind" .= _giKind),
@@ -610,7 +610,7 @@ instance ToJSON GroupItem where
 -- to a youtubeAnalytics.batchReportDefinitions.list request.
 --
 -- /See:/ 'batchReportDefinitionList' smart constructor.
-data BatchReportDefinitionList = BatchReportDefinitionList
+data BatchReportDefinitionList = BatchReportDefinitionList'
     { _brdlKind  :: !Text
     , _brdlItems :: !(Maybe [BatchReportDefinition])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -625,7 +625,7 @@ data BatchReportDefinitionList = BatchReportDefinitionList
 batchReportDefinitionList
     :: BatchReportDefinitionList
 batchReportDefinitionList =
-    BatchReportDefinitionList
+    BatchReportDefinitionList'
     { _brdlKind = "youtubeAnalytics#batchReportDefinitionList"
     , _brdlItems = Nothing
     }
@@ -648,13 +648,13 @@ instance FromJSON BatchReportDefinitionList where
         parseJSON
           = withObject "BatchReportDefinitionList"
               (\ o ->
-                 BatchReportDefinitionList <$>
+                 BatchReportDefinitionList' <$>
                    (o .:? "kind" .!=
                       "youtubeAnalytics#batchReportDefinitionList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON BatchReportDefinitionList where
-        toJSON BatchReportDefinitionList{..}
+        toJSON BatchReportDefinitionList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _brdlKind),
@@ -664,7 +664,7 @@ instance ToJSON BatchReportDefinitionList where
 -- youtubeAnalytics.batchReport.list request.
 --
 -- /See:/ 'batchReportList' smart constructor.
-data BatchReportList = BatchReportList
+data BatchReportList = BatchReportList'
     { _brlKind  :: !Text
     , _brlItems :: !(Maybe [BatchReport])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -679,7 +679,7 @@ data BatchReportList = BatchReportList
 batchReportList
     :: BatchReportList
 batchReportList =
-    BatchReportList
+    BatchReportList'
     { _brlKind = "youtubeAnalytics#batchReportList"
     , _brlItems = Nothing
     }
@@ -701,12 +701,12 @@ instance FromJSON BatchReportList where
         parseJSON
           = withObject "BatchReportList"
               (\ o ->
-                 BatchReportList <$>
+                 BatchReportList' <$>
                    (o .:? "kind" .!= "youtubeAnalytics#batchReportList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON BatchReportList where
-        toJSON BatchReportList{..}
+        toJSON BatchReportList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _brlKind),
@@ -714,7 +714,7 @@ instance ToJSON BatchReportList where
 
 --
 -- /See:/ 'batchReportOutputsItem' smart constructor.
-data BatchReportOutputsItem = BatchReportOutputsItem
+data BatchReportOutputsItem = BatchReportOutputsItem'
     { _broiFormat      :: !(Maybe Text)
     , _broiDownloadURL :: !(Maybe Text)
     , _broiType        :: !Text
@@ -732,7 +732,7 @@ data BatchReportOutputsItem = BatchReportOutputsItem
 batchReportOutputsItem
     :: BatchReportOutputsItem
 batchReportOutputsItem =
-    BatchReportOutputsItem
+    BatchReportOutputsItem'
     { _broiFormat = Nothing
     , _broiDownloadURL = Nothing
     , _broiType = "cloudStorageOutput"
@@ -758,12 +758,12 @@ instance FromJSON BatchReportOutputsItem where
         parseJSON
           = withObject "BatchReportOutputsItem"
               (\ o ->
-                 BatchReportOutputsItem <$>
+                 BatchReportOutputsItem' <$>
                    (o .:? "format") <*> (o .:? "downloadUrl") <*>
                      (o .:? "type" .!= "cloudStorageOutput"))
 
 instance ToJSON BatchReportOutputsItem where
-        toJSON BatchReportOutputsItem{..}
+        toJSON BatchReportOutputsItem'{..}
           = object
               (catMaybes
                  [("format" .=) <$> _broiFormat,
@@ -774,7 +774,7 @@ instance ToJSON BatchReportOutputsItem where
 -- endTime is not set. Both startTime and endTime are inclusive.
 --
 -- /See:/ 'batchReportTimeSpan' smart constructor.
-data BatchReportTimeSpan = BatchReportTimeSpan
+data BatchReportTimeSpan = BatchReportTimeSpan'
     { _brtsStartTime :: !(Maybe DateTime')
     , _brtsEndTime   :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -789,7 +789,7 @@ data BatchReportTimeSpan = BatchReportTimeSpan
 batchReportTimeSpan
     :: BatchReportTimeSpan
 batchReportTimeSpan =
-    BatchReportTimeSpan
+    BatchReportTimeSpan'
     { _brtsStartTime = Nothing
     , _brtsEndTime = Nothing
     }
@@ -812,11 +812,11 @@ instance FromJSON BatchReportTimeSpan where
         parseJSON
           = withObject "BatchReportTimeSpan"
               (\ o ->
-                 BatchReportTimeSpan <$>
+                 BatchReportTimeSpan' <$>
                    (o .:? "startTime") <*> (o .:? "endTime"))
 
 instance ToJSON BatchReportTimeSpan where
-        toJSON BatchReportTimeSpan{..}
+        toJSON BatchReportTimeSpan'{..}
           = object
               (catMaybes
                  [("startTime" .=) <$> _brtsStartTime,
@@ -826,7 +826,7 @@ instance ToJSON BatchReportTimeSpan where
 -- youtubeAnalytics.groupApi.list request.
 --
 -- /See:/ 'groupItemListResponse' smart constructor.
-data GroupItemListResponse = GroupItemListResponse
+data GroupItemListResponse = GroupItemListResponse'
     { _gilrEtag  :: !(Maybe Text)
     , _gilrKind  :: !Text
     , _gilrItems :: !(Maybe [GroupItem])
@@ -844,7 +844,7 @@ data GroupItemListResponse = GroupItemListResponse
 groupItemListResponse
     :: GroupItemListResponse
 groupItemListResponse =
-    GroupItemListResponse
+    GroupItemListResponse'
     { _gilrEtag = Nothing
     , _gilrKind = "youtube#groupItemListResponse"
     , _gilrItems = Nothing
@@ -866,13 +866,13 @@ instance FromJSON GroupItemListResponse where
         parseJSON
           = withObject "GroupItemListResponse"
               (\ o ->
-                 GroupItemListResponse <$>
+                 GroupItemListResponse' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "youtube#groupItemListResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON GroupItemListResponse where
-        toJSON GroupItemListResponse{..}
+        toJSON GroupItemListResponse'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _gilrEtag,
@@ -883,10 +883,11 @@ instance ToJSON GroupItemListResponse where
 -- youtubeAnalytics.groupApi.list request.
 --
 -- /See:/ 'groupListResponse' smart constructor.
-data GroupListResponse = GroupListResponse
-    { _glrEtag  :: !(Maybe Text)
-    , _glrKind  :: !Text
-    , _glrItems :: !(Maybe [Group])
+data GroupListResponse = GroupListResponse'
+    { _glrEtag          :: !(Maybe Text)
+    , _glrNextPageToken :: !(Maybe Text)
+    , _glrKind          :: !Text
+    , _glrItems         :: !(Maybe [Group])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupListResponse' with the minimum fields required to make a request.
@@ -895,20 +896,28 @@ data GroupListResponse = GroupListResponse
 --
 -- * 'glrEtag'
 --
+-- * 'glrNextPageToken'
+--
 -- * 'glrKind'
 --
 -- * 'glrItems'
 groupListResponse
     :: GroupListResponse
 groupListResponse =
-    GroupListResponse
+    GroupListResponse'
     { _glrEtag = Nothing
+    , _glrNextPageToken = Nothing
     , _glrKind = "youtube#groupListResponse"
     , _glrItems = Nothing
     }
 
 glrEtag :: Lens' GroupListResponse (Maybe Text)
 glrEtag = lens _glrEtag (\ s a -> s{_glrEtag = a})
+
+glrNextPageToken :: Lens' GroupListResponse (Maybe Text)
+glrNextPageToken
+  = lens _glrNextPageToken
+      (\ s a -> s{_glrNextPageToken = a})
 
 glrKind :: Lens' GroupListResponse Text
 glrKind = lens _glrKind (\ s a -> s{_glrKind = a})
@@ -923,14 +932,16 @@ instance FromJSON GroupListResponse where
         parseJSON
           = withObject "GroupListResponse"
               (\ o ->
-                 GroupListResponse <$>
-                   (o .:? "etag") <*>
+                 GroupListResponse' <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "youtube#groupListResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON GroupListResponse where
-        toJSON GroupListResponse{..}
+        toJSON GroupListResponse'{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _glrEtag, Just ("kind" .= _glrKind),
+                 [("etag" .=) <$> _glrEtag,
+                  ("nextPageToken" .=) <$> _glrNextPageToken,
+                  Just ("kind" .= _glrKind),
                   ("items" .=) <$> _glrItems])

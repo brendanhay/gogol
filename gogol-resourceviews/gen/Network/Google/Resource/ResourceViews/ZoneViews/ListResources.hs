@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ResourceViews.ZoneViews.ListResources
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -71,7 +71,7 @@ type ZoneViewsListResourcesResource =
 -- | List the resources of the resource view.
 --
 -- /See:/ 'zoneViewsListResources' smart constructor.
-data ZoneViewsListResources = ZoneViewsListResources
+data ZoneViewsListResources = ZoneViewsListResources'
     { _zvlrResourceView :: !Text
     , _zvlrListState    :: !ZoneViewsListResourcesListState
     , _zvlrProject      :: !Text
@@ -107,7 +107,7 @@ zoneViewsListResources
     -> Text -- ^ 'zvlrZone'
     -> ZoneViewsListResources
 zoneViewsListResources pZvlrResourceView_ pZvlrProject_ pZvlrZone_ =
-    ZoneViewsListResources
+    ZoneViewsListResources'
     { _zvlrResourceView = pZvlrResourceView_
     , _zvlrListState = All
     , _zvlrProject = pZvlrProject_
@@ -172,7 +172,14 @@ zvlrMaxResults
 instance GoogleRequest ZoneViewsListResources where
         type Rs ZoneViewsListResources =
              ZoneViewsListResourcesResponse
-        requestClient ZoneViewsListResources{..}
+        type Scopes ZoneViewsListResources =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+        requestClient ZoneViewsListResources'{..}
           = go _zvlrProject _zvlrZone _zvlrResourceView
               (Just _zvlrListState)
               _zvlrFormat

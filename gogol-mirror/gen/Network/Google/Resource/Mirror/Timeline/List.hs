@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type TimelineListResource =
 -- | Retrieves a list of timeline items for the authenticated user.
 --
 -- /See:/ 'timelineList' smart constructor.
-data TimelineList = TimelineList
+data TimelineList = TimelineList'
     { _tlPinnedOnly     :: !(Maybe Bool)
     , _tlOrderBy        :: !(Maybe TimelineListOrderBy)
     , _tlBundleId       :: !(Maybe Text)
@@ -94,7 +94,7 @@ data TimelineList = TimelineList
 timelineList
     :: TimelineList
 timelineList =
-    TimelineList
+    TimelineList'
     { _tlPinnedOnly = Nothing
     , _tlOrderBy = Nothing
     , _tlBundleId = Nothing
@@ -144,7 +144,10 @@ tlIncludeDeleted
 
 instance GoogleRequest TimelineList where
         type Rs TimelineList = TimelineListResponse
-        requestClient TimelineList{..}
+        type Scopes TimelineList =
+             '["https://www.googleapis.com/auth/glass.location",
+               "https://www.googleapis.com/auth/glass.timeline"]
+        requestClient TimelineList'{..}
           = go _tlPinnedOnly _tlOrderBy _tlBundleId
               _tlSourceItemId
               _tlPageToken

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Triggers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsContainersTriggersListResource =
 -- | Lists all GTM Triggers of a Container.
 --
 -- /See:/ 'accountsContainersTriggersList' smart constructor.
-data AccountsContainersTriggersList = AccountsContainersTriggersList
+data AccountsContainersTriggersList = AccountsContainersTriggersList'
     { _actlcContainerId :: !Text
     , _actlcAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsContainersTriggersList
     -> Text -- ^ 'actlcAccountId'
     -> AccountsContainersTriggersList
 accountsContainersTriggersList pActlcContainerId_ pActlcAccountId_ =
-    AccountsContainersTriggersList
+    AccountsContainersTriggersList'
     { _actlcContainerId = pActlcContainerId_
     , _actlcAccountId = pActlcAccountId_
     }
@@ -94,7 +94,10 @@ instance GoogleRequest AccountsContainersTriggersList
          where
         type Rs AccountsContainersTriggersList =
              ListTriggersResponse
-        requestClient AccountsContainersTriggersList{..}
+        type Scopes AccountsContainersTriggersList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersTriggersList'{..}
           = go _actlcAccountId _actlcContainerId (Just AltJSON)
               tagManagerService
           where go

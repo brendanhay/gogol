@@ -3,11 +3,10 @@
 {-# LANGUAGE LambdaCase         #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
-{-# LANGUAGE ViewPatterns       #-}
 
 -- |
 -- Module      : Network.Google.Internal.Logger
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
@@ -25,14 +24,15 @@ module Network.Google.Internal.Logger
     , logError
     , logInfo
     , logDebug
+    , logTrace
 
     -- * Building Messages
     , ToLog    (..)
     , buildLines
     ) where
 
-import           Control.Monad
-import           Control.Monad.IO.Class
+import           Control.Monad                (when)
+import           Control.Monad.IO.Class       (MonadIO (..))
 import           Data.ByteString              (ByteString)
 import qualified Data.ByteString              as BS
 import           Data.ByteString.Builder      (Builder)
@@ -41,18 +41,17 @@ import qualified Data.ByteString.Lazy         as LBS
 import qualified Data.ByteString.Lazy.Builder as Build
 import           Data.CaseInsensitive         (CI)
 import qualified Data.CaseInsensitive         as CI
-import           Data.Int
+import           Data.Int                     (Int16, Int8)
 import           Data.List                    (intersperse)
-import           Data.Monoid
 import qualified Data.Text                    as Text
 import qualified Data.Text.Encoding           as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Encoding      as LText
-import           Data.Word
+import           Data.Word                    (Word16)
 import           Network.Google.Prelude       hiding (Header, Request)
 import           Network.HTTP.Conduit
 import           Network.HTTP.Types
-import           Numeric
+import           Numeric                      (showFFloat)
 import           System.IO
 
 -- | A function threaded through various request and serialisation routines
@@ -63,21 +62,8 @@ data LogLevel
     = Info  -- ^ Info messages supplied by the user - this level is not emitted by the library.
     | Error -- ^ Error messages only.
     | Debug -- ^ Useful debug information + info + error levels.
+    | Trace -- ^ Includes potentially credentials metadata, and non-streaming response bodies.
       deriving (Eq, Ord, Enum, Show, Data, Typeable)
-
-instance FromText LogLevel where
-    fromText (Text.toLower -> t) =
-        case t of
-            "info"  -> Just Info
-            "error" -> Just Error
-            "debug" -> Just Debug
-            _       -> Nothing
-
-instance ToText LogLevel where
-    toText = \case
-        Info  -> "info"
-        Error -> "error"
-        Debug -> "debug"
 
 -- | This is a primitive logger which can be used to log builds to a 'Handle'.
 --
@@ -93,10 +79,12 @@ newLogger x hd = liftIO $ do
         when (x >= y) $
             Build.hPutBuilder hd (b <> "\n")
 
-logError, logInfo, logDebug :: (MonadIO m, ToLog a) => Logger -> a -> m ()
+logError, logInfo, logDebug, logTrace
+ :: (MonadIO m, ToLog a) => Logger -> a -> m ()
 logError f = liftIO . f Error . build
 logInfo  f = liftIO . f Info  . build
 logDebug f = liftIO . f Debug . build
+logTrace f = liftIO . f Trace . build
 
 class ToLog a where
     -- | Convert a value to a loggable builder.
@@ -159,7 +147,6 @@ instance ToLog RequestBody where
     build = \case
         RequestBodyBuilder     n _ -> " <msger:"   <> build n <> ">"
         RequestBodyStream      n _ -> " <stream:"  <> build n <> ">"
-        RequestBodyStreamChunked _ -> " <chunked>"
 
         RequestBodyLBS lbs
             | n <= 4096            -> build lbs
@@ -172,6 +159,8 @@ instance ToLog RequestBody where
             | otherwise            -> " <strict:" <> build n <> ">"
           where
             n = BS.length bs
+
+        _                          -> " <chunked>"
 
 instance ToLog HttpException where
     build x = "[HttpException] {\n" <> build (show x) <> "\n}"

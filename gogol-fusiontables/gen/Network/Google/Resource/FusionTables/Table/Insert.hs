@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Table.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type TableInsertResource =
 -- | Creates a new table.
 --
 -- /See:/ 'tableInsert' smart constructor.
-newtype TableInsert = TableInsert
+newtype TableInsert = TableInsert'
     { _tiPayload :: Table
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ tableInsert
     :: Table -- ^ 'tiPayload'
     -> TableInsert
 tableInsert pTiPayload_ =
-    TableInsert
+    TableInsert'
     { _tiPayload = pTiPayload_
     }
 
@@ -75,7 +75,9 @@ tiPayload
 
 instance GoogleRequest TableInsert where
         type Rs TableInsert = Table
-        requestClient TableInsert{..}
+        type Scopes TableInsert =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient TableInsert'{..}
           = go (Just AltJSON) _tiPayload fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableInsertResource)

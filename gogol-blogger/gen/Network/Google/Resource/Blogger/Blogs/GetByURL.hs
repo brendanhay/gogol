@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Blogs.GetByURL
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type BlogsGetByURLResource =
 -- | Retrieve a Blog by URL.
 --
 -- /See:/ 'blogsGetByURL' smart constructor.
-data BlogsGetByURL = BlogsGetByURL
+data BlogsGetByURL = BlogsGetByURL'
     { _bgbuURL  :: !Text
     , _bgbuView :: !(Maybe BlogsGetByURLView)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ blogsGetByURL
     :: Text -- ^ 'bgbuURL'
     -> BlogsGetByURL
 blogsGetByURL pBgbuURL_ =
-    BlogsGetByURL
+    BlogsGetByURL'
     { _bgbuURL = pBgbuURL_
     , _bgbuView = Nothing
     }
@@ -86,7 +86,10 @@ bgbuView = lens _bgbuView (\ s a -> s{_bgbuView = a})
 
 instance GoogleRequest BlogsGetByURL where
         type Rs BlogsGetByURL = Blog
-        requestClient BlogsGetByURL{..}
+        type Scopes BlogsGetByURL =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient BlogsGetByURL'{..}
           = go (Just _bgbuURL) _bgbuView (Just AltJSON)
               bloggerService
           where go

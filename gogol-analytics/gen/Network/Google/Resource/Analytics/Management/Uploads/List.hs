@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Uploads.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type ManagementUploadsListResource =
 -- | List uploads to which the user has access.
 --
 -- /See:/ 'managementUploadsList' smart constructor.
-data ManagementUploadsList = ManagementUploadsList
+data ManagementUploadsList = ManagementUploadsList'
     { _mulWebPropertyId      :: !Text
     , _mulCustomDataSourceId :: !Text
     , _mulAccountId          :: !Text
@@ -90,7 +90,7 @@ managementUploadsList
     -> Text -- ^ 'mulAccountId'
     -> ManagementUploadsList
 managementUploadsList pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ =
-    ManagementUploadsList
+    ManagementUploadsList'
     { _mulWebPropertyId = pMulWebPropertyId_
     , _mulCustomDataSourceId = pMulCustomDataSourceId_
     , _mulAccountId = pMulAccountId_
@@ -132,7 +132,11 @@ mulMaxResults
 
 instance GoogleRequest ManagementUploadsList where
         type Rs ManagementUploadsList = Uploads
-        requestClient ManagementUploadsList{..}
+        type Scopes ManagementUploadsList =
+             '["https://www.googleapis.com/auth/analytics",
+               "https://www.googleapis.com/auth/analytics.edit",
+               "https://www.googleapis.com/auth/analytics.readonly"]
+        requestClient ManagementUploadsList'{..}
           = go _mulAccountId _mulWebPropertyId
               _mulCustomDataSourceId
               _mulStartIndex

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type GlobalAccountsOperationsDeleteResource =
 -- | Deletes the specified operation resource.
 --
 -- /See:/ 'globalAccountsOperationsDelete' smart constructor.
-data GlobalAccountsOperationsDelete = GlobalAccountsOperationsDelete
+data GlobalAccountsOperationsDelete = GlobalAccountsOperationsDelete'
     { _gaodProject   :: !Text
     , _gaodOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ globalAccountsOperationsDelete
     -> Text -- ^ 'gaodOperation'
     -> GlobalAccountsOperationsDelete
 globalAccountsOperationsDelete pGaodProject_ pGaodOperation_ =
-    GlobalAccountsOperationsDelete
+    GlobalAccountsOperationsDelete'
     { _gaodProject = pGaodProject_
     , _gaodOperation = pGaodOperation_
     }
@@ -91,7 +91,10 @@ gaodOperation
 instance GoogleRequest GlobalAccountsOperationsDelete
          where
         type Rs GlobalAccountsOperationsDelete = ()
-        requestClient GlobalAccountsOperationsDelete{..}
+        type Scopes GlobalAccountsOperationsDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud.useraccounts"]
+        requestClient GlobalAccountsOperationsDelete'{..}
           = go _gaodProject _gaodOperation (Just AltJSON)
               userAccountsService
           where go

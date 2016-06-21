@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Cities.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'CitiesList' request conforms to.
 type CitiesListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "cities" :>
@@ -61,7 +61,7 @@ type CitiesListResource =
 -- | Retrieves a list of cities, possibly filtered.
 --
 -- /See:/ 'citiesList' smart constructor.
-data CitiesList = CitiesList
+data CitiesList = CitiesList'
     { _citRegionDartIds  :: !(Maybe [Textual Int64])
     , _citProFileId      :: !(Textual Int64)
     , _citNamePrefix     :: !(Maybe Text)
@@ -86,7 +86,7 @@ citiesList
     :: Int64 -- ^ 'citProFileId'
     -> CitiesList
 citiesList pCitProFileId_ =
-    CitiesList
+    CitiesList'
     { _citRegionDartIds = Nothing
     , _citProFileId = _Coerce # pCitProFileId_
     , _citNamePrefix = Nothing
@@ -131,7 +131,9 @@ citDartIds
 
 instance GoogleRequest CitiesList where
         type Rs CitiesList = CitiesListResponse
-        requestClient CitiesList{..}
+        type Scopes CitiesList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CitiesList'{..}
           = go _citProFileId (_citRegionDartIds ^. _Default)
               _citNamePrefix
               (_citCountryDartIds ^. _Default)

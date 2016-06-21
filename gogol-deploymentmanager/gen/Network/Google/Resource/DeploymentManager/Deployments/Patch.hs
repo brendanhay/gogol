@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DeploymentManager.Deployments.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type DeploymentsPatchResource =
 -- deployment manifest. This method supports patch semantics.
 --
 -- /See:/ 'deploymentsPatch' smart constructor.
-data DeploymentsPatch = DeploymentsPatch
+data DeploymentsPatch = DeploymentsPatch'
     { _dpCreatePolicy :: !DeploymentsPatchCreatePolicy
     , _dpProject      :: !Text
     , _dpPayload      :: !Deployment
@@ -99,7 +99,7 @@ deploymentsPatch
     -> Text -- ^ 'dpDeployment'
     -> DeploymentsPatch
 deploymentsPatch pDpProject_ pDpPayload_ pDpDeployment_ =
-    DeploymentsPatch
+    DeploymentsPatch'
     { _dpCreatePolicy = DPCPCreateOrAcquire
     , _dpProject = pDpProject_
     , _dpPayload = pDpPayload_
@@ -132,8 +132,8 @@ dpDeletePolicy
 
 -- | If set to true, updates the deployment and creates and updates the
 -- \"shell\" resources but does not actually alter or instantiate these
--- resources. This allows you to preview what your deployment looks like.
--- You can use this intent to preview how an update would affect your
+-- resources. This allows you to preview what your deployment will look
+-- like. You can use this intent to preview how an update would affect your
 -- deployment. You must provide a target.config with a configuration if
 -- this is set to true. After previewing a deployment, you can deploy your
 -- resources by making a request with the update() or you can
@@ -151,7 +151,10 @@ dpDeployment
 
 instance GoogleRequest DeploymentsPatch where
         type Rs DeploymentsPatch = Operation
-        requestClient DeploymentsPatch{..}
+        type Scopes DeploymentsPatch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient DeploymentsPatch'{..}
           = go _dpProject _dpDeployment (Just _dpCreatePolicy)
               (Just _dpDeletePolicy)
               (Just _dpPreview)

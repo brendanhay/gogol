@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type InstanceGroupManagersInsertResource =
 -- specified number of instances.
 --
 -- /See:/ 'instanceGroupManagersInsert' smart constructor.
-data InstanceGroupManagersInsert = InstanceGroupManagersInsert
+data InstanceGroupManagersInsert = InstanceGroupManagersInsert'
     { _igmiProject :: !Text
     , _igmiSize    :: !(Textual Int32)
     , _igmiZone    :: !Text
@@ -87,7 +87,7 @@ instanceGroupManagersInsert
     -> InstanceGroupManager -- ^ 'igmiPayload'
     -> InstanceGroupManagersInsert
 instanceGroupManagersInsert pIgmiProject_ pIgmiSize_ pIgmiZone_ pIgmiPayload_ =
-    InstanceGroupManagersInsert
+    InstanceGroupManagersInsert'
     { _igmiProject = pIgmiProject_
     , _igmiSize = _Coerce # pIgmiSize_
     , _igmiZone = pIgmiZone_
@@ -117,7 +117,10 @@ igmiPayload
 instance GoogleRequest InstanceGroupManagersInsert
          where
         type Rs InstanceGroupManagersInsert = Operation
-        requestClient InstanceGroupManagersInsert{..}
+        type Scopes InstanceGroupManagersInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstanceGroupManagersInsert'{..}
           = go _igmiProject _igmiZone (Just _igmiSize)
               (Just AltJSON)
               _igmiPayload

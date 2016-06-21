@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.Sitemaps.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves information about a specific sitemap.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.get@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.sitemaps.get@.
 module Network.Google.Resource.Webmasters.Sitemaps.Get
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type SitemapsGetResource =
 -- | Retrieves information about a specific sitemap.
 --
 -- /See:/ 'sitemapsGet' smart constructor.
-data SitemapsGet = SitemapsGet
+data SitemapsGet = SitemapsGet'
     { _sgFeedpath :: !Text
     , _sgSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitemapsGet
     -> Text -- ^ 'sgSiteURL'
     -> SitemapsGet
 sitemapsGet pSgFeedpath_ pSgSiteURL_ =
-    SitemapsGet
+    SitemapsGet'
     { _sgFeedpath = pSgFeedpath_
     , _sgSiteURL = pSgSiteURL_
     }
@@ -90,7 +90,10 @@ sgSiteURL
 
 instance GoogleRequest SitemapsGet where
         type Rs SitemapsGet = WmxSitemap
-        requestClient SitemapsGet{..}
+        type Scopes SitemapsGet =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
+        requestClient SitemapsGet'{..}
           = go _sgSiteURL _sgFeedpath (Just AltJSON)
               webmasterToolsService
           where go

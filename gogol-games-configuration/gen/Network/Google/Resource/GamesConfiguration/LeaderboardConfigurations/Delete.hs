@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type LeaderboardConfigurationsDeleteResource =
 -- | Delete the leaderboard configuration with the given ID.
 --
 -- /See:/ 'leaderboardConfigurationsDelete' smart constructor.
-newtype LeaderboardConfigurationsDelete = LeaderboardConfigurationsDelete
+newtype LeaderboardConfigurationsDelete = LeaderboardConfigurationsDelete'
     { _lcdLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ leaderboardConfigurationsDelete
     :: Text -- ^ 'lcdLeaderboardId'
     -> LeaderboardConfigurationsDelete
 leaderboardConfigurationsDelete pLcdLeaderboardId_ =
-    LeaderboardConfigurationsDelete
+    LeaderboardConfigurationsDelete'
     { _lcdLeaderboardId = pLcdLeaderboardId_
     }
 
@@ -77,7 +77,9 @@ lcdLeaderboardId
 instance GoogleRequest
          LeaderboardConfigurationsDelete where
         type Rs LeaderboardConfigurationsDelete = ()
-        requestClient LeaderboardConfigurationsDelete{..}
+        type Scopes LeaderboardConfigurationsDelete =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient LeaderboardConfigurationsDelete'{..}
           = go _lcdLeaderboardId (Just AltJSON)
               gamesConfigurationService
           where go

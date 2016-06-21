@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Style.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type StyleInsertResource =
 -- | Adds a new style for the table.
 --
 -- /See:/ 'styleInsert' smart constructor.
-data StyleInsert = StyleInsert
+data StyleInsert = StyleInsert'
     { _siPayload :: !StyleSetting
     , _siTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ styleInsert
     -> Text -- ^ 'siTableId'
     -> StyleInsert
 styleInsert pSiPayload_ pSiTableId_ =
-    StyleInsert
+    StyleInsert'
     { _siPayload = pSiPayload_
     , _siTableId = pSiTableId_
     }
@@ -89,7 +89,9 @@ siTableId
 
 instance GoogleRequest StyleInsert where
         type Rs StyleInsert = StyleSetting
-        requestClient StyleInsert{..}
+        type Scopes StyleInsert =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient StyleInsert'{..}
           = go _siTableId (Just AltJSON) _siPayload
               fusionTablesService
           where go

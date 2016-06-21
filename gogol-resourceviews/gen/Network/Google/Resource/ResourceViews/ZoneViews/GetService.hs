@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ResourceViews.ZoneViews.GetService
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type ZoneViewsGetServiceResource =
 -- | Get the service information of a resource view or a resource.
 --
 -- /See:/ 'zoneViewsGetService' smart constructor.
-data ZoneViewsGetService = ZoneViewsGetService
+data ZoneViewsGetService = ZoneViewsGetService'
     { _zvgsResourceView :: !Text
     , _zvgsResourceName :: !(Maybe Text)
     , _zvgsProject      :: !Text
@@ -85,7 +85,7 @@ zoneViewsGetService
     -> Text -- ^ 'zvgsZone'
     -> ZoneViewsGetService
 zoneViewsGetService pZvgsResourceView_ pZvgsProject_ pZvgsZone_ =
-    ZoneViewsGetService
+    ZoneViewsGetService'
     { _zvgsResourceView = pZvgsResourceView_
     , _zvgsResourceName = Nothing
     , _zvgsProject = pZvgsProject_
@@ -117,7 +117,11 @@ zvgsZone = lens _zvgsZone (\ s a -> s{_zvgsZone = a})
 instance GoogleRequest ZoneViewsGetService where
         type Rs ZoneViewsGetService =
              ZoneViewsGetServiceResponse
-        requestClient ZoneViewsGetService{..}
+        type Scopes ZoneViewsGetService =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/ndev.cloudman"]
+        requestClient ZoneViewsGetService'{..}
           = go _zvgsProject _zvgsZone _zvgsResourceView
               _zvgsResourceName
               (Just AltJSON)

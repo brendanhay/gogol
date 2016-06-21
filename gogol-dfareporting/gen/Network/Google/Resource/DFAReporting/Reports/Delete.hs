@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ReportsDelete' request conforms to.
 type ReportsDeleteResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -54,7 +54,7 @@ type ReportsDeleteResource =
 -- | Deletes a report by its ID.
 --
 -- /See:/ 'reportsDelete' smart constructor.
-data ReportsDelete = ReportsDelete
+data ReportsDelete = ReportsDelete'
     { _rdReportId  :: !(Textual Int64)
     , _rdProFileId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ reportsDelete
     -> Int64 -- ^ 'rdProFileId'
     -> ReportsDelete
 reportsDelete pRdReportId_ pRdProFileId_ =
-    ReportsDelete
+    ReportsDelete'
     { _rdReportId = _Coerce # pRdReportId_
     , _rdProFileId = _Coerce # pRdProFileId_
     }
@@ -90,7 +90,9 @@ rdProFileId
 
 instance GoogleRequest ReportsDelete where
         type Rs ReportsDelete = ()
-        requestClient ReportsDelete{..}
+        type Scopes ReportsDelete =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient ReportsDelete'{..}
           = go _rdProFileId _rdReportId (Just AltJSON)
               dFAReportingService
           where go

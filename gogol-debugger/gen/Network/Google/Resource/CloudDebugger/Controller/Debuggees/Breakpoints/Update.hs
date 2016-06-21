@@ -14,18 +14,18 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates the breakpoint state or mutable fields. The entire Breakpoint
--- protobuf must be sent back to the controller. Updates to active
+-- message must be sent back to the controller service. Updates to active
 -- breakpoint fields are only allowed if the new value does not change the
--- breakpoint specification. Updates to the \'location\', \'condition\' and
--- \'expression\' fields should not alter the breakpoint semantics. They
--- are restricted to changes such as canonicalizing a value or snapping the
+-- breakpoint specification. Updates to the \`location\`, \`condition\` and
+-- \`expression\` fields should not alter the breakpoint semantics. These
+-- may only make changes such as canonicalizing a value or snapping the
 -- location to the correct line of code.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
@@ -75,15 +75,15 @@ type ControllerDebuggeesBreakpointsUpdateResource =
                                    :> Put '[JSON] UpdateActiveBreakpointResponse
 
 -- | Updates the breakpoint state or mutable fields. The entire Breakpoint
--- protobuf must be sent back to the controller. Updates to active
+-- message must be sent back to the controller service. Updates to active
 -- breakpoint fields are only allowed if the new value does not change the
--- breakpoint specification. Updates to the \'location\', \'condition\' and
--- \'expression\' fields should not alter the breakpoint semantics. They
--- are restricted to changes such as canonicalizing a value or snapping the
+-- breakpoint specification. Updates to the \`location\`, \`condition\` and
+-- \`expression\` fields should not alter the breakpoint semantics. These
+-- may only make changes such as canonicalizing a value or snapping the
 -- location to the correct line of code.
 --
 -- /See:/ 'controllerDebuggeesBreakpointsUpdate' smart constructor.
-data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate
+data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv          :: !(Maybe Text)
     , _cdbuUploadProtocol :: !(Maybe Text)
     , _cdbuPp             :: !Bool
@@ -125,7 +125,7 @@ controllerDebuggeesBreakpointsUpdate
     -> Text -- ^ 'cdbuDebuggeeId'
     -> ControllerDebuggeesBreakpointsUpdate
 controllerDebuggeesBreakpointsUpdate pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
-    ControllerDebuggeesBreakpointsUpdate
+    ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv = Nothing
     , _cdbuUploadProtocol = Nothing
     , _cdbuPp = True
@@ -195,8 +195,11 @@ instance GoogleRequest
          ControllerDebuggeesBreakpointsUpdate where
         type Rs ControllerDebuggeesBreakpointsUpdate =
              UpdateActiveBreakpointResponse
+        type Scopes ControllerDebuggeesBreakpointsUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud_debugletcontroller"]
         requestClient
-          ControllerDebuggeesBreakpointsUpdate{..}
+          ControllerDebuggeesBreakpointsUpdate'{..}
           = go _cdbuDebuggeeId _cdbuId _cdbuXgafv
               _cdbuUploadProtocol
               (Just _cdbuPp)

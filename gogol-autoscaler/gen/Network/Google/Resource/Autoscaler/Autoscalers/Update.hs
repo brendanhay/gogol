@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Autoscaler.Autoscalers.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type AutoscalersUpdateResource =
 -- | Update the entire content of the Autoscaler resource.
 --
 -- /See:/ 'autoscalersUpdate' smart constructor.
-data AutoscalersUpdate = AutoscalersUpdate
+data AutoscalersUpdate = AutoscalersUpdate'
     { _auProject    :: !Text
     , _auZone       :: !Text
     , _auPayload    :: !Autoscaler
@@ -84,7 +84,7 @@ autoscalersUpdate
     -> Text -- ^ 'auAutoscaler'
     -> AutoscalersUpdate
 autoscalersUpdate pAuProject_ pAuZone_ pAuPayload_ pAuAutoscaler_ =
-    AutoscalersUpdate
+    AutoscalersUpdate'
     { _auProject = pAuProject_
     , _auZone = pAuZone_
     , _auPayload = pAuPayload_
@@ -112,7 +112,9 @@ auAutoscaler
 
 instance GoogleRequest AutoscalersUpdate where
         type Rs AutoscalersUpdate = Operation
-        requestClient AutoscalersUpdate{..}
+        type Scopes AutoscalersUpdate =
+             '["https://www.googleapis.com/auth/compute"]
+        requestClient AutoscalersUpdate'{..}
           = go _auProject _auZone _auAutoscaler (Just AltJSON)
               _auPayload
               autoscalerService

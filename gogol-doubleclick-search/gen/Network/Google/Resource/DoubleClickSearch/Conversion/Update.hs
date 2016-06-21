@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickSearch.Conversion.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -52,7 +52,7 @@ type ConversionUpdateResource =
 -- | Updates a batch of conversions in DoubleClick Search.
 --
 -- /See:/ 'conversionUpdate' smart constructor.
-newtype ConversionUpdate = ConversionUpdate
+newtype ConversionUpdate = ConversionUpdate'
     { _cuPayload :: ConversionList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ conversionUpdate
     :: ConversionList -- ^ 'cuPayload'
     -> ConversionUpdate
 conversionUpdate pCuPayload_ =
-    ConversionUpdate
+    ConversionUpdate'
     { _cuPayload = pCuPayload_
     }
 
@@ -76,7 +76,9 @@ cuPayload
 
 instance GoogleRequest ConversionUpdate where
         type Rs ConversionUpdate = ConversionList
-        requestClient ConversionUpdate{..}
+        type Scopes ConversionUpdate =
+             '["https://www.googleapis.com/auth/doubleclicksearch"]
+        requestClient ConversionUpdate'{..}
           = go (Just AltJSON) _cuPayload
               doubleClickSearchService
           where go

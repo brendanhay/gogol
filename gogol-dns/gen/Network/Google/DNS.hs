@@ -7,20 +7,25 @@
 
 -- |
 -- Module      : Network.Google.DNS
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Cloud DNS API provides services for configuring and serving
--- authoritative DNS records.
+-- Configures and serves authoritative DNS records.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference>
 module Network.Google.DNS
     (
     -- * Service Configuration
       dNSService
+
+    -- * OAuth Scopes
+    , ndevClouddnsReadOnlyScope
+    , cloudPlatformReadOnlyScope
+    , ndevClouddnsReadwriteScope
+    , cloudPlatformScope
 
     -- * API Declaration
     , DNSAPI

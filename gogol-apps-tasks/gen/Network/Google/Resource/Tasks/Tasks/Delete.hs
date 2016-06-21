@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Tasks.Tasks.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type TasksDeleteResource =
 -- | Deletes the specified task from the task list.
 --
 -- /See:/ 'tasksDelete' smart constructor.
-data TasksDelete = TasksDelete
+data TasksDelete = TasksDelete'
     { _tdTaskList :: !Text
     , _tdTask     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ tasksDelete
     -> Text -- ^ 'tdTask'
     -> TasksDelete
 tasksDelete pTdTaskList_ pTdTask_ =
-    TasksDelete
+    TasksDelete'
     { _tdTaskList = pTdTaskList_
     , _tdTask = pTdTask_
     }
@@ -87,7 +87,9 @@ tdTask = lens _tdTask (\ s a -> s{_tdTask = a})
 
 instance GoogleRequest TasksDelete where
         type Rs TasksDelete = ()
-        requestClient TasksDelete{..}
+        type Scopes TasksDelete =
+             '["https://www.googleapis.com/auth/tasks"]
+        requestClient TasksDelete'{..}
           = go _tdTaskList _tdTask (Just AltJSON)
               appsTasksService
           where go

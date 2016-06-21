@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.Variants.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a variant by ID.
+-- Gets a variant by ID. For the definitions of variants and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.variants.get@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.get@.
 module Network.Google.Resource.Genomics.Variants.Get
     (
     -- * REST Resource
@@ -61,10 +63,12 @@ type VariantsGetResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Get '[JSON] Variant
 
--- | Gets a variant by ID.
+-- | Gets a variant by ID. For the definitions of variants and other genomics
+-- resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantsGet' smart constructor.
-data VariantsGet = VariantsGet
+data VariantsGet = VariantsGet'
     { _vgXgafv          :: !(Maybe Text)
     , _vgUploadProtocol :: !(Maybe Text)
     , _vgPp             :: !Bool
@@ -98,7 +102,7 @@ variantsGet
     :: Text -- ^ 'vgVariantId'
     -> VariantsGet
 variantsGet pVgVariantId_ =
-    VariantsGet
+    VariantsGet'
     { _vgXgafv = Nothing
     , _vgUploadProtocol = Nothing
     , _vgPp = True
@@ -152,7 +156,11 @@ vgCallback
 
 instance GoogleRequest VariantsGet where
         type Rs VariantsGet = Variant
-        requestClient VariantsGet{..}
+        type Scopes VariantsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient VariantsGet'{..}
           = go _vgVariantId _vgXgafv _vgUploadProtocol
               (Just _vgPp)
               _vgAccessToken

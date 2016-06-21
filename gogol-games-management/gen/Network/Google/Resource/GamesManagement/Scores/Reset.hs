@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Scores.Reset
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ScoresResetResource =
 -- tester accounts for your application.
 --
 -- /See:/ 'scoresReset' smart constructor.
-newtype ScoresReset = ScoresReset
+newtype ScoresReset = ScoresReset'
     { _srLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -71,7 +71,7 @@ scoresReset
     :: Text -- ^ 'srLeaderboardId'
     -> ScoresReset
 scoresReset pSrLeaderboardId_ =
-    ScoresReset
+    ScoresReset'
     { _srLeaderboardId = pSrLeaderboardId_
     }
 
@@ -83,7 +83,10 @@ srLeaderboardId
 
 instance GoogleRequest ScoresReset where
         type Rs ScoresReset = PlayerScoreResetResponse
-        requestClient ScoresReset{..}
+        type Scopes ScoresReset =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient ScoresReset'{..}
           = go _srLeaderboardId (Just AltJSON)
               gamesManagementService
           where go

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Blogger.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -20,7 +21,7 @@ module Network.Google.Blogger.Types
 
     -- * OAuth Scopes
     , bloggerScope
-    , bloggerReadonlyScope
+    , bloggerReadOnlyScope
 
     -- * PostsListOrderBy
     , PostsListOrderBy (..)
@@ -379,15 +380,15 @@ import           Network.Google.Blogger.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v3' of the Blogger API. This contains the host and root path used as a starting point for constructing service requests.
-bloggerService :: Service
+bloggerService :: ServiceConfig
 bloggerService
   = defaultService (ServiceId "blogger:v3")
       "www.googleapis.com"
 
 -- | Manage your Blogger account
-bloggerScope :: OAuthScope
-bloggerScope = "https://www.googleapis.com/auth/blogger";
+bloggerScope :: Proxy '["https://www.googleapis.com/auth/blogger"]
+bloggerScope = Proxy;
 
 -- | View your Blogger account
-bloggerReadonlyScope :: OAuthScope
-bloggerReadonlyScope = "https://www.googleapis.com/auth/blogger.readonly";
+bloggerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/blogger.readonly"]
+bloggerReadOnlyScope = Proxy;

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ReportsInsert' request conforms to.
 type ReportsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -54,7 +54,7 @@ type ReportsInsertResource =
 -- | Creates a report.
 --
 -- /See:/ 'reportsInsert' smart constructor.
-data ReportsInsert = ReportsInsert
+data ReportsInsert = ReportsInsert'
     { _riProFileId :: !(Textual Int64)
     , _riPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ reportsInsert
     -> Report -- ^ 'riPayload'
     -> ReportsInsert
 reportsInsert pRiProFileId_ pRiPayload_ =
-    ReportsInsert
+    ReportsInsert'
     { _riProFileId = _Coerce # pRiProFileId_
     , _riPayload = pRiPayload_
     }
@@ -89,7 +89,9 @@ riPayload
 
 instance GoogleRequest ReportsInsert where
         type Rs ReportsInsert = Report
-        requestClient ReportsInsert{..}
+        type Scopes ReportsInsert =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient ReportsInsert'{..}
           = go _riProFileId (Just AltJSON) _riPayload
               dFAReportingService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type RelyingPartySetAccountInfoResource =
 -- | Set account info for a user.
 --
 -- /See:/ 'relyingPartySetAccountInfo' smart constructor.
-newtype RelyingPartySetAccountInfo = RelyingPartySetAccountInfo
+newtype RelyingPartySetAccountInfo = RelyingPartySetAccountInfo'
     { _rpsaiPayload :: IdentitytoolkitRelyingPartySetAccountInfoRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartySetAccountInfo
     :: IdentitytoolkitRelyingPartySetAccountInfoRequest -- ^ 'rpsaiPayload'
     -> RelyingPartySetAccountInfo
 relyingPartySetAccountInfo pRpsaiPayload_ =
-    RelyingPartySetAccountInfo
+    RelyingPartySetAccountInfo'
     { _rpsaiPayload = pRpsaiPayload_
     }
 
@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartySetAccountInfo
          where
         type Rs RelyingPartySetAccountInfo =
              SetAccountInfoResponse
-        requestClient RelyingPartySetAccountInfo{..}
+        type Scopes RelyingPartySetAccountInfo = '[]
+        requestClient RelyingPartySetAccountInfo'{..}
           = go (Just AltJSON) _rpsaiPayload
               identityToolkitService
           where go

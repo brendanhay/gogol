@@ -14,18 +14,18 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.Stop
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This method stops a running instance, shutting it down cleanly, and
--- allows you to restart the instance at a later time. Stopped instances do
--- not incur per-minute, virtual machine usage charges while they are
--- stopped, but any resources that the virtual machine is using, such as
--- persistent disks and static IP addresses,will continue to be charged
--- until they are deleted. For more information, see Stopping an instance.
+-- Stops a running instance, shutting it down cleanly, and allows you to
+-- restart the instance at a later time. Stopped instances do not incur
+-- per-minute, virtual machine usage charges while they are stopped, but
+-- any resources that the virtual machine is using, such as persistent
+-- disks and static IP addresses, will continue to be charged until they
+-- are deleted. For more information, see Stopping an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.stop@.
 module Network.Google.Resource.Compute.Instances.Stop
@@ -60,15 +60,15 @@ type InstancesStopResource =
                      "stop" :>
                        QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
--- | This method stops a running instance, shutting it down cleanly, and
--- allows you to restart the instance at a later time. Stopped instances do
--- not incur per-minute, virtual machine usage charges while they are
--- stopped, but any resources that the virtual machine is using, such as
--- persistent disks and static IP addresses,will continue to be charged
--- until they are deleted. For more information, see Stopping an instance.
+-- | Stops a running instance, shutting it down cleanly, and allows you to
+-- restart the instance at a later time. Stopped instances do not incur
+-- per-minute, virtual machine usage charges while they are stopped, but
+-- any resources that the virtual machine is using, such as persistent
+-- disks and static IP addresses, will continue to be charged until they
+-- are deleted. For more information, see Stopping an instance.
 --
 -- /See:/ 'instancesStop' smart constructor.
-data InstancesStop = InstancesStop
+data InstancesStop = InstancesStop'
     { _isProject  :: !Text
     , _isZone     :: !Text
     , _isInstance :: !Text
@@ -89,7 +89,7 @@ instancesStop
     -> Text -- ^ 'isInstance'
     -> InstancesStop
 instancesStop pIsProject_ pIsZone_ pIsInstance_ =
-    InstancesStop
+    InstancesStop'
     { _isProject = pIsProject_
     , _isZone = pIsZone_
     , _isInstance = pIsInstance_
@@ -111,7 +111,10 @@ isInstance
 
 instance GoogleRequest InstancesStop where
         type Rs InstancesStop = Operation
-        requestClient InstancesStop{..}
+        type Scopes InstancesStop =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstancesStop'{..}
           = go _isProject _isZone _isInstance (Just AltJSON)
               computeService
           where go

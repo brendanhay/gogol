@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchDelete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type RasterCollectionsRastersBatchDeleteResource =
 -- atomic.
 --
 -- /See:/ 'rasterCollectionsRastersBatchDelete' smart constructor.
-data RasterCollectionsRastersBatchDelete = RasterCollectionsRastersBatchDelete
+data RasterCollectionsRastersBatchDelete = RasterCollectionsRastersBatchDelete'
     { _rcrbdPayload :: !RasterCollectionsRasterBatchDeleteRequest
     , _rcrbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ rasterCollectionsRastersBatchDelete
     -> Text -- ^ 'rcrbdId'
     -> RasterCollectionsRastersBatchDelete
 rasterCollectionsRastersBatchDelete pRcrbdPayload_ pRcrbdId_ =
-    RasterCollectionsRastersBatchDelete
+    RasterCollectionsRastersBatchDelete'
     { _rcrbdPayload = pRcrbdPayload_
     , _rcrbdId = pRcrbdId_
     }
@@ -98,7 +98,10 @@ instance GoogleRequest
          RasterCollectionsRastersBatchDelete where
         type Rs RasterCollectionsRastersBatchDelete =
              RasterCollectionsRastersBatchDeleteResponse
-        requestClient RasterCollectionsRastersBatchDelete{..}
+        type Scopes RasterCollectionsRastersBatchDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient
+          RasterCollectionsRastersBatchDelete'{..}
           = go _rcrbdId (Just AltJSON) _rcrbdPayload
               mapsEngineService
           where go

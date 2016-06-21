@@ -7,19 +7,26 @@
 
 -- |
 -- Module      : Network.Google.Storage
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you store and retrieve potentially-large, immutable data objects.
+-- Stores and retrieves potentially large, immutable data objects.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference>
 module Network.Google.Storage
     (
     -- * Service Configuration
       storageService
+
+    -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , storageReadOnlyScope
+    , storageReadWriteScope
+    , storageFullControlScope
 
     -- * API Declaration
     , StorageAPI
@@ -230,6 +237,12 @@ module Network.Google.Storage
     , oacptProjectNumber
     , oacptTeam
 
+    -- ** ObjectCustomerEncryption
+    , ObjectCustomerEncryption
+    , objectCustomerEncryption
+    , oceKeySha256
+    , oceEncryptionAlgorithm
+
     -- ** Bucket
     , Bucket
     , bucket
@@ -336,6 +349,7 @@ module Network.Google.Storage
     , objKind
     , objTimeDeleted
     , objCrc32c
+    , objCustomerEncryption
     , objBucket
     , objOwner
     , objSelfLink

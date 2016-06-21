@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -76,7 +76,7 @@ type ProjectsSubscriptionsModifyPushConfigResource =
 -- \`PushConfig\`.
 --
 -- /See:/ 'projectsSubscriptionsModifyPushConfig' smart constructor.
-data ProjectsSubscriptionsModifyPushConfig = ProjectsSubscriptionsModifyPushConfig
+data ProjectsSubscriptionsModifyPushConfig = ProjectsSubscriptionsModifyPushConfig'
     { _psmpcXgafv          :: !(Maybe Text)
     , _psmpcUploadProtocol :: !(Maybe Text)
     , _psmpcPp             :: !Bool
@@ -114,7 +114,7 @@ projectsSubscriptionsModifyPushConfig
     -> Text -- ^ 'psmpcSubscription'
     -> ProjectsSubscriptionsModifyPushConfig
 projectsSubscriptionsModifyPushConfig pPsmpcPayload_ pPsmpcSubscription_ =
-    ProjectsSubscriptionsModifyPushConfig
+    ProjectsSubscriptionsModifyPushConfig'
     { _psmpcXgafv = Nothing
     , _psmpcUploadProtocol = Nothing
     , _psmpcPp = True
@@ -179,8 +179,11 @@ psmpcCallback
 instance GoogleRequest
          ProjectsSubscriptionsModifyPushConfig where
         type Rs ProjectsSubscriptionsModifyPushConfig = Empty
+        type Scopes ProjectsSubscriptionsModifyPushConfig =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/pubsub"]
         requestClient
-          ProjectsSubscriptionsModifyPushConfig{..}
+          ProjectsSubscriptionsModifyPushConfig'{..}
           = go _psmpcSubscription _psmpcXgafv
               _psmpcUploadProtocol
               (Just _psmpcPp)

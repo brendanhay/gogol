@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -69,7 +69,7 @@ type EditsExpansionFilesPatchResource =
 -- method. This method supports patch semantics.
 --
 -- /See:/ 'editsExpansionFilesPatch' smart constructor.
-data EditsExpansionFilesPatch = EditsExpansionFilesPatch
+data EditsExpansionFilesPatch = EditsExpansionFilesPatch'
     { _eefpPackageName       :: !Text
     , _eefpAPKVersionCode    :: !(Textual Int32)
     , _eefpPayload           :: !ExpansionFile
@@ -98,7 +98,7 @@ editsExpansionFilesPatch
     -> Text -- ^ 'eefpEditId'
     -> EditsExpansionFilesPatch
 editsExpansionFilesPatch pEefpPackageName_ pEefpAPKVersionCode_ pEefpPayload_ pEefpExpansionFileType_ pEefpEditId_ =
-    EditsExpansionFilesPatch
+    EditsExpansionFilesPatch'
     { _eefpPackageName = pEefpPackageName_
     , _eefpAPKVersionCode = _Coerce # pEefpAPKVersionCode_
     , _eefpPayload = pEefpPayload_
@@ -138,7 +138,9 @@ eefpEditId
 
 instance GoogleRequest EditsExpansionFilesPatch where
         type Rs EditsExpansionFilesPatch = ExpansionFile
-        requestClient EditsExpansionFilesPatch{..}
+        type Scopes EditsExpansionFilesPatch =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsExpansionFilesPatch'{..}
           = go _eefpPackageName _eefpEditId _eefpAPKVersionCode
               _eefpExpansionFileType
               (Just AltJSON)

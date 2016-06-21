@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Comments.Approve
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type CommentsApproveResource =
 -- | Marks a comment as not spam.
 --
 -- /See:/ 'commentsApprove' smart constructor.
-data CommentsApprove = CommentsApprove
+data CommentsApprove = CommentsApprove'
     { _caBlogId    :: !Text
     , _caPostId    :: !Text
     , _caCommentId :: !Text
@@ -79,7 +79,7 @@ commentsApprove
     -> Text -- ^ 'caCommentId'
     -> CommentsApprove
 commentsApprove pCaBlogId_ pCaPostId_ pCaCommentId_ =
-    CommentsApprove
+    CommentsApprove'
     { _caBlogId = pCaBlogId_
     , _caPostId = pCaPostId_
     , _caCommentId = pCaCommentId_
@@ -100,7 +100,9 @@ caCommentId
 
 instance GoogleRequest CommentsApprove where
         type Rs CommentsApprove = Comment
-        requestClient CommentsApprove{..}
+        type Scopes CommentsApprove =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient CommentsApprove'{..}
           = go _caBlogId _caPostId _caCommentId (Just AltJSON)
               bloggerService
           where go

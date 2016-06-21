@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Prediction.TrainedModels.Analyze
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type TrainedModelsAnalyzeResource =
 -- | Get analysis of the model and the data the model was trained on.
 --
 -- /See:/ 'trainedModelsAnalyze' smart constructor.
-data TrainedModelsAnalyze = TrainedModelsAnalyze
+data TrainedModelsAnalyze = TrainedModelsAnalyze'
     { _tmaProject :: !Text
     , _tmaId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ trainedModelsAnalyze
     -> Text -- ^ 'tmaId'
     -> TrainedModelsAnalyze
 trainedModelsAnalyze pTmaProject_ pTmaId_ =
-    TrainedModelsAnalyze
+    TrainedModelsAnalyze'
     { _tmaProject = pTmaProject_
     , _tmaId = pTmaId_
     }
@@ -88,7 +88,10 @@ tmaId = lens _tmaId (\ s a -> s{_tmaId = a})
 
 instance GoogleRequest TrainedModelsAnalyze where
         type Rs TrainedModelsAnalyze = Analyze
-        requestClient TrainedModelsAnalyze{..}
+        type Scopes TrainedModelsAnalyze =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/prediction"]
+        requestClient TrainedModelsAnalyze'{..}
           = go _tmaProject _tmaId (Just AltJSON)
               predictionService
           where go

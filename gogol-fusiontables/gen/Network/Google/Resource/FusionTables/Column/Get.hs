@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Column.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ColumnGetResource =
 -- | Retrieves a specific column by its ID.
 --
 -- /See:/ 'columnGet' smart constructor.
-data ColumnGet = ColumnGet
+data ColumnGet = ColumnGet'
     { _cgTableId  :: !Text
     , _cgColumnId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ columnGet
     -> Text -- ^ 'cgColumnId'
     -> ColumnGet
 columnGet pCgTableId_ pCgColumnId_ =
-    ColumnGet
+    ColumnGet'
     { _cgTableId = pCgTableId_
     , _cgColumnId = pCgColumnId_
     }
@@ -88,7 +88,10 @@ cgColumnId
 
 instance GoogleRequest ColumnGet where
         type Rs ColumnGet = Column
-        requestClient ColumnGet{..}
+        type Scopes ColumnGet =
+             '["https://www.googleapis.com/auth/fusiontables",
+               "https://www.googleapis.com/auth/fusiontables.readonly"]
+        requestClient ColumnGet'{..}
           = go _cgTableId _cgColumnId (Just AltJSON)
               fusionTablesService
           where go

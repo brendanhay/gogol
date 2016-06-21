@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Mirror.Timeline.Attachments.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type TimelineAttachmentsGetResource =
 -- | Retrieves an attachment on a timeline item by item ID and attachment ID.
 --
 -- /See:/ 'timelineAttachmentsGet' smart constructor.
-data TimelineAttachmentsGet = TimelineAttachmentsGet
+data TimelineAttachmentsGet = TimelineAttachmentsGet'
     { _tagItemId       :: !Text
     , _tagAttachmentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ timelineAttachmentsGet
     -> Text -- ^ 'tagAttachmentId'
     -> TimelineAttachmentsGet
 timelineAttachmentsGet pTagItemId_ pTagAttachmentId_ =
-    TimelineAttachmentsGet
+    TimelineAttachmentsGet'
     { _tagItemId = pTagItemId_
     , _tagAttachmentId = pTagAttachmentId_
     }
@@ -98,7 +98,9 @@ tagAttachmentId
 
 instance GoogleRequest TimelineAttachmentsGet where
         type Rs TimelineAttachmentsGet = Attachment
-        requestClient TimelineAttachmentsGet{..}
+        type Scopes TimelineAttachmentsGet =
+             '["https://www.googleapis.com/auth/glass.timeline"]
+        requestClient TimelineAttachmentsGet'{..}
           = go _tagItemId _tagAttachmentId (Just AltJSON)
               mirrorService
           where go :<|> _
@@ -110,8 +112,10 @@ instance GoogleRequest
          (MediaDownload TimelineAttachmentsGet) where
         type Rs (MediaDownload TimelineAttachmentsGet) =
              Stream
+        type Scopes (MediaDownload TimelineAttachmentsGet) =
+             Scopes TimelineAttachmentsGet
         requestClient
-          (MediaDownload TimelineAttachmentsGet{..})
+          (MediaDownload TimelineAttachmentsGet'{..})
           = go _tagItemId _tagAttachmentId (Just AltMedia)
               mirrorService
           where _ :<|> go

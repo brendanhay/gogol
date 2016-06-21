@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,7 +24,7 @@
 -- product. All products have a schema, but this may be empty if no app
 -- restrictions are defined.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.getAppRestrictionsSchema@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.getAppRestrictionsSchema@.
 module Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
     (
     -- * REST Resource
@@ -62,7 +62,7 @@ type ProductsGetAppRestrictionsSchemaResource =
 -- restrictions are defined.
 --
 -- /See:/ 'productsGetAppRestrictionsSchema' smart constructor.
-data ProductsGetAppRestrictionsSchema = ProductsGetAppRestrictionsSchema
+data ProductsGetAppRestrictionsSchema = ProductsGetAppRestrictionsSchema'
     { _pgarsEnterpriseId :: !Text
     , _pgarsLanguage     :: !(Maybe Text)
     , _pgarsProductId    :: !Text
@@ -82,7 +82,7 @@ productsGetAppRestrictionsSchema
     -> Text -- ^ 'pgarsProductId'
     -> ProductsGetAppRestrictionsSchema
 productsGetAppRestrictionsSchema pPgarsEnterpriseId_ pPgarsProductId_ =
-    ProductsGetAppRestrictionsSchema
+    ProductsGetAppRestrictionsSchema'
     { _pgarsEnterpriseId = pPgarsEnterpriseId_
     , _pgarsLanguage = Nothing
     , _pgarsProductId = pPgarsProductId_
@@ -111,7 +111,9 @@ instance GoogleRequest
          ProductsGetAppRestrictionsSchema where
         type Rs ProductsGetAppRestrictionsSchema =
              AppRestrictionsSchema
-        requestClient ProductsGetAppRestrictionsSchema{..}
+        type Scopes ProductsGetAppRestrictionsSchema =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient ProductsGetAppRestrictionsSchema'{..}
           = go _pgarsEnterpriseId _pgarsProductId
               _pgarsLanguage
               (Just AltJSON)

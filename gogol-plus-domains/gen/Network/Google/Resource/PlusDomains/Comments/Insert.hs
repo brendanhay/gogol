@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Comments.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type CommentsInsertResource =
 -- | Create a new comment in reply to an activity.
 --
 -- /See:/ 'commentsInsert' smart constructor.
-data CommentsInsert = CommentsInsert
+data CommentsInsert = CommentsInsert'
     { _cActivityId :: !Text
     , _cPayload    :: !Comment
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ commentsInsert
     -> Comment -- ^ 'cPayload'
     -> CommentsInsert
 commentsInsert pCActivityId_ pCPayload_ =
-    CommentsInsert
+    CommentsInsert'
     { _cActivityId = pCActivityId_
     , _cPayload = pCPayload_
     }
@@ -87,7 +87,10 @@ cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
 
 instance GoogleRequest CommentsInsert where
         type Rs CommentsInsert = Comment
-        requestClient CommentsInsert{..}
+        type Scopes CommentsInsert =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.stream.write"]
+        requestClient CommentsInsert'{..}
           = go _cActivityId (Just AltJSON) _cPayload
               plusDomainsService
           where go

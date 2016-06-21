@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Blogs.ListByUser
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type BlogsListByUserResource =
 -- | Retrieves a list of blogs, possibly filtered.
 --
 -- /See:/ 'blogsListByUser' smart constructor.
-data BlogsListByUser = BlogsListByUser
+data BlogsListByUser = BlogsListByUser'
     { _blbuStatus        :: ![BlogsListByUserStatus]
     , _blbuFetchUserInfo :: !(Maybe Bool)
     , _blbuUserId        :: !Text
@@ -85,7 +85,7 @@ blogsListByUser
     :: Text -- ^ 'blbuUserId'
     -> BlogsListByUser
 blogsListByUser pBlbuUserId_ =
-    BlogsListByUser
+    BlogsListByUser'
     { _blbuStatus = [BLBUSLive]
     , _blbuFetchUserInfo = Nothing
     , _blbuUserId = pBlbuUserId_
@@ -129,7 +129,10 @@ blbuView = lens _blbuView (\ s a -> s{_blbuView = a})
 
 instance GoogleRequest BlogsListByUser where
         type Rs BlogsListByUser = BlogList
-        requestClient BlogsListByUser{..}
+        type Scopes BlogsListByUser =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient BlogsListByUser'{..}
           = go _blbuUserId _blbuStatus _blbuFetchUserInfo
               (_blbuRole ^. _Default)
               _blbuView

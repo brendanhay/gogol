@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Jobs.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,14 +58,13 @@ type JobsInsertResource =
                Capture "projectId" Text :>
                  "jobs" :>
                    QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" AltMedia :>
-                       MultipartRelated '[JSON] Job RequestBody :>
-                         Post '[JSON] Job
+                     QueryParam "uploadType" Multipart :>
+                       MultipartRelated '[JSON] Job :> Post '[JSON] Job
 
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
 -- /See:/ 'jobsInsert' smart constructor.
-data JobsInsert = JobsInsert
+data JobsInsert = JobsInsert'
     { _jiPayload   :: !Job
     , _jiProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +81,7 @@ jobsInsert
     -> Text -- ^ 'jiProjectId'
     -> JobsInsert
 jobsInsert pJiPayload_ pJiProjectId_ =
-    JobsInsert
+    JobsInsert'
     { _jiPayload = pJiPayload_
     , _jiProjectId = pJiProjectId_
     }
@@ -99,7 +98,13 @@ jiProjectId
 
 instance GoogleRequest JobsInsert where
         type Rs JobsInsert = Job
-        requestClient JobsInsert{..}
+        type Scopes JobsInsert =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient JobsInsert'{..}
           = go _jiProjectId (Just AltJSON) _jiPayload
               bigQueryService
           where go :<|> _
@@ -108,8 +113,10 @@ instance GoogleRequest JobsInsert where
 
 instance GoogleRequest (MediaUpload JobsInsert) where
         type Rs (MediaUpload JobsInsert) = Job
-        requestClient (MediaUpload JobsInsert{..} body)
-          = go _jiProjectId (Just AltJSON) (Just AltMedia)
+        type Scopes (MediaUpload JobsInsert) =
+             Scopes JobsInsert
+        requestClient (MediaUpload JobsInsert'{..} body)
+          = go _jiProjectId (Just AltJSON) (Just Multipart)
               _jiPayload
               body
               bigQueryService

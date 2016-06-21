@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeBuyer.Accounts.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AccountsUpdateResource =
 -- | Updates an existing account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate
+data AccountsUpdate = AccountsUpdate'
     { _auPayload :: !Account
     , _auId      :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ accountsUpdate
     -> Int32 -- ^ 'auId'
     -> AccountsUpdate
 accountsUpdate pAuPayload_ pAuId_ =
-    AccountsUpdate
+    AccountsUpdate'
     { _auPayload = pAuPayload_
     , _auId = _Coerce # pAuId_
     }
@@ -86,7 +86,9 @@ auId = lens _auId (\ s a -> s{_auId = a}) . _Coerce
 
 instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
-        requestClient AccountsUpdate{..}
+        type Scopes AccountsUpdate =
+             '["https://www.googleapis.com/auth/adexchange.buyer"]
+        requestClient AccountsUpdate'{..}
           = go _auId (Just AltJSON) _auPayload
               adExchangeBuyerService
           where go

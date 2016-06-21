@@ -14,16 +14,20 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.References.Search
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Searches for references which match the given criteria. Implements
+-- Searches for references which match the given criteria. For the
+-- definitions of references and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchReferences](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L146).
 --
--- /See:/ < Genomics API Reference> for @genomics.references.search@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.references.search@.
 module Network.Google.Resource.Genomics.References.Search
     (
     -- * REST Resource
@@ -64,11 +68,15 @@ type ReferencesSearchResource =
                            ReqBody '[JSON] SearchReferencesRequest :>
                              Post '[JSON] SearchReferencesResponse
 
--- | Searches for references which match the given criteria. Implements
+-- | Searches for references which match the given criteria. For the
+-- definitions of references and other genomics resources, see
+-- [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
+-- Implements
 -- [GlobalAllianceApi.searchReferences](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L146).
 --
 -- /See:/ 'referencesSearch' smart constructor.
-data ReferencesSearch = ReferencesSearch
+data ReferencesSearch = ReferencesSearch'
     { _refXgafv          :: !(Maybe Text)
     , _refUploadProtocol :: !(Maybe Text)
     , _refPp             :: !Bool
@@ -102,7 +110,7 @@ referencesSearch
     :: SearchReferencesRequest -- ^ 'refPayload'
     -> ReferencesSearch
 referencesSearch pRefPayload_ =
-    ReferencesSearch
+    ReferencesSearch'
     { _refXgafv = Nothing
     , _refUploadProtocol = Nothing
     , _refPp = True
@@ -157,7 +165,11 @@ refCallback
 
 instance GoogleRequest ReferencesSearch where
         type Rs ReferencesSearch = SearchReferencesResponse
-        requestClient ReferencesSearch{..}
+        type Scopes ReferencesSearch =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics",
+               "https://www.googleapis.com/auth/genomics.readonly"]
+        requestClient ReferencesSearch'{..}
           = go _refXgafv _refUploadProtocol (Just _refPp)
               _refAccessToken
               _refUploadType

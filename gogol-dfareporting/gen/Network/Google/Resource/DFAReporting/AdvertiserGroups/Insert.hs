@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsInsert' request conforms to.
 type AdvertiserGroupsInsertResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -55,7 +55,7 @@ type AdvertiserGroupsInsertResource =
 -- | Inserts a new advertiser group.
 --
 -- /See:/ 'advertiserGroupsInsert' smart constructor.
-data AdvertiserGroupsInsert = AdvertiserGroupsInsert
+data AdvertiserGroupsInsert = AdvertiserGroupsInsert'
     { _agiProFileId :: !(Textual Int64)
     , _agiPayload   :: !AdvertiserGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ advertiserGroupsInsert
     -> AdvertiserGroup -- ^ 'agiPayload'
     -> AdvertiserGroupsInsert
 advertiserGroupsInsert pAgiProFileId_ pAgiPayload_ =
-    AdvertiserGroupsInsert
+    AdvertiserGroupsInsert'
     { _agiProFileId = _Coerce # pAgiProFileId_
     , _agiPayload = pAgiPayload_
     }
@@ -90,7 +90,9 @@ agiPayload
 
 instance GoogleRequest AdvertiserGroupsInsert where
         type Rs AdvertiserGroupsInsert = AdvertiserGroup
-        requestClient AdvertiserGroupsInsert{..}
+        type Scopes AdvertiserGroupsInsert =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdvertiserGroupsInsert'{..}
           = go _agiProFileId (Just AltJSON) _agiPayload
               dFAReportingService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type EditsAPKsAddexternallyhostedResource =
 -- configured to restrict distribution to the enterprise domain.
 --
 -- /See:/ 'editsAPKsAddexternallyhosted' smart constructor.
-data EditsAPKsAddexternallyhosted = EditsAPKsAddexternallyhosted
+data EditsAPKsAddexternallyhosted = EditsAPKsAddexternallyhosted'
     { _eapkaPackageName :: !Text
     , _eapkaPayload     :: !APKsAddExternallyHostedRequest
     , _eapkaEditId      :: !Text
@@ -86,7 +86,7 @@ editsAPKsAddexternallyhosted
     -> Text -- ^ 'eapkaEditId'
     -> EditsAPKsAddexternallyhosted
 editsAPKsAddexternallyhosted pEapkaPackageName_ pEapkaPayload_ pEapkaEditId_ =
-    EditsAPKsAddexternallyhosted
+    EditsAPKsAddexternallyhosted'
     { _eapkaPackageName = pEapkaPackageName_
     , _eapkaPayload = pEapkaPayload_
     , _eapkaEditId = pEapkaEditId_
@@ -113,7 +113,9 @@ instance GoogleRequest EditsAPKsAddexternallyhosted
          where
         type Rs EditsAPKsAddexternallyhosted =
              APKsAddExternallyHostedResponse
-        requestClient EditsAPKsAddexternallyhosted{..}
+        type Scopes EditsAPKsAddexternallyhosted =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsAPKsAddexternallyhosted'{..}
           = go _eapkaPackageName _eapkaEditId (Just AltJSON)
               _eapkaPayload
               androidPublisherService

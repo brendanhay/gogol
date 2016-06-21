@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.TagManager.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,13 +20,13 @@ module Network.Google.TagManager.Types
       tagManagerService
 
     -- * OAuth Scopes
-    , tagmanagerReadonlyScope
-    , tagmanagerEditContainersScope
-    , tagmanagerManageAccountsScope
-    , tagmanagerDeleteContainersScope
-    , tagmanagerManageUsersScope
-    , tagmanagerPublishScope
-    , tagmanagerEditContainerversionsScope
+    , tagManagerReadOnlyScope
+    , tagManagerEditContainersScope
+    , tagManagerManageAccountsScope
+    , tagManagerDeleteContainersScope
+    , tagManagerManageUsersScope
+    , tagManagerPublishScope
+    , tagManagerEditContainerversionsScope
 
     -- * ListVariablesResponse
     , ListVariablesResponse
@@ -36,6 +37,11 @@ module Network.Google.TagManager.Types
     , ListFoldersResponse
     , listFoldersResponse
     , lfrFolders
+
+    -- * ListEnvironmentsResponse
+    , ListEnvironmentsResponse
+    , listEnvironmentsResponse
+    , lerEnvironments
 
     -- * PublishContainerVersionResponse
     , PublishContainerVersionResponse
@@ -130,6 +136,22 @@ module Network.Google.TagManager.Types
     , uaEmailAddress
     , uaContainerAccess
     , uaPermissionId
+
+    -- * Environment
+    , Environment
+    , environment
+    , eContainerId
+    , eFingerprint
+    , eContainerVersionId
+    , eURL
+    , eAuthorizationCode
+    , eAccountId
+    , eName
+    , eEnableDebug
+    , eEnvironmentId
+    , eType
+    , eAuthorizationTimestampMs
+    , eDescription
 
     -- * AccountAccess
     , AccountAccess
@@ -254,6 +276,9 @@ module Network.Google.TagManager.Types
     , cvTrigger
     , cvNotes
 
+    -- * EnvironmentType
+    , EnvironmentType (..)
+
     -- * SetupTag
     , SetupTag
     , setupTag
@@ -327,35 +352,35 @@ import           Network.Google.TagManager.Types.Product
 import           Network.Google.TagManager.Types.Sum
 
 -- | Default request referring to version 'v1' of the Tag Manager API. This contains the host and root path used as a starting point for constructing service requests.
-tagManagerService :: Service
+tagManagerService :: ServiceConfig
 tagManagerService
   = defaultService (ServiceId "tagmanager:v1")
       "www.googleapis.com"
 
 -- | View your Google Tag Manager containers
-tagmanagerReadonlyScope :: OAuthScope
-tagmanagerReadonlyScope = "https://www.googleapis.com/auth/tagmanager.readonly";
+tagManagerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.readonly"]
+tagManagerReadOnlyScope = Proxy;
 
 -- | Manage your Google Tag Manager containers
-tagmanagerEditContainersScope :: OAuthScope
-tagmanagerEditContainersScope = "https://www.googleapis.com/auth/tagmanager.edit.containers";
+tagManagerEditContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+tagManagerEditContainersScope = Proxy;
 
 -- | Manage your Google Tag Manager accounts
-tagmanagerManageAccountsScope :: OAuthScope
-tagmanagerManageAccountsScope = "https://www.googleapis.com/auth/tagmanager.manage.accounts";
+tagManagerManageAccountsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
+tagManagerManageAccountsScope = Proxy;
 
 -- | Delete your Google Tag Manager containers
-tagmanagerDeleteContainersScope :: OAuthScope
-tagmanagerDeleteContainersScope = "https://www.googleapis.com/auth/tagmanager.delete.containers";
+tagManagerDeleteContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
+tagManagerDeleteContainersScope = Proxy;
 
 -- | Manage user permissions of your Google Tag Manager data
-tagmanagerManageUsersScope :: OAuthScope
-tagmanagerManageUsersScope = "https://www.googleapis.com/auth/tagmanager.manage.users";
+tagManagerManageUsersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.users"]
+tagManagerManageUsersScope = Proxy;
 
 -- | Publish your Google Tag Manager containers
-tagmanagerPublishScope :: OAuthScope
-tagmanagerPublishScope = "https://www.googleapis.com/auth/tagmanager.publish";
+tagManagerPublishScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.publish"]
+tagManagerPublishScope = Proxy;
 
 -- | Manage your Google Tag Manager container versions
-tagmanagerEditContainerversionsScope :: OAuthScope
-tagmanagerEditContainerversionsScope = "https://www.googleapis.com/auth/tagmanager.edit.containerversions";
+tagManagerEditContainerversionsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
+tagManagerEditContainerversionsScope = Proxy;

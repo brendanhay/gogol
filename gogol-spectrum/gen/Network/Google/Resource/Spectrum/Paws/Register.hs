@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Spectrum.Paws.Register
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type PawsRegisterResource =
 -- method. As such this always returns an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsRegister' smart constructor.
-newtype PawsRegister = PawsRegister
+newtype PawsRegister = PawsRegister'
     { _prPayload :: PawsRegisterRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ pawsRegister
     :: PawsRegisterRequest -- ^ 'prPayload'
     -> PawsRegister
 pawsRegister pPrPayload_ =
-    PawsRegister
+    PawsRegister'
     { _prPayload = pPrPayload_
     }
 
@@ -79,7 +79,8 @@ prPayload
 
 instance GoogleRequest PawsRegister where
         type Rs PawsRegister = PawsRegisterResponse
-        requestClient PawsRegister{..}
+        type Scopes PawsRegister = '[]
+        requestClient PawsRegister'{..}
           = go (Just AltJSON) _prPayload spectrumService
           where go
                   = buildClient (Proxy :: Proxy PawsRegisterResource)

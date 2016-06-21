@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type AccountsAdUnitsDeleteResource =
 -- account.
 --
 -- /See:/ 'accountsAdUnitsDelete' smart constructor.
-data AccountsAdUnitsDelete = AccountsAdUnitsDelete
+data AccountsAdUnitsDelete = AccountsAdUnitsDelete'
     { _aaudAdUnitId   :: !Text
     , _aaudAdClientId :: !Text
     , _aaudAccountId  :: !Text
@@ -80,7 +80,7 @@ accountsAdUnitsDelete
     -> Text -- ^ 'aaudAccountId'
     -> AccountsAdUnitsDelete
 accountsAdUnitsDelete pAaudAdUnitId_ pAaudAdClientId_ pAaudAccountId_ =
-    AccountsAdUnitsDelete
+    AccountsAdUnitsDelete'
     { _aaudAdUnitId = pAaudAdUnitId_
     , _aaudAdClientId = pAaudAdClientId_
     , _aaudAccountId = pAaudAccountId_
@@ -105,7 +105,9 @@ aaudAccountId
 
 instance GoogleRequest AccountsAdUnitsDelete where
         type Rs AccountsAdUnitsDelete = AdUnit
-        requestClient AccountsAdUnitsDelete{..}
+        type Scopes AccountsAdUnitsDelete =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AccountsAdUnitsDelete'{..}
           = go _aaudAccountId _aaudAdClientId _aaudAdUnitId
               (Just AltJSON)
               adSenseHostService

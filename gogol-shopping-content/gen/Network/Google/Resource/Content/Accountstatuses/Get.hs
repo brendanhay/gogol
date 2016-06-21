@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accountstatuses.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AccountstatusesGetResource =
 -- | Retrieves the status of a Merchant Center account.
 --
 -- /See:/ 'accountstatusesGet' smart constructor.
-data AccountstatusesGet = AccountstatusesGet
+data AccountstatusesGet = AccountstatusesGet'
     { _ag1MerchantId :: !(Textual Word64)
     , _ag1AccountId  :: !(Textual Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ accountstatusesGet
     -> Word64 -- ^ 'ag1AccountId'
     -> AccountstatusesGet
 accountstatusesGet pAg1MerchantId_ pAg1AccountId_ =
-    AccountstatusesGet
+    AccountstatusesGet'
     { _ag1MerchantId = _Coerce # pAg1MerchantId_
     , _ag1AccountId = _Coerce # pAg1AccountId_
     }
@@ -90,7 +90,9 @@ ag1AccountId
 
 instance GoogleRequest AccountstatusesGet where
         type Rs AccountstatusesGet = AccountStatus
-        requestClient AccountstatusesGet{..}
+        type Scopes AccountstatusesGet =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountstatusesGet'{..}
           = go _ag1MerchantId _ag1AccountId (Just AltJSON)
               shoppingContentService
           where go

@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.DataTransfer.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,8 +20,8 @@ module Network.Google.DataTransfer.Types
       dataTransferService
 
     -- * OAuth Scopes
-    , adminDatatransferReadonlyScope
-    , adminDatatransferScope
+    , adminDataTransferReadOnlyScope
+    , adminDataTransferScope
 
     -- * Application
     , Application
@@ -78,15 +79,15 @@ import           Network.Google.DataTransfer.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'datatransfer_v1' of the Admin Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
-dataTransferService :: Service
+dataTransferService :: ServiceConfig
 dataTransferService
   = defaultService (ServiceId "admin:datatransfer_v1")
       "www.googleapis.com"
 
 -- | View data transfers between users in your organization
-adminDatatransferReadonlyScope :: OAuthScope
-adminDatatransferReadonlyScope = "https://www.googleapis.com/auth/admin.datatransfer.readonly";
+adminDataTransferReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer.readonly"]
+adminDataTransferReadOnlyScope = Proxy;
 
 -- | View and manage data transfers between users in your organization
-adminDatatransferScope :: OAuthScope
-adminDatatransferScope = "https://www.googleapis.com/auth/admin.datatransfer";
+adminDataTransferScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer"]
+adminDataTransferScope = Proxy;

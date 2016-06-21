@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.AccountUserLinks.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ManagementAccountUserLinksListResource =
 -- | Lists account-user links for a given account.
 --
 -- /See:/ 'managementAccountUserLinksList' smart constructor.
-data ManagementAccountUserLinksList = ManagementAccountUserLinksList
+data ManagementAccountUserLinksList = ManagementAccountUserLinksList'
     { _maullAccountId  :: !Text
     , _maullStartIndex :: !(Maybe (Textual Int32))
     , _maullMaxResults :: !(Maybe (Textual Int32))
@@ -77,7 +77,7 @@ managementAccountUserLinksList
     :: Text -- ^ 'maullAccountId'
     -> ManagementAccountUserLinksList
 managementAccountUserLinksList pMaullAccountId_ =
-    ManagementAccountUserLinksList
+    ManagementAccountUserLinksList'
     { _maullAccountId = pMaullAccountId_
     , _maullStartIndex = Nothing
     , _maullMaxResults = Nothing
@@ -108,7 +108,10 @@ instance GoogleRequest ManagementAccountUserLinksList
          where
         type Rs ManagementAccountUserLinksList =
              EntityUserLinks
-        requestClient ManagementAccountUserLinksList{..}
+        type Scopes ManagementAccountUserLinksList =
+             '["https://www.googleapis.com/auth/analytics.manage.users",
+               "https://www.googleapis.com/auth/analytics.manage.users.readonly"]
+        requestClient ManagementAccountUserLinksList'{..}
           = go _maullAccountId _maullStartIndex
               _maullMaxResults
               (Just AltJSON)

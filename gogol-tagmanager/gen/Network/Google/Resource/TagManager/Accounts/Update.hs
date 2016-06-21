@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type AccountsUpdateResource =
 -- | Updates a GTM Account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate
+data AccountsUpdate = AccountsUpdate'
     { _auFingerprint :: !(Maybe Text)
     , _auPayload     :: !Account
     , _auAccountId   :: !Text
@@ -75,7 +75,7 @@ accountsUpdate
     -> Text -- ^ 'auAccountId'
     -> AccountsUpdate
 accountsUpdate pAuPayload_ pAuAccountId_ =
-    AccountsUpdate
+    AccountsUpdate'
     { _auFingerprint = Nothing
     , _auPayload = pAuPayload_
     , _auAccountId = pAuAccountId_
@@ -100,7 +100,9 @@ auAccountId
 
 instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
-        requestClient AccountsUpdate{..}
+        type Scopes AccountsUpdate =
+             '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
+        requestClient AccountsUpdate'{..}
           = go _auAccountId _auFingerprint (Just AltJSON)
               _auPayload
               tagManagerService

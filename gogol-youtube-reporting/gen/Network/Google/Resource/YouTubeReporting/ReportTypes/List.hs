@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeReporting.ReportTypes.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -38,6 +38,7 @@ module Network.Google.Resource.YouTubeReporting.ReportTypes.List
     , rtlPp
     , rtlAccessToken
     , rtlUploadType
+    , rtlIncludeSystemManaged
     , rtlOnBehalfOfContentOwner
     , rtlBearerToken
     , rtlPageToken
@@ -58,23 +59,25 @@ type ReportTypesListResource =
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListReportTypesResponse
+                   QueryParam "includeSystemManaged" Bool :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListReportTypesResponse
 
 -- | Lists report types.
 --
 -- /See:/ 'reportTypesList' smart constructor.
-data ReportTypesList = ReportTypesList
+data ReportTypesList = ReportTypesList'
     { _rtlXgafv                  :: !(Maybe Text)
     , _rtlUploadProtocol         :: !(Maybe Text)
     , _rtlPp                     :: !Bool
     , _rtlAccessToken            :: !(Maybe Text)
     , _rtlUploadType             :: !(Maybe Text)
+    , _rtlIncludeSystemManaged   :: !(Maybe Bool)
     , _rtlOnBehalfOfContentOwner :: !(Maybe Text)
     , _rtlBearerToken            :: !(Maybe Text)
     , _rtlPageToken              :: !(Maybe Text)
@@ -96,6 +99,8 @@ data ReportTypesList = ReportTypesList
 --
 -- * 'rtlUploadType'
 --
+-- * 'rtlIncludeSystemManaged'
+--
 -- * 'rtlOnBehalfOfContentOwner'
 --
 -- * 'rtlBearerToken'
@@ -108,12 +113,13 @@ data ReportTypesList = ReportTypesList
 reportTypesList
     :: ReportTypesList
 reportTypesList =
-    ReportTypesList
+    ReportTypesList'
     { _rtlXgafv = Nothing
     , _rtlUploadProtocol = Nothing
     , _rtlPp = True
     , _rtlAccessToken = Nothing
     , _rtlUploadType = Nothing
+    , _rtlIncludeSystemManaged = Nothing
     , _rtlOnBehalfOfContentOwner = Nothing
     , _rtlBearerToken = Nothing
     , _rtlPageToken = Nothing
@@ -146,6 +152,14 @@ rtlUploadType :: Lens' ReportTypesList (Maybe Text)
 rtlUploadType
   = lens _rtlUploadType
       (\ s a -> s{_rtlUploadType = a})
+
+-- | If set to true, also system-managed report types will be returned;
+-- otherwise only the report types that can be used to create new reporting
+-- jobs will be returned.
+rtlIncludeSystemManaged :: Lens' ReportTypesList (Maybe Bool)
+rtlIncludeSystemManaged
+  = lens _rtlIncludeSystemManaged
+      (\ s a -> s{_rtlIncludeSystemManaged = a})
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).
@@ -182,10 +196,14 @@ rtlCallback
 
 instance GoogleRequest ReportTypesList where
         type Rs ReportTypesList = ListReportTypesResponse
-        requestClient ReportTypesList{..}
+        type Scopes ReportTypesList =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
+        requestClient ReportTypesList'{..}
           = go _rtlXgafv _rtlUploadProtocol (Just _rtlPp)
               _rtlAccessToken
               _rtlUploadType
+              _rtlIncludeSystemManaged
               _rtlOnBehalfOfContentOwner
               _rtlBearerToken
               _rtlPageToken

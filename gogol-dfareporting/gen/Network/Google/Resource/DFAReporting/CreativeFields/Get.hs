@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeFields.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsGet' request conforms to.
 type CreativeFieldsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -54,7 +54,7 @@ type CreativeFieldsGetResource =
 -- | Gets one creative field by ID.
 --
 -- /See:/ 'creativeFieldsGet' smart constructor.
-data CreativeFieldsGet = CreativeFieldsGet
+data CreativeFieldsGet = CreativeFieldsGet'
     { _cfgProFileId :: !(Textual Int64)
     , _cfgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativeFieldsGet
     -> Int64 -- ^ 'cfgId'
     -> CreativeFieldsGet
 creativeFieldsGet pCfgProFileId_ pCfgId_ =
-    CreativeFieldsGet
+    CreativeFieldsGet'
     { _cfgProFileId = _Coerce # pCfgProFileId_
     , _cfgId = _Coerce # pCfgId_
     }
@@ -89,7 +89,9 @@ cfgId
 
 instance GoogleRequest CreativeFieldsGet where
         type Rs CreativeFieldsGet = CreativeField
-        requestClient CreativeFieldsGet{..}
+        type Scopes CreativeFieldsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeFieldsGet'{..}
           = go _cfgProFileId _cfgId (Just AltJSON)
               dFAReportingService
           where go

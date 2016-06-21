@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Maps.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type MapsPatchResource =
 -- | Mutate a map asset.
 --
 -- /See:/ 'mapsPatch' smart constructor.
-data MapsPatch = MapsPatch
+data MapsPatch = MapsPatch'
     { _mpPayload :: !Map
     , _mpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ mapsPatch
     -> Text -- ^ 'mpId'
     -> MapsPatch
 mapsPatch pMpPayload_ pMpId_ =
-    MapsPatch
+    MapsPatch'
     { _mpPayload = pMpPayload_
     , _mpId = pMpId_
     }
@@ -86,7 +86,9 @@ mpId = lens _mpId (\ s a -> s{_mpId = a})
 
 instance GoogleRequest MapsPatch where
         type Rs MapsPatch = ()
-        requestClient MapsPatch{..}
+        type Scopes MapsPatch =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient MapsPatch'{..}
           = go _mpId (Just AltJSON) _mpPayload
               mapsEngineService
           where go

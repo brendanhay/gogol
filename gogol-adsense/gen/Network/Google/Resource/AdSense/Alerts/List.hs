@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Alerts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type AlertsListResource =
 -- | List the alerts for this AdSense account.
 --
 -- /See:/ 'alertsList' smart constructor.
-newtype AlertsList = AlertsList
+newtype AlertsList = AlertsList'
     { _alLocale :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -63,7 +63,7 @@ newtype AlertsList = AlertsList
 alertsList
     :: AlertsList
 alertsList =
-    AlertsList
+    AlertsList'
     { _alLocale = Nothing
     }
 
@@ -75,7 +75,10 @@ alLocale = lens _alLocale (\ s a -> s{_alLocale = a})
 
 instance GoogleRequest AlertsList where
         type Rs AlertsList = Alerts
-        requestClient AlertsList{..}
+        type Scopes AlertsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AlertsList'{..}
           = go _alLocale (Just AltJSON) adSenseService
           where go
                   = buildClient (Proxy :: Proxy AlertsListResource)

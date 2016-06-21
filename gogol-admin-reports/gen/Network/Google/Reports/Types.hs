@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Reports.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,8 +20,8 @@ module Network.Google.Reports.Types
       reportsService
 
     -- * OAuth Scopes
-    , adminReportsUsageReadonlyScope
-    , adminReportsAuditReadonlyScope
+    , adminReportsUsageReadOnlyScope
+    , adminReportsAuditReadOnlyScope
 
     -- * UsageReportParametersItem
     , UsageReportParametersItem
@@ -153,15 +154,15 @@ import           Network.Google.Reports.Types.Product
 import           Network.Google.Reports.Types.Sum
 
 -- | Default request referring to version 'reports_v1' of the Admin Reports API. This contains the host and root path used as a starting point for constructing service requests.
-reportsService :: Service
+reportsService :: ServiceConfig
 reportsService
   = defaultService (ServiceId "admin:reports_v1")
       "www.googleapis.com"
 
 -- | View usage reports of Google Apps for your domain
-adminReportsUsageReadonlyScope :: OAuthScope
-adminReportsUsageReadonlyScope = "https://www.googleapis.com/auth/admin.reports.usage.readonly";
+adminReportsUsageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
+adminReportsUsageReadOnlyScope = Proxy;
 
 -- | View audit reports of Google Apps for your domain
-adminReportsAuditReadonlyScope :: OAuthScope
-adminReportsAuditReadonlyScope = "https://www.googleapis.com/auth/admin.reports.audit.readonly";
+adminReportsAuditReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
+adminReportsAuditReadOnlyScope = Proxy;

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFiles.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type ManagementProFilesPatchResource =
 -- semantics.
 --
 -- /See:/ 'managementProFilesPatch' smart constructor.
-data ManagementProFilesPatch = ManagementProFilesPatch
+data ManagementProFilesPatch = ManagementProFilesPatch'
     { _mpfpWebPropertyId :: !Text
     , _mpfpProFileId     :: !Text
     , _mpfpPayload       :: !ProFile
@@ -87,7 +87,7 @@ managementProFilesPatch
     -> Text -- ^ 'mpfpAccountId'
     -> ManagementProFilesPatch
 managementProFilesPatch pMpfpWebPropertyId_ pMpfpProFileId_ pMpfpPayload_ pMpfpAccountId_ =
-    ManagementProFilesPatch
+    ManagementProFilesPatch'
     { _mpfpWebPropertyId = pMpfpWebPropertyId_
     , _mpfpProFileId = pMpfpProFileId_
     , _mpfpPayload = pMpfpPayload_
@@ -119,7 +119,9 @@ mpfpAccountId
 
 instance GoogleRequest ManagementProFilesPatch where
         type Rs ManagementProFilesPatch = ProFile
-        requestClient ManagementProFilesPatch{..}
+        type Scopes ManagementProFilesPatch =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementProFilesPatch'{..}
           = go _mpfpAccountId _mpfpWebPropertyId _mpfpProFileId
               (Just AltJSON)
               _mpfpPayload

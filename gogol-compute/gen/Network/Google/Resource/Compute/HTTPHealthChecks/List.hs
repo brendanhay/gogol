@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.HTTPHealthChecks.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type HTTPHealthChecksListResource =
 -- specified project.
 --
 -- /See:/ 'hTTPHealthChecksList' smart constructor.
-data HTTPHealthChecksList = HTTPHealthChecksList
+data HTTPHealthChecksList = HTTPHealthChecksList'
     { _httphclProject    :: !Text
     , _httphclFilter     :: !(Maybe Text)
     , _httphclPageToken  :: !(Maybe Text)
@@ -84,44 +84,56 @@ hTTPHealthChecksList
     :: Text -- ^ 'httphclProject'
     -> HTTPHealthChecksList
 hTTPHealthChecksList pHttphclProject_ =
-    HTTPHealthChecksList
+    HTTPHealthChecksList'
     { _httphclProject = pHttphclProject_
     , _httphclFilter = Nothing
     , _httphclPageToken = Nothing
     , _httphclMaxResults = 500
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 httphclProject :: Lens' HTTPHealthChecksList Text
 httphclProject
   = lens _httphclProject
       (\ s a -> s{_httphclProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
--- filter={expression}. Your {expression} must be in the format: FIELD_NAME
--- COMPARISON_STRING LITERAL_STRING. The FIELD_NAME is the name of the
+-- filter={expression}. Your {expression} must be in the format: field_name
+-- comparison_string literal_string. The field_name is the name of the
 -- field you want to compare. Only atomic field types are supported
--- (string, number, boolean). The COMPARISON_STRING must be either eq
--- (equals) or ne (not equals). The LITERAL_STRING is the string value to
--- filter to. The literal value must be valid for the type of field
--- (string, number, boolean). For string fields, the literal value is
--- interpreted as a regular expression using RE2 syntax. The literal value
--- must match the entire field. For example, filter=name ne
--- example-instance.
+-- (string, number, boolean). The comparison_string must be either eq
+-- (equals) or ne (not equals). The literal_string is the string value to
+-- filter to. The literal value must be valid for the type of field you are
+-- filtering by (string, number, boolean). For string fields, the literal
+-- value is interpreted as a regular expression using RE2 syntax. The
+-- literal value must match the entire field. For example, to filter for
+-- instances that do not have a name of example-instance, you would use
+-- filter=name ne example-instance. Compute Engine Beta API Only: When
+-- filtering in the Beta API, you can also filter on nested fields. For
+-- example, you could filter on instances that have set the
+-- scheduling.automaticRestart field to true. Use filtering on nested
+-- fields to take advantage of labels to organize and search for results
+-- based on label values. The Beta API also supports filtering on multiple
+-- expressions by providing each separate expression within parentheses.
+-- For example, (scheduling.automaticRestart eq true) (zone eq
+-- us-central1-f). Multiple expressions are treated as AND expressions,
+-- meaning that resources must match all expressions to pass the filters.
 httphclFilter :: Lens' HTTPHealthChecksList (Maybe Text)
 httphclFilter
   = lens _httphclFilter
       (\ s a -> s{_httphclFilter = a})
 
--- | Specifies a page token to use. Use this parameter if you want to list
--- the next page of results. Set pageToken to the nextPageToken returned by
--- a previous list request.
+-- | Specifies a page token to use. Set pageToken to the nextPageToken
+-- returned by a previous list request to get the next page of results.
 httphclPageToken :: Lens' HTTPHealthChecksList (Maybe Text)
 httphclPageToken
   = lens _httphclPageToken
       (\ s a -> s{_httphclPageToken = a})
 
--- | Maximum count of results to be returned.
+-- | The maximum number of results per page that should be returned. If the
+-- number of available results is larger than maxResults, Compute Engine
+-- returns a nextPageToken that can be used to get the next page of results
+-- in subsequent list requests.
 httphclMaxResults :: Lens' HTTPHealthChecksList Word32
 httphclMaxResults
   = lens _httphclMaxResults
@@ -130,7 +142,11 @@ httphclMaxResults
 
 instance GoogleRequest HTTPHealthChecksList where
         type Rs HTTPHealthChecksList = HTTPHealthCheckList
-        requestClient HTTPHealthChecksList{..}
+        type Scopes HTTPHealthChecksList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient HTTPHealthChecksList'{..}
           = go _httphclProject _httphclFilter _httphclPageToken
               (Just _httphclMaxResults)
               (Just AltJSON)

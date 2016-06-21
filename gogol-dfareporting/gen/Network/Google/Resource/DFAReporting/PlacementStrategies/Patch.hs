@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlacementStrategies.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesPatch' request conforms to.
 type PlacementStrategiesPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -59,7 +59,7 @@ type PlacementStrategiesPatchResource =
 -- semantics.
 --
 -- /See:/ 'placementStrategiesPatch' smart constructor.
-data PlacementStrategiesPatch = PlacementStrategiesPatch
+data PlacementStrategiesPatch = PlacementStrategiesPatch'
     { _pspProFileId :: !(Textual Int64)
     , _pspPayload   :: !PlacementStrategy
     , _pspId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ placementStrategiesPatch
     -> Int64 -- ^ 'pspId'
     -> PlacementStrategiesPatch
 placementStrategiesPatch pPspProFileId_ pPspPayload_ pPspId_ =
-    PlacementStrategiesPatch
+    PlacementStrategiesPatch'
     { _pspProFileId = _Coerce # pPspProFileId_
     , _pspPayload = pPspPayload_
     , _pspId = _Coerce # pPspId_
@@ -104,7 +104,9 @@ pspId
 
 instance GoogleRequest PlacementStrategiesPatch where
         type Rs PlacementStrategiesPatch = PlacementStrategy
-        requestClient PlacementStrategiesPatch{..}
+        type Scopes PlacementStrategiesPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementStrategiesPatch'{..}
           = go _pspProFileId (Just _pspId) (Just AltJSON)
               _pspPayload
               dFAReportingService

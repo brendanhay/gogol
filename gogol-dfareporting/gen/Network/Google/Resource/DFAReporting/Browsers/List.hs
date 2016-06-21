@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Browsers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'BrowsersList' request conforms to.
 type BrowsersListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "browsers" :>
@@ -53,7 +53,7 @@ type BrowsersListResource =
 -- | Retrieves a list of browsers.
 --
 -- /See:/ 'browsersList' smart constructor.
-newtype BrowsersList = BrowsersList
+newtype BrowsersList = BrowsersList'
     { _blProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ browsersList
     :: Int64 -- ^ 'blProFileId'
     -> BrowsersList
 browsersList pBlProFileId_ =
-    BrowsersList
+    BrowsersList'
     { _blProFileId = _Coerce # pBlProFileId_
     }
 
@@ -78,7 +78,9 @@ blProFileId
 
 instance GoogleRequest BrowsersList where
         type Rs BrowsersList = BrowsersListResponse
-        requestClient BrowsersList{..}
+        type Scopes BrowsersList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient BrowsersList'{..}
           = go _blProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy BrowsersListResource)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Books.Volumes.Recommended.Rate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type VolumesRecommendedRateResource =
 -- | Rate a recommended book for the current user.
 --
 -- /See:/ 'volumesRecommendedRate' smart constructor.
-data VolumesRecommendedRate = VolumesRecommendedRate
+data VolumesRecommendedRate = VolumesRecommendedRate'
     { _vrrRating   :: !VolumesRecommendedRateRating
     , _vrrLocale   :: !(Maybe Text)
     , _vrrVolumeId :: !Text
@@ -83,7 +83,7 @@ volumesRecommendedRate
     -> Text -- ^ 'vrrVolumeId'
     -> VolumesRecommendedRate
 volumesRecommendedRate pVrrRating_ pVrrVolumeId_ =
-    VolumesRecommendedRate
+    VolumesRecommendedRate'
     { _vrrRating = pVrrRating_
     , _vrrLocale = Nothing
     , _vrrVolumeId = pVrrVolumeId_
@@ -114,7 +114,9 @@ vrrSource
 instance GoogleRequest VolumesRecommendedRate where
         type Rs VolumesRecommendedRate =
              BooksVolumesRecommendedRateResponse
-        requestClient VolumesRecommendedRate{..}
+        type Scopes VolumesRecommendedRate =
+             '["https://www.googleapis.com/auth/books"]
+        requestClient VolumesRecommendedRate'{..}
           = go (Just _vrrRating) (Just _vrrVolumeId) _vrrLocale
               _vrrSource
               (Just AltJSON)

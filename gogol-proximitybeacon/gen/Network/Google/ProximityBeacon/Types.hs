@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.ProximityBeacon.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -17,6 +18,9 @@ module Network.Google.ProximityBeacon.Types
     (
     -- * Service Configuration
       proximityBeaconService
+
+    -- * OAuth Scopes
+    , userlocationBeaconRegistryScope
 
     -- * LatLng
     , LatLng
@@ -56,6 +60,16 @@ module Network.Google.ProximityBeacon.Types
     , nServingVisibility
     , nNamespaceName
 
+    -- * EphemeralIdRegistration
+    , EphemeralIdRegistration
+    , ephemeralIdRegistration
+    , eirRotationPeriodExponent
+    , eirInitialClockValue
+    , eirBeaconIdentityKey
+    , eirBeaconEcdhPublicKey
+    , eirInitialEid
+    , eirServiceEcdhPublicKey
+
     -- * ListNamespacesResponse
     , ListNamespacesResponse
     , listNamespacesResponse
@@ -74,8 +88,10 @@ module Network.Google.ProximityBeacon.Types
     , bLatLng
     , bStatus
     , bBeaconName
+    , bEphemeralIdRegistration
     , bIndoorLevel
     , bExpectedStability
+    , bProvisioningKey
     , bDescription
     , bPlaceId
     , bAdvertisedId
@@ -98,12 +114,18 @@ module Network.Google.ProximityBeacon.Types
     , indoorLevel
     , ilName
 
+    -- * EphemeralIdRegistrationParams
+    , EphemeralIdRegistrationParams
+    , ephemeralIdRegistrationParams
+    , eirpMinRotationPeriodExponent
+    , eirpMaxRotationPeriodExponent
+    , eirpServiceEcdhPublicKey
+
     -- * BeaconInfo
     , BeaconInfo
     , beaconInfo
     , biAttachments
     , biBeaconName
-    , biDescription
     , biAdvertisedId
 
     -- * Observation
@@ -150,8 +172,12 @@ import           Network.Google.ProximityBeacon.Types.Product
 import           Network.Google.ProximityBeacon.Types.Sum
 
 -- | Default request referring to version 'v1beta1' of the Google Proximity Beacon API. This contains the host and root path used as a starting point for constructing service requests.
-proximityBeaconService :: Service
+proximityBeaconService :: ServiceConfig
 proximityBeaconService
   = defaultService
       (ServiceId "proximitybeacon:v1beta1")
       "proximitybeacon.googleapis.com"
+
+-- | View and modify your beacons
+userlocationBeaconRegistryScope :: Proxy '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+userlocationBeaconRegistryScope = Proxy;

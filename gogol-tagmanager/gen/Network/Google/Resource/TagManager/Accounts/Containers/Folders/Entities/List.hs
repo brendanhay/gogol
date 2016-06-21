@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type AccountsContainersFoldersEntitiesListResource =
 -- | List all entities in a GTM Folder.
 --
 -- /See:/ 'accountsContainersFoldersEntitiesList' smart constructor.
-data AccountsContainersFoldersEntitiesList = AccountsContainersFoldersEntitiesList
+data AccountsContainersFoldersEntitiesList = AccountsContainersFoldersEntitiesList'
     { _acfelContainerId :: !Text
     , _acfelFolderId    :: !Text
     , _acfelAccountId   :: !Text
@@ -80,7 +80,7 @@ accountsContainersFoldersEntitiesList
     -> Text -- ^ 'acfelAccountId'
     -> AccountsContainersFoldersEntitiesList
 accountsContainersFoldersEntitiesList pAcfelContainerId_ pAcfelFolderId_ pAcfelAccountId_ =
-    AccountsContainersFoldersEntitiesList
+    AccountsContainersFoldersEntitiesList'
     { _acfelContainerId = pAcfelContainerId_
     , _acfelFolderId = pAcfelFolderId_
     , _acfelAccountId = pAcfelAccountId_
@@ -108,8 +108,11 @@ instance GoogleRequest
          AccountsContainersFoldersEntitiesList where
         type Rs AccountsContainersFoldersEntitiesList =
              FolderEntities
+        type Scopes AccountsContainersFoldersEntitiesList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
         requestClient
-          AccountsContainersFoldersEntitiesList{..}
+          AccountsContainersFoldersEntitiesList'{..}
           = go _acfelAccountId _acfelContainerId _acfelFolderId
               (Just AltJSON)
               tagManagerService

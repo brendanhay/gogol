@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DNS.ManagedZones.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type ManagedZonesListResource =
 -- | Enumerate ManagedZones that have been created but not yet deleted.
 --
 -- /See:/ 'managedZonesList' smart constructor.
-data ManagedZonesList = ManagedZonesList
+data ManagedZonesList = ManagedZonesList'
     { _mzlProject    :: !Text
     , _mzlPageToken  :: !(Maybe Text)
     , _mzlDNSName    :: !(Maybe Text)
@@ -81,7 +81,7 @@ managedZonesList
     :: Text -- ^ 'mzlProject'
     -> ManagedZonesList
 managedZonesList pMzlProject_ =
-    ManagedZonesList
+    ManagedZonesList'
     { _mzlProject = pMzlProject_
     , _mzlPageToken = Nothing
     , _mzlDNSName = Nothing
@@ -114,7 +114,12 @@ mzlMaxResults
 
 instance GoogleRequest ManagedZonesList where
         type Rs ManagedZonesList = ManagedZonesListResponse
-        requestClient ManagedZonesList{..}
+        type Scopes ManagedZonesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
+        requestClient ManagedZonesList'{..}
           = go _mzlProject _mzlPageToken _mzlDNSName
               _mzlMaxResults
               (Just AltJSON)

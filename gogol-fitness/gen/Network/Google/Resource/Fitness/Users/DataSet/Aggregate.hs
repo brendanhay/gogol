@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.DataSet.Aggregate
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type UsersDataSetAggregateResource =
 -- request.
 --
 -- /See:/ 'usersDataSetAggregate' smart constructor.
-data UsersDataSetAggregate = UsersDataSetAggregate
+data UsersDataSetAggregate = UsersDataSetAggregate'
     { _udsaPayload :: !AggregateRequest
     , _udsaUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -78,7 +78,7 @@ usersDataSetAggregate
     -> Text -- ^ 'udsaUserId'
     -> UsersDataSetAggregate
 usersDataSetAggregate pUdsaPayload_ pUdsaUserId_ =
-    UsersDataSetAggregate
+    UsersDataSetAggregate'
     { _udsaPayload = pUdsaPayload_
     , _udsaUserId = pUdsaUserId_
     }
@@ -96,7 +96,14 @@ udsaUserId
 
 instance GoogleRequest UsersDataSetAggregate where
         type Rs UsersDataSetAggregate = AggregateResponse
-        requestClient UsersDataSetAggregate{..}
+        type Scopes UsersDataSetAggregate =
+             '["https://www.googleapis.com/auth/fitness.activity.read",
+               "https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.read",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.read",
+               "https://www.googleapis.com/auth/fitness.location.write"]
+        requestClient UsersDataSetAggregate'{..}
           = go _udsaUserId (Just AltJSON) _udsaPayload
               fitnessService
           where go

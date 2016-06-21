@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.APKListings.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type EditsAPKListingsListResource =
 -- | Lists all the APK-specific localized listings for a specified APK.
 --
 -- /See:/ 'editsAPKListingsList' smart constructor.
-data EditsAPKListingsList = EditsAPKListingsList
+data EditsAPKListingsList = EditsAPKListingsList'
     { _eapkllPackageName    :: !Text
     , _eapkllAPKVersionCode :: !(Textual Int32)
     , _eapkllEditId         :: !Text
@@ -80,7 +80,7 @@ editsAPKListingsList
     -> Text -- ^ 'eapkllEditId'
     -> EditsAPKListingsList
 editsAPKListingsList pEapkllPackageName_ pEapkllAPKVersionCode_ pEapkllEditId_ =
-    EditsAPKListingsList
+    EditsAPKListingsList'
     { _eapkllPackageName = pEapkllPackageName_
     , _eapkllAPKVersionCode = _Coerce # pEapkllAPKVersionCode_
     , _eapkllEditId = pEapkllEditId_
@@ -109,7 +109,9 @@ eapkllEditId
 instance GoogleRequest EditsAPKListingsList where
         type Rs EditsAPKListingsList =
              APKListingsListResponse
-        requestClient EditsAPKListingsList{..}
+        type Scopes EditsAPKListingsList =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsAPKListingsList'{..}
           = go _eapkllPackageName _eapkllEditId
               _eapkllAPKVersionCode
               (Just AltJSON)

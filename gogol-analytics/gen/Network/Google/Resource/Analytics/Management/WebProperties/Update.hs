@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.WebProperties.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type ManagementWebPropertiesUpdateResource =
 -- | Updates an existing web property.
 --
 -- /See:/ 'managementWebPropertiesUpdate' smart constructor.
-data ManagementWebPropertiesUpdate = ManagementWebPropertiesUpdate
+data ManagementWebPropertiesUpdate = ManagementWebPropertiesUpdate'
     { _mwpuWebPropertyId :: !Text
     , _mwpuPayload       :: !WebProperty
     , _mwpuAccountId     :: !Text
@@ -79,7 +79,7 @@ managementWebPropertiesUpdate
     -> Text -- ^ 'mwpuAccountId'
     -> ManagementWebPropertiesUpdate
 managementWebPropertiesUpdate pMwpuWebPropertyId_ pMwpuPayload_ pMwpuAccountId_ =
-    ManagementWebPropertiesUpdate
+    ManagementWebPropertiesUpdate'
     { _mwpuWebPropertyId = pMwpuWebPropertyId_
     , _mwpuPayload = pMwpuPayload_
     , _mwpuAccountId = pMwpuAccountId_
@@ -105,7 +105,9 @@ mwpuAccountId
 instance GoogleRequest ManagementWebPropertiesUpdate
          where
         type Rs ManagementWebPropertiesUpdate = WebProperty
-        requestClient ManagementWebPropertiesUpdate{..}
+        type Scopes ManagementWebPropertiesUpdate =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementWebPropertiesUpdate'{..}
           = go _mwpuAccountId _mwpuWebPropertyId (Just AltJSON)
               _mwpuPayload
               analyticsService

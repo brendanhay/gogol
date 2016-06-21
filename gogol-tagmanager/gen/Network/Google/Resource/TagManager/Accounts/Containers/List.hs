@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type AccountsContainersListResource =
 -- | Lists all Containers that belongs to a GTM Account.
 --
 -- /See:/ 'accountsContainersList' smart constructor.
-newtype AccountsContainersList = AccountsContainersList
+newtype AccountsContainersList = AccountsContainersList'
     { _aclAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountsContainersList
     :: Text -- ^ 'aclAccountId'
     -> AccountsContainersList
 accountsContainersList pAclAccountId_ =
-    AccountsContainersList
+    AccountsContainersList'
     { _aclAccountId = pAclAccountId_
     }
 
@@ -78,7 +78,10 @@ aclAccountId
 instance GoogleRequest AccountsContainersList where
         type Rs AccountsContainersList =
              ListContainersResponse
-        requestClient AccountsContainersList{..}
+        type Scopes AccountsContainersList =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersList'{..}
           = go _aclAccountId (Just AltJSON) tagManagerService
           where go
                   = buildClient

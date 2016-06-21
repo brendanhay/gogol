@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type RelyingPartyUploadAccountResource =
 -- | Batch upload existing user accounts.
 --
 -- /See:/ 'relyingPartyUploadAccount' smart constructor.
-newtype RelyingPartyUploadAccount = RelyingPartyUploadAccount
+newtype RelyingPartyUploadAccount = RelyingPartyUploadAccount'
     { _rpuaPayload :: IdentitytoolkitRelyingPartyUploadAccountRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyUploadAccount
     :: IdentitytoolkitRelyingPartyUploadAccountRequest -- ^ 'rpuaPayload'
     -> RelyingPartyUploadAccount
 relyingPartyUploadAccount pRpuaPayload_ =
-    RelyingPartyUploadAccount
+    RelyingPartyUploadAccount'
     { _rpuaPayload = pRpuaPayload_
     }
 
@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartyUploadAccount
          where
         type Rs RelyingPartyUploadAccount =
              UploadAccountResponse
-        requestClient RelyingPartyUploadAccount{..}
+        type Scopes RelyingPartyUploadAccount = '[]
+        requestClient RelyingPartyUploadAccount'{..}
           = go (Just AltJSON) _rpuaPayload
               identityToolkitService
           where go

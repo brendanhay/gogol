@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.CalendarList.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type CalendarListListResource =
 -- | Returns entries on the user\'s calendar list.
 --
 -- /See:/ 'calendarListList' smart constructor.
-data CalendarListList = CalendarListList
+data CalendarListList = CalendarListList'
     { _cllSyncToken     :: !(Maybe Text)
     , _cllMinAccessRole :: !(Maybe CalendarListListMinAccessRole)
     , _cllShowDeleted   :: !(Maybe Bool)
@@ -92,7 +92,7 @@ data CalendarListList = CalendarListList
 calendarListList
     :: CalendarListList
 calendarListList =
-    CalendarListList
+    CalendarListList'
     { _cllSyncToken = Nothing
     , _cllMinAccessRole = Nothing
     , _cllShowDeleted = Nothing
@@ -154,7 +154,10 @@ cllMaxResults
 
 instance GoogleRequest CalendarListList where
         type Rs CalendarListList = CalendarList
-        requestClient CalendarListList{..}
+        type Scopes CalendarListList =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient CalendarListList'{..}
           = go _cllSyncToken _cllMinAccessRole _cllShowDeleted
               _cllShowHidden
               _cllPageToken

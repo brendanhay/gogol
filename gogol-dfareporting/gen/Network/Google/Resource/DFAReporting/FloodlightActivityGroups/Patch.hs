@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivityGroupsPatch' request conforms to.
 type FloodlightActivityGroupsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>
@@ -59,7 +59,7 @@ type FloodlightActivityGroupsPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'floodlightActivityGroupsPatch' smart constructor.
-data FloodlightActivityGroupsPatch = FloodlightActivityGroupsPatch
+data FloodlightActivityGroupsPatch = FloodlightActivityGroupsPatch'
     { _fagpProFileId :: !(Textual Int64)
     , _fagpPayload   :: !FloodlightActivityGroup
     , _fagpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ floodlightActivityGroupsPatch
     -> Int64 -- ^ 'fagpId'
     -> FloodlightActivityGroupsPatch
 floodlightActivityGroupsPatch pFagpProFileId_ pFagpPayload_ pFagpId_ =
-    FloodlightActivityGroupsPatch
+    FloodlightActivityGroupsPatch'
     { _fagpProFileId = _Coerce # pFagpProFileId_
     , _fagpPayload = pFagpPayload_
     , _fagpId = _Coerce # pFagpId_
@@ -107,7 +107,9 @@ instance GoogleRequest FloodlightActivityGroupsPatch
          where
         type Rs FloodlightActivityGroupsPatch =
              FloodlightActivityGroup
-        requestClient FloodlightActivityGroupsPatch{..}
+        type Scopes FloodlightActivityGroupsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient FloodlightActivityGroupsPatch'{..}
           = go _fagpProFileId (Just _fagpId) (Just AltJSON)
               _fagpPayload
               dFAReportingService

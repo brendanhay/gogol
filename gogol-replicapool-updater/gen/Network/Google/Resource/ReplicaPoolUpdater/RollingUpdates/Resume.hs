@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type RollingUpdatesResumeResource =
 -- state of the update is ROLLED_OUT.
 --
 -- /See:/ 'rollingUpdatesResume' smart constructor.
-data RollingUpdatesResume = RollingUpdatesResume
+data RollingUpdatesResume = RollingUpdatesResume'
     { _rRollingUpdate :: !Text
     , _rProject       :: !Text
     , _rZone          :: !Text
@@ -81,7 +81,7 @@ rollingUpdatesResume
     -> Text -- ^ 'rZone'
     -> RollingUpdatesResume
 rollingUpdatesResume pRRollingUpdate_ pRProject_ pRZone_ =
-    RollingUpdatesResume
+    RollingUpdatesResume'
     { _rRollingUpdate = pRRollingUpdate_
     , _rProject = pRProject_
     , _rZone = pRZone_
@@ -103,7 +103,10 @@ rZone = lens _rZone (\ s a -> s{_rZone = a})
 
 instance GoogleRequest RollingUpdatesResume where
         type Rs RollingUpdatesResume = Operation
-        requestClient RollingUpdatesResume{..}
+        type Scopes RollingUpdatesResume =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/replicapool"]
+        requestClient RollingUpdatesResume'{..}
           = go _rProject _rZone _rRollingUpdate (Just AltJSON)
               replicaPoolUpdaterService
           where go

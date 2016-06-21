@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -79,7 +79,7 @@ type ProjectsJobsMessagesListResource =
 -- | Request the job status.
 --
 -- /See:/ 'projectsJobsMessagesList' smart constructor.
-data ProjectsJobsMessagesList = ProjectsJobsMessagesList
+data ProjectsJobsMessagesList = ProjectsJobsMessagesList'
     { _pjmlXgafv             :: !(Maybe Text)
     , _pjmlJobId             :: !Text
     , _pjmlUploadProtocol    :: !(Maybe Text)
@@ -132,7 +132,7 @@ projectsJobsMessagesList
     -> Text -- ^ 'pjmlProjectId'
     -> ProjectsJobsMessagesList
 projectsJobsMessagesList pPjmlJobId_ pPjmlProjectId_ =
-    ProjectsJobsMessagesList
+    ProjectsJobsMessagesList'
     { _pjmlXgafv = Nothing
     , _pjmlJobId = pPjmlJobId_
     , _pjmlUploadProtocol = Nothing
@@ -235,7 +235,10 @@ pjmlCallback
 instance GoogleRequest ProjectsJobsMessagesList where
         type Rs ProjectsJobsMessagesList =
              ListJobMessagesResponse
-        requestClient ProjectsJobsMessagesList{..}
+        type Scopes ProjectsJobsMessagesList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
+        requestClient ProjectsJobsMessagesList'{..}
           = go _pjmlProjectId _pjmlJobId _pjmlXgafv
               _pjmlUploadProtocol
               _pjmlStartTime

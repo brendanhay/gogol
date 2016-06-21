@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Labels.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type UsersLabelsListResource =
 -- | Lists all labels in the user\'s mailbox.
 --
 -- /See:/ 'usersLabelsList' smart constructor.
-newtype UsersLabelsList = UsersLabelsList
+newtype UsersLabelsList = UsersLabelsList'
     { _ullUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -63,10 +63,9 @@ newtype UsersLabelsList = UsersLabelsList
 --
 -- * 'ullUserId'
 usersLabelsList
-    :: Text
-    -> UsersLabelsList
-usersLabelsList pUllUserId_ =
-    UsersLabelsList
+    :: UsersLabelsList
+usersLabelsList =
+    UsersLabelsList'
     { _ullUserId = "me"
     }
 
@@ -78,7 +77,12 @@ ullUserId
 
 instance GoogleRequest UsersLabelsList where
         type Rs UsersLabelsList = ListLabelsResponse
-        requestClient UsersLabelsList{..}
+        type Scopes UsersLabelsList =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersLabelsList'{..}
           = go _ullUserId (Just AltJSON) gmailService
           where go
                   = buildClient

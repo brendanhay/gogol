@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Dataflow.Projects.Jobs.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -40,6 +40,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.List
     , pjlUploadType
     , pjlBearerToken
     , pjlView
+    , pjlFilter
     , pjlPageToken
     , pjlProjectId
     , pjlPageSize
@@ -63,16 +64,17 @@ type ProjectsJobsListResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "view" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" (Textual Int32) :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ListJobsResponse
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "pageSize" (Textual Int32) :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ListJobsResponse
 
 -- | List the jobs of a project
 --
 -- /See:/ 'projectsJobsList' smart constructor.
-data ProjectsJobsList = ProjectsJobsList
+data ProjectsJobsList = ProjectsJobsList'
     { _pjlXgafv          :: !(Maybe Text)
     , _pjlUploadProtocol :: !(Maybe Text)
     , _pjlPp             :: !Bool
@@ -80,6 +82,7 @@ data ProjectsJobsList = ProjectsJobsList
     , _pjlUploadType     :: !(Maybe Text)
     , _pjlBearerToken    :: !(Maybe Text)
     , _pjlView           :: !(Maybe Text)
+    , _pjlFilter         :: !(Maybe Text)
     , _pjlPageToken      :: !(Maybe Text)
     , _pjlProjectId      :: !Text
     , _pjlPageSize       :: !(Maybe (Textual Int32))
@@ -104,6 +107,8 @@ data ProjectsJobsList = ProjectsJobsList
 --
 -- * 'pjlView'
 --
+-- * 'pjlFilter'
+--
 -- * 'pjlPageToken'
 --
 -- * 'pjlProjectId'
@@ -115,7 +120,7 @@ projectsJobsList
     :: Text -- ^ 'pjlProjectId'
     -> ProjectsJobsList
 projectsJobsList pPjlProjectId_ =
-    ProjectsJobsList
+    ProjectsJobsList'
     { _pjlXgafv = Nothing
     , _pjlUploadProtocol = Nothing
     , _pjlPp = True
@@ -123,6 +128,7 @@ projectsJobsList pPjlProjectId_ =
     , _pjlUploadType = Nothing
     , _pjlBearerToken = Nothing
     , _pjlView = Nothing
+    , _pjlFilter = Nothing
     , _pjlPageToken = Nothing
     , _pjlProjectId = pPjlProjectId_
     , _pjlPageSize = Nothing
@@ -165,6 +171,11 @@ pjlBearerToken
 pjlView :: Lens' ProjectsJobsList (Maybe Text)
 pjlView = lens _pjlView (\ s a -> s{_pjlView = a})
 
+-- | The kind of filter to use.
+pjlFilter :: Lens' ProjectsJobsList (Maybe Text)
+pjlFilter
+  = lens _pjlFilter (\ s a -> s{_pjlFilter = a})
+
 -- | Set this to the \'next_page_token\' field of a previous response to
 -- request additional results in a long list.
 pjlPageToken :: Lens' ProjectsJobsList (Maybe Text)
@@ -191,13 +202,17 @@ pjlCallback
 
 instance GoogleRequest ProjectsJobsList where
         type Rs ProjectsJobsList = ListJobsResponse
-        requestClient ProjectsJobsList{..}
+        type Scopes ProjectsJobsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/userinfo.email"]
+        requestClient ProjectsJobsList'{..}
           = go _pjlProjectId _pjlXgafv _pjlUploadProtocol
               (Just _pjlPp)
               _pjlAccessToken
               _pjlUploadType
               _pjlBearerToken
               _pjlView
+              _pjlFilter
               _pjlPageToken
               _pjlPageSize
               _pjlCallback

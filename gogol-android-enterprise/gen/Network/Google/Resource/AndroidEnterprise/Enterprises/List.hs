@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Enterprises.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Looks up an enterprise by domain name.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.list@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.list@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.List
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ type EnterprisesListResource =
 -- | Looks up an enterprise by domain name.
 --
 -- /See:/ 'enterprisesList' smart constructor.
-newtype EnterprisesList = EnterprisesList
+newtype EnterprisesList = EnterprisesList'
     { _elDomain :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ enterprisesList
     :: Text -- ^ 'elDomain'
     -> EnterprisesList
 enterprisesList pElDomain_ =
-    EnterprisesList
+    EnterprisesList'
     { _elDomain = pElDomain_
     }
 
@@ -75,7 +75,9 @@ elDomain = lens _elDomain (\ s a -> s{_elDomain = a})
 
 instance GoogleRequest EnterprisesList where
         type Rs EnterprisesList = EnterprisesListResponse
-        requestClient EnterprisesList{..}
+        type Scopes EnterprisesList =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient EnterprisesList'{..}
           = go (Just _elDomain) (Just AltJSON)
               androidEnterpriseService
           where go

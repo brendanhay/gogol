@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.DFAReporting.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -24,18 +24,18 @@ data PlacementsListSortOrder
       -- ^ @ASCENDING@
     | Descending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsListSortOrder
 
-instance FromText PlacementsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just Ascending
-        "DESCENDING" -> Just Descending
-        _ -> Nothing
+instance FromHttpApiData PlacementsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right Ascending
+        "DESCENDING" -> Right Descending
+        x -> Left ("Unable to parse PlacementsListSortOrder from: " <> x)
 
-instance ToText PlacementsListSortOrder where
-    toText = \case
+instance ToHttpApiData PlacementsListSortOrder where
+    toQueryParam = \case
         Ascending -> "ASCENDING"
         Descending -> "DESCENDING"
 
@@ -77,31 +77,31 @@ data DateRangeRelativeDateRange
       -- ^ @YEAR_TO_DATE@
     | Yesterday
       -- ^ @YESTERDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DateRangeRelativeDateRange
 
-instance FromText DateRangeRelativeDateRange where
-    fromText = \case
-        "LAST_24_MONTHS" -> Just Last24Months
-        "LAST_30_DAYS" -> Just Last30Days
-        "LAST_365_DAYS" -> Just Last365Days
-        "LAST_7_DAYS" -> Just Last7Days
-        "LAST_90_DAYS" -> Just Last90Days
-        "MONTH_TO_DATE" -> Just MonthToDate
-        "PREVIOUS_MONTH" -> Just PreviousMonth
-        "PREVIOUS_QUARTER" -> Just PreviousQuarter
-        "PREVIOUS_WEEK" -> Just PreviousWeek
-        "PREVIOUS_YEAR" -> Just PreviousYear
-        "QUARTER_TO_DATE" -> Just QuarterToDate
-        "TODAY" -> Just Today
-        "WEEK_TO_DATE" -> Just WeekToDate
-        "YEAR_TO_DATE" -> Just YearToDate
-        "YESTERDAY" -> Just Yesterday
-        _ -> Nothing
+instance FromHttpApiData DateRangeRelativeDateRange where
+    parseQueryParam = \case
+        "LAST_24_MONTHS" -> Right Last24Months
+        "LAST_30_DAYS" -> Right Last30Days
+        "LAST_365_DAYS" -> Right Last365Days
+        "LAST_7_DAYS" -> Right Last7Days
+        "LAST_90_DAYS" -> Right Last90Days
+        "MONTH_TO_DATE" -> Right MonthToDate
+        "PREVIOUS_MONTH" -> Right PreviousMonth
+        "PREVIOUS_QUARTER" -> Right PreviousQuarter
+        "PREVIOUS_WEEK" -> Right PreviousWeek
+        "PREVIOUS_YEAR" -> Right PreviousYear
+        "QUARTER_TO_DATE" -> Right QuarterToDate
+        "TODAY" -> Right Today
+        "WEEK_TO_DATE" -> Right WeekToDate
+        "YEAR_TO_DATE" -> Right YearToDate
+        "YESTERDAY" -> Right Yesterday
+        x -> Left ("Unable to parse DateRangeRelativeDateRange from: " <> x)
 
-instance ToText DateRangeRelativeDateRange where
-    toText = \case
+instance ToHttpApiData DateRangeRelativeDateRange where
+    toQueryParam = \case
         Last24Months -> "LAST_24_MONTHS"
         Last30Days -> "LAST_30_DAYS"
         Last365Days -> "LAST_365_DAYS"
@@ -130,18 +130,18 @@ data AdvertisersListSortField
       -- ^ @ID@
     | Name
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertisersListSortField
 
-instance FromText AdvertisersListSortField where
-    fromText = \case
-        "ID" -> Just ID
-        "NAME" -> Just Name
-        _ -> Nothing
+instance FromHttpApiData AdvertisersListSortField where
+    parseQueryParam = \case
+        "ID" -> Right ID
+        "NAME" -> Right Name
+        x -> Left ("Unable to parse AdvertisersListSortField from: " <> x)
 
-instance ToText AdvertisersListSortField where
-    toText = \case
+instance ToHttpApiData AdvertisersListSortField where
+    toQueryParam = \case
         ID -> "ID"
         Name -> "NAME"
 
@@ -157,18 +157,18 @@ data CreativeFieldsListSortOrder
       -- ^ @ASCENDING@
     | CFLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeFieldsListSortOrder
 
-instance FromText CreativeFieldsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just CFLSOAscending
-        "DESCENDING" -> Just CFLSODescending
-        _ -> Nothing
+instance FromHttpApiData CreativeFieldsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right CFLSOAscending
+        "DESCENDING" -> Right CFLSODescending
+        x -> Left ("Unable to parse CreativeFieldsListSortOrder from: " <> x)
 
-instance ToText CreativeFieldsListSortOrder where
-    toText = \case
+instance ToHttpApiData CreativeFieldsListSortOrder where
+    toQueryParam = \case
         CFLSOAscending -> "ASCENDING"
         CFLSODescending -> "DESCENDING"
 
@@ -184,18 +184,18 @@ data UserRolesListSortField
       -- ^ @ID@
     | URLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserRolesListSortField
 
-instance FromText UserRolesListSortField where
-    fromText = \case
-        "ID" -> Just URLSFID
-        "NAME" -> Just URLSFName
-        _ -> Nothing
+instance FromHttpApiData UserRolesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right URLSFID
+        "NAME" -> Right URLSFName
+        x -> Left ("Unable to parse UserRolesListSortField from: " <> x)
 
-instance ToText UserRolesListSortField where
-    toText = \case
+instance ToHttpApiData UserRolesListSortField where
+    toQueryParam = \case
         URLSFID -> "ID"
         URLSFName -> "NAME"
 
@@ -212,18 +212,18 @@ data FloodlightActivityTagFormat
       -- ^ @HTML@
     | Xhtml
       -- ^ @XHTML@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityTagFormat
 
-instance FromText FloodlightActivityTagFormat where
-    fromText = \case
-        "HTML" -> Just HTML
-        "XHTML" -> Just Xhtml
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivityTagFormat where
+    parseQueryParam = \case
+        "HTML" -> Right HTML
+        "XHTML" -> Right Xhtml
+        x -> Left ("Unable to parse FloodlightActivityTagFormat from: " <> x)
 
-instance ToText FloodlightActivityTagFormat where
-    toText = \case
+instance ToHttpApiData FloodlightActivityTagFormat where
+    toQueryParam = \case
         HTML -> "HTML"
         Xhtml -> "XHTML"
 
@@ -239,18 +239,18 @@ data OrderDocumentsListSortOrder
       -- ^ @ASCENDING@
     | ODLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrderDocumentsListSortOrder
 
-instance FromText OrderDocumentsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just ODLSOAscending
-        "DESCENDING" -> Just ODLSODescending
-        _ -> Nothing
+instance FromHttpApiData OrderDocumentsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right ODLSOAscending
+        "DESCENDING" -> Right ODLSODescending
+        x -> Left ("Unable to parse OrderDocumentsListSortOrder from: " <> x)
 
-instance ToText OrderDocumentsListSortOrder where
-    toText = \case
+instance ToHttpApiData OrderDocumentsListSortOrder where
+    toQueryParam = \case
         ODLSOAscending -> "ASCENDING"
         ODLSODescending -> "DESCENDING"
 
@@ -262,24 +262,25 @@ instance ToJSON OrderDocumentsListSortOrder where
 
 -- | Role of the asset in relation to creative. Applicable to all but the
 -- following creative types: all REDIRECT and TRACKING_TEXT. This is a
--- required field. PRIMARY applies to ENHANCED_BANNER, FLASH_INPAGE,
--- HTML5_BANNER, IMAGE, IMAGE_GALLERY, all RICH_MEDIA (which may contain
--- multiple primary assets), and all VPAID creatives. BACKUP_IMAGE applies
--- to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all
--- VPAID creatives. ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to
--- FLASH_INPAGE creatives. OTHER refers to assets from sources other than
--- DCM, such as Studio uploaded assets, applicable to all RICH_MEDIA and
--- all VPAID creatives. PARENT_VIDEO refers to videos uploaded by the user
--- in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
+-- required field. PRIMARY applies to DISPLAY, FLASH_INPAGE, HTML5_BANNER,
+-- IMAGE, DISPLAY_IMAGE_GALLERY, all RICH_MEDIA (which may contain multiple
+-- primary assets), and all VPAID creatives. BACKUP_IMAGE applies to
+-- FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives.
+-- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
+-- ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to FLASH_INPAGE creatives.
+-- OTHER refers to assets from sources other than DCM, such as Studio
+-- uploaded assets, applicable to all RICH_MEDIA and all VPAID creatives.
+-- PARENT_VIDEO refers to videos uploaded by the user in DCM and is
+-- applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO creatives.
 -- TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO
--- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
--- ALTERNATE_VIDEO refers to the DCM representation of child asset videos
--- from Studio, and is applicable to VPAID_LINEAR creatives. These cannot
--- be added or removed within DCM. For VPAID_LINEAR creatives,
--- PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are
--- marked active serve as backup in case the VPAID creative cannot be
--- served. Only PARENT_VIDEO assets can be added or removed for an
--- INSTREAM_VIDEO or VPAID_LINEAR creative.
+-- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO
+-- creatives. ALTERNATE_VIDEO refers to the DCM representation of child
+-- asset videos from Studio, and is applicable to VPAID_LINEAR_VIDEO
+-- creatives. These cannot be added or removed within DCM. For
+-- VPAID_LINEAR_VIDEO creatives, PARENT_VIDEO, TRANSCODED_VIDEO and
+-- ALTERNATE_VIDEO assets that are marked active serve as backup in case
+-- the VPAID creative cannot be served. Only PARENT_VIDEO assets can be
+-- added or removed for an INSTREAM_VIDEO or VPAID_LINEAR_VIDEO creative.
 data CreativeAssetRole
     = AdditionalFlash
       -- ^ @ADDITIONAL_FLASH@
@@ -297,24 +298,24 @@ data CreativeAssetRole
       -- ^ @PRIMARY@
     | TranscodedVideo
       -- ^ @TRANSCODED_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetRole
 
-instance FromText CreativeAssetRole where
-    fromText = \case
-        "ADDITIONAL_FLASH" -> Just AdditionalFlash
-        "ADDITIONAL_IMAGE" -> Just AdditionalImage
-        "ALTERNATE_VIDEO" -> Just AlternateVideo
-        "BACKUP_IMAGE" -> Just BackupImage
-        "OTHER" -> Just Other
-        "PARENT_VIDEO" -> Just ParentVideo
-        "PRIMARY" -> Just Primary
-        "TRANSCODED_VIDEO" -> Just TranscodedVideo
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetRole where
+    parseQueryParam = \case
+        "ADDITIONAL_FLASH" -> Right AdditionalFlash
+        "ADDITIONAL_IMAGE" -> Right AdditionalImage
+        "ALTERNATE_VIDEO" -> Right AlternateVideo
+        "BACKUP_IMAGE" -> Right BackupImage
+        "OTHER" -> Right Other
+        "PARENT_VIDEO" -> Right ParentVideo
+        "PRIMARY" -> Right Primary
+        "TRANSCODED_VIDEO" -> Right TranscodedVideo
+        x -> Left ("Unable to parse CreativeAssetRole from: " <> x)
 
-instance ToText CreativeAssetRole where
-    toText = \case
+instance ToHttpApiData CreativeAssetRole where
+    toQueryParam = \case
         AdditionalFlash -> "ADDITIONAL_FLASH"
         AdditionalImage -> "ADDITIONAL_IMAGE"
         AlternateVideo -> "ALTERNATE_VIDEO"
@@ -330,24 +331,59 @@ instance FromJSON CreativeAssetRole where
 instance ToJSON CreativeAssetRole where
     toJSON = toJSONText
 
+-- | Select only dynamic targeting keys with this object type.
+data DynamicTargetingKeysListObjectType
+    = ObjectAd
+      -- ^ @OBJECT_AD@
+    | ObjectAdvertiser
+      -- ^ @OBJECT_ADVERTISER@
+    | ObjectCreative
+      -- ^ @OBJECT_CREATIVE@
+    | ObjectPlacement
+      -- ^ @OBJECT_PLACEMENT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DynamicTargetingKeysListObjectType
+
+instance FromHttpApiData DynamicTargetingKeysListObjectType where
+    parseQueryParam = \case
+        "OBJECT_AD" -> Right ObjectAd
+        "OBJECT_ADVERTISER" -> Right ObjectAdvertiser
+        "OBJECT_CREATIVE" -> Right ObjectCreative
+        "OBJECT_PLACEMENT" -> Right ObjectPlacement
+        x -> Left ("Unable to parse DynamicTargetingKeysListObjectType from: " <> x)
+
+instance ToHttpApiData DynamicTargetingKeysListObjectType where
+    toQueryParam = \case
+        ObjectAd -> "OBJECT_AD"
+        ObjectAdvertiser -> "OBJECT_ADVERTISER"
+        ObjectCreative -> "OBJECT_CREATIVE"
+        ObjectPlacement -> "OBJECT_PLACEMENT"
+
+instance FromJSON DynamicTargetingKeysListObjectType where
+    parseJSON = parseJSONText "DynamicTargetingKeysListObjectType"
+
+instance ToJSON DynamicTargetingKeysListObjectType where
+    toJSON = toJSONText
+
 -- | The delivery type for the recipient.
 data RecipientDeliveryType
     = Attachment
       -- ^ @ATTACHMENT@
     | Link
       -- ^ @LINK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RecipientDeliveryType
 
-instance FromText RecipientDeliveryType where
-    fromText = \case
-        "ATTACHMENT" -> Just Attachment
-        "LINK" -> Just Link
-        _ -> Nothing
+instance FromHttpApiData RecipientDeliveryType where
+    parseQueryParam = \case
+        "ATTACHMENT" -> Right Attachment
+        "LINK" -> Right Link
+        x -> Left ("Unable to parse RecipientDeliveryType from: " <> x)
 
-instance ToText RecipientDeliveryType where
-    toText = \case
+instance ToHttpApiData RecipientDeliveryType where
+    toQueryParam = \case
         Attachment -> "ATTACHMENT"
         Link -> "LINK"
 
@@ -385,41 +421,47 @@ data ThirdPartyTrackingURLThirdPartyURLType
       -- ^ @VIDEO_MUTE@
     | VideoPause
       -- ^ @VIDEO_PAUSE@
+    | VideoProgress
+      -- ^ @VIDEO_PROGRESS@
     | VideoRewind
       -- ^ @VIDEO_REWIND@
+    | VideoSkip
+      -- ^ @VIDEO_SKIP@
     | VideoStart
       -- ^ @VIDEO_START@
     | VideoStop
       -- ^ @VIDEO_STOP@
     | VideoThirdQuartile
       -- ^ @VIDEO_THIRD_QUARTILE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ThirdPartyTrackingURLThirdPartyURLType
 
-instance FromText ThirdPartyTrackingURLThirdPartyURLType where
-    fromText = \case
-        "CLICK_TRACKING" -> Just ClickTracking
-        "IMPRESSION" -> Just Impression
-        "RICH_MEDIA_BACKUP_IMPRESSION" -> Just RichMediaBackupImpression
-        "RICH_MEDIA_IMPRESSION" -> Just RichMediaImpression
-        "RICH_MEDIA_RM_IMPRESSION" -> Just RichMediaRmImpression
-        "SURVEY" -> Just Survey
-        "VIDEO_COMPLETE" -> Just VideoComplete
-        "VIDEO_CUSTOM" -> Just VideoCustom
-        "VIDEO_FIRST_QUARTILE" -> Just VideoFirstQuartile
-        "VIDEO_FULLSCREEN" -> Just VideoFullscreen
-        "VIDEO_MIDPOINT" -> Just VideoMidpoint
-        "VIDEO_MUTE" -> Just VideoMute
-        "VIDEO_PAUSE" -> Just VideoPause
-        "VIDEO_REWIND" -> Just VideoRewind
-        "VIDEO_START" -> Just VideoStart
-        "VIDEO_STOP" -> Just VideoStop
-        "VIDEO_THIRD_QUARTILE" -> Just VideoThirdQuartile
-        _ -> Nothing
+instance FromHttpApiData ThirdPartyTrackingURLThirdPartyURLType where
+    parseQueryParam = \case
+        "CLICK_TRACKING" -> Right ClickTracking
+        "IMPRESSION" -> Right Impression
+        "RICH_MEDIA_BACKUP_IMPRESSION" -> Right RichMediaBackupImpression
+        "RICH_MEDIA_IMPRESSION" -> Right RichMediaImpression
+        "RICH_MEDIA_RM_IMPRESSION" -> Right RichMediaRmImpression
+        "SURVEY" -> Right Survey
+        "VIDEO_COMPLETE" -> Right VideoComplete
+        "VIDEO_CUSTOM" -> Right VideoCustom
+        "VIDEO_FIRST_QUARTILE" -> Right VideoFirstQuartile
+        "VIDEO_FULLSCREEN" -> Right VideoFullscreen
+        "VIDEO_MIDPOINT" -> Right VideoMidpoint
+        "VIDEO_MUTE" -> Right VideoMute
+        "VIDEO_PAUSE" -> Right VideoPause
+        "VIDEO_PROGRESS" -> Right VideoProgress
+        "VIDEO_REWIND" -> Right VideoRewind
+        "VIDEO_SKIP" -> Right VideoSkip
+        "VIDEO_START" -> Right VideoStart
+        "VIDEO_STOP" -> Right VideoStop
+        "VIDEO_THIRD_QUARTILE" -> Right VideoThirdQuartile
+        x -> Left ("Unable to parse ThirdPartyTrackingURLThirdPartyURLType from: " <> x)
 
-instance ToText ThirdPartyTrackingURLThirdPartyURLType where
-    toText = \case
+instance ToHttpApiData ThirdPartyTrackingURLThirdPartyURLType where
+    toQueryParam = \case
         ClickTracking -> "CLICK_TRACKING"
         Impression -> "IMPRESSION"
         RichMediaBackupImpression -> "RICH_MEDIA_BACKUP_IMPRESSION"
@@ -433,7 +475,9 @@ instance ToText ThirdPartyTrackingURLThirdPartyURLType where
         VideoMidpoint -> "VIDEO_MIDPOINT"
         VideoMute -> "VIDEO_MUTE"
         VideoPause -> "VIDEO_PAUSE"
+        VideoProgress -> "VIDEO_PROGRESS"
         VideoRewind -> "VIDEO_REWIND"
+        VideoSkip -> "VIDEO_SKIP"
         VideoStart -> "VIDEO_START"
         VideoStop -> "VIDEO_STOP"
         VideoThirdQuartile -> "VIDEO_THIRD_QUARTILE"
@@ -450,18 +494,18 @@ data TargetableRemarketingListsListSortOrder
       -- ^ @ASCENDING@
     | TRLLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetableRemarketingListsListSortOrder
 
-instance FromText TargetableRemarketingListsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just TRLLSOAscending
-        "DESCENDING" -> Just TRLLSODescending
-        _ -> Nothing
+instance FromHttpApiData TargetableRemarketingListsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right TRLLSOAscending
+        "DESCENDING" -> Right TRLLSODescending
+        x -> Left ("Unable to parse TargetableRemarketingListsListSortOrder from: " <> x)
 
-instance ToText TargetableRemarketingListsListSortOrder where
-    toText = \case
+instance ToHttpApiData TargetableRemarketingListsListSortOrder where
+    toQueryParam = \case
         TRLLSOAscending -> "ASCENDING"
         TRLLSODescending -> "DESCENDING"
 
@@ -480,19 +524,19 @@ data CreativeAssetPositionLeftUnit
       -- ^ @OFFSET_UNIT_PIXEL@
     | OffSetUnitPixelFromCenter
       -- ^ @OFFSET_UNIT_PIXEL_FROM_CENTER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetPositionLeftUnit
 
-instance FromText CreativeAssetPositionLeftUnit where
-    fromText = \case
-        "OFFSET_UNIT_PERCENT" -> Just OffSetUnitPercent
-        "OFFSET_UNIT_PIXEL" -> Just OffSetUnitPixel
-        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Just OffSetUnitPixelFromCenter
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetPositionLeftUnit where
+    parseQueryParam = \case
+        "OFFSET_UNIT_PERCENT" -> Right OffSetUnitPercent
+        "OFFSET_UNIT_PIXEL" -> Right OffSetUnitPixel
+        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Right OffSetUnitPixelFromCenter
+        x -> Left ("Unable to parse CreativeAssetPositionLeftUnit from: " <> x)
 
-instance ToText CreativeAssetPositionLeftUnit where
-    toText = \case
+instance ToHttpApiData CreativeAssetPositionLeftUnit where
+    toQueryParam = \case
         OffSetUnitPercent -> "OFFSET_UNIT_PERCENT"
         OffSetUnitPixel -> "OFFSET_UNIT_PIXEL"
         OffSetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
@@ -511,19 +555,19 @@ data PricingScheduleCapCostOption
       -- ^ @CAP_COST_MONTHLY@
     | CapCostNone
       -- ^ @CAP_COST_NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PricingScheduleCapCostOption
 
-instance FromText PricingScheduleCapCostOption where
-    fromText = \case
-        "CAP_COST_CUMULATIVE" -> Just CapCostCumulative
-        "CAP_COST_MONTHLY" -> Just CapCostMonthly
-        "CAP_COST_NONE" -> Just CapCostNone
-        _ -> Nothing
+instance FromHttpApiData PricingScheduleCapCostOption where
+    parseQueryParam = \case
+        "CAP_COST_CUMULATIVE" -> Right CapCostCumulative
+        "CAP_COST_MONTHLY" -> Right CapCostMonthly
+        "CAP_COST_NONE" -> Right CapCostNone
+        x -> Left ("Unable to parse PricingScheduleCapCostOption from: " <> x)
 
-instance ToText PricingScheduleCapCostOption where
-    toText = \case
+instance ToHttpApiData PricingScheduleCapCostOption where
+    toQueryParam = \case
         CapCostCumulative -> "CAP_COST_CUMULATIVE"
         CapCostMonthly -> "CAP_COST_MONTHLY"
         CapCostNone -> "CAP_COST_NONE"
@@ -546,21 +590,21 @@ data UserRolePermissionAvailability
       -- ^ @SUBACCOUNT_AND_ACCOUNT_ALWAYS@
     | SubAccountAndAccountByDefault
       -- ^ @SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserRolePermissionAvailability
 
-instance FromText UserRolePermissionAvailability where
-    fromText = \case
-        "ACCOUNT_ALWAYS" -> Just AccountAlways
-        "ACCOUNT_BY_DEFAULT" -> Just AccountByDefault
-        "NOT_AVAILABLE_BY_DEFAULT" -> Just NotAvailableByDefault
-        "SUBACCOUNT_AND_ACCOUNT_ALWAYS" -> Just SubAccountAndAccountAlways
-        "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT" -> Just SubAccountAndAccountByDefault
-        _ -> Nothing
+instance FromHttpApiData UserRolePermissionAvailability where
+    parseQueryParam = \case
+        "ACCOUNT_ALWAYS" -> Right AccountAlways
+        "ACCOUNT_BY_DEFAULT" -> Right AccountByDefault
+        "NOT_AVAILABLE_BY_DEFAULT" -> Right NotAvailableByDefault
+        "SUBACCOUNT_AND_ACCOUNT_ALWAYS" -> Right SubAccountAndAccountAlways
+        "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT" -> Right SubAccountAndAccountByDefault
+        x -> Left ("Unable to parse UserRolePermissionAvailability from: " <> x)
 
-instance ToText UserRolePermissionAvailability where
-    toText = \case
+instance ToHttpApiData UserRolePermissionAvailability where
+    toQueryParam = \case
         AccountAlways -> "ACCOUNT_ALWAYS"
         AccountByDefault -> "ACCOUNT_BY_DEFAULT"
         NotAvailableByDefault -> "NOT_AVAILABLE_BY_DEFAULT"
@@ -581,18 +625,18 @@ data DirectorySiteContactAssignmentVisibility
       -- ^ @PRIVATE@
     | Public
       -- ^ @PUBLIC@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteContactAssignmentVisibility
 
-instance FromText DirectorySiteContactAssignmentVisibility where
-    fromText = \case
-        "PRIVATE" -> Just Private
-        "PUBLIC" -> Just Public
-        _ -> Nothing
+instance FromHttpApiData DirectorySiteContactAssignmentVisibility where
+    parseQueryParam = \case
+        "PRIVATE" -> Right Private
+        "PUBLIC" -> Right Public
+        x -> Left ("Unable to parse DirectorySiteContactAssignmentVisibility from: " <> x)
 
-instance ToText DirectorySiteContactAssignmentVisibility where
-    toText = \case
+instance ToHttpApiData DirectorySiteContactAssignmentVisibility where
+    toQueryParam = \case
         Private -> "PRIVATE"
         Public -> "PUBLIC"
 
@@ -602,42 +646,44 @@ instance FromJSON DirectorySiteContactAssignmentVisibility where
 instance ToJSON DirectorySiteContactAssignmentVisibility where
     toJSON = toJSONText
 
--- | Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering
--- either on desktop or on mobile devices for regular or interstitial ads,
--- respectively. APP and APP_INTERSTITIAL are for rendering in mobile
--- apps.IN_STREAM_VIDEO refers to rendering in in-stream video ads
--- developed with the VAST standard. This field is required on insertion.
+-- | Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
+-- rendering on desktop, on mobile devices or in mobile apps for regular or
+-- interstitial ads respectively. APP and APP_INTERSTITIAL are no longer
+-- allowed for new placement insertions. Instead, use DISPLAY or
+-- DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream
+-- video ads developed with the VAST standard. This field is required on
+-- insertion.
 data PlacementCompatibility
     = App
       -- ^ @APP@
     | AppInterstitial
       -- ^ @APP_INTERSTITIAL@
+    | Display
+      -- ^ @DISPLAY@
+    | DisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
     | InStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-    | Web
-      -- ^ @WEB@
-    | WebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementCompatibility
 
-instance FromText PlacementCompatibility where
-    fromText = \case
-        "APP" -> Just App
-        "APP_INTERSTITIAL" -> Just AppInterstitial
-        "IN_STREAM_VIDEO" -> Just InStreamVideo
-        "WEB" -> Just Web
-        "WEB_INTERSTITIAL" -> Just WebInterstitial
-        _ -> Nothing
+instance FromHttpApiData PlacementCompatibility where
+    parseQueryParam = \case
+        "APP" -> Right App
+        "APP_INTERSTITIAL" -> Right AppInterstitial
+        "DISPLAY" -> Right Display
+        "DISPLAY_INTERSTITIAL" -> Right DisplayInterstitial
+        "IN_STREAM_VIDEO" -> Right InStreamVideo
+        x -> Left ("Unable to parse PlacementCompatibility from: " <> x)
 
-instance ToText PlacementCompatibility where
-    toText = \case
+instance ToHttpApiData PlacementCompatibility where
+    toQueryParam = \case
         App -> "APP"
         AppInterstitial -> "APP_INTERSTITIAL"
+        Display -> "DISPLAY"
+        DisplayInterstitial -> "DISPLAY_INTERSTITIAL"
         InStreamVideo -> "IN_STREAM_VIDEO"
-        Web -> "WEB"
-        WebInterstitial -> "WEB_INTERSTITIAL"
 
 instance FromJSON PlacementCompatibility where
     parseJSON = parseJSONText "PlacementCompatibility"
@@ -662,23 +708,23 @@ data ListPopulationTermOperator
       -- ^ @STRING_CONTAINS@
     | StringEquals
       -- ^ @STRING_EQUALS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ListPopulationTermOperator
 
-instance FromText ListPopulationTermOperator where
-    fromText = \case
-        "NUM_EQUALS" -> Just NumEquals
-        "NUM_GREATER_THAN" -> Just NumGreaterThan
-        "NUM_GREATER_THAN_EQUAL" -> Just NumGreaterThanEqual
-        "NUM_LESS_THAN" -> Just NumLessThan
-        "NUM_LESS_THAN_EQUAL" -> Just NumLessThanEqual
-        "STRING_CONTAINS" -> Just StringContains
-        "STRING_EQUALS" -> Just StringEquals
-        _ -> Nothing
+instance FromHttpApiData ListPopulationTermOperator where
+    parseQueryParam = \case
+        "NUM_EQUALS" -> Right NumEquals
+        "NUM_GREATER_THAN" -> Right NumGreaterThan
+        "NUM_GREATER_THAN_EQUAL" -> Right NumGreaterThanEqual
+        "NUM_LESS_THAN" -> Right NumLessThan
+        "NUM_LESS_THAN_EQUAL" -> Right NumLessThanEqual
+        "STRING_CONTAINS" -> Right StringContains
+        "STRING_EQUALS" -> Right StringEquals
+        x -> Left ("Unable to parse ListPopulationTermOperator from: " <> x)
 
-instance ToText ListPopulationTermOperator where
-    toText = \case
+instance ToHttpApiData ListPopulationTermOperator where
+    toQueryParam = \case
         NumEquals -> "NUM_EQUALS"
         NumGreaterThan -> "NUM_GREATER_THAN"
         NumGreaterThanEqual -> "NUM_GREATER_THAN_EQUAL"
@@ -699,18 +745,18 @@ data PlacementsListPaymentSource
       -- ^ @PLACEMENT_AGENCY_PAID@
     | PlacementPublisherPaid
       -- ^ @PLACEMENT_PUBLISHER_PAID@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsListPaymentSource
 
-instance FromText PlacementsListPaymentSource where
-    fromText = \case
-        "PLACEMENT_AGENCY_PAID" -> Just PlacementAgencyPaid
-        "PLACEMENT_PUBLISHER_PAID" -> Just PlacementPublisherPaid
-        _ -> Nothing
+instance FromHttpApiData PlacementsListPaymentSource where
+    parseQueryParam = \case
+        "PLACEMENT_AGENCY_PAID" -> Right PlacementAgencyPaid
+        "PLACEMENT_PUBLISHER_PAID" -> Right PlacementPublisherPaid
+        x -> Left ("Unable to parse PlacementsListPaymentSource from: " <> x)
 
-instance ToText PlacementsListPaymentSource where
-    toText = \case
+instance ToHttpApiData PlacementsListPaymentSource where
+    toQueryParam = \case
         PlacementAgencyPaid -> "PLACEMENT_AGENCY_PAID"
         PlacementPublisherPaid -> "PLACEMENT_PUBLISHER_PAID"
 
@@ -731,19 +777,19 @@ data ReportsListSortField
     | RLSFName
       -- ^ @NAME@
       -- Sort by name of reports.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsListSortField
 
-instance FromText ReportsListSortField where
-    fromText = \case
-        "ID" -> Just RLSFID
-        "LAST_MODIFIED_TIME" -> Just RLSFLastModifiedTime
-        "NAME" -> Just RLSFName
-        _ -> Nothing
+instance FromHttpApiData ReportsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right RLSFID
+        "LAST_MODIFIED_TIME" -> Right RLSFLastModifiedTime
+        "NAME" -> Right RLSFName
+        x -> Left ("Unable to parse ReportsListSortField from: " <> x)
 
-instance ToText ReportsListSortField where
-    toText = \case
+instance ToHttpApiData ReportsListSortField where
+    toQueryParam = \case
         RLSFID -> "ID"
         RLSFLastModifiedTime -> "LAST_MODIFIED_TIME"
         RLSFName -> "NAME"
@@ -754,42 +800,42 @@ instance FromJSON ReportsListSortField where
 instance ToJSON ReportsListSortField where
     toJSON = toJSONText
 
--- | Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering
--- either on desktop or on mobile devices for regular or interstitial ads
--- respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.
--- IN_STREAM_VIDEO refers to rendering in in-stream video ads developed
--- with the VAST standard.
+-- | Ad slot compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
+-- rendering either on desktop, mobile devices or in mobile apps for
+-- regular or interstitial ads respectively. APP and APP_INTERSTITIAL are
+-- for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in
+-- in-stream video ads developed with the VAST standard.
 data AdSlotCompatibility
-    = PlanningRenderingEnvironmentTypeApp
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_APP@
-    | PlanningRenderingEnvironmentTypeAppInterstitial
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL@
-    | PlanningRenderingEnvironmentTypeInStreamVideo
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO@
-    | PlanningRenderingEnvironmentTypeWeb
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB@
-    | PlanningRenderingEnvironmentTypeWebInterstitial
-      -- ^ @PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+    = ASCApp
+      -- ^ @APP@
+    | ASCAppInterstitial
+      -- ^ @APP_INTERSTITIAL@
+    | ASCDisplay
+      -- ^ @DISPLAY@
+    | ASCDisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
+    | ASCInStreamVideo
+      -- ^ @IN_STREAM_VIDEO@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdSlotCompatibility
 
-instance FromText AdSlotCompatibility where
-    fromText = \case
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP" -> Just PlanningRenderingEnvironmentTypeApp
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL" -> Just PlanningRenderingEnvironmentTypeAppInterstitial
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO" -> Just PlanningRenderingEnvironmentTypeInStreamVideo
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB" -> Just PlanningRenderingEnvironmentTypeWeb
-        "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL" -> Just PlanningRenderingEnvironmentTypeWebInterstitial
-        _ -> Nothing
+instance FromHttpApiData AdSlotCompatibility where
+    parseQueryParam = \case
+        "APP" -> Right ASCApp
+        "APP_INTERSTITIAL" -> Right ASCAppInterstitial
+        "DISPLAY" -> Right ASCDisplay
+        "DISPLAY_INTERSTITIAL" -> Right ASCDisplayInterstitial
+        "IN_STREAM_VIDEO" -> Right ASCInStreamVideo
+        x -> Left ("Unable to parse AdSlotCompatibility from: " <> x)
 
-instance ToText AdSlotCompatibility where
-    toText = \case
-        PlanningRenderingEnvironmentTypeApp -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP"
-        PlanningRenderingEnvironmentTypeAppInterstitial -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL"
-        PlanningRenderingEnvironmentTypeInStreamVideo -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO"
-        PlanningRenderingEnvironmentTypeWeb -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB"
-        PlanningRenderingEnvironmentTypeWebInterstitial -> "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL"
+instance ToHttpApiData AdSlotCompatibility where
+    toQueryParam = \case
+        ASCApp -> "APP"
+        ASCAppInterstitial -> "APP_INTERSTITIAL"
+        ASCDisplay -> "DISPLAY"
+        ASCDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
+        ASCInStreamVideo -> "IN_STREAM_VIDEO"
 
 instance FromJSON AdSlotCompatibility where
     parseJSON = parseJSONText "AdSlotCompatibility"
@@ -803,18 +849,18 @@ data CampaignsListSortField
       -- ^ @ID@
     | CLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CampaignsListSortField
 
-instance FromText CampaignsListSortField where
-    fromText = \case
-        "ID" -> Just CLSFID
-        "NAME" -> Just CLSFName
-        _ -> Nothing
+instance FromHttpApiData CampaignsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right CLSFID
+        "NAME" -> Right CLSFName
+        x -> Left ("Unable to parse CampaignsListSortField from: " <> x)
 
-instance ToText CampaignsListSortField where
-    toText = \case
+instance ToHttpApiData CampaignsListSortField where
+    toQueryParam = \case
         CLSFID -> "ID"
         CLSFName -> "NAME"
 
@@ -832,19 +878,19 @@ data AccountUserProFileTraffickerType
       -- ^ @INTERNAL_NON_TRAFFICKER@
     | InternalTrafficker
       -- ^ @INTERNAL_TRAFFICKER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountUserProFileTraffickerType
 
-instance FromText AccountUserProFileTraffickerType where
-    fromText = \case
-        "EXTERNAL_TRAFFICKER" -> Just ExternalTrafficker
-        "INTERNAL_NON_TRAFFICKER" -> Just InternalNonTrafficker
-        "INTERNAL_TRAFFICKER" -> Just InternalTrafficker
-        _ -> Nothing
+instance FromHttpApiData AccountUserProFileTraffickerType where
+    parseQueryParam = \case
+        "EXTERNAL_TRAFFICKER" -> Right ExternalTrafficker
+        "INTERNAL_NON_TRAFFICKER" -> Right InternalNonTrafficker
+        "INTERNAL_TRAFFICKER" -> Right InternalTrafficker
+        x -> Left ("Unable to parse AccountUserProFileTraffickerType from: " <> x)
 
-instance ToText AccountUserProFileTraffickerType where
-    toText = \case
+instance ToHttpApiData AccountUserProFileTraffickerType where
+    toQueryParam = \case
         ExternalTrafficker -> "EXTERNAL_TRAFFICKER"
         InternalNonTrafficker -> "INTERNAL_NON_TRAFFICKER"
         InternalTrafficker -> "INTERNAL_TRAFFICKER"
@@ -988,82 +1034,82 @@ data CreativeAssetMetadataDetectedFeaturesItem
       -- ^ @WEB_SQL_DATABASE@
     | WebWorkers
       -- ^ @WEB_WORKERS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetMetadataDetectedFeaturesItem
 
-instance FromText CreativeAssetMetadataDetectedFeaturesItem where
-    fromText = \case
-        "APPLICATION_CACHE" -> Just ApplicationCache
-        "AUDIO" -> Just Audio
-        "CANVAS" -> Just Canvas
-        "CANVAS_TEXT" -> Just CanvasText
-        "CSS_ANIMATIONS" -> Just CssAnimations
-        "CSS_BACKGROUND_SIZE" -> Just CssBackgRoundSize
-        "CSS_BORDER_IMAGE" -> Just CssBOrderImage
-        "CSS_BORDER_RADIUS" -> Just CssBOrderRadius
-        "CSS_BOX_SHADOW" -> Just CssBoxShadow
-        "CSS_COLUMNS" -> Just CssColumns
-        "CSS_FLEX_BOX" -> Just CssFlexBox
-        "CSS_FONT_FACE" -> Just CssFontFace
-        "CSS_GENERATED_CONTENT" -> Just CssGeneratedContent
-        "CSS_GRADIENTS" -> Just CssGradients
-        "CSS_HSLA" -> Just CssHsla
-        "CSS_MULTIPLE_BGS" -> Just CssMultipleBgs
-        "CSS_OPACITY" -> Just CssOpacity
-        "CSS_REFLECTIONS" -> Just CssReflections
-        "CSS_RGBA" -> Just CssRgba
-        "CSS_TEXT_SHADOW" -> Just CssTextShadow
-        "CSS_TRANSFORMS" -> Just CssTransforms
-        "CSS_TRANSFORMS3D" -> Just CssTRANSFORMS3D
-        "CSS_TRANSITIONS" -> Just CssTransitions
-        "DRAG_AND_DROP" -> Just DragAndDrop
-        "GEO_LOCATION" -> Just GeoLocation
-        "HASH_CHANGE" -> Just HashChange
-        "HISTORY" -> Just History
-        "INDEXED_DB" -> Just IndexedDB
-        "INLINE_SVG" -> Just InlineSvg
-        "INPUT_ATTR_AUTOCOMPLETE" -> Just InputAttrAutocomplete
-        "INPUT_ATTR_AUTOFOCUS" -> Just InputAttrAutofocus
-        "INPUT_ATTR_LIST" -> Just InputAttrList
-        "INPUT_ATTR_MAX" -> Just InputAttrMax
-        "INPUT_ATTR_MIN" -> Just InputAttrMin
-        "INPUT_ATTR_MULTIPLE" -> Just InputAttrMultiple
-        "INPUT_ATTR_PATTERN" -> Just InputAttrPattern
-        "INPUT_ATTR_PLACEHOLDER" -> Just InputAttrPlaceholder
-        "INPUT_ATTR_REQUIRED" -> Just InputAttrRequired
-        "INPUT_ATTR_STEP" -> Just InputAttrStep
-        "INPUT_TYPE_COLOR" -> Just InputTypeColor
-        "INPUT_TYPE_DATE" -> Just InputTypeDate
-        "INPUT_TYPE_DATETIME" -> Just InputTypeDatetime
-        "INPUT_TYPE_DATETIME_LOCAL" -> Just InputTypeDatetimeLocal
-        "INPUT_TYPE_EMAIL" -> Just InputTypeEmail
-        "INPUT_TYPE_MONTH" -> Just InputTypeMonth
-        "INPUT_TYPE_NUMBER" -> Just InputTypeNumber
-        "INPUT_TYPE_RANGE" -> Just InputTypeRange
-        "INPUT_TYPE_SEARCH" -> Just InputTypeSearch
-        "INPUT_TYPE_TEL" -> Just InputTypeTel
-        "INPUT_TYPE_TIME" -> Just InputTypeTime
-        "INPUT_TYPE_URL" -> Just InputTypeURL
-        "INPUT_TYPE_WEEK" -> Just InputTypeWeek
-        "LOCAL_STORAGE" -> Just LocalStorage
-        "POST_MESSAGE" -> Just PostMessage
-        "SESSION_STORAGE" -> Just SessionStorage
-        "SMIL" -> Just Smil
-        "SVG_CLIP_PATHS" -> Just SvgClipPaths
-        "SVG_FE_IMAGE" -> Just SvgFeImage
-        "SVG_FILTERS" -> Just SvgFilters
-        "SVG_HREF" -> Just SvgHref
-        "TOUCH" -> Just Touch
-        "VIDEO" -> Just Video
-        "WEBGL" -> Just Webgl
-        "WEB_SOCKETS" -> Just WebSockets
-        "WEB_SQL_DATABASE" -> Just WebSQLDatabase
-        "WEB_WORKERS" -> Just WebWorkers
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetMetadataDetectedFeaturesItem where
+    parseQueryParam = \case
+        "APPLICATION_CACHE" -> Right ApplicationCache
+        "AUDIO" -> Right Audio
+        "CANVAS" -> Right Canvas
+        "CANVAS_TEXT" -> Right CanvasText
+        "CSS_ANIMATIONS" -> Right CssAnimations
+        "CSS_BACKGROUND_SIZE" -> Right CssBackgRoundSize
+        "CSS_BORDER_IMAGE" -> Right CssBOrderImage
+        "CSS_BORDER_RADIUS" -> Right CssBOrderRadius
+        "CSS_BOX_SHADOW" -> Right CssBoxShadow
+        "CSS_COLUMNS" -> Right CssColumns
+        "CSS_FLEX_BOX" -> Right CssFlexBox
+        "CSS_FONT_FACE" -> Right CssFontFace
+        "CSS_GENERATED_CONTENT" -> Right CssGeneratedContent
+        "CSS_GRADIENTS" -> Right CssGradients
+        "CSS_HSLA" -> Right CssHsla
+        "CSS_MULTIPLE_BGS" -> Right CssMultipleBgs
+        "CSS_OPACITY" -> Right CssOpacity
+        "CSS_REFLECTIONS" -> Right CssReflections
+        "CSS_RGBA" -> Right CssRgba
+        "CSS_TEXT_SHADOW" -> Right CssTextShadow
+        "CSS_TRANSFORMS" -> Right CssTransforms
+        "CSS_TRANSFORMS3D" -> Right CssTRANSFORMS3D
+        "CSS_TRANSITIONS" -> Right CssTransitions
+        "DRAG_AND_DROP" -> Right DragAndDrop
+        "GEO_LOCATION" -> Right GeoLocation
+        "HASH_CHANGE" -> Right HashChange
+        "HISTORY" -> Right History
+        "INDEXED_DB" -> Right IndexedDB
+        "INLINE_SVG" -> Right InlineSvg
+        "INPUT_ATTR_AUTOCOMPLETE" -> Right InputAttrAutocomplete
+        "INPUT_ATTR_AUTOFOCUS" -> Right InputAttrAutofocus
+        "INPUT_ATTR_LIST" -> Right InputAttrList
+        "INPUT_ATTR_MAX" -> Right InputAttrMax
+        "INPUT_ATTR_MIN" -> Right InputAttrMin
+        "INPUT_ATTR_MULTIPLE" -> Right InputAttrMultiple
+        "INPUT_ATTR_PATTERN" -> Right InputAttrPattern
+        "INPUT_ATTR_PLACEHOLDER" -> Right InputAttrPlaceholder
+        "INPUT_ATTR_REQUIRED" -> Right InputAttrRequired
+        "INPUT_ATTR_STEP" -> Right InputAttrStep
+        "INPUT_TYPE_COLOR" -> Right InputTypeColor
+        "INPUT_TYPE_DATE" -> Right InputTypeDate
+        "INPUT_TYPE_DATETIME" -> Right InputTypeDatetime
+        "INPUT_TYPE_DATETIME_LOCAL" -> Right InputTypeDatetimeLocal
+        "INPUT_TYPE_EMAIL" -> Right InputTypeEmail
+        "INPUT_TYPE_MONTH" -> Right InputTypeMonth
+        "INPUT_TYPE_NUMBER" -> Right InputTypeNumber
+        "INPUT_TYPE_RANGE" -> Right InputTypeRange
+        "INPUT_TYPE_SEARCH" -> Right InputTypeSearch
+        "INPUT_TYPE_TEL" -> Right InputTypeTel
+        "INPUT_TYPE_TIME" -> Right InputTypeTime
+        "INPUT_TYPE_URL" -> Right InputTypeURL
+        "INPUT_TYPE_WEEK" -> Right InputTypeWeek
+        "LOCAL_STORAGE" -> Right LocalStorage
+        "POST_MESSAGE" -> Right PostMessage
+        "SESSION_STORAGE" -> Right SessionStorage
+        "SMIL" -> Right Smil
+        "SVG_CLIP_PATHS" -> Right SvgClipPaths
+        "SVG_FE_IMAGE" -> Right SvgFeImage
+        "SVG_FILTERS" -> Right SvgFilters
+        "SVG_HREF" -> Right SvgHref
+        "TOUCH" -> Right Touch
+        "VIDEO" -> Right Video
+        "WEBGL" -> Right Webgl
+        "WEB_SOCKETS" -> Right WebSockets
+        "WEB_SQL_DATABASE" -> Right WebSQLDatabase
+        "WEB_WORKERS" -> Right WebWorkers
+        x -> Left ("Unable to parse CreativeAssetMetadataDetectedFeaturesItem from: " <> x)
 
-instance ToText CreativeAssetMetadataDetectedFeaturesItem where
-    toText = \case
+instance ToHttpApiData CreativeAssetMetadataDetectedFeaturesItem where
+    toQueryParam = \case
         ApplicationCache -> "APPLICATION_CACHE"
         Audio -> "AUDIO"
         Canvas -> "CANVAS"
@@ -1138,7 +1184,7 @@ instance ToJSON CreativeAssetMetadataDetectedFeaturesItem where
     toJSON = toJSONText
 
 -- | Select default ads with the specified compatibility. Applicable when
--- type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to
+-- type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to
 -- rendering either on desktop or on mobile devices for regular or
 -- interstitial ads, respectively. APP and APP_INTERSTITIAL are for
 -- rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an
@@ -1148,32 +1194,32 @@ data AdsListCompatibility
       -- ^ @APP@
     | ALCAppInterstitial
       -- ^ @APP_INTERSTITIAL@
+    | ALCDisplay
+      -- ^ @DISPLAY@
+    | ALCDisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
     | ALCInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-    | ALCWeb
-      -- ^ @WEB@
-    | ALCWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListCompatibility
 
-instance FromText AdsListCompatibility where
-    fromText = \case
-        "APP" -> Just ALCApp
-        "APP_INTERSTITIAL" -> Just ALCAppInterstitial
-        "IN_STREAM_VIDEO" -> Just ALCInStreamVideo
-        "WEB" -> Just ALCWeb
-        "WEB_INTERSTITIAL" -> Just ALCWebInterstitial
-        _ -> Nothing
+instance FromHttpApiData AdsListCompatibility where
+    parseQueryParam = \case
+        "APP" -> Right ALCApp
+        "APP_INTERSTITIAL" -> Right ALCAppInterstitial
+        "DISPLAY" -> Right ALCDisplay
+        "DISPLAY_INTERSTITIAL" -> Right ALCDisplayInterstitial
+        "IN_STREAM_VIDEO" -> Right ALCInStreamVideo
+        x -> Left ("Unable to parse AdsListCompatibility from: " <> x)
 
-instance ToText AdsListCompatibility where
-    toText = \case
+instance ToHttpApiData AdsListCompatibility where
+    toQueryParam = \case
         ALCApp -> "APP"
         ALCAppInterstitial -> "APP_INTERSTITIAL"
+        ALCDisplay -> "DISPLAY"
+        ALCDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
         ALCInStreamVideo -> "IN_STREAM_VIDEO"
-        ALCWeb -> "WEB"
-        ALCWebInterstitial -> "WEB_INTERSTITIAL"
 
 instance FromJSON AdsListCompatibility where
     parseJSON = parseJSONText "AdsListCompatibility"
@@ -1188,18 +1234,18 @@ data EventTagStatus
       -- ^ @DISABLED@
     | Enabled
       -- ^ @ENABLED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagStatus
 
-instance FromText EventTagStatus where
-    fromText = \case
-        "DISABLED" -> Just Disabled
-        "ENABLED" -> Just Enabled
-        _ -> Nothing
+instance FromHttpApiData EventTagStatus where
+    parseQueryParam = \case
+        "DISABLED" -> Right Disabled
+        "ENABLED" -> Right Enabled
+        x -> Left ("Unable to parse EventTagStatus from: " <> x)
 
-instance ToText EventTagStatus where
-    toText = \case
+instance ToHttpApiData EventTagStatus where
+    toQueryParam = \case
         Disabled -> "DISABLED"
         Enabled -> "ENABLED"
 
@@ -1215,18 +1261,18 @@ data SitesListSortField
       -- ^ @ID@
     | SLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SitesListSortField
 
-instance FromText SitesListSortField where
-    fromText = \case
-        "ID" -> Just SLSFID
-        "NAME" -> Just SLSFName
-        _ -> Nothing
+instance FromHttpApiData SitesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right SLSFID
+        "NAME" -> Right SLSFName
+        x -> Left ("Unable to parse SitesListSortField from: " <> x)
 
-instance ToText SitesListSortField where
-    toText = \case
+instance ToHttpApiData SitesListSortField where
+    toQueryParam = \case
         SLSFID -> "ID"
         SLSFName -> "NAME"
 
@@ -1247,19 +1293,19 @@ data EventTagsListEventTagTypes
       -- ^ @IMPRESSION_IMAGE_EVENT_TAG@
     | ImpressionJavascriptEventTag
       -- ^ @IMPRESSION_JAVASCRIPT_EVENT_TAG@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagsListEventTagTypes
 
-instance FromText EventTagsListEventTagTypes where
-    fromText = \case
-        "CLICK_THROUGH_EVENT_TAG" -> Just ClickThroughEventTag
-        "IMPRESSION_IMAGE_EVENT_TAG" -> Just ImpressionImageEventTag
-        "IMPRESSION_JAVASCRIPT_EVENT_TAG" -> Just ImpressionJavascriptEventTag
-        _ -> Nothing
+instance FromHttpApiData EventTagsListEventTagTypes where
+    parseQueryParam = \case
+        "CLICK_THROUGH_EVENT_TAG" -> Right ClickThroughEventTag
+        "IMPRESSION_IMAGE_EVENT_TAG" -> Right ImpressionImageEventTag
+        "IMPRESSION_JAVASCRIPT_EVENT_TAG" -> Right ImpressionJavascriptEventTag
+        x -> Left ("Unable to parse EventTagsListEventTagTypes from: " <> x)
 
-instance ToText EventTagsListEventTagTypes where
-    toText = \case
+instance ToHttpApiData EventTagsListEventTagTypes where
+    toQueryParam = \case
         ClickThroughEventTag -> "CLICK_THROUGH_EVENT_TAG"
         ImpressionImageEventTag -> "IMPRESSION_IMAGE_EVENT_TAG"
         ImpressionJavascriptEventTag -> "IMPRESSION_JAVASCRIPT_EVENT_TAG"
@@ -1280,20 +1326,20 @@ data FileStatus
       -- ^ @PROCESSING@
     | ReportAvailable
       -- ^ @REPORT_AVAILABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FileStatus
 
-instance FromText FileStatus where
-    fromText = \case
-        "CANCELLED" -> Just Cancelled
-        "FAILED" -> Just Failed
-        "PROCESSING" -> Just Processing
-        "REPORT_AVAILABLE" -> Just ReportAvailable
-        _ -> Nothing
+instance FromHttpApiData FileStatus where
+    parseQueryParam = \case
+        "CANCELLED" -> Right Cancelled
+        "FAILED" -> Right Failed
+        "PROCESSING" -> Right Processing
+        "REPORT_AVAILABLE" -> Right ReportAvailable
+        x -> Left ("Unable to parse FileStatus from: " <> x)
 
-instance ToText FileStatus where
-    toText = \case
+instance ToHttpApiData FileStatus where
+    toQueryParam = \case
         Cancelled -> "CANCELLED"
         Failed -> "FAILED"
         Processing -> "PROCESSING"
@@ -1311,23 +1357,27 @@ data CreativeCustomEventArtworkType
       -- ^ @ARTWORK_TYPE_FLASH@
     | ArtworkTypeHTML5
       -- ^ @ARTWORK_TYPE_HTML5@
+    | ArtworkTypeImage
+      -- ^ @ARTWORK_TYPE_IMAGE@
     | ArtworkTypeMixed
       -- ^ @ARTWORK_TYPE_MIXED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeCustomEventArtworkType
 
-instance FromText CreativeCustomEventArtworkType where
-    fromText = \case
-        "ARTWORK_TYPE_FLASH" -> Just ArtworkTypeFlash
-        "ARTWORK_TYPE_HTML5" -> Just ArtworkTypeHTML5
-        "ARTWORK_TYPE_MIXED" -> Just ArtworkTypeMixed
-        _ -> Nothing
+instance FromHttpApiData CreativeCustomEventArtworkType where
+    parseQueryParam = \case
+        "ARTWORK_TYPE_FLASH" -> Right ArtworkTypeFlash
+        "ARTWORK_TYPE_HTML5" -> Right ArtworkTypeHTML5
+        "ARTWORK_TYPE_IMAGE" -> Right ArtworkTypeImage
+        "ARTWORK_TYPE_MIXED" -> Right ArtworkTypeMixed
+        x -> Left ("Unable to parse CreativeCustomEventArtworkType from: " <> x)
 
-instance ToText CreativeCustomEventArtworkType where
-    toText = \case
+instance ToHttpApiData CreativeCustomEventArtworkType where
+    toQueryParam = \case
         ArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
         ArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
+        ArtworkTypeImage -> "ARTWORK_TYPE_IMAGE"
         ArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
 
 instance FromJSON CreativeCustomEventArtworkType where
@@ -1344,19 +1394,19 @@ data FloodlightConfigurationNATuralSearchConversionAttributionOption
       -- ^ @INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION@
     | IncludeNATuralSearchTieredConversionAttribution
       -- ^ @INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightConfigurationNATuralSearchConversionAttributionOption
 
-instance FromText FloodlightConfigurationNATuralSearchConversionAttributionOption where
-    fromText = \case
-        "EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION" -> Just ExcludeNATuralSearchConversionAttribution
-        "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION" -> Just IncludeNATuralSearchConversionAttribution
-        "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION" -> Just IncludeNATuralSearchTieredConversionAttribution
-        _ -> Nothing
+instance FromHttpApiData FloodlightConfigurationNATuralSearchConversionAttributionOption where
+    parseQueryParam = \case
+        "EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION" -> Right ExcludeNATuralSearchConversionAttribution
+        "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION" -> Right IncludeNATuralSearchConversionAttribution
+        "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION" -> Right IncludeNATuralSearchTieredConversionAttribution
+        x -> Left ("Unable to parse FloodlightConfigurationNATuralSearchConversionAttributionOption from: " <> x)
 
-instance ToText FloodlightConfigurationNATuralSearchConversionAttributionOption where
-    toText = \case
+instance ToHttpApiData FloodlightConfigurationNATuralSearchConversionAttributionOption where
+    toQueryParam = \case
         ExcludeNATuralSearchConversionAttribution -> "EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
         IncludeNATuralSearchConversionAttribution -> "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
         IncludeNATuralSearchTieredConversionAttribution -> "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION"
@@ -1374,23 +1424,27 @@ data CreativeAssetArtworkType
       -- ^ @ARTWORK_TYPE_FLASH@
     | CAATArtworkTypeHTML5
       -- ^ @ARTWORK_TYPE_HTML5@
+    | CAATArtworkTypeImage
+      -- ^ @ARTWORK_TYPE_IMAGE@
     | CAATArtworkTypeMixed
       -- ^ @ARTWORK_TYPE_MIXED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetArtworkType
 
-instance FromText CreativeAssetArtworkType where
-    fromText = \case
-        "ARTWORK_TYPE_FLASH" -> Just CAATArtworkTypeFlash
-        "ARTWORK_TYPE_HTML5" -> Just CAATArtworkTypeHTML5
-        "ARTWORK_TYPE_MIXED" -> Just CAATArtworkTypeMixed
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetArtworkType where
+    parseQueryParam = \case
+        "ARTWORK_TYPE_FLASH" -> Right CAATArtworkTypeFlash
+        "ARTWORK_TYPE_HTML5" -> Right CAATArtworkTypeHTML5
+        "ARTWORK_TYPE_IMAGE" -> Right CAATArtworkTypeImage
+        "ARTWORK_TYPE_MIXED" -> Right CAATArtworkTypeMixed
+        x -> Left ("Unable to parse CreativeAssetArtworkType from: " <> x)
 
-instance ToText CreativeAssetArtworkType where
-    toText = \case
+instance ToHttpApiData CreativeAssetArtworkType where
+    toQueryParam = \case
         CAATArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
         CAATArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
+        CAATArtworkTypeImage -> "ARTWORK_TYPE_IMAGE"
         CAATArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
 
 instance FromJSON CreativeAssetArtworkType where
@@ -1399,24 +1453,159 @@ instance FromJSON CreativeAssetArtworkType where
 instance ToJSON CreativeAssetArtworkType where
     toJSON = toJSONText
 
+-- | The type of custom floodlight variable to supply a value for. These map
+-- to the \"u[1-20]=\" in the tags.
+data CustomFloodlightVariableType
+    = U1
+      -- ^ @U1@
+    | U10
+      -- ^ @U10@
+    | U11
+      -- ^ @U11@
+    | U12
+      -- ^ @U12@
+    | U13
+      -- ^ @U13@
+    | U14
+      -- ^ @U14@
+    | U15
+      -- ^ @U15@
+    | U16
+      -- ^ @U16@
+    | U17
+      -- ^ @U17@
+    | U18
+      -- ^ @U18@
+    | U19
+      -- ^ @U19@
+    | U2
+      -- ^ @U2@
+    | U20
+      -- ^ @U20@
+    | U3
+      -- ^ @U3@
+    | U4
+      -- ^ @U4@
+    | U5
+      -- ^ @U5@
+    | U6
+      -- ^ @U6@
+    | U7
+      -- ^ @U7@
+    | U8
+      -- ^ @U8@
+    | U9
+      -- ^ @U9@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CustomFloodlightVariableType
+
+instance FromHttpApiData CustomFloodlightVariableType where
+    parseQueryParam = \case
+        "U1" -> Right U1
+        "U10" -> Right U10
+        "U11" -> Right U11
+        "U12" -> Right U12
+        "U13" -> Right U13
+        "U14" -> Right U14
+        "U15" -> Right U15
+        "U16" -> Right U16
+        "U17" -> Right U17
+        "U18" -> Right U18
+        "U19" -> Right U19
+        "U2" -> Right U2
+        "U20" -> Right U20
+        "U3" -> Right U3
+        "U4" -> Right U4
+        "U5" -> Right U5
+        "U6" -> Right U6
+        "U7" -> Right U7
+        "U8" -> Right U8
+        "U9" -> Right U9
+        x -> Left ("Unable to parse CustomFloodlightVariableType from: " <> x)
+
+instance ToHttpApiData CustomFloodlightVariableType where
+    toQueryParam = \case
+        U1 -> "U1"
+        U10 -> "U10"
+        U11 -> "U11"
+        U12 -> "U12"
+        U13 -> "U13"
+        U14 -> "U14"
+        U15 -> "U15"
+        U16 -> "U16"
+        U17 -> "U17"
+        U18 -> "U18"
+        U19 -> "U19"
+        U2 -> "U2"
+        U20 -> "U20"
+        U3 -> "U3"
+        U4 -> "U4"
+        U5 -> "U5"
+        U6 -> "U6"
+        U7 -> "U7"
+        U8 -> "U8"
+        U9 -> "U9"
+
+instance FromJSON CustomFloodlightVariableType where
+    parseJSON = parseJSONText "CustomFloodlightVariableType"
+
+instance ToJSON CustomFloodlightVariableType where
+    toJSON = toJSONText
+
+-- | The error code.
+data ConversionErrorCode
+    = Internal
+      -- ^ @INTERNAL@
+    | InvalidArgument
+      -- ^ @INVALID_ARGUMENT@
+    | NotFound
+      -- ^ @NOT_FOUND@
+    | PermissionDenied
+      -- ^ @PERMISSION_DENIED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ConversionErrorCode
+
+instance FromHttpApiData ConversionErrorCode where
+    parseQueryParam = \case
+        "INTERNAL" -> Right Internal
+        "INVALID_ARGUMENT" -> Right InvalidArgument
+        "NOT_FOUND" -> Right NotFound
+        "PERMISSION_DENIED" -> Right PermissionDenied
+        x -> Left ("Unable to parse ConversionErrorCode from: " <> x)
+
+instance ToHttpApiData ConversionErrorCode where
+    toQueryParam = \case
+        Internal -> "INTERNAL"
+        InvalidArgument -> "INVALID_ARGUMENT"
+        NotFound -> "NOT_FOUND"
+        PermissionDenied -> "PERMISSION_DENIED"
+
+instance FromJSON ConversionErrorCode where
+    parseJSON = parseJSONText "ConversionErrorCode"
+
+instance ToJSON ConversionErrorCode where
+    toJSON = toJSONText
+
 -- | Order of sorted results, default is ASCENDING.
 data FloodlightActivitiesListSortOrder
     = FALSOAscending
       -- ^ @ASCENDING@
     | FALSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivitiesListSortOrder
 
-instance FromText FloodlightActivitiesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just FALSOAscending
-        "DESCENDING" -> Just FALSODescending
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivitiesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right FALSOAscending
+        "DESCENDING" -> Right FALSODescending
+        x -> Left ("Unable to parse FloodlightActivitiesListSortOrder from: " <> x)
 
-instance ToText FloodlightActivitiesListSortOrder where
-    toText = \case
+instance ToHttpApiData FloodlightActivitiesListSortOrder where
+    toQueryParam = \case
         FALSOAscending -> "ASCENDING"
         FALSODescending -> "DESCENDING"
 
@@ -1433,18 +1622,18 @@ data FileFormat
       -- ^ @CSV@
     | Excel
       -- ^ @EXCEL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FileFormat
 
-instance FromText FileFormat where
-    fromText = \case
-        "CSV" -> Just CSV
-        "EXCEL" -> Just Excel
-        _ -> Nothing
+instance FromHttpApiData FileFormat where
+    parseQueryParam = \case
+        "CSV" -> Right CSV
+        "EXCEL" -> Right Excel
+        x -> Left ("Unable to parse FileFormat from: " <> x)
 
-instance ToText FileFormat where
-    toText = \case
+instance ToHttpApiData FileFormat where
+    toQueryParam = \case
         CSV -> "CSV"
         Excel -> "EXCEL"
 
@@ -1452,6 +1641,50 @@ instance FromJSON FileFormat where
     parseJSON = parseJSONText "FileFormat"
 
 instance ToJSON FileFormat where
+    toJSON = toJSONText
+
+-- | The encryption entity type. This should match the encryption
+-- configuration for ad serving or Data Transfer.
+data EncryptionInfoEncryptionEntityType
+    = AdwordsCustomer
+      -- ^ @ADWORDS_CUSTOMER@
+    | DBmAdvertiser
+      -- ^ @DBM_ADVERTISER@
+    | DBmPartner
+      -- ^ @DBM_PARTNER@
+    | DcmAccount
+      -- ^ @DCM_ACCOUNT@
+    | DcmAdvertiser
+      -- ^ @DCM_ADVERTISER@
+    | EncryptionEntityTypeUnknown
+      -- ^ @ENCRYPTION_ENTITY_TYPE_UNKNOWN@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EncryptionInfoEncryptionEntityType
+
+instance FromHttpApiData EncryptionInfoEncryptionEntityType where
+    parseQueryParam = \case
+        "ADWORDS_CUSTOMER" -> Right AdwordsCustomer
+        "DBM_ADVERTISER" -> Right DBmAdvertiser
+        "DBM_PARTNER" -> Right DBmPartner
+        "DCM_ACCOUNT" -> Right DcmAccount
+        "DCM_ADVERTISER" -> Right DcmAdvertiser
+        "ENCRYPTION_ENTITY_TYPE_UNKNOWN" -> Right EncryptionEntityTypeUnknown
+        x -> Left ("Unable to parse EncryptionInfoEncryptionEntityType from: " <> x)
+
+instance ToHttpApiData EncryptionInfoEncryptionEntityType where
+    toQueryParam = \case
+        AdwordsCustomer -> "ADWORDS_CUSTOMER"
+        DBmAdvertiser -> "DBM_ADVERTISER"
+        DBmPartner -> "DBM_PARTNER"
+        DcmAccount -> "DCM_ACCOUNT"
+        DcmAdvertiser -> "DCM_ADVERTISER"
+        EncryptionEntityTypeUnknown -> "ENCRYPTION_ENTITY_TYPE_UNKNOWN"
+
+instance FromJSON EncryptionInfoEncryptionEntityType where
+    parseJSON = parseJSONText "EncryptionInfoEncryptionEntityType"
+
+instance ToJSON EncryptionInfoEncryptionEntityType where
     toJSON = toJSONText
 
 -- | Placement pricing type. This field is required on insertion.
@@ -1466,21 +1699,21 @@ data PricingSchedulePricingType
       -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
     | PricingTypeFlatRateImpressions
       -- ^ @PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PricingSchedulePricingType
 
-instance FromText PricingSchedulePricingType where
-    fromText = \case
-        "PRICING_TYPE_CPA" -> Just PricingTypeCpa
-        "PRICING_TYPE_CPC" -> Just PricingTypeCpc
-        "PRICING_TYPE_CPM" -> Just PricingTypeCpm
-        "PRICING_TYPE_FLAT_RATE_CLICKS" -> Just PricingTypeFlatRateClicks
-        "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Just PricingTypeFlatRateImpressions
-        _ -> Nothing
+instance FromHttpApiData PricingSchedulePricingType where
+    parseQueryParam = \case
+        "PRICING_TYPE_CPA" -> Right PricingTypeCpa
+        "PRICING_TYPE_CPC" -> Right PricingTypeCpc
+        "PRICING_TYPE_CPM" -> Right PricingTypeCpm
+        "PRICING_TYPE_FLAT_RATE_CLICKS" -> Right PricingTypeFlatRateClicks
+        "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Right PricingTypeFlatRateImpressions
+        x -> Left ("Unable to parse PricingSchedulePricingType from: " <> x)
 
-instance ToText PricingSchedulePricingType where
-    toText = \case
+instance ToHttpApiData PricingSchedulePricingType where
+    toQueryParam = \case
         PricingTypeCpa -> "PRICING_TYPE_CPA"
         PricingTypeCpc -> "PRICING_TYPE_CPC"
         PricingTypeCpm -> "PRICING_TYPE_CPM"
@@ -1505,21 +1738,21 @@ data CreativeCustomEventTargetType
       -- ^ @TARGET_SELF@
     | TargetTop
       -- ^ @TARGET_TOP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeCustomEventTargetType
 
-instance FromText CreativeCustomEventTargetType where
-    fromText = \case
-        "TARGET_BLANK" -> Just TargetBlank
-        "TARGET_PARENT" -> Just TargetParent
-        "TARGET_POPUP" -> Just TargetPopup
-        "TARGET_SELF" -> Just TargetSelf
-        "TARGET_TOP" -> Just TargetTop
-        _ -> Nothing
+instance FromHttpApiData CreativeCustomEventTargetType where
+    parseQueryParam = \case
+        "TARGET_BLANK" -> Right TargetBlank
+        "TARGET_PARENT" -> Right TargetParent
+        "TARGET_POPUP" -> Right TargetPopup
+        "TARGET_SELF" -> Right TargetSelf
+        "TARGET_TOP" -> Right TargetTop
+        x -> Left ("Unable to parse CreativeCustomEventTargetType from: " <> x)
 
-instance ToText CreativeCustomEventTargetType where
-    toText = \case
+instance ToHttpApiData CreativeCustomEventTargetType where
+    toQueryParam = \case
         TargetBlank -> "TARGET_BLANK"
         TargetParent -> "TARGET_PARENT"
         TargetPopup -> "TARGET_POPUP"
@@ -1540,18 +1773,18 @@ data ReportsListScope
     | Mine
       -- ^ @MINE@
       -- My reports.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsListScope
 
-instance FromText ReportsListScope where
-    fromText = \case
-        "ALL" -> Just All
-        "MINE" -> Just Mine
-        _ -> Nothing
+instance FromHttpApiData ReportsListScope where
+    parseQueryParam = \case
+        "ALL" -> Right All
+        "MINE" -> Right Mine
+        x -> Left ("Unable to parse ReportsListScope from: " <> x)
 
-instance ToText ReportsListScope where
-    toText = \case
+instance ToHttpApiData ReportsListScope where
+    toQueryParam = \case
         All -> "ALL"
         Mine -> "MINE"
 
@@ -1570,19 +1803,19 @@ data CreativeAssetDurationType
       -- ^ @ASSET_DURATION_TYPE_CUSTOM@
     | AssetDurationTypeNone
       -- ^ @ASSET_DURATION_TYPE_NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetDurationType
 
-instance FromText CreativeAssetDurationType where
-    fromText = \case
-        "ASSET_DURATION_TYPE_AUTO" -> Just AssetDurationTypeAuto
-        "ASSET_DURATION_TYPE_CUSTOM" -> Just AssetDurationTypeCustom
-        "ASSET_DURATION_TYPE_NONE" -> Just AssetDurationTypeNone
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetDurationType where
+    parseQueryParam = \case
+        "ASSET_DURATION_TYPE_AUTO" -> Right AssetDurationTypeAuto
+        "ASSET_DURATION_TYPE_CUSTOM" -> Right AssetDurationTypeCustom
+        "ASSET_DURATION_TYPE_NONE" -> Right AssetDurationTypeNone
+        x -> Left ("Unable to parse CreativeAssetDurationType from: " <> x)
 
-instance ToText CreativeAssetDurationType where
-    toText = \case
+instance ToHttpApiData CreativeAssetDurationType where
+    toQueryParam = \case
         AssetDurationTypeAuto -> "ASSET_DURATION_TYPE_AUTO"
         AssetDurationTypeCustom -> "ASSET_DURATION_TYPE_CUSTOM"
         AssetDurationTypeNone -> "ASSET_DURATION_TYPE_NONE"
@@ -1595,36 +1828,60 @@ instance ToJSON CreativeAssetDurationType where
 
 -- | Product from which this targetable remarketing list was originated.
 data TargetableRemarketingListListSource
-    = RemarketingListSourceDBm
+    = RemarketingListSourceAdx
+      -- ^ @REMARKETING_LIST_SOURCE_ADX@
+    | RemarketingListSourceDBm
       -- ^ @REMARKETING_LIST_SOURCE_DBM@
     | RemarketingListSourceDfa
       -- ^ @REMARKETING_LIST_SOURCE_DFA@
+    | RemarketingListSourceDfp
+      -- ^ @REMARKETING_LIST_SOURCE_DFP@
     | RemarketingListSourceDmp
       -- ^ @REMARKETING_LIST_SOURCE_DMP@
     | RemarketingListSourceGa
       -- ^ @REMARKETING_LIST_SOURCE_GA@
+    | RemarketingListSourceGplus
+      -- ^ @REMARKETING_LIST_SOURCE_GPLUS@
     | RemarketingListSourceOther
       -- ^ @REMARKETING_LIST_SOURCE_OTHER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+    | RemarketingListSourcePlayStore
+      -- ^ @REMARKETING_LIST_SOURCE_PLAY_STORE@
+    | RemarketingListSourceXfp
+      -- ^ @REMARKETING_LIST_SOURCE_XFP@
+    | RemarketingListSourceYouTube
+      -- ^ @REMARKETING_LIST_SOURCE_YOUTUBE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetableRemarketingListListSource
 
-instance FromText TargetableRemarketingListListSource where
-    fromText = \case
-        "REMARKETING_LIST_SOURCE_DBM" -> Just RemarketingListSourceDBm
-        "REMARKETING_LIST_SOURCE_DFA" -> Just RemarketingListSourceDfa
-        "REMARKETING_LIST_SOURCE_DMP" -> Just RemarketingListSourceDmp
-        "REMARKETING_LIST_SOURCE_GA" -> Just RemarketingListSourceGa
-        "REMARKETING_LIST_SOURCE_OTHER" -> Just RemarketingListSourceOther
-        _ -> Nothing
+instance FromHttpApiData TargetableRemarketingListListSource where
+    parseQueryParam = \case
+        "REMARKETING_LIST_SOURCE_ADX" -> Right RemarketingListSourceAdx
+        "REMARKETING_LIST_SOURCE_DBM" -> Right RemarketingListSourceDBm
+        "REMARKETING_LIST_SOURCE_DFA" -> Right RemarketingListSourceDfa
+        "REMARKETING_LIST_SOURCE_DFP" -> Right RemarketingListSourceDfp
+        "REMARKETING_LIST_SOURCE_DMP" -> Right RemarketingListSourceDmp
+        "REMARKETING_LIST_SOURCE_GA" -> Right RemarketingListSourceGa
+        "REMARKETING_LIST_SOURCE_GPLUS" -> Right RemarketingListSourceGplus
+        "REMARKETING_LIST_SOURCE_OTHER" -> Right RemarketingListSourceOther
+        "REMARKETING_LIST_SOURCE_PLAY_STORE" -> Right RemarketingListSourcePlayStore
+        "REMARKETING_LIST_SOURCE_XFP" -> Right RemarketingListSourceXfp
+        "REMARKETING_LIST_SOURCE_YOUTUBE" -> Right RemarketingListSourceYouTube
+        x -> Left ("Unable to parse TargetableRemarketingListListSource from: " <> x)
 
-instance ToText TargetableRemarketingListListSource where
-    toText = \case
+instance ToHttpApiData TargetableRemarketingListListSource where
+    toQueryParam = \case
+        RemarketingListSourceAdx -> "REMARKETING_LIST_SOURCE_ADX"
         RemarketingListSourceDBm -> "REMARKETING_LIST_SOURCE_DBM"
         RemarketingListSourceDfa -> "REMARKETING_LIST_SOURCE_DFA"
+        RemarketingListSourceDfp -> "REMARKETING_LIST_SOURCE_DFP"
         RemarketingListSourceDmp -> "REMARKETING_LIST_SOURCE_DMP"
         RemarketingListSourceGa -> "REMARKETING_LIST_SOURCE_GA"
+        RemarketingListSourceGplus -> "REMARKETING_LIST_SOURCE_GPLUS"
         RemarketingListSourceOther -> "REMARKETING_LIST_SOURCE_OTHER"
+        RemarketingListSourcePlayStore -> "REMARKETING_LIST_SOURCE_PLAY_STORE"
+        RemarketingListSourceXfp -> "REMARKETING_LIST_SOURCE_XFP"
+        RemarketingListSourceYouTube -> "REMARKETING_LIST_SOURCE_YOUTUBE"
 
 instance FromJSON TargetableRemarketingListListSource where
     parseJSON = parseJSONText "TargetableRemarketingListListSource"
@@ -1638,18 +1895,18 @@ data CreativeGroupsListSortField
       -- ^ @ID@
     | CGLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeGroupsListSortField
 
-instance FromText CreativeGroupsListSortField where
-    fromText = \case
-        "ID" -> Just CGLSFID
-        "NAME" -> Just CGLSFName
-        _ -> Nothing
+instance FromHttpApiData CreativeGroupsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right CGLSFID
+        "NAME" -> Right CGLSFName
+        x -> Left ("Unable to parse CreativeGroupsListSortField from: " <> x)
 
-instance ToText CreativeGroupsListSortField where
-    toText = \case
+instance ToHttpApiData CreativeGroupsListSortField where
+    toQueryParam = \case
         CGLSFID -> "ID"
         CGLSFName -> "NAME"
 
@@ -1665,18 +1922,18 @@ data PlacementsListSortField
       -- ^ @ID@
     | PLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsListSortField
 
-instance FromText PlacementsListSortField where
-    fromText = \case
-        "ID" -> Just PLSFID
-        "NAME" -> Just PLSFName
-        _ -> Nothing
+instance FromHttpApiData PlacementsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right PLSFID
+        "NAME" -> Right PLSFName
+        x -> Left ("Unable to parse PlacementsListSortField from: " <> x)
 
-instance ToText PlacementsListSortField where
-    toText = \case
+instance ToHttpApiData PlacementsListSortField where
+    toQueryParam = \case
         PLSFID -> "ID"
         PLSFName -> "NAME"
 
@@ -1819,82 +2076,82 @@ data CreativeBackupImageFeaturesItem
       -- ^ @WEB_SQL_DATABASE@
     | CBIFIWebWorkers
       -- ^ @WEB_WORKERS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeBackupImageFeaturesItem
 
-instance FromText CreativeBackupImageFeaturesItem where
-    fromText = \case
-        "APPLICATION_CACHE" -> Just CBIFIApplicationCache
-        "AUDIO" -> Just CBIFIAudio
-        "CANVAS" -> Just CBIFICanvas
-        "CANVAS_TEXT" -> Just CBIFICanvasText
-        "CSS_ANIMATIONS" -> Just CBIFICssAnimations
-        "CSS_BACKGROUND_SIZE" -> Just CBIFICssBackgRoundSize
-        "CSS_BORDER_IMAGE" -> Just CBIFICssBOrderImage
-        "CSS_BORDER_RADIUS" -> Just CBIFICssBOrderRadius
-        "CSS_BOX_SHADOW" -> Just CBIFICssBoxShadow
-        "CSS_COLUMNS" -> Just CBIFICssColumns
-        "CSS_FLEX_BOX" -> Just CBIFICssFlexBox
-        "CSS_FONT_FACE" -> Just CBIFICssFontFace
-        "CSS_GENERATED_CONTENT" -> Just CBIFICssGeneratedContent
-        "CSS_GRADIENTS" -> Just CBIFICssGradients
-        "CSS_HSLA" -> Just CBIFICssHsla
-        "CSS_MULTIPLE_BGS" -> Just CBIFICssMultipleBgs
-        "CSS_OPACITY" -> Just CBIFICssOpacity
-        "CSS_REFLECTIONS" -> Just CBIFICssReflections
-        "CSS_RGBA" -> Just CBIFICssRgba
-        "CSS_TEXT_SHADOW" -> Just CBIFICssTextShadow
-        "CSS_TRANSFORMS" -> Just CBIFICssTransforms
-        "CSS_TRANSFORMS3D" -> Just CBIFICssTRANSFORMS3D
-        "CSS_TRANSITIONS" -> Just CBIFICssTransitions
-        "DRAG_AND_DROP" -> Just CBIFIDragAndDrop
-        "GEO_LOCATION" -> Just CBIFIGeoLocation
-        "HASH_CHANGE" -> Just CBIFIHashChange
-        "HISTORY" -> Just CBIFIHistory
-        "INDEXED_DB" -> Just CBIFIIndexedDB
-        "INLINE_SVG" -> Just CBIFIInlineSvg
-        "INPUT_ATTR_AUTOCOMPLETE" -> Just CBIFIInputAttrAutocomplete
-        "INPUT_ATTR_AUTOFOCUS" -> Just CBIFIInputAttrAutofocus
-        "INPUT_ATTR_LIST" -> Just CBIFIInputAttrList
-        "INPUT_ATTR_MAX" -> Just CBIFIInputAttrMax
-        "INPUT_ATTR_MIN" -> Just CBIFIInputAttrMin
-        "INPUT_ATTR_MULTIPLE" -> Just CBIFIInputAttrMultiple
-        "INPUT_ATTR_PATTERN" -> Just CBIFIInputAttrPattern
-        "INPUT_ATTR_PLACEHOLDER" -> Just CBIFIInputAttrPlaceholder
-        "INPUT_ATTR_REQUIRED" -> Just CBIFIInputAttrRequired
-        "INPUT_ATTR_STEP" -> Just CBIFIInputAttrStep
-        "INPUT_TYPE_COLOR" -> Just CBIFIInputTypeColor
-        "INPUT_TYPE_DATE" -> Just CBIFIInputTypeDate
-        "INPUT_TYPE_DATETIME" -> Just CBIFIInputTypeDatetime
-        "INPUT_TYPE_DATETIME_LOCAL" -> Just CBIFIInputTypeDatetimeLocal
-        "INPUT_TYPE_EMAIL" -> Just CBIFIInputTypeEmail
-        "INPUT_TYPE_MONTH" -> Just CBIFIInputTypeMonth
-        "INPUT_TYPE_NUMBER" -> Just CBIFIInputTypeNumber
-        "INPUT_TYPE_RANGE" -> Just CBIFIInputTypeRange
-        "INPUT_TYPE_SEARCH" -> Just CBIFIInputTypeSearch
-        "INPUT_TYPE_TEL" -> Just CBIFIInputTypeTel
-        "INPUT_TYPE_TIME" -> Just CBIFIInputTypeTime
-        "INPUT_TYPE_URL" -> Just CBIFIInputTypeURL
-        "INPUT_TYPE_WEEK" -> Just CBIFIInputTypeWeek
-        "LOCAL_STORAGE" -> Just CBIFILocalStorage
-        "POST_MESSAGE" -> Just CBIFIPostMessage
-        "SESSION_STORAGE" -> Just CBIFISessionStorage
-        "SMIL" -> Just CBIFISmil
-        "SVG_CLIP_PATHS" -> Just CBIFISvgClipPaths
-        "SVG_FE_IMAGE" -> Just CBIFISvgFeImage
-        "SVG_FILTERS" -> Just CBIFISvgFilters
-        "SVG_HREF" -> Just CBIFISvgHref
-        "TOUCH" -> Just CBIFITouch
-        "VIDEO" -> Just CBIFIVideo
-        "WEBGL" -> Just CBIFIWebgl
-        "WEB_SOCKETS" -> Just CBIFIWebSockets
-        "WEB_SQL_DATABASE" -> Just CBIFIWebSQLDatabase
-        "WEB_WORKERS" -> Just CBIFIWebWorkers
-        _ -> Nothing
+instance FromHttpApiData CreativeBackupImageFeaturesItem where
+    parseQueryParam = \case
+        "APPLICATION_CACHE" -> Right CBIFIApplicationCache
+        "AUDIO" -> Right CBIFIAudio
+        "CANVAS" -> Right CBIFICanvas
+        "CANVAS_TEXT" -> Right CBIFICanvasText
+        "CSS_ANIMATIONS" -> Right CBIFICssAnimations
+        "CSS_BACKGROUND_SIZE" -> Right CBIFICssBackgRoundSize
+        "CSS_BORDER_IMAGE" -> Right CBIFICssBOrderImage
+        "CSS_BORDER_RADIUS" -> Right CBIFICssBOrderRadius
+        "CSS_BOX_SHADOW" -> Right CBIFICssBoxShadow
+        "CSS_COLUMNS" -> Right CBIFICssColumns
+        "CSS_FLEX_BOX" -> Right CBIFICssFlexBox
+        "CSS_FONT_FACE" -> Right CBIFICssFontFace
+        "CSS_GENERATED_CONTENT" -> Right CBIFICssGeneratedContent
+        "CSS_GRADIENTS" -> Right CBIFICssGradients
+        "CSS_HSLA" -> Right CBIFICssHsla
+        "CSS_MULTIPLE_BGS" -> Right CBIFICssMultipleBgs
+        "CSS_OPACITY" -> Right CBIFICssOpacity
+        "CSS_REFLECTIONS" -> Right CBIFICssReflections
+        "CSS_RGBA" -> Right CBIFICssRgba
+        "CSS_TEXT_SHADOW" -> Right CBIFICssTextShadow
+        "CSS_TRANSFORMS" -> Right CBIFICssTransforms
+        "CSS_TRANSFORMS3D" -> Right CBIFICssTRANSFORMS3D
+        "CSS_TRANSITIONS" -> Right CBIFICssTransitions
+        "DRAG_AND_DROP" -> Right CBIFIDragAndDrop
+        "GEO_LOCATION" -> Right CBIFIGeoLocation
+        "HASH_CHANGE" -> Right CBIFIHashChange
+        "HISTORY" -> Right CBIFIHistory
+        "INDEXED_DB" -> Right CBIFIIndexedDB
+        "INLINE_SVG" -> Right CBIFIInlineSvg
+        "INPUT_ATTR_AUTOCOMPLETE" -> Right CBIFIInputAttrAutocomplete
+        "INPUT_ATTR_AUTOFOCUS" -> Right CBIFIInputAttrAutofocus
+        "INPUT_ATTR_LIST" -> Right CBIFIInputAttrList
+        "INPUT_ATTR_MAX" -> Right CBIFIInputAttrMax
+        "INPUT_ATTR_MIN" -> Right CBIFIInputAttrMin
+        "INPUT_ATTR_MULTIPLE" -> Right CBIFIInputAttrMultiple
+        "INPUT_ATTR_PATTERN" -> Right CBIFIInputAttrPattern
+        "INPUT_ATTR_PLACEHOLDER" -> Right CBIFIInputAttrPlaceholder
+        "INPUT_ATTR_REQUIRED" -> Right CBIFIInputAttrRequired
+        "INPUT_ATTR_STEP" -> Right CBIFIInputAttrStep
+        "INPUT_TYPE_COLOR" -> Right CBIFIInputTypeColor
+        "INPUT_TYPE_DATE" -> Right CBIFIInputTypeDate
+        "INPUT_TYPE_DATETIME" -> Right CBIFIInputTypeDatetime
+        "INPUT_TYPE_DATETIME_LOCAL" -> Right CBIFIInputTypeDatetimeLocal
+        "INPUT_TYPE_EMAIL" -> Right CBIFIInputTypeEmail
+        "INPUT_TYPE_MONTH" -> Right CBIFIInputTypeMonth
+        "INPUT_TYPE_NUMBER" -> Right CBIFIInputTypeNumber
+        "INPUT_TYPE_RANGE" -> Right CBIFIInputTypeRange
+        "INPUT_TYPE_SEARCH" -> Right CBIFIInputTypeSearch
+        "INPUT_TYPE_TEL" -> Right CBIFIInputTypeTel
+        "INPUT_TYPE_TIME" -> Right CBIFIInputTypeTime
+        "INPUT_TYPE_URL" -> Right CBIFIInputTypeURL
+        "INPUT_TYPE_WEEK" -> Right CBIFIInputTypeWeek
+        "LOCAL_STORAGE" -> Right CBIFILocalStorage
+        "POST_MESSAGE" -> Right CBIFIPostMessage
+        "SESSION_STORAGE" -> Right CBIFISessionStorage
+        "SMIL" -> Right CBIFISmil
+        "SVG_CLIP_PATHS" -> Right CBIFISvgClipPaths
+        "SVG_FE_IMAGE" -> Right CBIFISvgFeImage
+        "SVG_FILTERS" -> Right CBIFISvgFilters
+        "SVG_HREF" -> Right CBIFISvgHref
+        "TOUCH" -> Right CBIFITouch
+        "VIDEO" -> Right CBIFIVideo
+        "WEBGL" -> Right CBIFIWebgl
+        "WEB_SOCKETS" -> Right CBIFIWebSockets
+        "WEB_SQL_DATABASE" -> Right CBIFIWebSQLDatabase
+        "WEB_WORKERS" -> Right CBIFIWebWorkers
+        x -> Left ("Unable to parse CreativeBackupImageFeaturesItem from: " <> x)
 
-instance ToText CreativeBackupImageFeaturesItem where
-    toText = \case
+instance ToHttpApiData CreativeBackupImageFeaturesItem where
+    toQueryParam = \case
         CBIFIApplicationCache -> "APPLICATION_CACHE"
         CBIFIAudio -> "AUDIO"
         CBIFICanvas -> "CANVAS"
@@ -1974,18 +2231,18 @@ data AdvertisersListSortOrder
       -- ^ @ASCENDING@
     | ALSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertisersListSortOrder
 
-instance FromText AdvertisersListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just ALSOAscending
-        "DESCENDING" -> Just ALSODescending
-        _ -> Nothing
+instance FromHttpApiData AdvertisersListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right ALSOAscending
+        "DESCENDING" -> Right ALSODescending
+        x -> Left ("Unable to parse AdvertisersListSortOrder from: " <> x)
 
-instance ToText AdvertisersListSortOrder where
-    toText = \case
+instance ToHttpApiData AdvertisersListSortOrder where
+    toQueryParam = \case
         ALSOAscending -> "ASCENDING"
         ALSODescending -> "DESCENDING"
 
@@ -2001,18 +2258,18 @@ data CreativeFieldsListSortField
       -- ^ @ID@
     | CFLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeFieldsListSortField
 
-instance FromText CreativeFieldsListSortField where
-    fromText = \case
-        "ID" -> Just CFLSFID
-        "NAME" -> Just CFLSFName
-        _ -> Nothing
+instance FromHttpApiData CreativeFieldsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right CFLSFID
+        "NAME" -> Right CFLSFName
+        x -> Left ("Unable to parse CreativeFieldsListSortField from: " <> x)
 
-instance ToText CreativeFieldsListSortField where
-    toText = \case
+instance ToHttpApiData CreativeFieldsListSortField where
+    toQueryParam = \case
         CFLSFID -> "ID"
         CFLSFName -> "NAME"
 
@@ -2024,96 +2281,96 @@ instance ToJSON CreativeFieldsListSortField where
 
 -- | Variable name in the tag. This is a required field.
 data UserDefinedVariableConfigurationVariableType
-    = U1
+    = UDVCVTU1
       -- ^ @U1@
-    | U10
+    | UDVCVTU10
       -- ^ @U10@
-    | U11
+    | UDVCVTU11
       -- ^ @U11@
-    | U12
+    | UDVCVTU12
       -- ^ @U12@
-    | U13
+    | UDVCVTU13
       -- ^ @U13@
-    | U14
+    | UDVCVTU14
       -- ^ @U14@
-    | U15
+    | UDVCVTU15
       -- ^ @U15@
-    | U16
+    | UDVCVTU16
       -- ^ @U16@
-    | U17
+    | UDVCVTU17
       -- ^ @U17@
-    | U18
+    | UDVCVTU18
       -- ^ @U18@
-    | U19
+    | UDVCVTU19
       -- ^ @U19@
-    | U2
+    | UDVCVTU2
       -- ^ @U2@
-    | U20
+    | UDVCVTU20
       -- ^ @U20@
-    | U3
+    | UDVCVTU3
       -- ^ @U3@
-    | U4
+    | UDVCVTU4
       -- ^ @U4@
-    | U5
+    | UDVCVTU5
       -- ^ @U5@
-    | U6
+    | UDVCVTU6
       -- ^ @U6@
-    | U7
+    | UDVCVTU7
       -- ^ @U7@
-    | U8
+    | UDVCVTU8
       -- ^ @U8@
-    | U9
+    | UDVCVTU9
       -- ^ @U9@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserDefinedVariableConfigurationVariableType
 
-instance FromText UserDefinedVariableConfigurationVariableType where
-    fromText = \case
-        "U1" -> Just U1
-        "U10" -> Just U10
-        "U11" -> Just U11
-        "U12" -> Just U12
-        "U13" -> Just U13
-        "U14" -> Just U14
-        "U15" -> Just U15
-        "U16" -> Just U16
-        "U17" -> Just U17
-        "U18" -> Just U18
-        "U19" -> Just U19
-        "U2" -> Just U2
-        "U20" -> Just U20
-        "U3" -> Just U3
-        "U4" -> Just U4
-        "U5" -> Just U5
-        "U6" -> Just U6
-        "U7" -> Just U7
-        "U8" -> Just U8
-        "U9" -> Just U9
-        _ -> Nothing
+instance FromHttpApiData UserDefinedVariableConfigurationVariableType where
+    parseQueryParam = \case
+        "U1" -> Right UDVCVTU1
+        "U10" -> Right UDVCVTU10
+        "U11" -> Right UDVCVTU11
+        "U12" -> Right UDVCVTU12
+        "U13" -> Right UDVCVTU13
+        "U14" -> Right UDVCVTU14
+        "U15" -> Right UDVCVTU15
+        "U16" -> Right UDVCVTU16
+        "U17" -> Right UDVCVTU17
+        "U18" -> Right UDVCVTU18
+        "U19" -> Right UDVCVTU19
+        "U2" -> Right UDVCVTU2
+        "U20" -> Right UDVCVTU20
+        "U3" -> Right UDVCVTU3
+        "U4" -> Right UDVCVTU4
+        "U5" -> Right UDVCVTU5
+        "U6" -> Right UDVCVTU6
+        "U7" -> Right UDVCVTU7
+        "U8" -> Right UDVCVTU8
+        "U9" -> Right UDVCVTU9
+        x -> Left ("Unable to parse UserDefinedVariableConfigurationVariableType from: " <> x)
 
-instance ToText UserDefinedVariableConfigurationVariableType where
-    toText = \case
-        U1 -> "U1"
-        U10 -> "U10"
-        U11 -> "U11"
-        U12 -> "U12"
-        U13 -> "U13"
-        U14 -> "U14"
-        U15 -> "U15"
-        U16 -> "U16"
-        U17 -> "U17"
-        U18 -> "U18"
-        U19 -> "U19"
-        U2 -> "U2"
-        U20 -> "U20"
-        U3 -> "U3"
-        U4 -> "U4"
-        U5 -> "U5"
-        U6 -> "U6"
-        U7 -> "U7"
-        U8 -> "U8"
-        U9 -> "U9"
+instance ToHttpApiData UserDefinedVariableConfigurationVariableType where
+    toQueryParam = \case
+        UDVCVTU1 -> "U1"
+        UDVCVTU10 -> "U10"
+        UDVCVTU11 -> "U11"
+        UDVCVTU12 -> "U12"
+        UDVCVTU13 -> "U13"
+        UDVCVTU14 -> "U14"
+        UDVCVTU15 -> "U15"
+        UDVCVTU16 -> "U16"
+        UDVCVTU17 -> "U17"
+        UDVCVTU18 -> "U18"
+        UDVCVTU19 -> "U19"
+        UDVCVTU2 -> "U2"
+        UDVCVTU20 -> "U20"
+        UDVCVTU3 -> "U3"
+        UDVCVTU4 -> "U4"
+        UDVCVTU5 -> "U5"
+        UDVCVTU6 -> "U6"
+        UDVCVTU7 -> "U7"
+        UDVCVTU8 -> "U8"
+        UDVCVTU9 -> "U9"
 
 instance FromJSON UserDefinedVariableConfigurationVariableType where
     parseJSON = parseJSONText "UserDefinedVariableConfigurationVariableType"
@@ -2127,18 +2384,18 @@ data FsCommandPositionOption
       -- ^ @CENTERED@
     | DistanceFromTopLeftCorner
       -- ^ @DISTANCE_FROM_TOP_LEFT_CORNER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FsCommandPositionOption
 
-instance FromText FsCommandPositionOption where
-    fromText = \case
-        "CENTERED" -> Just Centered
-        "DISTANCE_FROM_TOP_LEFT_CORNER" -> Just DistanceFromTopLeftCorner
-        _ -> Nothing
+instance FromHttpApiData FsCommandPositionOption where
+    parseQueryParam = \case
+        "CENTERED" -> Right Centered
+        "DISTANCE_FROM_TOP_LEFT_CORNER" -> Right DistanceFromTopLeftCorner
+        x -> Left ("Unable to parse FsCommandPositionOption from: " <> x)
 
-instance ToText FsCommandPositionOption where
-    toText = \case
+instance ToHttpApiData FsCommandPositionOption where
+    toQueryParam = \case
         Centered -> "CENTERED"
         DistanceFromTopLeftCorner -> "DISTANCE_FROM_TOP_LEFT_CORNER"
 
@@ -2154,18 +2411,18 @@ data UserRolesListSortOrder
       -- ^ @ASCENDING@
     | URLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserRolesListSortOrder
 
-instance FromText UserRolesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just URLSOAscending
-        "DESCENDING" -> Just URLSODescending
-        _ -> Nothing
+instance FromHttpApiData UserRolesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right URLSOAscending
+        "DESCENDING" -> Right URLSODescending
+        x -> Left ("Unable to parse UserRolesListSortOrder from: " <> x)
 
-instance ToText UserRolesListSortOrder where
-    toText = \case
+instance ToHttpApiData UserRolesListSortOrder where
+    toQueryParam = \case
         URLSOAscending -> "ASCENDING"
         URLSODescending -> "DESCENDING"
 
@@ -2176,41 +2433,42 @@ instance ToJSON UserRolesListSortOrder where
     toJSON = toJSONText
 
 -- | Select only placements that are associated with these compatibilities.
--- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
--- mobile devices for regular or interstitial ads respectively. APP and
--- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
--- to rendering in in-stream video ads developed with the VAST standard.
+-- DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or
+-- on mobile devices for regular or interstitial ads respectively. APP and
+-- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
+-- refers to rendering in in-stream video ads developed with the VAST
+-- standard.
 data PlacementsListCompatibilities
     = PLCApp
       -- ^ @APP@
     | PLCAppInterstitial
       -- ^ @APP_INTERSTITIAL@
+    | PLCDisplay
+      -- ^ @DISPLAY@
+    | PLCDisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
     | PLCInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-    | PLCWeb
-      -- ^ @WEB@
-    | PLCWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsListCompatibilities
 
-instance FromText PlacementsListCompatibilities where
-    fromText = \case
-        "APP" -> Just PLCApp
-        "APP_INTERSTITIAL" -> Just PLCAppInterstitial
-        "IN_STREAM_VIDEO" -> Just PLCInStreamVideo
-        "WEB" -> Just PLCWeb
-        "WEB_INTERSTITIAL" -> Just PLCWebInterstitial
-        _ -> Nothing
+instance FromHttpApiData PlacementsListCompatibilities where
+    parseQueryParam = \case
+        "APP" -> Right PLCApp
+        "APP_INTERSTITIAL" -> Right PLCAppInterstitial
+        "DISPLAY" -> Right PLCDisplay
+        "DISPLAY_INTERSTITIAL" -> Right PLCDisplayInterstitial
+        "IN_STREAM_VIDEO" -> Right PLCInStreamVideo
+        x -> Left ("Unable to parse PlacementsListCompatibilities from: " <> x)
 
-instance ToText PlacementsListCompatibilities where
-    toText = \case
+instance ToHttpApiData PlacementsListCompatibilities where
+    toQueryParam = \case
         PLCApp -> "APP"
         PLCAppInterstitial -> "APP_INTERSTITIAL"
+        PLCDisplay -> "DISPLAY"
+        PLCDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
         PLCInStreamVideo -> "IN_STREAM_VIDEO"
-        PLCWeb -> "WEB"
-        PLCWebInterstitial -> "WEB_INTERSTITIAL"
 
 instance FromJSON PlacementsListCompatibilities where
     parseJSON = parseJSONText "PlacementsListCompatibilities"
@@ -2224,18 +2482,18 @@ data OrderDocumentsListSortField
       -- ^ @ID@
     | ODLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrderDocumentsListSortField
 
-instance FromText OrderDocumentsListSortField where
-    fromText = \case
-        "ID" -> Just ODLSFID
-        "NAME" -> Just ODLSFName
-        _ -> Nothing
+instance FromHttpApiData OrderDocumentsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right ODLSFID
+        "NAME" -> Right ODLSFName
+        x -> Left ("Unable to parse OrderDocumentsListSortField from: " <> x)
 
-instance ToText OrderDocumentsListSortField where
-    toText = \case
+instance ToHttpApiData OrderDocumentsListSortField where
+    toQueryParam = \case
         ODLSFID -> "ID"
         ODLSFName -> "NAME"
 
@@ -2250,32 +2508,32 @@ data CreativeCompatibilityItem
       -- ^ @APP@
     | CCIAppInterstitial
       -- ^ @APP_INTERSTITIAL@
+    | CCIDisplay
+      -- ^ @DISPLAY@
+    | CCIDisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
     | CCIInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-    | CCIWeb
-      -- ^ @WEB@
-    | CCIWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeCompatibilityItem
 
-instance FromText CreativeCompatibilityItem where
-    fromText = \case
-        "APP" -> Just CCIApp
-        "APP_INTERSTITIAL" -> Just CCIAppInterstitial
-        "IN_STREAM_VIDEO" -> Just CCIInStreamVideo
-        "WEB" -> Just CCIWeb
-        "WEB_INTERSTITIAL" -> Just CCIWebInterstitial
-        _ -> Nothing
+instance FromHttpApiData CreativeCompatibilityItem where
+    parseQueryParam = \case
+        "APP" -> Right CCIApp
+        "APP_INTERSTITIAL" -> Right CCIAppInterstitial
+        "DISPLAY" -> Right CCIDisplay
+        "DISPLAY_INTERSTITIAL" -> Right CCIDisplayInterstitial
+        "IN_STREAM_VIDEO" -> Right CCIInStreamVideo
+        x -> Left ("Unable to parse CreativeCompatibilityItem from: " <> x)
 
-instance ToText CreativeCompatibilityItem where
-    toText = \case
+instance ToHttpApiData CreativeCompatibilityItem where
+    toQueryParam = \case
         CCIApp -> "APP"
         CCIAppInterstitial -> "APP_INTERSTITIAL"
+        CCIDisplay -> "DISPLAY"
+        CCIDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
         CCIInStreamVideo -> "IN_STREAM_VIDEO"
-        CCIWeb -> "WEB"
-        CCIWebInterstitial -> "WEB_INTERSTITIAL"
 
 instance FromJSON CreativeCompatibilityItem where
     parseJSON = parseJSONText "CreativeCompatibilityItem"
@@ -2289,18 +2547,18 @@ data ReportDeliveryEmailOwnerDeliveryType
       -- ^ @ATTACHMENT@
     | RDEODTLink
       -- ^ @LINK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportDeliveryEmailOwnerDeliveryType
 
-instance FromText ReportDeliveryEmailOwnerDeliveryType where
-    fromText = \case
-        "ATTACHMENT" -> Just RDEODTAttachment
-        "LINK" -> Just RDEODTLink
-        _ -> Nothing
+instance FromHttpApiData ReportDeliveryEmailOwnerDeliveryType where
+    parseQueryParam = \case
+        "ATTACHMENT" -> Right RDEODTAttachment
+        "LINK" -> Right RDEODTLink
+        x -> Left ("Unable to parse ReportDeliveryEmailOwnerDeliveryType from: " <> x)
 
-instance ToText ReportDeliveryEmailOwnerDeliveryType where
-    toText = \case
+instance ToHttpApiData ReportDeliveryEmailOwnerDeliveryType where
+    toQueryParam = \case
         RDEODTAttachment -> "ATTACHMENT"
         RDEODTLink -> "LINK"
 
@@ -2316,18 +2574,18 @@ data SiteContactContactType
       -- ^ @SALES_PERSON@
     | Trafficker
       -- ^ @TRAFFICKER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SiteContactContactType
 
-instance FromText SiteContactContactType where
-    fromText = \case
-        "SALES_PERSON" -> Just SalesPerson
-        "TRAFFICKER" -> Just Trafficker
-        _ -> Nothing
+instance FromHttpApiData SiteContactContactType where
+    parseQueryParam = \case
+        "SALES_PERSON" -> Right SalesPerson
+        "TRAFFICKER" -> Right Trafficker
+        x -> Left ("Unable to parse SiteContactContactType from: " <> x)
 
-instance ToText SiteContactContactType where
-    toText = \case
+instance ToHttpApiData SiteContactContactType where
+    toQueryParam = \case
         SalesPerson -> "SALES_PERSON"
         Trafficker -> "TRAFFICKER"
 
@@ -2345,18 +2603,18 @@ data ReportsListSortOrder
     | RLSODescending
       -- ^ @DESCENDING@
       -- Descending order.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsListSortOrder
 
-instance FromText ReportsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just RLSOAscending
-        "DESCENDING" -> Just RLSODescending
-        _ -> Nothing
+instance FromHttpApiData ReportsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right RLSOAscending
+        "DESCENDING" -> Right RLSODescending
+        x -> Left ("Unable to parse ReportsListSortOrder from: " <> x)
 
-instance ToText ReportsListSortOrder where
-    toText = \case
+instance ToHttpApiData ReportsListSortOrder where
+    toQueryParam = \case
         RLSOAscending -> "ASCENDING"
         RLSODescending -> "DESCENDING"
 
@@ -2372,18 +2630,18 @@ data TargetableRemarketingListsListSortField
       -- ^ @ID@
     | TRLLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetableRemarketingListsListSortField
 
-instance FromText TargetableRemarketingListsListSortField where
-    fromText = \case
-        "ID" -> Just TRLLSFID
-        "NAME" -> Just TRLLSFName
-        _ -> Nothing
+instance FromHttpApiData TargetableRemarketingListsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right TRLLSFID
+        "NAME" -> Right TRLLSFName
+        x -> Left ("Unable to parse TargetableRemarketingListsListSortField from: " <> x)
 
-instance ToText TargetableRemarketingListsListSortField where
-    toText = \case
+instance ToHttpApiData TargetableRemarketingListsListSortField where
+    toQueryParam = \case
         TRLLSFID -> "ID"
         TRLLSFName -> "NAME"
 
@@ -2399,18 +2657,18 @@ data CampaignsListSortOrder
       -- ^ @ASCENDING@
     | CLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CampaignsListSortOrder
 
-instance FromText CampaignsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just CLSOAscending
-        "DESCENDING" -> Just CLSODescending
-        _ -> Nothing
+instance FromHttpApiData CampaignsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right CLSOAscending
+        "DESCENDING" -> Right CLSODescending
+        x -> Left ("Unable to parse CampaignsListSortOrder from: " <> x)
 
-instance ToText CampaignsListSortOrder where
-    toText = \case
+instance ToHttpApiData CampaignsListSortOrder where
+    toQueryParam = \case
         CLSOAscending -> "ASCENDING"
         CLSODescending -> "DESCENDING"
 
@@ -2427,18 +2685,18 @@ data FloodlightActivityGroupsListType
       -- ^ @COUNTER@
     | Sale
       -- ^ @SALE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityGroupsListType
 
-instance FromText FloodlightActivityGroupsListType where
-    fromText = \case
-        "COUNTER" -> Just Counter
-        "SALE" -> Just Sale
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivityGroupsListType where
+    parseQueryParam = \case
+        "COUNTER" -> Right Counter
+        "SALE" -> Right Sale
+        x -> Left ("Unable to parse FloodlightActivityGroupsListType from: " <> x)
 
-instance ToText FloodlightActivityGroupsListType where
-    toText = \case
+instance ToHttpApiData FloodlightActivityGroupsListType where
+    toQueryParam = \case
         Counter -> "COUNTER"
         Sale -> "SALE"
 
@@ -2455,18 +2713,18 @@ data FloodlightConfigurationFirstDayOfWeek
       -- ^ @MONDAY@
     | Sunday
       -- ^ @SUNDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightConfigurationFirstDayOfWeek
 
-instance FromText FloodlightConfigurationFirstDayOfWeek where
-    fromText = \case
-        "MONDAY" -> Just Monday
-        "SUNDAY" -> Just Sunday
-        _ -> Nothing
+instance FromHttpApiData FloodlightConfigurationFirstDayOfWeek where
+    parseQueryParam = \case
+        "MONDAY" -> Right Monday
+        "SUNDAY" -> Right Sunday
+        x -> Left ("Unable to parse FloodlightConfigurationFirstDayOfWeek from: " <> x)
 
-instance ToText FloodlightConfigurationFirstDayOfWeek where
-    toText = \case
+instance ToHttpApiData FloodlightConfigurationFirstDayOfWeek where
+    toQueryParam = \case
         Monday -> "MONDAY"
         Sunday -> "SUNDAY"
 
@@ -2511,32 +2769,32 @@ data DeliverySchedulePriority
       -- ^ @AD_PRIORITY_15@
     | AdPriority16
       -- ^ @AD_PRIORITY_16@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeliverySchedulePriority
 
-instance FromText DeliverySchedulePriority where
-    fromText = \case
-        "AD_PRIORITY_01" -> Just AdPriority01
-        "AD_PRIORITY_02" -> Just AdPriority02
-        "AD_PRIORITY_03" -> Just AdPriority03
-        "AD_PRIORITY_04" -> Just AdPriority04
-        "AD_PRIORITY_05" -> Just AdPriority05
-        "AD_PRIORITY_06" -> Just AdPriority06
-        "AD_PRIORITY_07" -> Just AdPriority07
-        "AD_PRIORITY_08" -> Just AdPriority08
-        "AD_PRIORITY_09" -> Just AdPriority09
-        "AD_PRIORITY_10" -> Just AdPriority10
-        "AD_PRIORITY_11" -> Just AdPriority11
-        "AD_PRIORITY_12" -> Just AdPriority12
-        "AD_PRIORITY_13" -> Just AdPriority13
-        "AD_PRIORITY_14" -> Just AdPriority14
-        "AD_PRIORITY_15" -> Just AdPriority15
-        "AD_PRIORITY_16" -> Just AdPriority16
-        _ -> Nothing
+instance FromHttpApiData DeliverySchedulePriority where
+    parseQueryParam = \case
+        "AD_PRIORITY_01" -> Right AdPriority01
+        "AD_PRIORITY_02" -> Right AdPriority02
+        "AD_PRIORITY_03" -> Right AdPriority03
+        "AD_PRIORITY_04" -> Right AdPriority04
+        "AD_PRIORITY_05" -> Right AdPriority05
+        "AD_PRIORITY_06" -> Right AdPriority06
+        "AD_PRIORITY_07" -> Right AdPriority07
+        "AD_PRIORITY_08" -> Right AdPriority08
+        "AD_PRIORITY_09" -> Right AdPriority09
+        "AD_PRIORITY_10" -> Right AdPriority10
+        "AD_PRIORITY_11" -> Right AdPriority11
+        "AD_PRIORITY_12" -> Right AdPriority12
+        "AD_PRIORITY_13" -> Right AdPriority13
+        "AD_PRIORITY_14" -> Right AdPriority14
+        "AD_PRIORITY_15" -> Right AdPriority15
+        "AD_PRIORITY_16" -> Right AdPriority16
+        x -> Left ("Unable to parse DeliverySchedulePriority from: " <> x)
 
-instance ToText DeliverySchedulePriority where
-    toText = \case
+instance ToHttpApiData DeliverySchedulePriority where
+    toQueryParam = \case
         AdPriority01 -> "AD_PRIORITY_01"
         AdPriority02 -> "AD_PRIORITY_02"
         AdPriority03 -> "AD_PRIORITY_03"
@@ -2567,18 +2825,18 @@ data FloodlightActivitiesListFloodlightActivityGroupType
       -- ^ @COUNTER@
     | FALFAGTSale
       -- ^ @SALE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivitiesListFloodlightActivityGroupType
 
-instance FromText FloodlightActivitiesListFloodlightActivityGroupType where
-    fromText = \case
-        "COUNTER" -> Just FALFAGTCounter
-        "SALE" -> Just FALFAGTSale
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivitiesListFloodlightActivityGroupType where
+    parseQueryParam = \case
+        "COUNTER" -> Right FALFAGTCounter
+        "SALE" -> Right FALFAGTSale
+        x -> Left ("Unable to parse FloodlightActivitiesListFloodlightActivityGroupType from: " <> x)
 
-instance ToText FloodlightActivitiesListFloodlightActivityGroupType where
-    toText = \case
+instance ToHttpApiData FloodlightActivitiesListFloodlightActivityGroupType where
+    toQueryParam = \case
         FALFAGTCounter -> "COUNTER"
         FALFAGTSale -> "SALE"
 
@@ -2586,6 +2844,39 @@ instance FromJSON FloodlightActivitiesListFloodlightActivityGroupType where
     parseJSON = parseJSONText "FloodlightActivitiesListFloodlightActivityGroupType"
 
 instance ToJSON FloodlightActivitiesListFloodlightActivityGroupType where
+    toJSON = toJSONText
+
+-- | Source application where creative was authored. Presently, only DBM
+-- authored creatives will have this field set. Applicable to all creative
+-- types.
+data CreativeAuthoringSource
+    = CreativeAuthoringSourceDBm
+      -- ^ @CREATIVE_AUTHORING_SOURCE_DBM@
+    | CreativeAuthoringSourceDcm
+      -- ^ @CREATIVE_AUTHORING_SOURCE_DCM@
+    | CreativeAuthoringSourceStudio
+      -- ^ @CREATIVE_AUTHORING_SOURCE_STUDIO@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CreativeAuthoringSource
+
+instance FromHttpApiData CreativeAuthoringSource where
+    parseQueryParam = \case
+        "CREATIVE_AUTHORING_SOURCE_DBM" -> Right CreativeAuthoringSourceDBm
+        "CREATIVE_AUTHORING_SOURCE_DCM" -> Right CreativeAuthoringSourceDcm
+        "CREATIVE_AUTHORING_SOURCE_STUDIO" -> Right CreativeAuthoringSourceStudio
+        x -> Left ("Unable to parse CreativeAuthoringSource from: " <> x)
+
+instance ToHttpApiData CreativeAuthoringSource where
+    toQueryParam = \case
+        CreativeAuthoringSourceDBm -> "CREATIVE_AUTHORING_SOURCE_DBM"
+        CreativeAuthoringSourceDcm -> "CREATIVE_AUTHORING_SOURCE_DCM"
+        CreativeAuthoringSourceStudio -> "CREATIVE_AUTHORING_SOURCE_STUDIO"
+
+instance FromJSON CreativeAuthoringSource where
+    parseJSON = parseJSONText "CreativeAuthoringSource"
+
+instance ToJSON CreativeAuthoringSource where
     toJSON = toJSONText
 
 data FloodlightConfigurationStandardVariableTypesItem
@@ -2597,20 +2888,20 @@ data FloodlightConfigurationStandardVariableTypesItem
       -- ^ @TRAN@
     | U
       -- ^ @U@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightConfigurationStandardVariableTypesItem
 
-instance FromText FloodlightConfigurationStandardVariableTypesItem where
-    fromText = \case
-        "NUM" -> Just Num
-        "ORD" -> Just Ord
-        "TRAN" -> Just Tran
-        "U" -> Just U
-        _ -> Nothing
+instance FromHttpApiData FloodlightConfigurationStandardVariableTypesItem where
+    parseQueryParam = \case
+        "NUM" -> Right Num
+        "ORD" -> Right Ord
+        "TRAN" -> Right Tran
+        "U" -> Right U
+        x -> Left ("Unable to parse FloodlightConfigurationStandardVariableTypesItem from: " <> x)
 
-instance ToText FloodlightConfigurationStandardVariableTypesItem where
-    toText = \case
+instance ToHttpApiData FloodlightConfigurationStandardVariableTypesItem where
+    toQueryParam = \case
         Num -> "NUM"
         Ord -> "ORD"
         Tran -> "TRAN"
@@ -2629,18 +2920,18 @@ data PlacementPaymentSource
       -- ^ @PLACEMENT_AGENCY_PAID@
     | PPSPlacementPublisherPaid
       -- ^ @PLACEMENT_PUBLISHER_PAID@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementPaymentSource
 
-instance FromText PlacementPaymentSource where
-    fromText = \case
-        "PLACEMENT_AGENCY_PAID" -> Just PPSPlacementAgencyPaid
-        "PLACEMENT_PUBLISHER_PAID" -> Just PPSPlacementPublisherPaid
-        _ -> Nothing
+instance FromHttpApiData PlacementPaymentSource where
+    parseQueryParam = \case
+        "PLACEMENT_AGENCY_PAID" -> Right PPSPlacementAgencyPaid
+        "PLACEMENT_PUBLISHER_PAID" -> Right PPSPlacementPublisherPaid
+        x -> Left ("Unable to parse PlacementPaymentSource from: " <> x)
 
-instance ToText PlacementPaymentSource where
-    toText = \case
+instance ToHttpApiData PlacementPaymentSource where
+    toQueryParam = \case
         PPSPlacementAgencyPaid -> "PLACEMENT_AGENCY_PAID"
         PPSPlacementPublisherPaid -> "PLACEMENT_PUBLISHER_PAID"
 
@@ -2658,18 +2949,18 @@ data ReportsFilesListSortOrder
     | RFLSODescending
       -- ^ @DESCENDING@
       -- Descending order.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsFilesListSortOrder
 
-instance FromText ReportsFilesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just RFLSOAscending
-        "DESCENDING" -> Just RFLSODescending
-        _ -> Nothing
+instance FromHttpApiData ReportsFilesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right RFLSOAscending
+        "DESCENDING" -> Right RFLSODescending
+        x -> Left ("Unable to parse ReportsFilesListSortOrder from: " <> x)
 
-instance ToText ReportsFilesListSortOrder where
-    toText = \case
+instance ToHttpApiData ReportsFilesListSortOrder where
+    toQueryParam = \case
         RFLSOAscending -> "ASCENDING"
         RFLSODescending -> "DESCENDING"
 
@@ -2685,18 +2976,18 @@ data InventoryItemsListSortField
       -- ^ @ID@
     | IILSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InventoryItemsListSortField
 
-instance FromText InventoryItemsListSortField where
-    fromText = \case
-        "ID" -> Just IILSFID
-        "NAME" -> Just IILSFName
-        _ -> Nothing
+instance FromHttpApiData InventoryItemsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right IILSFID
+        "NAME" -> Right IILSFName
+        x -> Left ("Unable to parse InventoryItemsListSortField from: " <> x)
 
-instance ToText InventoryItemsListSortField where
-    toText = \case
+instance ToHttpApiData InventoryItemsListSortField where
+    toQueryParam = \case
         IILSFID -> "ID"
         IILSFName -> "NAME"
 
@@ -2716,19 +3007,19 @@ data EventTagType
       -- ^ @IMPRESSION_IMAGE_EVENT_TAG@
     | ETTImpressionJavascriptEventTag
       -- ^ @IMPRESSION_JAVASCRIPT_EVENT_TAG@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagType
 
-instance FromText EventTagType where
-    fromText = \case
-        "CLICK_THROUGH_EVENT_TAG" -> Just ETTClickThroughEventTag
-        "IMPRESSION_IMAGE_EVENT_TAG" -> Just ETTImpressionImageEventTag
-        "IMPRESSION_JAVASCRIPT_EVENT_TAG" -> Just ETTImpressionJavascriptEventTag
-        _ -> Nothing
+instance FromHttpApiData EventTagType where
+    parseQueryParam = \case
+        "CLICK_THROUGH_EVENT_TAG" -> Right ETTClickThroughEventTag
+        "IMPRESSION_IMAGE_EVENT_TAG" -> Right ETTImpressionImageEventTag
+        "IMPRESSION_JAVASCRIPT_EVENT_TAG" -> Right ETTImpressionJavascriptEventTag
+        x -> Left ("Unable to parse EventTagType from: " <> x)
 
-instance ToText EventTagType where
-    toText = \case
+instance ToHttpApiData EventTagType where
+    toQueryParam = \case
         ETTClickThroughEventTag -> "CLICK_THROUGH_EVENT_TAG"
         ETTImpressionImageEventTag -> "IMPRESSION_IMAGE_EVENT_TAG"
         ETTImpressionJavascriptEventTag -> "IMPRESSION_JAVASCRIPT_EVENT_TAG"
@@ -2745,18 +3036,18 @@ data CreativesListSortOrder
       -- ^ @ASCENDING@
     | CDescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativesListSortOrder
 
-instance FromText CreativesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just CAscending
-        "DESCENDING" -> Just CDescending
-        _ -> Nothing
+instance FromHttpApiData CreativesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right CAscending
+        "DESCENDING" -> Right CDescending
+        x -> Left ("Unable to parse CreativesListSortOrder from: " <> x)
 
-instance ToText CreativesListSortOrder where
-    toText = \case
+instance ToHttpApiData CreativesListSortOrder where
+    toQueryParam = \case
         CAscending -> "ASCENDING"
         CDescending -> "DESCENDING"
 
@@ -2766,24 +3057,51 @@ instance FromJSON CreativesListSortOrder where
 instance ToJSON CreativesListSortOrder where
     toJSON = toJSONText
 
+-- | Select only inventory items with this type.
+data InventoryItemsListType
+    = PlanningPlacementTypeCredit
+      -- ^ @PLANNING_PLACEMENT_TYPE_CREDIT@
+    | PlanningPlacementTypeRegular
+      -- ^ @PLANNING_PLACEMENT_TYPE_REGULAR@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InventoryItemsListType
+
+instance FromHttpApiData InventoryItemsListType where
+    parseQueryParam = \case
+        "PLANNING_PLACEMENT_TYPE_CREDIT" -> Right PlanningPlacementTypeCredit
+        "PLANNING_PLACEMENT_TYPE_REGULAR" -> Right PlanningPlacementTypeRegular
+        x -> Left ("Unable to parse InventoryItemsListType from: " <> x)
+
+instance ToHttpApiData InventoryItemsListType where
+    toQueryParam = \case
+        PlanningPlacementTypeCredit -> "PLANNING_PLACEMENT_TYPE_CREDIT"
+        PlanningPlacementTypeRegular -> "PLANNING_PLACEMENT_TYPE_REGULAR"
+
+instance FromJSON InventoryItemsListType where
+    parseJSON = parseJSONText "InventoryItemsListType"
+
+instance ToJSON InventoryItemsListType where
+    toJSON = toJSONText
+
 -- | Popup window position either centered or at specific coordinate.
 data PopupWindowPropertiesPositionType
     = Center
       -- ^ @CENTER@
     | Coordinates
       -- ^ @COORDINATES@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PopupWindowPropertiesPositionType
 
-instance FromText PopupWindowPropertiesPositionType where
-    fromText = \case
-        "CENTER" -> Just Center
-        "COORDINATES" -> Just Coordinates
-        _ -> Nothing
+instance FromHttpApiData PopupWindowPropertiesPositionType where
+    parseQueryParam = \case
+        "CENTER" -> Right Center
+        "COORDINATES" -> Right Coordinates
+        x -> Left ("Unable to parse PopupWindowPropertiesPositionType from: " <> x)
 
-instance ToText PopupWindowPropertiesPositionType where
-    toText = \case
+instance ToHttpApiData PopupWindowPropertiesPositionType where
+    toQueryParam = \case
         Center -> "CENTER"
         Coordinates -> "COORDINATES"
 
@@ -2801,19 +3119,19 @@ data DirectorySiteContactRole
       -- ^ @EDIT@
     | View
       -- ^ @VIEW@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteContactRole
 
-instance FromText DirectorySiteContactRole where
-    fromText = \case
-        "ADMIN" -> Just Admin
-        "EDIT" -> Just Edit
-        "VIEW" -> Just View
-        _ -> Nothing
+instance FromHttpApiData DirectorySiteContactRole where
+    parseQueryParam = \case
+        "ADMIN" -> Right Admin
+        "EDIT" -> Right Edit
+        "VIEW" -> Right View
+        x -> Left ("Unable to parse DirectorySiteContactRole from: " <> x)
 
-instance ToText DirectorySiteContactRole where
-    toText = \case
+instance ToHttpApiData DirectorySiteContactRole where
+    toQueryParam = \case
         Admin -> "ADMIN"
         Edit -> "EDIT"
         View -> "VIEW"
@@ -2835,19 +3153,19 @@ data TagSettingKeywordOption
       -- ^ @IGNORE@
     | PlaceholderWithListOfKeywords
       -- ^ @PLACEHOLDER_WITH_LIST_OF_KEYWORDS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TagSettingKeywordOption
 
-instance FromText TagSettingKeywordOption where
-    fromText = \case
-        "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD" -> Just GenerateSeparateTagForEachKeyword
-        "IGNORE" -> Just Ignore
-        "PLACEHOLDER_WITH_LIST_OF_KEYWORDS" -> Just PlaceholderWithListOfKeywords
-        _ -> Nothing
+instance FromHttpApiData TagSettingKeywordOption where
+    parseQueryParam = \case
+        "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD" -> Right GenerateSeparateTagForEachKeyword
+        "IGNORE" -> Right Ignore
+        "PLACEHOLDER_WITH_LIST_OF_KEYWORDS" -> Right PlaceholderWithListOfKeywords
+        x -> Left ("Unable to parse TagSettingKeywordOption from: " <> x)
 
-instance ToText TagSettingKeywordOption where
-    toText = \case
+instance ToHttpApiData TagSettingKeywordOption where
+    toQueryParam = \case
         GenerateSeparateTagForEachKeyword -> "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD"
         Ignore -> "IGNORE"
         PlaceholderWithListOfKeywords -> "PLACEHOLDER_WITH_LIST_OF_KEYWORDS"
@@ -2865,18 +3183,18 @@ data CreativeAuthoringTool
       -- ^ @NINJA@
     | Swiffy
       -- ^ @SWIFFY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAuthoringTool
 
-instance FromText CreativeAuthoringTool where
-    fromText = \case
-        "NINJA" -> Just Ninja
-        "SWIFFY" -> Just Swiffy
-        _ -> Nothing
+instance FromHttpApiData CreativeAuthoringTool where
+    parseQueryParam = \case
+        "NINJA" -> Right Ninja
+        "SWIFFY" -> Right Swiffy
+        x -> Left ("Unable to parse CreativeAuthoringTool from: " <> x)
 
-instance ToText CreativeAuthoringTool where
-    toText = \case
+instance ToHttpApiData CreativeAuthoringTool where
+    toQueryParam = \case
         Ninja -> "NINJA"
         Swiffy -> "SWIFFY"
 
@@ -2894,19 +3212,19 @@ data OrderContactContactType
       -- ^ @PLANNING_ORDER_CONTACT_BUYER_CONTACT@
     | PlanningOrderContactSellerContact
       -- ^ @PLANNING_ORDER_CONTACT_SELLER_CONTACT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrderContactContactType
 
-instance FromText OrderContactContactType where
-    fromText = \case
-        "PLANNING_ORDER_CONTACT_BUYER_BILLING_CONTACT" -> Just PlanningOrderContactBuyerBillingContact
-        "PLANNING_ORDER_CONTACT_BUYER_CONTACT" -> Just PlanningOrderContactBuyerContact
-        "PLANNING_ORDER_CONTACT_SELLER_CONTACT" -> Just PlanningOrderContactSellerContact
-        _ -> Nothing
+instance FromHttpApiData OrderContactContactType where
+    parseQueryParam = \case
+        "PLANNING_ORDER_CONTACT_BUYER_BILLING_CONTACT" -> Right PlanningOrderContactBuyerBillingContact
+        "PLANNING_ORDER_CONTACT_BUYER_CONTACT" -> Right PlanningOrderContactBuyerContact
+        "PLANNING_ORDER_CONTACT_SELLER_CONTACT" -> Right PlanningOrderContactSellerContact
+        x -> Left ("Unable to parse OrderContactContactType from: " <> x)
 
-instance ToText OrderContactContactType where
-    toText = \case
+instance ToHttpApiData OrderContactContactType where
+    toQueryParam = \case
         PlanningOrderContactBuyerBillingContact -> "PLANNING_ORDER_CONTACT_BUYER_BILLING_CONTACT"
         PlanningOrderContactBuyerContact -> "PLANNING_ORDER_CONTACT_BUYER_CONTACT"
         PlanningOrderContactSellerContact -> "PLANNING_ORDER_CONTACT_SELLER_CONTACT"
@@ -2930,21 +3248,21 @@ data CreativeAssetIdType
       -- ^ @IMAGE@
     | CAITVideo
       -- ^ @VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetIdType
 
-instance FromText CreativeAssetIdType where
-    fromText = \case
-        "FLASH" -> Just CAITFlash
-        "HTML" -> Just CAITHTML
-        "HTML_IMAGE" -> Just CAITHTMLImage
-        "IMAGE" -> Just CAITImage
-        "VIDEO" -> Just CAITVideo
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetIdType where
+    parseQueryParam = \case
+        "FLASH" -> Right CAITFlash
+        "HTML" -> Right CAITHTML
+        "HTML_IMAGE" -> Right CAITHTMLImage
+        "IMAGE" -> Right CAITImage
+        "VIDEO" -> Right CAITVideo
+        x -> Left ("Unable to parse CreativeAssetIdType from: " <> x)
 
-instance ToText CreativeAssetIdType where
-    toText = \case
+instance ToHttpApiData CreativeAssetIdType where
+    toQueryParam = \case
         CAITFlash -> "FLASH"
         CAITHTML -> "HTML"
         CAITHTMLImage -> "HTML_IMAGE"
@@ -2963,18 +3281,18 @@ data AccountUserProFilesListSortOrder
       -- ^ @ASCENDING@
     | AUPFLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountUserProFilesListSortOrder
 
-instance FromText AccountUserProFilesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just AUPFLSOAscending
-        "DESCENDING" -> Just AUPFLSODescending
-        _ -> Nothing
+instance FromHttpApiData AccountUserProFilesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right AUPFLSOAscending
+        "DESCENDING" -> Right AUPFLSODescending
+        x -> Left ("Unable to parse AccountUserProFilesListSortOrder from: " <> x)
 
-instance ToText AccountUserProFilesListSortOrder where
-    toText = \case
+instance ToHttpApiData AccountUserProFilesListSortOrder where
+    toQueryParam = \case
         AUPFLSOAscending -> "ASCENDING"
         AUPFLSODescending -> "DESCENDING"
 
@@ -2986,36 +3304,60 @@ instance ToJSON AccountUserProFilesListSortOrder where
 
 -- | Product from which this remarketing list was originated.
 data RemarketingListListSource
-    = RLLSRemarketingListSourceDBm
+    = RLLSRemarketingListSourceAdx
+      -- ^ @REMARKETING_LIST_SOURCE_ADX@
+    | RLLSRemarketingListSourceDBm
       -- ^ @REMARKETING_LIST_SOURCE_DBM@
     | RLLSRemarketingListSourceDfa
       -- ^ @REMARKETING_LIST_SOURCE_DFA@
+    | RLLSRemarketingListSourceDfp
+      -- ^ @REMARKETING_LIST_SOURCE_DFP@
     | RLLSRemarketingListSourceDmp
       -- ^ @REMARKETING_LIST_SOURCE_DMP@
     | RLLSRemarketingListSourceGa
       -- ^ @REMARKETING_LIST_SOURCE_GA@
+    | RLLSRemarketingListSourceGplus
+      -- ^ @REMARKETING_LIST_SOURCE_GPLUS@
     | RLLSRemarketingListSourceOther
       -- ^ @REMARKETING_LIST_SOURCE_OTHER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+    | RLLSRemarketingListSourcePlayStore
+      -- ^ @REMARKETING_LIST_SOURCE_PLAY_STORE@
+    | RLLSRemarketingListSourceXfp
+      -- ^ @REMARKETING_LIST_SOURCE_XFP@
+    | RLLSRemarketingListSourceYouTube
+      -- ^ @REMARKETING_LIST_SOURCE_YOUTUBE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RemarketingListListSource
 
-instance FromText RemarketingListListSource where
-    fromText = \case
-        "REMARKETING_LIST_SOURCE_DBM" -> Just RLLSRemarketingListSourceDBm
-        "REMARKETING_LIST_SOURCE_DFA" -> Just RLLSRemarketingListSourceDfa
-        "REMARKETING_LIST_SOURCE_DMP" -> Just RLLSRemarketingListSourceDmp
-        "REMARKETING_LIST_SOURCE_GA" -> Just RLLSRemarketingListSourceGa
-        "REMARKETING_LIST_SOURCE_OTHER" -> Just RLLSRemarketingListSourceOther
-        _ -> Nothing
+instance FromHttpApiData RemarketingListListSource where
+    parseQueryParam = \case
+        "REMARKETING_LIST_SOURCE_ADX" -> Right RLLSRemarketingListSourceAdx
+        "REMARKETING_LIST_SOURCE_DBM" -> Right RLLSRemarketingListSourceDBm
+        "REMARKETING_LIST_SOURCE_DFA" -> Right RLLSRemarketingListSourceDfa
+        "REMARKETING_LIST_SOURCE_DFP" -> Right RLLSRemarketingListSourceDfp
+        "REMARKETING_LIST_SOURCE_DMP" -> Right RLLSRemarketingListSourceDmp
+        "REMARKETING_LIST_SOURCE_GA" -> Right RLLSRemarketingListSourceGa
+        "REMARKETING_LIST_SOURCE_GPLUS" -> Right RLLSRemarketingListSourceGplus
+        "REMARKETING_LIST_SOURCE_OTHER" -> Right RLLSRemarketingListSourceOther
+        "REMARKETING_LIST_SOURCE_PLAY_STORE" -> Right RLLSRemarketingListSourcePlayStore
+        "REMARKETING_LIST_SOURCE_XFP" -> Right RLLSRemarketingListSourceXfp
+        "REMARKETING_LIST_SOURCE_YOUTUBE" -> Right RLLSRemarketingListSourceYouTube
+        x -> Left ("Unable to parse RemarketingListListSource from: " <> x)
 
-instance ToText RemarketingListListSource where
-    toText = \case
+instance ToHttpApiData RemarketingListListSource where
+    toQueryParam = \case
+        RLLSRemarketingListSourceAdx -> "REMARKETING_LIST_SOURCE_ADX"
         RLLSRemarketingListSourceDBm -> "REMARKETING_LIST_SOURCE_DBM"
         RLLSRemarketingListSourceDfa -> "REMARKETING_LIST_SOURCE_DFA"
+        RLLSRemarketingListSourceDfp -> "REMARKETING_LIST_SOURCE_DFP"
         RLLSRemarketingListSourceDmp -> "REMARKETING_LIST_SOURCE_DMP"
         RLLSRemarketingListSourceGa -> "REMARKETING_LIST_SOURCE_GA"
+        RLLSRemarketingListSourceGplus -> "REMARKETING_LIST_SOURCE_GPLUS"
         RLLSRemarketingListSourceOther -> "REMARKETING_LIST_SOURCE_OTHER"
+        RLLSRemarketingListSourcePlayStore -> "REMARKETING_LIST_SOURCE_PLAY_STORE"
+        RLLSRemarketingListSourceXfp -> "REMARKETING_LIST_SOURCE_XFP"
+        RLLSRemarketingListSourceYouTube -> "REMARKETING_LIST_SOURCE_YOUTUBE"
 
 instance FromJSON RemarketingListListSource where
     parseJSON = parseJSONText "RemarketingListListSource"
@@ -3030,23 +3372,27 @@ data AccountUserProFileUserAccessType
       -- ^ @INTERNAL_ADMINISTRATOR@
     | NormalUser
       -- ^ @NORMAL_USER@
+    | ReadOnlySuperUser
+      -- ^ @READ_ONLY_SUPER_USER@
     | SuperUser
       -- ^ @SUPER_USER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountUserProFileUserAccessType
 
-instance FromText AccountUserProFileUserAccessType where
-    fromText = \case
-        "INTERNAL_ADMINISTRATOR" -> Just InternalAdministrator
-        "NORMAL_USER" -> Just NormalUser
-        "SUPER_USER" -> Just SuperUser
-        _ -> Nothing
+instance FromHttpApiData AccountUserProFileUserAccessType where
+    parseQueryParam = \case
+        "INTERNAL_ADMINISTRATOR" -> Right InternalAdministrator
+        "NORMAL_USER" -> Right NormalUser
+        "READ_ONLY_SUPER_USER" -> Right ReadOnlySuperUser
+        "SUPER_USER" -> Right SuperUser
+        x -> Left ("Unable to parse AccountUserProFileUserAccessType from: " <> x)
 
-instance ToText AccountUserProFileUserAccessType where
-    toText = \case
+instance ToHttpApiData AccountUserProFileUserAccessType where
+    toQueryParam = \case
         InternalAdministrator -> "INTERNAL_ADMINISTRATOR"
         NormalUser -> "NORMAL_USER"
+        ReadOnlySuperUser -> "READ_ONLY_SUPER_USER"
         SuperUser -> "SUPER_USER"
 
 instance FromJSON AccountUserProFileUserAccessType where
@@ -3062,18 +3408,18 @@ data CreativeAssetStartTimeType
       -- ^ @ASSET_START_TIME_TYPE_CUSTOM@
     | AssetStartTimeTypeNone
       -- ^ @ASSET_START_TIME_TYPE_NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetStartTimeType
 
-instance FromText CreativeAssetStartTimeType where
-    fromText = \case
-        "ASSET_START_TIME_TYPE_CUSTOM" -> Just AssetStartTimeTypeCustom
-        "ASSET_START_TIME_TYPE_NONE" -> Just AssetStartTimeTypeNone
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetStartTimeType where
+    parseQueryParam = \case
+        "ASSET_START_TIME_TYPE_CUSTOM" -> Right AssetStartTimeTypeCustom
+        "ASSET_START_TIME_TYPE_NONE" -> Right AssetStartTimeTypeNone
+        x -> Left ("Unable to parse CreativeAssetStartTimeType from: " <> x)
 
-instance ToText CreativeAssetStartTimeType where
-    toText = \case
+instance ToHttpApiData CreativeAssetStartTimeType where
+    toQueryParam = \case
         AssetStartTimeTypeCustom -> "ASSET_START_TIME_TYPE_CUSTOM"
         AssetStartTimeTypeNone -> "ASSET_START_TIME_TYPE_NONE"
 
@@ -3089,18 +3435,18 @@ data ProjectAudienceGender
       -- ^ @PLANNING_AUDIENCE_GENDER_FEMALE@
     | PlanningAudienceGenderMale
       -- ^ @PLANNING_AUDIENCE_GENDER_MALE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProjectAudienceGender
 
-instance FromText ProjectAudienceGender where
-    fromText = \case
-        "PLANNING_AUDIENCE_GENDER_FEMALE" -> Just PlanningAudienceGenderFemale
-        "PLANNING_AUDIENCE_GENDER_MALE" -> Just PlanningAudienceGenderMale
-        _ -> Nothing
+instance FromHttpApiData ProjectAudienceGender where
+    parseQueryParam = \case
+        "PLANNING_AUDIENCE_GENDER_FEMALE" -> Right PlanningAudienceGenderFemale
+        "PLANNING_AUDIENCE_GENDER_MALE" -> Right PlanningAudienceGenderMale
+        x -> Left ("Unable to parse ProjectAudienceGender from: " <> x)
 
-instance ToText ProjectAudienceGender where
-    toText = \case
+instance ToHttpApiData ProjectAudienceGender where
+    toQueryParam = \case
         PlanningAudienceGenderFemale -> "PLANNING_AUDIENCE_GENDER_FEMALE"
         PlanningAudienceGenderMale -> "PLANNING_AUDIENCE_GENDER_MALE"
 
@@ -3116,18 +3462,18 @@ data PlacementStrategiesListSortField
       -- ^ @ID@
     | PSLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementStrategiesListSortField
 
-instance FromText PlacementStrategiesListSortField where
-    fromText = \case
-        "ID" -> Just PSLSFID
-        "NAME" -> Just PSLSFName
-        _ -> Nothing
+instance FromHttpApiData PlacementStrategiesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right PSLSFID
+        "NAME" -> Right PSLSFName
+        x -> Left ("Unable to parse PlacementStrategiesListSortField from: " <> x)
 
-instance ToText PlacementStrategiesListSortField where
-    toText = \case
+instance ToHttpApiData PlacementStrategiesListSortField where
+    toQueryParam = \case
         PSLSFID -> "ID"
         PSLSFName -> "NAME"
 
@@ -3143,18 +3489,18 @@ data UserDefinedVariableConfigurationDataType
       -- ^ @NUMBER@
     | String
       -- ^ @STRING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserDefinedVariableConfigurationDataType
 
-instance FromText UserDefinedVariableConfigurationDataType where
-    fromText = \case
-        "NUMBER" -> Just Number
-        "STRING" -> Just String
-        _ -> Nothing
+instance FromHttpApiData UserDefinedVariableConfigurationDataType where
+    parseQueryParam = \case
+        "NUMBER" -> Right Number
+        "STRING" -> Right String
+        x -> Left ("Unable to parse UserDefinedVariableConfigurationDataType from: " <> x)
 
-instance ToText UserDefinedVariableConfigurationDataType where
-    toText = \case
+instance ToHttpApiData UserDefinedVariableConfigurationDataType where
+    toQueryParam = \case
         Number -> "NUMBER"
         String -> "STRING"
 
@@ -3176,21 +3522,21 @@ data FloodlightActivityCacheBustingType
       -- ^ @JSP@
     | Php
       -- ^ @PHP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityCacheBustingType
 
-instance FromText FloodlightActivityCacheBustingType where
-    fromText = \case
-        "ACTIVE_SERVER_PAGE" -> Just ActiveServerPage
-        "COLD_FUSION" -> Just ColdFusion
-        "JAVASCRIPT" -> Just Javascript
-        "JSP" -> Just Jsp
-        "PHP" -> Just Php
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivityCacheBustingType where
+    parseQueryParam = \case
+        "ACTIVE_SERVER_PAGE" -> Right ActiveServerPage
+        "COLD_FUSION" -> Right ColdFusion
+        "JAVASCRIPT" -> Right Javascript
+        "JSP" -> Right Jsp
+        "PHP" -> Right Php
+        x -> Left ("Unable to parse FloodlightActivityCacheBustingType from: " <> x)
 
-instance ToText FloodlightActivityCacheBustingType where
-    toText = \case
+instance ToHttpApiData FloodlightActivityCacheBustingType where
+    toQueryParam = \case
         ActiveServerPage -> "ACTIVE_SERVER_PAGE"
         ColdFusion -> "COLD_FUSION"
         Javascript -> "JAVASCRIPT"
@@ -3209,18 +3555,18 @@ data CreativeGroupsListSortOrder
       -- ^ @ASCENDING@
     | CGLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeGroupsListSortOrder
 
-instance FromText CreativeGroupsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just CGLSOAscending
-        "DESCENDING" -> Just CGLSODescending
-        _ -> Nothing
+instance FromHttpApiData CreativeGroupsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right CGLSOAscending
+        "DESCENDING" -> Right CGLSODescending
+        x -> Left ("Unable to parse CreativeGroupsListSortOrder from: " <> x)
 
-instance ToText CreativeGroupsListSortOrder where
-    toText = \case
+instance ToHttpApiData CreativeGroupsListSortOrder where
+    toQueryParam = \case
         CGLSOAscending -> "ASCENDING"
         CGLSODescending -> "DESCENDING"
 
@@ -3236,18 +3582,18 @@ data OrderDocumentType
       -- ^ @PLANNING_ORDER_TYPE_CHANGE_ORDER@
     | PlanningOrderTypeInsertionOrder
       -- ^ @PLANNING_ORDER_TYPE_INSERTION_ORDER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrderDocumentType
 
-instance FromText OrderDocumentType where
-    fromText = \case
-        "PLANNING_ORDER_TYPE_CHANGE_ORDER" -> Just PlanningOrderTypeChangeOrder
-        "PLANNING_ORDER_TYPE_INSERTION_ORDER" -> Just PlanningOrderTypeInsertionOrder
-        _ -> Nothing
+instance FromHttpApiData OrderDocumentType where
+    parseQueryParam = \case
+        "PLANNING_ORDER_TYPE_CHANGE_ORDER" -> Right PlanningOrderTypeChangeOrder
+        "PLANNING_ORDER_TYPE_INSERTION_ORDER" -> Right PlanningOrderTypeInsertionOrder
+        x -> Left ("Unable to parse OrderDocumentType from: " <> x)
 
-instance ToText OrderDocumentType where
-    toText = \case
+instance ToHttpApiData OrderDocumentType where
+    toQueryParam = \case
         PlanningOrderTypeChangeOrder -> "PLANNING_ORDER_TYPE_CHANGE_ORDER"
         PlanningOrderTypeInsertionOrder -> "PLANNING_ORDER_TYPE_INSERTION_ORDER"
 
@@ -3295,34 +3641,34 @@ data TagDataFormat
       -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
     | PlacementTagTrackingJavascript
       -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TagDataFormat
 
-instance FromText TagDataFormat where
-    fromText = \case
-        "PLACEMENT_TAG_CLICK_COMMANDS" -> Just PlacementTagClickCommands
-        "PLACEMENT_TAG_IFRAME_ILAYER" -> Just PlacementTagIframeIlayer
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Just PlacementTagIframeJavascript
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Just PlacementTagIframeJavascriptLegacy
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Just PlacementTagInstreamVideoPrefetch
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Just PlacementTagInstreamVideoPrefetchVast3
-        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Just PlacementTagInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Just PlacementTagInterstitialIframeJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Just PlacementTagInterstitialIframeJavascriptLegacy
-        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Just PlacementTagInterstitialInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Just PlacementTagInterstitialJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Just PlacementTagInterstitialJavascriptLegacy
-        "PLACEMENT_TAG_JAVASCRIPT" -> Just PlacementTagJavascript
-        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Just PlacementTagJavascriptLegacy
-        "PLACEMENT_TAG_STANDARD" -> Just PlacementTagStandard
-        "PLACEMENT_TAG_TRACKING" -> Just PlacementTagTracking
-        "PLACEMENT_TAG_TRACKING_IFRAME" -> Just PlacementTagTrackingIframe
-        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Just PlacementTagTrackingJavascript
-        _ -> Nothing
+instance FromHttpApiData TagDataFormat where
+    parseQueryParam = \case
+        "PLACEMENT_TAG_CLICK_COMMANDS" -> Right PlacementTagClickCommands
+        "PLACEMENT_TAG_IFRAME_ILAYER" -> Right PlacementTagIframeIlayer
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Right PlacementTagIframeJavascript
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Right PlacementTagIframeJavascriptLegacy
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Right PlacementTagInstreamVideoPrefetch
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Right PlacementTagInstreamVideoPrefetchVast3
+        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Right PlacementTagInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Right PlacementTagInterstitialIframeJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Right PlacementTagInterstitialIframeJavascriptLegacy
+        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Right PlacementTagInterstitialInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Right PlacementTagInterstitialJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Right PlacementTagInterstitialJavascriptLegacy
+        "PLACEMENT_TAG_JAVASCRIPT" -> Right PlacementTagJavascript
+        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Right PlacementTagJavascriptLegacy
+        "PLACEMENT_TAG_STANDARD" -> Right PlacementTagStandard
+        "PLACEMENT_TAG_TRACKING" -> Right PlacementTagTracking
+        "PLACEMENT_TAG_TRACKING_IFRAME" -> Right PlacementTagTrackingIframe
+        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Right PlacementTagTrackingJavascript
+        x -> Left ("Unable to parse TagDataFormat from: " <> x)
 
-instance ToText TagDataFormat where
-    toText = \case
+instance ToHttpApiData TagDataFormat where
+    toQueryParam = \case
         PlacementTagClickCommands -> "PLACEMENT_TAG_CLICK_COMMANDS"
         PlacementTagIframeIlayer -> "PLACEMENT_TAG_IFRAME_ILAYER"
         PlacementTagIframeJavascript -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
@@ -3360,21 +3706,21 @@ data AccountActiveAdSummaryActiveAdsLimitTier
       -- ^ @ACTIVE_ADS_TIER_40K@
     | ActiveAdsTier75K
       -- ^ @ACTIVE_ADS_TIER_75K@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountActiveAdSummaryActiveAdsLimitTier
 
-instance FromText AccountActiveAdSummaryActiveAdsLimitTier where
-    fromText = \case
-        "ACTIVE_ADS_TIER_100K" -> Just ActiveAdsTier100K
-        "ACTIVE_ADS_TIER_200K" -> Just ActiveAdsTier200K
-        "ACTIVE_ADS_TIER_300K" -> Just ActiveAdsTier300K
-        "ACTIVE_ADS_TIER_40K" -> Just ActiveAdsTier40K
-        "ACTIVE_ADS_TIER_75K" -> Just ActiveAdsTier75K
-        _ -> Nothing
+instance FromHttpApiData AccountActiveAdSummaryActiveAdsLimitTier where
+    parseQueryParam = \case
+        "ACTIVE_ADS_TIER_100K" -> Right ActiveAdsTier100K
+        "ACTIVE_ADS_TIER_200K" -> Right ActiveAdsTier200K
+        "ACTIVE_ADS_TIER_300K" -> Right ActiveAdsTier300K
+        "ACTIVE_ADS_TIER_40K" -> Right ActiveAdsTier40K
+        "ACTIVE_ADS_TIER_75K" -> Right ActiveAdsTier75K
+        x -> Left ("Unable to parse AccountActiveAdSummaryActiveAdsLimitTier from: " <> x)
 
-instance ToText AccountActiveAdSummaryActiveAdsLimitTier where
-    toText = \case
+instance ToHttpApiData AccountActiveAdSummaryActiveAdsLimitTier where
+    toQueryParam = \case
         ActiveAdsTier100K -> "ACTIVE_ADS_TIER_100K"
         ActiveAdsTier200K -> "ACTIVE_ADS_TIER_200K"
         ActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
@@ -3398,20 +3744,20 @@ data CreativeAssetChildAssetType
       -- ^ @CHILD_ASSET_TYPE_IMAGE@
     | ChildAssetTypeVideo
       -- ^ @CHILD_ASSET_TYPE_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetChildAssetType
 
-instance FromText CreativeAssetChildAssetType where
-    fromText = \case
-        "CHILD_ASSET_TYPE_DATA" -> Just ChildAssetTypeData
-        "CHILD_ASSET_TYPE_FLASH" -> Just ChildAssetTypeFlash
-        "CHILD_ASSET_TYPE_IMAGE" -> Just ChildAssetTypeImage
-        "CHILD_ASSET_TYPE_VIDEO" -> Just ChildAssetTypeVideo
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetChildAssetType where
+    parseQueryParam = \case
+        "CHILD_ASSET_TYPE_DATA" -> Right ChildAssetTypeData
+        "CHILD_ASSET_TYPE_FLASH" -> Right ChildAssetTypeFlash
+        "CHILD_ASSET_TYPE_IMAGE" -> Right ChildAssetTypeImage
+        "CHILD_ASSET_TYPE_VIDEO" -> Right ChildAssetTypeVideo
+        x -> Left ("Unable to parse CreativeAssetChildAssetType from: " <> x)
 
-instance ToText CreativeAssetChildAssetType where
-    toText = \case
+instance ToHttpApiData CreativeAssetChildAssetType where
+    toQueryParam = \case
         ChildAssetTypeData -> "CHILD_ASSET_TYPE_DATA"
         ChildAssetTypeFlash -> "CHILD_ASSET_TYPE_FLASH"
         ChildAssetTypeImage -> "CHILD_ASSET_TYPE_IMAGE"
@@ -3434,18 +3780,18 @@ data PlacementGroupsListPlacementGroupType
       -- ^ @PLACEMENT_PACKAGE@
     | PlacementRoadblock
       -- ^ @PLACEMENT_ROADBLOCK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementGroupsListPlacementGroupType
 
-instance FromText PlacementGroupsListPlacementGroupType where
-    fromText = \case
-        "PLACEMENT_PACKAGE" -> Just PlacementPackage
-        "PLACEMENT_ROADBLOCK" -> Just PlacementRoadblock
-        _ -> Nothing
+instance FromHttpApiData PlacementGroupsListPlacementGroupType where
+    parseQueryParam = \case
+        "PLACEMENT_PACKAGE" -> Right PlacementPackage
+        "PLACEMENT_ROADBLOCK" -> Right PlacementRoadblock
+        x -> Left ("Unable to parse PlacementGroupsListPlacementGroupType from: " <> x)
 
-instance ToText PlacementGroupsListPlacementGroupType where
-    toText = \case
+instance ToHttpApiData PlacementGroupsListPlacementGroupType where
+    toQueryParam = \case
         PlacementPackage -> "PLACEMENT_PACKAGE"
         PlacementRoadblock -> "PLACEMENT_ROADBLOCK"
 
@@ -3465,19 +3811,19 @@ data ObjectFilterStatus
       -- ^ @ASSIGNED@
     | OFSNone
       -- ^ @NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectFilterStatus
 
-instance FromText ObjectFilterStatus where
-    fromText = \case
-        "ALL" -> Just OFSAll
-        "ASSIGNED" -> Just OFSAssigned
-        "NONE" -> Just OFSNone
-        _ -> Nothing
+instance FromHttpApiData ObjectFilterStatus where
+    parseQueryParam = \case
+        "ALL" -> Right OFSAll
+        "ASSIGNED" -> Right OFSAssigned
+        "NONE" -> Right OFSNone
+        x -> Left ("Unable to parse ObjectFilterStatus from: " <> x)
 
-instance ToText ObjectFilterStatus where
-    toText = \case
+instance ToHttpApiData ObjectFilterStatus where
+    toQueryParam = \case
         OFSAll -> "ALL"
         OFSAssigned -> "ASSIGNED"
         OFSNone -> "NONE"
@@ -3494,18 +3840,18 @@ data CampaignCreativeAssociationsListSortOrder
       -- ^ @ASCENDING@
     | CCALSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CampaignCreativeAssociationsListSortOrder
 
-instance FromText CampaignCreativeAssociationsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just CCALSOAscending
-        "DESCENDING" -> Just CCALSODescending
-        _ -> Nothing
+instance FromHttpApiData CampaignCreativeAssociationsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right CCALSOAscending
+        "DESCENDING" -> Right CCALSODescending
+        x -> Left ("Unable to parse CampaignCreativeAssociationsListSortOrder from: " <> x)
 
-instance ToText CampaignCreativeAssociationsListSortOrder where
-    toText = \case
+instance ToHttpApiData CampaignCreativeAssociationsListSortOrder where
+    toQueryParam = \case
         CCALSOAscending -> "ASCENDING"
         CCALSODescending -> "DESCENDING"
 
@@ -3521,18 +3867,18 @@ data FloodlightActivitiesListSortField
       -- ^ @ID@
     | FALSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivitiesListSortField
 
-instance FromText FloodlightActivitiesListSortField where
-    fromText = \case
-        "ID" -> Just FALSFID
-        "NAME" -> Just FALSFName
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivitiesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right FALSFID
+        "NAME" -> Right FALSFName
+        x -> Left ("Unable to parse FloodlightActivitiesListSortField from: " <> x)
 
-instance ToText FloodlightActivitiesListSortField where
-    toText = \case
+instance ToHttpApiData FloodlightActivitiesListSortField where
+    toQueryParam = \case
         FALSFID -> "ID"
         FALSFName -> "NAME"
 
@@ -3544,112 +3890,112 @@ instance ToJSON FloodlightActivitiesListSortField where
 
 -- | Select only creatives with these creative types.
 data CreativesListTypes
-    = BrandSafeDefaultInstreamVideo
+    = CLTBrandSafeDefaultInstreamVideo
       -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
-    | CustomInpage
-      -- ^ @CUSTOM_INPAGE@
-    | CustomInterstitial
-      -- ^ @CUSTOM_INTERSTITIAL@
-    | EnhancedBanner
-      -- ^ @ENHANCED_BANNER@
-    | EnhancedImage
-      -- ^ @ENHANCED_IMAGE@
-    | FlashInpage
+    | CLTCustomDisplay
+      -- ^ @CUSTOM_DISPLAY@
+    | CLTCustomDisplayInterstitial
+      -- ^ @CUSTOM_DISPLAY_INTERSTITIAL@
+    | CLTDisplay
+      -- ^ @DISPLAY@
+    | CLTDisplayImageGallery
+      -- ^ @DISPLAY_IMAGE_GALLERY@
+    | CLTDisplayRedirect
+      -- ^ @DISPLAY_REDIRECT@
+    | CLTFlashInpage
       -- ^ @FLASH_INPAGE@
-    | HTML5Banner
+    | CLTHTML5Banner
       -- ^ @HTML5_BANNER@
-    | Image
+    | CLTImage
       -- ^ @IMAGE@
-    | InstreamVideo
+    | CLTInstreamVideo
       -- ^ @INSTREAM_VIDEO@
-    | InternalRedirect
+    | CLTInstreamVideoRedirect
+      -- ^ @INSTREAM_VIDEO_REDIRECT@
+    | CLTInternalRedirect
       -- ^ @INTERNAL_REDIRECT@
-    | InterstitialInternalRedirect
+    | CLTInterstitialInternalRedirect
       -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
-    | Redirect
-      -- ^ @REDIRECT@
-    | RichMediaExpanding
-      -- ^ @RICH_MEDIA_EXPANDING@
-    | RichMediaImExpand
+    | CLTRichMediaDisplayBanner
+      -- ^ @RICH_MEDIA_DISPLAY_BANNER@
+    | CLTRichMediaDisplayExpanding
+      -- ^ @RICH_MEDIA_DISPLAY_EXPANDING@
+    | CLTRichMediaDisplayInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_INTERSTITIAL@
+    | CLTRichMediaDisplayMultiFloatingInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL@
+    | CLTRichMediaImExpand
       -- ^ @RICH_MEDIA_IM_EXPAND@
-    | RichMediaInpage
-      -- ^ @RICH_MEDIA_INPAGE@
-    | RichMediaInpageFloating
+    | CLTRichMediaInpageFloating
       -- ^ @RICH_MEDIA_INPAGE_FLOATING@
-    | RichMediaInterstitialFloat
-      -- ^ @RICH_MEDIA_INTERSTITIAL_FLOAT@
-    | RichMediaMobileInApp
+    | CLTRichMediaMobileInApp
       -- ^ @RICH_MEDIA_MOBILE_IN_APP@
-    | RichMediaMultiFloating
-      -- ^ @RICH_MEDIA_MULTI_FLOATING@
-    | RichMediaPeelDown
+    | CLTRichMediaPeelDown
       -- ^ @RICH_MEDIA_PEEL_DOWN@
-    | TrackingText
+    | CLTTrackingText
       -- ^ @TRACKING_TEXT@
-    | VastRedirect
-      -- ^ @VAST_REDIRECT@
-    | VpaidLinear
-      -- ^ @VPAID_LINEAR@
-    | VpaidNonLinear
-      -- ^ @VPAID_NON_LINEAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+    | CLTVpaidLinearVideo
+      -- ^ @VPAID_LINEAR_VIDEO@
+    | CLTVpaidNonLinearVideo
+      -- ^ @VPAID_NON_LINEAR_VIDEO@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativesListTypes
 
-instance FromText CreativesListTypes where
-    fromText = \case
-        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Just BrandSafeDefaultInstreamVideo
-        "CUSTOM_INPAGE" -> Just CustomInpage
-        "CUSTOM_INTERSTITIAL" -> Just CustomInterstitial
-        "ENHANCED_BANNER" -> Just EnhancedBanner
-        "ENHANCED_IMAGE" -> Just EnhancedImage
-        "FLASH_INPAGE" -> Just FlashInpage
-        "HTML5_BANNER" -> Just HTML5Banner
-        "IMAGE" -> Just Image
-        "INSTREAM_VIDEO" -> Just InstreamVideo
-        "INTERNAL_REDIRECT" -> Just InternalRedirect
-        "INTERSTITIAL_INTERNAL_REDIRECT" -> Just InterstitialInternalRedirect
-        "REDIRECT" -> Just Redirect
-        "RICH_MEDIA_EXPANDING" -> Just RichMediaExpanding
-        "RICH_MEDIA_IM_EXPAND" -> Just RichMediaImExpand
-        "RICH_MEDIA_INPAGE" -> Just RichMediaInpage
-        "RICH_MEDIA_INPAGE_FLOATING" -> Just RichMediaInpageFloating
-        "RICH_MEDIA_INTERSTITIAL_FLOAT" -> Just RichMediaInterstitialFloat
-        "RICH_MEDIA_MOBILE_IN_APP" -> Just RichMediaMobileInApp
-        "RICH_MEDIA_MULTI_FLOATING" -> Just RichMediaMultiFloating
-        "RICH_MEDIA_PEEL_DOWN" -> Just RichMediaPeelDown
-        "TRACKING_TEXT" -> Just TrackingText
-        "VAST_REDIRECT" -> Just VastRedirect
-        "VPAID_LINEAR" -> Just VpaidLinear
-        "VPAID_NON_LINEAR" -> Just VpaidNonLinear
-        _ -> Nothing
+instance FromHttpApiData CreativesListTypes where
+    parseQueryParam = \case
+        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Right CLTBrandSafeDefaultInstreamVideo
+        "CUSTOM_DISPLAY" -> Right CLTCustomDisplay
+        "CUSTOM_DISPLAY_INTERSTITIAL" -> Right CLTCustomDisplayInterstitial
+        "DISPLAY" -> Right CLTDisplay
+        "DISPLAY_IMAGE_GALLERY" -> Right CLTDisplayImageGallery
+        "DISPLAY_REDIRECT" -> Right CLTDisplayRedirect
+        "FLASH_INPAGE" -> Right CLTFlashInpage
+        "HTML5_BANNER" -> Right CLTHTML5Banner
+        "IMAGE" -> Right CLTImage
+        "INSTREAM_VIDEO" -> Right CLTInstreamVideo
+        "INSTREAM_VIDEO_REDIRECT" -> Right CLTInstreamVideoRedirect
+        "INTERNAL_REDIRECT" -> Right CLTInternalRedirect
+        "INTERSTITIAL_INTERNAL_REDIRECT" -> Right CLTInterstitialInternalRedirect
+        "RICH_MEDIA_DISPLAY_BANNER" -> Right CLTRichMediaDisplayBanner
+        "RICH_MEDIA_DISPLAY_EXPANDING" -> Right CLTRichMediaDisplayExpanding
+        "RICH_MEDIA_DISPLAY_INTERSTITIAL" -> Right CLTRichMediaDisplayInterstitial
+        "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL" -> Right CLTRichMediaDisplayMultiFloatingInterstitial
+        "RICH_MEDIA_IM_EXPAND" -> Right CLTRichMediaImExpand
+        "RICH_MEDIA_INPAGE_FLOATING" -> Right CLTRichMediaInpageFloating
+        "RICH_MEDIA_MOBILE_IN_APP" -> Right CLTRichMediaMobileInApp
+        "RICH_MEDIA_PEEL_DOWN" -> Right CLTRichMediaPeelDown
+        "TRACKING_TEXT" -> Right CLTTrackingText
+        "VPAID_LINEAR_VIDEO" -> Right CLTVpaidLinearVideo
+        "VPAID_NON_LINEAR_VIDEO" -> Right CLTVpaidNonLinearVideo
+        x -> Left ("Unable to parse CreativesListTypes from: " <> x)
 
-instance ToText CreativesListTypes where
-    toText = \case
-        BrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
-        CustomInpage -> "CUSTOM_INPAGE"
-        CustomInterstitial -> "CUSTOM_INTERSTITIAL"
-        EnhancedBanner -> "ENHANCED_BANNER"
-        EnhancedImage -> "ENHANCED_IMAGE"
-        FlashInpage -> "FLASH_INPAGE"
-        HTML5Banner -> "HTML5_BANNER"
-        Image -> "IMAGE"
-        InstreamVideo -> "INSTREAM_VIDEO"
-        InternalRedirect -> "INTERNAL_REDIRECT"
-        InterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
-        Redirect -> "REDIRECT"
-        RichMediaExpanding -> "RICH_MEDIA_EXPANDING"
-        RichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
-        RichMediaInpage -> "RICH_MEDIA_INPAGE"
-        RichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
-        RichMediaInterstitialFloat -> "RICH_MEDIA_INTERSTITIAL_FLOAT"
-        RichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
-        RichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
-        RichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
-        TrackingText -> "TRACKING_TEXT"
-        VastRedirect -> "VAST_REDIRECT"
-        VpaidLinear -> "VPAID_LINEAR"
-        VpaidNonLinear -> "VPAID_NON_LINEAR"
+instance ToHttpApiData CreativesListTypes where
+    toQueryParam = \case
+        CLTBrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
+        CLTCustomDisplay -> "CUSTOM_DISPLAY"
+        CLTCustomDisplayInterstitial -> "CUSTOM_DISPLAY_INTERSTITIAL"
+        CLTDisplay -> "DISPLAY"
+        CLTDisplayImageGallery -> "DISPLAY_IMAGE_GALLERY"
+        CLTDisplayRedirect -> "DISPLAY_REDIRECT"
+        CLTFlashInpage -> "FLASH_INPAGE"
+        CLTHTML5Banner -> "HTML5_BANNER"
+        CLTImage -> "IMAGE"
+        CLTInstreamVideo -> "INSTREAM_VIDEO"
+        CLTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
+        CLTInternalRedirect -> "INTERNAL_REDIRECT"
+        CLTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
+        CLTRichMediaDisplayBanner -> "RICH_MEDIA_DISPLAY_BANNER"
+        CLTRichMediaDisplayExpanding -> "RICH_MEDIA_DISPLAY_EXPANDING"
+        CLTRichMediaDisplayInterstitial -> "RICH_MEDIA_DISPLAY_INTERSTITIAL"
+        CLTRichMediaDisplayMultiFloatingInterstitial -> "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL"
+        CLTRichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
+        CLTRichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
+        CLTRichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
+        CLTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
+        CLTTrackingText -> "TRACKING_TEXT"
+        CLTVpaidLinearVideo -> "VPAID_LINEAR_VIDEO"
+        CLTVpaidNonLinearVideo -> "VPAID_NON_LINEAR_VIDEO"
 
 instance FromJSON CreativesListTypes where
     parseJSON = parseJSONText "CreativesListTypes"
@@ -3666,20 +4012,20 @@ data DirectorySiteInpageTagFormatsItem
       -- ^ @JAVASCRIPT_INPAGE@
     | Standard
       -- ^ @STANDARD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteInpageTagFormatsItem
 
-instance FromText DirectorySiteInpageTagFormatsItem where
-    fromText = \case
-        "IFRAME_JAVASCRIPT_INPAGE" -> Just IframeJavascriptInpage
-        "INTERNAL_REDIRECT_INPAGE" -> Just InternalRedirectInpage
-        "JAVASCRIPT_INPAGE" -> Just JavascriptInpage
-        "STANDARD" -> Just Standard
-        _ -> Nothing
+instance FromHttpApiData DirectorySiteInpageTagFormatsItem where
+    parseQueryParam = \case
+        "IFRAME_JAVASCRIPT_INPAGE" -> Right IframeJavascriptInpage
+        "INTERNAL_REDIRECT_INPAGE" -> Right InternalRedirectInpage
+        "JAVASCRIPT_INPAGE" -> Right JavascriptInpage
+        "STANDARD" -> Right Standard
+        x -> Left ("Unable to parse DirectorySiteInpageTagFormatsItem from: " <> x)
 
-instance ToText DirectorySiteInpageTagFormatsItem where
-    toText = \case
+instance ToHttpApiData DirectorySiteInpageTagFormatsItem where
+    toQueryParam = \case
         IframeJavascriptInpage -> "IFRAME_JAVASCRIPT_INPAGE"
         InternalRedirectInpage -> "INTERNAL_REDIRECT_INPAGE"
         JavascriptInpage -> "JAVASCRIPT_INPAGE"
@@ -3692,8 +4038,9 @@ instance ToJSON DirectorySiteInpageTagFormatsItem where
     toJSON = toJSONText
 
 -- | Window mode options for flash assets. Applicable to the following
--- creative types: FLASH_INPAGE, RICH_MEDIA_EXPANDING,
--- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_INPAGE, and RICH_MEDIA_INPAGE_FLOATING.
+-- creative types: FLASH_INPAGE, RICH_MEDIA_DISPLAY_EXPANDING,
+-- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_DISPLAY_BANNER, and
+-- RICH_MEDIA_INPAGE_FLOATING.
 data CreativeAssetWindowMode
     = Opaque
       -- ^ @OPAQUE@
@@ -3701,19 +4048,19 @@ data CreativeAssetWindowMode
       -- ^ @TRANSPARENT@
     | Window
       -- ^ @WINDOW@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetWindowMode
 
-instance FromText CreativeAssetWindowMode where
-    fromText = \case
-        "OPAQUE" -> Just Opaque
-        "TRANSPARENT" -> Just Transparent
-        "WINDOW" -> Just Window
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetWindowMode where
+    parseQueryParam = \case
+        "OPAQUE" -> Right Opaque
+        "TRANSPARENT" -> Right Transparent
+        "WINDOW" -> Right Window
+        x -> Left ("Unable to parse CreativeAssetWindowMode from: " <> x)
 
-instance ToText CreativeAssetWindowMode where
-    toText = \case
+instance ToHttpApiData CreativeAssetWindowMode where
+    toQueryParam = \case
         Opaque -> "OPAQUE"
         Transparent -> "TRANSPARENT"
         Window -> "WINDOW"
@@ -3725,7 +4072,8 @@ instance ToJSON CreativeAssetWindowMode where
     toJSON = toJSONText
 
 -- | Possible alignments for an asset. This is a read-only field. Applicable
--- to the following creative types: RICH_MEDIA_MULTI_FLOATING.
+-- to the following creative types:
+-- RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL.
 data CreativeAssetAlignment
     = AlignmentBottom
       -- ^ @ALIGNMENT_BOTTOM@
@@ -3735,20 +4083,20 @@ data CreativeAssetAlignment
       -- ^ @ALIGNMENT_RIGHT@
     | AlignmentTop
       -- ^ @ALIGNMENT_TOP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetAlignment
 
-instance FromText CreativeAssetAlignment where
-    fromText = \case
-        "ALIGNMENT_BOTTOM" -> Just AlignmentBottom
-        "ALIGNMENT_LEFT" -> Just AlignmentLeft
-        "ALIGNMENT_RIGHT" -> Just AlignmentRight
-        "ALIGNMENT_TOP" -> Just AlignmentTop
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetAlignment where
+    parseQueryParam = \case
+        "ALIGNMENT_BOTTOM" -> Right AlignmentBottom
+        "ALIGNMENT_LEFT" -> Right AlignmentLeft
+        "ALIGNMENT_RIGHT" -> Right AlignmentRight
+        "ALIGNMENT_TOP" -> Right AlignmentTop
+        x -> Left ("Unable to parse CreativeAssetAlignment from: " <> x)
 
-instance ToText CreativeAssetAlignment where
-    toText = \case
+instance ToHttpApiData CreativeAssetAlignment where
+    toQueryParam = \case
         AlignmentBottom -> "ALIGNMENT_BOTTOM"
         AlignmentLeft -> "ALIGNMENT_LEFT"
         AlignmentRight -> "ALIGNMENT_RIGHT"
@@ -3766,18 +4114,18 @@ data RemarketingListsListSortOrder
       -- ^ @ASCENDING@
     | RLLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RemarketingListsListSortOrder
 
-instance FromText RemarketingListsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just RLLSOAscending
-        "DESCENDING" -> Just RLLSODescending
-        _ -> Nothing
+instance FromHttpApiData RemarketingListsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right RLLSOAscending
+        "DESCENDING" -> Right RLLSODescending
+        x -> Left ("Unable to parse RemarketingListsListSortOrder from: " <> x)
 
-instance ToText RemarketingListsListSortOrder where
-    toText = \case
+instance ToHttpApiData RemarketingListsListSortOrder where
+    toQueryParam = \case
         RLLSOAscending -> "ASCENDING"
         RLLSODescending -> "DESCENDING"
 
@@ -3799,21 +4147,21 @@ data PlacementGroupsListPricingTypes
       -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
     | PGLPTPricingTypeFlatRateImpressions
       -- ^ @PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementGroupsListPricingTypes
 
-instance FromText PlacementGroupsListPricingTypes where
-    fromText = \case
-        "PRICING_TYPE_CPA" -> Just PGLPTPricingTypeCpa
-        "PRICING_TYPE_CPC" -> Just PGLPTPricingTypeCpc
-        "PRICING_TYPE_CPM" -> Just PGLPTPricingTypeCpm
-        "PRICING_TYPE_FLAT_RATE_CLICKS" -> Just PGLPTPricingTypeFlatRateClicks
-        "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Just PGLPTPricingTypeFlatRateImpressions
-        _ -> Nothing
+instance FromHttpApiData PlacementGroupsListPricingTypes where
+    parseQueryParam = \case
+        "PRICING_TYPE_CPA" -> Right PGLPTPricingTypeCpa
+        "PRICING_TYPE_CPC" -> Right PGLPTPricingTypeCpc
+        "PRICING_TYPE_CPM" -> Right PGLPTPricingTypeCpm
+        "PRICING_TYPE_FLAT_RATE_CLICKS" -> Right PGLPTPricingTypeFlatRateClicks
+        "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Right PGLPTPricingTypeFlatRateImpressions
+        x -> Left ("Unable to parse PlacementGroupsListPricingTypes from: " <> x)
 
-instance ToText PlacementGroupsListPricingTypes where
-    toText = \case
+instance ToHttpApiData PlacementGroupsListPricingTypes where
+    toQueryParam = \case
         PGLPTPricingTypeCpa -> "PRICING_TYPE_CPA"
         PGLPTPricingTypeCpc -> "PRICING_TYPE_CPC"
         PGLPTPricingTypeCpm -> "PRICING_TYPE_CPM"
@@ -3824,6 +4172,42 @@ instance FromJSON PlacementGroupsListPricingTypes where
     parseJSON = parseJSONText "PlacementGroupsListPricingTypes"
 
 instance ToJSON PlacementGroupsListPricingTypes where
+    toJSON = toJSONText
+
+-- | Type of the object of this dynamic targeting key. This is a required
+-- field.
+data DynamicTargetingKeysDeleteObjectType
+    = DTKDOTObjectAd
+      -- ^ @OBJECT_AD@
+    | DTKDOTObjectAdvertiser
+      -- ^ @OBJECT_ADVERTISER@
+    | DTKDOTObjectCreative
+      -- ^ @OBJECT_CREATIVE@
+    | DTKDOTObjectPlacement
+      -- ^ @OBJECT_PLACEMENT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DynamicTargetingKeysDeleteObjectType
+
+instance FromHttpApiData DynamicTargetingKeysDeleteObjectType where
+    parseQueryParam = \case
+        "OBJECT_AD" -> Right DTKDOTObjectAd
+        "OBJECT_ADVERTISER" -> Right DTKDOTObjectAdvertiser
+        "OBJECT_CREATIVE" -> Right DTKDOTObjectCreative
+        "OBJECT_PLACEMENT" -> Right DTKDOTObjectPlacement
+        x -> Left ("Unable to parse DynamicTargetingKeysDeleteObjectType from: " <> x)
+
+instance ToHttpApiData DynamicTargetingKeysDeleteObjectType where
+    toQueryParam = \case
+        DTKDOTObjectAd -> "OBJECT_AD"
+        DTKDOTObjectAdvertiser -> "OBJECT_ADVERTISER"
+        DTKDOTObjectCreative -> "OBJECT_CREATIVE"
+        DTKDOTObjectPlacement -> "OBJECT_PLACEMENT"
+
+instance FromJSON DynamicTargetingKeysDeleteObjectType where
+    parseJSON = parseJSONText "DynamicTargetingKeysDeleteObjectType"
+
+instance ToJSON DynamicTargetingKeysDeleteObjectType where
     toJSON = toJSONText
 
 -- | Maximum number of active ads allowed for this account.
@@ -3838,21 +4222,21 @@ data AccountActiveAdsLimitTier
       -- ^ @ACTIVE_ADS_TIER_40K@
     | AAALTActiveAdsTier75K
       -- ^ @ACTIVE_ADS_TIER_75K@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountActiveAdsLimitTier
 
-instance FromText AccountActiveAdsLimitTier where
-    fromText = \case
-        "ACTIVE_ADS_TIER_100K" -> Just AAALTActiveAdsTier100K
-        "ACTIVE_ADS_TIER_200K" -> Just AAALTActiveAdsTier200K
-        "ACTIVE_ADS_TIER_300K" -> Just AAALTActiveAdsTier300K
-        "ACTIVE_ADS_TIER_40K" -> Just AAALTActiveAdsTier40K
-        "ACTIVE_ADS_TIER_75K" -> Just AAALTActiveAdsTier75K
-        _ -> Nothing
+instance FromHttpApiData AccountActiveAdsLimitTier where
+    parseQueryParam = \case
+        "ACTIVE_ADS_TIER_100K" -> Right AAALTActiveAdsTier100K
+        "ACTIVE_ADS_TIER_200K" -> Right AAALTActiveAdsTier200K
+        "ACTIVE_ADS_TIER_300K" -> Right AAALTActiveAdsTier300K
+        "ACTIVE_ADS_TIER_40K" -> Right AAALTActiveAdsTier40K
+        "ACTIVE_ADS_TIER_75K" -> Right AAALTActiveAdsTier75K
+        x -> Left ("Unable to parse AccountActiveAdsLimitTier from: " <> x)
 
-instance ToText AccountActiveAdsLimitTier where
-    toText = \case
+instance ToHttpApiData AccountActiveAdsLimitTier where
+    toQueryParam = \case
         AAALTActiveAdsTier100K -> "ACTIVE_ADS_TIER_100K"
         AAALTActiveAdsTier200K -> "ACTIVE_ADS_TIER_200K"
         AAALTActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
@@ -3871,18 +4255,18 @@ data AccountsListSortOrder
       -- ^ @ASCENDING@
     | ADescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountsListSortOrder
 
-instance FromText AccountsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just AAscending
-        "DESCENDING" -> Just ADescending
-        _ -> Nothing
+instance FromHttpApiData AccountsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right AAscending
+        "DESCENDING" -> Right ADescending
+        x -> Left ("Unable to parse AccountsListSortOrder from: " <> x)
 
-instance ToText AccountsListSortOrder where
-    toText = \case
+instance ToHttpApiData AccountsListSortOrder where
+    toQueryParam = \case
         AAscending -> "ASCENDING"
         ADescending -> "DESCENDING"
 
@@ -3898,18 +4282,18 @@ data SubAccountsListSortField
       -- ^ @ID@
     | SALSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SubAccountsListSortField
 
-instance FromText SubAccountsListSortField where
-    fromText = \case
-        "ID" -> Just SALSFID
-        "NAME" -> Just SALSFName
-        _ -> Nothing
+instance FromHttpApiData SubAccountsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right SALSFID
+        "NAME" -> Right SALSFName
+        x -> Left ("Unable to parse SubAccountsListSortField from: " <> x)
 
-instance ToText SubAccountsListSortField where
-    toText = \case
+instance ToHttpApiData SubAccountsListSortField where
+    toQueryParam = \case
         SALSFID -> "ID"
         SALSFName -> "NAME"
 
@@ -3925,18 +4309,18 @@ data AdsListSortField
       -- ^ @ID@
     | ALSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListSortField
 
-instance FromText AdsListSortField where
-    fromText = \case
-        "ID" -> Just ALSFID
-        "NAME" -> Just ALSFName
-        _ -> Nothing
+instance FromHttpApiData AdsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right ALSFID
+        "NAME" -> Right ALSFName
+        x -> Left ("Unable to parse AdsListSortField from: " <> x)
 
-instance ToText AdsListSortField where
-    toText = \case
+instance ToHttpApiData AdsListSortField where
+    toQueryParam = \case
         ALSFID -> "ID"
         ALSFName -> "NAME"
 
@@ -3952,18 +4336,18 @@ data ProjectsListSortField
       -- ^ @ID@
     | PName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProjectsListSortField
 
-instance FromText ProjectsListSortField where
-    fromText = \case
-        "ID" -> Just PID
-        "NAME" -> Just PName
-        _ -> Nothing
+instance FromHttpApiData ProjectsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right PID
+        "NAME" -> Right PName
+        x -> Left ("Unable to parse ProjectsListSortField from: " <> x)
 
-instance ToText ProjectsListSortField where
-    toText = \case
+instance ToHttpApiData ProjectsListSortField where
+    toQueryParam = \case
         PID -> "ID"
         PName -> "NAME"
 
@@ -3983,20 +4367,20 @@ data AdsListType
       -- ^ @AD_SERVING_STANDARD_AD@
     | AdServingTracking
       -- ^ @AD_SERVING_TRACKING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListType
 
-instance FromText AdsListType where
-    fromText = \case
-        "AD_SERVING_CLICK_TRACKER" -> Just AdServingClickTracker
-        "AD_SERVING_DEFAULT_AD" -> Just AdServingDefaultAd
-        "AD_SERVING_STANDARD_AD" -> Just AdServingStandardAd
-        "AD_SERVING_TRACKING" -> Just AdServingTracking
-        _ -> Nothing
+instance FromHttpApiData AdsListType where
+    parseQueryParam = \case
+        "AD_SERVING_CLICK_TRACKER" -> Right AdServingClickTracker
+        "AD_SERVING_DEFAULT_AD" -> Right AdServingDefaultAd
+        "AD_SERVING_STANDARD_AD" -> Right AdServingStandardAd
+        "AD_SERVING_TRACKING" -> Right AdServingTracking
+        x -> Left ("Unable to parse AdsListType from: " <> x)
 
-instance ToText AdsListType where
-    toText = \case
+instance ToHttpApiData AdsListType where
+    toQueryParam = \case
         AdServingClickTracker -> "AD_SERVING_CLICK_TRACKER"
         AdServingDefaultAd -> "AD_SERVING_DEFAULT_AD"
         AdServingStandardAd -> "AD_SERVING_STANDARD_AD"
@@ -4018,24 +4402,28 @@ data CreativeOptimizationConfigurationOptimizationModel
       -- ^ @POST_CLICK_AND_IMPRESSION@
     | PostImpression
       -- ^ @POST_IMPRESSION@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+    | VideoCompletion
+      -- ^ @VIDEO_COMPLETION@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeOptimizationConfigurationOptimizationModel
 
-instance FromText CreativeOptimizationConfigurationOptimizationModel where
-    fromText = \case
-        "CLICK" -> Just Click
-        "POST_CLICK" -> Just PostClick
-        "POST_CLICK_AND_IMPRESSION" -> Just PostClickAndImpression
-        "POST_IMPRESSION" -> Just PostImpression
-        _ -> Nothing
+instance FromHttpApiData CreativeOptimizationConfigurationOptimizationModel where
+    parseQueryParam = \case
+        "CLICK" -> Right Click
+        "POST_CLICK" -> Right PostClick
+        "POST_CLICK_AND_IMPRESSION" -> Right PostClickAndImpression
+        "POST_IMPRESSION" -> Right PostImpression
+        "VIDEO_COMPLETION" -> Right VideoCompletion
+        x -> Left ("Unable to parse CreativeOptimizationConfigurationOptimizationModel from: " <> x)
 
-instance ToText CreativeOptimizationConfigurationOptimizationModel where
-    toText = \case
+instance ToHttpApiData CreativeOptimizationConfigurationOptimizationModel where
+    toQueryParam = \case
         Click -> "CLICK"
         PostClick -> "POST_CLICK"
         PostClickAndImpression -> "POST_CLICK_AND_IMPRESSION"
         PostImpression -> "POST_IMPRESSION"
+        VideoCompletion -> "VIDEO_COMPLETION"
 
 instance FromJSON CreativeOptimizationConfigurationOptimizationModel where
     parseJSON = parseJSONText "CreativeOptimizationConfigurationOptimizationModel"
@@ -4049,18 +4437,18 @@ data AccountPermissionLevel
       -- ^ @ADMINISTRATOR@
     | User
       -- ^ @USER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountPermissionLevel
 
-instance FromText AccountPermissionLevel where
-    fromText = \case
-        "ADMINISTRATOR" -> Just Administrator
-        "USER" -> Just User
-        _ -> Nothing
+instance FromHttpApiData AccountPermissionLevel where
+    parseQueryParam = \case
+        "ADMINISTRATOR" -> Right Administrator
+        "USER" -> Right User
+        x -> Left ("Unable to parse AccountPermissionLevel from: " <> x)
 
-instance ToText AccountPermissionLevel where
-    toText = \case
+instance ToHttpApiData AccountPermissionLevel where
+    toQueryParam = \case
         Administrator -> "ADMINISTRATOR"
         User -> "USER"
 
@@ -4083,19 +4471,19 @@ data ListPopulationTermType
       -- ^ @LIST_MEMBERSHIP_TERM@
     | ReferrerTerm
       -- ^ @REFERRER_TERM@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ListPopulationTermType
 
-instance FromText ListPopulationTermType where
-    fromText = \case
-        "CUSTOM_VARIABLE_TERM" -> Just CustomVariableTerm
-        "LIST_MEMBERSHIP_TERM" -> Just ListMembershipTerm
-        "REFERRER_TERM" -> Just ReferrerTerm
-        _ -> Nothing
+instance FromHttpApiData ListPopulationTermType where
+    parseQueryParam = \case
+        "CUSTOM_VARIABLE_TERM" -> Right CustomVariableTerm
+        "LIST_MEMBERSHIP_TERM" -> Right ListMembershipTerm
+        "REFERRER_TERM" -> Right ReferrerTerm
+        x -> Left ("Unable to parse ListPopulationTermType from: " <> x)
 
-instance ToText ListPopulationTermType where
-    toText = \case
+instance ToHttpApiData ListPopulationTermType where
+    toQueryParam = \case
         CustomVariableTerm -> "CUSTOM_VARIABLE_TERM"
         ListMembershipTerm -> "LIST_MEMBERSHIP_TERM"
         ReferrerTerm -> "REFERRER_TERM"
@@ -4112,18 +4500,18 @@ data AdvertiserGroupsListSortOrder
       -- ^ @ASCENDING@
     | AGLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertiserGroupsListSortOrder
 
-instance FromText AdvertiserGroupsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just AGLSOAscending
-        "DESCENDING" -> Just AGLSODescending
-        _ -> Nothing
+instance FromHttpApiData AdvertiserGroupsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right AGLSOAscending
+        "DESCENDING" -> Right AGLSODescending
+        x -> Left ("Unable to parse AdvertiserGroupsListSortOrder from: " <> x)
 
-instance ToText AdvertiserGroupsListSortOrder where
-    toText = \case
+instance ToHttpApiData AdvertiserGroupsListSortOrder where
+    toQueryParam = \case
         AGLSOAscending -> "ASCENDING"
         AGLSODescending -> "DESCENDING"
 
@@ -4139,18 +4527,18 @@ data CreativeFieldValuesListSortOrder
       -- ^ @ASCENDING@
     | CFVLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeFieldValuesListSortOrder
 
-instance FromText CreativeFieldValuesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just CFVLSOAscending
-        "DESCENDING" -> Just CFVLSODescending
-        _ -> Nothing
+instance FromHttpApiData CreativeFieldValuesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right CFVLSOAscending
+        "DESCENDING" -> Right CFVLSODescending
+        x -> Left ("Unable to parse CreativeFieldValuesListSortOrder from: " <> x)
 
-instance ToText CreativeFieldValuesListSortOrder where
-    toText = \case
+instance ToHttpApiData CreativeFieldValuesListSortOrder where
+    toQueryParam = \case
         CFVLSOAscending -> "ASCENDING"
         CFVLSODescending -> "DESCENDING"
 
@@ -4166,18 +4554,18 @@ data SortedDimensionSortOrder
       -- ^ @ASCENDING@
     | SDSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SortedDimensionSortOrder
 
-instance FromText SortedDimensionSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just SDSOAscending
-        "DESCENDING" -> Just SDSODescending
-        _ -> Nothing
+instance FromHttpApiData SortedDimensionSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right SDSOAscending
+        "DESCENDING" -> Right SDSODescending
+        x -> Left ("Unable to parse SortedDimensionSortOrder from: " <> x)
 
-instance ToText SortedDimensionSortOrder where
-    toText = \case
+instance ToHttpApiData SortedDimensionSortOrder where
+    toQueryParam = \case
         SDSOAscending -> "ASCENDING"
         SDSODescending -> "DESCENDING"
 
@@ -4195,18 +4583,18 @@ data FilesListSortField
     | FLSFLastModifiedTime
       -- ^ @LAST_MODIFIED_TIME@
       -- Sort by \'lastmodifiedAt\' field.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilesListSortField
 
-instance FromText FilesListSortField where
-    fromText = \case
-        "ID" -> Just FLSFID
-        "LAST_MODIFIED_TIME" -> Just FLSFLastModifiedTime
-        _ -> Nothing
+instance FromHttpApiData FilesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right FLSFID
+        "LAST_MODIFIED_TIME" -> Right FLSFLastModifiedTime
+        x -> Left ("Unable to parse FilesListSortField from: " <> x)
 
-instance ToText FilesListSortField where
-    toText = \case
+instance ToHttpApiData FilesListSortField where
+    toQueryParam = \case
         FLSFID -> "ID"
         FLSFLastModifiedTime -> "LAST_MODIFIED_TIME"
 
@@ -4223,19 +4611,19 @@ data DirectorySiteInterstitialTagFormatsItem
       -- ^ @INTERNAL_REDIRECT_INTERSTITIAL@
     | JavascriptInterstitial
       -- ^ @JAVASCRIPT_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteInterstitialTagFormatsItem
 
-instance FromText DirectorySiteInterstitialTagFormatsItem where
-    fromText = \case
-        "IFRAME_JAVASCRIPT_INTERSTITIAL" -> Just IframeJavascriptInterstitial
-        "INTERNAL_REDIRECT_INTERSTITIAL" -> Just InternalRedirectInterstitial
-        "JAVASCRIPT_INTERSTITIAL" -> Just JavascriptInterstitial
-        _ -> Nothing
+instance FromHttpApiData DirectorySiteInterstitialTagFormatsItem where
+    parseQueryParam = \case
+        "IFRAME_JAVASCRIPT_INTERSTITIAL" -> Right IframeJavascriptInterstitial
+        "INTERNAL_REDIRECT_INTERSTITIAL" -> Right InternalRedirectInterstitial
+        "JAVASCRIPT_INTERSTITIAL" -> Right JavascriptInterstitial
+        x -> Left ("Unable to parse DirectorySiteInterstitialTagFormatsItem from: " <> x)
 
-instance ToText DirectorySiteInterstitialTagFormatsItem where
-    toText = \case
+instance ToHttpApiData DirectorySiteInterstitialTagFormatsItem where
+    toQueryParam = \case
         IframeJavascriptInterstitial -> "IFRAME_JAVASCRIPT_INTERSTITIAL"
         InternalRedirectInterstitial -> "INTERNAL_REDIRECT_INTERSTITIAL"
         JavascriptInterstitial -> "JAVASCRIPT_INTERSTITIAL"
@@ -4252,18 +4640,18 @@ data EventTagsListSortField
       -- ^ @ID@
     | ETLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagsListSortField
 
-instance FromText EventTagsListSortField where
-    fromText = \case
-        "ID" -> Just ETLSFID
-        "NAME" -> Just ETLSFName
-        _ -> Nothing
+instance FromHttpApiData EventTagsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right ETLSFID
+        "NAME" -> Right ETLSFName
+        x -> Left ("Unable to parse EventTagsListSortField from: " <> x)
 
-instance ToText EventTagsListSortField where
-    toText = \case
+instance ToHttpApiData EventTagsListSortField where
+    toQueryParam = \case
         ETLSFID -> "ID"
         ETLSFName -> "NAME"
 
@@ -4271,6 +4659,33 @@ instance FromJSON EventTagsListSortField where
     parseJSON = parseJSONText "EventTagsListSortField"
 
 instance ToJSON EventTagsListSortField where
+    toJSON = toJSONText
+
+-- | Type of inventory item.
+data InventoryItemType
+    = IITPlanningPlacementTypeCredit
+      -- ^ @PLANNING_PLACEMENT_TYPE_CREDIT@
+    | IITPlanningPlacementTypeRegular
+      -- ^ @PLANNING_PLACEMENT_TYPE_REGULAR@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InventoryItemType
+
+instance FromHttpApiData InventoryItemType where
+    parseQueryParam = \case
+        "PLANNING_PLACEMENT_TYPE_CREDIT" -> Right IITPlanningPlacementTypeCredit
+        "PLANNING_PLACEMENT_TYPE_REGULAR" -> Right IITPlanningPlacementTypeRegular
+        x -> Left ("Unable to parse InventoryItemType from: " <> x)
+
+instance ToHttpApiData InventoryItemType where
+    toQueryParam = \case
+        IITPlanningPlacementTypeCredit -> "PLANNING_PLACEMENT_TYPE_CREDIT"
+        IITPlanningPlacementTypeRegular -> "PLANNING_PLACEMENT_TYPE_REGULAR"
+
+instance FromJSON InventoryItemType where
+    parseJSON = parseJSONText "InventoryItemType"
+
+instance ToJSON InventoryItemType where
     toJSON = toJSONText
 
 -- | Offset top unit for an asset. This is a read-only field if the asset
@@ -4283,19 +4698,19 @@ data CreativeAssetPositionTopUnit
       -- ^ @OFFSET_UNIT_PIXEL@
     | CAPTUOffSetUnitPixelFromCenter
       -- ^ @OFFSET_UNIT_PIXEL_FROM_CENTER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetPositionTopUnit
 
-instance FromText CreativeAssetPositionTopUnit where
-    fromText = \case
-        "OFFSET_UNIT_PERCENT" -> Just CAPTUOffSetUnitPercent
-        "OFFSET_UNIT_PIXEL" -> Just CAPTUOffSetUnitPixel
-        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Just CAPTUOffSetUnitPixelFromCenter
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetPositionTopUnit where
+    parseQueryParam = \case
+        "OFFSET_UNIT_PERCENT" -> Right CAPTUOffSetUnitPercent
+        "OFFSET_UNIT_PIXEL" -> Right CAPTUOffSetUnitPixel
+        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Right CAPTUOffSetUnitPixelFromCenter
+        x -> Left ("Unable to parse CreativeAssetPositionTopUnit from: " <> x)
 
-instance ToText CreativeAssetPositionTopUnit where
-    toText = \case
+instance ToHttpApiData CreativeAssetPositionTopUnit where
+    toQueryParam = \case
         CAPTUOffSetUnitPercent -> "OFFSET_UNIT_PERCENT"
         CAPTUOffSetUnitPixel -> "OFFSET_UNIT_PIXEL"
         CAPTUOffSetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
@@ -4313,18 +4728,18 @@ data FloodlightActivityFloodlightActivityGroupType
       -- ^ @COUNTER@
     | FAFAGTSale
       -- ^ @SALE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityFloodlightActivityGroupType
 
-instance FromText FloodlightActivityFloodlightActivityGroupType where
-    fromText = \case
-        "COUNTER" -> Just FAFAGTCounter
-        "SALE" -> Just FAFAGTSale
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivityFloodlightActivityGroupType where
+    parseQueryParam = \case
+        "COUNTER" -> Right FAFAGTCounter
+        "SALE" -> Right FAFAGTSale
+        x -> Left ("Unable to parse FloodlightActivityFloodlightActivityGroupType from: " <> x)
 
-instance ToText FloodlightActivityFloodlightActivityGroupType where
-    toText = \case
+instance ToHttpApiData FloodlightActivityFloodlightActivityGroupType where
+    toQueryParam = \case
         FAFAGTCounter -> "COUNTER"
         FAFAGTSale -> "SALE"
 
@@ -4340,18 +4755,18 @@ data DirectorySiteContactsListSortOrder
       -- ^ @ASCENDING@
     | DSCLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteContactsListSortOrder
 
-instance FromText DirectorySiteContactsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just DSCLSOAscending
-        "DESCENDING" -> Just DSCLSODescending
-        _ -> Nothing
+instance FromHttpApiData DirectorySiteContactsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right DSCLSOAscending
+        "DESCENDING" -> Right DSCLSODescending
+        x -> Left ("Unable to parse DirectorySiteContactsListSortOrder from: " <> x)
 
-instance ToText DirectorySiteContactsListSortOrder where
-    toText = \case
+instance ToHttpApiData DirectorySiteContactsListSortOrder where
+    toQueryParam = \case
         DSCLSOAscending -> "ASCENDING"
         DSCLSODescending -> "DESCENDING"
 
@@ -4374,18 +4789,18 @@ data PricingGroupType
       -- ^ @PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE@
     | PlanningPlacementGroupTypeRoadblock
       -- ^ @PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PricingGroupType
 
-instance FromText PricingGroupType where
-    fromText = \case
-        "PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE" -> Just PlanningPlacementGroupTypePackage
-        "PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK" -> Just PlanningPlacementGroupTypeRoadblock
-        _ -> Nothing
+instance FromHttpApiData PricingGroupType where
+    parseQueryParam = \case
+        "PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE" -> Right PlanningPlacementGroupTypePackage
+        "PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK" -> Right PlanningPlacementGroupTypeRoadblock
+        x -> Left ("Unable to parse PricingGroupType from: " <> x)
 
-instance ToText PricingGroupType where
-    toText = \case
+instance ToHttpApiData PricingGroupType where
+    toQueryParam = \case
         PlanningPlacementGroupTypePackage -> "PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE"
         PlanningPlacementGroupTypeRoadblock -> "PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK"
 
@@ -4399,14 +4814,16 @@ instance ToJSON PricingGroupType where
 data AdsListCreativeType
     = ALCTBrandSafeDefaultInstreamVideo
       -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
-    | ALCTCustomInpage
-      -- ^ @CUSTOM_INPAGE@
-    | ALCTCustomInterstitial
-      -- ^ @CUSTOM_INTERSTITIAL@
-    | ALCTEnhancedBanner
-      -- ^ @ENHANCED_BANNER@
-    | ALCTEnhancedImage
-      -- ^ @ENHANCED_IMAGE@
+    | ALCTCustomDisplay
+      -- ^ @CUSTOM_DISPLAY@
+    | ALCTCustomDisplayInterstitial
+      -- ^ @CUSTOM_DISPLAY_INTERSTITIAL@
+    | ALCTDisplay
+      -- ^ @DISPLAY@
+    | ALCTDisplayImageGallery
+      -- ^ @DISPLAY_IMAGE_GALLERY@
+    | ALCTDisplayRedirect
+      -- ^ @DISPLAY_REDIRECT@
     | ALCTFlashInpage
       -- ^ @FLASH_INPAGE@
     | ALCTHTML5Banner
@@ -4415,94 +4832,92 @@ data AdsListCreativeType
       -- ^ @IMAGE@
     | ALCTInstreamVideo
       -- ^ @INSTREAM_VIDEO@
+    | ALCTInstreamVideoRedirect
+      -- ^ @INSTREAM_VIDEO_REDIRECT@
     | ALCTInternalRedirect
       -- ^ @INTERNAL_REDIRECT@
     | ALCTInterstitialInternalRedirect
       -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
-    | ALCTRedirect
-      -- ^ @REDIRECT@
-    | ALCTRichMediaExpanding
-      -- ^ @RICH_MEDIA_EXPANDING@
+    | ALCTRichMediaDisplayBanner
+      -- ^ @RICH_MEDIA_DISPLAY_BANNER@
+    | ALCTRichMediaDisplayExpanding
+      -- ^ @RICH_MEDIA_DISPLAY_EXPANDING@
+    | ALCTRichMediaDisplayInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_INTERSTITIAL@
+    | ALCTRichMediaDisplayMultiFloatingInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL@
     | ALCTRichMediaImExpand
       -- ^ @RICH_MEDIA_IM_EXPAND@
-    | ALCTRichMediaInpage
-      -- ^ @RICH_MEDIA_INPAGE@
     | ALCTRichMediaInpageFloating
       -- ^ @RICH_MEDIA_INPAGE_FLOATING@
-    | ALCTRichMediaInterstitialFloat
-      -- ^ @RICH_MEDIA_INTERSTITIAL_FLOAT@
     | ALCTRichMediaMobileInApp
       -- ^ @RICH_MEDIA_MOBILE_IN_APP@
-    | ALCTRichMediaMultiFloating
-      -- ^ @RICH_MEDIA_MULTI_FLOATING@
     | ALCTRichMediaPeelDown
       -- ^ @RICH_MEDIA_PEEL_DOWN@
     | ALCTTrackingText
       -- ^ @TRACKING_TEXT@
-    | ALCTVastRedirect
-      -- ^ @VAST_REDIRECT@
-    | ALCTVpaidLinear
-      -- ^ @VPAID_LINEAR@
-    | ALCTVpaidNonLinear
-      -- ^ @VPAID_NON_LINEAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+    | ALCTVpaidLinearVideo
+      -- ^ @VPAID_LINEAR_VIDEO@
+    | ALCTVpaidNonLinearVideo
+      -- ^ @VPAID_NON_LINEAR_VIDEO@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListCreativeType
 
-instance FromText AdsListCreativeType where
-    fromText = \case
-        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Just ALCTBrandSafeDefaultInstreamVideo
-        "CUSTOM_INPAGE" -> Just ALCTCustomInpage
-        "CUSTOM_INTERSTITIAL" -> Just ALCTCustomInterstitial
-        "ENHANCED_BANNER" -> Just ALCTEnhancedBanner
-        "ENHANCED_IMAGE" -> Just ALCTEnhancedImage
-        "FLASH_INPAGE" -> Just ALCTFlashInpage
-        "HTML5_BANNER" -> Just ALCTHTML5Banner
-        "IMAGE" -> Just ALCTImage
-        "INSTREAM_VIDEO" -> Just ALCTInstreamVideo
-        "INTERNAL_REDIRECT" -> Just ALCTInternalRedirect
-        "INTERSTITIAL_INTERNAL_REDIRECT" -> Just ALCTInterstitialInternalRedirect
-        "REDIRECT" -> Just ALCTRedirect
-        "RICH_MEDIA_EXPANDING" -> Just ALCTRichMediaExpanding
-        "RICH_MEDIA_IM_EXPAND" -> Just ALCTRichMediaImExpand
-        "RICH_MEDIA_INPAGE" -> Just ALCTRichMediaInpage
-        "RICH_MEDIA_INPAGE_FLOATING" -> Just ALCTRichMediaInpageFloating
-        "RICH_MEDIA_INTERSTITIAL_FLOAT" -> Just ALCTRichMediaInterstitialFloat
-        "RICH_MEDIA_MOBILE_IN_APP" -> Just ALCTRichMediaMobileInApp
-        "RICH_MEDIA_MULTI_FLOATING" -> Just ALCTRichMediaMultiFloating
-        "RICH_MEDIA_PEEL_DOWN" -> Just ALCTRichMediaPeelDown
-        "TRACKING_TEXT" -> Just ALCTTrackingText
-        "VAST_REDIRECT" -> Just ALCTVastRedirect
-        "VPAID_LINEAR" -> Just ALCTVpaidLinear
-        "VPAID_NON_LINEAR" -> Just ALCTVpaidNonLinear
-        _ -> Nothing
+instance FromHttpApiData AdsListCreativeType where
+    parseQueryParam = \case
+        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Right ALCTBrandSafeDefaultInstreamVideo
+        "CUSTOM_DISPLAY" -> Right ALCTCustomDisplay
+        "CUSTOM_DISPLAY_INTERSTITIAL" -> Right ALCTCustomDisplayInterstitial
+        "DISPLAY" -> Right ALCTDisplay
+        "DISPLAY_IMAGE_GALLERY" -> Right ALCTDisplayImageGallery
+        "DISPLAY_REDIRECT" -> Right ALCTDisplayRedirect
+        "FLASH_INPAGE" -> Right ALCTFlashInpage
+        "HTML5_BANNER" -> Right ALCTHTML5Banner
+        "IMAGE" -> Right ALCTImage
+        "INSTREAM_VIDEO" -> Right ALCTInstreamVideo
+        "INSTREAM_VIDEO_REDIRECT" -> Right ALCTInstreamVideoRedirect
+        "INTERNAL_REDIRECT" -> Right ALCTInternalRedirect
+        "INTERSTITIAL_INTERNAL_REDIRECT" -> Right ALCTInterstitialInternalRedirect
+        "RICH_MEDIA_DISPLAY_BANNER" -> Right ALCTRichMediaDisplayBanner
+        "RICH_MEDIA_DISPLAY_EXPANDING" -> Right ALCTRichMediaDisplayExpanding
+        "RICH_MEDIA_DISPLAY_INTERSTITIAL" -> Right ALCTRichMediaDisplayInterstitial
+        "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL" -> Right ALCTRichMediaDisplayMultiFloatingInterstitial
+        "RICH_MEDIA_IM_EXPAND" -> Right ALCTRichMediaImExpand
+        "RICH_MEDIA_INPAGE_FLOATING" -> Right ALCTRichMediaInpageFloating
+        "RICH_MEDIA_MOBILE_IN_APP" -> Right ALCTRichMediaMobileInApp
+        "RICH_MEDIA_PEEL_DOWN" -> Right ALCTRichMediaPeelDown
+        "TRACKING_TEXT" -> Right ALCTTrackingText
+        "VPAID_LINEAR_VIDEO" -> Right ALCTVpaidLinearVideo
+        "VPAID_NON_LINEAR_VIDEO" -> Right ALCTVpaidNonLinearVideo
+        x -> Left ("Unable to parse AdsListCreativeType from: " <> x)
 
-instance ToText AdsListCreativeType where
-    toText = \case
+instance ToHttpApiData AdsListCreativeType where
+    toQueryParam = \case
         ALCTBrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
-        ALCTCustomInpage -> "CUSTOM_INPAGE"
-        ALCTCustomInterstitial -> "CUSTOM_INTERSTITIAL"
-        ALCTEnhancedBanner -> "ENHANCED_BANNER"
-        ALCTEnhancedImage -> "ENHANCED_IMAGE"
+        ALCTCustomDisplay -> "CUSTOM_DISPLAY"
+        ALCTCustomDisplayInterstitial -> "CUSTOM_DISPLAY_INTERSTITIAL"
+        ALCTDisplay -> "DISPLAY"
+        ALCTDisplayImageGallery -> "DISPLAY_IMAGE_GALLERY"
+        ALCTDisplayRedirect -> "DISPLAY_REDIRECT"
         ALCTFlashInpage -> "FLASH_INPAGE"
         ALCTHTML5Banner -> "HTML5_BANNER"
         ALCTImage -> "IMAGE"
         ALCTInstreamVideo -> "INSTREAM_VIDEO"
+        ALCTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
         ALCTInternalRedirect -> "INTERNAL_REDIRECT"
         ALCTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
-        ALCTRedirect -> "REDIRECT"
-        ALCTRichMediaExpanding -> "RICH_MEDIA_EXPANDING"
+        ALCTRichMediaDisplayBanner -> "RICH_MEDIA_DISPLAY_BANNER"
+        ALCTRichMediaDisplayExpanding -> "RICH_MEDIA_DISPLAY_EXPANDING"
+        ALCTRichMediaDisplayInterstitial -> "RICH_MEDIA_DISPLAY_INTERSTITIAL"
+        ALCTRichMediaDisplayMultiFloatingInterstitial -> "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL"
         ALCTRichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
-        ALCTRichMediaInpage -> "RICH_MEDIA_INPAGE"
         ALCTRichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
-        ALCTRichMediaInterstitialFloat -> "RICH_MEDIA_INTERSTITIAL_FLOAT"
         ALCTRichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
-        ALCTRichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
         ALCTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
         ALCTTrackingText -> "TRACKING_TEXT"
-        ALCTVastRedirect -> "VAST_REDIRECT"
-        ALCTVpaidLinear -> "VPAID_LINEAR"
-        ALCTVpaidNonLinear -> "VPAID_NON_LINEAR"
+        ALCTVpaidLinearVideo -> "VPAID_LINEAR_VIDEO"
+        ALCTVpaidNonLinearVideo -> "VPAID_NON_LINEAR_VIDEO"
 
 instance FromJSON AdsListCreativeType where
     parseJSON = parseJSONText "AdsListCreativeType"
@@ -4516,18 +4931,18 @@ data FloodlightActivityGroupsListSortOrder
       -- ^ @ASCENDING@
     | FAGLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityGroupsListSortOrder
 
-instance FromText FloodlightActivityGroupsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just FAGLSOAscending
-        "DESCENDING" -> Just FAGLSODescending
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivityGroupsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right FAGLSOAscending
+        "DESCENDING" -> Right FAGLSODescending
+        x -> Left ("Unable to parse FloodlightActivityGroupsListSortOrder from: " <> x)
 
-instance ToText FloodlightActivityGroupsListSortOrder where
-    toText = \case
+instance ToHttpApiData FloodlightActivityGroupsListSortOrder where
+    toQueryParam = \case
         FAGLSOAscending -> "ASCENDING"
         FAGLSODescending -> "DESCENDING"
 
@@ -4544,18 +4959,18 @@ data CreativeRotationType
       -- ^ @CREATIVE_ROTATION_TYPE_RANDOM@
     | CreativeRotationTypeSequential
       -- ^ @CREATIVE_ROTATION_TYPE_SEQUENTIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeRotationType
 
-instance FromText CreativeRotationType where
-    fromText = \case
-        "CREATIVE_ROTATION_TYPE_RANDOM" -> Just CreativeRotationTypeRandom
-        "CREATIVE_ROTATION_TYPE_SEQUENTIAL" -> Just CreativeRotationTypeSequential
-        _ -> Nothing
+instance FromHttpApiData CreativeRotationType where
+    parseQueryParam = \case
+        "CREATIVE_ROTATION_TYPE_RANDOM" -> Right CreativeRotationTypeRandom
+        "CREATIVE_ROTATION_TYPE_SEQUENTIAL" -> Right CreativeRotationTypeSequential
+        x -> Left ("Unable to parse CreativeRotationType from: " <> x)
 
-instance ToText CreativeRotationType where
-    toText = \case
+instance ToHttpApiData CreativeRotationType where
+    toQueryParam = \case
         CreativeRotationTypeRandom -> "CREATIVE_ROTATION_TYPE_RANDOM"
         CreativeRotationTypeSequential -> "CREATIVE_ROTATION_TYPE_SEQUENTIAL"
 
@@ -4571,18 +4986,18 @@ data OrdersListSortField
       -- ^ @ID@
     | OLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrdersListSortField
 
-instance FromText OrdersListSortField where
-    fromText = \case
-        "ID" -> Just OLSFID
-        "NAME" -> Just OLSFName
-        _ -> Nothing
+instance FromHttpApiData OrdersListSortField where
+    parseQueryParam = \case
+        "ID" -> Right OLSFID
+        "NAME" -> Right OLSFName
+        x -> Left ("Unable to parse OrdersListSortField from: " <> x)
 
-instance ToText OrdersListSortField where
-    toText = \case
+instance ToHttpApiData OrdersListSortField where
+    toQueryParam = \case
         OLSFID -> "ID"
         OLSFName -> "NAME"
 
@@ -4598,18 +5013,18 @@ data PlacementGroupsListSortField
       -- ^ @ID@
     | PGLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementGroupsListSortField
 
-instance FromText PlacementGroupsListSortField where
-    fromText = \case
-        "ID" -> Just PGLSFID
-        "NAME" -> Just PGLSFName
-        _ -> Nothing
+instance FromHttpApiData PlacementGroupsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right PGLSFID
+        "NAME" -> Right PGLSFName
+        x -> Left ("Unable to parse PlacementGroupsListSortField from: " <> x)
 
-instance ToText PlacementGroupsListSortField where
-    toText = \case
+instance ToHttpApiData PlacementGroupsListSortField where
+    toQueryParam = \case
         PGLSFID -> "ID"
         PGLSFName -> "NAME"
 
@@ -4625,18 +5040,18 @@ data DirectorySitesListSortOrder
       -- ^ @ASCENDING@
     | DSLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySitesListSortOrder
 
-instance FromText DirectorySitesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just DSLSOAscending
-        "DESCENDING" -> Just DSLSODescending
-        _ -> Nothing
+instance FromHttpApiData DirectorySitesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right DSLSOAscending
+        "DESCENDING" -> Right DSLSODescending
+        x -> Left ("Unable to parse DirectorySitesListSortOrder from: " <> x)
 
-instance ToText DirectorySitesListSortOrder where
-    toText = \case
+instance ToHttpApiData DirectorySitesListSortOrder where
+    toQueryParam = \case
         DSLSOAscending -> "ASCENDING"
         DSLSODescending -> "DESCENDING"
 
@@ -4779,82 +5194,82 @@ data CreativeAssetDetectedFeaturesItem
       -- ^ @WEB_SQL_DATABASE@
     | CADFIWebWorkers
       -- ^ @WEB_WORKERS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetDetectedFeaturesItem
 
-instance FromText CreativeAssetDetectedFeaturesItem where
-    fromText = \case
-        "APPLICATION_CACHE" -> Just CADFIApplicationCache
-        "AUDIO" -> Just CADFIAudio
-        "CANVAS" -> Just CADFICanvas
-        "CANVAS_TEXT" -> Just CADFICanvasText
-        "CSS_ANIMATIONS" -> Just CADFICssAnimations
-        "CSS_BACKGROUND_SIZE" -> Just CADFICssBackgRoundSize
-        "CSS_BORDER_IMAGE" -> Just CADFICssBOrderImage
-        "CSS_BORDER_RADIUS" -> Just CADFICssBOrderRadius
-        "CSS_BOX_SHADOW" -> Just CADFICssBoxShadow
-        "CSS_COLUMNS" -> Just CADFICssColumns
-        "CSS_FLEX_BOX" -> Just CADFICssFlexBox
-        "CSS_FONT_FACE" -> Just CADFICssFontFace
-        "CSS_GENERATED_CONTENT" -> Just CADFICssGeneratedContent
-        "CSS_GRADIENTS" -> Just CADFICssGradients
-        "CSS_HSLA" -> Just CADFICssHsla
-        "CSS_MULTIPLE_BGS" -> Just CADFICssMultipleBgs
-        "CSS_OPACITY" -> Just CADFICssOpacity
-        "CSS_REFLECTIONS" -> Just CADFICssReflections
-        "CSS_RGBA" -> Just CADFICssRgba
-        "CSS_TEXT_SHADOW" -> Just CADFICssTextShadow
-        "CSS_TRANSFORMS" -> Just CADFICssTransforms
-        "CSS_TRANSFORMS3D" -> Just CADFICssTRANSFORMS3D
-        "CSS_TRANSITIONS" -> Just CADFICssTransitions
-        "DRAG_AND_DROP" -> Just CADFIDragAndDrop
-        "GEO_LOCATION" -> Just CADFIGeoLocation
-        "HASH_CHANGE" -> Just CADFIHashChange
-        "HISTORY" -> Just CADFIHistory
-        "INDEXED_DB" -> Just CADFIIndexedDB
-        "INLINE_SVG" -> Just CADFIInlineSvg
-        "INPUT_ATTR_AUTOCOMPLETE" -> Just CADFIInputAttrAutocomplete
-        "INPUT_ATTR_AUTOFOCUS" -> Just CADFIInputAttrAutofocus
-        "INPUT_ATTR_LIST" -> Just CADFIInputAttrList
-        "INPUT_ATTR_MAX" -> Just CADFIInputAttrMax
-        "INPUT_ATTR_MIN" -> Just CADFIInputAttrMin
-        "INPUT_ATTR_MULTIPLE" -> Just CADFIInputAttrMultiple
-        "INPUT_ATTR_PATTERN" -> Just CADFIInputAttrPattern
-        "INPUT_ATTR_PLACEHOLDER" -> Just CADFIInputAttrPlaceholder
-        "INPUT_ATTR_REQUIRED" -> Just CADFIInputAttrRequired
-        "INPUT_ATTR_STEP" -> Just CADFIInputAttrStep
-        "INPUT_TYPE_COLOR" -> Just CADFIInputTypeColor
-        "INPUT_TYPE_DATE" -> Just CADFIInputTypeDate
-        "INPUT_TYPE_DATETIME" -> Just CADFIInputTypeDatetime
-        "INPUT_TYPE_DATETIME_LOCAL" -> Just CADFIInputTypeDatetimeLocal
-        "INPUT_TYPE_EMAIL" -> Just CADFIInputTypeEmail
-        "INPUT_TYPE_MONTH" -> Just CADFIInputTypeMonth
-        "INPUT_TYPE_NUMBER" -> Just CADFIInputTypeNumber
-        "INPUT_TYPE_RANGE" -> Just CADFIInputTypeRange
-        "INPUT_TYPE_SEARCH" -> Just CADFIInputTypeSearch
-        "INPUT_TYPE_TEL" -> Just CADFIInputTypeTel
-        "INPUT_TYPE_TIME" -> Just CADFIInputTypeTime
-        "INPUT_TYPE_URL" -> Just CADFIInputTypeURL
-        "INPUT_TYPE_WEEK" -> Just CADFIInputTypeWeek
-        "LOCAL_STORAGE" -> Just CADFILocalStorage
-        "POST_MESSAGE" -> Just CADFIPostMessage
-        "SESSION_STORAGE" -> Just CADFISessionStorage
-        "SMIL" -> Just CADFISmil
-        "SVG_CLIP_PATHS" -> Just CADFISvgClipPaths
-        "SVG_FE_IMAGE" -> Just CADFISvgFeImage
-        "SVG_FILTERS" -> Just CADFISvgFilters
-        "SVG_HREF" -> Just CADFISvgHref
-        "TOUCH" -> Just CADFITouch
-        "VIDEO" -> Just CADFIVideo
-        "WEBGL" -> Just CADFIWebgl
-        "WEB_SOCKETS" -> Just CADFIWebSockets
-        "WEB_SQL_DATABASE" -> Just CADFIWebSQLDatabase
-        "WEB_WORKERS" -> Just CADFIWebWorkers
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetDetectedFeaturesItem where
+    parseQueryParam = \case
+        "APPLICATION_CACHE" -> Right CADFIApplicationCache
+        "AUDIO" -> Right CADFIAudio
+        "CANVAS" -> Right CADFICanvas
+        "CANVAS_TEXT" -> Right CADFICanvasText
+        "CSS_ANIMATIONS" -> Right CADFICssAnimations
+        "CSS_BACKGROUND_SIZE" -> Right CADFICssBackgRoundSize
+        "CSS_BORDER_IMAGE" -> Right CADFICssBOrderImage
+        "CSS_BORDER_RADIUS" -> Right CADFICssBOrderRadius
+        "CSS_BOX_SHADOW" -> Right CADFICssBoxShadow
+        "CSS_COLUMNS" -> Right CADFICssColumns
+        "CSS_FLEX_BOX" -> Right CADFICssFlexBox
+        "CSS_FONT_FACE" -> Right CADFICssFontFace
+        "CSS_GENERATED_CONTENT" -> Right CADFICssGeneratedContent
+        "CSS_GRADIENTS" -> Right CADFICssGradients
+        "CSS_HSLA" -> Right CADFICssHsla
+        "CSS_MULTIPLE_BGS" -> Right CADFICssMultipleBgs
+        "CSS_OPACITY" -> Right CADFICssOpacity
+        "CSS_REFLECTIONS" -> Right CADFICssReflections
+        "CSS_RGBA" -> Right CADFICssRgba
+        "CSS_TEXT_SHADOW" -> Right CADFICssTextShadow
+        "CSS_TRANSFORMS" -> Right CADFICssTransforms
+        "CSS_TRANSFORMS3D" -> Right CADFICssTRANSFORMS3D
+        "CSS_TRANSITIONS" -> Right CADFICssTransitions
+        "DRAG_AND_DROP" -> Right CADFIDragAndDrop
+        "GEO_LOCATION" -> Right CADFIGeoLocation
+        "HASH_CHANGE" -> Right CADFIHashChange
+        "HISTORY" -> Right CADFIHistory
+        "INDEXED_DB" -> Right CADFIIndexedDB
+        "INLINE_SVG" -> Right CADFIInlineSvg
+        "INPUT_ATTR_AUTOCOMPLETE" -> Right CADFIInputAttrAutocomplete
+        "INPUT_ATTR_AUTOFOCUS" -> Right CADFIInputAttrAutofocus
+        "INPUT_ATTR_LIST" -> Right CADFIInputAttrList
+        "INPUT_ATTR_MAX" -> Right CADFIInputAttrMax
+        "INPUT_ATTR_MIN" -> Right CADFIInputAttrMin
+        "INPUT_ATTR_MULTIPLE" -> Right CADFIInputAttrMultiple
+        "INPUT_ATTR_PATTERN" -> Right CADFIInputAttrPattern
+        "INPUT_ATTR_PLACEHOLDER" -> Right CADFIInputAttrPlaceholder
+        "INPUT_ATTR_REQUIRED" -> Right CADFIInputAttrRequired
+        "INPUT_ATTR_STEP" -> Right CADFIInputAttrStep
+        "INPUT_TYPE_COLOR" -> Right CADFIInputTypeColor
+        "INPUT_TYPE_DATE" -> Right CADFIInputTypeDate
+        "INPUT_TYPE_DATETIME" -> Right CADFIInputTypeDatetime
+        "INPUT_TYPE_DATETIME_LOCAL" -> Right CADFIInputTypeDatetimeLocal
+        "INPUT_TYPE_EMAIL" -> Right CADFIInputTypeEmail
+        "INPUT_TYPE_MONTH" -> Right CADFIInputTypeMonth
+        "INPUT_TYPE_NUMBER" -> Right CADFIInputTypeNumber
+        "INPUT_TYPE_RANGE" -> Right CADFIInputTypeRange
+        "INPUT_TYPE_SEARCH" -> Right CADFIInputTypeSearch
+        "INPUT_TYPE_TEL" -> Right CADFIInputTypeTel
+        "INPUT_TYPE_TIME" -> Right CADFIInputTypeTime
+        "INPUT_TYPE_URL" -> Right CADFIInputTypeURL
+        "INPUT_TYPE_WEEK" -> Right CADFIInputTypeWeek
+        "LOCAL_STORAGE" -> Right CADFILocalStorage
+        "POST_MESSAGE" -> Right CADFIPostMessage
+        "SESSION_STORAGE" -> Right CADFISessionStorage
+        "SMIL" -> Right CADFISmil
+        "SVG_CLIP_PATHS" -> Right CADFISvgClipPaths
+        "SVG_FE_IMAGE" -> Right CADFISvgFeImage
+        "SVG_FILTERS" -> Right CADFISvgFilters
+        "SVG_HREF" -> Right CADFISvgHref
+        "TOUCH" -> Right CADFITouch
+        "VIDEO" -> Right CADFIVideo
+        "WEBGL" -> Right CADFIWebgl
+        "WEB_SOCKETS" -> Right CADFIWebSockets
+        "WEB_SQL_DATABASE" -> Right CADFIWebSQLDatabase
+        "WEB_WORKERS" -> Right CADFIWebWorkers
+        x -> Left ("Unable to parse CreativeAssetDetectedFeaturesItem from: " <> x)
 
-instance ToText CreativeAssetDetectedFeaturesItem where
-    toText = \case
+instance ToHttpApiData CreativeAssetDetectedFeaturesItem where
+    toQueryParam = \case
         CADFIApplicationCache -> "APPLICATION_CACHE"
         CADFIAudio -> "AUDIO"
         CADFICanvas -> "CANVAS"
@@ -4935,18 +5350,18 @@ data FloodlightActivityGroupType
       -- ^ @COUNTER@
     | FAGTSale
       -- ^ @SALE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityGroupType
 
-instance FromText FloodlightActivityGroupType where
-    fromText = \case
-        "COUNTER" -> Just FAGTCounter
-        "SALE" -> Just FAGTSale
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivityGroupType where
+    parseQueryParam = \case
+        "COUNTER" -> Right FAGTCounter
+        "SALE" -> Right FAGTSale
+        x -> Left ("Unable to parse FloodlightActivityGroupType from: " <> x)
 
-instance ToText FloodlightActivityGroupType where
-    toText = \case
+instance ToHttpApiData FloodlightActivityGroupType where
+    toQueryParam = \case
         FAGTCounter -> "COUNTER"
         FAGTSale -> "SALE"
 
@@ -4966,20 +5381,20 @@ data DirectorySiteContactType
       -- ^ @SALES@
     | DSCTTechnical
       -- ^ @TECHNICAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteContactType
 
-instance FromText DirectorySiteContactType where
-    fromText = \case
-        "BILLING" -> Just DSCTBilling
-        "OTHER" -> Just DSCTOther
-        "SALES" -> Just DSCTSales
-        "TECHNICAL" -> Just DSCTTechnical
-        _ -> Nothing
+instance FromHttpApiData DirectorySiteContactType where
+    parseQueryParam = \case
+        "BILLING" -> Right DSCTBilling
+        "OTHER" -> Right DSCTOther
+        "SALES" -> Right DSCTSales
+        "TECHNICAL" -> Right DSCTTechnical
+        x -> Left ("Unable to parse DirectorySiteContactType from: " <> x)
 
-instance ToText DirectorySiteContactType where
-    toText = \case
+instance ToHttpApiData DirectorySiteContactType where
+    toQueryParam = \case
         DSCTBilling -> "BILLING"
         DSCTOther -> "OTHER"
         DSCTSales -> "SALES"
@@ -5029,34 +5444,34 @@ data PlacementsGeneratetagsTagFormats
       -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
     | PGTFPlacementTagTrackingJavascript
       -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsGeneratetagsTagFormats
 
-instance FromText PlacementsGeneratetagsTagFormats where
-    fromText = \case
-        "PLACEMENT_TAG_CLICK_COMMANDS" -> Just PGTFPlacementTagClickCommands
-        "PLACEMENT_TAG_IFRAME_ILAYER" -> Just PGTFPlacementTagIframeIlayer
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Just PGTFPlacementTagIframeJavascript
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Just PGTFPlacementTagIframeJavascriptLegacy
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Just PGTFPlacementTagInstreamVideoPrefetch
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Just PGTFPlacementTagInstreamVideoPrefetchVast3
-        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Just PGTFPlacementTagInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Just PGTFPlacementTagInterstitialIframeJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Just PGTFPlacementTagInterstitialIframeJavascriptLegacy
-        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Just PGTFPlacementTagInterstitialInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Just PGTFPlacementTagInterstitialJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Just PGTFPlacementTagInterstitialJavascriptLegacy
-        "PLACEMENT_TAG_JAVASCRIPT" -> Just PGTFPlacementTagJavascript
-        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Just PGTFPlacementTagJavascriptLegacy
-        "PLACEMENT_TAG_STANDARD" -> Just PGTFPlacementTagStandard
-        "PLACEMENT_TAG_TRACKING" -> Just PGTFPlacementTagTracking
-        "PLACEMENT_TAG_TRACKING_IFRAME" -> Just PGTFPlacementTagTrackingIframe
-        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Just PGTFPlacementTagTrackingJavascript
-        _ -> Nothing
+instance FromHttpApiData PlacementsGeneratetagsTagFormats where
+    parseQueryParam = \case
+        "PLACEMENT_TAG_CLICK_COMMANDS" -> Right PGTFPlacementTagClickCommands
+        "PLACEMENT_TAG_IFRAME_ILAYER" -> Right PGTFPlacementTagIframeIlayer
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Right PGTFPlacementTagIframeJavascript
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Right PGTFPlacementTagIframeJavascriptLegacy
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Right PGTFPlacementTagInstreamVideoPrefetch
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Right PGTFPlacementTagInstreamVideoPrefetchVast3
+        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Right PGTFPlacementTagInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Right PGTFPlacementTagInterstitialIframeJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Right PGTFPlacementTagInterstitialIframeJavascriptLegacy
+        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Right PGTFPlacementTagInterstitialInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Right PGTFPlacementTagInterstitialJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Right PGTFPlacementTagInterstitialJavascriptLegacy
+        "PLACEMENT_TAG_JAVASCRIPT" -> Right PGTFPlacementTagJavascript
+        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Right PGTFPlacementTagJavascriptLegacy
+        "PLACEMENT_TAG_STANDARD" -> Right PGTFPlacementTagStandard
+        "PLACEMENT_TAG_TRACKING" -> Right PGTFPlacementTagTracking
+        "PLACEMENT_TAG_TRACKING_IFRAME" -> Right PGTFPlacementTagTrackingIframe
+        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Right PGTFPlacementTagTrackingJavascript
+        x -> Left ("Unable to parse PlacementsGeneratetagsTagFormats from: " <> x)
 
-instance ToText PlacementsGeneratetagsTagFormats where
-    toText = \case
+instance ToHttpApiData PlacementsGeneratetagsTagFormats where
+    toQueryParam = \case
         PGTFPlacementTagClickCommands -> "PLACEMENT_TAG_CLICK_COMMANDS"
         PGTFPlacementTagIframeIlayer -> "PLACEMENT_TAG_IFRAME_ILAYER"
         PGTFPlacementTagIframeJavascript -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
@@ -5088,18 +5503,18 @@ data AccountUserProFilesListSortField
       -- ^ @ID@
     | AUPFLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountUserProFilesListSortField
 
-instance FromText AccountUserProFilesListSortField where
-    fromText = \case
-        "ID" -> Just AUPFLSFID
-        "NAME" -> Just AUPFLSFName
-        _ -> Nothing
+instance FromHttpApiData AccountUserProFilesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right AUPFLSFID
+        "NAME" -> Right AUPFLSFName
+        x -> Left ("Unable to parse AccountUserProFilesListSortField from: " <> x)
 
-instance ToText AccountUserProFilesListSortField where
-    toText = \case
+instance ToHttpApiData AccountUserProFilesListSortField where
+    toQueryParam = \case
         AUPFLSFID -> "ID"
         AUPFLSFName -> "NAME"
 
@@ -5115,18 +5530,18 @@ data InventoryItemsListSortOrder
       -- ^ @ASCENDING@
     | IILSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InventoryItemsListSortOrder
 
-instance FromText InventoryItemsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just IILSOAscending
-        "DESCENDING" -> Just IILSODescending
-        _ -> Nothing
+instance FromHttpApiData InventoryItemsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right IILSOAscending
+        "DESCENDING" -> Right IILSODescending
+        x -> Left ("Unable to parse InventoryItemsListSortOrder from: " <> x)
 
-instance ToText InventoryItemsListSortOrder where
-    toText = \case
+instance ToHttpApiData InventoryItemsListSortOrder where
+    toQueryParam = \case
         IILSOAscending -> "ASCENDING"
         IILSODescending -> "DESCENDING"
 
@@ -5142,18 +5557,18 @@ data PlacementStrategiesListSortOrder
       -- ^ @ASCENDING@
     | PSLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementStrategiesListSortOrder
 
-instance FromText PlacementStrategiesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just PSLSOAscending
-        "DESCENDING" -> Just PSLSODescending
-        _ -> Nothing
+instance FromHttpApiData PlacementStrategiesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right PSLSOAscending
+        "DESCENDING" -> Right PSLSODescending
+        x -> Left ("Unable to parse PlacementStrategiesListSortOrder from: " <> x)
 
-instance ToText PlacementStrategiesListSortOrder where
-    toText = \case
+instance ToHttpApiData PlacementStrategiesListSortOrder where
+    toQueryParam = \case
         PSLSOAscending -> "ASCENDING"
         PSLSODescending -> "DESCENDING"
 
@@ -5171,18 +5586,18 @@ data ReportsFilesListSortField
     | RFLSFLastModifiedTime
       -- ^ @LAST_MODIFIED_TIME@
       -- Sort by \'lastmodifiedAt\' field.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsFilesListSortField
 
-instance FromText ReportsFilesListSortField where
-    fromText = \case
-        "ID" -> Just RFLSFID
-        "LAST_MODIFIED_TIME" -> Just RFLSFLastModifiedTime
-        _ -> Nothing
+instance FromHttpApiData ReportsFilesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right RFLSFID
+        "LAST_MODIFIED_TIME" -> Right RFLSFLastModifiedTime
+        x -> Left ("Unable to parse ReportsFilesListSortField from: " <> x)
 
-instance ToText ReportsFilesListSortField where
-    toText = \case
+instance ToHttpApiData ReportsFilesListSortField where
+    toQueryParam = \case
         RFLSFID -> "ID"
         RFLSFLastModifiedTime -> "LAST_MODIFIED_TIME"
 
@@ -5198,18 +5613,18 @@ data CreativesListSortField
       -- ^ @ID@
     | CName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativesListSortField
 
-instance FromText CreativesListSortField where
-    fromText = \case
-        "ID" -> Just CID
-        "NAME" -> Just CName
-        _ -> Nothing
+instance FromHttpApiData CreativesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right CID
+        "NAME" -> Right CName
+        x -> Left ("Unable to parse CreativesListSortField from: " <> x)
 
-instance ToText CreativesListSortField where
-    toText = \case
+instance ToHttpApiData CreativesListSortField where
+    toQueryParam = \case
         CID -> "ID"
         CName -> "NAME"
 
@@ -5234,23 +5649,23 @@ data DayPartTargetingDaysOfWeekItem
       -- ^ @TUESDAY@
     | DPTDOWIWednesday
       -- ^ @WEDNESDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DayPartTargetingDaysOfWeekItem
 
-instance FromText DayPartTargetingDaysOfWeekItem where
-    fromText = \case
-        "FRIDAY" -> Just DPTDOWIFriday
-        "MONDAY" -> Just DPTDOWIMonday
-        "SATURDAY" -> Just DPTDOWISaturday
-        "SUNDAY" -> Just DPTDOWISunday
-        "THURSDAY" -> Just DPTDOWIThursday
-        "TUESDAY" -> Just DPTDOWITuesday
-        "WEDNESDAY" -> Just DPTDOWIWednesday
-        _ -> Nothing
+instance FromHttpApiData DayPartTargetingDaysOfWeekItem where
+    parseQueryParam = \case
+        "FRIDAY" -> Right DPTDOWIFriday
+        "MONDAY" -> Right DPTDOWIMonday
+        "SATURDAY" -> Right DPTDOWISaturday
+        "SUNDAY" -> Right DPTDOWISunday
+        "THURSDAY" -> Right DPTDOWIThursday
+        "TUESDAY" -> Right DPTDOWITuesday
+        "WEDNESDAY" -> Right DPTDOWIWednesday
+        x -> Left ("Unable to parse DayPartTargetingDaysOfWeekItem from: " <> x)
 
-instance ToText DayPartTargetingDaysOfWeekItem where
-    toText = \case
+instance ToHttpApiData DayPartTargetingDaysOfWeekItem where
+    toQueryParam = \case
         DPTDOWIFriday -> "FRIDAY"
         DPTDOWIMonday -> "MONDAY"
         DPTDOWISaturday -> "SATURDAY"
@@ -5276,20 +5691,20 @@ data CreativeRotationWeightCalculationStrategy
       -- ^ @WEIGHT_STRATEGY_HIGHEST_CTR@
     | WeightStrategyOptimized
       -- ^ @WEIGHT_STRATEGY_OPTIMIZED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeRotationWeightCalculationStrategy
 
-instance FromText CreativeRotationWeightCalculationStrategy where
-    fromText = \case
-        "WEIGHT_STRATEGY_CUSTOM" -> Just WeightStrategyCustom
-        "WEIGHT_STRATEGY_EQUAL" -> Just WeightStrategyEqual
-        "WEIGHT_STRATEGY_HIGHEST_CTR" -> Just WeightStrategyHighestCtr
-        "WEIGHT_STRATEGY_OPTIMIZED" -> Just WeightStrategyOptimized
-        _ -> Nothing
+instance FromHttpApiData CreativeRotationWeightCalculationStrategy where
+    parseQueryParam = \case
+        "WEIGHT_STRATEGY_CUSTOM" -> Right WeightStrategyCustom
+        "WEIGHT_STRATEGY_EQUAL" -> Right WeightStrategyEqual
+        "WEIGHT_STRATEGY_HIGHEST_CTR" -> Right WeightStrategyHighestCtr
+        "WEIGHT_STRATEGY_OPTIMIZED" -> Right WeightStrategyOptimized
+        x -> Left ("Unable to parse CreativeRotationWeightCalculationStrategy from: " <> x)
 
-instance ToText CreativeRotationWeightCalculationStrategy where
-    toText = \case
+instance ToHttpApiData CreativeRotationWeightCalculationStrategy where
+    toQueryParam = \case
         WeightStrategyCustom -> "WEIGHT_STRATEGY_CUSTOM"
         WeightStrategyEqual -> "WEIGHT_STRATEGY_EQUAL"
         WeightStrategyHighestCtr -> "WEIGHT_STRATEGY_HIGHEST_CTR"
@@ -5312,19 +5727,19 @@ data FilesListScope
     | FLSSharedWithMe
       -- ^ @SHARED_WITH_ME@
       -- Files shared with me.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilesListScope
 
-instance FromText FilesListScope where
-    fromText = \case
-        "ALL" -> Just FLSAll
-        "MINE" -> Just FLSMine
-        "SHARED_WITH_ME" -> Just FLSSharedWithMe
-        _ -> Nothing
+instance FromHttpApiData FilesListScope where
+    parseQueryParam = \case
+        "ALL" -> Right FLSAll
+        "MINE" -> Right FLSMine
+        "SHARED_WITH_ME" -> Right FLSSharedWithMe
+        x -> Left ("Unable to parse FilesListScope from: " <> x)
 
-instance ToText FilesListScope where
-    toText = \case
+instance ToHttpApiData FilesListScope where
+    toQueryParam = \case
         FLSAll -> "ALL"
         FLSMine -> "MINE"
         FLSSharedWithMe -> "SHARED_WITH_ME"
@@ -5341,18 +5756,18 @@ data ContentCategoriesListSortField
       -- ^ @ID@
     | CCLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentCategoriesListSortField
 
-instance FromText ContentCategoriesListSortField where
-    fromText = \case
-        "ID" -> Just CCLSFID
-        "NAME" -> Just CCLSFName
-        _ -> Nothing
+instance FromHttpApiData ContentCategoriesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right CCLSFID
+        "NAME" -> Right CCLSFName
+        x -> Left ("Unable to parse ContentCategoriesListSortField from: " <> x)
 
-instance ToText ContentCategoriesListSortField where
-    toText = \case
+instance ToHttpApiData ContentCategoriesListSortField where
+    toQueryParam = \case
         CCLSFID -> "ID"
         CCLSFName -> "NAME"
 
@@ -5378,23 +5793,23 @@ data ProjectAudienceAgeGroup
       -- ^ @PLANNING_AUDIENCE_AGE_65_OR_MORE@
     | PlanningAudienceAgeUnknown
       -- ^ @PLANNING_AUDIENCE_AGE_UNKNOWN@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProjectAudienceAgeGroup
 
-instance FromText ProjectAudienceAgeGroup where
-    fromText = \case
-        "PLANNING_AUDIENCE_AGE_18_24" -> Just PlanningAudienceAge1824
-        "PLANNING_AUDIENCE_AGE_25_34" -> Just PlanningAudienceAge2534
-        "PLANNING_AUDIENCE_AGE_35_44" -> Just PlanningAudienceAge3544
-        "PLANNING_AUDIENCE_AGE_45_54" -> Just PlanningAudienceAge4554
-        "PLANNING_AUDIENCE_AGE_55_64" -> Just PlanningAudienceAge5564
-        "PLANNING_AUDIENCE_AGE_65_OR_MORE" -> Just PlanningAudienceAge65OrMore
-        "PLANNING_AUDIENCE_AGE_UNKNOWN" -> Just PlanningAudienceAgeUnknown
-        _ -> Nothing
+instance FromHttpApiData ProjectAudienceAgeGroup where
+    parseQueryParam = \case
+        "PLANNING_AUDIENCE_AGE_18_24" -> Right PlanningAudienceAge1824
+        "PLANNING_AUDIENCE_AGE_25_34" -> Right PlanningAudienceAge2534
+        "PLANNING_AUDIENCE_AGE_35_44" -> Right PlanningAudienceAge3544
+        "PLANNING_AUDIENCE_AGE_45_54" -> Right PlanningAudienceAge4554
+        "PLANNING_AUDIENCE_AGE_55_64" -> Right PlanningAudienceAge5564
+        "PLANNING_AUDIENCE_AGE_65_OR_MORE" -> Right PlanningAudienceAge65OrMore
+        "PLANNING_AUDIENCE_AGE_UNKNOWN" -> Right PlanningAudienceAgeUnknown
+        x -> Left ("Unable to parse ProjectAudienceAgeGroup from: " <> x)
 
-instance ToText ProjectAudienceAgeGroup where
-    toText = \case
+instance ToHttpApiData ProjectAudienceAgeGroup where
+    toQueryParam = \case
         PlanningAudienceAge1824 -> "PLANNING_AUDIENCE_AGE_18_24"
         PlanningAudienceAge2534 -> "PLANNING_AUDIENCE_AGE_25_34"
         PlanningAudienceAge3544 -> "PLANNING_AUDIENCE_AGE_35_44"
@@ -5421,20 +5836,20 @@ data AdType
       -- ^ @AD_SERVING_STANDARD_AD@
     | ATAdServingTracking
       -- ^ @AD_SERVING_TRACKING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdType
 
-instance FromText AdType where
-    fromText = \case
-        "AD_SERVING_CLICK_TRACKER" -> Just ATAdServingClickTracker
-        "AD_SERVING_DEFAULT_AD" -> Just ATAdServingDefaultAd
-        "AD_SERVING_STANDARD_AD" -> Just ATAdServingStandardAd
-        "AD_SERVING_TRACKING" -> Just ATAdServingTracking
-        _ -> Nothing
+instance FromHttpApiData AdType where
+    parseQueryParam = \case
+        "AD_SERVING_CLICK_TRACKER" -> Right ATAdServingClickTracker
+        "AD_SERVING_DEFAULT_AD" -> Right ATAdServingDefaultAd
+        "AD_SERVING_STANDARD_AD" -> Right ATAdServingStandardAd
+        "AD_SERVING_TRACKING" -> Right ATAdServingTracking
+        x -> Left ("Unable to parse AdType from: " <> x)
 
-instance ToText AdType where
-    toText = \case
+instance ToHttpApiData AdType where
+    toQueryParam = \case
         ATAdServingClickTracker -> "AD_SERVING_CLICK_TRACKER"
         ATAdServingDefaultAd -> "AD_SERVING_DEFAULT_AD"
         ATAdServingStandardAd -> "AD_SERVING_STANDARD_AD"
@@ -5482,33 +5897,33 @@ data ChangeLogsListAction
       -- ^ @ACTION_UNLINK@
     | ActionUpdate
       -- ^ @ACTION_UPDATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChangeLogsListAction
 
-instance FromText ChangeLogsListAction where
-    fromText = \case
-        "ACTION_ADD" -> Just ActionAdd
-        "ACTION_ASSIGN" -> Just ActionAssign
-        "ACTION_ASSOCIATE" -> Just ActionAssociate
-        "ACTION_CREATE" -> Just ActionCreate
-        "ACTION_DELETE" -> Just ActionDelete
-        "ACTION_DISABLE" -> Just ActionDisable
-        "ACTION_EMAIL_TAGS" -> Just ActionEmailTags
-        "ACTION_ENABLE" -> Just ActionEnable
-        "ACTION_LINK" -> Just ActionLink
-        "ACTION_MARK_AS_DEFAULT" -> Just ActionMarkAsDefault
-        "ACTION_PUSH" -> Just ActionPush
-        "ACTION_REMOVE" -> Just ActionRemove
-        "ACTION_SEND" -> Just ActionSend
-        "ACTION_SHARE" -> Just ActionShare
-        "ACTION_UNASSIGN" -> Just ActionUnassign
-        "ACTION_UNLINK" -> Just ActionUnlink
-        "ACTION_UPDATE" -> Just ActionUpdate
-        _ -> Nothing
+instance FromHttpApiData ChangeLogsListAction where
+    parseQueryParam = \case
+        "ACTION_ADD" -> Right ActionAdd
+        "ACTION_ASSIGN" -> Right ActionAssign
+        "ACTION_ASSOCIATE" -> Right ActionAssociate
+        "ACTION_CREATE" -> Right ActionCreate
+        "ACTION_DELETE" -> Right ActionDelete
+        "ACTION_DISABLE" -> Right ActionDisable
+        "ACTION_EMAIL_TAGS" -> Right ActionEmailTags
+        "ACTION_ENABLE" -> Right ActionEnable
+        "ACTION_LINK" -> Right ActionLink
+        "ACTION_MARK_AS_DEFAULT" -> Right ActionMarkAsDefault
+        "ACTION_PUSH" -> Right ActionPush
+        "ACTION_REMOVE" -> Right ActionRemove
+        "ACTION_SEND" -> Right ActionSend
+        "ACTION_SHARE" -> Right ActionShare
+        "ACTION_UNASSIGN" -> Right ActionUnassign
+        "ACTION_UNLINK" -> Right ActionUnlink
+        "ACTION_UPDATE" -> Right ActionUpdate
+        x -> Left ("Unable to parse ChangeLogsListAction from: " <> x)
 
-instance ToText ChangeLogsListAction where
-    toText = \case
+instance ToHttpApiData ChangeLogsListAction where
+    toQueryParam = \case
         ActionAdd -> "ACTION_ADD"
         ActionAssign -> "ACTION_ASSIGN"
         ActionAssociate -> "ACTION_ASSOCIATE"
@@ -5541,23 +5956,27 @@ data CreativeArtworkType
       -- ^ @ARTWORK_TYPE_FLASH@
     | CATArtworkTypeHTML5
       -- ^ @ARTWORK_TYPE_HTML5@
+    | CATArtworkTypeImage
+      -- ^ @ARTWORK_TYPE_IMAGE@
     | CATArtworkTypeMixed
       -- ^ @ARTWORK_TYPE_MIXED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeArtworkType
 
-instance FromText CreativeArtworkType where
-    fromText = \case
-        "ARTWORK_TYPE_FLASH" -> Just CATArtworkTypeFlash
-        "ARTWORK_TYPE_HTML5" -> Just CATArtworkTypeHTML5
-        "ARTWORK_TYPE_MIXED" -> Just CATArtworkTypeMixed
-        _ -> Nothing
+instance FromHttpApiData CreativeArtworkType where
+    parseQueryParam = \case
+        "ARTWORK_TYPE_FLASH" -> Right CATArtworkTypeFlash
+        "ARTWORK_TYPE_HTML5" -> Right CATArtworkTypeHTML5
+        "ARTWORK_TYPE_IMAGE" -> Right CATArtworkTypeImage
+        "ARTWORK_TYPE_MIXED" -> Right CATArtworkTypeMixed
+        x -> Left ("Unable to parse CreativeArtworkType from: " <> x)
 
-instance ToText CreativeArtworkType where
-    toText = \case
+instance ToHttpApiData CreativeArtworkType where
+    toQueryParam = \case
         CATArtworkTypeFlash -> "ARTWORK_TYPE_FLASH"
         CATArtworkTypeHTML5 -> "ARTWORK_TYPE_HTML5"
+        CATArtworkTypeImage -> "ARTWORK_TYPE_IMAGE"
         CATArtworkTypeMixed -> "ARTWORK_TYPE_MIXED"
 
 instance FromJSON CreativeArtworkType where
@@ -5580,22 +5999,22 @@ data PlacementStatus
       -- ^ @PAYMENT_REJECTED@
     | PendingReview
       -- ^ @PENDING_REVIEW@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementStatus
 
-instance FromText PlacementStatus where
-    fromText = \case
-        "ACKNOWLEDGE_ACCEPTANCE" -> Just AcknowledgeAcceptance
-        "ACKNOWLEDGE_REJECTION" -> Just AcknowledgeRejection
-        "DRAFT" -> Just Draft
-        "PAYMENT_ACCEPTED" -> Just PaymentAccepted
-        "PAYMENT_REJECTED" -> Just PaymentRejected
-        "PENDING_REVIEW" -> Just PendingReview
-        _ -> Nothing
+instance FromHttpApiData PlacementStatus where
+    parseQueryParam = \case
+        "ACKNOWLEDGE_ACCEPTANCE" -> Right AcknowledgeAcceptance
+        "ACKNOWLEDGE_REJECTION" -> Right AcknowledgeRejection
+        "DRAFT" -> Right Draft
+        "PAYMENT_ACCEPTED" -> Right PaymentAccepted
+        "PAYMENT_REJECTED" -> Right PaymentRejected
+        "PENDING_REVIEW" -> Right PendingReview
+        x -> Left ("Unable to parse PlacementStatus from: " <> x)
 
-instance ToText PlacementStatus where
-    toText = \case
+instance ToHttpApiData PlacementStatus where
+    toQueryParam = \case
         AcknowledgeAcceptance -> "ACKNOWLEDGE_ACCEPTANCE"
         AcknowledgeRejection -> "ACKNOWLEDGE_REJECTION"
         Draft -> "DRAFT"
@@ -5620,18 +6039,18 @@ data ReportScheduleRunsOnDayOfMonth
       -- ^ @DAY_OF_MONTH@
     | WeekOfMonth
       -- ^ @WEEK_OF_MONTH@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportScheduleRunsOnDayOfMonth
 
-instance FromText ReportScheduleRunsOnDayOfMonth where
-    fromText = \case
-        "DAY_OF_MONTH" -> Just DayOfMonth
-        "WEEK_OF_MONTH" -> Just WeekOfMonth
-        _ -> Nothing
+instance FromHttpApiData ReportScheduleRunsOnDayOfMonth where
+    parseQueryParam = \case
+        "DAY_OF_MONTH" -> Right DayOfMonth
+        "WEEK_OF_MONTH" -> Right WeekOfMonth
+        x -> Left ("Unable to parse ReportScheduleRunsOnDayOfMonth from: " <> x)
 
-instance ToText ReportScheduleRunsOnDayOfMonth where
-    toText = \case
+instance ToHttpApiData ReportScheduleRunsOnDayOfMonth where
+    toQueryParam = \case
         DayOfMonth -> "DAY_OF_MONTH"
         WeekOfMonth -> "WEEK_OF_MONTH"
 
@@ -5682,36 +6101,36 @@ data FloodlightActivityUserDefinedVariableTypesItem
       -- ^ @U8@
     | FAUDVTIU9
       -- ^ @U9@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityUserDefinedVariableTypesItem
 
-instance FromText FloodlightActivityUserDefinedVariableTypesItem where
-    fromText = \case
-        "U1" -> Just FAUDVTIU1
-        "U10" -> Just FAUDVTIU10
-        "U11" -> Just FAUDVTIU11
-        "U12" -> Just FAUDVTIU12
-        "U13" -> Just FAUDVTIU13
-        "U14" -> Just FAUDVTIU14
-        "U15" -> Just FAUDVTIU15
-        "U16" -> Just FAUDVTIU16
-        "U17" -> Just FAUDVTIU17
-        "U18" -> Just FAUDVTIU18
-        "U19" -> Just FAUDVTIU19
-        "U2" -> Just FAUDVTIU2
-        "U20" -> Just FAUDVTIU20
-        "U3" -> Just FAUDVTIU3
-        "U4" -> Just FAUDVTIU4
-        "U5" -> Just FAUDVTIU5
-        "U6" -> Just FAUDVTIU6
-        "U7" -> Just FAUDVTIU7
-        "U8" -> Just FAUDVTIU8
-        "U9" -> Just FAUDVTIU9
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivityUserDefinedVariableTypesItem where
+    parseQueryParam = \case
+        "U1" -> Right FAUDVTIU1
+        "U10" -> Right FAUDVTIU10
+        "U11" -> Right FAUDVTIU11
+        "U12" -> Right FAUDVTIU12
+        "U13" -> Right FAUDVTIU13
+        "U14" -> Right FAUDVTIU14
+        "U15" -> Right FAUDVTIU15
+        "U16" -> Right FAUDVTIU16
+        "U17" -> Right FAUDVTIU17
+        "U18" -> Right FAUDVTIU18
+        "U19" -> Right FAUDVTIU19
+        "U2" -> Right FAUDVTIU2
+        "U20" -> Right FAUDVTIU20
+        "U3" -> Right FAUDVTIU3
+        "U4" -> Right FAUDVTIU4
+        "U5" -> Right FAUDVTIU5
+        "U6" -> Right FAUDVTIU6
+        "U7" -> Right FAUDVTIU7
+        "U8" -> Right FAUDVTIU8
+        "U9" -> Right FAUDVTIU9
+        x -> Left ("Unable to parse FloodlightActivityUserDefinedVariableTypesItem from: " <> x)
 
-instance ToText FloodlightActivityUserDefinedVariableTypesItem where
-    toText = \case
+instance ToHttpApiData FloodlightActivityUserDefinedVariableTypesItem where
+    toQueryParam = \case
         FAUDVTIU1 -> "U1"
         FAUDVTIU10 -> "U10"
         FAUDVTIU11 -> "U11"
@@ -5746,18 +6165,18 @@ data EventTagSiteFilterType
       -- ^ @BLACKLIST@
     | WhiteList
       -- ^ @WHITELIST@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagSiteFilterType
 
-instance FromText EventTagSiteFilterType where
-    fromText = \case
-        "BLACKLIST" -> Just BlackList
-        "WHITELIST" -> Just WhiteList
-        _ -> Nothing
+instance FromHttpApiData EventTagSiteFilterType where
+    parseQueryParam = \case
+        "BLACKLIST" -> Right BlackList
+        "WHITELIST" -> Right WhiteList
+        x -> Left ("Unable to parse EventTagSiteFilterType from: " <> x)
 
-instance ToText EventTagSiteFilterType where
-    toText = \case
+instance ToHttpApiData EventTagSiteFilterType where
+    toQueryParam = \case
         BlackList -> "BLACKLIST"
         WhiteList -> "WHITELIST"
 
@@ -5776,18 +6195,18 @@ data ReportFormat
       -- ^ @CSV@
     | RFExcel
       -- ^ @EXCEL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportFormat
 
-instance FromText ReportFormat where
-    fromText = \case
-        "CSV" -> Just RFCSV
-        "EXCEL" -> Just RFExcel
-        _ -> Nothing
+instance FromHttpApiData ReportFormat where
+    parseQueryParam = \case
+        "CSV" -> Right RFCSV
+        "EXCEL" -> Right RFExcel
+        x -> Left ("Unable to parse ReportFormat from: " <> x)
 
-instance ToText ReportFormat where
-    toText = \case
+instance ToHttpApiData ReportFormat where
+    toQueryParam = \case
         RFCSV -> "CSV"
         RFExcel -> "EXCEL"
 
@@ -5808,18 +6227,18 @@ data PlacementGroupPlacementGroupType
       -- ^ @PLACEMENT_PACKAGE@
     | PGPGTPlacementRoadblock
       -- ^ @PLACEMENT_ROADBLOCK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementGroupPlacementGroupType
 
-instance FromText PlacementGroupPlacementGroupType where
-    fromText = \case
-        "PLACEMENT_PACKAGE" -> Just PGPGTPlacementPackage
-        "PLACEMENT_ROADBLOCK" -> Just PGPGTPlacementRoadblock
-        _ -> Nothing
+instance FromHttpApiData PlacementGroupPlacementGroupType where
+    parseQueryParam = \case
+        "PLACEMENT_PACKAGE" -> Right PGPGTPlacementPackage
+        "PLACEMENT_ROADBLOCK" -> Right PGPGTPlacementRoadblock
+        x -> Left ("Unable to parse PlacementGroupPlacementGroupType from: " <> x)
 
-instance ToText PlacementGroupPlacementGroupType where
-    toText = \case
+instance ToHttpApiData PlacementGroupPlacementGroupType where
+    toQueryParam = \case
         PGPGTPlacementPackage -> "PLACEMENT_PACKAGE"
         PGPGTPlacementRoadblock -> "PLACEMENT_ROADBLOCK"
 
@@ -5845,23 +6264,23 @@ data PricingPricingType
       -- ^ @PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
     | PlanningPlacementPricingTypeImpressions
       -- ^ @PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PricingPricingType
 
-instance FromText PricingPricingType where
-    fromText = \case
-        "PLANNING_PLACEMENT_PRICING_TYPE_CLICKS" -> Just PlanningPlacementPricingTypeClicks
-        "PLANNING_PLACEMENT_PRICING_TYPE_CPA" -> Just PlanningPlacementPricingTypeCpa
-        "PLANNING_PLACEMENT_PRICING_TYPE_CPC" -> Just PlanningPlacementPricingTypeCpc
-        "PLANNING_PLACEMENT_PRICING_TYPE_CPM" -> Just PlanningPlacementPricingTypeCpm
-        "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_CLICKS" -> Just PlanningPlacementPricingTypeFlatRateClicks
-        "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Just PlanningPlacementPricingTypeFlatRateImpressions
-        "PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS" -> Just PlanningPlacementPricingTypeImpressions
-        _ -> Nothing
+instance FromHttpApiData PricingPricingType where
+    parseQueryParam = \case
+        "PLANNING_PLACEMENT_PRICING_TYPE_CLICKS" -> Right PlanningPlacementPricingTypeClicks
+        "PLANNING_PLACEMENT_PRICING_TYPE_CPA" -> Right PlanningPlacementPricingTypeCpa
+        "PLANNING_PLACEMENT_PRICING_TYPE_CPC" -> Right PlanningPlacementPricingTypeCpc
+        "PLANNING_PLACEMENT_PRICING_TYPE_CPM" -> Right PlanningPlacementPricingTypeCpm
+        "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_CLICKS" -> Right PlanningPlacementPricingTypeFlatRateClicks
+        "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Right PlanningPlacementPricingTypeFlatRateImpressions
+        "PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS" -> Right PlanningPlacementPricingTypeImpressions
+        x -> Left ("Unable to parse PricingPricingType from: " <> x)
 
-instance ToText PricingPricingType where
-    toText = \case
+instance ToHttpApiData PricingPricingType where
+    toQueryParam = \case
         PlanningPlacementPricingTypeClicks -> "PLANNING_PLACEMENT_PRICING_TYPE_CLICKS"
         PlanningPlacementPricingTypeCpa -> "PLANNING_PLACEMENT_PRICING_TYPE_CPA"
         PlanningPlacementPricingTypeCpc -> "PLANNING_PLACEMENT_PRICING_TYPE_CPC"
@@ -5882,18 +6301,18 @@ data SubAccountsListSortOrder
       -- ^ @ASCENDING@
     | SALSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SubAccountsListSortOrder
 
-instance FromText SubAccountsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just SALSOAscending
-        "DESCENDING" -> Just SALSODescending
-        _ -> Nothing
+instance FromHttpApiData SubAccountsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right SALSOAscending
+        "DESCENDING" -> Right SALSODescending
+        x -> Left ("Unable to parse SubAccountsListSortOrder from: " <> x)
 
-instance ToText SubAccountsListSortOrder where
-    toText = \case
+instance ToHttpApiData SubAccountsListSortOrder where
+    toQueryParam = \case
         SALSOAscending -> "ASCENDING"
         SALSODescending -> "DESCENDING"
 
@@ -5909,18 +6328,18 @@ data AdsListSortOrder
       -- ^ @ASCENDING@
     | ADSDescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListSortOrder
 
-instance FromText AdsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just ADSAscending
-        "DESCENDING" -> Just ADSDescending
-        _ -> Nothing
+instance FromHttpApiData AdsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right ADSAscending
+        "DESCENDING" -> Right ADSDescending
+        x -> Left ("Unable to parse AdsListSortOrder from: " <> x)
 
-instance ToText AdsListSortOrder where
-    toText = \case
+instance ToHttpApiData AdsListSortOrder where
+    toQueryParam = \case
         ADSAscending -> "ASCENDING"
         ADSDescending -> "DESCENDING"
 
@@ -5936,18 +6355,18 @@ data ProjectsListSortOrder
       -- ^ @ASCENDING@
     | PLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProjectsListSortOrder
 
-instance FromText ProjectsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just PLSOAscending
-        "DESCENDING" -> Just PLSODescending
-        _ -> Nothing
+instance FromHttpApiData ProjectsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right PLSOAscending
+        "DESCENDING" -> Right PLSODescending
+        x -> Left ("Unable to parse ProjectsListSortOrder from: " <> x)
 
-instance ToText ProjectsListSortOrder where
-    toText = \case
+instance ToHttpApiData ProjectsListSortOrder where
+    toQueryParam = \case
         PLSOAscending -> "ASCENDING"
         PLSODescending -> "DESCENDING"
 
@@ -5963,18 +6382,18 @@ data RemarketingListsListSortField
       -- ^ @ID@
     | RLLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RemarketingListsListSortField
 
-instance FromText RemarketingListsListSortField where
-    fromText = \case
-        "ID" -> Just RLLSFID
-        "NAME" -> Just RLLSFName
-        _ -> Nothing
+instance FromHttpApiData RemarketingListsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right RLLSFID
+        "NAME" -> Right RLLSFName
+        x -> Left ("Unable to parse RemarketingListsListSortField from: " <> x)
 
-instance ToText RemarketingListsListSortField where
-    toText = \case
+instance ToHttpApiData RemarketingListsListSortField where
+    toQueryParam = \case
         RLLSFID -> "ID"
         RLLSFName -> "NAME"
 
@@ -5999,23 +6418,23 @@ data ReportScheduleRepeatsOnWeekDaysItem
       -- ^ @TUESDAY@
     | RSROWDIWednesday
       -- ^ @WEDNESDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportScheduleRepeatsOnWeekDaysItem
 
-instance FromText ReportScheduleRepeatsOnWeekDaysItem where
-    fromText = \case
-        "FRIDAY" -> Just RSROWDIFriday
-        "MONDAY" -> Just RSROWDIMonday
-        "SATURDAY" -> Just RSROWDISaturday
-        "SUNDAY" -> Just RSROWDISunday
-        "THURSDAY" -> Just RSROWDIThursday
-        "TUESDAY" -> Just RSROWDITuesday
-        "WEDNESDAY" -> Just RSROWDIWednesday
-        _ -> Nothing
+instance FromHttpApiData ReportScheduleRepeatsOnWeekDaysItem where
+    parseQueryParam = \case
+        "FRIDAY" -> Right RSROWDIFriday
+        "MONDAY" -> Right RSROWDIMonday
+        "SATURDAY" -> Right RSROWDISaturday
+        "SUNDAY" -> Right RSROWDISunday
+        "THURSDAY" -> Right RSROWDIThursday
+        "TUESDAY" -> Right RSROWDITuesday
+        "WEDNESDAY" -> Right RSROWDIWednesday
+        x -> Left ("Unable to parse ReportScheduleRepeatsOnWeekDaysItem from: " <> x)
 
-instance ToText ReportScheduleRepeatsOnWeekDaysItem where
-    toText = \case
+instance ToHttpApiData ReportScheduleRepeatsOnWeekDaysItem where
+    toQueryParam = \case
         RSROWDIFriday -> "FRIDAY"
         RSROWDIMonday -> "MONDAY"
         RSROWDISaturday -> "SATURDAY"
@@ -6036,18 +6455,18 @@ data CreativeGroupAssignmentCreativeGroupNumber
       -- ^ @CREATIVE_GROUP_ONE@
     | CreativeGroupTwo
       -- ^ @CREATIVE_GROUP_TWO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeGroupAssignmentCreativeGroupNumber
 
-instance FromText CreativeGroupAssignmentCreativeGroupNumber where
-    fromText = \case
-        "CREATIVE_GROUP_ONE" -> Just CreativeGroupOne
-        "CREATIVE_GROUP_TWO" -> Just CreativeGroupTwo
-        _ -> Nothing
+instance FromHttpApiData CreativeGroupAssignmentCreativeGroupNumber where
+    parseQueryParam = \case
+        "CREATIVE_GROUP_ONE" -> Right CreativeGroupOne
+        "CREATIVE_GROUP_TWO" -> Right CreativeGroupTwo
+        x -> Left ("Unable to parse CreativeGroupAssignmentCreativeGroupNumber from: " <> x)
 
-instance ToText CreativeGroupAssignmentCreativeGroupNumber where
-    toText = \case
+instance ToHttpApiData CreativeGroupAssignmentCreativeGroupNumber where
+    toQueryParam = \case
         CreativeGroupOne -> "CREATIVE_GROUP_ONE"
         CreativeGroupTwo -> "CREATIVE_GROUP_TWO"
 
@@ -6063,18 +6482,18 @@ data AccountsListSortField
       -- ^ @ID@
     | AName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountsListSortField
 
-instance FromText AccountsListSortField where
-    fromText = \case
-        "ID" -> Just AID
-        "NAME" -> Just AName
-        _ -> Nothing
+instance FromHttpApiData AccountsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right AID
+        "NAME" -> Right AName
+        x -> Left ("Unable to parse AccountsListSortField from: " <> x)
 
-instance ToText AccountsListSortField where
-    toText = \case
+instance ToHttpApiData AccountsListSortField where
+    toQueryParam = \case
         AID -> "ID"
         AName -> "NAME"
 
@@ -6090,18 +6509,18 @@ data AdvertisersListStatus
       -- ^ @APPROVED@
     | OnHold
       -- ^ @ON_HOLD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertisersListStatus
 
-instance FromText AdvertisersListStatus where
-    fromText = \case
-        "APPROVED" -> Just Approved
-        "ON_HOLD" -> Just OnHold
-        _ -> Nothing
+instance FromHttpApiData AdvertisersListStatus where
+    parseQueryParam = \case
+        "APPROVED" -> Right Approved
+        "ON_HOLD" -> Right OnHold
+        x -> Left ("Unable to parse AdvertisersListStatus from: " <> x)
 
-instance ToText AdvertisersListStatus where
-    toText = \case
+instance ToHttpApiData AdvertisersListStatus where
+    toQueryParam = \case
         Approved -> "APPROVED"
         OnHold -> "ON_HOLD"
 
@@ -6125,20 +6544,20 @@ data DimensionValueMatchType
       -- ^ @EXACT@
     | WildcardExpression
       -- ^ @WILDCARD_EXPRESSION@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DimensionValueMatchType
 
-instance FromText DimensionValueMatchType where
-    fromText = \case
-        "BEGINS_WITH" -> Just BeginsWith
-        "CONTAINS" -> Just Contains
-        "EXACT" -> Just Exact
-        "WILDCARD_EXPRESSION" -> Just WildcardExpression
-        _ -> Nothing
+instance FromHttpApiData DimensionValueMatchType where
+    parseQueryParam = \case
+        "BEGINS_WITH" -> Right BeginsWith
+        "CONTAINS" -> Right Contains
+        "EXACT" -> Right Exact
+        "WILDCARD_EXPRESSION" -> Right WildcardExpression
+        x -> Left ("Unable to parse DimensionValueMatchType from: " <> x)
 
-instance ToText DimensionValueMatchType where
-    toText = \case
+instance ToHttpApiData DimensionValueMatchType where
+    toQueryParam = \case
         BeginsWith -> "BEGINS_WITH"
         Contains -> "CONTAINS"
         Exact -> "EXACT"
@@ -6156,18 +6575,18 @@ data PlacementGroupsListSortOrder
       -- ^ @ASCENDING@
     | PGLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementGroupsListSortOrder
 
-instance FromText PlacementGroupsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just PGLSOAscending
-        "DESCENDING" -> Just PGLSODescending
-        _ -> Nothing
+instance FromHttpApiData PlacementGroupsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right PGLSOAscending
+        "DESCENDING" -> Right PGLSODescending
+        x -> Left ("Unable to parse PlacementGroupsListSortOrder from: " <> x)
 
-instance ToText PlacementGroupsListSortOrder where
-    toText = \case
+instance ToHttpApiData PlacementGroupsListSortOrder where
+    toQueryParam = \case
         PGLSOAscending -> "ASCENDING"
         PGLSODescending -> "DESCENDING"
 
@@ -6178,42 +6597,44 @@ instance ToJSON PlacementGroupsListSortOrder where
     toJSON = toJSONText
 
 -- | Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
--- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
--- mobile devices for regular or interstitial ads, respectively. APP and
--- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
--- refers to rendering an in-stream video ads developed with the VAST
--- standard.
+-- DISPLAY and DISPLAY_INTERSTITIAL refer to either rendering on desktop or
+-- on mobile devices or in mobile apps for regular or interstitial ads,
+-- respectively. APP and APP_INTERSTITIAL are only used for existing
+-- default ads. New mobile placements must be assigned DISPLAY or
+-- DISPLAY_INTERSTITIAL and default ads created for those placements will
+-- be limited to those compatibility types. IN_STREAM_VIDEO refers to
+-- rendering in-stream video ads developed with the VAST standard.
 data AdCompatibility
     = ACApp
       -- ^ @APP@
     | ACAppInterstitial
       -- ^ @APP_INTERSTITIAL@
+    | ACDisplay
+      -- ^ @DISPLAY@
+    | ACDisplayInterstitial
+      -- ^ @DISPLAY_INTERSTITIAL@
     | ACInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-    | ACWeb
-      -- ^ @WEB@
-    | ACWebInterstitial
-      -- ^ @WEB_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdCompatibility
 
-instance FromText AdCompatibility where
-    fromText = \case
-        "APP" -> Just ACApp
-        "APP_INTERSTITIAL" -> Just ACAppInterstitial
-        "IN_STREAM_VIDEO" -> Just ACInStreamVideo
-        "WEB" -> Just ACWeb
-        "WEB_INTERSTITIAL" -> Just ACWebInterstitial
-        _ -> Nothing
+instance FromHttpApiData AdCompatibility where
+    parseQueryParam = \case
+        "APP" -> Right ACApp
+        "APP_INTERSTITIAL" -> Right ACAppInterstitial
+        "DISPLAY" -> Right ACDisplay
+        "DISPLAY_INTERSTITIAL" -> Right ACDisplayInterstitial
+        "IN_STREAM_VIDEO" -> Right ACInStreamVideo
+        x -> Left ("Unable to parse AdCompatibility from: " <> x)
 
-instance ToText AdCompatibility where
-    toText = \case
+instance ToHttpApiData AdCompatibility where
+    toQueryParam = \case
         ACApp -> "APP"
         ACAppInterstitial -> "APP_INTERSTITIAL"
+        ACDisplay -> "DISPLAY"
+        ACDisplayInterstitial -> "DISPLAY_INTERSTITIAL"
         ACInStreamVideo -> "IN_STREAM_VIDEO"
-        ACWeb -> "WEB"
-        ACWebInterstitial -> "WEB_INTERSTITIAL"
 
 instance FromJSON AdCompatibility where
     parseJSON = parseJSONText "AdCompatibility"
@@ -6227,18 +6648,18 @@ data CreativeFieldValuesListSortField
       -- ^ @ID@
     | CFVLSFValue
       -- ^ @VALUE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeFieldValuesListSortField
 
-instance FromText CreativeFieldValuesListSortField where
-    fromText = \case
-        "ID" -> Just CFVLSFID
-        "VALUE" -> Just CFVLSFValue
-        _ -> Nothing
+instance FromHttpApiData CreativeFieldValuesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right CFVLSFID
+        "VALUE" -> Right CFVLSFValue
+        x -> Left ("Unable to parse CreativeFieldValuesListSortField from: " <> x)
 
-instance ToText CreativeFieldValuesListSortField where
-    toText = \case
+instance ToHttpApiData CreativeFieldValuesListSortField where
+    toQueryParam = \case
         CFVLSFID -> "ID"
         CFVLSFValue -> "VALUE"
 
@@ -6254,18 +6675,18 @@ data FloodlightActivityGroupsListSortField
       -- ^ @ID@
     | FAGLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityGroupsListSortField
 
-instance FromText FloodlightActivityGroupsListSortField where
-    fromText = \case
-        "ID" -> Just FAGLSFID
-        "NAME" -> Just FAGLSFName
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivityGroupsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right FAGLSFID
+        "NAME" -> Right FAGLSFName
+        x -> Left ("Unable to parse FloodlightActivityGroupsListSortField from: " <> x)
 
-instance ToText FloodlightActivityGroupsListSortField where
-    toText = \case
+instance ToHttpApiData FloodlightActivityGroupsListSortField where
+    toQueryParam = \case
         FAGLSFID -> "ID"
         FAGLSFName -> "NAME"
 
@@ -6281,18 +6702,18 @@ data OrdersListSortOrder
       -- ^ @ASCENDING@
     | OLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrdersListSortOrder
 
-instance FromText OrdersListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just OLSOAscending
-        "DESCENDING" -> Just OLSODescending
-        _ -> Nothing
+instance FromHttpApiData OrdersListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right OLSOAscending
+        "DESCENDING" -> Right OLSODescending
+        x -> Left ("Unable to parse OrdersListSortOrder from: " <> x)
 
-instance ToText OrdersListSortOrder where
-    toText = \case
+instance ToHttpApiData OrdersListSortOrder where
+    toQueryParam = \case
         OLSOAscending -> "ASCENDING"
         OLSODescending -> "DESCENDING"
 
@@ -6309,18 +6730,18 @@ data AccountAccountProFile
       -- ^ @ACCOUNT_PROFILE_BASIC@
     | AccountProFileStandard
       -- ^ @ACCOUNT_PROFILE_STANDARD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountAccountProFile
 
-instance FromText AccountAccountProFile where
-    fromText = \case
-        "ACCOUNT_PROFILE_BASIC" -> Just AccountProFileBasic
-        "ACCOUNT_PROFILE_STANDARD" -> Just AccountProFileStandard
-        _ -> Nothing
+instance FromHttpApiData AccountAccountProFile where
+    parseQueryParam = \case
+        "ACCOUNT_PROFILE_BASIC" -> Right AccountProFileBasic
+        "ACCOUNT_PROFILE_STANDARD" -> Right AccountProFileStandard
+        x -> Left ("Unable to parse AccountAccountProFile from: " <> x)
 
-instance ToText AccountAccountProFile where
-    toText = \case
+instance ToHttpApiData AccountAccountProFile where
+    toQueryParam = \case
         AccountProFileBasic -> "ACCOUNT_PROFILE_BASIC"
         AccountProFileStandard -> "ACCOUNT_PROFILE_STANDARD"
 
@@ -6335,14 +6756,16 @@ instance ToJSON AccountAccountProFile where
 data CreativeType
     = CTBrandSafeDefaultInstreamVideo
       -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
-    | CTCustomInpage
-      -- ^ @CUSTOM_INPAGE@
-    | CTCustomInterstitial
-      -- ^ @CUSTOM_INTERSTITIAL@
-    | CTEnhancedBanner
-      -- ^ @ENHANCED_BANNER@
-    | CTEnhancedImage
-      -- ^ @ENHANCED_IMAGE@
+    | CTCustomDisplay
+      -- ^ @CUSTOM_DISPLAY@
+    | CTCustomDisplayInterstitial
+      -- ^ @CUSTOM_DISPLAY_INTERSTITIAL@
+    | CTDisplay
+      -- ^ @DISPLAY@
+    | CTDisplayImageGallery
+      -- ^ @DISPLAY_IMAGE_GALLERY@
+    | CTDisplayRedirect
+      -- ^ @DISPLAY_REDIRECT@
     | CTFlashInpage
       -- ^ @FLASH_INPAGE@
     | CTHTML5Banner
@@ -6351,94 +6774,92 @@ data CreativeType
       -- ^ @IMAGE@
     | CTInstreamVideo
       -- ^ @INSTREAM_VIDEO@
+    | CTInstreamVideoRedirect
+      -- ^ @INSTREAM_VIDEO_REDIRECT@
     | CTInternalRedirect
       -- ^ @INTERNAL_REDIRECT@
     | CTInterstitialInternalRedirect
       -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
-    | CTRedirect
-      -- ^ @REDIRECT@
-    | CTRichMediaExpanding
-      -- ^ @RICH_MEDIA_EXPANDING@
+    | CTRichMediaDisplayBanner
+      -- ^ @RICH_MEDIA_DISPLAY_BANNER@
+    | CTRichMediaDisplayExpanding
+      -- ^ @RICH_MEDIA_DISPLAY_EXPANDING@
+    | CTRichMediaDisplayInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_INTERSTITIAL@
+    | CTRichMediaDisplayMultiFloatingInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL@
     | CTRichMediaImExpand
       -- ^ @RICH_MEDIA_IM_EXPAND@
-    | CTRichMediaInpage
-      -- ^ @RICH_MEDIA_INPAGE@
     | CTRichMediaInpageFloating
       -- ^ @RICH_MEDIA_INPAGE_FLOATING@
-    | CTRichMediaInterstitialFloat
-      -- ^ @RICH_MEDIA_INTERSTITIAL_FLOAT@
     | CTRichMediaMobileInApp
       -- ^ @RICH_MEDIA_MOBILE_IN_APP@
-    | CTRichMediaMultiFloating
-      -- ^ @RICH_MEDIA_MULTI_FLOATING@
     | CTRichMediaPeelDown
       -- ^ @RICH_MEDIA_PEEL_DOWN@
     | CTTrackingText
       -- ^ @TRACKING_TEXT@
-    | CTVastRedirect
-      -- ^ @VAST_REDIRECT@
-    | CTVpaidLinear
-      -- ^ @VPAID_LINEAR@
-    | CTVpaidNonLinear
-      -- ^ @VPAID_NON_LINEAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+    | CTVpaidLinearVideo
+      -- ^ @VPAID_LINEAR_VIDEO@
+    | CTVpaidNonLinearVideo
+      -- ^ @VPAID_NON_LINEAR_VIDEO@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeType
 
-instance FromText CreativeType where
-    fromText = \case
-        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Just CTBrandSafeDefaultInstreamVideo
-        "CUSTOM_INPAGE" -> Just CTCustomInpage
-        "CUSTOM_INTERSTITIAL" -> Just CTCustomInterstitial
-        "ENHANCED_BANNER" -> Just CTEnhancedBanner
-        "ENHANCED_IMAGE" -> Just CTEnhancedImage
-        "FLASH_INPAGE" -> Just CTFlashInpage
-        "HTML5_BANNER" -> Just CTHTML5Banner
-        "IMAGE" -> Just CTImage
-        "INSTREAM_VIDEO" -> Just CTInstreamVideo
-        "INTERNAL_REDIRECT" -> Just CTInternalRedirect
-        "INTERSTITIAL_INTERNAL_REDIRECT" -> Just CTInterstitialInternalRedirect
-        "REDIRECT" -> Just CTRedirect
-        "RICH_MEDIA_EXPANDING" -> Just CTRichMediaExpanding
-        "RICH_MEDIA_IM_EXPAND" -> Just CTRichMediaImExpand
-        "RICH_MEDIA_INPAGE" -> Just CTRichMediaInpage
-        "RICH_MEDIA_INPAGE_FLOATING" -> Just CTRichMediaInpageFloating
-        "RICH_MEDIA_INTERSTITIAL_FLOAT" -> Just CTRichMediaInterstitialFloat
-        "RICH_MEDIA_MOBILE_IN_APP" -> Just CTRichMediaMobileInApp
-        "RICH_MEDIA_MULTI_FLOATING" -> Just CTRichMediaMultiFloating
-        "RICH_MEDIA_PEEL_DOWN" -> Just CTRichMediaPeelDown
-        "TRACKING_TEXT" -> Just CTTrackingText
-        "VAST_REDIRECT" -> Just CTVastRedirect
-        "VPAID_LINEAR" -> Just CTVpaidLinear
-        "VPAID_NON_LINEAR" -> Just CTVpaidNonLinear
-        _ -> Nothing
+instance FromHttpApiData CreativeType where
+    parseQueryParam = \case
+        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Right CTBrandSafeDefaultInstreamVideo
+        "CUSTOM_DISPLAY" -> Right CTCustomDisplay
+        "CUSTOM_DISPLAY_INTERSTITIAL" -> Right CTCustomDisplayInterstitial
+        "DISPLAY" -> Right CTDisplay
+        "DISPLAY_IMAGE_GALLERY" -> Right CTDisplayImageGallery
+        "DISPLAY_REDIRECT" -> Right CTDisplayRedirect
+        "FLASH_INPAGE" -> Right CTFlashInpage
+        "HTML5_BANNER" -> Right CTHTML5Banner
+        "IMAGE" -> Right CTImage
+        "INSTREAM_VIDEO" -> Right CTInstreamVideo
+        "INSTREAM_VIDEO_REDIRECT" -> Right CTInstreamVideoRedirect
+        "INTERNAL_REDIRECT" -> Right CTInternalRedirect
+        "INTERSTITIAL_INTERNAL_REDIRECT" -> Right CTInterstitialInternalRedirect
+        "RICH_MEDIA_DISPLAY_BANNER" -> Right CTRichMediaDisplayBanner
+        "RICH_MEDIA_DISPLAY_EXPANDING" -> Right CTRichMediaDisplayExpanding
+        "RICH_MEDIA_DISPLAY_INTERSTITIAL" -> Right CTRichMediaDisplayInterstitial
+        "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL" -> Right CTRichMediaDisplayMultiFloatingInterstitial
+        "RICH_MEDIA_IM_EXPAND" -> Right CTRichMediaImExpand
+        "RICH_MEDIA_INPAGE_FLOATING" -> Right CTRichMediaInpageFloating
+        "RICH_MEDIA_MOBILE_IN_APP" -> Right CTRichMediaMobileInApp
+        "RICH_MEDIA_PEEL_DOWN" -> Right CTRichMediaPeelDown
+        "TRACKING_TEXT" -> Right CTTrackingText
+        "VPAID_LINEAR_VIDEO" -> Right CTVpaidLinearVideo
+        "VPAID_NON_LINEAR_VIDEO" -> Right CTVpaidNonLinearVideo
+        x -> Left ("Unable to parse CreativeType from: " <> x)
 
-instance ToText CreativeType where
-    toText = \case
+instance ToHttpApiData CreativeType where
+    toQueryParam = \case
         CTBrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
-        CTCustomInpage -> "CUSTOM_INPAGE"
-        CTCustomInterstitial -> "CUSTOM_INTERSTITIAL"
-        CTEnhancedBanner -> "ENHANCED_BANNER"
-        CTEnhancedImage -> "ENHANCED_IMAGE"
+        CTCustomDisplay -> "CUSTOM_DISPLAY"
+        CTCustomDisplayInterstitial -> "CUSTOM_DISPLAY_INTERSTITIAL"
+        CTDisplay -> "DISPLAY"
+        CTDisplayImageGallery -> "DISPLAY_IMAGE_GALLERY"
+        CTDisplayRedirect -> "DISPLAY_REDIRECT"
         CTFlashInpage -> "FLASH_INPAGE"
         CTHTML5Banner -> "HTML5_BANNER"
         CTImage -> "IMAGE"
         CTInstreamVideo -> "INSTREAM_VIDEO"
+        CTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
         CTInternalRedirect -> "INTERNAL_REDIRECT"
         CTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
-        CTRedirect -> "REDIRECT"
-        CTRichMediaExpanding -> "RICH_MEDIA_EXPANDING"
+        CTRichMediaDisplayBanner -> "RICH_MEDIA_DISPLAY_BANNER"
+        CTRichMediaDisplayExpanding -> "RICH_MEDIA_DISPLAY_EXPANDING"
+        CTRichMediaDisplayInterstitial -> "RICH_MEDIA_DISPLAY_INTERSTITIAL"
+        CTRichMediaDisplayMultiFloatingInterstitial -> "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL"
         CTRichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
-        CTRichMediaInpage -> "RICH_MEDIA_INPAGE"
         CTRichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
-        CTRichMediaInterstitialFloat -> "RICH_MEDIA_INTERSTITIAL_FLOAT"
         CTRichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
-        CTRichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
         CTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
         CTTrackingText -> "TRACKING_TEXT"
-        CTVastRedirect -> "VAST_REDIRECT"
-        CTVpaidLinear -> "VPAID_LINEAR"
-        CTVpaidNonLinear -> "VPAID_NON_LINEAR"
+        CTVpaidLinearVideo -> "VPAID_LINEAR_VIDEO"
+        CTVpaidNonLinearVideo -> "VPAID_NON_LINEAR_VIDEO"
 
 instance FromJSON CreativeType where
     parseJSON = parseJSONText "CreativeType"
@@ -6454,18 +6875,18 @@ data FilesListSortOrder
     | FLSODescending
       -- ^ @DESCENDING@
       -- Descending order.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilesListSortOrder
 
-instance FromText FilesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just FLSOAscending
-        "DESCENDING" -> Just FLSODescending
-        _ -> Nothing
+instance FromHttpApiData FilesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right FLSOAscending
+        "DESCENDING" -> Right FLSODescending
+        x -> Left ("Unable to parse FilesListSortOrder from: " <> x)
 
-instance ToText FilesListSortOrder where
-    toText = \case
+instance ToHttpApiData FilesListSortOrder where
+    toQueryParam = \case
         FLSOAscending -> "ASCENDING"
         FLSODescending -> "DESCENDING"
 
@@ -6481,18 +6902,18 @@ data AdvertiserGroupsListSortField
       -- ^ @ID@
     | AGLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertiserGroupsListSortField
 
-instance FromText AdvertiserGroupsListSortField where
-    fromText = \case
-        "ID" -> Just AGLSFID
-        "NAME" -> Just AGLSFName
-        _ -> Nothing
+instance FromHttpApiData AdvertiserGroupsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right AGLSFID
+        "NAME" -> Right AGLSFName
+        x -> Left ("Unable to parse AdvertiserGroupsListSortField from: " <> x)
 
-instance ToText AdvertiserGroupsListSortField where
-    toText = \case
+instance ToHttpApiData AdvertiserGroupsListSortField where
+    toQueryParam = \case
         AGLSFID -> "ID"
         AGLSFName -> "NAME"
 
@@ -6511,19 +6932,19 @@ data TargetWindowTargetWindowOption
       -- ^ @CUSTOM@
     | NewWindow
       -- ^ @NEW_WINDOW@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetWindowTargetWindowOption
 
-instance FromText TargetWindowTargetWindowOption where
-    fromText = \case
-        "CURRENT_WINDOW" -> Just CurrentWindow
-        "CUSTOM" -> Just Custom
-        "NEW_WINDOW" -> Just NewWindow
-        _ -> Nothing
+instance FromHttpApiData TargetWindowTargetWindowOption where
+    parseQueryParam = \case
+        "CURRENT_WINDOW" -> Right CurrentWindow
+        "CUSTOM" -> Right Custom
+        "NEW_WINDOW" -> Right NewWindow
+        x -> Left ("Unable to parse TargetWindowTargetWindowOption from: " <> x)
 
-instance ToText TargetWindowTargetWindowOption where
-    toText = \case
+instance ToHttpApiData TargetWindowTargetWindowOption where
+    toQueryParam = \case
         CurrentWindow -> "CURRENT_WINDOW"
         Custom -> "CUSTOM"
         NewWindow -> "NEW_WINDOW"
@@ -6540,18 +6961,18 @@ data DirectorySiteContactsListSortField
       -- ^ @ID@
     | DSCLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteContactsListSortField
 
-instance FromText DirectorySiteContactsListSortField where
-    fromText = \case
-        "ID" -> Just DSCLSFID
-        "NAME" -> Just DSCLSFName
-        _ -> Nothing
+instance FromHttpApiData DirectorySiteContactsListSortField where
+    parseQueryParam = \case
+        "ID" -> Right DSCLSFID
+        "NAME" -> Right DSCLSFName
+        x -> Left ("Unable to parse DirectorySiteContactsListSortField from: " <> x)
 
-instance ToText DirectorySiteContactsListSortField where
-    toText = \case
+instance ToHttpApiData DirectorySiteContactsListSortField where
+    toQueryParam = \case
         DSCLSFID -> "ID"
         DSCLSFName -> "NAME"
 
@@ -6573,21 +6994,21 @@ data PlacementsListPricingTypes
       -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
     | PLPTPricingTypeFlatRateImpressions
       -- ^ @PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsListPricingTypes
 
-instance FromText PlacementsListPricingTypes where
-    fromText = \case
-        "PRICING_TYPE_CPA" -> Just PLPTPricingTypeCpa
-        "PRICING_TYPE_CPC" -> Just PLPTPricingTypeCpc
-        "PRICING_TYPE_CPM" -> Just PLPTPricingTypeCpm
-        "PRICING_TYPE_FLAT_RATE_CLICKS" -> Just PLPTPricingTypeFlatRateClicks
-        "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Just PLPTPricingTypeFlatRateImpressions
-        _ -> Nothing
+instance FromHttpApiData PlacementsListPricingTypes where
+    parseQueryParam = \case
+        "PRICING_TYPE_CPA" -> Right PLPTPricingTypeCpa
+        "PRICING_TYPE_CPC" -> Right PLPTPricingTypeCpc
+        "PRICING_TYPE_CPM" -> Right PLPTPricingTypeCpm
+        "PRICING_TYPE_FLAT_RATE_CLICKS" -> Right PLPTPricingTypeFlatRateClicks
+        "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Right PLPTPricingTypeFlatRateImpressions
+        x -> Left ("Unable to parse PlacementsListPricingTypes from: " <> x)
 
-instance ToText PlacementsListPricingTypes where
-    toText = \case
+instance ToHttpApiData PlacementsListPricingTypes where
+    toQueryParam = \case
         PLPTPricingTypeCpa -> "PRICING_TYPE_CPA"
         PLPTPricingTypeCpc -> "PRICING_TYPE_CPC"
         PLPTPricingTypeCpm -> "PRICING_TYPE_CPM"
@@ -6606,18 +7027,18 @@ data EventTagsListSortOrder
       -- ^ @ASCENDING@
     | ETLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagsListSortOrder
 
-instance FromText EventTagsListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just ETLSOAscending
-        "DESCENDING" -> Just ETLSODescending
-        _ -> Nothing
+instance FromHttpApiData EventTagsListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right ETLSOAscending
+        "DESCENDING" -> Right ETLSODescending
+        x -> Left ("Unable to parse EventTagsListSortOrder from: " <> x)
 
-instance ToText EventTagsListSortOrder where
-    toText = \case
+instance ToHttpApiData EventTagsListSortOrder where
+    toQueryParam = \case
         ETLSOAscending -> "ASCENDING"
         ETLSODescending -> "DESCENDING"
 
@@ -6627,24 +7048,56 @@ instance FromJSON EventTagsListSortOrder where
 instance ToJSON EventTagsListSortOrder where
     toJSON = toJSONText
 
+-- | Describes whether the encrypted cookie was received from ad serving (the
+-- %m macro) or from Data Transfer.
+data EncryptionInfoEncryptionSource
+    = AdServing
+      -- ^ @AD_SERVING@
+    | DataTransfer
+      -- ^ @DATA_TRANSFER@
+    | EncryptionScopeUnknown
+      -- ^ @ENCRYPTION_SCOPE_UNKNOWN@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EncryptionInfoEncryptionSource
+
+instance FromHttpApiData EncryptionInfoEncryptionSource where
+    parseQueryParam = \case
+        "AD_SERVING" -> Right AdServing
+        "DATA_TRANSFER" -> Right DataTransfer
+        "ENCRYPTION_SCOPE_UNKNOWN" -> Right EncryptionScopeUnknown
+        x -> Left ("Unable to parse EncryptionInfoEncryptionSource from: " <> x)
+
+instance ToHttpApiData EncryptionInfoEncryptionSource where
+    toQueryParam = \case
+        AdServing -> "AD_SERVING"
+        DataTransfer -> "DATA_TRANSFER"
+        EncryptionScopeUnknown -> "ENCRYPTION_SCOPE_UNKNOWN"
+
+instance FromJSON EncryptionInfoEncryptionSource where
+    parseJSON = parseJSONText "EncryptionInfoEncryptionSource"
+
+instance ToJSON EncryptionInfoEncryptionSource where
+    toJSON = toJSONText
+
 -- | Field by which to sort the list.
 data DirectorySitesListSortField
     = DSLSFID
       -- ^ @ID@
     | DSLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySitesListSortField
 
-instance FromText DirectorySitesListSortField where
-    fromText = \case
-        "ID" -> Just DSLSFID
-        "NAME" -> Just DSLSFName
-        _ -> Nothing
+instance FromHttpApiData DirectorySitesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right DSLSFID
+        "NAME" -> Right DSLSFName
+        x -> Left ("Unable to parse DirectorySitesListSortField from: " <> x)
 
-instance ToText DirectorySitesListSortField where
-    toText = \case
+instance ToHttpApiData DirectorySitesListSortField where
+    toQueryParam = \case
         DSLSFID -> "ID"
         DSLSFName -> "NAME"
 
@@ -6664,20 +7117,20 @@ data ReportCrossDimensionReachCriteriaDimension
       -- ^ @SITE_BY_ADVERTISER@
     | RCDRCDSiteByCampaign
       -- ^ @SITE_BY_CAMPAIGN@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportCrossDimensionReachCriteriaDimension
 
-instance FromText ReportCrossDimensionReachCriteriaDimension where
-    fromText = \case
-        "ADVERTISER" -> Just RCDRCDAdvertiser
-        "CAMPAIGN" -> Just RCDRCDCampaign
-        "SITE_BY_ADVERTISER" -> Just RCDRCDSiteByAdvertiser
-        "SITE_BY_CAMPAIGN" -> Just RCDRCDSiteByCampaign
-        _ -> Nothing
+instance FromHttpApiData ReportCrossDimensionReachCriteriaDimension where
+    parseQueryParam = \case
+        "ADVERTISER" -> Right RCDRCDAdvertiser
+        "CAMPAIGN" -> Right RCDRCDCampaign
+        "SITE_BY_ADVERTISER" -> Right RCDRCDSiteByAdvertiser
+        "SITE_BY_CAMPAIGN" -> Right RCDRCDSiteByCampaign
+        x -> Left ("Unable to parse ReportCrossDimensionReachCriteriaDimension from: " <> x)
 
-instance ToText ReportCrossDimensionReachCriteriaDimension where
-    toText = \case
+instance ToHttpApiData ReportCrossDimensionReachCriteriaDimension where
+    toQueryParam = \case
         RCDRCDAdvertiser -> "ADVERTISER"
         RCDRCDCampaign -> "CAMPAIGN"
         RCDRCDSiteByAdvertiser -> "SITE_BY_ADVERTISER"
@@ -6695,18 +7148,18 @@ data SitesListSortOrder
       -- ^ @ASCENDING@
     | SLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SitesListSortOrder
 
-instance FromText SitesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just SLSOAscending
-        "DESCENDING" -> Just SLSODescending
-        _ -> Nothing
+instance FromHttpApiData SitesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right SLSOAscending
+        "DESCENDING" -> Right SLSODescending
+        x -> Left ("Unable to parse SitesListSortOrder from: " <> x)
 
-instance ToText SitesListSortOrder where
-    toText = \case
+instance ToHttpApiData SitesListSortOrder where
+    toQueryParam = \case
         SLSOAscending -> "ASCENDING"
         SLSODescending -> "DESCENDING"
 
@@ -6753,34 +7206,34 @@ data PlacementTagFormatsItem
       -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
     | PTFIPlacementTagTrackingJavascript
       -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementTagFormatsItem
 
-instance FromText PlacementTagFormatsItem where
-    fromText = \case
-        "PLACEMENT_TAG_CLICK_COMMANDS" -> Just PTFIPlacementTagClickCommands
-        "PLACEMENT_TAG_IFRAME_ILAYER" -> Just PTFIPlacementTagIframeIlayer
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Just PTFIPlacementTagIframeJavascript
-        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Just PTFIPlacementTagIframeJavascriptLegacy
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Just PTFIPlacementTagInstreamVideoPrefetch
-        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Just PTFIPlacementTagInstreamVideoPrefetchVast3
-        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Just PTFIPlacementTagInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Just PTFIPlacementTagInterstitialIframeJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Just PTFIPlacementTagInterstitialIframeJavascriptLegacy
-        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Just PTFIPlacementTagInterstitialInternalRedirect
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Just PTFIPlacementTagInterstitialJavascript
-        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Just PTFIPlacementTagInterstitialJavascriptLegacy
-        "PLACEMENT_TAG_JAVASCRIPT" -> Just PTFIPlacementTagJavascript
-        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Just PTFIPlacementTagJavascriptLegacy
-        "PLACEMENT_TAG_STANDARD" -> Just PTFIPlacementTagStandard
-        "PLACEMENT_TAG_TRACKING" -> Just PTFIPlacementTagTracking
-        "PLACEMENT_TAG_TRACKING_IFRAME" -> Just PTFIPlacementTagTrackingIframe
-        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Just PTFIPlacementTagTrackingJavascript
-        _ -> Nothing
+instance FromHttpApiData PlacementTagFormatsItem where
+    parseQueryParam = \case
+        "PLACEMENT_TAG_CLICK_COMMANDS" -> Right PTFIPlacementTagClickCommands
+        "PLACEMENT_TAG_IFRAME_ILAYER" -> Right PTFIPlacementTagIframeIlayer
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT" -> Right PTFIPlacementTagIframeJavascript
+        "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY" -> Right PTFIPlacementTagIframeJavascriptLegacy
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH" -> Right PTFIPlacementTagInstreamVideoPrefetch
+        "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3" -> Right PTFIPlacementTagInstreamVideoPrefetchVast3
+        "PLACEMENT_TAG_INTERNAL_REDIRECT" -> Right PTFIPlacementTagInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT" -> Right PTFIPlacementTagInterstitialIframeJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY" -> Right PTFIPlacementTagInterstitialIframeJavascriptLegacy
+        "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT" -> Right PTFIPlacementTagInterstitialInternalRedirect
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT" -> Right PTFIPlacementTagInterstitialJavascript
+        "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY" -> Right PTFIPlacementTagInterstitialJavascriptLegacy
+        "PLACEMENT_TAG_JAVASCRIPT" -> Right PTFIPlacementTagJavascript
+        "PLACEMENT_TAG_JAVASCRIPT_LEGACY" -> Right PTFIPlacementTagJavascriptLegacy
+        "PLACEMENT_TAG_STANDARD" -> Right PTFIPlacementTagStandard
+        "PLACEMENT_TAG_TRACKING" -> Right PTFIPlacementTagTracking
+        "PLACEMENT_TAG_TRACKING_IFRAME" -> Right PTFIPlacementTagTrackingIframe
+        "PLACEMENT_TAG_TRACKING_JAVASCRIPT" -> Right PTFIPlacementTagTrackingJavascript
+        x -> Left ("Unable to parse PlacementTagFormatsItem from: " <> x)
 
-instance ToText PlacementTagFormatsItem where
-    toText = \case
+instance ToHttpApiData PlacementTagFormatsItem where
+    toQueryParam = \case
         PTFIPlacementTagClickCommands -> "PLACEMENT_TAG_CLICK_COMMANDS"
         PTFIPlacementTagIframeIlayer -> "PLACEMENT_TAG_IFRAME_ILAYER"
         PTFIPlacementTagIframeJavascript -> "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
@@ -6806,6 +7259,42 @@ instance FromJSON PlacementTagFormatsItem where
 instance ToJSON PlacementTagFormatsItem where
     toJSON = toJSONText
 
+-- | Type of the object of this dynamic targeting key. This is a required
+-- field.
+data DynamicTargetingKeyObjectType
+    = DTKOTObjectAd
+      -- ^ @OBJECT_AD@
+    | DTKOTObjectAdvertiser
+      -- ^ @OBJECT_ADVERTISER@
+    | DTKOTObjectCreative
+      -- ^ @OBJECT_CREATIVE@
+    | DTKOTObjectPlacement
+      -- ^ @OBJECT_PLACEMENT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DynamicTargetingKeyObjectType
+
+instance FromHttpApiData DynamicTargetingKeyObjectType where
+    parseQueryParam = \case
+        "OBJECT_AD" -> Right DTKOTObjectAd
+        "OBJECT_ADVERTISER" -> Right DTKOTObjectAdvertiser
+        "OBJECT_CREATIVE" -> Right DTKOTObjectCreative
+        "OBJECT_PLACEMENT" -> Right DTKOTObjectPlacement
+        x -> Left ("Unable to parse DynamicTargetingKeyObjectType from: " <> x)
+
+instance ToHttpApiData DynamicTargetingKeyObjectType where
+    toQueryParam = \case
+        DTKOTObjectAd -> "OBJECT_AD"
+        DTKOTObjectAdvertiser -> "OBJECT_ADVERTISER"
+        DTKOTObjectCreative -> "OBJECT_CREATIVE"
+        DTKOTObjectPlacement -> "OBJECT_PLACEMENT"
+
+instance FromJSON DynamicTargetingKeyObjectType where
+    parseJSON = parseJSONText "DynamicTargetingKeyObjectType"
+
+instance ToJSON DynamicTargetingKeyObjectType where
+    toJSON = toJSONText
+
 -- | The type of the report.
 data ReportType
     = RTCrossDimensionReach
@@ -6818,21 +7307,21 @@ data ReportType
       -- ^ @REACH@
     | RTStandard
       -- ^ @STANDARD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportType
 
-instance FromText ReportType where
-    fromText = \case
-        "CROSS_DIMENSION_REACH" -> Just RTCrossDimensionReach
-        "FLOODLIGHT" -> Just RTFloodlight
-        "PATH_TO_CONVERSION" -> Just RTPathToConversion
-        "REACH" -> Just RTReach
-        "STANDARD" -> Just RTStandard
-        _ -> Nothing
+instance FromHttpApiData ReportType where
+    parseQueryParam = \case
+        "CROSS_DIMENSION_REACH" -> Right RTCrossDimensionReach
+        "FLOODLIGHT" -> Right RTFloodlight
+        "PATH_TO_CONVERSION" -> Right RTPathToConversion
+        "REACH" -> Right RTReach
+        "STANDARD" -> Right RTStandard
+        x -> Left ("Unable to parse ReportType from: " <> x)
 
-instance ToText ReportType where
-    toText = \case
+instance ToHttpApiData ReportType where
+    toQueryParam = \case
         RTCrossDimensionReach -> "CROSS_DIMENSION_REACH"
         RTFloodlight -> "FLOODLIGHT"
         RTPathToConversion -> "PATH_TO_CONVERSION"
@@ -6852,8 +7341,12 @@ data CreativeAssetMetadataWarnedValidationRulesItem
       -- ^ @ASSET_FORMAT_UNSUPPORTED_DCM@
     | AssetInvalid
       -- ^ @ASSET_INVALID@
+    | ClickTagHardCoded
+      -- ^ @CLICK_TAG_HARD_CODED@
     | ClickTagInvalid
       -- ^ @CLICK_TAG_INVALID@
+    | ClickTagInGwd
+      -- ^ @CLICK_TAG_IN_GWD@
     | ClickTagMissing
       -- ^ @CLICK_TAG_MISSING@
     | ClickTagMoreThanOne
@@ -6886,43 +7379,50 @@ data CreativeAssetMetadataWarnedValidationRulesItem
       -- ^ @ORPHANED_ASSET@
     | PrimaryHTMLMissing
       -- ^ @PRIMARY_HTML_MISSING@
+    | SvgInvalid
+      -- ^ @SVG_INVALID@
     | ZipInvalid
       -- ^ @ZIP_INVALID@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetMetadataWarnedValidationRulesItem
 
-instance FromText CreativeAssetMetadataWarnedValidationRulesItem where
-    fromText = \case
-        "ADMOB_REFERENCED" -> Just ADMobReferenced
-        "ASSET_FORMAT_UNSUPPORTED_DCM" -> Just AssetFormatUnsupportedDcm
-        "ASSET_INVALID" -> Just AssetInvalid
-        "CLICK_TAG_INVALID" -> Just ClickTagInvalid
-        "CLICK_TAG_MISSING" -> Just ClickTagMissing
-        "CLICK_TAG_MORE_THAN_ONE" -> Just ClickTagMoreThanOne
-        "CLICK_TAG_NON_TOP_LEVEL" -> Just ClickTagNonTopLevel
-        "COMPONENT_UNSUPPORTED_DCM" -> Just ComponentUnsupportedDcm
-        "ENABLER_UNSUPPORTED_METHOD_DCM" -> Just EnablerUnsupportedMethodDcm
-        "EXTERNAL_FILE_REFERENCED" -> Just ExternalFileReferenced
-        "FILE_DETAIL_EMPTY" -> Just FileDetailEmpty
-        "FILE_TYPE_INVALID" -> Just FileTypeInvalid
-        "GWD_PROPERTIES_INVALID" -> Just GwdPropertiesInvalid
-        "HTML5_FEATURE_UNSUPPORTED" -> Just HTML5FeatureUnsupported
-        "LINKED_FILE_NOT_FOUND" -> Just LinkedFileNotFound
-        "MAX_FLASH_VERSION_11" -> Just MaxFlashVersion11
-        "MRAID_REFERENCED" -> Just MraidReferenced
-        "NOT_SSL_COMPLIANT" -> Just NotSSLCompliant
-        "ORPHANED_ASSET" -> Just OrphanedAsset
-        "PRIMARY_HTML_MISSING" -> Just PrimaryHTMLMissing
-        "ZIP_INVALID" -> Just ZipInvalid
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetMetadataWarnedValidationRulesItem where
+    parseQueryParam = \case
+        "ADMOB_REFERENCED" -> Right ADMobReferenced
+        "ASSET_FORMAT_UNSUPPORTED_DCM" -> Right AssetFormatUnsupportedDcm
+        "ASSET_INVALID" -> Right AssetInvalid
+        "CLICK_TAG_HARD_CODED" -> Right ClickTagHardCoded
+        "CLICK_TAG_INVALID" -> Right ClickTagInvalid
+        "CLICK_TAG_IN_GWD" -> Right ClickTagInGwd
+        "CLICK_TAG_MISSING" -> Right ClickTagMissing
+        "CLICK_TAG_MORE_THAN_ONE" -> Right ClickTagMoreThanOne
+        "CLICK_TAG_NON_TOP_LEVEL" -> Right ClickTagNonTopLevel
+        "COMPONENT_UNSUPPORTED_DCM" -> Right ComponentUnsupportedDcm
+        "ENABLER_UNSUPPORTED_METHOD_DCM" -> Right EnablerUnsupportedMethodDcm
+        "EXTERNAL_FILE_REFERENCED" -> Right ExternalFileReferenced
+        "FILE_DETAIL_EMPTY" -> Right FileDetailEmpty
+        "FILE_TYPE_INVALID" -> Right FileTypeInvalid
+        "GWD_PROPERTIES_INVALID" -> Right GwdPropertiesInvalid
+        "HTML5_FEATURE_UNSUPPORTED" -> Right HTML5FeatureUnsupported
+        "LINKED_FILE_NOT_FOUND" -> Right LinkedFileNotFound
+        "MAX_FLASH_VERSION_11" -> Right MaxFlashVersion11
+        "MRAID_REFERENCED" -> Right MraidReferenced
+        "NOT_SSL_COMPLIANT" -> Right NotSSLCompliant
+        "ORPHANED_ASSET" -> Right OrphanedAsset
+        "PRIMARY_HTML_MISSING" -> Right PrimaryHTMLMissing
+        "SVG_INVALID" -> Right SvgInvalid
+        "ZIP_INVALID" -> Right ZipInvalid
+        x -> Left ("Unable to parse CreativeAssetMetadataWarnedValidationRulesItem from: " <> x)
 
-instance ToText CreativeAssetMetadataWarnedValidationRulesItem where
-    toText = \case
+instance ToHttpApiData CreativeAssetMetadataWarnedValidationRulesItem where
+    toQueryParam = \case
         ADMobReferenced -> "ADMOB_REFERENCED"
         AssetFormatUnsupportedDcm -> "ASSET_FORMAT_UNSUPPORTED_DCM"
         AssetInvalid -> "ASSET_INVALID"
+        ClickTagHardCoded -> "CLICK_TAG_HARD_CODED"
         ClickTagInvalid -> "CLICK_TAG_INVALID"
+        ClickTagInGwd -> "CLICK_TAG_IN_GWD"
         ClickTagMissing -> "CLICK_TAG_MISSING"
         ClickTagMoreThanOne -> "CLICK_TAG_MORE_THAN_ONE"
         ClickTagNonTopLevel -> "CLICK_TAG_NON_TOP_LEVEL"
@@ -6939,6 +7439,7 @@ instance ToText CreativeAssetMetadataWarnedValidationRulesItem where
         NotSSLCompliant -> "NOT_SSL_COMPLIANT"
         OrphanedAsset -> "ORPHANED_ASSET"
         PrimaryHTMLMissing -> "PRIMARY_HTML_MISSING"
+        SvgInvalid -> "SVG_INVALID"
         ZipInvalid -> "ZIP_INVALID"
 
 instance FromJSON CreativeAssetMetadataWarnedValidationRulesItem where
@@ -6953,18 +7454,18 @@ data AdSlotPaymentSourceType
       -- ^ @PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID@
     | PlanningPaymentSourceTypePublisherPaid
       -- ^ @PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdSlotPaymentSourceType
 
-instance FromText AdSlotPaymentSourceType where
-    fromText = \case
-        "PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID" -> Just PlanningPaymentSourceTypeAgencyPaid
-        "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID" -> Just PlanningPaymentSourceTypePublisherPaid
-        _ -> Nothing
+instance FromHttpApiData AdSlotPaymentSourceType where
+    parseQueryParam = \case
+        "PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID" -> Right PlanningPaymentSourceTypeAgencyPaid
+        "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID" -> Right PlanningPaymentSourceTypePublisherPaid
+        x -> Left ("Unable to parse AdSlotPaymentSourceType from: " <> x)
 
-instance ToText AdSlotPaymentSourceType where
-    toText = \case
+instance ToHttpApiData AdSlotPaymentSourceType where
+    toQueryParam = \case
         PlanningPaymentSourceTypeAgencyPaid -> "PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID"
         PlanningPaymentSourceTypePublisherPaid -> "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID"
 
@@ -6979,18 +7480,18 @@ data AccountPermissionAccountProFilesItem
       -- ^ @ACCOUNT_PROFILE_BASIC@
     | APAPFIAccountProFileStandard
       -- ^ @ACCOUNT_PROFILE_STANDARD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountPermissionAccountProFilesItem
 
-instance FromText AccountPermissionAccountProFilesItem where
-    fromText = \case
-        "ACCOUNT_PROFILE_BASIC" -> Just APAPFIAccountProFileBasic
-        "ACCOUNT_PROFILE_STANDARD" -> Just APAPFIAccountProFileStandard
-        _ -> Nothing
+instance FromHttpApiData AccountPermissionAccountProFilesItem where
+    parseQueryParam = \case
+        "ACCOUNT_PROFILE_BASIC" -> Right APAPFIAccountProFileBasic
+        "ACCOUNT_PROFILE_STANDARD" -> Right APAPFIAccountProFileStandard
+        x -> Left ("Unable to parse AccountPermissionAccountProFilesItem from: " <> x)
 
-instance ToText AccountPermissionAccountProFilesItem where
-    toText = \case
+instance ToHttpApiData AccountPermissionAccountProFilesItem where
+    toQueryParam = \case
         APAPFIAccountProFileBasic -> "ACCOUNT_PROFILE_BASIC"
         APAPFIAccountProFileStandard -> "ACCOUNT_PROFILE_STANDARD"
 
@@ -7008,19 +7509,19 @@ data CreativeCustomEventAdvertiserCustomEventType
       -- ^ @ADVERTISER_EVENT_EXIT@
     | AdvertiserEventTimer
       -- ^ @ADVERTISER_EVENT_TIMER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeCustomEventAdvertiserCustomEventType
 
-instance FromText CreativeCustomEventAdvertiserCustomEventType where
-    fromText = \case
-        "ADVERTISER_EVENT_COUNTER" -> Just AdvertiserEventCounter
-        "ADVERTISER_EVENT_EXIT" -> Just AdvertiserEventExit
-        "ADVERTISER_EVENT_TIMER" -> Just AdvertiserEventTimer
-        _ -> Nothing
+instance FromHttpApiData CreativeCustomEventAdvertiserCustomEventType where
+    parseQueryParam = \case
+        "ADVERTISER_EVENT_COUNTER" -> Right AdvertiserEventCounter
+        "ADVERTISER_EVENT_EXIT" -> Right AdvertiserEventExit
+        "ADVERTISER_EVENT_TIMER" -> Right AdvertiserEventTimer
+        x -> Left ("Unable to parse CreativeCustomEventAdvertiserCustomEventType from: " <> x)
 
-instance ToText CreativeCustomEventAdvertiserCustomEventType where
-    toText = \case
+instance ToHttpApiData CreativeCustomEventAdvertiserCustomEventType where
+    toQueryParam = \case
         AdvertiserEventCounter -> "ADVERTISER_EVENT_COUNTER"
         AdvertiserEventExit -> "ADVERTISER_EVENT_EXIT"
         AdvertiserEventTimer -> "ADVERTISER_EVENT_TIMER"
@@ -7033,160 +7534,164 @@ instance ToJSON CreativeCustomEventAdvertiserCustomEventType where
 
 -- | Select only change logs with the specified object type.
 data ChangeLogsListObjectType
-    = ObjectAccount
+    = CLLOTObjectAccount
       -- ^ @OBJECT_ACCOUNT@
-    | ObjectAccountBillingFeature
+    | CLLOTObjectAccountBillingFeature
       -- ^ @OBJECT_ACCOUNT_BILLING_FEATURE@
-    | ObjectAd
+    | CLLOTObjectAd
       -- ^ @OBJECT_AD@
-    | ObjectAdvertiser
+    | CLLOTObjectAdvertiser
       -- ^ @OBJECT_ADVERTISER@
-    | ObjectAdvertiserGroup
+    | CLLOTObjectAdvertiserGroup
       -- ^ @OBJECT_ADVERTISER_GROUP@
-    | ObjectBillingAccountGroup
+    | CLLOTObjectBillingAccountGroup
       -- ^ @OBJECT_BILLING_ACCOUNT_GROUP@
-    | ObjectBillingFeature
+    | CLLOTObjectBillingFeature
       -- ^ @OBJECT_BILLING_FEATURE@
-    | ObjectBillingMinimumFee
+    | CLLOTObjectBillingMinimumFee
       -- ^ @OBJECT_BILLING_MINIMUM_FEE@
-    | ObjectBillingProFile
+    | CLLOTObjectBillingProFile
       -- ^ @OBJECT_BILLING_PROFILE@
-    | ObjectCampaign
+    | CLLOTObjectCampaign
       -- ^ @OBJECT_CAMPAIGN@
-    | ObjectContentCategory
+    | CLLOTObjectContentCategory
       -- ^ @OBJECT_CONTENT_CATEGORY@
-    | ObjectCreative
+    | CLLOTObjectCreative
       -- ^ @OBJECT_CREATIVE@
-    | ObjectCreativeAsset
+    | CLLOTObjectCreativeAsset
       -- ^ @OBJECT_CREATIVE_ASSET@
-    | ObjectCreativeBundle
+    | CLLOTObjectCreativeBundle
       -- ^ @OBJECT_CREATIVE_BUNDLE@
-    | ObjectCreativeField
+    | CLLOTObjectCreativeField
       -- ^ @OBJECT_CREATIVE_FIELD@
-    | ObjectCreativeGroup
+    | CLLOTObjectCreativeGroup
       -- ^ @OBJECT_CREATIVE_GROUP@
-    | ObjectDfaSite
+    | CLLOTObjectDfaSite
       -- ^ @OBJECT_DFA_SITE@
-    | ObjectEventTag
+    | CLLOTObjectEventTag
       -- ^ @OBJECT_EVENT_TAG@
-    | ObjectFloodlightActivityGroup
+    | CLLOTObjectFloodlightActivityGroup
       -- ^ @OBJECT_FLOODLIGHT_ACTIVITY_GROUP@
-    | ObjectFloodlightActvity
+    | CLLOTObjectFloodlightActvity
       -- ^ @OBJECT_FLOODLIGHT_ACTVITY@
-    | ObjectFloodlightConfiguration
+    | CLLOTObjectFloodlightConfiguration
       -- ^ @OBJECT_FLOODLIGHT_CONFIGURATION@
-    | ObjectInstreamCreative
+    | CLLOTObjectInstreamCreative
       -- ^ @OBJECT_INSTREAM_CREATIVE@
-    | ObjectLandingPage
+    | CLLOTObjectLandingPage
       -- ^ @OBJECT_LANDING_PAGE@
-    | ObjectMediaOrder
+    | CLLOTObjectMediaOrder
       -- ^ @OBJECT_MEDIA_ORDER@
-    | ObjectPlacement
+    | CLLOTObjectPlacement
       -- ^ @OBJECT_PLACEMENT@
-    | ObjectPlacementStrategy
+    | CLLOTObjectPlacementStrategy
       -- ^ @OBJECT_PLACEMENT_STRATEGY@
-    | ObjectProvidedListClient
+    | CLLOTObjectPlaystoreLink
+      -- ^ @OBJECT_PLAYSTORE_LINK@
+    | CLLOTObjectProvidedListClient
       -- ^ @OBJECT_PROVIDED_LIST_CLIENT@
-    | ObjectRateCard
+    | CLLOTObjectRateCard
       -- ^ @OBJECT_RATE_CARD@
-    | ObjectRemarketingList
+    | CLLOTObjectRemarketingList
       -- ^ @OBJECT_REMARKETING_LIST@
-    | ObjectRichmediaCreative
+    | CLLOTObjectRichmediaCreative
       -- ^ @OBJECT_RICHMEDIA_CREATIVE@
-    | ObjectSdSite
+    | CLLOTObjectSdSite
       -- ^ @OBJECT_SD_SITE@
-    | ObjectSize
+    | CLLOTObjectSize
       -- ^ @OBJECT_SIZE@
-    | ObjectSubAccount
+    | CLLOTObjectSubAccount
       -- ^ @OBJECT_SUBACCOUNT@
-    | ObjectUserProFile
+    | CLLOTObjectUserProFile
       -- ^ @OBJECT_USER_PROFILE@
-    | ObjectUserProFileFilter
+    | CLLOTObjectUserProFileFilter
       -- ^ @OBJECT_USER_PROFILE_FILTER@
-    | ObjectUserRole
+    | CLLOTObjectUserRole
       -- ^ @OBJECT_USER_ROLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChangeLogsListObjectType
 
-instance FromText ChangeLogsListObjectType where
-    fromText = \case
-        "OBJECT_ACCOUNT" -> Just ObjectAccount
-        "OBJECT_ACCOUNT_BILLING_FEATURE" -> Just ObjectAccountBillingFeature
-        "OBJECT_AD" -> Just ObjectAd
-        "OBJECT_ADVERTISER" -> Just ObjectAdvertiser
-        "OBJECT_ADVERTISER_GROUP" -> Just ObjectAdvertiserGroup
-        "OBJECT_BILLING_ACCOUNT_GROUP" -> Just ObjectBillingAccountGroup
-        "OBJECT_BILLING_FEATURE" -> Just ObjectBillingFeature
-        "OBJECT_BILLING_MINIMUM_FEE" -> Just ObjectBillingMinimumFee
-        "OBJECT_BILLING_PROFILE" -> Just ObjectBillingProFile
-        "OBJECT_CAMPAIGN" -> Just ObjectCampaign
-        "OBJECT_CONTENT_CATEGORY" -> Just ObjectContentCategory
-        "OBJECT_CREATIVE" -> Just ObjectCreative
-        "OBJECT_CREATIVE_ASSET" -> Just ObjectCreativeAsset
-        "OBJECT_CREATIVE_BUNDLE" -> Just ObjectCreativeBundle
-        "OBJECT_CREATIVE_FIELD" -> Just ObjectCreativeField
-        "OBJECT_CREATIVE_GROUP" -> Just ObjectCreativeGroup
-        "OBJECT_DFA_SITE" -> Just ObjectDfaSite
-        "OBJECT_EVENT_TAG" -> Just ObjectEventTag
-        "OBJECT_FLOODLIGHT_ACTIVITY_GROUP" -> Just ObjectFloodlightActivityGroup
-        "OBJECT_FLOODLIGHT_ACTVITY" -> Just ObjectFloodlightActvity
-        "OBJECT_FLOODLIGHT_CONFIGURATION" -> Just ObjectFloodlightConfiguration
-        "OBJECT_INSTREAM_CREATIVE" -> Just ObjectInstreamCreative
-        "OBJECT_LANDING_PAGE" -> Just ObjectLandingPage
-        "OBJECT_MEDIA_ORDER" -> Just ObjectMediaOrder
-        "OBJECT_PLACEMENT" -> Just ObjectPlacement
-        "OBJECT_PLACEMENT_STRATEGY" -> Just ObjectPlacementStrategy
-        "OBJECT_PROVIDED_LIST_CLIENT" -> Just ObjectProvidedListClient
-        "OBJECT_RATE_CARD" -> Just ObjectRateCard
-        "OBJECT_REMARKETING_LIST" -> Just ObjectRemarketingList
-        "OBJECT_RICHMEDIA_CREATIVE" -> Just ObjectRichmediaCreative
-        "OBJECT_SD_SITE" -> Just ObjectSdSite
-        "OBJECT_SIZE" -> Just ObjectSize
-        "OBJECT_SUBACCOUNT" -> Just ObjectSubAccount
-        "OBJECT_USER_PROFILE" -> Just ObjectUserProFile
-        "OBJECT_USER_PROFILE_FILTER" -> Just ObjectUserProFileFilter
-        "OBJECT_USER_ROLE" -> Just ObjectUserRole
-        _ -> Nothing
+instance FromHttpApiData ChangeLogsListObjectType where
+    parseQueryParam = \case
+        "OBJECT_ACCOUNT" -> Right CLLOTObjectAccount
+        "OBJECT_ACCOUNT_BILLING_FEATURE" -> Right CLLOTObjectAccountBillingFeature
+        "OBJECT_AD" -> Right CLLOTObjectAd
+        "OBJECT_ADVERTISER" -> Right CLLOTObjectAdvertiser
+        "OBJECT_ADVERTISER_GROUP" -> Right CLLOTObjectAdvertiserGroup
+        "OBJECT_BILLING_ACCOUNT_GROUP" -> Right CLLOTObjectBillingAccountGroup
+        "OBJECT_BILLING_FEATURE" -> Right CLLOTObjectBillingFeature
+        "OBJECT_BILLING_MINIMUM_FEE" -> Right CLLOTObjectBillingMinimumFee
+        "OBJECT_BILLING_PROFILE" -> Right CLLOTObjectBillingProFile
+        "OBJECT_CAMPAIGN" -> Right CLLOTObjectCampaign
+        "OBJECT_CONTENT_CATEGORY" -> Right CLLOTObjectContentCategory
+        "OBJECT_CREATIVE" -> Right CLLOTObjectCreative
+        "OBJECT_CREATIVE_ASSET" -> Right CLLOTObjectCreativeAsset
+        "OBJECT_CREATIVE_BUNDLE" -> Right CLLOTObjectCreativeBundle
+        "OBJECT_CREATIVE_FIELD" -> Right CLLOTObjectCreativeField
+        "OBJECT_CREATIVE_GROUP" -> Right CLLOTObjectCreativeGroup
+        "OBJECT_DFA_SITE" -> Right CLLOTObjectDfaSite
+        "OBJECT_EVENT_TAG" -> Right CLLOTObjectEventTag
+        "OBJECT_FLOODLIGHT_ACTIVITY_GROUP" -> Right CLLOTObjectFloodlightActivityGroup
+        "OBJECT_FLOODLIGHT_ACTVITY" -> Right CLLOTObjectFloodlightActvity
+        "OBJECT_FLOODLIGHT_CONFIGURATION" -> Right CLLOTObjectFloodlightConfiguration
+        "OBJECT_INSTREAM_CREATIVE" -> Right CLLOTObjectInstreamCreative
+        "OBJECT_LANDING_PAGE" -> Right CLLOTObjectLandingPage
+        "OBJECT_MEDIA_ORDER" -> Right CLLOTObjectMediaOrder
+        "OBJECT_PLACEMENT" -> Right CLLOTObjectPlacement
+        "OBJECT_PLACEMENT_STRATEGY" -> Right CLLOTObjectPlacementStrategy
+        "OBJECT_PLAYSTORE_LINK" -> Right CLLOTObjectPlaystoreLink
+        "OBJECT_PROVIDED_LIST_CLIENT" -> Right CLLOTObjectProvidedListClient
+        "OBJECT_RATE_CARD" -> Right CLLOTObjectRateCard
+        "OBJECT_REMARKETING_LIST" -> Right CLLOTObjectRemarketingList
+        "OBJECT_RICHMEDIA_CREATIVE" -> Right CLLOTObjectRichmediaCreative
+        "OBJECT_SD_SITE" -> Right CLLOTObjectSdSite
+        "OBJECT_SIZE" -> Right CLLOTObjectSize
+        "OBJECT_SUBACCOUNT" -> Right CLLOTObjectSubAccount
+        "OBJECT_USER_PROFILE" -> Right CLLOTObjectUserProFile
+        "OBJECT_USER_PROFILE_FILTER" -> Right CLLOTObjectUserProFileFilter
+        "OBJECT_USER_ROLE" -> Right CLLOTObjectUserRole
+        x -> Left ("Unable to parse ChangeLogsListObjectType from: " <> x)
 
-instance ToText ChangeLogsListObjectType where
-    toText = \case
-        ObjectAccount -> "OBJECT_ACCOUNT"
-        ObjectAccountBillingFeature -> "OBJECT_ACCOUNT_BILLING_FEATURE"
-        ObjectAd -> "OBJECT_AD"
-        ObjectAdvertiser -> "OBJECT_ADVERTISER"
-        ObjectAdvertiserGroup -> "OBJECT_ADVERTISER_GROUP"
-        ObjectBillingAccountGroup -> "OBJECT_BILLING_ACCOUNT_GROUP"
-        ObjectBillingFeature -> "OBJECT_BILLING_FEATURE"
-        ObjectBillingMinimumFee -> "OBJECT_BILLING_MINIMUM_FEE"
-        ObjectBillingProFile -> "OBJECT_BILLING_PROFILE"
-        ObjectCampaign -> "OBJECT_CAMPAIGN"
-        ObjectContentCategory -> "OBJECT_CONTENT_CATEGORY"
-        ObjectCreative -> "OBJECT_CREATIVE"
-        ObjectCreativeAsset -> "OBJECT_CREATIVE_ASSET"
-        ObjectCreativeBundle -> "OBJECT_CREATIVE_BUNDLE"
-        ObjectCreativeField -> "OBJECT_CREATIVE_FIELD"
-        ObjectCreativeGroup -> "OBJECT_CREATIVE_GROUP"
-        ObjectDfaSite -> "OBJECT_DFA_SITE"
-        ObjectEventTag -> "OBJECT_EVENT_TAG"
-        ObjectFloodlightActivityGroup -> "OBJECT_FLOODLIGHT_ACTIVITY_GROUP"
-        ObjectFloodlightActvity -> "OBJECT_FLOODLIGHT_ACTVITY"
-        ObjectFloodlightConfiguration -> "OBJECT_FLOODLIGHT_CONFIGURATION"
-        ObjectInstreamCreative -> "OBJECT_INSTREAM_CREATIVE"
-        ObjectLandingPage -> "OBJECT_LANDING_PAGE"
-        ObjectMediaOrder -> "OBJECT_MEDIA_ORDER"
-        ObjectPlacement -> "OBJECT_PLACEMENT"
-        ObjectPlacementStrategy -> "OBJECT_PLACEMENT_STRATEGY"
-        ObjectProvidedListClient -> "OBJECT_PROVIDED_LIST_CLIENT"
-        ObjectRateCard -> "OBJECT_RATE_CARD"
-        ObjectRemarketingList -> "OBJECT_REMARKETING_LIST"
-        ObjectRichmediaCreative -> "OBJECT_RICHMEDIA_CREATIVE"
-        ObjectSdSite -> "OBJECT_SD_SITE"
-        ObjectSize -> "OBJECT_SIZE"
-        ObjectSubAccount -> "OBJECT_SUBACCOUNT"
-        ObjectUserProFile -> "OBJECT_USER_PROFILE"
-        ObjectUserProFileFilter -> "OBJECT_USER_PROFILE_FILTER"
-        ObjectUserRole -> "OBJECT_USER_ROLE"
+instance ToHttpApiData ChangeLogsListObjectType where
+    toQueryParam = \case
+        CLLOTObjectAccount -> "OBJECT_ACCOUNT"
+        CLLOTObjectAccountBillingFeature -> "OBJECT_ACCOUNT_BILLING_FEATURE"
+        CLLOTObjectAd -> "OBJECT_AD"
+        CLLOTObjectAdvertiser -> "OBJECT_ADVERTISER"
+        CLLOTObjectAdvertiserGroup -> "OBJECT_ADVERTISER_GROUP"
+        CLLOTObjectBillingAccountGroup -> "OBJECT_BILLING_ACCOUNT_GROUP"
+        CLLOTObjectBillingFeature -> "OBJECT_BILLING_FEATURE"
+        CLLOTObjectBillingMinimumFee -> "OBJECT_BILLING_MINIMUM_FEE"
+        CLLOTObjectBillingProFile -> "OBJECT_BILLING_PROFILE"
+        CLLOTObjectCampaign -> "OBJECT_CAMPAIGN"
+        CLLOTObjectContentCategory -> "OBJECT_CONTENT_CATEGORY"
+        CLLOTObjectCreative -> "OBJECT_CREATIVE"
+        CLLOTObjectCreativeAsset -> "OBJECT_CREATIVE_ASSET"
+        CLLOTObjectCreativeBundle -> "OBJECT_CREATIVE_BUNDLE"
+        CLLOTObjectCreativeField -> "OBJECT_CREATIVE_FIELD"
+        CLLOTObjectCreativeGroup -> "OBJECT_CREATIVE_GROUP"
+        CLLOTObjectDfaSite -> "OBJECT_DFA_SITE"
+        CLLOTObjectEventTag -> "OBJECT_EVENT_TAG"
+        CLLOTObjectFloodlightActivityGroup -> "OBJECT_FLOODLIGHT_ACTIVITY_GROUP"
+        CLLOTObjectFloodlightActvity -> "OBJECT_FLOODLIGHT_ACTVITY"
+        CLLOTObjectFloodlightConfiguration -> "OBJECT_FLOODLIGHT_CONFIGURATION"
+        CLLOTObjectInstreamCreative -> "OBJECT_INSTREAM_CREATIVE"
+        CLLOTObjectLandingPage -> "OBJECT_LANDING_PAGE"
+        CLLOTObjectMediaOrder -> "OBJECT_MEDIA_ORDER"
+        CLLOTObjectPlacement -> "OBJECT_PLACEMENT"
+        CLLOTObjectPlacementStrategy -> "OBJECT_PLACEMENT_STRATEGY"
+        CLLOTObjectPlaystoreLink -> "OBJECT_PLAYSTORE_LINK"
+        CLLOTObjectProvidedListClient -> "OBJECT_PROVIDED_LIST_CLIENT"
+        CLLOTObjectRateCard -> "OBJECT_RATE_CARD"
+        CLLOTObjectRemarketingList -> "OBJECT_REMARKETING_LIST"
+        CLLOTObjectRichmediaCreative -> "OBJECT_RICHMEDIA_CREATIVE"
+        CLLOTObjectSdSite -> "OBJECT_SD_SITE"
+        CLLOTObjectSize -> "OBJECT_SIZE"
+        CLLOTObjectSubAccount -> "OBJECT_SUBACCOUNT"
+        CLLOTObjectUserProFile -> "OBJECT_USER_PROFILE"
+        CLLOTObjectUserProFileFilter -> "OBJECT_USER_PROFILE_FILTER"
+        CLLOTObjectUserRole -> "OBJECT_USER_ROLE"
 
 instance FromJSON ChangeLogsListObjectType where
     parseJSON = parseJSONText "ChangeLogsListObjectType"
@@ -7202,19 +7707,19 @@ data PricingCapCostType
       -- ^ @PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY@
     | PlanningPlacementCapCostTypeNone
       -- ^ @PLANNING_PLACEMENT_CAP_COST_TYPE_NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PricingCapCostType
 
-instance FromText PricingCapCostType where
-    fromText = \case
-        "PLANNING_PLACEMENT_CAP_COST_TYPE_CUMULATIVE" -> Just PlanningPlacementCapCostTypeCumulative
-        "PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY" -> Just PlanningPlacementCapCostTypeMonthly
-        "PLANNING_PLACEMENT_CAP_COST_TYPE_NONE" -> Just PlanningPlacementCapCostTypeNone
-        _ -> Nothing
+instance FromHttpApiData PricingCapCostType where
+    parseQueryParam = \case
+        "PLANNING_PLACEMENT_CAP_COST_TYPE_CUMULATIVE" -> Right PlanningPlacementCapCostTypeCumulative
+        "PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY" -> Right PlanningPlacementCapCostTypeMonthly
+        "PLANNING_PLACEMENT_CAP_COST_TYPE_NONE" -> Right PlanningPlacementCapCostTypeNone
+        x -> Left ("Unable to parse PricingCapCostType from: " <> x)
 
-instance ToText PricingCapCostType where
-    toText = \case
+instance ToHttpApiData PricingCapCostType where
+    toQueryParam = \case
         PlanningPlacementCapCostTypeCumulative -> "PLANNING_PLACEMENT_CAP_COST_TYPE_CUMULATIVE"
         PlanningPlacementCapCostTypeMonthly -> "PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY"
         PlanningPlacementCapCostTypeNone -> "PLANNING_PLACEMENT_CAP_COST_TYPE_NONE"
@@ -7246,25 +7751,25 @@ data CreativeAssetDisplayType
       -- ^ @ASSET_DISPLAY_TYPE_VPAID_LINEAR@
     | AssetDisplayTypeVpaidNonLinear
       -- ^ @ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetDisplayType
 
-instance FromText CreativeAssetDisplayType where
-    fromText = \case
-        "ASSET_DISPLAY_TYPE_EXPANDING" -> Just AssetDisplayTypeExpanding
-        "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH" -> Just AssetDisplayTypeFlashInFlash
-        "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING" -> Just AssetDisplayTypeFlashInFlashExpanding
-        "ASSET_DISPLAY_TYPE_FLOATING" -> Just AssetDisplayTypeFloating
-        "ASSET_DISPLAY_TYPE_INPAGE" -> Just AssetDisplayTypeInpage
-        "ASSET_DISPLAY_TYPE_OVERLAY" -> Just AssetDisplayTypeOverlay
-        "ASSET_DISPLAY_TYPE_PEEL_DOWN" -> Just AssetDisplayTypePeelDown
-        "ASSET_DISPLAY_TYPE_VPAID_LINEAR" -> Just AssetDisplayTypeVpaidLinear
-        "ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR" -> Just AssetDisplayTypeVpaidNonLinear
-        _ -> Nothing
+instance FromHttpApiData CreativeAssetDisplayType where
+    parseQueryParam = \case
+        "ASSET_DISPLAY_TYPE_EXPANDING" -> Right AssetDisplayTypeExpanding
+        "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH" -> Right AssetDisplayTypeFlashInFlash
+        "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING" -> Right AssetDisplayTypeFlashInFlashExpanding
+        "ASSET_DISPLAY_TYPE_FLOATING" -> Right AssetDisplayTypeFloating
+        "ASSET_DISPLAY_TYPE_INPAGE" -> Right AssetDisplayTypeInpage
+        "ASSET_DISPLAY_TYPE_OVERLAY" -> Right AssetDisplayTypeOverlay
+        "ASSET_DISPLAY_TYPE_PEEL_DOWN" -> Right AssetDisplayTypePeelDown
+        "ASSET_DISPLAY_TYPE_VPAID_LINEAR" -> Right AssetDisplayTypeVpaidLinear
+        "ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR" -> Right AssetDisplayTypeVpaidNonLinear
+        x -> Left ("Unable to parse CreativeAssetDisplayType from: " <> x)
 
-instance ToText CreativeAssetDisplayType where
-    toText = \case
+instance ToHttpApiData CreativeAssetDisplayType where
+    toQueryParam = \case
         AssetDisplayTypeExpanding -> "ASSET_DISPLAY_TYPE_EXPANDING"
         AssetDisplayTypeFlashInFlash -> "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH"
         AssetDisplayTypeFlashInFlashExpanding -> "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING"
@@ -7294,21 +7799,21 @@ data FloodlightActivityCountingMethod
       -- ^ @TRANSACTIONS_COUNTING@
     | UniqueCounting
       -- ^ @UNIQUE_COUNTING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityCountingMethod
 
-instance FromText FloodlightActivityCountingMethod where
-    fromText = \case
-        "ITEMS_SOLD_COUNTING" -> Just ItemsSoldCounting
-        "SESSION_COUNTING" -> Just SessionCounting
-        "STANDARD_COUNTING" -> Just StandardCounting
-        "TRANSACTIONS_COUNTING" -> Just TransactionsCounting
-        "UNIQUE_COUNTING" -> Just UniqueCounting
-        _ -> Nothing
+instance FromHttpApiData FloodlightActivityCountingMethod where
+    parseQueryParam = \case
+        "ITEMS_SOLD_COUNTING" -> Right ItemsSoldCounting
+        "SESSION_COUNTING" -> Right SessionCounting
+        "STANDARD_COUNTING" -> Right StandardCounting
+        "TRANSACTIONS_COUNTING" -> Right TransactionsCounting
+        "UNIQUE_COUNTING" -> Right UniqueCounting
+        x -> Left ("Unable to parse FloodlightActivityCountingMethod from: " <> x)
 
-instance ToText FloodlightActivityCountingMethod where
-    toText = \case
+instance ToHttpApiData FloodlightActivityCountingMethod where
+    toQueryParam = \case
         ItemsSoldCounting -> "ITEMS_SOLD_COUNTING"
         SessionCounting -> "SESSION_COUNTING"
         StandardCounting -> "STANDARD_COUNTING"
@@ -7327,18 +7832,18 @@ data ContentCategoriesListSortOrder
       -- ^ @ASCENDING@
     | CCLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentCategoriesListSortOrder
 
-instance FromText ContentCategoriesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just CCLSOAscending
-        "DESCENDING" -> Just CCLSODescending
-        _ -> Nothing
+instance FromHttpApiData ContentCategoriesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right CCLSOAscending
+        "DESCENDING" -> Right CCLSODescending
+        x -> Left ("Unable to parse ContentCategoriesListSortOrder from: " <> x)
 
-instance ToText ContentCategoriesListSortOrder where
-    toText = \case
+instance ToHttpApiData ContentCategoriesListSortOrder where
+    toQueryParam = \case
         CCLSOAscending -> "ASCENDING"
         CCLSODescending -> "DESCENDING"
 
@@ -7354,18 +7859,18 @@ data AdvertiserStatus
       -- ^ @APPROVED@
     | ASOnHold
       -- ^ @ON_HOLD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertiserStatus
 
-instance FromText AdvertiserStatus where
-    fromText = \case
-        "APPROVED" -> Just ASApproved
-        "ON_HOLD" -> Just ASOnHold
-        _ -> Nothing
+instance FromHttpApiData AdvertiserStatus where
+    parseQueryParam = \case
+        "APPROVED" -> Right ASApproved
+        "ON_HOLD" -> Right ASOnHold
+        x -> Left ("Unable to parse AdvertiserStatus from: " <> x)
 
-instance ToText AdvertiserStatus where
-    toText = \case
+instance ToHttpApiData AdvertiserStatus where
+    toQueryParam = \case
         ASApproved -> "APPROVED"
         ASOnHold -> "ON_HOLD"
 

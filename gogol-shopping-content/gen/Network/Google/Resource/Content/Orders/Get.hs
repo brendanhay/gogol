@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Orders.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type OrdersGetResource =
 -- | Retrieves an order from your Merchant Center account.
 --
 -- /See:/ 'ordersGet' smart constructor.
-data OrdersGet = OrdersGet
+data OrdersGet = OrdersGet'
     { _ogMerchantId :: !(Textual Word64)
     , _ogOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ ordersGet
     -> Text -- ^ 'ogOrderId'
     -> OrdersGet
 ordersGet pOgMerchantId_ pOgOrderId_ =
-    OrdersGet
+    OrdersGet'
     { _ogMerchantId = _Coerce # pOgMerchantId_
     , _ogOrderId = pOgOrderId_
     }
@@ -88,7 +88,9 @@ ogOrderId
 
 instance GoogleRequest OrdersGet where
         type Rs OrdersGet = Order
-        requestClient OrdersGet{..}
+        type Scopes OrdersGet =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient OrdersGet'{..}
           = go _ogMerchantId _ogOrderId (Just AltJSON)
               shoppingContentService
           where go

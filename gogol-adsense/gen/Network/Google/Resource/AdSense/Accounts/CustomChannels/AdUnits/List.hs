@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type AccountsCustomChannelsAdUnitsListResource =
 -- | List all ad units in the specified custom channel.
 --
 -- /See:/ 'accountsCustomChannelsAdUnitsList' smart constructor.
-data AccountsCustomChannelsAdUnitsList = AccountsCustomChannelsAdUnitsList
+data AccountsCustomChannelsAdUnitsList = AccountsCustomChannelsAdUnitsList'
     { _accaulIncludeInactive :: !(Maybe Bool)
     , _accaulCustomChannelId :: !Text
     , _accaulAdClientId      :: !Text
@@ -94,7 +94,7 @@ accountsCustomChannelsAdUnitsList
     -> Text -- ^ 'accaulAccountId'
     -> AccountsCustomChannelsAdUnitsList
 accountsCustomChannelsAdUnitsList pAccaulCustomChannelId_ pAccaulAdClientId_ pAccaulAccountId_ =
-    AccountsCustomChannelsAdUnitsList
+    AccountsCustomChannelsAdUnitsList'
     { _accaulIncludeInactive = Nothing
     , _accaulCustomChannelId = pAccaulCustomChannelId_
     , _accaulAdClientId = pAccaulAdClientId_
@@ -146,7 +146,10 @@ accaulMaxResults
 instance GoogleRequest
          AccountsCustomChannelsAdUnitsList where
         type Rs AccountsCustomChannelsAdUnitsList = AdUnits
-        requestClient AccountsCustomChannelsAdUnitsList{..}
+        type Scopes AccountsCustomChannelsAdUnitsList =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient AccountsCustomChannelsAdUnitsList'{..}
           = go _accaulAccountId _accaulAdClientId
               _accaulCustomChannelId
               _accaulIncludeInactive

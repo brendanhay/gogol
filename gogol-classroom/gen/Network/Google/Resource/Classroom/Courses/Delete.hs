@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -70,7 +70,7 @@ type CoursesDeleteResource =
 -- exists with the requested ID.
 --
 -- /See:/ 'coursesDelete' smart constructor.
-data CoursesDelete = CoursesDelete
+data CoursesDelete = CoursesDelete'
     { _cdXgafv          :: !(Maybe Text)
     , _cdUploadProtocol :: !(Maybe Text)
     , _cdPp             :: !Bool
@@ -104,7 +104,7 @@ coursesDelete
     :: Text -- ^ 'cdId'
     -> CoursesDelete
 coursesDelete pCdId_ =
-    CoursesDelete
+    CoursesDelete'
     { _cdXgafv = Nothing
     , _cdUploadProtocol = Nothing
     , _cdPp = True
@@ -158,7 +158,9 @@ cdCallback
 
 instance GoogleRequest CoursesDelete where
         type Rs CoursesDelete = Empty
-        requestClient CoursesDelete{..}
+        type Scopes CoursesDelete =
+             '["https://www.googleapis.com/auth/classroom.courses"]
+        requestClient CoursesDelete'{..}
           = go _cdId _cdXgafv _cdUploadProtocol (Just _cdPp)
               _cdAccessToken
               _cdUploadType

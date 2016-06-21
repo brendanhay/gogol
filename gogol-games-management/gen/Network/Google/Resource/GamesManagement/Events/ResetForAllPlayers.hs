@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Events.ResetForAllPlayers
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type EventsResetForAllPlayersResource =
 -- can be reset. All quests that use the event will also be reset.
 --
 -- /See:/ 'eventsResetForAllPlayers' smart constructor.
-newtype EventsResetForAllPlayers = EventsResetForAllPlayers
+newtype EventsResetForAllPlayers = EventsResetForAllPlayers'
     { _erfapEventId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ eventsResetForAllPlayers
     :: Text -- ^ 'erfapEventId'
     -> EventsResetForAllPlayers
 eventsResetForAllPlayers pErfapEventId_ =
-    EventsResetForAllPlayers
+    EventsResetForAllPlayers'
     { _erfapEventId = pErfapEventId_
     }
 
@@ -80,7 +80,10 @@ erfapEventId
 
 instance GoogleRequest EventsResetForAllPlayers where
         type Rs EventsResetForAllPlayers = ()
-        requestClient EventsResetForAllPlayers{..}
+        type Scopes EventsResetForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient EventsResetForAllPlayers'{..}
           = go _erfapEventId (Just AltJSON)
               gamesManagementService
           where go

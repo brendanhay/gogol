@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type AccountsPreferredDealsGetResource =
 -- | Get information about the selected Ad Exchange Preferred Deal.
 --
 -- /See:/ 'accountsPreferredDealsGet' smart constructor.
-data AccountsPreferredDealsGet = AccountsPreferredDealsGet
+data AccountsPreferredDealsGet = AccountsPreferredDealsGet'
     { _apdgDealId    :: !Text
     , _apdgAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsPreferredDealsGet
     -> Text -- ^ 'apdgAccountId'
     -> AccountsPreferredDealsGet
 accountsPreferredDealsGet pApdgDealId_ pApdgAccountId_ =
-    AccountsPreferredDealsGet
+    AccountsPreferredDealsGet'
     { _apdgDealId = pApdgDealId_
     , _apdgAccountId = pApdgAccountId_
     }
@@ -90,7 +90,10 @@ apdgAccountId
 instance GoogleRequest AccountsPreferredDealsGet
          where
         type Rs AccountsPreferredDealsGet = PreferredDeal
-        requestClient AccountsPreferredDealsGet{..}
+        type Scopes AccountsPreferredDealsGet =
+             '["https://www.googleapis.com/auth/adexchange.seller",
+               "https://www.googleapis.com/auth/adexchange.seller.readonly"]
+        requestClient AccountsPreferredDealsGet'{..}
           = go _apdgAccountId _apdgDealId (Just AltJSON)
               adExchangeSellerService
           where go

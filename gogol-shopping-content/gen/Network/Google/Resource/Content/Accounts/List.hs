@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accounts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AccountsListResource =
 -- | Lists the sub-accounts in your Merchant Center account.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
+data AccountsList = AccountsList'
     { _alMerchantId :: !(Textual Word64)
     , _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ accountsList
     :: Word64 -- ^ 'alMerchantId'
     -> AccountsList
 accountsList pAlMerchantId_ =
-    AccountsList
+    AccountsList'
     { _alMerchantId = _Coerce # pAlMerchantId_
     , _alPageToken = Nothing
     , _alMaxResults = Nothing
@@ -101,7 +101,9 @@ alMaxResults
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = AccountsListResponse
-        requestClient AccountsList{..}
+        type Scopes AccountsList =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountsList'{..}
           = go _alMerchantId _alPageToken _alMaxResults
               (Just AltJSON)
               shoppingContentService

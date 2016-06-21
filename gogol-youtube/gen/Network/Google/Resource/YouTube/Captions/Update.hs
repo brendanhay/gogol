@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.Captions.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -67,8 +67,8 @@ type CaptionsUpdateResource =
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "sync" Bool :>
                        QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" AltMedia :>
-                           MultipartRelated '[JSON] Caption RequestBody :>
+                         QueryParam "uploadType" Multipart :>
+                           MultipartRelated '[JSON] Caption :>
                              Put '[JSON] Caption
 
 -- | Updates a caption track. When updating a caption track, you can change
@@ -76,7 +76,7 @@ type CaptionsUpdateResource =
 -- both.
 --
 -- /See:/ 'captionsUpdate' smart constructor.
-data CaptionsUpdate = CaptionsUpdate
+data CaptionsUpdate = CaptionsUpdate'
     { _capOnBehalfOf             :: !(Maybe Text)
     , _capPart                   :: !Text
     , _capPayload                :: !Caption
@@ -102,7 +102,7 @@ captionsUpdate
     -> Caption -- ^ 'capPayload'
     -> CaptionsUpdate
 captionsUpdate pCapPart_ pCapPayload_ =
-    CaptionsUpdate
+    CaptionsUpdate'
     { _capOnBehalfOf = Nothing
     , _capPart = pCapPart_
     , _capPayload = pCapPayload_
@@ -155,7 +155,10 @@ capSync = lens _capSync (\ s a -> s{_capSync = a})
 
 instance GoogleRequest CaptionsUpdate where
         type Rs CaptionsUpdate = Caption
-        requestClient CaptionsUpdate{..}
+        type Scopes CaptionsUpdate =
+             '["https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient CaptionsUpdate'{..}
           = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner
               _capSync
@@ -169,12 +172,14 @@ instance GoogleRequest CaptionsUpdate where
 instance GoogleRequest (MediaUpload CaptionsUpdate)
          where
         type Rs (MediaUpload CaptionsUpdate) = Caption
-        requestClient (MediaUpload CaptionsUpdate{..} body)
+        type Scopes (MediaUpload CaptionsUpdate) =
+             Scopes CaptionsUpdate
+        requestClient (MediaUpload CaptionsUpdate'{..} body)
           = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner
               _capSync
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _capPayload
               body
               youTubeService

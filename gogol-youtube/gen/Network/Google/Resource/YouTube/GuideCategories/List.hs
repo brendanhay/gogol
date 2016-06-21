@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.GuideCategories.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type GuideCategoriesListResource =
 -- channels.
 --
 -- /See:/ 'guideCategoriesList' smart constructor.
-data GuideCategoriesList = GuideCategoriesList
+data GuideCategoriesList = GuideCategoriesList'
     { _gclPart       :: !Text
     , _gclRegionCode :: !(Maybe Text)
     , _gclHl         :: !Text
@@ -82,7 +82,7 @@ guideCategoriesList
     :: Text -- ^ 'gclPart'
     -> GuideCategoriesList
 guideCategoriesList pGclPart_ =
-    GuideCategoriesList
+    GuideCategoriesList'
     { _gclPart = pGclPart_
     , _gclRegionCode = Nothing
     , _gclHl = "en-US"
@@ -117,7 +117,12 @@ gclId = lens _gclId (\ s a -> s{_gclId = a})
 instance GoogleRequest GuideCategoriesList where
         type Rs GuideCategoriesList =
              GuideCategoryListResponse
-        requestClient GuideCategoriesList{..}
+        type Scopes GuideCategoriesList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient GuideCategoriesList'{..}
           = go (Just _gclPart) _gclRegionCode (Just _gclHl)
               _gclId
               (Just AltJSON)

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlacementGroups.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ import           Network.Google.Prelude
 -- 'PlacementGroupsList' request conforms to.
 type PlacementGroupsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
@@ -105,7 +105,7 @@ type PlacementGroupsListResource =
 -- | Retrieves a list of placement groups, possibly filtered.
 --
 -- /See:/ 'placementGroupsList' smart constructor.
-data PlacementGroupsList = PlacementGroupsList
+data PlacementGroupsList = PlacementGroupsList'
     { _pglPlacementStrategyIds :: !(Maybe [Textual Int64])
     , _pglContentCategoryIds   :: !(Maybe [Textual Int64])
     , _pglMaxEndDate           :: !(Maybe Text)
@@ -175,7 +175,7 @@ placementGroupsList
     :: Int64 -- ^ 'pglProFileId'
     -> PlacementGroupsList
 placementGroupsList pPglProFileId_ =
-    PlacementGroupsList
+    PlacementGroupsList'
     { _pglPlacementStrategyIds = Nothing
     , _pglContentCategoryIds = Nothing
     , _pglMaxEndDate = Nothing
@@ -355,7 +355,9 @@ pglMinEndDate
 instance GoogleRequest PlacementGroupsList where
         type Rs PlacementGroupsList =
              PlacementGroupsListResponse
-        requestClient PlacementGroupsList{..}
+        type Scopes PlacementGroupsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementGroupsList'{..}
           = go _pglProFileId
               (_pglPlacementStrategyIds ^. _Default)
               (_pglContentCategoryIds ^. _Default)

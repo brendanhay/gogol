@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -107,15 +107,14 @@ type ObjectsInsertResource =
                                  QueryParam "projection" ObjectsInsertProjection
                                    :>
                                    QueryParam "alt" AltJSON :>
-                                     QueryParam "uploadType" AltMedia :>
-                                       MultipartRelated '[JSON] Object
-                                         RequestBody
-                                         :> Post '[JSON] Object
+                                     QueryParam "uploadType" Multipart :>
+                                       MultipartRelated '[JSON] Object :>
+                                         Post '[JSON] Object
 
 -- | Stores a new object and metadata.
 --
 -- /See:/ 'objectsInsert' smart constructor.
-data ObjectsInsert = ObjectsInsert
+data ObjectsInsert = ObjectsInsert'
     { _oiIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _oiIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _oiIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -156,7 +155,7 @@ objectsInsert
     -> Object -- ^ 'oiPayload'
     -> ObjectsInsert
 objectsInsert pOiBucket_ pOiPayload_ =
-    ObjectsInsert
+    ObjectsInsert'
     { _oiIfMetagenerationMatch = Nothing
     , _oiIfGenerationNotMatch = Nothing
     , _oiIfGenerationMatch = Nothing
@@ -242,7 +241,11 @@ oiProjection
 
 instance GoogleRequest ObjectsInsert where
         type Rs ObjectsInsert = Object
-        requestClient ObjectsInsert{..}
+        type Scopes ObjectsInsert =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient ObjectsInsert'{..}
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch
@@ -261,7 +264,9 @@ instance GoogleRequest ObjectsInsert where
 instance GoogleRequest (MediaUpload ObjectsInsert)
          where
         type Rs (MediaUpload ObjectsInsert) = Object
-        requestClient (MediaUpload ObjectsInsert{..} body)
+        type Scopes (MediaUpload ObjectsInsert) =
+             Scopes ObjectsInsert
+        requestClient (MediaUpload ObjectsInsert'{..} body)
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch
@@ -271,7 +276,7 @@ instance GoogleRequest (MediaUpload ObjectsInsert)
               _oiContentEncoding
               _oiProjection
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _oiPayload
               body
               storageService

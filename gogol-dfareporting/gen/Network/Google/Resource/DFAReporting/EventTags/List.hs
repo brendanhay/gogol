@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.EventTags.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'EventTagsList' request conforms to.
 type EventTagsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>
@@ -76,7 +76,7 @@ type EventTagsListResource =
 -- | Retrieves a list of event tags, possibly filtered.
 --
 -- /See:/ 'eventTagsList' smart constructor.
-data EventTagsList = EventTagsList
+data EventTagsList = EventTagsList'
     { _etlDefinitionsOnly :: !(Maybe Bool)
     , _etlEventTagTypes   :: !(Maybe [EventTagsListEventTagTypes])
     , _etlEnabled         :: !(Maybe Bool)
@@ -119,7 +119,7 @@ eventTagsList
     :: Int64 -- ^ 'etlProFileId'
     -> EventTagsList
 eventTagsList pEtlProFileId_ =
-    EventTagsList
+    EventTagsList'
     { _etlDefinitionsOnly = Nothing
     , _etlEventTagTypes = Nothing
     , _etlEnabled = Nothing
@@ -222,7 +222,9 @@ etlSortField
 
 instance GoogleRequest EventTagsList where
         type Rs EventTagsList = EventTagsListResponse
-        requestClient EventTagsList{..}
+        type Scopes EventTagsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient EventTagsList'{..}
           = go _etlProFileId _etlDefinitionsOnly
               (_etlEventTagTypes ^. _Default)
               _etlEnabled

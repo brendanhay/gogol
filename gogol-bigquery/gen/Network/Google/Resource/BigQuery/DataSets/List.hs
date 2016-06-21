@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.DataSets.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type DataSetsListResource =
 -- granted the READER dataset role.
 --
 -- /See:/ 'dataSetsList' smart constructor.
-data DataSetsList = DataSetsList
+data DataSetsList = DataSetsList'
     { _dslAll        :: !(Maybe Bool)
     , _dslPageToken  :: !(Maybe Text)
     , _dslProjectId  :: !Text
@@ -82,7 +82,7 @@ dataSetsList
     :: Text -- ^ 'dslProjectId'
     -> DataSetsList
 dataSetsList pDslProjectId_ =
-    DataSetsList
+    DataSetsList'
     { _dslAll = Nothing
     , _dslPageToken = Nothing
     , _dslProjectId = pDslProjectId_
@@ -113,7 +113,11 @@ dslMaxResults
 
 instance GoogleRequest DataSetsList where
         type Rs DataSetsList = DataSetList
-        requestClient DataSetsList{..}
+        type Scopes DataSetsList =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient DataSetsList'{..}
           = go _dslProjectId _dslAll _dslPageToken
               _dslMaxResults
               (Just AltJSON)

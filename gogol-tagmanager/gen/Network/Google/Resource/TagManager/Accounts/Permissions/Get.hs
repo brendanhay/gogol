@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Permissions.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type AccountsPermissionsGetResource =
 -- | Gets a user\'s Account & Container Permissions.
 --
 -- /See:/ 'accountsPermissionsGet' smart constructor.
-data AccountsPermissionsGet = AccountsPermissionsGet
+data AccountsPermissionsGet = AccountsPermissionsGet'
     { _apgAccountId    :: !Text
     , _apgPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsPermissionsGet
     -> Text -- ^ 'apgPermissionId'
     -> AccountsPermissionsGet
 accountsPermissionsGet pApgAccountId_ pApgPermissionId_ =
-    AccountsPermissionsGet
+    AccountsPermissionsGet'
     { _apgAccountId = pApgAccountId_
     , _apgPermissionId = pApgPermissionId_
     }
@@ -89,7 +89,9 @@ apgPermissionId
 
 instance GoogleRequest AccountsPermissionsGet where
         type Rs AccountsPermissionsGet = UserAccess
-        requestClient AccountsPermissionsGet{..}
+        type Scopes AccountsPermissionsGet =
+             '["https://www.googleapis.com/auth/tagmanager.manage.users"]
+        requestClient AccountsPermissionsGet'{..}
           = go _apgAccountId _apgPermissionId (Just AltJSON)
               tagManagerService
           where go

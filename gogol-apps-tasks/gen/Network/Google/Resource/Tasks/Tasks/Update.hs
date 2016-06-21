@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Tasks.Tasks.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TasksUpdateResource =
 -- | Updates the specified task.
 --
 -- /See:/ 'tasksUpdate' smart constructor.
-data TasksUpdate = TasksUpdate
+data TasksUpdate = TasksUpdate'
     { _tuPayload  :: !Task
     , _tuTaskList :: !Text
     , _tuTask     :: !Text
@@ -77,7 +77,7 @@ tasksUpdate
     -> Text -- ^ 'tuTask'
     -> TasksUpdate
 tasksUpdate pTuPayload_ pTuTaskList_ pTuTask_ =
-    TasksUpdate
+    TasksUpdate'
     { _tuPayload = pTuPayload_
     , _tuTaskList = pTuTaskList_
     , _tuTask = pTuTask_
@@ -99,7 +99,9 @@ tuTask = lens _tuTask (\ s a -> s{_tuTask = a})
 
 instance GoogleRequest TasksUpdate where
         type Rs TasksUpdate = Task
-        requestClient TasksUpdate{..}
+        type Scopes TasksUpdate =
+             '["https://www.googleapis.com/auth/tasks"]
+        requestClient TasksUpdate'{..}
           = go _tuTaskList _tuTask (Just AltJSON) _tuPayload
               appsTasksService
           where go

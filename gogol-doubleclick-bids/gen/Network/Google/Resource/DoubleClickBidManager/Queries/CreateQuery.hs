@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type QueriesCreateQueryResource =
 -- | Creates a query.
 --
 -- /See:/ 'queriesCreateQuery' smart constructor.
-newtype QueriesCreateQuery = QueriesCreateQuery
+newtype QueriesCreateQuery = QueriesCreateQuery'
     { _qcqPayload :: Query
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ queriesCreateQuery
     :: Query -- ^ 'qcqPayload'
     -> QueriesCreateQuery
 queriesCreateQuery pQcqPayload_ =
-    QueriesCreateQuery
+    QueriesCreateQuery'
     { _qcqPayload = pQcqPayload_
     }
 
@@ -75,7 +75,8 @@ qcqPayload
 
 instance GoogleRequest QueriesCreateQuery where
         type Rs QueriesCreateQuery = Query
-        requestClient QueriesCreateQuery{..}
+        type Scopes QueriesCreateQuery = '[]
+        requestClient QueriesCreateQuery'{..}
           = go (Just AltJSON) _qcqPayload
               doubleClickBidsService
           where go

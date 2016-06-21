@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.Sessions.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersSessionsDeleteResource =
 -- | Deletes a session specified by the given session ID.
 --
 -- /See:/ 'usersSessionsDelete' smart constructor.
-data UsersSessionsDelete = UsersSessionsDelete
+data UsersSessionsDelete = UsersSessionsDelete'
     { _usdUserId            :: !Text
     , _usdCurrentTimeMillis :: !(Maybe (Textual Int64))
     , _usdSessionId         :: !Text
@@ -76,7 +76,7 @@ usersSessionsDelete
     -> Text -- ^ 'usdSessionId'
     -> UsersSessionsDelete
 usersSessionsDelete pUsdUserId_ pUsdSessionId_ =
-    UsersSessionsDelete
+    UsersSessionsDelete'
     { _usdUserId = pUsdUserId_
     , _usdCurrentTimeMillis = Nothing
     , _usdSessionId = pUsdSessionId_
@@ -102,7 +102,9 @@ usdSessionId
 
 instance GoogleRequest UsersSessionsDelete where
         type Rs UsersSessionsDelete = ()
-        requestClient UsersSessionsDelete{..}
+        type Scopes UsersSessionsDelete =
+             '["https://www.googleapis.com/auth/fitness.activity.write"]
+        requestClient UsersSessionsDelete'{..}
           = go _usdUserId _usdSessionId _usdCurrentTimeMillis
               (Just AltJSON)
               fitnessService

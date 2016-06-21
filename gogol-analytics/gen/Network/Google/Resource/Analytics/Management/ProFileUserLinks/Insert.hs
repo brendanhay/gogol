@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type ManagementProFileUserLinksInsertResource =
 -- | Adds a new user to the given view (profile).
 --
 -- /See:/ 'managementProFileUserLinksInsert' smart constructor.
-data ManagementProFileUserLinksInsert = ManagementProFileUserLinksInsert
+data ManagementProFileUserLinksInsert = ManagementProFileUserLinksInsert'
     { _mpfuliWebPropertyId :: !Text
     , _mpfuliProFileId     :: !Text
     , _mpfuliPayload       :: !EntityUserLink
@@ -87,7 +87,7 @@ managementProFileUserLinksInsert
     -> Text -- ^ 'mpfuliAccountId'
     -> ManagementProFileUserLinksInsert
 managementProFileUserLinksInsert pMpfuliWebPropertyId_ pMpfuliProFileId_ pMpfuliPayload_ pMpfuliAccountId_ =
-    ManagementProFileUserLinksInsert
+    ManagementProFileUserLinksInsert'
     { _mpfuliWebPropertyId = pMpfuliWebPropertyId_
     , _mpfuliProFileId = pMpfuliProFileId_
     , _mpfuliPayload = pMpfuliPayload_
@@ -122,7 +122,9 @@ instance GoogleRequest
          ManagementProFileUserLinksInsert where
         type Rs ManagementProFileUserLinksInsert =
              EntityUserLink
-        requestClient ManagementProFileUserLinksInsert{..}
+        type Scopes ManagementProFileUserLinksInsert =
+             '["https://www.googleapis.com/auth/analytics.manage.users"]
+        requestClient ManagementProFileUserLinksInsert'{..}
           = go _mpfuliAccountId _mpfuliWebPropertyId
               _mpfuliProFileId
               (Just AltJSON)

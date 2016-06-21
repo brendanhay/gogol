@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Notifications.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type NotificationsDeleteResource =
 -- | Deletes a notification
 --
 -- /See:/ 'notificationsDelete' smart constructor.
-data NotificationsDelete = NotificationsDelete
+data NotificationsDelete = NotificationsDelete'
     { _ndCustomer       :: !Text
     , _ndNotificationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ notificationsDelete
     -> Text -- ^ 'ndNotificationId'
     -> NotificationsDelete
 notificationsDelete pNdCustomer_ pNdNotificationId_ =
-    NotificationsDelete
+    NotificationsDelete'
     { _ndCustomer = pNdCustomer_
     , _ndNotificationId = pNdNotificationId_
     }
@@ -91,7 +91,9 @@ ndNotificationId
 
 instance GoogleRequest NotificationsDelete where
         type Rs NotificationsDelete = ()
-        requestClient NotificationsDelete{..}
+        type Scopes NotificationsDelete =
+             '["https://www.googleapis.com/auth/admin.directory.notifications"]
+        requestClient NotificationsDelete'{..}
           = go _ndCustomer _ndNotificationId (Just AltJSON)
               directoryService
           where go

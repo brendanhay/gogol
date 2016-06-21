@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.FusionTables.Template.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type TemplatePatchResource =
 -- | Updates an existing template. This method supports patch semantics.
 --
 -- /See:/ 'templatePatch' smart constructor.
-data TemplatePatch = TemplatePatch
+data TemplatePatch = TemplatePatch'
     { _tppTemplateId :: !(Textual Int32)
     , _tppPayload    :: !Template
     , _tppTableId    :: !Text
@@ -77,7 +77,7 @@ templatePatch
     -> Text -- ^ 'tppTableId'
     -> TemplatePatch
 templatePatch pTppTemplateId_ pTppPayload_ pTppTableId_ =
-    TemplatePatch
+    TemplatePatch'
     { _tppTemplateId = _Coerce # pTppTemplateId_
     , _tppPayload = pTppPayload_
     , _tppTableId = pTppTableId_
@@ -102,7 +102,9 @@ tppTableId
 
 instance GoogleRequest TemplatePatch where
         type Rs TemplatePatch = Template
-        requestClient TemplatePatch{..}
+        type Scopes TemplatePatch =
+             '["https://www.googleapis.com/auth/fusiontables"]
+        requestClient TemplatePatch'{..}
           = go _tppTableId _tppTemplateId (Just AltJSON)
               _tppPayload
               fusionTablesService

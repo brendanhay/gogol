@@ -7,20 +7,25 @@
 
 -- |
 -- Module      : Network.Google.Plus
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google+ API enables developers to build on top of the Google+
--- platform.
+-- Builds on top of the Google+ platform.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference>
 module Network.Google.Plus
     (
     -- * Service Configuration
       plusService
+
+    -- * OAuth Scopes
+    , userInfoProFileScope
+    , plusLoginScope
+    , userInfoEmailScope
+    , plusMeScope
 
     -- * API Declaration
     , PlusAPI
@@ -41,12 +46,6 @@ module Network.Google.Plus
 
     -- ** plus.comments.list
     , module Network.Google.Resource.Plus.Comments.List
-
-    -- ** plus.moments.insert
-    , module Network.Google.Resource.Plus.Moments.Insert
-
-    -- ** plus.moments.list
-    , module Network.Google.Resource.Plus.Moments.List
 
     -- ** plus.people.get
     , module Network.Google.Resource.Plus.People.Get
@@ -100,9 +99,6 @@ module Network.Google.Plus
     , peiValue
     , peiType
 
-    -- ** MomentsListCollection
-    , MomentsListCollection (..)
-
     -- ** CommentActorImage
     , CommentActorImage
     , commentActorImage
@@ -115,9 +111,6 @@ module Network.Google.Plus
     , aoaitiiURL
     , aoaitiiWidth
     , aoaitiiType
-
-    -- ** MomentsInsertCollection
-    , MomentsInsertCollection (..)
 
     -- ** PlacePosition
     , PlacePosition
@@ -187,17 +180,6 @@ module Network.Google.Plus
     , caDisplayName
     , caId
     , caVerification
-
-    -- ** Moment
-    , Moment
-    , moment
-    , mKind
-    , mResult
-    , mStartDate
-    , mObject
-    , mId
-    , mType
-    , mTarget
 
     -- ** ActivityObject
     , ActivityObject
@@ -289,65 +271,6 @@ module Network.Google.Plus
     , ActivityActorVerification
     , activityActorVerification
     , aavAdHocVerified
-
-    -- ** ItemScope
-    , ItemScope
-    , itemScope
-    , isGivenName
-    , isContentSize
-    , isThumbnail
-    , isTickerSymbol
-    , isHeight
-    , isThumbnailURL
-    , isImage
-    , isStreetAddress
-    , isWorstRating
-    , isLocation
-    , isAttendees
-    , isText
-    , isKind
-    , isLatitude
-    , isPostalCode
-    , isEndDate
-    , isAssociatedMedia
-    , isPlayerType
-    , isURL
-    , isWidth
-    , isCaption
-    , isAddress
-    , isAddressCountry
-    , isPostOfficeBoxNumber
-    , isAdditionalName
-    , isFamilyName
-    , isDateCreated
-    , isRatingValue
-    , isDatePublished
-    , isStartDate
-    , isGender
-    , isName
-    , isBestRating
-    , isAddressLocality
-    , isPartOfTVSeries
-    , isContentURL
-    , isByArtist
-    , isAbout
-    , isReviewRating
-    , isDateModified
-    , isAuthor
-    , isGeo
-    , isId
-    , isPerformers
-    , isAttendeeCount
-    , isInAlbum
-    , isEmbedURL
-    , isType
-    , isContributor
-    , isLongitude
-    , isDuration
-    , isAddressRegion
-    , isAudio
-    , isDescription
-    , isBirthDate
 
     -- ** ActivityObjectActorClientSpecificActorInfo
     , ActivityObjectActorClientSpecificActorInfo
@@ -569,18 +492,6 @@ module Network.Google.Plus
     , commentActorVerification
     , cavAdHocVerified
 
-    -- ** MomentsFeed
-    , MomentsFeed
-    , momentsFeed
-    , mfEtag
-    , mfNextPageToken
-    , mfNextLink
-    , mfKind
-    , mfItems
-    , mfSelfLink
-    , mfUpdated
-    , mfTitle
-
     -- ** ActivityActorName
     , ActivityActorName
     , activityActorName
@@ -595,8 +506,6 @@ import           Network.Google.Resource.Plus.Activities.List
 import           Network.Google.Resource.Plus.Activities.Search
 import           Network.Google.Resource.Plus.Comments.Get
 import           Network.Google.Resource.Plus.Comments.List
-import           Network.Google.Resource.Plus.Moments.Insert
-import           Network.Google.Resource.Plus.Moments.List
 import           Network.Google.Resource.Plus.People.Get
 import           Network.Google.Resource.Plus.People.List
 import           Network.Google.Resource.Plus.People.ListByActivity
@@ -616,5 +525,3 @@ type PlusAPI =
        :<|> PeopleSearchResource
        :<|> CommentsListResource
        :<|> CommentsGetResource
-       :<|> MomentsInsertResource
-       :<|> MomentsListResource

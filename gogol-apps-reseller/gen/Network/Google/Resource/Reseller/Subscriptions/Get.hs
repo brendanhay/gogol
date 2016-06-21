@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Reseller.Subscriptions.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type SubscriptionsGetResource =
 -- | Gets a subscription of the customer.
 --
 -- /See:/ 'subscriptionsGet' smart constructor.
-data SubscriptionsGet = SubscriptionsGet
+data SubscriptionsGet = SubscriptionsGet'
     { _sgCustomerId     :: !Text
     , _sgSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ subscriptionsGet
     -> Text -- ^ 'sgSubscriptionId'
     -> SubscriptionsGet
 subscriptionsGet pSgCustomerId_ pSgSubscriptionId_ =
-    SubscriptionsGet
+    SubscriptionsGet'
     { _sgCustomerId = pSgCustomerId_
     , _sgSubscriptionId = pSgSubscriptionId_
     }
@@ -90,7 +90,10 @@ sgSubscriptionId
 
 instance GoogleRequest SubscriptionsGet where
         type Rs SubscriptionsGet = Subscription
-        requestClient SubscriptionsGet{..}
+        type Scopes SubscriptionsGet =
+             '["https://www.googleapis.com/auth/apps.order",
+               "https://www.googleapis.com/auth/apps.order.readonly"]
+        requestClient SubscriptionsGet'{..}
           = go _sgCustomerId _sgSubscriptionId (Just AltJSON)
               appsResellerService
           where go

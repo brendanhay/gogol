@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.PlacementGroups.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PlacementGroupsPatch' request conforms to.
 type PlacementGroupsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>
@@ -59,7 +59,7 @@ type PlacementGroupsPatchResource =
 -- semantics.
 --
 -- /See:/ 'placementGroupsPatch' smart constructor.
-data PlacementGroupsPatch = PlacementGroupsPatch
+data PlacementGroupsPatch = PlacementGroupsPatch'
     { _pgpProFileId :: !(Textual Int64)
     , _pgpPayload   :: !PlacementGroup
     , _pgpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ placementGroupsPatch
     -> Int64 -- ^ 'pgpId'
     -> PlacementGroupsPatch
 placementGroupsPatch pPgpProFileId_ pPgpPayload_ pPgpId_ =
-    PlacementGroupsPatch
+    PlacementGroupsPatch'
     { _pgpProFileId = _Coerce # pPgpProFileId_
     , _pgpPayload = pPgpPayload_
     , _pgpId = _Coerce # pPgpId_
@@ -104,7 +104,9 @@ pgpId
 
 instance GoogleRequest PlacementGroupsPatch where
         type Rs PlacementGroupsPatch = PlacementGroup
-        requestClient PlacementGroupsPatch{..}
+        type Scopes PlacementGroupsPatch =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient PlacementGroupsPatch'{..}
           = go _pgpProFileId (Just _pgpId) (Just AltJSON)
               _pgpPayload
               dFAReportingService

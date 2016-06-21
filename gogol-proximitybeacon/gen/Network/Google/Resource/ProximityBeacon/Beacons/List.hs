@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ProximityBeacon.Beacons.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,10 @@
 --
 -- Searches the beacon registry for beacons that match the given search
 -- criteria. Only those beacons that the client has permission to list will
--- be returned.
+-- be returned. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **viewer**, **Is owner** or **Can edit**
+-- permissions in the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.list@.
 module Network.Google.Resource.ProximityBeacon.Beacons.List
@@ -43,6 +46,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.List
     , blQ
     , blBearerToken
     , blPageToken
+    , blProjectId
     , blPageSize
     , blCallback
     ) where
@@ -63,17 +67,21 @@ type BeaconsListResource =
                    QueryParam "q" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListBeaconsResponse
+                         QueryParam "projectId" Text :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListBeaconsResponse
 
 -- | Searches the beacon registry for beacons that match the given search
 -- criteria. Only those beacons that the client has permission to list will
--- be returned.
+-- be returned. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **viewer**, **Is owner** or **Can edit**
+-- permissions in the Google Developers Console project.
 --
 -- /See:/ 'beaconsList' smart constructor.
-data BeaconsList = BeaconsList
+data BeaconsList = BeaconsList'
     { _blXgafv          :: !(Maybe Text)
     , _blUploadProtocol :: !(Maybe Text)
     , _blPp             :: !Bool
@@ -82,6 +90,7 @@ data BeaconsList = BeaconsList
     , _blQ              :: !(Maybe Text)
     , _blBearerToken    :: !(Maybe Text)
     , _blPageToken      :: !(Maybe Text)
+    , _blProjectId      :: !(Maybe Text)
     , _blPageSize       :: !(Maybe (Textual Int32))
     , _blCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -106,13 +115,15 @@ data BeaconsList = BeaconsList
 --
 -- * 'blPageToken'
 --
+-- * 'blProjectId'
+--
 -- * 'blPageSize'
 --
 -- * 'blCallback'
 beaconsList
     :: BeaconsList
 beaconsList =
-    BeaconsList
+    BeaconsList'
     { _blXgafv = Nothing
     , _blUploadProtocol = Nothing
     , _blPp = True
@@ -121,6 +132,7 @@ beaconsList =
     , _blQ = Nothing
     , _blBearerToken = Nothing
     , _blPageToken = Nothing
+    , _blProjectId = Nothing
     , _blPageSize = Nothing
     , _blCallback = Nothing
     }
@@ -179,7 +191,7 @@ blUploadType
 -- registered location is within the given circle. When any of these fields
 -- are given, all are required. Latitude and longitude must be decimal
 -- degrees between -90.0 and 90.0 and between -180.0 and 180.0
--- respectively. Radius must be an integer number of meters less than
+-- respectively. Radius must be an integer number of meters between 10 and
 -- 1,000,000 (1000 km). * \`property:\"=\"\` For example:
 -- \`property:\"battery-type=CR2032\"\` Returns beacons which have a
 -- property of the given name and value. Supports multiple filters which
@@ -210,6 +222,12 @@ blPageToken :: Lens' BeaconsList (Maybe Text)
 blPageToken
   = lens _blPageToken (\ s a -> s{_blPageToken = a})
 
+-- | The project id to list beacons under. If not present then the project
+-- credential that made the request is used as the project. Optional.
+blProjectId :: Lens' BeaconsList (Maybe Text)
+blProjectId
+  = lens _blProjectId (\ s a -> s{_blProjectId = a})
+
 -- | The maximum number of records to return for this request, up to a
 -- server-defined upper limit.
 blPageSize :: Lens' BeaconsList (Maybe Int32)
@@ -224,13 +242,16 @@ blCallback
 
 instance GoogleRequest BeaconsList where
         type Rs BeaconsList = ListBeaconsResponse
-        requestClient BeaconsList{..}
+        type Scopes BeaconsList =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+        requestClient BeaconsList'{..}
           = go _blXgafv _blUploadProtocol (Just _blPp)
               _blAccessToken
               _blUploadType
               _blQ
               _blBearerToken
               _blPageToken
+              _blProjectId
               _blPageSize
               _blCallback
               (Just AltJSON)

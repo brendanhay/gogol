@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.BlogUserInfos.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type BlogUserInfosGetResource =
 -- | Gets one blog and user info pair by blogId and userId.
 --
 -- /See:/ 'blogUserInfosGet' smart constructor.
-data BlogUserInfosGet = BlogUserInfosGet
+data BlogUserInfosGet = BlogUserInfosGet'
     { _buigBlogId   :: !Text
     , _buigUserId   :: !Text
     , _buigMaxPosts :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ blogUserInfosGet
     -> Text -- ^ 'buigUserId'
     -> BlogUserInfosGet
 blogUserInfosGet pBuigBlogId_ pBuigUserId_ =
-    BlogUserInfosGet
+    BlogUserInfosGet'
     { _buigBlogId = pBuigBlogId_
     , _buigUserId = pBuigUserId_
     , _buigMaxPosts = Nothing
@@ -101,7 +101,10 @@ buigMaxPosts
 
 instance GoogleRequest BlogUserInfosGet where
         type Rs BlogUserInfosGet = BlogUserInfo
-        requestClient BlogUserInfosGet{..}
+        type Scopes BlogUserInfosGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient BlogUserInfosGet'{..}
           = go _buigUserId _buigBlogId _buigMaxPosts
               (Just AltJSON)
               bloggerService

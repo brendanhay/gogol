@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.OperatingSystems.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'OperatingSystemsList' request conforms to.
 type OperatingSystemsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystems" :>
@@ -53,7 +53,7 @@ type OperatingSystemsListResource =
 -- | Retrieves a list of operating systems.
 --
 -- /See:/ 'operatingSystemsList' smart constructor.
-newtype OperatingSystemsList = OperatingSystemsList
+newtype OperatingSystemsList = OperatingSystemsList'
     { _oslProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ operatingSystemsList
     :: Int64 -- ^ 'oslProFileId'
     -> OperatingSystemsList
 operatingSystemsList pOslProFileId_ =
-    OperatingSystemsList
+    OperatingSystemsList'
     { _oslProFileId = _Coerce # pOslProFileId_
     }
 
@@ -79,7 +79,9 @@ oslProFileId
 instance GoogleRequest OperatingSystemsList where
         type Rs OperatingSystemsList =
              OperatingSystemsListResponse
-        requestClient OperatingSystemsList{..}
+        type Scopes OperatingSystemsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient OperatingSystemsList'{..}
           = go _oslProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

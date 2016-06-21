@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TaskQueue.Tasks.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -33,7 +33,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Insert
     , TasksInsert
 
     -- * Request Lenses
-    , tiTaskqueue
+    , tiTaskQueue
     , tiProject
     , tiPayload
     ) where
@@ -57,8 +57,8 @@ type TasksInsertResource =
 -- | Insert a new task in a TaskQueue
 --
 -- /See:/ 'tasksInsert' smart constructor.
-data TasksInsert = TasksInsert
-    { _tiTaskqueue :: !Text
+data TasksInsert = TasksInsert'
+    { _tiTaskQueue :: !Text
     , _tiProject   :: !Text
     , _tiPayload   :: !Task
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -67,27 +67,27 @@ data TasksInsert = TasksInsert
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tiTaskqueue'
+-- * 'tiTaskQueue'
 --
 -- * 'tiProject'
 --
 -- * 'tiPayload'
 tasksInsert
-    :: Text -- ^ 'tiTaskqueue'
+    :: Text -- ^ 'tiTaskQueue'
     -> Text -- ^ 'tiProject'
     -> Task -- ^ 'tiPayload'
     -> TasksInsert
-tasksInsert pTiTaskqueue_ pTiProject_ pTiPayload_ =
-    TasksInsert
-    { _tiTaskqueue = pTiTaskqueue_
+tasksInsert pTiTaskQueue_ pTiProject_ pTiPayload_ =
+    TasksInsert'
+    { _tiTaskQueue = pTiTaskQueue_
     , _tiProject = pTiProject_
     , _tiPayload = pTiPayload_
     }
 
 -- | The taskqueue to insert the task into
-tiTaskqueue :: Lens' TasksInsert Text
-tiTaskqueue
-  = lens _tiTaskqueue (\ s a -> s{_tiTaskqueue = a})
+tiTaskQueue :: Lens' TasksInsert Text
+tiTaskQueue
+  = lens _tiTaskQueue (\ s a -> s{_tiTaskQueue = a})
 
 -- | The project under which the queue lies
 tiProject :: Lens' TasksInsert Text
@@ -101,8 +101,11 @@ tiPayload
 
 instance GoogleRequest TasksInsert where
         type Rs TasksInsert = Task
-        requestClient TasksInsert{..}
-          = go _tiProject _tiTaskqueue (Just AltJSON)
+        type Scopes TasksInsert =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
+        requestClient TasksInsert'{..}
+          = go _tiProject _tiTaskQueue (Just AltJSON)
               _tiPayload
               taskQueueService
           where go

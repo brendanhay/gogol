@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Labels.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type UsersLabelsPatchResource =
 -- | Updates the specified label. This method supports patch semantics.
 --
 -- /See:/ 'usersLabelsPatch' smart constructor.
-data UsersLabelsPatch = UsersLabelsPatch
+data UsersLabelsPatch = UsersLabelsPatch'
     { _ulpPayload :: !Label
     , _ulpUserId  :: !Text
     , _ulpId      :: !Text
@@ -74,10 +74,9 @@ data UsersLabelsPatch = UsersLabelsPatch
 usersLabelsPatch
     :: Label -- ^ 'ulpPayload'
     -> Text -- ^ 'ulpId'
-    -> Text
     -> UsersLabelsPatch
-usersLabelsPatch pUlpPayload_ pUlpUserId_ pUlpId_ =
-    UsersLabelsPatch
+usersLabelsPatch pUlpPayload_ pUlpId_ =
+    UsersLabelsPatch'
     { _ulpPayload = pUlpPayload_
     , _ulpUserId = "me"
     , _ulpId = pUlpId_
@@ -100,7 +99,11 @@ ulpId = lens _ulpId (\ s a -> s{_ulpId = a})
 
 instance GoogleRequest UsersLabelsPatch where
         type Rs UsersLabelsPatch = Label
-        requestClient UsersLabelsPatch{..}
+        type Scopes UsersLabelsPatch =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.modify"]
+        requestClient UsersLabelsPatch'{..}
           = go _ulpUserId _ulpId (Just AltJSON) _ulpPayload
               gmailService
           where go

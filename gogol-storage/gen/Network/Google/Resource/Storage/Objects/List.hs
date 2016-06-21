@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Storage.Objects.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type ObjectsListResource =
 -- | Retrieves a list of objects matching the criteria.
 --
 -- /See:/ 'objectsList' smart constructor.
-data ObjectsList = ObjectsList
+data ObjectsList = ObjectsList'
     { _olPrefix     :: !(Maybe Text)
     , _olBucket     :: !Text
     , _olVersions   :: !(Maybe Bool)
@@ -95,7 +95,7 @@ objectsList
     :: Text -- ^ 'olBucket'
     -> ObjectsList
 objectsList pOlBucket_ =
-    ObjectsList
+    ObjectsList'
     { _olPrefix = Nothing
     , _olBucket = pOlBucket_
     , _olVersions = Nothing
@@ -149,7 +149,13 @@ olMaxResults
 
 instance GoogleRequest ObjectsList where
         type Rs ObjectsList = Objects
-        requestClient ObjectsList{..}
+        type Scopes ObjectsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/devstorage.full_control",
+               "https://www.googleapis.com/auth/devstorage.read_only",
+               "https://www.googleapis.com/auth/devstorage.read_write"]
+        requestClient ObjectsList'{..}
           = go _olBucket _olPrefix _olVersions _olProjection
               _olPageToken
               _olDelimiter

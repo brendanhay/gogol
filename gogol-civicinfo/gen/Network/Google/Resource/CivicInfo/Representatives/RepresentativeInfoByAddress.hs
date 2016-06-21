@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type RepresentativesRepresentativeInfoByAddressResource
 -- address.
 --
 -- /See:/ 'representativesRepresentativeInfoByAddress' smart constructor.
-data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeInfoByAddress
+data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeInfoByAddress'
     { _rribaRoles          :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
     , _rribaAddress        :: !(Maybe Text)
     , _rribaIncludeOffices :: !Bool
@@ -86,7 +86,7 @@ data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeI
 representativesRepresentativeInfoByAddress
     :: RepresentativesRepresentativeInfoByAddress
 representativesRepresentativeInfoByAddress =
-    RepresentativesRepresentativeInfoByAddress
+    RepresentativesRepresentativeInfoByAddress'
     { _rribaRoles = Nothing
     , _rribaAddress = Nothing
     , _rribaIncludeOffices = True
@@ -128,8 +128,11 @@ instance GoogleRequest
          RepresentativesRepresentativeInfoByAddress where
         type Rs RepresentativesRepresentativeInfoByAddress =
              RepresentativeInfoResponse
+        type Scopes
+               RepresentativesRepresentativeInfoByAddress
+             = '[]
         requestClient
-          RepresentativesRepresentativeInfoByAddress{..}
+          RepresentativesRepresentativeInfoByAddress'{..}
           = go (_rribaRoles ^. _Default) _rribaAddress
               (Just _rribaIncludeOffices)
               (_rribaLevels ^. _Default)

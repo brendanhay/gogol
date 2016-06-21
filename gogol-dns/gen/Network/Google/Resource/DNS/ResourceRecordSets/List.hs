@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DNS.ResourceRecordSets.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -64,7 +64,7 @@ type ResourceRecordSetsListResource =
 -- | Enumerate ResourceRecordSets that have been created but not yet deleted.
 --
 -- /See:/ 'resourceRecordSetsList' smart constructor.
-data ResourceRecordSetsList = ResourceRecordSetsList
+data ResourceRecordSetsList = ResourceRecordSetsList'
     { _rrslProject     :: !Text
     , _rrslName        :: !(Maybe Text)
     , _rrslPageToken   :: !(Maybe Text)
@@ -93,7 +93,7 @@ resourceRecordSetsList
     -> Text -- ^ 'rrslManagedZone'
     -> ResourceRecordSetsList
 resourceRecordSetsList pRrslProject_ pRrslManagedZone_ =
-    ResourceRecordSetsList
+    ResourceRecordSetsList'
     { _rrslProject = pRrslProject_
     , _rrslName = Nothing
     , _rrslPageToken = Nothing
@@ -142,7 +142,12 @@ rrslMaxResults
 instance GoogleRequest ResourceRecordSetsList where
         type Rs ResourceRecordSetsList =
              ResourceRecordSetsListResponse
-        requestClient ResourceRecordSetsList{..}
+        type Scopes ResourceRecordSetsList =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
+        requestClient ResourceRecordSetsList'{..}
           = go _rrslProject _rrslManagedZone _rrslName
               _rrslPageToken
               _rrslType

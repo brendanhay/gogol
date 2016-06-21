@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTube.VideoCategories.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type VideoCategoriesListResource =
 -- | Returns a list of categories that can be associated with YouTube videos.
 --
 -- /See:/ 'videoCategoriesList' smart constructor.
-data VideoCategoriesList = VideoCategoriesList
+data VideoCategoriesList = VideoCategoriesList'
     { _vclPart       :: !Text
     , _vclRegionCode :: !(Maybe Text)
     , _vclHl         :: !Text
@@ -80,7 +80,7 @@ videoCategoriesList
     :: Text -- ^ 'vclPart'
     -> VideoCategoriesList
 videoCategoriesList pVclPart_ =
-    VideoCategoriesList
+    VideoCategoriesList'
     { _vclPart = pVclPart_
     , _vclRegionCode = Nothing
     , _vclHl = "en_US"
@@ -113,7 +113,12 @@ vclId = lens _vclId (\ s a -> s{_vclId = a})
 instance GoogleRequest VideoCategoriesList where
         type Rs VideoCategoriesList =
              VideoCategoryListResponse
-        requestClient VideoCategoriesList{..}
+        type Scopes VideoCategoriesList =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtube.force-ssl",
+               "https://www.googleapis.com/auth/youtube.readonly",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient VideoCategoriesList'{..}
           = go (Just _vclPart) _vclRegionCode (Just _vclHl)
               _vclId
               (Just AltJSON)

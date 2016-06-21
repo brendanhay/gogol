@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Fitness.Users.DataSources.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type UsersDataSourcesGetResource =
 -- | Returns a data source identified by a data stream ID.
 --
 -- /See:/ 'usersDataSourcesGet' smart constructor.
-data UsersDataSourcesGet = UsersDataSourcesGet
+data UsersDataSourcesGet = UsersDataSourcesGet'
     { _udsgDataSourceId :: !Text
     , _udsgUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersDataSourcesGet
     -> Text -- ^ 'udsgUserId'
     -> UsersDataSourcesGet
 usersDataSourcesGet pUdsgDataSourceId_ pUdsgUserId_ =
-    UsersDataSourcesGet
+    UsersDataSourcesGet'
     { _udsgDataSourceId = pUdsgDataSourceId_
     , _udsgUserId = pUdsgUserId_
     }
@@ -90,7 +90,14 @@ udsgUserId
 
 instance GoogleRequest UsersDataSourcesGet where
         type Rs UsersDataSourcesGet = DataSource
-        requestClient UsersDataSourcesGet{..}
+        type Scopes UsersDataSourcesGet =
+             '["https://www.googleapis.com/auth/fitness.activity.read",
+               "https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.body.read",
+               "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.location.read",
+               "https://www.googleapis.com/auth/fitness.location.write"]
+        requestClient UsersDataSourcesGet'{..}
           = go _udsgUserId _udsgDataSourceId (Just AltJSON)
               fitnessService
           where go

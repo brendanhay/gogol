@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ResourceViews.ZoneViews.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ZoneViewsGetResource =
 -- | Get the information of a zonal resource view.
 --
 -- /See:/ 'zoneViewsGet' smart constructor.
-data ZoneViewsGet = ZoneViewsGet
+data ZoneViewsGet = ZoneViewsGet'
     { _zvgResourceView :: !Text
     , _zvgProject      :: !Text
     , _zvgZone         :: !Text
@@ -78,7 +78,7 @@ zoneViewsGet
     -> Text -- ^ 'zvgZone'
     -> ZoneViewsGet
 zoneViewsGet pZvgResourceView_ pZvgProject_ pZvgZone_ =
-    ZoneViewsGet
+    ZoneViewsGet'
     { _zvgResourceView = pZvgResourceView_
     , _zvgProject = pZvgProject_
     , _zvgZone = pZvgZone_
@@ -101,7 +101,14 @@ zvgZone = lens _zvgZone (\ s a -> s{_zvgZone = a})
 
 instance GoogleRequest ZoneViewsGet where
         type Rs ZoneViewsGet = ResourceView
-        requestClient ZoneViewsGet{..}
+        type Scopes ZoneViewsGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly",
+               "https://www.googleapis.com/auth/ndev.cloudman",
+               "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+        requestClient ZoneViewsGet'{..}
           = go _zvgProject _zvgZone _zvgResourceView
               (Just AltJSON)
               resourceViewsService

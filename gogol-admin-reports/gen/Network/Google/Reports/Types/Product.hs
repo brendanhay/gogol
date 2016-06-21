@@ -9,7 +9,7 @@
 
 -- |
 -- Module      : Network.Google.Reports.Types.Product
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@ import           Network.Google.Reports.Types.Sum
 
 --
 -- /See:/ 'usageReportParametersItem' smart constructor.
-data UsageReportParametersItem = UsageReportParametersItem
+data UsageReportParametersItem = UsageReportParametersItem'
     { _urpiDatetimeValue :: !(Maybe DateTime')
     , _urpiBoolValue     :: !(Maybe Bool)
     , _urpiIntValue      :: !(Maybe (Textual Int64))
@@ -49,7 +49,7 @@ data UsageReportParametersItem = UsageReportParametersItem
 usageReportParametersItem
     :: UsageReportParametersItem
 usageReportParametersItem =
-    UsageReportParametersItem
+    UsageReportParametersItem'
     { _urpiDatetimeValue = Nothing
     , _urpiBoolValue = Nothing
     , _urpiIntValue = Nothing
@@ -98,7 +98,7 @@ instance FromJSON UsageReportParametersItem where
         parseJSON
           = withObject "UsageReportParametersItem"
               (\ o ->
-                 UsageReportParametersItem <$>
+                 UsageReportParametersItem' <$>
                    (o .:? "datetimeValue") <*> (o .:? "boolValue") <*>
                      (o .:? "intValue")
                      <*> (o .:? "stringValue")
@@ -106,7 +106,7 @@ instance FromJSON UsageReportParametersItem where
                      <*> (o .:? "msgValue" .!= mempty))
 
 instance ToJSON UsageReportParametersItem where
-        toJSON UsageReportParametersItem{..}
+        toJSON UsageReportParametersItem'{..}
           = object
               (catMaybes
                  [("datetimeValue" .=) <$> _urpiDatetimeValue,
@@ -119,7 +119,7 @@ instance ToJSON UsageReportParametersItem where
 -- | Unique identifier for each activity record.
 --
 -- /See:/ 'activityId' smart constructor.
-data ActivityId = ActivityId
+data ActivityId = ActivityId'
     { _aiTime            :: !(Maybe DateTime')
     , _aiUniqueQualifier :: !(Maybe (Textual Int64))
     , _aiCustomerId      :: !(Maybe Text)
@@ -140,7 +140,7 @@ data ActivityId = ActivityId
 activityId
     :: ActivityId
 activityId =
-    ActivityId
+    ActivityId'
     { _aiTime = Nothing
     , _aiUniqueQualifier = Nothing
     , _aiCustomerId = Nothing
@@ -175,13 +175,13 @@ instance FromJSON ActivityId where
         parseJSON
           = withObject "ActivityId"
               (\ o ->
-                 ActivityId <$>
+                 ActivityId' <$>
                    (o .:? "time") <*> (o .:? "uniqueQualifier") <*>
                      (o .:? "customerId")
                      <*> (o .:? "applicationName"))
 
 instance ToJSON ActivityId where
-        toJSON ActivityId{..}
+        toJSON ActivityId'{..}
           = object
               (catMaybes
                  [("time" .=) <$> _aiTime,
@@ -192,7 +192,7 @@ instance ToJSON ActivityId where
 -- | JSON template for a collection of usage reports.
 --
 -- /See:/ 'usageReports' smart constructor.
-data UsageReports = UsageReports
+data UsageReports = UsageReports'
     { _urEtag          :: !(Maybe Text)
     , _urNextPageToken :: !(Maybe Text)
     , _urUsageReports  :: !(Maybe [UsageReport])
@@ -216,7 +216,7 @@ data UsageReports = UsageReports
 usageReports
     :: UsageReports
 usageReports =
-    UsageReports
+    UsageReports'
     { _urEtag = Nothing
     , _urNextPageToken = Nothing
     , _urUsageReports = Nothing
@@ -257,14 +257,14 @@ instance FromJSON UsageReports where
         parseJSON
           = withObject "UsageReports"
               (\ o ->
-                 UsageReports <$>
+                 UsageReports' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "usageReports" .!= mempty)
                      <*> (o .:? "kind" .!= "admin#reports#usageReports")
                      <*> (o .:? "warnings" .!= mempty))
 
 instance ToJSON UsageReports where
-        toJSON UsageReports{..}
+        toJSON UsageReports'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _urEtag,
@@ -275,7 +275,7 @@ instance ToJSON UsageReports where
 
 --
 -- /See:/ 'usageReportParametersItemMsgValueItem' smart constructor.
-newtype UsageReportParametersItemMsgValueItem = UsageReportParametersItemMsgValueItem
+newtype UsageReportParametersItemMsgValueItem = UsageReportParametersItemMsgValueItem'
     { _urpimviAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -288,7 +288,7 @@ usageReportParametersItemMsgValueItem
     :: HashMap Text JSONValue -- ^ 'urpimviAddtional'
     -> UsageReportParametersItemMsgValueItem
 usageReportParametersItemMsgValueItem pUrpimviAddtional_ =
-    UsageReportParametersItemMsgValueItem
+    UsageReportParametersItemMsgValueItem'
     { _urpimviAddtional = _Coerce # pUrpimviAddtional_
     }
 
@@ -303,7 +303,7 @@ instance FromJSON
         parseJSON
           = withObject "UsageReportParametersItemMsgValueItem"
               (\ o ->
-                 UsageReportParametersItemMsgValueItem <$>
+                 UsageReportParametersItemMsgValueItem' <$>
                    (parseJSONObject o))
 
 instance ToJSON UsageReportParametersItemMsgValueItem
@@ -313,7 +313,7 @@ instance ToJSON UsageReportParametersItemMsgValueItem
 -- | JSON template for a collection of activites.
 --
 -- /See:/ 'activities' smart constructor.
-data Activities = Activities
+data Activities = Activities'
     { _aEtag          :: !(Maybe Text)
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
@@ -334,7 +334,7 @@ data Activities = Activities
 activities
     :: Activities
 activities =
-    Activities
+    Activities'
     { _aEtag = Nothing
     , _aNextPageToken = Nothing
     , _aKind = "admin#reports#activities"
@@ -365,13 +365,13 @@ instance FromJSON Activities where
         parseJSON
           = withObject "Activities"
               (\ o ->
-                 Activities <$>
+                 Activities' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "admin#reports#activities")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Activities where
-        toJSON Activities{..}
+        toJSON Activities'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _aEtag,
@@ -381,7 +381,7 @@ instance ToJSON Activities where
 -- | An notification channel used to watch for resource changes.
 --
 -- /See:/ 'channel' smart constructor.
-data Channel = Channel
+data Channel = Channel'
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
@@ -420,7 +420,7 @@ data Channel = Channel
 channel
     :: Channel
 channel =
-    Channel
+    Channel'
     { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
@@ -485,7 +485,7 @@ instance FromJSON Channel where
         parseJSON
           = withObject "Channel"
               (\ o ->
-                 Channel <$>
+                 Channel' <$>
                    (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
                      (o .:? "kind" .!= "api#channel")
                      <*> (o .:? "expiration")
@@ -497,7 +497,7 @@ instance FromJSON Channel where
                      <*> (o .:? "type"))
 
 instance ToJSON Channel where
-        toJSON Channel{..}
+        toJSON Channel'{..}
           = object
               (catMaybes
                  [("resourceUri" .=) <$> _cResourceURI,
@@ -513,7 +513,7 @@ instance ToJSON Channel where
 -- | JSON template for a usage report.
 --
 -- /See:/ 'usageReport' smart constructor.
-data UsageReport = UsageReport
+data UsageReport = UsageReport'
     { _uEtag       :: !(Maybe Text)
     , _uKind       :: !Text
     , _uDate       :: !(Maybe Text)
@@ -537,7 +537,7 @@ data UsageReport = UsageReport
 usageReport
     :: UsageReport
 usageReport =
-    UsageReport
+    UsageReport'
     { _uEtag = Nothing
     , _uKind = "admin#reports#usageReport"
     , _uDate = Nothing
@@ -572,7 +572,7 @@ instance FromJSON UsageReport where
         parseJSON
           = withObject "UsageReport"
               (\ o ->
-                 UsageReport <$>
+                 UsageReport' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "admin#reports#usageReport")
                      <*> (o .:? "date")
@@ -580,7 +580,7 @@ instance FromJSON UsageReport where
                      <*> (o .:? "entity"))
 
 instance ToJSON UsageReport where
-        toJSON UsageReport{..}
+        toJSON UsageReport'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _uEtag, Just ("kind" .= _uKind),
@@ -590,7 +590,7 @@ instance ToJSON UsageReport where
 
 --
 -- /See:/ 'usageReportsWarningsItemDataItem' smart constructor.
-data UsageReportsWarningsItemDataItem = UsageReportsWarningsItemDataItem
+data UsageReportsWarningsItemDataItem = UsageReportsWarningsItemDataItem'
     { _urwidiValue :: !(Maybe Text)
     , _urwidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -605,7 +605,7 @@ data UsageReportsWarningsItemDataItem = UsageReportsWarningsItemDataItem
 usageReportsWarningsItemDataItem
     :: UsageReportsWarningsItemDataItem
 usageReportsWarningsItemDataItem =
-    UsageReportsWarningsItemDataItem
+    UsageReportsWarningsItemDataItem'
     { _urwidiValue = Nothing
     , _urwidiKey = Nothing
     }
@@ -627,12 +627,12 @@ instance FromJSON UsageReportsWarningsItemDataItem
         parseJSON
           = withObject "UsageReportsWarningsItemDataItem"
               (\ o ->
-                 UsageReportsWarningsItemDataItem <$>
+                 UsageReportsWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON UsageReportsWarningsItemDataItem
          where
-        toJSON UsageReportsWarningsItemDataItem{..}
+        toJSON UsageReportsWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _urwidiValue,
@@ -640,7 +640,7 @@ instance ToJSON UsageReportsWarningsItemDataItem
 
 --
 -- /See:/ 'usageReportsWarningsItem' smart constructor.
-data UsageReportsWarningsItem = UsageReportsWarningsItem
+data UsageReportsWarningsItem = UsageReportsWarningsItem'
     { _urwiData    :: !(Maybe [UsageReportsWarningsItemDataItem])
     , _urwiCode    :: !(Maybe Text)
     , _urwiMessage :: !(Maybe Text)
@@ -658,7 +658,7 @@ data UsageReportsWarningsItem = UsageReportsWarningsItem
 usageReportsWarningsItem
     :: UsageReportsWarningsItem
 usageReportsWarningsItem =
-    UsageReportsWarningsItem
+    UsageReportsWarningsItem'
     { _urwiData = Nothing
     , _urwiCode = Nothing
     , _urwiMessage = Nothing
@@ -684,12 +684,12 @@ instance FromJSON UsageReportsWarningsItem where
         parseJSON
           = withObject "UsageReportsWarningsItem"
               (\ o ->
-                 UsageReportsWarningsItem <$>
+                 UsageReportsWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON UsageReportsWarningsItem where
-        toJSON UsageReportsWarningsItem{..}
+        toJSON UsageReportsWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _urwiData,
@@ -698,7 +698,7 @@ instance ToJSON UsageReportsWarningsItem where
 
 --
 -- /See:/ 'activityEventsItem' smart constructor.
-data ActivityEventsItem = ActivityEventsItem
+data ActivityEventsItem = ActivityEventsItem'
     { _aeiName       :: !(Maybe Text)
     , _aeiParameters :: !(Maybe [ActivityEventsItemParametersItem])
     , _aeiType       :: !(Maybe Text)
@@ -716,7 +716,7 @@ data ActivityEventsItem = ActivityEventsItem
 activityEventsItem
     :: ActivityEventsItem
 activityEventsItem =
-    ActivityEventsItem
+    ActivityEventsItem'
     { _aeiName = Nothing
     , _aeiParameters = Nothing
     , _aeiType = Nothing
@@ -742,12 +742,12 @@ instance FromJSON ActivityEventsItem where
         parseJSON
           = withObject "ActivityEventsItem"
               (\ o ->
-                 ActivityEventsItem <$>
+                 ActivityEventsItem' <$>
                    (o .:? "name") <*> (o .:? "parameters" .!= mempty)
                      <*> (o .:? "type"))
 
 instance ToJSON ActivityEventsItem where
-        toJSON ActivityEventsItem{..}
+        toJSON ActivityEventsItem'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _aeiName,
@@ -757,7 +757,7 @@ instance ToJSON ActivityEventsItem where
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-newtype ChannelParams = ChannelParams
+newtype ChannelParams = ChannelParams'
     { _cpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -770,7 +770,7 @@ channelParams
     :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
-    ChannelParams
+    ChannelParams'
     { _cpAddtional = _Coerce # pCpAddtional_
     }
 
@@ -783,7 +783,7 @@ cpAddtional
 instance FromJSON ChannelParams where
         parseJSON
           = withObject "ChannelParams"
-              (\ o -> ChannelParams <$> (parseJSONObject o))
+              (\ o -> ChannelParams' <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
         toJSON = toJSON . _cpAddtional
@@ -791,7 +791,7 @@ instance ToJSON ChannelParams where
 -- | JSON template for the activity resource.
 --
 -- /See:/ 'activity' smart constructor.
-data Activity = Activity
+data Activity = Activity'
     { _actEtag        :: !(Maybe Text)
     , _actIPAddress   :: !(Maybe Text)
     , _actKind        :: !Text
@@ -821,7 +821,7 @@ data Activity = Activity
 activity
     :: Activity
 activity =
-    Activity
+    Activity'
     { _actEtag = Nothing
     , _actIPAddress = Nothing
     , _actKind = "admin#reports#activity"
@@ -869,7 +869,7 @@ instance FromJSON Activity where
         parseJSON
           = withObject "Activity"
               (\ o ->
-                 Activity <$>
+                 Activity' <$>
                    (o .:? "etag") <*> (o .:? "ipAddress") <*>
                      (o .:? "kind" .!= "admin#reports#activity")
                      <*> (o .:? "actor")
@@ -878,7 +878,7 @@ instance FromJSON Activity where
                      <*> (o .:? "id"))
 
 instance ToJSON Activity where
-        toJSON Activity{..}
+        toJSON Activity'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _actEtag,
@@ -891,7 +891,7 @@ instance ToJSON Activity where
 -- | Information about the type of the item.
 --
 -- /See:/ 'usageReportEntity' smart constructor.
-data UsageReportEntity = UsageReportEntity
+data UsageReportEntity = UsageReportEntity'
     { _ureProFileId  :: !(Maybe Text)
     , _ureCustomerId :: !(Maybe Text)
     , _ureUserEmail  :: !(Maybe Text)
@@ -912,7 +912,7 @@ data UsageReportEntity = UsageReportEntity
 usageReportEntity
     :: UsageReportEntity
 usageReportEntity =
-    UsageReportEntity
+    UsageReportEntity'
     { _ureProFileId = Nothing
     , _ureCustomerId = Nothing
     , _ureUserEmail = Nothing
@@ -943,13 +943,13 @@ instance FromJSON UsageReportEntity where
         parseJSON
           = withObject "UsageReportEntity"
               (\ o ->
-                 UsageReportEntity <$>
+                 UsageReportEntity' <$>
                    (o .:? "profileId") <*> (o .:? "customerId") <*>
                      (o .:? "userEmail")
                      <*> (o .:? "type"))
 
 instance ToJSON UsageReportEntity where
-        toJSON UsageReportEntity{..}
+        toJSON UsageReportEntity'{..}
           = object
               (catMaybes
                  [("profileId" .=) <$> _ureProFileId,
@@ -959,7 +959,7 @@ instance ToJSON UsageReportEntity where
 
 --
 -- /See:/ 'activityEventsItemParametersItem' smart constructor.
-data ActivityEventsItemParametersItem = ActivityEventsItemParametersItem
+data ActivityEventsItemParametersItem = ActivityEventsItemParametersItem'
     { _aeipiBoolValue     :: !(Maybe Bool)
     , _aeipiIntValue      :: !(Maybe (Textual Int64))
     , _aeipiValue         :: !(Maybe Text)
@@ -986,7 +986,7 @@ data ActivityEventsItemParametersItem = ActivityEventsItemParametersItem
 activityEventsItemParametersItem
     :: ActivityEventsItemParametersItem
 activityEventsItemParametersItem =
-    ActivityEventsItemParametersItem
+    ActivityEventsItemParametersItem'
     { _aeipiBoolValue = Nothing
     , _aeipiIntValue = Nothing
     , _aeipiValue = Nothing
@@ -1039,7 +1039,7 @@ instance FromJSON ActivityEventsItemParametersItem
         parseJSON
           = withObject "ActivityEventsItemParametersItem"
               (\ o ->
-                 ActivityEventsItemParametersItem <$>
+                 ActivityEventsItemParametersItem' <$>
                    (o .:? "boolValue") <*> (o .:? "intValue") <*>
                      (o .:? "value")
                      <*> (o .:? "multiIntValue" .!= mempty)
@@ -1048,7 +1048,7 @@ instance FromJSON ActivityEventsItemParametersItem
 
 instance ToJSON ActivityEventsItemParametersItem
          where
-        toJSON ActivityEventsItemParametersItem{..}
+        toJSON ActivityEventsItemParametersItem'{..}
           = object
               (catMaybes
                  [("boolValue" .=) <$> _aeipiBoolValue,
@@ -1061,7 +1061,7 @@ instance ToJSON ActivityEventsItemParametersItem
 -- | User doing the action.
 --
 -- /See:/ 'activityActor' smart constructor.
-data ActivityActor = ActivityActor
+data ActivityActor = ActivityActor'
     { _aaEmail      :: !(Maybe Text)
     , _aaCallerType :: !(Maybe Text)
     , _aaProFileId  :: !(Maybe Text)
@@ -1082,7 +1082,7 @@ data ActivityActor = ActivityActor
 activityActor
     :: ActivityActor
 activityActor =
-    ActivityActor
+    ActivityActor'
     { _aaEmail = Nothing
     , _aaCallerType = Nothing
     , _aaProFileId = Nothing
@@ -1111,13 +1111,13 @@ instance FromJSON ActivityActor where
         parseJSON
           = withObject "ActivityActor"
               (\ o ->
-                 ActivityActor <$>
+                 ActivityActor' <$>
                    (o .:? "email") <*> (o .:? "callerType") <*>
                      (o .:? "profileId")
                      <*> (o .:? "key"))
 
 instance ToJSON ActivityActor where
-        toJSON ActivityActor{..}
+        toJSON ActivityActor'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _aaEmail,

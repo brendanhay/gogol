@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.Audiences.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -56,7 +56,7 @@ type AudiencesListResource =
 -- | List all of the audiences to which a user can share.
 --
 -- /See:/ 'audiencesList' smart constructor.
-data AudiencesList = AudiencesList
+data AudiencesList = AudiencesList'
     { _aUserId     :: !Text
     , _aPageToken  :: !(Maybe Text)
     , _aMaxResults :: !(Textual Word32)
@@ -75,7 +75,7 @@ audiencesList
     :: Text -- ^ 'aUserId'
     -> AudiencesList
 audiencesList pAUserId_ =
-    AudiencesList
+    AudiencesList'
     { _aUserId = pAUserId_
     , _aPageToken = Nothing
     , _aMaxResults = 20
@@ -103,7 +103,11 @@ aMaxResults
 
 instance GoogleRequest AudiencesList where
         type Rs AudiencesList = AudiencesFeed
-        requestClient AudiencesList{..}
+        type Scopes AudiencesList =
+             '["https://www.googleapis.com/auth/plus.circles.read",
+               "https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.me"]
+        requestClient AudiencesList'{..}
           = go _aUserId _aPageToken (Just _aMaxResults)
               (Just AltJSON)
               plusDomainsService

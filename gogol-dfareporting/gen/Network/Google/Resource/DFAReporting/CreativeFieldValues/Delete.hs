@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeFieldValues.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesDelete' request conforms to.
 type CreativeFieldValuesDeleteResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -57,7 +57,7 @@ type CreativeFieldValuesDeleteResource =
 -- | Deletes an existing creative field value.
 --
 -- /See:/ 'creativeFieldValuesDelete' smart constructor.
-data CreativeFieldValuesDelete = CreativeFieldValuesDelete
+data CreativeFieldValuesDelete = CreativeFieldValuesDelete'
     { _cfvdCreativeFieldId :: !(Textual Int64)
     , _cfvdProFileId       :: !(Textual Int64)
     , _cfvdId              :: !(Textual Int64)
@@ -78,7 +78,7 @@ creativeFieldValuesDelete
     -> Int64 -- ^ 'cfvdId'
     -> CreativeFieldValuesDelete
 creativeFieldValuesDelete pCfvdCreativeFieldId_ pCfvdProFileId_ pCfvdId_ =
-    CreativeFieldValuesDelete
+    CreativeFieldValuesDelete'
     { _cfvdCreativeFieldId = _Coerce # pCfvdCreativeFieldId_
     , _cfvdProFileId = _Coerce # pCfvdProFileId_
     , _cfvdId = _Coerce # pCfvdId_
@@ -106,7 +106,9 @@ cfvdId
 instance GoogleRequest CreativeFieldValuesDelete
          where
         type Rs CreativeFieldValuesDelete = ()
-        requestClient CreativeFieldValuesDelete{..}
+        type Scopes CreativeFieldValuesDelete =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeFieldValuesDelete'{..}
           = go _cfvdProFileId _cfvdCreativeFieldId _cfvdId
               (Just AltJSON)
               dFAReportingService

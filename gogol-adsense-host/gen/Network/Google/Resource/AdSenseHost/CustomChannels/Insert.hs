@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.CustomChannels.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type CustomChannelsInsertResource =
 -- | Add a new custom channel to the host AdSense account.
 --
 -- /See:/ 'customChannelsInsert' smart constructor.
-data CustomChannelsInsert = CustomChannelsInsert
+data CustomChannelsInsert = CustomChannelsInsert'
     { _cciPayload    :: !CustomChannel
     , _cciAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ customChannelsInsert
     -> Text -- ^ 'cciAdClientId'
     -> CustomChannelsInsert
 customChannelsInsert pCciPayload_ pCciAdClientId_ =
-    CustomChannelsInsert
+    CustomChannelsInsert'
     { _cciPayload = pCciPayload_
     , _cciAdClientId = pCciAdClientId_
     }
@@ -90,7 +90,9 @@ cciAdClientId
 
 instance GoogleRequest CustomChannelsInsert where
         type Rs CustomChannelsInsert = CustomChannel
-        requestClient CustomChannelsInsert{..}
+        type Scopes CustomChannelsInsert =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient CustomChannelsInsert'{..}
           = go _cciAdClientId (Just AltJSON) _cciPayload
               adSenseHostService
           where go

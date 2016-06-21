@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Productstatuses.Custombatch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type ProductstatusesCustombatchResource =
 -- | Gets the statuses of multiple products in a single request.
 --
 -- /See:/ 'productstatusesCustombatch' smart constructor.
-newtype ProductstatusesCustombatch = ProductstatusesCustombatch
+newtype ProductstatusesCustombatch = ProductstatusesCustombatch'
     { _pPayload :: ProductstatusesCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ productstatusesCustombatch
     :: ProductstatusesCustomBatchRequest -- ^ 'pPayload'
     -> ProductstatusesCustombatch
 productstatusesCustombatch pPPayload_ =
-    ProductstatusesCustombatch
+    ProductstatusesCustombatch'
     { _pPayload = pPPayload_
     }
 
@@ -78,7 +78,9 @@ instance GoogleRequest ProductstatusesCustombatch
          where
         type Rs ProductstatusesCustombatch =
              ProductstatusesCustomBatchResponse
-        requestClient ProductstatusesCustombatch{..}
+        type Scopes ProductstatusesCustombatch =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient ProductstatusesCustombatch'{..}
           = go (Just AltJSON) _pPayload shoppingContentService
           where go
                   = buildClient

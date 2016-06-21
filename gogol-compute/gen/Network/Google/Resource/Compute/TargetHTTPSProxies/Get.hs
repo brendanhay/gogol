@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.TargetHTTPSProxies.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the specified TargetHttpsProxy resource.
+-- Returns the specified TargetHttpsProxy resource. Get a list of available
+-- target HTTPS proxies by making a list() request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetHttpsProxies.get@.
 module Network.Google.Resource.Compute.TargetHTTPSProxies.Get
@@ -53,10 +54,11 @@ type TargetHTTPSProxiesGetResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] TargetHTTPSProxy
 
--- | Returns the specified TargetHttpsProxy resource.
+-- | Returns the specified TargetHttpsProxy resource. Get a list of available
+-- target HTTPS proxies by making a list() request.
 --
 -- /See:/ 'targetHTTPSProxiesGet' smart constructor.
-data TargetHTTPSProxiesGet = TargetHTTPSProxiesGet
+data TargetHTTPSProxiesGet = TargetHTTPSProxiesGet'
     { _thpgProject          :: !Text
     , _thpgTargetHTTPSProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,12 +75,12 @@ targetHTTPSProxiesGet
     -> Text -- ^ 'thpgTargetHTTPSProxy'
     -> TargetHTTPSProxiesGet
 targetHTTPSProxiesGet pThpgProject_ pThpgTargetHTTPSProxy_ =
-    TargetHTTPSProxiesGet
+    TargetHTTPSProxiesGet'
     { _thpgProject = pThpgProject_
     , _thpgTargetHTTPSProxy = pThpgTargetHTTPSProxy_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 thpgProject :: Lens' TargetHTTPSProxiesGet Text
 thpgProject
   = lens _thpgProject (\ s a -> s{_thpgProject = a})
@@ -91,7 +93,11 @@ thpgTargetHTTPSProxy
 
 instance GoogleRequest TargetHTTPSProxiesGet where
         type Rs TargetHTTPSProxiesGet = TargetHTTPSProxy
-        requestClient TargetHTTPSProxiesGet{..}
+        type Scopes TargetHTTPSProxiesGet =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute",
+               "https://www.googleapis.com/auth/compute.readonly"]
+        requestClient TargetHTTPSProxiesGet'{..}
           = go _thpgProject _thpgTargetHTTPSProxy
               (Just AltJSON)
               computeService

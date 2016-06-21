@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.Filters.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type ManagementFiltersDeleteResource =
 -- | Delete a filter.
 --
 -- /See:/ 'managementFiltersDelete' smart constructor.
-data ManagementFiltersDelete = ManagementFiltersDelete
+data ManagementFiltersDelete = ManagementFiltersDelete'
     { _mfdFilterId  :: !Text
     , _mfdAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ managementFiltersDelete
     -> Text -- ^ 'mfdAccountId'
     -> ManagementFiltersDelete
 managementFiltersDelete pMfdFilterId_ pMfdAccountId_ =
-    ManagementFiltersDelete
+    ManagementFiltersDelete'
     { _mfdFilterId = pMfdFilterId_
     , _mfdAccountId = pMfdAccountId_
     }
@@ -89,7 +89,9 @@ mfdAccountId
 
 instance GoogleRequest ManagementFiltersDelete where
         type Rs ManagementFiltersDelete = Filter
-        requestClient ManagementFiltersDelete{..}
+        type Scopes ManagementFiltersDelete =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementFiltersDelete'{..}
           = go _mfdAccountId _mfdFilterId (Just AltJSON)
               analyticsService
           where go

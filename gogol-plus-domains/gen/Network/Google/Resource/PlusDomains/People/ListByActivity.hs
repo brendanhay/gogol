@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.PlusDomains.People.ListByActivity
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type PeopleListByActivityResource =
 -- activity.
 --
 -- /See:/ 'peopleListByActivity' smart constructor.
-data PeopleListByActivity = PeopleListByActivity
+data PeopleListByActivity = PeopleListByActivity'
     { _plbaActivityId :: !Text
     , _plbaCollection :: !PeopleListByActivityCollection
     , _plbaPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ peopleListByActivity
     -> PeopleListByActivityCollection -- ^ 'plbaCollection'
     -> PeopleListByActivity
 peopleListByActivity pPlbaActivityId_ pPlbaCollection_ =
-    PeopleListByActivity
+    PeopleListByActivity'
     { _plbaActivityId = pPlbaActivityId_
     , _plbaCollection = pPlbaCollection_
     , _plbaPageToken = Nothing
@@ -122,7 +122,10 @@ plbaMaxResults
 
 instance GoogleRequest PeopleListByActivity where
         type Rs PeopleListByActivity = PeopleFeed
-        requestClient PeopleListByActivity{..}
+        type Scopes PeopleListByActivity =
+             '["https://www.googleapis.com/auth/plus.login",
+               "https://www.googleapis.com/auth/plus.stream.read"]
+        requestClient PeopleListByActivity'{..}
           = go _plbaActivityId _plbaCollection _plbaPageToken
               (Just _plbaMaxResults)
               (Just AltJSON)

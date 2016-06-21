@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Translate.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +62,7 @@ import           Network.Google.Translate.Types.Product
 import           Network.Google.Translate.Types.Sum
 
 -- | Default request referring to version 'v2' of the Translate API. This contains the host and root path used as a starting point for constructing service requests.
-translateService :: Service
+translateService :: ServiceConfig
 translateService
   = defaultService (ServiceId "translate:v2")
       "www.googleapis.com"

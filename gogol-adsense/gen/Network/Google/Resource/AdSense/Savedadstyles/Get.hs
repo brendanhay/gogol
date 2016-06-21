@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSense.Savedadstyles.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type SavedadstylesGetResource =
 -- | Get a specific saved ad style from the user\'s account.
 --
 -- /See:/ 'savedadstylesGet' smart constructor.
-newtype SavedadstylesGet = SavedadstylesGet
+newtype SavedadstylesGet = SavedadstylesGet'
     { _sgSavedAdStyleId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ savedadstylesGet
     :: Text -- ^ 'sgSavedAdStyleId'
     -> SavedadstylesGet
 savedadstylesGet pSgSavedAdStyleId_ =
-    SavedadstylesGet
+    SavedadstylesGet'
     { _sgSavedAdStyleId = pSgSavedAdStyleId_
     }
 
@@ -76,7 +76,10 @@ sgSavedAdStyleId
 
 instance GoogleRequest SavedadstylesGet where
         type Rs SavedadstylesGet = SavedAdStyle
-        requestClient SavedadstylesGet{..}
+        type Scopes SavedadstylesGet =
+             '["https://www.googleapis.com/auth/adsense",
+               "https://www.googleapis.com/auth/adsense.readonly"]
+        requestClient SavedadstylesGet'{..}
           = go _sgSavedAdStyleId (Just AltJSON) adSenseService
           where go
                   = buildClient

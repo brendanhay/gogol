@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Disks.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type DisksDeleteResource =
 -- delete snapshots.
 --
 -- /See:/ 'disksDelete' smart constructor.
-data DisksDelete = DisksDelete
+data DisksDelete = DisksDelete'
     { _ddProject :: !Text
     , _ddDisk    :: !Text
     , _ddZone    :: !Text
@@ -84,7 +84,7 @@ disksDelete
     -> Text -- ^ 'ddZone'
     -> DisksDelete
 disksDelete pDdProject_ pDdDisk_ pDdZone_ =
-    DisksDelete
+    DisksDelete'
     { _ddProject = pDdProject_
     , _ddDisk = pDdDisk_
     , _ddZone = pDdZone_
@@ -105,7 +105,10 @@ ddZone = lens _ddZone (\ s a -> s{_ddZone = a})
 
 instance GoogleRequest DisksDelete where
         type Rs DisksDelete = Operation
-        requestClient DisksDelete{..}
+        type Scopes DisksDelete =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient DisksDelete'{..}
           = go _ddProject _ddZone _ddDisk (Just AltJSON)
               computeService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -119,7 +119,7 @@ type ProjectsUpdateBillingInfoResource =
 -- billing account.
 --
 -- /See:/ 'projectsUpdateBillingInfo' smart constructor.
-data ProjectsUpdateBillingInfo = ProjectsUpdateBillingInfo
+data ProjectsUpdateBillingInfo = ProjectsUpdateBillingInfo'
     { _pubiXgafv          :: !(Maybe Text)
     , _pubiUploadProtocol :: !(Maybe Text)
     , _pubiPp             :: !Bool
@@ -157,7 +157,7 @@ projectsUpdateBillingInfo
     -> Text -- ^ 'pubiName'
     -> ProjectsUpdateBillingInfo
 projectsUpdateBillingInfo pPubiPayload_ pPubiName_ =
-    ProjectsUpdateBillingInfo
+    ProjectsUpdateBillingInfo'
     { _pubiXgafv = Nothing
     , _pubiUploadProtocol = Nothing
     , _pubiPp = True
@@ -221,7 +221,9 @@ instance GoogleRequest ProjectsUpdateBillingInfo
          where
         type Rs ProjectsUpdateBillingInfo =
              ProjectBillingInfo
-        requestClient ProjectsUpdateBillingInfo{..}
+        type Scopes ProjectsUpdateBillingInfo =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient ProjectsUpdateBillingInfo'{..}
           = go _pubiName _pubiXgafv _pubiUploadProtocol
               (Just _pubiPp)
               _pubiAccessToken

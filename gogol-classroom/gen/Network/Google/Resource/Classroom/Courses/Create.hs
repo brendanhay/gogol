@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Classroom.Courses.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -78,7 +78,7 @@ type CoursesCreateResource =
 -- specified in the \`id\` and already exists.
 --
 -- /See:/ 'coursesCreate' smart constructor.
-data CoursesCreate = CoursesCreate
+data CoursesCreate = CoursesCreate'
     { _ccXgafv          :: !(Maybe Text)
     , _ccUploadProtocol :: !(Maybe Text)
     , _ccPp             :: !Bool
@@ -112,7 +112,7 @@ coursesCreate
     :: Course -- ^ 'ccPayload'
     -> CoursesCreate
 coursesCreate pCcPayload_ =
-    CoursesCreate
+    CoursesCreate'
     { _ccXgafv = Nothing
     , _ccUploadProtocol = Nothing
     , _ccPp = True
@@ -166,7 +166,9 @@ ccCallback
 
 instance GoogleRequest CoursesCreate where
         type Rs CoursesCreate = Course
-        requestClient CoursesCreate{..}
+        type Scopes CoursesCreate =
+             '["https://www.googleapis.com/auth/classroom.courses"]
+        requestClient CoursesCreate'{..}
           = go _ccXgafv _ccUploadProtocol (Just _ccPp)
               _ccAccessToken
               _ccUploadType

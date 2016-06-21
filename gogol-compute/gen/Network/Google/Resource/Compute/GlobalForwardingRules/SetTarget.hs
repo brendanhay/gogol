@@ -14,13 +14,14 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Changes target url for forwarding rule.
+-- Changes target URL for forwarding rule. The new target should be of the
+-- same type as the old target.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalForwardingRules.setTarget@.
 module Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
@@ -56,10 +57,11 @@ type GlobalForwardingRulesSetTargetResource =
                        ReqBody '[JSON] TargetReference :>
                          Post '[JSON] Operation
 
--- | Changes target url for forwarding rule.
+-- | Changes target URL for forwarding rule. The new target should be of the
+-- same type as the old target.
 --
 -- /See:/ 'globalForwardingRulesSetTarget' smart constructor.
-data GlobalForwardingRulesSetTarget = GlobalForwardingRulesSetTarget
+data GlobalForwardingRulesSetTarget = GlobalForwardingRulesSetTarget'
     { _gfrstProject        :: !Text
     , _gfrstForwardingRule :: !Text
     , _gfrstPayload        :: !TargetReference
@@ -80,13 +82,13 @@ globalForwardingRulesSetTarget
     -> TargetReference -- ^ 'gfrstPayload'
     -> GlobalForwardingRulesSetTarget
 globalForwardingRulesSetTarget pGfrstProject_ pGfrstForwardingRule_ pGfrstPayload_ =
-    GlobalForwardingRulesSetTarget
+    GlobalForwardingRulesSetTarget'
     { _gfrstProject = pGfrstProject_
     , _gfrstForwardingRule = pGfrstForwardingRule_
     , _gfrstPayload = pGfrstPayload_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 gfrstProject :: Lens' GlobalForwardingRulesSetTarget Text
 gfrstProject
   = lens _gfrstProject (\ s a -> s{_gfrstProject = a})
@@ -105,7 +107,10 @@ gfrstPayload
 instance GoogleRequest GlobalForwardingRulesSetTarget
          where
         type Rs GlobalForwardingRulesSetTarget = Operation
-        requestClient GlobalForwardingRulesSetTarget{..}
+        type Scopes GlobalForwardingRulesSetTarget =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient GlobalForwardingRulesSetTarget'{..}
           = go _gfrstProject _gfrstForwardingRule
               (Just AltJSON)
               _gfrstPayload

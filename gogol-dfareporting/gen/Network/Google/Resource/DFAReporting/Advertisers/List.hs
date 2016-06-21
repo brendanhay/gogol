@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Advertisers.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersList' request conforms to.
 type AdvertisersListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>
@@ -81,7 +81,7 @@ type AdvertisersListResource =
 -- | Retrieves a list of advertisers, possibly filtered.
 --
 -- /See:/ 'advertisersList' smart constructor.
-data AdvertisersList = AdvertisersList
+data AdvertisersList = AdvertisersList'
     { _allStatus                              :: !(Maybe AdvertisersListStatus)
     , _allOnlyParent                          :: !(Maybe Bool)
     , _allSearchString                        :: !(Maybe Text)
@@ -130,7 +130,7 @@ advertisersList
     :: Int64 -- ^ 'allProFileId'
     -> AdvertisersList
 advertisersList pAllProFileId_ =
-    AdvertisersList
+    AdvertisersList'
     { _allStatus = Nothing
     , _allOnlyParent = Nothing
     , _allSearchString = Nothing
@@ -236,7 +236,9 @@ allMaxResults
 
 instance GoogleRequest AdvertisersList where
         type Rs AdvertisersList = AdvertisersListResponse
-        requestClient AdvertisersList{..}
+        type Scopes AdvertisersList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AdvertisersList'{..}
           = go _allProFileId _allStatus _allOnlyParent
               _allSearchString
               (_allIds ^. _Default)

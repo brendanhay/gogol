@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Licensing.LicenseAssignments.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type LicenseAssignmentsInsertResource =
 -- | Assign License.
 --
 -- /See:/ 'licenseAssignmentsInsert' smart constructor.
-data LicenseAssignmentsInsert = LicenseAssignmentsInsert
+data LicenseAssignmentsInsert = LicenseAssignmentsInsert'
     { _laiSKUId     :: !Text
     , _laiPayload   :: !LicenseAssignmentInsert
     , _laiProductId :: !Text
@@ -80,7 +80,7 @@ licenseAssignmentsInsert
     -> Text -- ^ 'laiProductId'
     -> LicenseAssignmentsInsert
 licenseAssignmentsInsert pLaiSKUId_ pLaiPayload_ pLaiProductId_ =
-    LicenseAssignmentsInsert
+    LicenseAssignmentsInsert'
     { _laiSKUId = pLaiSKUId_
     , _laiPayload = pLaiPayload_
     , _laiProductId = pLaiProductId_
@@ -102,7 +102,9 @@ laiProductId
 
 instance GoogleRequest LicenseAssignmentsInsert where
         type Rs LicenseAssignmentsInsert = LicenseAssignment
-        requestClient LicenseAssignmentsInsert{..}
+        type Scopes LicenseAssignmentsInsert =
+             '["https://www.googleapis.com/auth/apps.licensing"]
+        requestClient LicenseAssignmentsInsert'{..}
           = go _laiProductId _laiSKUId (Just AltJSON)
               _laiPayload
               appsLicensingService

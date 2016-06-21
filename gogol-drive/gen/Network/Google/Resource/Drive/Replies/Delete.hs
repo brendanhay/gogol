@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Replies.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'RepliesDelete' request conforms to.
 type RepliesDeleteResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>
@@ -57,7 +57,7 @@ type RepliesDeleteResource =
 -- | Deletes a reply.
 --
 -- /See:/ 'repliesDelete' smart constructor.
-data RepliesDelete = RepliesDelete
+data RepliesDelete = RepliesDelete'
     { _rdReplyId   :: !Text
     , _rdFileId    :: !Text
     , _rdCommentId :: !Text
@@ -78,7 +78,7 @@ repliesDelete
     -> Text -- ^ 'rdCommentId'
     -> RepliesDelete
 repliesDelete pRdReplyId_ pRdFileId_ pRdCommentId_ =
-    RepliesDelete
+    RepliesDelete'
     { _rdReplyId = pRdReplyId_
     , _rdFileId = pRdFileId_
     , _rdCommentId = pRdCommentId_
@@ -100,7 +100,10 @@ rdCommentId
 
 instance GoogleRequest RepliesDelete where
         type Rs RepliesDelete = ()
-        requestClient RepliesDelete{..}
+        type Scopes RepliesDelete =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
+        requestClient RepliesDelete'{..}
           = go _rdFileId _rdCommentId _rdReplyId (Just AltJSON)
               driveService
           where go

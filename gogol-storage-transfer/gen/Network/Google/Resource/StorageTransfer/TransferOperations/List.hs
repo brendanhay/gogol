@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.TransferOperations.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -78,7 +78,7 @@ type TransferOperationsListResource =
 -- \`users\/*\/operations\`.
 --
 -- /See:/ 'transferOperationsList' smart constructor.
-data TransferOperationsList = TransferOperationsList
+data TransferOperationsList = TransferOperationsList'
     { _tolXgafv          :: !(Maybe Text)
     , _tolUploadProtocol :: !(Maybe Text)
     , _tolPp             :: !Bool
@@ -121,7 +121,7 @@ transferOperationsList
     :: Text -- ^ 'tolName'
     -> TransferOperationsList
 transferOperationsList pTolName_ =
-    TransferOperationsList
+    TransferOperationsList'
     { _tolXgafv = Nothing
     , _tolUploadProtocol = Nothing
     , _tolPp = True
@@ -195,7 +195,9 @@ tolCallback
 instance GoogleRequest TransferOperationsList where
         type Rs TransferOperationsList =
              ListOperationsResponse
-        requestClient TransferOperationsList{..}
+        type Scopes TransferOperationsList =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TransferOperationsList'{..}
           = go _tolName _tolXgafv _tolUploadProtocol
               (Just _tolPp)
               _tolAccessToken

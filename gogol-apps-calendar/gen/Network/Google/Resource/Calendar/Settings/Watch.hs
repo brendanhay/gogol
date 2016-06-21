@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.Settings.Watch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type SettingsWatchResource =
 -- | Watch for changes to Settings resources.
 --
 -- /See:/ 'settingsWatch' smart constructor.
-data SettingsWatch = SettingsWatch
+data SettingsWatch = SettingsWatch'
     { _swSyncToken  :: !(Maybe Text)
     , _swPayload    :: !Channel
     , _swPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ settingsWatch
     :: Channel -- ^ 'swPayload'
     -> SettingsWatch
 settingsWatch pSwPayload_ =
-    SettingsWatch
+    SettingsWatch'
     { _swSyncToken = Nothing
     , _swPayload = pSwPayload_
     , _swPageToken = Nothing
@@ -120,7 +120,10 @@ swMaxResults
 
 instance GoogleRequest SettingsWatch where
         type Rs SettingsWatch = Channel
-        requestClient SettingsWatch{..}
+        type Scopes SettingsWatch =
+             '["https://www.googleapis.com/auth/calendar",
+               "https://www.googleapis.com/auth/calendar.readonly"]
+        requestClient SettingsWatch'{..}
           = go _swSyncToken _swPageToken _swMaxResults
               (Just AltJSON)
               _swPayload

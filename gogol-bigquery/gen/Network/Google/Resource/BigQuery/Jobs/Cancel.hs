@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Jobs.Cancel
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type JobsCancelResource =
 -- completed successfully. Cancelled jobs may still incur costs.
 --
 -- /See:/ 'jobsCancel' smart constructor.
-data JobsCancel = JobsCancel
+data JobsCancel = JobsCancel'
     { _jcJobId     :: !Text
     , _jcProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,23 +77,26 @@ jobsCancel
     -> Text -- ^ 'jcProjectId'
     -> JobsCancel
 jobsCancel pJcJobId_ pJcProjectId_ =
-    JobsCancel
+    JobsCancel'
     { _jcJobId = pJcJobId_
     , _jcProjectId = pJcProjectId_
     }
 
--- | Job ID of the job to cancel
+-- | [Required] Job ID of the job to cancel
 jcJobId :: Lens' JobsCancel Text
 jcJobId = lens _jcJobId (\ s a -> s{_jcJobId = a})
 
--- | Project ID of the job to cancel
+-- | [Required] Project ID of the job to cancel
 jcProjectId :: Lens' JobsCancel Text
 jcProjectId
   = lens _jcProjectId (\ s a -> s{_jcProjectId = a})
 
 instance GoogleRequest JobsCancel where
         type Rs JobsCancel = JobCancelResponse
-        requestClient JobsCancel{..}
+        type Scopes JobsCancel =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient JobsCancel'{..}
           = go _jcProjectId _jcJobId (Just AltJSON)
               bigQueryService
           where go

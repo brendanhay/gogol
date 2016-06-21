@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeGroups.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsGet' request conforms to.
 type CreativeGroupsGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
@@ -54,7 +54,7 @@ type CreativeGroupsGetResource =
 -- | Gets one creative group by ID.
 --
 -- /See:/ 'creativeGroupsGet' smart constructor.
-data CreativeGroupsGet = CreativeGroupsGet
+data CreativeGroupsGet = CreativeGroupsGet'
     { _cgggProFileId :: !(Textual Int64)
     , _cgggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativeGroupsGet
     -> Int64 -- ^ 'cgggId'
     -> CreativeGroupsGet
 creativeGroupsGet pCgggProFileId_ pCgggId_ =
-    CreativeGroupsGet
+    CreativeGroupsGet'
     { _cgggProFileId = _Coerce # pCgggProFileId_
     , _cgggId = _Coerce # pCgggId_
     }
@@ -90,7 +90,9 @@ cgggId
 
 instance GoogleRequest CreativeGroupsGet where
         type Rs CreativeGroupsGet = CreativeGroup
-        requestClient CreativeGroupsGet{..}
+        type Scopes CreativeGroupsGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeGroupsGet'{..}
           = go _cgggProFileId _cgggId (Just AltJSON)
               dFAReportingService
           where go

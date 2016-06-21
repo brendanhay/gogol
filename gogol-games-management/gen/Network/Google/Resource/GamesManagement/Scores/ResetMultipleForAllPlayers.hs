@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.GamesManagement.Scores.ResetMultipleForAllPlayers
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type ScoresResetMultipleForAllPlayersResource =
 -- console. Only draft leaderboards may be reset.
 --
 -- /See:/ 'scoresResetMultipleForAllPlayers' smart constructor.
-newtype ScoresResetMultipleForAllPlayers = ScoresResetMultipleForAllPlayers
+newtype ScoresResetMultipleForAllPlayers = ScoresResetMultipleForAllPlayers'
     { _srmfapPayload :: ScoresResetMultipleForAllRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ scoresResetMultipleForAllPlayers
     :: ScoresResetMultipleForAllRequest -- ^ 'srmfapPayload'
     -> ScoresResetMultipleForAllPlayers
 scoresResetMultipleForAllPlayers pSrmfapPayload_ =
-    ScoresResetMultipleForAllPlayers
+    ScoresResetMultipleForAllPlayers'
     { _srmfapPayload = pSrmfapPayload_
     }
 
@@ -83,7 +83,10 @@ srmfapPayload
 instance GoogleRequest
          ScoresResetMultipleForAllPlayers where
         type Rs ScoresResetMultipleForAllPlayers = ()
-        requestClient ScoresResetMultipleForAllPlayers{..}
+        type Scopes ScoresResetMultipleForAllPlayers =
+             '["https://www.googleapis.com/auth/games",
+               "https://www.googleapis.com/auth/plus.login"]
+        requestClient ScoresResetMultipleForAllPlayers'{..}
           = go (Just AltJSON) _srmfapPayload
               gamesManagementService
           where go

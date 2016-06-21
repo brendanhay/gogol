@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Webmasters.Searchanalytics.Query
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -27,7 +27,7 @@
 -- you need to know which days have data, issue a broad date range query
 -- grouped by date for any metric, and see which day rows are returned.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.searchanalytics.query@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference> for @webmasters.searchanalytics.query@.
 module Network.Google.Resource.Webmasters.Searchanalytics.Query
     (
     -- * REST Resource
@@ -66,7 +66,7 @@ type SearchanalyticsQueryResource =
 -- grouped by date for any metric, and see which day rows are returned.
 --
 -- /See:/ 'searchanalyticsQuery' smart constructor.
-data SearchanalyticsQuery = SearchanalyticsQuery
+data SearchanalyticsQuery = SearchanalyticsQuery'
     { _sqSiteURL :: !Text
     , _sqPayload :: !SearchAnalyticsQueryRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -83,7 +83,7 @@ searchanalyticsQuery
     -> SearchAnalyticsQueryRequest -- ^ 'sqPayload'
     -> SearchanalyticsQuery
 searchanalyticsQuery pSqSiteURL_ pSqPayload_ =
-    SearchanalyticsQuery
+    SearchanalyticsQuery'
     { _sqSiteURL = pSqSiteURL_
     , _sqPayload = pSqPayload_
     }
@@ -102,7 +102,10 @@ sqPayload
 instance GoogleRequest SearchanalyticsQuery where
         type Rs SearchanalyticsQuery =
              SearchAnalyticsQueryResponse
-        requestClient SearchanalyticsQuery{..}
+        type Scopes SearchanalyticsQuery =
+             '["https://www.googleapis.com/auth/webmasters",
+               "https://www.googleapis.com/auth/webmasters.readonly"]
+        requestClient SearchanalyticsQuery'{..}
           = go _sqSiteURL (Just AltJSON) _sqPayload
               webmasterToolsService
           where go

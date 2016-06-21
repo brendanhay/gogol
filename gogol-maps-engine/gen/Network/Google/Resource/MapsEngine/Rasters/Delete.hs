@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.MapsEngine.Rasters.Delete
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type RastersDeleteResource =
 -- | Delete a raster.
 --
 -- /See:/ 'rastersDelete' smart constructor.
-newtype RastersDelete = RastersDelete
+newtype RastersDelete = RastersDelete'
     { _rdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ rastersDelete
     :: Text -- ^ 'rdId'
     -> RastersDelete
 rastersDelete pRdId_ =
-    RastersDelete
+    RastersDelete'
     { _rdId = pRdId_
     }
 
@@ -76,7 +76,9 @@ rdId = lens _rdId (\ s a -> s{_rdId = a})
 
 instance GoogleRequest RastersDelete where
         type Rs RastersDelete = ()
-        requestClient RastersDelete{..}
+        type Scopes RastersDelete =
+             '["https://www.googleapis.com/auth/mapsengine"]
+        requestClient RastersDelete'{..}
           = go _rdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersDeleteResource)

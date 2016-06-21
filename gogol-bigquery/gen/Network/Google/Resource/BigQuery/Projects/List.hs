@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.Projects.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type ProjectsListResource =
 -- | Lists all projects to which you have been granted any project role.
 --
 -- /See:/ 'projectsList' smart constructor.
-data ProjectsList = ProjectsList
+data ProjectsList = ProjectsList'
     { _plPageToken  :: !(Maybe Text)
     , _plMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,7 +68,7 @@ data ProjectsList = ProjectsList
 projectsList
     :: ProjectsList
 projectsList =
-    ProjectsList
+    ProjectsList'
     { _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
@@ -87,7 +87,11 @@ plMaxResults
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectList
-        requestClient ProjectsList{..}
+        type Scopes ProjectsList =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
+        requestClient ProjectsList'{..}
           = go _plPageToken _plMaxResults (Just AltJSON)
               bigQueryService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.Accounts.AdUnits.GetAdCode
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -62,7 +62,7 @@ type AccountsAdUnitsGetAdCodeResource =
 -- custom channels.
 --
 -- /See:/ 'accountsAdUnitsGetAdCode' smart constructor.
-data AccountsAdUnitsGetAdCode = AccountsAdUnitsGetAdCode
+data AccountsAdUnitsGetAdCode = AccountsAdUnitsGetAdCode'
     { _aaugacAdUnitId            :: !Text
     , _aaugacAdClientId          :: !Text
     , _aaugacAccountId           :: !Text
@@ -86,7 +86,7 @@ accountsAdUnitsGetAdCode
     -> Text -- ^ 'aaugacAccountId'
     -> AccountsAdUnitsGetAdCode
 accountsAdUnitsGetAdCode pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ =
-    AccountsAdUnitsGetAdCode
+    AccountsAdUnitsGetAdCode'
     { _aaugacAdUnitId = pAaugacAdUnitId_
     , _aaugacAdClientId = pAaugacAdClientId_
     , _aaugacAccountId = pAaugacAccountId_
@@ -121,7 +121,9 @@ aaugacHostCustomChannelId
 
 instance GoogleRequest AccountsAdUnitsGetAdCode where
         type Rs AccountsAdUnitsGetAdCode = AdCode
-        requestClient AccountsAdUnitsGetAdCode{..}
+        type Scopes AccountsAdUnitsGetAdCode =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AccountsAdUnitsGetAdCode'{..}
           = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId
               (_aaugacHostCustomChannelId ^. _Default)

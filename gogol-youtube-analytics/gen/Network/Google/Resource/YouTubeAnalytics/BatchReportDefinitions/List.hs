@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type BatchReportDefinitionsListResource =
 -- | Retrieves a list of available batch report definitions.
 --
 -- /See:/ 'batchReportDefinitionsList' smart constructor.
-newtype BatchReportDefinitionsList = BatchReportDefinitionsList
+newtype BatchReportDefinitionsList = BatchReportDefinitionsList'
     { _brdlOnBehalfOfContentOwner :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ batchReportDefinitionsList
     :: Text -- ^ 'brdlOnBehalfOfContentOwner'
     -> BatchReportDefinitionsList
 batchReportDefinitionsList pBrdlOnBehalfOfContentOwner_ =
-    BatchReportDefinitionsList
+    BatchReportDefinitionsList'
     { _brdlOnBehalfOfContentOwner = pBrdlOnBehalfOfContentOwner_
     }
 
@@ -81,7 +81,10 @@ instance GoogleRequest BatchReportDefinitionsList
          where
         type Rs BatchReportDefinitionsList =
              BatchReportDefinitionList
-        requestClient BatchReportDefinitionsList{..}
+        type Scopes BatchReportDefinitionsList =
+             '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+               "https://www.googleapis.com/auth/yt-analytics.readonly"]
+        requestClient BatchReportDefinitionsList'{..}
           = go (Just _brdlOnBehalfOfContentOwner)
               (Just AltJSON)
               youTubeAnalyticsService

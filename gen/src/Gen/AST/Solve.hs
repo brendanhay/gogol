@@ -12,7 +12,7 @@
 {-# LANGUAGE ViewPatterns               #-}
 
 -- Module      : Gen.AST.Solve
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : provisional
@@ -39,7 +39,6 @@ import           Data.Semigroup       ((<>))
 import           Data.Text            (Text)
 import qualified Data.Text            as Text
 import           Data.Text.Manipulate
-import           Debug.Trace
 import           Gen.Formatting
 import           Gen.Text
 import           Gen.Types
@@ -196,8 +195,8 @@ overlap :: (Eq a, Hashable a) => Set a -> Set a -> Bool
 overlap xs ys = not . Set.null $ Set.intersection xs ys
 
 acronymPrefixes :: Global -> [CI Text]
-acronymPrefixes (global -> g) = filter (/= full) $
-    map CI.mk (xs ++ map suffix ys ++ zs)
+acronymPrefixes (global -> renameSpecial -> g) =
+    filter (/= full) $ map CI.mk (xs ++ map suffix ys ++ zs)
   where
     -- Take the next char
     suffix x = Text.snoc x c

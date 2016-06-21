@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Reports.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsPatch' request conforms to.
 type ReportsPatchResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>
@@ -56,7 +56,7 @@ type ReportsPatchResource =
 -- | Updates a report. This method supports patch semantics.
 --
 -- /See:/ 'reportsPatch' smart constructor.
-data ReportsPatch = ReportsPatch
+data ReportsPatch = ReportsPatch'
     { _rpReportId  :: !(Textual Int64)
     , _rpProFileId :: !(Textual Int64)
     , _rpPayload   :: !Report
@@ -77,7 +77,7 @@ reportsPatch
     -> Report -- ^ 'rpPayload'
     -> ReportsPatch
 reportsPatch pRpReportId_ pRpProFileId_ pRpPayload_ =
-    ReportsPatch
+    ReportsPatch'
     { _rpReportId = _Coerce # pRpReportId_
     , _rpProFileId = _Coerce # pRpProFileId_
     , _rpPayload = pRpPayload_
@@ -102,7 +102,9 @@ rpPayload
 
 instance GoogleRequest ReportsPatch where
         type Rs ReportsPatch = Report
-        requestClient ReportsPatch{..}
+        type Scopes ReportsPatch =
+             '["https://www.googleapis.com/auth/dfareporting"]
+        requestClient ReportsPatch'{..}
           = go _rpProFileId _rpReportId (Just AltJSON)
               _rpPayload
               dFAReportingService

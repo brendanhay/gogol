@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -63,7 +63,7 @@ type EditsTracksUpdateResource =
 -- adding new APKs will cause it to resume.
 --
 -- /See:/ 'editsTracksUpdate' smart constructor.
-data EditsTracksUpdate = EditsTracksUpdate
+data EditsTracksUpdate = EditsTracksUpdate'
     { _etuTrack       :: !EditsTracksUpdateTrack
     , _etuPackageName :: !Text
     , _etuPayload     :: !Track
@@ -88,7 +88,7 @@ editsTracksUpdate
     -> Text -- ^ 'etuEditId'
     -> EditsTracksUpdate
 editsTracksUpdate pEtuTrack_ pEtuPackageName_ pEtuPayload_ pEtuEditId_ =
-    EditsTracksUpdate
+    EditsTracksUpdate'
     { _etuTrack = pEtuTrack_
     , _etuPackageName = pEtuPackageName_
     , _etuPayload = pEtuPayload_
@@ -118,7 +118,9 @@ etuEditId
 
 instance GoogleRequest EditsTracksUpdate where
         type Rs EditsTracksUpdate = Track
-        requestClient EditsTracksUpdate{..}
+        type Scopes EditsTracksUpdate =
+             '["https://www.googleapis.com/auth/androidpublisher"]
+        requestClient EditsTracksUpdate'{..}
           = go _etuPackageName _etuEditId _etuTrack
               (Just AltJSON)
               _etuPayload

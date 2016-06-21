@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.AndroidPublisher.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,7 +20,7 @@ module Network.Google.AndroidPublisher.Types
       androidPublisherService
 
     -- * OAuth Scopes
-    , androidpublisherScope
+    , androidPublisherScope
 
     -- * InAppProductListings
     , InAppProductListings
@@ -88,6 +89,18 @@ module Network.Google.AndroidPublisher.Types
     -- * EditsTracksPatchTrack
     , EditsTracksPatchTrack (..)
 
+    -- * UserComment
+    , UserComment
+    , userComment
+    , ucAndroidOSVersion
+    , ucText
+    , ucDevice
+    , ucAppVersionCode
+    , ucAppVersionName
+    , ucReviewerLanguage
+    , ucStarRating
+    , ucLastModified
+
     -- * Testers
     , Testers
     , testers
@@ -131,6 +144,7 @@ module Network.Google.AndroidPublisher.Types
     , season
     , sStart
     , sEnd
+    , sProrations
 
     -- * PageInfo
     , PageInfo
@@ -159,6 +173,13 @@ module Network.Google.AndroidPublisher.Types
     , ppPurchaseTimeMillis
     , ppDeveloperPayload
 
+    -- * ReviewsListResponse
+    , ReviewsListResponse
+    , reviewsListResponse
+    , rlrTokenPagination
+    , rlrPageInfo
+    , rlrReviews
+
     -- * SubscriptionPurchasesDeferResponse
     , SubscriptionPurchasesDeferResponse
     , subscriptionPurchasesDeferResponse
@@ -173,9 +194,15 @@ module Network.Google.AndroidPublisher.Types
     -- * SubscriptionPurchase
     , SubscriptionPurchase
     , subscriptionPurchase
+    , spPaymentState
     , spKind
     , spExpiryTimeMillis
     , spAutoRenewing
+    , spPriceCurrencyCode
+    , spCancelReason
+    , spCountryCode
+    , spDeveloperPayload
+    , spPriceAmountMicros
     , spStartTimeMillis
 
     -- * AppDetails
@@ -237,6 +264,12 @@ module Network.Google.AndroidPublisher.Types
     -- * EditsImagesUploadImageType
     , EditsImagesUploadImageType (..)
 
+    -- * Prorate
+    , Prorate
+    , prorate
+    , pStart
+    , pDefaultPrice
+
     -- * InAppProductsListResponse
     , InAppProductsListResponse
     , inAppProductsListResponse
@@ -253,6 +286,13 @@ module Network.Google.AndroidPublisher.Types
     , aPKListingsListResponse
     , apkllrKind
     , apkllrListings
+
+    -- * Review
+    , Review
+    , review
+    , rReviewId
+    , rAuthorName
+    , rComments
 
     -- * InAppProductsInsertResponse
     , InAppProductsInsertResponse
@@ -273,11 +313,22 @@ module Network.Google.AndroidPublisher.Types
     -- * EditsExpansionFilesGetExpansionFileType
     , EditsExpansionFilesGetExpansionFileType (..)
 
+    -- * ReviewsReplyRequest
+    , ReviewsReplyRequest
+    , reviewsReplyRequest
+    , rrrReplyText
+
     -- * EditsExpansionFilesPatchExpansionFileType
     , EditsExpansionFilesPatchExpansionFileType (..)
 
     -- * EditsExpansionFilesUpdateExpansionFileType
     , EditsExpansionFilesUpdateExpansionFileType (..)
+
+    -- * DeveloperComment
+    , DeveloperComment
+    , developerComment
+    , dcText
+    , dcLastModified
 
     -- * InAppProduct
     , InAppProduct
@@ -321,6 +372,11 @@ module Network.Google.AndroidPublisher.Types
     , apklrKind
     , apklrAPKs
 
+    -- * ReviewsReplyResponse
+    , ReviewsReplyResponse
+    , reviewsReplyResponse
+    , rrrResult
+
     -- * ExternallyHostedAPKUsesPermission
     , ExternallyHostedAPKUsesPermission
     , externallyHostedAPKUsesPermission
@@ -350,6 +406,12 @@ module Network.Google.AndroidPublisher.Types
     , elrPageInfo
     , elrResources
 
+    -- * Comment
+    , Comment
+    , comment
+    , cUserComment
+    , cDeveloperComment
+
     -- * EditsTestersUpdateTrack
     , EditsTestersUpdateTrack (..)
 
@@ -357,6 +419,18 @@ module Network.Google.AndroidPublisher.Types
     , InAppProductsUpdateRequest
     , inAppProductsUpdateRequest
     , inInAppProduct
+
+    -- * Timestamp
+    , Timestamp
+    , timestamp
+    , tNanos
+    , tSeconds
+
+    -- * ReviewReplyResult
+    , ReviewReplyResult
+    , reviewReplyResult
+    , rReplyText
+    , rLastEdited
 
     -- * Entitlement
     , Entitlement
@@ -378,11 +452,11 @@ import           Network.Google.AndroidPublisher.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Google Play Developer API. This contains the host and root path used as a starting point for constructing service requests.
-androidPublisherService :: Service
+androidPublisherService :: ServiceConfig
 androidPublisherService
   = defaultService (ServiceId "androidpublisher:v2")
       "www.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-androidpublisherScope :: OAuthScope
-androidpublisherScope = "https://www.googleapis.com/auth/androidpublisher";
+androidPublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
+androidPublisherScope = Proxy;

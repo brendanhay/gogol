@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Gmail.Users.Messages.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type UsersMessagesGetResource =
 -- | Gets the specified message.
 --
 -- /See:/ 'usersMessagesGet' smart constructor.
-data UsersMessagesGet = UsersMessagesGet
+data UsersMessagesGet = UsersMessagesGet'
     { _umgFormat          :: !UsersMessagesGetFormat
     , _umgUserId          :: !Text
     , _umgId              :: !Text
@@ -78,10 +78,9 @@ data UsersMessagesGet = UsersMessagesGet
 -- * 'umgMetadataHeaders'
 usersMessagesGet
     :: Text -- ^ 'umgId'
-    -> Text
     -> UsersMessagesGet
-usersMessagesGet pUmgUserId_ pUmgId_ =
-    UsersMessagesGet
+usersMessagesGet pUmgId_ =
+    UsersMessagesGet'
     { _umgFormat = Full
     , _umgUserId = "me"
     , _umgId = pUmgId_
@@ -113,7 +112,11 @@ umgMetadataHeaders
 
 instance GoogleRequest UsersMessagesGet where
         type Rs UsersMessagesGet = Message
-        requestClient UsersMessagesGet{..}
+        type Scopes UsersMessagesGet =
+             '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.modify",
+               "https://www.googleapis.com/auth/gmail.readonly"]
+        requestClient UsersMessagesGet'{..}
           = go _umgUserId _umgId (Just _umgFormat)
               (_umgMetadataHeaders ^. _Default)
               (Just AltJSON)

@@ -14,13 +14,13 @@
 
 -- |
 -- Module      : Network.Google.Resource.Drive.Replies.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing reply.
+-- Updates a reply with patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.update@.
 module Network.Google.Resource.Drive.Replies.Update
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'RepliesUpdate' request conforms to.
 type RepliesUpdateResource =
      "drive" :>
-       "v2" :>
+       "v3" :>
          "files" :>
            Capture "fileId" Text :>
              "comments" :>
@@ -54,14 +54,13 @@ type RepliesUpdateResource =
                  "replies" :>
                    Capture "replyId" Text :>
                      QueryParam "alt" AltJSON :>
-                       ReqBody '[JSON] CommentReply :>
-                         Put '[JSON] CommentReply
+                       ReqBody '[JSON] Reply :> Patch '[JSON] Reply
 
--- | Updates an existing reply.
+-- | Updates a reply with patch semantics.
 --
 -- /See:/ 'repliesUpdate' smart constructor.
-data RepliesUpdate = RepliesUpdate
-    { _ruPayload   :: !CommentReply
+data RepliesUpdate = RepliesUpdate'
+    { _ruPayload   :: !Reply
     , _ruReplyId   :: !Text
     , _ruFileId    :: !Text
     , _ruCommentId :: !Text
@@ -79,13 +78,13 @@ data RepliesUpdate = RepliesUpdate
 --
 -- * 'ruCommentId'
 repliesUpdate
-    :: CommentReply -- ^ 'ruPayload'
+    :: Reply -- ^ 'ruPayload'
     -> Text -- ^ 'ruReplyId'
     -> Text -- ^ 'ruFileId'
     -> Text -- ^ 'ruCommentId'
     -> RepliesUpdate
 repliesUpdate pRuPayload_ pRuReplyId_ pRuFileId_ pRuCommentId_ =
-    RepliesUpdate
+    RepliesUpdate'
     { _ruPayload = pRuPayload_
     , _ruReplyId = pRuReplyId_
     , _ruFileId = pRuFileId_
@@ -93,7 +92,7 @@ repliesUpdate pRuPayload_ pRuReplyId_ pRuFileId_ pRuCommentId_ =
     }
 
 -- | Multipart request metadata.
-ruPayload :: Lens' RepliesUpdate CommentReply
+ruPayload :: Lens' RepliesUpdate Reply
 ruPayload
   = lens _ruPayload (\ s a -> s{_ruPayload = a})
 
@@ -112,8 +111,11 @@ ruCommentId
   = lens _ruCommentId (\ s a -> s{_ruCommentId = a})
 
 instance GoogleRequest RepliesUpdate where
-        type Rs RepliesUpdate = CommentReply
-        requestClient RepliesUpdate{..}
+        type Rs RepliesUpdate = Reply
+        type Scopes RepliesUpdate =
+             '["https://www.googleapis.com/auth/drive",
+               "https://www.googleapis.com/auth/drive.file"]
+        requestClient RepliesUpdate'{..}
           = go _ruFileId _ruCommentId _ruReplyId (Just AltJSON)
               _ruPayload
               driveService

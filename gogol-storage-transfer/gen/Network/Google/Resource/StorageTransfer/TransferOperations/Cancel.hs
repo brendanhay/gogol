@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -65,7 +65,7 @@ type TransferOperationsCancelResource =
 -- succeeded or whether the operation completed despite cancellation.
 --
 -- /See:/ 'transferOperationsCancel' smart constructor.
-data TransferOperationsCancel = TransferOperationsCancel
+data TransferOperationsCancel = TransferOperationsCancel'
     { _tocXgafv          :: !(Maybe Text)
     , _tocUploadProtocol :: !(Maybe Text)
     , _tocPp             :: !Bool
@@ -99,7 +99,7 @@ transferOperationsCancel
     :: Text -- ^ 'tocName'
     -> TransferOperationsCancel
 transferOperationsCancel pTocName_ =
-    TransferOperationsCancel
+    TransferOperationsCancel'
     { _tocXgafv = Nothing
     , _tocUploadProtocol = Nothing
     , _tocPp = True
@@ -153,7 +153,9 @@ tocCallback
 
 instance GoogleRequest TransferOperationsCancel where
         type Rs TransferOperationsCancel = Empty
-        requestClient TransferOperationsCancel{..}
+        type Scopes TransferOperationsCancel =
+             '["https://www.googleapis.com/auth/cloud-platform"]
+        requestClient TransferOperationsCancel'{..}
           = go _tocName _tocXgafv _tocUploadProtocol
               (Just _tocPp)
               _tocAccessToken

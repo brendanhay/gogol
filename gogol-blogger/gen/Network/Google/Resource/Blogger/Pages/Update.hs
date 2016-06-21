@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Pages.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type PagesUpdateResource =
 -- | Update a page.
 --
 -- /See:/ 'pagesUpdate' smart constructor.
-data PagesUpdate = PagesUpdate
+data PagesUpdate = PagesUpdate'
     { _puuBlogId  :: !Text
     , _puuPageId  :: !Text
     , _puuPayload :: !Page
@@ -87,7 +87,7 @@ pagesUpdate
     -> Page -- ^ 'puuPayload'
     -> PagesUpdate
 pagesUpdate pPuuBlogId_ pPuuPageId_ pPuuPayload_ =
-    PagesUpdate
+    PagesUpdate'
     { _puuBlogId = pPuuBlogId_
     , _puuPageId = pPuuPageId_
     , _puuPayload = pPuuPayload_
@@ -124,7 +124,9 @@ puuPublish
 
 instance GoogleRequest PagesUpdate where
         type Rs PagesUpdate = Page
-        requestClient PagesUpdate{..}
+        type Scopes PagesUpdate =
+             '["https://www.googleapis.com/auth/blogger"]
+        requestClient PagesUpdate'{..}
           = go _puuBlogId _puuPageId _puuRevert _puuPublish
               (Just AltJSON)
               _puuPayload

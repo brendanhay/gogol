@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TagManager.Accounts.Containers.Variables.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type AccountsContainersVariablesGetResource =
 -- | Gets a GTM Variable.
 --
 -- /See:/ 'accountsContainersVariablesGet' smart constructor.
-data AccountsContainersVariablesGet = AccountsContainersVariablesGet
+data AccountsContainersVariablesGet = AccountsContainersVariablesGet'
     { _acvgContainerId :: !Text
     , _acvgVariableId  :: !Text
     , _acvgAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersVariablesGet
     -> Text -- ^ 'acvgAccountId'
     -> AccountsContainersVariablesGet
 accountsContainersVariablesGet pAcvgContainerId_ pAcvgVariableId_ pAcvgAccountId_ =
-    AccountsContainersVariablesGet
+    AccountsContainersVariablesGet'
     { _acvgContainerId = pAcvgContainerId_
     , _acvgVariableId = pAcvgVariableId_
     , _acvgAccountId = pAcvgAccountId_
@@ -105,7 +105,10 @@ acvgAccountId
 instance GoogleRequest AccountsContainersVariablesGet
          where
         type Rs AccountsContainersVariablesGet = Variable
-        requestClient AccountsContainersVariablesGet{..}
+        type Scopes AccountsContainersVariablesGet =
+             '["https://www.googleapis.com/auth/tagmanager.edit.containers",
+               "https://www.googleapis.com/auth/tagmanager.readonly"]
+        requestClient AccountsContainersVariablesGet'{..}
           = go _acvgAccountId _acvgContainerId _acvgVariableId
               (Just AltJSON)
               tagManagerService

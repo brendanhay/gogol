@@ -7,7 +7,7 @@
 
 -- |
 -- Module      : Network.Google.Books
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -20,6 +20,9 @@ module Network.Google.Books
     (
     -- * Service Configuration
       booksService
+
+    -- * OAuth Scopes
+    , booksScope
 
     -- * API Declaration
     , BooksAPI
@@ -143,6 +146,12 @@ module Network.Google.Books
     -- ** books.promooffer.get
     , module Network.Google.Resource.Books.PromoOffer.Get
 
+    -- ** books.series.get
+    , module Network.Google.Resource.Books.Series.Get
+
+    -- ** books.series.membership.get
+    , module Network.Google.Resource.Books.Series.Membership.Get
+
     -- ** books.volumes.associated.list
     , module Network.Google.Resource.Books.Volumes.Associated.List
 
@@ -258,6 +267,12 @@ module Network.Google.Books
     , bclrAuthor
     , bclrTitle
 
+    -- ** VolumeseriesInfoVolumeSeriesItemIssueItem
+    , VolumeseriesInfoVolumeSeriesItemIssueItem
+    , volumeseriesInfoVolumeSeriesItemIssueItem
+    , vivsiiiIssueOrderNumber
+    , vivsiiiIssueDisplayNumber
+
     -- ** Annotation
     , Annotation
     , annotation
@@ -293,19 +308,25 @@ module Network.Google.Books
     -- ** VolumeUserInfo
     , VolumeUserInfo
     , volumeUserInfo
+    , vuiIsFamilySharingAllowed
+    , vuiIsFamilySharedToUser
     , vuiCopy
     , vuiUserUploadedVolumeInfo
     , vuiIsPurchased
     , vuiEntitlementType
     , vuiAcquisitionType
+    , vuiAcquiredTime
     , vuiRentalState
     , vuiIsPreOrdered
     , vuiReview
+    , vuiIsFamilySharedFromUser
     , vuiRentalPeriod
     , vuiUpdated
     , vuiIsUploaded
     , vuiIsInMyBooks
     , vuiReadingPosition
+    , vuiFamilySharing
+    , vuiIsFamilySharingDisabledByFop
 
     -- ** Layersummary
     , Layersummary
@@ -387,6 +408,14 @@ module Network.Google.Books
     , booksVolumesRecommendedRateResponse
     , bvrrrConsistencyToken
 
+    -- ** VolumeseriesInfo
+    , VolumeseriesInfo
+    , volumeseriesInfo
+    , viBookDisplayNumber
+    , viKind
+    , viShortSeriesBookTitle
+    , viVolumeSeries
+
     -- ** Bookshelf
     , Bookshelf
     , bookshelf
@@ -404,9 +433,17 @@ module Network.Google.Books
     -- ** Notification
     , Notification
     , notification
+    , nDocType
+    , nTargetURL
+    , nShowNotificationSettingsAction
+    , nDocId
     , nKind
     , nBody
-    , nLinkURL
+    , nCrmExperimentIds
+    , nPcampaignId
+    , nReason
+    , nDontShowNotification
+    , nNotificationType
     , nIconURL
     , nTitle
 
@@ -502,6 +539,12 @@ module Network.Google.Books
     , geolayerDataGeoBoundaryItemItem
     , gdgbiiLatitude
     , gdgbiiLongitude
+
+    -- ** Series
+    , Series
+    , series
+    , sKind
+    , sSeries
 
     -- ** OffersItemsItemItemsItem
     , OffersItemsItemItemsItem
@@ -610,6 +653,13 @@ module Network.Google.Books
     , dictlayerDataDictWordsItemSensesItemSynonymsItemSource
     , dddwisisisURL
     , dddwisisisAttribution
+
+    -- ** Seriesmembership
+    , Seriesmembership
+    , seriesmembership
+    , serNextPageToken
+    , serKind
+    , serMember
 
     -- ** VolumesListFilter
     , VolumesListFilter (..)
@@ -730,6 +780,15 @@ module Network.Google.Books
 
     -- ** MyLibraryBookshelvesAddVolumeReason
     , MyLibraryBookshelvesAddVolumeReason (..)
+
+    -- ** SeriesSeriesItem
+    , SeriesSeriesItem
+    , seriesSeriesItem
+    , ssiSeriesId
+    , ssiImageURL
+    , ssiBannerImageURL
+    , ssiTitle
+    , ssiSeriesType
 
     -- ** Metadata
     , Metadata
@@ -873,6 +932,14 @@ module Network.Google.Books
     , dTotalClusters
     , dClusters
 
+    -- ** VolumeseriesInfoVolumeSeriesItem
+    , VolumeseriesInfoVolumeSeriesItem
+    , volumeseriesInfoVolumeSeriesItem
+    , vivsiSeriesId
+    , vivsiSeriesBookType
+    , vivsiOrderNumber
+    , vivsiIssue
+
     -- ** UserSettingsNotesExport
     , UserSettingsNotesExport
     , userSettingsNotesExport
@@ -940,6 +1007,7 @@ module Network.Google.Books
     , vviCanonicalVolumeLink
     , vviReadingModes
     , vviIndustryIdentifiers
+    , vviSeriesInfo
     , vviPrintedPageCount
     , vviMainCategory
     , vviContentVersion
@@ -980,6 +1048,13 @@ module Network.Google.Books
     , volumeSaleInfoOffersItemRetailPrice
     , vsioirpCurrencyCode
     , vsioirpAmountInMicros
+
+    -- ** VolumeUserInfoFamilySharing
+    , VolumeUserInfoFamilySharing
+    , volumeUserInfoFamilySharing
+    , vuifsFamilyRole
+    , vuifsIsSharingAllowed
+    , vuifsIsSharingDisabledByFop
 
     -- ** VolumeVolumeInfoIndustryIdentifiersItem
     , VolumeVolumeInfoIndustryIdentifiersItem
@@ -1044,6 +1119,8 @@ import           Network.Google.Resource.Books.Personalizedstream.Get
 import           Network.Google.Resource.Books.PromoOffer.Accept
 import           Network.Google.Resource.Books.PromoOffer.Dismiss
 import           Network.Google.Resource.Books.PromoOffer.Get
+import           Network.Google.Resource.Books.Series.Get
+import           Network.Google.Resource.Books.Series.Membership.Get
 import           Network.Google.Resource.Books.Volumes.Associated.List
 import           Network.Google.Resource.Books.Volumes.Get
 import           Network.Google.Resource.Books.Volumes.List
@@ -1059,7 +1136,9 @@ TODO
 -- | Represents the entirety of the methods and resources available for the Books API service.
 type BooksAPI =
      NotificationGetResource :<|>
-       OnboardingListCategoriesResource
+       SeriesMembershipGetResource
+       :<|> SeriesGetResource
+       :<|> OnboardingListCategoriesResource
        :<|> OnboardingListCategoryVolumesResource
        :<|> MyLibraryAnnotationsSummaryResource
        :<|> MyLibraryAnnotationsInsertResource

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Modifies the set of products a user is entitled to access.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.setAvailableProductSet@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.setAvailableProductSet@.
 module Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type UsersSetAvailableProductSetResource =
 -- | Modifies the set of products a user is entitled to access.
 --
 -- /See:/ 'usersSetAvailableProductSet' smart constructor.
-data UsersSetAvailableProductSet = UsersSetAvailableProductSet
+data UsersSetAvailableProductSet = UsersSetAvailableProductSet'
     { _usapsEnterpriseId :: !Text
     , _usapsPayload      :: !ProductSet
     , _usapsUserId       :: !Text
@@ -78,7 +78,7 @@ usersSetAvailableProductSet
     -> Text -- ^ 'usapsUserId'
     -> UsersSetAvailableProductSet
 usersSetAvailableProductSet pUsapsEnterpriseId_ pUsapsPayload_ pUsapsUserId_ =
-    UsersSetAvailableProductSet
+    UsersSetAvailableProductSet'
     { _usapsEnterpriseId = pUsapsEnterpriseId_
     , _usapsPayload = pUsapsPayload_
     , _usapsUserId = pUsapsUserId_
@@ -103,7 +103,9 @@ usapsUserId
 instance GoogleRequest UsersSetAvailableProductSet
          where
         type Rs UsersSetAvailableProductSet = ProductSet
-        requestClient UsersSetAvailableProductSet{..}
+        type Scopes UsersSetAvailableProductSet =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient UsersSetAvailableProductSet'{..}
           = go _usapsEnterpriseId _usapsUserId (Just AltJSON)
               _usapsPayload
               androidEnterpriseService

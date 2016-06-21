@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.Accounts.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
@@ -67,7 +67,7 @@ type AccountsListResource =
 -- | Retrieves the list of accounts, possibly filtered.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
+data AccountsList = AccountsList'
     { _accSearchString :: !(Maybe Text)
     , _accIds          :: !(Maybe [Textual Int64])
     , _accProFileId    :: !(Textual Int64)
@@ -101,7 +101,7 @@ accountsList
     :: Int64 -- ^ 'accProFileId'
     -> AccountsList
 accountsList pAccProFileId_ =
-    AccountsList
+    AccountsList'
     { _accSearchString = Nothing
     , _accIds = Nothing
     , _accProFileId = _Coerce # pAccProFileId_
@@ -166,7 +166,9 @@ accMaxResults
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = AccountsListResponse
-        requestClient AccountsList{..}
+        type Scopes AccountsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient AccountsList'{..}
           = go _accProFileId _accSearchString
               (_accIds ^. _Default)
               _accSortOrder

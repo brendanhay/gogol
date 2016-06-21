@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.BigQuery.DataSets.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type DataSetsUpdateResource =
 -- fields that are provided in the submitted dataset resource.
 --
 -- /See:/ 'dataSetsUpdate' smart constructor.
-data DataSetsUpdate = DataSetsUpdate
+data DataSetsUpdate = DataSetsUpdate'
     { _dsuPayload   :: !DataSet
     , _dsuDataSetId :: !Text
     , _dsuProjectId :: !Text
@@ -81,7 +81,7 @@ dataSetsUpdate
     -> Text -- ^ 'dsuProjectId'
     -> DataSetsUpdate
 dataSetsUpdate pDsuPayload_ pDsuDataSetId_ pDsuProjectId_ =
-    DataSetsUpdate
+    DataSetsUpdate'
     { _dsuPayload = pDsuPayload_
     , _dsuDataSetId = pDsuDataSetId_
     , _dsuProjectId = pDsuProjectId_
@@ -104,7 +104,10 @@ dsuProjectId
 
 instance GoogleRequest DataSetsUpdate where
         type Rs DataSetsUpdate = DataSet
-        requestClient DataSetsUpdate{..}
+        type Scopes DataSetsUpdate =
+             '["https://www.googleapis.com/auth/bigquery",
+               "https://www.googleapis.com/auth/cloud-platform"]
+        requestClient DataSetsUpdate'{..}
           = go _dsuProjectId _dsuDataSetId (Just AltJSON)
               _dsuPayload
               bigQueryService

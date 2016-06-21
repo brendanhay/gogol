@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -66,7 +66,7 @@ type ManagementProFileFilterLinksPatchResource =
 -- semantics.
 --
 -- /See:/ 'managementProFileFilterLinksPatch' smart constructor.
-data ManagementProFileFilterLinksPatch = ManagementProFileFilterLinksPatch
+data ManagementProFileFilterLinksPatch = ManagementProFileFilterLinksPatch'
     { _mpfflpWebPropertyId :: !Text
     , _mpfflpProFileId     :: !Text
     , _mpfflpPayload       :: !ProFileFilterLink
@@ -95,7 +95,7 @@ managementProFileFilterLinksPatch
     -> Text -- ^ 'mpfflpLinkId'
     -> ManagementProFileFilterLinksPatch
 managementProFileFilterLinksPatch pMpfflpWebPropertyId_ pMpfflpProFileId_ pMpfflpPayload_ pMpfflpAccountId_ pMpfflpLinkId_ =
-    ManagementProFileFilterLinksPatch
+    ManagementProFileFilterLinksPatch'
     { _mpfflpWebPropertyId = pMpfflpWebPropertyId_
     , _mpfflpProFileId = pMpfflpProFileId_
     , _mpfflpPayload = pMpfflpPayload_
@@ -136,7 +136,9 @@ instance GoogleRequest
          ManagementProFileFilterLinksPatch where
         type Rs ManagementProFileFilterLinksPatch =
              ProFileFilterLink
-        requestClient ManagementProFileFilterLinksPatch{..}
+        type Scopes ManagementProFileFilterLinksPatch =
+             '["https://www.googleapis.com/auth/analytics.edit"]
+        requestClient ManagementProFileFilterLinksPatch'{..}
           = go _mpfflpAccountId _mpfflpWebPropertyId
               _mpfflpProFileId
               _mpfflpLinkId

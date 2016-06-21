@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type RelyingPartyDownloadAccountResource =
 -- | Batch download user accounts.
 --
 -- /See:/ 'relyingPartyDownloadAccount' smart constructor.
-newtype RelyingPartyDownloadAccount = RelyingPartyDownloadAccount
+newtype RelyingPartyDownloadAccount = RelyingPartyDownloadAccount'
     { _rpdaPayload :: IdentitytoolkitRelyingPartyDownloadAccountRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyDownloadAccount
     :: IdentitytoolkitRelyingPartyDownloadAccountRequest -- ^ 'rpdaPayload'
     -> RelyingPartyDownloadAccount
 relyingPartyDownloadAccount pRpdaPayload_ =
-    RelyingPartyDownloadAccount
+    RelyingPartyDownloadAccount'
     { _rpdaPayload = pRpdaPayload_
     }
 
@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartyDownloadAccount
          where
         type Rs RelyingPartyDownloadAccount =
              DownloadAccountResponse
-        requestClient RelyingPartyDownloadAccount{..}
+        type Scopes RelyingPartyDownloadAccount = '[]
+        requestClient RelyingPartyDownloadAccount'{..}
           = go (Just AltJSON) _rpdaPayload
               identityToolkitService
           where go

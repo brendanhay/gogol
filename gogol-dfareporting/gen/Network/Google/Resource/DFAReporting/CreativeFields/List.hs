@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.CreativeFields.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsList' request conforms to.
 type CreativeFieldsListResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -67,7 +67,7 @@ type CreativeFieldsListResource =
 -- | Retrieves a list of creative fields, possibly filtered.
 --
 -- /See:/ 'creativeFieldsList' smart constructor.
-data CreativeFieldsList = CreativeFieldsList
+data CreativeFieldsList = CreativeFieldsList'
     { _cflSearchString  :: !(Maybe Text)
     , _cflIds           :: !(Maybe [Textual Int64])
     , _cflProFileId     :: !(Textual Int64)
@@ -101,7 +101,7 @@ creativeFieldsList
     :: Int64 -- ^ 'cflProFileId'
     -> CreativeFieldsList
 creativeFieldsList pCflProFileId_ =
-    CreativeFieldsList
+    CreativeFieldsList'
     { _cflSearchString = Nothing
     , _cflIds = Nothing
     , _cflProFileId = _Coerce # pCflProFileId_
@@ -170,7 +170,9 @@ cflMaxResults
 instance GoogleRequest CreativeFieldsList where
         type Rs CreativeFieldsList =
              CreativeFieldsListResponse
-        requestClient CreativeFieldsList{..}
+        type Scopes CreativeFieldsList =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient CreativeFieldsList'{..}
           = go _cflProFileId _cflSearchString
               (_cflIds ^. _Default)
               _cflSortOrder

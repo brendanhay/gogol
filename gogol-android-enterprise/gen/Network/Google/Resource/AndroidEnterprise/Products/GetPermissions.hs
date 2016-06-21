@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -22,7 +22,7 @@
 --
 -- Retrieves the Android app permissions required by this app.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.getPermissions@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.getPermissions@.
 module Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type ProductsGetPermissionsResource =
 -- | Retrieves the Android app permissions required by this app.
 --
 -- /See:/ 'productsGetPermissions' smart constructor.
-data ProductsGetPermissions = ProductsGetPermissions
+data ProductsGetPermissions = ProductsGetPermissions'
     { _pgpEnterpriseId :: !Text
     , _pgpProductId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ productsGetPermissions
     -> Text -- ^ 'pgpProductId'
     -> ProductsGetPermissions
 productsGetPermissions pPgpEnterpriseId_ pPgpProductId_ =
-    ProductsGetPermissions
+    ProductsGetPermissions'
     { _pgpEnterpriseId = pPgpEnterpriseId_
     , _pgpProductId = pPgpProductId_
     }
@@ -91,7 +91,9 @@ pgpProductId
 
 instance GoogleRequest ProductsGetPermissions where
         type Rs ProductsGetPermissions = ProductPermissions
-        requestClient ProductsGetPermissions{..}
+        type Scopes ProductsGetPermissions =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient ProductsGetPermissions'{..}
           = go _pgpEnterpriseId _pgpProductId (Just AltJSON)
               androidEnterpriseService
           where go

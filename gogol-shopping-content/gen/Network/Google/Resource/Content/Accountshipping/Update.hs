@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Content.Accountshipping.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -58,7 +58,7 @@ type AccountshippingUpdateResource =
 -- | Updates the shipping settings of the account.
 --
 -- /See:/ 'accountshippingUpdate' smart constructor.
-data AccountshippingUpdate = AccountshippingUpdate
+data AccountshippingUpdate = AccountshippingUpdate'
     { _auMerchantId :: !(Textual Word64)
     , _auPayload    :: !AccountShipping
     , _auAccountId  :: !(Textual Word64)
@@ -82,7 +82,7 @@ accountshippingUpdate
     -> Word64 -- ^ 'auAccountId'
     -> AccountshippingUpdate
 accountshippingUpdate pAuMerchantId_ pAuPayload_ pAuAccountId_ =
-    AccountshippingUpdate
+    AccountshippingUpdate'
     { _auMerchantId = _Coerce # pAuMerchantId_
     , _auPayload = pAuPayload_
     , _auAccountId = _Coerce # pAuAccountId_
@@ -113,7 +113,9 @@ auDryRun = lens _auDryRun (\ s a -> s{_auDryRun = a})
 
 instance GoogleRequest AccountshippingUpdate where
         type Rs AccountshippingUpdate = AccountShipping
-        requestClient AccountshippingUpdate{..}
+        type Scopes AccountshippingUpdate =
+             '["https://www.googleapis.com/auth/content"]
+        requestClient AccountshippingUpdate'{..}
           = go _auMerchantId _auAccountId _auDryRun
               (Just AltJSON)
               _auPayload

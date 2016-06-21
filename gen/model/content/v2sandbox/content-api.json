@@ -1,14 +1,14 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"ye6orv2F-1npMW3u9suM3a7C5Bo/tvcbcjhYGF5BJi8y8RNxRBdwomM\"",
+ "etag": "\"jQLIOHBVnDZie4rQHGH1WJF-INE/4Fd9gR6kX7T-xSLXae9a3rT8Jqg\"",
  "discoveryVersion": "v1",
  "id": "content:v2sandbox",
  "name": "content",
  "canonicalName": "Shopping Content",
  "version": "v2sandbox",
- "revision": "20150915",
+ "revision": "20160419",
  "title": "Content API for Shopping",
- "description": "Manage product items, inventory, and Merchant Center accounts for Google Shopping.",
+ "description": "Manages product items, inventory, and Merchant Center accounts for Google Shopping.",
  "ownerDomain": "google.com",
  "ownerName": "Google",
  "icons": {
@@ -175,6 +175,13 @@
      "type": "string",
      "description": "The date when the order was placed, in ISO 8601 format."
     },
+    "promotions": {
+     "type": "array",
+     "description": "The details of the merchant provided promotions applied to the order. More details about the program are  here.",
+     "items": {
+      "$ref": "OrderPromotion"
+     }
+    },
     "refunds": {
      "type": "array",
      "description": "Refunds for the order.",
@@ -270,7 +277,7 @@
     },
     "reason": {
      "type": "string",
-     "description": "The reason for the cancellation."
+     "description": "The reason for the cancellation. Orders that are cancelled with a noIventory reason will lead to the removal of the product from POG until you make an update to that product. This will not affect your Shopping ads."
     },
     "reasonText": {
      "type": "string",
@@ -288,7 +295,7 @@
     },
     "explicitMarketingPreference": {
      "type": "boolean",
-     "description": "If set, this indicates the user had a choice to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow."
+     "description": "If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow."
     },
     "fullName": {
      "type": "string",
@@ -605,6 +612,71 @@
     }
    }
   },
+  "OrderPromotion": {
+   "id": "OrderPromotion",
+   "type": "object",
+   "properties": {
+    "benefits": {
+     "type": "array",
+     "items": {
+      "$ref": "OrderPromotionBenefit"
+     }
+    },
+    "effectiveDates": {
+     "type": "string",
+     "description": "The date and time frame when the promotion is active and ready for validation review. Note that the promotion live time may be delayed for a few hours due to the validation review.\nStart date and end date are separated by a forward slash (/). The start date is specified by the format (YYYY-MM-DD), followed by the letter ?T?, the time of the day when the sale starts (in Greenwich Mean Time, GMT), followed by an expression of the time zone for the sale. The end date is in the same format."
+    },
+    "genericRedemptionCode": {
+     "type": "string",
+     "description": "Optional. The text code that corresponds to the promotion when applied on the retailer?s website."
+    },
+    "id": {
+     "type": "string",
+     "description": "The unique ID of the promotion."
+    },
+    "longTitle": {
+     "type": "string",
+     "description": "The full title of the promotion."
+    },
+    "productApplicability": {
+     "type": "string",
+     "description": "Whether the promotion is applicable to all products or only specific products."
+    },
+    "redemptionChannel": {
+     "type": "string",
+     "description": "Indicates that the promotion is valid online."
+    }
+   }
+  },
+  "OrderPromotionBenefit": {
+   "id": "OrderPromotionBenefit",
+   "type": "object",
+   "properties": {
+    "discount": {
+     "$ref": "Price",
+     "description": "The discount in the order price when the promotion is applied."
+    },
+    "offerIds": {
+     "type": "array",
+     "description": "The OfferId(s) that were purchased in this order and map to this specific benefit of the promotion.",
+     "items": {
+      "type": "string"
+     }
+    },
+    "subType": {
+     "type": "string",
+     "description": "Further describes the benefit of the promotion. Note that we will expand on this enumeration as we support new promotion sub-types."
+    },
+    "taxImpact": {
+     "$ref": "Price",
+     "description": "The impact on tax when the promotion is applied."
+    },
+    "type": {
+     "type": "string",
+     "description": "Describes whether the promotion applies to products (e.g. 20% off) or to shipping (e.g. Free Shipping)."
+    }
+   }
+  },
   "OrderRefund": {
    "id": "OrderRefund",
    "type": "object",
@@ -750,6 +822,10 @@
    "id": "OrdersCancelLineItemRequest",
    "type": "object",
    "properties": {
+    "amount": {
+     "$ref": "Price",
+     "description": "Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order."
+    },
     "lineItemId": {
      "type": "string",
      "description": "The ID of the line item to cancel."
@@ -937,6 +1013,10 @@
    "id": "OrdersCustomBatchRequestEntryCancelLineItem",
    "type": "object",
    "properties": {
+    "amount": {
+     "$ref": "Price",
+     "description": "Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order."
+    },
     "lineItemId": {
      "type": "string",
      "description": "The ID of the line item to cancel."
@@ -1391,6 +1471,13 @@
       ]
      }
     },
+    "promotions": {
+     "type": "array",
+     "description": "The details of the merchant provided promotions applied to the order. More details about the program are  here.",
+     "items": {
+      "$ref": "OrderPromotion"
+     }
+    },
     "shippingCost": {
      "$ref": "Price",
      "description": "The total cost of shipping for all items.",
@@ -1435,7 +1522,7 @@
     },
     "explicitMarketingPreference": {
      "type": "boolean",
-     "description": "If set, this indicates the user had a choice to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow. Optional."
+     "description": "If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow. Optional."
     },
     "fullName": {
      "type": "string",
@@ -1884,9 +1971,13 @@
        "required": true,
        "enum": [
         "template1",
+        "template1a",
+        "template1b",
         "template2"
        ],
        "enumDescriptions": [
+        "",
+        "",
         "",
         ""
        ],

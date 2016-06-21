@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.Schemas.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type SchemasInsertResource =
 -- | Create schema.
 --
 -- /See:/ 'schemasInsert' smart constructor.
-data SchemasInsert = SchemasInsert
+data SchemasInsert = SchemasInsert'
     { _siPayload    :: !Schema
     , _siCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ schemasInsert
     -> Text -- ^ 'siCustomerId'
     -> SchemasInsert
 schemasInsert pSiPayload_ pSiCustomerId_ =
-    SchemasInsert
+    SchemasInsert'
     { _siPayload = pSiPayload_
     , _siCustomerId = pSiCustomerId_
     }
@@ -89,7 +89,9 @@ siCustomerId
 
 instance GoogleRequest SchemasInsert where
         type Rs SchemasInsert = Schema
-        requestClient SchemasInsert{..}
+        type Scopes SchemasInsert =
+             '["https://www.googleapis.com/auth/admin.directory.userschema"]
+        requestClient SchemasInsert'{..}
           = go _siCustomerId (Just AltJSON) _siPayload
               directoryService
           where go

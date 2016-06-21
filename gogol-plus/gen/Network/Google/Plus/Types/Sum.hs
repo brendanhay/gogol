@@ -8,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.Plus.Types.Sum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -18,55 +18,6 @@ module Network.Google.Plus.Types.Sum where
 
 import           Network.Google.Prelude
 
--- | The collection of moments to list.
-data MomentsListCollection
-    = Vault
-      -- ^ @vault@
-      -- All moments created by the requesting application for the authenticated
-      -- user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MomentsListCollection
-
-instance FromText MomentsListCollection where
-    fromText = \case
-        "vault" -> Just Vault
-        _ -> Nothing
-
-instance ToText MomentsListCollection where
-    toText = \case
-        Vault -> "vault"
-
-instance FromJSON MomentsListCollection where
-    parseJSON = parseJSONText "MomentsListCollection"
-
-instance ToJSON MomentsListCollection where
-    toJSON = toJSONText
-
--- | The collection to which to write moments.
-data MomentsInsertCollection
-    = MICVault
-      -- ^ @vault@
-      -- The default collection for writing new moments.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable MomentsInsertCollection
-
-instance FromText MomentsInsertCollection where
-    fromText = \case
-        "vault" -> Just MICVault
-        _ -> Nothing
-
-instance ToText MomentsInsertCollection where
-    toText = \case
-        MICVault -> "vault"
-
-instance FromJSON MomentsInsertCollection where
-    parseJSON = parseJSONText "MomentsInsertCollection"
-
-instance ToJSON MomentsInsertCollection where
-    toJSON = toJSONText
-
 -- | The collection of people to list.
 data PeopleListByActivityCollection
     = Plusoners
@@ -75,18 +26,18 @@ data PeopleListByActivityCollection
     | Resharers
       -- ^ @resharers@
       -- List all people who have reshared this activity.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PeopleListByActivityCollection
 
-instance FromText PeopleListByActivityCollection where
-    fromText = \case
-        "plusoners" -> Just Plusoners
-        "resharers" -> Just Resharers
-        _ -> Nothing
+instance FromHttpApiData PeopleListByActivityCollection where
+    parseQueryParam = \case
+        "plusoners" -> Right Plusoners
+        "resharers" -> Right Resharers
+        x -> Left ("Unable to parse PeopleListByActivityCollection from: " <> x)
 
-instance ToText PeopleListByActivityCollection where
-    toText = \case
+instance ToHttpApiData PeopleListByActivityCollection where
+    toQueryParam = \case
         Plusoners -> "plusoners"
         Resharers -> "resharers"
 
@@ -104,18 +55,18 @@ data PeopleListOrderBy
     | Best
       -- ^ @best@
       -- Order people based on the relevence to the viewer.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PeopleListOrderBy
 
-instance FromText PeopleListOrderBy where
-    fromText = \case
-        "alphabetical" -> Just Alphabetical
-        "best" -> Just Best
-        _ -> Nothing
+instance FromHttpApiData PeopleListOrderBy where
+    parseQueryParam = \case
+        "alphabetical" -> Right Alphabetical
+        "best" -> Right Best
+        x -> Left ("Unable to parse PeopleListOrderBy from: " <> x)
 
-instance ToText PeopleListOrderBy where
-    toText = \case
+instance ToHttpApiData PeopleListOrderBy where
+    toQueryParam = \case
         Alphabetical -> "alphabetical"
         Best -> "best"
 
@@ -130,17 +81,17 @@ data ActivitiesListCollection
     = Public
       -- ^ @public@
       -- All public activities created by the specified user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivitiesListCollection
 
-instance FromText ActivitiesListCollection where
-    fromText = \case
-        "public" -> Just Public
-        _ -> Nothing
+instance FromHttpApiData ActivitiesListCollection where
+    parseQueryParam = \case
+        "public" -> Right Public
+        x -> Left ("Unable to parse ActivitiesListCollection from: " <> x)
 
-instance ToText ActivitiesListCollection where
-    toText = \case
+instance ToHttpApiData ActivitiesListCollection where
+    toQueryParam = \case
         Public -> "public"
 
 instance FromJSON ActivitiesListCollection where
@@ -160,18 +111,18 @@ data PeopleListCollection
       -- ^ @visible@
       -- The list of people who this user has added to one or more circles,
       -- limited to the circles visible to the requesting application.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PeopleListCollection
 
-instance FromText PeopleListCollection where
-    fromText = \case
-        "connected" -> Just Connected
-        "visible" -> Just Visible
-        _ -> Nothing
+instance FromHttpApiData PeopleListCollection where
+    parseQueryParam = \case
+        "connected" -> Right Connected
+        "visible" -> Right Visible
+        x -> Left ("Unable to parse PeopleListCollection from: " <> x)
 
-instance ToText PeopleListCollection where
-    toText = \case
+instance ToHttpApiData PeopleListCollection where
+    toQueryParam = \case
         Connected -> "connected"
         Visible -> "visible"
 
@@ -189,18 +140,18 @@ data ActivitiesSearchOrderBy
     | ASOBRecent
       -- ^ @recent@
       -- Sort activities by published date, most recent first.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivitiesSearchOrderBy
 
-instance FromText ActivitiesSearchOrderBy where
-    fromText = \case
-        "best" -> Just ASOBBest
-        "recent" -> Just ASOBRecent
-        _ -> Nothing
+instance FromHttpApiData ActivitiesSearchOrderBy where
+    parseQueryParam = \case
+        "best" -> Right ASOBBest
+        "recent" -> Right ASOBRecent
+        x -> Left ("Unable to parse ActivitiesSearchOrderBy from: " <> x)
 
-instance ToText ActivitiesSearchOrderBy where
-    toText = \case
+instance ToHttpApiData ActivitiesSearchOrderBy where
+    toQueryParam = \case
         ASOBBest -> "best"
         ASOBRecent -> "recent"
 
@@ -218,18 +169,18 @@ data CommentsListSortOrder
     | Descending
       -- ^ @descending@
       -- Sort newest comments first.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsListSortOrder
 
-instance FromText CommentsListSortOrder where
-    fromText = \case
-        "ascending" -> Just Ascending
-        "descending" -> Just Descending
-        _ -> Nothing
+instance FromHttpApiData CommentsListSortOrder where
+    parseQueryParam = \case
+        "ascending" -> Right Ascending
+        "descending" -> Right Descending
+        x -> Left ("Unable to parse CommentsListSortOrder from: " <> x)
 
-instance ToText CommentsListSortOrder where
-    toText = \case
+instance ToHttpApiData CommentsListSortOrder where
+    toQueryParam = \case
         Ascending -> "ascending"
         Descending -> "descending"
 

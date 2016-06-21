@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Blogger.Users.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -51,7 +51,7 @@ type UsersGetResource =
 -- | Gets one user by ID.
 --
 -- /See:/ 'usersGet' smart constructor.
-newtype UsersGet = UsersGet
+newtype UsersGet = UsersGet'
     { _ugUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ usersGet
     :: Text -- ^ 'ugUserId'
     -> UsersGet
 usersGet pUgUserId_ =
-    UsersGet
+    UsersGet'
     { _ugUserId = pUgUserId_
     }
 
@@ -74,7 +74,10 @@ ugUserId = lens _ugUserId (\ s a -> s{_ugUserId = a})
 
 instance GoogleRequest UsersGet where
         type Rs UsersGet = User
-        requestClient UsersGet{..}
+        type Scopes UsersGet =
+             '["https://www.googleapis.com/auth/blogger",
+               "https://www.googleapis.com/auth/blogger.readonly"]
+        requestClient UsersGet'{..}
           = go _ugUserId (Just AltJSON) bloggerService
           where go
                   = buildClient (Proxy :: Proxy UsersGetResource)

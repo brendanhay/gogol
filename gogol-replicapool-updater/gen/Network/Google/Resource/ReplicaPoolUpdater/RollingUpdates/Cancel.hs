@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Cancel
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type RollingUpdatesCancelResource =
 -- This has no effect if the update is already CANCELLED.
 --
 -- /See:/ 'rollingUpdatesCancel' smart constructor.
-data RollingUpdatesCancel = RollingUpdatesCancel
+data RollingUpdatesCancel = RollingUpdatesCancel'
     { _rucRollingUpdate :: !Text
     , _rucProject       :: !Text
     , _rucZone          :: !Text
@@ -81,7 +81,7 @@ rollingUpdatesCancel
     -> Text -- ^ 'rucZone'
     -> RollingUpdatesCancel
 rollingUpdatesCancel pRucRollingUpdate_ pRucProject_ pRucZone_ =
-    RollingUpdatesCancel
+    RollingUpdatesCancel'
     { _rucRollingUpdate = pRucRollingUpdate_
     , _rucProject = pRucProject_
     , _rucZone = pRucZone_
@@ -104,7 +104,10 @@ rucZone = lens _rucZone (\ s a -> s{_rucZone = a})
 
 instance GoogleRequest RollingUpdatesCancel where
         type Rs RollingUpdatesCancel = Operation
-        requestClient RollingUpdatesCancel{..}
+        type Scopes RollingUpdatesCancel =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/replicapool"]
+        requestClient RollingUpdatesCancel'{..}
           = go _rucProject _rucZone _rucRollingUpdate
               (Just AltJSON)
               replicaPoolUpdaterService

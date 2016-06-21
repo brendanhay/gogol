@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -59,7 +59,7 @@ type AccountsAdUnitsInsertResource =
 -- account.
 --
 -- /See:/ 'accountsAdUnitsInsert' smart constructor.
-data AccountsAdUnitsInsert = AccountsAdUnitsInsert
+data AccountsAdUnitsInsert = AccountsAdUnitsInsert'
     { _aauiPayload    :: !AdUnit
     , _aauiAdClientId :: !Text
     , _aauiAccountId  :: !Text
@@ -80,7 +80,7 @@ accountsAdUnitsInsert
     -> Text -- ^ 'aauiAccountId'
     -> AccountsAdUnitsInsert
 accountsAdUnitsInsert pAauiPayload_ pAauiAdClientId_ pAauiAccountId_ =
-    AccountsAdUnitsInsert
+    AccountsAdUnitsInsert'
     { _aauiPayload = pAauiPayload_
     , _aauiAdClientId = pAauiAdClientId_
     , _aauiAccountId = pAauiAccountId_
@@ -105,7 +105,9 @@ aauiAccountId
 
 instance GoogleRequest AccountsAdUnitsInsert where
         type Rs AccountsAdUnitsInsert = AdUnit
-        requestClient AccountsAdUnitsInsert{..}
+        type Scopes AccountsAdUnitsInsert =
+             '["https://www.googleapis.com/auth/adsensehost"]
+        requestClient AccountsAdUnitsInsert'{..}
           = go _aauiAccountId _aauiAdClientId (Just AltJSON)
               _aauiPayload
               adSenseHostService

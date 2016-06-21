@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Spectrum.Paws.GetSpectrum
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -57,7 +57,7 @@ type PawsGetSpectrumResource =
 -- information so the device can be registered with the database.
 --
 -- /See:/ 'pawsGetSpectrum' smart constructor.
-newtype PawsGetSpectrum = PawsGetSpectrum
+newtype PawsGetSpectrum = PawsGetSpectrum'
     { _pgsPayload :: PawsGetSpectrumRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ pawsGetSpectrum
     :: PawsGetSpectrumRequest -- ^ 'pgsPayload'
     -> PawsGetSpectrum
 pawsGetSpectrum pPgsPayload_ =
-    PawsGetSpectrum
+    PawsGetSpectrum'
     { _pgsPayload = pPgsPayload_
     }
 
@@ -81,7 +81,8 @@ pgsPayload
 
 instance GoogleRequest PawsGetSpectrum where
         type Rs PawsGetSpectrum = PawsGetSpectrumResponse
-        requestClient PawsGetSpectrum{..}
+        type Scopes PawsGetSpectrum = '[]
+        requestClient PawsGetSpectrum'{..}
           = go (Just AltJSON) _pgsPayload spectrumService
           where go
                   = buildClient

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -53,7 +53,7 @@ type ReportsListreportsResource =
 -- | Retrieves stored reports.
 --
 -- /See:/ 'reportsListreports' smart constructor.
-newtype ReportsListreports = ReportsListreports
+newtype ReportsListreports = ReportsListreports'
     { _rlQueryId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ reportsListreports
     :: Int64 -- ^ 'rlQueryId'
     -> ReportsListreports
 reportsListreports pRlQueryId_ =
-    ReportsListreports
+    ReportsListreports'
     { _rlQueryId = _Coerce # pRlQueryId_
     }
 
@@ -78,7 +78,8 @@ rlQueryId
 
 instance GoogleRequest ReportsListreports where
         type Rs ReportsListreports = ListReportsResponse
-        requestClient ReportsListreports{..}
+        type Scopes ReportsListreports = '[]
+        requestClient ReportsListreports'{..}
           = go _rlQueryId (Just AltJSON) doubleClickBidsService
           where go
                   = buildClient

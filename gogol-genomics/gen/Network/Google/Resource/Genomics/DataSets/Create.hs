@@ -14,15 +14,17 @@
 
 -- |
 -- Module      : Network.Google.Resource.Genomics.DataSets.Create
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new dataset.
+-- Creates a new dataset. For the definitions of datasets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ < Genomics API Reference> for @genomics.datasets.create@.
+-- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.create@.
 module Network.Google.Resource.Genomics.DataSets.Create
     (
     -- * REST Resource
@@ -61,10 +63,12 @@ type DataSetsCreateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] DataSet :> Post '[JSON] DataSet
 
--- | Creates a new dataset.
+-- | Creates a new dataset. For the definitions of datasets and other
+-- genomics resources, see [Fundamentals of Google
+-- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsCreate' smart constructor.
-data DataSetsCreate = DataSetsCreate
+data DataSetsCreate = DataSetsCreate'
     { _dscXgafv          :: !(Maybe Text)
     , _dscUploadProtocol :: !(Maybe Text)
     , _dscPp             :: !Bool
@@ -98,7 +102,7 @@ dataSetsCreate
     :: DataSet -- ^ 'dscPayload'
     -> DataSetsCreate
 dataSetsCreate pDscPayload_ =
-    DataSetsCreate
+    DataSetsCreate'
     { _dscXgafv = Nothing
     , _dscUploadProtocol = Nothing
     , _dscPp = True
@@ -153,7 +157,10 @@ dscCallback
 
 instance GoogleRequest DataSetsCreate where
         type Rs DataSetsCreate = DataSet
-        requestClient DataSetsCreate{..}
+        type Scopes DataSetsCreate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/genomics"]
+        requestClient DataSetsCreate'{..}
           = go _dscXgafv _dscUploadProtocol (Just _dscPp)
               _dscAccessToken
               _dscUploadType

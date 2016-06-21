@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Directory.DomainAliases.List
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -55,7 +55,7 @@ type DomainAliasesListResource =
 -- | Lists the domain aliases of the customer.
 --
 -- /See:/ 'domainAliasesList' smart constructor.
-data DomainAliasesList = DomainAliasesList
+data DomainAliasesList = DomainAliasesList'
     { _dalCustomer         :: !Text
     , _dalParentDomainName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ domainAliasesList
     :: Text -- ^ 'dalCustomer'
     -> DomainAliasesList
 domainAliasesList pDalCustomer_ =
-    DomainAliasesList
+    DomainAliasesList'
     { _dalCustomer = pDalCustomer_
     , _dalParentDomainName = Nothing
     }
@@ -89,7 +89,10 @@ dalParentDomainName
 
 instance GoogleRequest DomainAliasesList where
         type Rs DomainAliasesList = DomainAliases
-        requestClient DomainAliasesList{..}
+        type Scopes DomainAliasesList =
+             '["https://www.googleapis.com/auth/admin.directory.domain",
+               "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
+        requestClient DomainAliasesList'{..}
           = go _dalCustomer _dalParentDomainName (Just AltJSON)
               directoryService
           where go

@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.YouTubeAnalytics.Groups.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type GroupsInsertResource =
 -- | Creates a group.
 --
 -- /See:/ 'groupsInsert' smart constructor.
-data GroupsInsert = GroupsInsert
+data GroupsInsert = GroupsInsert'
     { _giPayload                :: !Group
     , _giOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupsInsert
     :: Group -- ^ 'giPayload'
     -> GroupsInsert
 groupsInsert pGiPayload_ =
-    GroupsInsert
+    GroupsInsert'
     { _giPayload = pGiPayload_
     , _giOnBehalfOfContentOwner = Nothing
     }
@@ -97,7 +97,10 @@ giOnBehalfOfContentOwner
 
 instance GoogleRequest GroupsInsert where
         type Rs GroupsInsert = Group
-        requestClient GroupsInsert{..}
+        type Scopes GroupsInsert =
+             '["https://www.googleapis.com/auth/youtube",
+               "https://www.googleapis.com/auth/youtubepartner"]
+        requestClient GroupsInsert'{..}
           = go _giOnBehalfOfContentOwner (Just AltJSON)
               _giPayload
               youTubeAnalyticsService

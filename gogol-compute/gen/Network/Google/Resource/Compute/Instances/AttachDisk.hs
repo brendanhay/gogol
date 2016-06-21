@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.Instances.AttachDisk
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -61,7 +61,7 @@ type InstancesAttachDiskResource =
 -- | Attaches a Disk resource to an instance.
 --
 -- /See:/ 'instancesAttachDisk' smart constructor.
-data InstancesAttachDisk = InstancesAttachDisk
+data InstancesAttachDisk = InstancesAttachDisk'
     { _iadProject  :: !Text
     , _iadZone     :: !Text
     , _iadPayload  :: !AttachedDisk
@@ -86,7 +86,7 @@ instancesAttachDisk
     -> Text -- ^ 'iadInstance'
     -> InstancesAttachDisk
 instancesAttachDisk pIadProject_ pIadZone_ pIadPayload_ pIadInstance_ =
-    InstancesAttachDisk
+    InstancesAttachDisk'
     { _iadProject = pIadProject_
     , _iadZone = pIadZone_
     , _iadPayload = pIadPayload_
@@ -107,14 +107,17 @@ iadPayload :: Lens' InstancesAttachDisk AttachedDisk
 iadPayload
   = lens _iadPayload (\ s a -> s{_iadPayload = a})
 
--- | Instance name.
+-- | The instance name for this request.
 iadInstance :: Lens' InstancesAttachDisk Text
 iadInstance
   = lens _iadInstance (\ s a -> s{_iadInstance = a})
 
 instance GoogleRequest InstancesAttachDisk where
         type Rs InstancesAttachDisk = Operation
-        requestClient InstancesAttachDisk{..}
+        type Scopes InstancesAttachDisk =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient InstancesAttachDisk'{..}
           = go _iadProject _iadZone _iadInstance (Just AltJSON)
               _iadPayload
               computeService

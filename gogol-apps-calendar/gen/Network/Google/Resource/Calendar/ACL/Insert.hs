@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Calendar.ACL.Insert
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type ACLInsertResource =
 -- | Creates an access control rule.
 --
 -- /See:/ 'aclInsert' smart constructor.
-data ACLInsert = ACLInsert
+data ACLInsert = ACLInsert'
     { _aiCalendarId :: !Text
     , _aiPayload    :: !ACLRule
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ aclInsert
     -> ACLRule -- ^ 'aiPayload'
     -> ACLInsert
 aclInsert pAiCalendarId_ pAiPayload_ =
-    ACLInsert
+    ACLInsert'
     { _aiCalendarId = pAiCalendarId_
     , _aiPayload = pAiPayload_
     }
@@ -90,7 +90,9 @@ aiPayload
 
 instance GoogleRequest ACLInsert where
         type Rs ACLInsert = ACLRule
-        requestClient ACLInsert{..}
+        type Scopes ACLInsert =
+             '["https://www.googleapis.com/auth/calendar"]
+        requestClient ACLInsert'{..}
           = go _aiCalendarId (Just AltJSON) _aiPayload
               appsCalendarService
           where go

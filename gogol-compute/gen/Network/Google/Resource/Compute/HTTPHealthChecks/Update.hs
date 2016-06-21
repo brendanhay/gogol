@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Compute.HTTPHealthChecks.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -60,7 +60,7 @@ type HTTPHealthChecksUpdateResource =
 -- data included in the request.
 --
 -- /See:/ 'hTTPHealthChecksUpdate' smart constructor.
-data HTTPHealthChecksUpdate = HTTPHealthChecksUpdate
+data HTTPHealthChecksUpdate = HTTPHealthChecksUpdate'
     { _httphcuProject         :: !Text
     , _httphcuPayload         :: !HTTPHealthCheck
     , _httphcuHTTPHealthCheck :: !Text
@@ -81,13 +81,13 @@ hTTPHealthChecksUpdate
     -> Text -- ^ 'httphcuHTTPHealthCheck'
     -> HTTPHealthChecksUpdate
 hTTPHealthChecksUpdate pHttphcuProject_ pHttphcuPayload_ pHttphcuHTTPHealthCheck_ =
-    HTTPHealthChecksUpdate
+    HTTPHealthChecksUpdate'
     { _httphcuProject = pHttphcuProject_
     , _httphcuPayload = pHttphcuPayload_
     , _httphcuHTTPHealthCheck = pHttphcuHTTPHealthCheck_
     }
 
--- | Name of the project scoping this request.
+-- | Project ID for this request.
 httphcuProject :: Lens' HTTPHealthChecksUpdate Text
 httphcuProject
   = lens _httphcuProject
@@ -107,7 +107,10 @@ httphcuHTTPHealthCheck
 
 instance GoogleRequest HTTPHealthChecksUpdate where
         type Rs HTTPHealthChecksUpdate = Operation
-        requestClient HTTPHealthChecksUpdate{..}
+        type Scopes HTTPHealthChecksUpdate =
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/compute"]
+        requestClient HTTPHealthChecksUpdate'{..}
           = go _httphcuProject _httphcuHTTPHealthCheck
               (Just AltJSON)
               _httphcuPayload

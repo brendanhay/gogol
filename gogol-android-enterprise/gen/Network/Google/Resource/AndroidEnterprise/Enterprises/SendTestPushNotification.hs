@@ -14,16 +14,16 @@
 
 -- |
 -- Module      : Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotification
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sends a test push notification to validate the MDM integration with the
+-- Sends a test push notification to validate the EMM integration with the
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.sendTestPushNotification@.
+-- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.sendTestPushNotification@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotification
     (
     -- * REST Resource
@@ -52,11 +52,11 @@ type EnterprisesSendTestPushNotificationResource =
                  Post '[JSON]
                    EnterprisesSendTestPushNotificationResponse
 
--- | Sends a test push notification to validate the MDM integration with the
+-- | Sends a test push notification to validate the EMM integration with the
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
 -- /See:/ 'enterprisesSendTestPushNotification' smart constructor.
-newtype EnterprisesSendTestPushNotification = EnterprisesSendTestPushNotification
+newtype EnterprisesSendTestPushNotification = EnterprisesSendTestPushNotification'
     { _estpnEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ enterprisesSendTestPushNotification
     :: Text -- ^ 'estpnEnterpriseId'
     -> EnterprisesSendTestPushNotification
 enterprisesSendTestPushNotification pEstpnEnterpriseId_ =
-    EnterprisesSendTestPushNotification
+    EnterprisesSendTestPushNotification'
     { _estpnEnterpriseId = pEstpnEnterpriseId_
     }
 
@@ -83,7 +83,10 @@ instance GoogleRequest
          EnterprisesSendTestPushNotification where
         type Rs EnterprisesSendTestPushNotification =
              EnterprisesSendTestPushNotificationResponse
-        requestClient EnterprisesSendTestPushNotification{..}
+        type Scopes EnterprisesSendTestPushNotification =
+             '["https://www.googleapis.com/auth/androidenterprise"]
+        requestClient
+          EnterprisesSendTestPushNotification'{..}
           = go _estpnEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

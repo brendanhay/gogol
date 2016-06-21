@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.TaskQueue.Tasks.Update
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -33,7 +33,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Update
     , TasksUpdate
 
     -- * Request Lenses
-    , tuTaskqueue
+    , tuTaskQueue
     , tuProject
     , tuPayload
     , tuTask
@@ -61,8 +61,8 @@ type TasksUpdateResource =
 -- | Update tasks that are leased out of a TaskQueue.
 --
 -- /See:/ 'tasksUpdate' smart constructor.
-data TasksUpdate = TasksUpdate
-    { _tuTaskqueue       :: !Text
+data TasksUpdate = TasksUpdate'
+    { _tuTaskQueue       :: !Text
     , _tuProject         :: !Text
     , _tuPayload         :: !Task
     , _tuTask            :: !Text
@@ -73,7 +73,7 @@ data TasksUpdate = TasksUpdate
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tuTaskqueue'
+-- * 'tuTaskQueue'
 --
 -- * 'tuProject'
 --
@@ -83,24 +83,24 @@ data TasksUpdate = TasksUpdate
 --
 -- * 'tuNewLeaseSeconds'
 tasksUpdate
-    :: Text -- ^ 'tuTaskqueue'
+    :: Text -- ^ 'tuTaskQueue'
     -> Text -- ^ 'tuProject'
     -> Task -- ^ 'tuPayload'
     -> Text -- ^ 'tuTask'
     -> Int32 -- ^ 'tuNewLeaseSeconds'
     -> TasksUpdate
-tasksUpdate pTuTaskqueue_ pTuProject_ pTuPayload_ pTuTask_ pTuNewLeaseSeconds_ =
-    TasksUpdate
-    { _tuTaskqueue = pTuTaskqueue_
+tasksUpdate pTuTaskQueue_ pTuProject_ pTuPayload_ pTuTask_ pTuNewLeaseSeconds_ =
+    TasksUpdate'
+    { _tuTaskQueue = pTuTaskQueue_
     , _tuProject = pTuProject_
     , _tuPayload = pTuPayload_
     , _tuTask = pTuTask_
     , _tuNewLeaseSeconds = _Coerce # pTuNewLeaseSeconds_
     }
 
-tuTaskqueue :: Lens' TasksUpdate Text
-tuTaskqueue
-  = lens _tuTaskqueue (\ s a -> s{_tuTaskqueue = a})
+tuTaskQueue :: Lens' TasksUpdate Text
+tuTaskQueue
+  = lens _tuTaskQueue (\ s a -> s{_tuTaskQueue = a})
 
 -- | The project under which the queue lies.
 tuProject :: Lens' TasksUpdate Text
@@ -124,8 +124,11 @@ tuNewLeaseSeconds
 
 instance GoogleRequest TasksUpdate where
         type Rs TasksUpdate = Task
-        requestClient TasksUpdate{..}
-          = go _tuProject _tuTaskqueue _tuTask
+        type Scopes TasksUpdate =
+             '["https://www.googleapis.com/auth/taskqueue",
+               "https://www.googleapis.com/auth/taskqueue.consumer"]
+        requestClient TasksUpdate'{..}
+          = go _tuProject _tuTaskQueue _tuTask
               (Just _tuNewLeaseSeconds)
               (Just AltJSON)
               _tuPayload

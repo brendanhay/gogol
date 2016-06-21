@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.DFAReporting.RemarketingListShares.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListSharesGet' request conforms to.
 type RemarketingListSharesGetResource =
      "dfareporting" :>
-       "v2.2" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>
@@ -55,7 +55,7 @@ type RemarketingListSharesGetResource =
 -- | Gets one remarketing list share by remarketing list ID.
 --
 -- /See:/ 'remarketingListSharesGet' smart constructor.
-data RemarketingListSharesGet = RemarketingListSharesGet
+data RemarketingListSharesGet = RemarketingListSharesGet'
     { _rlsgProFileId         :: !(Textual Int64)
     , _rlsgRemarketingListId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ remarketingListSharesGet
     -> Int64 -- ^ 'rlsgRemarketingListId'
     -> RemarketingListSharesGet
 remarketingListSharesGet pRlsgProFileId_ pRlsgRemarketingListId_ =
-    RemarketingListSharesGet
+    RemarketingListSharesGet'
     { _rlsgProFileId = _Coerce # pRlsgProFileId_
     , _rlsgRemarketingListId = _Coerce # pRlsgRemarketingListId_
     }
@@ -94,7 +94,9 @@ rlsgRemarketingListId
 instance GoogleRequest RemarketingListSharesGet where
         type Rs RemarketingListSharesGet =
              RemarketingListShare
-        requestClient RemarketingListSharesGet{..}
+        type Scopes RemarketingListSharesGet =
+             '["https://www.googleapis.com/auth/dfatrafficking"]
+        requestClient RemarketingListSharesGet'{..}
           = go _rlsgProFileId _rlsgRemarketingListId
               (Just AltJSON)
               dFAReportingService

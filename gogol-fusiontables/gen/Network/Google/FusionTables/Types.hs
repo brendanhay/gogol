@@ -1,3 +1,4 @@
+{-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
 {-# LANGUAGE NoImplicitPrelude  #-}
@@ -7,7 +8,7 @@
 
 -- |
 -- Module      : Network.Google.FusionTables.Types
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -19,8 +20,8 @@ module Network.Google.FusionTables.Types
       fusionTablesService
 
     -- * OAuth Scopes
-    , fusiontablesReadonlyScope
-    , fusiontablesScope
+    , fusionTablesReadOnlyScope
+    , fusionTablesScope
 
     -- * ColumnList
     , ColumnList
@@ -232,15 +233,15 @@ import           Network.Google.FusionTables.Types.Sum
 import           Network.Google.Prelude
 
 -- | Default request referring to version 'v2' of the Fusion Tables API. This contains the host and root path used as a starting point for constructing service requests.
-fusionTablesService :: Service
+fusionTablesService :: ServiceConfig
 fusionTablesService
   = defaultService (ServiceId "fusiontables:v2")
       "www.googleapis.com"
 
 -- | View your Fusion Tables
-fusiontablesReadonlyScope :: OAuthScope
-fusiontablesReadonlyScope = "https://www.googleapis.com/auth/fusiontables.readonly";
+fusionTablesReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/fusiontables.readonly"]
+fusionTablesReadOnlyScope = Proxy;
 
 -- | Manage your Fusion Tables
-fusiontablesScope :: OAuthScope
-fusiontablesScope = "https://www.googleapis.com/auth/fusiontables";
+fusionTablesScope :: Proxy '["https://www.googleapis.com/auth/fusiontables"]
+fusionTablesScope = Proxy;

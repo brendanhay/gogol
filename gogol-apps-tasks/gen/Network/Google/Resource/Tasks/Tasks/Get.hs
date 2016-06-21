@@ -14,7 +14,7 @@
 
 -- |
 -- Module      : Network.Google.Resource.Tasks.Tasks.Get
--- Copyright   : (c) 2015 Brendan Hay
+-- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
@@ -54,7 +54,7 @@ type TasksGetResource =
 -- | Returns the specified task.
 --
 -- /See:/ 'tasksGet' smart constructor.
-data TasksGet = TasksGet
+data TasksGet = TasksGet'
     { _tgTaskList :: !Text
     , _tgTask     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ tasksGet
     -> Text -- ^ 'tgTask'
     -> TasksGet
 tasksGet pTgTaskList_ pTgTask_ =
-    TasksGet
+    TasksGet'
     { _tgTaskList = pTgTaskList_
     , _tgTask = pTgTask_
     }
@@ -87,7 +87,10 @@ tgTask = lens _tgTask (\ s a -> s{_tgTask = a})
 
 instance GoogleRequest TasksGet where
         type Rs TasksGet = Task
-        requestClient TasksGet{..}
+        type Scopes TasksGet =
+             '["https://www.googleapis.com/auth/tasks",
+               "https://www.googleapis.com/auth/tasks.readonly"]
+        requestClient TasksGet'{..}
           = go _tgTaskList _tgTask (Just AltJSON)
               appsTasksService
           where go
