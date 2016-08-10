@@ -488,7 +488,7 @@ instance ( KnownSymbol   s
 
     buildClient Proxy rq x = buildClient (Proxy :: Proxy fn)
         . appendPath rq
-        $ buildText x <> buildSymbol (Proxy :: Proxy m)
+        $ buildText x <> ":" <> buildSymbol (Proxy :: Proxy m)
 
 instance ( KnownSymbol   s
          , ToHttpApiData a
