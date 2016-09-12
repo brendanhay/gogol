@@ -44,7 +44,7 @@ maxTokenLifetime = 3600
 -- | Obtain an 'OAuthToken' from the local instace metadata
 -- using the specific 'ServiceId'.
 --
--- For example: @http:\/\/169.254.169.254\/instance\/service-accounts\/default\/token@
+-- For example: @http:\/\/metadata.google.internal\/computeMetadata\/v1\/instance\/service-accounts\/default\/token@
 -- will be retrieved if the given 'ServiceId' is @\"default\"@.
 metadataToken :: (MonadIO m, MonadCatch m)
               => ServiceId
@@ -53,7 +53,7 @@ metadataToken :: (MonadIO m, MonadCatch m)
               -> m (OAuthToken s)
 metadataToken s = refreshRequest $
     metadataRequest
-        { Client.path = "instance/service-accounts/"
+        { Client.path = "/computeMetadata/v1/instance/service-accounts/"
             <> Text.encodeUtf8 (toQueryParam s)
             <> "/token"
         }
@@ -75,7 +75,6 @@ authorizedUserToken u r = refreshRequest $
             <> "&client_secret=" <> toQueryParam (_userSecret u)
             <> "&refresh_token=" <> toQueryParam (fromMaybe (_userRefresh u) r)
         }
-
 
 -- | Obtain an 'OAuthToken' from @https://accounts.google.com/o/oauth2/token@
 -- by signing and sending a JSON Web Token (JWT) using the supplied 'ServiceAccount'.
