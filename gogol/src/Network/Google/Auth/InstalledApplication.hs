@@ -1,4 +1,6 @@
+{-# LANGUAGE KindSignatures    #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds         #-}
 
 -- |
 -- Module      : Network.Google.Auth.InstalledApplication
@@ -32,6 +34,7 @@ module Network.Google.Auth.InstalledApplication
 import           Control.Monad.Catch            (MonadCatch)
 import           Control.Monad.IO.Class         (MonadIO)
 import qualified Data.Text.Encoding             as Text
+import           GHC.TypeLits                   (Symbol)
 import           Network.Google.Auth.Scope      (AllowScopes (..),
                                                  queryEncodeScopes)
 import           Network.Google.Internal.Auth
@@ -83,7 +86,7 @@ redirectURI = "urn:ietf:wg:oauth:2.0:oob"
 -- construct a URL that can be used to obtain the 'OAuthCode'.
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#formingtheurl Forming the URL>.
-formURL :: AllowScopes s => OAuthClient -> proxy s -> Text
+formURL :: AllowScopes (s :: [Symbol]) => OAuthClient -> proxy s -> Text
 formURL c = formURLWith c . allowScopes
 
 -- | Form a URL using 'OAuthScope' values.
