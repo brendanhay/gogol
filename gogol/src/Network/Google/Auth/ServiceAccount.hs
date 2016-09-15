@@ -76,7 +76,7 @@ authorizedUserToken u r = refreshRequest $
             <> "&refresh_token=" <> toQueryParam (fromMaybe (_userRefresh u) r)
         }
 
--- | Obtain an 'OAuthToken' from @https://accounts.google.com/o/oauth2/token@
+-- | Obtain an 'OAuthToken' from @https://accounts.google.com/o/oauth2/v2/auth@
 -- by signing and sending a JSON Web Token (JWT) using the supplied 'ServiceAccount'.
 serviceAccountToken :: (MonadIO m, MonadCatch m, AllowScopes s)
                     => ServiceAccount
