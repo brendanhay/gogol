@@ -245,9 +245,9 @@ instance FromJSON RefreshError where
         <$> o .:  "error"
         <*> o .:? "error_description"
 
--- | @https://accounts.google.com/o/oauth2/token@.
+-- | @https://accounts.google.com/o/oauth2/v2/auth@.
 accountsURL :: Text
-accountsURL = "https://accounts.google.com/o/oauth2/token"
+accountsURL = "https://accounts.google.com/o/oauth2/v2/auth"
 
 accountsRequest :: Client.Request
 accountsRequest = def
@@ -256,7 +256,7 @@ accountsRequest = def
     , Client.secure         = True
     , Client.checkStatus    = \_ _ _ -> Nothing
     , Client.method         = "POST"
-    , Client.path           = "/o/oauth2/token"
+    , Client.path           = "/o/oauth2/v2/auth"
     , Client.requestHeaders =
         [ (hContentType, "application/x-www-form-urlencoded")
         ]
