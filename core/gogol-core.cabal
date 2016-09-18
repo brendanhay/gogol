@@ -55,7 +55,7 @@ library
         , exceptions           >= 0.6
         , hashable             >= 1.2
         , http-api-data        >= 0.2
-        , http-client          >= 0.4.4
+        , http-client          >= 0.5 && < 1
         , http-media           >= 0.6
         , http-types           >= 0.8.6
         , lens                 >= 4.4
