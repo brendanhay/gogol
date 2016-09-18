@@ -1,11 +1,12 @@
 compiler:   ghc-8.0.1
-resolver:   nightly-2016-06-20
+resolver:   nightly-2016-09-18
 flags:      {}
 extra-deps: []
 packages:
   - core
   - gogol
   - examples
+
   - gogol-adexchange-buyer
   - gogol-adexchange-seller
   - gogol-admin-datatransfer

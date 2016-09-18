@@ -14,7 +14,6 @@ import           Control.Monad.IO.Class                (MonadIO (..))
 import           Data.ByteString                       (ByteString)
 import qualified Data.ByteString                       as BS
 import           Data.ByteString.Builder.Extra         (byteStringCopy)
-import qualified Data.CaseInsensitive                  as CI
 import           Data.Monoid                           ((<>))
 import           Network.Google.Types                  (Body (..))
 import           Network.HTTP.Client

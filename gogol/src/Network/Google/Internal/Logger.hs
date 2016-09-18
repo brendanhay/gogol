@@ -43,7 +43,6 @@ import           Data.CaseInsensitive         (CI)
 import qualified Data.CaseInsensitive         as CI
 import           Data.Int                     (Int16, Int8)
 import           Data.List                    (intersperse)
-import qualified Data.Text                    as Text
 import qualified Data.Text.Encoding           as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Encoding      as LText
@@ -171,7 +170,7 @@ instance ToLog Request where
         ,  "  host      = " <> build (host x) <> ":" <> build (port x)
         ,  "  secure    = " <> build (secure x)
         ,  "  method    = " <> build (method x)
-        ,  "  timeout   = " <> build (responseTimeout x)
+        ,  "  timeout   = " <> build (show (responseTimeout x))
         ,  "  redirects = " <> build (redirectCount x)
         ,  "  path      = " <> build (path            x)
         ,  "  query     = " <> build (queryString     x)

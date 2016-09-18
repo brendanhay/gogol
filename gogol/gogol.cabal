@@ -63,13 +63,12 @@ library
         , conduit              >= 1.1
         , conduit-extra        >= 1.1
         , cryptonite           >= 0.6
-        , data-default-class   >= 0.0.1
         , directory            >= 1.2
         , exceptions           >= 0.6
         , filepath             >= 1.2
         , gogol-core           == 0.1.0.*
-        , http-client          >= 0.4.4
-        , http-conduit         >= 2.1.4
+        , http-client          >= 0.5 && < 1
+        , http-conduit         >= 2.2 && < 3
         , http-media           >= 0.6
         , http-types           >= 0.8.6
         , lens                 >= 4.4
