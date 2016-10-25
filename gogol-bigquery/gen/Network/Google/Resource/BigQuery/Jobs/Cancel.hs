@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 type JobsCancelResource =
      "bigquery" :>
        "v2" :>
-         "project" :>
+         "projects" :>
            Capture "projectId" Text :>
              "jobs" :>
                Capture "jobId" Text :>
