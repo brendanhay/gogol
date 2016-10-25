@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you search for books and manage your Google Books library.
+-- Searches for books and manages your Google Books library.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference>
 module Network.Google.Books
@@ -374,6 +374,14 @@ module Network.Google.Books
     , vaiViewOrderURL
     , vaiPublicDomain
 
+    -- ** VolumeVolumeInfoPanelizationSummary
+    , VolumeVolumeInfoPanelizationSummary
+    , volumeVolumeInfoPanelizationSummary
+    , vvipsEpubBubbleVersion
+    , vvipsContainsImageBubbles
+    , vvipsContainsEpubBubbles
+    , vvipsImageBubbleVersion
+
     -- ** MyLibraryBookshelvesRemoveVolumeReason
     , MyLibraryBookshelvesRemoveVolumeReason (..)
 
@@ -668,6 +676,7 @@ module Network.Google.Books
     , UserSettingsNotification
     , userSettingsNotification
     , usnMoreFromAuthors
+    , usnMoreFromSeries
 
     -- ** DictlayerDataDictWordsItemSensesItemSynonymsItem
     , DictlayerDataDictWordsItemSensesItemSynonymsItem
@@ -892,6 +901,7 @@ module Network.Google.Books
     , vsioiRentalDuration
     , vsioiListPrice
     , vsioiRetailPrice
+    , vsioiGiftable
 
     -- ** DictlayerDataDict
     , DictlayerDataDict
@@ -1002,6 +1012,7 @@ module Network.Google.Books
     , VolumeVolumeInfo
     , volumeVolumeInfo
     , vviImageLinks
+    , vviPanelizationSummary
     , vviAverageRating
     , vviRatingsCount
     , vviCanonicalVolumeLink
@@ -1056,6 +1067,11 @@ module Network.Google.Books
     , vuifsIsSharingAllowed
     , vuifsIsSharingDisabledByFop
 
+    -- ** UserSettingsNotificationMoreFromSeries
+    , UserSettingsNotificationMoreFromSeries
+    , userSettingsNotificationMoreFromSeries
+    , usnmfsOptedState
+
     -- ** VolumeVolumeInfoIndustryIdentifiersItem
     , VolumeVolumeInfoIndustryIdentifiersItem
     , volumeVolumeInfoIndustryIdentifiersItem
@@ -1069,6 +1085,9 @@ module Network.Google.Books
     , barEndOffSet
     , barEndPosition
     , barStartPosition
+
+    -- ** VolumesListMaxAllowedMaturityRating
+    , VolumesListMaxAllowedMaturityRating (..)
 
     -- ** Layersummaries
     , Layersummaries

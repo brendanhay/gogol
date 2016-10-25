@@ -500,9 +500,12 @@ instance FromJSON MyLibraryBookshelvesAddVolumeReason where
 instance ToJSON MyLibraryBookshelvesAddVolumeReason where
     toJSON = toJSONText
 
--- | How the book was aquired
+-- | How the book was acquired
 data VolumesMybooksListAcquireMethod
-    = PreOrdered
+    = FamilyShared
+      -- ^ @FAMILY_SHARED@
+      -- Books acquired via Family Sharing
+    | PreOrdered
       -- ^ @PREORDERED@
       -- Preordered books (not yet available)
     | PreviouslyRented
@@ -529,6 +532,7 @@ instance Hashable VolumesMybooksListAcquireMethod
 
 instance FromHttpApiData VolumesMybooksListAcquireMethod where
     parseQueryParam = \case
+        "FAMILY_SHARED" -> Right FamilyShared
         "PREORDERED" -> Right PreOrdered
         "PREVIOUSLY_RENTED" -> Right PreviouslyRented
         "PUBLIC_DOMAIN" -> Right PublicDomain
@@ -540,6 +544,7 @@ instance FromHttpApiData VolumesMybooksListAcquireMethod where
 
 instance ToHttpApiData VolumesMybooksListAcquireMethod where
     toQueryParam = \case
+        FamilyShared -> "FAMILY_SHARED"
         PreOrdered -> "PREORDERED"
         PreviouslyRented -> "PREVIOUSLY_RENTED"
         PublicDomain -> "PUBLIC_DOMAIN"
@@ -735,4 +740,34 @@ instance FromJSON MyLibraryReadingPositionsSetPositionAction where
     parseJSON = parseJSONText "MyLibraryReadingPositionsSetPositionAction"
 
 instance ToJSON MyLibraryReadingPositionsSetPositionAction where
+    toJSON = toJSONText
+
+-- | The maximum allowed maturity rating of returned recommendations. Books
+-- with a higher maturity rating are filtered out.
+data VolumesListMaxAllowedMaturityRating
+    = VLMAMRMature
+      -- ^ @mature@
+      -- Show books which are rated mature or lower.
+    | VLMAMRNotMature
+      -- ^ @not-mature@
+      -- Show books which are rated not mature.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VolumesListMaxAllowedMaturityRating
+
+instance FromHttpApiData VolumesListMaxAllowedMaturityRating where
+    parseQueryParam = \case
+        "mature" -> Right VLMAMRMature
+        "not-mature" -> Right VLMAMRNotMature
+        x -> Left ("Unable to parse VolumesListMaxAllowedMaturityRating from: " <> x)
+
+instance ToHttpApiData VolumesListMaxAllowedMaturityRating where
+    toQueryParam = \case
+        VLMAMRMature -> "mature"
+        VLMAMRNotMature -> "not-mature"
+
+instance FromJSON VolumesListMaxAllowedMaturityRating where
+    parseJSON = parseJSONText "VolumesListMaxAllowedMaturityRating"
+
+instance ToJSON VolumesListMaxAllowedMaturityRating where
     toJSON = toJSONText

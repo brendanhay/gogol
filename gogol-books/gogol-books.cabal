@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Lets you search for books and manage your Google Books library.
+    Searches for books and manages your Google Books library.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

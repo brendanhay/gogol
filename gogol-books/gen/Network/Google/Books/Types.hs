@@ -221,6 +221,14 @@ module Network.Google.Books.Types
     , vaiViewOrderURL
     , vaiPublicDomain
 
+    -- * VolumeVolumeInfoPanelizationSummary
+    , VolumeVolumeInfoPanelizationSummary
+    , volumeVolumeInfoPanelizationSummary
+    , vvipsEpubBubbleVersion
+    , vvipsContainsImageBubbles
+    , vvipsContainsEpubBubbles
+    , vvipsImageBubbleVersion
+
     -- * MyLibraryBookshelvesRemoveVolumeReason
     , MyLibraryBookshelvesRemoveVolumeReason (..)
 
@@ -515,6 +523,7 @@ module Network.Google.Books.Types
     , UserSettingsNotification
     , userSettingsNotification
     , usnMoreFromAuthors
+    , usnMoreFromSeries
 
     -- * DictlayerDataDictWordsItemSensesItemSynonymsItem
     , DictlayerDataDictWordsItemSensesItemSynonymsItem
@@ -739,6 +748,7 @@ module Network.Google.Books.Types
     , vsioiRentalDuration
     , vsioiListPrice
     , vsioiRetailPrice
+    , vsioiGiftable
 
     -- * DictlayerDataDict
     , DictlayerDataDict
@@ -849,6 +859,7 @@ module Network.Google.Books.Types
     , VolumeVolumeInfo
     , volumeVolumeInfo
     , vviImageLinks
+    , vviPanelizationSummary
     , vviAverageRating
     , vviRatingsCount
     , vviCanonicalVolumeLink
@@ -903,6 +914,11 @@ module Network.Google.Books.Types
     , vuifsIsSharingAllowed
     , vuifsIsSharingDisabledByFop
 
+    -- * UserSettingsNotificationMoreFromSeries
+    , UserSettingsNotificationMoreFromSeries
+    , userSettingsNotificationMoreFromSeries
+    , usnmfsOptedState
+
     -- * VolumeVolumeInfoIndustryIdentifiersItem
     , VolumeVolumeInfoIndustryIdentifiersItem
     , volumeVolumeInfoIndustryIdentifiersItem
@@ -916,6 +932,9 @@ module Network.Google.Books.Types
     , barEndOffSet
     , barEndPosition
     , barStartPosition
+
+    -- * VolumesListMaxAllowedMaturityRating
+    , VolumesListMaxAllowedMaturityRating (..)
 
     -- * Layersummaries
     , Layersummaries

@@ -34,6 +34,7 @@ module Network.Google.Resource.Books.Volumes.List
 
     -- * Request Lenses
     , vlOrderBy
+    , vlMaxAllowedMaturityRating
     , vlLibraryRestrict
     , vlPartner
     , vlQ
@@ -59,40 +60,44 @@ type VolumesListResource =
          "volumes" :>
            QueryParam "q" Text :>
              QueryParam "orderBy" VolumesListOrderBy :>
-               QueryParam "libraryRestrict"
-                 VolumesListLibraryRestrict
+               QueryParam "maxAllowedMaturityRating"
+                 VolumesListMaxAllowedMaturityRating
                  :>
-                 QueryParam "partner" Text :>
-                   QueryParam "download" VolumesListDownload :>
-                     QueryParam "source" Text :>
-                       QueryParam "projection" VolumesListProjection :>
-                         QueryParam "filter" VolumesListFilter :>
-                           QueryParam "langRestrict" Text :>
-                             QueryParam "startIndex" (Textual Word32) :>
-                               QueryParam "maxResults" (Textual Word32) :>
-                                 QueryParam "showPreorders" Bool :>
-                                   QueryParam "printType" VolumesListPrintType
-                                     :>
-                                     QueryParam "alt" AltJSON :>
-                                       Get '[JSON] Volumes
+                 QueryParam "libraryRestrict"
+                   VolumesListLibraryRestrict
+                   :>
+                   QueryParam "partner" Text :>
+                     QueryParam "download" VolumesListDownload :>
+                       QueryParam "source" Text :>
+                         QueryParam "projection" VolumesListProjection :>
+                           QueryParam "filter" VolumesListFilter :>
+                             QueryParam "langRestrict" Text :>
+                               QueryParam "startIndex" (Textual Word32) :>
+                                 QueryParam "maxResults" (Textual Word32) :>
+                                   QueryParam "showPreorders" Bool :>
+                                     QueryParam "printType" VolumesListPrintType
+                                       :>
+                                       QueryParam "alt" AltJSON :>
+                                         Get '[JSON] Volumes
 
 -- | Performs a book search.
 --
 -- /See:/ 'volumesList' smart constructor.
 data VolumesList = VolumesList'
-    { _vlOrderBy         :: !(Maybe VolumesListOrderBy)
-    , _vlLibraryRestrict :: !(Maybe VolumesListLibraryRestrict)
-    , _vlPartner         :: !(Maybe Text)
-    , _vlQ               :: !Text
-    , _vlDownload        :: !(Maybe VolumesListDownload)
-    , _vlSource          :: !(Maybe Text)
-    , _vlProjection      :: !(Maybe VolumesListProjection)
-    , _vlFilter          :: !(Maybe VolumesListFilter)
-    , _vlLangRestrict    :: !(Maybe Text)
-    , _vlStartIndex      :: !(Maybe (Textual Word32))
-    , _vlMaxResults      :: !(Maybe (Textual Word32))
-    , _vlShowPreOrders   :: !(Maybe Bool)
-    , _vlPrintType       :: !(Maybe VolumesListPrintType)
+    { _vlOrderBy                  :: !(Maybe VolumesListOrderBy)
+    , _vlMaxAllowedMaturityRating :: !(Maybe VolumesListMaxAllowedMaturityRating)
+    , _vlLibraryRestrict          :: !(Maybe VolumesListLibraryRestrict)
+    , _vlPartner                  :: !(Maybe Text)
+    , _vlQ                        :: !Text
+    , _vlDownload                 :: !(Maybe VolumesListDownload)
+    , _vlSource                   :: !(Maybe Text)
+    , _vlProjection               :: !(Maybe VolumesListProjection)
+    , _vlFilter                   :: !(Maybe VolumesListFilter)
+    , _vlLangRestrict             :: !(Maybe Text)
+    , _vlStartIndex               :: !(Maybe (Textual Word32))
+    , _vlMaxResults               :: !(Maybe (Textual Word32))
+    , _vlShowPreOrders            :: !(Maybe Bool)
+    , _vlPrintType                :: !(Maybe VolumesListPrintType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesList' with the minimum fields required to make a request.
@@ -100,6 +105,8 @@ data VolumesList = VolumesList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vlOrderBy'
+--
+-- * 'vlMaxAllowedMaturityRating'
 --
 -- * 'vlLibraryRestrict'
 --
@@ -130,6 +137,7 @@ volumesList
 volumesList pVlQ_ =
     VolumesList'
     { _vlOrderBy = Nothing
+    , _vlMaxAllowedMaturityRating = Nothing
     , _vlLibraryRestrict = Nothing
     , _vlPartner = Nothing
     , _vlQ = pVlQ_
@@ -148,6 +156,13 @@ volumesList pVlQ_ =
 vlOrderBy :: Lens' VolumesList (Maybe VolumesListOrderBy)
 vlOrderBy
   = lens _vlOrderBy (\ s a -> s{_vlOrderBy = a})
+
+-- | The maximum allowed maturity rating of returned recommendations. Books
+-- with a higher maturity rating are filtered out.
+vlMaxAllowedMaturityRating :: Lens' VolumesList (Maybe VolumesListMaxAllowedMaturityRating)
+vlMaxAllowedMaturityRating
+  = lens _vlMaxAllowedMaturityRating
+      (\ s a -> s{_vlMaxAllowedMaturityRating = a})
 
 -- | Restrict search to this user\'s library.
 vlLibraryRestrict :: Lens' VolumesList (Maybe VolumesListLibraryRestrict)
@@ -216,7 +231,9 @@ instance GoogleRequest VolumesList where
         type Scopes VolumesList =
              '["https://www.googleapis.com/auth/books"]
         requestClient VolumesList'{..}
-          = go (Just _vlQ) _vlOrderBy _vlLibraryRestrict
+          = go (Just _vlQ) _vlOrderBy
+              _vlMaxAllowedMaturityRating
+              _vlLibraryRestrict
               _vlPartner
               _vlDownload
               _vlSource

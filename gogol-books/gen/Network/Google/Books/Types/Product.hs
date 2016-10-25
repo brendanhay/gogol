@@ -1850,6 +1850,82 @@ instance ToJSON VolumeAccessInfo where
                   ("viewOrderUrl" .=) <$> _vaiViewOrderURL,
                   ("publicDomain" .=) <$> _vaiPublicDomain])
 
+-- | A top-level summary of the panelization info in this volume.
+--
+-- /See:/ 'volumeVolumeInfoPanelizationSummary' smart constructor.
+data VolumeVolumeInfoPanelizationSummary = VolumeVolumeInfoPanelizationSummary'
+    { _vvipsEpubBubbleVersion    :: !(Maybe Text)
+    , _vvipsContainsImageBubbles :: !(Maybe Bool)
+    , _vvipsContainsEpubBubbles  :: !(Maybe Bool)
+    , _vvipsImageBubbleVersion   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VolumeVolumeInfoPanelizationSummary' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vvipsEpubBubbleVersion'
+--
+-- * 'vvipsContainsImageBubbles'
+--
+-- * 'vvipsContainsEpubBubbles'
+--
+-- * 'vvipsImageBubbleVersion'
+volumeVolumeInfoPanelizationSummary
+    :: VolumeVolumeInfoPanelizationSummary
+volumeVolumeInfoPanelizationSummary =
+    VolumeVolumeInfoPanelizationSummary'
+    { _vvipsEpubBubbleVersion = Nothing
+    , _vvipsContainsImageBubbles = Nothing
+    , _vvipsContainsEpubBubbles = Nothing
+    , _vvipsImageBubbleVersion = Nothing
+    }
+
+vvipsEpubBubbleVersion :: Lens' VolumeVolumeInfoPanelizationSummary (Maybe Text)
+vvipsEpubBubbleVersion
+  = lens _vvipsEpubBubbleVersion
+      (\ s a -> s{_vvipsEpubBubbleVersion = a})
+
+vvipsContainsImageBubbles :: Lens' VolumeVolumeInfoPanelizationSummary (Maybe Bool)
+vvipsContainsImageBubbles
+  = lens _vvipsContainsImageBubbles
+      (\ s a -> s{_vvipsContainsImageBubbles = a})
+
+vvipsContainsEpubBubbles :: Lens' VolumeVolumeInfoPanelizationSummary (Maybe Bool)
+vvipsContainsEpubBubbles
+  = lens _vvipsContainsEpubBubbles
+      (\ s a -> s{_vvipsContainsEpubBubbles = a})
+
+vvipsImageBubbleVersion :: Lens' VolumeVolumeInfoPanelizationSummary (Maybe Text)
+vvipsImageBubbleVersion
+  = lens _vvipsImageBubbleVersion
+      (\ s a -> s{_vvipsImageBubbleVersion = a})
+
+instance FromJSON VolumeVolumeInfoPanelizationSummary
+         where
+        parseJSON
+          = withObject "VolumeVolumeInfoPanelizationSummary"
+              (\ o ->
+                 VolumeVolumeInfoPanelizationSummary' <$>
+                   (o .:? "epubBubbleVersion") <*>
+                     (o .:? "containsImageBubbles")
+                     <*> (o .:? "containsEpubBubbles")
+                     <*> (o .:? "imageBubbleVersion"))
+
+instance ToJSON VolumeVolumeInfoPanelizationSummary
+         where
+        toJSON VolumeVolumeInfoPanelizationSummary'{..}
+          = object
+              (catMaybes
+                 [("epubBubbleVersion" .=) <$>
+                    _vvipsEpubBubbleVersion,
+                  ("containsImageBubbles" .=) <$>
+                    _vvipsContainsImageBubbles,
+                  ("containsEpubBubbles" .=) <$>
+                    _vvipsContainsEpubBubbles,
+                  ("imageBubbleVersion" .=) <$>
+                    _vvipsImageBubbleVersion])
+
 -- | A list of image links for all the sizes that are available. (In LITE
 -- projection.)
 --
@@ -3224,6 +3300,8 @@ series =
 sKind :: Lens' Series Text
 sKind = lens _sKind (\ s a -> s{_sKind = a})
 
+-- | Series info list. The client always expects this element in the JSON
+-- output, hence declared here as OutputAlways.
 sSeries :: Lens' Series [SeriesSeriesItem]
 sSeries
   = lens _sSeries (\ s a -> s{_sSeries = a}) . _Default
@@ -4130,8 +4208,9 @@ instance ToJSON Seriesmembership where
 
 --
 -- /See:/ 'userSettingsNotification' smart constructor.
-newtype UserSettingsNotification = UserSettingsNotification'
-    { _usnMoreFromAuthors :: Maybe UserSettingsNotificationMoreFromAuthors
+data UserSettingsNotification = UserSettingsNotification'
+    { _usnMoreFromAuthors :: !(Maybe UserSettingsNotificationMoreFromAuthors)
+    , _usnMoreFromSeries  :: !(Maybe UserSettingsNotificationMoreFromSeries)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserSettingsNotification' with the minimum fields required to make a request.
@@ -4139,11 +4218,14 @@ newtype UserSettingsNotification = UserSettingsNotification'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'usnMoreFromAuthors'
+--
+-- * 'usnMoreFromSeries'
 userSettingsNotification
     :: UserSettingsNotification
 userSettingsNotification =
     UserSettingsNotification'
     { _usnMoreFromAuthors = Nothing
+    , _usnMoreFromSeries = Nothing
     }
 
 usnMoreFromAuthors :: Lens' UserSettingsNotification (Maybe UserSettingsNotificationMoreFromAuthors)
@@ -4151,18 +4233,25 @@ usnMoreFromAuthors
   = lens _usnMoreFromAuthors
       (\ s a -> s{_usnMoreFromAuthors = a})
 
+usnMoreFromSeries :: Lens' UserSettingsNotification (Maybe UserSettingsNotificationMoreFromSeries)
+usnMoreFromSeries
+  = lens _usnMoreFromSeries
+      (\ s a -> s{_usnMoreFromSeries = a})
+
 instance FromJSON UserSettingsNotification where
         parseJSON
           = withObject "UserSettingsNotification"
               (\ o ->
                  UserSettingsNotification' <$>
-                   (o .:? "moreFromAuthors"))
+                   (o .:? "moreFromAuthors") <*>
+                     (o .:? "moreFromSeries"))
 
 instance ToJSON UserSettingsNotification where
         toJSON UserSettingsNotification'{..}
           = object
               (catMaybes
-                 [("moreFromAuthors" .=) <$> _usnMoreFromAuthors])
+                 [("moreFromAuthors" .=) <$> _usnMoreFromAuthors,
+                  ("moreFromSeries" .=) <$> _usnMoreFromSeries])
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemSynonymsItem' smart constructor.
@@ -5959,6 +6048,7 @@ data VolumeSaleInfoOffersItem = VolumeSaleInfoOffersItem'
     , _vsioiRentalDuration  :: !(Maybe VolumeSaleInfoOffersItemRentalDuration)
     , _vsioiListPrice       :: !(Maybe VolumeSaleInfoOffersItemListPrice)
     , _vsioiRetailPrice     :: !(Maybe VolumeSaleInfoOffersItemRetailPrice)
+    , _vsioiGiftable        :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumeSaleInfoOffersItem' with the minimum fields required to make a request.
@@ -5972,6 +6062,8 @@ data VolumeSaleInfoOffersItem = VolumeSaleInfoOffersItem'
 -- * 'vsioiListPrice'
 --
 -- * 'vsioiRetailPrice'
+--
+-- * 'vsioiGiftable'
 volumeSaleInfoOffersItem
     :: VolumeSaleInfoOffersItem
 volumeSaleInfoOffersItem =
@@ -5980,6 +6072,7 @@ volumeSaleInfoOffersItem =
     , _vsioiRentalDuration = Nothing
     , _vsioiListPrice = Nothing
     , _vsioiRetailPrice = Nothing
+    , _vsioiGiftable = Nothing
     }
 
 -- | The finsky offer type (e.g., PURCHASE=0 RENTAL=3)
@@ -6007,6 +6100,12 @@ vsioiRetailPrice
   = lens _vsioiRetailPrice
       (\ s a -> s{_vsioiRetailPrice = a})
 
+-- | Indicates whether the offer is giftable.
+vsioiGiftable :: Lens' VolumeSaleInfoOffersItem (Maybe Bool)
+vsioiGiftable
+  = lens _vsioiGiftable
+      (\ s a -> s{_vsioiGiftable = a})
+
 instance FromJSON VolumeSaleInfoOffersItem where
         parseJSON
           = withObject "VolumeSaleInfoOffersItem"
@@ -6015,7 +6114,8 @@ instance FromJSON VolumeSaleInfoOffersItem where
                    (o .:? "finskyOfferType") <*>
                      (o .:? "rentalDuration")
                      <*> (o .:? "listPrice")
-                     <*> (o .:? "retailPrice"))
+                     <*> (o .:? "retailPrice")
+                     <*> (o .:? "giftable"))
 
 instance ToJSON VolumeSaleInfoOffersItem where
         toJSON VolumeSaleInfoOffersItem'{..}
@@ -6024,7 +6124,8 @@ instance ToJSON VolumeSaleInfoOffersItem where
                  [("finskyOfferType" .=) <$> _vsioiFinskyOfferType,
                   ("rentalDuration" .=) <$> _vsioiRentalDuration,
                   ("listPrice" .=) <$> _vsioiListPrice,
-                  ("retailPrice" .=) <$> _vsioiRetailPrice])
+                  ("retailPrice" .=) <$> _vsioiRetailPrice,
+                  ("giftable" .=) <$> _vsioiGiftable])
 
 --
 -- /See:/ 'dictlayerDataDict' smart constructor.
@@ -6870,6 +6971,7 @@ instance ToJSON GeolayerDataGeoViewportHi where
 -- /See:/ 'volumeVolumeInfo' smart constructor.
 data VolumeVolumeInfo = VolumeVolumeInfo'
     { _vviImageLinks          :: !(Maybe VolumeVolumeInfoImageLinks)
+    , _vviPanelizationSummary :: !(Maybe VolumeVolumeInfoPanelizationSummary)
     , _vviAverageRating       :: !(Maybe (Textual Double))
     , _vviRatingsCount        :: !(Maybe (Textual Int32))
     , _vviCanonicalVolumeLink :: !(Maybe Text)
@@ -6902,6 +7004,8 @@ data VolumeVolumeInfo = VolumeVolumeInfo'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vviImageLinks'
+--
+-- * 'vviPanelizationSummary'
 --
 -- * 'vviAverageRating'
 --
@@ -6957,6 +7061,7 @@ volumeVolumeInfo
 volumeVolumeInfo =
     VolumeVolumeInfo'
     { _vviImageLinks = Nothing
+    , _vviPanelizationSummary = Nothing
     , _vviAverageRating = Nothing
     , _vviRatingsCount = Nothing
     , _vviCanonicalVolumeLink = Nothing
@@ -6990,6 +7095,12 @@ vviImageLinks :: Lens' VolumeVolumeInfo (Maybe VolumeVolumeInfoImageLinks)
 vviImageLinks
   = lens _vviImageLinks
       (\ s a -> s{_vviImageLinks = a})
+
+-- | A top-level summary of the panelization info in this volume.
+vviPanelizationSummary :: Lens' VolumeVolumeInfo (Maybe VolumeVolumeInfoPanelizationSummary)
+vviPanelizationSummary
+  = lens _vviPanelizationSummary
+      (\ s a -> s{_vviPanelizationSummary = a})
 
 -- | The mean review rating for this volume. (min = 1.0, max = 5.0)
 vviAverageRating :: Lens' VolumeVolumeInfo (Maybe Double)
@@ -7154,8 +7265,10 @@ instance FromJSON VolumeVolumeInfo where
           = withObject "VolumeVolumeInfo"
               (\ o ->
                  VolumeVolumeInfo' <$>
-                   (o .:? "imageLinks") <*> (o .:? "averageRating") <*>
-                     (o .:? "ratingsCount")
+                   (o .:? "imageLinks") <*>
+                     (o .:? "panelizationSummary")
+                     <*> (o .:? "averageRating")
+                     <*> (o .:? "ratingsCount")
                      <*> (o .:? "canonicalVolumeLink")
                      <*> (o .:? "readingModes")
                      <*> (o .:? "industryIdentifiers" .!= mempty)
@@ -7185,6 +7298,8 @@ instance ToJSON VolumeVolumeInfo where
           = object
               (catMaybes
                  [("imageLinks" .=) <$> _vviImageLinks,
+                  ("panelizationSummary" .=) <$>
+                    _vviPanelizationSummary,
                   ("averageRating" .=) <$> _vviAverageRating,
                   ("ratingsCount" .=) <$> _vviRatingsCount,
                   ("canonicalVolumeLink" .=) <$>
@@ -7454,6 +7569,44 @@ instance ToJSON VolumeUserInfoFamilySharing where
                   ("isSharingAllowed" .=) <$> _vuifsIsSharingAllowed,
                   ("isSharingDisabledByFop" .=) <$>
                     _vuifsIsSharingDisabledByFop])
+
+--
+-- /See:/ 'userSettingsNotificationMoreFromSeries' smart constructor.
+newtype UserSettingsNotificationMoreFromSeries = UserSettingsNotificationMoreFromSeries'
+    { _usnmfsOptedState :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserSettingsNotificationMoreFromSeries' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'usnmfsOptedState'
+userSettingsNotificationMoreFromSeries
+    :: UserSettingsNotificationMoreFromSeries
+userSettingsNotificationMoreFromSeries =
+    UserSettingsNotificationMoreFromSeries'
+    { _usnmfsOptedState = Nothing
+    }
+
+usnmfsOptedState :: Lens' UserSettingsNotificationMoreFromSeries (Maybe Text)
+usnmfsOptedState
+  = lens _usnmfsOptedState
+      (\ s a -> s{_usnmfsOptedState = a})
+
+instance FromJSON
+         UserSettingsNotificationMoreFromSeries where
+        parseJSON
+          = withObject "UserSettingsNotificationMoreFromSeries"
+              (\ o ->
+                 UserSettingsNotificationMoreFromSeries' <$>
+                   (o .:? "opted_state"))
+
+instance ToJSON
+         UserSettingsNotificationMoreFromSeries where
+        toJSON UserSettingsNotificationMoreFromSeries'{..}
+          = object
+              (catMaybes
+                 [("opted_state" .=) <$> _usnmfsOptedState])
 
 --
 -- /See:/ 'volumeVolumeInfoIndustryIdentifiersItem' smart constructor.
