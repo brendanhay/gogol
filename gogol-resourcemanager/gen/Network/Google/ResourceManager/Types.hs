@@ -23,6 +23,20 @@ module Network.Google.ResourceManager.Types
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
 
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- * SearchOrganizationsRequest
+    , SearchOrganizationsRequest
+    , searchOrganizationsRequest
+    , sorFilter
+    , sorPageToken
+    , sorPageSize
+
     -- * ResourceId
     , ResourceId
     , resourceId
@@ -39,6 +53,11 @@ module Network.Google.ResourceManager.Types
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
 
+    -- * OrganizationOwner
+    , OrganizationOwner
+    , organizationOwner
+    , ooDirectoryCustomerId
+
     -- * Project
     , Project
     , project
@@ -50,9 +69,35 @@ module Network.Google.ResourceManager.Types
     , pLifecycleState
     , pCreateTime
 
+    -- * Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
+
     -- * Empty
     , Empty
     , empty
+
+    -- * ProjectCreationStatus
+    , ProjectCreationStatus
+    , projectCreationStatus
+    , pcsGettable
+    , pcsReady
+    , pcsCreateTime
+
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
+
+    -- * FolderOperationError
+    , FolderOperationError
+    , folderOperationError
+    , foeErrorMessageId
 
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
@@ -63,6 +108,12 @@ module Network.Google.ResourceManager.Types
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
     , tiprPermissions
+
+    -- * SearchOrganizationsResponse
+    , SearchOrganizationsResponse
+    , searchOrganizationsResponse
+    , sorNextPageToken
+    , sorOrganizations
 
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -80,6 +131,33 @@ module Network.Google.ResourceManager.Types
     , ProjectLabels
     , projectLabels
     , plAddtional
+
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omAddtional
+
+    -- * FolderOperation
+    , FolderOperation
+    , folderOperation
+    , foDestinationParent
+    , foDisplayName
+    , foOperationType
+    , foSourceParent
+
+    -- * Organization
+    , Organization
+    , organization
+    , orgCreationTime
+    , orgOwner
+    , orgName
+    , orgDisplayName
+    , orgLifecycleState
+
+    -- * OperationResponse
+    , OperationResponse
+    , operationResponse
+    , orAddtional
 
     -- * UndeleteProjectRequest
     , UndeleteProjectRequest

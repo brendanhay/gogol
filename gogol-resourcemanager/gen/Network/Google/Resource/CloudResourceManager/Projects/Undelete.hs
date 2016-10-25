@@ -23,9 +23,8 @@
 -- Restores the Project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). You can only use this method for a Project
 -- that has a lifecycle state of DELETE_REQUESTED. After deletion starts,
--- as indicated by a lifecycle state of DELETE_IN_PROGRESS, the Project
--- cannot be restored. The caller must have modify permissions for this
--- Project.
+-- the Project cannot be restored. The caller must have modify permissions
+-- for this Project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.undelete@.
 module Network.Google.Resource.CloudResourceManager.Projects.Undelete
@@ -72,9 +71,8 @@ type ProjectsUndeleteResource =
 -- | Restores the Project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). You can only use this method for a Project
 -- that has a lifecycle state of DELETE_REQUESTED. After deletion starts,
--- as indicated by a lifecycle state of DELETE_IN_PROGRESS, the Project
--- cannot be restored. The caller must have modify permissions for this
--- Project.
+-- the Project cannot be restored. The caller must have modify permissions
+-- for this Project.
 --
 -- /See:/ 'projectsUndelete' smart constructor.
 data ProjectsUndelete = ProjectsUndelete'
