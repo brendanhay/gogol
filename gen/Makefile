@@ -54,7 +54,7 @@ $(MODEL_DIR): vendor/google-api-go-client
 	@./script/copy-models $< $@
 
 vendor/google-api-go-client:
-	git clone git@github.com:google/google-api-go-client $@
+	git clone https://github.com/google/google-api-go-client $@
 
 .PHONY: audit
 
