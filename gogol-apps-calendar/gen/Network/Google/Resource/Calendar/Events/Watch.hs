@@ -114,7 +114,7 @@ data EventsWatch = EventsWatch'
     , _ewPageToken               :: !(Maybe Text)
     , _ewTimeZone                :: !(Maybe Text)
     , _ewShowHiddenInvitations   :: !(Maybe Bool)
-    , _ewMaxResults              :: !(Maybe (Textual Int32))
+    , _ewMaxResults              :: !(Textual Int32)
     , _ewAlwaysIncludeEmail      :: !(Maybe Bool)
     , _ewTimeMax                 :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -182,7 +182,7 @@ eventsWatch pEwCalendarId_ pEwPayload_ =
     , _ewPageToken = Nothing
     , _ewTimeZone = Nothing
     , _ewShowHiddenInvitations = Nothing
-    , _ewMaxResults = Nothing
+    , _ewMaxResults = 250
     , _ewAlwaysIncludeEmail = Nothing
     , _ewTimeMax = Nothing
     }
@@ -320,10 +320,10 @@ ewShowHiddenInvitations
 -- | Maximum number of events returned on one result page. By default the
 -- value is 250 events. The page size can never be larger than 2500 events.
 -- Optional.
-ewMaxResults :: Lens' EventsWatch (Maybe Int32)
+ewMaxResults :: Lens' EventsWatch Int32
 ewMaxResults
   = lens _ewMaxResults (\ s a -> s{_ewMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 -- | Whether to always include a value in the email field for the organizer,
 -- creator and attendees, even if no real email is available (i.e. a
@@ -364,7 +364,7 @@ instance GoogleRequest EventsWatch where
               _ewPageToken
               _ewTimeZone
               _ewShowHiddenInvitations
-              _ewMaxResults
+              (Just _ewMaxResults)
               _ewAlwaysIncludeEmail
               _ewTimeMax
               (Just AltJSON)
