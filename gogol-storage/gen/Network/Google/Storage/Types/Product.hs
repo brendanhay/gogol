@@ -248,10 +248,11 @@ instance ToJSON ObjectMetadata where
 --
 -- /See:/ 'bucketLifecycleRuleItemCondition' smart constructor.
 data BucketLifecycleRuleItemCondition = BucketLifecycleRuleItemCondition'
-    { _blricAge              :: !(Maybe (Textual Int32))
-    , _blricIsLive           :: !(Maybe Bool)
-    , _blricNumNewerVersions :: !(Maybe (Textual Int32))
-    , _blricCreatedBefore    :: !(Maybe Date')
+    { _blricAge                 :: !(Maybe (Textual Int32))
+    , _blricIsLive              :: !(Maybe Bool)
+    , _blricNumNewerVersions    :: !(Maybe (Textual Int32))
+    , _blricMatchesStorageClass :: !(Maybe [Text])
+    , _blricCreatedBefore       :: !(Maybe Date')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketLifecycleRuleItemCondition' with the minimum fields required to make a request.
@@ -264,6 +265,8 @@ data BucketLifecycleRuleItemCondition = BucketLifecycleRuleItemCondition'
 --
 -- * 'blricNumNewerVersions'
 --
+-- * 'blricMatchesStorageClass'
+--
 -- * 'blricCreatedBefore'
 bucketLifecycleRuleItemCondition
     :: BucketLifecycleRuleItemCondition
@@ -272,6 +275,7 @@ bucketLifecycleRuleItemCondition =
     { _blricAge = Nothing
     , _blricIsLive = Nothing
     , _blricNumNewerVersions = Nothing
+    , _blricMatchesStorageClass = Nothing
     , _blricCreatedBefore = Nothing
     }
 
@@ -298,6 +302,16 @@ blricNumNewerVersions
       (\ s a -> s{_blricNumNewerVersions = a})
       . mapping _Coerce
 
+-- | Objects having any of the storage classes specified by this condition
+-- will be matched. Values include MULTI_REGIONAL, REGIONAL, NEARLINE,
+-- COLDLINE, STANDARD, and DURABLE_REDUCED_AVAILABILITY.
+blricMatchesStorageClass :: Lens' BucketLifecycleRuleItemCondition [Text]
+blricMatchesStorageClass
+  = lens _blricMatchesStorageClass
+      (\ s a -> s{_blricMatchesStorageClass = a})
+      . _Default
+      . _Coerce
+
 -- | A date in RFC 3339 format with only the date part (for instance,
 -- \"2013-01-15\"). This condition is satisfied when an object is created
 -- before midnight of the specified date in UTC.
@@ -315,6 +329,7 @@ instance FromJSON BucketLifecycleRuleItemCondition
                  BucketLifecycleRuleItemCondition' <$>
                    (o .:? "age") <*> (o .:? "isLive") <*>
                      (o .:? "numNewerVersions")
+                     <*> (o .:? "matchesStorageClass" .!= mempty)
                      <*> (o .:? "createdBefore"))
 
 instance ToJSON BucketLifecycleRuleItemCondition
@@ -325,6 +340,8 @@ instance ToJSON BucketLifecycleRuleItemCondition
                  [("age" .=) <$> _blricAge,
                   ("isLive" .=) <$> _blricIsLive,
                   ("numNewerVersions" .=) <$> _blricNumNewerVersions,
+                  ("matchesStorageClass" .=) <$>
+                    _blricMatchesStorageClass,
                   ("createdBefore" .=) <$> _blricCreatedBefore])
 
 -- | The bucket\'s lifecycle configuration. See lifecycle management for more
@@ -655,7 +672,7 @@ oacptProjectNumber
   = lens _oacptProjectNumber
       (\ s a -> s{_oacptProjectNumber = a})
 
--- | The team. Can be owners, editors, or viewers.
+-- | The team.
 oacptTeam :: Lens' ObjectAccessControlProjectTeam (Maybe Text)
 oacptTeam
   = lens _oacptTeam (\ s a -> s{_oacptTeam = a})
@@ -832,7 +849,9 @@ bucLocation
 bucKind :: Lens' Bucket Text
 bucKind = lens _bucKind (\ s a -> s{_bucKind = a})
 
--- | The bucket\'s website configuration.
+-- | The bucket\'s website configuration, controlling how the service behaves
+-- when accessing bucket contents as a web site. See the Static Website
+-- Examples for more information.
 bucWebsite :: Lens' Bucket (Maybe BucketWebsite)
 bucWebsite
   = lens _bucWebsite (\ s a -> s{_bucWebsite = a})
@@ -863,10 +882,13 @@ bucSelfLink
 bucName :: Lens' Bucket (Maybe Text)
 bucName = lens _bucName (\ s a -> s{_bucName = a})
 
--- | The bucket\'s storage class. This defines how objects in the bucket are
--- stored and determines the SLA and the cost of storage. Values include
--- STANDARD, NEARLINE and DURABLE_REDUCED_AVAILABILITY. Defaults to
--- STANDARD. For more information, see storage classes.
+-- | The bucket\'s default storage class, used whenever no storageClass is
+-- specified for a newly-created object. This defines how objects in the
+-- bucket are stored and determines the SLA and the cost of storage. Values
+-- include MULTI_REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, and
+-- DURABLE_REDUCED_AVAILABILITY. If this value is not specified when the
+-- bucket is created, it will default to STANDARD. For more information,
+-- see storage classes.
 bucStorageClass :: Lens' Bucket (Maybe Text)
 bucStorageClass
   = lens _bucStorageClass
@@ -1532,7 +1554,9 @@ objContentLanguage
   = lens _objContentLanguage
       (\ s a -> s{_objContentLanguage = a})
 
--- | Cache-Control directive for the object data.
+-- | Cache-Control directive for the object data. If omitted, and the object
+-- is accessible to all anonymous users, the default will be public,
+-- max-age=3600.
 objCacheControl :: Lens' Object (Maybe Text)
 objCacheControl
   = lens _objCacheControl
@@ -1717,7 +1741,7 @@ bacptProjectNumber
   = lens _bacptProjectNumber
       (\ s a -> s{_bacptProjectNumber = a})
 
--- | The team. Can be owners, editors, or viewers.
+-- | The team.
 bacptTeam :: Lens' BucketAccessControlProjectTeam (Maybe Text)
 bacptTeam
   = lens _bacptTeam (\ s a -> s{_bacptTeam = a})
@@ -1742,7 +1766,7 @@ instance ToJSON BucketAccessControlProjectTeam where
 -- /See:/ 'objectAccessControls' smart constructor.
 data ObjectAccessControls = ObjectAccessControls'
     { _oacKind  :: !Text
-    , _oacItems :: !(Maybe [JSONValue])
+    , _oacItems :: !(Maybe [ObjectAccessControl])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControls' with the minimum fields required to make a request.
@@ -1766,7 +1790,7 @@ oacKind :: Lens' ObjectAccessControls Text
 oacKind = lens _oacKind (\ s a -> s{_oacKind = a})
 
 -- | The list of items.
-oacItems :: Lens' ObjectAccessControls [JSONValue]
+oacItems :: Lens' ObjectAccessControls [ObjectAccessControl]
 oacItems
   = lens _oacItems (\ s a -> s{_oacItems = a}) .
       _Default
@@ -1787,7 +1811,9 @@ instance ToJSON ObjectAccessControls where
                  [Just ("kind" .= _oacKind),
                   ("items" .=) <$> _oacItems])
 
--- | The bucket\'s website configuration.
+-- | The bucket\'s website configuration, controlling how the service behaves
+-- when accessing bucket contents as a web site. See the Static Website
+-- Examples for more information.
 --
 -- /See:/ 'bucketWebsite' smart constructor.
 data BucketWebsite = BucketWebsite'
@@ -1810,14 +1836,18 @@ bucketWebsite =
     , _bwNotFoundPage = Nothing
     }
 
--- | Behaves as the bucket\'s directory index where missing objects are
--- treated as potential directories.
+-- | If the requested object path is missing, the service will ensure the
+-- path has a trailing \'\/\', append this suffix, and attempt to retrieve
+-- the resulting object. This allows the creation of index.html objects to
+-- represent directory pages.
 bwMainPageSuffix :: Lens' BucketWebsite (Maybe Text)
 bwMainPageSuffix
   = lens _bwMainPageSuffix
       (\ s a -> s{_bwMainPageSuffix = a})
 
--- | The custom object to return when a requested resource is not found.
+-- | If the requested object path is missing, and any mainPageSuffix object
+-- is missing, if applicable, the service will return the named object from
+-- this bucket as the content for a 404 Not Found result.
 bwNotFoundPage :: Lens' BucketWebsite (Maybe Text)
 bwNotFoundPage
   = lens _bwNotFoundPage
@@ -1920,7 +1950,7 @@ bacaBucket :: Lens' BucketAccessControl (Maybe Text)
 bacaBucket
   = lens _bacaBucket (\ s a -> s{_bacaBucket = a})
 
--- | The access permission for the entity. Can be READER, WRITER, or OWNER.
+-- | The access permission for the entity.
 bacaRole :: Lens' BucketAccessControl (Maybe Text)
 bacaRole = lens _bacaRole (\ s a -> s{_bacaRole = a})
 
@@ -1990,23 +2020,35 @@ instance ToJSON BucketAccessControl where
 -- | The action to take.
 --
 -- /See:/ 'bucketLifecycleRuleItemAction' smart constructor.
-newtype BucketLifecycleRuleItemAction = BucketLifecycleRuleItemAction'
-    { _blriaType :: Maybe Text
+data BucketLifecycleRuleItemAction = BucketLifecycleRuleItemAction'
+    { _blriaStorageClass :: !(Maybe Text)
+    , _blriaType         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketLifecycleRuleItemAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'blriaStorageClass'
+--
 -- * 'blriaType'
 bucketLifecycleRuleItemAction
     :: BucketLifecycleRuleItemAction
 bucketLifecycleRuleItemAction =
     BucketLifecycleRuleItemAction'
-    { _blriaType = Nothing
+    { _blriaStorageClass = Nothing
+    , _blriaType = Nothing
     }
 
--- | Type of the action. Currently, only Delete is supported.
+-- | Target storage class. Required iff the type of the action is
+-- SetStorageClass.
+blriaStorageClass :: Lens' BucketLifecycleRuleItemAction (Maybe Text)
+blriaStorageClass
+  = lens _blriaStorageClass
+      (\ s a -> s{_blriaStorageClass = a})
+
+-- | Type of the action. Currently, only Delete and SetStorageClass are
+-- supported.
 blriaType :: Lens' BucketLifecycleRuleItemAction (Maybe Text)
 blriaType
   = lens _blriaType (\ s a -> s{_blriaType = a})
@@ -2015,11 +2057,15 @@ instance FromJSON BucketLifecycleRuleItemAction where
         parseJSON
           = withObject "BucketLifecycleRuleItemAction"
               (\ o ->
-                 BucketLifecycleRuleItemAction' <$> (o .:? "type"))
+                 BucketLifecycleRuleItemAction' <$>
+                   (o .:? "storageClass") <*> (o .:? "type"))
 
 instance ToJSON BucketLifecycleRuleItemAction where
         toJSON BucketLifecycleRuleItemAction'{..}
-          = object (catMaybes [("type" .=) <$> _blriaType])
+          = object
+              (catMaybes
+                 [("storageClass" .=) <$> _blriaStorageClass,
+                  ("type" .=) <$> _blriaType])
 
 -- | An access-control entry.
 --
@@ -2112,7 +2158,7 @@ oacaBucket :: Lens' ObjectAccessControl (Maybe Text)
 oacaBucket
   = lens _oacaBucket (\ s a -> s{_oacaBucket = a})
 
--- | The access permission for the entity. Can be READER or OWNER.
+-- | The access permission for the entity.
 oacaRole :: Lens' ObjectAccessControl (Maybe Text)
 oacaRole = lens _oacaRole (\ s a -> s{_oacaRole = a})
 
@@ -2121,7 +2167,7 @@ oacaSelfLink :: Lens' ObjectAccessControl (Maybe Text)
 oacaSelfLink
   = lens _oacaSelfLink (\ s a -> s{_oacaSelfLink = a})
 
--- | The name of the object.
+-- | The name of the object, if applied to an object.
 oacaObject :: Lens' ObjectAccessControl (Maybe Text)
 oacaObject
   = lens _oacaObject (\ s a -> s{_oacaObject = a})
@@ -2147,7 +2193,7 @@ oacaEntity :: Lens' ObjectAccessControl (Maybe Text)
 oacaEntity
   = lens _oacaEntity (\ s a -> s{_oacaEntity = a})
 
--- | The content generation of the object.
+-- | The content generation of the object, if applied to an object.
 oacaGeneration :: Lens' ObjectAccessControl (Maybe Int64)
 oacaGeneration
   = lens _oacaGeneration

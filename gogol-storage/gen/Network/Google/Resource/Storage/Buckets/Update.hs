@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a bucket.
+-- Updates a bucket. Changes to the bucket will be readable immediately
+-- after writing, but configuration changes may take time to propagate.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.buckets.update@.
 module Network.Google.Resource.Storage.Buckets.Update
@@ -64,7 +65,8 @@ type BucketsUpdateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
 
--- | Updates a bucket.
+-- | Updates a bucket. Changes to the bucket will be readable immediately
+-- after writing, but configuration changes may take time to propagate.
 --
 -- /See:/ 'bucketsUpdate' smart constructor.
 data BucketsUpdate = BucketsUpdate'

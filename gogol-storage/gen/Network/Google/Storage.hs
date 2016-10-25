@@ -190,6 +190,7 @@ module Network.Google.Storage
     , blricAge
     , blricIsLive
     , blricNumNewerVersions
+    , blricMatchesStorageClass
     , blricCreatedBefore
 
     -- ** ObjectsRewriteDestinationPredefinedACL
@@ -415,6 +416,7 @@ module Network.Google.Storage
     -- ** BucketLifecycleRuleItemAction
     , BucketLifecycleRuleItemAction
     , bucketLifecycleRuleItemAction
+    , blriaStorageClass
     , blriaType
 
     -- ** ObjectsGetProjection
