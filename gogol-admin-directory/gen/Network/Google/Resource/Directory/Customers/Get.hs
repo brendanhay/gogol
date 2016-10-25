@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrives a customer.
+-- Retrieves a customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.customers.get@.
 module Network.Google.Resource.Directory.Customers.Get
@@ -49,7 +49,7 @@ type CustomersGetResource =
              Capture "customerKey" Text :>
                QueryParam "alt" AltJSON :> Get '[JSON] Customer
 
--- | Retrives a customer.
+-- | Retrieves a customer.
 --
 -- /See:/ 'customersGet' smart constructor.
 newtype CustomersGet = CustomersGet'

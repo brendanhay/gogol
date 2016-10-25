@@ -3508,6 +3508,54 @@ instance ToJSON User where
                   ("customSchemas" .=) <$> _useCustomSchemas,
                   ("suspensionReason" .=) <$> _useSuspensionReason])
 
+-- | JSON request template for firing actions on ChromeOs Device in Directory
+-- Devices API.
+--
+-- /See:/ 'chromeOSDeviceAction' smart constructor.
+data ChromeOSDeviceAction = ChromeOSDeviceAction'
+    { _codaAction            :: !(Maybe Text)
+    , _codaDeprovisionReason :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChromeOSDeviceAction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'codaAction'
+--
+-- * 'codaDeprovisionReason'
+chromeOSDeviceAction
+    :: ChromeOSDeviceAction
+chromeOSDeviceAction =
+    ChromeOSDeviceAction'
+    { _codaAction = Nothing
+    , _codaDeprovisionReason = Nothing
+    }
+
+-- | Action to be taken on the ChromeOs Device
+codaAction :: Lens' ChromeOSDeviceAction (Maybe Text)
+codaAction
+  = lens _codaAction (\ s a -> s{_codaAction = a})
+
+codaDeprovisionReason :: Lens' ChromeOSDeviceAction (Maybe Text)
+codaDeprovisionReason
+  = lens _codaDeprovisionReason
+      (\ s a -> s{_codaDeprovisionReason = a})
+
+instance FromJSON ChromeOSDeviceAction where
+        parseJSON
+          = withObject "ChromeOSDeviceAction"
+              (\ o ->
+                 ChromeOSDeviceAction' <$>
+                   (o .:? "action") <*> (o .:? "deprovisionReason"))
+
+instance ToJSON ChromeOSDeviceAction where
+        toJSON ChromeOSDeviceAction'{..}
+          = object
+              (catMaybes
+                 [("action" .=) <$> _codaAction,
+                  ("deprovisionReason" .=) <$> _codaDeprovisionReason])
+
 -- | JSON template for role resource in Directory API.
 --
 -- /See:/ 'role'' smart constructor.
@@ -4581,14 +4629,19 @@ instance ToJSON UserPhoto where
 data MobileDevice = MobileDevice'
     { _mobEmail                          :: !(Maybe [Text])
     , _mobStatus                         :: !(Maybe Text)
+    , _mobPrivilege                      :: !(Maybe Text)
     , _mobEtag                           :: !(Maybe Text)
     , _mobResourceId                     :: !(Maybe Text)
+    , _mobManufacturer                   :: !(Maybe Text)
     , _mobBuildNumber                    :: !(Maybe Text)
     , _mobManagedAccountIsOnOwnerProFile :: !(Maybe Bool)
     , _mobLastSync                       :: !(Maybe DateTime')
     , _mobOtherAccountsInfo              :: !(Maybe [Text])
     , _mobKind                           :: !Text
     , _mobAdbStatus                      :: !(Maybe Bool)
+    , _mobReleaseVersion                 :: !(Maybe Text)
+    , _mobBrand                          :: !(Maybe Text)
+    , _mobSecurityPatchLevel             :: !(Maybe (Textual Int64))
     , _mobNetworkOperator                :: !(Maybe Text)
     , _mobKernelVersion                  :: !(Maybe Text)
     , _mobOS                             :: !(Maybe Text)
@@ -4597,16 +4650,20 @@ data MobileDevice = MobileDevice'
     , _mobDeveloperOptionsStatus         :: !(Maybe Bool)
     , _mobUnknownSourcesStatus           :: !(Maybe Bool)
     , _mobMeid                           :: !(Maybe Text)
+    , _mobBootLoaderVersion              :: !(Maybe Text)
     , _mobDeviceId                       :: !(Maybe Text)
     , _mobFirstSync                      :: !(Maybe DateTime')
     , _mobUserAgent                      :: !(Maybe Text)
     , _mobImei                           :: !(Maybe Text)
     , _mobType                           :: !(Maybe Text)
     , _mobWifiMACAddress                 :: !(Maybe Text)
+    , _mobEncryptionStatus               :: !(Maybe Text)
     , _mobSerialNumber                   :: !(Maybe Text)
+    , _mobDevicePasswordStatus           :: !(Maybe Text)
     , _mobHardwareId                     :: !(Maybe Text)
     , _mobBasebandVersion                :: !(Maybe Text)
     , _mobSupportsWorkProFile            :: !(Maybe Bool)
+    , _mobHardware                       :: !(Maybe Text)
     , _mobDeviceCompromisedStatus        :: !(Maybe Text)
     , _mobApplications                   :: !(Maybe [MobileDeviceApplicationsItem])
     , _mobDefaultLanguage                :: !(Maybe Text)
@@ -4620,9 +4677,13 @@ data MobileDevice = MobileDevice'
 --
 -- * 'mobStatus'
 --
+-- * 'mobPrivilege'
+--
 -- * 'mobEtag'
 --
 -- * 'mobResourceId'
+--
+-- * 'mobManufacturer'
 --
 -- * 'mobBuildNumber'
 --
@@ -4635,6 +4696,12 @@ data MobileDevice = MobileDevice'
 -- * 'mobKind'
 --
 -- * 'mobAdbStatus'
+--
+-- * 'mobReleaseVersion'
+--
+-- * 'mobBrand'
+--
+-- * 'mobSecurityPatchLevel'
 --
 -- * 'mobNetworkOperator'
 --
@@ -4652,6 +4719,8 @@ data MobileDevice = MobileDevice'
 --
 -- * 'mobMeid'
 --
+-- * 'mobBootLoaderVersion'
+--
 -- * 'mobDeviceId'
 --
 -- * 'mobFirstSync'
@@ -4664,13 +4733,19 @@ data MobileDevice = MobileDevice'
 --
 -- * 'mobWifiMACAddress'
 --
+-- * 'mobEncryptionStatus'
+--
 -- * 'mobSerialNumber'
+--
+-- * 'mobDevicePasswordStatus'
 --
 -- * 'mobHardwareId'
 --
 -- * 'mobBasebandVersion'
 --
 -- * 'mobSupportsWorkProFile'
+--
+-- * 'mobHardware'
 --
 -- * 'mobDeviceCompromisedStatus'
 --
@@ -4683,14 +4758,19 @@ mobileDevice =
     MobileDevice'
     { _mobEmail = Nothing
     , _mobStatus = Nothing
+    , _mobPrivilege = Nothing
     , _mobEtag = Nothing
     , _mobResourceId = Nothing
+    , _mobManufacturer = Nothing
     , _mobBuildNumber = Nothing
     , _mobManagedAccountIsOnOwnerProFile = Nothing
     , _mobLastSync = Nothing
     , _mobOtherAccountsInfo = Nothing
     , _mobKind = "admin#directory#mobiledevice"
     , _mobAdbStatus = Nothing
+    , _mobReleaseVersion = Nothing
+    , _mobBrand = Nothing
+    , _mobSecurityPatchLevel = Nothing
     , _mobNetworkOperator = Nothing
     , _mobKernelVersion = Nothing
     , _mobOS = Nothing
@@ -4699,16 +4779,20 @@ mobileDevice =
     , _mobDeveloperOptionsStatus = Nothing
     , _mobUnknownSourcesStatus = Nothing
     , _mobMeid = Nothing
+    , _mobBootLoaderVersion = Nothing
     , _mobDeviceId = Nothing
     , _mobFirstSync = Nothing
     , _mobUserAgent = Nothing
     , _mobImei = Nothing
     , _mobType = Nothing
     , _mobWifiMACAddress = Nothing
+    , _mobEncryptionStatus = Nothing
     , _mobSerialNumber = Nothing
+    , _mobDevicePasswordStatus = Nothing
     , _mobHardwareId = Nothing
     , _mobBasebandVersion = Nothing
     , _mobSupportsWorkProFile = Nothing
+    , _mobHardware = Nothing
     , _mobDeviceCompromisedStatus = Nothing
     , _mobApplications = Nothing
     , _mobDefaultLanguage = Nothing
@@ -4726,6 +4810,11 @@ mobStatus :: Lens' MobileDevice (Maybe Text)
 mobStatus
   = lens _mobStatus (\ s a -> s{_mobStatus = a})
 
+-- | DMAgentPermission (Read-only)
+mobPrivilege :: Lens' MobileDevice (Maybe Text)
+mobPrivilege
+  = lens _mobPrivilege (\ s a -> s{_mobPrivilege = a})
+
 -- | ETag of the resource.
 mobEtag :: Lens' MobileDevice (Maybe Text)
 mobEtag = lens _mobEtag (\ s a -> s{_mobEtag = a})
@@ -4735,6 +4824,12 @@ mobResourceId :: Lens' MobileDevice (Maybe Text)
 mobResourceId
   = lens _mobResourceId
       (\ s a -> s{_mobResourceId = a})
+
+-- | Mobile Device manufacturer (Read-only)
+mobManufacturer :: Lens' MobileDevice (Maybe Text)
+mobManufacturer
+  = lens _mobManufacturer
+      (\ s a -> s{_mobManufacturer = a})
 
 -- | Mobile Device Build number (Read-only)
 mobBuildNumber :: Lens' MobileDevice (Maybe Text)
@@ -4772,6 +4867,23 @@ mobKind = lens _mobKind (\ s a -> s{_mobKind = a})
 mobAdbStatus :: Lens' MobileDevice (Maybe Bool)
 mobAdbStatus
   = lens _mobAdbStatus (\ s a -> s{_mobAdbStatus = a})
+
+-- | Mobile Device release version version (Read-only)
+mobReleaseVersion :: Lens' MobileDevice (Maybe Text)
+mobReleaseVersion
+  = lens _mobReleaseVersion
+      (\ s a -> s{_mobReleaseVersion = a})
+
+-- | Mobile Device Brand (Read-only)
+mobBrand :: Lens' MobileDevice (Maybe Text)
+mobBrand = lens _mobBrand (\ s a -> s{_mobBrand = a})
+
+-- | Mobile Device Security patch level (Read-only)
+mobSecurityPatchLevel :: Lens' MobileDevice (Maybe Int64)
+mobSecurityPatchLevel
+  = lens _mobSecurityPatchLevel
+      (\ s a -> s{_mobSecurityPatchLevel = a})
+      . mapping _Coerce
 
 -- | Mobile Device mobile or network operator (if available) (Read-only)
 mobNetworkOperator :: Lens' MobileDevice (Maybe Text)
@@ -4815,6 +4927,12 @@ mobUnknownSourcesStatus
 mobMeid :: Lens' MobileDevice (Maybe Text)
 mobMeid = lens _mobMeid (\ s a -> s{_mobMeid = a})
 
+-- | Mobile Device Bootloader version (Read-only)
+mobBootLoaderVersion :: Lens' MobileDevice (Maybe Text)
+mobBootLoaderVersion
+  = lens _mobBootLoaderVersion
+      (\ s a -> s{_mobBootLoaderVersion = a})
+
 -- | Mobile Device serial number (Read-only)
 mobDeviceId :: Lens' MobileDevice (Maybe Text)
 mobDeviceId
@@ -4846,11 +4964,23 @@ mobWifiMACAddress
   = lens _mobWifiMACAddress
       (\ s a -> s{_mobWifiMACAddress = a})
 
+-- | Mobile Device Encryption Status (Read-only)
+mobEncryptionStatus :: Lens' MobileDevice (Maybe Text)
+mobEncryptionStatus
+  = lens _mobEncryptionStatus
+      (\ s a -> s{_mobEncryptionStatus = a})
+
 -- | Mobile Device SSN or Serial Number (Read-only)
 mobSerialNumber :: Lens' MobileDevice (Maybe Text)
 mobSerialNumber
   = lens _mobSerialNumber
       (\ s a -> s{_mobSerialNumber = a})
+
+-- | DevicePasswordStatus (Read-only)
+mobDevicePasswordStatus :: Lens' MobileDevice (Maybe Text)
+mobDevicePasswordStatus
+  = lens _mobDevicePasswordStatus
+      (\ s a -> s{_mobDevicePasswordStatus = a})
 
 -- | Mobile Device Hardware Id (Read-only)
 mobHardwareId :: Lens' MobileDevice (Maybe Text)
@@ -4869,6 +4999,11 @@ mobSupportsWorkProFile :: Lens' MobileDevice (Maybe Bool)
 mobSupportsWorkProFile
   = lens _mobSupportsWorkProFile
       (\ s a -> s{_mobSupportsWorkProFile = a})
+
+-- | Mobile Device Hardware (Read-only)
+mobHardware :: Lens' MobileDevice (Maybe Text)
+mobHardware
+  = lens _mobHardware (\ s a -> s{_mobHardware = a})
 
 -- | Mobile Device compromised status (Read-only)
 mobDeviceCompromisedStatus :: Lens' MobileDevice (Maybe Text)
@@ -4896,14 +5031,19 @@ instance FromJSON MobileDevice where
               (\ o ->
                  MobileDevice' <$>
                    (o .:? "email" .!= mempty) <*> (o .:? "status") <*>
-                     (o .:? "etag")
+                     (o .:? "privilege")
+                     <*> (o .:? "etag")
                      <*> (o .:? "resourceId")
+                     <*> (o .:? "manufacturer")
                      <*> (o .:? "buildNumber")
                      <*> (o .:? "managedAccountIsOnOwnerProfile")
                      <*> (o .:? "lastSync")
                      <*> (o .:? "otherAccountsInfo" .!= mempty)
                      <*> (o .:? "kind" .!= "admin#directory#mobiledevice")
                      <*> (o .:? "adbStatus")
+                     <*> (o .:? "releaseVersion")
+                     <*> (o .:? "brand")
+                     <*> (o .:? "securityPatchLevel")
                      <*> (o .:? "networkOperator")
                      <*> (o .:? "kernelVersion")
                      <*> (o .:? "os")
@@ -4912,16 +5052,20 @@ instance FromJSON MobileDevice where
                      <*> (o .:? "developerOptionsStatus")
                      <*> (o .:? "unknownSourcesStatus")
                      <*> (o .:? "meid")
+                     <*> (o .:? "bootloaderVersion")
                      <*> (o .:? "deviceId")
                      <*> (o .:? "firstSync")
                      <*> (o .:? "userAgent")
                      <*> (o .:? "imei")
                      <*> (o .:? "type")
                      <*> (o .:? "wifiMacAddress")
+                     <*> (o .:? "encryptionStatus")
                      <*> (o .:? "serialNumber")
+                     <*> (o .:? "devicePasswordStatus")
                      <*> (o .:? "hardwareId")
                      <*> (o .:? "basebandVersion")
                      <*> (o .:? "supportsWorkProfile")
+                     <*> (o .:? "hardware")
                      <*> (o .:? "deviceCompromisedStatus")
                      <*> (o .:? "applications" .!= mempty)
                      <*> (o .:? "defaultLanguage"))
@@ -4932,8 +5076,10 @@ instance ToJSON MobileDevice where
               (catMaybes
                  [("email" .=) <$> _mobEmail,
                   ("status" .=) <$> _mobStatus,
+                  ("privilege" .=) <$> _mobPrivilege,
                   ("etag" .=) <$> _mobEtag,
                   ("resourceId" .=) <$> _mobResourceId,
+                  ("manufacturer" .=) <$> _mobManufacturer,
                   ("buildNumber" .=) <$> _mobBuildNumber,
                   ("managedAccountIsOnOwnerProfile" .=) <$>
                     _mobManagedAccountIsOnOwnerProFile,
@@ -4941,6 +5087,9 @@ instance ToJSON MobileDevice where
                   ("otherAccountsInfo" .=) <$> _mobOtherAccountsInfo,
                   Just ("kind" .= _mobKind),
                   ("adbStatus" .=) <$> _mobAdbStatus,
+                  ("releaseVersion" .=) <$> _mobReleaseVersion,
+                  ("brand" .=) <$> _mobBrand,
+                  ("securityPatchLevel" .=) <$> _mobSecurityPatchLevel,
                   ("networkOperator" .=) <$> _mobNetworkOperator,
                   ("kernelVersion" .=) <$> _mobKernelVersion,
                   ("os" .=) <$> _mobOS, ("name" .=) <$> _mobName,
@@ -4950,16 +5099,21 @@ instance ToJSON MobileDevice where
                   ("unknownSourcesStatus" .=) <$>
                     _mobUnknownSourcesStatus,
                   ("meid" .=) <$> _mobMeid,
+                  ("bootloaderVersion" .=) <$> _mobBootLoaderVersion,
                   ("deviceId" .=) <$> _mobDeviceId,
                   ("firstSync" .=) <$> _mobFirstSync,
                   ("userAgent" .=) <$> _mobUserAgent,
                   ("imei" .=) <$> _mobImei, ("type" .=) <$> _mobType,
                   ("wifiMacAddress" .=) <$> _mobWifiMACAddress,
+                  ("encryptionStatus" .=) <$> _mobEncryptionStatus,
                   ("serialNumber" .=) <$> _mobSerialNumber,
+                  ("devicePasswordStatus" .=) <$>
+                    _mobDevicePasswordStatus,
                   ("hardwareId" .=) <$> _mobHardwareId,
                   ("basebandVersion" .=) <$> _mobBasebandVersion,
                   ("supportsWorkProfile" .=) <$>
                     _mobSupportsWorkProFile,
+                  ("hardware" .=) <$> _mobHardware,
                   ("deviceCompromisedStatus" .=) <$>
                     _mobDeviceCompromisedStatus,
                   ("applications" .=) <$> _mobApplications,
@@ -4969,12 +5123,13 @@ instance ToJSON MobileDevice where
 --
 -- /See:/ 'member' smart constructor.
 data Member = Member'
-    { _memEmail :: !(Maybe Text)
-    , _memEtag  :: !(Maybe Text)
-    , _memKind  :: !Text
-    , _memRole  :: !(Maybe Text)
-    , _memId    :: !(Maybe Text)
-    , _memType  :: !(Maybe Text)
+    { _memEmail  :: !(Maybe Text)
+    , _memStatus :: !(Maybe Text)
+    , _memEtag   :: !(Maybe Text)
+    , _memKind   :: !Text
+    , _memRole   :: !(Maybe Text)
+    , _memId     :: !(Maybe Text)
+    , _memType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Member' with the minimum fields required to make a request.
@@ -4982,6 +5137,8 @@ data Member = Member'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'memEmail'
+--
+-- * 'memStatus'
 --
 -- * 'memEtag'
 --
@@ -4997,6 +5154,7 @@ member
 member =
     Member'
     { _memEmail = Nothing
+    , _memStatus = Nothing
     , _memEtag = Nothing
     , _memKind = "admin#directory#member"
     , _memRole = Nothing
@@ -5007,6 +5165,11 @@ member =
 -- | Email of member (Read-only)
 memEmail :: Lens' Member (Maybe Text)
 memEmail = lens _memEmail (\ s a -> s{_memEmail = a})
+
+-- | Status of member (Immutable)
+memStatus :: Lens' Member (Maybe Text)
+memStatus
+  = lens _memStatus (\ s a -> s{_memStatus = a})
 
 -- | ETag of the resource.
 memEtag :: Lens' Member (Maybe Text)
@@ -5034,8 +5197,9 @@ instance FromJSON Member where
           = withObject "Member"
               (\ o ->
                  Member' <$>
-                   (o .:? "email") <*> (o .:? "etag") <*>
-                     (o .:? "kind" .!= "admin#directory#member")
+                   (o .:? "email") <*> (o .:? "status") <*>
+                     (o .:? "etag")
+                     <*> (o .:? "kind" .!= "admin#directory#member")
                      <*> (o .:? "role")
                      <*> (o .:? "id")
                      <*> (o .:? "type"))
@@ -5045,6 +5209,7 @@ instance ToJSON Member where
           = object
               (catMaybes
                  [("email" .=) <$> _memEmail,
+                  ("status" .=) <$> _memStatus,
                   ("etag" .=) <$> _memEtag, Just ("kind" .= _memKind),
                   ("role" .=) <$> _memRole, ("id" .=) <$> _memId,
                   ("type" .=) <$> _memType])

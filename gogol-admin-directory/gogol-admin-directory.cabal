@@ -41,6 +41,7 @@ library
         , Network.Google.Resource.Directory.Asps.Delete
         , Network.Google.Resource.Directory.Asps.Get
         , Network.Google.Resource.Directory.Asps.List
+        , Network.Google.Resource.Directory.ChromeosDevices.Action
         , Network.Google.Resource.Directory.ChromeosDevices.Get
         , Network.Google.Resource.Directory.ChromeosDevices.List
         , Network.Google.Resource.Directory.ChromeosDevices.Patch

@@ -69,6 +69,9 @@ module Network.Google.Directory
     -- ** directory.asps.list
     , module Network.Google.Resource.Directory.Asps.List
 
+    -- ** directory.chromeosdevices.action
+    , module Network.Google.Resource.Directory.ChromeosDevices.Action
+
     -- ** directory.chromeosdevices.get
     , module Network.Google.Resource.Directory.ChromeosDevices.Get
 
@@ -754,6 +757,12 @@ module Network.Google.Directory
     -- ** MobileDevicesListProjection
     , MobileDevicesListProjection (..)
 
+    -- ** ChromeOSDeviceAction
+    , ChromeOSDeviceAction
+    , chromeOSDeviceAction
+    , codaAction
+    , codaDeprovisionReason
+
     -- ** Role
     , Role
     , role'
@@ -897,14 +906,19 @@ module Network.Google.Directory
     , mobileDevice
     , mobEmail
     , mobStatus
+    , mobPrivilege
     , mobEtag
     , mobResourceId
+    , mobManufacturer
     , mobBuildNumber
     , mobManagedAccountIsOnOwnerProFile
     , mobLastSync
     , mobOtherAccountsInfo
     , mobKind
     , mobAdbStatus
+    , mobReleaseVersion
+    , mobBrand
+    , mobSecurityPatchLevel
     , mobNetworkOperator
     , mobKernelVersion
     , mobOS
@@ -913,16 +927,20 @@ module Network.Google.Directory
     , mobDeveloperOptionsStatus
     , mobUnknownSourcesStatus
     , mobMeid
+    , mobBootLoaderVersion
     , mobDeviceId
     , mobFirstSync
     , mobUserAgent
     , mobImei
     , mobType
     , mobWifiMACAddress
+    , mobEncryptionStatus
     , mobSerialNumber
+    , mobDevicePasswordStatus
     , mobHardwareId
     , mobBasebandVersion
     , mobSupportsWorkProFile
+    , mobHardware
     , mobDeviceCompromisedStatus
     , mobApplications
     , mobDefaultLanguage
@@ -931,6 +949,7 @@ module Network.Google.Directory
     , Member
     , member
     , memEmail
+    , memStatus
     , memEtag
     , memKind
     , memRole
@@ -1051,6 +1070,7 @@ import           Network.Google.Resource.Admin.Channels.Stop
 import           Network.Google.Resource.Directory.Asps.Delete
 import           Network.Google.Resource.Directory.Asps.Get
 import           Network.Google.Resource.Directory.Asps.List
+import           Network.Google.Resource.Directory.ChromeosDevices.Action
 import           Network.Google.Resource.Directory.ChromeosDevices.Get
 import           Network.Google.Resource.Directory.ChromeosDevices.List
 import           Network.Google.Resource.Directory.ChromeosDevices.Patch
@@ -1240,6 +1260,7 @@ type DirectoryAPI =
        :<|> ChromeosDevicesListResource
        :<|> ChromeosDevicesPatchResource
        :<|> ChromeosDevicesGetResource
+       :<|> ChromeosDevicesActionResource
        :<|> ChromeosDevicesUpdateResource
        :<|> AspsListResource
        :<|> AspsGetResource

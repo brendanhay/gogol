@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrives a domain of the customer.
+-- Retrieves a domain of the customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domains.get@.
 module Network.Google.Resource.Directory.Domains.Get
@@ -52,7 +52,7 @@ type DomainsGetResource =
                  Capture "domainName" Text :>
                    QueryParam "alt" AltJSON :> Get '[JSON] Domains
 
--- | Retrives a domain of the customer.
+-- | Retrieves a domain of the customer.
 --
 -- /See:/ 'domainsGet' smart constructor.
 data DomainsGet = DomainsGet'
