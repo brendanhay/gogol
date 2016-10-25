@@ -37,6 +37,8 @@ library
           Network.Google.Dataflow
         , Network.Google.Dataflow.Types
         , Network.Google.Resource.Dataflow.Projects.Jobs.Create
+        , Network.Google.Resource.Dataflow.Projects.Jobs.Debug.GetConfig
+        , Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
         , Network.Google.Resource.Dataflow.Projects.Jobs.Get
         , Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
         , Network.Google.Resource.Dataflow.Projects.Jobs.List
@@ -44,6 +46,7 @@ library
         , Network.Google.Resource.Dataflow.Projects.Jobs.Update
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+        , Network.Google.Resource.Dataflow.Projects.Templates.Create
         , Network.Google.Resource.Dataflow.Projects.WorkerMessages
 
     other-modules:

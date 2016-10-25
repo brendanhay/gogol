@@ -46,12 +46,29 @@ module Network.Google.Dataflow.Types
     , ssrShards
     , ssrOutcome
 
+    -- * CreateJobFromTemplateRequest
+    , CreateJobFromTemplateRequest
+    , createJobFromTemplateRequest
+    , cjftrGcsPath
+    , cjftrParameters
+
     -- * Status
     , Status
     , status
     , sDetails
     , sCode
     , sMessage
+
+    -- * NameAndKind
+    , NameAndKind
+    , nameAndKind
+    , nakKind
+    , nakName
+
+    -- * IntegerList
+    , IntegerList
+    , integerList
+    , ilElements
 
     -- * WorkItem
     , WorkItem
@@ -69,6 +86,7 @@ module Network.Google.Dataflow.Types
     , wiProjectId
     , wiLeaseExpireTime
     , wiConfiguration
+    , wiStreamingConfigTask
     , wiSeqMapTask
 
     -- * WorkerHealthReport
@@ -104,9 +122,12 @@ module Network.Google.Dataflow.Types
     -- * InstructionOutput
     , InstructionOutput
     , instructionOutput
+    , ioOnlyCountValueBytes
     , ioCodec
     , ioName
     , ioSystemName
+    , ioOriginalName
+    , ioOnlyCountKeyBytes
 
     -- * ReportWorkItemStatusRequest
     , ReportWorkItemStatusRequest
@@ -126,10 +147,24 @@ module Network.Google.Dataflow.Types
     , sCodec
     , sSpec
 
+    -- * StringList
+    , StringList
+    , stringList
+    , slElements
+
     -- * WorkerHealthReportResponse
     , WorkerHealthReportResponse
     , workerHealthReportResponse
     , whrrReportInterval
+
+    -- * SendDebugCaptureResponse
+    , SendDebugCaptureResponse
+    , sendDebugCaptureResponse
+
+    -- * JobLabels
+    , JobLabels
+    , jobLabels
+    , jlAddtional
 
     -- * MetricStructuredName
     , MetricStructuredName
@@ -137,6 +172,18 @@ module Network.Google.Dataflow.Types
     , msnOrigin
     , msnContext
     , msnName
+
+    -- * CounterStructuredName
+    , CounterStructuredName
+    , counterStructuredName
+    , csnStandardOrigin
+    , csnComponentStepName
+    , csnOtherOrigin
+    , csnPortion
+    , csnOriginalStepName
+    , csnName
+    , csnExecutionStepName
+    , csnWorkerId
 
     -- * WriteInstruction
     , WriteInstruction
@@ -184,6 +231,7 @@ module Network.Google.Dataflow.Types
     , eVersion
     , eInternalExperiments
     , eTempStoragePrefix
+    , eServiceAccountEmail
     , eUserAgent
     , eSdkPipelineOptions
 
@@ -197,6 +245,23 @@ module Network.Google.Dataflow.Types
     , MetricStructuredNameContext
     , metricStructuredNameContext
     , msncAddtional
+
+    -- * CounterUpdate
+    , CounterUpdate
+    , counterUpdate
+    , cuNameAndKind
+    , cuIntegerList
+    , cuFloatingPoint
+    , cuInternal
+    , cuStringList
+    , cuShortId
+    , cuCumulative
+    , cuStructuredNameAndMetadata
+    , cuFloatingPointMean
+    , cuIntegerMean
+    , cuBoolean
+    , cuFloatingPointList
+    , cuInteger
 
     -- * StreamingStageLocation
     , StreamingStageLocation
@@ -215,6 +280,13 @@ module Network.Google.Dataflow.Types
     , jmMetrics
     , jmMetricTime
 
+    -- * SendDebugCaptureRequest
+    , SendDebugCaptureRequest
+    , sendDebugCaptureRequest
+    , sdcrData
+    , sdcrComponentId
+    , sdcrWorkerId
+
     -- * WorkItemStatus
     , WorkItemStatus
     , workItemStatus
@@ -228,6 +300,7 @@ module Network.Google.Dataflow.Types
     , wisReportIndex
     , wisRequestedLeaseDuration
     , wisErrors
+    , wisCounterUpdates
     , wisMetricUpdates
     , wisWorkItemId
 
@@ -292,10 +365,24 @@ module Network.Google.Dataflow.Types
     , trsParallelWorkerSettings
     , trsLanguageHint
 
+    -- * StreamingComputationConfig
+    , StreamingComputationConfig
+    , streamingComputationConfig
+    , sccInstructions
+    , sccSystemName
+    , sccComputationId
+    , sccStageName
+
     -- * EnvironmentSdkPipelineOptions
     , EnvironmentSdkPipelineOptions
     , environmentSdkPipelineOptions
     , espoAddtional
+
+    -- * FloatingPointMean
+    , FloatingPointMean
+    , floatingPointMean
+    , fpmCount
+    , fpmSum
 
     -- * LeaseWorkItemRequest
     , LeaseWorkItemRequest
@@ -354,6 +441,12 @@ module Network.Google.Dataflow.Types
     , asrFractionConsumed
     , asrPosition
 
+    -- * SplitInt64
+    , SplitInt64
+    , splitInt64
+    , siHighBits
+    , siLowBits
+
     -- * WorkerSettings
     , WorkerSettings
     , workerSettings
@@ -363,6 +456,11 @@ module Network.Google.Dataflow.Types
     , wsTempStoragePrefix
     , wsReportingEnabled
     , wsWorkerId
+
+    -- * GetDebugConfigResponse
+    , GetDebugConfigResponse
+    , getDebugConfigResponse
+    , gdcrConfig
 
     -- * WorkItemServiceStateHarnessData
     , WorkItemServiceStateHarnessData
@@ -380,6 +478,11 @@ module Network.Google.Dataflow.Types
     , workerMessageResponse
     , wmrWorkerHealthReportResponse
 
+    -- * CreateJobFromTemplateRequestParameters
+    , CreateJobFromTemplateRequestParameters
+    , createJobFromTemplateRequestParameters
+    , cjftrpAddtional
+
     -- * WorkItemServiceState
     , WorkItemServiceState
     , workItemServiceState
@@ -390,6 +493,7 @@ module Network.Google.Dataflow.Types
     , wissSuggestedStopPosition
     , wissLeaseExpireTime
     , wissSplitRequest
+    , wissMetricShortId
 
     -- * StreamingSetupTask
     , StreamingSetupTask
@@ -421,6 +525,12 @@ module Network.Google.Dataflow.Types
     , sinkCodec
     , scAddtional
 
+    -- * IntegerMean
+    , IntegerMean
+    , integerMean
+    , imCount
+    , imSum
+
     -- * WorkerHealthReportPodsItem
     , WorkerHealthReportPodsItem
     , workerHealthReportPodsItem
@@ -449,6 +559,14 @@ module Network.Google.Dataflow.Types
     , workerPoolPoolArgs
     , wppaAddtional
 
+    -- * CounterMetadata
+    , CounterMetadata
+    , counterMetadata
+    , cmKind
+    , cmDescription
+    , cmStandardUnits
+    , cmOtherUnits
+
     -- * SendWorkerMessagesResponse
     , SendWorkerMessagesResponse
     , sendWorkerMessagesResponse
@@ -459,6 +577,18 @@ module Network.Google.Dataflow.Types
     , streamingSideInputLocation
     , ssilTag
     , ssilStateFamily
+
+    -- * GetDebugConfigRequest
+    , GetDebugConfigRequest
+    , getDebugConfigRequest
+    , gdcrComponentId
+    , gdcrWorkerId
+
+    -- * CounterStructuredNameAndMetadata
+    , CounterStructuredNameAndMetadata
+    , counterStructuredNameAndMetadata
+    , csnamName
+    , csnamMetadata
 
     -- * StreamingComputationTask
     , StreamingComputationTask
@@ -510,6 +640,7 @@ module Network.Google.Dataflow.Types
     , jName
     , jTransformNameMApping
     , jId
+    , jLabels
     , jProjectId
     , jType
     , jCurrentStateTime
@@ -545,6 +676,7 @@ module Network.Google.Dataflow.Types
     , wpNumWorkers
     , wpNetwork
     , wpZone
+    , wpIPConfiguration
     , wpPackages
     , wpOnHostMaintenance
     , wpDiskSourceImage
@@ -651,7 +783,9 @@ module Network.Google.Dataflow.Types
     , pgbkiValueCombiningFn
     , pgbkiSideInputs
     , pgbkiInput
+    , pgbkiOriginalCombineValuesStepName
     , pgbkiInputElementCodec
+    , pgbkiOriginalCombineValuesInputStoreName
 
     -- * ParDoInstruction
     , ParDoInstruction
@@ -683,11 +817,24 @@ module Network.Google.Dataflow.Types
     , piName
     , piSystemName
     , piFlatten
+    , piOriginalName
 
     -- * SideInputInfoKind
     , SideInputInfoKind
     , sideInputInfoKind
     , siikAddtional
+
+    -- * StreamingConfigTask
+    , StreamingConfigTask
+    , streamingConfigTask
+    , sctUserStepToStateFamilyNameMap
+    , sctStreamingComputationConfigs
+
+    -- * MetricShortId
+    , MetricShortId
+    , metricShortId
+    , msiShortId
+    , msiMetricIndex
 
     -- * SendWorkerMessagesRequest
     , SendWorkerMessagesRequest
@@ -752,6 +899,11 @@ module Network.Google.Dataflow.Types
     , plTopic
     , plSubscription
 
+    -- * FloatingPointList
+    , FloatingPointList
+    , floatingPointList
+    , fplElements
+
     -- * InstructionInput
     , InstructionInput
     , instructionInput
@@ -767,6 +919,11 @@ module Network.Google.Dataflow.Types
     , smtSystemName
     , smtStageName
     , smtUserFn
+
+    -- * StreamingConfigTaskUserStepToStateFamilyNameMap
+    , StreamingConfigTaskUserStepToStateFamilyNameMap
+    , streamingConfigTaskUserStepToStateFamilyNameMap
+    , sctustsfnmAddtional
 
     -- * SourceOperationRequest
     , SourceOperationRequest
