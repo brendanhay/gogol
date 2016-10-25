@@ -22,7 +22,7 @@
 --
 -- Lists the existing groups.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.groups.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.groups.list@.
 module Network.Google.Resource.Monitoring.Projects.Groups.List
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type ProjectsGroupsListResource =
      "v3" :>
        Capture "name" Text :>
          "groups" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "childrenOfGroup" Text :>
                  QueryParam "pp" Bool :>
@@ -76,7 +76,7 @@ type ProjectsGroupsListResource =
 --
 -- /See:/ 'projectsGroupsList' smart constructor.
 data ProjectsGroupsList = ProjectsGroupsList'
-    { _pglXgafv              :: !(Maybe Text)
+    { _pglXgafv              :: !(Maybe Xgafv)
     , _pglUploadProtocol     :: !(Maybe Text)
     , _pglChildrenOfGroup    :: !(Maybe Text)
     , _pglPp                 :: !Bool
@@ -141,7 +141,7 @@ projectsGroupsList pPglName_ =
     }
 
 -- | V1 error format.
-pglXgafv :: Lens' ProjectsGroupsList (Maybe Text)
+pglXgafv :: Lens' ProjectsGroupsList (Maybe Xgafv)
 pglXgafv = lens _pglXgafv (\ s a -> s{_pglXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -150,10 +150,9 @@ pglUploadProtocol
   = lens _pglUploadProtocol
       (\ s a -> s{_pglUploadProtocol = a})
 
--- | A group name:
--- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. Returns
--- groups whose \`parentName\` field contains the group name. If no groups
--- have this parent, the results are empty.
+-- | A group name: \"projects\/{project_id_or_number}\/groups\/{group_id}\".
+-- Returns groups whose parentName field contains the group name. If no
+-- groups have this parent, the results are empty.
 pglChildrenOfGroup :: Lens' ProjectsGroupsList (Maybe Text)
 pglChildrenOfGroup
   = lens _pglChildrenOfGroup
@@ -163,10 +162,9 @@ pglChildrenOfGroup
 pglPp :: Lens' ProjectsGroupsList Bool
 pglPp = lens _pglPp (\ s a -> s{_pglPp = a})
 
--- | A group name:
--- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. Returns
--- the descendants of the specified group. This is a superset of the
--- results returned by the \`childrenOfGroup\` filter, and includes
+-- | A group name: \"projects\/{project_id_or_number}\/groups\/{group_id}\".
+-- Returns the descendants of the specified group. This is a superset of
+-- the results returned by the childrenOfGroup filter, and includes
 -- children-of-children, and so forth.
 pglDescendantsOfGroup :: Lens' ProjectsGroupsList (Maybe Text)
 pglDescendantsOfGroup
@@ -192,14 +190,13 @@ pglBearerToken
       (\ s a -> s{_pglBearerToken = a})
 
 -- | The project whose groups are to be listed. The format is
--- \`\"projects\/{project_id_or_number}\"\`.
+-- \"projects\/{project_id_or_number}\".
 pglName :: Lens' ProjectsGroupsList Text
 pglName = lens _pglName (\ s a -> s{_pglName = a})
 
--- | If this field is not empty then it must contain the \`nextPageToken\`
--- value returned by a previous call to this method. Using this field
--- causes the method to return additional results from the previous method
--- call.
+-- | If this field is not empty then it must contain the nextPageToken value
+-- returned by a previous call to this method. Using this field causes the
+-- method to return additional results from the previous method call.
 pglPageToken :: Lens' ProjectsGroupsList (Maybe Text)
 pglPageToken
   = lens _pglPageToken (\ s a -> s{_pglPageToken = a})
@@ -210,9 +207,8 @@ pglPageSize
   = lens _pglPageSize (\ s a -> s{_pglPageSize = a}) .
       mapping _Coerce
 
--- | A group name:
--- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. Returns
--- groups that are ancestors of the specified group. The groups are
+-- | A group name: \"projects\/{project_id_or_number}\/groups\/{group_id}\".
+-- Returns groups that are ancestors of the specified group. The groups are
 -- returned in order, starting with the immediate parent and ending with
 -- the most distant ancestor. If the specified group has no immediate
 -- parent, the results are empty.

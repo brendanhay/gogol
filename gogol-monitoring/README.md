@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Monitoring.
+A client library for the Google Stackdriver Monitoring.
 
 
 ## Contribute

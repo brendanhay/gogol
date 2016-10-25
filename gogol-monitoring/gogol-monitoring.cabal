@@ -1,6 +1,6 @@
 name:                  gogol-monitoring
 version:               0.1.0
-synopsis:              Google Monitoring SDK.
+synopsis:              Google Stackdriver Monitoring SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,14 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Manages your Stackdriver monitoring data and configurations. Projects
-    must be associated with a Stackdriver account, except for the following
-    methods:
-    [monitoredResourceDescriptors.list](v3\/projects.monitoredResourceDescriptors\/list),
-    [monitoredResourceDescriptors.get](v3\/projects.monitoredResourceDescriptors\/get),
-    [metricDescriptors.list](v3\/projects.metricDescriptors\/list),
-    [metricDescriptors.get](v3\/projects.metricDescriptors\/get), and
-    [timeSeries.list](v3\/projects.timeSeries\/list).
+    Manages your Stackdriver Monitoring data and configurations. Most
+    projects must be associated with a Stackdriver account, with a few
+    exceptions as noted on the individual method pages.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

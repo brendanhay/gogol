@@ -22,7 +22,7 @@
 --
 -- Lists the monitored resources that are members of a group.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.groups.members.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.groups.members.list@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Members.List
     (
     -- * REST Resource
@@ -57,8 +57,8 @@ type ProjectsGroupsMembersListResource =
      "v3" :>
        Capture "name" Text :>
          "members" :>
-           QueryParam "interval.startTime" Text :>
-             QueryParam "$.xgafv" Text :>
+           QueryParam "interval.startTime" DateTime' :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
@@ -66,7 +66,7 @@ type ProjectsGroupsMembersListResource =
                        QueryParam "bearer_token" Text :>
                          QueryParam "filter" Text :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "interval.endTime" Text :>
+                             QueryParam "interval.endTime" DateTime' :>
                                QueryParam "pageSize" (Textual Int32) :>
                                  QueryParam "callback" Text :>
                                    QueryParam "alt" AltJSON :>
@@ -76,8 +76,8 @@ type ProjectsGroupsMembersListResource =
 --
 -- /See:/ 'projectsGroupsMembersList' smart constructor.
 data ProjectsGroupsMembersList = ProjectsGroupsMembersList'
-    { _pgmlIntervalStartTime :: !(Maybe Text)
-    , _pgmlXgafv             :: !(Maybe Text)
+    { _pgmlIntervalStartTime :: !(Maybe DateTime')
+    , _pgmlXgafv             :: !(Maybe Xgafv)
     , _pgmlUploadProtocol    :: !(Maybe Text)
     , _pgmlPp                :: !Bool
     , _pgmlAccessToken       :: !(Maybe Text)
@@ -86,7 +86,7 @@ data ProjectsGroupsMembersList = ProjectsGroupsMembersList'
     , _pgmlName              :: !Text
     , _pgmlFilter            :: !(Maybe Text)
     , _pgmlPageToken         :: !(Maybe Text)
-    , _pgmlIntervalEndTime   :: !(Maybe Text)
+    , _pgmlIntervalEndTime   :: !(Maybe DateTime')
     , _pgmlPageSize          :: !(Maybe (Textual Int32))
     , _pgmlCallback          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -140,17 +140,17 @@ projectsGroupsMembersList pPgmlName_ =
     , _pgmlCallback = Nothing
     }
 
--- | If this value is omitted, the interval is a point in time, \`endTime\`.
--- If \`startTime\` is present, it must be earlier than (less than)
--- \`endTime\`. The interval begins after \`startTime\`—it does not include
--- \`startTime\`.
-pgmlIntervalStartTime :: Lens' ProjectsGroupsMembersList (Maybe Text)
+-- | Optional. The beginning of the time interval. The default value for the
+-- start time is the end time. The start time must not be later than the
+-- end time.
+pgmlIntervalStartTime :: Lens' ProjectsGroupsMembersList (Maybe UTCTime)
 pgmlIntervalStartTime
   = lens _pgmlIntervalStartTime
       (\ s a -> s{_pgmlIntervalStartTime = a})
+      . mapping _DateTime
 
 -- | V1 error format.
-pgmlXgafv :: Lens' ProjectsGroupsMembersList (Maybe Text)
+pgmlXgafv :: Lens' ProjectsGroupsMembersList (Maybe Xgafv)
 pgmlXgafv
   = lens _pgmlXgafv (\ s a -> s{_pgmlXgafv = a})
 
@@ -183,11 +183,11 @@ pgmlBearerToken
       (\ s a -> s{_pgmlBearerToken = a})
 
 -- | The group whose members are listed. The format is
--- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`.
+-- \"projects\/{project_id_or_number}\/groups\/{group_id}\".
 pgmlName :: Lens' ProjectsGroupsMembersList Text
 pgmlName = lens _pgmlName (\ s a -> s{_pgmlName = a})
 
--- | An optional [list filter](\/monitoring\/api\/learn_more#filtering)
+-- | An optional list filter (\/monitoring\/api\/learn_more#filtering)
 -- describing the members to be returned. The filter may reference the
 -- type, labels, and metadata of monitored resources that comprise the
 -- group. For example, to return only resources representing Compute Engine
@@ -196,20 +196,20 @@ pgmlFilter :: Lens' ProjectsGroupsMembersList (Maybe Text)
 pgmlFilter
   = lens _pgmlFilter (\ s a -> s{_pgmlFilter = a})
 
--- | If this field is not empty then it must contain the \`nextPageToken\`
--- value returned by a previous call to this method. Using this field
--- causes the method to return additional results from the previous method
--- call.
+-- | If this field is not empty then it must contain the nextPageToken value
+-- returned by a previous call to this method. Using this field causes the
+-- method to return additional results from the previous method call.
 pgmlPageToken :: Lens' ProjectsGroupsMembersList (Maybe Text)
 pgmlPageToken
   = lens _pgmlPageToken
       (\ s a -> s{_pgmlPageToken = a})
 
--- | Required. The end of the interval. The interval includes this time.
-pgmlIntervalEndTime :: Lens' ProjectsGroupsMembersList (Maybe Text)
+-- | Required. The end of the time interval.
+pgmlIntervalEndTime :: Lens' ProjectsGroupsMembersList (Maybe UTCTime)
 pgmlIntervalEndTime
   = lens _pgmlIntervalEndTime
       (\ s a -> s{_pgmlIntervalEndTime = a})
+      . mapping _DateTime
 
 -- | A positive number that is the maximum number of results to return.
 pgmlPageSize :: Lens' ProjectsGroupsMembersList (Maybe Int32)

@@ -13,16 +13,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages your Stackdriver monitoring data and configurations. Projects
--- must be associated with a Stackdriver account, except for the following
--- methods:
--- [monitoredResourceDescriptors.list](v3\/projects.monitoredResourceDescriptors\/list),
--- [monitoredResourceDescriptors.get](v3\/projects.monitoredResourceDescriptors\/get),
--- [metricDescriptors.list](v3\/projects.metricDescriptors\/list),
--- [metricDescriptors.get](v3\/projects.metricDescriptors\/get), and
--- [timeSeries.list](v3\/projects.timeSeries\/list).
+-- Manages your Stackdriver Monitoring data and configurations. Most
+-- projects must be associated with a Stackdriver account, with a few
+-- exceptions as noted on the individual method pages.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference>
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference>
 module Network.Google.Monitoring
     (
     -- * Service Configuration
@@ -86,6 +81,9 @@ module Network.Google.Monitoring
 
     -- * Types
 
+    -- ** MetricDescriptorValueType
+    , MetricDescriptorValueType (..)
+
     -- ** MonitoredResourceDescriptor
     , MonitoredResourceDescriptor
     , monitoredResourceDescriptor
@@ -94,6 +92,9 @@ module Network.Google.Monitoring
     , mrdLabels
     , mrdType
     , mrdDescription
+
+    -- ** CollectdValueDataSourceType
+    , CollectdValueDataSourceType (..)
 
     -- ** ListTimeSeriesResponse
     , ListTimeSeriesResponse
@@ -165,6 +166,9 @@ module Network.Google.Monitoring
     , fNumber
     , fTypeURL
 
+    -- ** FieldKind
+    , FieldKind (..)
+
     -- ** Empty
     , Empty
     , empty
@@ -197,6 +201,9 @@ module Network.Google.Monitoring
     , lmrdrNextPageToken
     , lmrdrResourceDescriptors
 
+    -- ** LabelDescriptorValueType
+    , LabelDescriptorValueType (..)
+
     -- ** Explicit
     , Explicit
     , explicit
@@ -225,6 +232,9 @@ module Network.Google.Monitoring
     , cctsrCollectdPayloads
     , cctsrResource
     , cctsrCollectdVersion
+
+    -- ** TypeSyntax
+    , TypeSyntax (..)
 
     -- ** Point
     , Point
@@ -269,11 +279,17 @@ module Network.Google.Monitoring
     , mrLabels
     , mrType
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** TimeInterval
     , TimeInterval
     , timeInterval
     , tiStartTime
     , tiEndTime
+
+    -- ** TimeSeriesMetricKind
+    , TimeSeriesMetricKind (..)
 
     -- ** ListGroupMembersResponse
     , ListGroupMembersResponse
@@ -289,12 +305,18 @@ module Network.Google.Monitoring
     , ldValueType
     , ldDescription
 
+    -- ** TimeSeriesValueType
+    , TimeSeriesValueType (..)
+
     -- ** Linear
     , Linear
     , linear
     , lOffSet
     , lWidth
     , lNumFiniteBuckets
+
+    -- ** FieldCardinality
+    , FieldCardinality (..)
 
     -- ** Type
     , Type
@@ -305,6 +327,9 @@ module Network.Google.Monitoring
     , tOptions
     , tFields
     , tSyntax
+
+    -- ** MetricDescriptorMetricKind
+    , MetricDescriptorMetricKind (..)
 
     -- ** Option
     , Option
@@ -351,7 +376,7 @@ import           Network.Google.Resource.Monitoring.Projects.TimeSeries.List
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Monitoring API service.
+-- | Represents the entirety of the methods and resources available for the Stackdriver Monitoring API service.
 type MonitoringAPI =
      ProjectsMetricDescriptorsListResource :<|>
        ProjectsMetricDescriptorsGetResource
