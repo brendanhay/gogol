@@ -68,7 +68,7 @@ import           Gen.Types.Id
 import           Gen.Types.Map
 import           Gen.Types.NS
 import           Gen.Types.Schema
-import           GHC.TypeLits
+import           GHC.TypeLits               (Symbol)
 import           Prelude                    hiding (Enum)
 import           Text.EDE                   (Template)
 
