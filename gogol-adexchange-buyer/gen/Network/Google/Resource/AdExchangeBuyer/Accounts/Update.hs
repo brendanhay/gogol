@@ -34,6 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Update
 
     -- * Request Lenses
     , auPayload
+    , auConfirmUnsafeAccountChange
     , auId
     ) where
 
@@ -47,15 +48,17 @@ type AccountsUpdateResource =
        "v1.4" :>
          "accounts" :>
            Capture "id" (Textual Int32) :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Account :> Put '[JSON] Account
+             QueryParam "confirmUnsafeAccountChange" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Account :> Put '[JSON] Account
 
 -- | Updates an existing account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
 data AccountsUpdate = AccountsUpdate'
-    { _auPayload :: !Account
-    , _auId      :: !(Textual Int32)
+    { _auPayload                    :: !Account
+    , _auConfirmUnsafeAccountChange :: !(Maybe Bool)
+    , _auId                         :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
@@ -63,6 +66,8 @@ data AccountsUpdate = AccountsUpdate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'auPayload'
+--
+-- * 'auConfirmUnsafeAccountChange'
 --
 -- * 'auId'
 accountsUpdate
@@ -72,6 +77,7 @@ accountsUpdate
 accountsUpdate pAuPayload_ pAuId_ =
     AccountsUpdate'
     { _auPayload = pAuPayload_
+    , _auConfirmUnsafeAccountChange = Nothing
     , _auId = _Coerce # pAuId_
     }
 
@@ -79,6 +85,12 @@ accountsUpdate pAuPayload_ pAuId_ =
 auPayload :: Lens' AccountsUpdate Account
 auPayload
   = lens _auPayload (\ s a -> s{_auPayload = a})
+
+-- | Confirmation for erasing bidder and cookie matching urls.
+auConfirmUnsafeAccountChange :: Lens' AccountsUpdate (Maybe Bool)
+auConfirmUnsafeAccountChange
+  = lens _auConfirmUnsafeAccountChange
+      (\ s a -> s{_auConfirmUnsafeAccountChange = a})
 
 -- | The account id
 auId :: Lens' AccountsUpdate Int32
@@ -89,7 +101,9 @@ instance GoogleRequest AccountsUpdate where
         type Scopes AccountsUpdate =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient AccountsUpdate'{..}
-          = go _auId (Just AltJSON) _auPayload
+          = go _auId _auConfirmUnsafeAccountChange
+              (Just AltJSON)
+              _auPayload
               adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy AccountsUpdateResource)

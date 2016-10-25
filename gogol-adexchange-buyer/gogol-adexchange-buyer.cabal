@@ -50,6 +50,7 @@ library
         , Network.Google.Resource.AdExchangeBuyer.Creatives.Get
         , Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
         , Network.Google.Resource.AdExchangeBuyer.Creatives.List
+        , Network.Google.Resource.AdExchangeBuyer.Creatives.ListDeals
         , Network.Google.Resource.AdExchangeBuyer.Creatives.RemoveDeal
         , Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
         , Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
