@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of platform types.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.platformTypes.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.platformTypes.list@.
 module Network.Google.Resource.DFAReporting.PlatformTypes.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'PlatformTypesList' request conforms to.
 type PlatformTypesListResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "platformTypes" :>

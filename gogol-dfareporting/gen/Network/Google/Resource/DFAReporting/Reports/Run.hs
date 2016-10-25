@@ -22,7 +22,7 @@
 --
 -- Runs a report.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.run@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.run@.
 module Network.Google.Resource.DFAReporting.Reports.Run
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsRun' request conforms to.
 type ReportsRunResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>

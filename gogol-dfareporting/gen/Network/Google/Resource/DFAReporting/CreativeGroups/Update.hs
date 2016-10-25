@@ -22,7 +22,7 @@
 --
 -- Updates an existing creative group.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeGroups.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeGroups.update@.
 module Network.Google.Resource.DFAReporting.CreativeGroups.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsUpdate' request conforms to.
 type CreativeGroupsUpdateResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>

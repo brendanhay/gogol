@@ -22,7 +22,7 @@
 --
 -- Gets one connection type by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.connectionTypes.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.connectionTypes.get@.
 module Network.Google.Resource.DFAReporting.ConnectionTypes.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ConnectionTypesGet' request conforms to.
 type ConnectionTypesGetResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "connectionTypes" :>

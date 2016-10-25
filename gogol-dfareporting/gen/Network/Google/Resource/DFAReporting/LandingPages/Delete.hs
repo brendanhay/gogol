@@ -22,7 +22,7 @@
 --
 -- Deletes an existing campaign landing page.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.landingPages.delete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.landingPages.delete@.
 module Network.Google.Resource.DFAReporting.LandingPages.Delete
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'LandingPagesDelete' request conforms to.
 type LandingPagesDeleteResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>

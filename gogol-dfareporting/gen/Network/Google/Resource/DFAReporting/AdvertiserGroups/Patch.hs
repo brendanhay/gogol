@@ -23,7 +23,7 @@
 -- Updates an existing advertiser group. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertiserGroups.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertiserGroups.patch@.
 module Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsPatch' request conforms to.
 type AdvertiserGroupsPatchResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>

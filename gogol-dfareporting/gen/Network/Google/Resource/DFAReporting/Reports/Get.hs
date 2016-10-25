@@ -22,7 +22,7 @@
 --
 -- Retrieves a report by its ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.get@.
 module Network.Google.Resource.DFAReporting.Reports.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ReportsGet' request conforms to.
 type ReportsGetResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>

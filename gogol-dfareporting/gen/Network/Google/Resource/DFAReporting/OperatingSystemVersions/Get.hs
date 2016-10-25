@@ -22,7 +22,7 @@
 --
 -- Gets one operating system version by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.operatingSystemVersions.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.operatingSystemVersions.get@.
 module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'OperatingSystemVersionsGet' request conforms to.
 type OperatingSystemVersionsGetResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystemVersions" :>

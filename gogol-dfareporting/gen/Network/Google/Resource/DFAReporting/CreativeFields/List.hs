@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of creative fields, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFields.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFields.list@.
 module Network.Google.Resource.DFAReporting.CreativeFields.List
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldsList' request conforms to.
 type CreativeFieldsListResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>

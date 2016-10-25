@@ -26,7 +26,7 @@
 -- advertiser, out of which a maximum of 20 keys can be assigned per ad,
 -- creative, or placement.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.dynamicTargetingKeys.insert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.dynamicTargetingKeys.insert@.
 module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Insert
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'DynamicTargetingKeysInsert' request conforms to.
 type DynamicTargetingKeysInsertResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dynamicTargetingKeys" :>

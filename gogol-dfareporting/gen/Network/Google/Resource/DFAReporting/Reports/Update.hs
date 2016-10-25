@@ -22,7 +22,7 @@
 --
 -- Updates a report.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.update@.
 module Network.Google.Resource.DFAReporting.Reports.Update
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsUpdate' request conforms to.
 type ReportsUpdateResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>

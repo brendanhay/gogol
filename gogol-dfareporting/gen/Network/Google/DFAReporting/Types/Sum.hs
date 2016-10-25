@@ -178,6 +178,33 @@ instance FromJSON CreativeFieldsListSortOrder where
 instance ToJSON CreativeFieldsListSortOrder where
     toJSON = toJSONText
 
+-- | Order of sorted results, default is ASCENDING.
+data TargetingTemplatesListSortOrder
+    = TTLSOAscending
+      -- ^ @ASCENDING@
+    | TTLSODescending
+      -- ^ @DESCENDING@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TargetingTemplatesListSortOrder
+
+instance FromHttpApiData TargetingTemplatesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right TTLSOAscending
+        "DESCENDING" -> Right TTLSODescending
+        x -> Left ("Unable to parse TargetingTemplatesListSortOrder from: " <> x)
+
+instance ToHttpApiData TargetingTemplatesListSortOrder where
+    toQueryParam = \case
+        TTLSOAscending -> "ASCENDING"
+        TTLSODescending -> "DESCENDING"
+
+instance FromJSON TargetingTemplatesListSortOrder where
+    parseJSON = parseJSONText "TargetingTemplatesListSortOrder"
+
+instance ToJSON TargetingTemplatesListSortOrder where
+    toJSON = toJSONText
+
 -- | Field by which to sort the list.
 data UserRolesListSortField
     = URLSFID
@@ -1460,6 +1487,8 @@ data CustomFloodlightVariableType
       -- ^ @U1@
     | U10
       -- ^ @U10@
+    | U100
+      -- ^ @U100@
     | U11
       -- ^ @U11@
     | U12
@@ -1482,20 +1511,178 @@ data CustomFloodlightVariableType
       -- ^ @U2@
     | U20
       -- ^ @U20@
+    | U21
+      -- ^ @U21@
+    | U22
+      -- ^ @U22@
+    | U23
+      -- ^ @U23@
+    | U24
+      -- ^ @U24@
+    | U25
+      -- ^ @U25@
+    | U26
+      -- ^ @U26@
+    | U27
+      -- ^ @U27@
+    | U28
+      -- ^ @U28@
+    | U29
+      -- ^ @U29@
     | U3
       -- ^ @U3@
+    | U30
+      -- ^ @U30@
+    | U31
+      -- ^ @U31@
+    | U32
+      -- ^ @U32@
+    | U33
+      -- ^ @U33@
+    | U34
+      -- ^ @U34@
+    | U35
+      -- ^ @U35@
+    | U36
+      -- ^ @U36@
+    | U37
+      -- ^ @U37@
+    | U38
+      -- ^ @U38@
+    | U39
+      -- ^ @U39@
     | U4
       -- ^ @U4@
+    | U40
+      -- ^ @U40@
+    | U41
+      -- ^ @U41@
+    | U42
+      -- ^ @U42@
+    | U43
+      -- ^ @U43@
+    | U44
+      -- ^ @U44@
+    | U45
+      -- ^ @U45@
+    | U46
+      -- ^ @U46@
+    | U47
+      -- ^ @U47@
+    | U48
+      -- ^ @U48@
+    | U49
+      -- ^ @U49@
     | U5
       -- ^ @U5@
+    | U50
+      -- ^ @U50@
+    | U51
+      -- ^ @U51@
+    | U52
+      -- ^ @U52@
+    | U53
+      -- ^ @U53@
+    | U54
+      -- ^ @U54@
+    | U55
+      -- ^ @U55@
+    | U56
+      -- ^ @U56@
+    | U57
+      -- ^ @U57@
+    | U58
+      -- ^ @U58@
+    | U59
+      -- ^ @U59@
     | U6
       -- ^ @U6@
+    | U60
+      -- ^ @U60@
+    | U61
+      -- ^ @U61@
+    | U62
+      -- ^ @U62@
+    | U63
+      -- ^ @U63@
+    | U64
+      -- ^ @U64@
+    | U65
+      -- ^ @U65@
+    | U66
+      -- ^ @U66@
+    | U67
+      -- ^ @U67@
+    | U68
+      -- ^ @U68@
+    | U69
+      -- ^ @U69@
     | U7
       -- ^ @U7@
+    | U70
+      -- ^ @U70@
+    | U71
+      -- ^ @U71@
+    | U72
+      -- ^ @U72@
+    | U73
+      -- ^ @U73@
+    | U74
+      -- ^ @U74@
+    | U75
+      -- ^ @U75@
+    | U76
+      -- ^ @U76@
+    | U77
+      -- ^ @U77@
+    | U78
+      -- ^ @U78@
+    | U79
+      -- ^ @U79@
     | U8
       -- ^ @U8@
+    | U80
+      -- ^ @U80@
+    | U81
+      -- ^ @U81@
+    | U82
+      -- ^ @U82@
+    | U83
+      -- ^ @U83@
+    | U84
+      -- ^ @U84@
+    | U85
+      -- ^ @U85@
+    | U86
+      -- ^ @U86@
+    | U87
+      -- ^ @U87@
+    | U88
+      -- ^ @U88@
+    | U89
+      -- ^ @U89@
     | U9
       -- ^ @U9@
+    | U90
+      -- ^ @U90@
+    | U91
+      -- ^ @U91@
+    | U92
+      -- ^ @U92@
+    | U93
+      -- ^ @U93@
+    | U94
+      -- ^ @U94@
+    | U95
+      -- ^ @U95@
+    | U96
+      -- ^ @U96@
+    | U97
+      -- ^ @U97@
+    | U98
+      -- ^ @U98@
+    | U99
+      -- ^ @U99@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CustomFloodlightVariableType
@@ -1504,6 +1691,7 @@ instance FromHttpApiData CustomFloodlightVariableType where
     parseQueryParam = \case
         "U1" -> Right U1
         "U10" -> Right U10
+        "U100" -> Right U100
         "U11" -> Right U11
         "U12" -> Right U12
         "U13" -> Right U13
@@ -1515,19 +1703,99 @@ instance FromHttpApiData CustomFloodlightVariableType where
         "U19" -> Right U19
         "U2" -> Right U2
         "U20" -> Right U20
+        "U21" -> Right U21
+        "U22" -> Right U22
+        "U23" -> Right U23
+        "U24" -> Right U24
+        "U25" -> Right U25
+        "U26" -> Right U26
+        "U27" -> Right U27
+        "U28" -> Right U28
+        "U29" -> Right U29
         "U3" -> Right U3
+        "U30" -> Right U30
+        "U31" -> Right U31
+        "U32" -> Right U32
+        "U33" -> Right U33
+        "U34" -> Right U34
+        "U35" -> Right U35
+        "U36" -> Right U36
+        "U37" -> Right U37
+        "U38" -> Right U38
+        "U39" -> Right U39
         "U4" -> Right U4
+        "U40" -> Right U40
+        "U41" -> Right U41
+        "U42" -> Right U42
+        "U43" -> Right U43
+        "U44" -> Right U44
+        "U45" -> Right U45
+        "U46" -> Right U46
+        "U47" -> Right U47
+        "U48" -> Right U48
+        "U49" -> Right U49
         "U5" -> Right U5
+        "U50" -> Right U50
+        "U51" -> Right U51
+        "U52" -> Right U52
+        "U53" -> Right U53
+        "U54" -> Right U54
+        "U55" -> Right U55
+        "U56" -> Right U56
+        "U57" -> Right U57
+        "U58" -> Right U58
+        "U59" -> Right U59
         "U6" -> Right U6
+        "U60" -> Right U60
+        "U61" -> Right U61
+        "U62" -> Right U62
+        "U63" -> Right U63
+        "U64" -> Right U64
+        "U65" -> Right U65
+        "U66" -> Right U66
+        "U67" -> Right U67
+        "U68" -> Right U68
+        "U69" -> Right U69
         "U7" -> Right U7
+        "U70" -> Right U70
+        "U71" -> Right U71
+        "U72" -> Right U72
+        "U73" -> Right U73
+        "U74" -> Right U74
+        "U75" -> Right U75
+        "U76" -> Right U76
+        "U77" -> Right U77
+        "U78" -> Right U78
+        "U79" -> Right U79
         "U8" -> Right U8
+        "U80" -> Right U80
+        "U81" -> Right U81
+        "U82" -> Right U82
+        "U83" -> Right U83
+        "U84" -> Right U84
+        "U85" -> Right U85
+        "U86" -> Right U86
+        "U87" -> Right U87
+        "U88" -> Right U88
+        "U89" -> Right U89
         "U9" -> Right U9
+        "U90" -> Right U90
+        "U91" -> Right U91
+        "U92" -> Right U92
+        "U93" -> Right U93
+        "U94" -> Right U94
+        "U95" -> Right U95
+        "U96" -> Right U96
+        "U97" -> Right U97
+        "U98" -> Right U98
+        "U99" -> Right U99
         x -> Left ("Unable to parse CustomFloodlightVariableType from: " <> x)
 
 instance ToHttpApiData CustomFloodlightVariableType where
     toQueryParam = \case
         U1 -> "U1"
         U10 -> "U10"
+        U100 -> "U100"
         U11 -> "U11"
         U12 -> "U12"
         U13 -> "U13"
@@ -1539,13 +1807,92 @@ instance ToHttpApiData CustomFloodlightVariableType where
         U19 -> "U19"
         U2 -> "U2"
         U20 -> "U20"
+        U21 -> "U21"
+        U22 -> "U22"
+        U23 -> "U23"
+        U24 -> "U24"
+        U25 -> "U25"
+        U26 -> "U26"
+        U27 -> "U27"
+        U28 -> "U28"
+        U29 -> "U29"
         U3 -> "U3"
+        U30 -> "U30"
+        U31 -> "U31"
+        U32 -> "U32"
+        U33 -> "U33"
+        U34 -> "U34"
+        U35 -> "U35"
+        U36 -> "U36"
+        U37 -> "U37"
+        U38 -> "U38"
+        U39 -> "U39"
         U4 -> "U4"
+        U40 -> "U40"
+        U41 -> "U41"
+        U42 -> "U42"
+        U43 -> "U43"
+        U44 -> "U44"
+        U45 -> "U45"
+        U46 -> "U46"
+        U47 -> "U47"
+        U48 -> "U48"
+        U49 -> "U49"
         U5 -> "U5"
+        U50 -> "U50"
+        U51 -> "U51"
+        U52 -> "U52"
+        U53 -> "U53"
+        U54 -> "U54"
+        U55 -> "U55"
+        U56 -> "U56"
+        U57 -> "U57"
+        U58 -> "U58"
+        U59 -> "U59"
         U6 -> "U6"
+        U60 -> "U60"
+        U61 -> "U61"
+        U62 -> "U62"
+        U63 -> "U63"
+        U64 -> "U64"
+        U65 -> "U65"
+        U66 -> "U66"
+        U67 -> "U67"
+        U68 -> "U68"
+        U69 -> "U69"
         U7 -> "U7"
+        U70 -> "U70"
+        U71 -> "U71"
+        U72 -> "U72"
+        U73 -> "U73"
+        U74 -> "U74"
+        U75 -> "U75"
+        U76 -> "U76"
+        U77 -> "U77"
+        U78 -> "U78"
+        U79 -> "U79"
         U8 -> "U8"
+        U80 -> "U80"
+        U81 -> "U81"
+        U82 -> "U82"
+        U83 -> "U83"
+        U84 -> "U84"
+        U85 -> "U85"
+        U86 -> "U86"
+        U87 -> "U87"
+        U88 -> "U88"
+        U89 -> "U89"
         U9 -> "U9"
+        U90 -> "U90"
+        U91 -> "U91"
+        U92 -> "U92"
+        U93 -> "U93"
+        U94 -> "U94"
+        U95 -> "U95"
+        U96 -> "U96"
+        U97 -> "U97"
+        U98 -> "U98"
+        U99 -> "U99"
 
 instance FromJSON CustomFloodlightVariableType where
     parseJSON = parseJSONText "CustomFloodlightVariableType"
@@ -1695,6 +2042,8 @@ data PricingSchedulePricingType
       -- ^ @PRICING_TYPE_CPC@
     | PricingTypeCpm
       -- ^ @PRICING_TYPE_CPM@
+    | PricingTypeCpmActiveview
+      -- ^ @PRICING_TYPE_CPM_ACTIVEVIEW@
     | PricingTypeFlatRateClicks
       -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
     | PricingTypeFlatRateImpressions
@@ -1708,6 +2057,7 @@ instance FromHttpApiData PricingSchedulePricingType where
         "PRICING_TYPE_CPA" -> Right PricingTypeCpa
         "PRICING_TYPE_CPC" -> Right PricingTypeCpc
         "PRICING_TYPE_CPM" -> Right PricingTypeCpm
+        "PRICING_TYPE_CPM_ACTIVEVIEW" -> Right PricingTypeCpmActiveview
         "PRICING_TYPE_FLAT_RATE_CLICKS" -> Right PricingTypeFlatRateClicks
         "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Right PricingTypeFlatRateImpressions
         x -> Left ("Unable to parse PricingSchedulePricingType from: " <> x)
@@ -1717,6 +2067,7 @@ instance ToHttpApiData PricingSchedulePricingType where
         PricingTypeCpa -> "PRICING_TYPE_CPA"
         PricingTypeCpc -> "PRICING_TYPE_CPC"
         PricingTypeCpm -> "PRICING_TYPE_CPM"
+        PricingTypeCpmActiveview -> "PRICING_TYPE_CPM_ACTIVEVIEW"
         PricingTypeFlatRateClicks -> "PRICING_TYPE_FLAT_RATE_CLICKS"
         PricingTypeFlatRateImpressions -> "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
 
@@ -2253,6 +2604,33 @@ instance ToJSON AdvertisersListSortOrder where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
+data TargetingTemplatesListSortField
+    = TTLSFID
+      -- ^ @ID@
+    | TTLSFName
+      -- ^ @NAME@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TargetingTemplatesListSortField
+
+instance FromHttpApiData TargetingTemplatesListSortField where
+    parseQueryParam = \case
+        "ID" -> Right TTLSFID
+        "NAME" -> Right TTLSFName
+        x -> Left ("Unable to parse TargetingTemplatesListSortField from: " <> x)
+
+instance ToHttpApiData TargetingTemplatesListSortField where
+    toQueryParam = \case
+        TTLSFID -> "ID"
+        TTLSFName -> "NAME"
+
+instance FromJSON TargetingTemplatesListSortField where
+    parseJSON = parseJSONText "TargetingTemplatesListSortField"
+
+instance ToJSON TargetingTemplatesListSortField where
+    toJSON = toJSONText
+
+-- | Field by which to sort the list.
 data CreativeFieldsListSortField
     = CFLSFID
       -- ^ @ID@
@@ -2285,6 +2663,8 @@ data UserDefinedVariableConfigurationVariableType
       -- ^ @U1@
     | UDVCVTU10
       -- ^ @U10@
+    | UDVCVTU100
+      -- ^ @U100@
     | UDVCVTU11
       -- ^ @U11@
     | UDVCVTU12
@@ -2307,20 +2687,178 @@ data UserDefinedVariableConfigurationVariableType
       -- ^ @U2@
     | UDVCVTU20
       -- ^ @U20@
+    | UDVCVTU21
+      -- ^ @U21@
+    | UDVCVTU22
+      -- ^ @U22@
+    | UDVCVTU23
+      -- ^ @U23@
+    | UDVCVTU24
+      -- ^ @U24@
+    | UDVCVTU25
+      -- ^ @U25@
+    | UDVCVTU26
+      -- ^ @U26@
+    | UDVCVTU27
+      -- ^ @U27@
+    | UDVCVTU28
+      -- ^ @U28@
+    | UDVCVTU29
+      -- ^ @U29@
     | UDVCVTU3
       -- ^ @U3@
+    | UDVCVTU30
+      -- ^ @U30@
+    | UDVCVTU31
+      -- ^ @U31@
+    | UDVCVTU32
+      -- ^ @U32@
+    | UDVCVTU33
+      -- ^ @U33@
+    | UDVCVTU34
+      -- ^ @U34@
+    | UDVCVTU35
+      -- ^ @U35@
+    | UDVCVTU36
+      -- ^ @U36@
+    | UDVCVTU37
+      -- ^ @U37@
+    | UDVCVTU38
+      -- ^ @U38@
+    | UDVCVTU39
+      -- ^ @U39@
     | UDVCVTU4
       -- ^ @U4@
+    | UDVCVTU40
+      -- ^ @U40@
+    | UDVCVTU41
+      -- ^ @U41@
+    | UDVCVTU42
+      -- ^ @U42@
+    | UDVCVTU43
+      -- ^ @U43@
+    | UDVCVTU44
+      -- ^ @U44@
+    | UDVCVTU45
+      -- ^ @U45@
+    | UDVCVTU46
+      -- ^ @U46@
+    | UDVCVTU47
+      -- ^ @U47@
+    | UDVCVTU48
+      -- ^ @U48@
+    | UDVCVTU49
+      -- ^ @U49@
     | UDVCVTU5
       -- ^ @U5@
+    | UDVCVTU50
+      -- ^ @U50@
+    | UDVCVTU51
+      -- ^ @U51@
+    | UDVCVTU52
+      -- ^ @U52@
+    | UDVCVTU53
+      -- ^ @U53@
+    | UDVCVTU54
+      -- ^ @U54@
+    | UDVCVTU55
+      -- ^ @U55@
+    | UDVCVTU56
+      -- ^ @U56@
+    | UDVCVTU57
+      -- ^ @U57@
+    | UDVCVTU58
+      -- ^ @U58@
+    | UDVCVTU59
+      -- ^ @U59@
     | UDVCVTU6
       -- ^ @U6@
+    | UDVCVTU60
+      -- ^ @U60@
+    | UDVCVTU61
+      -- ^ @U61@
+    | UDVCVTU62
+      -- ^ @U62@
+    | UDVCVTU63
+      -- ^ @U63@
+    | UDVCVTU64
+      -- ^ @U64@
+    | UDVCVTU65
+      -- ^ @U65@
+    | UDVCVTU66
+      -- ^ @U66@
+    | UDVCVTU67
+      -- ^ @U67@
+    | UDVCVTU68
+      -- ^ @U68@
+    | UDVCVTU69
+      -- ^ @U69@
     | UDVCVTU7
       -- ^ @U7@
+    | UDVCVTU70
+      -- ^ @U70@
+    | UDVCVTU71
+      -- ^ @U71@
+    | UDVCVTU72
+      -- ^ @U72@
+    | UDVCVTU73
+      -- ^ @U73@
+    | UDVCVTU74
+      -- ^ @U74@
+    | UDVCVTU75
+      -- ^ @U75@
+    | UDVCVTU76
+      -- ^ @U76@
+    | UDVCVTU77
+      -- ^ @U77@
+    | UDVCVTU78
+      -- ^ @U78@
+    | UDVCVTU79
+      -- ^ @U79@
     | UDVCVTU8
       -- ^ @U8@
+    | UDVCVTU80
+      -- ^ @U80@
+    | UDVCVTU81
+      -- ^ @U81@
+    | UDVCVTU82
+      -- ^ @U82@
+    | UDVCVTU83
+      -- ^ @U83@
+    | UDVCVTU84
+      -- ^ @U84@
+    | UDVCVTU85
+      -- ^ @U85@
+    | UDVCVTU86
+      -- ^ @U86@
+    | UDVCVTU87
+      -- ^ @U87@
+    | UDVCVTU88
+      -- ^ @U88@
+    | UDVCVTU89
+      -- ^ @U89@
     | UDVCVTU9
       -- ^ @U9@
+    | UDVCVTU90
+      -- ^ @U90@
+    | UDVCVTU91
+      -- ^ @U91@
+    | UDVCVTU92
+      -- ^ @U92@
+    | UDVCVTU93
+      -- ^ @U93@
+    | UDVCVTU94
+      -- ^ @U94@
+    | UDVCVTU95
+      -- ^ @U95@
+    | UDVCVTU96
+      -- ^ @U96@
+    | UDVCVTU97
+      -- ^ @U97@
+    | UDVCVTU98
+      -- ^ @U98@
+    | UDVCVTU99
+      -- ^ @U99@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserDefinedVariableConfigurationVariableType
@@ -2329,6 +2867,7 @@ instance FromHttpApiData UserDefinedVariableConfigurationVariableType where
     parseQueryParam = \case
         "U1" -> Right UDVCVTU1
         "U10" -> Right UDVCVTU10
+        "U100" -> Right UDVCVTU100
         "U11" -> Right UDVCVTU11
         "U12" -> Right UDVCVTU12
         "U13" -> Right UDVCVTU13
@@ -2340,19 +2879,99 @@ instance FromHttpApiData UserDefinedVariableConfigurationVariableType where
         "U19" -> Right UDVCVTU19
         "U2" -> Right UDVCVTU2
         "U20" -> Right UDVCVTU20
+        "U21" -> Right UDVCVTU21
+        "U22" -> Right UDVCVTU22
+        "U23" -> Right UDVCVTU23
+        "U24" -> Right UDVCVTU24
+        "U25" -> Right UDVCVTU25
+        "U26" -> Right UDVCVTU26
+        "U27" -> Right UDVCVTU27
+        "U28" -> Right UDVCVTU28
+        "U29" -> Right UDVCVTU29
         "U3" -> Right UDVCVTU3
+        "U30" -> Right UDVCVTU30
+        "U31" -> Right UDVCVTU31
+        "U32" -> Right UDVCVTU32
+        "U33" -> Right UDVCVTU33
+        "U34" -> Right UDVCVTU34
+        "U35" -> Right UDVCVTU35
+        "U36" -> Right UDVCVTU36
+        "U37" -> Right UDVCVTU37
+        "U38" -> Right UDVCVTU38
+        "U39" -> Right UDVCVTU39
         "U4" -> Right UDVCVTU4
+        "U40" -> Right UDVCVTU40
+        "U41" -> Right UDVCVTU41
+        "U42" -> Right UDVCVTU42
+        "U43" -> Right UDVCVTU43
+        "U44" -> Right UDVCVTU44
+        "U45" -> Right UDVCVTU45
+        "U46" -> Right UDVCVTU46
+        "U47" -> Right UDVCVTU47
+        "U48" -> Right UDVCVTU48
+        "U49" -> Right UDVCVTU49
         "U5" -> Right UDVCVTU5
+        "U50" -> Right UDVCVTU50
+        "U51" -> Right UDVCVTU51
+        "U52" -> Right UDVCVTU52
+        "U53" -> Right UDVCVTU53
+        "U54" -> Right UDVCVTU54
+        "U55" -> Right UDVCVTU55
+        "U56" -> Right UDVCVTU56
+        "U57" -> Right UDVCVTU57
+        "U58" -> Right UDVCVTU58
+        "U59" -> Right UDVCVTU59
         "U6" -> Right UDVCVTU6
+        "U60" -> Right UDVCVTU60
+        "U61" -> Right UDVCVTU61
+        "U62" -> Right UDVCVTU62
+        "U63" -> Right UDVCVTU63
+        "U64" -> Right UDVCVTU64
+        "U65" -> Right UDVCVTU65
+        "U66" -> Right UDVCVTU66
+        "U67" -> Right UDVCVTU67
+        "U68" -> Right UDVCVTU68
+        "U69" -> Right UDVCVTU69
         "U7" -> Right UDVCVTU7
+        "U70" -> Right UDVCVTU70
+        "U71" -> Right UDVCVTU71
+        "U72" -> Right UDVCVTU72
+        "U73" -> Right UDVCVTU73
+        "U74" -> Right UDVCVTU74
+        "U75" -> Right UDVCVTU75
+        "U76" -> Right UDVCVTU76
+        "U77" -> Right UDVCVTU77
+        "U78" -> Right UDVCVTU78
+        "U79" -> Right UDVCVTU79
         "U8" -> Right UDVCVTU8
+        "U80" -> Right UDVCVTU80
+        "U81" -> Right UDVCVTU81
+        "U82" -> Right UDVCVTU82
+        "U83" -> Right UDVCVTU83
+        "U84" -> Right UDVCVTU84
+        "U85" -> Right UDVCVTU85
+        "U86" -> Right UDVCVTU86
+        "U87" -> Right UDVCVTU87
+        "U88" -> Right UDVCVTU88
+        "U89" -> Right UDVCVTU89
         "U9" -> Right UDVCVTU9
+        "U90" -> Right UDVCVTU90
+        "U91" -> Right UDVCVTU91
+        "U92" -> Right UDVCVTU92
+        "U93" -> Right UDVCVTU93
+        "U94" -> Right UDVCVTU94
+        "U95" -> Right UDVCVTU95
+        "U96" -> Right UDVCVTU96
+        "U97" -> Right UDVCVTU97
+        "U98" -> Right UDVCVTU98
+        "U99" -> Right UDVCVTU99
         x -> Left ("Unable to parse UserDefinedVariableConfigurationVariableType from: " <> x)
 
 instance ToHttpApiData UserDefinedVariableConfigurationVariableType where
     toQueryParam = \case
         UDVCVTU1 -> "U1"
         UDVCVTU10 -> "U10"
+        UDVCVTU100 -> "U100"
         UDVCVTU11 -> "U11"
         UDVCVTU12 -> "U12"
         UDVCVTU13 -> "U13"
@@ -2364,13 +2983,92 @@ instance ToHttpApiData UserDefinedVariableConfigurationVariableType where
         UDVCVTU19 -> "U19"
         UDVCVTU2 -> "U2"
         UDVCVTU20 -> "U20"
+        UDVCVTU21 -> "U21"
+        UDVCVTU22 -> "U22"
+        UDVCVTU23 -> "U23"
+        UDVCVTU24 -> "U24"
+        UDVCVTU25 -> "U25"
+        UDVCVTU26 -> "U26"
+        UDVCVTU27 -> "U27"
+        UDVCVTU28 -> "U28"
+        UDVCVTU29 -> "U29"
         UDVCVTU3 -> "U3"
+        UDVCVTU30 -> "U30"
+        UDVCVTU31 -> "U31"
+        UDVCVTU32 -> "U32"
+        UDVCVTU33 -> "U33"
+        UDVCVTU34 -> "U34"
+        UDVCVTU35 -> "U35"
+        UDVCVTU36 -> "U36"
+        UDVCVTU37 -> "U37"
+        UDVCVTU38 -> "U38"
+        UDVCVTU39 -> "U39"
         UDVCVTU4 -> "U4"
+        UDVCVTU40 -> "U40"
+        UDVCVTU41 -> "U41"
+        UDVCVTU42 -> "U42"
+        UDVCVTU43 -> "U43"
+        UDVCVTU44 -> "U44"
+        UDVCVTU45 -> "U45"
+        UDVCVTU46 -> "U46"
+        UDVCVTU47 -> "U47"
+        UDVCVTU48 -> "U48"
+        UDVCVTU49 -> "U49"
         UDVCVTU5 -> "U5"
+        UDVCVTU50 -> "U50"
+        UDVCVTU51 -> "U51"
+        UDVCVTU52 -> "U52"
+        UDVCVTU53 -> "U53"
+        UDVCVTU54 -> "U54"
+        UDVCVTU55 -> "U55"
+        UDVCVTU56 -> "U56"
+        UDVCVTU57 -> "U57"
+        UDVCVTU58 -> "U58"
+        UDVCVTU59 -> "U59"
         UDVCVTU6 -> "U6"
+        UDVCVTU60 -> "U60"
+        UDVCVTU61 -> "U61"
+        UDVCVTU62 -> "U62"
+        UDVCVTU63 -> "U63"
+        UDVCVTU64 -> "U64"
+        UDVCVTU65 -> "U65"
+        UDVCVTU66 -> "U66"
+        UDVCVTU67 -> "U67"
+        UDVCVTU68 -> "U68"
+        UDVCVTU69 -> "U69"
         UDVCVTU7 -> "U7"
+        UDVCVTU70 -> "U70"
+        UDVCVTU71 -> "U71"
+        UDVCVTU72 -> "U72"
+        UDVCVTU73 -> "U73"
+        UDVCVTU74 -> "U74"
+        UDVCVTU75 -> "U75"
+        UDVCVTU76 -> "U76"
+        UDVCVTU77 -> "U77"
+        UDVCVTU78 -> "U78"
+        UDVCVTU79 -> "U79"
         UDVCVTU8 -> "U8"
+        UDVCVTU80 -> "U80"
+        UDVCVTU81 -> "U81"
+        UDVCVTU82 -> "U82"
+        UDVCVTU83 -> "U83"
+        UDVCVTU84 -> "U84"
+        UDVCVTU85 -> "U85"
+        UDVCVTU86 -> "U86"
+        UDVCVTU87 -> "U87"
+        UDVCVTU88 -> "U88"
+        UDVCVTU89 -> "U89"
         UDVCVTU9 -> "U9"
+        UDVCVTU90 -> "U90"
+        UDVCVTU91 -> "U91"
+        UDVCVTU92 -> "U92"
+        UDVCVTU93 -> "U93"
+        UDVCVTU94 -> "U94"
+        UDVCVTU95 -> "U95"
+        UDVCVTU96 -> "U96"
+        UDVCVTU97 -> "U97"
+        UDVCVTU98 -> "U98"
+        UDVCVTU99 -> "U99"
 
 instance FromJSON UserDefinedVariableConfigurationVariableType where
     parseJSON = parseJSONText "UserDefinedVariableConfigurationVariableType"
@@ -3235,8 +3933,9 @@ instance FromJSON OrderContactContactType where
 instance ToJSON OrderContactContactType where
     toJSON = toJSONText
 
--- | Type of asset to upload. This is a required field. IMAGE is solely used
--- for IMAGE creatives. Other image assets should use HTML_IMAGE.
+-- | Type of asset to upload. This is a required field. FLASH and IMAGE are
+-- no longer supported for new uploads. All image assets should use
+-- HTML_IMAGE.
 data CreativeAssetIdType
     = CAITFlash
       -- ^ @FLASH@
@@ -3704,6 +4403,8 @@ data AccountActiveAdSummaryActiveAdsLimitTier
       -- ^ @ACTIVE_ADS_TIER_300K@
     | ActiveAdsTier40K
       -- ^ @ACTIVE_ADS_TIER_40K@
+    | ActiveAdsTier500K
+      -- ^ @ACTIVE_ADS_TIER_500K@
     | ActiveAdsTier75K
       -- ^ @ACTIVE_ADS_TIER_75K@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -3716,6 +4417,7 @@ instance FromHttpApiData AccountActiveAdSummaryActiveAdsLimitTier where
         "ACTIVE_ADS_TIER_200K" -> Right ActiveAdsTier200K
         "ACTIVE_ADS_TIER_300K" -> Right ActiveAdsTier300K
         "ACTIVE_ADS_TIER_40K" -> Right ActiveAdsTier40K
+        "ACTIVE_ADS_TIER_500K" -> Right ActiveAdsTier500K
         "ACTIVE_ADS_TIER_75K" -> Right ActiveAdsTier75K
         x -> Left ("Unable to parse AccountActiveAdSummaryActiveAdsLimitTier from: " <> x)
 
@@ -3725,6 +4427,7 @@ instance ToHttpApiData AccountActiveAdSummaryActiveAdsLimitTier where
         ActiveAdsTier200K -> "ACTIVE_ADS_TIER_200K"
         ActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
         ActiveAdsTier40K -> "ACTIVE_ADS_TIER_40K"
+        ActiveAdsTier500K -> "ACTIVE_ADS_TIER_500K"
         ActiveAdsTier75K -> "ACTIVE_ADS_TIER_75K"
 
 instance FromJSON AccountActiveAdSummaryActiveAdsLimitTier where
@@ -4143,6 +4846,8 @@ data PlacementGroupsListPricingTypes
       -- ^ @PRICING_TYPE_CPC@
     | PGLPTPricingTypeCpm
       -- ^ @PRICING_TYPE_CPM@
+    | PGLPTPricingTypeCpmActiveview
+      -- ^ @PRICING_TYPE_CPM_ACTIVEVIEW@
     | PGLPTPricingTypeFlatRateClicks
       -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
     | PGLPTPricingTypeFlatRateImpressions
@@ -4156,6 +4861,7 @@ instance FromHttpApiData PlacementGroupsListPricingTypes where
         "PRICING_TYPE_CPA" -> Right PGLPTPricingTypeCpa
         "PRICING_TYPE_CPC" -> Right PGLPTPricingTypeCpc
         "PRICING_TYPE_CPM" -> Right PGLPTPricingTypeCpm
+        "PRICING_TYPE_CPM_ACTIVEVIEW" -> Right PGLPTPricingTypeCpmActiveview
         "PRICING_TYPE_FLAT_RATE_CLICKS" -> Right PGLPTPricingTypeFlatRateClicks
         "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Right PGLPTPricingTypeFlatRateImpressions
         x -> Left ("Unable to parse PlacementGroupsListPricingTypes from: " <> x)
@@ -4165,6 +4871,7 @@ instance ToHttpApiData PlacementGroupsListPricingTypes where
         PGLPTPricingTypeCpa -> "PRICING_TYPE_CPA"
         PGLPTPricingTypeCpc -> "PRICING_TYPE_CPC"
         PGLPTPricingTypeCpm -> "PRICING_TYPE_CPM"
+        PGLPTPricingTypeCpmActiveview -> "PRICING_TYPE_CPM_ACTIVEVIEW"
         PGLPTPricingTypeFlatRateClicks -> "PRICING_TYPE_FLAT_RATE_CLICKS"
         PGLPTPricingTypeFlatRateImpressions -> "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
 
@@ -4220,6 +4927,8 @@ data AccountActiveAdsLimitTier
       -- ^ @ACTIVE_ADS_TIER_300K@
     | AAALTActiveAdsTier40K
       -- ^ @ACTIVE_ADS_TIER_40K@
+    | AAALTActiveAdsTier500K
+      -- ^ @ACTIVE_ADS_TIER_500K@
     | AAALTActiveAdsTier75K
       -- ^ @ACTIVE_ADS_TIER_75K@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -4232,6 +4941,7 @@ instance FromHttpApiData AccountActiveAdsLimitTier where
         "ACTIVE_ADS_TIER_200K" -> Right AAALTActiveAdsTier200K
         "ACTIVE_ADS_TIER_300K" -> Right AAALTActiveAdsTier300K
         "ACTIVE_ADS_TIER_40K" -> Right AAALTActiveAdsTier40K
+        "ACTIVE_ADS_TIER_500K" -> Right AAALTActiveAdsTier500K
         "ACTIVE_ADS_TIER_75K" -> Right AAALTActiveAdsTier75K
         x -> Left ("Unable to parse AccountActiveAdsLimitTier from: " <> x)
 
@@ -4241,6 +4951,7 @@ instance ToHttpApiData AccountActiveAdsLimitTier where
         AAALTActiveAdsTier200K -> "ACTIVE_ADS_TIER_200K"
         AAALTActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
         AAALTActiveAdsTier40K -> "ACTIVE_ADS_TIER_40K"
+        AAALTActiveAdsTier500K -> "ACTIVE_ADS_TIER_500K"
         AAALTActiveAdsTier75K -> "ACTIVE_ADS_TIER_75K"
 
 instance FromJSON AccountActiveAdsLimitTier where
@@ -6065,6 +6776,8 @@ data FloodlightActivityUserDefinedVariableTypesItem
       -- ^ @U1@
     | FAUDVTIU10
       -- ^ @U10@
+    | FAUDVTIU100
+      -- ^ @U100@
     | FAUDVTIU11
       -- ^ @U11@
     | FAUDVTIU12
@@ -6087,20 +6800,178 @@ data FloodlightActivityUserDefinedVariableTypesItem
       -- ^ @U2@
     | FAUDVTIU20
       -- ^ @U20@
+    | FAUDVTIU21
+      -- ^ @U21@
+    | FAUDVTIU22
+      -- ^ @U22@
+    | FAUDVTIU23
+      -- ^ @U23@
+    | FAUDVTIU24
+      -- ^ @U24@
+    | FAUDVTIU25
+      -- ^ @U25@
+    | FAUDVTIU26
+      -- ^ @U26@
+    | FAUDVTIU27
+      -- ^ @U27@
+    | FAUDVTIU28
+      -- ^ @U28@
+    | FAUDVTIU29
+      -- ^ @U29@
     | FAUDVTIU3
       -- ^ @U3@
+    | FAUDVTIU30
+      -- ^ @U30@
+    | FAUDVTIU31
+      -- ^ @U31@
+    | FAUDVTIU32
+      -- ^ @U32@
+    | FAUDVTIU33
+      -- ^ @U33@
+    | FAUDVTIU34
+      -- ^ @U34@
+    | FAUDVTIU35
+      -- ^ @U35@
+    | FAUDVTIU36
+      -- ^ @U36@
+    | FAUDVTIU37
+      -- ^ @U37@
+    | FAUDVTIU38
+      -- ^ @U38@
+    | FAUDVTIU39
+      -- ^ @U39@
     | FAUDVTIU4
       -- ^ @U4@
+    | FAUDVTIU40
+      -- ^ @U40@
+    | FAUDVTIU41
+      -- ^ @U41@
+    | FAUDVTIU42
+      -- ^ @U42@
+    | FAUDVTIU43
+      -- ^ @U43@
+    | FAUDVTIU44
+      -- ^ @U44@
+    | FAUDVTIU45
+      -- ^ @U45@
+    | FAUDVTIU46
+      -- ^ @U46@
+    | FAUDVTIU47
+      -- ^ @U47@
+    | FAUDVTIU48
+      -- ^ @U48@
+    | FAUDVTIU49
+      -- ^ @U49@
     | FAUDVTIU5
       -- ^ @U5@
+    | FAUDVTIU50
+      -- ^ @U50@
+    | FAUDVTIU51
+      -- ^ @U51@
+    | FAUDVTIU52
+      -- ^ @U52@
+    | FAUDVTIU53
+      -- ^ @U53@
+    | FAUDVTIU54
+      -- ^ @U54@
+    | FAUDVTIU55
+      -- ^ @U55@
+    | FAUDVTIU56
+      -- ^ @U56@
+    | FAUDVTIU57
+      -- ^ @U57@
+    | FAUDVTIU58
+      -- ^ @U58@
+    | FAUDVTIU59
+      -- ^ @U59@
     | FAUDVTIU6
       -- ^ @U6@
+    | FAUDVTIU60
+      -- ^ @U60@
+    | FAUDVTIU61
+      -- ^ @U61@
+    | FAUDVTIU62
+      -- ^ @U62@
+    | FAUDVTIU63
+      -- ^ @U63@
+    | FAUDVTIU64
+      -- ^ @U64@
+    | FAUDVTIU65
+      -- ^ @U65@
+    | FAUDVTIU66
+      -- ^ @U66@
+    | FAUDVTIU67
+      -- ^ @U67@
+    | FAUDVTIU68
+      -- ^ @U68@
+    | FAUDVTIU69
+      -- ^ @U69@
     | FAUDVTIU7
       -- ^ @U7@
+    | FAUDVTIU70
+      -- ^ @U70@
+    | FAUDVTIU71
+      -- ^ @U71@
+    | FAUDVTIU72
+      -- ^ @U72@
+    | FAUDVTIU73
+      -- ^ @U73@
+    | FAUDVTIU74
+      -- ^ @U74@
+    | FAUDVTIU75
+      -- ^ @U75@
+    | FAUDVTIU76
+      -- ^ @U76@
+    | FAUDVTIU77
+      -- ^ @U77@
+    | FAUDVTIU78
+      -- ^ @U78@
+    | FAUDVTIU79
+      -- ^ @U79@
     | FAUDVTIU8
       -- ^ @U8@
+    | FAUDVTIU80
+      -- ^ @U80@
+    | FAUDVTIU81
+      -- ^ @U81@
+    | FAUDVTIU82
+      -- ^ @U82@
+    | FAUDVTIU83
+      -- ^ @U83@
+    | FAUDVTIU84
+      -- ^ @U84@
+    | FAUDVTIU85
+      -- ^ @U85@
+    | FAUDVTIU86
+      -- ^ @U86@
+    | FAUDVTIU87
+      -- ^ @U87@
+    | FAUDVTIU88
+      -- ^ @U88@
+    | FAUDVTIU89
+      -- ^ @U89@
     | FAUDVTIU9
       -- ^ @U9@
+    | FAUDVTIU90
+      -- ^ @U90@
+    | FAUDVTIU91
+      -- ^ @U91@
+    | FAUDVTIU92
+      -- ^ @U92@
+    | FAUDVTIU93
+      -- ^ @U93@
+    | FAUDVTIU94
+      -- ^ @U94@
+    | FAUDVTIU95
+      -- ^ @U95@
+    | FAUDVTIU96
+      -- ^ @U96@
+    | FAUDVTIU97
+      -- ^ @U97@
+    | FAUDVTIU98
+      -- ^ @U98@
+    | FAUDVTIU99
+      -- ^ @U99@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityUserDefinedVariableTypesItem
@@ -6109,6 +6980,7 @@ instance FromHttpApiData FloodlightActivityUserDefinedVariableTypesItem where
     parseQueryParam = \case
         "U1" -> Right FAUDVTIU1
         "U10" -> Right FAUDVTIU10
+        "U100" -> Right FAUDVTIU100
         "U11" -> Right FAUDVTIU11
         "U12" -> Right FAUDVTIU12
         "U13" -> Right FAUDVTIU13
@@ -6120,19 +6992,99 @@ instance FromHttpApiData FloodlightActivityUserDefinedVariableTypesItem where
         "U19" -> Right FAUDVTIU19
         "U2" -> Right FAUDVTIU2
         "U20" -> Right FAUDVTIU20
+        "U21" -> Right FAUDVTIU21
+        "U22" -> Right FAUDVTIU22
+        "U23" -> Right FAUDVTIU23
+        "U24" -> Right FAUDVTIU24
+        "U25" -> Right FAUDVTIU25
+        "U26" -> Right FAUDVTIU26
+        "U27" -> Right FAUDVTIU27
+        "U28" -> Right FAUDVTIU28
+        "U29" -> Right FAUDVTIU29
         "U3" -> Right FAUDVTIU3
+        "U30" -> Right FAUDVTIU30
+        "U31" -> Right FAUDVTIU31
+        "U32" -> Right FAUDVTIU32
+        "U33" -> Right FAUDVTIU33
+        "U34" -> Right FAUDVTIU34
+        "U35" -> Right FAUDVTIU35
+        "U36" -> Right FAUDVTIU36
+        "U37" -> Right FAUDVTIU37
+        "U38" -> Right FAUDVTIU38
+        "U39" -> Right FAUDVTIU39
         "U4" -> Right FAUDVTIU4
+        "U40" -> Right FAUDVTIU40
+        "U41" -> Right FAUDVTIU41
+        "U42" -> Right FAUDVTIU42
+        "U43" -> Right FAUDVTIU43
+        "U44" -> Right FAUDVTIU44
+        "U45" -> Right FAUDVTIU45
+        "U46" -> Right FAUDVTIU46
+        "U47" -> Right FAUDVTIU47
+        "U48" -> Right FAUDVTIU48
+        "U49" -> Right FAUDVTIU49
         "U5" -> Right FAUDVTIU5
+        "U50" -> Right FAUDVTIU50
+        "U51" -> Right FAUDVTIU51
+        "U52" -> Right FAUDVTIU52
+        "U53" -> Right FAUDVTIU53
+        "U54" -> Right FAUDVTIU54
+        "U55" -> Right FAUDVTIU55
+        "U56" -> Right FAUDVTIU56
+        "U57" -> Right FAUDVTIU57
+        "U58" -> Right FAUDVTIU58
+        "U59" -> Right FAUDVTIU59
         "U6" -> Right FAUDVTIU6
+        "U60" -> Right FAUDVTIU60
+        "U61" -> Right FAUDVTIU61
+        "U62" -> Right FAUDVTIU62
+        "U63" -> Right FAUDVTIU63
+        "U64" -> Right FAUDVTIU64
+        "U65" -> Right FAUDVTIU65
+        "U66" -> Right FAUDVTIU66
+        "U67" -> Right FAUDVTIU67
+        "U68" -> Right FAUDVTIU68
+        "U69" -> Right FAUDVTIU69
         "U7" -> Right FAUDVTIU7
+        "U70" -> Right FAUDVTIU70
+        "U71" -> Right FAUDVTIU71
+        "U72" -> Right FAUDVTIU72
+        "U73" -> Right FAUDVTIU73
+        "U74" -> Right FAUDVTIU74
+        "U75" -> Right FAUDVTIU75
+        "U76" -> Right FAUDVTIU76
+        "U77" -> Right FAUDVTIU77
+        "U78" -> Right FAUDVTIU78
+        "U79" -> Right FAUDVTIU79
         "U8" -> Right FAUDVTIU8
+        "U80" -> Right FAUDVTIU80
+        "U81" -> Right FAUDVTIU81
+        "U82" -> Right FAUDVTIU82
+        "U83" -> Right FAUDVTIU83
+        "U84" -> Right FAUDVTIU84
+        "U85" -> Right FAUDVTIU85
+        "U86" -> Right FAUDVTIU86
+        "U87" -> Right FAUDVTIU87
+        "U88" -> Right FAUDVTIU88
+        "U89" -> Right FAUDVTIU89
         "U9" -> Right FAUDVTIU9
+        "U90" -> Right FAUDVTIU90
+        "U91" -> Right FAUDVTIU91
+        "U92" -> Right FAUDVTIU92
+        "U93" -> Right FAUDVTIU93
+        "U94" -> Right FAUDVTIU94
+        "U95" -> Right FAUDVTIU95
+        "U96" -> Right FAUDVTIU96
+        "U97" -> Right FAUDVTIU97
+        "U98" -> Right FAUDVTIU98
+        "U99" -> Right FAUDVTIU99
         x -> Left ("Unable to parse FloodlightActivityUserDefinedVariableTypesItem from: " <> x)
 
 instance ToHttpApiData FloodlightActivityUserDefinedVariableTypesItem where
     toQueryParam = \case
         FAUDVTIU1 -> "U1"
         FAUDVTIU10 -> "U10"
+        FAUDVTIU100 -> "U100"
         FAUDVTIU11 -> "U11"
         FAUDVTIU12 -> "U12"
         FAUDVTIU13 -> "U13"
@@ -6144,13 +7096,92 @@ instance ToHttpApiData FloodlightActivityUserDefinedVariableTypesItem where
         FAUDVTIU19 -> "U19"
         FAUDVTIU2 -> "U2"
         FAUDVTIU20 -> "U20"
+        FAUDVTIU21 -> "U21"
+        FAUDVTIU22 -> "U22"
+        FAUDVTIU23 -> "U23"
+        FAUDVTIU24 -> "U24"
+        FAUDVTIU25 -> "U25"
+        FAUDVTIU26 -> "U26"
+        FAUDVTIU27 -> "U27"
+        FAUDVTIU28 -> "U28"
+        FAUDVTIU29 -> "U29"
         FAUDVTIU3 -> "U3"
+        FAUDVTIU30 -> "U30"
+        FAUDVTIU31 -> "U31"
+        FAUDVTIU32 -> "U32"
+        FAUDVTIU33 -> "U33"
+        FAUDVTIU34 -> "U34"
+        FAUDVTIU35 -> "U35"
+        FAUDVTIU36 -> "U36"
+        FAUDVTIU37 -> "U37"
+        FAUDVTIU38 -> "U38"
+        FAUDVTIU39 -> "U39"
         FAUDVTIU4 -> "U4"
+        FAUDVTIU40 -> "U40"
+        FAUDVTIU41 -> "U41"
+        FAUDVTIU42 -> "U42"
+        FAUDVTIU43 -> "U43"
+        FAUDVTIU44 -> "U44"
+        FAUDVTIU45 -> "U45"
+        FAUDVTIU46 -> "U46"
+        FAUDVTIU47 -> "U47"
+        FAUDVTIU48 -> "U48"
+        FAUDVTIU49 -> "U49"
         FAUDVTIU5 -> "U5"
+        FAUDVTIU50 -> "U50"
+        FAUDVTIU51 -> "U51"
+        FAUDVTIU52 -> "U52"
+        FAUDVTIU53 -> "U53"
+        FAUDVTIU54 -> "U54"
+        FAUDVTIU55 -> "U55"
+        FAUDVTIU56 -> "U56"
+        FAUDVTIU57 -> "U57"
+        FAUDVTIU58 -> "U58"
+        FAUDVTIU59 -> "U59"
         FAUDVTIU6 -> "U6"
+        FAUDVTIU60 -> "U60"
+        FAUDVTIU61 -> "U61"
+        FAUDVTIU62 -> "U62"
+        FAUDVTIU63 -> "U63"
+        FAUDVTIU64 -> "U64"
+        FAUDVTIU65 -> "U65"
+        FAUDVTIU66 -> "U66"
+        FAUDVTIU67 -> "U67"
+        FAUDVTIU68 -> "U68"
+        FAUDVTIU69 -> "U69"
         FAUDVTIU7 -> "U7"
+        FAUDVTIU70 -> "U70"
+        FAUDVTIU71 -> "U71"
+        FAUDVTIU72 -> "U72"
+        FAUDVTIU73 -> "U73"
+        FAUDVTIU74 -> "U74"
+        FAUDVTIU75 -> "U75"
+        FAUDVTIU76 -> "U76"
+        FAUDVTIU77 -> "U77"
+        FAUDVTIU78 -> "U78"
+        FAUDVTIU79 -> "U79"
         FAUDVTIU8 -> "U8"
+        FAUDVTIU80 -> "U80"
+        FAUDVTIU81 -> "U81"
+        FAUDVTIU82 -> "U82"
+        FAUDVTIU83 -> "U83"
+        FAUDVTIU84 -> "U84"
+        FAUDVTIU85 -> "U85"
+        FAUDVTIU86 -> "U86"
+        FAUDVTIU87 -> "U87"
+        FAUDVTIU88 -> "U88"
+        FAUDVTIU89 -> "U89"
         FAUDVTIU9 -> "U9"
+        FAUDVTIU90 -> "U90"
+        FAUDVTIU91 -> "U91"
+        FAUDVTIU92 -> "U92"
+        FAUDVTIU93 -> "U93"
+        FAUDVTIU94 -> "U94"
+        FAUDVTIU95 -> "U95"
+        FAUDVTIU96 -> "U96"
+        FAUDVTIU97 -> "U97"
+        FAUDVTIU98 -> "U98"
+        FAUDVTIU99 -> "U99"
 
 instance FromJSON FloodlightActivityUserDefinedVariableTypesItem where
     parseJSON = parseJSONText "FloodlightActivityUserDefinedVariableTypesItem"
@@ -6258,6 +7289,8 @@ data PricingPricingType
       -- ^ @PLANNING_PLACEMENT_PRICING_TYPE_CPC@
     | PlanningPlacementPricingTypeCpm
       -- ^ @PLANNING_PLACEMENT_PRICING_TYPE_CPM@
+    | PlanningPlacementPricingTypeCpmActiveview
+      -- ^ @PLANNING_PLACEMENT_PRICING_TYPE_CPM_ACTIVEVIEW@
     | PlanningPlacementPricingTypeFlatRateClicks
       -- ^ @PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_CLICKS@
     | PlanningPlacementPricingTypeFlatRateImpressions
@@ -6274,6 +7307,7 @@ instance FromHttpApiData PricingPricingType where
         "PLANNING_PLACEMENT_PRICING_TYPE_CPA" -> Right PlanningPlacementPricingTypeCpa
         "PLANNING_PLACEMENT_PRICING_TYPE_CPC" -> Right PlanningPlacementPricingTypeCpc
         "PLANNING_PLACEMENT_PRICING_TYPE_CPM" -> Right PlanningPlacementPricingTypeCpm
+        "PLANNING_PLACEMENT_PRICING_TYPE_CPM_ACTIVEVIEW" -> Right PlanningPlacementPricingTypeCpmActiveview
         "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_CLICKS" -> Right PlanningPlacementPricingTypeFlatRateClicks
         "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Right PlanningPlacementPricingTypeFlatRateImpressions
         "PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS" -> Right PlanningPlacementPricingTypeImpressions
@@ -6285,6 +7319,7 @@ instance ToHttpApiData PricingPricingType where
         PlanningPlacementPricingTypeCpa -> "PLANNING_PLACEMENT_PRICING_TYPE_CPA"
         PlanningPlacementPricingTypeCpc -> "PLANNING_PLACEMENT_PRICING_TYPE_CPC"
         PlanningPlacementPricingTypeCpm -> "PLANNING_PLACEMENT_PRICING_TYPE_CPM"
+        PlanningPlacementPricingTypeCpmActiveview -> "PLANNING_PLACEMENT_PRICING_TYPE_CPM_ACTIVEVIEW"
         PlanningPlacementPricingTypeFlatRateClicks -> "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_CLICKS"
         PlanningPlacementPricingTypeFlatRateImpressions -> "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
         PlanningPlacementPricingTypeImpressions -> "PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS"
@@ -6751,8 +7786,10 @@ instance FromJSON AccountAccountProFile where
 instance ToJSON AccountAccountProFile where
     toJSON = toJSONText
 
--- | Type of this creative.This is a required field. Applicable to all
--- creative types.
+-- | Type of this creative. This is a required field. Applicable to all
+-- creative types. Note: FLASH_INPAGE, HTML5_BANNER, and IMAGE are only
+-- used for existing creatives. New creatives should use DISPLAY as a
+-- replacement for these types.
 data CreativeType
     = CTBrandSafeDefaultInstreamVideo
       -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
@@ -6990,6 +8027,8 @@ data PlacementsListPricingTypes
       -- ^ @PRICING_TYPE_CPC@
     | PLPTPricingTypeCpm
       -- ^ @PRICING_TYPE_CPM@
+    | PLPTPricingTypeCpmActiveview
+      -- ^ @PRICING_TYPE_CPM_ACTIVEVIEW@
     | PLPTPricingTypeFlatRateClicks
       -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
     | PLPTPricingTypeFlatRateImpressions
@@ -7003,6 +8042,7 @@ instance FromHttpApiData PlacementsListPricingTypes where
         "PRICING_TYPE_CPA" -> Right PLPTPricingTypeCpa
         "PRICING_TYPE_CPC" -> Right PLPTPricingTypeCpc
         "PRICING_TYPE_CPM" -> Right PLPTPricingTypeCpm
+        "PRICING_TYPE_CPM_ACTIVEVIEW" -> Right PLPTPricingTypeCpmActiveview
         "PRICING_TYPE_FLAT_RATE_CLICKS" -> Right PLPTPricingTypeFlatRateClicks
         "PRICING_TYPE_FLAT_RATE_IMPRESSIONS" -> Right PLPTPricingTypeFlatRateImpressions
         x -> Left ("Unable to parse PlacementsListPricingTypes from: " <> x)
@@ -7012,6 +8052,7 @@ instance ToHttpApiData PlacementsListPricingTypes where
         PLPTPricingTypeCpa -> "PRICING_TYPE_CPA"
         PLPTPricingTypeCpc -> "PRICING_TYPE_CPC"
         PLPTPricingTypeCpm -> "PRICING_TYPE_CPM"
+        PLPTPricingTypeCpmActiveview -> "PRICING_TYPE_CPM_ACTIVEVIEW"
         PLPTPricingTypeFlatRateClicks -> "PRICING_TYPE_FLAT_RATE_CLICKS"
         PLPTPricingTypeFlatRateImpressions -> "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
 
@@ -7602,6 +8643,8 @@ data ChangeLogsListObjectType
       -- ^ @OBJECT_SIZE@
     | CLLOTObjectSubAccount
       -- ^ @OBJECT_SUBACCOUNT@
+    | CLLOTObjectTargetingTemplate
+      -- ^ @OBJECT_TARGETING_TEMPLATE@
     | CLLOTObjectUserProFile
       -- ^ @OBJECT_USER_PROFILE@
     | CLLOTObjectUserProFileFilter
@@ -7648,6 +8691,7 @@ instance FromHttpApiData ChangeLogsListObjectType where
         "OBJECT_SD_SITE" -> Right CLLOTObjectSdSite
         "OBJECT_SIZE" -> Right CLLOTObjectSize
         "OBJECT_SUBACCOUNT" -> Right CLLOTObjectSubAccount
+        "OBJECT_TARGETING_TEMPLATE" -> Right CLLOTObjectTargetingTemplate
         "OBJECT_USER_PROFILE" -> Right CLLOTObjectUserProFile
         "OBJECT_USER_PROFILE_FILTER" -> Right CLLOTObjectUserProFileFilter
         "OBJECT_USER_ROLE" -> Right CLLOTObjectUserRole
@@ -7689,6 +8733,7 @@ instance ToHttpApiData ChangeLogsListObjectType where
         CLLOTObjectSdSite -> "OBJECT_SD_SITE"
         CLLOTObjectSize -> "OBJECT_SIZE"
         CLLOTObjectSubAccount -> "OBJECT_SUBACCOUNT"
+        CLLOTObjectTargetingTemplate -> "OBJECT_TARGETING_TEMPLATE"
         CLLOTObjectUserProFile -> "OBJECT_USER_PROFILE"
         CLLOTObjectUserProFileFilter -> "OBJECT_USER_PROFILE_FILTER"
         CLLOTObjectUserRole -> "OBJECT_USER_ROLE"
@@ -7733,7 +8778,9 @@ instance ToJSON PricingCapCostType where
 -- | Type of rich media asset. This is a read-only field. Applicable to the
 -- following creative types: all RICH_MEDIA.
 data CreativeAssetDisplayType
-    = AssetDisplayTypeExpanding
+    = AssetDisplayTypeBackdrop
+      -- ^ @ASSET_DISPLAY_TYPE_BACKDROP@
+    | AssetDisplayTypeExpanding
       -- ^ @ASSET_DISPLAY_TYPE_EXPANDING@
     | AssetDisplayTypeFlashInFlash
       -- ^ @ASSET_DISPLAY_TYPE_FLASH_IN_FLASH@
@@ -7757,6 +8804,7 @@ instance Hashable CreativeAssetDisplayType
 
 instance FromHttpApiData CreativeAssetDisplayType where
     parseQueryParam = \case
+        "ASSET_DISPLAY_TYPE_BACKDROP" -> Right AssetDisplayTypeBackdrop
         "ASSET_DISPLAY_TYPE_EXPANDING" -> Right AssetDisplayTypeExpanding
         "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH" -> Right AssetDisplayTypeFlashInFlash
         "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING" -> Right AssetDisplayTypeFlashInFlashExpanding
@@ -7770,6 +8818,7 @@ instance FromHttpApiData CreativeAssetDisplayType where
 
 instance ToHttpApiData CreativeAssetDisplayType where
     toQueryParam = \case
+        AssetDisplayTypeBackdrop -> "ASSET_DISPLAY_TYPE_BACKDROP"
         AssetDisplayTypeExpanding -> "ASSET_DISPLAY_TYPE_EXPANDING"
         AssetDisplayTypeFlashInFlash -> "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH"
         AssetDisplayTypeFlashInFlashExpanding -> "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING"

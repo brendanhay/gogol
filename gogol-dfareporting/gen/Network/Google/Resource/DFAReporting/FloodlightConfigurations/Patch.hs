@@ -23,7 +23,7 @@
 -- Updates an existing floodlight configuration. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightConfigurations.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightConfigurations.patch@.
 module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'FloodlightConfigurationsPatch' request conforms to.
 type FloodlightConfigurationsPatchResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>

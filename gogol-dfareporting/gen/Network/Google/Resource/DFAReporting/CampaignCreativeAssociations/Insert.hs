@@ -24,7 +24,7 @@
 -- default ad with dimensions matching the creative in the campaign if such
 -- a default ad does not exist already.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaignCreativeAssociations.insert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaignCreativeAssociations.insert@.
 module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'CampaignCreativeAssociationsInsert' request conforms to.
 type CampaignCreativeAssociationsInsertResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>

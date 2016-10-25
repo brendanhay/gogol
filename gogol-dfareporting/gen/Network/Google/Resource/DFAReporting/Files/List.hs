@@ -22,7 +22,7 @@
 --
 -- Lists files for a user profile.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.files.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.files.list@.
 module Network.Google.Resource.DFAReporting.Files.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'FilesList' request conforms to.
 type FilesListResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "files" :>

@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of creatives, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creatives.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creatives.list@.
 module Network.Google.Resource.DFAReporting.Creatives.List
     (
     -- * REST Resource
@@ -59,7 +59,7 @@ import           Network.Google.Prelude
 -- 'CreativesList' request conforms to.
 type CreativesListResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>

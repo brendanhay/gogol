@@ -22,7 +22,7 @@
 --
 -- Updates an existing placement strategy.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.update@.
 module Network.Google.Resource.DFAReporting.PlacementStrategies.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesUpdate' request conforms to.
 type PlacementStrategiesUpdateResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>

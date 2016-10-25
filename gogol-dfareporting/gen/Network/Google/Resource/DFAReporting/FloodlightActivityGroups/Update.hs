@@ -22,7 +22,7 @@
 --
 -- Updates an existing floodlight activity group.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivityGroups.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivityGroups.update@.
 module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivityGroupsUpdate' request conforms to.
 type FloodlightActivityGroupsUpdateResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>

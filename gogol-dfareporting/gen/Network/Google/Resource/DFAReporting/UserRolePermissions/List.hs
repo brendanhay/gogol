@@ -22,7 +22,7 @@
 --
 -- Gets a list of user role permissions, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRolePermissions.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRolePermissions.list@.
 module Network.Google.Resource.DFAReporting.UserRolePermissions.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolePermissionsList' request conforms to.
 type UserRolePermissionsListResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRolePermissions" :>

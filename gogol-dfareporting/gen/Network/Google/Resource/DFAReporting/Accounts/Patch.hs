@@ -22,7 +22,7 @@
 --
 -- Updates an existing account. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accounts.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accounts.patch@.
 module Network.Google.Resource.DFAReporting.Accounts.Patch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'AccountsPatch' request conforms to.
 type AccountsPatchResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>

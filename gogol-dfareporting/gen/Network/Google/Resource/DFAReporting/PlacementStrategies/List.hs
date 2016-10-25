@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of placement strategies, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.list@.
 module Network.Google.Resource.DFAReporting.PlacementStrategies.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesList' request conforms to.
 type PlacementStrategiesListResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>

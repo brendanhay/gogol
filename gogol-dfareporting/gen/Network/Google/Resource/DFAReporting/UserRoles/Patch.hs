@@ -22,7 +22,7 @@
 --
 -- Updates an existing user role. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRoles.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRoles.patch@.
 module Network.Google.Resource.DFAReporting.UserRoles.Patch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'UserRolesPatch' request conforms to.
 type UserRolesPatchResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>

@@ -22,7 +22,7 @@
 --
 -- Updates an existing account user profile.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountUserProfiles.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountUserProfiles.update@.
 module Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesUpdate' request conforms to.
 type AccountUserProFilesUpdateResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>

@@ -23,7 +23,7 @@
 -- Updates an existing remarketing list. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingLists.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingLists.patch@.
 module Network.Google.Resource.DFAReporting.RemarketingLists.Patch
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListsPatch' request conforms to.
 type RemarketingListsPatchResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>

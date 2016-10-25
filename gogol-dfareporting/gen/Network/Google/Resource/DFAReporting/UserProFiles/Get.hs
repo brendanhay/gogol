@@ -22,7 +22,7 @@
 --
 -- Gets one user profile by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userProfiles.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userProfiles.get@.
 module Network.Google.Resource.DFAReporting.UserProFiles.Get
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'UserProFilesGet' request conforms to.
 type UserProFilesGetResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              QueryParam "alt" AltJSON :> Get '[JSON] UserProFile

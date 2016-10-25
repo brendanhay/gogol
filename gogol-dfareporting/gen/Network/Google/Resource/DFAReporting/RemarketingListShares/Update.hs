@@ -22,7 +22,7 @@
 --
 -- Updates an existing remarketing list share.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingListShares.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingListShares.update@.
 module Network.Google.Resource.DFAReporting.RemarketingListShares.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListSharesUpdate' request conforms to.
 type RemarketingListSharesUpdateResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>

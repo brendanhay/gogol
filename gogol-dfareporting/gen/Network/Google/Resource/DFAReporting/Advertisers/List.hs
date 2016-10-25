@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of advertisers, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertisers.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertisers.list@.
 module Network.Google.Resource.DFAReporting.Advertisers.List
     (
     -- * REST Resource
@@ -55,7 +55,7 @@ import           Network.Google.Prelude
 -- 'AdvertisersList' request conforms to.
 type AdvertisersListResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertisers" :>

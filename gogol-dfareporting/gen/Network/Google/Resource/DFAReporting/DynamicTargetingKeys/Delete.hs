@@ -22,7 +22,7 @@
 --
 -- Deletes an existing dynamic targeting key.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.dynamicTargetingKeys.delete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.dynamicTargetingKeys.delete@.
 module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'DynamicTargetingKeysDelete' request conforms to.
 type DynamicTargetingKeysDeleteResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dynamicTargetingKeys" :>

@@ -15,7 +15,7 @@
 --
 -- Manages your DoubleClick Campaign Manager ad campaigns and reports.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference>
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference>
 module Network.Google.DFAReporting
     (
     -- * Service Configuration
@@ -379,6 +379,9 @@ module Network.Google.DFAReporting
     -- ** dfareporting.landingPages.update
     , module Network.Google.Resource.DFAReporting.LandingPages.Update
 
+    -- ** dfareporting.languages.list
+    , module Network.Google.Resource.DFAReporting.Languages.List
+
     -- ** dfareporting.metros.list
     , module Network.Google.Resource.DFAReporting.Metros.List
 
@@ -583,6 +586,21 @@ module Network.Google.DFAReporting
     -- ** dfareporting.targetableRemarketingLists.list
     , module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
 
+    -- ** dfareporting.targetingTemplates.get
+    , module Network.Google.Resource.DFAReporting.TargetingTemplates.Get
+
+    -- ** dfareporting.targetingTemplates.insert
+    , module Network.Google.Resource.DFAReporting.TargetingTemplates.Insert
+
+    -- ** dfareporting.targetingTemplates.list
+    , module Network.Google.Resource.DFAReporting.TargetingTemplates.List
+
+    -- ** dfareporting.targetingTemplates.patch
+    , module Network.Google.Resource.DFAReporting.TargetingTemplates.Patch
+
+    -- ** dfareporting.targetingTemplates.update
+    , module Network.Google.Resource.DFAReporting.TargetingTemplates.Update
+
     -- ** dfareporting.userProfiles.get
     , module Network.Google.Resource.DFAReporting.UserProFiles.Get
 
@@ -640,6 +658,9 @@ module Network.Google.DFAReporting
     , flNextPageToken
     , flKind
     , flItems
+
+    -- ** TargetingTemplatesListSortOrder
+    , TargetingTemplatesListSortOrder (..)
 
     -- ** OptimizationActivity
     , OptimizationActivity
@@ -1106,6 +1127,7 @@ module Network.Google.DFAReporting
     -- ** Ad
     , Ad
     , ad
+    , aTargetingTemplateId
     , aCreativeGroupAssignments
     , aGeoTargeting
     , aCreativeRotation
@@ -1138,6 +1160,7 @@ module Network.Google.DFAReporting
     , aSubAccountId
     , aType
     , aRemarketingListExpression
+    , aLanguageTargeting
     , aDynamicClickTracker
     , aCompatibility
     , aArchived
@@ -1171,6 +1194,7 @@ module Network.Google.DFAReporting
     , pId
     , pAudienceAgeGroup
     , pSubAccountId
+    , pTargetCpmActiveViewNanos
     , pAudienceGender
     , pClientName
     , pTargetCpaNanos
@@ -1291,6 +1315,9 @@ module Network.Google.DFAReporting
     -- ** AdvertisersListSortOrder
     , AdvertisersListSortOrder (..)
 
+    -- ** TargetingTemplatesListSortField
+    , TargetingTemplatesListSortField (..)
+
     -- ** CreativeFieldsListSortField
     , CreativeFieldsListSortField (..)
 
@@ -1363,6 +1390,12 @@ module Network.Google.DFAReporting
     , customRichMediaEvents
     , crmeKind
     , crmeFilteredEventIds
+
+    -- ** LanguagesListResponse
+    , LanguagesListResponse
+    , languagesListResponse
+    , llrKind
+    , llrLanguages
 
     -- ** UserRolesListSortOrder
     , UserRolesListSortOrder (..)
@@ -1523,6 +1556,7 @@ module Network.Google.DFAReporting
     , creVersion
     , creLatestTraffickedCreativeId
     , creThirdPartyRichMediaImpressionsURL
+    , creDynamicAssetSelection
     , creLastModifiedInfo
     , creId
     , creAuthoringSource
@@ -1531,6 +1565,7 @@ module Network.Google.DFAReporting
     , creSubAccountId
     , creType
     , creTimerCustomEvents
+    , creCreativeAssetSelection
     , creStudioCreativeId
     , creCompatibility
     , creBackupImageFeatures
@@ -1601,6 +1636,13 @@ module Network.Google.DFAReporting
     -- ** PlacementPaymentSource
     , PlacementPaymentSource (..)
 
+    -- ** Rule
+    , Rule
+    , rule
+    , rulTargetingTemplateId
+    , rulName
+    , rulAssetId
+
     -- ** ReportsFilesListSortOrder
     , ReportsFilesListSortOrder (..)
 
@@ -1620,7 +1662,6 @@ module Network.Google.DFAReporting
     , camLookbackConfiguration
     , camStartDate
     , camAccountId
-    , camComscoreVceEnabled
     , camName
     , camAdvertiserGroupId
     , camBillingInvoiceCode
@@ -1757,8 +1798,8 @@ module Network.Google.DFAReporting
     , aaActive
     , aaAvailablePermissionIds
     , aaTeaserSizeLimit
-    , aaComscoreVceEnabled
     , aaActiveViewOptOut
+    , aaShareReportsWithTwitter
     , aaName
     , aaAccountProFile
     , aaId
@@ -2339,6 +2380,14 @@ module Network.Google.DFAReporting
     , chaSubAccountId
     , chaChangeTime
 
+    -- ** Language
+    , Language
+    , language
+    , lLanguageCode
+    , lKind
+    , lName
+    , lId
+
     -- ** CreativesListSortField
     , CreativesListSortField (..)
 
@@ -2617,6 +2666,7 @@ module Network.Google.DFAReporting
     -- ** Conversion
     , Conversion
     , conversion
+    , conoEncryptedUserIdCandidates
     , conoTimestampMicros
     , conoLimitAdTracking
     , conoEncryptedUserId
@@ -2643,9 +2693,9 @@ module Network.Google.DFAReporting
     -- ** RichMediaExitOverride
     , RichMediaExitOverride
     , richMediaExitOverride
-    , rmeoUseCustomExitURL
+    , rmeoEnabled
+    , rmeoClickThroughURL
     , rmeoExitId
-    , rmeoCustomExitURL
 
     -- ** AdvertisersListStatus
     , AdvertisersListStatus (..)
@@ -2669,6 +2719,13 @@ module Network.Google.DFAReporting
     , cflrNextPageToken
     , cflrKind
     , cflrCreativeFields
+
+    -- ** TargetingTemplatesListResponse
+    , TargetingTemplatesListResponse
+    , targetingTemplatesListResponse
+    , ttlrNextPageToken
+    , ttlrKind
+    , ttlrTargetingTemplates
 
     -- ** PlacementsGenerateTagsResponse
     , PlacementsGenerateTagsResponse
@@ -2696,8 +2753,10 @@ module Network.Google.DFAReporting
     , caaSSLCompliant
     , caaFileSize
     , caaAssetIdentifier
+    , caaCompanionCreativeIds
     , caaDurationType
     , caaProgressiveServingURL
+    , caaIdDimensionValue
     , caaActive
     , caaRole
     , caaMimeType
@@ -2727,6 +2786,17 @@ module Network.Google.DFAReporting
 
     -- ** CreativeFieldValuesListSortField
     , CreativeFieldValuesListSortField (..)
+
+    -- ** LanguageTargeting
+    , LanguageTargeting
+    , languageTargeting
+    , ltLanguages
+
+    -- ** CreativeAssetSelection
+    , CreativeAssetSelection
+    , creativeAssetSelection
+    , casRules
+    , casDefaultAssetId
 
     -- ** PlacementsListResponse
     , PlacementsListResponse
@@ -2973,8 +3043,10 @@ module Network.Google.DFAReporting
     , creativeAssetMetadata
     , camaKind
     , camaAssetIdentifier
+    , camaIdDimensionValue
     , camaClickTags
     , camaWarnedValidationRules
+    , camaId
     , camaDetectedFeatures
 
     -- ** OmnitureSettings
@@ -3195,6 +3267,23 @@ module Network.Google.DFAReporting
     -- ** ContentCategoriesListSortOrder
     , ContentCategoriesListSortOrder (..)
 
+    -- ** TargetingTemplate
+    , TargetingTemplate
+    , targetingTemplate
+    , ttGeoTargeting
+    , ttTechnologyTargeting
+    , ttDayPartTargeting
+    , ttKind
+    , ttAdvertiserId
+    , ttAdvertiserIdDimensionValue
+    , ttAccountId
+    , ttName
+    , ttKeyValueTargetingExpression
+    , ttId
+    , ttSubAccountId
+    , ttLanguageTargeting
+    , ttListTargetingExpression
+
     -- ** CreativeField
     , CreativeField
     , creativeField
@@ -3339,6 +3428,7 @@ import           Network.Google.Resource.DFAReporting.LandingPages.Insert
 import           Network.Google.Resource.DFAReporting.LandingPages.List
 import           Network.Google.Resource.DFAReporting.LandingPages.Patch
 import           Network.Google.Resource.DFAReporting.LandingPages.Update
+import           Network.Google.Resource.DFAReporting.Languages.List
 import           Network.Google.Resource.DFAReporting.Metros.List
 import           Network.Google.Resource.DFAReporting.MobileCarriers.Get
 import           Network.Google.Resource.DFAReporting.MobileCarriers.List
@@ -3407,6 +3497,11 @@ import           Network.Google.Resource.DFAReporting.SubAccounts.Patch
 import           Network.Google.Resource.DFAReporting.SubAccounts.Update
 import           Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
 import           Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
+import           Network.Google.Resource.DFAReporting.TargetingTemplates.Get
+import           Network.Google.Resource.DFAReporting.TargetingTemplates.Insert
+import           Network.Google.Resource.DFAReporting.TargetingTemplates.List
+import           Network.Google.Resource.DFAReporting.TargetingTemplates.Patch
+import           Network.Google.Resource.DFAReporting.TargetingTemplates.Update
 import           Network.Google.Resource.DFAReporting.UserProFiles.Get
 import           Network.Google.Resource.DFAReporting.UserProFiles.List
 import           Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
@@ -3530,6 +3625,7 @@ type DFAReportingAPI =
        :<|> ChangeLogsListResource
        :<|> ChangeLogsGetResource
        :<|> CitiesListResource
+       :<|> LanguagesListResource
        :<|> TargetableRemarketingListsListResource
        :<|> TargetableRemarketingListsGetResource
        :<|> PlatformTypesListResource
@@ -3556,6 +3652,11 @@ type DFAReportingAPI =
        :<|> CreativeFieldsGetResource
        :<|> CreativeFieldsDeleteResource
        :<|> CreativeFieldsUpdateResource
+       :<|> TargetingTemplatesInsertResource
+       :<|> TargetingTemplatesListResource
+       :<|> TargetingTemplatesPatchResource
+       :<|> TargetingTemplatesGetResource
+       :<|> TargetingTemplatesUpdateResource
        :<|> EventTagsInsertResource
        :<|> EventTagsListResource
        :<|> EventTagsPatchResource

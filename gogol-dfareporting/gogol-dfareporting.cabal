@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2.5@
+    This library is compatible with version @v2.6@
     of the API.
 
 source-repository head
@@ -151,6 +151,7 @@ library
         , Network.Google.Resource.DFAReporting.LandingPages.List
         , Network.Google.Resource.DFAReporting.LandingPages.Patch
         , Network.Google.Resource.DFAReporting.LandingPages.Update
+        , Network.Google.Resource.DFAReporting.Languages.List
         , Network.Google.Resource.DFAReporting.Metros.List
         , Network.Google.Resource.DFAReporting.MobileCarriers.Get
         , Network.Google.Resource.DFAReporting.MobileCarriers.List
@@ -219,6 +220,11 @@ library
         , Network.Google.Resource.DFAReporting.SubAccounts.Update
         , Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
         , Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
+        , Network.Google.Resource.DFAReporting.TargetingTemplates.Get
+        , Network.Google.Resource.DFAReporting.TargetingTemplates.Insert
+        , Network.Google.Resource.DFAReporting.TargetingTemplates.List
+        , Network.Google.Resource.DFAReporting.TargetingTemplates.Patch
+        , Network.Google.Resource.DFAReporting.TargetingTemplates.Update
         , Network.Google.Resource.DFAReporting.UserProFiles.Get
         , Network.Google.Resource.DFAReporting.UserProFiles.List
         , Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get

@@ -22,7 +22,7 @@
 --
 -- Updates an existing floodlight configuration.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightConfigurations.update@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightConfigurations.update@.
 module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightConfigurationsUpdate' request conforms to.
 type FloodlightConfigurationsUpdateResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightConfigurations" :>

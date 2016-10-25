@@ -386,14 +386,15 @@ clickTag =
 ctValue :: Lens' ClickTag (Maybe Text)
 ctValue = lens _ctValue (\ s a -> s{_ctValue = a})
 
--- | Parameter name for the specified click tag. For ENHANCED_IMAGE creative
--- assets, this field must match the value of the creative asset\'s
--- creativeAssetId.name field.
+-- | Parameter name for the specified click tag. For DISPLAY_IMAGE_GALLERY
+-- creative assets, this field must match the value of the creative
+-- asset\'s creativeAssetId.name field.
 ctName :: Lens' ClickTag (Maybe Text)
 ctName = lens _ctName (\ s a -> s{_ctName = a})
 
 -- | Advertiser event name associated with the click tag. This field is used
--- by ENHANCED_BANNER, ENHANCED_IMAGE, and HTML5_BANNER creatives.
+-- by DISPLAY_IMAGE_GALLERY and HTML5_BANNER creatives. Applicable to
+-- DISPLAY when the primary asset type is not HTML_IMAGE.
 ctEventName :: Lens' ClickTag (Maybe Text)
 ctEventName
   = lens _ctEventName (\ s a -> s{_ctEventName = a})
@@ -1273,7 +1274,7 @@ ttPlatformTypes
 
 -- | Browsers that this ad targets. For each browser either set
 -- browserVersionId or dartId along with the version numbers. If both are
--- specified, only browserVersionId will be used.The other fields are
+-- specified, only browserVersionId will be used. The other fields are
 -- populated automatically when the ad is inserted or updated.
 ttBrowsers :: Lens' TechnologyTargeting [Browser]
 ttBrowsers
@@ -1282,7 +1283,7 @@ ttBrowsers
       . _Coerce
 
 -- | Connection types that this ad targets. For each connection type only id
--- is required.The other fields are populated automatically when the ad is
+-- is required. The other fields are populated automatically when the ad is
 -- inserted or updated.
 ttConnectionTypes :: Lens' TechnologyTargeting [ConnectionType]
 ttConnectionTypes
@@ -3917,7 +3918,8 @@ instance ToJSON InventoryItemsListResponse where
 --
 -- /See:/ 'ad' smart constructor.
 data Ad = Ad'
-    { _aCreativeGroupAssignments              :: !(Maybe [CreativeGroupAssignment])
+    { _aTargetingTemplateId                   :: !(Maybe (Textual Int64))
+    , _aCreativeGroupAssignments              :: !(Maybe [CreativeGroupAssignment])
     , _aGeoTargeting                          :: !(Maybe GeoTargeting)
     , _aCreativeRotation                      :: !(Maybe CreativeRotation)
     , _aTechnologyTargeting                   :: !(Maybe TechnologyTargeting)
@@ -3949,6 +3951,7 @@ data Ad = Ad'
     , _aSubAccountId                          :: !(Maybe (Textual Int64))
     , _aType                                  :: !(Maybe AdType)
     , _aRemarketingListExpression             :: !(Maybe ListTargetingExpression)
+    , _aLanguageTargeting                     :: !(Maybe LanguageTargeting)
     , _aDynamicClickTracker                   :: !(Maybe Bool)
     , _aCompatibility                         :: !(Maybe AdCompatibility)
     , _aArchived                              :: !(Maybe Bool)
@@ -3959,6 +3962,8 @@ data Ad = Ad'
 -- | Creates a value of 'Ad' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aTargetingTemplateId'
 --
 -- * 'aCreativeGroupAssignments'
 --
@@ -4024,6 +4029,8 @@ data Ad = Ad'
 --
 -- * 'aRemarketingListExpression'
 --
+-- * 'aLanguageTargeting'
+--
 -- * 'aDynamicClickTracker'
 --
 -- * 'aCompatibility'
@@ -4037,7 +4044,8 @@ ad
     :: Ad
 ad =
     Ad'
-    { _aCreativeGroupAssignments = Nothing
+    { _aTargetingTemplateId = Nothing
+    , _aCreativeGroupAssignments = Nothing
     , _aGeoTargeting = Nothing
     , _aCreativeRotation = Nothing
     , _aTechnologyTargeting = Nothing
@@ -4069,12 +4077,24 @@ ad =
     , _aSubAccountId = Nothing
     , _aType = Nothing
     , _aRemarketingListExpression = Nothing
+    , _aLanguageTargeting = Nothing
     , _aDynamicClickTracker = Nothing
     , _aCompatibility = Nothing
     , _aArchived = Nothing
     , _aDefaultClickThroughEventTagProperties = Nothing
     , _aPlacementAssignments = Nothing
     }
+
+-- | Targeting template ID, used to apply preconfigured targeting information
+-- to this ad. This cannot be set while any of dayPartTargeting,
+-- geoTargeting, keyValueTargetingExpression, languageTargeting,
+-- remarketingListExpression, or technologyTargeting are set. Applicable
+-- when type is AD_SERVING_STANDARD_AD.
+aTargetingTemplateId :: Lens' Ad (Maybe Int64)
+aTargetingTemplateId
+  = lens _aTargetingTemplateId
+      (\ s a -> s{_aTargetingTemplateId = a})
+      . mapping _Coerce
 
 -- | Creative group assignments for this ad. Applicable when type is
 -- AD_SERVING_CLICK_TRACKER. Only one assignment per creative group number
@@ -4086,7 +4106,8 @@ aCreativeGroupAssignments
       . _Default
       . _Coerce
 
--- | Geographical targeting information for this ad.Applicable when type is
+-- | Geographical targeting information for this ad. This field must be left
+-- blank if the ad is using a targeting template. Applicable when type is
 -- AD_SERVING_STANDARD_AD.
 aGeoTargeting :: Lens' Ad (Maybe GeoTargeting)
 aGeoTargeting
@@ -4102,7 +4123,8 @@ aCreativeRotation
   = lens _aCreativeRotation
       (\ s a -> s{_aCreativeRotation = a})
 
--- | Technology platform targeting information for this ad. Applicable when
+-- | Technology platform targeting information for this ad. This field must
+-- be left blank if the ad is using a targeting template. Applicable when
 -- type is AD_SERVING_STANDARD_AD.
 aTechnologyTargeting :: Lens' Ad (Maybe TechnologyTargeting)
 aTechnologyTargeting
@@ -4117,7 +4139,8 @@ aAudienceSegmentId
       (\ s a -> s{_aAudienceSegmentId = a})
       . mapping _Coerce
 
--- | Time and day targeting information for this ad. Applicable when type is
+-- | Time and day targeting information for this ad. This field must be left
+-- blank if the ad is using a targeting template. Applicable when type is
 -- AD_SERVING_STANDARD_AD.
 aDayPartTargeting :: Lens' Ad (Maybe DayPartTargeting)
 aDayPartTargeting
@@ -4228,7 +4251,8 @@ aAccountId
 aName :: Lens' Ad (Maybe Text)
 aName = lens _aName (\ s a -> s{_aName = a})
 
--- | Key-value targeting information for this ad. Applicable when type is
+-- | Key-value targeting information for this ad. This field must be left
+-- blank if the ad is using a targeting template. Applicable when type is
 -- AD_SERVING_STANDARD_AD.
 aKeyValueTargetingExpression :: Lens' Ad (Maybe KeyValueTargetingExpression)
 aKeyValueTargetingExpression
@@ -4242,7 +4266,7 @@ aEndTime
   = lens _aEndTime (\ s a -> s{_aEndTime = a}) .
       mapping _DateTime
 
--- | Information about the creation of this ad.This is a read-only field.
+-- | Information about the creation of this ad. This is a read-only field.
 aCreateInfo :: Lens' Ad (Maybe LastModifiedInfo)
 aCreateInfo
   = lens _aCreateInfo (\ s a -> s{_aCreateInfo = a})
@@ -4284,12 +4308,21 @@ aSubAccountId
 aType :: Lens' Ad (Maybe AdType)
 aType = lens _aType (\ s a -> s{_aType = a})
 
--- | Applicable when type is AD_SERVING_STANDARD_AD. Remarketing list
--- targeting expression for this ad.
+-- | Remarketing list targeting expression for this ad. This field must be
+-- left blank if the ad is using a targeting template. Applicable when type
+-- is AD_SERVING_STANDARD_AD.
 aRemarketingListExpression :: Lens' Ad (Maybe ListTargetingExpression)
 aRemarketingListExpression
   = lens _aRemarketingListExpression
       (\ s a -> s{_aRemarketingListExpression = a})
+
+-- | Language targeting information for this ad. This field must be left
+-- blank if the ad is using a targeting template. Applicable when type is
+-- AD_SERVING_STANDARD_AD.
+aLanguageTargeting :: Lens' Ad (Maybe LanguageTargeting)
+aLanguageTargeting
+  = lens _aLanguageTargeting
+      (\ s a -> s{_aLanguageTargeting = a})
 
 -- | Whether this ad is a dynamic click tracker. Applicable when type is
 -- AD_SERVING_CLICK_TRACKER. This is a required field on insert, and is
@@ -4337,8 +4370,9 @@ instance FromJSON Ad where
           = withObject "Ad"
               (\ o ->
                  Ad' <$>
-                   (o .:? "creativeGroupAssignments" .!= mempty) <*>
-                     (o .:? "geoTargeting")
+                   (o .:? "targetingTemplateId") <*>
+                     (o .:? "creativeGroupAssignments" .!= mempty)
+                     <*> (o .:? "geoTargeting")
                      <*> (o .:? "creativeRotation")
                      <*> (o .:? "technologyTargeting")
                      <*> (o .:? "audienceSegmentId")
@@ -4369,6 +4403,7 @@ instance FromJSON Ad where
                      <*> (o .:? "subaccountId")
                      <*> (o .:? "type")
                      <*> (o .:? "remarketingListExpression")
+                     <*> (o .:? "languageTargeting")
                      <*> (o .:? "dynamicClickTracker")
                      <*> (o .:? "compatibility")
                      <*> (o .:? "archived")
@@ -4379,7 +4414,9 @@ instance ToJSON Ad where
         toJSON Ad'{..}
           = object
               (catMaybes
-                 [("creativeGroupAssignments" .=) <$>
+                 [("targetingTemplateId" .=) <$>
+                    _aTargetingTemplateId,
+                  ("creativeGroupAssignments" .=) <$>
                     _aCreativeGroupAssignments,
                   ("geoTargeting" .=) <$> _aGeoTargeting,
                   ("creativeRotation" .=) <$> _aCreativeRotation,
@@ -4417,6 +4454,7 @@ instance ToJSON Ad where
                   ("type" .=) <$> _aType,
                   ("remarketingListExpression" .=) <$>
                     _aRemarketingListExpression,
+                  ("languageTargeting" .=) <$> _aLanguageTargeting,
                   ("dynamicClickTracker" .=) <$> _aDynamicClickTracker,
                   ("compatibility" .=) <$> _aCompatibility,
                   ("archived" .=) <$> _aArchived,
@@ -4429,27 +4467,28 @@ instance ToJSON Ad where
 --
 -- /See:/ 'project' smart constructor.
 data Project = Project'
-    { _pTargetClicks      :: !(Maybe (Textual Int64))
-    , _pClientBillingCode :: !(Maybe Text)
-    , _pTargetCpmNanos    :: !(Maybe (Textual Int64))
-    , _pTargetConversions :: !(Maybe (Textual Int64))
-    , _pBudget            :: !(Maybe (Textual Int64))
-    , _pKind              :: !Text
-    , _pAdvertiserId      :: !(Maybe (Textual Int64))
-    , _pEndDate           :: !(Maybe Date')
-    , _pOverview          :: !(Maybe Text)
-    , _pTargetImpressions :: !(Maybe (Textual Int64))
-    , _pStartDate         :: !(Maybe Date')
-    , _pTargetCpcNanos    :: !(Maybe (Textual Int64))
-    , _pAccountId         :: !(Maybe (Textual Int64))
-    , _pName              :: !(Maybe Text)
-    , _pLastModifiedInfo  :: !(Maybe LastModifiedInfo)
-    , _pId                :: !(Maybe (Textual Int64))
-    , _pAudienceAgeGroup  :: !(Maybe ProjectAudienceAgeGroup)
-    , _pSubAccountId      :: !(Maybe (Textual Int64))
-    , _pAudienceGender    :: !(Maybe ProjectAudienceGender)
-    , _pClientName        :: !(Maybe Text)
-    , _pTargetCpaNanos    :: !(Maybe (Textual Int64))
+    { _pTargetClicks             :: !(Maybe (Textual Int64))
+    , _pClientBillingCode        :: !(Maybe Text)
+    , _pTargetCpmNanos           :: !(Maybe (Textual Int64))
+    , _pTargetConversions        :: !(Maybe (Textual Int64))
+    , _pBudget                   :: !(Maybe (Textual Int64))
+    , _pKind                     :: !Text
+    , _pAdvertiserId             :: !(Maybe (Textual Int64))
+    , _pEndDate                  :: !(Maybe Date')
+    , _pOverview                 :: !(Maybe Text)
+    , _pTargetImpressions        :: !(Maybe (Textual Int64))
+    , _pStartDate                :: !(Maybe Date')
+    , _pTargetCpcNanos           :: !(Maybe (Textual Int64))
+    , _pAccountId                :: !(Maybe (Textual Int64))
+    , _pName                     :: !(Maybe Text)
+    , _pLastModifiedInfo         :: !(Maybe LastModifiedInfo)
+    , _pId                       :: !(Maybe (Textual Int64))
+    , _pAudienceAgeGroup         :: !(Maybe ProjectAudienceAgeGroup)
+    , _pSubAccountId             :: !(Maybe (Textual Int64))
+    , _pTargetCpmActiveViewNanos :: !(Maybe (Textual Int64))
+    , _pAudienceGender           :: !(Maybe ProjectAudienceGender)
+    , _pClientName               :: !(Maybe Text)
+    , _pTargetCpaNanos           :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
@@ -4492,6 +4531,8 @@ data Project = Project'
 --
 -- * 'pSubAccountId'
 --
+-- * 'pTargetCpmActiveViewNanos'
+--
 -- * 'pAudienceGender'
 --
 -- * 'pClientName'
@@ -4519,6 +4560,7 @@ project =
     , _pId = Nothing
     , _pAudienceAgeGroup = Nothing
     , _pSubAccountId = Nothing
+    , _pTargetCpmActiveViewNanos = Nothing
     , _pAudienceGender = Nothing
     , _pClientName = Nothing
     , _pTargetCpaNanos = Nothing
@@ -4637,6 +4679,13 @@ pSubAccountId
       (\ s a -> s{_pSubAccountId = a})
       . mapping _Coerce
 
+-- | vCPM from Active View that the advertiser is targeting.
+pTargetCpmActiveViewNanos :: Lens' Project (Maybe Int64)
+pTargetCpmActiveViewNanos
+  = lens _pTargetCpmActiveViewNanos
+      (\ s a -> s{_pTargetCpmActiveViewNanos = a})
+      . mapping _Coerce
+
 -- | Audience gender of this project.
 pAudienceGender :: Lens' Project (Maybe ProjectAudienceGender)
 pAudienceGender
@@ -4678,6 +4727,7 @@ instance FromJSON Project where
                      <*> (o .:? "id")
                      <*> (o .:? "audienceAgeGroup")
                      <*> (o .:? "subaccountId")
+                     <*> (o .:? "targetCpmActiveViewNanos")
                      <*> (o .:? "audienceGender")
                      <*> (o .:? "clientName")
                      <*> (o .:? "targetCpaNanos"))
@@ -4703,6 +4753,8 @@ instance ToJSON Project where
                   ("id" .=) <$> _pId,
                   ("audienceAgeGroup" .=) <$> _pAudienceAgeGroup,
                   ("subaccountId" .=) <$> _pSubAccountId,
+                  ("targetCpmActiveViewNanos" .=) <$>
+                    _pTargetCpmActiveViewNanos,
                   ("audienceGender" .=) <$> _pAudienceGender,
                   ("clientName" .=) <$> _pClientName,
                   ("targetCpaNanos" .=) <$> _pTargetCpaNanos])
@@ -6134,6 +6186,57 @@ instance ToJSON CustomRichMediaEvents where
                  [Just ("kind" .= _crmeKind),
                   ("filteredEventIds" .=) <$> _crmeFilteredEventIds])
 
+-- | Language List Response
+--
+-- /See:/ 'languagesListResponse' smart constructor.
+data LanguagesListResponse = LanguagesListResponse'
+    { _llrKind      :: !Text
+    , _llrLanguages :: !(Maybe [Language])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LanguagesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llrKind'
+--
+-- * 'llrLanguages'
+languagesListResponse
+    :: LanguagesListResponse
+languagesListResponse =
+    LanguagesListResponse'
+    { _llrKind = "dfareporting#languagesListResponse"
+    , _llrLanguages = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#languagesListResponse\".
+llrKind :: Lens' LanguagesListResponse Text
+llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
+
+-- | Language collection.
+llrLanguages :: Lens' LanguagesListResponse [Language]
+llrLanguages
+  = lens _llrLanguages (\ s a -> s{_llrLanguages = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON LanguagesListResponse where
+        parseJSON
+          = withObject "LanguagesListResponse"
+              (\ o ->
+                 LanguagesListResponse' <$>
+                   (o .:? "kind" .!=
+                      "dfareporting#languagesListResponse")
+                     <*> (o .:? "languages" .!= mempty))
+
+instance ToJSON LanguagesListResponse where
+        toJSON LanguagesListResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _llrKind),
+                  ("languages" .=) <$> _llrLanguages])
+
 -- | Targetable remarketing list response
 --
 -- /See:/ 'targetableRemarketingListsListResponse' smart constructor.
@@ -6947,6 +7050,7 @@ data Creative = Creative'
     , _creVersion                             :: !(Maybe (Textual Int32))
     , _creLatestTraffickedCreativeId          :: !(Maybe (Textual Int64))
     , _creThirdPartyRichMediaImpressionsURL   :: !(Maybe Text)
+    , _creDynamicAssetSelection               :: !(Maybe Bool)
     , _creLastModifiedInfo                    :: !(Maybe LastModifiedInfo)
     , _creId                                  :: !(Maybe (Textual Int64))
     , _creAuthoringSource                     :: !(Maybe CreativeAuthoringSource)
@@ -6955,6 +7059,7 @@ data Creative = Creative'
     , _creSubAccountId                        :: !(Maybe (Textual Int64))
     , _creType                                :: !(Maybe CreativeType)
     , _creTimerCustomEvents                   :: !(Maybe [CreativeCustomEvent])
+    , _creCreativeAssetSelection              :: !(Maybe CreativeAssetSelection)
     , _creStudioCreativeId                    :: !(Maybe (Textual Int64))
     , _creCompatibility                       :: !(Maybe [CreativeCompatibilityItem])
     , _creBackupImageFeatures                 :: !(Maybe [CreativeBackupImageFeaturesItem])
@@ -7050,6 +7155,8 @@ data Creative = Creative'
 --
 -- * 'creThirdPartyRichMediaImpressionsURL'
 --
+-- * 'creDynamicAssetSelection'
+--
 -- * 'creLastModifiedInfo'
 --
 -- * 'creId'
@@ -7065,6 +7172,8 @@ data Creative = Creative'
 -- * 'creType'
 --
 -- * 'creTimerCustomEvents'
+--
+-- * 'creCreativeAssetSelection'
 --
 -- * 'creStudioCreativeId'
 --
@@ -7130,6 +7239,7 @@ creative =
     , _creVersion = Nothing
     , _creLatestTraffickedCreativeId = Nothing
     , _creThirdPartyRichMediaImpressionsURL = Nothing
+    , _creDynamicAssetSelection = Nothing
     , _creLastModifiedInfo = Nothing
     , _creId = Nothing
     , _creAuthoringSource = Nothing
@@ -7138,6 +7248,7 @@ creative =
     , _creSubAccountId = Nothing
     , _creType = Nothing
     , _creTimerCustomEvents = Nothing
+    , _creCreativeAssetSelection = Nothing
     , _creStudioCreativeId = Nothing
     , _creCompatibility = Nothing
     , _creBackupImageFeatures = Nothing
@@ -7487,6 +7598,16 @@ creThirdPartyRichMediaImpressionsURL
       (\ s a ->
          s{_creThirdPartyRichMediaImpressionsURL = a})
 
+-- | Set this to true to enable the use of rules to target individual assets
+-- in this creative. When set to true creativeAssetSelection must be set.
+-- This also controls asset-level companions. When this is true, companion
+-- creatives should be assigned to creative assets. Learn more. Applicable
+-- to INSTREAM_VIDEO creatives.
+creDynamicAssetSelection :: Lens' Creative (Maybe Bool)
+creDynamicAssetSelection
+  = lens _creDynamicAssetSelection
+      (\ s a -> s{_creDynamicAssetSelection = a})
+
 -- | Creative last modification information. This is a read-only field.
 -- Applicable to all creative types.
 creLastModifiedInfo :: Lens' Creative (Maybe LastModifiedInfo)
@@ -7537,8 +7658,10 @@ creSubAccountId
       (\ s a -> s{_creSubAccountId = a})
       . mapping _Coerce
 
--- | Type of this creative.This is a required field. Applicable to all
--- creative types.
+-- | Type of this creative. This is a required field. Applicable to all
+-- creative types. Note: FLASH_INPAGE, HTML5_BANNER, and IMAGE are only
+-- used for existing creatives. New creatives should use DISPLAY as a
+-- replacement for these types.
 creType :: Lens' Creative (Maybe CreativeType)
 creType = lens _creType (\ s a -> s{_creType = a})
 
@@ -7553,6 +7676,12 @@ creTimerCustomEvents
       (\ s a -> s{_creTimerCustomEvents = a})
       . _Default
       . _Coerce
+
+-- | Required if dynamicAssetSelection is true.
+creCreativeAssetSelection :: Lens' Creative (Maybe CreativeAssetSelection)
+creCreativeAssetSelection
+  = lens _creCreativeAssetSelection
+      (\ s a -> s{_creCreativeAssetSelection = a})
 
 -- | Studio creative ID associated with rich media and VPAID creatives. This
 -- is a read-only field. Applicable to the following creative types: all
@@ -7611,8 +7740,8 @@ creArchived
 
 -- | List of companion creatives assigned to an in-Stream videocreative.
 -- Acceptable values include IDs of existing flash and image creatives.
--- Applicable to the following creative types: all INSTREAM_VIDEO and all
--- VPAID.
+-- Applicable to the following creative types: all VPAID and all
+-- INSTREAM_VIDEO with dynamicAssetSelection set to false.
 creCompanionCreatives :: Lens' Creative [Int64]
 creCompanionCreatives
   = lens _creCompanionCreatives
@@ -7650,7 +7779,7 @@ creRedirectURL
   = lens _creRedirectURL
       (\ s a -> s{_creRedirectURL = a})
 
--- | Whether images are automatically advanced for enhanced image creatives.
+-- | Whether images are automatically advanced for image gallery creatives.
 -- Applicable to the following creative types: DISPLAY_IMAGE_GALLERY.
 creAutoAdvanceImages :: Lens' Creative (Maybe Bool)
 creAutoAdvanceImages
@@ -7710,6 +7839,7 @@ instance FromJSON Creative where
                      <*> (o .:? "version")
                      <*> (o .:? "latestTraffickedCreativeId")
                      <*> (o .:? "thirdPartyRichMediaImpressionsUrl")
+                     <*> (o .:? "dynamicAssetSelection")
                      <*> (o .:? "lastModifiedInfo")
                      <*> (o .:? "id")
                      <*> (o .:? "authoringSource")
@@ -7718,6 +7848,7 @@ instance FromJSON Creative where
                      <*> (o .:? "subaccountId")
                      <*> (o .:? "type")
                      <*> (o .:? "timerCustomEvents" .!= mempty)
+                     <*> (o .:? "creativeAssetSelection")
                      <*> (o .:? "studioCreativeId")
                      <*> (o .:? "compatibility" .!= mempty)
                      <*> (o .:? "backupImageFeatures" .!= mempty)
@@ -7784,6 +7915,8 @@ instance ToJSON Creative where
                     _creLatestTraffickedCreativeId,
                   ("thirdPartyRichMediaImpressionsUrl" .=) <$>
                     _creThirdPartyRichMediaImpressionsURL,
+                  ("dynamicAssetSelection" .=) <$>
+                    _creDynamicAssetSelection,
                   ("lastModifiedInfo" .=) <$> _creLastModifiedInfo,
                   ("id" .=) <$> _creId,
                   ("authoringSource" .=) <$> _creAuthoringSource,
@@ -7792,6 +7925,8 @@ instance ToJSON Creative where
                   ("subaccountId" .=) <$> _creSubAccountId,
                   ("type" .=) <$> _creType,
                   ("timerCustomEvents" .=) <$> _creTimerCustomEvents,
+                  ("creativeAssetSelection" .=) <$>
+                    _creCreativeAssetSelection,
                   ("studioCreativeId" .=) <$> _creStudioCreativeId,
                   ("compatibility" .=) <$> _creCompatibility,
                   ("backupImageFeatures" .=) <$>
@@ -8290,6 +8425,71 @@ instance ToJSON Report where
                   ("criteria" .=) <$> _rCriteria,
                   ("fileName" .=) <$> _rFileName])
 
+-- | A rule associates an asset with a targeting template for asset-level
+-- targeting. Applicable to INSTREAM_VIDEO creatives.
+--
+-- /See:/ 'rule' smart constructor.
+data Rule = Rule'
+    { _rulTargetingTemplateId :: !(Maybe (Textual Int64))
+    , _rulName                :: !(Maybe Text)
+    , _rulAssetId             :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Rule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rulTargetingTemplateId'
+--
+-- * 'rulName'
+--
+-- * 'rulAssetId'
+rule
+    :: Rule
+rule =
+    Rule'
+    { _rulTargetingTemplateId = Nothing
+    , _rulName = Nothing
+    , _rulAssetId = Nothing
+    }
+
+-- | A targeting template ID. The targeting from the targeting template will
+-- be used to determine whether this asset should be served. This is a
+-- required field.
+rulTargetingTemplateId :: Lens' Rule (Maybe Int64)
+rulTargetingTemplateId
+  = lens _rulTargetingTemplateId
+      (\ s a -> s{_rulTargetingTemplateId = a})
+      . mapping _Coerce
+
+-- | A user-friendly name for this rule. This is a required field.
+rulName :: Lens' Rule (Maybe Text)
+rulName = lens _rulName (\ s a -> s{_rulName = a})
+
+-- | A creativeAssets[].id. This should refer to one of the parent assets in
+-- this creative. This is a required field.
+rulAssetId :: Lens' Rule (Maybe Int64)
+rulAssetId
+  = lens _rulAssetId (\ s a -> s{_rulAssetId = a}) .
+      mapping _Coerce
+
+instance FromJSON Rule where
+        parseJSON
+          = withObject "Rule"
+              (\ o ->
+                 Rule' <$>
+                   (o .:? "targetingTemplateId") <*> (o .:? "name") <*>
+                     (o .:? "assetId"))
+
+instance ToJSON Rule where
+        toJSON Rule'{..}
+          = object
+              (catMaybes
+                 [("targetingTemplateId" .=) <$>
+                    _rulTargetingTemplateId,
+                  ("name" .=) <$> _rulName,
+                  ("assetId" .=) <$> _rulAssetId])
+
 -- | Contains properties of a DCM campaign.
 --
 -- /See:/ 'campaign' smart constructor.
@@ -8307,7 +8507,6 @@ data Campaign = Campaign'
     , _camLookbackConfiguration                        :: !(Maybe LookbackConfiguration)
     , _camStartDate                                    :: !(Maybe Date')
     , _camAccountId                                    :: !(Maybe (Textual Int64))
-    , _camComscoreVceEnabled                           :: !(Maybe Bool)
     , _camName                                         :: !(Maybe Text)
     , _camAdvertiserGroupId                            :: !(Maybe (Textual Int64))
     , _camBillingInvoiceCode                           :: !(Maybe Text)
@@ -8354,8 +8553,6 @@ data Campaign = Campaign'
 --
 -- * 'camAccountId'
 --
--- * 'camComscoreVceEnabled'
---
 -- * 'camName'
 --
 -- * 'camAdvertiserGroupId'
@@ -8400,7 +8597,6 @@ campaign =
     , _camLookbackConfiguration = Nothing
     , _camStartDate = Nothing
     , _camAccountId = Nothing
-    , _camComscoreVceEnabled = Nothing
     , _camName = Nothing
     , _camAdvertiserGroupId = Nothing
     , _camBillingInvoiceCode = Nothing
@@ -8511,12 +8707,6 @@ camAccountId :: Lens' Campaign (Maybe Int64)
 camAccountId
   = lens _camAccountId (\ s a -> s{_camAccountId = a})
       . mapping _Coerce
-
--- | Whether comScore vCE reports are enabled for this campaign.
-camComscoreVceEnabled :: Lens' Campaign (Maybe Bool)
-camComscoreVceEnabled
-  = lens _camComscoreVceEnabled
-      (\ s a -> s{_camComscoreVceEnabled = a})
 
 -- | Name of this campaign. This is a required field and must be less than
 -- 256 characters long and unique among campaigns of the same advertiser.
@@ -8635,7 +8825,6 @@ instance FromJSON Campaign where
                      <*> (o .:? "lookbackConfiguration")
                      <*> (o .:? "startDate")
                      <*> (o .:? "accountId")
-                     <*> (o .:? "comscoreVceEnabled")
                      <*> (o .:? "name")
                      <*> (o .:? "advertiserGroupId")
                      <*> (o .:? "billingInvoiceCode")
@@ -8674,7 +8863,6 @@ instance ToJSON Campaign where
                     _camLookbackConfiguration,
                   ("startDate" .=) <$> _camStartDate,
                   ("accountId" .=) <$> _camAccountId,
-                  ("comscoreVceEnabled" .=) <$> _camComscoreVceEnabled,
                   ("name" .=) <$> _camName,
                   ("advertiserGroupId" .=) <$> _camAdvertiserGroupId,
                   ("billingInvoiceCode" .=) <$> _camBillingInvoiceCode,
@@ -9128,25 +9316,25 @@ instance ToJSON CreativesListResponse where
 --
 -- /See:/ 'account' smart constructor.
 data Account = Account'
-    { _aaAccountPermissionIds   :: !(Maybe [Textual Int64])
-    , _aaMaximumImageSize       :: !(Maybe (Textual Int64))
-    , _aaCurrencyId             :: !(Maybe (Textual Int64))
-    , _aaReportsConfiguration   :: !(Maybe ReportsConfiguration)
-    , _aaNielsenOCREnabled      :: !(Maybe Bool)
-    , _aaKind                   :: !Text
-    , _aaLocale                 :: !(Maybe Text)
-    , _aaActive                 :: !(Maybe Bool)
-    , _aaAvailablePermissionIds :: !(Maybe [Textual Int64])
-    , _aaTeaserSizeLimit        :: !(Maybe (Textual Int64))
-    , _aaComscoreVceEnabled     :: !(Maybe Bool)
-    , _aaActiveViewOptOut       :: !(Maybe Bool)
-    , _aaName                   :: !(Maybe Text)
-    , _aaAccountProFile         :: !(Maybe AccountAccountProFile)
-    , _aaId                     :: !(Maybe (Textual Int64))
-    , _aaCountryId              :: !(Maybe (Textual Int64))
-    , _aaActiveAdsLimitTier     :: !(Maybe AccountActiveAdsLimitTier)
-    , _aaDefaultCreativeSizeId  :: !(Maybe (Textual Int64))
-    , _aaDescription            :: !(Maybe Text)
+    { _aaAccountPermissionIds    :: !(Maybe [Textual Int64])
+    , _aaMaximumImageSize        :: !(Maybe (Textual Int64))
+    , _aaCurrencyId              :: !(Maybe (Textual Int64))
+    , _aaReportsConfiguration    :: !(Maybe ReportsConfiguration)
+    , _aaNielsenOCREnabled       :: !(Maybe Bool)
+    , _aaKind                    :: !Text
+    , _aaLocale                  :: !(Maybe Text)
+    , _aaActive                  :: !(Maybe Bool)
+    , _aaAvailablePermissionIds  :: !(Maybe [Textual Int64])
+    , _aaTeaserSizeLimit         :: !(Maybe (Textual Int64))
+    , _aaActiveViewOptOut        :: !(Maybe Bool)
+    , _aaShareReportsWithTwitter :: !(Maybe Bool)
+    , _aaName                    :: !(Maybe Text)
+    , _aaAccountProFile          :: !(Maybe AccountAccountProFile)
+    , _aaId                      :: !(Maybe (Textual Int64))
+    , _aaCountryId               :: !(Maybe (Textual Int64))
+    , _aaActiveAdsLimitTier      :: !(Maybe AccountActiveAdsLimitTier)
+    , _aaDefaultCreativeSizeId   :: !(Maybe (Textual Int64))
+    , _aaDescription             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
@@ -9173,9 +9361,9 @@ data Account = Account'
 --
 -- * 'aaTeaserSizeLimit'
 --
--- * 'aaComscoreVceEnabled'
---
 -- * 'aaActiveViewOptOut'
+--
+-- * 'aaShareReportsWithTwitter'
 --
 -- * 'aaName'
 --
@@ -9204,8 +9392,8 @@ account =
     , _aaActive = Nothing
     , _aaAvailablePermissionIds = Nothing
     , _aaTeaserSizeLimit = Nothing
-    , _aaComscoreVceEnabled = Nothing
     , _aaActiveViewOptOut = Nothing
+    , _aaShareReportsWithTwitter = Nothing
     , _aaName = Nothing
     , _aaAccountProFile = Nothing
     , _aaId = Nothing
@@ -9295,19 +9483,18 @@ aaTeaserSizeLimit
       (\ s a -> s{_aaTeaserSizeLimit = a})
       . mapping _Coerce
 
--- | Whether campaigns created in this account will be enabled for comScore
--- vCE by default.
-aaComscoreVceEnabled :: Lens' Account (Maybe Bool)
-aaComscoreVceEnabled
-  = lens _aaComscoreVceEnabled
-      (\ s a -> s{_aaComscoreVceEnabled = a})
-
 -- | Whether to serve creatives with Active View tags. If disabled,
 -- viewability data will not be available for any impressions.
 aaActiveViewOptOut :: Lens' Account (Maybe Bool)
 aaActiveViewOptOut
   = lens _aaActiveViewOptOut
       (\ s a -> s{_aaActiveViewOptOut = a})
+
+-- | Share Path to Conversion reports with Twitter.
+aaShareReportsWithTwitter :: Lens' Account (Maybe Bool)
+aaShareReportsWithTwitter
+  = lens _aaShareReportsWithTwitter
+      (\ s a -> s{_aaShareReportsWithTwitter = a})
 
 -- | Name of this account. This is a required field, and must be less than
 -- 128 characters long and be globally unique.
@@ -9367,8 +9554,8 @@ instance FromJSON Account where
                      <*> (o .:? "active")
                      <*> (o .:? "availablePermissionIds" .!= mempty)
                      <*> (o .:? "teaserSizeLimit")
-                     <*> (o .:? "comscoreVceEnabled")
                      <*> (o .:? "activeViewOptOut")
+                     <*> (o .:? "shareReportsWithTwitter")
                      <*> (o .:? "name")
                      <*> (o .:? "accountProfile")
                      <*> (o .:? "id")
@@ -9394,8 +9581,9 @@ instance ToJSON Account where
                   ("availablePermissionIds" .=) <$>
                     _aaAvailablePermissionIds,
                   ("teaserSizeLimit" .=) <$> _aaTeaserSizeLimit,
-                  ("comscoreVceEnabled" .=) <$> _aaComscoreVceEnabled,
                   ("activeViewOptOut" .=) <$> _aaActiveViewOptOut,
+                  ("shareReportsWithTwitter" .=) <$>
+                    _aaShareReportsWithTwitter,
                   ("name" .=) <$> _aaName,
                   ("accountProfile" .=) <$> _aaAccountProFile,
                   ("id" .=) <$> _aaId,
@@ -9445,8 +9633,9 @@ cbirConversions
       . _Default
       . _Coerce
 
--- | Describes how encryptedUserId is encrypted. This is a required field if
--- encryptedUserId is used.
+-- | Describes how encryptedUserId or encryptedUserIdCandidates[] is
+-- encrypted. This is a required field if encryptedUserId or
+-- encryptedUserIdCandidates[] is used.
 cbirEncryptionInfo :: Lens' ConversionsBatchInsertRequest (Maybe EncryptionInfo)
 cbirEncryptionInfo
   = lens _cbirEncryptionInfo
@@ -11165,8 +11354,8 @@ instance ToJSON CampaignCreativeAssociation where
                  [Just ("kind" .= _ccaKind),
                   ("creativeId" .=) <$> _ccaCreativeId])
 
--- | The original conversion that was inserted and whether there were any
--- errors.
+-- | The original conversion that was inserted or updated and whether there
+-- were any errors.
 --
 -- /See:/ 'conversionStatus' smart constructor.
 data ConversionStatus = ConversionStatus'
@@ -11198,7 +11387,7 @@ conversionStatus =
 csKind :: Lens' ConversionStatus Text
 csKind = lens _csKind (\ s a -> s{_csKind = a})
 
--- | The original conversion that was inserted.
+-- | The original conversion that was inserted or updated.
 csConversion :: Lens' ConversionStatus (Maybe Conversion)
 csConversion
   = lens _csConversion (\ s a -> s{_csConversion = a})
@@ -13632,6 +13821,78 @@ instance ToJSON ChangeLog where
                   ("subaccountId" .=) <$> _chaSubAccountId,
                   ("changeTime" .=) <$> _chaChangeTime])
 
+-- | Contains information about a language that can be targeted by ads.
+--
+-- /See:/ 'language' smart constructor.
+data Language = Language'
+    { _lLanguageCode :: !(Maybe Text)
+    , _lKind         :: !Text
+    , _lName         :: !(Maybe Text)
+    , _lId           :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Language' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lLanguageCode'
+--
+-- * 'lKind'
+--
+-- * 'lName'
+--
+-- * 'lId'
+language
+    :: Language
+language =
+    Language'
+    { _lLanguageCode = Nothing
+    , _lKind = "dfareporting#language"
+    , _lName = Nothing
+    , _lId = Nothing
+    }
+
+-- | Format of language code is an ISO 639 two-letter language code
+-- optionally followed by an underscore followed by an ISO 3166 code.
+-- Examples are \"en\" for English or \"zh_CN\" for Simplified Chinese.
+lLanguageCode :: Lens' Language (Maybe Text)
+lLanguageCode
+  = lens _lLanguageCode
+      (\ s a -> s{_lLanguageCode = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#language\".
+lKind :: Lens' Language Text
+lKind = lens _lKind (\ s a -> s{_lKind = a})
+
+-- | Name of this language.
+lName :: Lens' Language (Maybe Text)
+lName = lens _lName (\ s a -> s{_lName = a})
+
+-- | Language ID of this language. This is the ID used for targeting and
+-- generating reports.
+lId :: Lens' Language (Maybe Int64)
+lId
+  = lens _lId (\ s a -> s{_lId = a}) . mapping _Coerce
+
+instance FromJSON Language where
+        parseJSON
+          = withObject "Language"
+              (\ o ->
+                 Language' <$>
+                   (o .:? "languageCode") <*>
+                     (o .:? "kind" .!= "dfareporting#language")
+                     <*> (o .:? "name")
+                     <*> (o .:? "id"))
+
+instance ToJSON Language where
+        toJSON Language'{..}
+          = object
+              (catMaybes
+                 [("languageCode" .=) <$> _lLanguageCode,
+                  Just ("kind" .= _lKind), ("name" .=) <$> _lName,
+                  ("id" .=) <$> _lId])
+
 -- | Contains properties of a placement strategy.
 --
 -- /See:/ 'placementStrategy' smart constructor.
@@ -14796,7 +15057,8 @@ instance ToJSON DirectorySitesListResponse where
                   Just ("kind" .= _dslrKind),
                   ("directorySites" .=) <$> _dslrDirectorySites])
 
--- | The error code and description for a conversion that failed to insert.
+-- | The error code and description for a conversion that failed to insert or
+-- update.
 --
 -- /See:/ 'conversionError' smart constructor.
 data ConversionError = ConversionError'
@@ -15848,7 +16110,8 @@ instance ToJSON FloodlightActivityGroupsListResponse
 --
 -- /See:/ 'conversion' smart constructor.
 data Conversion = Conversion'
-    { _conoTimestampMicros           :: !(Maybe (Textual Int64))
+    { _conoEncryptedUserIdCandidates :: !(Maybe [Text])
+    , _conoTimestampMicros           :: !(Maybe (Textual Int64))
     , _conoLimitAdTracking           :: !(Maybe Bool)
     , _conoEncryptedUserId           :: !(Maybe Text)
     , _conoMobileDeviceId            :: !(Maybe Text)
@@ -15865,6 +16128,8 @@ data Conversion = Conversion'
 -- | Creates a value of 'Conversion' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'conoEncryptedUserIdCandidates'
 --
 -- * 'conoTimestampMicros'
 --
@@ -15893,7 +16158,8 @@ conversion
     :: Conversion
 conversion =
     Conversion'
-    { _conoTimestampMicros = Nothing
+    { _conoEncryptedUserIdCandidates = Nothing
+    , _conoTimestampMicros = Nothing
     , _conoLimitAdTracking = Nothing
     , _conoEncryptedUserId = Nothing
     , _conoMobileDeviceId = Nothing
@@ -15906,6 +16172,21 @@ conversion =
     , _conoChildDirectedTreatment = Nothing
     , _conoOrdinal = Nothing
     }
+
+-- | A list of the alphanumeric encrypted user IDs. Any user ID with exposure
+-- prior to the conversion timestamp will be used in the inserted
+-- conversion. If no such user ID is found then the conversion will be
+-- rejected with NO_COOKIE_MATCH_FOUND error. When set, encryptionInfo
+-- should also be specified. This field should only be used when calling
+-- conversions.batchinsert. This field is mutually exclusive with
+-- encryptedUserId and mobileDeviceId. This or encryptedUserId or
+-- mobileDeviceId is a required field.
+conoEncryptedUserIdCandidates :: Lens' Conversion [Text]
+conoEncryptedUserIdCandidates
+  = lens _conoEncryptedUserIdCandidates
+      (\ s a -> s{_conoEncryptedUserIdCandidates = a})
+      . _Default
+      . _Coerce
 
 -- | The timestamp of conversion, in Unix epoch micros. This is a required
 -- field.
@@ -15922,15 +16203,17 @@ conoLimitAdTracking
       (\ s a -> s{_conoLimitAdTracking = a})
 
 -- | The alphanumeric encrypted user ID. When set, encryptionInfo should also
--- be specified. This field is mutually exclusive with mobileDeviceId. This
--- or mobileDeviceId is a required field.
+-- be specified. This field is mutually exclusive with
+-- encryptedUserIdCandidates[] and mobileDeviceId. This or
+-- encryptedUserIdCandidates[] or mobileDeviceId is a required field.
 conoEncryptedUserId :: Lens' Conversion (Maybe Text)
 conoEncryptedUserId
   = lens _conoEncryptedUserId
       (\ s a -> s{_conoEncryptedUserId = a})
 
 -- | The mobile device ID. This field is mutually exclusive with
--- encryptedUserId. This or encryptedUserId is a required field.
+-- encryptedUserId and encryptedUserIdCandidates[]. This or encryptedUserId
+-- or encryptedUserIdCandidates[] is a required field.
 conoMobileDeviceId :: Lens' Conversion (Maybe Text)
 conoMobileDeviceId
   = lens _conoMobileDeviceId
@@ -15993,8 +16276,9 @@ instance FromJSON Conversion where
           = withObject "Conversion"
               (\ o ->
                  Conversion' <$>
-                   (o .:? "timestampMicros") <*>
-                     (o .:? "limitAdTracking")
+                   (o .:? "encryptedUserIdCandidates" .!= mempty) <*>
+                     (o .:? "timestampMicros")
+                     <*> (o .:? "limitAdTracking")
                      <*> (o .:? "encryptedUserId")
                      <*> (o .:? "mobileDeviceId")
                      <*> (o .:? "floodlightConfigurationId")
@@ -16010,7 +16294,9 @@ instance ToJSON Conversion where
         toJSON Conversion'{..}
           = object
               (catMaybes
-                 [("timestampMicros" .=) <$> _conoTimestampMicros,
+                 [("encryptedUserIdCandidates" .=) <$>
+                    _conoEncryptedUserIdCandidates,
+                  ("timestampMicros" .=) <$> _conoTimestampMicros,
                   ("limitAdTracking" .=) <$> _conoLimitAdTracking,
                   ("encryptedUserId" .=) <$> _conoEncryptedUserId,
                   ("mobileDeviceId" .=) <$> _conoMobileDeviceId,
@@ -16097,34 +16383,41 @@ instance ToJSON CreativeFieldValuesListResponse where
 --
 -- /See:/ 'richMediaExitOverride' smart constructor.
 data RichMediaExitOverride = RichMediaExitOverride'
-    { _rmeoUseCustomExitURL :: !(Maybe Bool)
-    , _rmeoExitId           :: !(Maybe (Textual Int64))
-    , _rmeoCustomExitURL    :: !(Maybe Text)
+    { _rmeoEnabled         :: !(Maybe Bool)
+    , _rmeoClickThroughURL :: !(Maybe ClickThroughURL)
+    , _rmeoExitId          :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RichMediaExitOverride' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rmeoUseCustomExitURL'
+-- * 'rmeoEnabled'
+--
+-- * 'rmeoClickThroughURL'
 --
 -- * 'rmeoExitId'
---
--- * 'rmeoCustomExitURL'
 richMediaExitOverride
     :: RichMediaExitOverride
 richMediaExitOverride =
     RichMediaExitOverride'
-    { _rmeoUseCustomExitURL = Nothing
+    { _rmeoEnabled = Nothing
+    , _rmeoClickThroughURL = Nothing
     , _rmeoExitId = Nothing
-    , _rmeoCustomExitURL = Nothing
     }
 
--- | Whether to use the custom exit URL.
-rmeoUseCustomExitURL :: Lens' RichMediaExitOverride (Maybe Bool)
-rmeoUseCustomExitURL
-  = lens _rmeoUseCustomExitURL
-      (\ s a -> s{_rmeoUseCustomExitURL = a})
+-- | Whether to use the clickThroughUrl. If false, the creative-level exit
+-- will be used.
+rmeoEnabled :: Lens' RichMediaExitOverride (Maybe Bool)
+rmeoEnabled
+  = lens _rmeoEnabled (\ s a -> s{_rmeoEnabled = a})
+
+-- | Click-through URL of this rich media exit override. Applicable if the
+-- enabled field is set to true.
+rmeoClickThroughURL :: Lens' RichMediaExitOverride (Maybe ClickThroughURL)
+rmeoClickThroughURL
+  = lens _rmeoClickThroughURL
+      (\ s a -> s{_rmeoClickThroughURL = a})
 
 -- | ID for the override to refer to a specific exit in the creative.
 rmeoExitId :: Lens' RichMediaExitOverride (Maybe Int64)
@@ -16132,28 +16425,21 @@ rmeoExitId
   = lens _rmeoExitId (\ s a -> s{_rmeoExitId = a}) .
       mapping _Coerce
 
--- | Click-through URL to override the default exit URL. Applicable if the
--- useCustomExitUrl field is set to true.
-rmeoCustomExitURL :: Lens' RichMediaExitOverride (Maybe Text)
-rmeoCustomExitURL
-  = lens _rmeoCustomExitURL
-      (\ s a -> s{_rmeoCustomExitURL = a})
-
 instance FromJSON RichMediaExitOverride where
         parseJSON
           = withObject "RichMediaExitOverride"
               (\ o ->
                  RichMediaExitOverride' <$>
-                   (o .:? "useCustomExitUrl") <*> (o .:? "exitId") <*>
-                     (o .:? "customExitUrl"))
+                   (o .:? "enabled") <*> (o .:? "clickThroughUrl") <*>
+                     (o .:? "exitId"))
 
 instance ToJSON RichMediaExitOverride where
         toJSON RichMediaExitOverride'{..}
           = object
               (catMaybes
-                 [("useCustomExitUrl" .=) <$> _rmeoUseCustomExitURL,
-                  ("exitId" .=) <$> _rmeoExitId,
-                  ("customExitUrl" .=) <$> _rmeoCustomExitURL])
+                 [("enabled" .=) <$> _rmeoEnabled,
+                  ("clickThroughUrl" .=) <$> _rmeoClickThroughURL,
+                  ("exitId" .=) <$> _rmeoExitId])
 
 -- | Represents a sorted dimension.
 --
@@ -16276,6 +16562,72 @@ instance ToJSON CreativeFieldsListResponse where
                   Just ("kind" .= _cflrKind),
                   ("creativeFields" .=) <$> _cflrCreativeFields])
 
+-- | Targeting Template List Response
+--
+-- /See:/ 'targetingTemplatesListResponse' smart constructor.
+data TargetingTemplatesListResponse = TargetingTemplatesListResponse'
+    { _ttlrNextPageToken      :: !(Maybe Text)
+    , _ttlrKind               :: !Text
+    , _ttlrTargetingTemplates :: !(Maybe [TargetingTemplate])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetingTemplatesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ttlrNextPageToken'
+--
+-- * 'ttlrKind'
+--
+-- * 'ttlrTargetingTemplates'
+targetingTemplatesListResponse
+    :: TargetingTemplatesListResponse
+targetingTemplatesListResponse =
+    TargetingTemplatesListResponse'
+    { _ttlrNextPageToken = Nothing
+    , _ttlrKind = "dfareporting#targetingTemplatesListResponse"
+    , _ttlrTargetingTemplates = Nothing
+    }
+
+-- | Pagination token to be used for the next list operation.
+ttlrNextPageToken :: Lens' TargetingTemplatesListResponse (Maybe Text)
+ttlrNextPageToken
+  = lens _ttlrNextPageToken
+      (\ s a -> s{_ttlrNextPageToken = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#targetingTemplatesListResponse\".
+ttlrKind :: Lens' TargetingTemplatesListResponse Text
+ttlrKind = lens _ttlrKind (\ s a -> s{_ttlrKind = a})
+
+-- | Targeting template collection.
+ttlrTargetingTemplates :: Lens' TargetingTemplatesListResponse [TargetingTemplate]
+ttlrTargetingTemplates
+  = lens _ttlrTargetingTemplates
+      (\ s a -> s{_ttlrTargetingTemplates = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TargetingTemplatesListResponse
+         where
+        parseJSON
+          = withObject "TargetingTemplatesListResponse"
+              (\ o ->
+                 TargetingTemplatesListResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "dfareporting#targetingTemplatesListResponse")
+                     <*> (o .:? "targetingTemplates" .!= mempty))
+
+instance ToJSON TargetingTemplatesListResponse where
+        toJSON TargetingTemplatesListResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ttlrNextPageToken,
+                  Just ("kind" .= _ttlrKind),
+                  ("targetingTemplates" .=) <$>
+                    _ttlrTargetingTemplates])
+
 -- | Placement GenerateTags Response
 --
 -- /See:/ 'placementsGenerateTagsResponse' smart constructor.
@@ -16350,8 +16702,10 @@ data CreativeAsset = CreativeAsset'
     , _caaSSLCompliant          :: !(Maybe Bool)
     , _caaFileSize              :: !(Maybe (Textual Int64))
     , _caaAssetIdentifier       :: !(Maybe CreativeAssetId)
+    , _caaCompanionCreativeIds  :: !(Maybe [Textual Int64])
     , _caaDurationType          :: !(Maybe CreativeAssetDurationType)
     , _caaProgressiveServingURL :: !(Maybe Text)
+    , _caaIdDimensionValue      :: !(Maybe DimensionValue)
     , _caaActive                :: !(Maybe Bool)
     , _caaRole                  :: !(Maybe CreativeAssetRole)
     , _caaMimeType              :: !(Maybe Text)
@@ -16415,9 +16769,13 @@ data CreativeAsset = CreativeAsset'
 --
 -- * 'caaAssetIdentifier'
 --
+-- * 'caaCompanionCreativeIds'
+--
 -- * 'caaDurationType'
 --
 -- * 'caaProgressiveServingURL'
+--
+-- * 'caaIdDimensionValue'
 --
 -- * 'caaActive'
 --
@@ -16485,8 +16843,10 @@ creativeAsset =
     , _caaSSLCompliant = Nothing
     , _caaFileSize = Nothing
     , _caaAssetIdentifier = Nothing
+    , _caaCompanionCreativeIds = Nothing
     , _caaDurationType = Nothing
     , _caaProgressiveServingURL = Nothing
+    , _caaIdDimensionValue = Nothing
     , _caaActive = Nothing
     , _caaRole = Nothing
     , _caaMimeType = Nothing
@@ -16651,6 +17011,17 @@ caaAssetIdentifier
   = lens _caaAssetIdentifier
       (\ s a -> s{_caaAssetIdentifier = a})
 
+-- | List of companion creatives assigned to an in-stream video creative
+-- asset. Acceptable values include IDs of existing flash and image
+-- creatives. Applicable to INSTREAM_VIDEO creative type with
+-- dynamicAssetSelection set to true.
+caaCompanionCreativeIds :: Lens' CreativeAsset [Int64]
+caaCompanionCreativeIds
+  = lens _caaCompanionCreativeIds
+      (\ s a -> s{_caaCompanionCreativeIds = a})
+      . _Default
+      . _Coerce
+
 -- | Duration type for which an asset will be displayed. Applicable to the
 -- following creative types: all RICH_MEDIA.
 caaDurationType :: Lens' CreativeAsset (Maybe CreativeAssetDurationType)
@@ -16664,6 +17035,13 @@ caaProgressiveServingURL :: Lens' CreativeAsset (Maybe Text)
 caaProgressiveServingURL
   = lens _caaProgressiveServingURL
       (\ s a -> s{_caaProgressiveServingURL = a})
+
+-- | Dimension value for the ID of the asset. This is a read-only,
+-- auto-generated field.
+caaIdDimensionValue :: Lens' CreativeAsset (Maybe DimensionValue)
+caaIdDimensionValue
+  = lens _caaIdDimensionValue
+      (\ s a -> s{_caaIdDimensionValue = a})
 
 -- | Whether the video asset is active. This is a read-only field for
 -- VPAID_NON_LINEAR_VIDEO assets. Applicable to the following creative
@@ -16877,8 +17255,10 @@ instance FromJSON CreativeAsset where
                      <*> (o .:? "sslCompliant")
                      <*> (o .:? "fileSize")
                      <*> (o .:? "assetIdentifier")
+                     <*> (o .:? "companionCreativeIds" .!= mempty)
                      <*> (o .:? "durationType")
                      <*> (o .:? "progressiveServingUrl")
+                     <*> (o .:? "idDimensionValue")
                      <*> (o .:? "active")
                      <*> (o .:? "role")
                      <*> (o .:? "mimeType")
@@ -16925,9 +17305,12 @@ instance ToJSON CreativeAsset where
                   ("sslCompliant" .=) <$> _caaSSLCompliant,
                   ("fileSize" .=) <$> _caaFileSize,
                   ("assetIdentifier" .=) <$> _caaAssetIdentifier,
+                  ("companionCreativeIds" .=) <$>
+                    _caaCompanionCreativeIds,
                   ("durationType" .=) <$> _caaDurationType,
                   ("progressiveServingUrl" .=) <$>
                     _caaProgressiveServingURL,
+                  ("idDimensionValue" .=) <$> _caaIdDimensionValue,
                   ("active" .=) <$> _caaActive,
                   ("role" .=) <$> _caaRole,
                   ("mimeType" .=) <$> _caaMimeType,
@@ -16952,6 +17335,103 @@ instance ToJSON CreativeAsset where
                   ("position" .=) <$> _caaPosition,
                   ("horizontallyLocked" .=) <$>
                     _caaHorizontallyLocked])
+
+-- | Language Targeting.
+--
+-- /See:/ 'languageTargeting' smart constructor.
+newtype LanguageTargeting = LanguageTargeting'
+    { _ltLanguages :: Maybe [Language]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LanguageTargeting' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ltLanguages'
+languageTargeting
+    :: LanguageTargeting
+languageTargeting =
+    LanguageTargeting'
+    { _ltLanguages = Nothing
+    }
+
+-- | Languages that this ad targets. For each language only languageId is
+-- required. The other fields are populated automatically when the ad is
+-- inserted or updated.
+ltLanguages :: Lens' LanguageTargeting [Language]
+ltLanguages
+  = lens _ltLanguages (\ s a -> s{_ltLanguages = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON LanguageTargeting where
+        parseJSON
+          = withObject "LanguageTargeting"
+              (\ o ->
+                 LanguageTargeting' <$>
+                   (o .:? "languages" .!= mempty))
+
+instance ToJSON LanguageTargeting where
+        toJSON LanguageTargeting'{..}
+          = object
+              (catMaybes [("languages" .=) <$> _ltLanguages])
+
+-- | Encapsulates the list of rules for asset selection and a default asset
+-- in case none of the rules match. Applicable to INSTREAM_VIDEO creatives.
+--
+-- /See:/ 'creativeAssetSelection' smart constructor.
+data CreativeAssetSelection = CreativeAssetSelection'
+    { _casRules          :: !(Maybe [Rule])
+    , _casDefaultAssetId :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeAssetSelection' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'casRules'
+--
+-- * 'casDefaultAssetId'
+creativeAssetSelection
+    :: CreativeAssetSelection
+creativeAssetSelection =
+    CreativeAssetSelection'
+    { _casRules = Nothing
+    , _casDefaultAssetId = Nothing
+    }
+
+-- | Rules determine which asset will be served to a viewer. Rules will be
+-- evaluated in the order in which they are stored in this list. This list
+-- must contain at least one rule. Applicable to INSTREAM_VIDEO creatives.
+casRules :: Lens' CreativeAssetSelection [Rule]
+casRules
+  = lens _casRules (\ s a -> s{_casRules = a}) .
+      _Default
+      . _Coerce
+
+-- | A creativeAssets[].id. This should refer to one of the parent assets in
+-- this creative, and will be served if none of the rules match. This is a
+-- required field.
+casDefaultAssetId :: Lens' CreativeAssetSelection (Maybe Int64)
+casDefaultAssetId
+  = lens _casDefaultAssetId
+      (\ s a -> s{_casDefaultAssetId = a})
+      . mapping _Coerce
+
+instance FromJSON CreativeAssetSelection where
+        parseJSON
+          = withObject "CreativeAssetSelection"
+              (\ o ->
+                 CreativeAssetSelection' <$>
+                   (o .:? "rules" .!= mempty) <*>
+                     (o .:? "defaultAssetId"))
+
+instance ToJSON CreativeAssetSelection where
+        toJSON CreativeAssetSelection'{..}
+          = object
+              (catMaybes
+                 [("rules" .=) <$> _casRules,
+                  ("defaultAssetId" .=) <$> _casDefaultAssetId])
 
 -- | Placement List Response
 --
@@ -18307,8 +18787,9 @@ creativeAssetId =
 caiName :: Lens' CreativeAssetId (Maybe Text)
 caiName = lens _caiName (\ s a -> s{_caiName = a})
 
--- | Type of asset to upload. This is a required field. IMAGE is solely used
--- for IMAGE creatives. Other image assets should use HTML_IMAGE.
+-- | Type of asset to upload. This is a required field. FLASH and IMAGE are
+-- no longer supported for new uploads. All image assets should use
+-- HTML_IMAGE.
 caiType :: Lens' CreativeAssetId (Maybe CreativeAssetIdType)
 caiType = lens _caiType (\ s a -> s{_caiType = a})
 
@@ -18746,8 +19227,10 @@ instance ToJSON LandingPagesListResponse where
 data CreativeAssetMetadata = CreativeAssetMetadata'
     { _camaKind                  :: !Text
     , _camaAssetIdentifier       :: !(Maybe CreativeAssetId)
+    , _camaIdDimensionValue      :: !(Maybe DimensionValue)
     , _camaClickTags             :: !(Maybe [ClickTag])
     , _camaWarnedValidationRules :: !(Maybe [CreativeAssetMetadataWarnedValidationRulesItem])
+    , _camaId                    :: !(Maybe (Textual Int64))
     , _camaDetectedFeatures      :: !(Maybe [CreativeAssetMetadataDetectedFeaturesItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -18759,9 +19242,13 @@ data CreativeAssetMetadata = CreativeAssetMetadata'
 --
 -- * 'camaAssetIdentifier'
 --
+-- * 'camaIdDimensionValue'
+--
 -- * 'camaClickTags'
 --
 -- * 'camaWarnedValidationRules'
+--
+-- * 'camaId'
 --
 -- * 'camaDetectedFeatures'
 creativeAssetMetadata
@@ -18770,8 +19257,10 @@ creativeAssetMetadata =
     CreativeAssetMetadata'
     { _camaKind = "dfareporting#creativeAssetMetadata"
     , _camaAssetIdentifier = Nothing
+    , _camaIdDimensionValue = Nothing
     , _camaClickTags = Nothing
     , _camaWarnedValidationRules = Nothing
+    , _camaId = Nothing
     , _camaDetectedFeatures = Nothing
     }
 
@@ -18785,6 +19274,13 @@ camaAssetIdentifier :: Lens' CreativeAssetMetadata (Maybe CreativeAssetId)
 camaAssetIdentifier
   = lens _camaAssetIdentifier
       (\ s a -> s{_camaAssetIdentifier = a})
+
+-- | Dimension value for the numeric ID of the asset. This is a read-only,
+-- auto-generated field.
+camaIdDimensionValue :: Lens' CreativeAssetMetadata (Maybe DimensionValue)
+camaIdDimensionValue
+  = lens _camaIdDimensionValue
+      (\ s a -> s{_camaIdDimensionValue = a})
 
 -- | List of detected click tags for assets. This is a read-only
 -- auto-generated field.
@@ -18815,6 +19311,12 @@ camaWarnedValidationRules
       . _Default
       . _Coerce
 
+-- | Numeric ID of the asset. This is a read-only, auto-generated field.
+camaId :: Lens' CreativeAssetMetadata (Maybe Int64)
+camaId
+  = lens _camaId (\ s a -> s{_camaId = a}) .
+      mapping _Coerce
+
 -- | List of feature dependencies for the creative asset that are detected by
 -- DCM. Feature dependencies are features that a browser must be able to
 -- support in order to render your HTML5 creative correctly. This is a
@@ -18834,8 +19336,10 @@ instance FromJSON CreativeAssetMetadata where
                    (o .:? "kind" .!=
                       "dfareporting#creativeAssetMetadata")
                      <*> (o .:? "assetIdentifier")
+                     <*> (o .:? "idDimensionValue")
                      <*> (o .:? "clickTags" .!= mempty)
                      <*> (o .:? "warnedValidationRules" .!= mempty)
+                     <*> (o .:? "id")
                      <*> (o .:? "detectedFeatures" .!= mempty))
 
 instance ToJSON CreativeAssetMetadata where
@@ -18844,9 +19348,11 @@ instance ToJSON CreativeAssetMetadata where
               (catMaybes
                  [Just ("kind" .= _camaKind),
                   ("assetIdentifier" .=) <$> _camaAssetIdentifier,
+                  ("idDimensionValue" .=) <$> _camaIdDimensionValue,
                   ("clickTags" .=) <$> _camaClickTags,
                   ("warnedValidationRules" .=) <$>
                     _camaWarnedValidationRules,
+                  ("id" .=) <$> _camaId,
                   ("detectedFeatures" .=) <$> _camaDetectedFeatures])
 
 -- | Omniture Integration Settings.
@@ -21034,6 +21540,200 @@ instance ToJSON SitesListResponse where
                  [("nextPageToken" .=) <$> _sitNextPageToken,
                   Just ("kind" .= _sitKind),
                   ("sites" .=) <$> _sitSites])
+
+-- | Contains properties of a targeting template. A targeting template
+-- encapsulates targeting information which can be reused across multiple
+-- ads.
+--
+-- /See:/ 'targetingTemplate' smart constructor.
+data TargetingTemplate = TargetingTemplate'
+    { _ttGeoTargeting                :: !(Maybe GeoTargeting)
+    , _ttTechnologyTargeting         :: !(Maybe TechnologyTargeting)
+    , _ttDayPartTargeting            :: !(Maybe DayPartTargeting)
+    , _ttKind                        :: !Text
+    , _ttAdvertiserId                :: !(Maybe (Textual Int64))
+    , _ttAdvertiserIdDimensionValue  :: !(Maybe DimensionValue)
+    , _ttAccountId                   :: !(Maybe (Textual Int64))
+    , _ttName                        :: !(Maybe Text)
+    , _ttKeyValueTargetingExpression :: !(Maybe KeyValueTargetingExpression)
+    , _ttId                          :: !(Maybe (Textual Int64))
+    , _ttSubAccountId                :: !(Maybe (Textual Int64))
+    , _ttLanguageTargeting           :: !(Maybe LanguageTargeting)
+    , _ttListTargetingExpression     :: !(Maybe ListTargetingExpression)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetingTemplate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ttGeoTargeting'
+--
+-- * 'ttTechnologyTargeting'
+--
+-- * 'ttDayPartTargeting'
+--
+-- * 'ttKind'
+--
+-- * 'ttAdvertiserId'
+--
+-- * 'ttAdvertiserIdDimensionValue'
+--
+-- * 'ttAccountId'
+--
+-- * 'ttName'
+--
+-- * 'ttKeyValueTargetingExpression'
+--
+-- * 'ttId'
+--
+-- * 'ttSubAccountId'
+--
+-- * 'ttLanguageTargeting'
+--
+-- * 'ttListTargetingExpression'
+targetingTemplate
+    :: TargetingTemplate
+targetingTemplate =
+    TargetingTemplate'
+    { _ttGeoTargeting = Nothing
+    , _ttTechnologyTargeting = Nothing
+    , _ttDayPartTargeting = Nothing
+    , _ttKind = "dfareporting#targetingTemplate"
+    , _ttAdvertiserId = Nothing
+    , _ttAdvertiserIdDimensionValue = Nothing
+    , _ttAccountId = Nothing
+    , _ttName = Nothing
+    , _ttKeyValueTargetingExpression = Nothing
+    , _ttId = Nothing
+    , _ttSubAccountId = Nothing
+    , _ttLanguageTargeting = Nothing
+    , _ttListTargetingExpression = Nothing
+    }
+
+-- | Geographical targeting criteria.
+ttGeoTargeting :: Lens' TargetingTemplate (Maybe GeoTargeting)
+ttGeoTargeting
+  = lens _ttGeoTargeting
+      (\ s a -> s{_ttGeoTargeting = a})
+
+-- | Technology platform targeting criteria.
+ttTechnologyTargeting :: Lens' TargetingTemplate (Maybe TechnologyTargeting)
+ttTechnologyTargeting
+  = lens _ttTechnologyTargeting
+      (\ s a -> s{_ttTechnologyTargeting = a})
+
+-- | Time and day targeting criteria.
+ttDayPartTargeting :: Lens' TargetingTemplate (Maybe DayPartTargeting)
+ttDayPartTargeting
+  = lens _ttDayPartTargeting
+      (\ s a -> s{_ttDayPartTargeting = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#targetingTemplate\".
+ttKind :: Lens' TargetingTemplate Text
+ttKind = lens _ttKind (\ s a -> s{_ttKind = a})
+
+-- | Advertiser ID of this targeting template. This is a required field on
+-- insert and is read-only after insert.
+ttAdvertiserId :: Lens' TargetingTemplate (Maybe Int64)
+ttAdvertiserId
+  = lens _ttAdvertiserId
+      (\ s a -> s{_ttAdvertiserId = a})
+      . mapping _Coerce
+
+-- | Dimension value for the ID of the advertiser. This is a read-only,
+-- auto-generated field.
+ttAdvertiserIdDimensionValue :: Lens' TargetingTemplate (Maybe DimensionValue)
+ttAdvertiserIdDimensionValue
+  = lens _ttAdvertiserIdDimensionValue
+      (\ s a -> s{_ttAdvertiserIdDimensionValue = a})
+
+-- | Account ID of this targeting template. This field, if left unset, will
+-- be auto-generated on insert and is read-only after insert.
+ttAccountId :: Lens' TargetingTemplate (Maybe Int64)
+ttAccountId
+  = lens _ttAccountId (\ s a -> s{_ttAccountId = a}) .
+      mapping _Coerce
+
+-- | Name of this targeting template. This field is required. It must be less
+-- than 256 characters long and unique within an advertiser.
+ttName :: Lens' TargetingTemplate (Maybe Text)
+ttName = lens _ttName (\ s a -> s{_ttName = a})
+
+-- | Key-value targeting criteria.
+ttKeyValueTargetingExpression :: Lens' TargetingTemplate (Maybe KeyValueTargetingExpression)
+ttKeyValueTargetingExpression
+  = lens _ttKeyValueTargetingExpression
+      (\ s a -> s{_ttKeyValueTargetingExpression = a})
+
+-- | ID of this targeting template. This is a read-only, auto-generated
+-- field.
+ttId :: Lens' TargetingTemplate (Maybe Int64)
+ttId
+  = lens _ttId (\ s a -> s{_ttId = a}) .
+      mapping _Coerce
+
+-- | Subaccount ID of this targeting template. This field, if left unset,
+-- will be auto-generated on insert and is read-only after insert.
+ttSubAccountId :: Lens' TargetingTemplate (Maybe Int64)
+ttSubAccountId
+  = lens _ttSubAccountId
+      (\ s a -> s{_ttSubAccountId = a})
+      . mapping _Coerce
+
+-- | Language targeting criteria.
+ttLanguageTargeting :: Lens' TargetingTemplate (Maybe LanguageTargeting)
+ttLanguageTargeting
+  = lens _ttLanguageTargeting
+      (\ s a -> s{_ttLanguageTargeting = a})
+
+-- | Remarketing list targeting criteria.
+ttListTargetingExpression :: Lens' TargetingTemplate (Maybe ListTargetingExpression)
+ttListTargetingExpression
+  = lens _ttListTargetingExpression
+      (\ s a -> s{_ttListTargetingExpression = a})
+
+instance FromJSON TargetingTemplate where
+        parseJSON
+          = withObject "TargetingTemplate"
+              (\ o ->
+                 TargetingTemplate' <$>
+                   (o .:? "geoTargeting") <*>
+                     (o .:? "technologyTargeting")
+                     <*> (o .:? "dayPartTargeting")
+                     <*>
+                     (o .:? "kind" .!= "dfareporting#targetingTemplate")
+                     <*> (o .:? "advertiserId")
+                     <*> (o .:? "advertiserIdDimensionValue")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "keyValueTargetingExpression")
+                     <*> (o .:? "id")
+                     <*> (o .:? "subaccountId")
+                     <*> (o .:? "languageTargeting")
+                     <*> (o .:? "listTargetingExpression"))
+
+instance ToJSON TargetingTemplate where
+        toJSON TargetingTemplate'{..}
+          = object
+              (catMaybes
+                 [("geoTargeting" .=) <$> _ttGeoTargeting,
+                  ("technologyTargeting" .=) <$>
+                    _ttTechnologyTargeting,
+                  ("dayPartTargeting" .=) <$> _ttDayPartTargeting,
+                  Just ("kind" .= _ttKind),
+                  ("advertiserId" .=) <$> _ttAdvertiserId,
+                  ("advertiserIdDimensionValue" .=) <$>
+                    _ttAdvertiserIdDimensionValue,
+                  ("accountId" .=) <$> _ttAccountId,
+                  ("name" .=) <$> _ttName,
+                  ("keyValueTargetingExpression" .=) <$>
+                    _ttKeyValueTargetingExpression,
+                  ("id" .=) <$> _ttId,
+                  ("subaccountId" .=) <$> _ttSubAccountId,
+                  ("languageTargeting" .=) <$> _ttLanguageTargeting,
+                  ("listTargetingExpression" .=) <$>
+                    _ttListTargetingExpression])
 
 -- | Contains properties of a creative field.
 --

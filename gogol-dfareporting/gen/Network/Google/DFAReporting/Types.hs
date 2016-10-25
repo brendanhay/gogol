@@ -44,6 +44,9 @@ module Network.Google.DFAReporting.Types
     , flKind
     , flItems
 
+    -- * TargetingTemplatesListSortOrder
+    , TargetingTemplatesListSortOrder (..)
+
     -- * OptimizationActivity
     , OptimizationActivity
     , optimizationActivity
@@ -509,6 +512,7 @@ module Network.Google.DFAReporting.Types
     -- * Ad
     , Ad
     , ad
+    , aTargetingTemplateId
     , aCreativeGroupAssignments
     , aGeoTargeting
     , aCreativeRotation
@@ -541,6 +545,7 @@ module Network.Google.DFAReporting.Types
     , aSubAccountId
     , aType
     , aRemarketingListExpression
+    , aLanguageTargeting
     , aDynamicClickTracker
     , aCompatibility
     , aArchived
@@ -574,6 +579,7 @@ module Network.Google.DFAReporting.Types
     , pId
     , pAudienceAgeGroup
     , pSubAccountId
+    , pTargetCpmActiveViewNanos
     , pAudienceGender
     , pClientName
     , pTargetCpaNanos
@@ -694,6 +700,9 @@ module Network.Google.DFAReporting.Types
     -- * AdvertisersListSortOrder
     , AdvertisersListSortOrder (..)
 
+    -- * TargetingTemplatesListSortField
+    , TargetingTemplatesListSortField (..)
+
     -- * CreativeFieldsListSortField
     , CreativeFieldsListSortField (..)
 
@@ -766,6 +775,12 @@ module Network.Google.DFAReporting.Types
     , customRichMediaEvents
     , crmeKind
     , crmeFilteredEventIds
+
+    -- * LanguagesListResponse
+    , LanguagesListResponse
+    , languagesListResponse
+    , llrKind
+    , llrLanguages
 
     -- * UserRolesListSortOrder
     , UserRolesListSortOrder (..)
@@ -926,6 +941,7 @@ module Network.Google.DFAReporting.Types
     , creVersion
     , creLatestTraffickedCreativeId
     , creThirdPartyRichMediaImpressionsURL
+    , creDynamicAssetSelection
     , creLastModifiedInfo
     , creId
     , creAuthoringSource
@@ -934,6 +950,7 @@ module Network.Google.DFAReporting.Types
     , creSubAccountId
     , creType
     , creTimerCustomEvents
+    , creCreativeAssetSelection
     , creStudioCreativeId
     , creCompatibility
     , creBackupImageFeatures
@@ -1004,6 +1021,13 @@ module Network.Google.DFAReporting.Types
     -- * PlacementPaymentSource
     , PlacementPaymentSource (..)
 
+    -- * Rule
+    , Rule
+    , rule
+    , rulTargetingTemplateId
+    , rulName
+    , rulAssetId
+
     -- * ReportsFilesListSortOrder
     , ReportsFilesListSortOrder (..)
 
@@ -1023,7 +1047,6 @@ module Network.Google.DFAReporting.Types
     , camLookbackConfiguration
     , camStartDate
     , camAccountId
-    , camComscoreVceEnabled
     , camName
     , camAdvertiserGroupId
     , camBillingInvoiceCode
@@ -1160,8 +1183,8 @@ module Network.Google.DFAReporting.Types
     , aaActive
     , aaAvailablePermissionIds
     , aaTeaserSizeLimit
-    , aaComscoreVceEnabled
     , aaActiveViewOptOut
+    , aaShareReportsWithTwitter
     , aaName
     , aaAccountProFile
     , aaId
@@ -1742,6 +1765,14 @@ module Network.Google.DFAReporting.Types
     , chaSubAccountId
     , chaChangeTime
 
+    -- * Language
+    , Language
+    , language
+    , lLanguageCode
+    , lKind
+    , lName
+    , lId
+
     -- * CreativesListSortField
     , CreativesListSortField (..)
 
@@ -2020,6 +2051,7 @@ module Network.Google.DFAReporting.Types
     -- * Conversion
     , Conversion
     , conversion
+    , conoEncryptedUserIdCandidates
     , conoTimestampMicros
     , conoLimitAdTracking
     , conoEncryptedUserId
@@ -2046,9 +2078,9 @@ module Network.Google.DFAReporting.Types
     -- * RichMediaExitOverride
     , RichMediaExitOverride
     , richMediaExitOverride
-    , rmeoUseCustomExitURL
+    , rmeoEnabled
+    , rmeoClickThroughURL
     , rmeoExitId
-    , rmeoCustomExitURL
 
     -- * AdvertisersListStatus
     , AdvertisersListStatus (..)
@@ -2072,6 +2104,13 @@ module Network.Google.DFAReporting.Types
     , cflrNextPageToken
     , cflrKind
     , cflrCreativeFields
+
+    -- * TargetingTemplatesListResponse
+    , TargetingTemplatesListResponse
+    , targetingTemplatesListResponse
+    , ttlrNextPageToken
+    , ttlrKind
+    , ttlrTargetingTemplates
 
     -- * PlacementsGenerateTagsResponse
     , PlacementsGenerateTagsResponse
@@ -2099,8 +2138,10 @@ module Network.Google.DFAReporting.Types
     , caaSSLCompliant
     , caaFileSize
     , caaAssetIdentifier
+    , caaCompanionCreativeIds
     , caaDurationType
     , caaProgressiveServingURL
+    , caaIdDimensionValue
     , caaActive
     , caaRole
     , caaMimeType
@@ -2130,6 +2171,17 @@ module Network.Google.DFAReporting.Types
 
     -- * CreativeFieldValuesListSortField
     , CreativeFieldValuesListSortField (..)
+
+    -- * LanguageTargeting
+    , LanguageTargeting
+    , languageTargeting
+    , ltLanguages
+
+    -- * CreativeAssetSelection
+    , CreativeAssetSelection
+    , creativeAssetSelection
+    , casRules
+    , casDefaultAssetId
 
     -- * PlacementsListResponse
     , PlacementsListResponse
@@ -2376,8 +2428,10 @@ module Network.Google.DFAReporting.Types
     , creativeAssetMetadata
     , camaKind
     , camaAssetIdentifier
+    , camaIdDimensionValue
     , camaClickTags
     , camaWarnedValidationRules
+    , camaId
     , camaDetectedFeatures
 
     -- * OmnitureSettings
@@ -2598,6 +2652,23 @@ module Network.Google.DFAReporting.Types
     -- * ContentCategoriesListSortOrder
     , ContentCategoriesListSortOrder (..)
 
+    -- * TargetingTemplate
+    , TargetingTemplate
+    , targetingTemplate
+    , ttGeoTargeting
+    , ttTechnologyTargeting
+    , ttDayPartTargeting
+    , ttKind
+    , ttAdvertiserId
+    , ttAdvertiserIdDimensionValue
+    , ttAccountId
+    , ttName
+    , ttKeyValueTargetingExpression
+    , ttId
+    , ttSubAccountId
+    , ttLanguageTargeting
+    , ttListTargetingExpression
+
     -- * CreativeField
     , CreativeField
     , creativeField
@@ -2628,10 +2699,10 @@ import           Network.Google.DFAReporting.Types.Product
 import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2.5' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2.6' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
 dFAReportingService :: ServiceConfig
 dFAReportingService
-  = defaultService (ServiceId "dfareporting:v2.5")
+  = defaultService (ServiceId "dfareporting:v2.6")
       "www.googleapis.com"
 
 -- | View and manage DoubleClick for Advertisers reports
