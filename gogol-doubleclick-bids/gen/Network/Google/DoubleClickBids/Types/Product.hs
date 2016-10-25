@@ -496,6 +496,85 @@ instance ToJSON DownloadLineItemsRequest where
                   ("fileSpec" .=) <$> _dlirFileSpec,
                   ("filterIds" .=) <$> _dlirFilterIds])
 
+-- | Request to fetch stored insertion orders, line items, TrueView ad groups
+-- and ads.
+--
+-- /See:/ 'downloadRequest' smart constructor.
+data DownloadRequest = DownloadRequest'
+    { _drFileTypes  :: !(Maybe [DownloadRequestFileTypesItem])
+    , _drFilterType :: !(Maybe DownloadRequestFilterType)
+    , _drVersion    :: !(Maybe Text)
+    , _drFilterIds  :: !(Maybe [Textual Int64])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DownloadRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drFileTypes'
+--
+-- * 'drFilterType'
+--
+-- * 'drVersion'
+--
+-- * 'drFilterIds'
+downloadRequest
+    :: DownloadRequest
+downloadRequest =
+    DownloadRequest'
+    { _drFileTypes = Nothing
+    , _drFilterType = Nothing
+    , _drVersion = Nothing
+    , _drFilterIds = Nothing
+    }
+
+-- | File types that will be returned.
+drFileTypes :: Lens' DownloadRequest [DownloadRequestFileTypesItem]
+drFileTypes
+  = lens _drFileTypes (\ s a -> s{_drFileTypes = a}) .
+      _Default
+      . _Coerce
+
+-- | Filter type used to filter line items to fetch.
+drFilterType :: Lens' DownloadRequest (Maybe DownloadRequestFilterType)
+drFilterType
+  = lens _drFilterType (\ s a -> s{_drFilterType = a})
+
+-- | SDF Version (column names, types, order) in which the entities will be
+-- returned. Default to 3.
+drVersion :: Lens' DownloadRequest (Maybe Text)
+drVersion
+  = lens _drVersion (\ s a -> s{_drVersion = a})
+
+-- | The IDs of the specified filter type. This is used to filter entities to
+-- fetch. At least one ID must be specified. Only one ID is allowed for the
+-- ADVERTISER_ID filter type. For INSERTION_ORDER_ID or LINE_ITEM_ID filter
+-- types all IDs must be from the same Advertiser.
+drFilterIds :: Lens' DownloadRequest [Int64]
+drFilterIds
+  = lens _drFilterIds (\ s a -> s{_drFilterIds = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON DownloadRequest where
+        parseJSON
+          = withObject "DownloadRequest"
+              (\ o ->
+                 DownloadRequest' <$>
+                   (o .:? "fileTypes" .!= mempty) <*>
+                     (o .:? "filterType")
+                     <*> (o .:? "version")
+                     <*> (o .:? "filterIds" .!= mempty))
+
+instance ToJSON DownloadRequest where
+        toJSON DownloadRequest'{..}
+          = object
+              (catMaybes
+                 [("fileTypes" .=) <$> _drFileTypes,
+                  ("filterType" .=) <$> _drFilterType,
+                  ("version" .=) <$> _drVersion,
+                  ("filterIds" .=) <$> _drFilterIds])
+
 -- | List queries response.
 --
 -- /See:/ 'listQueriesResponse' smart constructor.
@@ -583,83 +662,6 @@ instance ToJSON UploadLineItemsResponse where
           = object
               (catMaybes
                  [("uploadStatus" .=) <$> _ulirUploadStatus])
-
--- | Publisher comment from Rubicon.
---
--- /See:/ 'note' smart constructor.
-data Note = Note'
-    { _nUsername  :: !(Maybe Text)
-    , _nSource    :: !(Maybe Text)
-    , _nId        :: !(Maybe (Textual Int64))
-    , _nMessage   :: !(Maybe Text)
-    , _nTimestamp :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Note' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'nUsername'
---
--- * 'nSource'
---
--- * 'nId'
---
--- * 'nMessage'
---
--- * 'nTimestamp'
-note
-    :: Note
-note =
-    Note'
-    { _nUsername = Nothing
-    , _nSource = Nothing
-    , _nId = Nothing
-    , _nMessage = Nothing
-    , _nTimestamp = Nothing
-    }
-
--- | Publisher user name.
-nUsername :: Lens' Note (Maybe Text)
-nUsername
-  = lens _nUsername (\ s a -> s{_nUsername = a})
-
--- | Equals \"publisher\" for notification from Rubicon.
-nSource :: Lens' Note (Maybe Text)
-nSource = lens _nSource (\ s a -> s{_nSource = a})
-
--- | Note id.
-nId :: Lens' Note (Maybe Int64)
-nId
-  = lens _nId (\ s a -> s{_nId = a}) . mapping _Coerce
-
--- | Message from publisher.
-nMessage :: Lens' Note (Maybe Text)
-nMessage = lens _nMessage (\ s a -> s{_nMessage = a})
-
--- | Time when the note was added, e.g. \"2015-12-16T17:25:35.000-08:00\".
-nTimestamp :: Lens' Note (Maybe Text)
-nTimestamp
-  = lens _nTimestamp (\ s a -> s{_nTimestamp = a})
-
-instance FromJSON Note where
-        parseJSON
-          = withObject "Note"
-              (\ o ->
-                 Note' <$>
-                   (o .:? "username") <*> (o .:? "source") <*>
-                     (o .:? "id")
-                     <*> (o .:? "message")
-                     <*> (o .:? "timestamp"))
-
-instance ToJSON Note where
-        toJSON Note'{..}
-          = object
-              (catMaybes
-                 [("username" .=) <$> _nUsername,
-                  ("source" .=) <$> _nSource, ("id" .=) <$> _nId,
-                  ("message" .=) <$> _nMessage,
-                  ("timestamp" .=) <$> _nTimestamp])
 
 -- | Report metadata.
 --
@@ -1103,6 +1105,75 @@ instance ToJSON DownloadLineItemsResponse where
           = object
               (catMaybes [("lineItems" .=) <$> _dlirLineItems])
 
+-- | Download response.
+--
+-- /See:/ 'downloadResponse' smart constructor.
+data DownloadResponse = DownloadResponse'
+    { _drInsertionOrders :: !(Maybe Text)
+    , _drLineItems       :: !(Maybe Text)
+    , _drAdGroups        :: !(Maybe Text)
+    , _drAds             :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DownloadResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drInsertionOrders'
+--
+-- * 'drLineItems'
+--
+-- * 'drAdGroups'
+--
+-- * 'drAds'
+downloadResponse
+    :: DownloadResponse
+downloadResponse =
+    DownloadResponse'
+    { _drInsertionOrders = Nothing
+    , _drLineItems = Nothing
+    , _drAdGroups = Nothing
+    , _drAds = Nothing
+    }
+
+-- | Retrieved insertion orders in SDF format.
+drInsertionOrders :: Lens' DownloadResponse (Maybe Text)
+drInsertionOrders
+  = lens _drInsertionOrders
+      (\ s a -> s{_drInsertionOrders = a})
+
+-- | Retrieved line items in SDF format.
+drLineItems :: Lens' DownloadResponse (Maybe Text)
+drLineItems
+  = lens _drLineItems (\ s a -> s{_drLineItems = a})
+
+-- | Retrieved ad groups in SDF format.
+drAdGroups :: Lens' DownloadResponse (Maybe Text)
+drAdGroups
+  = lens _drAdGroups (\ s a -> s{_drAdGroups = a})
+
+-- | Retrieved ads in SDF format.
+drAds :: Lens' DownloadResponse (Maybe Text)
+drAds = lens _drAds (\ s a -> s{_drAds = a})
+
+instance FromJSON DownloadResponse where
+        parseJSON
+          = withObject "DownloadResponse"
+              (\ o ->
+                 DownloadResponse' <$>
+                   (o .:? "insertionOrders") <*> (o .:? "lineItems") <*>
+                     (o .:? "adGroups")
+                     <*> (o .:? "ads"))
+
+instance ToJSON DownloadResponse where
+        toJSON DownloadResponse'{..}
+          = object
+              (catMaybes
+                 [("insertionOrders" .=) <$> _drInsertionOrders,
+                  ("lineItems" .=) <$> _drLineItems,
+                  ("adGroups" .=) <$> _drAdGroups,
+                  ("ads" .=) <$> _drAds])
+
 -- | Report status.
 --
 -- /See:/ 'reportStatus' smart constructor.
@@ -1381,87 +1452,6 @@ instance ToJSON Parameters where
                   ("filters" .=) <$> _pFilters,
                   ("groupBys" .=) <$> _pGroupBys,
                   ("type" .=) <$> _pType])
-
--- | NotifyProposalChange request.
---
--- /See:/ 'notifyProposalChangeRequest' smart constructor.
-data NotifyProposalChangeRequest = NotifyProposalChangeRequest'
-    { _npcrToken  :: !(Maybe Text)
-    , _npcrAction :: !(Maybe Text)
-    , _npcrHref   :: !(Maybe Text)
-    , _npcrId     :: !(Maybe (Textual Int64))
-    , _npcrNotes  :: !(Maybe [Note])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'NotifyProposalChangeRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'npcrToken'
---
--- * 'npcrAction'
---
--- * 'npcrHref'
---
--- * 'npcrId'
---
--- * 'npcrNotes'
-notifyProposalChangeRequest
-    :: NotifyProposalChangeRequest
-notifyProposalChangeRequest =
-    NotifyProposalChangeRequest'
-    { _npcrToken = Nothing
-    , _npcrAction = Nothing
-    , _npcrHref = Nothing
-    , _npcrId = Nothing
-    , _npcrNotes = Nothing
-    }
-
--- | Deal token, available when proposal is accepted by publisher.
-npcrToken :: Lens' NotifyProposalChangeRequest (Maybe Text)
-npcrToken
-  = lens _npcrToken (\ s a -> s{_npcrToken = a})
-
--- | Action taken by publisher. One of: Accept, Decline, Append
-npcrAction :: Lens' NotifyProposalChangeRequest (Maybe Text)
-npcrAction
-  = lens _npcrAction (\ s a -> s{_npcrAction = a})
-
--- | URL to access proposal detail.
-npcrHref :: Lens' NotifyProposalChangeRequest (Maybe Text)
-npcrHref = lens _npcrHref (\ s a -> s{_npcrHref = a})
-
--- | Below are contents of notification from Rubicon. Proposal id.
-npcrId :: Lens' NotifyProposalChangeRequest (Maybe Int64)
-npcrId
-  = lens _npcrId (\ s a -> s{_npcrId = a}) .
-      mapping _Coerce
-
--- | Notes from publisher
-npcrNotes :: Lens' NotifyProposalChangeRequest [Note]
-npcrNotes
-  = lens _npcrNotes (\ s a -> s{_npcrNotes = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON NotifyProposalChangeRequest where
-        parseJSON
-          = withObject "NotifyProposalChangeRequest"
-              (\ o ->
-                 NotifyProposalChangeRequest' <$>
-                   (o .:? "token") <*> (o .:? "action") <*>
-                     (o .:? "href")
-                     <*> (o .:? "id")
-                     <*> (o .:? "notes" .!= mempty))
-
-instance ToJSON NotifyProposalChangeRequest where
-        toJSON NotifyProposalChangeRequest'{..}
-          = object
-              (catMaybes
-                 [("token" .=) <$> _npcrToken,
-                  ("action" .=) <$> _npcrAction,
-                  ("href" .=) <$> _npcrHref, ("id" .=) <$> _npcrId,
-                  ("notes" .=) <$> _npcrNotes])
 
 -- | An explanation of a report failure.
 --

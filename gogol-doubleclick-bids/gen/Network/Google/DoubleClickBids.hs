@@ -50,8 +50,8 @@ module Network.Google.DoubleClickBids
     -- ** doubleclickbidmanager.reports.listreports
     , module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 
-    -- ** doubleclickbidmanager.rubicon.notifyproposalchange
-    , module Network.Google.Resource.DoubleClickBidManager.Rubicon.Notifyproposalchange
+    -- ** doubleclickbidmanager.sdf.download
+    , module Network.Google.Resource.DoubleClickBidManager.Sdf.Download
 
     -- * Types
 
@@ -106,6 +106,9 @@ module Network.Google.DoubleClickBids
     -- ** DownloadLineItemsRequestFilterType
     , DownloadLineItemsRequestFilterType (..)
 
+    -- ** DownloadRequestFilterType
+    , DownloadRequestFilterType (..)
+
     -- ** DownloadLineItemsRequest
     , DownloadLineItemsRequest
     , downloadLineItemsRequest
@@ -113,6 +116,17 @@ module Network.Google.DoubleClickBids
     , dlirFormat
     , dlirFileSpec
     , dlirFilterIds
+
+    -- ** DownloadRequestFileTypesItem
+    , DownloadRequestFileTypesItem (..)
+
+    -- ** DownloadRequest
+    , DownloadRequest
+    , downloadRequest
+    , drFileTypes
+    , drFilterType
+    , drVersion
+    , drFilterIds
 
     -- ** ListQueriesResponse
     , ListQueriesResponse
@@ -124,15 +138,6 @@ module Network.Google.DoubleClickBids
     , UploadLineItemsResponse
     , uploadLineItemsResponse
     , ulirUploadStatus
-
-    -- ** Note
-    , Note
-    , note
-    , nUsername
-    , nSource
-    , nId
-    , nMessage
-    , nTimestamp
 
     -- ** QueryMetadataDataRange
     , QueryMetadataDataRange (..)
@@ -199,6 +204,14 @@ module Network.Google.DoubleClickBids
     , downloadLineItemsResponse
     , dlirLineItems
 
+    -- ** DownloadResponse
+    , DownloadResponse
+    , downloadResponse
+    , drInsertionOrders
+    , drLineItems
+    , drAdGroups
+    , drAds
+
     -- ** ReportStatus
     , ReportStatus
     , reportStatus
@@ -237,15 +250,6 @@ module Network.Google.DoubleClickBids
     -- ** ReportStatusState
     , ReportStatusState (..)
 
-    -- ** NotifyProposalChangeRequest
-    , NotifyProposalChangeRequest
-    , notifyProposalChangeRequest
-    , npcrToken
-    , npcrAction
-    , npcrHref
-    , npcrId
-    , npcrNotes
-
     -- ** ParametersGroupBysItem
     , ParametersGroupBysItem (..)
 
@@ -274,7 +278,7 @@ import           Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
 import           Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
 import           Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
 import           Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
-import           Network.Google.Resource.DoubleClickBidManager.Rubicon.Notifyproposalchange
+import           Network.Google.Resource.DoubleClickBidManager.Sdf.Download
 
 {- $resources
 TODO
@@ -289,4 +293,4 @@ type DoubleClickBidsAPI =
        :<|> ReportsListreportsResource
        :<|> LineitemsUploadlineitemsResource
        :<|> LineitemsDownloadlineitemsResource
-       :<|> RubiconNotifyproposalchangeResource
+       :<|> SdfDownloadResource

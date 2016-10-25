@@ -70,6 +70,9 @@ module Network.Google.DoubleClickBids.Types
     -- * DownloadLineItemsRequestFilterType
     , DownloadLineItemsRequestFilterType (..)
 
+    -- * DownloadRequestFilterType
+    , DownloadRequestFilterType (..)
+
     -- * DownloadLineItemsRequest
     , DownloadLineItemsRequest
     , downloadLineItemsRequest
@@ -77,6 +80,17 @@ module Network.Google.DoubleClickBids.Types
     , dlirFormat
     , dlirFileSpec
     , dlirFilterIds
+
+    -- * DownloadRequestFileTypesItem
+    , DownloadRequestFileTypesItem (..)
+
+    -- * DownloadRequest
+    , DownloadRequest
+    , downloadRequest
+    , drFileTypes
+    , drFilterType
+    , drVersion
+    , drFilterIds
 
     -- * ListQueriesResponse
     , ListQueriesResponse
@@ -88,15 +102,6 @@ module Network.Google.DoubleClickBids.Types
     , UploadLineItemsResponse
     , uploadLineItemsResponse
     , ulirUploadStatus
-
-    -- * Note
-    , Note
-    , note
-    , nUsername
-    , nSource
-    , nId
-    , nMessage
-    , nTimestamp
 
     -- * QueryMetadataDataRange
     , QueryMetadataDataRange (..)
@@ -163,6 +168,14 @@ module Network.Google.DoubleClickBids.Types
     , downloadLineItemsResponse
     , dlirLineItems
 
+    -- * DownloadResponse
+    , DownloadResponse
+    , downloadResponse
+    , drInsertionOrders
+    , drLineItems
+    , drAdGroups
+    , drAds
+
     -- * ReportStatus
     , ReportStatus
     , reportStatus
@@ -200,15 +213,6 @@ module Network.Google.DoubleClickBids.Types
 
     -- * ReportStatusState
     , ReportStatusState (..)
-
-    -- * NotifyProposalChangeRequest
-    , NotifyProposalChangeRequest
-    , notifyProposalChangeRequest
-    , npcrToken
-    , npcrAction
-    , npcrHref
-    , npcrId
-    , npcrNotes
 
     -- * ParametersGroupBysItem
     , ParametersGroupBysItem (..)
