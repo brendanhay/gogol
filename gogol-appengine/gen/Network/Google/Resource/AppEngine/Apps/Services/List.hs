@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.services.list@ method which the
 -- 'AppsServicesList' request conforms to.
 type AppsServicesListResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
@@ -155,8 +155,8 @@ aslBearerToken
   = lens _aslBearerToken
       (\ s a -> s{_aslBearerToken = a})
 
--- | Part of \`name\`. Name of the resource requested. For example:
--- \"apps\/myapp\".
+-- | Part of \`parent\`. Name of the parent Application resource. Example:
+-- \`apps\/myapp\`.
 aslAppsId :: Lens' AppsServicesList Text
 aslAppsId
   = lens _aslAppsId (\ s a -> s{_aslAppsId = a})

@@ -40,7 +40,6 @@ module Network.Google.Resource.AppEngine.Apps.Get
     , agUploadType
     , agBearerToken
     , agAppsId
-    , agEnsureResourcesExist
     , agCallback
     ) where
 
@@ -50,7 +49,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.get@ method which the
 -- 'AppsGet' request conforms to.
 type AppsGetResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            QueryParam "$.xgafv" Text :>
@@ -59,23 +58,21 @@ type AppsGetResource =
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
-                       QueryParam "ensureResourcesExist" Bool :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :> Get '[JSON] Application
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Gets information about an application.
 --
 -- /See:/ 'appsGet' smart constructor.
 data AppsGet = AppsGet'
-    { _agXgafv                :: !(Maybe Text)
-    , _agUploadProtocol       :: !(Maybe Text)
-    , _agPp                   :: !Bool
-    , _agAccessToken          :: !(Maybe Text)
-    , _agUploadType           :: !(Maybe Text)
-    , _agBearerToken          :: !(Maybe Text)
-    , _agAppsId               :: !Text
-    , _agEnsureResourcesExist :: !(Maybe Bool)
-    , _agCallback             :: !(Maybe Text)
+    { _agXgafv          :: !(Maybe Text)
+    , _agUploadProtocol :: !(Maybe Text)
+    , _agPp             :: !Bool
+    , _agAccessToken    :: !(Maybe Text)
+    , _agUploadType     :: !(Maybe Text)
+    , _agBearerToken    :: !(Maybe Text)
+    , _agAppsId         :: !Text
+    , _agCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsGet' with the minimum fields required to make a request.
@@ -96,8 +93,6 @@ data AppsGet = AppsGet'
 --
 -- * 'agAppsId'
 --
--- * 'agEnsureResourcesExist'
---
 -- * 'agCallback'
 appsGet
     :: Text -- ^ 'agAppsId'
@@ -111,7 +106,6 @@ appsGet pAgAppsId_ =
     , _agUploadType = Nothing
     , _agBearerToken = Nothing
     , _agAppsId = pAgAppsId_
-    , _agEnsureResourcesExist = Nothing
     , _agCallback = Nothing
     }
 
@@ -146,21 +140,10 @@ agBearerToken
   = lens _agBearerToken
       (\ s a -> s{_agBearerToken = a})
 
--- | Part of \`name\`. Name of the application to get. For example:
--- \"apps\/myapp\".
+-- | Part of \`name\`. Name of the Application resource to get. Example:
+-- \`apps\/myapp\`.
 agAppsId :: Lens' AppsGet Text
 agAppsId = lens _agAppsId (\ s a -> s{_agAppsId = a})
-
--- | Certain resources associated with an application are created on-demand.
--- Controls whether these resources should be created when performing the
--- \`GET\` operation. If specified and any resources could not be created,
--- the request will fail with an error code. Additionally, this parameter
--- can cause the request to take longer to complete. Note: This parameter
--- will be deprecated in a future version of the API.
-agEnsureResourcesExist :: Lens' AppsGet (Maybe Bool)
-agEnsureResourcesExist
-  = lens _agEnsureResourcesExist
-      (\ s a -> s{_agEnsureResourcesExist = a})
 
 -- | JSONP
 agCallback :: Lens' AppsGet (Maybe Text)
@@ -177,7 +160,6 @@ instance GoogleRequest AppsGet where
               _agAccessToken
               _agUploadType
               _agBearerToken
-              _agEnsureResourcesExist
               _agCallback
               (Just AltJSON)
               appEngineService

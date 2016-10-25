@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an existing version.
+-- Deletes an existing Version resource.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.delete@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.services.versions.delete@ method which the
 -- 'AppsServicesVersionsDelete' request conforms to.
 type AppsServicesVersionsDeleteResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
@@ -68,7 +68,7 @@ type AppsServicesVersionsDeleteResource =
                                  QueryParam "alt" AltJSON :>
                                    Delete '[JSON] Operation
 
--- | Deletes an existing version.
+-- | Deletes an existing Version resource.
 --
 -- /See:/ 'appsServicesVersionsDelete' smart constructor.
 data AppsServicesVersionsDelete = AppsServicesVersionsDelete'
@@ -165,8 +165,8 @@ asvdBearerToken
   = lens _asvdBearerToken
       (\ s a -> s{_asvdBearerToken = a})
 
--- | Part of \`name\`. Name of the resource requested. For example:
--- \"apps\/myapp\/services\/default\/versions\/v1\".
+-- | Part of \`name\`. Name of the resource requested. Example:
+-- \`apps\/myapp\/services\/default\/versions\/v1\`.
 asvdAppsId :: Lens' AppsServicesVersionsDelete Text
 asvdAppsId
   = lens _asvdAppsId (\ s a -> s{_asvdAppsId = a})

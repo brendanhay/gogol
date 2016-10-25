@@ -20,7 +20,20 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing version. Note: UNIMPLEMENTED.
+-- Updates the specified Version resource. You can specify the following
+-- fields depending on the App Engine environment and type of scaling that
+-- the version resource uses: *
+-- [\`serving_status\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status):
+-- For Version resources that use basic scaling, manual scaling, or run in
+-- the App Engine flexible environment. *
+-- [\`instance_class\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.instance_class):
+-- For Version resources that run in the App Engine standard environment. *
+-- [\`automatic_scaling.min_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
+-- For Version resources that use automatic scaling and run in the App
+-- Engine standard environment. *
+-- [\`automatic_scaling.max_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
+-- For Version resources that use automatic scaling and run in the App
+-- Engine standard environment.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.patch@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
@@ -35,12 +48,12 @@ module Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
     -- * Request Lenses
     , asvpXgafv
     , asvpUploadProtocol
+    , asvpUpdateMask
     , asvpPp
     , asvpAccessToken
     , asvpUploadType
     , asvpPayload
     , asvpVersionsId
-    , asvpMask
     , asvpBearerToken
     , asvpAppsId
     , asvpServicesId
@@ -53,7 +66,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.services.versions.patch@ method which the
 -- 'AppsServicesVersionsPatch' request conforms to.
 type AppsServicesVersionsPatchResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
@@ -62,28 +75,41 @@ type AppsServicesVersionsPatchResource =
                  Capture "versionsId" Text :>
                    QueryParam "$.xgafv" Text :>
                      QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "mask" Text :>
+                       QueryParam "updateMask" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
                                QueryParam "bearer_token" Text :>
                                  QueryParam "callback" Text :>
                                    QueryParam "alt" AltJSON :>
                                      ReqBody '[JSON] Version :>
                                        Patch '[JSON] Operation
 
--- | Updates an existing version. Note: UNIMPLEMENTED.
+-- | Updates the specified Version resource. You can specify the following
+-- fields depending on the App Engine environment and type of scaling that
+-- the version resource uses: *
+-- [\`serving_status\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status):
+-- For Version resources that use basic scaling, manual scaling, or run in
+-- the App Engine flexible environment. *
+-- [\`instance_class\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.instance_class):
+-- For Version resources that run in the App Engine standard environment. *
+-- [\`automatic_scaling.min_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
+-- For Version resources that use automatic scaling and run in the App
+-- Engine standard environment. *
+-- [\`automatic_scaling.max_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
+-- For Version resources that use automatic scaling and run in the App
+-- Engine standard environment.
 --
 -- /See:/ 'appsServicesVersionsPatch' smart constructor.
 data AppsServicesVersionsPatch = AppsServicesVersionsPatch'
     { _asvpXgafv          :: !(Maybe Text)
     , _asvpUploadProtocol :: !(Maybe Text)
+    , _asvpUpdateMask     :: !(Maybe Text)
     , _asvpPp             :: !Bool
     , _asvpAccessToken    :: !(Maybe Text)
     , _asvpUploadType     :: !(Maybe Text)
     , _asvpPayload        :: !Version
     , _asvpVersionsId     :: !Text
-    , _asvpMask           :: !(Maybe Text)
     , _asvpBearerToken    :: !(Maybe Text)
     , _asvpAppsId         :: !Text
     , _asvpServicesId     :: !Text
@@ -98,6 +124,8 @@ data AppsServicesVersionsPatch = AppsServicesVersionsPatch'
 --
 -- * 'asvpUploadProtocol'
 --
+-- * 'asvpUpdateMask'
+--
 -- * 'asvpPp'
 --
 -- * 'asvpAccessToken'
@@ -107,8 +135,6 @@ data AppsServicesVersionsPatch = AppsServicesVersionsPatch'
 -- * 'asvpPayload'
 --
 -- * 'asvpVersionsId'
---
--- * 'asvpMask'
 --
 -- * 'asvpBearerToken'
 --
@@ -127,12 +153,12 @@ appsServicesVersionsPatch pAsvpPayload_ pAsvpVersionsId_ pAsvpAppsId_ pAsvpServi
     AppsServicesVersionsPatch'
     { _asvpXgafv = Nothing
     , _asvpUploadProtocol = Nothing
+    , _asvpUpdateMask = Nothing
     , _asvpPp = True
     , _asvpAccessToken = Nothing
     , _asvpUploadType = Nothing
     , _asvpPayload = pAsvpPayload_
     , _asvpVersionsId = pAsvpVersionsId_
-    , _asvpMask = Nothing
     , _asvpBearerToken = Nothing
     , _asvpAppsId = pAsvpAppsId_
     , _asvpServicesId = pAsvpServicesId_
@@ -149,6 +175,12 @@ asvpUploadProtocol :: Lens' AppsServicesVersionsPatch (Maybe Text)
 asvpUploadProtocol
   = lens _asvpUploadProtocol
       (\ s a -> s{_asvpUploadProtocol = a})
+
+-- | Standard field mask for the set of fields to be updated.
+asvpUpdateMask :: Lens' AppsServicesVersionsPatch (Maybe Text)
+asvpUpdateMask
+  = lens _asvpUpdateMask
+      (\ s a -> s{_asvpUpdateMask = a})
 
 -- | Pretty-print response.
 asvpPp :: Lens' AppsServicesVersionsPatch Bool
@@ -177,18 +209,14 @@ asvpVersionsId
   = lens _asvpVersionsId
       (\ s a -> s{_asvpVersionsId = a})
 
--- | Standard field mask for the set of fields to be updated.
-asvpMask :: Lens' AppsServicesVersionsPatch (Maybe Text)
-asvpMask = lens _asvpMask (\ s a -> s{_asvpMask = a})
-
 -- | OAuth bearer token.
 asvpBearerToken :: Lens' AppsServicesVersionsPatch (Maybe Text)
 asvpBearerToken
   = lens _asvpBearerToken
       (\ s a -> s{_asvpBearerToken = a})
 
--- | Part of \`name\`. Name of the resource to update. For example:
--- \"apps\/myapp\/services\/default\/versions\/1\".
+-- | Part of \`name\`. Name of the resource to update. Example:
+-- \`apps\/myapp\/services\/default\/versions\/1\`.
 asvpAppsId :: Lens' AppsServicesVersionsPatch Text
 asvpAppsId
   = lens _asvpAppsId (\ s a -> s{_asvpAppsId = a})
@@ -213,10 +241,10 @@ instance GoogleRequest AppsServicesVersionsPatch
           = go _asvpAppsId _asvpServicesId _asvpVersionsId
               _asvpXgafv
               _asvpUploadProtocol
+              _asvpUpdateMask
               (Just _asvpPp)
               _asvpAccessToken
               _asvpUploadType
-              _asvpMask
               _asvpBearerToken
               _asvpCallback
               (Just AltJSON)

@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.services.versions.list@ method which the
 -- 'AppsServicesVersionsList' request conforms to.
 type AppsServicesVersionsListResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
@@ -170,8 +170,8 @@ asvlBearerToken
   = lens _asvlBearerToken
       (\ s a -> s{_asvlBearerToken = a})
 
--- | Part of \`name\`. Name of the resource requested. For example:
--- \"apps\/myapp\/services\/default\".
+-- | Part of \`parent\`. Name of the parent Service resource. Example:
+-- \`apps\/myapp\/services\/default\`.
 asvlAppsId :: Lens' AppsServicesVersionsList Text
 asvlAppsId
   = lens _asvlAppsId (\ s a -> s{_asvlAppsId = a})
@@ -186,7 +186,7 @@ asvlPageToken
   = lens _asvlPageToken
       (\ s a -> s{_asvlPageToken = a})
 
--- | Part of \`name\`. See documentation of \`appsId\`.
+-- | Part of \`parent\`. See documentation of \`appsId\`.
 asvlServicesId :: Lens' AppsServicesVersionsList Text
 asvlServicesId
   = lens _asvlServicesId

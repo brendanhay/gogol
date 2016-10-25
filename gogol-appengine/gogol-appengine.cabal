@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta5@
+    This library is compatible with version @v1@
     of the API.
 
 source-repository head
@@ -36,8 +36,12 @@ library
           Network.Google.AppEngine
         , Network.Google.AppEngine.Types
         , Network.Google.Resource.AppEngine.Apps.Get
+        , Network.Google.Resource.AppEngine.Apps.Locations.Get
+        , Network.Google.Resource.AppEngine.Apps.Locations.List
         , Network.Google.Resource.AppEngine.Apps.Operations.Get
         , Network.Google.Resource.AppEngine.Apps.Operations.List
+        , Network.Google.Resource.AppEngine.Apps.Patch
+        , Network.Google.Resource.AppEngine.Apps.Repair
         , Network.Google.Resource.AppEngine.Apps.Services.Delete
         , Network.Google.Resource.AppEngine.Apps.Services.Get
         , Network.Google.Resource.AppEngine.Apps.Services.List
@@ -45,9 +49,14 @@ library
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
+        , Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Debug
+        , Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Delete
+        , Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Get
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.List
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
+        , Network.Google.Resource.AppEngine.Experimental.Apps.Operations.Get
+        , Network.Google.Resource.AppEngine.Experimental.Apps.Operations.List
 
     other-modules:
           Network.Google.AppEngine.Types.Product

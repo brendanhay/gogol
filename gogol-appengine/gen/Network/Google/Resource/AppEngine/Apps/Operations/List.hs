@@ -56,7 +56,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.operations.list@ method which the
 -- 'AppsOperationsList' request conforms to.
 type AppsOperationsListResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "operations" :>

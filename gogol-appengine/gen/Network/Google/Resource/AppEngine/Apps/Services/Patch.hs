@@ -35,12 +35,12 @@ module Network.Google.Resource.AppEngine.Apps.Services.Patch
     -- * Request Lenses
     , aspXgafv
     , aspUploadProtocol
+    , aspUpdateMask
     , aspPp
     , aspAccessToken
     , aspUploadType
     , aspPayload
     , aspMigrateTraffic
-    , aspMask
     , aspBearerToken
     , aspAppsId
     , aspServicesId
@@ -53,18 +53,18 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.services.patch@ method which the
 -- 'AppsServicesPatch' request conforms to.
 type AppsServicesPatchResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
              Capture "servicesId" Text :>
                QueryParam "$.xgafv" Text :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "migrateTraffic" Bool :>
-                           QueryParam "mask" Text :>
+                   QueryParam "updateMask" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "migrateTraffic" Bool :>
                              QueryParam "bearer_token" Text :>
                                QueryParam "callback" Text :>
                                  QueryParam "alt" AltJSON :>
@@ -77,12 +77,12 @@ type AppsServicesPatchResource =
 data AppsServicesPatch = AppsServicesPatch'
     { _aspXgafv          :: !(Maybe Text)
     , _aspUploadProtocol :: !(Maybe Text)
+    , _aspUpdateMask     :: !(Maybe Text)
     , _aspPp             :: !Bool
     , _aspAccessToken    :: !(Maybe Text)
     , _aspUploadType     :: !(Maybe Text)
     , _aspPayload        :: !Service
     , _aspMigrateTraffic :: !(Maybe Bool)
-    , _aspMask           :: !(Maybe Text)
     , _aspBearerToken    :: !(Maybe Text)
     , _aspAppsId         :: !Text
     , _aspServicesId     :: !Text
@@ -97,6 +97,8 @@ data AppsServicesPatch = AppsServicesPatch'
 --
 -- * 'aspUploadProtocol'
 --
+-- * 'aspUpdateMask'
+--
 -- * 'aspPp'
 --
 -- * 'aspAccessToken'
@@ -106,8 +108,6 @@ data AppsServicesPatch = AppsServicesPatch'
 -- * 'aspPayload'
 --
 -- * 'aspMigrateTraffic'
---
--- * 'aspMask'
 --
 -- * 'aspBearerToken'
 --
@@ -125,12 +125,12 @@ appsServicesPatch pAspPayload_ pAspAppsId_ pAspServicesId_ =
     AppsServicesPatch'
     { _aspXgafv = Nothing
     , _aspUploadProtocol = Nothing
+    , _aspUpdateMask = Nothing
     , _aspPp = True
     , _aspAccessToken = Nothing
     , _aspUploadType = Nothing
     , _aspPayload = pAspPayload_
     , _aspMigrateTraffic = Nothing
-    , _aspMask = Nothing
     , _aspBearerToken = Nothing
     , _aspAppsId = pAspAppsId_
     , _aspServicesId = pAspServicesId_
@@ -146,6 +146,12 @@ aspUploadProtocol :: Lens' AppsServicesPatch (Maybe Text)
 aspUploadProtocol
   = lens _aspUploadProtocol
       (\ s a -> s{_aspUploadProtocol = a})
+
+-- | Standard field mask for the set of fields to be updated.
+aspUpdateMask :: Lens' AppsServicesPatch (Maybe Text)
+aspUpdateMask
+  = lens _aspUpdateMask
+      (\ s a -> s{_aspUpdateMask = a})
 
 -- | Pretty-print response.
 aspPp :: Lens' AppsServicesPatch Bool
@@ -168,16 +174,23 @@ aspPayload :: Lens' AppsServicesPatch Service
 aspPayload
   = lens _aspPayload (\ s a -> s{_aspPayload = a})
 
--- | Whether to use Traffic Migration to shift traffic gradually. Traffic can
--- only be migrated from a single version to another single version.
+-- | Set to \`true\` to gradually shift traffic from one version to another
+-- single version. By default, traffic is shifted immediately. For gradual
+-- traffic migration, the target version must be located within instances
+-- that are configured for both [warmup
+-- requests](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#inboundservicetype)
+-- and [automatic
+-- scaling](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#automaticscaling).
+-- You must specify the
+-- [\`shardBy\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services#shardby)
+-- field in the Service resource. Gradual traffic migration is not
+-- supported in the App Engine flexible environment. For examples, see
+-- [Migrating and Splitting
+-- Traffic](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/migrating-splitting-traffic).
 aspMigrateTraffic :: Lens' AppsServicesPatch (Maybe Bool)
 aspMigrateTraffic
   = lens _aspMigrateTraffic
       (\ s a -> s{_aspMigrateTraffic = a})
-
--- | Standard field mask for the set of fields to be updated.
-aspMask :: Lens' AppsServicesPatch (Maybe Text)
-aspMask = lens _aspMask (\ s a -> s{_aspMask = a})
 
 -- | OAuth bearer token.
 aspBearerToken :: Lens' AppsServicesPatch (Maybe Text)
@@ -185,8 +198,8 @@ aspBearerToken
   = lens _aspBearerToken
       (\ s a -> s{_aspBearerToken = a})
 
--- | Part of \`name\`. Name of the resource to update. For example:
--- \"apps\/myapp\/services\/default\".
+-- | Part of \`name\`. Name of the resource to update. Example:
+-- \`apps\/myapp\/services\/default\`.
 aspAppsId :: Lens' AppsServicesPatch Text
 aspAppsId
   = lens _aspAppsId (\ s a -> s{_aspAppsId = a})
@@ -209,11 +222,11 @@ instance GoogleRequest AppsServicesPatch where
         requestClient AppsServicesPatch'{..}
           = go _aspAppsId _aspServicesId _aspXgafv
               _aspUploadProtocol
+              _aspUpdateMask
               (Just _aspPp)
               _aspAccessToken
               _aspUploadType
               _aspMigrateTraffic
-              _aspMask
               _aspBearerToken
               _aspCallback
               (Just AltJSON)

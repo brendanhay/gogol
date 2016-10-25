@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.services.versions.instances.list@ method which the
 -- 'AppsServicesVersionsInstancesList' request conforms to.
 type AppsServicesVersionsInstancesListResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
@@ -166,7 +166,7 @@ asvilUploadType
   = lens _asvilUploadType
       (\ s a -> s{_asvilUploadType = a})
 
--- | Part of \`name\`. See documentation of \`appsId\`.
+-- | Part of \`parent\`. See documentation of \`appsId\`.
 asvilVersionsId :: Lens' AppsServicesVersionsInstancesList Text
 asvilVersionsId
   = lens _asvilVersionsId
@@ -178,8 +178,8 @@ asvilBearerToken
   = lens _asvilBearerToken
       (\ s a -> s{_asvilBearerToken = a})
 
--- | Part of \`name\`. Name of the resource requested. For example:
--- \"apps\/myapp\/services\/default\/versions\/v1\".
+-- | Part of \`parent\`. Name of the parent Version resource. Example:
+-- \`apps\/myapp\/services\/default\/versions\/v1\`.
 asvilAppsId :: Lens' AppsServicesVersionsInstancesList Text
 asvilAppsId
   = lens _asvilAppsId (\ s a -> s{_asvilAppsId = a})
@@ -190,7 +190,7 @@ asvilPageToken
   = lens _asvilPageToken
       (\ s a -> s{_asvilPageToken = a})
 
--- | Part of \`name\`. See documentation of \`appsId\`.
+-- | Part of \`parent\`. See documentation of \`appsId\`.
 asvilServicesId :: Lens' AppsServicesVersionsInstancesList Text
 asvilServicesId
   = lens _asvilServicesId

@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets application deployment information.
+-- Gets the specified Version resource. By default, only a \`BASIC_VIEW\`
+-- will be returned. Specify the \`FULL_VIEW\` parameter to get the full
+-- resource.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.get@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
@@ -52,7 +54,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.services.versions.get@ method which the
 -- 'AppsServicesVersionsGet' request conforms to.
 type AppsServicesVersionsGetResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
@@ -70,7 +72,9 @@ type AppsServicesVersionsGetResource =
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Version
 
--- | Gets application deployment information.
+-- | Gets the specified Version resource. By default, only a \`BASIC_VIEW\`
+-- will be returned. Specify the \`FULL_VIEW\` parameter to get the full
+-- resource.
 --
 -- /See:/ 'appsServicesVersionsGet' smart constructor.
 data AppsServicesVersionsGet = AppsServicesVersionsGet'
@@ -171,8 +175,8 @@ asvgBearerToken
   = lens _asvgBearerToken
       (\ s a -> s{_asvgBearerToken = a})
 
--- | Part of \`name\`. Name of the resource requested. For example:
--- \"apps\/myapp\/services\/default\/versions\/v1\".
+-- | Part of \`name\`. Name of the resource requested. Example:
+-- \`apps\/myapp\/services\/default\/versions\/v1\`.
 asvgAppsId :: Lens' AppsServicesVersionsGet Text
 asvgAppsId
   = lens _asvgAppsId (\ s a -> s{_asvgAppsId = a})

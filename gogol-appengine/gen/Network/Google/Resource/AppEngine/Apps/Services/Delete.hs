@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a service and all enclosed versions.
+-- Deletes the specified service and all enclosed versions.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.delete@.
 module Network.Google.Resource.AppEngine.Apps.Services.Delete
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.services.delete@ method which the
 -- 'AppsServicesDelete' request conforms to.
 type AppsServicesDeleteResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
@@ -65,7 +65,7 @@ type AppsServicesDeleteResource =
                              QueryParam "alt" AltJSON :>
                                Delete '[JSON] Operation
 
--- | Deletes a service and all enclosed versions.
+-- | Deletes the specified service and all enclosed versions.
 --
 -- /See:/ 'appsServicesDelete' smart constructor.
 data AppsServicesDelete = AppsServicesDelete'
@@ -150,8 +150,8 @@ asdBearerToken
   = lens _asdBearerToken
       (\ s a -> s{_asdBearerToken = a})
 
--- | Part of \`name\`. Name of the resource requested. For example:
--- \"apps\/myapp\/services\/default\".
+-- | Part of \`name\`. Name of the resource requested. Example:
+-- \`apps\/myapp\/services\/default\`.
 asdAppsId :: Lens' AppsServicesDelete Text
 asdAppsId
   = lens _asdAppsId (\ s a -> s{_asdAppsId = a})
