@@ -54,7 +54,8 @@ flNextPageToken
   = lens _flNextPageToken
       (\ s a -> s{_flNextPageToken = a})
 
--- | This is always drive#fileList.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#fileList\".
 flKind :: Lens' FileList Text
 flKind = lens _flKind (\ s a -> s{_flKind = a})
 
@@ -276,7 +277,8 @@ rCreatedTime
   = lens _rCreatedTime (\ s a -> s{_rCreatedTime = a})
       . mapping _DateTime
 
--- | This is always drive#reply.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#reply\".
 rKind :: Lens' Reply Text
 rKind = lens _rKind (\ s a -> s{_rKind = a})
 
@@ -479,7 +481,8 @@ rlNextPageToken
   = lens _rlNextPageToken
       (\ s a -> s{_rlNextPageToken = a})
 
--- | This is always drive#replyList.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#replyList\".
 rlKind :: Lens' ReplyList Text
 rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
 
@@ -833,7 +836,8 @@ chaTime
   = lens _chaTime (\ s a -> s{_chaTime = a}) .
       mapping _DateTime
 
--- | This is always drive#change.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#change\".
 chaKind :: Lens' Change Text
 chaKind = lens _chaKind (\ s a -> s{_chaKind = a})
 
@@ -946,7 +950,8 @@ uPhotoLink
 uMe :: Lens' User (Maybe Bool)
 uMe = lens _uMe (\ s a -> s{_uMe = a})
 
--- | This is always drive#user.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#user\".
 uKind :: Lens' User Text
 uKind = lens _uKind (\ s a -> s{_uKind = a})
 
@@ -1042,7 +1047,8 @@ clChanges
       _Default
       . _Coerce
 
--- | This is always drive#changeList.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#changeList\".
 clKind :: Lens' ChangeList Text
 clKind = lens _clKind (\ s a -> s{_clKind = a})
 
@@ -1287,7 +1293,8 @@ aImportFormats
   = lens _aImportFormats
       (\ s a -> s{_aImportFormats = a})
 
--- | This is always drive#about.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#about\".
 aKind :: Lens' About Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
@@ -1438,7 +1445,8 @@ startPageToken =
     , _sptStartPageToken = Nothing
     }
 
--- | This is always drive#startPageToken.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#startPageToken\".
 sptKind :: Lens' StartPageToken Text
 sptKind = lens _sptKind (\ s a -> s{_sptKind = a})
 
@@ -1825,7 +1833,8 @@ comCreatedTime
       (\ s a -> s{_comCreatedTime = a})
       . mapping _DateTime
 
--- | This is always drive#comment.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#comment\".
 comKind :: Lens' Comment Text
 comKind = lens _comKind (\ s a -> s{_comKind = a})
 
@@ -1993,7 +2002,8 @@ revOriginalFilename
   = lens _revOriginalFilename
       (\ s a -> s{_revOriginalFilename = a})
 
--- | This is always drive#revision.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#revision\".
 revKind :: Lens' Revision Text
 revKind = lens _revKind (\ s a -> s{_revKind = a})
 
@@ -2098,6 +2108,7 @@ data Permission = Permission'
     , _pDisplayName        :: !(Maybe Text)
     , _pId                 :: !(Maybe Text)
     , _pType               :: !(Maybe Text)
+    , _pExpirationTime     :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
@@ -2121,6 +2132,8 @@ data Permission = Permission'
 -- * 'pId'
 --
 -- * 'pType'
+--
+-- * 'pExpirationTime'
 permission
     :: Permission
 permission =
@@ -2134,6 +2147,7 @@ permission =
     , _pDisplayName = Nothing
     , _pId = Nothing
     , _pType = Nothing
+    , _pExpirationTime = Nothing
     }
 
 -- | A link to the user\'s profile photo, if available.
@@ -2141,7 +2155,8 @@ pPhotoLink :: Lens' Permission (Maybe Text)
 pPhotoLink
   = lens _pPhotoLink (\ s a -> s{_pPhotoLink = a})
 
--- | This is always drive#permission.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#permission\".
 pKind :: Lens' Permission Text
 pKind = lens _pKind (\ s a -> s{_pKind = a})
 
@@ -2182,6 +2197,13 @@ pId = lens _pId (\ s a -> s{_pId = a})
 pType :: Lens' Permission (Maybe Text)
 pType = lens _pType (\ s a -> s{_pType = a})
 
+-- | The time at which this permission will expire (RFC 3339 date-time).
+pExpirationTime :: Lens' Permission (Maybe UTCTime)
+pExpirationTime
+  = lens _pExpirationTime
+      (\ s a -> s{_pExpirationTime = a})
+      . mapping _DateTime
+
 instance FromJSON Permission where
         parseJSON
           = withObject "Permission"
@@ -2195,7 +2217,8 @@ instance FromJSON Permission where
                      <*> (o .:? "allowFileDiscovery")
                      <*> (o .:? "displayName")
                      <*> (o .:? "id")
-                     <*> (o .:? "type"))
+                     <*> (o .:? "type")
+                     <*> (o .:? "expirationTime"))
 
 instance ToJSON Permission where
         toJSON Permission'{..}
@@ -2207,7 +2230,8 @@ instance ToJSON Permission where
                   ("emailAddress" .=) <$> _pEmailAddress,
                   ("allowFileDiscovery" .=) <$> _pAllowFileDiscovery,
                   ("displayName" .=) <$> _pDisplayName,
-                  ("id" .=) <$> _pId, ("type" .=) <$> _pType])
+                  ("id" .=) <$> _pId, ("type" .=) <$> _pType,
+                  ("expirationTime" .=) <$> _pExpirationTime])
 
 -- | The metadata for a file.
 --
@@ -2497,7 +2521,8 @@ fOriginalFilename
   = lens _fOriginalFilename
       (\ s a -> s{_fOriginalFilename = a})
 
--- | This is always drive#file.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#file\".
 fKind :: Lens' File Text
 fKind = lens _fKind (\ s a -> s{_fKind = a})
 
@@ -2821,7 +2846,8 @@ generatedIds =
 giSpace :: Lens' GeneratedIds (Maybe Text)
 giSpace = lens _giSpace (\ s a -> s{_giSpace = a})
 
--- | This is always drive#generatedIds
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#generatedIds\".
 giKind :: Lens' GeneratedIds Text
 giKind = lens _giKind (\ s a -> s{_giKind = a})
 
@@ -2881,7 +2907,8 @@ cllNextPageToken
   = lens _cllNextPageToken
       (\ s a -> s{_cllNextPageToken = a})
 
--- | This is always drive#commentList.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#commentList\".
 cllKind :: Lens' CommentList Text
 cllKind = lens _cllKind (\ s a -> s{_cllKind = a})
 
@@ -2913,13 +2940,16 @@ instance ToJSON CommentList where
 --
 -- /See:/ 'revisionList' smart constructor.
 data RevisionList = RevisionList'
-    { _rllKind      :: !Text
-    , _rllRevisions :: !(Maybe [Revision])
+    { _rllNextPageToken :: !(Maybe Text)
+    , _rllKind          :: !Text
+    , _rllRevisions     :: !(Maybe [Revision])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rllNextPageToken'
 --
 -- * 'rllKind'
 --
@@ -2928,11 +2958,20 @@ revisionList
     :: RevisionList
 revisionList =
     RevisionList'
-    { _rllKind = "drive#revisionList"
+    { _rllNextPageToken = Nothing
+    , _rllKind = "drive#revisionList"
     , _rllRevisions = Nothing
     }
 
--- | This is always drive#revisionList.
+-- | The page token for the next page of revisions. This will be absent if
+-- the end of the revisions list has been reached.
+rllNextPageToken :: Lens' RevisionList (Maybe Text)
+rllNextPageToken
+  = lens _rllNextPageToken
+      (\ s a -> s{_rllNextPageToken = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#revisionList\".
 rllKind :: Lens' RevisionList Text
 rllKind = lens _rllKind (\ s a -> s{_rllKind = a})
 
@@ -2948,14 +2987,16 @@ instance FromJSON RevisionList where
           = withObject "RevisionList"
               (\ o ->
                  RevisionList' <$>
-                   (o .:? "kind" .!= "drive#revisionList") <*>
-                     (o .:? "revisions" .!= mempty))
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "drive#revisionList")
+                     <*> (o .:? "revisions" .!= mempty))
 
 instance ToJSON RevisionList where
         toJSON RevisionList'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _rllKind),
+                 [("nextPageToken" .=) <$> _rllNextPageToken,
+                  Just ("kind" .= _rllKind),
                   ("revisions" .=) <$> _rllRevisions])
 
 -- | A list of permissions for a file.
@@ -2981,7 +3022,8 @@ permissionList =
     , _plPermissions = Nothing
     }
 
--- | This is always drive#permissionList.
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"drive#permissionList\".
 plKind :: Lens' PermissionList Text
 plKind = lens _plKind (\ s a -> s{_plKind = a})
 

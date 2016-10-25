@@ -267,6 +267,7 @@ module Network.Google.Drive.Types
     , pDisplayName
     , pId
     , pType
+    , pExpirationTime
 
     -- * File
     , File
@@ -333,6 +334,7 @@ module Network.Google.Drive.Types
     -- * RevisionList
     , RevisionList
     , revisionList
+    , rllNextPageToken
     , rllKind
     , rllRevisions
 
