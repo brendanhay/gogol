@@ -19,6 +19,7 @@ import Data.Int            as Export (Int32, Int64)
 import Data.Maybe          as Export
 import Data.Monoid         as Export (mempty, (<>))
 import Data.Proxy          as Export
+import Data.Scientific     as Export (Scientific)
 import Data.Text           as Export (Text)
 import Data.Time           as Export (Day, TimeOfDay, UTCTime)
 import Data.Word           as Export (Word32, Word64, Word8)

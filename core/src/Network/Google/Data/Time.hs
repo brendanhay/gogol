@@ -22,17 +22,22 @@ module Network.Google.Data.Time
 
 import           Control.Lens
 import           Data.Aeson
-import qualified Data.Aeson.Types     as Aeson
+import qualified Data.Aeson.Types                  as Aeson
 import           Data.Attoparsec.Text
-import           Data.Bifunctor       (first, second)
-import           Data.Bits            ((.&.))
-import           Data.Char            (ord)
-import           Data.Data            (Data, Typeable)
-import           Data.Text            (Text)
-import qualified Data.Text            as Text
+import           Data.Bifunctor                    (first, second)
+import           Data.Bits                         ((.&.))
+import           Data.Char                         (ord)
+import           Data.Data                         (Data, Typeable)
+import           Data.Scientific                   (Scientific)
+import qualified Data.Scientific                   as Sci
+import           Data.Text                         (Text)
+import qualified Data.Text                         as Text
+import qualified Data.Text.Lazy.Builder            as Build
+import qualified Data.Text.Lazy.Builder.Scientific as Sci
 import           Data.Time
 import           GHC.Generics
-import           Web.HttpApiData      (FromHttpApiData (..), ToHttpApiData (..))
+import           Web.HttpApiData                   (FromHttpApiData (..),
+                                                    ToHttpApiData (..))
 
 -- | This SHOULD be a time in the format of hh:mm:ss.  It is
 -- recommended that you use the "date-time" format instead of "time"
@@ -66,9 +71,24 @@ newtype DateTime' = DateTime' { unDateTime :: UTCTime }
 _DateTime :: Iso' DateTime' UTCTime
 _DateTime = iso unDateTime DateTime'
 
+-- | A duration in seconds with up to nine fractional digits, terminated by 's'.
+--
+-- /Example/: @"3.5s"@.
+newtype Duration = Duration { unDuration :: Scientific }
+    deriving (Eq, Ord, Show, Generic, Data, Typeable)
+
+_Duration :: Iso' Duration Scientific
+_Duration = iso unDuration Duration
+
 instance ToJSON Time'     where toJSON = String . toQueryParam
 instance ToJSON Date'     where toJSON = String . toQueryParam
 instance ToJSON DateTime' where toJSON = toJSON . unDateTime
+
+instance ToJSON Duration where
+    toJSON = toJSON
+        . Build.toLazyText
+        . Sci.formatScientificBuilder Sci.Fixed (Just 9)
+        . unDuration
 
 instance FromJSON Time' where
     parseJSON = fmap Time' . withText "time" (run timeParser)
@@ -78,6 +98,9 @@ instance FromJSON Date' where
 
 instance FromJSON DateTime' where
     parseJSON = fmap DateTime' . parseJSON
+
+instance FromJSON Duration where
+    parseJSON = fmap Duration . withText "duration" (run durationParser)
 
 parseText :: Parser a -> Text -> Either Text a
 parseText p = first Text.pack . parseOnly p
@@ -99,6 +122,9 @@ dayParser = do
     m <- twoDigits <* char '-'
     d <- twoDigits
     maybe (fail "invalid date") pure (fromGregorianValid y m d)
+
+durationParser :: Parser Scientific
+durationParser = Sci.fromFloatDigits <$> (double <* char 's')
 
 -- | Parse a two-digit integer (e.g. day of month, hour).
 twoDigits :: Parser Int
