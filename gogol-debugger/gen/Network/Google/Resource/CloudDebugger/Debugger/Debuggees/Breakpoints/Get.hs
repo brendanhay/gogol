@@ -22,7 +22,7 @@
 --
 -- Gets breakpoint information.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.get@.
+-- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.get@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
     (
     -- * REST Resource

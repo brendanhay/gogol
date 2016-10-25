@@ -22,7 +22,7 @@
 --
 -- Deletes the breakpoint from the debuggee.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.delete@.
+-- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.delete@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Delete
     (
     -- * REST Resource

@@ -22,7 +22,7 @@
 --
 -- Lists all breakpoints for the debuggee.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.list@.
+-- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.list@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
     (
     -- * REST Resource

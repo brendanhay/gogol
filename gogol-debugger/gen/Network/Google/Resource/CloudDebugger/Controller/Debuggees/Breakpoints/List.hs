@@ -31,7 +31,7 @@
 -- are completed until the controller removes them from the active list to
 -- avoid setting those breakpoints again.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.list@.
+-- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.list@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.List
     (
     -- * REST Resource
@@ -210,7 +210,7 @@ instance GoogleRequest
              ListActiveBreakpointsResponse
         type Scopes ControllerDebuggeesBreakpointsList =
              '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/cloud_debugletcontroller"]
+               "https://www.googleapis.com/auth/cloud_debugger"]
         requestClient ControllerDebuggeesBreakpointsList'{..}
           = go _cdblDebuggeeId _cdblXgafv _cdblUploadProtocol
               (Just _cdblPp)
