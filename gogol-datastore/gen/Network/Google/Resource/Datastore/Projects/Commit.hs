@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.projects.commit@ method which the
 -- 'ProjectsCommit' request conforms to.
 type ProjectsCommitResource =
-     "v1beta3" :>
+     "v1" :>
        "projects" :>
          CaptureMode "projectId" "commit" Text :>
            QueryParam "$.xgafv" Xgafv :>

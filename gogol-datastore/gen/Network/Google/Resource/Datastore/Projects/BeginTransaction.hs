@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.projects.beginTransaction@ method which the
 -- 'ProjectsBeginTransaction' request conforms to.
 type ProjectsBeginTransactionResource =
-     "v1beta3" :>
+     "v1" :>
        "projects" :>
          CaptureMode "projectId" "beginTransaction" Text :>
            QueryParam "$.xgafv" Xgafv :>

@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.projects.rollback@ method which the
 -- 'ProjectsRollback' request conforms to.
 type ProjectsRollbackResource =
-     "v1beta3" :>
+     "v1" :>
        "projects" :>
          CaptureMode "projectId" "rollback" Text :>
            QueryParam "$.xgafv" Xgafv :>

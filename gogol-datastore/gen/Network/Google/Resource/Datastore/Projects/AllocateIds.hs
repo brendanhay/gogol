@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.projects.allocateIds@ method which the
 -- 'ProjectsAllocateIds' request conforms to.
 type ProjectsAllocateIdsResource =
-     "v1beta3" :>
+     "v1" :>
        "projects" :>
          CaptureMode "projectId" "allocateIds" Text :>
            QueryParam "$.xgafv" Xgafv :>

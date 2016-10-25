@@ -77,6 +77,7 @@ module Network.Google.Datastore
     , qrbSkippedResults
     , qrbSkippedCursor
     , qrbEntityResultType
+    , qrbSnapshotVersion
     , qrbEntityResults
     , qrbMoreResults
     , qrbEndCursor
@@ -126,7 +127,9 @@ module Network.Google.Datastore
     -- ** MutationResult
     , MutationResult
     , mutationResult
+    , mrConflictDetected
     , mrKey
+    , mrVersion
 
     -- ** AllocateIdsResponse
     , AllocateIdsResponse
@@ -179,6 +182,7 @@ module Network.Google.Datastore
     -- ** Mutation
     , Mutation
     , mutation
+    , mBaseVersion
     , mInsert
     , mUpsert
     , mDelete
@@ -229,6 +233,7 @@ module Network.Google.Datastore
     , EntityResult
     , entityResult
     , erCursor
+    , erVersion
     , erEntity
 
     -- ** Xgafv

@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.projects.runQuery@ method which the
 -- 'ProjectsRunQuery' request conforms to.
 type ProjectsRunQueryResource =
-     "v1beta3" :>
+     "v1" :>
        "projects" :>
          CaptureMode "projectId" "runQuery" Text :>
            QueryParam "$.xgafv" Xgafv :>

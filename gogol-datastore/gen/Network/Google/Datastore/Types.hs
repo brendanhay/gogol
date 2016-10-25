@@ -49,6 +49,7 @@ module Network.Google.Datastore.Types
     , qrbSkippedResults
     , qrbSkippedCursor
     , qrbEntityResultType
+    , qrbSnapshotVersion
     , qrbEntityResults
     , qrbMoreResults
     , qrbEndCursor
@@ -98,7 +99,9 @@ module Network.Google.Datastore.Types
     -- * MutationResult
     , MutationResult
     , mutationResult
+    , mrConflictDetected
     , mrKey
+    , mrVersion
 
     -- * AllocateIdsResponse
     , AllocateIdsResponse
@@ -151,6 +154,7 @@ module Network.Google.Datastore.Types
     -- * Mutation
     , Mutation
     , mutation
+    , mBaseVersion
     , mInsert
     , mUpsert
     , mDelete
@@ -201,6 +205,7 @@ module Network.Google.Datastore.Types
     , EntityResult
     , entityResult
     , erCursor
+    , erVersion
     , erEntity
 
     -- * Xgafv
@@ -288,10 +293,10 @@ import           Network.Google.Datastore.Types.Product
 import           Network.Google.Datastore.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta3' of the Google Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Google Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
 datastoreService :: ServiceConfig
 datastoreService
-  = defaultService (ServiceId "datastore:v1beta3")
+  = defaultService (ServiceId "datastore:v1")
       "datastore.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services

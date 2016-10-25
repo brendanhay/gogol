@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @datastore.projects.lookup@ method which the
 -- 'ProjectsLookup' request conforms to.
 type ProjectsLookupResource =
-     "v1beta3" :>
+     "v1" :>
        "projects" :>
          CaptureMode "projectId" "lookup" Text :>
            QueryParam "$.xgafv" Xgafv :>
