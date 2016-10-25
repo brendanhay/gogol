@@ -1998,12 +1998,13 @@ instance ToJSON FareInfo where
 --
 -- /See:/ 'tripOptionsRequest' smart constructor.
 data TripOptionsRequest = TripOptionsRequest'
-    { _torRefundable  :: !(Maybe Bool)
-    , _torSaleCountry :: !(Maybe Text)
-    , _torPassengers  :: !(Maybe PassengerCounts)
-    , _torSolutions   :: !(Maybe (Textual Int32))
-    , _torSlice       :: !(Maybe [SliceInput])
-    , _torMaxPrice    :: !(Maybe Text)
+    { _torRefundable       :: !(Maybe Bool)
+    , _torSaleCountry      :: !(Maybe Text)
+    , _torPassengers       :: !(Maybe PassengerCounts)
+    , _torTicketingCountry :: !(Maybe Text)
+    , _torSolutions        :: !(Maybe (Textual Int32))
+    , _torSlice            :: !(Maybe [SliceInput])
+    , _torMaxPrice         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripOptionsRequest' with the minimum fields required to make a request.
@@ -2015,6 +2016,8 @@ data TripOptionsRequest = TripOptionsRequest'
 -- * 'torSaleCountry'
 --
 -- * 'torPassengers'
+--
+-- * 'torTicketingCountry'
 --
 -- * 'torSolutions'
 --
@@ -2028,6 +2031,7 @@ tripOptionsRequest =
     { _torRefundable = Nothing
     , _torSaleCountry = Nothing
     , _torPassengers = Nothing
+    , _torTicketingCountry = Nothing
     , _torSolutions = Nothing
     , _torSlice = Nothing
     , _torMaxPrice = Nothing
@@ -2051,6 +2055,12 @@ torPassengers :: Lens' TripOptionsRequest (Maybe PassengerCounts)
 torPassengers
   = lens _torPassengers
       (\ s a -> s{_torPassengers = a})
+
+-- | IATA country code representing the point of ticketing.
+torTicketingCountry :: Lens' TripOptionsRequest (Maybe Text)
+torTicketingCountry
+  = lens _torTicketingCountry
+      (\ s a -> s{_torTicketingCountry = a})
 
 -- | The number of solutions to return, maximum 500.
 torSolutions :: Lens' TripOptionsRequest (Maybe Int32)
@@ -2085,6 +2095,7 @@ instance FromJSON TripOptionsRequest where
                  TripOptionsRequest' <$>
                    (o .:? "refundable") <*> (o .:? "saleCountry") <*>
                      (o .:? "passengers")
+                     <*> (o .:? "ticketingCountry")
                      <*> (o .:? "solutions")
                      <*> (o .:? "slice" .!= mempty)
                      <*> (o .:? "maxPrice"))
@@ -2096,6 +2107,7 @@ instance ToJSON TripOptionsRequest where
                  [("refundable" .=) <$> _torRefundable,
                   ("saleCountry" .=) <$> _torSaleCountry,
                   ("passengers" .=) <$> _torPassengers,
+                  ("ticketingCountry" .=) <$> _torTicketingCountry,
                   ("solutions" .=) <$> _torSolutions,
                   ("slice" .=) <$> _torSlice,
                   ("maxPrice" .=) <$> _torMaxPrice])

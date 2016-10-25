@@ -243,6 +243,7 @@ module Network.Google.QPXExpress
     , torRefundable
     , torSaleCountry
     , torPassengers
+    , torTicketingCountry
     , torSolutions
     , torSlice
     , torMaxPrice
