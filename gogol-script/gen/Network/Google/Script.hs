@@ -99,6 +99,7 @@ module Network.Google.Script
     -- ** ExecutionResponse
     , ExecutionResponse
     , executionResponse
+    , erStatus
     , erResult
     ) where
 
