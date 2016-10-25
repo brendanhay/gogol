@@ -62,6 +62,9 @@ module Network.Google.AndroidPublisher
     -- ** androidpublisher.edits.delete
     , module Network.Google.Resource.AndroidPublisher.Edits.Delete
 
+    -- ** androidpublisher.edits.deobfuscationfiles.upload
+    , module Network.Google.Resource.AndroidPublisher.Edits.DeobfuscationFiles.Upload
+
     -- ** androidpublisher.edits.details.get
     , module Network.Google.Resource.AndroidPublisher.Edits.Details.Get
 
@@ -425,6 +428,11 @@ module Network.Google.AndroidPublisher
     -- ** EditsTestersGetTrack
     , EditsTestersGetTrack (..)
 
+    -- ** DeobfuscationFile
+    , DeobfuscationFile
+    , deobfuscationFile
+    , dfSymbolType
+
     -- ** ExpansionFilesUploadResponse
     , ExpansionFilesUploadResponse
     , expansionFilesUploadResponse
@@ -444,6 +452,11 @@ module Network.Google.AndroidPublisher
     , pStart
     , pDefaultPrice
 
+    -- ** DeobfuscationFilesUploadResponse
+    , DeobfuscationFilesUploadResponse
+    , deobfuscationFilesUploadResponse
+    , dfurDeobfuscationFile
+
     -- ** InAppProductsListResponse
     , InAppProductsListResponse
     , inAppProductsListResponse
@@ -451,6 +464,9 @@ module Network.Google.AndroidPublisher
     , iaplrPageInfo
     , iaplrKind
     , iaplrInAppProduct
+
+    -- ** EditsDeobfuscationFilesUploadDeobfuscationFileType
+    , EditsDeobfuscationFilesUploadDeobfuscationFileType (..)
 
     -- ** EditsExpansionFilesUploadExpansionFileType
     , EditsExpansionFilesUploadExpansionFileType (..)
@@ -634,6 +650,7 @@ import           Network.Google.Resource.AndroidPublisher.Edits.APKs.List
 import           Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
 import           Network.Google.Resource.AndroidPublisher.Edits.Commit
 import           Network.Google.Resource.AndroidPublisher.Edits.Delete
+import           Network.Google.Resource.AndroidPublisher.Edits.DeobfuscationFiles.Upload
 import           Network.Google.Resource.AndroidPublisher.Edits.Details.Get
 import           Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
 import           Network.Google.Resource.AndroidPublisher.Edits.Details.Update
@@ -707,6 +724,7 @@ type AndroidPublisherAPI =
        :<|> EditsTracksPatchResource
        :<|> EditsTracksGetResource
        :<|> EditsTracksUpdateResource
+       :<|> EditsDeobfuscationFilesUploadResource
        :<|> EditsTestersPatchResource
        :<|> EditsTestersGetResource
        :<|> EditsTestersUpdateResource

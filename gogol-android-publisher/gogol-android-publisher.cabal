@@ -46,6 +46,7 @@ library
         , Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
         , Network.Google.Resource.AndroidPublisher.Edits.Commit
         , Network.Google.Resource.AndroidPublisher.Edits.Delete
+        , Network.Google.Resource.AndroidPublisher.Edits.DeobfuscationFiles.Upload
         , Network.Google.Resource.AndroidPublisher.Edits.Details.Get
         , Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
         , Network.Google.Resource.AndroidPublisher.Edits.Details.Update

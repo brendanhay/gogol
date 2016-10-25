@@ -1403,7 +1403,8 @@ spPaymentState
 spKind :: Lens' SubscriptionPurchase Text
 spKind = lens _spKind (\ s a -> s{_spKind = a})
 
--- | Time at which the subscription will expire, in milliseconds since Epoch.
+-- | Time at which the subscription will expire, in milliseconds since the
+-- Epoch.
 spExpiryTimeMillis :: Lens' SubscriptionPurchase (Maybe Int64)
 spExpiryTimeMillis
   = lens _spExpiryTimeMillis
@@ -1425,10 +1426,9 @@ spPriceCurrencyCode
   = lens _spPriceCurrencyCode
       (\ s a -> s{_spPriceCurrencyCode = a})
 
--- | The cancel reason of the subscription, if the subscription is not auto
--- renewing. Possible values are: - User cancelled the subscription -
--- Subscription was cancelled by the system, for example because of a
--- billing problem
+-- | The reason why a subscription was cancelled or is not auto-renewing.
+-- Possible values are: - User cancelled the subscription - Subscription
+-- was cancelled by the system, for example because of a billing problem
 spCancelReason :: Lens' SubscriptionPurchase (Maybe Int32)
 spCancelReason
   = lens _spCancelReason
@@ -1450,16 +1450,17 @@ spDeveloperPayload
       (\ s a -> s{_spDeveloperPayload = a})
 
 -- | Price of the subscription, not including tax. Price is expressed in
--- micro-units, where 1,000,000 micro-units equal one unit of the currency.
--- For example, if the subscription price is €1.99, price_amount_micros is
--- 1990000.
+-- micro-units, where 1,000,000 micro-units represents one unit of the
+-- currency. For example, if the subscription price is €1.99,
+-- price_amount_micros is 1990000.
 spPriceAmountMicros :: Lens' SubscriptionPurchase (Maybe Int64)
 spPriceAmountMicros
   = lens _spPriceAmountMicros
       (\ s a -> s{_spPriceAmountMicros = a})
       . mapping _Coerce
 
--- | Time at which the subscription was granted, in milliseconds since Epoch.
+-- | Time at which the subscription was granted, in milliseconds since the
+-- Epoch.
 spStartTimeMillis :: Lens' SubscriptionPurchase (Maybe Int64)
 spStartTimeMillis
   = lens _spStartTimeMillis
@@ -1866,6 +1867,40 @@ instance ToJSON ExternallyHostedAPK where
                   ("certificateBase64s" .=) <$>
                     _ehapkCertificateBase64s])
 
+-- | Represents a deobfuscation file.
+--
+-- /See:/ 'deobfuscationFile' smart constructor.
+newtype DeobfuscationFile = DeobfuscationFile'
+    { _dfSymbolType :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeobfuscationFile' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dfSymbolType'
+deobfuscationFile
+    :: DeobfuscationFile
+deobfuscationFile =
+    DeobfuscationFile'
+    { _dfSymbolType = Nothing
+    }
+
+-- | The type of the deobfuscation file.
+dfSymbolType :: Lens' DeobfuscationFile (Maybe Text)
+dfSymbolType
+  = lens _dfSymbolType (\ s a -> s{_dfSymbolType = a})
+
+instance FromJSON DeobfuscationFile where
+        parseJSON
+          = withObject "DeobfuscationFile"
+              (\ o -> DeobfuscationFile' <$> (o .:? "symbolType"))
+
+instance ToJSON DeobfuscationFile where
+        toJSON DeobfuscationFile'{..}
+          = object
+              (catMaybes [("symbolType" .=) <$> _dfSymbolType])
+
 --
 -- /See:/ 'expansionFilesUploadResponse' smart constructor.
 newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse'
@@ -1980,6 +2015,45 @@ instance ToJSON Prorate where
               (catMaybes
                  [("start" .=) <$> _pStart,
                   ("defaultPrice" .=) <$> _pDefaultPrice])
+
+--
+-- /See:/ 'deobfuscationFilesUploadResponse' smart constructor.
+newtype DeobfuscationFilesUploadResponse = DeobfuscationFilesUploadResponse'
+    { _dfurDeobfuscationFile :: Maybe DeobfuscationFile
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeobfuscationFilesUploadResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dfurDeobfuscationFile'
+deobfuscationFilesUploadResponse
+    :: DeobfuscationFilesUploadResponse
+deobfuscationFilesUploadResponse =
+    DeobfuscationFilesUploadResponse'
+    { _dfurDeobfuscationFile = Nothing
+    }
+
+dfurDeobfuscationFile :: Lens' DeobfuscationFilesUploadResponse (Maybe DeobfuscationFile)
+dfurDeobfuscationFile
+  = lens _dfurDeobfuscationFile
+      (\ s a -> s{_dfurDeobfuscationFile = a})
+
+instance FromJSON DeobfuscationFilesUploadResponse
+         where
+        parseJSON
+          = withObject "DeobfuscationFilesUploadResponse"
+              (\ o ->
+                 DeobfuscationFilesUploadResponse' <$>
+                   (o .:? "deobfuscationFile"))
+
+instance ToJSON DeobfuscationFilesUploadResponse
+         where
+        toJSON DeobfuscationFilesUploadResponse'{..}
+          = object
+              (catMaybes
+                 [("deobfuscationFile" .=) <$>
+                    _dfurDeobfuscationFile])
 
 --
 -- /See:/ 'inAppProductsListResponse' smart constructor.
@@ -2262,9 +2336,9 @@ subscriptionDeferralInfo =
     , _sdiExpectedExpiryTimeMillis = Nothing
     }
 
--- | The desired next expiry time for the subscription in milliseconds since
--- Epoch. The given time must be after the current expiry time for the
--- subscription.
+-- | The desired next expiry time to assign to the subscription, in
+-- milliseconds since the Epoch. The given time must be later\/greater than
+-- the current expiry time for the subscription.
 sdiDesiredExpiryTimeMillis :: Lens' SubscriptionDeferralInfo (Maybe Int64)
 sdiDesiredExpiryTimeMillis
   = lens _sdiDesiredExpiryTimeMillis

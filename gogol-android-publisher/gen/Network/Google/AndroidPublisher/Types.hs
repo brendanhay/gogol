@@ -251,6 +251,11 @@ module Network.Google.AndroidPublisher.Types
     -- * EditsTestersGetTrack
     , EditsTestersGetTrack (..)
 
+    -- * DeobfuscationFile
+    , DeobfuscationFile
+    , deobfuscationFile
+    , dfSymbolType
+
     -- * ExpansionFilesUploadResponse
     , ExpansionFilesUploadResponse
     , expansionFilesUploadResponse
@@ -270,6 +275,11 @@ module Network.Google.AndroidPublisher.Types
     , pStart
     , pDefaultPrice
 
+    -- * DeobfuscationFilesUploadResponse
+    , DeobfuscationFilesUploadResponse
+    , deobfuscationFilesUploadResponse
+    , dfurDeobfuscationFile
+
     -- * InAppProductsListResponse
     , InAppProductsListResponse
     , inAppProductsListResponse
@@ -277,6 +287,9 @@ module Network.Google.AndroidPublisher.Types
     , iaplrPageInfo
     , iaplrKind
     , iaplrInAppProduct
+
+    -- * EditsDeobfuscationFilesUploadDeobfuscationFileType
+    , EditsDeobfuscationFilesUploadDeobfuscationFileType (..)
 
     -- * EditsExpansionFilesUploadExpansionFileType
     , EditsExpansionFilesUploadExpansionFileType (..)
