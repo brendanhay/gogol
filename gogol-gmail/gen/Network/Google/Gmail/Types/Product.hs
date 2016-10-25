@@ -108,6 +108,42 @@ instance ToJSON ModifyThreadRequest where
                  [("removeLabelIds" .=) <$> _mtrRemoveLabelIds,
                   ("addLabelIds" .=) <$> _mtrAddLabelIds])
 
+-- | Response for the ListFilters method.
+--
+-- /See:/ 'listFiltersResponse' smart constructor.
+newtype ListFiltersResponse = ListFiltersResponse'
+    { _lfrFilter :: Maybe [Filter]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListFiltersResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lfrFilter'
+listFiltersResponse
+    :: ListFiltersResponse
+listFiltersResponse =
+    ListFiltersResponse'
+    { _lfrFilter = Nothing
+    }
+
+-- | List of a user\'s filters.
+lfrFilter :: Lens' ListFiltersResponse [Filter]
+lfrFilter
+  = lens _lfrFilter (\ s a -> s{_lfrFilter = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListFiltersResponse where
+        parseJSON
+          = withObject "ListFiltersResponse"
+              (\ o ->
+                 ListFiltersResponse' <$> (o .:? "filter" .!= mempty))
+
+instance ToJSON ListFiltersResponse where
+        toJSON ListFiltersResponse'{..}
+          = object (catMaybes [("filter" .=) <$> _lfrFilter])
+
 --
 -- /See:/ 'modifyMessageRequest' smart constructor.
 data ModifyMessageRequest = ModifyMessageRequest'
@@ -160,6 +196,98 @@ instance ToJSON ModifyMessageRequest where
               (catMaybes
                  [("removeLabelIds" .=) <$> _mmrRemoveLabelIds,
                   ("addLabelIds" .=) <$> _mmrAddLabelIds])
+
+-- | Response for the ListForwardingAddresses method.
+--
+-- /See:/ 'listForwardingAddressesResponse' smart constructor.
+newtype ListForwardingAddressesResponse = ListForwardingAddressesResponse'
+    { _lfarForwardingAddresses :: Maybe [ForwardingAddress]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListForwardingAddressesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lfarForwardingAddresses'
+listForwardingAddressesResponse
+    :: ListForwardingAddressesResponse
+listForwardingAddressesResponse =
+    ListForwardingAddressesResponse'
+    { _lfarForwardingAddresses = Nothing
+    }
+
+-- | List of addresses that may be used for forwarding.
+lfarForwardingAddresses :: Lens' ListForwardingAddressesResponse [ForwardingAddress]
+lfarForwardingAddresses
+  = lens _lfarForwardingAddresses
+      (\ s a -> s{_lfarForwardingAddresses = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListForwardingAddressesResponse
+         where
+        parseJSON
+          = withObject "ListForwardingAddressesResponse"
+              (\ o ->
+                 ListForwardingAddressesResponse' <$>
+                   (o .:? "forwardingAddresses" .!= mempty))
+
+instance ToJSON ListForwardingAddressesResponse where
+        toJSON ListForwardingAddressesResponse'{..}
+          = object
+              (catMaybes
+                 [("forwardingAddresses" .=) <$>
+                    _lfarForwardingAddresses])
+
+-- | POP settings for an account.
+--
+-- /See:/ 'popSettings' smart constructor.
+data PopSettings = PopSettings'
+    { _psAccessWindow :: !(Maybe PopSettingsAccessWindow)
+    , _psDisPosition  :: !(Maybe PopSettingsDisPosition)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PopSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'psAccessWindow'
+--
+-- * 'psDisPosition'
+popSettings
+    :: PopSettings
+popSettings =
+    PopSettings'
+    { _psAccessWindow = Nothing
+    , _psDisPosition = Nothing
+    }
+
+-- | The range of messages which are accessible via POP.
+psAccessWindow :: Lens' PopSettings (Maybe PopSettingsAccessWindow)
+psAccessWindow
+  = lens _psAccessWindow
+      (\ s a -> s{_psAccessWindow = a})
+
+-- | The action that will be executed on a message after it has been fetched
+-- via POP.
+psDisPosition :: Lens' PopSettings (Maybe PopSettingsDisPosition)
+psDisPosition
+  = lens _psDisPosition
+      (\ s a -> s{_psDisPosition = a})
+
+instance FromJSON PopSettings where
+        parseJSON
+          = withObject "PopSettings"
+              (\ o ->
+                 PopSettings' <$>
+                   (o .:? "accessWindow") <*> (o .:? "disposition"))
+
+instance ToJSON PopSettings where
+        toJSON PopSettings'{..}
+          = object
+              (catMaybes
+                 [("accessWindow" .=) <$> _psAccessWindow,
+                  ("disposition" .=) <$> _psDisPosition])
 
 -- | A record of a change to the user\'s mailbox. Each history change may
 -- affect multiple messages in multiple ways.
@@ -268,6 +396,141 @@ instance ToJSON History where
                   ("messagesAdded" .=) <$> _hMessagesAdded,
                   ("labelsAdded" .=) <$> _hLabelsAdded,
                   ("id" .=) <$> _hId, ("messages" .=) <$> _hMessages])
+
+-- | Message matching criteria.
+--
+-- /See:/ 'filterCriteria' smart constructor.
+data FilterCriteria = FilterCriteria'
+    { _fcSizeComparison :: !(Maybe FilterCriteriaSizeComparison)
+    , _fcSubject        :: !(Maybe Text)
+    , _fcSize           :: !(Maybe (Textual Int32))
+    , _fcExcludeChats   :: !(Maybe Bool)
+    , _fcTo             :: !(Maybe Text)
+    , _fcFrom           :: !(Maybe Text)
+    , _fcQuery          :: !(Maybe Text)
+    , _fcNegatedQuery   :: !(Maybe Text)
+    , _fcHasAttachment  :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FilterCriteria' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fcSizeComparison'
+--
+-- * 'fcSubject'
+--
+-- * 'fcSize'
+--
+-- * 'fcExcludeChats'
+--
+-- * 'fcTo'
+--
+-- * 'fcFrom'
+--
+-- * 'fcQuery'
+--
+-- * 'fcNegatedQuery'
+--
+-- * 'fcHasAttachment'
+filterCriteria
+    :: FilterCriteria
+filterCriteria =
+    FilterCriteria'
+    { _fcSizeComparison = Nothing
+    , _fcSubject = Nothing
+    , _fcSize = Nothing
+    , _fcExcludeChats = Nothing
+    , _fcTo = Nothing
+    , _fcFrom = Nothing
+    , _fcQuery = Nothing
+    , _fcNegatedQuery = Nothing
+    , _fcHasAttachment = Nothing
+    }
+
+-- | How the message size in bytes should be in relation to the size field.
+fcSizeComparison :: Lens' FilterCriteria (Maybe FilterCriteriaSizeComparison)
+fcSizeComparison
+  = lens _fcSizeComparison
+      (\ s a -> s{_fcSizeComparison = a})
+
+-- | Case-insensitive phrase found in the message\'s subject. Trailing and
+-- leading whitespace are be trimmed and adjacent spaces are collapsed.
+fcSubject :: Lens' FilterCriteria (Maybe Text)
+fcSubject
+  = lens _fcSubject (\ s a -> s{_fcSubject = a})
+
+-- | The size of the entire RFC822 message in bytes, including all headers
+-- and attachments.
+fcSize :: Lens' FilterCriteria (Maybe Int32)
+fcSize
+  = lens _fcSize (\ s a -> s{_fcSize = a}) .
+      mapping _Coerce
+
+-- | Whether the response should exclude chats.
+fcExcludeChats :: Lens' FilterCriteria (Maybe Bool)
+fcExcludeChats
+  = lens _fcExcludeChats
+      (\ s a -> s{_fcExcludeChats = a})
+
+-- | The recipient\'s display name or email address. Includes recipients in
+-- the \"to\", \"cc\", and \"bcc\" header fields. You can use simply the
+-- local part of the email address. For example, \"example\" and
+-- \"example\'\" both match \"example\'gmail.com\". This field is
+-- case-insensitive.
+fcTo :: Lens' FilterCriteria (Maybe Text)
+fcTo = lens _fcTo (\ s a -> s{_fcTo = a})
+
+-- | The sender\'s display name or email address.
+fcFrom :: Lens' FilterCriteria (Maybe Text)
+fcFrom = lens _fcFrom (\ s a -> s{_fcFrom = a})
+
+-- | Only return messages matching the specified query. Supports the same
+-- query format as the Gmail search box. For example,
+-- \"from:someuser\'example.com rfc822msgid: is:unread\".
+fcQuery :: Lens' FilterCriteria (Maybe Text)
+fcQuery = lens _fcQuery (\ s a -> s{_fcQuery = a})
+
+-- | Only return messages not matching the specified query. Supports the same
+-- query format as the Gmail search box. For example,
+-- \"from:someuser\'example.com rfc822msgid: is:unread\".
+fcNegatedQuery :: Lens' FilterCriteria (Maybe Text)
+fcNegatedQuery
+  = lens _fcNegatedQuery
+      (\ s a -> s{_fcNegatedQuery = a})
+
+-- | Whether the message has any attachment.
+fcHasAttachment :: Lens' FilterCriteria (Maybe Bool)
+fcHasAttachment
+  = lens _fcHasAttachment
+      (\ s a -> s{_fcHasAttachment = a})
+
+instance FromJSON FilterCriteria where
+        parseJSON
+          = withObject "FilterCriteria"
+              (\ o ->
+                 FilterCriteria' <$>
+                   (o .:? "sizeComparison") <*> (o .:? "subject") <*>
+                     (o .:? "size")
+                     <*> (o .:? "excludeChats")
+                     <*> (o .:? "to")
+                     <*> (o .:? "from")
+                     <*> (o .:? "query")
+                     <*> (o .:? "negatedQuery")
+                     <*> (o .:? "hasAttachment"))
+
+instance ToJSON FilterCriteria where
+        toJSON FilterCriteria'{..}
+          = object
+              (catMaybes
+                 [("sizeComparison" .=) <$> _fcSizeComparison,
+                  ("subject" .=) <$> _fcSubject,
+                  ("size" .=) <$> _fcSize,
+                  ("excludeChats" .=) <$> _fcExcludeChats,
+                  ("to" .=) <$> _fcTo, ("from" .=) <$> _fcFrom,
+                  ("query" .=) <$> _fcQuery,
+                  ("negatedQuery" .=) <$> _fcNegatedQuery,
+                  ("hasAttachment" .=) <$> _fcHasAttachment])
 
 -- | Profile for a Gmail user.
 --
@@ -451,6 +714,159 @@ instance ToJSON ListHistoryResponse where
                  [("nextPageToken" .=) <$> _lhrNextPageToken,
                   ("history" .=) <$> _lhrHistory,
                   ("historyId" .=) <$> _lhrHistoryId])
+
+-- | Settings associated with a send-as alias, which can be either the
+-- primary login address associated with the account or a custom \"from\"
+-- address. Send-as aliases correspond to the \"Send Mail As\" feature in
+-- the web interface. See for more details.
+--
+-- /See:/ 'sendAs' smart constructor.
+data SendAs = SendAs'
+    { _saSignature          :: !(Maybe Text)
+    , _saReplyToAddress     :: !(Maybe Text)
+    , _saTreatAsAlias       :: !(Maybe Bool)
+    , _saSendAsEmail        :: !(Maybe Text)
+    , _saDisplayName        :: !(Maybe Text)
+    , _saVerificationStatus :: !(Maybe SendAsVerificationStatus)
+    , _saSmtpMsa            :: !(Maybe SmtpMsa)
+    , _saIsPrimary          :: !(Maybe Bool)
+    , _saIsDefault          :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SendAs' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'saSignature'
+--
+-- * 'saReplyToAddress'
+--
+-- * 'saTreatAsAlias'
+--
+-- * 'saSendAsEmail'
+--
+-- * 'saDisplayName'
+--
+-- * 'saVerificationStatus'
+--
+-- * 'saSmtpMsa'
+--
+-- * 'saIsPrimary'
+--
+-- * 'saIsDefault'
+sendAs
+    :: SendAs
+sendAs =
+    SendAs'
+    { _saSignature = Nothing
+    , _saReplyToAddress = Nothing
+    , _saTreatAsAlias = Nothing
+    , _saSendAsEmail = Nothing
+    , _saDisplayName = Nothing
+    , _saVerificationStatus = Nothing
+    , _saSmtpMsa = Nothing
+    , _saIsPrimary = Nothing
+    , _saIsDefault = Nothing
+    }
+
+-- | An optional HTML signature that is included in messages composed with
+-- this alias in the Gmail web UI.
+saSignature :: Lens' SendAs (Maybe Text)
+saSignature
+  = lens _saSignature (\ s a -> s{_saSignature = a})
+
+-- | An optional email address that is included in a \"Reply-To:\" header for
+-- mail sent using this alias. If this is empty, Gmail will not generate a
+-- \"Reply-To:\" header.
+saReplyToAddress :: Lens' SendAs (Maybe Text)
+saReplyToAddress
+  = lens _saReplyToAddress
+      (\ s a -> s{_saReplyToAddress = a})
+
+-- | Whether Gmail should treat this address as an alias for the user\'s
+-- primary email address. See for more details. This setting only applies
+-- to custom \"from\" aliases.
+saTreatAsAlias :: Lens' SendAs (Maybe Bool)
+saTreatAsAlias
+  = lens _saTreatAsAlias
+      (\ s a -> s{_saTreatAsAlias = a})
+
+-- | The email address that appears in the \"From:\" header for mail sent
+-- using this alias. This is read-only for all operations except create.
+saSendAsEmail :: Lens' SendAs (Maybe Text)
+saSendAsEmail
+  = lens _saSendAsEmail
+      (\ s a -> s{_saSendAsEmail = a})
+
+-- | A name that appears in the \"From:\" header for mail sent using this
+-- alias. For custom \"from\" addresses, when this is empty, Gmail will
+-- populate the \"From:\" header with the name that is used for the primary
+-- address associated with the account.
+saDisplayName :: Lens' SendAs (Maybe Text)
+saDisplayName
+  = lens _saDisplayName
+      (\ s a -> s{_saDisplayName = a})
+
+-- | Indicates whether this address has been verified for use as a send-as
+-- alias. Read-only. This setting only applies to custom \"from\" aliases.
+saVerificationStatus :: Lens' SendAs (Maybe SendAsVerificationStatus)
+saVerificationStatus
+  = lens _saVerificationStatus
+      (\ s a -> s{_saVerificationStatus = a})
+
+-- | An optional SMTP service that will be used as an outbound relay for mail
+-- sent using this alias. If this is empty, outbound mail will be sent
+-- directly from Gmail\'s servers to the destination SMTP service. This
+-- setting only applies to custom \"from\" aliases.
+saSmtpMsa :: Lens' SendAs (Maybe SmtpMsa)
+saSmtpMsa
+  = lens _saSmtpMsa (\ s a -> s{_saSmtpMsa = a})
+
+-- | Whether this address is the primary address used to login to the
+-- account. Every Gmail account has exactly one primary address, and it
+-- cannot be deleted from the collection of send-as aliases. This field is
+-- read-only.
+saIsPrimary :: Lens' SendAs (Maybe Bool)
+saIsPrimary
+  = lens _saIsPrimary (\ s a -> s{_saIsPrimary = a})
+
+-- | Whether this address is selected as the default \"From:\" address in
+-- situations such as composing a new message or sending a vacation
+-- auto-reply. Every Gmail account has exactly one default send-as address,
+-- so the only legal value that clients may write to this field is true.
+-- Changing this from false to true for an address will result in this
+-- field becoming false for the other previous default address.
+saIsDefault :: Lens' SendAs (Maybe Bool)
+saIsDefault
+  = lens _saIsDefault (\ s a -> s{_saIsDefault = a})
+
+instance FromJSON SendAs where
+        parseJSON
+          = withObject "SendAs"
+              (\ o ->
+                 SendAs' <$>
+                   (o .:? "signature") <*> (o .:? "replyToAddress") <*>
+                     (o .:? "treatAsAlias")
+                     <*> (o .:? "sendAsEmail")
+                     <*> (o .:? "displayName")
+                     <*> (o .:? "verificationStatus")
+                     <*> (o .:? "smtpMsa")
+                     <*> (o .:? "isPrimary")
+                     <*> (o .:? "isDefault"))
+
+instance ToJSON SendAs where
+        toJSON SendAs'{..}
+          = object
+              (catMaybes
+                 [("signature" .=) <$> _saSignature,
+                  ("replyToAddress" .=) <$> _saReplyToAddress,
+                  ("treatAsAlias" .=) <$> _saTreatAsAlias,
+                  ("sendAsEmail" .=) <$> _saSendAsEmail,
+                  ("displayName" .=) <$> _saDisplayName,
+                  ("verificationStatus" .=) <$> _saVerificationStatus,
+                  ("smtpMsa" .=) <$> _saSmtpMsa,
+                  ("isPrimary" .=) <$> _saIsPrimary,
+                  ("isDefault" .=) <$> _saIsDefault])
 
 --
 -- /See:/ 'listThreadsResponse' smart constructor.
@@ -695,6 +1111,143 @@ instance ToJSON ListLabelsResponse where
         toJSON ListLabelsResponse'{..}
           = object (catMaybes [("labels" .=) <$> _llrLabels])
 
+-- | Vacation auto-reply settings for an account. These settings correspond
+-- to the \"Vacation responder\" feature in the web interface. See for more
+-- details.
+--
+-- /See:/ 'vacationSettings' smart constructor.
+data VacationSettings = VacationSettings'
+    { _vsEnableAutoReply       :: !(Maybe Bool)
+    , _vsResponseBodyPlainText :: !(Maybe Text)
+    , _vsRestrictToDomain      :: !(Maybe Bool)
+    , _vsStartTime             :: !(Maybe (Textual Int64))
+    , _vsResponseBodyHTML      :: !(Maybe Text)
+    , _vsRestrictToContacts    :: !(Maybe Bool)
+    , _vsResponseSubject       :: !(Maybe Text)
+    , _vsEndTime               :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VacationSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vsEnableAutoReply'
+--
+-- * 'vsResponseBodyPlainText'
+--
+-- * 'vsRestrictToDomain'
+--
+-- * 'vsStartTime'
+--
+-- * 'vsResponseBodyHTML'
+--
+-- * 'vsRestrictToContacts'
+--
+-- * 'vsResponseSubject'
+--
+-- * 'vsEndTime'
+vacationSettings
+    :: VacationSettings
+vacationSettings =
+    VacationSettings'
+    { _vsEnableAutoReply = Nothing
+    , _vsResponseBodyPlainText = Nothing
+    , _vsRestrictToDomain = Nothing
+    , _vsStartTime = Nothing
+    , _vsResponseBodyHTML = Nothing
+    , _vsRestrictToContacts = Nothing
+    , _vsResponseSubject = Nothing
+    , _vsEndTime = Nothing
+    }
+
+-- | Flag that controls whether Gmail automatically replies to messages.
+vsEnableAutoReply :: Lens' VacationSettings (Maybe Bool)
+vsEnableAutoReply
+  = lens _vsEnableAutoReply
+      (\ s a -> s{_vsEnableAutoReply = a})
+
+-- | Response body in plain text format.
+vsResponseBodyPlainText :: Lens' VacationSettings (Maybe Text)
+vsResponseBodyPlainText
+  = lens _vsResponseBodyPlainText
+      (\ s a -> s{_vsResponseBodyPlainText = a})
+
+-- | Flag that determines whether responses are sent to recipients who are
+-- outside of the user\'s domain. This feature is only available for Google
+-- Apps users.
+vsRestrictToDomain :: Lens' VacationSettings (Maybe Bool)
+vsRestrictToDomain
+  = lens _vsRestrictToDomain
+      (\ s a -> s{_vsRestrictToDomain = a})
+
+-- | An optional start time for sending auto-replies (epoch ms). When this is
+-- specified, Gmail will automatically reply only to messages that it
+-- receives after the start time. If both startTime and endTime are
+-- specified, startTime must precede endTime.
+vsStartTime :: Lens' VacationSettings (Maybe Int64)
+vsStartTime
+  = lens _vsStartTime (\ s a -> s{_vsStartTime = a}) .
+      mapping _Coerce
+
+-- | Response body in HTML format. Gmail will sanitize the HTML before
+-- storing it.
+vsResponseBodyHTML :: Lens' VacationSettings (Maybe Text)
+vsResponseBodyHTML
+  = lens _vsResponseBodyHTML
+      (\ s a -> s{_vsResponseBodyHTML = a})
+
+-- | Flag that determines whether responses are sent to recipients who are
+-- not in the user\'s list of contacts.
+vsRestrictToContacts :: Lens' VacationSettings (Maybe Bool)
+vsRestrictToContacts
+  = lens _vsRestrictToContacts
+      (\ s a -> s{_vsRestrictToContacts = a})
+
+-- | Optional text to prepend to the subject line in vacation responses. In
+-- order to enable auto-replies, either the response subject or the
+-- response body must be nonempty.
+vsResponseSubject :: Lens' VacationSettings (Maybe Text)
+vsResponseSubject
+  = lens _vsResponseSubject
+      (\ s a -> s{_vsResponseSubject = a})
+
+-- | An optional end time for sending auto-replies (epoch ms). When this is
+-- specified, Gmail will automatically reply only to messages that it
+-- receives before the end time. If both startTime and endTime are
+-- specified, startTime must precede endTime.
+vsEndTime :: Lens' VacationSettings (Maybe Int64)
+vsEndTime
+  = lens _vsEndTime (\ s a -> s{_vsEndTime = a}) .
+      mapping _Coerce
+
+instance FromJSON VacationSettings where
+        parseJSON
+          = withObject "VacationSettings"
+              (\ o ->
+                 VacationSettings' <$>
+                   (o .:? "enableAutoReply") <*>
+                     (o .:? "responseBodyPlainText")
+                     <*> (o .:? "restrictToDomain")
+                     <*> (o .:? "startTime")
+                     <*> (o .:? "responseBodyHtml")
+                     <*> (o .:? "restrictToContacts")
+                     <*> (o .:? "responseSubject")
+                     <*> (o .:? "endTime"))
+
+instance ToJSON VacationSettings where
+        toJSON VacationSettings'{..}
+          = object
+              (catMaybes
+                 [("enableAutoReply" .=) <$> _vsEnableAutoReply,
+                  ("responseBodyPlainText" .=) <$>
+                    _vsResponseBodyPlainText,
+                  ("restrictToDomain" .=) <$> _vsRestrictToDomain,
+                  ("startTime" .=) <$> _vsStartTime,
+                  ("responseBodyHtml" .=) <$> _vsResponseBodyHTML,
+                  ("restrictToContacts" .=) <$> _vsRestrictToContacts,
+                  ("responseSubject" .=) <$> _vsResponseSubject,
+                  ("endTime" .=) <$> _vsEndTime])
+
 --
 -- /See:/ 'historyMessageDeleted' smart constructor.
 newtype HistoryMessageDeleted = HistoryMessageDeleted'
@@ -792,6 +1345,67 @@ instance ToJSON MessagePartBody where
                  [("size" .=) <$> _mpbSize, ("data" .=) <$> _mpbData,
                   ("attachmentId" .=) <$> _mpbAttachmentId])
 
+-- | Auto-forwarding settings for an account.
+--
+-- /See:/ 'autoForwarding' smart constructor.
+data AutoForwarding = AutoForwarding'
+    { _afEnabled      :: !(Maybe Bool)
+    , _afDisPosition  :: !(Maybe AutoForwardingDisPosition)
+    , _afEmailAddress :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AutoForwarding' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'afEnabled'
+--
+-- * 'afDisPosition'
+--
+-- * 'afEmailAddress'
+autoForwarding
+    :: AutoForwarding
+autoForwarding =
+    AutoForwarding'
+    { _afEnabled = Nothing
+    , _afDisPosition = Nothing
+    , _afEmailAddress = Nothing
+    }
+
+-- | Whether all incoming mail is automatically forwarded to another address.
+afEnabled :: Lens' AutoForwarding (Maybe Bool)
+afEnabled
+  = lens _afEnabled (\ s a -> s{_afEnabled = a})
+
+-- | The state that a message should be left in after it has been forwarded.
+afDisPosition :: Lens' AutoForwarding (Maybe AutoForwardingDisPosition)
+afDisPosition
+  = lens _afDisPosition
+      (\ s a -> s{_afDisPosition = a})
+
+-- | Email address to which all incoming messages are forwarded. This email
+-- address must be a verified member of the forwarding addresses.
+afEmailAddress :: Lens' AutoForwarding (Maybe Text)
+afEmailAddress
+  = lens _afEmailAddress
+      (\ s a -> s{_afEmailAddress = a})
+
+instance FromJSON AutoForwarding where
+        parseJSON
+          = withObject "AutoForwarding"
+              (\ o ->
+                 AutoForwarding' <$>
+                   (o .:? "enabled") <*> (o .:? "disposition") <*>
+                     (o .:? "emailAddress"))
+
+instance ToJSON AutoForwarding where
+        toJSON AutoForwarding'{..}
+          = object
+              (catMaybes
+                 [("enabled" .=) <$> _afEnabled,
+                  ("disposition" .=) <$> _afDisPosition,
+                  ("emailAddress" .=) <$> _afEmailAddress])
+
 --
 -- /See:/ 'listDraftsResponse' smart constructor.
 data ListDraftsResponse = ListDraftsResponse'
@@ -854,6 +1468,42 @@ instance ToJSON ListDraftsResponse where
                  [("nextPageToken" .=) <$> _ldrNextPageToken,
                   ("resultSizeEstimate" .=) <$> _ldrResultSizeEstimate,
                   ("drafts" .=) <$> _ldrDrafts])
+
+-- | Response for the ListSendAs method.
+--
+-- /See:/ 'listSendAsResponse' smart constructor.
+newtype ListSendAsResponse = ListSendAsResponse'
+    { _lsarSendAs :: Maybe [SendAs]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListSendAsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsarSendAs'
+listSendAsResponse
+    :: ListSendAsResponse
+listSendAsResponse =
+    ListSendAsResponse'
+    { _lsarSendAs = Nothing
+    }
+
+-- | List of send-as aliases.
+lsarSendAs :: Lens' ListSendAsResponse [SendAs]
+lsarSendAs
+  = lens _lsarSendAs (\ s a -> s{_lsarSendAs = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListSendAsResponse where
+        parseJSON
+          = withObject "ListSendAsResponse"
+              (\ o ->
+                 ListSendAsResponse' <$> (o .:? "sendAs" .!= mempty))
+
+instance ToJSON ListSendAsResponse where
+        toJSON ListSendAsResponse'{..}
+          = object (catMaybes [("sendAs" .=) <$> _lsarSendAs])
 
 -- | Push notification watch response.
 --
@@ -948,6 +1598,198 @@ instance ToJSON Draft where
               (catMaybes
                  [("id" .=) <$> _dId, ("message" .=) <$> _dMessage])
 
+-- | Configuration for communication with an SMTP service.
+--
+-- /See:/ 'smtpMsa' smart constructor.
+data SmtpMsa = SmtpMsa'
+    { _smSecurityMode :: !(Maybe SmtpMsaSecurityMode)
+    , _smUsername     :: !(Maybe Text)
+    , _smPassword     :: !(Maybe Text)
+    , _smHost         :: !(Maybe Text)
+    , _smPort         :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SmtpMsa' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'smSecurityMode'
+--
+-- * 'smUsername'
+--
+-- * 'smPassword'
+--
+-- * 'smHost'
+--
+-- * 'smPort'
+smtpMsa
+    :: SmtpMsa
+smtpMsa =
+    SmtpMsa'
+    { _smSecurityMode = Nothing
+    , _smUsername = Nothing
+    , _smPassword = Nothing
+    , _smHost = Nothing
+    , _smPort = Nothing
+    }
+
+-- | The protocol that will be used to secure communication with the SMTP
+-- service. Required.
+smSecurityMode :: Lens' SmtpMsa (Maybe SmtpMsaSecurityMode)
+smSecurityMode
+  = lens _smSecurityMode
+      (\ s a -> s{_smSecurityMode = a})
+
+-- | The username that will be used for authentication with the SMTP service.
+-- This is a write-only field that can be specified in requests to create
+-- or update SendAs settings; it is never populated in responses.
+smUsername :: Lens' SmtpMsa (Maybe Text)
+smUsername
+  = lens _smUsername (\ s a -> s{_smUsername = a})
+
+-- | The password that will be used for authentication with the SMTP service.
+-- This is a write-only field that can be specified in requests to create
+-- or update SendAs settings; it is never populated in responses.
+smPassword :: Lens' SmtpMsa (Maybe Text)
+smPassword
+  = lens _smPassword (\ s a -> s{_smPassword = a})
+
+-- | The hostname of the SMTP service. Required.
+smHost :: Lens' SmtpMsa (Maybe Text)
+smHost = lens _smHost (\ s a -> s{_smHost = a})
+
+-- | The port of the SMTP service. Required.
+smPort :: Lens' SmtpMsa (Maybe Int32)
+smPort
+  = lens _smPort (\ s a -> s{_smPort = a}) .
+      mapping _Coerce
+
+instance FromJSON SmtpMsa where
+        parseJSON
+          = withObject "SmtpMsa"
+              (\ o ->
+                 SmtpMsa' <$>
+                   (o .:? "securityMode") <*> (o .:? "username") <*>
+                     (o .:? "password")
+                     <*> (o .:? "host")
+                     <*> (o .:? "port"))
+
+instance ToJSON SmtpMsa where
+        toJSON SmtpMsa'{..}
+          = object
+              (catMaybes
+                 [("securityMode" .=) <$> _smSecurityMode,
+                  ("username" .=) <$> _smUsername,
+                  ("password" .=) <$> _smPassword,
+                  ("host" .=) <$> _smHost, ("port" .=) <$> _smPort])
+
+-- | Settings for a forwarding address.
+--
+-- /See:/ 'forwardingAddress' smart constructor.
+data ForwardingAddress = ForwardingAddress'
+    { _faForwardingEmail    :: !(Maybe Text)
+    , _faVerificationStatus :: !(Maybe ForwardingAddressVerificationStatus)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ForwardingAddress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'faForwardingEmail'
+--
+-- * 'faVerificationStatus'
+forwardingAddress
+    :: ForwardingAddress
+forwardingAddress =
+    ForwardingAddress'
+    { _faForwardingEmail = Nothing
+    , _faVerificationStatus = Nothing
+    }
+
+-- | An email address to which messages can be forwarded.
+faForwardingEmail :: Lens' ForwardingAddress (Maybe Text)
+faForwardingEmail
+  = lens _faForwardingEmail
+      (\ s a -> s{_faForwardingEmail = a})
+
+-- | Indicates whether this address has been verified and is usable for
+-- forwarding. Read-only.
+faVerificationStatus :: Lens' ForwardingAddress (Maybe ForwardingAddressVerificationStatus)
+faVerificationStatus
+  = lens _faVerificationStatus
+      (\ s a -> s{_faVerificationStatus = a})
+
+instance FromJSON ForwardingAddress where
+        parseJSON
+          = withObject "ForwardingAddress"
+              (\ o ->
+                 ForwardingAddress' <$>
+                   (o .:? "forwardingEmail") <*>
+                     (o .:? "verificationStatus"))
+
+instance ToJSON ForwardingAddress where
+        toJSON ForwardingAddress'{..}
+          = object
+              (catMaybes
+                 [("forwardingEmail" .=) <$> _faForwardingEmail,
+                  ("verificationStatus" .=) <$> _faVerificationStatus])
+
+-- | Resource definition for Gmail filters. Filters apply to specific
+-- messages instead of an entire email thread.
+--
+-- /See:/ 'filter'' smart constructor.
+data Filter = Filter'
+    { _fAction   :: !(Maybe FilterAction)
+    , _fId       :: !(Maybe Text)
+    , _fCriteria :: !(Maybe FilterCriteria)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Filter' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fAction'
+--
+-- * 'fId'
+--
+-- * 'fCriteria'
+filter'
+    :: Filter
+filter' =
+    Filter'
+    { _fAction = Nothing
+    , _fId = Nothing
+    , _fCriteria = Nothing
+    }
+
+-- | Action that the filter performs.
+fAction :: Lens' Filter (Maybe FilterAction)
+fAction = lens _fAction (\ s a -> s{_fAction = a})
+
+-- | The server assigned ID of the filter.
+fId :: Lens' Filter (Maybe Text)
+fId = lens _fId (\ s a -> s{_fId = a})
+
+-- | Matching criteria for the filter.
+fCriteria :: Lens' Filter (Maybe FilterCriteria)
+fCriteria
+  = lens _fCriteria (\ s a -> s{_fCriteria = a})
+
+instance FromJSON Filter where
+        parseJSON
+          = withObject "Filter"
+              (\ o ->
+                 Filter' <$>
+                   (o .:? "action") <*> (o .:? "id") <*>
+                     (o .:? "criteria"))
+
+instance ToJSON Filter where
+        toJSON Filter'{..}
+          = object
+              (catMaybes
+                 [("action" .=) <$> _fAction, ("id" .=) <$> _fId,
+                  ("criteria" .=) <$> _fCriteria])
+
 -- | Set up or update a new push notification watch on this user\'s mailbox.
 --
 -- /See:/ 'watchRequest' smart constructor.
@@ -1016,6 +1858,84 @@ instance ToJSON WatchRequest where
                  [("labelFilterAction" .=) <$> _wrLabelFilterAction,
                   ("topicName" .=) <$> _wrTopicName,
                   ("labelIds" .=) <$> _wrLabelIds])
+
+-- | IMAP settings for an account.
+--
+-- /See:/ 'imapSettings' smart constructor.
+data ImapSettings = ImapSettings'
+    { _isEnabled         :: !(Maybe Bool)
+    , _isExpungeBehavior :: !(Maybe ImapSettingsExpungeBehavior)
+    , _isAutoExpunge     :: !(Maybe Bool)
+    , _isMaxFolderSize   :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ImapSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'isEnabled'
+--
+-- * 'isExpungeBehavior'
+--
+-- * 'isAutoExpunge'
+--
+-- * 'isMaxFolderSize'
+imapSettings
+    :: ImapSettings
+imapSettings =
+    ImapSettings'
+    { _isEnabled = Nothing
+    , _isExpungeBehavior = Nothing
+    , _isAutoExpunge = Nothing
+    , _isMaxFolderSize = Nothing
+    }
+
+-- | Whether IMAP is enabled for the account.
+isEnabled :: Lens' ImapSettings (Maybe Bool)
+isEnabled
+  = lens _isEnabled (\ s a -> s{_isEnabled = a})
+
+-- | The action that will be executed on a message when it is marked as
+-- deleted and expunged from the last visible IMAP folder.
+isExpungeBehavior :: Lens' ImapSettings (Maybe ImapSettingsExpungeBehavior)
+isExpungeBehavior
+  = lens _isExpungeBehavior
+      (\ s a -> s{_isExpungeBehavior = a})
+
+-- | If this value is true, Gmail will immediately expunge a message when it
+-- is marked as deleted in IMAP. Otherwise, Gmail will wait for an update
+-- from the client before expunging messages marked as deleted.
+isAutoExpunge :: Lens' ImapSettings (Maybe Bool)
+isAutoExpunge
+  = lens _isAutoExpunge
+      (\ s a -> s{_isAutoExpunge = a})
+
+-- | An optional limit on the number of messages that an IMAP folder may
+-- contain. Legal values are 0, 1000, 2000, 5000 or 10000. A value of zero
+-- is interpreted to mean that there is no limit.
+isMaxFolderSize :: Lens' ImapSettings (Maybe Int32)
+isMaxFolderSize
+  = lens _isMaxFolderSize
+      (\ s a -> s{_isMaxFolderSize = a})
+      . mapping _Coerce
+
+instance FromJSON ImapSettings where
+        parseJSON
+          = withObject "ImapSettings"
+              (\ o ->
+                 ImapSettings' <$>
+                   (o .:? "enabled") <*> (o .:? "expungeBehavior") <*>
+                     (o .:? "autoExpunge")
+                     <*> (o .:? "maxFolderSize"))
+
+instance ToJSON ImapSettings where
+        toJSON ImapSettings'{..}
+          = object
+              (catMaybes
+                 [("enabled" .=) <$> _isEnabled,
+                  ("expungeBehavior" .=) <$> _isExpungeBehavior,
+                  ("autoExpunge" .=) <$> _isAutoExpunge,
+                  ("maxFolderSize" .=) <$> _isMaxFolderSize])
 
 -- | An email message.
 --
@@ -1270,6 +2190,71 @@ instance ToJSON Thread where
                  [("snippet" .=) <$> _tSnippet,
                   ("historyId" .=) <$> _tHistoryId, ("id" .=) <$> _tId,
                   ("messages" .=) <$> _tMessages])
+
+-- | A set of actions to perform on a message.
+--
+-- /See:/ 'filterAction' smart constructor.
+data FilterAction = FilterAction'
+    { _faForward        :: !(Maybe Text)
+    , _faRemoveLabelIds :: !(Maybe [Text])
+    , _faAddLabelIds    :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FilterAction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'faForward'
+--
+-- * 'faRemoveLabelIds'
+--
+-- * 'faAddLabelIds'
+filterAction
+    :: FilterAction
+filterAction =
+    FilterAction'
+    { _faForward = Nothing
+    , _faRemoveLabelIds = Nothing
+    , _faAddLabelIds = Nothing
+    }
+
+-- | Email address that the message should be forwarded to.
+faForward :: Lens' FilterAction (Maybe Text)
+faForward
+  = lens _faForward (\ s a -> s{_faForward = a})
+
+-- | List of labels to remove from the message.
+faRemoveLabelIds :: Lens' FilterAction [Text]
+faRemoveLabelIds
+  = lens _faRemoveLabelIds
+      (\ s a -> s{_faRemoveLabelIds = a})
+      . _Default
+      . _Coerce
+
+-- | List of labels to add to the message.
+faAddLabelIds :: Lens' FilterAction [Text]
+faAddLabelIds
+  = lens _faAddLabelIds
+      (\ s a -> s{_faAddLabelIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON FilterAction where
+        parseJSON
+          = withObject "FilterAction"
+              (\ o ->
+                 FilterAction' <$>
+                   (o .:? "forward") <*>
+                     (o .:? "removeLabelIds" .!= mempty)
+                     <*> (o .:? "addLabelIds" .!= mempty))
+
+instance ToJSON FilterAction where
+        toJSON FilterAction'{..}
+          = object
+              (catMaybes
+                 [("forward" .=) <$> _faForward,
+                  ("removeLabelIds" .=) <$> _faRemoveLabelIds,
+                  ("addLabelIds" .=) <$> _faAddLabelIds])
 
 -- | Labels are used to categorize messages and threads within the user\'s
 -- mailbox.

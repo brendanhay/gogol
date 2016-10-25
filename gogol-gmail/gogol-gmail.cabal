@@ -60,6 +60,29 @@ library
         , Network.Google.Resource.Gmail.Users.Messages.Send
         , Network.Google.Resource.Gmail.Users.Messages.Trash
         , Network.Google.Resource.Gmail.Users.Messages.Untrash
+        , Network.Google.Resource.Gmail.Users.Settings.Filters.Create
+        , Network.Google.Resource.Gmail.Users.Settings.Filters.Delete
+        , Network.Google.Resource.Gmail.Users.Settings.Filters.Get
+        , Network.Google.Resource.Gmail.Users.Settings.Filters.List
+        , Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Create
+        , Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Delete
+        , Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Get
+        , Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.List
+        , Network.Google.Resource.Gmail.Users.Settings.GetAutoForwarding
+        , Network.Google.Resource.Gmail.Users.Settings.GetImap
+        , Network.Google.Resource.Gmail.Users.Settings.GetPop
+        , Network.Google.Resource.Gmail.Users.Settings.GetVacation
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.Create
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.Delete
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.Get
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.List
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.Update
+        , Network.Google.Resource.Gmail.Users.Settings.SendAs.Verify
+        , Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
+        , Network.Google.Resource.Gmail.Users.Settings.UpdateImap
+        , Network.Google.Resource.Gmail.Users.Settings.UpdatePop
+        , Network.Google.Resource.Gmail.Users.Settings.UpdateVacation
         , Network.Google.Resource.Gmail.Users.Stop
         , Network.Google.Resource.Gmail.Users.Threads.Delete
         , Network.Google.Resource.Gmail.Users.Threads.Get

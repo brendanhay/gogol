@@ -20,9 +20,11 @@ module Network.Google.Gmail.Types
       gmailService
 
     -- * OAuth Scopes
+    , gmailSettingsBasicScope
     , mailGoogleComScope
     , gmailModifyScope
     , gmailLabelsScope
+    , gmailSettingsSharingScope
     , gmailSendScope
     , gmailInsertScope
     , gmailComposeScope
@@ -33,6 +35,9 @@ module Network.Google.Gmail.Types
     , batchDeleteMessagesRequest
     , bdmrIds
 
+    -- * FilterCriteriaSizeComparison
+    , FilterCriteriaSizeComparison (..)
+
     -- * UsersMessagesGetFormat
     , UsersMessagesGetFormat (..)
 
@@ -42,11 +47,30 @@ module Network.Google.Gmail.Types
     , mtrRemoveLabelIds
     , mtrAddLabelIds
 
+    -- * ListFiltersResponse
+    , ListFiltersResponse
+    , listFiltersResponse
+    , lfrFilter
+
     -- * ModifyMessageRequest
     , ModifyMessageRequest
     , modifyMessageRequest
     , mmrRemoveLabelIds
     , mmrAddLabelIds
+
+    -- * ListForwardingAddressesResponse
+    , ListForwardingAddressesResponse
+    , listForwardingAddressesResponse
+    , lfarForwardingAddresses
+
+    -- * PopSettings
+    , PopSettings
+    , popSettings
+    , psAccessWindow
+    , psDisPosition
+
+    -- * PopSettingsAccessWindow
+    , PopSettingsAccessWindow (..)
 
     -- * History
     , History
@@ -58,6 +82,22 @@ module Network.Google.Gmail.Types
     , hId
     , hMessages
 
+    -- * ForwardingAddressVerificationStatus
+    , ForwardingAddressVerificationStatus (..)
+
+    -- * FilterCriteria
+    , FilterCriteria
+    , filterCriteria
+    , fcSizeComparison
+    , fcSubject
+    , fcSize
+    , fcExcludeChats
+    , fcTo
+    , fcFrom
+    , fcQuery
+    , fcNegatedQuery
+    , fcHasAttachment
+
     -- * ProFile
     , ProFile
     , proFile
@@ -66,11 +106,17 @@ module Network.Google.Gmail.Types
     , pfHistoryId
     , pfEmailAddress
 
+    -- * AutoForwardingDisPosition
+    , AutoForwardingDisPosition (..)
+
     -- * MessagePartHeader
     , MessagePartHeader
     , messagePartHeader
     , mphValue
     , mphName
+
+    -- * SendAsVerificationStatus
+    , SendAsVerificationStatus (..)
 
     -- * ListHistoryResponse
     , ListHistoryResponse
@@ -78,6 +124,19 @@ module Network.Google.Gmail.Types
     , lhrNextPageToken
     , lhrHistory
     , lhrHistoryId
+
+    -- * SendAs
+    , SendAs
+    , sendAs
+    , saSignature
+    , saReplyToAddress
+    , saTreatAsAlias
+    , saSendAsEmail
+    , saDisplayName
+    , saVerificationStatus
+    , saSmtpMsa
+    , saIsPrimary
+    , saIsDefault
 
     -- * LabelType
     , LabelType (..)
@@ -119,6 +178,18 @@ module Network.Google.Gmail.Types
     , listLabelsResponse
     , llrLabels
 
+    -- * VacationSettings
+    , VacationSettings
+    , vacationSettings
+    , vsEnableAutoReply
+    , vsResponseBodyPlainText
+    , vsRestrictToDomain
+    , vsStartTime
+    , vsResponseBodyHTML
+    , vsRestrictToContacts
+    , vsResponseSubject
+    , vsEndTime
+
     -- * LabelLabelListVisibility
     , LabelLabelListVisibility (..)
 
@@ -134,12 +205,24 @@ module Network.Google.Gmail.Types
     , mpbData
     , mpbAttachmentId
 
+    -- * AutoForwarding
+    , AutoForwarding
+    , autoForwarding
+    , afEnabled
+    , afDisPosition
+    , afEmailAddress
+
     -- * ListDraftsResponse
     , ListDraftsResponse
     , listDraftsResponse
     , ldrNextPageToken
     , ldrResultSizeEstimate
     , ldrDrafts
+
+    -- * ListSendAsResponse
+    , ListSendAsResponse
+    , listSendAsResponse
+    , lsarSendAs
 
     -- * WatchResponse
     , WatchResponse
@@ -156,6 +239,31 @@ module Network.Google.Gmail.Types
     , dId
     , dMessage
 
+    -- * SmtpMsa
+    , SmtpMsa
+    , smtpMsa
+    , smSecurityMode
+    , smUsername
+    , smPassword
+    , smHost
+    , smPort
+
+    -- * ForwardingAddress
+    , ForwardingAddress
+    , forwardingAddress
+    , faForwardingEmail
+    , faVerificationStatus
+
+    -- * PopSettingsDisPosition
+    , PopSettingsDisPosition (..)
+
+    -- * Filter
+    , Filter
+    , filter'
+    , fAction
+    , fId
+    , fCriteria
+
     -- * WatchRequest
     , WatchRequest
     , watchRequest
@@ -165,6 +273,20 @@ module Network.Google.Gmail.Types
 
     -- * WatchRequestLabelFilterAction
     , WatchRequestLabelFilterAction (..)
+
+    -- * ImapSettings
+    , ImapSettings
+    , imapSettings
+    , isEnabled
+    , isExpungeBehavior
+    , isAutoExpunge
+    , isMaxFolderSize
+
+    -- * ImapSettingsExpungeBehavior
+    , ImapSettingsExpungeBehavior (..)
+
+    -- * SmtpMsaSecurityMode
+    , SmtpMsaSecurityMode (..)
 
     -- * Message
     , Message
@@ -195,6 +317,13 @@ module Network.Google.Gmail.Types
     , tHistoryId
     , tId
     , tMessages
+
+    -- * FilterAction
+    , FilterAction
+    , filterAction
+    , faForward
+    , faRemoveLabelIds
+    , faAddLabelIds
 
     -- * Label
     , Label
@@ -232,6 +361,10 @@ gmailService
   = defaultService (ServiceId "gmail:v1")
       "www.googleapis.com"
 
+-- | Manage your basic mail settings
+gmailSettingsBasicScope :: Proxy '["https://www.googleapis.com/auth/gmail.settings.basic"]
+gmailSettingsBasicScope = Proxy;
+
 -- | View and manage your mail
 mailGoogleComScope :: Proxy '["https://mail.google.com/"]
 mailGoogleComScope = Proxy;
@@ -243,6 +376,10 @@ gmailModifyScope = Proxy;
 -- | Manage mailbox labels
 gmailLabelsScope :: Proxy '["https://www.googleapis.com/auth/gmail.labels"]
 gmailLabelsScope = Proxy;
+
+-- | Manage your sensitive mail settings, including who can manage your mail
+gmailSettingsSharingScope :: Proxy '["https://www.googleapis.com/auth/gmail.settings.sharing"]
+gmailSettingsSharingScope = Proxy;
 
 -- | Send email on your behalf
 gmailSendScope :: Proxy '["https://www.googleapis.com/auth/gmail.send"]
