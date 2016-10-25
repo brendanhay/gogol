@@ -3462,6 +3462,68 @@ instance FromJSON LiveBroadcastsListBroadcastType where
 instance ToJSON LiveBroadcastsListBroadcastType where
     toJSON = toJSONText
 
+data ContentRatingFpbRatingReasonsItem
+    = FpbBlasphemy
+      -- ^ @fpbBlasphemy@
+    | FpbCriminalTechniques
+      -- ^ @fpbCriminalTechniques@
+    | FpbDrugs
+      -- ^ @fpbDrugs@
+    | FpbHorror
+      -- ^ @fpbHorror@
+    | FpbImitativeActsTechniques
+      -- ^ @fpbImitativeActsTechniques@
+    | FpbLanguage
+      -- ^ @fpbLanguage@
+    | FpbNudity
+      -- ^ @fpbNudity@
+    | FpbPrejudice
+      -- ^ @fpbPrejudice@
+    | FpbSex
+      -- ^ @fpbSex@
+    | FpbSexualViolence
+      -- ^ @fpbSexualViolence@
+    | FpbViolence
+      -- ^ @fpbViolence@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ContentRatingFpbRatingReasonsItem
+
+instance FromHttpApiData ContentRatingFpbRatingReasonsItem where
+    parseQueryParam = \case
+        "fpbBlasphemy" -> Right FpbBlasphemy
+        "fpbCriminalTechniques" -> Right FpbCriminalTechniques
+        "fpbDrugs" -> Right FpbDrugs
+        "fpbHorror" -> Right FpbHorror
+        "fpbImitativeActsTechniques" -> Right FpbImitativeActsTechniques
+        "fpbLanguage" -> Right FpbLanguage
+        "fpbNudity" -> Right FpbNudity
+        "fpbPrejudice" -> Right FpbPrejudice
+        "fpbSex" -> Right FpbSex
+        "fpbSexualViolence" -> Right FpbSexualViolence
+        "fpbViolence" -> Right FpbViolence
+        x -> Left ("Unable to parse ContentRatingFpbRatingReasonsItem from: " <> x)
+
+instance ToHttpApiData ContentRatingFpbRatingReasonsItem where
+    toQueryParam = \case
+        FpbBlasphemy -> "fpbBlasphemy"
+        FpbCriminalTechniques -> "fpbCriminalTechniques"
+        FpbDrugs -> "fpbDrugs"
+        FpbHorror -> "fpbHorror"
+        FpbImitativeActsTechniques -> "fpbImitativeActsTechniques"
+        FpbLanguage -> "fpbLanguage"
+        FpbNudity -> "fpbNudity"
+        FpbPrejudice -> "fpbPrejudice"
+        FpbSex -> "fpbSex"
+        FpbSexualViolence -> "fpbSexualViolence"
+        FpbViolence -> "fpbViolence"
+
+instance FromJSON ContentRatingFpbRatingReasonsItem where
+    parseJSON = parseJSONText "ContentRatingFpbRatingReasonsItem"
+
+instance ToJSON ContentRatingFpbRatingReasonsItem where
+    toJSON = toJSONText
+
 -- | The video\'s processing status. This value indicates whether YouTube was
 -- able to process the video or if the video is still being processed.
 data VideoProcessingDetailsProcessingStatus
@@ -3796,10 +3858,16 @@ data ContentRatingGrfilmRating
       -- ^ @grfilmE@
     | GrfilmK
       -- ^ @grfilmK@
+    | GRFILMK12
+      -- ^ @grfilmK12@
     | GRFILMK13
       -- ^ @grfilmK13@
+    | GRFILMK15
+      -- ^ @grfilmK15@
     | GRFILMK17
       -- ^ @grfilmK17@
+    | GRFILMK18
+      -- ^ @grfilmK18@
     | GrfilmUnrated
       -- ^ @grfilmUnrated@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -3810,8 +3878,11 @@ instance FromHttpApiData ContentRatingGrfilmRating where
     parseQueryParam = \case
         "grfilmE" -> Right GrfilmE
         "grfilmK" -> Right GrfilmK
+        "grfilmK12" -> Right GRFILMK12
         "grfilmK13" -> Right GRFILMK13
+        "grfilmK15" -> Right GRFILMK15
         "grfilmK17" -> Right GRFILMK17
+        "grfilmK18" -> Right GRFILMK18
         "grfilmUnrated" -> Right GrfilmUnrated
         x -> Left ("Unable to parse ContentRatingGrfilmRating from: " <> x)
 
@@ -3819,8 +3890,11 @@ instance ToHttpApiData ContentRatingGrfilmRating where
     toQueryParam = \case
         GrfilmE -> "grfilmE"
         GrfilmK -> "grfilmK"
+        GRFILMK12 -> "grfilmK12"
         GRFILMK13 -> "grfilmK13"
+        GRFILMK15 -> "grfilmK15"
         GRFILMK17 -> "grfilmK17"
+        GRFILMK18 -> "grfilmK18"
         GrfilmUnrated -> "grfilmUnrated"
 
 instance FromJSON ContentRatingGrfilmRating where
@@ -5860,6 +5934,14 @@ data LiveChatMessageSnippetType
       -- ^ @messageRetractedEvent@
     | LCMSTNewSponsorEvent
       -- ^ @newSponsorEvent@
+    | LCMSTPollClosedEvent
+      -- ^ @pollClosedEvent@
+    | LCMSTPollEditedEvent
+      -- ^ @pollEditedEvent@
+    | LCMSTPollOpenedEvent
+      -- ^ @pollOpenedEvent@
+    | LCMSTPollVotedEvent
+      -- ^ @pollVotedEvent@
     | LCMSTSponsorOnlyModeEndedEvent
       -- ^ @sponsorOnlyModeEndedEvent@
     | LCMSTSponsorOnlyModeStartedEvent
@@ -5881,6 +5963,10 @@ instance FromHttpApiData LiveChatMessageSnippetType where
         "messageDeletedEvent" -> Right LCMSTMessageDeletedEvent
         "messageRetractedEvent" -> Right LCMSTMessageRetractedEvent
         "newSponsorEvent" -> Right LCMSTNewSponsorEvent
+        "pollClosedEvent" -> Right LCMSTPollClosedEvent
+        "pollEditedEvent" -> Right LCMSTPollEditedEvent
+        "pollOpenedEvent" -> Right LCMSTPollOpenedEvent
+        "pollVotedEvent" -> Right LCMSTPollVotedEvent
         "sponsorOnlyModeEndedEvent" -> Right LCMSTSponsorOnlyModeEndedEvent
         "sponsorOnlyModeStartedEvent" -> Right LCMSTSponsorOnlyModeStartedEvent
         "textMessageEvent" -> Right LCMSTTextMessageEvent
@@ -5895,6 +5981,10 @@ instance ToHttpApiData LiveChatMessageSnippetType where
         LCMSTMessageDeletedEvent -> "messageDeletedEvent"
         LCMSTMessageRetractedEvent -> "messageRetractedEvent"
         LCMSTNewSponsorEvent -> "newSponsorEvent"
+        LCMSTPollClosedEvent -> "pollClosedEvent"
+        LCMSTPollEditedEvent -> "pollEditedEvent"
+        LCMSTPollOpenedEvent -> "pollOpenedEvent"
+        LCMSTPollVotedEvent -> "pollVotedEvent"
         LCMSTSponsorOnlyModeEndedEvent -> "sponsorOnlyModeEndedEvent"
         LCMSTSponsorOnlyModeStartedEvent -> "sponsorOnlyModeStartedEvent"
         LCMSTTextMessageEvent -> "textMessageEvent"

@@ -852,6 +852,39 @@ instance ToJSON ChannelStatus where
                   ("longUploadsStatus" .=) <$> _csLongUploadsStatus,
                   ("privacyStatus" .=) <$> _csPrivacyStatus])
 
+--
+-- /See:/ 'liveChatPollClosedDetails' smart constructor.
+newtype LiveChatPollClosedDetails = LiveChatPollClosedDetails'
+    { _lcpcdPollId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveChatPollClosedDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcpcdPollId'
+liveChatPollClosedDetails
+    :: LiveChatPollClosedDetails
+liveChatPollClosedDetails =
+    LiveChatPollClosedDetails'
+    { _lcpcdPollId = Nothing
+    }
+
+-- | The id of the poll that was closed.
+lcpcdPollId :: Lens' LiveChatPollClosedDetails (Maybe Text)
+lcpcdPollId
+  = lens _lcpcdPollId (\ s a -> s{_lcpcdPollId = a})
+
+instance FromJSON LiveChatPollClosedDetails where
+        parseJSON
+          = withObject "LiveChatPollClosedDetails"
+              (\ o ->
+                 LiveChatPollClosedDetails' <$> (o .:? "pollId"))
+
+instance ToJSON LiveChatPollClosedDetails where
+        toJSON LiveChatPollClosedDetails'{..}
+          = object (catMaybes [("pollId" .=) <$> _lcpcdPollId])
+
 -- | Describes a single promoted item.
 --
 -- /See:/ 'promotedItem' smart constructor.
@@ -4573,6 +4606,61 @@ instance ToJSON ChannelTopicDetails where
               (catMaybes [("topicIds" .=) <$> _ctdTopicIds])
 
 --
+-- /See:/ 'liveChatPollEditedDetails' smart constructor.
+data LiveChatPollEditedDetails = LiveChatPollEditedDetails'
+    { _lcpedPrompt :: !(Maybe Text)
+    , _lcpedItems  :: !(Maybe [LiveChatPollItem])
+    , _lcpedId     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveChatPollEditedDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcpedPrompt'
+--
+-- * 'lcpedItems'
+--
+-- * 'lcpedId'
+liveChatPollEditedDetails
+    :: LiveChatPollEditedDetails
+liveChatPollEditedDetails =
+    LiveChatPollEditedDetails'
+    { _lcpedPrompt = Nothing
+    , _lcpedItems = Nothing
+    , _lcpedId = Nothing
+    }
+
+lcpedPrompt :: Lens' LiveChatPollEditedDetails (Maybe Text)
+lcpedPrompt
+  = lens _lcpedPrompt (\ s a -> s{_lcpedPrompt = a})
+
+lcpedItems :: Lens' LiveChatPollEditedDetails [LiveChatPollItem]
+lcpedItems
+  = lens _lcpedItems (\ s a -> s{_lcpedItems = a}) .
+      _Default
+      . _Coerce
+
+lcpedId :: Lens' LiveChatPollEditedDetails (Maybe Text)
+lcpedId = lens _lcpedId (\ s a -> s{_lcpedId = a})
+
+instance FromJSON LiveChatPollEditedDetails where
+        parseJSON
+          = withObject "LiveChatPollEditedDetails"
+              (\ o ->
+                 LiveChatPollEditedDetails' <$>
+                   (o .:? "prompt") <*> (o .:? "items" .!= mempty) <*>
+                     (o .:? "id"))
+
+instance ToJSON LiveChatPollEditedDetails where
+        toJSON LiveChatPollEditedDetails'{..}
+          = object
+              (catMaybes
+                 [("prompt" .=) <$> _lcpedPrompt,
+                  ("items" .=) <$> _lcpedItems,
+                  ("id" .=) <$> _lcpedId])
+
+--
 -- /See:/ 'videoCategoryListResponse' smart constructor.
 data VideoCategoryListResponse = VideoCategoryListResponse'
     { _vclrEtag            :: !(Maybe Text)
@@ -6525,9 +6613,13 @@ data LiveChatMessageSnippet = LiveChatMessageSnippet'
     { _lcmsMessageDeletedDetails   :: !(Maybe LiveChatMessageDeletedDetails)
     , _lcmsLiveChatId              :: !(Maybe Text)
     , _lcmsPublishedAt             :: !(Maybe DateTime')
+    , _lcmsPollOpenedDetails       :: !(Maybe LiveChatPollOpenedDetails)
+    , _lcmsPollVotedDetails        :: !(Maybe LiveChatPollVotedDetails)
     , _lcmsUserBannedDetails       :: !(Maybe LiveChatUserBannedMessageDetails)
     , _lcmsTextMessageDetails      :: !(Maybe LiveChatTextMessageDetails)
+    , _lcmsPollClosedDetails       :: !(Maybe LiveChatPollClosedDetails)
     , _lcmsMessageRetractedDetails :: !(Maybe LiveChatMessageRetractedDetails)
+    , _lcmsPollEditedDetails       :: !(Maybe LiveChatPollEditedDetails)
     , _lcmsType                    :: !(Maybe LiveChatMessageSnippetType)
     , _lcmsAuthorChannelId         :: !(Maybe Text)
     , _lcmsFanFundingEventDetails  :: !(Maybe LiveChatFanFundingEventDetails)
@@ -6545,11 +6637,19 @@ data LiveChatMessageSnippet = LiveChatMessageSnippet'
 --
 -- * 'lcmsPublishedAt'
 --
+-- * 'lcmsPollOpenedDetails'
+--
+-- * 'lcmsPollVotedDetails'
+--
 -- * 'lcmsUserBannedDetails'
 --
 -- * 'lcmsTextMessageDetails'
 --
+-- * 'lcmsPollClosedDetails'
+--
 -- * 'lcmsMessageRetractedDetails'
+--
+-- * 'lcmsPollEditedDetails'
 --
 -- * 'lcmsType'
 --
@@ -6567,9 +6667,13 @@ liveChatMessageSnippet =
     { _lcmsMessageDeletedDetails = Nothing
     , _lcmsLiveChatId = Nothing
     , _lcmsPublishedAt = Nothing
+    , _lcmsPollOpenedDetails = Nothing
+    , _lcmsPollVotedDetails = Nothing
     , _lcmsUserBannedDetails = Nothing
     , _lcmsTextMessageDetails = Nothing
+    , _lcmsPollClosedDetails = Nothing
     , _lcmsMessageRetractedDetails = Nothing
+    , _lcmsPollEditedDetails = Nothing
     , _lcmsType = Nothing
     , _lcmsAuthorChannelId = Nothing
     , _lcmsFanFundingEventDetails = Nothing
@@ -6595,6 +6699,16 @@ lcmsPublishedAt
       (\ s a -> s{_lcmsPublishedAt = a})
       . mapping _DateTime
 
+lcmsPollOpenedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatPollOpenedDetails)
+lcmsPollOpenedDetails
+  = lens _lcmsPollOpenedDetails
+      (\ s a -> s{_lcmsPollOpenedDetails = a})
+
+lcmsPollVotedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatPollVotedDetails)
+lcmsPollVotedDetails
+  = lens _lcmsPollVotedDetails
+      (\ s a -> s{_lcmsPollVotedDetails = a})
+
 lcmsUserBannedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatUserBannedMessageDetails)
 lcmsUserBannedDetails
   = lens _lcmsUserBannedDetails
@@ -6607,10 +6721,20 @@ lcmsTextMessageDetails
   = lens _lcmsTextMessageDetails
       (\ s a -> s{_lcmsTextMessageDetails = a})
 
+lcmsPollClosedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatPollClosedDetails)
+lcmsPollClosedDetails
+  = lens _lcmsPollClosedDetails
+      (\ s a -> s{_lcmsPollClosedDetails = a})
+
 lcmsMessageRetractedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatMessageRetractedDetails)
 lcmsMessageRetractedDetails
   = lens _lcmsMessageRetractedDetails
       (\ s a -> s{_lcmsMessageRetractedDetails = a})
+
+lcmsPollEditedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatPollEditedDetails)
+lcmsPollEditedDetails
+  = lens _lcmsPollEditedDetails
+      (\ s a -> s{_lcmsPollEditedDetails = a})
 
 -- | The type of message, this will always be present, it determines the
 -- contents of the message as well as which fields will be present.
@@ -6658,9 +6782,13 @@ instance FromJSON LiveChatMessageSnippet where
                    (o .:? "messageDeletedDetails") <*>
                      (o .:? "liveChatId")
                      <*> (o .:? "publishedAt")
+                     <*> (o .:? "pollOpenedDetails")
+                     <*> (o .:? "pollVotedDetails")
                      <*> (o .:? "userBannedDetails")
                      <*> (o .:? "textMessageDetails")
+                     <*> (o .:? "pollClosedDetails")
                      <*> (o .:? "messageRetractedDetails")
+                     <*> (o .:? "pollEditedDetails")
                      <*> (o .:? "type")
                      <*> (o .:? "authorChannelId")
                      <*> (o .:? "fanFundingEventDetails")
@@ -6675,11 +6803,15 @@ instance ToJSON LiveChatMessageSnippet where
                     _lcmsMessageDeletedDetails,
                   ("liveChatId" .=) <$> _lcmsLiveChatId,
                   ("publishedAt" .=) <$> _lcmsPublishedAt,
+                  ("pollOpenedDetails" .=) <$> _lcmsPollOpenedDetails,
+                  ("pollVotedDetails" .=) <$> _lcmsPollVotedDetails,
                   ("userBannedDetails" .=) <$> _lcmsUserBannedDetails,
                   ("textMessageDetails" .=) <$>
                     _lcmsTextMessageDetails,
+                  ("pollClosedDetails" .=) <$> _lcmsPollClosedDetails,
                   ("messageRetractedDetails" .=) <$>
                     _lcmsMessageRetractedDetails,
+                  ("pollEditedDetails" .=) <$> _lcmsPollEditedDetails,
                   ("type" .=) <$> _lcmsType,
                   ("authorChannelId" .=) <$> _lcmsAuthorChannelId,
                   ("fanFundingEventDetails" .=) <$>
@@ -10433,6 +10565,52 @@ instance ToJSON SearchResultSnippet where
                   ("description" .=) <$> _srsDescription])
 
 --
+-- /See:/ 'liveChatPollItem' smart constructor.
+data LiveChatPollItem = LiveChatPollItem'
+    { _lcpiItemId      :: !(Maybe Text)
+    , _lcpiDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveChatPollItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcpiItemId'
+--
+-- * 'lcpiDescription'
+liveChatPollItem
+    :: LiveChatPollItem
+liveChatPollItem =
+    LiveChatPollItem'
+    { _lcpiItemId = Nothing
+    , _lcpiDescription = Nothing
+    }
+
+lcpiItemId :: Lens' LiveChatPollItem (Maybe Text)
+lcpiItemId
+  = lens _lcpiItemId (\ s a -> s{_lcpiItemId = a})
+
+-- | Plain text description of the item.
+lcpiDescription :: Lens' LiveChatPollItem (Maybe Text)
+lcpiDescription
+  = lens _lcpiDescription
+      (\ s a -> s{_lcpiDescription = a})
+
+instance FromJSON LiveChatPollItem where
+        parseJSON
+          = withObject "LiveChatPollItem"
+              (\ o ->
+                 LiveChatPollItem' <$>
+                   (o .:? "itemId") <*> (o .:? "description"))
+
+instance ToJSON LiveChatPollItem where
+        toJSON LiveChatPollItem'{..}
+          = object
+              (catMaybes
+                 [("itemId" .=) <$> _lcpiItemId,
+                  ("description" .=) <$> _lcpiDescription])
+
+--
 -- /See:/ 'sponsorListResponse' smart constructor.
 data SponsorListResponse = SponsorListResponse'
     { _spoEtag            :: !(Maybe Text)
@@ -11835,6 +12013,61 @@ instance FromJSON LanguageTag where
 instance ToJSON LanguageTag where
         toJSON LanguageTag'{..}
           = object (catMaybes [("value" .=) <$> _ltValue])
+
+--
+-- /See:/ 'liveChatPollOpenedDetails' smart constructor.
+data LiveChatPollOpenedDetails = LiveChatPollOpenedDetails'
+    { _lcpodPrompt :: !(Maybe Text)
+    , _lcpodItems  :: !(Maybe [LiveChatPollItem])
+    , _lcpodId     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveChatPollOpenedDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcpodPrompt'
+--
+-- * 'lcpodItems'
+--
+-- * 'lcpodId'
+liveChatPollOpenedDetails
+    :: LiveChatPollOpenedDetails
+liveChatPollOpenedDetails =
+    LiveChatPollOpenedDetails'
+    { _lcpodPrompt = Nothing
+    , _lcpodItems = Nothing
+    , _lcpodId = Nothing
+    }
+
+lcpodPrompt :: Lens' LiveChatPollOpenedDetails (Maybe Text)
+lcpodPrompt
+  = lens _lcpodPrompt (\ s a -> s{_lcpodPrompt = a})
+
+lcpodItems :: Lens' LiveChatPollOpenedDetails [LiveChatPollItem]
+lcpodItems
+  = lens _lcpodItems (\ s a -> s{_lcpodItems = a}) .
+      _Default
+      . _Coerce
+
+lcpodId :: Lens' LiveChatPollOpenedDetails (Maybe Text)
+lcpodId = lens _lcpodId (\ s a -> s{_lcpodId = a})
+
+instance FromJSON LiveChatPollOpenedDetails where
+        parseJSON
+          = withObject "LiveChatPollOpenedDetails"
+              (\ o ->
+                 LiveChatPollOpenedDetails' <$>
+                   (o .:? "prompt") <*> (o .:? "items" .!= mempty) <*>
+                     (o .:? "id"))
+
+instance ToJSON LiveChatPollOpenedDetails where
+        toJSON LiveChatPollOpenedDetails'{..}
+          = object
+              (catMaybes
+                 [("prompt" .=) <$> _lcpodPrompt,
+                  ("items" .=) <$> _lcpodItems,
+                  ("id" .=) <$> _lcpodId])
 
 -- | Information about a video stream.
 --
@@ -13322,11 +13555,12 @@ instance ToJSON VideoProjectDetails where
           = object (catMaybes [("tags" .=) <$> _vpdTags])
 
 -- | Ratings schemes. The country-specific ratings are mostly for movies and
--- shows. NEXT_ID: 67
+-- shows. NEXT_ID: 68
 --
 -- /See:/ 'contentRating' smart constructor.
 data ContentRating = ContentRating'
-    { _crPefilmRating           :: !(Maybe ContentRatingPefilmRating)
+    { _crFpbRatingReasons       :: !(Maybe [ContentRatingFpbRatingReasonsItem])
+    , _crPefilmRating           :: !(Maybe ContentRatingPefilmRating)
     , _crCccRating              :: !(Maybe ContentRatingCccRating)
     , _crAnatelRating           :: !(Maybe ContentRatingAnatelRating)
     , _crMpaaRating             :: !(Maybe ContentRatingMpaaRating)
@@ -13397,6 +13631,8 @@ data ContentRating = ContentRating'
 -- | Creates a value of 'ContentRating' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'crFpbRatingReasons'
 --
 -- * 'crPefilmRating'
 --
@@ -13533,7 +13769,8 @@ contentRating
     :: ContentRating
 contentRating =
     ContentRating'
-    { _crPefilmRating = Nothing
+    { _crFpbRatingReasons = Nothing
+    , _crPefilmRating = Nothing
     , _crCccRating = Nothing
     , _crAnatelRating = Nothing
     , _crMpaaRating = Nothing
@@ -13600,6 +13837,15 @@ contentRating =
     , _crOflcRating = Nothing
     , _crKmrbRating = Nothing
     }
+
+-- | Reasons that explain why the video received its FPB (South Africa)
+-- rating.
+crFpbRatingReasons :: Lens' ContentRating [ContentRatingFpbRatingReasonsItem]
+crFpbRatingReasons
+  = lens _crFpbRatingReasons
+      (\ s a -> s{_crFpbRatingReasons = a})
+      . _Default
+      . _Coerce
 
 -- | The video\'s rating in Peru.
 crPefilmRating :: Lens' ContentRating (Maybe ContentRatingPefilmRating)
@@ -14007,8 +14253,10 @@ instance FromJSON ContentRating where
           = withObject "ContentRating"
               (\ o ->
                  ContentRating' <$>
-                   (o .:? "pefilmRating") <*> (o .:? "cccRating") <*>
-                     (o .:? "anatelRating")
+                   (o .:? "fpbRatingReasons" .!= mempty) <*>
+                     (o .:? "pefilmRating")
+                     <*> (o .:? "cccRating")
+                     <*> (o .:? "anatelRating")
                      <*> (o .:? "mpaaRating")
                      <*> (o .:? "cceRating")
                      <*> (o .:? "mccaaRating")
@@ -14077,7 +14325,8 @@ instance ToJSON ContentRating where
         toJSON ContentRating'{..}
           = object
               (catMaybes
-                 [("pefilmRating" .=) <$> _crPefilmRating,
+                 [("fpbRatingReasons" .=) <$> _crFpbRatingReasons,
+                  ("pefilmRating" .=) <$> _crPefilmRating,
                   ("cccRating" .=) <$> _crCccRating,
                   ("anatelRating" .=) <$> _crAnatelRating,
                   ("mpaaRating" .=) <$> _crMpaaRating,
@@ -15308,3 +15557,49 @@ instance ToJSON I18nLanguageSnippet where
           = object
               (catMaybes
                  [("hl" .=) <$> _ilsHl, ("name" .=) <$> _ilsName])
+
+--
+-- /See:/ 'liveChatPollVotedDetails' smart constructor.
+data LiveChatPollVotedDetails = LiveChatPollVotedDetails'
+    { _lcpvdPollId :: !(Maybe Text)
+    , _lcpvdItemId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveChatPollVotedDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcpvdPollId'
+--
+-- * 'lcpvdItemId'
+liveChatPollVotedDetails
+    :: LiveChatPollVotedDetails
+liveChatPollVotedDetails =
+    LiveChatPollVotedDetails'
+    { _lcpvdPollId = Nothing
+    , _lcpvdItemId = Nothing
+    }
+
+-- | The poll the user voted on.
+lcpvdPollId :: Lens' LiveChatPollVotedDetails (Maybe Text)
+lcpvdPollId
+  = lens _lcpvdPollId (\ s a -> s{_lcpvdPollId = a})
+
+-- | The poll item the user chose.
+lcpvdItemId :: Lens' LiveChatPollVotedDetails (Maybe Text)
+lcpvdItemId
+  = lens _lcpvdItemId (\ s a -> s{_lcpvdItemId = a})
+
+instance FromJSON LiveChatPollVotedDetails where
+        parseJSON
+          = withObject "LiveChatPollVotedDetails"
+              (\ o ->
+                 LiveChatPollVotedDetails' <$>
+                   (o .:? "pollId") <*> (o .:? "itemId"))
+
+instance ToJSON LiveChatPollVotedDetails where
+        toJSON LiveChatPollVotedDetails'{..}
+          = object
+              (catMaybes
+                 [("pollId" .=) <$> _lcpvdPollId,
+                  ("itemId" .=) <$> _lcpvdItemId])

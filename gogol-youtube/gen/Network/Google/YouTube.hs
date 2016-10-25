@@ -376,6 +376,11 @@ module Network.Google.YouTube
     -- ** CaptionSnippetFailureReason
     , CaptionSnippetFailureReason (..)
 
+    -- ** LiveChatPollClosedDetails
+    , LiveChatPollClosedDetails
+    , liveChatPollClosedDetails
+    , lcpcdPollId
+
     -- ** PromotedItem
     , PromotedItem
     , promotedItem
@@ -857,6 +862,13 @@ module Network.Google.YouTube
     -- ** ContentRatingBfvcRating
     , ContentRatingBfvcRating (..)
 
+    -- ** LiveChatPollEditedDetails
+    , LiveChatPollEditedDetails
+    , liveChatPollEditedDetails
+    , lcpedPrompt
+    , lcpedItems
+    , lcpedId
+
     -- ** LiveBroadcastTopicType
     , LiveBroadcastTopicType (..)
 
@@ -1100,9 +1112,13 @@ module Network.Google.YouTube
     , lcmsMessageDeletedDetails
     , lcmsLiveChatId
     , lcmsPublishedAt
+    , lcmsPollOpenedDetails
+    , lcmsPollVotedDetails
     , lcmsUserBannedDetails
     , lcmsTextMessageDetails
+    , lcmsPollClosedDetails
     , lcmsMessageRetractedDetails
+    , lcmsPollEditedDetails
     , lcmsType
     , lcmsAuthorChannelId
     , lcmsFanFundingEventDetails
@@ -1458,6 +1474,9 @@ module Network.Google.YouTube
     -- ** LiveBroadcastsListBroadcastType
     , LiveBroadcastsListBroadcastType (..)
 
+    -- ** ContentRatingFpbRatingReasonsItem
+    , ContentRatingFpbRatingReasonsItem (..)
+
     -- ** VideoProcessingDetailsProcessingStatus
     , VideoProcessingDetailsProcessingStatus (..)
 
@@ -1645,6 +1664,12 @@ module Network.Google.YouTube
     , srsTitle
     , srsLiveBroadcastContent
     , srsDescription
+
+    -- ** LiveChatPollItem
+    , LiveChatPollItem
+    , liveChatPollItem
+    , lcpiItemId
+    , lcpiDescription
 
     -- ** ActivityContentDetailsSocialType
     , ActivityContentDetailsSocialType (..)
@@ -1875,6 +1900,13 @@ module Network.Google.YouTube
     , languageTag
     , ltValue
 
+    -- ** LiveChatPollOpenedDetails
+    , LiveChatPollOpenedDetails
+    , liveChatPollOpenedDetails
+    , lcpodPrompt
+    , lcpodItems
+    , lcpodId
+
     -- ** SearchListEventType
     , SearchListEventType (..)
 
@@ -2077,6 +2109,7 @@ module Network.Google.YouTube
     -- ** ContentRating
     , ContentRating
     , contentRating
+    , crFpbRatingReasons
     , crPefilmRating
     , crCccRating
     , crAnatelRating
@@ -2288,6 +2321,12 @@ module Network.Google.YouTube
 
     -- ** ContentRatingCatvRating
     , ContentRatingCatvRating (..)
+
+    -- ** LiveChatPollVotedDetails
+    , LiveChatPollVotedDetails
+    , liveChatPollVotedDetails
+    , lcpvdPollId
+    , lcpvdItemId
     ) where
 
 import           Network.Google.Prelude

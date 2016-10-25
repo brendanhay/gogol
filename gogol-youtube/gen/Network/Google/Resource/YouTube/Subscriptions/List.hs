@@ -36,6 +36,7 @@ module Network.Google.Resource.YouTube.Subscriptions.List
     , subPart
     , subMine
     , subChannelId
+    , subMyRecentSubscribers
     , subOnBehalfOfContentOwner
     , subOnBehalfOfContentOwnerChannel
     , subId
@@ -58,16 +59,17 @@ type SubscriptionsListResource =
            QueryParam "part" Text :>
              QueryParam "mine" Bool :>
                QueryParam "channelId" Text :>
-                 QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "id" Text :>
-                       QueryParam "mySubscribers" Bool :>
-                         QueryParam "forChannelId" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "order" SubscriptionsListOrder :>
-                               QueryParam "maxResults" (Textual Word32) :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] SubscriptionListResponse
+                 QueryParam "myRecentSubscribers" Bool :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "mySubscribers" Bool :>
+                           QueryParam "forChannelId" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "order" SubscriptionsListOrder :>
+                                 QueryParam "maxResults" (Textual Word32) :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] SubscriptionListResponse
 
 -- | Returns subscription resources that match the API request criteria.
 --
@@ -76,6 +78,7 @@ data SubscriptionsList = SubscriptionsList'
     { _subPart                          :: !Text
     , _subMine                          :: !(Maybe Bool)
     , _subChannelId                     :: !(Maybe Text)
+    , _subMyRecentSubscribers           :: !(Maybe Bool)
     , _subOnBehalfOfContentOwner        :: !(Maybe Text)
     , _subOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _subId                            :: !(Maybe Text)
@@ -95,6 +98,8 @@ data SubscriptionsList = SubscriptionsList'
 -- * 'subMine'
 --
 -- * 'subChannelId'
+--
+-- * 'subMyRecentSubscribers'
 --
 -- * 'subOnBehalfOfContentOwner'
 --
@@ -119,6 +124,7 @@ subscriptionsList pSubPart_ =
     { _subPart = pSubPart_
     , _subMine = Nothing
     , _subChannelId = Nothing
+    , _subMyRecentSubscribers = Nothing
     , _subOnBehalfOfContentOwner = Nothing
     , _subOnBehalfOfContentOwnerChannel = Nothing
     , _subId = Nothing
@@ -149,6 +155,14 @@ subMine = lens _subMine (\ s a -> s{_subMine = a})
 subChannelId :: Lens' SubscriptionsList (Maybe Text)
 subChannelId
   = lens _subChannelId (\ s a -> s{_subChannelId = a})
+
+-- | Set this parameter\'s value to true to retrieve a feed of the
+-- subscribers of the authenticated user in reverse chronological order
+-- (newest first).
+subMyRecentSubscribers :: Lens' SubscriptionsList (Maybe Bool)
+subMyRecentSubscribers
+  = lens _subMyRecentSubscribers
+      (\ s a -> s{_subMyRecentSubscribers = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -194,7 +208,7 @@ subId :: Lens' SubscriptionsList (Maybe Text)
 subId = lens _subId (\ s a -> s{_subId = a})
 
 -- | Set this parameter\'s value to true to retrieve a feed of the
--- subscribers of the authenticated user.
+-- subscribers of the authenticated user in no particular order.
 subMySubscribers :: Lens' SubscriptionsList (Maybe Bool)
 subMySubscribers
   = lens _subMySubscribers
@@ -237,6 +251,7 @@ instance GoogleRequest SubscriptionsList where
                "https://www.googleapis.com/auth/youtubepartner"]
         requestClient SubscriptionsList'{..}
           = go (Just _subPart) _subMine _subChannelId
+              _subMyRecentSubscribers
               _subOnBehalfOfContentOwner
               _subOnBehalfOfContentOwnerChannel
               _subId
