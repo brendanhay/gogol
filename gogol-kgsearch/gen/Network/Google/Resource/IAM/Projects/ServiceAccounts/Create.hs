@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a service account and returns it.
+-- Creates a ServiceAccount and returns it.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference> for @iam.projects.serviceAccounts.create@.
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.create@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
     (
     -- * REST Resource
@@ -64,7 +64,7 @@ type ProjectsServiceAccountsCreateResource =
                            ReqBody '[JSON] CreateServiceAccountRequest :>
                              Post '[JSON] ServiceAccount
 
--- | Creates a service account and returns it.
+-- | Creates a ServiceAccount and returns it.
 --
 -- /See:/ 'projectsServiceAccountsCreate' smart constructor.
 data ProjectsServiceAccountsCreate = ProjectsServiceAccountsCreate'
@@ -156,7 +156,7 @@ psacBearerToken
       (\ s a -> s{_psacBearerToken = a})
 
 -- | Required. The resource name of the project associated with the service
--- accounts, such as \"projects\/123\"
+-- accounts, such as \`projects\/my-project-123\`.
 psacName :: Lens' ProjectsServiceAccountsCreate Text
 psacName = lens _psacName (\ s a -> s{_psacName = a})
 

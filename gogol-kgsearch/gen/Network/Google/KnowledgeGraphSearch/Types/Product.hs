@@ -20,51 +20,6 @@ module Network.Google.KnowledgeGraphSearch.Types.Product where
 import           Network.Google.KnowledgeGraphSearch.Types.Sum
 import           Network.Google.Prelude
 
--- | Options for counters
---
--- /See:/ 'counterOptions' smart constructor.
-data CounterOptions = CounterOptions'
-    { _coField  :: !(Maybe Text)
-    , _coMetric :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CounterOptions' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'coField'
---
--- * 'coMetric'
-counterOptions
-    :: CounterOptions
-counterOptions =
-    CounterOptions'
-    { _coField = Nothing
-    , _coMetric = Nothing
-    }
-
--- | The field value to attribute.
-coField :: Lens' CounterOptions (Maybe Text)
-coField = lens _coField (\ s a -> s{_coField = a})
-
--- | The metric to update.
-coMetric :: Lens' CounterOptions (Maybe Text)
-coMetric = lens _coMetric (\ s a -> s{_coMetric = a})
-
-instance FromJSON CounterOptions where
-        parseJSON
-          = withObject "CounterOptions"
-              (\ o ->
-                 CounterOptions' <$>
-                   (o .:? "field") <*> (o .:? "metric"))
-
-instance ToJSON CounterOptions where
-        toJSON CounterOptions'{..}
-          = object
-              (catMaybes
-                 [("field" .=) <$> _coField,
-                  ("metric" .=) <$> _coMetric])
-
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
@@ -88,17 +43,62 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
--- | Represents a service account key. A service account can have 0 or more
--- key pairs. The private keys for these are not stored by Google.
--- ServiceAccountKeys are immutable.
+-- | Audit log information specific to Cloud IAM. This message is serialized
+-- as an \`Any\` type in the \`ServiceData\` message of an \`AuditLog\`
+-- message.
+--
+-- /See:/ 'auditData' smart constructor.
+newtype AuditData = AuditData'
+    { _adPolicyDelta :: Maybe PolicyDelta
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuditData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'adPolicyDelta'
+auditData
+    :: AuditData
+auditData =
+    AuditData'
+    { _adPolicyDelta = Nothing
+    }
+
+-- | Policy delta between the original policy and the newly set policy.
+adPolicyDelta :: Lens' AuditData (Maybe PolicyDelta)
+adPolicyDelta
+  = lens _adPolicyDelta
+      (\ s a -> s{_adPolicyDelta = a})
+
+instance FromJSON AuditData where
+        parseJSON
+          = withObject "AuditData"
+              (\ o -> AuditData' <$> (o .:? "policyDelta"))
+
+instance ToJSON AuditData where
+        toJSON AuditData'{..}
+          = object
+              (catMaybes [("policyDelta" .=) <$> _adPolicyDelta])
+
+-- | Represents a service account key. A service account has two sets of
+-- key-pairs: user-managed, and system-managed. User-managed key-pairs can
+-- be created and deleted by users. Users are responsible for rotating
+-- these keys periodically to ensure security of their service accounts.
+-- Users retain the private key of these key-pairs, and Google retains ONLY
+-- the public key. System-managed key-pairs are managed automatically by
+-- Google, and rotated daily without user intervention. The private key
+-- never leaves Google\'s servers to maximize security. Public keys for all
+-- service accounts are also published at the OAuth2 Service Account API.
 --
 -- /See:/ 'serviceAccountKey' smart constructor.
 data ServiceAccountKey = ServiceAccountKey'
     { _sakValidAfterTime  :: !(Maybe Text)
     , _sakPrivateKeyData  :: !(Maybe Base64)
+    , _sakPublicKeyData   :: !(Maybe Base64)
     , _sakName            :: !(Maybe Text)
     , _sakPrivateKeyType  :: !(Maybe Text)
     , _sakValidBeforeTime :: !(Maybe Text)
+    , _sakKeyAlgorithm    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ServiceAccountKey' with the minimum fields required to make a request.
@@ -109,20 +109,26 @@ data ServiceAccountKey = ServiceAccountKey'
 --
 -- * 'sakPrivateKeyData'
 --
+-- * 'sakPublicKeyData'
+--
 -- * 'sakName'
 --
 -- * 'sakPrivateKeyType'
 --
 -- * 'sakValidBeforeTime'
+--
+-- * 'sakKeyAlgorithm'
 serviceAccountKey
     :: ServiceAccountKey
 serviceAccountKey =
     ServiceAccountKey'
     { _sakValidAfterTime = Nothing
     , _sakPrivateKeyData = Nothing
+    , _sakPublicKeyData = Nothing
     , _sakName = Nothing
     , _sakPrivateKeyType = Nothing
     , _sakValidBeforeTime = Nothing
+    , _sakKeyAlgorithm = Nothing
     }
 
 -- | The key can be used after this timestamp.
@@ -131,19 +137,32 @@ sakValidAfterTime
   = lens _sakValidAfterTime
       (\ s a -> s{_sakValidAfterTime = a})
 
--- | The key data.
+-- | The private key data. Only provided in \`CreateServiceAccountKey\`
+-- responses.
 sakPrivateKeyData :: Lens' ServiceAccountKey (Maybe ByteString)
 sakPrivateKeyData
   = lens _sakPrivateKeyData
       (\ s a -> s{_sakPrivateKeyData = a})
       . mapping _Base64
 
--- | The resource name of the service account key in the format
--- \"projects\/{project}\/serviceAccounts\/{email}\/keys\/{key}\".
+-- | The public key data. Only provided in \`GetServiceAccountKey\`
+-- responses.
+sakPublicKeyData :: Lens' ServiceAccountKey (Maybe ByteString)
+sakPublicKeyData
+  = lens _sakPublicKeyData
+      (\ s a -> s{_sakPublicKeyData = a})
+      . mapping _Base64
+
+-- | The resource name of the service account key in the following format
+-- \`projects\/{project}\/serviceAccounts\/{account}\/keys\/{key}\`.
 sakName :: Lens' ServiceAccountKey (Maybe Text)
 sakName = lens _sakName (\ s a -> s{_sakName = a})
 
--- | The type of the private key.
+-- | The output format for the private key. Only provided in
+-- \`CreateServiceAccountKey\` responses, not in \`GetServiceAccountKey\`
+-- or \`ListServiceAccountKey\` responses. Google never exposes
+-- system-managed private keys, and never retains user-managed private
+-- keys.
 sakPrivateKeyType :: Lens' ServiceAccountKey (Maybe Text)
 sakPrivateKeyType
   = lens _sakPrivateKeyType
@@ -155,15 +174,23 @@ sakValidBeforeTime
   = lens _sakValidBeforeTime
       (\ s a -> s{_sakValidBeforeTime = a})
 
+-- | Specifies the algorithm (and possibly key size) for the key.
+sakKeyAlgorithm :: Lens' ServiceAccountKey (Maybe Text)
+sakKeyAlgorithm
+  = lens _sakKeyAlgorithm
+      (\ s a -> s{_sakKeyAlgorithm = a})
+
 instance FromJSON ServiceAccountKey where
         parseJSON
           = withObject "ServiceAccountKey"
               (\ o ->
                  ServiceAccountKey' <$>
                    (o .:? "validAfterTime") <*> (o .:? "privateKeyData")
+                     <*> (o .:? "publicKeyData")
                      <*> (o .:? "name")
                      <*> (o .:? "privateKeyType")
-                     <*> (o .:? "validBeforeTime"))
+                     <*> (o .:? "validBeforeTime")
+                     <*> (o .:? "keyAlgorithm"))
 
 instance ToJSON ServiceAccountKey where
         toJSON ServiceAccountKey'{..}
@@ -171,129 +198,18 @@ instance ToJSON ServiceAccountKey where
               (catMaybes
                  [("validAfterTime" .=) <$> _sakValidAfterTime,
                   ("privateKeyData" .=) <$> _sakPrivateKeyData,
+                  ("publicKeyData" .=) <$> _sakPublicKeyData,
                   ("name" .=) <$> _sakName,
                   ("privateKeyType" .=) <$> _sakPrivateKeyType,
-                  ("validBeforeTime" .=) <$> _sakValidBeforeTime])
-
--- | A rule to be applied in a Policy.
---
--- /See:/ 'rule' smart constructor.
-data Rule = Rule'
-    { _rAction      :: !(Maybe Text)
-    , _rIn          :: !(Maybe [Text])
-    , _rNotIn       :: !(Maybe [Text])
-    , _rConditions  :: !(Maybe [Condition])
-    , _rPermissions :: !(Maybe [Text])
-    , _rLogConfig   :: !(Maybe [LogConfig])
-    , _rDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Rule' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'rAction'
---
--- * 'rIn'
---
--- * 'rNotIn'
---
--- * 'rConditions'
---
--- * 'rPermissions'
---
--- * 'rLogConfig'
---
--- * 'rDescription'
-rule
-    :: Rule
-rule =
-    Rule'
-    { _rAction = Nothing
-    , _rIn = Nothing
-    , _rNotIn = Nothing
-    , _rConditions = Nothing
-    , _rPermissions = Nothing
-    , _rLogConfig = Nothing
-    , _rDescription = Nothing
-    }
-
--- | Required
-rAction :: Lens' Rule (Maybe Text)
-rAction = lens _rAction (\ s a -> s{_rAction = a})
-
--- | The rule matches if the PRINCIPAL\/AUTHORITY_SELECTOR is in this set of
--- entries.
-rIn :: Lens' Rule [Text]
-rIn
-  = lens _rIn (\ s a -> s{_rIn = a}) . _Default .
-      _Coerce
-
--- | The rule matches if the PRINCIPAL\/AUTHORITY_SELECTOR is not in this set
--- of entries. The format for in and not_in entries is the same as for
--- members in a Binding (see google\/iam\/v1\/policy.proto).
-rNotIn :: Lens' Rule [Text]
-rNotIn
-  = lens _rNotIn (\ s a -> s{_rNotIn = a}) . _Default .
-      _Coerce
-
--- | Additional restrictions that must be met
-rConditions :: Lens' Rule [Condition]
-rConditions
-  = lens _rConditions (\ s a -> s{_rConditions = a}) .
-      _Default
-      . _Coerce
-
--- | A permission is a string of form \'..\' (e.g.,
--- \'storage.buckets.list\'). A value of \'*\' matches all permissions, and
--- a verb part of \'*\' (e.g., \'storage.buckets.*\') matches all verbs.
-rPermissions :: Lens' Rule [Text]
-rPermissions
-  = lens _rPermissions (\ s a -> s{_rPermissions = a})
-      . _Default
-      . _Coerce
-
--- | The config returned to callers of tech.iam.IAM.CheckPolicy for any
--- entries that match the LOG action.
-rLogConfig :: Lens' Rule [LogConfig]
-rLogConfig
-  = lens _rLogConfig (\ s a -> s{_rLogConfig = a}) .
-      _Default
-      . _Coerce
-
--- | Human-readable description of the rule.
-rDescription :: Lens' Rule (Maybe Text)
-rDescription
-  = lens _rDescription (\ s a -> s{_rDescription = a})
-
-instance FromJSON Rule where
-        parseJSON
-          = withObject "Rule"
-              (\ o ->
-                 Rule' <$>
-                   (o .:? "action") <*> (o .:? "in" .!= mempty) <*>
-                     (o .:? "notIn" .!= mempty)
-                     <*> (o .:? "conditions" .!= mempty)
-                     <*> (o .:? "permissions" .!= mempty)
-                     <*> (o .:? "logConfig" .!= mempty)
-                     <*> (o .:? "description"))
-
-instance ToJSON Rule where
-        toJSON Rule'{..}
-          = object
-              (catMaybes
-                 [("action" .=) <$> _rAction, ("in" .=) <$> _rIn,
-                  ("notIn" .=) <$> _rNotIn,
-                  ("conditions" .=) <$> _rConditions,
-                  ("permissions" .=) <$> _rPermissions,
-                  ("logConfig" .=) <$> _rLogConfig,
-                  ("description" .=) <$> _rDescription])
+                  ("validBeforeTime" .=) <$> _sakValidBeforeTime,
+                  ("keyAlgorithm" .=) <$> _sakKeyAlgorithm])
 
 -- | The service account key create request.
 --
 -- /See:/ 'createServiceAccountKeyRequest' smart constructor.
-newtype CreateServiceAccountKeyRequest = CreateServiceAccountKeyRequest'
-    { _csakrPrivateKeyType :: Maybe Text
+data CreateServiceAccountKeyRequest = CreateServiceAccountKeyRequest'
+    { _csakrPrivateKeyType :: !(Maybe Text)
+    , _csakrKeyAlgorithm   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateServiceAccountKeyRequest' with the minimum fields required to make a request.
@@ -301,19 +217,29 @@ newtype CreateServiceAccountKeyRequest = CreateServiceAccountKeyRequest'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'csakrPrivateKeyType'
+--
+-- * 'csakrKeyAlgorithm'
 createServiceAccountKeyRequest
     :: CreateServiceAccountKeyRequest
 createServiceAccountKeyRequest =
     CreateServiceAccountKeyRequest'
     { _csakrPrivateKeyType = Nothing
+    , _csakrKeyAlgorithm = Nothing
     }
 
--- | The type of the key requested. GOOGLE_CREDENTIALS is the default key
--- type.
+-- | The output format of the private key. \`GOOGLE_CREDENTIALS_FILE\` is the
+-- default output format.
 csakrPrivateKeyType :: Lens' CreateServiceAccountKeyRequest (Maybe Text)
 csakrPrivateKeyType
   = lens _csakrPrivateKeyType
       (\ s a -> s{_csakrPrivateKeyType = a})
+
+-- | Which type of key and algorithm to use for the key. The default is
+-- currently a 4K RSA key. However this may change in the future.
+csakrKeyAlgorithm :: Lens' CreateServiceAccountKeyRequest (Maybe Text)
+csakrKeyAlgorithm
+  = lens _csakrKeyAlgorithm
+      (\ s a -> s{_csakrKeyAlgorithm = a})
 
 instance FromJSON CreateServiceAccountKeyRequest
          where
@@ -321,13 +247,14 @@ instance FromJSON CreateServiceAccountKeyRequest
           = withObject "CreateServiceAccountKeyRequest"
               (\ o ->
                  CreateServiceAccountKeyRequest' <$>
-                   (o .:? "privateKeyType"))
+                   (o .:? "privateKeyType") <*> (o .:? "keyAlgorithm"))
 
 instance ToJSON CreateServiceAccountKeyRequest where
         toJSON CreateServiceAccountKeyRequest'{..}
           = object
               (catMaybes
-                 [("privateKeyType" .=) <$> _csakrPrivateKeyType])
+                 [("privateKeyType" .=) <$> _csakrPrivateKeyType,
+                  ("keyAlgorithm" .=) <$> _csakrKeyAlgorithm])
 
 -- | Request message for \`SetIamPolicy\` method.
 --
@@ -365,6 +292,64 @@ instance ToJSON SetIAMPolicyRequest where
         toJSON SetIAMPolicyRequest'{..}
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
+-- | One delta entry for Binding. Each individual change (only one member in
+-- each entry) to a binding will be a separate entry.
+--
+-- /See:/ 'bindingDelta' smart constructor.
+data BindingDelta = BindingDelta'
+    { _bdAction :: !(Maybe Text)
+    , _bdRole   :: !(Maybe Text)
+    , _bdMember :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BindingDelta' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bdAction'
+--
+-- * 'bdRole'
+--
+-- * 'bdMember'
+bindingDelta
+    :: BindingDelta
+bindingDelta =
+    BindingDelta'
+    { _bdAction = Nothing
+    , _bdRole = Nothing
+    , _bdMember = Nothing
+    }
+
+-- | The action that was performed on a Binding. Required
+bdAction :: Lens' BindingDelta (Maybe Text)
+bdAction = lens _bdAction (\ s a -> s{_bdAction = a})
+
+-- | Role that is assigned to \`members\`. For example, \`roles\/viewer\`,
+-- \`roles\/editor\`, or \`roles\/owner\`. Required
+bdRole :: Lens' BindingDelta (Maybe Text)
+bdRole = lens _bdRole (\ s a -> s{_bdRole = a})
+
+-- | A single identity requesting access for a Cloud Platform resource.
+-- Follows the same format of Binding.members. Required
+bdMember :: Lens' BindingDelta (Maybe Text)
+bdMember = lens _bdMember (\ s a -> s{_bdMember = a})
+
+instance FromJSON BindingDelta where
+        parseJSON
+          = withObject "BindingDelta"
+              (\ o ->
+                 BindingDelta' <$>
+                   (o .:? "action") <*> (o .:? "role") <*>
+                     (o .:? "member"))
+
+instance ToJSON BindingDelta where
+        toJSON BindingDelta'{..}
+          = object
+              (catMaybes
+                 [("action" .=) <$> _bdAction,
+                  ("role" .=) <$> _bdRole,
+                  ("member" .=) <$> _bdMember])
+
 -- | The service account sign blob request.
 --
 -- /See:/ 'signBlobRequest' smart constructor.
@@ -384,7 +369,7 @@ signBlobRequest =
     { _sbrBytesToSign = Nothing
     }
 
--- | The bytes to sign
+-- | The bytes to sign.
 sbrBytesToSign :: Lens' SignBlobRequest (Maybe ByteString)
 sbrBytesToSign
   = lens _sbrBytesToSign
@@ -439,57 +424,80 @@ instance ToJSON ListServiceAccountKeysResponse where
         toJSON ListServiceAccountKeysResponse'{..}
           = object (catMaybes [("keys" .=) <$> _lsakrKeys])
 
--- | Write a Cloud Audit log
+-- | A role in the Identity and Access Management API.
 --
--- /See:/ 'cloudAuditOptions' smart constructor.
-data CloudAuditOptions =
-    CloudAuditOptions'
-    deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'role'' smart constructor.
+data Role = Role'
+    { _rName        :: !(Maybe Text)
+    , _rTitle       :: !(Maybe Text)
+    , _rDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CloudAuditOptions' with the minimum fields required to make a request.
+-- | Creates a value of 'Role' with the minimum fields required to make a request.
 --
-cloudAuditOptions
-    :: CloudAuditOptions
-cloudAuditOptions = CloudAuditOptions'
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rName'
+--
+-- * 'rTitle'
+--
+-- * 'rDescription'
+role'
+    :: Role
+role' =
+    Role'
+    { _rName = Nothing
+    , _rTitle = Nothing
+    , _rDescription = Nothing
+    }
 
-instance FromJSON CloudAuditOptions where
+-- | The name of the role. When Role is used in CreateRole, the role name
+-- must not be set. When Role is used in output and other input such as
+-- UpdateRole, the role name is the complete path, e.g.,
+-- roles\/logging.viewer for curated roles and
+-- organizations\/{organization-id}\/roles\/logging.viewer for custom
+-- roles.
+rName :: Lens' Role (Maybe Text)
+rName = lens _rName (\ s a -> s{_rName = a})
+
+-- | Optional. A human-readable title for the role. Typically this is limited
+-- to 100 UTF-8 bytes.
+rTitle :: Lens' Role (Maybe Text)
+rTitle = lens _rTitle (\ s a -> s{_rTitle = a})
+
+-- | Optional. A human-readable description for the role.
+rDescription :: Lens' Role (Maybe Text)
+rDescription
+  = lens _rDescription (\ s a -> s{_rDescription = a})
+
+instance FromJSON Role where
         parseJSON
-          = withObject "CloudAuditOptions"
-              (\ o -> pure CloudAuditOptions')
+          = withObject "Role"
+              (\ o ->
+                 Role' <$>
+                   (o .:? "name") <*> (o .:? "title") <*>
+                     (o .:? "description"))
 
-instance ToJSON CloudAuditOptions where
-        toJSON = const emptyObject
-
--- | Write a Data Access (Gin) log
---
--- /See:/ 'dataAccessOptions' smart constructor.
-data DataAccessOptions =
-    DataAccessOptions'
-    deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'DataAccessOptions' with the minimum fields required to make a request.
---
-dataAccessOptions
-    :: DataAccessOptions
-dataAccessOptions = DataAccessOptions'
-
-instance FromJSON DataAccessOptions where
-        parseJSON
-          = withObject "DataAccessOptions"
-              (\ o -> pure DataAccessOptions')
-
-instance ToJSON DataAccessOptions where
-        toJSON = const emptyObject
+instance ToJSON Role where
+        toJSON Role'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _rName, ("title" .=) <$> _rTitle,
+                  ("description" .=) <$> _rDescription])
 
 -- | A service account in the Identity and Access Management API. To create a
--- service account, you specify the project_id and account_id for the
--- account. The account_id is unique within the project, and used to
--- generate the service account email address and a stable unique id. All
--- other methods can identify accounts using the format
--- \"projects\/{project}\/serviceAccounts\/{account}\". Using \'-\' as a
--- wildcard for the project, will infer the project from the account. The
--- account value can be the email address or the unique_id of the service
--- account.
+-- service account, specify the \`project_id\` and the \`account_id\` for
+-- the account. The \`account_id\` is unique within the project, and is
+-- used to generate the service account email address and a stable
+-- \`unique_id\`. If the account already exists, the account\'s resource
+-- name is returned in util::Status\'s ResourceInfo.resource_name in the
+-- format of projects\/{project}\/serviceAccounts\/{email}. The caller can
+-- use the name in other methods to access the account. All other methods
+-- can identify the service account using the format
+-- \`projects\/{project}\/serviceAccounts\/{account}\`. Using \`-\` as a
+-- wildcard for the project will infer the project from the account. The
+-- \`account\` value can be the \`email\` address or the \`unique_id\` of
+-- the service account.
 --
 -- /See:/ 'serviceAccount' smart constructor.
 data ServiceAccount = ServiceAccount'
@@ -532,7 +540,7 @@ serviceAccount =
     , _saOAuth2ClientId = Nothing
     }
 
--- | \'OutputOnly Email address of the service account.
+-- | \'OutputOnly The email address of the service account.
 saEmail :: Lens' ServiceAccount (Maybe Text)
 saEmail = lens _saEmail (\ s a -> s{_saEmail = a})
 
@@ -542,17 +550,18 @@ saEtag
   = lens _saEtag (\ s a -> s{_saEtag = a}) .
       mapping _Base64
 
--- | \'OutputOnly unique and stable id of the service account.
+-- | \'OutputOnly The unique and stable id of the service account.
 saUniqueId :: Lens' ServiceAccount (Maybe Text)
 saUniqueId
   = lens _saUniqueId (\ s a -> s{_saUniqueId = a})
 
--- | The resource name of the service account in the format
--- \"projects\/{project}\/serviceAccounts\/{account}\". In requests using
--- \'-\' as a wildcard for the project, will infer the project from the
--- account and the account value can be the email address or the unique_id
--- of the service account. In responses the resource name will always be in
--- the format \"projects\/{project}\/serviceAccounts\/{email}\".
+-- | The resource name of the service account in the following format:
+-- \`projects\/{project}\/serviceAccounts\/{account}\`. Requests using
+-- \`-\` as a wildcard for the project will infer the project from the
+-- \`account\` and the \`account\` value can be the \`email\` address or
+-- the \`unique_id\` of the service account. In responses the resource name
+-- will always be in the format
+-- \`projects\/{project}\/serviceAccounts\/{email}\`.
 saName :: Lens' ServiceAccount (Maybe Text)
 saName = lens _saName (\ s a -> s{_saName = a})
 
@@ -599,6 +608,43 @@ instance ToJSON ServiceAccount where
                   ("projectId" .=) <$> _saProjectId,
                   ("oauth2ClientId" .=) <$> _saOAuth2ClientId])
 
+-- | The grantable role query response.
+--
+-- /See:/ 'queryGrantableRolesResponse' smart constructor.
+newtype QueryGrantableRolesResponse = QueryGrantableRolesResponse'
+    { _qgrrRoles :: Maybe [Role]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'QueryGrantableRolesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qgrrRoles'
+queryGrantableRolesResponse
+    :: QueryGrantableRolesResponse
+queryGrantableRolesResponse =
+    QueryGrantableRolesResponse'
+    { _qgrrRoles = Nothing
+    }
+
+-- | The list of matching roles.
+qgrrRoles :: Lens' QueryGrantableRolesResponse [Role]
+qgrrRoles
+  = lens _qgrrRoles (\ s a -> s{_qgrrRoles = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON QueryGrantableRolesResponse where
+        parseJSON
+          = withObject "QueryGrantableRolesResponse"
+              (\ o ->
+                 QueryGrantableRolesResponse' <$>
+                   (o .:? "roles" .!= mempty))
+
+instance ToJSON QueryGrantableRolesResponse where
+        toJSON QueryGrantableRolesResponse'{..}
+          = object (catMaybes [("roles" .=) <$> _qgrrRoles])
+
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
@@ -620,7 +666,8 @@ testIAMPermissionsRequest =
 
 -- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed. For more
--- information see IAM Overview.
+-- information see [IAM
+-- Overview](https:\/\/cloud.google.com\/iam\/docs\/overview#permissions).
 tiprPermissions :: Lens' TestIAMPermissionsRequest [Text]
 tiprPermissions
   = lens _tiprPermissions
@@ -690,7 +737,7 @@ instance ToJSON TestIAMPermissionsResponse where
 -- \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
 -- \"user:mike\'example.com\", \"group:admins\'example.com\",
 -- \"domain:google.com\",
--- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\"] }, {
+-- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\", ] }, {
 -- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
 -- ] } For a description of IAM and its features, see the [IAM developer\'s
 -- guide](https:\/\/cloud.google.com\/iam).
@@ -698,7 +745,6 @@ instance ToJSON TestIAMPermissionsResponse where
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
     { _pEtag     :: !(Maybe Base64)
-    , _pRules    :: !(Maybe [Rule])
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -709,8 +755,6 @@ data Policy = Policy'
 --
 -- * 'pEtag'
 --
--- * 'pRules'
---
 -- * 'pVersion'
 --
 -- * 'pBindings'
@@ -719,7 +763,6 @@ policy
 policy =
     Policy'
     { _pEtag = Nothing
-    , _pRules = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
     }
@@ -737,11 +780,6 @@ pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
       mapping _Base64
-
-pRules :: Lens' Policy [Rule]
-pRules
-  = lens _pRules (\ s a -> s{_pRules = a}) . _Default .
-      _Coerce
 
 -- | Version of the \`Policy\`. The default version is 0.
 pVersion :: Lens' Policy (Maybe Int32)
@@ -763,102 +801,96 @@ instance FromJSON Policy where
           = withObject "Policy"
               (\ o ->
                  Policy' <$>
-                   (o .:? "etag") <*> (o .:? "rules" .!= mempty) <*>
-                     (o .:? "version")
-                     <*> (o .:? "bindings" .!= mempty))
+                   (o .:? "etag") <*> (o .:? "version") <*>
+                     (o .:? "bindings" .!= mempty))
 
 instance ToJSON Policy where
         toJSON Policy'{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _pEtag, ("rules" .=) <$> _pRules,
+                 [("etag" .=) <$> _pEtag,
                   ("version" .=) <$> _pVersion,
                   ("bindings" .=) <$> _pBindings])
 
--- | A condition to be met.
+-- | The difference delta between two policies.
 --
--- /See:/ 'condition' smart constructor.
-data Condition = Condition'
-    { _cOp     :: !(Maybe Text)
-    , _cIAM    :: !(Maybe Text)
-    , _cValues :: !(Maybe [Text])
-    , _cValue  :: !(Maybe Text)
-    , _cSys    :: !(Maybe Text)
-    , _cSvc    :: !(Maybe Text)
+-- /See:/ 'policyDelta' smart constructor.
+newtype PolicyDelta = PolicyDelta'
+    { _pdBindingDeltas :: Maybe [BindingDelta]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Condition' with the minimum fields required to make a request.
+-- | Creates a value of 'PolicyDelta' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cOp'
---
--- * 'cIAM'
---
--- * 'cValues'
---
--- * 'cValue'
---
--- * 'cSys'
---
--- * 'cSvc'
-condition
-    :: Condition
-condition =
-    Condition'
-    { _cOp = Nothing
-    , _cIAM = Nothing
-    , _cValues = Nothing
-    , _cValue = Nothing
-    , _cSys = Nothing
-    , _cSvc = Nothing
+-- * 'pdBindingDeltas'
+policyDelta
+    :: PolicyDelta
+policyDelta =
+    PolicyDelta'
+    { _pdBindingDeltas = Nothing
     }
 
--- | An operator to apply the subject with.
-cOp :: Lens' Condition (Maybe Text)
-cOp = lens _cOp (\ s a -> s{_cOp = a})
-
--- | Trusted attributes supplied by the IAM system.
-cIAM :: Lens' Condition (Maybe Text)
-cIAM = lens _cIAM (\ s a -> s{_cIAM = a})
-
--- | The objects of the condition. This is mutually exclusive with \'value\'.
-cValues :: Lens' Condition [Text]
-cValues
-  = lens _cValues (\ s a -> s{_cValues = a}) . _Default
+-- | The delta for Bindings between two policies.
+pdBindingDeltas :: Lens' PolicyDelta [BindingDelta]
+pdBindingDeltas
+  = lens _pdBindingDeltas
+      (\ s a -> s{_pdBindingDeltas = a})
+      . _Default
       . _Coerce
 
--- | The object of the condition. Exactly one of these must be set.
-cValue :: Lens' Condition (Maybe Text)
-cValue = lens _cValue (\ s a -> s{_cValue = a})
-
--- | Trusted attributes supplied by any service that owns resources and uses
--- the IAM system for access control.
-cSys :: Lens' Condition (Maybe Text)
-cSys = lens _cSys (\ s a -> s{_cSys = a})
-
--- | Trusted attributes discharged by the service.
-cSvc :: Lens' Condition (Maybe Text)
-cSvc = lens _cSvc (\ s a -> s{_cSvc = a})
-
-instance FromJSON Condition where
+instance FromJSON PolicyDelta where
         parseJSON
-          = withObject "Condition"
+          = withObject "PolicyDelta"
               (\ o ->
-                 Condition' <$>
-                   (o .:? "op") <*> (o .:? "iam") <*>
-                     (o .:? "values" .!= mempty)
-                     <*> (o .:? "value")
-                     <*> (o .:? "sys")
-                     <*> (o .:? "svc"))
+                 PolicyDelta' <$> (o .:? "bindingDeltas" .!= mempty))
 
-instance ToJSON Condition where
-        toJSON Condition'{..}
+instance ToJSON PolicyDelta where
+        toJSON PolicyDelta'{..}
           = object
               (catMaybes
-                 [("op" .=) <$> _cOp, ("iam" .=) <$> _cIAM,
-                  ("values" .=) <$> _cValues, ("value" .=) <$> _cValue,
-                  ("sys" .=) <$> _cSys, ("svc" .=) <$> _cSvc])
+                 [("bindingDeltas" .=) <$> _pdBindingDeltas])
+
+-- | The grantable role query request.
+--
+-- /See:/ 'queryGrantableRolesRequest' smart constructor.
+newtype QueryGrantableRolesRequest = QueryGrantableRolesRequest'
+    { _qgrrFullResourceName :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'QueryGrantableRolesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qgrrFullResourceName'
+queryGrantableRolesRequest
+    :: QueryGrantableRolesRequest
+queryGrantableRolesRequest =
+    QueryGrantableRolesRequest'
+    { _qgrrFullResourceName = Nothing
+    }
+
+-- | Required. The full resource name to query from the list of grantable
+-- roles. The name follows the Google Cloud Platform resource format. For
+-- example, a Cloud Platform project with id \`my-project\` will be named
+-- \`\/\/cloudresourcemanager.googleapis.com\/projects\/my-project\`.
+qgrrFullResourceName :: Lens' QueryGrantableRolesRequest (Maybe Text)
+qgrrFullResourceName
+  = lens _qgrrFullResourceName
+      (\ s a -> s{_qgrrFullResourceName = a})
+
+instance FromJSON QueryGrantableRolesRequest where
+        parseJSON
+          = withObject "QueryGrantableRolesRequest"
+              (\ o ->
+                 QueryGrantableRolesRequest' <$>
+                   (o .:? "fullResourceName"))
+
+instance ToJSON QueryGrantableRolesRequest where
+        toJSON QueryGrantableRolesRequest'{..}
+          = object
+              (catMaybes
+                 [("fullResourceName" .=) <$> _qgrrFullResourceName])
 
 -- | The service account sign blob response.
 --
@@ -931,7 +963,7 @@ listServiceAccountsResponse =
     }
 
 -- | To retrieve the next page of results, set
--- [ListServiceAccountsRequest.page_token] to this value.
+-- ListServiceAccountsRequest.page_token to this value.
 lsarNextPageToken :: Lens' ListServiceAccountsResponse (Maybe Text)
 lsarNextPageToken
   = lens _lsarNextPageToken
@@ -959,76 +991,6 @@ instance ToJSON ListServiceAccountsResponse where
                  [("nextPageToken" .=) <$> _lsarNextPageToken,
                   ("accounts" .=) <$> _lsarAccounts])
 
--- | Specifies what kind of log the caller must write Increment a streamz
--- counter with the specified metric and field names. Metric names should
--- start with a \'\/\', generally be lowercase-only, and end in \"_count\".
--- Field names should not contain an initial slash. The actual exported
--- metric names will have \"\/iam\/policy\" prepended. Field names
--- correspond to IAM request parameters and field values are their
--- respective values. At present only \"iam_principal\", corresponding to
--- IAMContext.principal, is supported. Examples: counter { metric:
--- \"\/debug_access_count\" field: \"iam_principal\" } ==> increment
--- counter \/iam\/policy\/backend_debug_access_count {iam_principal=[value
--- of IAMContext.principal]} At this time we do not support: * multiple
--- field names (though this may be supported in the future) * decrementing
--- the counter * incrementing it by anything other than 1
---
--- /See:/ 'logConfig' smart constructor.
-data LogConfig = LogConfig'
-    { _lcCloudAudit :: !(Maybe CloudAuditOptions)
-    , _lcDataAccess :: !(Maybe DataAccessOptions)
-    , _lcCounter    :: !(Maybe CounterOptions)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'LogConfig' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lcCloudAudit'
---
--- * 'lcDataAccess'
---
--- * 'lcCounter'
-logConfig
-    :: LogConfig
-logConfig =
-    LogConfig'
-    { _lcCloudAudit = Nothing
-    , _lcDataAccess = Nothing
-    , _lcCounter = Nothing
-    }
-
--- | Cloud audit options.
-lcCloudAudit :: Lens' LogConfig (Maybe CloudAuditOptions)
-lcCloudAudit
-  = lens _lcCloudAudit (\ s a -> s{_lcCloudAudit = a})
-
--- | Data access options.
-lcDataAccess :: Lens' LogConfig (Maybe DataAccessOptions)
-lcDataAccess
-  = lens _lcDataAccess (\ s a -> s{_lcDataAccess = a})
-
--- | Counter options.
-lcCounter :: Lens' LogConfig (Maybe CounterOptions)
-lcCounter
-  = lens _lcCounter (\ s a -> s{_lcCounter = a})
-
-instance FromJSON LogConfig where
-        parseJSON
-          = withObject "LogConfig"
-              (\ o ->
-                 LogConfig' <$>
-                   (o .:? "cloudAudit") <*> (o .:? "dataAccess") <*>
-                     (o .:? "counter"))
-
-instance ToJSON LogConfig where
-        toJSON LogConfig'{..}
-          = object
-              (catMaybes
-                 [("cloudAudit" .=) <$> _lcCloudAudit,
-                  ("dataAccess" .=) <$> _lcDataAccess,
-                  ("counter" .=) <$> _lcCounter])
-
 -- | The service account create request.
 --
 -- /See:/ 'createServiceAccountRequest' smart constructor.
@@ -1053,7 +1015,7 @@ createServiceAccountRequest =
     }
 
 -- | The ServiceAccount resource to create. Currently, only the following
--- values are user assignable: display_name .
+-- values are user assignable: \`display_name\` .
 csarServiceAccount :: Lens' CreateServiceAccountRequest (Maybe ServiceAccount)
 csarServiceAccount
   = lens _csarServiceAccount
@@ -1061,8 +1023,8 @@ csarServiceAccount
 
 -- | Required. The account id that is used to generate the service account
 -- email address and a stable unique id. It is unique within a project,
--- must be 1-63 characters long, and match the regular expression
--- [a-z]([-a-z0-9]*[a-z0-9]) to comply with RFC1035.
+-- must be 6-30 characters long, and match the regular expression
+-- \`[a-z]([-a-z0-9]*[a-z0-9])\` to comply with RFC1035.
 csarAccountId :: Lens' CreateServiceAccountRequest (Maybe Text)
 csarAccountId
   = lens _csarAccountId

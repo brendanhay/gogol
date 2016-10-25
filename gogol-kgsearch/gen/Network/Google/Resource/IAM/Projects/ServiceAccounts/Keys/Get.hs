@@ -22,7 +22,7 @@
 --
 -- Gets the ServiceAccountKey by key id.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference> for @iam.projects.serviceAccounts.keys.get@.
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.get@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
     (
     -- * REST Resource
@@ -40,6 +40,7 @@ module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
     , psakgUploadType
     , psakgBearerToken
     , psakgName
+    , psakgPublicKeyType
     , psakgCallback
     ) where
 
@@ -57,9 +58,10 @@ type ProjectsServiceAccountsKeysGetResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ServiceAccountKey
+                     QueryParam "publicKeyType" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ServiceAccountKey
 
 -- | Gets the ServiceAccountKey by key id.
 --
@@ -72,6 +74,7 @@ data ProjectsServiceAccountsKeysGet = ProjectsServiceAccountsKeysGet'
     , _psakgUploadType     :: !(Maybe Text)
     , _psakgBearerToken    :: !(Maybe Text)
     , _psakgName           :: !Text
+    , _psakgPublicKeyType  :: !(Maybe Text)
     , _psakgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -93,6 +96,8 @@ data ProjectsServiceAccountsKeysGet = ProjectsServiceAccountsKeysGet'
 --
 -- * 'psakgName'
 --
+-- * 'psakgPublicKeyType'
+--
 -- * 'psakgCallback'
 projectsServiceAccountsKeysGet
     :: Text -- ^ 'psakgName'
@@ -106,6 +111,7 @@ projectsServiceAccountsKeysGet pPsakgName_ =
     , _psakgUploadType = Nothing
     , _psakgBearerToken = Nothing
     , _psakgName = pPsakgName_
+    , _psakgPublicKeyType = Nothing
     , _psakgCallback = Nothing
     }
 
@@ -142,14 +148,21 @@ psakgBearerToken
   = lens _psakgBearerToken
       (\ s a -> s{_psakgBearerToken = a})
 
--- | The resource name of the service account key in the format
--- \"projects\/{project}\/serviceAccounts\/{account}\/keys\/{key}\". Using
--- \'-\' as a wildcard for the project will infer the project from the
--- account. The account value can be the email address or the unique_id of
--- the service account.
+-- | The resource name of the service account key in the following format:
+-- \`projects\/{project}\/serviceAccounts\/{account}\/keys\/{key}\`. Using
+-- \`-\` as a wildcard for the project will infer the project from the
+-- account. The \`account\` value can be the \`email\` address or the
+-- \`unique_id\` of the service account.
 psakgName :: Lens' ProjectsServiceAccountsKeysGet Text
 psakgName
   = lens _psakgName (\ s a -> s{_psakgName = a})
+
+-- | The output format of the public key requested. X509_PEM is the default
+-- output format.
+psakgPublicKeyType :: Lens' ProjectsServiceAccountsKeysGet (Maybe Text)
+psakgPublicKeyType
+  = lens _psakgPublicKeyType
+      (\ s a -> s{_psakgPublicKeyType = a})
 
 -- | JSONP
 psakgCallback :: Lens' ProjectsServiceAccountsKeysGet (Maybe Text)
@@ -169,6 +182,7 @@ instance GoogleRequest ProjectsServiceAccountsKeysGet
               _psakgAccessToken
               _psakgUploadType
               _psakgBearerToken
+              _psakgPublicKeyType
               _psakgCallback
               (Just AltJSON)
               knowledgeGraphSearchService

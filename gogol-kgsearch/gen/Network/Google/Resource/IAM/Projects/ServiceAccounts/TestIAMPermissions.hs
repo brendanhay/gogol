@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Tests the specified permissions against the IAM access control policy
--- for the specified IAM resource.
+-- for a ServiceAccount.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference> for @iam.projects.serviceAccounts.testIamPermissions@.
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.testIamPermissions@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
     (
     -- * REST Resource
@@ -66,7 +66,7 @@ type ProjectsServiceAccountsTestIAMPermissionsResource
                            Post '[JSON] TestIAMPermissionsResponse
 
 -- | Tests the specified permissions against the IAM access control policy
--- for the specified IAM resource.
+-- for a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsTestIAMPermissions' smart constructor.
 data ProjectsServiceAccountsTestIAMPermissions = ProjectsServiceAccountsTestIAMPermissions'
@@ -159,10 +159,8 @@ psatipBearerToken
       (\ s a -> s{_psatipBearerToken = a})
 
 -- | REQUIRED: The resource for which the policy detail is being requested.
--- \`resource\` is usually specified as a path, such as
--- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
--- the path specified in this value is resource specific and is specified
--- in the \`testIamPermissions\` documentation.
+-- \`resource\` is usually specified as a path. For example, a Project
+-- resource is specified as \`projects\/{project}\`.
 psatipResource :: Lens' ProjectsServiceAccountsTestIAMPermissions Text
 psatipResource
   = lens _psatipResource

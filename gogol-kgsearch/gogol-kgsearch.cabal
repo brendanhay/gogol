@@ -1,6 +1,6 @@
 name:                  gogol-kgsearch
 version:               0.1.0
-synopsis:              Google Identity and Access Management SDK.
+synopsis:              Google Identity and Access Management (IAM) SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -50,6 +50,7 @@ library
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
         , Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
+        , Network.Google.Resource.IAM.Roles.QueryGrantableRoles
 
     other-modules:
           Network.Google.KnowledgeGraphSearch.Types.Product

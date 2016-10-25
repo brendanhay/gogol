@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a service account. Currently, only the following fields are
--- updatable: \'display_name\' . The \'etag\' is mandatory.
+-- Updates a ServiceAccount. Currently, only the following fields are
+-- updatable: \`display_name\` . The \`etag\` is mandatory.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference> for @iam.projects.serviceAccounts.update@.
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.update@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
     (
     -- * REST Resource
@@ -64,8 +64,8 @@ type ProjectsServiceAccountsUpdateResource =
                          ReqBody '[JSON] ServiceAccount :>
                            Put '[JSON] ServiceAccount
 
--- | Updates a service account. Currently, only the following fields are
--- updatable: \'display_name\' . The \'etag\' is mandatory.
+-- | Updates a ServiceAccount. Currently, only the following fields are
+-- updatable: \`display_name\` . The \`etag\` is mandatory.
 --
 -- /See:/ 'projectsServiceAccountsUpdate' smart constructor.
 data ProjectsServiceAccountsUpdate = ProjectsServiceAccountsUpdate'
@@ -156,12 +156,13 @@ psauBearerToken
   = lens _psauBearerToken
       (\ s a -> s{_psauBearerToken = a})
 
--- | The resource name of the service account in the format
--- \"projects\/{project}\/serviceAccounts\/{account}\". In requests using
--- \'-\' as a wildcard for the project, will infer the project from the
--- account and the account value can be the email address or the unique_id
--- of the service account. In responses the resource name will always be in
--- the format \"projects\/{project}\/serviceAccounts\/{email}\".
+-- | The resource name of the service account in the following format:
+-- \`projects\/{project}\/serviceAccounts\/{account}\`. Requests using
+-- \`-\` as a wildcard for the project will infer the project from the
+-- \`account\` and the \`account\` value can be the \`email\` address or
+-- the \`unique_id\` of the service account. In responses the resource name
+-- will always be in the format
+-- \`projects\/{project}\/serviceAccounts\/{email}\`.
 psauName :: Lens' ProjectsServiceAccountsUpdate Text
 psauName = lens _psauName (\ s a -> s{_psauName = a})
 

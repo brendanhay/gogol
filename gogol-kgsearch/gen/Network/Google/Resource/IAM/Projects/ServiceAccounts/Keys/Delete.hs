@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a service account key.
+-- Deletes a ServiceAccountKey.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference> for @iam.projects.serviceAccounts.keys.delete@.
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.delete@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
     (
     -- * REST Resource
@@ -60,7 +60,7 @@ type ProjectsServiceAccountsKeysDeleteResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a service account key.
+-- | Deletes a ServiceAccountKey.
 --
 -- /See:/ 'projectsServiceAccountsKeysDelete' smart constructor.
 data ProjectsServiceAccountsKeysDelete = ProjectsServiceAccountsKeysDelete'
@@ -141,11 +141,11 @@ psakdBearerToken
   = lens _psakdBearerToken
       (\ s a -> s{_psakdBearerToken = a})
 
--- | The resource name of the service account key in the format
--- \"projects\/{project}\/serviceAccounts\/{account}\/keys\/{key}\". Using
--- \'-\' as a wildcard for the project will infer the project from the
--- account. The account value can be the email address or the unique_id of
--- the service account.
+-- | The resource name of the service account key in the following format:
+-- \`projects\/{project}\/serviceAccounts\/{account}\/keys\/{key}\`. Using
+-- \`-\` as a wildcard for the project will infer the project from the
+-- account. The \`account\` value can be the \`email\` address or the
+-- \`unique_id\` of the service account.
 psakdName :: Lens' ProjectsServiceAccountsKeysDelete Text
 psakdName
   = lens _psakdName (\ s a -> s{_psakdName = a})

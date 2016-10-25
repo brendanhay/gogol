@@ -22,45 +22,43 @@ module Network.Google.KnowledgeGraphSearch.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
-    -- * CounterOptions
-    , CounterOptions
-    , counterOptions
-    , coField
-    , coMetric
-
     -- * Empty
     , Empty
     , empty
+
+    -- * AuditData
+    , AuditData
+    , auditData
+    , adPolicyDelta
 
     -- * ServiceAccountKey
     , ServiceAccountKey
     , serviceAccountKey
     , sakValidAfterTime
     , sakPrivateKeyData
+    , sakPublicKeyData
     , sakName
     , sakPrivateKeyType
     , sakValidBeforeTime
-
-    -- * Rule
-    , Rule
-    , rule
-    , rAction
-    , rIn
-    , rNotIn
-    , rConditions
-    , rPermissions
-    , rLogConfig
-    , rDescription
+    , sakKeyAlgorithm
 
     -- * CreateServiceAccountKeyRequest
     , CreateServiceAccountKeyRequest
     , createServiceAccountKeyRequest
     , csakrPrivateKeyType
+    , csakrKeyAlgorithm
 
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
     , siprPolicy
+
+    -- * BindingDelta
+    , BindingDelta
+    , bindingDelta
+    , bdAction
+    , bdRole
+    , bdMember
 
     -- * SignBlobRequest
     , SignBlobRequest
@@ -72,13 +70,12 @@ module Network.Google.KnowledgeGraphSearch.Types
     , listServiceAccountKeysResponse
     , lsakrKeys
 
-    -- * CloudAuditOptions
-    , CloudAuditOptions
-    , cloudAuditOptions
-
-    -- * DataAccessOptions
-    , DataAccessOptions
-    , dataAccessOptions
+    -- * Role
+    , Role
+    , role'
+    , rName
+    , rTitle
+    , rDescription
 
     -- * ServiceAccount
     , ServiceAccount
@@ -90,6 +87,11 @@ module Network.Google.KnowledgeGraphSearch.Types
     , saDisplayName
     , saProjectId
     , saOAuth2ClientId
+
+    -- * QueryGrantableRolesResponse
+    , QueryGrantableRolesResponse
+    , queryGrantableRolesResponse
+    , qgrrRoles
 
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
@@ -105,19 +107,18 @@ module Network.Google.KnowledgeGraphSearch.Types
     , Policy
     , policy
     , pEtag
-    , pRules
     , pVersion
     , pBindings
 
-    -- * Condition
-    , Condition
-    , condition
-    , cOp
-    , cIAM
-    , cValues
-    , cValue
-    , cSys
-    , cSvc
+    -- * PolicyDelta
+    , PolicyDelta
+    , policyDelta
+    , pdBindingDeltas
+
+    -- * QueryGrantableRolesRequest
+    , QueryGrantableRolesRequest
+    , queryGrantableRolesRequest
+    , qgrrFullResourceName
 
     -- * SignBlobResponse
     , SignBlobResponse
@@ -130,13 +131,6 @@ module Network.Google.KnowledgeGraphSearch.Types
     , listServiceAccountsResponse
     , lsarNextPageToken
     , lsarAccounts
-
-    -- * LogConfig
-    , LogConfig
-    , logConfig
-    , lcCloudAudit
-    , lcDataAccess
-    , lcCounter
 
     -- * CreateServiceAccountRequest
     , CreateServiceAccountRequest
@@ -155,7 +149,7 @@ import           Network.Google.KnowledgeGraphSearch.Types.Product
 import           Network.Google.KnowledgeGraphSearch.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Identity and Access Management API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Google Identity and Access Management (IAM) API. This contains the host and root path used as a starting point for constructing service requests.
 knowledgeGraphSearchService :: ServiceConfig
 knowledgeGraphSearchService
   = defaultService (ServiceId "iam:v1")

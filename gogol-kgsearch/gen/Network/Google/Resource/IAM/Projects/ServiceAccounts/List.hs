@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists service accounts for a project.
+-- Lists ServiceAccounts for a project.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference> for @iam.projects.serviceAccounts.list@.
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.list@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.List
     (
     -- * REST Resource
@@ -66,7 +66,7 @@ type ProjectsServiceAccountsListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] ListServiceAccountsResponse
 
--- | Lists service accounts for a project.
+-- | Lists ServiceAccounts for a project.
 --
 -- /See:/ 'projectsServiceAccountsList' smart constructor.
 data ProjectsServiceAccountsList = ProjectsServiceAccountsList'
@@ -156,12 +156,12 @@ psalBearerToken
       (\ s a -> s{_psalBearerToken = a})
 
 -- | Required. The resource name of the project associated with the service
--- accounts, such as \"projects\/123\"
+-- accounts, such as \`projects\/my-project-123\`.
 psalName :: Lens' ProjectsServiceAccountsList Text
 psalName = lens _psalName (\ s a -> s{_psalName = a})
 
 -- | Optional pagination token returned in an earlier
--- [ListServiceAccountsResponse.next_page_token].
+-- ListServiceAccountsResponse.next_page_token.
 psalPageToken :: Lens' ProjectsServiceAccountsList (Maybe Text)
 psalPageToken
   = lens _psalPageToken
@@ -169,7 +169,7 @@ psalPageToken
 
 -- | Optional limit on the number of service accounts to include in the
 -- response. Further accounts can subsequently be obtained by including the
--- [ListServiceAccountsResponse.next_page_token] in a subsequent request.
+-- ListServiceAccountsResponse.next_page_token in a subsequent request.
 psalPageSize :: Lens' ProjectsServiceAccountsList (Maybe Int32)
 psalPageSize
   = lens _psalPageSize (\ s a -> s{_psalPageSize = a})

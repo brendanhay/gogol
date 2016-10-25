@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a ServiceAccount
+-- Gets a ServiceAccount.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference> for @iam.projects.serviceAccounts.get@.
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.get@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
     (
     -- * REST Resource
@@ -61,7 +61,7 @@ type ProjectsServiceAccountsGetResource =
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] ServiceAccount
 
--- | Gets a ServiceAccount
+-- | Gets a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsGet' smart constructor.
 data ProjectsServiceAccountsGet = ProjectsServiceAccountsGet'
@@ -142,11 +142,11 @@ psagBearerToken
   = lens _psagBearerToken
       (\ s a -> s{_psagBearerToken = a})
 
--- | The resource name of the service account in the format
--- \"projects\/{project}\/serviceAccounts\/{account}\". Using \'-\' as a
--- wildcard for the project, will infer the project from the account. The
--- account value can be the email address or the unique_id of the service
--- account.
+-- | The resource name of the service account in the following format:
+-- \`projects\/{project}\/serviceAccounts\/{account}\`. Using \`-\` as a
+-- wildcard for the project will infer the project from the account. The
+-- \`account\` value can be the \`email\` address or the \`unique_id\` of
+-- the service account.
 psagName :: Lens' ProjectsServiceAccountsGet Text
 psagName = lens _psagName (\ s a -> s{_psagName = a})
 

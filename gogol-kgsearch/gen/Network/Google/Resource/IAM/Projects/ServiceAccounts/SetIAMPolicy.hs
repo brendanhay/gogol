@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the IAM access control policy for the specified IAM resource.
+-- Sets the IAM access control policy for a ServiceAccount.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference> for @iam.projects.serviceAccounts.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.setIamPolicy@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
     (
     -- * REST Resource
@@ -63,7 +63,7 @@ type ProjectsServiceAccountsSetIAMPolicyResource =
                          ReqBody '[JSON] SetIAMPolicyRequest :>
                            Post '[JSON] Policy
 
--- | Sets the IAM access control policy for the specified IAM resource.
+-- | Sets the IAM access control policy for a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsSetIAMPolicy' smart constructor.
 data ProjectsServiceAccountsSetIAMPolicy = ProjectsServiceAccountsSetIAMPolicy'
@@ -156,10 +156,8 @@ psasipBearerToken
       (\ s a -> s{_psasipBearerToken = a})
 
 -- | REQUIRED: The resource for which the policy is being specified.
--- \`resource\` is usually specified as a path, such as
--- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
--- the path specified in this value is resource specific and is specified
--- in the \`setIamPolicy\` documentation.
+-- \`resource\` is usually specified as a path. For example, a Project
+-- resource is specified as \`projects\/{project}\`.
 psasipResource :: Lens' ProjectsServiceAccountsSetIAMPolicy Text
 psasipResource
   = lens _psasipResource

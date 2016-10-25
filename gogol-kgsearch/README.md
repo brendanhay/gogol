@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Identity and Access Management.
+A client library for the Google Identity and Access Management (IAM).
 
 
 ## Contribute

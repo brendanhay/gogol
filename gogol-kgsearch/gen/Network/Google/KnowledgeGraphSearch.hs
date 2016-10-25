@@ -17,7 +17,7 @@
 -- including the creation of service accounts, which you can use to
 -- authenticate to Google and make API calls.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference>
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference>
 module Network.Google.KnowledgeGraphSearch
     (
     -- * Service Configuration
@@ -70,47 +70,48 @@ module Network.Google.KnowledgeGraphSearch
     -- ** iam.projects.serviceAccounts.update
     , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
 
-    -- * Types
+    -- ** iam.roles.queryGrantableRoles
+    , module Network.Google.Resource.IAM.Roles.QueryGrantableRoles
 
-    -- ** CounterOptions
-    , CounterOptions
-    , counterOptions
-    , coField
-    , coMetric
+    -- * Types
 
     -- ** Empty
     , Empty
     , empty
+
+    -- ** AuditData
+    , AuditData
+    , auditData
+    , adPolicyDelta
 
     -- ** ServiceAccountKey
     , ServiceAccountKey
     , serviceAccountKey
     , sakValidAfterTime
     , sakPrivateKeyData
+    , sakPublicKeyData
     , sakName
     , sakPrivateKeyType
     , sakValidBeforeTime
-
-    -- ** Rule
-    , Rule
-    , rule
-    , rAction
-    , rIn
-    , rNotIn
-    , rConditions
-    , rPermissions
-    , rLogConfig
-    , rDescription
+    , sakKeyAlgorithm
 
     -- ** CreateServiceAccountKeyRequest
     , CreateServiceAccountKeyRequest
     , createServiceAccountKeyRequest
     , csakrPrivateKeyType
+    , csakrKeyAlgorithm
 
     -- ** SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
     , siprPolicy
+
+    -- ** BindingDelta
+    , BindingDelta
+    , bindingDelta
+    , bdAction
+    , bdRole
+    , bdMember
 
     -- ** SignBlobRequest
     , SignBlobRequest
@@ -122,13 +123,12 @@ module Network.Google.KnowledgeGraphSearch
     , listServiceAccountKeysResponse
     , lsakrKeys
 
-    -- ** CloudAuditOptions
-    , CloudAuditOptions
-    , cloudAuditOptions
-
-    -- ** DataAccessOptions
-    , DataAccessOptions
-    , dataAccessOptions
+    -- ** Role
+    , Role
+    , role'
+    , rName
+    , rTitle
+    , rDescription
 
     -- ** ServiceAccount
     , ServiceAccount
@@ -140,6 +140,11 @@ module Network.Google.KnowledgeGraphSearch
     , saDisplayName
     , saProjectId
     , saOAuth2ClientId
+
+    -- ** QueryGrantableRolesResponse
+    , QueryGrantableRolesResponse
+    , queryGrantableRolesResponse
+    , qgrrRoles
 
     -- ** TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
@@ -155,19 +160,18 @@ module Network.Google.KnowledgeGraphSearch
     , Policy
     , policy
     , pEtag
-    , pRules
     , pVersion
     , pBindings
 
-    -- ** Condition
-    , Condition
-    , condition
-    , cOp
-    , cIAM
-    , cValues
-    , cValue
-    , cSys
-    , cSvc
+    -- ** PolicyDelta
+    , PolicyDelta
+    , policyDelta
+    , pdBindingDeltas
+
+    -- ** QueryGrantableRolesRequest
+    , QueryGrantableRolesRequest
+    , queryGrantableRolesRequest
+    , qgrrFullResourceName
 
     -- ** SignBlobResponse
     , SignBlobResponse
@@ -180,13 +184,6 @@ module Network.Google.KnowledgeGraphSearch
     , listServiceAccountsResponse
     , lsarNextPageToken
     , lsarAccounts
-
-    -- ** LogConfig
-    , LogConfig
-    , logConfig
-    , lcCloudAudit
-    , lcDataAccess
-    , lcCounter
 
     -- ** CreateServiceAccountRequest
     , CreateServiceAccountRequest
@@ -216,15 +213,17 @@ import           Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPoli
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
 import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
+import           Network.Google.Resource.IAM.Roles.QueryGrantableRoles
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Identity and Access Management API service.
+-- | Represents the entirety of the methods and resources available for the Google Identity and Access Management (IAM) API service.
 type KnowledgeGraphSearchAPI =
-     ProjectsServiceAccountsKeysListResource :<|>
-       ProjectsServiceAccountsKeysGetResource
+     RolesQueryGrantableRolesResource :<|>
+       ProjectsServiceAccountsKeysListResource
+       :<|> ProjectsServiceAccountsKeysGetResource
        :<|> ProjectsServiceAccountsKeysCreateResource
        :<|> ProjectsServiceAccountsKeysDeleteResource
        :<|> ProjectsServiceAccountsListResource

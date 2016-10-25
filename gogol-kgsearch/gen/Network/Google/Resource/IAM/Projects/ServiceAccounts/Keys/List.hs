@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists service account keys
+-- Lists ServiceAccountKeys.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference> for @iam.projects.serviceAccounts.keys.list@.
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.keys.list@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
     (
     -- * REST Resource
@@ -64,7 +64,7 @@ type ProjectsServiceAccountsKeysListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] ListServiceAccountKeysResponse
 
--- | Lists service account keys
+-- | Lists ServiceAccountKeys.
 --
 -- /See:/ 'projectsServiceAccountsKeysList' smart constructor.
 data ProjectsServiceAccountsKeysList = ProjectsServiceAccountsKeysList'
@@ -116,8 +116,9 @@ projectsServiceAccountsKeysList pPsaklName_ =
     , _psaklCallback = Nothing
     }
 
--- | The type of keys the user wants to list. If empty, all key types are
--- included in the response. Duplicate key types are not allowed.
+-- | Filters the types of keys the user wants to include in the list
+-- response. Duplicate key types are not allowed. If no key type is
+-- provided, all keys are returned.
 psaklKeyTypes :: Lens' ProjectsServiceAccountsKeysList [Text]
 psaklKeyTypes
   = lens _psaklKeyTypes
@@ -158,11 +159,11 @@ psaklBearerToken
   = lens _psaklBearerToken
       (\ s a -> s{_psaklBearerToken = a})
 
--- | The resource name of the service account in the format
--- \"projects\/{project}\/serviceAccounts\/{account}\". Using \'-\' as a
+-- | The resource name of the service account in the following format:
+-- \`projects\/{project}\/serviceAccounts\/{account}\`. Using \`-\` as a
 -- wildcard for the project, will infer the project from the account. The
--- account value can be the email address or the unique_id of the service
--- account.
+-- \`account\` value can be the \`email\` address or the \`unique_id\` of
+-- the service account.
 psaklName :: Lens' ProjectsServiceAccountsKeysList Text
 psaklName
   = lens _psaklName (\ s a -> s{_psaklName = a})

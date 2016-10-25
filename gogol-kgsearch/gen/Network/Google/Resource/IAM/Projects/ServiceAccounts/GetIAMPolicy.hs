@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the IAM access control policy for specified IAM resource.
+-- Returns the IAM access control policy for a ServiceAccount.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference> for @iam.projects.serviceAccounts.getIamPolicy@.
+-- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management (IAM) API Reference> for @iam.projects.serviceAccounts.getIamPolicy@.
 module Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
     (
     -- * REST Resource
@@ -60,7 +60,7 @@ type ProjectsServiceAccountsGetIAMPolicyResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Post '[JSON] Policy
 
--- | Returns the IAM access control policy for specified IAM resource.
+-- | Returns the IAM access control policy for a ServiceAccount.
 --
 -- /See:/ 'projectsServiceAccountsGetIAMPolicy' smart constructor.
 data ProjectsServiceAccountsGetIAMPolicy = ProjectsServiceAccountsGetIAMPolicy'
@@ -142,10 +142,8 @@ psagipBearerToken
       (\ s a -> s{_psagipBearerToken = a})
 
 -- | REQUIRED: The resource for which the policy is being requested.
--- \`resource\` is usually specified as a path, such as
--- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
--- the path specified in this value is resource specific and is specified
--- in the \`getIamPolicy\` documentation.
+-- \`resource\` is usually specified as a path. For example, a Project
+-- resource is specified as \`projects\/{project}\`.
 psagipResource :: Lens' ProjectsServiceAccountsGetIAMPolicy Text
 psagipResource
   = lens _psagipResource
