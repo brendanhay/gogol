@@ -69,6 +69,15 @@ module Network.Google.Classroom.Types
     , dfTitle
     , dfAlternateLink
 
+    -- * GuardianInvitation
+    , GuardianInvitation
+    , guardianInvitation
+    , giCreationTime
+    , giStudentId
+    , giState
+    , giInvitationId
+    , giInvitedEmailAddress
+
     -- * ReturnStudentSubmissionRequest
     , ReturnStudentSubmissionRequest
     , returnStudentSubmissionRequest
@@ -134,6 +143,14 @@ module Network.Google.Classroom.Types
     , lirNextPageToken
     , lirInvitations
 
+    -- * Guardian
+    , Guardian
+    , guardian
+    , gStudentId
+    , gGuardianId
+    , gInvitedEmailAddress
+    , gGuardianProFile
+
     -- * CourseMaterial
     , CourseMaterial
     , courseMaterial
@@ -182,6 +199,12 @@ module Network.Google.Classroom.Types
     , ssDraftGrade
     , ssAlternateLink
     , ssCourseWorkId
+
+    -- * ListGuardiansResponse
+    , ListGuardiansResponse
+    , listGuardiansResponse
+    , lgrNextPageToken
+    , lgrGuardians
 
     -- * Date
     , Date
@@ -258,6 +281,7 @@ module Network.Google.Classroom.Types
     , cTeacherGroupEmail
     , cTeacherFolder
     , cCourseState
+    , cGuardiansEnabled
     , cEnrollmentCode
     , cUpdateTime
     , cOwnerId
@@ -276,6 +300,12 @@ module Network.Google.Classroom.Types
     , todHours
     , todMinutes
     , todSeconds
+
+    -- * ListGuardianInvitationsResponse
+    , ListGuardianInvitationsResponse
+    , listGuardianInvitationsResponse
+    , lgirNextPageToken
+    , lgirGuardianInvitations
 
     -- * Assignment
     , Assignment

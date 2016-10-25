@@ -68,6 +68,13 @@ library
         , Network.Google.Resource.Classroom.Invitations.Get
         , Network.Google.Resource.Classroom.Invitations.List
         , Network.Google.Resource.Classroom.UserProFiles.Get
+        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
+        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
+        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
+        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Patch
+        , Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
+        , Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
+        , Network.Google.Resource.Classroom.UserProFiles.Guardians.List
 
     other-modules:
           Network.Google.Classroom.Types.Product
