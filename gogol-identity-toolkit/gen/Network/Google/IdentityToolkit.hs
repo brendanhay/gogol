@@ -21,6 +21,9 @@ module Network.Google.IdentityToolkit
     -- * Service Configuration
       identityToolkitService
 
+    -- * OAuth Scopes
+    , firebaseScope
+
     -- * API Declaration
     , IdentityToolkitAPI
 
@@ -91,8 +94,10 @@ module Network.Google.IdentityToolkit
     , uipuiiProviderId
     , uipuiiEmail
     , uipuiiPhotoURL
+    , uipuiiRawUserInfo
     , uipuiiFederatedId
     , uipuiiDisplayName
+    , uipuiiScreenName
     , uipuiiRawId
 
     -- ** VerifyCustomTokenResponse
@@ -108,6 +113,7 @@ module Network.Google.IdentityToolkit
     , idpConfig
     , icClientId
     , icEnabled
+    , icWhiteListedAudiences
     , icSecret
     , icExperimentPercent
     , icProvider
@@ -116,8 +122,11 @@ module Network.Google.IdentityToolkit
     , UserInfo
     , userInfo
     , uiEmail
+    , uiLastLoginAt
     , uiPhotoURL
+    , uiCreatedAt
     , uiDisabled
+    , uiCustomAuth
     , uiProviderUserInfo
     , uiValidSince
     , uiPasswordUpdatedAt
@@ -127,6 +136,7 @@ module Network.Google.IdentityToolkit
     , uiDisplayName
     , uiPasswordHash
     , uiLocalId
+    , uiScreenName
 
     -- ** IdentitytoolkitRelyingPartySetProjectConfigResponse
     , IdentitytoolkitRelyingPartySetProjectConfigResponse
@@ -148,6 +158,11 @@ module Network.Google.IdentityToolkit
     , sairpuiiPhotoURL
     , sairpuiiFederatedId
     , sairpuiiDisplayName
+
+    -- ** IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
+    , IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
+    , identitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
+    , irpcaurcpAddtional
 
     -- ** IdentitytoolkitRelyingPartyVerifyPasswordRequest
     , IdentitytoolkitRelyingPartyVerifyPasswordRequest
@@ -194,8 +209,10 @@ module Network.Google.IdentityToolkit
     , irpsairUpgradeToFederatedLogin
     , irpsairEmail
     , irpsairInstanceId
+    , irpsairLastLoginAt
     , irpsairPhotoURL
     , irpsairCaptchaChallenge
+    , irpsairCreatedAt
     , irpsairDelegatedProjectNumber
     , irpsairDeleteAttribute
     , irpsairDeleteProvider
@@ -214,6 +231,7 @@ module Network.Google.IdentityToolkit
     -- ** IdentitytoolkitRelyingPartyVerifyAssertionRequest
     , IdentitytoolkitRelyingPartyVerifyAssertionRequest
     , identitytoolkitRelyingPartyVerifyAssertionRequest
+    , irpvarReturnIdpCredential
     , irpvarInstanceId
     , irpvarDelegatedProjectNumber
     , irpvarPostBody
@@ -261,6 +279,8 @@ module Network.Google.IdentityToolkit
     , resetPasswordResponse
     , rprEmail
     , rprKind
+    , rprRequestType
+    , rprNewEmail
 
     -- ** UploadAccountResponse
     , UploadAccountResponse
@@ -321,10 +341,12 @@ module Network.Google.IdentityToolkit
     , irpuarUsers
     , irpuarMemoryCost
     , irpuarDelegatedProjectNumber
+    , irpuarSanityCheck
     , irpuarSaltSeparator
     , irpuarHashAlgorithm
     , irpuarSignerKey
     , irpuarRounds
+    , irpuarTargetProjectId
 
     -- ** IdentitytoolkitRelyingPartyResetPasswordRequest
     , IdentitytoolkitRelyingPartyResetPasswordRequest
@@ -340,12 +362,16 @@ module Network.Google.IdentityToolkit
     , irpcaurProviderId
     , irpcaurClientId
     , irpcaurContext
+    , irpcaurCustomParameter
     , irpcaurIdentifier
     , irpcaurOtaApp
     , irpcaurOAuthConsumerKey
+    , irpcaurHostedDomain
     , irpcaurAppId
     , irpcaurContinueURI
+    , irpcaurAuthFlowType
     , irpcaurOAuthScope
+    , irpcaurSessionId
     , irpcaurOpenidRealm
 
     -- ** GetAccountInfoResponse
@@ -433,6 +459,7 @@ module Network.Google.IdentityToolkit
     , varOAuthAccessToken
     , varDateOfBirth
     , varKind
+    , varRawUserInfo
     , varOAuthExpireIn
     , varRefreshToken
     , varAppInstallationURL
@@ -453,6 +480,8 @@ module Network.Google.IdentityToolkit
     , varNickName
     , varLocalId
     , varTimeZone
+    , varScreenName
+    , varErrorMessage
     , varIdToken
     , varOAuthAuthorizationCode
 

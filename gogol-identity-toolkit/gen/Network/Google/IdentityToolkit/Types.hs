@@ -19,6 +19,9 @@ module Network.Google.IdentityToolkit.Types
     -- * Service Configuration
       identityToolkitService
 
+    -- * OAuth Scopes
+    , firebaseScope
+
     -- * UploadAccountResponseErrorItem
     , UploadAccountResponseErrorItem
     , uploadAccountResponseErrorItem
@@ -31,8 +34,10 @@ module Network.Google.IdentityToolkit.Types
     , uipuiiProviderId
     , uipuiiEmail
     , uipuiiPhotoURL
+    , uipuiiRawUserInfo
     , uipuiiFederatedId
     , uipuiiDisplayName
+    , uipuiiScreenName
     , uipuiiRawId
 
     -- * VerifyCustomTokenResponse
@@ -48,6 +53,7 @@ module Network.Google.IdentityToolkit.Types
     , idpConfig
     , icClientId
     , icEnabled
+    , icWhiteListedAudiences
     , icSecret
     , icExperimentPercent
     , icProvider
@@ -56,8 +62,11 @@ module Network.Google.IdentityToolkit.Types
     , UserInfo
     , userInfo
     , uiEmail
+    , uiLastLoginAt
     , uiPhotoURL
+    , uiCreatedAt
     , uiDisabled
+    , uiCustomAuth
     , uiProviderUserInfo
     , uiValidSince
     , uiPasswordUpdatedAt
@@ -67,6 +76,7 @@ module Network.Google.IdentityToolkit.Types
     , uiDisplayName
     , uiPasswordHash
     , uiLocalId
+    , uiScreenName
 
     -- * IdentitytoolkitRelyingPartySetProjectConfigResponse
     , IdentitytoolkitRelyingPartySetProjectConfigResponse
@@ -88,6 +98,11 @@ module Network.Google.IdentityToolkit.Types
     , sairpuiiPhotoURL
     , sairpuiiFederatedId
     , sairpuiiDisplayName
+
+    -- * IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
+    , IdentitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
+    , identitytoolkitRelyingPartyCreateAuthURIRequestCustomParameter
+    , irpcaurcpAddtional
 
     -- * IdentitytoolkitRelyingPartyVerifyPasswordRequest
     , IdentitytoolkitRelyingPartyVerifyPasswordRequest
@@ -134,8 +149,10 @@ module Network.Google.IdentityToolkit.Types
     , irpsairUpgradeToFederatedLogin
     , irpsairEmail
     , irpsairInstanceId
+    , irpsairLastLoginAt
     , irpsairPhotoURL
     , irpsairCaptchaChallenge
+    , irpsairCreatedAt
     , irpsairDelegatedProjectNumber
     , irpsairDeleteAttribute
     , irpsairDeleteProvider
@@ -154,6 +171,7 @@ module Network.Google.IdentityToolkit.Types
     -- * IdentitytoolkitRelyingPartyVerifyAssertionRequest
     , IdentitytoolkitRelyingPartyVerifyAssertionRequest
     , identitytoolkitRelyingPartyVerifyAssertionRequest
+    , irpvarReturnIdpCredential
     , irpvarInstanceId
     , irpvarDelegatedProjectNumber
     , irpvarPostBody
@@ -201,6 +219,8 @@ module Network.Google.IdentityToolkit.Types
     , resetPasswordResponse
     , rprEmail
     , rprKind
+    , rprRequestType
+    , rprNewEmail
 
     -- * UploadAccountResponse
     , UploadAccountResponse
@@ -261,10 +281,12 @@ module Network.Google.IdentityToolkit.Types
     , irpuarUsers
     , irpuarMemoryCost
     , irpuarDelegatedProjectNumber
+    , irpuarSanityCheck
     , irpuarSaltSeparator
     , irpuarHashAlgorithm
     , irpuarSignerKey
     , irpuarRounds
+    , irpuarTargetProjectId
 
     -- * IdentitytoolkitRelyingPartyResetPasswordRequest
     , IdentitytoolkitRelyingPartyResetPasswordRequest
@@ -280,12 +302,16 @@ module Network.Google.IdentityToolkit.Types
     , irpcaurProviderId
     , irpcaurClientId
     , irpcaurContext
+    , irpcaurCustomParameter
     , irpcaurIdentifier
     , irpcaurOtaApp
     , irpcaurOAuthConsumerKey
+    , irpcaurHostedDomain
     , irpcaurAppId
     , irpcaurContinueURI
+    , irpcaurAuthFlowType
     , irpcaurOAuthScope
+    , irpcaurSessionId
     , irpcaurOpenidRealm
 
     -- * GetAccountInfoResponse
@@ -373,6 +399,7 @@ module Network.Google.IdentityToolkit.Types
     , varOAuthAccessToken
     , varDateOfBirth
     , varKind
+    , varRawUserInfo
     , varOAuthExpireIn
     , varRefreshToken
     , varAppInstallationURL
@@ -393,6 +420,8 @@ module Network.Google.IdentityToolkit.Types
     , varNickName
     , varLocalId
     , varTimeZone
+    , varScreenName
+    , varErrorMessage
     , varIdToken
     , varOAuthAuthorizationCode
 
@@ -419,3 +448,7 @@ identityToolkitService :: ServiceConfig
 identityToolkitService
   = defaultService (ServiceId "identitytoolkit:v3")
       "www.googleapis.com"
+
+-- | View and administer all your Firebase data and settings
+firebaseScope :: Proxy '["https://www.googleapis.com/auth/firebase"]
+firebaseScope = Proxy;
