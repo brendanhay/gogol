@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an existing subscription. All pending messages in the
+-- Deletes an existing subscription. All messages retained in the
 -- subscription are immediately dropped. Calls to \`Pull\` after deletion
 -- will return \`NOT_FOUND\`. After a subscription is deleted, a new one
 -- may be created with the same name, but the new one has no association
--- with the old subscription, or its topic unless the same topic is
+-- with the old subscription or its topic unless the same topic is
 -- specified.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.delete@.
@@ -65,11 +65,11 @@ type ProjectsSubscriptionsDeleteResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes an existing subscription. All pending messages in the
+-- | Deletes an existing subscription. All messages retained in the
 -- subscription are immediately dropped. Calls to \`Pull\` after deletion
 -- will return \`NOT_FOUND\`. After a subscription is deleted, a new one
 -- may be created with the same name, but the new one has no association
--- with the old subscription, or its topic unless the same topic is
+-- with the old subscription or its topic unless the same topic is
 -- specified.
 --
 -- /See:/ 'projectsSubscriptionsDelete' smart constructor.

@@ -36,6 +36,9 @@ library
     exposed-modules:
           Network.Google.PubSub
         , Network.Google.PubSub.Types
+        , Network.Google.Resource.PubSub.Projects.Snapshots.GetIAMPolicy
+        , Network.Google.Resource.PubSub.Projects.Snapshots.SetIAMPolicy
+        , Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
         , Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
         , Network.Google.Resource.PubSub.Projects.Subscriptions.Create
         , Network.Google.Resource.PubSub.Projects.Subscriptions.Delete

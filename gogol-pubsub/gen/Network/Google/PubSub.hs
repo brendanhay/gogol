@@ -31,6 +31,15 @@ module Network.Google.PubSub
 
     -- * Resources
 
+    -- ** pubsub.projects.snapshots.getIamPolicy
+    , module Network.Google.Resource.PubSub.Projects.Snapshots.GetIAMPolicy
+
+    -- ** pubsub.projects.snapshots.setIamPolicy
+    , module Network.Google.Resource.PubSub.Projects.Snapshots.SetIAMPolicy
+
+    -- ** pubsub.projects.snapshots.testIamPermissions
+    , module Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
+
     -- ** pubsub.projects.subscriptions.acknowledge
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
 
@@ -226,6 +235,9 @@ module Network.Google.PubSub
 
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
+import           Network.Google.Resource.PubSub.Projects.Snapshots.GetIAMPolicy
+import           Network.Google.Resource.PubSub.Projects.Snapshots.SetIAMPolicy
+import           Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
 import           Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
 import           Network.Google.Resource.PubSub.Projects.Subscriptions.Create
 import           Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
@@ -262,6 +274,9 @@ type PubSubAPI =
        :<|> ProjectsTopicsTestIAMPermissionsResource
        :<|> ProjectsTopicsDeleteResource
        :<|> ProjectsTopicsPublishResource
+       :<|> ProjectsSnapshotsGetIAMPolicyResource
+       :<|> ProjectsSnapshotsSetIAMPolicyResource
+       :<|> ProjectsSnapshotsTestIAMPermissionsResource
        :<|> ProjectsSubscriptionsListResource
        :<|> ProjectsSubscriptionsAcknowledgeResource
        :<|> ProjectsSubscriptionsGetIAMPolicyResource

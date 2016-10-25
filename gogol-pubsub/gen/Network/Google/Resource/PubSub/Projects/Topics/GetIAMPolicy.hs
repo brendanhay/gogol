@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for a \`resource\`. Returns an empty
--- policy if the resource exists and does not have a policy set.
+-- Gets the access control policy for a resource. Returns an empty policy
+-- if the resource exists and does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.getIamPolicy@.
 module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
@@ -61,8 +61,8 @@ type ProjectsTopicsGetIAMPolicyResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
--- | Gets the access control policy for a \`resource\`. Returns an empty
--- policy if the resource exists and does not have a policy set.
+-- | Gets the access control policy for a resource. Returns an empty policy
+-- if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsTopicsGetIAMPolicy' smart constructor.
 data ProjectsTopicsGetIAMPolicy = ProjectsTopicsGetIAMPolicy'
@@ -144,10 +144,8 @@ ptgipBearerToken
       (\ s a -> s{_ptgipBearerToken = a})
 
 -- | REQUIRED: The resource for which the policy is being requested.
--- \`resource\` is usually specified as a path, such as
--- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
--- the path specified in this value is resource specific and is specified
--- in the \`getIamPolicy\` documentation.
+-- \`resource\` is usually specified as a path. For example, a Project
+-- resource is specified as \`projects\/{project}\`.
 ptgipResource :: Lens' ProjectsTopicsGetIAMPolicy Text
 ptgipResource
   = lens _ptgipResource

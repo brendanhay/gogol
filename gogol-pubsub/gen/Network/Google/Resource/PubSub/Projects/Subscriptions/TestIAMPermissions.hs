@@ -33,15 +33,15 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
     , ProjectsSubscriptionsTestIAMPermissions
 
     -- * Request Lenses
-    , pstipXgafv
-    , pstipUploadProtocol
-    , pstipPp
-    , pstipAccessToken
-    , pstipUploadType
-    , pstipPayload
-    , pstipBearerToken
-    , pstipResource
-    , pstipCallback
+    , pstiampXgafv
+    , pstiampUploadProtocol
+    , pstiampPp
+    , pstiampAccessToken
+    , pstiampUploadType
+    , pstiampPayload
+    , pstiampBearerToken
+    , pstiampResource
+    , pstiampCallback
     ) where
 
 import           Network.Google.Prelude
@@ -68,108 +68,108 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
 --
 -- /See:/ 'projectsSubscriptionsTestIAMPermissions' smart constructor.
 data ProjectsSubscriptionsTestIAMPermissions = ProjectsSubscriptionsTestIAMPermissions'
-    { _pstipXgafv          :: !(Maybe Text)
-    , _pstipUploadProtocol :: !(Maybe Text)
-    , _pstipPp             :: !Bool
-    , _pstipAccessToken    :: !(Maybe Text)
-    , _pstipUploadType     :: !(Maybe Text)
-    , _pstipPayload        :: !TestIAMPermissionsRequest
-    , _pstipBearerToken    :: !(Maybe Text)
-    , _pstipResource       :: !Text
-    , _pstipCallback       :: !(Maybe Text)
+    { _pstiampXgafv          :: !(Maybe Text)
+    , _pstiampUploadProtocol :: !(Maybe Text)
+    , _pstiampPp             :: !Bool
+    , _pstiampAccessToken    :: !(Maybe Text)
+    , _pstiampUploadType     :: !(Maybe Text)
+    , _pstiampPayload        :: !TestIAMPermissionsRequest
+    , _pstiampBearerToken    :: !(Maybe Text)
+    , _pstiampResource       :: !Text
+    , _pstiampCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pstipXgafv'
+-- * 'pstiampXgafv'
 --
--- * 'pstipUploadProtocol'
+-- * 'pstiampUploadProtocol'
 --
--- * 'pstipPp'
+-- * 'pstiampPp'
 --
--- * 'pstipAccessToken'
+-- * 'pstiampAccessToken'
 --
--- * 'pstipUploadType'
+-- * 'pstiampUploadType'
 --
--- * 'pstipPayload'
+-- * 'pstiampPayload'
 --
--- * 'pstipBearerToken'
+-- * 'pstiampBearerToken'
 --
--- * 'pstipResource'
+-- * 'pstiampResource'
 --
--- * 'pstipCallback'
+-- * 'pstiampCallback'
 projectsSubscriptionsTestIAMPermissions
-    :: TestIAMPermissionsRequest -- ^ 'pstipPayload'
-    -> Text -- ^ 'pstipResource'
+    :: TestIAMPermissionsRequest -- ^ 'pstiampPayload'
+    -> Text -- ^ 'pstiampResource'
     -> ProjectsSubscriptionsTestIAMPermissions
-projectsSubscriptionsTestIAMPermissions pPstipPayload_ pPstipResource_ =
+projectsSubscriptionsTestIAMPermissions pPstiampPayload_ pPstiampResource_ =
     ProjectsSubscriptionsTestIAMPermissions'
-    { _pstipXgafv = Nothing
-    , _pstipUploadProtocol = Nothing
-    , _pstipPp = True
-    , _pstipAccessToken = Nothing
-    , _pstipUploadType = Nothing
-    , _pstipPayload = pPstipPayload_
-    , _pstipBearerToken = Nothing
-    , _pstipResource = pPstipResource_
-    , _pstipCallback = Nothing
+    { _pstiampXgafv = Nothing
+    , _pstiampUploadProtocol = Nothing
+    , _pstiampPp = True
+    , _pstiampAccessToken = Nothing
+    , _pstiampUploadType = Nothing
+    , _pstiampPayload = pPstiampPayload_
+    , _pstiampBearerToken = Nothing
+    , _pstiampResource = pPstiampResource_
+    , _pstiampCallback = Nothing
     }
 
 -- | V1 error format.
-pstipXgafv :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
-pstipXgafv
-  = lens _pstipXgafv (\ s a -> s{_pstipXgafv = a})
+pstiampXgafv :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
+pstiampXgafv
+  = lens _pstiampXgafv (\ s a -> s{_pstiampXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pstipUploadProtocol :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
-pstipUploadProtocol
-  = lens _pstipUploadProtocol
-      (\ s a -> s{_pstipUploadProtocol = a})
+pstiampUploadProtocol :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
+pstiampUploadProtocol
+  = lens _pstiampUploadProtocol
+      (\ s a -> s{_pstiampUploadProtocol = a})
 
 -- | Pretty-print response.
-pstipPp :: Lens' ProjectsSubscriptionsTestIAMPermissions Bool
-pstipPp = lens _pstipPp (\ s a -> s{_pstipPp = a})
+pstiampPp :: Lens' ProjectsSubscriptionsTestIAMPermissions Bool
+pstiampPp
+  = lens _pstiampPp (\ s a -> s{_pstiampPp = a})
 
 -- | OAuth access token.
-pstipAccessToken :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
-pstipAccessToken
-  = lens _pstipAccessToken
-      (\ s a -> s{_pstipAccessToken = a})
+pstiampAccessToken :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
+pstiampAccessToken
+  = lens _pstiampAccessToken
+      (\ s a -> s{_pstiampAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pstipUploadType :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
-pstipUploadType
-  = lens _pstipUploadType
-      (\ s a -> s{_pstipUploadType = a})
+pstiampUploadType :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
+pstiampUploadType
+  = lens _pstiampUploadType
+      (\ s a -> s{_pstiampUploadType = a})
 
 -- | Multipart request metadata.
-pstipPayload :: Lens' ProjectsSubscriptionsTestIAMPermissions TestIAMPermissionsRequest
-pstipPayload
-  = lens _pstipPayload (\ s a -> s{_pstipPayload = a})
+pstiampPayload :: Lens' ProjectsSubscriptionsTestIAMPermissions TestIAMPermissionsRequest
+pstiampPayload
+  = lens _pstiampPayload
+      (\ s a -> s{_pstiampPayload = a})
 
 -- | OAuth bearer token.
-pstipBearerToken :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
-pstipBearerToken
-  = lens _pstipBearerToken
-      (\ s a -> s{_pstipBearerToken = a})
+pstiampBearerToken :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
+pstiampBearerToken
+  = lens _pstiampBearerToken
+      (\ s a -> s{_pstiampBearerToken = a})
 
 -- | REQUIRED: The resource for which the policy detail is being requested.
--- \`resource\` is usually specified as a path, such as
--- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
--- the path specified in this value is resource specific and is specified
--- in the \`testIamPermissions\` documentation.
-pstipResource :: Lens' ProjectsSubscriptionsTestIAMPermissions Text
-pstipResource
-  = lens _pstipResource
-      (\ s a -> s{_pstipResource = a})
+-- \`resource\` is usually specified as a path. For example, a Project
+-- resource is specified as \`projects\/{project}\`.
+pstiampResource :: Lens' ProjectsSubscriptionsTestIAMPermissions Text
+pstiampResource
+  = lens _pstiampResource
+      (\ s a -> s{_pstiampResource = a})
 
 -- | JSONP
-pstipCallback :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
-pstipCallback
-  = lens _pstipCallback
-      (\ s a -> s{_pstipCallback = a})
+pstiampCallback :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
+pstiampCallback
+  = lens _pstiampCallback
+      (\ s a -> s{_pstiampCallback = a})
 
 instance GoogleRequest
          ProjectsSubscriptionsTestIAMPermissions where
@@ -180,14 +180,15 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/pubsub"]
         requestClient
           ProjectsSubscriptionsTestIAMPermissions'{..}
-          = go _pstipResource _pstipXgafv _pstipUploadProtocol
-              (Just _pstipPp)
-              _pstipAccessToken
-              _pstipUploadType
-              _pstipBearerToken
-              _pstipCallback
+          = go _pstiampResource _pstiampXgafv
+              _pstiampUploadProtocol
+              (Just _pstiampPp)
+              _pstiampAccessToken
+              _pstiampUploadType
+              _pstiampBearerToken
+              _pstiampCallback
               (Just AltJSON)
-              _pstipPayload
+              _pstiampPayload
               pubSubService
           where go
                   = buildClient
