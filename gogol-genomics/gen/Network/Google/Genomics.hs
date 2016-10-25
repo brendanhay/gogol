@@ -13,9 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Stores, processes, explores and shares genomic data. This API implements
--- the Global Alliance for Genomics and Health (GA4GH) v0.5.1 API as well
--- as several extensions.
+-- Stores, processes, explores and shares genomic data.
 --
 -- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference>
 module Network.Google.Genomics
@@ -331,6 +329,7 @@ module Network.Google.Genomics
     , BatchCreateAnnotationsRequest
     , batchCreateAnnotationsRequest
     , bcarAnnotations
+    , bcarRequestId
 
     -- ** MergeVariantsRequest
     , MergeVariantsRequest
@@ -542,6 +541,11 @@ module Network.Google.Genomics
     , sVariants
     , sNextPageToken
 
+    -- ** OperationMetadataRuntimeMetadata
+    , OperationMetadataRuntimeMetadata
+    , operationMetadataRuntimeMetadata
+    , omrmAddtional
+
     -- ** ClinicalCondition
     , ClinicalCondition
     , clinicalCondition
@@ -752,10 +756,13 @@ module Network.Google.Genomics
     -- ** OperationMetadata
     , OperationMetadata
     , operationMetadata
+    , omClientId
+    , omStartTime
     , omEvents
     , omEndTime
     , omProjectId
     , omCreateTime
+    , omRuntimeMetadata
     , omRequest
 
     -- ** SearchAnnotationsRequest
@@ -793,6 +800,14 @@ module Network.Google.Genomics
     , annotationSetInfo
     , asiAddtional
 
+    -- ** ComputeEngine
+    , ComputeEngine
+    , computeEngine
+    , ceZone
+    , ceDiskNames
+    , ceMachineType
+    , ceInstanceName
+
     -- ** SearchAnnotationSetsResponse
     , SearchAnnotationSetsResponse
     , searchAnnotationSetsResponse
@@ -824,6 +839,8 @@ module Network.Google.Genomics
     -- ** OperationEvent
     , OperationEvent
     , operationEvent
+    , oeStartTime
+    , oeEndTime
     , oeDescription
 
     -- ** StreamVariantsRequest
@@ -858,6 +875,11 @@ module Network.Google.Genomics
     , pReverseStrand
     , pReferenceName
     , pPosition
+
+    -- ** RuntimeMetadata
+    , RuntimeMetadata
+    , runtimeMetadata
+    , rmComputeEngine
 
     -- ** SearchReadGroupSetsResponse
     , SearchReadGroupSetsResponse

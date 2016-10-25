@@ -164,7 +164,7 @@ dslPageToken :: Lens' DataSetsList (Maybe Text)
 dslPageToken
   = lens _dslPageToken (\ s a -> s{_dslPageToken = a})
 
--- | Required. The project to list datasets for.
+-- | Required. The Google Cloud project ID to list datasets for.
 dslProjectId :: Lens' DataSetsList (Maybe Text)
 dslProjectId
   = lens _dslProjectId (\ s a -> s{_dslProjectId = a})
