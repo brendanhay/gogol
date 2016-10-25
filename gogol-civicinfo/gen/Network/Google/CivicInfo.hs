@@ -13,7 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API for accessing civic information.
+-- Provides polling places, early vote locations, contest data, election
+-- officials, and government representatives for U.S. residential
+-- addresses.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference>
 module Network.Google.CivicInfo
@@ -114,6 +116,11 @@ module Network.Google.CivicInfo
     -- ** RepresentativesRepresentativeInfoByDivisionRoles
     , RepresentativesRepresentativeInfoByDivisionRoles (..)
 
+    -- ** ElectionsQueryRequest
+    , ElectionsQueryRequest
+    , electionsQueryRequest
+    , eqrContextParams
+
     -- ** Channel
     , Channel
     , channel
@@ -144,6 +151,11 @@ module Network.Google.CivicInfo
     , dsrName
     , dsrOcdId
 
+    -- ** DivisionSearchRequest
+    , DivisionSearchRequest
+    , divisionSearchRequest
+    , dsrContextParams
+
     -- ** AdministrativeBody
     , AdministrativeBody
     , administrativeBody
@@ -158,8 +170,14 @@ module Network.Google.CivicInfo
     , abElectionOfficials
     , abName
     , abElectionRulesURL
+    , abAddressLines
     , abVoterServices
     , abElectionRegistrationURL
+
+    -- ** RepresentativeInfoRequest
+    , RepresentativeInfoRequest
+    , representativeInfoRequest
+    , rirContextParams
 
     -- ** Contest
     , Contest
@@ -225,12 +243,23 @@ module Network.Google.CivicInfo
     , sName
     , sOfficial
 
+    -- ** DivisionRepresentativeInfoRequest
+    , DivisionRepresentativeInfoRequest
+    , divisionRepresentativeInfoRequest
+    , drirContextParams
+
     -- ** ElectoralDistrict
     , ElectoralDistrict
     , electoralDistrict
+    , edKgForeignKey
     , edName
     , edScope
     , edId
+
+    -- ** VoterInfoRequest
+    , VoterInfoRequest
+    , voterInfoRequest
+    , virContextParams
 
     -- ** SimpleAddressType
     , SimpleAddressType
@@ -242,6 +271,11 @@ module Network.Google.CivicInfo
     , satCity
     , satLine1
     , satLocationName
+
+    -- ** ContextParams
+    , ContextParams
+    , contextParams
+    , cpClientProFile
 
     -- ** AdministrationRegion
     , AdministrationRegion

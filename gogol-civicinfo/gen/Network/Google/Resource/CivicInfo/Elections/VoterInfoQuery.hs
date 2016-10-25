@@ -34,8 +34,10 @@ module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
     , ElectionsVoterInfoQuery
 
     -- * Request Lenses
+    , eviqReturnAllAvailableData
     , eviqElectionId
     , eviqAddress
+    , eviqPayload
     , eviqOfficialOnly
     ) where
 
@@ -49,39 +51,58 @@ type ElectionsVoterInfoQueryResource =
        "v2" :>
          "voterinfo" :>
            QueryParam "address" Text :>
-             QueryParam "electionId" (Textual Int64) :>
-               QueryParam "officialOnly" Bool :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] VoterInfoResponse
+             QueryParam "returnAllAvailableData" Bool :>
+               QueryParam "electionId" (Textual Int64) :>
+                 QueryParam "officialOnly" Bool :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] VoterInfoRequest :>
+                       Get '[JSON] VoterInfoResponse
 
 -- | Looks up information relevant to a voter based on the voter\'s
 -- registered address.
 --
 -- /See:/ 'electionsVoterInfoQuery' smart constructor.
 data ElectionsVoterInfoQuery = ElectionsVoterInfoQuery'
-    { _eviqElectionId   :: !(Textual Int64)
-    , _eviqAddress      :: !Text
-    , _eviqOfficialOnly :: !Bool
+    { _eviqReturnAllAvailableData :: !Bool
+    , _eviqElectionId             :: !(Textual Int64)
+    , _eviqAddress                :: !Text
+    , _eviqPayload                :: !VoterInfoRequest
+    , _eviqOfficialOnly           :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsVoterInfoQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'eviqReturnAllAvailableData'
+--
 -- * 'eviqElectionId'
 --
 -- * 'eviqAddress'
 --
+-- * 'eviqPayload'
+--
 -- * 'eviqOfficialOnly'
 electionsVoterInfoQuery
     :: Text -- ^ 'eviqAddress'
+    -> VoterInfoRequest -- ^ 'eviqPayload'
     -> ElectionsVoterInfoQuery
-electionsVoterInfoQuery pEviqAddress_ =
+electionsVoterInfoQuery pEviqAddress_ pEviqPayload_ =
     ElectionsVoterInfoQuery'
-    { _eviqElectionId = 0
+    { _eviqReturnAllAvailableData = False
+    , _eviqElectionId = 0
     , _eviqAddress = pEviqAddress_
+    , _eviqPayload = pEviqPayload_
     , _eviqOfficialOnly = False
     }
+
+-- | If set to true, the query will return the success codeand include any
+-- partial information when it is unable to determine a matching address or
+-- unable to determine the election for electionId=0 queries.
+eviqReturnAllAvailableData :: Lens' ElectionsVoterInfoQuery Bool
+eviqReturnAllAvailableData
+  = lens _eviqReturnAllAvailableData
+      (\ s a -> s{_eviqReturnAllAvailableData = a})
 
 -- | The unique ID of the election to look up. A list of election IDs can be
 -- obtained at
@@ -97,6 +118,11 @@ eviqAddress :: Lens' ElectionsVoterInfoQuery Text
 eviqAddress
   = lens _eviqAddress (\ s a -> s{_eviqAddress = a})
 
+-- | Multipart request metadata.
+eviqPayload :: Lens' ElectionsVoterInfoQuery VoterInfoRequest
+eviqPayload
+  = lens _eviqPayload (\ s a -> s{_eviqPayload = a})
+
 -- | If set to true, only data from official state sources will be returned.
 eviqOfficialOnly :: Lens' ElectionsVoterInfoQuery Bool
 eviqOfficialOnly
@@ -107,9 +133,12 @@ instance GoogleRequest ElectionsVoterInfoQuery where
         type Rs ElectionsVoterInfoQuery = VoterInfoResponse
         type Scopes ElectionsVoterInfoQuery = '[]
         requestClient ElectionsVoterInfoQuery'{..}
-          = go (Just _eviqAddress) (Just _eviqElectionId)
+          = go (Just _eviqAddress)
+              (Just _eviqReturnAllAvailableData)
+              (Just _eviqElectionId)
               (Just _eviqOfficialOnly)
               (Just AltJSON)
+              _eviqPayload
               civicInfoService
           where go
                   = buildClient

@@ -14,7 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    An API for accessing civic information.
+    Provides polling places, early vote locations, contest data, election
+    officials, and government representatives for U.S. residential
+    addresses.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

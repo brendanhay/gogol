@@ -36,6 +36,7 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAdd
     -- * Request Lenses
     , rribaRoles
     , rribaAddress
+    , rribaPayload
     , rribaIncludeOffices
     , rribaLevels
     ) where
@@ -59,7 +60,8 @@ type RepresentativesRepresentativeInfoByAddressResource
                    RepresentativesRepresentativeInfoByAddressLevels
                    :>
                    QueryParam "alt" AltJSON :>
-                     Get '[JSON] RepresentativeInfoResponse
+                     ReqBody '[JSON] RepresentativeInfoRequest :>
+                       Get '[JSON] RepresentativeInfoResponse
 
 -- | Looks up political geography and representative information for a single
 -- address.
@@ -68,6 +70,7 @@ type RepresentativesRepresentativeInfoByAddressResource
 data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeInfoByAddress'
     { _rribaRoles          :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
     , _rribaAddress        :: !(Maybe Text)
+    , _rribaPayload        :: !RepresentativeInfoRequest
     , _rribaIncludeOffices :: !Bool
     , _rribaLevels         :: !(Maybe [RepresentativesRepresentativeInfoByAddressLevels])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,15 +83,19 @@ data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeI
 --
 -- * 'rribaAddress'
 --
+-- * 'rribaPayload'
+--
 -- * 'rribaIncludeOffices'
 --
 -- * 'rribaLevels'
 representativesRepresentativeInfoByAddress
-    :: RepresentativesRepresentativeInfoByAddress
-representativesRepresentativeInfoByAddress =
+    :: RepresentativeInfoRequest -- ^ 'rribaPayload'
+    -> RepresentativesRepresentativeInfoByAddress
+representativesRepresentativeInfoByAddress pRribaPayload_ =
     RepresentativesRepresentativeInfoByAddress'
     { _rribaRoles = Nothing
     , _rribaAddress = Nothing
+    , _rribaPayload = pRribaPayload_
     , _rribaIncludeOffices = True
     , _rribaLevels = Nothing
     }
@@ -107,6 +114,11 @@ rribaRoles
 rribaAddress :: Lens' RepresentativesRepresentativeInfoByAddress (Maybe Text)
 rribaAddress
   = lens _rribaAddress (\ s a -> s{_rribaAddress = a})
+
+-- | Multipart request metadata.
+rribaPayload :: Lens' RepresentativesRepresentativeInfoByAddress RepresentativeInfoRequest
+rribaPayload
+  = lens _rribaPayload (\ s a -> s{_rribaPayload = a})
 
 -- | Whether to return information about offices and officials. If false,
 -- only the top-level district information will be returned.
@@ -137,6 +149,7 @@ instance GoogleRequest
               (Just _rribaIncludeOffices)
               (_rribaLevels ^. _Default)
               (Just AltJSON)
+              _rribaPayload
               civicInfoService
           where go
                   = buildClient
