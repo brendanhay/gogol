@@ -5,6 +5,12 @@
       "scopes": {
         "https://www.googleapis.com/auth/cloud-platform": {
           "description": "View and manage your data across Google Cloud Platform services"
+        },
+        "https://www.googleapis.com/auth/firebase": {
+          "description": "View and administer all your Firebase data and settings"
+        },
+        "https://www.googleapis.com/auth/firebase.readonly": {
+          "description": "View all your Firebase data and settings"
         }
       }
     }
@@ -42,7 +48,8 @@
               },
               "path": "v1/{+name}/rulesets",
               "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/firebase"
               ]
             },
             "get": {
@@ -67,7 +74,9 @@
               },
               "path": "v1/{+name}",
               "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/firebase",
+                "https://www.googleapis.com/auth/firebase.readonly"
               ]
             },
             "list": {
@@ -103,7 +112,9 @@
               },
               "path": "v1/{+name}/rulesets",
               "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/firebase",
+                "https://www.googleapis.com/auth/firebase.readonly"
               ]
             },
             "delete": {
@@ -128,7 +139,8 @@
               },
               "path": "v1/{+name}",
               "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/firebase"
               ]
             }
           }
@@ -151,7 +163,7 @@
               "httpMethod": "PUT",
               "parameters": {
                 "name": {
-                  "description": "Resource name for the `Release`.\n\n`Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2`\nwhich affords developers a great deal of flexibility in mapping the name\nto the style that best fits their existing development practices. For\nexample, a name could refer to an environment, an app, a version, or some\ncombination of three.\n\nIn the table below, for the project name `projects/foo`, the following\nrelative release paths show how flat and structured names might be chosen\nto match a desired development / deployment strategy.\n\nUse Case     | Flat Name           | Structured Name\n-------------|---------------------|----------------\nEnvironments | releases/qa         | releases/qa\nApps         | releases/app1_qa    | releases/app1/qa\nVersions     | releases/app1_v2_qa | releases/app1/v2/qa\n\nThe delimiter between the release name path elements can be almost anything\nand it should work equally well with the release name list filter, but in\nmany ways the structured paths provide a clearer picture of the\nrelationship between `Release` instances.\n\nFormat: `projects/{project_id}/releases/{release_id}`\n",
+                  "description": "Resource name for the `Release`.\n\n`Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2`\nwhich affords developers a great deal of flexibility in mapping the name\nto the style that best fits their existing development practices. For\nexample, a name could refer to an environment, an app, a version, or some\ncombination of three.\n\nIn the table below, for the project name `projects/foo`, the following\nrelative release paths show how flat and structured names might be chosen\nto match a desired development / deployment strategy.\n\nUse Case     | Flat Name           | Structured Name\n-------------|---------------------|----------------\nEnvironments | releases/qa         | releases/qa\nApps         | releases/app1_qa    | releases/app1/qa\nVersions     | releases/app1_v2_qa | releases/app1/v2/qa\n\nThe delimiter between the release name path elements can be almost anything\nand it should work equally well with the release name list filter, but in\nmany ways the structured paths provide a clearer picture of the\nrelationship between `Release` instances.\n\nFormat: `projects/{project_id}/releases/{release_id}`",
                   "required": true,
                   "pattern": "^projects/[^/]*/releases/.*$",
                   "location": "path",
@@ -160,7 +172,8 @@
               },
               "path": "v1/{+name}",
               "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/firebase"
               ]
             },
             "create": {
@@ -188,7 +201,8 @@
               },
               "path": "v1/{+name}/releases",
               "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/firebase"
               ]
             },
             "get": {
@@ -199,7 +213,7 @@
               "parameterOrder": [
                 "name"
               ],
-              "description": "Get a `Release` by name.\n",
+              "description": "Get a `Release` by name.",
               "flatPath": "v1/projects/{projectsId}/releases/{releasesId}",
               "httpMethod": "GET",
               "parameters": {
@@ -213,7 +227,9 @@
               },
               "path": "v1/{+name}",
               "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/firebase",
+                "https://www.googleapis.com/auth/firebase.readonly"
               ]
             },
             "list": {
@@ -254,7 +270,9 @@
               },
               "path": "v1/{+name}/releases",
               "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/firebase",
+                "https://www.googleapis.com/auth/firebase.readonly"
               ]
             },
             "delete": {
@@ -279,7 +297,8 @@
               },
               "path": "v1/{+name}",
               "scopes": [
-                "https://www.googleapis.com/auth/cloud-platform"
+                "https://www.googleapis.com/auth/cloud-platform",
+                "https://www.googleapis.com/auth/firebase"
               ]
             }
           }
@@ -311,7 +330,9 @@
           },
           "path": "v1/{+name}:test",
           "scopes": [
-            "https://www.googleapis.com/auth/cloud-platform"
+            "https://www.googleapis.com/auth/cloud-platform",
+            "https://www.googleapis.com/auth/firebase",
+            "https://www.googleapis.com/auth/firebase.readonly"
           ]
         }
       }
@@ -333,7 +354,7 @@
           "format": "google-datetime"
         },
         "name": {
-          "description": "Resource name for the `Release`.\n\n`Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2`\nwhich affords developers a great deal of flexibility in mapping the name\nto the style that best fits their existing development practices. For\nexample, a name could refer to an environment, an app, a version, or some\ncombination of three.\n\nIn the table below, for the project name `projects/foo`, the following\nrelative release paths show how flat and structured names might be chosen\nto match a desired development / deployment strategy.\n\nUse Case     | Flat Name           | Structured Name\n-------------|---------------------|----------------\nEnvironments | releases/qa         | releases/qa\nApps         | releases/app1_qa    | releases/app1/qa\nVersions     | releases/app1_v2_qa | releases/app1/v2/qa\n\nThe delimiter between the release name path elements can be almost anything\nand it should work equally well with the release name list filter, but in\nmany ways the structured paths provide a clearer picture of the\nrelationship between `Release` instances.\n\nFormat: `projects/{project_id}/releases/{release_id}`\n",
+          "description": "Resource name for the `Release`.\n\n`Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2`\nwhich affords developers a great deal of flexibility in mapping the name\nto the style that best fits their existing development practices. For\nexample, a name could refer to an environment, an app, a version, or some\ncombination of three.\n\nIn the table below, for the project name `projects/foo`, the following\nrelative release paths show how flat and structured names might be chosen\nto match a desired development / deployment strategy.\n\nUse Case     | Flat Name           | Structured Name\n-------------|---------------------|----------------\nEnvironments | releases/qa         | releases/qa\nApps         | releases/app1_qa    | releases/app1/qa\nVersions     | releases/app1_v2_qa | releases/app1/v2/qa\n\nThe delimiter between the release name path elements can be almost anything\nand it should work equally well with the release name list filter, but in\nmany ways the structured paths provide a clearer picture of the\nrelationship between `Release` instances.\n\nFormat: `projects/{project_id}/releases/{release_id}`",
           "type": "string"
         },
         "rulesetName": {
@@ -517,7 +538,7 @@
       "id": "Issue"
     }
   },
-  "revision": "20160513",
+  "revision": "20160930",
   "basePath": "",
   "icons": {
     "x32": "http://www.google.com/images/icons/product/search-32.gif",
@@ -616,7 +637,7 @@
       "location": "query"
     }
   },
-  "documentationLink": "https://firebase.google.com/docs/storage/security/start",
+  "documentationLink": "https://firebase.google.com/docs/storage/security",
   "ownerDomain": "google.com",
   "batchPath": "batch",
   "servicePath": "",

@@ -35,7 +35,7 @@
 -- imageName.endsWith(\'.jpg\')) &&
 -- resource.mimeType.startsWith(\'image\/\') } }
 --
--- /See:/ <https://firebase.google.com/docs/storage/security/start Firebase Rules API Reference> for @firebaserules.projects.test@.
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.test@.
 module Network.Google.Resource.FirebaseRules.Projects.Test
     (
     -- * REST Resource
@@ -190,7 +190,9 @@ ptCallback
 instance GoogleRequest ProjectsTest where
         type Rs ProjectsTest = TestRulesetResponse
         type Scopes ProjectsTest =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase",
+               "https://www.googleapis.com/auth/firebase.readonly"]
         requestClient ProjectsTest'{..}
           = go _ptName _ptXgafv _ptUploadProtocol (Just _ptPp)
               _ptAccessToken

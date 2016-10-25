@@ -24,7 +24,7 @@
 -- honored. \`Release\` rename is not supported. To create a \`Release\`
 -- use the CreateRelease method instead.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security/start Firebase Rules API Reference> for @firebaserules.projects.releases.update@.
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.update@.
 module Network.Google.Resource.FirebaseRules.Projects.Releases.Update
     (
     -- * REST Resource
@@ -184,7 +184,8 @@ pruCallback
 instance GoogleRequest ProjectsReleasesUpdate where
         type Rs ProjectsReleasesUpdate = Release
         type Scopes ProjectsReleasesUpdate =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase"]
         requestClient ProjectsReleasesUpdate'{..}
           = go _pruName _pruXgafv _pruUploadProtocol
               (Just _pruPp)
