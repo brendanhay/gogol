@@ -14,10 +14,12 @@ module Network.Google.Data.Time
     ( Time'
     , Date'
     , DateTime'
+    , Duration
 
     , _Time
     , _Date
     , _DateTime
+    , _Duration
     ) where
 
 import           Control.Lens
