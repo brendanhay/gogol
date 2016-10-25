@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.Disks.List
     , DisksList
 
     -- * Request Lenses
+    , dlOrderBy
     , dlProject
     , dlZone
     , dlFilter
@@ -54,17 +55,19 @@ type DisksListResource =
              "zones" :>
                Capture "zone" Text :>
                  "disks" :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] DiskList
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] DiskList
 
 -- | Retrieves a list of persistent disks contained within the specified
 -- zone.
 --
 -- /See:/ 'disksList' smart constructor.
 data DisksList = DisksList'
-    { _dlProject    :: !Text
+    { _dlOrderBy    :: !(Maybe Text)
+    , _dlProject    :: !Text
     , _dlZone       :: !Text
     , _dlFilter     :: !(Maybe Text)
     , _dlPageToken  :: !(Maybe Text)
@@ -74,6 +77,8 @@ data DisksList = DisksList'
 -- | Creates a value of 'DisksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlOrderBy'
 --
 -- * 'dlProject'
 --
@@ -90,12 +95,25 @@ disksList
     -> DisksList
 disksList pDlProject_ pDlZone_ =
     DisksList'
-    { _dlProject = pDlProject_
+    { _dlOrderBy = Nothing
+    , _dlProject = pDlProject_
     , _dlZone = pDlZone_
     , _dlFilter = Nothing
     , _dlPageToken = Nothing
     , _dlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+dlOrderBy :: Lens' DisksList (Maybe Text)
+dlOrderBy
+  = lens _dlOrderBy (\ s a -> s{_dlOrderBy = a})
 
 -- | Project ID for this request.
 dlProject :: Lens' DisksList Text
@@ -117,16 +135,15 @@ dlZone = lens _dlZone (\ s a -> s{_dlZone = a})
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 dlFilter :: Lens' DisksList (Maybe Text)
 dlFilter = lens _dlFilter (\ s a -> s{_dlFilter = a})
 
@@ -152,7 +169,8 @@ instance GoogleRequest DisksList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient DisksList'{..}
-          = go _dlProject _dlZone _dlFilter _dlPageToken
+          = go _dlProject _dlZone _dlOrderBy _dlFilter
+              _dlPageToken
               (Just _dlMaxResults)
               (Just AltJSON)
               computeService

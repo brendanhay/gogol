@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.ForwardingRules.List
     , ForwardingRulesList
 
     -- * Request Lenses
+    , frlOrderBy
     , frlProject
     , frlFilter
     , frlRegion
@@ -54,18 +55,20 @@ type ForwardingRulesListResource =
              "regions" :>
                Capture "region" Text :>
                  "forwardingRules" :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] ForwardingRuleList
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ForwardingRuleList
 
 -- | Retrieves a list of ForwardingRule resources available to the specified
 -- project and region.
 --
 -- /See:/ 'forwardingRulesList' smart constructor.
 data ForwardingRulesList = ForwardingRulesList'
-    { _frlProject    :: !Text
+    { _frlOrderBy    :: !(Maybe Text)
+    , _frlProject    :: !Text
     , _frlFilter     :: !(Maybe Text)
     , _frlRegion     :: !Text
     , _frlPageToken  :: !(Maybe Text)
@@ -75,6 +78,8 @@ data ForwardingRulesList = ForwardingRulesList'
 -- | Creates a value of 'ForwardingRulesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'frlOrderBy'
 --
 -- * 'frlProject'
 --
@@ -91,12 +96,25 @@ forwardingRulesList
     -> ForwardingRulesList
 forwardingRulesList pFrlProject_ pFrlRegion_ =
     ForwardingRulesList'
-    { _frlProject = pFrlProject_
+    { _frlOrderBy = Nothing
+    , _frlProject = pFrlProject_
     , _frlFilter = Nothing
     , _frlRegion = pFrlRegion_
     , _frlPageToken = Nothing
     , _frlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+frlOrderBy :: Lens' ForwardingRulesList (Maybe Text)
+frlOrderBy
+  = lens _frlOrderBy (\ s a -> s{_frlOrderBy = a})
 
 -- | Project ID for this request.
 frlProject :: Lens' ForwardingRulesList Text
@@ -114,16 +132,15 @@ frlProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 frlFilter :: Lens' ForwardingRulesList (Maybe Text)
 frlFilter
   = lens _frlFilter (\ s a -> s{_frlFilter = a})
@@ -156,7 +173,8 @@ instance GoogleRequest ForwardingRulesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ForwardingRulesList'{..}
-          = go _frlProject _frlRegion _frlFilter _frlPageToken
+          = go _frlProject _frlRegion _frlOrderBy _frlFilter
+              _frlPageToken
               (Just _frlMaxResults)
               (Just AltJSON)
               computeService

@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.Disks.AggregatedList
     , DisksAggregatedList
 
     -- * Request Lenses
+    , dalOrderBy
     , dalProject
     , dalFilter
     , dalPageToken
@@ -51,17 +52,19 @@ type DisksAggregatedListResource =
            Capture "project" Text :>
              "aggregated" :>
                "disks" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] DiskAggregatedList
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] DiskAggregatedList
 
 -- | Retrieves an aggregated list of persistent disks.
 --
 -- /See:/ 'disksAggregatedList' smart constructor.
 data DisksAggregatedList = DisksAggregatedList'
-    { _dalProject    :: !Text
+    { _dalOrderBy    :: !(Maybe Text)
+    , _dalProject    :: !Text
     , _dalFilter     :: !(Maybe Text)
     , _dalPageToken  :: !(Maybe Text)
     , _dalMaxResults :: !(Textual Word32)
@@ -70,6 +73,8 @@ data DisksAggregatedList = DisksAggregatedList'
 -- | Creates a value of 'DisksAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dalOrderBy'
 --
 -- * 'dalProject'
 --
@@ -83,11 +88,24 @@ disksAggregatedList
     -> DisksAggregatedList
 disksAggregatedList pDalProject_ =
     DisksAggregatedList'
-    { _dalProject = pDalProject_
+    { _dalOrderBy = Nothing
+    , _dalProject = pDalProject_
     , _dalFilter = Nothing
     , _dalPageToken = Nothing
     , _dalMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+dalOrderBy :: Lens' DisksAggregatedList (Maybe Text)
+dalOrderBy
+  = lens _dalOrderBy (\ s a -> s{_dalOrderBy = a})
 
 -- | Project ID for this request.
 dalProject :: Lens' DisksAggregatedList Text
@@ -105,16 +123,15 @@ dalProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 dalFilter :: Lens' DisksAggregatedList (Maybe Text)
 dalFilter
   = lens _dalFilter (\ s a -> s{_dalFilter = a})
@@ -142,7 +159,7 @@ instance GoogleRequest DisksAggregatedList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient DisksAggregatedList'{..}
-          = go _dalProject _dalFilter _dalPageToken
+          = go _dalProject _dalOrderBy _dalFilter _dalPageToken
               (Just _dalMaxResults)
               (Just AltJSON)
               computeService

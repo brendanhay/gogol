@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.ForwardingRules.AggregatedList
     , ForwardingRulesAggregatedList
 
     -- * Request Lenses
+    , fralOrderBy
     , fralProject
     , fralFilter
     , fralPageToken
@@ -51,17 +52,19 @@ type ForwardingRulesAggregatedListResource =
            Capture "project" Text :>
              "aggregated" :>
                "forwardingRules" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] ForwardingRuleAggregatedList
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ForwardingRuleAggregatedList
 
 -- | Retrieves an aggregated list of forwarding rules.
 --
 -- /See:/ 'forwardingRulesAggregatedList' smart constructor.
 data ForwardingRulesAggregatedList = ForwardingRulesAggregatedList'
-    { _fralProject    :: !Text
+    { _fralOrderBy    :: !(Maybe Text)
+    , _fralProject    :: !Text
     , _fralFilter     :: !(Maybe Text)
     , _fralPageToken  :: !(Maybe Text)
     , _fralMaxResults :: !(Textual Word32)
@@ -70,6 +73,8 @@ data ForwardingRulesAggregatedList = ForwardingRulesAggregatedList'
 -- | Creates a value of 'ForwardingRulesAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fralOrderBy'
 --
 -- * 'fralProject'
 --
@@ -83,11 +88,24 @@ forwardingRulesAggregatedList
     -> ForwardingRulesAggregatedList
 forwardingRulesAggregatedList pFralProject_ =
     ForwardingRulesAggregatedList'
-    { _fralProject = pFralProject_
+    { _fralOrderBy = Nothing
+    , _fralProject = pFralProject_
     , _fralFilter = Nothing
     , _fralPageToken = Nothing
     , _fralMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+fralOrderBy :: Lens' ForwardingRulesAggregatedList (Maybe Text)
+fralOrderBy
+  = lens _fralOrderBy (\ s a -> s{_fralOrderBy = a})
 
 -- | Project ID for this request.
 fralProject :: Lens' ForwardingRulesAggregatedList Text
@@ -105,16 +123,15 @@ fralProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 fralFilter :: Lens' ForwardingRulesAggregatedList (Maybe Text)
 fralFilter
   = lens _fralFilter (\ s a -> s{_fralFilter = a})
@@ -145,7 +162,8 @@ instance GoogleRequest ForwardingRulesAggregatedList
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ForwardingRulesAggregatedList'{..}
-          = go _fralProject _fralFilter _fralPageToken
+          = go _fralProject _fralOrderBy _fralFilter
+              _fralPageToken
               (Just _fralMaxResults)
               (Just AltJSON)
               computeService

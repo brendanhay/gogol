@@ -23,10 +23,9 @@
 -- Retrieves the list of private images available to the specified project.
 -- Private images are images you create that belong to your project. This
 -- method does not get any images that belong to other projects, including
--- publicly-available images, like Debian 7. If you want to get a list of
+-- publicly-available images, like Debian 8. If you want to get a list of
 -- publicly-available images, use this method to make a request to the
--- respective image project, such as debian-cloud or windows-cloud. See
--- Accessing images for more information.
+-- respective image project, such as debian-cloud or windows-cloud.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.list@.
 module Network.Google.Resource.Compute.Images.List
@@ -39,6 +38,7 @@ module Network.Google.Resource.Compute.Images.List
     , ImagesList
 
     -- * Request Lenses
+    , illOrderBy
     , illProject
     , illFilter
     , illPageToken
@@ -57,22 +57,23 @@ type ImagesListResource =
            Capture "project" Text :>
              "global" :>
                "images" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] ImageList
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] ImageList
 
 -- | Retrieves the list of private images available to the specified project.
 -- Private images are images you create that belong to your project. This
 -- method does not get any images that belong to other projects, including
--- publicly-available images, like Debian 7. If you want to get a list of
+-- publicly-available images, like Debian 8. If you want to get a list of
 -- publicly-available images, use this method to make a request to the
--- respective image project, such as debian-cloud or windows-cloud. See
--- Accessing images for more information.
+-- respective image project, such as debian-cloud or windows-cloud.
 --
 -- /See:/ 'imagesList' smart constructor.
 data ImagesList = ImagesList'
-    { _illProject    :: !Text
+    { _illOrderBy    :: !(Maybe Text)
+    , _illProject    :: !Text
     , _illFilter     :: !(Maybe Text)
     , _illPageToken  :: !(Maybe Text)
     , _illMaxResults :: !(Textual Word32)
@@ -81,6 +82,8 @@ data ImagesList = ImagesList'
 -- | Creates a value of 'ImagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'illOrderBy'
 --
 -- * 'illProject'
 --
@@ -94,11 +97,24 @@ imagesList
     -> ImagesList
 imagesList pIllProject_ =
     ImagesList'
-    { _illProject = pIllProject_
+    { _illOrderBy = Nothing
+    , _illProject = pIllProject_
     , _illFilter = Nothing
     , _illPageToken = Nothing
     , _illMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+illOrderBy :: Lens' ImagesList (Maybe Text)
+illOrderBy
+  = lens _illOrderBy (\ s a -> s{_illOrderBy = a})
 
 -- | Project ID for this request.
 illProject :: Lens' ImagesList Text
@@ -116,16 +132,15 @@ illProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 illFilter :: Lens' ImagesList (Maybe Text)
 illFilter
   = lens _illFilter (\ s a -> s{_illFilter = a})
@@ -153,7 +168,7 @@ instance GoogleRequest ImagesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ImagesList'{..}
-          = go _illProject _illFilter _illPageToken
+          = go _illProject _illOrderBy _illFilter _illPageToken
               (Just _illMaxResults)
               (Just AltJSON)
               computeService

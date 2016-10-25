@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.InstanceTemplates.List
     , InstanceTemplatesList
 
     -- * Request Lenses
+    , itlOrderBy
     , itlProject
     , itlFilter
     , itlPageToken
@@ -52,18 +53,20 @@ type InstanceTemplatesListResource =
            Capture "project" Text :>
              "global" :>
                "instanceTemplates" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] InstanceTemplateList
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] InstanceTemplateList
 
 -- | Retrieves a list of instance templates that are contained within the
 -- specified project and zone.
 --
 -- /See:/ 'instanceTemplatesList' smart constructor.
 data InstanceTemplatesList = InstanceTemplatesList'
-    { _itlProject    :: !Text
+    { _itlOrderBy    :: !(Maybe Text)
+    , _itlProject    :: !Text
     , _itlFilter     :: !(Maybe Text)
     , _itlPageToken  :: !(Maybe Text)
     , _itlMaxResults :: !(Textual Word32)
@@ -72,6 +75,8 @@ data InstanceTemplatesList = InstanceTemplatesList'
 -- | Creates a value of 'InstanceTemplatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itlOrderBy'
 --
 -- * 'itlProject'
 --
@@ -85,11 +90,24 @@ instanceTemplatesList
     -> InstanceTemplatesList
 instanceTemplatesList pItlProject_ =
     InstanceTemplatesList'
-    { _itlProject = pItlProject_
+    { _itlOrderBy = Nothing
+    , _itlProject = pItlProject_
     , _itlFilter = Nothing
     , _itlPageToken = Nothing
     , _itlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+itlOrderBy :: Lens' InstanceTemplatesList (Maybe Text)
+itlOrderBy
+  = lens _itlOrderBy (\ s a -> s{_itlOrderBy = a})
 
 -- | Project ID for this request.
 itlProject :: Lens' InstanceTemplatesList Text
@@ -107,16 +125,15 @@ itlProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 itlFilter :: Lens' InstanceTemplatesList (Maybe Text)
 itlFilter
   = lens _itlFilter (\ s a -> s{_itlFilter = a})
@@ -144,7 +161,7 @@ instance GoogleRequest InstanceTemplatesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceTemplatesList'{..}
-          = go _itlProject _itlFilter _itlPageToken
+          = go _itlProject _itlOrderBy _itlFilter _itlPageToken
               (Just _itlMaxResults)
               (Just AltJSON)
               computeService

@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.TargetPools.List
     , TargetPoolsList
 
     -- * Request Lenses
+    , tplOrderBy
     , tplProject
     , tplFilter
     , tplRegion
@@ -54,18 +55,20 @@ type TargetPoolsListResource =
              "regions" :>
                Capture "region" Text :>
                  "targetPools" :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] TargetPoolList
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] TargetPoolList
 
 -- | Retrieves a list of target pools available to the specified project and
 -- region.
 --
 -- /See:/ 'targetPoolsList' smart constructor.
 data TargetPoolsList = TargetPoolsList'
-    { _tplProject    :: !Text
+    { _tplOrderBy    :: !(Maybe Text)
+    , _tplProject    :: !Text
     , _tplFilter     :: !(Maybe Text)
     , _tplRegion     :: !Text
     , _tplPageToken  :: !(Maybe Text)
@@ -75,6 +78,8 @@ data TargetPoolsList = TargetPoolsList'
 -- | Creates a value of 'TargetPoolsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tplOrderBy'
 --
 -- * 'tplProject'
 --
@@ -91,12 +96,25 @@ targetPoolsList
     -> TargetPoolsList
 targetPoolsList pTplProject_ pTplRegion_ =
     TargetPoolsList'
-    { _tplProject = pTplProject_
+    { _tplOrderBy = Nothing
+    , _tplProject = pTplProject_
     , _tplFilter = Nothing
     , _tplRegion = pTplRegion_
     , _tplPageToken = Nothing
     , _tplMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+tplOrderBy :: Lens' TargetPoolsList (Maybe Text)
+tplOrderBy
+  = lens _tplOrderBy (\ s a -> s{_tplOrderBy = a})
 
 -- | Project ID for this request.
 tplProject :: Lens' TargetPoolsList Text
@@ -114,16 +132,15 @@ tplProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 tplFilter :: Lens' TargetPoolsList (Maybe Text)
 tplFilter
   = lens _tplFilter (\ s a -> s{_tplFilter = a})
@@ -156,7 +173,8 @@ instance GoogleRequest TargetPoolsList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetPoolsList'{..}
-          = go _tplProject _tplRegion _tplFilter _tplPageToken
+          = go _tplProject _tplRegion _tplOrderBy _tplFilter
+              _tplPageToken
               (Just _tplMaxResults)
               (Just AltJSON)
               computeService

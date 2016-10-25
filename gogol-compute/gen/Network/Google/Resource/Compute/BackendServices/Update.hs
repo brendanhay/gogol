@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the entire content of the BackendService resource. There are
--- several restrictions and guidelines to keep in mind when updating a
--- backend service. Read Restrictions and Guidelines for more information.
+-- Updates the specified BackendService resource with the data included in
+-- the request. There are several restrictions and guidelines to keep in
+-- mind when updating a backend service. Read Restrictions and Guidelines
+-- for more information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.update@.
 module Network.Google.Resource.Compute.BackendServices.Update
@@ -57,9 +58,10 @@ type BackendServicesUpdateResource =
                      ReqBody '[JSON] BackendService :>
                        Put '[JSON] Operation
 
--- | Updates the entire content of the BackendService resource. There are
--- several restrictions and guidelines to keep in mind when updating a
--- backend service. Read Restrictions and Guidelines for more information.
+-- | Updates the specified BackendService resource with the data included in
+-- the request. There are several restrictions and guidelines to keep in
+-- mind when updating a backend service. Read Restrictions and Guidelines
+-- for more information.
 --
 -- /See:/ 'backendServicesUpdate' smart constructor.
 data BackendServicesUpdate = BackendServicesUpdate'

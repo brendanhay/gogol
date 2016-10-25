@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.Networks.List
     , NetworksList
 
     -- * Request Lenses
+    , nlOrderBy
     , nlProject
     , nlFilter
     , nlPageToken
@@ -51,16 +52,18 @@ type NetworksListResource =
            Capture "project" Text :>
              "global" :>
                "networks" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] NetworkList
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] NetworkList
 
 -- | Retrieves the list of networks available to the specified project.
 --
 -- /See:/ 'networksList' smart constructor.
 data NetworksList = NetworksList'
-    { _nlProject    :: !Text
+    { _nlOrderBy    :: !(Maybe Text)
+    , _nlProject    :: !Text
     , _nlFilter     :: !(Maybe Text)
     , _nlPageToken  :: !(Maybe Text)
     , _nlMaxResults :: !(Textual Word32)
@@ -69,6 +72,8 @@ data NetworksList = NetworksList'
 -- | Creates a value of 'NetworksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nlOrderBy'
 --
 -- * 'nlProject'
 --
@@ -82,11 +87,24 @@ networksList
     -> NetworksList
 networksList pNlProject_ =
     NetworksList'
-    { _nlProject = pNlProject_
+    { _nlOrderBy = Nothing
+    , _nlProject = pNlProject_
     , _nlFilter = Nothing
     , _nlPageToken = Nothing
     , _nlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+nlOrderBy :: Lens' NetworksList (Maybe Text)
+nlOrderBy
+  = lens _nlOrderBy (\ s a -> s{_nlOrderBy = a})
 
 -- | Project ID for this request.
 nlProject :: Lens' NetworksList Text
@@ -104,16 +122,15 @@ nlProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 nlFilter :: Lens' NetworksList (Maybe Text)
 nlFilter = lens _nlFilter (\ s a -> s{_nlFilter = a})
 
@@ -139,7 +156,7 @@ instance GoogleRequest NetworksList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient NetworksList'{..}
-          = go _nlProject _nlFilter _nlPageToken
+          = go _nlProject _nlOrderBy _nlFilter _nlPageToken
               (Just _nlMaxResults)
               (Just AltJSON)
               computeService

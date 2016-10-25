@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.VPNTunnels.List
     , VPNTunnelsList
 
     -- * Request Lenses
+    , vtlOrderBy
     , vtlProject
     , vtlFilter
     , vtlRegion
@@ -54,17 +55,19 @@ type VPNTunnelsListResource =
              "regions" :>
                Capture "region" Text :>
                  "vpnTunnels" :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnelList
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnelList
 
 -- | Retrieves a list of VpnTunnel resources contained in the specified
 -- project and region.
 --
 -- /See:/ 'vpnTunnelsList' smart constructor.
 data VPNTunnelsList = VPNTunnelsList'
-    { _vtlProject    :: !Text
+    { _vtlOrderBy    :: !(Maybe Text)
+    , _vtlProject    :: !Text
     , _vtlFilter     :: !(Maybe Text)
     , _vtlRegion     :: !Text
     , _vtlPageToken  :: !(Maybe Text)
@@ -74,6 +77,8 @@ data VPNTunnelsList = VPNTunnelsList'
 -- | Creates a value of 'VPNTunnelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vtlOrderBy'
 --
 -- * 'vtlProject'
 --
@@ -90,12 +95,25 @@ vpnTunnelsList
     -> VPNTunnelsList
 vpnTunnelsList pVtlProject_ pVtlRegion_ =
     VPNTunnelsList'
-    { _vtlProject = pVtlProject_
+    { _vtlOrderBy = Nothing
+    , _vtlProject = pVtlProject_
     , _vtlFilter = Nothing
     , _vtlRegion = pVtlRegion_
     , _vtlPageToken = Nothing
     , _vtlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+vtlOrderBy :: Lens' VPNTunnelsList (Maybe Text)
+vtlOrderBy
+  = lens _vtlOrderBy (\ s a -> s{_vtlOrderBy = a})
 
 -- | Project ID for this request.
 vtlProject :: Lens' VPNTunnelsList Text
@@ -113,16 +131,15 @@ vtlProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 vtlFilter :: Lens' VPNTunnelsList (Maybe Text)
 vtlFilter
   = lens _vtlFilter (\ s a -> s{_vtlFilter = a})
@@ -155,7 +172,8 @@ instance GoogleRequest VPNTunnelsList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient VPNTunnelsList'{..}
-          = go _vtlProject _vtlRegion _vtlFilter _vtlPageToken
+          = go _vtlProject _vtlRegion _vtlOrderBy _vtlFilter
+              _vtlPageToken
               (Just _vtlMaxResults)
               (Just AltJSON)
               computeService

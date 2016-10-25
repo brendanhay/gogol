@@ -48,9 +48,9 @@ instance FromJSON SchedulingOnHostMaintenance where
 instance ToJSON SchedulingOnHostMaintenance where
     toJSON = toJSONText
 
--- | Defines how target utilization value is expressed for a Cloud Monitoring
--- metric. Either GAUGE, DELTA_PER_SECOND, or DELTA_PER_MINUTE. If not
--- specified, the default is GAUGE.
+-- | Defines how target utilization value is expressed for a Stackdriver
+-- Monitoring metric. Either GAUGE, DELTA_PER_SECOND, or DELTA_PER_MINUTE.
+-- If not specified, the default is GAUGE.
 data AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
     = DeltaPerMinute
       -- ^ @DELTA_PER_MINUTE@
@@ -90,6 +90,8 @@ data OperationWarningsItemCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | FieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | InjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | NextHopAddressNotAssigned
@@ -123,6 +125,7 @@ instance FromHttpApiData OperationWarningsItemCode where
         "CLEANUP_FAILED" -> Right CleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right DeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right DiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right FieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right InjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NextHopCannotIPForward
@@ -142,6 +145,7 @@ instance ToHttpApiData OperationWarningsItemCode where
         CleanupFailed -> "CLEANUP_FAILED"
         DeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        FieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         InjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         NextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         NextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -162,12 +166,18 @@ instance ToJSON OperationWarningsItemCode where
     toJSON = toJSONText
 
 -- | The protocol this BackendService uses to communicate with backends.
--- Possible values are HTTP, HTTPS, HTTP2, TCP and SSL.
+-- Possible values are HTTP, HTTPS, HTTP2, TCP and SSL. The default is
+-- HTTP. For internal load balancing, the possible values are TCP and UDP,
+-- and the default is TCP.
 data BackendServiceProtocol
     = HTTP
       -- ^ @HTTP@
     | HTTPS
       -- ^ @HTTPS@
+    | SSL
+      -- ^ @SSL@
+    | TCP
+      -- ^ @TCP@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BackendServiceProtocol
@@ -176,12 +186,16 @@ instance FromHttpApiData BackendServiceProtocol where
     parseQueryParam = \case
         "HTTP" -> Right HTTP
         "HTTPS" -> Right HTTPS
+        "SSL" -> Right SSL
+        "TCP" -> Right TCP
         x -> Left ("Unable to parse BackendServiceProtocol from: " <> x)
 
 instance ToHttpApiData BackendServiceProtocol where
     toQueryParam = \case
         HTTP -> "HTTP"
         HTTPS -> "HTTPS"
+        SSL -> "SSL"
+        TCP -> "TCP"
 
 instance FromJSON BackendServiceProtocol where
     parseJSON = parseJSONText "BackendServiceProtocol"
@@ -217,6 +231,34 @@ instance FromJSON AttachedDiskType where
 instance ToJSON AttachedDiskType where
     toJSON = toJSONText
 
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+data TargetSSLProxyProxyHeader
+    = None
+      -- ^ @NONE@
+    | ProxyV1
+      -- ^ @PROXY_V1@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TargetSSLProxyProxyHeader
+
+instance FromHttpApiData TargetSSLProxyProxyHeader where
+    parseQueryParam = \case
+        "NONE" -> Right None
+        "PROXY_V1" -> Right ProxyV1
+        x -> Left ("Unable to parse TargetSSLProxyProxyHeader from: " <> x)
+
+instance ToHttpApiData TargetSSLProxyProxyHeader where
+    toQueryParam = \case
+        None -> "NONE"
+        ProxyV1 -> "PROXY_V1"
+
+instance FromJSON TargetSSLProxyProxyHeader where
+    parseJSON = parseJSONText "TargetSSLProxyProxyHeader"
+
+instance ToJSON TargetSSLProxyProxyHeader where
+    toJSON = toJSONText
+
 -- | The type of the image used to create this disk. The default and only
 -- value is RAW
 data ImageSourceType
@@ -241,6 +283,45 @@ instance FromJSON ImageSourceType where
 instance ToJSON ImageSourceType where
     toJSON = toJSONText
 
+-- | Type of session affinity to use. The default is NONE. When the load
+-- balancing scheme is EXTERNAL, can be NONE, CLIENT_IP, or
+-- GENERATED_COOKIE. When the load balancing scheme is INTERNAL, can be
+-- NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO. When the
+-- protocol is UDP, this field is not used.
+data BackendServiceSessionAffinity
+    = BSSAClientIP
+      -- ^ @CLIENT_IP@
+    | BSSAClientIPProto
+      -- ^ @CLIENT_IP_PROTO@
+    | BSSAGeneratedCookie
+      -- ^ @GENERATED_COOKIE@
+    | BSSANone
+      -- ^ @NONE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BackendServiceSessionAffinity
+
+instance FromHttpApiData BackendServiceSessionAffinity where
+    parseQueryParam = \case
+        "CLIENT_IP" -> Right BSSAClientIP
+        "CLIENT_IP_PROTO" -> Right BSSAClientIPProto
+        "GENERATED_COOKIE" -> Right BSSAGeneratedCookie
+        "NONE" -> Right BSSANone
+        x -> Left ("Unable to parse BackendServiceSessionAffinity from: " <> x)
+
+instance ToHttpApiData BackendServiceSessionAffinity where
+    toQueryParam = \case
+        BSSAClientIP -> "CLIENT_IP"
+        BSSAClientIPProto -> "CLIENT_IP_PROTO"
+        BSSAGeneratedCookie -> "GENERATED_COOKIE"
+        BSSANone -> "NONE"
+
+instance FromJSON BackendServiceSessionAffinity where
+    parseJSON = parseJSONText "BackendServiceSessionAffinity"
+
+instance ToJSON BackendServiceSessionAffinity where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data ForwardingRulesScopedListWarningCode
@@ -250,6 +331,8 @@ data ForwardingRulesScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | FRSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | FRSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | FRSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | FRSLWCNextHopAddressNotAssigned
@@ -283,6 +366,7 @@ instance FromHttpApiData ForwardingRulesScopedListWarningCode where
         "CLEANUP_FAILED" -> Right FRSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right FRSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right FRSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right FRSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right FRSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right FRSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right FRSLWCNextHopCannotIPForward
@@ -302,6 +386,7 @@ instance ToHttpApiData ForwardingRulesScopedListWarningCode where
         FRSLWCCleanupFailed -> "CLEANUP_FAILED"
         FRSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         FRSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        FRSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         FRSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         FRSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         FRSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -330,6 +415,8 @@ data OperationsScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | OSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | OSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | OSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | OSLWCNextHopAddressNotAssigned
@@ -363,6 +450,7 @@ instance FromHttpApiData OperationsScopedListWarningCode where
         "CLEANUP_FAILED" -> Right OSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right OSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right OSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right OSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right OSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right OSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right OSLWCNextHopCannotIPForward
@@ -382,6 +470,7 @@ instance ToHttpApiData OperationsScopedListWarningCode where
         OSLWCCleanupFailed -> "CLEANUP_FAILED"
         OSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         OSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        OSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         OSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         OSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         OSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -410,6 +499,8 @@ data DisksScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | DSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | DSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | DSLWCNextHopAddressNotAssigned
@@ -443,6 +534,7 @@ instance FromHttpApiData DisksScopedListWarningCode where
         "CLEANUP_FAILED" -> Right DSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right DSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right DSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right DSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right DSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right DSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right DSLWCNextHopCannotIPForward
@@ -462,6 +554,7 @@ instance ToHttpApiData DisksScopedListWarningCode where
         DSLWCCleanupFailed -> "CLEANUP_FAILED"
         DSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        DSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         DSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         DSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         DSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -490,6 +583,8 @@ data InstanceGroupManagersScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | IGMSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | IGMSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | IGMSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | IGMSLWCNextHopAddressNotAssigned
@@ -523,6 +618,7 @@ instance FromHttpApiData InstanceGroupManagersScopedListWarningCode where
         "CLEANUP_FAILED" -> Right IGMSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right IGMSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right IGMSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right IGMSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IGMSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGMSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGMSLWCNextHopCannotIPForward
@@ -542,6 +638,7 @@ instance ToHttpApiData InstanceGroupManagersScopedListWarningCode where
         IGMSLWCCleanupFailed -> "CLEANUP_FAILED"
         IGMSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         IGMSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        IGMSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IGMSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         IGMSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IGMSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -570,6 +667,8 @@ data TargetPoolsScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | TPSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | TPSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | TPSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | TPSLWCNextHopAddressNotAssigned
@@ -603,6 +702,7 @@ instance FromHttpApiData TargetPoolsScopedListWarningCode where
         "CLEANUP_FAILED" -> Right TPSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right TPSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right TPSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right TPSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TPSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TPSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TPSLWCNextHopCannotIPForward
@@ -622,6 +722,7 @@ instance ToHttpApiData TargetPoolsScopedListWarningCode where
         TPSLWCCleanupFailed -> "CLEANUP_FAILED"
         TPSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         TPSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        TPSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TPSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         TPSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TPSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -639,6 +740,34 @@ instance FromJSON TargetPoolsScopedListWarningCode where
     parseJSON = parseJSONText "TargetPoolsScopedListWarningCode"
 
 instance ToJSON TargetPoolsScopedListWarningCode where
+    toJSON = toJSONText
+
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+data SSLHealthCheckProxyHeader
+    = SHCPHNone
+      -- ^ @NONE@
+    | SHCPHProxyV1
+      -- ^ @PROXY_V1@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SSLHealthCheckProxyHeader
+
+instance FromHttpApiData SSLHealthCheckProxyHeader where
+    parseQueryParam = \case
+        "NONE" -> Right SHCPHNone
+        "PROXY_V1" -> Right SHCPHProxyV1
+        x -> Left ("Unable to parse SSLHealthCheckProxyHeader from: " <> x)
+
+instance ToHttpApiData SSLHealthCheckProxyHeader where
+    toQueryParam = \case
+        SHCPHNone -> "NONE"
+        SHCPHProxyV1 -> "PROXY_V1"
+
+instance FromJSON SSLHealthCheckProxyHeader where
+    parseJSON = parseJSONText "SSLHealthCheckProxyHeader"
+
+instance ToJSON SSLHealthCheckProxyHeader where
     toJSON = toJSONText
 
 -- | [Output Only] The status of the VPN gateway.
@@ -725,6 +854,8 @@ data TargetInstancesScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | TISLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | TISLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | TISLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | TISLWCNextHopAddressNotAssigned
@@ -758,6 +889,7 @@ instance FromHttpApiData TargetInstancesScopedListWarningCode where
         "CLEANUP_FAILED" -> Right TISLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right TISLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right TISLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right TISLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TISLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TISLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TISLWCNextHopCannotIPForward
@@ -777,6 +909,7 @@ instance ToHttpApiData TargetInstancesScopedListWarningCode where
         TISLWCCleanupFailed -> "CLEANUP_FAILED"
         TISLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         TISLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        TISLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TISLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         TISLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TISLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -805,6 +938,8 @@ data RouteWarningsItemCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | RWICDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | RWICFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | RWICInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | RWICNextHopAddressNotAssigned
@@ -838,6 +973,7 @@ instance FromHttpApiData RouteWarningsItemCode where
         "CLEANUP_FAILED" -> Right RWICCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right RWICDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RWICDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right RWICFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right RWICInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RWICNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RWICNextHopCannotIPForward
@@ -857,6 +993,7 @@ instance ToHttpApiData RouteWarningsItemCode where
         RWICCleanupFailed -> "CLEANUP_FAILED"
         RWICDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         RWICDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RWICFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         RWICInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         RWICNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         RWICNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -915,6 +1052,8 @@ data AddressesScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | ASLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | ASLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | ASLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | ASLWCNextHopAddressNotAssigned
@@ -948,6 +1087,7 @@ instance FromHttpApiData AddressesScopedListWarningCode where
         "CLEANUP_FAILED" -> Right ASLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right ASLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right ASLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right ASLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ASLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ASLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ASLWCNextHopCannotIPForward
@@ -967,6 +1107,7 @@ instance ToHttpApiData AddressesScopedListWarningCode where
         ASLWCCleanupFailed -> "CLEANUP_FAILED"
         ASLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         ASLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        ASLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ASLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         ASLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ASLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -1083,6 +1224,90 @@ instance FromJSON DeprecationStatusState where
 instance ToJSON DeprecationStatusState where
     toJSON = toJSONText
 
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data RoutersScopedListWarningCode
+    = RSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | RSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | RSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | RSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | RSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | RSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | RSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | RSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | RSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | RSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | RSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | RSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | RSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | RSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | RSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | RSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RoutersScopedListWarningCode
+
+instance FromHttpApiData RoutersScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right RSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right RSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right RSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right RSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right RSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right RSLWCUnreachable
+        x -> Left ("Unable to parse RoutersScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData RoutersScopedListWarningCode where
+    toQueryParam = \case
+        RSLWCCleanupFailed -> "CLEANUP_FAILED"
+        RSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        RSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        RSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        RSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        RSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        RSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        RSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        RSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        RSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        RSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        RSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        RSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        RSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        RSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        RSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON RoutersScopedListWarningCode where
+    parseJSON = parseJSONText "RoutersScopedListWarningCode"
+
+instance ToJSON RoutersScopedListWarningCode where
+    toJSON = toJSONText
+
 -- | [Output Only] The current action that the managed instance group has
 -- scheduled for the instance. Possible values: - NONE The instance is
 -- running, and the managed instance group does not have any scheduled
@@ -1091,21 +1316,23 @@ instance ToJSON DeprecationStatusState where
 -- will try again until it is successful. - CREATING_WITHOUT_RETRIES The
 -- managed instance group is attempting to create this instance only once.
 -- If the group fails to create this instance, it does not try again and
--- the group\'s target_size value is decreased. - RECREATING The managed
--- instance group is recreating this instance. - DELETING The managed
--- instance group is permanently deleting this instance. - ABANDONING The
--- managed instance group is abandoning this instance. The instance will be
--- removed from the instance group and from any target pools that are
--- associated with this group. - RESTARTING The managed instance group is
--- restarting the instance. - REFRESHING The managed instance group is
--- applying configuration changes to the instance without stopping it. For
--- example, the group can update the target pool list for an instance
--- without stopping that instance.
+-- the group\'s targetSize value is decreased instead. - RECREATING The
+-- managed instance group is recreating this instance. - DELETING The
+-- managed instance group is permanently deleting this instance. -
+-- ABANDONING The managed instance group is abandoning this instance. The
+-- instance will be removed from the instance group and from any target
+-- pools that are associated with this group. - RESTARTING The managed
+-- instance group is restarting the instance. - REFRESHING The managed
+-- instance group is applying configuration changes to the instance without
+-- stopping it. For example, the group can update the target pool list for
+-- an instance without stopping that instance.
 data ManagedInstanceCurrentAction
     = MICAAbandoning
       -- ^ @ABANDONING@
     | MICACreating
       -- ^ @CREATING@
+    | MICACreatingWithoutRetries
+      -- ^ @CREATING_WITHOUT_RETRIES@
     | MICADeleting
       -- ^ @DELETING@
     | MICANone
@@ -1124,6 +1351,7 @@ instance FromHttpApiData ManagedInstanceCurrentAction where
     parseQueryParam = \case
         "ABANDONING" -> Right MICAAbandoning
         "CREATING" -> Right MICACreating
+        "CREATING_WITHOUT_RETRIES" -> Right MICACreatingWithoutRetries
         "DELETING" -> Right MICADeleting
         "NONE" -> Right MICANone
         "RECREATING" -> Right MICARecreating
@@ -1135,6 +1363,7 @@ instance ToHttpApiData ManagedInstanceCurrentAction where
     toQueryParam = \case
         MICAAbandoning -> "ABANDONING"
         MICACreating -> "CREATING"
+        MICACreatingWithoutRetries -> "CREATING_WITHOUT_RETRIES"
         MICADeleting -> "DELETING"
         MICANone -> "NONE"
         MICARecreating -> "RECREATING"
@@ -1236,6 +1465,8 @@ data TargetVPNGatewaysScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | TVGSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | TVGSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | TVGSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | TVGSLWCNextHopAddressNotAssigned
@@ -1269,6 +1500,7 @@ instance FromHttpApiData TargetVPNGatewaysScopedListWarningCode where
         "CLEANUP_FAILED" -> Right TVGSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right TVGSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right TVGSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right TVGSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right TVGSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TVGSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TVGSLWCNextHopCannotIPForward
@@ -1288,6 +1520,7 @@ instance ToHttpApiData TargetVPNGatewaysScopedListWarningCode where
         TVGSLWCCleanupFailed -> "CLEANUP_FAILED"
         TVGSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         TVGSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        TVGSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         TVGSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         TVGSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         TVGSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -1307,8 +1540,7 @@ instance FromJSON TargetVPNGatewaysScopedListWarningCode where
 instance ToJSON TargetVPNGatewaysScopedListWarningCode where
     toJSON = toJSONText
 
--- | [Output Only] The status of disk creation. Applicable statuses includes:
--- CREATING, FAILED, READY, RESTORING.
+-- | [Output Only] The status of disk creation.
 data DiskStatus
     = DSCreating
       -- ^ @CREATING@
@@ -1450,6 +1682,34 @@ instance FromJSON RegionStatus where
 instance ToJSON RegionStatus where
     toJSON = toJSONText
 
+-- | The new type of proxy header to append before sending data to the
+-- backend. NONE or PROXY_V1 are allowed.
+data TargetSSLProxiesSetProxyHeaderRequestProxyHeader
+    = TSPSPHRPHNone
+      -- ^ @NONE@
+    | TSPSPHRPHProxyV1
+      -- ^ @PROXY_V1@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TargetSSLProxiesSetProxyHeaderRequestProxyHeader
+
+instance FromHttpApiData TargetSSLProxiesSetProxyHeaderRequestProxyHeader where
+    parseQueryParam = \case
+        "NONE" -> Right TSPSPHRPHNone
+        "PROXY_V1" -> Right TSPSPHRPHProxyV1
+        x -> Left ("Unable to parse TargetSSLProxiesSetProxyHeaderRequestProxyHeader from: " <> x)
+
+instance ToHttpApiData TargetSSLProxiesSetProxyHeaderRequestProxyHeader where
+    toQueryParam = \case
+        TSPSPHRPHNone -> "NONE"
+        TSPSPHRPHProxyV1 -> "PROXY_V1"
+
+instance FromJSON TargetSSLProxiesSetProxyHeaderRequestProxyHeader where
+    parseJSON = parseJSONText "TargetSSLProxiesSetProxyHeaderRequestProxyHeader"
+
+instance ToJSON TargetSSLProxiesSetProxyHeaderRequestProxyHeader where
+    toJSON = toJSONText
+
 -- | [Output Only] The status of the VPN tunnel.
 data VPNTunnelStatus
     = VTSAllocatingResources
@@ -1517,11 +1777,14 @@ instance FromJSON VPNTunnelStatus where
 instance ToJSON VPNTunnelStatus where
     toJSON = toJSONText
 
--- | Specifies the balancing mode for this backend. For global HTTP(S) load
--- balancing, the default is UTILIZATION. Valid values are UTILIZATION and
--- RATE.
+-- | Specifies the balancing mode for this backend. For global HTTP(S) or
+-- TCP\/SSL load balancing, the default is UTILIZATION. Valid values are
+-- UTILIZATION, RATE (for HTTP(S)) and CONNECTION (for TCP\/SSL). This
+-- cannot be used for internal load balancing.
 data BackendBalancingMode
-    = Rate
+    = Connection
+      -- ^ @CONNECTION@
+    | Rate
       -- ^ @RATE@
     | Utilization
       -- ^ @UTILIZATION@
@@ -1531,12 +1794,14 @@ instance Hashable BackendBalancingMode
 
 instance FromHttpApiData BackendBalancingMode where
     parseQueryParam = \case
+        "CONNECTION" -> Right Connection
         "RATE" -> Right Rate
         "UTILIZATION" -> Right Utilization
         x -> Left ("Unable to parse BackendBalancingMode from: " <> x)
 
 instance ToHttpApiData BackendBalancingMode where
     toQueryParam = \case
+        Connection -> "CONNECTION"
         Rate -> "RATE"
         Utilization -> "UTILIZATION"
 
@@ -1547,17 +1812,17 @@ instance ToJSON BackendBalancingMode where
     toJSON = toJSONText
 
 -- | The IP protocol to which this rule applies. Valid options are TCP, UDP,
--- ESP, AH, SCTP or ICMP.
+-- ESP, AH, SCTP or ICMP. When the load balancing scheme is INTERNAL
 data ForwardingRuleIPProtocol
-    = AH
+    = FRIPAH
       -- ^ @AH@
-    | Esp
+    | FRIPEsp
       -- ^ @ESP@
-    | Sctp
+    | FRIPSctp
       -- ^ @SCTP@
-    | TCP
+    | FRIPTCP
       -- ^ @TCP@
-    | Udp
+    | FRIPUdp
       -- ^ @UDP@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -1565,20 +1830,20 @@ instance Hashable ForwardingRuleIPProtocol
 
 instance FromHttpApiData ForwardingRuleIPProtocol where
     parseQueryParam = \case
-        "AH" -> Right AH
-        "ESP" -> Right Esp
-        "SCTP" -> Right Sctp
-        "TCP" -> Right TCP
-        "UDP" -> Right Udp
+        "AH" -> Right FRIPAH
+        "ESP" -> Right FRIPEsp
+        "SCTP" -> Right FRIPSctp
+        "TCP" -> Right FRIPTCP
+        "UDP" -> Right FRIPUdp
         x -> Left ("Unable to parse ForwardingRuleIPProtocol from: " <> x)
 
 instance ToHttpApiData ForwardingRuleIPProtocol where
     toQueryParam = \case
-        AH -> "AH"
-        Esp -> "ESP"
-        Sctp -> "SCTP"
-        TCP -> "TCP"
-        Udp -> "UDP"
+        FRIPAH -> "AH"
+        FRIPEsp -> "ESP"
+        FRIPSctp -> "SCTP"
+        FRIPTCP -> "TCP"
+        FRIPUdp -> "UDP"
 
 instance FromJSON ForwardingRuleIPProtocol where
     parseJSON = parseJSONText "ForwardingRuleIPProtocol"
@@ -1677,6 +1942,52 @@ instance FromJSON AttachedDiskInterface where
 instance ToJSON AttachedDiskInterface where
     toJSON = toJSONText
 
+-- | Specifies the type of the healthCheck, either TCP, UDP, SSL, HTTP, HTTPS
+-- or HTTP2. If not specified, the default is TCP. Exactly one of the
+-- protocol-specific health check field must be specified, which must match
+-- type field.
+data HealthCheckType
+    = HCTHTTP
+      -- ^ @HTTP@
+    | HCTHTTP2
+      -- ^ @HTTP2@
+    | HCTHTTPS
+      -- ^ @HTTPS@
+    | HCTInvalid
+      -- ^ @INVALID@
+    | HCTSSL
+      -- ^ @SSL@
+    | HCTTCP
+      -- ^ @TCP@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HealthCheckType
+
+instance FromHttpApiData HealthCheckType where
+    parseQueryParam = \case
+        "HTTP" -> Right HCTHTTP
+        "HTTP2" -> Right HCTHTTP2
+        "HTTPS" -> Right HCTHTTPS
+        "INVALID" -> Right HCTInvalid
+        "SSL" -> Right HCTSSL
+        "TCP" -> Right HCTTCP
+        x -> Left ("Unable to parse HealthCheckType from: " <> x)
+
+instance ToHttpApiData HealthCheckType where
+    toQueryParam = \case
+        HCTHTTP -> "HTTP"
+        HCTHTTP2 -> "HTTP2"
+        HCTHTTPS -> "HTTPS"
+        HCTInvalid -> "INVALID"
+        HCTSSL -> "SSL"
+        HCTTCP -> "TCP"
+
+instance FromJSON HealthCheckType where
+    parseJSON = parseJSONText "HealthCheckType"
+
+instance ToJSON HealthCheckType where
+    toJSON = toJSONText
+
 -- | [Output Only] Status of the zone, either UP or DOWN.
 data ZoneStatus
     = ZSDown
@@ -1713,6 +2024,8 @@ data SubnetworksScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | SSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | SSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | SSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | SSLWCNextHopAddressNotAssigned
@@ -1746,6 +2059,7 @@ instance FromHttpApiData SubnetworksScopedListWarningCode where
         "CLEANUP_FAILED" -> Right SSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right SSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right SSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right SSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right SSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SSLWCNextHopCannotIPForward
@@ -1765,6 +2079,7 @@ instance ToHttpApiData SubnetworksScopedListWarningCode where
         SSLWCCleanupFailed -> "CLEANUP_FAILED"
         SSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         SSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        SSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         SSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         SSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         SSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -1816,6 +2131,14 @@ data QuotaMetric
       -- ^ @LOCAL_SSD_TOTAL_GB@
     | Networks
       -- ^ @NETWORKS@
+    | PreemptibleCPUs
+      -- ^ @PREEMPTIBLE_CPUS@
+    | RegionalAutoscalers
+      -- ^ @REGIONAL_AUTOSCALERS@
+    | RegionalInstanceGroupManagers
+      -- ^ @REGIONAL_INSTANCE_GROUP_MANAGERS@
+    | Routers
+      -- ^ @ROUTERS@
     | Routes
       -- ^ @ROUTES@
     | Snapshots
@@ -1836,6 +2159,8 @@ data QuotaMetric
       -- ^ @TARGET_INSTANCES@
     | TargetPools
       -- ^ @TARGET_POOLS@
+    | TargetSSLProxies
+      -- ^ @TARGET_SSL_PROXIES@
     | TargetVPNGateways
       -- ^ @TARGET_VPN_GATEWAYS@
     | URLMaps
@@ -1863,6 +2188,10 @@ instance FromHttpApiData QuotaMetric where
         "IN_USE_ADDRESSES" -> Right InUseAddresses
         "LOCAL_SSD_TOTAL_GB" -> Right LocalSsdTotalGb
         "NETWORKS" -> Right Networks
+        "PREEMPTIBLE_CPUS" -> Right PreemptibleCPUs
+        "REGIONAL_AUTOSCALERS" -> Right RegionalAutoscalers
+        "REGIONAL_INSTANCE_GROUP_MANAGERS" -> Right RegionalInstanceGroupManagers
+        "ROUTERS" -> Right Routers
         "ROUTES" -> Right Routes
         "SNAPSHOTS" -> Right Snapshots
         "SSD_TOTAL_GB" -> Right SsdTotalGb
@@ -1873,6 +2202,7 @@ instance FromHttpApiData QuotaMetric where
         "TARGET_HTTP_PROXIES" -> Right TargetHTTPProxies
         "TARGET_INSTANCES" -> Right TargetInstances
         "TARGET_POOLS" -> Right TargetPools
+        "TARGET_SSL_PROXIES" -> Right TargetSSLProxies
         "TARGET_VPN_GATEWAYS" -> Right TargetVPNGateways
         "URL_MAPS" -> Right URLMaps
         "VPN_TUNNELS" -> Right VPNTunnels
@@ -1895,6 +2225,10 @@ instance ToHttpApiData QuotaMetric where
         InUseAddresses -> "IN_USE_ADDRESSES"
         LocalSsdTotalGb -> "LOCAL_SSD_TOTAL_GB"
         Networks -> "NETWORKS"
+        PreemptibleCPUs -> "PREEMPTIBLE_CPUS"
+        RegionalAutoscalers -> "REGIONAL_AUTOSCALERS"
+        RegionalInstanceGroupManagers -> "REGIONAL_INSTANCE_GROUP_MANAGERS"
+        Routers -> "ROUTERS"
         Routes -> "ROUTES"
         Snapshots -> "SNAPSHOTS"
         SsdTotalGb -> "SSD_TOTAL_GB"
@@ -1905,6 +2239,7 @@ instance ToHttpApiData QuotaMetric where
         TargetHTTPProxies -> "TARGET_HTTP_PROXIES"
         TargetInstances -> "TARGET_INSTANCES"
         TargetPools -> "TARGET_POOLS"
+        TargetSSLProxies -> "TARGET_SSL_PROXIES"
         TargetVPNGateways -> "TARGET_VPN_GATEWAYS"
         URLMaps -> "URL_MAPS"
         VPNTunnels -> "VPN_TUNNELS"
@@ -1916,7 +2251,8 @@ instance ToJSON QuotaMetric where
     toJSON = toJSONText
 
 -- | [Output Only] The status of the instance. One of the following values:
--- PROVISIONING, STAGING, RUNNING, STOPPING, and TERMINATED.
+-- PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, and
+-- TERMINATED.
 data InstanceStatus
     = ISProvisioning
       -- ^ @PROVISIONING@
@@ -1976,6 +2312,8 @@ data MachineTypesScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | MTSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | MTSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | MTSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | MTSLWCNextHopAddressNotAssigned
@@ -2009,6 +2347,7 @@ instance FromHttpApiData MachineTypesScopedListWarningCode where
         "CLEANUP_FAILED" -> Right MTSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right MTSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right MTSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right MTSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right MTSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right MTSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right MTSLWCNextHopCannotIPForward
@@ -2028,6 +2367,7 @@ instance ToHttpApiData MachineTypesScopedListWarningCode where
         MTSLWCCleanupFailed -> "CLEANUP_FAILED"
         MTSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         MTSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        MTSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         MTSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         MTSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         MTSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2056,6 +2396,8 @@ data DiskTypesScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | DTSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | DTSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | DTSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | DTSLWCNextHopAddressNotAssigned
@@ -2089,6 +2431,7 @@ instance FromHttpApiData DiskTypesScopedListWarningCode where
         "CLEANUP_FAILED" -> Right DTSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right DTSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right DTSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right DTSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right DTSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right DTSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right DTSLWCNextHopCannotIPForward
@@ -2108,6 +2451,7 @@ instance ToHttpApiData DiskTypesScopedListWarningCode where
         DTSLWCCleanupFailed -> "CLEANUP_FAILED"
         DTSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DTSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        DTSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         DTSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         DTSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         DTSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2136,6 +2480,8 @@ data AutoscalersScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | ADiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | AFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | AInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | ANextHopAddressNotAssigned
@@ -2169,6 +2515,7 @@ instance FromHttpApiData AutoscalersScopedListWarningCode where
         "CLEANUP_FAILED" -> Right ACleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right ADeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right ADiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right AFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right AInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ANextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ANextHopCannotIPForward
@@ -2188,6 +2535,7 @@ instance ToHttpApiData AutoscalersScopedListWarningCode where
         ACleanupFailed -> "CLEANUP_FAILED"
         ADeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         ADiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        AFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         AInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         ANextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ANextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2207,6 +2555,37 @@ instance FromJSON AutoscalersScopedListWarningCode where
 instance ToJSON AutoscalersScopedListWarningCode where
     toJSON = toJSONText
 
+-- | Status of the BGP peer: {UP, DOWN}
+data RouterStatusBGPPeerStatusStatus
+    = RSBPSSDown
+      -- ^ @DOWN@
+    | RSBPSSUnknown
+      -- ^ @UNKNOWN@
+    | RSBPSSUP
+      -- ^ @UP@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RouterStatusBGPPeerStatusStatus
+
+instance FromHttpApiData RouterStatusBGPPeerStatusStatus where
+    parseQueryParam = \case
+        "DOWN" -> Right RSBPSSDown
+        "UNKNOWN" -> Right RSBPSSUnknown
+        "UP" -> Right RSBPSSUP
+        x -> Left ("Unable to parse RouterStatusBGPPeerStatusStatus from: " <> x)
+
+instance ToHttpApiData RouterStatusBGPPeerStatusStatus where
+    toQueryParam = \case
+        RSBPSSDown -> "DOWN"
+        RSBPSSUnknown -> "UNKNOWN"
+        RSBPSSUP -> "UP"
+
+instance FromJSON RouterStatusBGPPeerStatusStatus where
+    parseJSON = parseJSONText "RouterStatusBGPPeerStatusStatus"
+
+instance ToJSON RouterStatusBGPPeerStatusStatus where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data VPNTunnelsScopedListWarningCode
@@ -2216,6 +2595,8 @@ data VPNTunnelsScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | VTSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | VTSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | VTSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | VTSLWCNextHopAddressNotAssigned
@@ -2249,6 +2630,7 @@ instance FromHttpApiData VPNTunnelsScopedListWarningCode where
         "CLEANUP_FAILED" -> Right VTSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right VTSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right VTSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right VTSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right VTSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right VTSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right VTSLWCNextHopCannotIPForward
@@ -2268,6 +2650,7 @@ instance ToHttpApiData VPNTunnelsScopedListWarningCode where
         VTSLWCCleanupFailed -> "CLEANUP_FAILED"
         VTSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         VTSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        VTSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         VTSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         VTSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         VTSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2287,6 +2670,34 @@ instance FromJSON VPNTunnelsScopedListWarningCode where
 instance ToJSON VPNTunnelsScopedListWarningCode where
     toJSON = toJSONText
 
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+data HTTP2HealthCheckProxyHeader
+    = HTTPHCPHNone
+      -- ^ @NONE@
+    | HTTPHCPHProxyV1
+      -- ^ @PROXY_V1@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTP2HealthCheckProxyHeader
+
+instance FromHttpApiData HTTP2HealthCheckProxyHeader where
+    parseQueryParam = \case
+        "NONE" -> Right HTTPHCPHNone
+        "PROXY_V1" -> Right HTTPHCPHProxyV1
+        x -> Left ("Unable to parse HTTP2HealthCheckProxyHeader from: " <> x)
+
+instance ToHttpApiData HTTP2HealthCheckProxyHeader where
+    toQueryParam = \case
+        HTTPHCPHNone -> "NONE"
+        HTTPHCPHProxyV1 -> "PROXY_V1"
+
+instance FromJSON HTTP2HealthCheckProxyHeader where
+    parseJSON = parseJSONText "HTTP2HealthCheckProxyHeader"
+
+instance ToJSON HTTP2HealthCheckProxyHeader where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InstanceGroupsScopedListWarningCode
@@ -2296,6 +2707,8 @@ data InstanceGroupsScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | IGSLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | IGSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | IGSLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | IGSLWCNextHopAddressNotAssigned
@@ -2329,6 +2742,7 @@ instance FromHttpApiData InstanceGroupsScopedListWarningCode where
         "CLEANUP_FAILED" -> Right IGSLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right IGSLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right IGSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right IGSLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right IGSLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGSLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGSLWCNextHopCannotIPForward
@@ -2348,6 +2762,7 @@ instance ToHttpApiData InstanceGroupsScopedListWarningCode where
         IGSLWCCleanupFailed -> "CLEANUP_FAILED"
         IGSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         IGSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        IGSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         IGSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         IGSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         IGSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2418,6 +2833,34 @@ instance FromJSON InstanceWithNamedPortsStatus where
 instance ToJSON InstanceWithNamedPortsStatus where
     toJSON = toJSONText
 
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+data TCPHealthCheckProxyHeader
+    = THCPHNone
+      -- ^ @NONE@
+    | THCPHProxyV1
+      -- ^ @PROXY_V1@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable TCPHealthCheckProxyHeader
+
+instance FromHttpApiData TCPHealthCheckProxyHeader where
+    parseQueryParam = \case
+        "NONE" -> Right THCPHNone
+        "PROXY_V1" -> Right THCPHProxyV1
+        x -> Left ("Unable to parse TCPHealthCheckProxyHeader from: " <> x)
+
+instance ToHttpApiData TCPHealthCheckProxyHeader where
+    toQueryParam = \case
+        THCPHNone -> "NONE"
+        THCPHProxyV1 -> "PROXY_V1"
+
+instance FromJSON TCPHealthCheckProxyHeader where
+    parseJSON = parseJSONText "TCPHealthCheckProxyHeader"
+
+instance ToJSON TCPHealthCheckProxyHeader where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data InstancesScopedListWarningCode
@@ -2427,6 +2870,8 @@ data InstancesScopedListWarningCode
       -- ^ @DEPRECATED_RESOURCE_USED@
     | ISLWCDiskSizeLargerThanImageSize
       -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | ISLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
     | ISLWCInjectedKernelsDeprecated
       -- ^ @INJECTED_KERNELS_DEPRECATED@
     | ISLWCNextHopAddressNotAssigned
@@ -2460,6 +2905,7 @@ instance FromHttpApiData InstancesScopedListWarningCode where
         "CLEANUP_FAILED" -> Right ISLWCCleanupFailed
         "DEPRECATED_RESOURCE_USED" -> Right ISLWCDeprecatedResourceUsed
         "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right ISLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right ISLWCFieldValueOverriden
         "INJECTED_KERNELS_DEPRECATED" -> Right ISLWCInjectedKernelsDeprecated
         "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ISLWCNextHopAddressNotAssigned
         "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ISLWCNextHopCannotIPForward
@@ -2479,6 +2925,7 @@ instance ToHttpApiData InstancesScopedListWarningCode where
         ISLWCCleanupFailed -> "CLEANUP_FAILED"
         ISLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         ISLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        ISLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
         ISLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
         ISLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
         ISLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
@@ -2506,11 +2953,13 @@ instance ToJSON InstancesScopedListWarningCode where
 -- protocol will go to the same instance in the pool while that instance
 -- remains healthy.
 data TargetPoolSessionAffinity
-    = ClientIP
+    = TPSAClientIP
       -- ^ @CLIENT_IP@
-    | ClientIPProto
+    | TPSAClientIPProto
       -- ^ @CLIENT_IP_PROTO@
-    | None
+    | TPSAGeneratedCookie
+      -- ^ @GENERATED_COOKIE@
+    | TPSANone
       -- ^ @NONE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -2518,16 +2967,18 @@ instance Hashable TargetPoolSessionAffinity
 
 instance FromHttpApiData TargetPoolSessionAffinity where
     parseQueryParam = \case
-        "CLIENT_IP" -> Right ClientIP
-        "CLIENT_IP_PROTO" -> Right ClientIPProto
-        "NONE" -> Right None
+        "CLIENT_IP" -> Right TPSAClientIP
+        "CLIENT_IP_PROTO" -> Right TPSAClientIPProto
+        "GENERATED_COOKIE" -> Right TPSAGeneratedCookie
+        "NONE" -> Right TPSANone
         x -> Left ("Unable to parse TargetPoolSessionAffinity from: " <> x)
 
 instance ToHttpApiData TargetPoolSessionAffinity where
     toQueryParam = \case
-        ClientIP -> "CLIENT_IP"
-        ClientIPProto -> "CLIENT_IP_PROTO"
-        None -> "NONE"
+        TPSAClientIP -> "CLIENT_IP"
+        TPSAClientIPProto -> "CLIENT_IP_PROTO"
+        TPSAGeneratedCookie -> "GENERATED_COOKIE"
+        TPSANone -> "NONE"
 
 instance FromJSON TargetPoolSessionAffinity where
     parseJSON = parseJSONText "TargetPoolSessionAffinity"

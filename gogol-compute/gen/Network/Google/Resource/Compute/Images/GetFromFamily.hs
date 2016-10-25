@@ -85,7 +85,7 @@ igffProject :: Lens' ImagesGetFromFamily Text
 igffProject
   = lens _igffProject (\ s a -> s{_igffProject = a})
 
--- | Name of the image resource to return.
+-- | Name of the image family to search for.
 igffFamily :: Lens' ImagesGetFromFamily Text
 igffFamily
   = lens _igffFamily (\ s a -> s{_igffFamily = a})

@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.DiskTypes.List
     , DiskTypesList
 
     -- * Request Lenses
+    , dtlOrderBy
     , dtlProject
     , dtlZone
     , dtlFilter
@@ -53,16 +54,18 @@ type DiskTypesListResource =
              "zones" :>
                Capture "zone" Text :>
                  "diskTypes" :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] DiskTypeList
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] DiskTypeList
 
 -- | Retrieves a list of disk types available to the specified project.
 --
 -- /See:/ 'diskTypesList' smart constructor.
 data DiskTypesList = DiskTypesList'
-    { _dtlProject    :: !Text
+    { _dtlOrderBy    :: !(Maybe Text)
+    , _dtlProject    :: !Text
     , _dtlZone       :: !Text
     , _dtlFilter     :: !(Maybe Text)
     , _dtlPageToken  :: !(Maybe Text)
@@ -72,6 +75,8 @@ data DiskTypesList = DiskTypesList'
 -- | Creates a value of 'DiskTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtlOrderBy'
 --
 -- * 'dtlProject'
 --
@@ -88,12 +93,25 @@ diskTypesList
     -> DiskTypesList
 diskTypesList pDtlProject_ pDtlZone_ =
     DiskTypesList'
-    { _dtlProject = pDtlProject_
+    { _dtlOrderBy = Nothing
+    , _dtlProject = pDtlProject_
     , _dtlZone = pDtlZone_
     , _dtlFilter = Nothing
     , _dtlPageToken = Nothing
     , _dtlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+dtlOrderBy :: Lens' DiskTypesList (Maybe Text)
+dtlOrderBy
+  = lens _dtlOrderBy (\ s a -> s{_dtlOrderBy = a})
 
 -- | Project ID for this request.
 dtlProject :: Lens' DiskTypesList Text
@@ -115,16 +133,15 @@ dtlZone = lens _dtlZone (\ s a -> s{_dtlZone = a})
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 dtlFilter :: Lens' DiskTypesList (Maybe Text)
 dtlFilter
   = lens _dtlFilter (\ s a -> s{_dtlFilter = a})
@@ -152,7 +169,8 @@ instance GoogleRequest DiskTypesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient DiskTypesList'{..}
-          = go _dtlProject _dtlZone _dtlFilter _dtlPageToken
+          = go _dtlProject _dtlZone _dtlOrderBy _dtlFilter
+              _dtlPageToken
               (Just _dtlMaxResults)
               (Just AltJSON)
               computeService

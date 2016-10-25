@@ -101,6 +101,12 @@ library
         , Network.Google.Resource.Compute.HTTPSHealthChecks.List
         , Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
         , Network.Google.Resource.Compute.HTTPSHealthChecks.Update
+        , Network.Google.Resource.Compute.HealthChecks.Delete
+        , Network.Google.Resource.Compute.HealthChecks.Get
+        , Network.Google.Resource.Compute.HealthChecks.Insert
+        , Network.Google.Resource.Compute.HealthChecks.List
+        , Network.Google.Resource.Compute.HealthChecks.Patch
+        , Network.Google.Resource.Compute.HealthChecks.Update
         , Network.Google.Resource.Compute.Images.Delete
         , Network.Google.Resource.Compute.Images.Deprecate
         , Network.Google.Resource.Compute.Images.Get
@@ -149,6 +155,7 @@ library
         , Network.Google.Resource.Compute.Instances.SetScheduling
         , Network.Google.Resource.Compute.Instances.SetTags
         , Network.Google.Resource.Compute.Instances.Start
+        , Network.Google.Resource.Compute.Instances.StartWithEncryptionKey
         , Network.Google.Resource.Compute.Instances.Stop
         , Network.Google.Resource.Compute.Licenses.Get
         , Network.Google.Resource.Compute.MachineTypes.AggregatedList
@@ -168,6 +175,15 @@ library
         , Network.Google.Resource.Compute.RegionOperations.List
         , Network.Google.Resource.Compute.Regions.Get
         , Network.Google.Resource.Compute.Regions.List
+        , Network.Google.Resource.Compute.Routers.AggregatedList
+        , Network.Google.Resource.Compute.Routers.Delete
+        , Network.Google.Resource.Compute.Routers.Get
+        , Network.Google.Resource.Compute.Routers.GetRouterStatus
+        , Network.Google.Resource.Compute.Routers.Insert
+        , Network.Google.Resource.Compute.Routers.List
+        , Network.Google.Resource.Compute.Routers.Patch
+        , Network.Google.Resource.Compute.Routers.Preview
+        , Network.Google.Resource.Compute.Routers.Update
         , Network.Google.Resource.Compute.Routes.Delete
         , Network.Google.Resource.Compute.Routes.Get
         , Network.Google.Resource.Compute.Routes.Insert
@@ -211,6 +227,13 @@ library
         , Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
         , Network.Google.Resource.Compute.TargetPools.RemoveInstance
         , Network.Google.Resource.Compute.TargetPools.SetBackup
+        , Network.Google.Resource.Compute.TargetSSLProxies.Delete
+        , Network.Google.Resource.Compute.TargetSSLProxies.Get
+        , Network.Google.Resource.Compute.TargetSSLProxies.Insert
+        , Network.Google.Resource.Compute.TargetSSLProxies.List
+        , Network.Google.Resource.Compute.TargetSSLProxies.SetBackendService
+        , Network.Google.Resource.Compute.TargetSSLProxies.SetProxyHeader
+        , Network.Google.Resource.Compute.TargetSSLProxies.SetSSLCertificates
         , Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
         , Network.Google.Resource.Compute.TargetVPNGateways.Delete
         , Network.Google.Resource.Compute.TargetVPNGateways.Get
@@ -219,6 +242,7 @@ library
         , Network.Google.Resource.Compute.URLMaps.Delete
         , Network.Google.Resource.Compute.URLMaps.Get
         , Network.Google.Resource.Compute.URLMaps.Insert
+        , Network.Google.Resource.Compute.URLMaps.InvalidateCache
         , Network.Google.Resource.Compute.URLMaps.List
         , Network.Google.Resource.Compute.URLMaps.Patch
         , Network.Google.Resource.Compute.URLMaps.Update

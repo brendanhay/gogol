@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.List
     , TargetHTTPSProxiesList
 
     -- * Request Lenses
+    , thplOrderBy
     , thplProject
     , thplFilter
     , thplPageToken
@@ -52,18 +53,20 @@ type TargetHTTPSProxiesListResource =
            Capture "project" Text :>
              "global" :>
                "targetHttpsProxies" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] TargetHTTPSProxyList
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] TargetHTTPSProxyList
 
 -- | Retrieves the list of TargetHttpsProxy resources available to the
 -- specified project.
 --
 -- /See:/ 'targetHTTPSProxiesList' smart constructor.
 data TargetHTTPSProxiesList = TargetHTTPSProxiesList'
-    { _thplProject    :: !Text
+    { _thplOrderBy    :: !(Maybe Text)
+    , _thplProject    :: !Text
     , _thplFilter     :: !(Maybe Text)
     , _thplPageToken  :: !(Maybe Text)
     , _thplMaxResults :: !(Textual Word32)
@@ -72,6 +75,8 @@ data TargetHTTPSProxiesList = TargetHTTPSProxiesList'
 -- | Creates a value of 'TargetHTTPSProxiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'thplOrderBy'
 --
 -- * 'thplProject'
 --
@@ -85,11 +90,24 @@ targetHTTPSProxiesList
     -> TargetHTTPSProxiesList
 targetHTTPSProxiesList pThplProject_ =
     TargetHTTPSProxiesList'
-    { _thplProject = pThplProject_
+    { _thplOrderBy = Nothing
+    , _thplProject = pThplProject_
     , _thplFilter = Nothing
     , _thplPageToken = Nothing
     , _thplMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+thplOrderBy :: Lens' TargetHTTPSProxiesList (Maybe Text)
+thplOrderBy
+  = lens _thplOrderBy (\ s a -> s{_thplOrderBy = a})
 
 -- | Project ID for this request.
 thplProject :: Lens' TargetHTTPSProxiesList Text
@@ -107,16 +125,15 @@ thplProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 thplFilter :: Lens' TargetHTTPSProxiesList (Maybe Text)
 thplFilter
   = lens _thplFilter (\ s a -> s{_thplFilter = a})
@@ -145,7 +162,8 @@ instance GoogleRequest TargetHTTPSProxiesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetHTTPSProxiesList'{..}
-          = go _thplProject _thplFilter _thplPageToken
+          = go _thplProject _thplOrderBy _thplFilter
+              _thplPageToken
               (Just _thplMaxResults)
               (Just AltJSON)
               computeService

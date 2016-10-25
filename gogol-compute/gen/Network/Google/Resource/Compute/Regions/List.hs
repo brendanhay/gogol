@@ -34,10 +34,11 @@ module Network.Google.Resource.Compute.Regions.List
     , RegionsList
 
     -- * Request Lenses
-    , rProject
-    , rFilter
-    , rPageToken
-    , rMaxResults
+    , regOrderBy
+    , regProject
+    , regFilter
+    , regPageToken
+    , regMaxResults
     ) where
 
 import           Network.Google.Compute.Types
@@ -51,47 +52,65 @@ type RegionsListResource =
          "projects" :>
            Capture "project" Text :>
              "regions" :>
-               QueryParam "filter" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Word32) :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] RegionList
+               QueryParam "orderBy" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" (Textual Word32) :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] RegionList
 
 -- | Retrieves the list of region resources available to the specified
 -- project.
 --
 -- /See:/ 'regionsList' smart constructor.
 data RegionsList = RegionsList'
-    { _rProject    :: !Text
-    , _rFilter     :: !(Maybe Text)
-    , _rPageToken  :: !(Maybe Text)
-    , _rMaxResults :: !(Textual Word32)
+    { _regOrderBy    :: !(Maybe Text)
+    , _regProject    :: !Text
+    , _regFilter     :: !(Maybe Text)
+    , _regPageToken  :: !(Maybe Text)
+    , _regMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rProject'
+-- * 'regOrderBy'
 --
--- * 'rFilter'
+-- * 'regProject'
 --
--- * 'rPageToken'
+-- * 'regFilter'
 --
--- * 'rMaxResults'
+-- * 'regPageToken'
+--
+-- * 'regMaxResults'
 regionsList
-    :: Text -- ^ 'rProject'
+    :: Text -- ^ 'regProject'
     -> RegionsList
-regionsList pRProject_ =
+regionsList pRegProject_ =
     RegionsList'
-    { _rProject = pRProject_
-    , _rFilter = Nothing
-    , _rPageToken = Nothing
-    , _rMaxResults = 500
+    { _regOrderBy = Nothing
+    , _regProject = pRegProject_
+    , _regFilter = Nothing
+    , _regPageToken = Nothing
+    , _regMaxResults = 500
     }
 
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+regOrderBy :: Lens' RegionsList (Maybe Text)
+regOrderBy
+  = lens _regOrderBy (\ s a -> s{_regOrderBy = a})
+
 -- | Project ID for this request.
-rProject :: Lens' RegionsList Text
-rProject = lens _rProject (\ s a -> s{_rProject = a})
+regProject :: Lens' RegionsList Text
+regProject
+  = lens _regProject (\ s a -> s{_regProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: field_name
@@ -104,33 +123,34 @@ rProject = lens _rProject (\ s a -> s{_rProject = a})
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
-rFilter :: Lens' RegionsList (Maybe Text)
-rFilter = lens _rFilter (\ s a -> s{_rFilter = a})
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
+regFilter :: Lens' RegionsList (Maybe Text)
+regFilter
+  = lens _regFilter (\ s a -> s{_regFilter = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-rPageToken :: Lens' RegionsList (Maybe Text)
-rPageToken
-  = lens _rPageToken (\ s a -> s{_rPageToken = a})
+regPageToken :: Lens' RegionsList (Maybe Text)
+regPageToken
+  = lens _regPageToken (\ s a -> s{_regPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
 -- in subsequent list requests.
-rMaxResults :: Lens' RegionsList Word32
-rMaxResults
-  = lens _rMaxResults (\ s a -> s{_rMaxResults = a}) .
-      _Coerce
+regMaxResults :: Lens' RegionsList Word32
+regMaxResults
+  = lens _regMaxResults
+      (\ s a -> s{_regMaxResults = a})
+      . _Coerce
 
 instance GoogleRequest RegionsList where
         type Rs RegionsList = RegionList
@@ -139,8 +159,8 @@ instance GoogleRequest RegionsList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RegionsList'{..}
-          = go _rProject _rFilter _rPageToken
-              (Just _rMaxResults)
+          = go _regProject _regOrderBy _regFilter _regPageToken
+              (Just _regMaxResults)
               (Just AltJSON)
               computeService
           where go

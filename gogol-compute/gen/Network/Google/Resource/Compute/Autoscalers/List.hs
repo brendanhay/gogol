@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.Autoscalers.List
     , AutoscalersList
 
     -- * Request Lenses
+    , aOrderBy
     , aProject
     , aZone
     , aFilter
@@ -53,17 +54,19 @@ type AutoscalersListResource =
              "zones" :>
                Capture "zone" Text :>
                  "autoscalers" :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] AutoscalerList
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] AutoscalerList
 
 -- | Retrieves a list of autoscalers contained within the specified zone.
 --
 -- /See:/ 'autoscalersList' smart constructor.
 data AutoscalersList = AutoscalersList'
-    { _aProject    :: !Text
+    { _aOrderBy    :: !(Maybe Text)
+    , _aProject    :: !Text
     , _aZone       :: !Text
     , _aFilter     :: !(Maybe Text)
     , _aPageToken  :: !(Maybe Text)
@@ -73,6 +76,8 @@ data AutoscalersList = AutoscalersList'
 -- | Creates a value of 'AutoscalersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aOrderBy'
 --
 -- * 'aProject'
 --
@@ -89,12 +94,24 @@ autoscalersList
     -> AutoscalersList
 autoscalersList pAProject_ pAZone_ =
     AutoscalersList'
-    { _aProject = pAProject_
+    { _aOrderBy = Nothing
+    , _aProject = pAProject_
     , _aZone = pAZone_
     , _aFilter = Nothing
     , _aPageToken = Nothing
     , _aMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+aOrderBy :: Lens' AutoscalersList (Maybe Text)
+aOrderBy = lens _aOrderBy (\ s a -> s{_aOrderBy = a})
 
 -- | Project ID for this request.
 aProject :: Lens' AutoscalersList Text
@@ -115,16 +132,15 @@ aZone = lens _aZone (\ s a -> s{_aZone = a})
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 aFilter :: Lens' AutoscalersList (Maybe Text)
 aFilter = lens _aFilter (\ s a -> s{_aFilter = a})
 
@@ -150,7 +166,7 @@ instance GoogleRequest AutoscalersList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient AutoscalersList'{..}
-          = go _aProject _aZone _aFilter _aPageToken
+          = go _aProject _aZone _aOrderBy _aFilter _aPageToken
               (Just _aMaxResults)
               (Just AltJSON)
               computeService

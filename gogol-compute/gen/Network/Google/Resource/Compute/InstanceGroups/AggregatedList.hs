@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
     , InstanceGroupsAggregatedList
 
     -- * Request Lenses
+    , igalOrderBy
     , igalProject
     , igalFilter
     , igalPageToken
@@ -51,17 +52,19 @@ type InstanceGroupsAggregatedListResource =
            Capture "project" Text :>
              "aggregated" :>
                "instanceGroups" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] InstanceGroupAggregatedList
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] InstanceGroupAggregatedList
 
 -- | Retrieves the list of instance groups and sorts them by zone.
 --
 -- /See:/ 'instanceGroupsAggregatedList' smart constructor.
 data InstanceGroupsAggregatedList = InstanceGroupsAggregatedList'
-    { _igalProject    :: !Text
+    { _igalOrderBy    :: !(Maybe Text)
+    , _igalProject    :: !Text
     , _igalFilter     :: !(Maybe Text)
     , _igalPageToken  :: !(Maybe Text)
     , _igalMaxResults :: !(Textual Word32)
@@ -70,6 +73,8 @@ data InstanceGroupsAggregatedList = InstanceGroupsAggregatedList'
 -- | Creates a value of 'InstanceGroupsAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igalOrderBy'
 --
 -- * 'igalProject'
 --
@@ -83,11 +88,24 @@ instanceGroupsAggregatedList
     -> InstanceGroupsAggregatedList
 instanceGroupsAggregatedList pIgalProject_ =
     InstanceGroupsAggregatedList'
-    { _igalProject = pIgalProject_
+    { _igalOrderBy = Nothing
+    , _igalProject = pIgalProject_
     , _igalFilter = Nothing
     , _igalPageToken = Nothing
     , _igalMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+igalOrderBy :: Lens' InstanceGroupsAggregatedList (Maybe Text)
+igalOrderBy
+  = lens _igalOrderBy (\ s a -> s{_igalOrderBy = a})
 
 -- | Project ID for this request.
 igalProject :: Lens' InstanceGroupsAggregatedList Text
@@ -105,16 +123,15 @@ igalProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 igalFilter :: Lens' InstanceGroupsAggregatedList (Maybe Text)
 igalFilter
   = lens _igalFilter (\ s a -> s{_igalFilter = a})
@@ -145,7 +162,8 @@ instance GoogleRequest InstanceGroupsAggregatedList
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupsAggregatedList'{..}
-          = go _igalProject _igalFilter _igalPageToken
+          = go _igalProject _igalOrderBy _igalFilter
+              _igalPageToken
               (Just _igalMaxResults)
               (Just AltJSON)
               computeService
