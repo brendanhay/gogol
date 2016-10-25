@@ -20,9 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the schema defining app restrictions configurable for this
--- product. All products have a schema, but this may be empty if no app
--- restrictions are defined.
+-- Retrieves the schema that defines the configurable properties for this
+-- product. All products have a schema, but this schema may be empty if no
+-- managed configurations have been defined. This schema can be used to
+-- populate a UI that allows an administrator to configure the product. To
+-- apply a managed configuration based on the schema obtained using this
+-- API, see Managed Configurations through Play.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.getAppRestrictionsSchema@.
 module Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
@@ -57,9 +60,12 @@ type ProductsGetAppRestrictionsSchemaResource =
                      QueryParam "alt" AltJSON :>
                        Get '[JSON] AppRestrictionsSchema
 
--- | Retrieves the schema defining app restrictions configurable for this
--- product. All products have a schema, but this may be empty if no app
--- restrictions are defined.
+-- | Retrieves the schema that defines the configurable properties for this
+-- product. All products have a schema, but this schema may be empty if no
+-- managed configurations have been defined. This schema can be used to
+-- populate a UI that allows an administrator to configure the product. To
+-- apply a managed configuration based on the schema obtained using this
+-- API, see Managed Configurations through Play.
 --
 -- /See:/ 'productsGetAppRestrictionsSchema' smart constructor.
 data ProductsGetAppRestrictionsSchema = ProductsGetAppRestrictionsSchema'

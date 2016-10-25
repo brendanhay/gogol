@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets whether a device is enabled or disabled for access by the user to
--- Google services. The device state takes effect only if enforcing EMM
--- policies on Android devices is enabled in the Google Admin Console.
--- Otherwise, the device state is ignored and all devices are allowed
--- access to Google services.
+-- Sets whether a device\'s access to Google services is enabled or
+-- disabled. The device state takes effect only if enforcing EMM policies
+-- on Android devices is enabled in the Google Admin Console. Otherwise,
+-- the device state is ignored and all devices are allowed access to Google
+-- services. This is only supported for Google-managed users.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.devices.setState@.
 module Network.Google.Resource.AndroidEnterprise.Devices.SetState
@@ -62,11 +62,11 @@ type DevicesSetStateResource =
                          ReqBody '[JSON] DeviceState :>
                            Put '[JSON] DeviceState
 
--- | Sets whether a device is enabled or disabled for access by the user to
--- Google services. The device state takes effect only if enforcing EMM
--- policies on Android devices is enabled in the Google Admin Console.
--- Otherwise, the device state is ignored and all devices are allowed
--- access to Google services.
+-- | Sets whether a device\'s access to Google services is enabled or
+-- disabled. The device state takes effect only if enforcing EMM policies
+-- on Android devices is enabled in the Google Admin Console. Otherwise,
+-- the device state is ignored and all devices are allowed access to Google
+-- services. This is only supported for Google-managed users.
 --
 -- /See:/ 'devicesSetState' smart constructor.
 data DevicesSetState = DevicesSetState'

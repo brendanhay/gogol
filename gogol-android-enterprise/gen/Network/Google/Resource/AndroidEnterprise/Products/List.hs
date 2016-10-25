@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Finds approved products that match a query.
+-- Finds approved products that match a query, or all approved products if
+-- there is no query.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.list@.
 module Network.Google.Resource.AndroidEnterprise.Products.List
@@ -60,7 +61,8 @@ type ProductsListResource =
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ProductsListResponse
 
--- | Finds approved products that match a query.
+-- | Finds approved products that match a query, or all approved products if
+-- there is no query.
 --
 -- /See:/ 'productsList' smart constructor.
 data ProductsList = ProductsList'
@@ -115,7 +117,8 @@ plToken = lens _plToken (\ s a -> s{_plToken = a})
 
 -- | The search query as typed in the Google Play Store search box. If
 -- omitted, all approved apps will be returned (using the pagination
--- parameters).
+-- parameters), including apps that are not available in the store (e.g.
+-- unpublished apps).
 plQuery :: Lens' ProductsList (Maybe Text)
 plQuery = lens _plQuery (\ s a -> s{_plQuery = a})
 
