@@ -61,6 +61,18 @@ module Network.Google.Analytics.Types
     , gdqSegment
     , gdqStartDate
 
+    -- * RemarketingAudiences
+    , RemarketingAudiences
+    , remarketingAudiences
+    , raNextLink
+    , raItemsPerPage
+    , raKind
+    , raUsername
+    , raItems
+    , raTotalResults
+    , raStartIndex
+    , raPreviousLink
+
     -- * GaDataDataTableRowsItem
     , GaDataDataTableRowsItem
     , gaDataDataTableRowsItem
@@ -106,6 +118,24 @@ module Network.Google.Analytics.Types
     , proFileParentLink
     , pfplHref
     , pfplType
+
+    -- * RemarketingAudience
+    , RemarketingAudience
+    , remarketingAudience
+    , rWebPropertyId
+    , rKind
+    , rCreated
+    , rLinkedAdAccounts
+    , rAudienceDefinition
+    , rAudienceType
+    , rAccountId
+    , rName
+    , rStateBasedAudienceDefinition
+    , rLinkedViews
+    , rInternalWebPropertyId
+    , rId
+    , rUpdated
+    , rDescription
 
     -- * GaDataDataTableRowsItemCItem
     , GaDataDataTableRowsItemCItem
@@ -408,6 +438,7 @@ module Network.Google.Analytics.Types
     , gdColumnHeaders
     , gdId
     , gdTotalResults
+    , gdDataLastRefreshed
     , gdDataTable
     , gdContainsSampledData
     , gdTotalsForAllResults
@@ -446,6 +477,20 @@ module Network.Google.Analytics.Types
     , wprName
     , wprInternalWebPropertyId
     , wprId
+
+    -- * LinkedForeignAccount
+    , LinkedForeignAccount
+    , linkedForeignAccount
+    , lfaStatus
+    , lfaWebPropertyId
+    , lfaKind
+    , lfaEligibleForSearch
+    , lfaAccountId
+    , lfaRemarketingAudienceId
+    , lfaLinkedAccountId
+    , lfaInternalWebPropertyId
+    , lfaId
+    , lfaType
 
     -- * Goals
     , Goals
@@ -607,6 +652,15 @@ module Network.Google.Analytics.Types
     , customDataSourceChildLink
     , cdsclHref
     , cdsclType
+
+    -- * IncludeConditions
+    , IncludeConditions
+    , includeConditions
+    , icKind
+    , icDaysToLookBack
+    , icMembershipDurationDays
+    , icSegment
+    , icIsSmartList
 
     -- * FilterParentLink
     , FilterParentLink
@@ -861,6 +915,12 @@ module Network.Google.Analytics.Types
     , entityAdWordsLinkEntity
     , eawleWebPropertyRef
 
+    -- * RemarketingAudienceStateBasedAudienceDefinition
+    , RemarketingAudienceStateBasedAudienceDefinition
+    , remarketingAudienceStateBasedAudienceDefinition
+    , rasbadExcludeConditions
+    , rasbadIncludeConditions
+
     -- * GoalURLDestinationDetails
     , GoalURLDestinationDetails
     , goalURLDestinationDetails
@@ -969,6 +1029,11 @@ module Network.Google.Analytics.Types
     , ccAttributes
     , ccId
 
+    -- * RemarketingAudienceAudienceDefinition
+    , RemarketingAudienceAudienceDefinition
+    , remarketingAudienceAudienceDefinition
+    , raadIncludeConditions
+
     -- * GaDataDataTableColsItem
     , GaDataDataTableColsItem
     , gaDataDataTableColsItem
@@ -984,6 +1049,12 @@ module Network.Google.Analytics.Types
     , eviURL
     , eviWon
     , eviName
+
+    -- * RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
+    , RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
+    , remarketingAudienceStateBasedAudienceDefinitionExcludeConditions
+    , rasbadecExclusionDuration
+    , rasbadecSegment
 
     -- * McfDataTotalsForAllResults
     , McfDataTotalsForAllResults
