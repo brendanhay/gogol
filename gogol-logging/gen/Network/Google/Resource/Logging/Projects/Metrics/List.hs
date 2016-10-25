@@ -22,7 +22,7 @@
 --
 -- Lists logs-based metrics.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.projects.metrics.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.metrics.list@.
 module Network.Google.Resource.Logging.Projects.Metrics.List
     (
     -- * REST Resource
@@ -33,13 +33,13 @@ module Network.Google.Resource.Logging.Projects.Metrics.List
     , ProjectsMetricsList
 
     -- * Request Lenses
+    , pmlParent
     , pmlXgafv
     , pmlUploadProtocol
     , pmlPp
     , pmlAccessToken
     , pmlUploadType
     , pmlBearerToken
-    , pmlProjectName
     , pmlPageToken
     , pmlPageSize
     , pmlCallback
@@ -51,10 +51,10 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.projects.metrics.list@ method which the
 -- 'ProjectsMetricsList' request conforms to.
 type ProjectsMetricsListResource =
-     "v2beta1" :>
-       Capture "projectName" Text :>
+     "v2" :>
+       Capture "parent" Text :>
          "metrics" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -70,13 +70,13 @@ type ProjectsMetricsListResource =
 --
 -- /See:/ 'projectsMetricsList' smart constructor.
 data ProjectsMetricsList = ProjectsMetricsList'
-    { _pmlXgafv          :: !(Maybe Text)
+    { _pmlParent         :: !Text
+    , _pmlXgafv          :: !(Maybe Xgafv)
     , _pmlUploadProtocol :: !(Maybe Text)
     , _pmlPp             :: !Bool
     , _pmlAccessToken    :: !(Maybe Text)
     , _pmlUploadType     :: !(Maybe Text)
     , _pmlBearerToken    :: !(Maybe Text)
-    , _pmlProjectName    :: !Text
     , _pmlPageToken      :: !(Maybe Text)
     , _pmlPageSize       :: !(Maybe (Textual Int32))
     , _pmlCallback       :: !(Maybe Text)
@@ -85,6 +85,8 @@ data ProjectsMetricsList = ProjectsMetricsList'
 -- | Creates a value of 'ProjectsMetricsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pmlParent'
 --
 -- * 'pmlXgafv'
 --
@@ -98,32 +100,36 @@ data ProjectsMetricsList = ProjectsMetricsList'
 --
 -- * 'pmlBearerToken'
 --
--- * 'pmlProjectName'
---
 -- * 'pmlPageToken'
 --
 -- * 'pmlPageSize'
 --
 -- * 'pmlCallback'
 projectsMetricsList
-    :: Text -- ^ 'pmlProjectName'
+    :: Text -- ^ 'pmlParent'
     -> ProjectsMetricsList
-projectsMetricsList pPmlProjectName_ =
+projectsMetricsList pPmlParent_ =
     ProjectsMetricsList'
-    { _pmlXgafv = Nothing
+    { _pmlParent = pPmlParent_
+    , _pmlXgafv = Nothing
     , _pmlUploadProtocol = Nothing
     , _pmlPp = True
     , _pmlAccessToken = Nothing
     , _pmlUploadType = Nothing
     , _pmlBearerToken = Nothing
-    , _pmlProjectName = pPmlProjectName_
     , _pmlPageToken = Nothing
     , _pmlPageSize = Nothing
     , _pmlCallback = Nothing
     }
 
+-- | Required. The resource name containing the metrics. Example:
+-- \`\"projects\/my-project-id\"\`.
+pmlParent :: Lens' ProjectsMetricsList Text
+pmlParent
+  = lens _pmlParent (\ s a -> s{_pmlParent = a})
+
 -- | V1 error format.
-pmlXgafv :: Lens' ProjectsMetricsList (Maybe Text)
+pmlXgafv :: Lens' ProjectsMetricsList (Maybe Xgafv)
 pmlXgafv = lens _pmlXgafv (\ s a -> s{_pmlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -154,26 +160,17 @@ pmlBearerToken
   = lens _pmlBearerToken
       (\ s a -> s{_pmlBearerToken = a})
 
--- | Required. The resource name of the project containing the metrics.
--- Example: \`\"projects\/my-project-id\"\`.
-pmlProjectName :: Lens' ProjectsMetricsList Text
-pmlProjectName
-  = lens _pmlProjectName
-      (\ s a -> s{_pmlProjectName = a})
-
--- | Optional. If the \`pageToken\` parameter is supplied, then the next page
--- of results is retrieved. The \`pageToken\` parameter must be set to the
--- value of the \`nextPageToken\` from the previous response. The value of
--- \`projectName\` must be the same as in the previous request.
+-- | Optional. If present, then retrieve the next batch of results from the
+-- preceding call to this method. \`pageToken\` must be the value of
+-- \`nextPageToken\` from the previous response. The values of other method
+-- parameters should be identical to those in the previous call.
 pmlPageToken :: Lens' ProjectsMetricsList (Maybe Text)
 pmlPageToken
   = lens _pmlPageToken (\ s a -> s{_pmlPageToken = a})
 
--- | Optional. The maximum number of results to return from this request. You
--- must check for presence of \`nextPageToken\` to determine if additional
--- results are available, which you can retrieve by passing the
--- \`nextPageToken\` value as the \`pageToken\` parameter in the next
--- request.
+-- | Optional. The maximum number of results to return from this request.
+-- Non-positive values are ignored. The presence of \`nextPageToken\` in
+-- the response indicates that more results might be available.
 pmlPageSize :: Lens' ProjectsMetricsList (Maybe Int32)
 pmlPageSize
   = lens _pmlPageSize (\ s a -> s{_pmlPageSize = a}) .
@@ -192,7 +189,7 @@ instance GoogleRequest ProjectsMetricsList where
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsMetricsList'{..}
-          = go _pmlProjectName _pmlXgafv _pmlUploadProtocol
+          = go _pmlParent _pmlXgafv _pmlUploadProtocol
               (Just _pmlPp)
               _pmlAccessToken
               _pmlUploadType

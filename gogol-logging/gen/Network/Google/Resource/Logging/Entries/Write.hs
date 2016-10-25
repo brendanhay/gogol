@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Writes log entries to Cloud Logging. All log entries in Cloud Logging
--- are written by this method.
+-- Writes log entries to Stackdriver Logging. All log entries are written
+-- by this method.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.entries.write@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.entries.write@.
 module Network.Google.Resource.Logging.Entries.Write
     (
     -- * REST Resource
@@ -50,9 +50,9 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.entries.write@ method which the
 -- 'EntriesWrite' request conforms to.
 type EntriesWriteResource =
-     "v2beta1" :>
+     "v2" :>
        "entries:write" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -63,12 +63,12 @@ type EntriesWriteResource =
                          ReqBody '[JSON] WriteLogEntriesRequest :>
                            Post '[JSON] WriteLogEntriesResponse
 
--- | Writes log entries to Cloud Logging. All log entries in Cloud Logging
--- are written by this method.
+-- | Writes log entries to Stackdriver Logging. All log entries are written
+-- by this method.
 --
 -- /See:/ 'entriesWrite' smart constructor.
 data EntriesWrite = EntriesWrite'
-    { _ewXgafv          :: !(Maybe Text)
+    { _ewXgafv          :: !(Maybe Xgafv)
     , _ewUploadProtocol :: !(Maybe Text)
     , _ewPp             :: !Bool
     , _ewAccessToken    :: !(Maybe Text)
@@ -113,7 +113,7 @@ entriesWrite pEwPayload_ =
     }
 
 -- | V1 error format.
-ewXgafv :: Lens' EntriesWrite (Maybe Text)
+ewXgafv :: Lens' EntriesWrite (Maybe Xgafv)
 ewXgafv = lens _ewXgafv (\ s a -> s{_ewXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

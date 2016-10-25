@@ -13,10 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Writes log entries and manages your logs, log sinks, and logs-based
--- metrics.
+-- Writes log entries and manages your Stackdriver Logging configuration.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference>
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference>
 module Network.Google.Logging
     (
     -- * Service Configuration
@@ -34,6 +33,9 @@ module Network.Google.Logging
 
     -- * Resources
 
+    -- ** logging.billingAccounts.logs.delete
+    , module Network.Google.Resource.Logging.BillingAccounts.Logs.Delete
+
     -- ** logging.entries.list
     , module Network.Google.Resource.Logging.Entries.List
 
@@ -42,6 +44,24 @@ module Network.Google.Logging
 
     -- ** logging.monitoredResourceDescriptors.list
     , module Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
+
+    -- ** logging.organizations.logs.delete
+    , module Network.Google.Resource.Logging.Organizations.Logs.Delete
+
+    -- ** logging.organizations.sinks.create
+    , module Network.Google.Resource.Logging.Organizations.Sinks.Create
+
+    -- ** logging.organizations.sinks.delete
+    , module Network.Google.Resource.Logging.Organizations.Sinks.Delete
+
+    -- ** logging.organizations.sinks.get
+    , module Network.Google.Resource.Logging.Organizations.Sinks.Get
+
+    -- ** logging.organizations.sinks.list
+    , module Network.Google.Resource.Logging.Organizations.Sinks.List
+
+    -- ** logging.organizations.sinks.update
+    , module Network.Google.Resource.Logging.Organizations.Sinks.Update
 
     -- ** logging.projects.logs.delete
     , module Network.Google.Resource.Logging.Projects.Logs.Delete
@@ -87,24 +107,19 @@ module Network.Google.Logging
     , mrdType
     , mrdDescription
 
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
     -- ** ListLogEntriesResponse
     , ListLogEntriesResponse
     , listLogEntriesResponse
     , llerNextPageToken
     , llerEntries
-    , llerProjectIdErrors
 
     -- ** MonitoredResourceLabels
     , MonitoredResourceLabels
     , monitoredResourceLabels
     , mrlAddtional
+
+    -- ** LogMetricVersion
+    , LogMetricVersion (..)
 
     -- ** ListLogMetricsResponse
     , ListLogMetricsResponse
@@ -120,6 +135,9 @@ module Network.Google.Logging
     , wlerResource
     , wlerLabels
     , wlerLogName
+
+    -- ** LogSinkOutputVersionFormat
+    , LogSinkOutputVersionFormat (..)
 
     -- ** Empty
     , Empty
@@ -185,20 +203,21 @@ module Network.Google.Logging
     , LogSink
     , logSink
     , lsDestination
+    , lsStartTime
     , lsOutputVersionFormat
+    , lsWriterIdentity
     , lsName
+    , lsEndTime
     , lsFilter
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
 
     -- ** ListMonitoredResourceDescriptorsResponse
     , ListMonitoredResourceDescriptorsResponse
     , listMonitoredResourceDescriptorsResponse
     , lmrdrNextPageToken
     , lmrdrResourceDescriptors
+
+    -- ** LabelDescriptorValueType
+    , LabelDescriptorValueType (..)
 
     -- ** HTTPRequest
     , HTTPRequest
@@ -207,6 +226,8 @@ module Network.Google.Logging
     , httprRequestURL
     , httprCacheFillBytes
     , httprRemoteIP
+    , httprLatency
+    , httprServerIP
     , httprRequestSize
     , httprCacheValidatedWithOriginServer
     , httprUserAgent
@@ -215,11 +236,6 @@ module Network.Google.Logging
     , httprRequestMethod
     , httprCacheHit
     , httprReferer
-
-    -- ** ListLogEntriesResponseProjectIdErrors
-    , ListLogEntriesResponseProjectIdErrors
-    , listLogEntriesResponseProjectIdErrors
-    , llerpieAddtional
 
     -- ** WriteLogEntriesRequestLabels
     , WriteLogEntriesRequestLabels
@@ -231,6 +247,9 @@ module Network.Google.Logging
     , monitoredResource
     , mrLabels
     , mrType
+
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** LogLine
     , LogLine
@@ -251,11 +270,11 @@ module Network.Google.Logging
     , ListLogEntriesRequest
     , listLogEntriesRequest
     , llerOrderBy
-    , llerPartialSuccess
     , llerProjectIds
     , llerFilter
     , llerPageToken
     , llerPageSize
+    , llerResourceNames
 
     -- ** LogEntryOperation
     , LogEntryOperation
@@ -269,6 +288,7 @@ module Network.Google.Logging
     , LogMetric
     , logMetric
     , lmName
+    , lmVersion
     , lmFilter
     , lmDescription
 
@@ -294,6 +314,9 @@ module Network.Google.Logging
     , slFunctionName
     , slFile
 
+    -- ** LogEntrySeverity
+    , LogEntrySeverity (..)
+
     -- ** SourceReference
     , SourceReference
     , sourceReference
@@ -304,13 +327,23 @@ module Network.Google.Logging
     , LogEntryJSONPayload
     , logEntryJSONPayload
     , lejpAddtional
+
+    -- ** LogLineSeverity
+    , LogLineSeverity (..)
     ) where
 
 import           Network.Google.Logging.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.Logging.BillingAccounts.Logs.Delete
 import           Network.Google.Resource.Logging.Entries.List
 import           Network.Google.Resource.Logging.Entries.Write
 import           Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
+import           Network.Google.Resource.Logging.Organizations.Logs.Delete
+import           Network.Google.Resource.Logging.Organizations.Sinks.Create
+import           Network.Google.Resource.Logging.Organizations.Sinks.Delete
+import           Network.Google.Resource.Logging.Organizations.Sinks.Get
+import           Network.Google.Resource.Logging.Organizations.Sinks.List
+import           Network.Google.Resource.Logging.Organizations.Sinks.Update
 import           Network.Google.Resource.Logging.Projects.Logs.Delete
 import           Network.Google.Resource.Logging.Projects.Metrics.Create
 import           Network.Google.Resource.Logging.Projects.Metrics.Delete
@@ -327,10 +360,16 @@ import           Network.Google.Resource.Logging.Projects.Sinks.Update
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Cloud Logging API service.
+-- | Represents the entirety of the methods and resources available for the Stackdriver Logging API service.
 type LoggingAPI =
      EntriesListResource :<|> EntriesWriteResource :<|>
        MonitoredResourceDescriptorsListResource
+       :<|> OrganizationsSinksListResource
+       :<|> OrganizationsSinksGetResource
+       :<|> OrganizationsSinksCreateResource
+       :<|> OrganizationsSinksDeleteResource
+       :<|> OrganizationsSinksUpdateResource
+       :<|> OrganizationsLogsDeleteResource
        :<|> ProjectsSinksListResource
        :<|> ProjectsSinksGetResource
        :<|> ProjectsSinksCreateResource
@@ -342,3 +381,4 @@ type LoggingAPI =
        :<|> ProjectsMetricsDeleteResource
        :<|> ProjectsMetricsUpdateResource
        :<|> ProjectsLogsDeleteResource
+       :<|> BillingAccountsLogsDeleteResource

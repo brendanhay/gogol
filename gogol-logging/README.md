@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Logging.
+A client library for the Google Stackdriver Logging.
 
 
 ## Contribute

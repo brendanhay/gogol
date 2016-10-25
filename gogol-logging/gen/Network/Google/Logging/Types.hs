@@ -35,24 +35,19 @@ module Network.Google.Logging.Types
     , mrdType
     , mrdDescription
 
-    -- * Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
     -- * ListLogEntriesResponse
     , ListLogEntriesResponse
     , listLogEntriesResponse
     , llerNextPageToken
     , llerEntries
-    , llerProjectIdErrors
 
     -- * MonitoredResourceLabels
     , MonitoredResourceLabels
     , monitoredResourceLabels
     , mrlAddtional
+
+    -- * LogMetricVersion
+    , LogMetricVersion (..)
 
     -- * ListLogMetricsResponse
     , ListLogMetricsResponse
@@ -68,6 +63,9 @@ module Network.Google.Logging.Types
     , wlerResource
     , wlerLabels
     , wlerLogName
+
+    -- * LogSinkOutputVersionFormat
+    , LogSinkOutputVersionFormat (..)
 
     -- * Empty
     , Empty
@@ -133,20 +131,21 @@ module Network.Google.Logging.Types
     , LogSink
     , logSink
     , lsDestination
+    , lsStartTime
     , lsOutputVersionFormat
+    , lsWriterIdentity
     , lsName
+    , lsEndTime
     , lsFilter
-
-    -- * StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
 
     -- * ListMonitoredResourceDescriptorsResponse
     , ListMonitoredResourceDescriptorsResponse
     , listMonitoredResourceDescriptorsResponse
     , lmrdrNextPageToken
     , lmrdrResourceDescriptors
+
+    -- * LabelDescriptorValueType
+    , LabelDescriptorValueType (..)
 
     -- * HTTPRequest
     , HTTPRequest
@@ -155,6 +154,8 @@ module Network.Google.Logging.Types
     , httprRequestURL
     , httprCacheFillBytes
     , httprRemoteIP
+    , httprLatency
+    , httprServerIP
     , httprRequestSize
     , httprCacheValidatedWithOriginServer
     , httprUserAgent
@@ -163,11 +164,6 @@ module Network.Google.Logging.Types
     , httprRequestMethod
     , httprCacheHit
     , httprReferer
-
-    -- * ListLogEntriesResponseProjectIdErrors
-    , ListLogEntriesResponseProjectIdErrors
-    , listLogEntriesResponseProjectIdErrors
-    , llerpieAddtional
 
     -- * WriteLogEntriesRequestLabels
     , WriteLogEntriesRequestLabels
@@ -179,6 +175,9 @@ module Network.Google.Logging.Types
     , monitoredResource
     , mrLabels
     , mrType
+
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * LogLine
     , LogLine
@@ -199,11 +198,11 @@ module Network.Google.Logging.Types
     , ListLogEntriesRequest
     , listLogEntriesRequest
     , llerOrderBy
-    , llerPartialSuccess
     , llerProjectIds
     , llerFilter
     , llerPageToken
     , llerPageSize
+    , llerResourceNames
 
     -- * LogEntryOperation
     , LogEntryOperation
@@ -217,6 +216,7 @@ module Network.Google.Logging.Types
     , LogMetric
     , logMetric
     , lmName
+    , lmVersion
     , lmFilter
     , lmDescription
 
@@ -242,6 +242,9 @@ module Network.Google.Logging.Types
     , slFunctionName
     , slFile
 
+    -- * LogEntrySeverity
+    , LogEntrySeverity (..)
+
     -- * SourceReference
     , SourceReference
     , sourceReference
@@ -252,16 +255,19 @@ module Network.Google.Logging.Types
     , LogEntryJSONPayload
     , logEntryJSONPayload
     , lejpAddtional
+
+    -- * LogLineSeverity
+    , LogLineSeverity (..)
     ) where
 
 import           Network.Google.Logging.Types.Product
 import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2beta1' of the Google Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2' of the Stackdriver Logging API. This contains the host and root path used as a starting point for constructing service requests.
 loggingService :: ServiceConfig
 loggingService
-  = defaultService (ServiceId "logging:v2beta1")
+  = defaultService (ServiceId "logging:v2")
       "logging.googleapis.com"
 
 -- | Administrate log data for your projects

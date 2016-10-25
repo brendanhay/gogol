@@ -23,7 +23,7 @@
 -- Deletes a log and all its log entries. The log will reappear if it
 -- receives new entries.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.projects.logs.delete@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.logs.delete@.
 module Network.Google.Resource.Logging.Projects.Logs.Delete
     (
     -- * REST Resource
@@ -50,9 +50,9 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.projects.logs.delete@ method which the
 -- 'ProjectsLogsDelete' request conforms to.
 type ProjectsLogsDeleteResource =
-     "v2beta1" :>
+     "v2" :>
        Capture "logName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -66,7 +66,7 @@ type ProjectsLogsDeleteResource =
 --
 -- /See:/ 'projectsLogsDelete' smart constructor.
 data ProjectsLogsDelete = ProjectsLogsDelete'
-    { _pldXgafv          :: !(Maybe Text)
+    { _pldXgafv          :: !(Maybe Xgafv)
     , _pldUploadProtocol :: !(Maybe Text)
     , _pldPp             :: !Bool
     , _pldAccessToken    :: !(Maybe Text)
@@ -111,7 +111,7 @@ projectsLogsDelete pPldLogName_ =
     }
 
 -- | V1 error format.
-pldXgafv :: Lens' ProjectsLogsDelete (Maybe Text)
+pldXgafv :: Lens' ProjectsLogsDelete (Maybe Xgafv)
 pldXgafv = lens _pldXgafv (\ s a -> s{_pldXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

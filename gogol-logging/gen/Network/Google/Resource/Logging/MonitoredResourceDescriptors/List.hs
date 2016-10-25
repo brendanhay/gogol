@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists monitored resource descriptors that are used by Cloud Logging.
+-- Lists the monitored resource descriptors used by Stackdriver Logging.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.monitoredResourceDescriptors.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.monitoredResourceDescriptors.list@.
 module Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
     (
     -- * REST Resource
@@ -50,9 +50,9 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.monitoredResourceDescriptors.list@ method which the
 -- 'MonitoredResourceDescriptorsList' request conforms to.
 type MonitoredResourceDescriptorsListResource =
-     "v2beta1" :>
+     "v2" :>
        "monitoredResourceDescriptors" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -65,11 +65,11 @@ type MonitoredResourceDescriptorsListResource =
                              Get '[JSON]
                                ListMonitoredResourceDescriptorsResponse
 
--- | Lists monitored resource descriptors that are used by Cloud Logging.
+-- | Lists the monitored resource descriptors used by Stackdriver Logging.
 --
 -- /See:/ 'monitoredResourceDescriptorsList' smart constructor.
 data MonitoredResourceDescriptorsList = MonitoredResourceDescriptorsList'
-    { _mrdlXgafv          :: !(Maybe Text)
+    { _mrdlXgafv          :: !(Maybe Xgafv)
     , _mrdlUploadProtocol :: !(Maybe Text)
     , _mrdlPp             :: !Bool
     , _mrdlAccessToken    :: !(Maybe Text)
@@ -117,7 +117,7 @@ monitoredResourceDescriptorsList =
     }
 
 -- | V1 error format.
-mrdlXgafv :: Lens' MonitoredResourceDescriptorsList (Maybe Text)
+mrdlXgafv :: Lens' MonitoredResourceDescriptorsList (Maybe Xgafv)
 mrdlXgafv
   = lens _mrdlXgafv (\ s a -> s{_mrdlXgafv = a})
 
@@ -149,19 +149,18 @@ mrdlBearerToken
   = lens _mrdlBearerToken
       (\ s a -> s{_mrdlBearerToken = a})
 
--- | Optional. If the \`pageToken\` parameter is supplied, then the next page
--- of results is retrieved. The \`pageToken\` parameter must be set to the
--- value of the \`nextPageToken\` from the previous response.
+-- | Optional. If present, then retrieve the next batch of results from the
+-- preceding call to this method. \`pageToken\` must be the value of
+-- \`nextPageToken\` from the previous response. The values of other method
+-- parameters should be identical to those in the previous call.
 mrdlPageToken :: Lens' MonitoredResourceDescriptorsList (Maybe Text)
 mrdlPageToken
   = lens _mrdlPageToken
       (\ s a -> s{_mrdlPageToken = a})
 
--- | Optional. The maximum number of results to return from this request. You
--- must check for presence of \`nextPageToken\` to determine if additional
--- results are available, which you can retrieve by passing the
--- \`nextPageToken\` value as the \`pageToken\` parameter in the next
--- request.
+-- | Optional. The maximum number of results to return from this request.
+-- Non-positive values are ignored. The presence of \`nextPageToken\` in
+-- the response indicates that more results might be available.
 mrdlPageSize :: Lens' MonitoredResourceDescriptorsList (Maybe Int32)
 mrdlPageSize
   = lens _mrdlPageSize (\ s a -> s{_mrdlPageSize = a})

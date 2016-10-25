@@ -22,7 +22,7 @@
 --
 -- Deletes a sink.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.projects.sinks.delete@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.delete@.
 module Network.Google.Resource.Logging.Projects.Sinks.Delete
     (
     -- * REST Resource
@@ -49,9 +49,9 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.projects.sinks.delete@ method which the
 -- 'ProjectsSinksDelete' request conforms to.
 type ProjectsSinksDeleteResource =
-     "v2beta1" :>
+     "v2" :>
        Capture "sinkName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -64,7 +64,7 @@ type ProjectsSinksDeleteResource =
 --
 -- /See:/ 'projectsSinksDelete' smart constructor.
 data ProjectsSinksDelete = ProjectsSinksDelete'
-    { _psdXgafv          :: !(Maybe Text)
+    { _psdXgafv          :: !(Maybe Xgafv)
     , _psdUploadProtocol :: !(Maybe Text)
     , _psdPp             :: !Bool
     , _psdAccessToken    :: !(Maybe Text)
@@ -109,7 +109,7 @@ projectsSinksDelete pPsdSinkName_ =
     }
 
 -- | V1 error format.
-psdXgafv :: Lens' ProjectsSinksDelete (Maybe Text)
+psdXgafv :: Lens' ProjectsSinksDelete (Maybe Xgafv)
 psdXgafv = lens _psdXgafv (\ s a -> s{_psdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -140,8 +140,10 @@ psdBearerToken
   = lens _psdBearerToken
       (\ s a -> s{_psdBearerToken = a})
 
--- | The resource name of the sink to delete. Example:
--- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`.
+-- | Required. The resource name of the sink to delete, including the parent
+-- resource and the sink identifier. Example:
+-- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`. It is an error if
+-- the sink does not exist.
 psdSinkName :: Lens' ProjectsSinksDelete Text
 psdSinkName
   = lens _psdSinkName (\ s a -> s{_psdSinkName = a})

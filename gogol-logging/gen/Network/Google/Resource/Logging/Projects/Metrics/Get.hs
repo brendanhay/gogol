@@ -22,7 +22,7 @@
 --
 -- Gets a logs-based metric.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.projects.metrics.get@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.metrics.get@.
 module Network.Google.Resource.Logging.Projects.Metrics.Get
     (
     -- * REST Resource
@@ -49,9 +49,9 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.projects.metrics.get@ method which the
 -- 'ProjectsMetricsGet' request conforms to.
 type ProjectsMetricsGetResource =
-     "v2beta1" :>
+     "v2" :>
        Capture "metricName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -64,7 +64,7 @@ type ProjectsMetricsGetResource =
 --
 -- /See:/ 'projectsMetricsGet' smart constructor.
 data ProjectsMetricsGet = ProjectsMetricsGet'
-    { _pmgXgafv          :: !(Maybe Text)
+    { _pmgXgafv          :: !(Maybe Xgafv)
     , _pmgUploadProtocol :: !(Maybe Text)
     , _pmgPp             :: !Bool
     , _pmgAccessToken    :: !(Maybe Text)
@@ -109,7 +109,7 @@ projectsMetricsGet pPmgMetricName_ =
     }
 
 -- | V1 error format.
-pmgXgafv :: Lens' ProjectsMetricsGet (Maybe Text)
+pmgXgafv :: Lens' ProjectsMetricsGet (Maybe Xgafv)
 pmgXgafv = lens _pmgXgafv (\ s a -> s{_pmgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
