@@ -236,6 +236,7 @@ module Network.Google.SQLAdmin.Types
     , datProject
     , datSettings
     , datKind
+    , datConnectionName
     , datCurrentDiskSize
     , datInstanceType
     , datReplicaNames
@@ -284,7 +285,9 @@ module Network.Google.SQLAdmin.Types
     , brSelfLink
     , brEndTime
     , brId
+    , brType
     , brEnQueuedTime
+    , brDescription
     , brInstance
 
     -- * ACLEntry

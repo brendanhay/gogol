@@ -36,6 +36,7 @@ library
     exposed-modules:
           Network.Google.Resource.SQL.BackupRuns.Delete
         , Network.Google.Resource.SQL.BackupRuns.Get
+        , Network.Google.Resource.SQL.BackupRuns.Insert
         , Network.Google.Resource.SQL.BackupRuns.List
         , Network.Google.Resource.SQL.Databases.Delete
         , Network.Google.Resource.SQL.Databases.Get

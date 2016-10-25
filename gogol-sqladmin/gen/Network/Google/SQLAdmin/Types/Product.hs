@@ -731,12 +731,16 @@ sReplicationType
   = lens _sReplicationType
       (\ s a -> s{_sReplicationType = a})
 
--- | The activation policy for this instance. This specifies when the
--- instance should be activated and is applicable only when the instance
--- state is RUNNABLE. This can be one of the following. ALWAYS: The
--- instance should always be active. NEVER: The instance should never be
--- activated. ON_DEMAND: The instance is activated upon receiving requests;
--- only applicable to First Generation instances.
+-- | The activation policy specifies when the instance is activated; it is
+-- applicable only when the instance state is RUNNABLE. The activation
+-- policy cannot be updated together with other settings for Second
+-- Generation instances. Valid values: ALWAYS: The instance is on; it is
+-- not deactivated by inactivity. NEVER: The instance is off; it is not
+-- activated, even if a connection request arrives. ON_DEMAND: The instance
+-- responds to incoming requests, and turns itself off when not in use.
+-- Instances with PER_USE pricing turn off after 15 minutes of inactivity.
+-- Instances with PER_PACKAGE pricing turn off after 12 hours of
+-- inactivity.
 sActivationPolicy :: Lens' Settings (Maybe Text)
 sActivationPolicy
   = lens _sActivationPolicy
@@ -1179,7 +1183,10 @@ databaseInstanceFailoverReplica =
     , _difrAvailable = Nothing
     }
 
--- | The name of the failover replica.
+-- | The name of the failover replica. If specified at instance creation, a
+-- failover replica is created for the instance. The name doesn\'t include
+-- the project ID. This property is applicable only to Second Generation
+-- instances.
 difrName :: Lens' DatabaseInstanceFailoverReplica (Maybe Text)
 difrName = lens _difrName (\ s a -> s{_difrName = a})
 
@@ -1898,6 +1905,7 @@ data DatabaseInstance = DatabaseInstance'
     , _datProject                    :: !(Maybe Text)
     , _datSettings                   :: !(Maybe Settings)
     , _datKind                       :: !Text
+    , _datConnectionName             :: !(Maybe Text)
     , _datCurrentDiskSize            :: !(Maybe (Textual Int64))
     , _datInstanceType               :: !(Maybe Text)
     , _datReplicaNames               :: !(Maybe [Text])
@@ -1938,6 +1946,8 @@ data DatabaseInstance = DatabaseInstance'
 --
 -- * 'datKind'
 --
+-- * 'datConnectionName'
+--
 -- * 'datCurrentDiskSize'
 --
 -- * 'datInstanceType'
@@ -1976,6 +1986,7 @@ databaseInstance =
     , _datProject = Nothing
     , _datSettings = Nothing
     , _datKind = "sql#instance"
+    , _datConnectionName = Nothing
     , _datCurrentDiskSize = Nothing
     , _datInstanceType = Nothing
     , _datReplicaNames = Nothing
@@ -2060,6 +2071,12 @@ datSettings
 -- | This is always sql#instance.
 datKind :: Lens' DatabaseInstance Text
 datKind = lens _datKind (\ s a -> s{_datKind = a})
+
+-- | Connection name of the Cloud SQL instance used in connection strings.
+datConnectionName :: Lens' DatabaseInstance (Maybe Text)
+datConnectionName
+  = lens _datConnectionName
+      (\ s a -> s{_datConnectionName = a})
 
 -- | The current disk usage of the instance in bytes. This property has been
 -- deprecated. Users should use the
@@ -2168,6 +2185,7 @@ instance FromJSON DatabaseInstance where
                      <*> (o .:? "project")
                      <*> (o .:? "settings")
                      <*> (o .:? "kind" .!= "sql#instance")
+                     <*> (o .:? "connectionName")
                      <*> (o .:? "currentDiskSize")
                      <*> (o .:? "instanceType")
                      <*> (o .:? "replicaNames" .!= mempty)
@@ -2196,6 +2214,7 @@ instance ToJSON DatabaseInstance where
                   ("project" .=) <$> _datProject,
                   ("settings" .=) <$> _datSettings,
                   Just ("kind" .= _datKind),
+                  ("connectionName" .=) <$> _datConnectionName,
                   ("currentDiskSize" .=) <$> _datCurrentDiskSize,
                   ("instanceType" .=) <$> _datInstanceType,
                   ("replicaNames" .=) <$> _datReplicaNames,
@@ -2448,7 +2467,9 @@ data BackupRun = BackupRun'
     , _brSelfLink        :: !(Maybe Text)
     , _brEndTime         :: !(Maybe DateTime')
     , _brId              :: !(Maybe (Textual Int64))
+    , _brType            :: !(Maybe Text)
     , _brEnQueuedTime    :: !(Maybe DateTime')
+    , _brDescription     :: !(Maybe Text)
     , _brInstance        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2472,7 +2493,11 @@ data BackupRun = BackupRun'
 --
 -- * 'brId'
 --
+-- * 'brType'
+--
 -- * 'brEnQueuedTime'
+--
+-- * 'brDescription'
 --
 -- * 'brInstance'
 backupRun
@@ -2487,7 +2512,9 @@ backupRun =
     , _brSelfLink = Nothing
     , _brEndTime = Nothing
     , _brId = Nothing
+    , _brType = Nothing
     , _brEnQueuedTime = Nothing
+    , _brDescription = Nothing
     , _brInstance = Nothing
     }
 
@@ -2538,6 +2565,10 @@ brId
   = lens _brId (\ s a -> s{_brId = a}) .
       mapping _Coerce
 
+-- | The type of this run; can be either \"AUTOMATED\" or \"ON_DEMAND\".
+brType :: Lens' BackupRun (Maybe Text)
+brType = lens _brType (\ s a -> s{_brType = a})
+
 -- | The time the run was enqueued in UTC timezone in RFC 3339 format, for
 -- example 2012-11-15T16:19:00.094Z.
 brEnQueuedTime :: Lens' BackupRun (Maybe UTCTime)
@@ -2545,6 +2576,12 @@ brEnQueuedTime
   = lens _brEnQueuedTime
       (\ s a -> s{_brEnQueuedTime = a})
       . mapping _DateTime
+
+-- | The description of this run, only applicable to on-demand backups.
+brDescription :: Lens' BackupRun (Maybe Text)
+brDescription
+  = lens _brDescription
+      (\ s a -> s{_brDescription = a})
 
 -- | Name of the database instance.
 brInstance :: Lens' BackupRun (Maybe Text)
@@ -2563,7 +2600,9 @@ instance FromJSON BackupRun where
                      <*> (o .:? "selfLink")
                      <*> (o .:? "endTime")
                      <*> (o .:? "id")
+                     <*> (o .:? "type")
                      <*> (o .:? "enqueuedTime")
+                     <*> (o .:? "description")
                      <*> (o .:? "instance"))
 
 instance ToJSON BackupRun where
@@ -2576,7 +2615,9 @@ instance ToJSON BackupRun where
                   ("windowStartTime" .=) <$> _brWindowStartTime,
                   ("selfLink" .=) <$> _brSelfLink,
                   ("endTime" .=) <$> _brEndTime, ("id" .=) <$> _brId,
+                  ("type" .=) <$> _brType,
                   ("enqueuedTime" .=) <$> _brEnQueuedTime,
+                  ("description" .=) <$> _brDescription,
                   ("instance" .=) <$> _brInstance])
 
 -- | An entry for an Access Control list.
