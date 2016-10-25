@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'ManagedZonesList' request conforms to.
 type ManagedZonesListResource =
      "dns" :>
-       "v1" :>
+       "v2beta1" :>
          "projects" :>
            Capture "project" Text :>
              "managedZones" :>

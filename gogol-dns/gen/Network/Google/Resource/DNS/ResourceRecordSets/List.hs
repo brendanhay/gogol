@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'ResourceRecordSetsList' request conforms to.
 type ResourceRecordSetsListResource =
      "dns" :>
-       "v1" :>
+       "v2beta1" :>
          "projects" :>
            Capture "project" Text :>
              "managedZones" :>

@@ -35,6 +35,7 @@ module Network.Google.Resource.DNS.ManagedZones.Get
     -- * Request Lenses
     , mzgProject
     , mzgManagedZone
+    , mzgClientOperationId
     ) where
 
 import           Network.Google.DNS.Types
@@ -44,19 +45,21 @@ import           Network.Google.Prelude
 -- 'ManagedZonesGet' request conforms to.
 type ManagedZonesGetResource =
      "dns" :>
-       "v1" :>
+       "v2beta1" :>
          "projects" :>
            Capture "project" Text :>
              "managedZones" :>
                Capture "managedZone" Text :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] ManagedZone
+                 QueryParam "clientOperationId" Text :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] ManagedZone
 
 -- | Fetch the representation of an existing ManagedZone.
 --
 -- /See:/ 'managedZonesGet' smart constructor.
 data ManagedZonesGet = ManagedZonesGet'
-    { _mzgProject     :: !Text
-    , _mzgManagedZone :: !Text
+    { _mzgProject           :: !Text
+    , _mzgManagedZone       :: !Text
+    , _mzgClientOperationId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesGet' with the minimum fields required to make a request.
@@ -66,6 +69,8 @@ data ManagedZonesGet = ManagedZonesGet'
 -- * 'mzgProject'
 --
 -- * 'mzgManagedZone'
+--
+-- * 'mzgClientOperationId'
 managedZonesGet
     :: Text -- ^ 'mzgProject'
     -> Text -- ^ 'mzgManagedZone'
@@ -74,6 +79,7 @@ managedZonesGet pMzgProject_ pMzgManagedZone_ =
     ManagedZonesGet'
     { _mzgProject = pMzgProject_
     , _mzgManagedZone = pMzgManagedZone_
+    , _mzgClientOperationId = Nothing
     }
 
 -- | Identifies the project addressed by this request.
@@ -88,6 +94,14 @@ mzgManagedZone
   = lens _mzgManagedZone
       (\ s a -> s{_mzgManagedZone = a})
 
+-- | For mutating operation requests only. An optional identifier specified
+-- by the client. Must be unique for operation resources in the Operations
+-- collection.
+mzgClientOperationId :: Lens' ManagedZonesGet (Maybe Text)
+mzgClientOperationId
+  = lens _mzgClientOperationId
+      (\ s a -> s{_mzgClientOperationId = a})
+
 instance GoogleRequest ManagedZonesGet where
         type Rs ManagedZonesGet = ManagedZone
         type Scopes ManagedZonesGet =
@@ -96,7 +110,9 @@ instance GoogleRequest ManagedZonesGet where
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ManagedZonesGet'{..}
-          = go _mzgProject _mzgManagedZone (Just AltJSON)
+          = go _mzgProject _mzgManagedZone
+              _mzgClientOperationId
+              (Just AltJSON)
               dNSService
           where go
                   = buildClient

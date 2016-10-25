@@ -41,6 +41,18 @@ module Network.Google.DNS
     -- ** dns.changes.list
     , module Network.Google.Resource.DNS.Changes.List
 
+    -- ** dns.dnskeys.get
+    , module Network.Google.Resource.DNS.DNSkeys.Get
+
+    -- ** dns.dnskeys.list
+    , module Network.Google.Resource.DNS.DNSkeys.List
+
+    -- ** dns.managedZoneOperations.get
+    , module Network.Google.Resource.DNS.ManagedZoneOperations.Get
+
+    -- ** dns.managedZoneOperations.list
+    , module Network.Google.Resource.DNS.ManagedZoneOperations.List
+
     -- ** dns.managedZones.create
     , module Network.Google.Resource.DNS.ManagedZones.Create
 
@@ -53,6 +65,12 @@ module Network.Google.DNS
     -- ** dns.managedZones.list
     , module Network.Google.Resource.DNS.ManagedZones.List
 
+    -- ** dns.managedZones.patch
+    , module Network.Google.Resource.DNS.ManagedZones.Patch
+
+    -- ** dns.managedZones.update
+    , module Network.Google.Resource.DNS.ManagedZones.Update
+
     -- ** dns.projects.get
     , module Network.Google.Resource.DNS.Projects.Get
 
@@ -61,12 +79,41 @@ module Network.Google.DNS
 
     -- * Types
 
+    -- ** DNSKeySpecAlgorithm
+    , DNSKeySpecAlgorithm (..)
+
+    -- ** ManagedZoneDNSSecConfigNonExistence
+    , ManagedZoneDNSSecConfigNonExistence (..)
+
+    -- ** OperationDNSKeyContext
+    , OperationDNSKeyContext
+    , operationDNSKeyContext
+    , odkcOldValue
+    , odkcNewValue
+
+    -- ** DNSKeysListResponse
+    , DNSKeysListResponse
+    , dnsKeysListResponse
+    , dklrNextPageToken
+    , dklrDNSKeys
+    , dklrKind
+    , dklrHeader
+
     -- ** ChangesListResponse
     , ChangesListResponse
     , changesListResponse
     , clrNextPageToken
     , clrChanges
     , clrKind
+    , clrHeader
+
+    -- ** ManagedZoneDNSSecConfigState
+    , ManagedZoneDNSSecConfigState (..)
+
+    -- ** ManagedZonesDeleteResponse
+    , ManagedZonesDeleteResponse
+    , managedZonesDeleteResponse
+    , mzdrHeader
 
     -- ** Project
     , Project
@@ -76,8 +123,31 @@ module Network.Google.DNS
     , pNumber
     , pQuota
 
+    -- ** Operation
+    , Operation
+    , operation
+    , oStatus
+    , oStartTime
+    , oKind
+    , oUser
+    , oId
+    , oType
+    , oZoneContext
+    , oDNSKeyContext
+
+    -- ** DNSKeySpec
+    , DNSKeySpec
+    , dnsKeySpec
+    , dksKeyType
+    , dksKind
+    , dksAlgorithm
+    , dksKeyLength
+
     -- ** ChangesListSortBy
     , ChangesListSortBy (..)
+
+    -- ** DNSKeyDigestType
+    , DNSKeyDigestType (..)
 
     -- ** Change
     , Change
@@ -88,22 +158,76 @@ module Network.Google.DNS
     , cKind
     , cDeletions
     , cId
+    , cIsServing
+
+    -- ** DNSKey
+    , DNSKey
+    , dnsKey
+    , dkCreationTime
+    , dkKeyTag
+    , dkKind
+    , dkDigests
+    , dkPublicKey
+    , dkAlgorithm
+    , dkId
+    , dkType
+    , dkKeyLength
+    , dkIsActive
+    , dkDescription
+
+    -- ** OperationStatus
+    , OperationStatus (..)
+
+    -- ** OperationManagedZoneContext
+    , OperationManagedZoneContext
+    , operationManagedZoneContext
+    , omzcOldValue
+    , omzcNewValue
+
+    -- ** DNSKeyAlgorithm
+    , DNSKeyAlgorithm (..)
+
+    -- ** ResponseHeader
+    , ResponseHeader
+    , responseHeader
+    , rhOperationId
+
+    -- ** DNSKeySpecKeyType
+    , DNSKeySpecKeyType (..)
+
+    -- ** ManagedZoneOperationsListResponse
+    , ManagedZoneOperationsListResponse
+    , managedZoneOperationsListResponse
+    , mzolrNextPageToken
+    , mzolrKind
+    , mzolrHeader
+    , mzolrOperations
 
     -- ** ResourceRecordSetsListResponse
     , ResourceRecordSetsListResponse
     , resourceRecordSetsListResponse
     , rrslrNextPageToken
     , rrslrKind
+    , rrslrHeader
     , rrslrRrSets
 
     -- ** ChangeStatus
     , ChangeStatus (..)
+
+    -- ** ManagedZoneDNSSecConfig
+    , ManagedZoneDNSSecConfig
+    , managedZoneDNSSecConfig
+    , mzdscState
+    , mzdscKind
+    , mzdscDefaultKeySpecs
+    , mzdscNonExistence
 
     -- ** ResourceRecordSet
     , ResourceRecordSet
     , resourceRecordSet
     , rrsTtl
     , rrsKind
+    , rrsSignatureRrDatas
     , rrsName
     , rrsType
     , rrsRrDatas
@@ -118,24 +242,40 @@ module Network.Google.DNS
     , mzId
     , mzDNSName
     , mzDescription
+    , mzDNSsecConfig
     , mzNameServers
 
     -- ** Quota
     , Quota
     , quota
     , qRrSetDeletionsPerChange
+    , qWhiteListedKeySpecs
     , qRrSetsPerManagedZone
     , qKind
     , qResourceRecordsPerRrSet
     , qRrSetAdditionsPerChange
     , qManagedZones
     , qTotalRrDataSizePerChange
+    , qDNSKeysPerManagedZone
+
+    -- ** DNSKeyType
+    , DNSKeyType (..)
+
+    -- ** DNSKeyDigest
+    , DNSKeyDigest
+    , dnsKeyDigest
+    , dkdDigest
+    , dkdType
+
+    -- ** ManagedZoneOperationsListSortBy
+    , ManagedZoneOperationsListSortBy (..)
 
     -- ** ManagedZonesListResponse
     , ManagedZonesListResponse
     , managedZonesListResponse
     , mzlrNextPageToken
     , mzlrKind
+    , mzlrHeader
     , mzlrManagedZones
     ) where
 
@@ -144,10 +284,16 @@ import           Network.Google.Prelude
 import           Network.Google.Resource.DNS.Changes.Create
 import           Network.Google.Resource.DNS.Changes.Get
 import           Network.Google.Resource.DNS.Changes.List
+import           Network.Google.Resource.DNS.DNSkeys.Get
+import           Network.Google.Resource.DNS.DNSkeys.List
+import           Network.Google.Resource.DNS.ManagedZoneOperations.Get
+import           Network.Google.Resource.DNS.ManagedZoneOperations.List
 import           Network.Google.Resource.DNS.ManagedZones.Create
 import           Network.Google.Resource.DNS.ManagedZones.Delete
 import           Network.Google.Resource.DNS.ManagedZones.Get
 import           Network.Google.Resource.DNS.ManagedZones.List
+import           Network.Google.Resource.DNS.ManagedZones.Patch
+import           Network.Google.Resource.DNS.ManagedZones.Update
 import           Network.Google.Resource.DNS.Projects.Get
 import           Network.Google.Resource.DNS.ResourceRecordSets.List
 
@@ -157,11 +303,17 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Cloud DNS API service.
 type DNSAPI =
-     ChangesListResource :<|> ChangesGetResource :<|>
-       ChangesCreateResource
+     DNSkeysListResource :<|> DNSkeysGetResource :<|>
+       ChangesListResource
+       :<|> ChangesGetResource
+       :<|> ChangesCreateResource
        :<|> ResourceRecordSetsListResource
+       :<|> ManagedZoneOperationsListResource
+       :<|> ManagedZoneOperationsGetResource
        :<|> ManagedZonesListResource
+       :<|> ManagedZonesPatchResource
        :<|> ManagedZonesGetResource
        :<|> ManagedZonesCreateResource
        :<|> ManagedZonesDeleteResource
+       :<|> ManagedZonesUpdateResource
        :<|> ProjectsGetResource

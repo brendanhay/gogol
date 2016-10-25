@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1@
+    This library is compatible with version @v2beta1@
     of the API.
 
 source-repository head
@@ -38,10 +38,16 @@ library
         , Network.Google.Resource.DNS.Changes.Create
         , Network.Google.Resource.DNS.Changes.Get
         , Network.Google.Resource.DNS.Changes.List
+        , Network.Google.Resource.DNS.DNSkeys.Get
+        , Network.Google.Resource.DNS.DNSkeys.List
+        , Network.Google.Resource.DNS.ManagedZoneOperations.Get
+        , Network.Google.Resource.DNS.ManagedZoneOperations.List
         , Network.Google.Resource.DNS.ManagedZones.Create
         , Network.Google.Resource.DNS.ManagedZones.Delete
         , Network.Google.Resource.DNS.ManagedZones.Get
         , Network.Google.Resource.DNS.ManagedZones.List
+        , Network.Google.Resource.DNS.ManagedZones.Patch
+        , Network.Google.Resource.DNS.ManagedZones.Update
         , Network.Google.Resource.DNS.Projects.Get
         , Network.Google.Resource.DNS.ResourceRecordSets.List
 

@@ -25,12 +25,41 @@ module Network.Google.DNS.Types
     , ndevClouddnsReadwriteScope
     , cloudPlatformScope
 
+    -- * DNSKeySpecAlgorithm
+    , DNSKeySpecAlgorithm (..)
+
+    -- * ManagedZoneDNSSecConfigNonExistence
+    , ManagedZoneDNSSecConfigNonExistence (..)
+
+    -- * OperationDNSKeyContext
+    , OperationDNSKeyContext
+    , operationDNSKeyContext
+    , odkcOldValue
+    , odkcNewValue
+
+    -- * DNSKeysListResponse
+    , DNSKeysListResponse
+    , dnsKeysListResponse
+    , dklrNextPageToken
+    , dklrDNSKeys
+    , dklrKind
+    , dklrHeader
+
     -- * ChangesListResponse
     , ChangesListResponse
     , changesListResponse
     , clrNextPageToken
     , clrChanges
     , clrKind
+    , clrHeader
+
+    -- * ManagedZoneDNSSecConfigState
+    , ManagedZoneDNSSecConfigState (..)
+
+    -- * ManagedZonesDeleteResponse
+    , ManagedZonesDeleteResponse
+    , managedZonesDeleteResponse
+    , mzdrHeader
 
     -- * Project
     , Project
@@ -40,8 +69,31 @@ module Network.Google.DNS.Types
     , pNumber
     , pQuota
 
+    -- * Operation
+    , Operation
+    , operation
+    , oStatus
+    , oStartTime
+    , oKind
+    , oUser
+    , oId
+    , oType
+    , oZoneContext
+    , oDNSKeyContext
+
+    -- * DNSKeySpec
+    , DNSKeySpec
+    , dnsKeySpec
+    , dksKeyType
+    , dksKind
+    , dksAlgorithm
+    , dksKeyLength
+
     -- * ChangesListSortBy
     , ChangesListSortBy (..)
+
+    -- * DNSKeyDigestType
+    , DNSKeyDigestType (..)
 
     -- * Change
     , Change
@@ -52,22 +104,76 @@ module Network.Google.DNS.Types
     , cKind
     , cDeletions
     , cId
+    , cIsServing
+
+    -- * DNSKey
+    , DNSKey
+    , dnsKey
+    , dkCreationTime
+    , dkKeyTag
+    , dkKind
+    , dkDigests
+    , dkPublicKey
+    , dkAlgorithm
+    , dkId
+    , dkType
+    , dkKeyLength
+    , dkIsActive
+    , dkDescription
+
+    -- * OperationStatus
+    , OperationStatus (..)
+
+    -- * OperationManagedZoneContext
+    , OperationManagedZoneContext
+    , operationManagedZoneContext
+    , omzcOldValue
+    , omzcNewValue
+
+    -- * DNSKeyAlgorithm
+    , DNSKeyAlgorithm (..)
+
+    -- * ResponseHeader
+    , ResponseHeader
+    , responseHeader
+    , rhOperationId
+
+    -- * DNSKeySpecKeyType
+    , DNSKeySpecKeyType (..)
+
+    -- * ManagedZoneOperationsListResponse
+    , ManagedZoneOperationsListResponse
+    , managedZoneOperationsListResponse
+    , mzolrNextPageToken
+    , mzolrKind
+    , mzolrHeader
+    , mzolrOperations
 
     -- * ResourceRecordSetsListResponse
     , ResourceRecordSetsListResponse
     , resourceRecordSetsListResponse
     , rrslrNextPageToken
     , rrslrKind
+    , rrslrHeader
     , rrslrRrSets
 
     -- * ChangeStatus
     , ChangeStatus (..)
+
+    -- * ManagedZoneDNSSecConfig
+    , ManagedZoneDNSSecConfig
+    , managedZoneDNSSecConfig
+    , mzdscState
+    , mzdscKind
+    , mzdscDefaultKeySpecs
+    , mzdscNonExistence
 
     -- * ResourceRecordSet
     , ResourceRecordSet
     , resourceRecordSet
     , rrsTtl
     , rrsKind
+    , rrsSignatureRrDatas
     , rrsName
     , rrsType
     , rrsRrDatas
@@ -82,24 +188,40 @@ module Network.Google.DNS.Types
     , mzId
     , mzDNSName
     , mzDescription
+    , mzDNSsecConfig
     , mzNameServers
 
     -- * Quota
     , Quota
     , quota
     , qRrSetDeletionsPerChange
+    , qWhiteListedKeySpecs
     , qRrSetsPerManagedZone
     , qKind
     , qResourceRecordsPerRrSet
     , qRrSetAdditionsPerChange
     , qManagedZones
     , qTotalRrDataSizePerChange
+    , qDNSKeysPerManagedZone
+
+    -- * DNSKeyType
+    , DNSKeyType (..)
+
+    -- * DNSKeyDigest
+    , DNSKeyDigest
+    , dnsKeyDigest
+    , dkdDigest
+    , dkdType
+
+    -- * ManagedZoneOperationsListSortBy
+    , ManagedZoneOperationsListSortBy (..)
 
     -- * ManagedZonesListResponse
     , ManagedZonesListResponse
     , managedZonesListResponse
     , mzlrNextPageToken
     , mzlrKind
+    , mzlrHeader
     , mzlrManagedZones
     ) where
 
@@ -107,10 +229,10 @@ import           Network.Google.DNS.Types.Product
 import           Network.Google.DNS.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1' of the Google Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2beta1' of the Google Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
 dNSService :: ServiceConfig
 dNSService
-  = defaultService (ServiceId "dns:v1")
+  = defaultService (ServiceId "dns:v2beta1")
       "www.googleapis.com"
 
 -- | View your DNS records hosted by Google Cloud DNS

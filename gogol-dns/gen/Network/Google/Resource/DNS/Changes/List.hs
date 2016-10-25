@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'ChangesList' request conforms to.
 type ChangesListResource =
      "dns" :>
-       "v1" :>
+       "v2beta1" :>
          "projects" :>
            Capture "project" Text :>
              "managedZones" :>
