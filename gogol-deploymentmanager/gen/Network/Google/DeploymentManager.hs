@@ -42,6 +42,9 @@ module Network.Google.DeploymentManager
     -- ** deploymentmanager.deployments.get
     , module Network.Google.Resource.DeploymentManager.Deployments.Get
 
+    -- ** deploymentmanager.deployments.getIamPolicy
+    , module Network.Google.Resource.DeploymentManager.Deployments.GetIAMPolicy
+
     -- ** deploymentmanager.deployments.insert
     , module Network.Google.Resource.DeploymentManager.Deployments.Insert
 
@@ -51,8 +54,14 @@ module Network.Google.DeploymentManager
     -- ** deploymentmanager.deployments.patch
     , module Network.Google.Resource.DeploymentManager.Deployments.Patch
 
+    -- ** deploymentmanager.deployments.setIamPolicy
+    , module Network.Google.Resource.DeploymentManager.Deployments.SetIAMPolicy
+
     -- ** deploymentmanager.deployments.stop
     , module Network.Google.Resource.DeploymentManager.Deployments.Stop
+
+    -- ** deploymentmanager.deployments.testIamPermissions
+    , module Network.Google.Resource.DeploymentManager.Deployments.TestIAMPermissions
 
     -- ** deploymentmanager.deployments.update
     , module Network.Google.Resource.DeploymentManager.Deployments.Update
@@ -91,6 +100,12 @@ module Network.Google.DeploymentManager
     , configFile
     , cfContent
 
+    -- ** AuditConfig
+    , AuditConfig
+    , auditConfig
+    , acService
+    , acExemptedMembers
+
     -- ** DeploymentsUpdateCreatePolicy
     , DeploymentsUpdateCreatePolicy (..)
 
@@ -111,6 +126,12 @@ module Network.Google.DeploymentManager
     , typesListResponse
     , tlrNextPageToken
     , tlrTypes
+
+    -- ** LogConfigCounterOptions
+    , LogConfigCounterOptions
+    , logConfigCounterOptions
+    , lccoField
+    , lccoMetric
 
     -- ** DeploymentsUpdateDeletePolicy
     , DeploymentsUpdateDeletePolicy (..)
@@ -145,6 +166,11 @@ module Network.Google.DeploymentManager
     , oTargetLink
     , oClientOperationId
 
+    -- ** TestPermissionsResponse
+    , TestPermissionsResponse
+    , testPermissionsResponse
+    , tprPermissions
+
     -- ** DeploymentsPatchCreatePolicy
     , DeploymentsPatchCreatePolicy (..)
 
@@ -165,6 +191,7 @@ module Network.Google.DeploymentManager
     , resourceUpdate
     , ruState
     , ruError
+    , ruAccessControl
     , ruWarnings
     , ruIntent
     , ruManifest
@@ -176,6 +203,22 @@ module Network.Google.DeploymentManager
     , deploymentLabelEntry
     , dleValue
     , dleKey
+
+    -- ** Rule
+    , Rule
+    , rule
+    , rAction
+    , rNotIns
+    , rIns
+    , rLogConfigs
+    , rConditions
+    , rPermissions
+    , rDescription
+
+    -- ** TestPermissionsRequest
+    , TestPermissionsRequest
+    , testPermissionsRequest
+    , tPermissions
 
     -- ** Manifest
     , Manifest
@@ -205,6 +248,7 @@ module Network.Google.DeploymentManager
     , Resource
     , resource
     , rInsertTime
+    , rAccessControl
     , rURL
     , rWarnings
     , rUpdateTime
@@ -240,10 +284,21 @@ module Network.Google.DeploymentManager
     , operationError
     , oeErrors
 
+    -- ** Policy
+    , Policy
+    , policy
+    , pAuditConfigs
+    , pEtag
+    , pRules
+    , pVersion
+    , pBindings
+    , pIAMOwned
+
     -- ** Type
     , Type
     , type'
     , tInsertTime
+    , tOperation
     , tSelfLink
     , tName
     , tId
@@ -277,6 +332,16 @@ module Network.Google.DeploymentManager
     , resourceUpdateError
     , rueErrors
 
+    -- ** Condition
+    , Condition
+    , condition
+    , cOp
+    , cIAM
+    , cValues
+    , cValue
+    , cSys
+    , cSvc
+
     -- ** DeploymentsListResponse
     , DeploymentsListResponse
     , deploymentsListResponse
@@ -290,6 +355,16 @@ module Network.Google.DeploymentManager
     , rwiCode
     , rwiMessage
 
+    -- ** LogConfig
+    , LogConfig
+    , logConfig
+    , lcCounter
+
+    -- ** ResourceAccessControl
+    , ResourceAccessControl
+    , resourceAccessControl
+    , racGcpIAMPolicy
+
     -- ** TargetConfiguration
     , TargetConfiguration
     , targetConfiguration
@@ -302,6 +377,12 @@ module Network.Google.DeploymentManager
     , owiData
     , owiCode
     , owiMessage
+
+    -- ** Binding
+    , Binding
+    , binding
+    , bMembers
+    , bRole
 
     -- ** Deployment
     , Deployment
@@ -324,10 +405,13 @@ import           Network.Google.Prelude
 import           Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
 import           Network.Google.Resource.DeploymentManager.Deployments.Delete
 import           Network.Google.Resource.DeploymentManager.Deployments.Get
+import           Network.Google.Resource.DeploymentManager.Deployments.GetIAMPolicy
 import           Network.Google.Resource.DeploymentManager.Deployments.Insert
 import           Network.Google.Resource.DeploymentManager.Deployments.List
 import           Network.Google.Resource.DeploymentManager.Deployments.Patch
+import           Network.Google.Resource.DeploymentManager.Deployments.SetIAMPolicy
 import           Network.Google.Resource.DeploymentManager.Deployments.Stop
+import           Network.Google.Resource.DeploymentManager.Deployments.TestIAMPermissions
 import           Network.Google.Resource.DeploymentManager.Deployments.Update
 import           Network.Google.Resource.DeploymentManager.Manifests.Get
 import           Network.Google.Resource.DeploymentManager.Manifests.List
@@ -349,10 +433,13 @@ type DeploymentManagerAPI =
        :<|> ManifestsGetResource
        :<|> DeploymentsInsertResource
        :<|> DeploymentsListResource
+       :<|> DeploymentsGetIAMPolicyResource
        :<|> DeploymentsPatchResource
        :<|> DeploymentsGetResource
        :<|> DeploymentsCancelPreviewResource
+       :<|> DeploymentsSetIAMPolicyResource
        :<|> DeploymentsStopResource
+       :<|> DeploymentsTestIAMPermissionsResource
        :<|> DeploymentsDeleteResource
        :<|> DeploymentsUpdateResource
        :<|> OperationsListResource
