@@ -20,12 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a given data source. It is an error to modify the data source\'s
--- data stream ID, data type, type, stream name or device information apart
--- from the device version. Changing these fields would require a new
--- unique data stream ID and separate data source. Data sources are
--- identified by their data stream ID. This method supports patch
--- semantics.
+-- Updates the specified data source. The dataStreamId, dataType, type,
+-- dataStreamName, and device properties with the exception of version,
+-- cannot be modified. Data sources are identified by their dataStreamId.
+-- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.patch@.
 module Network.Google.Resource.Fitness.Users.DataSources.Patch
@@ -59,12 +57,10 @@ type UsersDataSourcesPatchResource =
                    ReqBody '[JSON] DataSource :>
                      Patch '[JSON] DataSource
 
--- | Updates a given data source. It is an error to modify the data source\'s
--- data stream ID, data type, type, stream name or device information apart
--- from the device version. Changing these fields would require a new
--- unique data stream ID and separate data source. Data sources are
--- identified by their data stream ID. This method supports patch
--- semantics.
+-- | Updates the specified data source. The dataStreamId, dataType, type,
+-- dataStreamName, and device properties with the exception of version,
+-- cannot be modified. Data sources are identified by their dataStreamId.
+-- This method supports patch semantics.
 --
 -- /See:/ 'usersDataSourcesPatch' smart constructor.
 data UsersDataSourcesPatch = UsersDataSourcesPatch'
@@ -116,7 +112,8 @@ instance GoogleRequest UsersDataSourcesPatch where
         type Scopes UsersDataSourcesPatch =
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
-               "https://www.googleapis.com/auth/fitness.location.write"]
+               "https://www.googleapis.com/auth/fitness.location.write",
+               "https://www.googleapis.com/auth/fitness.nutrition.write"]
         requestClient UsersDataSourcesPatch'{..}
           = go _udspUserId _udspDataSourceId (Just AltJSON)
               _udspPayload

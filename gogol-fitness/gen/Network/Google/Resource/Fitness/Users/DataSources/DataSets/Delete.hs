@@ -149,7 +149,8 @@ instance GoogleRequest UsersDataSourcesDataSetsDelete
         type Scopes UsersDataSourcesDataSetsDelete =
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
-               "https://www.googleapis.com/auth/fitness.location.write"]
+               "https://www.googleapis.com/auth/fitness.location.write",
+               "https://www.googleapis.com/auth/fitness.nutrition.write"]
         requestClient UsersDataSourcesDataSetsDelete'{..}
           = go _udsdsdUserId _udsdsdDataSourceId
               _udsdsdDataSetId

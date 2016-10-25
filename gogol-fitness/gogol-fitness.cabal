@@ -14,7 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Google Fit API
+    Stores and accesses user data in the fitness store from apps on any
+    platform.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

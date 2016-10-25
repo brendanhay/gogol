@@ -126,7 +126,7 @@ udsdsgDataSetId
       (\ s a -> s{_udsdsgDataSetId = a})
 
 -- | If specified, no more than this many data points will be included in the
--- dataset. If the there are more data points in the dataset, nextPageToken
+-- dataset. If there are more data points in the dataset, nextPageToken
 -- will be set in the dataset response.
 udsdsgLimit :: Lens' UsersDataSourcesDataSetsGet (Maybe Int32)
 udsdsgLimit
@@ -152,7 +152,9 @@ instance GoogleRequest UsersDataSourcesDataSetsGet
                "https://www.googleapis.com/auth/fitness.body.read",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.read",
-               "https://www.googleapis.com/auth/fitness.location.write"]
+               "https://www.googleapis.com/auth/fitness.location.write",
+               "https://www.googleapis.com/auth/fitness.nutrition.read",
+               "https://www.googleapis.com/auth/fitness.nutrition.write"]
         requestClient UsersDataSourcesDataSetsGet'{..}
           = go _udsdsgUserId _udsdsgDataSourceId
               _udsdsgDataSetId

@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists all data sources that are visible to the developer, using the
--- OAuth scopes provided. The list is not exhaustive: the user may have
--- private data sources that are only visible to other developers or calls
+-- OAuth scopes provided. The list is not exhaustive; the user may have
+-- private data sources that are only visible to other developers, or calls
 -- using other scopes.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.list@.
@@ -56,8 +56,8 @@ type UsersDataSourcesListResource =
                    Get '[JSON] ListDataSourcesResponse
 
 -- | Lists all data sources that are visible to the developer, using the
--- OAuth scopes provided. The list is not exhaustive: the user may have
--- private data sources that are only visible to other developers or calls
+-- OAuth scopes provided. The list is not exhaustive; the user may have
+-- private data sources that are only visible to other developers, or calls
 -- using other scopes.
 --
 -- /See:/ 'usersDataSourcesList' smart constructor.
@@ -106,7 +106,9 @@ instance GoogleRequest UsersDataSourcesList where
                "https://www.googleapis.com/auth/fitness.body.read",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.read",
-               "https://www.googleapis.com/auth/fitness.location.write"]
+               "https://www.googleapis.com/auth/fitness.location.write",
+               "https://www.googleapis.com/auth/fitness.nutrition.read",
+               "https://www.googleapis.com/auth/fitness.nutrition.write"]
         requestClient UsersDataSourcesList'{..}
           = go _udslUserId (_udslDataTypeName ^. _Default)
               (Just AltJSON)

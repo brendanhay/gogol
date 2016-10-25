@@ -86,10 +86,100 @@ instance FromJSON DataSourceType where
 instance ToJSON DataSourceType where
     toJSON = toJSONText
 
+data BucketByTimePeriodType
+    = Day
+      -- ^ @day@
+    | Month
+      -- ^ @month@
+    | Week
+      -- ^ @week@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BucketByTimePeriodType
+
+instance FromHttpApiData BucketByTimePeriodType where
+    parseQueryParam = \case
+        "day" -> Right Day
+        "month" -> Right Month
+        "week" -> Right Week
+        x -> Left ("Unable to parse BucketByTimePeriodType from: " <> x)
+
+instance ToHttpApiData BucketByTimePeriodType where
+    toQueryParam = \case
+        Day -> "day"
+        Month -> "month"
+        Week -> "week"
+
+instance FromJSON BucketByTimePeriodType where
+    parseJSON = parseJSONText "BucketByTimePeriodType"
+
+instance ToJSON BucketByTimePeriodType where
+    toJSON = toJSONText
+
+data AggregateRequestFilteredDataQualityStandardItem
+    = DATAQUALITYBLOODGLUCOSEISO151972003
+      -- ^ @dataQualityBloodGlucoseIso151972003@
+    | DATAQUALITYBLOODGLUCOSEISO151972013
+      -- ^ @dataQualityBloodGlucoseIso151972013@
+    | DataQualityBloodPressureAami
+      -- ^ @dataQualityBloodPressureAami@
+    | DataQualityBloodPressureBhsAA
+      -- ^ @dataQualityBloodPressureBhsAA@
+    | DataQualityBloodPressureBhsAB
+      -- ^ @dataQualityBloodPressureBhsAB@
+    | DataQualityBloodPressureBhsBA
+      -- ^ @dataQualityBloodPressureBhsBA@
+    | DataQualityBloodPressureBhsBB
+      -- ^ @dataQualityBloodPressureBhsBB@
+    | DATAQUALITYBLOODPRESSUREESH2002
+      -- ^ @dataQualityBloodPressureEsh2002@
+    | DATAQUALITYBLOODPRESSUREESH2010
+      -- ^ @dataQualityBloodPressureEsh2010@
+    | DataQualityUnknown
+      -- ^ @dataQualityUnknown@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AggregateRequestFilteredDataQualityStandardItem
+
+instance FromHttpApiData AggregateRequestFilteredDataQualityStandardItem where
+    parseQueryParam = \case
+        "dataQualityBloodGlucoseIso151972003" -> Right DATAQUALITYBLOODGLUCOSEISO151972003
+        "dataQualityBloodGlucoseIso151972013" -> Right DATAQUALITYBLOODGLUCOSEISO151972013
+        "dataQualityBloodPressureAami" -> Right DataQualityBloodPressureAami
+        "dataQualityBloodPressureBhsAA" -> Right DataQualityBloodPressureBhsAA
+        "dataQualityBloodPressureBhsAB" -> Right DataQualityBloodPressureBhsAB
+        "dataQualityBloodPressureBhsBA" -> Right DataQualityBloodPressureBhsBA
+        "dataQualityBloodPressureBhsBB" -> Right DataQualityBloodPressureBhsBB
+        "dataQualityBloodPressureEsh2002" -> Right DATAQUALITYBLOODPRESSUREESH2002
+        "dataQualityBloodPressureEsh2010" -> Right DATAQUALITYBLOODPRESSUREESH2010
+        "dataQualityUnknown" -> Right DataQualityUnknown
+        x -> Left ("Unable to parse AggregateRequestFilteredDataQualityStandardItem from: " <> x)
+
+instance ToHttpApiData AggregateRequestFilteredDataQualityStandardItem where
+    toQueryParam = \case
+        DATAQUALITYBLOODGLUCOSEISO151972003 -> "dataQualityBloodGlucoseIso151972003"
+        DATAQUALITYBLOODGLUCOSEISO151972013 -> "dataQualityBloodGlucoseIso151972013"
+        DataQualityBloodPressureAami -> "dataQualityBloodPressureAami"
+        DataQualityBloodPressureBhsAA -> "dataQualityBloodPressureBhsAA"
+        DataQualityBloodPressureBhsAB -> "dataQualityBloodPressureBhsAB"
+        DataQualityBloodPressureBhsBA -> "dataQualityBloodPressureBhsBA"
+        DataQualityBloodPressureBhsBB -> "dataQualityBloodPressureBhsBB"
+        DATAQUALITYBLOODPRESSUREESH2002 -> "dataQualityBloodPressureEsh2002"
+        DATAQUALITYBLOODPRESSUREESH2010 -> "dataQualityBloodPressureEsh2010"
+        DataQualityUnknown -> "dataQualityUnknown"
+
+instance FromJSON AggregateRequestFilteredDataQualityStandardItem where
+    parseJSON = parseJSONText "AggregateRequestFilteredDataQualityStandardItem"
+
+instance ToJSON AggregateRequestFilteredDataQualityStandardItem where
+    toJSON = toJSONText
+
 -- | A constant representing the type of the device.
 data DeviceType
     = ChestStrap
       -- ^ @chestStrap@
+    | HeadMounted
+      -- ^ @headMounted@
     | Phone
       -- ^ @phone@
     | Scale
@@ -107,6 +197,7 @@ instance Hashable DeviceType
 instance FromHttpApiData DeviceType where
     parseQueryParam = \case
         "chestStrap" -> Right ChestStrap
+        "headMounted" -> Right HeadMounted
         "phone" -> Right Phone
         "scale" -> Right Scale
         "tablet" -> Right Tablet
@@ -117,6 +208,7 @@ instance FromHttpApiData DeviceType where
 instance ToHttpApiData DeviceType where
     toQueryParam = \case
         ChestStrap -> "chestStrap"
+        HeadMounted -> "headMounted"
         Phone -> "phone"
         Scale -> "scale"
         Tablet -> "tablet"
@@ -127,6 +219,64 @@ instance FromJSON DeviceType where
     parseJSON = parseJSONText "DeviceType"
 
 instance ToJSON DeviceType where
+    toJSON = toJSONText
+
+data DataSourceDataQualityStandardItem
+    = DSDQSIDATAQUALITYBLOODGLUCOSEISO151972003
+      -- ^ @dataQualityBloodGlucoseIso151972003@
+    | DSDQSIDATAQUALITYBLOODGLUCOSEISO151972013
+      -- ^ @dataQualityBloodGlucoseIso151972013@
+    | DSDQSIDataQualityBloodPressureAami
+      -- ^ @dataQualityBloodPressureAami@
+    | DSDQSIDataQualityBloodPressureBhsAA
+      -- ^ @dataQualityBloodPressureBhsAA@
+    | DSDQSIDataQualityBloodPressureBhsAB
+      -- ^ @dataQualityBloodPressureBhsAB@
+    | DSDQSIDataQualityBloodPressureBhsBA
+      -- ^ @dataQualityBloodPressureBhsBA@
+    | DSDQSIDataQualityBloodPressureBhsBB
+      -- ^ @dataQualityBloodPressureBhsBB@
+    | DSDQSIDATAQUALITYBLOODPRESSUREESH2002
+      -- ^ @dataQualityBloodPressureEsh2002@
+    | DSDQSIDATAQUALITYBLOODPRESSUREESH2010
+      -- ^ @dataQualityBloodPressureEsh2010@
+    | DSDQSIDataQualityUnknown
+      -- ^ @dataQualityUnknown@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DataSourceDataQualityStandardItem
+
+instance FromHttpApiData DataSourceDataQualityStandardItem where
+    parseQueryParam = \case
+        "dataQualityBloodGlucoseIso151972003" -> Right DSDQSIDATAQUALITYBLOODGLUCOSEISO151972003
+        "dataQualityBloodGlucoseIso151972013" -> Right DSDQSIDATAQUALITYBLOODGLUCOSEISO151972013
+        "dataQualityBloodPressureAami" -> Right DSDQSIDataQualityBloodPressureAami
+        "dataQualityBloodPressureBhsAA" -> Right DSDQSIDataQualityBloodPressureBhsAA
+        "dataQualityBloodPressureBhsAB" -> Right DSDQSIDataQualityBloodPressureBhsAB
+        "dataQualityBloodPressureBhsBA" -> Right DSDQSIDataQualityBloodPressureBhsBA
+        "dataQualityBloodPressureBhsBB" -> Right DSDQSIDataQualityBloodPressureBhsBB
+        "dataQualityBloodPressureEsh2002" -> Right DSDQSIDATAQUALITYBLOODPRESSUREESH2002
+        "dataQualityBloodPressureEsh2010" -> Right DSDQSIDATAQUALITYBLOODPRESSUREESH2010
+        "dataQualityUnknown" -> Right DSDQSIDataQualityUnknown
+        x -> Left ("Unable to parse DataSourceDataQualityStandardItem from: " <> x)
+
+instance ToHttpApiData DataSourceDataQualityStandardItem where
+    toQueryParam = \case
+        DSDQSIDATAQUALITYBLOODGLUCOSEISO151972003 -> "dataQualityBloodGlucoseIso151972003"
+        DSDQSIDATAQUALITYBLOODGLUCOSEISO151972013 -> "dataQualityBloodGlucoseIso151972013"
+        DSDQSIDataQualityBloodPressureAami -> "dataQualityBloodPressureAami"
+        DSDQSIDataQualityBloodPressureBhsAA -> "dataQualityBloodPressureBhsAA"
+        DSDQSIDataQualityBloodPressureBhsAB -> "dataQualityBloodPressureBhsAB"
+        DSDQSIDataQualityBloodPressureBhsBA -> "dataQualityBloodPressureBhsBA"
+        DSDQSIDataQualityBloodPressureBhsBB -> "dataQualityBloodPressureBhsBB"
+        DSDQSIDATAQUALITYBLOODPRESSUREESH2002 -> "dataQualityBloodPressureEsh2002"
+        DSDQSIDATAQUALITYBLOODPRESSUREESH2010 -> "dataQualityBloodPressureEsh2010"
+        DSDQSIDataQualityUnknown -> "dataQualityUnknown"
+
+instance FromJSON DataSourceDataQualityStandardItem where
+    parseJSON = parseJSONText "DataSourceDataQualityStandardItem"
+
+instance ToJSON DataSourceDataQualityStandardItem where
     toJSON = toJSONText
 
 -- | The different supported formats for each field in a data type.

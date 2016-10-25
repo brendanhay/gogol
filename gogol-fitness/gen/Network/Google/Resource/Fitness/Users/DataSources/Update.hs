@@ -20,11 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a given data source. It is an error to modify the data source\'s
--- data stream ID, data type, type, stream name or device information apart
--- from the device version. Changing these fields would require a new
--- unique data stream ID and separate data source. Data sources are
--- identified by their data stream ID.
+-- Updates the specified data source. The dataStreamId, dataType, type,
+-- dataStreamName, and device properties with the exception of version,
+-- cannot be modified. Data sources are identified by their dataStreamId.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.update@.
 module Network.Google.Resource.Fitness.Users.DataSources.Update
@@ -57,11 +55,9 @@ type UsersDataSourcesUpdateResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] DataSource :> Put '[JSON] DataSource
 
--- | Updates a given data source. It is an error to modify the data source\'s
--- data stream ID, data type, type, stream name or device information apart
--- from the device version. Changing these fields would require a new
--- unique data stream ID and separate data source. Data sources are
--- identified by their data stream ID.
+-- | Updates the specified data source. The dataStreamId, dataType, type,
+-- dataStreamName, and device properties with the exception of version,
+-- cannot be modified. Data sources are identified by their dataStreamId.
 --
 -- /See:/ 'usersDataSourcesUpdate' smart constructor.
 data UsersDataSourcesUpdate = UsersDataSourcesUpdate'
@@ -113,7 +109,8 @@ instance GoogleRequest UsersDataSourcesUpdate where
         type Scopes UsersDataSourcesUpdate =
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
-               "https://www.googleapis.com/auth/fitness.location.write"]
+               "https://www.googleapis.com/auth/fitness.location.write",
+               "https://www.googleapis.com/auth/fitness.nutrition.write"]
         requestClient UsersDataSourcesUpdate'{..}
           = go _udsuUserId _udsuDataSourceId (Just AltJSON)
               _udsuPayload

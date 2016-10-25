@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a data source identified by a data stream ID.
+-- Returns the specified data source.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.get@.
 module Network.Google.Resource.Fitness.Users.DataSources.Get
@@ -51,7 +51,7 @@ type UsersDataSourcesGetResource =
                Capture "dataSourceId" Text :>
                  QueryParam "alt" AltJSON :> Get '[JSON] DataSource
 
--- | Returns a data source identified by a data stream ID.
+-- | Returns the specified data source.
 --
 -- /See:/ 'usersDataSourcesGet' smart constructor.
 data UsersDataSourcesGet = UsersDataSourcesGet'
@@ -96,7 +96,9 @@ instance GoogleRequest UsersDataSourcesGet where
                "https://www.googleapis.com/auth/fitness.body.read",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.read",
-               "https://www.googleapis.com/auth/fitness.location.write"]
+               "https://www.googleapis.com/auth/fitness.location.write",
+               "https://www.googleapis.com/auth/fitness.nutrition.read",
+               "https://www.googleapis.com/auth/fitness.nutrition.write"]
         requestClient UsersDataSourcesGet'{..}
           = go _udsgUserId _udsgDataSourceId (Just AltJSON)
               fitnessService
