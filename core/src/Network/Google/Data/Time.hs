@@ -34,6 +34,7 @@ import           Data.Scientific                   (Scientific)
 import qualified Data.Scientific                   as Sci
 import           Data.Text                         (Text)
 import qualified Data.Text                         as Text
+import qualified Data.Text.Lazy                    as LText
 import qualified Data.Text.Lazy.Builder            as Build
 import qualified Data.Text.Lazy.Builder.Scientific as Sci
 import           Data.Time
@@ -77,20 +78,25 @@ _DateTime = iso unDateTime DateTime'
 --
 -- /Example/: @"3.5s"@.
 newtype Duration = Duration { unDuration :: Scientific }
-    deriving (Eq, Ord, Show, Generic, Data, Typeable)
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
 
 _Duration :: Iso' Duration Scientific
 _Duration = iso unDuration Duration
 
-instance ToJSON Time'     where toJSON = String . toQueryParam
-instance ToJSON Date'     where toJSON = String . toQueryParam
-instance ToJSON DateTime' where toJSON = toJSON . unDateTime
-
-instance ToJSON Duration where
-    toJSON = toJSON
+instance ToHttpApiData Duration where
+    toQueryParam =
+          LText.toStrict
         . Build.toLazyText
         . Sci.formatScientificBuilder Sci.Fixed (Just 9)
         . unDuration
+
+instance FromHttpApiData Duration where
+    parseQueryParam = second Duration . parseText durationParser
+
+instance ToJSON Time'     where toJSON = String . toQueryParam
+instance ToJSON Date'     where toJSON = String . toQueryParam
+instance ToJSON DateTime' where toJSON = toJSON . unDateTime
+instance ToJSON Duration  where toJSON = String . toQueryParam
 
 instance FromJSON Time' where
     parseJSON = fmap Time' . withText "time" (run timeParser)
