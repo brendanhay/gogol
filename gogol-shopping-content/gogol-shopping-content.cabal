@@ -90,6 +90,12 @@ library
         , Network.Google.Resource.Content.Productstatuses.Custombatch
         , Network.Google.Resource.Content.Productstatuses.Get
         , Network.Google.Resource.Content.Productstatuses.List
+        , Network.Google.Resource.Content.ShippingSettings.Custombatch
+        , Network.Google.Resource.Content.ShippingSettings.Get
+        , Network.Google.Resource.Content.ShippingSettings.Getsupportedcarriers
+        , Network.Google.Resource.Content.ShippingSettings.List
+        , Network.Google.Resource.Content.ShippingSettings.Patch
+        , Network.Google.Resource.Content.ShippingSettings.Update
         , Network.Google.ShoppingContent
         , Network.Google.ShoppingContent.Types
 

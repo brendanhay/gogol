@@ -198,6 +198,24 @@ module Network.Google.ShoppingContent
     -- ** content.productstatuses.list
     , module Network.Google.Resource.Content.Productstatuses.List
 
+    -- ** content.shippingsettings.custombatch
+    , module Network.Google.Resource.Content.ShippingSettings.Custombatch
+
+    -- ** content.shippingsettings.get
+    , module Network.Google.Resource.Content.ShippingSettings.Get
+
+    -- ** content.shippingsettings.getsupportedcarriers
+    , module Network.Google.Resource.Content.ShippingSettings.Getsupportedcarriers
+
+    -- ** content.shippingsettings.list
+    , module Network.Google.Resource.Content.ShippingSettings.List
+
+    -- ** content.shippingsettings.patch
+    , module Network.Google.Resource.Content.ShippingSettings.Patch
+
+    -- ** content.shippingsettings.update
+    , module Network.Google.Resource.Content.ShippingSettings.Update
+
     -- * Types
 
     -- ** OrdersAcknowledgeRequest
@@ -288,6 +306,13 @@ module Network.Google.ShoppingContent
     , attrShippingTaxed
     , attrLocationId
     , attrRatePercent
+
+    -- ** PostalCodeGroup
+    , PostalCodeGroup
+    , postalCodeGroup
+    , pcgCountry
+    , pcgPostalCodeRanges
+    , pcgName
 
     -- ** ProductDestination
     , ProductDestination
@@ -415,6 +440,16 @@ module Network.Google.ShoppingContent
     , oliProduct
     , oliReturns
 
+    -- ** Service
+    , Service
+    , service
+    , sDeliveryCountry
+    , sRateGroups
+    , sDeliveryTime
+    , sActive
+    , sName
+    , sCurrency
+
     -- ** ProductstatusesCustomBatchResponse
     , ProductstatusesCustomBatchResponse
     , productstatusesCustomBatchResponse
@@ -480,6 +515,15 @@ module Network.Google.ShoppingContent
     , orlirReason
     , orlirOperationId
     , orlirReasonText
+
+    -- ** ShippingSettingsCustomBatchRequestEntry
+    , ShippingSettingsCustomBatchRequestEntry
+    , shippingSettingsCustomBatchRequestEntry
+    , sscbreMerchantId
+    , sscbreAccountId
+    , sscbreMethod
+    , sscbreShippingSettings
+    , sscbreBatchId
 
     -- ** AccountstatusesCustomBatchRequest
     , AccountstatusesCustomBatchRequest
@@ -564,6 +608,15 @@ module Network.Google.ShoppingContent
     , dcbreDatafeedId
     , dcbreBatchId
 
+    -- ** Value
+    , Value
+    , value
+    , vPricePercentage
+    , vCarrierRateName
+    , vFlatRate
+    , vSubtableName
+    , vNoShipping
+
     -- ** Installment
     , Installment
     , installment
@@ -587,6 +640,12 @@ module Network.Google.ShoppingContent
     , ordersCustomBatchRequest
     , ocbrEntries
 
+    -- ** ShippingSettingsGetSupportedCarriersResponse
+    , ShippingSettingsGetSupportedCarriersResponse
+    , shippingSettingsGetSupportedCarriersResponse
+    , ssgscrKind
+    , ssgscrCarriers
+
     -- ** AccountsListResponse
     , AccountsListResponse
     , accountsListResponse
@@ -605,6 +664,30 @@ module Network.Google.ShoppingContent
     , psdqiValueOnLandingPage
     , psdqiTimestamp
     , psdqiDetail
+
+    -- ** CarriersCarrier
+    , CarriersCarrier
+    , carriersCarrier
+    , ccCountry
+    , ccName
+    , ccServices
+
+    -- ** CarrierRate
+    , CarrierRate
+    , carrierRate
+    , crOriginPostalCode
+    , crFlatAdjustment
+    , crCarrierService
+    , crName
+    , crPercentageAdjustment
+    , crCarrierName
+
+    -- ** ShippingSettingsListResponse
+    , ShippingSettingsListResponse
+    , shippingSettingsListResponse
+    , sslrNextPageToken
+    , sslrKind
+    , sslrResources
 
     -- ** OrdersShipLineItemsRequest
     , OrdersShipLineItemsRequest
@@ -711,6 +794,12 @@ module Network.Google.ShoppingContent
     , acbrecMethod
     , acbrecBatchId
 
+    -- ** DeliveryTime
+    , DeliveryTime
+    , deliveryTime
+    , dtMinTransitTimeInDays
+    , dtMaxTransitTimeInDays
+
     -- ** ProductstatusesCustomBatchResponseEntry
     , ProductstatusesCustomBatchResponseEntry
     , productstatusesCustomBatchResponseEntry
@@ -742,6 +831,11 @@ module Network.Google.ShoppingContent
     , psPrice
     , psRegion
     , psLocationId
+
+    -- ** ShippingSettingsCustomBatchRequest
+    , ShippingSettingsCustomBatchRequest
+    , shippingSettingsCustomBatchRequest
+    , sscbrEntries
 
     -- ** AccountshippingCustomBatchRequestEntry
     , AccountshippingCustomBatchRequestEntry
@@ -778,6 +872,15 @@ module Network.Google.ShoppingContent
     , olrKind
     , olrResources
 
+    -- ** Headers
+    , Headers
+    , headers
+    , hNumberOfItems
+    , hPostalCodeGroupNames
+    , hPrices
+    , hWeights
+    , hLocations
+
     -- ** OrdersShipLineItemsResponse
     , OrdersShipLineItemsResponse
     , ordersShipLineItemsResponse
@@ -789,9 +892,11 @@ module Network.Google.ShoppingContent
     , accountShippingShippingService
     , asssCostRuleTree
     , asssSaleCountry
+    , asssMaxDaysInTransit
     , asssCalculationMethod
     , asssActive
     , asssName
+    , asssMinDaysInTransit
 
     -- ** AccountShippingRateTable
     , AccountShippingRateTable
@@ -805,6 +910,19 @@ module Network.Google.ShoppingContent
     , accountshippingCustomBatchResponse
     , acccEntries
     , acccKind
+
+    -- ** ShippingSettings
+    , ShippingSettings
+    , shippingSettings
+    , ssPostalCodeGroups
+    , ssAccountId
+    , ssServices
+
+    -- ** PostalCodeRange
+    , PostalCodeRange
+    , postalCodeRange
+    , pcrPostalCodeRangeBegin
+    , pcrPostalCodeRangeEnd
 
     -- ** OrdersUpdateShipmentResponse
     , OrdersUpdateShipmentResponse
@@ -826,14 +944,22 @@ module Network.Google.ShoppingContent
     -- ** ProductCustomGroup
     , ProductCustomGroup
     , productCustomGroup
-    , pcgName
-    , pcgAttributes
+    , pName
+    , pAttributes
 
     -- ** AccountstatusesCustomBatchResponse
     , AccountstatusesCustomBatchResponse
     , accountstatusesCustomBatchResponse
     , acbr1Entries
     , acbr1Kind
+
+    -- ** ShippingSettingsCustomBatchResponseEntry
+    , ShippingSettingsCustomBatchResponseEntry
+    , shippingSettingsCustomBatchResponseEntry
+    , sKind
+    , sShippingSettings
+    , sErrors
+    , sBatchId
 
     -- ** ProductStatus
     , ProductStatus
@@ -898,6 +1024,16 @@ module Network.Google.ShoppingContent
     , alr1Kind
     , alr1Resources
 
+    -- ** LocationIdSet
+    , LocationIdSet
+    , locationIdSet
+    , lisLocationIds
+
+    -- ** Row
+    , Row
+    , row
+    , rCells
+
     -- ** Inventory
     , Inventory
     , inventory
@@ -958,6 +1094,15 @@ module Network.Google.ShoppingContent
     , ascrModifierPercent
     , ascrName
     , ascrModifierFlatRate
+
+    -- ** RateGroup
+    , RateGroup
+    , rateGroup
+    , rgCarrierRates
+    , rgApplicableShippingLabels
+    , rgMainTable
+    , rgSingleValue
+    , rgSubtables
 
     -- ** OrderPromotion
     , OrderPromotion
@@ -1149,6 +1294,7 @@ module Network.Google.ShoppingContent
     , ppShippingLength
     , ppCustomLabel3
     , ppWarnings
+    , ppAdditionalProductTypes
     , ppAvailability
     , ppTargetCountry
     , ppShippingLabel
@@ -1233,6 +1379,12 @@ module Network.Google.ShoppingContent
     , pcbrecProductId
     , pcbrecBatchId
 
+    -- ** ShippingSettingsCustomBatchResponse
+    , ShippingSettingsCustomBatchResponse
+    , shippingSettingsCustomBatchResponse
+    , shiEntries
+    , shiKind
+
     -- ** AccountshippingCustomBatchResponseEntry
     , AccountshippingCustomBatchResponseEntry
     , accountshippingCustomBatchResponseEntry
@@ -1277,6 +1429,14 @@ module Network.Google.ShoppingContent
     , oarKind
     , oarExecutionStatus
 
+    -- ** Table
+    , Table
+    , table
+    , tRows
+    , tName
+    , tColumnHeaders
+    , tRowHeaders
+
     -- ** Order
     , Order
     , order
@@ -1297,6 +1457,7 @@ module Network.Google.ShoppingContent
     , ooId
     , ooPaymentMethod
     , ooPromotions
+    , ooChannelType
     , ooPaymentStatus
     , ooShippingCost
 
@@ -1514,6 +1675,12 @@ import           Network.Google.Resource.Content.Products.List
 import           Network.Google.Resource.Content.Productstatuses.Custombatch
 import           Network.Google.Resource.Content.Productstatuses.Get
 import           Network.Google.Resource.Content.Productstatuses.List
+import           Network.Google.Resource.Content.ShippingSettings.Custombatch
+import           Network.Google.Resource.Content.ShippingSettings.Get
+import           Network.Google.Resource.Content.ShippingSettings.Getsupportedcarriers
+import           Network.Google.Resource.Content.ShippingSettings.List
+import           Network.Google.Resource.Content.ShippingSettings.Patch
+import           Network.Google.Resource.Content.ShippingSettings.Update
 import           Network.Google.ShoppingContent.Types
 
 {- $resources
@@ -1537,6 +1704,12 @@ type ShoppingContentAPI =
        :<|> ProductstatusesListResource
        :<|> ProductstatusesGetResource
        :<|> ProductstatusesCustombatchResource
+       :<|> ShippingSettingsListResource
+       :<|> ShippingSettingsPatchResource
+       :<|> ShippingSettingsGetResource
+       :<|> ShippingSettingsCustombatchResource
+       :<|> ShippingSettingsGetsupportedcarriersResource
+       :<|> ShippingSettingsUpdateResource
        :<|> InventorySetResource
        :<|> InventoryCustombatchResource
        :<|> OrdersGetbymerchantOrderidResource
