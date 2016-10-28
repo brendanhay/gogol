@@ -13,7 +13,7 @@ module Network.Google.Prelude
 import Control.Lens        as Export (Lens', lens, mapping, ( # ), (^.), _Just)
 import Data.ByteString     as Export (ByteString)
 import Data.Data           as Export (Data, Typeable)
-import Data.Hashable       as Export
+import Data.Hashable       as Export (Hashable, hashWithSalt)
 import Data.HashMap.Strict as Export (HashMap)
 import Data.Int            as Export (Int32, Int64)
 import Data.Maybe          as Export
