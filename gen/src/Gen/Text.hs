@@ -150,6 +150,7 @@ renameReserved x
         , "Left"
         , "Right"
         , "Request"
+        , "Enum"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text

@@ -1542,7 +1542,7 @@ data Service = Service'
     , _sId                 :: !(Maybe Text)
     , _sUsage              :: !(Maybe Usage)
     , _sEndpoints          :: !(Maybe [Endpoint])
-    , _sEnums              :: !(Maybe [Enum])
+    , _sEnums              :: !(Maybe [Enum'])
     , _sConfigVersion      :: !(Maybe (Textual Word32))
     , _sHTTP               :: !(Maybe HTTP)
     , _sTitle              :: !(Maybe Text)
@@ -1766,7 +1766,7 @@ sEndpoints
 -- directly or indirectly by the \`apis\` are automatically included. Enums
 -- which are not referenced but shall be included should be listed here by
 -- name. Example: enums: - name: google.someapi.v1.SomeEnum
-sEnums :: Lens' Service [Enum]
+sEnums :: Lens' Service [Enum']
 sEnums
   = lens _sEnums (\ s a -> s{_sEnums = a}) . _Default .
       _Coerce
@@ -5418,7 +5418,7 @@ instance ToJSON Condition where
 -- | Enum type definition.
 --
 -- /See:/ 'enum' smart constructor.
-data Enum = Enum'
+data Enum' = Enum''
     { _enuSourceContext :: !(Maybe SourceContext)
     , _enuEnumvalue     :: !(Maybe [EnumValue])
     , _enuName          :: !(Maybe Text)
@@ -5440,9 +5440,9 @@ data Enum = Enum'
 --
 -- * 'enuSyntax'
 enum
-    :: Enum
+    :: Enum'
 enum =
-    Enum'
+    Enum''
     { _enuSourceContext = Nothing
     , _enuEnumvalue = Nothing
     , _enuName = Nothing
@@ -5451,47 +5451,47 @@ enum =
     }
 
 -- | The source context.
-enuSourceContext :: Lens' Enum (Maybe SourceContext)
+enuSourceContext :: Lens' Enum' (Maybe SourceContext)
 enuSourceContext
   = lens _enuSourceContext
       (\ s a -> s{_enuSourceContext = a})
 
 -- | Enum value definitions.
-enuEnumvalue :: Lens' Enum [EnumValue]
+enuEnumvalue :: Lens' Enum' [EnumValue]
 enuEnumvalue
   = lens _enuEnumvalue (\ s a -> s{_enuEnumvalue = a})
       . _Default
       . _Coerce
 
 -- | Enum type name.
-enuName :: Lens' Enum (Maybe Text)
+enuName :: Lens' Enum' (Maybe Text)
 enuName = lens _enuName (\ s a -> s{_enuName = a})
 
 -- | Protocol buffer options.
-enuOptions :: Lens' Enum [Option]
+enuOptions :: Lens' Enum' [Option]
 enuOptions
   = lens _enuOptions (\ s a -> s{_enuOptions = a}) .
       _Default
       . _Coerce
 
 -- | The source syntax.
-enuSyntax :: Lens' Enum (Maybe EnumSyntax)
+enuSyntax :: Lens' Enum' (Maybe EnumSyntax)
 enuSyntax
   = lens _enuSyntax (\ s a -> s{_enuSyntax = a})
 
-instance FromJSON Enum where
+instance FromJSON Enum' where
         parseJSON
           = withObject "Enum"
               (\ o ->
-                 Enum' <$>
+                 Enum'' <$>
                    (o .:? "sourceContext") <*>
                      (o .:? "enumvalue" .!= mempty)
                      <*> (o .:? "name")
                      <*> (o .:? "options" .!= mempty)
                      <*> (o .:? "syntax"))
 
-instance ToJSON Enum where
-        toJSON Enum'{..}
+instance ToJSON Enum' where
+        toJSON Enum''{..}
           = object
               (catMaybes
                  [("sourceContext" .=) <$> _enuSourceContext,

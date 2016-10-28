@@ -641,8 +641,8 @@ module Network.Google.ServiceManagement.Types
     , cSys
     , cSvc
 
-    -- * Enum
-    , Enum
+    -- * Enum'
+    , Enum'
     , enum
     , enuSourceContext
     , enuEnumvalue
