@@ -1,4 +1,4 @@
 {
-    "library": "kgsearch",
-    "canonicalName": "KnowledgeGraphSearch"
+    "library": "iam",
+    "canonicalName": "IAM"
 }
