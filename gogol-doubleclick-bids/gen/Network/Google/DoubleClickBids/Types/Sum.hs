@@ -219,6 +219,71 @@ instance FromJSON DownloadLineItemsRequestFilterType where
 instance ToJSON DownloadLineItemsRequestFilterType where
     toJSON = toJSONText
 
+-- | Filter type used to filter line items to fetch.
+data DownloadRequestFilterType
+    = DRFTAdvertiserId
+      -- ^ @ADVERTISER_ID@
+    | DRFTInsertionOrderId
+      -- ^ @INSERTION_ORDER_ID@
+    | DRFTLineItemId
+      -- ^ @LINE_ITEM_ID@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DownloadRequestFilterType
+
+instance FromHttpApiData DownloadRequestFilterType where
+    parseQueryParam = \case
+        "ADVERTISER_ID" -> Right DRFTAdvertiserId
+        "INSERTION_ORDER_ID" -> Right DRFTInsertionOrderId
+        "LINE_ITEM_ID" -> Right DRFTLineItemId
+        x -> Left ("Unable to parse DownloadRequestFilterType from: " <> x)
+
+instance ToHttpApiData DownloadRequestFilterType where
+    toQueryParam = \case
+        DRFTAdvertiserId -> "ADVERTISER_ID"
+        DRFTInsertionOrderId -> "INSERTION_ORDER_ID"
+        DRFTLineItemId -> "LINE_ITEM_ID"
+
+instance FromJSON DownloadRequestFilterType where
+    parseJSON = parseJSONText "DownloadRequestFilterType"
+
+instance ToJSON DownloadRequestFilterType where
+    toJSON = toJSONText
+
+data DownloadRequestFileTypesItem
+    = AD
+      -- ^ @AD@
+    | AdGroup
+      -- ^ @AD_GROUP@
+    | InsertionOrder
+      -- ^ @INSERTION_ORDER@
+    | LineItem
+      -- ^ @LINE_ITEM@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DownloadRequestFileTypesItem
+
+instance FromHttpApiData DownloadRequestFileTypesItem where
+    parseQueryParam = \case
+        "AD" -> Right AD
+        "AD_GROUP" -> Right AdGroup
+        "INSERTION_ORDER" -> Right InsertionOrder
+        "LINE_ITEM" -> Right LineItem
+        x -> Left ("Unable to parse DownloadRequestFileTypesItem from: " <> x)
+
+instance ToHttpApiData DownloadRequestFileTypesItem where
+    toQueryParam = \case
+        AD -> "AD"
+        AdGroup -> "AD_GROUP"
+        InsertionOrder -> "INSERTION_ORDER"
+        LineItem -> "LINE_ITEM"
+
+instance FromJSON DownloadRequestFileTypesItem where
+    parseJSON = parseJSONText "DownloadRequestFileTypesItem"
+
+instance ToJSON DownloadRequestFileTypesItem where
+    toJSON = toJSONText
+
 -- | Range of report data.
 data QueryMetadataDataRange
     = QMDRAllTime
@@ -315,7 +380,29 @@ instance ToJSON QueryMetadataDataRange where
     toJSON = toJSONText
 
 data ParametersMetricsItem
-    = MetricBidRequests
+    = MetricActiveViewAverageViewableTime
+      -- ^ @METRIC_ACTIVE_VIEW_AVERAGE_VIEWABLE_TIME@
+    | MetricActiveViewDistributionUnmeasurable
+      -- ^ @METRIC_ACTIVE_VIEW_DISTRIBUTION_UNMEASURABLE@
+    | MetricActiveViewDistributionUnviewable
+      -- ^ @METRIC_ACTIVE_VIEW_DISTRIBUTION_UNVIEWABLE@
+    | MetricActiveViewDistributionViewable
+      -- ^ @METRIC_ACTIVE_VIEW_DISTRIBUTION_VIEWABLE@
+    | MetricActiveViewEligibleImpressions
+      -- ^ @METRIC_ACTIVE_VIEW_ELIGIBLE_IMPRESSIONS@
+    | MetricActiveViewMeasurableImpressions
+      -- ^ @METRIC_ACTIVE_VIEW_MEASURABLE_IMPRESSIONS@
+    | MetricActiveViewPctMeasurableImpressions
+      -- ^ @METRIC_ACTIVE_VIEW_PCT_MEASURABLE_IMPRESSIONS@
+    | MetricActiveViewPctViewableImpressions
+      -- ^ @METRIC_ACTIVE_VIEW_PCT_VIEWABLE_IMPRESSIONS@
+    | MetricActiveViewUnmeasurableImpressions
+      -- ^ @METRIC_ACTIVE_VIEW_UNMEASURABLE_IMPRESSIONS@
+    | MetricActiveViewUnviewableImpressions
+      -- ^ @METRIC_ACTIVE_VIEW_UNVIEWABLE_IMPRESSIONS@
+    | MetricActiveViewViewableImpressions
+      -- ^ @METRIC_ACTIVE_VIEW_VIEWABLE_IMPRESSIONS@
+    | MetricBidRequests
       -- ^ @METRIC_BID_REQUESTS@
     | MetricBillableCostAdvertiser
       -- ^ @METRIC_BILLABLE_COST_ADVERTISER@
@@ -651,6 +738,8 @@ data ParametersMetricsItem
       -- ^ @METRIC_PROFIT_VIEWABLE_ECPM_PARTNER@
     | MetricProfitViewableEcpmUsd
       -- ^ @METRIC_PROFIT_VIEWABLE_ECPM_USD@
+    | MetricReachCookieReach
+      -- ^ @METRIC_REACH_COOKIE_REACH@
     | MetricRevenueAdvertiser
       -- ^ @METRIC_REVENUE_ADVERTISER@
     | MetricRevenueEcpapcAdvertiser
@@ -773,6 +862,12 @@ data ParametersMetricsItem
       -- ^ @METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_PARTNER@
     | MetricTotalMediaCostViewableEcpmUsd
       -- ^ @METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_USD@
+    | MetricTrueviewAverageCpeAdvertiser
+      -- ^ @METRIC_TRUEVIEW_AVERAGE_CPE_ADVERTISER@
+    | MetricTrueviewAverageCpePartner
+      -- ^ @METRIC_TRUEVIEW_AVERAGE_CPE_PARTNER@
+    | MetricTrueviewAverageCpeUsd
+      -- ^ @METRIC_TRUEVIEW_AVERAGE_CPE_USD@
     | MetricTrueviewConversionCostManyPerViewAdvertiser
       -- ^ @METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_ADVERTISER@
     | MetricTrueviewConversionCostManyPerViewPartner
@@ -823,6 +918,10 @@ data ParametersMetricsItem
       -- ^ @METRIC_TRUEVIEW_EARNED_SUBSCRIBERS@
     | MetricTrueviewEarnedViews
       -- ^ @METRIC_TRUEVIEW_EARNED_VIEWS@
+    | MetricTrueviewEngagements
+      -- ^ @METRIC_TRUEVIEW_ENGAGEMENTS@
+    | MetricTrueviewEngagementRate
+      -- ^ @METRIC_TRUEVIEW_ENGAGEMENT_RATE@
     | MetricTrueviewImpressionShare
       -- ^ @METRIC_TRUEVIEW_IMPRESSION_SHARE@
     | MetricTrueviewLostIsBudget
@@ -865,6 +964,17 @@ instance Hashable ParametersMetricsItem
 
 instance FromHttpApiData ParametersMetricsItem where
     parseQueryParam = \case
+        "METRIC_ACTIVE_VIEW_AVERAGE_VIEWABLE_TIME" -> Right MetricActiveViewAverageViewableTime
+        "METRIC_ACTIVE_VIEW_DISTRIBUTION_UNMEASURABLE" -> Right MetricActiveViewDistributionUnmeasurable
+        "METRIC_ACTIVE_VIEW_DISTRIBUTION_UNVIEWABLE" -> Right MetricActiveViewDistributionUnviewable
+        "METRIC_ACTIVE_VIEW_DISTRIBUTION_VIEWABLE" -> Right MetricActiveViewDistributionViewable
+        "METRIC_ACTIVE_VIEW_ELIGIBLE_IMPRESSIONS" -> Right MetricActiveViewEligibleImpressions
+        "METRIC_ACTIVE_VIEW_MEASURABLE_IMPRESSIONS" -> Right MetricActiveViewMeasurableImpressions
+        "METRIC_ACTIVE_VIEW_PCT_MEASURABLE_IMPRESSIONS" -> Right MetricActiveViewPctMeasurableImpressions
+        "METRIC_ACTIVE_VIEW_PCT_VIEWABLE_IMPRESSIONS" -> Right MetricActiveViewPctViewableImpressions
+        "METRIC_ACTIVE_VIEW_UNMEASURABLE_IMPRESSIONS" -> Right MetricActiveViewUnmeasurableImpressions
+        "METRIC_ACTIVE_VIEW_UNVIEWABLE_IMPRESSIONS" -> Right MetricActiveViewUnviewableImpressions
+        "METRIC_ACTIVE_VIEW_VIEWABLE_IMPRESSIONS" -> Right MetricActiveViewViewableImpressions
         "METRIC_BID_REQUESTS" -> Right MetricBidRequests
         "METRIC_BILLABLE_COST_ADVERTISER" -> Right MetricBillableCostAdvertiser
         "METRIC_BILLABLE_COST_PARTNER" -> Right MetricBillableCostPartner
@@ -1033,6 +1143,7 @@ instance FromHttpApiData ParametersMetricsItem where
         "METRIC_PROFIT_VIEWABLE_ECPM_ADVERTISER" -> Right MetricProfitViewableEcpmAdvertiser
         "METRIC_PROFIT_VIEWABLE_ECPM_PARTNER" -> Right MetricProfitViewableEcpmPartner
         "METRIC_PROFIT_VIEWABLE_ECPM_USD" -> Right MetricProfitViewableEcpmUsd
+        "METRIC_REACH_COOKIE_REACH" -> Right MetricReachCookieReach
         "METRIC_REVENUE_ADVERTISER" -> Right MetricRevenueAdvertiser
         "METRIC_REVENUE_ECPAPC_ADVERTISER" -> Right MetricRevenueEcpapcAdvertiser
         "METRIC_REVENUE_ECPAPC_PARTNER" -> Right MetricRevenueEcpapcPartner
@@ -1094,6 +1205,9 @@ instance FromHttpApiData ParametersMetricsItem where
         "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_ADVERTISER" -> Right MetricTotalMediaCostViewableEcpmAdvertiser
         "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_PARTNER" -> Right MetricTotalMediaCostViewableEcpmPartner
         "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_USD" -> Right MetricTotalMediaCostViewableEcpmUsd
+        "METRIC_TRUEVIEW_AVERAGE_CPE_ADVERTISER" -> Right MetricTrueviewAverageCpeAdvertiser
+        "METRIC_TRUEVIEW_AVERAGE_CPE_PARTNER" -> Right MetricTrueviewAverageCpePartner
+        "METRIC_TRUEVIEW_AVERAGE_CPE_USD" -> Right MetricTrueviewAverageCpeUsd
         "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_ADVERTISER" -> Right MetricTrueviewConversionCostManyPerViewAdvertiser
         "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_PARTNER" -> Right MetricTrueviewConversionCostManyPerViewPartner
         "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_USD" -> Right MetricTrueviewConversionCostManyPerViewUsd
@@ -1119,6 +1233,8 @@ instance FromHttpApiData ParametersMetricsItem where
         "METRIC_TRUEVIEW_EARNED_SHARES" -> Right MetricTrueviewEarnedShares
         "METRIC_TRUEVIEW_EARNED_SUBSCRIBERS" -> Right MetricTrueviewEarnedSubscribers
         "METRIC_TRUEVIEW_EARNED_VIEWS" -> Right MetricTrueviewEarnedViews
+        "METRIC_TRUEVIEW_ENGAGEMENTS" -> Right MetricTrueviewEngagements
+        "METRIC_TRUEVIEW_ENGAGEMENT_RATE" -> Right MetricTrueviewEngagementRate
         "METRIC_TRUEVIEW_IMPRESSION_SHARE" -> Right MetricTrueviewImpressionShare
         "METRIC_TRUEVIEW_LOST_IS_BUDGET" -> Right MetricTrueviewLostIsBudget
         "METRIC_TRUEVIEW_LOST_IS_RANK" -> Right MetricTrueviewLostIsRank
@@ -1141,6 +1257,17 @@ instance FromHttpApiData ParametersMetricsItem where
 
 instance ToHttpApiData ParametersMetricsItem where
     toQueryParam = \case
+        MetricActiveViewAverageViewableTime -> "METRIC_ACTIVE_VIEW_AVERAGE_VIEWABLE_TIME"
+        MetricActiveViewDistributionUnmeasurable -> "METRIC_ACTIVE_VIEW_DISTRIBUTION_UNMEASURABLE"
+        MetricActiveViewDistributionUnviewable -> "METRIC_ACTIVE_VIEW_DISTRIBUTION_UNVIEWABLE"
+        MetricActiveViewDistributionViewable -> "METRIC_ACTIVE_VIEW_DISTRIBUTION_VIEWABLE"
+        MetricActiveViewEligibleImpressions -> "METRIC_ACTIVE_VIEW_ELIGIBLE_IMPRESSIONS"
+        MetricActiveViewMeasurableImpressions -> "METRIC_ACTIVE_VIEW_MEASURABLE_IMPRESSIONS"
+        MetricActiveViewPctMeasurableImpressions -> "METRIC_ACTIVE_VIEW_PCT_MEASURABLE_IMPRESSIONS"
+        MetricActiveViewPctViewableImpressions -> "METRIC_ACTIVE_VIEW_PCT_VIEWABLE_IMPRESSIONS"
+        MetricActiveViewUnmeasurableImpressions -> "METRIC_ACTIVE_VIEW_UNMEASURABLE_IMPRESSIONS"
+        MetricActiveViewUnviewableImpressions -> "METRIC_ACTIVE_VIEW_UNVIEWABLE_IMPRESSIONS"
+        MetricActiveViewViewableImpressions -> "METRIC_ACTIVE_VIEW_VIEWABLE_IMPRESSIONS"
         MetricBidRequests -> "METRIC_BID_REQUESTS"
         MetricBillableCostAdvertiser -> "METRIC_BILLABLE_COST_ADVERTISER"
         MetricBillableCostPartner -> "METRIC_BILLABLE_COST_PARTNER"
@@ -1309,6 +1436,7 @@ instance ToHttpApiData ParametersMetricsItem where
         MetricProfitViewableEcpmAdvertiser -> "METRIC_PROFIT_VIEWABLE_ECPM_ADVERTISER"
         MetricProfitViewableEcpmPartner -> "METRIC_PROFIT_VIEWABLE_ECPM_PARTNER"
         MetricProfitViewableEcpmUsd -> "METRIC_PROFIT_VIEWABLE_ECPM_USD"
+        MetricReachCookieReach -> "METRIC_REACH_COOKIE_REACH"
         MetricRevenueAdvertiser -> "METRIC_REVENUE_ADVERTISER"
         MetricRevenueEcpapcAdvertiser -> "METRIC_REVENUE_ECPAPC_ADVERTISER"
         MetricRevenueEcpapcPartner -> "METRIC_REVENUE_ECPAPC_PARTNER"
@@ -1370,6 +1498,9 @@ instance ToHttpApiData ParametersMetricsItem where
         MetricTotalMediaCostViewableEcpmAdvertiser -> "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_ADVERTISER"
         MetricTotalMediaCostViewableEcpmPartner -> "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_PARTNER"
         MetricTotalMediaCostViewableEcpmUsd -> "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_USD"
+        MetricTrueviewAverageCpeAdvertiser -> "METRIC_TRUEVIEW_AVERAGE_CPE_ADVERTISER"
+        MetricTrueviewAverageCpePartner -> "METRIC_TRUEVIEW_AVERAGE_CPE_PARTNER"
+        MetricTrueviewAverageCpeUsd -> "METRIC_TRUEVIEW_AVERAGE_CPE_USD"
         MetricTrueviewConversionCostManyPerViewAdvertiser -> "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_ADVERTISER"
         MetricTrueviewConversionCostManyPerViewPartner -> "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_PARTNER"
         MetricTrueviewConversionCostManyPerViewUsd -> "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_USD"
@@ -1395,6 +1526,8 @@ instance ToHttpApiData ParametersMetricsItem where
         MetricTrueviewEarnedShares -> "METRIC_TRUEVIEW_EARNED_SHARES"
         MetricTrueviewEarnedSubscribers -> "METRIC_TRUEVIEW_EARNED_SUBSCRIBERS"
         MetricTrueviewEarnedViews -> "METRIC_TRUEVIEW_EARNED_VIEWS"
+        MetricTrueviewEngagements -> "METRIC_TRUEVIEW_ENGAGEMENTS"
+        MetricTrueviewEngagementRate -> "METRIC_TRUEVIEW_ENGAGEMENT_RATE"
         MetricTrueviewImpressionShare -> "METRIC_TRUEVIEW_IMPRESSION_SHARE"
         MetricTrueviewLostIsBudget -> "METRIC_TRUEVIEW_LOST_IS_BUDGET"
         MetricTrueviewLostIsRank -> "METRIC_TRUEVIEW_LOST_IS_RANK"
@@ -1590,6 +1723,8 @@ data FilterPairType
       -- ^ @FILTER_LINE_ITEM_LIFETIME_FREQUENCY@
     | FilterLineItemType
       -- ^ @FILTER_LINE_ITEM_TYPE@
+    | FilterMediaPlan
+      -- ^ @FILTER_MEDIA_PLAN@
     | FilterMobileDeviceMake
       -- ^ @FILTER_MOBILE_DEVICE_MAKE@
     | FilterMobileDeviceMakeModel
@@ -1610,6 +1745,8 @@ data FilterPairType
       -- ^ @FILTER_NIELSEN_DEVICE_ID@
     | FilterNielsenGender
       -- ^ @FILTER_NIELSEN_GENDER@
+    | FilterNotSupported
+      -- ^ @FILTER_NOT_SUPPORTED@
     | FilterOrderId
       -- ^ @FILTER_ORDER_ID@
     | FilterOS
@@ -1646,10 +1783,16 @@ data FilterPairType
       -- ^ @FILTER_TRUEVIEW_AGE@
     | FilterTrueviewCategory
       -- ^ @FILTER_TRUEVIEW_CATEGORY@
+    | FilterTrueviewCity
+      -- ^ @FILTER_TRUEVIEW_CITY@
     | FilterTrueviewConversionType
       -- ^ @FILTER_TRUEVIEW_CONVERSION_TYPE@
+    | FilterTrueviewCountry
+      -- ^ @FILTER_TRUEVIEW_COUNTRY@
     | FilterTrueviewCustomAffinity
       -- ^ @FILTER_TRUEVIEW_CUSTOM_AFFINITY@
+    | FilterTrueviewDma
+      -- ^ @FILTER_TRUEVIEW_DMA@
     | FilterTrueviewGender
       -- ^ @FILTER_TRUEVIEW_GENDER@
     | FilterTrueviewIarAge
@@ -1674,6 +1817,10 @@ data FilterPairType
       -- ^ @FILTER_TRUEVIEW_IAR_REMARKETING_LIST@
     | FilterTrueviewIarTimeOfDay
       -- ^ @FILTER_TRUEVIEW_IAR_TIME_OF_DAY@
+    | FilterTrueviewIarYouTubeChannel
+      -- ^ @FILTER_TRUEVIEW_IAR_YOUTUBE_CHANNEL@
+    | FilterTrueviewIarYouTubeVideo
+      -- ^ @FILTER_TRUEVIEW_IAR_YOUTUBE_VIDEO@
     | FilterTrueviewIarZipcode
       -- ^ @FILTER_TRUEVIEW_IAR_ZIPCODE@
     | FilterTrueviewInterest
@@ -1684,8 +1831,14 @@ data FilterPairType
       -- ^ @FILTER_TRUEVIEW_PARENTAL_STATUS@
     | FilterTrueviewPlacement
       -- ^ @FILTER_TRUEVIEW_PLACEMENT@
+    | FilterTrueviewRegion
+      -- ^ @FILTER_TRUEVIEW_REGION@
     | FilterTrueviewRemarketingList
       -- ^ @FILTER_TRUEVIEW_REMARKETING_LIST@
+    | FilterTrueviewURL
+      -- ^ @FILTER_TRUEVIEW_URL@
+    | FilterTrueviewZipcode
+      -- ^ @FILTER_TRUEVIEW_ZIPCODE@
     | FilterUnknown
       -- ^ @FILTER_UNKNOWN@
     | FilterUserList
@@ -1769,6 +1922,7 @@ instance FromHttpApiData FilterPairType where
         "FILTER_LINE_ITEM_DAILY_FREQUENCY" -> Right FilterLineItemDailyFrequency
         "FILTER_LINE_ITEM_LIFETIME_FREQUENCY" -> Right FilterLineItemLifetimeFrequency
         "FILTER_LINE_ITEM_TYPE" -> Right FilterLineItemType
+        "FILTER_MEDIA_PLAN" -> Right FilterMediaPlan
         "FILTER_MOBILE_DEVICE_MAKE" -> Right FilterMobileDeviceMake
         "FILTER_MOBILE_DEVICE_MAKE_MODEL" -> Right FilterMobileDeviceMakeModel
         "FILTER_MOBILE_DEVICE_TYPE" -> Right FilterMobileDeviceType
@@ -1779,6 +1933,7 @@ instance FromHttpApiData FilterPairType where
         "FILTER_NIELSEN_COUNTRY_CODE" -> Right FilterNielsenCountryCode
         "FILTER_NIELSEN_DEVICE_ID" -> Right FilterNielsenDeviceId
         "FILTER_NIELSEN_GENDER" -> Right FilterNielsenGender
+        "FILTER_NOT_SUPPORTED" -> Right FilterNotSupported
         "FILTER_ORDER_ID" -> Right FilterOrderId
         "FILTER_OS" -> Right FilterOS
         "FILTER_PAGE_CATEGORY" -> Right FilterPageCategory
@@ -1797,8 +1952,11 @@ instance FromHttpApiData FilterPairType where
         "FILTER_TRUEVIEW_AD_GROUP_ID" -> Right FilterTrueviewAdGroupId
         "FILTER_TRUEVIEW_AGE" -> Right FilterTrueviewAge
         "FILTER_TRUEVIEW_CATEGORY" -> Right FilterTrueviewCategory
+        "FILTER_TRUEVIEW_CITY" -> Right FilterTrueviewCity
         "FILTER_TRUEVIEW_CONVERSION_TYPE" -> Right FilterTrueviewConversionType
+        "FILTER_TRUEVIEW_COUNTRY" -> Right FilterTrueviewCountry
         "FILTER_TRUEVIEW_CUSTOM_AFFINITY" -> Right FilterTrueviewCustomAffinity
+        "FILTER_TRUEVIEW_DMA" -> Right FilterTrueviewDma
         "FILTER_TRUEVIEW_GENDER" -> Right FilterTrueviewGender
         "FILTER_TRUEVIEW_IAR_AGE" -> Right FilterTrueviewIarAge
         "FILTER_TRUEVIEW_IAR_CATEGORY" -> Right FilterTrueviewIarCategory
@@ -1811,12 +1969,17 @@ instance FromHttpApiData FilterPairType where
         "FILTER_TRUEVIEW_IAR_REGION" -> Right FilterTrueviewIarRegion
         "FILTER_TRUEVIEW_IAR_REMARKETING_LIST" -> Right FilterTrueviewIarRemarketingList
         "FILTER_TRUEVIEW_IAR_TIME_OF_DAY" -> Right FilterTrueviewIarTimeOfDay
+        "FILTER_TRUEVIEW_IAR_YOUTUBE_CHANNEL" -> Right FilterTrueviewIarYouTubeChannel
+        "FILTER_TRUEVIEW_IAR_YOUTUBE_VIDEO" -> Right FilterTrueviewIarYouTubeVideo
         "FILTER_TRUEVIEW_IAR_ZIPCODE" -> Right FilterTrueviewIarZipcode
         "FILTER_TRUEVIEW_INTEREST" -> Right FilterTrueviewInterest
         "FILTER_TRUEVIEW_KEYWORD" -> Right FilterTrueviewKeyword
         "FILTER_TRUEVIEW_PARENTAL_STATUS" -> Right FilterTrueviewParentalStatus
         "FILTER_TRUEVIEW_PLACEMENT" -> Right FilterTrueviewPlacement
+        "FILTER_TRUEVIEW_REGION" -> Right FilterTrueviewRegion
         "FILTER_TRUEVIEW_REMARKETING_LIST" -> Right FilterTrueviewRemarketingList
+        "FILTER_TRUEVIEW_URL" -> Right FilterTrueviewURL
+        "FILTER_TRUEVIEW_ZIPCODE" -> Right FilterTrueviewZipcode
         "FILTER_UNKNOWN" -> Right FilterUnknown
         "FILTER_USER_LIST" -> Right FilterUserList
         "FILTER_USER_LIST_FIRST_PARTY" -> Right FilterUserListFirstParty
@@ -1878,6 +2041,7 @@ instance ToHttpApiData FilterPairType where
         FilterLineItemDailyFrequency -> "FILTER_LINE_ITEM_DAILY_FREQUENCY"
         FilterLineItemLifetimeFrequency -> "FILTER_LINE_ITEM_LIFETIME_FREQUENCY"
         FilterLineItemType -> "FILTER_LINE_ITEM_TYPE"
+        FilterMediaPlan -> "FILTER_MEDIA_PLAN"
         FilterMobileDeviceMake -> "FILTER_MOBILE_DEVICE_MAKE"
         FilterMobileDeviceMakeModel -> "FILTER_MOBILE_DEVICE_MAKE_MODEL"
         FilterMobileDeviceType -> "FILTER_MOBILE_DEVICE_TYPE"
@@ -1888,6 +2052,7 @@ instance ToHttpApiData FilterPairType where
         FilterNielsenCountryCode -> "FILTER_NIELSEN_COUNTRY_CODE"
         FilterNielsenDeviceId -> "FILTER_NIELSEN_DEVICE_ID"
         FilterNielsenGender -> "FILTER_NIELSEN_GENDER"
+        FilterNotSupported -> "FILTER_NOT_SUPPORTED"
         FilterOrderId -> "FILTER_ORDER_ID"
         FilterOS -> "FILTER_OS"
         FilterPageCategory -> "FILTER_PAGE_CATEGORY"
@@ -1906,8 +2071,11 @@ instance ToHttpApiData FilterPairType where
         FilterTrueviewAdGroupId -> "FILTER_TRUEVIEW_AD_GROUP_ID"
         FilterTrueviewAge -> "FILTER_TRUEVIEW_AGE"
         FilterTrueviewCategory -> "FILTER_TRUEVIEW_CATEGORY"
+        FilterTrueviewCity -> "FILTER_TRUEVIEW_CITY"
         FilterTrueviewConversionType -> "FILTER_TRUEVIEW_CONVERSION_TYPE"
+        FilterTrueviewCountry -> "FILTER_TRUEVIEW_COUNTRY"
         FilterTrueviewCustomAffinity -> "FILTER_TRUEVIEW_CUSTOM_AFFINITY"
+        FilterTrueviewDma -> "FILTER_TRUEVIEW_DMA"
         FilterTrueviewGender -> "FILTER_TRUEVIEW_GENDER"
         FilterTrueviewIarAge -> "FILTER_TRUEVIEW_IAR_AGE"
         FilterTrueviewIarCategory -> "FILTER_TRUEVIEW_IAR_CATEGORY"
@@ -1920,12 +2088,17 @@ instance ToHttpApiData FilterPairType where
         FilterTrueviewIarRegion -> "FILTER_TRUEVIEW_IAR_REGION"
         FilterTrueviewIarRemarketingList -> "FILTER_TRUEVIEW_IAR_REMARKETING_LIST"
         FilterTrueviewIarTimeOfDay -> "FILTER_TRUEVIEW_IAR_TIME_OF_DAY"
+        FilterTrueviewIarYouTubeChannel -> "FILTER_TRUEVIEW_IAR_YOUTUBE_CHANNEL"
+        FilterTrueviewIarYouTubeVideo -> "FILTER_TRUEVIEW_IAR_YOUTUBE_VIDEO"
         FilterTrueviewIarZipcode -> "FILTER_TRUEVIEW_IAR_ZIPCODE"
         FilterTrueviewInterest -> "FILTER_TRUEVIEW_INTEREST"
         FilterTrueviewKeyword -> "FILTER_TRUEVIEW_KEYWORD"
         FilterTrueviewParentalStatus -> "FILTER_TRUEVIEW_PARENTAL_STATUS"
         FilterTrueviewPlacement -> "FILTER_TRUEVIEW_PLACEMENT"
+        FilterTrueviewRegion -> "FILTER_TRUEVIEW_REGION"
         FilterTrueviewRemarketingList -> "FILTER_TRUEVIEW_REMARKETING_LIST"
+        FilterTrueviewURL -> "FILTER_TRUEVIEW_URL"
+        FilterTrueviewZipcode -> "FILTER_TRUEVIEW_ZIPCODE"
         FilterUnknown -> "FILTER_UNKNOWN"
         FilterUserList -> "FILTER_USER_LIST"
         FilterUserListFirstParty -> "FILTER_USER_LIST_FIRST_PARTY"
@@ -2154,6 +2327,8 @@ data ParametersGroupBysItem
       -- ^ @FILTER_LINE_ITEM_LIFETIME_FREQUENCY@
     | PGBIFilterLineItemType
       -- ^ @FILTER_LINE_ITEM_TYPE@
+    | PGBIFilterMediaPlan
+      -- ^ @FILTER_MEDIA_PLAN@
     | PGBIFilterMobileDeviceMake
       -- ^ @FILTER_MOBILE_DEVICE_MAKE@
     | PGBIFilterMobileDeviceMakeModel
@@ -2174,6 +2349,8 @@ data ParametersGroupBysItem
       -- ^ @FILTER_NIELSEN_DEVICE_ID@
     | PGBIFilterNielsenGender
       -- ^ @FILTER_NIELSEN_GENDER@
+    | PGBIFilterNotSupported
+      -- ^ @FILTER_NOT_SUPPORTED@
     | PGBIFilterOrderId
       -- ^ @FILTER_ORDER_ID@
     | PGBIFilterOS
@@ -2210,10 +2387,16 @@ data ParametersGroupBysItem
       -- ^ @FILTER_TRUEVIEW_AGE@
     | PGBIFilterTrueviewCategory
       -- ^ @FILTER_TRUEVIEW_CATEGORY@
+    | PGBIFilterTrueviewCity
+      -- ^ @FILTER_TRUEVIEW_CITY@
     | PGBIFilterTrueviewConversionType
       -- ^ @FILTER_TRUEVIEW_CONVERSION_TYPE@
+    | PGBIFilterTrueviewCountry
+      -- ^ @FILTER_TRUEVIEW_COUNTRY@
     | PGBIFilterTrueviewCustomAffinity
       -- ^ @FILTER_TRUEVIEW_CUSTOM_AFFINITY@
+    | PGBIFilterTrueviewDma
+      -- ^ @FILTER_TRUEVIEW_DMA@
     | PGBIFilterTrueviewGender
       -- ^ @FILTER_TRUEVIEW_GENDER@
     | PGBIFilterTrueviewIarAge
@@ -2238,6 +2421,10 @@ data ParametersGroupBysItem
       -- ^ @FILTER_TRUEVIEW_IAR_REMARKETING_LIST@
     | PGBIFilterTrueviewIarTimeOfDay
       -- ^ @FILTER_TRUEVIEW_IAR_TIME_OF_DAY@
+    | PGBIFilterTrueviewIarYouTubeChannel
+      -- ^ @FILTER_TRUEVIEW_IAR_YOUTUBE_CHANNEL@
+    | PGBIFilterTrueviewIarYouTubeVideo
+      -- ^ @FILTER_TRUEVIEW_IAR_YOUTUBE_VIDEO@
     | PGBIFilterTrueviewIarZipcode
       -- ^ @FILTER_TRUEVIEW_IAR_ZIPCODE@
     | PGBIFilterTrueviewInterest
@@ -2248,8 +2435,14 @@ data ParametersGroupBysItem
       -- ^ @FILTER_TRUEVIEW_PARENTAL_STATUS@
     | PGBIFilterTrueviewPlacement
       -- ^ @FILTER_TRUEVIEW_PLACEMENT@
+    | PGBIFilterTrueviewRegion
+      -- ^ @FILTER_TRUEVIEW_REGION@
     | PGBIFilterTrueviewRemarketingList
       -- ^ @FILTER_TRUEVIEW_REMARKETING_LIST@
+    | PGBIFilterTrueviewURL
+      -- ^ @FILTER_TRUEVIEW_URL@
+    | PGBIFilterTrueviewZipcode
+      -- ^ @FILTER_TRUEVIEW_ZIPCODE@
     | PGBIFilterUnknown
       -- ^ @FILTER_UNKNOWN@
     | PGBIFilterUserList
@@ -2333,6 +2526,7 @@ instance FromHttpApiData ParametersGroupBysItem where
         "FILTER_LINE_ITEM_DAILY_FREQUENCY" -> Right PGBIFilterLineItemDailyFrequency
         "FILTER_LINE_ITEM_LIFETIME_FREQUENCY" -> Right PGBIFilterLineItemLifetimeFrequency
         "FILTER_LINE_ITEM_TYPE" -> Right PGBIFilterLineItemType
+        "FILTER_MEDIA_PLAN" -> Right PGBIFilterMediaPlan
         "FILTER_MOBILE_DEVICE_MAKE" -> Right PGBIFilterMobileDeviceMake
         "FILTER_MOBILE_DEVICE_MAKE_MODEL" -> Right PGBIFilterMobileDeviceMakeModel
         "FILTER_MOBILE_DEVICE_TYPE" -> Right PGBIFilterMobileDeviceType
@@ -2343,6 +2537,7 @@ instance FromHttpApiData ParametersGroupBysItem where
         "FILTER_NIELSEN_COUNTRY_CODE" -> Right PGBIFilterNielsenCountryCode
         "FILTER_NIELSEN_DEVICE_ID" -> Right PGBIFilterNielsenDeviceId
         "FILTER_NIELSEN_GENDER" -> Right PGBIFilterNielsenGender
+        "FILTER_NOT_SUPPORTED" -> Right PGBIFilterNotSupported
         "FILTER_ORDER_ID" -> Right PGBIFilterOrderId
         "FILTER_OS" -> Right PGBIFilterOS
         "FILTER_PAGE_CATEGORY" -> Right PGBIFilterPageCategory
@@ -2361,8 +2556,11 @@ instance FromHttpApiData ParametersGroupBysItem where
         "FILTER_TRUEVIEW_AD_GROUP_ID" -> Right PGBIFilterTrueviewAdGroupId
         "FILTER_TRUEVIEW_AGE" -> Right PGBIFilterTrueviewAge
         "FILTER_TRUEVIEW_CATEGORY" -> Right PGBIFilterTrueviewCategory
+        "FILTER_TRUEVIEW_CITY" -> Right PGBIFilterTrueviewCity
         "FILTER_TRUEVIEW_CONVERSION_TYPE" -> Right PGBIFilterTrueviewConversionType
+        "FILTER_TRUEVIEW_COUNTRY" -> Right PGBIFilterTrueviewCountry
         "FILTER_TRUEVIEW_CUSTOM_AFFINITY" -> Right PGBIFilterTrueviewCustomAffinity
+        "FILTER_TRUEVIEW_DMA" -> Right PGBIFilterTrueviewDma
         "FILTER_TRUEVIEW_GENDER" -> Right PGBIFilterTrueviewGender
         "FILTER_TRUEVIEW_IAR_AGE" -> Right PGBIFilterTrueviewIarAge
         "FILTER_TRUEVIEW_IAR_CATEGORY" -> Right PGBIFilterTrueviewIarCategory
@@ -2375,12 +2573,17 @@ instance FromHttpApiData ParametersGroupBysItem where
         "FILTER_TRUEVIEW_IAR_REGION" -> Right PGBIFilterTrueviewIarRegion
         "FILTER_TRUEVIEW_IAR_REMARKETING_LIST" -> Right PGBIFilterTrueviewIarRemarketingList
         "FILTER_TRUEVIEW_IAR_TIME_OF_DAY" -> Right PGBIFilterTrueviewIarTimeOfDay
+        "FILTER_TRUEVIEW_IAR_YOUTUBE_CHANNEL" -> Right PGBIFilterTrueviewIarYouTubeChannel
+        "FILTER_TRUEVIEW_IAR_YOUTUBE_VIDEO" -> Right PGBIFilterTrueviewIarYouTubeVideo
         "FILTER_TRUEVIEW_IAR_ZIPCODE" -> Right PGBIFilterTrueviewIarZipcode
         "FILTER_TRUEVIEW_INTEREST" -> Right PGBIFilterTrueviewInterest
         "FILTER_TRUEVIEW_KEYWORD" -> Right PGBIFilterTrueviewKeyword
         "FILTER_TRUEVIEW_PARENTAL_STATUS" -> Right PGBIFilterTrueviewParentalStatus
         "FILTER_TRUEVIEW_PLACEMENT" -> Right PGBIFilterTrueviewPlacement
+        "FILTER_TRUEVIEW_REGION" -> Right PGBIFilterTrueviewRegion
         "FILTER_TRUEVIEW_REMARKETING_LIST" -> Right PGBIFilterTrueviewRemarketingList
+        "FILTER_TRUEVIEW_URL" -> Right PGBIFilterTrueviewURL
+        "FILTER_TRUEVIEW_ZIPCODE" -> Right PGBIFilterTrueviewZipcode
         "FILTER_UNKNOWN" -> Right PGBIFilterUnknown
         "FILTER_USER_LIST" -> Right PGBIFilterUserList
         "FILTER_USER_LIST_FIRST_PARTY" -> Right PGBIFilterUserListFirstParty
@@ -2442,6 +2645,7 @@ instance ToHttpApiData ParametersGroupBysItem where
         PGBIFilterLineItemDailyFrequency -> "FILTER_LINE_ITEM_DAILY_FREQUENCY"
         PGBIFilterLineItemLifetimeFrequency -> "FILTER_LINE_ITEM_LIFETIME_FREQUENCY"
         PGBIFilterLineItemType -> "FILTER_LINE_ITEM_TYPE"
+        PGBIFilterMediaPlan -> "FILTER_MEDIA_PLAN"
         PGBIFilterMobileDeviceMake -> "FILTER_MOBILE_DEVICE_MAKE"
         PGBIFilterMobileDeviceMakeModel -> "FILTER_MOBILE_DEVICE_MAKE_MODEL"
         PGBIFilterMobileDeviceType -> "FILTER_MOBILE_DEVICE_TYPE"
@@ -2452,6 +2656,7 @@ instance ToHttpApiData ParametersGroupBysItem where
         PGBIFilterNielsenCountryCode -> "FILTER_NIELSEN_COUNTRY_CODE"
         PGBIFilterNielsenDeviceId -> "FILTER_NIELSEN_DEVICE_ID"
         PGBIFilterNielsenGender -> "FILTER_NIELSEN_GENDER"
+        PGBIFilterNotSupported -> "FILTER_NOT_SUPPORTED"
         PGBIFilterOrderId -> "FILTER_ORDER_ID"
         PGBIFilterOS -> "FILTER_OS"
         PGBIFilterPageCategory -> "FILTER_PAGE_CATEGORY"
@@ -2470,8 +2675,11 @@ instance ToHttpApiData ParametersGroupBysItem where
         PGBIFilterTrueviewAdGroupId -> "FILTER_TRUEVIEW_AD_GROUP_ID"
         PGBIFilterTrueviewAge -> "FILTER_TRUEVIEW_AGE"
         PGBIFilterTrueviewCategory -> "FILTER_TRUEVIEW_CATEGORY"
+        PGBIFilterTrueviewCity -> "FILTER_TRUEVIEW_CITY"
         PGBIFilterTrueviewConversionType -> "FILTER_TRUEVIEW_CONVERSION_TYPE"
+        PGBIFilterTrueviewCountry -> "FILTER_TRUEVIEW_COUNTRY"
         PGBIFilterTrueviewCustomAffinity -> "FILTER_TRUEVIEW_CUSTOM_AFFINITY"
+        PGBIFilterTrueviewDma -> "FILTER_TRUEVIEW_DMA"
         PGBIFilterTrueviewGender -> "FILTER_TRUEVIEW_GENDER"
         PGBIFilterTrueviewIarAge -> "FILTER_TRUEVIEW_IAR_AGE"
         PGBIFilterTrueviewIarCategory -> "FILTER_TRUEVIEW_IAR_CATEGORY"
@@ -2484,12 +2692,17 @@ instance ToHttpApiData ParametersGroupBysItem where
         PGBIFilterTrueviewIarRegion -> "FILTER_TRUEVIEW_IAR_REGION"
         PGBIFilterTrueviewIarRemarketingList -> "FILTER_TRUEVIEW_IAR_REMARKETING_LIST"
         PGBIFilterTrueviewIarTimeOfDay -> "FILTER_TRUEVIEW_IAR_TIME_OF_DAY"
+        PGBIFilterTrueviewIarYouTubeChannel -> "FILTER_TRUEVIEW_IAR_YOUTUBE_CHANNEL"
+        PGBIFilterTrueviewIarYouTubeVideo -> "FILTER_TRUEVIEW_IAR_YOUTUBE_VIDEO"
         PGBIFilterTrueviewIarZipcode -> "FILTER_TRUEVIEW_IAR_ZIPCODE"
         PGBIFilterTrueviewInterest -> "FILTER_TRUEVIEW_INTEREST"
         PGBIFilterTrueviewKeyword -> "FILTER_TRUEVIEW_KEYWORD"
         PGBIFilterTrueviewParentalStatus -> "FILTER_TRUEVIEW_PARENTAL_STATUS"
         PGBIFilterTrueviewPlacement -> "FILTER_TRUEVIEW_PLACEMENT"
+        PGBIFilterTrueviewRegion -> "FILTER_TRUEVIEW_REGION"
         PGBIFilterTrueviewRemarketingList -> "FILTER_TRUEVIEW_REMARKETING_LIST"
+        PGBIFilterTrueviewURL -> "FILTER_TRUEVIEW_URL"
+        PGBIFilterTrueviewZipcode -> "FILTER_TRUEVIEW_ZIPCODE"
         PGBIFilterUnknown -> "FILTER_UNKNOWN"
         PGBIFilterUserList -> "FILTER_USER_LIST"
         PGBIFilterUserListFirstParty -> "FILTER_USER_LIST_FIRST_PARTY"

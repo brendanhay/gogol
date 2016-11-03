@@ -25,10 +25,10 @@ module Network.Google.AppEngine.Types
     -- * NetworkUtilization
     , NetworkUtilization
     , networkUtilization
-    , nuTargetReceivedBytesPerSec
-    , nuTargetSentPacketsPerSec
-    , nuTargetReceivedPacketsPerSec
-    , nuTargetSentBytesPerSec
+    , nuTargetReceivedBytesPerSecond
+    , nuTargetSentPacketsPerSecond
+    , nuTargetReceivedPacketsPerSecond
+    , nuTargetSentBytesPerSecond
 
     -- * Status
     , Status
@@ -41,6 +41,11 @@ module Network.Google.AppEngine.Types
     , OperationSchema
     , operationSchema
     , osAddtional
+
+    -- * LocationSchema
+    , LocationSchema
+    , locationSchema
+    , lsAddtional
 
     -- * TrafficSplit
     , TrafficSplit
@@ -77,13 +82,19 @@ module Network.Google.AppEngine.Types
     , lName
     , lVersion
 
+    -- * ListLocationsResponse
+    , ListLocationsResponse
+    , listLocationsResponse
+    , llrNextPageToken
+    , llrLocations
+
     -- * DiskUtilization
     , DiskUtilization
     , diskUtilization
-    , duTargetWriteOpsPerSec
-    , duTargetReadOpsPerSec
-    , duTargetWriteBytesPerSec
-    , duTargetReadBytesPerSec
+    , duTargetReadBytesPerSecond
+    , duTargetReadOpsPerSecond
+    , duTargetWriteOpsPerSecond
+    , duTargetWriteBytesPerSecond
 
     -- * ListOperationsResponse
     , ListOperationsResponse
@@ -121,13 +132,13 @@ module Network.Google.AppEngine.Types
     , application
     , aDefaultHostname
     , aDefaultCookieExpiration
-    , aLocation
     , aAuthDomain
     , aCodeBucket
     , aName
     , aDispatchRules
     , aDefaultBucket
     , aId
+    , aLocationId
 
     -- * VersionBetaSettings
     , VersionBetaSettings
@@ -141,6 +152,14 @@ module Network.Google.AppEngine.Types
     , sName
     , sId
 
+    -- * Location
+    , Location
+    , location
+    , locName
+    , locMetadata
+    , locLabels
+    , locLocationId
+
     -- * Operation
     , Operation
     , operation
@@ -149,6 +168,12 @@ module Network.Google.AppEngine.Types
     , oResponse
     , oName
     , oMetadata
+
+    -- * ZipInfo
+    , ZipInfo
+    , zipInfo
+    , ziFilesCount
+    , ziSourceURL
 
     -- * URLDispatchRule
     , URLDispatchRule
@@ -212,6 +237,10 @@ module Network.Google.AppEngine.Types
     , nInstanceTag
     , nName
 
+    -- * DebugInstanceRequest
+    , DebugInstanceRequest
+    , debugInstanceRequest
+
     -- * StaticFilesHandlerHTTPHeaders
     , StaticFilesHandlerHTTPHeaders
     , staticFilesHandlerHTTPHeaders
@@ -251,12 +280,19 @@ module Network.Google.AppEngine.Types
     , bsMaxInstances
     , bsIdleTimeout
 
+    -- * OperationMetadataV1
+    , OperationMetadataV1
+    , operationMetadataV1
+    , omvInsertTime
+    , omvUser
+    , omvMethod
+    , omvEndTime
+    , omvTarget
+
     -- * Version
     , Version
     , version
-    , vCreationTime
     , vRuntime
-    , vDeployer
     , vNobuildFilesRegex
     , vInstanceClass
     , vHealthCheck
@@ -264,6 +300,7 @@ module Network.Google.AppEngine.Types
     , vDefaultExpiration
     , vAutomaticScaling
     , vErrorHandlers
+    , vCreatedBy
     , vVM
     , vHandlers
     , vInboundServices
@@ -279,7 +316,9 @@ module Network.Google.AppEngine.Types
     , vEnvVariables
     , vServingStatus
     , vDiskUsageBytes
+    , vCreateTime
     , vLibraries
+    , vVersionURL
     , vDeployment
 
     -- * StaticFilesHandler
@@ -299,6 +338,17 @@ module Network.Google.AppEngine.Types
     , ehMimeType
     , ehErrorCode
     , ehStaticFile
+
+    -- * LocationLabels
+    , LocationLabels
+    , locationLabels
+    , llAddtional
+
+    -- * LocationMetadata
+    , LocationMetadata
+    , locationMetadata
+    , lmStandardEnvironmentAvailable
+    , lmFlexibleEnvironmentAvailable
 
     -- * OperationMetadata
     , OperationMetadata
@@ -320,13 +370,11 @@ module Network.Google.AppEngine.Types
     , RequestUtilization
     , requestUtilization
     , ruTargetConcurrentRequests
-    , ruTargetRequestCountPerSec
+    , ruTargetRequestCountPerSecond
 
-    -- * SourceReference
-    , SourceReference
-    , sourceReference
-    , srRepository
-    , srRevisionId
+    -- * RepairApplicationRequest
+    , RepairApplicationRequest
+    , repairApplicationRequest
 
     -- * OperationResponse
     , OperationResponse
@@ -344,35 +392,35 @@ module Network.Google.AppEngine.Types
     , iMemoryUsage
     , iVMStatus
     , iVMZoneName
+    , iStartTime
     , iVMId
     , iAvailability
     , iVMName
     , iName
-    , iVMUnlocked
+    , iVMDebugEnabled
     , iRequests
     , iQps
     , iId
     , iErrors
     , iAverageLatency
-    , iStartTimestamp
     , iAppEngineRelease
 
     -- * Deployment
     , Deployment
     , deployment
+    , dZip
     , dContainer
     , dFiles
-    , dSourceReferences
     ) where
 
 import           Network.Google.AppEngine.Types.Product
 import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v1beta5' of the Google App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v1' of the Google App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
 appEngineService :: ServiceConfig
 appEngineService
-  = defaultService (ServiceId "appengine:v1beta5")
+  = defaultService (ServiceId "appengine:v1")
       "appengine.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services

@@ -104,6 +104,62 @@ instance ToJSON ConfigFile where
         toJSON ConfigFile'{..}
           = object (catMaybes [("content" .=) <$> _cfContent])
 
+-- | Enables \"data access\" audit logging for a service and specifies a list
+-- of members that are log-exempted.
+--
+-- /See:/ 'auditConfig' smart constructor.
+data AuditConfig = AuditConfig'
+    { _acService         :: !(Maybe Text)
+    , _acExemptedMembers :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuditConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'acService'
+--
+-- * 'acExemptedMembers'
+auditConfig
+    :: AuditConfig
+auditConfig =
+    AuditConfig'
+    { _acService = Nothing
+    , _acExemptedMembers = Nothing
+    }
+
+-- | Specifies a service that will be enabled for \"data access\" audit
+-- logging. For example, \`resourcemanager\`, \`storage\`, \`compute\`.
+-- \`allServices\` is a special value that covers all services.
+acService :: Lens' AuditConfig (Maybe Text)
+acService
+  = lens _acService (\ s a -> s{_acService = a})
+
+-- | Specifies the identities that are exempted from \"data access\" audit
+-- logging for the \`service\` specified above. Follows the same format of
+-- Binding.members.
+acExemptedMembers :: Lens' AuditConfig [Text]
+acExemptedMembers
+  = lens _acExemptedMembers
+      (\ s a -> s{_acExemptedMembers = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON AuditConfig where
+        parseJSON
+          = withObject "AuditConfig"
+              (\ o ->
+                 AuditConfig' <$>
+                   (o .:? "service") <*>
+                     (o .:? "exemptedMembers" .!= mempty))
+
+instance ToJSON AuditConfig where
+        toJSON AuditConfig'{..}
+          = object
+              (catMaybes
+                 [("service" .=) <$> _acService,
+                  ("exemptedMembers" .=) <$> _acExemptedMembers])
+
 -- | A response containing a partial list of operations and a page token used
 -- to build the next request if the request has been truncated.
 --
@@ -261,6 +317,53 @@ instance ToJSON TypesListResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _tlrNextPageToken,
                   ("types" .=) <$> _tlrTypes])
+
+-- | Options for counters
+--
+-- /See:/ 'logConfigCounterOptions' smart constructor.
+data LogConfigCounterOptions = LogConfigCounterOptions'
+    { _lccoField  :: !(Maybe Text)
+    , _lccoMetric :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogConfigCounterOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lccoField'
+--
+-- * 'lccoMetric'
+logConfigCounterOptions
+    :: LogConfigCounterOptions
+logConfigCounterOptions =
+    LogConfigCounterOptions'
+    { _lccoField = Nothing
+    , _lccoMetric = Nothing
+    }
+
+-- | The field value to attribute.
+lccoField :: Lens' LogConfigCounterOptions (Maybe Text)
+lccoField
+  = lens _lccoField (\ s a -> s{_lccoField = a})
+
+-- | The metric to update.
+lccoMetric :: Lens' LogConfigCounterOptions (Maybe Text)
+lccoMetric
+  = lens _lccoMetric (\ s a -> s{_lccoMetric = a})
+
+instance FromJSON LogConfigCounterOptions where
+        parseJSON
+          = withObject "LogConfigCounterOptions"
+              (\ o ->
+                 LogConfigCounterOptions' <$>
+                   (o .:? "field") <*> (o .:? "metric"))
+
+instance ToJSON LogConfigCounterOptions where
+        toJSON LogConfigCounterOptions'{..}
+          = object
+              (catMaybes
+                 [("field" .=) <$> _lccoField,
+                  ("metric" .=) <$> _lccoMetric])
 
 -- | An Operation resource, used to manage asynchronous API requests.
 --
@@ -498,7 +601,9 @@ oDescription :: Lens' Operation (Maybe Text)
 oDescription
   = lens _oDescription (\ s a -> s{_oDescription = a})
 
--- | [Output Only] The URL of the resource that the operation modifies.
+-- | [Output Only] The URL of the resource that the operation modifies. If
+-- creating a persistent disk snapshot, this points to the persistent disk
+-- that the snapshot was created from.
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
@@ -562,6 +667,45 @@ instance ToJSON Operation where
                   ("description" .=) <$> _oDescription,
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
+
+--
+-- /See:/ 'testPermissionsResponse' smart constructor.
+newtype TestPermissionsResponse = TestPermissionsResponse'
+    { _tprPermissions :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TestPermissionsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tprPermissions'
+testPermissionsResponse
+    :: TestPermissionsResponse
+testPermissionsResponse =
+    TestPermissionsResponse'
+    { _tprPermissions = Nothing
+    }
+
+-- | A subset of \`TestPermissionsRequest.permissions\` that the caller is
+-- allowed.
+tprPermissions :: Lens' TestPermissionsResponse [Text]
+tprPermissions
+  = lens _tprPermissions
+      (\ s a -> s{_tprPermissions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TestPermissionsResponse where
+        parseJSON
+          = withObject "TestPermissionsResponse"
+              (\ o ->
+                 TestPermissionsResponse' <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON TestPermissionsResponse where
+        toJSON TestPermissionsResponse'{..}
+          = object
+              (catMaybes [("permissions" .=) <$> _tprPermissions])
 
 -- | A response containing a partial list of resources and a page token used
 -- to build the next request if the request has been truncated.
@@ -676,6 +820,7 @@ instance ToJSON DeploymentUpdate where
 data ResourceUpdate = ResourceUpdate'
     { _ruState           :: !(Maybe Text)
     , _ruError           :: !(Maybe ResourceUpdateError)
+    , _ruAccessControl   :: !(Maybe ResourceAccessControl)
     , _ruWarnings        :: !(Maybe [ResourceUpdateWarningsItem])
     , _ruIntent          :: !(Maybe Text)
     , _ruManifest        :: !(Maybe Text)
@@ -690,6 +835,8 @@ data ResourceUpdate = ResourceUpdate'
 -- * 'ruState'
 --
 -- * 'ruError'
+--
+-- * 'ruAccessControl'
 --
 -- * 'ruWarnings'
 --
@@ -706,6 +853,7 @@ resourceUpdate =
     ResourceUpdate'
     { _ruState = Nothing
     , _ruError = Nothing
+    , _ruAccessControl = Nothing
     , _ruWarnings = Nothing
     , _ruIntent = Nothing
     , _ruManifest = Nothing
@@ -721,6 +869,13 @@ ruState = lens _ruState (\ s a -> s{_ruState = a})
 -- this field will be populated.
 ruError :: Lens' ResourceUpdate (Maybe ResourceUpdateError)
 ruError = lens _ruError (\ s a -> s{_ruError = a})
+
+-- | The Access Control Policy to set on this resource after updating the
+-- resource itself.
+ruAccessControl :: Lens' ResourceUpdate (Maybe ResourceAccessControl)
+ruAccessControl
+  = lens _ruAccessControl
+      (\ s a -> s{_ruAccessControl = a})
 
 -- | [Output Only] If warning messages are generated during processing of
 -- this resource, this field will be populated.
@@ -759,7 +914,8 @@ instance FromJSON ResourceUpdate where
               (\ o ->
                  ResourceUpdate' <$>
                    (o .:? "state") <*> (o .:? "error") <*>
-                     (o .:? "warnings" .!= mempty)
+                     (o .:? "accessControl")
+                     <*> (o .:? "warnings" .!= mempty)
                      <*> (o .:? "intent")
                      <*> (o .:? "manifest")
                      <*> (o .:? "finalProperties")
@@ -771,6 +927,7 @@ instance ToJSON ResourceUpdate where
               (catMaybes
                  [("state" .=) <$> _ruState,
                   ("error" .=) <$> _ruError,
+                  ("accessControl" .=) <$> _ruAccessControl,
                   ("warnings" .=) <$> _ruWarnings,
                   ("intent" .=) <$> _ruIntent,
                   ("manifest" .=) <$> _ruManifest,
@@ -817,6 +974,157 @@ instance ToJSON DeploymentLabelEntry where
           = object
               (catMaybes
                  [("value" .=) <$> _dleValue, ("key" .=) <$> _dleKey])
+
+-- | A rule to be applied in a Policy.
+--
+-- /See:/ 'rule' smart constructor.
+data Rule = Rule'
+    { _rAction      :: !(Maybe Text)
+    , _rNotIns      :: !(Maybe [Text])
+    , _rIns         :: !(Maybe [Text])
+    , _rLogConfigs  :: !(Maybe [LogConfig])
+    , _rConditions  :: !(Maybe [Condition])
+    , _rPermissions :: !(Maybe [Text])
+    , _rDescription :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Rule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rAction'
+--
+-- * 'rNotIns'
+--
+-- * 'rIns'
+--
+-- * 'rLogConfigs'
+--
+-- * 'rConditions'
+--
+-- * 'rPermissions'
+--
+-- * 'rDescription'
+rule
+    :: Rule
+rule =
+    Rule'
+    { _rAction = Nothing
+    , _rNotIns = Nothing
+    , _rIns = Nothing
+    , _rLogConfigs = Nothing
+    , _rConditions = Nothing
+    , _rPermissions = Nothing
+    , _rDescription = Nothing
+    }
+
+-- | Required
+rAction :: Lens' Rule (Maybe Text)
+rAction = lens _rAction (\ s a -> s{_rAction = a})
+
+-- | If one or more \'not_in\' clauses are specified, the rule matches if the
+-- PRINCIPAL\/AUTHORITY_SELECTOR is in none of the entries.
+rNotIns :: Lens' Rule [Text]
+rNotIns
+  = lens _rNotIns (\ s a -> s{_rNotIns = a}) . _Default
+      . _Coerce
+
+-- | If one or more \'in\' clauses are specified, the rule matches if the
+-- PRINCIPAL\/AUTHORITY_SELECTOR is in at least one of these entries.
+rIns :: Lens' Rule [Text]
+rIns
+  = lens _rIns (\ s a -> s{_rIns = a}) . _Default .
+      _Coerce
+
+-- | The config returned to callers of tech.iam.IAM.CheckPolicy for any
+-- entries that match the LOG action.
+rLogConfigs :: Lens' Rule [LogConfig]
+rLogConfigs
+  = lens _rLogConfigs (\ s a -> s{_rLogConfigs = a}) .
+      _Default
+      . _Coerce
+
+-- | Additional restrictions that must be met
+rConditions :: Lens' Rule [Condition]
+rConditions
+  = lens _rConditions (\ s a -> s{_rConditions = a}) .
+      _Default
+      . _Coerce
+
+-- | A permission is a string of form \'..\' (e.g.,
+-- \'storage.buckets.list\'). A value of \'*\' matches all permissions, and
+-- a verb part of \'*\' (e.g., \'storage.buckets.*\') matches all verbs.
+rPermissions :: Lens' Rule [Text]
+rPermissions
+  = lens _rPermissions (\ s a -> s{_rPermissions = a})
+      . _Default
+      . _Coerce
+
+-- | Human-readable description of the rule.
+rDescription :: Lens' Rule (Maybe Text)
+rDescription
+  = lens _rDescription (\ s a -> s{_rDescription = a})
+
+instance FromJSON Rule where
+        parseJSON
+          = withObject "Rule"
+              (\ o ->
+                 Rule' <$>
+                   (o .:? "action") <*> (o .:? "notIns" .!= mempty) <*>
+                     (o .:? "ins" .!= mempty)
+                     <*> (o .:? "logConfigs" .!= mempty)
+                     <*> (o .:? "conditions" .!= mempty)
+                     <*> (o .:? "permissions" .!= mempty)
+                     <*> (o .:? "description"))
+
+instance ToJSON Rule where
+        toJSON Rule'{..}
+          = object
+              (catMaybes
+                 [("action" .=) <$> _rAction,
+                  ("notIns" .=) <$> _rNotIns, ("ins" .=) <$> _rIns,
+                  ("logConfigs" .=) <$> _rLogConfigs,
+                  ("conditions" .=) <$> _rConditions,
+                  ("permissions" .=) <$> _rPermissions,
+                  ("description" .=) <$> _rDescription])
+
+--
+-- /See:/ 'testPermissionsRequest' smart constructor.
+newtype TestPermissionsRequest = TestPermissionsRequest'
+    { _tPermissions :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TestPermissionsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tPermissions'
+testPermissionsRequest
+    :: TestPermissionsRequest
+testPermissionsRequest =
+    TestPermissionsRequest'
+    { _tPermissions = Nothing
+    }
+
+-- | The set of permissions to check for the \'resource\'. Permissions with
+-- wildcards (such as \'*\' or \'storage.*\') are not allowed.
+tPermissions :: Lens' TestPermissionsRequest [Text]
+tPermissions
+  = lens _tPermissions (\ s a -> s{_tPermissions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TestPermissionsRequest where
+        parseJSON
+          = withObject "TestPermissionsRequest"
+              (\ o ->
+                 TestPermissionsRequest' <$>
+                   (o .:? "permissions" .!= mempty))
+
+instance ToJSON TestPermissionsRequest where
+        toJSON TestPermissionsRequest'{..}
+          = object
+              (catMaybes [("permissions" .=) <$> _tPermissions])
 
 -- |
 --
@@ -1045,6 +1353,7 @@ instance ToJSON DeploymentsCancelPreviewRequest where
 -- /See:/ 'resource' smart constructor.
 data Resource = Resource'
     { _rInsertTime      :: !(Maybe Text)
+    , _rAccessControl   :: !(Maybe ResourceAccessControl)
     , _rURL             :: !(Maybe Text)
     , _rWarnings        :: !(Maybe [ResourceWarningsItem])
     , _rUpdateTime      :: !(Maybe Text)
@@ -1062,6 +1371,8 @@ data Resource = Resource'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rInsertTime'
+--
+-- * 'rAccessControl'
 --
 -- * 'rURL'
 --
@@ -1087,6 +1398,7 @@ resource
 resource =
     Resource'
     { _rInsertTime = Nothing
+    , _rAccessControl = Nothing
     , _rURL = Nothing
     , _rWarnings = Nothing
     , _rUpdateTime = Nothing
@@ -1104,6 +1416,12 @@ resource =
 rInsertTime :: Lens' Resource (Maybe Text)
 rInsertTime
   = lens _rInsertTime (\ s a -> s{_rInsertTime = a})
+
+-- | The Access Control Policy set on this resource.
+rAccessControl :: Lens' Resource (Maybe ResourceAccessControl)
+rAccessControl
+  = lens _rAccessControl
+      (\ s a -> s{_rAccessControl = a})
 
 -- | [Output Only] The URL of the actual resource.
 rURL :: Lens' Resource (Maybe Text)
@@ -1146,7 +1464,7 @@ rId
   = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
 
 -- | [Output Only] The type of the resource, for example compute.v1.instance,
--- or replicaPools.v1beta2.instanceGroupManager.
+-- or cloudfunctions.v1beta1.function.
 rType :: Lens' Resource (Maybe Text)
 rType = lens _rType (\ s a -> s{_rType = a})
 
@@ -1166,8 +1484,9 @@ instance FromJSON Resource where
           = withObject "Resource"
               (\ o ->
                  Resource' <$>
-                   (o .:? "insertTime") <*> (o .:? "url") <*>
-                     (o .:? "warnings" .!= mempty)
+                   (o .:? "insertTime") <*> (o .:? "accessControl") <*>
+                     (o .:? "url")
+                     <*> (o .:? "warnings" .!= mempty)
                      <*> (o .:? "updateTime")
                      <*> (o .:? "name")
                      <*> (o .:? "manifest")
@@ -1182,6 +1501,7 @@ instance ToJSON Resource where
           = object
               (catMaybes
                  [("insertTime" .=) <$> _rInsertTime,
+                  ("accessControl" .=) <$> _rAccessControl,
                   ("url" .=) <$> _rURL, ("warnings" .=) <$> _rWarnings,
                   ("updateTime" .=) <$> _rUpdateTime,
                   ("name" .=) <$> _rName,
@@ -1383,11 +1703,142 @@ instance ToJSON OperationError where
         toJSON OperationError'{..}
           = object (catMaybes [("errors" .=) <$> _oeErrors])
 
+-- | Defines an Identity and Access Management (IAM) policy. It is used to
+-- specify access control policies for Cloud Platform resources. A
+-- \`Policy\` consists of a list of \`bindings\`. A \`Binding\` binds a
+-- list of \`members\` to a \`role\`, where the members can be user
+-- accounts, Google groups, Google domains, and service accounts. A
+-- \`role\` is a named list of permissions defined by IAM. **Example** {
+-- \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- \"user:mike\'example.com\", \"group:admins\'example.com\",
+-- \"domain:google.com\",
+-- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\", ] }, {
+-- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
+-- ] } For a description of IAM and its features, see the [IAM developer\'s
+-- guide](https:\/\/cloud.google.com\/iam).
+--
+-- /See:/ 'policy' smart constructor.
+data Policy = Policy'
+    { _pAuditConfigs :: !(Maybe [AuditConfig])
+    , _pEtag         :: !(Maybe Base64)
+    , _pRules        :: !(Maybe [Rule])
+    , _pVersion      :: !(Maybe (Textual Int32))
+    , _pBindings     :: !(Maybe [Binding])
+    , _pIAMOwned     :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Policy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pAuditConfigs'
+--
+-- * 'pEtag'
+--
+-- * 'pRules'
+--
+-- * 'pVersion'
+--
+-- * 'pBindings'
+--
+-- * 'pIAMOwned'
+policy
+    :: Policy
+policy =
+    Policy'
+    { _pAuditConfigs = Nothing
+    , _pEtag = Nothing
+    , _pRules = Nothing
+    , _pVersion = Nothing
+    , _pBindings = Nothing
+    , _pIAMOwned = Nothing
+    }
+
+-- | Specifies audit logging configs for \"data access\". \"data access\":
+-- generally refers to data reads\/writes and admin reads. \"admin
+-- activity\": generally refers to admin writes. Note: \`AuditConfig\`
+-- doesn\'t apply to \"admin activity\", which always enables audit
+-- logging.
+pAuditConfigs :: Lens' Policy [AuditConfig]
+pAuditConfigs
+  = lens _pAuditConfigs
+      (\ s a -> s{_pAuditConfigs = a})
+      . _Default
+      . _Coerce
+
+-- | \`etag\` is used for optimistic concurrency control as a way to help
+-- prevent simultaneous updates of a policy from overwriting each other. It
+-- is strongly suggested that systems make use of the \`etag\` in the
+-- read-modify-write cycle to perform policy updates in order to avoid race
+-- conditions: An \`etag\` is returned in the response to \`getIamPolicy\`,
+-- and systems are expected to put that etag in the request to
+-- \`setIamPolicy\` to ensure that their change will be applied to the same
+-- version of the policy. If no \`etag\` is provided in the call to
+-- \`setIamPolicy\`, then the existing policy is overwritten blindly.
+pEtag :: Lens' Policy (Maybe ByteString)
+pEtag
+  = lens _pEtag (\ s a -> s{_pEtag = a}) .
+      mapping _Base64
+
+-- | If more than one rule is specified, the rules are applied in the
+-- following manner: - All matching LOG rules are always applied. - If any
+-- DENY\/DENY_WITH_LOG rule matches, permission is denied. Logging will be
+-- applied if one or more matching rule requires logging. - Otherwise, if
+-- any ALLOW\/ALLOW_WITH_LOG rule matches, permission is granted. Logging
+-- will be applied if one or more matching rule requires logging. -
+-- Otherwise, if no rule applies, permission is denied.
+pRules :: Lens' Policy [Rule]
+pRules
+  = lens _pRules (\ s a -> s{_pRules = a}) . _Default .
+      _Coerce
+
+-- | Version of the \`Policy\`. The default version is 0.
+pVersion :: Lens' Policy (Maybe Int32)
+pVersion
+  = lens _pVersion (\ s a -> s{_pVersion = a}) .
+      mapping _Coerce
+
+-- | Associates a list of \`members\` to a \`role\`. Multiple \`bindings\`
+-- must not be specified for the same \`role\`. \`bindings\` with no
+-- members will result in an error.
+pBindings :: Lens' Policy [Binding]
+pBindings
+  = lens _pBindings (\ s a -> s{_pBindings = a}) .
+      _Default
+      . _Coerce
+
+-- |
+pIAMOwned :: Lens' Policy (Maybe Bool)
+pIAMOwned
+  = lens _pIAMOwned (\ s a -> s{_pIAMOwned = a})
+
+instance FromJSON Policy where
+        parseJSON
+          = withObject "Policy"
+              (\ o ->
+                 Policy' <$>
+                   (o .:? "auditConfigs" .!= mempty) <*> (o .:? "etag")
+                     <*> (o .:? "rules" .!= mempty)
+                     <*> (o .:? "version")
+                     <*> (o .:? "bindings" .!= mempty)
+                     <*> (o .:? "iamOwned"))
+
+instance ToJSON Policy where
+        toJSON Policy'{..}
+          = object
+              (catMaybes
+                 [("auditConfigs" .=) <$> _pAuditConfigs,
+                  ("etag" .=) <$> _pEtag, ("rules" .=) <$> _pRules,
+                  ("version" .=) <$> _pVersion,
+                  ("bindings" .=) <$> _pBindings,
+                  ("iamOwned" .=) <$> _pIAMOwned])
+
 -- | A resource type supported by Deployment Manager.
 --
 -- /See:/ 'type'' smart constructor.
 data Type = Type'
     { _tInsertTime :: !(Maybe Text)
+    , _tOperation  :: !(Maybe Operation)
     , _tSelfLink   :: !(Maybe Text)
     , _tName       :: !(Maybe Text)
     , _tId         :: !(Maybe (Textual Word64))
@@ -1399,6 +1850,8 @@ data Type = Type'
 --
 -- * 'tInsertTime'
 --
+-- * 'tOperation'
+--
 -- * 'tSelfLink'
 --
 -- * 'tName'
@@ -1409,6 +1862,7 @@ type'
 type' =
     Type'
     { _tInsertTime = Nothing
+    , _tOperation = Nothing
     , _tSelfLink = Nothing
     , _tName = Nothing
     , _tId = Nothing
@@ -1419,6 +1873,12 @@ type' =
 tInsertTime :: Lens' Type (Maybe Text)
 tInsertTime
   = lens _tInsertTime (\ s a -> s{_tInsertTime = a})
+
+-- | [Output Only] The Operation that most recently ran, or is currently
+-- running, on this type.
+tOperation :: Lens' Type (Maybe Operation)
+tOperation
+  = lens _tOperation (\ s a -> s{_tOperation = a})
 
 -- | [Output Only] Self link for the type.
 tSelfLink :: Lens' Type (Maybe Text)
@@ -1439,8 +1899,9 @@ instance FromJSON Type where
           = withObject "Type"
               (\ o ->
                  Type' <$>
-                   (o .:? "insertTime") <*> (o .:? "selfLink") <*>
-                     (o .:? "name")
+                   (o .:? "insertTime") <*> (o .:? "operation") <*>
+                     (o .:? "selfLink")
+                     <*> (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON Type where
@@ -1448,6 +1909,7 @@ instance ToJSON Type where
           = object
               (catMaybes
                  [("insertTime" .=) <$> _tInsertTime,
+                  ("operation" .=) <$> _tOperation,
                   ("selfLink" .=) <$> _tSelfLink,
                   ("name" .=) <$> _tName, ("id" .=) <$> _tId])
 
@@ -1687,6 +2149,91 @@ instance ToJSON ResourceUpdateError where
         toJSON ResourceUpdateError'{..}
           = object (catMaybes [("errors" .=) <$> _rueErrors])
 
+-- | A condition to be met.
+--
+-- /See:/ 'condition' smart constructor.
+data Condition = Condition'
+    { _cOp     :: !(Maybe Text)
+    , _cIAM    :: !(Maybe Text)
+    , _cValues :: !(Maybe [Text])
+    , _cValue  :: !(Maybe Text)
+    , _cSys    :: !(Maybe Text)
+    , _cSvc    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Condition' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cOp'
+--
+-- * 'cIAM'
+--
+-- * 'cValues'
+--
+-- * 'cValue'
+--
+-- * 'cSys'
+--
+-- * 'cSvc'
+condition
+    :: Condition
+condition =
+    Condition'
+    { _cOp = Nothing
+    , _cIAM = Nothing
+    , _cValues = Nothing
+    , _cValue = Nothing
+    , _cSys = Nothing
+    , _cSvc = Nothing
+    }
+
+-- | An operator to apply the subject with.
+cOp :: Lens' Condition (Maybe Text)
+cOp = lens _cOp (\ s a -> s{_cOp = a})
+
+-- | Trusted attributes supplied by the IAM system.
+cIAM :: Lens' Condition (Maybe Text)
+cIAM = lens _cIAM (\ s a -> s{_cIAM = a})
+
+-- | The objects of the condition. This is mutually exclusive with \'value\'.
+cValues :: Lens' Condition [Text]
+cValues
+  = lens _cValues (\ s a -> s{_cValues = a}) . _Default
+      . _Coerce
+
+-- | DEPRECATED. Use \'values\' instead.
+cValue :: Lens' Condition (Maybe Text)
+cValue = lens _cValue (\ s a -> s{_cValue = a})
+
+-- | Trusted attributes supplied by any service that owns resources and uses
+-- the IAM system for access control.
+cSys :: Lens' Condition (Maybe Text)
+cSys = lens _cSys (\ s a -> s{_cSys = a})
+
+-- | Trusted attributes discharged by the service.
+cSvc :: Lens' Condition (Maybe Text)
+cSvc = lens _cSvc (\ s a -> s{_cSvc = a})
+
+instance FromJSON Condition where
+        parseJSON
+          = withObject "Condition"
+              (\ o ->
+                 Condition' <$>
+                   (o .:? "op") <*> (o .:? "iam") <*>
+                     (o .:? "values" .!= mempty)
+                     <*> (o .:? "value")
+                     <*> (o .:? "sys")
+                     <*> (o .:? "svc"))
+
+instance ToJSON Condition where
+        toJSON Condition'{..}
+          = object
+              (catMaybes
+                 [("op" .=) <$> _cOp, ("iam" .=) <$> _cIAM,
+                  ("values" .=) <$> _cValues, ("value" .=) <$> _cValue,
+                  ("sys" .=) <$> _cSys, ("svc" .=) <$> _cSvc])
+
 -- | A response containing a partial list of deployments and a page token
 -- used to build the next request if the request has been truncated.
 --
@@ -1799,6 +2346,76 @@ instance ToJSON ResourceWarningsItem where
                  [("data" .=) <$> _rwiData, ("code" .=) <$> _rwiCode,
                   ("message" .=) <$> _rwiMessage])
 
+-- | Specifies what kind of log the caller must write
+--
+-- /See:/ 'logConfig' smart constructor.
+newtype LogConfig = LogConfig'
+    { _lcCounter :: Maybe LogConfigCounterOptions
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcCounter'
+logConfig
+    :: LogConfig
+logConfig =
+    LogConfig'
+    { _lcCounter = Nothing
+    }
+
+-- | Counter options.
+lcCounter :: Lens' LogConfig (Maybe LogConfigCounterOptions)
+lcCounter
+  = lens _lcCounter (\ s a -> s{_lcCounter = a})
+
+instance FromJSON LogConfig where
+        parseJSON
+          = withObject "LogConfig"
+              (\ o -> LogConfig' <$> (o .:? "counter"))
+
+instance ToJSON LogConfig where
+        toJSON LogConfig'{..}
+          = object (catMaybes [("counter" .=) <$> _lcCounter])
+
+-- | The access controls set on the resource.
+--
+-- /See:/ 'resourceAccessControl' smart constructor.
+newtype ResourceAccessControl = ResourceAccessControl'
+    { _racGcpIAMPolicy :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceAccessControl' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'racGcpIAMPolicy'
+resourceAccessControl
+    :: ResourceAccessControl
+resourceAccessControl =
+    ResourceAccessControl'
+    { _racGcpIAMPolicy = Nothing
+    }
+
+-- | The GCP IAM Policy to set on the resource.
+racGcpIAMPolicy :: Lens' ResourceAccessControl (Maybe Text)
+racGcpIAMPolicy
+  = lens _racGcpIAMPolicy
+      (\ s a -> s{_racGcpIAMPolicy = a})
+
+instance FromJSON ResourceAccessControl where
+        parseJSON
+          = withObject "ResourceAccessControl"
+              (\ o ->
+                 ResourceAccessControl' <$> (o .:? "gcpIamPolicy"))
+
+instance ToJSON ResourceAccessControl where
+        toJSON ResourceAccessControl'{..}
+          = object
+              (catMaybes
+                 [("gcpIamPolicy" .=) <$> _racGcpIAMPolicy])
+
 -- |
 --
 -- /See:/ 'targetConfiguration' smart constructor.
@@ -1907,6 +2524,68 @@ instance ToJSON OperationWarningsItem where
               (catMaybes
                  [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,
                   ("message" .=) <$> _owiMessage])
+
+-- | Associates \`members\` with a \`role\`.
+--
+-- /See:/ 'binding' smart constructor.
+data Binding = Binding'
+    { _bMembers :: !(Maybe [Text])
+    , _bRole    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Binding' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bMembers'
+--
+-- * 'bRole'
+binding
+    :: Binding
+binding =
+    Binding'
+    { _bMembers = Nothing
+    , _bRole = Nothing
+    }
+
+-- | Specifies the identities requesting access for a Cloud Platform
+-- resource. \`members\` can have the following values: * \`allUsers\`: A
+-- special identifier that represents anyone who is on the internet; with
+-- or without a Google account. * \`allAuthenticatedUsers\`: A special
+-- identifier that represents anyone who is authenticated with a Google
+-- account or a service account. * \`user:{emailid}\`: An email address
+-- that represents a specific Google account. For example,
+-- \`alice\'gmail.com\` or \`joe\'example.com\`. *
+-- \`serviceAccount:{emailid}\`: An email address that represents a service
+-- account. For example, \`my-other-app\'appspot.gserviceaccount.com\`. *
+-- \`group:{emailid}\`: An email address that represents a Google group.
+-- For example, \`admins\'example.com\`. * \`domain:{domain}\`: A Google
+-- Apps domain name that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
+bMembers :: Lens' Binding [Text]
+bMembers
+  = lens _bMembers (\ s a -> s{_bMembers = a}) .
+      _Default
+      . _Coerce
+
+-- | Role that is assigned to \`members\`. For example, \`roles\/viewer\`,
+-- \`roles\/editor\`, or \`roles\/owner\`.
+bRole :: Lens' Binding (Maybe Text)
+bRole = lens _bRole (\ s a -> s{_bRole = a})
+
+instance FromJSON Binding where
+        parseJSON
+          = withObject "Binding"
+              (\ o ->
+                 Binding' <$>
+                   (o .:? "members" .!= mempty) <*> (o .:? "role"))
+
+instance ToJSON Binding where
+        toJSON Binding'{..}
+          = object
+              (catMaybes
+                 [("members" .=) <$> _bMembers,
+                  ("role" .=) <$> _bRole])
 
 -- |
 --

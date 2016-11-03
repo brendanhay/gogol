@@ -22,7 +22,7 @@
 --
 -- Sets the breakpoint to the debuggee.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.set@.
+-- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.set@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
     (
     -- * REST Resource

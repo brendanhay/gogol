@@ -23,7 +23,7 @@
 -- Gets a single metric descriptor. This method does not require a
 -- Stackdriver account.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.get@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.metricDescriptors.get@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Get
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 type ProjectsMetricDescriptorsGetResource =
      "v3" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -67,7 +67,7 @@ type ProjectsMetricDescriptorsGetResource =
 --
 -- /See:/ 'projectsMetricDescriptorsGet' smart constructor.
 data ProjectsMetricDescriptorsGet = ProjectsMetricDescriptorsGet'
-    { _pmdgXgafv          :: !(Maybe Text)
+    { _pmdgXgafv          :: !(Maybe Xgafv)
     , _pmdgUploadProtocol :: !(Maybe Text)
     , _pmdgPp             :: !Bool
     , _pmdgAccessToken    :: !(Maybe Text)
@@ -112,7 +112,7 @@ projectsMetricDescriptorsGet pPmdgName_ =
     }
 
 -- | V1 error format.
-pmdgXgafv :: Lens' ProjectsMetricDescriptorsGet (Maybe Text)
+pmdgXgafv :: Lens' ProjectsMetricDescriptorsGet (Maybe Xgafv)
 pmdgXgafv
   = lens _pmdgXgafv (\ s a -> s{_pmdgXgafv = a})
 
@@ -145,9 +145,9 @@ pmdgBearerToken
       (\ s a -> s{_pmdgBearerToken = a})
 
 -- | The metric descriptor on which to execute the request. The format is
--- \`\"projects\/{project_id_or_number}\/metricDescriptors\/{metric_id}\"\`.
--- An example value of \`{metric_id}\` is
--- \`\"compute.googleapis.com\/instance\/disk\/read_bytes_count\"\`.
+-- \"projects\/{project_id_or_number}\/metricDescriptors\/{metric_id}\". An
+-- example value of {metric_id} is
+-- \"compute.googleapis.com\/instance\/disk\/read_bytes_count\".
 pmdgName :: Lens' ProjectsMetricDescriptorsGet Text
 pmdgName = lens _pmdgName (\ s a -> s{_pmdgName = a})
 

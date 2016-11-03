@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.GlobalOperations.List
     , GlobalOperationsList
 
     -- * Request Lenses
+    , golOrderBy
     , golProject
     , golFilter
     , golPageToken
@@ -52,17 +53,19 @@ type GlobalOperationsListResource =
            Capture "project" Text :>
              "global" :>
                "operations" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] OperationList
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] OperationList
 
 -- | Retrieves a list of Operation resources contained within the specified
 -- project.
 --
 -- /See:/ 'globalOperationsList' smart constructor.
 data GlobalOperationsList = GlobalOperationsList'
-    { _golProject    :: !Text
+    { _golOrderBy    :: !(Maybe Text)
+    , _golProject    :: !Text
     , _golFilter     :: !(Maybe Text)
     , _golPageToken  :: !(Maybe Text)
     , _golMaxResults :: !(Textual Word32)
@@ -71,6 +74,8 @@ data GlobalOperationsList = GlobalOperationsList'
 -- | Creates a value of 'GlobalOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'golOrderBy'
 --
 -- * 'golProject'
 --
@@ -84,11 +89,24 @@ globalOperationsList
     -> GlobalOperationsList
 globalOperationsList pGolProject_ =
     GlobalOperationsList'
-    { _golProject = pGolProject_
+    { _golOrderBy = Nothing
+    , _golProject = pGolProject_
     , _golFilter = Nothing
     , _golPageToken = Nothing
     , _golMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+golOrderBy :: Lens' GlobalOperationsList (Maybe Text)
+golOrderBy
+  = lens _golOrderBy (\ s a -> s{_golOrderBy = a})
 
 -- | Project ID for this request.
 golProject :: Lens' GlobalOperationsList Text
@@ -106,16 +124,15 @@ golProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 golFilter :: Lens' GlobalOperationsList (Maybe Text)
 golFilter
   = lens _golFilter (\ s a -> s{_golFilter = a})
@@ -143,7 +160,7 @@ instance GoogleRequest GlobalOperationsList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient GlobalOperationsList'{..}
-          = go _golProject _golFilter _golPageToken
+          = go _golProject _golOrderBy _golFilter _golPageToken
               (Just _golMaxResults)
               (Just AltJSON)
               computeService

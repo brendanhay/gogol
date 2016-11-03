@@ -89,7 +89,8 @@ proposalsUpdate pPuUpdateAction_ pPuRevisionNumber_ pPuPayload_ pPuProposalId_ =
     , _puProposalId = pPuProposalId_
     }
 
--- | The proposed action to take on the proposal.
+-- | The proposed action to take on the proposal. This field is required and
+-- it must be set when updating a proposal.
 puUpdateAction :: Lens' ProposalsUpdate ProposalsUpdateUpdateAction
 puUpdateAction
   = lens _puUpdateAction

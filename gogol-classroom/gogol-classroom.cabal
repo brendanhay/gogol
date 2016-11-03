@@ -1,5 +1,5 @@
 name:                  gogol-classroom
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Classroom SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -68,11 +68,18 @@ library
         , Network.Google.Resource.Classroom.Invitations.Get
         , Network.Google.Resource.Classroom.Invitations.List
         , Network.Google.Resource.Classroom.UserProFiles.Get
+        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
+        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
+        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
+        , Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Patch
+        , Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
+        , Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
+        , Network.Google.Resource.Classroom.UserProFiles.Guardians.List
 
     other-modules:
           Network.Google.Classroom.Types.Product
         , Network.Google.Classroom.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

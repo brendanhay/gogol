@@ -32,7 +32,6 @@ import           Data.ByteArray.Encoding
 import           Data.ByteString                (ByteString)
 import           Data.ByteString.Builder        ()
 import qualified Data.ByteString.Lazy           as LBS
-import           Data.Default.Class             (def)
 import           Data.String                    (IsString)
 import qualified Data.Text                      as Text
 import qualified Data.Text.Encoding             as Text
@@ -245,18 +244,17 @@ instance FromJSON RefreshError where
         <$> o .:  "error"
         <*> o .:? "error_description"
 
--- | @https://accounts.google.com/o/oauth2/token@.
+-- | @https://accounts.google.com/o/oauth2/v2/auth@.
 accountsURL :: Text
-accountsURL = "https://accounts.google.com/o/oauth2/token"
+accountsURL = "https://accounts.google.com/o/oauth2/v2/auth"
 
 accountsRequest :: Client.Request
-accountsRequest = def
+accountsRequest = Client.defaultRequest
     { Client.host           = "accounts.google.com"
     , Client.port           = 443
     , Client.secure         = True
-    , Client.checkStatus    = \_ _ _ -> Nothing
     , Client.method         = "POST"
-    , Client.path           = "/o/oauth2/token"
+    , Client.path           = "/o/oauth2/v2/auth"
     , Client.requestHeaders =
         [ (hContentType, "application/x-www-form-urlencoded")
         ]

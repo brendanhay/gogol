@@ -157,10 +157,8 @@ pssipBearerToken
       (\ s a -> s{_pssipBearerToken = a})
 
 -- | REQUIRED: The resource for which the policy is being specified.
--- \`resource\` is usually specified as a path, such as
--- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
--- the path specified in this value is resource specific and is specified
--- in the \`setIamPolicy\` documentation.
+-- \`resource\` is usually specified as a path. For example, a Project
+-- resource is specified as \`projects\/{project}\`.
 pssipResource :: Lens' ProjectsSubscriptionsSetIAMPolicy Text
 pssipResource
   = lens _pssipResource

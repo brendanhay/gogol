@@ -161,12 +161,13 @@ cwCreationTime
   = lens _cwCreationTime
       (\ s a -> s{_cwCreationTime = a})
 
--- | Status of this course work.. If unspecified, the default state is
+-- | Status of this course work. If unspecified, the default state is
 -- \`DRAFT\`.
 cwState :: Lens' CourseWork (Maybe Text)
 cwState = lens _cwState (\ s a -> s{_cwState = a})
 
--- | Additional materials.
+-- | Additional materials. CourseWork must have no more than 20 material
+-- items.
 cwMaterials :: Lens' CourseWork [Material]
 cwMaterials
   = lens _cwMaterials (\ s a -> s{_cwMaterials = a}) .
@@ -179,7 +180,8 @@ cwCourseId
   = lens _cwCourseId (\ s a -> s{_cwCourseId = a})
 
 -- | Maximum grade for this course work. If zero or unspecified, this
--- assignment is considered ungraded. This must be an integer value.
+-- assignment is considered ungraded. This must be a non-negative integer
+-- value.
 cwMaxPoints :: Lens' CourseWork (Maybe Double)
 cwMaxPoints
   = lens _cwMaxPoints (\ s a -> s{_cwMaxPoints = a}) .
@@ -375,6 +377,91 @@ instance ToJSON DriveFile where
                  [("thumbnailUrl" .=) <$> _dfThumbnailURL,
                   ("id" .=) <$> _dfId, ("title" .=) <$> _dfTitle,
                   ("alternateLink" .=) <$> _dfAlternateLink])
+
+-- | An invitation to become the guardian of a specified user, sent to a
+-- specified email address.
+--
+-- /See:/ 'guardianInvitation' smart constructor.
+data GuardianInvitation = GuardianInvitation'
+    { _giCreationTime        :: !(Maybe Text)
+    , _giStudentId           :: !(Maybe Text)
+    , _giState               :: !(Maybe Text)
+    , _giInvitationId        :: !(Maybe Text)
+    , _giInvitedEmailAddress :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GuardianInvitation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'giCreationTime'
+--
+-- * 'giStudentId'
+--
+-- * 'giState'
+--
+-- * 'giInvitationId'
+--
+-- * 'giInvitedEmailAddress'
+guardianInvitation
+    :: GuardianInvitation
+guardianInvitation =
+    GuardianInvitation'
+    { _giCreationTime = Nothing
+    , _giStudentId = Nothing
+    , _giState = Nothing
+    , _giInvitationId = Nothing
+    , _giInvitedEmailAddress = Nothing
+    }
+
+-- | The time that this invitation was created. Read-only.
+giCreationTime :: Lens' GuardianInvitation (Maybe Text)
+giCreationTime
+  = lens _giCreationTime
+      (\ s a -> s{_giCreationTime = a})
+
+-- | ID of the student (in standard format)
+giStudentId :: Lens' GuardianInvitation (Maybe Text)
+giStudentId
+  = lens _giStudentId (\ s a -> s{_giStudentId = a})
+
+-- | The state that this invitation is in.
+giState :: Lens' GuardianInvitation (Maybe Text)
+giState = lens _giState (\ s a -> s{_giState = a})
+
+-- | Unique identifier for this invitation. Read-only.
+giInvitationId :: Lens' GuardianInvitation (Maybe Text)
+giInvitationId
+  = lens _giInvitationId
+      (\ s a -> s{_giInvitationId = a})
+
+-- | Email address that the invitation was sent to. This field is only
+-- visible to domain administrators.
+giInvitedEmailAddress :: Lens' GuardianInvitation (Maybe Text)
+giInvitedEmailAddress
+  = lens _giInvitedEmailAddress
+      (\ s a -> s{_giInvitedEmailAddress = a})
+
+instance FromJSON GuardianInvitation where
+        parseJSON
+          = withObject "GuardianInvitation"
+              (\ o ->
+                 GuardianInvitation' <$>
+                   (o .:? "creationTime") <*> (o .:? "studentId") <*>
+                     (o .:? "state")
+                     <*> (o .:? "invitationId")
+                     <*> (o .:? "invitedEmailAddress"))
+
+instance ToJSON GuardianInvitation where
+        toJSON GuardianInvitation'{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _giCreationTime,
+                  ("studentId" .=) <$> _giStudentId,
+                  ("state" .=) <$> _giState,
+                  ("invitationId" .=) <$> _giInvitationId,
+                  ("invitedEmailAddress" .=) <$>
+                    _giInvitedEmailAddress])
 
 -- | Request to return a student submission.
 --
@@ -650,7 +737,8 @@ modifyAttachmentsRequest =
     { _marAddAttachments = Nothing
     }
 
--- | Attachments to add. This may only contain link attachments.
+-- | Attachments to add. A student submission may not have more than 20
+-- attachments. This may only contain link attachments.
 marAddAttachments :: Lens' ModifyAttachmentsRequest [Attachment]
 marAddAttachments
   = lens _marAddAttachments
@@ -881,6 +969,79 @@ instance ToJSON ListInvitationsResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _lirNextPageToken,
                   ("invitations" .=) <$> _lirInvitations])
+
+-- | Association between a student and a guardian of that student. The
+-- guardian may receive information about the student\'s course work.
+--
+-- /See:/ 'guardian' smart constructor.
+data Guardian = Guardian'
+    { _gStudentId           :: !(Maybe Text)
+    , _gGuardianId          :: !(Maybe Text)
+    , _gInvitedEmailAddress :: !(Maybe Text)
+    , _gGuardianProFile     :: !(Maybe UserProFile)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Guardian' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gStudentId'
+--
+-- * 'gGuardianId'
+--
+-- * 'gInvitedEmailAddress'
+--
+-- * 'gGuardianProFile'
+guardian
+    :: Guardian
+guardian =
+    Guardian'
+    { _gStudentId = Nothing
+    , _gGuardianId = Nothing
+    , _gInvitedEmailAddress = Nothing
+    , _gGuardianProFile = Nothing
+    }
+
+-- | Identifier for the student to whom the guardian relationship applies.
+gStudentId :: Lens' Guardian (Maybe Text)
+gStudentId
+  = lens _gStudentId (\ s a -> s{_gStudentId = a})
+
+-- | Identifier for the guardian.
+gGuardianId :: Lens' Guardian (Maybe Text)
+gGuardianId
+  = lens _gGuardianId (\ s a -> s{_gGuardianId = a})
+
+-- | The email address to which the initial guardian invitation was sent.
+-- This field is only visible to domain administrators.
+gInvitedEmailAddress :: Lens' Guardian (Maybe Text)
+gInvitedEmailAddress
+  = lens _gInvitedEmailAddress
+      (\ s a -> s{_gInvitedEmailAddress = a})
+
+-- | User profile for the guardian.
+gGuardianProFile :: Lens' Guardian (Maybe UserProFile)
+gGuardianProFile
+  = lens _gGuardianProFile
+      (\ s a -> s{_gGuardianProFile = a})
+
+instance FromJSON Guardian where
+        parseJSON
+          = withObject "Guardian"
+              (\ o ->
+                 Guardian' <$>
+                   (o .:? "studentId") <*> (o .:? "guardianId") <*>
+                     (o .:? "invitedEmailAddress")
+                     <*> (o .:? "guardianProfile"))
+
+instance ToJSON Guardian where
+        toJSON Guardian'{..}
+          = object
+              (catMaybes
+                 [("studentId" .=) <$> _gStudentId,
+                  ("guardianId" .=) <$> _gGuardianId,
+                  ("invitedEmailAddress" .=) <$> _gInvitedEmailAddress,
+                  ("guardianProfile" .=) <$> _gGuardianProFile])
 
 -- | A material attached to a course as part of a material set.
 --
@@ -1203,7 +1364,7 @@ studentSubmission =
     , _ssCourseWorkId = Nothing
     }
 
--- | Creation time of this submission.. This may be unset if the student has
+-- | Creation time of this submission. This may be unset if the student has
 -- not accessed this item. Read-only.
 ssCreationTime :: Lens' StudentSubmission (Maybe Text)
 ssCreationTime
@@ -1223,7 +1384,7 @@ ssCourseId :: Lens' StudentSubmission (Maybe Text)
 ssCourseId
   = lens _ssCourseId (\ s a -> s{_ssCourseId = a})
 
--- | Submission content when course_work_type is MUTIPLE_CHOICE_QUESTION.
+-- | Submission content when course_work_type is MULTIPLE_CHOICE_QUESTION.
 ssMultipleChoiceSubmission :: Lens' StudentSubmission (Maybe MultipleChoiceSubmission)
 ssMultipleChoiceSubmission
   = lens _ssMultipleChoiceSubmission
@@ -1265,8 +1426,8 @@ ssCourseWorkType
   = lens _ssCourseWorkType
       (\ s a -> s{_ssCourseWorkType = a})
 
--- | Optional grade. If unset, no grade was set. This must be an integer
--- value. This may be modified only by course teachers.
+-- | Optional grade. If unset, no grade was set. This must be a non-negative
+-- integer value. This may be modified only by course teachers.
 ssAssignedGrade :: Lens' StudentSubmission (Maybe Double)
 ssAssignedGrade
   = lens _ssAssignedGrade
@@ -1278,9 +1439,9 @@ ssAssignedGrade
 ssId :: Lens' StudentSubmission (Maybe Text)
 ssId = lens _ssId (\ s a -> s{_ssId = a})
 
--- | Optional pending grade. If unset, no grade was set. This must be an
--- integer value. This is only visible to and modifiable by course
--- teachers.
+-- | Optional pending grade. If unset, no grade was set. This must be a
+-- non-negative integer value. This is only visible to and modifiable by
+-- course teachers.
 ssDraftGrade :: Lens' StudentSubmission (Maybe Double)
 ssDraftGrade
   = lens _ssDraftGrade (\ s a -> s{_ssDraftGrade = a})
@@ -1342,6 +1503,59 @@ instance ToJSON StudentSubmission where
                   ("draftGrade" .=) <$> _ssDraftGrade,
                   ("alternateLink" .=) <$> _ssAlternateLink,
                   ("courseWorkId" .=) <$> _ssCourseWorkId])
+
+-- | Response when listing guardians.
+--
+-- /See:/ 'listGuardiansResponse' smart constructor.
+data ListGuardiansResponse = ListGuardiansResponse'
+    { _lgrNextPageToken :: !(Maybe Text)
+    , _lgrGuardians     :: !(Maybe [Guardian])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListGuardiansResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lgrNextPageToken'
+--
+-- * 'lgrGuardians'
+listGuardiansResponse
+    :: ListGuardiansResponse
+listGuardiansResponse =
+    ListGuardiansResponse'
+    { _lgrNextPageToken = Nothing
+    , _lgrGuardians = Nothing
+    }
+
+-- | Token identifying the next page of results to return. If empty, no
+-- further results are available.
+lgrNextPageToken :: Lens' ListGuardiansResponse (Maybe Text)
+lgrNextPageToken
+  = lens _lgrNextPageToken
+      (\ s a -> s{_lgrNextPageToken = a})
+
+-- | Guardians on this page of results that met the criteria specified in the
+-- request.
+lgrGuardians :: Lens' ListGuardiansResponse [Guardian]
+lgrGuardians
+  = lens _lgrGuardians (\ s a -> s{_lgrGuardians = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListGuardiansResponse where
+        parseJSON
+          = withObject "ListGuardiansResponse"
+              (\ o ->
+                 ListGuardiansResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "guardians" .!= mempty))
+
+instance ToJSON ListGuardiansResponse where
+        toJSON ListGuardiansResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lgrNextPageToken,
+                  ("guardians" .=) <$> _lgrGuardians])
 
 -- | Represents a whole calendar date, e.g. date of birth. The time of day
 -- and time zone are either specified elsewhere or are not significant. The
@@ -1905,6 +2119,7 @@ data Course = Course'
     , _cTeacherGroupEmail  :: !(Maybe Text)
     , _cTeacherFolder      :: !(Maybe DriveFolder)
     , _cCourseState        :: !(Maybe Text)
+    , _cGuardiansEnabled   :: !(Maybe Bool)
     , _cEnrollmentCode     :: !(Maybe Text)
     , _cUpdateTime         :: !(Maybe Text)
     , _cOwnerId            :: !(Maybe Text)
@@ -1932,6 +2147,8 @@ data Course = Course'
 -- * 'cTeacherFolder'
 --
 -- * 'cCourseState'
+--
+-- * 'cGuardiansEnabled'
 --
 -- * 'cEnrollmentCode'
 --
@@ -1962,6 +2179,7 @@ course =
     , _cTeacherGroupEmail = Nothing
     , _cTeacherFolder = Nothing
     , _cCourseState = Nothing
+    , _cGuardiansEnabled = Nothing
     , _cEnrollmentCode = Nothing
     , _cUpdateTime = Nothing
     , _cOwnerId = Nothing
@@ -2016,6 +2234,13 @@ cTeacherFolder
 cCourseState :: Lens' Course (Maybe Text)
 cCourseState
   = lens _cCourseState (\ s a -> s{_cCourseState = a})
+
+-- | Whether or not guardian notifications are enabled for this course.
+-- Read-only.
+cGuardiansEnabled :: Lens' Course (Maybe Bool)
+cGuardiansEnabled
+  = lens _cGuardiansEnabled
+      (\ s a -> s{_cGuardiansEnabled = a})
 
 -- | Enrollment code to use when joining this course. Specifying this field
 -- in a course update mask results in an error. Read-only.
@@ -2099,6 +2324,7 @@ instance FromJSON Course where
                      <*> (o .:? "teacherGroupEmail")
                      <*> (o .:? "teacherFolder")
                      <*> (o .:? "courseState")
+                     <*> (o .:? "guardiansEnabled")
                      <*> (o .:? "enrollmentCode")
                      <*> (o .:? "updateTime")
                      <*> (o .:? "ownerId")
@@ -2120,6 +2346,7 @@ instance ToJSON Course where
                   ("teacherGroupEmail" .=) <$> _cTeacherGroupEmail,
                   ("teacherFolder" .=) <$> _cTeacherFolder,
                   ("courseState" .=) <$> _cCourseState,
+                  ("guardiansEnabled" .=) <$> _cGuardiansEnabled,
                   ("enrollmentCode" .=) <$> _cEnrollmentCode,
                   ("updateTime" .=) <$> _cUpdateTime,
                   ("ownerId" .=) <$> _cOwnerId, ("name" .=) <$> _cName,
@@ -2208,6 +2435,61 @@ instance ToJSON TimeOfDay' where
                   ("hours" .=) <$> _todHours,
                   ("minutes" .=) <$> _todMinutes,
                   ("seconds" .=) <$> _todSeconds])
+
+-- | Response when listing guardian invitations.
+--
+-- /See:/ 'listGuardianInvitationsResponse' smart constructor.
+data ListGuardianInvitationsResponse = ListGuardianInvitationsResponse'
+    { _lgirNextPageToken       :: !(Maybe Text)
+    , _lgirGuardianInvitations :: !(Maybe [GuardianInvitation])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListGuardianInvitationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lgirNextPageToken'
+--
+-- * 'lgirGuardianInvitations'
+listGuardianInvitationsResponse
+    :: ListGuardianInvitationsResponse
+listGuardianInvitationsResponse =
+    ListGuardianInvitationsResponse'
+    { _lgirNextPageToken = Nothing
+    , _lgirGuardianInvitations = Nothing
+    }
+
+-- | Token identifying the next page of results to return. If empty, no
+-- further results are available.
+lgirNextPageToken :: Lens' ListGuardianInvitationsResponse (Maybe Text)
+lgirNextPageToken
+  = lens _lgirNextPageToken
+      (\ s a -> s{_lgirNextPageToken = a})
+
+-- | Guardian invitations that matched the list request.
+lgirGuardianInvitations :: Lens' ListGuardianInvitationsResponse [GuardianInvitation]
+lgirGuardianInvitations
+  = lens _lgirGuardianInvitations
+      (\ s a -> s{_lgirGuardianInvitations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListGuardianInvitationsResponse
+         where
+        parseJSON
+          = withObject "ListGuardianInvitationsResponse"
+              (\ o ->
+                 ListGuardianInvitationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "guardianInvitations" .!= mempty))
+
+instance ToJSON ListGuardianInvitationsResponse where
+        toJSON ListGuardianInvitationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lgirNextPageToken,
+                  ("guardianInvitations" .=) <$>
+                    _lgirGuardianInvitations])
 
 -- | Additional details for assignments.
 --

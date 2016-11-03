@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.Zones.List
     , ZonesList
 
     -- * Request Lenses
+    , zlOrderBy
     , zlProject
     , zlFilter
     , zlPageToken
@@ -50,16 +51,18 @@ type ZonesListResource =
          "projects" :>
            Capture "project" Text :>
              "zones" :>
-               QueryParam "filter" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Word32) :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] ZoneList
+               QueryParam "orderBy" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" (Textual Word32) :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] ZoneList
 
 -- | Retrieves the list of Zone resources available to the specified project.
 --
 -- /See:/ 'zonesList' smart constructor.
 data ZonesList = ZonesList'
-    { _zlProject    :: !Text
+    { _zlOrderBy    :: !(Maybe Text)
+    , _zlProject    :: !Text
     , _zlFilter     :: !(Maybe Text)
     , _zlPageToken  :: !(Maybe Text)
     , _zlMaxResults :: !(Textual Word32)
@@ -68,6 +71,8 @@ data ZonesList = ZonesList'
 -- | Creates a value of 'ZonesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'zlOrderBy'
 --
 -- * 'zlProject'
 --
@@ -81,11 +86,24 @@ zonesList
     -> ZonesList
 zonesList pZlProject_ =
     ZonesList'
-    { _zlProject = pZlProject_
+    { _zlOrderBy = Nothing
+    , _zlProject = pZlProject_
     , _zlFilter = Nothing
     , _zlPageToken = Nothing
     , _zlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+zlOrderBy :: Lens' ZonesList (Maybe Text)
+zlOrderBy
+  = lens _zlOrderBy (\ s a -> s{_zlOrderBy = a})
 
 -- | Project ID for this request.
 zlProject :: Lens' ZonesList Text
@@ -103,16 +121,15 @@ zlProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 zlFilter :: Lens' ZonesList (Maybe Text)
 zlFilter = lens _zlFilter (\ s a -> s{_zlFilter = a})
 
@@ -138,7 +155,7 @@ instance GoogleRequest ZonesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient ZonesList'{..}
-          = go _zlProject _zlFilter _zlPageToken
+          = go _zlProject _zlOrderBy _zlFilter _zlPageToken
               (Just _zlMaxResults)
               (Just AltJSON)
               computeService

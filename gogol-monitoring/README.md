@@ -8,12 +8,12 @@
 
 ## Version
 
-`0.1.0`
+`0.1.1`
 
 
 ## Description
 
-A client library for the Google Monitoring.
+A client library for the Google Stackdriver Monitoring.
 
 
 ## Contribute

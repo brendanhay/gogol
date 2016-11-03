@@ -40,7 +40,7 @@ import qualified Data.Conduit.List            as CL
 import           Data.Data
 import           Data.DList                   (DList)
 import qualified Data.DList                   as DList
-import           Data.Foldable                (foldl')
+import           Data.Foldable                (foldMap, foldl')
 import           Data.Monoid
 import           Data.String
 import           Data.Text                    (Text)
@@ -488,7 +488,7 @@ instance ( KnownSymbol   s
 
     buildClient Proxy rq x = buildClient (Proxy :: Proxy fn)
         . appendPath rq
-        $ buildText x <> buildSymbol (Proxy :: Proxy m)
+        $ buildText x <> ":" <> buildSymbol (Proxy :: Proxy m)
 
 instance ( KnownSymbol   s
          , ToHttpApiData a

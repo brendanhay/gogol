@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for interacting with Glass users via the timeline.
+-- Interacts with Glass users via the timeline.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference>
 module Network.Google.Mirror

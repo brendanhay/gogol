@@ -23,7 +23,7 @@
 -- Updates an existing campaign landing page. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.landingPages.patch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.landingPages.patch@.
 module Network.Google.Resource.DFAReporting.LandingPages.Patch
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'LandingPagesPatch' request conforms to.
 type LandingPagesPatchResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>

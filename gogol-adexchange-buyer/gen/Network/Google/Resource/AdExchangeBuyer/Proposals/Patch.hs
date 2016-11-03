@@ -89,7 +89,8 @@ proposalsPatch pPpUpdateAction_ pPpRevisionNumber_ pPpPayload_ pPpProposalId_ =
     , _ppProposalId = pPpProposalId_
     }
 
--- | The proposed action to take on the proposal.
+-- | The proposed action to take on the proposal. This field is required and
+-- it must be set when updating a proposal.
 ppUpdateAction :: Lens' ProposalsPatch ProposalsPatchUpdateAction
 ppUpdateAction
   = lens _ppUpdateAction

@@ -353,6 +353,28 @@ instance FromJSON EditsImagesUploadImageType where
 instance ToJSON EditsImagesUploadImageType where
     toJSON = toJSONText
 
+data EditsDeobfuscationFilesUploadDeobfuscationFileType
+    = Proguard
+      -- ^ @proguard@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EditsDeobfuscationFilesUploadDeobfuscationFileType
+
+instance FromHttpApiData EditsDeobfuscationFilesUploadDeobfuscationFileType where
+    parseQueryParam = \case
+        "proguard" -> Right Proguard
+        x -> Left ("Unable to parse EditsDeobfuscationFilesUploadDeobfuscationFileType from: " <> x)
+
+instance ToHttpApiData EditsDeobfuscationFilesUploadDeobfuscationFileType where
+    toQueryParam = \case
+        Proguard -> "proguard"
+
+instance FromJSON EditsDeobfuscationFilesUploadDeobfuscationFileType where
+    parseJSON = parseJSONText "EditsDeobfuscationFilesUploadDeobfuscationFileType"
+
+instance ToJSON EditsDeobfuscationFilesUploadDeobfuscationFileType where
+    toJSON = toJSONText
+
 data EditsExpansionFilesUploadExpansionFileType
     = Main
       -- ^ @main@

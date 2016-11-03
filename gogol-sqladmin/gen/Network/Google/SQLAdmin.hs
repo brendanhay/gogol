@@ -37,6 +37,9 @@ module Network.Google.SQLAdmin
     -- ** sql.backupRuns.get
     , module Network.Google.Resource.SQL.BackupRuns.Get
 
+    -- ** sql.backupRuns.insert
+    , module Network.Google.Resource.SQL.BackupRuns.Insert
+
     -- ** sql.backupRuns.list
     , module Network.Google.Resource.SQL.BackupRuns.List
 
@@ -360,6 +363,7 @@ module Network.Google.SQLAdmin
     , datProject
     , datSettings
     , datKind
+    , datConnectionName
     , datCurrentDiskSize
     , datInstanceType
     , datReplicaNames
@@ -408,7 +412,9 @@ module Network.Google.SQLAdmin
     , brSelfLink
     , brEndTime
     , brId
+    , brType
     , brEnQueuedTime
+    , brDescription
     , brInstance
 
     -- ** ACLEntry
@@ -550,6 +556,7 @@ module Network.Google.SQLAdmin
 import           Network.Google.Prelude
 import           Network.Google.Resource.SQL.BackupRuns.Delete
 import           Network.Google.Resource.SQL.BackupRuns.Get
+import           Network.Google.Resource.SQL.BackupRuns.Insert
 import           Network.Google.Resource.SQL.BackupRuns.List
 import           Network.Google.Resource.SQL.Databases.Delete
 import           Network.Google.Resource.SQL.Databases.Get
@@ -599,6 +606,7 @@ type SQLAdminAPI =
        :<|> UsersDeleteResource
        :<|> UsersUpdateResource
        :<|> TiersListResource
+       :<|> BackupRunsInsertResource
        :<|> BackupRunsListResource
        :<|> BackupRunsGetResource
        :<|> BackupRunsDeleteResource

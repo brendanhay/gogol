@@ -20,63 +20,63 @@ module Network.Google.AppEngine.Types.Product where
 import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
--- | Target scaling by network usage (for VM runtimes only).
+-- | Target scaling by network usage. Only applicable for VM runtimes.
 --
 -- /See:/ 'networkUtilization' smart constructor.
 data NetworkUtilization = NetworkUtilization'
-    { _nuTargetReceivedBytesPerSec   :: !(Maybe (Textual Int32))
-    , _nuTargetSentPacketsPerSec     :: !(Maybe (Textual Int32))
-    , _nuTargetReceivedPacketsPerSec :: !(Maybe (Textual Int32))
-    , _nuTargetSentBytesPerSec       :: !(Maybe (Textual Int32))
+    { _nuTargetReceivedBytesPerSecond   :: !(Maybe (Textual Int32))
+    , _nuTargetSentPacketsPerSecond     :: !(Maybe (Textual Int32))
+    , _nuTargetReceivedPacketsPerSecond :: !(Maybe (Textual Int32))
+    , _nuTargetSentBytesPerSecond       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworkUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'nuTargetReceivedBytesPerSec'
+-- * 'nuTargetReceivedBytesPerSecond'
 --
--- * 'nuTargetSentPacketsPerSec'
+-- * 'nuTargetSentPacketsPerSecond'
 --
--- * 'nuTargetReceivedPacketsPerSec'
+-- * 'nuTargetReceivedPacketsPerSecond'
 --
--- * 'nuTargetSentBytesPerSec'
+-- * 'nuTargetSentBytesPerSecond'
 networkUtilization
     :: NetworkUtilization
 networkUtilization =
     NetworkUtilization'
-    { _nuTargetReceivedBytesPerSec = Nothing
-    , _nuTargetSentPacketsPerSec = Nothing
-    , _nuTargetReceivedPacketsPerSec = Nothing
-    , _nuTargetSentBytesPerSec = Nothing
+    { _nuTargetReceivedBytesPerSecond = Nothing
+    , _nuTargetSentPacketsPerSecond = Nothing
+    , _nuTargetReceivedPacketsPerSecond = Nothing
+    , _nuTargetSentBytesPerSecond = Nothing
     }
 
--- | Target bytes per second received.
-nuTargetReceivedBytesPerSec :: Lens' NetworkUtilization (Maybe Int32)
-nuTargetReceivedBytesPerSec
-  = lens _nuTargetReceivedBytesPerSec
-      (\ s a -> s{_nuTargetReceivedBytesPerSec = a})
+-- | Target bytes received per second.
+nuTargetReceivedBytesPerSecond :: Lens' NetworkUtilization (Maybe Int32)
+nuTargetReceivedBytesPerSecond
+  = lens _nuTargetReceivedBytesPerSecond
+      (\ s a -> s{_nuTargetReceivedBytesPerSecond = a})
       . mapping _Coerce
 
--- | Target packets per second sent.
-nuTargetSentPacketsPerSec :: Lens' NetworkUtilization (Maybe Int32)
-nuTargetSentPacketsPerSec
-  = lens _nuTargetSentPacketsPerSec
-      (\ s a -> s{_nuTargetSentPacketsPerSec = a})
+-- | Target packets sent per second.
+nuTargetSentPacketsPerSecond :: Lens' NetworkUtilization (Maybe Int32)
+nuTargetSentPacketsPerSecond
+  = lens _nuTargetSentPacketsPerSecond
+      (\ s a -> s{_nuTargetSentPacketsPerSecond = a})
       . mapping _Coerce
 
--- | Target packets per second received.
-nuTargetReceivedPacketsPerSec :: Lens' NetworkUtilization (Maybe Int32)
-nuTargetReceivedPacketsPerSec
-  = lens _nuTargetReceivedPacketsPerSec
-      (\ s a -> s{_nuTargetReceivedPacketsPerSec = a})
+-- | Target packets received per second.
+nuTargetReceivedPacketsPerSecond :: Lens' NetworkUtilization (Maybe Int32)
+nuTargetReceivedPacketsPerSecond
+  = lens _nuTargetReceivedPacketsPerSecond
+      (\ s a -> s{_nuTargetReceivedPacketsPerSecond = a})
       . mapping _Coerce
 
--- | Target bytes per second sent.
-nuTargetSentBytesPerSec :: Lens' NetworkUtilization (Maybe Int32)
-nuTargetSentBytesPerSec
-  = lens _nuTargetSentBytesPerSec
-      (\ s a -> s{_nuTargetSentBytesPerSec = a})
+-- | Target bytes sent per second.
+nuTargetSentBytesPerSecond :: Lens' NetworkUtilization (Maybe Int32)
+nuTargetSentBytesPerSecond
+  = lens _nuTargetSentBytesPerSecond
+      (\ s a -> s{_nuTargetSentBytesPerSecond = a})
       . mapping _Coerce
 
 instance FromJSON NetworkUtilization where
@@ -84,23 +84,23 @@ instance FromJSON NetworkUtilization where
           = withObject "NetworkUtilization"
               (\ o ->
                  NetworkUtilization' <$>
-                   (o .:? "targetReceivedBytesPerSec") <*>
-                     (o .:? "targetSentPacketsPerSec")
-                     <*> (o .:? "targetReceivedPacketsPerSec")
-                     <*> (o .:? "targetSentBytesPerSec"))
+                   (o .:? "targetReceivedBytesPerSecond") <*>
+                     (o .:? "targetSentPacketsPerSecond")
+                     <*> (o .:? "targetReceivedPacketsPerSecond")
+                     <*> (o .:? "targetSentBytesPerSecond"))
 
 instance ToJSON NetworkUtilization where
         toJSON NetworkUtilization'{..}
           = object
               (catMaybes
-                 [("targetReceivedBytesPerSec" .=) <$>
-                    _nuTargetReceivedBytesPerSec,
-                  ("targetSentPacketsPerSec" .=) <$>
-                    _nuTargetSentPacketsPerSec,
-                  ("targetReceivedPacketsPerSec" .=) <$>
-                    _nuTargetReceivedPacketsPerSec,
-                  ("targetSentBytesPerSec" .=) <$>
-                    _nuTargetSentBytesPerSec])
+                 [("targetReceivedBytesPerSecond" .=) <$>
+                    _nuTargetReceivedBytesPerSecond,
+                  ("targetSentPacketsPerSecond" .=) <$>
+                    _nuTargetSentPacketsPerSecond,
+                  ("targetReceivedPacketsPerSecond" .=) <$>
+                    _nuTargetReceivedPacketsPerSecond,
+                  ("targetSentBytesPerSecond" .=) <$>
+                    _nuTargetSentBytesPerSecond])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
@@ -222,7 +222,7 @@ operationSchema pOsAddtional_ =
     { _osAddtional = _Coerce # pOsAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
 osAddtional
   = lens _osAddtional (\ s a -> s{_osAddtional = a}) .
@@ -236,10 +236,44 @@ instance FromJSON OperationSchema where
 instance ToJSON OperationSchema where
         toJSON = toJSON . _osAddtional
 
--- | Configuration for traffic splitting for versions within a single
--- service. Traffic splitting allows traffic directed to the service to be
--- assigned to one of several versions in a fractional way, enabling
--- experiments and canarying new builds, for example.
+-- | Service-specific metadata. For example the available capacity at the
+-- given location.
+--
+-- /See:/ 'locationSchema' smart constructor.
+newtype LocationSchema = LocationSchema'
+    { _lsAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LocationSchema' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsAddtional'
+locationSchema
+    :: HashMap Text JSONValue -- ^ 'lsAddtional'
+    -> LocationSchema
+locationSchema pLsAddtional_ =
+    LocationSchema'
+    { _lsAddtional = _Coerce # pLsAddtional_
+    }
+
+-- | Properties of the object. Contains field \'type with type URL.
+lsAddtional :: Lens' LocationSchema (HashMap Text JSONValue)
+lsAddtional
+  = lens _lsAddtional (\ s a -> s{_lsAddtional = a}) .
+      _Coerce
+
+instance FromJSON LocationSchema where
+        parseJSON
+          = withObject "LocationSchema"
+              (\ o -> LocationSchema' <$> (parseJSONObject o))
+
+instance ToJSON LocationSchema where
+        toJSON = toJSON . _lsAddtional
+
+-- | Traffic routing configuration for versions within a single service.
+-- Traffic splits define how traffic directed to the service is assigned to
+-- versions.
 --
 -- /See:/ 'trafficSplit' smart constructor.
 data TrafficSplit = TrafficSplit'
@@ -262,21 +296,21 @@ trafficSplit =
     , _tsAllocations = Nothing
     }
 
--- | Which mechanism should be used as a selector when choosing a version to
--- send a request to. The traffic selection algorithm will be stable for
--- either type until allocations are changed.
+-- | Mechanism used to determine which version a request is sent to. The
+-- traffic selection algorithm will be stable for either type until
+-- allocations are changed.
 tsShardBy :: Lens' TrafficSplit (Maybe Text)
 tsShardBy
   = lens _tsShardBy (\ s a -> s{_tsShardBy = a})
 
--- | Mapping from service version IDs within the service to fractional
--- (0.000, 1] allocations of traffic for that version. Each version may
--- only be specified once, but some versions in the service may not have
--- any traffic allocation. Services that have traffic allocated in this
--- field may not be deleted until the service is deleted, or their traffic
--- allocation is removed. Allocations must sum to 1. Supports precision up
--- to two decimal places for IP-based splits and up to three decimal places
--- for cookie-based splits.
+-- | Mapping from version IDs within the service to fractional (0.000, 1]
+-- allocations of traffic for that version. Each version can be specified
+-- only once, but some versions in the service may not have any traffic
+-- allocation. Services that have traffic allocated cannot be deleted until
+-- either the service is deleted or their traffic allocation is removed.
+-- Allocations must sum to 1. Up to two decimal place precision is
+-- supported for IP-based splits and up to three decimal places is
+-- supported for cookie-based splits.
 tsAllocations :: Lens' TrafficSplit (Maybe TrafficSplitAllocations)
 tsAllocations
   = lens _tsAllocations
@@ -315,7 +349,7 @@ scriptHandler =
     { _shScriptPath = Nothing
     }
 
--- | Specifies the path to the script from the application root directory.
+-- | Path to the script from the application root directory.
 shScriptPath :: Lens' ScriptHandler (Maybe Text)
 shScriptPath
   = lens _shScriptPath (\ s a -> s{_shScriptPath = a})
@@ -381,9 +415,9 @@ instance ToJSON ListServicesResponse where
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
                   ("services" .=) <$> _lsrServices])
 
--- | A URL pattern and description of how it should be handled. App Engine
--- can handle URLs by executing application code, or by serving static
--- files uploaded with the code, such as images, CSS or JavaScript.
+-- | URL pattern and description of how the URL should be handled. App Engine
+-- can handle URLs by executing application code or by serving static files
+-- uploaded with the version, such as images, CSS, or JavaScript.
 --
 -- /See:/ 'urlMap' smart constructor.
 data URLMap = URLMap'
@@ -430,40 +464,39 @@ urlMap =
     , _umLogin = Nothing
     }
 
--- | Executes a script to handle the request that matches the URL pattern.
+-- | Executes a script to handle the request that matches this URL pattern.
 umScript :: Lens' URLMap (Maybe ScriptHandler)
 umScript = lens _umScript (\ s a -> s{_umScript = a})
 
--- | Configures whether security (HTTPS) should be enforced for this URL.
+-- | Security (HTTPS) enforcement for this URL.
 umSecurityLevel :: Lens' URLMap (Maybe Text)
 umSecurityLevel
   = lens _umSecurityLevel
       (\ s a -> s{_umSecurityLevel = a})
 
--- | Use API Endpoints to handle requests.
+-- | Uses API Endpoints to handle requests.
 umAPIEndpoint :: Lens' URLMap (Maybe APIEndpointHandler)
 umAPIEndpoint
   = lens _umAPIEndpoint
       (\ s a -> s{_umAPIEndpoint = a})
 
--- | A URL prefix. This value uses regular expression syntax (and so regexp
--- special characters must be escaped), but it should not contain
--- groupings. All URLs that begin with this prefix are handled by this
--- handler, using the portion of the URL after the prefix as part of the
--- file path. This is always required.
+-- | URL prefix. Uses regular expression syntax, which means regexp special
+-- characters must be escaped, but should not contain groupings. All URLs
+-- that begin with this prefix are handled by this handler, using the
+-- portion of the URL after the prefix as part of the file path.
 umURLRegex :: Lens' URLMap (Maybe Text)
 umURLRegex
   = lens _umURLRegex (\ s a -> s{_umURLRegex = a})
 
 -- | \`30x\` code to use when performing redirects for the \`secure\` field.
--- A \`302\` is used by default.
+-- Defaults to \`302\`.
 umRedirectHTTPResponseCode :: Lens' URLMap (Maybe Text)
 umRedirectHTTPResponseCode
   = lens _umRedirectHTTPResponseCode
       (\ s a -> s{_umRedirectHTTPResponseCode = a})
 
--- | For users not logged in, how to handle access to resources with required
--- login. Defaults to \"redirect\".
+-- | Action to take when users access resources that require authentication.
+-- Defaults to \`redirect\`.
 umAuthFailAction :: Lens' URLMap (Maybe Text)
 umAuthFailAction
   = lens _umAuthFailAction
@@ -475,7 +508,7 @@ umStaticFiles
   = lens _umStaticFiles
       (\ s a -> s{_umStaticFiles = a})
 
--- | What level of login is required to access this resource.
+-- | Level of login required to access this resource.
 umLogin :: Lens' URLMap (Maybe Text)
 umLogin = lens _umLogin (\ s a -> s{_umLogin = a})
 
@@ -506,7 +539,7 @@ instance ToJSON URLMap where
                   ("staticFiles" .=) <$> _umStaticFiles,
                   ("login" .=) <$> _umLogin])
 
--- | A Python runtime third-party library required by the application.
+-- | Third-party Python runtime library that is required by the application.
 --
 -- /See:/ 'library' smart constructor.
 data Library = Library'
@@ -529,11 +562,11 @@ library =
     , _lVersion = Nothing
     }
 
--- | The name of the library, e.g. \"PIL\" or \"django\".
+-- | Name of the library. Example: \"django\".
 lName :: Lens' Library (Maybe Text)
 lName = lens _lName (\ s a -> s{_lName = a})
 
--- | The version of the library to select, or \"latest\".
+-- | Version of the library to select, or \"latest\".
 lVersion :: Lens' Library (Maybe Text)
 lVersion = lens _lVersion (\ s a -> s{_lVersion = a})
 
@@ -550,63 +583,114 @@ instance ToJSON Library where
                  [("name" .=) <$> _lName,
                   ("version" .=) <$> _lVersion])
 
--- | Target scaling by disk usage (for VM runtimes only).
+-- | The response message for LocationService.ListLocations.
+--
+-- /See:/ 'listLocationsResponse' smart constructor.
+data ListLocationsResponse = ListLocationsResponse'
+    { _llrNextPageToken :: !(Maybe Text)
+    , _llrLocations     :: !(Maybe [Location])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListLocationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llrNextPageToken'
+--
+-- * 'llrLocations'
+listLocationsResponse
+    :: ListLocationsResponse
+listLocationsResponse =
+    ListLocationsResponse'
+    { _llrNextPageToken = Nothing
+    , _llrLocations = Nothing
+    }
+
+-- | The standard List next-page token.
+llrNextPageToken :: Lens' ListLocationsResponse (Maybe Text)
+llrNextPageToken
+  = lens _llrNextPageToken
+      (\ s a -> s{_llrNextPageToken = a})
+
+-- | A list of locations that matches the specified filter in the request.
+llrLocations :: Lens' ListLocationsResponse [Location]
+llrLocations
+  = lens _llrLocations (\ s a -> s{_llrLocations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListLocationsResponse where
+        parseJSON
+          = withObject "ListLocationsResponse"
+              (\ o ->
+                 ListLocationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "locations" .!= mempty))
+
+instance ToJSON ListLocationsResponse where
+        toJSON ListLocationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _llrNextPageToken,
+                  ("locations" .=) <$> _llrLocations])
+
+-- | Target scaling by disk usage. Only applicable for VM runtimes.
 --
 -- /See:/ 'diskUtilization' smart constructor.
 data DiskUtilization = DiskUtilization'
-    { _duTargetWriteOpsPerSec   :: !(Maybe (Textual Int32))
-    , _duTargetReadOpsPerSec    :: !(Maybe (Textual Int32))
-    , _duTargetWriteBytesPerSec :: !(Maybe (Textual Int32))
-    , _duTargetReadBytesPerSec  :: !(Maybe (Textual Int32))
+    { _duTargetReadBytesPerSecond  :: !(Maybe (Textual Int32))
+    , _duTargetReadOpsPerSecond    :: !(Maybe (Textual Int32))
+    , _duTargetWriteOpsPerSecond   :: !(Maybe (Textual Int32))
+    , _duTargetWriteBytesPerSecond :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskUtilization' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'duTargetWriteOpsPerSec'
+-- * 'duTargetReadBytesPerSecond'
 --
--- * 'duTargetReadOpsPerSec'
+-- * 'duTargetReadOpsPerSecond'
 --
--- * 'duTargetWriteBytesPerSec'
+-- * 'duTargetWriteOpsPerSecond'
 --
--- * 'duTargetReadBytesPerSec'
+-- * 'duTargetWriteBytesPerSecond'
 diskUtilization
     :: DiskUtilization
 diskUtilization =
     DiskUtilization'
-    { _duTargetWriteOpsPerSec = Nothing
-    , _duTargetReadOpsPerSec = Nothing
-    , _duTargetWriteBytesPerSec = Nothing
-    , _duTargetReadBytesPerSec = Nothing
+    { _duTargetReadBytesPerSecond = Nothing
+    , _duTargetReadOpsPerSecond = Nothing
+    , _duTargetWriteOpsPerSecond = Nothing
+    , _duTargetWriteBytesPerSecond = Nothing
     }
 
--- | Target ops per second written.
-duTargetWriteOpsPerSec :: Lens' DiskUtilization (Maybe Int32)
-duTargetWriteOpsPerSec
-  = lens _duTargetWriteOpsPerSec
-      (\ s a -> s{_duTargetWriteOpsPerSec = a})
+-- | Target bytes read per second.
+duTargetReadBytesPerSecond :: Lens' DiskUtilization (Maybe Int32)
+duTargetReadBytesPerSecond
+  = lens _duTargetReadBytesPerSecond
+      (\ s a -> s{_duTargetReadBytesPerSecond = a})
       . mapping _Coerce
 
--- | Target ops per second read.
-duTargetReadOpsPerSec :: Lens' DiskUtilization (Maybe Int32)
-duTargetReadOpsPerSec
-  = lens _duTargetReadOpsPerSec
-      (\ s a -> s{_duTargetReadOpsPerSec = a})
+-- | Target ops read per seconds.
+duTargetReadOpsPerSecond :: Lens' DiskUtilization (Maybe Int32)
+duTargetReadOpsPerSecond
+  = lens _duTargetReadOpsPerSecond
+      (\ s a -> s{_duTargetReadOpsPerSecond = a})
       . mapping _Coerce
 
--- | Target bytes per second written.
-duTargetWriteBytesPerSec :: Lens' DiskUtilization (Maybe Int32)
-duTargetWriteBytesPerSec
-  = lens _duTargetWriteBytesPerSec
-      (\ s a -> s{_duTargetWriteBytesPerSec = a})
+-- | Target ops written per second.
+duTargetWriteOpsPerSecond :: Lens' DiskUtilization (Maybe Int32)
+duTargetWriteOpsPerSecond
+  = lens _duTargetWriteOpsPerSecond
+      (\ s a -> s{_duTargetWriteOpsPerSecond = a})
       . mapping _Coerce
 
--- | Target bytes per second read.
-duTargetReadBytesPerSec :: Lens' DiskUtilization (Maybe Int32)
-duTargetReadBytesPerSec
-  = lens _duTargetReadBytesPerSec
-      (\ s a -> s{_duTargetReadBytesPerSec = a})
+-- | Target bytes written per second.
+duTargetWriteBytesPerSecond :: Lens' DiskUtilization (Maybe Int32)
+duTargetWriteBytesPerSecond
+  = lens _duTargetWriteBytesPerSecond
+      (\ s a -> s{_duTargetWriteBytesPerSecond = a})
       . mapping _Coerce
 
 instance FromJSON DiskUtilization where
@@ -614,23 +698,23 @@ instance FromJSON DiskUtilization where
           = withObject "DiskUtilization"
               (\ o ->
                  DiskUtilization' <$>
-                   (o .:? "targetWriteOpsPerSec") <*>
-                     (o .:? "targetReadOpsPerSec")
-                     <*> (o .:? "targetWriteBytesPerSec")
-                     <*> (o .:? "targetReadBytesPerSec"))
+                   (o .:? "targetReadBytesPerSecond") <*>
+                     (o .:? "targetReadOpsPerSecond")
+                     <*> (o .:? "targetWriteOpsPerSecond")
+                     <*> (o .:? "targetWriteBytesPerSecond"))
 
 instance ToJSON DiskUtilization where
         toJSON DiskUtilization'{..}
           = object
               (catMaybes
-                 [("targetWriteOpsPerSec" .=) <$>
-                    _duTargetWriteOpsPerSec,
-                  ("targetReadOpsPerSec" .=) <$>
-                    _duTargetReadOpsPerSec,
-                  ("targetWriteBytesPerSec" .=) <$>
-                    _duTargetWriteBytesPerSec,
-                  ("targetReadBytesPerSec" .=) <$>
-                    _duTargetReadBytesPerSec])
+                 [("targetReadBytesPerSecond" .=) <$>
+                    _duTargetReadBytesPerSecond,
+                  ("targetReadOpsPerSecond" .=) <$>
+                    _duTargetReadOpsPerSecond,
+                  ("targetWriteOpsPerSecond" .=) <$>
+                    _duTargetWriteOpsPerSecond,
+                  ("targetWriteBytesPerSecond" .=) <$>
+                    _duTargetWriteBytesPerSecond])
 
 -- | The response message for Operations.ListOperations.
 --
@@ -684,8 +768,9 @@ instance ToJSON ListOperationsResponse where
                  [("nextPageToken" .=) <$> _lorNextPageToken,
                   ("operations" .=) <$> _lorOperations])
 
--- | Configure health checking for the VM instances. Unhealthy VM instances
--- will be killed and replaced with new instances.
+-- | Health checking configuration for VM instances. Unhealthy instances are
+-- killed and replaced with new instances. Only applicable for instances in
+-- App Engine flexible environment.
 --
 -- /See:/ 'healthCheck' smart constructor.
 data HealthCheck = HealthCheck'
@@ -728,7 +813,7 @@ healthCheck =
     , _hcUnhealthyThreshold = Nothing
     }
 
--- | The number of consecutive successful health checks before receiving
+-- | Number of consecutive successful health checks required before receiving
 -- traffic.
 hcHealthyThreshold :: Lens' HealthCheck (Maybe Word32)
 hcHealthyThreshold
@@ -742,31 +827,32 @@ hcDisableHealthCheck
   = lens _hcDisableHealthCheck
       (\ s a -> s{_hcDisableHealthCheck = a})
 
--- | The interval between health checks.
+-- | Interval between health checks.
 hcCheckInterval :: Lens' HealthCheck (Maybe Text)
 hcCheckInterval
   = lens _hcCheckInterval
       (\ s a -> s{_hcCheckInterval = a})
 
--- | The number of consecutive failed health checks before an instance is
--- restarted.
+-- | Number of consecutive failed health checks required before an instance
+-- is restarted.
 hcRestartThreshold :: Lens' HealthCheck (Maybe Word32)
 hcRestartThreshold
   = lens _hcRestartThreshold
       (\ s a -> s{_hcRestartThreshold = a})
       . mapping _Coerce
 
--- | The host header to send when performing an HTTP health check (e.g.
--- myapp.appspot.com)
+-- | Host header to send when performing an HTTP health check. Example:
+-- \"myapp.appspot.com\"
 hcHost :: Lens' HealthCheck (Maybe Text)
 hcHost = lens _hcHost (\ s a -> s{_hcHost = a})
 
--- | The amount of time before the health check is considered failed.
+-- | Time before the health check is considered failed.
 hcTimeout :: Lens' HealthCheck (Maybe Text)
 hcTimeout
   = lens _hcTimeout (\ s a -> s{_hcTimeout = a})
 
--- | The number of consecutive failed health checks before removing traffic.
+-- | Number of consecutive failed health checks required before removing
+-- traffic.
 hcUnhealthyThreshold :: Lens' HealthCheck (Maybe Word32)
 hcUnhealthyThreshold
   = lens _hcUnhealthyThreshold
@@ -798,7 +884,9 @@ instance ToJSON HealthCheck where
                   ("timeout" .=) <$> _hcTimeout,
                   ("unhealthyThreshold" .=) <$> _hcUnhealthyThreshold])
 
--- | API Serving configuration for Cloud Endpoints.
+-- | [Google Cloud
+-- Endpoints](https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/)
+-- configuration for API handlers.
 --
 -- /See:/ 'apiConfigHandler' smart constructor.
 data APIConfigHandler = APIConfigHandler'
@@ -833,12 +921,12 @@ apiConfigHandler =
     , _achLogin = Nothing
     }
 
--- | Specifies the path to the script from the application root directory.
+-- | Path to the script from the application root directory.
 achScript :: Lens' APIConfigHandler (Maybe Text)
 achScript
   = lens _achScript (\ s a -> s{_achScript = a})
 
--- | Configures whether security (HTTPS) should be enforced for this URL.
+-- | Security (HTTPS) enforcement for this URL.
 achSecurityLevel :: Lens' APIConfigHandler (Maybe Text)
 achSecurityLevel
   = lens _achSecurityLevel
@@ -848,15 +936,15 @@ achSecurityLevel
 achURL :: Lens' APIConfigHandler (Maybe Text)
 achURL = lens _achURL (\ s a -> s{_achURL = a})
 
--- | For users not logged in, how to handle access to resources with required
--- login. Defaults to \"redirect\".
+-- | Action to take when users access resources that require authentication.
+-- Defaults to \`redirect\`.
 achAuthFailAction :: Lens' APIConfigHandler (Maybe Text)
 achAuthFailAction
   = lens _achAuthFailAction
       (\ s a -> s{_achAuthFailAction = a})
 
--- | What level of login is required to access this resource. Default is
--- \"optional\".
+-- | Level of login required to access this resource. Defaults to
+-- \`optional\`.
 achLogin :: Lens' APIConfigHandler (Maybe Text)
 achLogin = lens _achLogin (\ s a -> s{_achLogin = a})
 
@@ -880,9 +968,8 @@ instance ToJSON APIConfigHandler where
                   ("authFailAction" .=) <$> _achAuthFailAction,
                   ("login" .=) <$> _achLogin])
 
--- | Environment variables made available to the application. Only returned
--- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
--- requests; once created, is immutable.
+-- | Environment variables available to the application. Only returned in
+-- \`GET\` requests if \`view=FULL\` is set.
 --
 -- /See:/ 'versionEnvVariables' smart constructor.
 newtype VersionEnvVariables = VersionEnvVariables'
@@ -915,20 +1002,20 @@ instance FromJSON VersionEnvVariables where
 instance ToJSON VersionEnvVariables where
         toJSON = toJSON . _vevAddtional
 
--- | An Application contains the top-level configuration of an App Engine
--- application.
+-- | An Application resource contains the top-level configuration of an App
+-- Engine application.
 --
 -- /See:/ 'application' smart constructor.
 data Application = Application'
     { _aDefaultHostname         :: !(Maybe Text)
     , _aDefaultCookieExpiration :: !(Maybe Text)
-    , _aLocation                :: !(Maybe Text)
     , _aAuthDomain              :: !(Maybe Text)
     , _aCodeBucket              :: !(Maybe Text)
     , _aName                    :: !(Maybe Text)
     , _aDispatchRules           :: !(Maybe [URLDispatchRule])
     , _aDefaultBucket           :: !(Maybe Text)
     , _aId                      :: !(Maybe Text)
+    , _aLocationId              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
@@ -938,8 +1025,6 @@ data Application = Application'
 -- * 'aDefaultHostname'
 --
 -- * 'aDefaultCookieExpiration'
---
--- * 'aLocation'
 --
 -- * 'aAuthDomain'
 --
@@ -952,66 +1037,58 @@ data Application = Application'
 -- * 'aDefaultBucket'
 --
 -- * 'aId'
+--
+-- * 'aLocationId'
 application
     :: Application
 application =
     Application'
     { _aDefaultHostname = Nothing
     , _aDefaultCookieExpiration = Nothing
-    , _aLocation = Nothing
     , _aAuthDomain = Nothing
     , _aCodeBucket = Nothing
     , _aName = Nothing
     , _aDispatchRules = Nothing
     , _aDefaultBucket = Nothing
     , _aId = Nothing
+    , _aLocationId = Nothing
     }
 
--- | The hostname used to reach the application, as resolved by App Engine.
+-- | Hostname used to reach this application, as resolved by App Engine.
 -- \'OutputOnly
 aDefaultHostname :: Lens' Application (Maybe Text)
 aDefaultHostname
   = lens _aDefaultHostname
       (\ s a -> s{_aDefaultHostname = a})
 
--- | Determines the cookie expiration policy for the application.
--- \'OutputOnly
+-- | Cookie expiration policy for this application. \'OutputOnly
 aDefaultCookieExpiration :: Lens' Application (Maybe Text)
 aDefaultCookieExpiration
   = lens _aDefaultCookieExpiration
       (\ s a -> s{_aDefaultCookieExpiration = a})
 
--- | The location from which the application will be run. Application
--- instances will run out of data centers in the chosen location and all of
--- the application\'s End User Content will be stored at rest. The default
--- is \"us-central\". Choices are: \"us-central\" - Central US
--- \"europe-west\" - Western Europe \"us-east1\" - Eastern US
-aLocation :: Lens' Application (Maybe Text)
-aLocation
-  = lens _aLocation (\ s a -> s{_aLocation = a})
-
--- | If set, only users from the specified Google Apps authentication domain
--- may access the application. If not set, any Google Account may access
--- the application.
+-- | Google Apps authentication domain that controls which users can access
+-- this application. Defaults to open access for any Google Account.
 aAuthDomain :: Lens' Application (Maybe Text)
 aAuthDomain
   = lens _aAuthDomain (\ s a -> s{_aAuthDomain = a})
 
--- | A Google Cloud Storage bucket which can be used for storing files
--- associated with an application. This bucket is associated with the
+-- | Google Cloud Storage bucket that can be used for storing files
+-- associated with this application. This bucket is associated with the
 -- application and can be used by the gcloud deployment commands.
 -- \'OutputOnly
 aCodeBucket :: Lens' Application (Maybe Text)
 aCodeBucket
   = lens _aCodeBucket (\ s a -> s{_aCodeBucket = a})
 
--- | The full path to the application in the API. Example: \"apps\/myapp\".
--- \'OutputOnly
+-- | Full path to the Application resource in the API. Example:
+-- \`apps\/myapp\`. \'OutputOnly
 aName :: Lens' Application (Maybe Text)
 aName = lens _aName (\ s a -> s{_aName = a})
 
--- | HTTP path dispatch rules for requests to the app that do not explicitly
--- target a service or version. The rules are order-dependent. \'OutputOnly
+-- | HTTP path dispatch rules for requests to the application that do not
+-- explicitly target a service or version. Rules are order-dependent.
+-- \'OutputOnly
 aDispatchRules :: Lens' Application [URLDispatchRule]
 aDispatchRules
   = lens _aDispatchRules
@@ -1019,16 +1096,27 @@ aDispatchRules
       . _Default
       . _Coerce
 
--- | A Google Cloud Storage bucket which can be used by the application to
+-- | Google Cloud Storage bucket that can be used by this application to
 -- store content. \'OutputOnly
 aDefaultBucket :: Lens' Application (Maybe Text)
 aDefaultBucket
   = lens _aDefaultBucket
       (\ s a -> s{_aDefaultBucket = a})
 
--- | The relative name\/path of the application. Example: \"myapp\".
+-- | Identifier of the Application resource. This identifier is equivalent to
+-- the project ID of the Google Cloud Platform project where you want to
+-- deploy your application. Example: \`myapp\`.
 aId :: Lens' Application (Maybe Text)
 aId = lens _aId (\ s a -> s{_aId = a})
+
+-- | Location from which this application will be run. Application instances
+-- will run out of data centers in the chosen location, which is also where
+-- all of the application\'s end user content is stored. Defaults to
+-- \`us-central\`. Options are: \`us-central\` - Central US \`europe-west\`
+-- - Western Europe \`us-east1\` - Eastern US
+aLocationId :: Lens' Application (Maybe Text)
+aLocationId
+  = lens _aLocationId (\ s a -> s{_aLocationId = a})
 
 instance FromJSON Application where
         parseJSON
@@ -1037,13 +1125,13 @@ instance FromJSON Application where
                  Application' <$>
                    (o .:? "defaultHostname") <*>
                      (o .:? "defaultCookieExpiration")
-                     <*> (o .:? "location")
                      <*> (o .:? "authDomain")
                      <*> (o .:? "codeBucket")
                      <*> (o .:? "name")
                      <*> (o .:? "dispatchRules" .!= mempty)
                      <*> (o .:? "defaultBucket")
-                     <*> (o .:? "id"))
+                     <*> (o .:? "id")
+                     <*> (o .:? "locationId"))
 
 instance ToJSON Application where
         toJSON Application'{..}
@@ -1052,15 +1140,16 @@ instance ToJSON Application where
                  [("defaultHostname" .=) <$> _aDefaultHostname,
                   ("defaultCookieExpiration" .=) <$>
                     _aDefaultCookieExpiration,
-                  ("location" .=) <$> _aLocation,
                   ("authDomain" .=) <$> _aAuthDomain,
                   ("codeBucket" .=) <$> _aCodeBucket,
                   ("name" .=) <$> _aName,
                   ("dispatchRules" .=) <$> _aDispatchRules,
                   ("defaultBucket" .=) <$> _aDefaultBucket,
-                  ("id" .=) <$> _aId])
+                  ("id" .=) <$> _aId,
+                  ("locationId" .=) <$> _aLocationId])
 
--- | Beta settings supplied to the application via metadata.
+-- | Metadata settings that are supplied to this version to enable beta
+-- runtime features.
 --
 -- /See:/ 'versionBetaSettings' smart constructor.
 newtype VersionBetaSettings = VersionBetaSettings'
@@ -1093,13 +1182,13 @@ instance FromJSON VersionBetaSettings where
 instance ToJSON VersionBetaSettings where
         toJSON = toJSON . _vbsAddtional
 
--- | A service is a logical component of an application that can share state
--- and communicate in a secure fashion with other services. For example, an
--- application that handles customer requests might include separate
--- services to handle other tasks such as API requests from mobile devices
--- or backend data analysis. Each service has a collection of versions that
--- define a specific set of code used to implement the functionality of
--- that service.
+-- | A Service resource is a logical component of an application that can
+-- share state and communicate in a secure fashion with other services. For
+-- example, an application that handles customer requests might include
+-- separate services to handle tasks such as backend data analysis or API
+-- requests from mobile devices. Each service has a collection of versions
+-- that define a specific set of code used to implement the functionality
+-- of that service.
 --
 -- /See:/ 'service' smart constructor.
 data Service = Service'
@@ -1126,18 +1215,18 @@ service =
     , _sId = Nothing
     }
 
--- | A mapping that defines fractional HTTP traffic diversion to different
+-- | Mapping that defines fractional HTTP traffic diversion to different
 -- versions within the service.
 sSplit :: Lens' Service (Maybe TrafficSplit)
 sSplit = lens _sSplit (\ s a -> s{_sSplit = a})
 
--- | The full path to the Service resource in the API. Example:
--- \"apps\/myapp\/services\/default\" \'OutputOnly
+-- | Full path to the Service resource in the API. Example:
+-- \`apps\/myapp\/services\/default\`. \'OutputOnly
 sName :: Lens' Service (Maybe Text)
 sName = lens _sName (\ s a -> s{_sName = a})
 
--- | The relative name\/path of the service within the application. Example:
--- \"default\" \'OutputOnly
+-- | Relative name of the service within the application. Example:
+-- \`default\`. \'OutputOnly
 sId :: Lens' Service (Maybe Text)
 sId = lens _sId (\ s a -> s{_sId = a})
 
@@ -1154,6 +1243,78 @@ instance ToJSON Service where
               (catMaybes
                  [("split" .=) <$> _sSplit, ("name" .=) <$> _sName,
                   ("id" .=) <$> _sId])
+
+-- | A resource that represents Google Cloud Platform location.
+--
+-- /See:/ 'location' smart constructor.
+data Location = Location'
+    { _locName       :: !(Maybe Text)
+    , _locMetadata   :: !(Maybe LocationSchema)
+    , _locLabels     :: !(Maybe LocationLabels)
+    , _locLocationId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Location' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'locName'
+--
+-- * 'locMetadata'
+--
+-- * 'locLabels'
+--
+-- * 'locLocationId'
+location
+    :: Location
+location =
+    Location'
+    { _locName = Nothing
+    , _locMetadata = Nothing
+    , _locLabels = Nothing
+    , _locLocationId = Nothing
+    }
+
+-- | Resource name for the location, which may vary between implementations.
+-- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
+locName :: Lens' Location (Maybe Text)
+locName = lens _locName (\ s a -> s{_locName = a})
+
+-- | Service-specific metadata. For example the available capacity at the
+-- given location.
+locMetadata :: Lens' Location (Maybe LocationSchema)
+locMetadata
+  = lens _locMetadata (\ s a -> s{_locMetadata = a})
+
+-- | Cross-service attributes for the location. For example
+-- {\"cloud.googleapis.com\/region\": \"us-east1\"}
+locLabels :: Lens' Location (Maybe LocationLabels)
+locLabels
+  = lens _locLabels (\ s a -> s{_locLabels = a})
+
+-- | The canonical id for this location. For example: \`\"us-east1\"\`.
+locLocationId :: Lens' Location (Maybe Text)
+locLocationId
+  = lens _locLocationId
+      (\ s a -> s{_locLocationId = a})
+
+instance FromJSON Location where
+        parseJSON
+          = withObject "Location"
+              (\ o ->
+                 Location' <$>
+                   (o .:? "name") <*> (o .:? "metadata") <*>
+                     (o .:? "labels")
+                     <*> (o .:? "locationId"))
+
+instance ToJSON Location where
+        toJSON Location'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _locName,
+                  ("metadata" .=) <$> _locMetadata,
+                  ("labels" .=) <$> _locLabels,
+                  ("locationId" .=) <$> _locLocationId])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -1246,6 +1407,58 @@ instance ToJSON Operation where
                   ("name" .=) <$> _oName,
                   ("metadata" .=) <$> _oMetadata])
 
+-- | The zip file information for a zip deployment.
+--
+-- /See:/ 'zipInfo' smart constructor.
+data ZipInfo = ZipInfo'
+    { _ziFilesCount :: !(Maybe (Textual Int32))
+    , _ziSourceURL  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ZipInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ziFilesCount'
+--
+-- * 'ziSourceURL'
+zipInfo
+    :: ZipInfo
+zipInfo =
+    ZipInfo'
+    { _ziFilesCount = Nothing
+    , _ziSourceURL = Nothing
+    }
+
+-- | An estimate of the number of files in a zip for a zip deployment. If
+-- set, must be greater than or equal to the actual number of files. Used
+-- for optimizing performance; if not provided, deployment may be slow.
+ziFilesCount :: Lens' ZipInfo (Maybe Int32)
+ziFilesCount
+  = lens _ziFilesCount (\ s a -> s{_ziFilesCount = a})
+      . mapping _Coerce
+
+-- | URL of the zip file to deploy from. Must be a URL to a resource in
+-- Google Cloud Storage in the form
+-- \'http(s):\/\/storage.googleapis.com\/\\\/\\\'.
+ziSourceURL :: Lens' ZipInfo (Maybe Text)
+ziSourceURL
+  = lens _ziSourceURL (\ s a -> s{_ziSourceURL = a})
+
+instance FromJSON ZipInfo where
+        parseJSON
+          = withObject "ZipInfo"
+              (\ o ->
+                 ZipInfo' <$>
+                   (o .:? "filesCount") <*> (o .:? "sourceUrl"))
+
+instance ToJSON ZipInfo where
+        toJSON ZipInfo'{..}
+          = object
+              (catMaybes
+                 [("filesCount" .=) <$> _ziFilesCount,
+                  ("sourceUrl" .=) <$> _ziSourceURL])
+
 -- | Rules to match an HTTP request and dispatch that request to a service.
 --
 -- /See:/ 'urlDispatchRule' smart constructor.
@@ -1273,21 +1486,21 @@ urlDispatchRule =
     , _udrDomain = Nothing
     }
 
--- | The pathname within the host. This must start with a \'\/\'. A single
--- \'*\' (glob) can be included at the end of the path. The sum of the
--- lengths of the domain and path may not exceed 100 characters.
+-- | Pathname within the host. Must start with a \"\`\/\`\". A single
+-- \"\`*\`\" can be included at the end of the path. The sum of the lengths
+-- of the domain and path may not exceed 100 characters.
 udrPath :: Lens' URLDispatchRule (Maybe Text)
 udrPath = lens _udrPath (\ s a -> s{_udrPath = a})
 
--- | The resource id of a Service in this application that should service the
--- matched request. The Service must already exist. Example: \"default\".
+-- | Resource ID of a service in this application that should serve the
+-- matched request. The service must already exist. Example: \`default\`.
 udrService :: Lens' URLDispatchRule (Maybe Text)
 udrService
   = lens _udrService (\ s a -> s{_udrService = a})
 
--- | The domain name to match on. Supports \'*\' (glob) wildcarding on the
--- left-hand side of a \'.\'. If empty, all domains will be matched (the
--- same as \'*\').
+-- | Domain name to match against. The wildcard \"\`*\`\" is supported if
+-- specified before a period: \"\`*.\`\". Defaults to matching all domains:
+-- \"\`*\`\".
 udrDomain :: Lens' URLDispatchRule (Maybe Text)
 udrDomain
   = lens _udrDomain (\ s a -> s{_udrDomain = a})
@@ -1337,7 +1550,7 @@ lvrNextPageToken
   = lens _lvrNextPageToken
       (\ s a -> s{_lvrNextPageToken = a})
 
--- | The versions belonging to the requested application service.
+-- | The versions belonging to the requested service.
 lvrVersions :: Lens' ListVersionsResponse [Version]
 lvrVersions
   = lens _lvrVersions (\ s a -> s{_lvrVersions = a}) .
@@ -1359,7 +1572,8 @@ instance ToJSON ListVersionsResponse where
                  [("nextPageToken" .=) <$> _lvrNextPageToken,
                   ("versions" .=) <$> _lvrVersions])
 
--- | A single source file which is part of the application to be deployed.
+-- | Single source file that is part of the version to be deployed. Each
+-- source file that is deployed must be specified separately.
 --
 -- /See:/ 'fileInfo' smart constructor.
 data FileInfo = FileInfo'
@@ -1386,18 +1600,18 @@ fileInfo =
     , _fiSourceURL = Nothing
     }
 
--- | The SHA1 (160 bits) hash of the file in hex.
+-- | The SHA1 hash of the file, in hex.
 fiSha1Sum :: Lens' FileInfo (Maybe Text)
 fiSha1Sum
   = lens _fiSha1Sum (\ s a -> s{_fiSha1Sum = a})
 
--- | The MIME type of the file; if unspecified, the value from Google Cloud
--- Storage will be used.
+-- | The MIME type of the file. Defaults to the value from Google Cloud
+-- Storage.
 fiMimeType :: Lens' FileInfo (Maybe Text)
 fiMimeType
   = lens _fiMimeType (\ s a -> s{_fiMimeType = a})
 
--- | The URL source to use to fetch this file. Must be a URL to a resource in
+-- | URL source to use to fetch this file. Must be a URL to a resource in
 -- Google Cloud Storage in the form
 -- \'http(s):\/\/storage.googleapis.com\/\\\/\\\'.
 fiSourceURL :: Lens' FileInfo (Maybe Text)
@@ -1420,8 +1634,7 @@ instance ToJSON FileInfo where
                   ("mimeType" .=) <$> _fiMimeType,
                   ("sourceUrl" .=) <$> _fiSourceURL])
 
--- | Automatic scaling is the scaling policy that App Engine has used since
--- its inception. It is based on request rate, response latencies, and
+-- | Automatic scaling is based on request rate, response latencies, and
 -- other application metrics.
 --
 -- /See:/ 'automaticScaling' smart constructor.
@@ -1491,16 +1704,15 @@ asNetworkUtilization
   = lens _asNetworkUtilization
       (\ s a -> s{_asNetworkUtilization = a})
 
--- | Max number of instances that App Engine should start to handle requests.
+-- | Maximum number of instances that should be started to handle requests.
 asMaxTotalInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMaxTotalInstances
   = lens _asMaxTotalInstances
       (\ s a -> s{_asMaxTotalInstances = a})
       . mapping _Coerce
 
--- | The minimum number of idle instances that App Engine should maintain for
--- this version. Only applies to the default version of a service, since
--- other versions are not expected to receive significant traffic.
+-- | Minimum number of idle instances that should be maintained for this
+-- version. Only applicable for the default version of a service.
 asMinIdleInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMinIdleInstances
   = lens _asMinIdleInstances
@@ -1513,8 +1725,8 @@ asDiskUtilization
   = lens _asDiskUtilization
       (\ s a -> s{_asDiskUtilization = a})
 
--- | The minimum amount of time that App Engine should allow a request to
--- wait in the pending queue before starting a new instance to handle it.
+-- | Minimum amount of time a request should wait in the pending queue before
+-- starting a new instance to handle it.
 asMinPendingLatency :: Lens' AutomaticScaling (Maybe Text)
 asMinPendingLatency
   = lens _asMinPendingLatency
@@ -1526,34 +1738,34 @@ asCPUUtilization
   = lens _asCPUUtilization
       (\ s a -> s{_asCPUUtilization = a})
 
--- | The maximum number of idle instances that App Engine should maintain for
--- this version.
+-- | Maximum number of idle instances that should be maintained for this
+-- version.
 asMaxIdleInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMaxIdleInstances
   = lens _asMaxIdleInstances
       (\ s a -> s{_asMaxIdleInstances = a})
       . mapping _Coerce
 
--- | Minimum number of instances that App Engine should maintain.
+-- | Minimum number of instances that should be maintained for this version.
 asMinTotalInstances :: Lens' AutomaticScaling (Maybe Int32)
 asMinTotalInstances
   = lens _asMinTotalInstances
       (\ s a -> s{_asMinTotalInstances = a})
       . mapping _Coerce
 
--- | The number of concurrent requests an automatic scaling instance can
--- accept before the scheduler spawns a new instance. Default value is
--- chosen based on the runtime.
+-- | Number of concurrent requests an automatic scaling instance can accept
+-- before the scheduler spawns a new instance. Defaults to a
+-- runtime-specific value.
 asMaxConcurrentRequests :: Lens' AutomaticScaling (Maybe Int32)
 asMaxConcurrentRequests
   = lens _asMaxConcurrentRequests
       (\ s a -> s{_asMaxConcurrentRequests = a})
       . mapping _Coerce
 
--- | The amount of time that the
+-- | Amount of time that the
 -- [Autoscaler](https:\/\/cloud.google.com\/compute\/docs\/autoscaler\/)
--- should wait between changes to the number of virtual machines. Applies
--- only to the VM runtime.
+-- should wait between changes to the number of virtual machines. Only
+-- applicable for VM runtimes.
 asCoolDownPeriod :: Lens' AutomaticScaling (Maybe Text)
 asCoolDownPeriod
   = lens _asCoolDownPeriod
@@ -1565,8 +1777,8 @@ asRequestUtilization
   = lens _asRequestUtilization
       (\ s a -> s{_asRequestUtilization = a})
 
--- | The maximum amount of time that App Engine should allow a request to
--- wait in the pending queue before starting a new instance to handle it.
+-- | Maximum amount of time that a request should wait in the pending queue
+-- before starting a new instance to handle it.
 asMaxPendingLatency :: Lens' AutomaticScaling (Maybe Text)
 asMaxPendingLatency
   = lens _asMaxPendingLatency
@@ -1643,30 +1855,29 @@ operationMetadataV1Beta5 =
     , _omvbTarget = Nothing
     }
 
--- | Timestamp that this operation was received. \'OutputOnly
+-- | Timestamp that this operation was created. \'OutputOnly
 omvbInsertTime :: Lens' OperationMetadataV1Beta5 (Maybe Text)
 omvbInsertTime
   = lens _omvbInsertTime
       (\ s a -> s{_omvbInsertTime = a})
 
--- | The user who requested this operation. \'OutputOnly
+-- | User who requested this operation. \'OutputOnly
 omvbUser :: Lens' OperationMetadataV1Beta5 (Maybe Text)
 omvbUser = lens _omvbUser (\ s a -> s{_omvbUser = a})
 
--- | API method name that initiated the operation. Example:
--- \"google.appengine.v1beta5.Version.CreateVersion\". \'OutputOnly
+-- | API method name that initiated this operation. Example:
+-- \`google.appengine.v1beta5.Version.CreateVersion\`. \'OutputOnly
 omvbMethod :: Lens' OperationMetadataV1Beta5 (Maybe Text)
 omvbMethod
   = lens _omvbMethod (\ s a -> s{_omvbMethod = a})
 
--- | Timestamp that this operation was completed. (Not present if the
--- operation is still in progress.) \'OutputOnly
+-- | Timestamp that this operation completed. \'OutputOnly
 omvbEndTime :: Lens' OperationMetadataV1Beta5 (Maybe Text)
 omvbEndTime
   = lens _omvbEndTime (\ s a -> s{_omvbEndTime = a})
 
--- | Resource that this operation is acting on. Example:
--- \"apps\/myapp\/services\/default\". \'OutputOnly
+-- | Name of the resource that this operation is acting on. Example:
+-- \`apps\/myapp\/services\/default\`. \'OutputOnly
 omvbTarget :: Lens' OperationMetadataV1Beta5 (Maybe Text)
 omvbTarget
   = lens _omvbTarget (\ s a -> s{_omvbTarget = a})
@@ -1691,7 +1902,7 @@ instance ToJSON OperationMetadataV1Beta5 where
                   ("endTime" .=) <$> _omvbEndTime,
                   ("target" .=) <$> _omvbTarget])
 
--- | Use Google Cloud Endpoints to handle requests.
+-- | Uses Google Cloud Endpoints to handle requests.
 --
 -- /See:/ 'apiEndpointHandler' smart constructor.
 newtype APIEndpointHandler = APIEndpointHandler'
@@ -1710,7 +1921,7 @@ apiEndpointHandler =
     { _aehScriptPath = Nothing
     }
 
--- | Specifies the path to the script from the application root directory.
+-- | Path to the script from the application root directory.
 aehScriptPath :: Lens' APIEndpointHandler (Maybe Text)
 aehScriptPath
   = lens _aehScriptPath
@@ -1745,7 +1956,7 @@ statusDetailsItem pSdiAddtional_ =
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
 sdiAddtional
   = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
@@ -1759,7 +1970,7 @@ instance FromJSON StatusDetailsItem where
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
--- | Used to specify extra network settings (for VM runtimes only).
+-- | Extra network settings. Only applicable for VM runtimes.
 --
 -- /See:/ 'network' smart constructor.
 data Network = Network'
@@ -1786,8 +1997,8 @@ network =
     , _nName = Nothing
     }
 
--- | A list of ports (or port pairs) to forward from the VM into the app
--- container.
+-- | List of ports, or port pairs, to forward from the virtual machine to the
+-- application container.
 nForwardedPorts :: Lens' Network [Text]
 nForwardedPorts
   = lens _nForwardedPorts
@@ -1795,14 +2006,13 @@ nForwardedPorts
       . _Default
       . _Coerce
 
--- | A tag to apply to the VM instance during creation.
+-- | Tag to apply to the VM instance during creation.
 nInstanceTag :: Lens' Network (Maybe Text)
 nInstanceTag
   = lens _nInstanceTag (\ s a -> s{_nInstanceTag = a})
 
--- | The Google Compute Engine network where the VMs will be created. If not
--- specified, or empty, the network named \"default\" will be used. (The
--- short name should be specified, not the resource path.)
+-- | Google Cloud Platform network where the virtual machines are created.
+-- Specify the short name, not the resource path. Defaults to \`default\`.
 nName :: Lens' Network (Maybe Text)
 nName = lens _nName (\ s a -> s{_nName = a})
 
@@ -1822,6 +2032,27 @@ instance ToJSON Network where
                  [("forwardedPorts" .=) <$> _nForwardedPorts,
                   ("instanceTag" .=) <$> _nInstanceTag,
                   ("name" .=) <$> _nName])
+
+-- | Request message for \`Instances.DebugInstance\`.
+--
+-- /See:/ 'debugInstanceRequest' smart constructor.
+data DebugInstanceRequest =
+    DebugInstanceRequest'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DebugInstanceRequest' with the minimum fields required to make a request.
+--
+debugInstanceRequest
+    :: DebugInstanceRequest
+debugInstanceRequest = DebugInstanceRequest'
+
+instance FromJSON DebugInstanceRequest where
+        parseJSON
+          = withObject "DebugInstanceRequest"
+              (\ o -> pure DebugInstanceRequest')
+
+instance ToJSON DebugInstanceRequest where
+        toJSON = const emptyObject
 
 -- | HTTP headers to use for all responses from these URLs.
 --
@@ -1859,7 +2090,7 @@ instance FromJSON StaticFilesHandlerHTTPHeaders where
 instance ToJSON StaticFilesHandlerHTTPHeaders where
         toJSON = toJSON . _sfhhttphAddtional
 
--- | Used to specify how many machine resources an app version needs.
+-- | Machine resources for a version.
 --
 -- /See:/ 'resources' smart constructor.
 data Resources = Resources'
@@ -1886,19 +2117,19 @@ resources =
     , _rCPU = Nothing
     }
 
--- | How much memory, in GB, an app version needs.
+-- | Memory (GB) needed.
 rMemoryGb :: Lens' Resources (Maybe Double)
 rMemoryGb
   = lens _rMemoryGb (\ s a -> s{_rMemoryGb = a}) .
       mapping _Coerce
 
--- | How much disk size, in GB, an app version needs.
+-- | Disk size (GB) needed.
 rDiskGb :: Lens' Resources (Maybe Double)
 rDiskGb
   = lens _rDiskGb (\ s a -> s{_rDiskGb = a}) .
       mapping _Coerce
 
--- | How many CPU cores an app version needs.
+-- | Number of CPU cores needed.
 rCPU :: Lens' Resources (Maybe Double)
 rCPU
   = lens _rCPU (\ s a -> s{_rCPU = a}) .
@@ -1919,9 +2150,9 @@ instance ToJSON Resources where
                  [("memoryGb" .=) <$> _rMemoryGb,
                   ("diskGb" .=) <$> _rDiskGb, ("cpu" .=) <$> _rCPU])
 
--- | A manifest of files stored in Google Cloud Storage which should be
--- included as part of this application. All files must be readable using
--- the credentials supplied with this call.
+-- | Manifest of the files stored in Google Cloud Storage that are included
+-- as part of this version. All files must be readable using the
+-- credentials supplied with this call.
 --
 -- /See:/ 'deploymentFiles' smart constructor.
 newtype DeploymentFiles = DeploymentFiles'
@@ -1977,13 +2208,14 @@ cpuUtilization =
     , _cuTargetUtilization = Nothing
     }
 
--- | The period of time over which CPU utilization is calculated.
+-- | Period of time over which CPU utilization is calculated.
 cuAggregationWindowLength :: Lens' CPUUtilization (Maybe Text)
 cuAggregationWindowLength
   = lens _cuAggregationWindowLength
       (\ s a -> s{_cuAggregationWindowLength = a})
 
--- | Target (0-1) CPU utilization ratio to maintain when scaling.
+-- | Target CPU utilization ratio to maintain when scaling. Must be between 0
+-- and 1.
 cuTargetUtilization :: Lens' CPUUtilization (Maybe Double)
 cuTargetUtilization
   = lens _cuTargetUtilization
@@ -2006,14 +2238,14 @@ instance ToJSON CPUUtilization where
                     _cuAggregationWindowLength,
                   ("targetUtilization" .=) <$> _cuTargetUtilization])
 
--- | Mapping from service version IDs within the service to fractional
--- (0.000, 1] allocations of traffic for that version. Each version may
--- only be specified once, but some versions in the service may not have
--- any traffic allocation. Services that have traffic allocated in this
--- field may not be deleted until the service is deleted, or their traffic
--- allocation is removed. Allocations must sum to 1. Supports precision up
--- to two decimal places for IP-based splits and up to three decimal places
--- for cookie-based splits.
+-- | Mapping from version IDs within the service to fractional (0.000, 1]
+-- allocations of traffic for that version. Each version can be specified
+-- only once, but some versions in the service may not have any traffic
+-- allocation. Services that have traffic allocated cannot be deleted until
+-- either the service is deleted or their traffic allocation is removed.
+-- Allocations must sum to 1. Up to two decimal place precision is
+-- supported for IP-based splits and up to three decimal places is
+-- supported for cookie-based splits.
 --
 -- /See:/ 'trafficSplitAllocations' smart constructor.
 newtype TrafficSplitAllocations = TrafficSplitAllocations'
@@ -2067,8 +2299,8 @@ manualScaling =
     { _msInstances = Nothing
     }
 
--- | The number of instances to assign to the service at the start. This
--- number can later be altered by using the [Modules
+-- | Number of instances to assign to the service at the start. This number
+-- can later be altered by using the [Modules
 -- API](https:\/\/cloud.google.com\/appengine\/docs\/python\/modules\/functions)
 -- \`set_num_instances()\` function.
 msInstances :: Lens' ManualScaling (Maybe Int32)
@@ -2112,16 +2344,15 @@ basicScaling =
     , _bsIdleTimeout = Nothing
     }
 
--- | The maximum number of instances for App Engine to create for this
--- version.
+-- | Maximum number of instances to create for this version.
 bsMaxInstances :: Lens' BasicScaling (Maybe Int32)
 bsMaxInstances
   = lens _bsMaxInstances
       (\ s a -> s{_bsMaxInstances = a})
       . mapping _Coerce
 
--- | The instance will be shut down this amount of time after receiving its
--- last request.
+-- | Duration of time after the last request that an instance must wait
+-- before the instance is shut down.
 bsIdleTimeout :: Lens' BasicScaling (Maybe Text)
 bsIdleTimeout
   = lens _bsIdleTimeout
@@ -2141,14 +2372,94 @@ instance ToJSON BasicScaling where
                  [("maxInstances" .=) <$> _bsMaxInstances,
                   ("idleTimeout" .=) <$> _bsIdleTimeout])
 
--- | A Version is a specific set of source code and configuration files
--- deployed to a service.
+-- | Metadata for the given google.longrunning.Operation.
+--
+-- /See:/ 'operationMetadataV1' smart constructor.
+data OperationMetadataV1 = OperationMetadataV1'
+    { _omvInsertTime :: !(Maybe Text)
+    , _omvUser       :: !(Maybe Text)
+    , _omvMethod     :: !(Maybe Text)
+    , _omvEndTime    :: !(Maybe Text)
+    , _omvTarget     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationMetadataV1' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omvInsertTime'
+--
+-- * 'omvUser'
+--
+-- * 'omvMethod'
+--
+-- * 'omvEndTime'
+--
+-- * 'omvTarget'
+operationMetadataV1
+    :: OperationMetadataV1
+operationMetadataV1 =
+    OperationMetadataV1'
+    { _omvInsertTime = Nothing
+    , _omvUser = Nothing
+    , _omvMethod = Nothing
+    , _omvEndTime = Nothing
+    , _omvTarget = Nothing
+    }
+
+-- | Time that this operation was created. \'OutputOnly
+omvInsertTime :: Lens' OperationMetadataV1 (Maybe Text)
+omvInsertTime
+  = lens _omvInsertTime
+      (\ s a -> s{_omvInsertTime = a})
+
+-- | User who requested this operation. \'OutputOnly
+omvUser :: Lens' OperationMetadataV1 (Maybe Text)
+omvUser = lens _omvUser (\ s a -> s{_omvUser = a})
+
+-- | API method that initiated this operation. Example:
+-- \`google.appengine.v1.Versions.CreateVersion\`. \'OutputOnly
+omvMethod :: Lens' OperationMetadataV1 (Maybe Text)
+omvMethod
+  = lens _omvMethod (\ s a -> s{_omvMethod = a})
+
+-- | Time that this operation completed. \'OutputOnly
+omvEndTime :: Lens' OperationMetadataV1 (Maybe Text)
+omvEndTime
+  = lens _omvEndTime (\ s a -> s{_omvEndTime = a})
+
+-- | Name of the resource that this operation is acting on. Example:
+-- \`apps\/myapp\/services\/default\`. \'OutputOnly
+omvTarget :: Lens' OperationMetadataV1 (Maybe Text)
+omvTarget
+  = lens _omvTarget (\ s a -> s{_omvTarget = a})
+
+instance FromJSON OperationMetadataV1 where
+        parseJSON
+          = withObject "OperationMetadataV1"
+              (\ o ->
+                 OperationMetadataV1' <$>
+                   (o .:? "insertTime") <*> (o .:? "user") <*>
+                     (o .:? "method")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "target"))
+
+instance ToJSON OperationMetadataV1 where
+        toJSON OperationMetadataV1'{..}
+          = object
+              (catMaybes
+                 [("insertTime" .=) <$> _omvInsertTime,
+                  ("user" .=) <$> _omvUser,
+                  ("method" .=) <$> _omvMethod,
+                  ("endTime" .=) <$> _omvEndTime,
+                  ("target" .=) <$> _omvTarget])
+
+-- | A Version resource is a specific set of source code and configuration
+-- files that are deployed into a service.
 --
 -- /See:/ 'version' smart constructor.
 data Version = Version'
-    { _vCreationTime      :: !(Maybe Text)
-    , _vRuntime           :: !(Maybe Text)
-    , _vDeployer          :: !(Maybe Text)
+    { _vRuntime           :: !(Maybe Text)
     , _vNobuildFilesRegex :: !(Maybe Text)
     , _vInstanceClass     :: !(Maybe Text)
     , _vHealthCheck       :: !(Maybe HealthCheck)
@@ -2156,6 +2467,7 @@ data Version = Version'
     , _vDefaultExpiration :: !(Maybe Text)
     , _vAutomaticScaling  :: !(Maybe AutomaticScaling)
     , _vErrorHandlers     :: !(Maybe [ErrorHandler])
+    , _vCreatedBy         :: !(Maybe Text)
     , _vVM                :: !(Maybe Bool)
     , _vHandlers          :: !(Maybe [URLMap])
     , _vInboundServices   :: !(Maybe [Text])
@@ -2171,7 +2483,9 @@ data Version = Version'
     , _vEnvVariables      :: !(Maybe VersionEnvVariables)
     , _vServingStatus     :: !(Maybe Text)
     , _vDiskUsageBytes    :: !(Maybe (Textual Int64))
+    , _vCreateTime        :: !(Maybe Text)
     , _vLibraries         :: !(Maybe [Library])
+    , _vVersionURL        :: !(Maybe Text)
     , _vDeployment        :: !(Maybe Deployment)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2179,11 +2493,7 @@ data Version = Version'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vCreationTime'
---
 -- * 'vRuntime'
---
--- * 'vDeployer'
 --
 -- * 'vNobuildFilesRegex'
 --
@@ -2198,6 +2508,8 @@ data Version = Version'
 -- * 'vAutomaticScaling'
 --
 -- * 'vErrorHandlers'
+--
+-- * 'vCreatedBy'
 --
 -- * 'vVM'
 --
@@ -2229,16 +2541,18 @@ data Version = Version'
 --
 -- * 'vDiskUsageBytes'
 --
+-- * 'vCreateTime'
+--
 -- * 'vLibraries'
+--
+-- * 'vVersionURL'
 --
 -- * 'vDeployment'
 version
     :: Version
 version =
     Version'
-    { _vCreationTime = Nothing
-    , _vRuntime = Nothing
-    , _vDeployer = Nothing
+    { _vRuntime = Nothing
     , _vNobuildFilesRegex = Nothing
     , _vInstanceClass = Nothing
     , _vHealthCheck = Nothing
@@ -2246,6 +2560,7 @@ version =
     , _vDefaultExpiration = Nothing
     , _vAutomaticScaling = Nothing
     , _vErrorHandlers = Nothing
+    , _vCreatedBy = Nothing
     , _vVM = Nothing
     , _vHandlers = Nothing
     , _vInboundServices = Nothing
@@ -2261,76 +2576,65 @@ version =
     , _vEnvVariables = Nothing
     , _vServingStatus = Nothing
     , _vDiskUsageBytes = Nothing
+    , _vCreateTime = Nothing
     , _vLibraries = Nothing
+    , _vVersionURL = Nothing
     , _vDeployment = Nothing
     }
 
--- | Creation time of this version. This will be between the start and end
--- times of the operation that creates this version. \'OutputOnly
-vCreationTime :: Lens' Version (Maybe Text)
-vCreationTime
-  = lens _vCreationTime
-      (\ s a -> s{_vCreationTime = a})
-
--- | The desired runtime. Values can include python27, java7, go, etc.
+-- | Desired runtime. Example: \`python27\`.
 vRuntime :: Lens' Version (Maybe Text)
 vRuntime = lens _vRuntime (\ s a -> s{_vRuntime = a})
 
--- | The email address of the user who created this version. \'OutputOnly
-vDeployer :: Lens' Version (Maybe Text)
-vDeployer
-  = lens _vDeployer (\ s a -> s{_vDeployer = a})
-
--- | Go only. Files that match this pattern will not be built into the app.
--- May only be set on create requests.
+-- | Files that match this pattern will not be built into this version. Only
+-- applicable for Go runtimes. Only returned in \`GET\` requests if
+-- \`view=FULL\` is set.
 vNobuildFilesRegex :: Lens' Version (Maybe Text)
 vNobuildFilesRegex
   = lens _vNobuildFilesRegex
       (\ s a -> s{_vNobuildFilesRegex = a})
 
--- | The instance class to use to run this app. Valid values for
--- AutomaticScaling are \`[F1, F2, F4, F4_1G]\`. Valid values for
--- ManualScaling and BasicScaling are \`[B1, B2, B4, B8, B4_1G]\`. Default:
--- \"F1\" for AutomaticScaling, \"B1\" for ManualScaling and BasicScaling
+-- | Instance class that is used to run this version. Valid values are: *
+-- AutomaticScaling: \`F1\`, \`F2\`, \`F4\`, \`F4_1G\` * ManualScaling or
+-- BasicScaling: \`B1\`, \`B2\`, \`B4\`, \`B8\`, \`B4_1G\` Defaults to
+-- \`F1\` for AutomaticScaling and \`B1\` for ManualScaling or
+-- BasicScaling.
 vInstanceClass :: Lens' Version (Maybe Text)
 vInstanceClass
   = lens _vInstanceClass
       (\ s a -> s{_vInstanceClass = a})
 
--- | Configure health checking for the VM instances. Unhealthy VM instances
--- will be stopped and replaced with new instances. Only returned in
--- \`GET\` requests if \`view=FULL\` is set. May only be set on create
--- requests; once created, is immutable.
+-- | Configures health checking for VM instances. Unhealthy instances are
+-- stopped and replaced with new instances. Only applicable for VM
+-- runtimes. Only returned in \`GET\` requests if \`view=FULL\` is set.
 vHealthCheck :: Lens' Version (Maybe HealthCheck)
 vHealthCheck
   = lens _vHealthCheck (\ s a -> s{_vHealthCheck = a})
 
--- | The App Engine execution environment to use for this version. Default:
--- \"1\"
+-- | App Engine execution environment for this version. Defaults to
+-- \`standard\`.
 vEnv :: Lens' Version (Maybe Text)
 vEnv = lens _vEnv (\ s a -> s{_vEnv = a})
 
--- | The length of time a static file served by a static file handler ought
--- to be cached by web proxies and browsers, if the handler does not
--- specify its own expiration. Only returned in \`GET\` requests if
--- \`view=FULL\` is set. May only be set on create requests; once created,
--- is immutable.
+-- | Duration that static files should be cached by web proxies and browsers.
+-- Only applicable if the corresponding
+-- [StaticFilesHandler](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#staticfileshandler)
+-- does not specify its own expiration time. Only returned in \`GET\`
+-- requests if \`view=FULL\` is set.
 vDefaultExpiration :: Lens' Version (Maybe Text)
 vDefaultExpiration
   = lens _vDefaultExpiration
       (\ s a -> s{_vDefaultExpiration = a})
 
--- | Automatic scaling is the scaling policy that App Engine has used since
--- its inception. It is based on request rate, response latencies, and
+-- | Automatic scaling is based on request rate, response latencies, and
 -- other application metrics.
 vAutomaticScaling :: Lens' Version (Maybe AutomaticScaling)
 vAutomaticScaling
   = lens _vAutomaticScaling
       (\ s a -> s{_vAutomaticScaling = a})
 
--- | Custom static error pages instead of these generic error pages, (limit
--- 10 KB\/page) Only returned in \`GET\` requests if \`view=FULL\` is set.
--- May only be set on create requests; once created, is immutable.
+-- | Custom static error pages. Limited to 10KB per page. Only returned in
+-- \`GET\` requests if \`view=FULL\` is set.
 vErrorHandlers :: Lens' Version [ErrorHandler]
 vErrorHandlers
   = lens _vErrorHandlers
@@ -2338,15 +2642,19 @@ vErrorHandlers
       . _Default
       . _Coerce
 
--- | Whether to deploy this app in a VM container.
+-- | Email address of the user who created this version. \'OutputOnly
+vCreatedBy :: Lens' Version (Maybe Text)
+vCreatedBy
+  = lens _vCreatedBy (\ s a -> s{_vCreatedBy = a})
+
+-- | Whether to deploy this version in a container on a virtual machine.
 vVM :: Lens' Version (Maybe Bool)
 vVM = lens _vVM (\ s a -> s{_vVM = a})
 
--- | An ordered list of URL Matching patterns that should be applied to
--- incoming requests. The first matching URL consumes the request, and
--- subsequent handlers are not attempted. Only returned in \`GET\` requests
--- if \`view=FULL\` is set. May only be set on create requests; once
--- created, is immutable.
+-- | An ordered list of URL-matching patterns that should be applied to
+-- incoming requests. The first matching URL handles the request and other
+-- request handlers are not attempted. Only returned in \`GET\` requests if
+-- \`view=FULL\` is set.
 vHandlers :: Lens' Version [URLMap]
 vHandlers
   = lens _vHandlers (\ s a -> s{_vHandlers = a}) .
@@ -2362,27 +2670,27 @@ vInboundServices
       . _Default
       . _Coerce
 
--- | Used to specify extra network settings (for VM runtimes only).
+-- | Extra network settings. Only applicable for VM runtimes.
 vNetwork :: Lens' Version (Maybe Network)
 vNetwork = lens _vNetwork (\ s a -> s{_vNetwork = a})
 
--- | Used to specify how many machine resources an app version needs (for VM
--- runtimes only).
+-- | Machine resources for this version. Only applicable for VM runtimes.
 vResources :: Lens' Version (Maybe Resources)
 vResources
   = lens _vResources (\ s a -> s{_vResources = a})
 
--- | The full path to the Version resource in the API. Example:
--- \"apps\/myapp\/services\/default\/versions\/v1\". \'OutputOnly
+-- | Full path to the Version resource in the API. Example:
+-- \`apps\/myapp\/services\/default\/versions\/v1\`. \'OutputOnly
 vName :: Lens' Version (Maybe Text)
 vName = lens _vName (\ s a -> s{_vName = a})
 
--- | If true, multiple requests can be dispatched to the app at once.
+-- | Whether multiple requests can be dispatched to this version at once.
 vThreadsafe :: Lens' Version (Maybe Bool)
 vThreadsafe
   = lens _vThreadsafe (\ s a -> s{_vThreadsafe = a})
 
--- | Beta settings supplied to the application via metadata.
+-- | Metadata settings that are supplied to this version to enable beta
+-- runtime features.
 vBetaSettings :: Lens' Version (Maybe VersionBetaSettings)
 vBetaSettings
   = lens _vBetaSettings
@@ -2404,57 +2712,66 @@ vManualScaling
   = lens _vManualScaling
       (\ s a -> s{_vManualScaling = a})
 
--- | Serving configuration for Google Cloud Endpoints. Only returned in
--- \`GET\` requests if \`view=FULL\` is set. May only be set on create
--- requests; once created, is immutable.
+-- | Serving configuration for [Google Cloud
+-- Endpoints](https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/).
+-- Only returned in \`GET\` requests if \`view=FULL\` is set.
 vAPIConfig :: Lens' Version (Maybe APIConfigHandler)
 vAPIConfig
   = lens _vAPIConfig (\ s a -> s{_vAPIConfig = a})
 
--- | The relative name\/path of the Version within the service. Example:
--- \"v1\". Version specifiers can contain lowercase letters, digits, and
--- hyphens. It cannot begin with the prefix \`ah-\` and the names
--- \`default\` and \`latest\` are reserved and cannot be used.
+-- | Relative name of the version within the service. Example: \`v1\`.
+-- Version names can contain only lowercase letters, numbers, or hyphens.
+-- Reserved names: \"default\", \"latest\", and any name with the prefix
+-- \"ah-\".
 vId :: Lens' Version (Maybe Text)
 vId = lens _vId (\ s a -> s{_vId = a})
 
--- | Environment variables made available to the application. Only returned
--- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
--- requests; once created, is immutable.
+-- | Environment variables available to the application. Only returned in
+-- \`GET\` requests if \`view=FULL\` is set.
 vEnvVariables :: Lens' Version (Maybe VersionEnvVariables)
 vEnvVariables
   = lens _vEnvVariables
       (\ s a -> s{_vEnvVariables = a})
 
--- | The current serving status of this version. Only \`SERVING\` versions
--- will have instances created or billed for. If this field is unset when a
--- version is created, \`SERVING\` status will be assumed. It is an error
--- to explicitly set this field to \`SERVING_STATUS_UNSPECIFIED\`.
+-- | Current serving status of this version. Only the versions with a
+-- \`SERVING\` status create instances and can be billed.
+-- \`SERVING_STATUS_UNSPECIFIED\` is an invalid value. Defaults to
+-- \`SERVING\`.
 vServingStatus :: Lens' Version (Maybe Text)
 vServingStatus
   = lens _vServingStatus
       (\ s a -> s{_vServingStatus = a})
 
--- | Total size of version files hosted on App Engine disk in bytes.
--- \'OutputOnly
+-- | Total size in bytes of all the files that are included in this version
+-- and curerntly hosted on the App Engine disk. \'OutputOnly
 vDiskUsageBytes :: Lens' Version (Maybe Int64)
 vDiskUsageBytes
   = lens _vDiskUsageBytes
       (\ s a -> s{_vDiskUsageBytes = a})
       . mapping _Coerce
 
--- | Configuration for Python runtime third-party libraries required by the
--- application. Only returned in \`GET\` requests if \`view=FULL\` is set.
--- May only be set on create requests; once created, is immutable.
+-- | Time that this version was created. \'OutputOnly
+vCreateTime :: Lens' Version (Maybe Text)
+vCreateTime
+  = lens _vCreateTime (\ s a -> s{_vCreateTime = a})
+
+-- | Configuration for third-party Python runtime libraries that are required
+-- by the application. Only returned in \`GET\` requests if \`view=FULL\`
+-- is set.
 vLibraries :: Lens' Version [Library]
 vLibraries
   = lens _vLibraries (\ s a -> s{_vLibraries = a}) .
       _Default
       . _Coerce
 
+-- | Serving URL for this version. Example:
+-- \"https:\/\/myversion-dot-myservice-dot-myapp.appspot.com\" \'OutputOnly
+vVersionURL :: Lens' Version (Maybe Text)
+vVersionURL
+  = lens _vVersionURL (\ s a -> s{_vVersionURL = a})
+
 -- | Code and application artifacts that make up this version. Only returned
--- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
--- requests; once created, is immutable.
+-- in \`GET\` requests if \`view=FULL\` is set.
 vDeployment :: Lens' Version (Maybe Deployment)
 vDeployment
   = lens _vDeployment (\ s a -> s{_vDeployment = a})
@@ -2464,15 +2781,14 @@ instance FromJSON Version where
           = withObject "Version"
               (\ o ->
                  Version' <$>
-                   (o .:? "creationTime") <*> (o .:? "runtime") <*>
-                     (o .:? "deployer")
-                     <*> (o .:? "nobuildFilesRegex")
-                     <*> (o .:? "instanceClass")
+                   (o .:? "runtime") <*> (o .:? "nobuildFilesRegex") <*>
+                     (o .:? "instanceClass")
                      <*> (o .:? "healthCheck")
                      <*> (o .:? "env")
                      <*> (o .:? "defaultExpiration")
                      <*> (o .:? "automaticScaling")
                      <*> (o .:? "errorHandlers" .!= mempty)
+                     <*> (o .:? "createdBy")
                      <*> (o .:? "vm")
                      <*> (o .:? "handlers" .!= mempty)
                      <*> (o .:? "inboundServices" .!= mempty)
@@ -2488,16 +2804,16 @@ instance FromJSON Version where
                      <*> (o .:? "envVariables")
                      <*> (o .:? "servingStatus")
                      <*> (o .:? "diskUsageBytes")
+                     <*> (o .:? "createTime")
                      <*> (o .:? "libraries" .!= mempty)
+                     <*> (o .:? "versionUrl")
                      <*> (o .:? "deployment"))
 
 instance ToJSON Version where
         toJSON Version'{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _vCreationTime,
-                  ("runtime" .=) <$> _vRuntime,
-                  ("deployer" .=) <$> _vDeployer,
+                 [("runtime" .=) <$> _vRuntime,
                   ("nobuildFilesRegex" .=) <$> _vNobuildFilesRegex,
                   ("instanceClass" .=) <$> _vInstanceClass,
                   ("healthCheck" .=) <$> _vHealthCheck,
@@ -2505,7 +2821,8 @@ instance ToJSON Version where
                   ("defaultExpiration" .=) <$> _vDefaultExpiration,
                   ("automaticScaling" .=) <$> _vAutomaticScaling,
                   ("errorHandlers" .=) <$> _vErrorHandlers,
-                  ("vm" .=) <$> _vVM, ("handlers" .=) <$> _vHandlers,
+                  ("createdBy" .=) <$> _vCreatedBy, ("vm" .=) <$> _vVM,
+                  ("handlers" .=) <$> _vHandlers,
                   ("inboundServices" .=) <$> _vInboundServices,
                   ("network" .=) <$> _vNetwork,
                   ("resources" .=) <$> _vResources,
@@ -2518,7 +2835,9 @@ instance ToJSON Version where
                   ("envVariables" .=) <$> _vEnvVariables,
                   ("servingStatus" .=) <$> _vServingStatus,
                   ("diskUsageBytes" .=) <$> _vDiskUsageBytes,
+                  ("createTime" .=) <$> _vCreateTime,
                   ("libraries" .=) <$> _vLibraries,
+                  ("versionUrl" .=) <$> _vVersionURL,
                   ("deployment" .=) <$> _vDeployment])
 
 -- | Files served directly to the user for a given URL, such as images, CSS
@@ -2573,46 +2892,44 @@ sfhHTTPHeaders
   = lens _sfhHTTPHeaders
       (\ s a -> s{_sfhHTTPHeaders = a})
 
--- | The path to the static files matched by the URL pattern, from the
+-- | Path to the static files matched by the URL pattern, from the
 -- application root directory. The path can refer to text matched in
 -- groupings in the URL pattern.
 sfhPath :: Lens' StaticFilesHandler (Maybe Text)
 sfhPath = lens _sfhPath (\ s a -> s{_sfhPath = a})
 
--- | If true, this UrlMap entry does not match the request unless the file
--- referenced by the handler also exists. If no such file exists,
--- processing will continue with the next UrlMap that matches the requested
--- URL.
+-- | Whether this handler should match the request if the file referenced by
+-- the handler does not exist.
 sfhRequireMatchingFile :: Lens' StaticFilesHandler (Maybe Bool)
 sfhRequireMatchingFile
   = lens _sfhRequireMatchingFile
       (\ s a -> s{_sfhRequireMatchingFile = a})
 
--- | The length of time a static file served by this handler ought to be
--- cached by web proxies and browsers.
+-- | Time a static file served by this handler should be cached by web
+-- proxies and browsers.
 sfhExpiration :: Lens' StaticFilesHandler (Maybe Text)
 sfhExpiration
   = lens _sfhExpiration
       (\ s a -> s{_sfhExpiration = a})
 
--- | If specified, all files served by this handler will be served using the
--- specified MIME type. If not specified, the MIME type for a file will be
--- derived from the file\'s filename extension.
+-- | MIME type used to serve all files served by this handler. Defaults to
+-- file-specific MIME types, which are derived from each file\'s filename
+-- extension.
 sfhMimeType :: Lens' StaticFilesHandler (Maybe Text)
 sfhMimeType
   = lens _sfhMimeType (\ s a -> s{_sfhMimeType = a})
 
--- | By default, files declared in static file handlers are uploaded as
--- static data and are only served to end users, they cannot be read by an
--- application. If this field is set to true, the files are also uploaded
--- as code data so your application can read them. Both uploads are charged
--- against your code and static data storage resource quotas.
+-- | Whether files should also be uploaded as code data. By default, files
+-- declared in static file handlers are uploaded as static data and are
+-- only served to end users; they cannot be read by the application. If
+-- enabled, uploads are charged against both your code and static data
+-- storage resource quotas.
 sfhApplicationReadable :: Lens' StaticFilesHandler (Maybe Bool)
 sfhApplicationReadable
   = lens _sfhApplicationReadable
       (\ s a -> s{_sfhApplicationReadable = a})
 
--- | A regular expression that matches the file paths for all files that will
+-- | Regular expression that matches the file paths for all files that should
 -- be referenced by this handler.
 sfhUploadPathRegex :: Lens' StaticFilesHandler (Maybe Text)
 sfhUploadPathRegex
@@ -2645,7 +2962,7 @@ instance ToJSON StaticFilesHandler where
                     _sfhApplicationReadable,
                   ("uploadPathRegex" .=) <$> _sfhUploadPathRegex])
 
--- | A custom static error page to be served when an error occurs.
+-- | Custom static error page to be served when an error occurs.
 --
 -- /See:/ 'errorHandler' smart constructor.
 data ErrorHandler = ErrorHandler'
@@ -2672,12 +2989,12 @@ errorHandler =
     , _ehStaticFile = Nothing
     }
 
--- | MIME type of file. If unspecified, \"text\/html\" is assumed.
+-- | MIME type of file. Defaults to \`text\/html\`.
 ehMimeType :: Lens' ErrorHandler (Maybe Text)
 ehMimeType
   = lens _ehMimeType (\ s a -> s{_ehMimeType = a})
 
--- | The error condition this handler applies to.
+-- | Error condition this handler applies to.
 ehErrorCode :: Lens' ErrorHandler (Maybe Text)
 ehErrorCode
   = lens _ehErrorCode (\ s a -> s{_ehErrorCode = a})
@@ -2702,6 +3019,94 @@ instance ToJSON ErrorHandler where
                  [("mimeType" .=) <$> _ehMimeType,
                   ("errorCode" .=) <$> _ehErrorCode,
                   ("staticFile" .=) <$> _ehStaticFile])
+
+-- | Cross-service attributes for the location. For example
+-- {\"cloud.googleapis.com\/region\": \"us-east1\"}
+--
+-- /See:/ 'locationLabels' smart constructor.
+newtype LocationLabels = LocationLabels'
+    { _llAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LocationLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llAddtional'
+locationLabels
+    :: HashMap Text Text -- ^ 'llAddtional'
+    -> LocationLabels
+locationLabels pLlAddtional_ =
+    LocationLabels'
+    { _llAddtional = _Coerce # pLlAddtional_
+    }
+
+llAddtional :: Lens' LocationLabels (HashMap Text Text)
+llAddtional
+  = lens _llAddtional (\ s a -> s{_llAddtional = a}) .
+      _Coerce
+
+instance FromJSON LocationLabels where
+        parseJSON
+          = withObject "LocationLabels"
+              (\ o -> LocationLabels' <$> (parseJSONObject o))
+
+instance ToJSON LocationLabels where
+        toJSON = toJSON . _llAddtional
+
+-- | Metadata for the given google.cloud.location.Location.
+--
+-- /See:/ 'locationMetadata' smart constructor.
+data LocationMetadata = LocationMetadata'
+    { _lmStandardEnvironmentAvailable :: !(Maybe Bool)
+    , _lmFlexibleEnvironmentAvailable :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmStandardEnvironmentAvailable'
+--
+-- * 'lmFlexibleEnvironmentAvailable'
+locationMetadata
+    :: LocationMetadata
+locationMetadata =
+    LocationMetadata'
+    { _lmStandardEnvironmentAvailable = Nothing
+    , _lmFlexibleEnvironmentAvailable = Nothing
+    }
+
+-- | App Engine Standard Environment is available in the given location.
+-- \'OutputOnly
+lmStandardEnvironmentAvailable :: Lens' LocationMetadata (Maybe Bool)
+lmStandardEnvironmentAvailable
+  = lens _lmStandardEnvironmentAvailable
+      (\ s a -> s{_lmStandardEnvironmentAvailable = a})
+
+-- | App Engine Flexible Environment is available in the given location.
+-- \'OutputOnly
+lmFlexibleEnvironmentAvailable :: Lens' LocationMetadata (Maybe Bool)
+lmFlexibleEnvironmentAvailable
+  = lens _lmFlexibleEnvironmentAvailable
+      (\ s a -> s{_lmFlexibleEnvironmentAvailable = a})
+
+instance FromJSON LocationMetadata where
+        parseJSON
+          = withObject "LocationMetadata"
+              (\ o ->
+                 LocationMetadata' <$>
+                   (o .:? "standardEnvironmentAvailable") <*>
+                     (o .:? "flexibleEnvironmentAvailable"))
+
+instance ToJSON LocationMetadata where
+        toJSON LocationMetadata'{..}
+          = object
+              (catMaybes
+                 [("standardEnvironmentAvailable" .=) <$>
+                    _lmStandardEnvironmentAvailable,
+                  ("flexibleEnvironmentAvailable" .=) <$>
+                    _lmFlexibleEnvironmentAvailable])
 
 -- | Metadata for the given google.longrunning.Operation.
 --
@@ -2742,35 +3147,34 @@ operationMetadata =
     , _omTarget = Nothing
     }
 
--- | Timestamp that this operation was received. \'OutputOnly
+-- | Timestamp that this operation was created. \'OutputOnly
 omInsertTime :: Lens' OperationMetadata (Maybe Text)
 omInsertTime
   = lens _omInsertTime (\ s a -> s{_omInsertTime = a})
 
--- | The user who requested this operation. \'OutputOnly
+-- | User who requested this operation. \'OutputOnly
 omUser :: Lens' OperationMetadata (Maybe Text)
 omUser = lens _omUser (\ s a -> s{_omUser = a})
 
--- | API method name that initiated the operation. Example:
--- \"google.appengine.v1beta4.Version.CreateVersion\". \'OutputOnly
+-- | API method that initiated this operation. Example:
+-- \`google.appengine.v1beta4.Version.CreateVersion\`. \'OutputOnly
 omMethod :: Lens' OperationMetadata (Maybe Text)
 omMethod = lens _omMethod (\ s a -> s{_omMethod = a})
 
--- | Timestamp that this operation was completed. (Not present if the
--- operation is still in progress.) \'OutputOnly
+-- | Timestamp that this operation completed. \'OutputOnly
 omEndTime :: Lens' OperationMetadata (Maybe Text)
 omEndTime
   = lens _omEndTime (\ s a -> s{_omEndTime = a})
 
--- | The type of the operation (deprecated, use method field instead).
--- Example: \"create_version\". \'OutputOnly
+-- | Type of this operation. Deprecated, use method field instead. Example:
+-- \"create_version\". \'OutputOnly
 omOperationType :: Lens' OperationMetadata (Maybe Text)
 omOperationType
   = lens _omOperationType
       (\ s a -> s{_omOperationType = a})
 
--- | Resource that this operation is acting on. Example:
--- \"apps\/myapp\/modules\/default\". \'OutputOnly
+-- | Name of the resource that this operation is acting on. Example:
+-- \`apps\/myapp\/modules\/default\`. \'OutputOnly
 omTarget :: Lens' OperationMetadata (Maybe Text)
 omTarget = lens _omTarget (\ s a -> s{_omTarget = a})
 
@@ -2846,12 +3250,12 @@ instance ToJSON ListInstancesResponse where
                  [("nextPageToken" .=) <$> _lirNextPageToken,
                   ("instances" .=) <$> _lirInstances])
 
--- | Target scaling by request utilization (for VM runtimes only).
+-- | Target scaling by request utilization. Only applicable for VM runtimes.
 --
 -- /See:/ 'requestUtilization' smart constructor.
 data RequestUtilization = RequestUtilization'
-    { _ruTargetConcurrentRequests :: !(Maybe (Textual Int32))
-    , _ruTargetRequestCountPerSec :: !(Maybe (Textual Int32))
+    { _ruTargetConcurrentRequests    :: !(Maybe (Textual Int32))
+    , _ruTargetRequestCountPerSecond :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RequestUtilization' with the minimum fields required to make a request.
@@ -2860,13 +3264,13 @@ data RequestUtilization = RequestUtilization'
 --
 -- * 'ruTargetConcurrentRequests'
 --
--- * 'ruTargetRequestCountPerSec'
+-- * 'ruTargetRequestCountPerSecond'
 requestUtilization
     :: RequestUtilization
 requestUtilization =
     RequestUtilization'
     { _ruTargetConcurrentRequests = Nothing
-    , _ruTargetRequestCountPerSec = Nothing
+    , _ruTargetRequestCountPerSecond = Nothing
     }
 
 -- | Target number of concurrent requests.
@@ -2877,10 +3281,10 @@ ruTargetConcurrentRequests
       . mapping _Coerce
 
 -- | Target requests per second.
-ruTargetRequestCountPerSec :: Lens' RequestUtilization (Maybe Int32)
-ruTargetRequestCountPerSec
-  = lens _ruTargetRequestCountPerSec
-      (\ s a -> s{_ruTargetRequestCountPerSec = a})
+ruTargetRequestCountPerSecond :: Lens' RequestUtilization (Maybe Int32)
+ruTargetRequestCountPerSecond
+  = lens _ruTargetRequestCountPerSecond
+      (\ s a -> s{_ruTargetRequestCountPerSecond = a})
       . mapping _Coerce
 
 instance FromJSON RequestUtilization where
@@ -2889,7 +3293,7 @@ instance FromJSON RequestUtilization where
               (\ o ->
                  RequestUtilization' <$>
                    (o .:? "targetConcurrentRequests") <*>
-                     (o .:? "targetRequestCountPerSec"))
+                     (o .:? "targetRequestCountPerSecond"))
 
 instance ToJSON RequestUtilization where
         toJSON RequestUtilization'{..}
@@ -2897,59 +3301,29 @@ instance ToJSON RequestUtilization where
               (catMaybes
                  [("targetConcurrentRequests" .=) <$>
                     _ruTargetConcurrentRequests,
-                  ("targetRequestCountPerSec" .=) <$>
-                    _ruTargetRequestCountPerSec])
+                  ("targetRequestCountPerSecond" .=) <$>
+                    _ruTargetRequestCountPerSecond])
 
--- | A reference to a particular snapshot of the source tree used to build
--- and deploy the application.
+-- | Request message for \'Applications.RepairApplication\'.
 --
--- /See:/ 'sourceReference' smart constructor.
-data SourceReference = SourceReference'
-    { _srRepository :: !(Maybe Text)
-    , _srRevisionId :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
+-- /See:/ 'repairApplicationRequest' smart constructor.
+data RepairApplicationRequest =
+    RepairApplicationRequest'
+    deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SourceReference' with the minimum fields required to make a request.
+-- | Creates a value of 'RepairApplicationRequest' with the minimum fields required to make a request.
 --
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'srRepository'
---
--- * 'srRevisionId'
-sourceReference
-    :: SourceReference
-sourceReference =
-    SourceReference'
-    { _srRepository = Nothing
-    , _srRevisionId = Nothing
-    }
+repairApplicationRequest
+    :: RepairApplicationRequest
+repairApplicationRequest = RepairApplicationRequest'
 
--- | Optional. A URI string identifying the repository. Example:
--- \"https:\/\/source.developers.google.com\/p\/app-123\/r\/default\"
-srRepository :: Lens' SourceReference (Maybe Text)
-srRepository
-  = lens _srRepository (\ s a -> s{_srRepository = a})
-
--- | The canonical (and persistent) identifier of the deployed revision, i.e.
--- any kind of aliases including tags or branch names are not allowed.
--- Example (git): \"2198322f89e0bb2e25021667c2ed489d1fd34e6b\"
-srRevisionId :: Lens' SourceReference (Maybe Text)
-srRevisionId
-  = lens _srRevisionId (\ s a -> s{_srRevisionId = a})
-
-instance FromJSON SourceReference where
+instance FromJSON RepairApplicationRequest where
         parseJSON
-          = withObject "SourceReference"
-              (\ o ->
-                 SourceReference' <$>
-                   (o .:? "repository") <*> (o .:? "revisionId"))
+          = withObject "RepairApplicationRequest"
+              (\ o -> pure RepairApplicationRequest')
 
-instance ToJSON SourceReference where
-        toJSON SourceReference'{..}
-          = object
-              (catMaybes
-                 [("repository" .=) <$> _srRepository,
-                  ("revisionId" .=) <$> _srRevisionId])
+instance ToJSON RepairApplicationRequest where
+        toJSON = const emptyObject
 
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as \`Delete\`, the response is
@@ -2978,7 +3352,7 @@ operationResponse pOrAddtional_ =
     { _orAddtional = _Coerce # pOrAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
 orAddtional
   = lens _orAddtional (\ s a -> s{_orAddtional = a}) .
@@ -2992,8 +3366,8 @@ instance FromJSON OperationResponse where
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
 
--- | A Docker (container) image which should be used to start the
--- application.
+-- | Docker image that is used to start a VM container for the version you
+-- deploy.
 --
 -- /See:/ 'containerInfo' smart constructor.
 newtype ContainerInfo = ContainerInfo'
@@ -3012,9 +3386,10 @@ containerInfo =
     { _ciImage = Nothing
     }
 
--- | Reference to a hosted container image. Must be a URI to a resource in a
--- Docker repository. Must be fully qualified, including tag or digest.
--- e.g. gcr.io\/my-project\/image:tag or gcr.io\/my-project\/image\'digest
+-- | URI to the hosted container image in a Docker repository. The URI must
+-- be fully qualified and include a tag or digest. Examples:
+-- \"gcr.io\/my-project\/image:tag\" or
+-- \"gcr.io\/my-project\/image\'digest\"
 ciImage :: Lens' ContainerInfo (Maybe Text)
 ciImage = lens _ciImage (\ s a -> s{_ciImage = a})
 
@@ -3027,25 +3402,25 @@ instance ToJSON ContainerInfo where
         toJSON ContainerInfo'{..}
           = object (catMaybes [("image" .=) <$> _ciImage])
 
--- | Instances are the computing units that App Engine uses to automatically
--- scale an application.
+-- | An Instance resource is the computing unit that App Engine uses to
+-- automatically scale an application.
 --
 -- /See:/ 'instance'' smart constructor.
 data Instance = Instance'
     { _iMemoryUsage      :: !(Maybe (Textual Int64))
     , _iVMStatus         :: !(Maybe Text)
     , _iVMZoneName       :: !(Maybe Text)
+    , _iStartTime        :: !(Maybe Text)
     , _iVMId             :: !(Maybe Text)
     , _iAvailability     :: !(Maybe Text)
     , _iVMName           :: !(Maybe Text)
     , _iName             :: !(Maybe Text)
-    , _iVMUnlocked       :: !(Maybe Bool)
+    , _iVMDebugEnabled   :: !(Maybe Bool)
     , _iRequests         :: !(Maybe (Textual Int32))
     , _iQps              :: !(Maybe (Textual Double))
     , _iId               :: !(Maybe Text)
-    , _iErrors           :: !(Maybe (Textual Word32))
+    , _iErrors           :: !(Maybe (Textual Int32))
     , _iAverageLatency   :: !(Maybe (Textual Int32))
-    , _iStartTimestamp   :: !(Maybe Text)
     , _iAppEngineRelease :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3059,6 +3434,8 @@ data Instance = Instance'
 --
 -- * 'iVMZoneName'
 --
+-- * 'iStartTime'
+--
 -- * 'iVMId'
 --
 -- * 'iAvailability'
@@ -3067,7 +3444,7 @@ data Instance = Instance'
 --
 -- * 'iName'
 --
--- * 'iVMUnlocked'
+-- * 'iVMDebugEnabled'
 --
 -- * 'iRequests'
 --
@@ -3079,8 +3456,6 @@ data Instance = Instance'
 --
 -- * 'iAverageLatency'
 --
--- * 'iStartTimestamp'
---
 -- * 'iAppEngineRelease'
 instance'
     :: Instance
@@ -3089,102 +3464,103 @@ instance' =
     { _iMemoryUsage = Nothing
     , _iVMStatus = Nothing
     , _iVMZoneName = Nothing
+    , _iStartTime = Nothing
     , _iVMId = Nothing
     , _iAvailability = Nothing
     , _iVMName = Nothing
     , _iName = Nothing
-    , _iVMUnlocked = Nothing
+    , _iVMDebugEnabled = Nothing
     , _iRequests = Nothing
     , _iQps = Nothing
     , _iId = Nothing
     , _iErrors = Nothing
     , _iAverageLatency = Nothing
-    , _iStartTimestamp = Nothing
     , _iAppEngineRelease = Nothing
     }
 
--- | Memory usage (in bytes). \'OutputOnly
+-- | Total memory in use (bytes). \'OutputOnly
 iMemoryUsage :: Lens' Instance (Maybe Int64)
 iMemoryUsage
   = lens _iMemoryUsage (\ s a -> s{_iMemoryUsage = a})
       . mapping _Coerce
 
--- | For VMEngines instances, the status of GCE VM where the instance lives.
--- \'OutputOnly
+-- | Status of the virtual machine where this instance lives. Only applicable
+-- for instances in App Engine flexible environment. \'OutputOnly
 iVMStatus :: Lens' Instance (Maybe Text)
 iVMStatus
   = lens _iVMStatus (\ s a -> s{_iVMStatus = a})
 
--- | For VMEngines instances, the zone where the GCE VM is located.
--- \'OutputOnly
+-- | Zone where the virtual machine is located. Only applicable for instances
+-- in App Engine flexible environment. \'OutputOnly
 iVMZoneName :: Lens' Instance (Maybe Text)
 iVMZoneName
   = lens _iVMZoneName (\ s a -> s{_iVMZoneName = a})
 
--- | For VMEngines instances, the GCE VM ID of the instance. \'OutputOnly
+-- | Time that this instance was started. \'OutputOnly
+iStartTime :: Lens' Instance (Maybe Text)
+iStartTime
+  = lens _iStartTime (\ s a -> s{_iStartTime = a})
+
+-- | Virtual machine ID of this instance. Only applicable for instances in
+-- App Engine flexible environment. \'OutputOnly
 iVMId :: Lens' Instance (Maybe Text)
 iVMId = lens _iVMId (\ s a -> s{_iVMId = a})
 
--- | Availability of instance. \'OutputOnly
+-- | Availability of the instance. \'OutputOnly
 iAvailability :: Lens' Instance (Maybe Text)
 iAvailability
   = lens _iAvailability
       (\ s a -> s{_iAvailability = a})
 
--- | For VMEngines instances, the name of GCE VM where the instance lives.
--- \'OutputOnly
+-- | Name of the virtual machine where this instance lives. Only applicable
+-- for instances in App Engine flexible environment. \'OutputOnly
 iVMName :: Lens' Instance (Maybe Text)
 iVMName = lens _iVMName (\ s a -> s{_iVMName = a})
 
--- | The full path to the Instance resource in the API. Example:
--- \"apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1\"
+-- | Full path to the Instance resource in the API. Example:
+-- \`apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1\`.
 -- \'OutputOnly
 iName :: Lens' Instance (Maybe Text)
 iName = lens _iName (\ s a -> s{_iName = a})
 
--- | For VMEngines instances, whether the instance has been unlocked.
--- \'OutputOnly
-iVMUnlocked :: Lens' Instance (Maybe Bool)
-iVMUnlocked
-  = lens _iVMUnlocked (\ s a -> s{_iVMUnlocked = a})
+-- | Whether this instance is in debug mode. Only applicable for instances in
+-- App Engine flexible environment. \'OutputOnly
+iVMDebugEnabled :: Lens' Instance (Maybe Bool)
+iVMDebugEnabled
+  = lens _iVMDebugEnabled
+      (\ s a -> s{_iVMDebugEnabled = a})
 
--- | Number of requests (since the clone was started). \'OutputOnly
+-- | Number of requests since this instance was started. \'OutputOnly
 iRequests :: Lens' Instance (Maybe Int32)
 iRequests
   = lens _iRequests (\ s a -> s{_iRequests = a}) .
       mapping _Coerce
 
--- | QPS for this instance (averaged over the last minute). \'OutputOnly
+-- | Average queries per second (QPS) over the last minute. \'OutputOnly
 iQps :: Lens' Instance (Maybe Double)
 iQps
   = lens _iQps (\ s a -> s{_iQps = a}) .
       mapping _Coerce
 
--- | The relative name\/path of the instance within the version. Example:
--- \"instance-1\" \'OutputOnly
+-- | Relative name of the instance within the version. Example:
+-- \`instance-1\`. \'OutputOnly
 iId :: Lens' Instance (Maybe Text)
 iId = lens _iId (\ s a -> s{_iId = a})
 
--- | Number of errors since the instance was started. \'OutputOnly
-iErrors :: Lens' Instance (Maybe Word32)
+-- | Number of errors since this instance was started. \'OutputOnly
+iErrors :: Lens' Instance (Maybe Int32)
 iErrors
   = lens _iErrors (\ s a -> s{_iErrors = a}) .
       mapping _Coerce
 
--- | Latency in milliseconds (averaged over the last minute). \'OutputOnly
+-- | Average latency (ms) over the last minute. \'OutputOnly
 iAverageLatency :: Lens' Instance (Maybe Int32)
 iAverageLatency
   = lens _iAverageLatency
       (\ s a -> s{_iAverageLatency = a})
       . mapping _Coerce
 
--- | Time when instance was started. \'OutputOnly
-iStartTimestamp :: Lens' Instance (Maybe Text)
-iStartTimestamp
-  = lens _iStartTimestamp
-      (\ s a -> s{_iStartTimestamp = a})
-
--- | The App Engine release the instance is running on. \'OutputOnly
+-- | App Engine release this instance is running on. \'OutputOnly
 iAppEngineRelease :: Lens' Instance (Maybe Text)
 iAppEngineRelease
   = lens _iAppEngineRelease
@@ -3197,17 +3573,17 @@ instance FromJSON Instance where
                  Instance' <$>
                    (o .:? "memoryUsage") <*> (o .:? "vmStatus") <*>
                      (o .:? "vmZoneName")
+                     <*> (o .:? "startTime")
                      <*> (o .:? "vmId")
                      <*> (o .:? "availability")
                      <*> (o .:? "vmName")
                      <*> (o .:? "name")
-                     <*> (o .:? "vmUnlocked")
+                     <*> (o .:? "vmDebugEnabled")
                      <*> (o .:? "requests")
                      <*> (o .:? "qps")
                      <*> (o .:? "id")
                      <*> (o .:? "errors")
                      <*> (o .:? "averageLatency")
-                     <*> (o .:? "startTimestamp")
                      <*> (o .:? "appEngineRelease"))
 
 instance ToJSON Instance where
@@ -3217,77 +3593,71 @@ instance ToJSON Instance where
                  [("memoryUsage" .=) <$> _iMemoryUsage,
                   ("vmStatus" .=) <$> _iVMStatus,
                   ("vmZoneName" .=) <$> _iVMZoneName,
+                  ("startTime" .=) <$> _iStartTime,
                   ("vmId" .=) <$> _iVMId,
                   ("availability" .=) <$> _iAvailability,
                   ("vmName" .=) <$> _iVMName, ("name" .=) <$> _iName,
-                  ("vmUnlocked" .=) <$> _iVMUnlocked,
+                  ("vmDebugEnabled" .=) <$> _iVMDebugEnabled,
                   ("requests" .=) <$> _iRequests, ("qps" .=) <$> _iQps,
                   ("id" .=) <$> _iId, ("errors" .=) <$> _iErrors,
                   ("averageLatency" .=) <$> _iAverageLatency,
-                  ("startTimestamp" .=) <$> _iStartTimestamp,
                   ("appEngineRelease" .=) <$> _iAppEngineRelease])
 
 -- | Code and application artifacts used to deploy a version to App Engine.
 --
 -- /See:/ 'deployment' smart constructor.
 data Deployment = Deployment'
-    { _dContainer        :: !(Maybe ContainerInfo)
-    , _dFiles            :: !(Maybe DeploymentFiles)
-    , _dSourceReferences :: !(Maybe [SourceReference])
+    { _dZip       :: !(Maybe ZipInfo)
+    , _dContainer :: !(Maybe ContainerInfo)
+    , _dFiles     :: !(Maybe DeploymentFiles)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dZip'
+--
 -- * 'dContainer'
 --
 -- * 'dFiles'
---
--- * 'dSourceReferences'
 deployment
     :: Deployment
 deployment =
     Deployment'
-    { _dContainer = Nothing
+    { _dZip = Nothing
+    , _dContainer = Nothing
     , _dFiles = Nothing
-    , _dSourceReferences = Nothing
     }
 
--- | If supplied, a docker (container) image which should be used to start
--- the application. Only applicable to the \'vm\' runtime.
+-- | The zip file for this deployment, if this is a zip deployment.
+dZip :: Lens' Deployment (Maybe ZipInfo)
+dZip = lens _dZip (\ s a -> s{_dZip = a})
+
+-- | A Docker image that App Engine uses to run the version. Only applicable
+-- for instances in App Engine flexible environment.
 dContainer :: Lens' Deployment (Maybe ContainerInfo)
 dContainer
   = lens _dContainer (\ s a -> s{_dContainer = a})
 
--- | A manifest of files stored in Google Cloud Storage which should be
--- included as part of this application. All files must be readable using
--- the credentials supplied with this call.
+-- | Manifest of the files stored in Google Cloud Storage that are included
+-- as part of this version. All files must be readable using the
+-- credentials supplied with this call.
 dFiles :: Lens' Deployment (Maybe DeploymentFiles)
 dFiles = lens _dFiles (\ s a -> s{_dFiles = a})
-
--- | The origin of the source code for this deployment. There can be more
--- than one source reference per Version if source code is distributed
--- among multiple repositories.
-dSourceReferences :: Lens' Deployment [SourceReference]
-dSourceReferences
-  = lens _dSourceReferences
-      (\ s a -> s{_dSourceReferences = a})
-      . _Default
-      . _Coerce
 
 instance FromJSON Deployment where
         parseJSON
           = withObject "Deployment"
               (\ o ->
                  Deployment' <$>
-                   (o .:? "container") <*> (o .:? "files") <*>
-                     (o .:? "sourceReferences" .!= mempty))
+                   (o .:? "zip") <*> (o .:? "container") <*>
+                     (o .:? "files"))
 
 instance ToJSON Deployment where
         toJSON Deployment'{..}
           = object
               (catMaybes
-                 [("container" .=) <$> _dContainer,
-                  ("files" .=) <$> _dFiles,
-                  ("sourceReferences" .=) <$> _dSourceReferences])
+                 [("zip" .=) <$> _dZip,
+                  ("container" .=) <$> _dContainer,
+                  ("files" .=) <$> _dFiles])

@@ -140,6 +140,27 @@ module Network.Google.Classroom
     -- ** classroom.userProfiles.get
     , module Network.Google.Resource.Classroom.UserProFiles.Get
 
+    -- ** classroom.userProfiles.guardianInvitations.create
+    , module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
+
+    -- ** classroom.userProfiles.guardianInvitations.get
+    , module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
+
+    -- ** classroom.userProfiles.guardianInvitations.list
+    , module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
+
+    -- ** classroom.userProfiles.guardianInvitations.patch
+    , module Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Patch
+
+    -- ** classroom.userProfiles.guardians.delete
+    , module Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
+
+    -- ** classroom.userProfiles.guardians.get
+    , module Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
+
+    -- ** classroom.userProfiles.guardians.list
+    , module Network.Google.Resource.Classroom.UserProFiles.Guardians.List
+
     -- * Types
 
     -- ** ListCourseAliasesResponse
@@ -176,6 +197,15 @@ module Network.Google.Classroom
     , dfId
     , dfTitle
     , dfAlternateLink
+
+    -- ** GuardianInvitation
+    , GuardianInvitation
+    , guardianInvitation
+    , giCreationTime
+    , giStudentId
+    , giState
+    , giInvitationId
+    , giInvitedEmailAddress
 
     -- ** ReturnStudentSubmissionRequest
     , ReturnStudentSubmissionRequest
@@ -242,6 +272,14 @@ module Network.Google.Classroom
     , lirNextPageToken
     , lirInvitations
 
+    -- ** Guardian
+    , Guardian
+    , guardian
+    , gStudentId
+    , gGuardianId
+    , gInvitedEmailAddress
+    , gGuardianProFile
+
     -- ** CourseMaterial
     , CourseMaterial
     , courseMaterial
@@ -290,6 +328,12 @@ module Network.Google.Classroom
     , ssDraftGrade
     , ssAlternateLink
     , ssCourseWorkId
+
+    -- ** ListGuardiansResponse
+    , ListGuardiansResponse
+    , listGuardiansResponse
+    , lgrNextPageToken
+    , lgrGuardians
 
     -- ** Date
     , Date
@@ -366,6 +410,7 @@ module Network.Google.Classroom
     , cTeacherGroupEmail
     , cTeacherFolder
     , cCourseState
+    , cGuardiansEnabled
     , cEnrollmentCode
     , cUpdateTime
     , cOwnerId
@@ -384,6 +429,12 @@ module Network.Google.Classroom
     , todHours
     , todMinutes
     , todSeconds
+
+    -- ** ListGuardianInvitationsResponse
+    , ListGuardianInvitationsResponse
+    , listGuardianInvitationsResponse
+    , lgirNextPageToken
+    , lgirGuardianInvitations
 
     -- ** Assignment
     , Assignment
@@ -465,6 +516,13 @@ import           Network.Google.Resource.Classroom.Invitations.Delete
 import           Network.Google.Resource.Classroom.Invitations.Get
 import           Network.Google.Resource.Classroom.Invitations.List
 import           Network.Google.Resource.Classroom.UserProFiles.Get
+import           Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Create
+import           Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Get
+import           Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.List
+import           Network.Google.Resource.Classroom.UserProFiles.GuardianInvitations.Patch
+import           Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
+import           Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
+import           Network.Google.Resource.Classroom.UserProFiles.Guardians.List
 
 {- $resources
 TODO
@@ -508,4 +566,11 @@ type ClassroomAPI =
        :<|> CoursesCreateResource
        :<|> CoursesDeleteResource
        :<|> CoursesUpdateResource
+       :<|> UserProFilesGuardiansListResource
+       :<|> UserProFilesGuardiansGetResource
+       :<|> UserProFilesGuardiansDeleteResource
+       :<|> UserProFilesGuardianInvitationsListResource
+       :<|> UserProFilesGuardianInvitationsPatchResource
+       :<|> UserProFilesGuardianInvitationsGetResource
+       :<|> UserProFilesGuardianInvitationsCreateResource
        :<|> UserProFilesGetResource

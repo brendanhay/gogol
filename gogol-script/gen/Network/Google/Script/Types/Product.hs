@@ -280,7 +280,7 @@ statusDetailsItem pSdiAddtional_ =
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
 sdiAddtional
   = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
@@ -435,7 +435,7 @@ operationMetadata pOmAddtional_ =
     { _omAddtional = _Coerce # pOmAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 omAddtional :: Lens' OperationMetadata (HashMap Text JSONValue)
 omAddtional
   = lens _omAddtional (\ s a -> s{_omAddtional = a}) .
@@ -471,7 +471,7 @@ operationResponse pOrAddtional_ =
     { _orAddtional = _Coerce # pOrAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
 orAddtional
   = lens _orAddtional (\ s a -> s{_orAddtional = a}) .
@@ -491,21 +491,28 @@ instance ToJSON OperationResponse where
 -- field will contain this \`ExecutionResponse\` object.
 --
 -- /See:/ 'executionResponse' smart constructor.
-newtype ExecutionResponse = ExecutionResponse'
-    { _erResult :: Maybe JSONValue
+data ExecutionResponse = ExecutionResponse'
+    { _erStatus :: !(Maybe Text)
+    , _erResult :: !(Maybe JSONValue)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExecutionResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'erStatus'
+--
 -- * 'erResult'
 executionResponse
     :: ExecutionResponse
 executionResponse =
     ExecutionResponse'
-    { _erResult = Nothing
+    { _erStatus = Nothing
+    , _erResult = Nothing
     }
+
+erStatus :: Lens' ExecutionResponse (Maybe Text)
+erStatus = lens _erStatus (\ s a -> s{_erStatus = a})
 
 -- | The return value of the script function. The type will match the type
 -- returned in Apps Script. Functions called through the Execution API
@@ -518,8 +525,13 @@ erResult = lens _erResult (\ s a -> s{_erResult = a})
 instance FromJSON ExecutionResponse where
         parseJSON
           = withObject "ExecutionResponse"
-              (\ o -> ExecutionResponse' <$> (o .:? "result"))
+              (\ o ->
+                 ExecutionResponse' <$>
+                   (o .:? "status") <*> (o .:? "result"))
 
 instance ToJSON ExecutionResponse where
         toJSON ExecutionResponse'{..}
-          = object (catMaybes [("result" .=) <$> _erResult])
+          = object
+              (catMaybes
+                 [("status" .=) <$> _erStatus,
+                  ("result" .=) <$> _erResult])

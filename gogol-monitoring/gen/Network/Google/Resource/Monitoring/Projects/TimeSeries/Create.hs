@@ -25,7 +25,7 @@
 -- not be written, a corresponding failure message is included in the error
 -- response.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.timeSeries.create@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.timeSeries.create@.
 module Network.Google.Resource.Monitoring.Projects.TimeSeries.Create
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type ProjectsTimeSeriesCreateResource =
      "v3" :>
        Capture "name" Text :>
          "timeSeries" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -74,7 +74,7 @@ type ProjectsTimeSeriesCreateResource =
 --
 -- /See:/ 'projectsTimeSeriesCreate' smart constructor.
 data ProjectsTimeSeriesCreate = ProjectsTimeSeriesCreate'
-    { _ptscXgafv          :: !(Maybe Text)
+    { _ptscXgafv          :: !(Maybe Xgafv)
     , _ptscUploadProtocol :: !(Maybe Text)
     , _ptscPp             :: !Bool
     , _ptscAccessToken    :: !(Maybe Text)
@@ -124,7 +124,7 @@ projectsTimeSeriesCreate pPtscPayload_ pPtscName_ =
     }
 
 -- | V1 error format.
-ptscXgafv :: Lens' ProjectsTimeSeriesCreate (Maybe Text)
+ptscXgafv :: Lens' ProjectsTimeSeriesCreate (Maybe Xgafv)
 ptscXgafv
   = lens _ptscXgafv (\ s a -> s{_ptscXgafv = a})
 
@@ -162,7 +162,7 @@ ptscBearerToken
       (\ s a -> s{_ptscBearerToken = a})
 
 -- | The project on which to execute the request. The format is
--- \`\"projects\/{project_id_or_number}\"\`.
+-- \"projects\/{project_id_or_number}\".
 ptscName :: Lens' ProjectsTimeSeriesCreate Text
 ptscName = lens _ptscName (\ s a -> s{_ptscName = a})
 

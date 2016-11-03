@@ -35,6 +35,7 @@ module Network.Google.Resource.DNS.ManagedZones.Create
     -- * Request Lenses
     , mzcProject
     , mzcPayload
+    , mzcClientOperationId
     ) where
 
 import           Network.Google.DNS.Types
@@ -44,20 +45,22 @@ import           Network.Google.Prelude
 -- 'ManagedZonesCreate' request conforms to.
 type ManagedZonesCreateResource =
      "dns" :>
-       "v1" :>
+       "v2beta1" :>
          "projects" :>
            Capture "project" Text :>
              "managedZones" :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] ManagedZone :>
-                   Post '[JSON] ManagedZone
+               QueryParam "clientOperationId" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] ManagedZone :>
+                     Post '[JSON] ManagedZone
 
 -- | Create a new ManagedZone.
 --
 -- /See:/ 'managedZonesCreate' smart constructor.
 data ManagedZonesCreate = ManagedZonesCreate'
-    { _mzcProject :: !Text
-    , _mzcPayload :: !ManagedZone
+    { _mzcProject           :: !Text
+    , _mzcPayload           :: !ManagedZone
+    , _mzcClientOperationId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesCreate' with the minimum fields required to make a request.
@@ -67,6 +70,8 @@ data ManagedZonesCreate = ManagedZonesCreate'
 -- * 'mzcProject'
 --
 -- * 'mzcPayload'
+--
+-- * 'mzcClientOperationId'
 managedZonesCreate
     :: Text -- ^ 'mzcProject'
     -> ManagedZone -- ^ 'mzcPayload'
@@ -75,6 +80,7 @@ managedZonesCreate pMzcProject_ pMzcPayload_ =
     ManagedZonesCreate'
     { _mzcProject = pMzcProject_
     , _mzcPayload = pMzcPayload_
+    , _mzcClientOperationId = Nothing
     }
 
 -- | Identifies the project addressed by this request.
@@ -87,13 +93,22 @@ mzcPayload :: Lens' ManagedZonesCreate ManagedZone
 mzcPayload
   = lens _mzcPayload (\ s a -> s{_mzcPayload = a})
 
+-- | For mutating operation requests only. An optional identifier specified
+-- by the client. Must be unique for operation resources in the Operations
+-- collection.
+mzcClientOperationId :: Lens' ManagedZonesCreate (Maybe Text)
+mzcClientOperationId
+  = lens _mzcClientOperationId
+      (\ s a -> s{_mzcClientOperationId = a})
+
 instance GoogleRequest ManagedZonesCreate where
         type Rs ManagedZonesCreate = ManagedZone
         type Scopes ManagedZonesCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ManagedZonesCreate'{..}
-          = go _mzcProject (Just AltJSON) _mzcPayload
+          = go _mzcProject _mzcClientOperationId (Just AltJSON)
+              _mzcPayload
               dNSService
           where go
                   = buildClient

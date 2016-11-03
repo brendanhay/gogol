@@ -23,11 +23,10 @@ import           Network.Google.Prelude
 -- | An object that describes the schema of a MonitoredResource object using
 -- a type name and a set of labels. For example, the monitored resource
 -- descriptor for Google Compute Engine VM instances has a type of
--- \`\"gce_instance\"\` and specifies the use of the labels
--- \`\"instance_id\"\` and \`\"zone\"\` to identify particular VM
--- instances. Different APIs can support different monitored resource
--- types. APIs generally provide a \`list\` method that returns the
--- monitored resource descriptors used by the API.
+-- \"gce_instance\" and specifies the use of the labels \"instance_id\" and
+-- \"zone\" to identify particular VM instances.Different APIs can support
+-- different monitored resource types. APIs generally provide a list method
+-- that returns the monitored resource descriptors used by the API.
 --
 -- /See:/ 'monitoredResourceDescriptor' smart constructor.
 data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
@@ -63,17 +62,18 @@ monitoredResourceDescriptor =
     }
 
 -- | Optional. The resource name of the monitored resource descriptor:
--- \`\"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\"\`
--- where {type} is the value of the \`type\` field in this object and
--- {project_id} is a project ID that provides API-specific context for
--- accessing the type. APIs that do not use project information can use the
--- resource name format \`\"monitoredResourceDescriptors\/{type}\"\`.
+-- \"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\" where
+-- {type} is the value of the type field in this object and {project_id} is
+-- a project ID that provides API-specific context for accessing the type.
+-- APIs that do not use project information can use the resource name
+-- format \"monitoredResourceDescriptors\/{type}\".
 mrdName :: Lens' MonitoredResourceDescriptor (Maybe Text)
 mrdName = lens _mrdName (\ s a -> s{_mrdName = a})
 
 -- | Optional. A concise name for the monitored resource type that might be
--- displayed in user interfaces. For example, \`\"Google Cloud SQL
--- Database\"\`.
+-- displayed in user interfaces. It should be a Title Cased Noun Phrase,
+-- without any article or other determiners. For example, \"Google Cloud
+-- SQL Database\".
 mrdDisplayName :: Lens' MonitoredResourceDescriptor (Maybe Text)
 mrdDisplayName
   = lens _mrdDisplayName
@@ -81,8 +81,7 @@ mrdDisplayName
 
 -- | Required. A set of labels used to describe instances of this monitored
 -- resource type. For example, an individual Google Cloud SQL database is
--- identified by values for the labels \`\"database_id\"\` and
--- \`\"zone\"\`.
+-- identified by values for the labels \"database_id\" and \"zone\".
 mrdLabels :: Lens' MonitoredResourceDescriptor [LabelDescriptor]
 mrdLabels
   = lens _mrdLabels (\ s a -> s{_mrdLabels = a}) .
@@ -90,7 +89,8 @@ mrdLabels
       . _Coerce
 
 -- | Required. The monitored resource type. For example, the type
--- \`\"cloudsql_database\"\` represents databases in Google Cloud SQL.
+-- \"cloudsql_database\" represents databases in Google Cloud SQL. The
+-- maximum length of this value is 256 characters.
 mrdType :: Lens' MonitoredResourceDescriptor (Maybe Text)
 mrdType = lens _mrdType (\ s a -> s{_mrdType = a})
 
@@ -121,7 +121,7 @@ instance ToJSON MonitoredResourceDescriptor where
                   ("type" .=) <$> _mrdType,
                   ("description" .=) <$> _mrdDescription])
 
--- | The \`ListTimeSeries\` response.
+-- | The ListTimeSeries response.
 --
 -- /See:/ 'listTimeSeriesResponse' smart constructor.
 data ListTimeSeriesResponse = ListTimeSeriesResponse'
@@ -146,7 +146,7 @@ listTimeSeriesResponse =
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as \`pageToken\` in the next call to this method.
+-- as pageToken in the next call to this method.
 ltsrNextPageToken :: Lens' ListTimeSeriesResponse (Maybe Text)
 ltsrNextPageToken
   = lens _ltsrNextPageToken
@@ -179,12 +179,12 @@ instance ToJSON ListTimeSeriesResponse where
 --
 -- /See:/ 'metricDescriptor' smart constructor.
 data MetricDescriptor = MetricDescriptor'
-    { _mdMetricKind  :: !(Maybe Text)
+    { _mdMetricKind  :: !(Maybe MetricDescriptorMetricKind)
     , _mdName        :: !(Maybe Text)
     , _mdDisplayName :: !(Maybe Text)
     , _mdLabels      :: !(Maybe [LabelDescriptor])
     , _mdType        :: !(Maybe Text)
-    , _mdValueType   :: !(Maybe Text)
+    , _mdValueType   :: !(Maybe MetricDescriptorValueType)
     , _mdDescription :: !(Maybe Text)
     , _mdUnit        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -223,8 +223,9 @@ metricDescriptor =
     }
 
 -- | Whether the metric records instantaneous values, changes to a value,
--- etc.
-mdMetricKind :: Lens' MetricDescriptor (Maybe Text)
+-- etc. Some combinations of metric_kind and value_type might not be
+-- supported.
+mdMetricKind :: Lens' MetricDescriptor (Maybe MetricDescriptorMetricKind)
 mdMetricKind
   = lens _mdMetricKind (\ s a -> s{_mdMetricKind = a})
 
@@ -245,9 +246,9 @@ mdDisplayName
 
 -- | The set of labels that can be used to describe a specific instance of
 -- this metric type. For example, the
--- \`compute.googleapis.com\/instance\/network\/received_bytes_count\`
--- metric type has a label, \`loadbalanced\`, that specifies whether the
--- traffic was received through a load balanced IP address.
+-- compute.googleapis.com\/instance\/network\/received_bytes_count metric
+-- type has a label, loadbalanced, that specifies whether the traffic was
+-- received through a load balanced IP address.
 mdLabels :: Lens' MetricDescriptor [LabelDescriptor]
 mdLabels
   = lens _mdLabels (\ s a -> s{_mdLabels = a}) .
@@ -255,7 +256,7 @@ mdLabels
       . _Coerce
 
 -- | The metric type including a DNS name prefix, for example
--- \`\"compute.googleapis.com\/instance\/cpu\/utilization\"\`. Metric types
+-- \"compute.googleapis.com\/instance\/cpu\/utilization\". Metric types
 -- should use a natural hierarchical grouping such as the following:
 -- compute.googleapis.com\/instance\/cpu\/utilization
 -- compute.googleapis.com\/instance\/disk\/read_ops_count
@@ -268,7 +269,8 @@ mdType :: Lens' MetricDescriptor (Maybe Text)
 mdType = lens _mdType (\ s a -> s{_mdType = a})
 
 -- | Whether the measurement is an integer, a floating-point number, etc.
-mdValueType :: Lens' MetricDescriptor (Maybe Text)
+-- Some combinations of metric_kind and value_type might not be supported.
+mdValueType :: Lens' MetricDescriptor (Maybe MetricDescriptorValueType)
 mdValueType
   = lens _mdValueType (\ s a -> s{_mdValueType = a})
 
@@ -280,28 +282,25 @@ mdDescription
       (\ s a -> s{_mdDescription = a})
 
 -- | The unit in which the metric value is reported. It is only applicable if
--- the \`value_type\` is \`INT64\`, \`DOUBLE\`, or \`DISTRIBUTION\`. The
--- supported units are a subset of [The Unified Code for Units of
--- Measure](http:\/\/unitsofmeasure.org\/ucum.html) standard: **Basic units
--- (UNIT)** * \`bit\` bit * \`By\` byte * \`s\` second * \`min\` minute *
--- \`h\` hour * \`d\` day **Prefixes (PREFIX)** * \`k\` kilo (10**3) *
--- \`M\` mega (10**6) * \`G\` giga (10**9) * \`T\` tera (10**12) * \`P\`
--- peta (10**15) * \`E\` exa (10**18) * \`Z\` zetta (10**21) * \`Y\` yotta
--- (10**24) * \`m\` milli (10**-3) * \`u\` micro (10**-6) * \`n\` nano
--- (10**-9) * \`p\` pico (10**-12) * \`f\` femto (10**-15) * \`a\` atto
--- (10**-18) * \`z\` zepto (10**-21) * \`y\` yocto (10**-24) * \`Ki\` kibi
--- (2**10) * \`Mi\` mebi (2**20) * \`Gi\` gibi (2**30) * \`Ti\` tebi
--- (2**40) **Grammar** The grammar includes the dimensionless unit \`1\`,
--- such as \`1\/s\`. The grammar also includes these connectors: * \`\/\`
--- division (as an infix operator, e.g. \`1\/s\`). * \`.\` multiplication
--- (as an infix operator, e.g. \`GBy.d\`) The grammar for a unit is as
--- follows: Expression = Component { \".\" Component } { \"\/\" Component }
--- ; Component = [ PREFIX ] UNIT [ Annotation ] | Annotation | \"1\" ;
--- Annotation = \"{\" NAME \"}\" ; Notes: * \`Annotation\` is just a
--- comment if it follows a \`UNIT\` and is equivalent to \`1\` if it is
--- used alone. For examples, \`{requests}\/s == 1\/s\`,
--- \`By{transmitted}\/s == By\/s\`. * \`NAME\` is a sequence of non-blank
--- printable ASCII characters not containing \'{\' or \'}\'.
+-- the value_type is INT64, DOUBLE, or DISTRIBUTION. The supported units
+-- are a subset of The Unified Code for Units of Measure
+-- (http:\/\/unitsofmeasure.org\/ucum.html) standard:Basic units (UNIT) bit
+-- bit By byte s second min minute h hour d dayPrefixes (PREFIX) k kilo
+-- (10**3) M mega (10**6) G giga (10**9) T tera (10**12) P peta (10**15) E
+-- exa (10**18) Z zetta (10**21) Y yotta (10**24) m milli (10**-3) u micro
+-- (10**-6) n nano (10**-9) p pico (10**-12) f femto (10**-15) a atto
+-- (10**-18) z zepto (10**-21) y yocto (10**-24) Ki kibi (2**10) Mi mebi
+-- (2**20) Gi gibi (2**30) Ti tebi (2**40)GrammarThe grammar includes the
+-- dimensionless unit 1, such as 1\/s.The grammar also includes these
+-- connectors: \/ division (as an infix operator, e.g. 1\/s). .
+-- multiplication (as an infix operator, e.g. GBy.d)The grammar for a unit
+-- is as follows: Expression = Component { \".\" Component } { \"\/\"
+-- Component } ; Component = [ PREFIX ] UNIT [ Annotation ] | Annotation |
+-- \"1\" ; Annotation = \"{\" NAME \"}\" ; Notes: Annotation is just a
+-- comment if it follows a UNIT and is equivalent to 1 if it is used alone.
+-- For examples, {requests}\/s == 1\/s, By{transmitted}\/s == By\/s. NAME
+-- is a sequence of non-blank printable ASCII characters not containing
+-- \'{\' or \'}\'.
 mdUnit :: Lens' MetricDescriptor (Maybe Text)
 mdUnit = lens _mdUnit (\ s a -> s{_mdUnit = a})
 
@@ -335,23 +334,23 @@ instance ToJSON MetricDescriptor where
 -- associated metadata. If a group\'s filter matches an available monitored
 -- resource, then that resource is a member of that group. Groups can
 -- contain any number of monitored resources, and each monitored resource
--- can be a member of any number of groups. Groups can be nested in
--- parent-child hierarchies. The \`parentName\` field identifies an
--- optional parent for each group. If a group has a parent, then the only
--- monitored resources available to be matched by the group\'s filter are
--- the resources contained in the parent group. In other words, a group
+-- can be a member of any number of groups.Groups can be nested in
+-- parent-child hierarchies. The parentName field identifies an optional
+-- parent for each group. If a group has a parent, then the only monitored
+-- resources available to be matched by the group\'s filter are the
+-- resources contained in the parent group. In other words, a group
 -- contains the monitored resources that match its filter and the filters
 -- of all the group\'s ancestors. A group without a parent can contain any
--- monitored resource. For example, consider an infrastructure running a
--- set of instances with two user-defined tags: \`\"environment\"\` and
--- \`\"role\"\`. A parent group has a filter,
--- \`environment=\"production\"\`. A child of that parent group has a
--- filter, \`role=\"transcoder\"\`. The parent group contains all instances
--- in the production environment, regardless of their roles. The child
--- group contains instances that have the transcoder role *and* are in the
--- production environment. The monitored resources contained in a group can
--- change at any moment, depending on what resources exist and what filters
--- are associated with the group and its ancestors.
+-- monitored resource.For example, consider an infrastructure running a set
+-- of instances with two user-defined tags: \"environment\" and \"role\". A
+-- parent group has a filter, environment=\"production\". A child of that
+-- parent group has a filter, role=\"transcoder\". The parent group
+-- contains all instances in the production environment, regardless of
+-- their roles. The child group contains instances that have the transcoder
+-- role and are in the production environment.The monitored resources
+-- contained in a group can change at any moment, depending on what
+-- resources exist and what filters are associated with the group and its
+-- ancestors.
 --
 -- /See:/ 'group'' smart constructor.
 data Group = Group'
@@ -386,11 +385,11 @@ group' =
     , _gParentName = Nothing
     }
 
--- | The name of this group. The format is
--- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. When
--- creating a group, this field is ignored and a new name is created
--- consisting of the project specified in the call to \`CreateGroup\` and a
--- unique \`{group_id}\` that is generated automatically. \'OutputOnly
+-- | Output only. The name of this group. The format is
+-- \"projects\/{project_id_or_number}\/groups\/{group_id}\". When creating
+-- a group, this field is ignored and a new name is created consisting of
+-- the project specified in the call to CreateGroup and a unique {group_id}
+-- that is generated automatically.
 gName :: Lens' Group (Maybe Text)
 gName = lens _gName (\ s a -> s{_gName = a})
 
@@ -411,8 +410,8 @@ gIsCluster
   = lens _gIsCluster (\ s a -> s{_gIsCluster = a})
 
 -- | The name of the group\'s parent, if it has one. The format is
--- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. For groups
--- with no parent, \`parentName\` is the empty string, \`\"\"\`.
+-- \"projects\/{project_id_or_number}\/groups\/{group_id}\". For groups
+-- with no parent, parentName is the empty string, \"\".
 gParentName :: Lens' Group (Maybe Text)
 gParentName
   = lens _gParentName (\ s a -> s{_gParentName = a})
@@ -472,7 +471,7 @@ typedValue =
     , _tvInt64Value = Nothing
     }
 
--- | A Boolean value: \`true\` or \`false\`.
+-- | A Boolean value: true or false.
 tvBoolValue :: Lens' TypedValue (Maybe Bool)
 tvBoolValue
   = lens _tvBoolValue (\ s a -> s{_tvBoolValue = a})
@@ -525,7 +524,7 @@ instance ToJSON TypedValue where
 
 -- | Required. Values for all of the labels listed in the associated
 -- monitored resource descriptor. For example, Cloud SQL databases use the
--- labels \`\"database_id\"\` and \`\"zone\"\`.
+-- labels \"database_id\" and \"zone\".
 --
 -- /See:/ 'monitoredResourceLabels' smart constructor.
 newtype MonitoredResourceLabels = MonitoredResourceLabels'
@@ -559,7 +558,7 @@ instance FromJSON MonitoredResourceLabels where
 instance ToJSON MonitoredResourceLabels where
         toJSON = toJSON . _mrlAddtional
 
--- | \`SourceContext\` represents information about the source of a protobuf
+-- | SourceContext represents information about the source of a protobuf
 -- element, like the file in which it is defined.
 --
 -- /See:/ 'sourceContext' smart constructor.
@@ -580,7 +579,8 @@ sourceContext =
     }
 
 -- | The path-qualified name of the .proto file that contained the associated
--- protobuf element. For example: \`\"google\/protobuf\/source.proto\"\`.
+-- protobuf element. For example:
+-- \"google\/protobuf\/source_context.proto\".
 scFileName :: Lens' SourceContext (Maybe Text)
 scFileName
   = lens _scFileName (\ s a -> s{_scFileName = a})
@@ -597,17 +597,17 @@ instance ToJSON SourceContext where
 
 -- | Distribution contains summary statistics for a population of values and,
 -- optionally, a histogram representing the distribution of those values
--- across a specified set of histogram buckets. The summary statistics are
+-- across a specified set of histogram buckets.The summary statistics are
 -- the count, mean, sum of the squared deviation from the mean, the
--- minimum, and the maximum of the set of population of values. The
+-- minimum, and the maximum of the set of population of values.The
 -- histogram is based on a sequence of buckets and gives a count of values
 -- that fall into each bucket. The boundaries of the buckets are given
 -- either explicitly or by specifying parameters for a method of computing
 -- them (buckets of fixed width or buckets of exponentially increasing
--- width). Although it is not forbidden, it is generally a bad idea to
+-- width).Although it is not forbidden, it is generally a bad idea to
 -- include non-finite values (infinities or NaNs) in the population of
--- values, as this will render the \`mean\` and
--- \`sum_of_squared_deviation\` fields meaningless.
+-- values, as this will render the mean and sum_of_squared_deviation fields
+-- meaningless.
 --
 -- /See:/ 'distribution' smart constructor.
 data Distribution = Distribution'
@@ -649,16 +649,16 @@ distribution =
 -- | The sum of squared deviations from the mean of the values in the
 -- population. For values x_i this is: Sum[i=1..n]((x_i - mean)^2) Knuth,
 -- \"The Art of Computer Programming\", Vol. 2, page 323, 3rd edition
--- describes Welford\'s method for accumulating this sum in one pass. If
--- \`count\` is zero then this field must be zero.
+-- describes Welford\'s method for accumulating this sum in one pass.If
+-- count is zero then this field must be zero.
 dSumOfSquaredDeviation :: Lens' Distribution (Maybe Double)
 dSumOfSquaredDeviation
   = lens _dSumOfSquaredDeviation
       (\ s a -> s{_dSumOfSquaredDeviation = a})
       . mapping _Coerce
 
--- | The arithmetic mean of the values in the population. If \`count\` is
--- zero then this field must be zero.
+-- | The arithmetic mean of the values in the population. If count is zero
+-- then this field must be zero.
 dMean :: Lens' Distribution (Maybe Double)
 dMean
   = lens _dMean (\ s a -> s{_dMean = a}) .
@@ -670,15 +670,14 @@ dCount
   = lens _dCount (\ s a -> s{_dCount = a}) .
       mapping _Coerce
 
--- | If \`bucket_options\` is given, then the sum of the values in
--- \`bucket_counts\` must equal the value in \`count\`. If
--- \`bucket_options\` is not given, no \`bucket_counts\` fields may be
--- given. Bucket counts are given in order under the numbering scheme
--- described above (the underflow bucket has number 0; the finite buckets,
--- if any, have numbers 1 through N-2; the overflow bucket has number N-1).
--- The size of \`bucket_counts\` must be no greater than N as defined in
--- \`bucket_options\`. Any suffix of trailing zero bucket_count fields may
--- be omitted.
+-- | If bucket_options is given, then the sum of the values in bucket_counts
+-- must equal the value in count. If bucket_options is not given, no
+-- bucket_counts fields may be given.Bucket counts are given in order under
+-- the numbering scheme described above (the underflow bucket has number 0;
+-- the finite buckets, if any, have numbers 1 through N-2; the overflow
+-- bucket has number N-1).The size of bucket_counts must be no greater than
+-- N as defined in bucket_options.Any suffix of trailing zero bucket_count
+-- fields may be omitted.
 dBucketCounts :: Lens' Distribution [Int64]
 dBucketCounts
   = lens _dBucketCounts
@@ -687,7 +686,8 @@ dBucketCounts
       . _Coerce
 
 -- | If specified, contains the range of the population values. The field
--- must not be present if the \`count\` is zero.
+-- must not be present if the count is zero. This field is presently
+-- ignored by the Stackdriver Monitoring API v3.
 dRange :: Lens' Distribution (Maybe Range)
 dRange = lens _dRange (\ s a -> s{_dRange = a})
 
@@ -723,11 +723,11 @@ instance ToJSON Distribution where
 --
 -- /See:/ 'field' smart constructor.
 data Field = Field'
-    { _fKind         :: !(Maybe Text)
+    { _fKind         :: !(Maybe FieldKind)
     , _fOneofIndex   :: !(Maybe (Textual Int32))
     , _fName         :: !(Maybe Text)
     , _fJSONName     :: !(Maybe Text)
-    , _fCardinality  :: !(Maybe Text)
+    , _fCardinality  :: !(Maybe FieldCardinality)
     , _fOptions      :: !(Maybe [Option])
     , _fPacked       :: !(Maybe Bool)
     , _fDefaultValue :: !(Maybe Text)
@@ -775,12 +775,12 @@ field =
     }
 
 -- | The field type.
-fKind :: Lens' Field (Maybe Text)
+fKind :: Lens' Field (Maybe FieldKind)
 fKind = lens _fKind (\ s a -> s{_fKind = a})
 
--- | The index of the field type in \`Type.oneofs\`, for message or
--- enumeration types. The first type has index 1; zero means the type is
--- not in the list.
+-- | The index of the field type in Type.oneofs, for message or enumeration
+-- types. The first type has index 1; zero means the type is not in the
+-- list.
 fOneofIndex :: Lens' Field (Maybe Int32)
 fOneofIndex
   = lens _fOneofIndex (\ s a -> s{_fOneofIndex = a}) .
@@ -796,7 +796,7 @@ fJSONName
   = lens _fJSONName (\ s a -> s{_fJSONName = a})
 
 -- | The field cardinality.
-fCardinality :: Lens' Field (Maybe Text)
+fCardinality :: Lens' Field (Maybe FieldCardinality)
 fCardinality
   = lens _fCardinality (\ s a -> s{_fCardinality = a})
 
@@ -824,7 +824,7 @@ fNumber
       mapping _Coerce
 
 -- | The field type URL, without the scheme, for message or enumeration
--- types. Example: \`\"type.googleapis.com\/google.protobuf.Timestamp\"\`.
+-- types. Example: \"type.googleapis.com\/google.protobuf.Timestamp\".
 fTypeURL :: Lens' Field (Maybe Text)
 fTypeURL = lens _fTypeURL (\ s a -> s{_fTypeURL = a})
 
@@ -862,7 +862,7 @@ instance ToJSON Field where
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
 -- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
--- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+-- JSON representation for Empty is empty JSON object {}.
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
@@ -881,7 +881,7 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const emptyObject
 
--- | The \`ListGroups\` response.
+-- | The ListGroups response.
 --
 -- /See:/ 'listGroupsResponse' smart constructor.
 data ListGroupsResponse = ListGroupsResponse'
@@ -906,7 +906,7 @@ listGroupsResponse =
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as \`pageToken\` in the next call to this method.
+-- as pageToken in the next call to this method.
 lgrNextPageToken :: Lens' ListGroupsResponse (Maybe Text)
 lgrNextPageToken
   = lens _lgrNextPageToken
@@ -934,7 +934,7 @@ instance ToJSON ListGroupsResponse where
                  [("nextPageToken" .=) <$> _lgrNextPageToken,
                   ("group" .=) <$> _lgrGroup])
 
--- | The \`ListMetricDescriptors\` response.
+-- | The ListMetricDescriptors response.
 --
 -- /See:/ 'listMetricDescriptorsResponse' smart constructor.
 data ListMetricDescriptorsResponse = ListMetricDescriptorsResponse'
@@ -958,7 +958,7 @@ listMetricDescriptorsResponse =
     }
 
 -- | The metric descriptors that are available to the project and that match
--- the value of \`filter\`, if present.
+-- the value of filter, if present.
 lmdrMetricDescriptors :: Lens' ListMetricDescriptorsResponse [MetricDescriptor]
 lmdrMetricDescriptors
   = lens _lmdrMetricDescriptors
@@ -968,7 +968,7 @@ lmdrMetricDescriptors
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as \`pageToken\` in the next call to this method.
+-- as pageToken in the next call to this method.
 lmdrNextPageToken :: Lens' ListMetricDescriptorsResponse (Maybe Text)
 lmdrNextPageToken
   = lens _lmdrNextPageToken
@@ -989,7 +989,7 @@ instance ToJSON ListMetricDescriptorsResponse where
                  [("metricDescriptors" .=) <$> _lmdrMetricDescriptors,
                   ("nextPageToken" .=) <$> _lmdrNextPageToken])
 
--- | The option\'s value. For example, \`\"com.google.protobuf\"\`.
+-- | The option\'s value. For example, \"com.google.protobuf\".
 --
 -- /See:/ 'optionValue' smart constructor.
 newtype OptionValue = OptionValue'
@@ -1009,7 +1009,7 @@ optionValue pOvAddtional_ =
     { _ovAddtional = _Coerce # pOvAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 ovAddtional :: Lens' OptionValue (HashMap Text JSONValue)
 ovAddtional
   = lens _ovAddtional (\ s a -> s{_ovAddtional = a}) .
@@ -1023,7 +1023,7 @@ instance FromJSON OptionValue where
 instance ToJSON OptionValue where
         toJSON = toJSON . _ovAddtional
 
--- | The \`CreateTimeSeries\` request.
+-- | The CreateTimeSeries request.
 --
 -- /See:/ 'createTimeSeriesRequest' smart constructor.
 newtype CreateTimeSeriesRequest = CreateTimeSeriesRequest'
@@ -1044,9 +1044,9 @@ createTimeSeriesRequest =
 
 -- | The new data to be added to a list of time series. Adds at most one data
 -- point to each of several time series. The new data point must be more
--- recent than any other point in its time series. Each \`TimeSeries\`
--- value must fully specify a unique time series by supplying all label
--- values for the metric and the monitored resource.
+-- recent than any other point in its time series. Each TimeSeries value
+-- must fully specify a unique time series by supplying all label values
+-- for the metric and the monitored resource.
 ctsrTimeSeries :: Lens' CreateTimeSeriesRequest [TimeSeries]
 ctsrTimeSeries
   = lens _ctsrTimeSeries
@@ -1066,7 +1066,7 @@ instance ToJSON CreateTimeSeriesRequest where
           = object
               (catMaybes [("timeSeries" .=) <$> _ctsrTimeSeries])
 
--- | The \`ListMonitoredResourcDescriptors\` response.
+-- | The ListMonitoredResourcDescriptors response.
 --
 -- /See:/ 'listMonitoredResourceDescriptorsResponse' smart constructor.
 data ListMonitoredResourceDescriptorsResponse = ListMonitoredResourceDescriptorsResponse'
@@ -1091,14 +1091,14 @@ listMonitoredResourceDescriptorsResponse =
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as \`pageToken\` in the next call to this method.
+-- as pageToken in the next call to this method.
 lmrdrNextPageToken :: Lens' ListMonitoredResourceDescriptorsResponse (Maybe Text)
 lmrdrNextPageToken
   = lens _lmrdrNextPageToken
       (\ s a -> s{_lmrdrNextPageToken = a})
 
 -- | The monitored resource descriptors that are available to this project
--- and that match \`filter\`, if present.
+-- and that match filter, if present.
 lmrdrResourceDescriptors :: Lens' ListMonitoredResourceDescriptorsResponse [MonitoredResourceDescriptor]
 lmrdrResourceDescriptors
   = lens _lmrdrResourceDescriptors
@@ -1125,12 +1125,12 @@ instance ToJSON
                   ("resourceDescriptors" .=) <$>
                     _lmrdrResourceDescriptors])
 
--- | A set of buckets with arbitrary widths. Defines \`size(bounds) + 1\` (=
--- N) buckets with these boundaries for bucket i: Upper bound (0 \<= i \<
--- N-1): bounds[i] Lower bound (1 \<= i \< N); bounds[i - 1] There must be
--- at least one element in \`bounds\`. If \`bounds\` has only one element,
--- there are no finite buckets, and that single element is the common
--- boundary of the overflow and underflow buckets.
+-- | A set of buckets with arbitrary widths.Defines size(bounds) + 1 (= N)
+-- buckets with these boundaries for bucket i:Upper bound (0 \<= i \< N-1):
+-- boundsi Lower bound (1 \<= i \< N); boundsi - 1There must be at least
+-- one element in bounds. If bounds has only one element, there are no
+-- finite buckets, and that single element is the common boundary of the
+-- overflow and underflow buckets.
 --
 -- /See:/ 'explicit' smart constructor.
 newtype Explicit = Explicit'
@@ -1165,8 +1165,7 @@ instance ToJSON Explicit where
           = object (catMaybes [("bounds" .=) <$> _eBounds])
 
 -- | The set of labels that uniquely identify a metric. To specify a metric,
--- all labels enumerated in the \`MetricDescriptor\` must be assigned
--- values.
+-- all labels enumerated in the MetricDescriptor must be assigned values.
 --
 -- /See:/ 'metricLabels' smart constructor.
 newtype MetricLabels = MetricLabels'
@@ -1199,7 +1198,7 @@ instance FromJSON MetricLabels where
 instance ToJSON MetricLabels where
         toJSON = toJSON . _mlAddtional
 
--- | The measurement metadata. Example: \`\"process_id\" -> 12345\`
+-- | The measurement metadata. Example: \"process_id\" -> 12345
 --
 -- /See:/ 'collectdPayloadMetadata' smart constructor.
 newtype CollectdPayloadMetadata = CollectdPayloadMetadata'
@@ -1233,12 +1232,12 @@ instance FromJSON CollectdPayloadMetadata where
 instance ToJSON CollectdPayloadMetadata where
         toJSON = toJSON . _cpmAddtional
 
--- | A single data point from a \`collectd\`-based plugin.
+-- | A single data point from a collectd-based plugin.
 --
 -- /See:/ 'collectdValue' smart constructor.
 data CollectdValue = CollectdValue'
     { _cvDataSourceName :: !(Maybe Text)
-    , _cvDataSourceType :: !(Maybe Text)
+    , _cvDataSourceType :: !(Maybe CollectdValueDataSourceType)
     , _cvValue          :: !(Maybe TypedValue)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1260,15 +1259,15 @@ collectdValue =
     , _cvValue = Nothing
     }
 
--- | The data source for the \`collectd\` value. For example there are two
--- data sources for network measurements: \`\"rx\"\` and \`\"tx\"\`.
+-- | The data source for the collectd value. For example there are two data
+-- sources for network measurements: \"rx\" and \"tx\".
 cvDataSourceName :: Lens' CollectdValue (Maybe Text)
 cvDataSourceName
   = lens _cvDataSourceName
       (\ s a -> s{_cvDataSourceName = a})
 
 -- | The type of measurement.
-cvDataSourceType :: Lens' CollectdValue (Maybe Text)
+cvDataSourceType :: Lens' CollectdValue (Maybe CollectdValueDataSourceType)
 cvDataSourceType
   = lens _cvDataSourceType
       (\ s a -> s{_cvDataSourceType = a})
@@ -1293,7 +1292,7 @@ instance ToJSON CollectdValue where
                   ("dataSourceType" .=) <$> _cvDataSourceType,
                   ("value" .=) <$> _cvValue])
 
--- | The \`CreateCollectdTimeSeries\` request.
+-- | The CreateCollectdTimeSeries request.
 --
 -- /See:/ 'createCollectdTimeSeriesRequest' smart constructor.
 data CreateCollectdTimeSeriesRequest = CreateCollectdTimeSeriesRequest'
@@ -1320,10 +1319,10 @@ createCollectdTimeSeriesRequest =
     , _cctsrCollectdVersion = Nothing
     }
 
--- | The \`collectd\` payloads representing the time series data. You must
--- not include more than a single point for each time series, so no two
--- payloads can have the same values for all of the fields \`plugin\`,
--- \`plugin_instance\`, \`type\`, and \`type_instance\`.
+-- | The collectd payloads representing the time series data. You must not
+-- include more than a single point for each time series, so no two
+-- payloads can have the same values for all of the fields plugin,
+-- plugin_instance, type, and type_instance.
 cctsrCollectdPayloads :: Lens' CreateCollectdTimeSeriesRequest [CollectdPayload]
 cctsrCollectdPayloads
   = lens _cctsrCollectdPayloads
@@ -1337,8 +1336,8 @@ cctsrResource
   = lens _cctsrResource
       (\ s a -> s{_cctsrResource = a})
 
--- | The version of \`collectd\` that collected the data. Example:
--- \`\"5.3.0-192.el6\"\`.
+-- | The version of collectd that collected the data. Example:
+-- \"5.3.0-192.el6\".
 cctsrCollectdVersion :: Lens' CreateCollectdTimeSeriesRequest (Maybe Text)
 cctsrCollectdVersion
   = lens _cctsrCollectdVersion
@@ -1389,7 +1388,14 @@ point =
 pValue :: Lens' Point (Maybe TypedValue)
 pValue = lens _pValue (\ s a -> s{_pValue = a})
 
--- | The time interval to which the value applies.
+-- | The time interval to which the data point applies. For GAUGE metrics,
+-- only the end time of the interval is used. For DELTA metrics, the start
+-- and end time should specify a non-zero interval, with subsequent points
+-- specifying contiguous and non-overlapping intervals. For CUMULATIVE
+-- metrics, the start and end time should specify a non-zero interval, with
+-- subsequent points specifying the same start time and increasing end
+-- times, until an event resets the cumulative value to zero and sets a new
+-- start time for the following points.
 pInterval :: Lens' Point (Maybe TimeInterval)
 pInterval
   = lens _pInterval (\ s a -> s{_pInterval = a})
@@ -1407,16 +1413,16 @@ instance ToJSON Point where
                  [("value" .=) <$> _pValue,
                   ("interval" .=) <$> _pInterval])
 
--- | A collection of data points sent from a \`collectd\`-based plugin. See
--- the \`collectd\` documentation for more information.
+-- | A collection of data points sent from a collectd-based plugin. See the
+-- collectd documentation for more information.
 --
 -- /See:/ 'collectdPayload' smart constructor.
 data CollectdPayload = CollectdPayload'
-    { _cpStartTime      :: !(Maybe Text)
+    { _cpStartTime      :: !(Maybe DateTime')
     , _cpPluginInstance :: !(Maybe Text)
     , _cpValues         :: !(Maybe [CollectdValue])
     , _cpTypeInstance   :: !(Maybe Text)
-    , _cpEndTime        :: !(Maybe Text)
+    , _cpEndTime        :: !(Maybe DateTime')
     , _cpMetadata       :: !(Maybe CollectdPayloadMetadata)
     , _cpType           :: !(Maybe Text)
     , _cpPlugin         :: !(Maybe Text)
@@ -1456,45 +1462,47 @@ collectdPayload =
     }
 
 -- | The start time of the interval.
-cpStartTime :: Lens' CollectdPayload (Maybe Text)
+cpStartTime :: Lens' CollectdPayload (Maybe UTCTime)
 cpStartTime
-  = lens _cpStartTime (\ s a -> s{_cpStartTime = a})
+  = lens _cpStartTime (\ s a -> s{_cpStartTime = a}) .
+      mapping _DateTime
 
--- | The instance name of the plugin Example: \`\"hdcl\"\`.
+-- | The instance name of the plugin Example: \"hdcl\".
 cpPluginInstance :: Lens' CollectdPayload (Maybe Text)
 cpPluginInstance
   = lens _cpPluginInstance
       (\ s a -> s{_cpPluginInstance = a})
 
 -- | The measured values during this time interval. Each value must have a
--- different \`dataSourceName\`.
+-- different dataSourceName.
 cpValues :: Lens' CollectdPayload [CollectdValue]
 cpValues
   = lens _cpValues (\ s a -> s{_cpValues = a}) .
       _Default
       . _Coerce
 
--- | The measurement type instance. Example: \`\"used\"\`.
+-- | The measurement type instance. Example: \"used\".
 cpTypeInstance :: Lens' CollectdPayload (Maybe Text)
 cpTypeInstance
   = lens _cpTypeInstance
       (\ s a -> s{_cpTypeInstance = a})
 
 -- | The end time of the interval.
-cpEndTime :: Lens' CollectdPayload (Maybe Text)
+cpEndTime :: Lens' CollectdPayload (Maybe UTCTime)
 cpEndTime
-  = lens _cpEndTime (\ s a -> s{_cpEndTime = a})
+  = lens _cpEndTime (\ s a -> s{_cpEndTime = a}) .
+      mapping _DateTime
 
--- | The measurement metadata. Example: \`\"process_id\" -> 12345\`
+-- | The measurement metadata. Example: \"process_id\" -> 12345
 cpMetadata :: Lens' CollectdPayload (Maybe CollectdPayloadMetadata)
 cpMetadata
   = lens _cpMetadata (\ s a -> s{_cpMetadata = a})
 
--- | The measurement type. Example: \`\"memory\"\`.
+-- | The measurement type. Example: \"memory\".
 cpType :: Lens' CollectdPayload (Maybe Text)
 cpType = lens _cpType (\ s a -> s{_cpType = a})
 
--- | The name of the plugin. Example: \`\"disk\"\`.
+-- | The name of the plugin. Example: \"disk\".
 cpPlugin :: Lens' CollectdPayload (Maybe Text)
 cpPlugin = lens _cpPlugin (\ s a -> s{_cpPlugin = a})
 
@@ -1525,7 +1533,7 @@ instance ToJSON CollectdPayload where
                   ("plugin" .=) <$> _cpPlugin])
 
 -- | A specific metric identified by specifying values for all of the labels
--- of a \`MetricDescriptor\`.
+-- of a MetricDescriptor.
 --
 -- /See:/ 'metric' smart constructor.
 data Metric = Metric'
@@ -1549,13 +1557,12 @@ metric =
     }
 
 -- | The set of labels that uniquely identify a metric. To specify a metric,
--- all labels enumerated in the \`MetricDescriptor\` must be assigned
--- values.
+-- all labels enumerated in the MetricDescriptor must be assigned values.
 mLabels :: Lens' Metric (Maybe MetricLabels)
 mLabels = lens _mLabels (\ s a -> s{_mLabels = a})
 
 -- | An existing metric type, see google.api.MetricDescriptor. For example,
--- \`compute.googleapis.com\/instance\/cpu\/usage_time\`.
+-- compute.googleapis.com\/instance\/cpu\/usage_time.
 mType :: Lens' Metric (Maybe Text)
 mType = lens _mType (\ s a -> s{_mType = a})
 
@@ -1573,10 +1580,10 @@ instance ToJSON Metric where
 
 -- | Specify a sequence of buckets that have a width that is proportional to
 -- the value of the lower bound. Each bucket represents a constant relative
--- uncertainty on a specific value in the bucket. Defines
--- \`num_finite_buckets + 2\` (= N) buckets with these boundaries for
--- bucket i: Upper bound (0 \<= i \< N-1): scale * (growth_factor ^ i).
--- Lower bound (1 \<= i \< N): scale * (growth_factor ^ (i - 1)).
+-- uncertainty on a specific value in the bucket.Defines num_finite_buckets
+-- + 2 (= N) buckets with these boundaries for bucket i:Upper bound (0 \<=
+-- i \< N-1): scale * (growth_factor ^ i). Lower bound (1 \<= i \< N):
+-- scale * (growth_factor ^ (i - 1)).
 --
 -- /See:/ 'exponential' smart constructor.
 data Exponential = Exponential'
@@ -1603,20 +1610,20 @@ exponential =
     , _eNumFiniteBuckets = Nothing
     }
 
--- | Must be greater than 1
+-- | Must be greater than 1.
 eGrowthFactor :: Lens' Exponential (Maybe Double)
 eGrowthFactor
   = lens _eGrowthFactor
       (\ s a -> s{_eGrowthFactor = a})
       . mapping _Coerce
 
--- | Must be greater than 0
+-- | Must be greater than 0.
 eScale :: Lens' Exponential (Maybe Double)
 eScale
   = lens _eScale (\ s a -> s{_eScale = a}) .
       mapping _Coerce
 
--- | must be greater than 0
+-- | Must be greater than 0.
 eNumFiniteBuckets :: Lens' Exponential (Maybe Int32)
 eNumFiniteBuckets
   = lens _eNumFiniteBuckets
@@ -1687,15 +1694,15 @@ instance ToJSON Range where
 
 -- | An object representing a resource that can be used for monitoring,
 -- logging, billing, or other purposes. Examples include virtual machine
--- instances, databases, and storage devices such as disks. The \`type\`
--- field identifies a MonitoredResourceDescriptor object that describes the
--- resource\'s schema. Information in the \`labels\` field identifies the
+-- instances, databases, and storage devices such as disks. The type field
+-- identifies a MonitoredResourceDescriptor object that describes the
+-- resource\'s schema. Information in the labels field identifies the
 -- actual resource and its attributes according to the schema. For example,
 -- a particular Compute Engine VM instance could be represented by the
 -- following object, because the MonitoredResourceDescriptor for
--- \`\"gce_instance\"\` has labels \`\"instance_id\"\` and \`\"zone\"\`: {
--- \"type\": \"gce_instance\", \"labels\": { \"instance_id\":
--- \"my-instance\", \"zone\": \"us-central1-a\" }}
+-- \"gce_instance\" has labels \"instance_id\" and \"zone\": { \"type\":
+-- \"gce_instance\", \"labels\": { \"instance_id\": \"12345678901234\",
+-- \"zone\": \"us-central1-a\" }}
 --
 -- /See:/ 'monitoredResource' smart constructor.
 data MonitoredResource = MonitoredResource'
@@ -1720,13 +1727,13 @@ monitoredResource =
 
 -- | Required. Values for all of the labels listed in the associated
 -- monitored resource descriptor. For example, Cloud SQL databases use the
--- labels \`\"database_id\"\` and \`\"zone\"\`.
+-- labels \"database_id\" and \"zone\".
 mrLabels :: Lens' MonitoredResource (Maybe MonitoredResourceLabels)
 mrLabels = lens _mrLabels (\ s a -> s{_mrLabels = a})
 
--- | Required. The monitored resource type. This field must match the
--- \`type\` field of a MonitoredResourceDescriptor object. For example, the
--- type of a Cloud SQL database is \`\"cloudsql_database\"\`.
+-- | Required. The monitored resource type. This field must match the type
+-- field of a MonitoredResourceDescriptor object. For example, the type of
+-- a Cloud SQL database is \"cloudsql_database\".
 mrType :: Lens' MonitoredResource (Maybe Text)
 mrType = lens _mrType (\ s a -> s{_mrType = a})
 
@@ -1744,14 +1751,14 @@ instance ToJSON MonitoredResource where
                  [("labels" .=) <$> _mrLabels,
                   ("type" .=) <$> _mrType])
 
--- | A time interval extending from after \`startTime\` through \`endTime\`.
--- If \`startTime\` is omitted, the interval is the single point in time,
--- \`endTime\`.
+-- | A time interval extending just after a start time through an end time.
+-- If the start time is the same as the end time, then the interval
+-- represents a single point in time.
 --
 -- /See:/ 'timeInterval' smart constructor.
 data TimeInterval = TimeInterval'
-    { _tiStartTime :: !(Maybe Text)
-    , _tiEndTime   :: !(Maybe Text)
+    { _tiStartTime :: !(Maybe DateTime')
+    , _tiEndTime   :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeInterval' with the minimum fields required to make a request.
@@ -1769,18 +1776,19 @@ timeInterval =
     , _tiEndTime = Nothing
     }
 
--- | If this value is omitted, the interval is a point in time, \`endTime\`.
--- If \`startTime\` is present, it must be earlier than (less than)
--- \`endTime\`. The interval begins after \`startTime\`—it does not include
--- \`startTime\`.
-tiStartTime :: Lens' TimeInterval (Maybe Text)
+-- | Optional. The beginning of the time interval. The default value for the
+-- start time is the end time. The start time must not be later than the
+-- end time.
+tiStartTime :: Lens' TimeInterval (Maybe UTCTime)
 tiStartTime
-  = lens _tiStartTime (\ s a -> s{_tiStartTime = a})
+  = lens _tiStartTime (\ s a -> s{_tiStartTime = a}) .
+      mapping _DateTime
 
--- | Required. The end of the interval. The interval includes this time.
-tiEndTime :: Lens' TimeInterval (Maybe Text)
+-- | Required. The end of the time interval.
+tiEndTime :: Lens' TimeInterval (Maybe UTCTime)
 tiEndTime
-  = lens _tiEndTime (\ s a -> s{_tiEndTime = a})
+  = lens _tiEndTime (\ s a -> s{_tiEndTime = a}) .
+      mapping _DateTime
 
 instance FromJSON TimeInterval where
         parseJSON
@@ -1796,7 +1804,7 @@ instance ToJSON TimeInterval where
                  [("startTime" .=) <$> _tiStartTime,
                   ("endTime" .=) <$> _tiEndTime])
 
--- | The \`ListGroupMembers\` response.
+-- | The ListGroupMembers response.
 --
 -- /See:/ 'listGroupMembersResponse' smart constructor.
 data ListGroupMembersResponse = ListGroupMembersResponse'
@@ -1825,7 +1833,7 @@ listGroupMembersResponse =
 
 -- | If there are more results than have been returned, then this field is
 -- set to a non-empty value. To see the additional results, use that value
--- as \`pageToken\` in the next call to this method.
+-- as pageToken in the next call to this method.
 lgmrNextPageToken :: Lens' ListGroupMembersResponse (Maybe Text)
 lgmrNextPageToken
   = lens _lgmrNextPageToken
@@ -1867,7 +1875,7 @@ instance ToJSON ListGroupMembersResponse where
 -- /See:/ 'labelDescriptor' smart constructor.
 data LabelDescriptor = LabelDescriptor'
     { _ldKey         :: !(Maybe Text)
-    , _ldValueType   :: !(Maybe Text)
+    , _ldValueType   :: !(Maybe LabelDescriptorValueType)
     , _ldDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1894,7 +1902,7 @@ ldKey :: Lens' LabelDescriptor (Maybe Text)
 ldKey = lens _ldKey (\ s a -> s{_ldKey = a})
 
 -- | The type of data that can be assigned to the label.
-ldValueType :: Lens' LabelDescriptor (Maybe Text)
+ldValueType :: Lens' LabelDescriptor (Maybe LabelDescriptorValueType)
 ldValueType
   = lens _ldValueType (\ s a -> s{_ldValueType = a})
 
@@ -1922,10 +1930,10 @@ instance ToJSON LabelDescriptor where
 
 -- | Specify a sequence of buckets that all have the same width (except
 -- overflow and underflow). Each bucket represents a constant absolute
--- uncertainty on the specific value in the bucket. Defines
--- \`num_finite_buckets + 2\` (= N) buckets with these boundaries for
--- bucket \`i\`: Upper bound (0 \<= i \< N-1): offset + (width * i). Lower
--- bound (1 \<= i \< N): offset + (width * (i - 1)).
+-- uncertainty on the specific value in the bucket.Defines
+-- num_finite_buckets + 2 (= N) buckets with these boundaries for bucket
+-- i:Upper bound (0 \<= i \< N-1): offset + (width * i). Lower bound (1 \<=
+-- i \< N): offset + (width * (i - 1)).
 --
 -- /See:/ 'linear' smart constructor.
 data Linear = Linear'
@@ -1996,7 +2004,7 @@ data Type = Type'
     , _tName          :: !(Maybe Text)
     , _tOptions       :: !(Maybe [Option])
     , _tFields        :: !(Maybe [Field])
-    , _tSyntax        :: !(Maybe Text)
+    , _tSyntax        :: !(Maybe TypeSyntax)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Type' with the minimum fields required to make a request.
@@ -2032,7 +2040,7 @@ tSourceContext
   = lens _tSourceContext
       (\ s a -> s{_tSourceContext = a})
 
--- | The list of types appearing in \`oneof\` definitions in this type.
+-- | The list of types appearing in oneof definitions in this type.
 tOneofs :: Lens' Type [Text]
 tOneofs
   = lens _tOneofs (\ s a -> s{_tOneofs = a}) . _Default
@@ -2056,7 +2064,7 @@ tFields
       . _Coerce
 
 -- | The source syntax.
-tSyntax :: Lens' Type (Maybe Text)
+tSyntax :: Lens' Type (Maybe TypeSyntax)
 tSyntax = lens _tSyntax (\ s a -> s{_tSyntax = a})
 
 instance FromJSON Type where
@@ -2105,11 +2113,11 @@ option =
     , _oName = Nothing
     }
 
--- | The option\'s value. For example, \`\"com.google.protobuf\"\`.
+-- | The option\'s value. For example, \"com.google.protobuf\".
 oValue :: Lens' Option (Maybe OptionValue)
 oValue = lens _oValue (\ s a -> s{_oValue = a})
 
--- | The option\'s name. For example, \`\"java_package\"\`.
+-- | The option\'s name. For example, \"java_package\".
 oName :: Lens' Option (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -2126,23 +2134,23 @@ instance ToJSON Option where
                  [("value" .=) <$> _oValue, ("name" .=) <$> _oName])
 
 -- | A Distribution may optionally contain a histogram of the values in the
--- population. The histogram is given in \`bucket_counts\` as counts of
--- values that fall into one of a sequence of non-overlapping buckets. The
--- sequence of buckets is described by \`bucket_options\`. A bucket
--- specifies an inclusive lower bound and exclusive upper bound for the
--- values that are counted for that bucket. The upper bound of a bucket is
--- strictly greater than the lower bound. The sequence of N buckets for a
--- Distribution consists of an underflow bucket (number 0), zero or more
--- finite buckets (number 1 through N - 2) and an overflow bucket (number N
--- - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is
--- the same as the upper bound of bucket i - 1. The buckets span the whole
--- range of finite values: lower bound of the underflow bucket is -infinity
--- and the upper bound of the overflow bucket is +infinity. The finite
--- buckets are so-called because both bounds are finite. \`BucketOptions\`
--- describes bucket boundaries in one of three ways. Two describe the
--- boundaries by giving parameters for a formula to generate boundaries and
--- one gives the bucket boundaries explicitly. If \`bucket_boundaries\` is
--- not given, then no \`bucket_counts\` may be given.
+-- population. The histogram is given in bucket_counts as counts of values
+-- that fall into one of a sequence of non-overlapping buckets. The
+-- sequence of buckets is described by bucket_options.A bucket specifies an
+-- inclusive lower bound and exclusive upper bound for the values that are
+-- counted for that bucket. The upper bound of a bucket is strictly greater
+-- than the lower bound.The sequence of N buckets for a Distribution
+-- consists of an underflow bucket (number 0), zero or more finite buckets
+-- (number 1 through N - 2) and an overflow bucket (number N - 1). The
+-- buckets are contiguous: the lower bound of bucket i (i > 0) is the same
+-- as the upper bound of bucket i - 1. The buckets span the whole range of
+-- finite values: lower bound of the underflow bucket is -infinity and the
+-- upper bound of the overflow bucket is +infinity. The finite buckets are
+-- so-called because both bounds are finite.BucketOptions describes bucket
+-- boundaries in one of three ways. Two describe the boundaries by giving
+-- parameters for a formula to generate boundaries and one gives the bucket
+-- boundaries explicitly.If bucket_options is not given, then no
+-- bucket_counts may be given.
 --
 -- /See:/ 'bucketOptions' smart constructor.
 data BucketOptions = BucketOptions'
@@ -2204,17 +2212,18 @@ instance ToJSON BucketOptions where
                   ("linearBuckets" .=) <$> _boLinearBuckets,
                   ("explicitBuckets" .=) <$> _boExplicitBuckets])
 
--- | A collection of data points that describes the time-varying nature of a
+-- | A collection of data points that describes the time-varying values of a
 -- metric. A time series is identified by a combination of a
--- fully-specified monitored resource and a fully-specified metric.
+-- fully-specified monitored resource and a fully-specified metric. This
+-- type is used for both listing and creating time series.
 --
 -- /See:/ 'timeSeries' smart constructor.
 data TimeSeries = TimeSeries'
     { _tsPoints     :: !(Maybe [Point])
-    , _tsMetricKind :: !(Maybe Text)
+    , _tsMetricKind :: !(Maybe TimeSeriesMetricKind)
     , _tsMetric     :: !(Maybe Metric)
     , _tsResource   :: !(Maybe MonitoredResource)
-    , _tsValueType  :: !(Maybe Text)
+    , _tsValueType  :: !(Maybe TimeSeriesValueType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeSeries' with the minimum fields required to make a request.
@@ -2241,39 +2250,48 @@ timeSeries =
     , _tsValueType = Nothing
     }
 
--- | The data points of this time series. When used as output, points will be
--- sorted by decreasing time order. When used as input, points could be
--- written in any orders.
+-- | The data points of this time series. When listing time series, the order
+-- of the points is specified by the list method.When creating a time
+-- series, this field must contain exactly one point and the point\'s type
+-- must be the same as the value type of the associated metric. If the
+-- associated metric\'s descriptor must be auto-created, then the value
+-- type of the descriptor is determined by the point\'s type, which must be
+-- BOOL, INT64, DOUBLE, or DISTRIBUTION.
 tsPoints :: Lens' TimeSeries [Point]
 tsPoints
   = lens _tsPoints (\ s a -> s{_tsPoints = a}) .
       _Default
       . _Coerce
 
--- | The metric kind of the time series. This can be different than the
--- metric kind specified in [google.api.MetricDescriptor] because of
--- alignment and reduction operations on the data. This field is ignored
--- when writing data; the value specified in the descriptor is used
--- instead. \'OutputOnly
-tsMetricKind :: Lens' TimeSeries (Maybe Text)
+-- | The metric kind of the time series. When listing time series, this
+-- metric kind might be different from the metric kind of the associated
+-- metric if this time series is an alignment or reduction of other time
+-- series.When creating a time series, this field is optional. If present,
+-- it must be the same as the metric kind of the associated metric. If the
+-- associated metric\'s descriptor must be auto-created, then this field
+-- specifies the metric kind of the new descriptor and must be either GAUGE
+-- (the default) or CUMULATIVE.
+tsMetricKind :: Lens' TimeSeries (Maybe TimeSeriesMetricKind)
 tsMetricKind
   = lens _tsMetricKind (\ s a -> s{_tsMetricKind = a})
 
--- | The fully-specified metric used to identify the time series.
+-- | The associated metric. A fully-specified metric used to identify the
+-- time series.
 tsMetric :: Lens' TimeSeries (Maybe Metric)
 tsMetric = lens _tsMetric (\ s a -> s{_tsMetric = a})
 
--- | The fully-specified monitored resource used to identify the time series.
+-- | The associated resource. A fully-specified monitored resource used to
+-- identify the time series.
 tsResource :: Lens' TimeSeries (Maybe MonitoredResource)
 tsResource
   = lens _tsResource (\ s a -> s{_tsResource = a})
 
--- | The value type of the time series. This can be different than the value
--- type specified in [google.api.MetricDescriptor] because of alignment and
--- reduction operations on the data. This field is ignored when writing
--- data; the value specified in the descriptor is used instead.
--- \'OutputOnly
-tsValueType :: Lens' TimeSeries (Maybe Text)
+-- | The value type of the time series. When listing time series, this value
+-- type might be different from the value type of the associated metric if
+-- this time series is an alignment or reduction of other time series.When
+-- creating a time series, this field is optional. If present, it must be
+-- the same as the type of the data in the points field.
+tsValueType :: Lens' TimeSeries (Maybe TimeSeriesValueType)
 tsValueType
   = lens _tsValueType (\ s a -> s{_tsValueType = a})
 

@@ -59,7 +59,8 @@ instance FromJSON CreativesListOpenAuctionStatusFilter where
 instance ToJSON CreativesListOpenAuctionStatusFilter where
     toJSON = toJSONText
 
--- | The proposed action to take on the proposal.
+-- | The proposed action to take on the proposal. This field is required and
+-- it must be set when updating a proposal.
 data ProposalsPatchUpdateAction
     = Accept
       -- ^ @accept@
@@ -67,6 +68,8 @@ data ProposalsPatchUpdateAction
       -- ^ @cancel@
     | Propose
       -- ^ @propose@
+    | ProposeAndAccept
+      -- ^ @proposeAndAccept@
     | UnknownAction
       -- ^ @unknownAction@
     | UpdateFinalized
@@ -80,6 +83,7 @@ instance FromHttpApiData ProposalsPatchUpdateAction where
         "accept" -> Right Accept
         "cancel" -> Right Cancel
         "propose" -> Right Propose
+        "proposeAndAccept" -> Right ProposeAndAccept
         "unknownAction" -> Right UnknownAction
         "updateFinalized" -> Right UpdateFinalized
         x -> Left ("Unable to parse ProposalsPatchUpdateAction from: " <> x)
@@ -89,6 +93,7 @@ instance ToHttpApiData ProposalsPatchUpdateAction where
         Accept -> "accept"
         Cancel -> "cancel"
         Propose -> "propose"
+        ProposeAndAccept -> "proposeAndAccept"
         UnknownAction -> "unknownAction"
         UpdateFinalized -> "updateFinalized"
 
@@ -138,7 +143,8 @@ instance FromJSON CreativesListDealsStatusFilter where
 instance ToJSON CreativesListDealsStatusFilter where
     toJSON = toJSONText
 
--- | The proposed action to take on the proposal.
+-- | The proposed action to take on the proposal. This field is required and
+-- it must be set when updating a proposal.
 data ProposalsUpdateUpdateAction
     = PUUAAccept
       -- ^ @accept@
@@ -146,6 +152,8 @@ data ProposalsUpdateUpdateAction
       -- ^ @cancel@
     | PUUAPropose
       -- ^ @propose@
+    | PUUAProposeAndAccept
+      -- ^ @proposeAndAccept@
     | PUUAUnknownAction
       -- ^ @unknownAction@
     | PUUAUpdateFinalized
@@ -159,6 +167,7 @@ instance FromHttpApiData ProposalsUpdateUpdateAction where
         "accept" -> Right PUUAAccept
         "cancel" -> Right PUUACancel
         "propose" -> Right PUUAPropose
+        "proposeAndAccept" -> Right PUUAProposeAndAccept
         "unknownAction" -> Right PUUAUnknownAction
         "updateFinalized" -> Right PUUAUpdateFinalized
         x -> Left ("Unable to parse ProposalsUpdateUpdateAction from: " <> x)
@@ -168,6 +177,7 @@ instance ToHttpApiData ProposalsUpdateUpdateAction where
         PUUAAccept -> "accept"
         PUUACancel -> "cancel"
         PUUAPropose -> "propose"
+        PUUAProposeAndAccept -> "proposeAndAccept"
         PUUAUnknownAction -> "unknownAction"
         PUUAUpdateFinalized -> "updateFinalized"
 

@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.InstanceGroups.List
     , InstanceGroupsList
 
     -- * Request Lenses
+    , iglOrderBy
     , iglProject
     , iglZone
     , iglFilter
@@ -54,18 +55,20 @@ type InstanceGroupsListResource =
              "zones" :>
                Capture "zone" Text :>
                  "instanceGroups" :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] InstanceGroupList
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] InstanceGroupList
 
 -- | Retrieves the list of instance groups that are located in the specified
 -- project and zone.
 --
 -- /See:/ 'instanceGroupsList' smart constructor.
 data InstanceGroupsList = InstanceGroupsList'
-    { _iglProject    :: !Text
+    { _iglOrderBy    :: !(Maybe Text)
+    , _iglProject    :: !Text
     , _iglZone       :: !Text
     , _iglFilter     :: !(Maybe Text)
     , _iglPageToken  :: !(Maybe Text)
@@ -75,6 +78,8 @@ data InstanceGroupsList = InstanceGroupsList'
 -- | Creates a value of 'InstanceGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iglOrderBy'
 --
 -- * 'iglProject'
 --
@@ -91,12 +96,25 @@ instanceGroupsList
     -> InstanceGroupsList
 instanceGroupsList pIglProject_ pIglZone_ =
     InstanceGroupsList'
-    { _iglProject = pIglProject_
+    { _iglOrderBy = Nothing
+    , _iglProject = pIglProject_
     , _iglZone = pIglZone_
     , _iglFilter = Nothing
     , _iglPageToken = Nothing
     , _iglMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+iglOrderBy :: Lens' InstanceGroupsList (Maybe Text)
+iglOrderBy
+  = lens _iglOrderBy (\ s a -> s{_iglOrderBy = a})
 
 -- | Project ID for this request.
 iglProject :: Lens' InstanceGroupsList Text
@@ -118,16 +136,15 @@ iglZone = lens _iglZone (\ s a -> s{_iglZone = a})
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 iglFilter :: Lens' InstanceGroupsList (Maybe Text)
 iglFilter
   = lens _iglFilter (\ s a -> s{_iglFilter = a})
@@ -155,7 +172,8 @@ instance GoogleRequest InstanceGroupsList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupsList'{..}
-          = go _iglProject _iglZone _iglFilter _iglPageToken
+          = go _iglProject _iglZone _iglOrderBy _iglFilter
+              _iglPageToken
               (Just _iglMaxResults)
               (Just AltJSON)
               computeService

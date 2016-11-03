@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of countries.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.countries.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.countries.list@.
 module Network.Google.Resource.DFAReporting.Countries.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'CountriesList' request conforms to.
 type CountriesListResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "countries" :>

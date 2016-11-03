@@ -283,7 +283,7 @@ operationSchema pOsAddtional_ =
     { _osAddtional = _Coerce # pOsAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 osAddtional :: Lens' OperationSchema (HashMap Text JSONValue)
 osAddtional
   = lens _osAddtional (\ s a -> s{_osAddtional = a}) .
@@ -861,7 +861,7 @@ dsName = lens _dsName (\ s a -> s{_dsName = a})
 dsId :: Lens' DataSet (Maybe Text)
 dsId = lens _dsId (\ s a -> s{_dsId = a})
 
--- | The Google Developers Console project ID that this dataset belongs to.
+-- | The Google Cloud project ID that this dataset belongs to.
 dsProjectId :: Lens' DataSet (Maybe Text)
 dsProjectId
   = lens _dsProjectId (\ s a -> s{_dsProjectId = a})
@@ -1318,8 +1318,9 @@ instance ToJSON VariantCall where
 
 --
 -- /See:/ 'batchCreateAnnotationsRequest' smart constructor.
-newtype BatchCreateAnnotationsRequest = BatchCreateAnnotationsRequest'
-    { _bcarAnnotations :: Maybe [Annotation]
+data BatchCreateAnnotationsRequest = BatchCreateAnnotationsRequest'
+    { _bcarAnnotations :: !(Maybe [Annotation])
+    , _bcarRequestId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchCreateAnnotationsRequest' with the minimum fields required to make a request.
@@ -1327,11 +1328,14 @@ newtype BatchCreateAnnotationsRequest = BatchCreateAnnotationsRequest'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bcarAnnotations'
+--
+-- * 'bcarRequestId'
 batchCreateAnnotationsRequest
     :: BatchCreateAnnotationsRequest
 batchCreateAnnotationsRequest =
     BatchCreateAnnotationsRequest'
     { _bcarAnnotations = Nothing
+    , _bcarRequestId = Nothing
     }
 
 -- | The annotations to be created. At most 4096 can be specified in a single
@@ -1343,17 +1347,33 @@ bcarAnnotations
       . _Default
       . _Coerce
 
+-- | A unique request ID which enables the server to detect duplicated
+-- requests. If provided, duplicated requests will result in the same
+-- response; if not provided, duplicated requests may result in duplicated
+-- data. For a given annotation set, callers should not reuse
+-- \`request_id\`s when writing different batches of annotations - behavior
+-- in this case is undefined. A common approach is to use a UUID. For batch
+-- jobs where worker crashes are a possibility, consider using some unique
+-- variant of a worker or run ID.
+bcarRequestId :: Lens' BatchCreateAnnotationsRequest (Maybe Text)
+bcarRequestId
+  = lens _bcarRequestId
+      (\ s a -> s{_bcarRequestId = a})
+
 instance FromJSON BatchCreateAnnotationsRequest where
         parseJSON
           = withObject "BatchCreateAnnotationsRequest"
               (\ o ->
                  BatchCreateAnnotationsRequest' <$>
-                   (o .:? "annotations" .!= mempty))
+                   (o .:? "annotations" .!= mempty) <*>
+                     (o .:? "requestId"))
 
 instance ToJSON BatchCreateAnnotationsRequest where
         toJSON BatchCreateAnnotationsRequest'{..}
           = object
-              (catMaybes [("annotations" .=) <$> _bcarAnnotations])
+              (catMaybes
+                 [("annotations" .=) <$> _bcarAnnotations,
+                  ("requestId" .=) <$> _bcarRequestId])
 
 --
 -- /See:/ 'mergeVariantsRequest' smart constructor.
@@ -1611,7 +1631,7 @@ operation =
 oDone :: Lens' Operation (Maybe Bool)
 oDone = lens _oDone (\ s a -> s{_oDone = a})
 
--- | The error result of the operation in case of failure.
+-- | The error result of the operation in case of failure or cancellation.
 oError :: Lens' Operation (Maybe Status)
 oError = lens _oError (\ s a -> s{_oError = a})
 
@@ -2509,7 +2529,7 @@ statusDetailsItem pSdiAddtional_ =
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
 sdiAddtional
   = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
@@ -2797,7 +2817,7 @@ operationMetadataRequest pOmrAddtional_ =
     { _omrAddtional = _Coerce # pOmrAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 omrAddtional :: Lens' OperationMetadataRequest (HashMap Text JSONValue)
 omrAddtional
   = lens _omrAddtional (\ s a -> s{_omrAddtional = a})
@@ -3277,6 +3297,45 @@ instance ToJSON SearchVariantsResponse where
                  [("variants" .=) <$> _sVariants,
                   ("nextPageToken" .=) <$> _sNextPageToken])
 
+-- | Runtime metadata on this Operation.
+--
+-- /See:/ 'operationMetadataRuntimeMetadata' smart constructor.
+newtype OperationMetadataRuntimeMetadata = OperationMetadataRuntimeMetadata'
+    { _omrmAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationMetadataRuntimeMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omrmAddtional'
+operationMetadataRuntimeMetadata
+    :: HashMap Text JSONValue -- ^ 'omrmAddtional'
+    -> OperationMetadataRuntimeMetadata
+operationMetadataRuntimeMetadata pOmrmAddtional_ =
+    OperationMetadataRuntimeMetadata'
+    { _omrmAddtional = _Coerce # pOmrmAddtional_
+    }
+
+-- | Properties of the object. Contains field \'type with type URL.
+omrmAddtional :: Lens' OperationMetadataRuntimeMetadata (HashMap Text JSONValue)
+omrmAddtional
+  = lens _omrmAddtional
+      (\ s a -> s{_omrmAddtional = a})
+      . _Coerce
+
+instance FromJSON OperationMetadataRuntimeMetadata
+         where
+        parseJSON
+          = withObject "OperationMetadataRuntimeMetadata"
+              (\ o ->
+                 OperationMetadataRuntimeMetadata' <$>
+                   (parseJSONObject o))
+
+instance ToJSON OperationMetadataRuntimeMetadata
+         where
+        toJSON = toJSON . _omrmAddtional
+
 --
 -- /See:/ 'clinicalCondition' smart constructor.
 data ClinicalCondition = ClinicalCondition'
@@ -3449,9 +3508,8 @@ sEnd
   = lens _sEnd (\ s a -> s{_sEnd = a}) .
       mapping _Coerce
 
--- | The Google Developers Console project ID or number which will be billed
--- for this access. The caller must have WRITE access to this project.
--- Required.
+-- | The Google Cloud project ID which will be billed for this access. The
+-- caller must have WRITE access to this project. Required.
 sProjectId :: Lens' StreamReadsRequest (Maybe Text)
 sProjectId
   = lens _sProjectId (\ s a -> s{_sProjectId = a})
@@ -4191,8 +4249,8 @@ ergsrExportURI
   = lens _ergsrExportURI
       (\ s a -> s{_ergsrExportURI = a})
 
--- | Required. The Google Developers Console project ID that owns this
--- export. The caller must have WRITE access to this project.
+-- | Required. The Google Cloud project ID that owns this export. The caller
+-- must have WRITE access to this project.
 ergsrProjectId :: Lens' ExportReadGroupSetRequest (Maybe Text)
 ergsrProjectId
   = lens _ergsrProjectId
@@ -5266,16 +5324,23 @@ instance ToJSON ExportVariantSetRequest where
 --
 -- /See:/ 'operationMetadata' smart constructor.
 data OperationMetadata = OperationMetadata'
-    { _omEvents     :: !(Maybe [OperationEvent])
-    , _omEndTime    :: !(Maybe Text)
-    , _omProjectId  :: !(Maybe Text)
-    , _omCreateTime :: !(Maybe Text)
-    , _omRequest    :: !(Maybe OperationMetadataRequest)
+    { _omClientId        :: !(Maybe Text)
+    , _omStartTime       :: !(Maybe Text)
+    , _omEvents          :: !(Maybe [OperationEvent])
+    , _omEndTime         :: !(Maybe Text)
+    , _omProjectId       :: !(Maybe Text)
+    , _omCreateTime      :: !(Maybe Text)
+    , _omRuntimeMetadata :: !(Maybe OperationMetadataRuntimeMetadata)
+    , _omRequest         :: !(Maybe OperationMetadataRequest)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omClientId'
+--
+-- * 'omStartTime'
 --
 -- * 'omEvents'
 --
@@ -5285,17 +5350,33 @@ data OperationMetadata = OperationMetadata'
 --
 -- * 'omCreateTime'
 --
+-- * 'omRuntimeMetadata'
+--
 -- * 'omRequest'
 operationMetadata
     :: OperationMetadata
 operationMetadata =
     OperationMetadata'
-    { _omEvents = Nothing
+    { _omClientId = Nothing
+    , _omStartTime = Nothing
+    , _omEvents = Nothing
     , _omEndTime = Nothing
     , _omProjectId = Nothing
     , _omCreateTime = Nothing
+    , _omRuntimeMetadata = Nothing
     , _omRequest = Nothing
     }
+
+-- | Optionally provided by the caller when submitting the request that
+-- creates the operation.
+omClientId :: Lens' OperationMetadata (Maybe Text)
+omClientId
+  = lens _omClientId (\ s a -> s{_omClientId = a})
+
+-- | The time at which the job began to run.
+omStartTime :: Lens' OperationMetadata (Maybe Text)
+omStartTime
+  = lens _omStartTime (\ s a -> s{_omStartTime = a})
 
 -- | Optional event messages that were generated during the job\'s execution.
 -- This also contains any warnings that were generated during import or
@@ -5321,6 +5402,12 @@ omCreateTime :: Lens' OperationMetadata (Maybe Text)
 omCreateTime
   = lens _omCreateTime (\ s a -> s{_omCreateTime = a})
 
+-- | Runtime metadata on this Operation.
+omRuntimeMetadata :: Lens' OperationMetadata (Maybe OperationMetadataRuntimeMetadata)
+omRuntimeMetadata
+  = lens _omRuntimeMetadata
+      (\ s a -> s{_omRuntimeMetadata = a})
+
 -- | The original request that started the operation. Note that this will be
 -- in current version of the API. If the operation was started with v1beta2
 -- API and a GetOperation is performed on v1 API, a v1 request will be
@@ -5334,19 +5421,25 @@ instance FromJSON OperationMetadata where
           = withObject "OperationMetadata"
               (\ o ->
                  OperationMetadata' <$>
-                   (o .:? "events" .!= mempty) <*> (o .:? "endTime") <*>
-                     (o .:? "projectId")
+                   (o .:? "clientId") <*> (o .:? "startTime") <*>
+                     (o .:? "events" .!= mempty)
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "projectId")
                      <*> (o .:? "createTime")
+                     <*> (o .:? "runtimeMetadata")
                      <*> (o .:? "request"))
 
 instance ToJSON OperationMetadata where
         toJSON OperationMetadata'{..}
           = object
               (catMaybes
-                 [("events" .=) <$> _omEvents,
+                 [("clientId" .=) <$> _omClientId,
+                  ("startTime" .=) <$> _omStartTime,
+                  ("events" .=) <$> _omEvents,
                   ("endTime" .=) <$> _omEndTime,
                   ("projectId" .=) <$> _omProjectId,
                   ("createTime" .=) <$> _omCreateTime,
+                  ("runtimeMetadata" .=) <$> _omRuntimeMetadata,
                   ("request" .=) <$> _omRequest])
 
 --
@@ -5584,8 +5677,6 @@ svrStart
 -- | Only return variant calls which belong to call sets with these ids.
 -- Leaving this blank returns all variant calls. If a variant has no calls
 -- belonging to any of these call sets, it won\'t be returned at all.
--- Currently, variants with no calls from any call set will never be
--- returned.
 svrCallSetIds :: Lens' SearchVariantsRequest [Text]
 svrCallSetIds
   = lens _svrCallSetIds
@@ -5706,6 +5797,79 @@ instance FromJSON AnnotationSetInfo where
 
 instance ToJSON AnnotationSetInfo where
         toJSON = toJSON . _asiAddtional
+
+-- | Describes a Compute Engine resource that is being managed by a running
+-- pipeline.
+--
+-- /See:/ 'computeEngine' smart constructor.
+data ComputeEngine = ComputeEngine'
+    { _ceZone         :: !(Maybe Text)
+    , _ceDiskNames    :: !(Maybe [Text])
+    , _ceMachineType  :: !(Maybe Text)
+    , _ceInstanceName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ComputeEngine' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ceZone'
+--
+-- * 'ceDiskNames'
+--
+-- * 'ceMachineType'
+--
+-- * 'ceInstanceName'
+computeEngine
+    :: ComputeEngine
+computeEngine =
+    ComputeEngine'
+    { _ceZone = Nothing
+    , _ceDiskNames = Nothing
+    , _ceMachineType = Nothing
+    , _ceInstanceName = Nothing
+    }
+
+-- | The availability zone in which the instance resides.
+ceZone :: Lens' ComputeEngine (Maybe Text)
+ceZone = lens _ceZone (\ s a -> s{_ceZone = a})
+
+-- | The names of the disks that were created for this pipeline.
+ceDiskNames :: Lens' ComputeEngine [Text]
+ceDiskNames
+  = lens _ceDiskNames (\ s a -> s{_ceDiskNames = a}) .
+      _Default
+      . _Coerce
+
+-- | The machine type of the instance.
+ceMachineType :: Lens' ComputeEngine (Maybe Text)
+ceMachineType
+  = lens _ceMachineType
+      (\ s a -> s{_ceMachineType = a})
+
+-- | The instance on which the operation is running.
+ceInstanceName :: Lens' ComputeEngine (Maybe Text)
+ceInstanceName
+  = lens _ceInstanceName
+      (\ s a -> s{_ceInstanceName = a})
+
+instance FromJSON ComputeEngine where
+        parseJSON
+          = withObject "ComputeEngine"
+              (\ o ->
+                 ComputeEngine' <$>
+                   (o .:? "zone") <*> (o .:? "diskNames" .!= mempty) <*>
+                     (o .:? "machineType")
+                     <*> (o .:? "instanceName"))
+
+instance ToJSON ComputeEngine where
+        toJSON ComputeEngine'{..}
+          = object
+              (catMaybes
+                 [("zone" .=) <$> _ceZone,
+                  ("diskNames" .=) <$> _ceDiskNames,
+                  ("machineType" .=) <$> _ceMachineType,
+                  ("instanceName" .=) <$> _ceInstanceName])
 
 --
 -- /See:/ 'searchAnnotationSetsResponse' smart constructor.
@@ -5853,7 +6017,7 @@ operationResponse pOrAddtional_ =
     { _orAddtional = _Coerce # pOrAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 orAddtional :: Lens' OperationResponse (HashMap Text JSONValue)
 orAddtional
   = lens _orAddtional (\ s a -> s{_orAddtional = a}) .
@@ -5946,21 +6110,41 @@ instance ToJSON Transcript where
 -- | An event that occurred during an Operation.
 --
 -- /See:/ 'operationEvent' smart constructor.
-newtype OperationEvent = OperationEvent'
-    { _oeDescription :: Maybe Text
+data OperationEvent = OperationEvent'
+    { _oeStartTime   :: !(Maybe Text)
+    , _oeEndTime     :: !(Maybe Text)
+    , _oeDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationEvent' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'oeStartTime'
+--
+-- * 'oeEndTime'
+--
 -- * 'oeDescription'
 operationEvent
     :: OperationEvent
 operationEvent =
     OperationEvent'
-    { _oeDescription = Nothing
+    { _oeStartTime = Nothing
+    , _oeEndTime = Nothing
+    , _oeDescription = Nothing
     }
+
+-- | Optional time of when event started.
+oeStartTime :: Lens' OperationEvent (Maybe Text)
+oeStartTime
+  = lens _oeStartTime (\ s a -> s{_oeStartTime = a})
+
+-- | Optional time of when event finished. An event can have a start time and
+-- no finish time. If an event has a finish time, there must be a start
+-- time.
+oeEndTime :: Lens' OperationEvent (Maybe Text)
+oeEndTime
+  = lens _oeEndTime (\ s a -> s{_oeEndTime = a})
 
 -- | Required description of event.
 oeDescription :: Lens' OperationEvent (Maybe Text)
@@ -5971,12 +6155,18 @@ oeDescription
 instance FromJSON OperationEvent where
         parseJSON
           = withObject "OperationEvent"
-              (\ o -> OperationEvent' <$> (o .:? "description"))
+              (\ o ->
+                 OperationEvent' <$>
+                   (o .:? "startTime") <*> (o .:? "endTime") <*>
+                     (o .:? "description"))
 
 instance ToJSON OperationEvent where
         toJSON OperationEvent'{..}
           = object
-              (catMaybes [("description" .=) <$> _oeDescription])
+              (catMaybes
+                 [("startTime" .=) <$> _oeStartTime,
+                  ("endTime" .=) <$> _oeEndTime,
+                  ("description" .=) <$> _oeDescription])
 
 -- | The stream variants request.
 --
@@ -6052,9 +6242,8 @@ strEnd
   = lens _strEnd (\ s a -> s{_strEnd = a}) .
       mapping _Coerce
 
--- | The Google Developers Console project ID or number which will be billed
--- for this access. The caller must have WRITE access to this project.
--- Required.
+-- | The Google Cloud project ID which will be billed for this access. The
+-- caller must have WRITE access to this project. Required.
 strProjectId :: Lens' StreamVariantsRequest (Maybe Text)
 strProjectId
   = lens _strProjectId (\ s a -> s{_strProjectId = a})
@@ -6279,6 +6468,43 @@ instance ToJSON Position where
                  [("reverseStrand" .=) <$> _pReverseStrand,
                   ("referenceName" .=) <$> _pReferenceName,
                   ("position" .=) <$> _pPosition])
+
+-- | Runtime metadata that will be populated in the runtimeMetadata field of
+-- the Operation associated with a RunPipeline execution.
+--
+-- /See:/ 'runtimeMetadata' smart constructor.
+newtype RuntimeMetadata = RuntimeMetadata'
+    { _rmComputeEngine :: Maybe ComputeEngine
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RuntimeMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rmComputeEngine'
+runtimeMetadata
+    :: RuntimeMetadata
+runtimeMetadata =
+    RuntimeMetadata'
+    { _rmComputeEngine = Nothing
+    }
+
+-- | Execution information specific to Google Compute Engine.
+rmComputeEngine :: Lens' RuntimeMetadata (Maybe ComputeEngine)
+rmComputeEngine
+  = lens _rmComputeEngine
+      (\ s a -> s{_rmComputeEngine = a})
+
+instance FromJSON RuntimeMetadata where
+        parseJSON
+          = withObject "RuntimeMetadata"
+              (\ o -> RuntimeMetadata' <$> (o .:? "computeEngine"))
+
+instance ToJSON RuntimeMetadata where
+        toJSON RuntimeMetadata'{..}
+          = object
+              (catMaybes
+                 [("computeEngine" .=) <$> _rmComputeEngine])
 
 -- | The read group set search response.
 --

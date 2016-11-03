@@ -23,7 +23,7 @@
 -- Delete a \`Ruleset\` by resource name. If the \`Ruleset\` is referenced
 -- by a \`Release\` the operation will fail.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security/start Firebase Rules API Reference> for @firebaserules.projects.rulesets.delete@.
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.rulesets.delete@.
 module Network.Google.Resource.FirebaseRules.Projects.Rulesets.Delete
     (
     -- * REST Resource
@@ -155,7 +155,8 @@ proCallback
 instance GoogleRequest ProjectsRulesetsDelete where
         type Rs ProjectsRulesetsDelete = Empty
         type Scopes ProjectsRulesetsDelete =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase"]
         requestClient ProjectsRulesetsDelete'{..}
           = go _proName _proXgafv _proUploadProtocol
               (Just _proPp)

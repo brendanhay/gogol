@@ -1,6 +1,6 @@
 name:                  gogol-kgsearch
-version:               0.1.0
-synopsis:              Google Identity and Access Management SDK.
+version:               0.1.1
+synopsis:              Google Knowledge Graph Search SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense
@@ -14,9 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Manages identity and access control for Google Cloud Platform resources,
-    including the creation of service accounts, which you can use to
-    authenticate to Google and make API calls.
+    Knowledge Graph Search API allows developers to search the Google
+    Knowledge Graph for entities.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -37,24 +36,12 @@ library
     exposed-modules:
           Network.Google.KnowledgeGraphSearch
         , Network.Google.KnowledgeGraphSearch.Types
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.List
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
-        , Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
+        , Network.Google.Resource.Kgsearch.Entities.Search
 
     other-modules:
           Network.Google.KnowledgeGraphSearch.Types.Product
         , Network.Google.KnowledgeGraphSearch.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

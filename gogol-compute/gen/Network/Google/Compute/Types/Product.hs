@@ -109,6 +109,100 @@ instance ToJSON TargetHTTPSProxyList where
                   ("id" .=) <$> _thplId])
 
 --
+-- /See:/ 'routersScopedList' smart constructor.
+data RoutersScopedList = RoutersScopedList'
+    { _rslRouters :: !(Maybe [Router])
+    , _rslWarning :: !(Maybe RoutersScopedListWarning)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RoutersScopedList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rslRouters'
+--
+-- * 'rslWarning'
+routersScopedList
+    :: RoutersScopedList
+routersScopedList =
+    RoutersScopedList'
+    { _rslRouters = Nothing
+    , _rslWarning = Nothing
+    }
+
+-- | List of routers contained in this scope.
+rslRouters :: Lens' RoutersScopedList [Router]
+rslRouters
+  = lens _rslRouters (\ s a -> s{_rslRouters = a}) .
+      _Default
+      . _Coerce
+
+-- | Informational warning which replaces the list of routers when the list
+-- is empty.
+rslWarning :: Lens' RoutersScopedList (Maybe RoutersScopedListWarning)
+rslWarning
+  = lens _rslWarning (\ s a -> s{_rslWarning = a})
+
+instance FromJSON RoutersScopedList where
+        parseJSON
+          = withObject "RoutersScopedList"
+              (\ o ->
+                 RoutersScopedList' <$>
+                   (o .:? "routers" .!= mempty) <*> (o .:? "warning"))
+
+instance ToJSON RoutersScopedList where
+        toJSON RoutersScopedList'{..}
+          = object
+              (catMaybes
+                 [("routers" .=) <$> _rslRouters,
+                  ("warning" .=) <$> _rslWarning])
+
+--
+-- /See:/ 'routerStatusResponse' smart constructor.
+data RouterStatusResponse = RouterStatusResponse'
+    { _rsrKind   :: !Text
+    , _rsrResult :: !(Maybe RouterStatus)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouterStatusResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rsrKind'
+--
+-- * 'rsrResult'
+routerStatusResponse
+    :: RouterStatusResponse
+routerStatusResponse =
+    RouterStatusResponse'
+    { _rsrKind = "compute#routerStatusResponse"
+    , _rsrResult = Nothing
+    }
+
+-- | Type of resource.
+rsrKind :: Lens' RouterStatusResponse Text
+rsrKind = lens _rsrKind (\ s a -> s{_rsrKind = a})
+
+rsrResult :: Lens' RouterStatusResponse (Maybe RouterStatus)
+rsrResult
+  = lens _rsrResult (\ s a -> s{_rsrResult = a})
+
+instance FromJSON RouterStatusResponse where
+        parseJSON
+          = withObject "RouterStatusResponse"
+              (\ o ->
+                 RouterStatusResponse' <$>
+                   (o .:? "kind" .!= "compute#routerStatusResponse") <*>
+                     (o .:? "result"))
+
+instance ToJSON RouterStatusResponse where
+        toJSON RouterStatusResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _rsrKind),
+                  ("result" .=) <$> _rsrResult])
+
+--
 -- /See:/ 'addressesScopedList' smart constructor.
 data AddressesScopedList = AddressesScopedList'
     { _aslAddresses :: !(Maybe [Address])
@@ -324,6 +418,90 @@ instance FromJSON DiskTypeAggregatedListItems where
 
 instance ToJSON DiskTypeAggregatedListItems where
         toJSON = toJSON . _dtaliAddtional
+
+-- | Contains a list of routers.
+--
+-- /See:/ 'routerAggregatedList' smart constructor.
+data RouterAggregatedList = RouterAggregatedList'
+    { _ralNextPageToken :: !(Maybe Text)
+    , _ralKind          :: !Text
+    , _ralItems         :: !(Maybe RouterAggregatedListItems)
+    , _ralSelfLink      :: !(Maybe Text)
+    , _ralId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouterAggregatedList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ralNextPageToken'
+--
+-- * 'ralKind'
+--
+-- * 'ralItems'
+--
+-- * 'ralSelfLink'
+--
+-- * 'ralId'
+routerAggregatedList
+    :: RouterAggregatedList
+routerAggregatedList =
+    RouterAggregatedList'
+    { _ralNextPageToken = Nothing
+    , _ralKind = "compute#routerAggregatedList"
+    , _ralItems = Nothing
+    , _ralSelfLink = Nothing
+    , _ralId = Nothing
+    }
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+ralNextPageToken :: Lens' RouterAggregatedList (Maybe Text)
+ralNextPageToken
+  = lens _ralNextPageToken
+      (\ s a -> s{_ralNextPageToken = a})
+
+-- | Type of resource.
+ralKind :: Lens' RouterAggregatedList Text
+ralKind = lens _ralKind (\ s a -> s{_ralKind = a})
+
+-- | A map of scoped router lists.
+ralItems :: Lens' RouterAggregatedList (Maybe RouterAggregatedListItems)
+ralItems = lens _ralItems (\ s a -> s{_ralItems = a})
+
+-- | [Output Only] Server-defined URL for this resource.
+ralSelfLink :: Lens' RouterAggregatedList (Maybe Text)
+ralSelfLink
+  = lens _ralSelfLink (\ s a -> s{_ralSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+ralId :: Lens' RouterAggregatedList (Maybe Text)
+ralId = lens _ralId (\ s a -> s{_ralId = a})
+
+instance FromJSON RouterAggregatedList where
+        parseJSON
+          = withObject "RouterAggregatedList"
+              (\ o ->
+                 RouterAggregatedList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#routerAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON RouterAggregatedList where
+        toJSON RouterAggregatedList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _ralNextPageToken,
+                  Just ("kind" .= _ralKind),
+                  ("items" .=) <$> _ralItems,
+                  ("selfLink" .=) <$> _ralSelfLink,
+                  ("id" .=) <$> _ralId])
 
 -- | Contains a list of firewalls.
 --
@@ -603,6 +781,55 @@ instance ToJSON InstancesSetMachineTypeRequest where
               (catMaybes
                  [("machineType" .=) <$> _ismtrMachineType])
 
+-- | Represents a customer-supplied encryption key
+--
+-- /See:/ 'customerEncryptionKey' smart constructor.
+data CustomerEncryptionKey = CustomerEncryptionKey'
+    { _cekSha256 :: !(Maybe Text)
+    , _cekRawKey :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomerEncryptionKey' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cekSha256'
+--
+-- * 'cekRawKey'
+customerEncryptionKey
+    :: CustomerEncryptionKey
+customerEncryptionKey =
+    CustomerEncryptionKey'
+    { _cekSha256 = Nothing
+    , _cekRawKey = Nothing
+    }
+
+-- | [Output only] The RFC 4648 base64 encoded SHA-256 hash of the
+-- customer-supplied encryption key that protects this resource.
+cekSha256 :: Lens' CustomerEncryptionKey (Maybe Text)
+cekSha256
+  = lens _cekSha256 (\ s a -> s{_cekSha256 = a})
+
+-- | Specifies a 256-bit customer-supplied encryption key, encoded in RFC
+-- 4648 base64 to either encrypt or decrypt this resource.
+cekRawKey :: Lens' CustomerEncryptionKey (Maybe Text)
+cekRawKey
+  = lens _cekRawKey (\ s a -> s{_cekRawKey = a})
+
+instance FromJSON CustomerEncryptionKey where
+        parseJSON
+          = withObject "CustomerEncryptionKey"
+              (\ o ->
+                 CustomerEncryptionKey' <$>
+                   (o .:? "sha256") <*> (o .:? "rawKey"))
+
+instance ToJSON CustomerEncryptionKey where
+        toJSON CustomerEncryptionKey'{..}
+          = object
+              (catMaybes
+                 [("sha256" .=) <$> _cekSha256,
+                  ("rawKey" .=) <$> _cekRawKey])
+
 -- | A map of scoped autoscaler lists.
 --
 -- /See:/ 'autoscalerAggregatedListItems' smart constructor.
@@ -778,19 +1005,21 @@ instance ToJSON DeprecationStatus where
 --
 -- /See:/ 'snapshot' smart constructor.
 data Snapshot = Snapshot'
-    { _sStorageBytesStatus :: !(Maybe SnapshotStorageBytesStatus)
-    , _sStatus             :: !(Maybe SnapshotStatus)
-    , _sDiskSizeGb         :: !(Maybe (Textual Int64))
-    , _sSourceDiskId       :: !(Maybe Text)
-    , _sKind               :: !Text
-    , _sStorageBytes       :: !(Maybe (Textual Int64))
-    , _sSelfLink           :: !(Maybe Text)
-    , _sName               :: !(Maybe Text)
-    , _sCreationTimestamp  :: !(Maybe Text)
-    , _sId                 :: !(Maybe (Textual Word64))
-    , _sLicenses           :: !(Maybe [Text])
-    , _sSourceDisk         :: !(Maybe Text)
-    , _sDescription        :: !(Maybe Text)
+    { _sStorageBytesStatus      :: !(Maybe SnapshotStorageBytesStatus)
+    , _sStatus                  :: !(Maybe SnapshotStatus)
+    , _sDiskSizeGb              :: !(Maybe (Textual Int64))
+    , _sSourceDiskId            :: !(Maybe Text)
+    , _sKind                    :: !Text
+    , _sSourceDiskEncryptionKey :: !(Maybe CustomerEncryptionKey)
+    , _sStorageBytes            :: !(Maybe (Textual Int64))
+    , _sSelfLink                :: !(Maybe Text)
+    , _sSnapshotEncryptionKey   :: !(Maybe CustomerEncryptionKey)
+    , _sName                    :: !(Maybe Text)
+    , _sCreationTimestamp       :: !(Maybe Text)
+    , _sId                      :: !(Maybe (Textual Word64))
+    , _sLicenses                :: !(Maybe [Text])
+    , _sSourceDisk              :: !(Maybe Text)
+    , _sDescription             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Snapshot' with the minimum fields required to make a request.
@@ -807,9 +1036,13 @@ data Snapshot = Snapshot'
 --
 -- * 'sKind'
 --
+-- * 'sSourceDiskEncryptionKey'
+--
 -- * 'sStorageBytes'
 --
 -- * 'sSelfLink'
+--
+-- * 'sSnapshotEncryptionKey'
 --
 -- * 'sName'
 --
@@ -831,8 +1064,10 @@ snapshot =
     , _sDiskSizeGb = Nothing
     , _sSourceDiskId = Nothing
     , _sKind = "compute#snapshot"
+    , _sSourceDiskEncryptionKey = Nothing
     , _sStorageBytes = Nothing
     , _sSelfLink = Nothing
+    , _sSnapshotEncryptionKey = Nothing
     , _sName = Nothing
     , _sCreationTimestamp = Nothing
     , _sId = Nothing
@@ -874,6 +1109,13 @@ sSourceDiskId
 sKind :: Lens' Snapshot Text
 sKind = lens _sKind (\ s a -> s{_sKind = a})
 
+-- | The customer-supplied encryption key of the source disk. Required if the
+-- source disk is protected by a customer-supplied encryption key.
+sSourceDiskEncryptionKey :: Lens' Snapshot (Maybe CustomerEncryptionKey)
+sSourceDiskEncryptionKey
+  = lens _sSourceDiskEncryptionKey
+      (\ s a -> s{_sSourceDiskEncryptionKey = a})
+
 -- | [Output Only] A size of the the storage used by the snapshot. As
 -- snapshots share storage, this number is expected to change with snapshot
 -- creation\/deletion.
@@ -887,6 +1129,20 @@ sStorageBytes
 sSelfLink :: Lens' Snapshot (Maybe Text)
 sSelfLink
   = lens _sSelfLink (\ s a -> s{_sSelfLink = a})
+
+-- | Encrypts the snapshot using a customer-supplied encryption key. After
+-- you encrypt a snapshot using a customer-supplied key, you must provide
+-- the same key if you use the image later For example, you must provide
+-- the encryption key when you create a disk from the encrypted snapshot in
+-- a future request. Customer-supplied encryption keys do not protect
+-- access to metadata of the disk. If you do not provide an encryption key
+-- when creating the snapshot, then the snapshot will be encrypted using an
+-- automatically generated key and you do not need to provide a key to use
+-- the snapshot later.
+sSnapshotEncryptionKey :: Lens' Snapshot (Maybe CustomerEncryptionKey)
+sSnapshotEncryptionKey
+  = lens _sSnapshotEncryptionKey
+      (\ s a -> s{_sSnapshotEncryptionKey = a})
 
 -- | Name of the resource; provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -939,8 +1195,10 @@ instance FromJSON Snapshot where
                      (o .:? "diskSizeGb")
                      <*> (o .:? "sourceDiskId")
                      <*> (o .:? "kind" .!= "compute#snapshot")
+                     <*> (o .:? "sourceDiskEncryptionKey")
                      <*> (o .:? "storageBytes")
                      <*> (o .:? "selfLink")
+                     <*> (o .:? "snapshotEncryptionKey")
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
                      <*> (o .:? "id")
@@ -957,13 +1215,79 @@ instance ToJSON Snapshot where
                   ("diskSizeGb" .=) <$> _sDiskSizeGb,
                   ("sourceDiskId" .=) <$> _sSourceDiskId,
                   Just ("kind" .= _sKind),
+                  ("sourceDiskEncryptionKey" .=) <$>
+                    _sSourceDiskEncryptionKey,
                   ("storageBytes" .=) <$> _sStorageBytes,
                   ("selfLink" .=) <$> _sSelfLink,
+                  ("snapshotEncryptionKey" .=) <$>
+                    _sSnapshotEncryptionKey,
                   ("name" .=) <$> _sName,
                   ("creationTimestamp" .=) <$> _sCreationTimestamp,
                   ("id" .=) <$> _sId, ("licenses" .=) <$> _sLicenses,
                   ("sourceDisk" .=) <$> _sSourceDisk,
                   ("description" .=) <$> _sDescription])
+
+--
+-- /See:/ 'routerStatus' smart constructor.
+data RouterStatus = RouterStatus'
+    { _rsBGPPeerStatus :: !(Maybe [RouterStatusBGPPeerStatus])
+    , _rsNetwork       :: !(Maybe Text)
+    , _rsBestRoutes    :: !(Maybe [Route])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouterStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rsBGPPeerStatus'
+--
+-- * 'rsNetwork'
+--
+-- * 'rsBestRoutes'
+routerStatus
+    :: RouterStatus
+routerStatus =
+    RouterStatus'
+    { _rsBGPPeerStatus = Nothing
+    , _rsNetwork = Nothing
+    , _rsBestRoutes = Nothing
+    }
+
+rsBGPPeerStatus :: Lens' RouterStatus [RouterStatusBGPPeerStatus]
+rsBGPPeerStatus
+  = lens _rsBGPPeerStatus
+      (\ s a -> s{_rsBGPPeerStatus = a})
+      . _Default
+      . _Coerce
+
+-- | URI of the network to which this router belongs.
+rsNetwork :: Lens' RouterStatus (Maybe Text)
+rsNetwork
+  = lens _rsNetwork (\ s a -> s{_rsNetwork = a})
+
+-- | Best routes for this router\'s network.
+rsBestRoutes :: Lens' RouterStatus [Route]
+rsBestRoutes
+  = lens _rsBestRoutes (\ s a -> s{_rsBestRoutes = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON RouterStatus where
+        parseJSON
+          = withObject "RouterStatus"
+              (\ o ->
+                 RouterStatus' <$>
+                   (o .:? "bgpPeerStatus" .!= mempty) <*>
+                     (o .:? "network")
+                     <*> (o .:? "bestRoutes" .!= mempty))
+
+instance ToJSON RouterStatus where
+        toJSON RouterStatus'{..}
+          = object
+              (catMaybes
+                 [("bgpPeerStatus" .=) <$> _rsBGPPeerStatus,
+                  ("network" .=) <$> _rsNetwork,
+                  ("bestRoutes" .=) <$> _rsBestRoutes])
 
 -- | Custom utilization metric policy.
 --
@@ -1000,11 +1324,11 @@ apcmuUtilizationTarget
       (\ s a -> s{_apcmuUtilizationTarget = a})
       . mapping _Coerce
 
--- | The identifier of the Cloud Monitoring metric. The metric cannot have
--- negative values and should be a utilization metric, which means that the
--- number of virtual machines handling requests should increase or decrease
--- proportionally to the metric. The metric must also have a label of
--- compute.googleapis.com\/resource_id with the value of the instance\'s
+-- | The identifier of the Stackdriver Monitoring metric. The metric cannot
+-- have negative values and should be a utilization metric, which means
+-- that the number of virtual machines handling requests should increase or
+-- decrease proportionally to the metric. The metric must also have a label
+-- of compute.googleapis.com\/resource_id with the value of the instance\'s
 -- unique ID, although this alone does not guarantee that the metric is
 -- valid. For example, the following is a valid metric:
 -- compute.googleapis.com\/instance\/network\/received_bytes_count The
@@ -1014,9 +1338,9 @@ apcmuMetric :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
 apcmuMetric
   = lens _apcmuMetric (\ s a -> s{_apcmuMetric = a})
 
--- | Defines how target utilization value is expressed for a Cloud Monitoring
--- metric. Either GAUGE, DELTA_PER_SECOND, or DELTA_PER_MINUTE. If not
--- specified, the default is GAUGE.
+-- | Defines how target utilization value is expressed for a Stackdriver
+-- Monitoring metric. Either GAUGE, DELTA_PER_SECOND, or DELTA_PER_MINUTE.
+-- If not specified, the default is GAUGE.
 apcmuUtilizationTargetType :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
 apcmuUtilizationTargetType
   = lens _apcmuUtilizationTargetType
@@ -1551,8 +1875,7 @@ igmlItems
       _Default
       . _Coerce
 
--- | [Output Only] The URL for this resource type. The server generates this
--- URL.
+-- | [Output Only] Server-defined URL for this resource.
 igmlSelfLink :: Lens' InstanceGroupManagerList (Maybe Text)
 igmlSelfLink
   = lens _igmlSelfLink (\ s a -> s{_igmlSelfLink = a})
@@ -1650,22 +1973,24 @@ instance ToJSON SubnetworksScopedListWarning where
 --
 -- /See:/ 'image' smart constructor.
 data Image = Image'
-    { _iStatus            :: !(Maybe ImageStatus)
-    , _iDiskSizeGb        :: !(Maybe (Textual Int64))
-    , _iSourceType        :: !ImageSourceType
-    , _iSourceDiskId      :: !(Maybe Text)
-    , _iKind              :: !Text
-    , _iArchiveSizeBytes  :: !(Maybe (Textual Int64))
-    , _iFamily            :: !(Maybe Text)
-    , _iRawDisk           :: !(Maybe ImageRawDisk)
-    , _iSelfLink          :: !(Maybe Text)
-    , _iName              :: !(Maybe Text)
-    , _iCreationTimestamp :: !(Maybe Text)
-    , _iId                :: !(Maybe (Textual Word64))
-    , _iLicenses          :: !(Maybe [Text])
-    , _iSourceDisk        :: !(Maybe Text)
-    , _iDescription       :: !(Maybe Text)
-    , _iDeprecated        :: !(Maybe DeprecationStatus)
+    { _iStatus                  :: !(Maybe ImageStatus)
+    , _iImageEncryptionKey      :: !(Maybe CustomerEncryptionKey)
+    , _iDiskSizeGb              :: !(Maybe (Textual Int64))
+    , _iSourceType              :: !ImageSourceType
+    , _iSourceDiskId            :: !(Maybe Text)
+    , _iKind                    :: !Text
+    , _iSourceDiskEncryptionKey :: !(Maybe CustomerEncryptionKey)
+    , _iArchiveSizeBytes        :: !(Maybe (Textual Int64))
+    , _iFamily                  :: !(Maybe Text)
+    , _iRawDisk                 :: !(Maybe ImageRawDisk)
+    , _iSelfLink                :: !(Maybe Text)
+    , _iName                    :: !(Maybe Text)
+    , _iCreationTimestamp       :: !(Maybe Text)
+    , _iId                      :: !(Maybe (Textual Word64))
+    , _iLicenses                :: !(Maybe [Text])
+    , _iSourceDisk              :: !(Maybe Text)
+    , _iDescription             :: !(Maybe Text)
+    , _iDeprecated              :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
@@ -1674,6 +1999,8 @@ data Image = Image'
 --
 -- * 'iStatus'
 --
+-- * 'iImageEncryptionKey'
+--
 -- * 'iDiskSizeGb'
 --
 -- * 'iSourceType'
@@ -1681,6 +2008,8 @@ data Image = Image'
 -- * 'iSourceDiskId'
 --
 -- * 'iKind'
+--
+-- * 'iSourceDiskEncryptionKey'
 --
 -- * 'iArchiveSizeBytes'
 --
@@ -1708,10 +2037,12 @@ image
 image =
     Image'
     { _iStatus = Nothing
+    , _iImageEncryptionKey = Nothing
     , _iDiskSizeGb = Nothing
     , _iSourceType = Raw
     , _iSourceDiskId = Nothing
     , _iKind = "compute#image"
+    , _iSourceDiskEncryptionKey = Nothing
     , _iArchiveSizeBytes = Nothing
     , _iFamily = Nothing
     , _iRawDisk = Nothing
@@ -1731,6 +2062,18 @@ image =
 -- FAILED, PENDING, or READY.
 iStatus :: Lens' Image (Maybe ImageStatus)
 iStatus = lens _iStatus (\ s a -> s{_iStatus = a})
+
+-- | Encrypts the image using a customer-supplied encryption key. After you
+-- encrypt an image with a customer-supplied key, you must provide the same
+-- key if you use the image later (e.g. to create a disk from the image).
+-- Customer-supplied encryption keys do not protect access to metadata of
+-- the disk. If you do not provide an encryption key when creating the
+-- image, then the disk will be encrypted using an automatically generated
+-- key and you do not need to provide a key to use the image later.
+iImageEncryptionKey :: Lens' Image (Maybe CustomerEncryptionKey)
+iImageEncryptionKey
+  = lens _iImageEncryptionKey
+      (\ s a -> s{_iImageEncryptionKey = a})
 
 -- | Size of the image when restored onto a persistent disk (in GB).
 iDiskSizeGb :: Lens' Image (Maybe Int64)
@@ -1756,6 +2099,13 @@ iSourceDiskId
 iKind :: Lens' Image Text
 iKind = lens _iKind (\ s a -> s{_iKind = a})
 
+-- | The customer-supplied encryption key of the source disk. Required if the
+-- source disk is protected by a customer-supplied encryption key.
+iSourceDiskEncryptionKey :: Lens' Image (Maybe CustomerEncryptionKey)
+iSourceDiskEncryptionKey
+  = lens _iSourceDiskEncryptionKey
+      (\ s a -> s{_iSourceDiskEncryptionKey = a})
+
 -- | Size of the image tar.gz archive stored in Google Cloud Storage (in
 -- bytes).
 iArchiveSizeBytes :: Lens' Image (Maybe Int64)
@@ -1767,6 +2117,7 @@ iArchiveSizeBytes
 -- | The name of the image family to which this image belongs. You can create
 -- disks by specifying an image family instead of a specific image name.
 -- The image family always returns its latest image that is not deprecated.
+-- The name of the image family must comply with RFC1035.
 iFamily :: Lens' Image (Maybe Text)
 iFamily = lens _iFamily (\ s a -> s{_iFamily = a})
 
@@ -1801,7 +2152,7 @@ iId :: Lens' Image (Maybe Word64)
 iId
   = lens _iId (\ s a -> s{_iId = a}) . mapping _Coerce
 
--- | Any applicable publicly visible licenses.
+-- | Any applicable license URI.
 iLicenses :: Lens' Image [Text]
 iLicenses
   = lens _iLicenses (\ s a -> s{_iLicenses = a}) .
@@ -1812,8 +2163,8 @@ iLicenses
 -- or valid partial URL. You must provide either this property or the
 -- rawDisk.source property but not both to create an image. For example,
 -- the following are valid values: -
--- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/disk\/disk
--- - projects\/project\/zones\/zone\/disk\/disk - zones\/zone\/disks\/disk
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/disks\/disk
+-- - projects\/project\/zones\/zone\/disks\/disk - zones\/zone\/disks\/disk
 iSourceDisk :: Lens' Image (Maybe Text)
 iSourceDisk
   = lens _iSourceDisk (\ s a -> s{_iSourceDisk = a})
@@ -1834,10 +2185,12 @@ instance FromJSON Image where
           = withObject "Image"
               (\ o ->
                  Image' <$>
-                   (o .:? "status") <*> (o .:? "diskSizeGb") <*>
-                     (o .:? "sourceType" .!= Raw)
+                   (o .:? "status") <*> (o .:? "imageEncryptionKey") <*>
+                     (o .:? "diskSizeGb")
+                     <*> (o .:? "sourceType" .!= Raw)
                      <*> (o .:? "sourceDiskId")
                      <*> (o .:? "kind" .!= "compute#image")
+                     <*> (o .:? "sourceDiskEncryptionKey")
                      <*> (o .:? "archiveSizeBytes")
                      <*> (o .:? "family")
                      <*> (o .:? "rawDisk")
@@ -1855,10 +2208,13 @@ instance ToJSON Image where
           = object
               (catMaybes
                  [("status" .=) <$> _iStatus,
+                  ("imageEncryptionKey" .=) <$> _iImageEncryptionKey,
                   ("diskSizeGb" .=) <$> _iDiskSizeGb,
                   Just ("sourceType" .= _iSourceType),
                   ("sourceDiskId" .=) <$> _iSourceDiskId,
                   Just ("kind" .= _iKind),
+                  ("sourceDiskEncryptionKey" .=) <$>
+                    _iSourceDiskEncryptionKey,
                   ("archiveSizeBytes" .=) <$> _iArchiveSizeBytes,
                   ("family" .=) <$> _iFamily,
                   ("rawDisk" .=) <$> _iRawDisk,
@@ -2352,6 +2708,232 @@ instance ToJSON InstanceGroupManagersScopedList where
                  [("warning" .=) <$> _igmslWarning,
                   ("instanceGroupManagers" .=) <$>
                     _igmslInstanceGroupManagers])
+
+-- | An HealthCheck resource. This resource defines a template for how
+-- individual virtual machines should be checked for health, via one of the
+-- supported protocols.
+--
+-- /See:/ 'healthCheck' smart constructor.
+data HealthCheck = HealthCheck'
+    { _hcHealthyThreshold   :: !(Maybe (Textual Int32))
+    , _hcTCPHealthCheck     :: !(Maybe TCPHealthCheck)
+    , _hcHTTP2HealthCheck   :: !(Maybe HTTP2HealthCheck)
+    , _hcKind               :: !Text
+    , _hcSSLHealthCheck     :: !(Maybe SSLHealthCheck)
+    , _hcSelfLink           :: !(Maybe Text)
+    , _hcCheckIntervalSec   :: !(Maybe (Textual Int32))
+    , _hcName               :: !(Maybe Text)
+    , _hcCreationTimestamp  :: !(Maybe Text)
+    , _hcHTTPHealthCheck    :: !(Maybe HTTPHealthCheck)
+    , _hcId                 :: !(Maybe (Textual Word64))
+    , _hcType               :: !(Maybe HealthCheckType)
+    , _hcTimeoutSec         :: !(Maybe (Textual Int32))
+    , _hcDescription        :: !(Maybe Text)
+    , _hcUnhealthyThreshold :: !(Maybe (Textual Int32))
+    , _hcHTTPSHealthCheck   :: !(Maybe HTTPSHealthCheck)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HealthCheck' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hcHealthyThreshold'
+--
+-- * 'hcTCPHealthCheck'
+--
+-- * 'hcHTTP2HealthCheck'
+--
+-- * 'hcKind'
+--
+-- * 'hcSSLHealthCheck'
+--
+-- * 'hcSelfLink'
+--
+-- * 'hcCheckIntervalSec'
+--
+-- * 'hcName'
+--
+-- * 'hcCreationTimestamp'
+--
+-- * 'hcHTTPHealthCheck'
+--
+-- * 'hcId'
+--
+-- * 'hcType'
+--
+-- * 'hcTimeoutSec'
+--
+-- * 'hcDescription'
+--
+-- * 'hcUnhealthyThreshold'
+--
+-- * 'hcHTTPSHealthCheck'
+healthCheck
+    :: HealthCheck
+healthCheck =
+    HealthCheck'
+    { _hcHealthyThreshold = Nothing
+    , _hcTCPHealthCheck = Nothing
+    , _hcHTTP2HealthCheck = Nothing
+    , _hcKind = "compute#healthCheck"
+    , _hcSSLHealthCheck = Nothing
+    , _hcSelfLink = Nothing
+    , _hcCheckIntervalSec = Nothing
+    , _hcName = Nothing
+    , _hcCreationTimestamp = Nothing
+    , _hcHTTPHealthCheck = Nothing
+    , _hcId = Nothing
+    , _hcType = Nothing
+    , _hcTimeoutSec = Nothing
+    , _hcDescription = Nothing
+    , _hcUnhealthyThreshold = Nothing
+    , _hcHTTPSHealthCheck = Nothing
+    }
+
+-- | A so-far unhealthy instance will be marked healthy after this many
+-- consecutive successes. The default value is 2.
+hcHealthyThreshold :: Lens' HealthCheck (Maybe Int32)
+hcHealthyThreshold
+  = lens _hcHealthyThreshold
+      (\ s a -> s{_hcHealthyThreshold = a})
+      . mapping _Coerce
+
+hcTCPHealthCheck :: Lens' HealthCheck (Maybe TCPHealthCheck)
+hcTCPHealthCheck
+  = lens _hcTCPHealthCheck
+      (\ s a -> s{_hcTCPHealthCheck = a})
+
+hcHTTP2HealthCheck :: Lens' HealthCheck (Maybe HTTP2HealthCheck)
+hcHTTP2HealthCheck
+  = lens _hcHTTP2HealthCheck
+      (\ s a -> s{_hcHTTP2HealthCheck = a})
+
+-- | Type of the resource.
+hcKind :: Lens' HealthCheck Text
+hcKind = lens _hcKind (\ s a -> s{_hcKind = a})
+
+hcSSLHealthCheck :: Lens' HealthCheck (Maybe SSLHealthCheck)
+hcSSLHealthCheck
+  = lens _hcSSLHealthCheck
+      (\ s a -> s{_hcSSLHealthCheck = a})
+
+-- | [Output Only] Server-defined URL for the resource.
+hcSelfLink :: Lens' HealthCheck (Maybe Text)
+hcSelfLink
+  = lens _hcSelfLink (\ s a -> s{_hcSelfLink = a})
+
+-- | How often (in seconds) to send a health check. The default value is 5
+-- seconds.
+hcCheckIntervalSec :: Lens' HealthCheck (Maybe Int32)
+hcCheckIntervalSec
+  = lens _hcCheckIntervalSec
+      (\ s a -> s{_hcCheckIntervalSec = a})
+      . mapping _Coerce
+
+-- | Name of the resource. Provided by the client when the resource is
+-- created. The name must be 1-63 characters long, and comply with RFC1035.
+-- Specifically, the name must be 1-63 characters long and match the
+-- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash.
+hcName :: Lens' HealthCheck (Maybe Text)
+hcName = lens _hcName (\ s a -> s{_hcName = a})
+
+-- | [Output Only] Creation timestamp in 3339 text format.
+hcCreationTimestamp :: Lens' HealthCheck (Maybe Text)
+hcCreationTimestamp
+  = lens _hcCreationTimestamp
+      (\ s a -> s{_hcCreationTimestamp = a})
+
+hcHTTPHealthCheck :: Lens' HealthCheck (Maybe HTTPHealthCheck)
+hcHTTPHealthCheck
+  = lens _hcHTTPHealthCheck
+      (\ s a -> s{_hcHTTPHealthCheck = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+hcId :: Lens' HealthCheck (Maybe Word64)
+hcId
+  = lens _hcId (\ s a -> s{_hcId = a}) .
+      mapping _Coerce
+
+-- | Specifies the type of the healthCheck, either TCP, UDP, SSL, HTTP, HTTPS
+-- or HTTP2. If not specified, the default is TCP. Exactly one of the
+-- protocol-specific health check field must be specified, which must match
+-- type field.
+hcType :: Lens' HealthCheck (Maybe HealthCheckType)
+hcType = lens _hcType (\ s a -> s{_hcType = a})
+
+-- | How long (in seconds) to wait before claiming failure. The default value
+-- is 5 seconds. It is invalid for timeoutSec to have greater value than
+-- checkIntervalSec.
+hcTimeoutSec :: Lens' HealthCheck (Maybe Int32)
+hcTimeoutSec
+  = lens _hcTimeoutSec (\ s a -> s{_hcTimeoutSec = a})
+      . mapping _Coerce
+
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
+hcDescription :: Lens' HealthCheck (Maybe Text)
+hcDescription
+  = lens _hcDescription
+      (\ s a -> s{_hcDescription = a})
+
+-- | A so-far healthy instance will be marked unhealthy after this many
+-- consecutive failures. The default value is 2.
+hcUnhealthyThreshold :: Lens' HealthCheck (Maybe Int32)
+hcUnhealthyThreshold
+  = lens _hcUnhealthyThreshold
+      (\ s a -> s{_hcUnhealthyThreshold = a})
+      . mapping _Coerce
+
+hcHTTPSHealthCheck :: Lens' HealthCheck (Maybe HTTPSHealthCheck)
+hcHTTPSHealthCheck
+  = lens _hcHTTPSHealthCheck
+      (\ s a -> s{_hcHTTPSHealthCheck = a})
+
+instance FromJSON HealthCheck where
+        parseJSON
+          = withObject "HealthCheck"
+              (\ o ->
+                 HealthCheck' <$>
+                   (o .:? "healthyThreshold") <*>
+                     (o .:? "tcpHealthCheck")
+                     <*> (o .:? "http2HealthCheck")
+                     <*> (o .:? "kind" .!= "compute#healthCheck")
+                     <*> (o .:? "sslHealthCheck")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "checkIntervalSec")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "httpHealthCheck")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type")
+                     <*> (o .:? "timeoutSec")
+                     <*> (o .:? "description")
+                     <*> (o .:? "unhealthyThreshold")
+                     <*> (o .:? "httpsHealthCheck"))
+
+instance ToJSON HealthCheck where
+        toJSON HealthCheck'{..}
+          = object
+              (catMaybes
+                 [("healthyThreshold" .=) <$> _hcHealthyThreshold,
+                  ("tcpHealthCheck" .=) <$> _hcTCPHealthCheck,
+                  ("http2HealthCheck" .=) <$> _hcHTTP2HealthCheck,
+                  Just ("kind" .= _hcKind),
+                  ("sslHealthCheck" .=) <$> _hcSSLHealthCheck,
+                  ("selfLink" .=) <$> _hcSelfLink,
+                  ("checkIntervalSec" .=) <$> _hcCheckIntervalSec,
+                  ("name" .=) <$> _hcName,
+                  ("creationTimestamp" .=) <$> _hcCreationTimestamp,
+                  ("httpHealthCheck" .=) <$> _hcHTTPHealthCheck,
+                  ("id" .=) <$> _hcId, ("type" .=) <$> _hcType,
+                  ("timeoutSec" .=) <$> _hcTimeoutSec,
+                  ("description" .=) <$> _hcDescription,
+                  ("unhealthyThreshold" .=) <$> _hcUnhealthyThreshold,
+                  ("httpsHealthCheck" .=) <$> _hcHTTPSHealthCheck])
 
 --
 -- /See:/ 'diskAggregatedList' smart constructor.
@@ -3600,6 +4182,45 @@ instance ToJSON VPNTunnelsScopedListWarning where
                   ("code" .=) <$> _vtslwCode,
                   ("message" .=) <$> _vtslwMessage])
 
+--
+-- /See:/ 'targetSSLProxiesSetBackendServiceRequest' smart constructor.
+newtype TargetSSLProxiesSetBackendServiceRequest = TargetSSLProxiesSetBackendServiceRequest'
+    { _tspsbsrService :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetSSLProxiesSetBackendServiceRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tspsbsrService'
+targetSSLProxiesSetBackendServiceRequest
+    :: TargetSSLProxiesSetBackendServiceRequest
+targetSSLProxiesSetBackendServiceRequest =
+    TargetSSLProxiesSetBackendServiceRequest'
+    { _tspsbsrService = Nothing
+    }
+
+-- | The URL of the new BackendService resource for the targetSslProxy.
+tspsbsrService :: Lens' TargetSSLProxiesSetBackendServiceRequest (Maybe Text)
+tspsbsrService
+  = lens _tspsbsrService
+      (\ s a -> s{_tspsbsrService = a})
+
+instance FromJSON
+         TargetSSLProxiesSetBackendServiceRequest where
+        parseJSON
+          = withObject
+              "TargetSSLProxiesSetBackendServiceRequest"
+              (\ o ->
+                 TargetSSLProxiesSetBackendServiceRequest' <$>
+                   (o .:? "service"))
+
+instance ToJSON
+         TargetSSLProxiesSetBackendServiceRequest where
+        toJSON TargetSSLProxiesSetBackendServiceRequest'{..}
+          = object
+              (catMaybes [("service" .=) <$> _tspsbsrService])
+
 -- | A ForwardingRule resource. A ForwardingRule resource specifies which
 -- pool of target virtual machines to forward a packet to if it matches the
 -- given [IPAddress, IPProtocol, portRange] tuple.
@@ -3661,11 +4282,16 @@ forwardingRule =
     , _frTarget = Nothing
     }
 
--- | Value of the reserved IP address that this forwarding rule is serving on
--- behalf of. For global forwarding rules, the address must be a global IP;
--- for regional forwarding rules, the address must live in the same region
--- as the forwarding rule. If left empty (default value), an ephemeral IP
--- from the same scope (global or regional) will be assigned.
+-- | The IP address that this forwarding rule is serving on behalf of. For
+-- global forwarding rules, the address must be a global IP; for regional
+-- forwarding rules, the address must live in the same region as the
+-- forwarding rule. By default, this field is empty and an ephemeral IP
+-- from the same scope (global or regional) will be assigned. When the load
+-- balancing scheme is INTERNAL, this can only be an RFC 1918 IP address
+-- belonging to the network\/subnetwork configured for the forwarding rule.
+-- A reserved address cannot be used. If the field is empty, the IP address
+-- will be automatically allocated from the internal IP range of the
+-- subnetwork or network configured for this forwarding rule.
 frIPAddress :: Lens' ForwardingRule (Maybe Text)
 frIPAddress
   = lens _frIPAddress (\ s a -> s{_frIPAddress = a})
@@ -3678,7 +4304,8 @@ frKind = lens _frKind (\ s a -> s{_frKind = a})
 -- | Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets
 -- addressed to ports in the specified range will be forwarded to target.
 -- Forwarding rules with the same [IPAddress, IPProtocol] pair must have
--- disjoint port ranges.
+-- disjoint port ranges. This field is not used for internal load
+-- balancing.
 frPortRange :: Lens' ForwardingRule (Maybe Text)
 frPortRange
   = lens _frPortRange (\ s a -> s{_frPortRange = a})
@@ -3699,7 +4326,7 @@ frName :: Lens' ForwardingRule (Maybe Text)
 frName = lens _frName (\ s a -> s{_frName = a})
 
 -- | The IP protocol to which this rule applies. Valid options are TCP, UDP,
--- ESP, AH, SCTP or ICMP.
+-- ESP, AH, SCTP or ICMP. When the load balancing scheme is INTERNAL
 frIPProtocol :: Lens' ForwardingRule (Maybe ForwardingRuleIPProtocol)
 frIPProtocol
   = lens _frIPProtocol (\ s a -> s{_frIPProtocol = a})
@@ -3735,7 +4362,7 @@ frDescription
 -- global TargetHttpProxy or TargetHttpsProxy resource. The forwarded
 -- traffic must be of a type appropriate to the target object. For example,
 -- TargetHttpProxy requires HTTP traffic, and TargetHttpsProxy requires
--- HTTPS traffic.
+-- HTTPS traffic. This field is not used for internal load balancing.
 frTarget :: Lens' ForwardingRule (Maybe Text)
 frTarget = lens _frTarget (\ s a -> s{_frTarget = a})
 
@@ -4030,6 +4657,7 @@ data Project = Project'
     , _pUsageExportLocation    :: !(Maybe UsageExportLocation)
     , _pSelfLink               :: !(Maybe Text)
     , _pName                   :: !(Maybe Text)
+    , _pDefaultServiceAccount  :: !(Maybe Text)
     , _pCreationTimestamp      :: !(Maybe Text)
     , _pEnabledFeatures        :: !(Maybe [Text])
     , _pQuotas                 :: !(Maybe [Quota])
@@ -4050,6 +4678,8 @@ data Project = Project'
 --
 -- * 'pName'
 --
+-- * 'pDefaultServiceAccount'
+--
 -- * 'pCreationTimestamp'
 --
 -- * 'pEnabledFeatures'
@@ -4069,6 +4699,7 @@ project =
     , _pUsageExportLocation = Nothing
     , _pSelfLink = Nothing
     , _pName = Nothing
+    , _pDefaultServiceAccount = Nothing
     , _pCreationTimestamp = Nothing
     , _pEnabledFeatures = Nothing
     , _pQuotas = Nothing
@@ -4097,6 +4728,13 @@ pSelfLink
 -- make requests to Compute Engine.
 pName :: Lens' Project (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
+
+-- | [Output Only] Default service account used by VMs running in this
+-- project.
+pDefaultServiceAccount :: Lens' Project (Maybe Text)
+pDefaultServiceAccount
+  = lens _pDefaultServiceAccount
+      (\ s a -> s{_pDefaultServiceAccount = a})
 
 -- | [Output Only] Creation timestamp in RFC3339 text format.
 pCreationTimestamp :: Lens' Project (Maybe Text)
@@ -4146,6 +4784,7 @@ instance FromJSON Project where
                      (o .:? "usageExportLocation")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
+                     <*> (o .:? "defaultServiceAccount")
                      <*> (o .:? "creationTimestamp")
                      <*> (o .:? "enabledFeatures" .!= mempty)
                      <*> (o .:? "quotas" .!= mempty)
@@ -4161,6 +4800,8 @@ instance ToJSON Project where
                   ("usageExportLocation" .=) <$> _pUsageExportLocation,
                   ("selfLink" .=) <$> _pSelfLink,
                   ("name" .=) <$> _pName,
+                  ("defaultServiceAccount" .=) <$>
+                    _pDefaultServiceAccount,
                   ("creationTimestamp" .=) <$> _pCreationTimestamp,
                   ("enabledFeatures" .=) <$> _pEnabledFeatures,
                   ("quotas" .=) <$> _pQuotas, ("id" .=) <$> _pId,
@@ -4404,7 +5045,9 @@ oDescription :: Lens' Operation (Maybe Text)
 oDescription
   = lens _oDescription (\ s a -> s{_oDescription = a})
 
--- | [Output Only] The URL of the resource that the operation modifies.
+-- | [Output Only] The URL of the resource that the operation modifies. If
+-- creating a persistent disk snapshot, this points to the persistent disk
+-- that the snapshot was created from.
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
@@ -4526,25 +5169,28 @@ instance ToJSON DisksScopedListWarningDataItem where
 --
 -- /See:/ 'disk' smart constructor.
 data Disk = Disk'
-    { _dStatus              :: !(Maybe DiskStatus)
-    , _dSourceSnapshotId    :: !(Maybe Text)
-    , _dLastAttachTimestamp :: !(Maybe Text)
-    , _dUsers               :: !(Maybe [Text])
-    , _dSourceImage         :: !(Maybe Text)
-    , _dSizeGb              :: !(Maybe (Textual Int64))
-    , _dKind                :: !Text
-    , _dLastDetachTimestamp :: !(Maybe Text)
-    , _dZone                :: !(Maybe Text)
-    , _dSelfLink            :: !(Maybe Text)
-    , _dName                :: !(Maybe Text)
-    , _dSourceImageId       :: !(Maybe Text)
-    , _dCreationTimestamp   :: !(Maybe Text)
-    , _dId                  :: !(Maybe (Textual Word64))
-    , _dLicenses            :: !(Maybe [Text])
-    , _dOptions             :: !(Maybe Text)
-    , _dType                :: !(Maybe Text)
-    , _dDescription         :: !(Maybe Text)
-    , _dSourceSnapshot      :: !(Maybe Text)
+    { _dStatus                      :: !(Maybe DiskStatus)
+    , _dSourceSnapshotId            :: !(Maybe Text)
+    , _dLastAttachTimestamp         :: !(Maybe Text)
+    , _dUsers                       :: !(Maybe [Text])
+    , _dSourceImage                 :: !(Maybe Text)
+    , _dDiskEncryptionKey           :: !(Maybe CustomerEncryptionKey)
+    , _dSizeGb                      :: !(Maybe (Textual Int64))
+    , _dKind                        :: !Text
+    , _dLastDetachTimestamp         :: !(Maybe Text)
+    , _dZone                        :: !(Maybe Text)
+    , _dSelfLink                    :: !(Maybe Text)
+    , _dName                        :: !(Maybe Text)
+    , _dSourceImageId               :: !(Maybe Text)
+    , _dCreationTimestamp           :: !(Maybe Text)
+    , _dSourceImageEncryptionKey    :: !(Maybe CustomerEncryptionKey)
+    , _dId                          :: !(Maybe (Textual Word64))
+    , _dLicenses                    :: !(Maybe [Text])
+    , _dOptions                     :: !(Maybe Text)
+    , _dType                        :: !(Maybe Text)
+    , _dDescription                 :: !(Maybe Text)
+    , _dSourceSnapshotEncryptionKey :: !(Maybe CustomerEncryptionKey)
+    , _dSourceSnapshot              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Disk' with the minimum fields required to make a request.
@@ -4560,6 +5206,8 @@ data Disk = Disk'
 -- * 'dUsers'
 --
 -- * 'dSourceImage'
+--
+-- * 'dDiskEncryptionKey'
 --
 -- * 'dSizeGb'
 --
@@ -4577,6 +5225,8 @@ data Disk = Disk'
 --
 -- * 'dCreationTimestamp'
 --
+-- * 'dSourceImageEncryptionKey'
+--
 -- * 'dId'
 --
 -- * 'dLicenses'
@@ -4586,6 +5236,8 @@ data Disk = Disk'
 -- * 'dType'
 --
 -- * 'dDescription'
+--
+-- * 'dSourceSnapshotEncryptionKey'
 --
 -- * 'dSourceSnapshot'
 disk
@@ -4597,6 +5249,7 @@ disk =
     , _dLastAttachTimestamp = Nothing
     , _dUsers = Nothing
     , _dSourceImage = Nothing
+    , _dDiskEncryptionKey = Nothing
     , _dSizeGb = Nothing
     , _dKind = "compute#disk"
     , _dLastDetachTimestamp = Nothing
@@ -4605,16 +5258,17 @@ disk =
     , _dName = Nothing
     , _dSourceImageId = Nothing
     , _dCreationTimestamp = Nothing
+    , _dSourceImageEncryptionKey = Nothing
     , _dId = Nothing
     , _dLicenses = Nothing
     , _dOptions = Nothing
     , _dType = Nothing
     , _dDescription = Nothing
+    , _dSourceSnapshotEncryptionKey = Nothing
     , _dSourceSnapshot = Nothing
     }
 
--- | [Output Only] The status of disk creation. Applicable statuses includes:
--- CREATING, FAILED, READY, RESTORING.
+-- | [Output Only] The status of disk creation.
 dStatus :: Lens' Disk (Maybe DiskStatus)
 dStatus = lens _dStatus (\ s a -> s{_dStatus = a})
 
@@ -4657,6 +5311,19 @@ dUsers
 dSourceImage :: Lens' Disk (Maybe Text)
 dSourceImage
   = lens _dSourceImage (\ s a -> s{_dSourceImage = a})
+
+-- | Encrypts the disk using a customer-supplied encryption key. After you
+-- encrypt a disk with a customer-supplied key, you must provide the same
+-- key if you use the disk later (e.g. to create a disk snapshot or an
+-- image, or to attach the disk to a virtual machine). Customer-supplied
+-- encryption keys do not protect access to metadata of the disk. If you do
+-- not provide an encryption key when creating the disk, then the disk will
+-- be encrypted using an automatically generated key and you do not need to
+-- provide a key to use the disk later.
+dDiskEncryptionKey :: Lens' Disk (Maybe CustomerEncryptionKey)
+dDiskEncryptionKey
+  = lens _dDiskEncryptionKey
+      (\ s a -> s{_dDiskEncryptionKey = a})
 
 -- | Size of the persistent disk, specified in GB. You can specify this field
 -- when creating a persistent disk using the sourceImage or sourceSnapshot
@@ -4714,13 +5381,20 @@ dCreationTimestamp
   = lens _dCreationTimestamp
       (\ s a -> s{_dCreationTimestamp = a})
 
+-- | The customer-supplied encryption key of the source image. Required if
+-- the source image is protected by a customer-supplied encryption key.
+dSourceImageEncryptionKey :: Lens' Disk (Maybe CustomerEncryptionKey)
+dSourceImageEncryptionKey
+  = lens _dSourceImageEncryptionKey
+      (\ s a -> s{_dSourceImageEncryptionKey = a})
+
 -- | [Output Only] The unique identifier for the resource. This identifier is
 -- defined by the server.
 dId :: Lens' Disk (Maybe Word64)
 dId
   = lens _dId (\ s a -> s{_dId = a}) . mapping _Coerce
 
--- | [Output Only] Any applicable publicly visible licenses.
+-- | Any applicable publicly visible licenses.
 dLicenses :: Lens' Disk [Text]
 dLicenses
   = lens _dLicenses (\ s a -> s{_dLicenses = a}) .
@@ -4742,6 +5416,13 @@ dDescription :: Lens' Disk (Maybe Text)
 dDescription
   = lens _dDescription (\ s a -> s{_dDescription = a})
 
+-- | The customer-supplied encryption key of the source snapshot. Required if
+-- the source snapshot is protected by a customer-supplied encryption key.
+dSourceSnapshotEncryptionKey :: Lens' Disk (Maybe CustomerEncryptionKey)
+dSourceSnapshotEncryptionKey
+  = lens _dSourceSnapshotEncryptionKey
+      (\ s a -> s{_dSourceSnapshotEncryptionKey = a})
+
 -- | The source snapshot used to create this disk. You can provide this as a
 -- partial or full URL to the resource. For example, the following are
 -- valid values: -
@@ -4762,6 +5443,7 @@ instance FromJSON Disk where
                      (o .:? "lastAttachTimestamp")
                      <*> (o .:? "users" .!= mempty)
                      <*> (o .:? "sourceImage")
+                     <*> (o .:? "diskEncryptionKey")
                      <*> (o .:? "sizeGb")
                      <*> (o .:? "kind" .!= "compute#disk")
                      <*> (o .:? "lastDetachTimestamp")
@@ -4770,11 +5452,13 @@ instance FromJSON Disk where
                      <*> (o .:? "name")
                      <*> (o .:? "sourceImageId")
                      <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "sourceImageEncryptionKey")
                      <*> (o .:? "id")
                      <*> (o .:? "licenses" .!= mempty)
                      <*> (o .:? "options")
                      <*> (o .:? "type")
                      <*> (o .:? "description")
+                     <*> (o .:? "sourceSnapshotEncryptionKey")
                      <*> (o .:? "sourceSnapshot"))
 
 instance ToJSON Disk where
@@ -4786,6 +5470,7 @@ instance ToJSON Disk where
                   ("lastAttachTimestamp" .=) <$> _dLastAttachTimestamp,
                   ("users" .=) <$> _dUsers,
                   ("sourceImage" .=) <$> _dSourceImage,
+                  ("diskEncryptionKey" .=) <$> _dDiskEncryptionKey,
                   ("sizeGb" .=) <$> _dSizeGb, Just ("kind" .= _dKind),
                   ("lastDetachTimestamp" .=) <$> _dLastDetachTimestamp,
                   ("zone" .=) <$> _dZone,
@@ -4793,9 +5478,13 @@ instance ToJSON Disk where
                   ("name" .=) <$> _dName,
                   ("sourceImageId" .=) <$> _dSourceImageId,
                   ("creationTimestamp" .=) <$> _dCreationTimestamp,
+                  ("sourceImageEncryptionKey" .=) <$>
+                    _dSourceImageEncryptionKey,
                   ("id" .=) <$> _dId, ("licenses" .=) <$> _dLicenses,
                   ("options" .=) <$> _dOptions, ("type" .=) <$> _dType,
                   ("description" .=) <$> _dDescription,
+                  ("sourceSnapshotEncryptionKey" .=) <$>
+                    _dSourceSnapshotEncryptionKey,
                   ("sourceSnapshot" .=) <$> _dSourceSnapshot])
 
 --
@@ -4951,6 +5640,7 @@ instance ToJSON TargetPoolsScopedListWarningDataItem
                  [("value" .=) <$> _tpslwdiValue,
                   ("key" .=) <$> _tpslwdiKey])
 
+-- | An Instance Group Manager resource.
 --
 -- /See:/ 'instanceGroupManager' smart constructor.
 data InstanceGroupManager = InstanceGroupManager'
@@ -4965,6 +5655,7 @@ data InstanceGroupManager = InstanceGroupManager'
     , _igmName              :: !(Maybe Text)
     , _igmCreationTimestamp :: !(Maybe Text)
     , _igmId                :: !(Maybe (Textual Word64))
+    , _igmRegion            :: !(Maybe Text)
     , _igmTargetPools       :: !(Maybe [Text])
     , _igmDescription       :: !(Maybe Text)
     , _igmInstanceGroup     :: !(Maybe Text)
@@ -4997,6 +5688,8 @@ data InstanceGroupManager = InstanceGroupManager'
 --
 -- * 'igmId'
 --
+-- * 'igmRegion'
+--
 -- * 'igmTargetPools'
 --
 -- * 'igmDescription'
@@ -5019,6 +5712,7 @@ instanceGroupManager =
     , _igmName = Nothing
     , _igmCreationTimestamp = Nothing
     , _igmId = Nothing
+    , _igmRegion = Nothing
     , _igmTargetPools = Nothing
     , _igmDescription = Nothing
     , _igmInstanceGroup = Nothing
@@ -5047,7 +5741,8 @@ igmBaseInstanceName
   = lens _igmBaseInstanceName
       (\ s a -> s{_igmBaseInstanceName = a})
 
--- | The name of the zone where the managed instance group is located.
+-- | [Output Only] The URL of the zone where the managed instance group is
+-- located (for zonal resources).
 igmZone :: Lens' InstanceGroupManager (Maybe Text)
 igmZone = lens _igmZone (\ s a -> s{_igmZone = a})
 
@@ -5101,6 +5796,12 @@ igmId
   = lens _igmId (\ s a -> s{_igmId = a}) .
       mapping _Coerce
 
+-- | [Output Only] The URL of the region where the managed instance group
+-- resides (for regional resources).
+igmRegion :: Lens' InstanceGroupManager (Maybe Text)
+igmRegion
+  = lens _igmRegion (\ s a -> s{_igmRegion = a})
+
 -- | The URLs for all TargetPool resources to which instances in the
 -- instanceGroup field are added. The target pools automatically apply to
 -- all of the instances in the managed instance group.
@@ -5149,6 +5850,7 @@ instance FromJSON InstanceGroupManager where
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
                      <*> (o .:? "id")
+                     <*> (o .:? "region")
                      <*> (o .:? "targetPools" .!= mempty)
                      <*> (o .:? "description")
                      <*> (o .:? "instanceGroup")
@@ -5168,11 +5870,100 @@ instance ToJSON InstanceGroupManager where
                   ("currentActions" .=) <$> _igmCurrentActions,
                   ("name" .=) <$> _igmName,
                   ("creationTimestamp" .=) <$> _igmCreationTimestamp,
-                  ("id" .=) <$> _igmId,
+                  ("id" .=) <$> _igmId, ("region" .=) <$> _igmRegion,
                   ("targetPools" .=) <$> _igmTargetPools,
                   ("description" .=) <$> _igmDescription,
                   ("instanceGroup" .=) <$> _igmInstanceGroup,
                   ("namedPorts" .=) <$> _igmNamedPorts])
+
+--
+-- /See:/ 'tcpHealthCheck' smart constructor.
+data TCPHealthCheck = TCPHealthCheck'
+    { _thcResponse    :: !(Maybe Text)
+    , _thcProxyHeader :: !(Maybe TCPHealthCheckProxyHeader)
+    , _thcPortName    :: !(Maybe Text)
+    , _thcPort        :: !(Maybe (Textual Int32))
+    , _thcRequest     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TCPHealthCheck' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'thcResponse'
+--
+-- * 'thcProxyHeader'
+--
+-- * 'thcPortName'
+--
+-- * 'thcPort'
+--
+-- * 'thcRequest'
+tcpHealthCheck
+    :: TCPHealthCheck
+tcpHealthCheck =
+    TCPHealthCheck'
+    { _thcResponse = Nothing
+    , _thcProxyHeader = Nothing
+    , _thcPortName = Nothing
+    , _thcPort = Nothing
+    , _thcRequest = Nothing
+    }
+
+-- | The bytes to match against the beginning of the response data. If left
+-- empty (the default value), any response will indicate health. The
+-- response data can only be ASCII.
+thcResponse :: Lens' TCPHealthCheck (Maybe Text)
+thcResponse
+  = lens _thcResponse (\ s a -> s{_thcResponse = a})
+
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+thcProxyHeader :: Lens' TCPHealthCheck (Maybe TCPHealthCheckProxyHeader)
+thcProxyHeader
+  = lens _thcProxyHeader
+      (\ s a -> s{_thcProxyHeader = a})
+
+-- | Port name as defined in InstanceGroup#NamedPort#name. If both port and
+-- port_name are defined, port takes precedence.
+thcPortName :: Lens' TCPHealthCheck (Maybe Text)
+thcPortName
+  = lens _thcPortName (\ s a -> s{_thcPortName = a})
+
+-- | The TCP port number for the health check request. The default value is
+-- 80.
+thcPort :: Lens' TCPHealthCheck (Maybe Int32)
+thcPort
+  = lens _thcPort (\ s a -> s{_thcPort = a}) .
+      mapping _Coerce
+
+-- | The application data to send once the TCP connection has been
+-- established (default value is empty). If both request and response are
+-- empty, the connection establishment alone will indicate health. The
+-- request data can only be ASCII.
+thcRequest :: Lens' TCPHealthCheck (Maybe Text)
+thcRequest
+  = lens _thcRequest (\ s a -> s{_thcRequest = a})
+
+instance FromJSON TCPHealthCheck where
+        parseJSON
+          = withObject "TCPHealthCheck"
+              (\ o ->
+                 TCPHealthCheck' <$>
+                   (o .:? "response") <*> (o .:? "proxyHeader") <*>
+                     (o .:? "portName")
+                     <*> (o .:? "port")
+                     <*> (o .:? "request"))
+
+instance ToJSON TCPHealthCheck where
+        toJSON TCPHealthCheck'{..}
+          = object
+              (catMaybes
+                 [("response" .=) <$> _thcResponse,
+                  ("proxyHeader" .=) <$> _thcProxyHeader,
+                  ("portName" .=) <$> _thcPortName,
+                  ("port" .=) <$> _thcPort,
+                  ("request" .=) <$> _thcRequest])
 
 --
 -- /See:/ 'instanceGroupsRemoveInstancesRequest' smart constructor.
@@ -5363,6 +6154,93 @@ instance ToJSON AutoscalersScopedListWarning where
                  [("data" .=) <$> _aslwData,
                   ("code" .=) <$> _aslwCode,
                   ("message" .=) <$> _aslwMessage])
+
+-- | Contains a list of HealthCheck resources.
+--
+-- /See:/ 'healthCheckList' smart constructor.
+data HealthCheckList = HealthCheckList'
+    { _hclNextPageToken :: !(Maybe Text)
+    , _hclKind          :: !Text
+    , _hclItems         :: !(Maybe [HealthCheck])
+    , _hclSelfLink      :: !(Maybe Text)
+    , _hclId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HealthCheckList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hclNextPageToken'
+--
+-- * 'hclKind'
+--
+-- * 'hclItems'
+--
+-- * 'hclSelfLink'
+--
+-- * 'hclId'
+healthCheckList
+    :: HealthCheckList
+healthCheckList =
+    HealthCheckList'
+    { _hclNextPageToken = Nothing
+    , _hclKind = "compute#healthCheckList"
+    , _hclItems = Nothing
+    , _hclSelfLink = Nothing
+    , _hclId = Nothing
+    }
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+hclNextPageToken :: Lens' HealthCheckList (Maybe Text)
+hclNextPageToken
+  = lens _hclNextPageToken
+      (\ s a -> s{_hclNextPageToken = a})
+
+-- | Type of resource.
+hclKind :: Lens' HealthCheckList Text
+hclKind = lens _hclKind (\ s a -> s{_hclKind = a})
+
+-- | A list of HealthCheck resources.
+hclItems :: Lens' HealthCheckList [HealthCheck]
+hclItems
+  = lens _hclItems (\ s a -> s{_hclItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for this resource.
+hclSelfLink :: Lens' HealthCheckList (Maybe Text)
+hclSelfLink
+  = lens _hclSelfLink (\ s a -> s{_hclSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+hclId :: Lens' HealthCheckList (Maybe Text)
+hclId = lens _hclId (\ s a -> s{_hclId = a})
+
+instance FromJSON HealthCheckList where
+        parseJSON
+          = withObject "HealthCheckList"
+              (\ o ->
+                 HealthCheckList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#healthCheckList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON HealthCheckList where
+        toJSON HealthCheckList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _hclNextPageToken,
+                  Just ("kind" .= _hclKind),
+                  ("items" .=) <$> _hclItems,
+                  ("selfLink" .=) <$> _hclSelfLink,
+                  ("id" .=) <$> _hclId])
 
 -- | [Output Only] Encountered errors during the last attempt to create or
 -- delete the instance.
@@ -5903,7 +6781,7 @@ ipDisks
 -- destination IP addresses other than their own. If these instances will
 -- be used as an IP gateway or it will be set as the next-hop in a Route
 -- resource, specify true. If unsure, leave this set to false. See the
--- canIpForward documentation for more information.
+-- Enable IP forwarding for instances documentation for more information.
 ipCanIPForward :: Lens' InstanceProperties (Maybe Bool)
 ipCanIPForward
   = lens _ipCanIPForward
@@ -5951,6 +6829,95 @@ instance ToJSON InstanceProperties where
                   ("canIpForward" .=) <$> _ipCanIPForward,
                   ("description" .=) <$> _ipDescription,
                   ("tags" .=) <$> _ipTags])
+
+--
+-- /See:/ 'hTTP2HealthCheck' smart constructor.
+data HTTP2HealthCheck = HTTP2HealthCheck'
+    { _httphcRequestPath :: !(Maybe Text)
+    , _httphcHost        :: !(Maybe Text)
+    , _httphcProxyHeader :: !(Maybe HTTP2HealthCheckProxyHeader)
+    , _httphcPortName    :: !(Maybe Text)
+    , _httphcPort        :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HTTP2HealthCheck' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'httphcRequestPath'
+--
+-- * 'httphcHost'
+--
+-- * 'httphcProxyHeader'
+--
+-- * 'httphcPortName'
+--
+-- * 'httphcPort'
+hTTP2HealthCheck
+    :: HTTP2HealthCheck
+hTTP2HealthCheck =
+    HTTP2HealthCheck'
+    { _httphcRequestPath = Nothing
+    , _httphcHost = Nothing
+    , _httphcProxyHeader = Nothing
+    , _httphcPortName = Nothing
+    , _httphcPort = Nothing
+    }
+
+-- | The request path of the HTTP\/2 health check request. The default value
+-- is \/.
+httphcRequestPath :: Lens' HTTP2HealthCheck (Maybe Text)
+httphcRequestPath
+  = lens _httphcRequestPath
+      (\ s a -> s{_httphcRequestPath = a})
+
+-- | The value of the host header in the HTTP\/2 health check request. If
+-- left empty (default value), the IP on behalf of which this health check
+-- is performed will be used.
+httphcHost :: Lens' HTTP2HealthCheck (Maybe Text)
+httphcHost
+  = lens _httphcHost (\ s a -> s{_httphcHost = a})
+
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+httphcProxyHeader :: Lens' HTTP2HealthCheck (Maybe HTTP2HealthCheckProxyHeader)
+httphcProxyHeader
+  = lens _httphcProxyHeader
+      (\ s a -> s{_httphcProxyHeader = a})
+
+-- | Port name as defined in InstanceGroup#NamedPort#name. If both port and
+-- port_name are defined, port takes precedence.
+httphcPortName :: Lens' HTTP2HealthCheck (Maybe Text)
+httphcPortName
+  = lens _httphcPortName
+      (\ s a -> s{_httphcPortName = a})
+
+-- | The TCP port number for the health check request. The default value is
+-- 443.
+httphcPort :: Lens' HTTP2HealthCheck (Maybe Int32)
+httphcPort
+  = lens _httphcPort (\ s a -> s{_httphcPort = a}) .
+      mapping _Coerce
+
+instance FromJSON HTTP2HealthCheck where
+        parseJSON
+          = withObject "HTTP2HealthCheck"
+              (\ o ->
+                 HTTP2HealthCheck' <$>
+                   (o .:? "requestPath") <*> (o .:? "host") <*>
+                     (o .:? "proxyHeader")
+                     <*> (o .:? "portName")
+                     <*> (o .:? "port"))
+
+instance ToJSON HTTP2HealthCheck where
+        toJSON HTTP2HealthCheck'{..}
+          = object
+              (catMaybes
+                 [("requestPath" .=) <$> _httphcRequestPath,
+                  ("host" .=) <$> _httphcHost,
+                  ("proxyHeader" .=) <$> _httphcProxyHeader,
+                  ("portName" .=) <$> _httphcPortName,
+                  ("port" .=) <$> _httphcPort])
 
 -- | [Output Only] Informational warning which replaces the list of disk
 -- types when the list is empty.
@@ -6024,10 +6991,11 @@ instance ToJSON DiskTypesScopedListWarning where
 --
 -- /See:/ 'attachedDiskInitializeParams' smart constructor.
 data AttachedDiskInitializeParams = AttachedDiskInitializeParams'
-    { _adipSourceImage :: !(Maybe Text)
-    , _adipDiskSizeGb  :: !(Maybe (Textual Int64))
-    , _adipDiskName    :: !(Maybe Text)
-    , _adipDiskType    :: !(Maybe Text)
+    { _adipSourceImage              :: !(Maybe Text)
+    , _adipDiskSizeGb               :: !(Maybe (Textual Int64))
+    , _adipDiskName                 :: !(Maybe Text)
+    , _adipSourceImageEncryptionKey :: !(Maybe CustomerEncryptionKey)
+    , _adipDiskType                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AttachedDiskInitializeParams' with the minimum fields required to make a request.
@@ -6040,6 +7008,8 @@ data AttachedDiskInitializeParams = AttachedDiskInitializeParams'
 --
 -- * 'adipDiskName'
 --
+-- * 'adipSourceImageEncryptionKey'
+--
 -- * 'adipDiskType'
 attachedDiskInitializeParams
     :: AttachedDiskInitializeParams
@@ -6048,6 +7018,7 @@ attachedDiskInitializeParams =
     { _adipSourceImage = Nothing
     , _adipDiskSizeGb = Nothing
     , _adipDiskName = Nothing
+    , _adipSourceImageEncryptionKey = Nothing
     , _adipDiskType = Nothing
     }
 
@@ -6081,6 +7052,16 @@ adipDiskName :: Lens' AttachedDiskInitializeParams (Maybe Text)
 adipDiskName
   = lens _adipDiskName (\ s a -> s{_adipDiskName = a})
 
+-- | The customer-supplied encryption key of the source image. Required if
+-- the source image is protected by a customer-supplied encryption key.
+-- Instance templates do not store customer-supplied encryption keys, so
+-- you cannot create disks for instances in a managed instance group if the
+-- source images are encrypted with your own keys.
+adipSourceImageEncryptionKey :: Lens' AttachedDiskInitializeParams (Maybe CustomerEncryptionKey)
+adipSourceImageEncryptionKey
+  = lens _adipSourceImageEncryptionKey
+      (\ s a -> s{_adipSourceImageEncryptionKey = a})
+
 -- | Specifies the disk type to use to create the instance. If not specified,
 -- the default is pd-standard, specified using the full URL. For example:
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/diskTypes\/pd-standard
@@ -6089,7 +7070,8 @@ adipDiskName
 -- are valid values: -
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/diskTypes\/diskType
 -- - projects\/project\/zones\/zone\/diskTypes\/diskType -
--- zones\/zone\/diskTypes\/diskType
+-- zones\/zone\/diskTypes\/diskType Note that for InstanceTemplate, this is
+-- the name of the disk type, not URL.
 adipDiskType :: Lens' AttachedDiskInitializeParams (Maybe Text)
 adipDiskType
   = lens _adipDiskType (\ s a -> s{_adipDiskType = a})
@@ -6101,6 +7083,7 @@ instance FromJSON AttachedDiskInitializeParams where
                  AttachedDiskInitializeParams' <$>
                    (o .:? "sourceImage") <*> (o .:? "diskSizeGb") <*>
                      (o .:? "diskName")
+                     <*> (o .:? "sourceImageEncryptionKey")
                      <*> (o .:? "diskType"))
 
 instance ToJSON AttachedDiskInitializeParams where
@@ -6110,6 +7093,8 @@ instance ToJSON AttachedDiskInitializeParams where
                  [("sourceImage" .=) <$> _adipSourceImage,
                   ("diskSizeGb" .=) <$> _adipDiskSizeGb,
                   ("diskName" .=) <$> _adipDiskName,
+                  ("sourceImageEncryptionKey" .=) <$>
+                    _adipSourceImageEncryptionKey,
                   ("diskType" .=) <$> _adipDiskType])
 
 --
@@ -6238,9 +7223,10 @@ niSubnetwork :: Lens' NetworkInterface (Maybe Text)
 niSubnetwork
   = lens _niSubnetwork (\ s a -> s{_niSubnetwork = a})
 
--- | An array of configurations for this interface. Currently, ONE_TO_ONE_NAT
--- is the only access config supported. If there are no accessConfigs
--- specified, then this instance will have no external internet access.
+-- | An array of configurations for this interface. Currently, only one
+-- access config, ONE_TO_ONE_NAT, is supported. If there are no
+-- accessConfigs specified, then this instance will have no external
+-- internet access.
 niAccessConfigs :: Lens' NetworkInterface [AccessConfig]
 niAccessConfigs
   = lens _niAccessConfigs
@@ -6312,6 +7298,145 @@ instance ToJSON TargetPoolsRemoveHealthCheckRequest
           = object
               (catMaybes
                  [("healthChecks" .=) <$> _tprhcrHealthChecks])
+
+-- | Contains a list of TargetSslProxy resources.
+--
+-- /See:/ 'targetSSLProxyList' smart constructor.
+data TargetSSLProxyList = TargetSSLProxyList'
+    { _tsplNextPageToken :: !(Maybe Text)
+    , _tsplKind          :: !Text
+    , _tsplItems         :: !(Maybe [TargetSSLProxy])
+    , _tsplSelfLink      :: !(Maybe Text)
+    , _tsplId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetSSLProxyList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tsplNextPageToken'
+--
+-- * 'tsplKind'
+--
+-- * 'tsplItems'
+--
+-- * 'tsplSelfLink'
+--
+-- * 'tsplId'
+targetSSLProxyList
+    :: TargetSSLProxyList
+targetSSLProxyList =
+    TargetSSLProxyList'
+    { _tsplNextPageToken = Nothing
+    , _tsplKind = "compute#targetSslProxyList"
+    , _tsplItems = Nothing
+    , _tsplSelfLink = Nothing
+    , _tsplId = Nothing
+    }
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+tsplNextPageToken :: Lens' TargetSSLProxyList (Maybe Text)
+tsplNextPageToken
+  = lens _tsplNextPageToken
+      (\ s a -> s{_tsplNextPageToken = a})
+
+-- | Type of resource.
+tsplKind :: Lens' TargetSSLProxyList Text
+tsplKind = lens _tsplKind (\ s a -> s{_tsplKind = a})
+
+-- | A list of TargetSslProxy resources.
+tsplItems :: Lens' TargetSSLProxyList [TargetSSLProxy]
+tsplItems
+  = lens _tsplItems (\ s a -> s{_tsplItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for this resource.
+tsplSelfLink :: Lens' TargetSSLProxyList (Maybe Text)
+tsplSelfLink
+  = lens _tsplSelfLink (\ s a -> s{_tsplSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+tsplId :: Lens' TargetSSLProxyList (Maybe Text)
+tsplId = lens _tsplId (\ s a -> s{_tsplId = a})
+
+instance FromJSON TargetSSLProxyList where
+        parseJSON
+          = withObject "TargetSSLProxyList"
+              (\ o ->
+                 TargetSSLProxyList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#targetSslProxyList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON TargetSSLProxyList where
+        toJSON TargetSSLProxyList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tsplNextPageToken,
+                  Just ("kind" .= _tsplKind),
+                  ("items" .=) <$> _tsplItems,
+                  ("selfLink" .=) <$> _tsplSelfLink,
+                  ("id" .=) <$> _tsplId])
+
+--
+-- /See:/ 'customerEncryptionKeyProtectedDisk' smart constructor.
+data CustomerEncryptionKeyProtectedDisk = CustomerEncryptionKeyProtectedDisk'
+    { _cekpdDiskEncryptionKey :: !(Maybe CustomerEncryptionKey)
+    , _cekpdSource            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomerEncryptionKeyProtectedDisk' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cekpdDiskEncryptionKey'
+--
+-- * 'cekpdSource'
+customerEncryptionKeyProtectedDisk
+    :: CustomerEncryptionKeyProtectedDisk
+customerEncryptionKeyProtectedDisk =
+    CustomerEncryptionKeyProtectedDisk'
+    { _cekpdDiskEncryptionKey = Nothing
+    , _cekpdSource = Nothing
+    }
+
+-- | Decrypts data associated with the disk with a customer-supplied
+-- encryption key.
+cekpdDiskEncryptionKey :: Lens' CustomerEncryptionKeyProtectedDisk (Maybe CustomerEncryptionKey)
+cekpdDiskEncryptionKey
+  = lens _cekpdDiskEncryptionKey
+      (\ s a -> s{_cekpdDiskEncryptionKey = a})
+
+-- | Specifies a valid partial or full URL to an existing Persistent Disk
+-- resource. This field is only applicable for persistent disks.
+cekpdSource :: Lens' CustomerEncryptionKeyProtectedDisk (Maybe Text)
+cekpdSource
+  = lens _cekpdSource (\ s a -> s{_cekpdSource = a})
+
+instance FromJSON CustomerEncryptionKeyProtectedDisk
+         where
+        parseJSON
+          = withObject "CustomerEncryptionKeyProtectedDisk"
+              (\ o ->
+                 CustomerEncryptionKeyProtectedDisk' <$>
+                   (o .:? "diskEncryptionKey") <*> (o .:? "source"))
+
+instance ToJSON CustomerEncryptionKeyProtectedDisk
+         where
+        toJSON CustomerEncryptionKeyProtectedDisk'{..}
+          = object
+              (catMaybes
+                 [("diskEncryptionKey" .=) <$>
+                    _cekpdDiskEncryptionKey,
+                  ("source" .=) <$> _cekpdSource])
 
 -- | A list of instance templates.
 --
@@ -6486,6 +7611,216 @@ instance ToJSON RouteList where
                   ("selfLink" .=) <$> _rlSelfLink,
                   ("id" .=) <$> _rlId])
 
+-- | Router resource.
+--
+-- /See:/ 'router' smart constructor.
+data Router = Router'
+    { _rBGPPeers          :: !(Maybe [RouterBGPPeer])
+    , _rBGP               :: !(Maybe RouterBGP)
+    , _rKind              :: !Text
+    , _rNetwork           :: !(Maybe Text)
+    , _rInterfaces        :: !(Maybe [RouterInterface])
+    , _rSelfLink          :: !(Maybe Text)
+    , _rName              :: !(Maybe Text)
+    , _rCreationTimestamp :: !(Maybe Text)
+    , _rId                :: !(Maybe (Textual Word64))
+    , _rRegion            :: !(Maybe Text)
+    , _rDescription       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Router' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rBGPPeers'
+--
+-- * 'rBGP'
+--
+-- * 'rKind'
+--
+-- * 'rNetwork'
+--
+-- * 'rInterfaces'
+--
+-- * 'rSelfLink'
+--
+-- * 'rName'
+--
+-- * 'rCreationTimestamp'
+--
+-- * 'rId'
+--
+-- * 'rRegion'
+--
+-- * 'rDescription'
+router
+    :: Router
+router =
+    Router'
+    { _rBGPPeers = Nothing
+    , _rBGP = Nothing
+    , _rKind = "compute#router"
+    , _rNetwork = Nothing
+    , _rInterfaces = Nothing
+    , _rSelfLink = Nothing
+    , _rName = Nothing
+    , _rCreationTimestamp = Nothing
+    , _rId = Nothing
+    , _rRegion = Nothing
+    , _rDescription = Nothing
+    }
+
+-- | BGP information that needs to be configured into the routing stack to
+-- establish the BGP peering. It must specify peer ASN and either interface
+-- name, IP, or peer IP. Please refer to RFC4273.
+rBGPPeers :: Lens' Router [RouterBGPPeer]
+rBGPPeers
+  = lens _rBGPPeers (\ s a -> s{_rBGPPeers = a}) .
+      _Default
+      . _Coerce
+
+-- | BGP information specific to this router.
+rBGP :: Lens' Router (Maybe RouterBGP)
+rBGP = lens _rBGP (\ s a -> s{_rBGP = a})
+
+-- | [Output Only] Type of resource. Always compute#router for routers.
+rKind :: Lens' Router Text
+rKind = lens _rKind (\ s a -> s{_rKind = a})
+
+-- | URI of the network to which this router belongs.
+rNetwork :: Lens' Router (Maybe Text)
+rNetwork = lens _rNetwork (\ s a -> s{_rNetwork = a})
+
+-- | Router interfaces. Each interface requires either one linked resource
+-- (e.g. linkedVpnTunnel), or IP address and IP address range (e.g.
+-- ipRange), or both.
+rInterfaces :: Lens' Router [RouterInterface]
+rInterfaces
+  = lens _rInterfaces (\ s a -> s{_rInterfaces = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for the resource.
+rSelfLink :: Lens' Router (Maybe Text)
+rSelfLink
+  = lens _rSelfLink (\ s a -> s{_rSelfLink = a})
+
+-- | Name of the resource. Provided by the client when the resource is
+-- created. The name must be 1-63 characters long, and comply with RFC1035.
+-- Specifically, the name must be 1-63 characters long and match the
+-- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash.
+rName :: Lens' Router (Maybe Text)
+rName = lens _rName (\ s a -> s{_rName = a})
+
+-- | [Output Only] Creation timestamp in RFC3339 text format.
+rCreationTimestamp :: Lens' Router (Maybe Text)
+rCreationTimestamp
+  = lens _rCreationTimestamp
+      (\ s a -> s{_rCreationTimestamp = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+rId :: Lens' Router (Maybe Word64)
+rId
+  = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
+
+-- | [Output Only] URI of the region where the router resides.
+rRegion :: Lens' Router (Maybe Text)
+rRegion = lens _rRegion (\ s a -> s{_rRegion = a})
+
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
+rDescription :: Lens' Router (Maybe Text)
+rDescription
+  = lens _rDescription (\ s a -> s{_rDescription = a})
+
+instance FromJSON Router where
+        parseJSON
+          = withObject "Router"
+              (\ o ->
+                 Router' <$>
+                   (o .:? "bgpPeers" .!= mempty) <*> (o .:? "bgp") <*>
+                     (o .:? "kind" .!= "compute#router")
+                     <*> (o .:? "network")
+                     <*> (o .:? "interfaces" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "region")
+                     <*> (o .:? "description"))
+
+instance ToJSON Router where
+        toJSON Router'{..}
+          = object
+              (catMaybes
+                 [("bgpPeers" .=) <$> _rBGPPeers,
+                  ("bgp" .=) <$> _rBGP, Just ("kind" .= _rKind),
+                  ("network" .=) <$> _rNetwork,
+                  ("interfaces" .=) <$> _rInterfaces,
+                  ("selfLink" .=) <$> _rSelfLink,
+                  ("name" .=) <$> _rName,
+                  ("creationTimestamp" .=) <$> _rCreationTimestamp,
+                  ("id" .=) <$> _rId, ("region" .=) <$> _rRegion,
+                  ("description" .=) <$> _rDescription])
+
+--
+-- /See:/ 'routersScopedListWarningDataItem' smart constructor.
+data RoutersScopedListWarningDataItem = RoutersScopedListWarningDataItem'
+    { _rslwdiValue :: !(Maybe Text)
+    , _rslwdiKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RoutersScopedListWarningDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rslwdiValue'
+--
+-- * 'rslwdiKey'
+routersScopedListWarningDataItem
+    :: RoutersScopedListWarningDataItem
+routersScopedListWarningDataItem =
+    RoutersScopedListWarningDataItem'
+    { _rslwdiValue = Nothing
+    , _rslwdiKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+rslwdiValue :: Lens' RoutersScopedListWarningDataItem (Maybe Text)
+rslwdiValue
+  = lens _rslwdiValue (\ s a -> s{_rslwdiValue = a})
+
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
+rslwdiKey :: Lens' RoutersScopedListWarningDataItem (Maybe Text)
+rslwdiKey
+  = lens _rslwdiKey (\ s a -> s{_rslwdiKey = a})
+
+instance FromJSON RoutersScopedListWarningDataItem
+         where
+        parseJSON
+          = withObject "RoutersScopedListWarningDataItem"
+              (\ o ->
+                 RoutersScopedListWarningDataItem' <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON RoutersScopedListWarningDataItem
+         where
+        toJSON RoutersScopedListWarningDataItem'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _rslwdiValue,
+                  ("key" .=) <$> _rslwdiKey])
+
 -- | Contains a list of TargetVpnGateway resources.
 --
 -- /See:/ 'targetVPNGatewayList' smart constructor.
@@ -6543,7 +7878,7 @@ tvglItems
       _Default
       . _Coerce
 
--- | [Output Only] Server-defined URL for the resource.
+-- | [Output Only] Server-defined URL for this resource.
 tvglSelfLink :: Lens' TargetVPNGatewayList (Maybe Text)
 tvglSelfLink
   = lens _tvglSelfLink (\ s a -> s{_tvglSelfLink = a})
@@ -6682,7 +8017,7 @@ firewallAllowedItem =
     , _faiPorts = Nothing
     }
 
--- | The IP protocol that is allowed for this rule. The protocol type is
+-- | The IP protocol to which this rule applies. The protocol type is
 -- required when creating a firewall rule. This value can either be one of
 -- the following well known protocol strings (tcp, udp, icmp, esp, ah,
 -- sctp), or the IP protocol number.
@@ -6691,10 +8026,10 @@ faiIPProtocol
   = lens _faiIPProtocol
       (\ s a -> s{_faiIPProtocol = a})
 
--- | An optional list of ports which are allowed. This field is only
+-- | An optional list of ports to which this rule applies. This field is only
 -- applicable for UDP or TCP protocol. Each entry must be either an integer
--- or a range. If not specified, connections through any port are allowed
--- Example inputs include: [\"22\"], [\"80\",\"443\"], and
+-- or a range. If not specified, this rule applies to connections through
+-- any port. Example inputs include: [\"22\"], [\"80\",\"443\"], and
 -- [\"12345-12349\"].
 faiPorts :: Lens' FirewallAllowedItem [Text]
 faiPorts
@@ -6871,6 +8206,69 @@ instance ToJSON Network where
                   ("id" .=) <$> _nId,
                   ("gatewayIPv4" .=) <$> _nGatewayIPv4,
                   ("description" .=) <$> _nDescription])
+
+-- | Informational warning which replaces the list of routers when the list
+-- is empty.
+--
+-- /See:/ 'routersScopedListWarning' smart constructor.
+data RoutersScopedListWarning = RoutersScopedListWarning'
+    { _rslwData    :: !(Maybe [RoutersScopedListWarningDataItem])
+    , _rslwCode    :: !(Maybe RoutersScopedListWarningCode)
+    , _rslwMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RoutersScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rslwData'
+--
+-- * 'rslwCode'
+--
+-- * 'rslwMessage'
+routersScopedListWarning
+    :: RoutersScopedListWarning
+routersScopedListWarning =
+    RoutersScopedListWarning'
+    { _rslwData = Nothing
+    , _rslwCode = Nothing
+    , _rslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
+rslwData :: Lens' RoutersScopedListWarning [RoutersScopedListWarningDataItem]
+rslwData
+  = lens _rslwData (\ s a -> s{_rslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+rslwCode :: Lens' RoutersScopedListWarning (Maybe RoutersScopedListWarningCode)
+rslwCode = lens _rslwCode (\ s a -> s{_rslwCode = a})
+
+-- | [Output Only] A human-readable description of the warning code.
+rslwMessage :: Lens' RoutersScopedListWarning (Maybe Text)
+rslwMessage
+  = lens _rslwMessage (\ s a -> s{_rslwMessage = a})
+
+instance FromJSON RoutersScopedListWarning where
+        parseJSON
+          = withObject "RoutersScopedListWarning"
+              (\ o ->
+                 RoutersScopedListWarning' <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON RoutersScopedListWarning where
+        toJSON RoutersScopedListWarning'{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _rslwData,
+                  ("code" .=) <$> _rslwCode,
+                  ("message" .=) <$> _rslwMessage])
 
 -- | [Output Only] Informational warning which replaces the list of addresses
 -- when the list is empty.
@@ -7080,6 +8478,95 @@ instance ToJSON InstanceAggregatedList where
                   ("items" .=) <$> _ialItems,
                   ("selfLink" .=) <$> _ialSelfLink,
                   ("id" .=) <$> _ialId])
+
+--
+-- /See:/ 'sslHealthCheck' smart constructor.
+data SSLHealthCheck = SSLHealthCheck'
+    { _shcResponse    :: !(Maybe Text)
+    , _shcProxyHeader :: !(Maybe SSLHealthCheckProxyHeader)
+    , _shcPortName    :: !(Maybe Text)
+    , _shcPort        :: !(Maybe (Textual Int32))
+    , _shcRequest     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SSLHealthCheck' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'shcResponse'
+--
+-- * 'shcProxyHeader'
+--
+-- * 'shcPortName'
+--
+-- * 'shcPort'
+--
+-- * 'shcRequest'
+sslHealthCheck
+    :: SSLHealthCheck
+sslHealthCheck =
+    SSLHealthCheck'
+    { _shcResponse = Nothing
+    , _shcProxyHeader = Nothing
+    , _shcPortName = Nothing
+    , _shcPort = Nothing
+    , _shcRequest = Nothing
+    }
+
+-- | The bytes to match against the beginning of the response data. If left
+-- empty (the default value), any response will indicate health. The
+-- response data can only be ASCII.
+shcResponse :: Lens' SSLHealthCheck (Maybe Text)
+shcResponse
+  = lens _shcResponse (\ s a -> s{_shcResponse = a})
+
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+shcProxyHeader :: Lens' SSLHealthCheck (Maybe SSLHealthCheckProxyHeader)
+shcProxyHeader
+  = lens _shcProxyHeader
+      (\ s a -> s{_shcProxyHeader = a})
+
+-- | Port name as defined in InstanceGroup#NamedPort#name. If both port and
+-- port_name are defined, port takes precedence.
+shcPortName :: Lens' SSLHealthCheck (Maybe Text)
+shcPortName
+  = lens _shcPortName (\ s a -> s{_shcPortName = a})
+
+-- | The TCP port number for the health check request. The default value is
+-- 443.
+shcPort :: Lens' SSLHealthCheck (Maybe Int32)
+shcPort
+  = lens _shcPort (\ s a -> s{_shcPort = a}) .
+      mapping _Coerce
+
+-- | The application data to send once the SSL connection has been
+-- established (default value is empty). If both request and response are
+-- empty, the connection establishment alone will indicate health. The
+-- request data can only be ASCII.
+shcRequest :: Lens' SSLHealthCheck (Maybe Text)
+shcRequest
+  = lens _shcRequest (\ s a -> s{_shcRequest = a})
+
+instance FromJSON SSLHealthCheck where
+        parseJSON
+          = withObject "SSLHealthCheck"
+              (\ o ->
+                 SSLHealthCheck' <$>
+                   (o .:? "response") <*> (o .:? "proxyHeader") <*>
+                     (o .:? "portName")
+                     <*> (o .:? "port")
+                     <*> (o .:? "request"))
+
+instance ToJSON SSLHealthCheck where
+        toJSON SSLHealthCheck'{..}
+          = object
+              (catMaybes
+                 [("response" .=) <$> _shcResponse,
+                  ("proxyHeader" .=) <$> _shcProxyHeader,
+                  ("portName" .=) <$> _shcPortName,
+                  ("port" .=) <$> _shcPort,
+                  ("request" .=) <$> _shcRequest])
 
 -- | A reserved address resource.
 --
@@ -7346,6 +8833,42 @@ instance ToJSON Zone where
                   ("deprecated" .=) <$> _zDeprecated])
 
 --
+-- /See:/ 'routerBGP' smart constructor.
+newtype RouterBGP = RouterBGP'
+    { _rbASN :: Maybe (Textual Word32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouterBGP' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rbASN'
+routerBGP
+    :: RouterBGP
+routerBGP =
+    RouterBGP'
+    { _rbASN = Nothing
+    }
+
+-- | Local BGP Autonomous System Number (ASN). Must be an RFC6996 private
+-- ASN, either 16-bit or 32-bit. The value will be fixed for this router
+-- resource. All VPN tunnels that link to this router will have the same
+-- local ASN.
+rbASN :: Lens' RouterBGP (Maybe Word32)
+rbASN
+  = lens _rbASN (\ s a -> s{_rbASN = a}) .
+      mapping _Coerce
+
+instance FromJSON RouterBGP where
+        parseJSON
+          = withObject "RouterBGP"
+              (\ o -> RouterBGP' <$> (o .:? "asn"))
+
+instance ToJSON RouterBGP where
+        toJSON RouterBGP'{..}
+          = object (catMaybes [("asn" .=) <$> _rbASN])
+
+--
 -- /See:/ 'instanceGroupManagersRecreateInstancesRequest' smart constructor.
 newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest'
     { _igmrirInstances :: Maybe [Text]
@@ -7386,6 +8909,49 @@ instance ToJSON
           InstanceGroupManagersRecreateInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igmrirInstances])
+
+--
+-- /See:/ 'targetSSLProxiesSetSSLCertificatesRequest' smart constructor.
+newtype TargetSSLProxiesSetSSLCertificatesRequest = TargetSSLProxiesSetSSLCertificatesRequest'
+    { _tspsscrSSLCertificates :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetSSLProxiesSetSSLCertificatesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tspsscrSSLCertificates'
+targetSSLProxiesSetSSLCertificatesRequest
+    :: TargetSSLProxiesSetSSLCertificatesRequest
+targetSSLProxiesSetSSLCertificatesRequest =
+    TargetSSLProxiesSetSSLCertificatesRequest'
+    { _tspsscrSSLCertificates = Nothing
+    }
+
+-- | New set of URLs to SslCertificate resources to associate with this
+-- TargetSslProxy. Currently exactly one ssl certificate must be specified.
+tspsscrSSLCertificates :: Lens' TargetSSLProxiesSetSSLCertificatesRequest [Text]
+tspsscrSSLCertificates
+  = lens _tspsscrSSLCertificates
+      (\ s a -> s{_tspsscrSSLCertificates = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         TargetSSLProxiesSetSSLCertificatesRequest where
+        parseJSON
+          = withObject
+              "TargetSSLProxiesSetSSLCertificatesRequest"
+              (\ o ->
+                 TargetSSLProxiesSetSSLCertificatesRequest' <$>
+                   (o .:? "sslCertificates" .!= mempty))
+
+instance ToJSON
+         TargetSSLProxiesSetSSLCertificatesRequest where
+        toJSON TargetSSLProxiesSetSSLCertificatesRequest'{..}
+          = object
+              (catMaybes
+                 [("sslCertificates" .=) <$> _tspsscrSSLCertificates])
 
 --
 -- /See:/ 'instancesScopedList' smart constructor.
@@ -7619,79 +9185,79 @@ instance ToJSON InstanceGroupAggregatedList where
 --
 -- /See:/ 'route' smart constructor.
 data Route = Route'
-    { _rPriority          :: !(Maybe (Textual Word32))
-    , _rKind              :: !Text
-    , _rNextHopGateway    :: !(Maybe Text)
-    , _rNextHopNetwork    :: !(Maybe Text)
-    , _rNetwork           :: !(Maybe Text)
-    , _rWarnings          :: !(Maybe [RouteWarningsItem])
-    , _rNextHopIP         :: !(Maybe Text)
-    , _rDestRange         :: !(Maybe Text)
-    , _rSelfLink          :: !(Maybe Text)
-    , _rName              :: !(Maybe Text)
-    , _rCreationTimestamp :: !(Maybe Text)
-    , _rId                :: !(Maybe (Textual Word64))
-    , _rNextHopVPNTunnel  :: !(Maybe Text)
-    , _rDescription       :: !(Maybe Text)
-    , _rTags              :: !(Maybe [Text])
-    , _rNextHopInstance   :: !(Maybe Text)
+    { _rouPriority          :: !(Maybe (Textual Word32))
+    , _rouKind              :: !Text
+    , _rouNextHopGateway    :: !(Maybe Text)
+    , _rouNextHopNetwork    :: !(Maybe Text)
+    , _rouNetwork           :: !(Maybe Text)
+    , _rouWarnings          :: !(Maybe [RouteWarningsItem])
+    , _rouNextHopIP         :: !(Maybe Text)
+    , _rouDestRange         :: !(Maybe Text)
+    , _rouSelfLink          :: !(Maybe Text)
+    , _rouName              :: !(Maybe Text)
+    , _rouCreationTimestamp :: !(Maybe Text)
+    , _rouId                :: !(Maybe (Textual Word64))
+    , _rouNextHopVPNTunnel  :: !(Maybe Text)
+    , _rouDescription       :: !(Maybe Text)
+    , _rouTags              :: !(Maybe [Text])
+    , _rouNextHopInstance   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Route' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rPriority'
+-- * 'rouPriority'
 --
--- * 'rKind'
+-- * 'rouKind'
 --
--- * 'rNextHopGateway'
+-- * 'rouNextHopGateway'
 --
--- * 'rNextHopNetwork'
+-- * 'rouNextHopNetwork'
 --
--- * 'rNetwork'
+-- * 'rouNetwork'
 --
--- * 'rWarnings'
+-- * 'rouWarnings'
 --
--- * 'rNextHopIP'
+-- * 'rouNextHopIP'
 --
--- * 'rDestRange'
+-- * 'rouDestRange'
 --
--- * 'rSelfLink'
+-- * 'rouSelfLink'
 --
--- * 'rName'
+-- * 'rouName'
 --
--- * 'rCreationTimestamp'
+-- * 'rouCreationTimestamp'
 --
--- * 'rId'
+-- * 'rouId'
 --
--- * 'rNextHopVPNTunnel'
+-- * 'rouNextHopVPNTunnel'
 --
--- * 'rDescription'
+-- * 'rouDescription'
 --
--- * 'rTags'
+-- * 'rouTags'
 --
--- * 'rNextHopInstance'
+-- * 'rouNextHopInstance'
 route
     :: Route
 route =
     Route'
-    { _rPriority = Nothing
-    , _rKind = "compute#route"
-    , _rNextHopGateway = Nothing
-    , _rNextHopNetwork = Nothing
-    , _rNetwork = Nothing
-    , _rWarnings = Nothing
-    , _rNextHopIP = Nothing
-    , _rDestRange = Nothing
-    , _rSelfLink = Nothing
-    , _rName = Nothing
-    , _rCreationTimestamp = Nothing
-    , _rId = Nothing
-    , _rNextHopVPNTunnel = Nothing
-    , _rDescription = Nothing
-    , _rTags = Nothing
-    , _rNextHopInstance = Nothing
+    { _rouPriority = Nothing
+    , _rouKind = "compute#route"
+    , _rouNextHopGateway = Nothing
+    , _rouNextHopNetwork = Nothing
+    , _rouNetwork = Nothing
+    , _rouWarnings = Nothing
+    , _rouNextHopIP = Nothing
+    , _rouDestRange = Nothing
+    , _rouSelfLink = Nothing
+    , _rouName = Nothing
+    , _rouCreationTimestamp = Nothing
+    , _rouId = Nothing
+    , _rouNextHopVPNTunnel = Nothing
+    , _rouDescription = Nothing
+    , _rouTags = Nothing
+    , _rouNextHopInstance = Nothing
     }
 
 -- | The priority of this route. Priority is used to break ties in cases
@@ -7699,57 +9265,58 @@ route =
 -- the case of two routes with equal prefix length, the one with the
 -- lowest-numbered priority value wins. Default value is 1000. Valid range
 -- is 0 through 65535.
-rPriority :: Lens' Route (Maybe Word32)
-rPriority
-  = lens _rPriority (\ s a -> s{_rPriority = a}) .
+rouPriority :: Lens' Route (Maybe Word32)
+rouPriority
+  = lens _rouPriority (\ s a -> s{_rouPriority = a}) .
       mapping _Coerce
 
 -- | [Output Only] Type of this resource. Always compute#routes for Route
 -- resources.
-rKind :: Lens' Route Text
-rKind = lens _rKind (\ s a -> s{_rKind = a})
+rouKind :: Lens' Route Text
+rouKind = lens _rouKind (\ s a -> s{_rouKind = a})
 
 -- | The URL to a gateway that should handle matching packets. You can only
 -- specify the internet gateway using a full or partial valid URL:
 -- projects\/\/global\/gateways\/default-internet-gateway
-rNextHopGateway :: Lens' Route (Maybe Text)
-rNextHopGateway
-  = lens _rNextHopGateway
-      (\ s a -> s{_rNextHopGateway = a})
+rouNextHopGateway :: Lens' Route (Maybe Text)
+rouNextHopGateway
+  = lens _rouNextHopGateway
+      (\ s a -> s{_rouNextHopGateway = a})
 
 -- | The URL of the local network if it should handle matching packets.
-rNextHopNetwork :: Lens' Route (Maybe Text)
-rNextHopNetwork
-  = lens _rNextHopNetwork
-      (\ s a -> s{_rNextHopNetwork = a})
+rouNextHopNetwork :: Lens' Route (Maybe Text)
+rouNextHopNetwork
+  = lens _rouNextHopNetwork
+      (\ s a -> s{_rouNextHopNetwork = a})
 
 -- | Fully-qualified URL of the network that this route applies to.
-rNetwork :: Lens' Route (Maybe Text)
-rNetwork = lens _rNetwork (\ s a -> s{_rNetwork = a})
+rouNetwork :: Lens' Route (Maybe Text)
+rouNetwork
+  = lens _rouNetwork (\ s a -> s{_rouNetwork = a})
 
 -- | [Output Only] If potential misconfigurations are detected for this
 -- route, this field will be populated with warning messages.
-rWarnings :: Lens' Route [RouteWarningsItem]
-rWarnings
-  = lens _rWarnings (\ s a -> s{_rWarnings = a}) .
+rouWarnings :: Lens' Route [RouteWarningsItem]
+rouWarnings
+  = lens _rouWarnings (\ s a -> s{_rouWarnings = a}) .
       _Default
       . _Coerce
 
 -- | The network IP address of an instance that should handle matching
 -- packets.
-rNextHopIP :: Lens' Route (Maybe Text)
-rNextHopIP
-  = lens _rNextHopIP (\ s a -> s{_rNextHopIP = a})
+rouNextHopIP :: Lens' Route (Maybe Text)
+rouNextHopIP
+  = lens _rouNextHopIP (\ s a -> s{_rouNextHopIP = a})
 
 -- | The destination range of outgoing packets that this route applies to.
-rDestRange :: Lens' Route (Maybe Text)
-rDestRange
-  = lens _rDestRange (\ s a -> s{_rDestRange = a})
+rouDestRange :: Lens' Route (Maybe Text)
+rouDestRange
+  = lens _rouDestRange (\ s a -> s{_rouDestRange = a})
 
 -- | [Output Only] Server-defined fully-qualified URL for this resource.
-rSelfLink :: Lens' Route (Maybe Text)
-rSelfLink
-  = lens _rSelfLink (\ s a -> s{_rSelfLink = a})
+rouSelfLink :: Lens' Route (Maybe Text)
+rouSelfLink
+  = lens _rouSelfLink (\ s a -> s{_rouSelfLink = a})
 
 -- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -7758,46 +9325,48 @@ rSelfLink
 -- character must be a lowercase letter, and all following characters must
 -- be a dash, lowercase letter, or digit, except the last character, which
 -- cannot be a dash.
-rName :: Lens' Route (Maybe Text)
-rName = lens _rName (\ s a -> s{_rName = a})
+rouName :: Lens' Route (Maybe Text)
+rouName = lens _rouName (\ s a -> s{_rouName = a})
 
 -- | [Output Only] Creation timestamp in RFC3339 text format.
-rCreationTimestamp :: Lens' Route (Maybe Text)
-rCreationTimestamp
-  = lens _rCreationTimestamp
-      (\ s a -> s{_rCreationTimestamp = a})
+rouCreationTimestamp :: Lens' Route (Maybe Text)
+rouCreationTimestamp
+  = lens _rouCreationTimestamp
+      (\ s a -> s{_rouCreationTimestamp = a})
 
 -- | [Output Only] The unique identifier for the resource. This identifier is
 -- defined by the server.
-rId :: Lens' Route (Maybe Word64)
-rId
-  = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
+rouId :: Lens' Route (Maybe Word64)
+rouId
+  = lens _rouId (\ s a -> s{_rouId = a}) .
+      mapping _Coerce
 
 -- | The URL to a VpnTunnel that should handle matching packets.
-rNextHopVPNTunnel :: Lens' Route (Maybe Text)
-rNextHopVPNTunnel
-  = lens _rNextHopVPNTunnel
-      (\ s a -> s{_rNextHopVPNTunnel = a})
+rouNextHopVPNTunnel :: Lens' Route (Maybe Text)
+rouNextHopVPNTunnel
+  = lens _rouNextHopVPNTunnel
+      (\ s a -> s{_rouNextHopVPNTunnel = a})
 
 -- | An optional description of this resource. Provide this property when you
 -- create the resource.
-rDescription :: Lens' Route (Maybe Text)
-rDescription
-  = lens _rDescription (\ s a -> s{_rDescription = a})
+rouDescription :: Lens' Route (Maybe Text)
+rouDescription
+  = lens _rouDescription
+      (\ s a -> s{_rouDescription = a})
 
 -- | A list of instance tags to which this route applies.
-rTags :: Lens' Route [Text]
-rTags
-  = lens _rTags (\ s a -> s{_rTags = a}) . _Default .
-      _Coerce
+rouTags :: Lens' Route [Text]
+rouTags
+  = lens _rouTags (\ s a -> s{_rouTags = a}) . _Default
+      . _Coerce
 
 -- | The URL to an instance that should handle matching packets. You can
 -- specify this as a full or partial URL. For example:
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/instances\/
-rNextHopInstance :: Lens' Route (Maybe Text)
-rNextHopInstance
-  = lens _rNextHopInstance
-      (\ s a -> s{_rNextHopInstance = a})
+rouNextHopInstance :: Lens' Route (Maybe Text)
+rouNextHopInstance
+  = lens _rouNextHopInstance
+      (\ s a -> s{_rouNextHopInstance = a})
 
 instance FromJSON Route where
         parseJSON
@@ -7825,22 +9394,22 @@ instance ToJSON Route where
         toJSON Route'{..}
           = object
               (catMaybes
-                 [("priority" .=) <$> _rPriority,
-                  Just ("kind" .= _rKind),
-                  ("nextHopGateway" .=) <$> _rNextHopGateway,
-                  ("nextHopNetwork" .=) <$> _rNextHopNetwork,
-                  ("network" .=) <$> _rNetwork,
-                  ("warnings" .=) <$> _rWarnings,
-                  ("nextHopIp" .=) <$> _rNextHopIP,
-                  ("destRange" .=) <$> _rDestRange,
-                  ("selfLink" .=) <$> _rSelfLink,
-                  ("name" .=) <$> _rName,
-                  ("creationTimestamp" .=) <$> _rCreationTimestamp,
-                  ("id" .=) <$> _rId,
-                  ("nextHopVpnTunnel" .=) <$> _rNextHopVPNTunnel,
-                  ("description" .=) <$> _rDescription,
-                  ("tags" .=) <$> _rTags,
-                  ("nextHopInstance" .=) <$> _rNextHopInstance])
+                 [("priority" .=) <$> _rouPriority,
+                  Just ("kind" .= _rouKind),
+                  ("nextHopGateway" .=) <$> _rouNextHopGateway,
+                  ("nextHopNetwork" .=) <$> _rouNextHopNetwork,
+                  ("network" .=) <$> _rouNetwork,
+                  ("warnings" .=) <$> _rouWarnings,
+                  ("nextHopIp" .=) <$> _rouNextHopIP,
+                  ("destRange" .=) <$> _rouDestRange,
+                  ("selfLink" .=) <$> _rouSelfLink,
+                  ("name" .=) <$> _rouName,
+                  ("creationTimestamp" .=) <$> _rouCreationTimestamp,
+                  ("id" .=) <$> _rouId,
+                  ("nextHopVpnTunnel" .=) <$> _rouNextHopVPNTunnel,
+                  ("description" .=) <$> _rouDescription,
+                  ("tags" .=) <$> _rouTags,
+                  ("nextHopInstance" .=) <$> _rouNextHopInstance])
 
 --
 -- /See:/ 'targetVPNGatewaysScopedListWarningDataItem' smart constructor.
@@ -8058,6 +9627,235 @@ instance ToJSON InstanceTemplate where
                   ("id" .=) <$> _itId,
                   ("description" .=) <$> _itDescription,
                   ("properties" .=) <$> _itProperties])
+
+-- | Contains a list of Router resources.
+--
+-- /See:/ 'routerList' smart constructor.
+data RouterList = RouterList'
+    { _rllNextPageToken :: !(Maybe Text)
+    , _rllKind          :: !Text
+    , _rllItems         :: !(Maybe [Router])
+    , _rllSelfLink      :: !(Maybe Text)
+    , _rllId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouterList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rllNextPageToken'
+--
+-- * 'rllKind'
+--
+-- * 'rllItems'
+--
+-- * 'rllSelfLink'
+--
+-- * 'rllId'
+routerList
+    :: RouterList
+routerList =
+    RouterList'
+    { _rllNextPageToken = Nothing
+    , _rllKind = "compute#routerList"
+    , _rllItems = Nothing
+    , _rllSelfLink = Nothing
+    , _rllId = Nothing
+    }
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+rllNextPageToken :: Lens' RouterList (Maybe Text)
+rllNextPageToken
+  = lens _rllNextPageToken
+      (\ s a -> s{_rllNextPageToken = a})
+
+-- | [Output Only] Type of resource. Always compute#router for routers.
+rllKind :: Lens' RouterList Text
+rllKind = lens _rllKind (\ s a -> s{_rllKind = a})
+
+-- | A list of Router resources.
+rllItems :: Lens' RouterList [Router]
+rllItems
+  = lens _rllItems (\ s a -> s{_rllItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for this resource.
+rllSelfLink :: Lens' RouterList (Maybe Text)
+rllSelfLink
+  = lens _rllSelfLink (\ s a -> s{_rllSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+rllId :: Lens' RouterList (Maybe Text)
+rllId = lens _rllId (\ s a -> s{_rllId = a})
+
+instance FromJSON RouterList where
+        parseJSON
+          = withObject "RouterList"
+              (\ o ->
+                 RouterList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#routerList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON RouterList where
+        toJSON RouterList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rllNextPageToken,
+                  Just ("kind" .= _rllKind),
+                  ("items" .=) <$> _rllItems,
+                  ("selfLink" .=) <$> _rllSelfLink,
+                  ("id" .=) <$> _rllId])
+
+-- | A TargetSslProxy resource. This resource defines an SSL proxy.
+--
+-- /See:/ 'targetSSLProxy' smart constructor.
+data TargetSSLProxy = TargetSSLProxy'
+    { _tspSSLCertificates   :: !(Maybe [Text])
+    , _tspService           :: !(Maybe Text)
+    , _tspKind              :: !Text
+    , _tspSelfLink          :: !(Maybe Text)
+    , _tspName              :: !(Maybe Text)
+    , _tspCreationTimestamp :: !(Maybe Text)
+    , _tspId                :: !(Maybe (Textual Word64))
+    , _tspProxyHeader       :: !(Maybe TargetSSLProxyProxyHeader)
+    , _tspDescription       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetSSLProxy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tspSSLCertificates'
+--
+-- * 'tspService'
+--
+-- * 'tspKind'
+--
+-- * 'tspSelfLink'
+--
+-- * 'tspName'
+--
+-- * 'tspCreationTimestamp'
+--
+-- * 'tspId'
+--
+-- * 'tspProxyHeader'
+--
+-- * 'tspDescription'
+targetSSLProxy
+    :: TargetSSLProxy
+targetSSLProxy =
+    TargetSSLProxy'
+    { _tspSSLCertificates = Nothing
+    , _tspService = Nothing
+    , _tspKind = "compute#targetSslProxy"
+    , _tspSelfLink = Nothing
+    , _tspName = Nothing
+    , _tspCreationTimestamp = Nothing
+    , _tspId = Nothing
+    , _tspProxyHeader = Nothing
+    , _tspDescription = Nothing
+    }
+
+-- | URLs to SslCertificate resources that are used to authenticate
+-- connections to Backends. Currently exactly one SSL certificate must be
+-- specified.
+tspSSLCertificates :: Lens' TargetSSLProxy [Text]
+tspSSLCertificates
+  = lens _tspSSLCertificates
+      (\ s a -> s{_tspSSLCertificates = a})
+      . _Default
+      . _Coerce
+
+-- | URL to the BackendService resource.
+tspService :: Lens' TargetSSLProxy (Maybe Text)
+tspService
+  = lens _tspService (\ s a -> s{_tspService = a})
+
+-- | [Output Only] Type of the resource. Always compute#targetSslProxy for
+-- target SSL proxies.
+tspKind :: Lens' TargetSSLProxy Text
+tspKind = lens _tspKind (\ s a -> s{_tspKind = a})
+
+-- | [Output Only] Server-defined URL for the resource.
+tspSelfLink :: Lens' TargetSSLProxy (Maybe Text)
+tspSelfLink
+  = lens _tspSelfLink (\ s a -> s{_tspSelfLink = a})
+
+-- | Name of the resource. Provided by the client when the resource is
+-- created. The name must be 1-63 characters long, and comply with RFC1035.
+-- Specifically, the name must be 1-63 characters long and match the
+-- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash.
+tspName :: Lens' TargetSSLProxy (Maybe Text)
+tspName = lens _tspName (\ s a -> s{_tspName = a})
+
+-- | [Output Only] Creation timestamp in RFC3339 text format.
+tspCreationTimestamp :: Lens' TargetSSLProxy (Maybe Text)
+tspCreationTimestamp
+  = lens _tspCreationTimestamp
+      (\ s a -> s{_tspCreationTimestamp = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+tspId :: Lens' TargetSSLProxy (Maybe Word64)
+tspId
+  = lens _tspId (\ s a -> s{_tspId = a}) .
+      mapping _Coerce
+
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+tspProxyHeader :: Lens' TargetSSLProxy (Maybe TargetSSLProxyProxyHeader)
+tspProxyHeader
+  = lens _tspProxyHeader
+      (\ s a -> s{_tspProxyHeader = a})
+
+-- | An optional description of this resource. Provide this property when you
+-- create the resource.
+tspDescription :: Lens' TargetSSLProxy (Maybe Text)
+tspDescription
+  = lens _tspDescription
+      (\ s a -> s{_tspDescription = a})
+
+instance FromJSON TargetSSLProxy where
+        parseJSON
+          = withObject "TargetSSLProxy"
+              (\ o ->
+                 TargetSSLProxy' <$>
+                   (o .:? "sslCertificates" .!= mempty) <*>
+                     (o .:? "service")
+                     <*> (o .:? "kind" .!= "compute#targetSslProxy")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "proxyHeader")
+                     <*> (o .:? "description"))
+
+instance ToJSON TargetSSLProxy where
+        toJSON TargetSSLProxy'{..}
+          = object
+              (catMaybes
+                 [("sslCertificates" .=) <$> _tspSSLCertificates,
+                  ("service" .=) <$> _tspService,
+                  Just ("kind" .= _tspKind),
+                  ("selfLink" .=) <$> _tspSelfLink,
+                  ("name" .=) <$> _tspName,
+                  ("creationTimestamp" .=) <$> _tspCreationTimestamp,
+                  ("id" .=) <$> _tspId,
+                  ("proxyHeader" .=) <$> _tspProxyHeader,
+                  ("description" .=) <$> _tspDescription])
 
 -- | Represents a Target VPN gateway resource.
 --
@@ -8388,6 +10186,150 @@ instance ToJSON SSLCertificate where
                   ("description" .=) <$> _scDescription])
 
 --
+-- /See:/ 'routerStatusBGPPeerStatus' smart constructor.
+data RouterStatusBGPPeerStatus = RouterStatusBGPPeerStatus'
+    { _rsbpsStatus           :: !(Maybe RouterStatusBGPPeerStatusStatus)
+    , _rsbpsIPAddress        :: !(Maybe Text)
+    , _rsbpsState            :: !(Maybe Text)
+    , _rsbpsPeerIPAddress    :: !(Maybe Text)
+    , _rsbpsUptime           :: !(Maybe Text)
+    , _rsbpsNumLearnedRoutes :: !(Maybe (Textual Word32))
+    , _rsbpsName             :: !(Maybe Text)
+    , _rsbpsUptimeSeconds    :: !(Maybe Text)
+    , _rsbpsAdvertisedRoutes :: !(Maybe [Route])
+    , _rsbpsLinkedVPNTunnel  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouterStatusBGPPeerStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rsbpsStatus'
+--
+-- * 'rsbpsIPAddress'
+--
+-- * 'rsbpsState'
+--
+-- * 'rsbpsPeerIPAddress'
+--
+-- * 'rsbpsUptime'
+--
+-- * 'rsbpsNumLearnedRoutes'
+--
+-- * 'rsbpsName'
+--
+-- * 'rsbpsUptimeSeconds'
+--
+-- * 'rsbpsAdvertisedRoutes'
+--
+-- * 'rsbpsLinkedVPNTunnel'
+routerStatusBGPPeerStatus
+    :: RouterStatusBGPPeerStatus
+routerStatusBGPPeerStatus =
+    RouterStatusBGPPeerStatus'
+    { _rsbpsStatus = Nothing
+    , _rsbpsIPAddress = Nothing
+    , _rsbpsState = Nothing
+    , _rsbpsPeerIPAddress = Nothing
+    , _rsbpsUptime = Nothing
+    , _rsbpsNumLearnedRoutes = Nothing
+    , _rsbpsName = Nothing
+    , _rsbpsUptimeSeconds = Nothing
+    , _rsbpsAdvertisedRoutes = Nothing
+    , _rsbpsLinkedVPNTunnel = Nothing
+    }
+
+-- | Status of the BGP peer: {UP, DOWN}
+rsbpsStatus :: Lens' RouterStatusBGPPeerStatus (Maybe RouterStatusBGPPeerStatusStatus)
+rsbpsStatus
+  = lens _rsbpsStatus (\ s a -> s{_rsbpsStatus = a})
+
+-- | IP address of the local BGP interface.
+rsbpsIPAddress :: Lens' RouterStatusBGPPeerStatus (Maybe Text)
+rsbpsIPAddress
+  = lens _rsbpsIPAddress
+      (\ s a -> s{_rsbpsIPAddress = a})
+
+-- | BGP state as specified in RFC1771.
+rsbpsState :: Lens' RouterStatusBGPPeerStatus (Maybe Text)
+rsbpsState
+  = lens _rsbpsState (\ s a -> s{_rsbpsState = a})
+
+-- | IP address of the remote BGP interface.
+rsbpsPeerIPAddress :: Lens' RouterStatusBGPPeerStatus (Maybe Text)
+rsbpsPeerIPAddress
+  = lens _rsbpsPeerIPAddress
+      (\ s a -> s{_rsbpsPeerIPAddress = a})
+
+-- | Time this session has been up. Format: 14 years, 51 weeks, 6 days, 23
+-- hours, 59 minutes, 59 seconds
+rsbpsUptime :: Lens' RouterStatusBGPPeerStatus (Maybe Text)
+rsbpsUptime
+  = lens _rsbpsUptime (\ s a -> s{_rsbpsUptime = a})
+
+-- | Number of routes learned from the remote BGP Peer.
+rsbpsNumLearnedRoutes :: Lens' RouterStatusBGPPeerStatus (Maybe Word32)
+rsbpsNumLearnedRoutes
+  = lens _rsbpsNumLearnedRoutes
+      (\ s a -> s{_rsbpsNumLearnedRoutes = a})
+      . mapping _Coerce
+
+-- | Name of this BGP peer. Unique within the Routers resource.
+rsbpsName :: Lens' RouterStatusBGPPeerStatus (Maybe Text)
+rsbpsName
+  = lens _rsbpsName (\ s a -> s{_rsbpsName = a})
+
+-- | Time this session has been up, in seconds. Format: 145
+rsbpsUptimeSeconds :: Lens' RouterStatusBGPPeerStatus (Maybe Text)
+rsbpsUptimeSeconds
+  = lens _rsbpsUptimeSeconds
+      (\ s a -> s{_rsbpsUptimeSeconds = a})
+
+-- | Routes that were advertised to the remote BGP peer
+rsbpsAdvertisedRoutes :: Lens' RouterStatusBGPPeerStatus [Route]
+rsbpsAdvertisedRoutes
+  = lens _rsbpsAdvertisedRoutes
+      (\ s a -> s{_rsbpsAdvertisedRoutes = a})
+      . _Default
+      . _Coerce
+
+-- | URL of the VPN tunnel that this BGP peer controls.
+rsbpsLinkedVPNTunnel :: Lens' RouterStatusBGPPeerStatus (Maybe Text)
+rsbpsLinkedVPNTunnel
+  = lens _rsbpsLinkedVPNTunnel
+      (\ s a -> s{_rsbpsLinkedVPNTunnel = a})
+
+instance FromJSON RouterStatusBGPPeerStatus where
+        parseJSON
+          = withObject "RouterStatusBGPPeerStatus"
+              (\ o ->
+                 RouterStatusBGPPeerStatus' <$>
+                   (o .:? "status") <*> (o .:? "ipAddress") <*>
+                     (o .:? "state")
+                     <*> (o .:? "peerIpAddress")
+                     <*> (o .:? "uptime")
+                     <*> (o .:? "numLearnedRoutes")
+                     <*> (o .:? "name")
+                     <*> (o .:? "uptimeSeconds")
+                     <*> (o .:? "advertisedRoutes" .!= mempty)
+                     <*> (o .:? "linkedVpnTunnel"))
+
+instance ToJSON RouterStatusBGPPeerStatus where
+        toJSON RouterStatusBGPPeerStatus'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _rsbpsStatus,
+                  ("ipAddress" .=) <$> _rsbpsIPAddress,
+                  ("state" .=) <$> _rsbpsState,
+                  ("peerIpAddress" .=) <$> _rsbpsPeerIPAddress,
+                  ("uptime" .=) <$> _rsbpsUptime,
+                  ("numLearnedRoutes" .=) <$> _rsbpsNumLearnedRoutes,
+                  ("name" .=) <$> _rsbpsName,
+                  ("uptimeSeconds" .=) <$> _rsbpsUptimeSeconds,
+                  ("advertisedRoutes" .=) <$> _rsbpsAdvertisedRoutes,
+                  ("linkedVpnTunnel" .=) <$> _rsbpsLinkedVPNTunnel])
+
+--
 -- /See:/ 'urlMapReference' smart constructor.
 newtype URLMapReference = URLMapReference'
     { _umrURLMap :: Maybe Text
@@ -8639,6 +10581,105 @@ instance ToJSON ZoneList where
                   ("id" .=) <$> _zlId])
 
 --
+-- /See:/ 'routerBGPPeer' smart constructor.
+data RouterBGPPeer = RouterBGPPeer'
+    { _rbpIPAddress               :: !(Maybe Text)
+    , _rbpInterfaceName           :: !(Maybe Text)
+    , _rbpPeerIPAddress           :: !(Maybe Text)
+    , _rbpAdvertisedRoutePriority :: !(Maybe (Textual Word32))
+    , _rbpPeerASN                 :: !(Maybe (Textual Word32))
+    , _rbpName                    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouterBGPPeer' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rbpIPAddress'
+--
+-- * 'rbpInterfaceName'
+--
+-- * 'rbpPeerIPAddress'
+--
+-- * 'rbpAdvertisedRoutePriority'
+--
+-- * 'rbpPeerASN'
+--
+-- * 'rbpName'
+routerBGPPeer
+    :: RouterBGPPeer
+routerBGPPeer =
+    RouterBGPPeer'
+    { _rbpIPAddress = Nothing
+    , _rbpInterfaceName = Nothing
+    , _rbpPeerIPAddress = Nothing
+    , _rbpAdvertisedRoutePriority = Nothing
+    , _rbpPeerASN = Nothing
+    , _rbpName = Nothing
+    }
+
+-- | IP address of the interface inside Google Cloud Platform.
+rbpIPAddress :: Lens' RouterBGPPeer (Maybe Text)
+rbpIPAddress
+  = lens _rbpIPAddress (\ s a -> s{_rbpIPAddress = a})
+
+-- | Name of the interface the BGP peer is associated with.
+rbpInterfaceName :: Lens' RouterBGPPeer (Maybe Text)
+rbpInterfaceName
+  = lens _rbpInterfaceName
+      (\ s a -> s{_rbpInterfaceName = a})
+
+-- | IP address of the BGP interface outside Google cloud.
+rbpPeerIPAddress :: Lens' RouterBGPPeer (Maybe Text)
+rbpPeerIPAddress
+  = lens _rbpPeerIPAddress
+      (\ s a -> s{_rbpPeerIPAddress = a})
+
+-- | The priority of routes advertised to this BGP peer. In the case where
+-- there is more than one matching route of maximum length, the routes with
+-- lowest priority value win.
+rbpAdvertisedRoutePriority :: Lens' RouterBGPPeer (Maybe Word32)
+rbpAdvertisedRoutePriority
+  = lens _rbpAdvertisedRoutePriority
+      (\ s a -> s{_rbpAdvertisedRoutePriority = a})
+      . mapping _Coerce
+
+-- | Peer BGP Autonomous System Number (ASN). For VPN use case, this value
+-- can be different for every tunnel.
+rbpPeerASN :: Lens' RouterBGPPeer (Maybe Word32)
+rbpPeerASN
+  = lens _rbpPeerASN (\ s a -> s{_rbpPeerASN = a}) .
+      mapping _Coerce
+
+-- | Name of this BGP peer. The name must be 1-63 characters long and comply
+-- with RFC1035.
+rbpName :: Lens' RouterBGPPeer (Maybe Text)
+rbpName = lens _rbpName (\ s a -> s{_rbpName = a})
+
+instance FromJSON RouterBGPPeer where
+        parseJSON
+          = withObject "RouterBGPPeer"
+              (\ o ->
+                 RouterBGPPeer' <$>
+                   (o .:? "ipAddress") <*> (o .:? "interfaceName") <*>
+                     (o .:? "peerIpAddress")
+                     <*> (o .:? "advertisedRoutePriority")
+                     <*> (o .:? "peerAsn")
+                     <*> (o .:? "name"))
+
+instance ToJSON RouterBGPPeer where
+        toJSON RouterBGPPeer'{..}
+          = object
+              (catMaybes
+                 [("ipAddress" .=) <$> _rbpIPAddress,
+                  ("interfaceName" .=) <$> _rbpInterfaceName,
+                  ("peerIpAddress" .=) <$> _rbpPeerIPAddress,
+                  ("advertisedRoutePriority" .=) <$>
+                    _rbpAdvertisedRoutePriority,
+                  ("peerAsn" .=) <$> _rbpPeerASN,
+                  ("name" .=) <$> _rbpName])
+
+--
 -- /See:/ 'managedInstance' smart constructor.
 data ManagedInstance = ManagedInstance'
     { _miLastAttempt    :: !(Maybe ManagedInstanceLastAttempt)
@@ -8687,16 +10728,16 @@ miLastAttempt
 -- will try again until it is successful. - CREATING_WITHOUT_RETRIES The
 -- managed instance group is attempting to create this instance only once.
 -- If the group fails to create this instance, it does not try again and
--- the group\'s target_size value is decreased. - RECREATING The managed
--- instance group is recreating this instance. - DELETING The managed
--- instance group is permanently deleting this instance. - ABANDONING The
--- managed instance group is abandoning this instance. The instance will be
--- removed from the instance group and from any target pools that are
--- associated with this group. - RESTARTING The managed instance group is
--- restarting the instance. - REFRESHING The managed instance group is
--- applying configuration changes to the instance without stopping it. For
--- example, the group can update the target pool list for an instance
--- without stopping that instance.
+-- the group\'s targetSize value is decreased instead. - RECREATING The
+-- managed instance group is recreating this instance. - DELETING The
+-- managed instance group is permanently deleting this instance. -
+-- ABANDONING The managed instance group is abandoning this instance. The
+-- instance will be removed from the instance group and from any target
+-- pools that are associated with this group. - RESTARTING The managed
+-- instance group is restarting the instance. - REFRESHING The managed
+-- instance group is applying configuration changes to the instance without
+-- stopping it. For example, the group can update the target pool list for
+-- an instance without stopping that instance.
 miCurrentAction :: Lens' ManagedInstance (Maybe ManagedInstanceCurrentAction)
 miCurrentAction
   = lens _miCurrentAction
@@ -8830,13 +10871,15 @@ instance ToJSON
 --
 -- /See:/ 'backend' smart constructor.
 data Backend = Backend'
-    { _bGroup              :: !(Maybe Text)
-    , _bBalancingMode      :: !(Maybe BackendBalancingMode)
-    , _bMaxUtilization     :: !(Maybe (Textual Double))
-    , _bMaxRate            :: !(Maybe (Textual Int32))
-    , _bMaxRatePerInstance :: !(Maybe (Textual Double))
-    , _bDescription        :: !(Maybe Text)
-    , _bCapacityScaler     :: !(Maybe (Textual Double))
+    { _bGroup                     :: !(Maybe Text)
+    , _bBalancingMode             :: !(Maybe BackendBalancingMode)
+    , _bMaxUtilization            :: !(Maybe (Textual Double))
+    , _bMaxRate                   :: !(Maybe (Textual Int32))
+    , _bMaxConnections            :: !(Maybe (Textual Int32))
+    , _bMaxConnectionsPerInstance :: !(Maybe (Textual Int32))
+    , _bMaxRatePerInstance        :: !(Maybe (Textual Double))
+    , _bDescription               :: !(Maybe Text)
+    , _bCapacityScaler            :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Backend' with the minimum fields required to make a request.
@@ -8851,6 +10894,10 @@ data Backend = Backend'
 --
 -- * 'bMaxRate'
 --
+-- * 'bMaxConnections'
+--
+-- * 'bMaxConnectionsPerInstance'
+--
 -- * 'bMaxRatePerInstance'
 --
 -- * 'bDescription'
@@ -8864,6 +10911,8 @@ backend =
     , _bBalancingMode = Nothing
     , _bMaxUtilization = Nothing
     , _bMaxRate = Nothing
+    , _bMaxConnections = Nothing
+    , _bMaxConnectionsPerInstance = Nothing
     , _bMaxRatePerInstance = Nothing
     , _bDescription = Nothing
     , _bCapacityScaler = Nothing
@@ -8875,13 +10924,16 @@ backend =
 -- zone as the instance group itself. No two backends in a backend service
 -- are allowed to use same Instance Group resource. Note that you must
 -- specify an Instance Group resource using the fully-qualified URL, rather
--- than a partial URL.
+-- than a partial URL. When the BackendService has load balancing scheme
+-- INTERNAL, the instance group must be in a zone within the same region as
+-- the BackendService.
 bGroup :: Lens' Backend (Maybe Text)
 bGroup = lens _bGroup (\ s a -> s{_bGroup = a})
 
--- | Specifies the balancing mode for this backend. For global HTTP(S) load
--- balancing, the default is UTILIZATION. Valid values are UTILIZATION and
--- RATE.
+-- | Specifies the balancing mode for this backend. For global HTTP(S) or
+-- TCP\/SSL load balancing, the default is UTILIZATION. Valid values are
+-- UTILIZATION, RATE (for HTTP(S)) and CONNECTION (for TCP\/SSL). This
+-- cannot be used for internal load balancing.
 bBalancingMode :: Lens' Backend (Maybe BackendBalancingMode)
 bBalancingMode
   = lens _bBalancingMode
@@ -8889,7 +10941,7 @@ bBalancingMode
 
 -- | Used when balancingMode is UTILIZATION. This ratio defines the CPU
 -- utilization target for the group. The default is 0.8. Valid range is
--- [0.0, 1.0].
+-- [0.0, 1.0]. This cannot be used for internal load balancing.
 bMaxUtilization :: Lens' Backend (Maybe Double)
 bMaxUtilization
   = lens _bMaxUtilization
@@ -8898,16 +10950,39 @@ bMaxUtilization
 
 -- | The max requests per second (RPS) of the group. Can be used with either
 -- RATE or UTILIZATION balancing modes, but required if RATE mode. For RATE
--- mode, either maxRate or maxRatePerInstance must be set.
+-- mode, either maxRate or maxRatePerInstance must be set. This cannot be
+-- used for internal load balancing.
 bMaxRate :: Lens' Backend (Maybe Int32)
 bMaxRate
   = lens _bMaxRate (\ s a -> s{_bMaxRate = a}) .
       mapping _Coerce
 
+-- | The max number of simultaneous connections for the group. Can be used
+-- with either CONNECTION or UTILIZATION balancing modes. For CONNECTION
+-- mode, either maxConnections or maxConnectionsPerInstance must be set.
+-- This cannot be used for internal load balancing.
+bMaxConnections :: Lens' Backend (Maybe Int32)
+bMaxConnections
+  = lens _bMaxConnections
+      (\ s a -> s{_bMaxConnections = a})
+      . mapping _Coerce
+
+-- | The max number of simultaneous connections that a single backend
+-- instance can handle. This is used to calculate the capacity of the
+-- group. Can be used in either CONNECTION or UTILIZATION balancing modes.
+-- For CONNECTION mode, either maxConnections or maxConnectionsPerInstance
+-- must be set. This cannot be used for internal load balancing.
+bMaxConnectionsPerInstance :: Lens' Backend (Maybe Int32)
+bMaxConnectionsPerInstance
+  = lens _bMaxConnectionsPerInstance
+      (\ s a -> s{_bMaxConnectionsPerInstance = a})
+      . mapping _Coerce
+
 -- | The max requests per second (RPS) that a single backend instance can
 -- handle.This is used to calculate the capacity of the group. Can be used
 -- in either balancing mode. For RATE mode, either maxRate or
--- maxRatePerInstance must be set.
+-- maxRatePerInstance must be set. This cannot be used for internal load
+-- balancing.
 bMaxRatePerInstance :: Lens' Backend (Maybe Double)
 bMaxRatePerInstance
   = lens _bMaxRatePerInstance
@@ -8920,11 +10995,12 @@ bDescription :: Lens' Backend (Maybe Text)
 bDescription
   = lens _bDescription (\ s a -> s{_bDescription = a})
 
--- | A multiplier applied to the group\'s maximum servicing capacity (either
--- UTILIZATION or RATE). Default value is 1, which means the group will
--- serve up to 100% of its configured CPU or RPS (depending on
+-- | A multiplier applied to the group\'s maximum servicing capacity (based
+-- on UTILIZATION, RATE or CONNECTION). Default value is 1, which means the
+-- group will serve up to 100% of its configured capacity (depending on
 -- balancingMode). A setting of 0 means the group is completely drained,
--- offering 0% of its available CPU or RPS. Valid range is [0.0,1.0].
+-- offering 0% of its available Capacity. Valid range is [0.0,1.0]. This
+-- cannot be used for internal load balancing.
 bCapacityScaler :: Lens' Backend (Maybe Double)
 bCapacityScaler
   = lens _bCapacityScaler
@@ -8939,6 +11015,8 @@ instance FromJSON Backend where
                    (o .:? "group") <*> (o .:? "balancingMode") <*>
                      (o .:? "maxUtilization")
                      <*> (o .:? "maxRate")
+                     <*> (o .:? "maxConnections")
+                     <*> (o .:? "maxConnectionsPerInstance")
                      <*> (o .:? "maxRatePerInstance")
                      <*> (o .:? "description")
                      <*> (o .:? "capacityScaler"))
@@ -8951,6 +11029,9 @@ instance ToJSON Backend where
                   ("balancingMode" .=) <$> _bBalancingMode,
                   ("maxUtilization" .=) <$> _bMaxUtilization,
                   ("maxRate" .=) <$> _bMaxRate,
+                  ("maxConnections" .=) <$> _bMaxConnections,
+                  ("maxConnectionsPerInstance" .=) <$>
+                    _bMaxConnectionsPerInstance,
                   ("maxRatePerInstance" .=) <$> _bMaxRatePerInstance,
                   ("description" .=) <$> _bDescription,
                   ("capacityScaler" .=) <$> _bCapacityScaler])
@@ -9187,13 +11268,14 @@ instance ToJSON OperationAggregatedListItems where
 --
 -- /See:/ 'instanceGroupManagerActionsSummary' smart constructor.
 data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary'
-    { _igmasDeleting   :: !(Maybe (Textual Int32))
-    , _igmasRestarting :: !(Maybe (Textual Int32))
-    , _igmasNone       :: !(Maybe (Textual Int32))
-    , _igmasCreating   :: !(Maybe (Textual Int32))
-    , _igmasRefreshing :: !(Maybe (Textual Int32))
-    , _igmasRecreating :: !(Maybe (Textual Int32))
-    , _igmasAbandoning :: !(Maybe (Textual Int32))
+    { _igmasDeleting               :: !(Maybe (Textual Int32))
+    , _igmasRestarting             :: !(Maybe (Textual Int32))
+    , _igmasNone                   :: !(Maybe (Textual Int32))
+    , _igmasCreating               :: !(Maybe (Textual Int32))
+    , _igmasRefreshing             :: !(Maybe (Textual Int32))
+    , _igmasCreatingWithoutRetries :: !(Maybe (Textual Int32))
+    , _igmasRecreating             :: !(Maybe (Textual Int32))
+    , _igmasAbandoning             :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagerActionsSummary' with the minimum fields required to make a request.
@@ -9210,6 +11292,8 @@ data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary'
 --
 -- * 'igmasRefreshing'
 --
+-- * 'igmasCreatingWithoutRetries'
+--
 -- * 'igmasRecreating'
 --
 -- * 'igmasAbandoning'
@@ -9222,6 +11306,7 @@ instanceGroupManagerActionsSummary =
     , _igmasNone = Nothing
     , _igmasCreating = Nothing
     , _igmasRefreshing = Nothing
+    , _igmasCreatingWithoutRetries = Nothing
     , _igmasRecreating = Nothing
     , _igmasAbandoning = Nothing
     }
@@ -9251,8 +11336,10 @@ igmasNone
 
 -- | [Output Only] The number of instances in the managed instance group that
 -- are scheduled to be created or are currently being created. If the group
--- fails to create one of these instances, it tries again until it creates
--- the instance successfully.
+-- fails to create any of these instances, it tries again until it creates
+-- the instance successfully. If you have disabled creation retries, this
+-- field will not be populated; instead, the creatingWithoutRetries field
+-- will be populated.
 igmasCreating :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasCreating
   = lens _igmasCreating
@@ -9267,6 +11354,16 @@ igmasRefreshing :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasRefreshing
   = lens _igmasRefreshing
       (\ s a -> s{_igmasRefreshing = a})
+      . mapping _Coerce
+
+-- | [Output Only] The number of instances that the managed instance group
+-- will attempt to create. The group attempts to create each instance only
+-- once. If the group fails to create any of these instances, it decreases
+-- the group\'s targetSize value accordingly.
+igmasCreatingWithoutRetries :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
+igmasCreatingWithoutRetries
+  = lens _igmasCreatingWithoutRetries
+      (\ s a -> s{_igmasCreatingWithoutRetries = a})
       . mapping _Coerce
 
 -- | [Output Only] The number of instances in the managed instance group that
@@ -9299,6 +11396,7 @@ instance FromJSON InstanceGroupManagerActionsSummary
                      (o .:? "none")
                      <*> (o .:? "creating")
                      <*> (o .:? "refreshing")
+                     <*> (o .:? "creatingWithoutRetries")
                      <*> (o .:? "recreating")
                      <*> (o .:? "abandoning"))
 
@@ -9312,6 +11410,8 @@ instance ToJSON InstanceGroupManagerActionsSummary
                   ("none" .=) <$> _igmasNone,
                   ("creating" .=) <$> _igmasCreating,
                   ("refreshing" .=) <$> _igmasRefreshing,
+                  ("creatingWithoutRetries" .=) <$>
+                    _igmasCreatingWithoutRetries,
                   ("recreating" .=) <$> _igmasRecreating,
                   ("abandoning" .=) <$> _igmasAbandoning])
 
@@ -9419,7 +11519,7 @@ nlItems
   = lens _nlItems (\ s a -> s{_nlItems = a}) . _Default
       . _Coerce
 
--- | [Output Only] Server-defined URL for this resource .
+-- | [Output Only] Server-defined URL for this resource.
 nlSelfLink :: Lens' NetworkList (Maybe Text)
 nlSelfLink
   = lens _nlSelfLink (\ s a -> s{_nlSelfLink = a})
@@ -9702,6 +11802,46 @@ instance ToJSON AutoscalerList where
                   ("id" .=) <$> _autId])
 
 --
+-- /See:/ 'targetSSLProxiesSetProxyHeaderRequest' smart constructor.
+newtype TargetSSLProxiesSetProxyHeaderRequest = TargetSSLProxiesSetProxyHeaderRequest'
+    { _tspsphrProxyHeader :: Maybe TargetSSLProxiesSetProxyHeaderRequestProxyHeader
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetSSLProxiesSetProxyHeaderRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tspsphrProxyHeader'
+targetSSLProxiesSetProxyHeaderRequest
+    :: TargetSSLProxiesSetProxyHeaderRequest
+targetSSLProxiesSetProxyHeaderRequest =
+    TargetSSLProxiesSetProxyHeaderRequest'
+    { _tspsphrProxyHeader = Nothing
+    }
+
+-- | The new type of proxy header to append before sending data to the
+-- backend. NONE or PROXY_V1 are allowed.
+tspsphrProxyHeader :: Lens' TargetSSLProxiesSetProxyHeaderRequest (Maybe TargetSSLProxiesSetProxyHeaderRequestProxyHeader)
+tspsphrProxyHeader
+  = lens _tspsphrProxyHeader
+      (\ s a -> s{_tspsphrProxyHeader = a})
+
+instance FromJSON
+         TargetSSLProxiesSetProxyHeaderRequest where
+        parseJSON
+          = withObject "TargetSSLProxiesSetProxyHeaderRequest"
+              (\ o ->
+                 TargetSSLProxiesSetProxyHeaderRequest' <$>
+                   (o .:? "proxyHeader"))
+
+instance ToJSON TargetSSLProxiesSetProxyHeaderRequest
+         where
+        toJSON TargetSSLProxiesSetProxyHeaderRequest'{..}
+          = object
+              (catMaybes
+                 [("proxyHeader" .=) <$> _tspsphrProxyHeader])
+
+--
 -- /See:/ 'vpnTunnelAggregatedList' smart constructor.
 data VPNTunnelAggregatedList = VPNTunnelAggregatedList'
     { _vtalNextPageToken :: !(Maybe Text)
@@ -9790,22 +11930,25 @@ instance ToJSON VPNTunnelAggregatedList where
 --
 -- /See:/ 'attachedDisk' smart constructor.
 data AttachedDisk = AttachedDisk'
-    { _adKind             :: !Text
-    , _adMode             :: !(Maybe AttachedDiskMode)
-    , _adBoot             :: !(Maybe Bool)
-    , _adAutoDelete       :: !(Maybe Bool)
-    , _adInitializeParams :: !(Maybe AttachedDiskInitializeParams)
-    , _adDeviceName       :: !(Maybe Text)
-    , _adInterface        :: !(Maybe AttachedDiskInterface)
-    , _adSource           :: !(Maybe Text)
-    , _adLicenses         :: !(Maybe [Text])
-    , _adType             :: !(Maybe AttachedDiskType)
-    , _adIndex            :: !(Maybe (Textual Int32))
+    { _adDiskEncryptionKey :: !(Maybe CustomerEncryptionKey)
+    , _adKind              :: !Text
+    , _adMode              :: !(Maybe AttachedDiskMode)
+    , _adBoot              :: !(Maybe Bool)
+    , _adAutoDelete        :: !(Maybe Bool)
+    , _adInitializeParams  :: !(Maybe AttachedDiskInitializeParams)
+    , _adDeviceName        :: !(Maybe Text)
+    , _adInterface         :: !(Maybe AttachedDiskInterface)
+    , _adSource            :: !(Maybe Text)
+    , _adLicenses          :: !(Maybe [Text])
+    , _adType              :: !(Maybe AttachedDiskType)
+    , _adIndex             :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AttachedDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'adDiskEncryptionKey'
 --
 -- * 'adKind'
 --
@@ -9832,7 +11975,8 @@ attachedDisk
     :: AttachedDisk
 attachedDisk =
     AttachedDisk'
-    { _adKind = "compute#attachedDisk"
+    { _adDiskEncryptionKey = Nothing
+    , _adKind = "compute#attachedDisk"
     , _adMode = Nothing
     , _adBoot = Nothing
     , _adAutoDelete = Nothing
@@ -9844,6 +11988,25 @@ attachedDisk =
     , _adType = Nothing
     , _adIndex = Nothing
     }
+
+-- | Encrypts or decrypts a disk using a customer-supplied encryption key. If
+-- you are creating a new disk, this field encrypts the new disk using an
+-- encryption key that you provide. If you are attaching an existing disk
+-- that is already encrypted, this field decrypts the disk using the
+-- customer-supplied encryption key. If you encrypt a disk using a
+-- customer-supplied key, you must provide the same key again when you
+-- attempt to use this resource at a later time. For example, you must
+-- provide the key when you create a snapshot or an image from the disk or
+-- when you attach the disk to a virtual machine instance. If you do not
+-- provide an encryption key, then the disk will be encrypted using an
+-- automatically generated key and you do not need to provide a key to use
+-- the disk later. Instance templates do not store customer-supplied
+-- encryption keys, so you cannot use your own keys to encrypt disks in a
+-- managed instance group.
+adDiskEncryptionKey :: Lens' AttachedDisk (Maybe CustomerEncryptionKey)
+adDiskEncryptionKey
+  = lens _adDiskEncryptionKey
+      (\ s a -> s{_adDiskEncryptionKey = a})
 
 -- | [Output Only] Type of the resource. Always compute#attachedDisk for
 -- attached disks.
@@ -9899,7 +12062,8 @@ adInterface
   = lens _adInterface (\ s a -> s{_adInterface = a})
 
 -- | Specifies a valid partial or full URL to an existing Persistent Disk
--- resource. This field is only applicable for persistent disks.
+-- resource. This field is only applicable for persistent disks. Note that
+-- for InstanceTemplate, it is just disk name, not URL for the disk.
 adSource :: Lens' AttachedDisk (Maybe Text)
 adSource = lens _adSource (\ s a -> s{_adSource = a})
 
@@ -9929,8 +12093,9 @@ instance FromJSON AttachedDisk where
           = withObject "AttachedDisk"
               (\ o ->
                  AttachedDisk' <$>
-                   (o .:? "kind" .!= "compute#attachedDisk") <*>
-                     (o .:? "mode")
+                   (o .:? "diskEncryptionKey") <*>
+                     (o .:? "kind" .!= "compute#attachedDisk")
+                     <*> (o .:? "mode")
                      <*> (o .:? "boot")
                      <*> (o .:? "autoDelete")
                      <*> (o .:? "initializeParams")
@@ -9945,7 +12110,8 @@ instance ToJSON AttachedDisk where
         toJSON AttachedDisk'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _adKind), ("mode" .=) <$> _adMode,
+                 [("diskEncryptionKey" .=) <$> _adDiskEncryptionKey,
+                  Just ("kind" .= _adKind), ("mode" .=) <$> _adMode,
                   ("boot" .=) <$> _adBoot,
                   ("autoDelete" .=) <$> _adAutoDelete,
                   ("initializeParams" .=) <$> _adInitializeParams,
@@ -10361,102 +12527,99 @@ instance ToJSON DiskTypeAggregatedList where
 --
 -- /See:/ 'hTTPHealthCheck' smart constructor.
 data HTTPHealthCheck = HTTPHealthCheck'
-    { _httphcHealthyThreshold   :: !(Maybe (Textual Int32))
-    , _httphcKind               :: !Text
-    , _httphcRequestPath        :: !(Maybe Text)
-    , _httphcSelfLink           :: !(Maybe Text)
-    , _httphcCheckIntervalSec   :: !(Maybe (Textual Int32))
-    , _httphcName               :: !(Maybe Text)
-    , _httphcCreationTimestamp  :: !(Maybe Text)
-    , _httphcId                 :: !(Maybe (Textual Word64))
-    , _httphcHost               :: !(Maybe Text)
-    , _httphcTimeoutSec         :: !(Maybe (Textual Int32))
-    , _httphcDescription        :: !(Maybe Text)
-    , _httphcUnhealthyThreshold :: !(Maybe (Textual Int32))
-    , _httphcPort               :: !(Maybe (Textual Int32))
+    { _hHealthyThreshold   :: !(Maybe (Textual Int32))
+    , _hKind               :: !Text
+    , _hRequestPath        :: !(Maybe Text)
+    , _hSelfLink           :: !(Maybe Text)
+    , _hCheckIntervalSec   :: !(Maybe (Textual Int32))
+    , _hName               :: !(Maybe Text)
+    , _hCreationTimestamp  :: !(Maybe Text)
+    , _hId                 :: !(Maybe (Textual Word64))
+    , _hHost               :: !(Maybe Text)
+    , _hTimeoutSec         :: !(Maybe (Textual Int32))
+    , _hDescription        :: !(Maybe Text)
+    , _hUnhealthyThreshold :: !(Maybe (Textual Int32))
+    , _hPort               :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'httphcHealthyThreshold'
+-- * 'hHealthyThreshold'
 --
--- * 'httphcKind'
+-- * 'hKind'
 --
--- * 'httphcRequestPath'
+-- * 'hRequestPath'
 --
--- * 'httphcSelfLink'
+-- * 'hSelfLink'
 --
--- * 'httphcCheckIntervalSec'
+-- * 'hCheckIntervalSec'
 --
--- * 'httphcName'
+-- * 'hName'
 --
--- * 'httphcCreationTimestamp'
+-- * 'hCreationTimestamp'
 --
--- * 'httphcId'
+-- * 'hId'
 --
--- * 'httphcHost'
+-- * 'hHost'
 --
--- * 'httphcTimeoutSec'
+-- * 'hTimeoutSec'
 --
--- * 'httphcDescription'
+-- * 'hDescription'
 --
--- * 'httphcUnhealthyThreshold'
+-- * 'hUnhealthyThreshold'
 --
--- * 'httphcPort'
+-- * 'hPort'
 hTTPHealthCheck
     :: HTTPHealthCheck
 hTTPHealthCheck =
     HTTPHealthCheck'
-    { _httphcHealthyThreshold = Nothing
-    , _httphcKind = "compute#httpHealthCheck"
-    , _httphcRequestPath = Nothing
-    , _httphcSelfLink = Nothing
-    , _httphcCheckIntervalSec = Nothing
-    , _httphcName = Nothing
-    , _httphcCreationTimestamp = Nothing
-    , _httphcId = Nothing
-    , _httphcHost = Nothing
-    , _httphcTimeoutSec = Nothing
-    , _httphcDescription = Nothing
-    , _httphcUnhealthyThreshold = Nothing
-    , _httphcPort = Nothing
+    { _hHealthyThreshold = Nothing
+    , _hKind = "compute#httpHealthCheck"
+    , _hRequestPath = Nothing
+    , _hSelfLink = Nothing
+    , _hCheckIntervalSec = Nothing
+    , _hName = Nothing
+    , _hCreationTimestamp = Nothing
+    , _hId = Nothing
+    , _hHost = Nothing
+    , _hTimeoutSec = Nothing
+    , _hDescription = Nothing
+    , _hUnhealthyThreshold = Nothing
+    , _hPort = Nothing
     }
 
 -- | A so-far unhealthy instance will be marked healthy after this many
 -- consecutive successes. The default value is 2.
-httphcHealthyThreshold :: Lens' HTTPHealthCheck (Maybe Int32)
-httphcHealthyThreshold
-  = lens _httphcHealthyThreshold
-      (\ s a -> s{_httphcHealthyThreshold = a})
+hHealthyThreshold :: Lens' HTTPHealthCheck (Maybe Int32)
+hHealthyThreshold
+  = lens _hHealthyThreshold
+      (\ s a -> s{_hHealthyThreshold = a})
       . mapping _Coerce
 
 -- | [Output Only] Type of the resource. Always compute#httpHealthCheck for
 -- HTTP health checks.
-httphcKind :: Lens' HTTPHealthCheck Text
-httphcKind
-  = lens _httphcKind (\ s a -> s{_httphcKind = a})
+hKind :: Lens' HTTPHealthCheck Text
+hKind = lens _hKind (\ s a -> s{_hKind = a})
 
 -- | The request path of the HTTP health check request. The default value is
 -- \/.
-httphcRequestPath :: Lens' HTTPHealthCheck (Maybe Text)
-httphcRequestPath
-  = lens _httphcRequestPath
-      (\ s a -> s{_httphcRequestPath = a})
+hRequestPath :: Lens' HTTPHealthCheck (Maybe Text)
+hRequestPath
+  = lens _hRequestPath (\ s a -> s{_hRequestPath = a})
 
 -- | [Output Only] Server-defined URL for the resource.
-httphcSelfLink :: Lens' HTTPHealthCheck (Maybe Text)
-httphcSelfLink
-  = lens _httphcSelfLink
-      (\ s a -> s{_httphcSelfLink = a})
+hSelfLink :: Lens' HTTPHealthCheck (Maybe Text)
+hSelfLink
+  = lens _hSelfLink (\ s a -> s{_hSelfLink = a})
 
 -- | How often (in seconds) to send a health check. The default value is 5
 -- seconds.
-httphcCheckIntervalSec :: Lens' HTTPHealthCheck (Maybe Int32)
-httphcCheckIntervalSec
-  = lens _httphcCheckIntervalSec
-      (\ s a -> s{_httphcCheckIntervalSec = a})
+hCheckIntervalSec :: Lens' HTTPHealthCheck (Maybe Int32)
+hCheckIntervalSec
+  = lens _hCheckIntervalSec
+      (\ s a -> s{_hCheckIntervalSec = a})
       . mapping _Coerce
 
 -- | Name of the resource. Provided by the client when the resource is
@@ -10466,59 +12629,54 @@ httphcCheckIntervalSec
 -- character must be a lowercase letter, and all following characters must
 -- be a dash, lowercase letter, or digit, except the last character, which
 -- cannot be a dash.
-httphcName :: Lens' HTTPHealthCheck (Maybe Text)
-httphcName
-  = lens _httphcName (\ s a -> s{_httphcName = a})
+hName :: Lens' HTTPHealthCheck (Maybe Text)
+hName = lens _hName (\ s a -> s{_hName = a})
 
 -- | [Output Only] Creation timestamp in RFC3339 text format.
-httphcCreationTimestamp :: Lens' HTTPHealthCheck (Maybe Text)
-httphcCreationTimestamp
-  = lens _httphcCreationTimestamp
-      (\ s a -> s{_httphcCreationTimestamp = a})
+hCreationTimestamp :: Lens' HTTPHealthCheck (Maybe Text)
+hCreationTimestamp
+  = lens _hCreationTimestamp
+      (\ s a -> s{_hCreationTimestamp = a})
 
 -- | [Output Only] The unique identifier for the resource. This identifier is
 -- defined by the server.
-httphcId :: Lens' HTTPHealthCheck (Maybe Word64)
-httphcId
-  = lens _httphcId (\ s a -> s{_httphcId = a}) .
-      mapping _Coerce
+hId :: Lens' HTTPHealthCheck (Maybe Word64)
+hId
+  = lens _hId (\ s a -> s{_hId = a}) . mapping _Coerce
 
 -- | The value of the host header in the HTTP health check request. If left
 -- empty (default value), the public IP on behalf of which this health
 -- check is performed will be used.
-httphcHost :: Lens' HTTPHealthCheck (Maybe Text)
-httphcHost
-  = lens _httphcHost (\ s a -> s{_httphcHost = a})
+hHost :: Lens' HTTPHealthCheck (Maybe Text)
+hHost = lens _hHost (\ s a -> s{_hHost = a})
 
 -- | How long (in seconds) to wait before claiming failure. The default value
 -- is 5 seconds. It is invalid for timeoutSec to have greater value than
 -- checkIntervalSec.
-httphcTimeoutSec :: Lens' HTTPHealthCheck (Maybe Int32)
-httphcTimeoutSec
-  = lens _httphcTimeoutSec
-      (\ s a -> s{_httphcTimeoutSec = a})
-      . mapping _Coerce
+hTimeoutSec :: Lens' HTTPHealthCheck (Maybe Int32)
+hTimeoutSec
+  = lens _hTimeoutSec (\ s a -> s{_hTimeoutSec = a}) .
+      mapping _Coerce
 
 -- | An optional description of this resource. Provide this property when you
 -- create the resource.
-httphcDescription :: Lens' HTTPHealthCheck (Maybe Text)
-httphcDescription
-  = lens _httphcDescription
-      (\ s a -> s{_httphcDescription = a})
+hDescription :: Lens' HTTPHealthCheck (Maybe Text)
+hDescription
+  = lens _hDescription (\ s a -> s{_hDescription = a})
 
 -- | A so-far healthy instance will be marked unhealthy after this many
 -- consecutive failures. The default value is 2.
-httphcUnhealthyThreshold :: Lens' HTTPHealthCheck (Maybe Int32)
-httphcUnhealthyThreshold
-  = lens _httphcUnhealthyThreshold
-      (\ s a -> s{_httphcUnhealthyThreshold = a})
+hUnhealthyThreshold :: Lens' HTTPHealthCheck (Maybe Int32)
+hUnhealthyThreshold
+  = lens _hUnhealthyThreshold
+      (\ s a -> s{_hUnhealthyThreshold = a})
       . mapping _Coerce
 
 -- | The TCP port number for the HTTP health check request. The default value
 -- is 80.
-httphcPort :: Lens' HTTPHealthCheck (Maybe Int32)
-httphcPort
-  = lens _httphcPort (\ s a -> s{_httphcPort = a}) .
+hPort :: Lens' HTTPHealthCheck (Maybe Int32)
+hPort
+  = lens _hPort (\ s a -> s{_hPort = a}) .
       mapping _Coerce
 
 instance FromJSON HTTPHealthCheck where
@@ -10544,20 +12702,18 @@ instance ToJSON HTTPHealthCheck where
         toJSON HTTPHealthCheck'{..}
           = object
               (catMaybes
-                 [("healthyThreshold" .=) <$> _httphcHealthyThreshold,
-                  Just ("kind" .= _httphcKind),
-                  ("requestPath" .=) <$> _httphcRequestPath,
-                  ("selfLink" .=) <$> _httphcSelfLink,
-                  ("checkIntervalSec" .=) <$> _httphcCheckIntervalSec,
-                  ("name" .=) <$> _httphcName,
-                  ("creationTimestamp" .=) <$>
-                    _httphcCreationTimestamp,
-                  ("id" .=) <$> _httphcId, ("host" .=) <$> _httphcHost,
-                  ("timeoutSec" .=) <$> _httphcTimeoutSec,
-                  ("description" .=) <$> _httphcDescription,
-                  ("unhealthyThreshold" .=) <$>
-                    _httphcUnhealthyThreshold,
-                  ("port" .=) <$> _httphcPort])
+                 [("healthyThreshold" .=) <$> _hHealthyThreshold,
+                  Just ("kind" .= _hKind),
+                  ("requestPath" .=) <$> _hRequestPath,
+                  ("selfLink" .=) <$> _hSelfLink,
+                  ("checkIntervalSec" .=) <$> _hCheckIntervalSec,
+                  ("name" .=) <$> _hName,
+                  ("creationTimestamp" .=) <$> _hCreationTimestamp,
+                  ("id" .=) <$> _hId, ("host" .=) <$> _hHost,
+                  ("timeoutSec" .=) <$> _hTimeoutSec,
+                  ("description" .=) <$> _hDescription,
+                  ("unhealthyThreshold" .=) <$> _hUnhealthyThreshold,
+                  ("port" .=) <$> _hPort])
 
 --
 -- /See:/ 'backendServiceGroupHealth' smart constructor.
@@ -10741,6 +12897,42 @@ instance ToJSON AutoscalerAggregatedList where
                   ("items" .=) <$> _aalItems,
                   ("selfLink" .=) <$> _aalSelfLink,
                   ("id" .=) <$> _aalId])
+
+-- | A map of scoped router lists.
+--
+-- /See:/ 'routerAggregatedListItems' smart constructor.
+newtype RouterAggregatedListItems = RouterAggregatedListItems'
+    { _raliAddtional :: HashMap Text RoutersScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouterAggregatedListItems' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'raliAddtional'
+routerAggregatedListItems
+    :: HashMap Text RoutersScopedList -- ^ 'raliAddtional'
+    -> RouterAggregatedListItems
+routerAggregatedListItems pRaliAddtional_ =
+    RouterAggregatedListItems'
+    { _raliAddtional = _Coerce # pRaliAddtional_
+    }
+
+-- | Name of the scope containing this set of routers.
+raliAddtional :: Lens' RouterAggregatedListItems (HashMap Text RoutersScopedList)
+raliAddtional
+  = lens _raliAddtional
+      (\ s a -> s{_raliAddtional = a})
+      . _Coerce
+
+instance FromJSON RouterAggregatedListItems where
+        parseJSON
+          = withObject "RouterAggregatedListItems"
+              (\ o ->
+                 RouterAggregatedListItems' <$> (parseJSONObject o))
+
+instance ToJSON RouterAggregatedListItems where
+        toJSON = toJSON . _raliAddtional
 
 -- | Cloud Autoscaler policy.
 --
@@ -11004,7 +13196,7 @@ vtlItems
       _Default
       . _Coerce
 
--- | [Output Only] Server-defined URL for the resource.
+-- | [Output Only] Server-defined URL for this resource.
 vtlSelfLink :: Lens' VPNTunnelList (Maybe Text)
 vtlSelfLink
   = lens _vtlSelfLink (\ s a -> s{_vtlSelfLink = a})
@@ -11987,7 +14179,8 @@ instance ToJSON TargetHTTPProxy where
 --
 -- /See:/ 'machineType' smart constructor.
 data MachineType = MachineType'
-    { _mtKind                         :: !Text
+    { _mtIsSharedCPU                  :: !(Maybe Bool)
+    , _mtKind                         :: !Text
     , _mtImageSpaceGb                 :: !(Maybe (Textual Int32))
     , _mtZone                         :: !(Maybe Text)
     , _mtSelfLink                     :: !(Maybe Text)
@@ -12006,6 +14199,8 @@ data MachineType = MachineType'
 -- | Creates a value of 'MachineType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mtIsSharedCPU'
 --
 -- * 'mtKind'
 --
@@ -12038,7 +14233,8 @@ machineType
     :: MachineType
 machineType =
     MachineType'
-    { _mtKind = "compute#machineType"
+    { _mtIsSharedCPU = Nothing
+    , _mtKind = "compute#machineType"
     , _mtImageSpaceGb = Nothing
     , _mtZone = Nothing
     , _mtSelfLink = Nothing
@@ -12053,6 +14249,13 @@ machineType =
     , _mtDescription = Nothing
     , _mtDeprecated = Nothing
     }
+
+-- | [Output Only] Whether this machine type has a shared CPU. See
+-- Shared-core machine types for more information.
+mtIsSharedCPU :: Lens' MachineType (Maybe Bool)
+mtIsSharedCPU
+  = lens _mtIsSharedCPU
+      (\ s a -> s{_mtIsSharedCPU = a})
 
 -- | [Output Only] The type of the resource. Always compute#machineType for
 -- machine types.
@@ -12146,8 +14349,9 @@ instance FromJSON MachineType where
           = withObject "MachineType"
               (\ o ->
                  MachineType' <$>
-                   (o .:? "kind" .!= "compute#machineType") <*>
-                     (o .:? "imageSpaceGb")
+                   (o .:? "isSharedCpu") <*>
+                     (o .:? "kind" .!= "compute#machineType")
+                     <*> (o .:? "imageSpaceGb")
                      <*> (o .:? "zone")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
@@ -12165,7 +14369,8 @@ instance ToJSON MachineType where
         toJSON MachineType'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _mtKind),
+                 [("isSharedCpu" .=) <$> _mtIsSharedCPU,
+                  Just ("kind" .= _mtKind),
                   ("imageSpaceGb" .=) <$> _mtImageSpaceGb,
                   ("zone" .=) <$> _mtZone,
                   ("selfLink" .=) <$> _mtSelfLink,
@@ -12499,7 +14704,8 @@ igliNextPageToken
       (\ s a -> s{_igliNextPageToken = a})
 
 -- | [Output Only] The resource type, which is always
--- compute#instanceGroupsListInstances for lists of instance groups.
+-- compute#instanceGroupsListInstances for the list of instances in the
+-- specified instance group.
 igliKind :: Lens' InstanceGroupsListInstances Text
 igliKind = lens _igliKind (\ s a -> s{_igliKind = a})
 
@@ -12511,14 +14717,14 @@ igliItems
       _Default
       . _Coerce
 
--- | [Output Only] The URL for this list of instance groups. The server
--- generates this URL.
+-- | [Output Only] The URL for this list of instances in the specified
+-- instance groups. The server generates this URL.
 igliSelfLink :: Lens' InstanceGroupsListInstances (Maybe Text)
 igliSelfLink
   = lens _igliSelfLink (\ s a -> s{_igliSelfLink = a})
 
--- | [Output Only] A unique identifier for this list of instance groups. The
--- server generates this identifier.
+-- | [Output Only] A unique identifier for this list of instances in the
+-- specified instance group. The server generates this identifier.
 igliId :: Lens' InstanceGroupsListInstances (Maybe Text)
 igliId = lens _igliId (\ s a -> s{_igliId = a})
 
@@ -12558,6 +14764,7 @@ data Autoscaler = Autoscaler'
     , _aaCreationTimestamp :: !(Maybe Text)
     , _aaAutoscalingPolicy :: !(Maybe AutoscalingPolicy)
     , _aaId                :: !(Maybe (Textual Word64))
+    , _aaRegion            :: !(Maybe Text)
     , _aaDescription       :: !(Maybe Text)
     , _aaTarget            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12580,6 +14787,8 @@ data Autoscaler = Autoscaler'
 --
 -- * 'aaId'
 --
+-- * 'aaRegion'
+--
 -- * 'aaDescription'
 --
 -- * 'aaTarget'
@@ -12594,6 +14803,7 @@ autoscaler =
     , _aaCreationTimestamp = Nothing
     , _aaAutoscalingPolicy = Nothing
     , _aaId = Nothing
+    , _aaRegion = Nothing
     , _aaDescription = Nothing
     , _aaTarget = Nothing
     }
@@ -12603,7 +14813,8 @@ autoscaler =
 aaKind :: Lens' Autoscaler Text
 aaKind = lens _aaKind (\ s a -> s{_aaKind = a})
 
--- | [Output Only] URL of the zone where the instance group resides.
+-- | [Output Only] URL of the zone where the instance group resides (for
+-- autoscalers living in zonal scope).
 aaZone :: Lens' Autoscaler (Maybe Text)
 aaZone = lens _aaZone (\ s a -> s{_aaZone = a})
 
@@ -12632,7 +14843,7 @@ aaCreationTimestamp
 -- define one or more of the policies for an autoscaler: cpuUtilization,
 -- customMetricUtilizations, and loadBalancingUtilization. If none of these
 -- are specified, the default will be to autoscale based on cpuUtilization
--- to 0.8 or 80%.
+-- to 0.6 or 60%.
 aaAutoscalingPolicy :: Lens' Autoscaler (Maybe AutoscalingPolicy)
 aaAutoscalingPolicy
   = lens _aaAutoscalingPolicy
@@ -12644,6 +14855,11 @@ aaId :: Lens' Autoscaler (Maybe Word64)
 aaId
   = lens _aaId (\ s a -> s{_aaId = a}) .
       mapping _Coerce
+
+-- | [Output Only] URL of the region where the instance group resides (for
+-- autoscalers living in regional scope).
+aaRegion :: Lens' Autoscaler (Maybe Text)
+aaRegion = lens _aaRegion (\ s a -> s{_aaRegion = a})
 
 -- | An optional description of this resource. Provide this property when you
 -- create the resource.
@@ -12668,6 +14884,7 @@ instance FromJSON Autoscaler where
                      <*> (o .:? "creationTimestamp")
                      <*> (o .:? "autoscalingPolicy")
                      <*> (o .:? "id")
+                     <*> (o .:? "region")
                      <*> (o .:? "description")
                      <*> (o .:? "target"))
 
@@ -12680,7 +14897,7 @@ instance ToJSON Autoscaler where
                   ("name" .=) <$> _aaName,
                   ("creationTimestamp" .=) <$> _aaCreationTimestamp,
                   ("autoscalingPolicy" .=) <$> _aaAutoscalingPolicy,
-                  ("id" .=) <$> _aaId,
+                  ("id" .=) <$> _aaId, ("region" .=) <$> _aaRegion,
                   ("description" .=) <$> _aaDescription,
                   ("target" .=) <$> _aaTarget])
 
@@ -13062,21 +15279,23 @@ instance ToJSON Region where
 --
 -- /See:/ 'vpnTunnel' smart constructor.
 data VPNTunnel = VPNTunnel'
-    { _vtDetailedStatus       :: !(Maybe Text)
-    , _vtStatus               :: !(Maybe VPNTunnelStatus)
-    , _vtLocalTrafficSelector :: !(Maybe [Text])
-    , _vtKind                 :: !Text
-    , _vtPeerIP               :: !(Maybe Text)
-    , _vtTargetVPNGateway     :: !(Maybe Text)
-    , _vtSelfLink             :: !(Maybe Text)
-    , _vtSharedSecret         :: !(Maybe Text)
-    , _vtName                 :: !(Maybe Text)
-    , _vtCreationTimestamp    :: !(Maybe Text)
-    , _vtSharedSecretHash     :: !(Maybe Text)
-    , _vtId                   :: !(Maybe (Textual Word64))
-    , _vtIkeVersion           :: !(Maybe (Textual Int32))
-    , _vtRegion               :: !(Maybe Text)
-    , _vtDescription          :: !(Maybe Text)
+    { _vtDetailedStatus        :: !(Maybe Text)
+    , _vtStatus                :: !(Maybe VPNTunnelStatus)
+    , _vtLocalTrafficSelector  :: !(Maybe [Text])
+    , _vtKind                  :: !Text
+    , _vtPeerIP                :: !(Maybe Text)
+    , _vtRouter                :: !(Maybe Text)
+    , _vtTargetVPNGateway      :: !(Maybe Text)
+    , _vtRemoteTrafficSelector :: !(Maybe [Text])
+    , _vtSelfLink              :: !(Maybe Text)
+    , _vtSharedSecret          :: !(Maybe Text)
+    , _vtName                  :: !(Maybe Text)
+    , _vtCreationTimestamp     :: !(Maybe Text)
+    , _vtSharedSecretHash      :: !(Maybe Text)
+    , _vtId                    :: !(Maybe (Textual Word64))
+    , _vtIkeVersion            :: !(Maybe (Textual Int32))
+    , _vtRegion                :: !(Maybe Text)
+    , _vtDescription           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnel' with the minimum fields required to make a request.
@@ -13093,7 +15312,11 @@ data VPNTunnel = VPNTunnel'
 --
 -- * 'vtPeerIP'
 --
+-- * 'vtRouter'
+--
 -- * 'vtTargetVPNGateway'
+--
+-- * 'vtRemoteTrafficSelector'
 --
 -- * 'vtSelfLink'
 --
@@ -13121,7 +15344,9 @@ vpnTunnel =
     , _vtLocalTrafficSelector = Nothing
     , _vtKind = "compute#vpnTunnel"
     , _vtPeerIP = Nothing
+    , _vtRouter = Nothing
     , _vtTargetVPNGateway = Nothing
+    , _vtRemoteTrafficSelector = Nothing
     , _vtSelfLink = Nothing
     , _vtSharedSecret = Nothing
     , _vtName = Nothing
@@ -13162,12 +15387,26 @@ vtKind = lens _vtKind (\ s a -> s{_vtKind = a})
 vtPeerIP :: Lens' VPNTunnel (Maybe Text)
 vtPeerIP = lens _vtPeerIP (\ s a -> s{_vtPeerIP = a})
 
+-- | URL of router resource to be used for dynamic routing.
+vtRouter :: Lens' VPNTunnel (Maybe Text)
+vtRouter = lens _vtRouter (\ s a -> s{_vtRouter = a})
+
 -- | URL of the VPN gateway with which this VPN tunnel is associated.
 -- Provided by the client when the VPN tunnel is created.
 vtTargetVPNGateway :: Lens' VPNTunnel (Maybe Text)
 vtTargetVPNGateway
   = lens _vtTargetVPNGateway
       (\ s a -> s{_vtTargetVPNGateway = a})
+
+-- | Remote traffic selectors to use when establishing the VPN tunnel with
+-- peer VPN gateway. The value should be a CIDR formatted string, for
+-- example: 192.168.0.0\/16. The ranges should be disjoint.
+vtRemoteTrafficSelector :: Lens' VPNTunnel [Text]
+vtRemoteTrafficSelector
+  = lens _vtRemoteTrafficSelector
+      (\ s a -> s{_vtRemoteTrafficSelector = a})
+      . _Default
+      . _Coerce
 
 -- | [Output Only] Server-defined URL for the resource.
 vtSelfLink :: Lens' VPNTunnel (Maybe Text)
@@ -13237,7 +15476,9 @@ instance FromJSON VPNTunnel where
                      (o .:? "localTrafficSelector" .!= mempty)
                      <*> (o .:? "kind" .!= "compute#vpnTunnel")
                      <*> (o .:? "peerIp")
+                     <*> (o .:? "router")
                      <*> (o .:? "targetVpnGateway")
+                     <*> (o .:? "remoteTrafficSelector" .!= mempty)
                      <*> (o .:? "selfLink")
                      <*> (o .:? "sharedSecret")
                      <*> (o .:? "name")
@@ -13258,7 +15499,10 @@ instance ToJSON VPNTunnel where
                     _vtLocalTrafficSelector,
                   Just ("kind" .= _vtKind),
                   ("peerIp" .=) <$> _vtPeerIP,
+                  ("router" .=) <$> _vtRouter,
                   ("targetVpnGateway" .=) <$> _vtTargetVPNGateway,
+                  ("remoteTrafficSelector" .=) <$>
+                    _vtRemoteTrafficSelector,
                   ("selfLink" .=) <$> _vtSelfLink,
                   ("sharedSecret" .=) <$> _vtSharedSecret,
                   ("name" .=) <$> _vtName,
@@ -14319,11 +16563,7 @@ backendServiceList =
     , _bslId = Nothing
     }
 
--- | [Output Only] This token allows you to get the next page of results for
--- list requests. If the number of results is larger than maxResults, use
--- the nextPageToken as a value for the query parameter pageToken in the
--- next list request. Subsequent list requests will have their own
--- nextPageToken to continue paging through the results.
+-- | [Output Only] A token used to continue a truncated list request.
 bslNextPageToken :: Lens' BackendServiceList (Maybe Text)
 bslNextPageToken
   = lens _bslNextPageToken
@@ -14346,8 +16586,7 @@ bslSelfLink :: Lens' BackendServiceList (Maybe Text)
 bslSelfLink
   = lens _bslSelfLink (\ s a -> s{_bslSelfLink = a})
 
--- | [Output Only] The unique identifier for the resource. This identifier is
--- defined by the server.
+-- | [Output Only] Unique identifier for the resource; defined by the server.
 bslId :: Lens' BackendServiceList (Maybe Text)
 bslId = lens _bslId (\ s a -> s{_bslId = a})
 
@@ -14457,7 +16696,7 @@ autoscalingPolicyCPUUtilization =
     }
 
 -- | The target CPU utilization that the autoscaler should maintain. Must be
--- a float value in the range (0, 1]. If not specified, the default is 0.8.
+-- a float value in the range (0, 1]. If not specified, the default is 0.6.
 -- If the CPU level is below the target utilization, the autoscaler scales
 -- down the number of instances until it reaches the minimum number of
 -- instances you specified or until the average CPU of your instances
@@ -14559,7 +16798,7 @@ resourceGroupReference =
     { _rgrGroup = Nothing
     }
 
--- | A URI referencing one of the resource views listed in the backend
+-- | A URI referencing one of the instance groups listed in the backend
 -- service.
 rgrGroup :: Lens' ResourceGroupReference (Maybe Text)
 rgrGroup = lens _rgrGroup (\ s a -> s{_rgrGroup = a})
@@ -14632,15 +16871,15 @@ firewall =
     , _fDescription = Nothing
     }
 
--- | A list of instance tags which this rule applies to. One or both of
--- sourceRanges and sourceTags may be set. If both properties are set, an
--- inbound connection is allowed if the range matches the sourceRanges OR
--- the tag of the source matches the sourceTags property. The connection
--- does not need to match both properties. Source tags cannot be used to
--- allow access to an instance\'s external IP address. Because tags are
--- associated with an instance, not an IP address, source tags can only be
--- used to control traffic traveling from an instance inside the same
--- network as the firewall.
+-- | If source tags are specified, the firewall will apply only to traffic
+-- with source IP that belongs to a tag listed in source tags. Source tags
+-- cannot be used to control traffic to an instance\'s external IP address.
+-- Because tags are associated with an instance, not an IP address. One or
+-- both of sourceRanges and sourceTags may be set. If both properties are
+-- set, the firewall will apply to traffic that has source IP address
+-- within sourceRanges OR the source IP that belongs to a tag listed in the
+-- sourceTags property. The connection does not need to match both
+-- properties for the firewall to apply.
 fSourceTags :: Lens' Firewall [Text]
 fSourceTags
   = lens _fSourceTags (\ s a -> s{_fSourceTags = a}) .
@@ -14673,11 +16912,13 @@ fTargetTags
 fNetwork :: Lens' Firewall (Maybe Text)
 fNetwork = lens _fNetwork (\ s a -> s{_fNetwork = a})
 
--- | The IP address blocks that this rule applies to, expressed in CIDR
--- format. One or both of sourceRanges and sourceTags may be set. If both
--- properties are set, an inbound connection is allowed if the range
--- matches the sourceRanges OR the tag of the source matches the sourceTags
--- property. The connection does not need to match both properties.
+-- | If source ranges are specified, the firewall will apply only to traffic
+-- that has source IP address in these ranges. These ranges must be
+-- expressed in CIDR format. One or both of sourceRanges and sourceTags may
+-- be set. If both properties are set, the firewall will apply to traffic
+-- that has source IP address within sourceRanges OR the source IP that
+-- belongs to a tag listed in the sourceTags property. The connection does
+-- not need to match both properties for the firewall to apply.
 fSourceRanges :: Lens' Firewall [Text]
 fSourceRanges
   = lens _fSourceRanges
@@ -14712,8 +16953,8 @@ fId :: Lens' Firewall (Maybe Word64)
 fId
   = lens _fId (\ s a -> s{_fId = a}) . mapping _Coerce
 
--- | The list of rules specified by this firewall. Each rule specifies a
--- protocol and port-range tuple that describes a permitted connection.
+-- | The list of ALLOW rules specified by this firewall. Each rule specifies
+-- a protocol and port-range tuple that describes a permitted connection.
 fAllowed :: Lens' Firewall [FirewallAllowedItem]
 fAllowed
   = lens _fAllowed (\ s a -> s{_fAllowed = a}) .
@@ -14895,6 +17136,7 @@ data InstanceGroup = InstanceGroup'
     , _iiCreationTimestamp :: !(Maybe Text)
     , _iiSubnetwork        :: !(Maybe Text)
     , _iiId                :: !(Maybe (Textual Word64))
+    , _iiRegion            :: !(Maybe Text)
     , _iiDescription       :: !(Maybe Text)
     , _iiNamedPorts        :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -14923,6 +17165,8 @@ data InstanceGroup = InstanceGroup'
 --
 -- * 'iiId'
 --
+-- * 'iiRegion'
+--
 -- * 'iiDescription'
 --
 -- * 'iiNamedPorts'
@@ -14940,6 +17184,7 @@ instanceGroup =
     , _iiCreationTimestamp = Nothing
     , _iiSubnetwork = Nothing
     , _iiId = Nothing
+    , _iiRegion = Nothing
     , _iiDescription = Nothing
     , _iiNamedPorts = Nothing
     }
@@ -14970,7 +17215,8 @@ iiNetwork :: Lens' InstanceGroup (Maybe Text)
 iiNetwork
   = lens _iiNetwork (\ s a -> s{_iiNetwork = a})
 
--- | [Output Only] The URL of the zone where the instance group is located.
+-- | [Output Only] The URL of the zone where the instance group is located
+-- (for zonal resources).
 iiZone :: Lens' InstanceGroup (Maybe Text)
 iiZone = lens _iiZone (\ s a -> s{_iiZone = a})
 
@@ -14998,12 +17244,17 @@ iiSubnetwork :: Lens' InstanceGroup (Maybe Text)
 iiSubnetwork
   = lens _iiSubnetwork (\ s a -> s{_iiSubnetwork = a})
 
--- | [Output Only] A unique identifier for this resource type. The server
--- generates this identifier.
+-- | [Output Only] A unique identifier for this instance group, generated by
+-- the server.
 iiId :: Lens' InstanceGroup (Maybe Word64)
 iiId
   = lens _iiId (\ s a -> s{_iiId = a}) .
       mapping _Coerce
+
+-- | The URL of the region where the instance group is located (for regional
+-- resources).
+iiRegion :: Lens' InstanceGroup (Maybe Text)
+iiRegion = lens _iiRegion (\ s a -> s{_iiRegion = a})
 
 -- | An optional description of this resource. Provide this property when you
 -- create the resource.
@@ -15038,6 +17289,7 @@ instance FromJSON InstanceGroup where
                      <*> (o .:? "creationTimestamp")
                      <*> (o .:? "subnetwork")
                      <*> (o .:? "id")
+                     <*> (o .:? "region")
                      <*> (o .:? "description")
                      <*> (o .:? "namedPorts" .!= mempty))
 
@@ -15053,9 +17305,71 @@ instance ToJSON InstanceGroup where
                   ("name" .=) <$> _iiName,
                   ("creationTimestamp" .=) <$> _iiCreationTimestamp,
                   ("subnetwork" .=) <$> _iiSubnetwork,
-                  ("id" .=) <$> _iiId,
+                  ("id" .=) <$> _iiId, ("region" .=) <$> _iiRegion,
                   ("description" .=) <$> _iiDescription,
                   ("namedPorts" .=) <$> _iiNamedPorts])
+
+--
+-- /See:/ 'routerInterface' smart constructor.
+data RouterInterface = RouterInterface'
+    { _riName            :: !(Maybe Text)
+    , _riIPRange         :: !(Maybe Text)
+    , _riLinkedVPNTunnel :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouterInterface' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riName'
+--
+-- * 'riIPRange'
+--
+-- * 'riLinkedVPNTunnel'
+routerInterface
+    :: RouterInterface
+routerInterface =
+    RouterInterface'
+    { _riName = Nothing
+    , _riIPRange = Nothing
+    , _riLinkedVPNTunnel = Nothing
+    }
+
+-- | Name of this interface entry. The name must be 1-63 characters long and
+-- comply with RFC1035.
+riName :: Lens' RouterInterface (Maybe Text)
+riName = lens _riName (\ s a -> s{_riName = a})
+
+-- | IP address and range of the interface. The IP range must be in the
+-- RFC3927 link-local IP space. The value must be a CIDR-formatted string,
+-- for example: 169.254.0.1\/30. NOTE: Do not truncate the address as it
+-- represents the IP address of the interface.
+riIPRange :: Lens' RouterInterface (Maybe Text)
+riIPRange
+  = lens _riIPRange (\ s a -> s{_riIPRange = a})
+
+-- | URI of linked VPN tunnel. It must be in the same region as the router.
+-- Each interface can have at most one linked resource.
+riLinkedVPNTunnel :: Lens' RouterInterface (Maybe Text)
+riLinkedVPNTunnel
+  = lens _riLinkedVPNTunnel
+      (\ s a -> s{_riLinkedVPNTunnel = a})
+
+instance FromJSON RouterInterface where
+        parseJSON
+          = withObject "RouterInterface"
+              (\ o ->
+                 RouterInterface' <$>
+                   (o .:? "name") <*> (o .:? "ipRange") <*>
+                     (o .:? "linkedVpnTunnel"))
+
+instance ToJSON RouterInterface where
+        toJSON RouterInterface'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _riName,
+                  ("ipRange" .=) <$> _riIPRange,
+                  ("linkedVpnTunnel" .=) <$> _riLinkedVPNTunnel])
 
 -- | Contains a list of Snapshot resources.
 --
@@ -15245,7 +17559,7 @@ spoContents
 spoKind :: Lens' SerialPortOutput Text
 spoKind = lens _spoKind (\ s a -> s{_spoKind = a})
 
--- | [Output Only] Server-defined URL for the resource.
+-- | [Output Only] Server-defined URL for this resource.
 spoSelfLink :: Lens' SerialPortOutput (Maybe Text)
 spoSelfLink
   = lens _spoSelfLink (\ s a -> s{_spoSelfLink = a})
@@ -15322,7 +17636,7 @@ tvgalItems :: Lens' TargetVPNGatewayAggregatedList (Maybe TargetVPNGatewayAggreg
 tvgalItems
   = lens _tvgalItems (\ s a -> s{_tvgalItems = a})
 
--- | [Output Only] Server-defined URL for the resource.
+-- | [Output Only] Server-defined URL for this resource.
 tvgalSelfLink :: Lens' TargetVPNGatewayAggregatedList (Maybe Text)
 tvgalSelfLink
   = lens _tvgalSelfLink
@@ -15539,6 +17853,76 @@ instance ToJSON TargetHTTPSProxy where
                   ("id" .=) <$> _thpId,
                   ("description" .=) <$> _thpDescription])
 
+-- | Message containing connection draining configuration.
+--
+-- /See:/ 'connectionDraining' smart constructor.
+newtype ConnectionDraining = ConnectionDraining'
+    { _cdDrainingTimeoutSec :: Maybe (Textual Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConnectionDraining' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cdDrainingTimeoutSec'
+connectionDraining
+    :: ConnectionDraining
+connectionDraining =
+    ConnectionDraining'
+    { _cdDrainingTimeoutSec = Nothing
+    }
+
+-- | Time for which instance will be drained (not accept new connections, but
+-- still work to finish started).
+cdDrainingTimeoutSec :: Lens' ConnectionDraining (Maybe Int32)
+cdDrainingTimeoutSec
+  = lens _cdDrainingTimeoutSec
+      (\ s a -> s{_cdDrainingTimeoutSec = a})
+      . mapping _Coerce
+
+instance FromJSON ConnectionDraining where
+        parseJSON
+          = withObject "ConnectionDraining"
+              (\ o ->
+                 ConnectionDraining' <$> (o .:? "drainingTimeoutSec"))
+
+instance ToJSON ConnectionDraining where
+        toJSON ConnectionDraining'{..}
+          = object
+              (catMaybes
+                 [("drainingTimeoutSec" .=) <$>
+                    _cdDrainingTimeoutSec])
+
+--
+-- /See:/ 'cacheInvalidationRule' smart constructor.
+newtype CacheInvalidationRule = CacheInvalidationRule'
+    { _cirPath :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CacheInvalidationRule' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cirPath'
+cacheInvalidationRule
+    :: CacheInvalidationRule
+cacheInvalidationRule =
+    CacheInvalidationRule'
+    { _cirPath = Nothing
+    }
+
+cirPath :: Lens' CacheInvalidationRule (Maybe Text)
+cirPath = lens _cirPath (\ s a -> s{_cirPath = a})
+
+instance FromJSON CacheInvalidationRule where
+        parseJSON
+          = withObject "CacheInvalidationRule"
+              (\ o -> CacheInvalidationRule' <$> (o .:? "path"))
+
+instance ToJSON CacheInvalidationRule where
+        toJSON CacheInvalidationRule'{..}
+          = object (catMaybes [("path" .=) <$> _cirPath])
+
 --
 -- /See:/ 'targetVPNGatewaysScopedList' smart constructor.
 data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList'
@@ -15592,6 +17976,7 @@ instance ToJSON TargetVPNGatewaysScopedList where
                   ("warning" .=) <$> _tvgslWarning])
 
 -- | An access configuration attached to an instance\'s network interface.
+-- Only one access config per instance is supported.
 --
 -- /See:/ 'accessConfig' smart constructor.
 data AccessConfig = AccessConfig'
@@ -15784,29 +18169,39 @@ instance ToJSON InstancesScopedListWarningDataItem
 --
 -- /See:/ 'backendService' smart constructor.
 data BackendService = BackendService'
-    { _bsBackends          :: !(Maybe [Backend])
-    , _bsKind              :: !Text
-    , _bsFingerprint       :: !(Maybe Base64)
-    , _bsProtocol          :: !(Maybe BackendServiceProtocol)
-    , _bsSelfLink          :: !(Maybe Text)
-    , _bsName              :: !(Maybe Text)
-    , _bsCreationTimestamp :: !(Maybe Text)
-    , _bsId                :: !(Maybe (Textual Word64))
-    , _bsRegion            :: !(Maybe Text)
-    , _bsTimeoutSec        :: !(Maybe (Textual Int32))
-    , _bsDescription       :: !(Maybe Text)
-    , _bsPortName          :: !(Maybe Text)
-    , _bsHealthChecks      :: !(Maybe [Text])
-    , _bsPort              :: !(Maybe (Textual Int32))
+    { _bsSessionAffinity      :: !(Maybe BackendServiceSessionAffinity)
+    , _bsBackends             :: !(Maybe [Backend])
+    , _bsAffinityCookieTtlSec :: !(Maybe (Textual Int32))
+    , _bsKind                 :: !Text
+    , _bsEnableCDN            :: !(Maybe Bool)
+    , _bsFingerprint          :: !(Maybe Base64)
+    , _bsProtocol             :: !(Maybe BackendServiceProtocol)
+    , _bsSelfLink             :: !(Maybe Text)
+    , _bsName                 :: !(Maybe Text)
+    , _bsCreationTimestamp    :: !(Maybe Text)
+    , _bsId                   :: !(Maybe (Textual Word64))
+    , _bsRegion               :: !(Maybe Text)
+    , _bsConnectionDraining   :: !(Maybe ConnectionDraining)
+    , _bsTimeoutSec           :: !(Maybe (Textual Int32))
+    , _bsDescription          :: !(Maybe Text)
+    , _bsPortName             :: !(Maybe Text)
+    , _bsHealthChecks         :: !(Maybe [Text])
+    , _bsPort                 :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'bsSessionAffinity'
+--
 -- * 'bsBackends'
 --
+-- * 'bsAffinityCookieTtlSec'
+--
 -- * 'bsKind'
+--
+-- * 'bsEnableCDN'
 --
 -- * 'bsFingerprint'
 --
@@ -15822,6 +18217,8 @@ data BackendService = BackendService'
 --
 -- * 'bsRegion'
 --
+-- * 'bsConnectionDraining'
+--
 -- * 'bsTimeoutSec'
 --
 -- * 'bsDescription'
@@ -15835,8 +18232,11 @@ backendService
     :: BackendService
 backendService =
     BackendService'
-    { _bsBackends = Nothing
+    { _bsSessionAffinity = Nothing
+    , _bsBackends = Nothing
+    , _bsAffinityCookieTtlSec = Nothing
     , _bsKind = "compute#backendService"
+    , _bsEnableCDN = Nothing
     , _bsFingerprint = Nothing
     , _bsProtocol = Nothing
     , _bsSelfLink = Nothing
@@ -15844,12 +18244,23 @@ backendService =
     , _bsCreationTimestamp = Nothing
     , _bsId = Nothing
     , _bsRegion = Nothing
+    , _bsConnectionDraining = Nothing
     , _bsTimeoutSec = Nothing
     , _bsDescription = Nothing
     , _bsPortName = Nothing
     , _bsHealthChecks = Nothing
     , _bsPort = Nothing
     }
+
+-- | Type of session affinity to use. The default is NONE. When the load
+-- balancing scheme is EXTERNAL, can be NONE, CLIENT_IP, or
+-- GENERATED_COOKIE. When the load balancing scheme is INTERNAL, can be
+-- NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO. When the
+-- protocol is UDP, this field is not used.
+bsSessionAffinity :: Lens' BackendService (Maybe BackendServiceSessionAffinity)
+bsSessionAffinity
+  = lens _bsSessionAffinity
+      (\ s a -> s{_bsSessionAffinity = a})
 
 -- | The list of backends that serve this BackendService.
 bsBackends :: Lens' BackendService [Backend]
@@ -15858,10 +18269,27 @@ bsBackends
       _Default
       . _Coerce
 
+-- | Lifetime of cookies in seconds if session_affinity is GENERATED_COOKIE.
+-- If set to 0, the cookie is non-persistent and lasts only until the end
+-- of the browser session (or equivalent). The maximum allowed value for
+-- TTL is one day. When the load balancing scheme is INTERNAL, this field
+-- is not used.
+bsAffinityCookieTtlSec :: Lens' BackendService (Maybe Int32)
+bsAffinityCookieTtlSec
+  = lens _bsAffinityCookieTtlSec
+      (\ s a -> s{_bsAffinityCookieTtlSec = a})
+      . mapping _Coerce
+
 -- | [Output Only] Type of resource. Always compute#backendService for
 -- backend services.
 bsKind :: Lens' BackendService Text
 bsKind = lens _bsKind (\ s a -> s{_bsKind = a})
+
+-- | If true, enable Cloud CDN for this BackendService. When the load
+-- balancing scheme is INTERNAL, this field is not used.
+bsEnableCDN :: Lens' BackendService (Maybe Bool)
+bsEnableCDN
+  = lens _bsEnableCDN (\ s a -> s{_bsEnableCDN = a})
 
 -- | Fingerprint of this resource. A hash of the contents stored in this
 -- object. This field is used in optimistic locking. This field will be
@@ -15874,7 +18302,9 @@ bsFingerprint
       . mapping _Base64
 
 -- | The protocol this BackendService uses to communicate with backends.
--- Possible values are HTTP, HTTPS, HTTP2, TCP and SSL.
+-- Possible values are HTTP, HTTPS, HTTP2, TCP and SSL. The default is
+-- HTTP. For internal load balancing, the possible values are TCP and UDP,
+-- and the default is TCP.
 bsProtocol :: Lens' BackendService (Maybe BackendServiceProtocol)
 bsProtocol
   = lens _bsProtocol (\ s a -> s{_bsProtocol = a})
@@ -15912,6 +18342,11 @@ bsId
 bsRegion :: Lens' BackendService (Maybe Text)
 bsRegion = lens _bsRegion (\ s a -> s{_bsRegion = a})
 
+bsConnectionDraining :: Lens' BackendService (Maybe ConnectionDraining)
+bsConnectionDraining
+  = lens _bsConnectionDraining
+      (\ s a -> s{_bsConnectionDraining = a})
+
 -- | How many seconds to wait for the backend before considering it a failed
 -- request. Default is 30 seconds.
 bsTimeoutSec :: Lens' BackendService (Maybe Int32)
@@ -15927,14 +18362,17 @@ bsDescription
       (\ s a -> s{_bsDescription = a})
 
 -- | Name of backend port. The same name should appear in the instance groups
--- referenced by this service. Required.
+-- referenced by this service. Required when the load balancing scheme is
+-- EXTERNAL. When the load balancing scheme is INTERNAL, this field is not
+-- used.
 bsPortName :: Lens' BackendService (Maybe Text)
 bsPortName
   = lens _bsPortName (\ s a -> s{_bsPortName = a})
 
 -- | The list of URLs to the HttpHealthCheck or HttpsHealthCheck resource for
 -- health checking this BackendService. Currently at most one health check
--- can be specified, and a health check is required.
+-- can be specified, and a health check is required. For internal load
+-- balancing, a URL to a HealthCheck resource must be specified instead.
 bsHealthChecks :: Lens' BackendService [Text]
 bsHealthChecks
   = lens _bsHealthChecks
@@ -15943,7 +18381,8 @@ bsHealthChecks
       . _Coerce
 
 -- | Deprecated in favor of portName. The TCP port to connect on the backend.
--- The default value is 80.
+-- The default value is 80. This cannot be used for internal load
+-- balancing.
 bsPort :: Lens' BackendService (Maybe Int32)
 bsPort
   = lens _bsPort (\ s a -> s{_bsPort = a}) .
@@ -15954,8 +18393,11 @@ instance FromJSON BackendService where
           = withObject "BackendService"
               (\ o ->
                  BackendService' <$>
-                   (o .:? "backends" .!= mempty) <*>
-                     (o .:? "kind" .!= "compute#backendService")
+                   (o .:? "sessionAffinity") <*>
+                     (o .:? "backends" .!= mempty)
+                     <*> (o .:? "affinityCookieTtlSec")
+                     <*> (o .:? "kind" .!= "compute#backendService")
+                     <*> (o .:? "enableCDN")
                      <*> (o .:? "fingerprint")
                      <*> (o .:? "protocol")
                      <*> (o .:? "selfLink")
@@ -15963,6 +18405,7 @@ instance FromJSON BackendService where
                      <*> (o .:? "creationTimestamp")
                      <*> (o .:? "id")
                      <*> (o .:? "region")
+                     <*> (o .:? "connectionDraining")
                      <*> (o .:? "timeoutSec")
                      <*> (o .:? "description")
                      <*> (o .:? "portName")
@@ -15973,14 +18416,19 @@ instance ToJSON BackendService where
         toJSON BackendService'{..}
           = object
               (catMaybes
-                 [("backends" .=) <$> _bsBackends,
+                 [("sessionAffinity" .=) <$> _bsSessionAffinity,
+                  ("backends" .=) <$> _bsBackends,
+                  ("affinityCookieTtlSec" .=) <$>
+                    _bsAffinityCookieTtlSec,
                   Just ("kind" .= _bsKind),
+                  ("enableCDN" .=) <$> _bsEnableCDN,
                   ("fingerprint" .=) <$> _bsFingerprint,
                   ("protocol" .=) <$> _bsProtocol,
                   ("selfLink" .=) <$> _bsSelfLink,
                   ("name" .=) <$> _bsName,
                   ("creationTimestamp" .=) <$> _bsCreationTimestamp,
                   ("id" .=) <$> _bsId, ("region" .=) <$> _bsRegion,
+                  ("connectionDraining" .=) <$> _bsConnectionDraining,
                   ("timeoutSec" .=) <$> _bsTimeoutSec,
                   ("description" .=) <$> _bsDescription,
                   ("portName" .=) <$> _bsPortName,
@@ -16095,6 +18543,48 @@ instance ToJSON InstanceGroupsScopedList where
               (catMaybes
                  [("warning" .=) <$> _igslWarning,
                   ("instanceGroups" .=) <$> _igslInstanceGroups])
+
+--
+-- /See:/ 'instancesStartWithEncryptionKeyRequest' smart constructor.
+newtype InstancesStartWithEncryptionKeyRequest = InstancesStartWithEncryptionKeyRequest'
+    { _iswekrDisks :: Maybe [CustomerEncryptionKeyProtectedDisk]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesStartWithEncryptionKeyRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iswekrDisks'
+instancesStartWithEncryptionKeyRequest
+    :: InstancesStartWithEncryptionKeyRequest
+instancesStartWithEncryptionKeyRequest =
+    InstancesStartWithEncryptionKeyRequest'
+    { _iswekrDisks = Nothing
+    }
+
+-- | Array of disks associated with this instance that are protected with a
+-- customer-supplied encryption key. In order to start the instance, the
+-- disk url and its corresponding key must be provided. If the disk is not
+-- protected with a customer-supplied encryption key it should not be
+-- specified.
+iswekrDisks :: Lens' InstancesStartWithEncryptionKeyRequest [CustomerEncryptionKeyProtectedDisk]
+iswekrDisks
+  = lens _iswekrDisks (\ s a -> s{_iswekrDisks = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON
+         InstancesStartWithEncryptionKeyRequest where
+        parseJSON
+          = withObject "InstancesStartWithEncryptionKeyRequest"
+              (\ o ->
+                 InstancesStartWithEncryptionKeyRequest' <$>
+                   (o .:? "disks" .!= mempty))
+
+instance ToJSON
+         InstancesStartWithEncryptionKeyRequest where
+        toJSON InstancesStartWithEncryptionKeyRequest'{..}
+          = object (catMaybes [("disks" .=) <$> _iswekrDisks])
 
 -- | An HttpsHealthCheck resource. This resource defines a template for how
 -- individual instances should be checked for health, via HTTPS.
@@ -16594,6 +19084,40 @@ instance ToJSON URLMapTest where
                   ("host" .=) <$> _umtHost,
                   ("description" .=) <$> _umtDescription])
 
+--
+-- /See:/ 'routersPreviewResponse' smart constructor.
+newtype RoutersPreviewResponse = RoutersPreviewResponse'
+    { _rprResource :: Maybe Router
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RoutersPreviewResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rprResource'
+routersPreviewResponse
+    :: RoutersPreviewResponse
+routersPreviewResponse =
+    RoutersPreviewResponse'
+    { _rprResource = Nothing
+    }
+
+-- | Preview of given router.
+rprResource :: Lens' RoutersPreviewResponse (Maybe Router)
+rprResource
+  = lens _rprResource (\ s a -> s{_rprResource = a})
+
+instance FromJSON RoutersPreviewResponse where
+        parseJSON
+          = withObject "RoutersPreviewResponse"
+              (\ o ->
+                 RoutersPreviewResponse' <$> (o .:? "resource"))
+
+instance ToJSON RoutersPreviewResponse where
+        toJSON RoutersPreviewResponse'{..}
+          = object
+              (catMaybes [("resource" .=) <$> _rprResource])
+
 -- | An Instance resource.
 --
 -- /See:/ 'instance'' smart constructor.
@@ -16682,7 +19206,8 @@ instance' =
     }
 
 -- | [Output Only] The status of the instance. One of the following values:
--- PROVISIONING, STAGING, RUNNING, STOPPING, and TERMINATED.
+-- PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, and
+-- TERMINATED.
 insnStatus :: Lens' Instance (Maybe InstanceStatus)
 insnStatus
   = lens _insnStatus (\ s a -> s{_insnStatus = a})
@@ -16690,8 +19215,7 @@ insnStatus
 -- | A list of service accounts, with their specified scopes, authorized for
 -- this instance. Service accounts generate access tokens that can be
 -- accessed through the metadata server and used to authenticate
--- applications on the instance. See Authenticating from Google Compute
--- Engine for more information.
+-- applications on the instance. See Service Accounts for more information.
 insnServiceAccounts :: Lens' Instance [ServiceAccount]
 insnServiceAccounts
   = lens _insnServiceAccounts
@@ -16701,7 +19225,8 @@ insnServiceAccounts
 
 -- | An array of configurations for this interface. This specifies how this
 -- interface is configured to interact with other network services, such as
--- connecting to the internet.
+-- connecting to the internet. Only one interface is supported per
+-- instance.
 insnNetworkInterfaces :: Lens' Instance [NetworkInterface]
 insnNetworkInterfaces
   = lens _insnNetworkInterfaces

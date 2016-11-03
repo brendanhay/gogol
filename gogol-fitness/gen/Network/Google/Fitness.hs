@@ -13,7 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Google Fit API
+-- Stores and accesses user data in the fitness store from apps on any
+-- platform.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference>
 module Network.Google.Fitness
@@ -23,10 +24,12 @@ module Network.Google.Fitness
 
     -- * OAuth Scopes
     , fitnessBodyReadScope
+    , fitnessNutritionReadScope
     , fitnessActivityReadScope
     , fitnessActivityWriteScope
     , fitnessLocationReadScope
     , fitnessLocationWriteScope
+    , fitnessNutritionWriteScope
     , fitnessBodyWriteScope
 
     -- * API Declaration
@@ -109,6 +112,9 @@ module Network.Google.Fitness
     -- ** DataSourceType
     , DataSourceType (..)
 
+    -- ** BucketByTimePeriodType
+    , BucketByTimePeriodType (..)
+
     -- ** BucketByActivity
     , BucketByActivity
     , bucketByActivity
@@ -119,6 +125,7 @@ module Network.Google.Fitness
     , AggregateRequest
     , aggregateRequest
     , arEndTimeMillis
+    , arFilteredDataQualityStandard
     , arAggregateBy
     , arBucketBySession
     , arBucketByActivityType
@@ -165,6 +172,7 @@ module Network.Google.Fitness
     , listSessionsResponse
     , lsrNextPageToken
     , lsrDeletedSession
+    , lsrHasMoreData
     , lsrSession
 
     -- ** AggregateBucket
@@ -194,16 +202,27 @@ module Network.Google.Fitness
     , dtfName
     , dtfOptional
 
+    -- ** AggregateRequestFilteredDataQualityStandardItem
+    , AggregateRequestFilteredDataQualityStandardItem (..)
+
     -- ** DataSource
     , DataSource
     , dataSource
     , dsApplication
     , dsDevice
+    , dsDataQualityStandard
     , dsName
     , dsDataType
     , dsType
     , dsDataStreamName
     , dsDataStreamId
+
+    -- ** BucketByTimePeriod
+    , BucketByTimePeriod
+    , bucketByTimePeriod
+    , bbtpValue
+    , bbtpType
+    , bbtpTimeZoneId
 
     -- ** DeviceType
     , DeviceType (..)
@@ -217,6 +236,7 @@ module Network.Google.Fitness
     -- ** BucketByTime
     , BucketByTime
     , bucketByTime
+    , bbtPeriod
     , bbtDurationMillis
 
     -- ** DataType
@@ -237,6 +257,9 @@ module Network.Google.Fitness
     , sId
     , sStartTimeMillis
     , sDescription
+
+    -- ** DataSourceDataQualityStandardItem
+    , DataSourceDataQualityStandardItem (..)
 
     -- ** DataTypeFieldFormat
     , DataTypeFieldFormat (..)

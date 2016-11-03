@@ -26,7 +26,7 @@
 -- indicating the first error encountered. For a detailed view of
 -- \`Source\` issues, use TestRuleset.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security/start Firebase Rules API Reference> for @firebaserules.projects.rulesets.create@.
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.rulesets.create@.
 module Network.Google.Resource.FirebaseRules.Projects.Rulesets.Create
     (
     -- * REST Resource
@@ -174,7 +174,8 @@ prcCallback
 instance GoogleRequest ProjectsRulesetsCreate where
         type Rs ProjectsRulesetsCreate = Ruleset
         type Scopes ProjectsRulesetsCreate =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase"]
         requestClient ProjectsRulesetsCreate'{..}
           = go _prcName _prcXgafv _prcUploadProtocol
               (Just _prcPp)

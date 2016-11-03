@@ -22,7 +22,7 @@
 --
 -- Delete a \`Release\` by resource name.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security/start Firebase Rules API Reference> for @firebaserules.projects.releases.delete@.
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.delete@.
 module Network.Google.Resource.FirebaseRules.Projects.Releases.Delete
     (
     -- * REST Resource
@@ -153,7 +153,8 @@ prdCallback
 instance GoogleRequest ProjectsReleasesDelete where
         type Rs ProjectsReleasesDelete = Empty
         type Scopes ProjectsReleasesDelete =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase"]
         requestClient ProjectsReleasesDelete'{..}
           = go _prdName _prdXgafv _prdUploadProtocol
               (Just _prdPp)

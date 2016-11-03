@@ -1,5 +1,5 @@
 name:                  gogol-android-publisher
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Play Developer SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -46,6 +46,7 @@ library
         , Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
         , Network.Google.Resource.AndroidPublisher.Edits.Commit
         , Network.Google.Resource.AndroidPublisher.Edits.Delete
+        , Network.Google.Resource.AndroidPublisher.Edits.DeobfuscationFiles.Upload
         , Network.Google.Resource.AndroidPublisher.Edits.Details.Get
         , Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
         , Network.Google.Resource.AndroidPublisher.Edits.Details.Update
@@ -96,5 +97,5 @@ library
         , Network.Google.AndroidPublisher.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

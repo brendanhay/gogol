@@ -34,6 +34,7 @@ module Network.Google.Resource.Drive.Permissions.Update
 
     -- * Request Lenses
     , puPayload
+    , puRemoveExpiration
     , puTransferOwnership
     , puFileId
     , puPermissionId
@@ -51,16 +52,18 @@ type PermissionsUpdateResource =
            Capture "fileId" Text :>
              "permissions" :>
                Capture "permissionId" Text :>
-                 QueryParam "transferOwnership" Bool :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Permission :>
-                       Patch '[JSON] Permission
+                 QueryParam "removeExpiration" Bool :>
+                   QueryParam "transferOwnership" Bool :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Permission :>
+                         Patch '[JSON] Permission
 
 -- | Updates a permission with patch semantics.
 --
 -- /See:/ 'permissionsUpdate' smart constructor.
 data PermissionsUpdate = PermissionsUpdate'
     { _puPayload           :: !Permission
+    , _puRemoveExpiration  :: !Bool
     , _puTransferOwnership :: !Bool
     , _puFileId            :: !Text
     , _puPermissionId      :: !Text
@@ -71,6 +74,8 @@ data PermissionsUpdate = PermissionsUpdate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'puPayload'
+--
+-- * 'puRemoveExpiration'
 --
 -- * 'puTransferOwnership'
 --
@@ -85,6 +90,7 @@ permissionsUpdate
 permissionsUpdate pPuPayload_ pPuFileId_ pPuPermissionId_ =
     PermissionsUpdate'
     { _puPayload = pPuPayload_
+    , _puRemoveExpiration = False
     , _puTransferOwnership = False
     , _puFileId = pPuFileId_
     , _puPermissionId = pPuPermissionId_
@@ -94,6 +100,12 @@ permissionsUpdate pPuPayload_ pPuFileId_ pPuPermissionId_ =
 puPayload :: Lens' PermissionsUpdate Permission
 puPayload
   = lens _puPayload (\ s a -> s{_puPayload = a})
+
+-- | Whether to remove the expiration date.
+puRemoveExpiration :: Lens' PermissionsUpdate Bool
+puRemoveExpiration
+  = lens _puRemoveExpiration
+      (\ s a -> s{_puRemoveExpiration = a})
 
 -- | Whether to transfer ownership to the specified user and downgrade the
 -- current owner to a writer. This parameter is required as an
@@ -120,6 +132,7 @@ instance GoogleRequest PermissionsUpdate where
                "https://www.googleapis.com/auth/drive.file"]
         requestClient PermissionsUpdate'{..}
           = go _puFileId _puPermissionId
+              (Just _puRemoveExpiration)
               (Just _puTransferOwnership)
               (Just AltJSON)
               _puPayload

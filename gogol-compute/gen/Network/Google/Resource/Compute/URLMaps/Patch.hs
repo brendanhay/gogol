@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the entire content of the UrlMap resource. This method supports
--- patch semantics.
+-- Updates the specified UrlMap resource with the data included in the
+-- request. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.patch@.
 module Network.Google.Resource.Compute.URLMaps.Patch
@@ -55,8 +55,8 @@ type URLMapsPatchResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] URLMap :> Patch '[JSON] Operation
 
--- | Updates the entire content of the UrlMap resource. This method supports
--- patch semantics.
+-- | Updates the specified UrlMap resource with the data included in the
+-- request. This method supports patch semantics.
 --
 -- /See:/ 'urlMapsPatch' smart constructor.
 data URLMapsPatch = URLMapsPatch'

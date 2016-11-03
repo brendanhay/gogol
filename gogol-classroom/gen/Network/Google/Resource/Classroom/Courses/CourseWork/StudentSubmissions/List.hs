@@ -256,9 +256,9 @@ ccwsslCallback
   = lens _ccwsslCallback
       (\ s a -> s{_ccwsslCallback = a})
 
--- | Identifer of the student work to request. If \`user_id\` is specified,
--- this may be set to the string literal \`\"-\"\` to request student work
--- for all course work in the specified course.
+-- | Identifer of the student work to request. This may be set to the string
+-- literal \`\"-\"\` to request student work for all course work in the
+-- specified course.
 ccwsslCourseWorkId :: Lens' CoursesCourseWorkStudentSubmissionsList Text
 ccwsslCourseWorkId
   = lens _ccwsslCourseWorkId

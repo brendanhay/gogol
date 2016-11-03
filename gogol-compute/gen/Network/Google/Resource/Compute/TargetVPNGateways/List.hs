@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.List
     , TargetVPNGatewaysList
 
     -- * Request Lenses
+    , tvglOrderBy
     , tvglProject
     , tvglFilter
     , tvglRegion
@@ -54,18 +55,20 @@ type TargetVPNGatewaysListResource =
              "regions" :>
                Capture "region" Text :>
                  "targetVpnGateways" :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] TargetVPNGatewayList
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] TargetVPNGatewayList
 
 -- | Retrieves a list of target VPN gateways available to the specified
 -- project and region.
 --
 -- /See:/ 'targetVPNGatewaysList' smart constructor.
 data TargetVPNGatewaysList = TargetVPNGatewaysList'
-    { _tvglProject    :: !Text
+    { _tvglOrderBy    :: !(Maybe Text)
+    , _tvglProject    :: !Text
     , _tvglFilter     :: !(Maybe Text)
     , _tvglRegion     :: !Text
     , _tvglPageToken  :: !(Maybe Text)
@@ -75,6 +78,8 @@ data TargetVPNGatewaysList = TargetVPNGatewaysList'
 -- | Creates a value of 'TargetVPNGatewaysList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tvglOrderBy'
 --
 -- * 'tvglProject'
 --
@@ -91,12 +96,25 @@ targetVPNGatewaysList
     -> TargetVPNGatewaysList
 targetVPNGatewaysList pTvglProject_ pTvglRegion_ =
     TargetVPNGatewaysList'
-    { _tvglProject = pTvglProject_
+    { _tvglOrderBy = Nothing
+    , _tvglProject = pTvglProject_
     , _tvglFilter = Nothing
     , _tvglRegion = pTvglRegion_
     , _tvglPageToken = Nothing
     , _tvglMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+tvglOrderBy :: Lens' TargetVPNGatewaysList (Maybe Text)
+tvglOrderBy
+  = lens _tvglOrderBy (\ s a -> s{_tvglOrderBy = a})
 
 -- | Project ID for this request.
 tvglProject :: Lens' TargetVPNGatewaysList Text
@@ -114,16 +132,15 @@ tvglProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 tvglFilter :: Lens' TargetVPNGatewaysList (Maybe Text)
 tvglFilter
   = lens _tvglFilter (\ s a -> s{_tvglFilter = a})
@@ -157,7 +174,8 @@ instance GoogleRequest TargetVPNGatewaysList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient TargetVPNGatewaysList'{..}
-          = go _tvglProject _tvglRegion _tvglFilter
+          = go _tvglProject _tvglRegion _tvglOrderBy
+              _tvglFilter
               _tvglPageToken
               (Just _tvglMaxResults)
               (Just AltJSON)

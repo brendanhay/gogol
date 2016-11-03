@@ -1,5 +1,5 @@
 name:                  gogol-genomics
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Genomics SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -14,9 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Stores, processes, explores and shares genomic data. This API implements
-    the Global Alliance for Genomics and Health (GA4GH) v0.5.1 API as well
-    as several extensions.
+    Stores, processes, explores and shares genomic data.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -99,5 +97,5 @@ library
         , Network.Google.Genomics.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

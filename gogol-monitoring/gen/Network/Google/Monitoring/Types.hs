@@ -25,6 +25,9 @@ module Network.Google.Monitoring.Types
     , monitoringScope
     , monitoringWriteScope
 
+    -- * MetricDescriptorValueType
+    , MetricDescriptorValueType (..)
+
     -- * MonitoredResourceDescriptor
     , MonitoredResourceDescriptor
     , monitoredResourceDescriptor
@@ -33,6 +36,9 @@ module Network.Google.Monitoring.Types
     , mrdLabels
     , mrdType
     , mrdDescription
+
+    -- * CollectdValueDataSourceType
+    , CollectdValueDataSourceType (..)
 
     -- * ListTimeSeriesResponse
     , ListTimeSeriesResponse
@@ -104,6 +110,9 @@ module Network.Google.Monitoring.Types
     , fNumber
     , fTypeURL
 
+    -- * FieldKind
+    , FieldKind (..)
+
     -- * Empty
     , Empty
     , empty
@@ -136,6 +145,9 @@ module Network.Google.Monitoring.Types
     , lmrdrNextPageToken
     , lmrdrResourceDescriptors
 
+    -- * LabelDescriptorValueType
+    , LabelDescriptorValueType (..)
+
     -- * Explicit
     , Explicit
     , explicit
@@ -164,6 +176,9 @@ module Network.Google.Monitoring.Types
     , cctsrCollectdPayloads
     , cctsrResource
     , cctsrCollectdVersion
+
+    -- * TypeSyntax
+    , TypeSyntax (..)
 
     -- * Point
     , Point
@@ -208,11 +223,17 @@ module Network.Google.Monitoring.Types
     , mrLabels
     , mrType
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * TimeInterval
     , TimeInterval
     , timeInterval
     , tiStartTime
     , tiEndTime
+
+    -- * TimeSeriesMetricKind
+    , TimeSeriesMetricKind (..)
 
     -- * ListGroupMembersResponse
     , ListGroupMembersResponse
@@ -228,12 +249,18 @@ module Network.Google.Monitoring.Types
     , ldValueType
     , ldDescription
 
+    -- * TimeSeriesValueType
+    , TimeSeriesValueType (..)
+
     -- * Linear
     , Linear
     , linear
     , lOffSet
     , lWidth
     , lNumFiniteBuckets
+
+    -- * FieldCardinality
+    , FieldCardinality (..)
 
     -- * Type
     , Type
@@ -244,6 +271,9 @@ module Network.Google.Monitoring.Types
     , tOptions
     , tFields
     , tSyntax
+
+    -- * MetricDescriptorMetricKind
+    , MetricDescriptorMetricKind (..)
 
     -- * Option
     , Option
@@ -272,7 +302,7 @@ import           Network.Google.Monitoring.Types.Product
 import           Network.Google.Monitoring.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v3' of the Google Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v3' of the Stackdriver Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
 monitoringService :: ServiceConfig
 monitoringService
   = defaultService (ServiceId "monitoring:v3")

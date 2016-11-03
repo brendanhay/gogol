@@ -102,7 +102,9 @@ instance GoogleRequest UsersDataSetAggregate where
                "https://www.googleapis.com/auth/fitness.body.read",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.read",
-               "https://www.googleapis.com/auth/fitness.location.write"]
+               "https://www.googleapis.com/auth/fitness.location.write",
+               "https://www.googleapis.com/auth/fitness.nutrition.read",
+               "https://www.googleapis.com/auth/fitness.nutrition.write"]
         requestClient UsersDataSetAggregate'{..}
           = go _udsaUserId (Just AltJSON) _udsaPayload
               fitnessService

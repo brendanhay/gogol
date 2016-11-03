@@ -13,227 +13,40 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages identity and access control for Google Cloud Platform resources,
--- including the creation of service accounts, which you can use to
--- authenticate to Google and make API calls.
+-- Knowledge Graph Search API allows developers to search the Google
+-- Knowledge Graph for entities.
 --
--- /See:/ <https://cloud.google.com/iam/ Google Identity and Access Management API Reference>
+-- /See:/ <https://developers.google.com/knowledge-graph/ Knowledge Graph Search API Reference>
 module Network.Google.KnowledgeGraphSearch
     (
     -- * Service Configuration
       knowledgeGraphSearchService
-
-    -- * OAuth Scopes
-    , cloudPlatformScope
 
     -- * API Declaration
     , KnowledgeGraphSearchAPI
 
     -- * Resources
 
-    -- ** iam.projects.serviceAccounts.create
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
-
-    -- ** iam.projects.serviceAccounts.delete
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
-
-    -- ** iam.projects.serviceAccounts.get
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
-
-    -- ** iam.projects.serviceAccounts.getIamPolicy
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
-
-    -- ** iam.projects.serviceAccounts.keys.create
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
-
-    -- ** iam.projects.serviceAccounts.keys.delete
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
-
-    -- ** iam.projects.serviceAccounts.keys.get
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
-
-    -- ** iam.projects.serviceAccounts.keys.list
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
-
-    -- ** iam.projects.serviceAccounts.list
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.List
-
-    -- ** iam.projects.serviceAccounts.setIamPolicy
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
-
-    -- ** iam.projects.serviceAccounts.signBlob
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
-
-    -- ** iam.projects.serviceAccounts.testIamPermissions
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
-
-    -- ** iam.projects.serviceAccounts.update
-    , module Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
+    -- ** kgsearch.entities.search
+    , module Network.Google.Resource.Kgsearch.Entities.Search
 
     -- * Types
 
-    -- ** CounterOptions
-    , CounterOptions
-    , counterOptions
-    , coField
-    , coMetric
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** ServiceAccountKey
-    , ServiceAccountKey
-    , serviceAccountKey
-    , sakValidAfterTime
-    , sakPrivateKeyData
-    , sakName
-    , sakPrivateKeyType
-    , sakValidBeforeTime
-
-    -- ** Rule
-    , Rule
-    , rule
-    , rAction
-    , rIn
-    , rNotIn
-    , rConditions
-    , rPermissions
-    , rLogConfig
-    , rDescription
-
-    -- ** CreateServiceAccountKeyRequest
-    , CreateServiceAccountKeyRequest
-    , createServiceAccountKeyRequest
-    , csakrPrivateKeyType
-
-    -- ** SetIAMPolicyRequest
-    , SetIAMPolicyRequest
-    , setIAMPolicyRequest
-    , siprPolicy
-
-    -- ** SignBlobRequest
-    , SignBlobRequest
-    , signBlobRequest
-    , sbrBytesToSign
-
-    -- ** ListServiceAccountKeysResponse
-    , ListServiceAccountKeysResponse
-    , listServiceAccountKeysResponse
-    , lsakrKeys
-
-    -- ** CloudAuditOptions
-    , CloudAuditOptions
-    , cloudAuditOptions
-
-    -- ** DataAccessOptions
-    , DataAccessOptions
-    , dataAccessOptions
-
-    -- ** ServiceAccount
-    , ServiceAccount
-    , serviceAccount
-    , saEmail
-    , saEtag
-    , saUniqueId
-    , saName
-    , saDisplayName
-    , saProjectId
-    , saOAuth2ClientId
-
-    -- ** TestIAMPermissionsRequest
-    , TestIAMPermissionsRequest
-    , testIAMPermissionsRequest
-    , tiprPermissions
-
-    -- ** TestIAMPermissionsResponse
-    , TestIAMPermissionsResponse
-    , testIAMPermissionsResponse
-    , tiamprPermissions
-
-    -- ** Policy
-    , Policy
-    , policy
-    , pEtag
-    , pRules
-    , pVersion
-    , pBindings
-
-    -- ** Condition
-    , Condition
-    , condition
-    , cOp
-    , cIAM
-    , cValues
-    , cValue
-    , cSys
-    , cSvc
-
-    -- ** SignBlobResponse
-    , SignBlobResponse
-    , signBlobResponse
-    , sbrSignature
-    , sbrKeyId
-
-    -- ** ListServiceAccountsResponse
-    , ListServiceAccountsResponse
-    , listServiceAccountsResponse
-    , lsarNextPageToken
-    , lsarAccounts
-
-    -- ** LogConfig
-    , LogConfig
-    , logConfig
-    , lcCloudAudit
-    , lcDataAccess
-    , lcCounter
-
-    -- ** CreateServiceAccountRequest
-    , CreateServiceAccountRequest
-    , createServiceAccountRequest
-    , csarServiceAccount
-    , csarAccountId
-
-    -- ** Binding
-    , Binding
-    , binding
-    , bMembers
-    , bRole
+    -- ** SearchResponse
+    , SearchResponse
+    , searchResponse
+    , srContext
+    , srItemListElement
+    , srType
     ) where
 
 import           Network.Google.KnowledgeGraphSearch.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Create
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Delete
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Get
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.GetIAMPolicy
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Create
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Delete
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.Get
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Keys.List
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.List
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.SetIAMPolicy
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.SignBlob
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.TestIAMPermissions
-import           Network.Google.Resource.IAM.Projects.ServiceAccounts.Update
+import           Network.Google.Resource.Kgsearch.Entities.Search
 
 {- $resources
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Identity and Access Management API service.
-type KnowledgeGraphSearchAPI =
-     ProjectsServiceAccountsKeysListResource :<|>
-       ProjectsServiceAccountsKeysGetResource
-       :<|> ProjectsServiceAccountsKeysCreateResource
-       :<|> ProjectsServiceAccountsKeysDeleteResource
-       :<|> ProjectsServiceAccountsListResource
-       :<|> ProjectsServiceAccountsGetIAMPolicyResource
-       :<|> ProjectsServiceAccountsGetResource
-       :<|> ProjectsServiceAccountsCreateResource
-       :<|> ProjectsServiceAccountsSetIAMPolicyResource
-       :<|> ProjectsServiceAccountsSignBlobResource
-       :<|>
-       ProjectsServiceAccountsTestIAMPermissionsResource
-       :<|> ProjectsServiceAccountsDeleteResource
-       :<|> ProjectsServiceAccountsUpdateResource
+-- | Represents the entirety of the methods and resources available for the Knowledge Graph Search API service.
+type KnowledgeGraphSearchAPI = EntitiesSearchResource

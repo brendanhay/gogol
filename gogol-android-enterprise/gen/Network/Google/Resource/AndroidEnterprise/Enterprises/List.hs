@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Looks up an enterprise by domain name.
+-- Looks up an enterprise by domain name. This is only supported for
+-- enterprises created via the Google-initiated creation flow. Lookup of
+-- the id is not needed for enterprises created via the EMM-initiated flow
+-- since the EMM learns the enterprise ID in the callback specified in the
+-- Enterprises.generateSignupUrl call.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.list@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.List
@@ -49,7 +53,11 @@ type EnterprisesListResource =
              QueryParam "alt" AltJSON :>
                Get '[JSON] EnterprisesListResponse
 
--- | Looks up an enterprise by domain name.
+-- | Looks up an enterprise by domain name. This is only supported for
+-- enterprises created via the Google-initiated creation flow. Lookup of
+-- the id is not needed for enterprises created via the EMM-initiated flow
+-- since the EMM learns the enterprise ID in the callback specified in the
+-- Enterprises.generateSignupUrl call.
 --
 -- /See:/ 'enterprisesList' smart constructor.
 newtype EnterprisesList = EnterprisesList'

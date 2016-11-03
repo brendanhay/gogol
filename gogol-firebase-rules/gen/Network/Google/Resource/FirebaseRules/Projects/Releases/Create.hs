@@ -39,7 +39,7 @@
 -- custom \`Release\` name may be referenced by specifying the
 -- \`X-Firebase-Rules-Release-Name\` header.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security/start Firebase Rules API Reference> for @firebaserules.projects.releases.create@.
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.create@.
 module Network.Google.Resource.FirebaseRules.Projects.Releases.Create
     (
     -- * REST Resource
@@ -201,7 +201,8 @@ prcrCallback
 instance GoogleRequest ProjectsReleasesCreate where
         type Rs ProjectsReleasesCreate = Release
         type Scopes ProjectsReleasesCreate =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase"]
         requestClient ProjectsReleasesCreate'{..}
           = go _prcrName _prcrXgafv _prcrUploadProtocol
               (Just _prcrPp)

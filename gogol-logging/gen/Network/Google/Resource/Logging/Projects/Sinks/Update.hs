@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates or updates a sink.
+-- Updates or creates a sink.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.projects.sinks.update@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.update@.
 module Network.Google.Resource.Logging.Projects.Sinks.Update
     (
     -- * REST Resource
@@ -50,9 +50,9 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.projects.sinks.update@ method which the
 -- 'ProjectsSinksUpdate' request conforms to.
 type ProjectsSinksUpdateResource =
-     "v2beta1" :>
+     "v2" :>
        Capture "sinkName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -62,11 +62,11 @@ type ProjectsSinksUpdateResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] LogSink :> Put '[JSON] LogSink
 
--- | Creates or updates a sink.
+-- | Updates or creates a sink.
 --
 -- /See:/ 'projectsSinksUpdate' smart constructor.
 data ProjectsSinksUpdate = ProjectsSinksUpdate'
-    { _psuXgafv          :: !(Maybe Text)
+    { _psuXgafv          :: !(Maybe Xgafv)
     , _psuUploadProtocol :: !(Maybe Text)
     , _psuPp             :: !Bool
     , _psuAccessToken    :: !(Maybe Text)
@@ -116,7 +116,7 @@ projectsSinksUpdate pPsuPayload_ pPsuSinkName_ =
     }
 
 -- | V1 error format.
-psuXgafv :: Lens' ProjectsSinksUpdate (Maybe Text)
+psuXgafv :: Lens' ProjectsSinksUpdate (Maybe Xgafv)
 psuXgafv = lens _psuXgafv (\ s a -> s{_psuXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -152,10 +152,10 @@ psuBearerToken
   = lens _psuBearerToken
       (\ s a -> s{_psuBearerToken = a})
 
--- | The resource name of the sink to update. Example:
--- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`. The updated sink
--- must be provided in the request and have the same name that is specified
--- in \`sinkName\`. If the sink does not exist, it is created.
+-- | Required. The resource name of the sink to update, including the parent
+-- resource and the sink identifier. If the sink does not exist, this
+-- method creates the sink. Example:
+-- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`.
 psuSinkName :: Lens' ProjectsSinksUpdate Text
 psuSinkName
   = lens _psuSinkName (\ s a -> s{_psuSinkName = a})

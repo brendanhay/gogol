@@ -22,7 +22,7 @@
 --
 -- Get a \`Release\` by name.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security/start Firebase Rules API Reference> for @firebaserules.projects.releases.get@.
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.get@.
 module Network.Google.Resource.FirebaseRules.Projects.Releases.Get
     (
     -- * REST Resource
@@ -150,7 +150,9 @@ pCallback
 instance GoogleRequest ProjectsReleasesGet where
         type Rs ProjectsReleasesGet = Release
         type Scopes ProjectsReleasesGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase",
+               "https://www.googleapis.com/auth/firebase.readonly"]
         requestClient ProjectsReleasesGet'{..}
           = go _pName _pXgafv _pUploadProtocol (Just _pPp)
               _pAccessToken

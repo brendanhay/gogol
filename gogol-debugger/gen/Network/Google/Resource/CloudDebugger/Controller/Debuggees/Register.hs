@@ -29,7 +29,7 @@
 -- disabled by the server, the response will have \`is_disabled\` set to
 -- \`true\`.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.register@.
+-- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.controller.debuggees.register@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
     (
     -- * REST Resource
@@ -174,7 +174,7 @@ instance GoogleRequest ControllerDebuggeesRegister
              RegisterDebuggeeResponse
         type Scopes ControllerDebuggeesRegister =
              '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/cloud_debugletcontroller"]
+               "https://www.googleapis.com/auth/cloud_debugger"]
         requestClient ControllerDebuggeesRegister'{..}
           = go _cdrXgafv _cdrUploadProtocol (Just _cdrPp)
               _cdrAccessToken

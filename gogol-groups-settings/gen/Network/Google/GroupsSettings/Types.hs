@@ -44,12 +44,14 @@ module Network.Google.GroupsSettings.Types
     , gIsArchived
     , gName
     , gMessageDisplayFont
+    , gIncludeCustomFooter
     , gCustomReplyTo
     , gWhoCanContactOwner
     , gWhoCanAdd
     , gWhoCanInvite
     , gWhoCanLeaveGroup
     , gAllowGoogleCommunication
+    , gCustomFooterText
     , gPrimaryLanguage
     , gDescription
     , gDefaultMessageDenyNotificationText

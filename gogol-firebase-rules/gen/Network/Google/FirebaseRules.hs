@@ -16,14 +16,16 @@
 -- Creates and manages rules that determine when a Firebase Rules-enabled
 -- service should permit a request.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security/start Firebase Rules API Reference>
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference>
 module Network.Google.FirebaseRules
     (
     -- * Service Configuration
       firebaseRulesService
 
     -- * OAuth Scopes
+    , firebaseScope
     , cloudPlatformScope
+    , firebaseReadOnlyScope
 
     -- * API Declaration
     , FirebaseRulesAPI

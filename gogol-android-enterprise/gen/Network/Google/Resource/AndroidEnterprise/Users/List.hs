@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Looks up a user by their primary email address.
+-- Looks up a user by primary email address. This is only supported for
+-- Google-managed users. Lookup of the id is not needed for EMM-managed
+-- users because the id is already returned in the result of the
+-- Users.insert call.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.list@.
 module Network.Google.Resource.AndroidEnterprise.Users.List
@@ -52,7 +55,10 @@ type UsersListResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] UsersListResponse
 
--- | Looks up a user by their primary email address.
+-- | Looks up a user by primary email address. This is only supported for
+-- Google-managed users. Lookup of the id is not needed for EMM-managed
+-- users because the id is already returned in the result of the
+-- Users.insert call.
 --
 -- /See:/ 'usersList' smart constructor.
 data UsersList = UsersList'

@@ -8,12 +8,12 @@
 
 ## Version
 
-`0.1.0`
+`0.1.1`
 
 
 ## Description
 
-A client library for the Google Identity and Access Management.
+A client library for the Google Knowledge Graph Search.
 
 
 ## Contribute

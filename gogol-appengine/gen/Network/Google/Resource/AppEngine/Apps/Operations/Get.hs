@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.operations.get@ method which the
 -- 'AppsOperationsGet' request conforms to.
 type AppsOperationsGetResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "operations" :>

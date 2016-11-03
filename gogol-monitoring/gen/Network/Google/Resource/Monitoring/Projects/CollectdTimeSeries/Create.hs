@@ -20,12 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new time series with the given data points. This method is
--- only for use in \`collectd\`-related code, including the Google
--- Monitoring Agent. See
--- [google.monitoring.v3.MetricService.CreateTimeSeries] instead.
+-- Stackdriver Monitoring Agent only: Creates a new time series.
+-- This method is only for use by the Stackdriver Monitoring Agent. Use
+-- projects.timeSeries.create instead.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.collectdTimeSeries.create@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.collectdTimeSeries.create@.
 module Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
     (
     -- * REST Resource
@@ -56,7 +55,7 @@ type ProjectsCollectdTimeSeriesCreateResource =
      "v3" :>
        Capture "name" Text :>
          "collectdTimeSeries" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -67,14 +66,13 @@ type ProjectsCollectdTimeSeriesCreateResource =
                            ReqBody '[JSON] CreateCollectdTimeSeriesRequest :>
                              Post '[JSON] Empty
 
--- | Creates a new time series with the given data points. This method is
--- only for use in \`collectd\`-related code, including the Google
--- Monitoring Agent. See
--- [google.monitoring.v3.MetricService.CreateTimeSeries] instead.
+-- | Stackdriver Monitoring Agent only: Creates a new time series.
+-- This method is only for use by the Stackdriver Monitoring Agent. Use
+-- projects.timeSeries.create instead.
 --
 -- /See:/ 'projectsCollectdTimeSeriesCreate' smart constructor.
 data ProjectsCollectdTimeSeriesCreate = ProjectsCollectdTimeSeriesCreate'
-    { _pctscXgafv          :: !(Maybe Text)
+    { _pctscXgafv          :: !(Maybe Xgafv)
     , _pctscUploadProtocol :: !(Maybe Text)
     , _pctscPp             :: !Bool
     , _pctscAccessToken    :: !(Maybe Text)
@@ -124,7 +122,7 @@ projectsCollectdTimeSeriesCreate pPctscPayload_ pPctscName_ =
     }
 
 -- | V1 error format.
-pctscXgafv :: Lens' ProjectsCollectdTimeSeriesCreate (Maybe Text)
+pctscXgafv :: Lens' ProjectsCollectdTimeSeriesCreate (Maybe Xgafv)
 pctscXgafv
   = lens _pctscXgafv (\ s a -> s{_pctscXgafv = a})
 
@@ -162,7 +160,7 @@ pctscBearerToken
       (\ s a -> s{_pctscBearerToken = a})
 
 -- | The project in which to create the time series. The format is
--- \`\"projects\/PROJECT_ID_OR_NUMBER\"\`.
+-- \"projects\/PROJECT_ID_OR_NUMBER\".
 pctscName :: Lens' ProjectsCollectdTimeSeriesCreate Text
 pctscName
   = lens _pctscName (\ s a -> s{_pctscName = a})

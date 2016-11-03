@@ -34,6 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
 
     -- * Request Lenses
     , apPayload
+    , apConfirmUnsafeAccountChange
     , apId
     ) where
 
@@ -47,15 +48,17 @@ type AccountsPatchResource =
        "v1.4" :>
          "accounts" :>
            Capture "id" (Textual Int32) :>
-             QueryParam "alt" AltJSON :>
-               ReqBody '[JSON] Account :> Patch '[JSON] Account
+             QueryParam "confirmUnsafeAccountChange" Bool :>
+               QueryParam "alt" AltJSON :>
+                 ReqBody '[JSON] Account :> Patch '[JSON] Account
 
 -- | Updates an existing account. This method supports patch semantics.
 --
 -- /See:/ 'accountsPatch' smart constructor.
 data AccountsPatch = AccountsPatch'
-    { _apPayload :: !Account
-    , _apId      :: !(Textual Int32)
+    { _apPayload                    :: !Account
+    , _apConfirmUnsafeAccountChange :: !(Maybe Bool)
+    , _apId                         :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPatch' with the minimum fields required to make a request.
@@ -63,6 +66,8 @@ data AccountsPatch = AccountsPatch'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'apPayload'
+--
+-- * 'apConfirmUnsafeAccountChange'
 --
 -- * 'apId'
 accountsPatch
@@ -72,6 +77,7 @@ accountsPatch
 accountsPatch pApPayload_ pApId_ =
     AccountsPatch'
     { _apPayload = pApPayload_
+    , _apConfirmUnsafeAccountChange = Nothing
     , _apId = _Coerce # pApId_
     }
 
@@ -79,6 +85,12 @@ accountsPatch pApPayload_ pApId_ =
 apPayload :: Lens' AccountsPatch Account
 apPayload
   = lens _apPayload (\ s a -> s{_apPayload = a})
+
+-- | Confirmation for erasing bidder and cookie matching urls.
+apConfirmUnsafeAccountChange :: Lens' AccountsPatch (Maybe Bool)
+apConfirmUnsafeAccountChange
+  = lens _apConfirmUnsafeAccountChange
+      (\ s a -> s{_apConfirmUnsafeAccountChange = a})
 
 -- | The account id
 apId :: Lens' AccountsPatch Int32
@@ -89,7 +101,9 @@ instance GoogleRequest AccountsPatch where
         type Scopes AccountsPatch =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient AccountsPatch'{..}
-          = go _apId (Just AltJSON) _apPayload
+          = go _apId _apConfirmUnsafeAccountChange
+              (Just AltJSON)
+              _apPayload
               adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy AccountsPatchResource)

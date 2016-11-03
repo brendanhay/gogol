@@ -904,13 +904,11 @@ data BooleanConditionType
     | TextStartsWith
       -- ^ @TEXT_STARTS_WITH@
       -- The cell\'s value must start with the condition\'s value. Supported by
-      -- data validation, conditional formatting and filters. Requires a single
-      -- ConditionValue.
+      -- conditional formatting and filters. Requires a single ConditionValue.
     | TextEndsWith
       -- ^ @TEXT_ENDS_WITH@
       -- The cell\'s value must end with the condition\'s value. Supported by
-      -- data validation, conditional formatting and filters. Requires a single
-      -- ConditionValue.
+      -- conditional formatting and filters. Requires a single ConditionValue.
     | TextEQ
       -- ^ @TEXT_EQ@
       -- The cell\'s value must be exactly the condition\'s value. Supported by
@@ -942,13 +940,13 @@ data BooleanConditionType
     | DateOnOrBefore
       -- ^ @DATE_ON_OR_BEFORE@
       -- The cell\'s value must be on or before the date of the condition\'s
-      -- value. Supported by data validation, conditional formatting and filters.
-      -- Requires a single ConditionValue that may be a relative date.
+      -- value. Supported by data validation. Requires a single ConditionValue
+      -- that may be a relative date.
     | DateOnOrAfter
       -- ^ @DATE_ON_OR_AFTER@
       -- The cell\'s value must be on or after the date of the condition\'s
-      -- value. Supported by data validation, conditional formatting and filters.
-      -- Requires a single ConditionValue that may be a relative date.
+      -- value. Supported by data validation. Requires a single ConditionValue
+      -- that may be a relative date.
     | DateBetween
       -- ^ @DATE_BETWEEN@
       -- The cell\'s value must be between the dates of the two condition values.
@@ -973,12 +971,12 @@ data BooleanConditionType
       -- in the list. Formulas are not supported in the values.
     | Blank
       -- ^ @BLANK@
-      -- The cell\'s value must be empty. Supported by data validation,
-      -- conditional formatting and filters. Requires no ConditionValues.
+      -- The cell\'s value must be empty. Supported by conditional formatting and
+      -- filters. Requires no ConditionValues.
     | NotBlank
       -- ^ @NOT_BLANK@
-      -- The cell\'s value must not be empty. Supported by data validation,
-      -- conditional formatting and filters. Requires no ConditionValues.
+      -- The cell\'s value must not be empty. Supported by conditional formatting
+      -- and filters. Requires no ConditionValues.
     | CustomFormula
       -- ^ @CUSTOM_FORMULA@
       -- The condition\'s formula must evaluate to true. Supported by data
@@ -1487,7 +1485,13 @@ data BOrderStyle
       -- The border is dashed.
     | Solid
       -- ^ @SOLID@
-      -- The border is a solid line.
+      -- The border is a thin solid line.
+    | SolidMedium
+      -- ^ @SOLID_MEDIUM@
+      -- The border is a medium solid line.
+    | SolidThick
+      -- ^ @SOLID_THICK@
+      -- The border is a thick solid line.
     | None
       -- ^ @NONE@
       -- No border. Used only when updating a border in order to erase it.
@@ -1504,6 +1508,8 @@ instance FromHttpApiData BOrderStyle where
         "DOTTED" -> Right Dotted
         "DASHED" -> Right Dashed
         "SOLID" -> Right Solid
+        "SOLID_MEDIUM" -> Right SolidMedium
+        "SOLID_THICK" -> Right SolidThick
         "NONE" -> Right None
         "DOUBLE" -> Right Double
         x -> Left ("Unable to parse BOrderStyle from: " <> x)
@@ -1514,6 +1520,8 @@ instance ToHttpApiData BOrderStyle where
         Dotted -> "DOTTED"
         Dashed -> "DASHED"
         Solid -> "SOLID"
+        SolidMedium -> "SOLID_MEDIUM"
+        SolidThick -> "SOLID_THICK"
         None -> "NONE"
         Double -> "DOUBLE"
 

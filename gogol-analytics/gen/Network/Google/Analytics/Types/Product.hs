@@ -364,6 +364,132 @@ instance ToJSON GaDataQuery where
                   ("segment" .=) <$> _gdqSegment,
                   ("start-date" .=) <$> _gdqStartDate])
 
+-- | A remarketing audience collection lists Analytics remarketing audiences
+-- to which the user has access. Each resource in the collection
+-- corresponds to a single Analytics remarketing audience.
+--
+-- /See:/ 'remarketingAudiences' smart constructor.
+data RemarketingAudiences = RemarketingAudiences'
+    { _raNextLink     :: !(Maybe Text)
+    , _raItemsPerPage :: !(Maybe (Textual Int32))
+    , _raKind         :: !Text
+    , _raUsername     :: !(Maybe Text)
+    , _raItems        :: !(Maybe [RemarketingAudience])
+    , _raTotalResults :: !(Maybe (Textual Int32))
+    , _raStartIndex   :: !(Maybe (Textual Int32))
+    , _raPreviousLink :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RemarketingAudiences' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'raNextLink'
+--
+-- * 'raItemsPerPage'
+--
+-- * 'raKind'
+--
+-- * 'raUsername'
+--
+-- * 'raItems'
+--
+-- * 'raTotalResults'
+--
+-- * 'raStartIndex'
+--
+-- * 'raPreviousLink'
+remarketingAudiences
+    :: RemarketingAudiences
+remarketingAudiences =
+    RemarketingAudiences'
+    { _raNextLink = Nothing
+    , _raItemsPerPage = Nothing
+    , _raKind = "analytics#remarketingAudiences"
+    , _raUsername = Nothing
+    , _raItems = Nothing
+    , _raTotalResults = Nothing
+    , _raStartIndex = Nothing
+    , _raPreviousLink = Nothing
+    }
+
+-- | Link to next page for this remarketing audience collection.
+raNextLink :: Lens' RemarketingAudiences (Maybe Text)
+raNextLink
+  = lens _raNextLink (\ s a -> s{_raNextLink = a})
+
+-- | The maximum number of resources the response can contain, regardless of
+-- the actual number of resources returned. Its value ranges from 1 to 1000
+-- with a value of 1000 by default, or otherwise specified by the
+-- max-results query parameter.
+raItemsPerPage :: Lens' RemarketingAudiences (Maybe Int32)
+raItemsPerPage
+  = lens _raItemsPerPage
+      (\ s a -> s{_raItemsPerPage = a})
+      . mapping _Coerce
+
+-- | Collection type.
+raKind :: Lens' RemarketingAudiences Text
+raKind = lens _raKind (\ s a -> s{_raKind = a})
+
+-- | Email ID of the authenticated user
+raUsername :: Lens' RemarketingAudiences (Maybe Text)
+raUsername
+  = lens _raUsername (\ s a -> s{_raUsername = a})
+
+-- | A list of remarketing audiences.
+raItems :: Lens' RemarketingAudiences [RemarketingAudience]
+raItems
+  = lens _raItems (\ s a -> s{_raItems = a}) . _Default
+      . _Coerce
+
+-- | The total number of results for the query, regardless of the number of
+-- results in the response.
+raTotalResults :: Lens' RemarketingAudiences (Maybe Int32)
+raTotalResults
+  = lens _raTotalResults
+      (\ s a -> s{_raTotalResults = a})
+      . mapping _Coerce
+
+-- | The starting index of the resources, which is 1 by default or otherwise
+-- specified by the start-index query parameter.
+raStartIndex :: Lens' RemarketingAudiences (Maybe Int32)
+raStartIndex
+  = lens _raStartIndex (\ s a -> s{_raStartIndex = a})
+      . mapping _Coerce
+
+-- | Link to previous page for this view (profile) collection.
+raPreviousLink :: Lens' RemarketingAudiences (Maybe Text)
+raPreviousLink
+  = lens _raPreviousLink
+      (\ s a -> s{_raPreviousLink = a})
+
+instance FromJSON RemarketingAudiences where
+        parseJSON
+          = withObject "RemarketingAudiences"
+              (\ o ->
+                 RemarketingAudiences' <$>
+                   (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
+                     (o .:? "kind" .!= "analytics#remarketingAudiences")
+                     <*> (o .:? "username")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex")
+                     <*> (o .:? "previousLink"))
+
+instance ToJSON RemarketingAudiences where
+        toJSON RemarketingAudiences'{..}
+          = object
+              (catMaybes
+                 [("nextLink" .=) <$> _raNextLink,
+                  ("itemsPerPage" .=) <$> _raItemsPerPage,
+                  Just ("kind" .= _raKind),
+                  ("username" .=) <$> _raUsername,
+                  ("items" .=) <$> _raItems,
+                  ("totalResults" .=) <$> _raTotalResults,
+                  ("startIndex" .=) <$> _raStartIndex,
+                  ("previousLink" .=) <$> _raPreviousLink])
+
 --
 -- /See:/ 'gaDataDataTableRowsItem' smart constructor.
 newtype GaDataDataTableRowsItem = GaDataDataTableRowsItem'
@@ -488,7 +614,11 @@ unSampledReport =
     , _uStartDate = Nothing
     }
 
--- | The type of download you need to use for the report data file.
+-- | The type of download you need to use for the report data file. Possible
+-- values include \`GOOGLE_DRIVE\` and \`GOOGLE_CLOUD_STORAGE\`. If the
+-- value is \`GOOGLE_DRIVE\`, see the \`driveDownloadDetails\` field. If
+-- the value is \`GOOGLE_CLOUD_STORAGE\`, see the
+-- \`cloudStorageDownloadDetails\` field.
 uDownloadType :: Lens' UnSampledReport (Maybe Text)
 uDownloadType
   = lens _uDownloadType
@@ -777,6 +907,201 @@ instance ToJSON ProFileParentLink where
               (catMaybes
                  [("href" .=) <$> _pfplHref,
                   Just ("type" .= _pfplType)])
+
+-- | JSON template for an Analytics remarketing audience.
+--
+-- /See:/ 'remarketingAudience' smart constructor.
+data RemarketingAudience = RemarketingAudience'
+    { _rWebPropertyId                :: !(Maybe Text)
+    , _rKind                         :: !Text
+    , _rCreated                      :: !(Maybe DateTime')
+    , _rLinkedAdAccounts             :: !(Maybe [LinkedForeignAccount])
+    , _rAudienceDefinition           :: !(Maybe RemarketingAudienceAudienceDefinition)
+    , _rAudienceType                 :: !(Maybe Text)
+    , _rAccountId                    :: !(Maybe Text)
+    , _rName                         :: !(Maybe Text)
+    , _rStateBasedAudienceDefinition :: !(Maybe RemarketingAudienceStateBasedAudienceDefinition)
+    , _rLinkedViews                  :: !(Maybe [Text])
+    , _rInternalWebPropertyId        :: !(Maybe Text)
+    , _rId                           :: !(Maybe Text)
+    , _rUpdated                      :: !(Maybe DateTime')
+    , _rDescription                  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RemarketingAudience' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rWebPropertyId'
+--
+-- * 'rKind'
+--
+-- * 'rCreated'
+--
+-- * 'rLinkedAdAccounts'
+--
+-- * 'rAudienceDefinition'
+--
+-- * 'rAudienceType'
+--
+-- * 'rAccountId'
+--
+-- * 'rName'
+--
+-- * 'rStateBasedAudienceDefinition'
+--
+-- * 'rLinkedViews'
+--
+-- * 'rInternalWebPropertyId'
+--
+-- * 'rId'
+--
+-- * 'rUpdated'
+--
+-- * 'rDescription'
+remarketingAudience
+    :: RemarketingAudience
+remarketingAudience =
+    RemarketingAudience'
+    { _rWebPropertyId = Nothing
+    , _rKind = "analytics#remarketingAudience"
+    , _rCreated = Nothing
+    , _rLinkedAdAccounts = Nothing
+    , _rAudienceDefinition = Nothing
+    , _rAudienceType = Nothing
+    , _rAccountId = Nothing
+    , _rName = Nothing
+    , _rStateBasedAudienceDefinition = Nothing
+    , _rLinkedViews = Nothing
+    , _rInternalWebPropertyId = Nothing
+    , _rId = Nothing
+    , _rUpdated = Nothing
+    , _rDescription = Nothing
+    }
+
+-- | Web property ID of the form UA-XXXXX-YY to which this remarketing
+-- audience belongs.
+rWebPropertyId :: Lens' RemarketingAudience (Maybe Text)
+rWebPropertyId
+  = lens _rWebPropertyId
+      (\ s a -> s{_rWebPropertyId = a})
+
+-- | Collection type.
+rKind :: Lens' RemarketingAudience Text
+rKind = lens _rKind (\ s a -> s{_rKind = a})
+
+-- | Time this remarketing audience was created.
+rCreated :: Lens' RemarketingAudience (Maybe UTCTime)
+rCreated
+  = lens _rCreated (\ s a -> s{_rCreated = a}) .
+      mapping _DateTime
+
+-- | The linked ad accounts associated with this remarketing audience. A
+-- remarketing audience can have only one linkedAdAccount currently.
+rLinkedAdAccounts :: Lens' RemarketingAudience [LinkedForeignAccount]
+rLinkedAdAccounts
+  = lens _rLinkedAdAccounts
+      (\ s a -> s{_rLinkedAdAccounts = a})
+      . _Default
+      . _Coerce
+
+-- | The simple audience definition that will cause a user to be added to an
+-- audience.
+rAudienceDefinition :: Lens' RemarketingAudience (Maybe RemarketingAudienceAudienceDefinition)
+rAudienceDefinition
+  = lens _rAudienceDefinition
+      (\ s a -> s{_rAudienceDefinition = a})
+
+-- | The type of audience, either SIMPLE or STATE_BASED.
+rAudienceType :: Lens' RemarketingAudience (Maybe Text)
+rAudienceType
+  = lens _rAudienceType
+      (\ s a -> s{_rAudienceType = a})
+
+-- | Account ID to which this remarketing audience belongs.
+rAccountId :: Lens' RemarketingAudience (Maybe Text)
+rAccountId
+  = lens _rAccountId (\ s a -> s{_rAccountId = a})
+
+-- | The name of this remarketing audience.
+rName :: Lens' RemarketingAudience (Maybe Text)
+rName = lens _rName (\ s a -> s{_rName = a})
+
+-- | A state based audience definition that will cause a user to be added or
+-- removed from an audience.
+rStateBasedAudienceDefinition :: Lens' RemarketingAudience (Maybe RemarketingAudienceStateBasedAudienceDefinition)
+rStateBasedAudienceDefinition
+  = lens _rStateBasedAudienceDefinition
+      (\ s a -> s{_rStateBasedAudienceDefinition = a})
+
+-- | The views (profiles) that this remarketing audience is linked to.
+rLinkedViews :: Lens' RemarketingAudience [Text]
+rLinkedViews
+  = lens _rLinkedViews (\ s a -> s{_rLinkedViews = a})
+      . _Default
+      . _Coerce
+
+-- | Internal ID for the web property to which this remarketing audience
+-- belongs.
+rInternalWebPropertyId :: Lens' RemarketingAudience (Maybe Text)
+rInternalWebPropertyId
+  = lens _rInternalWebPropertyId
+      (\ s a -> s{_rInternalWebPropertyId = a})
+
+-- | Remarketing Audience ID.
+rId :: Lens' RemarketingAudience (Maybe Text)
+rId = lens _rId (\ s a -> s{_rId = a})
+
+-- | Time this remarketing audience was last modified.
+rUpdated :: Lens' RemarketingAudience (Maybe UTCTime)
+rUpdated
+  = lens _rUpdated (\ s a -> s{_rUpdated = a}) .
+      mapping _DateTime
+
+-- | The description of this remarketing audience.
+rDescription :: Lens' RemarketingAudience (Maybe Text)
+rDescription
+  = lens _rDescription (\ s a -> s{_rDescription = a})
+
+instance FromJSON RemarketingAudience where
+        parseJSON
+          = withObject "RemarketingAudience"
+              (\ o ->
+                 RemarketingAudience' <$>
+                   (o .:? "webPropertyId") <*>
+                     (o .:? "kind" .!= "analytics#remarketingAudience")
+                     <*> (o .:? "created")
+                     <*> (o .:? "linkedAdAccounts" .!= mempty)
+                     <*> (o .:? "audienceDefinition")
+                     <*> (o .:? "audienceType")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "stateBasedAudienceDefinition")
+                     <*> (o .:? "linkedViews" .!= mempty)
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "updated")
+                     <*> (o .:? "description"))
+
+instance ToJSON RemarketingAudience where
+        toJSON RemarketingAudience'{..}
+          = object
+              (catMaybes
+                 [("webPropertyId" .=) <$> _rWebPropertyId,
+                  Just ("kind" .= _rKind),
+                  ("created" .=) <$> _rCreated,
+                  ("linkedAdAccounts" .=) <$> _rLinkedAdAccounts,
+                  ("audienceDefinition" .=) <$> _rAudienceDefinition,
+                  ("audienceType" .=) <$> _rAudienceType,
+                  ("accountId" .=) <$> _rAccountId,
+                  ("name" .=) <$> _rName,
+                  ("stateBasedAudienceDefinition" .=) <$>
+                    _rStateBasedAudienceDefinition,
+                  ("linkedViews" .=) <$> _rLinkedViews,
+                  ("internalWebPropertyId" .=) <$>
+                    _rInternalWebPropertyId,
+                  ("id" .=) <$> _rId, ("updated" .=) <$> _rUpdated,
+                  ("description" .=) <$> _rDescription])
 
 --
 -- /See:/ 'gaDataDataTableRowsItemCItem' smart constructor.
@@ -3016,9 +3341,10 @@ pName :: Lens' ProFile (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
 -- | The currency type associated with this view (profile), defaults to USD.
--- The supported values are: ARS, AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK,
--- EUR, GBP, HKD, HUF, IDR, INR, JPY, KRW, LTL, MXN, NOK, NZD, PHP, PLN,
--- RUB, SEK, THB, TRY, TWD, USD, VND, ZAR
+-- The supported values are: USD, JPY, EUR, GBP, AUD, KRW, BRL, CNY, DKK,
+-- RUB, SEK, NOK, PLN, TRY, TWD, HKD, THB, IDR, ARS, MXN, VND, PHP, INR,
+-- CHF, CAD, CZK, NZD, HUF, BGN, LTL, ZAR, UAH, AED, BOB, CLP, COP, EGP,
+-- HRK, ILS, MAD, MYR, PEN, PKR, RON, RSD, SAR, SGD, VEF, LVL
 pCurrency :: Lens' ProFile (Maybe Text)
 pCurrency
   = lens _pCurrency (\ s a -> s{_pCurrency = a})
@@ -3594,6 +3920,7 @@ data GaData = GaData'
     , _gdColumnHeaders       :: !(Maybe [GaDataColumnHeadersItem])
     , _gdId                  :: !(Maybe Text)
     , _gdTotalResults        :: !(Maybe (Textual Int32))
+    , _gdDataLastRefreshed   :: !(Maybe (Textual Int64))
     , _gdDataTable           :: !(Maybe GaDataDataTable)
     , _gdContainsSampledData :: !(Maybe Bool)
     , _gdTotalsForAllResults :: !(Maybe GaDataTotalsForAllResults)
@@ -3628,6 +3955,8 @@ data GaData = GaData'
 --
 -- * 'gdTotalResults'
 --
+-- * 'gdDataLastRefreshed'
+--
 -- * 'gdDataTable'
 --
 -- * 'gdContainsSampledData'
@@ -3651,6 +3980,7 @@ gaData =
     , _gdColumnHeaders = Nothing
     , _gdId = Nothing
     , _gdTotalResults = Nothing
+    , _gdDataLastRefreshed = Nothing
     , _gdDataTable = Nothing
     , _gdContainsSampledData = Nothing
     , _gdTotalsForAllResults = Nothing
@@ -3734,6 +4064,13 @@ gdTotalResults
       (\ s a -> s{_gdTotalResults = a})
       . mapping _Coerce
 
+-- | The last refreshed time in seconds for Analytics data.
+gdDataLastRefreshed :: Lens' GaData (Maybe Int64)
+gdDataLastRefreshed
+  = lens _gdDataLastRefreshed
+      (\ s a -> s{_gdDataLastRefreshed = a})
+      . mapping _Coerce
+
 gdDataTable :: Lens' GaData (Maybe GaDataDataTable)
 gdDataTable
   = lens _gdDataTable (\ s a -> s{_gdDataTable = a})
@@ -3774,6 +4111,7 @@ instance FromJSON GaData where
                      <*> (o .:? "columnHeaders" .!= mempty)
                      <*> (o .:? "id")
                      <*> (o .:? "totalResults")
+                     <*> (o .:? "dataLastRefreshed")
                      <*> (o .:? "dataTable")
                      <*> (o .:? "containsSampledData")
                      <*> (o .:? "totalsForAllResults")
@@ -3795,6 +4133,7 @@ instance ToJSON GaData where
                   ("columnHeaders" .=) <$> _gdColumnHeaders,
                   ("id" .=) <$> _gdId,
                   ("totalResults" .=) <$> _gdTotalResults,
+                  ("dataLastRefreshed" .=) <$> _gdDataLastRefreshed,
                   ("dataTable" .=) <$> _gdDataTable,
                   ("containsSampledData" .=) <$>
                     _gdContainsSampledData,
@@ -4121,6 +4460,147 @@ instance ToJSON WebPropertyRef where
                   ("internalWebPropertyId" .=) <$>
                     _wprInternalWebPropertyId,
                   ("id" .=) <$> _wprId])
+
+-- | JSON template for an Analytics Remarketing Audience Foreign Link.
+--
+-- /See:/ 'linkedForeignAccount' smart constructor.
+data LinkedForeignAccount = LinkedForeignAccount'
+    { _lfaStatus                :: !(Maybe Text)
+    , _lfaWebPropertyId         :: !(Maybe Text)
+    , _lfaKind                  :: !Text
+    , _lfaEligibleForSearch     :: !(Maybe Bool)
+    , _lfaAccountId             :: !(Maybe Text)
+    , _lfaRemarketingAudienceId :: !(Maybe Text)
+    , _lfaLinkedAccountId       :: !(Maybe Text)
+    , _lfaInternalWebPropertyId :: !(Maybe Text)
+    , _lfaId                    :: !(Maybe Text)
+    , _lfaType                  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LinkedForeignAccount' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lfaStatus'
+--
+-- * 'lfaWebPropertyId'
+--
+-- * 'lfaKind'
+--
+-- * 'lfaEligibleForSearch'
+--
+-- * 'lfaAccountId'
+--
+-- * 'lfaRemarketingAudienceId'
+--
+-- * 'lfaLinkedAccountId'
+--
+-- * 'lfaInternalWebPropertyId'
+--
+-- * 'lfaId'
+--
+-- * 'lfaType'
+linkedForeignAccount
+    :: LinkedForeignAccount
+linkedForeignAccount =
+    LinkedForeignAccount'
+    { _lfaStatus = Nothing
+    , _lfaWebPropertyId = Nothing
+    , _lfaKind = "analytics#linkedForeignAccount"
+    , _lfaEligibleForSearch = Nothing
+    , _lfaAccountId = Nothing
+    , _lfaRemarketingAudienceId = Nothing
+    , _lfaLinkedAccountId = Nothing
+    , _lfaInternalWebPropertyId = Nothing
+    , _lfaId = Nothing
+    , _lfaType = Nothing
+    }
+
+-- | The status of this foreign account link.
+lfaStatus :: Lens' LinkedForeignAccount (Maybe Text)
+lfaStatus
+  = lens _lfaStatus (\ s a -> s{_lfaStatus = a})
+
+-- | Web property ID of the form UA-XXXXX-YY to which this linked foreign
+-- account belongs.
+lfaWebPropertyId :: Lens' LinkedForeignAccount (Maybe Text)
+lfaWebPropertyId
+  = lens _lfaWebPropertyId
+      (\ s a -> s{_lfaWebPropertyId = a})
+
+-- | Resource type for linked foreign account.
+lfaKind :: Lens' LinkedForeignAccount Text
+lfaKind = lens _lfaKind (\ s a -> s{_lfaKind = a})
+
+-- | Boolean indicating whether this is eligible for search.
+lfaEligibleForSearch :: Lens' LinkedForeignAccount (Maybe Bool)
+lfaEligibleForSearch
+  = lens _lfaEligibleForSearch
+      (\ s a -> s{_lfaEligibleForSearch = a})
+
+-- | Account ID to which this linked foreign account belongs.
+lfaAccountId :: Lens' LinkedForeignAccount (Maybe Text)
+lfaAccountId
+  = lens _lfaAccountId (\ s a -> s{_lfaAccountId = a})
+
+-- | Remarketing audience ID to which this linked foreign account belongs.
+lfaRemarketingAudienceId :: Lens' LinkedForeignAccount (Maybe Text)
+lfaRemarketingAudienceId
+  = lens _lfaRemarketingAudienceId
+      (\ s a -> s{_lfaRemarketingAudienceId = a})
+
+-- | The foreign account ID. For example the an AdWords \`linkedAccountId\`
+-- has the following format XXX-XXX-XXXX.
+lfaLinkedAccountId :: Lens' LinkedForeignAccount (Maybe Text)
+lfaLinkedAccountId
+  = lens _lfaLinkedAccountId
+      (\ s a -> s{_lfaLinkedAccountId = a})
+
+-- | Internal ID for the web property to which this linked foreign account
+-- belongs.
+lfaInternalWebPropertyId :: Lens' LinkedForeignAccount (Maybe Text)
+lfaInternalWebPropertyId
+  = lens _lfaInternalWebPropertyId
+      (\ s a -> s{_lfaInternalWebPropertyId = a})
+
+-- | Entity ad account link ID.
+lfaId :: Lens' LinkedForeignAccount (Maybe Text)
+lfaId = lens _lfaId (\ s a -> s{_lfaId = a})
+
+-- | The type of the foreign account. For example \`ADWORDS_LINKS\`.
+lfaType :: Lens' LinkedForeignAccount (Maybe Text)
+lfaType = lens _lfaType (\ s a -> s{_lfaType = a})
+
+instance FromJSON LinkedForeignAccount where
+        parseJSON
+          = withObject "LinkedForeignAccount"
+              (\ o ->
+                 LinkedForeignAccount' <$>
+                   (o .:? "status") <*> (o .:? "webPropertyId") <*>
+                     (o .:? "kind" .!= "analytics#linkedForeignAccount")
+                     <*> (o .:? "eligibleForSearch")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "remarketingAudienceId")
+                     <*> (o .:? "linkedAccountId")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "id")
+                     <*> (o .:? "type"))
+
+instance ToJSON LinkedForeignAccount where
+        toJSON LinkedForeignAccount'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _lfaStatus,
+                  ("webPropertyId" .=) <$> _lfaWebPropertyId,
+                  Just ("kind" .= _lfaKind),
+                  ("eligibleForSearch" .=) <$> _lfaEligibleForSearch,
+                  ("accountId" .=) <$> _lfaAccountId,
+                  ("remarketingAudienceId" .=) <$>
+                    _lfaRemarketingAudienceId,
+                  ("linkedAccountId" .=) <$> _lfaLinkedAccountId,
+                  ("internalWebPropertyId" .=) <$>
+                    _lfaInternalWebPropertyId,
+                  ("id" .=) <$> _lfaId, ("type" .=) <$> _lfaType])
 
 -- | A goal collection lists Analytics goals to which the user has access.
 -- Each view (profile) can have a set of goals. Each resource in the Goal
@@ -5777,6 +6257,98 @@ instance ToJSON CustomDataSourceChildLink where
               (catMaybes
                  [("href" .=) <$> _cdsclHref,
                   ("type" .=) <$> _cdsclType])
+
+-- | JSON template for an Analytics Remarketing Include Conditions.
+--
+-- /See:/ 'includeConditions' smart constructor.
+data IncludeConditions = IncludeConditions'
+    { _icKind                   :: !Text
+    , _icDaysToLookBack         :: !(Maybe (Textual Int32))
+    , _icMembershipDurationDays :: !(Maybe (Textual Int32))
+    , _icSegment                :: !(Maybe Text)
+    , _icIsSmartList            :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'IncludeConditions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'icKind'
+--
+-- * 'icDaysToLookBack'
+--
+-- * 'icMembershipDurationDays'
+--
+-- * 'icSegment'
+--
+-- * 'icIsSmartList'
+includeConditions
+    :: IncludeConditions
+includeConditions =
+    IncludeConditions'
+    { _icKind = "analytics#includeConditions"
+    , _icDaysToLookBack = Nothing
+    , _icMembershipDurationDays = Nothing
+    , _icSegment = Nothing
+    , _icIsSmartList = Nothing
+    }
+
+-- | Resource type for include conditions.
+icKind :: Lens' IncludeConditions Text
+icKind = lens _icKind (\ s a -> s{_icKind = a})
+
+-- | The look-back window lets you specify a time frame for evaluating the
+-- behavior that qualifies users for your audience. For example, if your
+-- filters include users from Central Asia, and Transactions Greater than
+-- 2, and you set the look-back window to 14 days, then any user from
+-- Central Asia whose cumulative transactions exceed 2 during the last 14
+-- days is added to the audience.
+icDaysToLookBack :: Lens' IncludeConditions (Maybe Int32)
+icDaysToLookBack
+  = lens _icDaysToLookBack
+      (\ s a -> s{_icDaysToLookBack = a})
+      . mapping _Coerce
+
+-- | Number of days (in the range 1 to 540) a user remains in the audience.
+icMembershipDurationDays :: Lens' IncludeConditions (Maybe Int32)
+icMembershipDurationDays
+  = lens _icMembershipDurationDays
+      (\ s a -> s{_icMembershipDurationDays = a})
+      . mapping _Coerce
+
+-- | The segment condition that will cause a user to be added to an audience.
+icSegment :: Lens' IncludeConditions (Maybe Text)
+icSegment
+  = lens _icSegment (\ s a -> s{_icSegment = a})
+
+-- | Boolean indicating whether this segment is a smart list.
+-- https:\/\/support.google.com\/analytics\/answer\/4628577
+icIsSmartList :: Lens' IncludeConditions (Maybe Bool)
+icIsSmartList
+  = lens _icIsSmartList
+      (\ s a -> s{_icIsSmartList = a})
+
+instance FromJSON IncludeConditions where
+        parseJSON
+          = withObject "IncludeConditions"
+              (\ o ->
+                 IncludeConditions' <$>
+                   (o .:? "kind" .!= "analytics#includeConditions") <*>
+                     (o .:? "daysToLookBack")
+                     <*> (o .:? "membershipDurationDays")
+                     <*> (o .:? "segment")
+                     <*> (o .:? "isSmartList"))
+
+instance ToJSON IncludeConditions where
+        toJSON IncludeConditions'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _icKind),
+                  ("daysToLookBack" .=) <$> _icDaysToLookBack,
+                  ("membershipDurationDays" .=) <$>
+                    _icMembershipDurationDays,
+                  ("segment" .=) <$> _icSegment,
+                  ("isSmartList" .=) <$> _icIsSmartList])
 
 -- | Parent link for this filter. Points to the account to which this filter
 -- belongs.
@@ -8212,6 +8784,63 @@ instance ToJSON EntityAdWordsLinkEntity where
               (catMaybes
                  [("webPropertyRef" .=) <$> _eawleWebPropertyRef])
 
+-- | A state based audience definition that will cause a user to be added or
+-- removed from an audience.
+--
+-- /See:/ 'remarketingAudienceStateBasedAudienceDefinition' smart constructor.
+data RemarketingAudienceStateBasedAudienceDefinition = RemarketingAudienceStateBasedAudienceDefinition'
+    { _rasbadExcludeConditions :: !(Maybe RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions)
+    , _rasbadIncludeConditions :: !(Maybe IncludeConditions)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RemarketingAudienceStateBasedAudienceDefinition' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rasbadExcludeConditions'
+--
+-- * 'rasbadIncludeConditions'
+remarketingAudienceStateBasedAudienceDefinition
+    :: RemarketingAudienceStateBasedAudienceDefinition
+remarketingAudienceStateBasedAudienceDefinition =
+    RemarketingAudienceStateBasedAudienceDefinition'
+    { _rasbadExcludeConditions = Nothing
+    , _rasbadIncludeConditions = Nothing
+    }
+
+-- | Defines the conditions to exclude users from the audience.
+rasbadExcludeConditions :: Lens' RemarketingAudienceStateBasedAudienceDefinition (Maybe RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions)
+rasbadExcludeConditions
+  = lens _rasbadExcludeConditions
+      (\ s a -> s{_rasbadExcludeConditions = a})
+
+-- | Defines the conditions to include users to the audience.
+rasbadIncludeConditions :: Lens' RemarketingAudienceStateBasedAudienceDefinition (Maybe IncludeConditions)
+rasbadIncludeConditions
+  = lens _rasbadIncludeConditions
+      (\ s a -> s{_rasbadIncludeConditions = a})
+
+instance FromJSON
+         RemarketingAudienceStateBasedAudienceDefinition where
+        parseJSON
+          = withObject
+              "RemarketingAudienceStateBasedAudienceDefinition"
+              (\ o ->
+                 RemarketingAudienceStateBasedAudienceDefinition' <$>
+                   (o .:? "excludeConditions") <*>
+                     (o .:? "includeConditions"))
+
+instance ToJSON
+         RemarketingAudienceStateBasedAudienceDefinition where
+        toJSON
+          RemarketingAudienceStateBasedAudienceDefinition'{..}
+          = object
+              (catMaybes
+                 [("excludeConditions" .=) <$>
+                    _rasbadExcludeConditions,
+                  ("includeConditions" .=) <$>
+                    _rasbadIncludeConditions])
+
 -- | Details for the goal of the type URL_DESTINATION.
 --
 -- /See:/ 'goalURLDestinationDetails' smart constructor.
@@ -9197,6 +9826,48 @@ instance ToJSON Column where
                   ("attributes" .=) <$> _ccAttributes,
                   ("id" .=) <$> _ccId])
 
+-- | The simple audience definition that will cause a user to be added to an
+-- audience.
+--
+-- /See:/ 'remarketingAudienceAudienceDefinition' smart constructor.
+newtype RemarketingAudienceAudienceDefinition = RemarketingAudienceAudienceDefinition'
+    { _raadIncludeConditions :: Maybe IncludeConditions
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RemarketingAudienceAudienceDefinition' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'raadIncludeConditions'
+remarketingAudienceAudienceDefinition
+    :: RemarketingAudienceAudienceDefinition
+remarketingAudienceAudienceDefinition =
+    RemarketingAudienceAudienceDefinition'
+    { _raadIncludeConditions = Nothing
+    }
+
+-- | Defines the conditions to include users to the audience.
+raadIncludeConditions :: Lens' RemarketingAudienceAudienceDefinition (Maybe IncludeConditions)
+raadIncludeConditions
+  = lens _raadIncludeConditions
+      (\ s a -> s{_raadIncludeConditions = a})
+
+instance FromJSON
+         RemarketingAudienceAudienceDefinition where
+        parseJSON
+          = withObject "RemarketingAudienceAudienceDefinition"
+              (\ o ->
+                 RemarketingAudienceAudienceDefinition' <$>
+                   (o .:? "includeConditions"))
+
+instance ToJSON RemarketingAudienceAudienceDefinition
+         where
+        toJSON RemarketingAudienceAudienceDefinition'{..}
+          = object
+              (catMaybes
+                 [("includeConditions" .=) <$>
+                    _raadIncludeConditions])
+
 --
 -- /See:/ 'gaDataDataTableColsItem' smart constructor.
 data GaDataDataTableColsItem = GaDataDataTableColsItem'
@@ -9331,6 +10002,64 @@ instance ToJSON ExperimentVariationsItem where
                  [("status" .=) <$> _eviStatus,
                   ("weight" .=) <$> _eviWeight, ("url" .=) <$> _eviURL,
                   ("won" .=) <$> _eviWon, ("name" .=) <$> _eviName])
+
+-- | Defines the conditions to exclude users from the audience.
+--
+-- /See:/ 'remarketingAudienceStateBasedAudienceDefinitionExcludeConditions' smart constructor.
+data RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions = RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'
+    { _rasbadecExclusionDuration :: !(Maybe Text)
+    , _rasbadecSegment           :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rasbadecExclusionDuration'
+--
+-- * 'rasbadecSegment'
+remarketingAudienceStateBasedAudienceDefinitionExcludeConditions
+    :: RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
+remarketingAudienceStateBasedAudienceDefinitionExcludeConditions =
+    RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'
+    { _rasbadecExclusionDuration = Nothing
+    , _rasbadecSegment = Nothing
+    }
+
+-- | Whether to make the exclusion TEMPORARY or PERMANENT.
+rasbadecExclusionDuration :: Lens' RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions (Maybe Text)
+rasbadecExclusionDuration
+  = lens _rasbadecExclusionDuration
+      (\ s a -> s{_rasbadecExclusionDuration = a})
+
+-- | The segment condition that will cause a user to be removed from an
+-- audience.
+rasbadecSegment :: Lens' RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions (Maybe Text)
+rasbadecSegment
+  = lens _rasbadecSegment
+      (\ s a -> s{_rasbadecSegment = a})
+
+instance FromJSON
+         RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
+         where
+        parseJSON
+          = withObject
+              "RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions"
+              (\ o ->
+                 RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'
+                   <$>
+                   (o .:? "exclusionDuration") <*> (o .:? "segment"))
+
+instance ToJSON
+         RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions
+         where
+        toJSON
+          RemarketingAudienceStateBasedAudienceDefinitionExcludeConditions'{..}
+          = object
+              (catMaybes
+                 [("exclusionDuration" .=) <$>
+                    _rasbadecExclusionDuration,
+                  ("segment" .=) <$> _rasbadecSegment])
 
 -- | Total values for the requested metrics over all the results, not just
 -- the results returned in this response. The order of the metric totals is

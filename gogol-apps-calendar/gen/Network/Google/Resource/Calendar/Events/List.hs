@@ -108,7 +108,7 @@ data EventsList = EventsList'
     , _elPageToken               :: !(Maybe Text)
     , _elTimeZone                :: !(Maybe Text)
     , _elShowHiddenInvitations   :: !(Maybe Bool)
-    , _elMaxResults              :: !(Maybe (Textual Int32))
+    , _elMaxResults              :: !(Textual Int32)
     , _elAlwaysIncludeEmail      :: !(Maybe Bool)
     , _elTimeMax                 :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -172,7 +172,7 @@ eventsList pElCalendarId_ =
     , _elPageToken = Nothing
     , _elTimeZone = Nothing
     , _elShowHiddenInvitations = Nothing
-    , _elMaxResults = Nothing
+    , _elMaxResults = 250
     , _elAlwaysIncludeEmail = Nothing
     , _elTimeMax = Nothing
     }
@@ -305,10 +305,10 @@ elShowHiddenInvitations
 -- | Maximum number of events returned on one result page. By default the
 -- value is 250 events. The page size can never be larger than 2500 events.
 -- Optional.
-elMaxResults :: Lens' EventsList (Maybe Int32)
+elMaxResults :: Lens' EventsList Int32
 elMaxResults
   = lens _elMaxResults (\ s a -> s{_elMaxResults = a})
-      . mapping _Coerce
+      . _Coerce
 
 -- | Whether to always include a value in the email field for the organizer,
 -- creator and attendees, even if no real email is available (i.e. a
@@ -349,7 +349,7 @@ instance GoogleRequest EventsList where
               _elPageToken
               _elTimeZone
               _elShowHiddenInvitations
-              _elMaxResults
+              (Just _elMaxResults)
               _elAlwaysIncludeEmail
               _elTimeMax
               (Just AltJSON)

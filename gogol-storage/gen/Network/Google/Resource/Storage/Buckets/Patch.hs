@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a bucket. This method supports patch semantics.
+-- Updates a bucket. Changes to the bucket will be readable immediately
+-- after writing, but configuration changes may take time to propagate.
+-- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.buckets.patch@.
 module Network.Google.Resource.Storage.Buckets.Patch
@@ -64,7 +66,9 @@ type BucketsPatchResource =
                        QueryParam "alt" AltJSON :>
                          ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
 
--- | Updates a bucket. This method supports patch semantics.
+-- | Updates a bucket. Changes to the bucket will be readable immediately
+-- after writing, but configuration changes may take time to propagate.
+-- This method supports patch semantics.
 --
 -- /See:/ 'bucketsPatch' smart constructor.
 data BucketsPatch = BucketsPatch'

@@ -35,6 +35,7 @@ module Network.Google.Resource.BigQuery.DataSets.List
 
     -- * Request Lenses
     , dslAll
+    , dslFilter
     , dslPageToken
     , dslProjectId
     , dslMaxResults
@@ -52,9 +53,10 @@ type DataSetsListResource =
            Capture "projectId" Text :>
              "datasets" :>
                QueryParam "all" Bool :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Word32) :>
-                     QueryParam "alt" AltJSON :> Get '[JSON] DataSetList
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" (Textual Word32) :>
+                       QueryParam "alt" AltJSON :> Get '[JSON] DataSetList
 
 -- | Lists all datasets in the specified project to which you have been
 -- granted the READER dataset role.
@@ -62,6 +64,7 @@ type DataSetsListResource =
 -- /See:/ 'dataSetsList' smart constructor.
 data DataSetsList = DataSetsList'
     { _dslAll        :: !(Maybe Bool)
+    , _dslFilter     :: !(Maybe Text)
     , _dslPageToken  :: !(Maybe Text)
     , _dslProjectId  :: !Text
     , _dslMaxResults :: !(Maybe (Textual Word32))
@@ -72,6 +75,8 @@ data DataSetsList = DataSetsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dslAll'
+--
+-- * 'dslFilter'
 --
 -- * 'dslPageToken'
 --
@@ -84,6 +89,7 @@ dataSetsList
 dataSetsList pDslProjectId_ =
     DataSetsList'
     { _dslAll = Nothing
+    , _dslFilter = Nothing
     , _dslPageToken = Nothing
     , _dslProjectId = pDslProjectId_
     , _dslMaxResults = Nothing
@@ -92,6 +98,14 @@ dataSetsList pDslProjectId_ =
 -- | Whether to list all datasets, including hidden ones
 dslAll :: Lens' DataSetsList (Maybe Bool)
 dslAll = lens _dslAll (\ s a -> s{_dslAll = a})
+
+-- | An expression for filtering the results of the request by label. The
+-- syntax is \"labels.[:]\". Multiple filters can be ANDed together by
+-- connecting with a space. Example: \"labels.department:receiving
+-- labels.active\". See Filtering datasets using labels for details.
+dslFilter :: Lens' DataSetsList (Maybe Text)
+dslFilter
+  = lens _dslFilter (\ s a -> s{_dslFilter = a})
 
 -- | Page token, returned by a previous call, to request the next page of
 -- results
@@ -118,7 +132,7 @@ instance GoogleRequest DataSetsList where
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient DataSetsList'{..}
-          = go _dslProjectId _dslAll _dslPageToken
+          = go _dslProjectId _dslAll _dslFilter _dslPageToken
               _dslMaxResults
               (Just AltJSON)
               bigQueryService

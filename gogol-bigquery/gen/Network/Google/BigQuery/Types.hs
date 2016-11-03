@@ -50,6 +50,7 @@ module Network.Google.BigQuery.Types
     , dsldsiKind
     , dsldsiDataSetReference
     , dsldsiId
+    , dsldsiLabels
 
     -- * TableDataList
     , TableDataList
@@ -98,6 +99,13 @@ module Network.Google.BigQuery.Types
     , eqsSubsteps
     , eqsKind
 
+    -- * QueryParameterTypeStructTypesItem
+    , QueryParameterTypeStructTypesItem
+    , queryParameterTypeStructTypesItem
+    , qptstiName
+    , qptstiType
+    , qptstiDescription
+
     -- * BigtableColumnFamily
     , BigtableColumnFamily
     , bigtableColumnFamily
@@ -118,6 +126,11 @@ module Network.Google.BigQuery.Types
     , jsQuery
     , jsExtract
 
+    -- * JobConfigurationLabels
+    , JobConfigurationLabels
+    , jobConfigurationLabels
+    , jclAddtional
+
     -- * DataSet
     , DataSet
     , dataSet
@@ -131,12 +144,14 @@ module Network.Google.BigQuery.Types
     , dsDataSetReference
     , dsSelfLink
     , dsId
+    , dsLabels
     , dsDefaultTableExpirationMs
     , dsDescription
 
     -- * BigtableOptions
     , BigtableOptions
     , bigtableOptions
+    , boReadRowkeyAsString
     , boIgnoreUnspecifiedColumnFamilies
     , boColumnFamilies
 
@@ -180,6 +195,7 @@ module Network.Google.BigQuery.Types
     , gqrrTotalBytesProcessed
     , gqrrRows
     , gqrrPageToken
+    , gqrrNumDmlAffectedRows
     , gqrrTotalRows
     , gqrrErrors
     , gqrrJobComplete
@@ -199,7 +215,9 @@ module Network.Google.BigQuery.Types
     , qrUseQueryCache
     , qrPreserveNulls
     , qrKind
+    , qrQueryParameters
     , qrQuery
+    , qrParameterMode
     , qrTimeoutMs
     , qrUseLegacySQL
     , qrDryRun
@@ -208,6 +226,13 @@ module Network.Google.BigQuery.Types
 
     -- * JobsListProjection
     , JobsListProjection (..)
+
+    -- * QueryParameter
+    , QueryParameter
+    , queryParameter
+    , qpParameterValue
+    , qpParameterType
+    , qpName
 
     -- * JobStatistics4
     , JobStatistics4
@@ -246,6 +271,7 @@ module Network.Google.BigQuery.Types
     , jclAllowJaggedRows
     , jclSchemaInline
     , jclIgnoreUnknownValues
+    , jclSchemaUpdateOptions
     , jclCreateDisPosition
     , jclSchemaInlineFormat
     , jclAllowQuotedNewlines
@@ -326,6 +352,16 @@ module Network.Google.BigQuery.Types
     , tpExpirationMs
     , tpType
 
+    -- * QueryParameterValueStructValues
+    , QueryParameterValueStructValues
+    , queryParameterValueStructValues
+    , qpvsvAddtional
+
+    -- * DataSetLabels
+    , DataSetLabels
+    , dataSetLabels
+    , dslAddtional
+
     -- * JobConfiguration
     , JobConfiguration
     , jobConfiguration
@@ -333,6 +369,7 @@ module Network.Google.BigQuery.Types
     , jcLoad
     , jcQuery
     , jcExtract
+    , jcLabels
     , jcDryRun
 
     -- * Job
@@ -385,12 +422,16 @@ module Network.Google.BigQuery.Types
     , jcqUseQueryCache
     , jcqPreserveNulls
     , jcqTableDefinitions
+    , jcqQueryParameters
+    , jcqSchemaUpdateOptions
+    , jcqMaximumBytesBilled
     , jcqCreateDisPosition
     , jcqUserDefinedFunctionResources
     , jcqAllowLargeResults
     , jcqMaximumBillingTier
     , jcqQuery
     , jcqFlattenResults
+    , jcqParameterMode
     , jcqUseLegacySQL
     , jcqDefaultDataSet
 
@@ -423,11 +464,19 @@ module Network.Google.BigQuery.Types
     , tableCell
     , tcV
 
+    -- * QueryParameterValue
+    , QueryParameterValue
+    , queryParameterValue
+    , qpvStructValues
+    , qpvValue
+    , qpvArrayValues
+
     -- * ViewDefinition
     , ViewDefinition
     , viewDefinition
     , vdUserDefinedFunctionResources
     , vdQuery
+    , vdUseLegacySQL
 
     -- * UserDefinedFunctionResource
     , UserDefinedFunctionResource
@@ -441,7 +490,9 @@ module Network.Google.BigQuery.Types
     , jSchema
     , jTotalBytesProcessed
     , jBillingTier
+    , jUndeclaredQueryParameters
     , jReferencedTables
+    , jNumDmlAffectedRows
     , jQueryPlan
     , jCacheHit
     , jTotalBytesBilled
@@ -468,6 +519,13 @@ module Network.Google.BigQuery.Types
     , tableDataInsertAllResponse
     , tKind
     , tInsertErrors
+
+    -- * QueryParameterType
+    , QueryParameterType
+    , queryParameterType
+    , qptStructTypes
+    , qptType
+    , qptArrayType
 
     -- * Table
     , Table
@@ -528,10 +586,16 @@ module Network.Google.BigQuery.Types
     , qTotalBytesProcessed
     , qRows
     , qPageToken
+    , qNumDmlAffectedRows
     , qTotalRows
     , qErrors
     , qJobComplete
     , qCacheHit
+
+    -- * DataSetListDataSetsItemLabels
+    , DataSetListDataSetsItemLabels
+    , dataSetListDataSetsItemLabels
+    , dsldsilAddtional
     ) where
 
 import           Network.Google.BigQuery.Types.Product

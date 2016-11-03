@@ -33,6 +33,7 @@ module Network.Google.Resource.Compute.VPNTunnels.AggregatedList
     , VPNTunnelsAggregatedList
 
     -- * Request Lenses
+    , vtalOrderBy
     , vtalProject
     , vtalFilter
     , vtalPageToken
@@ -51,17 +52,19 @@ type VPNTunnelsAggregatedListResource =
            Capture "project" Text :>
              "aggregated" :>
                "vpnTunnels" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] VPNTunnelAggregatedList
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] VPNTunnelAggregatedList
 
 -- | Retrieves an aggregated list of VPN tunnels.
 --
 -- /See:/ 'vpnTunnelsAggregatedList' smart constructor.
 data VPNTunnelsAggregatedList = VPNTunnelsAggregatedList'
-    { _vtalProject    :: !Text
+    { _vtalOrderBy    :: !(Maybe Text)
+    , _vtalProject    :: !Text
     , _vtalFilter     :: !(Maybe Text)
     , _vtalPageToken  :: !(Maybe Text)
     , _vtalMaxResults :: !(Textual Word32)
@@ -70,6 +73,8 @@ data VPNTunnelsAggregatedList = VPNTunnelsAggregatedList'
 -- | Creates a value of 'VPNTunnelsAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vtalOrderBy'
 --
 -- * 'vtalProject'
 --
@@ -83,11 +88,24 @@ vpnTunnelsAggregatedList
     -> VPNTunnelsAggregatedList
 vpnTunnelsAggregatedList pVtalProject_ =
     VPNTunnelsAggregatedList'
-    { _vtalProject = pVtalProject_
+    { _vtalOrderBy = Nothing
+    , _vtalProject = pVtalProject_
     , _vtalFilter = Nothing
     , _vtalPageToken = Nothing
     , _vtalMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+vtalOrderBy :: Lens' VPNTunnelsAggregatedList (Maybe Text)
+vtalOrderBy
+  = lens _vtalOrderBy (\ s a -> s{_vtalOrderBy = a})
 
 -- | Project ID for this request.
 vtalProject :: Lens' VPNTunnelsAggregatedList Text
@@ -105,16 +123,15 @@ vtalProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 vtalFilter :: Lens' VPNTunnelsAggregatedList (Maybe Text)
 vtalFilter
   = lens _vtalFilter (\ s a -> s{_vtalFilter = a})
@@ -144,7 +161,8 @@ instance GoogleRequest VPNTunnelsAggregatedList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient VPNTunnelsAggregatedList'{..}
-          = go _vtalProject _vtalFilter _vtalPageToken
+          = go _vtalProject _vtalOrderBy _vtalFilter
+              _vtalPageToken
               (Just _vtalMaxResults)
               (Just AltJSON)
               computeService

@@ -36,6 +36,12 @@ module Network.Google.DeploymentManager.Types
     , configFile
     , cfContent
 
+    -- * AuditConfig
+    , AuditConfig
+    , auditConfig
+    , acService
+    , acExemptedMembers
+
     -- * DeploymentsUpdateCreatePolicy
     , DeploymentsUpdateCreatePolicy (..)
 
@@ -56,6 +62,12 @@ module Network.Google.DeploymentManager.Types
     , typesListResponse
     , tlrNextPageToken
     , tlrTypes
+
+    -- * LogConfigCounterOptions
+    , LogConfigCounterOptions
+    , logConfigCounterOptions
+    , lccoField
+    , lccoMetric
 
     -- * DeploymentsUpdateDeletePolicy
     , DeploymentsUpdateDeletePolicy (..)
@@ -90,6 +102,11 @@ module Network.Google.DeploymentManager.Types
     , oTargetLink
     , oClientOperationId
 
+    -- * TestPermissionsResponse
+    , TestPermissionsResponse
+    , testPermissionsResponse
+    , tprPermissions
+
     -- * DeploymentsPatchCreatePolicy
     , DeploymentsPatchCreatePolicy (..)
 
@@ -110,6 +127,7 @@ module Network.Google.DeploymentManager.Types
     , resourceUpdate
     , ruState
     , ruError
+    , ruAccessControl
     , ruWarnings
     , ruIntent
     , ruManifest
@@ -121,6 +139,22 @@ module Network.Google.DeploymentManager.Types
     , deploymentLabelEntry
     , dleValue
     , dleKey
+
+    -- * Rule
+    , Rule
+    , rule
+    , rAction
+    , rNotIns
+    , rIns
+    , rLogConfigs
+    , rConditions
+    , rPermissions
+    , rDescription
+
+    -- * TestPermissionsRequest
+    , TestPermissionsRequest
+    , testPermissionsRequest
+    , tPermissions
 
     -- * Manifest
     , Manifest
@@ -150,6 +184,7 @@ module Network.Google.DeploymentManager.Types
     , Resource
     , resource
     , rInsertTime
+    , rAccessControl
     , rURL
     , rWarnings
     , rUpdateTime
@@ -185,10 +220,21 @@ module Network.Google.DeploymentManager.Types
     , operationError
     , oeErrors
 
+    -- * Policy
+    , Policy
+    , policy
+    , pAuditConfigs
+    , pEtag
+    , pRules
+    , pVersion
+    , pBindings
+    , pIAMOwned
+
     -- * Type
     , Type
     , type'
     , tInsertTime
+    , tOperation
     , tSelfLink
     , tName
     , tId
@@ -222,6 +268,16 @@ module Network.Google.DeploymentManager.Types
     , resourceUpdateError
     , rueErrors
 
+    -- * Condition
+    , Condition
+    , condition
+    , cOp
+    , cIAM
+    , cValues
+    , cValue
+    , cSys
+    , cSvc
+
     -- * DeploymentsListResponse
     , DeploymentsListResponse
     , deploymentsListResponse
@@ -235,6 +291,16 @@ module Network.Google.DeploymentManager.Types
     , rwiCode
     , rwiMessage
 
+    -- * LogConfig
+    , LogConfig
+    , logConfig
+    , lcCounter
+
+    -- * ResourceAccessControl
+    , ResourceAccessControl
+    , resourceAccessControl
+    , racGcpIAMPolicy
+
     -- * TargetConfiguration
     , TargetConfiguration
     , targetConfiguration
@@ -247,6 +313,12 @@ module Network.Google.DeploymentManager.Types
     , owiData
     , owiCode
     , owiMessage
+
+    -- * Binding
+    , Binding
+    , binding
+    , bMembers
+    , bRole
 
     -- * Deployment
     , Deployment

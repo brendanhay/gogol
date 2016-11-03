@@ -21,10 +21,12 @@ module Network.Google.Fitness.Types
 
     -- * OAuth Scopes
     , fitnessBodyReadScope
+    , fitnessNutritionReadScope
     , fitnessActivityReadScope
     , fitnessActivityWriteScope
     , fitnessLocationReadScope
     , fitnessLocationWriteScope
+    , fitnessNutritionWriteScope
     , fitnessBodyWriteScope
 
     -- * AggregateBucketType
@@ -61,6 +63,9 @@ module Network.Google.Fitness.Types
     -- * DataSourceType
     , DataSourceType (..)
 
+    -- * BucketByTimePeriodType
+    , BucketByTimePeriodType (..)
+
     -- * BucketByActivity
     , BucketByActivity
     , bucketByActivity
@@ -71,6 +76,7 @@ module Network.Google.Fitness.Types
     , AggregateRequest
     , aggregateRequest
     , arEndTimeMillis
+    , arFilteredDataQualityStandard
     , arAggregateBy
     , arBucketBySession
     , arBucketByActivityType
@@ -117,6 +123,7 @@ module Network.Google.Fitness.Types
     , listSessionsResponse
     , lsrNextPageToken
     , lsrDeletedSession
+    , lsrHasMoreData
     , lsrSession
 
     -- * AggregateBucket
@@ -146,16 +153,27 @@ module Network.Google.Fitness.Types
     , dtfName
     , dtfOptional
 
+    -- * AggregateRequestFilteredDataQualityStandardItem
+    , AggregateRequestFilteredDataQualityStandardItem (..)
+
     -- * DataSource
     , DataSource
     , dataSource
     , dsApplication
     , dsDevice
+    , dsDataQualityStandard
     , dsName
     , dsDataType
     , dsType
     , dsDataStreamName
     , dsDataStreamId
+
+    -- * BucketByTimePeriod
+    , BucketByTimePeriod
+    , bucketByTimePeriod
+    , bbtpValue
+    , bbtpType
+    , bbtpTimeZoneId
 
     -- * DeviceType
     , DeviceType (..)
@@ -169,6 +187,7 @@ module Network.Google.Fitness.Types
     -- * BucketByTime
     , BucketByTime
     , bucketByTime
+    , bbtPeriod
     , bbtDurationMillis
 
     -- * DataType
@@ -190,6 +209,9 @@ module Network.Google.Fitness.Types
     , sStartTimeMillis
     , sDescription
 
+    -- * DataSourceDataQualityStandardItem
+    , DataSourceDataQualityStandardItem (..)
+
     -- * DataTypeFieldFormat
     , DataTypeFieldFormat (..)
     ) where
@@ -208,6 +230,10 @@ fitnessService
 fitnessBodyReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.read"]
 fitnessBodyReadScope = Proxy;
 
+-- | View nutrition information in Google Fit
+fitnessNutritionReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.nutrition.read"]
+fitnessNutritionReadScope = Proxy;
+
 -- | View your activity information in Google Fit
 fitnessActivityReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.read"]
 fitnessActivityReadScope = Proxy;
@@ -223,6 +249,10 @@ fitnessLocationReadScope = Proxy;
 -- | View and store your location data in Google Fit
 fitnessLocationWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.write"]
 fitnessLocationWriteScope = Proxy;
+
+-- | View and store nutrition information in Google Fit
+fitnessNutritionWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.nutrition.write"]
+fitnessNutritionWriteScope = Proxy;
 
 -- | View and store body sensor data in Google Fit
 fitnessBodyWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.write"]

@@ -26,11 +26,11 @@
 -- have a billing account associated with it. + The Project has a lifecycle
 -- state of ACTIVE. This method changes the Project\'s lifecycle state from
 -- ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time,
--- at which point the lifecycle state changes to DELETE_IN_PROGRESS. Until
--- the deletion completes, you can check the lifecycle state checked by
--- retrieving the Project with GetProject, and the Project remains visible
--- to ListProjects. However, you cannot update the project. After the
--- deletion completes, the Project is not retrievable by the GetProject and
+-- at which point the Project is no longer accessible. Until the deletion
+-- completes, you can check the lifecycle state checked by retrieving the
+-- Project with GetProject, and the Project remains visible to
+-- ListProjects. However, you cannot update the project. After the deletion
+-- completes, the Project is not retrievable by the GetProject and
 -- ListProjects methods. The caller must have modify permissions for this
 -- Project.
 --
@@ -79,11 +79,11 @@ type ProjectsDeleteResource =
 -- have a billing account associated with it. + The Project has a lifecycle
 -- state of ACTIVE. This method changes the Project\'s lifecycle state from
 -- ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time,
--- at which point the lifecycle state changes to DELETE_IN_PROGRESS. Until
--- the deletion completes, you can check the lifecycle state checked by
--- retrieving the Project with GetProject, and the Project remains visible
--- to ListProjects. However, you cannot update the project. After the
--- deletion completes, the Project is not retrievable by the GetProject and
+-- at which point the Project is no longer accessible. Until the deletion
+-- completes, you can check the lifecycle state checked by retrieving the
+-- Project with GetProject, and the Project remains visible to
+-- ListProjects. However, you cannot update the project. After the deletion
+-- completes, the Project is not retrievable by the GetProject and
 -- ListProjects methods. The caller must have modify permissions for this
 -- Project.
 --

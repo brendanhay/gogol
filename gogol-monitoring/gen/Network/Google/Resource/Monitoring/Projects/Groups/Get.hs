@@ -22,7 +22,7 @@
 --
 -- Gets a single group.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.groups.get@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.groups.get@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Get
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 type ProjectsGroupsGetResource =
      "v3" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -64,7 +64,7 @@ type ProjectsGroupsGetResource =
 --
 -- /See:/ 'projectsGroupsGet' smart constructor.
 data ProjectsGroupsGet = ProjectsGroupsGet'
-    { _pggXgafv          :: !(Maybe Text)
+    { _pggXgafv          :: !(Maybe Xgafv)
     , _pggUploadProtocol :: !(Maybe Text)
     , _pggPp             :: !Bool
     , _pggAccessToken    :: !(Maybe Text)
@@ -109,7 +109,7 @@ projectsGroupsGet pPggName_ =
     }
 
 -- | V1 error format.
-pggXgafv :: Lens' ProjectsGroupsGet (Maybe Text)
+pggXgafv :: Lens' ProjectsGroupsGet (Maybe Xgafv)
 pggXgafv = lens _pggXgafv (\ s a -> s{_pggXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -141,7 +141,7 @@ pggBearerToken
       (\ s a -> s{_pggBearerToken = a})
 
 -- | The group to retrieve. The format is
--- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`.
+-- \"projects\/{project_id_or_number}\/groups\/{group_id}\".
 pggName :: Lens' ProjectsGroupsGet Text
 pggName = lens _pggName (\ s a -> s{_pggName = a})
 

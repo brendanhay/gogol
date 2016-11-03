@@ -1,5 +1,5 @@
 name:                  gogol-civicinfo
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Civic Information SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -14,7 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    An API for accessing civic information.
+    Provides polling places, early vote locations, contest data, election
+    officials, and government representatives for U.S. residential
+    addresses.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -46,5 +48,5 @@ library
         , Network.Google.CivicInfo.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

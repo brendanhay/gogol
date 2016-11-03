@@ -22,7 +22,7 @@
 --
 -- Deletes a logs-based metric.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.projects.metrics.delete@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.metrics.delete@.
 module Network.Google.Resource.Logging.Projects.Metrics.Delete
     (
     -- * REST Resource
@@ -49,9 +49,9 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.projects.metrics.delete@ method which the
 -- 'ProjectsMetricsDelete' request conforms to.
 type ProjectsMetricsDeleteResource =
-     "v2beta1" :>
+     "v2" :>
        Capture "metricName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -64,7 +64,7 @@ type ProjectsMetricsDeleteResource =
 --
 -- /See:/ 'projectsMetricsDelete' smart constructor.
 data ProjectsMetricsDelete = ProjectsMetricsDelete'
-    { _pmdXgafv          :: !(Maybe Text)
+    { _pmdXgafv          :: !(Maybe Xgafv)
     , _pmdUploadProtocol :: !(Maybe Text)
     , _pmdPp             :: !Bool
     , _pmdAccessToken    :: !(Maybe Text)
@@ -109,7 +109,7 @@ projectsMetricsDelete pPmdMetricName_ =
     }
 
 -- | V1 error format.
-pmdXgafv :: Lens' ProjectsMetricsDelete (Maybe Text)
+pmdXgafv :: Lens' ProjectsMetricsDelete (Maybe Xgafv)
 pmdXgafv = lens _pmdXgafv (\ s a -> s{_pmdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

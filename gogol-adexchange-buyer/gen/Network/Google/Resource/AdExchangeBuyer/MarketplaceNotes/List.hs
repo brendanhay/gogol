@@ -34,6 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
 
     -- * Request Lenses
     , mnlProposalId
+    , mnlPqlQuery
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -47,14 +48,16 @@ type MarketplaceNotesListResource =
          "proposals" :>
            Capture "proposalId" Text :>
              "notes" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] GetOrderNotesResponse
+               QueryParam "pqlQuery" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] GetOrderNotesResponse
 
 -- | Get all the notes associated with a proposal
 --
 -- /See:/ 'marketplaceNotesList' smart constructor.
-newtype MarketplaceNotesList = MarketplaceNotesList'
-    { _mnlProposalId :: Text
+data MarketplaceNotesList = MarketplaceNotesList'
+    { _mnlProposalId :: !Text
+    , _mnlPqlQuery   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceNotesList' with the minimum fields required to make a request.
@@ -62,26 +65,37 @@ newtype MarketplaceNotesList = MarketplaceNotesList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mnlProposalId'
+--
+-- * 'mnlPqlQuery'
 marketplaceNotesList
     :: Text -- ^ 'mnlProposalId'
     -> MarketplaceNotesList
 marketplaceNotesList pMnlProposalId_ =
     MarketplaceNotesList'
     { _mnlProposalId = pMnlProposalId_
+    , _mnlPqlQuery = Nothing
     }
 
--- | The proposalId to get notes for.
+-- | The proposalId to get notes for. To search across all proposals specify
+-- order_id = \'-\' as part of the URL.
 mnlProposalId :: Lens' MarketplaceNotesList Text
 mnlProposalId
   = lens _mnlProposalId
       (\ s a -> s{_mnlProposalId = a})
+
+-- | Query string to retrieve specific notes. To search the text contents of
+-- notes, please use syntax like \"WHERE note.note = \"foo\" or \"WHERE
+-- note.note LIKE \"%bar%\"
+mnlPqlQuery :: Lens' MarketplaceNotesList (Maybe Text)
+mnlPqlQuery
+  = lens _mnlPqlQuery (\ s a -> s{_mnlPqlQuery = a})
 
 instance GoogleRequest MarketplaceNotesList where
         type Rs MarketplaceNotesList = GetOrderNotesResponse
         type Scopes MarketplaceNotesList =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceNotesList'{..}
-          = go _mnlProposalId (Just AltJSON)
+          = go _mnlProposalId _mnlPqlQuery (Just AltJSON)
               adExchangeBuyerService
           where go
                   = buildClient

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the current configuration of the service.
+-- Gets the current configuration of the specified service.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.get@.
 module Network.Google.Resource.AppEngine.Apps.Services.Get
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.services.get@ method which the
 -- 'AppsServicesGet' request conforms to.
 type AppsServicesGetResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
@@ -64,7 +64,7 @@ type AppsServicesGetResource =
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :> Get '[JSON] Service
 
--- | Gets the current configuration of the service.
+-- | Gets the current configuration of the specified service.
 --
 -- /See:/ 'appsServicesGet' smart constructor.
 data AppsServicesGet = AppsServicesGet'
@@ -149,8 +149,8 @@ asgBearerToken
   = lens _asgBearerToken
       (\ s a -> s{_asgBearerToken = a})
 
--- | Part of \`name\`. Name of the resource requested. For example:
--- \"apps\/myapp\/services\/default\".
+-- | Part of \`name\`. Name of the resource requested. Example:
+-- \`apps\/myapp\/services\/default\`.
 asgAppsId :: Lens' AppsServicesGet Text
 asgAppsId
   = lens _asgAppsId (\ s a -> s{_asgAppsId = a})

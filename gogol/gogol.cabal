@@ -1,5 +1,5 @@
 name:                  gogol
-version:               0.1.0
+version:               0.1.1
 synopsis:              Comprehensive Google Services SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -57,19 +57,18 @@ library
 
     build-depends:
           aeson                >= 0.8
-        , base                 >= 4.7
+        , base                 >= 4.7 && < 5
         , bytestring           >= 0.9
         , case-insensitive     >= 1.2
         , conduit              >= 1.1
         , conduit-extra        >= 1.1
         , cryptonite           >= 0.6
-        , data-default-class   >= 0.0.1
         , directory            >= 1.2
         , exceptions           >= 0.6
         , filepath             >= 1.2
-        , gogol-core           == 0.1.0.*
-        , http-client          >= 0.4.4
-        , http-conduit         >= 2.1.4
+        , gogol-core           == 0.1.1.*
+        , http-client          >= 0.5 && < 1
+        , http-conduit         >= 2.2 && < 3
         , http-media           >= 0.6
         , http-types           >= 0.8.6
         , lens                 >= 4.4

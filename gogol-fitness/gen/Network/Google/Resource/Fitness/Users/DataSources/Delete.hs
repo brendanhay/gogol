@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Delete the data source if there are no datapoints associated with it
+-- Deletes the specified data source. The request will fail if the data
+-- source contains any data points.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.delete@.
 module Network.Google.Resource.Fitness.Users.DataSources.Delete
@@ -51,7 +52,8 @@ type UsersDataSourcesDeleteResource =
                Capture "dataSourceId" Text :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] DataSource
 
--- | Delete the data source if there are no datapoints associated with it
+-- | Deletes the specified data source. The request will fail if the data
+-- source contains any data points.
 --
 -- /See:/ 'usersDataSourcesDelete' smart constructor.
 data UsersDataSourcesDelete = UsersDataSourcesDelete'
@@ -93,7 +95,8 @@ instance GoogleRequest UsersDataSourcesDelete where
         type Scopes UsersDataSourcesDelete =
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
-               "https://www.googleapis.com/auth/fitness.location.write"]
+               "https://www.googleapis.com/auth/fitness.location.write",
+               "https://www.googleapis.com/auth/fitness.nutrition.write"]
         requestClient UsersDataSourcesDelete'{..}
           = go _udsdUserId _udsdDataSourceId (Just AltJSON)
               fitnessService

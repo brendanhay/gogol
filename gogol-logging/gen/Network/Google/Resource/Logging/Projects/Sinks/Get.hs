@@ -22,7 +22,7 @@
 --
 -- Gets a sink.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.projects.sinks.get@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.get@.
 module Network.Google.Resource.Logging.Projects.Sinks.Get
     (
     -- * REST Resource
@@ -49,9 +49,9 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.projects.sinks.get@ method which the
 -- 'ProjectsSinksGet' request conforms to.
 type ProjectsSinksGetResource =
-     "v2beta1" :>
+     "v2" :>
        Capture "sinkName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -64,7 +64,7 @@ type ProjectsSinksGetResource =
 --
 -- /See:/ 'projectsSinksGet' smart constructor.
 data ProjectsSinksGet = ProjectsSinksGet'
-    { _psgXgafv          :: !(Maybe Text)
+    { _psgXgafv          :: !(Maybe Xgafv)
     , _psgUploadProtocol :: !(Maybe Text)
     , _psgPp             :: !Bool
     , _psgAccessToken    :: !(Maybe Text)
@@ -109,7 +109,7 @@ projectsSinksGet pPsgSinkName_ =
     }
 
 -- | V1 error format.
-psgXgafv :: Lens' ProjectsSinksGet (Maybe Text)
+psgXgafv :: Lens' ProjectsSinksGet (Maybe Xgafv)
 psgXgafv = lens _psgXgafv (\ s a -> s{_psgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -140,7 +140,7 @@ psgBearerToken
   = lens _psgBearerToken
       (\ s a -> s{_psgBearerToken = a})
 
--- | The resource name of the sink to return. Example:
+-- | Required. The resource name of the sink to return. Example:
 -- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`.
 psgSinkName :: Lens' ProjectsSinksGet Text
 psgSinkName

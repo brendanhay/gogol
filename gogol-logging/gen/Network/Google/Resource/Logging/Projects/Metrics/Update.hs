@@ -22,7 +22,7 @@
 --
 -- Creates or updates a logs-based metric.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.projects.metrics.update@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.metrics.update@.
 module Network.Google.Resource.Logging.Projects.Metrics.Update
     (
     -- * REST Resource
@@ -50,9 +50,9 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.projects.metrics.update@ method which the
 -- 'ProjectsMetricsUpdate' request conforms to.
 type ProjectsMetricsUpdateResource =
-     "v2beta1" :>
+     "v2" :>
        Capture "metricName" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -66,7 +66,7 @@ type ProjectsMetricsUpdateResource =
 --
 -- /See:/ 'projectsMetricsUpdate' smart constructor.
 data ProjectsMetricsUpdate = ProjectsMetricsUpdate'
-    { _pmuXgafv          :: !(Maybe Text)
+    { _pmuXgafv          :: !(Maybe Xgafv)
     , _pmuUploadProtocol :: !(Maybe Text)
     , _pmuPp             :: !Bool
     , _pmuAccessToken    :: !(Maybe Text)
@@ -116,7 +116,7 @@ projectsMetricsUpdate pPmuMetricName_ pPmuPayload_ =
     }
 
 -- | V1 error format.
-pmuXgafv :: Lens' ProjectsMetricsUpdate (Maybe Text)
+pmuXgafv :: Lens' ProjectsMetricsUpdate (Maybe Xgafv)
 pmuXgafv = lens _pmuXgafv (\ s a -> s{_pmuXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

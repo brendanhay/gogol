@@ -20,10 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the entire content of the BackendService resource. There are
--- several restrictions and guidelines to keep in mind when updating a
--- backend service. Read Restrictions and Guidelines for more information.
--- This method supports patch semantics.
+-- Updates the specified BackendService resource with the data included in
+-- the request. There are several restrictions and guidelines to keep in
+-- mind when updating a backend service. Read Restrictions and Guidelines
+-- for more information. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.patch@.
 module Network.Google.Resource.Compute.BackendServices.Patch
@@ -58,10 +58,10 @@ type BackendServicesPatchResource =
                      ReqBody '[JSON] BackendService :>
                        Patch '[JSON] Operation
 
--- | Updates the entire content of the BackendService resource. There are
--- several restrictions and guidelines to keep in mind when updating a
--- backend service. Read Restrictions and Guidelines for more information.
--- This method supports patch semantics.
+-- | Updates the specified BackendService resource with the data included in
+-- the request. There are several restrictions and guidelines to keep in
+-- mind when updating a backend service. Read Restrictions and Guidelines
+-- for more information. This method supports patch semantics.
 --
 -- /See:/ 'backendServicesPatch' smart constructor.
 data BackendServicesPatch = BackendServicesPatch'

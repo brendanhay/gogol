@@ -1,5 +1,5 @@
 name:                  gogol-dataflow
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Dataflow SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -37,6 +37,8 @@ library
           Network.Google.Dataflow
         , Network.Google.Dataflow.Types
         , Network.Google.Resource.Dataflow.Projects.Jobs.Create
+        , Network.Google.Resource.Dataflow.Projects.Jobs.Debug.GetConfig
+        , Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
         , Network.Google.Resource.Dataflow.Projects.Jobs.Get
         , Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
         , Network.Google.Resource.Dataflow.Projects.Jobs.List
@@ -44,6 +46,7 @@ library
         , Network.Google.Resource.Dataflow.Projects.Jobs.Update
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
         , Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+        , Network.Google.Resource.Dataflow.Projects.Templates.Create
         , Network.Google.Resource.Dataflow.Projects.WorkerMessages
 
     other-modules:
@@ -51,5 +54,5 @@ library
         , Network.Google.Dataflow.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

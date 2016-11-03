@@ -23,7 +23,7 @@
 -- Gets a single monitored resource descriptor. This method does not
 -- require a Stackdriver account.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.monitoredResourceDescriptors.get@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.monitoredResourceDescriptors.get@.
 module Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.Get
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ type ProjectsMonitoredResourceDescriptorsGetResource
      =
      "v3" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -68,7 +68,7 @@ type ProjectsMonitoredResourceDescriptorsGetResource
 --
 -- /See:/ 'projectsMonitoredResourceDescriptorsGet' smart constructor.
 data ProjectsMonitoredResourceDescriptorsGet = ProjectsMonitoredResourceDescriptorsGet'
-    { _pmrdgXgafv          :: !(Maybe Text)
+    { _pmrdgXgafv          :: !(Maybe Xgafv)
     , _pmrdgUploadProtocol :: !(Maybe Text)
     , _pmrdgPp             :: !Bool
     , _pmrdgAccessToken    :: !(Maybe Text)
@@ -113,7 +113,7 @@ projectsMonitoredResourceDescriptorsGet pPmrdgName_ =
     }
 
 -- | V1 error format.
-pmrdgXgafv :: Lens' ProjectsMonitoredResourceDescriptorsGet (Maybe Text)
+pmrdgXgafv :: Lens' ProjectsMonitoredResourceDescriptorsGet (Maybe Xgafv)
 pmrdgXgafv
   = lens _pmrdgXgafv (\ s a -> s{_pmrdgXgafv = a})
 
@@ -146,9 +146,8 @@ pmrdgBearerToken
       (\ s a -> s{_pmrdgBearerToken = a})
 
 -- | The monitored resource descriptor to get. The format is
--- \`\"projects\/{project_id_or_number}\/monitoredResourceDescriptors\/{resource_type}\"\`.
--- The \`{resource_type}\` is a predefined type, such as
--- \`cloudsql_database\`.
+-- \"projects\/{project_id_or_number}\/monitoredResourceDescriptors\/{resource_type}\".
+-- The {resource_type} is a predefined type, such as cloudsql_database.
 pmrdgName :: Lens' ProjectsMonitoredResourceDescriptorsGet Text
 pmrdgName
   = lens _pmrdgName (\ s a -> s{_pmrdgName = a})

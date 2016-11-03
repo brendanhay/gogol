@@ -40,19 +40,20 @@ module Network.Google.Compute.Metadata
     , getMetadata
     ) where
 
+import           Control.Exception       (throwIO)
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class  (MonadIO (..))
 import           Data.Aeson              (eitherDecode')
 import           Data.ByteString         (ByteString)
 import qualified Data.ByteString.Lazy    as LBS
 import           Data.Char               (toLower)
-import           Data.Default.Class      (def)
 import qualified Data.Text.Encoding      as Text
 import qualified Data.Text.Lazy          as LText
 import qualified Data.Text.Lazy.Encoding as LText
 import           Network.Google.Prelude  (Text, (<>))
-import           Network.HTTP.Conduit    (HttpException (..), Manager)
-import qualified Network.HTTP.Conduit    as Client
+import           Network.HTTP.Client     (HttpException (..),
+                                          HttpExceptionContent (..), Manager)
+import qualified Network.HTTP.Client     as Client
 import           Network.HTTP.Types      (HeaderName)
 import           System.Environment      (lookupEnv)
 
@@ -91,7 +92,7 @@ isGCE m = liftIO $ do
     failure = const (pure False)
 
     rq = metadataRequest
-       { Client.responseTimeout = Just 1000000
+       { Client.responseTimeout = Client.responseTimeoutMicro 1000000
        }
 
 -- | A directory of custom metadata values that have been set for this project.
@@ -223,20 +224,24 @@ getMetadata :: MonadIO m
             -> [Int]      -- ^ Acceptable status code responses.
             -> Manager
             -> m (Client.Response LBS.ByteString)
-getMetadata path ss m =
-    liftIO . flip Client.httpLbs m $ metadataRequest
-        { Client.path        = "/computeMetadata/v1/" <> path
-        , Client.checkStatus = \s hs cj ->
-            let c = fromEnum s
-             in if 200 <= c && c < 300 && notElem c ss
-                 then Nothing
-                 else Just . toException $ StatusCodeException s hs cj
-        }
+getMetadata path statuses m =
+    liftIO . flip Client.httpLbs m $
+        metadataRequest
+            { Client.path          = "/computeMetadata/v1/" <> path
+            , Client.checkResponse = \rq rs ->
+                let c = fromEnum (Client.responseStatus rs)
+                 in if 200 <= c && c < 300 && notElem c statuses
+                     then return ()
+                     else do
+                         bs <- Client.brReadSome (Client.responseBody rs) 4096
+                         throwIO . HttpExceptionRequest rq $
+                             StatusCodeException (() <$ rs) (LBS.toStrict bs)
+            }
 
 -- | A default @http-client@ 'Client.Request' with the host, port, and headers
 -- set appropriately for @metadata.google.internal@ use.
 metadataRequest :: Client.Request
-metadataRequest = def
+metadataRequest = Client.defaultRequest
     { Client.host           = "metadata.google.internal"
     , Client.port           = 80
     , Client.secure         = False

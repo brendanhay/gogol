@@ -1,5 +1,5 @@
 name:                  gogol-core
-version:               0.1.0
+version:               0.1.1
 synopsis:              Core data types and functionality for Gogol libraries.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -46,7 +46,7 @@ library
     build-depends:
           aeson                >= 0.8
         , attoparsec           >= 0.11.3
-        , base                 >= 4.7
+        , base                 >= 4.7 && < 5
         , bifunctors           >= 0.1
         , bytestring           >= 0.9
         , case-insensitive     >= 1.2
@@ -55,7 +55,7 @@ library
         , exceptions           >= 0.6
         , hashable             >= 1.2
         , http-api-data        >= 0.2
-        , http-client          >= 0.4.4
+        , http-client          >= 0.5 && < 1
         , http-media           >= 0.6
         , http-types           >= 0.8.6
         , lens                 >= 4.4

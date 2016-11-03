@@ -1,5 +1,5 @@
 name:                  gogol-maps-engine
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Maps Engine SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -119,5 +119,5 @@ library
         , Network.Google.MapsEngine.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

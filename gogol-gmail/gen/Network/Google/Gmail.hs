@@ -22,9 +22,11 @@ module Network.Google.Gmail
       gmailService
 
     -- * OAuth Scopes
+    , gmailSettingsBasicScope
     , mailGoogleComScope
     , gmailModifyScope
     , gmailLabelsScope
+    , gmailSettingsSharingScope
     , gmailSendScope
     , gmailInsertScope
     , gmailComposeScope
@@ -110,6 +112,75 @@ module Network.Google.Gmail
     -- ** gmail.users.messages.untrash
     , module Network.Google.Resource.Gmail.Users.Messages.Untrash
 
+    -- ** gmail.users.settings.filters.create
+    , module Network.Google.Resource.Gmail.Users.Settings.Filters.Create
+
+    -- ** gmail.users.settings.filters.delete
+    , module Network.Google.Resource.Gmail.Users.Settings.Filters.Delete
+
+    -- ** gmail.users.settings.filters.get
+    , module Network.Google.Resource.Gmail.Users.Settings.Filters.Get
+
+    -- ** gmail.users.settings.filters.list
+    , module Network.Google.Resource.Gmail.Users.Settings.Filters.List
+
+    -- ** gmail.users.settings.forwardingAddresses.create
+    , module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Create
+
+    -- ** gmail.users.settings.forwardingAddresses.delete
+    , module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Delete
+
+    -- ** gmail.users.settings.forwardingAddresses.get
+    , module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Get
+
+    -- ** gmail.users.settings.forwardingAddresses.list
+    , module Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.List
+
+    -- ** gmail.users.settings.getAutoForwarding
+    , module Network.Google.Resource.Gmail.Users.Settings.GetAutoForwarding
+
+    -- ** gmail.users.settings.getImap
+    , module Network.Google.Resource.Gmail.Users.Settings.GetImap
+
+    -- ** gmail.users.settings.getPop
+    , module Network.Google.Resource.Gmail.Users.Settings.GetPop
+
+    -- ** gmail.users.settings.getVacation
+    , module Network.Google.Resource.Gmail.Users.Settings.GetVacation
+
+    -- ** gmail.users.settings.sendAs.create
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Create
+
+    -- ** gmail.users.settings.sendAs.delete
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Delete
+
+    -- ** gmail.users.settings.sendAs.get
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Get
+
+    -- ** gmail.users.settings.sendAs.list
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.List
+
+    -- ** gmail.users.settings.sendAs.patch
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
+
+    -- ** gmail.users.settings.sendAs.update
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Update
+
+    -- ** gmail.users.settings.sendAs.verify
+    , module Network.Google.Resource.Gmail.Users.Settings.SendAs.Verify
+
+    -- ** gmail.users.settings.updateAutoForwarding
+    , module Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
+
+    -- ** gmail.users.settings.updateImap
+    , module Network.Google.Resource.Gmail.Users.Settings.UpdateImap
+
+    -- ** gmail.users.settings.updatePop
+    , module Network.Google.Resource.Gmail.Users.Settings.UpdatePop
+
+    -- ** gmail.users.settings.updateVacation
+    , module Network.Google.Resource.Gmail.Users.Settings.UpdateVacation
+
     -- ** gmail.users.stop
     , module Network.Google.Resource.Gmail.Users.Stop
 
@@ -141,6 +212,9 @@ module Network.Google.Gmail
     , batchDeleteMessagesRequest
     , bdmrIds
 
+    -- ** FilterCriteriaSizeComparison
+    , FilterCriteriaSizeComparison (..)
+
     -- ** UsersMessagesGetFormat
     , UsersMessagesGetFormat (..)
 
@@ -150,11 +224,30 @@ module Network.Google.Gmail
     , mtrRemoveLabelIds
     , mtrAddLabelIds
 
+    -- ** ListFiltersResponse
+    , ListFiltersResponse
+    , listFiltersResponse
+    , lfrFilter
+
     -- ** ModifyMessageRequest
     , ModifyMessageRequest
     , modifyMessageRequest
     , mmrRemoveLabelIds
     , mmrAddLabelIds
+
+    -- ** ListForwardingAddressesResponse
+    , ListForwardingAddressesResponse
+    , listForwardingAddressesResponse
+    , lfarForwardingAddresses
+
+    -- ** PopSettings
+    , PopSettings
+    , popSettings
+    , psAccessWindow
+    , psDisPosition
+
+    -- ** PopSettingsAccessWindow
+    , PopSettingsAccessWindow (..)
 
     -- ** History
     , History
@@ -166,6 +259,22 @@ module Network.Google.Gmail
     , hId
     , hMessages
 
+    -- ** ForwardingAddressVerificationStatus
+    , ForwardingAddressVerificationStatus (..)
+
+    -- ** FilterCriteria
+    , FilterCriteria
+    , filterCriteria
+    , fcSizeComparison
+    , fcSubject
+    , fcSize
+    , fcExcludeChats
+    , fcTo
+    , fcFrom
+    , fcQuery
+    , fcNegatedQuery
+    , fcHasAttachment
+
     -- ** ProFile
     , ProFile
     , proFile
@@ -174,11 +283,17 @@ module Network.Google.Gmail
     , pfHistoryId
     , pfEmailAddress
 
+    -- ** AutoForwardingDisPosition
+    , AutoForwardingDisPosition (..)
+
     -- ** MessagePartHeader
     , MessagePartHeader
     , messagePartHeader
     , mphValue
     , mphName
+
+    -- ** SendAsVerificationStatus
+    , SendAsVerificationStatus (..)
 
     -- ** ListHistoryResponse
     , ListHistoryResponse
@@ -186,6 +301,19 @@ module Network.Google.Gmail
     , lhrNextPageToken
     , lhrHistory
     , lhrHistoryId
+
+    -- ** SendAs
+    , SendAs
+    , sendAs
+    , saSignature
+    , saReplyToAddress
+    , saTreatAsAlias
+    , saSendAsEmail
+    , saDisplayName
+    , saVerificationStatus
+    , saSmtpMsa
+    , saIsPrimary
+    , saIsDefault
 
     -- ** LabelType
     , LabelType (..)
@@ -227,6 +355,18 @@ module Network.Google.Gmail
     , listLabelsResponse
     , llrLabels
 
+    -- ** VacationSettings
+    , VacationSettings
+    , vacationSettings
+    , vsEnableAutoReply
+    , vsResponseBodyPlainText
+    , vsRestrictToDomain
+    , vsStartTime
+    , vsResponseBodyHTML
+    , vsRestrictToContacts
+    , vsResponseSubject
+    , vsEndTime
+
     -- ** LabelLabelListVisibility
     , LabelLabelListVisibility (..)
 
@@ -242,12 +382,24 @@ module Network.Google.Gmail
     , mpbData
     , mpbAttachmentId
 
+    -- ** AutoForwarding
+    , AutoForwarding
+    , autoForwarding
+    , afEnabled
+    , afDisPosition
+    , afEmailAddress
+
     -- ** ListDraftsResponse
     , ListDraftsResponse
     , listDraftsResponse
     , ldrNextPageToken
     , ldrResultSizeEstimate
     , ldrDrafts
+
+    -- ** ListSendAsResponse
+    , ListSendAsResponse
+    , listSendAsResponse
+    , lsarSendAs
 
     -- ** WatchResponse
     , WatchResponse
@@ -264,6 +416,31 @@ module Network.Google.Gmail
     , dId
     , dMessage
 
+    -- ** SmtpMsa
+    , SmtpMsa
+    , smtpMsa
+    , smSecurityMode
+    , smUsername
+    , smPassword
+    , smHost
+    , smPort
+
+    -- ** ForwardingAddress
+    , ForwardingAddress
+    , forwardingAddress
+    , faForwardingEmail
+    , faVerificationStatus
+
+    -- ** PopSettingsDisPosition
+    , PopSettingsDisPosition (..)
+
+    -- ** Filter
+    , Filter
+    , filter'
+    , fAction
+    , fId
+    , fCriteria
+
     -- ** WatchRequest
     , WatchRequest
     , watchRequest
@@ -273,6 +450,20 @@ module Network.Google.Gmail
 
     -- ** WatchRequestLabelFilterAction
     , WatchRequestLabelFilterAction (..)
+
+    -- ** ImapSettings
+    , ImapSettings
+    , imapSettings
+    , isEnabled
+    , isExpungeBehavior
+    , isAutoExpunge
+    , isMaxFolderSize
+
+    -- ** ImapSettingsExpungeBehavior
+    , ImapSettingsExpungeBehavior (..)
+
+    -- ** SmtpMsaSecurityMode
+    , SmtpMsaSecurityMode (..)
 
     -- ** Message
     , Message
@@ -303,6 +494,13 @@ module Network.Google.Gmail
     , tHistoryId
     , tId
     , tMessages
+
+    -- ** FilterAction
+    , FilterAction
+    , filterAction
+    , faForward
+    , faRemoveLabelIds
+    , faAddLabelIds
 
     -- ** Label
     , Label
@@ -357,6 +555,29 @@ import           Network.Google.Resource.Gmail.Users.Messages.Modify
 import           Network.Google.Resource.Gmail.Users.Messages.Send
 import           Network.Google.Resource.Gmail.Users.Messages.Trash
 import           Network.Google.Resource.Gmail.Users.Messages.Untrash
+import           Network.Google.Resource.Gmail.Users.Settings.Filters.Create
+import           Network.Google.Resource.Gmail.Users.Settings.Filters.Delete
+import           Network.Google.Resource.Gmail.Users.Settings.Filters.Get
+import           Network.Google.Resource.Gmail.Users.Settings.Filters.List
+import           Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Create
+import           Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Delete
+import           Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.Get
+import           Network.Google.Resource.Gmail.Users.Settings.ForwardingAddresses.List
+import           Network.Google.Resource.Gmail.Users.Settings.GetAutoForwarding
+import           Network.Google.Resource.Gmail.Users.Settings.GetImap
+import           Network.Google.Resource.Gmail.Users.Settings.GetPop
+import           Network.Google.Resource.Gmail.Users.Settings.GetVacation
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Create
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Delete
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Get
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.List
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Patch
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Update
+import           Network.Google.Resource.Gmail.Users.Settings.SendAs.Verify
+import           Network.Google.Resource.Gmail.Users.Settings.UpdateAutoForwarding
+import           Network.Google.Resource.Gmail.Users.Settings.UpdateImap
+import           Network.Google.Resource.Gmail.Users.Settings.UpdatePop
+import           Network.Google.Resource.Gmail.Users.Settings.UpdateVacation
 import           Network.Google.Resource.Gmail.Users.Stop
 import           Network.Google.Resource.Gmail.Users.Threads.Delete
 import           Network.Google.Resource.Gmail.Users.Threads.Get
@@ -372,7 +593,31 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Gmail API service.
 type GmailAPI =
-     UsersHistoryListResource :<|> UsersDraftsListResource
+     UsersHistoryListResource :<|>
+       UsersSettingsForwardingAddressesListResource
+       :<|> UsersSettingsForwardingAddressesGetResource
+       :<|> UsersSettingsForwardingAddressesCreateResource
+       :<|> UsersSettingsForwardingAddressesDeleteResource
+       :<|> UsersSettingsFiltersListResource
+       :<|> UsersSettingsFiltersGetResource
+       :<|> UsersSettingsFiltersCreateResource
+       :<|> UsersSettingsFiltersDeleteResource
+       :<|> UsersSettingsSendAsVerifyResource
+       :<|> UsersSettingsSendAsListResource
+       :<|> UsersSettingsSendAsPatchResource
+       :<|> UsersSettingsSendAsGetResource
+       :<|> UsersSettingsSendAsCreateResource
+       :<|> UsersSettingsSendAsDeleteResource
+       :<|> UsersSettingsSendAsUpdateResource
+       :<|> UsersSettingsUpdateImapResource
+       :<|> UsersSettingsGetVacationResource
+       :<|> UsersSettingsGetAutoForwardingResource
+       :<|> UsersSettingsUpdateAutoForwardingResource
+       :<|> UsersSettingsUpdateVacationResource
+       :<|> UsersSettingsGetImapResource
+       :<|> UsersSettingsUpdatePopResource
+       :<|> UsersSettingsGetPopResource
+       :<|> UsersDraftsListResource
        :<|> UsersDraftsGetResource
        :<|> UsersDraftsCreateResource
        :<|> UsersDraftsSendResource

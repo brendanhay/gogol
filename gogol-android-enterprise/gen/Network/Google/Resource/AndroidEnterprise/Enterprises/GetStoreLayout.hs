@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the store layout resource.
+-- Returns the store layout for the enterprise. If the store layout has not
+-- been set, or if the store layout has no homepageId set, returns a
+-- NOT_FOUND error.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.getStoreLayout@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.GetStoreLayout
@@ -49,7 +51,9 @@ type EnterprisesGetStoreLayoutResource =
              "storeLayout" :>
                QueryParam "alt" AltJSON :> Get '[JSON] StoreLayout
 
--- | Returns the store layout resource.
+-- | Returns the store layout for the enterprise. If the store layout has not
+-- been set, or if the store layout has no homepageId set, returns a
+-- NOT_FOUND error.
 --
 -- /See:/ 'enterprisesGetStoreLayout' smart constructor.
 newtype EnterprisesGetStoreLayout = EnterprisesGetStoreLayout'

@@ -1,5 +1,5 @@
 name:                  gogol-dfareporting
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google DCM/DFA Reporting And Trafficking SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2.5@
+    This library is compatible with version @v2.6@
     of the API.
 
 source-repository head
@@ -151,6 +151,7 @@ library
         , Network.Google.Resource.DFAReporting.LandingPages.List
         , Network.Google.Resource.DFAReporting.LandingPages.Patch
         , Network.Google.Resource.DFAReporting.LandingPages.Update
+        , Network.Google.Resource.DFAReporting.Languages.List
         , Network.Google.Resource.DFAReporting.Metros.List
         , Network.Google.Resource.DFAReporting.MobileCarriers.Get
         , Network.Google.Resource.DFAReporting.MobileCarriers.List
@@ -219,6 +220,11 @@ library
         , Network.Google.Resource.DFAReporting.SubAccounts.Update
         , Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
         , Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
+        , Network.Google.Resource.DFAReporting.TargetingTemplates.Get
+        , Network.Google.Resource.DFAReporting.TargetingTemplates.Insert
+        , Network.Google.Resource.DFAReporting.TargetingTemplates.List
+        , Network.Google.Resource.DFAReporting.TargetingTemplates.Patch
+        , Network.Google.Resource.DFAReporting.TargetingTemplates.Update
         , Network.Google.Resource.DFAReporting.UserProFiles.Get
         , Network.Google.Resource.DFAReporting.UserProFiles.List
         , Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
@@ -237,5 +243,5 @@ library
         , Network.Google.DFAReporting.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

@@ -43,12 +43,14 @@ data Groups = Groups'
     , _gIsArchived                         :: !(Maybe Text)
     , _gName                               :: !(Maybe Text)
     , _gMessageDisplayFont                 :: !(Maybe Text)
+    , _gIncludeCustomFooter                :: !(Maybe Text)
     , _gCustomReplyTo                      :: !(Maybe Text)
     , _gWhoCanContactOwner                 :: !(Maybe Text)
     , _gWhoCanAdd                          :: !(Maybe Text)
     , _gWhoCanInvite                       :: !(Maybe Text)
     , _gWhoCanLeaveGroup                   :: !(Maybe Text)
     , _gAllowGoogleCommunication           :: !(Maybe Text)
+    , _gCustomFooterText                   :: !(Maybe Text)
     , _gPrimaryLanguage                    :: !(Maybe Text)
     , _gDescription                        :: !(Maybe Text)
     , _gDefaultMessageDenyNotificationText :: !(Maybe Text)
@@ -97,6 +99,8 @@ data Groups = Groups'
 --
 -- * 'gMessageDisplayFont'
 --
+-- * 'gIncludeCustomFooter'
+--
 -- * 'gCustomReplyTo'
 --
 -- * 'gWhoCanContactOwner'
@@ -108,6 +112,8 @@ data Groups = Groups'
 -- * 'gWhoCanLeaveGroup'
 --
 -- * 'gAllowGoogleCommunication'
+--
+-- * 'gCustomFooterText'
 --
 -- * 'gPrimaryLanguage'
 --
@@ -139,12 +145,14 @@ groups =
     , _gIsArchived = Nothing
     , _gName = Nothing
     , _gMessageDisplayFont = Nothing
+    , _gIncludeCustomFooter = Nothing
     , _gCustomReplyTo = Nothing
     , _gWhoCanContactOwner = Nothing
     , _gWhoCanAdd = Nothing
     , _gWhoCanInvite = Nothing
     , _gWhoCanLeaveGroup = Nothing
     , _gAllowGoogleCommunication = Nothing
+    , _gCustomFooterText = Nothing
     , _gPrimaryLanguage = Nothing
     , _gDescription = Nothing
     , _gDefaultMessageDenyNotificationText = Nothing
@@ -266,6 +274,12 @@ gMessageDisplayFont
   = lens _gMessageDisplayFont
       (\ s a -> s{_gMessageDisplayFont = a})
 
+-- | Whether to include custom footer.
+gIncludeCustomFooter :: Lens' Groups (Maybe Text)
+gIncludeCustomFooter
+  = lens _gIncludeCustomFooter
+      (\ s a -> s{_gIncludeCustomFooter = a})
+
 -- | Default email to which reply to any message should go.
 gCustomReplyTo :: Lens' Groups (Maybe Text)
 gCustomReplyTo
@@ -305,6 +319,12 @@ gAllowGoogleCommunication :: Lens' Groups (Maybe Text)
 gAllowGoogleCommunication
   = lens _gAllowGoogleCommunication
       (\ s a -> s{_gAllowGoogleCommunication = a})
+
+-- | Custom footer text.
+gCustomFooterText :: Lens' Groups (Maybe Text)
+gCustomFooterText
+  = lens _gCustomFooterText
+      (\ s a -> s{_gCustomFooterText = a})
 
 -- | Primary language for the group.
 gPrimaryLanguage :: Lens' Groups (Maybe Text)
@@ -354,12 +374,14 @@ instance FromJSON Groups where
                      <*> (o .:? "isArchived")
                      <*> (o .:? "name")
                      <*> (o .:? "messageDisplayFont")
+                     <*> (o .:? "includeCustomFooter")
                      <*> (o .:? "customReplyTo")
                      <*> (o .:? "whoCanContactOwner")
                      <*> (o .:? "whoCanAdd")
                      <*> (o .:? "whoCanInvite")
                      <*> (o .:? "whoCanLeaveGroup")
                      <*> (o .:? "allowGoogleCommunication")
+                     <*> (o .:? "customFooterText")
                      <*> (o .:? "primaryLanguage")
                      <*> (o .:? "description")
                      <*> (o .:? "defaultMessageDenyNotificationText")
@@ -395,6 +417,7 @@ instance ToJSON Groups where
                   ("isArchived" .=) <$> _gIsArchived,
                   ("name" .=) <$> _gName,
                   ("messageDisplayFont" .=) <$> _gMessageDisplayFont,
+                  ("includeCustomFooter" .=) <$> _gIncludeCustomFooter,
                   ("customReplyTo" .=) <$> _gCustomReplyTo,
                   ("whoCanContactOwner" .=) <$> _gWhoCanContactOwner,
                   ("whoCanAdd" .=) <$> _gWhoCanAdd,
@@ -402,6 +425,7 @@ instance ToJSON Groups where
                   ("whoCanLeaveGroup" .=) <$> _gWhoCanLeaveGroup,
                   ("allowGoogleCommunication" .=) <$>
                     _gAllowGoogleCommunication,
+                  ("customFooterText" .=) <$> _gCustomFooterText,
                   ("primaryLanguage" .=) <$> _gPrimaryLanguage,
                   ("description" .=) <$> _gDescription,
                   ("defaultMessageDenyNotificationText" .=) <$>

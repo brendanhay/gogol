@@ -22,7 +22,7 @@
 --
 -- Get a \`Ruleset\` by name including the full \`Source\` contents.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security/start Firebase Rules API Reference> for @firebaserules.projects.rulesets.get@.
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.rulesets.get@.
 module Network.Google.Resource.FirebaseRules.Projects.Rulesets.Get
     (
     -- * REST Resource
@@ -153,7 +153,9 @@ prgCallback
 instance GoogleRequest ProjectsRulesetsGet where
         type Rs ProjectsRulesetsGet = Ruleset
         type Scopes ProjectsRulesetsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase",
+               "https://www.googleapis.com/auth/firebase.readonly"]
         requestClient ProjectsRulesetsGet'{..}
           = go _prgName _prgXgafv _prgUploadProtocol
               (Just _prgPp)

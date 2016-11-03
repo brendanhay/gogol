@@ -29,7 +29,7 @@ import           Network.Google.Prelude
 -- degrees longitude to [-180.0, 180.0].\"\"\" q, r = divmod(longitude,
 -- 360.0) if r > 180.0 or (r == 180.0 and q \<= -1.0): return r - 360.0
 -- return r def NormalizeLatLng(latitude, longitude): \"\"\"Wraps decimal
--- degrees latitude and longitude to [-180.0, 180.0] and [-90.0, 90.0],
+-- degrees latitude and longitude to [-90.0, 90.0] and [-180.0, 180.0],
 -- respectively.\"\"\" r = latitude % 360.0 if r \<= 90.0: return r,
 -- NormalizeLongitude(longitude) elif r >= 270.0: return r - 360,
 -- NormalizeLongitude(longitude) else: return 180 - r,
@@ -93,7 +93,7 @@ instance ToJSON LatLng where
                  [("latitude" .=) <$> _llLatitude,
                   ("longitude" .=) <$> _llLongitude])
 
--- | The request for google.datastore.v1beta3.Datastore.Rollback.
+-- | The request for Datastore.Rollback.
 --
 -- /See:/ 'rollbackRequest' smart constructor.
 newtype RollbackRequest = RollbackRequest'
@@ -113,7 +113,7 @@ rollbackRequest =
     }
 
 -- | The transaction identifier, returned by a call to
--- google.datastore.v1beta3.Datastore.BeginTransaction.
+-- Datastore.BeginTransaction.
 rrTransaction :: Lens' RollbackRequest (Maybe ByteString)
 rrTransaction
   = lens _rrTransaction
@@ -195,6 +195,7 @@ data QueryResultBatch = QueryResultBatch'
     { _qrbSkippedResults   :: !(Maybe (Textual Int32))
     , _qrbSkippedCursor    :: !(Maybe Base64)
     , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
+    , _qrbSnapshotVersion  :: !(Maybe (Textual Int64))
     , _qrbEntityResults    :: !(Maybe [EntityResult])
     , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
     , _qrbEndCursor        :: !(Maybe Base64)
@@ -210,6 +211,8 @@ data QueryResultBatch = QueryResultBatch'
 --
 -- * 'qrbEntityResultType'
 --
+-- * 'qrbSnapshotVersion'
+--
 -- * 'qrbEntityResults'
 --
 -- * 'qrbMoreResults'
@@ -222,6 +225,7 @@ queryResultBatch =
     { _qrbSkippedResults = Nothing
     , _qrbSkippedCursor = Nothing
     , _qrbEntityResultType = Nothing
+    , _qrbSnapshotVersion = Nothing
     , _qrbEntityResults = Nothing
     , _qrbMoreResults = Nothing
     , _qrbEndCursor = Nothing
@@ -247,6 +251,19 @@ qrbEntityResultType :: Lens' QueryResultBatch (Maybe QueryResultBatchEntityResul
 qrbEntityResultType
   = lens _qrbEntityResultType
       (\ s a -> s{_qrbEntityResultType = a})
+
+-- | The version number of the snapshot this batch was returned from. This
+-- applies to the range of results from the query\'s \`start_cursor\` (or
+-- the beginning of the query if no cursor was given) to this batch\'s
+-- \`end_cursor\` (not the query\'s \`end_cursor\`). In a single
+-- transaction, subsequent query result batches for the same query can have
+-- a greater snapshot version number. Each batch\'s snapshot version is
+-- valid for all preceding batches.
+qrbSnapshotVersion :: Lens' QueryResultBatch (Maybe Int64)
+qrbSnapshotVersion
+  = lens _qrbSnapshotVersion
+      (\ s a -> s{_qrbSnapshotVersion = a})
+      . mapping _Coerce
 
 -- | The results for this batch.
 qrbEntityResults :: Lens' QueryResultBatch [EntityResult]
@@ -275,6 +292,7 @@ instance FromJSON QueryResultBatch where
                  QueryResultBatch' <$>
                    (o .:? "skippedResults") <*> (o .:? "skippedCursor")
                      <*> (o .:? "entityResultType")
+                     <*> (o .:? "snapshotVersion")
                      <*> (o .:? "entityResults" .!= mempty)
                      <*> (o .:? "moreResults")
                      <*> (o .:? "endCursor"))
@@ -286,6 +304,7 @@ instance ToJSON QueryResultBatch where
                  [("skippedResults" .=) <$> _qrbSkippedResults,
                   ("skippedCursor" .=) <$> _qrbSkippedCursor,
                   ("entityResultType" .=) <$> _qrbEntityResultType,
+                  ("snapshotVersion" .=) <$> _qrbSnapshotVersion,
                   ("entityResults" .=) <$> _qrbEntityResults,
                   ("moreResults" .=) <$> _qrbMoreResults,
                   ("endCursor" .=) <$> _qrbEndCursor])
@@ -326,7 +345,7 @@ instance FromJSON EntityProperties where
 instance ToJSON EntityProperties where
         toJSON = toJSON . _epAddtional
 
--- | The request for google.datastore.v1beta3.Datastore.BeginTransaction.
+-- | The request for Datastore.BeginTransaction.
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
 data BeginTransactionRequest =
@@ -347,7 +366,7 @@ instance FromJSON BeginTransactionRequest where
 instance ToJSON BeginTransactionRequest where
         toJSON = const emptyObject
 
--- | The request for google.datastore.v1beta3.Datastore.RunQuery.
+-- | The request for Datastore.RunQuery.
 --
 -- /See:/ 'runQueryRequest' smart constructor.
 data RunQueryRequest = RunQueryRequest'
@@ -419,7 +438,7 @@ instance ToJSON RunQueryRequest where
                   ("query" .=) <$> _rqrQuery,
                   ("readOptions" .=) <$> _rqrReadOptions])
 
--- | The request for google.datastore.v1beta3.Datastore.AllocateIds.
+-- | The request for Datastore.AllocateIds.
 --
 -- /See:/ 'allocateIdsRequest' smart constructor.
 newtype AllocateIdsRequest = AllocateIdsRequest'
@@ -502,7 +521,7 @@ instance ToJSON CompositeFilter where
               (catMaybes
                  [("op" .=) <$> _cfOp, ("filters" .=) <$> _cfFilters])
 
--- | The response for google.datastore.v1beta3.Datastore.BeginTransaction.
+-- | The response for Datastore.BeginTransaction.
 --
 -- /See:/ 'beginTransactionResponse' smart constructor.
 newtype BeginTransactionResponse = BeginTransactionResponse'
@@ -542,37 +561,69 @@ instance ToJSON BeginTransactionResponse where
 -- | The result of applying a mutation.
 --
 -- /See:/ 'mutationResult' smart constructor.
-newtype MutationResult = MutationResult'
-    { _mrKey :: Maybe Key
+data MutationResult = MutationResult'
+    { _mrConflictDetected :: !(Maybe Bool)
+    , _mrKey              :: !(Maybe Key)
+    , _mrVersion          :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MutationResult' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'mrConflictDetected'
+--
 -- * 'mrKey'
+--
+-- * 'mrVersion'
 mutationResult
     :: MutationResult
 mutationResult =
     MutationResult'
-    { _mrKey = Nothing
+    { _mrConflictDetected = Nothing
+    , _mrKey = Nothing
+    , _mrVersion = Nothing
     }
+
+-- | Whether a conflict was detected for this mutation. Always false when a
+-- conflict detection strategy field is not set in the mutation.
+mrConflictDetected :: Lens' MutationResult (Maybe Bool)
+mrConflictDetected
+  = lens _mrConflictDetected
+      (\ s a -> s{_mrConflictDetected = a})
 
 -- | The automatically allocated key. Set only when the mutation allocated a
 -- key.
 mrKey :: Lens' MutationResult (Maybe Key)
 mrKey = lens _mrKey (\ s a -> s{_mrKey = a})
 
+-- | The version of the entity on the server after processing the mutation.
+-- If the mutation doesn\'t change anything on the server, then the version
+-- will be the version of the current entity or, if no entity is present, a
+-- version that is strictly greater than the version of any previous entity
+-- and less than the version of any possible future entity.
+mrVersion :: Lens' MutationResult (Maybe Int64)
+mrVersion
+  = lens _mrVersion (\ s a -> s{_mrVersion = a}) .
+      mapping _Coerce
+
 instance FromJSON MutationResult where
         parseJSON
           = withObject "MutationResult"
-              (\ o -> MutationResult' <$> (o .:? "key"))
+              (\ o ->
+                 MutationResult' <$>
+                   (o .:? "conflictDetected") <*> (o .:? "key") <*>
+                     (o .:? "version"))
 
 instance ToJSON MutationResult where
         toJSON MutationResult'{..}
-          = object (catMaybes [("key" .=) <$> _mrKey])
+          = object
+              (catMaybes
+                 [("conflictDetected" .=) <$> _mrConflictDetected,
+                  ("key" .=) <$> _mrKey,
+                  ("version" .=) <$> _mrVersion])
 
--- | The response for google.datastore.v1beta3.Datastore.AllocateIds.
+-- | The response for Datastore.AllocateIds.
 --
 -- /See:/ 'allocateIdsResponse' smart constructor.
 newtype AllocateIdsResponse = AllocateIdsResponse'
@@ -695,7 +746,7 @@ instance ToJSON GqlQuery where
                   ("queryString" .=) <$> _gqQueryString,
                   ("allowLiterals" .=) <$> _gqAllowLiterals])
 
--- | The response for google.datastore.v1beta3.Datastore.RunQuery.
+-- | The response for Datastore.RunQuery.
 --
 -- /See:/ 'runQueryResponse' smart constructor.
 data RunQueryResponse = RunQueryResponse'
@@ -928,7 +979,7 @@ instance ToJSON Value where
                   ("nullValue" .=) <$> _vNullValue,
                   ("blobValue" .=) <$> _vBlobValue])
 
--- | The request for google.datastore.v1beta3.Datastore.Lookup.
+-- | The request for Datastore.Lookup.
 --
 -- /See:/ 'lookupRequest' smart constructor.
 data LookupRequest = LookupRequest'
@@ -981,15 +1032,18 @@ instance ToJSON LookupRequest where
 --
 -- /See:/ 'mutation' smart constructor.
 data Mutation = Mutation'
-    { _mInsert :: !(Maybe Entity)
-    , _mUpsert :: !(Maybe Entity)
-    , _mDelete :: !(Maybe Key)
-    , _mUpdate :: !(Maybe Entity)
+    { _mBaseVersion :: !(Maybe (Textual Int64))
+    , _mInsert      :: !(Maybe Entity)
+    , _mUpsert      :: !(Maybe Entity)
+    , _mDelete      :: !(Maybe Key)
+    , _mUpdate      :: !(Maybe Entity)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Mutation' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mBaseVersion'
 --
 -- * 'mInsert'
 --
@@ -1002,11 +1056,20 @@ mutation
     :: Mutation
 mutation =
     Mutation'
-    { _mInsert = Nothing
+    { _mBaseVersion = Nothing
+    , _mInsert = Nothing
     , _mUpsert = Nothing
     , _mDelete = Nothing
     , _mUpdate = Nothing
     }
+
+-- | The version of the entity that this mutation is being applied to. If
+-- this does not match the current version on the server, the mutation
+-- conflicts.
+mBaseVersion :: Lens' Mutation (Maybe Int64)
+mBaseVersion
+  = lens _mBaseVersion (\ s a -> s{_mBaseVersion = a})
+      . mapping _Coerce
 
 -- | The entity to insert. The entity must not already exist. The entity
 -- key\'s final path element may be incomplete.
@@ -1034,15 +1097,17 @@ instance FromJSON Mutation where
           = withObject "Mutation"
               (\ o ->
                  Mutation' <$>
-                   (o .:? "insert") <*> (o .:? "upsert") <*>
-                     (o .:? "delete")
+                   (o .:? "baseVersion") <*> (o .:? "insert") <*>
+                     (o .:? "upsert")
+                     <*> (o .:? "delete")
                      <*> (o .:? "update"))
 
 instance ToJSON Mutation where
         toJSON Mutation'{..}
           = object
               (catMaybes
-                 [("insert" .=) <$> _mInsert,
+                 [("baseVersion" .=) <$> _mBaseVersion,
+                  ("insert" .=) <$> _mInsert,
                   ("upsert" .=) <$> _mUpsert,
                   ("delete" .=) <$> _mDelete,
                   ("update" .=) <$> _mUpdate])
@@ -1420,8 +1485,9 @@ instance ToJSON ArrayValue where
 --
 -- /See:/ 'entityResult' smart constructor.
 data EntityResult = EntityResult'
-    { _erCursor :: !(Maybe Base64)
-    , _erEntity :: !(Maybe Entity)
+    { _erCursor  :: !(Maybe Base64)
+    , _erVersion :: !(Maybe (Textual Int64))
+    , _erEntity  :: !(Maybe Entity)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntityResult' with the minimum fields required to make a request.
@@ -1430,12 +1496,15 @@ data EntityResult = EntityResult'
 --
 -- * 'erCursor'
 --
+-- * 'erVersion'
+--
 -- * 'erEntity'
 entityResult
     :: EntityResult
 entityResult =
     EntityResult'
     { _erCursor = Nothing
+    , _erVersion = Nothing
     , _erEntity = Nothing
     }
 
@@ -1446,6 +1515,16 @@ erCursor
   = lens _erCursor (\ s a -> s{_erCursor = a}) .
       mapping _Base64
 
+-- | The version of the entity, a strictly positive number that monotonically
+-- increases with changes to the entity. This field is set for \`FULL\`
+-- entity results. For missing entities in \`LookupResponse\`, this is the
+-- version of the snapshot that was used to look up the entity, and it is
+-- always set except for eventually consistent reads.
+erVersion :: Lens' EntityResult (Maybe Int64)
+erVersion
+  = lens _erVersion (\ s a -> s{_erVersion = a}) .
+      mapping _Coerce
+
 -- | The resulting entity.
 erEntity :: Lens' EntityResult (Maybe Entity)
 erEntity = lens _erEntity (\ s a -> s{_erEntity = a})
@@ -1455,16 +1534,18 @@ instance FromJSON EntityResult where
           = withObject "EntityResult"
               (\ o ->
                  EntityResult' <$>
-                   (o .:? "cursor") <*> (o .:? "entity"))
+                   (o .:? "cursor") <*> (o .:? "version") <*>
+                     (o .:? "entity"))
 
 instance ToJSON EntityResult where
         toJSON EntityResult'{..}
           = object
               (catMaybes
                  [("cursor" .=) <$> _erCursor,
+                  ("version" .=) <$> _erVersion,
                   ("entity" .=) <$> _erEntity])
 
--- | The response for google.datastore.v1beta3.Datastore.Commit.
+-- | The response for Datastore.Commit.
 --
 -- /See:/ 'commitResponse' smart constructor.
 data CommitResponse = CommitResponse'
@@ -1582,7 +1663,7 @@ roReadConsistency
       (\ s a -> s{_roReadConsistency = a})
 
 -- | The identifier of the transaction in which to read. A transaction
--- identifier is returned by a call to BeginTransaction.
+-- identifier is returned by a call to Datastore.BeginTransaction.
 roTransaction :: Lens' ReadOptions (Maybe ByteString)
 roTransaction
   = lens _roTransaction
@@ -1603,8 +1684,7 @@ instance ToJSON ReadOptions where
                  [("readConsistency" .=) <$> _roReadConsistency,
                   ("transaction" .=) <$> _roTransaction])
 
--- | The response for google.datastore.v1beta3.Datastore.Rollback (an empty
--- message).
+-- | The response for Datastore.Rollback. (an empty message).
 --
 -- /See:/ 'rollbackResponse' smart constructor.
 data RollbackResponse =
@@ -1708,7 +1788,7 @@ instance ToJSON Filter where
                  [("compositeFilter" .=) <$> _fCompositeFilter,
                   ("propertyFilter" .=) <$> _fPropertyFilter])
 
--- | The request for google.datastore.v1beta3.Datastore.Commit.
+-- | The request for Datastore.Commit.
 --
 -- /See:/ 'commitRequest' smart constructor.
 data CommitRequest = CommitRequest'
@@ -1753,7 +1833,8 @@ crMode :: Lens' CommitRequest (Maybe CommitRequestMode)
 crMode = lens _crMode (\ s a -> s{_crMode = a})
 
 -- | The identifier of the transaction associated with the commit. A
--- transaction identifier is returned by a call to BeginTransaction.
+-- transaction identifier is returned by a call to
+-- Datastore.BeginTransaction.
 crTransaction :: Lens' CommitRequest (Maybe ByteString)
 crTransaction
   = lens _crTransaction
@@ -1891,7 +1972,7 @@ instance ToJSON Entity where
                  [("key" .=) <$> _eKey,
                   ("properties" .=) <$> _eProperties])
 
--- | The response for google.datastore.v1beta3.Datastore.Lookup.
+-- | The response for Datastore.Lookup.
 --
 -- /See:/ 'lookupResponse' smart constructor.
 data LookupResponse = LookupResponse'

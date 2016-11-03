@@ -1,5 +1,5 @@
 name:                  gogol-deploymentmanager
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Cloud Deployment Manager SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -39,10 +39,13 @@ library
         , Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
         , Network.Google.Resource.DeploymentManager.Deployments.Delete
         , Network.Google.Resource.DeploymentManager.Deployments.Get
+        , Network.Google.Resource.DeploymentManager.Deployments.GetIAMPolicy
         , Network.Google.Resource.DeploymentManager.Deployments.Insert
         , Network.Google.Resource.DeploymentManager.Deployments.List
         , Network.Google.Resource.DeploymentManager.Deployments.Patch
+        , Network.Google.Resource.DeploymentManager.Deployments.SetIAMPolicy
         , Network.Google.Resource.DeploymentManager.Deployments.Stop
+        , Network.Google.Resource.DeploymentManager.Deployments.TestIAMPermissions
         , Network.Google.Resource.DeploymentManager.Deployments.Update
         , Network.Google.Resource.DeploymentManager.Manifests.Get
         , Network.Google.Resource.DeploymentManager.Manifests.List
@@ -57,5 +60,5 @@ library
         , Network.Google.DeploymentManager.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

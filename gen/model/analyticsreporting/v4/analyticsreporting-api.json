@@ -61,7 +61,7 @@
       "id": "PivotHeader"
     },
     "Metric": {
-      "description": "A metric in the request.",
+      "description": "[Metrics](https://support.google.com/analytics/answer/1033861)\nare the quantitative measurements. For example, the metric `ga:users`\nindicates the total number of users for the requested time period.",
       "type": "object",
       "properties": {
         "alias": {
@@ -308,11 +308,11 @@
       "type": "object",
       "properties": {
         "cohortGroup": {
-          "description": "Cohort group associated with this request. If there is a cohort group\nin the request the `ga:cohort` dimension must be present. All requests\nshould have the same cohort definitions.",
+          "description": "Cohort group associated with this request. If there is a cohort group\nin the request the `ga:cohort` dimension must be present.\nEvery [ReportRequest](#ReportRequest) within a `batchGet` method must\ncontain the same `cohortGroup` definition.",
           "$ref": "CohortGroup"
         },
         "dimensions": {
-          "description": "Dimensions requested in the request.",
+          "description": "The dimensions requested.\nRequests can have a total of 7 dimensions.",
           "type": "array",
           "items": {
             "$ref": "Dimension"
@@ -341,28 +341,28 @@
           }
         },
         "pivots": {
-          "description": "The pivot definitions.",
+          "description": "The pivot definitions. Requests can have a maximum of 2 pivots.",
           "type": "array",
           "items": {
             "$ref": "Pivot"
           }
         },
         "dateRanges": {
-          "description": "Date ranges in the request. The request can have a maximum of 2 date\nranges. The response will contain a set of metric values for each\ncombination of the dimensions for each date range in the request. So, if\nthere are two date ranges, there will be two set of metric values, one for\nthe original date range and one for the second date range.\nThe `reportRequest.dateRanges` field should not be specified for cohorts\nor Lifetime value requests.\nIf a date range is not provided, the default date range is (startDate:\ncurrent date - 7 days, endDate: current date - 1 day)",
+          "description": "Date ranges in the request. The request can have a maximum of 2 date\nranges. The response will contain a set of metric values for each\ncombination of the dimensions for each date range in the request. So, if\nthere are two date ranges, there will be two set of metric values, one for\nthe original date range and one for the second date range.\nThe `reportRequest.dateRanges` field should not be specified for cohorts\nor Lifetime value requests.\nIf a date range is not provided, the default date range is (startDate:\ncurrent date - 7 days, endDate: current date - 1 day). Every\n[ReportRequest](#ReportRequest) within a `batchGet` method must\ncontain the same `dateRanges` definition.",
           "type": "array",
           "items": {
             "$ref": "DateRange"
           }
         },
         "segments": {
-          "description": "Segment the data returned for the request. A segment definition helps look\nat a subset of the segment request. A request can contain up to four\nsegments. All requests should have the same segment definitions. Requests\nwith segments must have the `ga:segment` dimension.",
+          "description": "Segment the data returned for the request. A segment definition helps look\nat a subset of the segment request. A request can contain up to four\nsegments. Every [ReportRequest](#ReportRequest) within a\n`batchGet` method must contain the same `segments` definition. Requests\nwith segments must have the `ga:segment` dimension.",
           "type": "array",
           "items": {
             "$ref": "Segment"
           }
         },
         "samplingLevel": {
-          "description": "The desired sampling level. If the sampling level is not specified the\nDEFAULT sampling level will be used. All requests should have same\n`samplingLevel`.",
+          "description": "The desired report\n[sample](https://support.google.com/analytics/answer/2637192) size.\nIf the the `samplingLevel` field is unspecified the `DEFAULT` sampling\nlevel is used. Every [ReportRequest](#ReportRequest) within a\n`batchGet` method must contain the same `samplingLevel` definition. See\n[developer guide](/analytics/devguides/reporting/core/v4/basics#sampling)\n for details.",
           "enum": [
             "SAMPLING_UNSPECIFIED",
             "DEFAULT",
@@ -370,7 +370,7 @@
             "LARGE"
           ],
           "enumDescriptions": [
-            "If sampling level is unspecified the default sampling level is used.",
+            "If the `samplingLevel` field is unspecified the `DEFAULT` sampling level\nis used.",
             "Returns response with a sample size that balances speed and\naccuracy.",
             "It returns a fast response with a smaller sampling size.",
             "Returns a more accurate response using a large sampling size. But this\nmay result in response being slower."
@@ -378,7 +378,7 @@
           "type": "string"
         },
         "metrics": {
-          "description": "Metrics, the quantitative measurements, requested in the request.\nRequests must specify at least one metric.",
+          "description": "The metrics requested.\nRequests must specify at least one metric. Requests can have a\ntotal of 10 metrics.",
           "type": "array",
           "items": {
             "$ref": "Metric"
@@ -405,7 +405,7 @@
           "type": "boolean"
         },
         "viewId": {
-          "description": "Unique View Id for retrieving Analytics data.",
+          "description": "The Analytics\n[view ID](https://support.google.com/analytics/answer/1009618)\nfrom which to retrieve data. Every [ReportRequest](#ReportRequest)\nwithin a `batchGet` method must contain the same `viewId`.",
           "type": "string"
         },
         "pageToken": {
@@ -508,7 +508,7 @@
           "format": "int32"
         },
         "samplingSpaceSizes": {
-          "description": "If sampling was enabled, this returns the total number of samples\npresent, one entry per date range.",
+          "description": "If the results are\n[sampled](https://support.google.com/analytics/answer/2637192),\nthis returns the total number of\nsamples present, one entry per date range. If the results are not sampled\nthis field will not be defined. See\n[developer guide](/analytics/devguides/reporting/core/v4/basics#sampling)\nfor details.",
           "type": "array",
           "items": {
             "type": "string",
@@ -523,7 +523,7 @@
           }
         },
         "samplesReadCounts": {
-          "description": "If sampling was enabled, this returns the total number of samples\nread, one entry per date range",
+          "description": "If the results are\n[sampled](https://support.google.com/analytics/answer/2637192),\nthis returns the total number of samples read, one entry per date range.\nIf the results are not sampled this field will not be defined. See\n[developer guide](/analytics/devguides/reporting/core/v4/basics#sampling)\nfor details.",
           "type": "array",
           "items": {
             "type": "string",
@@ -563,7 +563,7 @@
       "type": "object",
       "properties": {
         "reportRequests": {
-          "description": "Requests, each request will have a separate response.\nThere can be a maximum of 5 requests. All requests should have the same\n`dateRange`, `viewId`, `segments`, `samplingLevel`, and `cohortGroup`.",
+          "description": "Requests, each request will have a separate response.\nThere can be a maximum of 5 requests. All requests should have the same\n`dateRanges`, `viewId`, `segments`, `samplingLevel`, and `cohortGroup`.",
           "type": "array",
           "items": {
             "$ref": "ReportRequest"
@@ -602,7 +602,7 @@
           ],
           "enumDescriptions": [
             "Unspecified order type will be treated as sort based on value.",
-            "The sort order is based on the value of the chosen column; looks only at\nthe first date range",
+            "The sort order is based on the value of the chosen column; looks only at\nthe first date range.",
             "The sort order is based on the difference of the values of the chosen\ncolumn between the first two date ranges.  Usable only if there are\nexactly two date ranges.",
             "The sort order is based on weighted value of the chosen column.  If\ncolumn has n/d format, then weighted value of this ratio will\nbe `(n + totals.n)/(d + totals.d)` Usable only for metrics that\nrepresent ratios.",
             "Histogram order type is applicable only to dimension columns with\nnon-empty histogram-buckets.",
@@ -700,7 +700,7 @@
       "type": "object",
       "properties": {
         "dimensionNames": {
-          "description": "The name of the dimensions in the pivotDimensionValues field in the\nresponse.",
+          "description": "The name of the dimensions in the pivot response.",
           "type": "array",
           "items": {
             "type": "string"
@@ -781,14 +781,14 @@
       "type": "object",
       "properties": {
         "dimensions": {
-          "description": "A list of dimensions to show as pivot columns.",
+          "description": "A list of dimensions to show as pivot columns. A Pivot can have a maximum\nof 4 dimensions. Pivot dimensions are part of the restriction on the\ntotal number of dimensions allowed in the request.",
           "type": "array",
           "items": {
             "$ref": "Dimension"
           }
         },
         "metrics": {
-          "description": "Metrics to aggregate and return.",
+          "description": "The pivot metrics. Pivot metrics are part of the\nrestriction on total number of metrics allowed in the request.",
           "type": "array",
           "items": {
             "$ref": "Metric"
@@ -905,7 +905,7 @@
           }
         },
         "metrics": {
-          "description": "List of metrics for each requested DateRange",
+          "description": "List of metrics for each requested DateRange.",
           "type": "array",
           "items": {
             "$ref": "DateRangeValues"
@@ -915,7 +915,7 @@
       "id": "ReportRow"
     },
     "CohortGroup": {
-      "description": "Defines a cohort group.\nFor example:\n\n    \"cohortGroup\": {\n      \"cohorts\": [{\n        \"name\": \"cohort 1\",\n        \"type\": \"FIRST_VISIT_DATE\",\n        \"dateRange\": { \"startDate\": \"2015-08-01\", \"endDate\": \"2015-08-01\" }\n      },{\n        \"name\": \"cohort 2\"\n         \"type\": \"FIRST_VISIT_DATE\"\n         \"dateRange\": { \"startDate\": \"2015-07-01\", \"endDate\": \"2015-07-01\" }\n      }]\n    }\n",
+      "description": "Defines a cohort group.\nFor example:\n\n    \"cohortGroup\": {\n      \"cohorts\": [{\n        \"name\": \"cohort 1\",\n        \"type\": \"FIRST_VISIT_DATE\",\n        \"dateRange\": { \"startDate\": \"2015-08-01\", \"endDate\": \"2015-08-01\" }\n      },{\n        \"name\": \"cohort 2\"\n         \"type\": \"FIRST_VISIT_DATE\"\n         \"dateRange\": { \"startDate\": \"2015-07-01\", \"endDate\": \"2015-07-01\" }\n      }]\n    }",
       "type": "object",
       "properties": {
         "lifetimeValue": {
@@ -1015,7 +1015,7 @@
       "id": "MetricFilter"
     },
     "Dimension": {
-      "description": "A dimension in the request.",
+      "description": "[Dimensions](https://support.google.com/analytics/answer/1033861)\nare attributes of your data. For example, the dimension `ga:city`\nindicates the city, for example, \"Paris\" or \"New York\", from which\na session originates.",
       "type": "object",
       "properties": {
         "histogramBuckets": {
@@ -1048,7 +1048,7 @@
       "id": "PivotValueRegion"
     }
   },
-  "revision": "20160512",
+  "revision": "20160809",
   "basePath": "",
   "icons": {
     "x32": "http://www.google.com/images/icons/product/search-32.gif",

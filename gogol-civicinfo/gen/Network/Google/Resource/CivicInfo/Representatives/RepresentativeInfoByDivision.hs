@@ -34,6 +34,7 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDiv
 
     -- * Request Lenses
     , rribdRoles
+    , rribdPayload
     , rribdRecursive
     , rribdOcdId
     , rribdLevels
@@ -58,13 +59,15 @@ type RepresentativesRepresentativeInfoByDivisionResource
                    RepresentativesRepresentativeInfoByDivisionLevels
                    :>
                    QueryParam "alt" AltJSON :>
-                     Get '[JSON] RepresentativeInfoData
+                     ReqBody '[JSON] DivisionRepresentativeInfoRequest :>
+                       Get '[JSON] RepresentativeInfoData
 
 -- | Looks up representative information for a single geographic division.
 --
 -- /See:/ 'representativesRepresentativeInfoByDivision' smart constructor.
 data RepresentativesRepresentativeInfoByDivision = RepresentativesRepresentativeInfoByDivision'
     { _rribdRoles     :: !(Maybe [RepresentativesRepresentativeInfoByDivisionRoles])
+    , _rribdPayload   :: !DivisionRepresentativeInfoRequest
     , _rribdRecursive :: !(Maybe Bool)
     , _rribdOcdId     :: !Text
     , _rribdLevels    :: !(Maybe [RepresentativesRepresentativeInfoByDivisionLevels])
@@ -76,17 +79,21 @@ data RepresentativesRepresentativeInfoByDivision = RepresentativesRepresentative
 --
 -- * 'rribdRoles'
 --
+-- * 'rribdPayload'
+--
 -- * 'rribdRecursive'
 --
 -- * 'rribdOcdId'
 --
 -- * 'rribdLevels'
 representativesRepresentativeInfoByDivision
-    :: Text -- ^ 'rribdOcdId'
+    :: DivisionRepresentativeInfoRequest -- ^ 'rribdPayload'
+    -> Text -- ^ 'rribdOcdId'
     -> RepresentativesRepresentativeInfoByDivision
-representativesRepresentativeInfoByDivision pRribdOcdId_ =
+representativesRepresentativeInfoByDivision pRribdPayload_ pRribdOcdId_ =
     RepresentativesRepresentativeInfoByDivision'
     { _rribdRoles = Nothing
+    , _rribdPayload = pRribdPayload_
     , _rribdRecursive = Nothing
     , _rribdOcdId = pRribdOcdId_
     , _rribdLevels = Nothing
@@ -100,6 +107,11 @@ rribdRoles
   = lens _rribdRoles (\ s a -> s{_rribdRoles = a}) .
       _Default
       . _Coerce
+
+-- | Multipart request metadata.
+rribdPayload :: Lens' RepresentativesRepresentativeInfoByDivision DivisionRepresentativeInfoRequest
+rribdPayload
+  = lens _rribdPayload (\ s a -> s{_rribdPayload = a})
 
 -- | If true, information about all divisions contained in the division
 -- requested will be included as well. For example, if querying
@@ -137,6 +149,7 @@ instance GoogleRequest
               _rribdRecursive
               (_rribdLevels ^. _Default)
               (Just AltJSON)
+              _rribdPayload
               civicInfoService
           where go
                   = buildClient

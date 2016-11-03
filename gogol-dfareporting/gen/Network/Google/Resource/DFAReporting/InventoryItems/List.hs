@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of inventory items, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.inventoryItems.list@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.inventoryItems.list@.
 module Network.Google.Resource.DFAReporting.InventoryItems.List
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'InventoryItemsList' request conforms to.
 type InventoryItemsListResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>

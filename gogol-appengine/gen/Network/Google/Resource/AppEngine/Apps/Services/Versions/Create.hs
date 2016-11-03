@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deploys new code and resource files to a version.
+-- Deploys code and resource files to a new version.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.create@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 -- | A resource alias for @appengine.apps.services.versions.create@ method which the
 -- 'AppsServicesVersionsCreate' request conforms to.
 type AppsServicesVersionsCreateResource =
-     "v1beta5" :>
+     "v1" :>
        "apps" :>
          Capture "appsId" Text :>
            "services" :>
@@ -68,7 +68,7 @@ type AppsServicesVersionsCreateResource =
                                  ReqBody '[JSON] Version :>
                                    Post '[JSON] Operation
 
--- | Deploys new code and resource files to a version.
+-- | Deploys code and resource files to a new version.
 --
 -- /See:/ 'appsServicesVersionsCreate' smart constructor.
 data AppsServicesVersionsCreate = AppsServicesVersionsCreate'
@@ -164,13 +164,13 @@ asvcBearerToken
   = lens _asvcBearerToken
       (\ s a -> s{_asvcBearerToken = a})
 
--- | Part of \`name\`. Name of the resource to update. For example:
--- \"apps\/myapp\/services\/default\".
+-- | Part of \`parent\`. Name of the parent resource to create this version
+-- under. Example: \`apps\/myapp\/services\/default\`.
 asvcAppsId :: Lens' AppsServicesVersionsCreate Text
 asvcAppsId
   = lens _asvcAppsId (\ s a -> s{_asvcAppsId = a})
 
--- | Part of \`name\`. See documentation of \`appsId\`.
+-- | Part of \`parent\`. See documentation of \`appsId\`.
 asvcServicesId :: Lens' AppsServicesVersionsCreate Text
 asvcServicesId
   = lens _asvcServicesId

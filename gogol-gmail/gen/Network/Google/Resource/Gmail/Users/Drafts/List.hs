@@ -33,6 +33,7 @@ module Network.Google.Resource.Gmail.Users.Drafts.List
     , UsersDraftsList
 
     -- * Request Lenses
+    , udlQ
     , udlUserId
     , udlIncludeSpamTrash
     , udlPageToken
@@ -50,17 +51,19 @@ type UsersDraftsListResource =
          "users" :>
            Capture "userId" Text :>
              "drafts" :>
-               QueryParam "includeSpamTrash" Bool :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Word32) :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] ListDraftsResponse
+               QueryParam "q" Text :>
+                 QueryParam "includeSpamTrash" Bool :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" (Textual Word32) :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ListDraftsResponse
 
 -- | Lists the drafts in the user\'s mailbox.
 --
 -- /See:/ 'usersDraftsList' smart constructor.
 data UsersDraftsList = UsersDraftsList'
-    { _udlUserId           :: !Text
+    { _udlQ                :: !(Maybe Text)
+    , _udlUserId           :: !Text
     , _udlIncludeSpamTrash :: !Bool
     , _udlPageToken        :: !(Maybe Text)
     , _udlMaxResults       :: !(Textual Word32)
@@ -69,6 +72,8 @@ data UsersDraftsList = UsersDraftsList'
 -- | Creates a value of 'UsersDraftsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'udlQ'
 --
 -- * 'udlUserId'
 --
@@ -81,11 +86,18 @@ usersDraftsList
     :: UsersDraftsList
 usersDraftsList =
     UsersDraftsList'
-    { _udlUserId = "me"
+    { _udlQ = Nothing
+    , _udlUserId = "me"
     , _udlIncludeSpamTrash = False
     , _udlPageToken = Nothing
     , _udlMaxResults = 100
     }
+
+-- | Only return draft messages matching the specified query. Supports the
+-- same query format as the Gmail search box. For example,
+-- \"from:someuser\'example.com rfc822msgid: is:unread\".
+udlQ :: Lens' UsersDraftsList (Maybe Text)
+udlQ = lens _udlQ (\ s a -> s{_udlQ = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -119,7 +131,7 @@ instance GoogleRequest UsersDraftsList where
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersDraftsList'{..}
-          = go _udlUserId (Just _udlIncludeSpamTrash)
+          = go _udlUserId _udlQ (Just _udlIncludeSpamTrash)
               _udlPageToken
               (Just _udlMaxResults)
               (Just AltJSON)

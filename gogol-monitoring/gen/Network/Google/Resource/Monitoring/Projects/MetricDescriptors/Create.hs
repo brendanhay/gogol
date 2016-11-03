@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a new metric descriptor. User-created metric descriptors define
--- [custom metrics](\/monitoring\/custom-metrics).
+-- custom metrics (\/monitoring\/custom-metrics).
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.create@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.metricDescriptors.create@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Create
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type ProjectsMetricDescriptorsCreateResource =
      "v3" :>
        Capture "name" Text :>
          "metricDescriptors" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -66,11 +66,11 @@ type ProjectsMetricDescriptorsCreateResource =
                              Post '[JSON] MetricDescriptor
 
 -- | Creates a new metric descriptor. User-created metric descriptors define
--- [custom metrics](\/monitoring\/custom-metrics).
+-- custom metrics (\/monitoring\/custom-metrics).
 --
 -- /See:/ 'projectsMetricDescriptorsCreate' smart constructor.
 data ProjectsMetricDescriptorsCreate = ProjectsMetricDescriptorsCreate'
-    { _pmdcXgafv          :: !(Maybe Text)
+    { _pmdcXgafv          :: !(Maybe Xgafv)
     , _pmdcUploadProtocol :: !(Maybe Text)
     , _pmdcPp             :: !Bool
     , _pmdcAccessToken    :: !(Maybe Text)
@@ -120,7 +120,7 @@ projectsMetricDescriptorsCreate pPmdcPayload_ pPmdcName_ =
     }
 
 -- | V1 error format.
-pmdcXgafv :: Lens' ProjectsMetricDescriptorsCreate (Maybe Text)
+pmdcXgafv :: Lens' ProjectsMetricDescriptorsCreate (Maybe Xgafv)
 pmdcXgafv
   = lens _pmdcXgafv (\ s a -> s{_pmdcXgafv = a})
 
@@ -158,7 +158,7 @@ pmdcBearerToken
       (\ s a -> s{_pmdcBearerToken = a})
 
 -- | The project on which to execute the request. The format is
--- \`\"projects\/{project_id_or_number}\"\`.
+-- \"projects\/{project_id_or_number}\".
 pmdcName :: Lens' ProjectsMetricDescriptorsCreate Text
 pmdcName = lens _pmdcName (\ s a -> s{_pmdcName = a})
 

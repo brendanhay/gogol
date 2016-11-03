@@ -117,7 +117,7 @@ vmlProcessingState
       . _Default
       . _Coerce
 
--- | How the book was aquired
+-- | How the book was acquired
 vmlAcquireMethod :: Lens' VolumesMybooksList [VolumesMybooksListAcquireMethod]
 vmlAcquireMethod
   = lens _vmlAcquireMethod

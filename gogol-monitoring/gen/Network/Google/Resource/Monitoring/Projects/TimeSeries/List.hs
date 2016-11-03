@@ -23,7 +23,7 @@
 -- Lists time series that match a filter. This method does not require a
 -- Stackdriver account.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.timeSeries.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.timeSeries.list@.
 module Network.Google.Resource.Monitoring.Projects.TimeSeries.List
     (
     -- * REST Resource
@@ -64,8 +64,8 @@ type ProjectsTimeSeriesListResource =
      "v3" :>
        Capture "name" Text :>
          "timeSeries" :>
-           QueryParam "interval.startTime" Text :>
-             QueryParam "$.xgafv" Text :>
+           QueryParam "interval.startTime" DateTime' :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "orderBy" Text :>
                    QueryParam "pp" Bool :>
@@ -80,10 +80,11 @@ type ProjectsTimeSeriesListResource =
                                    :>
                                    QueryParam "filter" Text :>
                                      QueryParam "aggregation.alignmentPeriod"
-                                       Text
+                                       Duration
                                        :>
                                        QueryParam "pageToken" Text :>
-                                         QueryParam "interval.endTime" Text :>
+                                         QueryParam "interval.endTime" DateTime'
+                                           :>
                                            QueryParam "pageSize" (Textual Int32)
                                              :>
                                              QueryParam "callback" Text :>
@@ -96,8 +97,8 @@ type ProjectsTimeSeriesListResource =
 --
 -- /See:/ 'projectsTimeSeriesList' smart constructor.
 data ProjectsTimeSeriesList = ProjectsTimeSeriesList'
-    { _ptslIntervalStartTime             :: !(Maybe Text)
-    , _ptslXgafv                         :: !(Maybe Text)
+    { _ptslIntervalStartTime             :: !(Maybe DateTime')
+    , _ptslXgafv                         :: !(Maybe Xgafv)
     , _ptslUploadProtocol                :: !(Maybe Text)
     , _ptslOrderBy                       :: !(Maybe Text)
     , _ptslPp                            :: !Bool
@@ -110,9 +111,9 @@ data ProjectsTimeSeriesList = ProjectsTimeSeriesList'
     , _ptslView                          :: !(Maybe Text)
     , _ptslAggregationCrossSeriesReducer :: !(Maybe Text)
     , _ptslFilter                        :: !(Maybe Text)
-    , _ptslAggregationAlignmentPeriod    :: !(Maybe Text)
+    , _ptslAggregationAlignmentPeriod    :: !(Maybe Duration)
     , _ptslPageToken                     :: !(Maybe Text)
-    , _ptslIntervalEndTime               :: !(Maybe Text)
+    , _ptslIntervalEndTime               :: !(Maybe DateTime')
     , _ptslPageSize                      :: !(Maybe (Textual Int32))
     , _ptslCallback                      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -184,17 +185,17 @@ projectsTimeSeriesList pPtslName_ =
     , _ptslCallback = Nothing
     }
 
--- | If this value is omitted, the interval is a point in time, \`endTime\`.
--- If \`startTime\` is present, it must be earlier than (less than)
--- \`endTime\`. The interval begins after \`startTime\`—it does not include
--- \`startTime\`.
-ptslIntervalStartTime :: Lens' ProjectsTimeSeriesList (Maybe Text)
+-- | Optional. The beginning of the time interval. The default value for the
+-- start time is the end time. The start time must not be later than the
+-- end time.
+ptslIntervalStartTime :: Lens' ProjectsTimeSeriesList (Maybe UTCTime)
 ptslIntervalStartTime
   = lens _ptslIntervalStartTime
       (\ s a -> s{_ptslIntervalStartTime = a})
+      . mapping _DateTime
 
 -- | V1 error format.
-ptslXgafv :: Lens' ProjectsTimeSeriesList (Maybe Text)
+ptslXgafv :: Lens' ProjectsTimeSeriesList (Maybe Xgafv)
 ptslXgafv
   = lens _ptslXgafv (\ s a -> s{_ptslXgafv = a})
 
@@ -230,11 +231,11 @@ ptslUploadType
 -- | The approach to be used to align individual time series. Not all
 -- alignment functions may be applied to all time series, depending on the
 -- metric type and value type of the original time series. Alignment may
--- change the metric type or the value type of the time series. Time series
+-- change the metric type or the value type of the time series.Time series
 -- data must be aligned in order to perform cross-time series reduction. If
--- \`crossSeriesReducer\` is specified, then \`perSeriesAligner\` must be
--- specified and not equal \`ALIGN_NONE\` and \`alignmentPeriod\` must be
--- specified; otherwise, an error is returned.
+-- crossSeriesReducer is specified, then perSeriesAligner must be specified
+-- and not equal ALIGN_NONE and alignmentPeriod must be specified;
+-- otherwise, an error is returned.
 ptslAggregationPerSeriesAligner :: Lens' ProjectsTimeSeriesList (Maybe Text)
 ptslAggregationPerSeriesAligner
   = lens _ptslAggregationPerSeriesAligner
@@ -251,16 +252,15 @@ ptslBearerToken
 ptslName :: Lens' ProjectsTimeSeriesList Text
 ptslName = lens _ptslName (\ s a -> s{_ptslName = a})
 
--- | The set of fields to preserve when \`crossSeriesReducer\` is specified.
--- The \`groupByFields\` determine how the time series are partitioned into
--- subsets prior to applying the aggregation function. Each subset contains
--- time series that have the same value for each of the grouping fields.
--- Each individual time series is a member of exactly one subset. The
--- \`crossSeriesReducer\` is applied to each subset of time series. Fields
--- not specified in \`groupByFields\` are aggregated away. If
--- \`groupByFields\` is not specified, the time series are aggregated into
--- a single output time series. If \`crossSeriesReducer\` is not defined,
--- this field is ignored.
+-- | The set of fields to preserve when crossSeriesReducer is specified. The
+-- groupByFields determine how the time series are partitioned into subsets
+-- prior to applying the aggregation function. Each subset contains time
+-- series that have the same value for each of the grouping fields. Each
+-- individual time series is a member of exactly one subset. The
+-- crossSeriesReducer is applied to each subset of time series. Fields not
+-- specified in groupByFields are aggregated away. If groupByFields is not
+-- specified, the time series are aggregated into a single output time
+-- series. If crossSeriesReducer is not defined, this field is ignored.
 ptslAggregationGroupByFields :: Lens' ProjectsTimeSeriesList [Text]
 ptslAggregationGroupByFields
   = lens _ptslAggregationGroupByFields
@@ -275,17 +275,17 @@ ptslView = lens _ptslView (\ s a -> s{_ptslView = a})
 -- | The approach to be used to combine time series. Not all reducer
 -- functions may be applied to all time series, depending on the metric
 -- type and the value type of the original time series. Reduction may
--- change the metric type of value type of the time series. Time series
--- data must be aligned in order to perform cross-time series reduction. If
--- \`crossSeriesReducer\` is specified, then \`perSeriesAligner\` must be
--- specified and not equal \`ALIGN_NONE\` and \`alignmentPeriod\` must be
--- specified; otherwise, an error is returned.
+-- change the metric type of value type of the time series.Time series data
+-- must be aligned in order to perform cross-time series reduction. If
+-- crossSeriesReducer is specified, then perSeriesAligner must be specified
+-- and not equal ALIGN_NONE and alignmentPeriod must be specified;
+-- otherwise, an error is returned.
 ptslAggregationCrossSeriesReducer :: Lens' ProjectsTimeSeriesList (Maybe Text)
 ptslAggregationCrossSeriesReducer
   = lens _ptslAggregationCrossSeriesReducer
       (\ s a -> s{_ptslAggregationCrossSeriesReducer = a})
 
--- | A [monitoring filter](\/monitoring\/api\/v3\/filters) that specifies
+-- | A monitoring filter (\/monitoring\/api\/v3\/filters) that specifies
 -- which time series should be returned. The filter must specify a single
 -- metric type, and can additionally specify metric labels and other
 -- information. For example: metric.type =
@@ -295,37 +295,38 @@ ptslFilter :: Lens' ProjectsTimeSeriesList (Maybe Text)
 ptslFilter
   = lens _ptslFilter (\ s a -> s{_ptslFilter = a})
 
--- | The alignment period for per-[time series](TimeSeries) alignment. If
--- present, \`alignmentPeriod\` must be at least 60 seconds. After per-time
--- series alignment, each time series will contain data points only on the
--- period boundaries. If \`perSeriesAligner\` is not specified or equals
--- \`ALIGN_NONE\`, then this field is ignored. If \`perSeriesAligner\` is
--- specified and does not equal \`ALIGN_NONE\`, then this field must be
--- defined; otherwise an error is returned.
-ptslAggregationAlignmentPeriod :: Lens' ProjectsTimeSeriesList (Maybe Text)
+-- | The alignment period for per-time series alignment. If present,
+-- alignmentPeriod must be at least 60 seconds. After per-time series
+-- alignment, each time series will contain data points only on the period
+-- boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE,
+-- then this field is ignored. If perSeriesAligner is specified and does
+-- not equal ALIGN_NONE, then this field must be defined; otherwise an
+-- error is returned.
+ptslAggregationAlignmentPeriod :: Lens' ProjectsTimeSeriesList (Maybe Scientific)
 ptslAggregationAlignmentPeriod
   = lens _ptslAggregationAlignmentPeriod
       (\ s a -> s{_ptslAggregationAlignmentPeriod = a})
+      . mapping _Duration
 
--- | If this field is not empty then it must contain the \`nextPageToken\`
--- value returned by a previous call to this method. Using this field
--- causes the method to return additional results from the previous method
--- call.
+-- | If this field is not empty then it must contain the nextPageToken value
+-- returned by a previous call to this method. Using this field causes the
+-- method to return additional results from the previous method call.
 ptslPageToken :: Lens' ProjectsTimeSeriesList (Maybe Text)
 ptslPageToken
   = lens _ptslPageToken
       (\ s a -> s{_ptslPageToken = a})
 
--- | Required. The end of the interval. The interval includes this time.
-ptslIntervalEndTime :: Lens' ProjectsTimeSeriesList (Maybe Text)
+-- | Required. The end of the time interval.
+ptslIntervalEndTime :: Lens' ProjectsTimeSeriesList (Maybe UTCTime)
 ptslIntervalEndTime
   = lens _ptslIntervalEndTime
       (\ s a -> s{_ptslIntervalEndTime = a})
+      . mapping _DateTime
 
 -- | A positive number that is the maximum number of results to return. When
--- \`view\` field sets to \`FULL\`, it limits the number of \`Points\`
--- server will return; if \`view\` field is \`HEADERS\`, it limits the
--- number of \`TimeSeries\` server will return.
+-- view field sets to FULL, it limits the number of Points server will
+-- return; if view field is HEADERS, it limits the number of TimeSeries
+-- server will return.
 ptslPageSize :: Lens' ProjectsTimeSeriesList (Maybe Int32)
 ptslPageSize
   = lens _ptslPageSize (\ s a -> s{_ptslPageSize = a})

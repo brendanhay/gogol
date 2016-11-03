@@ -23,7 +23,7 @@
 -- Lists monitored resource descriptors that match a filter. This method
 -- does not require a Stackdriver account.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.monitoredResourceDescriptors.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.monitoredResourceDescriptors.list@.
 module Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.List
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type ProjectsMonitoredResourceDescriptorsListResource
      "v3" :>
        Capture "name" Text :>
          "monitoredResourceDescriptors" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -76,7 +76,7 @@ type ProjectsMonitoredResourceDescriptorsListResource
 --
 -- /See:/ 'projectsMonitoredResourceDescriptorsList' smart constructor.
 data ProjectsMonitoredResourceDescriptorsList = ProjectsMonitoredResourceDescriptorsList'
-    { _pmrdlXgafv          :: !(Maybe Text)
+    { _pmrdlXgafv          :: !(Maybe Xgafv)
     , _pmrdlUploadProtocol :: !(Maybe Text)
     , _pmrdlPp             :: !Bool
     , _pmrdlAccessToken    :: !(Maybe Text)
@@ -133,7 +133,7 @@ projectsMonitoredResourceDescriptorsList pPmrdlName_ =
     }
 
 -- | V1 error format.
-pmrdlXgafv :: Lens' ProjectsMonitoredResourceDescriptorsList (Maybe Text)
+pmrdlXgafv :: Lens' ProjectsMonitoredResourceDescriptorsList (Maybe Xgafv)
 pmrdlXgafv
   = lens _pmrdlXgafv (\ s a -> s{_pmrdlXgafv = a})
 
@@ -166,24 +166,23 @@ pmrdlBearerToken
       (\ s a -> s{_pmrdlBearerToken = a})
 
 -- | The project on which to execute the request. The format is
--- \`\"projects\/{project_id_or_number}\"\`.
+-- \"projects\/{project_id_or_number}\".
 pmrdlName :: Lens' ProjectsMonitoredResourceDescriptorsList Text
 pmrdlName
   = lens _pmrdlName (\ s a -> s{_pmrdlName = a})
 
--- | An optional [filter](\/monitoring\/api\/v3\/filters) describing the
+-- | An optional filter (\/monitoring\/api\/v3\/filters) describing the
 -- descriptors to be returned. The filter can reference the descriptor\'s
 -- type and labels. For example, the following filter returns only Google
--- Compute Engine descriptors that have an \`id\` label: resource.type =
+-- Compute Engine descriptors that have an id label: resource.type =
 -- starts_with(\"gce_\") AND resource.label:id
 pmrdlFilter :: Lens' ProjectsMonitoredResourceDescriptorsList (Maybe Text)
 pmrdlFilter
   = lens _pmrdlFilter (\ s a -> s{_pmrdlFilter = a})
 
--- | If this field is not empty then it must contain the \`nextPageToken\`
--- value returned by a previous call to this method. Using this field
--- causes the method to return additional results from the previous method
--- call.
+-- | If this field is not empty then it must contain the nextPageToken value
+-- returned by a previous call to this method. Using this field causes the
+-- method to return additional results from the previous method call.
 pmrdlPageToken :: Lens' ProjectsMonitoredResourceDescriptorsList (Maybe Text)
 pmrdlPageToken
   = lens _pmrdlPageToken

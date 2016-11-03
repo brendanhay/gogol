@@ -22,7 +22,7 @@
 --
 -- Inserts conversions.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.conversions.batchinsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.conversions.batchinsert@.
 module Network.Google.Resource.DFAReporting.Conversions.Batchinsert
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'ConversionsBatchinsert' request conforms to.
 type ConversionsBatchinsertResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "conversions" :>

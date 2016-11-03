@@ -152,6 +152,7 @@ module Network.Google.Genomics.Types
     , BatchCreateAnnotationsRequest
     , batchCreateAnnotationsRequest
     , bcarAnnotations
+    , bcarRequestId
 
     -- * MergeVariantsRequest
     , MergeVariantsRequest
@@ -363,6 +364,11 @@ module Network.Google.Genomics.Types
     , sVariants
     , sNextPageToken
 
+    -- * OperationMetadataRuntimeMetadata
+    , OperationMetadataRuntimeMetadata
+    , operationMetadataRuntimeMetadata
+    , omrmAddtional
+
     -- * ClinicalCondition
     , ClinicalCondition
     , clinicalCondition
@@ -573,10 +579,13 @@ module Network.Google.Genomics.Types
     -- * OperationMetadata
     , OperationMetadata
     , operationMetadata
+    , omClientId
+    , omStartTime
     , omEvents
     , omEndTime
     , omProjectId
     , omCreateTime
+    , omRuntimeMetadata
     , omRequest
 
     -- * SearchAnnotationsRequest
@@ -614,6 +623,14 @@ module Network.Google.Genomics.Types
     , annotationSetInfo
     , asiAddtional
 
+    -- * ComputeEngine
+    , ComputeEngine
+    , computeEngine
+    , ceZone
+    , ceDiskNames
+    , ceMachineType
+    , ceInstanceName
+
     -- * SearchAnnotationSetsResponse
     , SearchAnnotationSetsResponse
     , searchAnnotationSetsResponse
@@ -645,6 +662,8 @@ module Network.Google.Genomics.Types
     -- * OperationEvent
     , OperationEvent
     , operationEvent
+    , oeStartTime
+    , oeEndTime
     , oeDescription
 
     -- * StreamVariantsRequest
@@ -679,6 +698,11 @@ module Network.Google.Genomics.Types
     , pReverseStrand
     , pReferenceName
     , pPosition
+
+    -- * RuntimeMetadata
+    , RuntimeMetadata
+    , runtimeMetadata
+    , rmComputeEngine
 
     -- * SearchReadGroupSetsResponse
     , SearchReadGroupSetsResponse

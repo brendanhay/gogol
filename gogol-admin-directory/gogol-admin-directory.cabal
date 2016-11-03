@@ -1,5 +1,5 @@
 name:                  gogol-admin-directory
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Admin Directory SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -41,6 +41,7 @@ library
         , Network.Google.Resource.Directory.Asps.Delete
         , Network.Google.Resource.Directory.Asps.Get
         , Network.Google.Resource.Directory.Asps.List
+        , Network.Google.Resource.Directory.ChromeosDevices.Action
         , Network.Google.Resource.Directory.ChromeosDevices.Get
         , Network.Google.Resource.Directory.ChromeosDevices.List
         , Network.Google.Resource.Directory.ChromeosDevices.Patch
@@ -138,5 +139,5 @@ library
         , Network.Google.Directory.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

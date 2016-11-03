@@ -28,7 +28,7 @@
 -- may only make changes such as canonicalizing a value or snapping the
 -- location to the correct line of code.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
+-- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Update
     (
     -- * REST Resource
@@ -197,7 +197,7 @@ instance GoogleRequest
              UpdateActiveBreakpointResponse
         type Scopes ControllerDebuggeesBreakpointsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
-               "https://www.googleapis.com/auth/cloud_debugletcontroller"]
+               "https://www.googleapis.com/auth/cloud_debugger"]
         requestClient
           ControllerDebuggeesBreakpointsUpdate'{..}
           = go _cdbuDebuggeeId _cdbuId _cdbuXgafv

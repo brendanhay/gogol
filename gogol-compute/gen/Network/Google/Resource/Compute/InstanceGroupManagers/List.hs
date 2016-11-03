@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.List
     , InstanceGroupManagersList
 
     -- * Request Lenses
+    , igmlOrderBy
     , igmlProject
     , igmlZone
     , igmlFilter
@@ -54,18 +55,20 @@ type InstanceGroupManagersListResource =
              "zones" :>
                Capture "zone" Text :>
                  "instanceGroupManagers" :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] InstanceGroupManagerList
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] InstanceGroupManagerList
 
 -- | Retrieves a list of managed instance groups that are contained within
 -- the specified project and zone.
 --
 -- /See:/ 'instanceGroupManagersList' smart constructor.
 data InstanceGroupManagersList = InstanceGroupManagersList'
-    { _igmlProject    :: !Text
+    { _igmlOrderBy    :: !(Maybe Text)
+    , _igmlProject    :: !Text
     , _igmlZone       :: !Text
     , _igmlFilter     :: !(Maybe Text)
     , _igmlPageToken  :: !(Maybe Text)
@@ -75,6 +78,8 @@ data InstanceGroupManagersList = InstanceGroupManagersList'
 -- | Creates a value of 'InstanceGroupManagersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmlOrderBy'
 --
 -- * 'igmlProject'
 --
@@ -91,12 +96,25 @@ instanceGroupManagersList
     -> InstanceGroupManagersList
 instanceGroupManagersList pIgmlProject_ pIgmlZone_ =
     InstanceGroupManagersList'
-    { _igmlProject = pIgmlProject_
+    { _igmlOrderBy = Nothing
+    , _igmlProject = pIgmlProject_
     , _igmlZone = pIgmlZone_
     , _igmlFilter = Nothing
     , _igmlPageToken = Nothing
     , _igmlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+igmlOrderBy :: Lens' InstanceGroupManagersList (Maybe Text)
+igmlOrderBy
+  = lens _igmlOrderBy (\ s a -> s{_igmlOrderBy = a})
 
 -- | Project ID for this request.
 igmlProject :: Lens' InstanceGroupManagersList Text
@@ -118,16 +136,15 @@ igmlZone = lens _igmlZone (\ s a -> s{_igmlZone = a})
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
 igmlFilter :: Lens' InstanceGroupManagersList (Maybe Text)
 igmlFilter
   = lens _igmlFilter (\ s a -> s{_igmlFilter = a})
@@ -158,7 +175,7 @@ instance GoogleRequest InstanceGroupManagersList
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstanceGroupManagersList'{..}
-          = go _igmlProject _igmlZone _igmlFilter
+          = go _igmlProject _igmlZone _igmlOrderBy _igmlFilter
               _igmlPageToken
               (Just _igmlMaxResults)
               (Just AltJSON)

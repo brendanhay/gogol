@@ -44,11 +44,20 @@ module Network.Google.Sheets
     -- ** sheets.spreadsheets.sheets.copyTo
     , module Network.Google.Resource.Sheets.Spreadsheets.Sheets.CopyTo
 
+    -- ** sheets.spreadsheets.values.append
+    , module Network.Google.Resource.Sheets.Spreadsheets.Values.Append
+
+    -- ** sheets.spreadsheets.values.batchClear
+    , module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClear
+
     -- ** sheets.spreadsheets.values.batchGet
     , module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGet
 
     -- ** sheets.spreadsheets.values.batchUpdate
     , module Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdate
+
+    -- ** sheets.spreadsheets.values.clear
+    , module Network.Google.Resource.Sheets.Spreadsheets.Values.Clear
 
     -- ** sheets.spreadsheets.values.get
     , module Network.Google.Resource.Sheets.Spreadsheets.Values.Get
@@ -98,6 +107,11 @@ module Network.Google.Sheets
     , ChartData
     , chartData
     , cdSourceRange
+
+    -- ** BatchClearValuesRequest
+    , BatchClearValuesRequest
+    , batchClearValuesRequest
+    , bcvrRanges
 
     -- ** BasicChartSeriesTargetAxis
     , BasicChartSeriesTargetAxis (..)
@@ -194,6 +208,12 @@ module Network.Google.Sheets
     , gcRowIndex
     , gcSheetId
 
+    -- ** ClearValuesResponse
+    , ClearValuesResponse
+    , clearValuesResponse
+    , cvrClearedRange
+    , cvrSpreadsheetId
+
     -- ** ClearBasicFilterRequest
     , ClearBasicFilterRequest
     , clearBasicFilterRequest
@@ -261,6 +281,13 @@ module Network.Google.Sheets
     , pcsDomain
     , pcsSeries
     , pcsThreeDimensional
+
+    -- ** AppendValuesResponse
+    , AppendValuesResponse
+    , appendValuesResponse
+    , avrSpreadsheetId
+    , avrUpdates
+    , avrTableRange
 
     -- ** DataValidationRule
     , DataValidationRule
@@ -331,6 +358,10 @@ module Network.Google.Sheets
     , DeleteDimensionRequest
     , deleteDimensionRequest
     , ddrRange
+
+    -- ** ClearValuesRequest
+    , ClearValuesRequest
+    , clearValuesRequest
 
     -- ** FindReplaceRequest
     , FindReplaceRequest
@@ -962,6 +993,12 @@ module Network.Google.Sheets
     , tfBold
     , tfStrikethrough
 
+    -- ** BatchClearValuesResponse
+    , BatchClearValuesResponse
+    , batchClearValuesResponse
+    , bcvrClearedRanges
+    , bcvrSpreadsheetId
+
     -- ** BasicChartDomain
     , BasicChartDomain
     , basicChartDomain
@@ -1069,8 +1106,11 @@ import           Network.Google.Resource.Sheets.Spreadsheets.BatchUpdate
 import           Network.Google.Resource.Sheets.Spreadsheets.Create
 import           Network.Google.Resource.Sheets.Spreadsheets.Get
 import           Network.Google.Resource.Sheets.Spreadsheets.Sheets.CopyTo
+import           Network.Google.Resource.Sheets.Spreadsheets.Values.Append
+import           Network.Google.Resource.Sheets.Spreadsheets.Values.BatchClear
 import           Network.Google.Resource.Sheets.Spreadsheets.Values.BatchGet
 import           Network.Google.Resource.Sheets.Spreadsheets.Values.BatchUpdate
+import           Network.Google.Resource.Sheets.Spreadsheets.Values.Clear
 import           Network.Google.Resource.Sheets.Spreadsheets.Values.Get
 import           Network.Google.Resource.Sheets.Spreadsheets.Values.Update
 import           Network.Google.Sheets.Types
@@ -1082,9 +1122,12 @@ TODO
 -- | Represents the entirety of the methods and resources available for the Google Sheets API service.
 type SheetsAPI =
      SpreadsheetsSheetsCopyToResource :<|>
-       SpreadsheetsValuesGetResource
+       SpreadsheetsValuesBatchClearResource
+       :<|> SpreadsheetsValuesGetResource
+       :<|> SpreadsheetsValuesClearResource
        :<|> SpreadsheetsValuesBatchGetResource
        :<|> SpreadsheetsValuesBatchUpdateResource
+       :<|> SpreadsheetsValuesAppendResource
        :<|> SpreadsheetsValuesUpdateResource
        :<|> SpreadsheetsGetResource
        :<|> SpreadsheetsCreateResource

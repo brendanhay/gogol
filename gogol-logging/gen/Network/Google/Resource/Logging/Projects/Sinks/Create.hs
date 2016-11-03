@@ -22,7 +22,7 @@
 --
 -- Creates a sink.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.projects.sinks.create@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.create@.
 module Network.Google.Resource.Logging.Projects.Sinks.Create
     (
     -- * REST Resource
@@ -33,6 +33,7 @@ module Network.Google.Resource.Logging.Projects.Sinks.Create
     , ProjectsSinksCreate
 
     -- * Request Lenses
+    , pscParent
     , pscXgafv
     , pscUploadProtocol
     , pscPp
@@ -40,7 +41,6 @@ module Network.Google.Resource.Logging.Projects.Sinks.Create
     , pscUploadType
     , pscPayload
     , pscBearerToken
-    , pscProjectName
     , pscCallback
     ) where
 
@@ -50,10 +50,10 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.projects.sinks.create@ method which the
 -- 'ProjectsSinksCreate' request conforms to.
 type ProjectsSinksCreateResource =
-     "v2beta1" :>
-       Capture "projectName" Text :>
+     "v2" :>
+       Capture "parent" Text :>
          "sinks" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -67,20 +67,22 @@ type ProjectsSinksCreateResource =
 --
 -- /See:/ 'projectsSinksCreate' smart constructor.
 data ProjectsSinksCreate = ProjectsSinksCreate'
-    { _pscXgafv          :: !(Maybe Text)
+    { _pscParent         :: !Text
+    , _pscXgafv          :: !(Maybe Xgafv)
     , _pscUploadProtocol :: !(Maybe Text)
     , _pscPp             :: !Bool
     , _pscAccessToken    :: !(Maybe Text)
     , _pscUploadType     :: !(Maybe Text)
     , _pscPayload        :: !LogSink
     , _pscBearerToken    :: !(Maybe Text)
-    , _pscProjectName    :: !Text
     , _pscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pscParent'
 --
 -- * 'pscXgafv'
 --
@@ -96,28 +98,33 @@ data ProjectsSinksCreate = ProjectsSinksCreate'
 --
 -- * 'pscBearerToken'
 --
--- * 'pscProjectName'
---
 -- * 'pscCallback'
 projectsSinksCreate
-    :: LogSink -- ^ 'pscPayload'
-    -> Text -- ^ 'pscProjectName'
+    :: Text -- ^ 'pscParent'
+    -> LogSink -- ^ 'pscPayload'
     -> ProjectsSinksCreate
-projectsSinksCreate pPscPayload_ pPscProjectName_ =
+projectsSinksCreate pPscParent_ pPscPayload_ =
     ProjectsSinksCreate'
-    { _pscXgafv = Nothing
+    { _pscParent = pPscParent_
+    , _pscXgafv = Nothing
     , _pscUploadProtocol = Nothing
     , _pscPp = True
     , _pscAccessToken = Nothing
     , _pscUploadType = Nothing
     , _pscPayload = pPscPayload_
     , _pscBearerToken = Nothing
-    , _pscProjectName = pPscProjectName_
     , _pscCallback = Nothing
     }
 
+-- | Required. The resource in which to create the sink. Example:
+-- \`\"projects\/my-project-id\"\`. The new sink must be provided in the
+-- request.
+pscParent :: Lens' ProjectsSinksCreate Text
+pscParent
+  = lens _pscParent (\ s a -> s{_pscParent = a})
+
 -- | V1 error format.
-pscXgafv :: Lens' ProjectsSinksCreate (Maybe Text)
+pscXgafv :: Lens' ProjectsSinksCreate (Maybe Xgafv)
 pscXgafv = lens _pscXgafv (\ s a -> s{_pscXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -153,14 +160,6 @@ pscBearerToken
   = lens _pscBearerToken
       (\ s a -> s{_pscBearerToken = a})
 
--- | The resource name of the project in which to create the sink. Example:
--- \`\"projects\/my-project-id\"\`. The new sink must be provided in the
--- request.
-pscProjectName :: Lens' ProjectsSinksCreate Text
-pscProjectName
-  = lens _pscProjectName
-      (\ s a -> s{_pscProjectName = a})
-
 -- | JSONP
 pscCallback :: Lens' ProjectsSinksCreate (Maybe Text)
 pscCallback
@@ -172,7 +171,7 @@ instance GoogleRequest ProjectsSinksCreate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient ProjectsSinksCreate'{..}
-          = go _pscProjectName _pscXgafv _pscUploadProtocol
+          = go _pscParent _pscXgafv _pscUploadProtocol
               (Just _pscPp)
               _pscAccessToken
               _pscUploadType

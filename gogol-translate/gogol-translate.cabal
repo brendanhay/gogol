@@ -1,5 +1,5 @@
 name:                  gogol-translate
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Translate SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Lets you translate text from one language to another
+    Translates text from one language to another.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -44,5 +44,5 @@ library
         , Network.Google.Translate.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

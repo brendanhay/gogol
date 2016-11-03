@@ -22,7 +22,7 @@
 --
 -- Retrieves a report file by its report ID and file ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.files.get@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.files.get@.
 module Network.Google.Resource.DFAReporting.Files.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FilesGet' request conforms to.
 type FilesGetResource =
      "dfareporting" :>
-       "v2.5" :>
+       "v2.6" :>
          "reports" :>
            Capture "reportId" (Textual Int64) :>
              "files" :>
@@ -52,7 +52,7 @@ type FilesGetResource =
                  QueryParam "alt" AltJSON :> Get '[JSON] File
        :<|>
        "dfareporting" :>
-         "v2.5" :>
+         "v2.6" :>
            "reports" :>
              Capture "reportId" (Textual Int64) :>
                "files" :>

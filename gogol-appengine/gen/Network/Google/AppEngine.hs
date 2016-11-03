@@ -32,11 +32,23 @@ module Network.Google.AppEngine
     -- ** appengine.apps.get
     , module Network.Google.Resource.AppEngine.Apps.Get
 
+    -- ** appengine.apps.locations.get
+    , module Network.Google.Resource.AppEngine.Apps.Locations.Get
+
+    -- ** appengine.apps.locations.list
+    , module Network.Google.Resource.AppEngine.Apps.Locations.List
+
     -- ** appengine.apps.operations.get
     , module Network.Google.Resource.AppEngine.Apps.Operations.Get
 
     -- ** appengine.apps.operations.list
     , module Network.Google.Resource.AppEngine.Apps.Operations.List
+
+    -- ** appengine.apps.patch
+    , module Network.Google.Resource.AppEngine.Apps.Patch
+
+    -- ** appengine.apps.repair
+    , module Network.Google.Resource.AppEngine.Apps.Repair
 
     -- ** appengine.apps.services.delete
     , module Network.Google.Resource.AppEngine.Apps.Services.Delete
@@ -59,6 +71,15 @@ module Network.Google.AppEngine
     -- ** appengine.apps.services.versions.get
     , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
 
+    -- ** appengine.apps.services.versions.instances.debug
+    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Debug
+
+    -- ** appengine.apps.services.versions.instances.delete
+    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Delete
+
+    -- ** appengine.apps.services.versions.instances.get
+    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Get
+
     -- ** appengine.apps.services.versions.instances.list
     , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
 
@@ -68,15 +89,21 @@ module Network.Google.AppEngine
     -- ** appengine.apps.services.versions.patch
     , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
 
+    -- ** appengine.experimental.apps.operations.get
+    , module Network.Google.Resource.AppEngine.Experimental.Apps.Operations.Get
+
+    -- ** appengine.experimental.apps.operations.list
+    , module Network.Google.Resource.AppEngine.Experimental.Apps.Operations.List
+
     -- * Types
 
     -- ** NetworkUtilization
     , NetworkUtilization
     , networkUtilization
-    , nuTargetReceivedBytesPerSec
-    , nuTargetSentPacketsPerSec
-    , nuTargetReceivedPacketsPerSec
-    , nuTargetSentBytesPerSec
+    , nuTargetReceivedBytesPerSecond
+    , nuTargetSentPacketsPerSecond
+    , nuTargetReceivedPacketsPerSecond
+    , nuTargetSentBytesPerSecond
 
     -- ** Status
     , Status
@@ -89,6 +116,11 @@ module Network.Google.AppEngine
     , OperationSchema
     , operationSchema
     , osAddtional
+
+    -- ** LocationSchema
+    , LocationSchema
+    , locationSchema
+    , lsAddtional
 
     -- ** TrafficSplit
     , TrafficSplit
@@ -125,13 +157,19 @@ module Network.Google.AppEngine
     , lName
     , lVersion
 
+    -- ** ListLocationsResponse
+    , ListLocationsResponse
+    , listLocationsResponse
+    , llrNextPageToken
+    , llrLocations
+
     -- ** DiskUtilization
     , DiskUtilization
     , diskUtilization
-    , duTargetWriteOpsPerSec
-    , duTargetReadOpsPerSec
-    , duTargetWriteBytesPerSec
-    , duTargetReadBytesPerSec
+    , duTargetReadBytesPerSecond
+    , duTargetReadOpsPerSecond
+    , duTargetWriteOpsPerSecond
+    , duTargetWriteBytesPerSecond
 
     -- ** ListOperationsResponse
     , ListOperationsResponse
@@ -169,13 +207,13 @@ module Network.Google.AppEngine
     , application
     , aDefaultHostname
     , aDefaultCookieExpiration
-    , aLocation
     , aAuthDomain
     , aCodeBucket
     , aName
     , aDispatchRules
     , aDefaultBucket
     , aId
+    , aLocationId
 
     -- ** VersionBetaSettings
     , VersionBetaSettings
@@ -189,6 +227,14 @@ module Network.Google.AppEngine
     , sName
     , sId
 
+    -- ** Location
+    , Location
+    , location
+    , locName
+    , locMetadata
+    , locLabels
+    , locLocationId
+
     -- ** Operation
     , Operation
     , operation
@@ -197,6 +243,12 @@ module Network.Google.AppEngine
     , oResponse
     , oName
     , oMetadata
+
+    -- ** ZipInfo
+    , ZipInfo
+    , zipInfo
+    , ziFilesCount
+    , ziSourceURL
 
     -- ** URLDispatchRule
     , URLDispatchRule
@@ -260,6 +312,10 @@ module Network.Google.AppEngine
     , nInstanceTag
     , nName
 
+    -- ** DebugInstanceRequest
+    , DebugInstanceRequest
+    , debugInstanceRequest
+
     -- ** StaticFilesHandlerHTTPHeaders
     , StaticFilesHandlerHTTPHeaders
     , staticFilesHandlerHTTPHeaders
@@ -299,12 +355,19 @@ module Network.Google.AppEngine
     , bsMaxInstances
     , bsIdleTimeout
 
+    -- ** OperationMetadataV1
+    , OperationMetadataV1
+    , operationMetadataV1
+    , omvInsertTime
+    , omvUser
+    , omvMethod
+    , omvEndTime
+    , omvTarget
+
     -- ** Version
     , Version
     , version
-    , vCreationTime
     , vRuntime
-    , vDeployer
     , vNobuildFilesRegex
     , vInstanceClass
     , vHealthCheck
@@ -312,6 +375,7 @@ module Network.Google.AppEngine
     , vDefaultExpiration
     , vAutomaticScaling
     , vErrorHandlers
+    , vCreatedBy
     , vVM
     , vHandlers
     , vInboundServices
@@ -327,7 +391,9 @@ module Network.Google.AppEngine
     , vEnvVariables
     , vServingStatus
     , vDiskUsageBytes
+    , vCreateTime
     , vLibraries
+    , vVersionURL
     , vDeployment
 
     -- ** StaticFilesHandler
@@ -347,6 +413,17 @@ module Network.Google.AppEngine
     , ehMimeType
     , ehErrorCode
     , ehStaticFile
+
+    -- ** LocationLabels
+    , LocationLabels
+    , locationLabels
+    , llAddtional
+
+    -- ** LocationMetadata
+    , LocationMetadata
+    , locationMetadata
+    , lmStandardEnvironmentAvailable
+    , lmFlexibleEnvironmentAvailable
 
     -- ** OperationMetadata
     , OperationMetadata
@@ -368,13 +445,11 @@ module Network.Google.AppEngine
     , RequestUtilization
     , requestUtilization
     , ruTargetConcurrentRequests
-    , ruTargetRequestCountPerSec
+    , ruTargetRequestCountPerSecond
 
-    -- ** SourceReference
-    , SourceReference
-    , sourceReference
-    , srRepository
-    , srRevisionId
+    -- ** RepairApplicationRequest
+    , RepairApplicationRequest
+    , repairApplicationRequest
 
     -- ** OperationResponse
     , OperationResponse
@@ -392,32 +467,36 @@ module Network.Google.AppEngine
     , iMemoryUsage
     , iVMStatus
     , iVMZoneName
+    , iStartTime
     , iVMId
     , iAvailability
     , iVMName
     , iName
-    , iVMUnlocked
+    , iVMDebugEnabled
     , iRequests
     , iQps
     , iId
     , iErrors
     , iAverageLatency
-    , iStartTimestamp
     , iAppEngineRelease
 
     -- ** Deployment
     , Deployment
     , deployment
+    , dZip
     , dContainer
     , dFiles
-    , dSourceReferences
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.AppEngine.Apps.Get
+import           Network.Google.Resource.AppEngine.Apps.Locations.Get
+import           Network.Google.Resource.AppEngine.Apps.Locations.List
 import           Network.Google.Resource.AppEngine.Apps.Operations.Get
 import           Network.Google.Resource.AppEngine.Apps.Operations.List
+import           Network.Google.Resource.AppEngine.Apps.Patch
+import           Network.Google.Resource.AppEngine.Apps.Repair
 import           Network.Google.Resource.AppEngine.Apps.Services.Delete
 import           Network.Google.Resource.AppEngine.Apps.Services.Get
 import           Network.Google.Resource.AppEngine.Apps.Services.List
@@ -425,9 +504,14 @@ import           Network.Google.Resource.AppEngine.Apps.Services.Patch
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
+import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Debug
+import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Delete
+import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.Get
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.List
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
+import           Network.Google.Resource.AppEngine.Experimental.Apps.Operations.Get
+import           Network.Google.Resource.AppEngine.Experimental.Apps.Operations.List
 
 {- $resources
 TODO
@@ -437,7 +521,12 @@ TODO
 type AppEngineAPI =
      AppsOperationsListResource :<|>
        AppsOperationsGetResource
+       :<|> AppsLocationsListResource
+       :<|> AppsLocationsGetResource
        :<|> AppsServicesVersionsInstancesListResource
+       :<|> AppsServicesVersionsInstancesGetResource
+       :<|> AppsServicesVersionsInstancesDebugResource
+       :<|> AppsServicesVersionsInstancesDeleteResource
        :<|> AppsServicesVersionsListResource
        :<|> AppsServicesVersionsPatchResource
        :<|> AppsServicesVersionsGetResource
@@ -447,4 +536,8 @@ type AppEngineAPI =
        :<|> AppsServicesPatchResource
        :<|> AppsServicesGetResource
        :<|> AppsServicesDeleteResource
+       :<|> AppsPatchResource
        :<|> AppsGetResource
+       :<|> AppsRepairResource
+       :<|> ExperimentalAppsOperationsListResource
+       :<|> ExperimentalAppsOperationsGetResource

@@ -72,8 +72,9 @@ mrdName :: Lens' MonitoredResourceDescriptor (Maybe Text)
 mrdName = lens _mrdName (\ s a -> s{_mrdName = a})
 
 -- | Optional. A concise name for the monitored resource type that might be
--- displayed in user interfaces. For example, \`\"Google Cloud SQL
--- Database\"\`.
+-- displayed in user interfaces. It should be a Title Cased Noun Phrase,
+-- without any article or other determiners. For example, \`\"Google Cloud
+-- SQL Database\"\`.
 mrdDisplayName :: Lens' MonitoredResourceDescriptor (Maybe Text)
 mrdDisplayName
   = lens _mrdDisplayName
@@ -90,7 +91,8 @@ mrdLabels
       . _Coerce
 
 -- | Required. The monitored resource type. For example, the type
--- \`\"cloudsql_database\"\` represents databases in Google Cloud SQL.
+-- \`\"cloudsql_database\"\` represents databases in Google Cloud SQL. The
+-- maximum length of this value is 256 characters.
 mrdType :: Lens' MonitoredResourceDescriptor (Maybe Text)
 mrdType = lens _mrdType (\ s a -> s{_mrdType = a})
 
@@ -121,110 +123,12 @@ instance ToJSON MonitoredResourceDescriptor where
                   ("type" .=) <$> _mrdType,
                   ("description" .=) <$> _mrdDescription])
 
--- | The \`Status\` type defines a logical error model that is suitable for
--- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
--- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
--- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` which can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
--- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting
--- purpose. - Batch operations. If a client uses batch request and batch
--- response, the \`Status\` message should be used directly inside batch
--- response, one for each error sub-response. - Asynchronous operations. If
--- an API call embeds asynchronous operation results in its response, the
--- status of those operations should be represented directly using the
--- \`Status\` message. - Logging. If some API errors are stored in logs,
--- the message \`Status\` could be used directly after any stripping needed
--- for security\/privacy reasons.
---
--- /See:/ 'status' smart constructor.
-data Status = Status'
-    { _sDetails :: !(Maybe [StatusDetailsItem])
-    , _sCode    :: !(Maybe (Textual Int32))
-    , _sMessage :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Status' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sDetails'
---
--- * 'sCode'
---
--- * 'sMessage'
-status
-    :: Status
-status =
-    Status'
-    { _sDetails = Nothing
-    , _sCode = Nothing
-    , _sMessage = Nothing
-    }
-
--- | A list of messages that carry the error details. There will be a common
--- set of message types for APIs to use.
-sDetails :: Lens' Status [StatusDetailsItem]
-sDetails
-  = lens _sDetails (\ s a -> s{_sDetails = a}) .
-      _Default
-      . _Coerce
-
--- | The status code, which should be an enum value of google.rpc.Code.
-sCode :: Lens' Status (Maybe Int32)
-sCode
-  = lens _sCode (\ s a -> s{_sCode = a}) .
-      mapping _Coerce
-
--- | A developer-facing error message, which should be in English. Any
--- user-facing error message should be localized and sent in the
--- google.rpc.Status.details field, or localized by the client.
-sMessage :: Lens' Status (Maybe Text)
-sMessage = lens _sMessage (\ s a -> s{_sMessage = a})
-
-instance FromJSON Status where
-        parseJSON
-          = withObject "Status"
-              (\ o ->
-                 Status' <$>
-                   (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
-                     (o .:? "message"))
-
-instance ToJSON Status where
-        toJSON Status'{..}
-          = object
-              (catMaybes
-                 [("details" .=) <$> _sDetails,
-                  ("code" .=) <$> _sCode,
-                  ("message" .=) <$> _sMessage])
-
 -- | Result returned from \`ListLogEntries\`.
 --
 -- /See:/ 'listLogEntriesResponse' smart constructor.
 data ListLogEntriesResponse = ListLogEntriesResponse'
-    { _llerNextPageToken   :: !(Maybe Text)
-    , _llerEntries         :: !(Maybe [LogEntry])
-    , _llerProjectIdErrors :: !(Maybe ListLogEntriesResponseProjectIdErrors)
+    { _llerNextPageToken :: !(Maybe Text)
+    , _llerEntries       :: !(Maybe [LogEntry])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogEntriesResponse' with the minimum fields required to make a request.
@@ -234,19 +138,16 @@ data ListLogEntriesResponse = ListLogEntriesResponse'
 -- * 'llerNextPageToken'
 --
 -- * 'llerEntries'
---
--- * 'llerProjectIdErrors'
 listLogEntriesResponse
     :: ListLogEntriesResponse
 listLogEntriesResponse =
     ListLogEntriesResponse'
     { _llerNextPageToken = Nothing
     , _llerEntries = Nothing
-    , _llerProjectIdErrors = Nothing
     }
 
--- | If there are more results than were returned, then \`nextPageToken\` is
--- included in the response. To get the next set of results, call this
+-- | If there might be more results than appear in this response, then
+-- \`nextPageToken\` is included. To get the next set of results, call this
 -- method again using the value of \`nextPageToken\` as \`pageToken\`.
 llerNextPageToken :: Lens' ListLogEntriesResponse (Maybe Text)
 llerNextPageToken
@@ -260,29 +161,20 @@ llerEntries
       _Default
       . _Coerce
 
--- | If partial_success is true, contains the project ids that had errors and
--- the associated errors.
-llerProjectIdErrors :: Lens' ListLogEntriesResponse (Maybe ListLogEntriesResponseProjectIdErrors)
-llerProjectIdErrors
-  = lens _llerProjectIdErrors
-      (\ s a -> s{_llerProjectIdErrors = a})
-
 instance FromJSON ListLogEntriesResponse where
         parseJSON
           = withObject "ListLogEntriesResponse"
               (\ o ->
                  ListLogEntriesResponse' <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "entries" .!= mempty)
-                     <*> (o .:? "projectIdErrors"))
+                     (o .:? "entries" .!= mempty))
 
 instance ToJSON ListLogEntriesResponse where
         toJSON ListLogEntriesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _llerNextPageToken,
-                  ("entries" .=) <$> _llerEntries,
-                  ("projectIdErrors" .=) <$> _llerProjectIdErrors])
+                  ("entries" .=) <$> _llerEntries])
 
 -- | Required. Values for all of the labels listed in the associated
 -- monitored resource descriptor. For example, Cloud SQL databases use the
@@ -350,8 +242,8 @@ llmrMetrics
       _Default
       . _Coerce
 
--- | If there are more results than were returned, then \`nextPageToken\` is
--- included in the response. To get the next set of results, call this
+-- | If there might be more results than appear in this response, then
+-- \`nextPageToken\` is included. To get the next set of results, call this
 -- method again using the value of \`nextPageToken\` as \`pageToken\`.
 llmrNextPageToken :: Lens' ListLogMetricsResponse (Maybe Text)
 llmrNextPageToken
@@ -408,8 +300,13 @@ writeLogEntriesRequest =
     , _wlerLogName = Nothing
     }
 
--- | Required. The log entries to write. The log entries must have values for
--- all required fields.
+-- | Required. The log entries to write. Values supplied for the fields
+-- \`log_name\`, \`resource\`, and \`labels\` in this \`entries.write\`
+-- request are added to those log entries that do not provide their own
+-- values for the fields. To improve throughput and to avoid exceeding the
+-- [quota limit](\/logging\/quota-policy) for calls to \`entries.write\`,
+-- you should write multiple log entries at once rather than calling this
+-- method for each individual log entry.
 wlerEntries :: Lens' WriteLogEntriesRequest [LogEntry]
 wlerEntries
   = lens _wlerEntries (\ s a -> s{_wlerEntries = a}) .
@@ -426,23 +323,26 @@ wlerPartialSuccess
   = lens _wlerPartialSuccess
       (\ s a -> s{_wlerPartialSuccess = a})
 
--- | Optional. A default monitored resource for those log entries in
--- \`entries\` that do not specify their own \`resource\`.
+-- | Optional. A default monitored resource object that is assigned to all
+-- log entries in \`entries\` that do not specify a value for \`resource\`.
+-- Example: { \"type\": \"gce_instance\", \"labels\": { \"zone\":
+-- \"us-central1-a\", \"instance_id\": \"00000000000000000000\" }} See
+-- LogEntry.
 wlerResource :: Lens' WriteLogEntriesRequest (Maybe MonitoredResource)
 wlerResource
   = lens _wlerResource (\ s a -> s{_wlerResource = a})
 
--- | Optional. User-defined \`key:value\` items that are added to the
--- \`labels\` field of each log entry in \`entries\`, except when a log
--- entry specifies its own \`key:value\` item with the same key. Example:
--- \`{ \"size\": \"large\", \"color\":\"red\" }\`
+-- | Optional. Default labels that are added to the \`labels\` field of all
+-- log entries in \`entries\`. If a log entry already has a label with the
+-- same key as a label in this parameter, then the log entry\'s label is
+-- not changed. See LogEntry.
 wlerLabels :: Lens' WriteLogEntriesRequest (Maybe WriteLogEntriesRequestLabels)
 wlerLabels
   = lens _wlerLabels (\ s a -> s{_wlerLabels = a})
 
--- | Optional. A default log resource name for those log entries in
--- \`entries\` that do not specify their own \`logName\`. Example:
--- \`\"projects\/my-project\/logs\/syslog\"\`. See LogEntry.
+-- | Optional. A default log resource name that is assigned to all log
+-- entries in \`entries\` that do not specify a value for \`log_name\`.
+-- Example: \`\"projects\/my-project\/logs\/syslog\"\`. See LogEntry.
 wlerLogName :: Lens' WriteLogEntriesRequest (Maybe Text)
 wlerLogName
   = lens _wlerLogName (\ s a -> s{_wlerLogName = a})
@@ -555,9 +455,9 @@ lsrSinks
       _Default
       . _Coerce
 
--- | If there are more results than were returned, then \`nextPageToken\` is
--- included in the response. To get the next set of results, call this
--- method again using the value of \`nextPageToken\` as \`pageToken\`.
+-- | If there might be more results than appear in this response, then
+-- \`nextPageToken\` is included. To get the next set of results, call the
+-- same method again using the value of \`nextPageToken\` as \`pageToken\`.
 lsrNextPageToken :: Lens' ListSinksResponse (Maybe Text)
 lsrNextPageToken
   = lens _lsrNextPageToken
@@ -592,11 +492,11 @@ data RequestLog = RequestLog'
     , _rlVersionId         :: !(Maybe Text)
     , _rlHTTPVersion       :: !(Maybe Text)
     , _rlTaskName          :: !(Maybe Text)
-    , _rlPendingTime       :: !(Maybe Text)
+    , _rlPendingTime       :: !(Maybe Duration)
     , _rlWasLoadingRequest :: !(Maybe Bool)
     , _rlFirst             :: !(Maybe Bool)
-    , _rlStartTime         :: !(Maybe Text)
-    , _rlLatency           :: !(Maybe Text)
+    , _rlStartTime         :: !(Maybe DateTime')
+    , _rlLatency           :: !(Maybe Duration)
     , _rlURLMapEntry       :: !(Maybe Text)
     , _rlCost              :: !(Maybe (Textual Double))
     , _rlReferrer          :: !(Maybe Text)
@@ -605,7 +505,7 @@ data RequestLog = RequestLog'
     , _rlAppId             :: !(Maybe Text)
     , _rlMethod            :: !(Maybe Text)
     , _rlResource          :: !(Maybe Text)
-    , _rlEndTime           :: !(Maybe Text)
+    , _rlEndTime           :: !(Maybe DateTime')
     , _rlFinished          :: !(Maybe Bool)
     , _rlMegaCycles        :: !(Maybe (Textual Int64))
     , _rlUserAgent         :: !(Maybe Text)
@@ -776,10 +676,11 @@ rlTaskName
   = lens _rlTaskName (\ s a -> s{_rlTaskName = a})
 
 -- | Time this request spent in the pending request queue.
-rlPendingTime :: Lens' RequestLog (Maybe Text)
+rlPendingTime :: Lens' RequestLog (Maybe Scientific)
 rlPendingTime
   = lens _rlPendingTime
       (\ s a -> s{_rlPendingTime = a})
+      . mapping _Duration
 
 -- | Whether this was a loading request for the instance.
 rlWasLoadingRequest :: Lens' RequestLog (Maybe Bool)
@@ -794,14 +695,16 @@ rlFirst :: Lens' RequestLog (Maybe Bool)
 rlFirst = lens _rlFirst (\ s a -> s{_rlFirst = a})
 
 -- | Time when the request started.
-rlStartTime :: Lens' RequestLog (Maybe Text)
+rlStartTime :: Lens' RequestLog (Maybe UTCTime)
 rlStartTime
-  = lens _rlStartTime (\ s a -> s{_rlStartTime = a})
+  = lens _rlStartTime (\ s a -> s{_rlStartTime = a}) .
+      mapping _DateTime
 
 -- | Latency of the request.
-rlLatency :: Lens' RequestLog (Maybe Text)
+rlLatency :: Lens' RequestLog (Maybe Scientific)
 rlLatency
-  = lens _rlLatency (\ s a -> s{_rlLatency = a})
+  = lens _rlLatency (\ s a -> s{_rlLatency = a}) .
+      mapping _Duration
 
 -- | File or class that handled the request.
 rlURLMapEntry :: Lens' RequestLog (Maybe Text)
@@ -849,9 +752,10 @@ rlResource
   = lens _rlResource (\ s a -> s{_rlResource = a})
 
 -- | Time when the request finished.
-rlEndTime :: Lens' RequestLog (Maybe Text)
+rlEndTime :: Lens' RequestLog (Maybe UTCTime)
 rlEndTime
-  = lens _rlEndTime (\ s a -> s{_rlEndTime = a})
+  = lens _rlEndTime (\ s a -> s{_rlEndTime = a}) .
+      mapping _DateTime
 
 -- | Whether this request is finished or active.
 rlFinished :: Lens' RequestLog (Maybe Bool)
@@ -985,8 +889,8 @@ instance ToJSON RequestLog where
                   ("sourceReference" .=) <$> _rlSourceReference,
                   ("appEngineRelease" .=) <$> _rlAppEngineRelease])
 
--- | The log entry payload, represented as a protocol buffer. You can only
--- use \`protoPayload\` values that belong to a set of approved types.
+-- | The log entry payload, represented as a protocol buffer. Some Google
+-- Cloud Platform services use this field for their log entry payloads.
 --
 -- /See:/ 'logEntryProtoPayload' smart constructor.
 newtype LogEntryProtoPayload = LogEntryProtoPayload'
@@ -1006,7 +910,7 @@ logEntryProtoPayload pLeppAddtional_ =
     { _leppAddtional = _Coerce # pLeppAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 leppAddtional :: Lens' LogEntryProtoPayload (HashMap Text JSONValue)
 leppAddtional
   = lens _leppAddtional
@@ -1043,13 +947,17 @@ instance FromJSON WriteLogEntriesResponse where
 instance ToJSON WriteLogEntriesResponse where
         toJSON = const emptyObject
 
--- | Describes a sink used to export log entries outside Cloud Logging.
+-- | Describes a sink used to export log entries outside of Stackdriver
+-- Logging.
 --
 -- /See:/ 'logSink' smart constructor.
 data LogSink = LogSink'
     { _lsDestination         :: !(Maybe Text)
-    , _lsOutputVersionFormat :: !(Maybe Text)
+    , _lsStartTime           :: !(Maybe DateTime')
+    , _lsOutputVersionFormat :: !(Maybe LogSinkOutputVersionFormat)
+    , _lsWriterIdentity      :: !(Maybe Text)
     , _lsName                :: !(Maybe Text)
+    , _lsEndTime             :: !(Maybe DateTime')
     , _lsFilter              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1059,9 +967,15 @@ data LogSink = LogSink'
 --
 -- * 'lsDestination'
 --
+-- * 'lsStartTime'
+--
 -- * 'lsOutputVersionFormat'
 --
+-- * 'lsWriterIdentity'
+--
 -- * 'lsName'
+--
+-- * 'lsEndTime'
 --
 -- * 'lsFilter'
 logSink
@@ -1069,42 +983,77 @@ logSink
 logSink =
     LogSink'
     { _lsDestination = Nothing
+    , _lsStartTime = Nothing
     , _lsOutputVersionFormat = Nothing
+    , _lsWriterIdentity = Nothing
     , _lsName = Nothing
+    , _lsEndTime = Nothing
     , _lsFilter = Nothing
     }
 
--- | The export destination. See [Exporting Logs With
+-- | Required. The export destination. See [Exporting Logs With
 -- Sinks](\/logging\/docs\/api\/tasks\/exporting-logs). Examples:
--- \`\"storage.googleapis.com\/a-bucket\"\`,
--- \`\"bigquery.googleapis.com\/projects\/a-project-id\/datasets\/a-dataset\"\`.
+-- \"storage.googleapis.com\/my-gcs-bucket\"
+-- \"bigquery.googleapis.com\/projects\/my-project-id\/datasets\/my-dataset\"
+-- \"pubsub.googleapis.com\/projects\/my-project\/topics\/my-topic\"
 lsDestination :: Lens' LogSink (Maybe Text)
 lsDestination
   = lens _lsDestination
       (\ s a -> s{_lsDestination = a})
 
--- | The log entry version to use for this sink\'s exported log entries. This
--- version does not have to correspond to the version of the log entry when
--- it was written to Cloud Logging.
-lsOutputVersionFormat :: Lens' LogSink (Maybe Text)
+-- | Optional. Time range for which this sink is active. Logs are exported
+-- only if start_time \<= entry.timestamp \< end_time Both start_time and
+-- end_time may be omitted to specify (half) infinite ranges. The
+-- start_time must be less than the end_time.
+lsStartTime :: Lens' LogSink (Maybe UTCTime)
+lsStartTime
+  = lens _lsStartTime (\ s a -> s{_lsStartTime = a}) .
+      mapping _DateTime
+
+-- | Optional. The log entry version to use for this sink\'s exported log
+-- entries. This version does not have to correspond to the version of the
+-- log entry that was written to Stackdriver Logging. If omitted, the v2
+-- format is used.
+lsOutputVersionFormat :: Lens' LogSink (Maybe LogSinkOutputVersionFormat)
 lsOutputVersionFormat
   = lens _lsOutputVersionFormat
       (\ s a -> s{_lsOutputVersionFormat = a})
 
--- | Required. The client-assigned sink identifier. Example:
--- \`\"my-severe-errors-to-pubsub\"\`. Sink identifiers are limited to 1000
--- characters and can include only the following characters: \`A-Z\`,
--- \`a-z\`, \`0-9\`, and the special characters \`_-.\`.
+-- | Output only. The IAM identity to which the destination needs to grant
+-- write access. This may be a service account or a group. Examples (Do not
+-- assume these specific values):
+-- \"serviceAccount:cloud-logs\'system.gserviceaccount.com\"
+-- \"group:cloud-logs\'google.com\" For GCS destinations, the role
+-- \"roles\/owner\" is required on the bucket For Cloud Pubsub
+-- destinations, the role \"roles\/pubsub.publisher\" is required on the
+-- topic For BigQuery, the role \"roles\/editor\" is required on the
+-- dataset
+lsWriterIdentity :: Lens' LogSink (Maybe Text)
+lsWriterIdentity
+  = lens _lsWriterIdentity
+      (\ s a -> s{_lsWriterIdentity = a})
+
+-- | Required. The client-assigned sink identifier, unique within the
+-- project. Example: \`\"my-syslog-errors-to-pubsub\"\`. Sink identifiers
+-- are limited to 1000 characters and can include only the following
+-- characters: \`A-Z\`, \`a-z\`, \`0-9\`, and the special characters
+-- \`_-.\`. The maximum length of the name is 100 characters.
 lsName :: Lens' LogSink (Maybe Text)
 lsName = lens _lsName (\ s a -> s{_lsName = a})
 
--- | An [advanced logs filter](\/logging\/docs\/view\/advanced_filters). Only
--- log entries matching that filter are exported. The filter must be
--- consistent with the log entry format specified by the
--- \`outputVersionFormat\` parameter, regardless of the format of the log
--- entry that was originally written to Cloud Logging. Example (V2 format):
--- \`\"logName=projects\/my-projectid\/logs\/syslog AND
--- severity>=ERROR\"\`.
+-- | Optional. Time at which this sink expires.
+lsEndTime :: Lens' LogSink (Maybe UTCTime)
+lsEndTime
+  = lens _lsEndTime (\ s a -> s{_lsEndTime = a}) .
+      mapping _DateTime
+
+-- | Optional. An [advanced logs
+-- filter](\/logging\/docs\/view\/advanced_filters). Only log entries
+-- matching the filter are exported. The filter must be consistent with the
+-- log entry format specified by the \`outputVersionFormat\` parameter,
+-- regardless of the format of the log entry that was originally written to
+-- Stackdriver Logging. Example filter (V2 format):
+-- logName=projects\/my-projectid\/logs\/syslog AND severity>=ERROR
 lsFilter :: Lens' LogSink (Maybe Text)
 lsFilter = lens _lsFilter (\ s a -> s{_lsFilter = a})
 
@@ -1113,9 +1062,11 @@ instance FromJSON LogSink where
           = withObject "LogSink"
               (\ o ->
                  LogSink' <$>
-                   (o .:? "destination") <*>
+                   (o .:? "destination") <*> (o .:? "startTime") <*>
                      (o .:? "outputVersionFormat")
+                     <*> (o .:? "writerIdentity")
                      <*> (o .:? "name")
+                     <*> (o .:? "endTime")
                      <*> (o .:? "filter"))
 
 instance ToJSON LogSink where
@@ -1123,43 +1074,13 @@ instance ToJSON LogSink where
           = object
               (catMaybes
                  [("destination" .=) <$> _lsDestination,
+                  ("startTime" .=) <$> _lsStartTime,
                   ("outputVersionFormat" .=) <$>
                     _lsOutputVersionFormat,
+                  ("writerIdentity" .=) <$> _lsWriterIdentity,
                   ("name" .=) <$> _lsName,
+                  ("endTime" .=) <$> _lsEndTime,
                   ("filter" .=) <$> _lsFilter])
-
---
--- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem'
-    { _sdiAddtional :: HashMap Text JSONValue
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StatusDetailsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sdiAddtional'
-statusDetailsItem
-    :: HashMap Text JSONValue -- ^ 'sdiAddtional'
-    -> StatusDetailsItem
-statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem'
-    { _sdiAddtional = _Coerce # pSdiAddtional_
-    }
-
--- | Properties of the object. Contains field \'ype with type URL.
-sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
-sdiAddtional
-  = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
-      . _Coerce
-
-instance FromJSON StatusDetailsItem where
-        parseJSON
-          = withObject "StatusDetailsItem"
-              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
-
-instance ToJSON StatusDetailsItem where
-        toJSON = toJSON . _sdiAddtional
 
 -- | Result returned from ListMonitoredResourceDescriptors.
 --
@@ -1184,8 +1105,8 @@ listMonitoredResourceDescriptorsResponse =
     , _lmrdrResourceDescriptors = Nothing
     }
 
--- | If there are more results than were returned, then \`nextPageToken\` is
--- included in the response. To get the next set of results, call this
+-- | If there might be more results than appear in this response, then
+-- \`nextPageToken\` is included. To get the next set of results, call this
 -- method again using the value of \`nextPageToken\` as \`pageToken\`.
 lmrdrNextPageToken :: Lens' ListMonitoredResourceDescriptorsResponse (Maybe Text)
 lmrdrNextPageToken
@@ -1219,7 +1140,9 @@ instance ToJSON
                   ("resourceDescriptors" .=) <$>
                     _lmrdrResourceDescriptors])
 
--- | A common proto for logging HTTP requests.
+-- | A common proto for logging HTTP requests. Only contains semantics
+-- defined by the HTTP specification. Product-specific logging information
+-- MUST be defined in a separate message.
 --
 -- /See:/ 'hTTPRequest' smart constructor.
 data HTTPRequest = HTTPRequest'
@@ -1227,6 +1150,8 @@ data HTTPRequest = HTTPRequest'
     , _httprRequestURL                     :: !(Maybe Text)
     , _httprCacheFillBytes                 :: !(Maybe (Textual Int64))
     , _httprRemoteIP                       :: !(Maybe Text)
+    , _httprLatency                        :: !(Maybe Duration)
+    , _httprServerIP                       :: !(Maybe Text)
     , _httprRequestSize                    :: !(Maybe (Textual Int64))
     , _httprCacheValidatedWithOriginServer :: !(Maybe Bool)
     , _httprUserAgent                      :: !(Maybe Text)
@@ -1248,6 +1173,10 @@ data HTTPRequest = HTTPRequest'
 -- * 'httprCacheFillBytes'
 --
 -- * 'httprRemoteIP'
+--
+-- * 'httprLatency'
+--
+-- * 'httprServerIP'
 --
 -- * 'httprRequestSize'
 --
@@ -1272,6 +1201,8 @@ hTTPRequest =
     , _httprRequestURL = Nothing
     , _httprCacheFillBytes = Nothing
     , _httprRemoteIP = Nothing
+    , _httprLatency = Nothing
+    , _httprServerIP = Nothing
     , _httprRequestSize = Nothing
     , _httprCacheValidatedWithOriginServer = Nothing
     , _httprUserAgent = Nothing
@@ -1311,6 +1242,20 @@ httprRemoteIP :: Lens' HTTPRequest (Maybe Text)
 httprRemoteIP
   = lens _httprRemoteIP
       (\ s a -> s{_httprRemoteIP = a})
+
+-- | The request processing latency on the server, from the time the request
+-- was received until the response was sent.
+httprLatency :: Lens' HTTPRequest (Maybe Scientific)
+httprLatency
+  = lens _httprLatency (\ s a -> s{_httprLatency = a})
+      . mapping _Duration
+
+-- | The IP address (IPv4 or IPv6) of the origin server that the request was
+-- sent to.
+httprServerIP :: Lens' HTTPRequest (Maybe Text)
+httprServerIP
+  = lens _httprServerIP
+      (\ s a -> s{_httprServerIP = a})
 
 -- | The size of the HTTP request message in bytes, including the request
 -- headers and the request body.
@@ -1378,6 +1323,8 @@ instance FromJSON HTTPRequest where
                    (o .:? "status") <*> (o .:? "requestUrl") <*>
                      (o .:? "cacheFillBytes")
                      <*> (o .:? "remoteIp")
+                     <*> (o .:? "latency")
+                     <*> (o .:? "serverIp")
                      <*> (o .:? "requestSize")
                      <*> (o .:? "cacheValidatedWithOriginServer")
                      <*> (o .:? "userAgent")
@@ -1395,6 +1342,8 @@ instance ToJSON HTTPRequest where
                   ("requestUrl" .=) <$> _httprRequestURL,
                   ("cacheFillBytes" .=) <$> _httprCacheFillBytes,
                   ("remoteIp" .=) <$> _httprRemoteIP,
+                  ("latency" .=) <$> _httprLatency,
+                  ("serverIp" .=) <$> _httprServerIP,
                   ("requestSize" .=) <$> _httprRequestSize,
                   ("cacheValidatedWithOriginServer" .=) <$>
                     _httprCacheValidatedWithOriginServer,
@@ -1405,49 +1354,10 @@ instance ToJSON HTTPRequest where
                   ("cacheHit" .=) <$> _httprCacheHit,
                   ("referer" .=) <$> _httprReferer])
 
--- | If partial_success is true, contains the project ids that had errors and
--- the associated errors.
---
--- /See:/ 'listLogEntriesResponseProjectIdErrors' smart constructor.
-newtype ListLogEntriesResponseProjectIdErrors = ListLogEntriesResponseProjectIdErrors'
-    { _llerpieAddtional :: HashMap Text Status
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListLogEntriesResponseProjectIdErrors' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'llerpieAddtional'
-listLogEntriesResponseProjectIdErrors
-    :: HashMap Text Status -- ^ 'llerpieAddtional'
-    -> ListLogEntriesResponseProjectIdErrors
-listLogEntriesResponseProjectIdErrors pLlerpieAddtional_ =
-    ListLogEntriesResponseProjectIdErrors'
-    { _llerpieAddtional = _Coerce # pLlerpieAddtional_
-    }
-
-llerpieAddtional :: Lens' ListLogEntriesResponseProjectIdErrors (HashMap Text Status)
-llerpieAddtional
-  = lens _llerpieAddtional
-      (\ s a -> s{_llerpieAddtional = a})
-      . _Coerce
-
-instance FromJSON
-         ListLogEntriesResponseProjectIdErrors where
-        parseJSON
-          = withObject "ListLogEntriesResponseProjectIdErrors"
-              (\ o ->
-                 ListLogEntriesResponseProjectIdErrors' <$>
-                   (parseJSONObject o))
-
-instance ToJSON ListLogEntriesResponseProjectIdErrors
-         where
-        toJSON = toJSON . _llerpieAddtional
-
--- | Optional. User-defined \`key:value\` items that are added to the
--- \`labels\` field of each log entry in \`entries\`, except when a log
--- entry specifies its own \`key:value\` item with the same key. Example:
--- \`{ \"size\": \"large\", \"color\":\"red\" }\`
+-- | Optional. Default labels that are added to the \`labels\` field of all
+-- log entries in \`entries\`. If a log entry already has a label with the
+-- same key as a label in this parameter, then the log entry\'s label is
+-- not changed. See LogEntry.
 --
 -- /See:/ 'writeLogEntriesRequestLabels' smart constructor.
 newtype WriteLogEntriesRequestLabels = WriteLogEntriesRequestLabels'
@@ -1493,7 +1403,7 @@ instance ToJSON WriteLogEntriesRequestLabels where
 -- following object, because the MonitoredResourceDescriptor for
 -- \`\"gce_instance\"\` has labels \`\"instance_id\"\` and \`\"zone\"\`: {
 -- \"type\": \"gce_instance\", \"labels\": { \"instance_id\":
--- \"my-instance\", \"zone\": \"us-central1-a\" }}
+-- \"12345678901234\", \"zone\": \"us-central1-a\" }}
 --
 -- /See:/ 'monitoredResource' smart constructor.
 data MonitoredResource = MonitoredResource'
@@ -1546,8 +1456,8 @@ instance ToJSON MonitoredResource where
 --
 -- /See:/ 'logLine' smart constructor.
 data LogLine = LogLine'
-    { _llTime           :: !(Maybe Text)
-    , _llSeverity       :: !(Maybe Text)
+    { _llTime           :: !(Maybe DateTime')
+    , _llSeverity       :: !(Maybe LogLineSeverity)
     , _llLogMessage     :: !(Maybe Text)
     , _llSourceLocation :: !(Maybe SourceLocation)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1574,11 +1484,13 @@ logLine =
     }
 
 -- | Approximate time when this log entry was made.
-llTime :: Lens' LogLine (Maybe Text)
-llTime = lens _llTime (\ s a -> s{_llTime = a})
+llTime :: Lens' LogLine (Maybe UTCTime)
+llTime
+  = lens _llTime (\ s a -> s{_llTime = a}) .
+      mapping _DateTime
 
 -- | Severity of this log entry.
-llSeverity :: Lens' LogLine (Maybe Text)
+llSeverity :: Lens' LogLine (Maybe LogLineSeverity)
 llSeverity
   = lens _llSeverity (\ s a -> s{_llSeverity = a})
 
@@ -1616,7 +1528,7 @@ instance ToJSON LogLine where
 -- /See:/ 'labelDescriptor' smart constructor.
 data LabelDescriptor = LabelDescriptor'
     { _ldKey         :: !(Maybe Text)
-    , _ldValueType   :: !(Maybe Text)
+    , _ldValueType   :: !(Maybe LabelDescriptorValueType)
     , _ldDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1643,7 +1555,7 @@ ldKey :: Lens' LabelDescriptor (Maybe Text)
 ldKey = lens _ldKey (\ s a -> s{_ldKey = a})
 
 -- | The type of data that can be assigned to the label.
-ldValueType :: Lens' LabelDescriptor (Maybe Text)
+ldValueType :: Lens' LabelDescriptor (Maybe LabelDescriptorValueType)
 ldValueType
   = lens _ldValueType (\ s a -> s{_ldValueType = a})
 
@@ -1673,12 +1585,12 @@ instance ToJSON LabelDescriptor where
 --
 -- /See:/ 'listLogEntriesRequest' smart constructor.
 data ListLogEntriesRequest = ListLogEntriesRequest'
-    { _llerOrderBy        :: !(Maybe Text)
-    , _llerPartialSuccess :: !(Maybe Bool)
-    , _llerProjectIds     :: !(Maybe [Text])
-    , _llerFilter         :: !(Maybe Text)
-    , _llerPageToken      :: !(Maybe Text)
-    , _llerPageSize       :: !(Maybe (Textual Int32))
+    { _llerOrderBy       :: !(Maybe Text)
+    , _llerProjectIds    :: !(Maybe [Text])
+    , _llerFilter        :: !(Maybe Text)
+    , _llerPageToken     :: !(Maybe Text)
+    , _llerPageSize      :: !(Maybe (Textual Int32))
+    , _llerResourceNames :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogEntriesRequest' with the minimum fields required to make a request.
@@ -1687,8 +1599,6 @@ data ListLogEntriesRequest = ListLogEntriesRequest'
 --
 -- * 'llerOrderBy'
 --
--- * 'llerPartialSuccess'
---
 -- * 'llerProjectIds'
 --
 -- * 'llerFilter'
@@ -1696,16 +1606,18 @@ data ListLogEntriesRequest = ListLogEntriesRequest'
 -- * 'llerPageToken'
 --
 -- * 'llerPageSize'
+--
+-- * 'llerResourceNames'
 listLogEntriesRequest
     :: ListLogEntriesRequest
 listLogEntriesRequest =
     ListLogEntriesRequest'
     { _llerOrderBy = Nothing
-    , _llerPartialSuccess = Nothing
     , _llerProjectIds = Nothing
     , _llerFilter = Nothing
     , _llerPageToken = Nothing
     , _llerPageSize = Nothing
+    , _llerResourceNames = Nothing
     }
 
 -- | Optional. How the results should be sorted. Presently, the only
@@ -1718,17 +1630,12 @@ llerOrderBy :: Lens' ListLogEntriesRequest (Maybe Text)
 llerOrderBy
   = lens _llerOrderBy (\ s a -> s{_llerOrderBy = a})
 
--- | Optional. If true, read access to all projects is not required and
--- results will be returned for the subset of projects for which read
--- access is permitted (empty subset is permitted).
-llerPartialSuccess :: Lens' ListLogEntriesRequest (Maybe Bool)
-llerPartialSuccess
-  = lens _llerPartialSuccess
-      (\ s a -> s{_llerPartialSuccess = a})
-
--- | Required. One or more project IDs or project numbers from which to
--- retrieve log entries. Examples of a project ID: \`\"my-project-1A\"\`,
--- \`\"1234567890\"\`.
+-- | Deprecated. One or more project identifiers or project numbers from
+-- which to retrieve log entries. Examples: \`\"my-project-1A\"\`,
+-- \`\"1234567890\"\`. If present, these project identifiers are converted
+-- to resource format and added to the list of resources in
+-- \`resourceNames\`. Callers should use \`resourceNames\` rather than this
+-- parameter.
 llerProjectIds :: Lens' ListLogEntriesRequest [Text]
 llerProjectIds
   = lens _llerProjectIds
@@ -1736,56 +1643,63 @@ llerProjectIds
       . _Default
       . _Coerce
 
--- | Optional. An [advanced logs
--- filter](\/logging\/docs\/view\/advanced_filters). The filter is compared
--- against all log entries in the projects specified by \`projectIds\`.
--- Only entries that match the filter are retrieved. An empty filter
--- matches all log entries.
+-- | Optional. A filter that chooses which log entries to return. See
+-- [Advanced Logs Filters](\/logging\/docs\/view\/advanced_filters). Only
+-- log entries that match the filter are returned. An empty filter matches
+-- all log entries.
 llerFilter :: Lens' ListLogEntriesRequest (Maybe Text)
 llerFilter
   = lens _llerFilter (\ s a -> s{_llerFilter = a})
 
--- | Optional. If the \`pageToken\` parameter is supplied, then the next page
--- of results is retrieved. The \`pageToken\` parameter must be set to the
--- value of the \`nextPageToken\` from the previous response. The values of
--- \`projectIds\`, \`filter\`, and \`orderBy\` must be the same as in the
--- previous request.
+-- | Optional. If present, then retrieve the next batch of results from the
+-- preceding call to this method. \`pageToken\` must be the value of
+-- \`nextPageToken\` from the previous response. The values of other method
+-- parameters should be identical to those in the previous call.
 llerPageToken :: Lens' ListLogEntriesRequest (Maybe Text)
 llerPageToken
   = lens _llerPageToken
       (\ s a -> s{_llerPageToken = a})
 
--- | Optional. The maximum number of results to return from this request. You
--- must check for presence of \`nextPageToken\` to determine if additional
--- results are available, which you can retrieve by passing the
--- \`nextPageToken\` value as the \`pageToken\` parameter in the next
--- request.
+-- | Optional. The maximum number of results to return from this request.
+-- Non-positive values are ignored. The presence of \`nextPageToken\` in
+-- the response indicates that more results might be available.
 llerPageSize :: Lens' ListLogEntriesRequest (Maybe Int32)
 llerPageSize
   = lens _llerPageSize (\ s a -> s{_llerPageSize = a})
       . mapping _Coerce
+
+-- | Required. One or more cloud resources from which to retrieve log
+-- entries. Example: \`\"projects\/my-project-1A\"\`,
+-- \`\"projects\/1234567890\"\`. Projects listed in \`projectIds\` are
+-- added to this list.
+llerResourceNames :: Lens' ListLogEntriesRequest [Text]
+llerResourceNames
+  = lens _llerResourceNames
+      (\ s a -> s{_llerResourceNames = a})
+      . _Default
+      . _Coerce
 
 instance FromJSON ListLogEntriesRequest where
         parseJSON
           = withObject "ListLogEntriesRequest"
               (\ o ->
                  ListLogEntriesRequest' <$>
-                   (o .:? "orderBy") <*> (o .:? "partialSuccess") <*>
-                     (o .:? "projectIds" .!= mempty)
+                   (o .:? "orderBy") <*> (o .:? "projectIds" .!= mempty)
                      <*> (o .:? "filter")
                      <*> (o .:? "pageToken")
-                     <*> (o .:? "pageSize"))
+                     <*> (o .:? "pageSize")
+                     <*> (o .:? "resourceNames" .!= mempty))
 
 instance ToJSON ListLogEntriesRequest where
         toJSON ListLogEntriesRequest'{..}
           = object
               (catMaybes
                  [("orderBy" .=) <$> _llerOrderBy,
-                  ("partialSuccess" .=) <$> _llerPartialSuccess,
                   ("projectIds" .=) <$> _llerProjectIds,
                   ("filter" .=) <$> _llerFilter,
                   ("pageToken" .=) <$> _llerPageToken,
-                  ("pageSize" .=) <$> _llerPageSize])
+                  ("pageSize" .=) <$> _llerPageSize,
+                  ("resourceNames" .=) <$> _llerResourceNames])
 
 -- | Additional information about a potentially long-running operation with
 -- which a log entry is associated.
@@ -1824,10 +1738,10 @@ logEntryOperation =
 leoFirst :: Lens' LogEntryOperation (Maybe Bool)
 leoFirst = lens _leoFirst (\ s a -> s{_leoFirst = a})
 
--- | Required. An arbitrary producer identifier. The combination of \`id\`
+-- | Optional. An arbitrary producer identifier. The combination of \`id\`
 -- and \`producer\` must be globally unique. Examples for \`producer\`:
 -- \`\"MyDivision.MyBigCompany.com\"\`,
--- \"github.com\/MyProject\/MyApplication\"\`.
+-- \`\"github.com\/MyProject\/MyApplication\"\`.
 leoProducer :: Lens' LogEntryOperation (Maybe Text)
 leoProducer
   = lens _leoProducer (\ s a -> s{_leoProducer = a})
@@ -1837,7 +1751,7 @@ leoProducer
 leoLast :: Lens' LogEntryOperation (Maybe Bool)
 leoLast = lens _leoLast (\ s a -> s{_leoLast = a})
 
--- | Required. An arbitrary operation identifier. Log entries with the same
+-- | Optional. An arbitrary operation identifier. Log entries with the same
 -- identifier are assumed to be part of the same operation.
 leoId :: Lens' LogEntryOperation (Maybe Text)
 leoId = lens _leoId (\ s a -> s{_leoId = a})
@@ -1865,6 +1779,7 @@ instance ToJSON LogEntryOperation where
 -- /See:/ 'logMetric' smart constructor.
 data LogMetric = LogMetric'
     { _lmName        :: !(Maybe Text)
+    , _lmVersion     :: !(Maybe LogMetricVersion)
     , _lmFilter      :: !(Maybe Text)
     , _lmDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1875,6 +1790,8 @@ data LogMetric = LogMetric'
 --
 -- * 'lmName'
 --
+-- * 'lmVersion'
+--
 -- * 'lmFilter'
 --
 -- * 'lmDescription'
@@ -1883,25 +1800,36 @@ logMetric
 logMetric =
     LogMetric'
     { _lmName = Nothing
+    , _lmVersion = Nothing
     , _lmFilter = Nothing
     , _lmDescription = Nothing
     }
 
 -- | Required. The client-assigned metric identifier. Example:
--- \`\"severe_errors\"\`. Metric identifiers are limited to 1000 characters
+-- \`\"severe_errors\"\`. Metric identifiers are limited to 100 characters
 -- and can include only the following characters: \`A-Z\`, \`a-z\`,
--- \`0-9\`, and the special characters \`_-.,+!*\',()%\/\\\`. The
+-- \`0-9\`, and the special characters \`_-.,+!*\',()%\/\`. The
 -- forward-slash character (\`\/\`) denotes a hierarchy of name pieces, and
--- it cannot be the first character of the name.
+-- it cannot be the first character of the name. The \'%\' character is
+-- used to URL encode unsafe and reserved characters and must be followed
+-- by two hexadecimal digits according to RFC 1738.
 lmName :: Lens' LogMetric (Maybe Text)
 lmName = lens _lmName (\ s a -> s{_lmName = a})
 
--- | An [advanced logs filter](\/logging\/docs\/view\/advanced_filters).
--- Example: \`\"logName:syslog AND severity>=ERROR\"\`.
+-- | Output only. The API version that created or updated this metric. The
+-- version also dictates the syntax of the filter expression. When a value
+-- for this field is missing, the default value of V2 should be assumed.
+lmVersion :: Lens' LogMetric (Maybe LogMetricVersion)
+lmVersion
+  = lens _lmVersion (\ s a -> s{_lmVersion = a})
+
+-- | Required. An [advanced logs
+-- filter](\/logging\/docs\/view\/advanced_filters). Example:
+-- \`\"resource.type=gae_app AND severity>=ERROR\"\`.
 lmFilter :: Lens' LogMetric (Maybe Text)
 lmFilter = lens _lmFilter (\ s a -> s{_lmFilter = a})
 
--- | A description of this metric, which is used in documentation.
+-- | Optional. A description of this metric, which is used in documentation.
 lmDescription :: Lens' LogMetric (Maybe Text)
 lmDescription
   = lens _lmDescription
@@ -1912,14 +1840,16 @@ instance FromJSON LogMetric where
           = withObject "LogMetric"
               (\ o ->
                  LogMetric' <$>
-                   (o .:? "name") <*> (o .:? "filter") <*>
-                     (o .:? "description"))
+                   (o .:? "name") <*> (o .:? "version") <*>
+                     (o .:? "filter")
+                     <*> (o .:? "description"))
 
 instance ToJSON LogMetric where
         toJSON LogMetric'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _lmName,
+                  ("version" .=) <$> _lmVersion,
                   ("filter" .=) <$> _lmFilter,
                   ("description" .=) <$> _lmDescription])
 
@@ -1928,7 +1858,7 @@ instance ToJSON LogMetric where
 -- /See:/ 'logEntry' smart constructor.
 data LogEntry = LogEntry'
     { _leOperation    :: !(Maybe LogEntryOperation)
-    , _leSeverity     :: !(Maybe Text)
+    , _leSeverity     :: !(Maybe LogEntrySeverity)
     , _leTextPayload  :: !(Maybe Text)
     , _leJSONPayload  :: !(Maybe LogEntryJSONPayload)
     , _leHTTPRequest  :: !(Maybe HTTPRequest)
@@ -1937,7 +1867,7 @@ data LogEntry = LogEntry'
     , _leLabels       :: !(Maybe LogEntryLabels)
     , _leProtoPayload :: !(Maybe LogEntryProtoPayload)
     , _leLogName      :: !(Maybe Text)
-    , _leTimestamp    :: !(Maybe Text)
+    , _leTimestamp    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntry' with the minimum fields required to make a request.
@@ -1990,7 +1920,7 @@ leOperation
 
 -- | Optional. The severity of the log entry. The default value is
 -- \`LogSeverity.DEFAULT\`.
-leSeverity :: Lens' LogEntry (Maybe Text)
+leSeverity :: Lens' LogEntry (Maybe LogEntrySeverity)
 leSeverity
   = lens _leSeverity (\ s a -> s{_leSeverity = a})
 
@@ -2023,9 +1953,9 @@ leResource
   = lens _leResource (\ s a -> s{_leResource = a})
 
 -- | Optional. A unique ID for the log entry. If you provide this field, the
--- logging service considers other log entries in the same log with the
--- same ID as duplicates which can be removed. If omitted, Cloud Logging
--- will generate a unique ID for this log entry.
+-- logging service considers other log entries in the same project with the
+-- same ID as duplicates which can be removed. If omitted, Stackdriver
+-- Logging will generate a unique ID for this log entry.
 leInsertId :: Lens' LogEntry (Maybe Text)
 leInsertId
   = lens _leInsertId (\ s a -> s{_leInsertId = a})
@@ -2035,17 +1965,17 @@ leInsertId
 leLabels :: Lens' LogEntry (Maybe LogEntryLabels)
 leLabels = lens _leLabels (\ s a -> s{_leLabels = a})
 
--- | The log entry payload, represented as a protocol buffer. You can only
--- use \`protoPayload\` values that belong to a set of approved types.
+-- | The log entry payload, represented as a protocol buffer. Some Google
+-- Cloud Platform services use this field for their log entry payloads.
 leProtoPayload :: Lens' LogEntry (Maybe LogEntryProtoPayload)
 leProtoPayload
   = lens _leProtoPayload
       (\ s a -> s{_leProtoPayload = a})
 
 -- | Required. The resource name of the log to which this log entry belongs.
--- The format of the name is \`\"projects\/ \/logs\/\"\`. Examples:
+-- The format of the name is \`\"projects\/\/logs\/\"\`. Examples:
 -- \`\"projects\/my-projectid\/logs\/syslog\"\`,
--- \`\"projects\/1234567890\/logs\/library.googleapis.com%2Fbook_log\"\`.
+-- \`\"projects\/my-projectid\/logs\/library.googleapis.com%2Fbook_log\"\`.
 -- The log ID part of resource name must be less than 512 characters long
 -- and can only include the following characters: upper and lower case
 -- alphanumeric characters: [A-Za-z0-9]; and punctuation characters:
@@ -2056,10 +1986,12 @@ leLogName
   = lens _leLogName (\ s a -> s{_leLogName = a})
 
 -- | Optional. The time the event described by the log entry occurred. If
--- omitted, Cloud Logging will use the time the log entry is written.
-leTimestamp :: Lens' LogEntry (Maybe Text)
+-- omitted, Stackdriver Logging will use the time the log entry is
+-- received.
+leTimestamp :: Lens' LogEntry (Maybe UTCTime)
 leTimestamp
-  = lens _leTimestamp (\ s a -> s{_leTimestamp = a})
+  = lens _leTimestamp (\ s a -> s{_leTimestamp = a}) .
+      mapping _DateTime
 
 instance FromJSON LogEntry where
         parseJSON

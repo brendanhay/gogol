@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the store layout resource.
+-- Sets the store layout for the enterprise.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.setStoreLayout@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.SetStoreLayout
@@ -52,7 +52,7 @@ type EnterprisesSetStoreLayoutResource =
                  ReqBody '[JSON] StoreLayout :>
                    Put '[JSON] StoreLayout
 
--- | Sets the store layout resource.
+-- | Sets the store layout for the enterprise.
 --
 -- /See:/ 'enterprisesSetStoreLayout' smart constructor.
 data EnterprisesSetStoreLayout = EnterprisesSetStoreLayout'

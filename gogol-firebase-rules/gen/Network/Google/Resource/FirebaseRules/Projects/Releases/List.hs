@@ -23,7 +23,7 @@
 -- List the \`Release\` values for a project. This list may optionally be
 -- filtered by \`Release\` name or \`Ruleset\` id or both.
 --
--- /See:/ <https://firebase.google.com/docs/storage/security/start Firebase Rules API Reference> for @firebaserules.projects.releases.list@.
+-- /See:/ <https://firebase.google.com/docs/storage/security Firebase Rules API Reference> for @firebaserules.projects.releases.list@.
 module Network.Google.Resource.FirebaseRules.Projects.Releases.List
     (
     -- * REST Resource
@@ -213,7 +213,9 @@ prlrCallback
 instance GoogleRequest ProjectsReleasesList where
         type Rs ProjectsReleasesList = ListReleasesResponse
         type Scopes ProjectsReleasesList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase",
+               "https://www.googleapis.com/auth/firebase.readonly"]
         requestClient ProjectsReleasesList'{..}
           = go _prlrName _prlrXgafv _prlrUploadProtocol
               (Just _prlrPp)

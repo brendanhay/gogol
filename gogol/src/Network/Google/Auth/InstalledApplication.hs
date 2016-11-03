@@ -1,4 +1,6 @@
+{-# LANGUAGE KindSignatures    #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds         #-}
 
 -- |
 -- Module      : Network.Google.Auth.InstalledApplication
@@ -32,6 +34,7 @@ module Network.Google.Auth.InstalledApplication
 import           Control.Monad.Catch            (MonadCatch)
 import           Control.Monad.IO.Class         (MonadIO)
 import qualified Data.Text.Encoding             as Text
+import           GHC.TypeLits                   (Symbol)
 import           Network.Google.Auth.Scope      (AllowScopes (..),
                                                  queryEncodeScopes)
 import           Network.Google.Internal.Auth
@@ -52,23 +55,22 @@ import qualified Network.HTTP.Conduit           as Client
 -- > {-# LANGUAGE ScopedTypeVariables #-}
 --
 -- > import Data.Proxy     (Proxy (..))
+-- > import Data.Text      as T
+-- > import Data.Text.IO   as T
 -- > import System.Exit    (exitFailure)
 -- > import System.Info    (os)
 -- > import System.Process (rawSystem)
 --
--- > import qualified Data.ByteString            as BS
--- > import qualified Data.ByteString.Lazy.Char8 as LBS8
--- >
--- > redirectPrompt :: forall s. OAuthClient -> proxy s -> IO (OAuthCode s)
+-- > redirectPrompt :: AllowScopes (s :: [Symbol]) => OAuthClient -> proxy s -> IO (OAuthCode s)
 -- > redirectPrompt c p = do
--- >     let url = LBS8.unpack (formURL c (Proxy :: Proxy s))
--- >     putStrLn $ "Opening URL " ++ url
--- >     case os of
--- >         "darwin" -> rawSystem "open"     [url]
--- >         "linux"  -> rawSystem "xdg-open" [url]
--- >         _        -> putStrLn "Unsupported OS" >> exitFailure
--- >     putStrLn "Please input the authorisation code: "
--- >     OAuthCode . LBS.fromStrict <$> BS.getLine
+-- >   let url = formURL c p
+-- >   T.putStrLn $ "Opening URL " `T.append` url
+-- >   _ <- case os of
+-- >     "darwin" -> rawSystem "open"     [unpack url]
+-- >     "linux"  -> rawSystem "xdg-open" [unpack url]
+-- >     _        -> T.putStrLn "Unsupported OS" >> exitFailure
+-- >   T.putStrLn "Please input the authorisation code: "
+-- >   OAuthCode <$> T.getLine
 --
 -- This ensures the scopes passed to 'formURL' and the type of 'OAuthCode' 's'
 -- are correct.
@@ -83,7 +85,7 @@ redirectURI = "urn:ietf:wg:oauth:2.0:oob"
 -- construct a URL that can be used to obtain the 'OAuthCode'.
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#formingtheurl Forming the URL>.
-formURL :: AllowScopes s => OAuthClient -> proxy s -> Text
+formURL :: AllowScopes (s :: [Symbol]) => OAuthClient -> proxy s -> Text
 formURL c = formURLWith c . allowScopes
 
 -- | Form a URL using 'OAuthScope' values.

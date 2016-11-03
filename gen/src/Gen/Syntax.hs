@@ -576,6 +576,7 @@ externalLit = \case
     RsBody    -> TyCon "Stream"
     JSONValue -> TyCon "JSONValue"
     FieldMask -> TyCon "FieldMask"
+    Duration  -> TyCon "Scientific"
 
 internalLit :: Lit -> Type
 internalLit = \case
@@ -597,6 +598,7 @@ internalLit = \case
     RsBody    -> TyCon "Stream"
     JSONValue -> TyCon "JSONValue"
     FieldMask -> TyCon "FieldMask"
+    Duration  -> TyCon "Duration"
 
 mapping :: TType -> Exp -> Exp
 mapping t e = infixE e "." (go t)
@@ -617,6 +619,7 @@ iso = \case
     TLit Time     -> Just (var "_Time")
     TLit Date     -> Just (var "_Date")
     TLit DateTime -> Just (var "_DateTime")
+    TLit Duration -> Just (var "_Duration")
     TLit Float    -> Just (var "_Coerce")
     TLit Double   -> Just (var "_Coerce")
     TLit Byte     -> Just (var "_Base64")

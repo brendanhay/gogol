@@ -150,6 +150,7 @@ renameReserved x
         , "Left"
         , "Right"
         , "Request"
+        , "Enum"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text
@@ -237,6 +238,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Xml",           "XML")
          , ("Youtube",       "YouTube")
          , ("youtube",       "YouTube")
+         , ("kgs",           "KGS")
 
          , ("([^a])data",  "$1Data")
          , ("([^ypn])load", "$1Load")

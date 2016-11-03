@@ -1,5 +1,5 @@
 name:                  gogol-analytics
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Analytics SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -88,6 +88,11 @@ library
         , Network.Google.Resource.Analytics.Management.ProFiles.List
         , Network.Google.Resource.Analytics.Management.ProFiles.Patch
         , Network.Google.Resource.Analytics.Management.ProFiles.Update
+        , Network.Google.Resource.Analytics.Management.RemarketingAudience.Get
+        , Network.Google.Resource.Analytics.Management.RemarketingAudience.Insert
+        , Network.Google.Resource.Analytics.Management.RemarketingAudience.List
+        , Network.Google.Resource.Analytics.Management.RemarketingAudience.Patch
+        , Network.Google.Resource.Analytics.Management.RemarketingAudience.Update
         , Network.Google.Resource.Analytics.Management.Segments.List
         , Network.Google.Resource.Analytics.Management.UnSampledReports.Delete
         , Network.Google.Resource.Analytics.Management.UnSampledReports.Get
@@ -120,5 +125,5 @@ library
         , Network.Google.Analytics.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

@@ -33,6 +33,7 @@ module Network.Google.Resource.CivicInfo.Divisions.Search
     , DivisionsSearch
 
     -- * Request Lenses
+    , dsPayload
     , dsQuery
     ) where
 
@@ -47,26 +48,37 @@ type DivisionsSearchResource =
          "divisions" :>
            QueryParam "query" Text :>
              QueryParam "alt" AltJSON :>
-               Get '[JSON] DivisionSearchResponse
+               ReqBody '[JSON] DivisionSearchRequest :>
+                 Get '[JSON] DivisionSearchResponse
 
 -- | Searches for political divisions by their natural name or OCD ID.
 --
 -- /See:/ 'divisionsSearch' smart constructor.
-newtype DivisionsSearch = DivisionsSearch'
-    { _dsQuery :: Maybe Text
+data DivisionsSearch = DivisionsSearch'
+    { _dsPayload :: !DivisionSearchRequest
+    , _dsQuery   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DivisionsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'dsPayload'
+--
 -- * 'dsQuery'
 divisionsSearch
-    :: DivisionsSearch
-divisionsSearch =
+    :: DivisionSearchRequest -- ^ 'dsPayload'
+    -> DivisionsSearch
+divisionsSearch pDsPayload_ =
     DivisionsSearch'
-    { _dsQuery = Nothing
+    { _dsPayload = pDsPayload_
+    , _dsQuery = Nothing
     }
+
+-- | Multipart request metadata.
+dsPayload :: Lens' DivisionsSearch DivisionSearchRequest
+dsPayload
+  = lens _dsPayload (\ s a -> s{_dsPayload = a})
 
 -- | The search query. Queries can cover any parts of a OCD ID or a human
 -- readable division name. All words given in the query are treated as
@@ -80,7 +92,8 @@ instance GoogleRequest DivisionsSearch where
         type Rs DivisionsSearch = DivisionSearchResponse
         type Scopes DivisionsSearch = '[]
         requestClient DivisionsSearch'{..}
-          = go _dsQuery (Just AltJSON) civicInfoService
+          = go _dsQuery (Just AltJSON) _dsPayload
+              civicInfoService
           where go
                   = buildClient
                       (Proxy :: Proxy DivisionsSearchResource)

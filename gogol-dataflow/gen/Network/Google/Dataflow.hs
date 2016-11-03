@@ -34,6 +34,12 @@ module Network.Google.Dataflow
     -- ** dataflow.projects.jobs.create
     , module Network.Google.Resource.Dataflow.Projects.Jobs.Create
 
+    -- ** dataflow.projects.jobs.debug.getConfig
+    , module Network.Google.Resource.Dataflow.Projects.Jobs.Debug.GetConfig
+
+    -- ** dataflow.projects.jobs.debug.sendCapture
+    , module Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
+
     -- ** dataflow.projects.jobs.get
     , module Network.Google.Resource.Dataflow.Projects.Jobs.Get
 
@@ -54,6 +60,9 @@ module Network.Google.Dataflow
 
     -- ** dataflow.projects.jobs.workItems.reportStatus
     , module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+
+    -- ** dataflow.projects.templates.create
+    , module Network.Google.Resource.Dataflow.Projects.Templates.Create
 
     -- ** dataflow.projects.workerMessages
     , module Network.Google.Resource.Dataflow.Projects.WorkerMessages
@@ -83,12 +92,29 @@ module Network.Google.Dataflow
     , ssrShards
     , ssrOutcome
 
+    -- ** CreateJobFromTemplateRequest
+    , CreateJobFromTemplateRequest
+    , createJobFromTemplateRequest
+    , cjftrGcsPath
+    , cjftrParameters
+
     -- ** Status
     , Status
     , status
     , sDetails
     , sCode
     , sMessage
+
+    -- ** NameAndKind
+    , NameAndKind
+    , nameAndKind
+    , nakKind
+    , nakName
+
+    -- ** IntegerList
+    , IntegerList
+    , integerList
+    , ilElements
 
     -- ** WorkItem
     , WorkItem
@@ -106,6 +132,7 @@ module Network.Google.Dataflow
     , wiProjectId
     , wiLeaseExpireTime
     , wiConfiguration
+    , wiStreamingConfigTask
     , wiSeqMapTask
 
     -- ** WorkerHealthReport
@@ -141,9 +168,12 @@ module Network.Google.Dataflow
     -- ** InstructionOutput
     , InstructionOutput
     , instructionOutput
+    , ioOnlyCountValueBytes
     , ioCodec
     , ioName
     , ioSystemName
+    , ioOriginalName
+    , ioOnlyCountKeyBytes
 
     -- ** ReportWorkItemStatusRequest
     , ReportWorkItemStatusRequest
@@ -163,10 +193,24 @@ module Network.Google.Dataflow
     , sCodec
     , sSpec
 
+    -- ** StringList
+    , StringList
+    , stringList
+    , slElements
+
     -- ** WorkerHealthReportResponse
     , WorkerHealthReportResponse
     , workerHealthReportResponse
     , whrrReportInterval
+
+    -- ** SendDebugCaptureResponse
+    , SendDebugCaptureResponse
+    , sendDebugCaptureResponse
+
+    -- ** JobLabels
+    , JobLabels
+    , jobLabels
+    , jlAddtional
 
     -- ** MetricStructuredName
     , MetricStructuredName
@@ -174,6 +218,18 @@ module Network.Google.Dataflow
     , msnOrigin
     , msnContext
     , msnName
+
+    -- ** CounterStructuredName
+    , CounterStructuredName
+    , counterStructuredName
+    , csnStandardOrigin
+    , csnComponentStepName
+    , csnOtherOrigin
+    , csnPortion
+    , csnOriginalStepName
+    , csnName
+    , csnExecutionStepName
+    , csnWorkerId
 
     -- ** WriteInstruction
     , WriteInstruction
@@ -221,6 +277,7 @@ module Network.Google.Dataflow
     , eVersion
     , eInternalExperiments
     , eTempStoragePrefix
+    , eServiceAccountEmail
     , eUserAgent
     , eSdkPipelineOptions
 
@@ -234,6 +291,23 @@ module Network.Google.Dataflow
     , MetricStructuredNameContext
     , metricStructuredNameContext
     , msncAddtional
+
+    -- ** CounterUpdate
+    , CounterUpdate
+    , counterUpdate
+    , cuNameAndKind
+    , cuIntegerList
+    , cuFloatingPoint
+    , cuInternal
+    , cuStringList
+    , cuShortId
+    , cuCumulative
+    , cuStructuredNameAndMetadata
+    , cuFloatingPointMean
+    , cuIntegerMean
+    , cuBoolean
+    , cuFloatingPointList
+    , cuInteger
 
     -- ** StreamingStageLocation
     , StreamingStageLocation
@@ -252,6 +326,13 @@ module Network.Google.Dataflow
     , jmMetrics
     , jmMetricTime
 
+    -- ** SendDebugCaptureRequest
+    , SendDebugCaptureRequest
+    , sendDebugCaptureRequest
+    , sdcrData
+    , sdcrComponentId
+    , sdcrWorkerId
+
     -- ** WorkItemStatus
     , WorkItemStatus
     , workItemStatus
@@ -265,6 +346,7 @@ module Network.Google.Dataflow
     , wisReportIndex
     , wisRequestedLeaseDuration
     , wisErrors
+    , wisCounterUpdates
     , wisMetricUpdates
     , wisWorkItemId
 
@@ -329,10 +411,24 @@ module Network.Google.Dataflow
     , trsParallelWorkerSettings
     , trsLanguageHint
 
+    -- ** StreamingComputationConfig
+    , StreamingComputationConfig
+    , streamingComputationConfig
+    , sccInstructions
+    , sccSystemName
+    , sccComputationId
+    , sccStageName
+
     -- ** EnvironmentSdkPipelineOptions
     , EnvironmentSdkPipelineOptions
     , environmentSdkPipelineOptions
     , espoAddtional
+
+    -- ** FloatingPointMean
+    , FloatingPointMean
+    , floatingPointMean
+    , fpmCount
+    , fpmSum
 
     -- ** LeaseWorkItemRequest
     , LeaseWorkItemRequest
@@ -391,6 +487,12 @@ module Network.Google.Dataflow
     , asrFractionConsumed
     , asrPosition
 
+    -- ** SplitInt64
+    , SplitInt64
+    , splitInt64
+    , siHighBits
+    , siLowBits
+
     -- ** WorkerSettings
     , WorkerSettings
     , workerSettings
@@ -400,6 +502,11 @@ module Network.Google.Dataflow
     , wsTempStoragePrefix
     , wsReportingEnabled
     , wsWorkerId
+
+    -- ** GetDebugConfigResponse
+    , GetDebugConfigResponse
+    , getDebugConfigResponse
+    , gdcrConfig
 
     -- ** WorkItemServiceStateHarnessData
     , WorkItemServiceStateHarnessData
@@ -417,6 +524,11 @@ module Network.Google.Dataflow
     , workerMessageResponse
     , wmrWorkerHealthReportResponse
 
+    -- ** CreateJobFromTemplateRequestParameters
+    , CreateJobFromTemplateRequestParameters
+    , createJobFromTemplateRequestParameters
+    , cjftrpAddtional
+
     -- ** WorkItemServiceState
     , WorkItemServiceState
     , workItemServiceState
@@ -427,6 +539,7 @@ module Network.Google.Dataflow
     , wissSuggestedStopPosition
     , wissLeaseExpireTime
     , wissSplitRequest
+    , wissMetricShortId
 
     -- ** StreamingSetupTask
     , StreamingSetupTask
@@ -458,6 +571,12 @@ module Network.Google.Dataflow
     , sinkCodec
     , scAddtional
 
+    -- ** IntegerMean
+    , IntegerMean
+    , integerMean
+    , imCount
+    , imSum
+
     -- ** WorkerHealthReportPodsItem
     , WorkerHealthReportPodsItem
     , workerHealthReportPodsItem
@@ -486,6 +605,14 @@ module Network.Google.Dataflow
     , workerPoolPoolArgs
     , wppaAddtional
 
+    -- ** CounterMetadata
+    , CounterMetadata
+    , counterMetadata
+    , cmKind
+    , cmDescription
+    , cmStandardUnits
+    , cmOtherUnits
+
     -- ** SendWorkerMessagesResponse
     , SendWorkerMessagesResponse
     , sendWorkerMessagesResponse
@@ -496,6 +623,18 @@ module Network.Google.Dataflow
     , streamingSideInputLocation
     , ssilTag
     , ssilStateFamily
+
+    -- ** GetDebugConfigRequest
+    , GetDebugConfigRequest
+    , getDebugConfigRequest
+    , gdcrComponentId
+    , gdcrWorkerId
+
+    -- ** CounterStructuredNameAndMetadata
+    , CounterStructuredNameAndMetadata
+    , counterStructuredNameAndMetadata
+    , csnamName
+    , csnamMetadata
 
     -- ** StreamingComputationTask
     , StreamingComputationTask
@@ -547,6 +686,7 @@ module Network.Google.Dataflow
     , jName
     , jTransformNameMApping
     , jId
+    , jLabels
     , jProjectId
     , jType
     , jCurrentStateTime
@@ -582,6 +722,7 @@ module Network.Google.Dataflow
     , wpNumWorkers
     , wpNetwork
     , wpZone
+    , wpIPConfiguration
     , wpPackages
     , wpOnHostMaintenance
     , wpDiskSourceImage
@@ -688,7 +829,9 @@ module Network.Google.Dataflow
     , pgbkiValueCombiningFn
     , pgbkiSideInputs
     , pgbkiInput
+    , pgbkiOriginalCombineValuesStepName
     , pgbkiInputElementCodec
+    , pgbkiOriginalCombineValuesInputStoreName
 
     -- ** ParDoInstruction
     , ParDoInstruction
@@ -720,11 +863,24 @@ module Network.Google.Dataflow
     , piName
     , piSystemName
     , piFlatten
+    , piOriginalName
 
     -- ** SideInputInfoKind
     , SideInputInfoKind
     , sideInputInfoKind
     , siikAddtional
+
+    -- ** StreamingConfigTask
+    , StreamingConfigTask
+    , streamingConfigTask
+    , sctUserStepToStateFamilyNameMap
+    , sctStreamingComputationConfigs
+
+    -- ** MetricShortId
+    , MetricShortId
+    , metricShortId
+    , msiShortId
+    , msiMetricIndex
 
     -- ** SendWorkerMessagesRequest
     , SendWorkerMessagesRequest
@@ -789,6 +945,11 @@ module Network.Google.Dataflow
     , plTopic
     , plSubscription
 
+    -- ** FloatingPointList
+    , FloatingPointList
+    , floatingPointList
+    , fplElements
+
     -- ** InstructionInput
     , InstructionInput
     , instructionInput
@@ -804,6 +965,11 @@ module Network.Google.Dataflow
     , smtSystemName
     , smtStageName
     , smtUserFn
+
+    -- ** StreamingConfigTaskUserStepToStateFamilyNameMap
+    , StreamingConfigTaskUserStepToStateFamilyNameMap
+    , streamingConfigTaskUserStepToStateFamilyNameMap
+    , sctustsfnmAddtional
 
     -- ** SourceOperationRequest
     , SourceOperationRequest
@@ -830,6 +996,8 @@ module Network.Google.Dataflow
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.Dataflow.Projects.Jobs.Create
+import           Network.Google.Resource.Dataflow.Projects.Jobs.Debug.GetConfig
+import           Network.Google.Resource.Dataflow.Projects.Jobs.Debug.SendCapture
 import           Network.Google.Resource.Dataflow.Projects.Jobs.Get
 import           Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
 import           Network.Google.Resource.Dataflow.Projects.Jobs.List
@@ -837,6 +1005,7 @@ import           Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
 import           Network.Google.Resource.Dataflow.Projects.Jobs.Update
 import           Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
 import           Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+import           Network.Google.Resource.Dataflow.Projects.Templates.Create
 import           Network.Google.Resource.Dataflow.Projects.WorkerMessages
 
 {- $resources
@@ -845,8 +1014,11 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Dataflow API service.
 type DataflowAPI =
-     ProjectsJobsWorkItemsLeaseResource :<|>
-       ProjectsJobsWorkItemsReportStatusResource
+     ProjectsTemplatesCreateResource :<|>
+       ProjectsJobsDebugGetConfigResource
+       :<|> ProjectsJobsDebugSendCaptureResource
+       :<|> ProjectsJobsWorkItemsLeaseResource
+       :<|> ProjectsJobsWorkItemsReportStatusResource
        :<|> ProjectsJobsMessagesListResource
        :<|> ProjectsJobsListResource
        :<|> ProjectsJobsGetResource

@@ -1,12 +1,12 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"jQLIOHBVnDZie4rQHGH1WJF-INE/R4cuCODTYsbGjTBiFOeVYpfBJ-Q\"",
+ "etag": "\"C5oy1hgQsABtYOYIOXWcR3BgYqU/wf3hMfh68A1iU1Ee8ZNiVo3poVk\"",
  "discoveryVersion": "v1",
  "id": "identitytoolkit:v3",
  "name": "identitytoolkit",
  "canonicalName": "Identity Toolkit",
  "version": "v3",
- "revision": "20160510",
+ "revision": "20161010",
  "title": "Google Identity Toolkit API",
  "description": "Help the third party sites to implement federated login.",
  "ownerDomain": "google.com",
@@ -65,6 +65,15 @@
    "type": "string",
    "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
    "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/firebase": {
+     "description": "View and administer all your Firebase data and settings"
+    }
+   }
   }
  },
  "schemas": {
@@ -245,6 +254,10 @@
      "type": "string",
      "description": "The app ID of the mobile app, base64(CERT_SHA1):PACKAGE_NAME for Android, BUNDLE_ID for iOS."
     },
+    "authFlowType": {
+     "type": "string",
+     "description": "Explicitly specify the auth flow type. Currently only support \"CODE_FLOW\" type. The field is only used for Google provider."
+    },
     "clientId": {
      "type": "string",
      "description": "The relying party OAuth client ID."
@@ -256,6 +269,18 @@
     "continueUri": {
      "type": "string",
      "description": "The URI to which the IDP redirects the user after the federated login flow."
+    },
+    "customParameter": {
+     "type": "object",
+     "description": "The query parameter that client can customize by themselves in auth url. The following parameters are reserved for server so that they cannot be customized by clients: client_id, response_type, scope, redirect_uri, state, oauth_token.",
+     "additionalProperties": {
+      "type": "string",
+      "description": "The customized query parameter."
+     }
+    },
+    "hostedDomain": {
+     "type": "string",
+     "description": "The hosted domain to restrict sign-in to accounts at that domain for Google Apps hosted accounts."
     },
     "identifier": {
      "type": "string",
@@ -280,6 +305,10 @@
     "providerId": {
      "type": "string",
      "description": "The IdP ID. For white listed IdPs it's a short domain name e.g. google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier."
+    },
+    "sessionId": {
+     "type": "string",
+     "description": "The session_id passed by client."
     }
    }
   },
@@ -455,6 +484,11 @@
      "type": "string",
      "description": "Response to the captcha."
     },
+    "createdAt": {
+     "type": "string",
+     "description": "The timestamp when the account is created.",
+     "format": "int64"
+    },
     "delegatedProjectNumber": {
      "type": "string",
      "description": "GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.",
@@ -497,6 +531,11 @@
     "instanceId": {
      "type": "string",
      "description": "Instance id token of the app."
+    },
+    "lastLoginAt": {
+     "type": "string",
+     "description": "Last login timestamp.",
+     "format": "int64"
     },
     "localId": {
      "type": "string",
@@ -695,10 +734,18 @@
      "description": "The salt separator.",
      "format": "byte"
     },
+    "sanityCheck": {
+     "type": "boolean",
+     "description": "If true, backend will do sanity check(including duplicate email and federated id) when uploading account."
+    },
     "signerKey": {
      "type": "string",
      "description": "The key for to hash the password.",
      "format": "byte"
+    },
+    "targetProjectId": {
+     "type": "string",
+     "description": "Specify which project (field value is actually project id) to operate. Only used when provided credential."
     },
     "users": {
      "type": "array",
@@ -738,6 +785,10 @@
     "requestUri": {
      "type": "string",
      "description": "The URI to which the IDP redirects the user back. It may contain federated login result params added by the IDP."
+    },
+    "returnIdpCredential": {
+     "type": "boolean",
+     "description": "Whether return 200 and IDP credential rather than throw exception when federated id is already linked."
     },
     "returnRefreshToken": {
      "type": "boolean",
@@ -846,6 +897,13 @@
     "secret": {
      "type": "string",
      "description": "OAuth2 client secret."
+    },
+    "whitelistedAudiences": {
+     "type": "array",
+     "description": "Whitelisted client IDs for audience check.",
+     "items": {
+      "type": "string"
+     }
     }
    }
   },
@@ -896,12 +954,20 @@
    "properties": {
     "email": {
      "type": "string",
-     "description": "The user's email."
+     "description": "The user's email. If the out-of-band code is for email recovery, the user's original email."
     },
     "kind": {
      "type": "string",
      "description": "The fixed string \"identitytoolkit#ResetPasswordResponse\".",
      "default": "identitytoolkit#ResetPasswordResponse"
+    },
+    "newEmail": {
+     "type": "string",
+     "description": "If the out-of-band code is for email recovery, the user's new email."
+    },
+    "requestType": {
+     "type": "string",
+     "description": "The request type."
     }
    }
   },
@@ -1052,6 +1118,15 @@
    "type": "object",
    "description": "Template for an individual account info.",
    "properties": {
+    "createdAt": {
+     "type": "string",
+     "description": "User creation timestamp.",
+     "format": "int64"
+    },
+    "customAuth": {
+     "type": "boolean",
+     "description": "Whether the user is authenticated by the developer."
+    },
     "disabled": {
      "type": "boolean",
      "description": "Whether the user is disabled."
@@ -1067,6 +1142,11 @@
     "emailVerified": {
      "type": "boolean",
      "description": "Whether the email has been verified."
+    },
+    "lastLoginAt": {
+     "type": "string",
+     "description": "last login timestamp.",
+     "format": "int64"
     },
     "localId": {
      "type": "string",
@@ -1115,6 +1195,14 @@
        "rawId": {
         "type": "string",
         "description": "User's raw identifier directly returned from IDP."
+       },
+       "rawUserInfo": {
+        "type": "string",
+        "description": "Raw IDP-returned user info."
+       },
+       "screenName": {
+        "type": "string",
+        "description": "User's screen name at Twitter or login name at Github."
        }
       }
      }
@@ -1123,6 +1211,10 @@
      "type": "string",
      "description": "The user's password salt.",
      "format": "byte"
+    },
+    "screenName": {
+     "type": "string",
+     "description": "User's screen name at Twitter or login name at Github."
     },
     "validSince": {
      "type": "string",
@@ -1176,6 +1268,10 @@
     "emailVerified": {
      "type": "boolean",
      "description": "The value is true if the IDP is also the email provider. It means the user owns the email."
+    },
+    "errorMessage": {
+     "type": "string",
+     "description": "Client error code."
     },
     "expiresIn": {
      "type": "string",
@@ -1272,9 +1368,17 @@
      "type": "string",
      "description": "The IdP ID. For white listed IdPs it's a short domain name e.g. google.com, aol.com, live.net and yahoo.com. If the \"providerId\" param is set to OpenID OP identifer other than the whilte listed IdPs the OP identifier is returned. If the \"identifier\" param is federated ID in the createAuthUri request. The domain part of the federated ID is returned."
     },
+    "rawUserInfo": {
+     "type": "string",
+     "description": "Raw IDP-returned user info."
+    },
     "refreshToken": {
      "type": "string",
      "description": "If idToken is STS id token, then this field will be refresh token."
+    },
+    "screenName": {
+     "type": "string",
+     "description": "The screen_name of a Twitter user or the login name at Github."
     },
     "timeZone": {
      "type": "string",
@@ -1410,7 +1514,10 @@
      },
      "response": {
       "$ref": "DownloadAccountResponse"
-     }
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/firebase"
+     ]
     },
     "getAccountInfo": {
      "id": "identitytoolkit.relyingparty.getAccountInfo",
@@ -1545,7 +1652,10 @@
      },
      "response": {
       "$ref": "UploadAccountResponse"
-     }
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/firebase"
+     ]
     },
     "verifyAssertion": {
      "id": "identitytoolkit.relyingparty.verifyAssertion",

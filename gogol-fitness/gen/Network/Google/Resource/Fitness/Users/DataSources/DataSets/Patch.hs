@@ -145,7 +145,8 @@ instance GoogleRequest UsersDataSourcesDataSetsPatch
         type Scopes UsersDataSourcesDataSetsPatch =
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
-               "https://www.googleapis.com/auth/fitness.location.write"]
+               "https://www.googleapis.com/auth/fitness.location.write",
+               "https://www.googleapis.com/auth/fitness.nutrition.write"]
         requestClient UsersDataSourcesDataSetsPatch'{..}
           = go _udsdspUserId _udsdspDataSourceId
               _udsdspDataSetId

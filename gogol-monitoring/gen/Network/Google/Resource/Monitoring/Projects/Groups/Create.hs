@@ -22,7 +22,7 @@
 --
 -- Creates a new group.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.groups.create@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.groups.create@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Create
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type ProjectsGroupsCreateResource =
      "v3" :>
        Capture "name" Text :>
          "groups" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "validateOnly" Bool :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "pp" Bool :>
@@ -69,7 +69,7 @@ type ProjectsGroupsCreateResource =
 --
 -- /See:/ 'projectsGroupsCreate' smart constructor.
 data ProjectsGroupsCreate = ProjectsGroupsCreate'
-    { _pgcXgafv          :: !(Maybe Text)
+    { _pgcXgafv          :: !(Maybe Xgafv)
     , _pgcValidateOnly   :: !(Maybe Bool)
     , _pgcUploadProtocol :: !(Maybe Text)
     , _pgcPp             :: !Bool
@@ -123,7 +123,7 @@ projectsGroupsCreate pPgcPayload_ pPgcName_ =
     }
 
 -- | V1 error format.
-pgcXgafv :: Lens' ProjectsGroupsCreate (Maybe Text)
+pgcXgafv :: Lens' ProjectsGroupsCreate (Maybe Xgafv)
 pgcXgafv = lens _pgcXgafv (\ s a -> s{_pgcXgafv = a})
 
 -- | If true, validate this request but do not create the group.
@@ -166,7 +166,7 @@ pgcBearerToken
       (\ s a -> s{_pgcBearerToken = a})
 
 -- | The project in which to create the group. The format is
--- \`\"projects\/{project_id_or_number}\"\`.
+-- \"projects\/{project_id_or_number}\".
 pgcName :: Lens' ProjectsGroupsCreate Text
 pgcName = lens _pgcName (\ s a -> s{_pgcName = a})
 

@@ -47,6 +47,7 @@ module Network.Google.Resource.Classroom.Courses.List
     , clBearerToken
     , clPageToken
     , clPageSize
+    , clCourseStates
     , clCallback
     ) where
 
@@ -68,9 +69,10 @@ type CoursesListResource =
                        QueryParam "bearer_token" Text :>
                          QueryParam "pageToken" Text :>
                            QueryParam "pageSize" (Textual Int32) :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 Get '[JSON] ListCoursesResponse
+                             QueryParams "courseStates" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] ListCoursesResponse
 
 -- | Returns a list of courses that the requesting user is permitted to view,
 -- restricted to those that match the request. This method returns the
@@ -90,6 +92,7 @@ data CoursesList = CoursesList'
     , _clBearerToken    :: !(Maybe Text)
     , _clPageToken      :: !(Maybe Text)
     , _clPageSize       :: !(Maybe (Textual Int32))
+    , _clCourseStates   :: !(Maybe [Text])
     , _clCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -117,6 +120,8 @@ data CoursesList = CoursesList'
 --
 -- * 'clPageSize'
 --
+-- * 'clCourseStates'
+--
 -- * 'clCallback'
 coursesList
     :: CoursesList
@@ -132,6 +137,7 @@ coursesList =
     , _clBearerToken = Nothing
     , _clPageToken = Nothing
     , _clPageSize = Nothing
+    , _clCourseStates = Nothing
     , _clCallback = Nothing
     }
 
@@ -197,6 +203,14 @@ clPageSize
   = lens _clPageSize (\ s a -> s{_clPageSize = a}) .
       mapping _Coerce
 
+-- | Restricts returned courses to those in one of the specified states
+clCourseStates :: Lens' CoursesList [Text]
+clCourseStates
+  = lens _clCourseStates
+      (\ s a -> s{_clCourseStates = a})
+      . _Default
+      . _Coerce
+
 -- | JSONP
 clCallback :: Lens' CoursesList (Maybe Text)
 clCallback
@@ -216,6 +230,7 @@ instance GoogleRequest CoursesList where
               _clBearerToken
               _clPageToken
               _clPageSize
+              (_clCourseStates ^. _Default)
               _clCallback
               (Just AltJSON)
               classroomService

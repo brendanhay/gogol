@@ -22,7 +22,6 @@ import           Control.Monad.Trans.Resource      (MonadResource (..))
 import qualified Data.ByteString.Lazy              as LBS
 import           Data.Conduit                      (($$+-))
 import qualified Data.Conduit.List                 as Conduit
-import           Data.Default.Class                (Default (..))
 import           Data.Monoid                       (Dual (..), Endo (..), (<>))
 import qualified Data.Text.Encoding                as Text
 import qualified Data.Text.Lazy                    as LText
@@ -81,11 +80,10 @@ perform Env{..} x = catches go handlers
                 , _serializeBody    = Just bs
                 }
 
-    request ct b = def
+    request ct b = Client.defaultRequest
         { Client.host            = _svcHost
         , Client.port            = _svcPort
         , Client.secure          = _svcSecure
-        , Client.checkStatus     = \_ _ _ -> Nothing
         , Client.responseTimeout = timeout
         , Client.method          = _cliMethod
         , Client.path            = path
@@ -113,7 +111,10 @@ perform Env{..} x = catches go handlers
                     , _serviceBody    = Just b
                     }
 
-    timeout = microseconds <$> _svcTimeout
+    timeout =
+        maybe Client.responseTimeoutNone
+              (Client.responseTimeoutMicro . microseconds)
+              _svcTimeout
 
     handlers =
         [ Handler $ err

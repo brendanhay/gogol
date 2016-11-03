@@ -519,7 +519,10 @@ cOrderOnBallot
       (\ s a -> s{_cOrderOnBallot = a})
       . mapping _Coerce
 
--- | The candidate\'s name.
+-- | The candidate\'s name. If this is a joint ticket it will indicate the
+-- name of the candidate at the top of a ticket followed by a \/ and that
+-- name of candidate at the bottom of the ticket. e.g. \"Mitt Romney \/
+-- Paul Ryan\"
 cName :: Lens' Candidate (Maybe Text)
 cName = lens _cName (\ s a -> s{_cName = a})
 
@@ -655,6 +658,41 @@ instance ToJSON Office where
                   ("officialIndices" .=) <$> _oOfficialIndices,
                   ("sources" .=) <$> _oSources, ("name" .=) <$> _oName,
                   ("levels" .=) <$> _oLevels])
+
+--
+-- /See:/ 'electionsQueryRequest' smart constructor.
+newtype ElectionsQueryRequest = ElectionsQueryRequest'
+    { _eqrContextParams :: Maybe ContextParams
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ElectionsQueryRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eqrContextParams'
+electionsQueryRequest
+    :: ElectionsQueryRequest
+electionsQueryRequest =
+    ElectionsQueryRequest'
+    { _eqrContextParams = Nothing
+    }
+
+eqrContextParams :: Lens' ElectionsQueryRequest (Maybe ContextParams)
+eqrContextParams
+  = lens _eqrContextParams
+      (\ s a -> s{_eqrContextParams = a})
+
+instance FromJSON ElectionsQueryRequest where
+        parseJSON
+          = withObject "ElectionsQueryRequest"
+              (\ o ->
+                 ElectionsQueryRequest' <$> (o .:? "contextParams"))
+
+instance ToJSON ElectionsQueryRequest where
+        toJSON ElectionsQueryRequest'{..}
+          = object
+              (catMaybes
+                 [("contextParams" .=) <$> _eqrContextParams])
 
 -- | A social media or web channel for a candidate.
 --
@@ -925,6 +963,42 @@ instance ToJSON DivisionSearchResult where
                   ("name" .=) <$> _dsrName,
                   ("ocdId" .=) <$> _dsrOcdId])
 
+-- | A search request for political geographies.
+--
+-- /See:/ 'divisionSearchRequest' smart constructor.
+newtype DivisionSearchRequest = DivisionSearchRequest'
+    { _dsrContextParams :: Maybe ContextParams
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DivisionSearchRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsrContextParams'
+divisionSearchRequest
+    :: DivisionSearchRequest
+divisionSearchRequest =
+    DivisionSearchRequest'
+    { _dsrContextParams = Nothing
+    }
+
+dsrContextParams :: Lens' DivisionSearchRequest (Maybe ContextParams)
+dsrContextParams
+  = lens _dsrContextParams
+      (\ s a -> s{_dsrContextParams = a})
+
+instance FromJSON DivisionSearchRequest where
+        parseJSON
+          = withObject "DivisionSearchRequest"
+              (\ o ->
+                 DivisionSearchRequest' <$> (o .:? "contextParams"))
+
+instance ToJSON DivisionSearchRequest where
+        toJSON DivisionSearchRequest'{..}
+          = object
+              (catMaybes
+                 [("contextParams" .=) <$> _dsrContextParams])
+
 -- | Information about an election administrative body (e.g. County Board of
 -- Elections).
 --
@@ -941,6 +1015,7 @@ data AdministrativeBody = AdministrativeBody'
     , _abElectionOfficials                   :: !(Maybe [ElectionOfficial])
     , _abName                                :: !(Maybe Text)
     , _abElectionRulesURL                    :: !(Maybe Text)
+    , _abAddressLines                        :: !(Maybe [Text])
     , _abVoterServices                       :: !(Maybe [Text])
     , _abElectionRegistrationURL             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -971,6 +1046,8 @@ data AdministrativeBody = AdministrativeBody'
 --
 -- * 'abElectionRulesURL'
 --
+-- * 'abAddressLines'
+--
 -- * 'abVoterServices'
 --
 -- * 'abElectionRegistrationURL'
@@ -989,6 +1066,7 @@ administrativeBody =
     , _abElectionOfficials = Nothing
     , _abName = Nothing
     , _abElectionRulesURL = Nothing
+    , _abAddressLines = Nothing
     , _abVoterServices = Nothing
     , _abElectionRegistrationURL = Nothing
     }
@@ -1065,6 +1143,13 @@ abElectionRulesURL
   = lens _abElectionRulesURL
       (\ s a -> s{_abElectionRulesURL = a})
 
+abAddressLines :: Lens' AdministrativeBody [Text]
+abAddressLines
+  = lens _abAddressLines
+      (\ s a -> s{_abAddressLines = a})
+      . _Default
+      . _Coerce
+
 -- | A description of the services this administrative body may provide.
 abVoterServices :: Lens' AdministrativeBody [Text]
 abVoterServices
@@ -1096,6 +1181,7 @@ instance FromJSON AdministrativeBody where
                      <*> (o .:? "electionOfficials" .!= mempty)
                      <*> (o .:? "name")
                      <*> (o .:? "electionRulesUrl")
+                     <*> (o .:? "addressLines" .!= mempty)
                      <*> (o .:? "voter_services" .!= mempty)
                      <*> (o .:? "electionRegistrationUrl"))
 
@@ -1118,9 +1204,48 @@ instance ToJSON AdministrativeBody where
                   ("electionOfficials" .=) <$> _abElectionOfficials,
                   ("name" .=) <$> _abName,
                   ("electionRulesUrl" .=) <$> _abElectionRulesURL,
+                  ("addressLines" .=) <$> _abAddressLines,
                   ("voter_services" .=) <$> _abVoterServices,
                   ("electionRegistrationUrl" .=) <$>
                     _abElectionRegistrationURL])
+
+-- | A request for political geography and representative information for an
+-- address.
+--
+-- /See:/ 'representativeInfoRequest' smart constructor.
+newtype RepresentativeInfoRequest = RepresentativeInfoRequest'
+    { _rirContextParams :: Maybe ContextParams
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RepresentativeInfoRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rirContextParams'
+representativeInfoRequest
+    :: RepresentativeInfoRequest
+representativeInfoRequest =
+    RepresentativeInfoRequest'
+    { _rirContextParams = Nothing
+    }
+
+rirContextParams :: Lens' RepresentativeInfoRequest (Maybe ContextParams)
+rirContextParams
+  = lens _rirContextParams
+      (\ s a -> s{_rirContextParams = a})
+
+instance FromJSON RepresentativeInfoRequest where
+        parseJSON
+          = withObject "RepresentativeInfoRequest"
+              (\ o ->
+                 RepresentativeInfoRequest' <$>
+                   (o .:? "contextParams"))
+
+instance ToJSON RepresentativeInfoRequest where
+        toJSON RepresentativeInfoRequest'{..}
+          = object
+              (catMaybes
+                 [("contextParams" .=) <$> _rirContextParams])
 
 -- | Information about a contest that appears on a voter\'s ballot.
 --
@@ -1308,8 +1433,8 @@ conReferendumProStatement
 
 -- | The set of ballot responses for the referendum. A ballot response
 -- represents a line on the ballot. Common examples might include \"yes\"
--- or \"no\" for referenda, or a judge\'s name for a retention contest.
--- This field is only populated for contests of type \'Referendum\'.
+-- or \"no\" for referenda. This field is only populated for contests of
+-- type \'Referendum\'.
 conReferendumBallotResponses :: Lens' Contest [Text]
 conReferendumBallotResponses
   = lens _conReferendumBallotResponses
@@ -1351,7 +1476,8 @@ conId = lens _conId (\ s a -> s{_conId = a})
 
 -- | The type of contest. Usually this will be \'General\', \'Primary\', or
 -- \'Run-off\' for contests with candidates. For referenda this will be
--- \'Referendum\'.
+-- \'Referendum\'. For Retention contests this will typically be
+-- \'Retention\'.
 conType :: Lens' Contest (Maybe Text)
 conType = lens _conType (\ s a -> s{_conType = a})
 
@@ -1750,18 +1876,60 @@ instance ToJSON Source where
                  [("name" .=) <$> _sName,
                   ("official" .=) <$> _sOfficial])
 
+-- | A request to look up representative information for a single division.
+--
+-- /See:/ 'divisionRepresentativeInfoRequest' smart constructor.
+newtype DivisionRepresentativeInfoRequest = DivisionRepresentativeInfoRequest'
+    { _drirContextParams :: Maybe ContextParams
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DivisionRepresentativeInfoRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drirContextParams'
+divisionRepresentativeInfoRequest
+    :: DivisionRepresentativeInfoRequest
+divisionRepresentativeInfoRequest =
+    DivisionRepresentativeInfoRequest'
+    { _drirContextParams = Nothing
+    }
+
+drirContextParams :: Lens' DivisionRepresentativeInfoRequest (Maybe ContextParams)
+drirContextParams
+  = lens _drirContextParams
+      (\ s a -> s{_drirContextParams = a})
+
+instance FromJSON DivisionRepresentativeInfoRequest
+         where
+        parseJSON
+          = withObject "DivisionRepresentativeInfoRequest"
+              (\ o ->
+                 DivisionRepresentativeInfoRequest' <$>
+                   (o .:? "contextParams"))
+
+instance ToJSON DivisionRepresentativeInfoRequest
+         where
+        toJSON DivisionRepresentativeInfoRequest'{..}
+          = object
+              (catMaybes
+                 [("contextParams" .=) <$> _drirContextParams])
+
 -- | Describes the geographic scope of a contest.
 --
 -- /See:/ 'electoralDistrict' smart constructor.
 data ElectoralDistrict = ElectoralDistrict'
-    { _edName  :: !(Maybe Text)
-    , _edScope :: !(Maybe Text)
-    , _edId    :: !(Maybe Text)
+    { _edKgForeignKey :: !(Maybe Text)
+    , _edName         :: !(Maybe Text)
+    , _edScope        :: !(Maybe Text)
+    , _edId           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectoralDistrict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'edKgForeignKey'
 --
 -- * 'edName'
 --
@@ -1772,10 +1940,16 @@ electoralDistrict
     :: ElectoralDistrict
 electoralDistrict =
     ElectoralDistrict'
-    { _edName = Nothing
+    { _edKgForeignKey = Nothing
+    , _edName = Nothing
     , _edScope = Nothing
     , _edId = Nothing
     }
+
+edKgForeignKey :: Lens' ElectoralDistrict (Maybe Text)
+edKgForeignKey
+  = lens _edKgForeignKey
+      (\ s a -> s{_edKgForeignKey = a})
 
 -- | The name of the district.
 edName :: Lens' ElectoralDistrict (Maybe Text)
@@ -1799,14 +1973,53 @@ instance FromJSON ElectoralDistrict where
           = withObject "ElectoralDistrict"
               (\ o ->
                  ElectoralDistrict' <$>
-                   (o .:? "name") <*> (o .:? "scope") <*> (o .:? "id"))
+                   (o .:? "kgForeignKey") <*> (o .:? "name") <*>
+                     (o .:? "scope")
+                     <*> (o .:? "id"))
 
 instance ToJSON ElectoralDistrict where
         toJSON ElectoralDistrict'{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _edName, ("scope" .=) <$> _edScope,
+                 [("kgForeignKey" .=) <$> _edKgForeignKey,
+                  ("name" .=) <$> _edName, ("scope" .=) <$> _edScope,
                   ("id" .=) <$> _edId])
+
+-- | A request for information about a voter.
+--
+-- /See:/ 'voterInfoRequest' smart constructor.
+newtype VoterInfoRequest = VoterInfoRequest'
+    { _virContextParams :: Maybe ContextParams
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VoterInfoRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'virContextParams'
+voterInfoRequest
+    :: VoterInfoRequest
+voterInfoRequest =
+    VoterInfoRequest'
+    { _virContextParams = Nothing
+    }
+
+virContextParams :: Lens' VoterInfoRequest (Maybe ContextParams)
+virContextParams
+  = lens _virContextParams
+      (\ s a -> s{_virContextParams = a})
+
+instance FromJSON VoterInfoRequest where
+        parseJSON
+          = withObject "VoterInfoRequest"
+              (\ o ->
+                 VoterInfoRequest' <$> (o .:? "contextParams"))
+
+instance ToJSON VoterInfoRequest where
+        toJSON VoterInfoRequest'{..}
+          = object
+              (catMaybes
+                 [("contextParams" .=) <$> _virContextParams])
 
 -- | A simple representation of an address.
 --
@@ -1902,6 +2115,40 @@ instance ToJSON SimpleAddressType where
                   ("line3" .=) <$> _satLine3, ("zip" .=) <$> _satZip,
                   ("city" .=) <$> _satCity, ("line1" .=) <$> _satLine1,
                   ("locationName" .=) <$> _satLocationName])
+
+--
+-- /See:/ 'contextParams' smart constructor.
+newtype ContextParams = ContextParams'
+    { _cpClientProFile :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ContextParams' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpClientProFile'
+contextParams
+    :: ContextParams
+contextParams =
+    ContextParams'
+    { _cpClientProFile = Nothing
+    }
+
+cpClientProFile :: Lens' ContextParams (Maybe Text)
+cpClientProFile
+  = lens _cpClientProFile
+      (\ s a -> s{_cpClientProFile = a})
+
+instance FromJSON ContextParams where
+        parseJSON
+          = withObject "ContextParams"
+              (\ o -> ContextParams' <$> (o .:? "clientProfile"))
+
+instance ToJSON ContextParams where
+        toJSON ContextParams'{..}
+          = object
+              (catMaybes
+                 [("clientProfile" .=) <$> _cpClientProFile])
 
 -- | Describes information about a regional election administrative area.
 --

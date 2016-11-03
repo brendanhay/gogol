@@ -66,6 +66,11 @@ module Network.Google.Sheets.Types
     , chartData
     , cdSourceRange
 
+    -- * BatchClearValuesRequest
+    , BatchClearValuesRequest
+    , batchClearValuesRequest
+    , bcvrRanges
+
     -- * BasicChartSeriesTargetAxis
     , BasicChartSeriesTargetAxis (..)
 
@@ -161,6 +166,12 @@ module Network.Google.Sheets.Types
     , gcRowIndex
     , gcSheetId
 
+    -- * ClearValuesResponse
+    , ClearValuesResponse
+    , clearValuesResponse
+    , cvrClearedRange
+    , cvrSpreadsheetId
+
     -- * ClearBasicFilterRequest
     , ClearBasicFilterRequest
     , clearBasicFilterRequest
@@ -228,6 +239,13 @@ module Network.Google.Sheets.Types
     , pcsDomain
     , pcsSeries
     , pcsThreeDimensional
+
+    -- * AppendValuesResponse
+    , AppendValuesResponse
+    , appendValuesResponse
+    , avrSpreadsheetId
+    , avrUpdates
+    , avrTableRange
 
     -- * DataValidationRule
     , DataValidationRule
@@ -298,6 +316,10 @@ module Network.Google.Sheets.Types
     , DeleteDimensionRequest
     , deleteDimensionRequest
     , ddrRange
+
+    -- * ClearValuesRequest
+    , ClearValuesRequest
+    , clearValuesRequest
 
     -- * FindReplaceRequest
     , FindReplaceRequest
@@ -928,6 +950,12 @@ module Network.Google.Sheets.Types
     , tfItalic
     , tfBold
     , tfStrikethrough
+
+    -- * BatchClearValuesResponse
+    , BatchClearValuesResponse
+    , batchClearValuesResponse
+    , bcvrClearedRanges
+    , bcvrSpreadsheetId
 
     -- * BasicChartDomain
     , BasicChartDomain

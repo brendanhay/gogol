@@ -106,7 +106,8 @@ instance GoogleRequest UsersDataSourcesCreate where
         type Scopes UsersDataSourcesCreate =
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
-               "https://www.googleapis.com/auth/fitness.location.write"]
+               "https://www.googleapis.com/auth/fitness.location.write",
+               "https://www.googleapis.com/auth/fitness.nutrition.write"]
         requestClient UsersDataSourcesCreate'{..}
           = go _udscUserId (Just AltJSON) _udscPayload
               fitnessService

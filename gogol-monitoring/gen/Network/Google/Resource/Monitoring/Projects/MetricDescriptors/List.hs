@@ -23,7 +23,7 @@
 -- Lists metric descriptors that match a filter. This method does not
 -- require a Stackdriver account.
 --
--- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.metricDescriptors.list@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.List
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type ProjectsMetricDescriptorsListResource =
      "v3" :>
        Capture "name" Text :>
          "metricDescriptors" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -74,7 +74,7 @@ type ProjectsMetricDescriptorsListResource =
 --
 -- /See:/ 'projectsMetricDescriptorsList' smart constructor.
 data ProjectsMetricDescriptorsList = ProjectsMetricDescriptorsList'
-    { _pmdlXgafv          :: !(Maybe Text)
+    { _pmdlXgafv          :: !(Maybe Xgafv)
     , _pmdlUploadProtocol :: !(Maybe Text)
     , _pmdlPp             :: !Bool
     , _pmdlAccessToken    :: !(Maybe Text)
@@ -131,7 +131,7 @@ projectsMetricDescriptorsList pPmdlName_ =
     }
 
 -- | V1 error format.
-pmdlXgafv :: Lens' ProjectsMetricDescriptorsList (Maybe Text)
+pmdlXgafv :: Lens' ProjectsMetricDescriptorsList (Maybe Xgafv)
 pmdlXgafv
   = lens _pmdlXgafv (\ s a -> s{_pmdlXgafv = a})
 
@@ -164,24 +164,23 @@ pmdlBearerToken
       (\ s a -> s{_pmdlBearerToken = a})
 
 -- | The project on which to execute the request. The format is
--- \`\"projects\/{project_id_or_number}\"\`.
+-- \"projects\/{project_id_or_number}\".
 pmdlName :: Lens' ProjectsMetricDescriptorsList Text
 pmdlName = lens _pmdlName (\ s a -> s{_pmdlName = a})
 
 -- | If this field is empty, all custom and system-defined metric descriptors
--- are returned. Otherwise, the [filter](\/monitoring\/api\/v3\/filters)
+-- are returned. Otherwise, the filter (\/monitoring\/api\/v3\/filters)
 -- specifies which metric descriptors are to be returned. For example, the
--- following filter matches all [custom
--- metrics](\/monitoring\/custom-metrics): metric.type =
+-- following filter matches all custom metrics
+-- (\/monitoring\/custom-metrics): metric.type =
 -- starts_with(\"custom.googleapis.com\/\")
 pmdlFilter :: Lens' ProjectsMetricDescriptorsList (Maybe Text)
 pmdlFilter
   = lens _pmdlFilter (\ s a -> s{_pmdlFilter = a})
 
--- | If this field is not empty then it must contain the \`nextPageToken\`
--- value returned by a previous call to this method. Using this field
--- causes the method to return additional results from the previous method
--- call.
+-- | If this field is not empty then it must contain the nextPageToken value
+-- returned by a previous call to this method. Using this field causes the
+-- method to return additional results from the previous method call.
 pmdlPageToken :: Lens' ProjectsMetricDescriptorsList (Maybe Text)
 pmdlPageToken
   = lens _pmdlPageToken

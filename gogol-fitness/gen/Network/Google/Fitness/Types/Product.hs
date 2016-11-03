@@ -121,8 +121,7 @@ instance ToJSON DataSet where
                   ("minStartTimeNs" .=) <$> _dsMinStartTimeNs,
                   ("maxEndTimeNs" .=) <$> _dsMaxEndTimeNs])
 
--- | See:
--- google3\/java\/com\/google\/android\/apps\/heart\/platform\/api\/Application.java
+-- |
 --
 -- /See:/ 'application' smart constructor.
 data Application = Application'
@@ -339,16 +338,18 @@ instance ToJSON BucketByActivity where
                   ("activityDataSourceId" .=) <$>
                     _bbaActivityDataSourceId])
 
+-- | Next id: 10
 --
 -- /See:/ 'aggregateRequest' smart constructor.
 data AggregateRequest = AggregateRequest'
-    { _arEndTimeMillis           :: !(Maybe (Textual Int64))
-    , _arAggregateBy             :: !(Maybe [AggregateBy])
-    , _arBucketBySession         :: !(Maybe BucketBySession)
-    , _arBucketByActivityType    :: !(Maybe BucketByActivity)
-    , _arBucketByTime            :: !(Maybe BucketByTime)
-    , _arStartTimeMillis         :: !(Maybe (Textual Int64))
-    , _arBucketByActivitySegment :: !(Maybe BucketByActivity)
+    { _arEndTimeMillis               :: !(Maybe (Textual Int64))
+    , _arFilteredDataQualityStandard :: !(Maybe [AggregateRequestFilteredDataQualityStandardItem])
+    , _arAggregateBy                 :: !(Maybe [AggregateBy])
+    , _arBucketBySession             :: !(Maybe BucketBySession)
+    , _arBucketByActivityType        :: !(Maybe BucketByActivity)
+    , _arBucketByTime                :: !(Maybe BucketByTime)
+    , _arStartTimeMillis             :: !(Maybe (Textual Int64))
+    , _arBucketByActivitySegment     :: !(Maybe BucketByActivity)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateRequest' with the minimum fields required to make a request.
@@ -356,6 +357,8 @@ data AggregateRequest = AggregateRequest'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'arEndTimeMillis'
+--
+-- * 'arFilteredDataQualityStandard'
 --
 -- * 'arAggregateBy'
 --
@@ -373,6 +376,7 @@ aggregateRequest
 aggregateRequest =
     AggregateRequest'
     { _arEndTimeMillis = Nothing
+    , _arFilteredDataQualityStandard = Nothing
     , _arAggregateBy = Nothing
     , _arBucketBySession = Nothing
     , _arBucketByActivityType = Nothing
@@ -388,6 +392,16 @@ arEndTimeMillis
   = lens _arEndTimeMillis
       (\ s a -> s{_arEndTimeMillis = a})
       . mapping _Coerce
+
+-- | A list of acceptable data quality standards. Only data points which
+-- conform to at least one of the specified data quality standards will be
+-- returned. If the list is empty, all data points are returned.
+arFilteredDataQualityStandard :: Lens' AggregateRequest [AggregateRequestFilteredDataQualityStandardItem]
+arFilteredDataQualityStandard
+  = lens _arFilteredDataQualityStandard
+      (\ s a -> s{_arFilteredDataQualityStandard = a})
+      . _Default
+      . _Coerce
 
 -- | The specification of data to be aggregated. At least one aggregateBy
 -- spec must be provided. All data that is specified will be aggregated
@@ -450,7 +464,8 @@ instance FromJSON AggregateRequest where
               (\ o ->
                  AggregateRequest' <$>
                    (o .:? "endTimeMillis") <*>
-                     (o .:? "aggregateBy" .!= mempty)
+                     (o .:? "filteredDataQualityStandard" .!= mempty)
+                     <*> (o .:? "aggregateBy" .!= mempty)
                      <*> (o .:? "bucketBySession")
                      <*> (o .:? "bucketByActivityType")
                      <*> (o .:? "bucketByTime")
@@ -462,6 +477,8 @@ instance ToJSON AggregateRequest where
           = object
               (catMaybes
                  [("endTimeMillis" .=) <$> _arEndTimeMillis,
+                  ("filteredDataQualityStandard" .=) <$>
+                    _arFilteredDataQualityStandard,
                   ("aggregateBy" .=) <$> _arAggregateBy,
                   ("bucketBySession" .=) <$> _arBucketBySession,
                   ("bucketByActivityType" .=) <$>
@@ -828,6 +845,7 @@ instance ToJSON DataPoint where
 data ListSessionsResponse = ListSessionsResponse'
     { _lsrNextPageToken  :: !(Maybe Text)
     , _lsrDeletedSession :: !(Maybe [Session])
+    , _lsrHasMoreData    :: !(Maybe Bool)
     , _lsrSession        :: !(Maybe [Session])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -839,6 +857,8 @@ data ListSessionsResponse = ListSessionsResponse'
 --
 -- * 'lsrDeletedSession'
 --
+-- * 'lsrHasMoreData'
+--
 -- * 'lsrSession'
 listSessionsResponse
     :: ListSessionsResponse
@@ -846,6 +866,7 @@ listSessionsResponse =
     ListSessionsResponse'
     { _lsrNextPageToken = Nothing
     , _lsrDeletedSession = Nothing
+    , _lsrHasMoreData = Nothing
     , _lsrSession = Nothing
     }
 
@@ -867,6 +888,12 @@ lsrDeletedSession
       . _Default
       . _Coerce
 
+-- | Flag to indicate server has more data to transfer
+lsrHasMoreData :: Lens' ListSessionsResponse (Maybe Bool)
+lsrHasMoreData
+  = lens _lsrHasMoreData
+      (\ s a -> s{_lsrHasMoreData = a})
+
 -- | Sessions with an end time that is between startTime and endTime of the
 -- request.
 lsrSession :: Lens' ListSessionsResponse [Session]
@@ -882,6 +909,7 @@ instance FromJSON ListSessionsResponse where
                  ListSessionsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "deletedSession" .!= mempty)
+                     <*> (o .:? "hasMoreData")
                      <*> (o .:? "session" .!= mempty))
 
 instance ToJSON ListSessionsResponse where
@@ -890,6 +918,7 @@ instance ToJSON ListSessionsResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
                   ("deletedSession" .=) <$> _lsrDeletedSession,
+                  ("hasMoreData" .=) <$> _lsrHasMoreData,
                   ("session" .=) <$> _lsrSession])
 
 --
@@ -1144,13 +1173,14 @@ instance ToJSON DataTypeField where
 --
 -- /See:/ 'dataSource' smart constructor.
 data DataSource = DataSource'
-    { _dsApplication    :: !(Maybe Application)
-    , _dsDevice         :: !(Maybe Device)
-    , _dsName           :: !(Maybe Text)
-    , _dsDataType       :: !(Maybe DataType)
-    , _dsType           :: !(Maybe DataSourceType)
-    , _dsDataStreamName :: !(Maybe Text)
-    , _dsDataStreamId   :: !(Maybe Text)
+    { _dsApplication         :: !(Maybe Application)
+    , _dsDevice              :: !(Maybe Device)
+    , _dsDataQualityStandard :: !(Maybe [DataSourceDataQualityStandardItem])
+    , _dsName                :: !(Maybe Text)
+    , _dsDataType            :: !(Maybe DataType)
+    , _dsType                :: !(Maybe DataSourceType)
+    , _dsDataStreamName      :: !(Maybe Text)
+    , _dsDataStreamId        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataSource' with the minimum fields required to make a request.
@@ -1160,6 +1190,8 @@ data DataSource = DataSource'
 -- * 'dsApplication'
 --
 -- * 'dsDevice'
+--
+-- * 'dsDataQualityStandard'
 --
 -- * 'dsName'
 --
@@ -1176,6 +1208,7 @@ dataSource =
     DataSource'
     { _dsApplication = Nothing
     , _dsDevice = Nothing
+    , _dsDataQualityStandard = Nothing
     , _dsName = Nothing
     , _dsDataType = Nothing
     , _dsType = Nothing
@@ -1194,6 +1227,14 @@ dsApplication
 -- that can hold sensors.
 dsDevice :: Lens' DataSource (Maybe Device)
 dsDevice = lens _dsDevice (\ s a -> s{_dsDevice = a})
+
+-- |
+dsDataQualityStandard :: Lens' DataSource [DataSourceDataQualityStandardItem]
+dsDataQualityStandard
+  = lens _dsDataQualityStandard
+      (\ s a -> s{_dsDataQualityStandard = a})
+      . _Default
+      . _Coerce
 
 -- | An end-user visible name for this data source.
 dsName :: Lens' DataSource (Maybe Text)
@@ -1255,7 +1296,8 @@ instance FromJSON DataSource where
               (\ o ->
                  DataSource' <$>
                    (o .:? "application") <*> (o .:? "device") <*>
-                     (o .:? "name")
+                     (o .:? "dataQualityStandard" .!= mempty)
+                     <*> (o .:? "name")
                      <*> (o .:? "dataType")
                      <*> (o .:? "type")
                      <*> (o .:? "dataStreamName")
@@ -1266,11 +1308,70 @@ instance ToJSON DataSource where
           = object
               (catMaybes
                  [("application" .=) <$> _dsApplication,
-                  ("device" .=) <$> _dsDevice, ("name" .=) <$> _dsName,
+                  ("device" .=) <$> _dsDevice,
+                  ("dataQualityStandard" .=) <$>
+                    _dsDataQualityStandard,
+                  ("name" .=) <$> _dsName,
                   ("dataType" .=) <$> _dsDataType,
                   ("type" .=) <$> _dsType,
                   ("dataStreamName" .=) <$> _dsDataStreamName,
                   ("dataStreamId" .=) <$> _dsDataStreamId])
+
+--
+-- /See:/ 'bucketByTimePeriod' smart constructor.
+data BucketByTimePeriod = BucketByTimePeriod'
+    { _bbtpValue      :: !(Maybe (Textual Int32))
+    , _bbtpType       :: !(Maybe BucketByTimePeriodType)
+    , _bbtpTimeZoneId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BucketByTimePeriod' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bbtpValue'
+--
+-- * 'bbtpType'
+--
+-- * 'bbtpTimeZoneId'
+bucketByTimePeriod
+    :: BucketByTimePeriod
+bucketByTimePeriod =
+    BucketByTimePeriod'
+    { _bbtpValue = Nothing
+    , _bbtpType = Nothing
+    , _bbtpTimeZoneId = Nothing
+    }
+
+bbtpValue :: Lens' BucketByTimePeriod (Maybe Int32)
+bbtpValue
+  = lens _bbtpValue (\ s a -> s{_bbtpValue = a}) .
+      mapping _Coerce
+
+bbtpType :: Lens' BucketByTimePeriod (Maybe BucketByTimePeriodType)
+bbtpType = lens _bbtpType (\ s a -> s{_bbtpType = a})
+
+-- | org.joda.timezone.DateTimeZone
+bbtpTimeZoneId :: Lens' BucketByTimePeriod (Maybe Text)
+bbtpTimeZoneId
+  = lens _bbtpTimeZoneId
+      (\ s a -> s{_bbtpTimeZoneId = a})
+
+instance FromJSON BucketByTimePeriod where
+        parseJSON
+          = withObject "BucketByTimePeriod"
+              (\ o ->
+                 BucketByTimePeriod' <$>
+                   (o .:? "value") <*> (o .:? "type") <*>
+                     (o .:? "timeZoneId"))
+
+instance ToJSON BucketByTimePeriod where
+        toJSON BucketByTimePeriod'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _bbtpValue,
+                  ("type" .=) <$> _bbtpType,
+                  ("timeZoneId" .=) <$> _bbtpTimeZoneId])
 
 --
 -- /See:/ 'valueMapValEntry' smart constructor.
@@ -1317,21 +1418,29 @@ instance ToJSON ValueMapValEntry where
 
 --
 -- /See:/ 'bucketByTime' smart constructor.
-newtype BucketByTime = BucketByTime'
-    { _bbtDurationMillis :: Maybe (Textual Int64)
+data BucketByTime = BucketByTime'
+    { _bbtPeriod         :: !(Maybe BucketByTimePeriod)
+    , _bbtDurationMillis :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketByTime' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'bbtPeriod'
+--
 -- * 'bbtDurationMillis'
 bucketByTime
     :: BucketByTime
 bucketByTime =
     BucketByTime'
-    { _bbtDurationMillis = Nothing
+    { _bbtPeriod = Nothing
+    , _bbtDurationMillis = Nothing
     }
+
+bbtPeriod :: Lens' BucketByTime (Maybe BucketByTimePeriod)
+bbtPeriod
+  = lens _bbtPeriod (\ s a -> s{_bbtPeriod = a})
 
 -- | Specifies that result buckets aggregate data by exactly durationMillis
 -- time frames. Time frames that contain no data will be included in the
@@ -1345,16 +1454,18 @@ bbtDurationMillis
 instance FromJSON BucketByTime where
         parseJSON
           = withObject "BucketByTime"
-              (\ o -> BucketByTime' <$> (o .:? "durationMillis"))
+              (\ o ->
+                 BucketByTime' <$>
+                   (o .:? "period") <*> (o .:? "durationMillis"))
 
 instance ToJSON BucketByTime where
         toJSON BucketByTime'{..}
           = object
               (catMaybes
-                 [("durationMillis" .=) <$> _bbtDurationMillis])
+                 [("period" .=) <$> _bbtPeriod,
+                  ("durationMillis" .=) <$> _bbtDurationMillis])
 
--- | See:
--- google3\/java\/com\/google\/android\/apps\/heart\/platform\/api\/DataType.java
+-- |
 --
 -- /See:/ 'dataType' smart constructor.
 data DataType = DataType'

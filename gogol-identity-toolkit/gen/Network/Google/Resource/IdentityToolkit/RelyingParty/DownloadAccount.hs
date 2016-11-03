@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartyDownloadAccount
          where
         type Rs RelyingPartyDownloadAccount =
              DownloadAccountResponse
-        type Scopes RelyingPartyDownloadAccount = '[]
+        type Scopes RelyingPartyDownloadAccount =
+             '["https://www.googleapis.com/auth/firebase"]
         requestClient RelyingPartyDownloadAccount'{..}
           = go (Just AltJSON) _rpdaPayload
               identityToolkitService

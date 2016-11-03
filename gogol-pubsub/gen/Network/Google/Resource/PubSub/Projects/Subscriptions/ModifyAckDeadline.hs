@@ -23,7 +23,8 @@
 -- Modifies the ack deadline for a specific message. This method is useful
 -- to indicate that more time is needed to process a message by the
 -- subscriber, or to make the message available for redelivery if the
--- processing was interrupted.
+-- processing was interrupted. Note that this does not modify the
+-- subscription-level \`ackDeadlineSeconds\` used for subsequent messages.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.modifyAckDeadline@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
@@ -70,7 +71,8 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
 -- | Modifies the ack deadline for a specific message. This method is useful
 -- to indicate that more time is needed to process a message by the
 -- subscriber, or to make the message available for redelivery if the
--- processing was interrupted.
+-- processing was interrupted. Note that this does not modify the
+-- subscription-level \`ackDeadlineSeconds\` used for subsequent messages.
 --
 -- /See:/ 'projectsSubscriptionsModifyAckDeadline' smart constructor.
 data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDeadline'

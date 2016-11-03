@@ -87,6 +87,7 @@ module Network.Google.Script.Types
     -- * ExecutionResponse
     , ExecutionResponse
     , executionResponse
+    , erStatus
     , erResult
     ) where
 

@@ -90,6 +90,11 @@ module Network.Google.CivicInfo.Types
     -- * RepresentativesRepresentativeInfoByDivisionRoles
     , RepresentativesRepresentativeInfoByDivisionRoles (..)
 
+    -- * ElectionsQueryRequest
+    , ElectionsQueryRequest
+    , electionsQueryRequest
+    , eqrContextParams
+
     -- * Channel
     , Channel
     , channel
@@ -120,6 +125,11 @@ module Network.Google.CivicInfo.Types
     , dsrName
     , dsrOcdId
 
+    -- * DivisionSearchRequest
+    , DivisionSearchRequest
+    , divisionSearchRequest
+    , dsrContextParams
+
     -- * AdministrativeBody
     , AdministrativeBody
     , administrativeBody
@@ -134,8 +144,14 @@ module Network.Google.CivicInfo.Types
     , abElectionOfficials
     , abName
     , abElectionRulesURL
+    , abAddressLines
     , abVoterServices
     , abElectionRegistrationURL
+
+    -- * RepresentativeInfoRequest
+    , RepresentativeInfoRequest
+    , representativeInfoRequest
+    , rirContextParams
 
     -- * Contest
     , Contest
@@ -201,12 +217,23 @@ module Network.Google.CivicInfo.Types
     , sName
     , sOfficial
 
+    -- * DivisionRepresentativeInfoRequest
+    , DivisionRepresentativeInfoRequest
+    , divisionRepresentativeInfoRequest
+    , drirContextParams
+
     -- * ElectoralDistrict
     , ElectoralDistrict
     , electoralDistrict
+    , edKgForeignKey
     , edName
     , edScope
     , edId
+
+    -- * VoterInfoRequest
+    , VoterInfoRequest
+    , voterInfoRequest
+    , virContextParams
 
     -- * SimpleAddressType
     , SimpleAddressType
@@ -218,6 +245,11 @@ module Network.Google.CivicInfo.Types
     , satCity
     , satLine1
     , satLocationName
+
+    -- * ContextParams
+    , ContextParams
+    , contextParams
+    , cpClientProFile
 
     -- * AdministrationRegion
     , AdministrationRegion

@@ -155,10 +155,8 @@ pttipBearerToken
       (\ s a -> s{_pttipBearerToken = a})
 
 -- | REQUIRED: The resource for which the policy detail is being requested.
--- \`resource\` is usually specified as a path, such as
--- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
--- the path specified in this value is resource specific and is specified
--- in the \`testIamPermissions\` documentation.
+-- \`resource\` is usually specified as a path. For example, a Project
+-- resource is specified as \`projects\/{project}\`.
 pttipResource :: Lens' ProjectsTopicsTestIAMPermissions Text
 pttipResource
   = lens _pttipResource

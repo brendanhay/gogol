@@ -305,7 +305,9 @@ image =
     , _iSource = Nothing
     }
 
--- | Image content, represented as a stream of bytes.
+-- | Image content, represented as a stream of bytes. Note: as with all
+-- \`bytes\` fields, protobuffers use a pure binary representation, whereas
+-- JSON representations use base64.
 iContent :: Lens' Image (Maybe ByteString)
 iContent
   = lens _iContent (\ s a -> s{_iContent = a}) .
@@ -630,7 +632,7 @@ statusDetailsItem pSdiAddtional_ =
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
--- | Properties of the object. Contains field \'ype with type URL.
+-- | Properties of the object. Contains field \'type with type URL.
 sdiAddtional :: Lens' StatusDetailsItem (HashMap Text JSONValue)
 sdiAddtional
   = lens _sdiAddtional (\ s a -> s{_sdiAddtional = a})
@@ -1486,15 +1488,14 @@ imageContext =
     }
 
 -- | List of languages to use for TEXT_DETECTION. In most cases, an empty
--- value will yield the best results as it will allow text detection to
--- automatically detect the text language. For languages based on the latin
--- alphabet a hint is not needed. In rare cases, when the language of the
--- text in the image is known in advance, setting this hint will help get
--- better results (although it will hurt a great deal if the hint is
--- wrong). Text detection will return an error if one or more of the
--- languages specified here are not supported. The exact list of supported
--- languages are specified here:
--- https:\/\/cloud.google.com\/translate\/v2\/using_rest#language-params
+-- value yields the best results since it enables automatic language
+-- detection. For languages based on the Latin alphabet, setting
+-- \`language_hints\` is not needed. In rare cases, when the language of
+-- the text in the image is known, setting a hint will help get better
+-- results (although it will be a significant hindrance if the hint is
+-- wrong). Text detection returns an error if one or more of the specified
+-- languages is not one of the [supported
+-- languages](\/translate\/v2\/translate-reference#supported_languages).
 icLanguageHints :: Lens' ImageContext [Text]
 icLanguageHints
   = lens _icLanguageHints

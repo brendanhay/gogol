@@ -123,7 +123,9 @@ vrValues
 
 -- | The range the values cover, in A1 notation. For output, this range
 -- indicates the entire requested range, even though the values will
--- exclude trailing rows and columns.
+-- exclude trailing rows and columns. When appending values, this field
+-- represents the range to search for a table, after which values will be
+-- appended.
 vrRange :: Lens' ValueRange (Maybe Text)
 vrRange = lens _vrRange (\ s a -> s{_vrRange = a})
 
@@ -327,6 +329,43 @@ instance ToJSON ChartData where
         toJSON ChartData'{..}
           = object
               (catMaybes [("sourceRange" .=) <$> _cdSourceRange])
+
+-- | The request for clearing more than one range of values in a spreadsheet.
+--
+-- /See:/ 'batchClearValuesRequest' smart constructor.
+newtype BatchClearValuesRequest = BatchClearValuesRequest'
+    { _bcvrRanges :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchClearValuesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcvrRanges'
+batchClearValuesRequest
+    :: BatchClearValuesRequest
+batchClearValuesRequest =
+    BatchClearValuesRequest'
+    { _bcvrRanges = Nothing
+    }
+
+-- | The ranges to clear, in A1 notation.
+bcvrRanges :: Lens' BatchClearValuesRequest [Text]
+bcvrRanges
+  = lens _bcvrRanges (\ s a -> s{_bcvrRanges = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON BatchClearValuesRequest where
+        parseJSON
+          = withObject "BatchClearValuesRequest"
+              (\ o ->
+                 BatchClearValuesRequest' <$>
+                   (o .:? "ranges" .!= mempty))
+
+instance ToJSON BatchClearValuesRequest where
+        toJSON BatchClearValuesRequest'{..}
+          = object (catMaybes [("ranges" .=) <$> _bcvrRanges])
 
 -- | Properties of a spreadsheet.
 --
@@ -552,8 +591,9 @@ addSheetRequest =
     }
 
 -- | The properties the new sheet should have. All properties are optional.
--- If a sheetId is specified, the sheet will use that ID. (It is an error
--- to specify the ID of a sheet that already exists.)
+-- The sheetId field is optional; if one is not set, an id will be randomly
+-- generated. (It is an error to specify the ID of a sheet that already
+-- exists.)
 asrProperties :: Lens' AddSheetRequest (Maybe SheetProperties)
 asrProperties
   = lens _asrProperties
@@ -1112,6 +1152,58 @@ instance ToJSON GridCoordinate where
                   ("rowIndex" .=) <$> _gcRowIndex,
                   ("sheetId" .=) <$> _gcSheetId])
 
+-- | The response when clearing a range of values in a spreadsheet.
+--
+-- /See:/ 'clearValuesResponse' smart constructor.
+data ClearValuesResponse = ClearValuesResponse'
+    { _cvrClearedRange  :: !(Maybe Text)
+    , _cvrSpreadsheetId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ClearValuesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cvrClearedRange'
+--
+-- * 'cvrSpreadsheetId'
+clearValuesResponse
+    :: ClearValuesResponse
+clearValuesResponse =
+    ClearValuesResponse'
+    { _cvrClearedRange = Nothing
+    , _cvrSpreadsheetId = Nothing
+    }
+
+-- | The range (in A1 notation) that was cleared. (If the request was for an
+-- unbounded range or a ranger larger than the bounds of the sheet, this
+-- will be the actual range that was cleared, bounded to the sheet\'s
+-- limits.)
+cvrClearedRange :: Lens' ClearValuesResponse (Maybe Text)
+cvrClearedRange
+  = lens _cvrClearedRange
+      (\ s a -> s{_cvrClearedRange = a})
+
+-- | The spreadsheet the updates were applied to.
+cvrSpreadsheetId :: Lens' ClearValuesResponse (Maybe Text)
+cvrSpreadsheetId
+  = lens _cvrSpreadsheetId
+      (\ s a -> s{_cvrSpreadsheetId = a})
+
+instance FromJSON ClearValuesResponse where
+        parseJSON
+          = withObject "ClearValuesResponse"
+              (\ o ->
+                 ClearValuesResponse' <$>
+                   (o .:? "clearedRange") <*> (o .:? "spreadsheetId"))
+
+instance ToJSON ClearValuesResponse where
+        toJSON ClearValuesResponse'{..}
+          = object
+              (catMaybes
+                 [("clearedRange" .=) <$> _cvrClearedRange,
+                  ("spreadsheetId" .=) <$> _cvrSpreadsheetId])
+
 -- | Clears the basic filter, if any exists on the sheet.
 --
 -- /See:/ 'clearBasicFilterRequest' smart constructor.
@@ -1649,6 +1741,67 @@ instance ToJSON PieChartSpec where
                   ("series" .=) <$> _pcsSeries,
                   ("threeDimensional" .=) <$> _pcsThreeDimensional])
 
+-- | The response when updating a range of values in a spreadsheet.
+--
+-- /See:/ 'appendValuesResponse' smart constructor.
+data AppendValuesResponse = AppendValuesResponse'
+    { _avrSpreadsheetId :: !(Maybe Text)
+    , _avrUpdates       :: !(Maybe UpdateValuesResponse)
+    , _avrTableRange    :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AppendValuesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'avrSpreadsheetId'
+--
+-- * 'avrUpdates'
+--
+-- * 'avrTableRange'
+appendValuesResponse
+    :: AppendValuesResponse
+appendValuesResponse =
+    AppendValuesResponse'
+    { _avrSpreadsheetId = Nothing
+    , _avrUpdates = Nothing
+    , _avrTableRange = Nothing
+    }
+
+-- | The spreadsheet the updates were applied to.
+avrSpreadsheetId :: Lens' AppendValuesResponse (Maybe Text)
+avrSpreadsheetId
+  = lens _avrSpreadsheetId
+      (\ s a -> s{_avrSpreadsheetId = a})
+
+-- | Information about the updates that were applied.
+avrUpdates :: Lens' AppendValuesResponse (Maybe UpdateValuesResponse)
+avrUpdates
+  = lens _avrUpdates (\ s a -> s{_avrUpdates = a})
+
+-- | The range (in A1 notation) of the table that values are being appended
+-- to (before the values were appended). Empty if no table was found.
+avrTableRange :: Lens' AppendValuesResponse (Maybe Text)
+avrTableRange
+  = lens _avrTableRange
+      (\ s a -> s{_avrTableRange = a})
+
+instance FromJSON AppendValuesResponse where
+        parseJSON
+          = withObject "AppendValuesResponse"
+              (\ o ->
+                 AppendValuesResponse' <$>
+                   (o .:? "spreadsheetId") <*> (o .:? "updates") <*>
+                     (o .:? "tableRange"))
+
+instance ToJSON AppendValuesResponse where
+        toJSON AppendValuesResponse'{..}
+          = object
+              (catMaybes
+                 [("spreadsheetId" .=) <$> _avrSpreadsheetId,
+                  ("updates" .=) <$> _avrUpdates,
+                  ("tableRange" .=) <$> _avrTableRange])
+
 -- | A data validation rule.
 --
 -- /See:/ 'dataValidationRule' smart constructor.
@@ -2113,7 +2266,9 @@ addProtectedRangeRequest =
     { _aprrProtectedRange = Nothing
     }
 
--- | The protected range to be added.
+-- | The protected range to be added. The protectedRangeId field is optional;
+-- if one is not set, an id will be randomly generated. (It is an error to
+-- specify the ID of a range that already exists.)
 aprrProtectedRange :: Lens' AddProtectedRangeRequest (Maybe ProtectedRange)
 aprrProtectedRange
   = lens _aprrProtectedRange
@@ -2284,6 +2439,27 @@ instance FromJSON DeleteDimensionRequest where
 instance ToJSON DeleteDimensionRequest where
         toJSON DeleteDimensionRequest'{..}
           = object (catMaybes [("range" .=) <$> _ddrRange])
+
+-- | The request for clearing a range of values in a spreadsheet.
+--
+-- /See:/ 'clearValuesRequest' smart constructor.
+data ClearValuesRequest =
+    ClearValuesRequest'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ClearValuesRequest' with the minimum fields required to make a request.
+--
+clearValuesRequest
+    :: ClearValuesRequest
+clearValuesRequest = ClearValuesRequest'
+
+instance FromJSON ClearValuesRequest where
+        parseJSON
+          = withObject "ClearValuesRequest"
+              (\ o -> pure ClearValuesRequest')
+
+instance ToJSON ClearValuesRequest where
+        toJSON = const emptyObject
 
 -- | Finds and replaces data in cells over a range, sheet, or all sheets.
 --
@@ -4484,7 +4660,9 @@ addChartRequest =
     }
 
 -- | The chart that should be added to the spreadsheet, including the
--- position where it should be placed.
+-- position where it should be placed. The chartId field is optional; if
+-- one is not set, an id will be randomly generated. (It is an error to
+-- specify the ID of a chart that already exists.)
 aChart :: Lens' AddChartRequest (Maybe EmbeddedChart)
 aChart = lens _aChart (\ s a -> s{_aChart = a})
 
@@ -4634,8 +4812,8 @@ boStyle = lens _boStyle (\ s a -> s{_boStyle = a})
 boColor :: Lens' BOrder (Maybe Color)
 boColor = lens _boColor (\ s a -> s{_boColor = a})
 
--- | The width of the border, in pixels. Border widths must be between 0 and
--- 3 pixels, inclusive.
+-- | The width of the border, in pixels. Deprecated; the width is determined
+-- by the \"style\" field.
 boWidth :: Lens' BOrder (Maybe Int32)
 boWidth
   = lens _boWidth (\ s a -> s{_boWidth = a}) .
@@ -4763,9 +4941,9 @@ addNamedRangeRequest =
     { _aNamedRange = Nothing
     }
 
--- | The named range to add. If a non-empty namedRangeId is specified, the
--- named range will use that ID. (It is an error to specify the ID of a
--- named range that already exists.)
+-- | The named range to add. The namedRangeId field is optional; if one is
+-- not set, an id will be randomly generated. (It is an error to specify
+-- the ID of a range that already exists.)
 aNamedRange :: Lens' AddNamedRangeRequest (Maybe NamedRange)
 aNamedRange
   = lens _aNamedRange (\ s a -> s{_aNamedRange = a})
@@ -5924,7 +6102,9 @@ addFilterViewRequest =
     { _aFilter = Nothing
     }
 
--- | The filter to add.
+-- | The filter to add. The filterViewId field is optional; if one is not
+-- set, an id will be randomly generated. (It is an error to specify the ID
+-- of a filter that already exists.)
 aFilter :: Lens' AddFilterViewRequest (Maybe FilterView)
 aFilter = lens _aFilter (\ s a -> s{_aFilter = a})
 
@@ -6265,9 +6445,7 @@ updateProtectedRangeRequest =
     , _uprrFields = Nothing
     }
 
--- | The protected range to update with the new properties. If a nonzero
--- protectedRangeId is specified, the protected range will use that ID. (It
--- is an error to specify the ID of a protected range that already exists.)
+-- | The protected range to update with the new properties.
 uprrProtectedRange :: Lens' UpdateProtectedRangeRequest (Maybe ProtectedRange)
 uprrProtectedRange
   = lens _uprrProtectedRange
@@ -6643,7 +6821,9 @@ numberFormat =
     }
 
 -- | Pattern string used for formatting. If not set, a default pattern based
--- on the user\'s locale will be used if necessary for the given type.
+-- on the user\'s locale will be used if necessary for the given type. See
+-- the [Date and Number Formats guide](\/sheets\/guides\/formats) for more
+-- information about the supported patterns.
 nfPattern :: Lens' NumberFormat (Maybe Text)
 nfPattern
   = lens _nfPattern (\ s a -> s{_nfPattern = a})
@@ -7246,6 +7426,61 @@ instance ToJSON TextFormat where
                   ("underline" .=) <$> _tfUnderline,
                   ("italic" .=) <$> _tfItalic, ("bold" .=) <$> _tfBold,
                   ("strikethrough" .=) <$> _tfStrikethrough])
+
+-- | The response when updating a range of values in a spreadsheet.
+--
+-- /See:/ 'batchClearValuesResponse' smart constructor.
+data BatchClearValuesResponse = BatchClearValuesResponse'
+    { _bcvrClearedRanges :: !(Maybe [Text])
+    , _bcvrSpreadsheetId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchClearValuesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bcvrClearedRanges'
+--
+-- * 'bcvrSpreadsheetId'
+batchClearValuesResponse
+    :: BatchClearValuesResponse
+batchClearValuesResponse =
+    BatchClearValuesResponse'
+    { _bcvrClearedRanges = Nothing
+    , _bcvrSpreadsheetId = Nothing
+    }
+
+-- | The ranges that were cleared, in A1 notation. (If the requests were for
+-- an unbounded range or a ranger larger than the bounds of the sheet, this
+-- will be the actual ranges that were cleared, bounded to the sheet\'s
+-- limits.)
+bcvrClearedRanges :: Lens' BatchClearValuesResponse [Text]
+bcvrClearedRanges
+  = lens _bcvrClearedRanges
+      (\ s a -> s{_bcvrClearedRanges = a})
+      . _Default
+      . _Coerce
+
+-- | The spreadsheet the updates were applied to.
+bcvrSpreadsheetId :: Lens' BatchClearValuesResponse (Maybe Text)
+bcvrSpreadsheetId
+  = lens _bcvrSpreadsheetId
+      (\ s a -> s{_bcvrSpreadsheetId = a})
+
+instance FromJSON BatchClearValuesResponse where
+        parseJSON
+          = withObject "BatchClearValuesResponse"
+              (\ o ->
+                 BatchClearValuesResponse' <$>
+                   (o .:? "clearedRanges" .!= mempty) <*>
+                     (o .:? "spreadsheetId"))
+
+instance ToJSON BatchClearValuesResponse where
+        toJSON BatchClearValuesResponse'{..}
+          = object
+              (catMaybes
+                 [("clearedRanges" .=) <$> _bcvrClearedRanges,
+                  ("spreadsheetId" .=) <$> _bcvrSpreadsheetId])
 
 -- | The domain of a chart. For example, if charting stock prices over time,
 -- this would be the date.

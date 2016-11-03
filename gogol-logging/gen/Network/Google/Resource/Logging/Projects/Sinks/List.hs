@@ -22,7 +22,7 @@
 --
 -- Lists sinks.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.projects.sinks.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.list@.
 module Network.Google.Resource.Logging.Projects.Sinks.List
     (
     -- * REST Resource
@@ -33,13 +33,13 @@ module Network.Google.Resource.Logging.Projects.Sinks.List
     , ProjectsSinksList
 
     -- * Request Lenses
+    , pslParent
     , pslXgafv
     , pslUploadProtocol
     , pslPp
     , pslAccessToken
     , pslUploadType
     , pslBearerToken
-    , pslProjectName
     , pslPageToken
     , pslPageSize
     , pslCallback
@@ -51,10 +51,10 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.projects.sinks.list@ method which the
 -- 'ProjectsSinksList' request conforms to.
 type ProjectsSinksListResource =
-     "v2beta1" :>
-       Capture "projectName" Text :>
+     "v2" :>
+       Capture "parent" Text :>
          "sinks" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -70,13 +70,13 @@ type ProjectsSinksListResource =
 --
 -- /See:/ 'projectsSinksList' smart constructor.
 data ProjectsSinksList = ProjectsSinksList'
-    { _pslXgafv          :: !(Maybe Text)
+    { _pslParent         :: !Text
+    , _pslXgafv          :: !(Maybe Xgafv)
     , _pslUploadProtocol :: !(Maybe Text)
     , _pslPp             :: !Bool
     , _pslAccessToken    :: !(Maybe Text)
     , _pslUploadType     :: !(Maybe Text)
     , _pslBearerToken    :: !(Maybe Text)
-    , _pslProjectName    :: !Text
     , _pslPageToken      :: !(Maybe Text)
     , _pslPageSize       :: !(Maybe (Textual Int32))
     , _pslCallback       :: !(Maybe Text)
@@ -85,6 +85,8 @@ data ProjectsSinksList = ProjectsSinksList'
 -- | Creates a value of 'ProjectsSinksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pslParent'
 --
 -- * 'pslXgafv'
 --
@@ -98,32 +100,36 @@ data ProjectsSinksList = ProjectsSinksList'
 --
 -- * 'pslBearerToken'
 --
--- * 'pslProjectName'
---
 -- * 'pslPageToken'
 --
 -- * 'pslPageSize'
 --
 -- * 'pslCallback'
 projectsSinksList
-    :: Text -- ^ 'pslProjectName'
+    :: Text -- ^ 'pslParent'
     -> ProjectsSinksList
-projectsSinksList pPslProjectName_ =
+projectsSinksList pPslParent_ =
     ProjectsSinksList'
-    { _pslXgafv = Nothing
+    { _pslParent = pPslParent_
+    , _pslXgafv = Nothing
     , _pslUploadProtocol = Nothing
     , _pslPp = True
     , _pslAccessToken = Nothing
     , _pslUploadType = Nothing
     , _pslBearerToken = Nothing
-    , _pslProjectName = pPslProjectName_
     , _pslPageToken = Nothing
     , _pslPageSize = Nothing
     , _pslCallback = Nothing
     }
 
+-- | Required. The cloud resource containing the sinks. Example:
+-- \`\"projects\/my-logging-project\"\`.
+pslParent :: Lens' ProjectsSinksList Text
+pslParent
+  = lens _pslParent (\ s a -> s{_pslParent = a})
+
 -- | V1 error format.
-pslXgafv :: Lens' ProjectsSinksList (Maybe Text)
+pslXgafv :: Lens' ProjectsSinksList (Maybe Xgafv)
 pslXgafv = lens _pslXgafv (\ s a -> s{_pslXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -154,26 +160,17 @@ pslBearerToken
   = lens _pslBearerToken
       (\ s a -> s{_pslBearerToken = a})
 
--- | Required. The resource name of the project containing the sinks.
--- Example: \`\"projects\/my-logging-project\"\`.
-pslProjectName :: Lens' ProjectsSinksList Text
-pslProjectName
-  = lens _pslProjectName
-      (\ s a -> s{_pslProjectName = a})
-
--- | Optional. If the \`pageToken\` parameter is supplied, then the next page
--- of results is retrieved. The \`pageToken\` parameter must be set to the
--- value of the \`nextPageToken\` from the previous response. The value of
--- \`projectName\` must be the same as in the previous request.
+-- | Optional. If present, then retrieve the next batch of results from the
+-- preceding call to this method. \`pageToken\` must be the value of
+-- \`nextPageToken\` from the previous response. The values of other method
+-- parameters should be identical to those in the previous call.
 pslPageToken :: Lens' ProjectsSinksList (Maybe Text)
 pslPageToken
   = lens _pslPageToken (\ s a -> s{_pslPageToken = a})
 
--- | Optional. The maximum number of results to return from this request. You
--- must check for presence of \`nextPageToken\` to determine if additional
--- results are available, which you can retrieve by passing the
--- \`nextPageToken\` value as the \`pageToken\` parameter in the next
--- request.
+-- | Optional. The maximum number of results to return from this request.
+-- Non-positive values are ignored. The presence of \`nextPageToken\` in
+-- the response indicates that more results might be available.
 pslPageSize :: Lens' ProjectsSinksList (Maybe Int32)
 pslPageSize
   = lens _pslPageSize (\ s a -> s{_pslPageSize = a}) .
@@ -192,7 +189,7 @@ instance GoogleRequest ProjectsSinksList where
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
         requestClient ProjectsSinksList'{..}
-          = go _pslProjectName _pslXgafv _pslUploadProtocol
+          = go _pslParent _pslXgafv _pslUploadProtocol
               (Just _pslPp)
               _pslAccessToken
               _pslUploadType

@@ -1,11 +1,15 @@
 compiler:   ghc-7.10.3
-resolver:   lts-6.2
+resolver:   lts-6.9
 flags:      {}
-extra-deps: []
+extra-deps:
+  - http-conduit-2.2.0
+  - http-client-0.5.0.1
+  - http-client-tls-0.3.0
 packages:
   - core
   - gogol
   - examples
+
   - gogol-adexchange-buyer
   - gogol-adexchange-seller
   - gogol-admin-datatransfer
@@ -36,6 +40,7 @@ packages:
   - gogol-cloudtrace
   - gogol-compute
   - gogol-container
+  - gogol-containerbuilder
   - gogol-customsearch
   - gogol-dataflow
   - gogol-dataproc
@@ -48,6 +53,7 @@ packages:
   - gogol-doubleclick-bids
   - gogol-doubleclick-search
   - gogol-drive
+  - gogol-firebase-dynamiclinks
   - gogol-firebase-rules
   - gogol-fitness
   - gogol-fonts
@@ -60,6 +66,7 @@ packages:
   - gogol-gmail
   - gogol-groups-migration
   - gogol-groups-settings
+  - gogol-iam
   - gogol-identity-toolkit
   - gogol-kgsearch
   - gogol-latencytest
@@ -67,6 +74,7 @@ packages:
   - gogol-maps-coordinate
   - gogol-maps-engine
   - gogol-mirror
+  - gogol-ml
   - gogol-monitoring
   - gogol-oauth2
   - gogol-pagespeed
@@ -83,7 +91,11 @@ packages:
   - gogol-replicapool-updater
   - gogol-resourcemanager
   - gogol-resourceviews
+  - gogol-runtimeconfig
+  - gogol-safebrowsing
   - gogol-script
+  - gogol-servicecontrol
+  - gogol-servicemanagement
   - gogol-sheets
   - gogol-shopping-content
   - gogol-siteverification

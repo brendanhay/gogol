@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the entire content of the UrlMap resource.
+-- Updates the specified UrlMap resource with the data included in the
+-- request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.update@.
 module Network.Google.Resource.Compute.URLMaps.Update
@@ -54,7 +55,8 @@ type URLMapsUpdateResource =
                    QueryParam "alt" AltJSON :>
                      ReqBody '[JSON] URLMap :> Put '[JSON] Operation
 
--- | Updates the entire content of the UrlMap resource.
+-- | Updates the specified UrlMap resource with the data included in the
+-- request.
 --
 -- /See:/ 'urlMapsUpdate' smart constructor.
 data URLMapsUpdate = URLMapsUpdate'

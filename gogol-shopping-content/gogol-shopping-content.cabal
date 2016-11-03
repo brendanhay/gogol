@@ -1,5 +1,5 @@
 name:                  gogol-shopping-content
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Content API for Shopping SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -90,6 +90,12 @@ library
         , Network.Google.Resource.Content.Productstatuses.Custombatch
         , Network.Google.Resource.Content.Productstatuses.Get
         , Network.Google.Resource.Content.Productstatuses.List
+        , Network.Google.Resource.Content.ShippingSettings.Custombatch
+        , Network.Google.Resource.Content.ShippingSettings.Get
+        , Network.Google.Resource.Content.ShippingSettings.Getsupportedcarriers
+        , Network.Google.Resource.Content.ShippingSettings.List
+        , Network.Google.Resource.Content.ShippingSettings.Patch
+        , Network.Google.Resource.Content.ShippingSettings.Update
         , Network.Google.ShoppingContent
         , Network.Google.ShoppingContent.Types
 
@@ -98,5 +104,5 @@ library
         , Network.Google.ShoppingContent.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
-        , base       >= 4.7
+          gogol-core == 0.1.1.*
+        , base       >= 4.7 && < 5

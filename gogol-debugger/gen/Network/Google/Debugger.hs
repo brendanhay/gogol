@@ -16,7 +16,7 @@
 -- Examines the call stack and variables of a running application without
 -- stopping or slowing it down.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference>
+-- /See:/ <http://cloud.google.com/debugger Stackdriver Debugger API Reference>
 module Network.Google.Debugger
     (
     -- * Service Configuration
@@ -24,7 +24,6 @@ module Network.Google.Debugger
 
     -- * OAuth Scopes
     , cloudDebuggerScope
-    , cloudDebugletcontrollerScope
     , cloudPlatformScope
 
     -- * API Declaration
@@ -279,7 +278,7 @@ import           Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Google Cloud Debugger API service.
+-- | Represents the entirety of the methods and resources available for the Stackdriver Debugger API service.
 type DebuggerAPI =
      ControllerDebuggeesBreakpointsListResource :<|>
        ControllerDebuggeesBreakpointsUpdateResource

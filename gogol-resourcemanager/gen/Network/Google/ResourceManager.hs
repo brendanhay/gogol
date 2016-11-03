@@ -31,6 +31,27 @@ module Network.Google.ResourceManager
 
     -- * Resources
 
+    -- ** cloudresourcemanager.operations.get
+    , module Network.Google.Resource.CloudResourceManager.Operations.Get
+
+    -- ** cloudresourcemanager.organizations.get
+    , module Network.Google.Resource.CloudResourceManager.Organizations.Get
+
+    -- ** cloudresourcemanager.organizations.getIamPolicy
+    , module Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
+
+    -- ** cloudresourcemanager.organizations.search
+    , module Network.Google.Resource.CloudResourceManager.Organizations.Search
+
+    -- ** cloudresourcemanager.organizations.setIamPolicy
+    , module Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
+
+    -- ** cloudresourcemanager.organizations.testIamPermissions
+    , module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
+
+    -- ** cloudresourcemanager.projects.create
+    , module Network.Google.Resource.CloudResourceManager.Projects.Create
+
     -- ** cloudresourcemanager.projects.delete
     , module Network.Google.Resource.CloudResourceManager.Projects.Delete
 
@@ -57,6 +78,20 @@ module Network.Google.ResourceManager
 
     -- * Types
 
+    -- ** Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- ** SearchOrganizationsRequest
+    , SearchOrganizationsRequest
+    , searchOrganizationsRequest
+    , sorFilter
+    , sorPageToken
+    , sorPageSize
+
     -- ** ResourceId
     , ResourceId
     , resourceId
@@ -73,6 +108,11 @@ module Network.Google.ResourceManager
     , GetIAMPolicyRequest
     , getIAMPolicyRequest
 
+    -- ** OrganizationOwner
+    , OrganizationOwner
+    , organizationOwner
+    , ooDirectoryCustomerId
+
     -- ** Project
     , Project
     , project
@@ -84,9 +124,35 @@ module Network.Google.ResourceManager
     , pLifecycleState
     , pCreateTime
 
+    -- ** Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
+
     -- ** Empty
     , Empty
     , empty
+
+    -- ** ProjectCreationStatus
+    , ProjectCreationStatus
+    , projectCreationStatus
+    , pcsGettable
+    , pcsReady
+    , pcsCreateTime
+
+    -- ** StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
+
+    -- ** FolderOperationError
+    , FolderOperationError
+    , folderOperationError
+    , foeErrorMessageId
 
     -- ** SetIAMPolicyRequest
     , SetIAMPolicyRequest
@@ -97,6 +163,12 @@ module Network.Google.ResourceManager
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
     , tiprPermissions
+
+    -- ** SearchOrganizationsResponse
+    , SearchOrganizationsResponse
+    , searchOrganizationsResponse
+    , sorNextPageToken
+    , sorOrganizations
 
     -- ** TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -115,6 +187,33 @@ module Network.Google.ResourceManager
     , projectLabels
     , plAddtional
 
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omAddtional
+
+    -- ** FolderOperation
+    , FolderOperation
+    , folderOperation
+    , foDestinationParent
+    , foDisplayName
+    , foOperationType
+    , foSourceParent
+
+    -- ** Organization
+    , Organization
+    , organization
+    , orgCreationTime
+    , orgOwner
+    , orgName
+    , orgDisplayName
+    , orgLifecycleState
+
+    -- ** OperationResponse
+    , OperationResponse
+    , operationResponse
+    , orAddtional
+
     -- ** UndeleteProjectRequest
     , UndeleteProjectRequest
     , undeleteProjectRequest
@@ -127,6 +226,13 @@ module Network.Google.ResourceManager
     ) where
 
 import           Network.Google.Prelude
+import           Network.Google.Resource.CloudResourceManager.Operations.Get
+import           Network.Google.Resource.CloudResourceManager.Organizations.Get
+import           Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
+import           Network.Google.Resource.CloudResourceManager.Organizations.Search
+import           Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
+import           Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
+import           Network.Google.Resource.CloudResourceManager.Projects.Create
 import           Network.Google.Resource.CloudResourceManager.Projects.Delete
 import           Network.Google.Resource.CloudResourceManager.Projects.Get
 import           Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
@@ -143,9 +249,17 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Cloud Resource Manager API service.
 type ResourceManagerAPI =
-     ProjectsListResource :<|> ProjectsUndeleteResource
+     OrganizationsGetIAMPolicyResource :<|>
+       OrganizationsGetResource
+       :<|> OrganizationsSetIAMPolicyResource
+       :<|> OrganizationsTestIAMPermissionsResource
+       :<|> OrganizationsSearchResource
+       :<|> OperationsGetResource
+       :<|> ProjectsListResource
+       :<|> ProjectsUndeleteResource
        :<|> ProjectsGetIAMPolicyResource
        :<|> ProjectsGetResource
+       :<|> ProjectsCreateResource
        :<|> ProjectsSetIAMPolicyResource
        :<|> ProjectsTestIAMPermissionsResource
        :<|> ProjectsDeleteResource

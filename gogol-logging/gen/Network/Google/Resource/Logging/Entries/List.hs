@@ -24,7 +24,7 @@
 -- Logging. For ways to export log entries, see [Exporting
 -- Logs](\/logging\/docs\/export).
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @logging.entries.list@.
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.entries.list@.
 module Network.Google.Resource.Logging.Entries.List
     (
     -- * REST Resource
@@ -51,9 +51,9 @@ import           Network.Google.Prelude
 -- | A resource alias for @logging.entries.list@ method which the
 -- 'EntriesList' request conforms to.
 type EntriesListResource =
-     "v2beta1" :>
+     "v2" :>
        "entries:list" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -70,7 +70,7 @@ type EntriesListResource =
 --
 -- /See:/ 'entriesList' smart constructor.
 data EntriesList = EntriesList'
-    { _elXgafv          :: !(Maybe Text)
+    { _elXgafv          :: !(Maybe Xgafv)
     , _elUploadProtocol :: !(Maybe Text)
     , _elPp             :: !Bool
     , _elAccessToken    :: !(Maybe Text)
@@ -115,7 +115,7 @@ entriesList pElPayload_ =
     }
 
 -- | V1 error format.
-elXgafv :: Lens' EntriesList (Maybe Text)
+elXgafv :: Lens' EntriesList (Maybe Xgafv)
 elXgafv = lens _elXgafv (\ s a -> s{_elXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

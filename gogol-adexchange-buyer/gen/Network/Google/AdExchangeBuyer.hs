@@ -70,6 +70,9 @@ module Network.Google.AdExchangeBuyer
     -- ** adexchangebuyer.creatives.list
     , module Network.Google.Resource.AdExchangeBuyer.Creatives.List
 
+    -- ** adexchangebuyer.creatives.listDeals
+    , module Network.Google.Resource.AdExchangeBuyer.Creatives.ListDeals
+
     -- ** adexchangebuyer.creatives.removeDeal
     , module Network.Google.Resource.AdExchangeBuyer.Creatives.RemoveDeal
 
@@ -167,6 +170,7 @@ module Network.Google.AdExchangeBuyer
     , cnataImpressionTrackingURL
     , cnataCallToAction
     , cnataStore
+    , cnataVideoURL
     , cnataPrice
     , cnataAdvertiser
     , cnataStarRating
@@ -184,6 +188,13 @@ module Network.Google.AdExchangeBuyer
     , clNextPageToken
     , clKind
     , clItems
+
+    -- ** CreativeDealIdsDealStatusesItem
+    , CreativeDealIdsDealStatusesItem
+    , creativeDealIdsDealStatusesItem
+    , cdidsiArcStatus
+    , cdidsiWebPropertyId
+    , cdidsiDealId
 
     -- ** CreativeServingRestrictionsItemContextsItem
     , CreativeServingRestrictionsItemContextsItem
@@ -277,8 +288,15 @@ module Network.Google.AdExchangeBuyer
     -- ** CreativeCorrectionsItem
     , CreativeCorrectionsItem
     , creativeCorrectionsItem
+    , cciContexts
     , cciReason
     , cciDetails
+
+    -- ** DealTermsRubiconNonGuaranteedTerms
+    , DealTermsRubiconNonGuaranteedTerms
+    , dealTermsRubiconNonGuaranteedTerms
+    , dtrngtPriorityPrice
+    , dtrngtStandardPrice
 
     -- ** DealServingMetadata
     , DealServingMetadata
@@ -324,6 +342,7 @@ module Network.Google.AdExchangeBuyer
     , cDealsStatus
     , cWidth
     , cClickThroughURL
+    , cLanguages
     , cVendorType
     , cAccountId
     , cImpressionTrackingURL
@@ -333,6 +352,7 @@ module Network.Google.AdExchangeBuyer
     , cVideoURL
     , cAPIUploadTimestamp
     , cServingRestrictions
+    , cDetectedDomains
     , cOpenAuctionStatus
 
     -- ** TargetingValueDayPartTargetingDayPart
@@ -349,6 +369,7 @@ module Network.Google.AdExchangeBuyer
     , dimensionDimensionValue
     , ddvName
     , ddvId
+    , ddvPercentage
 
     -- ** PretargetingConfigList
     , PretargetingConfigList
@@ -484,12 +505,14 @@ module Network.Google.AdExchangeBuyer
     , targetingValueCreativeSize
     , tvcsSize
     , tvcsCompanionSizes
+    , tvcsSkippableAdType
     , tvcsCreativeSizeType
 
     -- ** DealTermsGuaranteedFixedPriceTermsBillingInfo
     , DealTermsGuaranteedFixedPriceTermsBillingInfo
     , dealTermsGuaranteedFixedPriceTermsBillingInfo
     , dtgfptbiCurrencyConversionTimeMs
+    , dtgfptbiDfpLineItemId
     , dtgfptbiPrice
     , dtgfptbiOriginalContractedQuantity
 
@@ -507,6 +530,7 @@ module Network.Google.AdExchangeBuyer
     , pBuyerContacts
     , pKind
     , pOriginatorRole
+    , pDBmAdvertiserIds
     , pRevisionNumber
     , pBilledBuyer
     , pPrivateAuctionId
@@ -555,6 +579,14 @@ module Network.Google.AdExchangeBuyer
     , pcdiHeight
     , pcdiWidth
 
+    -- ** CreativeCorrectionsItemContextsItem
+    , CreativeCorrectionsItemContextsItem
+    , creativeCorrectionsItemContextsItem
+    , cciciPlatform
+    , cciciContextType
+    , cciciAuctionType
+    , cciciGeoCriteriaId
+
     -- ** PublisherProvidedForecast
     , PublisherProvidedForecast
     , publisherProvidedForecast
@@ -583,6 +615,7 @@ module Network.Google.AdExchangeBuyer
     , pCurrencyCode
     , pAmountMicros
     , pPricingType
+    , pExpectedCpmMicros
 
     -- ** PretargetingConfigVideoPlayerSizesItem
     , PretargetingConfigVideoPlayerSizesItem
@@ -714,6 +747,7 @@ module Network.Google.AdExchangeBuyer
     , mdDealServingMetadata
     , mdFlightStartTimeMs
     , mdSharedTargetings
+    , mdIsRfpTemplate
     , mdProposalId
     , mdDealId
     , mdInventoryDescription
@@ -756,11 +790,19 @@ module Network.Google.AdExchangeBuyer
     , dtEstimatedGrossSpend
     , dtNonGuaranteedFixedPriceTerms
     , dtNonGuaranteedAuctionTerms
+    , dtRubiconNonGuaranteedTerms
     , dtBrandingType
+    , dtCrossListedExternalDealIdType
     , dtEstimatedImpressionsPerDay
     , dtSellerTimeZone
     , dtGuaranteedFixedPriceTerms
     , dtDescription
+
+    -- ** CreativeDealIds
+    , CreativeDealIds
+    , creativeDealIds
+    , cdiKind
+    , cdiDealStatuses
 
     -- ** MarketplaceLabel
     , MarketplaceLabel
@@ -789,7 +831,9 @@ module Network.Google.AdExchangeBuyer
     , DealServingMetadataDealPauseStatus
     , dealServingMetadataDealPauseStatus
     , dsmdpsFirstPausedBy
+    , dsmdpsBuyerPauseReason
     , dsmdpsHasBuyerPaused
+    , dsmdpsSellerPauseReason
     , dsmdpsHasSellerPaused
 
     -- ** DealTermsGuaranteedFixedPriceTerms
@@ -799,6 +843,7 @@ module Network.Google.AdExchangeBuyer
     , dtgfptGuaranteedImpressions
     , dtgfptBillingInfo
     , dtgfptFixedPrices
+    , dtgfptMinimumDailyLooks
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -816,6 +861,7 @@ import           Network.Google.Resource.AdExchangeBuyer.Creatives.AddDeal
 import           Network.Google.Resource.AdExchangeBuyer.Creatives.Get
 import           Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
 import           Network.Google.Resource.AdExchangeBuyer.Creatives.List
+import           Network.Google.Resource.AdExchangeBuyer.Creatives.ListDeals
 import           Network.Google.Resource.AdExchangeBuyer.Creatives.RemoveDeal
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
@@ -865,6 +911,7 @@ type AdExchangeBuyerAPI =
        :<|> CreativesInsertResource
        :<|> CreativesRemoveDealResource
        :<|> CreativesListResource
+       :<|> CreativesListDealsResource
        :<|> CreativesGetResource
        :<|> CreativesAddDealResource
        :<|> PerformanceReportListResource

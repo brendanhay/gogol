@@ -36,6 +36,7 @@ module Network.Google.Resource.DNS.Changes.Create
     , ccProject
     , ccPayload
     , ccManagedZone
+    , ccClientOperationId
     ) where
 
 import           Network.Google.DNS.Types
@@ -45,22 +46,24 @@ import           Network.Google.Prelude
 -- 'ChangesCreate' request conforms to.
 type ChangesCreateResource =
      "dns" :>
-       "v1" :>
+       "v2beta1" :>
          "projects" :>
            Capture "project" Text :>
              "managedZones" :>
                Capture "managedZone" Text :>
                  "changes" :>
-                   QueryParam "alt" AltJSON :>
-                     ReqBody '[JSON] Change :> Post '[JSON] Change
+                   QueryParam "clientOperationId" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Change :> Post '[JSON] Change
 
 -- | Atomically update the ResourceRecordSet collection.
 --
 -- /See:/ 'changesCreate' smart constructor.
 data ChangesCreate = ChangesCreate'
-    { _ccProject     :: !Text
-    , _ccPayload     :: !Change
-    , _ccManagedZone :: !Text
+    { _ccProject           :: !Text
+    , _ccPayload           :: !Change
+    , _ccManagedZone       :: !Text
+    , _ccClientOperationId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesCreate' with the minimum fields required to make a request.
@@ -72,6 +75,8 @@ data ChangesCreate = ChangesCreate'
 -- * 'ccPayload'
 --
 -- * 'ccManagedZone'
+--
+-- * 'ccClientOperationId'
 changesCreate
     :: Text -- ^ 'ccProject'
     -> Change -- ^ 'ccPayload'
@@ -82,6 +87,7 @@ changesCreate pCcProject_ pCcPayload_ pCcManagedZone_ =
     { _ccProject = pCcProject_
     , _ccPayload = pCcPayload_
     , _ccManagedZone = pCcManagedZone_
+    , _ccClientOperationId = Nothing
     }
 
 -- | Identifies the project addressed by this request.
@@ -101,13 +107,22 @@ ccManagedZone
   = lens _ccManagedZone
       (\ s a -> s{_ccManagedZone = a})
 
+-- | For mutating operation requests only. An optional identifier specified
+-- by the client. Must be unique for operation resources in the Operations
+-- collection.
+ccClientOperationId :: Lens' ChangesCreate (Maybe Text)
+ccClientOperationId
+  = lens _ccClientOperationId
+      (\ s a -> s{_ccClientOperationId = a})
+
 instance GoogleRequest ChangesCreate where
         type Rs ChangesCreate = Change
         type Scopes ChangesCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
         requestClient ChangesCreate'{..}
-          = go _ccProject _ccManagedZone (Just AltJSON)
+          = go _ccProject _ccManagedZone _ccClientOperationId
+              (Just AltJSON)
               _ccPayload
               dNSService
           where go

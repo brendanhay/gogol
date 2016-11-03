@@ -18,6 +18,37 @@ module Network.Google.Gmail.Types.Sum where
 
 import           Network.Google.Prelude
 
+-- | How the message size in bytes should be in relation to the size field.
+data FilterCriteriaSizeComparison
+    = Larger
+      -- ^ @larger@
+    | Smaller
+      -- ^ @smaller@
+    | Unspecified
+      -- ^ @unspecified@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable FilterCriteriaSizeComparison
+
+instance FromHttpApiData FilterCriteriaSizeComparison where
+    parseQueryParam = \case
+        "larger" -> Right Larger
+        "smaller" -> Right Smaller
+        "unspecified" -> Right Unspecified
+        x -> Left ("Unable to parse FilterCriteriaSizeComparison from: " <> x)
+
+instance ToHttpApiData FilterCriteriaSizeComparison where
+    toQueryParam = \case
+        Larger -> "larger"
+        Smaller -> "smaller"
+        Unspecified -> "unspecified"
+
+instance FromJSON FilterCriteriaSizeComparison where
+    parseJSON = parseJSONText "FilterCriteriaSizeComparison"
+
+instance ToJSON FilterCriteriaSizeComparison where
+    toJSON = toJSONText
+
 -- | The format to return the message in.
 data UsersMessagesGetFormat
     = Full
@@ -51,6 +82,144 @@ instance FromJSON UsersMessagesGetFormat where
     parseJSON = parseJSONText "UsersMessagesGetFormat"
 
 instance ToJSON UsersMessagesGetFormat where
+    toJSON = toJSONText
+
+-- | The range of messages which are accessible via POP.
+data PopSettingsAccessWindow
+    = AccessWindowUnspecified
+      -- ^ @accessWindowUnspecified@
+    | AllMail
+      -- ^ @allMail@
+    | Disabled
+      -- ^ @disabled@
+    | FromNowOn
+      -- ^ @fromNowOn@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PopSettingsAccessWindow
+
+instance FromHttpApiData PopSettingsAccessWindow where
+    parseQueryParam = \case
+        "accessWindowUnspecified" -> Right AccessWindowUnspecified
+        "allMail" -> Right AllMail
+        "disabled" -> Right Disabled
+        "fromNowOn" -> Right FromNowOn
+        x -> Left ("Unable to parse PopSettingsAccessWindow from: " <> x)
+
+instance ToHttpApiData PopSettingsAccessWindow where
+    toQueryParam = \case
+        AccessWindowUnspecified -> "accessWindowUnspecified"
+        AllMail -> "allMail"
+        Disabled -> "disabled"
+        FromNowOn -> "fromNowOn"
+
+instance FromJSON PopSettingsAccessWindow where
+    parseJSON = parseJSONText "PopSettingsAccessWindow"
+
+instance ToJSON PopSettingsAccessWindow where
+    toJSON = toJSONText
+
+-- | Indicates whether this address has been verified and is usable for
+-- forwarding. Read-only.
+data ForwardingAddressVerificationStatus
+    = Accepted
+      -- ^ @accepted@
+    | Pending
+      -- ^ @pending@
+    | VerificationStatusUnspecified
+      -- ^ @verificationStatusUnspecified@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ForwardingAddressVerificationStatus
+
+instance FromHttpApiData ForwardingAddressVerificationStatus where
+    parseQueryParam = \case
+        "accepted" -> Right Accepted
+        "pending" -> Right Pending
+        "verificationStatusUnspecified" -> Right VerificationStatusUnspecified
+        x -> Left ("Unable to parse ForwardingAddressVerificationStatus from: " <> x)
+
+instance ToHttpApiData ForwardingAddressVerificationStatus where
+    toQueryParam = \case
+        Accepted -> "accepted"
+        Pending -> "pending"
+        VerificationStatusUnspecified -> "verificationStatusUnspecified"
+
+instance FromJSON ForwardingAddressVerificationStatus where
+    parseJSON = parseJSONText "ForwardingAddressVerificationStatus"
+
+instance ToJSON ForwardingAddressVerificationStatus where
+    toJSON = toJSONText
+
+-- | The state that a message should be left in after it has been forwarded.
+data AutoForwardingDisPosition
+    = Archive
+      -- ^ @archive@
+    | DisPositionUnspecified
+      -- ^ @dispositionUnspecified@
+    | LeaveInInbox
+      -- ^ @leaveInInbox@
+    | MarkRead
+      -- ^ @markRead@
+    | Trash
+      -- ^ @trash@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AutoForwardingDisPosition
+
+instance FromHttpApiData AutoForwardingDisPosition where
+    parseQueryParam = \case
+        "archive" -> Right Archive
+        "dispositionUnspecified" -> Right DisPositionUnspecified
+        "leaveInInbox" -> Right LeaveInInbox
+        "markRead" -> Right MarkRead
+        "trash" -> Right Trash
+        x -> Left ("Unable to parse AutoForwardingDisPosition from: " <> x)
+
+instance ToHttpApiData AutoForwardingDisPosition where
+    toQueryParam = \case
+        Archive -> "archive"
+        DisPositionUnspecified -> "dispositionUnspecified"
+        LeaveInInbox -> "leaveInInbox"
+        MarkRead -> "markRead"
+        Trash -> "trash"
+
+instance FromJSON AutoForwardingDisPosition where
+    parseJSON = parseJSONText "AutoForwardingDisPosition"
+
+instance ToJSON AutoForwardingDisPosition where
+    toJSON = toJSONText
+
+-- | Indicates whether this address has been verified for use as a send-as
+-- alias. Read-only. This setting only applies to custom \"from\" aliases.
+data SendAsVerificationStatus
+    = SAVSAccepted
+      -- ^ @accepted@
+    | SAVSPending
+      -- ^ @pending@
+    | SAVSVerificationStatusUnspecified
+      -- ^ @verificationStatusUnspecified@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SendAsVerificationStatus
+
+instance FromHttpApiData SendAsVerificationStatus where
+    parseQueryParam = \case
+        "accepted" -> Right SAVSAccepted
+        "pending" -> Right SAVSPending
+        "verificationStatusUnspecified" -> Right SAVSVerificationStatusUnspecified
+        x -> Left ("Unable to parse SendAsVerificationStatus from: " <> x)
+
+instance ToHttpApiData SendAsVerificationStatus where
+    toQueryParam = \case
+        SAVSAccepted -> "accepted"
+        SAVSPending -> "pending"
+        SAVSVerificationStatusUnspecified -> "verificationStatusUnspecified"
+
+instance FromJSON SendAsVerificationStatus where
+    parseJSON = parseJSONText "SendAsVerificationStatus"
+
+instance ToJSON SendAsVerificationStatus where
     toJSON = toJSONText
 
 -- | The owner type for the label. User labels are created by the user and
@@ -240,6 +409,46 @@ instance FromJSON UsersThreadsGetFormat where
 instance ToJSON UsersThreadsGetFormat where
     toJSON = toJSONText
 
+-- | The action that will be executed on a message after it has been fetched
+-- via POP.
+data PopSettingsDisPosition
+    = PSDPArchive
+      -- ^ @archive@
+    | PSDPDisPositionUnspecified
+      -- ^ @dispositionUnspecified@
+    | PSDPLeaveInInbox
+      -- ^ @leaveInInbox@
+    | PSDPMarkRead
+      -- ^ @markRead@
+    | PSDPTrash
+      -- ^ @trash@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PopSettingsDisPosition
+
+instance FromHttpApiData PopSettingsDisPosition where
+    parseQueryParam = \case
+        "archive" -> Right PSDPArchive
+        "dispositionUnspecified" -> Right PSDPDisPositionUnspecified
+        "leaveInInbox" -> Right PSDPLeaveInInbox
+        "markRead" -> Right PSDPMarkRead
+        "trash" -> Right PSDPTrash
+        x -> Left ("Unable to parse PopSettingsDisPosition from: " <> x)
+
+instance ToHttpApiData PopSettingsDisPosition where
+    toQueryParam = \case
+        PSDPArchive -> "archive"
+        PSDPDisPositionUnspecified -> "dispositionUnspecified"
+        PSDPLeaveInInbox -> "leaveInInbox"
+        PSDPMarkRead -> "markRead"
+        PSDPTrash -> "trash"
+
+instance FromJSON PopSettingsDisPosition where
+    parseJSON = parseJSONText "PopSettingsDisPosition"
+
+instance ToJSON PopSettingsDisPosition where
+    toJSON = toJSONText
+
 -- | Filtering behavior of labelIds list specified.
 data WatchRequestLabelFilterAction
     = Exclude
@@ -265,6 +474,78 @@ instance FromJSON WatchRequestLabelFilterAction where
     parseJSON = parseJSONText "WatchRequestLabelFilterAction"
 
 instance ToJSON WatchRequestLabelFilterAction where
+    toJSON = toJSONText
+
+-- | The action that will be executed on a message when it is marked as
+-- deleted and expunged from the last visible IMAP folder.
+data ImapSettingsExpungeBehavior
+    = ISEBArchive
+      -- ^ @archive@
+    | ISEBDeleteForever
+      -- ^ @deleteForever@
+    | ISEBExpungeBehaviorUnspecified
+      -- ^ @expungeBehaviorUnspecified@
+    | ISEBTrash
+      -- ^ @trash@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ImapSettingsExpungeBehavior
+
+instance FromHttpApiData ImapSettingsExpungeBehavior where
+    parseQueryParam = \case
+        "archive" -> Right ISEBArchive
+        "deleteForever" -> Right ISEBDeleteForever
+        "expungeBehaviorUnspecified" -> Right ISEBExpungeBehaviorUnspecified
+        "trash" -> Right ISEBTrash
+        x -> Left ("Unable to parse ImapSettingsExpungeBehavior from: " <> x)
+
+instance ToHttpApiData ImapSettingsExpungeBehavior where
+    toQueryParam = \case
+        ISEBArchive -> "archive"
+        ISEBDeleteForever -> "deleteForever"
+        ISEBExpungeBehaviorUnspecified -> "expungeBehaviorUnspecified"
+        ISEBTrash -> "trash"
+
+instance FromJSON ImapSettingsExpungeBehavior where
+    parseJSON = parseJSONText "ImapSettingsExpungeBehavior"
+
+instance ToJSON ImapSettingsExpungeBehavior where
+    toJSON = toJSONText
+
+-- | The protocol that will be used to secure communication with the SMTP
+-- service. Required.
+data SmtpMsaSecurityMode
+    = None
+      -- ^ @none@
+    | SecurityModeUnspecified
+      -- ^ @securityModeUnspecified@
+    | SSL
+      -- ^ @ssl@
+    | Starttls
+      -- ^ @starttls@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SmtpMsaSecurityMode
+
+instance FromHttpApiData SmtpMsaSecurityMode where
+    parseQueryParam = \case
+        "none" -> Right None
+        "securityModeUnspecified" -> Right SecurityModeUnspecified
+        "ssl" -> Right SSL
+        "starttls" -> Right Starttls
+        x -> Left ("Unable to parse SmtpMsaSecurityMode from: " <> x)
+
+instance ToHttpApiData SmtpMsaSecurityMode where
+    toQueryParam = \case
+        None -> "none"
+        SecurityModeUnspecified -> "securityModeUnspecified"
+        SSL -> "ssl"
+        Starttls -> "starttls"
+
+instance FromJSON SmtpMsaSecurityMode where
+    parseJSON = parseJSONText "SmtpMsaSecurityMode"
+
+instance ToJSON SmtpMsaSecurityMode where
     toJSON = toJSONText
 
 -- | Source for Gmail\'s internal date of the message.

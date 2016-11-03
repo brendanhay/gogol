@@ -76,7 +76,7 @@ marketplaceDealsList pMdlProposalId_ =
     , _mdlPqlQuery = Nothing
     }
 
--- | The proposalId to get deals for. To search across proposals specify
+-- | The proposalId to get deals for. To search across all proposals specify
 -- order_id = \'-\' as part of the URL.
 mdlProposalId :: Lens' MarketplaceDealsList Text
 mdlProposalId

@@ -24,7 +24,8 @@
 -- exists, returns \`ALREADY_EXISTS\`. If the corresponding topic doesn\'t
 -- exist, returns \`NOT_FOUND\`. If the name is not provided in the
 -- request, the server will assign a random name for this subscription on
--- the same project as the topic.
+-- the same project as the topic. Note that for REST API requests, you must
+-- specify a name.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.create@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
@@ -71,7 +72,8 @@ type ProjectsSubscriptionsCreateResource =
 -- exists, returns \`ALREADY_EXISTS\`. If the corresponding topic doesn\'t
 -- exist, returns \`NOT_FOUND\`. If the name is not provided in the
 -- request, the server will assign a random name for this subscription on
--- the same project as the topic.
+-- the same project as the topic. Note that for REST API requests, you must
+-- specify a name.
 --
 -- /See:/ 'projectsSubscriptionsCreate' smart constructor.
 data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'

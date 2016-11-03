@@ -34,8 +34,8 @@ module Network.Google.Resource.Compute.Routes.Get
     , RoutesGet
 
     -- * Request Lenses
-    , rouProject
-    , rouRoute
+    , rrProject
+    , rrRoute
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,35 +58,35 @@ type RoutesGetResource =
 --
 -- /See:/ 'routesGet' smart constructor.
 data RoutesGet = RoutesGet'
-    { _rouProject :: !Text
-    , _rouRoute   :: !Text
+    { _rrProject :: !Text
+    , _rrRoute   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rouProject'
+-- * 'rrProject'
 --
--- * 'rouRoute'
+-- * 'rrRoute'
 routesGet
-    :: Text -- ^ 'rouProject'
-    -> Text -- ^ 'rouRoute'
+    :: Text -- ^ 'rrProject'
+    -> Text -- ^ 'rrRoute'
     -> RoutesGet
-routesGet pRouProject_ pRouRoute_ =
+routesGet pRrProject_ pRrRoute_ =
     RoutesGet'
-    { _rouProject = pRouProject_
-    , _rouRoute = pRouRoute_
+    { _rrProject = pRrProject_
+    , _rrRoute = pRrRoute_
     }
 
 -- | Project ID for this request.
-rouProject :: Lens' RoutesGet Text
-rouProject
-  = lens _rouProject (\ s a -> s{_rouProject = a})
+rrProject :: Lens' RoutesGet Text
+rrProject
+  = lens _rrProject (\ s a -> s{_rrProject = a})
 
 -- | Name of the Route resource to return.
-rouRoute :: Lens' RoutesGet Text
-rouRoute = lens _rouRoute (\ s a -> s{_rouRoute = a})
+rrRoute :: Lens' RoutesGet Text
+rrRoute = lens _rrRoute (\ s a -> s{_rrRoute = a})
 
 instance GoogleRequest RoutesGet where
         type Rs RoutesGet = Route
@@ -95,7 +95,7 @@ instance GoogleRequest RoutesGet where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RoutesGet'{..}
-          = go _rouProject _rouRoute (Just AltJSON)
+          = go _rrProject _rrRoute (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy RoutesGetResource)

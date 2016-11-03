@@ -34,10 +34,11 @@ module Network.Google.Resource.Compute.Routes.List
     , RoutesList
 
     -- * Request Lenses
-    , rlProject
-    , rlFilter
-    , rlPageToken
-    , rlMaxResults
+    , rouOrderBy
+    , rouProject
+    , rouFilter
+    , rouPageToken
+    , rouMaxResults
     ) where
 
 import           Network.Google.Compute.Types
@@ -52,48 +53,65 @@ type RoutesListResource =
            Capture "project" Text :>
              "global" :>
                "routes" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :> Get '[JSON] RouteList
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :> Get '[JSON] RouteList
 
 -- | Retrieves the list of Route resources available to the specified
 -- project.
 --
 -- /See:/ 'routesList' smart constructor.
 data RoutesList = RoutesList'
-    { _rlProject    :: !Text
-    , _rlFilter     :: !(Maybe Text)
-    , _rlPageToken  :: !(Maybe Text)
-    , _rlMaxResults :: !(Textual Word32)
+    { _rouOrderBy    :: !(Maybe Text)
+    , _rouProject    :: !Text
+    , _rouFilter     :: !(Maybe Text)
+    , _rouPageToken  :: !(Maybe Text)
+    , _rouMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rlProject'
+-- * 'rouOrderBy'
 --
--- * 'rlFilter'
+-- * 'rouProject'
 --
--- * 'rlPageToken'
+-- * 'rouFilter'
 --
--- * 'rlMaxResults'
+-- * 'rouPageToken'
+--
+-- * 'rouMaxResults'
 routesList
-    :: Text -- ^ 'rlProject'
+    :: Text -- ^ 'rouProject'
     -> RoutesList
-routesList pRlProject_ =
+routesList pRouProject_ =
     RoutesList'
-    { _rlProject = pRlProject_
-    , _rlFilter = Nothing
-    , _rlPageToken = Nothing
-    , _rlMaxResults = 500
+    { _rouOrderBy = Nothing
+    , _rouProject = pRouProject_
+    , _rouFilter = Nothing
+    , _rouPageToken = Nothing
+    , _rouMaxResults = 500
     }
 
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+rouOrderBy :: Lens' RoutesList (Maybe Text)
+rouOrderBy
+  = lens _rouOrderBy (\ s a -> s{_rouOrderBy = a})
+
 -- | Project ID for this request.
-rlProject :: Lens' RoutesList Text
-rlProject
-  = lens _rlProject (\ s a -> s{_rlProject = a})
+rouProject :: Lens' RoutesList Text
+rouProject
+  = lens _rouProject (\ s a -> s{_rouProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: field_name
@@ -106,32 +124,33 @@ rlProject
 -- value is interpreted as a regular expression using RE2 syntax. The
 -- literal value must match the entire field. For example, to filter for
 -- instances that do not have a name of example-instance, you would use
--- filter=name ne example-instance. Compute Engine Beta API Only: When
--- filtering in the Beta API, you can also filter on nested fields. For
+-- filter=name ne example-instance. You can filter on nested fields. For
 -- example, you could filter on instances that have set the
 -- scheduling.automaticRestart field to true. Use filtering on nested
 -- fields to take advantage of labels to organize and search for results
--- based on label values. The Beta API also supports filtering on multiple
--- expressions by providing each separate expression within parentheses.
--- For example, (scheduling.automaticRestart eq true) (zone eq
--- us-central1-f). Multiple expressions are treated as AND expressions,
--- meaning that resources must match all expressions to pass the filters.
-rlFilter :: Lens' RoutesList (Maybe Text)
-rlFilter = lens _rlFilter (\ s a -> s{_rlFilter = a})
+-- based on label values. To filter on multiple expressions, provide each
+-- separate expression within parentheses. For example,
+-- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
+-- expressions are treated as AND expressions, meaning that resources must
+-- match all expressions to pass the filters.
+rouFilter :: Lens' RoutesList (Maybe Text)
+rouFilter
+  = lens _rouFilter (\ s a -> s{_rouFilter = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-rlPageToken :: Lens' RoutesList (Maybe Text)
-rlPageToken
-  = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
+rouPageToken :: Lens' RoutesList (Maybe Text)
+rouPageToken
+  = lens _rouPageToken (\ s a -> s{_rouPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
 -- in subsequent list requests.
-rlMaxResults :: Lens' RoutesList Word32
-rlMaxResults
-  = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
+rouMaxResults :: Lens' RoutesList Word32
+rouMaxResults
+  = lens _rouMaxResults
+      (\ s a -> s{_rouMaxResults = a})
       . _Coerce
 
 instance GoogleRequest RoutesList where
@@ -141,8 +160,8 @@ instance GoogleRequest RoutesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RoutesList'{..}
-          = go _rlProject _rlFilter _rlPageToken
-              (Just _rlMaxResults)
+          = go _rouProject _rouOrderBy _rouFilter _rouPageToken
+              (Just _rouMaxResults)
               (Just AltJSON)
               computeService
           where go

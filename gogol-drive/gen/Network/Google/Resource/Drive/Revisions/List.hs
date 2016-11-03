@@ -33,7 +33,9 @@ module Network.Google.Resource.Drive.Revisions.List
     , RevisionsList
 
     -- * Request Lenses
+    , rllPageToken
     , rllFileId
+    , rllPageSize
     ) where
 
 import           Network.Google.Drive.Types
@@ -47,32 +49,55 @@ type RevisionsListResource =
          "files" :>
            Capture "fileId" Text :>
              "revisions" :>
-               QueryParam "alt" AltJSON :> Get '[JSON] RevisionList
+               QueryParam "pageToken" Text :>
+                 QueryParam "pageSize" (Textual Int32) :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] RevisionList
 
 -- | Lists a file\'s revisions.
 --
 -- /See:/ 'revisionsList' smart constructor.
-newtype RevisionsList = RevisionsList'
-    { _rllFileId :: Text
+data RevisionsList = RevisionsList'
+    { _rllPageToken :: !(Maybe Text)
+    , _rllFileId    :: !Text
+    , _rllPageSize  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rllPageToken'
+--
 -- * 'rllFileId'
+--
+-- * 'rllPageSize'
 revisionsList
     :: Text -- ^ 'rllFileId'
     -> RevisionsList
 revisionsList pRllFileId_ =
     RevisionsList'
-    { _rllFileId = pRllFileId_
+    { _rllPageToken = Nothing
+    , _rllFileId = pRllFileId_
+    , _rllPageSize = Nothing
     }
+
+-- | The token for continuing a previous list request on the next page. This
+-- should be set to the value of \'nextPageToken\' from the previous
+-- response.
+rllPageToken :: Lens' RevisionsList (Maybe Text)
+rllPageToken
+  = lens _rllPageToken (\ s a -> s{_rllPageToken = a})
 
 -- | The ID of the file.
 rllFileId :: Lens' RevisionsList Text
 rllFileId
   = lens _rllFileId (\ s a -> s{_rllFileId = a})
+
+-- | The maximum number of revisions to return per page.
+rllPageSize :: Lens' RevisionsList (Maybe Int32)
+rllPageSize
+  = lens _rllPageSize (\ s a -> s{_rllPageSize = a}) .
+      mapping _Coerce
 
 instance GoogleRequest RevisionsList where
         type Rs RevisionsList = RevisionList
@@ -85,7 +110,9 @@ instance GoogleRequest RevisionsList where
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
         requestClient RevisionsList'{..}
-          = go _rllFileId (Just AltJSON) driveService
+          = go _rllFileId _rllPageToken _rllPageSize
+              (Just AltJSON)
+              driveService
           where go
                   = buildClient (Proxy :: Proxy RevisionsListResource)
                       mempty

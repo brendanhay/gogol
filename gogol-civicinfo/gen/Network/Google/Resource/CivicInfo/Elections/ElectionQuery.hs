@@ -32,6 +32,8 @@ module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
     , electionsElectionQuery
     , ElectionsElectionQuery
 
+    -- * Request Lenses
+    , eeqPayload
     ) where
 
 import           Network.Google.CivicInfo.Types
@@ -44,27 +46,40 @@ type ElectionsElectionQueryResource =
        "v2" :>
          "elections" :>
            QueryParam "alt" AltJSON :>
-             Get '[JSON] ElectionsQueryResponse
+             ReqBody '[JSON] ElectionsQueryRequest :>
+               Get '[JSON] ElectionsQueryResponse
 
 -- | List of available elections to query.
 --
 -- /See:/ 'electionsElectionQuery' smart constructor.
-data ElectionsElectionQuery =
-    ElectionsElectionQuery'
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype ElectionsElectionQuery = ElectionsElectionQuery'
+    { _eeqPayload :: ElectionsQueryRequest
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsElectionQuery' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eeqPayload'
 electionsElectionQuery
-    :: ElectionsElectionQuery
-electionsElectionQuery = ElectionsElectionQuery'
+    :: ElectionsQueryRequest -- ^ 'eeqPayload'
+    -> ElectionsElectionQuery
+electionsElectionQuery pEeqPayload_ =
+    ElectionsElectionQuery'
+    { _eeqPayload = pEeqPayload_
+    }
+
+-- | Multipart request metadata.
+eeqPayload :: Lens' ElectionsElectionQuery ElectionsQueryRequest
+eeqPayload
+  = lens _eeqPayload (\ s a -> s{_eeqPayload = a})
 
 instance GoogleRequest ElectionsElectionQuery where
         type Rs ElectionsElectionQuery =
              ElectionsQueryResponse
         type Scopes ElectionsElectionQuery = '[]
-        requestClient ElectionsElectionQuery'{}
-          = go (Just AltJSON) civicInfoService
+        requestClient ElectionsElectionQuery'{..}
+          = go (Just AltJSON) _eeqPayload civicInfoService
           where go
                   = buildClient
                       (Proxy :: Proxy ElectionsElectionQueryResource)

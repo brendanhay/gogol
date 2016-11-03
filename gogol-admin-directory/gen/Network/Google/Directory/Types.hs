@@ -458,6 +458,12 @@ module Network.Google.Directory.Types
     -- * MobileDevicesListProjection
     , MobileDevicesListProjection (..)
 
+    -- * ChromeOSDeviceAction
+    , ChromeOSDeviceAction
+    , chromeOSDeviceAction
+    , codaAction
+    , codaDeprovisionReason
+
     -- * Role
     , Role
     , role'
@@ -601,14 +607,19 @@ module Network.Google.Directory.Types
     , mobileDevice
     , mobEmail
     , mobStatus
+    , mobPrivilege
     , mobEtag
     , mobResourceId
+    , mobManufacturer
     , mobBuildNumber
     , mobManagedAccountIsOnOwnerProFile
     , mobLastSync
     , mobOtherAccountsInfo
     , mobKind
     , mobAdbStatus
+    , mobReleaseVersion
+    , mobBrand
+    , mobSecurityPatchLevel
     , mobNetworkOperator
     , mobKernelVersion
     , mobOS
@@ -617,16 +628,20 @@ module Network.Google.Directory.Types
     , mobDeveloperOptionsStatus
     , mobUnknownSourcesStatus
     , mobMeid
+    , mobBootLoaderVersion
     , mobDeviceId
     , mobFirstSync
     , mobUserAgent
     , mobImei
     , mobType
     , mobWifiMACAddress
+    , mobEncryptionStatus
     , mobSerialNumber
+    , mobDevicePasswordStatus
     , mobHardwareId
     , mobBasebandVersion
     , mobSupportsWorkProFile
+    , mobHardware
     , mobDeviceCompromisedStatus
     , mobApplications
     , mobDefaultLanguage
@@ -635,6 +650,7 @@ module Network.Google.Directory.Types
     , Member
     , member
     , memEmail
+    , memStatus
     , memEtag
     , memKind
     , memRole
