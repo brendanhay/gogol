@@ -1,5 +1,5 @@
 name:                  gogol-compute
-version:               0.1.0
+version:               0.1.1
 synopsis:              Google Compute Engine SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -263,5 +263,5 @@ library
         , Network.Google.Compute.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.0.*
+          gogol-core == 0.1.1.*
         , base       >= 4.7 && < 5
