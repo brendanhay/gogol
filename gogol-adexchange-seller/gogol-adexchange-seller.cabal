@@ -11,7 +11,7 @@ copyright:             Copyright (c) 2015-2016 Brendan Hay
 category:              Network, Google, Cloud
 build-type:            Simple
 cabal-version:         >= 1.10
-extra-source-files:    README.md
+extra-source-files:    README.md src/.gitkeep
 
 description:
     Accesses the inventory of Ad Exchange seller users and generates
