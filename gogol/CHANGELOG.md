@@ -1,5 +1,20 @@
 # Change Log
 
+## [0.1.1](https://github.com/brendanhay/gogol/tree/0.1.1)
+Released: **03 November, 2016**, Compare: [0.1.0](https://github.com/brendanhay/gogol/compare/0.1.0...0.1.1)
+
+### Fixed
+
+- Fixes for incorrectly serialised project/commit URL identifiers. [\#34](https://github.com/brendanhay/gogol/pull/34)
+- Correcting `/computeMetadta/V1` path prefix for metadata token refresh URLs. [\#37](https://github.com/brendanhay/gogol/pull/37)
+- Fixes for Installed Application authentication flow. [\#39](https://github.com/brendanhay/gogol/pull/34)
+
+
+### Updated Service Definitions
+
+- All service definitions have been updated to their latest respective versions.
+
+
 ## [0.1.0](https://github.com/brendanhay/gogol/tree/0.1.0)
 Released: **20 June, 2016**, Compare: [0.0.1](https://github.com/brendanhay/gogol/compare/0.0.1...0.1.0)
 
@@ -19,7 +34,6 @@ Released: **20 June, 2016**, Compare: [0.0.1](https://github.com/brendanhay/gogo
 - `MonadGoogle`, `Google`, `Env`, and `Credentials` types are now constrained by
   the required OAuth2 scopes.
 - GHC 8 support.
-
 
 ### Updated Service Definitions
 
