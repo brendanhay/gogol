@@ -1,6 +1,6 @@
 SERVICES  ?= $(wildcard gogol-*)
 LIBRARIES ?= core gogol $(SERVICES)
-FORWARD   := sdist upload candidate
+FORWARD   := sdist upload upload-docs
 
 build:
 	stack build --fast
