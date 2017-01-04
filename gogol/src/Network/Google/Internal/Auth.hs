@@ -260,6 +260,18 @@ accountsRequest = Client.defaultRequest
         ]
     }
 
+tokenRequest :: Client.Request
+tokenRequest = Client.defaultRequest
+    { Client.host           = "www.googleapis.com"
+    , Client.port           = 443
+    , Client.secure         = True
+    , Client.method         = "POST"
+    , Client.path           = "/oauth2/v4/token"
+    , Client.requestHeaders =
+        [ (hContentType, "application/x-www-form-urlencoded")
+        ]
+    }
+
 refreshRequest :: (MonadIO m, MonadCatch m)
                => Client.Request
                -> Logger

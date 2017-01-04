@@ -109,7 +109,7 @@ exchangeCode :: (MonadIO m, MonadCatch m)
              -> Manager
              -> m (OAuthToken s)
 exchangeCode c n = refreshRequest $
-    accountsRequest
+    tokenRequest
         { Client.requestBody = textBody $
                "grant_type=authorization_code"
             <> "&client_id="     <> toQueryParam (_clientId     c)
