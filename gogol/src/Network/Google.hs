@@ -312,7 +312,7 @@ The following example demonstrates uploading a file to Google
 >         bkt = "my-storage-bucket"
 >
 >     runResourceT . runGoogle env $                                               -- (5)
->         upload (objectsInsert bkt object' & oiName ?~ key) bkt
+>         upload (objectsInsert bkt object' & oiName ?~ key) body
 
 Breaking down the above example, we have the following points of interest:
 
