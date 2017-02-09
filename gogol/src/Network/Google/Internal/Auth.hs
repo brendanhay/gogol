@@ -260,6 +260,10 @@ accountsRequest = Client.defaultRequest
         ]
     }
 
+-- | @https://www.googleapis.com/oauth2/v4/token@.
+tokenURL :: Text
+tokenURL = "https://www.googleapis.com/oauth2/v4/token"
+
 tokenRequest :: Client.Request
 tokenRequest = Client.defaultRequest
     { Client.host           = "www.googleapis.com"
