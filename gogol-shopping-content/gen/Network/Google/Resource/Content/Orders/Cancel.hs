@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels all line items in an order.
+-- Cancels all line items in an order. This method can only be called for
+-- non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.cancel@.
 module Network.Google.Resource.Content.Orders.Cancel
@@ -54,7 +55,8 @@ type OrdersCancelResource =
                    ReqBody '[JSON] OrdersCancelRequest :>
                      Post '[JSON] OrdersCancelResponse
 
--- | Cancels all line items in an order.
+-- | Cancels all line items in an order. This method can only be called for
+-- non-multi-client accounts.
 --
 -- /See:/ 'ordersCancel' smart constructor.
 data OrdersCancel = OrdersCancel'

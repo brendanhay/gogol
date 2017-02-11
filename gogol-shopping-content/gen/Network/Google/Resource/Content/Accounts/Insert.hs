@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a Merchant Center sub-account.
+-- Creates a Merchant Center sub-account. This method can only be called
+-- for multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.insert@.
 module Network.Google.Resource.Content.Accounts.Insert
@@ -52,7 +53,8 @@ type AccountsInsertResource =
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Account :> Post '[JSON] Account
 
--- | Creates a Merchant Center sub-account.
+-- | Creates a Merchant Center sub-account. This method can only be called
+-- for multi-client accounts.
 --
 -- /See:/ 'accountsInsert' smart constructor.
 data AccountsInsert = AccountsInsert'

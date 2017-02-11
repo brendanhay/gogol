@@ -563,6 +563,7 @@ module Network.Google.ShoppingContent.Types
     , isrInstallment
     , isrSalePrice
     , isrAvailability
+    , isrPickup
     , isrSalePriceEffectiveDate
     , isrSellOnGoogleQuantity
     , isrPrice
@@ -847,6 +848,7 @@ module Network.Google.ShoppingContent.Types
     , iInstallment
     , iSalePrice
     , iAvailability
+    , iPickup
     , iSalePriceEffectiveDate
     , iSellOnGoogleQuantity
     , iPrice
@@ -1219,6 +1221,12 @@ module Network.Google.ShoppingContent.Types
     , ordersUpdateMerchantOrderIdResponse
     , oumoirKind
     , oumoirExecutionStatus
+
+    -- * InventoryPickup
+    , InventoryPickup
+    , inventoryPickup
+    , ipPickupSla
+    , ipPickupMethod
 
     -- * DatafeedStatusExample
     , DatafeedStatusExample

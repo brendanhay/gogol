@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a product from your Merchant Center account.
+-- Retrieves a product from your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.get@.
 module Network.Google.Resource.Content.Products.Get
@@ -50,7 +51,8 @@ type ProductsGetResource =
              Capture "productId" Text :>
                QueryParam "alt" AltJSON :> Get '[JSON] Product
 
--- | Retrieves a product from your Merchant Center account.
+-- | Retrieves a product from your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ 'productsGet' smart constructor.
 data ProductsGet = ProductsGet'

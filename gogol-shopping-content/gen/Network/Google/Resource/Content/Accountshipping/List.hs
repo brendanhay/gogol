@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the shipping settings of the sub-accounts in your Merchant Center
--- account.
+-- account. This method can only be called for multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountshipping.list@.
 module Network.Google.Resource.Content.Accountshipping.List
@@ -55,7 +55,7 @@ type AccountshippingListResource =
                    Get '[JSON] AccountshippingListResponse
 
 -- | Lists the shipping settings of the sub-accounts in your Merchant Center
--- account.
+-- account. This method can only be called for multi-client accounts.
 --
 -- /See:/ 'accountshippingList' smart constructor.
 data AccountshippingList = AccountshippingList'

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a Merchant Center sub-account.
+-- Deletes a Merchant Center sub-account. This method can only be called
+-- for multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.delete@.
 module Network.Google.Resource.Content.Accounts.Delete
@@ -52,7 +53,8 @@ type AccountsDeleteResource =
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes a Merchant Center sub-account.
+-- | Deletes a Merchant Center sub-account. This method can only be called
+-- for multi-client accounts.
 --
 -- /See:/ 'accountsDelete' smart constructor.
 data AccountsDelete = AccountsDelete'

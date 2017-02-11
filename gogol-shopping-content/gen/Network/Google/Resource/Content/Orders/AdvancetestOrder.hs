@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sandbox only. Moves a test order from state \"inProgress\" to state
--- \"pendingShipment\".
+-- \"pendingShipment\". This method can only be called for non-multi-client
+-- accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.advancetestorder@.
 module Network.Google.Resource.Content.Orders.AdvancetestOrder
@@ -54,7 +55,8 @@ type OrdersAdvancetestOrderResource =
                    Post '[JSON] OrdersAdvanceTestOrderResponse
 
 -- | Sandbox only. Moves a test order from state \"inProgress\" to state
--- \"pendingShipment\".
+-- \"pendingShipment\". This method can only be called for non-multi-client
+-- accounts.
 --
 -- /See:/ 'ordersAdvancetestOrder' smart constructor.
 data OrdersAdvancetestOrder = OrdersAdvancetestOrder'

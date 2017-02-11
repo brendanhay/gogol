@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the datafeeds in your Merchant Center account.
+-- Lists the datafeeds in your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.list@.
 module Network.Google.Resource.Content.Datafeeds.List
@@ -53,7 +54,8 @@ type DatafeedsListResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] DatafeedsListResponse
 
--- | Lists the datafeeds in your Merchant Center account.
+-- | Lists the datafeeds in your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ 'datafeedsList' smart constructor.
 data DatafeedsList = DatafeedsList'

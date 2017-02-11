@@ -20,8 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a datafeed of your Merchant Center account. This method supports
--- patch semantics.
+-- Updates a datafeed of your Merchant Center account. This method can only
+-- be called for non-multi-client accounts. This method supports patch
+-- semantics.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.patch@.
 module Network.Google.Resource.Content.Datafeeds.Patch
@@ -55,8 +56,9 @@ type DatafeedsPatchResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Datafeed :> Patch '[JSON] Datafeed
 
--- | Updates a datafeed of your Merchant Center account. This method supports
--- patch semantics.
+-- | Updates a datafeed of your Merchant Center account. This method can only
+-- be called for non-multi-client accounts. This method supports patch
+-- semantics.
 --
 -- /See:/ 'datafeedsPatch' smart constructor.
 data DatafeedsPatch = DatafeedsPatch'

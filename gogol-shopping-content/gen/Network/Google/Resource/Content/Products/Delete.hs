@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a product from your Merchant Center account.
+-- Deletes a product from your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.delete@.
 module Network.Google.Resource.Content.Products.Delete
@@ -52,7 +53,8 @@ type ProductsDeleteResource =
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes a product from your Merchant Center account.
+-- | Deletes a product from your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ 'productsDelete' smart constructor.
 data ProductsDelete = ProductsDelete'

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a shipment\'s status, carrier, and\/or tracking ID.
+-- Updates a shipment\'s status, carrier, and\/or tracking ID. This method
+-- can only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.updateshipment@.
 module Network.Google.Resource.Content.Orders.Updateshipment
@@ -54,7 +55,8 @@ type OrdersUpdateshipmentResource =
                    ReqBody '[JSON] OrdersUpdateShipmentRequest :>
                      Post '[JSON] OrdersUpdateShipmentResponse
 
--- | Updates a shipment\'s status, carrier, and\/or tracking ID.
+-- | Updates a shipment\'s status, carrier, and\/or tracking ID. This method
+-- can only be called for non-multi-client accounts.
 --
 -- /See:/ 'ordersUpdateshipment' smart constructor.
 data OrdersUpdateshipment = OrdersUpdateshipment'

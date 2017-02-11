@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a line item.
+-- Returns a line item. This method can only be called for non-multi-client
+-- accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.returnlineitem@.
 module Network.Google.Resource.Content.Orders.Returnlineitem
@@ -54,7 +55,8 @@ type OrdersReturnlineitemResource =
                    ReqBody '[JSON] OrdersReturnLineItemRequest :>
                      Post '[JSON] OrdersReturnLineItemResponse
 
--- | Returns a line item.
+-- | Returns a line item. This method can only be called for non-multi-client
+-- accounts.
 --
 -- /See:/ 'ordersReturnlineitem' smart constructor.
 data OrdersReturnlineitem = OrdersReturnlineitem'

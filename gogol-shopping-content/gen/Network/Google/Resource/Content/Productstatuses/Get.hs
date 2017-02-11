@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the status of a product from your Merchant Center account.
+-- Gets the status of a product from your Merchant Center account. This
+-- method can only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.productstatuses.get@.
 module Network.Google.Resource.Content.Productstatuses.Get
@@ -50,7 +51,8 @@ type ProductstatusesGetResource =
              Capture "productId" Text :>
                QueryParam "alt" AltJSON :> Get '[JSON] ProductStatus
 
--- | Gets the status of a product from your Merchant Center account.
+-- | Gets the status of a product from your Merchant Center account. This
+-- method can only be called for non-multi-client accounts.
 --
 -- /See:/ 'productstatusesGet' smart constructor.
 data ProductstatusesGet = ProductstatusesGet'

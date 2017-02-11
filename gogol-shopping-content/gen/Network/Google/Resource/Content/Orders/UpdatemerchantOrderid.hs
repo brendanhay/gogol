@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the merchant order ID for a given order.
+-- Updates the merchant order ID for a given order. This method can only be
+-- called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.updatemerchantorderid@.
 module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
@@ -54,7 +55,8 @@ type OrdersUpdatemerchantOrderidResource =
                    ReqBody '[JSON] OrdersUpdateMerchantOrderIdRequest :>
                      Post '[JSON] OrdersUpdateMerchantOrderIdResponse
 
--- | Updates the merchant order ID for a given order.
+-- | Updates the merchant order ID for a given order. This method can only be
+-- called for non-multi-client accounts.
 --
 -- /See:/ 'ordersUpdatemerchantOrderid' smart constructor.
 data OrdersUpdatemerchantOrderid = OrdersUpdatemerchantOrderid'

@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Uploads a product to your Merchant Center account.
+-- Uploads a product to your Merchant Center account. If an item with the
+-- same channel, contentLanguage, offerId, and targetCountry already
+-- exists, this method updates that entry. This method can only be called
+-- for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.insert@.
 module Network.Google.Resource.Content.Products.Insert
@@ -52,7 +55,10 @@ type ProductsInsertResource =
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Product :> Post '[JSON] Product
 
--- | Uploads a product to your Merchant Center account.
+-- | Uploads a product to your Merchant Center account. If an item with the
+-- same channel, contentLanguage, offerId, and targetCountry already
+-- exists, this method updates that entry. This method can only be called
+-- for non-multi-client accounts.
 --
 -- /See:/ 'productsInsert' smart constructor.
 data ProductsInsert = ProductsInsert'

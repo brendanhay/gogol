@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Cancels a line item.
+-- Cancels a line item. This method can only be called for non-multi-client
+-- accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.cancellineitem@.
 module Network.Google.Resource.Content.Orders.Cancellineitem
@@ -54,7 +55,8 @@ type OrdersCancellineitemResource =
                    ReqBody '[JSON] OrdersCancelLineItemRequest :>
                      Post '[JSON] OrdersCancelLineItemResponse
 
--- | Cancels a line item.
+-- | Cancels a line item. This method can only be called for non-multi-client
+-- accounts.
 --
 -- /See:/ 'ordersCancellineitem' smart constructor.
 data OrdersCancellineitem = OrdersCancellineitem'

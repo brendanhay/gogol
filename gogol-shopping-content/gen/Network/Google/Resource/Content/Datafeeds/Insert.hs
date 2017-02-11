@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Registers a datafeed with your Merchant Center account.
+-- Registers a datafeed with your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.insert@.
 module Network.Google.Resource.Content.Datafeeds.Insert
@@ -52,7 +53,8 @@ type DatafeedsInsertResource =
                QueryParam "alt" AltJSON :>
                  ReqBody '[JSON] Datafeed :> Post '[JSON] Datafeed
 
--- | Registers a datafeed with your Merchant Center account.
+-- | Registers a datafeed with your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ 'datafeedsInsert' smart constructor.
 data DatafeedsInsert = DatafeedsInsert'

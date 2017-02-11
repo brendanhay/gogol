@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the sub-accounts in your Merchant Center account.
+-- Lists the sub-accounts in your Merchant Center account. This method can
+-- only be called for multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.list@.
 module Network.Google.Resource.Content.Accounts.List
@@ -53,7 +54,8 @@ type AccountsListResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] AccountsListResponse
 
--- | Lists the sub-accounts in your Merchant Center account.
+-- | Lists the sub-accounts in your Merchant Center account. This method can
+-- only be called for multi-client accounts.
 --
 -- /See:/ 'accountsList' smart constructor.
 data AccountsList = AccountsList'

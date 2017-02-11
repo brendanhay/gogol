@@ -22,7 +22,8 @@
 --
 -- Updates price and availability for multiple products or stores in a
 -- single request. This operation does not update the expiration date of
--- the products.
+-- the products. This method can only be called for non-multi-client
+-- accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.inventory.custombatch@.
 module Network.Google.Resource.Content.Inventory.Custombatch
@@ -56,7 +57,8 @@ type InventoryCustombatchResource =
 
 -- | Updates price and availability for multiple products or stores in a
 -- single request. This operation does not update the expiration date of
--- the products.
+-- the products. This method can only be called for non-multi-client
+-- accounts.
 --
 -- /See:/ 'inventoryCustombatch' smart constructor.
 data InventoryCustombatch = InventoryCustombatch'

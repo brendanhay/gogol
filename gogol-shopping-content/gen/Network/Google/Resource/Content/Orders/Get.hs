@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves an order from your Merchant Center account.
+-- Retrieves an order from your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.get@.
 module Network.Google.Resource.Content.Orders.Get
@@ -50,7 +51,8 @@ type OrdersGetResource =
              Capture "orderId" Text :>
                QueryParam "alt" AltJSON :> Get '[JSON] Order
 
--- | Retrieves an order from your Merchant Center account.
+-- | Retrieves an order from your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ 'ordersGet' smart constructor.
 data OrdersGet = OrdersGet'
