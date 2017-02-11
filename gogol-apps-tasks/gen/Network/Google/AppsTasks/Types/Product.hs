@@ -54,7 +54,7 @@ tliLink = lens _tliLink (\ s a -> s{_tliLink = a})
 tliType :: Lens' TaskLinksItem (Maybe Text)
 tliType = lens _tliType (\ s a -> s{_tliType = a})
 
--- | The description. In HTML speak: Everything between < and>.
+-- | The description. In HTML speak: Everything between and.
 tliDescription :: Lens' TaskLinksItem (Maybe Text)
 tliDescription
   = lens _tliDescription
