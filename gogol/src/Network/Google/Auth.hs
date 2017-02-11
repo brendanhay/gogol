@@ -145,7 +145,7 @@ exchange c l = fmap (Auth c) . action l
         FromClient   x n  -> exchangeCode        x n
         FromUser     u    -> authorizedUserToken u Nothing
 
--- | Refresh an existing 'OAuthToken' using
+-- | Refresh an existing 'OAuthToken'.
 refresh :: forall m s. (MonadIO m, MonadCatch m, AllowScopes s)
         => Auth s
         -> Logger
