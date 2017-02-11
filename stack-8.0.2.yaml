@@ -1,12 +1,12 @@
-compiler:   ghc-8.0.1
-resolver:   nightly-2016-10-29
+compiler:   ghc-8.0.2
+resolver:   nightly-2017-01-25
 flags:      {}
 extra-deps: []
 packages:
   - core
   - gogol
   - examples
-
+# GENERATED
   - gogol-adexchange-buyer
   - gogol-adexchange-seller
   - gogol-admin-datatransfer
@@ -110,3 +110,4 @@ packages:
   - gogol-youtube
   - gogol-youtube-analytics
   - gogol-youtube-reporting
+# END GENERATED
