@@ -905,6 +905,7 @@ instance ToJSON Settings where
 data IPMApping = IPMApping'
     { _imaIPAddress    :: !(Maybe Text)
     , _imaTimeToRetire :: !(Maybe DateTime')
+    , _imaType         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IPMApping' with the minimum fields required to make a request.
@@ -914,12 +915,15 @@ data IPMApping = IPMApping'
 -- * 'imaIPAddress'
 --
 -- * 'imaTimeToRetire'
+--
+-- * 'imaType'
 ipMApping
     :: IPMApping
 ipMApping =
     IPMApping'
     { _imaIPAddress = Nothing
     , _imaTimeToRetire = Nothing
+    , _imaType = Nothing
     }
 
 -- | The IP address assigned.
@@ -936,19 +940,27 @@ imaTimeToRetire
       (\ s a -> s{_imaTimeToRetire = a})
       . mapping _DateTime
 
+-- | The type of this IP address. A PRIMARY address is an address that can
+-- accept incoming connections. An OUTGOING address is the source address
+-- of connections originating from the instance, if supported.
+imaType :: Lens' IPMApping (Maybe Text)
+imaType = lens _imaType (\ s a -> s{_imaType = a})
+
 instance FromJSON IPMApping where
         parseJSON
           = withObject "IPMApping"
               (\ o ->
                  IPMApping' <$>
-                   (o .:? "ipAddress") <*> (o .:? "timeToRetire"))
+                   (o .:? "ipAddress") <*> (o .:? "timeToRetire") <*>
+                     (o .:? "type"))
 
 instance ToJSON IPMApping where
         toJSON IPMApping'{..}
           = object
               (catMaybes
                  [("ipAddress" .=) <$> _imaIPAddress,
-                  ("timeToRetire" .=) <$> _imaTimeToRetire])
+                  ("timeToRetire" .=) <$> _imaTimeToRetire,
+                  ("type" .=) <$> _imaType])
 
 -- | A database resource inside a Cloud SQL instance.
 --
@@ -2782,8 +2794,7 @@ tKind = lens _tKind (\ s a -> s{_tKind = a})
 tTier :: Lens' Tier (Maybe Text)
 tTier = lens _tTier (\ s a -> s{_tTier = a})
 
--- | The applicable regions for this tier. Can be us-east1, europe-west1 or
--- asia-east1.
+-- | The applicable regions for this tier.
 tRegion :: Lens' Tier [Text]
 tRegion
   = lens _tRegion (\ s a -> s{_tRegion = a}) . _Default
@@ -3196,6 +3207,54 @@ instance ToJSON OperationError where
               (catMaybes
                  [Just ("kind" .= _opeKind), ("code" .=) <$> _opeCode,
                   ("message" .=) <$> _opeMessage])
+
+-- | Database Instance truncate log context.
+--
+-- /See:/ 'truncateLogContext' smart constructor.
+data TruncateLogContext = TruncateLogContext'
+    { _tlcKind    :: !Text
+    , _tlcLogType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TruncateLogContext' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tlcKind'
+--
+-- * 'tlcLogType'
+truncateLogContext
+    :: TruncateLogContext
+truncateLogContext =
+    TruncateLogContext'
+    { _tlcKind = "sql#truncateLogContext"
+    , _tlcLogType = Nothing
+    }
+
+-- | This is always sql#truncateLogContext.
+tlcKind :: Lens' TruncateLogContext Text
+tlcKind = lens _tlcKind (\ s a -> s{_tlcKind = a})
+
+-- | The type of log to truncate. Valid values are MYSQL_GENERAL_TABLE and
+-- MYSQL_SLOW_TABLE.
+tlcLogType :: Lens' TruncateLogContext (Maybe Text)
+tlcLogType
+  = lens _tlcLogType (\ s a -> s{_tlcLogType = a})
+
+instance FromJSON TruncateLogContext where
+        parseJSON
+          = withObject "TruncateLogContext"
+              (\ o ->
+                 TruncateLogContext' <$>
+                   (o .:? "kind" .!= "sql#truncateLogContext") <*>
+                     (o .:? "logType"))
+
+instance ToJSON TruncateLogContext where
+        toJSON TruncateLogContext'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _tlcKind),
+                  ("logType" .=) <$> _tlcLogType])
 
 -- | Database instance clone request.
 --
@@ -3711,6 +3770,45 @@ instance ToJSON FlagsListResponse where
               (catMaybes
                  [Just ("kind" .= _flrKind),
                   ("items" .=) <$> _flrItems])
+
+-- | Instance truncate log request.
+--
+-- /See:/ 'instancesTruncateLogRequest' smart constructor.
+newtype InstancesTruncateLogRequest = InstancesTruncateLogRequest'
+    { _itlrTruncateLogContext :: Maybe TruncateLogContext
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesTruncateLogRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itlrTruncateLogContext'
+instancesTruncateLogRequest
+    :: InstancesTruncateLogRequest
+instancesTruncateLogRequest =
+    InstancesTruncateLogRequest'
+    { _itlrTruncateLogContext = Nothing
+    }
+
+-- | Contains details about the truncate log operation.
+itlrTruncateLogContext :: Lens' InstancesTruncateLogRequest (Maybe TruncateLogContext)
+itlrTruncateLogContext
+  = lens _itlrTruncateLogContext
+      (\ s a -> s{_itlrTruncateLogContext = a})
+
+instance FromJSON InstancesTruncateLogRequest where
+        parseJSON
+          = withObject "InstancesTruncateLogRequest"
+              (\ o ->
+                 InstancesTruncateLogRequest' <$>
+                   (o .:? "truncateLogContext"))
+
+instance ToJSON InstancesTruncateLogRequest where
+        toJSON InstancesTruncateLogRequest'{..}
+          = object
+              (catMaybes
+                 [("truncateLogContext" .=) <$>
+                    _itlrTruncateLogContext])
 
 -- | Options for exporting data as SQL statements.
 --
