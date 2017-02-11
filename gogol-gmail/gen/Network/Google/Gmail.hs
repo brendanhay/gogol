@@ -25,6 +25,7 @@ module Network.Google.Gmail
     , gmailSettingsBasicScope
     , mailGoogleComScope
     , gmailModifyScope
+    , gmailMetadataScope
     , gmailLabelsScope
     , gmailSettingsSharingScope
     , gmailSendScope
@@ -84,6 +85,9 @@ module Network.Google.Gmail
 
     -- ** gmail.users.messages.batchDelete
     , module Network.Google.Resource.Gmail.Users.Messages.BatchDelete
+
+    -- ** gmail.users.messages.batchModify
+    , module Network.Google.Resource.Gmail.Users.Messages.BatchModify
 
     -- ** gmail.users.messages.delete
     , module Network.Google.Resource.Gmail.Users.Messages.Delete
@@ -410,6 +414,13 @@ module Network.Google.Gmail
     -- ** UsersThreadsGetFormat
     , UsersThreadsGetFormat (..)
 
+    -- ** BatchModifyMessagesRequest
+    , BatchModifyMessagesRequest
+    , batchModifyMessagesRequest
+    , bmmrIds
+    , bmmrRemoveLabelIds
+    , bmmrAddLabelIds
+
     -- ** Draft
     , Draft
     , draft
@@ -546,6 +557,7 @@ import           Network.Google.Resource.Gmail.Users.Labels.Patch
 import           Network.Google.Resource.Gmail.Users.Labels.Update
 import           Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
 import           Network.Google.Resource.Gmail.Users.Messages.BatchDelete
+import           Network.Google.Resource.Gmail.Users.Messages.BatchModify
 import           Network.Google.Resource.Gmail.Users.Messages.Delete
 import           Network.Google.Resource.Gmail.Users.Messages.Get
 import           Network.Google.Resource.Gmail.Users.Messages.Import
@@ -641,6 +653,7 @@ type GmailAPI =
        :<|> UsersMessagesGetResource
        :<|> UsersMessagesTrashResource
        :<|> UsersMessagesSendResource
+       :<|> UsersMessagesBatchModifyResource
        :<|> UsersMessagesUntrashResource
        :<|> UsersMessagesImportResource
        :<|> UsersMessagesBatchDeleteResource

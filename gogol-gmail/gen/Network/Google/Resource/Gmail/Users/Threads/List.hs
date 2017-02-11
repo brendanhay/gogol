@@ -101,7 +101,8 @@ usersThreadsList =
 
 -- | Only return threads matching the specified query. Supports the same
 -- query format as the Gmail search box. For example,
--- \"from:someuser\'example.com rfc822msgid: is:unread\".
+-- \"from:someuser\'example.com rfc822msgid: is:unread\". Parameter cannot
+-- be used when accessing the api using the gmail.metadata scope.
 utlQ :: Lens' UsersThreadsList (Maybe Text)
 utlQ = lens _utlQ (\ s a -> s{_utlQ = a})
 
@@ -141,6 +142,7 @@ instance GoogleRequest UsersThreadsList where
         type Rs UsersThreadsList = ListThreadsResponse
         type Scopes UsersThreadsList =
              '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.metadata",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersThreadsList'{..}

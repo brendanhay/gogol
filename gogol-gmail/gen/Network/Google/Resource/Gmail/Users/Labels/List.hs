@@ -80,6 +80,7 @@ instance GoogleRequest UsersLabelsList where
         type Scopes UsersLabelsList =
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.labels",
+               "https://www.googleapis.com/auth/gmail.metadata",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersLabelsList'{..}

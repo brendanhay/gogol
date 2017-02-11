@@ -51,6 +51,7 @@ library
         , Network.Google.Resource.Gmail.Users.Labels.Update
         , Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
         , Network.Google.Resource.Gmail.Users.Messages.BatchDelete
+        , Network.Google.Resource.Gmail.Users.Messages.BatchModify
         , Network.Google.Resource.Gmail.Users.Messages.Delete
         , Network.Google.Resource.Gmail.Users.Messages.Get
         , Network.Google.Resource.Gmail.Users.Messages.Import

@@ -101,7 +101,8 @@ usersMessagesList =
 
 -- | Only return messages matching the specified query. Supports the same
 -- query format as the Gmail search box. For example,
--- \"from:someuser\'example.com rfc822msgid: is:unread\".
+-- \"from:someuser\'example.com rfc822msgid: is:unread\". Parameter cannot
+-- be used when accessing the api using the gmail.metadata scope.
 umlQ :: Lens' UsersMessagesList (Maybe Text)
 umlQ = lens _umlQ (\ s a -> s{_umlQ = a})
 
@@ -141,6 +142,7 @@ instance GoogleRequest UsersMessagesList where
         type Rs UsersMessagesList = ListMessagesResponse
         type Scopes UsersMessagesList =
              '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.metadata",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersMessagesList'{..}
