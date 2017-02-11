@@ -36,6 +36,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
     , pjgmXgafv
     , pjgmJobId
     , pjgmUploadProtocol
+    , pjgmLocation
     , pjgmStartTime
     , pjgmPp
     , pjgmAccessToken
@@ -59,14 +60,15 @@ type ProjectsJobsGetMetricsResource =
                "metrics" :>
                  QueryParam "$.xgafv" Text :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "startTime" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] JobMetrics
+                     QueryParam "location" Text :>
+                       QueryParam "startTime" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] JobMetrics
 
 -- | Request the job status.
 --
@@ -75,6 +77,7 @@ data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics'
     { _pjgmXgafv          :: !(Maybe Text)
     , _pjgmJobId          :: !Text
     , _pjgmUploadProtocol :: !(Maybe Text)
+    , _pjgmLocation       :: !(Maybe Text)
     , _pjgmStartTime      :: !(Maybe Text)
     , _pjgmPp             :: !Bool
     , _pjgmAccessToken    :: !(Maybe Text)
@@ -93,6 +96,8 @@ data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics'
 -- * 'pjgmJobId'
 --
 -- * 'pjgmUploadProtocol'
+--
+-- * 'pjgmLocation'
 --
 -- * 'pjgmStartTime'
 --
@@ -116,6 +121,7 @@ projectsJobsGetMetrics pPjgmJobId_ pPjgmProjectId_ =
     { _pjgmXgafv = Nothing
     , _pjgmJobId = pPjgmJobId_
     , _pjgmUploadProtocol = Nothing
+    , _pjgmLocation = Nothing
     , _pjgmStartTime = Nothing
     , _pjgmPp = True
     , _pjgmAccessToken = Nothing
@@ -140,6 +146,11 @@ pjgmUploadProtocol :: Lens' ProjectsJobsGetMetrics (Maybe Text)
 pjgmUploadProtocol
   = lens _pjgmUploadProtocol
       (\ s a -> s{_pjgmUploadProtocol = a})
+
+-- | The location which contains the job specified by job_id.
+pjgmLocation :: Lens' ProjectsJobsGetMetrics (Maybe Text)
+pjgmLocation
+  = lens _pjgmLocation (\ s a -> s{_pjgmLocation = a})
 
 -- | Return only metric data that has changed since this time. Default is to
 -- return all information about all metrics for the job.
@@ -189,6 +200,7 @@ instance GoogleRequest ProjectsJobsGetMetrics where
         requestClient ProjectsJobsGetMetrics'{..}
           = go _pjgmProjectId _pjgmJobId _pjgmXgafv
               _pjgmUploadProtocol
+              _pjgmLocation
               _pjgmStartTime
               (Just _pjgmPp)
               _pjgmAccessToken

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List the jobs of a project
+-- List the jobs of a project.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.list@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.List
@@ -35,6 +35,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.List
     -- * Request Lenses
     , pjlXgafv
     , pjlUploadProtocol
+    , pjlLocation
     , pjlPp
     , pjlAccessToken
     , pjlUploadType
@@ -59,24 +60,26 @@ type ProjectsJobsListResource =
            "jobs" :>
              QueryParam "$.xgafv" Text :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "view" Text :>
-                           QueryParam "filter" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "pageSize" (Textual Int32) :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ListJobsResponse
+                 QueryParam "location" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "view" Text :>
+                             QueryParam "filter" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "pageSize" (Textual Int32) :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] ListJobsResponse
 
--- | List the jobs of a project
+-- | List the jobs of a project.
 --
 -- /See:/ 'projectsJobsList' smart constructor.
 data ProjectsJobsList = ProjectsJobsList'
     { _pjlXgafv          :: !(Maybe Text)
     , _pjlUploadProtocol :: !(Maybe Text)
+    , _pjlLocation       :: !(Maybe Text)
     , _pjlPp             :: !Bool
     , _pjlAccessToken    :: !(Maybe Text)
     , _pjlUploadType     :: !(Maybe Text)
@@ -96,6 +99,8 @@ data ProjectsJobsList = ProjectsJobsList'
 -- * 'pjlXgafv'
 --
 -- * 'pjlUploadProtocol'
+--
+-- * 'pjlLocation'
 --
 -- * 'pjlPp'
 --
@@ -123,6 +128,7 @@ projectsJobsList pPjlProjectId_ =
     ProjectsJobsList'
     { _pjlXgafv = Nothing
     , _pjlUploadProtocol = Nothing
+    , _pjlLocation = Nothing
     , _pjlPp = True
     , _pjlAccessToken = Nothing
     , _pjlUploadType = Nothing
@@ -144,6 +150,11 @@ pjlUploadProtocol :: Lens' ProjectsJobsList (Maybe Text)
 pjlUploadProtocol
   = lens _pjlUploadProtocol
       (\ s a -> s{_pjlUploadProtocol = a})
+
+-- | The location that contains this job.
+pjlLocation :: Lens' ProjectsJobsList (Maybe Text)
+pjlLocation
+  = lens _pjlLocation (\ s a -> s{_pjlLocation = a})
 
 -- | Pretty-print response.
 pjlPp :: Lens' ProjectsJobsList Bool
@@ -167,7 +178,8 @@ pjlBearerToken
   = lens _pjlBearerToken
       (\ s a -> s{_pjlBearerToken = a})
 
--- | Level of information requested in response. Default is SUMMARY.
+-- | Level of information requested in response. Default is
+-- \`JOB_VIEW_SUMMARY\`.
 pjlView :: Lens' ProjectsJobsList (Maybe Text)
 pjlView = lens _pjlView (\ s a -> s{_pjlView = a})
 
@@ -207,6 +219,7 @@ instance GoogleRequest ProjectsJobsList where
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsList'{..}
           = go _pjlProjectId _pjlXgafv _pjlUploadProtocol
+              _pjlLocation
               (Just _pjlPp)
               _pjlAccessToken
               _pjlUploadType

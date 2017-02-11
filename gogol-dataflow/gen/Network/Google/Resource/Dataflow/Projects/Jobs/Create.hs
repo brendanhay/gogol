@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a dataflow job.
+-- Creates a Cloud Dataflow job.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.create@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Create
@@ -35,6 +35,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Create
     -- * Request Lenses
     , pjcXgafv
     , pjcUploadProtocol
+    , pjcLocation
     , pjcPp
     , pjcAccessToken
     , pjcUploadType
@@ -58,22 +59,24 @@ type ProjectsJobsCreateResource =
            "jobs" :>
              QueryParam "$.xgafv" Text :>
                QueryParam "upload_protocol" Text :>
-                 QueryParam "pp" Bool :>
-                   QueryParam "access_token" Text :>
-                     QueryParam "uploadType" Text :>
-                       QueryParam "bearer_token" Text :>
-                         QueryParam "view" Text :>
-                           QueryParam "replaceJobId" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :>
-                                 ReqBody '[JSON] Job :> Post '[JSON] Job
+                 QueryParam "location" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "view" Text :>
+                             QueryParam "replaceJobId" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Job :> Post '[JSON] Job
 
--- | Creates a dataflow job.
+-- | Creates a Cloud Dataflow job.
 --
 -- /See:/ 'projectsJobsCreate' smart constructor.
 data ProjectsJobsCreate = ProjectsJobsCreate'
     { _pjcXgafv          :: !(Maybe Text)
     , _pjcUploadProtocol :: !(Maybe Text)
+    , _pjcLocation       :: !(Maybe Text)
     , _pjcPp             :: !Bool
     , _pjcAccessToken    :: !(Maybe Text)
     , _pjcUploadType     :: !(Maybe Text)
@@ -92,6 +95,8 @@ data ProjectsJobsCreate = ProjectsJobsCreate'
 -- * 'pjcXgafv'
 --
 -- * 'pjcUploadProtocol'
+--
+-- * 'pjcLocation'
 --
 -- * 'pjcPp'
 --
@@ -118,6 +123,7 @@ projectsJobsCreate pPjcPayload_ pPjcProjectId_ =
     ProjectsJobsCreate'
     { _pjcXgafv = Nothing
     , _pjcUploadProtocol = Nothing
+    , _pjcLocation = Nothing
     , _pjcPp = True
     , _pjcAccessToken = Nothing
     , _pjcUploadType = Nothing
@@ -138,6 +144,11 @@ pjcUploadProtocol :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcUploadProtocol
   = lens _pjcUploadProtocol
       (\ s a -> s{_pjcUploadProtocol = a})
+
+-- | The location that contains this job.
+pjcLocation :: Lens' ProjectsJobsCreate (Maybe Text)
+pjcLocation
+  = lens _pjcLocation (\ s a -> s{_pjcLocation = a})
 
 -- | Pretty-print response.
 pjcPp :: Lens' ProjectsJobsCreate Bool
@@ -166,16 +177,16 @@ pjcBearerToken
   = lens _pjcBearerToken
       (\ s a -> s{_pjcBearerToken = a})
 
--- | Level of information requested in response.
+-- | The level of information requested in response.
 pjcView :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcView = lens _pjcView (\ s a -> s{_pjcView = a})
 
--- | The project which owns the job.
+-- | The ID of the Cloud Platform project that the job belongs to.
 pjcProjectId :: Lens' ProjectsJobsCreate Text
 pjcProjectId
   = lens _pjcProjectId (\ s a -> s{_pjcProjectId = a})
 
--- | DEPRECATED. This field is now on the Job message.
+-- | Deprecated. This field is now in the Job message.
 pjcReplaceJobId :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcReplaceJobId
   = lens _pjcReplaceJobId
@@ -193,6 +204,7 @@ instance GoogleRequest ProjectsJobsCreate where
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ProjectsJobsCreate'{..}
           = go _pjcProjectId _pjcXgafv _pjcUploadProtocol
+              _pjcLocation
               (Just _pjcPp)
               _pjcAccessToken
               _pjcUploadType

@@ -46,9 +46,16 @@ module Network.Google.Dataflow.Types
     , ssrShards
     , ssrOutcome
 
+    -- * ResourceUtilizationReportMetricsItem
+    , ResourceUtilizationReportMetricsItem
+    , resourceUtilizationReportMetricsItem
+    , rurmiAddtional
+
     -- * CreateJobFromTemplateRequest
     , CreateJobFromTemplateRequest
     , createJobFromTemplateRequest
+    , cjftrEnvironment
+    , cjftrJobName
     , cjftrGcsPath
     , cjftrParameters
 
@@ -133,6 +140,7 @@ module Network.Google.Dataflow.Types
     , ReportWorkItemStatusRequest
     , reportWorkItemStatusRequest
     , rwisrCurrentWorkerTime
+    , rwisrLocation
     , rwisrWorkItemStatuses
     , rwisrWorkerId
 
@@ -255,6 +263,7 @@ module Network.Google.Dataflow.Types
     , cuInternal
     , cuStringList
     , cuShortId
+    , cuDistribution
     , cuCumulative
     , cuStructuredNameAndMetadata
     , cuFloatingPointMean
@@ -389,6 +398,7 @@ module Network.Google.Dataflow.Types
     , leaseWorkItemRequest
     , lwirWorkItemTypes
     , lwirCurrentWorkerTime
+    , lwirLocation
     , lwirWorkerCapabilities
     , lwirRequestedLeaseDuration
     , lwirWorkerId
@@ -473,10 +483,21 @@ module Network.Google.Dataflow.Types
     , ddaVMInstance
     , ddaDataDisks
 
+    -- * ResourceUtilizationReport
+    , ResourceUtilizationReport
+    , resourceUtilizationReport
+    , rurMetrics
+
+    -- * FailedLocation
+    , FailedLocation
+    , failedLocation
+    , flName
+
     -- * WorkerMessageResponse
     , WorkerMessageResponse
     , workerMessageResponse
     , wmrWorkerHealthReportResponse
+    , wmrWorkerMetricsResponse
 
     -- * CreateJobFromTemplateRequestParameters
     , CreateJobFromTemplateRequestParameters
@@ -559,6 +580,15 @@ module Network.Google.Dataflow.Types
     , workerPoolPoolArgs
     , wppaAddtional
 
+    -- * RuntimeEnvironment
+    , RuntimeEnvironment
+    , runtimeEnvironment
+    , reZone
+    , reBypassTempDirValidation
+    , reServiceAccountEmail
+    , reMaxWorkers
+    , reTempLocation
+
     -- * CounterMetadata
     , CounterMetadata
     , counterMetadata
@@ -630,6 +660,7 @@ module Network.Google.Dataflow.Types
     , Job
     , job
     , jRequestedState
+    , jLocation
     , jEnvironment
     , jClientRequestId
     , jCurrentState
@@ -727,6 +758,10 @@ module Network.Google.Dataflow.Types
     , sfPrimary
     , sfResidualSource
 
+    -- * ResourceUtilizationReportResponse
+    , ResourceUtilizationReportResponse
+    , resourceUtilizationReportResponse
+
     -- * StreamingComputationRanges
     , StreamingComputationRanges
     , streamingComputationRanges
@@ -737,6 +772,7 @@ module Network.Google.Dataflow.Types
     , ListJobsResponse
     , listJobsResponse
     , ljrNextPageToken
+    , ljrFailedLocation
     , ljrJobs
 
     -- * Source
@@ -761,6 +797,7 @@ module Network.Google.Dataflow.Types
     , wmWorkerHealthReport
     , wmTime
     , wmWorkerMessageCode
+    , wmWorkerMetrics
     , wmLabels
 
     -- * KeyRangeLocation
@@ -800,6 +837,15 @@ module Network.Google.Dataflow.Types
     , CustomSourceLocation
     , customSourceLocation
     , cslStateful
+
+    -- * DistributionUpdate
+    , DistributionUpdate
+    , distributionUpdate
+    , duMax
+    , duCount
+    , duMin
+    , duSumOfSquares
+    , duSum
 
     -- * SourceBaseSpecsItem
     , SourceBaseSpecsItem
@@ -897,6 +943,7 @@ module Network.Google.Dataflow.Types
     , plTimestampLabel
     , plIdLabel
     , plTopic
+    , plWithAttributes
     , plSubscription
 
     -- * FloatingPointList

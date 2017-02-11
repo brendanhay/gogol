@@ -36,6 +36,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
     , pjmlXgafv
     , pjmlJobId
     , pjmlUploadProtocol
+    , pjmlLocation
     , pjmlStartTime
     , pjmlPp
     , pjmlAccessToken
@@ -63,18 +64,19 @@ type ProjectsJobsMessagesListResource =
                "messages" :>
                  QueryParam "$.xgafv" Text :>
                    QueryParam "upload_protocol" Text :>
-                     QueryParam "startTime" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "bearer_token" Text :>
-                               QueryParam "endTime" Text :>
-                                 QueryParam "minimumImportance" Text :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "pageSize" (Textual Int32) :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] ListJobMessagesResponse
+                     QueryParam "location" Text :>
+                       QueryParam "startTime" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "endTime" Text :>
+                                   QueryParam "minimumImportance" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "pageSize" (Textual Int32) :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] ListJobMessagesResponse
 
 -- | Request the job status.
 --
@@ -83,6 +85,7 @@ data ProjectsJobsMessagesList = ProjectsJobsMessagesList'
     { _pjmlXgafv             :: !(Maybe Text)
     , _pjmlJobId             :: !Text
     , _pjmlUploadProtocol    :: !(Maybe Text)
+    , _pjmlLocation          :: !(Maybe Text)
     , _pjmlStartTime         :: !(Maybe Text)
     , _pjmlPp                :: !Bool
     , _pjmlAccessToken       :: !(Maybe Text)
@@ -105,6 +108,8 @@ data ProjectsJobsMessagesList = ProjectsJobsMessagesList'
 -- * 'pjmlJobId'
 --
 -- * 'pjmlUploadProtocol'
+--
+-- * 'pjmlLocation'
 --
 -- * 'pjmlStartTime'
 --
@@ -136,6 +141,7 @@ projectsJobsMessagesList pPjmlJobId_ pPjmlProjectId_ =
     { _pjmlXgafv = Nothing
     , _pjmlJobId = pPjmlJobId_
     , _pjmlUploadProtocol = Nothing
+    , _pjmlLocation = Nothing
     , _pjmlStartTime = Nothing
     , _pjmlPp = True
     , _pjmlAccessToken = Nothing
@@ -164,6 +170,11 @@ pjmlUploadProtocol :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlUploadProtocol
   = lens _pjmlUploadProtocol
       (\ s a -> s{_pjmlUploadProtocol = a})
+
+-- | The location which contains the job specified by job_id.
+pjmlLocation :: Lens' ProjectsJobsMessagesList (Maybe Text)
+pjmlLocation
+  = lens _pjmlLocation (\ s a -> s{_pjmlLocation = a})
 
 -- | If specified, return only messages with timestamps >= start_time. The
 -- default is the job creation time (i.e. beginning of messages).
@@ -241,6 +252,7 @@ instance GoogleRequest ProjectsJobsMessagesList where
         requestClient ProjectsJobsMessagesList'{..}
           = go _pjmlProjectId _pjmlJobId _pjmlXgafv
               _pjmlUploadProtocol
+              _pjmlLocation
               _pjmlStartTime
               (Just _pjmlPp)
               _pjmlAccessToken

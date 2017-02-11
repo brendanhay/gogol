@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a dataflow job from a template.
+-- Creates a Cloud Dataflow job from a template.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.templates.create@.
 module Network.Google.Resource.Dataflow.Projects.Templates.Create
@@ -65,7 +65,7 @@ type ProjectsTemplatesCreateResource =
                              ReqBody '[JSON] CreateJobFromTemplateRequest :>
                                Post '[JSON] Job
 
--- | Creates a dataflow job from a template.
+-- | Creates a Cloud Dataflow job from a template.
 --
 -- /See:/ 'projectsTemplatesCreate' smart constructor.
 data ProjectsTemplatesCreate = ProjectsTemplatesCreate'
@@ -155,7 +155,7 @@ ptcBearerToken
   = lens _ptcBearerToken
       (\ s a -> s{_ptcBearerToken = a})
 
--- | The project which owns the job.
+-- | Required. The ID of the Cloud Platform project that the job belongs to.
 ptcProjectId :: Lens' ProjectsTemplatesCreate Text
 ptcProjectId
   = lens _ptcProjectId (\ s a -> s{_ptcProjectId = a})

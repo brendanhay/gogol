@@ -13,8 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Develops and executes data processing patterns like ETL, batch
--- computation, and continuous computation.
+-- Manages Google Cloud Dataflow projects on Google Cloud Platform.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference>
 module Network.Google.Dataflow
@@ -61,6 +60,30 @@ module Network.Google.Dataflow
     -- ** dataflow.projects.jobs.workItems.reportStatus
     , module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
 
+    -- ** dataflow.projects.locations.jobs.create
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
+
+    -- ** dataflow.projects.locations.jobs.get
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
+
+    -- ** dataflow.projects.locations.jobs.getMetrics
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
+
+    -- ** dataflow.projects.locations.jobs.list
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.List
+
+    -- ** dataflow.projects.locations.jobs.messages.list
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
+
+    -- ** dataflow.projects.locations.jobs.update
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
+
+    -- ** dataflow.projects.locations.jobs.workItems.lease
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
+
+    -- ** dataflow.projects.locations.jobs.workItems.reportStatus
+    , module Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
+
     -- ** dataflow.projects.templates.create
     , module Network.Google.Resource.Dataflow.Projects.Templates.Create
 
@@ -92,9 +115,16 @@ module Network.Google.Dataflow
     , ssrShards
     , ssrOutcome
 
+    -- ** ResourceUtilizationReportMetricsItem
+    , ResourceUtilizationReportMetricsItem
+    , resourceUtilizationReportMetricsItem
+    , rurmiAddtional
+
     -- ** CreateJobFromTemplateRequest
     , CreateJobFromTemplateRequest
     , createJobFromTemplateRequest
+    , cjftrEnvironment
+    , cjftrJobName
     , cjftrGcsPath
     , cjftrParameters
 
@@ -179,6 +209,7 @@ module Network.Google.Dataflow
     , ReportWorkItemStatusRequest
     , reportWorkItemStatusRequest
     , rwisrCurrentWorkerTime
+    , rwisrLocation
     , rwisrWorkItemStatuses
     , rwisrWorkerId
 
@@ -301,6 +332,7 @@ module Network.Google.Dataflow
     , cuInternal
     , cuStringList
     , cuShortId
+    , cuDistribution
     , cuCumulative
     , cuStructuredNameAndMetadata
     , cuFloatingPointMean
@@ -435,6 +467,7 @@ module Network.Google.Dataflow
     , leaseWorkItemRequest
     , lwirWorkItemTypes
     , lwirCurrentWorkerTime
+    , lwirLocation
     , lwirWorkerCapabilities
     , lwirRequestedLeaseDuration
     , lwirWorkerId
@@ -519,10 +552,21 @@ module Network.Google.Dataflow
     , ddaVMInstance
     , ddaDataDisks
 
+    -- ** ResourceUtilizationReport
+    , ResourceUtilizationReport
+    , resourceUtilizationReport
+    , rurMetrics
+
+    -- ** FailedLocation
+    , FailedLocation
+    , failedLocation
+    , flName
+
     -- ** WorkerMessageResponse
     , WorkerMessageResponse
     , workerMessageResponse
     , wmrWorkerHealthReportResponse
+    , wmrWorkerMetricsResponse
 
     -- ** CreateJobFromTemplateRequestParameters
     , CreateJobFromTemplateRequestParameters
@@ -605,6 +649,15 @@ module Network.Google.Dataflow
     , workerPoolPoolArgs
     , wppaAddtional
 
+    -- ** RuntimeEnvironment
+    , RuntimeEnvironment
+    , runtimeEnvironment
+    , reZone
+    , reBypassTempDirValidation
+    , reServiceAccountEmail
+    , reMaxWorkers
+    , reTempLocation
+
     -- ** CounterMetadata
     , CounterMetadata
     , counterMetadata
@@ -676,6 +729,7 @@ module Network.Google.Dataflow
     , Job
     , job
     , jRequestedState
+    , jLocation
     , jEnvironment
     , jClientRequestId
     , jCurrentState
@@ -773,6 +827,10 @@ module Network.Google.Dataflow
     , sfPrimary
     , sfResidualSource
 
+    -- ** ResourceUtilizationReportResponse
+    , ResourceUtilizationReportResponse
+    , resourceUtilizationReportResponse
+
     -- ** StreamingComputationRanges
     , StreamingComputationRanges
     , streamingComputationRanges
@@ -783,6 +841,7 @@ module Network.Google.Dataflow
     , ListJobsResponse
     , listJobsResponse
     , ljrNextPageToken
+    , ljrFailedLocation
     , ljrJobs
 
     -- ** Source
@@ -807,6 +866,7 @@ module Network.Google.Dataflow
     , wmWorkerHealthReport
     , wmTime
     , wmWorkerMessageCode
+    , wmWorkerMetrics
     , wmLabels
 
     -- ** KeyRangeLocation
@@ -846,6 +906,15 @@ module Network.Google.Dataflow
     , CustomSourceLocation
     , customSourceLocation
     , cslStateful
+
+    -- ** DistributionUpdate
+    , DistributionUpdate
+    , distributionUpdate
+    , duMax
+    , duCount
+    , duMin
+    , duSumOfSquares
+    , duSum
 
     -- ** SourceBaseSpecsItem
     , SourceBaseSpecsItem
@@ -943,6 +1012,7 @@ module Network.Google.Dataflow
     , plTimestampLabel
     , plIdLabel
     , plTopic
+    , plWithAttributes
     , plSubscription
 
     -- ** FloatingPointList
@@ -1005,6 +1075,14 @@ import           Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
 import           Network.Google.Resource.Dataflow.Projects.Jobs.Update
 import           Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
 import           Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
+import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Create
+import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Get
+import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.GetMetrics
+import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.List
+import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Messages.List
+import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.Update
+import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.Lease
+import           Network.Google.Resource.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
 import           Network.Google.Resource.Dataflow.Projects.Templates.Create
 import           Network.Google.Resource.Dataflow.Projects.WorkerMessages
 
@@ -1025,4 +1103,13 @@ type DataflowAPI =
        :<|> ProjectsJobsCreateResource
        :<|> ProjectsJobsUpdateResource
        :<|> ProjectsJobsGetMetricsResource
+       :<|> ProjectsLocationsJobsWorkItemsLeaseResource
+       :<|>
+       ProjectsLocationsJobsWorkItemsReportStatusResource
+       :<|> ProjectsLocationsJobsMessagesListResource
+       :<|> ProjectsLocationsJobsListResource
+       :<|> ProjectsLocationsJobsGetResource
+       :<|> ProjectsLocationsJobsCreateResource
+       :<|> ProjectsLocationsJobsUpdateResource
+       :<|> ProjectsLocationsJobsGetMetricsResource
        :<|> ProjectsWorkerMessagesResource
