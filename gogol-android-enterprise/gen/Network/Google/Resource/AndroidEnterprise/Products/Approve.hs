@@ -22,9 +22,9 @@
 --
 -- Approves the specified product and the relevant app permissions, if any.
 -- The maximum number of products that you can approve per enterprise
--- customer is 1,000. To learn how to use Google Play for Work to design
--- and create a store layout to display approved products to your users,
--- see Store Layout Design.
+-- customer is 1,000. To learn how to use managed Google Play to design and
+-- create a store layout to display approved products to your users, see
+-- Store Layout Design.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.approve@.
 module Network.Google.Resource.AndroidEnterprise.Products.Approve
@@ -61,9 +61,9 @@ type ProductsApproveResource =
 
 -- | Approves the specified product and the relevant app permissions, if any.
 -- The maximum number of products that you can approve per enterprise
--- customer is 1,000. To learn how to use Google Play for Work to design
--- and create a store layout to display approved products to your users,
--- see Store Layout Design.
+-- customer is 1,000. To learn how to use managed Google Play to design and
+-- create a store layout to display approved products to your users, see
+-- Store Layout Design.
 --
 -- /See:/ 'productsApprove' smart constructor.
 data ProductsApprove = ProductsApprove'

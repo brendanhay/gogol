@@ -21,8 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Generates a token (activation code) to allow this user to configure
--- their work account in the Android Setup Wizard. Revokes any previously
--- generated token. This call only works with Google managed accounts.
+-- their managed account in the Android Setup Wizard. Revokes any
+-- previously generated token. This call only works with Google managed
+-- accounts.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.users.generateToken@.
 module Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
@@ -55,8 +56,9 @@ type UsersGenerateTokenResource =
                    QueryParam "alt" AltJSON :> Post '[JSON] UserToken
 
 -- | Generates a token (activation code) to allow this user to configure
--- their work account in the Android Setup Wizard. Revokes any previously
--- generated token. This call only works with Google managed accounts.
+-- their managed account in the Android Setup Wizard. Revokes any
+-- previously generated token. This call only works with Google managed
+-- accounts.
 --
 -- /See:/ 'usersGenerateToken' smart constructor.
 data UsersGenerateToken = UsersGenerateToken'
