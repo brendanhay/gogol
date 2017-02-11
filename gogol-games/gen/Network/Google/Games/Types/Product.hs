@@ -847,7 +847,7 @@ instance ToJSON TurnBasedMatch where
 -- /See:/ 'turnBasedMatchData' smart constructor.
 data TurnBasedMatchData = TurnBasedMatchData'
     { _tbmdKind          :: !Text
-    , _tbmdData          :: !(Maybe Base64)
+    , _tbmdData          :: !(Maybe Bytes)
     , _tbmdDataAvailable :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -879,7 +879,7 @@ tbmdKind = lens _tbmdKind (\ s a -> s{_tbmdKind = a})
 tbmdData :: Lens' TurnBasedMatchData (Maybe ByteString)
 tbmdData
   = lens _tbmdData (\ s a -> s{_tbmdData = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | True if this match has data available but it wasn\'t returned in a list
 -- response; fetching the match individually will retrieve this data.
@@ -6064,7 +6064,7 @@ instance ToJSON TurnBasedMatchResults where
 --
 -- /See:/ 'pushTokenIdIos' smart constructor.
 data PushTokenIdIos = PushTokenIdIos'
-    { _ptiiAPNSDeviceToken :: !(Maybe Base64)
+    { _ptiiAPNSDeviceToken :: !(Maybe Bytes)
     , _ptiiAPNSEnvironment :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6089,7 +6089,7 @@ ptiiAPNSDeviceToken :: Lens' PushTokenIdIos (Maybe ByteString)
 ptiiAPNSDeviceToken
   = lens _ptiiAPNSDeviceToken
       (\ s a -> s{_ptiiAPNSDeviceToken = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | Indicates whether this token should be used for the production or
 -- sandbox APNS server.
@@ -6664,7 +6664,7 @@ data QuestMilestone = QuestMilestone'
     { _qmState                :: !(Maybe Text)
     , _qmKind                 :: !Text
     , _qmId                   :: !(Maybe Text)
-    , _qmCompletionRewardData :: !(Maybe Base64)
+    , _qmCompletionRewardData :: !(Maybe Bytes)
     , _qmCriteria             :: !(Maybe [QuestCriterion])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6717,7 +6717,7 @@ qmCompletionRewardData :: Lens' QuestMilestone (Maybe ByteString)
 qmCompletionRewardData
   = lens _qmCompletionRewardData
       (\ s a -> s{_qmCompletionRewardData = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The criteria of the milestone.
 qmCriteria :: Lens' QuestMilestone [QuestCriterion]
@@ -8233,7 +8233,7 @@ instance ToJSON PlayerEventListResponse where
 -- /See:/ 'turnBasedMatchDataRequest' smart constructor.
 data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest'
     { _tbmdrKind :: !Text
-    , _tbmdrData :: !(Maybe Base64)
+    , _tbmdrData :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchDataRequest' with the minimum fields required to make a request.
@@ -8262,7 +8262,7 @@ tbmdrKind
 tbmdrData :: Lens' TurnBasedMatchDataRequest (Maybe ByteString)
 tbmdrData
   = lens _tbmdrData (\ s a -> s{_tbmdrData = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 instance FromJSON TurnBasedMatchDataRequest where
         parseJSON
