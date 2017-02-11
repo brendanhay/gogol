@@ -35,18 +35,6 @@ module Network.Google.PlayMoviesPartner
     -- ** playmoviespartner.accounts.avails.list
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
 
-    -- ** playmoviespartner.accounts.components.list
-    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Components.List
-
-    -- ** playmoviespartner.accounts.components.type.get
-    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Components.Type.Get
-
-    -- ** playmoviespartner.accounts.experienceLocales.get
-    , module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
-
-    -- ** playmoviespartner.accounts.experienceLocales.list
-    , module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
-
     -- ** playmoviespartner.accounts.orders.get
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
 
@@ -60,39 +48,6 @@ module Network.Google.PlayMoviesPartner
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
 
     -- * Types
-
-    -- ** Component
-    , Component
-    , component
-    , cStatus
-    , cPphName
-    , cStudioName
-    , cElIds
-    , cReceivedTime
-    , cPriority
-    , cCustomIds
-    , cAltCutIds
-    , cProcessingErrors
-    , cPlayableUnitType
-    , cEditLevelEidrs
-    , cApprovedTime
-    , cName
-    , cTitleLevelEidrs
-    , cRejectionNote
-    , cComponentId
-    , cLanguage
-    , cStatusDetail
-    , cType
-    , cNormalizedPriority
-    , cComponentDetailType
-    , cFilename
-
-    -- ** ListComponentsResponse
-    , ListComponentsResponse
-    , listComponentsResponse
-    , lcrComponents
-    , lcrNextPageToken
-    , lcrTotalSize
 
     -- ** Avail
     , Avail
@@ -138,13 +93,6 @@ module Network.Google.PlayMoviesPartner
     , larAvails
     , larTotalSize
 
-    -- ** ListExperienceLocalesResponse
-    , ListExperienceLocalesResponse
-    , listExperienceLocalesResponse
-    , lelrNextPageToken
-    , lelrTotalSize
-    , lelrExperienceLocales
-
     -- ** ListOrdersResponse
     , ListOrdersResponse
     , listOrdersResponse
@@ -186,33 +134,6 @@ module Network.Google.PlayMoviesPartner
     , oOrderId
     , oEpisodeName
 
-    -- ** ExperienceLocale
-    , ExperienceLocale
-    , experienceLocale
-    , elTitleLevelEidr
-    , elStatus
-    , elPphNames
-    , elInventoryId
-    , elEarliestAvailStartTime
-    , elStudioName
-    , elPriority
-    , elCustomIds
-    , elCreatedTime
-    , elCountry
-    , elTrailerId
-    , elPresentationId
-    , elAltCutId
-    , elChannelId
-    , elApprovedTime
-    , elPlayableSequenceId
-    , elElId
-    , elVideoId
-    , elName
-    , elLanguage
-    , elEditLevelEidr
-    , elType
-    , elNormalizedPriority
-
     -- ** StoreInfo
     , StoreInfo
     , storeInfo
@@ -247,10 +168,6 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.Get
 import           Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
-import           Network.Google.Resource.PlayMoviesPartner.Accounts.Components.List
-import           Network.Google.Resource.PlayMoviesPartner.Accounts.Components.Type.Get
-import           Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
-import           Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
 import           Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
 import           Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
 import           Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
@@ -262,13 +179,9 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Play Movies Partner API service.
 type PlayMoviesPartnerAPI =
-     AccountsComponentsTypeGetResource :<|>
-       AccountsComponentsListResource
-       :<|> AccountsAvailsListResource
-       :<|> AccountsAvailsGetResource
+     AccountsAvailsListResource :<|>
+       AccountsAvailsGetResource
        :<|> AccountsStoreInfosCountryGetResource
        :<|> AccountsStoreInfosListResource
        :<|> AccountsOrdersListResource
        :<|> AccountsOrdersGetResource
-       :<|> AccountsExperienceLocalesListResource
-       :<|> AccountsExperienceLocalesGetResource

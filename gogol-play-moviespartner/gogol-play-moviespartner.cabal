@@ -37,10 +37,6 @@ library
         , Network.Google.PlayMoviesPartner.Types
         , Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.Get
         , Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
-        , Network.Google.Resource.PlayMoviesPartner.Accounts.Components.List
-        , Network.Google.Resource.PlayMoviesPartner.Accounts.Components.Type.Get
-        , Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
-        , Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
         , Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
         , Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
         , Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
