@@ -28,6 +28,7 @@ executable gogol-gen
         , Gen.Formatting
         , Gen.IO
         , Gen.JSON
+        , Gen.Orphans
         , Gen.Syntax
         , Gen.TH
         , Gen.Text

@@ -153,7 +153,7 @@ main = do
             let anx = _optAnnexes </> fromText modelName <.> "json"
             p <- isFile anx
             if not p
-               then say ("Skipping '" % stext % "' due to mimsing annex configuration.")
+               then say ("Skipping '" % stext % "' due to missing annex configuration.")
                          modelName
                else do
                     s <- sequence

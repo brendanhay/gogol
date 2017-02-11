@@ -71,7 +71,6 @@ import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy.Builder       as Build
 import           Data.Text.Manipulate
 import           Formatting
-import           Gen.Orphans                  ()
 import           Gen.Text
 import           GHC.Generics                 (Generic)
 import           Language.Haskell.Exts.Build
@@ -161,20 +160,28 @@ instance IsString Global where
 instance FromJSON Global where
     parseJSON = withText "global" (pure . mkGlobal)
 
+instance FromJSONKey Global where
+    fromJSONKey = FromJSONKeyText mkGlobal
+
 instance ToJSON Global where
     toJSON = toJSON . global
-
-instance FromJSONKey Global
-instance ToJSONKey   Global
 
 gid :: Format a (Global -> a)
 gid = later (Build.fromText . global)
 
 newtype Local = Local { local :: Text }
-    deriving (Eq, Ord, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
-
-instance FromJSONKey Local
-instance ToJSONKey   Local
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Generic
+        , Hashable
+        , FromJSON
+        , ToJSON
+        , FromJSONKey
+        , ToJSONKey
+        , IsString
+        )
 
 lid :: Format a (Local -> a)
 lid = later (Build.fromText . local)
