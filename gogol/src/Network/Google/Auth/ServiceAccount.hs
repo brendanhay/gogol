@@ -86,7 +86,7 @@ serviceAccountToken :: (MonadIO m, MonadCatch m, AllowScopes s)
                     -> m (OAuthToken s)
 serviceAccountToken s p l m = do
     b <- encodeBearerJWT s p
-    let rq = accountsRequest
+    let rq = tokenRequest
            { Client.requestBody = RequestBodyBS $
                   "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer"
                <> "&assertion="
@@ -126,7 +126,7 @@ encodeBearerJWT s p = liftIO $ do
             ]
 
         payload = base64Encode
-            [ "aud"   .= accountsURL
+            [ "aud"   .= tokenURL
             , "scope" .= concatScopes (allowScopes p)
             , "iat"   .= n
             , "exp"   .= (n + seconds maxTokenLifetime)
