@@ -65,7 +65,8 @@ instance GoogleRequest RelyingPartyGetPublicKeys
          where
         type Rs RelyingPartyGetPublicKeys =
              IdentitytoolkitRelyingPartyGetPublicKeysResponse
-        type Scopes RelyingPartyGetPublicKeys = '[]
+        type Scopes RelyingPartyGetPublicKeys =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient RelyingPartyGetPublicKeys'{}
           = go (Just AltJSON) identityToolkitService
           where go

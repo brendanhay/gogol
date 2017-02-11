@@ -64,7 +64,8 @@ instance GoogleRequest RelyingPartyGetRecaptchaParam
          where
         type Rs RelyingPartyGetRecaptchaParam =
              GetRecaptchaParamResponse
-        type Scopes RelyingPartyGetRecaptchaParam = '[]
+        type Scopes RelyingPartyGetRecaptchaParam =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient RelyingPartyGetRecaptchaParam'{}
           = go (Just AltJSON) identityToolkitService
           where go

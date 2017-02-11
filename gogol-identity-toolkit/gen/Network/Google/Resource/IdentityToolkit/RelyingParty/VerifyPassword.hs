@@ -80,7 +80,8 @@ instance GoogleRequest RelyingPartyVerifyPassword
          where
         type Rs RelyingPartyVerifyPassword =
              VerifyPasswordResponse
-        type Scopes RelyingPartyVerifyPassword = '[]
+        type Scopes RelyingPartyVerifyPassword =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient RelyingPartyVerifyPassword'{..}
           = go (Just AltJSON) _rpvpPayload
               identityToolkitService
