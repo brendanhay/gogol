@@ -27,7 +27,7 @@
 -- Implements
 -- [GlobalAllianceApi.searchVariantSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L49).
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.search@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.variantsets.search@.
 module Network.Google.Resource.Genomics.VariantSets.Search
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type VariantSetsSearchResource =
      "v1" :>
        "variantsets" :>
          "search" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -77,7 +77,7 @@ type VariantSetsSearchResource =
 --
 -- /See:/ 'variantSetsSearch' smart constructor.
 data VariantSetsSearch = VariantSetsSearch'
-    { _vssXgafv          :: !(Maybe Text)
+    { _vssXgafv          :: !(Maybe Xgafv)
     , _vssUploadProtocol :: !(Maybe Text)
     , _vssPp             :: !Bool
     , _vssAccessToken    :: !(Maybe Text)
@@ -122,7 +122,7 @@ variantSetsSearch pVssPayload_ =
     }
 
 -- | V1 error format.
-vssXgafv :: Lens' VariantSetsSearch (Maybe Text)
+vssXgafv :: Lens' VariantSetsSearch (Maybe Xgafv)
 vssXgafv = lens _vssXgafv (\ s a -> s{_vssXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

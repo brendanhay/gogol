@@ -30,7 +30,7 @@
 -- 100Mbp (mega base pairs). See the Annotation resource for additional
 -- restrictions on each field.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.annotations.create@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.annotations.create@.
 module Network.Google.Resource.Genomics.Annotations.Create
     (
     -- * REST Resource
@@ -59,7 +59,7 @@ import           Network.Google.Prelude
 type AnnotationsCreateResource =
      "v1" :>
        "annotations" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -81,7 +81,7 @@ type AnnotationsCreateResource =
 --
 -- /See:/ 'annotationsCreate' smart constructor.
 data AnnotationsCreate = AnnotationsCreate'
-    { _acXgafv          :: !(Maybe Text)
+    { _acXgafv          :: !(Maybe Xgafv)
     , _acUploadProtocol :: !(Maybe Text)
     , _acPp             :: !Bool
     , _acAccessToken    :: !(Maybe Text)
@@ -126,7 +126,7 @@ annotationsCreate pAcPayload_ =
     }
 
 -- | V1 error format.
-acXgafv :: Lens' AnnotationsCreate (Maybe Text)
+acXgafv :: Lens' AnnotationsCreate (Maybe Xgafv)
 acXgafv = lens _acXgafv (\ s a -> s{_acXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

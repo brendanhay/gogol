@@ -51,7 +51,7 @@
 -- [ 1, 1 ], } ] } This may be the desired outcome, but it is up to the
 -- user to determine if if that is indeed the case.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.merge@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.variants.merge@.
 module Network.Google.Resource.Genomics.Variants.Merge
     (
     -- * REST Resource
@@ -80,7 +80,7 @@ import           Network.Google.Prelude
 type VariantsMergeResource =
      "v1" :>
        "variants:merge" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -124,7 +124,7 @@ type VariantsMergeResource =
 --
 -- /See:/ 'variantsMerge' smart constructor.
 data VariantsMerge = VariantsMerge'
-    { _vmXgafv          :: !(Maybe Text)
+    { _vmXgafv          :: !(Maybe Xgafv)
     , _vmUploadProtocol :: !(Maybe Text)
     , _vmPp             :: !Bool
     , _vmAccessToken    :: !(Maybe Text)
@@ -169,7 +169,7 @@ variantsMerge pVmPayload_ =
     }
 
 -- | V1 error format.
-vmXgafv :: Lens' VariantsMerge (Maybe Text)
+vmXgafv :: Lens' VariantsMerge (Maybe Xgafv)
 vmXgafv = lens _vmXgafv (\ s a -> s{_vmXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

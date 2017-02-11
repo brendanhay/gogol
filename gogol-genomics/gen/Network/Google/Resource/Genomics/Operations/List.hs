@@ -22,7 +22,7 @@
 --
 -- Lists operations that match the specified filter in the request.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.operations.list@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.operations.list@.
 module Network.Google.Resource.Genomics.Operations.List
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 type OperationsListResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -71,7 +71,7 @@ type OperationsListResource =
 --
 -- /See:/ 'operationsList' smart constructor.
 data OperationsList = OperationsList'
-    { _olXgafv          :: !(Maybe Text)
+    { _olXgafv          :: !(Maybe Xgafv)
     , _olUploadProtocol :: !(Maybe Text)
     , _olPp             :: !Bool
     , _olAccessToken    :: !(Maybe Text)
@@ -128,7 +128,7 @@ operationsList pOlName_ =
     }
 
 -- | V1 error format.
-olXgafv :: Lens' OperationsList (Maybe Text)
+olXgafv :: Lens' OperationsList (Maybe Xgafv)
 olXgafv = lens _olXgafv (\ s a -> s{_olXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -167,8 +167,13 @@ olName = lens _olName (\ s a -> s{_olName = a})
 -- OperationMetadata.projectId. * createTime: The time this job was
 -- created, in seconds from the
 -- [epoch](http:\/\/en.wikipedia.org\/wiki\/Unix_time). Can use \`>=\`
--- and\/or \`= 1432140000\` * \`projectId = my-project AND createTime >=
--- 1432140000 AND createTime \<= 1432150000 AND status = RUNNING\`
+-- and\/or \`\<=\` operators. * status: Can be \`RUNNING\`, \`SUCCESS\`,
+-- \`FAILURE\`, or \`CANCELED\`. Only one status may be specified. *
+-- labels.key where key is a label key. Examples: * \`projectId =
+-- my-project AND createTime >= 1432140000\` * \`projectId = my-project AND
+-- createTime >= 1432140000 AND createTime \<= 1432150000 AND status =
+-- RUNNING\` * \`projectId = my-project AND labels.color = *\` *
+-- \`projectId = my-project AND labels.color = red\`
 olFilter :: Lens' OperationsList (Maybe Text)
 olFilter = lens _olFilter (\ s a -> s{_olFilter = a})
 

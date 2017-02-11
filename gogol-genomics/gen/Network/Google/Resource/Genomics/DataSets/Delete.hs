@@ -27,7 +27,7 @@
 -- see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.delete@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.datasets.delete@.
 module Network.Google.Resource.Genomics.DataSets.Delete
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type DataSetsDeleteResource =
      "v1" :>
        "datasets" :>
          Capture "datasetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -75,7 +75,7 @@ type DataSetsDeleteResource =
 --
 -- /See:/ 'dataSetsDelete' smart constructor.
 data DataSetsDelete = DataSetsDelete'
-    { _dsdXgafv          :: !(Maybe Text)
+    { _dsdXgafv          :: !(Maybe Xgafv)
     , _dsdUploadProtocol :: !(Maybe Text)
     , _dsdPp             :: !Bool
     , _dsdAccessToken    :: !(Maybe Text)
@@ -120,7 +120,7 @@ dataSetsDelete pDsdDataSetId_ =
     }
 
 -- | V1 error format.
-dsdXgafv :: Lens' DataSetsDelete (Maybe Text)
+dsdXgafv :: Lens' DataSetsDelete (Maybe Xgafv)
 dsdXgafv = lens _dsdXgafv (\ s a -> s{_dsdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

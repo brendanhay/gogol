@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.operations.get@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.operations.get@.
 module Network.Google.Resource.Genomics.Operations.Get
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 type OperationsGetResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -68,7 +68,7 @@ type OperationsGetResource =
 --
 -- /See:/ 'operationsGet' smart constructor.
 data OperationsGet = OperationsGet'
-    { _ogXgafv          :: !(Maybe Text)
+    { _ogXgafv          :: !(Maybe Xgafv)
     , _ogUploadProtocol :: !(Maybe Text)
     , _ogPp             :: !Bool
     , _ogAccessToken    :: !(Maybe Text)
@@ -113,7 +113,7 @@ operationsGet pOgName_ =
     }
 
 -- | V1 error format.
-ogXgafv :: Lens' OperationsGet (Maybe Text)
+ogXgafv :: Lens' OperationsGet (Maybe Xgafv)
 ogXgafv = lens _ogXgafv (\ s a -> s{_ogXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

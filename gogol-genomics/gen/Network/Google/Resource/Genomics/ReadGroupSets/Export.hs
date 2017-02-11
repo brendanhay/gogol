@@ -28,7 +28,7 @@
 -- files and the original BAM file at the time of import. See
 -- ImportReadGroupSets for caveats.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.export@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.readgroupsets.export@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Export
     (
     -- * REST Resource
@@ -59,7 +59,7 @@ type ReadGroupSetsExportResource =
      "v1" :>
        "readgroupsets" :>
          CaptureMode "readGroupSetId" "export" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -80,7 +80,7 @@ type ReadGroupSetsExportResource =
 --
 -- /See:/ 'readGroupSetsExport' smart constructor.
 data ReadGroupSetsExport = ReadGroupSetsExport'
-    { _rgseXgafv          :: !(Maybe Text)
+    { _rgseXgafv          :: !(Maybe Xgafv)
     , _rgseReadGroupSetId :: !Text
     , _rgseUploadProtocol :: !(Maybe Text)
     , _rgsePp             :: !Bool
@@ -130,7 +130,7 @@ readGroupSetsExport pRgseReadGroupSetId_ pRgsePayload_ =
     }
 
 -- | V1 error format.
-rgseXgafv :: Lens' ReadGroupSetsExport (Maybe Text)
+rgseXgafv :: Lens' ReadGroupSetsExport (Maybe Xgafv)
 rgseXgafv
   = lens _rgseXgafv (\ s a -> s{_rgseXgafv = a})
 

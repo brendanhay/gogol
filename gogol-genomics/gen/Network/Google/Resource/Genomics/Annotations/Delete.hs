@@ -23,7 +23,7 @@
 -- Deletes an annotation. Caller must have WRITE permission for the
 -- associated annotation set.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.annotations.delete@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.annotations.delete@.
 module Network.Google.Resource.Genomics.Annotations.Delete
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ type AnnotationsDeleteResource =
      "v1" :>
        "annotations" :>
          Capture "annotationId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -67,7 +67,7 @@ type AnnotationsDeleteResource =
 --
 -- /See:/ 'annotationsDelete' smart constructor.
 data AnnotationsDelete = AnnotationsDelete'
-    { _adXgafv          :: !(Maybe Text)
+    { _adXgafv          :: !(Maybe Xgafv)
     , _adUploadProtocol :: !(Maybe Text)
     , _adPp             :: !Bool
     , _adAccessToken    :: !(Maybe Text)
@@ -112,7 +112,7 @@ annotationsDelete pAdAnnotationId_ =
     }
 
 -- | V1 error format.
-adXgafv :: Lens' AnnotationsDelete (Maybe Text)
+adXgafv :: Lens' AnnotationsDelete (Maybe Xgafv)
 adXgafv = lens _adXgafv (\ s a -> s{_adXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

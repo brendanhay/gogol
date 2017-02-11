@@ -23,7 +23,7 @@
 -- Gets an annotation. Caller must have READ permission for the associated
 -- annotation set.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.annotations.get@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.annotations.get@.
 module Network.Google.Resource.Genomics.Annotations.Get
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ type AnnotationsGetResource =
      "v1" :>
        "annotations" :>
          Capture "annotationId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -67,7 +67,7 @@ type AnnotationsGetResource =
 --
 -- /See:/ 'annotationsGet' smart constructor.
 data AnnotationsGet = AnnotationsGet'
-    { _agXgafv          :: !(Maybe Text)
+    { _agXgafv          :: !(Maybe Xgafv)
     , _agUploadProtocol :: !(Maybe Text)
     , _agPp             :: !Bool
     , _agAccessToken    :: !(Maybe Text)
@@ -112,7 +112,7 @@ annotationsGet pAgAnnotationId_ =
     }
 
 -- | V1 error format.
-agXgafv :: Lens' AnnotationsGet (Maybe Text)
+agXgafv :: Lens' AnnotationsGet (Maybe Xgafv)
 agXgafv = lens _agXgafv (\ s a -> s{_agXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

@@ -23,7 +23,7 @@
 -- Deletes an annotation set. Caller must have WRITE permission for the
 -- associated annotation set.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.annotationsets.delete@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.annotationsets.delete@.
 module Network.Google.Resource.Genomics.AnnotationSets.Delete
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ type AnnotationSetsDeleteResource =
      "v1" :>
        "annotationsets" :>
          Capture "annotationSetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -67,7 +67,7 @@ type AnnotationSetsDeleteResource =
 --
 -- /See:/ 'annotationSetsDelete' smart constructor.
 data AnnotationSetsDelete = AnnotationSetsDelete'
-    { _asdXgafv           :: !(Maybe Text)
+    { _asdXgafv           :: !(Maybe Xgafv)
     , _asdUploadProtocol  :: !(Maybe Text)
     , _asdAnnotationSetId :: !Text
     , _asdPp              :: !Bool
@@ -112,7 +112,7 @@ annotationSetsDelete pAsdAnnotationSetId_ =
     }
 
 -- | V1 error format.
-asdXgafv :: Lens' AnnotationSetsDelete (Maybe Text)
+asdXgafv :: Lens' AnnotationSetsDelete (Maybe Xgafv)
 asdXgafv = lens _asdXgafv (\ s a -> s{_asdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

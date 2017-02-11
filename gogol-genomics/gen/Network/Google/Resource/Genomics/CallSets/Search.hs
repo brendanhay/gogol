@@ -26,7 +26,7 @@
 -- Implements
 -- [GlobalAllianceApi.searchCallSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L178).
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.search@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.callsets.search@.
 module Network.Google.Resource.Genomics.CallSets.Search
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type CallSetsSearchResource =
      "v1" :>
        "callsets" :>
          "search" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -75,7 +75,7 @@ type CallSetsSearchResource =
 --
 -- /See:/ 'callSetsSearch' smart constructor.
 data CallSetsSearch = CallSetsSearch'
-    { _cssXgafv          :: !(Maybe Text)
+    { _cssXgafv          :: !(Maybe Xgafv)
     , _cssUploadProtocol :: !(Maybe Text)
     , _cssPp             :: !Bool
     , _cssAccessToken    :: !(Maybe Text)
@@ -120,7 +120,7 @@ callSetsSearch pCssPayload_ =
     }
 
 -- | V1 error format.
-cssXgafv :: Lens' CallSetsSearch (Maybe Text)
+cssXgafv :: Lens' CallSetsSearch (Maybe Xgafv)
 cssXgafv = lens _cssXgafv (\ s a -> s{_cssXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

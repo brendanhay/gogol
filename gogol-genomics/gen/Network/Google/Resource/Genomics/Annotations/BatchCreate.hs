@@ -31,7 +31,7 @@
 -- on the requirements for each individual annotation resource, see
 -- CreateAnnotation.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.annotations.batchCreate@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.annotations.batchCreate@.
 module Network.Google.Resource.Genomics.Annotations.BatchCreate
     (
     -- * REST Resource
@@ -60,7 +60,7 @@ import           Network.Google.Prelude
 type AnnotationsBatchCreateResource =
      "v1" :>
        "annotations:batchCreate" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -84,7 +84,7 @@ type AnnotationsBatchCreateResource =
 --
 -- /See:/ 'annotationsBatchCreate' smart constructor.
 data AnnotationsBatchCreate = AnnotationsBatchCreate'
-    { _abcXgafv          :: !(Maybe Text)
+    { _abcXgafv          :: !(Maybe Xgafv)
     , _abcUploadProtocol :: !(Maybe Text)
     , _abcPp             :: !Bool
     , _abcAccessToken    :: !(Maybe Text)
@@ -129,7 +129,7 @@ annotationsBatchCreate pAbcPayload_ =
     }
 
 -- | V1 error format.
-abcXgafv :: Lens' AnnotationsBatchCreate (Maybe Text)
+abcXgafv :: Lens' AnnotationsBatchCreate (Maybe Xgafv)
 abcXgafv = lens _abcXgafv (\ s a -> s{_abcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

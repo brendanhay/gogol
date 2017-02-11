@@ -24,7 +24,7 @@
 -- variant sets and other genomics resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.patch@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.variantsets.patch@.
 module Network.Google.Resource.Genomics.VariantSets.Patch
     (
     -- * REST Resource
@@ -56,9 +56,9 @@ type VariantSetsPatchResource =
      "v1" :>
        "variantsets" :>
          Capture "variantSetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "updateMask" Text :>
+               QueryParam "updateMask" FieldMask :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
@@ -74,9 +74,9 @@ type VariantSetsPatchResource =
 --
 -- /See:/ 'variantSetsPatch' smart constructor.
 data VariantSetsPatch = VariantSetsPatch'
-    { _vspXgafv          :: !(Maybe Text)
+    { _vspXgafv          :: !(Maybe Xgafv)
     , _vspUploadProtocol :: !(Maybe Text)
-    , _vspUpdateMask     :: !(Maybe Text)
+    , _vspUpdateMask     :: !(Maybe FieldMask)
     , _vspPp             :: !Bool
     , _vspVariantSetId   :: !Text
     , _vspAccessToken    :: !(Maybe Text)
@@ -128,7 +128,7 @@ variantSetsPatch pVspVariantSetId_ pVspPayload_ =
     }
 
 -- | V1 error format.
-vspXgafv :: Lens' VariantSetsPatch (Maybe Text)
+vspXgafv :: Lens' VariantSetsPatch (Maybe Xgafv)
 vspXgafv = lens _vspXgafv (\ s a -> s{_vspXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -140,7 +140,7 @@ vspUploadProtocol
 -- | An optional mask specifying which fields to update. Supported fields: *
 -- metadata. * name. * description. Leaving \`updateMask\` unset is
 -- equivalent to specifying all mutable fields.
-vspUpdateMask :: Lens' VariantSetsPatch (Maybe Text)
+vspUpdateMask :: Lens' VariantSetsPatch (Maybe FieldMask)
 vspUpdateMask
   = lens _vspUpdateMask
       (\ s a -> s{_vspUpdateMask = a})

@@ -24,7 +24,7 @@
 -- resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.delete@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.callsets.delete@.
 module Network.Google.Resource.Genomics.CallSets.Delete
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type CallSetsDeleteResource =
      "v1" :>
        "callsets" :>
          Capture "callSetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -69,7 +69,7 @@ type CallSetsDeleteResource =
 --
 -- /See:/ 'callSetsDelete' smart constructor.
 data CallSetsDelete = CallSetsDelete'
-    { _csdXgafv          :: !(Maybe Text)
+    { _csdXgafv          :: !(Maybe Xgafv)
     , _csdUploadProtocol :: !(Maybe Text)
     , _csdPp             :: !Bool
     , _csdAccessToken    :: !(Maybe Text)
@@ -114,7 +114,7 @@ callSetsDelete pCsdCallSetId_ =
     }
 
 -- | V1 error format.
-csdXgafv :: Lens' CallSetsDelete (Maybe Text)
+csdXgafv :: Lens' CallSetsDelete (Maybe Xgafv)
 csdXgafv = lens _csdXgafv (\ s a -> s{_csdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

@@ -24,9 +24,10 @@
 -- existing policy. For the definitions of datasets and other genomics
 -- resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
--- See Setting a Policy for more information.
+-- See </iam/docs/managing-policies#setting_a_policy Setting a Policy> for
+-- more information.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.datasets.setIamPolicy@.
 module Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
     (
     -- * REST Resource
@@ -56,7 +57,7 @@ import           Network.Google.Prelude
 type DataSetsSetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -71,11 +72,12 @@ type DataSetsSetIAMPolicyResource =
 -- existing policy. For the definitions of datasets and other genomics
 -- resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
--- See Setting a Policy for more information.
+-- See </iam/docs/managing-policies#setting_a_policy Setting a Policy> for
+-- more information.
 --
 -- /See:/ 'dataSetsSetIAMPolicy' smart constructor.
 data DataSetsSetIAMPolicy = DataSetsSetIAMPolicy'
-    { _dssipXgafv          :: !(Maybe Text)
+    { _dssipXgafv          :: !(Maybe Xgafv)
     , _dssipUploadProtocol :: !(Maybe Text)
     , _dssipPp             :: !Bool
     , _dssipAccessToken    :: !(Maybe Text)
@@ -125,7 +127,7 @@ dataSetsSetIAMPolicy pDssipPayload_ pDssipResource_ =
     }
 
 -- | V1 error format.
-dssipXgafv :: Lens' DataSetsSetIAMPolicy (Maybe Text)
+dssipXgafv :: Lens' DataSetsSetIAMPolicy (Maybe Xgafv)
 dssipXgafv
   = lens _dssipXgafv (\ s a -> s{_dssipXgafv = a})
 

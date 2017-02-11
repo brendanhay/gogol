@@ -21,12 +21,13 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets the access control policy for the dataset. This is empty if the
--- policy or resource does not exist. See Getting a Policy for more
+-- policy or resource does not exist. See
+-- </iam/docs/managing-policies#getting_a_policy Getting a Policy> for more
 -- information. For the definitions of datasets and other genomics
 -- resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.getIamPolicy@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.datasets.getIamPolicy@.
 module Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
     (
     -- * REST Resource
@@ -56,7 +57,7 @@ import           Network.Google.Prelude
 type DataSetsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -68,14 +69,15 @@ type DataSetsGetIAMPolicyResource =
                            Post '[JSON] Policy
 
 -- | Gets the access control policy for the dataset. This is empty if the
--- policy or resource does not exist. See Getting a Policy for more
+-- policy or resource does not exist. See
+-- </iam/docs/managing-policies#getting_a_policy Getting a Policy> for more
 -- information. For the definitions of datasets and other genomics
 -- resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsGetIAMPolicy' smart constructor.
 data DataSetsGetIAMPolicy = DataSetsGetIAMPolicy'
-    { _dsgipXgafv          :: !(Maybe Text)
+    { _dsgipXgafv          :: !(Maybe Xgafv)
     , _dsgipUploadProtocol :: !(Maybe Text)
     , _dsgipPp             :: !Bool
     , _dsgipAccessToken    :: !(Maybe Text)
@@ -125,7 +127,7 @@ dataSetsGetIAMPolicy pDsgipPayload_ pDsgipResource_ =
     }
 
 -- | V1 error format.
-dsgipXgafv :: Lens' DataSetsGetIAMPolicy (Maybe Text)
+dsgipXgafv :: Lens' DataSetsGetIAMPolicy (Maybe Xgafv)
 dsgipXgafv
   = lens _dsgipXgafv (\ s a -> s{_dsgipXgafv = a})
 

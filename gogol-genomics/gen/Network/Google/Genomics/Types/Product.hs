@@ -509,7 +509,7 @@ data Annotation = Annotation'
     , _aName            :: !(Maybe Text)
     , _aEnd             :: !(Maybe (Textual Int64))
     , _aId              :: !(Maybe Text)
-    , _aType            :: !(Maybe Text)
+    , _aType            :: !(Maybe AnnotationType)
     , _aTranscript      :: !(Maybe Transcript)
     , _aInfo            :: !(Maybe AnnotationInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -614,7 +614,7 @@ aId = lens _aId (\ s a -> s{_aId = a})
 
 -- | The data type for this annotation. Must match the containing annotation
 -- set\'s type.
-aType :: Lens' Annotation (Maybe Text)
+aType :: Lens' Annotation (Maybe AnnotationType)
 aType = lens _aType (\ s a -> s{_aType = a})
 
 -- | A transcript value represents the assertion that a particular region of
@@ -829,7 +829,7 @@ data DataSet = DataSet'
     { _dsName       :: !(Maybe Text)
     , _dsId         :: !(Maybe Text)
     , _dsProjectId  :: !(Maybe Text)
-    , _dsCreateTime :: !(Maybe Text)
+    , _dsCreateTime :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataSet' with the minimum fields required to make a request.
@@ -867,9 +867,10 @@ dsProjectId
   = lens _dsProjectId (\ s a -> s{_dsProjectId = a})
 
 -- | The time this dataset was created, in seconds from the epoch.
-dsCreateTime :: Lens' DataSet (Maybe Text)
+dsCreateTime :: Lens' DataSet (Maybe UTCTime)
 dsCreateTime
   = lens _dsCreateTime (\ s a -> s{_dsCreateTime = a})
+      . mapping _DateTime
 
 instance FromJSON DataSet where
         parseJSON
@@ -1195,6 +1196,41 @@ instance ToJSON Read' where
                   ("info" .=) <$> _rInfo,
                   ("readNumber" .=) <$> _rReadNumber,
                   ("alignedQuality" .=) <$> _rAlignedQuality])
+
+-- | Optionally provided by the caller when submitting the request that
+-- creates the operation.
+--
+-- /See:/ 'operationMetadataLabels' smart constructor.
+newtype OperationMetadataLabels = OperationMetadataLabels'
+    { _omlAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationMetadataLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omlAddtional'
+operationMetadataLabels
+    :: HashMap Text Text -- ^ 'omlAddtional'
+    -> OperationMetadataLabels
+operationMetadataLabels pOmlAddtional_ =
+    OperationMetadataLabels'
+    { _omlAddtional = _Coerce # pOmlAddtional_
+    }
+
+omlAddtional :: Lens' OperationMetadataLabels (HashMap Text Text)
+omlAddtional
+  = lens _omlAddtional (\ s a -> s{_omlAddtional = a})
+      . _Coerce
+
+instance FromJSON OperationMetadataLabels where
+        parseJSON
+          = withObject "OperationMetadataLabels"
+              (\ o ->
+                 OperationMetadataLabels' <$> (parseJSONObject o))
+
+instance ToJSON OperationMetadataLabels where
+        toJSON = toJSON . _omlAddtional
 
 -- | A call represents the determination of genotype with respect to a
 -- particular variant. It may include associated information such as
@@ -1637,7 +1673,7 @@ oError = lens _oError (\ s a -> s{_oError = a})
 
 -- | If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned.
 -- If importing Variants, an ImportVariantsResponse is returned. For
--- exports, an empty response is returned.
+-- pipelines and exports, an empty response is returned.
 oResponse :: Lens' Operation (Maybe OperationResponse)
 oResponse
   = lens _oResponse (\ s a -> s{_oResponse = a})
@@ -1855,7 +1891,7 @@ data VariantSetMetadata = VariantSetMetadata'
     { _vsmValue       :: !(Maybe Text)
     , _vsmKey         :: !(Maybe Text)
     , _vsmId          :: !(Maybe Text)
-    , _vsmType        :: !(Maybe Text)
+    , _vsmType        :: !(Maybe VariantSetMetadataType)
     , _vsmNumber      :: !(Maybe Text)
     , _vsmDescription :: !(Maybe Text)
     , _vsmInfo        :: !(Maybe VariantSetMetadataInfo)
@@ -1907,7 +1943,7 @@ vsmId = lens _vsmId (\ s a -> s{_vsmId = a})
 
 -- | The type of data. Possible types include: Integer, Float, Flag,
 -- Character, and String.
-vsmType :: Lens' VariantSetMetadata (Maybe Text)
+vsmType :: Lens' VariantSetMetadata (Maybe VariantSetMetadataType)
 vsmType = lens _vsmType (\ s a -> s{_vsmType = a})
 
 -- | The number of values that can be included in a field described by this
@@ -2098,12 +2134,12 @@ instance ToJSON CoverageBucket where
 --
 -- /See:/ 'variantAnnotation' smart constructor.
 data VariantAnnotation = VariantAnnotation'
-    { _vaEffect               :: !(Maybe Text)
-    , _vaClinicalSignificance :: !(Maybe Text)
+    { _vaEffect               :: !(Maybe VariantAnnotationEffect)
+    , _vaClinicalSignificance :: !(Maybe VariantAnnotationClinicalSignificance)
     , _vaAlternateBases       :: !(Maybe Text)
     , _vaGeneId               :: !(Maybe Text)
     , _vaConditions           :: !(Maybe [ClinicalCondition])
-    , _vaType                 :: !(Maybe Text)
+    , _vaType                 :: !(Maybe VariantAnnotationType)
     , _vaTranscriptIds        :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2138,13 +2174,13 @@ variantAnnotation =
     }
 
 -- | Effect of the variant on the coding sequence.
-vaEffect :: Lens' VariantAnnotation (Maybe Text)
+vaEffect :: Lens' VariantAnnotation (Maybe VariantAnnotationEffect)
 vaEffect = lens _vaEffect (\ s a -> s{_vaEffect = a})
 
 -- | Describes the clinical significance of a variant. It is adapted from the
 -- ClinVar controlled vocabulary for clinical significance described at:
 -- http:\/\/www.ncbi.nlm.nih.gov\/clinvar\/docs\/clinsig\/
-vaClinicalSignificance :: Lens' VariantAnnotation (Maybe Text)
+vaClinicalSignificance :: Lens' VariantAnnotation (Maybe VariantAnnotationClinicalSignificance)
 vaClinicalSignificance
   = lens _vaClinicalSignificance
       (\ s a -> s{_vaClinicalSignificance = a})
@@ -2171,7 +2207,7 @@ vaConditions
       . _Coerce
 
 -- | Type has been adapted from ClinVar\'s list of variant types.
-vaType :: Lens' VariantAnnotation (Maybe Text)
+vaType :: Lens' VariantAnnotation (Maybe VariantAnnotationType)
 vaType = lens _vaType (\ s a -> s{_vaType = a})
 
 -- | Google annotation IDs of the transcripts affected by this variant. These
@@ -2475,42 +2511,6 @@ instance ToJSON ReadGroupInfo where
         toJSON = toJSON . _rgiAddtional
 
 --
--- /See:/ 'streamVariantsResponse' smart constructor.
-newtype StreamVariantsResponse = StreamVariantsResponse'
-    { _svrVariants :: Maybe [Variant]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StreamVariantsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'svrVariants'
-streamVariantsResponse
-    :: StreamVariantsResponse
-streamVariantsResponse =
-    StreamVariantsResponse'
-    { _svrVariants = Nothing
-    }
-
-svrVariants :: Lens' StreamVariantsResponse [Variant]
-svrVariants
-  = lens _svrVariants (\ s a -> s{_svrVariants = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON StreamVariantsResponse where
-        parseJSON
-          = withObject "StreamVariantsResponse"
-              (\ o ->
-                 StreamVariantsResponse' <$>
-                   (o .:? "variants" .!= mempty))
-
-instance ToJSON StreamVariantsResponse where
-        toJSON StreamVariantsResponse'{..}
-          = object
-              (catMaybes [("variants" .=) <$> _svrVariants])
-
---
 -- /See:/ 'statusDetailsItem' smart constructor.
 newtype StatusDetailsItem = StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
@@ -2542,43 +2542,6 @@ instance FromJSON StatusDetailsItem where
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
-
---
--- /See:/ 'streamReadsResponse' smart constructor.
-newtype StreamReadsResponse = StreamReadsResponse'
-    { _srrAlignments :: Maybe [Read']
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StreamReadsResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'srrAlignments'
-streamReadsResponse
-    :: StreamReadsResponse
-streamReadsResponse =
-    StreamReadsResponse'
-    { _srrAlignments = Nothing
-    }
-
-srrAlignments :: Lens' StreamReadsResponse [Read']
-srrAlignments
-  = lens _srrAlignments
-      (\ s a -> s{_srrAlignments = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON StreamReadsResponse where
-        parseJSON
-          = withObject "StreamReadsResponse"
-              (\ o ->
-                 StreamReadsResponse' <$>
-                   (o .:? "alignments" .!= mempty))
-
-instance ToJSON StreamReadsResponse where
-        toJSON StreamReadsResponse'{..}
-          = object
-              (catMaybes [("alignments" .=) <$> _srrAlignments])
 
 -- | The call set search response.
 --
@@ -3247,29 +3210,29 @@ instance ToJSON SearchAnnotationSetsRequest where
 --
 -- /See:/ 'searchVariantsResponse' smart constructor.
 data SearchVariantsResponse = SearchVariantsResponse'
-    { _sVariants      :: !(Maybe [Variant])
-    , _sNextPageToken :: !(Maybe Text)
+    { _svrVariants      :: !(Maybe [Variant])
+    , _svrNextPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchVariantsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sVariants'
+-- * 'svrVariants'
 --
--- * 'sNextPageToken'
+-- * 'svrNextPageToken'
 searchVariantsResponse
     :: SearchVariantsResponse
 searchVariantsResponse =
     SearchVariantsResponse'
-    { _sVariants = Nothing
-    , _sNextPageToken = Nothing
+    { _svrVariants = Nothing
+    , _svrNextPageToken = Nothing
     }
 
 -- | The list of matching Variants.
-sVariants :: Lens' SearchVariantsResponse [Variant]
-sVariants
-  = lens _sVariants (\ s a -> s{_sVariants = a}) .
+svrVariants :: Lens' SearchVariantsResponse [Variant]
+svrVariants
+  = lens _svrVariants (\ s a -> s{_svrVariants = a}) .
       _Default
       . _Coerce
 
@@ -3277,10 +3240,10 @@ sVariants
 -- Provide this value in a subsequent request to return the next page of
 -- results. This field will be empty if there aren\'t any additional
 -- results.
-sNextPageToken :: Lens' SearchVariantsResponse (Maybe Text)
-sNextPageToken
-  = lens _sNextPageToken
-      (\ s a -> s{_sNextPageToken = a})
+svrNextPageToken :: Lens' SearchVariantsResponse (Maybe Text)
+svrNextPageToken
+  = lens _svrNextPageToken
+      (\ s a -> s{_svrNextPageToken = a})
 
 instance FromJSON SearchVariantsResponse where
         parseJSON
@@ -3294,8 +3257,8 @@ instance ToJSON SearchVariantsResponse where
         toJSON SearchVariantsResponse'{..}
           = object
               (catMaybes
-                 [("variants" .=) <$> _sVariants,
-                  ("nextPageToken" .=) <$> _sNextPageToken])
+                 [("variants" .=) <$> _svrVariants,
+                  ("nextPageToken" .=) <$> _svrNextPageToken])
 
 -- | Runtime metadata on this Operation.
 --
@@ -3409,134 +3372,6 @@ instance ToJSON ClinicalCondition where
                   ("names" .=) <$> _ccNames,
                   ("conceptId" .=) <$> _ccConceptId,
                   ("omimId" .=) <$> _ccOmimId])
-
--- | The stream reads request.
---
--- /See:/ 'streamReadsRequest' smart constructor.
-data StreamReadsRequest = StreamReadsRequest'
-    { _sShard          :: !(Maybe (Textual Int32))
-    , _sReadGroupSetId :: !(Maybe Text)
-    , _sTotalShards    :: !(Maybe (Textual Int32))
-    , _sStart          :: !(Maybe (Textual Int64))
-    , _sReferenceName  :: !(Maybe Text)
-    , _sEnd            :: !(Maybe (Textual Int64))
-    , _sProjectId      :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StreamReadsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'sShard'
---
--- * 'sReadGroupSetId'
---
--- * 'sTotalShards'
---
--- * 'sStart'
---
--- * 'sReferenceName'
---
--- * 'sEnd'
---
--- * 'sProjectId'
-streamReadsRequest
-    :: StreamReadsRequest
-streamReadsRequest =
-    StreamReadsRequest'
-    { _sShard = Nothing
-    , _sReadGroupSetId = Nothing
-    , _sTotalShards = Nothing
-    , _sStart = Nothing
-    , _sReferenceName = Nothing
-    , _sEnd = Nothing
-    , _sProjectId = Nothing
-    }
-
--- | Restricts results to a shard containing approximately \`1\/totalShards\`
--- of the normal response payload for this query. Results from a sharded
--- request are disjoint from those returned by all queries which differ
--- only in their shard parameter. A shard may yield 0 results; this is
--- especially likely for large values of \`totalShards\`. Valid values are
--- \`[0, totalShards)\`.
-sShard :: Lens' StreamReadsRequest (Maybe Int32)
-sShard
-  = lens _sShard (\ s a -> s{_sShard = a}) .
-      mapping _Coerce
-
--- | The ID of the read group set from which to stream reads.
-sReadGroupSetId :: Lens' StreamReadsRequest (Maybe Text)
-sReadGroupSetId
-  = lens _sReadGroupSetId
-      (\ s a -> s{_sReadGroupSetId = a})
-
--- | Specifying \`totalShards\` causes a disjoint subset of the normal
--- response payload to be returned for each query with a unique \`shard\`
--- parameter specified. A best effort is made to yield equally sized
--- shards. Sharding can be used to distribute processing amongst workers,
--- where each worker is assigned a unique \`shard\` number and all workers
--- specify the same \`totalShards\` number. The union of reads returned for
--- all sharded queries \`[0, totalShards)\` is equal to those returned by a
--- single unsharded query. Queries for different values of \`totalShards\`
--- with common divisors will share shard boundaries. For example, streaming
--- \`shard\` 2 of 5 \`totalShards\` yields the same results as streaming
--- \`shard\`s 4 and 5 of 10 \`totalShards\`. This property can be leveraged
--- for adaptive retries.
-sTotalShards :: Lens' StreamReadsRequest (Maybe Int32)
-sTotalShards
-  = lens _sTotalShards (\ s a -> s{_sTotalShards = a})
-      . mapping _Coerce
-
--- | The start position of the range on the reference, 0-based inclusive. If
--- specified, \`referenceName\` must also be specified.
-sStart :: Lens' StreamReadsRequest (Maybe Int64)
-sStart
-  = lens _sStart (\ s a -> s{_sStart = a}) .
-      mapping _Coerce
-
--- | The reference sequence name, for example \`chr1\`, \`1\`, or \`chrX\`.
--- If set to *, only unmapped reads are returned.
-sReferenceName :: Lens' StreamReadsRequest (Maybe Text)
-sReferenceName
-  = lens _sReferenceName
-      (\ s a -> s{_sReferenceName = a})
-
--- | The end position of the range on the reference, 0-based exclusive. If
--- specified, \`referenceName\` must also be specified.
-sEnd :: Lens' StreamReadsRequest (Maybe Int64)
-sEnd
-  = lens _sEnd (\ s a -> s{_sEnd = a}) .
-      mapping _Coerce
-
--- | The Google Cloud project ID which will be billed for this access. The
--- caller must have WRITE access to this project. Required.
-sProjectId :: Lens' StreamReadsRequest (Maybe Text)
-sProjectId
-  = lens _sProjectId (\ s a -> s{_sProjectId = a})
-
-instance FromJSON StreamReadsRequest where
-        parseJSON
-          = withObject "StreamReadsRequest"
-              (\ o ->
-                 StreamReadsRequest' <$>
-                   (o .:? "shard") <*> (o .:? "readGroupSetId") <*>
-                     (o .:? "totalShards")
-                     <*> (o .:? "start")
-                     <*> (o .:? "referenceName")
-                     <*> (o .:? "end")
-                     <*> (o .:? "projectId"))
-
-instance ToJSON StreamReadsRequest where
-        toJSON StreamReadsRequest'{..}
-          = object
-              (catMaybes
-                 [("shard" .=) <$> _sShard,
-                  ("readGroupSetId" .=) <$> _sReadGroupSetId,
-                  ("totalShards" .=) <$> _sTotalShards,
-                  ("start" .=) <$> _sStart,
-                  ("referenceName" .=) <$> _sReferenceName,
-                  ("end" .=) <$> _sEnd,
-                  ("projectId" .=) <$> _sProjectId])
 
 -- | The call set search request.
 --
@@ -3664,43 +3499,42 @@ instance ToJSON Entry where
 --
 -- /See:/ 'searchReadsResponse' smart constructor.
 data SearchReadsResponse = SearchReadsResponse'
-    { _seaNextPageToken :: !(Maybe Text)
-    , _seaAlignments    :: !(Maybe [Read'])
+    { _sNextPageToken :: !(Maybe Text)
+    , _sAlignments    :: !(Maybe [Read'])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReadsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'seaNextPageToken'
+-- * 'sNextPageToken'
 --
--- * 'seaAlignments'
+-- * 'sAlignments'
 searchReadsResponse
     :: SearchReadsResponse
 searchReadsResponse =
     SearchReadsResponse'
-    { _seaNextPageToken = Nothing
-    , _seaAlignments = Nothing
+    { _sNextPageToken = Nothing
+    , _sAlignments = Nothing
     }
 
 -- | The continuation token, which is used to page through large result sets.
 -- Provide this value in a subsequent request to return the next page of
 -- results. This field will be empty if there aren\'t any additional
 -- results.
-seaNextPageToken :: Lens' SearchReadsResponse (Maybe Text)
-seaNextPageToken
-  = lens _seaNextPageToken
-      (\ s a -> s{_seaNextPageToken = a})
+sNextPageToken :: Lens' SearchReadsResponse (Maybe Text)
+sNextPageToken
+  = lens _sNextPageToken
+      (\ s a -> s{_sNextPageToken = a})
 
 -- | The list of matching alignments sorted by mapped genomic coordinate, if
 -- any, ascending in position within the same reference. Unmapped reads,
 -- which have no position, are returned contiguously and are sorted in
 -- ascending lexicographic order by fragment name.
-seaAlignments :: Lens' SearchReadsResponse [Read']
-seaAlignments
-  = lens _seaAlignments
-      (\ s a -> s{_seaAlignments = a})
-      . _Default
+sAlignments :: Lens' SearchReadsResponse [Read']
+sAlignments
+  = lens _sAlignments (\ s a -> s{_sAlignments = a}) .
+      _Default
       . _Coerce
 
 instance FromJSON SearchReadsResponse where
@@ -3715,8 +3549,8 @@ instance ToJSON SearchReadsResponse where
         toJSON SearchReadsResponse'{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _seaNextPageToken,
-                  ("alignments" .=) <$> _seaAlignments])
+                 [("nextPageToken" .=) <$> _sNextPageToken,
+                  ("alignments" .=) <$> _sAlignments])
 
 --
 -- /See:/ 'program' smart constructor.
@@ -4546,7 +4380,7 @@ data AnnotationSet = AnnotationSet'
     , _asName           :: !(Maybe Text)
     , _asDataSetId      :: !(Maybe Text)
     , _asId             :: !(Maybe Text)
-    , _asType           :: !(Maybe Text)
+    , _asType           :: !(Maybe AnnotationSetType)
     , _asSourceURI      :: !(Maybe Text)
     , _asInfo           :: !(Maybe AnnotationSetInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4603,7 +4437,7 @@ asId :: Lens' AnnotationSet (Maybe Text)
 asId = lens _asId (\ s a -> s{_asId = a})
 
 -- | The type of annotations contained within this set.
-asType :: Lens' AnnotationSet (Maybe Text)
+asType :: Lens' AnnotationSet (Maybe AnnotationSetType)
 asType = lens _asType (\ s a -> s{_asType = a})
 
 -- | The source URI describing the file from which this annotation set was
@@ -4861,7 +4695,7 @@ data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest'
     { _irgsrReferenceSetId    :: !(Maybe Text)
     , _irgsrDataSetId         :: !(Maybe Text)
     , _irgsrSourceURIs        :: !(Maybe [Text])
-    , _irgsrPartitionStrategy :: !(Maybe Text)
+    , _irgsrPartitionStrategy :: !(Maybe ImportReadGroupSetsRequestPartitionStrategy)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImportReadGroupSetsRequest' with the minimum fields required to make a request.
@@ -4904,7 +4738,12 @@ irgsrDataSetId
 
 -- | A list of URIs pointing at [BAM
 -- files](https:\/\/samtools.github.io\/hts-specs\/SAMv1.pdf) in Google
--- Cloud Storage.
+-- Cloud Storage. Those URIs can include wildcards (*), but do not add or
+-- remove matching files before import has completed. Note that Google
+-- Cloud Storage object listing is only eventually consistent: files added
+-- may be not be immediately visible to everyone. Thus, if using a wildcard
+-- it is preferable not to start the import immediately after the files are
+-- created.
 irgsrSourceURIs :: Lens' ImportReadGroupSetsRequest [Text]
 irgsrSourceURIs
   = lens _irgsrSourceURIs
@@ -4914,7 +4753,7 @@ irgsrSourceURIs
 
 -- | The partition strategy describes how read groups are partitioned into
 -- read group sets.
-irgsrPartitionStrategy :: Lens' ImportReadGroupSetsRequest (Maybe Text)
+irgsrPartitionStrategy :: Lens' ImportReadGroupSetsRequest (Maybe ImportReadGroupSetsRequestPartitionStrategy)
 irgsrPartitionStrategy
   = lens _irgsrPartitionStrategy
       (\ s a -> s{_irgsrPartitionStrategy = a})
@@ -4943,7 +4782,7 @@ instance ToJSON ImportReadGroupSetsRequest where
 -- /See:/ 'importVariantsRequest' smart constructor.
 data ImportVariantsRequest = ImportVariantsRequest'
     { _ivrVariantSetId            :: !(Maybe Text)
-    , _ivrFormat                  :: !(Maybe Text)
+    , _ivrFormat                  :: !(Maybe ImportVariantsRequestFormat)
     , _ivrInfoMergeConfig         :: !(Maybe ImportVariantsRequestInfoMergeConfig)
     , _ivrNormalizeReferenceNames :: !(Maybe Bool)
     , _ivrSourceURIs              :: !(Maybe [Text])
@@ -4981,7 +4820,7 @@ ivrVariantSetId
 
 -- | The format of the variant data being imported. If unspecified, defaults
 -- to to \`VCF\`.
-ivrFormat :: Lens' ImportVariantsRequest (Maybe Text)
+ivrFormat :: Lens' ImportVariantsRequest (Maybe ImportVariantsRequestFormat)
 ivrFormat
   = lens _ivrFormat (\ s a -> s{_ivrFormat = a})
 
@@ -5086,7 +4925,7 @@ instance ToJSON ExternalId where
 --
 -- /See:/ 'cigarUnit' smart constructor.
 data CigarUnit = CigarUnit'
-    { _cuOperation         :: !(Maybe Text)
+    { _cuOperation         :: !(Maybe CigarUnitOperation)
     , _cuOperationLength   :: !(Maybe (Textual Int64))
     , _cuReferenceSequence :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5109,7 +4948,7 @@ cigarUnit =
     , _cuReferenceSequence = Nothing
     }
 
-cuOperation :: Lens' CigarUnit (Maybe Text)
+cuOperation :: Lens' CigarUnit (Maybe CigarUnitOperation)
 cuOperation
   = lens _cuOperation (\ s a -> s{_cuOperation = a})
 
@@ -5160,7 +4999,7 @@ instance ToJSON CigarUnit where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
-    { _polEtag     :: !(Maybe Base64)
+    { _polEtag     :: !(Maybe Bytes)
     , _polVersion  :: !(Maybe (Textual Int32))
     , _polBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5195,7 +5034,7 @@ policy =
 polEtag :: Lens' Policy (Maybe ByteString)
 polEtag
   = lens _polEtag (\ s a -> s{_polEtag = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | Version of the \`Policy\`. The default version is 0.
 polVersion :: Lens' Policy (Maybe Int32)
@@ -5234,7 +5073,7 @@ instance ToJSON Policy where
 data ExportVariantSetRequest = ExportVariantSetRequest'
     { _evsrBigQueryDataSet :: !(Maybe Text)
     , _evsrBigQueryTable   :: !(Maybe Text)
-    , _evsrFormat          :: !(Maybe Text)
+    , _evsrFormat          :: !(Maybe ExportVariantSetRequestFormat)
     , _evsrCallSetIds      :: !(Maybe [Text])
     , _evsrProjectId       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5279,7 +5118,7 @@ evsrBigQueryTable
       (\ s a -> s{_evsrBigQueryTable = a})
 
 -- | The format for the exported data.
-evsrFormat :: Lens' ExportVariantSetRequest (Maybe Text)
+evsrFormat :: Lens' ExportVariantSetRequest (Maybe ExportVariantSetRequestFormat)
 evsrFormat
   = lens _evsrFormat (\ s a -> s{_evsrFormat = a})
 
@@ -5325,11 +5164,12 @@ instance ToJSON ExportVariantSetRequest where
 -- /See:/ 'operationMetadata' smart constructor.
 data OperationMetadata = OperationMetadata'
     { _omClientId        :: !(Maybe Text)
-    , _omStartTime       :: !(Maybe Text)
+    , _omStartTime       :: !(Maybe DateTime')
     , _omEvents          :: !(Maybe [OperationEvent])
-    , _omEndTime         :: !(Maybe Text)
+    , _omEndTime         :: !(Maybe DateTime')
+    , _omLabels          :: !(Maybe OperationMetadataLabels)
     , _omProjectId       :: !(Maybe Text)
-    , _omCreateTime      :: !(Maybe Text)
+    , _omCreateTime      :: !(Maybe DateTime')
     , _omRuntimeMetadata :: !(Maybe OperationMetadataRuntimeMetadata)
     , _omRequest         :: !(Maybe OperationMetadataRequest)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5346,6 +5186,8 @@ data OperationMetadata = OperationMetadata'
 --
 -- * 'omEndTime'
 --
+-- * 'omLabels'
+--
 -- * 'omProjectId'
 --
 -- * 'omCreateTime'
@@ -5361,22 +5203,24 @@ operationMetadata =
     , _omStartTime = Nothing
     , _omEvents = Nothing
     , _omEndTime = Nothing
+    , _omLabels = Nothing
     , _omProjectId = Nothing
     , _omCreateTime = Nothing
     , _omRuntimeMetadata = Nothing
     , _omRequest = Nothing
     }
 
--- | Optionally provided by the caller when submitting the request that
--- creates the operation.
+-- | This field is deprecated. Use \`labels\` instead. Optionally provided by
+-- the caller when submitting the request that creates the operation.
 omClientId :: Lens' OperationMetadata (Maybe Text)
 omClientId
   = lens _omClientId (\ s a -> s{_omClientId = a})
 
 -- | The time at which the job began to run.
-omStartTime :: Lens' OperationMetadata (Maybe Text)
+omStartTime :: Lens' OperationMetadata (Maybe UTCTime)
 omStartTime
-  = lens _omStartTime (\ s a -> s{_omStartTime = a})
+  = lens _omStartTime (\ s a -> s{_omStartTime = a}) .
+      mapping _DateTime
 
 -- | Optional event messages that were generated during the job\'s execution.
 -- This also contains any warnings that were generated during import or
@@ -5388,9 +5232,15 @@ omEvents
       . _Coerce
 
 -- | The time at which the job stopped running.
-omEndTime :: Lens' OperationMetadata (Maybe Text)
+omEndTime :: Lens' OperationMetadata (Maybe UTCTime)
 omEndTime
-  = lens _omEndTime (\ s a -> s{_omEndTime = a})
+  = lens _omEndTime (\ s a -> s{_omEndTime = a}) .
+      mapping _DateTime
+
+-- | Optionally provided by the caller when submitting the request that
+-- creates the operation.
+omLabels :: Lens' OperationMetadata (Maybe OperationMetadataLabels)
+omLabels = lens _omLabels (\ s a -> s{_omLabels = a})
 
 -- | The Google Cloud Project in which the job is scoped.
 omProjectId :: Lens' OperationMetadata (Maybe Text)
@@ -5398,9 +5248,10 @@ omProjectId
   = lens _omProjectId (\ s a -> s{_omProjectId = a})
 
 -- | The time at which the job was submitted to the Genomics service.
-omCreateTime :: Lens' OperationMetadata (Maybe Text)
+omCreateTime :: Lens' OperationMetadata (Maybe UTCTime)
 omCreateTime
   = lens _omCreateTime (\ s a -> s{_omCreateTime = a})
+      . mapping _DateTime
 
 -- | Runtime metadata on this Operation.
 omRuntimeMetadata :: Lens' OperationMetadata (Maybe OperationMetadataRuntimeMetadata)
@@ -5424,6 +5275,7 @@ instance FromJSON OperationMetadata where
                    (o .:? "clientId") <*> (o .:? "startTime") <*>
                      (o .:? "events" .!= mempty)
                      <*> (o .:? "endTime")
+                     <*> (o .:? "labels")
                      <*> (o .:? "projectId")
                      <*> (o .:? "createTime")
                      <*> (o .:? "runtimeMetadata")
@@ -5437,6 +5289,7 @@ instance ToJSON OperationMetadata where
                   ("startTime" .=) <$> _omStartTime,
                   ("events" .=) <$> _omEvents,
                   ("endTime" .=) <$> _omEndTime,
+                  ("labels" .=) <$> _omLabels,
                   ("projectId" .=) <$> _omProjectId,
                   ("createTime" .=) <$> _omCreateTime,
                   ("runtimeMetadata" .=) <$> _omRuntimeMetadata,
@@ -5997,7 +5850,7 @@ instance ToJSON VariantSetMetadataInfo where
 
 -- | If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned.
 -- If importing Variants, an ImportVariantsResponse is returned. For
--- exports, an empty response is returned.
+-- pipelines and exports, an empty response is returned.
 --
 -- /See:/ 'operationResponse' smart constructor.
 newtype OperationResponse = OperationResponse'
@@ -6077,15 +5930,15 @@ tCodingSequence
   = lens _tCodingSequence
       (\ s a -> s{_tCodingSequence = a})
 
--- | The exons that compose this transcript. This field should be unset for
--- genomes where transcript splicing does not occur, for example
--- prokaryotes. Introns are regions of the transcript that are not included
--- in the spliced RNA product. Though not explicitly modeled here, intron
--- ranges can be deduced; all regions of this transcript that are not exons
--- are introns. Exonic sequences do not necessarily code for a
--- translational product (amino acids). Only the regions of exons bounded
--- by the codingSequence correspond to coding DNA sequence. Exons are
--- ordered by start position and may not overlap.
+-- | The <http://en.wikipedia.org/wiki/Exon exons> that compose this
+-- transcript. This field should be unset for genomes where transcript
+-- splicing does not occur, for example prokaryotes. Introns are regions of
+-- the transcript that are not included in the spliced RNA product. Though
+-- not explicitly modeled here, intron ranges can be deduced; all regions
+-- of this transcript that are not exons are introns. Exonic sequences do
+-- not necessarily code for a translational product (amino acids). Only the
+-- regions of exons bounded by the codingSequence correspond to coding DNA
+-- sequence. Exons are ordered by start position and may not overlap.
 tExons :: Lens' Transcript [Exon]
 tExons
   = lens _tExons (\ s a -> s{_tExons = a}) . _Default .
@@ -6111,8 +5964,8 @@ instance ToJSON Transcript where
 --
 -- /See:/ 'operationEvent' smart constructor.
 data OperationEvent = OperationEvent'
-    { _oeStartTime   :: !(Maybe Text)
-    , _oeEndTime     :: !(Maybe Text)
+    { _oeStartTime   :: !(Maybe DateTime')
+    , _oeEndTime     :: !(Maybe DateTime')
     , _oeDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6135,16 +5988,18 @@ operationEvent =
     }
 
 -- | Optional time of when event started.
-oeStartTime :: Lens' OperationEvent (Maybe Text)
+oeStartTime :: Lens' OperationEvent (Maybe UTCTime)
 oeStartTime
-  = lens _oeStartTime (\ s a -> s{_oeStartTime = a})
+  = lens _oeStartTime (\ s a -> s{_oeStartTime = a}) .
+      mapping _DateTime
 
 -- | Optional time of when event finished. An event can have a start time and
 -- no finish time. If an event has a finish time, there must be a start
 -- time.
-oeEndTime :: Lens' OperationEvent (Maybe Text)
+oeEndTime :: Lens' OperationEvent (Maybe UTCTime)
 oeEndTime
-  = lens _oeEndTime (\ s a -> s{_oeEndTime = a})
+  = lens _oeEndTime (\ s a -> s{_oeEndTime = a}) .
+      mapping _DateTime
 
 -- | Required description of event.
 oeDescription :: Lens' OperationEvent (Maybe Text)
@@ -6167,108 +6022,6 @@ instance ToJSON OperationEvent where
                  [("startTime" .=) <$> _oeStartTime,
                   ("endTime" .=) <$> _oeEndTime,
                   ("description" .=) <$> _oeDescription])
-
--- | The stream variants request.
---
--- /See:/ 'streamVariantsRequest' smart constructor.
-data StreamVariantsRequest = StreamVariantsRequest'
-    { _strVariantSetId  :: !(Maybe Text)
-    , _strStart         :: !(Maybe (Textual Int64))
-    , _strCallSetIds    :: !(Maybe [Text])
-    , _strReferenceName :: !(Maybe Text)
-    , _strEnd           :: !(Maybe (Textual Int64))
-    , _strProjectId     :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'StreamVariantsRequest' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'strVariantSetId'
---
--- * 'strStart'
---
--- * 'strCallSetIds'
---
--- * 'strReferenceName'
---
--- * 'strEnd'
---
--- * 'strProjectId'
-streamVariantsRequest
-    :: StreamVariantsRequest
-streamVariantsRequest =
-    StreamVariantsRequest'
-    { _strVariantSetId = Nothing
-    , _strStart = Nothing
-    , _strCallSetIds = Nothing
-    , _strReferenceName = Nothing
-    , _strEnd = Nothing
-    , _strProjectId = Nothing
-    }
-
--- | The variant set ID from which to stream variants.
-strVariantSetId :: Lens' StreamVariantsRequest (Maybe Text)
-strVariantSetId
-  = lens _strVariantSetId
-      (\ s a -> s{_strVariantSetId = a})
-
--- | The beginning of the window (0-based, inclusive) for which overlapping
--- variants should be returned.
-strStart :: Lens' StreamVariantsRequest (Maybe Int64)
-strStart
-  = lens _strStart (\ s a -> s{_strStart = a}) .
-      mapping _Coerce
-
--- | Only return variant calls which belong to call sets with these IDs.
--- Leaving this blank returns all variant calls.
-strCallSetIds :: Lens' StreamVariantsRequest [Text]
-strCallSetIds
-  = lens _strCallSetIds
-      (\ s a -> s{_strCallSetIds = a})
-      . _Default
-      . _Coerce
-
--- | Required. Only return variants in this reference sequence.
-strReferenceName :: Lens' StreamVariantsRequest (Maybe Text)
-strReferenceName
-  = lens _strReferenceName
-      (\ s a -> s{_strReferenceName = a})
-
--- | The end of the window (0-based, exclusive) for which overlapping
--- variants should be returned.
-strEnd :: Lens' StreamVariantsRequest (Maybe Int64)
-strEnd
-  = lens _strEnd (\ s a -> s{_strEnd = a}) .
-      mapping _Coerce
-
--- | The Google Cloud project ID which will be billed for this access. The
--- caller must have WRITE access to this project. Required.
-strProjectId :: Lens' StreamVariantsRequest (Maybe Text)
-strProjectId
-  = lens _strProjectId (\ s a -> s{_strProjectId = a})
-
-instance FromJSON StreamVariantsRequest where
-        parseJSON
-          = withObject "StreamVariantsRequest"
-              (\ o ->
-                 StreamVariantsRequest' <$>
-                   (o .:? "variantSetId") <*> (o .:? "start") <*>
-                     (o .:? "callSetIds" .!= mempty)
-                     <*> (o .:? "referenceName")
-                     <*> (o .:? "end")
-                     <*> (o .:? "projectId"))
-
-instance ToJSON StreamVariantsRequest where
-        toJSON StreamVariantsRequest'{..}
-          = object
-              (catMaybes
-                 [("variantSetId" .=) <$> _strVariantSetId,
-                  ("start" .=) <$> _strStart,
-                  ("callSetIds" .=) <$> _strCallSetIds,
-                  ("referenceName" .=) <$> _strReferenceName,
-                  ("end" .=) <$> _strEnd,
-                  ("projectId" .=) <$> _strProjectId])
 
 -- | ReferenceBound records an upper bound for the starting coordinate of
 -- variants in a particular reference.

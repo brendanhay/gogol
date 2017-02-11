@@ -24,7 +24,7 @@
 -- other genomics resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.list@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.datasets.list@.
 module Network.Google.Resource.Genomics.DataSets.List
     (
     -- * REST Resource
@@ -55,7 +55,7 @@ import           Network.Google.Prelude
 type DataSetsListResource =
      "v1" :>
        "datasets" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -74,7 +74,7 @@ type DataSetsListResource =
 --
 -- /See:/ 'dataSetsList' smart constructor.
 data DataSetsList = DataSetsList'
-    { _dslXgafv          :: !(Maybe Text)
+    { _dslXgafv          :: !(Maybe Xgafv)
     , _dslUploadProtocol :: !(Maybe Text)
     , _dslPp             :: !Bool
     , _dslAccessToken    :: !(Maybe Text)
@@ -126,7 +126,7 @@ dataSetsList =
     }
 
 -- | V1 error format.
-dslXgafv :: Lens' DataSetsList (Maybe Text)
+dslXgafv :: Lens' DataSetsList (Maybe Xgafv)
 dslXgafv = lens _dslXgafv (\ s a -> s{_dslXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

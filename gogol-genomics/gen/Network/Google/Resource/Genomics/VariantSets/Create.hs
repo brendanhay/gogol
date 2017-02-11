@@ -27,7 +27,7 @@
 -- fields are optional. Note that the \`id\` field will be ignored, as this
 -- is assigned by the server.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.create@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.variantsets.create@.
 module Network.Google.Resource.Genomics.VariantSets.Create
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ import           Network.Google.Prelude
 type VariantSetsCreateResource =
      "v1" :>
        "variantsets" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -75,7 +75,7 @@ type VariantSetsCreateResource =
 --
 -- /See:/ 'variantSetsCreate' smart constructor.
 data VariantSetsCreate = VariantSetsCreate'
-    { _vscXgafv          :: !(Maybe Text)
+    { _vscXgafv          :: !(Maybe Xgafv)
     , _vscUploadProtocol :: !(Maybe Text)
     , _vscPp             :: !Bool
     , _vscAccessToken    :: !(Maybe Text)
@@ -120,7 +120,7 @@ variantSetsCreate pVscPayload_ =
     }
 
 -- | V1 error format.
-vscXgafv :: Lens' VariantSetsCreate (Maybe Text)
+vscXgafv :: Lens' VariantSetsCreate (Maybe Xgafv)
 vscXgafv = lens _vscXgafv (\ s a -> s{_vscXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

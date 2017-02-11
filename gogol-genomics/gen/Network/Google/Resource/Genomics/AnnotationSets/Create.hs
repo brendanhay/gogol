@@ -25,7 +25,7 @@
 -- referenceSetId All other fields may be optionally specified, unless
 -- documented as being server-generated (for example, the \`id\` field).
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.annotationsets.create@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.annotationsets.create@.
 module Network.Google.Resource.Genomics.AnnotationSets.Create
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 type AnnotationSetsCreateResource =
      "v1" :>
        "annotationsets" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -72,7 +72,7 @@ type AnnotationSetsCreateResource =
 --
 -- /See:/ 'annotationSetsCreate' smart constructor.
 data AnnotationSetsCreate = AnnotationSetsCreate'
-    { _ascXgafv          :: !(Maybe Text)
+    { _ascXgafv          :: !(Maybe Xgafv)
     , _ascUploadProtocol :: !(Maybe Text)
     , _ascPp             :: !Bool
     , _ascAccessToken    :: !(Maybe Text)
@@ -117,7 +117,7 @@ annotationSetsCreate pAscPayload_ =
     }
 
 -- | V1 error format.
-ascXgafv :: Lens' AnnotationSetsCreate (Maybe Text)
+ascXgafv :: Lens' AnnotationSetsCreate (Maybe Xgafv)
 ascXgafv = lens _ascXgafv (\ s a -> s{_ascXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

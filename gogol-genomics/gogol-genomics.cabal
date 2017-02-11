@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Stores, processes, explores and shares genomic data.
+    Upload, process, query, and search Genomics data in the cloud.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -71,7 +71,6 @@ library
         , Network.Google.Resource.Genomics.ReadGroupSets.Patch
         , Network.Google.Resource.Genomics.ReadGroupSets.Search
         , Network.Google.Resource.Genomics.Reads.Search
-        , Network.Google.Resource.Genomics.Reads.Stream
         , Network.Google.Resource.Genomics.References.Bases.List
         , Network.Google.Resource.Genomics.References.Get
         , Network.Google.Resource.Genomics.References.Search
@@ -90,7 +89,6 @@ library
         , Network.Google.Resource.Genomics.Variants.Merge
         , Network.Google.Resource.Genomics.Variants.Patch
         , Network.Google.Resource.Genomics.Variants.Search
-        , Network.Google.Resource.Genomics.Variants.Stream
 
     other-modules:
           Network.Google.Genomics.Types.Product

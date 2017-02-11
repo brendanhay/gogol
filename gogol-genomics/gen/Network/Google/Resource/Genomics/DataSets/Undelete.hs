@@ -26,7 +26,7 @@
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 -- This operation is only possible for a week after the deletion occurred.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.undelete@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.datasets.undelete@.
 module Network.Google.Resource.Genomics.DataSets.Undelete
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type DataSetsUndeleteResource =
      "v1" :>
        "datasets" :>
          CaptureMode "datasetId" "undelete" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -76,7 +76,7 @@ type DataSetsUndeleteResource =
 --
 -- /See:/ 'dataSetsUndelete' smart constructor.
 data DataSetsUndelete = DataSetsUndelete'
-    { _dsuXgafv          :: !(Maybe Text)
+    { _dsuXgafv          :: !(Maybe Xgafv)
     , _dsuUploadProtocol :: !(Maybe Text)
     , _dsuPp             :: !Bool
     , _dsuAccessToken    :: !(Maybe Text)
@@ -126,7 +126,7 @@ dataSetsUndelete pDsuPayload_ pDsuDataSetId_ =
     }
 
 -- | V1 error format.
-dsuXgafv :: Lens' DataSetsUndelete (Maybe Text)
+dsuXgafv :: Lens' DataSetsUndelete (Maybe Xgafv)
 dsuXgafv = lens _dsuXgafv (\ s a -> s{_dsuXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

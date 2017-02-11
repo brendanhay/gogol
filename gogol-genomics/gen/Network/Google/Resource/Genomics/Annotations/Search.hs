@@ -28,7 +28,7 @@
 -- order across their respective streams of paginated responses. Caller
 -- must have READ permission for the queried annotation sets.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.annotations.search@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.annotations.search@.
 module Network.Google.Resource.Genomics.Annotations.Search
     (
     -- * REST Resource
@@ -58,7 +58,7 @@ type AnnotationsSearchResource =
      "v1" :>
        "annotations" :>
          "search" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -79,7 +79,7 @@ type AnnotationsSearchResource =
 --
 -- /See:/ 'annotationsSearch' smart constructor.
 data AnnotationsSearch = AnnotationsSearch'
-    { _asXgafv          :: !(Maybe Text)
+    { _asXgafv          :: !(Maybe Xgafv)
     , _asUploadProtocol :: !(Maybe Text)
     , _asPp             :: !Bool
     , _asAccessToken    :: !(Maybe Text)
@@ -124,7 +124,7 @@ annotationsSearch pAsPayload_ =
     }
 
 -- | V1 error format.
-asXgafv :: Lens' AnnotationsSearch (Maybe Text)
+asXgafv :: Lens' AnnotationsSearch (Maybe Xgafv)
 asXgafv = lens _asXgafv (\ s a -> s{_asXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

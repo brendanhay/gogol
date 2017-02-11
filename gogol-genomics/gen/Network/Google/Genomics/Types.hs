@@ -55,6 +55,9 @@ module Network.Google.Genomics.Types
     , operationSchema
     , osAddtional
 
+    -- * VariantAnnotationEffect
+    , VariantAnnotationEffect (..)
+
     -- * Variant
     , Variant
     , variant
@@ -138,6 +141,11 @@ module Network.Google.Genomics.Types
     , rReadNumber
     , rAlignedQuality
 
+    -- * OperationMetadataLabels
+    , OperationMetadataLabels
+    , operationMetadataLabels
+    , omlAddtional
+
     -- * VariantCall
     , VariantCall
     , variantCall
@@ -197,6 +205,9 @@ module Network.Google.Genomics.Types
     , Empty
     , empty
 
+    -- * AnnotationSetType
+    , AnnotationSetType (..)
+
     -- * SearchReferencesResponse
     , SearchReferencesResponse
     , searchReferencesResponse
@@ -241,6 +252,9 @@ module Network.Google.Genomics.Types
     , vaType
     , vaTranscriptIds
 
+    -- * VariantAnnotationClinicalSignificance
+    , VariantAnnotationClinicalSignificance (..)
+
     -- * SearchReadGroupSetsRequest
     , SearchReadGroupSetsRequest
     , searchReadGroupSetsRequest
@@ -270,20 +284,10 @@ module Network.Google.Genomics.Types
     , readGroupInfo
     , rgiAddtional
 
-    -- * StreamVariantsResponse
-    , StreamVariantsResponse
-    , streamVariantsResponse
-    , svrVariants
-
     -- * StatusDetailsItem
     , StatusDetailsItem
     , statusDetailsItem
     , sdiAddtional
-
-    -- * StreamReadsResponse
-    , StreamReadsResponse
-    , streamReadsResponse
-    , srrAlignments
 
     -- * SearchCallSetsResponse
     , SearchCallSetsResponse
@@ -358,11 +362,14 @@ module Network.Google.Genomics.Types
     , sasrPageToken
     , sasrPageSize
 
+    -- * ImportReadGroupSetsRequestPartitionStrategy
+    , ImportReadGroupSetsRequestPartitionStrategy (..)
+
     -- * SearchVariantsResponse
     , SearchVariantsResponse
     , searchVariantsResponse
-    , sVariants
-    , sNextPageToken
+    , svrVariants
+    , svrNextPageToken
 
     -- * OperationMetadataRuntimeMetadata
     , OperationMetadataRuntimeMetadata
@@ -376,17 +383,6 @@ module Network.Google.Genomics.Types
     , ccNames
     , ccConceptId
     , ccOmimId
-
-    -- * StreamReadsRequest
-    , StreamReadsRequest
-    , streamReadsRequest
-    , sShard
-    , sReadGroupSetId
-    , sTotalShards
-    , sStart
-    , sReferenceName
-    , sEnd
-    , sProjectId
 
     -- * SearchCallSetsRequest
     , SearchCallSetsRequest
@@ -405,8 +401,8 @@ module Network.Google.Genomics.Types
     -- * SearchReadsResponse
     , SearchReadsResponse
     , searchReadsResponse
-    , seaNextPageToken
-    , seaAlignments
+    , sNextPageToken
+    , sAlignments
 
     -- * Program
     , Program
@@ -437,6 +433,9 @@ module Network.Google.Genomics.Types
     , csStart
     , csEnd
 
+    -- * AnnotationType
+    , AnnotationType (..)
+
     -- * SearchReferenceSetsResponse
     , SearchReferenceSetsResponse
     , searchReferenceSetsResponse
@@ -460,6 +459,9 @@ module Network.Google.Genomics.Types
     , rgsInfo
     , rgsReadGroups
     , rgsFilename
+
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * ExportReadGroupSetRequest
     , ExportReadGroupSetRequest
@@ -519,6 +521,12 @@ module Network.Google.Genomics.Types
     , vsId
     , vsDescription
 
+    -- * CigarUnitOperation
+    , CigarUnitOperation (..)
+
+    -- * VariantSetMetadataType
+    , VariantSetMetadataType (..)
+
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
     , testIAMPermissionsResponse
@@ -576,6 +584,9 @@ module Network.Google.Genomics.Types
     , evsrCallSetIds
     , evsrProjectId
 
+    -- * VariantAnnotationType
+    , VariantAnnotationType (..)
+
     -- * OperationMetadata
     , OperationMetadata
     , operationMetadata
@@ -583,10 +594,14 @@ module Network.Google.Genomics.Types
     , omStartTime
     , omEvents
     , omEndTime
+    , omLabels
     , omProjectId
     , omCreateTime
     , omRuntimeMetadata
     , omRequest
+
+    -- * ImportVariantsRequestFormat
+    , ImportVariantsRequestFormat (..)
 
     -- * SearchAnnotationsRequest
     , SearchAnnotationsRequest
@@ -617,6 +632,9 @@ module Network.Google.Genomics.Types
     , svrVariantName
     , svrVariantSetIds
     , svrPageSize
+
+    -- * ExportVariantSetRequestFormat
+    , ExportVariantSetRequestFormat (..)
 
     -- * AnnotationSetInfo
     , AnnotationSetInfo
@@ -665,16 +683,6 @@ module Network.Google.Genomics.Types
     , oeStartTime
     , oeEndTime
     , oeDescription
-
-    -- * StreamVariantsRequest
-    , StreamVariantsRequest
-    , streamVariantsRequest
-    , strVariantSetId
-    , strStart
-    , strCallSetIds
-    , strReferenceName
-    , strEnd
-    , strProjectId
 
     -- * ReferenceBound
     , ReferenceBound

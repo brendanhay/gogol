@@ -24,7 +24,7 @@
 -- resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.delete@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.variants.delete@.
 module Network.Google.Resource.Genomics.Variants.Delete
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type VariantsDeleteResource =
      "v1" :>
        "variants" :>
          Capture "variantId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -69,7 +69,7 @@ type VariantsDeleteResource =
 --
 -- /See:/ 'variantsDelete' smart constructor.
 data VariantsDelete = VariantsDelete'
-    { _vdXgafv          :: !(Maybe Text)
+    { _vdXgafv          :: !(Maybe Xgafv)
     , _vdUploadProtocol :: !(Maybe Text)
     , _vdPp             :: !Bool
     , _vdAccessToken    :: !(Maybe Text)
@@ -114,7 +114,7 @@ variantsDelete pVdVariantId_ =
     }
 
 -- | V1 error format.
-vdXgafv :: Lens' VariantsDelete (Maybe Text)
+vdXgafv :: Lens' VariantsDelete (Maybe Xgafv)
 vdXgafv = lens _vdXgafv (\ s a -> s{_vdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

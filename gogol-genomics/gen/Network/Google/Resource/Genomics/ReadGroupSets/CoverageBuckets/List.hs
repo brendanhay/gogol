@@ -32,7 +32,7 @@
 -- coverage \'zoom levels\'. The caller must have READ permissions for the
 -- target read group set.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.coveragebuckets.list@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.readgroupsets.coveragebuckets.list@.
 module Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
     (
     -- * REST Resource
@@ -69,7 +69,7 @@ type ReadGroupSetsCoverageBucketsListResource =
        "readgroupsets" :>
          Capture "readGroupSetId" Text :>
            "coveragebuckets" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
@@ -99,7 +99,7 @@ type ReadGroupSetsCoverageBucketsListResource =
 --
 -- /See:/ 'readGroupSetsCoverageBucketsList' smart constructor.
 data ReadGroupSetsCoverageBucketsList = ReadGroupSetsCoverageBucketsList'
-    { _rgscblXgafv             :: !(Maybe Text)
+    { _rgscblXgafv             :: !(Maybe Xgafv)
     , _rgscblReadGroupSetId    :: !Text
     , _rgscblUploadProtocol    :: !(Maybe Text)
     , _rgscblPp                :: !Bool
@@ -168,7 +168,7 @@ readGroupSetsCoverageBucketsList pRgscblReadGroupSetId_ =
     }
 
 -- | V1 error format.
-rgscblXgafv :: Lens' ReadGroupSetsCoverageBucketsList (Maybe Text)
+rgscblXgafv :: Lens' ReadGroupSetsCoverageBucketsList (Maybe Xgafv)
 rgscblXgafv
   = lens _rgscblXgafv (\ s a -> s{_rgscblXgafv = a})
 

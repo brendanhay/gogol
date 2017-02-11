@@ -34,7 +34,7 @@
 -- Unmapped reads will be stripped of positional information (reference
 -- name and position)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.import@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.readgroupsets.import@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Import
     (
     -- * REST Resource
@@ -63,7 +63,7 @@ import           Network.Google.Prelude
 type ReadGroupSetsImportResource =
      "v1" :>
        "readgroupsets:import" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -90,7 +90,7 @@ type ReadGroupSetsImportResource =
 --
 -- /See:/ 'readGroupSetsImport' smart constructor.
 data ReadGroupSetsImport = ReadGroupSetsImport'
-    { _rgsiXgafv          :: !(Maybe Text)
+    { _rgsiXgafv          :: !(Maybe Xgafv)
     , _rgsiUploadProtocol :: !(Maybe Text)
     , _rgsiPp             :: !Bool
     , _rgsiAccessToken    :: !(Maybe Text)
@@ -135,7 +135,7 @@ readGroupSetsImport pRgsiPayload_ =
     }
 
 -- | V1 error format.
-rgsiXgafv :: Lens' ReadGroupSetsImport (Maybe Text)
+rgsiXgafv :: Lens' ReadGroupSetsImport (Maybe Xgafv)
 rgsiXgafv
   = lens _rgsiXgafv (\ s a -> s{_rgsiXgafv = a})
 

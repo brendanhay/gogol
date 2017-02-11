@@ -26,7 +26,7 @@
 -- This method supports patch semantics. Returns the modified variant
 -- without its calls.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.patch@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.variants.patch@.
 module Network.Google.Resource.Genomics.Variants.Patch
     (
     -- * REST Resource
@@ -58,9 +58,9 @@ type VariantsPatchResource =
      "v1" :>
        "variants" :>
          Capture "variantId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "updateMask" Text :>
+               QueryParam "updateMask" FieldMask :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
@@ -77,9 +77,9 @@ type VariantsPatchResource =
 --
 -- /See:/ 'variantsPatch' smart constructor.
 data VariantsPatch = VariantsPatch'
-    { _vpXgafv          :: !(Maybe Text)
+    { _vpXgafv          :: !(Maybe Xgafv)
     , _vpUploadProtocol :: !(Maybe Text)
-    , _vpUpdateMask     :: !(Maybe Text)
+    , _vpUpdateMask     :: !(Maybe FieldMask)
     , _vpPp             :: !Bool
     , _vpAccessToken    :: !(Maybe Text)
     , _vpUploadType     :: !(Maybe Text)
@@ -131,7 +131,7 @@ variantsPatch pVpPayload_ pVpVariantId_ =
     }
 
 -- | V1 error format.
-vpXgafv :: Lens' VariantsPatch (Maybe Text)
+vpXgafv :: Lens' VariantsPatch (Maybe Xgafv)
 vpXgafv = lens _vpXgafv (\ s a -> s{_vpXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -143,7 +143,7 @@ vpUploadProtocol
 -- | An optional mask specifying which fields to update. At this time,
 -- mutable fields are names and info. Acceptable values are \"names\" and
 -- \"info\". If unspecified, all mutable fields will be updated.
-vpUpdateMask :: Lens' VariantsPatch (Maybe Text)
+vpUpdateMask :: Lens' VariantsPatch (Maybe FieldMask)
 vpUpdateMask
   = lens _vpUpdateMask (\ s a -> s{_vpUpdateMask = a})
 
