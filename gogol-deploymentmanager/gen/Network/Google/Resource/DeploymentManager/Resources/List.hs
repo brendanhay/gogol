@@ -33,6 +33,7 @@ module Network.Google.Resource.DeploymentManager.Resources.List
     , ResourcesList
 
     -- * Request Lenses
+    , rlOrderBy
     , rlProject
     , rlFilter
     , rlPageToken
@@ -54,17 +55,19 @@ type ResourcesListResource =
                "deployments" :>
                  Capture "deployment" Text :>
                    "resources" :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ResourcesListResponse
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ResourcesListResponse
 
 -- | Lists all resources in a given deployment.
 --
 -- /See:/ 'resourcesList' smart constructor.
 data ResourcesList = ResourcesList'
-    { _rlProject    :: !Text
+    { _rlOrderBy    :: !(Maybe Text)
+    , _rlProject    :: !Text
     , _rlFilter     :: !(Maybe Text)
     , _rlPageToken  :: !(Maybe Text)
     , _rlMaxResults :: !(Textual Word32)
@@ -74,6 +77,8 @@ data ResourcesList = ResourcesList'
 -- | Creates a value of 'ResourcesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rlOrderBy'
 --
 -- * 'rlProject'
 --
@@ -90,12 +95,25 @@ resourcesList
     -> ResourcesList
 resourcesList pRlProject_ pRlDeployment_ =
     ResourcesList'
-    { _rlProject = pRlProject_
+    { _rlOrderBy = Nothing
+    , _rlProject = pRlProject_
     , _rlFilter = Nothing
     , _rlPageToken = Nothing
     , _rlMaxResults = 500
     , _rlDeployment = pRlDeployment_
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+rlOrderBy :: Lens' ResourcesList (Maybe Text)
+rlOrderBy
+  = lens _rlOrderBy (\ s a -> s{_rlOrderBy = a})
 
 -- | The project ID for this request.
 rlProject :: Lens' ResourcesList Text
@@ -153,7 +171,8 @@ instance GoogleRequest ResourcesList where
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient ResourcesList'{..}
-          = go _rlProject _rlDeployment _rlFilter _rlPageToken
+          = go _rlProject _rlDeployment _rlOrderBy _rlFilter
+              _rlPageToken
               (Just _rlMaxResults)
               (Just AltJSON)
               deploymentManagerService

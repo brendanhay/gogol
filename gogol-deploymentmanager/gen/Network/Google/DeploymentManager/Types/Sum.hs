@@ -46,10 +46,37 @@ instance ToJSON DeploymentsUpdateCreatePolicy where
     toJSON = toJSONText
 
 -- | Sets the policy to use for deleting resources.
-data DeploymentsUpdateDeletePolicy
+data DeploymentsDeleteDeletePolicy
     = Abandon
       -- ^ @ABANDON@
     | Delete'
+      -- ^ @DELETE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeploymentsDeleteDeletePolicy
+
+instance FromHttpApiData DeploymentsDeleteDeletePolicy where
+    parseQueryParam = \case
+        "ABANDON" -> Right Abandon
+        "DELETE" -> Right Delete'
+        x -> Left ("Unable to parse DeploymentsDeleteDeletePolicy from: " <> x)
+
+instance ToHttpApiData DeploymentsDeleteDeletePolicy where
+    toQueryParam = \case
+        Abandon -> "ABANDON"
+        Delete' -> "DELETE"
+
+instance FromJSON DeploymentsDeleteDeletePolicy where
+    parseJSON = parseJSONText "DeploymentsDeleteDeletePolicy"
+
+instance ToJSON DeploymentsDeleteDeletePolicy where
+    toJSON = toJSONText
+
+-- | Sets the policy to use for deleting resources.
+data DeploymentsUpdateDeletePolicy
+    = DUDPAbandon
+      -- ^ @ABANDON@
+    | DUDPDelete'
       -- ^ @DELETE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -57,14 +84,14 @@ instance Hashable DeploymentsUpdateDeletePolicy
 
 instance FromHttpApiData DeploymentsUpdateDeletePolicy where
     parseQueryParam = \case
-        "ABANDON" -> Right Abandon
-        "DELETE" -> Right Delete'
+        "ABANDON" -> Right DUDPAbandon
+        "DELETE" -> Right DUDPDelete'
         x -> Left ("Unable to parse DeploymentsUpdateDeletePolicy from: " <> x)
 
 instance ToHttpApiData DeploymentsUpdateDeletePolicy where
     toQueryParam = \case
-        Abandon -> "ABANDON"
-        Delete' -> "DELETE"
+        DUDPAbandon -> "ABANDON"
+        DUDPDelete' -> "DELETE"
 
 instance FromJSON DeploymentsUpdateDeletePolicy where
     parseJSON = parseJSONText "DeploymentsUpdateDeletePolicy"

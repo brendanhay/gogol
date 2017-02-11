@@ -33,6 +33,7 @@ module Network.Google.Resource.DeploymentManager.Manifests.List
     , ManifestsList
 
     -- * Request Lenses
+    , mlOrderBy
     , mlProject
     , mlFilter
     , mlPageToken
@@ -54,17 +55,19 @@ type ManifestsListResource =
                "deployments" :>
                  Capture "deployment" Text :>
                    "manifests" :>
-                     QueryParam "filter" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ManifestsListResponse
+                     QueryParam "orderBy" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "maxResults" (Textual Word32) :>
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ManifestsListResponse
 
 -- | Lists all manifests for a given deployment.
 --
 -- /See:/ 'manifestsList' smart constructor.
 data ManifestsList = ManifestsList'
-    { _mlProject    :: !Text
+    { _mlOrderBy    :: !(Maybe Text)
+    , _mlProject    :: !Text
     , _mlFilter     :: !(Maybe Text)
     , _mlPageToken  :: !(Maybe Text)
     , _mlMaxResults :: !(Textual Word32)
@@ -74,6 +77,8 @@ data ManifestsList = ManifestsList'
 -- | Creates a value of 'ManifestsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mlOrderBy'
 --
 -- * 'mlProject'
 --
@@ -90,12 +95,25 @@ manifestsList
     -> ManifestsList
 manifestsList pMlProject_ pMlDeployment_ =
     ManifestsList'
-    { _mlProject = pMlProject_
+    { _mlOrderBy = Nothing
+    , _mlProject = pMlProject_
     , _mlFilter = Nothing
     , _mlPageToken = Nothing
     , _mlMaxResults = 500
     , _mlDeployment = pMlDeployment_
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+mlOrderBy :: Lens' ManifestsList (Maybe Text)
+mlOrderBy
+  = lens _mlOrderBy (\ s a -> s{_mlOrderBy = a})
 
 -- | The project ID for this request.
 mlProject :: Lens' ManifestsList Text
@@ -153,7 +171,8 @@ instance GoogleRequest ManifestsList where
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient ManifestsList'{..}
-          = go _mlProject _mlDeployment _mlFilter _mlPageToken
+          = go _mlProject _mlDeployment _mlOrderBy _mlFilter
+              _mlPageToken
               (Just _mlMaxResults)
               (Just AltJSON)
               deploymentManagerService

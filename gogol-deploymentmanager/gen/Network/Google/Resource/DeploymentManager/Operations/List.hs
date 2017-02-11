@@ -33,6 +33,7 @@ module Network.Google.Resource.DeploymentManager.Operations.List
     , OperationsList
 
     -- * Request Lenses
+    , olOrderBy
     , olProject
     , olFilter
     , olPageToken
@@ -51,17 +52,19 @@ type OperationsListResource =
            Capture "project" Text :>
              "global" :>
                "operations" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] OperationsListResponse
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] OperationsListResponse
 
 -- | Lists all operations for a project.
 --
 -- /See:/ 'operationsList' smart constructor.
 data OperationsList = OperationsList'
-    { _olProject    :: !Text
+    { _olOrderBy    :: !(Maybe Text)
+    , _olProject    :: !Text
     , _olFilter     :: !(Maybe Text)
     , _olPageToken  :: !(Maybe Text)
     , _olMaxResults :: !(Textual Word32)
@@ -70,6 +73,8 @@ data OperationsList = OperationsList'
 -- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'olOrderBy'
 --
 -- * 'olProject'
 --
@@ -83,11 +88,24 @@ operationsList
     -> OperationsList
 operationsList pOlProject_ =
     OperationsList'
-    { _olProject = pOlProject_
+    { _olOrderBy = Nothing
+    , _olProject = pOlProject_
     , _olFilter = Nothing
     , _olPageToken = Nothing
     , _olMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+olOrderBy :: Lens' OperationsList (Maybe Text)
+olOrderBy
+  = lens _olOrderBy (\ s a -> s{_olOrderBy = a})
 
 -- | The project ID for this request.
 olProject :: Lens' OperationsList Text
@@ -140,7 +158,7 @@ instance GoogleRequest OperationsList where
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient OperationsList'{..}
-          = go _olProject _olFilter _olPageToken
+          = go _olProject _olOrderBy _olFilter _olPageToken
               (Just _olMaxResults)
               (Just AltJSON)
               deploymentManagerService

@@ -33,6 +33,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.List
     , DeploymentsList
 
     -- * Request Lenses
+    , dlOrderBy
     , dlProject
     , dlFilter
     , dlPageToken
@@ -51,17 +52,19 @@ type DeploymentsListResource =
            Capture "project" Text :>
              "global" :>
                "deployments" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] DeploymentsListResponse
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] DeploymentsListResponse
 
 -- | Lists all deployments for a given project.
 --
 -- /See:/ 'deploymentsList' smart constructor.
 data DeploymentsList = DeploymentsList'
-    { _dlProject    :: !Text
+    { _dlOrderBy    :: !(Maybe Text)
+    , _dlProject    :: !Text
     , _dlFilter     :: !(Maybe Text)
     , _dlPageToken  :: !(Maybe Text)
     , _dlMaxResults :: !(Textual Word32)
@@ -70,6 +73,8 @@ data DeploymentsList = DeploymentsList'
 -- | Creates a value of 'DeploymentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dlOrderBy'
 --
 -- * 'dlProject'
 --
@@ -83,11 +88,24 @@ deploymentsList
     -> DeploymentsList
 deploymentsList pDlProject_ =
     DeploymentsList'
-    { _dlProject = pDlProject_
+    { _dlOrderBy = Nothing
+    , _dlProject = pDlProject_
     , _dlFilter = Nothing
     , _dlPageToken = Nothing
     , _dlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+dlOrderBy :: Lens' DeploymentsList (Maybe Text)
+dlOrderBy
+  = lens _dlOrderBy (\ s a -> s{_dlOrderBy = a})
 
 -- | The project ID for this request.
 dlProject :: Lens' DeploymentsList Text
@@ -140,7 +158,7 @@ instance GoogleRequest DeploymentsList where
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient DeploymentsList'{..}
-          = go _dlProject _dlFilter _dlPageToken
+          = go _dlProject _dlOrderBy _dlFilter _dlPageToken
               (Just _dlMaxResults)
               (Just AltJSON)
               deploymentManagerService
