@@ -13,86 +13,95 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
--- Module      : Network.Google.Resource.Compute.Routers.AggregatedList
+-- Module      : Network.Google.Resource.Compute.RegionInstanceGroupManagers.List
 -- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves an aggregated list of routers.
+-- Retrieves the list of managed instance groups that are contained within
+-- the specified region.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routers.aggregatedList@.
-module Network.Google.Resource.Compute.Routers.AggregatedList
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionInstanceGroupManagers.list@.
+module Network.Google.Resource.Compute.RegionInstanceGroupManagers.List
     (
     -- * REST Resource
-      RoutersAggregatedListResource
+      RegionInstanceGroupManagersListResource
 
     -- * Creating a Request
-    , routersAggregatedList
-    , RoutersAggregatedList
+    , regionInstanceGroupManagersList
+    , RegionInstanceGroupManagersList
 
     -- * Request Lenses
-    , rOrderBy
-    , rProject
-    , rFilter
-    , rPageToken
-    , rMaxResults
+    , rigmlOrderBy
+    , rigmlProject
+    , rigmlFilter
+    , rigmlRegion
+    , rigmlPageToken
+    , rigmlMaxResults
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @compute.routers.aggregatedList@ method which the
--- 'RoutersAggregatedList' request conforms to.
-type RoutersAggregatedListResource =
+-- | A resource alias for @compute.regionInstanceGroupManagers.list@ method which the
+-- 'RegionInstanceGroupManagersList' request conforms to.
+type RegionInstanceGroupManagersListResource =
      "compute" :>
        "v1" :>
          "projects" :>
            Capture "project" Text :>
-             "aggregated" :>
-               "routers" :>
-                 QueryParam "orderBy" Text :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] RouterAggregatedList
+             "regions" :>
+               Capture "region" Text :>
+                 "instanceGroupManagers" :>
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] RegionInstanceGroupManagerList
 
--- | Retrieves an aggregated list of routers.
+-- | Retrieves the list of managed instance groups that are contained within
+-- the specified region.
 --
--- /See:/ 'routersAggregatedList' smart constructor.
-data RoutersAggregatedList = RoutersAggregatedList'
-    { _rOrderBy    :: !(Maybe Text)
-    , _rProject    :: !Text
-    , _rFilter     :: !(Maybe Text)
-    , _rPageToken  :: !(Maybe Text)
-    , _rMaxResults :: !(Textual Word32)
+-- /See:/ 'regionInstanceGroupManagersList' smart constructor.
+data RegionInstanceGroupManagersList = RegionInstanceGroupManagersList'
+    { _rigmlOrderBy    :: !(Maybe Text)
+    , _rigmlProject    :: !Text
+    , _rigmlFilter     :: !(Maybe Text)
+    , _rigmlRegion     :: !Text
+    , _rigmlPageToken  :: !(Maybe Text)
+    , _rigmlMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoutersAggregatedList' with the minimum fields required to make a request.
+-- | Creates a value of 'RegionInstanceGroupManagersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rOrderBy'
+-- * 'rigmlOrderBy'
 --
--- * 'rProject'
+-- * 'rigmlProject'
 --
--- * 'rFilter'
+-- * 'rigmlFilter'
 --
--- * 'rPageToken'
+-- * 'rigmlRegion'
 --
--- * 'rMaxResults'
-routersAggregatedList
-    :: Text -- ^ 'rProject'
-    -> RoutersAggregatedList
-routersAggregatedList pRProject_ =
-    RoutersAggregatedList'
-    { _rOrderBy = Nothing
-    , _rProject = pRProject_
-    , _rFilter = Nothing
-    , _rPageToken = Nothing
-    , _rMaxResults = 500
+-- * 'rigmlPageToken'
+--
+-- * 'rigmlMaxResults'
+regionInstanceGroupManagersList
+    :: Text -- ^ 'rigmlProject'
+    -> Text -- ^ 'rigmlRegion'
+    -> RegionInstanceGroupManagersList
+regionInstanceGroupManagersList pRigmlProject_ pRigmlRegion_ =
+    RegionInstanceGroupManagersList'
+    { _rigmlOrderBy = Nothing
+    , _rigmlProject = pRigmlProject_
+    , _rigmlFilter = Nothing
+    , _rigmlRegion = pRigmlRegion_
+    , _rigmlPageToken = Nothing
+    , _rigmlMaxResults = 500
     }
 
 -- | Sorts list results by a certain order. By default, results are returned
@@ -103,12 +112,14 @@ routersAggregatedList pRProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-rOrderBy :: Lens' RoutersAggregatedList (Maybe Text)
-rOrderBy = lens _rOrderBy (\ s a -> s{_rOrderBy = a})
+rigmlOrderBy :: Lens' RegionInstanceGroupManagersList (Maybe Text)
+rigmlOrderBy
+  = lens _rigmlOrderBy (\ s a -> s{_rigmlOrderBy = a})
 
 -- | Project ID for this request.
-rProject :: Lens' RoutersAggregatedList Text
-rProject = lens _rProject (\ s a -> s{_rProject = a})
+rigmlProject :: Lens' RegionInstanceGroupManagersList Text
+rigmlProject
+  = lens _rigmlProject (\ s a -> s{_rigmlProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: field_name
@@ -130,36 +141,49 @@ rProject = lens _rProject (\ s a -> s{_rProject = a})
 -- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
 -- expressions are treated as AND expressions, meaning that resources must
 -- match all expressions to pass the filters.
-rFilter :: Lens' RoutersAggregatedList (Maybe Text)
-rFilter = lens _rFilter (\ s a -> s{_rFilter = a})
+rigmlFilter :: Lens' RegionInstanceGroupManagersList (Maybe Text)
+rigmlFilter
+  = lens _rigmlFilter (\ s a -> s{_rigmlFilter = a})
+
+-- | Name of the region scoping this request.
+rigmlRegion :: Lens' RegionInstanceGroupManagersList Text
+rigmlRegion
+  = lens _rigmlRegion (\ s a -> s{_rigmlRegion = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-rPageToken :: Lens' RoutersAggregatedList (Maybe Text)
-rPageToken
-  = lens _rPageToken (\ s a -> s{_rPageToken = a})
+rigmlPageToken :: Lens' RegionInstanceGroupManagersList (Maybe Text)
+rigmlPageToken
+  = lens _rigmlPageToken
+      (\ s a -> s{_rigmlPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
 -- in subsequent list requests.
-rMaxResults :: Lens' RoutersAggregatedList Word32
-rMaxResults
-  = lens _rMaxResults (\ s a -> s{_rMaxResults = a}) .
-      _Coerce
+rigmlMaxResults :: Lens' RegionInstanceGroupManagersList Word32
+rigmlMaxResults
+  = lens _rigmlMaxResults
+      (\ s a -> s{_rigmlMaxResults = a})
+      . _Coerce
 
-instance GoogleRequest RoutersAggregatedList where
-        type Rs RoutersAggregatedList = RouterAggregatedList
-        type Scopes RoutersAggregatedList =
+instance GoogleRequest
+         RegionInstanceGroupManagersList where
+        type Rs RegionInstanceGroupManagersList =
+             RegionInstanceGroupManagerList
+        type Scopes RegionInstanceGroupManagersList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient RoutersAggregatedList'{..}
-          = go _rProject _rOrderBy _rFilter _rPageToken
-              (Just _rMaxResults)
+        requestClient RegionInstanceGroupManagersList'{..}
+          = go _rigmlProject _rigmlRegion _rigmlOrderBy
+              _rigmlFilter
+              _rigmlPageToken
+              (Just _rigmlMaxResults)
               (Just AltJSON)
               computeService
           where go
                   = buildClient
-                      (Proxy :: Proxy RoutersAggregatedListResource)
+                      (Proxy ::
+                         Proxy RegionInstanceGroupManagersListResource)
                       mempty

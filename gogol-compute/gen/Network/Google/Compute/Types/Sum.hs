@@ -178,6 +178,8 @@ data BackendServiceProtocol
       -- ^ @SSL@
     | TCP
       -- ^ @TCP@
+    | Udp
+      -- ^ @UDP@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BackendServiceProtocol
@@ -188,6 +190,7 @@ instance FromHttpApiData BackendServiceProtocol where
         "HTTPS" -> Right HTTPS
         "SSL" -> Right SSL
         "TCP" -> Right TCP
+        "UDP" -> Right Udp
         x -> Left ("Unable to parse BackendServiceProtocol from: " <> x)
 
 instance ToHttpApiData BackendServiceProtocol where
@@ -196,6 +199,7 @@ instance ToHttpApiData BackendServiceProtocol where
         HTTPS -> "HTTPS"
         SSL -> "SSL"
         TCP -> "TCP"
+        Udp -> "UDP"
 
 instance FromJSON BackendServiceProtocol where
     parseJSON = parseJSONText "BackendServiceProtocol"
@@ -259,6 +263,34 @@ instance FromJSON TargetSSLProxyProxyHeader where
 instance ToJSON TargetSSLProxyProxyHeader where
     toJSON = toJSONText
 
+-- | Instances in which state should be returned. Valid options are: \'ALL\',
+-- \'RUNNING\'. By default, it lists all instances.
+data RegionInstanceGroupsListInstancesRequestInstanceState
+    = All
+      -- ^ @ALL@
+    | Running
+      -- ^ @RUNNING@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable RegionInstanceGroupsListInstancesRequestInstanceState
+
+instance FromHttpApiData RegionInstanceGroupsListInstancesRequestInstanceState where
+    parseQueryParam = \case
+        "ALL" -> Right All
+        "RUNNING" -> Right Running
+        x -> Left ("Unable to parse RegionInstanceGroupsListInstancesRequestInstanceState from: " <> x)
+
+instance ToHttpApiData RegionInstanceGroupsListInstancesRequestInstanceState where
+    toQueryParam = \case
+        All -> "ALL"
+        Running -> "RUNNING"
+
+instance FromJSON RegionInstanceGroupsListInstancesRequestInstanceState where
+    parseJSON = parseJSONText "RegionInstanceGroupsListInstancesRequestInstanceState"
+
+instance ToJSON RegionInstanceGroupsListInstancesRequestInstanceState where
+    toJSON = toJSONText
+
 -- | The type of the image used to create this disk. The default and only
 -- value is RAW
 data ImageSourceType
@@ -291,6 +323,8 @@ instance ToJSON ImageSourceType where
 data BackendServiceSessionAffinity
     = BSSAClientIP
       -- ^ @CLIENT_IP@
+    | BSSAClientIPPortProto
+      -- ^ @CLIENT_IP_PORT_PROTO@
     | BSSAClientIPProto
       -- ^ @CLIENT_IP_PROTO@
     | BSSAGeneratedCookie
@@ -304,6 +338,7 @@ instance Hashable BackendServiceSessionAffinity
 instance FromHttpApiData BackendServiceSessionAffinity where
     parseQueryParam = \case
         "CLIENT_IP" -> Right BSSAClientIP
+        "CLIENT_IP_PORT_PROTO" -> Right BSSAClientIPPortProto
         "CLIENT_IP_PROTO" -> Right BSSAClientIPProto
         "GENERATED_COOKIE" -> Right BSSAGeneratedCookie
         "NONE" -> Right BSSANone
@@ -312,6 +347,7 @@ instance FromHttpApiData BackendServiceSessionAffinity where
 instance ToHttpApiData BackendServiceSessionAffinity where
     toQueryParam = \case
         BSSAClientIP -> "CLIENT_IP"
+        BSSAClientIPPortProto -> "CLIENT_IP_PORT_PROTO"
         BSSAClientIPProto -> "CLIENT_IP_PROTO"
         BSSAGeneratedCookie -> "GENERATED_COOKIE"
         BSSANone -> "NONE"
@@ -929,6 +965,41 @@ instance FromJSON TargetInstancesScopedListWarningCode where
 instance ToJSON TargetInstancesScopedListWarningCode where
     toJSON = toJSONText
 
+-- | The type of supported feature. Currenty only VIRTIO_SCSI_MULTIQUEUE is
+-- supported. For newer Windows images, the server might also populate this
+-- property with the value WINDOWS to indicate that this is a Windows
+-- image. This value is purely informational and does not enable or disable
+-- any features.
+data GuestOSFeatureType
+    = FeatureTypeUnspecified
+      -- ^ @FEATURE_TYPE_UNSPECIFIED@
+    | VirtioScsiMultiQueue
+      -- ^ @VIRTIO_SCSI_MULTIQUEUE@
+    | Windows
+      -- ^ @WINDOWS@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable GuestOSFeatureType
+
+instance FromHttpApiData GuestOSFeatureType where
+    parseQueryParam = \case
+        "FEATURE_TYPE_UNSPECIFIED" -> Right FeatureTypeUnspecified
+        "VIRTIO_SCSI_MULTIQUEUE" -> Right VirtioScsiMultiQueue
+        "WINDOWS" -> Right Windows
+        x -> Left ("Unable to parse GuestOSFeatureType from: " <> x)
+
+instance ToHttpApiData GuestOSFeatureType where
+    toQueryParam = \case
+        FeatureTypeUnspecified -> "FEATURE_TYPE_UNSPECIFIED"
+        VirtioScsiMultiQueue -> "VIRTIO_SCSI_MULTIQUEUE"
+        Windows -> "WINDOWS"
+
+instance FromJSON GuestOSFeatureType where
+    parseJSON = parseJSONText "GuestOSFeatureType"
+
+instance ToJSON GuestOSFeatureType where
+    toJSON = toJSONText
+
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
 -- returns NO_RESULTS_ON_PAGE if there are no results in the response.
 data RouteWarningsItemCode
@@ -1424,14 +1495,44 @@ instance FromJSON AccessConfigType where
 instance ToJSON AccessConfigType where
     toJSON = toJSONText
 
+data BackendServiceLoadBalancingScheme
+    = External
+      -- ^ @EXTERNAL@
+    | Internal
+      -- ^ @INTERNAL@
+    | InvalidLoadBalancingScheme
+      -- ^ @INVALID_LOAD_BALANCING_SCHEME@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BackendServiceLoadBalancingScheme
+
+instance FromHttpApiData BackendServiceLoadBalancingScheme where
+    parseQueryParam = \case
+        "EXTERNAL" -> Right External
+        "INTERNAL" -> Right Internal
+        "INVALID_LOAD_BALANCING_SCHEME" -> Right InvalidLoadBalancingScheme
+        x -> Left ("Unable to parse BackendServiceLoadBalancingScheme from: " <> x)
+
+instance ToHttpApiData BackendServiceLoadBalancingScheme where
+    toQueryParam = \case
+        External -> "EXTERNAL"
+        Internal -> "INTERNAL"
+        InvalidLoadBalancingScheme -> "INVALID_LOAD_BALANCING_SCHEME"
+
+instance FromJSON BackendServiceLoadBalancingScheme where
+    parseJSON = parseJSONText "BackendServiceLoadBalancingScheme"
+
+instance ToJSON BackendServiceLoadBalancingScheme where
+    toJSON = toJSONText
+
 -- | [Output Only] The status of the operation, which can be one of the
 -- following: PENDING, RUNNING, or DONE.
 data OperationStatus
-    = Done
+    = OSDone
       -- ^ @DONE@
-    | Pending
+    | OSPending
       -- ^ @PENDING@
-    | Running
+    | OSRunning
       -- ^ @RUNNING@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -1439,16 +1540,16 @@ instance Hashable OperationStatus
 
 instance FromHttpApiData OperationStatus where
     parseQueryParam = \case
-        "DONE" -> Right Done
-        "PENDING" -> Right Pending
-        "RUNNING" -> Right Running
+        "DONE" -> Right OSDone
+        "PENDING" -> Right OSPending
+        "RUNNING" -> Right OSRunning
         x -> Left ("Unable to parse OperationStatus from: " <> x)
 
 instance ToHttpApiData OperationStatus where
     toQueryParam = \case
-        Done -> "DONE"
-        Pending -> "PENDING"
-        Running -> "RUNNING"
+        OSDone -> "DONE"
+        OSPending -> "PENDING"
+        OSRunning -> "RUNNING"
 
 instance FromJSON OperationStatus where
     parseJSON = parseJSONText "OperationStatus"
@@ -1625,6 +1726,34 @@ instance FromJSON ManagedInstanceInstanceStatus where
     parseJSON = parseJSONText "ManagedInstanceInstanceStatus"
 
 instance ToJSON ManagedInstanceInstanceStatus where
+    toJSON = toJSONText
+
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+data HTTPHealthCheckProxyHeader
+    = HTTPHCPHNone
+      -- ^ @NONE@
+    | HTTPHCPHProxyV1
+      -- ^ @PROXY_V1@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTPHealthCheckProxyHeader
+
+instance FromHttpApiData HTTPHealthCheckProxyHeader where
+    parseQueryParam = \case
+        "NONE" -> Right HTTPHCPHNone
+        "PROXY_V1" -> Right HTTPHCPHProxyV1
+        x -> Left ("Unable to parse HTTPHealthCheckProxyHeader from: " <> x)
+
+instance ToHttpApiData HTTPHealthCheckProxyHeader where
+    toQueryParam = \case
+        HTTPHCPHNone -> "NONE"
+        HTTPHCPHProxyV1 -> "PROXY_V1"
+
+instance FromJSON HTTPHealthCheckProxyHeader where
+    parseJSON = parseJSONText "HTTPHealthCheckProxyHeader"
+
+instance ToJSON HTTPHealthCheckProxyHeader where
     toJSON = toJSONText
 
 -- | The mode in which to attach this disk, either READ_WRITE or READ_ONLY.
@@ -1910,6 +2039,34 @@ instance FromJSON InstanceGroupsListInstancesRequestInstanceState where
 instance ToJSON InstanceGroupsListInstancesRequestInstanceState where
     toJSON = toJSONText
 
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+data HTTPSHealthCheckProxyHeader
+    = HHCPHNone
+      -- ^ @NONE@
+    | HHCPHProxyV1
+      -- ^ @PROXY_V1@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable HTTPSHealthCheckProxyHeader
+
+instance FromHttpApiData HTTPSHealthCheckProxyHeader where
+    parseQueryParam = \case
+        "NONE" -> Right HHCPHNone
+        "PROXY_V1" -> Right HHCPHProxyV1
+        x -> Left ("Unable to parse HTTPSHealthCheckProxyHeader from: " <> x)
+
+instance ToHttpApiData HTTPSHealthCheckProxyHeader where
+    toQueryParam = \case
+        HHCPHNone -> "NONE"
+        HHCPHProxyV1 -> "PROXY_V1"
+
+instance FromJSON HTTPSHealthCheckProxyHeader where
+    parseJSON = parseJSONText "HTTPSHealthCheckProxyHeader"
+
+instance ToJSON HTTPSHealthCheckProxyHeader where
+    toJSON = toJSONText
+
 -- | Specifies the disk interface to use for attaching this disk, which is
 -- either SCSI or NVME. The default is SCSI. Persistent disks must always
 -- use SCSI and the request will fail if you attempt to attach a persistent
@@ -1942,15 +2099,13 @@ instance FromJSON AttachedDiskInterface where
 instance ToJSON AttachedDiskInterface where
     toJSON = toJSONText
 
--- | Specifies the type of the healthCheck, either TCP, UDP, SSL, HTTP, HTTPS
--- or HTTP2. If not specified, the default is TCP. Exactly one of the
+-- | Specifies the type of the healthCheck, either TCP, SSL, HTTP or HTTPS.
+-- If not specified, the default is TCP. Exactly one of the
 -- protocol-specific health check field must be specified, which must match
 -- type field.
 data HealthCheckType
     = HCTHTTP
       -- ^ @HTTP@
-    | HCTHTTP2
-      -- ^ @HTTP2@
     | HCTHTTPS
       -- ^ @HTTPS@
     | HCTInvalid
@@ -1966,7 +2121,6 @@ instance Hashable HealthCheckType
 instance FromHttpApiData HealthCheckType where
     parseQueryParam = \case
         "HTTP" -> Right HCTHTTP
-        "HTTP2" -> Right HCTHTTP2
         "HTTPS" -> Right HCTHTTPS
         "INVALID" -> Right HCTInvalid
         "SSL" -> Right HCTSSL
@@ -1976,7 +2130,6 @@ instance FromHttpApiData HealthCheckType where
 instance ToHttpApiData HealthCheckType where
     toQueryParam = \case
         HCTHTTP -> "HTTP"
-        HCTHTTP2 -> "HTTP2"
         HCTHTTPS -> "HTTPS"
         HCTInvalid -> "INVALID"
         HCTSSL -> "SSL"
@@ -2163,6 +2316,8 @@ data QuotaMetric
       -- ^ @TARGET_SSL_PROXIES@
     | TargetVPNGateways
       -- ^ @TARGET_VPN_GATEWAYS@
+    | TotalCPUs
+      -- ^ @TOTAL_CPUS@
     | URLMaps
       -- ^ @URL_MAPS@
     | VPNTunnels
@@ -2204,6 +2359,7 @@ instance FromHttpApiData QuotaMetric where
         "TARGET_POOLS" -> Right TargetPools
         "TARGET_SSL_PROXIES" -> Right TargetSSLProxies
         "TARGET_VPN_GATEWAYS" -> Right TargetVPNGateways
+        "TOTAL_CPUS" -> Right TotalCPUs
         "URL_MAPS" -> Right URLMaps
         "VPN_TUNNELS" -> Right VPNTunnels
         x -> Left ("Unable to parse QuotaMetric from: " <> x)
@@ -2241,6 +2397,7 @@ instance ToHttpApiData QuotaMetric where
         TargetPools -> "TARGET_POOLS"
         TargetSSLProxies -> "TARGET_SSL_PROXIES"
         TargetVPNGateways -> "TARGET_VPN_GATEWAYS"
+        TotalCPUs -> "TOTAL_CPUS"
         URLMaps -> "URL_MAPS"
         VPNTunnels -> "VPN_TUNNELS"
 
@@ -2555,6 +2712,41 @@ instance FromJSON AutoscalersScopedListWarningCode where
 instance ToJSON AutoscalersScopedListWarningCode where
     toJSON = toJSONText
 
+-- | This signifies what the ForwardingRule will be used for and can only
+-- take the following values: INTERNAL EXTERNAL The value of INTERNAL means
+-- that this will be used for Internal Network Load Balancing (TCP, UDP).
+-- The value of EXTERNAL means that this will be used for External Load
+-- Balancing (HTTP(S) LB, External TCP\/UDP LB, SSL Proxy)
+data ForwardingRuleLoadBalancingScheme
+    = FRLBSExternal
+      -- ^ @EXTERNAL@
+    | FRLBSInternal
+      -- ^ @INTERNAL@
+    | FRLBSInvalid
+      -- ^ @INVALID@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ForwardingRuleLoadBalancingScheme
+
+instance FromHttpApiData ForwardingRuleLoadBalancingScheme where
+    parseQueryParam = \case
+        "EXTERNAL" -> Right FRLBSExternal
+        "INTERNAL" -> Right FRLBSInternal
+        "INVALID" -> Right FRLBSInvalid
+        x -> Left ("Unable to parse ForwardingRuleLoadBalancingScheme from: " <> x)
+
+instance ToHttpApiData ForwardingRuleLoadBalancingScheme where
+    toQueryParam = \case
+        FRLBSExternal -> "EXTERNAL"
+        FRLBSInternal -> "INTERNAL"
+        FRLBSInvalid -> "INVALID"
+
+instance FromJSON ForwardingRuleLoadBalancingScheme where
+    parseJSON = parseJSONText "ForwardingRuleLoadBalancingScheme"
+
+instance ToJSON ForwardingRuleLoadBalancingScheme where
+    toJSON = toJSONText
+
 -- | Status of the BGP peer: {UP, DOWN}
 data RouterStatusBGPPeerStatusStatus
     = RSBPSSDown
@@ -2668,34 +2860,6 @@ instance FromJSON VPNTunnelsScopedListWarningCode where
     parseJSON = parseJSONText "VPNTunnelsScopedListWarningCode"
 
 instance ToJSON VPNTunnelsScopedListWarningCode where
-    toJSON = toJSONText
-
--- | Specifies the type of proxy header to append before sending data to the
--- backend, either NONE or PROXY_V1. The default is NONE.
-data HTTP2HealthCheckProxyHeader
-    = HTTPHCPHNone
-      -- ^ @NONE@
-    | HTTPHCPHProxyV1
-      -- ^ @PROXY_V1@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable HTTP2HealthCheckProxyHeader
-
-instance FromHttpApiData HTTP2HealthCheckProxyHeader where
-    parseQueryParam = \case
-        "NONE" -> Right HTTPHCPHNone
-        "PROXY_V1" -> Right HTTPHCPHProxyV1
-        x -> Left ("Unable to parse HTTP2HealthCheckProxyHeader from: " <> x)
-
-instance ToHttpApiData HTTP2HealthCheckProxyHeader where
-    toQueryParam = \case
-        HTTPHCPHNone -> "NONE"
-        HTTPHCPHProxyV1 -> "PROXY_V1"
-
-instance FromJSON HTTP2HealthCheckProxyHeader where
-    parseJSON = parseJSONText "HTTP2HealthCheckProxyHeader"
-
-instance ToJSON HTTP2HealthCheckProxyHeader where
     toJSON = toJSONText
 
 -- | [Output Only] A warning code, if applicable. For example, Compute Engine
@@ -2945,6 +3109,90 @@ instance FromJSON InstancesScopedListWarningCode where
 instance ToJSON InstancesScopedListWarningCode where
     toJSON = toJSONText
 
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+data BackendServicesScopedListWarningCode
+    = BSSLWCCleanupFailed
+      -- ^ @CLEANUP_FAILED@
+    | BSSLWCDeprecatedResourceUsed
+      -- ^ @DEPRECATED_RESOURCE_USED@
+    | BSSLWCDiskSizeLargerThanImageSize
+      -- ^ @DISK_SIZE_LARGER_THAN_IMAGE_SIZE@
+    | BSSLWCFieldValueOverriden
+      -- ^ @FIELD_VALUE_OVERRIDEN@
+    | BSSLWCInjectedKernelsDeprecated
+      -- ^ @INJECTED_KERNELS_DEPRECATED@
+    | BSSLWCNextHopAddressNotAssigned
+      -- ^ @NEXT_HOP_ADDRESS_NOT_ASSIGNED@
+    | BSSLWCNextHopCannotIPForward
+      -- ^ @NEXT_HOP_CANNOT_IP_FORWARD@
+    | BSSLWCNextHopInstanceNotFound
+      -- ^ @NEXT_HOP_INSTANCE_NOT_FOUND@
+    | BSSLWCNextHopInstanceNotOnNetwork
+      -- ^ @NEXT_HOP_INSTANCE_NOT_ON_NETWORK@
+    | BSSLWCNextHopNotRunning
+      -- ^ @NEXT_HOP_NOT_RUNNING@
+    | BSSLWCNotCriticalError
+      -- ^ @NOT_CRITICAL_ERROR@
+    | BSSLWCNoResultsOnPage
+      -- ^ @NO_RESULTS_ON_PAGE@
+    | BSSLWCRequiredTosAgreement
+      -- ^ @REQUIRED_TOS_AGREEMENT@
+    | BSSLWCResourceNotDeleted
+      -- ^ @RESOURCE_NOT_DELETED@
+    | BSSLWCSingleInstancePropertyTemplate
+      -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
+    | BSSLWCUnreachable
+      -- ^ @UNREACHABLE@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BackendServicesScopedListWarningCode
+
+instance FromHttpApiData BackendServicesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right BSSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right BSSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right BSSLWCDiskSizeLargerThanImageSize
+        "FIELD_VALUE_OVERRIDEN" -> Right BSSLWCFieldValueOverriden
+        "INJECTED_KERNELS_DEPRECATED" -> Right BSSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right BSSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right BSSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right BSSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right BSSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right BSSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right BSSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right BSSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right BSSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right BSSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right BSSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right BSSLWCUnreachable
+        x -> Left ("Unable to parse BackendServicesScopedListWarningCode from: " <> x)
+
+instance ToHttpApiData BackendServicesScopedListWarningCode where
+    toQueryParam = \case
+        BSSLWCCleanupFailed -> "CLEANUP_FAILED"
+        BSSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
+        BSSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
+        BSSLWCFieldValueOverriden -> "FIELD_VALUE_OVERRIDEN"
+        BSSLWCInjectedKernelsDeprecated -> "INJECTED_KERNELS_DEPRECATED"
+        BSSLWCNextHopAddressNotAssigned -> "NEXT_HOP_ADDRESS_NOT_ASSIGNED"
+        BSSLWCNextHopCannotIPForward -> "NEXT_HOP_CANNOT_IP_FORWARD"
+        BSSLWCNextHopInstanceNotFound -> "NEXT_HOP_INSTANCE_NOT_FOUND"
+        BSSLWCNextHopInstanceNotOnNetwork -> "NEXT_HOP_INSTANCE_NOT_ON_NETWORK"
+        BSSLWCNextHopNotRunning -> "NEXT_HOP_NOT_RUNNING"
+        BSSLWCNotCriticalError -> "NOT_CRITICAL_ERROR"
+        BSSLWCNoResultsOnPage -> "NO_RESULTS_ON_PAGE"
+        BSSLWCRequiredTosAgreement -> "REQUIRED_TOS_AGREEMENT"
+        BSSLWCResourceNotDeleted -> "RESOURCE_NOT_DELETED"
+        BSSLWCSingleInstancePropertyTemplate -> "SINGLE_INSTANCE_PROPERTY_TEMPLATE"
+        BSSLWCUnreachable -> "UNREACHABLE"
+
+instance FromJSON BackendServicesScopedListWarningCode where
+    parseJSON = parseJSONText "BackendServicesScopedListWarningCode"
+
+instance ToJSON BackendServicesScopedListWarningCode where
+    toJSON = toJSONText
+
 -- | Sesssion affinity option, must be one of the following values: NONE:
 -- Connections from the same client IP may go to any instance in the pool.
 -- CLIENT_IP: Connections from the same client IP will go to the same
@@ -2955,6 +3203,8 @@ instance ToJSON InstancesScopedListWarningCode where
 data TargetPoolSessionAffinity
     = TPSAClientIP
       -- ^ @CLIENT_IP@
+    | TPSAClientIPPortProto
+      -- ^ @CLIENT_IP_PORT_PROTO@
     | TPSAClientIPProto
       -- ^ @CLIENT_IP_PROTO@
     | TPSAGeneratedCookie
@@ -2968,6 +3218,7 @@ instance Hashable TargetPoolSessionAffinity
 instance FromHttpApiData TargetPoolSessionAffinity where
     parseQueryParam = \case
         "CLIENT_IP" -> Right TPSAClientIP
+        "CLIENT_IP_PORT_PROTO" -> Right TPSAClientIPPortProto
         "CLIENT_IP_PROTO" -> Right TPSAClientIPProto
         "GENERATED_COOKIE" -> Right TPSAGeneratedCookie
         "NONE" -> Right TPSANone
@@ -2976,6 +3227,7 @@ instance FromHttpApiData TargetPoolSessionAffinity where
 instance ToHttpApiData TargetPoolSessionAffinity where
     toQueryParam = \case
         TPSAClientIP -> "CLIENT_IP"
+        TPSAClientIPPortProto -> "CLIENT_IP_PORT_PROTO"
         TPSAClientIPProto -> "CLIENT_IP_PROTO"
         TPSAGeneratedCookie -> "GENERATED_COOKIE"
         TPSANone -> "NONE"

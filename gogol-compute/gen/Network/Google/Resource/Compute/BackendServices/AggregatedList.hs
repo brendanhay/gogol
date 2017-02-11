@@ -13,87 +13,88 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
--- Module      : Network.Google.Resource.Compute.Routes.List
+-- Module      : Network.Google.Resource.Compute.BackendServices.AggregatedList
 -- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the list of Route resources available to the specified
--- project.
+-- Retrieves the list of all BackendService resources, regional and global,
+-- available to the specified project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.list@.
-module Network.Google.Resource.Compute.Routes.List
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.aggregatedList@.
+module Network.Google.Resource.Compute.BackendServices.AggregatedList
     (
     -- * REST Resource
-      RoutesListResource
+      BackendServicesAggregatedListResource
 
     -- * Creating a Request
-    , routesList
-    , RoutesList
+    , backendServicesAggregatedList
+    , BackendServicesAggregatedList
 
     -- * Request Lenses
-    , rllOrderBy
-    , rllProject
-    , rllFilter
-    , rllPageToken
-    , rllMaxResults
+    , bsalOrderBy
+    , bsalProject
+    , bsalFilter
+    , bsalPageToken
+    , bsalMaxResults
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @compute.routes.list@ method which the
--- 'RoutesList' request conforms to.
-type RoutesListResource =
+-- | A resource alias for @compute.backendServices.aggregatedList@ method which the
+-- 'BackendServicesAggregatedList' request conforms to.
+type BackendServicesAggregatedListResource =
      "compute" :>
        "v1" :>
          "projects" :>
            Capture "project" Text :>
-             "global" :>
-               "routes" :>
+             "aggregated" :>
+               "backendServices" :>
                  QueryParam "orderBy" Text :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
                        QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] RouteList
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] BackendServiceAggregatedList
 
--- | Retrieves the list of Route resources available to the specified
--- project.
+-- | Retrieves the list of all BackendService resources, regional and global,
+-- available to the specified project.
 --
--- /See:/ 'routesList' smart constructor.
-data RoutesList = RoutesList'
-    { _rllOrderBy    :: !(Maybe Text)
-    , _rllProject    :: !Text
-    , _rllFilter     :: !(Maybe Text)
-    , _rllPageToken  :: !(Maybe Text)
-    , _rllMaxResults :: !(Textual Word32)
+-- /See:/ 'backendServicesAggregatedList' smart constructor.
+data BackendServicesAggregatedList = BackendServicesAggregatedList'
+    { _bsalOrderBy    :: !(Maybe Text)
+    , _bsalProject    :: !Text
+    , _bsalFilter     :: !(Maybe Text)
+    , _bsalPageToken  :: !(Maybe Text)
+    , _bsalMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoutesList' with the minimum fields required to make a request.
+-- | Creates a value of 'BackendServicesAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rllOrderBy'
+-- * 'bsalOrderBy'
 --
--- * 'rllProject'
+-- * 'bsalProject'
 --
--- * 'rllFilter'
+-- * 'bsalFilter'
 --
--- * 'rllPageToken'
+-- * 'bsalPageToken'
 --
--- * 'rllMaxResults'
-routesList
-    :: Text -- ^ 'rllProject'
-    -> RoutesList
-routesList pRllProject_ =
-    RoutesList'
-    { _rllOrderBy = Nothing
-    , _rllProject = pRllProject_
-    , _rllFilter = Nothing
-    , _rllPageToken = Nothing
-    , _rllMaxResults = 500
+-- * 'bsalMaxResults'
+backendServicesAggregatedList
+    :: Text -- ^ 'bsalProject'
+    -> BackendServicesAggregatedList
+backendServicesAggregatedList pBsalProject_ =
+    BackendServicesAggregatedList'
+    { _bsalOrderBy = Nothing
+    , _bsalProject = pBsalProject_
+    , _bsalFilter = Nothing
+    , _bsalPageToken = Nothing
+    , _bsalMaxResults = 500
     }
 
 -- | Sorts list results by a certain order. By default, results are returned
@@ -104,14 +105,14 @@ routesList pRllProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-rllOrderBy :: Lens' RoutesList (Maybe Text)
-rllOrderBy
-  = lens _rllOrderBy (\ s a -> s{_rllOrderBy = a})
+bsalOrderBy :: Lens' BackendServicesAggregatedList (Maybe Text)
+bsalOrderBy
+  = lens _bsalOrderBy (\ s a -> s{_bsalOrderBy = a})
 
--- | Project ID for this request.
-rllProject :: Lens' RoutesList Text
-rllProject
-  = lens _rllProject (\ s a -> s{_rllProject = a})
+-- | Name of the project scoping this request.
+bsalProject :: Lens' BackendServicesAggregatedList Text
+bsalProject
+  = lens _bsalProject (\ s a -> s{_bsalProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: field_name
@@ -133,37 +134,43 @@ rllProject
 -- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
 -- expressions are treated as AND expressions, meaning that resources must
 -- match all expressions to pass the filters.
-rllFilter :: Lens' RoutesList (Maybe Text)
-rllFilter
-  = lens _rllFilter (\ s a -> s{_rllFilter = a})
+bsalFilter :: Lens' BackendServicesAggregatedList (Maybe Text)
+bsalFilter
+  = lens _bsalFilter (\ s a -> s{_bsalFilter = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-rllPageToken :: Lens' RoutesList (Maybe Text)
-rllPageToken
-  = lens _rllPageToken (\ s a -> s{_rllPageToken = a})
+bsalPageToken :: Lens' BackendServicesAggregatedList (Maybe Text)
+bsalPageToken
+  = lens _bsalPageToken
+      (\ s a -> s{_bsalPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
 -- in subsequent list requests.
-rllMaxResults :: Lens' RoutesList Word32
-rllMaxResults
-  = lens _rllMaxResults
-      (\ s a -> s{_rllMaxResults = a})
+bsalMaxResults :: Lens' BackendServicesAggregatedList Word32
+bsalMaxResults
+  = lens _bsalMaxResults
+      (\ s a -> s{_bsalMaxResults = a})
       . _Coerce
 
-instance GoogleRequest RoutesList where
-        type Rs RoutesList = RouteList
-        type Scopes RoutesList =
+instance GoogleRequest BackendServicesAggregatedList
+         where
+        type Rs BackendServicesAggregatedList =
+             BackendServiceAggregatedList
+        type Scopes BackendServicesAggregatedList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient RoutesList'{..}
-          = go _rllProject _rllOrderBy _rllFilter _rllPageToken
-              (Just _rllMaxResults)
+        requestClient BackendServicesAggregatedList'{..}
+          = go _bsalProject _bsalOrderBy _bsalFilter
+              _bsalPageToken
+              (Just _bsalMaxResults)
               (Just AltJSON)
               computeService
           where go
-                  = buildClient (Proxy :: Proxy RoutesListResource)
+                  = buildClient
+                      (Proxy ::
+                         Proxy BackendServicesAggregatedListResource)
                       mempty

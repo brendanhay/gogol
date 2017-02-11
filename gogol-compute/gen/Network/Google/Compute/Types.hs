@@ -48,6 +48,11 @@ module Network.Google.Compute.Types
     , rsrKind
     , rsrResult
 
+    -- * RegionInstanceGroupManagersDeleteInstancesRequest
+    , RegionInstanceGroupManagersDeleteInstancesRequest
+    , regionInstanceGroupManagersDeleteInstancesRequest
+    , rigmdirInstances
+
     -- * AddressesScopedList
     , AddressesScopedList
     , addressesScopedList
@@ -62,6 +67,12 @@ module Network.Google.Compute.Types
 
     -- * SchedulingOnHostMaintenance
     , SchedulingOnHostMaintenance (..)
+
+    -- * RegionInstanceGroupsListInstancesRequest
+    , RegionInstanceGroupsListInstancesRequest
+    , regionInstanceGroupsListInstancesRequest
+    , riglirInstanceState
+    , riglirPortName
 
     -- * AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
     , AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType (..)
@@ -105,6 +116,18 @@ module Network.Google.Compute.Types
     , islwData
     , islwCode
     , islwMessage
+
+    -- * RegionInstanceGroupManagersRecreateRequest
+    , RegionInstanceGroupManagersRecreateRequest
+    , regionInstanceGroupManagersRecreateRequest
+    , rigmrrInstances
+
+    -- * BackendServicesScopedListWarning
+    , BackendServicesScopedListWarning
+    , backendServicesScopedListWarning
+    , bsslwData
+    , bsslwCode
+    , bsslwMessage
 
     -- * InstanceGroupList
     , InstanceGroupList
@@ -228,6 +251,15 @@ module Network.Google.Compute.Types
     , targetPoolsAddInstanceRequest
     , tpairInstances
 
+    -- * RegionAutoscalerList
+    , RegionAutoscalerList
+    , regionAutoscalerList
+    , rNextPageToken
+    , rKind
+    , rItems
+    , rSelfLink
+    , rId
+
     -- * InstanceGroupsAddInstancesRequest
     , InstanceGroupsAddInstancesRequest
     , instanceGroupsAddInstancesRequest
@@ -262,6 +294,7 @@ module Network.Google.Compute.Types
     , iSourceDiskId
     , iKind
     , iSourceDiskEncryptionKey
+    , iGuestOSFeatures
     , iArchiveSizeBytes
     , iFamily
     , iRawDisk
@@ -329,7 +362,6 @@ module Network.Google.Compute.Types
     , healthCheck
     , hcHealthyThreshold
     , hcTCPHealthCheck
-    , hcHTTP2HealthCheck
     , hcKind
     , hcSSLHealthCheck
     , hcSelfLink
@@ -394,6 +426,9 @@ module Network.Google.Compute.Types
     , namedPort
     , npName
     , npPort
+
+    -- * RegionInstanceGroupsListInstancesRequestInstanceState
+    , RegionInstanceGroupsListInstancesRequestInstanceState (..)
 
     -- * TargetInstanceList
     , TargetInstanceList
@@ -501,16 +536,21 @@ module Network.Google.Compute.Types
     , ForwardingRule
     , forwardingRule
     , frIPAddress
+    , frLoadBalancingScheme
     , frKind
+    , frNetwork
     , frPortRange
     , frSelfLink
     , frName
     , frIPProtocol
     , frCreationTimestamp
+    , frSubnetwork
+    , frPorts
     , frId
     , frRegion
     , frDescription
     , frTarget
+    , frBackendService
 
     -- * URLMapList
     , URLMapList
@@ -556,6 +596,11 @@ module Network.Google.Compute.Types
     , pId
     , pDescription
     , pCommonInstanceMetadata
+
+    -- * RegionInstanceGroupManagersListInstancesResponse
+    , RegionInstanceGroupManagersListInstancesResponse
+    , regionInstanceGroupManagersListInstancesResponse
+    , rigmlirManagedInstances
 
     -- * Operation
     , Operation
@@ -656,6 +701,15 @@ module Network.Google.Compute.Types
     , igmInstanceGroup
     , igmNamedPorts
 
+    -- * RegionInstanceGroupsListInstances
+    , RegionInstanceGroupsListInstances
+    , regionInstanceGroupsListInstances
+    , rigliNextPageToken
+    , rigliKind
+    , rigliItems
+    , rigliSelfLink
+    , rigliId
+
     -- * TCPHealthCheck
     , TCPHealthCheck
     , tcpHealthCheck
@@ -691,6 +745,11 @@ module Network.Google.Compute.Types
     -- * TargetInstancesScopedListWarningCode
     , TargetInstancesScopedListWarningCode (..)
 
+    -- * BackendServiceAggregatedListItems
+    , BackendServiceAggregatedListItems
+    , backendServiceAggregatedListItems
+    , bsaliAddtional
+
     -- * InstanceAggregatedListItems
     , InstanceAggregatedListItems
     , instanceAggregatedListItems
@@ -716,6 +775,9 @@ module Network.Google.Compute.Types
     , ManagedInstanceLastAttemptErrors
     , managedInstanceLastAttemptErrors
     , milaeErrors
+
+    -- * GuestOSFeatureType
+    , GuestOSFeatureType (..)
 
     -- * RouteWarningsItemCode
     , RouteWarningsItemCode (..)
@@ -778,15 +840,6 @@ module Network.Google.Compute.Types
     , ipDescription
     , ipTags
 
-    -- * HTTP2HealthCheck
-    , HTTP2HealthCheck
-    , hTTP2HealthCheck
-    , httphcRequestPath
-    , httphcHost
-    , httphcProxyHeader
-    , httphcPortName
-    , httphcPort
-
     -- * DiskTypesScopedListWarning
     , DiskTypesScopedListWarning
     , diskTypesScopedListWarning
@@ -818,6 +871,7 @@ module Network.Google.Compute.Types
     -- * NetworkInterface
     , NetworkInterface
     , networkInterface
+    , niKind
     , niNetwork
     , niName
     , niNetworkIP
@@ -828,6 +882,12 @@ module Network.Google.Compute.Types
     , TargetPoolsRemoveHealthCheckRequest
     , targetPoolsRemoveHealthCheckRequest
     , tprhcrHealthChecks
+
+    -- * RegionInstanceGroupManagersSetTargetPoolsRequest
+    , RegionInstanceGroupManagersSetTargetPoolsRequest
+    , regionInstanceGroupManagersSetTargetPoolsRequest
+    , rigmstprFingerprint
+    , rigmstprTargetPools
 
     -- * TargetSSLProxyList
     , TargetSSLProxyList
@@ -871,17 +931,17 @@ module Network.Google.Compute.Types
     -- * Router
     , Router
     , router
-    , rBGPPeers
-    , rBGP
-    , rKind
-    , rNetwork
-    , rInterfaces
-    , rSelfLink
-    , rName
-    , rCreationTimestamp
-    , rId
-    , rRegion
-    , rDescription
+    , rouBGPPeers
+    , rouBGP
+    , rouKind
+    , rouNetwork
+    , rouInterfaces
+    , rouSelfLink
+    , rouName
+    , rouCreationTimestamp
+    , rouId
+    , rouRegion
+    , rouDescription
 
     -- * RoutersScopedListWarningCode
     , RoutersScopedListWarningCode (..)
@@ -921,6 +981,15 @@ module Network.Google.Compute.Types
     , firewallAllowedItem
     , faiIPProtocol
     , faiPorts
+
+    -- * BackendServiceAggregatedList
+    , BackendServiceAggregatedList
+    , backendServiceAggregatedList
+    , bsalNextPageToken
+    , bsalKind
+    , bsalItems
+    , bsalSelfLink
+    , bsalId
 
     -- * Network
     , Network
@@ -1010,6 +1079,12 @@ module Network.Google.Compute.Types
     , routerBGP
     , rbASN
 
+    -- * BackendServicesScopedList
+    , BackendServicesScopedList
+    , backendServicesScopedList
+    , bsslWarning
+    , bsslBackendServices
+
     -- * InstanceGroupManagersRecreateInstancesRequest
     , InstanceGroupManagersRecreateInstancesRequest
     , instanceGroupManagersRecreateInstancesRequest
@@ -1025,6 +1100,9 @@ module Network.Google.Compute.Types
     , instancesScopedList
     , islWarning
     , islInstances
+
+    -- * BackendServiceLoadBalancingScheme
+    , BackendServiceLoadBalancingScheme (..)
 
     -- * HealthCheckReference
     , HealthCheckReference
@@ -1051,22 +1129,22 @@ module Network.Google.Compute.Types
     -- * Route
     , Route
     , route
-    , rouPriority
-    , rouKind
-    , rouNextHopGateway
-    , rouNextHopNetwork
-    , rouNetwork
-    , rouWarnings
-    , rouNextHopIP
-    , rouDestRange
-    , rouSelfLink
-    , rouName
-    , rouCreationTimestamp
-    , rouId
-    , rouNextHopVPNTunnel
-    , rouDescription
-    , rouTags
-    , rouNextHopInstance
+    , rrPriority
+    , rrKind
+    , rrNextHopGateway
+    , rrNextHopNetwork
+    , rrNetwork
+    , rrWarnings
+    , rrNextHopIP
+    , rrDestRange
+    , rrSelfLink
+    , rrName
+    , rrCreationTimestamp
+    , rrId
+    , rrNextHopVPNTunnel
+    , rrDescription
+    , rrTags
+    , rrNextHopInstance
 
     -- * TargetVPNGatewaysScopedListWarningDataItem
     , TargetVPNGatewaysScopedListWarningDataItem
@@ -1135,6 +1213,9 @@ module Network.Google.Compute.Types
 
     -- * ManagedInstanceInstanceStatus
     , ManagedInstanceInstanceStatus (..)
+
+    -- * HTTPHealthCheckProxyHeader
+    , HTTPHealthCheckProxyHeader (..)
 
     -- * URLMapsValidateResponse
     , URLMapsValidateResponse
@@ -1212,6 +1293,11 @@ module Network.Google.Compute.Types
     , rbpAdvertisedRoutePriority
     , rbpPeerASN
     , rbpName
+
+    -- * SubnetworksExpandIPCIdRRangeRequest
+    , SubnetworksExpandIPCIdRRangeRequest
+    , subnetworksExpandIPCIdRRangeRequest
+    , seicirrrIPCIdRRange
 
     -- * ManagedInstance
     , ManagedInstance
@@ -1295,6 +1381,11 @@ module Network.Google.Compute.Types
     , saEmail
     , saScopes
 
+    -- * RegionInstanceGroupManagersAbandonInstancesRequest
+    , RegionInstanceGroupManagersAbandonInstancesRequest
+    , regionInstanceGroupManagersAbandonInstancesRequest
+    , rigmairInstances
+
     -- * NetworkList
     , NetworkList
     , networkList
@@ -1311,6 +1402,15 @@ module Network.Google.Compute.Types
 
     -- * BackendBalancingMode
     , BackendBalancingMode (..)
+
+    -- * RegionInstanceGroupList
+    , RegionInstanceGroupList
+    , regionInstanceGroupList
+    , riglNextPageToken
+    , riglKind
+    , riglItems
+    , riglSelfLink
+    , riglId
 
     -- * TargetPoolAggregatedListItems
     , TargetPoolAggregatedListItems
@@ -1376,6 +1476,12 @@ module Network.Google.Compute.Types
     , dtlSelfLink
     , dtlId
 
+    -- * RegionInstanceGroupsSetNamedPortsRequest
+    , RegionInstanceGroupsSetNamedPortsRequest
+    , regionInstanceGroupsSetNamedPortsRequest
+    , rigsnprFingerprint
+    , rigsnprNamedPorts
+
     -- * MachineTypeList
     , MachineTypeList
     , machineTypeList
@@ -1393,6 +1499,15 @@ module Network.Google.Compute.Types
     , thttpplItems
     , thttpplSelfLink
     , thttpplId
+
+    -- * RegionInstanceGroupManagerList
+    , RegionInstanceGroupManagerList
+    , regionInstanceGroupManagerList
+    , rigmlNextPageToken
+    , rigmlKind
+    , rigmlItems
+    , rigmlSelfLink
+    , rigmlId
 
     -- * ForwardingRuleIPProtocol
     , ForwardingRuleIPProtocol (..)
@@ -1418,19 +1533,11 @@ module Network.Google.Compute.Types
     -- * HTTPHealthCheck
     , HTTPHealthCheck
     , hTTPHealthCheck
-    , hHealthyThreshold
-    , hKind
-    , hRequestPath
-    , hSelfLink
-    , hCheckIntervalSec
-    , hName
-    , hCreationTimestamp
-    , hId
-    , hHost
-    , hTimeoutSec
-    , hDescription
-    , hUnhealthyThreshold
-    , hPort
+    , httphcRequestPath
+    , httphcHost
+    , httphcProxyHeader
+    , httphcPortName
+    , httphcPort
 
     -- * BackendServiceGroupHealth
     , BackendServiceGroupHealth
@@ -1460,6 +1567,9 @@ module Network.Google.Compute.Types
     , RouterAggregatedListItems
     , routerAggregatedListItems
     , raliAddtional
+
+    -- * HTTPSHealthCheckProxyHeader
+    , HTTPSHealthCheckProxyHeader (..)
 
     -- * AutoscalingPolicy
     , AutoscalingPolicy
@@ -1592,6 +1702,12 @@ module Network.Google.Compute.Types
     -- * MachineTypesScopedListWarningCode
     , MachineTypesScopedListWarningCode (..)
 
+    -- * InstancesSetServiceAccountRequest
+    , InstancesSetServiceAccountRequest
+    , instancesSetServiceAccountRequest
+    , issarEmail
+    , issarScopes
+
     -- * DiskTypesScopedListWarningDataItem
     , DiskTypesScopedListWarningDataItem
     , diskTypesScopedListWarningDataItem
@@ -1666,6 +1782,14 @@ module Network.Google.Compute.Types
     -- * AutoscalersScopedListWarningCode
     , AutoscalersScopedListWarningCode (..)
 
+    -- * ForwardingRuleLoadBalancingScheme
+    , ForwardingRuleLoadBalancingScheme (..)
+
+    -- * RegionInstanceGroupManagersSetTemplateRequest
+    , RegionInstanceGroupManagersSetTemplateRequest
+    , regionInstanceGroupManagersSetTemplateRequest
+    , rigmstrInstanceTemplate
+
     -- * InstanceGroupsListInstances
     , InstanceGroupsListInstances
     , instanceGroupsListInstances
@@ -1722,16 +1846,21 @@ module Network.Google.Compute.Types
     -- * Region
     , Region
     , region
-    , rrStatus
-    , rrZones
-    , rrKind
-    , rrSelfLink
-    , rrName
-    , rrCreationTimestamp
-    , rrQuotas
-    , rrId
-    , rrDescription
-    , rrDeprecated
+    , regeStatus
+    , regeZones
+    , regeKind
+    , regeSelfLink
+    , regeName
+    , regeCreationTimestamp
+    , regeQuotas
+    , regeId
+    , regeDescription
+    , regeDeprecated
+
+    -- * GuestOSFeature
+    , GuestOSFeature
+    , guestOSFeature
+    , gofType
 
     -- * VPNTunnel
     , VPNTunnel
@@ -1869,9 +1998,6 @@ module Network.Google.Compute.Types
     , managedInstanceLastAttempt
     , milaErrors
 
-    -- * HTTP2HealthCheckProxyHeader
-    , HTTP2HealthCheckProxyHeader (..)
-
     -- * BackendServiceList
     , BackendServiceList
     , backendServiceList
@@ -1986,8 +2112,10 @@ module Network.Google.Compute.Types
     -- * SerialPortOutput
     , SerialPortOutput
     , serialPortOutput
+    , spoNext
     , spoContents
     , spoKind
+    , spoStart
     , spoSelfLink
 
     -- * TargetVPNGatewayAggregatedList
@@ -2026,6 +2154,7 @@ module Network.Google.Compute.Types
     , CacheInvalidationRule
     , cacheInvalidationRule
     , cirPath
+    , cirHost
 
     -- * TargetVPNGatewaysScopedList
     , TargetVPNGatewaysScopedList
@@ -2057,12 +2186,19 @@ module Network.Google.Compute.Types
     , islwdiValue
     , islwdiKey
 
+    -- * BackendServicesScopedListWarningDataItem
+    , BackendServicesScopedListWarningDataItem
+    , backendServicesScopedListWarningDataItem
+    , bsslwdiValue
+    , bsslwdiKey
+
     -- * BackendService
     , BackendService
     , backendService
     , bsSessionAffinity
     , bsBackends
     , bsAffinityCookieTtlSec
+    , bsLoadBalancingScheme
     , bsKind
     , bsEnableCDN
     , bsFingerprint
@@ -2085,6 +2221,9 @@ module Network.Google.Compute.Types
     , imrTargetInstance
     , imrDestinationZone
 
+    -- * BackendServicesScopedListWarningCode
+    , BackendServicesScopedListWarningCode (..)
+
     -- * TargetPoolSessionAffinity
     , TargetPoolSessionAffinity (..)
 
@@ -2102,18 +2241,10 @@ module Network.Google.Compute.Types
     -- * HTTPSHealthCheck
     , HTTPSHealthCheck
     , httpsHealthCheck
-    , hhcHealthyThreshold
-    , hhcKind
     , hhcRequestPath
-    , hhcSelfLink
-    , hhcCheckIntervalSec
-    , hhcName
-    , hhcCreationTimestamp
-    , hhcId
     , hhcHost
-    , hhcTimeoutSec
-    , hhcDescription
-    , hhcUnhealthyThreshold
+    , hhcProxyHeader
+    , hhcPortName
     , hhcPort
 
     -- * ImageRawDiskContainerType

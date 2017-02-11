@@ -13,87 +13,95 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
--- Module      : Network.Google.Resource.Compute.Routes.List
+-- Module      : Network.Google.Resource.Compute.RegionBackendServices.List
 -- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the list of Route resources available to the specified
--- project.
+-- Retrieves the list of regional BackendService resources available to the
+-- specified project in the given region.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.list@.
-module Network.Google.Resource.Compute.Routes.List
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionBackendServices.list@.
+module Network.Google.Resource.Compute.RegionBackendServices.List
     (
     -- * REST Resource
-      RoutesListResource
+      RegionBackendServicesListResource
 
     -- * Creating a Request
-    , routesList
-    , RoutesList
+    , regionBackendServicesList
+    , RegionBackendServicesList
 
     -- * Request Lenses
-    , rllOrderBy
-    , rllProject
-    , rllFilter
-    , rllPageToken
-    , rllMaxResults
+    , rbslOrderBy
+    , rbslProject
+    , rbslFilter
+    , rbslRegion
+    , rbslPageToken
+    , rbslMaxResults
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @compute.routes.list@ method which the
--- 'RoutesList' request conforms to.
-type RoutesListResource =
+-- | A resource alias for @compute.regionBackendServices.list@ method which the
+-- 'RegionBackendServicesList' request conforms to.
+type RegionBackendServicesListResource =
      "compute" :>
        "v1" :>
          "projects" :>
            Capture "project" Text :>
-             "global" :>
-               "routes" :>
-                 QueryParam "orderBy" Text :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] RouteList
+             "regions" :>
+               Capture "region" Text :>
+                 "backendServices" :>
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] BackendServiceList
 
--- | Retrieves the list of Route resources available to the specified
--- project.
+-- | Retrieves the list of regional BackendService resources available to the
+-- specified project in the given region.
 --
--- /See:/ 'routesList' smart constructor.
-data RoutesList = RoutesList'
-    { _rllOrderBy    :: !(Maybe Text)
-    , _rllProject    :: !Text
-    , _rllFilter     :: !(Maybe Text)
-    , _rllPageToken  :: !(Maybe Text)
-    , _rllMaxResults :: !(Textual Word32)
+-- /See:/ 'regionBackendServicesList' smart constructor.
+data RegionBackendServicesList = RegionBackendServicesList'
+    { _rbslOrderBy    :: !(Maybe Text)
+    , _rbslProject    :: !Text
+    , _rbslFilter     :: !(Maybe Text)
+    , _rbslRegion     :: !Text
+    , _rbslPageToken  :: !(Maybe Text)
+    , _rbslMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoutesList' with the minimum fields required to make a request.
+-- | Creates a value of 'RegionBackendServicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rllOrderBy'
+-- * 'rbslOrderBy'
 --
--- * 'rllProject'
+-- * 'rbslProject'
 --
--- * 'rllFilter'
+-- * 'rbslFilter'
 --
--- * 'rllPageToken'
+-- * 'rbslRegion'
 --
--- * 'rllMaxResults'
-routesList
-    :: Text -- ^ 'rllProject'
-    -> RoutesList
-routesList pRllProject_ =
-    RoutesList'
-    { _rllOrderBy = Nothing
-    , _rllProject = pRllProject_
-    , _rllFilter = Nothing
-    , _rllPageToken = Nothing
-    , _rllMaxResults = 500
+-- * 'rbslPageToken'
+--
+-- * 'rbslMaxResults'
+regionBackendServicesList
+    :: Text -- ^ 'rbslProject'
+    -> Text -- ^ 'rbslRegion'
+    -> RegionBackendServicesList
+regionBackendServicesList pRbslProject_ pRbslRegion_ =
+    RegionBackendServicesList'
+    { _rbslOrderBy = Nothing
+    , _rbslProject = pRbslProject_
+    , _rbslFilter = Nothing
+    , _rbslRegion = pRbslRegion_
+    , _rbslPageToken = Nothing
+    , _rbslMaxResults = 500
     }
 
 -- | Sorts list results by a certain order. By default, results are returned
@@ -104,14 +112,14 @@ routesList pRllProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-rllOrderBy :: Lens' RoutesList (Maybe Text)
-rllOrderBy
-  = lens _rllOrderBy (\ s a -> s{_rllOrderBy = a})
+rbslOrderBy :: Lens' RegionBackendServicesList (Maybe Text)
+rbslOrderBy
+  = lens _rbslOrderBy (\ s a -> s{_rbslOrderBy = a})
 
 -- | Project ID for this request.
-rllProject :: Lens' RoutesList Text
-rllProject
-  = lens _rllProject (\ s a -> s{_rllProject = a})
+rbslProject :: Lens' RegionBackendServicesList Text
+rbslProject
+  = lens _rbslProject (\ s a -> s{_rbslProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: field_name
@@ -133,37 +141,48 @@ rllProject
 -- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
 -- expressions are treated as AND expressions, meaning that resources must
 -- match all expressions to pass the filters.
-rllFilter :: Lens' RoutesList (Maybe Text)
-rllFilter
-  = lens _rllFilter (\ s a -> s{_rllFilter = a})
+rbslFilter :: Lens' RegionBackendServicesList (Maybe Text)
+rbslFilter
+  = lens _rbslFilter (\ s a -> s{_rbslFilter = a})
+
+-- | Name of the region scoping this request.
+rbslRegion :: Lens' RegionBackendServicesList Text
+rbslRegion
+  = lens _rbslRegion (\ s a -> s{_rbslRegion = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-rllPageToken :: Lens' RoutesList (Maybe Text)
-rllPageToken
-  = lens _rllPageToken (\ s a -> s{_rllPageToken = a})
+rbslPageToken :: Lens' RegionBackendServicesList (Maybe Text)
+rbslPageToken
+  = lens _rbslPageToken
+      (\ s a -> s{_rbslPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
 -- in subsequent list requests.
-rllMaxResults :: Lens' RoutesList Word32
-rllMaxResults
-  = lens _rllMaxResults
-      (\ s a -> s{_rllMaxResults = a})
+rbslMaxResults :: Lens' RegionBackendServicesList Word32
+rbslMaxResults
+  = lens _rbslMaxResults
+      (\ s a -> s{_rbslMaxResults = a})
       . _Coerce
 
-instance GoogleRequest RoutesList where
-        type Rs RoutesList = RouteList
-        type Scopes RoutesList =
+instance GoogleRequest RegionBackendServicesList
+         where
+        type Rs RegionBackendServicesList =
+             BackendServiceList
+        type Scopes RegionBackendServicesList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient RoutesList'{..}
-          = go _rllProject _rllOrderBy _rllFilter _rllPageToken
-              (Just _rllMaxResults)
+        requestClient RegionBackendServicesList'{..}
+          = go _rbslProject _rbslRegion _rbslOrderBy
+              _rbslFilter
+              _rbslPageToken
+              (Just _rbslMaxResults)
               (Just AltJSON)
               computeService
           where go
-                  = buildClient (Proxy :: Proxy RoutesListResource)
+                  = buildClient
+                      (Proxy :: Proxy RegionBackendServicesListResource)
                       mempty

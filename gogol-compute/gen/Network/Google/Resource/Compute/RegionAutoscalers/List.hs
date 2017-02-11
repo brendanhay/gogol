@@ -13,87 +13,93 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
--- Module      : Network.Google.Resource.Compute.Routes.List
+-- Module      : Network.Google.Resource.Compute.RegionAutoscalers.List
 -- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the list of Route resources available to the specified
--- project.
+-- Retrieves a list of autoscalers contained within the specified region.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.list@.
-module Network.Google.Resource.Compute.Routes.List
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionAutoscalers.list@.
+module Network.Google.Resource.Compute.RegionAutoscalers.List
     (
     -- * REST Resource
-      RoutesListResource
+      RegionAutoscalersListResource
 
     -- * Creating a Request
-    , routesList
-    , RoutesList
+    , regionAutoscalersList
+    , RegionAutoscalersList
 
     -- * Request Lenses
-    , rllOrderBy
-    , rllProject
-    , rllFilter
-    , rllPageToken
-    , rllMaxResults
+    , ralOrderBy
+    , ralProject
+    , ralFilter
+    , ralRegion
+    , ralPageToken
+    , ralMaxResults
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @compute.routes.list@ method which the
--- 'RoutesList' request conforms to.
-type RoutesListResource =
+-- | A resource alias for @compute.regionAutoscalers.list@ method which the
+-- 'RegionAutoscalersList' request conforms to.
+type RegionAutoscalersListResource =
      "compute" :>
        "v1" :>
          "projects" :>
            Capture "project" Text :>
-             "global" :>
-               "routes" :>
-                 QueryParam "orderBy" Text :>
-                   QueryParam "filter" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" (Textual Word32) :>
-                         QueryParam "alt" AltJSON :> Get '[JSON] RouteList
+             "regions" :>
+               Capture "region" Text :>
+                 "autoscalers" :>
+                   QueryParam "orderBy" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "maxResults" (Textual Word32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] RegionAutoscalerList
 
--- | Retrieves the list of Route resources available to the specified
--- project.
+-- | Retrieves a list of autoscalers contained within the specified region.
 --
--- /See:/ 'routesList' smart constructor.
-data RoutesList = RoutesList'
-    { _rllOrderBy    :: !(Maybe Text)
-    , _rllProject    :: !Text
-    , _rllFilter     :: !(Maybe Text)
-    , _rllPageToken  :: !(Maybe Text)
-    , _rllMaxResults :: !(Textual Word32)
+-- /See:/ 'regionAutoscalersList' smart constructor.
+data RegionAutoscalersList = RegionAutoscalersList'
+    { _ralOrderBy    :: !(Maybe Text)
+    , _ralProject    :: !Text
+    , _ralFilter     :: !(Maybe Text)
+    , _ralRegion     :: !Text
+    , _ralPageToken  :: !(Maybe Text)
+    , _ralMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoutesList' with the minimum fields required to make a request.
+-- | Creates a value of 'RegionAutoscalersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rllOrderBy'
+-- * 'ralOrderBy'
 --
--- * 'rllProject'
+-- * 'ralProject'
 --
--- * 'rllFilter'
+-- * 'ralFilter'
 --
--- * 'rllPageToken'
+-- * 'ralRegion'
 --
--- * 'rllMaxResults'
-routesList
-    :: Text -- ^ 'rllProject'
-    -> RoutesList
-routesList pRllProject_ =
-    RoutesList'
-    { _rllOrderBy = Nothing
-    , _rllProject = pRllProject_
-    , _rllFilter = Nothing
-    , _rllPageToken = Nothing
-    , _rllMaxResults = 500
+-- * 'ralPageToken'
+--
+-- * 'ralMaxResults'
+regionAutoscalersList
+    :: Text -- ^ 'ralProject'
+    -> Text -- ^ 'ralRegion'
+    -> RegionAutoscalersList
+regionAutoscalersList pRalProject_ pRalRegion_ =
+    RegionAutoscalersList'
+    { _ralOrderBy = Nothing
+    , _ralProject = pRalProject_
+    , _ralFilter = Nothing
+    , _ralRegion = pRalRegion_
+    , _ralPageToken = Nothing
+    , _ralMaxResults = 500
     }
 
 -- | Sorts list results by a certain order. By default, results are returned
@@ -104,14 +110,14 @@ routesList pRllProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-rllOrderBy :: Lens' RoutesList (Maybe Text)
-rllOrderBy
-  = lens _rllOrderBy (\ s a -> s{_rllOrderBy = a})
+ralOrderBy :: Lens' RegionAutoscalersList (Maybe Text)
+ralOrderBy
+  = lens _ralOrderBy (\ s a -> s{_ralOrderBy = a})
 
 -- | Project ID for this request.
-rllProject :: Lens' RoutesList Text
-rllProject
-  = lens _rllProject (\ s a -> s{_rllProject = a})
+ralProject :: Lens' RegionAutoscalersList Text
+ralProject
+  = lens _ralProject (\ s a -> s{_ralProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: field_name
@@ -133,37 +139,44 @@ rllProject
 -- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
 -- expressions are treated as AND expressions, meaning that resources must
 -- match all expressions to pass the filters.
-rllFilter :: Lens' RoutesList (Maybe Text)
-rllFilter
-  = lens _rllFilter (\ s a -> s{_rllFilter = a})
+ralFilter :: Lens' RegionAutoscalersList (Maybe Text)
+ralFilter
+  = lens _ralFilter (\ s a -> s{_ralFilter = a})
+
+-- | Name of the region scoping this request.
+ralRegion :: Lens' RegionAutoscalersList Text
+ralRegion
+  = lens _ralRegion (\ s a -> s{_ralRegion = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-rllPageToken :: Lens' RoutesList (Maybe Text)
-rllPageToken
-  = lens _rllPageToken (\ s a -> s{_rllPageToken = a})
+ralPageToken :: Lens' RegionAutoscalersList (Maybe Text)
+ralPageToken
+  = lens _ralPageToken (\ s a -> s{_ralPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
 -- in subsequent list requests.
-rllMaxResults :: Lens' RoutesList Word32
-rllMaxResults
-  = lens _rllMaxResults
-      (\ s a -> s{_rllMaxResults = a})
+ralMaxResults :: Lens' RegionAutoscalersList Word32
+ralMaxResults
+  = lens _ralMaxResults
+      (\ s a -> s{_ralMaxResults = a})
       . _Coerce
 
-instance GoogleRequest RoutesList where
-        type Rs RoutesList = RouteList
-        type Scopes RoutesList =
+instance GoogleRequest RegionAutoscalersList where
+        type Rs RegionAutoscalersList = RegionAutoscalerList
+        type Scopes RegionAutoscalersList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient RoutesList'{..}
-          = go _rllProject _rllOrderBy _rllFilter _rllPageToken
-              (Just _rllMaxResults)
+        requestClient RegionAutoscalersList'{..}
+          = go _ralProject _ralRegion _ralOrderBy _ralFilter
+              _ralPageToken
+              (Just _ralMaxResults)
               (Just AltJSON)
               computeService
           where go
-                  = buildClient (Proxy :: Proxy RoutesListResource)
+                  = buildClient
+                      (Proxy :: Proxy RegionAutoscalersListResource)
                       mempty
