@@ -58,6 +58,10 @@ data CheckErrorCode
       -- ^ @CLIENT_APP_BLOCKED@
       -- The client application of the consumer request is invalid for the
       -- specific consumer project.
+    | APITargetBlocked
+      -- ^ @API_TARGET_BLOCKED@
+      -- The API targeted by this request is invalid for the specified consumer
+      -- project.
     | APIKeyInvalid
       -- ^ @API_KEY_INVALID@
       -- The consumer\'s API key is invalid.
@@ -93,6 +97,7 @@ instance FromHttpApiData CheckErrorCode where
         "IP_ADDRESS_BLOCKED" -> Right IPAddressBlocked
         "REFERER_BLOCKED" -> Right RefererBlocked
         "CLIENT_APP_BLOCKED" -> Right ClientAppBlocked
+        "API_TARGET_BLOCKED" -> Right APITargetBlocked
         "API_KEY_INVALID" -> Right APIKeyInvalid
         "API_KEY_EXPIRED" -> Right APIKeyExpired
         "API_KEY_NOT_FOUND" -> Right APIKeyNotFound
@@ -114,6 +119,7 @@ instance ToHttpApiData CheckErrorCode where
         IPAddressBlocked -> "IP_ADDRESS_BLOCKED"
         RefererBlocked -> "REFERER_BLOCKED"
         ClientAppBlocked -> "CLIENT_APP_BLOCKED"
+        APITargetBlocked -> "API_TARGET_BLOCKED"
         APIKeyInvalid -> "API_KEY_INVALID"
         APIKeyExpired -> "API_KEY_EXPIRED"
         APIKeyNotFound -> "API_KEY_NOT_FOUND"

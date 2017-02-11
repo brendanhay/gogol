@@ -22,7 +22,10 @@
 --
 -- Checks an operation with Google Service Control to decide whether the
 -- given operation should proceed. It should be called before the operation
--- is executed. This method requires the
+-- is executed. If feasible, the client should cache the check results and
+-- reuse them for 60 seconds. In case of server errors, the client can rely
+-- on the cached results for longer time. NOTE: the \`CheckRequest\` has
+-- the size limit of 64KB. This method requires the
 -- \`servicemanagement.services.check\` permission on the specified
 -- service. For more information, see [Google Cloud
 -- IAM](https:\/\/cloud.google.com\/iam).
@@ -71,7 +74,10 @@ type ServicesCheckResource =
 
 -- | Checks an operation with Google Service Control to decide whether the
 -- given operation should proceed. It should be called before the operation
--- is executed. This method requires the
+-- is executed. If feasible, the client should cache the check results and
+-- reuse them for 60 seconds. In case of server errors, the client can rely
+-- on the cached results for longer time. NOTE: the \`CheckRequest\` has
+-- the size limit of 64KB. This method requires the
 -- \`servicemanagement.services.check\` permission on the specified
 -- service. For more information, see [Google Cloud
 -- IAM](https:\/\/cloud.google.com\/iam).

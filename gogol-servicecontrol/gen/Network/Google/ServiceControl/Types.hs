@@ -23,6 +23,11 @@ module Network.Google.ServiceControl.Types
     , serviceControlScope
     , cloudPlatformScope
 
+    -- * AuditLogServiceData
+    , AuditLogServiceData
+    , auditLogServiceData
+    , alsdAddtional
+
     -- * Status
     , Status
     , status
@@ -30,15 +35,23 @@ module Network.Google.ServiceControl.Types
     , sCode
     , sMessage
 
+    -- * RequestMetadata
+    , RequestMetadata
+    , requestMetadata
+    , rmCallerSuppliedUserAgent
+    , rmCallerIP
+
     -- * ReportRequest
     , ReportRequest
     , reportRequest
+    , rrServiceConfigId
     , rrOperations
 
     -- * CheckRequest
     , CheckRequest
     , checkRequest
     , crOperation
+    , crServiceConfigId
 
     -- * MetricValueLabels
     , MetricValueLabels
@@ -64,6 +77,13 @@ module Network.Google.ServiceControl.Types
     , ebGrowthFactor
     , ebScale
     , ebNumFiniteBuckets
+
+    -- * AuthorizationInfo
+    , AuthorizationInfo
+    , authorizationInfo
+    , aiGranted
+    , aiResource
+    , aiPermission
 
     -- * Operation
     , Operation
@@ -139,18 +159,23 @@ module Network.Google.ServiceControl.Types
     -- * Xgafv
     , Xgafv (..)
 
+    -- * AuditLogResponse
+    , AuditLogResponse
+    , auditLogResponse
+    , alrAddtional
+
     -- * CheckResponse
     , CheckResponse
     , checkResponse
-    , crCheckErrors
-    , crServiceConfigId
-    , crOperationId
+    , cCheckErrors
+    , cServiceConfigId
+    , cOperationId
 
     -- * ReportResponse
     , ReportResponse
     , reportResponse
-    , rrReportErrors
-    , rrServiceConfigId
+    , rReportErrors
+    , rServiceConfigId
 
     -- * LogEntry
     , LogEntry
@@ -164,6 +189,11 @@ module Network.Google.ServiceControl.Types
     , leProtoPayload
     , leTimestamp
 
+    -- * AuditLogRequest
+    , AuditLogRequest
+    , auditLogRequest
+    , aAddtional
+
     -- * OperationLabels
     , OperationLabels
     , operationLabels
@@ -176,6 +206,27 @@ module Network.Google.ServiceControl.Types
     , ExplicitBuckets
     , explicitBuckets
     , ebBounds
+
+    -- * AuthenticationInfo
+    , AuthenticationInfo
+    , authenticationInfo
+    , aiPrincipalEmail
+    , aiAuthoritySelector
+
+    -- * AuditLog
+    , AuditLog
+    , auditLog
+    , alRequestMetadata
+    , alStatus
+    , alResourceName
+    , alAuthorizationInfo
+    , alServiceData
+    , alMethodName
+    , alResponse
+    , alServiceName
+    , alNumResponseItems
+    , alAuthenticationInfo
+    , alRequest
 
     -- * LogEntryStructPayload
     , LogEntryStructPayload
