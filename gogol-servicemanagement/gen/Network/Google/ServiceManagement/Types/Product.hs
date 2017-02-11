@@ -96,8 +96,8 @@ spURLQueryParameter
   = lens _spURLQueryParameter
       (\ s a -> s{_spURLQueryParameter = a})
 
--- | Define the name of the parameter, such as \"api_key\", \"alt\",
--- \"callback\", and etc. It is case sensitive.
+-- | Define the name of the parameter, such as \"api_key\" . It is case
+-- sensitive.
 spName :: Lens' SystemParameter (Maybe Text)
 spName = lens _spName (\ s a -> s{_spName = a})
 
@@ -157,7 +157,7 @@ instance ToJSON Advice where
 --
 -- /See:/ 'configFile' smart constructor.
 data ConfigFile = ConfigFile'
-    { _cfFileContents :: !(Maybe Base64)
+    { _cfFileContents :: !(Maybe Bytes)
     , _cfFilePath     :: !(Maybe Text)
     , _cfFileType     :: !(Maybe ConfigFileFileType)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -185,7 +185,7 @@ cfFileContents :: Lens' ConfigFile (Maybe ByteString)
 cfFileContents
   = lens _cfFileContents
       (\ s a -> s{_cfFileContents = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The file name of the configuration file (full or relative path).
 cfFilePath :: Lens' ConfigFile (Maybe Text)
@@ -675,12 +675,14 @@ instance ToJSON MediaUpload' where
         toJSON MediaUpload''{..}
           = object (catMaybes [("enabled" .=) <$> _muEnabled])
 
--- | Enables \"data access\" audit logging for a service and specifies a list
--- of members that are log-exempted.
+-- | Specifies the audit configuration for a service. It consists of which
+-- permission types are logged, and what identities, if any, are exempted
+-- from logging. An AuditConifg must have one or more AuditLogConfigs.
 --
 -- /See:/ 'auditConfig' smart constructor.
 data AuditConfig = AuditConfig'
     { _acService         :: !(Maybe Text)
+    , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
     , _acExemptedMembers :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -690,25 +692,37 @@ data AuditConfig = AuditConfig'
 --
 -- * 'acService'
 --
+-- * 'acAuditLogConfigs'
+--
 -- * 'acExemptedMembers'
 auditConfig
     :: AuditConfig
 auditConfig =
     AuditConfig'
     { _acService = Nothing
+    , _acAuditLogConfigs = Nothing
     , _acExemptedMembers = Nothing
     }
 
--- | Specifies a service that will be enabled for \"data access\" audit
--- logging. For example, \`resourcemanager\`, \`storage\`, \`compute\`.
--- \`allServices\` is a special value that covers all services.
+-- | Specifies a service that will be enabled for audit logging. For example,
+-- \`resourcemanager\`, \`storage\`, \`compute\`. \`allServices\` is a
+-- special value that covers all services.
 acService :: Lens' AuditConfig (Maybe Text)
 acService
   = lens _acService (\ s a -> s{_acService = a})
 
+-- | The configuration for logging of each type of permission. Next ID: 4
+acAuditLogConfigs :: Lens' AuditConfig [AuditLogConfig]
+acAuditLogConfigs
+  = lens _acAuditLogConfigs
+      (\ s a -> s{_acAuditLogConfigs = a})
+      . _Default
+      . _Coerce
+
 -- | Specifies the identities that are exempted from \"data access\" audit
 -- logging for the \`service\` specified above. Follows the same format of
--- Binding.members.
+-- Binding.members. This field is deprecated in favor of
+-- per-permission-type exemptions.
 acExemptedMembers :: Lens' AuditConfig [Text]
 acExemptedMembers
   = lens _acExemptedMembers
@@ -722,13 +736,15 @@ instance FromJSON AuditConfig where
               (\ o ->
                  AuditConfig' <$>
                    (o .:? "service") <*>
-                     (o .:? "exemptedMembers" .!= mempty))
+                     (o .:? "auditLogConfigs" .!= mempty)
+                     <*> (o .:? "exemptedMembers" .!= mempty))
 
 instance ToJSON AuditConfig where
         toJSON AuditConfig'{..}
           = object
               (catMaybes
                  [("service" .=) <$> _acService,
+                  ("auditLogConfigs" .=) <$> _acAuditLogConfigs,
                   ("exemptedMembers" .=) <$> _acExemptedMembers])
 
 -- | Selects and configures the service controller used by the service. The
@@ -820,7 +836,8 @@ arProviderId :: Lens' AuthRequirement (Maybe Text)
 arProviderId
   = lens _arProviderId (\ s a -> s{_arProviderId = a})
 
--- | The list of JWT
+-- | NOTE: This will be deprecated soon, once AuthProvider.audiences is
+-- implemented and accepted in all the runtime components. The list of JWT
 -- [audiences](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32#section-4.1.3).
 -- that are allowed to access. A JWT containing any of these audiences will
 -- be accepted. When this setting is absent, only JWTs with audience
@@ -878,7 +895,7 @@ lsrNextPageToken
   = lens _lsrNextPageToken
       (\ s a -> s{_lsrNextPageToken = a})
 
--- | The results of the query.
+-- | The returned services will only have the name field set.
 lsrServices :: Lens' ListServicesResponse [ManagedService]
 lsrServices
   = lens _lsrServices (\ s a -> s{_lsrServices = a}) .
@@ -996,7 +1013,9 @@ instance ToJSON LoggingDestination where
                  [("monitoredResource" .=) <$> _ldMonitoredResource,
                   ("logs" .=) <$> _ldLogs])
 
--- | Defines a metric type and its schema.
+-- | Defines a metric type and its schema. Once a metric descriptor is
+-- created, deleting or altering it stops data collection and makes the
+-- metric type\'s existing data unusable.
 --
 -- /See:/ 'metricDescriptor' smart constructor.
 data MetricDescriptor = MetricDescriptor'
@@ -1050,10 +1069,13 @@ mdMetricKind :: Lens' MetricDescriptor (Maybe MetricDescriptorMetricKind)
 mdMetricKind
   = lens _mdMetricKind (\ s a -> s{_mdMetricKind = a})
 
--- | Resource name. The format of the name may vary between different
--- implementations. For examples:
--- projects\/{project_id}\/metricDescriptors\/{type=**}
--- metricDescriptors\/{type=**}
+-- | The resource name of the metric descriptor. Depending on the
+-- implementation, the name typically includes: (1) the parent resource
+-- name that defines the scope of the metric type or of its data; and (2)
+-- the metric\'s URL-encoded type, which also appears in the \`type\` field
+-- of this descriptor. For example, following is the resource name of a
+-- custom metric within the GCP project \`my-project-id\`:
+-- \"projects\/my-project-id\/metricDescriptors\/custom.googleapis.com%2Finvoice%2Fpaid%2Famount\"
 mdName :: Lens' MetricDescriptor (Maybe Text)
 mdName = lens _mdName (\ s a -> s{_mdName = a})
 
@@ -1067,25 +1089,22 @@ mdDisplayName
 
 -- | The set of labels that can be used to describe a specific instance of
 -- this metric type. For example, the
--- \`compute.googleapis.com\/instance\/network\/received_bytes_count\`
--- metric type has a label, \`loadbalanced\`, that specifies whether the
--- traffic was received through a load balanced IP address.
+-- \`appengine.googleapis.com\/http\/server\/response_latencies\` metric
+-- type has a label for the HTTP response code, \`response_code\`, so you
+-- can look at latencies for successful responses or just for responses
+-- that failed.
 mdLabels :: Lens' MetricDescriptor [LabelDescriptor]
 mdLabels
   = lens _mdLabels (\ s a -> s{_mdLabels = a}) .
       _Default
       . _Coerce
 
--- | The metric type including a DNS name prefix, for example
--- \`\"compute.googleapis.com\/instance\/cpu\/utilization\"\`. Metric types
--- should use a natural hierarchical grouping such as the following:
--- compute.googleapis.com\/instance\/cpu\/utilization
--- compute.googleapis.com\/instance\/disk\/read_ops_count
--- compute.googleapis.com\/instance\/network\/received_bytes_count Note
--- that if the metric type changes, the monitoring data will be
--- discontinued, and anything depends on it will break, such as monitoring
--- dashboards, alerting rules and quota limits. Therefore, once a metric
--- has been published, its type should be immutable.
+-- | The metric type, including its DNS name prefix. The type is not
+-- URL-encoded. All user-defined custom metric types have the DNS name
+-- \`custom.googleapis.com\`. Metric types should use a natural
+-- hierarchical grouping. For example:
+-- \"custom.googleapis.com\/invoice\/paid\/amount\"
+-- \"appengine.googleapis.com\/http\/server\/response_latencies\"
 mdType :: Lens' MetricDescriptor (Maybe Text)
 mdType = lens _mdType (\ s a -> s{_mdType = a})
 
@@ -1518,8 +1537,11 @@ instance ToJSON TrafficPercentStrategy where
 -- specific aspect, such as auth. See each proto message definition for
 -- details. Example: type: google.api.Service config_version: 3 name:
 -- calendar.googleapis.com title: Google Calendar API apis: - name:
--- google.calendar.v3.Calendar backend: rules: - selector:
--- \"google.calendar.v3.*\" address: calendar.example.com
+-- google.calendar.v3.Calendar authentication: providers: - id:
+-- google_calendar_auth jwks_uri:
+-- https:\/\/www.googleapis.com\/oauth2\/v1\/certs issuer:
+-- https:\/\/securetoken.google.com rules: - selector: \"*\" requirements:
+-- provider_id: google_calendar_auth
 --
 -- /See:/ 'service' smart constructor.
 data Service = Service'
@@ -1529,7 +1551,6 @@ data Service = Service'
     , _sAuthentication     :: !(Maybe Authentication)
     , _sAPIs               :: !(Maybe [API])
     , _sTypes              :: !(Maybe [Type])
-    , _sAnalytics          :: !(Maybe Analytics)
     , _sVisibility         :: !(Maybe Visibility)
     , _sSystemTypes        :: !(Maybe [Type])
     , _sMonitoredResources :: !(Maybe [MonitoredResourceDescriptor])
@@ -1566,8 +1587,6 @@ data Service = Service'
 -- * 'sAPIs'
 --
 -- * 'sTypes'
---
--- * 'sAnalytics'
 --
 -- * 'sVisibility'
 --
@@ -1616,7 +1635,6 @@ service =
     , _sAuthentication = Nothing
     , _sAPIs = Nothing
     , _sTypes = Nothing
-    , _sAnalytics = Nothing
     , _sVisibility = Nothing
     , _sSystemTypes = Nothing
     , _sMonitoredResources = Nothing
@@ -1679,12 +1697,6 @@ sTypes :: Lens' Service [Type]
 sTypes
   = lens _sTypes (\ s a -> s{_sTypes = a}) . _Default .
       _Coerce
-
--- | WARNING: DO NOT USE UNTIL THIS MESSAGE IS REMOVED. Analytics
--- configuration.
-sAnalytics :: Lens' Service (Maybe Analytics)
-sAnalytics
-  = lens _sAnalytics (\ s a -> s{_sAnalytics = a})
 
 -- | API visibility configuration.
 sVisibility :: Lens' Service (Maybe Visibility)
@@ -1816,7 +1828,6 @@ instance FromJSON Service where
                      <*> (o .:? "authentication")
                      <*> (o .:? "apis" .!= mempty)
                      <*> (o .:? "types" .!= mempty)
-                     <*> (o .:? "analytics")
                      <*> (o .:? "visibility")
                      <*> (o .:? "systemTypes" .!= mempty)
                      <*> (o .:? "monitoredResources" .!= mempty)
@@ -1846,7 +1857,6 @@ instance ToJSON Service where
                   ("context" .=) <$> _sContext,
                   ("authentication" .=) <$> _sAuthentication,
                   ("apis" .=) <$> _sAPIs, ("types" .=) <$> _sTypes,
-                  ("analytics" .=) <$> _sAnalytics,
                   ("visibility" .=) <$> _sVisibility,
                   ("systemTypes" .=) <$> _sSystemTypes,
                   ("monitoredResources" .=) <$> _sMonitoredResources,
@@ -1977,8 +1987,8 @@ enableServiceRequest =
 
 -- | The identity of consumer resource which service enablement will be
 -- applied to. The Google Service Management implementation accepts the
--- following forms: \"project:\", \"project_number:\". Note: this is made
--- compatible with google.api.servicecontrol.v1.Operation.consumer_id.
+-- following forms: - \"project:\" Note: this is made compatible with
+-- google.api.servicecontrol.v1.Operation.consumer_id.
 esrConsumerId :: Lens' EnableServiceRequest (Maybe Text)
 esrConsumerId
   = lens _esrConsumerId
@@ -2271,7 +2281,11 @@ instance ToJSON MediaDownload' where
         toJSON MediaDownload''{..}
           = object (catMaybes [("enabled" .=) <$> _mdEnabled])
 
--- | The option\'s value. For example, \`\"com.google.protobuf\"\`.
+-- | The option\'s value packed in an Any message. If the value is a
+-- primitive, the corresponding wrapper type defined in
+-- google\/protobuf\/wrappers.proto should be used. If the value is an
+-- enum, it should be stored as an int32 value using the
+-- google.protobuf.Int32Value type.
 --
 -- /See:/ 'optionValue' smart constructor.
 newtype OptionValue = OptionValue'
@@ -2367,10 +2381,11 @@ instance ToJSON EnumValue where
 
 -- | \`Authentication\` defines the authentication configuration for an API.
 -- Example for an API targeted for external use: name:
--- calendar.googleapis.com authentication: rules: - selector: \"*\" oauth:
--- canonical_scopes: https:\/\/www.googleapis.com\/auth\/calendar -
--- selector: google.calendar.Delegate oauth: canonical_scopes:
--- https:\/\/www.googleapis.com\/auth\/calendar.read
+-- calendar.googleapis.com authentication: providers: - id:
+-- google_calendar_auth jwks_uri:
+-- https:\/\/www.googleapis.com\/oauth2\/v1\/certs issuer:
+-- https:\/\/securetoken.google.com rules: - selector: \"*\" requirements:
+-- provider_id: google_calendar_auth
 --
 -- /See:/ 'authentication' smart constructor.
 data Authentication = Authentication'
@@ -2756,65 +2771,6 @@ instance ToJSON GenerateConfigReportRequestOldConfig
          where
         toJSON = toJSON . _gcrrocAddtional
 
--- | Analytics configuration of the service. The example below shows how to
--- configure monitored resources and metrics for analytics. In the example,
--- a monitored resource and two metrics are defined. The
--- \`library.googleapis.com\/book\/returned_count\` and
--- \`library.googleapis.com\/book\/overdue_count\` metric are sent to the
--- analytics. monitored_resources: - type: library.googleapis.com\/branch
--- labels: - key: \/city description: The city where the library branch is
--- located in. - key: \/name description: The name of the branch. metrics:
--- - name: library.googleapis.com\/book\/returned_count metric_kind: DELTA
--- value_type: INT64 labels: - key: \/customer_id - name:
--- library.googleapis.com\/book\/overdue_count metric_kind: GAUGE
--- value_type: INT64 labels: - key: \/customer_id analytics:
--- producer_destinations: - monitored_resource:
--- library.googleapis.com\/branch metrics: -
--- library.googleapis.com\/book\/returned_count -
--- library.googleapis.com\/book\/overdue_count
---
--- /See:/ 'analytics' smart constructor.
-newtype Analytics = Analytics'
-    { _aProducerDestinations :: Maybe [AnalyticsDestination]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Analytics' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'aProducerDestinations'
-analytics
-    :: Analytics
-analytics =
-    Analytics'
-    { _aProducerDestinations = Nothing
-    }
-
--- | Analytics configurations for sending metrics to the analytics backend.
--- There can be multiple producer destinations, each one must have a
--- different monitored resource type. A metric can be used in at most one
--- producer destination.
-aProducerDestinations :: Lens' Analytics [AnalyticsDestination]
-aProducerDestinations
-  = lens _aProducerDestinations
-      (\ s a -> s{_aProducerDestinations = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON Analytics where
-        parseJSON
-          = withObject "Analytics"
-              (\ o ->
-                 Analytics' <$>
-                   (o .:? "producerDestinations" .!= mempty))
-
-instance ToJSON Analytics where
-        toJSON Analytics'{..}
-          = object
-              (catMaybes
-                 [("producerDestinations" .=) <$>
-                    _aProducerDestinations])
-
 -- | A rule to be applied in a Policy.
 --
 -- /See:/ 'rule' smart constructor.
@@ -3065,21 +3021,34 @@ instance ToJSON AuthenticationRule where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
-    { _siprPolicy :: Maybe Policy
+data SetIAMPolicyRequest = SetIAMPolicyRequest'
+    { _siprUpdateMask :: !(Maybe FieldMask)
+    , _siprPolicy     :: !(Maybe Policy)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'siprUpdateMask'
+--
 -- * 'siprPolicy'
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
     SetIAMPolicyRequest'
-    { _siprPolicy = Nothing
+    { _siprUpdateMask = Nothing
+    , _siprPolicy = Nothing
     }
+
+-- | OPTIONAL: A FieldMask specifying which fields of the policy to modify.
+-- Only the fields in the mask will be modified. If no mask is provided, a
+-- default mask is used: paths: \"bindings, etag\" This field is only used
+-- by Cloud IAM.
+siprUpdateMask :: Lens' SetIAMPolicyRequest (Maybe FieldMask)
+siprUpdateMask
+  = lens _siprUpdateMask
+      (\ s a -> s{_siprUpdateMask = a})
 
 -- | REQUIRED: The complete policy to be applied to the \`resource\`. The
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
@@ -3092,11 +3061,16 @@ siprPolicy
 instance FromJSON SetIAMPolicyRequest where
         parseJSON
           = withObject "SetIAMPolicyRequest"
-              (\ o -> SetIAMPolicyRequest' <$> (o .:? "policy"))
+              (\ o ->
+                 SetIAMPolicyRequest' <$>
+                   (o .:? "updateMask") <*> (o .:? "policy"))
 
 instance ToJSON SetIAMPolicyRequest where
         toJSON SetIAMPolicyRequest'{..}
-          = object (catMaybes [("policy" .=) <$> _siprPolicy])
+          = object
+              (catMaybes
+                 [("updateMask" .=) <$> _siprUpdateMask,
+                  ("policy" .=) <$> _siprPolicy])
 
 -- | Maps service configuration IDs to their corresponding traffic
 -- percentage. Key is the service configuration ID, Value is the traffic
@@ -3718,13 +3692,12 @@ systemParameters =
 -- default parameters implemented by the system. If this field is missing
 -- from the service config, default system parameters will be used. Default
 -- system parameters and names is implementation-dependent. Example: define
--- api key and alt name for all methods system_parameters rules: -
--- selector: \"*\" parameters: - name: api_key url_query_parameter: api_key
--- - name: alt http_header: Response-Content-Type Example: define 2 api key
--- names for a specific method. system_parameters rules: - selector:
--- \"\/ListShelves\" parameters: - name: api_key http_header: Api-Key1 -
--- name: api_key http_header: Api-Key2 **NOTE:** All service configuration
--- rules follow \"last one wins\" order.
+-- api key for all methods system_parameters rules: - selector: \"*\"
+-- parameters: - name: api_key url_query_parameter: api_key Example: define
+-- 2 api key names for a specific method. system_parameters rules: -
+-- selector: \"\/ListShelves\" parameters: - name: api_key http_header:
+-- Api-Key1 - name: api_key http_header: Api-Key2 **NOTE:** All service
+-- configuration rules follow \"last one wins\" order.
 spRules :: Lens' SystemParameters [SystemParameterRule]
 spRules
   = lens _spRules (\ s a -> s{_spRules = a}) . _Default
@@ -3995,61 +3968,6 @@ instance ToJSON Step where
                  [("status" .=) <$> _sStatus,
                   ("description" .=) <$> _sDescription])
 
--- | Configuration of a specific analytics destination.
---
--- /See:/ 'analyticsDestination' smart constructor.
-data AnalyticsDestination = AnalyticsDestination'
-    { _adMetrics           :: !(Maybe [Text])
-    , _adMonitoredResource :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'AnalyticsDestination' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'adMetrics'
---
--- * 'adMonitoredResource'
-analyticsDestination
-    :: AnalyticsDestination
-analyticsDestination =
-    AnalyticsDestination'
-    { _adMetrics = Nothing
-    , _adMonitoredResource = Nothing
-    }
-
--- | Names of the metrics to report to this analytics destination. Each name
--- must be defined in Service.metrics section. Metrics with value type BOOL
--- and STRING must be of GUAGE kind, metrics with value type INT64, DOUBLE
--- and MONEY must be of DELTA kind.
-adMetrics :: Lens' AnalyticsDestination [Text]
-adMetrics
-  = lens _adMetrics (\ s a -> s{_adMetrics = a}) .
-      _Default
-      . _Coerce
-
--- | The monitored resource type. The type must be defined in
--- Service.monitored_resources section.
-adMonitoredResource :: Lens' AnalyticsDestination (Maybe Text)
-adMonitoredResource
-  = lens _adMonitoredResource
-      (\ s a -> s{_adMonitoredResource = a})
-
-instance FromJSON AnalyticsDestination where
-        parseJSON
-          = withObject "AnalyticsDestination"
-              (\ o ->
-                 AnalyticsDestination' <$>
-                   (o .:? "metrics" .!= mempty) <*>
-                     (o .:? "monitoredResource"))
-
-instance ToJSON AnalyticsDestination where
-        toJSON AnalyticsDestination'{..}
-          = object
-              (catMaybes
-                 [("metrics" .=) <$> _adMetrics,
-                  ("monitoredResource" .=) <$> _adMonitoredResource])
-
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
@@ -4209,8 +4127,9 @@ instance ToJSON LabelDescriptor where
 --
 -- /See:/ 'usage' smart constructor.
 data Usage = Usage'
-    { _uRequirements :: !(Maybe [Text])
-    , _uRules        :: !(Maybe [UsageRule])
+    { _uRequirements                :: !(Maybe [Text])
+    , _uRules                       :: !(Maybe [UsageRule])
+    , _uProducerNotificationChannel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Usage' with the minimum fields required to make a request.
@@ -4220,12 +4139,15 @@ data Usage = Usage'
 -- * 'uRequirements'
 --
 -- * 'uRules'
+--
+-- * 'uProducerNotificationChannel'
 usage
     :: Usage
 usage =
     Usage'
     { _uRequirements = Nothing
     , _uRules = Nothing
+    , _uProducerNotificationChannel = Nothing
     }
 
 -- | Requirements that must be satisfied before a consumer project can use
@@ -4245,20 +4167,35 @@ uRules
   = lens _uRules (\ s a -> s{_uRules = a}) . _Default .
       _Coerce
 
+-- | The full resource name of a channel used for sending notifications to
+-- the service producer. Google Service Management currently only supports
+-- [Google Cloud Pub\/Sub](https:\/\/cloud.google.com\/pubsub) as a
+-- notification channel. To use Google Cloud Pub\/Sub as the channel, this
+-- must be the name of a Cloud Pub\/Sub topic that uses the Cloud Pub\/Sub
+-- topic name format documented in
+-- https:\/\/cloud.google.com\/pubsub\/docs\/overview.
+uProducerNotificationChannel :: Lens' Usage (Maybe Text)
+uProducerNotificationChannel
+  = lens _uProducerNotificationChannel
+      (\ s a -> s{_uProducerNotificationChannel = a})
+
 instance FromJSON Usage where
         parseJSON
           = withObject "Usage"
               (\ o ->
                  Usage' <$>
                    (o .:? "requirements" .!= mempty) <*>
-                     (o .:? "rules" .!= mempty))
+                     (o .:? "rules" .!= mempty)
+                     <*> (o .:? "producerNotificationChannel"))
 
 instance ToJSON Usage where
         toJSON Usage'{..}
           = object
               (catMaybes
                  [("requirements" .=) <$> _uRequirements,
-                  ("rules" .=) <$> _uRules])
+                  ("rules" .=) <$> _uRules,
+                  ("producerNotificationChannel" .=) <$>
+                    _uProducerNotificationChannel])
 
 -- | Response message for \`TestIamPermissions\` method.
 --
@@ -4402,8 +4339,8 @@ disableServiceRequest =
 
 -- | The identity of consumer resource which service disablement will be
 -- applied to. The Google Service Management implementation accepts the
--- following forms: \"project:\", \"project_number:\". Note: this is made
--- compatible with google.api.servicecontrol.v1.Operation.consumer_id.
+-- following forms: - \"project:\" Note: this is made compatible with
+-- google.api.servicecontrol.v1.Operation.consumer_id.
 dsrConsumerId :: Lens' DisableServiceRequest (Maybe Text)
 dsrConsumerId
   = lens _dsrConsumerId
@@ -4437,7 +4374,7 @@ instance ToJSON DisableServiceRequest where
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
-    , _pEtag         :: !(Maybe Base64)
+    , _pEtag         :: !(Maybe Bytes)
     , _pRules        :: !(Maybe [Rule])
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
@@ -4471,11 +4408,7 @@ policy =
     , _pIAMOwned = Nothing
     }
 
--- | Specifies audit logging configs for \"data access\". \"data access\":
--- generally refers to data reads\/writes and admin reads. \"admin
--- activity\": generally refers to admin writes. Note: \`AuditConfig\`
--- doesn\'t apply to \"admin activity\", which always enables audit
--- logging.
+-- | Specifies cloud audit logging configuration for this policy.
 pAuditConfigs :: Lens' Policy [AuditConfig]
 pAuditConfigs
   = lens _pAuditConfigs
@@ -4495,7 +4428,7 @@ pAuditConfigs
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | If more than one rule is specified, the rules are applied in the
 -- following manner: - All matching LOG rules are always applied. - If any
@@ -4955,18 +4888,7 @@ instance ToJSON OperationMetadata where
 -- address library-example.googleapis.com. # It also allows HTTP OPTIONS
 -- calls to be passed to the backend, for # it to decide whether the
 -- subsequent cross-origin request is # allowed to proceed. - name:
--- library-example.googleapis.com apis: google.example.library.v1.Library
--- allow_cors: true # Below entry makes
--- \'google.example.library.v1.Library\' # API be served from endpoint
--- address # google.example.library-example.v1.LibraryManager. - name:
--- library-manager.googleapis.com apis:
--- google.example.library.v1.LibraryManager # BNS address for a borg job.
--- Can specify a task by appending # \"\/taskId\" (e.g. \"\/0\") to the job
--- spec. Example OpenAPI extension for endpoint with allow_cors set to
--- true: { \"swagger\": \"2.0\", \"info\": { \"description\": \"A
--- simple...\" }, \"host\": \"MY_PROJECT_ID.appspot.com\",
--- \"x-google-endpoints\": [{ \"name\": \"MY_PROJECT_ID.appspot.com\",
--- \"allow_cors\": \"true\" }] }
+-- library-example.googleapis.com allow_cors: true
 --
 -- /See:/ 'endpoint' smart constructor.
 data Endpoint = Endpoint'
@@ -5167,6 +5089,62 @@ instance ToJSON CustomError where
                  [("rules" .=) <$> _ceRules,
                   ("types" .=) <$> _ceTypes])
 
+-- | Provides the configuration for logging a type of permissions. Example: {
+-- \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\",
+-- \"exempted_members\": [ \"user:foo\'gmail.com\" ] }, { \"log_type\":
+-- \"DATA_WRITE\", } ] } This enables \'DATA_READ\' and \'DATA_WRITE\'
+-- logging, while exempting foo\'gmail.com from DATA_READ logging.
+--
+-- /See:/ 'auditLogConfig' smart constructor.
+data AuditLogConfig = AuditLogConfig'
+    { _alcLogType         :: !(Maybe AuditLogConfigLogType)
+    , _alcExemptedMembers :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alcLogType'
+--
+-- * 'alcExemptedMembers'
+auditLogConfig
+    :: AuditLogConfig
+auditLogConfig =
+    AuditLogConfig'
+    { _alcLogType = Nothing
+    , _alcExemptedMembers = Nothing
+    }
+
+-- | The log type that this config enables.
+alcLogType :: Lens' AuditLogConfig (Maybe AuditLogConfigLogType)
+alcLogType
+  = lens _alcLogType (\ s a -> s{_alcLogType = a})
+
+-- | Specifies the identities that do not cause logging for this type of
+-- permission. Follows the same format of Binding.members.
+alcExemptedMembers :: Lens' AuditLogConfig [Text]
+alcExemptedMembers
+  = lens _alcExemptedMembers
+      (\ s a -> s{_alcExemptedMembers = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON AuditLogConfig where
+        parseJSON
+          = withObject "AuditLogConfig"
+              (\ o ->
+                 AuditLogConfig' <$>
+                   (o .:? "logType") <*>
+                     (o .:? "exemptedMembers" .!= mempty))
+
+instance ToJSON AuditLogConfig where
+        toJSON AuditLogConfig'{..}
+          = object
+              (catMaybes
+                 [("logType" .=) <$> _alcLogType,
+                  ("exemptedMembers" .=) <$> _alcExemptedMembers])
+
 -- | A protocol buffer option, which can be attached to a message, field,
 -- enumeration, etc.
 --
@@ -5191,11 +5169,18 @@ option =
     , _optName = Nothing
     }
 
--- | The option\'s value. For example, \`\"com.google.protobuf\"\`.
+-- | The option\'s value packed in an Any message. If the value is a
+-- primitive, the corresponding wrapper type defined in
+-- google\/protobuf\/wrappers.proto should be used. If the value is an
+-- enum, it should be stored as an int32 value using the
+-- google.protobuf.Int32Value type.
 optValue :: Lens' Option (Maybe OptionValue)
 optValue = lens _optValue (\ s a -> s{_optValue = a})
 
--- | The option\'s name. For example, \`\"java_package\"\`.
+-- | The option\'s name. For protobuf built-in options (options defined in
+-- descriptor.proto), this is the short name. For example,
+-- \`\"map_entry\"\`. For custom options, it should be the fully-qualified
+-- name. For example, \`\"google.api.http\"\`.
 optName :: Lens' Option (Maybe Text)
 optName = lens _optName (\ s a -> s{_optName = a})
 
@@ -5670,15 +5655,18 @@ instance ToJSON GenerateConfigReportRequest where
 -- mapping consists of a field specifying the path template and method
 -- kind. The path template can refer to fields in the request message, as
 -- in the example below which describes a REST GET operation on a resource
--- collection of messages: \`\`\`proto service Messaging { rpc
+-- collection of messages: service Messaging { rpc
 -- GetMessage(GetMessageRequest) returns (Message) { option
 -- (google.api.http).get =
 -- \"\/v1\/messages\/{message_id}\/{sub.subfield}\"; } } message
 -- GetMessageRequest { message SubMessage { string subfield = 1; } string
 -- message_id = 1; \/\/ mapped to the URL SubMessage sub = 2; \/\/
 -- \`sub.subfield\` is url-mapped } message Message { string text = 1; \/\/
--- content of the resource } \`\`\` This definition enables an automatic,
--- bidrectional mapping of HTTP JSON to RPC. Example: HTTP | RPC
+-- content of the resource } The same http annotation can alternatively be
+-- expressed inside the \`GRPC API Configuration\` YAML file. http: rules:
+-- - selector: .Messaging.GetMessage get:
+-- \/v1\/messages\/{message_id}\/{sub.subfield} This definition enables an
+-- automatic, bidrectional mapping of HTTP JSON to RPC. Example: HTTP | RPC
 -- -----|----- \`GET \/v1\/messages\/123456\/foo\` |
 -- \`GetMessage(message_id: \"123456\" sub: SubMessage(subfield:
 -- \"foo\"))\` In general, not only fields but also field paths can be
@@ -5686,13 +5674,12 @@ instance ToJSON GenerateConfigReportRequest where
 -- be repeated and must have a primitive (non-message) type. Any fields in
 -- the request message which are not bound by the path pattern
 -- automatically become (optional) HTTP query parameters. Assume the
--- following definition of the request message: \`\`\`proto message
--- GetMessageRequest { message SubMessage { string subfield = 1; } string
--- message_id = 1; \/\/ mapped to the URL int64 revision = 2; \/\/ becomes
--- a parameter SubMessage sub = 3; \/\/ \`sub.subfield\` becomes a
--- parameter } \`\`\` This enables a HTTP JSON to RPC mapping as below:
--- HTTP | RPC -----|----- \`GET
--- \/v1\/messages\/123456?revision=2&sub.subfield=foo\` |
+-- following definition of the request message: message GetMessageRequest {
+-- message SubMessage { string subfield = 1; } string message_id = 1; \/\/
+-- mapped to the URL int64 revision = 2; \/\/ becomes a parameter
+-- SubMessage sub = 3; \/\/ \`sub.subfield\` becomes a parameter } This
+-- enables a HTTP JSON to RPC mapping as below: HTTP | RPC -----|-----
+-- \`GET \/v1\/messages\/123456?revision=2&sub.subfield=foo\` |
 -- \`GetMessage(message_id: \"123456\" revision: 2 sub:
 -- SubMessage(subfield: \"foo\"))\` Note that fields which are mapped to
 -- HTTP parameters must have a primitive type or a repeated primitive type.
@@ -5700,23 +5687,23 @@ instance ToJSON GenerateConfigReportRequest where
 -- parameter can be repeated in the URL, as in \`...?param=A&param=B\`. For
 -- HTTP method kinds which allow a request body, the \`body\` field
 -- specifies the mapping. Consider a REST update method on the message
--- resource collection: \`\`\`proto service Messaging { rpc
+-- resource collection: service Messaging { rpc
 -- UpdateMessage(UpdateMessageRequest) returns (Message) { option
 -- (google.api.http) = { put: \"\/v1\/messages\/{message_id}\" body:
 -- \"message\" }; } } message UpdateMessageRequest { string message_id = 1;
 -- \/\/ mapped to the URL Message message = 2; \/\/ mapped to the body }
--- \`\`\` The following HTTP JSON to RPC mapping is enabled, where the
+-- The following HTTP JSON to RPC mapping is enabled, where the
 -- representation of the JSON in the request body is determined by protos
 -- JSON encoding: HTTP | RPC -----|----- \`PUT \/v1\/messages\/123456 {
 -- \"text\": \"Hi!\" }\` | \`UpdateMessage(message_id: \"123456\" message {
 -- text: \"Hi!\" })\` The special name \`*\` can be used in the body
 -- mapping to define that every field not bound by the path template should
 -- be mapped to the request body. This enables the following alternative
--- definition of the update method: \`\`\`proto service Messaging { rpc
+-- definition of the update method: service Messaging { rpc
 -- UpdateMessage(Message) returns (Message) { option (google.api.http) = {
 -- put: \"\/v1\/messages\/{message_id}\" body: \"*\" }; } } message Message
--- { string message_id = 1; string text = 2; } \`\`\` The following HTTP
--- JSON to RPC mapping is enabled: HTTP | RPC -----|----- \`PUT
+-- { string message_id = 1; string text = 2; } The following HTTP JSON to
+-- RPC mapping is enabled: HTTP | RPC -----|----- \`PUT
 -- \/v1\/messages\/123456 { \"text\": \"Hi!\" }\` |
 -- \`UpdateMessage(message_id: \"123456\" text: \"Hi!\")\` Note that when
 -- using \`*\` in the body mapping, it is not possible to have HTTP
@@ -5725,14 +5712,13 @@ instance ToJSON GenerateConfigReportRequest where
 -- The common usage of \`*\` is in custom methods which don\'t use the URL
 -- at all for transferring data. It is possible to define multiple HTTP
 -- methods for one RPC by using the \`additional_bindings\` option.
--- Example: \`\`\`proto service Messaging { rpc
--- GetMessage(GetMessageRequest) returns (Message) { option
--- (google.api.http) = { get: \"\/v1\/messages\/{message_id}\"
--- additional_bindings { get:
+-- Example: service Messaging { rpc GetMessage(GetMessageRequest) returns
+-- (Message) { option (google.api.http) = { get:
+-- \"\/v1\/messages\/{message_id}\" additional_bindings { get:
 -- \"\/v1\/users\/{user_id}\/messages\/{message_id}\" } }; } } message
--- GetMessageRequest { string message_id = 1; string user_id = 2; } \`\`\`
--- This enables the following two alternative HTTP JSON to RPC mappings:
--- HTTP | RPC -----|----- \`GET \/v1\/messages\/123456\` |
+-- GetMessageRequest { string message_id = 1; string user_id = 2; } This
+-- enables the following two alternative HTTP JSON to RPC mappings: HTTP |
+-- RPC -----|----- \`GET \/v1\/messages\/123456\` |
 -- \`GetMessage(message_id: \"123456\")\` \`GET
 -- \/v1\/users\/me\/messages\/123456\` | \`GetMessage(user_id: \"me\"
 -- message_id: \"123456\")\` # Rules for HTTP mapping The rules for mapping
@@ -5754,8 +5740,9 @@ instance ToJSON GenerateConfigReportRequest where
 -- String Expansion. The syntax \`**\` matches zero or more path segments.
 -- It follows the semantics of [RFC
 -- 6570](https:\/\/tools.ietf.org\/html\/rfc6570) Section 3.2.3 Reserved
--- Expansion. The syntax \`LITERAL\` matches literal text in the URL path.
--- The syntax \`Variable\` matches the entire path as specified by its
+-- Expansion. NOTE: it must be the last segment in the path except the
+-- Verb. The syntax \`LITERAL\` matches literal text in the URL path. The
+-- syntax \`Variable\` matches the entire path as specified by its
 -- template; this nested template must not contain further variables. If a
 -- variable matches a single path segment, its template may be omitted,
 -- e.g. \`{var}\` is equivalent to \`{var=*}\`. NOTE: the field paths in
@@ -5855,7 +5842,7 @@ httprMediaDownload
 -- | The name of the request field whose value is mapped to the HTTP body, or
 -- \`*\` for mapping all fields not captured by the path pattern to the
 -- HTTP body. NOTE: the referred field must not be a repeated field and
--- must be present at the top-level of response message type.
+-- must be present at the top-level of request message type.
 httprBody :: Lens' HTTPRule (Maybe Text)
 httprBody
   = lens _httprBody (\ s a -> s{_httprBody = a})
@@ -6057,9 +6044,10 @@ instance ToJSON LogConfig where
 --
 -- /See:/ 'authProvider' smart constructor.
 data AuthProvider = AuthProvider'
-    { _apJWKsURI :: !(Maybe Text)
-    , _apId      :: !(Maybe Text)
-    , _apIssuer  :: !(Maybe Text)
+    { _apJWKsURI   :: !(Maybe Text)
+    , _apAudiences :: !(Maybe Text)
+    , _apId        :: !(Maybe Text)
+    , _apIssuer    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AuthProvider' with the minimum fields required to make a request.
@@ -6067,6 +6055,8 @@ data AuthProvider = AuthProvider'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'apJWKsURI'
+--
+-- * 'apAudiences'
 --
 -- * 'apId'
 --
@@ -6076,6 +6066,7 @@ authProvider
 authProvider =
     AuthProvider'
     { _apJWKsURI = Nothing
+    , _apAudiences = Nothing
     , _apId = Nothing
     , _apIssuer = Nothing
     }
@@ -6091,6 +6082,20 @@ authProvider =
 apJWKsURI :: Lens' AuthProvider (Maybe Text)
 apJWKsURI
   = lens _apJWKsURI (\ s a -> s{_apJWKsURI = a})
+
+-- | The list of JWT
+-- [audiences](https:\/\/tools.ietf.org\/html\/draft-ietf-oauth-json-web-token-32#section-4.1.3).
+-- that are allowed to access. A JWT containing any of these audiences will
+-- be accepted. When this setting is absent, only JWTs with audience
+-- \"https:\/\/Service_name\/API_name\" will be accepted. For example, if
+-- no audiences are in the setting, LibraryService API will only accept
+-- JWTs with the following audience
+-- \"https:\/\/library-example.googleapis.com\/google.example.library.v1.LibraryService\".
+-- Example: audiences: bookstore_android.apps.googleusercontent.com,
+-- bookstore_web.apps.googleusercontent.com
+apAudiences :: Lens' AuthProvider (Maybe Text)
+apAudiences
+  = lens _apAudiences (\ s a -> s{_apAudiences = a})
 
 -- | The unique identifier of the auth provider. It will be referred to by
 -- \`AuthRequirement.provider_id\`. Example: \"bookstore_auth\".
@@ -6110,15 +6115,17 @@ instance FromJSON AuthProvider where
           = withObject "AuthProvider"
               (\ o ->
                  AuthProvider' <$>
-                   (o .:? "jwksUri") <*> (o .:? "id") <*>
-                     (o .:? "issuer"))
+                   (o .:? "jwksUri") <*> (o .:? "audiences") <*>
+                     (o .:? "id")
+                     <*> (o .:? "issuer"))
 
 instance ToJSON AuthProvider where
         toJSON AuthProvider'{..}
           = object
               (catMaybes
-                 [("jwksUri" .=) <$> _apJWKsURI, ("id" .=) <$> _apId,
-                  ("issuer" .=) <$> _apIssuer])
+                 [("jwksUri" .=) <$> _apJWKsURI,
+                  ("audiences" .=) <$> _apAudiences,
+                  ("id" .=) <$> _apId, ("issuer" .=) <$> _apIssuer])
 
 -- | Associates \`members\` with a \`role\`.
 --

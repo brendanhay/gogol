@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a managed service. This method will change the serivce in the
+-- Deletes a managed service. This method will change the service to the
 -- \`Soft-Delete\` state for 30 days. Within this period, service producers
 -- may call UndeleteService to restore the service. After 30 days, the
 -- service will be permanently deleted. Operation
@@ -64,7 +64,7 @@ type ServicesDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes a managed service. This method will change the serivce in the
+-- | Deletes a managed service. This method will change the service to the
 -- \`Soft-Delete\` state for 30 days. Within this period, service producers
 -- may call UndeleteService to restore the service. After 30 days, the
 -- service will be permanently deleted. Operation
