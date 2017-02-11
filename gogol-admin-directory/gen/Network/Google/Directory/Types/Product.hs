@@ -3118,9 +3118,11 @@ data User = User'
     , _useEmails                     :: !(Maybe JSONValue)
     , _useIms                        :: !(Maybe JSONValue)
     , _useIsAdmin                    :: !(Maybe Bool)
+    , _useIsEnrolledIn2Sv            :: !(Maybe Bool)
     , _useId                         :: !(Maybe Text)
     , _useOrganizations              :: !(Maybe JSONValue)
     , _usePrimaryEmail               :: !(Maybe Text)
+    , _useIsEnforcedIn2Sv            :: !(Maybe Bool)
     , _useNotes                      :: !(Maybe JSONValue)
     , _useIsDelegatedAdmin           :: !(Maybe Bool)
     , _useIsMailboxSetup             :: !(Maybe Bool)
@@ -3186,11 +3188,15 @@ data User = User'
 --
 -- * 'useIsAdmin'
 --
+-- * 'useIsEnrolledIn2Sv'
+--
 -- * 'useId'
 --
 -- * 'useOrganizations'
 --
 -- * 'usePrimaryEmail'
+--
+-- * 'useIsEnforcedIn2Sv'
 --
 -- * 'useNotes'
 --
@@ -3232,9 +3238,11 @@ user =
     , _useEmails = Nothing
     , _useIms = Nothing
     , _useIsAdmin = Nothing
+    , _useIsEnrolledIn2Sv = Nothing
     , _useId = Nothing
     , _useOrganizations = Nothing
     , _usePrimaryEmail = Nothing
+    , _useIsEnforcedIn2Sv = Nothing
     , _useNotes = Nothing
     , _useIsDelegatedAdmin = Nothing
     , _useIsMailboxSetup = Nothing
@@ -3386,6 +3394,12 @@ useIsAdmin :: Lens' User (Maybe Bool)
 useIsAdmin
   = lens _useIsAdmin (\ s a -> s{_useIsAdmin = a})
 
+-- | Is enrolled in 2-step verification (Read-only)
+useIsEnrolledIn2Sv :: Lens' User (Maybe Bool)
+useIsEnrolledIn2Sv
+  = lens _useIsEnrolledIn2Sv
+      (\ s a -> s{_useIsEnrolledIn2Sv = a})
+
 -- | Unique identifier of User (Read-only)
 useId :: Lens' User (Maybe Text)
 useId = lens _useId (\ s a -> s{_useId = a})
@@ -3400,6 +3414,12 @@ usePrimaryEmail :: Lens' User (Maybe Text)
 usePrimaryEmail
   = lens _usePrimaryEmail
       (\ s a -> s{_usePrimaryEmail = a})
+
+-- | Is 2-step verification enforced (Read-only)
+useIsEnforcedIn2Sv :: Lens' User (Maybe Bool)
+useIsEnforcedIn2Sv
+  = lens _useIsEnforcedIn2Sv
+      (\ s a -> s{_useIsEnforcedIn2Sv = a})
 
 useNotes :: Lens' User (Maybe JSONValue)
 useNotes = lens _useNotes (\ s a -> s{_useNotes = a})
@@ -3459,9 +3479,11 @@ instance FromJSON User where
                      <*> (o .:? "emails")
                      <*> (o .:? "ims")
                      <*> (o .:? "isAdmin")
+                     <*> (o .:? "isEnrolledIn2Sv")
                      <*> (o .:? "id")
                      <*> (o .:? "organizations")
                      <*> (o .:? "primaryEmail")
+                     <*> (o .:? "isEnforcedIn2Sv")
                      <*> (o .:? "notes")
                      <*> (o .:? "isDelegatedAdmin")
                      <*> (o .:? "isMailboxSetup")
@@ -3499,9 +3521,12 @@ instance ToJSON User where
                   ("name" .=) <$> _useName,
                   ("password" .=) <$> _usePassword,
                   ("emails" .=) <$> _useEmails, ("ims" .=) <$> _useIms,
-                  ("isAdmin" .=) <$> _useIsAdmin, ("id" .=) <$> _useId,
+                  ("isAdmin" .=) <$> _useIsAdmin,
+                  ("isEnrolledIn2Sv" .=) <$> _useIsEnrolledIn2Sv,
+                  ("id" .=) <$> _useId,
                   ("organizations" .=) <$> _useOrganizations,
                   ("primaryEmail" .=) <$> _usePrimaryEmail,
+                  ("isEnforcedIn2Sv" .=) <$> _useIsEnforcedIn2Sv,
                   ("notes" .=) <$> _useNotes,
                   ("isDelegatedAdmin" .=) <$> _useIsDelegatedAdmin,
                   ("isMailboxSetup" .=) <$> _useIsMailboxSetup,
@@ -4516,7 +4541,7 @@ instance ToJSON UserPhone where
 --
 -- /See:/ 'userPhoto' smart constructor.
 data UserPhoto = UserPhoto'
-    { _upPhotoData    :: !(Maybe Base64)
+    { _upPhotoData    :: !(Maybe Bytes)
     , _upEtag         :: !(Maybe Text)
     , _upHeight       :: !(Maybe (Textual Int32))
     , _upKind         :: !Text
@@ -4563,7 +4588,7 @@ userPhoto =
 upPhotoData :: Lens' UserPhoto (Maybe ByteString)
 upPhotoData
   = lens _upPhotoData (\ s a -> s{_upPhotoData = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | ETag of the resource.
 upEtag :: Lens' UserPhoto (Maybe Text)
