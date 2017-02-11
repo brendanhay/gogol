@@ -40,8 +40,8 @@ TITLE
 }
 
 ghc_710=( 7.10.3 )
-ghc_801=( 8.0.1 )
-ghc_all=( 8.0.1 7.10.3 )
+ghc_802=( 8.0.2 )
+ghc_all=( 8.0.2 7.10.3 )
 
 travis=".travis.yml"
 
@@ -53,8 +53,8 @@ echo "# GENERATED"                        >> "${travis}"
 matrix "Documentation" ghc_710[@] docs[@] >> "${travis}"
 matrix "Core" ghc_all[@] core[@]          >> "${travis}"
 matrix "Priority" ghc_all[@] priority[@]  >> "${travis}"
-matrix "Remainder" ghc_801[@] library[@]  >> "${travis}"
-matrix "Examples" ghc_801[@] examples[@]  >> "${travis}"
+matrix "Remainder" ghc_802[@] library[@]  >> "${travis}"
+matrix "Examples" ghc_802[@] examples[@]  >> "${travis}"
 echo "# END GENERATED"                    >> "${travis}"
 
 echo "Done."
