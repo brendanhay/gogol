@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefile
 
 docs=( documentation )
 core=( gogol-core gogol )
@@ -43,8 +43,18 @@ ghc_710=( 7.10.3 )
 ghc_801=( 8.0.1 )
 ghc_all=( 8.0.1 7.10.3 )
 
-matrix "Documentation" ghc_710[@] docs[@]
-matrix "Core" ghc_all[@] core[@]
-matrix "Priority" ghc_801[@] priority[@]
-matrix "Remainder" ghc_801[@] library[@]
-matrix "Examples" ghc_801[@] examples[@]
+travis=".travis.yml"
+
+echo "Updating ${travis}"
+
+sed -i -e '/# GENERATED/,/# END GENERATED/d' "${travis}"
+
+echo "# GENERATED"                        >> "${travis}"
+matrix "Documentation" ghc_710[@] docs[@] >> "${travis}"
+matrix "Core" ghc_all[@] core[@]          >> "${travis}"
+matrix "Priority" ghc_all[@] priority[@]  >> "${travis}"
+matrix "Remainder" ghc_801[@] library[@]  >> "${travis}"
+matrix "Examples" ghc_801[@] examples[@]  >> "${travis}"
+echo "# END GENERATED"                    >> "${travis}"
+
+echo "Done."
