@@ -114,6 +114,43 @@ instance FromJSON BasicChartAxisPosition where
 instance ToJSON BasicChartAxisPosition where
     toJSON = toJSONText
 
+-- | The dimension from which deleted cells will be replaced with. If ROWS,
+-- existing cells will be shifted upward to replace the deleted cells. If
+-- COLUMNS, existing cells will be shifted left to replace the deleted
+-- cells.
+data DeleteRangeRequestShiftDimension
+    = DimensionUnspecified
+      -- ^ @DIMENSION_UNSPECIFIED@
+      -- The default value, do not use.
+    | Rows
+      -- ^ @ROWS@
+      -- Operates on the rows of a sheet.
+    | Columns
+      -- ^ @COLUMNS@
+      -- Operates on the columns of a sheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DeleteRangeRequestShiftDimension
+
+instance FromHttpApiData DeleteRangeRequestShiftDimension where
+    parseQueryParam = \case
+        "DIMENSION_UNSPECIFIED" -> Right DimensionUnspecified
+        "ROWS" -> Right Rows
+        "COLUMNS" -> Right Columns
+        x -> Left ("Unable to parse DeleteRangeRequestShiftDimension from: " <> x)
+
+instance ToHttpApiData DeleteRangeRequestShiftDimension where
+    toQueryParam = \case
+        DimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        Rows -> "ROWS"
+        Columns -> "COLUMNS"
+
+instance FromJSON DeleteRangeRequestShiftDimension where
+    parseJSON = parseJSONText "DeleteRangeRequestShiftDimension"
+
+instance ToJSON DeleteRangeRequestShiftDimension where
+    toJSON = toJSONText
+
 -- | The minor axis that will specify the range of values for this series.
 -- For example, if charting stocks over time, the \"Volume\" series may
 -- want to be pinned to the right with the prices pinned to the left,
@@ -161,15 +198,55 @@ instance FromJSON BasicChartSeriesTargetAxis where
 instance ToJSON BasicChartSeriesTargetAxis where
     toJSON = toJSONText
 
+-- | Determines how dates, times, and durations in the response should be
+-- rendered. This is ignored if response_value_render_option is
+-- FORMATTED_VALUE. The default dateTime render option is
+-- [DateTimeRenderOption.SERIAL_NUMBER].
+data BatchUpdateValuesRequestResponseDateTimeRenderOption
+    = SerialNumber
+      -- ^ @SERIAL_NUMBER@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- doubles in \"serial number\" format, as popularized by Lotus 1-2-3. Days
+      -- are counted from December 31st 1899 and are incremented by 1, and times
+      -- are fractions of a day. For example, January 1st 1900 at noon would be
+      -- 1.5, 1 because it\'s 1 day offset from December 31st 1899, and .5
+      -- because noon is half a day. February 1st 1900 at 3pm would be 32.625.
+      -- This correctly treats the year 1900 as not a leap year.
+    | FormattedString
+      -- ^ @FORMATTED_STRING@
+      -- Instructs date, time, datetime, and duration fields to be output as
+      -- strings in their given number format (which is dependent on the
+      -- spreadsheet locale).
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchUpdateValuesRequestResponseDateTimeRenderOption
+
+instance FromHttpApiData BatchUpdateValuesRequestResponseDateTimeRenderOption where
+    parseQueryParam = \case
+        "SERIAL_NUMBER" -> Right SerialNumber
+        "FORMATTED_STRING" -> Right FormattedString
+        x -> Left ("Unable to parse BatchUpdateValuesRequestResponseDateTimeRenderOption from: " <> x)
+
+instance ToHttpApiData BatchUpdateValuesRequestResponseDateTimeRenderOption where
+    toQueryParam = \case
+        SerialNumber -> "SERIAL_NUMBER"
+        FormattedString -> "FORMATTED_STRING"
+
+instance FromJSON BatchUpdateValuesRequestResponseDateTimeRenderOption where
+    parseJSON = parseJSONText "BatchUpdateValuesRequestResponseDateTimeRenderOption"
+
+instance ToJSON BatchUpdateValuesRequestResponseDateTimeRenderOption where
+    toJSON = toJSONText
+
 -- | Whether rows or columns should be appended.
 data AppendDimensionRequestDimension
-    = DimensionUnspecified
+    = ADRDDimensionUnspecified
       -- ^ @DIMENSION_UNSPECIFIED@
       -- The default value, do not use.
-    | Rows
+    | ADRDRows
       -- ^ @ROWS@
       -- Operates on the rows of a sheet.
-    | Columns
+    | ADRDColumns
       -- ^ @COLUMNS@
       -- Operates on the columns of a sheet.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -178,16 +255,16 @@ instance Hashable AppendDimensionRequestDimension
 
 instance FromHttpApiData AppendDimensionRequestDimension where
     parseQueryParam = \case
-        "DIMENSION_UNSPECIFIED" -> Right DimensionUnspecified
-        "ROWS" -> Right Rows
-        "COLUMNS" -> Right Columns
+        "DIMENSION_UNSPECIFIED" -> Right ADRDDimensionUnspecified
+        "ROWS" -> Right ADRDRows
+        "COLUMNS" -> Right ADRDColumns
         x -> Left ("Unable to parse AppendDimensionRequestDimension from: " <> x)
 
 instance ToHttpApiData AppendDimensionRequestDimension where
     toQueryParam = \case
-        DimensionUnspecified -> "DIMENSION_UNSPECIFIED"
-        Rows -> "ROWS"
-        Columns -> "COLUMNS"
+        ADRDDimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        ADRDRows -> "ROWS"
+        ADRDColumns -> "COLUMNS"
 
 instance FromJSON AppendDimensionRequestDimension where
     parseJSON = parseJSONText "AppendDimensionRequestDimension"
@@ -356,6 +433,49 @@ instance FromJSON BatchUpdateValuesRequestValueInputOption where
     parseJSON = parseJSONText "BatchUpdateValuesRequestValueInputOption"
 
 instance ToJSON BatchUpdateValuesRequestValueInputOption where
+    toJSON = toJSONText
+
+-- | Determines how values in the response should be rendered. The default
+-- render option is ValueRenderOption.FORMATTED_VALUE.
+data BatchUpdateValuesRequestResponseValueRenderOption
+    = FormattedValue
+      -- ^ @FORMATTED_VALUE@
+      -- Values will be calculated & formatted in the reply according to the
+      -- cell\'s formatting. Formatting is based on the spreadsheet\'s locale,
+      -- not the requesting user\'s locale. For example, if \`A1\` is \`1.23\`
+      -- and \`A2\` is \`=A1\` and formatted as currency, then \`A2\` would
+      -- return \`\"$1.23\"\`.
+    | UnformattedValue
+      -- ^ @UNFORMATTED_VALUE@
+      -- Values will be calculated, but not formatted in the reply. For example,
+      -- if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as currency,
+      -- then \`A2\` would return the number \`1.23\`.
+    | Formula
+      -- ^ @FORMULA@
+      -- Values will not be calculated. The reply will include the formulas. For
+      -- example, if \`A1\` is \`1.23\` and \`A2\` is \`=A1\` and formatted as
+      -- currency, then A2 would return \`\"=A1\"\`.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable BatchUpdateValuesRequestResponseValueRenderOption
+
+instance FromHttpApiData BatchUpdateValuesRequestResponseValueRenderOption where
+    parseQueryParam = \case
+        "FORMATTED_VALUE" -> Right FormattedValue
+        "UNFORMATTED_VALUE" -> Right UnformattedValue
+        "FORMULA" -> Right Formula
+        x -> Left ("Unable to parse BatchUpdateValuesRequestResponseValueRenderOption from: " <> x)
+
+instance ToHttpApiData BatchUpdateValuesRequestResponseValueRenderOption where
+    toQueryParam = \case
+        FormattedValue -> "FORMATTED_VALUE"
+        UnformattedValue -> "UNFORMATTED_VALUE"
+        Formula -> "FORMULA"
+
+instance FromJSON BatchUpdateValuesRequestResponseValueRenderOption where
+    parseJSON = parseJSONText "BatchUpdateValuesRequestResponseValueRenderOption"
+
+instance ToJSON BatchUpdateValuesRequestResponseValueRenderOption where
     toJSON = toJSONText
 
 -- | Where the legend of the pie chart should be drawn.
@@ -1840,4 +1960,40 @@ instance FromJSON TextToColumnsRequestDelimiterType where
     parseJSON = parseJSONText "TextToColumnsRequestDelimiterType"
 
 instance ToJSON TextToColumnsRequestDelimiterType where
+    toJSON = toJSONText
+
+-- | The dimension which will be shifted when inserting cells. If ROWS,
+-- existing cells will be shifted down. If COLUMNS, existing cells will be
+-- shifted right.
+data InsertRangeRequestShiftDimension
+    = IRRSDDimensionUnspecified
+      -- ^ @DIMENSION_UNSPECIFIED@
+      -- The default value, do not use.
+    | IRRSDRows
+      -- ^ @ROWS@
+      -- Operates on the rows of a sheet.
+    | IRRSDColumns
+      -- ^ @COLUMNS@
+      -- Operates on the columns of a sheet.
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable InsertRangeRequestShiftDimension
+
+instance FromHttpApiData InsertRangeRequestShiftDimension where
+    parseQueryParam = \case
+        "DIMENSION_UNSPECIFIED" -> Right IRRSDDimensionUnspecified
+        "ROWS" -> Right IRRSDRows
+        "COLUMNS" -> Right IRRSDColumns
+        x -> Left ("Unable to parse InsertRangeRequestShiftDimension from: " <> x)
+
+instance ToHttpApiData InsertRangeRequestShiftDimension where
+    toQueryParam = \case
+        IRRSDDimensionUnspecified -> "DIMENSION_UNSPECIFIED"
+        IRRSDRows -> "ROWS"
+        IRRSDColumns -> "COLUMNS"
+
+instance FromJSON InsertRangeRequestShiftDimension where
+    parseJSON = parseJSONText "InsertRangeRequestShiftDimension"
+
+instance ToJSON InsertRangeRequestShiftDimension where
     toJSON = toJSONText

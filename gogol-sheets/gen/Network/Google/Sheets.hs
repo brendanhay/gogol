@@ -113,6 +113,9 @@ module Network.Google.Sheets
     , batchClearValuesRequest
     , bcvrRanges
 
+    -- ** DeleteRangeRequestShiftDimension
+    , DeleteRangeRequestShiftDimension (..)
+
     -- ** BasicChartSeriesTargetAxis
     , BasicChartSeriesTargetAxis (..)
 
@@ -149,6 +152,9 @@ module Network.Google.Sheets
     , sortSpec
     , ssSortOrder
     , ssDimensionIndex
+
+    -- ** BatchUpdateValuesRequestResponseDateTimeRenderOption
+    , BatchUpdateValuesRequestResponseDateTimeRenderOption (..)
 
     -- ** CopyPasteRequest
     , CopyPasteRequest
@@ -189,12 +195,19 @@ module Network.Google.Sheets
     , autoResizeDimensionsRequest
     , ardrDimensions
 
+    -- ** DeleteRangeRequest
+    , DeleteRangeRequest
+    , deleteRangeRequest
+    , drrShiftDimension
+    , drrRange
+
     -- ** Sheet
     , Sheet
     , sheet
     , sData
     , sMerges
     , sProtectedRanges
+    , sBandedRanges
     , sCharts
     , sBasicFilter
     , sConditionalFormats
@@ -288,6 +301,9 @@ module Network.Google.Sheets
     , avrSpreadsheetId
     , avrUpdates
     , avrTableRange
+
+    -- ** BatchUpdateValuesRequestResponseValueRenderOption
+    , BatchUpdateValuesRequestResponseValueRenderOption (..)
 
     -- ** DataValidationRule
     , DataValidationRule
@@ -423,6 +439,7 @@ module Network.Google.Sheets
     , rUpdateConditionalFormatRule
     , rAddNamedRange
     , rAddChart
+    , rAddBanding
     , rDuplicateSheet
 
     -- ** FilterCriteria
@@ -507,6 +524,7 @@ module Network.Google.Sheets
     , sprSheets
     , sprNamedRanges
     , sprSpreadsheetId
+    , sprSpreadsheetURL
     , sprProperties
 
     -- ** InsertDimensionRequest
@@ -582,6 +600,11 @@ module Network.Google.Sheets
     , basicFilterCriteria
     , bfcAddtional
 
+    -- ** AddBandingRequest
+    , AddBandingRequest
+    , addBandingRequest
+    , abrBandedRange
+
     -- ** UpdateDimensionPropertiesRequest
     , UpdateDimensionPropertiesRequest
     , updateDimensionPropertiesRequest
@@ -622,6 +645,9 @@ module Network.Google.Sheets
     , batchUpdateValuesRequest
     , buvrData
     , buvrValueInputOption
+    , buvrIncludeValuesInResponse
+    , buvrResponseDateTimeRenderOption
+    , buvrResponseValueRenderOption
 
     -- ** AddChartRequest
     , AddChartRequest
@@ -720,6 +746,14 @@ module Network.Google.Sheets
     -- ** BooleanConditionType
     , BooleanConditionType (..)
 
+    -- ** BandedRange
+    , BandedRange
+    , bandedRange
+    , brBandedRangeId
+    , brRowProperties
+    , brRange
+    , brColumnProperties
+
     -- ** UpdateBOrdersRequest
     , UpdateBOrdersRequest
     , updateBOrdersRequest
@@ -802,7 +836,10 @@ module Network.Google.Sheets
     -- ** BatchUpdateSpreadsheetRequest
     , BatchUpdateSpreadsheetRequest
     , batchUpdateSpreadsheetRequest
+    , busrResponseIncludeGridData
+    , busrResponseRanges
     , busrRequests
+    , busrIncludeSpreadsheetInResponse
 
     -- ** PasteDataRequestType
     , PasteDataRequestType (..)
@@ -814,6 +851,7 @@ module Network.Google.Sheets
     , uvrSpreadsheetId
     , uvrUpdatedRows
     , uvrUpdatedRange
+    , uvrUpdatedData
     , uvrUpdatedColumns
 
     -- ** CopySheetToAnotherSpreadsheetRequest
@@ -915,12 +953,21 @@ module Network.Google.Sheets
     , batchUpdateSpreadsheetResponse
     , busrSpreadsheetId
     , busrReplies
+    , busrUpdatedSpreadsheet
 
     -- ** SetDataValidationRequest
     , SetDataValidationRequest
     , setDataValidationRequest
     , sdvrRule
     , sdvrRange
+
+    -- ** BandingProperties
+    , BandingProperties
+    , bandingProperties
+    , bpSecondBandColor
+    , bpHeaderColor
+    , bpFooterColor
+    , bpFirstBandColor
 
     -- ** ChartSpecHiddenDimensionStrategy
     , ChartSpecHiddenDimensionStrategy (..)
@@ -941,6 +988,11 @@ module Network.Google.Sheets
     , pgSortOrder
     , pgShowTotals
     , pgValueBucket
+
+    -- ** AddBandingResponse
+    , AddBandingResponse
+    , addBandingResponse
+    , aBandedRange
 
     -- ** CutPasteRequestPasteType
     , CutPasteRequestPasteType (..)
@@ -1010,6 +1062,15 @@ module Network.Google.Sheets
     -- ** TextToColumnsRequestDelimiterType
     , TextToColumnsRequestDelimiterType (..)
 
+    -- ** InsertRangeRequest
+    , InsertRangeRequest
+    , insertRangeRequest
+    , irrShiftDimension
+    , irrRange
+
+    -- ** InsertRangeRequestShiftDimension
+    , InsertRangeRequestShiftDimension (..)
+
     -- ** Padding
     , Padding
     , padding
@@ -1033,11 +1094,22 @@ module Network.Google.Sheets
     , dpPixelSize
     , dpHiddenByUser
 
+    -- ** UpdateBandingRequest
+    , UpdateBandingRequest
+    , updateBandingRequest
+    , ubrBandedRange
+    , ubrFields
+
     -- ** BatchGetValuesResponse
     , BatchGetValuesResponse
     , batchGetValuesResponse
     , bgvrSpreadsheetId
     , bgvrValueRanges
+
+    -- ** DeleteBandingRequest
+    , DeleteBandingRequest
+    , deleteBandingRequest
+    , dbrBandedRangeId
 
     -- ** Request'
     , Request'
@@ -1051,10 +1123,14 @@ module Network.Google.Sheets
     , reqSortRange
     , reqUpdateNamedRange
     , reqDeleteNamedRange
+    , reqInsertRange
+    , reqDeleteBanding
+    , reqUpdateBanding
     , reqClearBasicFilter
     , reqAppendCells
     , reqPasteData
     , reqUpdateEmbeddedObjectPosition
+    , reqDeleteRange
     , reqCopyPaste
     , reqAutoResizeDimensions
     , reqAddSheet
@@ -1074,6 +1150,7 @@ module Network.Google.Sheets
     , reqMergeCells
     , reqAddNamedRange
     , reqAddChart
+    , reqAddBanding
     , reqDuplicateSheet
     , reqAutoFill
     , reqUpdateDimensionProperties
