@@ -105,9 +105,14 @@ instance GoogleRequest UsersDataSourcesCreate where
         type Rs UsersDataSourcesCreate = DataSource
         type Scopes UsersDataSourcesCreate =
              '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.blood_glucose.write",
+               "https://www.googleapis.com/auth/fitness.blood_pressure.write",
                "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.body_temperature.write",
                "https://www.googleapis.com/auth/fitness.location.write",
-               "https://www.googleapis.com/auth/fitness.nutrition.write"]
+               "https://www.googleapis.com/auth/fitness.nutrition.write",
+               "https://www.googleapis.com/auth/fitness.oxygen_saturation.write",
+               "https://www.googleapis.com/auth/fitness.reproductive_health.write"]
         requestClient UsersDataSourcesCreate'{..}
           = go _udscUserId (Just AltJSON) _udscPayload
               fitnessService
