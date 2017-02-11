@@ -54,7 +54,7 @@ type ProjectsTopicsSubscriptionsListResource =
      "v1" :>
        Capture "topic" Text :>
          "subscriptions" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -70,7 +70,7 @@ type ProjectsTopicsSubscriptionsListResource =
 --
 -- /See:/ 'projectsTopicsSubscriptionsList' smart constructor.
 data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList'
-    { _ptslXgafv          :: !(Maybe Text)
+    { _ptslXgafv          :: !(Maybe Xgafv)
     , _ptslUploadProtocol :: !(Maybe Text)
     , _ptslPp             :: !Bool
     , _ptslAccessToken    :: !(Maybe Text)
@@ -123,7 +123,7 @@ projectsTopicsSubscriptionsList pPtslTopic_ =
     }
 
 -- | V1 error format.
-ptslXgafv :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
+ptslXgafv :: Lens' ProjectsTopicsSubscriptionsList (Maybe Xgafv)
 ptslXgafv
   = lens _ptslXgafv (\ s a -> s{_ptslXgafv = a})
 
@@ -149,7 +149,8 @@ ptslUploadType
   = lens _ptslUploadType
       (\ s a -> s{_ptslUploadType = a})
 
--- | The name of the topic that subscriptions are attached to.
+-- | The name of the topic that subscriptions are attached to. Format is
+-- \`projects\/{project}\/topics\/{topic}\`.
 ptslTopic :: Lens' ProjectsTopicsSubscriptionsList Text
 ptslTopic
   = lens _ptslTopic (\ s a -> s{_ptslTopic = a})

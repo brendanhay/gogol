@@ -96,6 +96,9 @@ module Network.Google.PubSub.Types
     , pubsubMessageAttributes
     , pmaAddtional
 
+    -- * Xgafv
+    , Xgafv (..)
+
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest

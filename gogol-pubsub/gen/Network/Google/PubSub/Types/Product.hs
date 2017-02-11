@@ -160,10 +160,11 @@ madrAckIds
       . _Coerce
 
 -- | The new ack deadline with respect to the time this request was sent to
--- the Pub\/Sub system. Must be >= 0. For example, if the value is 10, the
--- new ack deadline will expire 10 seconds after the \`ModifyAckDeadline\`
--- call was made. Specifying zero may immediately make the message
--- available for another pull request.
+-- the Pub\/Sub system. For example, if the value is 10, the new ack
+-- deadline will expire 10 seconds after the \`ModifyAckDeadline\` call was
+-- made. Specifying zero may immediately make the message available for
+-- another pull request. The minimum deadline you can specify is 0 seconds.
+-- The maximum deadline you can specify is 600 seconds (10 minutes).
 madrAckDeadlineSeconds :: Lens' ModifyAckDeadlineRequest (Maybe Int32)
 madrAckDeadlineSeconds
   = lens _madrAckDeadlineSeconds
@@ -254,8 +255,8 @@ instance ToJSON Empty where
 --
 -- /See:/ 'pubsubMessage' smart constructor.
 data PubsubMessage = PubsubMessage'
-    { _pmData        :: !(Maybe Base64)
-    , _pmPublishTime :: !(Maybe Text)
+    { _pmData        :: !(Maybe Bytes)
+    , _pmPublishTime :: !(Maybe DateTime')
     , _pmAttributes  :: !(Maybe PubsubMessageAttributes)
     , _pmMessageId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -281,20 +282,20 @@ pubsubMessage =
     , _pmMessageId = Nothing
     }
 
--- | The message payload. For JSON requests, the value of this field must be
--- [base64-encoded](https:\/\/tools.ietf.org\/html\/rfc4648).
+-- | The message payload.
 pmData :: Lens' PubsubMessage (Maybe ByteString)
 pmData
   = lens _pmData (\ s a -> s{_pmData = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The time at which the message was published, populated by the server
 -- when it receives the \`Publish\` call. It must not be populated by the
 -- publisher in a \`Publish\` call.
-pmPublishTime :: Lens' PubsubMessage (Maybe Text)
+pmPublishTime :: Lens' PubsubMessage (Maybe UTCTime)
 pmPublishTime
   = lens _pmPublishTime
       (\ s a -> s{_pmPublishTime = a})
+      . mapping _DateTime
 
 -- | Optional attributes for this message.
 pmAttributes :: Lens' PubsubMessage (Maybe PubsubMessageAttributes)
@@ -583,11 +584,12 @@ prMaxMessages
       (\ s a -> s{_prMaxMessages = a})
       . mapping _Coerce
 
--- | If this is specified as true the system will respond immediately even if
--- it is not able to return a message in the \`Pull\` response. Otherwise
--- the system is allowed to wait until at least one message is available
--- rather than returning no messages. The client may cancel the request if
--- it does not wish to wait any longer for the response.
+-- | If this field set to true, the system will respond immediately even if
+-- it there are no messages available to return in the \`Pull\` response.
+-- Otherwise, the system may wait (for a bounded amount of time) until at
+-- least one message is available, rather than returning no messages. The
+-- client may cancel the request if it does not wish to wait any longer for
+-- the response.
 prReturnImmediately :: Lens' PullRequest (Maybe Bool)
 prReturnImmediately
   = lens _prReturnImmediately
@@ -817,7 +819,7 @@ instance ToJSON TestIAMPermissionsResponse where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
-    { _pEtag     :: !(Maybe Base64)
+    { _pEtag     :: !(Maybe Bytes)
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -852,7 +854,7 @@ policy =
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | Version of the \`Policy\`. The default version is 0.
 pVersion :: Lens' Policy (Maybe Int32)
@@ -972,8 +974,8 @@ sPushConfig
   = lens _sPushConfig (\ s a -> s{_sPushConfig = a})
 
 -- | The name of the topic from which this subscription is receiving
--- messages. The value of this field will be \`_deleted-topic_\` if the
--- topic has been deleted.
+-- messages. Format is \`projects\/{project}\/topics\/{topic}\`. The value
+-- of this field will be \`_deleted-topic_\` if the topic has been deleted.
 sTopic :: Lens' Subscription (Maybe Text)
 sTopic = lens _sTopic (\ s a -> s{_sTopic = a})
 
@@ -994,12 +996,13 @@ sName = lens _sName (\ s a -> s{_sName = a})
 -- again during that time (on a best-effort basis). For pull subscriptions,
 -- this value is used as the initial value for the ack deadline. To
 -- override this value for a given message, call \`ModifyAckDeadline\` with
--- the corresponding \`ack_id\` if using pull. The maximum custom deadline
--- you can specify is 600 seconds (10 minutes). For push delivery, this
--- value is also used to set the request timeout for the call to the push
--- endpoint. If the subscriber never acknowledges the message, the Pub\/Sub
--- system will eventually redeliver the message. If this parameter is 0, a
--- default value of 10 seconds is used.
+-- the corresponding \`ack_id\` if using pull. The minimum custom deadline
+-- you can specify is 10 seconds. The maximum custom deadline you can
+-- specify is 600 seconds (10 minutes). If this parameter is 0, a default
+-- value of 10 seconds is used. For push delivery, this value is also used
+-- to set the request timeout for the call to the push endpoint. If the
+-- subscriber never acknowledges the message, the Pub\/Sub system will
+-- eventually redeliver the message.
 sAckDeadlineSeconds :: Lens' Subscription (Maybe Int32)
 sAckDeadlineSeconds
   = lens _sAckDeadlineSeconds

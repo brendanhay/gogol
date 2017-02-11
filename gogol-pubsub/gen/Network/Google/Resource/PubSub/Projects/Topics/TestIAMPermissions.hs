@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns permissions that a caller has on the specified resource.
+-- Returns permissions that a caller has on the specified resource. If the
+-- resource does not exist, this will return an empty set of permissions,
+-- not a NOT_FOUND error.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.testIamPermissions@.
 module Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
@@ -52,7 +54,7 @@ import           Network.Google.PubSub.Types
 type ProjectsTopicsTestIAMPermissionsResource =
      "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -63,11 +65,13 @@ type ProjectsTopicsTestIAMPermissionsResource =
                          ReqBody '[JSON] TestIAMPermissionsRequest :>
                            Post '[JSON] TestIAMPermissionsResponse
 
--- | Returns permissions that a caller has on the specified resource.
+-- | Returns permissions that a caller has on the specified resource. If the
+-- resource does not exist, this will return an empty set of permissions,
+-- not a NOT_FOUND error.
 --
 -- /See:/ 'projectsTopicsTestIAMPermissions' smart constructor.
 data ProjectsTopicsTestIAMPermissions = ProjectsTopicsTestIAMPermissions'
-    { _pttipXgafv          :: !(Maybe Text)
+    { _pttipXgafv          :: !(Maybe Xgafv)
     , _pttipUploadProtocol :: !(Maybe Text)
     , _pttipPp             :: !Bool
     , _pttipAccessToken    :: !(Maybe Text)
@@ -117,7 +121,7 @@ projectsTopicsTestIAMPermissions pPttipPayload_ pPttipResource_ =
     }
 
 -- | V1 error format.
-pttipXgafv :: Lens' ProjectsTopicsTestIAMPermissions (Maybe Text)
+pttipXgafv :: Lens' ProjectsTopicsTestIAMPermissions (Maybe Xgafv)
 pttipXgafv
   = lens _pttipXgafv (\ s a -> s{_pttipXgafv = a})
 

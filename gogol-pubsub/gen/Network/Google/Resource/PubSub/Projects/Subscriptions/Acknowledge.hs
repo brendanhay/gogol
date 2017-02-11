@@ -57,7 +57,7 @@ import           Network.Google.PubSub.Types
 type ProjectsSubscriptionsAcknowledgeResource =
      "v1" :>
        CaptureMode "subscription" "acknowledge" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -77,7 +77,7 @@ type ProjectsSubscriptionsAcknowledgeResource =
 --
 -- /See:/ 'projectsSubscriptionsAcknowledge' smart constructor.
 data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge'
-    { _psaXgafv          :: !(Maybe Text)
+    { _psaXgafv          :: !(Maybe Xgafv)
     , _psaUploadProtocol :: !(Maybe Text)
     , _psaPp             :: !Bool
     , _psaAccessToken    :: !(Maybe Text)
@@ -127,7 +127,7 @@ projectsSubscriptionsAcknowledge pPsaPayload_ pPsaSubscription_ =
     }
 
 -- | V1 error format.
-psaXgafv :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
+psaXgafv :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Xgafv)
 psaXgafv = lens _psaXgafv (\ s a -> s{_psaXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -163,7 +163,8 @@ psaBearerToken
   = lens _psaBearerToken
       (\ s a -> s{_psaBearerToken = a})
 
--- | The subscription whose message is being acknowledged.
+-- | The subscription whose message is being acknowledged. Format is
+-- \`projects\/{project}\/subscriptions\/{sub}\`.
 psaSubscription :: Lens' ProjectsSubscriptionsAcknowledge Text
 psaSubscription
   = lens _psaSubscription

@@ -51,7 +51,7 @@ import           Network.Google.PubSub.Types
 type ProjectsTopicsGetResource =
      "v1" :>
        Capture "topic" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -64,7 +64,7 @@ type ProjectsTopicsGetResource =
 --
 -- /See:/ 'projectsTopicsGet' smart constructor.
 data ProjectsTopicsGet = ProjectsTopicsGet'
-    { _ptgXgafv          :: !(Maybe Text)
+    { _ptgXgafv          :: !(Maybe Xgafv)
     , _ptgUploadProtocol :: !(Maybe Text)
     , _ptgPp             :: !Bool
     , _ptgAccessToken    :: !(Maybe Text)
@@ -109,7 +109,7 @@ projectsTopicsGet pPtgTopic_ =
     }
 
 -- | V1 error format.
-ptgXgafv :: Lens' ProjectsTopicsGet (Maybe Text)
+ptgXgafv :: Lens' ProjectsTopicsGet (Maybe Xgafv)
 ptgXgafv = lens _ptgXgafv (\ s a -> s{_ptgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -134,7 +134,8 @@ ptgUploadType
   = lens _ptgUploadType
       (\ s a -> s{_ptgUploadType = a})
 
--- | The name of the topic to get.
+-- | The name of the topic to get. Format is
+-- \`projects\/{project}\/topics\/{topic}\`.
 ptgTopic :: Lens' ProjectsTopicsGet Text
 ptgTopic = lens _ptgTopic (\ s a -> s{_ptgTopic = a})
 

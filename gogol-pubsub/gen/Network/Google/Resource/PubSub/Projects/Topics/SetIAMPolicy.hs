@@ -53,7 +53,7 @@ import           Network.Google.PubSub.Types
 type ProjectsTopicsSetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -69,7 +69,7 @@ type ProjectsTopicsSetIAMPolicyResource =
 --
 -- /See:/ 'projectsTopicsSetIAMPolicy' smart constructor.
 data ProjectsTopicsSetIAMPolicy = ProjectsTopicsSetIAMPolicy'
-    { _ptsipXgafv          :: !(Maybe Text)
+    { _ptsipXgafv          :: !(Maybe Xgafv)
     , _ptsipUploadProtocol :: !(Maybe Text)
     , _ptsipPp             :: !Bool
     , _ptsipAccessToken    :: !(Maybe Text)
@@ -119,7 +119,7 @@ projectsTopicsSetIAMPolicy pPtsipPayload_ pPtsipResource_ =
     }
 
 -- | V1 error format.
-ptsipXgafv :: Lens' ProjectsTopicsSetIAMPolicy (Maybe Text)
+ptsipXgafv :: Lens' ProjectsTopicsSetIAMPolicy (Maybe Xgafv)
 ptsipXgafv
   = lens _ptsipXgafv (\ s a -> s{_ptsipXgafv = a})
 

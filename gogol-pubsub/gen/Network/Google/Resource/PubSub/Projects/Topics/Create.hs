@@ -52,7 +52,7 @@ import           Network.Google.PubSub.Types
 type ProjectsTopicsCreateResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -66,7 +66,7 @@ type ProjectsTopicsCreateResource =
 --
 -- /See:/ 'projectsTopicsCreate' smart constructor.
 data ProjectsTopicsCreate = ProjectsTopicsCreate'
-    { _ptcXgafv          :: !(Maybe Text)
+    { _ptcXgafv          :: !(Maybe Xgafv)
     , _ptcUploadProtocol :: !(Maybe Text)
     , _ptcPp             :: !Bool
     , _ptcAccessToken    :: !(Maybe Text)
@@ -116,7 +116,7 @@ projectsTopicsCreate pPtcPayload_ pPtcName_ =
     }
 
 -- | V1 error format.
-ptcXgafv :: Lens' ProjectsTopicsCreate (Maybe Text)
+ptcXgafv :: Lens' ProjectsTopicsCreate (Maybe Xgafv)
 ptcXgafv = lens _ptcXgafv (\ s a -> s{_ptcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

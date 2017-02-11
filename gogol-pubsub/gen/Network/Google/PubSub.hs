@@ -175,6 +175,9 @@ module Network.Google.PubSub
     , pubsubMessageAttributes
     , pmaAddtional
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest

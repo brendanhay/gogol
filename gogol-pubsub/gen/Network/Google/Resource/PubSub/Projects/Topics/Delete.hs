@@ -56,7 +56,7 @@ import           Network.Google.PubSub.Types
 type ProjectsTopicsDeleteResource =
      "v1" :>
        Capture "topic" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -74,7 +74,7 @@ type ProjectsTopicsDeleteResource =
 --
 -- /See:/ 'projectsTopicsDelete' smart constructor.
 data ProjectsTopicsDelete = ProjectsTopicsDelete'
-    { _ptdXgafv          :: !(Maybe Text)
+    { _ptdXgafv          :: !(Maybe Xgafv)
     , _ptdUploadProtocol :: !(Maybe Text)
     , _ptdPp             :: !Bool
     , _ptdAccessToken    :: !(Maybe Text)
@@ -119,7 +119,7 @@ projectsTopicsDelete pPtdTopic_ =
     }
 
 -- | V1 error format.
-ptdXgafv :: Lens' ProjectsTopicsDelete (Maybe Text)
+ptdXgafv :: Lens' ProjectsTopicsDelete (Maybe Xgafv)
 ptdXgafv = lens _ptdXgafv (\ s a -> s{_ptdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -144,7 +144,8 @@ ptdUploadType
   = lens _ptdUploadType
       (\ s a -> s{_ptdUploadType = a})
 
--- | Name of the topic to delete.
+-- | Name of the topic to delete. Format is
+-- \`projects\/{project}\/topics\/{topic}\`.
 ptdTopic :: Lens' ProjectsTopicsDelete Text
 ptdTopic = lens _ptdTopic (\ s a -> s{_ptdTopic = a})
 

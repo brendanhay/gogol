@@ -54,7 +54,7 @@ type ProjectsTopicsListResource =
      "v1" :>
        Capture "project" Text :>
          "topics" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -70,7 +70,7 @@ type ProjectsTopicsListResource =
 --
 -- /See:/ 'projectsTopicsList' smart constructor.
 data ProjectsTopicsList = ProjectsTopicsList'
-    { _ptlXgafv          :: !(Maybe Text)
+    { _ptlXgafv          :: !(Maybe Xgafv)
     , _ptlUploadProtocol :: !(Maybe Text)
     , _ptlProject        :: !Text
     , _ptlPp             :: !Bool
@@ -123,7 +123,7 @@ projectsTopicsList pPtlProject_ =
     }
 
 -- | V1 error format.
-ptlXgafv :: Lens' ProjectsTopicsList (Maybe Text)
+ptlXgafv :: Lens' ProjectsTopicsList (Maybe Xgafv)
 ptlXgafv = lens _ptlXgafv (\ s a -> s{_ptlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -132,7 +132,8 @@ ptlUploadProtocol
   = lens _ptlUploadProtocol
       (\ s a -> s{_ptlUploadProtocol = a})
 
--- | The name of the cloud project that topics belong to.
+-- | The name of the cloud project that topics belong to. Format is
+-- \`projects\/{project}\`.
 ptlProject :: Lens' ProjectsTopicsList Text
 ptlProject
   = lens _ptlProject (\ s a -> s{_ptlProject = a})
