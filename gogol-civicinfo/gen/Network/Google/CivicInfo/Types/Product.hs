@@ -899,6 +899,73 @@ instance ToJSON RepresentativeInfoResponse where
                   ("divisions" .=) <$> _rirDivisions,
                   ("offices" .=) <$> _rirOffices])
 
+--
+-- /See:/ 'voterInfoSegmentResult' smart constructor.
+data VoterInfoSegmentResult = VoterInfoSegmentResult'
+    { _visrResponse        :: !(Maybe VoterInfoResponse)
+    , _visrGeneratedMillis :: !(Maybe (Textual Int64))
+    , _visrPostalAddress   :: !(Maybe PostalAddress)
+    , _visrRequest         :: !(Maybe VoterInfoRequest)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VoterInfoSegmentResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'visrResponse'
+--
+-- * 'visrGeneratedMillis'
+--
+-- * 'visrPostalAddress'
+--
+-- * 'visrRequest'
+voterInfoSegmentResult
+    :: VoterInfoSegmentResult
+voterInfoSegmentResult =
+    VoterInfoSegmentResult'
+    { _visrResponse = Nothing
+    , _visrGeneratedMillis = Nothing
+    , _visrPostalAddress = Nothing
+    , _visrRequest = Nothing
+    }
+
+visrResponse :: Lens' VoterInfoSegmentResult (Maybe VoterInfoResponse)
+visrResponse
+  = lens _visrResponse (\ s a -> s{_visrResponse = a})
+
+visrGeneratedMillis :: Lens' VoterInfoSegmentResult (Maybe Int64)
+visrGeneratedMillis
+  = lens _visrGeneratedMillis
+      (\ s a -> s{_visrGeneratedMillis = a})
+      . mapping _Coerce
+
+visrPostalAddress :: Lens' VoterInfoSegmentResult (Maybe PostalAddress)
+visrPostalAddress
+  = lens _visrPostalAddress
+      (\ s a -> s{_visrPostalAddress = a})
+
+visrRequest :: Lens' VoterInfoSegmentResult (Maybe VoterInfoRequest)
+visrRequest
+  = lens _visrRequest (\ s a -> s{_visrRequest = a})
+
+instance FromJSON VoterInfoSegmentResult where
+        parseJSON
+          = withObject "VoterInfoSegmentResult"
+              (\ o ->
+                 VoterInfoSegmentResult' <$>
+                   (o .:? "response") <*> (o .:? "generatedMillis") <*>
+                     (o .:? "postalAddress")
+                     <*> (o .:? "request"))
+
+instance ToJSON VoterInfoSegmentResult where
+        toJSON VoterInfoSegmentResult'{..}
+          = object
+              (catMaybes
+                 [("response" .=) <$> _visrResponse,
+                  ("generatedMillis" .=) <$> _visrGeneratedMillis,
+                  ("postalAddress" .=) <$> _visrPostalAddress,
+                  ("request" .=) <$> _visrRequest])
+
 -- | Represents a political geographic division that matches the requested
 -- query.
 --
@@ -1988,21 +2055,30 @@ instance ToJSON ElectoralDistrict where
 -- | A request for information about a voter.
 --
 -- /See:/ 'voterInfoRequest' smart constructor.
-newtype VoterInfoRequest = VoterInfoRequest'
-    { _virContextParams :: Maybe ContextParams
+data VoterInfoRequest = VoterInfoRequest'
+    { _virVoterInfoSegmentResult :: !(Maybe VoterInfoSegmentResult)
+    , _virContextParams          :: !(Maybe ContextParams)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VoterInfoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'virVoterInfoSegmentResult'
+--
 -- * 'virContextParams'
 voterInfoRequest
     :: VoterInfoRequest
 voterInfoRequest =
     VoterInfoRequest'
-    { _virContextParams = Nothing
+    { _virVoterInfoSegmentResult = Nothing
+    , _virContextParams = Nothing
     }
+
+virVoterInfoSegmentResult :: Lens' VoterInfoRequest (Maybe VoterInfoSegmentResult)
+virVoterInfoSegmentResult
+  = lens _virVoterInfoSegmentResult
+      (\ s a -> s{_virVoterInfoSegmentResult = a})
 
 virContextParams :: Lens' VoterInfoRequest (Maybe ContextParams)
 virContextParams
@@ -2013,13 +2089,17 @@ instance FromJSON VoterInfoRequest where
         parseJSON
           = withObject "VoterInfoRequest"
               (\ o ->
-                 VoterInfoRequest' <$> (o .:? "contextParams"))
+                 VoterInfoRequest' <$>
+                   (o .:? "voterInfoSegmentResult") <*>
+                     (o .:? "contextParams"))
 
 instance ToJSON VoterInfoRequest where
         toJSON VoterInfoRequest'{..}
           = object
               (catMaybes
-                 [("contextParams" .=) <$> _virContextParams])
+                 [("voterInfoSegmentResult" .=) <$>
+                    _virVoterInfoSegmentResult,
+                  ("contextParams" .=) <$> _virContextParams])
 
 -- | A simple representation of an address.
 --
@@ -2149,6 +2229,391 @@ instance ToJSON ContextParams where
           = object
               (catMaybes
                  [("clientProfile" .=) <$> _cpClientProFile])
+
+--
+-- /See:/ 'postalAddress' smart constructor.
+data PostalAddress = PostalAddress'
+    { _paAdministrativeAreaName             :: !(Maybe Text)
+    , _paRecipientName                      :: !(Maybe Text)
+    , _paLanguageCode                       :: !(Maybe Text)
+    , _paSortingCode                        :: !(Maybe Text)
+    , _paPremiseName                        :: !(Maybe Text)
+    , _paPostalCodeNumberExtension          :: !(Maybe Text)
+    , _paCountryNameCode                    :: !(Maybe Text)
+    , _paDependentThoroughfaresConnector    :: !(Maybe Text)
+    , _paThoroughfareLeadingType            :: !(Maybe Text)
+    , _paSubAdministrativeAreaName          :: !(Maybe Text)
+    , _paThoroughfareTrailingType           :: !(Maybe Text)
+    , _paPostBoxNumber                      :: !(Maybe Text)
+    , _paThoroughfarePreDirection           :: !(Maybe Text)
+    , _paLocalityName                       :: !(Maybe Text)
+    , _paDependentThoroughfaresType         :: !(Maybe Text)
+    , _paThoroughfarePostDirection          :: !(Maybe Text)
+    , _paIsDisputed                         :: !(Maybe Bool)
+    , _paDependentThoroughfarePreDirection  :: !(Maybe Text)
+    , _paThoroughfareNumber                 :: !(Maybe Text)
+    , _paDependentThoroughfaresIndicator    :: !(Maybe Text)
+    , _paDependentLocalityName              :: !(Maybe Text)
+    , _paFirmName                           :: !(Maybe Text)
+    , _paCountryName                        :: !(Maybe Text)
+    , _paDependentThoroughfareTrailingType  :: !(Maybe Text)
+    , _paDependentThoroughfareName          :: !(Maybe Text)
+    , _paDependentThoroughfarePostDirection :: !(Maybe Text)
+    , _paAddressLines                       :: !(Maybe [Text])
+    , _paPostalCodeNumber                   :: !(Maybe Text)
+    , _paThoroughfareName                   :: !(Maybe Text)
+    , _paSubPremiseName                     :: !(Maybe Text)
+    , _paDependentThoroughfareLeadingType   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PostalAddress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'paAdministrativeAreaName'
+--
+-- * 'paRecipientName'
+--
+-- * 'paLanguageCode'
+--
+-- * 'paSortingCode'
+--
+-- * 'paPremiseName'
+--
+-- * 'paPostalCodeNumberExtension'
+--
+-- * 'paCountryNameCode'
+--
+-- * 'paDependentThoroughfaresConnector'
+--
+-- * 'paThoroughfareLeadingType'
+--
+-- * 'paSubAdministrativeAreaName'
+--
+-- * 'paThoroughfareTrailingType'
+--
+-- * 'paPostBoxNumber'
+--
+-- * 'paThoroughfarePreDirection'
+--
+-- * 'paLocalityName'
+--
+-- * 'paDependentThoroughfaresType'
+--
+-- * 'paThoroughfarePostDirection'
+--
+-- * 'paIsDisputed'
+--
+-- * 'paDependentThoroughfarePreDirection'
+--
+-- * 'paThoroughfareNumber'
+--
+-- * 'paDependentThoroughfaresIndicator'
+--
+-- * 'paDependentLocalityName'
+--
+-- * 'paFirmName'
+--
+-- * 'paCountryName'
+--
+-- * 'paDependentThoroughfareTrailingType'
+--
+-- * 'paDependentThoroughfareName'
+--
+-- * 'paDependentThoroughfarePostDirection'
+--
+-- * 'paAddressLines'
+--
+-- * 'paPostalCodeNumber'
+--
+-- * 'paThoroughfareName'
+--
+-- * 'paSubPremiseName'
+--
+-- * 'paDependentThoroughfareLeadingType'
+postalAddress
+    :: PostalAddress
+postalAddress =
+    PostalAddress'
+    { _paAdministrativeAreaName = Nothing
+    , _paRecipientName = Nothing
+    , _paLanguageCode = Nothing
+    , _paSortingCode = Nothing
+    , _paPremiseName = Nothing
+    , _paPostalCodeNumberExtension = Nothing
+    , _paCountryNameCode = Nothing
+    , _paDependentThoroughfaresConnector = Nothing
+    , _paThoroughfareLeadingType = Nothing
+    , _paSubAdministrativeAreaName = Nothing
+    , _paThoroughfareTrailingType = Nothing
+    , _paPostBoxNumber = Nothing
+    , _paThoroughfarePreDirection = Nothing
+    , _paLocalityName = Nothing
+    , _paDependentThoroughfaresType = Nothing
+    , _paThoroughfarePostDirection = Nothing
+    , _paIsDisputed = Nothing
+    , _paDependentThoroughfarePreDirection = Nothing
+    , _paThoroughfareNumber = Nothing
+    , _paDependentThoroughfaresIndicator = Nothing
+    , _paDependentLocalityName = Nothing
+    , _paFirmName = Nothing
+    , _paCountryName = Nothing
+    , _paDependentThoroughfareTrailingType = Nothing
+    , _paDependentThoroughfareName = Nothing
+    , _paDependentThoroughfarePostDirection = Nothing
+    , _paAddressLines = Nothing
+    , _paPostalCodeNumber = Nothing
+    , _paThoroughfareName = Nothing
+    , _paSubPremiseName = Nothing
+    , _paDependentThoroughfareLeadingType = Nothing
+    }
+
+paAdministrativeAreaName :: Lens' PostalAddress (Maybe Text)
+paAdministrativeAreaName
+  = lens _paAdministrativeAreaName
+      (\ s a -> s{_paAdministrativeAreaName = a})
+
+paRecipientName :: Lens' PostalAddress (Maybe Text)
+paRecipientName
+  = lens _paRecipientName
+      (\ s a -> s{_paRecipientName = a})
+
+paLanguageCode :: Lens' PostalAddress (Maybe Text)
+paLanguageCode
+  = lens _paLanguageCode
+      (\ s a -> s{_paLanguageCode = a})
+
+paSortingCode :: Lens' PostalAddress (Maybe Text)
+paSortingCode
+  = lens _paSortingCode
+      (\ s a -> s{_paSortingCode = a})
+
+paPremiseName :: Lens' PostalAddress (Maybe Text)
+paPremiseName
+  = lens _paPremiseName
+      (\ s a -> s{_paPremiseName = a})
+
+paPostalCodeNumberExtension :: Lens' PostalAddress (Maybe Text)
+paPostalCodeNumberExtension
+  = lens _paPostalCodeNumberExtension
+      (\ s a -> s{_paPostalCodeNumberExtension = a})
+
+paCountryNameCode :: Lens' PostalAddress (Maybe Text)
+paCountryNameCode
+  = lens _paCountryNameCode
+      (\ s a -> s{_paCountryNameCode = a})
+
+paDependentThoroughfaresConnector :: Lens' PostalAddress (Maybe Text)
+paDependentThoroughfaresConnector
+  = lens _paDependentThoroughfaresConnector
+      (\ s a -> s{_paDependentThoroughfaresConnector = a})
+
+paThoroughfareLeadingType :: Lens' PostalAddress (Maybe Text)
+paThoroughfareLeadingType
+  = lens _paThoroughfareLeadingType
+      (\ s a -> s{_paThoroughfareLeadingType = a})
+
+paSubAdministrativeAreaName :: Lens' PostalAddress (Maybe Text)
+paSubAdministrativeAreaName
+  = lens _paSubAdministrativeAreaName
+      (\ s a -> s{_paSubAdministrativeAreaName = a})
+
+paThoroughfareTrailingType :: Lens' PostalAddress (Maybe Text)
+paThoroughfareTrailingType
+  = lens _paThoroughfareTrailingType
+      (\ s a -> s{_paThoroughfareTrailingType = a})
+
+paPostBoxNumber :: Lens' PostalAddress (Maybe Text)
+paPostBoxNumber
+  = lens _paPostBoxNumber
+      (\ s a -> s{_paPostBoxNumber = a})
+
+paThoroughfarePreDirection :: Lens' PostalAddress (Maybe Text)
+paThoroughfarePreDirection
+  = lens _paThoroughfarePreDirection
+      (\ s a -> s{_paThoroughfarePreDirection = a})
+
+paLocalityName :: Lens' PostalAddress (Maybe Text)
+paLocalityName
+  = lens _paLocalityName
+      (\ s a -> s{_paLocalityName = a})
+
+paDependentThoroughfaresType :: Lens' PostalAddress (Maybe Text)
+paDependentThoroughfaresType
+  = lens _paDependentThoroughfaresType
+      (\ s a -> s{_paDependentThoroughfaresType = a})
+
+paThoroughfarePostDirection :: Lens' PostalAddress (Maybe Text)
+paThoroughfarePostDirection
+  = lens _paThoroughfarePostDirection
+      (\ s a -> s{_paThoroughfarePostDirection = a})
+
+paIsDisputed :: Lens' PostalAddress (Maybe Bool)
+paIsDisputed
+  = lens _paIsDisputed (\ s a -> s{_paIsDisputed = a})
+
+paDependentThoroughfarePreDirection :: Lens' PostalAddress (Maybe Text)
+paDependentThoroughfarePreDirection
+  = lens _paDependentThoroughfarePreDirection
+      (\ s a ->
+         s{_paDependentThoroughfarePreDirection = a})
+
+paThoroughfareNumber :: Lens' PostalAddress (Maybe Text)
+paThoroughfareNumber
+  = lens _paThoroughfareNumber
+      (\ s a -> s{_paThoroughfareNumber = a})
+
+paDependentThoroughfaresIndicator :: Lens' PostalAddress (Maybe Text)
+paDependentThoroughfaresIndicator
+  = lens _paDependentThoroughfaresIndicator
+      (\ s a -> s{_paDependentThoroughfaresIndicator = a})
+
+paDependentLocalityName :: Lens' PostalAddress (Maybe Text)
+paDependentLocalityName
+  = lens _paDependentLocalityName
+      (\ s a -> s{_paDependentLocalityName = a})
+
+paFirmName :: Lens' PostalAddress (Maybe Text)
+paFirmName
+  = lens _paFirmName (\ s a -> s{_paFirmName = a})
+
+paCountryName :: Lens' PostalAddress (Maybe Text)
+paCountryName
+  = lens _paCountryName
+      (\ s a -> s{_paCountryName = a})
+
+paDependentThoroughfareTrailingType :: Lens' PostalAddress (Maybe Text)
+paDependentThoroughfareTrailingType
+  = lens _paDependentThoroughfareTrailingType
+      (\ s a ->
+         s{_paDependentThoroughfareTrailingType = a})
+
+paDependentThoroughfareName :: Lens' PostalAddress (Maybe Text)
+paDependentThoroughfareName
+  = lens _paDependentThoroughfareName
+      (\ s a -> s{_paDependentThoroughfareName = a})
+
+paDependentThoroughfarePostDirection :: Lens' PostalAddress (Maybe Text)
+paDependentThoroughfarePostDirection
+  = lens _paDependentThoroughfarePostDirection
+      (\ s a ->
+         s{_paDependentThoroughfarePostDirection = a})
+
+paAddressLines :: Lens' PostalAddress [Text]
+paAddressLines
+  = lens _paAddressLines
+      (\ s a -> s{_paAddressLines = a})
+      . _Default
+      . _Coerce
+
+paPostalCodeNumber :: Lens' PostalAddress (Maybe Text)
+paPostalCodeNumber
+  = lens _paPostalCodeNumber
+      (\ s a -> s{_paPostalCodeNumber = a})
+
+paThoroughfareName :: Lens' PostalAddress (Maybe Text)
+paThoroughfareName
+  = lens _paThoroughfareName
+      (\ s a -> s{_paThoroughfareName = a})
+
+paSubPremiseName :: Lens' PostalAddress (Maybe Text)
+paSubPremiseName
+  = lens _paSubPremiseName
+      (\ s a -> s{_paSubPremiseName = a})
+
+paDependentThoroughfareLeadingType :: Lens' PostalAddress (Maybe Text)
+paDependentThoroughfareLeadingType
+  = lens _paDependentThoroughfareLeadingType
+      (\ s a -> s{_paDependentThoroughfareLeadingType = a})
+
+instance FromJSON PostalAddress where
+        parseJSON
+          = withObject "PostalAddress"
+              (\ o ->
+                 PostalAddress' <$>
+                   (o .:? "administrativeAreaName") <*>
+                     (o .:? "recipientName")
+                     <*> (o .:? "languageCode")
+                     <*> (o .:? "sortingCode")
+                     <*> (o .:? "premiseName")
+                     <*> (o .:? "postalCodeNumberExtension")
+                     <*> (o .:? "countryNameCode")
+                     <*> (o .:? "dependentThoroughfaresConnector")
+                     <*> (o .:? "thoroughfareLeadingType")
+                     <*> (o .:? "subAdministrativeAreaName")
+                     <*> (o .:? "thoroughfareTrailingType")
+                     <*> (o .:? "postBoxNumber")
+                     <*> (o .:? "thoroughfarePreDirection")
+                     <*> (o .:? "localityName")
+                     <*> (o .:? "dependentThoroughfaresType")
+                     <*> (o .:? "thoroughfarePostDirection")
+                     <*> (o .:? "isDisputed")
+                     <*> (o .:? "dependentThoroughfarePreDirection")
+                     <*> (o .:? "thoroughfareNumber")
+                     <*> (o .:? "dependentThoroughfaresIndicator")
+                     <*> (o .:? "dependentLocalityName")
+                     <*> (o .:? "firmName")
+                     <*> (o .:? "countryName")
+                     <*> (o .:? "dependentThoroughfareTrailingType")
+                     <*> (o .:? "dependentThoroughfareName")
+                     <*> (o .:? "dependentThoroughfarePostDirection")
+                     <*> (o .:? "addressLines" .!= mempty)
+                     <*> (o .:? "postalCodeNumber")
+                     <*> (o .:? "thoroughfareName")
+                     <*> (o .:? "subPremiseName")
+                     <*> (o .:? "dependentThoroughfareLeadingType"))
+
+instance ToJSON PostalAddress where
+        toJSON PostalAddress'{..}
+          = object
+              (catMaybes
+                 [("administrativeAreaName" .=) <$>
+                    _paAdministrativeAreaName,
+                  ("recipientName" .=) <$> _paRecipientName,
+                  ("languageCode" .=) <$> _paLanguageCode,
+                  ("sortingCode" .=) <$> _paSortingCode,
+                  ("premiseName" .=) <$> _paPremiseName,
+                  ("postalCodeNumberExtension" .=) <$>
+                    _paPostalCodeNumberExtension,
+                  ("countryNameCode" .=) <$> _paCountryNameCode,
+                  ("dependentThoroughfaresConnector" .=) <$>
+                    _paDependentThoroughfaresConnector,
+                  ("thoroughfareLeadingType" .=) <$>
+                    _paThoroughfareLeadingType,
+                  ("subAdministrativeAreaName" .=) <$>
+                    _paSubAdministrativeAreaName,
+                  ("thoroughfareTrailingType" .=) <$>
+                    _paThoroughfareTrailingType,
+                  ("postBoxNumber" .=) <$> _paPostBoxNumber,
+                  ("thoroughfarePreDirection" .=) <$>
+                    _paThoroughfarePreDirection,
+                  ("localityName" .=) <$> _paLocalityName,
+                  ("dependentThoroughfaresType" .=) <$>
+                    _paDependentThoroughfaresType,
+                  ("thoroughfarePostDirection" .=) <$>
+                    _paThoroughfarePostDirection,
+                  ("isDisputed" .=) <$> _paIsDisputed,
+                  ("dependentThoroughfarePreDirection" .=) <$>
+                    _paDependentThoroughfarePreDirection,
+                  ("thoroughfareNumber" .=) <$> _paThoroughfareNumber,
+                  ("dependentThoroughfaresIndicator" .=) <$>
+                    _paDependentThoroughfaresIndicator,
+                  ("dependentLocalityName" .=) <$>
+                    _paDependentLocalityName,
+                  ("firmName" .=) <$> _paFirmName,
+                  ("countryName" .=) <$> _paCountryName,
+                  ("dependentThoroughfareTrailingType" .=) <$>
+                    _paDependentThoroughfareTrailingType,
+                  ("dependentThoroughfareName" .=) <$>
+                    _paDependentThoroughfareName,
+                  ("dependentThoroughfarePostDirection" .=) <$>
+                    _paDependentThoroughfarePostDirection,
+                  ("addressLines" .=) <$> _paAddressLines,
+                  ("postalCodeNumber" .=) <$> _paPostalCodeNumber,
+                  ("thoroughfareName" .=) <$> _paThoroughfareName,
+                  ("subPremiseName" .=) <$> _paSubPremiseName,
+                  ("dependentThoroughfareLeadingType" .=) <$>
+                    _paDependentThoroughfareLeadingType])
 
 -- | Describes information about a regional election administrative area.
 --
