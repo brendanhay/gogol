@@ -509,9 +509,13 @@ data UserComment = UserComment'
     { _ucAndroidOSVersion :: !(Maybe (Textual Int32))
     , _ucText             :: !(Maybe Text)
     , _ucDevice           :: !(Maybe Text)
+    , _ucThumbsUpCount    :: !(Maybe (Textual Int32))
     , _ucAppVersionCode   :: !(Maybe (Textual Int32))
+    , _ucThumbsDownCount  :: !(Maybe (Textual Int32))
+    , _ucOriginalText     :: !(Maybe Text)
     , _ucAppVersionName   :: !(Maybe Text)
     , _ucReviewerLanguage :: !(Maybe Text)
+    , _ucDeviceMetadata   :: !(Maybe DeviceMetadata)
     , _ucStarRating       :: !(Maybe (Textual Int32))
     , _ucLastModified     :: !(Maybe Timestamp)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -526,11 +530,19 @@ data UserComment = UserComment'
 --
 -- * 'ucDevice'
 --
+-- * 'ucThumbsUpCount'
+--
 -- * 'ucAppVersionCode'
+--
+-- * 'ucThumbsDownCount'
+--
+-- * 'ucOriginalText'
 --
 -- * 'ucAppVersionName'
 --
 -- * 'ucReviewerLanguage'
+--
+-- * 'ucDeviceMetadata'
 --
 -- * 'ucStarRating'
 --
@@ -542,9 +554,13 @@ userComment =
     { _ucAndroidOSVersion = Nothing
     , _ucText = Nothing
     , _ucDevice = Nothing
+    , _ucThumbsUpCount = Nothing
     , _ucAppVersionCode = Nothing
+    , _ucThumbsDownCount = Nothing
+    , _ucOriginalText = Nothing
     , _ucAppVersionName = Nothing
     , _ucReviewerLanguage = Nothing
+    , _ucDeviceMetadata = Nothing
     , _ucStarRating = Nothing
     , _ucLastModified = Nothing
     }
@@ -567,6 +583,13 @@ ucText = lens _ucText (\ s a -> s{_ucText = a})
 ucDevice :: Lens' UserComment (Maybe Text)
 ucDevice = lens _ucDevice (\ s a -> s{_ucDevice = a})
 
+-- | Number of users who have given this review a thumbs up
+ucThumbsUpCount :: Lens' UserComment (Maybe Int32)
+ucThumbsUpCount
+  = lens _ucThumbsUpCount
+      (\ s a -> s{_ucThumbsUpCount = a})
+      . mapping _Coerce
+
 -- | Integer version code of the app as installed at the time the review was
 -- written. May be absent.
 ucAppVersionCode :: Lens' UserComment (Maybe Int32)
@@ -574,6 +597,20 @@ ucAppVersionCode
   = lens _ucAppVersionCode
       (\ s a -> s{_ucAppVersionCode = a})
       . mapping _Coerce
+
+-- | Number of users who have given this review a thumbs down
+ucThumbsDownCount :: Lens' UserComment (Maybe Int32)
+ucThumbsDownCount
+  = lens _ucThumbsDownCount
+      (\ s a -> s{_ucThumbsDownCount = a})
+      . mapping _Coerce
+
+-- | Untranslated text of the review, in the case where the review has been
+-- translated. If the review has not been translated this is left blank.
+ucOriginalText :: Lens' UserComment (Maybe Text)
+ucOriginalText
+  = lens _ucOriginalText
+      (\ s a -> s{_ucOriginalText = a})
 
 -- | String version name of the app as installed at the time the review was
 -- written. May be absent.
@@ -589,6 +626,12 @@ ucReviewerLanguage :: Lens' UserComment (Maybe Text)
 ucReviewerLanguage
   = lens _ucReviewerLanguage
       (\ s a -> s{_ucReviewerLanguage = a})
+
+-- | Some information about the characteristics of the user\'s device
+ucDeviceMetadata :: Lens' UserComment (Maybe DeviceMetadata)
+ucDeviceMetadata
+  = lens _ucDeviceMetadata
+      (\ s a -> s{_ucDeviceMetadata = a})
 
 -- | The star rating associated with the review, from 1 to 5.
 ucStarRating :: Lens' UserComment (Maybe Int32)
@@ -609,9 +652,13 @@ instance FromJSON UserComment where
                  UserComment' <$>
                    (o .:? "androidOsVersion") <*> (o .:? "text") <*>
                      (o .:? "device")
+                     <*> (o .:? "thumbsUpCount")
                      <*> (o .:? "appVersionCode")
+                     <*> (o .:? "thumbsDownCount")
+                     <*> (o .:? "originalText")
                      <*> (o .:? "appVersionName")
                      <*> (o .:? "reviewerLanguage")
+                     <*> (o .:? "deviceMetadata")
                      <*> (o .:? "starRating")
                      <*> (o .:? "lastModified"))
 
@@ -621,9 +668,13 @@ instance ToJSON UserComment where
               (catMaybes
                  [("androidOsVersion" .=) <$> _ucAndroidOSVersion,
                   ("text" .=) <$> _ucText, ("device" .=) <$> _ucDevice,
+                  ("thumbsUpCount" .=) <$> _ucThumbsUpCount,
                   ("appVersionCode" .=) <$> _ucAppVersionCode,
+                  ("thumbsDownCount" .=) <$> _ucThumbsDownCount,
+                  ("originalText" .=) <$> _ucOriginalText,
                   ("appVersionName" .=) <$> _ucAppVersionName,
                   ("reviewerLanguage" .=) <$> _ucReviewerLanguage,
+                  ("deviceMetadata" .=) <$> _ucDeviceMetadata,
                   ("starRating" .=) <$> _ucStarRating,
                   ("lastModified" .=) <$> _ucLastModified])
 
@@ -1902,6 +1953,64 @@ instance ToJSON DeobfuscationFile where
               (catMaybes [("symbolType" .=) <$> _dfSymbolType])
 
 --
+-- /See:/ 'voidedPurchasesListResponse' smart constructor.
+data VoidedPurchasesListResponse = VoidedPurchasesListResponse'
+    { _vplrTokenPagination :: !(Maybe TokenPagination)
+    , _vplrPageInfo        :: !(Maybe PageInfo)
+    , _vplrVoidedPurchases :: !(Maybe [VoidedPurchase])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VoidedPurchasesListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vplrTokenPagination'
+--
+-- * 'vplrPageInfo'
+--
+-- * 'vplrVoidedPurchases'
+voidedPurchasesListResponse
+    :: VoidedPurchasesListResponse
+voidedPurchasesListResponse =
+    VoidedPurchasesListResponse'
+    { _vplrTokenPagination = Nothing
+    , _vplrPageInfo = Nothing
+    , _vplrVoidedPurchases = Nothing
+    }
+
+vplrTokenPagination :: Lens' VoidedPurchasesListResponse (Maybe TokenPagination)
+vplrTokenPagination
+  = lens _vplrTokenPagination
+      (\ s a -> s{_vplrTokenPagination = a})
+
+vplrPageInfo :: Lens' VoidedPurchasesListResponse (Maybe PageInfo)
+vplrPageInfo
+  = lens _vplrPageInfo (\ s a -> s{_vplrPageInfo = a})
+
+vplrVoidedPurchases :: Lens' VoidedPurchasesListResponse [VoidedPurchase]
+vplrVoidedPurchases
+  = lens _vplrVoidedPurchases
+      (\ s a -> s{_vplrVoidedPurchases = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON VoidedPurchasesListResponse where
+        parseJSON
+          = withObject "VoidedPurchasesListResponse"
+              (\ o ->
+                 VoidedPurchasesListResponse' <$>
+                   (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
+                     (o .:? "voidedPurchases" .!= mempty))
+
+instance ToJSON VoidedPurchasesListResponse where
+        toJSON VoidedPurchasesListResponse'{..}
+          = object
+              (catMaybes
+                 [("tokenPagination" .=) <$> _vplrTokenPagination,
+                  ("pageInfo" .=) <$> _vplrPageInfo,
+                  ("voidedPurchases" .=) <$> _vplrVoidedPurchases])
+
+--
 -- /See:/ 'expansionFilesUploadResponse' smart constructor.
 newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse'
     { _efurExpansionFile :: Maybe ExpansionFile
@@ -2404,6 +2513,164 @@ instance ToJSON ReviewsReplyRequest where
         toJSON ReviewsReplyRequest'{..}
           = object
               (catMaybes [("replyText" .=) <$> _rrrReplyText])
+
+--
+-- /See:/ 'deviceMetadata' smart constructor.
+data DeviceMetadata = DeviceMetadata'
+    { _dmProductName      :: !(Maybe Text)
+    , _dmGlEsVersion      :: !(Maybe (Textual Int32))
+    , _dmManufacturer     :: !(Maybe Text)
+    , _dmScreenWidthPx    :: !(Maybe (Textual Int32))
+    , _dmRamMb            :: !(Maybe (Textual Int32))
+    , _dmCPUMake          :: !(Maybe Text)
+    , _dmScreenHeightPx   :: !(Maybe (Textual Int32))
+    , _dmNATivePlatform   :: !(Maybe Text)
+    , _dmDeviceClass      :: !(Maybe Text)
+    , _dmCPUModel         :: !(Maybe Text)
+    , _dmScreenDensityDpi :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeviceMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dmProductName'
+--
+-- * 'dmGlEsVersion'
+--
+-- * 'dmManufacturer'
+--
+-- * 'dmScreenWidthPx'
+--
+-- * 'dmRamMb'
+--
+-- * 'dmCPUMake'
+--
+-- * 'dmScreenHeightPx'
+--
+-- * 'dmNATivePlatform'
+--
+-- * 'dmDeviceClass'
+--
+-- * 'dmCPUModel'
+--
+-- * 'dmScreenDensityDpi'
+deviceMetadata
+    :: DeviceMetadata
+deviceMetadata =
+    DeviceMetadata'
+    { _dmProductName = Nothing
+    , _dmGlEsVersion = Nothing
+    , _dmManufacturer = Nothing
+    , _dmScreenWidthPx = Nothing
+    , _dmRamMb = Nothing
+    , _dmCPUMake = Nothing
+    , _dmScreenHeightPx = Nothing
+    , _dmNATivePlatform = Nothing
+    , _dmDeviceClass = Nothing
+    , _dmCPUModel = Nothing
+    , _dmScreenDensityDpi = Nothing
+    }
+
+-- | Device model name (e.g. Droid)
+dmProductName :: Lens' DeviceMetadata (Maybe Text)
+dmProductName
+  = lens _dmProductName
+      (\ s a -> s{_dmProductName = a})
+
+-- | OpenGL version
+dmGlEsVersion :: Lens' DeviceMetadata (Maybe Int32)
+dmGlEsVersion
+  = lens _dmGlEsVersion
+      (\ s a -> s{_dmGlEsVersion = a})
+      . mapping _Coerce
+
+-- | Device manufacturer (e.g. Motorola)
+dmManufacturer :: Lens' DeviceMetadata (Maybe Text)
+dmManufacturer
+  = lens _dmManufacturer
+      (\ s a -> s{_dmManufacturer = a})
+
+-- | Screen width in pixels
+dmScreenWidthPx :: Lens' DeviceMetadata (Maybe Int32)
+dmScreenWidthPx
+  = lens _dmScreenWidthPx
+      (\ s a -> s{_dmScreenWidthPx = a})
+      . mapping _Coerce
+
+-- | Device RAM in Megabytes e.g. \"2048\"
+dmRamMb :: Lens' DeviceMetadata (Maybe Int32)
+dmRamMb
+  = lens _dmRamMb (\ s a -> s{_dmRamMb = a}) .
+      mapping _Coerce
+
+-- | Device CPU make e.g. \"Qualcomm\"
+dmCPUMake :: Lens' DeviceMetadata (Maybe Text)
+dmCPUMake
+  = lens _dmCPUMake (\ s a -> s{_dmCPUMake = a})
+
+-- | Screen height in pixels
+dmScreenHeightPx :: Lens' DeviceMetadata (Maybe Int32)
+dmScreenHeightPx
+  = lens _dmScreenHeightPx
+      (\ s a -> s{_dmScreenHeightPx = a})
+      . mapping _Coerce
+
+-- | Comma separated list of native platforms (e.g. \"arm\", \"arm7\")
+dmNATivePlatform :: Lens' DeviceMetadata (Maybe Text)
+dmNATivePlatform
+  = lens _dmNATivePlatform
+      (\ s a -> s{_dmNATivePlatform = a})
+
+-- | Device class (e.g. tablet)
+dmDeviceClass :: Lens' DeviceMetadata (Maybe Text)
+dmDeviceClass
+  = lens _dmDeviceClass
+      (\ s a -> s{_dmDeviceClass = a})
+
+-- | Device CPU model e.g. \"MSM8974\"
+dmCPUModel :: Lens' DeviceMetadata (Maybe Text)
+dmCPUModel
+  = lens _dmCPUModel (\ s a -> s{_dmCPUModel = a})
+
+-- | Screen density in DPI
+dmScreenDensityDpi :: Lens' DeviceMetadata (Maybe Int32)
+dmScreenDensityDpi
+  = lens _dmScreenDensityDpi
+      (\ s a -> s{_dmScreenDensityDpi = a})
+      . mapping _Coerce
+
+instance FromJSON DeviceMetadata where
+        parseJSON
+          = withObject "DeviceMetadata"
+              (\ o ->
+                 DeviceMetadata' <$>
+                   (o .:? "productName") <*> (o .:? "glEsVersion") <*>
+                     (o .:? "manufacturer")
+                     <*> (o .:? "screenWidthPx")
+                     <*> (o .:? "ramMb")
+                     <*> (o .:? "cpuMake")
+                     <*> (o .:? "screenHeightPx")
+                     <*> (o .:? "nativePlatform")
+                     <*> (o .:? "deviceClass")
+                     <*> (o .:? "cpuModel")
+                     <*> (o .:? "screenDensityDpi"))
+
+instance ToJSON DeviceMetadata where
+        toJSON DeviceMetadata'{..}
+          = object
+              (catMaybes
+                 [("productName" .=) <$> _dmProductName,
+                  ("glEsVersion" .=) <$> _dmGlEsVersion,
+                  ("manufacturer" .=) <$> _dmManufacturer,
+                  ("screenWidthPx" .=) <$> _dmScreenWidthPx,
+                  ("ramMb" .=) <$> _dmRamMb,
+                  ("cpuMake" .=) <$> _dmCPUMake,
+                  ("screenHeightPx" .=) <$> _dmScreenHeightPx,
+                  ("nativePlatform" .=) <$> _dmNATivePlatform,
+                  ("deviceClass" .=) <$> _dmDeviceClass,
+                  ("cpuModel" .=) <$> _dmCPUModel,
+                  ("screenDensityDpi" .=) <$> _dmScreenDensityDpi])
 
 --
 -- /See:/ 'developerComment' smart constructor.
@@ -3187,6 +3454,85 @@ instance ToJSON Timestamp where
               (catMaybes
                  [("nanos" .=) <$> _tNanos,
                   ("seconds" .=) <$> _tSeconds])
+
+-- | A VoidedPurchase resource indicates a purchase that was either
+-- cancelled\/refunded\/charged-back.
+--
+-- /See:/ 'voidedPurchase' smart constructor.
+data VoidedPurchase = VoidedPurchase'
+    { _vpKind               :: !Text
+    , _vpPurchaseTimeMillis :: !(Maybe (Textual Int64))
+    , _vpPurchaseToken      :: !(Maybe Text)
+    , _vpVoidedTimeMillis   :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VoidedPurchase' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vpKind'
+--
+-- * 'vpPurchaseTimeMillis'
+--
+-- * 'vpPurchaseToken'
+--
+-- * 'vpVoidedTimeMillis'
+voidedPurchase
+    :: VoidedPurchase
+voidedPurchase =
+    VoidedPurchase'
+    { _vpKind = "androidpublisher#voidedPurchase"
+    , _vpPurchaseTimeMillis = Nothing
+    , _vpPurchaseToken = Nothing
+    , _vpVoidedTimeMillis = Nothing
+    }
+
+-- | This kind represents a voided purchase object in the androidpublisher
+-- service.
+vpKind :: Lens' VoidedPurchase Text
+vpKind = lens _vpKind (\ s a -> s{_vpKind = a})
+
+-- | The time at which the purchase was made, in milliseconds since the epoch
+-- (Jan 1, 1970).
+vpPurchaseTimeMillis :: Lens' VoidedPurchase (Maybe Int64)
+vpPurchaseTimeMillis
+  = lens _vpPurchaseTimeMillis
+      (\ s a -> s{_vpPurchaseTimeMillis = a})
+      . mapping _Coerce
+
+-- | The token that was generated when a purchase was made. This uniquely
+-- identifies a purchase.
+vpPurchaseToken :: Lens' VoidedPurchase (Maybe Text)
+vpPurchaseToken
+  = lens _vpPurchaseToken
+      (\ s a -> s{_vpPurchaseToken = a})
+
+-- | The time at which the purchase was cancelled\/refunded\/charged-back, in
+-- milliseconds since the epoch (Jan 1, 1970).
+vpVoidedTimeMillis :: Lens' VoidedPurchase (Maybe Int64)
+vpVoidedTimeMillis
+  = lens _vpVoidedTimeMillis
+      (\ s a -> s{_vpVoidedTimeMillis = a})
+      . mapping _Coerce
+
+instance FromJSON VoidedPurchase where
+        parseJSON
+          = withObject "VoidedPurchase"
+              (\ o ->
+                 VoidedPurchase' <$>
+                   (o .:? "kind" .!= "androidpublisher#voidedPurchase")
+                     <*> (o .:? "purchaseTimeMillis")
+                     <*> (o .:? "purchaseToken")
+                     <*> (o .:? "voidedTimeMillis"))
+
+instance ToJSON VoidedPurchase where
+        toJSON VoidedPurchase'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _vpKind),
+                  ("purchaseTimeMillis" .=) <$> _vpPurchaseTimeMillis,
+                  ("purchaseToken" .=) <$> _vpPurchaseToken,
+                  ("voidedTimeMillis" .=) <$> _vpVoidedTimeMillis])
 
 --
 -- /See:/ 'reviewReplyResult' smart constructor.

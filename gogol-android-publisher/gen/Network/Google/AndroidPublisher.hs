@@ -188,6 +188,9 @@ module Network.Google.AndroidPublisher
     -- ** androidpublisher.purchases.subscriptions.revoke
     , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
 
+    -- ** androidpublisher.purchases.voidedpurchases.list
+    , module Network.Google.Resource.AndroidPublisher.Purchases.Voidedpurchases.List
+
     -- ** androidpublisher.reviews.get
     , module Network.Google.Resource.AndroidPublisher.Reviews.Get
 
@@ -272,9 +275,13 @@ module Network.Google.AndroidPublisher
     , ucAndroidOSVersion
     , ucText
     , ucDevice
+    , ucThumbsUpCount
     , ucAppVersionCode
+    , ucThumbsDownCount
+    , ucOriginalText
     , ucAppVersionName
     , ucReviewerLanguage
+    , ucDeviceMetadata
     , ucStarRating
     , ucLastModified
 
@@ -433,6 +440,13 @@ module Network.Google.AndroidPublisher
     , deobfuscationFile
     , dfSymbolType
 
+    -- ** VoidedPurchasesListResponse
+    , VoidedPurchasesListResponse
+    , voidedPurchasesListResponse
+    , vplrTokenPagination
+    , vplrPageInfo
+    , vplrVoidedPurchases
+
     -- ** ExpansionFilesUploadResponse
     , ExpansionFilesUploadResponse
     , expansionFilesUploadResponse
@@ -513,6 +527,21 @@ module Network.Google.AndroidPublisher
 
     -- ** EditsExpansionFilesUpdateExpansionFileType
     , EditsExpansionFilesUpdateExpansionFileType (..)
+
+    -- ** DeviceMetadata
+    , DeviceMetadata
+    , deviceMetadata
+    , dmProductName
+    , dmGlEsVersion
+    , dmManufacturer
+    , dmScreenWidthPx
+    , dmRamMb
+    , dmCPUMake
+    , dmScreenHeightPx
+    , dmNATivePlatform
+    , dmDeviceClass
+    , dmCPUModel
+    , dmScreenDensityDpi
 
     -- ** DeveloperComment
     , DeveloperComment
@@ -616,6 +645,14 @@ module Network.Google.AndroidPublisher
     , tNanos
     , tSeconds
 
+    -- ** VoidedPurchase
+    , VoidedPurchase
+    , voidedPurchase
+    , vpKind
+    , vpPurchaseTimeMillis
+    , vpPurchaseToken
+    , vpVoidedTimeMillis
+
     -- ** ReviewReplyResult
     , ReviewReplyResult
     , reviewReplyResult
@@ -692,6 +729,7 @@ import           Network.Google.Resource.AndroidPublisher.Purchases.Subscription
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
+import           Network.Google.Resource.AndroidPublisher.Purchases.Voidedpurchases.List
 import           Network.Google.Resource.AndroidPublisher.Reviews.Get
 import           Network.Google.Resource.AndroidPublisher.Reviews.List
 import           Network.Google.Resource.AndroidPublisher.Reviews.Reply
@@ -752,6 +790,7 @@ type AndroidPublisherAPI =
        :<|> EditsDeleteResource
        :<|> EditsCommitResource
        :<|> EntitlementsListResource
+       :<|> PurchasesVoidedpurchasesListResource
        :<|> PurchasesProductsGetResource
        :<|> PurchasesSubscriptionsDeferResource
        :<|> PurchasesSubscriptionsGetResource
