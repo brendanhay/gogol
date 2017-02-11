@@ -18,6 +18,7 @@ import           Control.Error
 import           Control.Lens              hiding ((<.>))
 import           Control.Monad.State
 import           Data.List                 (nub, sort)
+import           Data.Monoid               ((<>))
 import           Data.String
 import qualified Data.Text                 as Text
 import qualified Filesystem                as FS

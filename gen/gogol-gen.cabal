@@ -28,7 +28,6 @@ executable gogol-gen
         , Gen.Formatting
         , Gen.IO
         , Gen.JSON
-        , Gen.Orphans
         , Gen.Syntax
         , Gen.TH
         , Gen.Text
@@ -44,7 +43,7 @@ executable gogol-gen
     ghc-options:       -Wall -threaded
 
     build-depends:
-          aeson
+          aeson            >= 1
         , attoparsec
         , base             >= 4.8
         , bifunctors

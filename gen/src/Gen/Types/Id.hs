@@ -58,12 +58,10 @@ import           Control.Applicative
 import           Control.Monad
 import           Data.Aeson                   hiding (Bool, String)
 import qualified Data.Attoparsec.Text         as A
-import           Data.Bifunctor               (first)
 import qualified Data.CaseInsensitive         as CI
 import           Data.Foldable                (foldl')
 import           Data.Function                (on)
 import           Data.Hashable
-import qualified Data.HashMap.Strict          as Map
 import           Data.List                    (intersperse)
 import           Data.List                    (elemIndex, nub, sortOn)
 import           Data.Semigroup               hiding (Sum)
@@ -75,7 +73,6 @@ import           Data.Text.Manipulate
 import           Formatting
 import           Gen.Orphans                  ()
 import           Gen.Text
-import           Gen.Types.Map
 import           GHC.Generics                 (Generic)
 import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.Syntax (Exp, Name (..))
@@ -167,9 +164,8 @@ instance FromJSON Global where
 instance ToJSON Global where
     toJSON = toJSON . global
 
-instance FromJSON v => FromJSON (Map Global v) where
-    parseJSON = fmap (Map.fromList . map (first mkGlobal) . Map.toList)
-        . parseJSON
+instance FromJSONKey Global
+instance ToJSONKey   Global
 
 gid :: Format a (Global -> a)
 gid = later (Build.fromText . global)
@@ -177,9 +173,8 @@ gid = later (Build.fromText . global)
 newtype Local = Local { local :: Text }
     deriving (Eq, Ord, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
 
-instance FromJSON v => FromJSON (Map Local v) where
-    parseJSON = fmap (Map.fromList . map (first Local) . Map.toList)
-        . parseJSON
+instance FromJSONKey Local
+instance ToJSONKey   Local
 
 lid :: Format a (Local -> a)
 lid = later (Build.fromText . local)
