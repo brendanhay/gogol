@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of ads, possibly filtered.
+-- Retrieves a list of ads, possibly filtered. This method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.ads.list@.
 module Network.Google.Resource.DFAReporting.Ads.List
@@ -52,7 +52,6 @@ module Network.Google.Resource.DFAReporting.Ads.List
     , alPageToken
     , alSortField
     , alType
-    , alCreativeType
     , alDynamicClickTracker
     , alCompatibility
     , alArchived
@@ -67,7 +66,7 @@ import           Network.Google.Prelude
 -- 'AdsList' request conforms to.
 type AdsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>
@@ -99,35 +98,30 @@ type AdsListResource =
                                                  :>
                                                  QueryParams "type" AdsListType
                                                    :>
-                                                   QueryParam "creativeType"
-                                                     AdsListCreativeType
+                                                   QueryParam
+                                                     "dynamicClickTracker"
+                                                     Bool
                                                      :>
-                                                     QueryParam
-                                                       "dynamicClickTracker"
-                                                       Bool
+                                                     QueryParam "compatibility"
+                                                       AdsListCompatibility
                                                        :>
-                                                       QueryParam
-                                                         "compatibility"
-                                                         AdsListCompatibility
+                                                       QueryParam "archived"
+                                                         Bool
                                                          :>
-                                                         QueryParam "archived"
-                                                           Bool
+                                                         QueryParam "maxResults"
+                                                           (Textual Int32)
                                                            :>
-                                                           QueryParam
-                                                             "maxResults"
-                                                             (Textual Int32)
+                                                           QueryParams
+                                                             "audienceSegmentIds"
+                                                             (Textual Int64)
                                                              :>
-                                                             QueryParams
-                                                               "audienceSegmentIds"
-                                                               (Textual Int64)
+                                                             QueryParam "alt"
+                                                               AltJSON
                                                                :>
-                                                               QueryParam "alt"
-                                                                 AltJSON
-                                                                 :>
-                                                                 Get '[JSON]
-                                                                   AdsListResponse
+                                                               Get '[JSON]
+                                                                 AdsListResponse
 
--- | Retrieves a list of ads, possibly filtered.
+-- | Retrieves a list of ads, possibly filtered. This method supports paging.
 --
 -- /See:/ 'adsList' smart constructor.
 data AdsList = AdsList'
@@ -150,7 +144,6 @@ data AdsList = AdsList'
     , _alPageToken                            :: !(Maybe Text)
     , _alSortField                            :: !(Maybe AdsListSortField)
     , _alType                                 :: !(Maybe [AdsListType])
-    , _alCreativeType                         :: !(Maybe AdsListCreativeType)
     , _alDynamicClickTracker                  :: !(Maybe Bool)
     , _alCompatibility                        :: !(Maybe AdsListCompatibility)
     , _alArchived                             :: !(Maybe Bool)
@@ -200,8 +193,6 @@ data AdsList = AdsList'
 --
 -- * 'alType'
 --
--- * 'alCreativeType'
---
 -- * 'alDynamicClickTracker'
 --
 -- * 'alCompatibility'
@@ -235,7 +226,6 @@ adsList pAlProFileId_ =
     , _alPageToken = Nothing
     , _alSortField = Nothing
     , _alType = Nothing
-    , _alCreativeType = Nothing
     , _alDynamicClickTracker = Nothing
     , _alCompatibility = Nothing
     , _alArchived = Nothing
@@ -374,12 +364,6 @@ alType
   = lens _alType (\ s a -> s{_alType = a}) . _Default .
       _Coerce
 
--- | Select only ads with the specified creativeType.
-alCreativeType :: Lens' AdsList (Maybe AdsListCreativeType)
-alCreativeType
-  = lens _alCreativeType
-      (\ s a -> s{_alCreativeType = a})
-
 -- | Select only dynamic click trackers. Applicable when type is
 -- AD_SERVING_CLICK_TRACKER. If true, select dynamic click trackers. If
 -- false, select static click trackers. Leave unset to select both.
@@ -441,7 +425,6 @@ instance GoogleRequest AdsList where
               _alPageToken
               _alSortField
               (_alType ^. _Default)
-              _alCreativeType
               _alDynamicClickTracker
               _alCompatibility
               _alArchived

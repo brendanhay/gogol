@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of remarketing lists, possibly filtered.
+-- Retrieves a list of remarketing lists, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingLists.list@.
 module Network.Google.Resource.DFAReporting.RemarketingLists.List
@@ -51,7 +52,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListsList' request conforms to.
 type RemarketingListsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>
@@ -68,7 +69,8 @@ type RemarketingListsListResource =
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] RemarketingListsListResponse
 
--- | Retrieves a list of remarketing lists, possibly filtered.
+-- | Retrieves a list of remarketing lists, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ 'remarketingListsList' smart constructor.
 data RemarketingListsList = RemarketingListsList'

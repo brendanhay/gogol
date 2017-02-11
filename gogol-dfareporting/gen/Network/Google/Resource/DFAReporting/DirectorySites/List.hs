@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of directory sites, possibly filtered.
+-- Retrieves a list of directory sites, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.directorySites.list@.
 module Network.Google.Resource.DFAReporting.DirectorySites.List
@@ -56,7 +57,7 @@ import           Network.Google.Prelude
 -- 'DirectorySitesList' request conforms to.
 type DirectorySitesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySites" :>
@@ -81,7 +82,8 @@ type DirectorySitesListResource =
                                            Get '[JSON]
                                              DirectorySitesListResponse
 
--- | Retrieves a list of directory sites, possibly filtered.
+-- | Retrieves a list of directory sites, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ 'directorySitesList' smart constructor.
 data DirectorySitesList = DirectorySitesList'

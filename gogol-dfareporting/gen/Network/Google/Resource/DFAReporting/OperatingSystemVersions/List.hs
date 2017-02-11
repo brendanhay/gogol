@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'OperatingSystemVersionsList' request conforms to.
 type OperatingSystemVersionsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystemVersions" :>

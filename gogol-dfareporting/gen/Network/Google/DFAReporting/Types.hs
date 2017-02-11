@@ -24,6 +24,12 @@ module Network.Google.DFAReporting.Types
     , ddmconversionsScope
     , dfatraffickingScope
 
+    -- * VideoOffSet
+    , VideoOffSet
+    , videoOffSet
+    , vosOffSetPercentage
+    , vosOffSetSeconds
+
     -- * PlacementsListSortOrder
     , PlacementsListSortOrder (..)
 
@@ -100,6 +106,14 @@ module Network.Google.DFAReporting.Types
     -- * UserRolesListSortField
     , UserRolesListSortField (..)
 
+    -- * VideoSettings
+    , VideoSettings
+    , videoSettings
+    , vsKind
+    , vsCompanionSettings
+    , vsTranscodeSettings
+    , vsSkippableSettings
+
     -- * ReachReportCompatibleFields
     , ReachReportCompatibleFields
     , reachReportCompatibleFields
@@ -173,6 +187,9 @@ module Network.Google.DFAReporting.Types
 
     -- * UserRolePermissionAvailability
     , UserRolePermissionAvailability (..)
+
+    -- * PlacementVpaidAdapterChoice
+    , PlacementVpaidAdapterChoice (..)
 
     -- * DirectorySiteContactAssignmentVisibility
     , DirectorySiteContactAssignmentVisibility (..)
@@ -308,6 +325,15 @@ module Network.Google.DFAReporting.Types
     , fadtTag
     , fadtName
     , fadtId
+
+    -- * VideoFormat
+    , VideoFormat
+    , videoFormat
+    , vfKind
+    , vfFileType
+    , vfResolution
+    , vfTargetBitRate
+    , vfId
 
     -- * AccountUserProFileTraffickerType
     , AccountUserProFileTraffickerType (..)
@@ -632,6 +658,14 @@ module Network.Google.DFAReporting.Types
     , ofKind
     , ofObjectIds
 
+    -- * SkippableSetting
+    , SkippableSetting
+    , skippableSetting
+    , ssSkipOffSet
+    , ssProgressOffSet
+    , ssKind
+    , ssSkippable
+
     -- * CreativeGroupsListSortField
     , CreativeGroupsListSortField (..)
 
@@ -906,6 +940,7 @@ module Network.Google.DFAReporting.Types
     , creBackupImageTargetWindow
     , creRenderingIdDimensionValue
     , creCustomKeyValues
+    , creSkipOffSet
     , creVideoDuration
     , creRenderingId
     , creThirdPartyBackupImageImpressionsURL
@@ -916,6 +951,7 @@ module Network.Google.DFAReporting.Types
     , creAuthoringTool
     , creSize
     , creThirdPartyURLs
+    , creProgressOffSet
     , creCounterCustomEvents
     , creKind
     , creSSLOverride
@@ -1131,11 +1167,12 @@ module Network.Google.DFAReporting.Types
     , SiteSettings
     , siteSettings
     , ssDisableNewCookie
+    , ssVideoActiveViewOptOutTemplate
     , ssDisableBrandSafeAds
     , ssLookbackConfiguration
     , ssTagSetting
     , ssActiveViewOptOut
-    , ssVideoActiveViewOptOut
+    , ssVpaidAdapterChoiceTemplate
     , ssCreativeSettings
 
     -- * PlacementStrategiesListSortField
@@ -1430,6 +1467,9 @@ module Network.Google.DFAReporting.Types
     , lcClickDuration
     , lcPostImpressionActivitiesDuration
 
+    -- * VideoFormatFileType
+    , VideoFormatFileType (..)
+
     -- * AdsListSortField
     , AdsListSortField (..)
 
@@ -1598,9 +1638,6 @@ module Network.Google.DFAReporting.Types
     , companionClickThroughOverride
     , cctoCreativeId
     , cctoClickThroughURL
-
-    -- * AdsListCreativeType
-    , AdsListCreativeType (..)
 
     -- * FloodlightActivityGroupsListSortOrder
     , FloodlightActivityGroupsListSortOrder (..)
@@ -1920,6 +1957,12 @@ module Network.Google.DFAReporting.Types
     -- * PlacementGroupPlacementGroupType
     , PlacementGroupPlacementGroupType (..)
 
+    -- * VideoFormatsListResponse
+    , VideoFormatsListResponse
+    , videoFormatsListResponse
+    , vflrKind
+    , vflrVideoFormats
+
     -- * DirectorySitesListResponse
     , DirectorySitesListResponse
     , directorySitesListResponse
@@ -2035,6 +2078,14 @@ module Network.Google.DFAReporting.Types
     , fcOmnitureSettings
     , fcStandardVariableTypes
 
+    -- * CompanionSetting
+    , CompanionSetting
+    , companionSetting
+    , comKind
+    , comImageOnly
+    , comCompanionsDisabled
+    , comEnabledSizes
+
     -- * ReportScheduleRepeatsOnWeekDaysItem
     , ReportScheduleRepeatsOnWeekDaysItem (..)
 
@@ -2071,6 +2122,9 @@ module Network.Google.DFAReporting.Types
     , cfvlrNextPageToken
     , cfvlrKind
     , cfvlrCreativeFieldValues
+
+    -- * SiteSettingsVpaidAdapterChoiceTemplate
+    , SiteSettingsVpaidAdapterChoiceTemplate (..)
 
     -- * AccountsListSortField
     , AccountsListSortField (..)
@@ -2280,18 +2334,18 @@ module Network.Google.DFAReporting.Types
     -- * Site
     , Site
     , site
-    , ssKind
-    , ssKeyName
-    , ssSiteContacts
-    , ssSiteSettings
-    , ssIdDimensionValue
-    , ssDirectorySiteIdDimensionValue
-    , ssAccountId
-    , ssName
-    , ssDirectorySiteId
-    , ssId
-    , ssSubAccountId
-    , ssApproved
+    , sitiKind
+    , sitiKeyName
+    , sitiSiteContacts
+    , sitiSiteSettings
+    , sitiIdDimensionValue
+    , sitiDirectorySiteIdDimensionValue
+    , sitiAccountId
+    , sitiName
+    , sitiDirectorySiteId
+    , sitiId
+    , sitiSubAccountId
+    , sitiApproved
 
     -- * ReportCrossDimensionReachCriteriaDimension
     , ReportCrossDimensionReachCriteriaDimension (..)
@@ -2523,6 +2577,12 @@ module Network.Google.DFAReporting.Types
     , ocContactType
     , ocContactInfo
 
+    -- * TranscodeSetting
+    , TranscodeSetting
+    , transcodeSetting
+    , tsKind
+    , tsEnabledVideoFormats
+
     -- * FloodlightActivitiesGenerateTagResponse
     , FloodlightActivitiesGenerateTagResponse
     , floodlightActivitiesGenerateTagResponse
@@ -2595,6 +2655,7 @@ module Network.Google.DFAReporting.Types
     , Placement
     , placement
     , p1Status
+    , p1VideoSettings
     , p1PlacementStrategyId
     , p1TagFormats
     , p1SiteIdDimensionValue
@@ -2607,6 +2668,7 @@ module Network.Google.DFAReporting.Types
     , p1AdvertiserIdDimensionValue
     , p1CampaignId
     , p1IdDimensionValue
+    , p1VpaidAdapterChoice
     , p1Primary
     , p1LookbackConfiguration
     , p1TagSetting
@@ -2617,6 +2679,7 @@ module Network.Google.DFAReporting.Types
     , p1Name
     , p1DirectorySiteId
     , p1CreateInfo
+    , p1VideoActiveViewOptOut
     , p1LastModifiedInfo
     , p1Id
     , p1SSLRequired
@@ -2699,10 +2762,10 @@ import           Network.Google.DFAReporting.Types.Product
 import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2.6' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2.7' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
 dFAReportingService :: ServiceConfig
 dFAReportingService
-  = defaultService (ServiceId "dfareporting:v2.6")
+  = defaultService (ServiceId "dfareporting:v2.7")
       "www.googleapis.com"
 
 -- | View and manage DoubleClick for Advertisers reports

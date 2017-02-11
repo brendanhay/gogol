@@ -21,6 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves a list of targetable remarketing lists, possibly filtered.
+-- This method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.targetableRemarketingLists.list@.
 module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
@@ -50,7 +51,7 @@ import           Network.Google.Prelude
 -- 'TargetableRemarketingListsList' request conforms to.
 type TargetableRemarketingListsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "targetableRemarketingLists" :>
@@ -70,6 +71,7 @@ type TargetableRemarketingListsListResource =
                                  TargetableRemarketingListsListResponse
 
 -- | Retrieves a list of targetable remarketing lists, possibly filtered.
+-- This method supports paging.
 --
 -- /See:/ 'targetableRemarketingListsList' smart constructor.
 data TargetableRemarketingListsList = TargetableRemarketingListsList'

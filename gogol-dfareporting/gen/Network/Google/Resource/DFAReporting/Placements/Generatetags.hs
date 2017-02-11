@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'PlacementsGeneratetags' request conforms to.
 type PlacementsGeneratetagsResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>

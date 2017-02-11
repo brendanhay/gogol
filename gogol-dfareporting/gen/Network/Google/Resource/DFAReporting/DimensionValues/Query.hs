@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'DimensionValuesQuery' request conforms to.
 type DimensionValuesQueryResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dimensionvalues" :>

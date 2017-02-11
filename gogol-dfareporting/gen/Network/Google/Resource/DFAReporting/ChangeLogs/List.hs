@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of change logs.
+-- Retrieves a list of change logs. This method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.changeLogs.list@.
 module Network.Google.Resource.DFAReporting.ChangeLogs.List
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'ChangeLogsList' request conforms to.
 type ChangeLogsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "changeLogs" :>
@@ -70,7 +70,7 @@ type ChangeLogsListResource =
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] ChangeLogsListResponse
 
--- | Retrieves a list of change logs.
+-- | Retrieves a list of change logs. This method supports paging.
 --
 -- /See:/ 'changeLogsList' smart constructor.
 data ChangeLogsList = ChangeLogsList'

@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves the list of creative IDs associated with the specified
--- campaign.
+-- campaign. This method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaignCreativeAssociations.list@.
 module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'CampaignCreativeAssociationsList' request conforms to.
 type CampaignCreativeAssociationsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -63,7 +63,7 @@ type CampaignCreativeAssociationsListResource =
                            Get '[JSON] CampaignCreativeAssociationsListResponse
 
 -- | Retrieves the list of creative IDs associated with the specified
--- campaign.
+-- campaign. This method supports paging.
 --
 -- /See:/ 'campaignCreativeAssociationsList' smart constructor.
 data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList'

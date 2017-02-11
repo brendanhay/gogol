@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolesInsert' request conforms to.
 type UserRolesInsertResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>

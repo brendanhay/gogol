@@ -644,6 +644,43 @@ instance FromJSON UserRolePermissionAvailability where
 instance ToJSON UserRolePermissionAvailability where
     toJSON = toJSONText
 
+-- | VPAID adapter setting for this placement. Controls which VPAID format
+-- the measurement adapter will use for in-stream video creatives assigned
+-- to this placement.
+data PlacementVpaidAdapterChoice
+    = Both
+      -- ^ @BOTH@
+    | Default
+      -- ^ @DEFAULT@
+    | Flash
+      -- ^ @FLASH@
+    | HTML5
+      -- ^ @HTML5@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable PlacementVpaidAdapterChoice
+
+instance FromHttpApiData PlacementVpaidAdapterChoice where
+    parseQueryParam = \case
+        "BOTH" -> Right Both
+        "DEFAULT" -> Right Default
+        "FLASH" -> Right Flash
+        "HTML5" -> Right HTML5
+        x -> Left ("Unable to parse PlacementVpaidAdapterChoice from: " <> x)
+
+instance ToHttpApiData PlacementVpaidAdapterChoice where
+    toQueryParam = \case
+        Both -> "BOTH"
+        Default -> "DEFAULT"
+        Flash -> "FLASH"
+        HTML5 -> "HTML5"
+
+instance FromJSON PlacementVpaidAdapterChoice where
+    parseJSON = parseJSONText "PlacementVpaidAdapterChoice"
+
+instance ToJSON PlacementVpaidAdapterChoice where
+    toJSON = toJSONText
+
 -- | Visibility of this directory site contact assignment. When set to PUBLIC
 -- this contact assignment is visible to all account and agency users; when
 -- set to PRIVATE it is visible only to the site.
@@ -4405,6 +4442,8 @@ data AccountActiveAdSummaryActiveAdsLimitTier
       -- ^ @ACTIVE_ADS_TIER_40K@
     | ActiveAdsTier500K
       -- ^ @ACTIVE_ADS_TIER_500K@
+    | ActiveAdsTier750K
+      -- ^ @ACTIVE_ADS_TIER_750K@
     | ActiveAdsTier75K
       -- ^ @ACTIVE_ADS_TIER_75K@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -4418,6 +4457,7 @@ instance FromHttpApiData AccountActiveAdSummaryActiveAdsLimitTier where
         "ACTIVE_ADS_TIER_300K" -> Right ActiveAdsTier300K
         "ACTIVE_ADS_TIER_40K" -> Right ActiveAdsTier40K
         "ACTIVE_ADS_TIER_500K" -> Right ActiveAdsTier500K
+        "ACTIVE_ADS_TIER_750K" -> Right ActiveAdsTier750K
         "ACTIVE_ADS_TIER_75K" -> Right ActiveAdsTier75K
         x -> Left ("Unable to parse AccountActiveAdSummaryActiveAdsLimitTier from: " <> x)
 
@@ -4428,6 +4468,7 @@ instance ToHttpApiData AccountActiveAdSummaryActiveAdsLimitTier where
         ActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
         ActiveAdsTier40K -> "ACTIVE_ADS_TIER_40K"
         ActiveAdsTier500K -> "ACTIVE_ADS_TIER_500K"
+        ActiveAdsTier750K -> "ACTIVE_ADS_TIER_750K"
         ActiveAdsTier75K -> "ACTIVE_ADS_TIER_75K"
 
 instance FromJSON AccountActiveAdSummaryActiveAdsLimitTier where
@@ -4929,6 +4970,8 @@ data AccountActiveAdsLimitTier
       -- ^ @ACTIVE_ADS_TIER_40K@
     | AAALTActiveAdsTier500K
       -- ^ @ACTIVE_ADS_TIER_500K@
+    | AAALTActiveAdsTier750K
+      -- ^ @ACTIVE_ADS_TIER_750K@
     | AAALTActiveAdsTier75K
       -- ^ @ACTIVE_ADS_TIER_75K@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -4942,6 +4985,7 @@ instance FromHttpApiData AccountActiveAdsLimitTier where
         "ACTIVE_ADS_TIER_300K" -> Right AAALTActiveAdsTier300K
         "ACTIVE_ADS_TIER_40K" -> Right AAALTActiveAdsTier40K
         "ACTIVE_ADS_TIER_500K" -> Right AAALTActiveAdsTier500K
+        "ACTIVE_ADS_TIER_750K" -> Right AAALTActiveAdsTier750K
         "ACTIVE_ADS_TIER_75K" -> Right AAALTActiveAdsTier75K
         x -> Left ("Unable to parse AccountActiveAdsLimitTier from: " <> x)
 
@@ -4952,6 +4996,7 @@ instance ToHttpApiData AccountActiveAdsLimitTier where
         AAALTActiveAdsTier300K -> "ACTIVE_ADS_TIER_300K"
         AAALTActiveAdsTier40K -> "ACTIVE_ADS_TIER_40K"
         AAALTActiveAdsTier500K -> "ACTIVE_ADS_TIER_500K"
+        AAALTActiveAdsTier750K -> "ACTIVE_ADS_TIER_750K"
         AAALTActiveAdsTier75K -> "ACTIVE_ADS_TIER_75K"
 
 instance FromJSON AccountActiveAdsLimitTier where
@@ -5012,6 +5057,45 @@ instance FromJSON SubAccountsListSortField where
     parseJSON = parseJSONText "SubAccountsListSortField"
 
 instance ToJSON SubAccountsListSortField where
+    toJSON = toJSONText
+
+-- | File type of the video format.
+data VideoFormatFileType
+    = Flv
+      -- ^ @FLV@
+    | M3U8
+      -- ^ @M3U8@
+    | MP4
+      -- ^ @MP4@
+    | Threegpp
+      -- ^ @THREEGPP@
+    | Webm
+      -- ^ @WEBM@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VideoFormatFileType
+
+instance FromHttpApiData VideoFormatFileType where
+    parseQueryParam = \case
+        "FLV" -> Right Flv
+        "M3U8" -> Right M3U8
+        "MP4" -> Right MP4
+        "THREEGPP" -> Right Threegpp
+        "WEBM" -> Right Webm
+        x -> Left ("Unable to parse VideoFormatFileType from: " <> x)
+
+instance ToHttpApiData VideoFormatFileType where
+    toQueryParam = \case
+        Flv -> "FLV"
+        M3U8 -> "M3U8"
+        MP4 -> "MP4"
+        Threegpp -> "THREEGPP"
+        Webm -> "WEBM"
+
+instance FromJSON VideoFormatFileType where
+    parseJSON = parseJSONText "VideoFormatFileType"
+
+instance ToJSON VideoFormatFileType where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
@@ -5519,121 +5603,6 @@ instance FromJSON PricingGroupType where
     parseJSON = parseJSONText "PricingGroupType"
 
 instance ToJSON PricingGroupType where
-    toJSON = toJSONText
-
--- | Select only ads with the specified creativeType.
-data AdsListCreativeType
-    = ALCTBrandSafeDefaultInstreamVideo
-      -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
-    | ALCTCustomDisplay
-      -- ^ @CUSTOM_DISPLAY@
-    | ALCTCustomDisplayInterstitial
-      -- ^ @CUSTOM_DISPLAY_INTERSTITIAL@
-    | ALCTDisplay
-      -- ^ @DISPLAY@
-    | ALCTDisplayImageGallery
-      -- ^ @DISPLAY_IMAGE_GALLERY@
-    | ALCTDisplayRedirect
-      -- ^ @DISPLAY_REDIRECT@
-    | ALCTFlashInpage
-      -- ^ @FLASH_INPAGE@
-    | ALCTHTML5Banner
-      -- ^ @HTML5_BANNER@
-    | ALCTImage
-      -- ^ @IMAGE@
-    | ALCTInstreamVideo
-      -- ^ @INSTREAM_VIDEO@
-    | ALCTInstreamVideoRedirect
-      -- ^ @INSTREAM_VIDEO_REDIRECT@
-    | ALCTInternalRedirect
-      -- ^ @INTERNAL_REDIRECT@
-    | ALCTInterstitialInternalRedirect
-      -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
-    | ALCTRichMediaDisplayBanner
-      -- ^ @RICH_MEDIA_DISPLAY_BANNER@
-    | ALCTRichMediaDisplayExpanding
-      -- ^ @RICH_MEDIA_DISPLAY_EXPANDING@
-    | ALCTRichMediaDisplayInterstitial
-      -- ^ @RICH_MEDIA_DISPLAY_INTERSTITIAL@
-    | ALCTRichMediaDisplayMultiFloatingInterstitial
-      -- ^ @RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL@
-    | ALCTRichMediaImExpand
-      -- ^ @RICH_MEDIA_IM_EXPAND@
-    | ALCTRichMediaInpageFloating
-      -- ^ @RICH_MEDIA_INPAGE_FLOATING@
-    | ALCTRichMediaMobileInApp
-      -- ^ @RICH_MEDIA_MOBILE_IN_APP@
-    | ALCTRichMediaPeelDown
-      -- ^ @RICH_MEDIA_PEEL_DOWN@
-    | ALCTTrackingText
-      -- ^ @TRACKING_TEXT@
-    | ALCTVpaidLinearVideo
-      -- ^ @VPAID_LINEAR_VIDEO@
-    | ALCTVpaidNonLinearVideo
-      -- ^ @VPAID_NON_LINEAR_VIDEO@
-      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
-
-instance Hashable AdsListCreativeType
-
-instance FromHttpApiData AdsListCreativeType where
-    parseQueryParam = \case
-        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Right ALCTBrandSafeDefaultInstreamVideo
-        "CUSTOM_DISPLAY" -> Right ALCTCustomDisplay
-        "CUSTOM_DISPLAY_INTERSTITIAL" -> Right ALCTCustomDisplayInterstitial
-        "DISPLAY" -> Right ALCTDisplay
-        "DISPLAY_IMAGE_GALLERY" -> Right ALCTDisplayImageGallery
-        "DISPLAY_REDIRECT" -> Right ALCTDisplayRedirect
-        "FLASH_INPAGE" -> Right ALCTFlashInpage
-        "HTML5_BANNER" -> Right ALCTHTML5Banner
-        "IMAGE" -> Right ALCTImage
-        "INSTREAM_VIDEO" -> Right ALCTInstreamVideo
-        "INSTREAM_VIDEO_REDIRECT" -> Right ALCTInstreamVideoRedirect
-        "INTERNAL_REDIRECT" -> Right ALCTInternalRedirect
-        "INTERSTITIAL_INTERNAL_REDIRECT" -> Right ALCTInterstitialInternalRedirect
-        "RICH_MEDIA_DISPLAY_BANNER" -> Right ALCTRichMediaDisplayBanner
-        "RICH_MEDIA_DISPLAY_EXPANDING" -> Right ALCTRichMediaDisplayExpanding
-        "RICH_MEDIA_DISPLAY_INTERSTITIAL" -> Right ALCTRichMediaDisplayInterstitial
-        "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL" -> Right ALCTRichMediaDisplayMultiFloatingInterstitial
-        "RICH_MEDIA_IM_EXPAND" -> Right ALCTRichMediaImExpand
-        "RICH_MEDIA_INPAGE_FLOATING" -> Right ALCTRichMediaInpageFloating
-        "RICH_MEDIA_MOBILE_IN_APP" -> Right ALCTRichMediaMobileInApp
-        "RICH_MEDIA_PEEL_DOWN" -> Right ALCTRichMediaPeelDown
-        "TRACKING_TEXT" -> Right ALCTTrackingText
-        "VPAID_LINEAR_VIDEO" -> Right ALCTVpaidLinearVideo
-        "VPAID_NON_LINEAR_VIDEO" -> Right ALCTVpaidNonLinearVideo
-        x -> Left ("Unable to parse AdsListCreativeType from: " <> x)
-
-instance ToHttpApiData AdsListCreativeType where
-    toQueryParam = \case
-        ALCTBrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
-        ALCTCustomDisplay -> "CUSTOM_DISPLAY"
-        ALCTCustomDisplayInterstitial -> "CUSTOM_DISPLAY_INTERSTITIAL"
-        ALCTDisplay -> "DISPLAY"
-        ALCTDisplayImageGallery -> "DISPLAY_IMAGE_GALLERY"
-        ALCTDisplayRedirect -> "DISPLAY_REDIRECT"
-        ALCTFlashInpage -> "FLASH_INPAGE"
-        ALCTHTML5Banner -> "HTML5_BANNER"
-        ALCTImage -> "IMAGE"
-        ALCTInstreamVideo -> "INSTREAM_VIDEO"
-        ALCTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
-        ALCTInternalRedirect -> "INTERNAL_REDIRECT"
-        ALCTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
-        ALCTRichMediaDisplayBanner -> "RICH_MEDIA_DISPLAY_BANNER"
-        ALCTRichMediaDisplayExpanding -> "RICH_MEDIA_DISPLAY_EXPANDING"
-        ALCTRichMediaDisplayInterstitial -> "RICH_MEDIA_DISPLAY_INTERSTITIAL"
-        ALCTRichMediaDisplayMultiFloatingInterstitial -> "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL"
-        ALCTRichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
-        ALCTRichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
-        ALCTRichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
-        ALCTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
-        ALCTTrackingText -> "TRACKING_TEXT"
-        ALCTVpaidLinearVideo -> "VPAID_LINEAR_VIDEO"
-        ALCTVpaidNonLinearVideo -> "VPAID_NON_LINEAR_VIDEO"
-
-instance FromJSON AdsListCreativeType where
-    parseJSON = parseJSONText "AdsListCreativeType"
-
-instance ToJSON AdsListCreativeType where
     toJSON = toJSONText
 
 -- | Order of sorted results, default is ASCENDING.
@@ -7511,6 +7480,49 @@ instance FromJSON CreativeGroupAssignmentCreativeGroupNumber where
 instance ToJSON CreativeGroupAssignmentCreativeGroupNumber where
     toJSON = toJSONText
 
+-- | Default VPAID adapter setting for new placements created under this
+-- site. This value will be used to populate the
+-- placements.vpaidAdapterChoice field, when no value is specified for the
+-- new placement. Controls which VPAID format the measurement adapter will
+-- use for in-stream video creatives assigned to the placement. The
+-- publisher\'s specifications will typically determine this setting. For
+-- VPAID creatives, the adapter format will match the VPAID format (HTML5
+-- VPAID creatives use the HTML5 adapter, and Flash VPAID creatives use the
+-- Flash adapter).
+data SiteSettingsVpaidAdapterChoiceTemplate
+    = SSVACTBoth
+      -- ^ @BOTH@
+    | SSVACTDefault
+      -- ^ @DEFAULT@
+    | SSVACTFlash
+      -- ^ @FLASH@
+    | SSVACTHTML5
+      -- ^ @HTML5@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable SiteSettingsVpaidAdapterChoiceTemplate
+
+instance FromHttpApiData SiteSettingsVpaidAdapterChoiceTemplate where
+    parseQueryParam = \case
+        "BOTH" -> Right SSVACTBoth
+        "DEFAULT" -> Right SSVACTDefault
+        "FLASH" -> Right SSVACTFlash
+        "HTML5" -> Right SSVACTHTML5
+        x -> Left ("Unable to parse SiteSettingsVpaidAdapterChoiceTemplate from: " <> x)
+
+instance ToHttpApiData SiteSettingsVpaidAdapterChoiceTemplate where
+    toQueryParam = \case
+        SSVACTBoth -> "BOTH"
+        SSVACTDefault -> "DEFAULT"
+        SSVACTFlash -> "FLASH"
+        SSVACTHTML5 -> "HTML5"
+
+instance FromJSON SiteSettingsVpaidAdapterChoiceTemplate where
+    parseJSON = parseJSONText "SiteSettingsVpaidAdapterChoiceTemplate"
+
+instance ToJSON SiteSettingsVpaidAdapterChoiceTemplate where
+    toJSON = toJSONText
+
 -- | Field by which to sort the list.
 data AccountsListSortField
     = AID
@@ -8639,6 +8651,8 @@ data ChangeLogsListObjectType
       -- ^ @OBJECT_RICHMEDIA_CREATIVE@
     | CLLOTObjectSdSite
       -- ^ @OBJECT_SD_SITE@
+    | CLLOTObjectSearchLiftStudy
+      -- ^ @OBJECT_SEARCH_LIFT_STUDY@
     | CLLOTObjectSize
       -- ^ @OBJECT_SIZE@
     | CLLOTObjectSubAccount
@@ -8689,6 +8703,7 @@ instance FromHttpApiData ChangeLogsListObjectType where
         "OBJECT_REMARKETING_LIST" -> Right CLLOTObjectRemarketingList
         "OBJECT_RICHMEDIA_CREATIVE" -> Right CLLOTObjectRichmediaCreative
         "OBJECT_SD_SITE" -> Right CLLOTObjectSdSite
+        "OBJECT_SEARCH_LIFT_STUDY" -> Right CLLOTObjectSearchLiftStudy
         "OBJECT_SIZE" -> Right CLLOTObjectSize
         "OBJECT_SUBACCOUNT" -> Right CLLOTObjectSubAccount
         "OBJECT_TARGETING_TEMPLATE" -> Right CLLOTObjectTargetingTemplate
@@ -8731,6 +8746,7 @@ instance ToHttpApiData ChangeLogsListObjectType where
         CLLOTObjectRemarketingList -> "OBJECT_REMARKETING_LIST"
         CLLOTObjectRichmediaCreative -> "OBJECT_RICHMEDIA_CREATIVE"
         CLLOTObjectSdSite -> "OBJECT_SD_SITE"
+        CLLOTObjectSearchLiftStudy -> "OBJECT_SEARCH_LIFT_STUDY"
         CLLOTObjectSize -> "OBJECT_SIZE"
         CLLOTObjectSubAccount -> "OBJECT_SUBACCOUNT"
         CLLOTObjectTargetingTemplate -> "OBJECT_TARGETING_TEMPLATE"

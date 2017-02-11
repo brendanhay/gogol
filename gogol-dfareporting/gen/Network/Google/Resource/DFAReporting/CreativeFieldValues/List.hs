@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of creative field values, possibly filtered.
+-- Retrieves a list of creative field values, possibly filtered. This
+-- method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFieldValues.list@.
 module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
@@ -50,7 +51,7 @@ import           Network.Google.Prelude
 -- 'CreativeFieldValuesList' request conforms to.
 type CreativeFieldValuesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeFields" :>
@@ -69,7 +70,8 @@ type CreativeFieldValuesListResource =
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CreativeFieldValuesListResponse
 
--- | Retrieves a list of creative field values, possibly filtered.
+-- | Retrieves a list of creative field values, possibly filtered. This
+-- method supports paging.
 --
 -- /See:/ 'creativeFieldValuesList' smart constructor.
 data CreativeFieldValuesList = CreativeFieldValuesList'

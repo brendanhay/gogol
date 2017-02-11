@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of advertiser groups, possibly filtered.
+-- Retrieves a list of advertiser groups, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertiserGroups.list@.
 module Network.Google.Resource.DFAReporting.AdvertiserGroups.List
@@ -49,7 +50,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsList' request conforms to.
 type AdvertiserGroupsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
@@ -64,7 +65,8 @@ type AdvertiserGroupsListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] AdvertiserGroupsListResponse
 
--- | Retrieves a list of advertiser groups, possibly filtered.
+-- | Retrieves a list of advertiser groups, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ 'advertiserGroupsList' smart constructor.
 data AdvertiserGroupsList = AdvertiserGroupsList'

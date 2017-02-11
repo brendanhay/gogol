@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'FilesList' request conforms to.
 type FilesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "files" :>

@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListsUpdate' request conforms to.
 type RemarketingListsUpdateResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingLists" :>

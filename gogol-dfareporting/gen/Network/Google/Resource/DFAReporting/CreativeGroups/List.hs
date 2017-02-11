@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of creative groups, possibly filtered.
+-- Retrieves a list of creative groups, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeGroups.list@.
 module Network.Google.Resource.DFAReporting.CreativeGroups.List
@@ -51,7 +52,7 @@ import           Network.Google.Prelude
 -- 'CreativeGroupsList' request conforms to.
 type CreativeGroupsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeGroups" :>
@@ -66,7 +67,8 @@ type CreativeGroupsListResource =
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] CreativeGroupsListResponse
 
--- | Retrieves a list of creative groups, possibly filtered.
+-- | Retrieves a list of creative groups, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ 'creativeGroupsList' smart constructor.
 data CreativeGroupsList = CreativeGroupsList'
