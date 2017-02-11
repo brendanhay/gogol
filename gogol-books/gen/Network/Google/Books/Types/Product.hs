@@ -404,7 +404,7 @@ instance ToJSON ReviewSource where
 --
 -- /See:/ 'annotationData' smart constructor.
 data AnnotationData = AnnotationData'
-    { _annEncodedData    :: !(Maybe Base64)
+    { _annEncodedData    :: !(Maybe Bytes)
     , _annKind           :: !Text
     , _annData           :: !(Maybe JSONValue)
     , _annSelfLink       :: !(Maybe Text)
@@ -456,7 +456,7 @@ annEncodedData :: Lens' AnnotationData (Maybe ByteString)
 annEncodedData
   = lens _annEncodedData
       (\ s a -> s{_annEncodedData = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | Resource Type
 annKind :: Lens' AnnotationData Text
@@ -2401,6 +2401,7 @@ data Notification = Notification'
     , _nReason                         :: !(Maybe Text)
     , _nDontShowNotification           :: !(Maybe Bool)
     , _nNotificationType               :: !(Maybe Text)
+    , _nNotificationGroup              :: !(Maybe Text)
     , _nIconURL                        :: !(Maybe Text)
     , _nTitle                          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2431,6 +2432,8 @@ data Notification = Notification'
 --
 -- * 'nNotificationType'
 --
+-- * 'nNotificationGroup'
+--
 -- * 'nIconURL'
 --
 -- * 'nTitle'
@@ -2449,6 +2452,7 @@ notification =
     , _nReason = Nothing
     , _nDontShowNotification = Nothing
     , _nNotificationType = Nothing
+    , _nNotificationGroup = Nothing
     , _nIconURL = Nothing
     , _nTitle = Nothing
     }
@@ -2500,6 +2504,11 @@ nNotificationType
   = lens _nNotificationType
       (\ s a -> s{_nNotificationType = a})
 
+nNotificationGroup :: Lens' Notification (Maybe Text)
+nNotificationGroup
+  = lens _nNotificationGroup
+      (\ s a -> s{_nNotificationGroup = a})
+
 nIconURL :: Lens' Notification (Maybe Text)
 nIconURL = lens _nIconURL (\ s a -> s{_nIconURL = a})
 
@@ -2521,6 +2530,7 @@ instance FromJSON Notification where
                      <*> (o .:? "reason")
                      <*> (o .:? "dont_show_notification")
                      <*> (o .:? "notification_type")
+                     <*> (o .:? "notificationGroup")
                      <*> (o .:? "iconUrl")
                      <*> (o .:? "title"))
 
@@ -2540,6 +2550,7 @@ instance ToJSON Notification where
                   ("dont_show_notification" .=) <$>
                     _nDontShowNotification,
                   ("notification_type" .=) <$> _nNotificationType,
+                  ("notificationGroup" .=) <$> _nNotificationGroup,
                   ("iconUrl" .=) <$> _nIconURL,
                   ("title" .=) <$> _nTitle])
 
@@ -3300,8 +3311,6 @@ series =
 sKind :: Lens' Series Text
 sKind = lens _sKind (\ s a -> s{_sKind = a})
 
--- | Series info list. The client always expects this element in the JSON
--- output, hence declared here as OutputAlways.
 sSeries :: Lens' Series [SeriesSeriesItem]
 sSeries
   = lens _sSeries (\ s a -> s{_sSeries = a}) . _Default
