@@ -915,6 +915,8 @@ data CdnSettingsResolution
       -- ^ @1080p@
     | CSR1440p
       -- ^ @1440p@
+    | CSR2160p
+      -- ^ @2160p@
     | CSR240p
       -- ^ @240p@
     | CSR360p
@@ -931,6 +933,7 @@ instance FromHttpApiData CdnSettingsResolution where
     parseQueryParam = \case
         "1080p" -> Right CSR1080p
         "1440p" -> Right CSR1440p
+        "2160p" -> Right CSR2160p
         "240p" -> Right CSR240p
         "360p" -> Right CSR360p
         "480p" -> Right CSR480p
@@ -941,6 +944,7 @@ instance ToHttpApiData CdnSettingsResolution where
     toQueryParam = \case
         CSR1080p -> "1080p"
         CSR1440p -> "1440p"
+        CSR2160p -> "2160p"
         CSR240p -> "240p"
         CSR360p -> "360p"
         CSR480p -> "480p"
@@ -4920,6 +4924,10 @@ instance ToJSON ContentRatingEirinRating where
 data VideoSuggestionsProcessingHintsItem
     = NonStreamableMov
       -- ^ @nonStreamableMov@
+    | ProcsesingHintSpatialAudio
+      -- ^ @procsesingHintSpatialAudio@
+    | ProcsesingHintSphericalVideo
+      -- ^ @procsesingHintSphericalVideo@
     | SendBestQualityVideo
       -- ^ @sendBestQualityVideo@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -4929,12 +4937,16 @@ instance Hashable VideoSuggestionsProcessingHintsItem
 instance FromHttpApiData VideoSuggestionsProcessingHintsItem where
     parseQueryParam = \case
         "nonStreamableMov" -> Right NonStreamableMov
+        "procsesingHintSpatialAudio" -> Right ProcsesingHintSpatialAudio
+        "procsesingHintSphericalVideo" -> Right ProcsesingHintSphericalVideo
         "sendBestQualityVideo" -> Right SendBestQualityVideo
         x -> Left ("Unable to parse VideoSuggestionsProcessingHintsItem from: " <> x)
 
 instance ToHttpApiData VideoSuggestionsProcessingHintsItem where
     toQueryParam = \case
         NonStreamableMov -> "nonStreamableMov"
+        ProcsesingHintSpatialAudio -> "procsesingHintSpatialAudio"
+        ProcsesingHintSphericalVideo -> "procsesingHintSphericalVideo"
         SendBestQualityVideo -> "sendBestQualityVideo"
 
 instance FromJSON VideoSuggestionsProcessingHintsItem where
@@ -5133,6 +5145,57 @@ instance FromJSON SearchListVideoEmbeddable where
     parseJSON = parseJSONText "SearchListVideoEmbeddable"
 
 instance ToJSON SearchListVideoEmbeddable where
+    toJSON = toJSONText
+
+-- | The video\'s rating system for Vietnam - MCST
+data ContentRatingMcstRating
+    = MCST0
+      -- ^ @mcst0@
+    | Mcst16plus
+      -- ^ @mcst16plus@
+    | MCSTC13
+      -- ^ @mcstC13@
+    | MCSTC16
+      -- ^ @mcstC16@
+    | MCSTC18
+      -- ^ @mcstC18@
+    | McstGPg
+      -- ^ @mcstGPg@
+    | McstP
+      -- ^ @mcstP@
+    | McstUnrated
+      -- ^ @mcstUnrated@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ContentRatingMcstRating
+
+instance FromHttpApiData ContentRatingMcstRating where
+    parseQueryParam = \case
+        "mcst0" -> Right MCST0
+        "mcst16plus" -> Right Mcst16plus
+        "mcstC13" -> Right MCSTC13
+        "mcstC16" -> Right MCSTC16
+        "mcstC18" -> Right MCSTC18
+        "mcstGPg" -> Right McstGPg
+        "mcstP" -> Right McstP
+        "mcstUnrated" -> Right McstUnrated
+        x -> Left ("Unable to parse ContentRatingMcstRating from: " <> x)
+
+instance ToHttpApiData ContentRatingMcstRating where
+    toQueryParam = \case
+        MCST0 -> "mcst0"
+        Mcst16plus -> "mcst16plus"
+        MCSTC13 -> "mcstC13"
+        MCSTC16 -> "mcstC16"
+        MCSTC18 -> "mcstC18"
+        McstGPg -> "mcstGPg"
+        McstP -> "mcstP"
+        McstUnrated -> "mcstUnrated"
+
+instance FromJSON ContentRatingMcstRating where
+    parseJSON = parseJSONText "ContentRatingMcstRating"
+
+instance ToJSON ContentRatingMcstRating where
     toJSON = toJSONText
 
 -- | The eventType parameter restricts a search to broadcast events. If you

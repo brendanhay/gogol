@@ -2469,6 +2469,7 @@ instance ToJSON ActivityContentDetailsFavorite where
 -- /See:/ 'videoContentDetails' smart constructor.
 data VideoContentDetails = VideoContentDetails'
     { _vcdCountryRestriction :: !(Maybe AccessPolicy)
+    , _vcdHasCustomThumbnail :: !(Maybe Bool)
     , _vcdDefinition         :: !(Maybe VideoContentDetailsDefinition)
     , _vcdDimension          :: !(Maybe Text)
     , _vcdCaption            :: !(Maybe VideoContentDetailsCaption)
@@ -2484,6 +2485,8 @@ data VideoContentDetails = VideoContentDetails'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vcdCountryRestriction'
+--
+-- * 'vcdHasCustomThumbnail'
 --
 -- * 'vcdDefinition'
 --
@@ -2505,6 +2508,7 @@ videoContentDetails
 videoContentDetails =
     VideoContentDetails'
     { _vcdCountryRestriction = Nothing
+    , _vcdHasCustomThumbnail = Nothing
     , _vcdDefinition = Nothing
     , _vcdDimension = Nothing
     , _vcdCaption = Nothing
@@ -2521,6 +2525,14 @@ vcdCountryRestriction :: Lens' VideoContentDetails (Maybe AccessPolicy)
 vcdCountryRestriction
   = lens _vcdCountryRestriction
       (\ s a -> s{_vcdCountryRestriction = a})
+
+-- | Indicates whether the video uploader has provided a custom thumbnail
+-- image for the video. This property is only visible to the video
+-- uploader.
+vcdHasCustomThumbnail :: Lens' VideoContentDetails (Maybe Bool)
+vcdHasCustomThumbnail
+  = lens _vcdHasCustomThumbnail
+      (\ s a -> s{_vcdHasCustomThumbnail = a})
 
 -- | The value of definition indicates whether the video is available in high
 -- definition or only in standard definition.
@@ -2585,7 +2597,9 @@ instance FromJSON VideoContentDetails where
           = withObject "VideoContentDetails"
               (\ o ->
                  VideoContentDetails' <$>
-                   (o .:? "countryRestriction") <*> (o .:? "definition")
+                   (o .:? "countryRestriction") <*>
+                     (o .:? "hasCustomThumbnail")
+                     <*> (o .:? "definition")
                      <*> (o .:? "dimension")
                      <*> (o .:? "caption")
                      <*> (o .:? "regionRestriction")
@@ -2600,6 +2614,7 @@ instance ToJSON VideoContentDetails where
               (catMaybes
                  [("countryRestriction" .=) <$>
                     _vcdCountryRestriction,
+                  ("hasCustomThumbnail" .=) <$> _vcdHasCustomThumbnail,
                   ("definition" .=) <$> _vcdDefinition,
                   ("dimension" .=) <$> _vcdDimension,
                   ("caption" .=) <$> _vcdCaption,
@@ -3645,16 +3660,15 @@ instance ToJSON VideoStatus where
 --
 -- /See:/ 'videoFileDetails' smart constructor.
 data VideoFileDetails = VideoFileDetails'
-    { _vfdBitrateBps        :: !(Maybe (Textual Word64))
-    , _vfdCreationTime      :: !(Maybe Text)
-    , _vfdRecordingLocation :: !(Maybe GeoPoint)
-    , _vfdDurationMs        :: !(Maybe (Textual Word64))
-    , _vfdFileSize          :: !(Maybe (Textual Word64))
-    , _vfdFileType          :: !(Maybe VideoFileDetailsFileType)
-    , _vfdContainer         :: !(Maybe Text)
-    , _vfdVideoStreams      :: !(Maybe [VideoFileDetailsVideoStream])
-    , _vfdAudioStreams      :: !(Maybe [VideoFileDetailsAudioStream])
-    , _vfdFileName          :: !(Maybe Text)
+    { _vfdBitrateBps   :: !(Maybe (Textual Word64))
+    , _vfdCreationTime :: !(Maybe Text)
+    , _vfdDurationMs   :: !(Maybe (Textual Word64))
+    , _vfdFileSize     :: !(Maybe (Textual Word64))
+    , _vfdFileType     :: !(Maybe VideoFileDetailsFileType)
+    , _vfdContainer    :: !(Maybe Text)
+    , _vfdVideoStreams :: !(Maybe [VideoFileDetailsVideoStream])
+    , _vfdAudioStreams :: !(Maybe [VideoFileDetailsAudioStream])
+    , _vfdFileName     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoFileDetails' with the minimum fields required to make a request.
@@ -3664,8 +3678,6 @@ data VideoFileDetails = VideoFileDetails'
 -- * 'vfdBitrateBps'
 --
 -- * 'vfdCreationTime'
---
--- * 'vfdRecordingLocation'
 --
 -- * 'vfdDurationMs'
 --
@@ -3686,7 +3698,6 @@ videoFileDetails =
     VideoFileDetails'
     { _vfdBitrateBps = Nothing
     , _vfdCreationTime = Nothing
-    , _vfdRecordingLocation = Nothing
     , _vfdDurationMs = Nothing
     , _vfdFileSize = Nothing
     , _vfdFileType = Nothing
@@ -3712,13 +3723,6 @@ vfdCreationTime :: Lens' VideoFileDetails (Maybe Text)
 vfdCreationTime
   = lens _vfdCreationTime
       (\ s a -> s{_vfdCreationTime = a})
-
--- | Geographic coordinates that identify the place where the uploaded video
--- was recorded. Coordinates are defined using WGS 84.
-vfdRecordingLocation :: Lens' VideoFileDetails (Maybe GeoPoint)
-vfdRecordingLocation
-  = lens _vfdRecordingLocation
-      (\ s a -> s{_vfdRecordingLocation = a})
 
 -- | The length of the uploaded video in milliseconds.
 vfdDurationMs :: Lens' VideoFileDetails (Maybe Word64)
@@ -3776,8 +3780,7 @@ instance FromJSON VideoFileDetails where
               (\ o ->
                  VideoFileDetails' <$>
                    (o .:? "bitrateBps") <*> (o .:? "creationTime") <*>
-                     (o .:? "recordingLocation")
-                     <*> (o .:? "durationMs")
+                     (o .:? "durationMs")
                      <*> (o .:? "fileSize")
                      <*> (o .:? "fileType")
                      <*> (o .:? "container")
@@ -3791,7 +3794,6 @@ instance ToJSON VideoFileDetails where
               (catMaybes
                  [("bitrateBps" .=) <$> _vfdBitrateBps,
                   ("creationTime" .=) <$> _vfdCreationTime,
-                  ("recordingLocation" .=) <$> _vfdRecordingLocation,
                   ("durationMs" .=) <$> _vfdDurationMs,
                   ("fileSize" .=) <$> _vfdFileSize,
                   ("fileType" .=) <$> _vfdFileType,
@@ -4013,9 +4015,8 @@ instance ToJSON LiveBroadcastListResponse where
 -- | Details about the content of a channel.
 --
 -- /See:/ 'channelContentDetails' smart constructor.
-data ChannelContentDetails = ChannelContentDetails'
-    { _ccdRelatedPlayLists :: !(Maybe ChannelContentDetailsRelatedPlayLists)
-    , _ccdGooglePlusUserId :: !(Maybe Text)
+newtype ChannelContentDetails = ChannelContentDetails'
+    { _ccdRelatedPlayLists :: Maybe ChannelContentDetailsRelatedPlayLists
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelContentDetails' with the minimum fields required to make a request.
@@ -4023,14 +4024,11 @@ data ChannelContentDetails = ChannelContentDetails'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ccdRelatedPlayLists'
---
--- * 'ccdGooglePlusUserId'
 channelContentDetails
     :: ChannelContentDetails
 channelContentDetails =
     ChannelContentDetails'
     { _ccdRelatedPlayLists = Nothing
-    , _ccdGooglePlusUserId = Nothing
     }
 
 ccdRelatedPlayLists :: Lens' ChannelContentDetails (Maybe ChannelContentDetailsRelatedPlayLists)
@@ -4038,27 +4036,18 @@ ccdRelatedPlayLists
   = lens _ccdRelatedPlayLists
       (\ s a -> s{_ccdRelatedPlayLists = a})
 
--- | The googlePlusUserId object identifies the Google+ profile ID associated
--- with this channel.
-ccdGooglePlusUserId :: Lens' ChannelContentDetails (Maybe Text)
-ccdGooglePlusUserId
-  = lens _ccdGooglePlusUserId
-      (\ s a -> s{_ccdGooglePlusUserId = a})
-
 instance FromJSON ChannelContentDetails where
         parseJSON
           = withObject "ChannelContentDetails"
               (\ o ->
                  ChannelContentDetails' <$>
-                   (o .:? "relatedPlaylists") <*>
-                     (o .:? "googlePlusUserId"))
+                   (o .:? "relatedPlaylists"))
 
 instance ToJSON ChannelContentDetails where
         toJSON ChannelContentDetails'{..}
           = object
               (catMaybes
-                 [("relatedPlaylists" .=) <$> _ccdRelatedPlayLists,
-                  ("googlePlusUserId" .=) <$> _ccdGooglePlusUserId])
+                 [("relatedPlaylists" .=) <$> _ccdRelatedPlayLists])
 
 -- | Details about a resource which was added to a channel.
 --
@@ -10091,21 +10080,41 @@ instance ToJSON CommentListResponse where
 -- | Player to be used for a video playback.
 --
 -- /See:/ 'videoPlayer' smart constructor.
-newtype VideoPlayer = VideoPlayer'
-    { _vpEmbedHTML :: Maybe Text
+data VideoPlayer = VideoPlayer'
+    { _vpEmbedHeight :: !(Maybe (Textual Int64))
+    , _vpEmbedWidth  :: !(Maybe (Textual Int64))
+    , _vpEmbedHTML   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoPlayer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'vpEmbedHeight'
+--
+-- * 'vpEmbedWidth'
+--
 -- * 'vpEmbedHTML'
 videoPlayer
     :: VideoPlayer
 videoPlayer =
     VideoPlayer'
-    { _vpEmbedHTML = Nothing
+    { _vpEmbedHeight = Nothing
+    , _vpEmbedWidth = Nothing
+    , _vpEmbedHTML = Nothing
     }
+
+vpEmbedHeight :: Lens' VideoPlayer (Maybe Int64)
+vpEmbedHeight
+  = lens _vpEmbedHeight
+      (\ s a -> s{_vpEmbedHeight = a})
+      . mapping _Coerce
+
+-- | The embed width
+vpEmbedWidth :: Lens' VideoPlayer (Maybe Int64)
+vpEmbedWidth
+  = lens _vpEmbedWidth (\ s a -> s{_vpEmbedWidth = a})
+      . mapping _Coerce
 
 -- | An
 -- tag that embeds a player that will play the video.
@@ -10116,12 +10125,18 @@ vpEmbedHTML
 instance FromJSON VideoPlayer where
         parseJSON
           = withObject "VideoPlayer"
-              (\ o -> VideoPlayer' <$> (o .:? "embedHtml"))
+              (\ o ->
+                 VideoPlayer' <$>
+                   (o .:? "embedHeight") <*> (o .:? "embedWidth") <*>
+                     (o .:? "embedHtml"))
 
 instance ToJSON VideoPlayer where
         toJSON VideoPlayer'{..}
           = object
-              (catMaybes [("embedHtml" .=) <$> _vpEmbedHTML])
+              (catMaybes
+                 [("embedHeight" .=) <$> _vpEmbedHeight,
+                  ("embedWidth" .=) <$> _vpEmbedWidth,
+                  ("embedHtml" .=) <$> _vpEmbedHTML])
 
 -- | Describes a single promoted item id. It is a union of various possible
 -- types.
@@ -10944,7 +10959,7 @@ data InvideoBranding = InvideoBranding'
     { _ibImageURL        :: !(Maybe Text)
     , _ibTargetChannelId :: !(Maybe Text)
     , _ibTiming          :: !(Maybe InvideoTiming)
-    , _ibImageBytes      :: !(Maybe Base64)
+    , _ibImageBytes      :: !(Maybe Bytes)
     , _ibPosition        :: !(Maybe InvideoPosition)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10987,7 +11002,7 @@ ibTiming = lens _ibTiming (\ s a -> s{_ibTiming = a})
 ibImageBytes :: Lens' InvideoBranding (Maybe ByteString)
 ibImageBytes
   = lens _ibImageBytes (\ s a -> s{_ibImageBytes = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 ibPosition :: Lens' InvideoBranding (Maybe InvideoPosition)
 ibPosition
@@ -11845,10 +11860,11 @@ instance ToJSON ChannelLocalization where
 --
 -- /See:/ 'playListItemContentDetails' smart constructor.
 data PlayListItemContentDetails = PlayListItemContentDetails'
-    { _plicdStartAt :: !(Maybe Text)
-    , _plicdNote    :: !(Maybe Text)
-    , _plicdVideoId :: !(Maybe Text)
-    , _plicdEndAt   :: !(Maybe Text)
+    { _plicdStartAt          :: !(Maybe Text)
+    , _plicdNote             :: !(Maybe Text)
+    , _plicdVideoPublishedAt :: !(Maybe DateTime')
+    , _plicdVideoId          :: !(Maybe Text)
+    , _plicdEndAt            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayListItemContentDetails' with the minimum fields required to make a request.
@@ -11859,6 +11875,8 @@ data PlayListItemContentDetails = PlayListItemContentDetails'
 --
 -- * 'plicdNote'
 --
+-- * 'plicdVideoPublishedAt'
+--
 -- * 'plicdVideoId'
 --
 -- * 'plicdEndAt'
@@ -11868,6 +11886,7 @@ playListItemContentDetails =
     PlayListItemContentDetails'
     { _plicdStartAt = Nothing
     , _plicdNote = Nothing
+    , _plicdVideoPublishedAt = Nothing
     , _plicdVideoId = Nothing
     , _plicdEndAt = Nothing
     }
@@ -11884,6 +11903,14 @@ plicdStartAt
 plicdNote :: Lens' PlayListItemContentDetails (Maybe Text)
 plicdNote
   = lens _plicdNote (\ s a -> s{_plicdNote = a})
+
+-- | The date and time that the video was published to YouTube. The value is
+-- specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.
+plicdVideoPublishedAt :: Lens' PlayListItemContentDetails (Maybe UTCTime)
+plicdVideoPublishedAt
+  = lens _plicdVideoPublishedAt
+      (\ s a -> s{_plicdVideoPublishedAt = a})
+      . mapping _DateTime
 
 -- | The ID that YouTube uses to uniquely identify a video. To retrieve the
 -- video resource, set the id query parameter to this value in your API
@@ -11907,7 +11934,8 @@ instance FromJSON PlayListItemContentDetails where
               (\ o ->
                  PlayListItemContentDetails' <$>
                    (o .:? "startAt") <*> (o .:? "note") <*>
-                     (o .:? "videoId")
+                     (o .:? "videoPublishedAt")
+                     <*> (o .:? "videoId")
                      <*> (o .:? "endAt"))
 
 instance ToJSON PlayListItemContentDetails where
@@ -11916,6 +11944,7 @@ instance ToJSON PlayListItemContentDetails where
               (catMaybes
                  [("startAt" .=) <$> _plicdStartAt,
                   ("note" .=) <$> _plicdNote,
+                  ("videoPublishedAt" .=) <$> _plicdVideoPublishedAt,
                   ("videoId" .=) <$> _plicdVideoId,
                   ("endAt" .=) <$> _plicdEndAt])
 
@@ -13000,22 +13029,21 @@ instance ToJSON VideoRating where
 --
 -- /See:/ 'commentSnippet' smart constructor.
 data CommentSnippet = CommentSnippet'
-    { _cViewerRating               :: !(Maybe CommentSnippetViewerRating)
-    , _cPublishedAt                :: !(Maybe DateTime')
-    , _cAuthorChannelURL           :: !(Maybe Text)
-    , _cModerationStatus           :: !(Maybe CommentSnippetModerationStatus)
-    , _cLikeCount                  :: !(Maybe (Textual Word32))
-    , _cChannelId                  :: !(Maybe Text)
-    , _cTextOriginal               :: !(Maybe Text)
-    , _cVideoId                    :: !(Maybe Text)
-    , _cTextDisplay                :: !(Maybe Text)
-    , _cAuthorProFileImageURL      :: !(Maybe Text)
-    , _cAuthorDisplayName          :: !(Maybe Text)
-    , _cUpdatedAt                  :: !(Maybe DateTime')
-    , _cAuthorChannelId            :: !(Maybe JSONValue)
-    , _cCanRate                    :: !(Maybe Bool)
-    , _cAuthorGoogleplusProFileURL :: !(Maybe Text)
-    , _cParentId                   :: !(Maybe Text)
+    { _cViewerRating          :: !(Maybe CommentSnippetViewerRating)
+    , _cPublishedAt           :: !(Maybe DateTime')
+    , _cAuthorChannelURL      :: !(Maybe Text)
+    , _cModerationStatus      :: !(Maybe CommentSnippetModerationStatus)
+    , _cLikeCount             :: !(Maybe (Textual Word32))
+    , _cChannelId             :: !(Maybe Text)
+    , _cTextOriginal          :: !(Maybe Text)
+    , _cVideoId               :: !(Maybe Text)
+    , _cTextDisplay           :: !(Maybe Text)
+    , _cAuthorProFileImageURL :: !(Maybe Text)
+    , _cAuthorDisplayName     :: !(Maybe Text)
+    , _cUpdatedAt             :: !(Maybe DateTime')
+    , _cAuthorChannelId       :: !(Maybe JSONValue)
+    , _cCanRate               :: !(Maybe Bool)
+    , _cParentId              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentSnippet' with the minimum fields required to make a request.
@@ -13050,8 +13078,6 @@ data CommentSnippet = CommentSnippet'
 --
 -- * 'cCanRate'
 --
--- * 'cAuthorGoogleplusProFileURL'
---
 -- * 'cParentId'
 commentSnippet
     :: CommentSnippet
@@ -13071,7 +13097,6 @@ commentSnippet =
     , _cUpdatedAt = Nothing
     , _cAuthorChannelId = Nothing
     , _cCanRate = Nothing
-    , _cAuthorGoogleplusProFileURL = Nothing
     , _cParentId = Nothing
     }
 
@@ -13165,12 +13190,6 @@ cAuthorChannelId
 cCanRate :: Lens' CommentSnippet (Maybe Bool)
 cCanRate = lens _cCanRate (\ s a -> s{_cCanRate = a})
 
--- | Link to the author\'s Google+ profile, if any.
-cAuthorGoogleplusProFileURL :: Lens' CommentSnippet (Maybe Text)
-cAuthorGoogleplusProFileURL
-  = lens _cAuthorGoogleplusProFileURL
-      (\ s a -> s{_cAuthorGoogleplusProFileURL = a})
-
 -- | The unique id of the parent comment, only set for replies.
 cParentId :: Lens' CommentSnippet (Maybe Text)
 cParentId
@@ -13194,7 +13213,6 @@ instance FromJSON CommentSnippet where
                      <*> (o .:? "updatedAt")
                      <*> (o .:? "authorChannelId")
                      <*> (o .:? "canRate")
-                     <*> (o .:? "authorGoogleplusProfileUrl")
                      <*> (o .:? "parentId"))
 
 instance ToJSON CommentSnippet where
@@ -13216,8 +13234,6 @@ instance ToJSON CommentSnippet where
                   ("updatedAt" .=) <$> _cUpdatedAt,
                   ("authorChannelId" .=) <$> _cAuthorChannelId,
                   ("canRate" .=) <$> _cCanRate,
-                  ("authorGoogleplusProfileUrl" .=) <$>
-                    _cAuthorGoogleplusProFileURL,
                   ("parentId" .=) <$> _cParentId])
 
 -- | Brief description of the live stream status.
@@ -13555,7 +13571,7 @@ instance ToJSON VideoProjectDetails where
           = object (catMaybes [("tags" .=) <$> _vpdTags])
 
 -- | Ratings schemes. The country-specific ratings are mostly for movies and
--- shows. NEXT_ID: 68
+-- shows. NEXT_ID: 69
 --
 -- /See:/ 'contentRating' smart constructor.
 data ContentRating = ContentRating'
@@ -13581,6 +13597,7 @@ data ContentRating = ContentRating'
     , _crSmsaRating             :: !(Maybe ContentRatingSmsaRating)
     , _crChvrsRating            :: !(Maybe ContentRatingChvrsRating)
     , _crIncaaRating            :: !(Maybe ContentRatingIncaaRating)
+    , _crMcstRating             :: !(Maybe ContentRatingMcstRating)
     , _crNfrcRating             :: !(Maybe ContentRatingNfrcRating)
     , _crCsaRating              :: !(Maybe ContentRatingCsaRating)
     , _crMocRating              :: !(Maybe ContentRatingMocRating)
@@ -13675,6 +13692,8 @@ data ContentRating = ContentRating'
 -- * 'crChvrsRating'
 --
 -- * 'crIncaaRating'
+--
+-- * 'crMcstRating'
 --
 -- * 'crNfrcRating'
 --
@@ -13791,6 +13810,7 @@ contentRating =
     , _crSmsaRating = Nothing
     , _crChvrsRating = Nothing
     , _crIncaaRating = Nothing
+    , _crMcstRating = Nothing
     , _crNfrcRating = Nothing
     , _crCsaRating = Nothing
     , _crMocRating = Nothing
@@ -13977,6 +13997,11 @@ crIncaaRating :: Lens' ContentRating (Maybe ContentRatingIncaaRating)
 crIncaaRating
   = lens _crIncaaRating
       (\ s a -> s{_crIncaaRating = a})
+
+-- | The video\'s rating system for Vietnam - MCST
+crMcstRating :: Lens' ContentRating (Maybe ContentRatingMcstRating)
+crMcstRating
+  = lens _crMcstRating (\ s a -> s{_crMcstRating = a})
 
 -- | The video\'s rating from the Bulgarian National Film Center.
 crNfrcRating :: Lens' ContentRating (Maybe ContentRatingNfrcRating)
@@ -14275,6 +14300,7 @@ instance FromJSON ContentRating where
                      <*> (o .:? "smsaRating")
                      <*> (o .:? "chvrsRating")
                      <*> (o .:? "incaaRating")
+                     <*> (o .:? "mcstRating")
                      <*> (o .:? "nfrcRating")
                      <*> (o .:? "csaRating")
                      <*> (o .:? "mocRating")
@@ -14347,6 +14373,7 @@ instance ToJSON ContentRating where
                   ("smsaRating" .=) <$> _crSmsaRating,
                   ("chvrsRating" .=) <$> _crChvrsRating,
                   ("incaaRating" .=) <$> _crIncaaRating,
+                  ("mcstRating" .=) <$> _crMcstRating,
                   ("nfrcRating" .=) <$> _crNfrcRating,
                   ("csaRating" .=) <$> _crCsaRating,
                   ("mocRating" .=) <$> _crMocRating,
