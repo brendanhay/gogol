@@ -40,6 +40,7 @@ module Network.Google.AdExchangeBuyer.Types
     , cnataImage
     , cnataAppIcon
     , cnataClickTrackingURL
+    , cnataClickLinkURL
     , cnataBody
     , cnataHeadline
     , cnataImpressionTrackingURL
@@ -352,6 +353,8 @@ module Network.Google.AdExchangeBuyer.Types
     , pcUserLists
     , pcKind
     , pcExcludedPlacements
+    , pcUserIdentifierDataRequired
+    , pcMinimumViewabilityDecile
     , pcMobileDevices
     , pcLanguages
     , pcVerticals
@@ -556,6 +559,7 @@ module Network.Google.AdExchangeBuyer.Types
     , proFlightEndTimeMs
     , proName
     , proCreatorContacts
+    , proMarketplacePublisherProFileId
     , proPublisherProvidedForecast
     , proLabels
     , proPublisherProFileId
