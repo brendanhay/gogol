@@ -187,11 +187,11 @@ pgmlBearerToken
 pgmlName :: Lens' ProjectsGroupsMembersList Text
 pgmlName = lens _pgmlName (\ s a -> s{_pgmlName = a})
 
--- | An optional list filter (\/monitoring\/api\/learn_more#filtering)
--- describing the members to be returned. The filter may reference the
--- type, labels, and metadata of monitored resources that comprise the
--- group. For example, to return only resources representing Compute Engine
--- VM instances, use this filter: resource.type = \"gce_instance\"
+-- | An optional list filter describing the members to be returned. The
+-- filter may reference the type, labels, and metadata of monitored
+-- resources that comprise the group. For example, to return only resources
+-- representing Compute Engine VM instances, use this filter: resource.type
+-- = \"gce_instance\"
 pgmlFilter :: Lens' ProjectsGroupsMembersList (Maybe Text)
 pgmlFilter
   = lens _pgmlFilter (\ s a -> s{_pgmlFilter = a})

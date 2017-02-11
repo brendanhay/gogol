@@ -34,6 +34,30 @@ module Network.Google.Monitoring
 
     -- * Resources
 
+    -- ** monitoring.categories.list
+    , module Network.Google.Resource.Monitoring.Categories.List
+
+    -- ** monitoring.categories.metricAssociations.list
+    , module Network.Google.Resource.Monitoring.Categories.MetricAssociations.List
+
+    -- ** monitoring.projects.categories.create
+    , module Network.Google.Resource.Monitoring.Projects.Categories.Create
+
+    -- ** monitoring.projects.categories.delete
+    , module Network.Google.Resource.Monitoring.Projects.Categories.Delete
+
+    -- ** monitoring.projects.categories.list
+    , module Network.Google.Resource.Monitoring.Projects.Categories.List
+
+    -- ** monitoring.projects.categories.metricAssociations.create
+    , module Network.Google.Resource.Monitoring.Projects.Categories.MetricAssociations.Create
+
+    -- ** monitoring.projects.categories.metricAssociations.delete
+    , module Network.Google.Resource.Monitoring.Projects.Categories.MetricAssociations.Delete
+
+    -- ** monitoring.projects.categories.metricAssociations.list
+    , module Network.Google.Resource.Monitoring.Projects.Categories.MetricAssociations.List
+
     -- ** monitoring.projects.collectdTimeSeries.create
     , module Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
 
@@ -102,6 +126,12 @@ module Network.Google.Monitoring
     , ltsrNextPageToken
     , ltsrTimeSeries
 
+    -- ** ListMetricAssociationsResponse
+    , ListMetricAssociationsResponse
+    , listMetricAssociationsResponse
+    , lmarNextPageToken
+    , lmarMetricAssociations
+
     -- ** MetricDescriptor
     , MetricDescriptor
     , metricDescriptor
@@ -169,6 +199,13 @@ module Network.Google.Monitoring
     -- ** FieldKind
     , FieldKind (..)
 
+    -- ** MetricAssociation
+    , MetricAssociation
+    , metricAssociation
+    , maMetricType
+    , maName
+    , maIsDefault
+
     -- ** Empty
     , Empty
     , empty
@@ -189,6 +226,15 @@ module Network.Google.Monitoring
     , OptionValue
     , optionValue
     , ovAddtional
+
+    -- ** Category
+    , Category
+    , category
+    , cShortName
+    , cName
+    , cDisplayName
+    , cDescription
+    , cIsDefault
 
     -- ** CreateTimeSeriesRequest
     , CreateTimeSeriesRequest
@@ -266,6 +312,12 @@ module Network.Google.Monitoring
     , eGrowthFactor
     , eScale
     , eNumFiniteBuckets
+
+    -- ** ListCategoriesResponse
+    , ListCategoriesResponse
+    , listCategoriesResponse
+    , lcrNextPageToken
+    , lcrCategory
 
     -- ** Range
     , Range
@@ -356,6 +408,14 @@ module Network.Google.Monitoring
 
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.Monitoring.Categories.List
+import           Network.Google.Resource.Monitoring.Categories.MetricAssociations.List
+import           Network.Google.Resource.Monitoring.Projects.Categories.Create
+import           Network.Google.Resource.Monitoring.Projects.Categories.Delete
+import           Network.Google.Resource.Monitoring.Projects.Categories.List
+import           Network.Google.Resource.Monitoring.Projects.Categories.MetricAssociations.Create
+import           Network.Google.Resource.Monitoring.Projects.Categories.MetricAssociations.Delete
+import           Network.Google.Resource.Monitoring.Projects.Categories.MetricAssociations.List
 import           Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
 import           Network.Google.Resource.Monitoring.Projects.Groups.Create
 import           Network.Google.Resource.Monitoring.Projects.Groups.Delete
@@ -378,8 +438,10 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Stackdriver Monitoring API service.
 type MonitoringAPI =
-     ProjectsMetricDescriptorsListResource :<|>
-       ProjectsMetricDescriptorsGetResource
+     CategoriesMetricAssociationsListResource :<|>
+       CategoriesListResource
+       :<|> ProjectsMetricDescriptorsListResource
+       :<|> ProjectsMetricDescriptorsGetResource
        :<|> ProjectsMetricDescriptorsCreateResource
        :<|> ProjectsMetricDescriptorsDeleteResource
        :<|> ProjectsGroupsMembersListResource
@@ -389,6 +451,14 @@ type MonitoringAPI =
        :<|> ProjectsGroupsDeleteResource
        :<|> ProjectsGroupsUpdateResource
        :<|> ProjectsCollectdTimeSeriesCreateResource
+       :<|> ProjectsCategoriesMetricAssociationsListResource
+       :<|>
+       ProjectsCategoriesMetricAssociationsCreateResource
+       :<|>
+       ProjectsCategoriesMetricAssociationsDeleteResource
+       :<|> ProjectsCategoriesListResource
+       :<|> ProjectsCategoriesCreateResource
+       :<|> ProjectsCategoriesDeleteResource
        :<|> ProjectsMonitoredResourceDescriptorsListResource
        :<|> ProjectsMonitoredResourceDescriptorsGetResource
        :<|> ProjectsTimeSeriesListResource

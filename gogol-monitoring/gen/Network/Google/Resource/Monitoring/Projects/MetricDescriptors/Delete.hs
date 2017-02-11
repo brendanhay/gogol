@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a metric descriptor. Only user-created custom metrics
--- (\/monitoring\/custom-metrics) can be deleted.
+-- Deletes a metric descriptor. Only user-created custom metrics can be
+-- deleted.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.metricDescriptors.delete@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Delete
@@ -61,8 +61,8 @@ type ProjectsMetricDescriptorsDeleteResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a metric descriptor. Only user-created custom metrics
--- (\/monitoring\/custom-metrics) can be deleted.
+-- | Deletes a metric descriptor. Only user-created custom metrics can be
+-- deleted.
 --
 -- /See:/ 'projectsMetricDescriptorsDelete' smart constructor.
 data ProjectsMetricDescriptorsDelete = ProjectsMetricDescriptorsDelete'

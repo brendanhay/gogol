@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a new metric descriptor. User-created metric descriptors define
--- custom metrics (\/monitoring\/custom-metrics).
+-- custom metrics.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Stackdriver Monitoring API Reference> for @monitoring.projects.metricDescriptors.create@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Create
@@ -66,7 +66,7 @@ type ProjectsMetricDescriptorsCreateResource =
                              Post '[JSON] MetricDescriptor
 
 -- | Creates a new metric descriptor. User-created metric descriptors define
--- custom metrics (\/monitoring\/custom-metrics).
+-- custom metrics.
 --
 -- /See:/ 'projectsMetricDescriptorsCreate' smart constructor.
 data ProjectsMetricDescriptorsCreate = ProjectsMetricDescriptorsCreate'

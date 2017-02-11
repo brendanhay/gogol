@@ -175,7 +175,65 @@ instance ToJSON ListTimeSeriesResponse where
                  [("nextPageToken" .=) <$> _ltsrNextPageToken,
                   ("timeSeries" .=) <$> _ltsrTimeSeries])
 
--- | Defines a metric type and its schema.
+-- | The MetricAssociations response.
+--
+-- /See:/ 'listMetricAssociationsResponse' smart constructor.
+data ListMetricAssociationsResponse = ListMetricAssociationsResponse'
+    { _lmarNextPageToken      :: !(Maybe Text)
+    , _lmarMetricAssociations :: !(Maybe [MetricAssociation])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListMetricAssociationsResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lmarNextPageToken'
+--
+-- * 'lmarMetricAssociations'
+listMetricAssociationsResponse
+    :: ListMetricAssociationsResponse
+listMetricAssociationsResponse =
+    ListMetricAssociationsResponse'
+    { _lmarNextPageToken = Nothing
+    , _lmarMetricAssociations = Nothing
+    }
+
+-- | If there are more results than have been returned, then this field is
+-- set to a non-empty value. To see the additional results, use that value
+-- as pageToken in the next call to this method.
+lmarNextPageToken :: Lens' ListMetricAssociationsResponse (Maybe Text)
+lmarNextPageToken
+  = lens _lmarNextPageToken
+      (\ s a -> s{_lmarNextPageToken = a})
+
+-- | The MetricAssociations that match the specified filters.
+lmarMetricAssociations :: Lens' ListMetricAssociationsResponse [MetricAssociation]
+lmarMetricAssociations
+  = lens _lmarMetricAssociations
+      (\ s a -> s{_lmarMetricAssociations = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListMetricAssociationsResponse
+         where
+        parseJSON
+          = withObject "ListMetricAssociationsResponse"
+              (\ o ->
+                 ListMetricAssociationsResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "metricAssociations" .!= mempty))
+
+instance ToJSON ListMetricAssociationsResponse where
+        toJSON ListMetricAssociationsResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lmarNextPageToken,
+                  ("metricAssociations" .=) <$>
+                    _lmarMetricAssociations])
+
+-- | Defines a metric type and its schema. Once a metric descriptor is
+-- created, deleting or altering it stops data collection and makes the
+-- metric type\'s existing data unusable.
 --
 -- /See:/ 'metricDescriptor' smart constructor.
 data MetricDescriptor = MetricDescriptor'
@@ -229,10 +287,13 @@ mdMetricKind :: Lens' MetricDescriptor (Maybe MetricDescriptorMetricKind)
 mdMetricKind
   = lens _mdMetricKind (\ s a -> s{_mdMetricKind = a})
 
--- | Resource name. The format of the name may vary between different
--- implementations. For examples:
--- projects\/{project_id}\/metricDescriptors\/{type=**}
--- metricDescriptors\/{type=**}
+-- | The resource name of the metric descriptor. Depending on the
+-- implementation, the name typically includes: (1) the parent resource
+-- name that defines the scope of the metric type or of its data; and (2)
+-- the metric\'s URL-encoded type, which also appears in the type field of
+-- this descriptor. For example, following is the resource name of a custom
+-- metric within the GCP project my-project-id:
+-- \"projects\/my-project-id\/metricDescriptors\/custom.googleapis.com%2Finvoice%2Fpaid%2Famount\"
 mdName :: Lens' MetricDescriptor (Maybe Text)
 mdName = lens _mdName (\ s a -> s{_mdName = a})
 
@@ -246,25 +307,20 @@ mdDisplayName
 
 -- | The set of labels that can be used to describe a specific instance of
 -- this metric type. For example, the
--- compute.googleapis.com\/instance\/network\/received_bytes_count metric
--- type has a label, loadbalanced, that specifies whether the traffic was
--- received through a load balanced IP address.
+-- appengine.googleapis.com\/http\/server\/response_latencies metric type
+-- has a label for the HTTP response code, response_code, so you can look
+-- at latencies for successful responses or just for responses that failed.
 mdLabels :: Lens' MetricDescriptor [LabelDescriptor]
 mdLabels
   = lens _mdLabels (\ s a -> s{_mdLabels = a}) .
       _Default
       . _Coerce
 
--- | The metric type including a DNS name prefix, for example
--- \"compute.googleapis.com\/instance\/cpu\/utilization\". Metric types
--- should use a natural hierarchical grouping such as the following:
--- compute.googleapis.com\/instance\/cpu\/utilization
--- compute.googleapis.com\/instance\/disk\/read_ops_count
--- compute.googleapis.com\/instance\/network\/received_bytes_count Note
--- that if the metric type changes, the monitoring data will be
--- discontinued, and anything depends on it will break, such as monitoring
--- dashboards, alerting rules and quota limits. Therefore, once a metric
--- has been published, its type should be immutable.
+-- | The metric type, including its DNS name prefix. The type is not
+-- URL-encoded. All user-defined custom metric types have the DNS name
+-- custom.googleapis.com. Metric types should use a natural hierarchical
+-- grouping. For example: \"custom.googleapis.com\/invoice\/paid\/amount\"
+-- \"appengine.googleapis.com\/http\/server\/response_latencies\"
 mdType :: Lens' MetricDescriptor (Maybe Text)
 mdType = lens _mdType (\ s a -> s{_mdType = a})
 
@@ -858,6 +914,66 @@ instance ToJSON Field where
                   ("number" .=) <$> _fNumber,
                   ("typeUrl" .=) <$> _fTypeURL])
 
+-- | A Vital Signs MetricAssociation, representing the inclusion of its
+-- referenced metric type within its parent category.
+--
+-- /See:/ 'metricAssociation' smart constructor.
+data MetricAssociation = MetricAssociation'
+    { _maMetricType :: !(Maybe Text)
+    , _maName       :: !(Maybe Text)
+    , _maIsDefault  :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MetricAssociation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'maMetricType'
+--
+-- * 'maName'
+--
+-- * 'maIsDefault'
+metricAssociation
+    :: MetricAssociation
+metricAssociation =
+    MetricAssociation'
+    { _maMetricType = Nothing
+    , _maName = Nothing
+    , _maIsDefault = Nothing
+    }
+
+-- | Resource name of the metric. It must be the full resource name. For
+-- example, \"compute.googleapis.com\/instance\/cpu\/utilization\".
+maMetricType :: Lens' MetricAssociation (Maybe Text)
+maMetricType
+  = lens _maMetricType (\ s a -> s{_maMetricType = a})
+
+-- | Resource name for the metric association.
+maName :: Lens' MetricAssociation (Maybe Text)
+maName = lens _maName (\ s a -> s{_maName = a})
+
+-- | A flag to indicate whether this association is part of Stackdriver\'s
+-- default taxonomy.
+maIsDefault :: Lens' MetricAssociation (Maybe Bool)
+maIsDefault
+  = lens _maIsDefault (\ s a -> s{_maIsDefault = a})
+
+instance FromJSON MetricAssociation where
+        parseJSON
+          = withObject "MetricAssociation"
+              (\ o ->
+                 MetricAssociation' <$>
+                   (o .:? "metricType") <*> (o .:? "name") <*>
+                     (o .:? "isDefault"))
+
+instance ToJSON MetricAssociation where
+        toJSON MetricAssociation'{..}
+          = object
+              (catMaybes
+                 [("metricType" .=) <$> _maMetricType,
+                  ("name" .=) <$> _maName,
+                  ("isDefault" .=) <$> _maIsDefault])
+
 -- | A generic empty message that you can re-use to avoid defining duplicated
 -- empty messages in your APIs. A typical example is to use it as the
 -- request or the response type of an API method. For instance: service Foo
@@ -989,7 +1105,11 @@ instance ToJSON ListMetricDescriptorsResponse where
                  [("metricDescriptors" .=) <$> _lmdrMetricDescriptors,
                   ("nextPageToken" .=) <$> _lmdrNextPageToken])
 
--- | The option\'s value. For example, \"com.google.protobuf\".
+-- | The option\'s value packed in an Any message. If the value is a
+-- primitive, the corresponding wrapper type defined in
+-- google\/protobuf\/wrappers.proto should be used. If the value is an
+-- enum, it should be stored as an int32 value using the
+-- google.protobuf.Int32Value type.
 --
 -- /See:/ 'optionValue' smart constructor.
 newtype OptionValue = OptionValue'
@@ -1022,6 +1142,90 @@ instance FromJSON OptionValue where
 
 instance ToJSON OptionValue where
         toJSON = toJSON . _ovAddtional
+
+-- | A Vital Signs Category.
+--
+-- /See:/ 'category' smart constructor.
+data Category = Category'
+    { _cShortName   :: !(Maybe Text)
+    , _cName        :: !(Maybe Text)
+    , _cDisplayName :: !(Maybe Text)
+    , _cDescription :: !(Maybe Text)
+    , _cIsDefault   :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Category' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cShortName'
+--
+-- * 'cName'
+--
+-- * 'cDisplayName'
+--
+-- * 'cDescription'
+--
+-- * 'cIsDefault'
+category
+    :: Category
+category =
+    Category'
+    { _cShortName = Nothing
+    , _cName = Nothing
+    , _cDisplayName = Nothing
+    , _cDescription = Nothing
+    , _cIsDefault = Nothing
+    }
+
+-- | Unique usually one-word name for this category. e.g. latency or
+-- custom:goodness
+cShortName :: Lens' Category (Maybe Text)
+cShortName
+  = lens _cShortName (\ s a -> s{_cShortName = a})
+
+-- | Resource name for the category. e.g.
+-- projects\/91091\/categories\/latency or
+-- projects\/91091\/categories\/custom:goodness
+cName :: Lens' Category (Maybe Text)
+cName = lens _cName (\ s a -> s{_cName = a})
+
+-- | A human-readable name for the category.
+cDisplayName :: Lens' Category (Maybe Text)
+cDisplayName
+  = lens _cDisplayName (\ s a -> s{_cDisplayName = a})
+
+-- | A human-readable description for the category. The description can be
+-- longer and contain more details.
+cDescription :: Lens' Category (Maybe Text)
+cDescription
+  = lens _cDescription (\ s a -> s{_cDescription = a})
+
+-- | A flag to indicate whether this category is part of Stackdriver\'s
+-- default taxonomy.
+cIsDefault :: Lens' Category (Maybe Bool)
+cIsDefault
+  = lens _cIsDefault (\ s a -> s{_cIsDefault = a})
+
+instance FromJSON Category where
+        parseJSON
+          = withObject "Category"
+              (\ o ->
+                 Category' <$>
+                   (o .:? "shortName") <*> (o .:? "name") <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "description")
+                     <*> (o .:? "isDefault"))
+
+instance ToJSON Category where
+        toJSON Category'{..}
+          = object
+              (catMaybes
+                 [("shortName" .=) <$> _cShortName,
+                  ("name" .=) <$> _cName,
+                  ("displayName" .=) <$> _cDisplayName,
+                  ("description" .=) <$> _cDescription,
+                  ("isDefault" .=) <$> _cIsDefault])
 
 -- | The CreateTimeSeries request.
 --
@@ -1164,8 +1368,8 @@ instance ToJSON Explicit where
         toJSON Explicit'{..}
           = object (catMaybes [("bounds" .=) <$> _eBounds])
 
--- | The set of labels that uniquely identify a metric. To specify a metric,
--- all labels enumerated in the MetricDescriptor must be assigned values.
+-- | The set of label values that uniquely identify this metric. All labels
+-- listed in the MetricDescriptor must be assigned values.
 --
 -- /See:/ 'metricLabels' smart constructor.
 newtype MetricLabels = MetricLabels'
@@ -1532,7 +1736,7 @@ instance ToJSON CollectdPayload where
                   ("type" .=) <$> _cpType,
                   ("plugin" .=) <$> _cpPlugin])
 
--- | A specific metric identified by specifying values for all of the labels
+-- | A specific metric, identified by specifying values for all of the labels
 -- of a MetricDescriptor.
 --
 -- /See:/ 'metric' smart constructor.
@@ -1556,13 +1760,13 @@ metric =
     , _mType = Nothing
     }
 
--- | The set of labels that uniquely identify a metric. To specify a metric,
--- all labels enumerated in the MetricDescriptor must be assigned values.
+-- | The set of label values that uniquely identify this metric. All labels
+-- listed in the MetricDescriptor must be assigned values.
 mLabels :: Lens' Metric (Maybe MetricLabels)
 mLabels = lens _mLabels (\ s a -> s{_mLabels = a})
 
 -- | An existing metric type, see google.api.MetricDescriptor. For example,
--- compute.googleapis.com\/instance\/cpu\/usage_time.
+-- custom.googleapis.com\/invoice\/paid\/amount.
 mType :: Lens' Metric (Maybe Text)
 mType = lens _mType (\ s a -> s{_mType = a})
 
@@ -1645,6 +1849,59 @@ instance ToJSON Exponential where
                  [("growthFactor" .=) <$> _eGrowthFactor,
                   ("scale" .=) <$> _eScale,
                   ("numFiniteBuckets" .=) <$> _eNumFiniteBuckets])
+
+-- | The ListCategories response.
+--
+-- /See:/ 'listCategoriesResponse' smart constructor.
+data ListCategoriesResponse = ListCategoriesResponse'
+    { _lcrNextPageToken :: !(Maybe Text)
+    , _lcrCategory      :: !(Maybe [Category])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListCategoriesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcrNextPageToken'
+--
+-- * 'lcrCategory'
+listCategoriesResponse
+    :: ListCategoriesResponse
+listCategoriesResponse =
+    ListCategoriesResponse'
+    { _lcrNextPageToken = Nothing
+    , _lcrCategory = Nothing
+    }
+
+-- | If there are more results than have been returned, then this field is
+-- set to a non-empty value. To see the additional results, use that value
+-- as pageToken in the next call to this method.
+lcrNextPageToken :: Lens' ListCategoriesResponse (Maybe Text)
+lcrNextPageToken
+  = lens _lcrNextPageToken
+      (\ s a -> s{_lcrNextPageToken = a})
+
+-- | The Categories that match the specified filters.
+lcrCategory :: Lens' ListCategoriesResponse [Category]
+lcrCategory
+  = lens _lcrCategory (\ s a -> s{_lcrCategory = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ListCategoriesResponse where
+        parseJSON
+          = withObject "ListCategoriesResponse"
+              (\ o ->
+                 ListCategoriesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "category" .!= mempty))
+
+instance ToJSON ListCategoriesResponse where
+        toJSON ListCategoriesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lcrNextPageToken,
+                  ("category" .=) <$> _lcrCategory])
 
 -- | The range of the population values.
 --
@@ -2113,11 +2370,18 @@ option =
     , _oName = Nothing
     }
 
--- | The option\'s value. For example, \"com.google.protobuf\".
+-- | The option\'s value packed in an Any message. If the value is a
+-- primitive, the corresponding wrapper type defined in
+-- google\/protobuf\/wrappers.proto should be used. If the value is an
+-- enum, it should be stored as an int32 value using the
+-- google.protobuf.Int32Value type.
 oValue :: Lens' Option (Maybe OptionValue)
 oValue = lens _oValue (\ s a -> s{_oValue = a})
 
--- | The option\'s name. For example, \"java_package\".
+-- | The option\'s name. For protobuf built-in options (options defined in
+-- descriptor.proto), this is the short name. For example, \"map_entry\".
+-- For custom options, it should be the fully-qualified name. For example,
+-- \"google.api.http\".
 oName :: Lens' Option (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 

@@ -171,11 +171,11 @@ pmrdlName :: Lens' ProjectsMonitoredResourceDescriptorsList Text
 pmrdlName
   = lens _pmrdlName (\ s a -> s{_pmrdlName = a})
 
--- | An optional filter (\/monitoring\/api\/v3\/filters) describing the
--- descriptors to be returned. The filter can reference the descriptor\'s
--- type and labels. For example, the following filter returns only Google
--- Compute Engine descriptors that have an id label: resource.type =
--- starts_with(\"gce_\") AND resource.label:id
+-- | An optional filter describing the descriptors to be returned. The filter
+-- can reference the descriptor\'s type and labels. For example, the
+-- following filter returns only Google Compute Engine descriptors that
+-- have an id label: resource.type = starts_with(\"gce_\") AND
+-- resource.label:id
 pmrdlFilter :: Lens' ProjectsMonitoredResourceDescriptorsList (Maybe Text)
 pmrdlFilter
   = lens _pmrdlFilter (\ s a -> s{_pmrdlFilter = a})
