@@ -588,7 +588,7 @@ internalLit = \case
     Nat       -> TyApp (TyCon "Textual") (TyCon "Nat")
     Float     -> TyApp (TyCon "Textual") (TyCon "Double")
     Double    -> TyApp (TyCon "Textual") (TyCon "Double")
-    Byte      -> TyCon "Base64"
+    Byte      -> TyCon "Bytes"
     UInt32    -> TyApp (TyCon "Textual") (TyCon "Word32")
     UInt64    -> TyApp (TyCon "Textual") (TyCon "Word64")
     Int32     -> TyApp (TyCon "Textual") (TyCon "Int32")
@@ -622,7 +622,7 @@ iso = \case
     TLit Duration -> Just (var "_Duration")
     TLit Float    -> Just (var "_Coerce")
     TLit Double   -> Just (var "_Coerce")
-    TLit Byte     -> Just (var "_Base64")
+    TLit Byte     -> Just (var "_Bytes")
     TLit UInt32   -> Just (var "_Coerce")
     TLit UInt64   -> Just (var "_Coerce")
     TLit Int32    -> Just (var "_Coerce")

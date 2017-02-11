@@ -31,7 +31,7 @@ import Servant.API         as Export hiding (Headers, getResponse)
 import Servant.Utils.Links as Export hiding (Link)
 import Web.HttpApiData     as Export (FromHttpApiData (..), ToHttpApiData (..))
 
-import Network.Google.Data.Base64  as Export
+import Network.Google.Data.Bytes   as Export
 import Network.Google.Data.JSON    as Export
 import Network.Google.Data.Numeric as Export
 import Network.Google.Data.Time    as Export

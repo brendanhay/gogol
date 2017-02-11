@@ -36,7 +36,7 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Data.Base64
+          Network.Google.Data.Bytes
         , Network.Google.Data.JSON
         , Network.Google.Data.Numeric
         , Network.Google.Data.Time
@@ -59,7 +59,6 @@ library
         , http-media           >= 0.6
         , http-types           >= 0.8.6
         , lens                 >= 4.4
-        , memory               >= 0.8
         , resourcet            >= 1.1
         , scientific           >= 0.3
         , servant              >= 0.4.4
