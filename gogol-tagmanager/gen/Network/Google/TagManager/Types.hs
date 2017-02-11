@@ -357,15 +357,16 @@ tagManagerService
   = defaultService (ServiceId "tagmanager:v1")
       "www.googleapis.com"
 
--- | View your Google Tag Manager containers
+-- | View your Google Tag Manager container and its subcomponents
 tagManagerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.readonly"]
 tagManagerReadOnlyScope = Proxy;
 
--- | Manage your Google Tag Manager containers
+-- | Manage your Google Tag Manager container and its subcomponents,
+-- excluding versioning and publishing
 tagManagerEditContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
 tagManagerEditContainersScope = Proxy;
 
--- | Manage your Google Tag Manager accounts
+-- | View and manage your Google Tag Manager accounts
 tagManagerManageAccountsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
 tagManagerManageAccountsScope = Proxy;
 
@@ -373,11 +374,11 @@ tagManagerManageAccountsScope = Proxy;
 tagManagerDeleteContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
 tagManagerDeleteContainersScope = Proxy;
 
--- | Manage user permissions of your Google Tag Manager data
+-- | Manage user permissions of your Google Tag Manager account and container
 tagManagerManageUsersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.users"]
 tagManagerManageUsersScope = Proxy;
 
--- | Publish your Google Tag Manager containers
+-- | Publish your Google Tag Manager container versions
 tagManagerPublishScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.publish"]
 tagManagerPublishScope = Proxy;
 
