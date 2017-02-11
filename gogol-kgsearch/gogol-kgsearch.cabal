@@ -14,8 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md src/.gitkeep
 
 description:
-    Knowledge Graph Search API allows developers to search the Google
-    Knowledge Graph for entities.
+    Searches the Google Knowledge Graph for entities.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

@@ -25,6 +25,9 @@ module Network.Google.KnowledgeGraphSearch.Types
     , srContext
     , srItemListElement
     , srType
+
+    -- * Xgafv
+    , Xgafv (..)
     ) where
 
 import           Network.Google.KnowledgeGraphSearch.Types.Product
