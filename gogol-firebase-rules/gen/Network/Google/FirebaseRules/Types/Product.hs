@@ -417,7 +417,7 @@ instance ToJSON TestRulesetRequest where
 --
 -- /See:/ 'file' smart constructor.
 data File = File'
-    { _fFingerprint :: !(Maybe Base64)
+    { _fFingerprint :: !(Maybe Bytes)
     , _fContent     :: !(Maybe Text)
     , _fName        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -444,7 +444,7 @@ file =
 fFingerprint :: Lens' File (Maybe ByteString)
 fFingerprint
   = lens _fFingerprint (\ s a -> s{_fFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | Textual Content.
 fContent :: Lens' File (Maybe Text)
