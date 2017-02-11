@@ -48,7 +48,9 @@ fileList =
     }
 
 -- | The page token for the next page of files. This will be absent if the
--- end of the files list has been reached.
+-- end of the files list has been reached. If the token is rejected for any
+-- reason, it should be discarded, and pagination should be restarted from
+-- the first page of results.
 flNextPageToken :: Lens' FileList (Maybe Text)
 flNextPageToken
   = lens _flNextPageToken
@@ -59,7 +61,8 @@ flNextPageToken
 flKind :: Lens' FileList Text
 flKind = lens _flKind (\ s a -> s{_flKind = a})
 
--- | The page of files.
+-- | The list of files. If nextPageToken is populated, then this list may be
+-- incomplete and an additional page of results should be fetched.
 flFiles :: Lens' FileList [File]
 flFiles
   = lens _flFiles (\ s a -> s{_flFiles = a}) . _Default
@@ -475,7 +478,9 @@ replyList =
     }
 
 -- | The page token for the next page of replies. This will be absent if the
--- end of the replies list has been reached.
+-- end of the replies list has been reached. If the token is rejected for
+-- any reason, it should be discarded, and pagination should be restarted
+-- from the first page of results.
 rlNextPageToken :: Lens' ReplyList (Maybe Text)
 rlNextPageToken
   = lens _rlNextPageToken
@@ -486,7 +491,8 @@ rlNextPageToken
 rlKind :: Lens' ReplyList Text
 rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
 
--- | The page of replies.
+-- | The list of replies. If nextPageToken is populated, then this list may
+-- be incomplete and an additional page of results should be fetched.
 rlReplies :: Lens' ReplyList [Reply]
 rlReplies
   = lens _rlReplies (\ s a -> s{_rlReplies = a}) .
@@ -515,7 +521,7 @@ instance ToJSON ReplyList where
 --
 -- /See:/ 'fileContentHintsThumbnail' smart constructor.
 data FileContentHintsThumbnail = FileContentHintsThumbnail'
-    { _fchtImage    :: !(Maybe Base64)
+    { _fchtImage    :: !(Maybe Bytes)
     , _fchtMimeType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -538,7 +544,7 @@ fileContentHintsThumbnail =
 fchtImage :: Lens' FileContentHintsThumbnail (Maybe ByteString)
 fchtImage
   = lens _fchtImage (\ s a -> s{_fchtImage = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The MIME type of the thumbnail.
 fchtMimeType :: Lens' FileContentHintsThumbnail (Maybe Text)
@@ -1034,13 +1040,16 @@ clNewStartPageToken
       (\ s a -> s{_clNewStartPageToken = a})
 
 -- | The page token for the next page of changes. This will be absent if the
--- end of the current changes list has been reached.
+-- end of the changes list has been reached. If the token is rejected for
+-- any reason, it should be discarded, and pagination should be restarted
+-- from the first page of results.
 clNextPageToken :: Lens' ChangeList (Maybe Text)
 clNextPageToken
   = lens _clNextPageToken
       (\ s a -> s{_clNextPageToken = a})
 
--- | The page of changes.
+-- | The list of changes. If nextPageToken is populated, then this list may
+-- be incomplete and an additional page of results should be fetched.
 clChanges :: Lens' ChangeList [Change]
 clChanges
   = lens _clChanges (\ s a -> s{_clChanges = a}) .
@@ -2246,6 +2255,7 @@ data File = File'
     , _fViewedByMe            :: !(Maybe Bool)
     , _fOwners                :: !(Maybe [User])
     , _fViewedByMeTime        :: !(Maybe DateTime')
+    , _fModifiedByMe          :: !(Maybe Bool)
     , _fSize                  :: !(Maybe (Textual Int64))
     , _fTrashed               :: !(Maybe Bool)
     , _fWebViewLink           :: !(Maybe Text)
@@ -2254,6 +2264,8 @@ data File = File'
     , _fKind                  :: !Text
     , _fLastModifyingUser     :: !(Maybe User)
     , _fIconLink              :: !(Maybe Text)
+    , _fHasThumbnail          :: !(Maybe Bool)
+    , _fThumbnailVersion      :: !(Maybe (Textual Int64))
     , _fImageMediaMetadata    :: !(Maybe FileImageMediaMetadata)
     , _fExplicitlyTrashed     :: !(Maybe Bool)
     , _fShared                :: !(Maybe Bool)
@@ -2305,6 +2317,8 @@ data File = File'
 --
 -- * 'fViewedByMeTime'
 --
+-- * 'fModifiedByMe'
+--
 -- * 'fSize'
 --
 -- * 'fTrashed'
@@ -2320,6 +2334,10 @@ data File = File'
 -- * 'fLastModifyingUser'
 --
 -- * 'fIconLink'
+--
+-- * 'fHasThumbnail'
+--
+-- * 'fThumbnailVersion'
 --
 -- * 'fImageMediaMetadata'
 --
@@ -2387,6 +2405,7 @@ file =
     , _fViewedByMe = Nothing
     , _fOwners = Nothing
     , _fViewedByMeTime = Nothing
+    , _fModifiedByMe = Nothing
     , _fSize = Nothing
     , _fTrashed = Nothing
     , _fWebViewLink = Nothing
@@ -2395,6 +2414,8 @@ file =
     , _fKind = "drive#file"
     , _fLastModifyingUser = Nothing
     , _fIconLink = Nothing
+    , _fHasThumbnail = Nothing
+    , _fThumbnailVersion = Nothing
     , _fImageMediaMetadata = Nothing
     , _fExplicitlyTrashed = Nothing
     , _fShared = Nothing
@@ -2430,7 +2451,8 @@ fOwnedByMe
   = lens _fOwnedByMe (\ s a -> s{_fOwnedByMe = a})
 
 -- | A short-lived link to the file\'s thumbnail, if available. Typically
--- lasts on the order of hours.
+-- lasts on the order of hours. Only populated when the requesting app can
+-- access the file\'s content.
 fThumbnailLink :: Lens' File (Maybe Text)
 fThumbnailLink
   = lens _fThumbnailLink
@@ -2488,6 +2510,12 @@ fViewedByMeTime
       (\ s a -> s{_fViewedByMeTime = a})
       . mapping _DateTime
 
+-- | Whether the file has been modified by this user.
+fModifiedByMe :: Lens' File (Maybe Bool)
+fModifiedByMe
+  = lens _fModifiedByMe
+      (\ s a -> s{_fModifiedByMe = a})
+
 -- | The size of the file\'s content in bytes. This is only applicable to
 -- files with binary content in Drive.
 fSize :: Lens' File (Maybe Int64)
@@ -2536,6 +2564,19 @@ fLastModifyingUser
 fIconLink :: Lens' File (Maybe Text)
 fIconLink
   = lens _fIconLink (\ s a -> s{_fIconLink = a})
+
+-- | Whether this file has a thumbnail.
+fHasThumbnail :: Lens' File (Maybe Bool)
+fHasThumbnail
+  = lens _fHasThumbnail
+      (\ s a -> s{_fHasThumbnail = a})
+
+-- | The thumbnail version for use in thumbnail cache invalidation.
+fThumbnailVersion :: Lens' File (Maybe Int64)
+fThumbnailVersion
+  = lens _fThumbnailVersion
+      (\ s a -> s{_fThumbnailVersion = a})
+      . mapping _Coerce
 
 -- | Additional metadata about image media, if available.
 fImageMediaMetadata :: Lens' File (Maybe FileImageMediaMetadata)
@@ -2731,6 +2772,7 @@ instance FromJSON File where
                      <*> (o .:? "viewedByMe")
                      <*> (o .:? "owners" .!= mempty)
                      <*> (o .:? "viewedByMeTime")
+                     <*> (o .:? "modifiedByMe")
                      <*> (o .:? "size")
                      <*> (o .:? "trashed")
                      <*> (o .:? "webViewLink")
@@ -2739,6 +2781,8 @@ instance FromJSON File where
                      <*> (o .:? "kind" .!= "drive#file")
                      <*> (o .:? "lastModifyingUser")
                      <*> (o .:? "iconLink")
+                     <*> (o .:? "hasThumbnail")
+                     <*> (o .:? "thumbnailVersion")
                      <*> (o .:? "imageMediaMetadata")
                      <*> (o .:? "explicitlyTrashed")
                      <*> (o .:? "shared")
@@ -2780,6 +2824,7 @@ instance ToJSON File where
                   ("viewedByMe" .=) <$> _fViewedByMe,
                   ("owners" .=) <$> _fOwners,
                   ("viewedByMeTime" .=) <$> _fViewedByMeTime,
+                  ("modifiedByMe" .=) <$> _fModifiedByMe,
                   ("size" .=) <$> _fSize, ("trashed" .=) <$> _fTrashed,
                   ("webViewLink" .=) <$> _fWebViewLink,
                   ("createdTime" .=) <$> _fCreatedTime,
@@ -2787,6 +2832,8 @@ instance ToJSON File where
                   Just ("kind" .= _fKind),
                   ("lastModifyingUser" .=) <$> _fLastModifyingUser,
                   ("iconLink" .=) <$> _fIconLink,
+                  ("hasThumbnail" .=) <$> _fHasThumbnail,
+                  ("thumbnailVersion" .=) <$> _fThumbnailVersion,
                   ("imageMediaMetadata" .=) <$> _fImageMediaMetadata,
                   ("explicitlyTrashed" .=) <$> _fExplicitlyTrashed,
                   ("shared" .=) <$> _fShared,
@@ -2901,7 +2948,9 @@ commentList =
     }
 
 -- | The page token for the next page of comments. This will be absent if the
--- end of the comments list has been reached.
+-- end of the comments list has been reached. If the token is rejected for
+-- any reason, it should be discarded, and pagination should be restarted
+-- from the first page of results.
 cllNextPageToken :: Lens' CommentList (Maybe Text)
 cllNextPageToken
   = lens _cllNextPageToken
@@ -2912,7 +2961,8 @@ cllNextPageToken
 cllKind :: Lens' CommentList Text
 cllKind = lens _cllKind (\ s a -> s{_cllKind = a})
 
--- | The page of comments.
+-- | The list of comments. If nextPageToken is populated, then this list may
+-- be incomplete and an additional page of results should be fetched.
 cllComments :: Lens' CommentList [Comment]
 cllComments
   = lens _cllComments (\ s a -> s{_cllComments = a}) .
@@ -2964,7 +3014,9 @@ revisionList =
     }
 
 -- | The page token for the next page of revisions. This will be absent if
--- the end of the revisions list has been reached.
+-- the end of the revisions list has been reached. If the token is rejected
+-- for any reason, it should be discarded, and pagination should be
+-- restarted from the first page of results.
 rllNextPageToken :: Lens' RevisionList (Maybe Text)
 rllNextPageToken
   = lens _rllNextPageToken
@@ -2975,7 +3027,8 @@ rllNextPageToken
 rllKind :: Lens' RevisionList Text
 rllKind = lens _rllKind (\ s a -> s{_rllKind = a})
 
--- | The full list of revisions.
+-- | The list of revisions. If nextPageToken is populated, then this list may
+-- be incomplete and an additional page of results should be fetched.
 rllRevisions :: Lens' RevisionList [Revision]
 rllRevisions
   = lens _rllRevisions (\ s a -> s{_rllRevisions = a})
@@ -3027,7 +3080,7 @@ permissionList =
 plKind :: Lens' PermissionList Text
 plKind = lens _plKind (\ s a -> s{_plKind = a})
 
--- | The full list of permissions.
+-- | The list of permissions.
 plPermissions :: Lens' PermissionList [Permission]
 plPermissions
   = lens _plPermissions

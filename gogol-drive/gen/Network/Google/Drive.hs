@@ -393,6 +393,7 @@ module Network.Google.Drive
     , fViewedByMe
     , fOwners
     , fViewedByMeTime
+    , fModifiedByMe
     , fSize
     , fTrashed
     , fWebViewLink
@@ -401,6 +402,8 @@ module Network.Google.Drive
     , fKind
     , fLastModifyingUser
     , fIconLink
+    , fHasThumbnail
+    , fThumbnailVersion
     , fImageMediaMetadata
     , fExplicitlyTrashed
     , fShared
