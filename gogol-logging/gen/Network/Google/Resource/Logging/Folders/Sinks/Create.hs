@@ -13,7 +13,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
--- Module      : Network.Google.Resource.Logging.Projects.Sinks.Create
+-- Module      : Network.Google.Resource.Logging.Folders.Sinks.Create
 -- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -26,35 +26,35 @@
 -- writer_identity is not permitted to write to the destination. A sink can
 -- export log entries only from the resource owning the sink.
 --
--- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.create@.
-module Network.Google.Resource.Logging.Projects.Sinks.Create
+-- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.folders.sinks.create@.
+module Network.Google.Resource.Logging.Folders.Sinks.Create
     (
     -- * REST Resource
-      ProjectsSinksCreateResource
+      FoldersSinksCreateResource
 
     -- * Creating a Request
-    , projectsSinksCreate
-    , ProjectsSinksCreate
+    , foldersSinksCreate
+    , FoldersSinksCreate
 
     -- * Request Lenses
-    , pscParent
-    , pscXgafv
-    , pscUniqueWriterIdentity
-    , pscUploadProtocol
-    , pscPp
-    , pscAccessToken
-    , pscUploadType
-    , pscPayload
-    , pscBearerToken
-    , pscCallback
+    , fscParent
+    , fscXgafv
+    , fscUniqueWriterIdentity
+    , fscUploadProtocol
+    , fscPp
+    , fscAccessToken
+    , fscUploadType
+    , fscPayload
+    , fscBearerToken
+    , fscCallback
     ) where
 
 import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @logging.projects.sinks.create@ method which the
--- 'ProjectsSinksCreate' request conforms to.
-type ProjectsSinksCreateResource =
+-- | A resource alias for @logging.folders.sinks.create@ method which the
+-- 'FoldersSinksCreate' request conforms to.
+type FoldersSinksCreateResource =
      "v2" :>
        Capture "parent" Text :>
          "sinks" :>
@@ -75,72 +75,72 @@ type ProjectsSinksCreateResource =
 -- writer_identity is not permitted to write to the destination. A sink can
 -- export log entries only from the resource owning the sink.
 --
--- /See:/ 'projectsSinksCreate' smart constructor.
-data ProjectsSinksCreate = ProjectsSinksCreate'
-    { _pscParent               :: !Text
-    , _pscXgafv                :: !(Maybe Xgafv)
-    , _pscUniqueWriterIdentity :: !(Maybe Bool)
-    , _pscUploadProtocol       :: !(Maybe Text)
-    , _pscPp                   :: !Bool
-    , _pscAccessToken          :: !(Maybe Text)
-    , _pscUploadType           :: !(Maybe Text)
-    , _pscPayload              :: !LogSink
-    , _pscBearerToken          :: !(Maybe Text)
-    , _pscCallback             :: !(Maybe Text)
+-- /See:/ 'foldersSinksCreate' smart constructor.
+data FoldersSinksCreate = FoldersSinksCreate'
+    { _fscParent               :: !Text
+    , _fscXgafv                :: !(Maybe Xgafv)
+    , _fscUniqueWriterIdentity :: !(Maybe Bool)
+    , _fscUploadProtocol       :: !(Maybe Text)
+    , _fscPp                   :: !Bool
+    , _fscAccessToken          :: !(Maybe Text)
+    , _fscUploadType           :: !(Maybe Text)
+    , _fscPayload              :: !LogSink
+    , _fscBearerToken          :: !(Maybe Text)
+    , _fscCallback             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSinksCreate' with the minimum fields required to make a request.
+-- | Creates a value of 'FoldersSinksCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pscParent'
+-- * 'fscParent'
 --
--- * 'pscXgafv'
+-- * 'fscXgafv'
 --
--- * 'pscUniqueWriterIdentity'
+-- * 'fscUniqueWriterIdentity'
 --
--- * 'pscUploadProtocol'
+-- * 'fscUploadProtocol'
 --
--- * 'pscPp'
+-- * 'fscPp'
 --
--- * 'pscAccessToken'
+-- * 'fscAccessToken'
 --
--- * 'pscUploadType'
+-- * 'fscUploadType'
 --
--- * 'pscPayload'
+-- * 'fscPayload'
 --
--- * 'pscBearerToken'
+-- * 'fscBearerToken'
 --
--- * 'pscCallback'
-projectsSinksCreate
-    :: Text -- ^ 'pscParent'
-    -> LogSink -- ^ 'pscPayload'
-    -> ProjectsSinksCreate
-projectsSinksCreate pPscParent_ pPscPayload_ =
-    ProjectsSinksCreate'
-    { _pscParent = pPscParent_
-    , _pscXgafv = Nothing
-    , _pscUniqueWriterIdentity = Nothing
-    , _pscUploadProtocol = Nothing
-    , _pscPp = True
-    , _pscAccessToken = Nothing
-    , _pscUploadType = Nothing
-    , _pscPayload = pPscPayload_
-    , _pscBearerToken = Nothing
-    , _pscCallback = Nothing
+-- * 'fscCallback'
+foldersSinksCreate
+    :: Text -- ^ 'fscParent'
+    -> LogSink -- ^ 'fscPayload'
+    -> FoldersSinksCreate
+foldersSinksCreate pFscParent_ pFscPayload_ =
+    FoldersSinksCreate'
+    { _fscParent = pFscParent_
+    , _fscXgafv = Nothing
+    , _fscUniqueWriterIdentity = Nothing
+    , _fscUploadProtocol = Nothing
+    , _fscPp = True
+    , _fscAccessToken = Nothing
+    , _fscUploadType = Nothing
+    , _fscPayload = pFscPayload_
+    , _fscBearerToken = Nothing
+    , _fscCallback = Nothing
     }
 
 -- | Required. The resource in which to create the sink:
 -- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
 -- Examples: \"projects\/my-logging-project\",
 -- \"organizations\/123456789\".
-pscParent :: Lens' ProjectsSinksCreate Text
-pscParent
-  = lens _pscParent (\ s a -> s{_pscParent = a})
+fscParent :: Lens' FoldersSinksCreate Text
+fscParent
+  = lens _fscParent (\ s a -> s{_fscParent = a})
 
 -- | V1 error format.
-pscXgafv :: Lens' ProjectsSinksCreate (Maybe Xgafv)
-pscXgafv = lens _pscXgafv (\ s a -> s{_pscXgafv = a})
+fscXgafv :: Lens' FoldersSinksCreate (Maybe Xgafv)
+fscXgafv = lens _fscXgafv (\ s a -> s{_fscXgafv = a})
 
 -- | Optional. Determines the kind of IAM identity returned as
 -- writer_identity in the new sink. If this value is omitted or set to
@@ -152,66 +152,66 @@ pscXgafv = lens _pscXgafv (\ s a -> s{_pscXgafv = a})
 -- as an organization, then the value of writer_identity will be a unique
 -- service account used only for exports from the new sink. For more
 -- information, see writer_identity in LogSink.
-pscUniqueWriterIdentity :: Lens' ProjectsSinksCreate (Maybe Bool)
-pscUniqueWriterIdentity
-  = lens _pscUniqueWriterIdentity
-      (\ s a -> s{_pscUniqueWriterIdentity = a})
+fscUniqueWriterIdentity :: Lens' FoldersSinksCreate (Maybe Bool)
+fscUniqueWriterIdentity
+  = lens _fscUniqueWriterIdentity
+      (\ s a -> s{_fscUniqueWriterIdentity = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pscUploadProtocol :: Lens' ProjectsSinksCreate (Maybe Text)
-pscUploadProtocol
-  = lens _pscUploadProtocol
-      (\ s a -> s{_pscUploadProtocol = a})
+fscUploadProtocol :: Lens' FoldersSinksCreate (Maybe Text)
+fscUploadProtocol
+  = lens _fscUploadProtocol
+      (\ s a -> s{_fscUploadProtocol = a})
 
 -- | Pretty-print response.
-pscPp :: Lens' ProjectsSinksCreate Bool
-pscPp = lens _pscPp (\ s a -> s{_pscPp = a})
+fscPp :: Lens' FoldersSinksCreate Bool
+fscPp = lens _fscPp (\ s a -> s{_fscPp = a})
 
 -- | OAuth access token.
-pscAccessToken :: Lens' ProjectsSinksCreate (Maybe Text)
-pscAccessToken
-  = lens _pscAccessToken
-      (\ s a -> s{_pscAccessToken = a})
+fscAccessToken :: Lens' FoldersSinksCreate (Maybe Text)
+fscAccessToken
+  = lens _fscAccessToken
+      (\ s a -> s{_fscAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pscUploadType :: Lens' ProjectsSinksCreate (Maybe Text)
-pscUploadType
-  = lens _pscUploadType
-      (\ s a -> s{_pscUploadType = a})
+fscUploadType :: Lens' FoldersSinksCreate (Maybe Text)
+fscUploadType
+  = lens _fscUploadType
+      (\ s a -> s{_fscUploadType = a})
 
 -- | Multipart request metadata.
-pscPayload :: Lens' ProjectsSinksCreate LogSink
-pscPayload
-  = lens _pscPayload (\ s a -> s{_pscPayload = a})
+fscPayload :: Lens' FoldersSinksCreate LogSink
+fscPayload
+  = lens _fscPayload (\ s a -> s{_fscPayload = a})
 
 -- | OAuth bearer token.
-pscBearerToken :: Lens' ProjectsSinksCreate (Maybe Text)
-pscBearerToken
-  = lens _pscBearerToken
-      (\ s a -> s{_pscBearerToken = a})
+fscBearerToken :: Lens' FoldersSinksCreate (Maybe Text)
+fscBearerToken
+  = lens _fscBearerToken
+      (\ s a -> s{_fscBearerToken = a})
 
 -- | JSONP
-pscCallback :: Lens' ProjectsSinksCreate (Maybe Text)
-pscCallback
-  = lens _pscCallback (\ s a -> s{_pscCallback = a})
+fscCallback :: Lens' FoldersSinksCreate (Maybe Text)
+fscCallback
+  = lens _fscCallback (\ s a -> s{_fscCallback = a})
 
-instance GoogleRequest ProjectsSinksCreate where
-        type Rs ProjectsSinksCreate = LogSink
-        type Scopes ProjectsSinksCreate =
+instance GoogleRequest FoldersSinksCreate where
+        type Rs FoldersSinksCreate = LogSink
+        type Scopes FoldersSinksCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
-        requestClient ProjectsSinksCreate'{..}
-          = go _pscParent _pscXgafv _pscUniqueWriterIdentity
-              _pscUploadProtocol
-              (Just _pscPp)
-              _pscAccessToken
-              _pscUploadType
-              _pscBearerToken
-              _pscCallback
+        requestClient FoldersSinksCreate'{..}
+          = go _fscParent _fscXgafv _fscUniqueWriterIdentity
+              _fscUploadProtocol
+              (Just _fscPp)
+              _fscAccessToken
+              _fscUploadType
+              _fscBearerToken
+              _fscCallback
               (Just AltJSON)
-              _pscPayload
+              _fscPayload
               loggingService
           where go
                   = buildClient
-                      (Proxy :: Proxy ProjectsSinksCreateResource)
+                      (Proxy :: Proxy FoldersSinksCreateResource)
                       mempty

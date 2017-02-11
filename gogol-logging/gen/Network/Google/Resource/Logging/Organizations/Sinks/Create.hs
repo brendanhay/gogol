@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a sink.
+-- Creates a sink that exports specified log entries to a destination. The
+-- export of newly-ingested log entries begins immediately, unless the
+-- current time is outside the sink\'s start and end times or the sink\'s
+-- writer_identity is not permitted to write to the destination. A sink can
+-- export log entries only from the resource owning the sink.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.sinks.create@.
 module Network.Google.Resource.Logging.Organizations.Sinks.Create
@@ -35,6 +39,7 @@ module Network.Google.Resource.Logging.Organizations.Sinks.Create
     -- * Request Lenses
     , oscParent
     , oscXgafv
+    , oscUniqueWriterIdentity
     , oscUploadProtocol
     , oscPp
     , oscAccessToken
@@ -54,28 +59,34 @@ type OrganizationsSinksCreateResource =
        Capture "parent" Text :>
          "sinks" :>
            QueryParam "$.xgafv" Xgafv :>
-             QueryParam "upload_protocol" Text :>
-               QueryParam "pp" Bool :>
-                 QueryParam "access_token" Text :>
-                   QueryParam "uploadType" Text :>
-                     QueryParam "bearer_token" Text :>
-                       QueryParam "callback" Text :>
-                         QueryParam "alt" AltJSON :>
-                           ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
+             QueryParam "uniqueWriterIdentity" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "callback" Text :>
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] LogSink :> Post '[JSON] LogSink
 
--- | Creates a sink.
+-- | Creates a sink that exports specified log entries to a destination. The
+-- export of newly-ingested log entries begins immediately, unless the
+-- current time is outside the sink\'s start and end times or the sink\'s
+-- writer_identity is not permitted to write to the destination. A sink can
+-- export log entries only from the resource owning the sink.
 --
 -- /See:/ 'organizationsSinksCreate' smart constructor.
 data OrganizationsSinksCreate = OrganizationsSinksCreate'
-    { _oscParent         :: !Text
-    , _oscXgafv          :: !(Maybe Xgafv)
-    , _oscUploadProtocol :: !(Maybe Text)
-    , _oscPp             :: !Bool
-    , _oscAccessToken    :: !(Maybe Text)
-    , _oscUploadType     :: !(Maybe Text)
-    , _oscPayload        :: !LogSink
-    , _oscBearerToken    :: !(Maybe Text)
-    , _oscCallback       :: !(Maybe Text)
+    { _oscParent               :: !Text
+    , _oscXgafv                :: !(Maybe Xgafv)
+    , _oscUniqueWriterIdentity :: !(Maybe Bool)
+    , _oscUploadProtocol       :: !(Maybe Text)
+    , _oscPp                   :: !Bool
+    , _oscAccessToken          :: !(Maybe Text)
+    , _oscUploadType           :: !(Maybe Text)
+    , _oscPayload              :: !LogSink
+    , _oscBearerToken          :: !(Maybe Text)
+    , _oscCallback             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrganizationsSinksCreate' with the minimum fields required to make a request.
@@ -85,6 +96,8 @@ data OrganizationsSinksCreate = OrganizationsSinksCreate'
 -- * 'oscParent'
 --
 -- * 'oscXgafv'
+--
+-- * 'oscUniqueWriterIdentity'
 --
 -- * 'oscUploadProtocol'
 --
@@ -107,6 +120,7 @@ organizationsSinksCreate pOscParent_ pOscPayload_ =
     OrganizationsSinksCreate'
     { _oscParent = pOscParent_
     , _oscXgafv = Nothing
+    , _oscUniqueWriterIdentity = Nothing
     , _oscUploadProtocol = Nothing
     , _oscPp = True
     , _oscAccessToken = Nothing
@@ -116,9 +130,10 @@ organizationsSinksCreate pOscParent_ pOscPayload_ =
     , _oscCallback = Nothing
     }
 
--- | Required. The resource in which to create the sink. Example:
--- \`\"projects\/my-project-id\"\`. The new sink must be provided in the
--- request.
+-- | Required. The resource in which to create the sink:
+-- \"projects\/[PROJECT_ID]\" \"organizations\/[ORGANIZATION_ID]\"
+-- Examples: \"projects\/my-logging-project\",
+-- \"organizations\/123456789\".
 oscParent :: Lens' OrganizationsSinksCreate Text
 oscParent
   = lens _oscParent (\ s a -> s{_oscParent = a})
@@ -126,6 +141,21 @@ oscParent
 -- | V1 error format.
 oscXgafv :: Lens' OrganizationsSinksCreate (Maybe Xgafv)
 oscXgafv = lens _oscXgafv (\ s a -> s{_oscXgafv = a})
+
+-- | Optional. Determines the kind of IAM identity returned as
+-- writer_identity in the new sink. If this value is omitted or set to
+-- false, and if the sink\'s parent is a project, then the value returned
+-- as writer_identity is cloud-logs\'google.com, the same identity used
+-- before the addition of writer identities to this API. The sink\'s
+-- destination must be in the same project as the sink itself.If this field
+-- is set to true, or if the sink is owned by a non-project resource such
+-- as an organization, then the value of writer_identity will be a unique
+-- service account used only for exports from the new sink. For more
+-- information, see writer_identity in LogSink.
+oscUniqueWriterIdentity :: Lens' OrganizationsSinksCreate (Maybe Bool)
+oscUniqueWriterIdentity
+  = lens _oscUniqueWriterIdentity
+      (\ s a -> s{_oscUniqueWriterIdentity = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 oscUploadProtocol :: Lens' OrganizationsSinksCreate (Maybe Text)
@@ -171,7 +201,8 @@ instance GoogleRequest OrganizationsSinksCreate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient OrganizationsSinksCreate'{..}
-          = go _oscParent _oscXgafv _oscUploadProtocol
+          = go _oscParent _oscXgafv _oscUniqueWriterIdentity
+              _oscUploadProtocol
               (Just _oscPp)
               _oscAccessToken
               _oscUploadType

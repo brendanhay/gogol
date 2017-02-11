@@ -122,8 +122,8 @@ projectsSinksList pPslParent_ =
     , _pslCallback = Nothing
     }
 
--- | Required. The cloud resource containing the sinks. Example:
--- \`\"projects\/my-logging-project\"\`.
+-- | Required. The parent resource whose sinks are to be listed. Examples:
+-- \"projects\/my-logging-project\", \"organizations\/123456789\".
 pslParent :: Lens' ProjectsSinksList Text
 pslParent
   = lens _pslParent (\ s a -> s{_pslParent = a})
@@ -161,16 +161,16 @@ pslBearerToken
       (\ s a -> s{_pslBearerToken = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
--- preceding call to this method. \`pageToken\` must be the value of
--- \`nextPageToken\` from the previous response. The values of other method
+-- preceding call to this method. pageToken must be the value of
+-- nextPageToken from the previous response. The values of other method
 -- parameters should be identical to those in the previous call.
 pslPageToken :: Lens' ProjectsSinksList (Maybe Text)
 pslPageToken
   = lens _pslPageToken (\ s a -> s{_pslPageToken = a})
 
 -- | Optional. The maximum number of results to return from this request.
--- Non-positive values are ignored. The presence of \`nextPageToken\` in
--- the response indicates that more results might be available.
+-- Non-positive values are ignored. The presence of nextPageToken in the
+-- response indicates that more results might be available.
 pslPageSize :: Lens' ProjectsSinksList (Maybe Int32)
 pslPageSize
   = lens _pslPageSize (\ s a -> s{_pslPageSize = a}) .

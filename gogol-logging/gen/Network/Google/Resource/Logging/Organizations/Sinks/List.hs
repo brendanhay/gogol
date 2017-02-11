@@ -122,8 +122,8 @@ organizationsSinksList pOslParent_ =
     , _oslCallback = Nothing
     }
 
--- | Required. The cloud resource containing the sinks. Example:
--- \`\"projects\/my-logging-project\"\`.
+-- | Required. The parent resource whose sinks are to be listed. Examples:
+-- \"projects\/my-logging-project\", \"organizations\/123456789\".
 oslParent :: Lens' OrganizationsSinksList Text
 oslParent
   = lens _oslParent (\ s a -> s{_oslParent = a})
@@ -161,16 +161,16 @@ oslBearerToken
       (\ s a -> s{_oslBearerToken = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
--- preceding call to this method. \`pageToken\` must be the value of
--- \`nextPageToken\` from the previous response. The values of other method
+-- preceding call to this method. pageToken must be the value of
+-- nextPageToken from the previous response. The values of other method
 -- parameters should be identical to those in the previous call.
 oslPageToken :: Lens' OrganizationsSinksList (Maybe Text)
 oslPageToken
   = lens _oslPageToken (\ s a -> s{_oslPageToken = a})
 
 -- | Optional. The maximum number of results to return from this request.
--- Non-positive values are ignored. The presence of \`nextPageToken\` in
--- the response indicates that more results might be available.
+-- Non-positive values are ignored. The presence of nextPageToken in the
+-- response indicates that more results might be available.
 oslPageSize :: Lens' OrganizationsSinksList (Maybe Int32)
 oslPageSize
   = lens _oslPageSize (\ s a -> s{_oslPageSize = a}) .

@@ -128,8 +128,8 @@ pmdAccessToken
   = lens _pmdAccessToken
       (\ s a -> s{_pmdAccessToken = a})
 
--- | The resource name of the metric to delete. Example:
--- \`\"projects\/my-project-id\/metrics\/my-metric-id\"\`.
+-- | The resource name of the metric to delete:
+-- \"projects\/[PROJECT_ID]\/metrics\/[METRIC_ID]\"
 pmdMetricName :: Lens' ProjectsMetricsDelete Text
 pmdMetricName
   = lens _pmdMetricName

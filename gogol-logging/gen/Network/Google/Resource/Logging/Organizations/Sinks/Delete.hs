@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a sink.
+-- Deletes a sink. If the sink has a unique writer_identity, then that
+-- service account is also deleted.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.organizations.sinks.delete@.
 module Network.Google.Resource.Logging.Organizations.Sinks.Delete
@@ -60,7 +61,8 @@ type OrganizationsSinksDeleteResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a sink.
+-- | Deletes a sink. If the sink has a unique writer_identity, then that
+-- service account is also deleted.
 --
 -- /See:/ 'organizationsSinksDelete' smart constructor.
 data OrganizationsSinksDelete = OrganizationsSinksDelete'
@@ -140,10 +142,13 @@ osdBearerToken
   = lens _osdBearerToken
       (\ s a -> s{_osdBearerToken = a})
 
--- | Required. The resource name of the sink to delete, including the parent
--- resource and the sink identifier. Example:
--- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`. It is an error if
--- the sink does not exist.
+-- | Required. The full resource name of the sink to delete, including the
+-- parent resource and the sink identifier:
+-- \"projects\/[PROJECT_ID]\/sinks\/[SINK_ID]\"
+-- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\" It is an error if
+-- the sink does not exist. Example:
+-- \"projects\/my-project-id\/sinks\/my-sink-id\". It is an error if the
+-- sink does not exist.
 osdSinkName :: Lens' OrganizationsSinksDelete Text
 osdSinkName
   = lens _osdSinkName (\ s a -> s{_osdSinkName = a})

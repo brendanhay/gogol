@@ -128,8 +128,8 @@ pmgAccessToken
   = lens _pmgAccessToken
       (\ s a -> s{_pmgAccessToken = a})
 
--- | The resource name of the desired metric. Example:
--- \`\"projects\/my-project-id\/metrics\/my-metric-id\"\`.
+-- | The resource name of the desired metric:
+-- \"projects\/[PROJECT_ID]\/metrics\/[METRIC_ID]\"
 pmgMetricName :: Lens' ProjectsMetricsGet Text
 pmgMetricName
   = lens _pmgMetricName

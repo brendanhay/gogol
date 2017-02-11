@@ -116,8 +116,8 @@ projectsMetricsCreate pPmcParent_ pPmcPayload_ =
     , _pmcCallback = Nothing
     }
 
--- | The resource name of the project in which to create the metric. Example:
--- \`\"projects\/my-project-id\"\`. The new metric must be provided in the
+-- | The resource name of the project in which to create the metric:
+-- \"projects\/[PROJECT_ID]\" The new metric must be provided in the
 -- request.
 pmcParent :: Lens' ProjectsMetricsCreate Text
 pmcParent

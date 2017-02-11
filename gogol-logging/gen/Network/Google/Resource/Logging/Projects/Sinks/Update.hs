@@ -20,7 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates or creates a sink.
+-- Updates a sink. If the named sink doesn\'t exist, then this method is
+-- identical to sinks.create. If the named sink does exist, then this
+-- method replaces the following fields in the existing sink with values
+-- from the new sink: destination, filter, output_version_format,
+-- start_time, and end_time. The updated filter might also have a new
+-- writer_identity; see the unique_writer_identity field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.sinks.update@.
 module Network.Google.Resource.Logging.Projects.Sinks.Update
@@ -34,6 +39,7 @@ module Network.Google.Resource.Logging.Projects.Sinks.Update
 
     -- * Request Lenses
     , psuXgafv
+    , psuUniqueWriterIdentity
     , psuUploadProtocol
     , psuPp
     , psuAccessToken
@@ -53,28 +59,35 @@ type ProjectsSinksUpdateResource =
      "v2" :>
        Capture "sinkName" Text :>
          QueryParam "$.xgafv" Xgafv :>
-           QueryParam "upload_protocol" Text :>
-             QueryParam "pp" Bool :>
-               QueryParam "access_token" Text :>
-                 QueryParam "uploadType" Text :>
-                   QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] LogSink :> Put '[JSON] LogSink
+           QueryParam "uniqueWriterIdentity" Bool :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] LogSink :> Put '[JSON] LogSink
 
--- | Updates or creates a sink.
+-- | Updates a sink. If the named sink doesn\'t exist, then this method is
+-- identical to sinks.create. If the named sink does exist, then this
+-- method replaces the following fields in the existing sink with values
+-- from the new sink: destination, filter, output_version_format,
+-- start_time, and end_time. The updated filter might also have a new
+-- writer_identity; see the unique_writer_identity field.
 --
 -- /See:/ 'projectsSinksUpdate' smart constructor.
 data ProjectsSinksUpdate = ProjectsSinksUpdate'
-    { _psuXgafv          :: !(Maybe Xgafv)
-    , _psuUploadProtocol :: !(Maybe Text)
-    , _psuPp             :: !Bool
-    , _psuAccessToken    :: !(Maybe Text)
-    , _psuUploadType     :: !(Maybe Text)
-    , _psuPayload        :: !LogSink
-    , _psuBearerToken    :: !(Maybe Text)
-    , _psuSinkName       :: !Text
-    , _psuCallback       :: !(Maybe Text)
+    { _psuXgafv                :: !(Maybe Xgafv)
+    , _psuUniqueWriterIdentity :: !(Maybe Bool)
+    , _psuUploadProtocol       :: !(Maybe Text)
+    , _psuPp                   :: !Bool
+    , _psuAccessToken          :: !(Maybe Text)
+    , _psuUploadType           :: !(Maybe Text)
+    , _psuPayload              :: !LogSink
+    , _psuBearerToken          :: !(Maybe Text)
+    , _psuSinkName             :: !Text
+    , _psuCallback             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksUpdate' with the minimum fields required to make a request.
@@ -82,6 +95,8 @@ data ProjectsSinksUpdate = ProjectsSinksUpdate'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psuXgafv'
+--
+-- * 'psuUniqueWriterIdentity'
 --
 -- * 'psuUploadProtocol'
 --
@@ -105,6 +120,7 @@ projectsSinksUpdate
 projectsSinksUpdate pPsuPayload_ pPsuSinkName_ =
     ProjectsSinksUpdate'
     { _psuXgafv = Nothing
+    , _psuUniqueWriterIdentity = Nothing
     , _psuUploadProtocol = Nothing
     , _psuPp = True
     , _psuAccessToken = Nothing
@@ -118,6 +134,19 @@ projectsSinksUpdate pPsuPayload_ pPsuSinkName_ =
 -- | V1 error format.
 psuXgafv :: Lens' ProjectsSinksUpdate (Maybe Xgafv)
 psuXgafv = lens _psuXgafv (\ s a -> s{_psuXgafv = a})
+
+-- | Optional. See sinks.create for a description of this field. When
+-- updating a sink, the effect of this field on the value of
+-- writer_identity in the updated sink depends on both the old and new
+-- values of this field: If the old and new values of this field are both
+-- false or both true, then there is no change to the sink\'s
+-- writer_identity. If the old value was false and the new value is true,
+-- then writer_identity is changed to a unique service account. It is an
+-- error if the old value was true and the new value is false.
+psuUniqueWriterIdentity :: Lens' ProjectsSinksUpdate (Maybe Bool)
+psuUniqueWriterIdentity
+  = lens _psuUniqueWriterIdentity
+      (\ s a -> s{_psuUniqueWriterIdentity = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
 psuUploadProtocol :: Lens' ProjectsSinksUpdate (Maybe Text)
@@ -152,10 +181,11 @@ psuBearerToken
   = lens _psuBearerToken
       (\ s a -> s{_psuBearerToken = a})
 
--- | Required. The resource name of the sink to update, including the parent
--- resource and the sink identifier. If the sink does not exist, this
--- method creates the sink. Example:
--- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`.
+-- | Required. The full resource name of the sink to update, including the
+-- parent resource and the sink identifier:
+-- \"projects\/[PROJECT_ID]\/sinks\/[SINK_ID]\"
+-- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\" Example:
+-- \"projects\/my-project-id\/sinks\/my-sink-id\".
 psuSinkName :: Lens' ProjectsSinksUpdate Text
 psuSinkName
   = lens _psuSinkName (\ s a -> s{_psuSinkName = a})
@@ -171,7 +201,8 @@ instance GoogleRequest ProjectsSinksUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
         requestClient ProjectsSinksUpdate'{..}
-          = go _psuSinkName _psuXgafv _psuUploadProtocol
+          = go _psuSinkName _psuXgafv _psuUniqueWriterIdentity
+              _psuUploadProtocol
               (Just _psuPp)
               _psuAccessToken
               _psuUploadType
