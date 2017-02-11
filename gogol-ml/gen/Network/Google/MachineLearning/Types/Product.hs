@@ -54,17 +54,21 @@ instance ToJSON
 --
 -- /See:/ 'googleCloudMlV1beta1__Version' smart constructor.
 data GoogleCloudMlV1beta1__Version = GoogleCloudMlV1beta1__Version'
-    { _gcmvvLastUseTime   :: !(Maybe DateTime')
-    , _gcmvvName          :: !(Maybe Text)
-    , _gcmvvDeploymentURI :: !(Maybe Text)
-    , _gcmvvDescription   :: !(Maybe Text)
-    , _gcmvvCreateTime    :: !(Maybe DateTime')
-    , _gcmvvIsDefault     :: !(Maybe Bool)
+    { _gcmvvRuntimeVersion          :: !(Maybe Text)
+    , _gcmvvLastUseTime             :: !(Maybe DateTime')
+    , _gcmvvName                    :: !(Maybe Text)
+    , _gcmvvDeploymentURI           :: !(Maybe Text)
+    , _gcmvvDescription             :: !(Maybe Text)
+    , _gcmvvCreateTime              :: !(Maybe DateTime')
+    , _gcmvvOnlinePredictionLogging :: !(Maybe Bool)
+    , _gcmvvIsDefault               :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GoogleCloudMlV1beta1__Version' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcmvvRuntimeVersion'
 --
 -- * 'gcmvvLastUseTime'
 --
@@ -76,18 +80,29 @@ data GoogleCloudMlV1beta1__Version = GoogleCloudMlV1beta1__Version'
 --
 -- * 'gcmvvCreateTime'
 --
+-- * 'gcmvvOnlinePredictionLogging'
+--
 -- * 'gcmvvIsDefault'
 googleCloudMlV1beta1__Version
     :: GoogleCloudMlV1beta1__Version
 googleCloudMlV1beta1__Version =
     GoogleCloudMlV1beta1__Version'
-    { _gcmvvLastUseTime = Nothing
+    { _gcmvvRuntimeVersion = Nothing
+    , _gcmvvLastUseTime = Nothing
     , _gcmvvName = Nothing
     , _gcmvvDeploymentURI = Nothing
     , _gcmvvDescription = Nothing
     , _gcmvvCreateTime = Nothing
+    , _gcmvvOnlinePredictionLogging = Nothing
     , _gcmvvIsDefault = Nothing
     }
+
+-- | Optional. The Google Cloud ML runtime version to use for this
+-- deployment. If not set, Google Cloud ML will choose a version.
+gcmvvRuntimeVersion :: Lens' GoogleCloudMlV1beta1__Version (Maybe Text)
+gcmvvRuntimeVersion
+  = lens _gcmvvRuntimeVersion
+      (\ s a -> s{_gcmvvRuntimeVersion = a})
 
 -- | Output only. The time the version was last used for prediction.
 gcmvvLastUseTime :: Lens' GoogleCloudMlV1beta1__Version (Maybe UTCTime)
@@ -128,6 +143,13 @@ gcmvvCreateTime
       (\ s a -> s{_gcmvvCreateTime = a})
       . mapping _DateTime
 
+-- | Optional. If true, enables StackDriver Logging for online prediction.
+-- Default is false.
+gcmvvOnlinePredictionLogging :: Lens' GoogleCloudMlV1beta1__Version (Maybe Bool)
+gcmvvOnlinePredictionLogging
+  = lens _gcmvvOnlinePredictionLogging
+      (\ s a -> s{_gcmvvOnlinePredictionLogging = a})
+
 -- | Output only. If true, this version will be used to handle prediction
 -- requests that do not specify a version. You can change the default
 -- version by calling
@@ -142,21 +164,26 @@ instance FromJSON GoogleCloudMlV1beta1__Version where
           = withObject "GoogleCloudMlV1beta1Version"
               (\ o ->
                  GoogleCloudMlV1beta1__Version' <$>
-                   (o .:? "lastUseTime") <*> (o .:? "name") <*>
-                     (o .:? "deploymentUri")
+                   (o .:? "runtimeVersion") <*> (o .:? "lastUseTime")
+                     <*> (o .:? "name")
+                     <*> (o .:? "deploymentUri")
                      <*> (o .:? "description")
                      <*> (o .:? "createTime")
+                     <*> (o .:? "onlinePredictionLogging")
                      <*> (o .:? "isDefault"))
 
 instance ToJSON GoogleCloudMlV1beta1__Version where
         toJSON GoogleCloudMlV1beta1__Version'{..}
           = object
               (catMaybes
-                 [("lastUseTime" .=) <$> _gcmvvLastUseTime,
+                 [("runtimeVersion" .=) <$> _gcmvvRuntimeVersion,
+                  ("lastUseTime" .=) <$> _gcmvvLastUseTime,
                   ("name" .=) <$> _gcmvvName,
                   ("deploymentUri" .=) <$> _gcmvvDeploymentURI,
                   ("description" .=) <$> _gcmvvDescription,
                   ("createTime" .=) <$> _gcmvvCreateTime,
+                  ("onlinePredictionLogging" .=) <$>
+                    _gcmvvOnlinePredictionLogging,
                   ("isDefault" .=) <$> _gcmvvIsDefault])
 
 -- | Represents a set of hyperparameters to optimize.
@@ -444,37 +471,60 @@ instance ToJSON GoogleCloudMlV1beta1__Job where
                   ("trainingInput" .=) <$> _gcmvjTrainingInput,
                   ("createTime" .=) <$> _gcmvjCreateTime])
 
--- | Represents results of a training job.
+-- | Represents results of a training job. Output only.
 --
 -- /See:/ 'googleCloudMlV1beta1__TrainingOutput' smart constructor.
 data GoogleCloudMlV1beta1__TrainingOutput = GoogleCloudMlV1beta1__TrainingOutput'
-    { _gcmvtoCompletedTrialCount :: !(Maybe (Textual Int64))
-    , _gcmvtoTrials              :: !(Maybe [GoogleCloudMlV1beta1__HyperparameterOutput])
+    { _gcmvtoIsHyperparameterTuningJob :: !(Maybe Bool)
+    , _gcmvtoCompletedTrialCount       :: !(Maybe (Textual Int64))
+    , _gcmvtoConsumedMLUnits           :: !(Maybe (Textual Double))
+    , _gcmvtoTrials                    :: !(Maybe [GoogleCloudMlV1beta1__HyperparameterOutput])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GoogleCloudMlV1beta1__TrainingOutput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gcmvtoIsHyperparameterTuningJob'
+--
 -- * 'gcmvtoCompletedTrialCount'
+--
+-- * 'gcmvtoConsumedMLUnits'
 --
 -- * 'gcmvtoTrials'
 googleCloudMlV1beta1__TrainingOutput
     :: GoogleCloudMlV1beta1__TrainingOutput
 googleCloudMlV1beta1__TrainingOutput =
     GoogleCloudMlV1beta1__TrainingOutput'
-    { _gcmvtoCompletedTrialCount = Nothing
+    { _gcmvtoIsHyperparameterTuningJob = Nothing
+    , _gcmvtoCompletedTrialCount = Nothing
+    , _gcmvtoConsumedMLUnits = Nothing
     , _gcmvtoTrials = Nothing
     }
 
+-- | Whether this job is a hyperparameter tuning job.
+gcmvtoIsHyperparameterTuningJob :: Lens' GoogleCloudMlV1beta1__TrainingOutput (Maybe Bool)
+gcmvtoIsHyperparameterTuningJob
+  = lens _gcmvtoIsHyperparameterTuningJob
+      (\ s a -> s{_gcmvtoIsHyperparameterTuningJob = a})
+
 -- | The number of hyperparameter tuning trials that completed successfully.
+-- Only set for hyperparameter tuning jobs.
 gcmvtoCompletedTrialCount :: Lens' GoogleCloudMlV1beta1__TrainingOutput (Maybe Int64)
 gcmvtoCompletedTrialCount
   = lens _gcmvtoCompletedTrialCount
       (\ s a -> s{_gcmvtoCompletedTrialCount = a})
       . mapping _Coerce
 
--- | Results for individual Hyperparameter trials.
+-- | The amount of ML units consumed by the job.
+gcmvtoConsumedMLUnits :: Lens' GoogleCloudMlV1beta1__TrainingOutput (Maybe Double)
+gcmvtoConsumedMLUnits
+  = lens _gcmvtoConsumedMLUnits
+      (\ s a -> s{_gcmvtoConsumedMLUnits = a})
+      . mapping _Coerce
+
+-- | Results for individual Hyperparameter trials. Only set for
+-- hyperparameter tuning jobs.
 gcmvtoTrials :: Lens' GoogleCloudMlV1beta1__TrainingOutput [GoogleCloudMlV1beta1__HyperparameterOutput]
 gcmvtoTrials
   = lens _gcmvtoTrials (\ s a -> s{_gcmvtoTrials = a})
@@ -487,16 +537,21 @@ instance FromJSON
           = withObject "GoogleCloudMlV1beta1TrainingOutput"
               (\ o ->
                  GoogleCloudMlV1beta1__TrainingOutput' <$>
-                   (o .:? "completedTrialCount") <*>
-                     (o .:? "trials" .!= mempty))
+                   (o .:? "isHyperparameterTuningJob") <*>
+                     (o .:? "completedTrialCount")
+                     <*> (o .:? "consumedMLUnits")
+                     <*> (o .:? "trials" .!= mempty))
 
 instance ToJSON GoogleCloudMlV1beta1__TrainingOutput
          where
         toJSON GoogleCloudMlV1beta1__TrainingOutput'{..}
           = object
               (catMaybes
-                 [("completedTrialCount" .=) <$>
+                 [("isHyperparameterTuningJob" .=) <$>
+                    _gcmvtoIsHyperparameterTuningJob,
+                  ("completedTrialCount" .=) <$>
                     _gcmvtoCompletedTrialCount,
+                  ("consumedMLUnits" .=) <$> _gcmvtoConsumedMLUnits,
                   ("trials" .=) <$> _gcmvtoTrials])
 
 -- | Represents a machine learning solution. A model can have multiple
@@ -505,7 +560,8 @@ instance ToJSON GoogleCloudMlV1beta1__TrainingOutput
 --
 -- /See:/ 'googleCloudMlV1beta1__Model' smart constructor.
 data GoogleCloudMlV1beta1__Model = GoogleCloudMlV1beta1__Model'
-    { _gcmvmDefaultVersion :: !(Maybe GoogleCloudMlV1beta1__Version)
+    { _gcmvmRegions        :: !(Maybe [Text])
+    , _gcmvmDefaultVersion :: !(Maybe GoogleCloudMlV1beta1__Version)
     , _gcmvmName           :: !(Maybe Text)
     , _gcmvmDescription    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -513,6 +569,8 @@ data GoogleCloudMlV1beta1__Model = GoogleCloudMlV1beta1__Model'
 -- | Creates a value of 'GoogleCloudMlV1beta1__Model' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcmvmRegions'
 --
 -- * 'gcmvmDefaultVersion'
 --
@@ -523,10 +581,20 @@ googleCloudMlV1beta1__Model
     :: GoogleCloudMlV1beta1__Model
 googleCloudMlV1beta1__Model =
     GoogleCloudMlV1beta1__Model'
-    { _gcmvmDefaultVersion = Nothing
+    { _gcmvmRegions = Nothing
+    , _gcmvmDefaultVersion = Nothing
     , _gcmvmName = Nothing
     , _gcmvmDescription = Nothing
     }
+
+-- | Optional. The list of regions where the model is going to be deployed.
+-- Currently only one region per model is supported. Defaults to
+-- \'us-central1\' if nothing is set.
+gcmvmRegions :: Lens' GoogleCloudMlV1beta1__Model [Text]
+gcmvmRegions
+  = lens _gcmvmRegions (\ s a -> s{_gcmvmRegions = a})
+      . _Default
+      . _Coerce
 
 -- | Output only. The default version of the model. This version will be used
 -- to handle prediction requests that do not specify a version. You can
@@ -554,14 +622,17 @@ instance FromJSON GoogleCloudMlV1beta1__Model where
           = withObject "GoogleCloudMlV1beta1Model"
               (\ o ->
                  GoogleCloudMlV1beta1__Model' <$>
-                   (o .:? "defaultVersion") <*> (o .:? "name") <*>
-                     (o .:? "description"))
+                   (o .:? "regions" .!= mempty) <*>
+                     (o .:? "defaultVersion")
+                     <*> (o .:? "name")
+                     <*> (o .:? "description"))
 
 instance ToJSON GoogleCloudMlV1beta1__Model where
         toJSON GoogleCloudMlV1beta1__Model'{..}
           = object
               (catMaybes
-                 [("defaultVersion" .=) <$> _gcmvmDefaultVersion,
+                 [("regions" .=) <$> _gcmvmRegions,
+                  ("defaultVersion" .=) <$> _gcmvmDefaultVersion,
                   ("name" .=) <$> _gcmvmName,
                   ("description" .=) <$> _gcmvmDescription])
 
@@ -928,6 +999,7 @@ data GoogleCloudMlV1beta1__PredictionInput = GoogleCloudMlV1beta1__PredictionInp
     { _gcmvpiVersionName    :: !(Maybe Text)
     , _gcmvpiModelName      :: !(Maybe Text)
     , _gcmvpiDataFormat     :: !(Maybe GoogleCloudMlV1beta1__PredictionInputDataFormat)
+    , _gcmvpiRuntimeVersion :: !(Maybe Text)
     , _gcmvpiMaxWorkerCount :: !(Maybe (Textual Int64))
     , _gcmvpiOutputPath     :: !(Maybe Text)
     , _gcmvpiRegion         :: !(Maybe Text)
@@ -944,6 +1016,8 @@ data GoogleCloudMlV1beta1__PredictionInput = GoogleCloudMlV1beta1__PredictionInp
 --
 -- * 'gcmvpiDataFormat'
 --
+-- * 'gcmvpiRuntimeVersion'
+--
 -- * 'gcmvpiMaxWorkerCount'
 --
 -- * 'gcmvpiOutputPath'
@@ -958,6 +1032,7 @@ googleCloudMlV1beta1__PredictionInput =
     { _gcmvpiVersionName = Nothing
     , _gcmvpiModelName = Nothing
     , _gcmvpiDataFormat = Nothing
+    , _gcmvpiRuntimeVersion = Nothing
     , _gcmvpiMaxWorkerCount = Nothing
     , _gcmvpiOutputPath = Nothing
     , _gcmvpiRegion = Nothing
@@ -986,6 +1061,13 @@ gcmvpiDataFormat :: Lens' GoogleCloudMlV1beta1__PredictionInput (Maybe GoogleClo
 gcmvpiDataFormat
   = lens _gcmvpiDataFormat
       (\ s a -> s{_gcmvpiDataFormat = a})
+
+-- | Optional. The Google Cloud ML runtime version to use for this batch
+-- prediction. If not set, Google Cloud ML will choose a version.
+gcmvpiRuntimeVersion :: Lens' GoogleCloudMlV1beta1__PredictionInput (Maybe Text)
+gcmvpiRuntimeVersion
+  = lens _gcmvpiRuntimeVersion
+      (\ s a -> s{_gcmvpiRuntimeVersion = a})
 
 -- | Optional. The maximum number of workers to be used for parallel
 -- processing. Defaults to 10 if not specified.
@@ -1023,6 +1105,7 @@ instance FromJSON
                  GoogleCloudMlV1beta1__PredictionInput' <$>
                    (o .:? "versionName") <*> (o .:? "modelName") <*>
                      (o .:? "dataFormat")
+                     <*> (o .:? "runtimeVersion")
                      <*> (o .:? "maxWorkerCount")
                      <*> (o .:? "outputPath")
                      <*> (o .:? "region")
@@ -1036,6 +1119,7 @@ instance ToJSON GoogleCloudMlV1beta1__PredictionInput
                  [("versionName" .=) <$> _gcmvpiVersionName,
                   ("modelName" .=) <$> _gcmvpiModelName,
                   ("dataFormat" .=) <$> _gcmvpiDataFormat,
+                  ("runtimeVersion" .=) <$> _gcmvpiRuntimeVersion,
                   ("maxWorkerCount" .=) <$> _gcmvpiMaxWorkerCount,
                   ("outputPath" .=) <$> _gcmvpiOutputPath,
                   ("region" .=) <$> _gcmvpiRegion,
@@ -1318,7 +1402,8 @@ instance ToJSON GoogleLongrunning__OperationMetadata
 --
 -- /See:/ 'googleCloudMlV1beta1__PredictionOutput' smart constructor.
 data GoogleCloudMlV1beta1__PredictionOutput = GoogleCloudMlV1beta1__PredictionOutput'
-    { _gcmvpoErrorCount      :: !(Maybe (Textual Int64))
+    { _gcmvpoNodeHours       :: !(Maybe (Textual Double))
+    , _gcmvpoErrorCount      :: !(Maybe (Textual Int64))
     , _gcmvpoPredictionCount :: !(Maybe (Textual Int64))
     , _gcmvpoOutputPath      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1326,6 +1411,8 @@ data GoogleCloudMlV1beta1__PredictionOutput = GoogleCloudMlV1beta1__PredictionOu
 -- | Creates a value of 'GoogleCloudMlV1beta1__PredictionOutput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcmvpoNodeHours'
 --
 -- * 'gcmvpoErrorCount'
 --
@@ -1336,10 +1423,18 @@ googleCloudMlV1beta1__PredictionOutput
     :: GoogleCloudMlV1beta1__PredictionOutput
 googleCloudMlV1beta1__PredictionOutput =
     GoogleCloudMlV1beta1__PredictionOutput'
-    { _gcmvpoErrorCount = Nothing
+    { _gcmvpoNodeHours = Nothing
+    , _gcmvpoErrorCount = Nothing
     , _gcmvpoPredictionCount = Nothing
     , _gcmvpoOutputPath = Nothing
     }
+
+-- | Node hours used by the batch prediction job.
+gcmvpoNodeHours :: Lens' GoogleCloudMlV1beta1__PredictionOutput (Maybe Double)
+gcmvpoNodeHours
+  = lens _gcmvpoNodeHours
+      (\ s a -> s{_gcmvpoNodeHours = a})
+      . mapping _Coerce
 
 -- | The number of data instances which resulted in errors.
 gcmvpoErrorCount :: Lens' GoogleCloudMlV1beta1__PredictionOutput (Maybe Int64)
@@ -1368,7 +1463,8 @@ instance FromJSON
           = withObject "GoogleCloudMlV1beta1PredictionOutput"
               (\ o ->
                  GoogleCloudMlV1beta1__PredictionOutput' <$>
-                   (o .:? "errorCount") <*> (o .:? "predictionCount")
+                   (o .:? "nodeHours") <*> (o .:? "errorCount") <*>
+                     (o .:? "predictionCount")
                      <*> (o .:? "outputPath"))
 
 instance ToJSON
@@ -1376,7 +1472,8 @@ instance ToJSON
         toJSON GoogleCloudMlV1beta1__PredictionOutput'{..}
           = object
               (catMaybes
-                 [("errorCount" .=) <$> _gcmvpoErrorCount,
+                 [("nodeHours" .=) <$> _gcmvpoNodeHours,
+                  ("errorCount" .=) <$> _gcmvpoErrorCount,
                   ("predictionCount" .=) <$> _gcmvpoPredictionCount,
                   ("outputPath" .=) <$> _gcmvpoOutputPath])
 
@@ -1521,6 +1618,7 @@ data GoogleCloudMlV1beta1__TrainingInput = GoogleCloudMlV1beta1__TrainingInput'
     , _gcmvtiParameterServerCount :: !(Maybe (Textual Int64))
     , _gcmvtiArgs                 :: !(Maybe [Text])
     , _gcmvtiWorkerCount          :: !(Maybe (Textual Int64))
+    , _gcmvtiRuntimeVersion       :: !(Maybe Text)
     , _gcmvtiWorkerType           :: !(Maybe Text)
     , _gcmvtiPythonModule         :: !(Maybe Text)
     , _gcmvtiParameterServerType  :: !(Maybe Text)
@@ -1541,6 +1639,8 @@ data GoogleCloudMlV1beta1__TrainingInput = GoogleCloudMlV1beta1__TrainingInput'
 -- * 'gcmvtiArgs'
 --
 -- * 'gcmvtiWorkerCount'
+--
+-- * 'gcmvtiRuntimeVersion'
 --
 -- * 'gcmvtiWorkerType'
 --
@@ -1563,6 +1663,7 @@ googleCloudMlV1beta1__TrainingInput =
     , _gcmvtiParameterServerCount = Nothing
     , _gcmvtiArgs = Nothing
     , _gcmvtiWorkerCount = Nothing
+    , _gcmvtiRuntimeVersion = Nothing
     , _gcmvtiWorkerType = Nothing
     , _gcmvtiPythonModule = Nothing
     , _gcmvtiParameterServerType = Nothing
@@ -1627,6 +1728,13 @@ gcmvtiWorkerCount
       (\ s a -> s{_gcmvtiWorkerCount = a})
       . mapping _Coerce
 
+-- | Optional. The Google Cloud ML runtime version to use for training. If
+-- not set, Google Cloud ML will choose the latest stable version.
+gcmvtiRuntimeVersion :: Lens' GoogleCloudMlV1beta1__TrainingInput (Maybe Text)
+gcmvtiRuntimeVersion
+  = lens _gcmvtiRuntimeVersion
+      (\ s a -> s{_gcmvtiRuntimeVersion = a})
+
 -- | Optional. Specifies the type of virtual machine to use for your training
 -- job\'s worker nodes. The supported values are the same as those
 -- described in the entry for \`masterType\`. This value must be present
@@ -1690,6 +1798,7 @@ instance FromJSON GoogleCloudMlV1beta1__TrainingInput
                      (o .:? "parameterServerCount")
                      <*> (o .:? "args" .!= mempty)
                      <*> (o .:? "workerCount")
+                     <*> (o .:? "runtimeVersion")
                      <*> (o .:? "workerType")
                      <*> (o .:? "pythonModule")
                      <*> (o .:? "parameterServerType")
@@ -1708,6 +1817,7 @@ instance ToJSON GoogleCloudMlV1beta1__TrainingInput
                     _gcmvtiParameterServerCount,
                   ("args" .=) <$> _gcmvtiArgs,
                   ("workerCount" .=) <$> _gcmvtiWorkerCount,
+                  ("runtimeVersion" .=) <$> _gcmvtiRuntimeVersion,
                   ("workerType" .=) <$> _gcmvtiWorkerType,
                   ("pythonModule" .=) <$> _gcmvtiPythonModule,
                   ("parameterServerType" .=) <$>
@@ -1857,7 +1967,7 @@ instance ToJSON
 --
 -- /See:/ 'googleAPI__HTTPBody' smart constructor.
 data GoogleAPI__HTTPBody = GoogleAPI__HTTPBody'
-    { _gahttpbData        :: !(Maybe Base64)
+    { _gahttpbData        :: !(Maybe Bytes)
     , _gahttpbContentType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1880,7 +1990,7 @@ googleAPI__HTTPBody =
 gahttpbData :: Lens' GoogleAPI__HTTPBody (Maybe ByteString)
 gahttpbData
   = lens _gahttpbData (\ s a -> s{_gahttpbData = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The HTTP Content-Type string representing the content type of the body.
 gahttpbContentType :: Lens' GoogleAPI__HTTPBody (Maybe Text)
