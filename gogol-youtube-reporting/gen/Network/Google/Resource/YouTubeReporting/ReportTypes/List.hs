@@ -54,7 +54,7 @@ import           Network.Google.YouTubeReporting.Types
 type ReportTypesListResource =
      "v1" :>
        "reportTypes" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -72,7 +72,7 @@ type ReportTypesListResource =
 --
 -- /See:/ 'reportTypesList' smart constructor.
 data ReportTypesList = ReportTypesList'
-    { _rtlXgafv                  :: !(Maybe Text)
+    { _rtlXgafv                  :: !(Maybe Xgafv)
     , _rtlUploadProtocol         :: !(Maybe Text)
     , _rtlPp                     :: !Bool
     , _rtlAccessToken            :: !(Maybe Text)
@@ -128,7 +128,7 @@ reportTypesList =
     }
 
 -- | V1 error format.
-rtlXgafv :: Lens' ReportTypesList (Maybe Text)
+rtlXgafv :: Lens' ReportTypesList (Maybe Xgafv)
 rtlXgafv = lens _rtlXgafv (\ s a -> s{_rtlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

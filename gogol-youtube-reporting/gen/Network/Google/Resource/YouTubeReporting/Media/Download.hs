@@ -53,7 +53,7 @@ type MediaDownloadResource =
      "v1" :>
        "media" :>
          Capture "resourceName" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -65,7 +65,7 @@ type MediaDownloadResource =
        "v1" :>
          "media" :>
            Capture "resourceName" Text :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
@@ -80,7 +80,7 @@ type MediaDownloadResource =
 --
 -- /See:/ 'mediaDownload' smart constructor.
 data MediaDownload' = MediaDownload''
-    { _mdXgafv          :: !(Maybe Text)
+    { _mdXgafv          :: !(Maybe Xgafv)
     , _mdUploadProtocol :: !(Maybe Text)
     , _mdResourceName   :: !Text
     , _mdPp             :: !Bool
@@ -125,7 +125,7 @@ mediaDownload pMdResourceName_ =
     }
 
 -- | V1 error format.
-mdXgafv :: Lens' MediaDownload' (Maybe Text)
+mdXgafv :: Lens' MediaDownload' (Maybe Xgafv)
 mdXgafv = lens _mdXgafv (\ s a -> s{_mdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

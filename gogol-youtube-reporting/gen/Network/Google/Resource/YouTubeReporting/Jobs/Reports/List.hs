@@ -60,14 +60,14 @@ type JobsReportsListResource =
        "jobs" :>
          Capture "jobId" Text :>
            "reports" :>
-             QueryParam "createdAfter" Text :>
-               QueryParam "$.xgafv" Text :>
+             QueryParam "createdAfter" DateTime' :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "upload_protocol" Text :>
                    QueryParam "pp" Bool :>
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
-                         QueryParam "startTimeAtOrAfter" Text :>
-                           QueryParam "startTimeBefore" Text :>
+                         QueryParam "startTimeAtOrAfter" DateTime' :>
+                           QueryParam "startTimeBefore" DateTime' :>
                              QueryParam "onBehalfOfContentOwner" Text :>
                                QueryParam "bearer_token" Text :>
                                  QueryParam "pageToken" Text :>
@@ -81,15 +81,15 @@ type JobsReportsListResource =
 --
 -- /See:/ 'jobsReportsList' smart constructor.
 data JobsReportsList = JobsReportsList'
-    { _jrlCreatedAfter           :: !(Maybe Text)
-    , _jrlXgafv                  :: !(Maybe Text)
+    { _jrlCreatedAfter           :: !(Maybe DateTime')
+    , _jrlXgafv                  :: !(Maybe Xgafv)
     , _jrlJobId                  :: !Text
     , _jrlUploadProtocol         :: !(Maybe Text)
     , _jrlPp                     :: !Bool
     , _jrlAccessToken            :: !(Maybe Text)
     , _jrlUploadType             :: !(Maybe Text)
-    , _jrlStartTimeAtOrAfter     :: !(Maybe Text)
-    , _jrlStartTimeBefore        :: !(Maybe Text)
+    , _jrlStartTimeAtOrAfter     :: !(Maybe DateTime')
+    , _jrlStartTimeBefore        :: !(Maybe DateTime')
     , _jrlOnBehalfOfContentOwner :: !(Maybe Text)
     , _jrlBearerToken            :: !(Maybe Text)
     , _jrlPageToken              :: !(Maybe Text)
@@ -151,13 +151,14 @@ jobsReportsList pJrlJobId_ =
 
 -- | If set, only reports created after the specified date\/time are
 -- returned.
-jrlCreatedAfter :: Lens' JobsReportsList (Maybe Text)
+jrlCreatedAfter :: Lens' JobsReportsList (Maybe UTCTime)
 jrlCreatedAfter
   = lens _jrlCreatedAfter
       (\ s a -> s{_jrlCreatedAfter = a})
+      . mapping _DateTime
 
 -- | V1 error format.
-jrlXgafv :: Lens' JobsReportsList (Maybe Text)
+jrlXgafv :: Lens' JobsReportsList (Maybe Xgafv)
 jrlXgafv = lens _jrlXgafv (\ s a -> s{_jrlXgafv = a})
 
 -- | The ID of the job.
@@ -188,17 +189,19 @@ jrlUploadType
 
 -- | If set, only reports whose start time is greater than or equal the
 -- specified date\/time are returned.
-jrlStartTimeAtOrAfter :: Lens' JobsReportsList (Maybe Text)
+jrlStartTimeAtOrAfter :: Lens' JobsReportsList (Maybe UTCTime)
 jrlStartTimeAtOrAfter
   = lens _jrlStartTimeAtOrAfter
       (\ s a -> s{_jrlStartTimeAtOrAfter = a})
+      . mapping _DateTime
 
 -- | If set, only reports whose start time is smaller than the specified
 -- date\/time are returned.
-jrlStartTimeBefore :: Lens' JobsReportsList (Maybe Text)
+jrlStartTimeBefore :: Lens' JobsReportsList (Maybe UTCTime)
 jrlStartTimeBefore
   = lens _jrlStartTimeBefore
       (\ s a -> s{_jrlStartTimeBefore = a})
+      . mapping _DateTime
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).

@@ -102,12 +102,12 @@ instance ToJSON Empty where
 -- /See:/ 'report' smart constructor.
 data Report = Report'
     { _rJobId         :: !(Maybe Text)
-    , _rStartTime     :: !(Maybe Text)
+    , _rStartTime     :: !(Maybe DateTime')
     , _rDownloadURL   :: !(Maybe Text)
-    , _rEndTime       :: !(Maybe Text)
+    , _rEndTime       :: !(Maybe DateTime')
     , _rId            :: !(Maybe Text)
-    , _rCreateTime    :: !(Maybe Text)
-    , _rJobExpireTime :: !(Maybe Text)
+    , _rCreateTime    :: !(Maybe DateTime')
+    , _rJobExpireTime :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
@@ -146,9 +146,10 @@ rJobId = lens _rJobId (\ s a -> s{_rJobId = a})
 
 -- | The start of the time period that the report instance covers. The value
 -- is inclusive.
-rStartTime :: Lens' Report (Maybe Text)
+rStartTime :: Lens' Report (Maybe UTCTime)
 rStartTime
-  = lens _rStartTime (\ s a -> s{_rStartTime = a})
+  = lens _rStartTime (\ s a -> s{_rStartTime = a}) .
+      mapping _DateTime
 
 -- | The URL from which the report can be downloaded (max. 1000 characters).
 rDownloadURL :: Lens' Report (Maybe Text)
@@ -157,23 +158,27 @@ rDownloadURL
 
 -- | The end of the time period that the report instance covers. The value is
 -- exclusive.
-rEndTime :: Lens' Report (Maybe Text)
-rEndTime = lens _rEndTime (\ s a -> s{_rEndTime = a})
+rEndTime :: Lens' Report (Maybe UTCTime)
+rEndTime
+  = lens _rEndTime (\ s a -> s{_rEndTime = a}) .
+      mapping _DateTime
 
 -- | The server-generated ID of the report.
 rId :: Lens' Report (Maybe Text)
 rId = lens _rId (\ s a -> s{_rId = a})
 
 -- | The date\/time when this report was created.
-rCreateTime :: Lens' Report (Maybe Text)
+rCreateTime :: Lens' Report (Maybe UTCTime)
 rCreateTime
-  = lens _rCreateTime (\ s a -> s{_rCreateTime = a})
+  = lens _rCreateTime (\ s a -> s{_rCreateTime = a}) .
+      mapping _DateTime
 
 -- | The date\/time when the job this report belongs to will expire\/expired.
-rJobExpireTime :: Lens' Report (Maybe Text)
+rJobExpireTime :: Lens' Report (Maybe UTCTime)
 rJobExpireTime
   = lens _rJobExpireTime
       (\ s a -> s{_rJobExpireTime = a})
+      . mapping _DateTime
 
 instance FromJSON Report where
         parseJSON
@@ -295,8 +300,8 @@ data Job = Job'
     , _jId            :: !(Maybe Text)
     , _jSystemManaged :: !(Maybe Bool)
     , _jReportTypeId  :: !(Maybe Text)
-    , _jExpireTime    :: !(Maybe Text)
-    , _jCreateTime    :: !(Maybe Text)
+    , _jExpireTime    :: !(Maybe DateTime')
+    , _jCreateTime    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
@@ -350,14 +355,16 @@ jReportTypeId
 
 -- | The date\/time when this job will expire\/expired. After a job expired,
 -- no new reports are generated.
-jExpireTime :: Lens' Job (Maybe Text)
+jExpireTime :: Lens' Job (Maybe UTCTime)
 jExpireTime
-  = lens _jExpireTime (\ s a -> s{_jExpireTime = a})
+  = lens _jExpireTime (\ s a -> s{_jExpireTime = a}) .
+      mapping _DateTime
 
 -- | The creation date\/time of the job.
-jCreateTime :: Lens' Job (Maybe Text)
+jCreateTime :: Lens' Job (Maybe UTCTime)
 jCreateTime
-  = lens _jCreateTime (\ s a -> s{_jCreateTime = a})
+  = lens _jCreateTime (\ s a -> s{_jCreateTime = a}) .
+      mapping _DateTime
 
 instance FromJSON Job where
         parseJSON
@@ -438,7 +445,7 @@ instance ToJSON ListJobsResponse where
 data ReportType = ReportType'
     { _rtName          :: !(Maybe Text)
     , _rtId            :: !(Maybe Text)
-    , _rtDeprecateTime :: !(Maybe Text)
+    , _rtDeprecateTime :: !(Maybe DateTime')
     , _rtSystemManaged :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -472,10 +479,11 @@ rtId :: Lens' ReportType (Maybe Text)
 rtId = lens _rtId (\ s a -> s{_rtId = a})
 
 -- | The date\/time when this report type was\/will be deprecated.
-rtDeprecateTime :: Lens' ReportType (Maybe Text)
+rtDeprecateTime :: Lens' ReportType (Maybe UTCTime)
 rtDeprecateTime
   = lens _rtDeprecateTime
       (\ s a -> s{_rtDeprecateTime = a})
+      . mapping _DateTime
 
 -- | True if this a system-managed report type; otherwise false. Reporting
 -- jobs for system-managed report types are created automatically and can
