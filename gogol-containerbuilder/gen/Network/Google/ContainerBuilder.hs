@@ -29,6 +29,9 @@ module Network.Google.ContainerBuilder
 
     -- * Resources
 
+    -- ** cloudbuild.operations.cancel
+    , module Network.Google.Resource.Cloudbuild.Operations.Cancel
+
     -- ** cloudbuild.operations.get
     , module Network.Google.Resource.Cloudbuild.Operations.Get
 
@@ -70,6 +73,7 @@ module Network.Google.ContainerBuilder
     , bsDir
     , bsArgs
     , bsEnv
+    , bsEntrypoint
     , bsWaitFor
     , bsName
     , bsId
@@ -99,6 +103,10 @@ module Network.Google.ContainerBuilder
     , listOperationsResponse
     , lorNextPageToken
     , lorOperations
+
+    -- ** CancelOperationRequest
+    , CancelOperationRequest
+    , cancelOperationRequest
 
     -- ** Hash
     , Hash
@@ -155,6 +163,7 @@ module Network.Google.ContainerBuilder
     , bId
     , bOptions
     , bProjectId
+    , bBuildTriggerId
     , bTimeout
     , bFinishTime
     , bCreateTime
@@ -244,6 +253,7 @@ module Network.Google.ContainerBuilder
 
 import           Network.Google.ContainerBuilder.Types
 import           Network.Google.Prelude
+import           Network.Google.Resource.Cloudbuild.Operations.Cancel
 import           Network.Google.Resource.Cloudbuild.Operations.Get
 import           Network.Google.Resource.Cloudbuild.Operations.List
 import           Network.Google.Resource.Cloudbuild.Projects.Builds.Cancel
@@ -263,6 +273,7 @@ TODO
 -- | Represents the entirety of the methods and resources available for the Google Cloud Container Builder API service.
 type ContainerBuilderAPI =
      OperationsListResource :<|> OperationsGetResource
+       :<|> OperationsCancelResource
        :<|> ProjectsBuildsListResource
        :<|> ProjectsBuildsGetResource
        :<|> ProjectsBuildsCreateResource

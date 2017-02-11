@@ -35,6 +35,7 @@ library
     exposed-modules:
           Network.Google.ContainerBuilder
         , Network.Google.ContainerBuilder.Types
+        , Network.Google.Resource.Cloudbuild.Operations.Cancel
         , Network.Google.Resource.Cloudbuild.Operations.Get
         , Network.Google.Resource.Cloudbuild.Operations.List
         , Network.Google.Resource.Cloudbuild.Projects.Builds.Cancel

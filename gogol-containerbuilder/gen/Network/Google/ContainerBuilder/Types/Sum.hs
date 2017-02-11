@@ -81,9 +81,6 @@ data BuildStatus
     = StatusUnknown
       -- ^ @STATUS_UNKNOWN@
       -- Status of the build is unknown.
-    | Queuing
-      -- ^ @QUEUING@
-      -- Build has been received and is being queued.
     | Queued
       -- ^ @QUEUED@
       -- Build is queued; work has not yet begun.
@@ -112,7 +109,6 @@ instance Hashable BuildStatus
 instance FromHttpApiData BuildStatus where
     parseQueryParam = \case
         "STATUS_UNKNOWN" -> Right StatusUnknown
-        "QUEUING" -> Right Queuing
         "QUEUED" -> Right Queued
         "WORKING" -> Right Working
         "SUCCESS" -> Right Success
@@ -125,7 +121,6 @@ instance FromHttpApiData BuildStatus where
 instance ToHttpApiData BuildStatus where
     toQueryParam = \case
         StatusUnknown -> "STATUS_UNKNOWN"
-        Queuing -> "QUEUING"
         Queued -> "QUEUED"
         Working -> "WORKING"
         Success -> "SUCCESS"
