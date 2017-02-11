@@ -43,6 +43,7 @@ module Network.Google.Container.Types
     , cluster
     , cStatus
     , cNodePools
+    , cEnableKubernetesAlpha
     , cNodeConfig
     , cNodeIPv4CIdRSize
     , cClusterIPv4CIdR
@@ -61,12 +62,17 @@ module Network.Google.Container.Types
     , cSubnetwork
     , cCurrentNodeCount
     , cEndpoint
+    , cExpireTime
     , cLocations
     , cLoggingService
     , cDescription
     , cInstanceGroupURLs
     , cMonitoringService
     , cCreateTime
+
+    -- * CancelOperationRequest
+    , CancelOperationRequest
+    , cancelOperationRequest
 
     -- * UpdateClusterRequest
     , UpdateClusterRequest
@@ -76,10 +82,16 @@ module Network.Google.Container.Types
     -- * NodeConfig
     , NodeConfig
     , nodeConfig
+    , ncLocalSsdCount
     , ncDiskSizeGb
     , ncOAuthScopes
+    , ncServiceAccount
+    , ncImageType
     , ncMachineType
     , ncMetadata
+    , ncLabels
+    , ncTags
+    , ncPreemptible
 
     -- * HTTPLoadBalancing
     , HTTPLoadBalancing
@@ -98,6 +110,23 @@ module Network.Google.Container.Types
     , oTargetLink
     , oDetail
 
+    -- * Empty
+    , Empty
+    , empty
+
+    -- * NodeManagement
+    , NodeManagement
+    , nodeManagement
+    , nmAutoUpgrade
+    , nmUpgradeOptions
+
+    -- * NodePoolAutoscaling
+    , NodePoolAutoscaling
+    , nodePoolAutoscaling
+    , npaMaxNodeCount
+    , npaEnabled
+    , npaMinNodeCount
+
     -- * AddonsConfig
     , AddonsConfig
     , addonsConfig
@@ -108,13 +137,20 @@ module Network.Google.Container.Types
     , NodePool
     , nodePool
     , npStatus
+    , npAutoscaling
     , npConfig
     , npInitialNodeCount
+    , npManagement
     , npSelfLink
     , npName
     , npStatusMessage
     , npVersion
     , npInstanceGroupURLs
+
+    -- * SetNodePoolManagementRequest
+    , SetNodePoolManagementRequest
+    , setNodePoolManagementRequest
+    , snpmrManagement
 
     -- * MasterAuth
     , MasterAuth
@@ -130,13 +166,25 @@ module Network.Google.Container.Types
     , nodeConfigMetadata
     , ncmAddtional
 
+    -- * NodeConfigLabels
+    , NodeConfigLabels
+    , nodeConfigLabels
+    , nclAddtional
+
     -- * ServerConfig
     , ServerConfig
     , serverConfig
+    , scDefaultImageType
     , scValidNodeVersions
-    , scDefaultImageFamily
-    , scValidImageFamilies
+    , scValidImageTypes
     , scDefaultClusterVersion
+    , scValidMasterVersions
+
+    -- * AutoUpgradeOptions
+    , AutoUpgradeOptions
+    , autoUpgradeOptions
+    , auoAutoUpgradeStartTime
+    , auoDescription
 
     -- * ListClustersResponse
     , ListClustersResponse
@@ -147,11 +195,18 @@ module Network.Google.Container.Types
     -- * ClusterUpdate
     , ClusterUpdate
     , clusterUpdate
+    , cuDesiredNodePoolAutoscaling
     , cuDesiredAddonsConfig
     , cuDesiredNodePoolId
+    , cuDesiredImageType
     , cuDesiredNodeVersion
     , cuDesiredMasterVersion
+    , cuDesiredLocations
     , cuDesiredMonitoringService
+
+    -- * RollbackNodePoolUpgradeRequest
+    , RollbackNodePoolUpgradeRequest
+    , rollbackNodePoolUpgradeRequest
 
     -- * ListNodePoolsResponse
     , ListNodePoolsResponse
