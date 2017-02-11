@@ -20,9 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the specified Version resource. By default, only a \`BASIC_VIEW\`
--- will be returned. Specify the \`FULL_VIEW\` parameter to get the full
--- resource.
+-- Gets the specified Version resource. By default, only a BASIC_VIEW will
+-- be returned. Specify the FULL_VIEW parameter to get the full resource.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.get@.
 module Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
@@ -72,9 +71,8 @@ type AppsServicesVersionsGetResource =
                                    QueryParam "alt" AltJSON :>
                                      Get '[JSON] Version
 
--- | Gets the specified Version resource. By default, only a \`BASIC_VIEW\`
--- will be returned. Specify the \`FULL_VIEW\` parameter to get the full
--- resource.
+-- | Gets the specified Version resource. By default, only a BASIC_VIEW will
+-- be returned. Specify the FULL_VIEW parameter to get the full resource.
 --
 -- /See:/ 'appsServicesVersionsGet' smart constructor.
 data AppsServicesVersionsGet = AppsServicesVersionsGet'
@@ -176,12 +174,12 @@ asvgBearerToken
       (\ s a -> s{_asvgBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\`.
+-- apps\/myapp\/services\/default\/versions\/v1.
 asvgAppsId :: Lens' AppsServicesVersionsGet Text
 asvgAppsId
   = lens _asvgAppsId (\ s a -> s{_asvgAppsId = a})
 
--- | Controls the set of fields returned in the \`Get\` response.
+-- | Controls the set of fields returned in the Get response.
 asvgView :: Lens' AppsServicesVersionsGet (Maybe Text)
 asvgView = lens _asvgView (\ s a -> s{_asvgView = a})
 
@@ -199,7 +197,9 @@ asvgCallback
 instance GoogleRequest AppsServicesVersionsGet where
         type Rs AppsServicesVersionsGet = Version
         type Scopes AppsServicesVersionsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsServicesVersionsGet'{..}
           = go _asvgAppsId _asvgServicesId _asvgVersionsId
               _asvgXgafv

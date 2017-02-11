@@ -168,7 +168,9 @@ algCallback
 instance GoogleRequest AppsLocationsGet where
         type Rs AppsLocationsGet = Location
         type Scopes AppsLocationsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsLocationsGet'{..}
           = go _algAppsId _algLocationsId _algXgafv
               _algUploadProtocol

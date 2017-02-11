@@ -172,7 +172,9 @@ aogCallback
 instance GoogleRequest AppsOperationsGet where
         type Rs AppsOperationsGet = Operation
         type Scopes AppsOperationsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsOperationsGet'{..}
           = go _aogAppsId _aogOperationsId _aogXgafv
               _aogUploadProtocol

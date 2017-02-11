@@ -165,7 +165,7 @@ asvcBearerToken
       (\ s a -> s{_asvcBearerToken = a})
 
 -- | Part of \`parent\`. Name of the parent resource to create this version
--- under. Example: \`apps\/myapp\/services\/default\`.
+-- under. Example: apps\/myapp\/services\/default.
 asvcAppsId :: Lens' AppsServicesVersionsCreate Text
 asvcAppsId
   = lens _asvcAppsId (\ s a -> s{_asvcAppsId = a})

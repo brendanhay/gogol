@@ -151,7 +151,7 @@ asdBearerToken
       (\ s a -> s{_asdBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\`.
+-- apps\/myapp\/services\/default.
 asdAppsId :: Lens' AppsServicesDelete Text
 asdAppsId
   = lens _asdAppsId (\ s a -> s{_asdAppsId = a})

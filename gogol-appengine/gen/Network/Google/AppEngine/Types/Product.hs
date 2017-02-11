@@ -20,6 +20,88 @@ module Network.Google.AppEngine.Types.Product where
 import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
+-- | Metadata for the given google.longrunning.Operation.
+--
+-- /See:/ 'operationMetadataExperimental' smart constructor.
+data OperationMetadataExperimental = OperationMetadataExperimental'
+    { _omeInsertTime :: !(Maybe Text)
+    , _omeUser       :: !(Maybe Text)
+    , _omeMethod     :: !(Maybe Text)
+    , _omeEndTime    :: !(Maybe Text)
+    , _omeTarget     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationMetadataExperimental' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omeInsertTime'
+--
+-- * 'omeUser'
+--
+-- * 'omeMethod'
+--
+-- * 'omeEndTime'
+--
+-- * 'omeTarget'
+operationMetadataExperimental
+    :: OperationMetadataExperimental
+operationMetadataExperimental =
+    OperationMetadataExperimental'
+    { _omeInsertTime = Nothing
+    , _omeUser = Nothing
+    , _omeMethod = Nothing
+    , _omeEndTime = Nothing
+    , _omeTarget = Nothing
+    }
+
+-- | Time that this operation was created.\'OutputOnly
+omeInsertTime :: Lens' OperationMetadataExperimental (Maybe Text)
+omeInsertTime
+  = lens _omeInsertTime
+      (\ s a -> s{_omeInsertTime = a})
+
+-- | User who requested this operation.\'OutputOnly
+omeUser :: Lens' OperationMetadataExperimental (Maybe Text)
+omeUser = lens _omeUser (\ s a -> s{_omeUser = a})
+
+-- | API method that initiated this operation. Example:
+-- google.appengine.experimental.CustomDomains.CreateCustomDomain.\'OutputOnly
+omeMethod :: Lens' OperationMetadataExperimental (Maybe Text)
+omeMethod
+  = lens _omeMethod (\ s a -> s{_omeMethod = a})
+
+-- | Time that this operation completed.\'OutputOnly
+omeEndTime :: Lens' OperationMetadataExperimental (Maybe Text)
+omeEndTime
+  = lens _omeEndTime (\ s a -> s{_omeEndTime = a})
+
+-- | Name of the resource that this operation is acting on. Example:
+-- apps\/myapp\/customDomains\/example.com.\'OutputOnly
+omeTarget :: Lens' OperationMetadataExperimental (Maybe Text)
+omeTarget
+  = lens _omeTarget (\ s a -> s{_omeTarget = a})
+
+instance FromJSON OperationMetadataExperimental where
+        parseJSON
+          = withObject "OperationMetadataExperimental"
+              (\ o ->
+                 OperationMetadataExperimental' <$>
+                   (o .:? "insertTime") <*> (o .:? "user") <*>
+                     (o .:? "method")
+                     <*> (o .:? "endTime")
+                     <*> (o .:? "target"))
+
+instance ToJSON OperationMetadataExperimental where
+        toJSON OperationMetadataExperimental'{..}
+          = object
+              (catMaybes
+                 [("insertTime" .=) <$> _omeInsertTime,
+                  ("user" .=) <$> _omeUser,
+                  ("method" .=) <$> _omeMethod,
+                  ("endTime" .=) <$> _omeEndTime,
+                  ("target" .=) <$> _omeTarget])
+
 -- | Target scaling by network usage. Only applicable for VM runtimes.
 --
 -- /See:/ 'networkUtilization' smart constructor.
@@ -102,41 +184,41 @@ instance ToJSON NetworkUtilization where
                   ("targetSentBytesPerSecond" .=) <$>
                     _nuTargetSentBytesPerSecond])
 
--- | The \`Status\` type defines a logical error model that is suitable for
+-- | The Status type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
--- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
--- designed to be: - Simple to use and understand for most users - Flexible
--- enough to meet unexpected needs # Overview The \`Status\` message
--- contains three pieces of data: error code, error message, and error
--- details. The error code should be an enum value of google.rpc.Code, but
--- it may accept additional error codes if needed. The error message should
--- be a developer-facing English message that helps developers *understand*
--- and *resolve* the error. If a localized user-facing error message is
--- needed, put the localized message in the error details or localize it in
--- the client. The optional error details may contain arbitrary information
+-- is used by gRPC (https:\/\/github.com\/grpc). The error model is
+-- designed to be: Simple to use and understand for most users Flexible
+-- enough to meet unexpected needsOverviewThe Status message contains three
+-- pieces of data: error code, error message, and error details. The error
+-- code should be an enum value of google.rpc.Code, but it may accept
+-- additional error codes if needed. The error message should be a
+-- developer-facing English message that helps developers understand and
+-- resolve the error. If a localized user-facing error message is needed,
+-- put the localized message in the error details or localize it in the
+-- client. The optional error details may contain arbitrary information
 -- about the error. There is a predefined set of error detail types in the
--- package \`google.rpc\` which can be used for common error conditions. #
--- Language mapping The \`Status\` message is the logical representation of
--- the error model, but it is not necessarily the actual wire format. When
--- the \`Status\` message is exposed in different client libraries and
--- different wire protocols, it can be mapped differently. For example, it
--- will likely be mapped to some exceptions in Java, but more likely mapped
--- to some error codes in C. # Other uses The error model and the
--- \`Status\` message can be used in a variety of environments, either with
--- or without APIs, to provide a consistent developer experience across
--- different environments. Example uses of this error model include: -
+-- package google.rpc which can be used for common error
+-- conditions.Language mappingThe Status message is the logical
+-- representation of the error model, but it is not necessarily the actual
+-- wire format. When the Status message is exposed in different client
+-- libraries and different wire protocols, it can be mapped differently.
+-- For example, it will likely be mapped to some exceptions in Java, but
+-- more likely mapped to some error codes in C.Other usesThe error model
+-- and the Status message can be used in a variety of environments, either
+-- with or without APIs, to provide a consistent developer experience
+-- across different environments.Example uses of this error model include:
 -- Partial errors. If a service needs to return partial errors to the
--- client, it may embed the \`Status\` in the normal response to indicate
--- the partial errors. - Workflow errors. A typical workflow has multiple
--- steps. Each step may have a \`Status\` message for error reporting
--- purpose. - Batch operations. If a client uses batch request and batch
--- response, the \`Status\` message should be used directly inside batch
--- response, one for each error sub-response. - Asynchronous operations. If
--- an API call embeds asynchronous operation results in its response, the
--- status of those operations should be represented directly using the
--- \`Status\` message. - Logging. If some API errors are stored in logs,
--- the message \`Status\` could be used directly after any stripping needed
--- for security\/privacy reasons.
+-- client, it may embed the Status in the normal response to indicate the
+-- partial errors. Workflow errors. A typical workflow has multiple steps.
+-- Each step may have a Status message for error reporting purpose. Batch
+-- operations. If a client uses batch request and batch response, the
+-- Status message should be used directly inside batch response, one for
+-- each error sub-response. Asynchronous operations. If an API call embeds
+-- asynchronous operation results in its response, the status of those
+-- operations should be represented directly using the Status message.
+-- Logging. If some API errors are stored in logs, the message Status could
+-- be used directly after any stripping needed for security\/privacy
+-- reasons.
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status'
@@ -364,7 +446,7 @@ instance ToJSON ScriptHandler where
           = object
               (catMaybes [("scriptPath" .=) <$> _shScriptPath])
 
--- | Response message for \`Services.ListServices\`.
+-- | Response message for Services.ListServices.
 --
 -- /See:/ 'listServicesResponse' smart constructor.
 data ListServicesResponse = ListServicesResponse'
@@ -488,15 +570,15 @@ umURLRegex :: Lens' URLMap (Maybe Text)
 umURLRegex
   = lens _umURLRegex (\ s a -> s{_umURLRegex = a})
 
--- | \`30x\` code to use when performing redirects for the \`secure\` field.
--- Defaults to \`302\`.
+-- | 30x code to use when performing redirects for the secure field. Defaults
+-- to 302.
 umRedirectHTTPResponseCode :: Lens' URLMap (Maybe Text)
 umRedirectHTTPResponseCode
   = lens _umRedirectHTTPResponseCode
       (\ s a -> s{_umRedirectHTTPResponseCode = a})
 
 -- | Action to take when users access resources that require authentication.
--- Defaults to \`redirect\`.
+-- Defaults to redirect.
 umAuthFailAction :: Lens' URLMap (Maybe Text)
 umAuthFailAction
   = lens _umAuthFailAction
@@ -884,8 +966,8 @@ instance ToJSON HealthCheck where
                   ("timeout" .=) <$> _hcTimeout,
                   ("unhealthyThreshold" .=) <$> _hcUnhealthyThreshold])
 
--- | [Google Cloud
--- Endpoints](https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/)
+-- | Google Cloud Endpoints
+-- (https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/)
 -- configuration for API handlers.
 --
 -- /See:/ 'apiConfigHandler' smart constructor.
@@ -937,14 +1019,13 @@ achURL :: Lens' APIConfigHandler (Maybe Text)
 achURL = lens _achURL (\ s a -> s{_achURL = a})
 
 -- | Action to take when users access resources that require authentication.
--- Defaults to \`redirect\`.
+-- Defaults to redirect.
 achAuthFailAction :: Lens' APIConfigHandler (Maybe Text)
 achAuthFailAction
   = lens _achAuthFailAction
       (\ s a -> s{_achAuthFailAction = a})
 
--- | Level of login required to access this resource. Defaults to
--- \`optional\`.
+-- | Level of login required to access this resource. Defaults to optional.
 achLogin :: Lens' APIConfigHandler (Maybe Text)
 achLogin = lens _achLogin (\ s a -> s{_achLogin = a})
 
@@ -968,8 +1049,8 @@ instance ToJSON APIConfigHandler where
                   ("authFailAction" .=) <$> _achAuthFailAction,
                   ("login" .=) <$> _achLogin])
 
--- | Environment variables available to the application. Only returned in
--- \`GET\` requests if \`view=FULL\` is set.
+-- | Environment variables available to the application.Only returned in GET
+-- requests if view=FULL is set.
 --
 -- /See:/ 'versionEnvVariables' smart constructor.
 newtype VersionEnvVariables = VersionEnvVariables'
@@ -1054,41 +1135,41 @@ application =
     , _aLocationId = Nothing
     }
 
--- | Hostname used to reach this application, as resolved by App Engine.
--- \'OutputOnly
+-- | Hostname used to reach this application, as resolved by App
+-- Engine.\'OutputOnly
 aDefaultHostname :: Lens' Application (Maybe Text)
 aDefaultHostname
   = lens _aDefaultHostname
       (\ s a -> s{_aDefaultHostname = a})
 
--- | Cookie expiration policy for this application. \'OutputOnly
+-- | Cookie expiration policy for this application.
 aDefaultCookieExpiration :: Lens' Application (Maybe Text)
 aDefaultCookieExpiration
   = lens _aDefaultCookieExpiration
       (\ s a -> s{_aDefaultCookieExpiration = a})
 
 -- | Google Apps authentication domain that controls which users can access
--- this application. Defaults to open access for any Google Account.
+-- this application.Defaults to open access for any Google Account.
 aAuthDomain :: Lens' Application (Maybe Text)
 aAuthDomain
   = lens _aAuthDomain (\ s a -> s{_aAuthDomain = a})
 
 -- | Google Cloud Storage bucket that can be used for storing files
 -- associated with this application. This bucket is associated with the
--- application and can be used by the gcloud deployment commands.
--- \'OutputOnly
+-- application and can be used by the gcloud deployment
+-- commands.\'OutputOnly
 aCodeBucket :: Lens' Application (Maybe Text)
 aCodeBucket
   = lens _aCodeBucket (\ s a -> s{_aCodeBucket = a})
 
 -- | Full path to the Application resource in the API. Example:
--- \`apps\/myapp\`. \'OutputOnly
+-- apps\/myapp.\'OutputOnly
 aName :: Lens' Application (Maybe Text)
 aName = lens _aName (\ s a -> s{_aName = a})
 
 -- | HTTP path dispatch rules for requests to the application that do not
--- explicitly target a service or version. Rules are order-dependent.
--- \'OutputOnly
+-- explicitly target a service or version. Rules are
+-- order-dependent.\'OutputOnly
 aDispatchRules :: Lens' Application [URLDispatchRule]
 aDispatchRules
   = lens _aDispatchRules
@@ -1097,7 +1178,7 @@ aDispatchRules
       . _Coerce
 
 -- | Google Cloud Storage bucket that can be used by this application to
--- store content. \'OutputOnly
+-- store content.\'OutputOnly
 aDefaultBucket :: Lens' Application (Maybe Text)
 aDefaultBucket
   = lens _aDefaultBucket
@@ -1105,15 +1186,15 @@ aDefaultBucket
 
 -- | Identifier of the Application resource. This identifier is equivalent to
 -- the project ID of the Google Cloud Platform project where you want to
--- deploy your application. Example: \`myapp\`.
+-- deploy your application. Example: myapp.
 aId :: Lens' Application (Maybe Text)
 aId = lens _aId (\ s a -> s{_aId = a})
 
 -- | Location from which this application will be run. Application instances
 -- will run out of data centers in the chosen location, which is also where
--- all of the application\'s end user content is stored. Defaults to
--- \`us-central\`. Options are: \`us-central\` - Central US \`europe-west\`
--- - Western Europe \`us-east1\` - Eastern US
+-- all of the application\'s end user content is stored.Defaults to
+-- us-central.Options are:us-central - Central USeurope-west - Western
+-- Europeus-east1 - Eastern US
 aLocationId :: Lens' Application (Maybe Text)
 aLocationId
   = lens _aLocationId (\ s a -> s{_aLocationId = a})
@@ -1221,12 +1302,12 @@ sSplit :: Lens' Service (Maybe TrafficSplit)
 sSplit = lens _sSplit (\ s a -> s{_sSplit = a})
 
 -- | Full path to the Service resource in the API. Example:
--- \`apps\/myapp\/services\/default\`. \'OutputOnly
+-- apps\/myapp\/services\/default.\'OutputOnly
 sName :: Lens' Service (Maybe Text)
 sName = lens _sName (\ s a -> s{_sName = a})
 
 -- | Relative name of the service within the application. Example:
--- \`default\`. \'OutputOnly
+-- default.\'OutputOnly
 sId :: Lens' Service (Maybe Text)
 sId = lens _sId (\ s a -> s{_sId = a})
 
@@ -1243,6 +1324,59 @@ instance ToJSON Service where
               (catMaybes
                  [("split" .=) <$> _sSplit, ("name" .=) <$> _sName,
                   ("id" .=) <$> _sId])
+
+-- | Cloud Endpoints (https:\/\/cloud.google.com\/endpoints) configuration.
+-- The Endpoints API Service provides tooling for serving Open API and gRPC
+-- endpoints via an NGINX proxy.The fields here refer to the name and
+-- configuration id of a \"service\" resource in the Service Management API
+-- (https:\/\/cloud.google.com\/service-management\/overview).
+--
+-- /See:/ 'endpointsAPIService' smart constructor.
+data EndpointsAPIService = EndpointsAPIService'
+    { _easName     :: !(Maybe Text)
+    , _easConfigId :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EndpointsAPIService' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'easName'
+--
+-- * 'easConfigId'
+endpointsAPIService
+    :: EndpointsAPIService
+endpointsAPIService =
+    EndpointsAPIService'
+    { _easName = Nothing
+    , _easConfigId = Nothing
+    }
+
+-- | Endpoints service name which is the name of the \"service\" resource in
+-- the Service Management API. For example
+-- \"myapi.endpoints.myproject.cloud.goog\"
+easName :: Lens' EndpointsAPIService (Maybe Text)
+easName = lens _easName (\ s a -> s{_easName = a})
+
+-- | Endpoints service configuration id as specified by the Service
+-- Management API. For example \"2016-09-19r1\"
+easConfigId :: Lens' EndpointsAPIService (Maybe Text)
+easConfigId
+  = lens _easConfigId (\ s a -> s{_easConfigId = a})
+
+instance FromJSON EndpointsAPIService where
+        parseJSON
+          = withObject "EndpointsAPIService"
+              (\ o ->
+                 EndpointsAPIService' <$>
+                   (o .:? "name") <*> (o .:? "configId"))
+
+instance ToJSON EndpointsAPIService where
+        toJSON EndpointsAPIService'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _easName,
+                  ("configId" .=) <$> _easConfigId])
 
 -- | A resource that represents Google Cloud Platform location.
 --
@@ -1276,7 +1410,7 @@ location =
     }
 
 -- | Resource name for the location, which may vary between implementations.
--- For example: \`\"projects\/example-project\/locations\/us-east1\"\`
+-- For example: \"projects\/example-project\/locations\/us-east1\"
 locName :: Lens' Location (Maybe Text)
 locName = lens _locName (\ s a -> s{_locName = a})
 
@@ -1292,7 +1426,7 @@ locLabels :: Lens' Location (Maybe LocationLabels)
 locLabels
   = lens _locLabels (\ s a -> s{_locLabels = a})
 
--- | The canonical id for this location. For example: \`\"us-east1\"\`.
+-- | The canonical id for this location. For example: \"us-east1\".
 locLocationId :: Lens' Location (Maybe Text)
 locLocationId
   = lens _locLocationId
@@ -1352,31 +1486,30 @@ operation =
     , _oMetadata = Nothing
     }
 
--- | If the value is \`false\`, it means the operation is still in progress.
--- If true, the operation is completed, and either \`error\` or
--- \`response\` is available.
+-- | If the value is false, it means the operation is still in progress. If
+-- true, the operation is completed, and either error or response is
+-- available.
 oDone :: Lens' Operation (Maybe Bool)
 oDone = lens _oDone (\ s a -> s{_oDone = a})
 
--- | The error result of the operation in case of failure.
+-- | The error result of the operation in case of failure or cancellation.
 oError :: Lens' Operation (Maybe Status)
 oError = lens _oError (\ s a -> s{_oError = a})
 
 -- | The normal response of the operation in case of success. If the original
--- method returns no data on success, such as \`Delete\`, the response is
--- \`google.protobuf.Empty\`. If the original method is standard
--- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
--- For other methods, the response should have the type \`XxxResponse\`,
--- where \`Xxx\` is the original method name. For example, if the original
--- method name is \`TakeSnapshot()\`, the inferred response type is
--- \`TakeSnapshotResponse\`.
+-- method returns no data on success, such as Delete, the response is
+-- google.protobuf.Empty. If the original method is standard
+-- Get\/Create\/Update, the response should be the resource. For other
+-- methods, the response should have the type XxxResponse, where Xxx is the
+-- original method name. For example, if the original method name is
+-- TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
 oResponse :: Lens' Operation (Maybe OperationResponse)
 oResponse
   = lens _oResponse (\ s a -> s{_oResponse = a})
 
 -- | The server-assigned name, which is only unique within the same service
 -- that originally returns it. If you use the default HTTP mapping, the
--- \`name\` should have the format of \`operations\/some\/unique\/name\`.
+-- name should have the format of operations\/some\/unique\/name.
 oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
@@ -1440,7 +1573,7 @@ ziFilesCount
 
 -- | URL of the zip file to deploy from. Must be a URL to a resource in
 -- Google Cloud Storage in the form
--- \'http(s):\/\/storage.googleapis.com\/\\\/\\\'.
+-- \'http(s):\/\/storage.googleapis.com\/\/\'.
 ziSourceURL :: Lens' ZipInfo (Maybe Text)
 ziSourceURL
   = lens _ziSourceURL (\ s a -> s{_ziSourceURL = a})
@@ -1486,21 +1619,21 @@ urlDispatchRule =
     , _udrDomain = Nothing
     }
 
--- | Pathname within the host. Must start with a \"\`\/\`\". A single
--- \"\`*\`\" can be included at the end of the path. The sum of the lengths
--- of the domain and path may not exceed 100 characters.
+-- | Pathname within the host. Must start with a \"\/\". A single \"*\" can
+-- be included at the end of the path. The sum of the lengths of the domain
+-- and path may not exceed 100 characters.
 udrPath :: Lens' URLDispatchRule (Maybe Text)
 udrPath = lens _udrPath (\ s a -> s{_udrPath = a})
 
 -- | Resource ID of a service in this application that should serve the
--- matched request. The service must already exist. Example: \`default\`.
+-- matched request. The service must already exist. Example: default.
 udrService :: Lens' URLDispatchRule (Maybe Text)
 udrService
   = lens _udrService (\ s a -> s{_udrService = a})
 
--- | Domain name to match against. The wildcard \"\`*\`\" is supported if
--- specified before a period: \"\`*.\`\". Defaults to matching all domains:
--- \"\`*\`\".
+-- | Domain name to match against. The wildcard \"*\" is supported if
+-- specified before a period: \"*.\".Defaults to matching all domains:
+-- \"*\".
 udrDomain :: Lens' URLDispatchRule (Maybe Text)
 udrDomain
   = lens _udrDomain (\ s a -> s{_udrDomain = a})
@@ -1521,7 +1654,7 @@ instance ToJSON URLDispatchRule where
                   ("service" .=) <$> _udrService,
                   ("domain" .=) <$> _udrDomain])
 
--- | Response message for \`Versions.ListVersions\`.
+-- | Response message for Versions.ListVersions.
 --
 -- /See:/ 'listVersionsResponse' smart constructor.
 data ListVersionsResponse = ListVersionsResponse'
@@ -1605,7 +1738,7 @@ fiSha1Sum :: Lens' FileInfo (Maybe Text)
 fiSha1Sum
   = lens _fiSha1Sum (\ s a -> s{_fiSha1Sum = a})
 
--- | The MIME type of the file. Defaults to the value from Google Cloud
+-- | The MIME type of the file.Defaults to the value from Google Cloud
 -- Storage.
 fiMimeType :: Lens' FileInfo (Maybe Text)
 fiMimeType
@@ -1613,7 +1746,7 @@ fiMimeType
 
 -- | URL source to use to fetch this file. Must be a URL to a resource in
 -- Google Cloud Storage in the form
--- \'http(s):\/\/storage.googleapis.com\/\\\/\\\'.
+-- \'http(s):\/\/storage.googleapis.com\/\/\'.
 fiSourceURL :: Lens' FileInfo (Maybe Text)
 fiSourceURL
   = lens _fiSourceURL (\ s a -> s{_fiSourceURL = a})
@@ -1754,7 +1887,7 @@ asMinTotalInstances
       . mapping _Coerce
 
 -- | Number of concurrent requests an automatic scaling instance can accept
--- before the scheduler spawns a new instance. Defaults to a
+-- before the scheduler spawns a new instance.Defaults to a
 -- runtime-specific value.
 asMaxConcurrentRequests :: Lens' AutomaticScaling (Maybe Int32)
 asMaxConcurrentRequests
@@ -1762,10 +1895,10 @@ asMaxConcurrentRequests
       (\ s a -> s{_asMaxConcurrentRequests = a})
       . mapping _Coerce
 
--- | Amount of time that the
--- [Autoscaler](https:\/\/cloud.google.com\/compute\/docs\/autoscaler\/)
--- should wait between changes to the number of virtual machines. Only
--- applicable for VM runtimes.
+-- | Amount of time that the Autoscaler
+-- (https:\/\/cloud.google.com\/compute\/docs\/autoscaler\/) should wait
+-- between changes to the number of virtual machines. Only applicable for
+-- VM runtimes.
 asCoolDownPeriod :: Lens' AutomaticScaling (Maybe Text)
 asCoolDownPeriod
   = lens _asCoolDownPeriod
@@ -1855,29 +1988,29 @@ operationMetadataV1Beta5 =
     , _omvbTarget = Nothing
     }
 
--- | Timestamp that this operation was created. \'OutputOnly
+-- | Timestamp that this operation was created.\'OutputOnly
 omvbInsertTime :: Lens' OperationMetadataV1Beta5 (Maybe Text)
 omvbInsertTime
   = lens _omvbInsertTime
       (\ s a -> s{_omvbInsertTime = a})
 
--- | User who requested this operation. \'OutputOnly
+-- | User who requested this operation.\'OutputOnly
 omvbUser :: Lens' OperationMetadataV1Beta5 (Maybe Text)
 omvbUser = lens _omvbUser (\ s a -> s{_omvbUser = a})
 
 -- | API method name that initiated this operation. Example:
--- \`google.appengine.v1beta5.Version.CreateVersion\`. \'OutputOnly
+-- google.appengine.v1beta5.Version.CreateVersion.\'OutputOnly
 omvbMethod :: Lens' OperationMetadataV1Beta5 (Maybe Text)
 omvbMethod
   = lens _omvbMethod (\ s a -> s{_omvbMethod = a})
 
--- | Timestamp that this operation completed. \'OutputOnly
+-- | Timestamp that this operation completed.\'OutputOnly
 omvbEndTime :: Lens' OperationMetadataV1Beta5 (Maybe Text)
 omvbEndTime
   = lens _omvbEndTime (\ s a -> s{_omvbEndTime = a})
 
 -- | Name of the resource that this operation is acting on. Example:
--- \`apps\/myapp\/services\/default\`. \'OutputOnly
+-- apps\/myapp\/services\/default.\'OutputOnly
 omvbTarget :: Lens' OperationMetadataV1Beta5 (Maybe Text)
 omvbTarget
   = lens _omvbTarget (\ s a -> s{_omvbTarget = a})
@@ -1901,6 +2034,64 @@ instance ToJSON OperationMetadataV1Beta5 where
                   ("method" .=) <$> _omvbMethod,
                   ("endTime" .=) <$> _omvbEndTime,
                   ("target" .=) <$> _omvbTarget])
+
+-- | Volumes mounted within the app container. Only applicable for VM
+-- runtimes.
+--
+-- /See:/ 'volume' smart constructor.
+data Volume = Volume'
+    { _vSizeGb     :: !(Maybe (Textual Double))
+    , _vName       :: !(Maybe Text)
+    , _vVolumeType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Volume' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vSizeGb'
+--
+-- * 'vName'
+--
+-- * 'vVolumeType'
+volume
+    :: Volume
+volume =
+    Volume'
+    { _vSizeGb = Nothing
+    , _vName = Nothing
+    , _vVolumeType = Nothing
+    }
+
+-- | Volume size in gigabytes.
+vSizeGb :: Lens' Volume (Maybe Double)
+vSizeGb
+  = lens _vSizeGb (\ s a -> s{_vSizeGb = a}) .
+      mapping _Coerce
+
+-- | Unique name for the volume.
+vName :: Lens' Volume (Maybe Text)
+vName = lens _vName (\ s a -> s{_vName = a})
+
+-- | Underlying volume type, e.g. \'tmpfs\'.
+vVolumeType :: Lens' Volume (Maybe Text)
+vVolumeType
+  = lens _vVolumeType (\ s a -> s{_vVolumeType = a})
+
+instance FromJSON Volume where
+        parseJSON
+          = withObject "Volume"
+              (\ o ->
+                 Volume' <$>
+                   (o .:? "sizeGb") <*> (o .:? "name") <*>
+                     (o .:? "volumeType"))
+
+instance ToJSON Volume where
+        toJSON Volume'{..}
+          = object
+              (catMaybes
+                 [("sizeGb" .=) <$> _vSizeGb, ("name" .=) <$> _vName,
+                  ("volumeType" .=) <$> _vVolumeType])
 
 -- | Uses Google Cloud Endpoints to handle requests.
 --
@@ -1974,7 +2165,8 @@ instance ToJSON StatusDetailsItem where
 --
 -- /See:/ 'network' smart constructor.
 data Network = Network'
-    { _nForwardedPorts :: !(Maybe [Text])
+    { _nSubnetworkName :: !(Maybe Text)
+    , _nForwardedPorts :: !(Maybe [Text])
     , _nInstanceTag    :: !(Maybe Text)
     , _nName           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1982,6 +2174,8 @@ data Network = Network'
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nSubnetworkName'
 --
 -- * 'nForwardedPorts'
 --
@@ -1992,10 +2186,29 @@ network
     :: Network
 network =
     Network'
-    { _nForwardedPorts = Nothing
+    { _nSubnetworkName = Nothing
+    , _nForwardedPorts = Nothing
     , _nInstanceTag = Nothing
     , _nName = Nothing
     }
+
+-- | Google Cloud Platform sub-network where the virtual machines are
+-- created. Specify the short name, not the resource path.If a subnetwork
+-- name is specified, a network name will also be required unless it is for
+-- the default network. If the network the VM instance is being created in
+-- is a Legacy network, then the IP address is allocated from the
+-- IPv4Range. If the network the VM instance is being created in is an auto
+-- Subnet Mode Network, then only network name should be specified (not the
+-- subnetwork_name) and the IP address is created from the IPCidrRange of
+-- the subnetwork that exists in that zone for that network. If the network
+-- the VM instance is being created in is a custom Subnet Mode Network,
+-- then the subnetwork_name must be specified and the IP address is created
+-- from the IPCidrRange of the subnetwork.If specified, the subnetwork must
+-- exist in the same region as the Flex app.
+nSubnetworkName :: Lens' Network (Maybe Text)
+nSubnetworkName
+  = lens _nSubnetworkName
+      (\ s a -> s{_nSubnetworkName = a})
 
 -- | List of ports, or port pairs, to forward from the virtual machine to the
 -- application container.
@@ -2012,7 +2225,7 @@ nInstanceTag
   = lens _nInstanceTag (\ s a -> s{_nInstanceTag = a})
 
 -- | Google Cloud Platform network where the virtual machines are created.
--- Specify the short name, not the resource path. Defaults to \`default\`.
+-- Specify the short name, not the resource path.Defaults to default.
 nName :: Lens' Network (Maybe Text)
 nName = lens _nName (\ s a -> s{_nName = a})
 
@@ -2021,38 +2234,56 @@ instance FromJSON Network where
           = withObject "Network"
               (\ o ->
                  Network' <$>
-                   (o .:? "forwardedPorts" .!= mempty) <*>
-                     (o .:? "instanceTag")
+                   (o .:? "subnetworkName") <*>
+                     (o .:? "forwardedPorts" .!= mempty)
+                     <*> (o .:? "instanceTag")
                      <*> (o .:? "name"))
 
 instance ToJSON Network where
         toJSON Network'{..}
           = object
               (catMaybes
-                 [("forwardedPorts" .=) <$> _nForwardedPorts,
+                 [("subnetworkName" .=) <$> _nSubnetworkName,
+                  ("forwardedPorts" .=) <$> _nForwardedPorts,
                   ("instanceTag" .=) <$> _nInstanceTag,
                   ("name" .=) <$> _nName])
 
--- | Request message for \`Instances.DebugInstance\`.
+-- | Request message for Instances.DebugInstance.
 --
 -- /See:/ 'debugInstanceRequest' smart constructor.
-data DebugInstanceRequest =
-    DebugInstanceRequest'
-    deriving (Eq,Show,Data,Typeable,Generic)
+newtype DebugInstanceRequest = DebugInstanceRequest'
+    { _dirSSHKey :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DebugInstanceRequest' with the minimum fields required to make a request.
 --
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dirSSHKey'
 debugInstanceRequest
     :: DebugInstanceRequest
-debugInstanceRequest = DebugInstanceRequest'
+debugInstanceRequest =
+    DebugInstanceRequest'
+    { _dirSSHKey = Nothing
+    }
+
+-- | Public SSH key to add to the instance. Examples: [USERNAME]:ssh-rsa
+-- [KEY_VALUE] [USERNAME] [USERNAME]:ssh-rsa [KEY_VALUE] google-ssh
+-- {\"userName\":\"[USERNAME]\",\"expireOn\":\"[EXPIRE_TIME]\"}For more
+-- information, see Adding and Removing SSH Keys
+-- (https:\/\/cloud.google.com\/compute\/docs\/instances\/adding-removing-ssh-keys).
+dirSSHKey :: Lens' DebugInstanceRequest (Maybe Text)
+dirSSHKey
+  = lens _dirSSHKey (\ s a -> s{_dirSSHKey = a})
 
 instance FromJSON DebugInstanceRequest where
         parseJSON
           = withObject "DebugInstanceRequest"
-              (\ o -> pure DebugInstanceRequest')
+              (\ o -> DebugInstanceRequest' <$> (o .:? "sshKey"))
 
 instance ToJSON DebugInstanceRequest where
-        toJSON = const emptyObject
+        toJSON DebugInstanceRequest'{..}
+          = object (catMaybes [("sshKey" .=) <$> _dirSSHKey])
 
 -- | HTTP headers to use for all responses from these URLs.
 --
@@ -2096,6 +2327,7 @@ instance ToJSON StaticFilesHandlerHTTPHeaders where
 data Resources = Resources'
     { _rMemoryGb :: !(Maybe (Textual Double))
     , _rDiskGb   :: !(Maybe (Textual Double))
+    , _rVolumes  :: !(Maybe [Volume])
     , _rCPU      :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2107,6 +2339,8 @@ data Resources = Resources'
 --
 -- * 'rDiskGb'
 --
+-- * 'rVolumes'
+--
 -- * 'rCPU'
 resources
     :: Resources
@@ -2114,6 +2348,7 @@ resources =
     Resources'
     { _rMemoryGb = Nothing
     , _rDiskGb = Nothing
+    , _rVolumes = Nothing
     , _rCPU = Nothing
     }
 
@@ -2129,6 +2364,13 @@ rDiskGb
   = lens _rDiskGb (\ s a -> s{_rDiskGb = a}) .
       mapping _Coerce
 
+-- | User specified volumes.
+rVolumes :: Lens' Resources [Volume]
+rVolumes
+  = lens _rVolumes (\ s a -> s{_rVolumes = a}) .
+      _Default
+      . _Coerce
+
 -- | Number of CPU cores needed.
 rCPU :: Lens' Resources (Maybe Double)
 rCPU
@@ -2141,14 +2383,16 @@ instance FromJSON Resources where
               (\ o ->
                  Resources' <$>
                    (o .:? "memoryGb") <*> (o .:? "diskGb") <*>
-                     (o .:? "cpu"))
+                     (o .:? "volumes" .!= mempty)
+                     <*> (o .:? "cpu"))
 
 instance ToJSON Resources where
         toJSON Resources'{..}
           = object
               (catMaybes
                  [("memoryGb" .=) <$> _rMemoryGb,
-                  ("diskGb" .=) <$> _rDiskGb, ("cpu" .=) <$> _rCPU])
+                  ("diskGb" .=) <$> _rDiskGb,
+                  ("volumes" .=) <$> _rVolumes, ("cpu" .=) <$> _rCPU])
 
 -- | Manifest of the files stored in Google Cloud Storage that are included
 -- as part of this version. All files must be readable using the
@@ -2300,9 +2544,9 @@ manualScaling =
     }
 
 -- | Number of instances to assign to the service at the start. This number
--- can later be altered by using the [Modules
--- API](https:\/\/cloud.google.com\/appengine\/docs\/python\/modules\/functions)
--- \`set_num_instances()\` function.
+-- can later be altered by using the Modules API
+-- (https:\/\/cloud.google.com\/appengine\/docs\/python\/modules\/functions)
+-- set_num_instances() function.
 msInstances :: Lens' ManualScaling (Maybe Int32)
 msInstances
   = lens _msInstances (\ s a -> s{_msInstances = a}) .
@@ -2376,16 +2620,20 @@ instance ToJSON BasicScaling where
 --
 -- /See:/ 'operationMetadataV1' smart constructor.
 data OperationMetadataV1 = OperationMetadataV1'
-    { _omvInsertTime :: !(Maybe Text)
-    , _omvUser       :: !(Maybe Text)
-    , _omvMethod     :: !(Maybe Text)
-    , _omvEndTime    :: !(Maybe Text)
-    , _omvTarget     :: !(Maybe Text)
+    { _omvEphemeralMessage :: !(Maybe Text)
+    , _omvInsertTime       :: !(Maybe Text)
+    , _omvUser             :: !(Maybe Text)
+    , _omvMethod           :: !(Maybe Text)
+    , _omvEndTime          :: !(Maybe Text)
+    , _omvWarning          :: !(Maybe [Text])
+    , _omvTarget           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationMetadataV1' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'omvEphemeralMessage'
 --
 -- * 'omvInsertTime'
 --
@@ -2395,41 +2643,59 @@ data OperationMetadataV1 = OperationMetadataV1'
 --
 -- * 'omvEndTime'
 --
+-- * 'omvWarning'
+--
 -- * 'omvTarget'
 operationMetadataV1
     :: OperationMetadataV1
 operationMetadataV1 =
     OperationMetadataV1'
-    { _omvInsertTime = Nothing
+    { _omvEphemeralMessage = Nothing
+    , _omvInsertTime = Nothing
     , _omvUser = Nothing
     , _omvMethod = Nothing
     , _omvEndTime = Nothing
+    , _omvWarning = Nothing
     , _omvTarget = Nothing
     }
 
--- | Time that this operation was created. \'OutputOnly
+-- | Ephemeral message that may change every time the operation is polled.
+-- \'OutputOnly
+omvEphemeralMessage :: Lens' OperationMetadataV1 (Maybe Text)
+omvEphemeralMessage
+  = lens _omvEphemeralMessage
+      (\ s a -> s{_omvEphemeralMessage = a})
+
+-- | Time that this operation was created.\'OutputOnly
 omvInsertTime :: Lens' OperationMetadataV1 (Maybe Text)
 omvInsertTime
   = lens _omvInsertTime
       (\ s a -> s{_omvInsertTime = a})
 
--- | User who requested this operation. \'OutputOnly
+-- | User who requested this operation.\'OutputOnly
 omvUser :: Lens' OperationMetadataV1 (Maybe Text)
 omvUser = lens _omvUser (\ s a -> s{_omvUser = a})
 
 -- | API method that initiated this operation. Example:
--- \`google.appengine.v1.Versions.CreateVersion\`. \'OutputOnly
+-- google.appengine.v1.Versions.CreateVersion.\'OutputOnly
 omvMethod :: Lens' OperationMetadataV1 (Maybe Text)
 omvMethod
   = lens _omvMethod (\ s a -> s{_omvMethod = a})
 
--- | Time that this operation completed. \'OutputOnly
+-- | Time that this operation completed.\'OutputOnly
 omvEndTime :: Lens' OperationMetadataV1 (Maybe Text)
 omvEndTime
   = lens _omvEndTime (\ s a -> s{_omvEndTime = a})
 
+-- | Durable messages that persist on every operation poll. \'OutputOnly
+omvWarning :: Lens' OperationMetadataV1 [Text]
+omvWarning
+  = lens _omvWarning (\ s a -> s{_omvWarning = a}) .
+      _Default
+      . _Coerce
+
 -- | Name of the resource that this operation is acting on. Example:
--- \`apps\/myapp\/services\/default\`. \'OutputOnly
+-- apps\/myapp\/services\/default.\'OutputOnly
 omvTarget :: Lens' OperationMetadataV1 (Maybe Text)
 omvTarget
   = lens _omvTarget (\ s a -> s{_omvTarget = a})
@@ -2439,19 +2705,23 @@ instance FromJSON OperationMetadataV1 where
           = withObject "OperationMetadataV1"
               (\ o ->
                  OperationMetadataV1' <$>
-                   (o .:? "insertTime") <*> (o .:? "user") <*>
-                     (o .:? "method")
+                   (o .:? "ephemeralMessage") <*> (o .:? "insertTime")
+                     <*> (o .:? "user")
+                     <*> (o .:? "method")
                      <*> (o .:? "endTime")
+                     <*> (o .:? "warning" .!= mempty)
                      <*> (o .:? "target"))
 
 instance ToJSON OperationMetadataV1 where
         toJSON OperationMetadataV1'{..}
           = object
               (catMaybes
-                 [("insertTime" .=) <$> _omvInsertTime,
+                 [("ephemeralMessage" .=) <$> _omvEphemeralMessage,
+                  ("insertTime" .=) <$> _omvInsertTime,
                   ("user" .=) <$> _omvUser,
                   ("method" .=) <$> _omvMethod,
                   ("endTime" .=) <$> _omvEndTime,
+                  ("warning" .=) <$> _omvWarning,
                   ("target" .=) <$> _omvTarget])
 
 -- | A Version resource is a specific set of source code and configuration
@@ -2459,322 +2729,336 @@ instance ToJSON OperationMetadataV1 where
 --
 -- /See:/ 'version' smart constructor.
 data Version = Version'
-    { _vRuntime           :: !(Maybe Text)
-    , _vNobuildFilesRegex :: !(Maybe Text)
-    , _vInstanceClass     :: !(Maybe Text)
-    , _vHealthCheck       :: !(Maybe HealthCheck)
-    , _vEnv               :: !(Maybe Text)
-    , _vDefaultExpiration :: !(Maybe Text)
-    , _vAutomaticScaling  :: !(Maybe AutomaticScaling)
-    , _vErrorHandlers     :: !(Maybe [ErrorHandler])
-    , _vCreatedBy         :: !(Maybe Text)
-    , _vVM                :: !(Maybe Bool)
-    , _vHandlers          :: !(Maybe [URLMap])
-    , _vInboundServices   :: !(Maybe [Text])
-    , _vNetwork           :: !(Maybe Network)
-    , _vResources         :: !(Maybe Resources)
-    , _vName              :: !(Maybe Text)
-    , _vThreadsafe        :: !(Maybe Bool)
-    , _vBetaSettings      :: !(Maybe VersionBetaSettings)
-    , _vBasicScaling      :: !(Maybe BasicScaling)
-    , _vManualScaling     :: !(Maybe ManualScaling)
-    , _vAPIConfig         :: !(Maybe APIConfigHandler)
-    , _vId                :: !(Maybe Text)
-    , _vEnvVariables      :: !(Maybe VersionEnvVariables)
-    , _vServingStatus     :: !(Maybe Text)
-    , _vDiskUsageBytes    :: !(Maybe (Textual Int64))
-    , _vCreateTime        :: !(Maybe Text)
-    , _vLibraries         :: !(Maybe [Library])
-    , _vVersionURL        :: !(Maybe Text)
-    , _vDeployment        :: !(Maybe Deployment)
+    { _verRuntime             :: !(Maybe Text)
+    , _verNobuildFilesRegex   :: !(Maybe Text)
+    , _verInstanceClass       :: !(Maybe Text)
+    , _verHealthCheck         :: !(Maybe HealthCheck)
+    , _verEndpointsAPIService :: !(Maybe EndpointsAPIService)
+    , _verEnv                 :: !(Maybe Text)
+    , _verDefaultExpiration   :: !(Maybe Text)
+    , _verAutomaticScaling    :: !(Maybe AutomaticScaling)
+    , _verErrorHandlers       :: !(Maybe [ErrorHandler])
+    , _verCreatedBy           :: !(Maybe Text)
+    , _verVM                  :: !(Maybe Bool)
+    , _verHandlers            :: !(Maybe [URLMap])
+    , _verInboundServices     :: !(Maybe [Text])
+    , _verNetwork             :: !(Maybe Network)
+    , _verResources           :: !(Maybe Resources)
+    , _verName                :: !(Maybe Text)
+    , _verThreadsafe          :: !(Maybe Bool)
+    , _verBetaSettings        :: !(Maybe VersionBetaSettings)
+    , _verBasicScaling        :: !(Maybe BasicScaling)
+    , _verManualScaling       :: !(Maybe ManualScaling)
+    , _verAPIConfig           :: !(Maybe APIConfigHandler)
+    , _verId                  :: !(Maybe Text)
+    , _verEnvVariables        :: !(Maybe VersionEnvVariables)
+    , _verServingStatus       :: !(Maybe Text)
+    , _verDiskUsageBytes      :: !(Maybe (Textual Int64))
+    , _verCreateTime          :: !(Maybe Text)
+    , _verLibraries           :: !(Maybe [Library])
+    , _verVersionURL          :: !(Maybe Text)
+    , _verDeployment          :: !(Maybe Deployment)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vRuntime'
+-- * 'verRuntime'
 --
--- * 'vNobuildFilesRegex'
+-- * 'verNobuildFilesRegex'
 --
--- * 'vInstanceClass'
+-- * 'verInstanceClass'
 --
--- * 'vHealthCheck'
+-- * 'verHealthCheck'
 --
--- * 'vEnv'
+-- * 'verEndpointsAPIService'
 --
--- * 'vDefaultExpiration'
+-- * 'verEnv'
 --
--- * 'vAutomaticScaling'
+-- * 'verDefaultExpiration'
 --
--- * 'vErrorHandlers'
+-- * 'verAutomaticScaling'
 --
--- * 'vCreatedBy'
+-- * 'verErrorHandlers'
 --
--- * 'vVM'
+-- * 'verCreatedBy'
 --
--- * 'vHandlers'
+-- * 'verVM'
 --
--- * 'vInboundServices'
+-- * 'verHandlers'
 --
--- * 'vNetwork'
+-- * 'verInboundServices'
 --
--- * 'vResources'
+-- * 'verNetwork'
 --
--- * 'vName'
+-- * 'verResources'
 --
--- * 'vThreadsafe'
+-- * 'verName'
 --
--- * 'vBetaSettings'
+-- * 'verThreadsafe'
 --
--- * 'vBasicScaling'
+-- * 'verBetaSettings'
 --
--- * 'vManualScaling'
+-- * 'verBasicScaling'
 --
--- * 'vAPIConfig'
+-- * 'verManualScaling'
 --
--- * 'vId'
+-- * 'verAPIConfig'
 --
--- * 'vEnvVariables'
+-- * 'verId'
 --
--- * 'vServingStatus'
+-- * 'verEnvVariables'
 --
--- * 'vDiskUsageBytes'
+-- * 'verServingStatus'
 --
--- * 'vCreateTime'
+-- * 'verDiskUsageBytes'
 --
--- * 'vLibraries'
+-- * 'verCreateTime'
 --
--- * 'vVersionURL'
+-- * 'verLibraries'
 --
--- * 'vDeployment'
+-- * 'verVersionURL'
+--
+-- * 'verDeployment'
 version
     :: Version
 version =
     Version'
-    { _vRuntime = Nothing
-    , _vNobuildFilesRegex = Nothing
-    , _vInstanceClass = Nothing
-    , _vHealthCheck = Nothing
-    , _vEnv = Nothing
-    , _vDefaultExpiration = Nothing
-    , _vAutomaticScaling = Nothing
-    , _vErrorHandlers = Nothing
-    , _vCreatedBy = Nothing
-    , _vVM = Nothing
-    , _vHandlers = Nothing
-    , _vInboundServices = Nothing
-    , _vNetwork = Nothing
-    , _vResources = Nothing
-    , _vName = Nothing
-    , _vThreadsafe = Nothing
-    , _vBetaSettings = Nothing
-    , _vBasicScaling = Nothing
-    , _vManualScaling = Nothing
-    , _vAPIConfig = Nothing
-    , _vId = Nothing
-    , _vEnvVariables = Nothing
-    , _vServingStatus = Nothing
-    , _vDiskUsageBytes = Nothing
-    , _vCreateTime = Nothing
-    , _vLibraries = Nothing
-    , _vVersionURL = Nothing
-    , _vDeployment = Nothing
+    { _verRuntime = Nothing
+    , _verNobuildFilesRegex = Nothing
+    , _verInstanceClass = Nothing
+    , _verHealthCheck = Nothing
+    , _verEndpointsAPIService = Nothing
+    , _verEnv = Nothing
+    , _verDefaultExpiration = Nothing
+    , _verAutomaticScaling = Nothing
+    , _verErrorHandlers = Nothing
+    , _verCreatedBy = Nothing
+    , _verVM = Nothing
+    , _verHandlers = Nothing
+    , _verInboundServices = Nothing
+    , _verNetwork = Nothing
+    , _verResources = Nothing
+    , _verName = Nothing
+    , _verThreadsafe = Nothing
+    , _verBetaSettings = Nothing
+    , _verBasicScaling = Nothing
+    , _verManualScaling = Nothing
+    , _verAPIConfig = Nothing
+    , _verId = Nothing
+    , _verEnvVariables = Nothing
+    , _verServingStatus = Nothing
+    , _verDiskUsageBytes = Nothing
+    , _verCreateTime = Nothing
+    , _verLibraries = Nothing
+    , _verVersionURL = Nothing
+    , _verDeployment = Nothing
     }
 
--- | Desired runtime. Example: \`python27\`.
-vRuntime :: Lens' Version (Maybe Text)
-vRuntime = lens _vRuntime (\ s a -> s{_vRuntime = a})
+-- | Desired runtime. Example: python27.
+verRuntime :: Lens' Version (Maybe Text)
+verRuntime
+  = lens _verRuntime (\ s a -> s{_verRuntime = a})
 
 -- | Files that match this pattern will not be built into this version. Only
--- applicable for Go runtimes. Only returned in \`GET\` requests if
--- \`view=FULL\` is set.
-vNobuildFilesRegex :: Lens' Version (Maybe Text)
-vNobuildFilesRegex
-  = lens _vNobuildFilesRegex
-      (\ s a -> s{_vNobuildFilesRegex = a})
+-- applicable for Go runtimes.Only returned in GET requests if view=FULL is
+-- set.
+verNobuildFilesRegex :: Lens' Version (Maybe Text)
+verNobuildFilesRegex
+  = lens _verNobuildFilesRegex
+      (\ s a -> s{_verNobuildFilesRegex = a})
 
--- | Instance class that is used to run this version. Valid values are: *
--- AutomaticScaling: \`F1\`, \`F2\`, \`F4\`, \`F4_1G\` * ManualScaling or
--- BasicScaling: \`B1\`, \`B2\`, \`B4\`, \`B8\`, \`B4_1G\` Defaults to
--- \`F1\` for AutomaticScaling and \`B1\` for ManualScaling or
--- BasicScaling.
-vInstanceClass :: Lens' Version (Maybe Text)
-vInstanceClass
-  = lens _vInstanceClass
-      (\ s a -> s{_vInstanceClass = a})
+-- | Instance class that is used to run this version. Valid values are:
+-- AutomaticScaling: F1, F2, F4, F4_1G ManualScaling or BasicScaling: B1,
+-- B2, B4, B8, B4_1GDefaults to F1 for AutomaticScaling and B1 for
+-- ManualScaling or BasicScaling.
+verInstanceClass :: Lens' Version (Maybe Text)
+verInstanceClass
+  = lens _verInstanceClass
+      (\ s a -> s{_verInstanceClass = a})
 
 -- | Configures health checking for VM instances. Unhealthy instances are
 -- stopped and replaced with new instances. Only applicable for VM
--- runtimes. Only returned in \`GET\` requests if \`view=FULL\` is set.
-vHealthCheck :: Lens' Version (Maybe HealthCheck)
-vHealthCheck
-  = lens _vHealthCheck (\ s a -> s{_vHealthCheck = a})
+-- runtimes.Only returned in GET requests if view=FULL is set.
+verHealthCheck :: Lens' Version (Maybe HealthCheck)
+verHealthCheck
+  = lens _verHealthCheck
+      (\ s a -> s{_verHealthCheck = a})
 
--- | App Engine execution environment for this version. Defaults to
--- \`standard\`.
-vEnv :: Lens' Version (Maybe Text)
-vEnv = lens _vEnv (\ s a -> s{_vEnv = a})
+-- | Cloud Endpoints configuration.If endpoints_api_service is set, the Cloud
+-- Endpoints Extensible Service Proxy will be provided to serve the API
+-- implemented by the app.
+verEndpointsAPIService :: Lens' Version (Maybe EndpointsAPIService)
+verEndpointsAPIService
+  = lens _verEndpointsAPIService
+      (\ s a -> s{_verEndpointsAPIService = a})
+
+-- | App Engine execution environment for this version.Defaults to standard.
+verEnv :: Lens' Version (Maybe Text)
+verEnv = lens _verEnv (\ s a -> s{_verEnv = a})
 
 -- | Duration that static files should be cached by web proxies and browsers.
--- Only applicable if the corresponding
--- [StaticFilesHandler](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#staticfileshandler)
--- does not specify its own expiration time. Only returned in \`GET\`
--- requests if \`view=FULL\` is set.
-vDefaultExpiration :: Lens' Version (Maybe Text)
-vDefaultExpiration
-  = lens _vDefaultExpiration
-      (\ s a -> s{_vDefaultExpiration = a})
+-- Only applicable if the corresponding StaticFilesHandler
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#staticfileshandler)
+-- does not specify its own expiration time.Only returned in GET requests
+-- if view=FULL is set.
+verDefaultExpiration :: Lens' Version (Maybe Text)
+verDefaultExpiration
+  = lens _verDefaultExpiration
+      (\ s a -> s{_verDefaultExpiration = a})
 
 -- | Automatic scaling is based on request rate, response latencies, and
 -- other application metrics.
-vAutomaticScaling :: Lens' Version (Maybe AutomaticScaling)
-vAutomaticScaling
-  = lens _vAutomaticScaling
-      (\ s a -> s{_vAutomaticScaling = a})
+verAutomaticScaling :: Lens' Version (Maybe AutomaticScaling)
+verAutomaticScaling
+  = lens _verAutomaticScaling
+      (\ s a -> s{_verAutomaticScaling = a})
 
--- | Custom static error pages. Limited to 10KB per page. Only returned in
--- \`GET\` requests if \`view=FULL\` is set.
-vErrorHandlers :: Lens' Version [ErrorHandler]
-vErrorHandlers
-  = lens _vErrorHandlers
-      (\ s a -> s{_vErrorHandlers = a})
+-- | Custom static error pages. Limited to 10KB per page.Only returned in GET
+-- requests if view=FULL is set.
+verErrorHandlers :: Lens' Version [ErrorHandler]
+verErrorHandlers
+  = lens _verErrorHandlers
+      (\ s a -> s{_verErrorHandlers = a})
       . _Default
       . _Coerce
 
--- | Email address of the user who created this version. \'OutputOnly
-vCreatedBy :: Lens' Version (Maybe Text)
-vCreatedBy
-  = lens _vCreatedBy (\ s a -> s{_vCreatedBy = a})
+-- | Email address of the user who created this version.\'OutputOnly
+verCreatedBy :: Lens' Version (Maybe Text)
+verCreatedBy
+  = lens _verCreatedBy (\ s a -> s{_verCreatedBy = a})
 
 -- | Whether to deploy this version in a container on a virtual machine.
-vVM :: Lens' Version (Maybe Bool)
-vVM = lens _vVM (\ s a -> s{_vVM = a})
+verVM :: Lens' Version (Maybe Bool)
+verVM = lens _verVM (\ s a -> s{_verVM = a})
 
 -- | An ordered list of URL-matching patterns that should be applied to
 -- incoming requests. The first matching URL handles the request and other
--- request handlers are not attempted. Only returned in \`GET\` requests if
--- \`view=FULL\` is set.
-vHandlers :: Lens' Version [URLMap]
-vHandlers
-  = lens _vHandlers (\ s a -> s{_vHandlers = a}) .
+-- request handlers are not attempted.Only returned in GET requests if
+-- view=FULL is set.
+verHandlers :: Lens' Version [URLMap]
+verHandlers
+  = lens _verHandlers (\ s a -> s{_verHandlers = a}) .
       _Default
       . _Coerce
 
 -- | Before an application can receive email or XMPP messages, the
 -- application must be configured to enable the service.
-vInboundServices :: Lens' Version [Text]
-vInboundServices
-  = lens _vInboundServices
-      (\ s a -> s{_vInboundServices = a})
+verInboundServices :: Lens' Version [Text]
+verInboundServices
+  = lens _verInboundServices
+      (\ s a -> s{_verInboundServices = a})
       . _Default
       . _Coerce
 
 -- | Extra network settings. Only applicable for VM runtimes.
-vNetwork :: Lens' Version (Maybe Network)
-vNetwork = lens _vNetwork (\ s a -> s{_vNetwork = a})
+verNetwork :: Lens' Version (Maybe Network)
+verNetwork
+  = lens _verNetwork (\ s a -> s{_verNetwork = a})
 
 -- | Machine resources for this version. Only applicable for VM runtimes.
-vResources :: Lens' Version (Maybe Resources)
-vResources
-  = lens _vResources (\ s a -> s{_vResources = a})
+verResources :: Lens' Version (Maybe Resources)
+verResources
+  = lens _verResources (\ s a -> s{_verResources = a})
 
 -- | Full path to the Version resource in the API. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\`. \'OutputOnly
-vName :: Lens' Version (Maybe Text)
-vName = lens _vName (\ s a -> s{_vName = a})
+-- apps\/myapp\/services\/default\/versions\/v1.\'OutputOnly
+verName :: Lens' Version (Maybe Text)
+verName = lens _verName (\ s a -> s{_verName = a})
 
 -- | Whether multiple requests can be dispatched to this version at once.
-vThreadsafe :: Lens' Version (Maybe Bool)
-vThreadsafe
-  = lens _vThreadsafe (\ s a -> s{_vThreadsafe = a})
+verThreadsafe :: Lens' Version (Maybe Bool)
+verThreadsafe
+  = lens _verThreadsafe
+      (\ s a -> s{_verThreadsafe = a})
 
 -- | Metadata settings that are supplied to this version to enable beta
 -- runtime features.
-vBetaSettings :: Lens' Version (Maybe VersionBetaSettings)
-vBetaSettings
-  = lens _vBetaSettings
-      (\ s a -> s{_vBetaSettings = a})
+verBetaSettings :: Lens' Version (Maybe VersionBetaSettings)
+verBetaSettings
+  = lens _verBetaSettings
+      (\ s a -> s{_verBetaSettings = a})
 
 -- | A service with basic scaling will create an instance when the
 -- application receives a request. The instance will be turned down when
 -- the app becomes idle. Basic scaling is ideal for work that is
 -- intermittent or driven by user activity.
-vBasicScaling :: Lens' Version (Maybe BasicScaling)
-vBasicScaling
-  = lens _vBasicScaling
-      (\ s a -> s{_vBasicScaling = a})
+verBasicScaling :: Lens' Version (Maybe BasicScaling)
+verBasicScaling
+  = lens _verBasicScaling
+      (\ s a -> s{_verBasicScaling = a})
 
 -- | A service with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
-vManualScaling :: Lens' Version (Maybe ManualScaling)
-vManualScaling
-  = lens _vManualScaling
-      (\ s a -> s{_vManualScaling = a})
+verManualScaling :: Lens' Version (Maybe ManualScaling)
+verManualScaling
+  = lens _verManualScaling
+      (\ s a -> s{_verManualScaling = a})
 
--- | Serving configuration for [Google Cloud
--- Endpoints](https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/).
--- Only returned in \`GET\` requests if \`view=FULL\` is set.
-vAPIConfig :: Lens' Version (Maybe APIConfigHandler)
-vAPIConfig
-  = lens _vAPIConfig (\ s a -> s{_vAPIConfig = a})
+-- | Serving configuration for Google Cloud Endpoints
+-- (https:\/\/cloud.google.com\/appengine\/docs\/python\/endpoints\/).Only
+-- returned in GET requests if view=FULL is set.
+verAPIConfig :: Lens' Version (Maybe APIConfigHandler)
+verAPIConfig
+  = lens _verAPIConfig (\ s a -> s{_verAPIConfig = a})
 
--- | Relative name of the version within the service. Example: \`v1\`.
--- Version names can contain only lowercase letters, numbers, or hyphens.
--- Reserved names: \"default\", \"latest\", and any name with the prefix
--- \"ah-\".
-vId :: Lens' Version (Maybe Text)
-vId = lens _vId (\ s a -> s{_vId = a})
+-- | Relative name of the version within the service. Example: v1. Version
+-- names can contain only lowercase letters, numbers, or hyphens. Reserved
+-- names: \"default\", \"latest\", and any name with the prefix \"ah-\".
+verId :: Lens' Version (Maybe Text)
+verId = lens _verId (\ s a -> s{_verId = a})
 
--- | Environment variables available to the application. Only returned in
--- \`GET\` requests if \`view=FULL\` is set.
-vEnvVariables :: Lens' Version (Maybe VersionEnvVariables)
-vEnvVariables
-  = lens _vEnvVariables
-      (\ s a -> s{_vEnvVariables = a})
+-- | Environment variables available to the application.Only returned in GET
+-- requests if view=FULL is set.
+verEnvVariables :: Lens' Version (Maybe VersionEnvVariables)
+verEnvVariables
+  = lens _verEnvVariables
+      (\ s a -> s{_verEnvVariables = a})
 
--- | Current serving status of this version. Only the versions with a
--- \`SERVING\` status create instances and can be billed.
--- \`SERVING_STATUS_UNSPECIFIED\` is an invalid value. Defaults to
--- \`SERVING\`.
-vServingStatus :: Lens' Version (Maybe Text)
-vServingStatus
-  = lens _vServingStatus
-      (\ s a -> s{_vServingStatus = a})
+-- | Current serving status of this version. Only the versions with a SERVING
+-- status create instances and can be billed.SERVING_STATUS_UNSPECIFIED is
+-- an invalid value. Defaults to SERVING.
+verServingStatus :: Lens' Version (Maybe Text)
+verServingStatus
+  = lens _verServingStatus
+      (\ s a -> s{_verServingStatus = a})
 
 -- | Total size in bytes of all the files that are included in this version
--- and curerntly hosted on the App Engine disk. \'OutputOnly
-vDiskUsageBytes :: Lens' Version (Maybe Int64)
-vDiskUsageBytes
-  = lens _vDiskUsageBytes
-      (\ s a -> s{_vDiskUsageBytes = a})
+-- and curerntly hosted on the App Engine disk.\'OutputOnly
+verDiskUsageBytes :: Lens' Version (Maybe Int64)
+verDiskUsageBytes
+  = lens _verDiskUsageBytes
+      (\ s a -> s{_verDiskUsageBytes = a})
       . mapping _Coerce
 
--- | Time that this version was created. \'OutputOnly
-vCreateTime :: Lens' Version (Maybe Text)
-vCreateTime
-  = lens _vCreateTime (\ s a -> s{_vCreateTime = a})
+-- | Time that this version was created.\'OutputOnly
+verCreateTime :: Lens' Version (Maybe Text)
+verCreateTime
+  = lens _verCreateTime
+      (\ s a -> s{_verCreateTime = a})
 
 -- | Configuration for third-party Python runtime libraries that are required
--- by the application. Only returned in \`GET\` requests if \`view=FULL\`
--- is set.
-vLibraries :: Lens' Version [Library]
-vLibraries
-  = lens _vLibraries (\ s a -> s{_vLibraries = a}) .
-      _Default
+-- by the application.Only returned in GET requests if view=FULL is set.
+verLibraries :: Lens' Version [Library]
+verLibraries
+  = lens _verLibraries (\ s a -> s{_verLibraries = a})
+      . _Default
       . _Coerce
 
 -- | Serving URL for this version. Example:
--- \"https:\/\/myversion-dot-myservice-dot-myapp.appspot.com\" \'OutputOnly
-vVersionURL :: Lens' Version (Maybe Text)
-vVersionURL
-  = lens _vVersionURL (\ s a -> s{_vVersionURL = a})
+-- \"https:\/\/myversion-dot-myservice-dot-myapp.appspot.com\"\'OutputOnly
+verVersionURL :: Lens' Version (Maybe Text)
+verVersionURL
+  = lens _verVersionURL
+      (\ s a -> s{_verVersionURL = a})
 
--- | Code and application artifacts that make up this version. Only returned
--- in \`GET\` requests if \`view=FULL\` is set.
-vDeployment :: Lens' Version (Maybe Deployment)
-vDeployment
-  = lens _vDeployment (\ s a -> s{_vDeployment = a})
+-- | Code and application artifacts that make up this version.Only returned
+-- in GET requests if view=FULL is set.
+verDeployment :: Lens' Version (Maybe Deployment)
+verDeployment
+  = lens _verDeployment
+      (\ s a -> s{_verDeployment = a})
 
 instance FromJSON Version where
         parseJSON
@@ -2784,6 +3068,7 @@ instance FromJSON Version where
                    (o .:? "runtime") <*> (o .:? "nobuildFilesRegex") <*>
                      (o .:? "instanceClass")
                      <*> (o .:? "healthCheck")
+                     <*> (o .:? "endpointsApiService")
                      <*> (o .:? "env")
                      <*> (o .:? "defaultExpiration")
                      <*> (o .:? "automaticScaling")
@@ -2813,32 +3098,36 @@ instance ToJSON Version where
         toJSON Version'{..}
           = object
               (catMaybes
-                 [("runtime" .=) <$> _vRuntime,
-                  ("nobuildFilesRegex" .=) <$> _vNobuildFilesRegex,
-                  ("instanceClass" .=) <$> _vInstanceClass,
-                  ("healthCheck" .=) <$> _vHealthCheck,
-                  ("env" .=) <$> _vEnv,
-                  ("defaultExpiration" .=) <$> _vDefaultExpiration,
-                  ("automaticScaling" .=) <$> _vAutomaticScaling,
-                  ("errorHandlers" .=) <$> _vErrorHandlers,
-                  ("createdBy" .=) <$> _vCreatedBy, ("vm" .=) <$> _vVM,
-                  ("handlers" .=) <$> _vHandlers,
-                  ("inboundServices" .=) <$> _vInboundServices,
-                  ("network" .=) <$> _vNetwork,
-                  ("resources" .=) <$> _vResources,
-                  ("name" .=) <$> _vName,
-                  ("threadsafe" .=) <$> _vThreadsafe,
-                  ("betaSettings" .=) <$> _vBetaSettings,
-                  ("basicScaling" .=) <$> _vBasicScaling,
-                  ("manualScaling" .=) <$> _vManualScaling,
-                  ("apiConfig" .=) <$> _vAPIConfig, ("id" .=) <$> _vId,
-                  ("envVariables" .=) <$> _vEnvVariables,
-                  ("servingStatus" .=) <$> _vServingStatus,
-                  ("diskUsageBytes" .=) <$> _vDiskUsageBytes,
-                  ("createTime" .=) <$> _vCreateTime,
-                  ("libraries" .=) <$> _vLibraries,
-                  ("versionUrl" .=) <$> _vVersionURL,
-                  ("deployment" .=) <$> _vDeployment])
+                 [("runtime" .=) <$> _verRuntime,
+                  ("nobuildFilesRegex" .=) <$> _verNobuildFilesRegex,
+                  ("instanceClass" .=) <$> _verInstanceClass,
+                  ("healthCheck" .=) <$> _verHealthCheck,
+                  ("endpointsApiService" .=) <$>
+                    _verEndpointsAPIService,
+                  ("env" .=) <$> _verEnv,
+                  ("defaultExpiration" .=) <$> _verDefaultExpiration,
+                  ("automaticScaling" .=) <$> _verAutomaticScaling,
+                  ("errorHandlers" .=) <$> _verErrorHandlers,
+                  ("createdBy" .=) <$> _verCreatedBy,
+                  ("vm" .=) <$> _verVM,
+                  ("handlers" .=) <$> _verHandlers,
+                  ("inboundServices" .=) <$> _verInboundServices,
+                  ("network" .=) <$> _verNetwork,
+                  ("resources" .=) <$> _verResources,
+                  ("name" .=) <$> _verName,
+                  ("threadsafe" .=) <$> _verThreadsafe,
+                  ("betaSettings" .=) <$> _verBetaSettings,
+                  ("basicScaling" .=) <$> _verBasicScaling,
+                  ("manualScaling" .=) <$> _verManualScaling,
+                  ("apiConfig" .=) <$> _verAPIConfig,
+                  ("id" .=) <$> _verId,
+                  ("envVariables" .=) <$> _verEnvVariables,
+                  ("servingStatus" .=) <$> _verServingStatus,
+                  ("diskUsageBytes" .=) <$> _verDiskUsageBytes,
+                  ("createTime" .=) <$> _verCreateTime,
+                  ("libraries" .=) <$> _verLibraries,
+                  ("versionUrl" .=) <$> _verVersionURL,
+                  ("deployment" .=) <$> _verDeployment])
 
 -- | Files served directly to the user for a given URL, such as images, CSS
 -- stylesheets, or JavaScript source files. Static file handlers describe
@@ -2912,7 +3201,7 @@ sfhExpiration
   = lens _sfhExpiration
       (\ s a -> s{_sfhExpiration = a})
 
--- | MIME type used to serve all files served by this handler. Defaults to
+-- | MIME type used to serve all files served by this handler.Defaults to
 -- file-specific MIME types, which are derived from each file\'s filename
 -- extension.
 sfhMimeType :: Lens' StaticFilesHandler (Maybe Text)
@@ -2989,7 +3278,7 @@ errorHandler =
     , _ehStaticFile = Nothing
     }
 
--- | MIME type of file. Defaults to \`text\/html\`.
+-- | MIME type of file. Defaults to text\/html.
 ehMimeType :: Lens' ErrorHandler (Maybe Text)
 ehMimeType
   = lens _ehMimeType (\ s a -> s{_ehMimeType = a})
@@ -3077,15 +3366,15 @@ locationMetadata =
     , _lmFlexibleEnvironmentAvailable = Nothing
     }
 
--- | App Engine Standard Environment is available in the given location.
--- \'OutputOnly
+-- | App Engine Standard Environment is available in the given
+-- location.\'OutputOnly
 lmStandardEnvironmentAvailable :: Lens' LocationMetadata (Maybe Bool)
 lmStandardEnvironmentAvailable
   = lens _lmStandardEnvironmentAvailable
       (\ s a -> s{_lmStandardEnvironmentAvailable = a})
 
--- | App Engine Flexible Environment is available in the given location.
--- \'OutputOnly
+-- | App Engine Flexible Environment is available in the given
+-- location.\'OutputOnly
 lmFlexibleEnvironmentAvailable :: Lens' LocationMetadata (Maybe Bool)
 lmFlexibleEnvironmentAvailable
   = lens _lmFlexibleEnvironmentAvailable
@@ -3147,34 +3436,34 @@ operationMetadata =
     , _omTarget = Nothing
     }
 
--- | Timestamp that this operation was created. \'OutputOnly
+-- | Timestamp that this operation was created.\'OutputOnly
 omInsertTime :: Lens' OperationMetadata (Maybe Text)
 omInsertTime
   = lens _omInsertTime (\ s a -> s{_omInsertTime = a})
 
--- | User who requested this operation. \'OutputOnly
+-- | User who requested this operation.\'OutputOnly
 omUser :: Lens' OperationMetadata (Maybe Text)
 omUser = lens _omUser (\ s a -> s{_omUser = a})
 
 -- | API method that initiated this operation. Example:
--- \`google.appengine.v1beta4.Version.CreateVersion\`. \'OutputOnly
+-- google.appengine.v1beta4.Version.CreateVersion.\'OutputOnly
 omMethod :: Lens' OperationMetadata (Maybe Text)
 omMethod = lens _omMethod (\ s a -> s{_omMethod = a})
 
--- | Timestamp that this operation completed. \'OutputOnly
+-- | Timestamp that this operation completed.\'OutputOnly
 omEndTime :: Lens' OperationMetadata (Maybe Text)
 omEndTime
   = lens _omEndTime (\ s a -> s{_omEndTime = a})
 
 -- | Type of this operation. Deprecated, use method field instead. Example:
--- \"create_version\". \'OutputOnly
+-- \"create_version\".\'OutputOnly
 omOperationType :: Lens' OperationMetadata (Maybe Text)
 omOperationType
   = lens _omOperationType
       (\ s a -> s{_omOperationType = a})
 
 -- | Name of the resource that this operation is acting on. Example:
--- \`apps\/myapp\/modules\/default\`. \'OutputOnly
+-- apps\/myapp\/modules\/default.\'OutputOnly
 omTarget :: Lens' OperationMetadata (Maybe Text)
 omTarget = lens _omTarget (\ s a -> s{_omTarget = a})
 
@@ -3199,7 +3488,7 @@ instance ToJSON OperationMetadata where
                   ("operationType" .=) <$> _omOperationType,
                   ("target" .=) <$> _omTarget])
 
--- | Response message for \`Instances.ListInstances\`.
+-- | Response message for Instances.ListInstances.
 --
 -- /See:/ 'listInstancesResponse' smart constructor.
 data ListInstancesResponse = ListInstancesResponse'
@@ -3326,13 +3615,12 @@ instance ToJSON RepairApplicationRequest where
         toJSON = const emptyObject
 
 -- | The normal response of the operation in case of success. If the original
--- method returns no data on success, such as \`Delete\`, the response is
--- \`google.protobuf.Empty\`. If the original method is standard
--- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
--- For other methods, the response should have the type \`XxxResponse\`,
--- where \`Xxx\` is the original method name. For example, if the original
--- method name is \`TakeSnapshot()\`, the inferred response type is
--- \`TakeSnapshotResponse\`.
+-- method returns no data on success, such as Delete, the response is
+-- google.protobuf.Empty. If the original method is standard
+-- Get\/Create\/Update, the response should be the resource. For other
+-- methods, the response should have the type XxxResponse, where Xxx is the
+-- original method name. For example, if the original method name is
+-- TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
 --
 -- /See:/ 'operationResponse' smart constructor.
 newtype OperationResponse = OperationResponse'
@@ -3410,6 +3698,7 @@ data Instance = Instance'
     { _iMemoryUsage      :: !(Maybe (Textual Int64))
     , _iVMStatus         :: !(Maybe Text)
     , _iVMZoneName       :: !(Maybe Text)
+    , _iVMIP             :: !(Maybe Text)
     , _iStartTime        :: !(Maybe Text)
     , _iVMId             :: !(Maybe Text)
     , _iAvailability     :: !(Maybe Text)
@@ -3433,6 +3722,8 @@ data Instance = Instance'
 -- * 'iVMStatus'
 --
 -- * 'iVMZoneName'
+--
+-- * 'iVMIP'
 --
 -- * 'iStartTime'
 --
@@ -3464,6 +3755,7 @@ instance' =
     { _iMemoryUsage = Nothing
     , _iVMStatus = Nothing
     , _iVMZoneName = Nothing
+    , _iVMIP = Nothing
     , _iStartTime = Nothing
     , _iVMId = Nothing
     , _iAvailability = Nothing
@@ -3478,89 +3770,93 @@ instance' =
     , _iAppEngineRelease = Nothing
     }
 
--- | Total memory in use (bytes). \'OutputOnly
+-- | Total memory in use (bytes).\'OutputOnly
 iMemoryUsage :: Lens' Instance (Maybe Int64)
 iMemoryUsage
   = lens _iMemoryUsage (\ s a -> s{_iMemoryUsage = a})
       . mapping _Coerce
 
 -- | Status of the virtual machine where this instance lives. Only applicable
--- for instances in App Engine flexible environment. \'OutputOnly
+-- for instances in App Engine flexible environment.\'OutputOnly
 iVMStatus :: Lens' Instance (Maybe Text)
 iVMStatus
   = lens _iVMStatus (\ s a -> s{_iVMStatus = a})
 
 -- | Zone where the virtual machine is located. Only applicable for instances
--- in App Engine flexible environment. \'OutputOnly
+-- in App Engine flexible environment.\'OutputOnly
 iVMZoneName :: Lens' Instance (Maybe Text)
 iVMZoneName
   = lens _iVMZoneName (\ s a -> s{_iVMZoneName = a})
 
--- | Time that this instance was started. \'OutputOnly
+-- | The IP address of this instance. Only applicable for instances in App
+-- Engine flexible environment.\'OutputOnly
+iVMIP :: Lens' Instance (Maybe Text)
+iVMIP = lens _iVMIP (\ s a -> s{_iVMIP = a})
+
+-- | Time that this instance was started.\'OutputOnly
 iStartTime :: Lens' Instance (Maybe Text)
 iStartTime
   = lens _iStartTime (\ s a -> s{_iStartTime = a})
 
 -- | Virtual machine ID of this instance. Only applicable for instances in
--- App Engine flexible environment. \'OutputOnly
+-- App Engine flexible environment.\'OutputOnly
 iVMId :: Lens' Instance (Maybe Text)
 iVMId = lens _iVMId (\ s a -> s{_iVMId = a})
 
--- | Availability of the instance. \'OutputOnly
+-- | Availability of the instance.\'OutputOnly
 iAvailability :: Lens' Instance (Maybe Text)
 iAvailability
   = lens _iAvailability
       (\ s a -> s{_iAvailability = a})
 
 -- | Name of the virtual machine where this instance lives. Only applicable
--- for instances in App Engine flexible environment. \'OutputOnly
+-- for instances in App Engine flexible environment.\'OutputOnly
 iVMName :: Lens' Instance (Maybe Text)
 iVMName = lens _iVMName (\ s a -> s{_iVMName = a})
 
 -- | Full path to the Instance resource in the API. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1\`.
--- \'OutputOnly
+-- apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1.\'OutputOnly
 iName :: Lens' Instance (Maybe Text)
 iName = lens _iName (\ s a -> s{_iName = a})
 
 -- | Whether this instance is in debug mode. Only applicable for instances in
--- App Engine flexible environment. \'OutputOnly
+-- App Engine flexible environment.\'OutputOnly
 iVMDebugEnabled :: Lens' Instance (Maybe Bool)
 iVMDebugEnabled
   = lens _iVMDebugEnabled
       (\ s a -> s{_iVMDebugEnabled = a})
 
--- | Number of requests since this instance was started. \'OutputOnly
+-- | Number of requests since this instance was started.\'OutputOnly
 iRequests :: Lens' Instance (Maybe Int32)
 iRequests
   = lens _iRequests (\ s a -> s{_iRequests = a}) .
       mapping _Coerce
 
--- | Average queries per second (QPS) over the last minute. \'OutputOnly
+-- | Average queries per second (QPS) over the last minute.\'OutputOnly
 iQps :: Lens' Instance (Maybe Double)
 iQps
   = lens _iQps (\ s a -> s{_iQps = a}) .
       mapping _Coerce
 
 -- | Relative name of the instance within the version. Example:
--- \`instance-1\`. \'OutputOnly
+-- instance-1.\'OutputOnly
 iId :: Lens' Instance (Maybe Text)
 iId = lens _iId (\ s a -> s{_iId = a})
 
--- | Number of errors since this instance was started. \'OutputOnly
+-- | Number of errors since this instance was started.\'OutputOnly
 iErrors :: Lens' Instance (Maybe Int32)
 iErrors
   = lens _iErrors (\ s a -> s{_iErrors = a}) .
       mapping _Coerce
 
--- | Average latency (ms) over the last minute. \'OutputOnly
+-- | Average latency (ms) over the last minute.\'OutputOnly
 iAverageLatency :: Lens' Instance (Maybe Int32)
 iAverageLatency
   = lens _iAverageLatency
       (\ s a -> s{_iAverageLatency = a})
       . mapping _Coerce
 
--- | App Engine release this instance is running on. \'OutputOnly
+-- | App Engine release this instance is running on.\'OutputOnly
 iAppEngineRelease :: Lens' Instance (Maybe Text)
 iAppEngineRelease
   = lens _iAppEngineRelease
@@ -3573,6 +3869,7 @@ instance FromJSON Instance where
                  Instance' <$>
                    (o .:? "memoryUsage") <*> (o .:? "vmStatus") <*>
                      (o .:? "vmZoneName")
+                     <*> (o .:? "vmIp")
                      <*> (o .:? "startTime")
                      <*> (o .:? "vmId")
                      <*> (o .:? "availability")
@@ -3593,6 +3890,7 @@ instance ToJSON Instance where
                  [("memoryUsage" .=) <$> _iMemoryUsage,
                   ("vmStatus" .=) <$> _iVMStatus,
                   ("vmZoneName" .=) <$> _iVMZoneName,
+                  ("vmIp" .=) <$> _iVMIP,
                   ("startTime" .=) <$> _iStartTime,
                   ("vmId" .=) <$> _iVMId,
                   ("availability" .=) <$> _iAvailability,

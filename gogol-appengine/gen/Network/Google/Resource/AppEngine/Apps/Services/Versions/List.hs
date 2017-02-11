@@ -171,12 +171,12 @@ asvlBearerToken
       (\ s a -> s{_asvlBearerToken = a})
 
 -- | Part of \`parent\`. Name of the parent Service resource. Example:
--- \`apps\/myapp\/services\/default\`.
+-- apps\/myapp\/services\/default.
 asvlAppsId :: Lens' AppsServicesVersionsList Text
 asvlAppsId
   = lens _asvlAppsId (\ s a -> s{_asvlAppsId = a})
 
--- | Controls the set of fields returned in the \`List\` response.
+-- | Controls the set of fields returned in the List response.
 asvlView :: Lens' AppsServicesVersionsList (Maybe Text)
 asvlView = lens _asvlView (\ s a -> s{_asvlView = a})
 
@@ -207,7 +207,9 @@ instance GoogleRequest AppsServicesVersionsList where
         type Rs AppsServicesVersionsList =
              ListVersionsResponse
         type Scopes AppsServicesVersionsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsServicesVersionsList'{..}
           = go _asvlAppsId _asvlServicesId _asvlXgafv
               _asvlUploadProtocol

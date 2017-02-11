@@ -20,7 +20,18 @@ module Network.Google.AppEngine.Types
       appEngineService
 
     -- * OAuth Scopes
+    , cloudPlatformReadOnlyScope
+    , appEngineAdminScope
     , cloudPlatformScope
+
+    -- * OperationMetadataExperimental
+    , OperationMetadataExperimental
+    , operationMetadataExperimental
+    , omeInsertTime
+    , omeUser
+    , omeMethod
+    , omeEndTime
+    , omeTarget
 
     -- * NetworkUtilization
     , NetworkUtilization
@@ -152,6 +163,12 @@ module Network.Google.AppEngine.Types
     , sName
     , sId
 
+    -- * EndpointsAPIService
+    , EndpointsAPIService
+    , endpointsAPIService
+    , easName
+    , easConfigId
+
     -- * Location
     , Location
     , location
@@ -220,6 +237,13 @@ module Network.Google.AppEngine.Types
     , omvbEndTime
     , omvbTarget
 
+    -- * Volume
+    , Volume
+    , volume
+    , vSizeGb
+    , vName
+    , vVolumeType
+
     -- * APIEndpointHandler
     , APIEndpointHandler
     , apiEndpointHandler
@@ -233,6 +257,7 @@ module Network.Google.AppEngine.Types
     -- * Network
     , Network
     , network
+    , nSubnetworkName
     , nForwardedPorts
     , nInstanceTag
     , nName
@@ -240,6 +265,7 @@ module Network.Google.AppEngine.Types
     -- * DebugInstanceRequest
     , DebugInstanceRequest
     , debugInstanceRequest
+    , dirSSHKey
 
     -- * StaticFilesHandlerHTTPHeaders
     , StaticFilesHandlerHTTPHeaders
@@ -251,6 +277,7 @@ module Network.Google.AppEngine.Types
     , resources
     , rMemoryGb
     , rDiskGb
+    , rVolumes
     , rCPU
 
     -- * DeploymentFiles
@@ -283,43 +310,46 @@ module Network.Google.AppEngine.Types
     -- * OperationMetadataV1
     , OperationMetadataV1
     , operationMetadataV1
+    , omvEphemeralMessage
     , omvInsertTime
     , omvUser
     , omvMethod
     , omvEndTime
+    , omvWarning
     , omvTarget
 
     -- * Version
     , Version
     , version
-    , vRuntime
-    , vNobuildFilesRegex
-    , vInstanceClass
-    , vHealthCheck
-    , vEnv
-    , vDefaultExpiration
-    , vAutomaticScaling
-    , vErrorHandlers
-    , vCreatedBy
-    , vVM
-    , vHandlers
-    , vInboundServices
-    , vNetwork
-    , vResources
-    , vName
-    , vThreadsafe
-    , vBetaSettings
-    , vBasicScaling
-    , vManualScaling
-    , vAPIConfig
-    , vId
-    , vEnvVariables
-    , vServingStatus
-    , vDiskUsageBytes
-    , vCreateTime
-    , vLibraries
-    , vVersionURL
-    , vDeployment
+    , verRuntime
+    , verNobuildFilesRegex
+    , verInstanceClass
+    , verHealthCheck
+    , verEndpointsAPIService
+    , verEnv
+    , verDefaultExpiration
+    , verAutomaticScaling
+    , verErrorHandlers
+    , verCreatedBy
+    , verVM
+    , verHandlers
+    , verInboundServices
+    , verNetwork
+    , verResources
+    , verName
+    , verThreadsafe
+    , verBetaSettings
+    , verBasicScaling
+    , verManualScaling
+    , verAPIConfig
+    , verId
+    , verEnvVariables
+    , verServingStatus
+    , verDiskUsageBytes
+    , verCreateTime
+    , verLibraries
+    , verVersionURL
+    , verDeployment
 
     -- * StaticFilesHandler
     , StaticFilesHandler
@@ -392,6 +422,7 @@ module Network.Google.AppEngine.Types
     , iMemoryUsage
     , iVMStatus
     , iVMZoneName
+    , iVMIP
     , iStartTime
     , iVMId
     , iAvailability
@@ -422,6 +453,14 @@ appEngineService :: ServiceConfig
 appEngineService
   = defaultService (ServiceId "appengine:v1")
       "appengine.googleapis.com"
+
+-- | View your data across Google Cloud Platform services
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
+
+-- | View and manage your applications deployed on Google App Engine
+appEngineAdminScope :: Proxy '["https://www.googleapis.com/auth/appengine.admin"]
+appEngineAdminScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]

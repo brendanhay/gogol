@@ -35,6 +35,7 @@ library
     exposed-modules:
           Network.Google.AppEngine
         , Network.Google.AppEngine.Types
+        , Network.Google.Resource.AppEngine.Apps.Create
         , Network.Google.Resource.AppEngine.Apps.Get
         , Network.Google.Resource.AppEngine.Apps.Locations.Get
         , Network.Google.Resource.AppEngine.Apps.Locations.List
@@ -55,8 +56,6 @@ library
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.List
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
-        , Network.Google.Resource.AppEngine.Experimental.Apps.Operations.Get
-        , Network.Google.Resource.AppEngine.Experimental.Apps.Operations.List
 
     other-modules:
           Network.Google.AppEngine.Types.Product

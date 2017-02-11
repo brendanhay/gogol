@@ -191,7 +191,9 @@ allCallback
 instance GoogleRequest AppsLocationsList where
         type Rs AppsLocationsList = ListLocationsResponse
         type Scopes AppsLocationsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsLocationsList'{..}
           = go _allAppsId _allXgafv _allUploadProtocol
               (Just _allPp)

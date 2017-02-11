@@ -25,7 +25,7 @@
 -- While in \"debug mode\", the instance continues to serve live traffic.
 -- You should delete the instance when you are done debugging and then
 -- allow the system to take over and determine if another instance should
--- be started. Only applicable for instances in App Engine flexible
+-- be started.Only applicable for instances in App Engine flexible
 -- environment.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.services.versions.instances.debug@.
@@ -84,7 +84,7 @@ type AppsServicesVersionsInstancesDebugResource =
 -- While in \"debug mode\", the instance continues to serve live traffic.
 -- You should delete the instance when you are done debugging and then
 -- allow the system to take over and determine if another instance should
--- be started. Only applicable for instances in App Engine flexible
+-- be started.Only applicable for instances in App Engine flexible
 -- environment.
 --
 -- /See:/ 'appsServicesVersionsInstancesDebug' smart constructor.
@@ -204,7 +204,7 @@ asvidBearerToken
       (\ s a -> s{_asvidBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1\`.
+-- apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1.
 asvidAppsId :: Lens' AppsServicesVersionsInstancesDebug Text
 asvidAppsId
   = lens _asvidAppsId (\ s a -> s{_asvidAppsId = a})
