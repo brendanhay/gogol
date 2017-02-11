@@ -38,8 +38,8 @@ library
         , Network.Google.Resource.DNS.Changes.Create
         , Network.Google.Resource.DNS.Changes.Get
         , Network.Google.Resource.DNS.Changes.List
-        , Network.Google.Resource.DNS.DNSkeys.Get
-        , Network.Google.Resource.DNS.DNSkeys.List
+        , Network.Google.Resource.DNS.DNSKeys.Get
+        , Network.Google.Resource.DNS.DNSKeys.List
         , Network.Google.Resource.DNS.ManagedZoneOperations.Get
         , Network.Google.Resource.DNS.ManagedZoneOperations.List
         , Network.Google.Resource.DNS.ManagedZones.Create

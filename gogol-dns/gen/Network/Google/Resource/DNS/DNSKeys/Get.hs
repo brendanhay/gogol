@@ -13,7 +13,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
--- Module      : Network.Google.Resource.DNS.DNSkeys.Get
+-- Module      : Network.Google.Resource.DNS.DNSKeys.Get
 -- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -22,30 +22,30 @@
 --
 -- Fetch the representation of an existing DnsKey.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.dnskeys.get@.
-module Network.Google.Resource.DNS.DNSkeys.Get
+-- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.dnsKeys.get@.
+module Network.Google.Resource.DNS.DNSKeys.Get
     (
     -- * REST Resource
-      DNSkeysGetResource
+      DNSKeysGetResource
 
     -- * Creating a Request
-    , dnskeysGet
-    , DNSkeysGet
+    , dnsKeysGet
+    , DNSKeysGet
 
     -- * Request Lenses
-    , dgProject
-    , dgDigestType
-    , dgDNSKeyId
-    , dgManagedZone
-    , dgClientOperationId
+    , dkgProject
+    , dkgDigestType
+    , dkgDNSKeyId
+    , dkgManagedZone
+    , dkgClientOperationId
     ) where
 
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @dns.dnskeys.get@ method which the
--- 'DNSkeysGet' request conforms to.
-type DNSkeysGetResource =
+-- | A resource alias for @dns.dnsKeys.get@ method which the
+-- 'DNSKeysGet' request conforms to.
+type DNSKeysGetResource =
      "dns" :>
        "v2beta1" :>
          "projects" :>
@@ -60,87 +60,88 @@ type DNSkeysGetResource =
 
 -- | Fetch the representation of an existing DnsKey.
 --
--- /See:/ 'dnskeysGet' smart constructor.
-data DNSkeysGet = DNSkeysGet'
-    { _dgProject           :: !Text
-    , _dgDigestType        :: !(Maybe Text)
-    , _dgDNSKeyId          :: !Text
-    , _dgManagedZone       :: !Text
-    , _dgClientOperationId :: !(Maybe Text)
+-- /See:/ 'dnsKeysGet' smart constructor.
+data DNSKeysGet = DNSKeysGet'
+    { _dkgProject           :: !Text
+    , _dkgDigestType        :: !(Maybe Text)
+    , _dkgDNSKeyId          :: !Text
+    , _dkgManagedZone       :: !Text
+    , _dkgClientOperationId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DNSkeysGet' with the minimum fields required to make a request.
+-- | Creates a value of 'DNSKeysGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dgProject'
+-- * 'dkgProject'
 --
--- * 'dgDigestType'
+-- * 'dkgDigestType'
 --
--- * 'dgDNSKeyId'
+-- * 'dkgDNSKeyId'
 --
--- * 'dgManagedZone'
+-- * 'dkgManagedZone'
 --
--- * 'dgClientOperationId'
-dnskeysGet
-    :: Text -- ^ 'dgProject'
-    -> Text -- ^ 'dgDNSKeyId'
-    -> Text -- ^ 'dgManagedZone'
-    -> DNSkeysGet
-dnskeysGet pDgProject_ pDgDNSKeyId_ pDgManagedZone_ =
-    DNSkeysGet'
-    { _dgProject = pDgProject_
-    , _dgDigestType = Nothing
-    , _dgDNSKeyId = pDgDNSKeyId_
-    , _dgManagedZone = pDgManagedZone_
-    , _dgClientOperationId = Nothing
+-- * 'dkgClientOperationId'
+dnsKeysGet
+    :: Text -- ^ 'dkgProject'
+    -> Text -- ^ 'dkgDNSKeyId'
+    -> Text -- ^ 'dkgManagedZone'
+    -> DNSKeysGet
+dnsKeysGet pDkgProject_ pDkgDNSKeyId_ pDkgManagedZone_ =
+    DNSKeysGet'
+    { _dkgProject = pDkgProject_
+    , _dkgDigestType = Nothing
+    , _dkgDNSKeyId = pDkgDNSKeyId_
+    , _dkgManagedZone = pDkgManagedZone_
+    , _dkgClientOperationId = Nothing
     }
 
 -- | Identifies the project addressed by this request.
-dgProject :: Lens' DNSkeysGet Text
-dgProject
-  = lens _dgProject (\ s a -> s{_dgProject = a})
+dkgProject :: Lens' DNSKeysGet Text
+dkgProject
+  = lens _dkgProject (\ s a -> s{_dkgProject = a})
 
 -- | An optional comma-separated list of digest types to compute and display
 -- for key signing keys. If omitted, the recommended digest type will be
 -- computed and displayed.
-dgDigestType :: Lens' DNSkeysGet (Maybe Text)
-dgDigestType
-  = lens _dgDigestType (\ s a -> s{_dgDigestType = a})
+dkgDigestType :: Lens' DNSKeysGet (Maybe Text)
+dkgDigestType
+  = lens _dkgDigestType
+      (\ s a -> s{_dkgDigestType = a})
 
 -- | The identifier of the requested DnsKey.
-dgDNSKeyId :: Lens' DNSkeysGet Text
-dgDNSKeyId
-  = lens _dgDNSKeyId (\ s a -> s{_dgDNSKeyId = a})
+dkgDNSKeyId :: Lens' DNSKeysGet Text
+dkgDNSKeyId
+  = lens _dkgDNSKeyId (\ s a -> s{_dkgDNSKeyId = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
-dgManagedZone :: Lens' DNSkeysGet Text
-dgManagedZone
-  = lens _dgManagedZone
-      (\ s a -> s{_dgManagedZone = a})
+dkgManagedZone :: Lens' DNSKeysGet Text
+dkgManagedZone
+  = lens _dkgManagedZone
+      (\ s a -> s{_dkgManagedZone = a})
 
 -- | For mutating operation requests only. An optional identifier specified
 -- by the client. Must be unique for operation resources in the Operations
 -- collection.
-dgClientOperationId :: Lens' DNSkeysGet (Maybe Text)
-dgClientOperationId
-  = lens _dgClientOperationId
-      (\ s a -> s{_dgClientOperationId = a})
+dkgClientOperationId :: Lens' DNSKeysGet (Maybe Text)
+dkgClientOperationId
+  = lens _dkgClientOperationId
+      (\ s a -> s{_dkgClientOperationId = a})
 
-instance GoogleRequest DNSkeysGet where
-        type Rs DNSkeysGet = DNSKey
-        type Scopes DNSkeysGet =
+instance GoogleRequest DNSKeysGet where
+        type Rs DNSKeysGet = DNSKey
+        type Scopes DNSKeysGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        requestClient DNSkeysGet'{..}
-          = go _dgProject _dgManagedZone _dgDNSKeyId
-              _dgDigestType
-              _dgClientOperationId
+        requestClient DNSKeysGet'{..}
+          = go _dkgProject _dkgManagedZone _dkgDNSKeyId
+              _dkgDigestType
+              _dkgClientOperationId
               (Just AltJSON)
               dNSService
           where go
-                  = buildClient (Proxy :: Proxy DNSkeysGetResource)
+                  = buildClient (Proxy :: Proxy DNSKeysGetResource)
                       mempty
