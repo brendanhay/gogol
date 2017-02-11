@@ -84,7 +84,6 @@ module Network.Google.FirebaseDynamicLinks
     , dliDynamicLinkDomain
     , dliLink
     , dliIosInfo
-    , dliIsAd
     , dliAndroidInfo
     , dliAnalyticsInfo
 
