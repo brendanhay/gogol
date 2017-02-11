@@ -481,10 +481,10 @@ instance ToJSON FormatMessage where
 -- /See:/ 'breakpoint' smart constructor.
 data Breakpoint = Breakpoint'
     { _bStatus               :: !(Maybe StatusMessage)
-    , _bLogLevel             :: !(Maybe Text)
+    , _bLogLevel             :: !(Maybe BreakpointLogLevel)
     , _bLocation             :: !(Maybe SourceLocation)
-    , _bAction               :: !(Maybe Text)
-    , _bFinalTime            :: !(Maybe Text)
+    , _bAction               :: !(Maybe BreakpointAction)
+    , _bFinalTime            :: !(Maybe DateTime')
     , _bExpressions          :: !(Maybe [Text])
     , _bLogMessageFormat     :: !(Maybe Text)
     , _bId                   :: !(Maybe Text)
@@ -494,7 +494,7 @@ data Breakpoint = Breakpoint'
     , _bStackFrames          :: !(Maybe [StackFrame])
     , _bCondition            :: !(Maybe Text)
     , _bEvaluatedExpressions :: !(Maybe [Variable])
-    , _bCreateTime           :: !(Maybe Text)
+    , _bCreateTime           :: !(Maybe DateTime')
     , _bIsFinalState         :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -567,7 +567,7 @@ bStatus :: Lens' Breakpoint (Maybe StatusMessage)
 bStatus = lens _bStatus (\ s a -> s{_bStatus = a})
 
 -- | Indicates the severity of the log. Only relevant when action is \`LOG\`.
-bLogLevel :: Lens' Breakpoint (Maybe Text)
+bLogLevel :: Lens' Breakpoint (Maybe BreakpointLogLevel)
 bLogLevel
   = lens _bLogLevel (\ s a -> s{_bLogLevel = a})
 
@@ -578,14 +578,15 @@ bLocation
 
 -- | Action that the agent should perform when the code at the breakpoint
 -- location is hit.
-bAction :: Lens' Breakpoint (Maybe Text)
+bAction :: Lens' Breakpoint (Maybe BreakpointAction)
 bAction = lens _bAction (\ s a -> s{_bAction = a})
 
 -- | Time this breakpoint was finalized as seen by the server in seconds
 -- resolution.
-bFinalTime :: Lens' Breakpoint (Maybe Text)
+bFinalTime :: Lens' Breakpoint (Maybe UTCTime)
 bFinalTime
-  = lens _bFinalTime (\ s a -> s{_bFinalTime = a})
+  = lens _bFinalTime (\ s a -> s{_bFinalTime = a}) .
+      mapping _DateTime
 
 -- | List of read-only expressions to evaluate at the breakpoint location.
 -- The expressions are composed using expressions in the programming
@@ -669,9 +670,10 @@ bEvaluatedExpressions
       . _Coerce
 
 -- | Time this breakpoint was created by the server in seconds resolution.
-bCreateTime :: Lens' Breakpoint (Maybe Text)
+bCreateTime :: Lens' Breakpoint (Maybe UTCTime)
 bCreateTime
-  = lens _bCreateTime (\ s a -> s{_bCreateTime = a})
+  = lens _bCreateTime (\ s a -> s{_bCreateTime = a}) .
+      mapping _DateTime
 
 -- | When true, indicates that this is a final result and the breakpoint
 -- state will not change from here on.
@@ -807,7 +809,7 @@ instance ToJSON GetBreakpointResponse where
 -- Captured variable name: \"p\", type: \"T*\", value: \"0x00400400\"
 -- status { is_error: true, description { format: \"unavailable\" } } } The
 -- status should describe the reason for the missing value, such as \`\`,
--- \`\`, \` \`. Note that a null pointer should not have members. 5) An
+-- \`\`, \`\`. Note that a null pointer should not have members. 5) An
 -- unnamed value: int* p = new int(7); { \/\/ Captured variable name:
 -- \"p\", value: \"0x00500500\", type: \"int*\", members { value: \"7\",
 -- type: \"int\" } } 6) An unnamed pointer where the pointee was not
@@ -968,8 +970,10 @@ lbrNextWaitToken
   = lens _lbrNextWaitToken
       (\ s a -> s{_lbrNextWaitToken = a})
 
--- | List of all breakpoints with complete state. The fields \`id\` and
--- \`location\` are guaranteed to be set on each breakpoint.
+-- | List of breakpoints matching the request. The fields \`id\` and
+-- \`location\` are guaranteed to be set on each breakpoint. The fields:
+-- \`stack_frames\`, \`evaluated_expressions\` and \`variable_table\` are
+-- cleared on each breakpoint regardless of it\'s status.
 lbrBreakpoints :: Lens' ListBreakpointsResponse [Breakpoint]
 lbrBreakpoints
   = lens _lbrBreakpoints
@@ -1078,7 +1082,7 @@ instance ToJSON UpdateActiveBreakpointRequest where
 --
 -- /See:/ 'statusMessage' smart constructor.
 data StatusMessage = StatusMessage'
-    { _smRefersTo    :: !(Maybe Text)
+    { _smRefersTo    :: !(Maybe StatusMessageRefersTo)
     , _smIsError     :: !(Maybe Bool)
     , _smDescription :: !(Maybe FormatMessage)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1102,7 +1106,7 @@ statusMessage =
     }
 
 -- | Reference to which the message applies.
-smRefersTo :: Lens' StatusMessage (Maybe Text)
+smRefersTo :: Lens' StatusMessage (Maybe StatusMessageRefersTo)
 smRefersTo
   = lens _smRefersTo (\ s a -> s{_smRefersTo = a})
 
@@ -1783,7 +1787,7 @@ instance ToJSON RegisterDebuggeeRequest where
 --
 -- /See:/ 'aliasContext' smart constructor.
 data AliasContext = AliasContext'
-    { _acKind :: !(Maybe Text)
+    { _acKind :: !(Maybe AliasContextKind)
     , _acName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1803,7 +1807,7 @@ aliasContext =
     }
 
 -- | The alias kind.
-acKind :: Lens' AliasContext (Maybe Text)
+acKind :: Lens' AliasContext (Maybe AliasContextKind)
 acKind = lens _acKind (\ s a -> s{_acKind = a})
 
 -- | The alias name.

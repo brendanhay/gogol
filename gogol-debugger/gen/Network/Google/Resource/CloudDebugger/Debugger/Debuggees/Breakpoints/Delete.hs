@@ -57,7 +57,7 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
            Capture "debuggeeId" Text :>
              "breakpoints" :>
                Capture "breakpointId" Text :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
                      QueryParam "pp" Bool :>
                        QueryParam "access_token" Text :>
@@ -72,7 +72,7 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsDelete' smart constructor.
 data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete'
-    { _ddbdXgafv          :: !(Maybe Text)
+    { _ddbdXgafv          :: !(Maybe Xgafv)
     , _ddbdUploadProtocol :: !(Maybe Text)
     , _ddbdPp             :: !Bool
     , _ddbdAccessToken    :: !(Maybe Text)
@@ -126,7 +126,7 @@ debuggerDebuggeesBreakpointsDelete pDdbdBreakpointId_ pDdbdDebuggeeId_ =
     }
 
 -- | V1 error format.
-ddbdXgafv :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
+ddbdXgafv :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Xgafv)
 ddbdXgafv
   = lens _ddbdXgafv (\ s a -> s{_ddbdXgafv = a})
 

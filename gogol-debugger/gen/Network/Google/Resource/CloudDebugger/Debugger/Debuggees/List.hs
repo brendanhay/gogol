@@ -54,7 +54,7 @@ type DebuggerDebuggeesListResource =
      "v2" :>
        "debugger" :>
          "debuggees" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "includeInactive" Bool :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "project" Text :>
@@ -71,7 +71,7 @@ type DebuggerDebuggeesListResource =
 --
 -- /See:/ 'debuggerDebuggeesList' smart constructor.
 data DebuggerDebuggeesList = DebuggerDebuggeesList'
-    { _ddlXgafv           :: !(Maybe Text)
+    { _ddlXgafv           :: !(Maybe Xgafv)
     , _ddlIncludeInactive :: !(Maybe Bool)
     , _ddlUploadProtocol  :: !(Maybe Text)
     , _ddlProject         :: !(Maybe Text)
@@ -123,7 +123,7 @@ debuggerDebuggeesList =
     }
 
 -- | V1 error format.
-ddlXgafv :: Lens' DebuggerDebuggeesList (Maybe Text)
+ddlXgafv :: Lens' DebuggerDebuggeesList (Maybe Xgafv)
 ddlXgafv = lens _ddlXgafv (\ s a -> s{_ddlXgafv = a})
 
 -- | When set to \`true\`, the result includes all debuggees. Otherwise, the

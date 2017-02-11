@@ -57,7 +57,7 @@ type DebuggerDebuggeesBreakpointsSetResource =
            Capture "debuggeeId" Text :>
              "breakpoints" :>
                "set" :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
                      QueryParam "pp" Bool :>
                        QueryParam "access_token" Text :>
@@ -73,7 +73,7 @@ type DebuggerDebuggeesBreakpointsSetResource =
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsSet' smart constructor.
 data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet'
-    { _ddbsXgafv          :: !(Maybe Text)
+    { _ddbsXgafv          :: !(Maybe Xgafv)
     , _ddbsUploadProtocol :: !(Maybe Text)
     , _ddbsPp             :: !Bool
     , _ddbsAccessToken    :: !(Maybe Text)
@@ -127,7 +127,7 @@ debuggerDebuggeesBreakpointsSet pDdbsPayload_ pDdbsDebuggeeId_ =
     }
 
 -- | V1 error format.
-ddbsXgafv :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
+ddbsXgafv :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Xgafv)
 ddbsXgafv
   = lens _ddbsXgafv (\ s a -> s{_ddbsXgafv = a})
 

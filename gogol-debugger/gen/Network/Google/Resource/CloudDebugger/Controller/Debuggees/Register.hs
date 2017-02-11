@@ -60,7 +60,7 @@ type ControllerDebuggeesRegisterResource =
        "controller" :>
          "debuggees" :>
            "register" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
@@ -82,7 +82,7 @@ type ControllerDebuggeesRegisterResource =
 --
 -- /See:/ 'controllerDebuggeesRegister' smart constructor.
 data ControllerDebuggeesRegister = ControllerDebuggeesRegister'
-    { _cdrXgafv          :: !(Maybe Text)
+    { _cdrXgafv          :: !(Maybe Xgafv)
     , _cdrUploadProtocol :: !(Maybe Text)
     , _cdrPp             :: !Bool
     , _cdrAccessToken    :: !(Maybe Text)
@@ -127,7 +127,7 @@ controllerDebuggeesRegister pCdrPayload_ =
     }
 
 -- | V1 error format.
-cdrXgafv :: Lens' ControllerDebuggeesRegister (Maybe Text)
+cdrXgafv :: Lens' ControllerDebuggeesRegister (Maybe Xgafv)
 cdrXgafv = lens _cdrXgafv (\ s a -> s{_cdrXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

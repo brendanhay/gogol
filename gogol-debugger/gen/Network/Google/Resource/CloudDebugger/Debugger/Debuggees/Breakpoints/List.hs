@@ -60,7 +60,7 @@ type DebuggerDebuggeesBreakpointsListResource =
          "debuggees" :>
            Capture "debuggeeId" Text :>
              "breakpoints" :>
-               QueryParam "$.xgafv" Text :>
+               QueryParam "$.xgafv" Xgafv :>
                  QueryParam "includeInactive" Bool :>
                    QueryParam "upload_protocol" Text :>
                      QueryParam "pp" Bool :>
@@ -80,7 +80,7 @@ type DebuggerDebuggeesBreakpointsListResource =
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsList' smart constructor.
 data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList'
-    { _ddblXgafv           :: !(Maybe Text)
+    { _ddblXgafv           :: !(Maybe Xgafv)
     , _ddblIncludeInactive :: !(Maybe Bool)
     , _ddblUploadProtocol  :: !(Maybe Text)
     , _ddblPp              :: !Bool
@@ -149,7 +149,7 @@ debuggerDebuggeesBreakpointsList pDdblDebuggeeId_ =
     }
 
 -- | V1 error format.
-ddblXgafv :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
+ddblXgafv :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Xgafv)
 ddblXgafv
   = lens _ddblXgafv (\ s a -> s{_ddblXgafv = a})
 
@@ -188,8 +188,8 @@ ddblUploadType
   = lens _ddblUploadType
       (\ s a -> s{_ddblUploadType = a})
 
--- | When set to \`true\`, the response breakpoints are stripped of the
--- results fields: \`stack_frames\`, \`evaluated_expressions\` and
+-- | This field is deprecated. The following fields are always stripped out
+-- of the result: \`stack_frames\`, \`evaluated_expressions\` and
 -- \`variable_table\`.
 ddblStripResults :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Bool)
 ddblStripResults
