@@ -25,19 +25,19 @@ data FaceAnnotationUnderExposedLikelihood
       -- Unknown likelihood.
     | VeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | Unlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | Possible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | Likely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | VeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationUnderExposedLikelihood
@@ -74,19 +74,19 @@ data FaceAnnotationHeadwearLikelihood
       -- Unknown likelihood.
     | FAHLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | FAHLUnlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | FAHLPossible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | FAHLLikely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | FAHLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationHeadwearLikelihood
@@ -116,26 +116,26 @@ instance FromJSON FaceAnnotationHeadwearLikelihood where
 instance ToJSON FaceAnnotationHeadwearLikelihood where
     toJSON = toJSONText
 
--- | Represents the adult contents likelihood for the image.
+-- | Represents the adult content likelihood for the image.
 data SafeSearchAnnotationAdult
     = SSAAUnknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
     | SSAAVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | SSAAUnlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | SSAAPossible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | SSAALikely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | SSAAVeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationAdult
@@ -172,19 +172,19 @@ data FaceAnnotationAngerLikelihood
       -- Unknown likelihood.
     | FAALVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | FAALUnlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | FAALPossible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | FAALLikely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | FAALVeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationAngerLikelihood
@@ -214,26 +214,26 @@ instance FromJSON FaceAnnotationAngerLikelihood where
 instance ToJSON FaceAnnotationAngerLikelihood where
     toJSON = toJSONText
 
--- | Likelihood this is a medical image.
+-- | Likelihood that this is a medical image.
 data SafeSearchAnnotationMedical
     = SSAMUnknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
     | SSAMVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | SSAMUnlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | SSAMPossible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | SSAMLikely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | SSAMVeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationMedical
@@ -270,19 +270,19 @@ data FaceAnnotationBlurredLikelihood
       -- Unknown likelihood.
     | FABLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | FABLUnlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | FABLPossible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | FABLLikely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | FABLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationBlurredLikelihood
@@ -319,19 +319,19 @@ data SafeSearchAnnotationViolence
       -- Unknown likelihood.
     | SSAVVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | SSAVUnlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | SSAVPossible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | SSAVLikely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | SSAVVeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationViolence
@@ -383,12 +383,10 @@ data FeatureType
       -- Run OCR.
     | SafeSearchDetection
       -- ^ @SAFE_SEARCH_DETECTION@
-      -- Run various computer vision models to compute image safe-search
-      -- properties.
+      -- Run computer vision models to compute image safe-search properties.
     | ImageProperties
       -- ^ @IMAGE_PROPERTIES@
-      -- Compute a set of properties about the image (such as the image\'s
-      -- dominant colors).
+      -- Compute a set of image properties, such as the image\'s dominant colors.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FeatureType
@@ -645,27 +643,27 @@ instance FromJSON Xgafv where
 instance ToJSON Xgafv where
     toJSON = toJSONText
 
--- | Spoof likelihood. The likelihood that an obvious modification was made
--- to the image\'s canonical version to make it appear funny or offensive.
+-- | Spoof likelihood. The likelihood that an modification was made to the
+-- image\'s canonical version to make it appear funny or offensive.
 data SafeSearchAnnotationSpoof
     = SSASUnknown
       -- ^ @UNKNOWN@
       -- Unknown likelihood.
     | SSASVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | SSASUnlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | SSASPossible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | SSASLikely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | SSASVeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationSpoof
@@ -702,19 +700,19 @@ data FaceAnnotationSurpriseLikelihood
       -- Unknown likelihood.
     | FASLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | FASLUnlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | FASLPossible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | FASLLikely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | FASLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationSurpriseLikelihood
@@ -751,19 +749,19 @@ data FaceAnnotationSorrowLikelihood
       -- Unknown likelihood.
     | FVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | FUnlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | FPossible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | FLikely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | FVeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationSorrowLikelihood
@@ -800,19 +798,19 @@ data FaceAnnotationJoyLikelihood
       -- Unknown likelihood.
     | FAJLVeryUnlikely
       -- ^ @VERY_UNLIKELY@
-      -- The image very unlikely belongs to the vertical specified.
+      -- It is very unlikely that the image belongs to the specified vertical.
     | FAJLUnlikely
       -- ^ @UNLIKELY@
-      -- The image unlikely belongs to the vertical specified.
+      -- It is unlikely that the image belongs to the specified vertical.
     | FAJLPossible
       -- ^ @POSSIBLE@
-      -- The image possibly belongs to the vertical specified.
+      -- It is possible that the image belongs to the specified vertical.
     | FAJLLikely
       -- ^ @LIKELY@
-      -- The image likely belongs to the vertical specified.
+      -- It is likely that the image belongs to the specified vertical.
     | FAJLVeryLikely
       -- ^ @VERY_LIKELY@
-      -- The image very likely belongs to the vertical specified.
+      -- It is very likely that the image belongs to the specified vertical.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationJoyLikelihood
