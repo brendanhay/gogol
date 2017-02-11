@@ -346,6 +346,7 @@ module Network.Google.Storage
     , Object
     , object'
     , objEtag
+    , objTimeStorageClassUpdated
     , objSize
     , objKind
     , objTimeDeleted

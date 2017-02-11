@@ -1332,32 +1332,33 @@ instance ToJSON ChannelParams where
 --
 -- /See:/ 'object'' smart constructor.
 data Object = Object'
-    { _objEtag               :: !(Maybe Text)
-    , _objSize               :: !(Maybe (Textual Word64))
-    , _objKind               :: !Text
-    , _objTimeDeleted        :: !(Maybe DateTime')
-    , _objCrc32c             :: !(Maybe Text)
-    , _objCustomerEncryption :: !(Maybe ObjectCustomerEncryption)
-    , _objBucket             :: !(Maybe Text)
-    , _objOwner              :: !(Maybe ObjectOwner)
-    , _objSelfLink           :: !(Maybe Text)
-    , _objMediaLink          :: !(Maybe Text)
-    , _objComponentCount     :: !(Maybe (Textual Int32))
-    , _objName               :: !(Maybe Text)
-    , _objStorageClass       :: !(Maybe Text)
-    , _objContentEncoding    :: !(Maybe Text)
-    , _objMetadata           :: !(Maybe ObjectMetadata)
-    , _objTimeCreated        :: !(Maybe DateTime')
-    , _objId                 :: !(Maybe Text)
-    , _objUpdated            :: !(Maybe DateTime')
-    , _objContentLanguage    :: !(Maybe Text)
-    , _objCacheControl       :: !(Maybe Text)
-    , _objMetageneration     :: !(Maybe (Textual Int64))
-    , _objGeneration         :: !(Maybe (Textual Int64))
-    , _objACL                :: !(Maybe [ObjectAccessControl])
-    , _objContentDisPosition :: !(Maybe Text)
-    , _objMD5Hash            :: !(Maybe Text)
-    , _objContentType        :: !(Maybe Text)
+    { _objEtag                    :: !(Maybe Text)
+    , _objTimeStorageClassUpdated :: !(Maybe DateTime')
+    , _objSize                    :: !(Maybe (Textual Word64))
+    , _objKind                    :: !Text
+    , _objTimeDeleted             :: !(Maybe DateTime')
+    , _objCrc32c                  :: !(Maybe Text)
+    , _objCustomerEncryption      :: !(Maybe ObjectCustomerEncryption)
+    , _objBucket                  :: !(Maybe Text)
+    , _objOwner                   :: !(Maybe ObjectOwner)
+    , _objSelfLink                :: !(Maybe Text)
+    , _objMediaLink               :: !(Maybe Text)
+    , _objComponentCount          :: !(Maybe (Textual Int32))
+    , _objName                    :: !(Maybe Text)
+    , _objStorageClass            :: !(Maybe Text)
+    , _objContentEncoding         :: !(Maybe Text)
+    , _objMetadata                :: !(Maybe ObjectMetadata)
+    , _objTimeCreated             :: !(Maybe DateTime')
+    , _objId                      :: !(Maybe Text)
+    , _objUpdated                 :: !(Maybe DateTime')
+    , _objContentLanguage         :: !(Maybe Text)
+    , _objCacheControl            :: !(Maybe Text)
+    , _objMetageneration          :: !(Maybe (Textual Int64))
+    , _objGeneration              :: !(Maybe (Textual Int64))
+    , _objACL                     :: !(Maybe [ObjectAccessControl])
+    , _objContentDisPosition      :: !(Maybe Text)
+    , _objMD5Hash                 :: !(Maybe Text)
+    , _objContentType             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Object' with the minimum fields required to make a request.
@@ -1365,6 +1366,8 @@ data Object = Object'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'objEtag'
+--
+-- * 'objTimeStorageClassUpdated'
 --
 -- * 'objSize'
 --
@@ -1420,6 +1423,7 @@ object'
 object' =
     Object'
     { _objEtag = Nothing
+    , _objTimeStorageClassUpdated = Nothing
     , _objSize = Nothing
     , _objKind = "storage#object"
     , _objTimeDeleted = Nothing
@@ -1450,6 +1454,14 @@ object' =
 -- | HTTP 1.1 Entity tag for the object.
 objEtag :: Lens' Object (Maybe Text)
 objEtag = lens _objEtag (\ s a -> s{_objEtag = a})
+
+-- | The time at which the object\'s storage class was last changed. When the
+-- object is initially created, it will be set to timeCreated.
+objTimeStorageClassUpdated :: Lens' Object (Maybe UTCTime)
+objTimeStorageClassUpdated
+  = lens _objTimeStorageClassUpdated
+      (\ s a -> s{_objTimeStorageClassUpdated = a})
+      . mapping _DateTime
 
 -- | Content-Length of the data in bytes.
 objSize :: Lens' Object (Maybe Word64)
@@ -1609,8 +1621,9 @@ instance FromJSON Object where
           = withObject "Object"
               (\ o ->
                  Object' <$>
-                   (o .:? "etag") <*> (o .:? "size") <*>
-                     (o .:? "kind" .!= "storage#object")
+                   (o .:? "etag") <*> (o .:? "timeStorageClassUpdated")
+                     <*> (o .:? "size")
+                     <*> (o .:? "kind" .!= "storage#object")
                      <*> (o .:? "timeDeleted")
                      <*> (o .:? "crc32c")
                      <*> (o .:? "customerEncryption")
@@ -1639,8 +1652,10 @@ instance ToJSON Object where
         toJSON Object'{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _objEtag, ("size" .=) <$> _objSize,
-                  Just ("kind" .= _objKind),
+                 [("etag" .=) <$> _objEtag,
+                  ("timeStorageClassUpdated" .=) <$>
+                    _objTimeStorageClassUpdated,
+                  ("size" .=) <$> _objSize, Just ("kind" .= _objKind),
                   ("timeDeleted" .=) <$> _objTimeDeleted,
                   ("crc32c" .=) <$> _objCrc32c,
                   ("customerEncryption" .=) <$> _objCustomerEncryption,
