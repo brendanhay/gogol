@@ -53,7 +53,7 @@ type ProjectsTestIAMPermissionsResource =
      "v1" :>
        "projects" :>
          CaptureMode "resource" "testIamPermissions" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -68,7 +68,7 @@ type ProjectsTestIAMPermissionsResource =
 --
 -- /See:/ 'projectsTestIAMPermissions' smart constructor.
 data ProjectsTestIAMPermissions = ProjectsTestIAMPermissions'
-    { _ptipXgafv          :: !(Maybe Text)
+    { _ptipXgafv          :: !(Maybe Xgafv)
     , _ptipUploadProtocol :: !(Maybe Text)
     , _ptipPp             :: !Bool
     , _ptipAccessToken    :: !(Maybe Text)
@@ -118,7 +118,7 @@ projectsTestIAMPermissions pPtipPayload_ pPtipResource_ =
     }
 
 -- | V1 error format.
-ptipXgafv :: Lens' ProjectsTestIAMPermissions (Maybe Text)
+ptipXgafv :: Lens' ProjectsTestIAMPermissions (Maybe Xgafv)
 ptipXgafv
   = lens _ptipXgafv (\ s a -> s{_ptipXgafv = a})
 

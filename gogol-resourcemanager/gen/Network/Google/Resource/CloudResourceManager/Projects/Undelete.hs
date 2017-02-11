@@ -57,7 +57,7 @@ type ProjectsUndeleteResource =
      "v1" :>
        "projects" :>
          CaptureMode "projectId" "undelete" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -76,7 +76,7 @@ type ProjectsUndeleteResource =
 --
 -- /See:/ 'projectsUndelete' smart constructor.
 data ProjectsUndelete = ProjectsUndelete'
-    { _puXgafv          :: !(Maybe Text)
+    { _puXgafv          :: !(Maybe Xgafv)
     , _puUploadProtocol :: !(Maybe Text)
     , _puPp             :: !Bool
     , _puAccessToken    :: !(Maybe Text)
@@ -126,7 +126,7 @@ projectsUndelete pPuPayload_ pPuProjectId_ =
     }
 
 -- | V1 error format.
-puXgafv :: Lens' ProjectsUndelete (Maybe Text)
+puXgafv :: Lens' ProjectsUndelete (Maybe Xgafv)
 puXgafv = lens _puXgafv (\ s a -> s{_puXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

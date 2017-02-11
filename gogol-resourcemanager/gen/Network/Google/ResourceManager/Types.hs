@@ -58,6 +58,9 @@ module Network.Google.ResourceManager.Types
     , organizationOwner
     , ooDirectoryCustomerId
 
+    -- * OrganizationLifecycleState
+    , OrganizationLifecycleState (..)
+
     -- * Project
     , Project
     , project
@@ -82,6 +85,9 @@ module Network.Google.ResourceManager.Types
     , Empty
     , empty
 
+    -- * FolderOperationErrorErrorMessageId
+    , FolderOperationErrorErrorMessageId (..)
+
     -- * ProjectCreationStatus
     , ProjectCreationStatus
     , projectCreationStatus
@@ -99,21 +105,39 @@ module Network.Google.ResourceManager.Types
     , folderOperationError
     , foeErrorMessageId
 
+    -- * FolderOperationOperationType
+    , FolderOperationOperationType (..)
+
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
     , siprPolicy
+
+    -- * ProjectLifecycleState
+    , ProjectLifecycleState (..)
+
+    -- * Xgafv
+    , Xgafv (..)
 
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
     , tiprPermissions
 
+    -- * GetAncestryRequest
+    , GetAncestryRequest
+    , getAncestryRequest
+
     -- * SearchOrganizationsResponse
     , SearchOrganizationsResponse
     , searchOrganizationsResponse
     , sorNextPageToken
     , sorOrganizations
+
+    -- * GetAncestryResponse
+    , GetAncestryResponse
+    , getAncestryResponse
+    , garAncestor
 
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -153,6 +177,11 @@ module Network.Google.ResourceManager.Types
     , orgName
     , orgDisplayName
     , orgLifecycleState
+
+    -- * Ancestor
+    , Ancestor
+    , ancestor
+    , aResourceId
 
     -- * OperationResponse
     , OperationResponse

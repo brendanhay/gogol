@@ -52,7 +52,7 @@ import           Network.Google.ResourceManager.Types
 type OrganizationsGetResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -66,7 +66,7 @@ type OrganizationsGetResource =
 --
 -- /See:/ 'organizationsGet' smart constructor.
 data OrganizationsGet = OrganizationsGet'
-    { _oggXgafv          :: !(Maybe Text)
+    { _oggXgafv          :: !(Maybe Xgafv)
     , _oggUploadProtocol :: !(Maybe Text)
     , _oggPp             :: !Bool
     , _oggAccessToken    :: !(Maybe Text)
@@ -111,7 +111,7 @@ organizationsGet pOggName_ =
     }
 
 -- | V1 error format.
-oggXgafv :: Lens' OrganizationsGet (Maybe Text)
+oggXgafv :: Lens' OrganizationsGet (Maybe Xgafv)
 oggXgafv = lens _oggXgafv (\ s a -> s{_oggXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

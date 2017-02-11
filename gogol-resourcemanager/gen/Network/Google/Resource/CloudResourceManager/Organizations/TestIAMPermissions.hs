@@ -54,7 +54,7 @@ import           Network.Google.ResourceManager.Types
 type OrganizationsTestIAMPermissionsResource =
      "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -71,7 +71,7 @@ type OrganizationsTestIAMPermissionsResource =
 --
 -- /See:/ 'organizationsTestIAMPermissions' smart constructor.
 data OrganizationsTestIAMPermissions = OrganizationsTestIAMPermissions'
-    { _otipXgafv          :: !(Maybe Text)
+    { _otipXgafv          :: !(Maybe Xgafv)
     , _otipUploadProtocol :: !(Maybe Text)
     , _otipPp             :: !Bool
     , _otipAccessToken    :: !(Maybe Text)
@@ -121,7 +121,7 @@ organizationsTestIAMPermissions pOtipPayload_ pOtipResource_ =
     }
 
 -- | V1 error format.
-otipXgafv :: Lens' OrganizationsTestIAMPermissions (Maybe Text)
+otipXgafv :: Lens' OrganizationsTestIAMPermissions (Maybe Xgafv)
 otipXgafv
   = lens _otipXgafv (\ s a -> s{_otipXgafv = a})
 

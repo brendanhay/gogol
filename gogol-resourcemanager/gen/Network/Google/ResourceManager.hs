@@ -58,6 +58,9 @@ module Network.Google.ResourceManager
     -- ** cloudresourcemanager.projects.get
     , module Network.Google.Resource.CloudResourceManager.Projects.Get
 
+    -- ** cloudresourcemanager.projects.getAncestry
+    , module Network.Google.Resource.CloudResourceManager.Projects.GetAncestry
+
     -- ** cloudresourcemanager.projects.getIamPolicy
     , module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
 
@@ -113,6 +116,9 @@ module Network.Google.ResourceManager
     , organizationOwner
     , ooDirectoryCustomerId
 
+    -- ** OrganizationLifecycleState
+    , OrganizationLifecycleState (..)
+
     -- ** Project
     , Project
     , project
@@ -137,6 +143,9 @@ module Network.Google.ResourceManager
     , Empty
     , empty
 
+    -- ** FolderOperationErrorErrorMessageId
+    , FolderOperationErrorErrorMessageId (..)
+
     -- ** ProjectCreationStatus
     , ProjectCreationStatus
     , projectCreationStatus
@@ -154,21 +163,39 @@ module Network.Google.ResourceManager
     , folderOperationError
     , foeErrorMessageId
 
+    -- ** FolderOperationOperationType
+    , FolderOperationOperationType (..)
+
     -- ** SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
     , siprPolicy
+
+    -- ** ProjectLifecycleState
+    , ProjectLifecycleState (..)
+
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
     , tiprPermissions
 
+    -- ** GetAncestryRequest
+    , GetAncestryRequest
+    , getAncestryRequest
+
     -- ** SearchOrganizationsResponse
     , SearchOrganizationsResponse
     , searchOrganizationsResponse
     , sorNextPageToken
     , sorOrganizations
+
+    -- ** GetAncestryResponse
+    , GetAncestryResponse
+    , getAncestryResponse
+    , garAncestor
 
     -- ** TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
@@ -209,6 +236,11 @@ module Network.Google.ResourceManager
     , orgDisplayName
     , orgLifecycleState
 
+    -- ** Ancestor
+    , Ancestor
+    , ancestor
+    , aResourceId
+
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
@@ -235,6 +267,7 @@ import           Network.Google.Resource.CloudResourceManager.Organizations.Test
 import           Network.Google.Resource.CloudResourceManager.Projects.Create
 import           Network.Google.Resource.CloudResourceManager.Projects.Delete
 import           Network.Google.Resource.CloudResourceManager.Projects.Get
+import           Network.Google.Resource.CloudResourceManager.Projects.GetAncestry
 import           Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
 import           Network.Google.Resource.CloudResourceManager.Projects.List
 import           Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
@@ -262,5 +295,6 @@ type ResourceManagerAPI =
        :<|> ProjectsCreateResource
        :<|> ProjectsSetIAMPolicyResource
        :<|> ProjectsTestIAMPermissionsResource
+       :<|> ProjectsGetAncestryResource
        :<|> ProjectsDeleteResource
        :<|> ProjectsUpdateResource

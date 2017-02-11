@@ -54,7 +54,7 @@ import           Network.Google.ResourceManager.Types
 type OrganizationsSearchResource =
      "v1" :>
        "organizations:search" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -72,7 +72,7 @@ type OrganizationsSearchResource =
 --
 -- /See:/ 'organizationsSearch' smart constructor.
 data OrganizationsSearch = OrganizationsSearch'
-    { _osXgafv          :: !(Maybe Text)
+    { _osXgafv          :: !(Maybe Xgafv)
     , _osUploadProtocol :: !(Maybe Text)
     , _osPp             :: !Bool
     , _osAccessToken    :: !(Maybe Text)
@@ -117,7 +117,7 @@ organizationsSearch pOsPayload_ =
     }
 
 -- | V1 error format.
-osXgafv :: Lens' OrganizationsSearch (Maybe Text)
+osXgafv :: Lens' OrganizationsSearch (Maybe Xgafv)
 osXgafv = lens _osXgafv (\ s a -> s{_osXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

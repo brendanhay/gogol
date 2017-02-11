@@ -64,7 +64,7 @@ type ProjectsDeleteResource =
      "v1" :>
        "projects" :>
          Capture "projectId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -89,7 +89,7 @@ type ProjectsDeleteResource =
 --
 -- /See:/ 'projectsDelete' smart constructor.
 data ProjectsDelete = ProjectsDelete'
-    { _pdXgafv          :: !(Maybe Text)
+    { _pdXgafv          :: !(Maybe Xgafv)
     , _pdUploadProtocol :: !(Maybe Text)
     , _pdPp             :: !Bool
     , _pdAccessToken    :: !(Maybe Text)
@@ -134,7 +134,7 @@ projectsDelete pPdProjectId_ =
     }
 
 -- | V1 error format.
-pdXgafv :: Lens' ProjectsDelete (Maybe Text)
+pdXgafv :: Lens' ProjectsDelete (Maybe Xgafv)
 pdXgafv = lens _pdXgafv (\ s a -> s{_pdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
