@@ -23,7 +23,7 @@
 -- Reclaims a student submission on behalf of the student that owns it.
 -- Reclaiming a student submission transfers ownership of attached Drive
 -- files to the student and update the submission state. Only the student
--- that ownes the requested student submission may call this method, and
+-- that owns the requested student submission may call this method, and
 -- only for a student submission that has been turned in. This request must
 -- be made by the Developer Console project of the [OAuth client
 -- ID](https:\/\/support.google.com\/cloud\/answer\/6158849) used to create
@@ -89,7 +89,7 @@ type CoursesCourseWorkStudentSubmissionsReclaimResource
 -- | Reclaims a student submission on behalf of the student that owns it.
 -- Reclaiming a student submission transfers ownership of attached Drive
 -- files to the student and update the submission state. Only the student
--- that ownes the requested student submission may call this method, and
+-- that owns the requested student submission may call this method, and
 -- only for a student submission that has been turned in. This request must
 -- be made by the Developer Console project of the [OAuth client
 -- ID](https:\/\/support.google.com\/cloud\/answer\/6158849) used to create

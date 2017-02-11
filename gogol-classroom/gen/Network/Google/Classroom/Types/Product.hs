@@ -188,8 +188,7 @@ cwMaxPoints
       mapping _Coerce
 
 -- | Type of this course work. The type is set when the course work is
--- created and cannot be changed. When creating course work, this must be
--- \`ASSIGNMENT\`.
+-- created and cannot be changed.
 cwWorkType :: Lens' CourseWork (Maybe Text)
 cwWorkType
   = lens _cwWorkType (\ s a -> s{_cwWorkType = a})
@@ -213,8 +212,11 @@ cwUpdateTime :: Lens' CourseWork (Maybe Text)
 cwUpdateTime
   = lens _cwUpdateTime (\ s a -> s{_cwUpdateTime = a})
 
--- | Multiple choice question details. This is populated only when
--- \`work_type\` is \`MULTIPLE_CHOICE_QUESTION\`.
+-- | Multiple choice question details. For read operations, this field is
+-- populated only when \`work_type\` is \`MULTIPLE_CHOICE_QUESTION\`. For
+-- write operations, this field must be specified when creating course work
+-- with a \`work_type\` of \`MULTIPLE_CHOICE_QUESTION\`, and it must not be
+-- set otherwise.
 cwMultipleChoiceQuestion :: Lens' CourseWork (Maybe MultipleChoiceQuestion)
 cwMultipleChoiceQuestion
   = lens _cwMultipleChoiceQuestion
@@ -251,7 +253,7 @@ cwAlternateLink
       (\ s a -> s{_cwAlternateLink = a})
 
 -- | Assignment details. This is populated only when \`work_type\` is
--- \`ASSIGNMENT\`.
+-- \`ASSIGNMENT\`. Read-only.
 cwAssignment :: Lens' CourseWork (Maybe Assignment)
 cwAssignment
   = lens _cwAssignment (\ s a -> s{_cwAssignment = a})
@@ -694,11 +696,11 @@ assignmentSubmission =
     }
 
 -- | Attachments added by the student. Drive files that correspond to
--- materials with a share mode of SUBMISSION_COPY may not exist yet if the
+-- materials with a share mode of STUDENT_COPY may not exist yet if the
 -- student has not accessed the assignment in Classroom. Some attachment
 -- metadata is only populated if the requesting user has permission to
--- access it. Identifier and alternate_link fields are available, but
--- others (e.g. title) may not be.
+-- access it. Identifier and alternate_link fields are always available,
+-- but others (e.g. title) may not be.
 asAttachments :: Lens' AssignmentSubmission [Attachment]
 asAttachments
   = lens _asAttachments
@@ -738,7 +740,7 @@ modifyAttachmentsRequest =
     }
 
 -- | Attachments to add. A student submission may not have more than 20
--- attachments. This may only contain link attachments.
+-- attachments. Form attachments are not supported.
 marAddAttachments :: Lens' ModifyAttachmentsRequest [Attachment]
 marAddAttachments
   = lens _marAddAttachments
@@ -814,8 +816,8 @@ instance ToJSON ListStudentSubmissionsResponse where
                   ("studentSubmissions" .=) <$>
                     _lssrStudentSubmissions])
 
--- | Material attached to course work. When creating attachments, only the
--- Link field may be specified.
+-- | Material attached to course work. When creating attachments, setting the
+-- \`form\` field is not supported.
 --
 -- /See:/ 'material' smart constructor.
 data Material = Material'
@@ -851,7 +853,8 @@ mDriveFile :: Lens' Material (Maybe SharedDriveFile)
 mDriveFile
   = lens _mDriveFile (\ s a -> s{_mDriveFile = a})
 
--- | Link material.
+-- | Link material. On creation, will be upgraded to a more appropriate type
+-- if possible, and this will be reflected in the response.
 mLink :: Lens' Material (Maybe Link)
 mLink = lens _mLink (\ s a -> s{_mLink = a})
 
@@ -1214,7 +1217,7 @@ instance ToJSON Invitation where
                   ("id" .=) <$> _iId])
 
 -- | Attachment added to student assignment work. When creating attachments,
--- only the Link field may be specified.
+-- setting the \`form\` field is not supported.
 --
 -- /See:/ 'attachment' smart constructor.
 data Attachment = Attachment'

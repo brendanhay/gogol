@@ -29,8 +29,10 @@
 -- Developer Console project. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
 -- to access the requested course, create course work in the requested
--- course, or for access errors. * \`INVALID_ARGUMENT\` if the request is
--- malformed. * \`NOT_FOUND\` if the requested course does not exist.
+-- course, share a Drive attachment, or for access errors. *
+-- \`INVALID_ARGUMENT\` if the request is malformed. * \`NOT_FOUND\` if the
+-- requested course does not exist. * \`FAILED_PRECONDITION\` for the
+-- following request error: * AttachmentNotVisible
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.courseWork.create@.
 module Network.Google.Resource.Classroom.Courses.CourseWork.Create
@@ -84,8 +86,10 @@ type CoursesCourseWorkCreateResource =
 -- Developer Console project. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
 -- to access the requested course, create course work in the requested
--- course, or for access errors. * \`INVALID_ARGUMENT\` if the request is
--- malformed. * \`NOT_FOUND\` if the requested course does not exist.
+-- course, share a Drive attachment, or for access errors. *
+-- \`INVALID_ARGUMENT\` if the request is malformed. * \`NOT_FOUND\` if the
+-- requested course does not exist. * \`FAILED_PRECONDITION\` for the
+-- following request error: * AttachmentNotVisible
 --
 -- /See:/ 'coursesCourseWorkCreate' smart constructor.
 data CoursesCourseWorkCreate = CoursesCourseWorkCreate'

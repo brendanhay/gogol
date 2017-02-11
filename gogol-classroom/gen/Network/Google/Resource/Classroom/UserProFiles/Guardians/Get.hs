@@ -21,14 +21,17 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns a specific guardian. This method returns the following error
--- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to view guardian information for the student identified by the
--- \`student_id\`, if guardians are not enabled for the domain in question,
--- or for other access errors. * \`INVALID_ARGUMENT\` if a \`student_id\`
--- is specified, but its format cannot be recognized (it is not an email
--- address, nor a \`student_id\` from the API, nor the literal string
--- \`me\`). * \`NOT_FOUND\` if Classroom cannot find any record of the
--- given student or \`guardian_id\`, or if the guardian has been disabled.
+-- codes: * \`PERMISSION_DENIED\` if no user that matches the provided
+-- \`student_id\` is visible to the requesting user, if the requesting user
+-- is not permitted to view guardian information for the student identified
+-- by the \`student_id\`, if guardians are not enabled for the domain in
+-- question, or for other access errors. * \`INVALID_ARGUMENT\` if a
+-- \`student_id\` is specified, but its format cannot be recognized (it is
+-- not an email address, nor a \`student_id\` from the API, nor the literal
+-- string \`me\`). * \`NOT_FOUND\` if the requesting user is permitted to
+-- view guardians for the requested \`student_id\`, but no \`Guardian\`
+-- record exists for that student that matches the provided
+-- \`guardian_id\`.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.userProfiles.guardians.get@.
 module Network.Google.Resource.Classroom.UserProFiles.Guardians.Get
@@ -73,14 +76,17 @@ type UserProFilesGuardiansGetResource =
                              QueryParam "alt" AltJSON :> Get '[JSON] Guardian
 
 -- | Returns a specific guardian. This method returns the following error
--- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to view guardian information for the student identified by the
--- \`student_id\`, if guardians are not enabled for the domain in question,
--- or for other access errors. * \`INVALID_ARGUMENT\` if a \`student_id\`
--- is specified, but its format cannot be recognized (it is not an email
--- address, nor a \`student_id\` from the API, nor the literal string
--- \`me\`). * \`NOT_FOUND\` if Classroom cannot find any record of the
--- given student or \`guardian_id\`, or if the guardian has been disabled.
+-- codes: * \`PERMISSION_DENIED\` if no user that matches the provided
+-- \`student_id\` is visible to the requesting user, if the requesting user
+-- is not permitted to view guardian information for the student identified
+-- by the \`student_id\`, if guardians are not enabled for the domain in
+-- question, or for other access errors. * \`INVALID_ARGUMENT\` if a
+-- \`student_id\` is specified, but its format cannot be recognized (it is
+-- not an email address, nor a \`student_id\` from the API, nor the literal
+-- string \`me\`). * \`NOT_FOUND\` if the requesting user is permitted to
+-- view guardians for the requested \`student_id\`, but no \`Guardian\`
+-- record exists for that student that matches the provided
+-- \`guardian_id\`.
 --
 -- /See:/ 'userProFilesGuardiansGet' smart constructor.
 data UserProFilesGuardiansGet = UserProFilesGuardiansGet'
