@@ -38,7 +38,6 @@ import           Data.Semigroup       ((<>))
 import           Data.Text            (Text)
 import qualified Data.Text            as Text
 import           Data.Text.Manipulate
-import           Gen.Orphans          ()
 import           Gen.Text
 import           Gen.TH
 import           Gen.Types.Help

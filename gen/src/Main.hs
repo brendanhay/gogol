@@ -18,6 +18,7 @@ import           Control.Error
 import           Control.Lens              hiding ((<.>))
 import           Control.Monad.State
 import           Data.List                 (nub, sort)
+import           Data.Monoid               ((<>))
 import           Data.String
 import qualified Data.Text                 as Text
 import qualified Filesystem                as FS
@@ -152,7 +153,7 @@ main = do
             let anx = _optAnnexes </> fromText modelName <.> "json"
             p <- isFile anx
             if not p
-               then say ("Skipping '" % stext % "' due to mimsing annex configuration.")
+               then say ("Skipping '" % stext % "' due to missing annex configuration.")
                          modelName
                else do
                     s <- sequence

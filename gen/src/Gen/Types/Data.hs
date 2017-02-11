@@ -31,7 +31,6 @@ import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import           Data.Text.Manipulate
-import           Gen.Orphans                  ()
 import           Gen.Types.Help
 import           Gen.Types.Id
 import           Gen.Types.NS

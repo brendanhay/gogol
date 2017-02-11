@@ -44,7 +44,7 @@ executable gogol-gen
     ghc-options:       -Wall -threaded
 
     build-depends:
-          aeson
+          aeson            >= 1
         , attoparsec
         , base             >= 4.8
         , bifunctors
@@ -55,8 +55,8 @@ executable gogol-gen
         , errors           >= 2.1.2
         , formatting
         , hashable
-        , haskell-src-exts >= 1.17.1
-        , hindent
+        , haskell-src-exts == 1.17.1
+        , hindent           < 5
         , lens
         , mtl
         , optparse-applicative
