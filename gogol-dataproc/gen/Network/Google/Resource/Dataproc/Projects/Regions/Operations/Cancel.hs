@@ -26,7 +26,9 @@
 -- \`google.rpc.Code.UNIMPLEMENTED\`. Clients can use
 -- Operations.GetOperation or other methods to check whether the
 -- cancellation succeeded or whether the operation completed despite
--- cancellation.
+-- cancellation. On successful cancellation, the operation is not deleted;
+-- instead, it becomes an operation with an Operation.error value with a
+-- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference> for @dataproc.projects.regions.operations.cancel@.
 module Network.Google.Resource.Dataproc.Projects.Regions.Operations.Cancel
@@ -72,7 +74,9 @@ type ProjectsRegionsOperationsCancelResource =
 -- \`google.rpc.Code.UNIMPLEMENTED\`. Clients can use
 -- Operations.GetOperation or other methods to check whether the
 -- cancellation succeeded or whether the operation completed despite
--- cancellation.
+-- cancellation. On successful cancellation, the operation is not deleted;
+-- instead, it becomes an operation with an Operation.error value with a
+-- google.rpc.Status.code of 1, corresponding to \`Code.CANCELLED\`.
 --
 -- /See:/ 'projectsRegionsOperationsCancel' smart constructor.
 data ProjectsRegionsOperationsCancel = ProjectsRegionsOperationsCancel'

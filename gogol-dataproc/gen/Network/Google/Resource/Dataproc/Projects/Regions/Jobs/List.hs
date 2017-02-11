@@ -41,6 +41,7 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Jobs.List
     , prjlUploadType
     , prjlBearerToken
     , prjlClusterName
+    , prjlFilter
     , prjlRegion
     , prjlPageToken
     , prjlProjectId
@@ -68,11 +69,12 @@ type ProjectsRegionsJobsListResource =
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
                                QueryParam "clusterName" Text :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "pageSize" (Textual Int32) :>
-                                     QueryParam "callback" Text :>
-                                       QueryParam "alt" AltJSON :>
-                                         Get '[JSON] ListJobsResponse
+                                 QueryParam "filter" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "pageSize" (Textual Int32) :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" AltJSON :>
+                                           Get '[JSON] ListJobsResponse
 
 -- | Lists regions\/{region}\/jobs in a project.
 --
@@ -86,6 +88,7 @@ data ProjectsRegionsJobsList = ProjectsRegionsJobsList'
     , _prjlUploadType      :: !(Maybe Text)
     , _prjlBearerToken     :: !(Maybe Text)
     , _prjlClusterName     :: !(Maybe Text)
+    , _prjlFilter          :: !(Maybe Text)
     , _prjlRegion          :: !Text
     , _prjlPageToken       :: !(Maybe Text)
     , _prjlProjectId       :: !Text
@@ -113,6 +116,8 @@ data ProjectsRegionsJobsList = ProjectsRegionsJobsList'
 --
 -- * 'prjlClusterName'
 --
+-- * 'prjlFilter'
+--
 -- * 'prjlRegion'
 --
 -- * 'prjlPageToken'
@@ -136,6 +141,7 @@ projectsRegionsJobsList pPrjlRegion_ pPrjlProjectId_ =
     , _prjlUploadType = Nothing
     , _prjlBearerToken = Nothing
     , _prjlClusterName = Nothing
+    , _prjlFilter = Nothing
     , _prjlRegion = pPrjlRegion_
     , _prjlPageToken = Nothing
     , _prjlProjectId = pPrjlProjectId_
@@ -143,7 +149,8 @@ projectsRegionsJobsList pPrjlRegion_ pPrjlProjectId_ =
     , _prjlCallback = Nothing
     }
 
--- | [Optional] Specifies enumerated categories of jobs to list.
+-- | [Optional] Specifies enumerated categories of jobs to list (default =
+-- match ALL jobs).
 prjlJobStateMatcher :: Lens' ProjectsRegionsJobsList (Maybe Text)
 prjlJobStateMatcher
   = lens _prjlJobStateMatcher
@@ -189,6 +196,20 @@ prjlClusterName
   = lens _prjlClusterName
       (\ s a -> s{_prjlClusterName = a})
 
+-- | [Optional] A filter constraining the jobs to list. Filters are
+-- case-sensitive and have the following syntax: field:value] ... or [field
+-- = value] AND [field [= value]] ... where **field** is \`status.state\`
+-- or \`labels.[KEY]\`, and \`[KEY]\` is a label key. **value** can be
+-- \`*\` to match all values. \`status.state\` can be either \`ACTIVE\` or
+-- \`INACTIVE\`. Only the logical \`AND\` operator is supported;
+-- space-separated items are treated as having an implicit \`AND\`
+-- operator. Example valid filters are: status.state:ACTIVE
+-- labels.env:staging labels.starred:* and status.state = ACTIVE AND
+-- labels.env = staging AND labels.starred = *
+prjlFilter :: Lens' ProjectsRegionsJobsList (Maybe Text)
+prjlFilter
+  = lens _prjlFilter (\ s a -> s{_prjlFilter = a})
+
 -- | [Required] The Cloud Dataproc region in which to handle the request.
 prjlRegion :: Lens' ProjectsRegionsJobsList Text
 prjlRegion
@@ -232,6 +253,7 @@ instance GoogleRequest ProjectsRegionsJobsList where
               _prjlUploadType
               _prjlBearerToken
               _prjlClusterName
+              _prjlFilter
               _prjlPageToken
               _prjlPageSize
               _prjlCallback

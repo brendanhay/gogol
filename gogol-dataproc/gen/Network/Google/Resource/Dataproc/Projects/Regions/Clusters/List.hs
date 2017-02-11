@@ -39,6 +39,7 @@ module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.List
     , prclAccessToken
     , prclUploadType
     , prclBearerToken
+    , prclFilter
     , prclRegion
     , prclPageToken
     , prclProjectId
@@ -64,11 +65,12 @@ type ProjectsRegionsClustersListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "pageSize" (Textual Int32) :>
-                                 QueryParam "callback" Text :>
-                                   QueryParam "alt" AltJSON :>
-                                     Get '[JSON] ListClustersResponse
+                             QueryParam "filter" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "pageSize" (Textual Int32) :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] ListClustersResponse
 
 -- | Lists all regions\/{region}\/clusters in a project.
 --
@@ -80,6 +82,7 @@ data ProjectsRegionsClustersList = ProjectsRegionsClustersList'
     , _prclAccessToken    :: !(Maybe Text)
     , _prclUploadType     :: !(Maybe Text)
     , _prclBearerToken    :: !(Maybe Text)
+    , _prclFilter         :: !(Maybe Text)
     , _prclRegion         :: !Text
     , _prclPageToken      :: !(Maybe Text)
     , _prclProjectId      :: !Text
@@ -103,6 +106,8 @@ data ProjectsRegionsClustersList = ProjectsRegionsClustersList'
 --
 -- * 'prclBearerToken'
 --
+-- * 'prclFilter'
+--
 -- * 'prclRegion'
 --
 -- * 'prclPageToken'
@@ -124,6 +129,7 @@ projectsRegionsClustersList pPrclRegion_ pPrclProjectId_ =
     , _prclAccessToken = Nothing
     , _prclUploadType = Nothing
     , _prclBearerToken = Nothing
+    , _prclFilter = Nothing
     , _prclRegion = pPrclRegion_
     , _prclPageToken = Nothing
     , _prclProjectId = pPrclProjectId_
@@ -164,12 +170,32 @@ prclBearerToken
   = lens _prclBearerToken
       (\ s a -> s{_prclBearerToken = a})
 
+-- | [Optional] A filter constraining the clusters to list. Filters are
+-- case-sensitive and have the following syntax: field:value [field:value]
+-- ... or field = value [AND [field = value]] ... where **field** is one of
+-- \`status.state\`, \`clusterName\`, or \`labels.[KEY]\`, and \`[KEY]\` is
+-- a label key. **value** can be \`*\` to match all values.
+-- \`status.state\` can be one of the following: \`ACTIVE\`, \`INACTIVE\`,
+-- \`CREATING\`, \`RUNNING\`, \`ERROR\`, \`DELETING\`, or \`UPDATING\`.
+-- \`ACTIVE\` contains the \`CREATING\`, \`UPDATING\`, and \`RUNNING\`
+-- states. \`INACTIVE\` contains the \`DELETING\` and \`ERROR\` states.
+-- \`clusterName\` is the name of the cluster provided at creation time.
+-- Only the logical \`AND\` operator is supported; space-separated items
+-- are treated as having an implicit \`AND\` operator. Example valid
+-- filters are: status.state:ACTIVE clusterName:mycluster
+-- labels.env:staging \\ labels.starred:* and status.state = ACTIVE AND
+-- clusterName = mycluster \\ AND labels.env = staging AND labels.starred =
+-- *
+prclFilter :: Lens' ProjectsRegionsClustersList (Maybe Text)
+prclFilter
+  = lens _prclFilter (\ s a -> s{_prclFilter = a})
+
 -- | [Required] The Cloud Dataproc region in which to handle the request.
 prclRegion :: Lens' ProjectsRegionsClustersList Text
 prclRegion
   = lens _prclRegion (\ s a -> s{_prclRegion = a})
 
--- | The standard List page token.
+-- | [Optional] The standard List page token.
 prclPageToken :: Lens' ProjectsRegionsClustersList (Maybe Text)
 prclPageToken
   = lens _prclPageToken
@@ -182,7 +208,7 @@ prclProjectId
   = lens _prclProjectId
       (\ s a -> s{_prclProjectId = a})
 
--- | The standard List page size.
+-- | [Optional] The standard List page size.
 prclPageSize :: Lens' ProjectsRegionsClustersList (Maybe Int32)
 prclPageSize
   = lens _prclPageSize (\ s a -> s{_prclPageSize = a})
@@ -206,6 +232,7 @@ instance GoogleRequest ProjectsRegionsClustersList
               _prclAccessToken
               _prclUploadType
               _prclBearerToken
+              _prclFilter
               _prclPageToken
               _prclPageSize
               _prclCallback

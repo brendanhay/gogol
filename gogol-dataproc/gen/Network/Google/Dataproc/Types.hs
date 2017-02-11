@@ -84,6 +84,11 @@ module Network.Google.Dataproc.Types
     , dcNumLocalSsds
     , dcBootDiskSizeGb
 
+    -- * ClusterOperationMetadataLabels
+    , ClusterOperationMetadataLabels
+    , clusterOperationMetadataLabels
+    , comlAddtional
+
     -- * ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
@@ -99,16 +104,29 @@ module Network.Google.Dataproc.Types
     , Cluster
     , cluster
     , cStatus
+    , cMetrics
     , cClusterUuid
     , cConfig
     , cClusterName
+    , cLabels
     , cProjectId
     , cStatusHistory
+
+    -- * JobLabels
+    , JobLabels
+    , jobLabels
+    , jlAddtional
 
     -- * SubmitJobRequest
     , SubmitJobRequest
     , submitJobRequest
     , sjrJob
+
+    -- * ClusterMetrics
+    , ClusterMetrics
+    , clusterMetrics
+    , cmYarnMetrics
+    , cmHdfsMetrics
 
     -- * Operation
     , Operation
@@ -183,6 +201,11 @@ module Network.Google.Dataproc.Types
     , niaExecutionTimeout
     , niaExecutableFile
 
+    -- * ClusterMetricsYarnMetrics
+    , ClusterMetricsYarnMetrics
+    , clusterMetricsYarnMetrics
+    , cmymAddtional
+
     -- * JobPlacement
     , JobPlacement
     , jobPlacement
@@ -193,6 +216,7 @@ module Network.Google.Dataproc.Types
     , GceClusterConfig
     , gceClusterConfig
     , gccSubnetworkURI
+    , gccInternalIPOnly
     , gccNetworkURI
     , gccZoneURI
     , gccMetadata
@@ -222,6 +246,11 @@ module Network.Google.Dataproc.Types
     , diagnoseClusterOutputLocation
     , dcolOutputURI
 
+    -- * ClusterLabels
+    , ClusterLabels
+    , clusterLabels
+    , clAddtional
+
     -- * Job
     , Job
     , job
@@ -232,6 +261,8 @@ module Network.Google.Dataproc.Types
     , jReference
     , jSparkSQLJob
     , jHadoopJob
+    , jYarnApplications
+    , jLabels
     , jPysparkJob
     , jDriverOutputResourceURI
     , jStatusHistory
@@ -260,6 +291,7 @@ module Network.Google.Dataproc.Types
     , comStatus
     , comClusterUuid
     , comClusterName
+    , comLabels
     , comOperationType
     , comStatusHistory
     , comDescription
@@ -352,6 +384,11 @@ module Network.Google.Dataproc.Types
     , pigJobScriptVariables
     , pjsvAddtional
 
+    -- * ClusterMetricsHdfsMetrics
+    , ClusterMetricsHdfsMetrics
+    , clusterMetricsHdfsMetrics
+    , cmhmAddtional
+
     -- * OperationResponse
     , OperationResponse
     , operationResponse
@@ -368,6 +405,14 @@ module Network.Google.Dataproc.Types
     , csState
     , csStateStartTime
     , csDetail
+
+    -- * YarnApplication
+    , YarnApplication
+    , yarnApplication
+    , yaTrackingURL
+    , yaState
+    , yaProgress
+    , yaName
 
     -- * PigJob
     , PigJob
