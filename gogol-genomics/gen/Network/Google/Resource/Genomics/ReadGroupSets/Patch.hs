@@ -25,7 +25,7 @@
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 -- This method supports patch semantics.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.patch@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.readgroupsets.patch@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Patch
     (
     -- * REST Resource
@@ -57,9 +57,9 @@ type ReadGroupSetsPatchResource =
      "v1" :>
        "readgroupsets" :>
          Capture "readGroupSetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "updateMask" Text :>
+               QueryParam "updateMask" FieldMask :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
@@ -76,10 +76,10 @@ type ReadGroupSetsPatchResource =
 --
 -- /See:/ 'readGroupSetsPatch' smart constructor.
 data ReadGroupSetsPatch = ReadGroupSetsPatch'
-    { _rgspXgafv          :: !(Maybe Text)
+    { _rgspXgafv          :: !(Maybe Xgafv)
     , _rgspReadGroupSetId :: !Text
     , _rgspUploadProtocol :: !(Maybe Text)
-    , _rgspUpdateMask     :: !(Maybe Text)
+    , _rgspUpdateMask     :: !(Maybe FieldMask)
     , _rgspPp             :: !Bool
     , _rgspAccessToken    :: !(Maybe Text)
     , _rgspUploadType     :: !(Maybe Text)
@@ -130,7 +130,7 @@ readGroupSetsPatch pRgspReadGroupSetId_ pRgspPayload_ =
     }
 
 -- | V1 error format.
-rgspXgafv :: Lens' ReadGroupSetsPatch (Maybe Text)
+rgspXgafv :: Lens' ReadGroupSetsPatch (Maybe Xgafv)
 rgspXgafv
   = lens _rgspXgafv (\ s a -> s{_rgspXgafv = a})
 
@@ -150,7 +150,7 @@ rgspUploadProtocol
 -- | An optional mask specifying which fields to update. Supported fields: *
 -- name. * referenceSetId. Leaving \`updateMask\` unset is equivalent to
 -- specifying all mutable fields.
-rgspUpdateMask :: Lens' ReadGroupSetsPatch (Maybe Text)
+rgspUpdateMask :: Lens' ReadGroupSetsPatch (Maybe FieldMask)
 rgspUpdateMask
   = lens _rgspUpdateMask
       (\ s a -> s{_rgspUpdateMask = a})

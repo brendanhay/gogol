@@ -22,7 +22,7 @@
 --
 -- Returns a user profile. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
--- this user profile or if no profile exists with the requested ID or for
+-- this user profile, if no profile exists with the requested ID, or for
 -- access errors.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.userProfiles.get@.
@@ -66,7 +66,7 @@ type UserProFilesGetResource =
 
 -- | Returns a user profile. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
--- this user profile or if no profile exists with the requested ID or for
+-- this user profile, if no profile exists with the requested ID, or for
 -- access errors.
 --
 -- /See:/ 'userProFilesGet' smart constructor.

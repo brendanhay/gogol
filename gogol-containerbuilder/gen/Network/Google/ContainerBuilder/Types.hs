@@ -28,6 +28,7 @@ module Network.Google.ContainerBuilder.Types
     , bsDir
     , bsArgs
     , bsEnv
+    , bsEntrypoint
     , bsWaitFor
     , bsName
     , bsId
@@ -57,6 +58,10 @@ module Network.Google.ContainerBuilder.Types
     , listOperationsResponse
     , lorNextPageToken
     , lorOperations
+
+    -- * CancelOperationRequest
+    , CancelOperationRequest
+    , cancelOperationRequest
 
     -- * Hash
     , Hash
@@ -113,6 +118,7 @@ module Network.Google.ContainerBuilder.Types
     , bId
     , bOptions
     , bProjectId
+    , bBuildTriggerId
     , bTimeout
     , bFinishTime
     , bCreateTime

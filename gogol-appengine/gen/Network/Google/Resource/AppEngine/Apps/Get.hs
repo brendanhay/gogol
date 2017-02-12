@@ -141,7 +141,7 @@ agBearerToken
       (\ s a -> s{_agBearerToken = a})
 
 -- | Part of \`name\`. Name of the Application resource to get. Example:
--- \`apps\/myapp\`.
+-- apps\/myapp.
 agAppsId :: Lens' AppsGet Text
 agAppsId = lens _agAppsId (\ s a -> s{_agAppsId = a})
 
@@ -153,7 +153,9 @@ agCallback
 instance GoogleRequest AppsGet where
         type Rs AppsGet = Application
         type Scopes AppsGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsGet'{..}
           = go _agAppsId _agXgafv _agUploadProtocol
               (Just _agPp)

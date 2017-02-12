@@ -34,7 +34,7 @@
 -- sometimes interpreted in a call-specific context. Imported VCF headers
 -- are appended to the metadata already in a variant set.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.import@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.variants.import@.
 module Network.Google.Resource.Genomics.Variants.Import
     (
     -- * REST Resource
@@ -63,7 +63,7 @@ import           Network.Google.Prelude
 type VariantsImportResource =
      "v1" :>
        "variants:import" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -90,7 +90,7 @@ type VariantsImportResource =
 --
 -- /See:/ 'variantsImport' smart constructor.
 data VariantsImport = VariantsImport'
-    { _viXgafv          :: !(Maybe Text)
+    { _viXgafv          :: !(Maybe Xgafv)
     , _viUploadProtocol :: !(Maybe Text)
     , _viPp             :: !Bool
     , _viAccessToken    :: !(Maybe Text)
@@ -135,7 +135,7 @@ variantsImport pViPayload_ =
     }
 
 -- | V1 error format.
-viXgafv :: Lens' VariantsImport (Maybe Text)
+viXgafv :: Lens' VariantsImport (Maybe Xgafv)
 viXgafv = lens _viXgafv (\ s a -> s{_viXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

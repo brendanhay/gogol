@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the statuses of multiple products in a single request.
+-- Gets the statuses of multiple products in a single request. This method
+-- can only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.productstatuses.custombatch@.
 module Network.Google.Resource.Content.Productstatuses.Custombatch
@@ -50,7 +51,8 @@ type ProductstatusesCustombatchResource =
                ReqBody '[JSON] ProductstatusesCustomBatchRequest :>
                  Post '[JSON] ProductstatusesCustomBatchResponse
 
--- | Gets the statuses of multiple products in a single request.
+-- | Gets the statuses of multiple products in a single request. This method
+-- can only be called for non-multi-client accounts.
 --
 -- /See:/ 'productstatusesCustombatch' smart constructor.
 newtype ProductstatusesCustombatch = ProductstatusesCustombatch'

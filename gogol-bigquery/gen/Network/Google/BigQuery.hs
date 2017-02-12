@@ -149,6 +149,7 @@ module Network.Google.BigQuery
     , tltiFriendlyName
     , tltiKind
     , tltiId
+    , tltiLabels
     , tltiType
 
     -- ** TableSchema
@@ -319,6 +320,7 @@ module Network.Google.BigQuery
     -- ** ExplainQueryStage
     , ExplainQueryStage
     , explainQueryStage
+    , eqsStatus
     , eqsWaitRatioMax
     , eqsRecordsWritten
     , eqsSteps
@@ -355,6 +357,7 @@ module Network.Google.BigQuery
     , jclSourceURIs
     , jclEncoding
     , jclFieldDelimiter
+    , jclNullMarker
 
     -- ** JobsListStateFilter
     , JobsListStateFilter (..)
@@ -564,6 +567,7 @@ module Network.Google.BigQuery
     , jBillingTier
     , jUndeclaredQueryParameters
     , jReferencedTables
+    , jStatementType
     , jNumDmlAffectedRows
     , jQueryPlan
     , jCacheHit
@@ -575,6 +579,11 @@ module Network.Google.BigQuery
     , jsState
     , jsErrorResult
     , jsErrors
+
+    -- ** TableLabels
+    , TableLabels
+    , tableLabels
+    , tlAddtional
 
     -- ** DataSetAccessItem
     , DataSetAccessItem
@@ -618,6 +627,7 @@ module Network.Google.BigQuery
     , tabNumRows
     , tabView
     , tabId
+    , tabLabels
     , tabType
     , tabNumLongTermBytes
     , tabExpirationTime
@@ -668,6 +678,11 @@ module Network.Google.BigQuery
     , DataSetListDataSetsItemLabels
     , dataSetListDataSetsItemLabels
     , dsldsilAddtional
+
+    -- ** TableListTablesItemLabels
+    , TableListTablesItemLabels
+    , tableListTablesItemLabels
+    , tltilAddtional
     ) where
 
 import           Network.Google.BigQuery.Types

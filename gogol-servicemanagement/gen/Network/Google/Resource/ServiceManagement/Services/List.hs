@@ -20,7 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all managed services.
+-- Lists managed services. If called without any authentication, it returns
+-- only the public services. If called with authentication, it returns all
+-- services that the caller has \"servicemanagement.services.get\"
+-- permission for. **BETA:** If the caller specifies the \`consumer_id\`,
+-- it returns only the services enabled on the consumer. The
+-- \`consumer_id\` must have the format of \"project:{PROJECT-ID}\".
 --
 -- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.list@.
 module Network.Google.Resource.ServiceManagement.Services.List
@@ -41,6 +46,7 @@ module Network.Google.Resource.ServiceManagement.Services.List
     , slBearerToken
     , slPageToken
     , slProducerProjectId
+    , slConsumerId
     , slPageSize
     , slCallback
     ) where
@@ -61,12 +67,18 @@ type ServicesListResource =
                    QueryParam "bearer_token" Text :>
                      QueryParam "pageToken" Text :>
                        QueryParam "producerProjectId" Text :>
-                         QueryParam "pageSize" (Textual Int32) :>
-                           QueryParam "callback" Text :>
-                             QueryParam "alt" AltJSON :>
-                               Get '[JSON] ListServicesResponse
+                         QueryParam "consumerId" Text :>
+                           QueryParam "pageSize" (Textual Int32) :>
+                             QueryParam "callback" Text :>
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ListServicesResponse
 
--- | Lists all managed services.
+-- | Lists managed services. If called without any authentication, it returns
+-- only the public services. If called with authentication, it returns all
+-- services that the caller has \"servicemanagement.services.get\"
+-- permission for. **BETA:** If the caller specifies the \`consumer_id\`,
+-- it returns only the services enabled on the consumer. The
+-- \`consumer_id\` must have the format of \"project:{PROJECT-ID}\".
 --
 -- /See:/ 'servicesList' smart constructor.
 data ServicesList = ServicesList'
@@ -78,6 +90,7 @@ data ServicesList = ServicesList'
     , _slBearerToken       :: !(Maybe Text)
     , _slPageToken         :: !(Maybe Text)
     , _slProducerProjectId :: !(Maybe Text)
+    , _slConsumerId        :: !(Maybe Text)
     , _slPageSize          :: !(Maybe (Textual Int32))
     , _slCallback          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -102,6 +115,8 @@ data ServicesList = ServicesList'
 --
 -- * 'slProducerProjectId'
 --
+-- * 'slConsumerId'
+--
 -- * 'slPageSize'
 --
 -- * 'slCallback'
@@ -117,6 +132,7 @@ servicesList =
     , _slBearerToken = Nothing
     , _slPageToken = Nothing
     , _slProducerProjectId = Nothing
+    , _slConsumerId = Nothing
     , _slPageSize = Nothing
     , _slCallback = Nothing
     }
@@ -164,6 +180,12 @@ slProducerProjectId
   = lens _slProducerProjectId
       (\ s a -> s{_slProducerProjectId = a})
 
+-- | Include services consumed by the specified consumer. The Google Service
+-- Management implementation accepts the following forms: - project:
+slConsumerId :: Lens' ServicesList (Maybe Text)
+slConsumerId
+  = lens _slConsumerId (\ s a -> s{_slConsumerId = a})
+
 -- | Requested size of the next page of data.
 slPageSize :: Lens' ServicesList (Maybe Int32)
 slPageSize
@@ -189,6 +211,7 @@ instance GoogleRequest ServicesList where
               _slBearerToken
               _slPageToken
               _slProducerProjectId
+              _slConsumerId
               _slPageSize
               _slCallback
               (Just AltJSON)

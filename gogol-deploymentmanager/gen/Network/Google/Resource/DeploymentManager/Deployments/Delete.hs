@@ -34,6 +34,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Delete
 
     -- * Request Lenses
     , ddProject
+    , ddDeletePolicy
     , ddDeployment
     ) where
 
@@ -50,14 +51,18 @@ type DeploymentsDeleteResource =
              "global" :>
                "deployments" :>
                  Capture "deployment" Text :>
-                   QueryParam "alt" AltJSON :> Delete '[JSON] Operation
+                   QueryParam "deletePolicy"
+                     DeploymentsDeleteDeletePolicy
+                     :>
+                     QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes a deployment and all of the resources in the deployment.
 --
 -- /See:/ 'deploymentsDelete' smart constructor.
 data DeploymentsDelete = DeploymentsDelete'
-    { _ddProject    :: !Text
-    , _ddDeployment :: !Text
+    { _ddProject      :: !Text
+    , _ddDeletePolicy :: !DeploymentsDeleteDeletePolicy
+    , _ddDeployment   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsDelete' with the minimum fields required to make a request.
@@ -65,6 +70,8 @@ data DeploymentsDelete = DeploymentsDelete'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ddProject'
+--
+-- * 'ddDeletePolicy'
 --
 -- * 'ddDeployment'
 deploymentsDelete
@@ -74,6 +81,7 @@ deploymentsDelete
 deploymentsDelete pDdProject_ pDdDeployment_ =
     DeploymentsDelete'
     { _ddProject = pDdProject_
+    , _ddDeletePolicy = Delete'
     , _ddDeployment = pDdDeployment_
     }
 
@@ -81,6 +89,12 @@ deploymentsDelete pDdProject_ pDdDeployment_ =
 ddProject :: Lens' DeploymentsDelete Text
 ddProject
   = lens _ddProject (\ s a -> s{_ddProject = a})
+
+-- | Sets the policy to use for deleting resources.
+ddDeletePolicy :: Lens' DeploymentsDelete DeploymentsDeleteDeletePolicy
+ddDeletePolicy
+  = lens _ddDeletePolicy
+      (\ s a -> s{_ddDeletePolicy = a})
 
 -- | The name of the deployment for this request.
 ddDeployment :: Lens' DeploymentsDelete Text
@@ -93,7 +107,8 @@ instance GoogleRequest DeploymentsDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.cloudman"]
         requestClient DeploymentsDelete'{..}
-          = go _ddProject _ddDeployment (Just AltJSON)
+          = go _ddProject _ddDeployment (Just _ddDeletePolicy)
+              (Just AltJSON)
               deploymentManagerService
           where go
                   = buildClient

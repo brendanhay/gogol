@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Marks an order as acknowledged.
+-- Marks an order as acknowledged. This method can only be called for
+-- non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.acknowledge@.
 module Network.Google.Resource.Content.Orders.Acknowledge
@@ -54,7 +55,8 @@ type OrdersAcknowledgeResource =
                    ReqBody '[JSON] OrdersAcknowledgeRequest :>
                      Post '[JSON] OrdersAcknowledgeResponse
 
--- | Marks an order as acknowledged.
+-- | Marks an order as acknowledged. This method can only be called for
+-- non-multi-client accounts.
 --
 -- /See:/ 'ordersAcknowledge' smart constructor.
 data OrdersAcknowledge = OrdersAcknowledge'

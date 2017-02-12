@@ -57,7 +57,7 @@ import           Network.Google.ResourceManager.Types
 type ProjectsCreateResource =
      "v1" :>
        "projects" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -77,7 +77,7 @@ type ProjectsCreateResource =
 --
 -- /See:/ 'projectsCreate' smart constructor.
 data ProjectsCreate = ProjectsCreate'
-    { _pcXgafv          :: !(Maybe Text)
+    { _pcXgafv          :: !(Maybe Xgafv)
     , _pcUploadProtocol :: !(Maybe Text)
     , _pcPp             :: !Bool
     , _pcAccessToken    :: !(Maybe Text)
@@ -122,7 +122,7 @@ projectsCreate pPcPayload_ =
     }
 
 -- | V1 error format.
-pcXgafv :: Lens' ProjectsCreate (Maybe Text)
+pcXgafv :: Lens' ProjectsCreate (Maybe Xgafv)
 pcXgafv = lens _pcXgafv (\ s a -> s{_pcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

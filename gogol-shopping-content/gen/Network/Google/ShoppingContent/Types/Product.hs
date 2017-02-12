@@ -292,8 +292,8 @@ tocEmail = lens _tocEmail (\ s a -> s{_tocEmail = a})
 -- | If set, this indicates the user explicitly chose to opt in or out of
 -- providing marketing rights to the merchant. If unset, this indicates the
 -- user has already made this choice in a previous purchase, and was thus
--- not shown the marketing right opt in\/out checkbox during the Purchases
--- on Google checkout flow. Optional.
+-- not shown the marketing right opt in\/out checkbox during the checkout
+-- flow. Optional.
 tocExplicitMarketingPreference :: Lens' TestOrderCustomer (Maybe Bool)
 tocExplicitMarketingPreference
   = lens _tocExplicitMarketingPreference
@@ -4760,11 +4760,11 @@ aaWebsiteURL :: Lens' Account (Maybe Text)
 aaWebsiteURL
   = lens _aaWebsiteURL (\ s a -> s{_aaWebsiteURL = a})
 
--- | List of linked AdWords accounts, active or pending approval. To create a
--- new link request, add a new link with status active to the list. It will
--- remain is state pending until approved or rejected in the AdWords
--- interface. To delete an active link or to cancel a link request, remove
--- it from the list.
+-- | List of linked AdWords accounts that are active or pending approval. To
+-- create a new link request, add a new link with status active to the
+-- list. It will remain in a pending state until approved or rejected
+-- either in the AdWords interface or through the AdWords API. To delete an
+-- active link, or to cancel a link request, remove it from the list.
 aaAdwordsLinks :: Lens' Account [AccountAdwordsLink]
 aaAdwordsLinks
   = lens _aaAdwordsLinks
@@ -4814,6 +4814,7 @@ data InventorySetRequest = InventorySetRequest'
     , _isrInstallment            :: !(Maybe Installment)
     , _isrSalePrice              :: !(Maybe Price)
     , _isrAvailability           :: !(Maybe Text)
+    , _isrPickup                 :: !(Maybe InventoryPickup)
     , _isrSalePriceEffectiveDate :: !(Maybe Text)
     , _isrSellOnGoogleQuantity   :: !(Maybe (Textual Word32))
     , _isrPrice                  :: !(Maybe Price)
@@ -4833,6 +4834,8 @@ data InventorySetRequest = InventorySetRequest'
 --
 -- * 'isrAvailability'
 --
+-- * 'isrPickup'
+--
 -- * 'isrSalePriceEffectiveDate'
 --
 -- * 'isrSellOnGoogleQuantity'
@@ -4847,6 +4850,7 @@ inventorySetRequest =
     , _isrInstallment = Nothing
     , _isrSalePrice = Nothing
     , _isrAvailability = Nothing
+    , _isrPickup = Nothing
     , _isrSalePriceEffectiveDate = Nothing
     , _isrSellOnGoogleQuantity = Nothing
     , _isrPrice = Nothing
@@ -4883,6 +4887,15 @@ isrAvailability
   = lens _isrAvailability
       (\ s a -> s{_isrAvailability = a})
 
+-- | Store pickup information. Only supported for local inventory. Not
+-- setting pickup means \"don\'t update\" while setting it to the empty
+-- value ({} in JSON) means \"delete\". Otherwise, pickupMethod and
+-- pickupSla must be set together, unless pickupMethod is \"not
+-- supported\".
+isrPickup :: Lens' InventorySetRequest (Maybe InventoryPickup)
+isrPickup
+  = lens _isrPickup (\ s a -> s{_isrPickup = a})
+
 -- | A date range represented by a pair of ISO 8601 dates separated by a
 -- space, comma, or slash. Both dates might be specified as \'null\' if
 -- undecided.
@@ -4912,6 +4925,7 @@ instance FromJSON InventorySetRequest where
                      (o .:? "installment")
                      <*> (o .:? "salePrice")
                      <*> (o .:? "availability")
+                     <*> (o .:? "pickup")
                      <*> (o .:? "salePriceEffectiveDate")
                      <*> (o .:? "sellOnGoogleQuantity")
                      <*> (o .:? "price"))
@@ -4925,6 +4939,7 @@ instance ToJSON InventorySetRequest where
                   ("installment" .=) <$> _isrInstallment,
                   ("salePrice" .=) <$> _isrSalePrice,
                   ("availability" .=) <$> _isrAvailability,
+                  ("pickup" .=) <$> _isrPickup,
                   ("salePriceEffectiveDate" .=) <$>
                     _isrSalePriceEffectiveDate,
                   ("sellOnGoogleQuantity" .=) <$>
@@ -7171,8 +7186,8 @@ ocEmail = lens _ocEmail (\ s a -> s{_ocEmail = a})
 -- | If set, this indicates the user explicitly chose to opt in or out of
 -- providing marketing rights to the merchant. If unset, this indicates the
 -- user has already made this choice in a previous purchase, and was thus
--- not shown the marketing right opt in\/out checkbox during the Purchases
--- on Google checkout flow.
+-- not shown the marketing right opt in\/out checkbox during the checkout
+-- flow.
 ocExplicitMarketingPreference :: Lens' OrderCustomer (Maybe Bool)
 ocExplicitMarketingPreference
   = lens _ocExplicitMarketingPreference
@@ -7404,6 +7419,7 @@ data Inventory = Inventory'
     , _iInstallment            :: !(Maybe Installment)
     , _iSalePrice              :: !(Maybe Price)
     , _iAvailability           :: !(Maybe Text)
+    , _iPickup                 :: !(Maybe InventoryPickup)
     , _iSalePriceEffectiveDate :: !(Maybe Text)
     , _iSellOnGoogleQuantity   :: !(Maybe (Textual Word32))
     , _iPrice                  :: !(Maybe Price)
@@ -7425,6 +7441,8 @@ data Inventory = Inventory'
 --
 -- * 'iAvailability'
 --
+-- * 'iPickup'
+--
 -- * 'iSalePriceEffectiveDate'
 --
 -- * 'iSellOnGoogleQuantity'
@@ -7440,6 +7458,7 @@ inventory =
     , _iInstallment = Nothing
     , _iSalePrice = Nothing
     , _iAvailability = Nothing
+    , _iPickup = Nothing
     , _iSalePriceEffectiveDate = Nothing
     , _iSellOnGoogleQuantity = Nothing
     , _iPrice = Nothing
@@ -7480,6 +7499,14 @@ iAvailability
   = lens _iAvailability
       (\ s a -> s{_iAvailability = a})
 
+-- | Store pickup information. Only supported for local inventory. Not
+-- setting pickup means \"don\'t update\" while setting it to the empty
+-- value ({} in JSON) means \"delete\". Otherwise, pickupMethod and
+-- pickupSla must be set together, unless pickupMethod is \"not
+-- supported\".
+iPickup :: Lens' Inventory (Maybe InventoryPickup)
+iPickup = lens _iPickup (\ s a -> s{_iPickup = a})
+
 -- | A date range represented by a pair of ISO 8601 dates separated by a
 -- space, comma, or slash. Both dates might be specified as \'null\' if
 -- undecided.
@@ -7511,6 +7538,7 @@ instance FromJSON Inventory where
                      <*> (o .:? "installment")
                      <*> (o .:? "salePrice")
                      <*> (o .:? "availability")
+                     <*> (o .:? "pickup")
                      <*> (o .:? "salePriceEffectiveDate")
                      <*> (o .:? "sellOnGoogleQuantity")
                      <*> (o .:? "price"))
@@ -7525,6 +7553,7 @@ instance ToJSON Inventory where
                   ("installment" .=) <$> _iInstallment,
                   ("salePrice" .=) <$> _iSalePrice,
                   ("availability" .=) <$> _iAvailability,
+                  ("pickup" .=) <$> _iPickup,
                   ("salePriceEffectiveDate" .=) <$>
                     _iSalePriceEffectiveDate,
                   ("sellOnGoogleQuantity" .=) <$>
@@ -11142,6 +11171,58 @@ instance ToJSON OrdersUpdateMerchantOrderIdResponse
               (catMaybes
                  [Just ("kind" .= _oumoirKind),
                   ("executionStatus" .=) <$> _oumoirExecutionStatus])
+
+--
+-- /See:/ 'inventoryPickup' smart constructor.
+data InventoryPickup = InventoryPickup'
+    { _ipPickupSla    :: !(Maybe Text)
+    , _ipPickupMethod :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InventoryPickup' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ipPickupSla'
+--
+-- * 'ipPickupMethod'
+inventoryPickup
+    :: InventoryPickup
+inventoryPickup =
+    InventoryPickup'
+    { _ipPickupSla = Nothing
+    , _ipPickupMethod = Nothing
+    }
+
+-- | The expected date that an order will be ready for pickup, relative to
+-- when the order is placed. Only supported for local inventory. Must be
+-- submitted together with pickupMethod.
+ipPickupSla :: Lens' InventoryPickup (Maybe Text)
+ipPickupSla
+  = lens _ipPickupSla (\ s a -> s{_ipPickupSla = a})
+
+-- | Whether store pickup is available for this offer and whether the pickup
+-- option should be shown as buy, reserve, or not supported. Only supported
+-- for local inventory. Unless the value is \"not supported\", must be
+-- submitted together with pickupSla.
+ipPickupMethod :: Lens' InventoryPickup (Maybe Text)
+ipPickupMethod
+  = lens _ipPickupMethod
+      (\ s a -> s{_ipPickupMethod = a})
+
+instance FromJSON InventoryPickup where
+        parseJSON
+          = withObject "InventoryPickup"
+              (\ o ->
+                 InventoryPickup' <$>
+                   (o .:? "pickupSla") <*> (o .:? "pickupMethod"))
+
+instance ToJSON InventoryPickup where
+        toJSON InventoryPickup'{..}
+          = object
+              (catMaybes
+                 [("pickupSla" .=) <$> _ipPickupSla,
+                  ("pickupMethod" .=) <$> _ipPickupMethod])
 
 -- | An example occurrence for a particular error.
 --

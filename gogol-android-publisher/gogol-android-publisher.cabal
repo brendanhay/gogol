@@ -88,6 +88,7 @@ library
         , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
         , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
         , Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
+        , Network.Google.Resource.AndroidPublisher.Purchases.Voidedpurchases.List
         , Network.Google.Resource.AndroidPublisher.Reviews.Get
         , Network.Google.Resource.AndroidPublisher.Reviews.List
         , Network.Google.Resource.AndroidPublisher.Reviews.Reply

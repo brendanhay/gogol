@@ -33,12 +33,6 @@ module Network.Google.YouTubeAnalytics
 
     -- * Resources
 
-    -- ** youtubeAnalytics.batchReportDefinitions.list
-    , module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
-
-    -- ** youtubeAnalytics.batchReports.list
-    , module Network.Google.Resource.YouTubeAnalytics.BatchReports.List
-
     -- ** youtubeAnalytics.groupItems.delete
     , module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
 
@@ -100,25 +94,6 @@ module Network.Google.YouTubeAnalytics
     , rtRows
     , rtColumnHeaders
 
-    -- ** BatchReportDefinition
-    , BatchReportDefinition
-    , batchReportDefinition
-    , brdStatus
-    , brdKind
-    , brdName
-    , brdId
-    , brdType
-
-    -- ** BatchReport
-    , BatchReport
-    , batchReport
-    , brTimeUpdated
-    , brKind
-    , brReportId
-    , brTimeSpan
-    , brOutputs
-    , brId
-
     -- ** GroupSnippet
     , GroupSnippet
     , groupSnippet
@@ -133,31 +108,6 @@ module Network.Google.YouTubeAnalytics
     , giResource
     , giGroupId
     , giId
-
-    -- ** BatchReportDefinitionList
-    , BatchReportDefinitionList
-    , batchReportDefinitionList
-    , brdlKind
-    , brdlItems
-
-    -- ** BatchReportList
-    , BatchReportList
-    , batchReportList
-    , brlKind
-    , brlItems
-
-    -- ** BatchReportOutputsItem
-    , BatchReportOutputsItem
-    , batchReportOutputsItem
-    , broiFormat
-    , broiDownloadURL
-    , broiType
-
-    -- ** BatchReportTimeSpan
-    , BatchReportTimeSpan
-    , batchReportTimeSpan
-    , brtsStartTime
-    , brtsEndTime
 
     -- ** GroupItemListResponse
     , GroupItemListResponse
@@ -176,8 +126,6 @@ module Network.Google.YouTubeAnalytics
     ) where
 
 import           Network.Google.Prelude
-import           Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
-import           Network.Google.Resource.YouTubeAnalytics.BatchReports.List
 import           Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
 import           Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
 import           Network.Google.Resource.YouTubeAnalytics.GroupItems.List
@@ -198,8 +146,6 @@ type YouTubeAnalyticsAPI =
        GroupsDeleteResource
        :<|> GroupsUpdateResource
        :<|> ReportsQueryResource
-       :<|> BatchReportsListResource
        :<|> GroupItemsInsertResource
        :<|> GroupItemsListResource
        :<|> GroupItemsDeleteResource
-       :<|> BatchReportDefinitionsListResource

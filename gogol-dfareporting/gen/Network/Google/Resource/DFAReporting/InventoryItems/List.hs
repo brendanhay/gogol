@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of inventory items, possibly filtered.
+-- Retrieves a list of inventory items, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.inventoryItems.list@.
 module Network.Google.Resource.DFAReporting.InventoryItems.List
@@ -53,7 +54,7 @@ import           Network.Google.Prelude
 -- 'InventoryItemsList' request conforms to.
 type InventoryItemsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "projects" :>
@@ -71,7 +72,8 @@ type InventoryItemsListResource =
                                      QueryParam "alt" AltJSON :>
                                        Get '[JSON] InventoryItemsListResponse
 
--- | Retrieves a list of inventory items, possibly filtered.
+-- | Retrieves a list of inventory items, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ 'inventoryItemsList' smart constructor.
 data InventoryItemsList = InventoryItemsList'

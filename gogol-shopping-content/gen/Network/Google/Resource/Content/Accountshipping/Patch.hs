@@ -20,8 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the shipping settings of the account. This method supports patch
--- semantics.
+-- Updates the shipping settings of the account. This method can only be
+-- called for accounts to which the managing account has access: either the
+-- managing account itself or sub-accounts if the managing account is a
+-- multi-client account. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountshipping.patch@.
 module Network.Google.Resource.Content.Accountshipping.Patch
@@ -56,8 +58,10 @@ type AccountshippingPatchResource =
                    ReqBody '[JSON] AccountShipping :>
                      Patch '[JSON] AccountShipping
 
--- | Updates the shipping settings of the account. This method supports patch
--- semantics.
+-- | Updates the shipping settings of the account. This method can only be
+-- called for accounts to which the managing account has access: either the
+-- managing account itself or sub-accounts if the managing account is a
+-- multi-client account. This method supports patch semantics.
 --
 -- /See:/ 'accountshippingPatch' smart constructor.
 data AccountshippingPatch = AccountshippingPatch'

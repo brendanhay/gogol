@@ -22,7 +22,7 @@
 --
 -- Updates price and availability of a product in your Merchant Center
 -- account. This operation does not update the expiration date of the
--- product.
+-- product. This method can only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.inventory.set@.
 module Network.Google.Resource.Content.Inventory.Set
@@ -62,7 +62,7 @@ type InventorySetResource =
 
 -- | Updates price and availability of a product in your Merchant Center
 -- account. This operation does not update the expiration date of the
--- product.
+-- product. This method can only be called for non-multi-client accounts.
 --
 -- /See:/ 'inventorySet' smart constructor.
 data InventorySet = InventorySet'

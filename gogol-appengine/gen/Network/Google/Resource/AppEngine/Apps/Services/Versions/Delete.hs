@@ -166,7 +166,7 @@ asvdBearerToken
       (\ s a -> s{_asvdBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\`.
+-- apps\/myapp\/services\/default\/versions\/v1.
 asvdAppsId :: Lens' AppsServicesVersionsDelete Text
 asvdAppsId
   = lens _asvdAppsId (\ s a -> s{_asvdAppsId = a})

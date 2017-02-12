@@ -1720,7 +1720,8 @@ adStyle =
     , _asColors = Nothing
     }
 
--- | The style of the corners in the ad.
+-- | The style of the corners in the ad (deprecated: never populated,
+-- ignored).
 asCorners :: Lens' AdStyle (Maybe Text)
 asCorners
   = lens _asCorners (\ s a -> s{_asCorners = a})

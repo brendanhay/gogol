@@ -53,7 +53,7 @@ type JobsGetResource =
      "v1" :>
        "jobs" :>
          Capture "jobId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -67,7 +67,7 @@ type JobsGetResource =
 --
 -- /See:/ 'jobsGet' smart constructor.
 data JobsGet = JobsGet'
-    { _jgXgafv                  :: !(Maybe Text)
+    { _jgXgafv                  :: !(Maybe Xgafv)
     , _jgJobId                  :: !Text
     , _jgUploadProtocol         :: !(Maybe Text)
     , _jgPp                     :: !Bool
@@ -116,7 +116,7 @@ jobsGet pJgJobId_ =
     }
 
 -- | V1 error format.
-jgXgafv :: Lens' JobsGet (Maybe Text)
+jgXgafv :: Lens' JobsGet (Maybe Xgafv)
 jgXgafv = lens _jgXgafv (\ s a -> s{_jgXgafv = a})
 
 -- | The ID of the job to retrieve.

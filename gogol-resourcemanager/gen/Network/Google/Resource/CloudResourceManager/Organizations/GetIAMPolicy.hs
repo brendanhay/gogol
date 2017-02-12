@@ -55,7 +55,7 @@ import           Network.Google.ResourceManager.Types
 type OrganizationsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -73,7 +73,7 @@ type OrganizationsGetIAMPolicyResource =
 --
 -- /See:/ 'organizationsGetIAMPolicy' smart constructor.
 data OrganizationsGetIAMPolicy = OrganizationsGetIAMPolicy'
-    { _ogipXgafv          :: !(Maybe Text)
+    { _ogipXgafv          :: !(Maybe Xgafv)
     , _ogipUploadProtocol :: !(Maybe Text)
     , _ogipPp             :: !Bool
     , _ogipAccessToken    :: !(Maybe Text)
@@ -123,7 +123,7 @@ organizationsGetIAMPolicy pOgipPayload_ pOgipResource_ =
     }
 
 -- | V1 error format.
-ogipXgafv :: Lens' OrganizationsGetIAMPolicy (Maybe Text)
+ogipXgafv :: Lens' OrganizationsGetIAMPolicy (Maybe Xgafv)
 ogipXgafv
   = lens _ogipXgafv (\ s a -> s{_ogipXgafv = a})
 

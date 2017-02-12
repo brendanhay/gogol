@@ -44,7 +44,9 @@ import           Network.Google.Vision.Types.Sum
 -- NormalizeLatLng(-180.0, 10.0) assert (0.0, -170.0) ==
 -- NormalizeLatLng(180.0, 10.0) assert (-90.0, 10.0) ==
 -- NormalizeLatLng(270.0, 10.0) assert (90.0, 10.0) ==
--- NormalizeLatLng(-270.0, 10.0)
+-- NormalizeLatLng(-270.0, 10.0) The code in
+-- logs\/storage\/validator\/logs_validator_traits.cc treats this type as
+-- if it were annotated as ST_LOCATION.
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng = LatLng'
@@ -93,10 +95,10 @@ instance ToJSON LatLng where
                  [("latitude" .=) <$> _llLatitude,
                   ("longitude" .=) <$> _llLongitude])
 
--- | The /Feature/ indicates what type of image detection task to perform.
--- Users describe the type of Google Cloud Vision API tasks to perform over
--- images by using /Feature/s. Features encode the Cloud Vision API
--- vertical to operate on and the number of top-scoring results to return.
+-- | Users describe the type of Google Cloud Vision API tasks to perform over
+-- images by using *Feature*s. Each Feature indicates a type of image
+-- detection task to perform. Features encode the Cloud Vision API vertical
+-- to operate on and the number of top-scoring results to return.
 --
 -- /See:/ 'feature' smart constructor.
 data Feature = Feature'
@@ -239,7 +241,7 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
--- | Arbitrary name\/value pair.
+-- | A \`Property\` consists of a user-supplied name\/value pair.
 --
 -- /See:/ 'property' smart constructor.
 data Property = Property'
@@ -286,7 +288,7 @@ instance ToJSON Property where
 --
 -- /See:/ 'image' smart constructor.
 data Image = Image'
-    { _iContent :: !(Maybe Base64)
+    { _iContent :: !(Maybe Bytes)
     , _iSource  :: !(Maybe ImageSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -311,11 +313,11 @@ image =
 iContent :: Lens' Image (Maybe ByteString)
 iContent
   = lens _iContent (\ s a -> s{_iContent = a}) .
-      mapping _Base64
+      mapping _Bytes
 
--- | Google Cloud Storage image location. If both \'content\' and \'source\'
--- are filled for an image, \'content\' takes precedence and it will be
--- used for performing the image annotation request.
+-- | Google Cloud Storage image location. If both \`content\` and \`source\`
+-- are provided for an image, \`content\` takes precedence and is used to
+-- perform the image annotation request.
 iSource :: Lens' Image (Maybe ImageSource)
 iSource = lens _iSource (\ s a -> s{_iSource = a})
 
@@ -333,9 +335,9 @@ instance ToJSON Image where
                   ("source" .=) <$> _iSource])
 
 -- | A face-specific landmark (for example, a face feature). Landmark
--- positions may fall outside the bounds of the image when the face is near
--- one or more edges of the image. Therefore it is NOT guaranteed that 0
--- \<= x \< width or 0 \<= y \< height.
+-- positions may fall outside the bounds of the image if the face is near
+-- one or more edges of the image. Therefore it is NOT guaranteed that \`0
+-- \<= x \< width\` or \`0 \<= y \< height\`.
 --
 -- /See:/ 'landmark' smart constructor.
 data Landmark = Landmark'
@@ -600,7 +602,7 @@ locationInfo =
     { _liLatLng = Nothing
     }
 
--- | Lat - long location coordinates.
+-- | lat\/long location coordinates.
 liLatLng :: Lens' LocationInfo (Maybe LatLng)
 liLatLng = lens _liLatLng (\ s a -> s{_liLatLng = a})
 
@@ -685,8 +687,8 @@ instance ToJSON BatchAnnotateImagesRequest where
           = object
               (catMaybes [("requests" .=) <$> _bairRequests])
 
--- | Color information consists of RGB channels, score and fraction of image
--- the color occupies in the image.
+-- | Color information consists of RGB channels, score, and the fraction of
+-- the image that the color occupies in the image.
 --
 -- /See:/ 'colorInfo' smart constructor.
 data ColorInfo = ColorInfo'
@@ -723,8 +725,8 @@ ciScore
   = lens _ciScore (\ s a -> s{_ciScore = a}) .
       mapping _Coerce
 
--- | Stores the fraction of pixels the color occupies in the image. Value in
--- range [0, 1].
+-- | The fraction of pixels the color occupies in the image. Value in range
+-- [0, 1].
 ciPixelFraction :: Lens' ColorInfo (Maybe Double)
 ciPixelFraction
   = lens _ciPixelFraction
@@ -794,7 +796,7 @@ annotateImageResponse =
     , _airImagePropertiesAnnotation = Nothing
     }
 
--- | If present, logo detection completed successfully.
+-- | If present, logo detection has completed successfully.
 airLogoAnnotations :: Lens' AnnotateImageResponse [EntityAnnotation]
 airLogoAnnotations
   = lens _airLogoAnnotations
@@ -802,7 +804,7 @@ airLogoAnnotations
       . _Default
       . _Coerce
 
--- | If present, label detection completed successfully.
+-- | If present, label detection has completed successfully.
 airLabelAnnotations :: Lens' AnnotateImageResponse [EntityAnnotation]
 airLabelAnnotations
   = lens _airLabelAnnotations
@@ -810,7 +812,7 @@ airLabelAnnotations
       . _Default
       . _Coerce
 
--- | If present, face detection completed successfully.
+-- | If present, face detection has completed successfully.
 airFaceAnnotations :: Lens' AnnotateImageResponse [FaceAnnotation]
 airFaceAnnotations
   = lens _airFaceAnnotations
@@ -819,18 +821,18 @@ airFaceAnnotations
       . _Coerce
 
 -- | If set, represents the error message for the operation. Note that
--- filled-in mage annotations are guaranteed to be correct, even when
--- 'error' is non-empty.
+-- filled-in image annotations are guaranteed to be correct, even when
+-- \`error\` is set.
 airError :: Lens' AnnotateImageResponse (Maybe Status)
 airError = lens _airError (\ s a -> s{_airError = a})
 
--- | If present, safe-search annotation completed successfully.
+-- | If present, safe-search annotation has completed successfully.
 airSafeSearchAnnotation :: Lens' AnnotateImageResponse (Maybe SafeSearchAnnotation)
 airSafeSearchAnnotation
   = lens _airSafeSearchAnnotation
       (\ s a -> s{_airSafeSearchAnnotation = a})
 
--- | If present, landmark detection completed successfully.
+-- | If present, landmark detection has completed successfully.
 airLandmarkAnnotations :: Lens' AnnotateImageResponse [EntityAnnotation]
 airLandmarkAnnotations
   = lens _airLandmarkAnnotations
@@ -838,7 +840,7 @@ airLandmarkAnnotations
       . _Default
       . _Coerce
 
--- | If present, text (OCR) detection completed successfully.
+-- | If present, text (OCR) detection has completed successfully.
 airTextAnnotations :: Lens' AnnotateImageResponse [EntityAnnotation]
 airTextAnnotations
   = lens _airTextAnnotations
@@ -882,7 +884,7 @@ instance ToJSON AnnotateImageResponse where
                   ("imagePropertiesAnnotation" .=) <$>
                     _airImagePropertiesAnnotation])
 
--- | Stores image properties (e.g. dominant colors).
+-- | Stores image properties, such as dominant colors.
 --
 -- /See:/ 'imageProperties' smart constructor.
 newtype ImageProperties = ImageProperties'
@@ -994,8 +996,8 @@ faceAnnotation =
     , _faLandmarks = Nothing
     }
 
--- | Pitch angle. Indicates the upwards\/downwards angle that the face is
--- pointing relative to the image\'s horizontal plane. Range [-180,180].
+-- | Pitch angle, which indicates the upwards\/downwards angle that the face
+-- is pointing relative to the image\'s horizontal plane. Range [-180,180].
 faTiltAngle :: Lens' FaceAnnotation (Maybe Double)
 faTiltAngle
   = lens _faTiltAngle (\ s a -> s{_faTiltAngle = a}) .
@@ -1008,12 +1010,12 @@ faBlurredLikelihood
       (\ s a -> s{_faBlurredLikelihood = a})
 
 -- | The bounding polygon around the face. The coordinates of the bounding
--- box are in the original image\'s scale, as returned in ImageParams. The
--- bounding box is computed to \"frame\" the face in accordance with human
--- expectations. It is based on the landmarker results. Note that one or
--- more x and\/or y coordinates may not be generated in the BoundingPoly
--- (the polygon will be unbounded) if only a partial face appears in the
--- image to be annotated.
+-- box are in the original image\'s scale, as returned in \`ImageParams\`.
+-- The bounding box is computed to \"frame\" the face in accordance with
+-- human expectations. It is based on the landmarker results. Note that one
+-- or more x and\/or y coordinates may not be generated in the
+-- \`BoundingPoly\` (the polygon will be unbounded) if only a partial face
+-- appears in the image to be annotated.
 faBoundingPoly :: Lens' FaceAnnotation (Maybe BoundingPoly)
 faBoundingPoly
   = lens _faBoundingPoly
@@ -1032,17 +1034,17 @@ faLandmarkingConfidence
       (\ s a -> s{_faLandmarkingConfidence = a})
       . mapping _Coerce
 
--- | Yaw angle. Indicates the leftward\/rightward angle that the face is
--- pointing, relative to the vertical plane perpendicular to the image.
+-- | Yaw angle, which indicates the leftward\/rightward angle that the face
+-- is pointing relative to the vertical plane perpendicular to the image.
 -- Range [-180,180].
 faPanAngle :: Lens' FaceAnnotation (Maybe Double)
 faPanAngle
   = lens _faPanAngle (\ s a -> s{_faPanAngle = a}) .
       mapping _Coerce
 
--- | Roll angle. Indicates the amount of clockwise\/anti-clockwise rotation
--- of the face relative to the image vertical, about the axis perpendicular
--- to the face. Range [-180,180].
+-- | Roll angle, which indicates the amount of clockwise\/anti-clockwise
+-- rotation of the face relative to the image vertical about the axis
+-- perpendicular to the face. Range [-180,180].
 faRollAngle :: Lens' FaceAnnotation (Maybe Double)
 faRollAngle
   = lens _faRollAngle (\ s a -> s{_faRollAngle = a}) .
@@ -1054,12 +1056,12 @@ faUnderExposedLikelihood
   = lens _faUnderExposedLikelihood
       (\ s a -> s{_faUnderExposedLikelihood = a})
 
--- | This bounding polygon is tighter than the previous 'boundingPoly', and
--- encloses only the skin part of the face. Typically, it is used to
--- eliminate the face from any image analysis that detects the \"amount of
--- skin\" visible in an image. It is not based on the landmarker results,
--- only on the initial face detection, hence the 'fd' (face detection)
--- prefix.
+-- | The \`fd_bounding_poly\` bounding polygon is tighter than the
+-- \`boundingPoly\`, and encloses only the skin part of the face.
+-- Typically, it is used to eliminate the face from any image analysis that
+-- detects the \"amount of skin\" visible in an image. It is not based on
+-- the landmarker results, only on the initial face detection, hence the
+-- 'fd' (face detection) prefix.
 faFdBoundingPoly :: Lens' FaceAnnotation (Maybe BoundingPoly)
 faFdBoundingPoly
   = lens _faFdBoundingPoly
@@ -1204,21 +1206,21 @@ eaScore
       mapping _Coerce
 
 -- | The relevancy of the ICA (Image Content Annotation) label to the image.
--- For example, the relevancy of \'tower\' to an image containing \'Eiffel
--- Tower\' is likely higher than an image containing a distant towering
--- building, though the confidence that there is a tower may be the same.
--- Range [0, 1].
+-- For example, the relevancy of \"tower\" is likely higher to an image
+-- containing the detected \"Eiffel Tower\" than to an image containing a
+-- detected distant towering building, even though the confidence that
+-- there is a tower in each image may be the same. Range [0, 1].
 eaTopicality :: Lens' EntityAnnotation (Maybe Double)
 eaTopicality
   = lens _eaTopicality (\ s a -> s{_eaTopicality = a})
       . mapping _Coerce
 
 -- | The language code for the locale in which the entity textual
--- 'description' (next field) is expressed.
+-- \`description\` is expressed.
 eaLocale :: Lens' EntityAnnotation (Maybe Text)
 eaLocale = lens _eaLocale (\ s a -> s{_eaLocale = a})
 
--- | Image region to which this entity belongs. Not filled currently for
+-- | Image region to which this entity belongs. Currently not produced for
 -- \`LABEL_DETECTION\` features. For \`TEXT_DETECTION\` (OCR),
 -- \`boundingPoly\`s are produced for the entire text detected in an image
 -- region, followed by \`boundingPoly\`s for each word within the detected
@@ -1229,38 +1231,38 @@ eaBoundingPoly
       (\ s a -> s{_eaBoundingPoly = a})
 
 -- | The accuracy of the entity detection in an image. For example, for an
--- image containing \'Eiffel Tower,\' this field represents the confidence
--- that there is a tower in the query image. Range [0, 1].
+-- image in which the \"Eiffel Tower\" entity is detected, this field
+-- represents the confidence that there is a tower in the query image.
+-- Range [0, 1].
 eaConfidence :: Lens' EntityAnnotation (Maybe Double)
 eaConfidence
   = lens _eaConfidence (\ s a -> s{_eaConfidence = a})
       . mapping _Coerce
 
--- | Opaque entity ID. Some IDs might be available in Knowledge Graph(KG).
--- For more details on KG please see:
--- https:\/\/developers.google.com\/knowledge-graph\/
+-- | Opaque entity ID. Some IDs may be available in [Google Knowledge Graph
+-- Search API](https:\/\/developers.google.com\/knowledge-graph\/).
 eaMid :: Lens' EntityAnnotation (Maybe Text)
 eaMid = lens _eaMid (\ s a -> s{_eaMid = a})
 
 -- | The location information for the detected entity. Multiple
--- 'LocationInfo' elements can be present since one location may indicate
--- the location of the scene in the query image, and another the location
--- of the place where the query image was taken. Location information is
--- usually present for landmarks.
+-- \`LocationInfo\` elements can be present because one location may
+-- indicate the location of the scene in the image, and another location
+-- may indicate the location of the place where the image was taken.
+-- Location information is usually present for landmarks.
 eaLocations :: Lens' EntityAnnotation [LocationInfo]
 eaLocations
   = lens _eaLocations (\ s a -> s{_eaLocations = a}) .
       _Default
       . _Coerce
 
--- | Entity textual description, expressed in its 'locale' language.
+-- | Entity textual description, expressed in its \`locale\` language.
 eaDescription :: Lens' EntityAnnotation (Maybe Text)
 eaDescription
   = lens _eaDescription
       (\ s a -> s{_eaDescription = a})
 
--- | Some entities can have additional optional 'Property' fields. For
--- example a different kind of score or string that qualifies the entity.
+-- | Some entities may have optional user-supplied \`Property\` (name\/value)
+-- fields, such a score or string that qualifies the entity.
 eaProperties :: Lens' EntityAnnotation [Property]
 eaProperties
   = lens _eaProperties (\ s a -> s{_eaProperties = a})
@@ -1375,10 +1377,11 @@ imageSource =
     { _isGcsImageURI = Nothing
     }
 
--- | Google Cloud Storage image URI. It must be in the following form:
--- \`gs:\/\/bucket_name\/object_name\`. For more details, please see:
--- https:\/\/cloud.google.com\/storage\/docs\/reference-uris. NOTE: Cloud
--- Storage object versioning is not supported!
+-- | Google Cloud Storage image URI, which must be in the following form:
+-- \`gs:\/\/bucket_name\/object_name\` (for details, see [Google Cloud
+-- Storage Request
+-- URIs](https:\/\/cloud.google.com\/storage\/docs\/reference-uris)). NOTE:
+-- Cloud Storage object versioning is not supported.
 isGcsImageURI :: Lens' ImageSource (Maybe Text)
 isGcsImageURI
   = lens _isGcsImageURI
@@ -1394,9 +1397,6 @@ instance ToJSON ImageSource where
           = object
               (catMaybes [("gcsImageUri" .=) <$> _isGcsImageURI])
 
--- | Set of features pertaining to the image, computed by various computer
--- vision methods over safe-search verticals (for example, adult, spoof,
--- medical, violence).
 --
 -- /See:/ 'safeSearchAnnotation' smart constructor.
 data SafeSearchAnnotation = SafeSearchAnnotation'
@@ -1427,16 +1427,16 @@ safeSearchAnnotation =
     , _ssaViolence = Nothing
     }
 
--- | Spoof likelihood. The likelihood that an obvious modification was made
--- to the image\'s canonical version to make it appear funny or offensive.
+-- | Spoof likelihood. The likelihood that an modification was made to the
+-- image\'s canonical version to make it appear funny or offensive.
 ssaSpoof :: Lens' SafeSearchAnnotation (Maybe SafeSearchAnnotationSpoof)
 ssaSpoof = lens _ssaSpoof (\ s a -> s{_ssaSpoof = a})
 
--- | Represents the adult contents likelihood for the image.
+-- | Represents the adult content likelihood for the image.
 ssaAdult :: Lens' SafeSearchAnnotation (Maybe SafeSearchAnnotationAdult)
 ssaAdult = lens _ssaAdult (\ s a -> s{_ssaAdult = a})
 
--- | Likelihood this is a medical image.
+-- | Likelihood that this is a medical image.
 ssaMedical :: Lens' SafeSearchAnnotation (Maybe SafeSearchAnnotationMedical)
 ssaMedical
   = lens _ssaMedical (\ s a -> s{_ssaMedical = a})
@@ -1464,7 +1464,7 @@ instance ToJSON SafeSearchAnnotation where
                   ("medical" .=) <$> _ssaMedical,
                   ("violence" .=) <$> _ssaViolence])
 
--- | Image context.
+-- | Image context and\/or feature-specific parameters.
 --
 -- /See:/ 'imageContext' smart constructor.
 data ImageContext = ImageContext'
@@ -1495,7 +1495,7 @@ imageContext =
 -- results (although it will be a significant hindrance if the hint is
 -- wrong). Text detection returns an error if one or more of the specified
 -- languages is not one of the [supported
--- languages](\/translate\/v2\/translate-reference#supported_languages).
+-- languages](\/vision\/docs\/languages).
 icLanguageHints :: Lens' ImageContext [Text]
 icLanguageHints
   = lens _icLanguageHints
@@ -1503,7 +1503,7 @@ icLanguageHints
       . _Default
       . _Coerce
 
--- | Lat\/long rectangle that specifies the location of the image.
+-- | lat\/long rectangle that specifies the location of the image.
 icLatLongRect :: Lens' ImageContext (Maybe LatLongRect)
 icLatLongRect
   = lens _icLatLongRect
@@ -1543,7 +1543,7 @@ dominantColorsAnnotation =
     { _dcaColors = Nothing
     }
 
--- | RGB color values, with their score and pixel fraction.
+-- | RGB color values with their score and pixel fraction.
 dcaColors :: Lens' DominantColorsAnnotation [ColorInfo]
 dcaColors
   = lens _dcaColors (\ s a -> s{_dcaColors = a}) .
@@ -1561,7 +1561,7 @@ instance ToJSON DominantColorsAnnotation where
         toJSON DominantColorsAnnotation'{..}
           = object (catMaybes [("colors" .=) <$> _dcaColors])
 
--- | Rectangle determined by min and max LatLng pairs.
+-- | Rectangle determined by min and max \`LatLng\` pairs.
 --
 -- /See:/ 'latLongRect' smart constructor.
 data LatLongRect = LatLongRect'

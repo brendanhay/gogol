@@ -142,7 +142,8 @@ spreadsheetsValuesGet pSvgSpreadsheetId_ pSvgRange_ =
 svgXgafv :: Lens' SpreadsheetsValuesGet (Maybe Xgafv)
 svgXgafv = lens _svgXgafv (\ s a -> s{_svgXgafv = a})
 
--- | How values should be represented in the output.
+-- | How values should be represented in the output. The default render
+-- option is ValueRenderOption.FORMATTED_VALUE.
 svgValueRenderOption :: Lens' SpreadsheetsValuesGet (Maybe Text)
 svgValueRenderOption
   = lens _svgValueRenderOption
@@ -187,7 +188,8 @@ svgRange :: Lens' SpreadsheetsValuesGet Text
 svgRange = lens _svgRange (\ s a -> s{_svgRange = a})
 
 -- | How dates, times, and durations should be represented in the output.
--- This is ignored if value_render_option is FORMATTED_VALUE.
+-- This is ignored if value_render_option is FORMATTED_VALUE. The default
+-- dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
 svgDateTimeRenderOption :: Lens' SpreadsheetsValuesGet (Maybe Text)
 svgDateTimeRenderOption
   = lens _svgDateTimeRenderOption

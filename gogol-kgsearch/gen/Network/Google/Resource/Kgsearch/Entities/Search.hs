@@ -59,7 +59,7 @@ import           Network.Google.Prelude
 type EntitiesSearchResource =
      "v1" :>
        "entities:search" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "prefix" Bool :>
                QueryParam "pp" Bool :>
@@ -82,7 +82,7 @@ type EntitiesSearchResource =
 --
 -- /See:/ 'entitiesSearch' smart constructor.
 data EntitiesSearch = EntitiesSearch'
-    { _esXgafv          :: !(Maybe Text)
+    { _esXgafv          :: !(Maybe Xgafv)
     , _esUploadProtocol :: !(Maybe Text)
     , _esPrefix         :: !(Maybe Bool)
     , _esPp             :: !Bool
@@ -150,7 +150,7 @@ entitiesSearch =
     }
 
 -- | V1 error format.
-esXgafv :: Lens' EntitiesSearch (Maybe Text)
+esXgafv :: Lens' EntitiesSearch (Maybe Xgafv)
 esXgafv = lens _esXgafv (\ s a -> s{_esXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -179,13 +179,16 @@ esUploadType
   = lens _esUploadType (\ s a -> s{_esUploadType = a})
 
 -- | Restricts returned entities with these types, e.g. Person (as defined in
--- http:\/\/schema.org\/Person).
+-- http:\/\/schema.org\/Person). If multiple types are specified, returned
+-- entities will contain one or more of these types.
 esTypes :: Lens' EntitiesSearch [Text]
 esTypes
   = lens _esTypes (\ s a -> s{_esTypes = a}) . _Default
       . _Coerce
 
--- | The list of entity id to be used for search instead of query string.
+-- | The list of entity id to be used for search instead of query string. To
+-- specify multiple ids in the HTTP request, repeat the parameter in the
+-- URL as in ...?ids=A&ids=B
 esIds :: Lens' EntitiesSearch [Text]
 esIds
   = lens _esIds (\ s a -> s{_esIds = a}) . _Default .

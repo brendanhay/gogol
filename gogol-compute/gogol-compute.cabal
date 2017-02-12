@@ -47,6 +47,7 @@ library
         , Network.Google.Resource.Compute.Autoscalers.List
         , Network.Google.Resource.Compute.Autoscalers.Patch
         , Network.Google.Resource.Compute.Autoscalers.Update
+        , Network.Google.Resource.Compute.BackendServices.AggregatedList
         , Network.Google.Resource.Compute.BackendServices.Delete
         , Network.Google.Resource.Compute.BackendServices.Get
         , Network.Google.Resource.Compute.BackendServices.GetHealth
@@ -153,6 +154,7 @@ library
         , Network.Google.Resource.Compute.Instances.SetMachineType
         , Network.Google.Resource.Compute.Instances.SetMetadata
         , Network.Google.Resource.Compute.Instances.SetScheduling
+        , Network.Google.Resource.Compute.Instances.SetServiceAccount
         , Network.Google.Resource.Compute.Instances.SetTags
         , Network.Google.Resource.Compute.Instances.Start
         , Network.Google.Resource.Compute.Instances.StartWithEncryptionKey
@@ -165,11 +167,40 @@ library
         , Network.Google.Resource.Compute.Networks.Get
         , Network.Google.Resource.Compute.Networks.Insert
         , Network.Google.Resource.Compute.Networks.List
+        , Network.Google.Resource.Compute.Networks.SwitchToCustomMode
         , Network.Google.Resource.Compute.Projects.Get
         , Network.Google.Resource.Compute.Projects.MoveDisk
         , Network.Google.Resource.Compute.Projects.MoveInstance
         , Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
         , Network.Google.Resource.Compute.Projects.SetUsageExportBucket
+        , Network.Google.Resource.Compute.RegionAutoscalers.Delete
+        , Network.Google.Resource.Compute.RegionAutoscalers.Get
+        , Network.Google.Resource.Compute.RegionAutoscalers.Insert
+        , Network.Google.Resource.Compute.RegionAutoscalers.List
+        , Network.Google.Resource.Compute.RegionAutoscalers.Patch
+        , Network.Google.Resource.Compute.RegionAutoscalers.Update
+        , Network.Google.Resource.Compute.RegionBackendServices.Delete
+        , Network.Google.Resource.Compute.RegionBackendServices.Get
+        , Network.Google.Resource.Compute.RegionBackendServices.GetHealth
+        , Network.Google.Resource.Compute.RegionBackendServices.Insert
+        , Network.Google.Resource.Compute.RegionBackendServices.List
+        , Network.Google.Resource.Compute.RegionBackendServices.Patch
+        , Network.Google.Resource.Compute.RegionBackendServices.Update
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.AbandonInstances
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.Delete
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.DeleteInstances
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.Get
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.Insert
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.List
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListManagedInstances
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.RecreateInstances
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.Resize
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
+        , Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetTargetPools
+        , Network.Google.Resource.Compute.RegionInstanceGroups.Get
+        , Network.Google.Resource.Compute.RegionInstanceGroups.List
+        , Network.Google.Resource.Compute.RegionInstanceGroups.ListInstances
+        , Network.Google.Resource.Compute.RegionInstanceGroups.SetNamedPorts
         , Network.Google.Resource.Compute.RegionOperations.Delete
         , Network.Google.Resource.Compute.RegionOperations.Get
         , Network.Google.Resource.Compute.RegionOperations.List
@@ -197,6 +228,7 @@ library
         , Network.Google.Resource.Compute.Snapshots.List
         , Network.Google.Resource.Compute.Subnetworks.AggregatedList
         , Network.Google.Resource.Compute.Subnetworks.Delete
+        , Network.Google.Resource.Compute.Subnetworks.ExpandIPCIdRRange
         , Network.Google.Resource.Compute.Subnetworks.Get
         , Network.Google.Resource.Compute.Subnetworks.Insert
         , Network.Google.Resource.Compute.Subnetworks.List

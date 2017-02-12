@@ -122,8 +122,8 @@ projectsMetricsList pPmlParent_ =
     , _pmlCallback = Nothing
     }
 
--- | Required. The resource name containing the metrics. Example:
--- \`\"projects\/my-project-id\"\`.
+-- | Required. The name of the project containing the metrics:
+-- \"projects\/[PROJECT_ID]\"
 pmlParent :: Lens' ProjectsMetricsList Text
 pmlParent
   = lens _pmlParent (\ s a -> s{_pmlParent = a})
@@ -161,16 +161,16 @@ pmlBearerToken
       (\ s a -> s{_pmlBearerToken = a})
 
 -- | Optional. If present, then retrieve the next batch of results from the
--- preceding call to this method. \`pageToken\` must be the value of
--- \`nextPageToken\` from the previous response. The values of other method
+-- preceding call to this method. pageToken must be the value of
+-- nextPageToken from the previous response. The values of other method
 -- parameters should be identical to those in the previous call.
 pmlPageToken :: Lens' ProjectsMetricsList (Maybe Text)
 pmlPageToken
   = lens _pmlPageToken (\ s a -> s{_pmlPageToken = a})
 
 -- | Optional. The maximum number of results to return from this request.
--- Non-positive values are ignored. The presence of \`nextPageToken\` in
--- the response indicates that more results might be available.
+-- Non-positive values are ignored. The presence of nextPageToken in the
+-- response indicates that more results might be available.
 pmlPageSize :: Lens' ProjectsMetricsList (Maybe Int32)
 pmlPageSize
   = lens _pmlPageSize (\ s a -> s{_pmlPageSize = a}) .

@@ -606,7 +606,7 @@ data InstanceGroupManager = InstanceGroupManager'
     { _igmCurrentSize         :: !(Maybe (Textual Int32))
     , _igmGroup               :: !(Maybe Text)
     , _igmKind                :: !Text
-    , _igmFingerprint         :: !(Maybe Base64)
+    , _igmFingerprint         :: !(Maybe Bytes)
     , _igmBaseInstanceName    :: !(Maybe Text)
     , _igmAutoHealingPolicies :: !(Maybe [ReplicaPoolAutoHealingPolicy])
     , _igmInstanceTemplate    :: !(Maybe Text)
@@ -698,7 +698,7 @@ igmFingerprint :: Lens' InstanceGroupManager (Maybe ByteString)
 igmFingerprint
   = lens _igmFingerprint
       (\ s a -> s{_igmFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The base instance name to use for instances in this group. The value
 -- must be a valid RFC1035 name. Supported characters are lowercase
@@ -992,7 +992,7 @@ instance ToJSON OperationError where
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
 data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest'
-    { _igmstprFingerprint :: !(Maybe Base64)
+    { _igmstprFingerprint :: !(Maybe Bytes)
     , _igmstprTargetPools :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1018,7 +1018,7 @@ igmstprFingerprint :: Lens' InstanceGroupManagersSetTargetPoolsRequest (Maybe By
 igmstprFingerprint
   = lens _igmstprFingerprint
       (\ s a -> s{_igmstprFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | A list of fully-qualified URLs to existing Target Pool resources. New
 -- instances in the Instance Group Manager will be added to the specified

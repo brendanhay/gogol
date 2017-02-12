@@ -123,6 +123,13 @@ module Network.Google.Logging.Types
     , logEntryProtoPayload
     , leppAddtional
 
+    -- * LogEntrySourceLocation
+    , LogEntrySourceLocation
+    , logEntrySourceLocation
+    , leslFunction
+    , leslLine
+    , leslFile
+
     -- * WriteLogEntriesResponse
     , WriteLogEntriesResponse
     , writeLogEntriesResponse
@@ -137,6 +144,12 @@ module Network.Google.Logging.Types
     , lsName
     , lsEndTime
     , lsFilter
+
+    -- * ListLogsResponse
+    , ListLogsResponse
+    , listLogsResponse
+    , llrNextPageToken
+    , llrLogNames
 
     -- * ListMonitoredResourceDescriptorsResponse
     , ListMonitoredResourceDescriptorsResponse
@@ -232,8 +245,10 @@ module Network.Google.Logging.Types
     , leInsertId
     , leLabels
     , leProtoPayload
+    , leSourceLocation
     , leLogName
     , leTimestamp
+    , leTrace
 
     -- * SourceLocation
     , SourceLocation

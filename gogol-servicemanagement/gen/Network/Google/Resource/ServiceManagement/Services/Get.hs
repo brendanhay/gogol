@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a managed service.
+-- Gets a managed service. Authentication is required unless the service is
+-- public.
 --
 -- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.get@.
 module Network.Google.Resource.ServiceManagement.Services.Get
@@ -62,7 +63,8 @@ type ServicesGetResource =
                          QueryParam "alt" AltJSON :>
                            Get '[JSON] ManagedService
 
--- | Gets a managed service.
+-- | Gets a managed service. Authentication is required unless the service is
+-- public.
 --
 -- /See:/ 'servicesGet' smart constructor.
 data ServicesGet = ServicesGet'

@@ -95,9 +95,13 @@ module Network.Google.AndroidPublisher.Types
     , ucAndroidOSVersion
     , ucText
     , ucDevice
+    , ucThumbsUpCount
     , ucAppVersionCode
+    , ucThumbsDownCount
+    , ucOriginalText
     , ucAppVersionName
     , ucReviewerLanguage
+    , ucDeviceMetadata
     , ucStarRating
     , ucLastModified
 
@@ -256,6 +260,13 @@ module Network.Google.AndroidPublisher.Types
     , deobfuscationFile
     , dfSymbolType
 
+    -- * VoidedPurchasesListResponse
+    , VoidedPurchasesListResponse
+    , voidedPurchasesListResponse
+    , vplrTokenPagination
+    , vplrPageInfo
+    , vplrVoidedPurchases
+
     -- * ExpansionFilesUploadResponse
     , ExpansionFilesUploadResponse
     , expansionFilesUploadResponse
@@ -336,6 +347,21 @@ module Network.Google.AndroidPublisher.Types
 
     -- * EditsExpansionFilesUpdateExpansionFileType
     , EditsExpansionFilesUpdateExpansionFileType (..)
+
+    -- * DeviceMetadata
+    , DeviceMetadata
+    , deviceMetadata
+    , dmProductName
+    , dmGlEsVersion
+    , dmManufacturer
+    , dmScreenWidthPx
+    , dmRamMb
+    , dmCPUMake
+    , dmScreenHeightPx
+    , dmNATivePlatform
+    , dmDeviceClass
+    , dmCPUModel
+    , dmScreenDensityDpi
 
     -- * DeveloperComment
     , DeveloperComment
@@ -438,6 +464,14 @@ module Network.Google.AndroidPublisher.Types
     , timestamp
     , tNanos
     , tSeconds
+
+    -- * VoidedPurchase
+    , VoidedPurchase
+    , voidedPurchase
+    , vpKind
+    , vpPurchaseTimeMillis
+    , vpPurchaseToken
+    , vpVoidedTimeMillis
 
     -- * ReviewReplyResult
     , ReviewReplyResult

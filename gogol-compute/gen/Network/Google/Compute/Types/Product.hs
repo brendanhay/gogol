@@ -203,6 +203,50 @@ instance ToJSON RouterStatusResponse where
                   ("result" .=) <$> _rsrResult])
 
 --
+-- /See:/ 'regionInstanceGroupManagersDeleteInstancesRequest' smart constructor.
+newtype RegionInstanceGroupManagersDeleteInstancesRequest = RegionInstanceGroupManagersDeleteInstancesRequest'
+    { _rigmdirInstances :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupManagersDeleteInstancesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigmdirInstances'
+regionInstanceGroupManagersDeleteInstancesRequest
+    :: RegionInstanceGroupManagersDeleteInstancesRequest
+regionInstanceGroupManagersDeleteInstancesRequest =
+    RegionInstanceGroupManagersDeleteInstancesRequest'
+    { _rigmdirInstances = Nothing
+    }
+
+-- | The names of one or more instances to delete.
+rigmdirInstances :: Lens' RegionInstanceGroupManagersDeleteInstancesRequest [Text]
+rigmdirInstances
+  = lens _rigmdirInstances
+      (\ s a -> s{_rigmdirInstances = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         RegionInstanceGroupManagersDeleteInstancesRequest
+         where
+        parseJSON
+          = withObject
+              "RegionInstanceGroupManagersDeleteInstancesRequest"
+              (\ o ->
+                 RegionInstanceGroupManagersDeleteInstancesRequest'
+                   <$> (o .:? "instances" .!= mempty))
+
+instance ToJSON
+         RegionInstanceGroupManagersDeleteInstancesRequest
+         where
+        toJSON
+          RegionInstanceGroupManagersDeleteInstancesRequest'{..}
+          = object
+              (catMaybes [("instances" .=) <$> _rigmdirInstances])
+
+--
 -- /See:/ 'addressesScopedList' smart constructor.
 data AddressesScopedList = AddressesScopedList'
     { _aslAddresses :: !(Maybe [Address])
@@ -301,6 +345,60 @@ instance ToJSON OperationWarningsItemDataItem where
               (catMaybes
                  [("value" .=) <$> _owidiValue,
                   ("key" .=) <$> _owidiKey])
+
+--
+-- /See:/ 'regionInstanceGroupsListInstancesRequest' smart constructor.
+data RegionInstanceGroupsListInstancesRequest = RegionInstanceGroupsListInstancesRequest'
+    { _riglirInstanceState :: !(Maybe RegionInstanceGroupsListInstancesRequestInstanceState)
+    , _riglirPortName      :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupsListInstancesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riglirInstanceState'
+--
+-- * 'riglirPortName'
+regionInstanceGroupsListInstancesRequest
+    :: RegionInstanceGroupsListInstancesRequest
+regionInstanceGroupsListInstancesRequest =
+    RegionInstanceGroupsListInstancesRequest'
+    { _riglirInstanceState = Nothing
+    , _riglirPortName = Nothing
+    }
+
+-- | Instances in which state should be returned. Valid options are: \'ALL\',
+-- \'RUNNING\'. By default, it lists all instances.
+riglirInstanceState :: Lens' RegionInstanceGroupsListInstancesRequest (Maybe RegionInstanceGroupsListInstancesRequestInstanceState)
+riglirInstanceState
+  = lens _riglirInstanceState
+      (\ s a -> s{_riglirInstanceState = a})
+
+-- | Name of port user is interested in. It is optional. If it is set, only
+-- information about this ports will be returned. If it is not set, all the
+-- named ports will be returned. Always lists all instances.
+riglirPortName :: Lens' RegionInstanceGroupsListInstancesRequest (Maybe Text)
+riglirPortName
+  = lens _riglirPortName
+      (\ s a -> s{_riglirPortName = a})
+
+instance FromJSON
+         RegionInstanceGroupsListInstancesRequest where
+        parseJSON
+          = withObject
+              "RegionInstanceGroupsListInstancesRequest"
+              (\ o ->
+                 RegionInstanceGroupsListInstancesRequest' <$>
+                   (o .:? "instanceState") <*> (o .:? "portName"))
+
+instance ToJSON
+         RegionInstanceGroupsListInstancesRequest where
+        toJSON RegionInstanceGroupsListInstancesRequest'{..}
+          = object
+              (catMaybes
+                 [("instanceState" .=) <$> _riglirInstanceState,
+                  ("portName" .=) <$> _riglirPortName])
 
 --
 -- /See:/ 'instanceGroupManagersAbandonInstancesRequest' smart constructor.
@@ -652,6 +750,114 @@ instance ToJSON InstancesScopedListWarning where
                   ("code" .=) <$> _islwCode,
                   ("message" .=) <$> _islwMessage])
 
+--
+-- /See:/ 'regionInstanceGroupManagersRecreateRequest' smart constructor.
+newtype RegionInstanceGroupManagersRecreateRequest = RegionInstanceGroupManagersRecreateRequest'
+    { _rigmrrInstances :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupManagersRecreateRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigmrrInstances'
+regionInstanceGroupManagersRecreateRequest
+    :: RegionInstanceGroupManagersRecreateRequest
+regionInstanceGroupManagersRecreateRequest =
+    RegionInstanceGroupManagersRecreateRequest'
+    { _rigmrrInstances = Nothing
+    }
+
+-- | The URL for one or more instances to recreate.
+rigmrrInstances :: Lens' RegionInstanceGroupManagersRecreateRequest [Text]
+rigmrrInstances
+  = lens _rigmrrInstances
+      (\ s a -> s{_rigmrrInstances = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         RegionInstanceGroupManagersRecreateRequest where
+        parseJSON
+          = withObject
+              "RegionInstanceGroupManagersRecreateRequest"
+              (\ o ->
+                 RegionInstanceGroupManagersRecreateRequest' <$>
+                   (o .:? "instances" .!= mempty))
+
+instance ToJSON
+         RegionInstanceGroupManagersRecreateRequest where
+        toJSON
+          RegionInstanceGroupManagersRecreateRequest'{..}
+          = object
+              (catMaybes [("instances" .=) <$> _rigmrrInstances])
+
+-- | Informational warning which replaces the list of backend services when
+-- the list is empty.
+--
+-- /See:/ 'backendServicesScopedListWarning' smart constructor.
+data BackendServicesScopedListWarning = BackendServicesScopedListWarning'
+    { _bsslwData    :: !(Maybe [BackendServicesScopedListWarningDataItem])
+    , _bsslwCode    :: !(Maybe BackendServicesScopedListWarningCode)
+    , _bsslwMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BackendServicesScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bsslwData'
+--
+-- * 'bsslwCode'
+--
+-- * 'bsslwMessage'
+backendServicesScopedListWarning
+    :: BackendServicesScopedListWarning
+backendServicesScopedListWarning =
+    BackendServicesScopedListWarning'
+    { _bsslwData = Nothing
+    , _bsslwCode = Nothing
+    , _bsslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata about this warning in key: value format. For
+-- example: \"data\": [ { \"key\": \"scope\", \"value\":
+-- \"zones\/us-east1-d\" }
+bsslwData :: Lens' BackendServicesScopedListWarning [BackendServicesScopedListWarningDataItem]
+bsslwData
+  = lens _bsslwData (\ s a -> s{_bsslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] A warning code, if applicable. For example, Compute Engine
+-- returns NO_RESULTS_ON_PAGE if there are no results in the response.
+bsslwCode :: Lens' BackendServicesScopedListWarning (Maybe BackendServicesScopedListWarningCode)
+bsslwCode
+  = lens _bsslwCode (\ s a -> s{_bsslwCode = a})
+
+-- | [Output Only] A human-readable description of the warning code.
+bsslwMessage :: Lens' BackendServicesScopedListWarning (Maybe Text)
+bsslwMessage
+  = lens _bsslwMessage (\ s a -> s{_bsslwMessage = a})
+
+instance FromJSON BackendServicesScopedListWarning
+         where
+        parseJSON
+          = withObject "BackendServicesScopedListWarning"
+              (\ o ->
+                 BackendServicesScopedListWarning' <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON BackendServicesScopedListWarning
+         where
+        toJSON BackendServicesScopedListWarning'{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _bsslwData,
+                  ("code" .=) <$> _bsslwCode,
+                  ("message" .=) <$> _bsslwMessage])
+
 -- | A list of InstanceGroup resources.
 --
 -- /See:/ 'instanceGroupList' smart constructor.
@@ -955,8 +1161,9 @@ deprecationStatus =
 dsState :: Lens' DeprecationStatus (Maybe DeprecationStatusState)
 dsState = lens _dsState (\ s a -> s{_dsState = a})
 
--- | An optional RFC3339 timestamp on or after which the deprecation state of
--- this resource will be changed to DELETED.
+-- | An optional RFC3339 timestamp on or after which the state of this
+-- resource is intended to change to DELETED. This is only informational
+-- and the status will not change unless the client explicitly changes it.
 dsDeleted :: Lens' DeprecationStatus (Maybe Text)
 dsDeleted
   = lens _dsDeleted (\ s a -> s{_dsDeleted = a})
@@ -969,14 +1176,16 @@ dsReplacement
   = lens _dsReplacement
       (\ s a -> s{_dsReplacement = a})
 
--- | An optional RFC3339 timestamp on or after which the deprecation state of
--- this resource will be changed to OBSOLETE.
+-- | An optional RFC3339 timestamp on or after which the state of this
+-- resource is intended to change to OBSOLETE. This is only informational
+-- and the status will not change unless the client explicitly changes it.
 dsObsolete :: Lens' DeprecationStatus (Maybe Text)
 dsObsolete
   = lens _dsObsolete (\ s a -> s{_dsObsolete = a})
 
--- | An optional RFC3339 timestamp on or after which the deprecation state of
--- this resource will be changed to DEPRECATED.
+-- | An optional RFC3339 timestamp on or after which the state of this
+-- resource is intended to change to DEPRECATED. This is only informational
+-- and the status will not change unless the client explicitly changes it.
 dsDeprecated :: Lens' DeprecationStatus (Maybe Text)
 dsDeprecated
   = lens _dsDeprecated (\ s a -> s{_dsDeprecated = a})
@@ -1507,7 +1716,7 @@ instance ToJSON VPNTunnelsScopedList where
 --
 -- /See:/ 'instanceGroupsSetNamedPortsRequest' smart constructor.
 data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest'
-    { _igsnprFingerprint :: !(Maybe Base64)
+    { _igsnprFingerprint :: !(Maybe Bytes)
     , _igsnprNamedPorts  :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1536,7 +1745,7 @@ igsnprFingerprint :: Lens' InstanceGroupsSetNamedPortsRequest (Maybe ByteString)
 igsnprFingerprint
   = lens _igsnprFingerprint
       (\ s a -> s{_igsnprFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The list of named ports to set for this instance group.
 igsnprNamedPorts :: Lens' InstanceGroupsSetNamedPortsRequest [NamedPort]
@@ -1778,6 +1987,86 @@ instance ToJSON TargetPoolsAddInstanceRequest where
           = object
               (catMaybes [("instances" .=) <$> _tpairInstances])
 
+-- | Contains a list of autoscalers.
+--
+-- /See:/ 'regionAutoscalerList' smart constructor.
+data RegionAutoscalerList = RegionAutoscalerList'
+    { _rNextPageToken :: !(Maybe Text)
+    , _rKind          :: !Text
+    , _rItems         :: !(Maybe [Autoscaler])
+    , _rSelfLink      :: !(Maybe Text)
+    , _rId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionAutoscalerList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rNextPageToken'
+--
+-- * 'rKind'
+--
+-- * 'rItems'
+--
+-- * 'rSelfLink'
+--
+-- * 'rId'
+regionAutoscalerList
+    :: RegionAutoscalerList
+regionAutoscalerList =
+    RegionAutoscalerList'
+    { _rNextPageToken = Nothing
+    , _rKind = "compute#regionAutoscalerList"
+    , _rItems = Nothing
+    , _rSelfLink = Nothing
+    , _rId = Nothing
+    }
+
+-- | [Output Only] A token used to continue a truncated list request.
+rNextPageToken :: Lens' RegionAutoscalerList (Maybe Text)
+rNextPageToken
+  = lens _rNextPageToken
+      (\ s a -> s{_rNextPageToken = a})
+
+-- | Type of resource.
+rKind :: Lens' RegionAutoscalerList Text
+rKind = lens _rKind (\ s a -> s{_rKind = a})
+
+-- | A list of autoscalers.
+rItems :: Lens' RegionAutoscalerList [Autoscaler]
+rItems
+  = lens _rItems (\ s a -> s{_rItems = a}) . _Default .
+      _Coerce
+
+-- | [Output Only] Server-defined URL for this resource.
+rSelfLink :: Lens' RegionAutoscalerList (Maybe Text)
+rSelfLink
+  = lens _rSelfLink (\ s a -> s{_rSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+rId :: Lens' RegionAutoscalerList (Maybe Text)
+rId = lens _rId (\ s a -> s{_rId = a})
+
+instance FromJSON RegionAutoscalerList where
+        parseJSON
+          = withObject "RegionAutoscalerList"
+              (\ o ->
+                 RegionAutoscalerList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#regionAutoscalerList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON RegionAutoscalerList where
+        toJSON RegionAutoscalerList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rNextPageToken,
+                  Just ("kind" .= _rKind), ("items" .=) <$> _rItems,
+                  ("selfLink" .=) <$> _rSelfLink, ("id" .=) <$> _rId])
+
 --
 -- /See:/ 'instanceGroupsAddInstancesRequest' smart constructor.
 newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest'
@@ -1980,6 +2269,7 @@ data Image = Image'
     , _iSourceDiskId            :: !(Maybe Text)
     , _iKind                    :: !Text
     , _iSourceDiskEncryptionKey :: !(Maybe CustomerEncryptionKey)
+    , _iGuestOSFeatures         :: !(Maybe [GuestOSFeature])
     , _iArchiveSizeBytes        :: !(Maybe (Textual Int64))
     , _iFamily                  :: !(Maybe Text)
     , _iRawDisk                 :: !(Maybe ImageRawDisk)
@@ -2010,6 +2300,8 @@ data Image = Image'
 -- * 'iKind'
 --
 -- * 'iSourceDiskEncryptionKey'
+--
+-- * 'iGuestOSFeatures'
 --
 -- * 'iArchiveSizeBytes'
 --
@@ -2043,6 +2335,7 @@ image =
     , _iSourceDiskId = Nothing
     , _iKind = "compute#image"
     , _iSourceDiskEncryptionKey = Nothing
+    , _iGuestOSFeatures = Nothing
     , _iArchiveSizeBytes = Nothing
     , _iFamily = Nothing
     , _iRawDisk = Nothing
@@ -2106,6 +2399,22 @@ iSourceDiskEncryptionKey
   = lens _iSourceDiskEncryptionKey
       (\ s a -> s{_iSourceDiskEncryptionKey = a})
 
+-- | A list of features to enable on the guest OS. Applicable for bootable
+-- images only. Currently, only one feature can be enabled,
+-- VIRTIO_SCSCI_MULTIQUEUE, which allows each virtual CPU to have its own
+-- queue. For Windows images, you can only enable VIRTIO_SCSCI_MULTIQUEUE
+-- on images with driver version 1.2.0.1621 or higher. Linux images with
+-- kernel versions 3.17 and higher will support VIRTIO_SCSCI_MULTIQUEUE.
+-- For new Windows images, the server might also populate this field with
+-- the value WINDOWS, to indicate that this is a Windows image. This value
+-- is purely informational and does not enable or disable any features.
+iGuestOSFeatures :: Lens' Image [GuestOSFeature]
+iGuestOSFeatures
+  = lens _iGuestOSFeatures
+      (\ s a -> s{_iGuestOSFeatures = a})
+      . _Default
+      . _Coerce
+
 -- | Size of the image tar.gz archive stored in Google Cloud Storage (in
 -- bytes).
 iArchiveSizeBytes :: Lens' Image (Maybe Int64)
@@ -2159,8 +2468,8 @@ iLicenses
       _Default
       . _Coerce
 
--- | URL of the The source disk used to create this image. This can be a full
--- or valid partial URL. You must provide either this property or the
+-- | URL of the source disk used to create this image. This can be a full or
+-- valid partial URL. You must provide either this property or the
 -- rawDisk.source property but not both to create an image. For example,
 -- the following are valid values: -
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/disks\/disk
@@ -2191,6 +2500,7 @@ instance FromJSON Image where
                      <*> (o .:? "sourceDiskId")
                      <*> (o .:? "kind" .!= "compute#image")
                      <*> (o .:? "sourceDiskEncryptionKey")
+                     <*> (o .:? "guestOsFeatures" .!= mempty)
                      <*> (o .:? "archiveSizeBytes")
                      <*> (o .:? "family")
                      <*> (o .:? "rawDisk")
@@ -2215,6 +2525,7 @@ instance ToJSON Image where
                   Just ("kind" .= _iKind),
                   ("sourceDiskEncryptionKey" .=) <$>
                     _iSourceDiskEncryptionKey,
+                  ("guestOsFeatures" .=) <$> _iGuestOSFeatures,
                   ("archiveSizeBytes" .=) <$> _iArchiveSizeBytes,
                   ("family" .=) <$> _iFamily,
                   ("rawDisk" .=) <$> _iRawDisk,
@@ -2234,7 +2545,7 @@ instance ToJSON Image where
 data URLMap = URLMap'
     { _umTests             :: !(Maybe [URLMapTest])
     , _umKind              :: !Text
-    , _umFingerprint       :: !(Maybe Base64)
+    , _umFingerprint       :: !(Maybe Bytes)
     , _umDefaultService    :: !(Maybe Text)
     , _umSelfLink          :: !(Maybe Text)
     , _umName              :: !(Maybe Text)
@@ -2306,7 +2617,7 @@ umFingerprint :: Lens' URLMap (Maybe ByteString)
 umFingerprint
   = lens _umFingerprint
       (\ s a -> s{_umFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The URL of the BackendService resource if none of the hostRules match.
 umDefaultService :: Lens' URLMap (Maybe Text)
@@ -2717,7 +3028,6 @@ instance ToJSON InstanceGroupManagersScopedList where
 data HealthCheck = HealthCheck'
     { _hcHealthyThreshold   :: !(Maybe (Textual Int32))
     , _hcTCPHealthCheck     :: !(Maybe TCPHealthCheck)
-    , _hcHTTP2HealthCheck   :: !(Maybe HTTP2HealthCheck)
     , _hcKind               :: !Text
     , _hcSSLHealthCheck     :: !(Maybe SSLHealthCheck)
     , _hcSelfLink           :: !(Maybe Text)
@@ -2740,8 +3050,6 @@ data HealthCheck = HealthCheck'
 -- * 'hcHealthyThreshold'
 --
 -- * 'hcTCPHealthCheck'
---
--- * 'hcHTTP2HealthCheck'
 --
 -- * 'hcKind'
 --
@@ -2774,7 +3082,6 @@ healthCheck =
     HealthCheck'
     { _hcHealthyThreshold = Nothing
     , _hcTCPHealthCheck = Nothing
-    , _hcHTTP2HealthCheck = Nothing
     , _hcKind = "compute#healthCheck"
     , _hcSSLHealthCheck = Nothing
     , _hcSelfLink = Nothing
@@ -2802,11 +3109,6 @@ hcTCPHealthCheck :: Lens' HealthCheck (Maybe TCPHealthCheck)
 hcTCPHealthCheck
   = lens _hcTCPHealthCheck
       (\ s a -> s{_hcTCPHealthCheck = a})
-
-hcHTTP2HealthCheck :: Lens' HealthCheck (Maybe HTTP2HealthCheck)
-hcHTTP2HealthCheck
-  = lens _hcHTTP2HealthCheck
-      (\ s a -> s{_hcHTTP2HealthCheck = a})
 
 -- | Type of the resource.
 hcKind :: Lens' HealthCheck Text
@@ -2858,8 +3160,8 @@ hcId
   = lens _hcId (\ s a -> s{_hcId = a}) .
       mapping _Coerce
 
--- | Specifies the type of the healthCheck, either TCP, UDP, SSL, HTTP, HTTPS
--- or HTTP2. If not specified, the default is TCP. Exactly one of the
+-- | Specifies the type of the healthCheck, either TCP, SSL, HTTP or HTTPS.
+-- If not specified, the default is TCP. Exactly one of the
 -- protocol-specific health check field must be specified, which must match
 -- type field.
 hcType :: Lens' HealthCheck (Maybe HealthCheckType)
@@ -2900,7 +3202,6 @@ instance FromJSON HealthCheck where
                  HealthCheck' <$>
                    (o .:? "healthyThreshold") <*>
                      (o .:? "tcpHealthCheck")
-                     <*> (o .:? "http2HealthCheck")
                      <*> (o .:? "kind" .!= "compute#healthCheck")
                      <*> (o .:? "sslHealthCheck")
                      <*> (o .:? "selfLink")
@@ -2921,7 +3222,6 @@ instance ToJSON HealthCheck where
               (catMaybes
                  [("healthyThreshold" .=) <$> _hcHealthyThreshold,
                   ("tcpHealthCheck" .=) <$> _hcTCPHealthCheck,
-                  ("http2HealthCheck" .=) <$> _hcHTTP2HealthCheck,
                   Just ("kind" .= _hcKind),
                   ("sslHealthCheck" .=) <$> _hcSSLHealthCheck,
                   ("selfLink" .=) <$> _hcSelfLink,
@@ -4227,17 +4527,22 @@ instance ToJSON
 --
 -- /See:/ 'forwardingRule' smart constructor.
 data ForwardingRule = ForwardingRule'
-    { _frIPAddress         :: !(Maybe Text)
-    , _frKind              :: !Text
-    , _frPortRange         :: !(Maybe Text)
-    , _frSelfLink          :: !(Maybe Text)
-    , _frName              :: !(Maybe Text)
-    , _frIPProtocol        :: !(Maybe ForwardingRuleIPProtocol)
-    , _frCreationTimestamp :: !(Maybe Text)
-    , _frId                :: !(Maybe (Textual Word64))
-    , _frRegion            :: !(Maybe Text)
-    , _frDescription       :: !(Maybe Text)
-    , _frTarget            :: !(Maybe Text)
+    { _frIPAddress           :: !(Maybe Text)
+    , _frLoadBalancingScheme :: !(Maybe ForwardingRuleLoadBalancingScheme)
+    , _frKind                :: !Text
+    , _frNetwork             :: !(Maybe Text)
+    , _frPortRange           :: !(Maybe Text)
+    , _frSelfLink            :: !(Maybe Text)
+    , _frName                :: !(Maybe Text)
+    , _frIPProtocol          :: !(Maybe ForwardingRuleIPProtocol)
+    , _frCreationTimestamp   :: !(Maybe Text)
+    , _frSubnetwork          :: !(Maybe Text)
+    , _frPorts               :: !(Maybe [Text])
+    , _frId                  :: !(Maybe (Textual Word64))
+    , _frRegion              :: !(Maybe Text)
+    , _frDescription         :: !(Maybe Text)
+    , _frTarget              :: !(Maybe Text)
+    , _frBackendService      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRule' with the minimum fields required to make a request.
@@ -4246,7 +4551,11 @@ data ForwardingRule = ForwardingRule'
 --
 -- * 'frIPAddress'
 --
+-- * 'frLoadBalancingScheme'
+--
 -- * 'frKind'
+--
+-- * 'frNetwork'
 --
 -- * 'frPortRange'
 --
@@ -4258,6 +4567,10 @@ data ForwardingRule = ForwardingRule'
 --
 -- * 'frCreationTimestamp'
 --
+-- * 'frSubnetwork'
+--
+-- * 'frPorts'
+--
 -- * 'frId'
 --
 -- * 'frRegion'
@@ -4265,21 +4578,28 @@ data ForwardingRule = ForwardingRule'
 -- * 'frDescription'
 --
 -- * 'frTarget'
+--
+-- * 'frBackendService'
 forwardingRule
     :: ForwardingRule
 forwardingRule =
     ForwardingRule'
     { _frIPAddress = Nothing
+    , _frLoadBalancingScheme = Nothing
     , _frKind = "compute#forwardingRule"
+    , _frNetwork = Nothing
     , _frPortRange = Nothing
     , _frSelfLink = Nothing
     , _frName = Nothing
     , _frIPProtocol = Nothing
     , _frCreationTimestamp = Nothing
+    , _frSubnetwork = Nothing
+    , _frPorts = Nothing
     , _frId = Nothing
     , _frRegion = Nothing
     , _frDescription = Nothing
     , _frTarget = Nothing
+    , _frBackendService = Nothing
     }
 
 -- | The IP address that this forwarding rule is serving on behalf of. For
@@ -4291,15 +4611,34 @@ forwardingRule =
 -- belonging to the network\/subnetwork configured for the forwarding rule.
 -- A reserved address cannot be used. If the field is empty, the IP address
 -- will be automatically allocated from the internal IP range of the
--- subnetwork or network configured for this forwarding rule.
+-- subnetwork or network configured for this forwarding rule. Only IPv4 is
+-- supported.
 frIPAddress :: Lens' ForwardingRule (Maybe Text)
 frIPAddress
   = lens _frIPAddress (\ s a -> s{_frIPAddress = a})
+
+-- | This signifies what the ForwardingRule will be used for and can only
+-- take the following values: INTERNAL EXTERNAL The value of INTERNAL means
+-- that this will be used for Internal Network Load Balancing (TCP, UDP).
+-- The value of EXTERNAL means that this will be used for External Load
+-- Balancing (HTTP(S) LB, External TCP\/UDP LB, SSL Proxy)
+frLoadBalancingScheme :: Lens' ForwardingRule (Maybe ForwardingRuleLoadBalancingScheme)
+frLoadBalancingScheme
+  = lens _frLoadBalancingScheme
+      (\ s a -> s{_frLoadBalancingScheme = a})
 
 -- | [Output Only] Type of the resource. Always compute#forwardingRule for
 -- Forwarding Rule resources.
 frKind :: Lens' ForwardingRule Text
 frKind = lens _frKind (\ s a -> s{_frKind = a})
+
+-- | This field is not used for external load balancing. For internal load
+-- balancing, this field identifies the network that the load balanced IP
+-- should belong to for this Forwarding Rule. If this field is not
+-- specified, the default network will be used.
+frNetwork :: Lens' ForwardingRule (Maybe Text)
+frNetwork
+  = lens _frNetwork (\ s a -> s{_frNetwork = a})
 
 -- | Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets
 -- addressed to ports in the specified range will be forwarded to target.
@@ -4337,6 +4676,26 @@ frCreationTimestamp
   = lens _frCreationTimestamp
       (\ s a -> s{_frCreationTimestamp = a})
 
+-- | This field is not used for external load balancing. For internal load
+-- balancing, this field identifies the subnetwork that the load balanced
+-- IP should belong to for this Forwarding Rule. If the network specified
+-- is in auto subnet mode, this field is optional. However, if the network
+-- is in custom subnet mode, a subnetwork must be specified.
+frSubnetwork :: Lens' ForwardingRule (Maybe Text)
+frSubnetwork
+  = lens _frSubnetwork (\ s a -> s{_frSubnetwork = a})
+
+-- | This field is not used for external load balancing. When the load
+-- balancing scheme is INTERNAL, a single port or a comma separated list of
+-- ports can be configured. Only packets addressed to these ports will be
+-- forwarded to the backends configured with this forwarding rule. If the
+-- port list is not provided then all ports are allowed to pass through.
+-- You may specify a maximum of up to 5 ports.
+frPorts :: Lens' ForwardingRule [Text]
+frPorts
+  = lens _frPorts (\ s a -> s{_frPorts = a}) . _Default
+      . _Coerce
+
 -- | [Output Only] The unique identifier for the resource. This identifier is
 -- defined by the server.
 frId :: Lens' ForwardingRule (Maybe Word64)
@@ -4366,37 +4725,55 @@ frDescription
 frTarget :: Lens' ForwardingRule (Maybe Text)
 frTarget = lens _frTarget (\ s a -> s{_frTarget = a})
 
+-- | This field is not used for external load balancing. For internal load
+-- balancing, this field identifies the BackendService resource to receive
+-- the matched traffic.
+frBackendService :: Lens' ForwardingRule (Maybe Text)
+frBackendService
+  = lens _frBackendService
+      (\ s a -> s{_frBackendService = a})
+
 instance FromJSON ForwardingRule where
         parseJSON
           = withObject "ForwardingRule"
               (\ o ->
                  ForwardingRule' <$>
-                   (o .:? "IPAddress") <*>
-                     (o .:? "kind" .!= "compute#forwardingRule")
+                   (o .:? "IPAddress") <*> (o .:? "loadBalancingScheme")
+                     <*> (o .:? "kind" .!= "compute#forwardingRule")
+                     <*> (o .:? "network")
                      <*> (o .:? "portRange")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "IPProtocol")
                      <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "subnetwork")
+                     <*> (o .:? "ports" .!= mempty)
                      <*> (o .:? "id")
                      <*> (o .:? "region")
                      <*> (o .:? "description")
-                     <*> (o .:? "target"))
+                     <*> (o .:? "target")
+                     <*> (o .:? "backendService"))
 
 instance ToJSON ForwardingRule where
         toJSON ForwardingRule'{..}
           = object
               (catMaybes
                  [("IPAddress" .=) <$> _frIPAddress,
+                  ("loadBalancingScheme" .=) <$>
+                    _frLoadBalancingScheme,
                   Just ("kind" .= _frKind),
+                  ("network" .=) <$> _frNetwork,
                   ("portRange" .=) <$> _frPortRange,
                   ("selfLink" .=) <$> _frSelfLink,
                   ("name" .=) <$> _frName,
                   ("IPProtocol" .=) <$> _frIPProtocol,
                   ("creationTimestamp" .=) <$> _frCreationTimestamp,
-                  ("id" .=) <$> _frId, ("region" .=) <$> _frRegion,
+                  ("subnetwork" .=) <$> _frSubnetwork,
+                  ("ports" .=) <$> _frPorts, ("id" .=) <$> _frId,
+                  ("region" .=) <$> _frRegion,
                   ("description" .=) <$> _frDescription,
-                  ("target" .=) <$> _frTarget])
+                  ("target" .=) <$> _frTarget,
+                  ("backendService" .=) <$> _frBackendService])
 
 -- | Contains a list of UrlMap resources.
 --
@@ -4809,6 +5186,52 @@ instance ToJSON Project where
                   ("commonInstanceMetadata" .=) <$>
                     _pCommonInstanceMetadata])
 
+--
+-- /See:/ 'regionInstanceGroupManagersListInstancesResponse' smart constructor.
+newtype RegionInstanceGroupManagersListInstancesResponse = RegionInstanceGroupManagersListInstancesResponse'
+    { _rigmlirManagedInstances :: Maybe [ManagedInstance]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupManagersListInstancesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigmlirManagedInstances'
+regionInstanceGroupManagersListInstancesResponse
+    :: RegionInstanceGroupManagersListInstancesResponse
+regionInstanceGroupManagersListInstancesResponse =
+    RegionInstanceGroupManagersListInstancesResponse'
+    { _rigmlirManagedInstances = Nothing
+    }
+
+-- | List of managed instances.
+rigmlirManagedInstances :: Lens' RegionInstanceGroupManagersListInstancesResponse [ManagedInstance]
+rigmlirManagedInstances
+  = lens _rigmlirManagedInstances
+      (\ s a -> s{_rigmlirManagedInstances = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         RegionInstanceGroupManagersListInstancesResponse
+         where
+        parseJSON
+          = withObject
+              "RegionInstanceGroupManagersListInstancesResponse"
+              (\ o ->
+                 RegionInstanceGroupManagersListInstancesResponse' <$>
+                   (o .:? "managedInstances" .!= mempty))
+
+instance ToJSON
+         RegionInstanceGroupManagersListInstancesResponse
+         where
+        toJSON
+          RegionInstanceGroupManagersListInstancesResponse'{..}
+          = object
+              (catMaybes
+                 [("managedInstances" .=) <$>
+                    _rigmlirManagedInstances])
+
 -- | An Operation resource, used to manage asynchronous API requests.
 --
 -- /See:/ 'operation' smart constructor.
@@ -5045,9 +5468,9 @@ oDescription :: Lens' Operation (Maybe Text)
 oDescription
   = lens _oDescription (\ s a -> s{_oDescription = a})
 
--- | [Output Only] The URL of the resource that the operation modifies. If
--- creating a persistent disk snapshot, this points to the persistent disk
--- that the snapshot was created from.
+-- | [Output Only] The URL of the resource that the operation modifies. For
+-- operations related to creating a snapshot, this points to the persistent
+-- disk that the snapshot was created from.
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
@@ -5645,7 +6068,7 @@ instance ToJSON TargetPoolsScopedListWarningDataItem
 -- /See:/ 'instanceGroupManager' smart constructor.
 data InstanceGroupManager = InstanceGroupManager'
     { _igmKind              :: !Text
-    , _igmFingerprint       :: !(Maybe Base64)
+    , _igmFingerprint       :: !(Maybe Bytes)
     , _igmBaseInstanceName  :: !(Maybe Text)
     , _igmZone              :: !(Maybe Text)
     , _igmInstanceTemplate  :: !(Maybe Text)
@@ -5730,7 +6153,7 @@ igmFingerprint :: Lens' InstanceGroupManager (Maybe ByteString)
 igmFingerprint
   = lens _igmFingerprint
       (\ s a -> s{_igmFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The base instance name to use for instances in this group. The value
 -- must be 1-58 characters long. Instances are named by appending a hyphen
@@ -5875,6 +6298,97 @@ instance ToJSON InstanceGroupManager where
                   ("description" .=) <$> _igmDescription,
                   ("instanceGroup" .=) <$> _igmInstanceGroup,
                   ("namedPorts" .=) <$> _igmNamedPorts])
+
+--
+-- /See:/ 'regionInstanceGroupsListInstances' smart constructor.
+data RegionInstanceGroupsListInstances = RegionInstanceGroupsListInstances'
+    { _rigliNextPageToken :: !(Maybe Text)
+    , _rigliKind          :: !Text
+    , _rigliItems         :: !(Maybe [InstanceWithNamedPorts])
+    , _rigliSelfLink      :: !(Maybe Text)
+    , _rigliId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupsListInstances' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigliNextPageToken'
+--
+-- * 'rigliKind'
+--
+-- * 'rigliItems'
+--
+-- * 'rigliSelfLink'
+--
+-- * 'rigliId'
+regionInstanceGroupsListInstances
+    :: RegionInstanceGroupsListInstances
+regionInstanceGroupsListInstances =
+    RegionInstanceGroupsListInstances'
+    { _rigliNextPageToken = Nothing
+    , _rigliKind = "compute#regionInstanceGroupsListInstances"
+    , _rigliItems = Nothing
+    , _rigliSelfLink = Nothing
+    , _rigliId = Nothing
+    }
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+rigliNextPageToken :: Lens' RegionInstanceGroupsListInstances (Maybe Text)
+rigliNextPageToken
+  = lens _rigliNextPageToken
+      (\ s a -> s{_rigliNextPageToken = a})
+
+-- | The resource type.
+rigliKind :: Lens' RegionInstanceGroupsListInstances Text
+rigliKind
+  = lens _rigliKind (\ s a -> s{_rigliKind = a})
+
+-- | A list of instances and any named ports that are assigned to those
+-- instances.
+rigliItems :: Lens' RegionInstanceGroupsListInstances [InstanceWithNamedPorts]
+rigliItems
+  = lens _rigliItems (\ s a -> s{_rigliItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for the resource.
+rigliSelfLink :: Lens' RegionInstanceGroupsListInstances (Maybe Text)
+rigliSelfLink
+  = lens _rigliSelfLink
+      (\ s a -> s{_rigliSelfLink = a})
+
+-- | [Output Only] Unique identifier for the resource. Defined by the server.
+rigliId :: Lens' RegionInstanceGroupsListInstances (Maybe Text)
+rigliId = lens _rigliId (\ s a -> s{_rigliId = a})
+
+instance FromJSON RegionInstanceGroupsListInstances
+         where
+        parseJSON
+          = withObject "RegionInstanceGroupsListInstances"
+              (\ o ->
+                 RegionInstanceGroupsListInstances' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#regionInstanceGroupsListInstances")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON RegionInstanceGroupsListInstances
+         where
+        toJSON RegionInstanceGroupsListInstances'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rigliNextPageToken,
+                  Just ("kind" .= _rigliKind),
+                  ("items" .=) <$> _rigliItems,
+                  ("selfLink" .=) <$> _rigliSelfLink,
+                  ("id" .=) <$> _rigliId])
 
 --
 -- /See:/ 'tcpHealthCheck' smart constructor.
@@ -6055,6 +6569,45 @@ instance ToJSON RouteWarningsItemDataItem where
               (catMaybes
                  [("value" .=) <$> _rwidiValue,
                   ("key" .=) <$> _rwidiKey])
+
+-- | A map of scoped BackendService lists.
+--
+-- /See:/ 'backendServiceAggregatedListItems' smart constructor.
+newtype BackendServiceAggregatedListItems = BackendServiceAggregatedListItems'
+    { _bsaliAddtional :: HashMap Text BackendServicesScopedList
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BackendServiceAggregatedListItems' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bsaliAddtional'
+backendServiceAggregatedListItems
+    :: HashMap Text BackendServicesScopedList -- ^ 'bsaliAddtional'
+    -> BackendServiceAggregatedListItems
+backendServiceAggregatedListItems pBsaliAddtional_ =
+    BackendServiceAggregatedListItems'
+    { _bsaliAddtional = _Coerce # pBsaliAddtional_
+    }
+
+-- | Name of the scope containing this set of BackendServices.
+bsaliAddtional :: Lens' BackendServiceAggregatedListItems (HashMap Text BackendServicesScopedList)
+bsaliAddtional
+  = lens _bsaliAddtional
+      (\ s a -> s{_bsaliAddtional = a})
+      . _Coerce
+
+instance FromJSON BackendServiceAggregatedListItems
+         where
+        parseJSON
+          = withObject "BackendServiceAggregatedListItems"
+              (\ o ->
+                 BackendServiceAggregatedListItems' <$>
+                   (parseJSONObject o))
+
+instance ToJSON BackendServiceAggregatedListItems
+         where
+        toJSON = toJSON . _bsaliAddtional
 
 -- | [Output Only] A map of scoped instance lists.
 --
@@ -6830,95 +7383,6 @@ instance ToJSON InstanceProperties where
                   ("description" .=) <$> _ipDescription,
                   ("tags" .=) <$> _ipTags])
 
---
--- /See:/ 'hTTP2HealthCheck' smart constructor.
-data HTTP2HealthCheck = HTTP2HealthCheck'
-    { _httphcRequestPath :: !(Maybe Text)
-    , _httphcHost        :: !(Maybe Text)
-    , _httphcProxyHeader :: !(Maybe HTTP2HealthCheckProxyHeader)
-    , _httphcPortName    :: !(Maybe Text)
-    , _httphcPort        :: !(Maybe (Textual Int32))
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'HTTP2HealthCheck' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'httphcRequestPath'
---
--- * 'httphcHost'
---
--- * 'httphcProxyHeader'
---
--- * 'httphcPortName'
---
--- * 'httphcPort'
-hTTP2HealthCheck
-    :: HTTP2HealthCheck
-hTTP2HealthCheck =
-    HTTP2HealthCheck'
-    { _httphcRequestPath = Nothing
-    , _httphcHost = Nothing
-    , _httphcProxyHeader = Nothing
-    , _httphcPortName = Nothing
-    , _httphcPort = Nothing
-    }
-
--- | The request path of the HTTP\/2 health check request. The default value
--- is \/.
-httphcRequestPath :: Lens' HTTP2HealthCheck (Maybe Text)
-httphcRequestPath
-  = lens _httphcRequestPath
-      (\ s a -> s{_httphcRequestPath = a})
-
--- | The value of the host header in the HTTP\/2 health check request. If
--- left empty (default value), the IP on behalf of which this health check
--- is performed will be used.
-httphcHost :: Lens' HTTP2HealthCheck (Maybe Text)
-httphcHost
-  = lens _httphcHost (\ s a -> s{_httphcHost = a})
-
--- | Specifies the type of proxy header to append before sending data to the
--- backend, either NONE or PROXY_V1. The default is NONE.
-httphcProxyHeader :: Lens' HTTP2HealthCheck (Maybe HTTP2HealthCheckProxyHeader)
-httphcProxyHeader
-  = lens _httphcProxyHeader
-      (\ s a -> s{_httphcProxyHeader = a})
-
--- | Port name as defined in InstanceGroup#NamedPort#name. If both port and
--- port_name are defined, port takes precedence.
-httphcPortName :: Lens' HTTP2HealthCheck (Maybe Text)
-httphcPortName
-  = lens _httphcPortName
-      (\ s a -> s{_httphcPortName = a})
-
--- | The TCP port number for the health check request. The default value is
--- 443.
-httphcPort :: Lens' HTTP2HealthCheck (Maybe Int32)
-httphcPort
-  = lens _httphcPort (\ s a -> s{_httphcPort = a}) .
-      mapping _Coerce
-
-instance FromJSON HTTP2HealthCheck where
-        parseJSON
-          = withObject "HTTP2HealthCheck"
-              (\ o ->
-                 HTTP2HealthCheck' <$>
-                   (o .:? "requestPath") <*> (o .:? "host") <*>
-                     (o .:? "proxyHeader")
-                     <*> (o .:? "portName")
-                     <*> (o .:? "port"))
-
-instance ToJSON HTTP2HealthCheck where
-        toJSON HTTP2HealthCheck'{..}
-          = object
-              (catMaybes
-                 [("requestPath" .=) <$> _httphcRequestPath,
-                  ("host" .=) <$> _httphcHost,
-                  ("proxyHeader" .=) <$> _httphcProxyHeader,
-                  ("portName" .=) <$> _httphcPortName,
-                  ("port" .=) <$> _httphcPort])
-
 -- | [Output Only] Informational warning which replaces the list of disk
 -- types when the list is empty.
 --
@@ -7022,10 +7486,11 @@ attachedDiskInitializeParams =
     , _adipDiskType = Nothing
     }
 
--- | The source image used to create this disk. If the source image is
--- deleted, this field will not be set. To create a disk with one of the
--- public operating system images, specify the image by its family name.
--- For example, specify family\/debian-8 to use the latest Debian 8 image:
+-- | The source image to create this disk. When creating a new instance, one
+-- of initializeParams.sourceImage or disks.source is required. To create a
+-- disk with one of the public operating system images, specify the image
+-- by its family name. For example, specify family\/debian-8 to use the
+-- latest Debian 8 image:
 -- projects\/debian-cloud\/global\/images\/family\/debian-8 Alternatively,
 -- use a specific version of a public operating system image:
 -- projects\/debian-cloud\/global\/images\/debian-8-jessie-vYYYYMMDD To
@@ -7033,7 +7498,8 @@ attachedDiskInitializeParams =
 -- name in the following format: global\/images\/my-private-image You can
 -- also specify a private image by its image family, which returns the
 -- latest version of the image in that family. Replace the image name with
--- family\/family-name: global\/images\/family\/my-private-family
+-- family\/family-name: global\/images\/family\/my-private-family If the
+-- source image is deleted later, this field will not be set.
 adipSourceImage :: Lens' AttachedDiskInitializeParams (Maybe Text)
 adipSourceImage
   = lens _adipSourceImage
@@ -7155,7 +7621,8 @@ instance ToJSON AddressesScopedListWarningDataItem
 --
 -- /See:/ 'networkInterface' smart constructor.
 data NetworkInterface = NetworkInterface'
-    { _niNetwork       :: !(Maybe Text)
+    { _niKind          :: !Text
+    , _niNetwork       :: !(Maybe Text)
     , _niName          :: !(Maybe Text)
     , _niNetworkIP     :: !(Maybe Text)
     , _niSubnetwork    :: !(Maybe Text)
@@ -7165,6 +7632,8 @@ data NetworkInterface = NetworkInterface'
 -- | Creates a value of 'NetworkInterface' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'niKind'
 --
 -- * 'niNetwork'
 --
@@ -7179,12 +7648,18 @@ networkInterface
     :: NetworkInterface
 networkInterface =
     NetworkInterface'
-    { _niNetwork = Nothing
+    { _niKind = "compute#networkInterface"
+    , _niNetwork = Nothing
     , _niName = Nothing
     , _niNetworkIP = Nothing
     , _niSubnetwork = Nothing
     , _niAccessConfigs = Nothing
     }
+
+-- | [Output Only] Type of the resource. Always compute#networkInterface for
+-- network interfaces.
+niKind :: Lens' NetworkInterface Text
+niKind = lens _niKind (\ s a -> s{_niKind = a})
 
 -- | URL of the network resource for this instance. This is required for
 -- creating an instance but optional when creating a firewall rule. If not
@@ -7239,8 +7714,10 @@ instance FromJSON NetworkInterface where
           = withObject "NetworkInterface"
               (\ o ->
                  NetworkInterface' <$>
-                   (o .:? "network") <*> (o .:? "name") <*>
-                     (o .:? "networkIP")
+                   (o .:? "kind" .!= "compute#networkInterface") <*>
+                     (o .:? "network")
+                     <*> (o .:? "name")
+                     <*> (o .:? "networkIP")
                      <*> (o .:? "subnetwork")
                      <*> (o .:? "accessConfigs" .!= mempty))
 
@@ -7248,7 +7725,8 @@ instance ToJSON NetworkInterface where
         toJSON NetworkInterface'{..}
           = object
               (catMaybes
-                 [("network" .=) <$> _niNetwork,
+                 [Just ("kind" .= _niKind),
+                  ("network" .=) <$> _niNetwork,
                   ("name" .=) <$> _niName,
                   ("networkIP" .=) <$> _niNetworkIP,
                   ("subnetwork" .=) <$> _niSubnetwork,
@@ -7298,6 +7776,68 @@ instance ToJSON TargetPoolsRemoveHealthCheckRequest
           = object
               (catMaybes
                  [("healthChecks" .=) <$> _tprhcrHealthChecks])
+
+--
+-- /See:/ 'regionInstanceGroupManagersSetTargetPoolsRequest' smart constructor.
+data RegionInstanceGroupManagersSetTargetPoolsRequest = RegionInstanceGroupManagersSetTargetPoolsRequest'
+    { _rigmstprFingerprint :: !(Maybe Bytes)
+    , _rigmstprTargetPools :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupManagersSetTargetPoolsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigmstprFingerprint'
+--
+-- * 'rigmstprTargetPools'
+regionInstanceGroupManagersSetTargetPoolsRequest
+    :: RegionInstanceGroupManagersSetTargetPoolsRequest
+regionInstanceGroupManagersSetTargetPoolsRequest =
+    RegionInstanceGroupManagersSetTargetPoolsRequest'
+    { _rigmstprFingerprint = Nothing
+    , _rigmstprTargetPools = Nothing
+    }
+
+-- | Fingerprint of the target pools information, which is a hash of the
+-- contents. This field is used for optimistic locking when you update the
+-- target pool entries. This field is optional.
+rigmstprFingerprint :: Lens' RegionInstanceGroupManagersSetTargetPoolsRequest (Maybe ByteString)
+rigmstprFingerprint
+  = lens _rigmstprFingerprint
+      (\ s a -> s{_rigmstprFingerprint = a})
+      . mapping _Bytes
+
+-- | The URL of all TargetPool resources to which instances in the
+-- instanceGroup field are added. The target pools automatically apply to
+-- all of the instances in the managed instance group.
+rigmstprTargetPools :: Lens' RegionInstanceGroupManagersSetTargetPoolsRequest [Text]
+rigmstprTargetPools
+  = lens _rigmstprTargetPools
+      (\ s a -> s{_rigmstprTargetPools = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         RegionInstanceGroupManagersSetTargetPoolsRequest
+         where
+        parseJSON
+          = withObject
+              "RegionInstanceGroupManagersSetTargetPoolsRequest"
+              (\ o ->
+                 RegionInstanceGroupManagersSetTargetPoolsRequest' <$>
+                   (o .:? "fingerprint") <*>
+                     (o .:? "targetPools" .!= mempty))
+
+instance ToJSON
+         RegionInstanceGroupManagersSetTargetPoolsRequest
+         where
+        toJSON
+          RegionInstanceGroupManagersSetTargetPoolsRequest'{..}
+          = object
+              (catMaybes
+                 [("fingerprint" .=) <$> _rigmstprFingerprint,
+                  ("targetPools" .=) <$> _rigmstprTargetPools])
 
 -- | Contains a list of TargetSslProxy resources.
 --
@@ -7615,95 +8155,97 @@ instance ToJSON RouteList where
 --
 -- /See:/ 'router' smart constructor.
 data Router = Router'
-    { _rBGPPeers          :: !(Maybe [RouterBGPPeer])
-    , _rBGP               :: !(Maybe RouterBGP)
-    , _rKind              :: !Text
-    , _rNetwork           :: !(Maybe Text)
-    , _rInterfaces        :: !(Maybe [RouterInterface])
-    , _rSelfLink          :: !(Maybe Text)
-    , _rName              :: !(Maybe Text)
-    , _rCreationTimestamp :: !(Maybe Text)
-    , _rId                :: !(Maybe (Textual Word64))
-    , _rRegion            :: !(Maybe Text)
-    , _rDescription       :: !(Maybe Text)
+    { _rouBGPPeers          :: !(Maybe [RouterBGPPeer])
+    , _rouBGP               :: !(Maybe RouterBGP)
+    , _rouKind              :: !Text
+    , _rouNetwork           :: !(Maybe Text)
+    , _rouInterfaces        :: !(Maybe [RouterInterface])
+    , _rouSelfLink          :: !(Maybe Text)
+    , _rouName              :: !(Maybe Text)
+    , _rouCreationTimestamp :: !(Maybe Text)
+    , _rouId                :: !(Maybe (Textual Word64))
+    , _rouRegion            :: !(Maybe Text)
+    , _rouDescription       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Router' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rBGPPeers'
+-- * 'rouBGPPeers'
 --
--- * 'rBGP'
+-- * 'rouBGP'
 --
--- * 'rKind'
+-- * 'rouKind'
 --
--- * 'rNetwork'
+-- * 'rouNetwork'
 --
--- * 'rInterfaces'
+-- * 'rouInterfaces'
 --
--- * 'rSelfLink'
+-- * 'rouSelfLink'
 --
--- * 'rName'
+-- * 'rouName'
 --
--- * 'rCreationTimestamp'
+-- * 'rouCreationTimestamp'
 --
--- * 'rId'
+-- * 'rouId'
 --
--- * 'rRegion'
+-- * 'rouRegion'
 --
--- * 'rDescription'
+-- * 'rouDescription'
 router
     :: Router
 router =
     Router'
-    { _rBGPPeers = Nothing
-    , _rBGP = Nothing
-    , _rKind = "compute#router"
-    , _rNetwork = Nothing
-    , _rInterfaces = Nothing
-    , _rSelfLink = Nothing
-    , _rName = Nothing
-    , _rCreationTimestamp = Nothing
-    , _rId = Nothing
-    , _rRegion = Nothing
-    , _rDescription = Nothing
+    { _rouBGPPeers = Nothing
+    , _rouBGP = Nothing
+    , _rouKind = "compute#router"
+    , _rouNetwork = Nothing
+    , _rouInterfaces = Nothing
+    , _rouSelfLink = Nothing
+    , _rouName = Nothing
+    , _rouCreationTimestamp = Nothing
+    , _rouId = Nothing
+    , _rouRegion = Nothing
+    , _rouDescription = Nothing
     }
 
 -- | BGP information that needs to be configured into the routing stack to
 -- establish the BGP peering. It must specify peer ASN and either interface
 -- name, IP, or peer IP. Please refer to RFC4273.
-rBGPPeers :: Lens' Router [RouterBGPPeer]
-rBGPPeers
-  = lens _rBGPPeers (\ s a -> s{_rBGPPeers = a}) .
+rouBGPPeers :: Lens' Router [RouterBGPPeer]
+rouBGPPeers
+  = lens _rouBGPPeers (\ s a -> s{_rouBGPPeers = a}) .
       _Default
       . _Coerce
 
 -- | BGP information specific to this router.
-rBGP :: Lens' Router (Maybe RouterBGP)
-rBGP = lens _rBGP (\ s a -> s{_rBGP = a})
+rouBGP :: Lens' Router (Maybe RouterBGP)
+rouBGP = lens _rouBGP (\ s a -> s{_rouBGP = a})
 
 -- | [Output Only] Type of resource. Always compute#router for routers.
-rKind :: Lens' Router Text
-rKind = lens _rKind (\ s a -> s{_rKind = a})
+rouKind :: Lens' Router Text
+rouKind = lens _rouKind (\ s a -> s{_rouKind = a})
 
 -- | URI of the network to which this router belongs.
-rNetwork :: Lens' Router (Maybe Text)
-rNetwork = lens _rNetwork (\ s a -> s{_rNetwork = a})
+rouNetwork :: Lens' Router (Maybe Text)
+rouNetwork
+  = lens _rouNetwork (\ s a -> s{_rouNetwork = a})
 
 -- | Router interfaces. Each interface requires either one linked resource
 -- (e.g. linkedVpnTunnel), or IP address and IP address range (e.g.
 -- ipRange), or both.
-rInterfaces :: Lens' Router [RouterInterface]
-rInterfaces
-  = lens _rInterfaces (\ s a -> s{_rInterfaces = a}) .
-      _Default
+rouInterfaces :: Lens' Router [RouterInterface]
+rouInterfaces
+  = lens _rouInterfaces
+      (\ s a -> s{_rouInterfaces = a})
+      . _Default
       . _Coerce
 
 -- | [Output Only] Server-defined URL for the resource.
-rSelfLink :: Lens' Router (Maybe Text)
-rSelfLink
-  = lens _rSelfLink (\ s a -> s{_rSelfLink = a})
+rouSelfLink :: Lens' Router (Maybe Text)
+rouSelfLink
+  = lens _rouSelfLink (\ s a -> s{_rouSelfLink = a})
 
 -- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -7712,30 +8254,33 @@ rSelfLink
 -- character must be a lowercase letter, and all following characters must
 -- be a dash, lowercase letter, or digit, except the last character, which
 -- cannot be a dash.
-rName :: Lens' Router (Maybe Text)
-rName = lens _rName (\ s a -> s{_rName = a})
+rouName :: Lens' Router (Maybe Text)
+rouName = lens _rouName (\ s a -> s{_rouName = a})
 
 -- | [Output Only] Creation timestamp in RFC3339 text format.
-rCreationTimestamp :: Lens' Router (Maybe Text)
-rCreationTimestamp
-  = lens _rCreationTimestamp
-      (\ s a -> s{_rCreationTimestamp = a})
+rouCreationTimestamp :: Lens' Router (Maybe Text)
+rouCreationTimestamp
+  = lens _rouCreationTimestamp
+      (\ s a -> s{_rouCreationTimestamp = a})
 
 -- | [Output Only] The unique identifier for the resource. This identifier is
 -- defined by the server.
-rId :: Lens' Router (Maybe Word64)
-rId
-  = lens _rId (\ s a -> s{_rId = a}) . mapping _Coerce
+rouId :: Lens' Router (Maybe Word64)
+rouId
+  = lens _rouId (\ s a -> s{_rouId = a}) .
+      mapping _Coerce
 
 -- | [Output Only] URI of the region where the router resides.
-rRegion :: Lens' Router (Maybe Text)
-rRegion = lens _rRegion (\ s a -> s{_rRegion = a})
+rouRegion :: Lens' Router (Maybe Text)
+rouRegion
+  = lens _rouRegion (\ s a -> s{_rouRegion = a})
 
 -- | An optional description of this resource. Provide this property when you
 -- create the resource.
-rDescription :: Lens' Router (Maybe Text)
-rDescription
-  = lens _rDescription (\ s a -> s{_rDescription = a})
+rouDescription :: Lens' Router (Maybe Text)
+rouDescription
+  = lens _rouDescription
+      (\ s a -> s{_rouDescription = a})
 
 instance FromJSON Router where
         parseJSON
@@ -7757,15 +8302,15 @@ instance ToJSON Router where
         toJSON Router'{..}
           = object
               (catMaybes
-                 [("bgpPeers" .=) <$> _rBGPPeers,
-                  ("bgp" .=) <$> _rBGP, Just ("kind" .= _rKind),
-                  ("network" .=) <$> _rNetwork,
-                  ("interfaces" .=) <$> _rInterfaces,
-                  ("selfLink" .=) <$> _rSelfLink,
-                  ("name" .=) <$> _rName,
-                  ("creationTimestamp" .=) <$> _rCreationTimestamp,
-                  ("id" .=) <$> _rId, ("region" .=) <$> _rRegion,
-                  ("description" .=) <$> _rDescription])
+                 [("bgpPeers" .=) <$> _rouBGPPeers,
+                  ("bgp" .=) <$> _rouBGP, Just ("kind" .= _rouKind),
+                  ("network" .=) <$> _rouNetwork,
+                  ("interfaces" .=) <$> _rouInterfaces,
+                  ("selfLink" .=) <$> _rouSelfLink,
+                  ("name" .=) <$> _rouName,
+                  ("creationTimestamp" .=) <$> _rouCreationTimestamp,
+                  ("id" .=) <$> _rouId, ("region" .=) <$> _rouRegion,
+                  ("description" .=) <$> _rouDescription])
 
 --
 -- /See:/ 'routersScopedListWarningDataItem' smart constructor.
@@ -8050,6 +8595,87 @@ instance ToJSON FirewallAllowedItem where
               (catMaybes
                  [("IPProtocol" .=) <$> _faiIPProtocol,
                   ("ports" .=) <$> _faiPorts])
+
+-- | Contains a list of BackendServicesScopedList.
+--
+-- /See:/ 'backendServiceAggregatedList' smart constructor.
+data BackendServiceAggregatedList = BackendServiceAggregatedList'
+    { _bsalNextPageToken :: !(Maybe Text)
+    , _bsalKind          :: !Text
+    , _bsalItems         :: !(Maybe BackendServiceAggregatedListItems)
+    , _bsalSelfLink      :: !(Maybe Text)
+    , _bsalId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BackendServiceAggregatedList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bsalNextPageToken'
+--
+-- * 'bsalKind'
+--
+-- * 'bsalItems'
+--
+-- * 'bsalSelfLink'
+--
+-- * 'bsalId'
+backendServiceAggregatedList
+    :: BackendServiceAggregatedList
+backendServiceAggregatedList =
+    BackendServiceAggregatedList'
+    { _bsalNextPageToken = Nothing
+    , _bsalKind = "compute#backendServiceAggregatedList"
+    , _bsalItems = Nothing
+    , _bsalSelfLink = Nothing
+    , _bsalId = Nothing
+    }
+
+-- | [Output Only] A token used to continue a truncated list request.
+bsalNextPageToken :: Lens' BackendServiceAggregatedList (Maybe Text)
+bsalNextPageToken
+  = lens _bsalNextPageToken
+      (\ s a -> s{_bsalNextPageToken = a})
+
+-- | Type of resource.
+bsalKind :: Lens' BackendServiceAggregatedList Text
+bsalKind = lens _bsalKind (\ s a -> s{_bsalKind = a})
+
+-- | A map of scoped BackendService lists.
+bsalItems :: Lens' BackendServiceAggregatedList (Maybe BackendServiceAggregatedListItems)
+bsalItems
+  = lens _bsalItems (\ s a -> s{_bsalItems = a})
+
+-- | [Output Only] Server-defined URL for this resource.
+bsalSelfLink :: Lens' BackendServiceAggregatedList (Maybe Text)
+bsalSelfLink
+  = lens _bsalSelfLink (\ s a -> s{_bsalSelfLink = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+bsalId :: Lens' BackendServiceAggregatedList (Maybe Text)
+bsalId = lens _bsalId (\ s a -> s{_bsalId = a})
+
+instance FromJSON BackendServiceAggregatedList where
+        parseJSON
+          = withObject "BackendServiceAggregatedList"
+              (\ o ->
+                 BackendServiceAggregatedList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#backendServiceAggregatedList")
+                     <*> (o .:? "items")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON BackendServiceAggregatedList where
+        toJSON BackendServiceAggregatedList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _bsalNextPageToken,
+                  Just ("kind" .= _bsalKind),
+                  ("items" .=) <$> _bsalItems,
+                  ("selfLink" .=) <$> _bsalSelfLink,
+                  ("id" .=) <$> _bsalId])
 
 -- | Represents a Network resource. Read Networks and Firewalls for more
 -- information.
@@ -8641,7 +9267,8 @@ aUsers
 aKind :: Lens' Address Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
--- | The static external IP address represented by this resource.
+-- | The static external IP address represented by this resource. Only IPv4
+-- is supported.
 aAddress :: Lens' Address (Maybe Text)
 aAddress = lens _aAddress (\ s a -> s{_aAddress = a})
 
@@ -8867,6 +9494,57 @@ instance FromJSON RouterBGP where
 instance ToJSON RouterBGP where
         toJSON RouterBGP'{..}
           = object (catMaybes [("asn" .=) <$> _rbASN])
+
+--
+-- /See:/ 'backendServicesScopedList' smart constructor.
+data BackendServicesScopedList = BackendServicesScopedList'
+    { _bsslWarning         :: !(Maybe BackendServicesScopedListWarning)
+    , _bsslBackendServices :: !(Maybe [BackendService])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BackendServicesScopedList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bsslWarning'
+--
+-- * 'bsslBackendServices'
+backendServicesScopedList
+    :: BackendServicesScopedList
+backendServicesScopedList =
+    BackendServicesScopedList'
+    { _bsslWarning = Nothing
+    , _bsslBackendServices = Nothing
+    }
+
+-- | Informational warning which replaces the list of backend services when
+-- the list is empty.
+bsslWarning :: Lens' BackendServicesScopedList (Maybe BackendServicesScopedListWarning)
+bsslWarning
+  = lens _bsslWarning (\ s a -> s{_bsslWarning = a})
+
+-- | List of BackendServices contained in this scope.
+bsslBackendServices :: Lens' BackendServicesScopedList [BackendService]
+bsslBackendServices
+  = lens _bsslBackendServices
+      (\ s a -> s{_bsslBackendServices = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BackendServicesScopedList where
+        parseJSON
+          = withObject "BackendServicesScopedList"
+              (\ o ->
+                 BackendServicesScopedList' <$>
+                   (o .:? "warning") <*>
+                     (o .:? "backendServices" .!= mempty))
+
+instance ToJSON BackendServicesScopedList where
+        toJSON BackendServicesScopedList'{..}
+          = object
+              (catMaybes
+                 [("warning" .=) <$> _bsslWarning,
+                  ("backendServices" .=) <$> _bsslBackendServices])
 
 --
 -- /See:/ 'instanceGroupManagersRecreateInstancesRequest' smart constructor.
@@ -9185,79 +9863,79 @@ instance ToJSON InstanceGroupAggregatedList where
 --
 -- /See:/ 'route' smart constructor.
 data Route = Route'
-    { _rouPriority          :: !(Maybe (Textual Word32))
-    , _rouKind              :: !Text
-    , _rouNextHopGateway    :: !(Maybe Text)
-    , _rouNextHopNetwork    :: !(Maybe Text)
-    , _rouNetwork           :: !(Maybe Text)
-    , _rouWarnings          :: !(Maybe [RouteWarningsItem])
-    , _rouNextHopIP         :: !(Maybe Text)
-    , _rouDestRange         :: !(Maybe Text)
-    , _rouSelfLink          :: !(Maybe Text)
-    , _rouName              :: !(Maybe Text)
-    , _rouCreationTimestamp :: !(Maybe Text)
-    , _rouId                :: !(Maybe (Textual Word64))
-    , _rouNextHopVPNTunnel  :: !(Maybe Text)
-    , _rouDescription       :: !(Maybe Text)
-    , _rouTags              :: !(Maybe [Text])
-    , _rouNextHopInstance   :: !(Maybe Text)
+    { _rrPriority          :: !(Maybe (Textual Word32))
+    , _rrKind              :: !Text
+    , _rrNextHopGateway    :: !(Maybe Text)
+    , _rrNextHopNetwork    :: !(Maybe Text)
+    , _rrNetwork           :: !(Maybe Text)
+    , _rrWarnings          :: !(Maybe [RouteWarningsItem])
+    , _rrNextHopIP         :: !(Maybe Text)
+    , _rrDestRange         :: !(Maybe Text)
+    , _rrSelfLink          :: !(Maybe Text)
+    , _rrName              :: !(Maybe Text)
+    , _rrCreationTimestamp :: !(Maybe Text)
+    , _rrId                :: !(Maybe (Textual Word64))
+    , _rrNextHopVPNTunnel  :: !(Maybe Text)
+    , _rrDescription       :: !(Maybe Text)
+    , _rrTags              :: !(Maybe [Text])
+    , _rrNextHopInstance   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Route' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rouPriority'
+-- * 'rrPriority'
 --
--- * 'rouKind'
+-- * 'rrKind'
 --
--- * 'rouNextHopGateway'
+-- * 'rrNextHopGateway'
 --
--- * 'rouNextHopNetwork'
+-- * 'rrNextHopNetwork'
 --
--- * 'rouNetwork'
+-- * 'rrNetwork'
 --
--- * 'rouWarnings'
+-- * 'rrWarnings'
 --
--- * 'rouNextHopIP'
+-- * 'rrNextHopIP'
 --
--- * 'rouDestRange'
+-- * 'rrDestRange'
 --
--- * 'rouSelfLink'
+-- * 'rrSelfLink'
 --
--- * 'rouName'
+-- * 'rrName'
 --
--- * 'rouCreationTimestamp'
+-- * 'rrCreationTimestamp'
 --
--- * 'rouId'
+-- * 'rrId'
 --
--- * 'rouNextHopVPNTunnel'
+-- * 'rrNextHopVPNTunnel'
 --
--- * 'rouDescription'
+-- * 'rrDescription'
 --
--- * 'rouTags'
+-- * 'rrTags'
 --
--- * 'rouNextHopInstance'
+-- * 'rrNextHopInstance'
 route
     :: Route
 route =
     Route'
-    { _rouPriority = Nothing
-    , _rouKind = "compute#route"
-    , _rouNextHopGateway = Nothing
-    , _rouNextHopNetwork = Nothing
-    , _rouNetwork = Nothing
-    , _rouWarnings = Nothing
-    , _rouNextHopIP = Nothing
-    , _rouDestRange = Nothing
-    , _rouSelfLink = Nothing
-    , _rouName = Nothing
-    , _rouCreationTimestamp = Nothing
-    , _rouId = Nothing
-    , _rouNextHopVPNTunnel = Nothing
-    , _rouDescription = Nothing
-    , _rouTags = Nothing
-    , _rouNextHopInstance = Nothing
+    { _rrPriority = Nothing
+    , _rrKind = "compute#route"
+    , _rrNextHopGateway = Nothing
+    , _rrNextHopNetwork = Nothing
+    , _rrNetwork = Nothing
+    , _rrWarnings = Nothing
+    , _rrNextHopIP = Nothing
+    , _rrDestRange = Nothing
+    , _rrSelfLink = Nothing
+    , _rrName = Nothing
+    , _rrCreationTimestamp = Nothing
+    , _rrId = Nothing
+    , _rrNextHopVPNTunnel = Nothing
+    , _rrDescription = Nothing
+    , _rrTags = Nothing
+    , _rrNextHopInstance = Nothing
     }
 
 -- | The priority of this route. Priority is used to break ties in cases
@@ -9265,58 +9943,59 @@ route =
 -- the case of two routes with equal prefix length, the one with the
 -- lowest-numbered priority value wins. Default value is 1000. Valid range
 -- is 0 through 65535.
-rouPriority :: Lens' Route (Maybe Word32)
-rouPriority
-  = lens _rouPriority (\ s a -> s{_rouPriority = a}) .
+rrPriority :: Lens' Route (Maybe Word32)
+rrPriority
+  = lens _rrPriority (\ s a -> s{_rrPriority = a}) .
       mapping _Coerce
 
 -- | [Output Only] Type of this resource. Always compute#routes for Route
 -- resources.
-rouKind :: Lens' Route Text
-rouKind = lens _rouKind (\ s a -> s{_rouKind = a})
+rrKind :: Lens' Route Text
+rrKind = lens _rrKind (\ s a -> s{_rrKind = a})
 
 -- | The URL to a gateway that should handle matching packets. You can only
 -- specify the internet gateway using a full or partial valid URL:
 -- projects\/\/global\/gateways\/default-internet-gateway
-rouNextHopGateway :: Lens' Route (Maybe Text)
-rouNextHopGateway
-  = lens _rouNextHopGateway
-      (\ s a -> s{_rouNextHopGateway = a})
+rrNextHopGateway :: Lens' Route (Maybe Text)
+rrNextHopGateway
+  = lens _rrNextHopGateway
+      (\ s a -> s{_rrNextHopGateway = a})
 
 -- | The URL of the local network if it should handle matching packets.
-rouNextHopNetwork :: Lens' Route (Maybe Text)
-rouNextHopNetwork
-  = lens _rouNextHopNetwork
-      (\ s a -> s{_rouNextHopNetwork = a})
+rrNextHopNetwork :: Lens' Route (Maybe Text)
+rrNextHopNetwork
+  = lens _rrNextHopNetwork
+      (\ s a -> s{_rrNextHopNetwork = a})
 
 -- | Fully-qualified URL of the network that this route applies to.
-rouNetwork :: Lens' Route (Maybe Text)
-rouNetwork
-  = lens _rouNetwork (\ s a -> s{_rouNetwork = a})
+rrNetwork :: Lens' Route (Maybe Text)
+rrNetwork
+  = lens _rrNetwork (\ s a -> s{_rrNetwork = a})
 
 -- | [Output Only] If potential misconfigurations are detected for this
 -- route, this field will be populated with warning messages.
-rouWarnings :: Lens' Route [RouteWarningsItem]
-rouWarnings
-  = lens _rouWarnings (\ s a -> s{_rouWarnings = a}) .
+rrWarnings :: Lens' Route [RouteWarningsItem]
+rrWarnings
+  = lens _rrWarnings (\ s a -> s{_rrWarnings = a}) .
       _Default
       . _Coerce
 
 -- | The network IP address of an instance that should handle matching
--- packets.
-rouNextHopIP :: Lens' Route (Maybe Text)
-rouNextHopIP
-  = lens _rouNextHopIP (\ s a -> s{_rouNextHopIP = a})
+-- packets. Only IPv4 is supported.
+rrNextHopIP :: Lens' Route (Maybe Text)
+rrNextHopIP
+  = lens _rrNextHopIP (\ s a -> s{_rrNextHopIP = a})
 
 -- | The destination range of outgoing packets that this route applies to.
-rouDestRange :: Lens' Route (Maybe Text)
-rouDestRange
-  = lens _rouDestRange (\ s a -> s{_rouDestRange = a})
+-- Only IPv4 is supported.
+rrDestRange :: Lens' Route (Maybe Text)
+rrDestRange
+  = lens _rrDestRange (\ s a -> s{_rrDestRange = a})
 
 -- | [Output Only] Server-defined fully-qualified URL for this resource.
-rouSelfLink :: Lens' Route (Maybe Text)
-rouSelfLink
-  = lens _rouSelfLink (\ s a -> s{_rouSelfLink = a})
+rrSelfLink :: Lens' Route (Maybe Text)
+rrSelfLink
+  = lens _rrSelfLink (\ s a -> s{_rrSelfLink = a})
 
 -- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -9325,48 +10004,48 @@ rouSelfLink
 -- character must be a lowercase letter, and all following characters must
 -- be a dash, lowercase letter, or digit, except the last character, which
 -- cannot be a dash.
-rouName :: Lens' Route (Maybe Text)
-rouName = lens _rouName (\ s a -> s{_rouName = a})
+rrName :: Lens' Route (Maybe Text)
+rrName = lens _rrName (\ s a -> s{_rrName = a})
 
 -- | [Output Only] Creation timestamp in RFC3339 text format.
-rouCreationTimestamp :: Lens' Route (Maybe Text)
-rouCreationTimestamp
-  = lens _rouCreationTimestamp
-      (\ s a -> s{_rouCreationTimestamp = a})
+rrCreationTimestamp :: Lens' Route (Maybe Text)
+rrCreationTimestamp
+  = lens _rrCreationTimestamp
+      (\ s a -> s{_rrCreationTimestamp = a})
 
 -- | [Output Only] The unique identifier for the resource. This identifier is
 -- defined by the server.
-rouId :: Lens' Route (Maybe Word64)
-rouId
-  = lens _rouId (\ s a -> s{_rouId = a}) .
+rrId :: Lens' Route (Maybe Word64)
+rrId
+  = lens _rrId (\ s a -> s{_rrId = a}) .
       mapping _Coerce
 
 -- | The URL to a VpnTunnel that should handle matching packets.
-rouNextHopVPNTunnel :: Lens' Route (Maybe Text)
-rouNextHopVPNTunnel
-  = lens _rouNextHopVPNTunnel
-      (\ s a -> s{_rouNextHopVPNTunnel = a})
+rrNextHopVPNTunnel :: Lens' Route (Maybe Text)
+rrNextHopVPNTunnel
+  = lens _rrNextHopVPNTunnel
+      (\ s a -> s{_rrNextHopVPNTunnel = a})
 
 -- | An optional description of this resource. Provide this property when you
 -- create the resource.
-rouDescription :: Lens' Route (Maybe Text)
-rouDescription
-  = lens _rouDescription
-      (\ s a -> s{_rouDescription = a})
+rrDescription :: Lens' Route (Maybe Text)
+rrDescription
+  = lens _rrDescription
+      (\ s a -> s{_rrDescription = a})
 
 -- | A list of instance tags to which this route applies.
-rouTags :: Lens' Route [Text]
-rouTags
-  = lens _rouTags (\ s a -> s{_rouTags = a}) . _Default
-      . _Coerce
+rrTags :: Lens' Route [Text]
+rrTags
+  = lens _rrTags (\ s a -> s{_rrTags = a}) . _Default .
+      _Coerce
 
 -- | The URL to an instance that should handle matching packets. You can
 -- specify this as a full or partial URL. For example:
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/instances\/
-rouNextHopInstance :: Lens' Route (Maybe Text)
-rouNextHopInstance
-  = lens _rouNextHopInstance
-      (\ s a -> s{_rouNextHopInstance = a})
+rrNextHopInstance :: Lens' Route (Maybe Text)
+rrNextHopInstance
+  = lens _rrNextHopInstance
+      (\ s a -> s{_rrNextHopInstance = a})
 
 instance FromJSON Route where
         parseJSON
@@ -9394,22 +10073,22 @@ instance ToJSON Route where
         toJSON Route'{..}
           = object
               (catMaybes
-                 [("priority" .=) <$> _rouPriority,
-                  Just ("kind" .= _rouKind),
-                  ("nextHopGateway" .=) <$> _rouNextHopGateway,
-                  ("nextHopNetwork" .=) <$> _rouNextHopNetwork,
-                  ("network" .=) <$> _rouNetwork,
-                  ("warnings" .=) <$> _rouWarnings,
-                  ("nextHopIp" .=) <$> _rouNextHopIP,
-                  ("destRange" .=) <$> _rouDestRange,
-                  ("selfLink" .=) <$> _rouSelfLink,
-                  ("name" .=) <$> _rouName,
-                  ("creationTimestamp" .=) <$> _rouCreationTimestamp,
-                  ("id" .=) <$> _rouId,
-                  ("nextHopVpnTunnel" .=) <$> _rouNextHopVPNTunnel,
-                  ("description" .=) <$> _rouDescription,
-                  ("tags" .=) <$> _rouTags,
-                  ("nextHopInstance" .=) <$> _rouNextHopInstance])
+                 [("priority" .=) <$> _rrPriority,
+                  Just ("kind" .= _rrKind),
+                  ("nextHopGateway" .=) <$> _rrNextHopGateway,
+                  ("nextHopNetwork" .=) <$> _rrNextHopNetwork,
+                  ("network" .=) <$> _rrNetwork,
+                  ("warnings" .=) <$> _rrWarnings,
+                  ("nextHopIp" .=) <$> _rrNextHopIP,
+                  ("destRange" .=) <$> _rrDestRange,
+                  ("selfLink" .=) <$> _rrSelfLink,
+                  ("name" .=) <$> _rrName,
+                  ("creationTimestamp" .=) <$> _rrCreationTimestamp,
+                  ("id" .=) <$> _rrId,
+                  ("nextHopVpnTunnel" .=) <$> _rrNextHopVPNTunnel,
+                  ("description" .=) <$> _rrDescription,
+                  ("tags" .=) <$> _rrTags,
+                  ("nextHopInstance" .=) <$> _rrNextHopInstance])
 
 --
 -- /See:/ 'targetVPNGatewaysScopedListWarningDataItem' smart constructor.
@@ -10104,8 +10783,8 @@ sslCertificate =
     , _scDescription = Nothing
     }
 
--- | A write-only private key in PEM format. Only insert RPCs will include
--- this field.
+-- | A write-only private key in PEM format. Only insert requests will
+-- include this field.
 scPrivateKey :: Lens' SSLCertificate (Maybe Text)
 scPrivateKey
   = lens _scPrivateKey (\ s a -> s{_scPrivateKey = a})
@@ -10618,7 +11297,8 @@ routerBGPPeer =
     , _rbpName = Nothing
     }
 
--- | IP address of the interface inside Google Cloud Platform.
+-- | IP address of the interface inside Google Cloud Platform. Only IPv4 is
+-- supported.
 rbpIPAddress :: Lens' RouterBGPPeer (Maybe Text)
 rbpIPAddress
   = lens _rbpIPAddress (\ s a -> s{_rbpIPAddress = a})
@@ -10629,7 +11309,8 @@ rbpInterfaceName
   = lens _rbpInterfaceName
       (\ s a -> s{_rbpInterfaceName = a})
 
--- | IP address of the BGP interface outside Google cloud.
+-- | IP address of the BGP interface outside Google cloud. Only IPv4 is
+-- supported.
 rbpPeerIPAddress :: Lens' RouterBGPPeer (Maybe Text)
 rbpPeerIPAddress
   = lens _rbpPeerIPAddress
@@ -10678,6 +11359,48 @@ instance ToJSON RouterBGPPeer where
                     _rbpAdvertisedRoutePriority,
                   ("peerAsn" .=) <$> _rbpPeerASN,
                   ("name" .=) <$> _rbpName])
+
+--
+-- /See:/ 'subnetworksExpandIPCIdRRangeRequest' smart constructor.
+newtype SubnetworksExpandIPCIdRRangeRequest = SubnetworksExpandIPCIdRRangeRequest'
+    { _seicirrrIPCIdRRange :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubnetworksExpandIPCIdRRangeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'seicirrrIPCIdRRange'
+subnetworksExpandIPCIdRRangeRequest
+    :: SubnetworksExpandIPCIdRRangeRequest
+subnetworksExpandIPCIdRRangeRequest =
+    SubnetworksExpandIPCIdRRangeRequest'
+    { _seicirrrIPCIdRRange = Nothing
+    }
+
+-- | The IP (in CIDR format or netmask) of internal addresses that are legal
+-- on this Subnetwork. This range should be disjoint from other subnetworks
+-- within this network. This range can only be larger than (i.e. a superset
+-- of) the range previously defined before the update.
+seicirrrIPCIdRRange :: Lens' SubnetworksExpandIPCIdRRangeRequest (Maybe Text)
+seicirrrIPCIdRRange
+  = lens _seicirrrIPCIdRRange
+      (\ s a -> s{_seicirrrIPCIdRRange = a})
+
+instance FromJSON SubnetworksExpandIPCIdRRangeRequest
+         where
+        parseJSON
+          = withObject "SubnetworksExpandIPCIdRRangeRequest"
+              (\ o ->
+                 SubnetworksExpandIPCIdRRangeRequest' <$>
+                   (o .:? "ipCidrRange"))
+
+instance ToJSON SubnetworksExpandIPCIdRRangeRequest
+         where
+        toJSON SubnetworksExpandIPCIdRRangeRequest'{..}
+          = object
+              (catMaybes
+                 [("ipCidrRange" .=) <$> _seicirrrIPCIdRRange])
 
 --
 -- /See:/ 'managedInstance' smart constructor.
@@ -11463,6 +12186,50 @@ instance ToJSON ServiceAccount where
                  [("email" .=) <$> _saEmail,
                   ("scopes" .=) <$> _saScopes])
 
+--
+-- /See:/ 'regionInstanceGroupManagersAbandonInstancesRequest' smart constructor.
+newtype RegionInstanceGroupManagersAbandonInstancesRequest = RegionInstanceGroupManagersAbandonInstancesRequest'
+    { _rigmairInstances :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupManagersAbandonInstancesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigmairInstances'
+regionInstanceGroupManagersAbandonInstancesRequest
+    :: RegionInstanceGroupManagersAbandonInstancesRequest
+regionInstanceGroupManagersAbandonInstancesRequest =
+    RegionInstanceGroupManagersAbandonInstancesRequest'
+    { _rigmairInstances = Nothing
+    }
+
+-- | The names of one or more instances to abandon.
+rigmairInstances :: Lens' RegionInstanceGroupManagersAbandonInstancesRequest [Text]
+rigmairInstances
+  = lens _rigmairInstances
+      (\ s a -> s{_rigmairInstances = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         RegionInstanceGroupManagersAbandonInstancesRequest
+         where
+        parseJSON
+          = withObject
+              "RegionInstanceGroupManagersAbandonInstancesRequest"
+              (\ o ->
+                 RegionInstanceGroupManagersAbandonInstancesRequest'
+                   <$> (o .:? "instances" .!= mempty))
+
+instance ToJSON
+         RegionInstanceGroupManagersAbandonInstancesRequest
+         where
+        toJSON
+          RegionInstanceGroupManagersAbandonInstancesRequest'{..}
+          = object
+              (catMaybes [("instances" .=) <$> _rigmairInstances])
+
 -- | Contains a list of networks.
 --
 -- /See:/ 'networkList' smart constructor.
@@ -11589,6 +12356,94 @@ instance ToJSON InstanceGroupsListInstancesRequest
           = object
               (catMaybes
                  [("instanceState" .=) <$> _iglirInstanceState])
+
+-- | Contains a list of InstanceGroup resources.
+--
+-- /See:/ 'regionInstanceGroupList' smart constructor.
+data RegionInstanceGroupList = RegionInstanceGroupList'
+    { _riglNextPageToken :: !(Maybe Text)
+    , _riglKind          :: !Text
+    , _riglItems         :: !(Maybe [InstanceGroup])
+    , _riglSelfLink      :: !(Maybe Text)
+    , _riglId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riglNextPageToken'
+--
+-- * 'riglKind'
+--
+-- * 'riglItems'
+--
+-- * 'riglSelfLink'
+--
+-- * 'riglId'
+regionInstanceGroupList
+    :: RegionInstanceGroupList
+regionInstanceGroupList =
+    RegionInstanceGroupList'
+    { _riglNextPageToken = Nothing
+    , _riglKind = "compute#regionInstanceGroupList"
+    , _riglItems = Nothing
+    , _riglSelfLink = Nothing
+    , _riglId = Nothing
+    }
+
+-- | [Output Only] This token allows you to get the next page of results for
+-- list requests. If the number of results is larger than maxResults, use
+-- the nextPageToken as a value for the query parameter pageToken in the
+-- next list request. Subsequent list requests will have their own
+-- nextPageToken to continue paging through the results.
+riglNextPageToken :: Lens' RegionInstanceGroupList (Maybe Text)
+riglNextPageToken
+  = lens _riglNextPageToken
+      (\ s a -> s{_riglNextPageToken = a})
+
+-- | The resource type.
+riglKind :: Lens' RegionInstanceGroupList Text
+riglKind = lens _riglKind (\ s a -> s{_riglKind = a})
+
+-- | A list of InstanceGroup resources.
+riglItems :: Lens' RegionInstanceGroupList [InstanceGroup]
+riglItems
+  = lens _riglItems (\ s a -> s{_riglItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The URL for this resource type. The server generates this
+-- URL.
+riglSelfLink :: Lens' RegionInstanceGroupList (Maybe Text)
+riglSelfLink
+  = lens _riglSelfLink (\ s a -> s{_riglSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+riglId :: Lens' RegionInstanceGroupList (Maybe Text)
+riglId = lens _riglId (\ s a -> s{_riglId = a})
+
+instance FromJSON RegionInstanceGroupList where
+        parseJSON
+          = withObject "RegionInstanceGroupList"
+              (\ o ->
+                 RegionInstanceGroupList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#regionInstanceGroupList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON RegionInstanceGroupList where
+        toJSON RegionInstanceGroupList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _riglNextPageToken,
+                  Just ("kind" .= _riglKind),
+                  ("items" .=) <$> _riglItems,
+                  ("selfLink" .=) <$> _riglSelfLink,
+                  ("id" .=) <$> _riglId])
 
 -- | [Output Only] A map of scoped target pool lists.
 --
@@ -12062,8 +12917,11 @@ adInterface
   = lens _adInterface (\ s a -> s{_adInterface = a})
 
 -- | Specifies a valid partial or full URL to an existing Persistent Disk
--- resource. This field is only applicable for persistent disks. Note that
--- for InstanceTemplate, it is just disk name, not URL for the disk.
+-- resource. When creating a new instance, one of
+-- initializeParams.sourceImage or disks.source is required. If desired,
+-- you can also attach existing non-root persistent disks using this
+-- property. This field is only applicable for persistent disks. Note that
+-- for InstanceTemplate, specify the disk name, not the URL for the disk.
 adSource :: Lens' AttachedDisk (Maybe Text)
 adSource = lens _adSource (\ s a -> s{_adSource = a})
 
@@ -12208,6 +13066,66 @@ instance ToJSON DiskTypeList where
                   ("items" .=) <$> _dtlItems,
                   ("selfLink" .=) <$> _dtlSelfLink,
                   ("id" .=) <$> _dtlId])
+
+--
+-- /See:/ 'regionInstanceGroupsSetNamedPortsRequest' smart constructor.
+data RegionInstanceGroupsSetNamedPortsRequest = RegionInstanceGroupsSetNamedPortsRequest'
+    { _rigsnprFingerprint :: !(Maybe Bytes)
+    , _rigsnprNamedPorts  :: !(Maybe [NamedPort])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupsSetNamedPortsRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigsnprFingerprint'
+--
+-- * 'rigsnprNamedPorts'
+regionInstanceGroupsSetNamedPortsRequest
+    :: RegionInstanceGroupsSetNamedPortsRequest
+regionInstanceGroupsSetNamedPortsRequest =
+    RegionInstanceGroupsSetNamedPortsRequest'
+    { _rigsnprFingerprint = Nothing
+    , _rigsnprNamedPorts = Nothing
+    }
+
+-- | The fingerprint of the named ports information for this instance group.
+-- Use this optional property to prevent conflicts when multiple users
+-- change the named ports settings concurrently. Obtain the fingerprint
+-- with the instanceGroups.get method. Then, include the fingerprint in
+-- your request to ensure that you do not overwrite changes that were
+-- applied from another concurrent request.
+rigsnprFingerprint :: Lens' RegionInstanceGroupsSetNamedPortsRequest (Maybe ByteString)
+rigsnprFingerprint
+  = lens _rigsnprFingerprint
+      (\ s a -> s{_rigsnprFingerprint = a})
+      . mapping _Bytes
+
+-- | The list of named ports to set for this instance group.
+rigsnprNamedPorts :: Lens' RegionInstanceGroupsSetNamedPortsRequest [NamedPort]
+rigsnprNamedPorts
+  = lens _rigsnprNamedPorts
+      (\ s a -> s{_rigsnprNamedPorts = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         RegionInstanceGroupsSetNamedPortsRequest where
+        parseJSON
+          = withObject
+              "RegionInstanceGroupsSetNamedPortsRequest"
+              (\ o ->
+                 RegionInstanceGroupsSetNamedPortsRequest' <$>
+                   (o .:? "fingerprint") <*>
+                     (o .:? "namedPorts" .!= mempty))
+
+instance ToJSON
+         RegionInstanceGroupsSetNamedPortsRequest where
+        toJSON RegionInstanceGroupsSetNamedPortsRequest'{..}
+          = object
+              (catMaybes
+                 [("fingerprint" .=) <$> _rigsnprFingerprint,
+                  ("namedPorts" .=) <$> _rigsnprNamedPorts])
 
 -- | Contains a list of machine types.
 --
@@ -12388,6 +13306,96 @@ instance ToJSON TargetHTTPProxyList where
                   ("selfLink" .=) <$> _thttpplSelfLink,
                   ("id" .=) <$> _thttpplId])
 
+-- | Contains a list of managed instance groups.
+--
+-- /See:/ 'regionInstanceGroupManagerList' smart constructor.
+data RegionInstanceGroupManagerList = RegionInstanceGroupManagerList'
+    { _rigmlNextPageToken :: !(Maybe Text)
+    , _rigmlKind          :: !Text
+    , _rigmlItems         :: !(Maybe [InstanceGroupManager])
+    , _rigmlSelfLink      :: !(Maybe Text)
+    , _rigmlId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupManagerList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigmlNextPageToken'
+--
+-- * 'rigmlKind'
+--
+-- * 'rigmlItems'
+--
+-- * 'rigmlSelfLink'
+--
+-- * 'rigmlId'
+regionInstanceGroupManagerList
+    :: RegionInstanceGroupManagerList
+regionInstanceGroupManagerList =
+    RegionInstanceGroupManagerList'
+    { _rigmlNextPageToken = Nothing
+    , _rigmlKind = "compute#regionInstanceGroupManagerList"
+    , _rigmlItems = Nothing
+    , _rigmlSelfLink = Nothing
+    , _rigmlId = Nothing
+    }
+
+-- | [Output only] A token used to continue a truncated list request.
+rigmlNextPageToken :: Lens' RegionInstanceGroupManagerList (Maybe Text)
+rigmlNextPageToken
+  = lens _rigmlNextPageToken
+      (\ s a -> s{_rigmlNextPageToken = a})
+
+-- | [Output Only] The resource type, which is always
+-- compute#instanceGroupManagerList for a list of managed instance groups
+-- that exist in th regional scope.
+rigmlKind :: Lens' RegionInstanceGroupManagerList Text
+rigmlKind
+  = lens _rigmlKind (\ s a -> s{_rigmlKind = a})
+
+-- | A list of managed instance groups.
+rigmlItems :: Lens' RegionInstanceGroupManagerList [InstanceGroupManager]
+rigmlItems
+  = lens _rigmlItems (\ s a -> s{_rigmlItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output only] The URL for this resource type. The server generates this
+-- URL.
+rigmlSelfLink :: Lens' RegionInstanceGroupManagerList (Maybe Text)
+rigmlSelfLink
+  = lens _rigmlSelfLink
+      (\ s a -> s{_rigmlSelfLink = a})
+
+-- | [Output Only] The unique identifier for the resource. This identifier is
+-- defined by the server.
+rigmlId :: Lens' RegionInstanceGroupManagerList (Maybe Text)
+rigmlId = lens _rigmlId (\ s a -> s{_rigmlId = a})
+
+instance FromJSON RegionInstanceGroupManagerList
+         where
+        parseJSON
+          = withObject "RegionInstanceGroupManagerList"
+              (\ o ->
+                 RegionInstanceGroupManagerList' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!=
+                        "compute#regionInstanceGroupManagerList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON RegionInstanceGroupManagerList where
+        toJSON RegionInstanceGroupManagerList'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _rigmlNextPageToken,
+                  Just ("kind" .= _rigmlKind),
+                  ("items" .=) <$> _rigmlItems,
+                  ("selfLink" .=) <$> _rigmlSelfLink,
+                  ("id" .=) <$> _rigmlId])
+
 --
 -- /See:/ 'diskTypesScopedList' smart constructor.
 data DiskTypesScopedList = DiskTypesScopedList'
@@ -12522,161 +13530,73 @@ instance ToJSON DiskTypeAggregatedList where
                   ("selfLink" .=) <$> _dtalSelfLink,
                   ("id" .=) <$> _dtalId])
 
--- | An HttpHealthCheck resource. This resource defines a template for how
--- individual instances should be checked for health, via HTTP.
 --
 -- /See:/ 'hTTPHealthCheck' smart constructor.
 data HTTPHealthCheck = HTTPHealthCheck'
-    { _hHealthyThreshold   :: !(Maybe (Textual Int32))
-    , _hKind               :: !Text
-    , _hRequestPath        :: !(Maybe Text)
-    , _hSelfLink           :: !(Maybe Text)
-    , _hCheckIntervalSec   :: !(Maybe (Textual Int32))
-    , _hName               :: !(Maybe Text)
-    , _hCreationTimestamp  :: !(Maybe Text)
-    , _hId                 :: !(Maybe (Textual Word64))
-    , _hHost               :: !(Maybe Text)
-    , _hTimeoutSec         :: !(Maybe (Textual Int32))
-    , _hDescription        :: !(Maybe Text)
-    , _hUnhealthyThreshold :: !(Maybe (Textual Int32))
-    , _hPort               :: !(Maybe (Textual Int32))
+    { _httphcRequestPath :: !(Maybe Text)
+    , _httphcHost        :: !(Maybe Text)
+    , _httphcProxyHeader :: !(Maybe HTTPHealthCheckProxyHeader)
+    , _httphcPortName    :: !(Maybe Text)
+    , _httphcPort        :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'hHealthyThreshold'
+-- * 'httphcRequestPath'
 --
--- * 'hKind'
+-- * 'httphcHost'
 --
--- * 'hRequestPath'
+-- * 'httphcProxyHeader'
 --
--- * 'hSelfLink'
+-- * 'httphcPortName'
 --
--- * 'hCheckIntervalSec'
---
--- * 'hName'
---
--- * 'hCreationTimestamp'
---
--- * 'hId'
---
--- * 'hHost'
---
--- * 'hTimeoutSec'
---
--- * 'hDescription'
---
--- * 'hUnhealthyThreshold'
---
--- * 'hPort'
+-- * 'httphcPort'
 hTTPHealthCheck
     :: HTTPHealthCheck
 hTTPHealthCheck =
     HTTPHealthCheck'
-    { _hHealthyThreshold = Nothing
-    , _hKind = "compute#httpHealthCheck"
-    , _hRequestPath = Nothing
-    , _hSelfLink = Nothing
-    , _hCheckIntervalSec = Nothing
-    , _hName = Nothing
-    , _hCreationTimestamp = Nothing
-    , _hId = Nothing
-    , _hHost = Nothing
-    , _hTimeoutSec = Nothing
-    , _hDescription = Nothing
-    , _hUnhealthyThreshold = Nothing
-    , _hPort = Nothing
+    { _httphcRequestPath = Nothing
+    , _httphcHost = Nothing
+    , _httphcProxyHeader = Nothing
+    , _httphcPortName = Nothing
+    , _httphcPort = Nothing
     }
-
--- | A so-far unhealthy instance will be marked healthy after this many
--- consecutive successes. The default value is 2.
-hHealthyThreshold :: Lens' HTTPHealthCheck (Maybe Int32)
-hHealthyThreshold
-  = lens _hHealthyThreshold
-      (\ s a -> s{_hHealthyThreshold = a})
-      . mapping _Coerce
-
--- | [Output Only] Type of the resource. Always compute#httpHealthCheck for
--- HTTP health checks.
-hKind :: Lens' HTTPHealthCheck Text
-hKind = lens _hKind (\ s a -> s{_hKind = a})
 
 -- | The request path of the HTTP health check request. The default value is
 -- \/.
-hRequestPath :: Lens' HTTPHealthCheck (Maybe Text)
-hRequestPath
-  = lens _hRequestPath (\ s a -> s{_hRequestPath = a})
-
--- | [Output Only] Server-defined URL for the resource.
-hSelfLink :: Lens' HTTPHealthCheck (Maybe Text)
-hSelfLink
-  = lens _hSelfLink (\ s a -> s{_hSelfLink = a})
-
--- | How often (in seconds) to send a health check. The default value is 5
--- seconds.
-hCheckIntervalSec :: Lens' HTTPHealthCheck (Maybe Int32)
-hCheckIntervalSec
-  = lens _hCheckIntervalSec
-      (\ s a -> s{_hCheckIntervalSec = a})
-      . mapping _Coerce
-
--- | Name of the resource. Provided by the client when the resource is
--- created. The name must be 1-63 characters long, and comply with RFC1035.
--- Specifically, the name must be 1-63 characters long and match the
--- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
--- character must be a lowercase letter, and all following characters must
--- be a dash, lowercase letter, or digit, except the last character, which
--- cannot be a dash.
-hName :: Lens' HTTPHealthCheck (Maybe Text)
-hName = lens _hName (\ s a -> s{_hName = a})
-
--- | [Output Only] Creation timestamp in RFC3339 text format.
-hCreationTimestamp :: Lens' HTTPHealthCheck (Maybe Text)
-hCreationTimestamp
-  = lens _hCreationTimestamp
-      (\ s a -> s{_hCreationTimestamp = a})
-
--- | [Output Only] The unique identifier for the resource. This identifier is
--- defined by the server.
-hId :: Lens' HTTPHealthCheck (Maybe Word64)
-hId
-  = lens _hId (\ s a -> s{_hId = a}) . mapping _Coerce
+httphcRequestPath :: Lens' HTTPHealthCheck (Maybe Text)
+httphcRequestPath
+  = lens _httphcRequestPath
+      (\ s a -> s{_httphcRequestPath = a})
 
 -- | The value of the host header in the HTTP health check request. If left
--- empty (default value), the public IP on behalf of which this health
--- check is performed will be used.
-hHost :: Lens' HTTPHealthCheck (Maybe Text)
-hHost = lens _hHost (\ s a -> s{_hHost = a})
+-- empty (default value), the IP on behalf of which this health check is
+-- performed will be used.
+httphcHost :: Lens' HTTPHealthCheck (Maybe Text)
+httphcHost
+  = lens _httphcHost (\ s a -> s{_httphcHost = a})
 
--- | How long (in seconds) to wait before claiming failure. The default value
--- is 5 seconds. It is invalid for timeoutSec to have greater value than
--- checkIntervalSec.
-hTimeoutSec :: Lens' HTTPHealthCheck (Maybe Int32)
-hTimeoutSec
-  = lens _hTimeoutSec (\ s a -> s{_hTimeoutSec = a}) .
-      mapping _Coerce
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+httphcProxyHeader :: Lens' HTTPHealthCheck (Maybe HTTPHealthCheckProxyHeader)
+httphcProxyHeader
+  = lens _httphcProxyHeader
+      (\ s a -> s{_httphcProxyHeader = a})
 
--- | An optional description of this resource. Provide this property when you
--- create the resource.
-hDescription :: Lens' HTTPHealthCheck (Maybe Text)
-hDescription
-  = lens _hDescription (\ s a -> s{_hDescription = a})
+-- | Port name as defined in InstanceGroup#NamedPort#name. If both port and
+-- port_name are defined, port takes precedence.
+httphcPortName :: Lens' HTTPHealthCheck (Maybe Text)
+httphcPortName
+  = lens _httphcPortName
+      (\ s a -> s{_httphcPortName = a})
 
--- | A so-far healthy instance will be marked unhealthy after this many
--- consecutive failures. The default value is 2.
-hUnhealthyThreshold :: Lens' HTTPHealthCheck (Maybe Int32)
-hUnhealthyThreshold
-  = lens _hUnhealthyThreshold
-      (\ s a -> s{_hUnhealthyThreshold = a})
-      . mapping _Coerce
-
--- | The TCP port number for the HTTP health check request. The default value
--- is 80.
-hPort :: Lens' HTTPHealthCheck (Maybe Int32)
-hPort
-  = lens _hPort (\ s a -> s{_hPort = a}) .
+-- | The TCP port number for the health check request. The default value is
+-- 80.
+httphcPort :: Lens' HTTPHealthCheck (Maybe Int32)
+httphcPort
+  = lens _httphcPort (\ s a -> s{_httphcPort = a}) .
       mapping _Coerce
 
 instance FromJSON HTTPHealthCheck where
@@ -12684,36 +13604,20 @@ instance FromJSON HTTPHealthCheck where
           = withObject "HTTPHealthCheck"
               (\ o ->
                  HTTPHealthCheck' <$>
-                   (o .:? "healthyThreshold") <*>
-                     (o .:? "kind" .!= "compute#httpHealthCheck")
-                     <*> (o .:? "requestPath")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "checkIntervalSec")
-                     <*> (o .:? "name")
-                     <*> (o .:? "creationTimestamp")
-                     <*> (o .:? "id")
-                     <*> (o .:? "host")
-                     <*> (o .:? "timeoutSec")
-                     <*> (o .:? "description")
-                     <*> (o .:? "unhealthyThreshold")
+                   (o .:? "requestPath") <*> (o .:? "host") <*>
+                     (o .:? "proxyHeader")
+                     <*> (o .:? "portName")
                      <*> (o .:? "port"))
 
 instance ToJSON HTTPHealthCheck where
         toJSON HTTPHealthCheck'{..}
           = object
               (catMaybes
-                 [("healthyThreshold" .=) <$> _hHealthyThreshold,
-                  Just ("kind" .= _hKind),
-                  ("requestPath" .=) <$> _hRequestPath,
-                  ("selfLink" .=) <$> _hSelfLink,
-                  ("checkIntervalSec" .=) <$> _hCheckIntervalSec,
-                  ("name" .=) <$> _hName,
-                  ("creationTimestamp" .=) <$> _hCreationTimestamp,
-                  ("id" .=) <$> _hId, ("host" .=) <$> _hHost,
-                  ("timeoutSec" .=) <$> _hTimeoutSec,
-                  ("description" .=) <$> _hDescription,
-                  ("unhealthyThreshold" .=) <$> _hUnhealthyThreshold,
-                  ("port" .=) <$> _hPort])
+                 [("requestPath" .=) <$> _httphcRequestPath,
+                  ("host" .=) <$> _httphcHost,
+                  ("proxyHeader" .=) <$> _httphcProxyHeader,
+                  ("portName" .=) <$> _httphcPortName,
+                  ("port" .=) <$> _httphcPort])
 
 --
 -- /See:/ 'backendServiceGroupHealth' smart constructor.
@@ -13464,7 +14368,7 @@ subCreationTimestamp
 -- | The range of internal addresses that are owned by this subnetwork.
 -- Provide this property when you create the subnetwork. For example,
 -- 10.0.0.0\/8 or 192.168.0.0\/16. Ranges must be unique and
--- non-overlapping within a network.
+-- non-overlapping within a network. Only IPv4 is supported.
 subIPCIdRRange :: Lens' Subnetwork (Maybe Text)
 subIPCIdRRange
   = lens _subIPCIdRRange
@@ -13829,7 +14733,7 @@ instance ToJSON URLMapValidationResult where
 -- /See:/ 'metadata' smart constructor.
 data Metadata = Metadata'
     { _mKind        :: !Text
-    , _mFingerprint :: !(Maybe Base64)
+    , _mFingerprint :: !(Maybe Bytes)
     , _mItems       :: !(Maybe [MetadataItemsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -13864,7 +14768,7 @@ mKind = lens _mKind (\ s a -> s{_mKind = a})
 mFingerprint :: Lens' Metadata (Maybe ByteString)
 mFingerprint
   = lens _mFingerprint (\ s a -> s{_mFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | Array of key\/value pairs. The total size of all keys and values must be
 -- less than 512 KB.
@@ -14002,6 +14906,56 @@ instance ToJSON MachineTypesScopedListWarningDataItem
               (catMaybes
                  [("value" .=) <$> _mtslwdiValue,
                   ("key" .=) <$> _mtslwdiKey])
+
+--
+-- /See:/ 'instancesSetServiceAccountRequest' smart constructor.
+data InstancesSetServiceAccountRequest = InstancesSetServiceAccountRequest'
+    { _issarEmail  :: !(Maybe Text)
+    , _issarScopes :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesSetServiceAccountRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'issarEmail'
+--
+-- * 'issarScopes'
+instancesSetServiceAccountRequest
+    :: InstancesSetServiceAccountRequest
+instancesSetServiceAccountRequest =
+    InstancesSetServiceAccountRequest'
+    { _issarEmail = Nothing
+    , _issarScopes = Nothing
+    }
+
+-- | Email address of the service account.
+issarEmail :: Lens' InstancesSetServiceAccountRequest (Maybe Text)
+issarEmail
+  = lens _issarEmail (\ s a -> s{_issarEmail = a})
+
+-- | The list of scopes to be made available for this service account.
+issarScopes :: Lens' InstancesSetServiceAccountRequest [Text]
+issarScopes
+  = lens _issarScopes (\ s a -> s{_issarScopes = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON InstancesSetServiceAccountRequest
+         where
+        parseJSON
+          = withObject "InstancesSetServiceAccountRequest"
+              (\ o ->
+                 InstancesSetServiceAccountRequest' <$>
+                   (o .:? "email") <*> (o .:? "scopes" .!= mempty))
+
+instance ToJSON InstancesSetServiceAccountRequest
+         where
+        toJSON InstancesSetServiceAccountRequest'{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _issarEmail,
+                  ("scopes" .=) <$> _issarScopes])
 
 --
 -- /See:/ 'diskTypesScopedListWarningDataItem' smart constructor.
@@ -14660,6 +15614,49 @@ instance ToJSON AutoscalersScopedListWarningDataItem
                  [("value" .=) <$> _aValue, ("key" .=) <$> _aKey])
 
 --
+-- /See:/ 'regionInstanceGroupManagersSetTemplateRequest' smart constructor.
+newtype RegionInstanceGroupManagersSetTemplateRequest = RegionInstanceGroupManagersSetTemplateRequest'
+    { _rigmstrInstanceTemplate :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionInstanceGroupManagersSetTemplateRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rigmstrInstanceTemplate'
+regionInstanceGroupManagersSetTemplateRequest
+    :: RegionInstanceGroupManagersSetTemplateRequest
+regionInstanceGroupManagersSetTemplateRequest =
+    RegionInstanceGroupManagersSetTemplateRequest'
+    { _rigmstrInstanceTemplate = Nothing
+    }
+
+-- | URL of the InstanceTemplate resource from which all new instances will
+-- be created.
+rigmstrInstanceTemplate :: Lens' RegionInstanceGroupManagersSetTemplateRequest (Maybe Text)
+rigmstrInstanceTemplate
+  = lens _rigmstrInstanceTemplate
+      (\ s a -> s{_rigmstrInstanceTemplate = a})
+
+instance FromJSON
+         RegionInstanceGroupManagersSetTemplateRequest where
+        parseJSON
+          = withObject
+              "RegionInstanceGroupManagersSetTemplateRequest"
+              (\ o ->
+                 RegionInstanceGroupManagersSetTemplateRequest' <$>
+                   (o .:? "instanceTemplate"))
+
+instance ToJSON
+         RegionInstanceGroupManagersSetTemplateRequest where
+        toJSON
+          RegionInstanceGroupManagersSetTemplateRequest'{..}
+          = object
+              (catMaybes
+                 [("instanceTemplate" .=) <$>
+                    _rigmstrInstanceTemplate])
+
+--
 -- /See:/ 'instanceGroupsListInstances' smart constructor.
 data InstanceGroupsListInstances = InstanceGroupsListInstances'
     { _igliNextPageToken :: !(Maybe Text)
@@ -15142,111 +16139,114 @@ instance ToJSON HealthStatus where
 --
 -- /See:/ 'region' smart constructor.
 data Region = Region'
-    { _rrStatus            :: !(Maybe RegionStatus)
-    , _rrZones             :: !(Maybe [Text])
-    , _rrKind              :: !Text
-    , _rrSelfLink          :: !(Maybe Text)
-    , _rrName              :: !(Maybe Text)
-    , _rrCreationTimestamp :: !(Maybe Text)
-    , _rrQuotas            :: !(Maybe [Quota])
-    , _rrId                :: !(Maybe (Textual Word64))
-    , _rrDescription       :: !(Maybe Text)
-    , _rrDeprecated        :: !(Maybe DeprecationStatus)
+    { _regeStatus            :: !(Maybe RegionStatus)
+    , _regeZones             :: !(Maybe [Text])
+    , _regeKind              :: !Text
+    , _regeSelfLink          :: !(Maybe Text)
+    , _regeName              :: !(Maybe Text)
+    , _regeCreationTimestamp :: !(Maybe Text)
+    , _regeQuotas            :: !(Maybe [Quota])
+    , _regeId                :: !(Maybe (Textual Word64))
+    , _regeDescription       :: !(Maybe Text)
+    , _regeDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Region' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rrStatus'
+-- * 'regeStatus'
 --
--- * 'rrZones'
+-- * 'regeZones'
 --
--- * 'rrKind'
+-- * 'regeKind'
 --
--- * 'rrSelfLink'
+-- * 'regeSelfLink'
 --
--- * 'rrName'
+-- * 'regeName'
 --
--- * 'rrCreationTimestamp'
+-- * 'regeCreationTimestamp'
 --
--- * 'rrQuotas'
+-- * 'regeQuotas'
 --
--- * 'rrId'
+-- * 'regeId'
 --
--- * 'rrDescription'
+-- * 'regeDescription'
 --
--- * 'rrDeprecated'
+-- * 'regeDeprecated'
 region
     :: Region
 region =
     Region'
-    { _rrStatus = Nothing
-    , _rrZones = Nothing
-    , _rrKind = "compute#region"
-    , _rrSelfLink = Nothing
-    , _rrName = Nothing
-    , _rrCreationTimestamp = Nothing
-    , _rrQuotas = Nothing
-    , _rrId = Nothing
-    , _rrDescription = Nothing
-    , _rrDeprecated = Nothing
+    { _regeStatus = Nothing
+    , _regeZones = Nothing
+    , _regeKind = "compute#region"
+    , _regeSelfLink = Nothing
+    , _regeName = Nothing
+    , _regeCreationTimestamp = Nothing
+    , _regeQuotas = Nothing
+    , _regeId = Nothing
+    , _regeDescription = Nothing
+    , _regeDeprecated = Nothing
     }
 
 -- | [Output Only] Status of the region, either UP or DOWN.
-rrStatus :: Lens' Region (Maybe RegionStatus)
-rrStatus = lens _rrStatus (\ s a -> s{_rrStatus = a})
+regeStatus :: Lens' Region (Maybe RegionStatus)
+regeStatus
+  = lens _regeStatus (\ s a -> s{_regeStatus = a})
 
 -- | [Output Only] A list of zones available in this region, in the form of
 -- resource URLs.
-rrZones :: Lens' Region [Text]
-rrZones
-  = lens _rrZones (\ s a -> s{_rrZones = a}) . _Default
+regeZones :: Lens' Region [Text]
+regeZones
+  = lens _regeZones (\ s a -> s{_regeZones = a}) .
+      _Default
       . _Coerce
 
 -- | [Output Only] Type of the resource. Always compute#region for regions.
-rrKind :: Lens' Region Text
-rrKind = lens _rrKind (\ s a -> s{_rrKind = a})
+regeKind :: Lens' Region Text
+regeKind = lens _regeKind (\ s a -> s{_regeKind = a})
 
 -- | [Output Only] Server-defined URL for the resource.
-rrSelfLink :: Lens' Region (Maybe Text)
-rrSelfLink
-  = lens _rrSelfLink (\ s a -> s{_rrSelfLink = a})
+regeSelfLink :: Lens' Region (Maybe Text)
+regeSelfLink
+  = lens _regeSelfLink (\ s a -> s{_regeSelfLink = a})
 
 -- | [Output Only] Name of the resource.
-rrName :: Lens' Region (Maybe Text)
-rrName = lens _rrName (\ s a -> s{_rrName = a})
+regeName :: Lens' Region (Maybe Text)
+regeName = lens _regeName (\ s a -> s{_regeName = a})
 
 -- | [Output Only] Creation timestamp in RFC3339 text format.
-rrCreationTimestamp :: Lens' Region (Maybe Text)
-rrCreationTimestamp
-  = lens _rrCreationTimestamp
-      (\ s a -> s{_rrCreationTimestamp = a})
+regeCreationTimestamp :: Lens' Region (Maybe Text)
+regeCreationTimestamp
+  = lens _regeCreationTimestamp
+      (\ s a -> s{_regeCreationTimestamp = a})
 
 -- | [Output Only] Quotas assigned to this region.
-rrQuotas :: Lens' Region [Quota]
-rrQuotas
-  = lens _rrQuotas (\ s a -> s{_rrQuotas = a}) .
+regeQuotas :: Lens' Region [Quota]
+regeQuotas
+  = lens _regeQuotas (\ s a -> s{_regeQuotas = a}) .
       _Default
       . _Coerce
 
 -- | [Output Only] The unique identifier for the resource. This identifier is
 -- defined by the server.
-rrId :: Lens' Region (Maybe Word64)
-rrId
-  = lens _rrId (\ s a -> s{_rrId = a}) .
+regeId :: Lens' Region (Maybe Word64)
+regeId
+  = lens _regeId (\ s a -> s{_regeId = a}) .
       mapping _Coerce
 
 -- | [Output Only] Textual description of the resource.
-rrDescription :: Lens' Region (Maybe Text)
-rrDescription
-  = lens _rrDescription
-      (\ s a -> s{_rrDescription = a})
+regeDescription :: Lens' Region (Maybe Text)
+regeDescription
+  = lens _regeDescription
+      (\ s a -> s{_regeDescription = a})
 
 -- | [Output Only] The deprecation status associated with this region.
-rrDeprecated :: Lens' Region (Maybe DeprecationStatus)
-rrDeprecated
-  = lens _rrDeprecated (\ s a -> s{_rrDeprecated = a})
+regeDeprecated :: Lens' Region (Maybe DeprecationStatus)
+regeDeprecated
+  = lens _regeDeprecated
+      (\ s a -> s{_regeDeprecated = a})
 
 instance FromJSON Region where
         parseJSON
@@ -15267,14 +16267,51 @@ instance ToJSON Region where
         toJSON Region'{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _rrStatus,
-                  ("zones" .=) <$> _rrZones, Just ("kind" .= _rrKind),
-                  ("selfLink" .=) <$> _rrSelfLink,
-                  ("name" .=) <$> _rrName,
-                  ("creationTimestamp" .=) <$> _rrCreationTimestamp,
-                  ("quotas" .=) <$> _rrQuotas, ("id" .=) <$> _rrId,
-                  ("description" .=) <$> _rrDescription,
-                  ("deprecated" .=) <$> _rrDeprecated])
+                 [("status" .=) <$> _regeStatus,
+                  ("zones" .=) <$> _regeZones,
+                  Just ("kind" .= _regeKind),
+                  ("selfLink" .=) <$> _regeSelfLink,
+                  ("name" .=) <$> _regeName,
+                  ("creationTimestamp" .=) <$> _regeCreationTimestamp,
+                  ("quotas" .=) <$> _regeQuotas, ("id" .=) <$> _regeId,
+                  ("description" .=) <$> _regeDescription,
+                  ("deprecated" .=) <$> _regeDeprecated])
+
+-- | Guest OS features.
+--
+-- /See:/ 'guestOSFeature' smart constructor.
+newtype GuestOSFeature = GuestOSFeature'
+    { _gofType :: Maybe GuestOSFeatureType
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GuestOSFeature' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gofType'
+guestOSFeature
+    :: GuestOSFeature
+guestOSFeature =
+    GuestOSFeature'
+    { _gofType = Nothing
+    }
+
+-- | The type of supported feature. Currenty only VIRTIO_SCSI_MULTIQUEUE is
+-- supported. For newer Windows images, the server might also populate this
+-- property with the value WINDOWS to indicate that this is a Windows
+-- image. This value is purely informational and does not enable or disable
+-- any features.
+gofType :: Lens' GuestOSFeature (Maybe GuestOSFeatureType)
+gofType = lens _gofType (\ s a -> s{_gofType = a})
+
+instance FromJSON GuestOSFeature where
+        parseJSON
+          = withObject "GuestOSFeature"
+              (\ o -> GuestOSFeature' <$> (o .:? "type"))
+
+instance ToJSON GuestOSFeature where
+        toJSON GuestOSFeature'{..}
+          = object (catMaybes [("type" .=) <$> _gofType])
 
 --
 -- /See:/ 'vpnTunnel' smart constructor.
@@ -15370,7 +16407,7 @@ vtStatus = lens _vtStatus (\ s a -> s{_vtStatus = a})
 
 -- | Local traffic selector to use when establishing the VPN tunnel with peer
 -- VPN gateway. The value should be a CIDR formatted string, for example:
--- 192.168.0.0\/16. The ranges should be disjoint.
+-- 192.168.0.0\/16. The ranges should be disjoint. Only IPv4 is supported.
 vtLocalTrafficSelector :: Lens' VPNTunnel [Text]
 vtLocalTrafficSelector
   = lens _vtLocalTrafficSelector
@@ -15383,7 +16420,7 @@ vtLocalTrafficSelector
 vtKind :: Lens' VPNTunnel Text
 vtKind = lens _vtKind (\ s a -> s{_vtKind = a})
 
--- | IP address of the peer VPN gateway.
+-- | IP address of the peer VPN gateway. Only IPv4 is supported.
 vtPeerIP :: Lens' VPNTunnel (Maybe Text)
 vtPeerIP = lens _vtPeerIP (\ s a -> s{_vtPeerIP = a})
 
@@ -15400,7 +16437,8 @@ vtTargetVPNGateway
 
 -- | Remote traffic selectors to use when establishing the VPN tunnel with
 -- peer VPN gateway. The value should be a CIDR formatted string, for
--- example: 192.168.0.0\/16. The ranges should be disjoint.
+-- example: 192.168.0.0\/16. The ranges should be disjoint. Only IPv4 is
+-- supported.
 vtRemoteTrafficSelector :: Lens' VPNTunnel [Text]
 vtRemoteTrafficSelector
   = lens _vtRemoteTrafficSelector
@@ -16042,7 +17080,7 @@ instance ToJSON URLMapsValidateRequest where
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
 data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest'
-    { _igmstprFingerprint :: !(Maybe Base64)
+    { _igmstprFingerprint :: !(Maybe Bytes)
     , _igmstprTargetPools :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -16071,7 +17109,7 @@ igmstprFingerprint :: Lens' InstanceGroupManagersSetTargetPoolsRequest (Maybe By
 igmstprFingerprint
   = lens _igmstprFingerprint
       (\ s a -> s{_igmstprFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The list of target pool URLs that instances in this managed instance
 -- group belong to. The managed instance group applies these target pools
@@ -16918,7 +17956,8 @@ fNetwork = lens _fNetwork (\ s a -> s{_fNetwork = a})
 -- be set. If both properties are set, the firewall will apply to traffic
 -- that has source IP address within sourceRanges OR the source IP that
 -- belongs to a tag listed in the sourceTags property. The connection does
--- not need to match both properties for the firewall to apply.
+-- not need to match both properties for the firewall to apply. Only IPv4
+-- is supported.
 fSourceRanges :: Lens' Firewall [Text]
 fSourceRanges
   = lens _fSourceRanges
@@ -17128,7 +18167,7 @@ instance ToJSON Quota where
 data InstanceGroup = InstanceGroup'
     { _iiSize              :: !(Maybe (Textual Int32))
     , _iiKind              :: !Text
-    , _iiFingerprint       :: !(Maybe Base64)
+    , _iiFingerprint       :: !(Maybe Bytes)
     , _iiNetwork           :: !(Maybe Text)
     , _iiZone              :: !(Maybe Text)
     , _iiSelfLink          :: !(Maybe Text)
@@ -17207,7 +18246,7 @@ iiFingerprint :: Lens' InstanceGroup (Maybe ByteString)
 iiFingerprint
   = lens _iiFingerprint
       (\ s a -> s{_iiFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The URL of the network to which all instances in the instance group
 -- belong.
@@ -17526,8 +18565,10 @@ instance ToJSON TestFailure where
 --
 -- /See:/ 'serialPortOutput' smart constructor.
 data SerialPortOutput = SerialPortOutput'
-    { _spoContents :: !(Maybe Text)
+    { _spoNext     :: !(Maybe (Textual Int64))
+    , _spoContents :: !(Maybe Text)
     , _spoKind     :: !Text
+    , _spoStart    :: !(Maybe (Textual Int64))
     , _spoSelfLink :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -17535,19 +18576,33 @@ data SerialPortOutput = SerialPortOutput'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'spoNext'
+--
 -- * 'spoContents'
 --
 -- * 'spoKind'
+--
+-- * 'spoStart'
 --
 -- * 'spoSelfLink'
 serialPortOutput
     :: SerialPortOutput
 serialPortOutput =
     SerialPortOutput'
-    { _spoContents = Nothing
+    { _spoNext = Nothing
+    , _spoContents = Nothing
     , _spoKind = "compute#serialPortOutput"
+    , _spoStart = Nothing
     , _spoSelfLink = Nothing
     }
+
+-- | [Output Only] The position of the next byte of content from the serial
+-- console output. Use this value in the next request as the start
+-- parameter.
+spoNext :: Lens' SerialPortOutput (Maybe Int64)
+spoNext
+  = lens _spoNext (\ s a -> s{_spoNext = a}) .
+      mapping _Coerce
 
 -- | [Output Only] The contents of the console output.
 spoContents :: Lens' SerialPortOutput (Maybe Text)
@@ -17559,6 +18614,16 @@ spoContents
 spoKind :: Lens' SerialPortOutput Text
 spoKind = lens _spoKind (\ s a -> s{_spoKind = a})
 
+-- | [Output Only] The starting byte position of the output that was
+-- returned. This should match the start parameter sent with the request.
+-- If the serial console output exceeds the size of the buffer, older
+-- output will be overwritten by newer content and the start values will be
+-- mismatched.
+spoStart :: Lens' SerialPortOutput (Maybe Int64)
+spoStart
+  = lens _spoStart (\ s a -> s{_spoStart = a}) .
+      mapping _Coerce
+
 -- | [Output Only] Server-defined URL for this resource.
 spoSelfLink :: Lens' SerialPortOutput (Maybe Text)
 spoSelfLink
@@ -17569,16 +18634,19 @@ instance FromJSON SerialPortOutput where
           = withObject "SerialPortOutput"
               (\ o ->
                  SerialPortOutput' <$>
-                   (o .:? "contents") <*>
+                   (o .:? "next") <*> (o .:? "contents") <*>
                      (o .:? "kind" .!= "compute#serialPortOutput")
+                     <*> (o .:? "start")
                      <*> (o .:? "selfLink"))
 
 instance ToJSON SerialPortOutput where
         toJSON SerialPortOutput'{..}
           = object
               (catMaybes
-                 [("contents" .=) <$> _spoContents,
+                 [("next" .=) <$> _spoNext,
+                  ("contents" .=) <$> _spoContents,
                   Just ("kind" .= _spoKind),
+                  ("start" .=) <$> _spoStart,
                   ("selfLink" .=) <$> _spoSelfLink])
 
 --
@@ -17895,8 +18963,9 @@ instance ToJSON ConnectionDraining where
 
 --
 -- /See:/ 'cacheInvalidationRule' smart constructor.
-newtype CacheInvalidationRule = CacheInvalidationRule'
-    { _cirPath :: Maybe Text
+data CacheInvalidationRule = CacheInvalidationRule'
+    { _cirPath :: !(Maybe Text)
+    , _cirHost :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CacheInvalidationRule' with the minimum fields required to make a request.
@@ -17904,24 +18973,36 @@ newtype CacheInvalidationRule = CacheInvalidationRule'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cirPath'
+--
+-- * 'cirHost'
 cacheInvalidationRule
     :: CacheInvalidationRule
 cacheInvalidationRule =
     CacheInvalidationRule'
     { _cirPath = Nothing
+    , _cirHost = Nothing
     }
 
 cirPath :: Lens' CacheInvalidationRule (Maybe Text)
 cirPath = lens _cirPath (\ s a -> s{_cirPath = a})
 
+-- | If set, this invalidation rule will only apply to requests with a Host
+-- header matching host.
+cirHost :: Lens' CacheInvalidationRule (Maybe Text)
+cirHost = lens _cirHost (\ s a -> s{_cirHost = a})
+
 instance FromJSON CacheInvalidationRule where
         parseJSON
           = withObject "CacheInvalidationRule"
-              (\ o -> CacheInvalidationRule' <$> (o .:? "path"))
+              (\ o ->
+                 CacheInvalidationRule' <$>
+                   (o .:? "path") <*> (o .:? "host"))
 
 instance ToJSON CacheInvalidationRule where
         toJSON CacheInvalidationRule'{..}
-          = object (catMaybes [("path" .=) <$> _cirPath])
+          = object
+              (catMaybes
+                 [("path" .=) <$> _cirPath, ("host" .=) <$> _cirHost])
 
 --
 -- /See:/ 'targetVPNGatewaysScopedList' smart constructor.
@@ -18164,6 +19245,61 @@ instance ToJSON InstancesScopedListWarningDataItem
                  [("value" .=) <$> _islwdiValue,
                   ("key" .=) <$> _islwdiKey])
 
+--
+-- /See:/ 'backendServicesScopedListWarningDataItem' smart constructor.
+data BackendServicesScopedListWarningDataItem = BackendServicesScopedListWarningDataItem'
+    { _bsslwdiValue :: !(Maybe Text)
+    , _bsslwdiKey   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BackendServicesScopedListWarningDataItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bsslwdiValue'
+--
+-- * 'bsslwdiKey'
+backendServicesScopedListWarningDataItem
+    :: BackendServicesScopedListWarningDataItem
+backendServicesScopedListWarningDataItem =
+    BackendServicesScopedListWarningDataItem'
+    { _bsslwdiValue = Nothing
+    , _bsslwdiKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+bsslwdiValue :: Lens' BackendServicesScopedListWarningDataItem (Maybe Text)
+bsslwdiValue
+  = lens _bsslwdiValue (\ s a -> s{_bsslwdiValue = a})
+
+-- | [Output Only] A key that provides more detail on the warning being
+-- returned. For example, for warnings where there are no results in a list
+-- request for a particular zone, this key might be scope and the key value
+-- might be the zone name. Other examples might be a key indicating a
+-- deprecated resource and a suggested replacement, or a warning about
+-- invalid network settings (for example, if an instance attempts to
+-- perform IP forwarding but is not enabled for IP forwarding).
+bsslwdiKey :: Lens' BackendServicesScopedListWarningDataItem (Maybe Text)
+bsslwdiKey
+  = lens _bsslwdiKey (\ s a -> s{_bsslwdiKey = a})
+
+instance FromJSON
+         BackendServicesScopedListWarningDataItem where
+        parseJSON
+          = withObject
+              "BackendServicesScopedListWarningDataItem"
+              (\ o ->
+                 BackendServicesScopedListWarningDataItem' <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+         BackendServicesScopedListWarningDataItem where
+        toJSON BackendServicesScopedListWarningDataItem'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _bsslwdiValue,
+                  ("key" .=) <$> _bsslwdiKey])
+
 -- | A BackendService resource. This resource defines a group of backend
 -- virtual machines and their serving capacity.
 --
@@ -18172,9 +19308,10 @@ data BackendService = BackendService'
     { _bsSessionAffinity      :: !(Maybe BackendServiceSessionAffinity)
     , _bsBackends             :: !(Maybe [Backend])
     , _bsAffinityCookieTtlSec :: !(Maybe (Textual Int32))
+    , _bsLoadBalancingScheme  :: !(Maybe BackendServiceLoadBalancingScheme)
     , _bsKind                 :: !Text
     , _bsEnableCDN            :: !(Maybe Bool)
-    , _bsFingerprint          :: !(Maybe Base64)
+    , _bsFingerprint          :: !(Maybe Bytes)
     , _bsProtocol             :: !(Maybe BackendServiceProtocol)
     , _bsSelfLink             :: !(Maybe Text)
     , _bsName                 :: !(Maybe Text)
@@ -18198,6 +19335,8 @@ data BackendService = BackendService'
 -- * 'bsBackends'
 --
 -- * 'bsAffinityCookieTtlSec'
+--
+-- * 'bsLoadBalancingScheme'
 --
 -- * 'bsKind'
 --
@@ -18235,6 +19374,7 @@ backendService =
     { _bsSessionAffinity = Nothing
     , _bsBackends = Nothing
     , _bsAffinityCookieTtlSec = Nothing
+    , _bsLoadBalancingScheme = Nothing
     , _bsKind = "compute#backendService"
     , _bsEnableCDN = Nothing
     , _bsFingerprint = Nothing
@@ -18280,6 +19420,11 @@ bsAffinityCookieTtlSec
       (\ s a -> s{_bsAffinityCookieTtlSec = a})
       . mapping _Coerce
 
+bsLoadBalancingScheme :: Lens' BackendService (Maybe BackendServiceLoadBalancingScheme)
+bsLoadBalancingScheme
+  = lens _bsLoadBalancingScheme
+      (\ s a -> s{_bsLoadBalancingScheme = a})
+
 -- | [Output Only] Type of resource. Always compute#backendService for
 -- backend services.
 bsKind :: Lens' BackendService Text
@@ -18299,7 +19444,7 @@ bsFingerprint :: Lens' BackendService (Maybe ByteString)
 bsFingerprint
   = lens _bsFingerprint
       (\ s a -> s{_bsFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The protocol this BackendService uses to communicate with backends.
 -- Possible values are HTTP, HTTPS, HTTP2, TCP and SSL. The default is
@@ -18396,6 +19541,7 @@ instance FromJSON BackendService where
                    (o .:? "sessionAffinity") <*>
                      (o .:? "backends" .!= mempty)
                      <*> (o .:? "affinityCookieTtlSec")
+                     <*> (o .:? "loadBalancingScheme")
                      <*> (o .:? "kind" .!= "compute#backendService")
                      <*> (o .:? "enableCDN")
                      <*> (o .:? "fingerprint")
@@ -18420,6 +19566,8 @@ instance ToJSON BackendService where
                   ("backends" .=) <$> _bsBackends,
                   ("affinityCookieTtlSec" .=) <$>
                     _bsAffinityCookieTtlSec,
+                  ("loadBalancingScheme" .=) <$>
+                    _bsLoadBalancingScheme,
                   Just ("kind" .= _bsKind),
                   ("enableCDN" .=) <$> _bsEnableCDN,
                   ("fingerprint" .=) <$> _bsFingerprint,
@@ -18586,161 +19734,68 @@ instance ToJSON
         toJSON InstancesStartWithEncryptionKeyRequest'{..}
           = object (catMaybes [("disks" .=) <$> _iswekrDisks])
 
--- | An HttpsHealthCheck resource. This resource defines a template for how
--- individual instances should be checked for health, via HTTPS.
 --
 -- /See:/ 'httpsHealthCheck' smart constructor.
 data HTTPSHealthCheck = HTTPSHealthCheck'
-    { _hhcHealthyThreshold   :: !(Maybe (Textual Int32))
-    , _hhcKind               :: !Text
-    , _hhcRequestPath        :: !(Maybe Text)
-    , _hhcSelfLink           :: !(Maybe Text)
-    , _hhcCheckIntervalSec   :: !(Maybe (Textual Int32))
-    , _hhcName               :: !(Maybe Text)
-    , _hhcCreationTimestamp  :: !(Maybe Text)
-    , _hhcId                 :: !(Maybe (Textual Word64))
-    , _hhcHost               :: !(Maybe Text)
-    , _hhcTimeoutSec         :: !(Maybe (Textual Int32))
-    , _hhcDescription        :: !(Maybe Text)
-    , _hhcUnhealthyThreshold :: !(Maybe (Textual Int32))
-    , _hhcPort               :: !(Maybe (Textual Int32))
+    { _hhcRequestPath :: !(Maybe Text)
+    , _hhcHost        :: !(Maybe Text)
+    , _hhcProxyHeader :: !(Maybe HTTPSHealthCheckProxyHeader)
+    , _hhcPortName    :: !(Maybe Text)
+    , _hhcPort        :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPSHealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'hhcHealthyThreshold'
---
--- * 'hhcKind'
---
 -- * 'hhcRequestPath'
---
--- * 'hhcSelfLink'
---
--- * 'hhcCheckIntervalSec'
---
--- * 'hhcName'
---
--- * 'hhcCreationTimestamp'
---
--- * 'hhcId'
 --
 -- * 'hhcHost'
 --
--- * 'hhcTimeoutSec'
+-- * 'hhcProxyHeader'
 --
--- * 'hhcDescription'
---
--- * 'hhcUnhealthyThreshold'
+-- * 'hhcPortName'
 --
 -- * 'hhcPort'
 httpsHealthCheck
     :: HTTPSHealthCheck
 httpsHealthCheck =
     HTTPSHealthCheck'
-    { _hhcHealthyThreshold = Nothing
-    , _hhcKind = "compute#httpsHealthCheck"
-    , _hhcRequestPath = Nothing
-    , _hhcSelfLink = Nothing
-    , _hhcCheckIntervalSec = Nothing
-    , _hhcName = Nothing
-    , _hhcCreationTimestamp = Nothing
-    , _hhcId = Nothing
+    { _hhcRequestPath = Nothing
     , _hhcHost = Nothing
-    , _hhcTimeoutSec = Nothing
-    , _hhcDescription = Nothing
-    , _hhcUnhealthyThreshold = Nothing
+    , _hhcProxyHeader = Nothing
+    , _hhcPortName = Nothing
     , _hhcPort = Nothing
     }
 
--- | A so-far unhealthy instance will be marked healthy after this many
--- consecutive successes. The default value is 2.
-hhcHealthyThreshold :: Lens' HTTPSHealthCheck (Maybe Int32)
-hhcHealthyThreshold
-  = lens _hhcHealthyThreshold
-      (\ s a -> s{_hhcHealthyThreshold = a})
-      . mapping _Coerce
-
--- | Type of the resource.
-hhcKind :: Lens' HTTPSHealthCheck Text
-hhcKind = lens _hhcKind (\ s a -> s{_hhcKind = a})
-
 -- | The request path of the HTTPS health check request. The default value is
--- \"\/\".
+-- \/.
 hhcRequestPath :: Lens' HTTPSHealthCheck (Maybe Text)
 hhcRequestPath
   = lens _hhcRequestPath
       (\ s a -> s{_hhcRequestPath = a})
 
--- | [Output Only] Server-defined URL for the resource.
-hhcSelfLink :: Lens' HTTPSHealthCheck (Maybe Text)
-hhcSelfLink
-  = lens _hhcSelfLink (\ s a -> s{_hhcSelfLink = a})
-
--- | How often (in seconds) to send a health check. The default value is 5
--- seconds.
-hhcCheckIntervalSec :: Lens' HTTPSHealthCheck (Maybe Int32)
-hhcCheckIntervalSec
-  = lens _hhcCheckIntervalSec
-      (\ s a -> s{_hhcCheckIntervalSec = a})
-      . mapping _Coerce
-
--- | Name of the resource. Provided by the client when the resource is
--- created. The name must be 1-63 characters long, and comply with RFC1035.
--- Specifically, the name must be 1-63 characters long and match the
--- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
--- character must be a lowercase letter, and all following characters must
--- be a dash, lowercase letter, or digit, except the last character, which
--- cannot be a dash.
-hhcName :: Lens' HTTPSHealthCheck (Maybe Text)
-hhcName = lens _hhcName (\ s a -> s{_hhcName = a})
-
--- | [Output Only] Creation timestamp in RFC3339 text format.
-hhcCreationTimestamp :: Lens' HTTPSHealthCheck (Maybe Text)
-hhcCreationTimestamp
-  = lens _hhcCreationTimestamp
-      (\ s a -> s{_hhcCreationTimestamp = a})
-
--- | [Output Only] The unique identifier for the resource. This identifier is
--- defined by the server.
-hhcId :: Lens' HTTPSHealthCheck (Maybe Word64)
-hhcId
-  = lens _hhcId (\ s a -> s{_hhcId = a}) .
-      mapping _Coerce
-
 -- | The value of the host header in the HTTPS health check request. If left
--- empty (default value), the public IP on behalf of which this health
--- check is performed will be used.
+-- empty (default value), the IP on behalf of which this health check is
+-- performed will be used.
 hhcHost :: Lens' HTTPSHealthCheck (Maybe Text)
 hhcHost = lens _hhcHost (\ s a -> s{_hhcHost = a})
 
--- | How long (in seconds) to wait before claiming failure. The default value
--- is 5 seconds. It is invalid for timeoutSec to have a greater value than
--- checkIntervalSec.
-hhcTimeoutSec :: Lens' HTTPSHealthCheck (Maybe Int32)
-hhcTimeoutSec
-  = lens _hhcTimeoutSec
-      (\ s a -> s{_hhcTimeoutSec = a})
-      . mapping _Coerce
+-- | Specifies the type of proxy header to append before sending data to the
+-- backend, either NONE or PROXY_V1. The default is NONE.
+hhcProxyHeader :: Lens' HTTPSHealthCheck (Maybe HTTPSHealthCheckProxyHeader)
+hhcProxyHeader
+  = lens _hhcProxyHeader
+      (\ s a -> s{_hhcProxyHeader = a})
 
--- | An optional description of this resource. Provide this property when you
--- create the resource.
-hhcDescription :: Lens' HTTPSHealthCheck (Maybe Text)
-hhcDescription
-  = lens _hhcDescription
-      (\ s a -> s{_hhcDescription = a})
+-- | Port name as defined in InstanceGroup#NamedPort#name. If both port and
+-- port_name are defined, port takes precedence.
+hhcPortName :: Lens' HTTPSHealthCheck (Maybe Text)
+hhcPortName
+  = lens _hhcPortName (\ s a -> s{_hhcPortName = a})
 
--- | A so-far healthy instance will be marked unhealthy after this many
--- consecutive failures. The default value is 2.
-hhcUnhealthyThreshold :: Lens' HTTPSHealthCheck (Maybe Int32)
-hhcUnhealthyThreshold
-  = lens _hhcUnhealthyThreshold
-      (\ s a -> s{_hhcUnhealthyThreshold = a})
-      . mapping _Coerce
-
--- | The TCP port number for the HTTPS health check request. The default
--- value is 443.
+-- | The TCP port number for the health check request. The default value is
+-- 443.
 hhcPort :: Lens' HTTPSHealthCheck (Maybe Int32)
 hhcPort
   = lens _hhcPort (\ s a -> s{_hhcPort = a}) .
@@ -18751,35 +19806,19 @@ instance FromJSON HTTPSHealthCheck where
           = withObject "HTTPSHealthCheck"
               (\ o ->
                  HTTPSHealthCheck' <$>
-                   (o .:? "healthyThreshold") <*>
-                     (o .:? "kind" .!= "compute#httpsHealthCheck")
-                     <*> (o .:? "requestPath")
-                     <*> (o .:? "selfLink")
-                     <*> (o .:? "checkIntervalSec")
-                     <*> (o .:? "name")
-                     <*> (o .:? "creationTimestamp")
-                     <*> (o .:? "id")
-                     <*> (o .:? "host")
-                     <*> (o .:? "timeoutSec")
-                     <*> (o .:? "description")
-                     <*> (o .:? "unhealthyThreshold")
+                   (o .:? "requestPath") <*> (o .:? "host") <*>
+                     (o .:? "proxyHeader")
+                     <*> (o .:? "portName")
                      <*> (o .:? "port"))
 
 instance ToJSON HTTPSHealthCheck where
         toJSON HTTPSHealthCheck'{..}
           = object
               (catMaybes
-                 [("healthyThreshold" .=) <$> _hhcHealthyThreshold,
-                  Just ("kind" .= _hhcKind),
-                  ("requestPath" .=) <$> _hhcRequestPath,
-                  ("selfLink" .=) <$> _hhcSelfLink,
-                  ("checkIntervalSec" .=) <$> _hhcCheckIntervalSec,
-                  ("name" .=) <$> _hhcName,
-                  ("creationTimestamp" .=) <$> _hhcCreationTimestamp,
-                  ("id" .=) <$> _hhcId, ("host" .=) <$> _hhcHost,
-                  ("timeoutSec" .=) <$> _hhcTimeoutSec,
-                  ("description" .=) <$> _hhcDescription,
-                  ("unhealthyThreshold" .=) <$> _hhcUnhealthyThreshold,
+                 [("requestPath" .=) <$> _hhcRequestPath,
+                  ("host" .=) <$> _hhcHost,
+                  ("proxyHeader" .=) <$> _hhcProxyHeader,
+                  ("portName" .=) <$> _hhcPortName,
                   ("port" .=) <$> _hhcPort])
 
 -- | [Output Only] A map of scoped vpn tunnel lists.
@@ -18823,7 +19862,7 @@ instance ToJSON VPNTunnelAggregatedListItems where
 --
 -- /See:/ 'tags' smart constructor.
 data Tags = Tags'
-    { _tFingerprint :: !(Maybe Base64)
+    { _tFingerprint :: !(Maybe Bytes)
     , _tItems       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -18851,7 +19890,7 @@ tags =
 tFingerprint :: Lens' Tags (Maybe ByteString)
 tFingerprint
   = lens _tFingerprint (\ s a -> s{_tFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | An array of tags. Each tag must be 1-63 characters long, and comply with
 -- RFC1035.

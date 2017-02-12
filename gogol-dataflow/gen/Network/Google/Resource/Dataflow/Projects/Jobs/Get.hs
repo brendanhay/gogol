@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the state of the specified dataflow job.
+-- Gets the state of the specified Cloud Dataflow job.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.get@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Get
@@ -36,6 +36,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Get
     , pjgXgafv
     , pjgJobId
     , pjgUploadProtocol
+    , pjgLocation
     , pjgPp
     , pjgAccessToken
     , pjgUploadType
@@ -58,21 +59,23 @@ type ProjectsJobsGetResource =
              Capture "jobId" Text :>
                QueryParam "$.xgafv" Text :>
                  QueryParam "upload_protocol" Text :>
-                   QueryParam "pp" Bool :>
-                     QueryParam "access_token" Text :>
-                       QueryParam "uploadType" Text :>
-                         QueryParam "bearer_token" Text :>
-                           QueryParam "view" Text :>
-                             QueryParam "callback" Text :>
-                               QueryParam "alt" AltJSON :> Get '[JSON] Job
+                   QueryParam "location" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "view" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Job
 
--- | Gets the state of the specified dataflow job.
+-- | Gets the state of the specified Cloud Dataflow job.
 --
 -- /See:/ 'projectsJobsGet' smart constructor.
 data ProjectsJobsGet = ProjectsJobsGet'
     { _pjgXgafv          :: !(Maybe Text)
     , _pjgJobId          :: !Text
     , _pjgUploadProtocol :: !(Maybe Text)
+    , _pjgLocation       :: !(Maybe Text)
     , _pjgPp             :: !Bool
     , _pjgAccessToken    :: !(Maybe Text)
     , _pjgUploadType     :: !(Maybe Text)
@@ -91,6 +94,8 @@ data ProjectsJobsGet = ProjectsJobsGet'
 -- * 'pjgJobId'
 --
 -- * 'pjgUploadProtocol'
+--
+-- * 'pjgLocation'
 --
 -- * 'pjgPp'
 --
@@ -114,6 +119,7 @@ projectsJobsGet pPjgJobId_ pPjgProjectId_ =
     { _pjgXgafv = Nothing
     , _pjgJobId = pPjgJobId_
     , _pjgUploadProtocol = Nothing
+    , _pjgLocation = Nothing
     , _pjgPp = True
     , _pjgAccessToken = Nothing
     , _pjgUploadType = Nothing
@@ -127,7 +133,7 @@ projectsJobsGet pPjgJobId_ pPjgProjectId_ =
 pjgXgafv :: Lens' ProjectsJobsGet (Maybe Text)
 pjgXgafv = lens _pjgXgafv (\ s a -> s{_pjgXgafv = a})
 
--- | Identifies a single job.
+-- | The job ID.
 pjgJobId :: Lens' ProjectsJobsGet Text
 pjgJobId = lens _pjgJobId (\ s a -> s{_pjgJobId = a})
 
@@ -136,6 +142,11 @@ pjgUploadProtocol :: Lens' ProjectsJobsGet (Maybe Text)
 pjgUploadProtocol
   = lens _pjgUploadProtocol
       (\ s a -> s{_pjgUploadProtocol = a})
+
+-- | The location that contains this job.
+pjgLocation :: Lens' ProjectsJobsGet (Maybe Text)
+pjgLocation
+  = lens _pjgLocation (\ s a -> s{_pjgLocation = a})
 
 -- | Pretty-print response.
 pjgPp :: Lens' ProjectsJobsGet Bool
@@ -159,11 +170,11 @@ pjgBearerToken
   = lens _pjgBearerToken
       (\ s a -> s{_pjgBearerToken = a})
 
--- | Level of information requested in response.
+-- | The level of information requested in response.
 pjgView :: Lens' ProjectsJobsGet (Maybe Text)
 pjgView = lens _pjgView (\ s a -> s{_pjgView = a})
 
--- | The project which owns the job.
+-- | The ID of the Cloud Platform project that the job belongs to.
 pjgProjectId :: Lens' ProjectsJobsGet Text
 pjgProjectId
   = lens _pjgProjectId (\ s a -> s{_pjgProjectId = a})
@@ -181,6 +192,7 @@ instance GoogleRequest ProjectsJobsGet where
         requestClient ProjectsJobsGet'{..}
           = go _pjgProjectId _pjgJobId _pjgXgafv
               _pjgUploadProtocol
+              _pjgLocation
               (Just _pjgPp)
               _pjgAccessToken
               _pjgUploadType

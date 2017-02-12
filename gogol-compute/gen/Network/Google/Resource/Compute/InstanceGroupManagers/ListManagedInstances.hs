@@ -41,6 +41,10 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstance
     , igmlmiProject
     , igmlmiInstanceGroupManager
     , igmlmiZone
+    , igmlmiOrderBy
+    , igmlmiFilter
+    , igmlmiPageToken
+    , igmlmiMaxResults
     ) where
 
 import           Network.Google.Compute.Types
@@ -59,9 +63,13 @@ type InstanceGroupManagersListManagedInstancesResource
                  "instanceGroupManagers" :>
                    Capture "instanceGroupManager" Text :>
                      "listManagedInstances" :>
-                       QueryParam "alt" AltJSON :>
-                         Post '[JSON]
-                           InstanceGroupManagersListManagedInstancesResponse
+                       QueryParam "order_by" Text :>
+                         QueryParam "filter" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "maxResults" (Textual Word32) :>
+                               QueryParam "alt" AltJSON :>
+                                 Post '[JSON]
+                                   InstanceGroupManagersListManagedInstancesResponse
 
 -- | Lists all of the instances in the managed instance group. Each instance
 -- in the list has a currentAction, which indicates the action that the
@@ -75,6 +83,10 @@ data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManage
     { _igmlmiProject              :: !Text
     , _igmlmiInstanceGroupManager :: !Text
     , _igmlmiZone                 :: !Text
+    , _igmlmiOrderBy              :: !(Maybe Text)
+    , _igmlmiFilter               :: !(Maybe Text)
+    , _igmlmiPageToken            :: !(Maybe Text)
+    , _igmlmiMaxResults           :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersListManagedInstances' with the minimum fields required to make a request.
@@ -86,6 +98,14 @@ data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManage
 -- * 'igmlmiInstanceGroupManager'
 --
 -- * 'igmlmiZone'
+--
+-- * 'igmlmiOrderBy'
+--
+-- * 'igmlmiFilter'
+--
+-- * 'igmlmiPageToken'
+--
+-- * 'igmlmiMaxResults'
 instanceGroupManagersListManagedInstances
     :: Text -- ^ 'igmlmiProject'
     -> Text -- ^ 'igmlmiInstanceGroupManager'
@@ -96,6 +116,10 @@ instanceGroupManagersListManagedInstances pIgmlmiProject_ pIgmlmiInstanceGroupMa
     { _igmlmiProject = pIgmlmiProject_
     , _igmlmiInstanceGroupManager = pIgmlmiInstanceGroupManager_
     , _igmlmiZone = pIgmlmiZone_
+    , _igmlmiOrderBy = Nothing
+    , _igmlmiFilter = Nothing
+    , _igmlmiPageToken = Nothing
+    , _igmlmiMaxResults = 500
     }
 
 -- | Project ID for this request.
@@ -115,6 +139,26 @@ igmlmiZone :: Lens' InstanceGroupManagersListManagedInstances Text
 igmlmiZone
   = lens _igmlmiZone (\ s a -> s{_igmlmiZone = a})
 
+igmlmiOrderBy :: Lens' InstanceGroupManagersListManagedInstances (Maybe Text)
+igmlmiOrderBy
+  = lens _igmlmiOrderBy
+      (\ s a -> s{_igmlmiOrderBy = a})
+
+igmlmiFilter :: Lens' InstanceGroupManagersListManagedInstances (Maybe Text)
+igmlmiFilter
+  = lens _igmlmiFilter (\ s a -> s{_igmlmiFilter = a})
+
+igmlmiPageToken :: Lens' InstanceGroupManagersListManagedInstances (Maybe Text)
+igmlmiPageToken
+  = lens _igmlmiPageToken
+      (\ s a -> s{_igmlmiPageToken = a})
+
+igmlmiMaxResults :: Lens' InstanceGroupManagersListManagedInstances Word32
+igmlmiMaxResults
+  = lens _igmlmiMaxResults
+      (\ s a -> s{_igmlmiMaxResults = a})
+      . _Coerce
+
 instance GoogleRequest
          InstanceGroupManagersListManagedInstances where
         type Rs InstanceGroupManagersListManagedInstances =
@@ -128,6 +172,10 @@ instance GoogleRequest
           InstanceGroupManagersListManagedInstances'{..}
           = go _igmlmiProject _igmlmiZone
               _igmlmiInstanceGroupManager
+              _igmlmiOrderBy
+              _igmlmiFilter
+              _igmlmiPageToken
+              (Just _igmlmiMaxResults)
               (Just AltJSON)
               computeService
           where go

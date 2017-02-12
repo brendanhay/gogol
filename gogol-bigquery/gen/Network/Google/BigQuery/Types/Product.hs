@@ -420,6 +420,7 @@ data TableListTablesItem = TableListTablesItem'
     , _tltiFriendlyName   :: !(Maybe Text)
     , _tltiKind           :: !Text
     , _tltiId             :: !(Maybe Text)
+    , _tltiLabels         :: !(Maybe TableListTablesItemLabels)
     , _tltiType           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -435,6 +436,8 @@ data TableListTablesItem = TableListTablesItem'
 --
 -- * 'tltiId'
 --
+-- * 'tltiLabels'
+--
 -- * 'tltiType'
 tableListTablesItem
     :: TableListTablesItem
@@ -444,6 +447,7 @@ tableListTablesItem =
     , _tltiFriendlyName = Nothing
     , _tltiKind = "bigquery#table"
     , _tltiId = Nothing
+    , _tltiLabels = Nothing
     , _tltiType = Nothing
     }
 
@@ -467,6 +471,12 @@ tltiKind = lens _tltiKind (\ s a -> s{_tltiKind = a})
 tltiId :: Lens' TableListTablesItem (Maybe Text)
 tltiId = lens _tltiId (\ s a -> s{_tltiId = a})
 
+-- | [Experimental] The labels associated with this table. You can use these
+-- to organize and group your tables.
+tltiLabels :: Lens' TableListTablesItem (Maybe TableListTablesItemLabels)
+tltiLabels
+  = lens _tltiLabels (\ s a -> s{_tltiLabels = a})
+
 -- | The type of table. Possible values are: TABLE, VIEW.
 tltiType :: Lens' TableListTablesItem (Maybe Text)
 tltiType = lens _tltiType (\ s a -> s{_tltiType = a})
@@ -479,6 +489,7 @@ instance FromJSON TableListTablesItem where
                    (o .:? "tableReference") <*> (o .:? "friendlyName")
                      <*> (o .:? "kind" .!= "bigquery#table")
                      <*> (o .:? "id")
+                     <*> (o .:? "labels")
                      <*> (o .:? "type"))
 
 instance ToJSON TableListTablesItem where
@@ -488,6 +499,7 @@ instance ToJSON TableListTablesItem where
                  [("tableReference" .=) <$> _tltiTableReference,
                   ("friendlyName" .=) <$> _tltiFriendlyName,
                   Just ("kind" .= _tltiKind), ("id" .=) <$> _tltiId,
+                  ("labels" .=) <$> _tltiLabels,
                   ("type" .=) <$> _tltiType])
 
 --
@@ -1523,8 +1535,10 @@ tfsName :: Lens' TableFieldSchema (Maybe Text)
 tfsName = lens _tfsName (\ s a -> s{_tfsName = a})
 
 -- | [Required] The field data type. Possible values include STRING, BYTES,
--- INTEGER, FLOAT, BOOLEAN, TIMESTAMP, DATE, TIME, DATETIME, or RECORD
--- (where RECORD indicates that the field contains a nested schema).
+-- INTEGER, INT64 (same as INTEGER), FLOAT, FLOAT64 (same as FLOAT),
+-- BOOLEAN, BOOL (same as BOOLEAN), TIMESTAMP, DATE, TIME, DATETIME, RECORD
+-- (where RECORD indicates that the field contains a nested schema) or
+-- STRUCT (same as RECORD).
 tfsType :: Lens' TableFieldSchema (Maybe Text)
 tfsType = lens _tfsType (\ s a -> s{_tfsType = a})
 
@@ -1910,8 +1924,9 @@ qrQueryParameters
 qrQuery :: Lens' QueryRequest (Maybe Text)
 qrQuery = lens _qrQuery (\ s a -> s{_qrQuery = a})
 
--- | [Experimental] Standard SQL only. Whether to use positional (?) or named
--- (\'myparam) query parameters in this query.
+-- | [Experimental] Standard SQL only. Set to POSITIONAL to use positional
+-- (?) query parameters or to NAMED to use named (\'myparam) query
+-- parameters in this query.
 qrParameterMode :: Lens' QueryRequest (Maybe Text)
 qrParameterMode
   = lens _qrParameterMode
@@ -1929,9 +1944,9 @@ qrTimeoutMs
   = lens _qrTimeoutMs (\ s a -> s{_qrTimeoutMs = a}) .
       mapping _Coerce
 
--- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL dialect
--- for this query. The default value is true. If set to false, the query
--- will use BigQuery\'s standard SQL:
+-- | Specifies whether to use BigQuery\'s legacy SQL dialect for this query.
+-- The default value is true. If set to false, the query will use
+-- BigQuery\'s standard SQL:
 -- https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql
 -- is set to false, the values of allowLargeResults and flattenResults are
 -- ignored; query will be run as if allowLargeResults is true and
@@ -2138,7 +2153,8 @@ instance ToJSON ProjectReference where
 --
 -- /See:/ 'explainQueryStage' smart constructor.
 data ExplainQueryStage = ExplainQueryStage'
-    { _eqsWaitRatioMax    :: !(Maybe (Textual Double))
+    { _eqsStatus          :: !(Maybe Text)
+    , _eqsWaitRatioMax    :: !(Maybe (Textual Double))
     , _eqsRecordsWritten  :: !(Maybe (Textual Int64))
     , _eqsSteps           :: !(Maybe [ExplainQueryStep])
     , _eqsWriteRatioAvg   :: !(Maybe (Textual Double))
@@ -2156,6 +2172,8 @@ data ExplainQueryStage = ExplainQueryStage'
 -- | Creates a value of 'ExplainQueryStage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eqsStatus'
 --
 -- * 'eqsWaitRatioMax'
 --
@@ -2186,7 +2204,8 @@ explainQueryStage
     :: ExplainQueryStage
 explainQueryStage =
     ExplainQueryStage'
-    { _eqsWaitRatioMax = Nothing
+    { _eqsStatus = Nothing
+    , _eqsWaitRatioMax = Nothing
     , _eqsRecordsWritten = Nothing
     , _eqsSteps = Nothing
     , _eqsWriteRatioAvg = Nothing
@@ -2200,6 +2219,11 @@ explainQueryStage =
     , _eqsWriteRatioMax = Nothing
     , _eqsReadRatioAvg = Nothing
     }
+
+-- | Current status for the stage.
+eqsStatus :: Lens' ExplainQueryStage (Maybe Text)
+eqsStatus
+  = lens _eqsStatus (\ s a -> s{_eqsStatus = a})
 
 -- | Relative amount of time the slowest shard spent waiting to be scheduled.
 eqsWaitRatioMax :: Lens' ExplainQueryStage (Maybe Double)
@@ -2294,7 +2318,8 @@ instance FromJSON ExplainQueryStage where
           = withObject "ExplainQueryStage"
               (\ o ->
                  ExplainQueryStage' <$>
-                   (o .:? "waitRatioMax") <*> (o .:? "recordsWritten")
+                   (o .:? "status") <*> (o .:? "waitRatioMax") <*>
+                     (o .:? "recordsWritten")
                      <*> (o .:? "steps" .!= mempty)
                      <*> (o .:? "writeRatioAvg")
                      <*> (o .:? "recordsRead")
@@ -2311,7 +2336,8 @@ instance ToJSON ExplainQueryStage where
         toJSON ExplainQueryStage'{..}
           = object
               (catMaybes
-                 [("waitRatioMax" .=) <$> _eqsWaitRatioMax,
+                 [("status" .=) <$> _eqsStatus,
+                  ("waitRatioMax" .=) <$> _eqsWaitRatioMax,
                   ("recordsWritten" .=) <$> _eqsRecordsWritten,
                   ("steps" .=) <$> _eqsSteps,
                   ("writeRatioAvg" .=) <$> _eqsWriteRatioAvg,
@@ -2347,6 +2373,7 @@ data JobConfigurationLoad = JobConfigurationLoad'
     , _jclSourceURIs          :: !(Maybe [Text])
     , _jclEncoding            :: !(Maybe Text)
     , _jclFieldDelimiter      :: !(Maybe Text)
+    , _jclNullMarker          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationLoad' with the minimum fields required to make a request.
@@ -2390,6 +2417,8 @@ data JobConfigurationLoad = JobConfigurationLoad'
 -- * 'jclEncoding'
 --
 -- * 'jclFieldDelimiter'
+--
+-- * 'jclNullMarker'
 jobConfigurationLoad
     :: JobConfigurationLoad
 jobConfigurationLoad =
@@ -2413,6 +2442,7 @@ jobConfigurationLoad =
     , _jclSourceURIs = Nothing
     , _jclEncoding = Nothing
     , _jclFieldDelimiter = Nothing
+    , _jclNullMarker = Nothing
     }
 
 -- | [Optional] The number of rows at the top of a CSV file that BigQuery
@@ -2600,6 +2630,18 @@ jclFieldDelimiter
   = lens _jclFieldDelimiter
       (\ s a -> s{_jclFieldDelimiter = a})
 
+-- | [Optional] Specifies a string that represents a null value in a CSV
+-- file. For example, if you specify \"\\N\", BigQuery interprets \"\\N\"
+-- as a null value when loading a CSV file. The default value is the empty
+-- string. If you set this property to a custom value, BigQuery still
+-- interprets the empty string as a null value for all data types except
+-- for STRING and BYTE. For STRING and BYTE columns, BigQuery interprets
+-- the empty string as an empty value.
+jclNullMarker :: Lens' JobConfigurationLoad (Maybe Text)
+jclNullMarker
+  = lens _jclNullMarker
+      (\ s a -> s{_jclNullMarker = a})
+
 instance FromJSON JobConfigurationLoad where
         parseJSON
           = withObject "JobConfigurationLoad"
@@ -2623,7 +2665,8 @@ instance FromJSON JobConfigurationLoad where
                      <*> (o .:? "autodetect")
                      <*> (o .:? "sourceUris" .!= mempty)
                      <*> (o .:? "encoding")
-                     <*> (o .:? "fieldDelimiter"))
+                     <*> (o .:? "fieldDelimiter")
+                     <*> (o .:? "nullMarker"))
 
 instance ToJSON JobConfigurationLoad where
         toJSON JobConfigurationLoad'{..}
@@ -2650,7 +2693,8 @@ instance ToJSON JobConfigurationLoad where
                   ("autodetect" .=) <$> _jclAutodetect,
                   ("sourceUris" .=) <$> _jclSourceURIs,
                   ("encoding" .=) <$> _jclEncoding,
-                  ("fieldDelimiter" .=) <$> _jclFieldDelimiter])
+                  ("fieldDelimiter" .=) <$> _jclFieldDelimiter,
+                  ("nullMarker" .=) <$> _jclNullMarker])
 
 --
 -- /See:/ 'dataSetReference' smart constructor.
@@ -2881,7 +2925,7 @@ instance ToJSON ProjectListProjectsItem where
 --
 -- /See:/ 'bigtableColumn' smart constructor.
 data BigtableColumn = BigtableColumn'
-    { _bcQualifierEncoded :: !(Maybe Base64)
+    { _bcQualifierEncoded :: !(Maybe Bytes)
     , _bcFieldName        :: !(Maybe Text)
     , _bcQualifierString  :: !(Maybe Text)
     , _bcOnlyReadLatest   :: !(Maybe Bool)
@@ -2928,7 +2972,7 @@ bcQualifierEncoded :: Lens' BigtableColumn (Maybe ByteString)
 bcQualifierEncoded
   = lens _bcQualifierEncoded
       (\ s a -> s{_bcQualifierEncoded = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | [Optional] If the qualifier is not a valid BigQuery field identifier
 -- i.e. does not match [a-zA-Z][a-zA-Z0-9_]*, a valid identifier must be
@@ -4028,16 +4072,17 @@ jcqFlattenResults
   = lens _jcqFlattenResults
       (\ s a -> s{_jcqFlattenResults = a})
 
--- | [Experimental] Standard SQL only. Whether to use positional (?) or named
--- (\'myparam) query parameters in this query.
+-- | [Experimental] Standard SQL only. Set to POSITIONAL to use positional
+-- (?) query parameters or to NAMED to use named (\'myparam) query
+-- parameters in this query.
 jcqParameterMode :: Lens' JobConfigurationQuery (Maybe Text)
 jcqParameterMode
   = lens _jcqParameterMode
       (\ s a -> s{_jcqParameterMode = a})
 
--- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL dialect
--- for this query. The default value is true. If set to false, the query
--- will use BigQuery\'s standard SQL:
+-- | Specifies whether to use BigQuery\'s legacy SQL dialect for this query.
+-- The default value is true. If set to false, the query will use
+-- BigQuery\'s standard SQL:
 -- https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql
 -- is set to false, the values of allowLargeResults and flattenResults are
 -- ignored; query will be run as if allowLargeResults is true and
@@ -4440,11 +4485,10 @@ vdUserDefinedFunctionResources
 vdQuery :: Lens' ViewDefinition (Maybe Text)
 vdQuery = lens _vdQuery (\ s a -> s{_vdQuery = a})
 
--- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL for this
--- view. The default value is true. If set to false, the view will use
--- BigQuery\'s standard SQL:
--- https:\/\/cloud.google.com\/bigquery\/sql-reference\/ Queries and views
--- that reference this view must use the same flag value.
+-- | Specifies whether to use BigQuery\'s legacy SQL for this view. The
+-- default value is true. If set to false, the view will use BigQuery\'s
+-- standard SQL: https:\/\/cloud.google.com\/bigquery\/sql-reference\/
+-- Queries and views that reference this view must use the same flag value.
 vdUseLegacySQL :: Lens' ViewDefinition (Maybe Bool)
 vdUseLegacySQL
   = lens _vdUseLegacySQL
@@ -4527,6 +4571,7 @@ data JobStatistics2 = JobStatistics2'
     , _jBillingTier               :: !(Maybe (Textual Int32))
     , _jUndeclaredQueryParameters :: !(Maybe [QueryParameter])
     , _jReferencedTables          :: !(Maybe [TableReference])
+    , _jStatementType             :: !(Maybe Text)
     , _jNumDmlAffectedRows        :: !(Maybe (Textual Int64))
     , _jQueryPlan                 :: !(Maybe [ExplainQueryStage])
     , _jCacheHit                  :: !(Maybe Bool)
@@ -4547,6 +4592,8 @@ data JobStatistics2 = JobStatistics2'
 --
 -- * 'jReferencedTables'
 --
+-- * 'jStatementType'
+--
 -- * 'jNumDmlAffectedRows'
 --
 -- * 'jQueryPlan'
@@ -4563,6 +4610,7 @@ jobStatistics2 =
     , _jBillingTier = Nothing
     , _jUndeclaredQueryParameters = Nothing
     , _jReferencedTables = Nothing
+    , _jStatementType = Nothing
     , _jNumDmlAffectedRows = Nothing
     , _jQueryPlan = Nothing
     , _jCacheHit = Nothing
@@ -4605,6 +4653,12 @@ jReferencedTables
       . _Default
       . _Coerce
 
+-- | [Output-only, Experimental] The type of query statement, if valid.
+jStatementType :: Lens' JobStatistics2 (Maybe Text)
+jStatementType
+  = lens _jStatementType
+      (\ s a -> s{_jStatementType = a})
+
 -- | [Output-only, Experimental] The number of rows affected by a DML
 -- statement. Present only for DML statements INSERT, UPDATE or DELETE.
 jNumDmlAffectedRows :: Lens' JobStatistics2 (Maybe Int64)
@@ -4641,6 +4695,7 @@ instance FromJSON JobStatistics2 where
                      <*> (o .:? "billingTier")
                      <*> (o .:? "undeclaredQueryParameters" .!= mempty)
                      <*> (o .:? "referencedTables" .!= mempty)
+                     <*> (o .:? "statementType")
                      <*> (o .:? "numDmlAffectedRows")
                      <*> (o .:? "queryPlan" .!= mempty)
                      <*> (o .:? "cacheHit")
@@ -4656,6 +4711,7 @@ instance ToJSON JobStatistics2 where
                   ("undeclaredQueryParameters" .=) <$>
                     _jUndeclaredQueryParameters,
                   ("referencedTables" .=) <$> _jReferencedTables,
+                  ("statementType" .=) <$> _jStatementType,
                   ("numDmlAffectedRows" .=) <$> _jNumDmlAffectedRows,
                   ("queryPlan" .=) <$> _jQueryPlan,
                   ("cacheHit" .=) <$> _jCacheHit,
@@ -4722,6 +4778,45 @@ instance ToJSON JobStatus where
                  [("state" .=) <$> _jsState,
                   ("errorResult" .=) <$> _jsErrorResult,
                   ("errors" .=) <$> _jsErrors])
+
+-- | [Experimental] The labels associated with this table. You can use these
+-- to organize and group your tables. Label keys and values can be no
+-- longer than 63 characters, can only contain letters, numeric characters,
+-- underscores and dashes. International characters are allowed. Label
+-- values are optional. Label keys must start with a letter and must be
+-- unique within a dataset. Both keys and values are additionally
+-- constrained to be \<= 128 bytes in size.
+--
+-- /See:/ 'tableLabels' smart constructor.
+newtype TableLabels = TableLabels'
+    { _tlAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TableLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tlAddtional'
+tableLabels
+    :: HashMap Text Text -- ^ 'tlAddtional'
+    -> TableLabels
+tableLabels pTlAddtional_ =
+    TableLabels'
+    { _tlAddtional = _Coerce # pTlAddtional_
+    }
+
+tlAddtional :: Lens' TableLabels (HashMap Text Text)
+tlAddtional
+  = lens _tlAddtional (\ s a -> s{_tlAddtional = a}) .
+      _Coerce
+
+instance FromJSON TableLabels where
+        parseJSON
+          = withObject "TableLabels"
+              (\ o -> TableLabels' <$> (parseJSONObject o))
+
+instance ToJSON TableLabels where
+        toJSON = toJSON . _tlAddtional
 
 --
 -- /See:/ 'dataSetAccessItem' smart constructor.
@@ -4954,6 +5049,7 @@ data Table = Table'
     , _tabNumRows                   :: !(Maybe (Textual Word64))
     , _tabView                      :: !(Maybe ViewDefinition)
     , _tabId                        :: !(Maybe Text)
+    , _tabLabels                    :: !(Maybe TableLabels)
     , _tabType                      :: !(Maybe Text)
     , _tabNumLongTermBytes          :: !(Maybe (Textual Int64))
     , _tabExpirationTime            :: !(Maybe (Textual Int64))
@@ -4996,6 +5092,8 @@ data Table = Table'
 --
 -- * 'tabId'
 --
+-- * 'tabLabels'
+--
 -- * 'tabType'
 --
 -- * 'tabNumLongTermBytes'
@@ -5023,6 +5121,7 @@ table =
     , _tabNumRows = Nothing
     , _tabView = Nothing
     , _tabId = Nothing
+    , _tabLabels = Nothing
     , _tabType = Nothing
     , _tabNumLongTermBytes = Nothing
     , _tabExpirationTime = Nothing
@@ -5126,6 +5225,17 @@ tabView = lens _tabView (\ s a -> s{_tabView = a})
 tabId :: Lens' Table (Maybe Text)
 tabId = lens _tabId (\ s a -> s{_tabId = a})
 
+-- | [Experimental] The labels associated with this table. You can use these
+-- to organize and group your tables. Label keys and values can be no
+-- longer than 63 characters, can only contain letters, numeric characters,
+-- underscores and dashes. International characters are allowed. Label
+-- values are optional. Label keys must start with a letter and must be
+-- unique within a dataset. Both keys and values are additionally
+-- constrained to be \<= 128 bytes in size.
+tabLabels :: Lens' Table (Maybe TableLabels)
+tabLabels
+  = lens _tabLabels (\ s a -> s{_tabLabels = a})
+
 -- | [Output-only] Describes the table type. The following values are
 -- supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined
 -- by a SQL query. EXTERNAL: A table that references data stored in an
@@ -5177,6 +5287,7 @@ instance FromJSON Table where
                      <*> (o .:? "numRows")
                      <*> (o .:? "view")
                      <*> (o .:? "id")
+                     <*> (o .:? "labels")
                      <*> (o .:? "type")
                      <*> (o .:? "numLongTermBytes")
                      <*> (o .:? "expirationTime")
@@ -5202,6 +5313,7 @@ instance ToJSON Table where
                   ("timePartitioning" .=) <$> _tabTimePartitioning,
                   ("numRows" .=) <$> _tabNumRows,
                   ("view" .=) <$> _tabView, ("id" .=) <$> _tabId,
+                  ("labels" .=) <$> _tabLabels,
                   ("type" .=) <$> _tabType,
                   ("numLongTermBytes" .=) <$> _tabNumLongTermBytes,
                   ("expirationTime" .=) <$> _tabExpirationTime,
@@ -5670,3 +5782,39 @@ instance FromJSON DataSetListDataSetsItemLabels where
 
 instance ToJSON DataSetListDataSetsItemLabels where
         toJSON = toJSON . _dsldsilAddtional
+
+-- | [Experimental] The labels associated with this table. You can use these
+-- to organize and group your tables.
+--
+-- /See:/ 'tableListTablesItemLabels' smart constructor.
+newtype TableListTablesItemLabels = TableListTablesItemLabels'
+    { _tltilAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TableListTablesItemLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tltilAddtional'
+tableListTablesItemLabels
+    :: HashMap Text Text -- ^ 'tltilAddtional'
+    -> TableListTablesItemLabels
+tableListTablesItemLabels pTltilAddtional_ =
+    TableListTablesItemLabels'
+    { _tltilAddtional = _Coerce # pTltilAddtional_
+    }
+
+tltilAddtional :: Lens' TableListTablesItemLabels (HashMap Text Text)
+tltilAddtional
+  = lens _tltilAddtional
+      (\ s a -> s{_tltilAddtional = a})
+      . _Coerce
+
+instance FromJSON TableListTablesItemLabels where
+        parseJSON
+          = withObject "TableListTablesItemLabels"
+              (\ o ->
+                 TableListTablesItemLabels' <$> (parseJSONObject o))
+
+instance ToJSON TableListTablesItemLabels where
+        toJSON = toJSON . _tltilAddtional

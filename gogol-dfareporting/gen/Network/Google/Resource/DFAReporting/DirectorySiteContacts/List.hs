@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of directory site contacts, possibly filtered.
+-- Retrieves a list of directory site contacts, possibly filtered. This
+-- method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.directorySiteContacts.list@.
 module Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
@@ -50,7 +51,7 @@ import           Network.Google.Prelude
 -- 'DirectorySiteContactsList' request conforms to.
 type DirectorySiteContactsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "directorySiteContacts" :>
@@ -68,7 +69,8 @@ type DirectorySiteContactsListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] DirectorySiteContactsListResponse
 
--- | Retrieves a list of directory site contacts, possibly filtered.
+-- | Retrieves a list of directory site contacts, possibly filtered. This
+-- method supports paging.
 --
 -- /See:/ 'directorySiteContactsList' smart constructor.
 data DirectorySiteContactsList = DirectorySiteContactsList'

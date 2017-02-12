@@ -21,10 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists operations that match the specified filter in the request. If the
--- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding below allows API services to override the binding
--- to use different resource name schemes, such as
--- \`users\/*\/operations\`.
+-- server doesn\'t support this method, it returns UNIMPLEMENTED.NOTE: the
+-- name binding below allows API services to override the binding to use
+-- different resource name schemes, such as users\/*\/operations.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.operations.list@.
 module Network.Google.Resource.AppEngine.Apps.Operations.List
@@ -74,10 +73,9 @@ type AppsOperationsListResource =
                                    Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
--- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
--- the \`name\` binding below allows API services to override the binding
--- to use different resource name schemes, such as
--- \`users\/*\/operations\`.
+-- server doesn\'t support this method, it returns UNIMPLEMENTED.NOTE: the
+-- name binding below allows API services to override the binding to use
+-- different resource name schemes, such as users\/*\/operations.
 --
 -- /See:/ 'appsOperationsList' smart constructor.
 data AppsOperationsList = AppsOperationsList'
@@ -198,7 +196,9 @@ aolCallback
 instance GoogleRequest AppsOperationsList where
         type Rs AppsOperationsList = ListOperationsResponse
         type Scopes AppsOperationsList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsOperationsList'{..}
           = go _aolAppsId _aolXgafv _aolUploadProtocol
               (Just _aolPp)

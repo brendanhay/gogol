@@ -90,6 +90,7 @@ instance GoogleRequest UsersWatch where
         type Rs UsersWatch = WatchResponse
         type Scopes UsersWatch =
              '["https://mail.google.com/",
+               "https://www.googleapis.com/auth/gmail.metadata",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersWatch'{..}

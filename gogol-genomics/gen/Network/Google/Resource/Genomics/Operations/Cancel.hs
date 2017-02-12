@@ -26,7 +26,7 @@
 -- Operations.ListOperations to check whether the cancellation succeeded or
 -- the operation completed despite cancellation.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.operations.cancel@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.operations.cancel@.
 module Network.Google.Resource.Genomics.Operations.Cancel
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ import           Network.Google.Prelude
 type OperationsCancelResource =
      "v1" :>
        CaptureMode "name" "cancel" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -75,7 +75,7 @@ type OperationsCancelResource =
 --
 -- /See:/ 'operationsCancel' smart constructor.
 data OperationsCancel = OperationsCancel'
-    { _ocXgafv          :: !(Maybe Text)
+    { _ocXgafv          :: !(Maybe Xgafv)
     , _ocUploadProtocol :: !(Maybe Text)
     , _ocPp             :: !Bool
     , _ocAccessToken    :: !(Maybe Text)
@@ -125,7 +125,7 @@ operationsCancel pOcPayload_ pOcName_ =
     }
 
 -- | V1 error format.
-ocXgafv :: Lens' OperationsCancel (Maybe Text)
+ocXgafv :: Lens' OperationsCancel (Maybe Xgafv)
 ocXgafv = lens _ocXgafv (\ s a -> s{_ocXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

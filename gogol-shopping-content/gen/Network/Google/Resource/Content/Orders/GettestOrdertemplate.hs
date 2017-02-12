@@ -21,7 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sandbox only. Retrieves an order template that can be used to quickly
--- create a new order in sandbox.
+-- create a new order in sandbox. This method can only be called for
+-- non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.gettestordertemplate@.
 module Network.Google.Resource.Content.Orders.GettestOrdertemplate
@@ -55,7 +56,8 @@ type OrdersGettestOrdertemplateResource =
                  Get '[JSON] OrdersGetTestOrderTemplateResponse
 
 -- | Sandbox only. Retrieves an order template that can be used to quickly
--- create a new order in sandbox.
+-- create a new order in sandbox. This method can only be called for
+-- non-multi-client accounts.
 --
 -- /See:/ 'ordersGettestOrdertemplate' smart constructor.
 data OrdersGettestOrdertemplate = OrdersGettestOrdertemplate'

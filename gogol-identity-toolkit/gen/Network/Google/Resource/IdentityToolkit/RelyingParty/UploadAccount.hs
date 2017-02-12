@@ -81,7 +81,8 @@ instance GoogleRequest RelyingPartyUploadAccount
         type Rs RelyingPartyUploadAccount =
              UploadAccountResponse
         type Scopes RelyingPartyUploadAccount =
-             '["https://www.googleapis.com/auth/firebase"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/firebase"]
         requestClient RelyingPartyUploadAccount'{..}
           = go (Just AltJSON) _rpuaPayload
               identityToolkitService

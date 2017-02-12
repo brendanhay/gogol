@@ -25,7 +25,7 @@
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 -- This method supports patch semantics.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.patch@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.datasets.patch@.
 module Network.Google.Resource.Genomics.DataSets.Patch
     (
     -- * REST Resource
@@ -57,9 +57,9 @@ type DataSetsPatchResource =
      "v1" :>
        "datasets" :>
          Capture "datasetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "updateMask" Text :>
+               QueryParam "updateMask" FieldMask :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
@@ -75,9 +75,9 @@ type DataSetsPatchResource =
 --
 -- /See:/ 'dataSetsPatch' smart constructor.
 data DataSetsPatch = DataSetsPatch'
-    { _dspXgafv          :: !(Maybe Text)
+    { _dspXgafv          :: !(Maybe Xgafv)
     , _dspUploadProtocol :: !(Maybe Text)
-    , _dspUpdateMask     :: !(Maybe Text)
+    , _dspUpdateMask     :: !(Maybe FieldMask)
     , _dspPp             :: !Bool
     , _dspAccessToken    :: !(Maybe Text)
     , _dspUploadType     :: !(Maybe Text)
@@ -129,7 +129,7 @@ dataSetsPatch pDspPayload_ pDspDataSetId_ =
     }
 
 -- | V1 error format.
-dspXgafv :: Lens' DataSetsPatch (Maybe Text)
+dspXgafv :: Lens' DataSetsPatch (Maybe Xgafv)
 dspXgafv = lens _dspXgafv (\ s a -> s{_dspXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -141,7 +141,7 @@ dspUploadProtocol
 -- | An optional mask specifying which fields to update. At this time, the
 -- only mutable field is name. The only acceptable value is \"name\". If
 -- unspecified, all mutable fields will be updated.
-dspUpdateMask :: Lens' DataSetsPatch (Maybe Text)
+dspUpdateMask :: Lens' DataSetsPatch (Maybe FieldMask)
 dspUpdateMask
   = lens _dspUpdateMask
       (\ s a -> s{_dspUpdateMask = a})

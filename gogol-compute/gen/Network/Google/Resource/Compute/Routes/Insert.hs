@@ -34,8 +34,8 @@ module Network.Google.Resource.Compute.Routes.Insert
     , RoutesInsert
 
     -- * Request Lenses
-    , rProject
-    , rPayload
+    , rouProject
+    , rouPayload
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,34 +58,36 @@ type RoutesInsertResource =
 --
 -- /See:/ 'routesInsert' smart constructor.
 data RoutesInsert = RoutesInsert'
-    { _rProject :: !Text
-    , _rPayload :: !Route
+    { _rouProject :: !Text
+    , _rouPayload :: !Route
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rProject'
+-- * 'rouProject'
 --
--- * 'rPayload'
+-- * 'rouPayload'
 routesInsert
-    :: Text -- ^ 'rProject'
-    -> Route -- ^ 'rPayload'
+    :: Text -- ^ 'rouProject'
+    -> Route -- ^ 'rouPayload'
     -> RoutesInsert
-routesInsert pRProject_ pRPayload_ =
+routesInsert pRouProject_ pRouPayload_ =
     RoutesInsert'
-    { _rProject = pRProject_
-    , _rPayload = pRPayload_
+    { _rouProject = pRouProject_
+    , _rouPayload = pRouPayload_
     }
 
 -- | Project ID for this request.
-rProject :: Lens' RoutesInsert Text
-rProject = lens _rProject (\ s a -> s{_rProject = a})
+rouProject :: Lens' RoutesInsert Text
+rouProject
+  = lens _rouProject (\ s a -> s{_rouProject = a})
 
 -- | Multipart request metadata.
-rPayload :: Lens' RoutesInsert Route
-rPayload = lens _rPayload (\ s a -> s{_rPayload = a})
+rouPayload :: Lens' RoutesInsert Route
+rouPayload
+  = lens _rouPayload (\ s a -> s{_rouPayload = a})
 
 instance GoogleRequest RoutesInsert where
         type Rs RoutesInsert = Operation
@@ -93,7 +95,7 @@ instance GoogleRequest RoutesInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient RoutesInsert'{..}
-          = go _rProject (Just AltJSON) _rPayload
+          = go _rouProject (Just AltJSON) _rouPayload
               computeService
           where go
                   = buildClient (Proxy :: Proxy RoutesInsertResource)

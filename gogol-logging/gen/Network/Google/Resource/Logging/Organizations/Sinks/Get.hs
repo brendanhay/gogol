@@ -140,8 +140,10 @@ osgBearerToken
   = lens _osgBearerToken
       (\ s a -> s{_osgBearerToken = a})
 
--- | Required. The resource name of the sink to return. Example:
--- \`\"projects\/my-project-id\/sinks\/my-sink-id\"\`.
+-- | Required. The parent resource name of the sink:
+-- \"projects\/[PROJECT_ID]\/sinks\/[SINK_ID]\"
+-- \"organizations\/[ORGANIZATION_ID]\/sinks\/[SINK_ID]\" Example:
+-- \"projects\/my-project-id\/sinks\/my-sink-id\".
 osgSinkName :: Lens' OrganizationsSinksGet Text
 osgSinkName
   = lens _osgSinkName (\ s a -> s{_osgSinkName = a})

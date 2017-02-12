@@ -71,14 +71,14 @@ instance FromJSON SearchResponse where
           = withObject "SearchResponse"
               (\ o ->
                  SearchResponse' <$>
-                   (o .:? "context") <*>
+                   (o .:? "@context") <*>
                      (o .:? "itemListElement" .!= mempty)
-                     <*> (o .:? "type"))
+                     <*> (o .:? "@type"))
 
 instance ToJSON SearchResponse where
         toJSON SearchResponse'{..}
           = object
               (catMaybes
-                 [("context" .=) <$> _srContext,
+                 [("@context" .=) <$> _srContext,
                   ("itemListElement" .=) <$> _srItemListElement,
-                  ("type" .=) <$> _srType])
+                  ("@type" .=) <$> _srType])

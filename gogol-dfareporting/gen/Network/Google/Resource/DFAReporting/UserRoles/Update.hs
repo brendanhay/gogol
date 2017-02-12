@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'UserRolesUpdate' request conforms to.
 type UserRolesUpdateResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>

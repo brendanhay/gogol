@@ -27,7 +27,7 @@
 -- Implements
 -- [GlobalAllianceApi.getReferenceBases](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L221).
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.references.bases.list@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.references.bases.list@.
 module Network.Google.Resource.Genomics.References.Bases.List
     (
     -- * REST Resource
@@ -62,7 +62,7 @@ type ReferencesBasesListResource =
        "references" :>
          Capture "referenceId" Text :>
            "bases" :>
-             QueryParam "$.xgafv" Text :>
+             QueryParam "$.xgafv" Xgafv :>
                QueryParam "upload_protocol" Text :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
@@ -85,7 +85,7 @@ type ReferencesBasesListResource =
 --
 -- /See:/ 'referencesBasesList' smart constructor.
 data ReferencesBasesList = ReferencesBasesList'
-    { _rblXgafv          :: !(Maybe Text)
+    { _rblXgafv          :: !(Maybe Xgafv)
     , _rblUploadProtocol :: !(Maybe Text)
     , _rblPp             :: !Bool
     , _rblAccessToken    :: !(Maybe Text)
@@ -146,7 +146,7 @@ referencesBasesList pRblReferenceId_ =
     }
 
 -- | V1 error format.
-rblXgafv :: Lens' ReferencesBasesList (Maybe Text)
+rblXgafv :: Lens' ReferencesBasesList (Maybe Xgafv)
 rblXgafv = lens _rblXgafv (\ s a -> s{_rblXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

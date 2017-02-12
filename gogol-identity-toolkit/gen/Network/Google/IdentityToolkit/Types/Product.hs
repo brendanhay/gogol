@@ -74,7 +74,6 @@ data UserInfoProviderUserInfoItem = UserInfoProviderUserInfoItem'
     { _uipuiiProviderId  :: !(Maybe Text)
     , _uipuiiEmail       :: !(Maybe Text)
     , _uipuiiPhotoURL    :: !(Maybe Text)
-    , _uipuiiRawUserInfo :: !(Maybe Text)
     , _uipuiiFederatedId :: !(Maybe Text)
     , _uipuiiDisplayName :: !(Maybe Text)
     , _uipuiiScreenName  :: !(Maybe Text)
@@ -91,8 +90,6 @@ data UserInfoProviderUserInfoItem = UserInfoProviderUserInfoItem'
 --
 -- * 'uipuiiPhotoURL'
 --
--- * 'uipuiiRawUserInfo'
---
 -- * 'uipuiiFederatedId'
 --
 -- * 'uipuiiDisplayName'
@@ -107,7 +104,6 @@ userInfoProviderUserInfoItem =
     { _uipuiiProviderId = Nothing
     , _uipuiiEmail = Nothing
     , _uipuiiPhotoURL = Nothing
-    , _uipuiiRawUserInfo = Nothing
     , _uipuiiFederatedId = Nothing
     , _uipuiiDisplayName = Nothing
     , _uipuiiScreenName = Nothing
@@ -132,12 +128,6 @@ uipuiiPhotoURL :: Lens' UserInfoProviderUserInfoItem (Maybe Text)
 uipuiiPhotoURL
   = lens _uipuiiPhotoURL
       (\ s a -> s{_uipuiiPhotoURL = a})
-
--- | Raw IDP-returned user info.
-uipuiiRawUserInfo :: Lens' UserInfoProviderUserInfoItem (Maybe Text)
-uipuiiRawUserInfo
-  = lens _uipuiiRawUserInfo
-      (\ s a -> s{_uipuiiRawUserInfo = a})
 
 -- | User\'s identifier at IDP.
 uipuiiFederatedId :: Lens' UserInfoProviderUserInfoItem (Maybe Text)
@@ -169,7 +159,6 @@ instance FromJSON UserInfoProviderUserInfoItem where
                  UserInfoProviderUserInfoItem' <$>
                    (o .:? "providerId") <*> (o .:? "email") <*>
                      (o .:? "photoUrl")
-                     <*> (o .:? "rawUserInfo")
                      <*> (o .:? "federatedId")
                      <*> (o .:? "displayName")
                      <*> (o .:? "screenName")
@@ -182,7 +171,6 @@ instance ToJSON UserInfoProviderUserInfoItem where
                  [("providerId" .=) <$> _uipuiiProviderId,
                   ("email" .=) <$> _uipuiiEmail,
                   ("photoUrl" .=) <$> _uipuiiPhotoURL,
-                  ("rawUserInfo" .=) <$> _uipuiiRawUserInfo,
                   ("federatedId" .=) <$> _uipuiiFederatedId,
                   ("displayName" .=) <$> _uipuiiDisplayName,
                   ("screenName" .=) <$> _uipuiiScreenName,
@@ -374,10 +362,11 @@ data UserInfo = UserInfo'
     , _uiPasswordUpdatedAt :: !(Maybe (Textual Double))
     , _uiVersion           :: !(Maybe (Textual Int32))
     , _uiEmailVerified     :: !(Maybe Bool)
-    , _uiSalt              :: !(Maybe Base64)
+    , _uiSalt              :: !(Maybe Bytes)
     , _uiDisplayName       :: !(Maybe Text)
-    , _uiPasswordHash      :: !(Maybe Base64)
+    , _uiPasswordHash      :: !(Maybe Bytes)
     , _uiLocalId           :: !(Maybe Text)
+    , _uiRawPassword       :: !(Maybe Text)
     , _uiScreenName        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -415,6 +404,8 @@ data UserInfo = UserInfo'
 --
 -- * 'uiLocalId'
 --
+-- * 'uiRawPassword'
+--
 -- * 'uiScreenName'
 userInfo
     :: UserInfo
@@ -435,6 +426,7 @@ userInfo =
     , _uiDisplayName = Nothing
     , _uiPasswordHash = Nothing
     , _uiLocalId = Nothing
+    , _uiRawPassword = Nothing
     , _uiScreenName = Nothing
     }
 
@@ -507,7 +499,7 @@ uiEmailVerified
 uiSalt :: Lens' UserInfo (Maybe ByteString)
 uiSalt
   = lens _uiSalt (\ s a -> s{_uiSalt = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The name of the user.
 uiDisplayName :: Lens' UserInfo (Maybe Text)
@@ -520,12 +512,18 @@ uiPasswordHash :: Lens' UserInfo (Maybe ByteString)
 uiPasswordHash
   = lens _uiPasswordHash
       (\ s a -> s{_uiPasswordHash = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The local ID of the user.
 uiLocalId :: Lens' UserInfo (Maybe Text)
 uiLocalId
   = lens _uiLocalId (\ s a -> s{_uiLocalId = a})
+
+-- | The user\'s plain text password.
+uiRawPassword :: Lens' UserInfo (Maybe Text)
+uiRawPassword
+  = lens _uiRawPassword
+      (\ s a -> s{_uiRawPassword = a})
 
 -- | User\'s screen name at Twitter or login name at Github.
 uiScreenName :: Lens' UserInfo (Maybe Text)
@@ -551,6 +549,7 @@ instance FromJSON UserInfo where
                      <*> (o .:? "displayName")
                      <*> (o .:? "passwordHash")
                      <*> (o .:? "localId")
+                     <*> (o .:? "rawPassword")
                      <*> (o .:? "screenName"))
 
 instance ToJSON UserInfo where
@@ -572,6 +571,7 @@ instance ToJSON UserInfo where
                   ("displayName" .=) <$> _uiDisplayName,
                   ("passwordHash" .=) <$> _uiPasswordHash,
                   ("localId" .=) <$> _uiLocalId,
+                  ("rawPassword" .=) <$> _uiRawPassword,
                   ("screenName" .=) <$> _uiScreenName])
 
 -- | Response of setting the project configuration.
@@ -1867,6 +1867,7 @@ data IdentitytoolkitRelyingPartyGetProjectConfigResponse = IdentitytoolkitRelyin
     , _irpgpcrResetPasswordTemplate       :: !(Maybe EmailTemplate)
     , _irpgpcrProjectId                   :: !(Maybe Text)
     , _irpgpcrUseEmailSending             :: !(Maybe Bool)
+    , _irpgpcrDynamicLinksDomain          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyGetProjectConfigResponse' with the minimum fields required to make a request.
@@ -1894,6 +1895,8 @@ data IdentitytoolkitRelyingPartyGetProjectConfigResponse = IdentitytoolkitRelyin
 -- * 'irpgpcrProjectId'
 --
 -- * 'irpgpcrUseEmailSending'
+--
+-- * 'irpgpcrDynamicLinksDomain'
 identitytoolkitRelyingPartyGetProjectConfigResponse
     :: IdentitytoolkitRelyingPartyGetProjectConfigResponse
 identitytoolkitRelyingPartyGetProjectConfigResponse =
@@ -1909,6 +1912,7 @@ identitytoolkitRelyingPartyGetProjectConfigResponse =
     , _irpgpcrResetPasswordTemplate = Nothing
     , _irpgpcrProjectId = Nothing
     , _irpgpcrUseEmailSending = Nothing
+    , _irpgpcrDynamicLinksDomain = Nothing
     }
 
 -- | Authorized domains.
@@ -1981,6 +1985,11 @@ irpgpcrUseEmailSending
   = lens _irpgpcrUseEmailSending
       (\ s a -> s{_irpgpcrUseEmailSending = a})
 
+irpgpcrDynamicLinksDomain :: Lens' IdentitytoolkitRelyingPartyGetProjectConfigResponse (Maybe Text)
+irpgpcrDynamicLinksDomain
+  = lens _irpgpcrDynamicLinksDomain
+      (\ s a -> s{_irpgpcrDynamicLinksDomain = a})
+
 instance FromJSON
          IdentitytoolkitRelyingPartyGetProjectConfigResponse
          where
@@ -2000,7 +2009,8 @@ instance FromJSON
                      <*> (o .:? "allowPasswordUser")
                      <*> (o .:? "resetPasswordTemplate")
                      <*> (o .:? "projectId")
-                     <*> (o .:? "useEmailSending"))
+                     <*> (o .:? "useEmailSending")
+                     <*> (o .:? "dynamicLinksDomain"))
 
 instance ToJSON
          IdentitytoolkitRelyingPartyGetProjectConfigResponse
@@ -2026,7 +2036,9 @@ instance ToJSON
                   ("resetPasswordTemplate" .=) <$>
                     _irpgpcrResetPasswordTemplate,
                   ("projectId" .=) <$> _irpgpcrProjectId,
-                  ("useEmailSending" .=) <$> _irpgpcrUseEmailSending])
+                  ("useEmailSending" .=) <$> _irpgpcrUseEmailSending,
+                  ("dynamicLinksDomain" .=) <$>
+                    _irpgpcrDynamicLinksDomain])
 
 -- | Response of resetting the password.
 --
@@ -2607,11 +2619,12 @@ instance ToJSON EmailTemplate where
 data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPartyUploadAccountRequest'
     { _irpuarUsers                  :: !(Maybe [UserInfo])
     , _irpuarMemoryCost             :: !(Maybe (Textual Int32))
+    , _irpuarAllowOverwrite         :: !(Maybe Bool)
     , _irpuarDelegatedProjectNumber :: !(Maybe (Textual Int64))
     , _irpuarSanityCheck            :: !(Maybe Bool)
-    , _irpuarSaltSeparator          :: !(Maybe Base64)
+    , _irpuarSaltSeparator          :: !(Maybe Bytes)
     , _irpuarHashAlgorithm          :: !(Maybe Text)
-    , _irpuarSignerKey              :: !(Maybe Base64)
+    , _irpuarSignerKey              :: !(Maybe Bytes)
     , _irpuarRounds                 :: !(Maybe (Textual Int32))
     , _irpuarTargetProjectId        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2623,6 +2636,8 @@ data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPar
 -- * 'irpuarUsers'
 --
 -- * 'irpuarMemoryCost'
+--
+-- * 'irpuarAllowOverwrite'
 --
 -- * 'irpuarDelegatedProjectNumber'
 --
@@ -2643,6 +2658,7 @@ identitytoolkitRelyingPartyUploadAccountRequest =
     IdentitytoolkitRelyingPartyUploadAccountRequest'
     { _irpuarUsers = Nothing
     , _irpuarMemoryCost = Nothing
+    , _irpuarAllowOverwrite = Nothing
     , _irpuarDelegatedProjectNumber = Nothing
     , _irpuarSanityCheck = Nothing
     , _irpuarSaltSeparator = Nothing
@@ -2666,6 +2682,12 @@ irpuarMemoryCost
       (\ s a -> s{_irpuarMemoryCost = a})
       . mapping _Coerce
 
+-- | Whether allow overwrite existing account when user local_id exists.
+irpuarAllowOverwrite :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Bool)
+irpuarAllowOverwrite
+  = lens _irpuarAllowOverwrite
+      (\ s a -> s{_irpuarAllowOverwrite = a})
+
 -- | GCP project number of the requesting delegated app. Currently only
 -- intended for Firebase V1 migration.
 irpuarDelegatedProjectNumber :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Int64)
@@ -2686,7 +2708,7 @@ irpuarSaltSeparator :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Ma
 irpuarSaltSeparator
   = lens _irpuarSaltSeparator
       (\ s a -> s{_irpuarSaltSeparator = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The password hash algorithm.
 irpuarHashAlgorithm :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Text)
@@ -2699,7 +2721,7 @@ irpuarSignerKey :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe 
 irpuarSignerKey
   = lens _irpuarSignerKey
       (\ s a -> s{_irpuarSignerKey = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | Rounds for hash calculation. Used by scrypt and similar algorithms.
 irpuarRounds :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Int32)
@@ -2722,6 +2744,7 @@ instance FromJSON
               (\ o ->
                  IdentitytoolkitRelyingPartyUploadAccountRequest' <$>
                    (o .:? "users" .!= mempty) <*> (o .:? "memoryCost")
+                     <*> (o .:? "allowOverwrite")
                      <*> (o .:? "delegatedProjectNumber")
                      <*> (o .:? "sanityCheck")
                      <*> (o .:? "saltSeparator")
@@ -2738,6 +2761,7 @@ instance ToJSON
               (catMaybes
                  [("users" .=) <$> _irpuarUsers,
                   ("memoryCost" .=) <$> _irpuarMemoryCost,
+                  ("allowOverwrite" .=) <$> _irpuarAllowOverwrite,
                   ("delegatedProjectNumber" .=) <$>
                     _irpuarDelegatedProjectNumber,
                   ("sanityCheck" .=) <$> _irpuarSanityCheck,
@@ -3221,6 +3245,7 @@ data IdentitytoolkitRelyingPartyDownloadAccountRequest = IdentitytoolkitRelyingP
     { _iNextPageToken          :: !(Maybe Text)
     , _iDelegatedProjectNumber :: !(Maybe (Textual Int64))
     , _iMaxResults             :: !(Maybe (Textual Word32))
+    , _iTargetProjectId        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyDownloadAccountRequest' with the minimum fields required to make a request.
@@ -3232,6 +3257,8 @@ data IdentitytoolkitRelyingPartyDownloadAccountRequest = IdentitytoolkitRelyingP
 -- * 'iDelegatedProjectNumber'
 --
 -- * 'iMaxResults'
+--
+-- * 'iTargetProjectId'
 identitytoolkitRelyingPartyDownloadAccountRequest
     :: IdentitytoolkitRelyingPartyDownloadAccountRequest
 identitytoolkitRelyingPartyDownloadAccountRequest =
@@ -3239,6 +3266,7 @@ identitytoolkitRelyingPartyDownloadAccountRequest =
     { _iNextPageToken = Nothing
     , _iDelegatedProjectNumber = Nothing
     , _iMaxResults = Nothing
+    , _iTargetProjectId = Nothing
     }
 
 -- | The token for the next page. This should be taken from the previous
@@ -3262,6 +3290,13 @@ iMaxResults
   = lens _iMaxResults (\ s a -> s{_iMaxResults = a}) .
       mapping _Coerce
 
+-- | Specify which project (field value is actually project id) to operate.
+-- Only used when provided credential.
+iTargetProjectId :: Lens' IdentitytoolkitRelyingPartyDownloadAccountRequest (Maybe Text)
+iTargetProjectId
+  = lens _iTargetProjectId
+      (\ s a -> s{_iTargetProjectId = a})
+
 instance FromJSON
          IdentitytoolkitRelyingPartyDownloadAccountRequest
          where
@@ -3273,7 +3308,8 @@ instance FromJSON
                    <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "delegatedProjectNumber")
-                     <*> (o .:? "maxResults"))
+                     <*> (o .:? "maxResults")
+                     <*> (o .:? "targetProjectId"))
 
 instance ToJSON
          IdentitytoolkitRelyingPartyDownloadAccountRequest
@@ -3285,7 +3321,8 @@ instance ToJSON
                  [("nextPageToken" .=) <$> _iNextPageToken,
                   ("delegatedProjectNumber" .=) <$>
                     _iDelegatedProjectNumber,
-                  ("maxResults" .=) <$> _iMaxResults])
+                  ("maxResults" .=) <$> _iMaxResults,
+                  ("targetProjectId" .=) <$> _iTargetProjectId])
 
 -- | Request of verifying the password.
 --
@@ -3467,7 +3504,7 @@ data SetAccountInfoResponse = SetAccountInfoResponse'
     , _sairProviderUserInfo :: !(Maybe [SetAccountInfoResponseProviderUserInfoItem])
     , _sairExpiresIn        :: !(Maybe (Textual Int64))
     , _sairDisplayName      :: !(Maybe Text)
-    , _sairPasswordHash     :: !(Maybe Base64)
+    , _sairPasswordHash     :: !(Maybe Bytes)
     , _sairLocalId          :: !(Maybe Text)
     , _sairNewEmail         :: !(Maybe Text)
     , _sairIdToken          :: !(Maybe Text)
@@ -3562,7 +3599,7 @@ sairPasswordHash :: Lens' SetAccountInfoResponse (Maybe ByteString)
 sairPasswordHash
   = lens _sairPasswordHash
       (\ s a -> s{_sairPasswordHash = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The local ID of the user.
 sairLocalId :: Lens' SetAccountInfoResponse (Maybe Text)
@@ -3619,9 +3656,12 @@ instance ToJSON SetAccountInfoResponse where
 data IdentitytoolkitRelyingPartySignupNewUserRequest = IdentitytoolkitRelyingPartySignupNewUserRequest'
     { _irpsnurEmail            :: !(Maybe Text)
     , _irpsnurInstanceId       :: !(Maybe Text)
+    , _irpsnurPhotoURL         :: !(Maybe Text)
     , _irpsnurCaptchaChallenge :: !(Maybe Text)
+    , _irpsnurDisabled         :: !(Maybe Bool)
     , _irpsnurPassword         :: !(Maybe Text)
     , _irpsnurCaptchaResponse  :: !(Maybe Text)
+    , _irpsnurEmailVerified    :: !(Maybe Bool)
     , _irpsnurDisplayName      :: !(Maybe Text)
     , _irpsnurIdToken          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3634,11 +3674,17 @@ data IdentitytoolkitRelyingPartySignupNewUserRequest = IdentitytoolkitRelyingPar
 --
 -- * 'irpsnurInstanceId'
 --
+-- * 'irpsnurPhotoURL'
+--
 -- * 'irpsnurCaptchaChallenge'
+--
+-- * 'irpsnurDisabled'
 --
 -- * 'irpsnurPassword'
 --
 -- * 'irpsnurCaptchaResponse'
+--
+-- * 'irpsnurEmailVerified'
 --
 -- * 'irpsnurDisplayName'
 --
@@ -3649,9 +3695,12 @@ identitytoolkitRelyingPartySignupNewUserRequest =
     IdentitytoolkitRelyingPartySignupNewUserRequest'
     { _irpsnurEmail = Nothing
     , _irpsnurInstanceId = Nothing
+    , _irpsnurPhotoURL = Nothing
     , _irpsnurCaptchaChallenge = Nothing
+    , _irpsnurDisabled = Nothing
     , _irpsnurPassword = Nothing
     , _irpsnurCaptchaResponse = Nothing
+    , _irpsnurEmailVerified = Nothing
     , _irpsnurDisplayName = Nothing
     , _irpsnurIdToken = Nothing
     }
@@ -3667,11 +3716,23 @@ irpsnurInstanceId
   = lens _irpsnurInstanceId
       (\ s a -> s{_irpsnurInstanceId = a})
 
+-- | The photo url of the user.
+irpsnurPhotoURL :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest (Maybe Text)
+irpsnurPhotoURL
+  = lens _irpsnurPhotoURL
+      (\ s a -> s{_irpsnurPhotoURL = a})
+
 -- | The captcha challenge.
 irpsnurCaptchaChallenge :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest (Maybe Text)
 irpsnurCaptchaChallenge
   = lens _irpsnurCaptchaChallenge
       (\ s a -> s{_irpsnurCaptchaChallenge = a})
+
+-- | Whether to disable the user. Only can be used by service account.
+irpsnurDisabled :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest (Maybe Bool)
+irpsnurDisabled
+  = lens _irpsnurDisabled
+      (\ s a -> s{_irpsnurDisabled = a})
 
 -- | The new password of the user.
 irpsnurPassword :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest (Maybe Text)
@@ -3684,6 +3745,12 @@ irpsnurCaptchaResponse :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest 
 irpsnurCaptchaResponse
   = lens _irpsnurCaptchaResponse
       (\ s a -> s{_irpsnurCaptchaResponse = a})
+
+-- | Mark the email as verified or not. Only can be used by service account.
+irpsnurEmailVerified :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest (Maybe Bool)
+irpsnurEmailVerified
+  = lens _irpsnurEmailVerified
+      (\ s a -> s{_irpsnurEmailVerified = a})
 
 -- | The name of the user.
 irpsnurDisplayName :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest (Maybe Text)
@@ -3705,9 +3772,12 @@ instance FromJSON
               (\ o ->
                  IdentitytoolkitRelyingPartySignupNewUserRequest' <$>
                    (o .:? "email") <*> (o .:? "instanceId") <*>
-                     (o .:? "captchaChallenge")
+                     (o .:? "photoUrl")
+                     <*> (o .:? "captchaChallenge")
+                     <*> (o .:? "disabled")
                      <*> (o .:? "password")
                      <*> (o .:? "captchaResponse")
+                     <*> (o .:? "emailVerified")
                      <*> (o .:? "displayName")
                      <*> (o .:? "idToken"))
 
@@ -3719,9 +3789,12 @@ instance ToJSON
               (catMaybes
                  [("email" .=) <$> _irpsnurEmail,
                   ("instanceId" .=) <$> _irpsnurInstanceId,
+                  ("photoUrl" .=) <$> _irpsnurPhotoURL,
                   ("captchaChallenge" .=) <$> _irpsnurCaptchaChallenge,
+                  ("disabled" .=) <$> _irpsnurDisabled,
                   ("password" .=) <$> _irpsnurPassword,
                   ("captchaResponse" .=) <$> _irpsnurCaptchaResponse,
+                  ("emailVerified" .=) <$> _irpsnurEmailVerified,
                   ("displayName" .=) <$> _irpsnurDisplayName,
                   ("idToken" .=) <$> _irpsnurIdToken])
 

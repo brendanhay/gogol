@@ -150,7 +150,7 @@ asgBearerToken
       (\ s a -> s{_asgBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\`.
+-- apps\/myapp\/services\/default.
 asgAppsId :: Lens' AppsServicesGet Text
 asgAppsId
   = lens _asgAppsId (\ s a -> s{_asgAppsId = a})
@@ -169,7 +169,9 @@ asgCallback
 instance GoogleRequest AppsServicesGet where
         type Rs AppsServicesGet = Service
         type Scopes AppsServicesGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsServicesGet'{..}
           = go _asgAppsId _asgServicesId _asgXgafv
               _asgUploadProtocol

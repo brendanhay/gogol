@@ -24,7 +24,7 @@
 -- genomics resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.create@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.variants.create@.
 module Network.Google.Resource.Genomics.Variants.Create
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 type VariantsCreateResource =
      "v1" :>
        "variants" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -69,7 +69,7 @@ type VariantsCreateResource =
 --
 -- /See:/ 'variantsCreate' smart constructor.
 data VariantsCreate = VariantsCreate'
-    { _vcXgafv          :: !(Maybe Text)
+    { _vcXgafv          :: !(Maybe Xgafv)
     , _vcUploadProtocol :: !(Maybe Text)
     , _vcPp             :: !Bool
     , _vcAccessToken    :: !(Maybe Text)
@@ -114,7 +114,7 @@ variantsCreate pVcPayload_ =
     }
 
 -- | V1 error format.
-vcXgafv :: Lens' VariantsCreate (Maybe Text)
+vcXgafv :: Lens' VariantsCreate (Maybe Xgafv)
 vcXgafv = lens _vcXgafv (\ s a -> s{_vcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

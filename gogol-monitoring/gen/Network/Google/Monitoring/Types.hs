@@ -46,6 +46,12 @@ module Network.Google.Monitoring.Types
     , ltsrNextPageToken
     , ltsrTimeSeries
 
+    -- * ListMetricAssociationsResponse
+    , ListMetricAssociationsResponse
+    , listMetricAssociationsResponse
+    , lmarNextPageToken
+    , lmarMetricAssociations
+
     -- * MetricDescriptor
     , MetricDescriptor
     , metricDescriptor
@@ -113,6 +119,13 @@ module Network.Google.Monitoring.Types
     -- * FieldKind
     , FieldKind (..)
 
+    -- * MetricAssociation
+    , MetricAssociation
+    , metricAssociation
+    , maMetricType
+    , maName
+    , maIsDefault
+
     -- * Empty
     , Empty
     , empty
@@ -133,6 +146,15 @@ module Network.Google.Monitoring.Types
     , OptionValue
     , optionValue
     , ovAddtional
+
+    -- * Category
+    , Category
+    , category
+    , cShortName
+    , cName
+    , cDisplayName
+    , cDescription
+    , cIsDefault
 
     -- * CreateTimeSeriesRequest
     , CreateTimeSeriesRequest
@@ -210,6 +232,12 @@ module Network.Google.Monitoring.Types
     , eGrowthFactor
     , eScale
     , eNumFiniteBuckets
+
+    -- * ListCategoriesResponse
+    , ListCategoriesResponse
+    , listCategoriesResponse
+    , lcrNextPageToken
+    , lcrCategory
 
     -- * Range
     , Range

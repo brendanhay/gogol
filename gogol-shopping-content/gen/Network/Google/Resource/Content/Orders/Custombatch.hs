@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves or modifies multiple orders in a single request.
+-- Retrieves or modifies multiple orders in a single request. This method
+-- can only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.custombatch@.
 module Network.Google.Resource.Content.Orders.Custombatch
@@ -50,7 +51,8 @@ type OrdersCustombatchResource =
                ReqBody '[JSON] OrdersCustomBatchRequest :>
                  Post '[JSON] OrdersCustomBatchResponse
 
--- | Retrieves or modifies multiple orders in a single request.
+-- | Retrieves or modifies multiple orders in a single request. This method
+-- can only be called for non-multi-client accounts.
 --
 -- /See:/ 'ordersCustombatch' smart constructor.
 newtype OrdersCustombatch = OrdersCustombatch'

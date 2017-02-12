@@ -53,11 +53,17 @@ module Network.Google.Classroom
     -- ** classroom.courses.courseWork.create
     , module Network.Google.Resource.Classroom.Courses.CourseWork.Create
 
+    -- ** classroom.courses.courseWork.delete
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.Delete
+
     -- ** classroom.courses.courseWork.get
     , module Network.Google.Resource.Classroom.Courses.CourseWork.Get
 
     -- ** classroom.courses.courseWork.list
     , module Network.Google.Resource.Classroom.Courses.CourseWork.List
+
+    -- ** classroom.courses.courseWork.patch
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.Patch
 
     -- ** classroom.courses.courseWork.studentSubmissions.get
     , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
@@ -487,8 +493,10 @@ import           Network.Google.Resource.Classroom.Courses.Aliases.Create
 import           Network.Google.Resource.Classroom.Courses.Aliases.Delete
 import           Network.Google.Resource.Classroom.Courses.Aliases.List
 import           Network.Google.Resource.Classroom.Courses.CourseWork.Create
+import           Network.Google.Resource.Classroom.Courses.CourseWork.Delete
 import           Network.Google.Resource.Classroom.Courses.CourseWork.Get
 import           Network.Google.Resource.Classroom.Courses.CourseWork.List
+import           Network.Google.Resource.Classroom.Courses.CourseWork.Patch
 import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
 import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
 import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
@@ -547,8 +555,10 @@ type ClassroomAPI =
        :<|>
        CoursesCourseWorkStudentSubmissionsModifyAttachmentsResource
        :<|> CoursesCourseWorkListResource
+       :<|> CoursesCourseWorkPatchResource
        :<|> CoursesCourseWorkGetResource
        :<|> CoursesCourseWorkCreateResource
+       :<|> CoursesCourseWorkDeleteResource
        :<|> CoursesTeachersListResource
        :<|> CoursesTeachersGetResource
        :<|> CoursesTeachersCreateResource

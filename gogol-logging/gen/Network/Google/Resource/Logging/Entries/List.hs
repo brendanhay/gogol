@@ -20,9 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists log entries. Use this method to retrieve log entries from Cloud
--- Logging. For ways to export log entries, see [Exporting
--- Logs](\/logging\/docs\/export).
+-- Lists log entries. Use this method to retrieve log entries from
+-- Stackdriver Logging. For ways to export log entries, see Exporting Logs.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.entries.list@.
 module Network.Google.Resource.Logging.Entries.List
@@ -64,9 +63,8 @@ type EntriesListResource =
                          ReqBody '[JSON] ListLogEntriesRequest :>
                            Post '[JSON] ListLogEntriesResponse
 
--- | Lists log entries. Use this method to retrieve log entries from Cloud
--- Logging. For ways to export log entries, see [Exporting
--- Logs](\/logging\/docs\/export).
+-- | Lists log entries. Use this method to retrieve log entries from
+-- Stackdriver Logging. For ways to export log entries, see Exporting Logs.
 --
 -- /See:/ 'entriesList' smart constructor.
 data EntriesList = EntriesList'

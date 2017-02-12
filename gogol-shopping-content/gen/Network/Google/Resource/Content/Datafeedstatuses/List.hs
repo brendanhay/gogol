@@ -21,6 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the statuses of the datafeeds in your Merchant Center account.
+-- This method can only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeedstatuses.list@.
 module Network.Google.Resource.Content.Datafeedstatuses.List
@@ -54,6 +55,7 @@ type DatafeedstatusesListResource =
                    Get '[JSON] DatafeedstatusesListResponse
 
 -- | Lists the statuses of the datafeeds in your Merchant Center account.
+-- This method can only be called for non-multi-client accounts.
 --
 -- /See:/ 'datafeedstatusesList' smart constructor.
 data DatafeedstatusesList = DatafeedstatusesList'

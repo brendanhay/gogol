@@ -22,16 +22,17 @@
 --
 -- Updates the specified Version resource. You can specify the following
 -- fields depending on the App Engine environment and type of scaling that
--- the version resource uses: *
--- [\`serving_status\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status):
+-- the version resource uses: serving_status
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status):
 -- For Version resources that use basic scaling, manual scaling, or run in
--- the App Engine flexible environment. *
--- [\`instance_class\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.instance_class):
--- For Version resources that run in the App Engine standard environment. *
--- [\`automatic_scaling.min_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
+-- the App Engine flexible environment. instance_class
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.instance_class):
+-- For Version resources that run in the App Engine standard environment.
+-- automatic_scaling.min_idle_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
 -- For Version resources that use automatic scaling and run in the App
--- Engine standard environment. *
--- [\`automatic_scaling.max_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
+-- Engine standard environment. automatic_scaling.max_idle_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
 -- For Version resources that use automatic scaling and run in the App
 -- Engine standard environment.
 --
@@ -87,16 +88,17 @@ type AppsServicesVersionsPatchResource =
 
 -- | Updates the specified Version resource. You can specify the following
 -- fields depending on the App Engine environment and type of scaling that
--- the version resource uses: *
--- [\`serving_status\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status):
+-- the version resource uses: serving_status
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.serving_status):
 -- For Version resources that use basic scaling, manual scaling, or run in
--- the App Engine flexible environment. *
--- [\`instance_class\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.instance_class):
--- For Version resources that run in the App Engine standard environment. *
--- [\`automatic_scaling.min_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
+-- the App Engine flexible environment. instance_class
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.instance_class):
+-- For Version resources that run in the App Engine standard environment.
+-- automatic_scaling.min_idle_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
 -- For Version resources that use automatic scaling and run in the App
--- Engine standard environment. *
--- [\`automatic_scaling.max_idle_instances\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
+-- Engine standard environment. automatic_scaling.max_idle_instances
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#Version.FIELDS.automatic_scaling):
 -- For Version resources that use automatic scaling and run in the App
 -- Engine standard environment.
 --
@@ -216,7 +218,7 @@ asvpBearerToken
       (\ s a -> s{_asvpBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource to update. Example:
--- \`apps\/myapp\/services\/default\/versions\/1\`.
+-- apps\/myapp\/services\/default\/versions\/1.
 asvpAppsId :: Lens' AppsServicesVersionsPatch Text
 asvpAppsId
   = lens _asvpAppsId (\ s a -> s{_asvpAppsId = a})

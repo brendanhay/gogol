@@ -13,8 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Knowledge Graph Search API allows developers to search the Google
--- Knowledge Graph for entities.
+-- Searches the Google Knowledge Graph for entities.
 --
 -- /See:/ <https://developers.google.com/knowledge-graph/ Knowledge Graph Search API Reference>
 module Network.Google.KnowledgeGraphSearch
@@ -38,6 +37,9 @@ module Network.Google.KnowledgeGraphSearch
     , srContext
     , srItemListElement
     , srType
+
+    -- ** Xgafv
+    , Xgafv (..)
     ) where
 
 import           Network.Google.KnowledgeGraphSearch.Types

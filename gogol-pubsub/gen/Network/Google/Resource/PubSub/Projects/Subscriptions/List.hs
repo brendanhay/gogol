@@ -54,7 +54,7 @@ type ProjectsSubscriptionsListResource =
      "v1" :>
        Capture "project" Text :>
          "subscriptions" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -70,7 +70,7 @@ type ProjectsSubscriptionsListResource =
 --
 -- /See:/ 'projectsSubscriptionsList' smart constructor.
 data ProjectsSubscriptionsList = ProjectsSubscriptionsList'
-    { _pslXgafv          :: !(Maybe Text)
+    { _pslXgafv          :: !(Maybe Xgafv)
     , _pslUploadProtocol :: !(Maybe Text)
     , _pslProject        :: !Text
     , _pslPp             :: !Bool
@@ -123,7 +123,7 @@ projectsSubscriptionsList pPslProject_ =
     }
 
 -- | V1 error format.
-pslXgafv :: Lens' ProjectsSubscriptionsList (Maybe Text)
+pslXgafv :: Lens' ProjectsSubscriptionsList (Maybe Xgafv)
 pslXgafv = lens _pslXgafv (\ s a -> s{_pslXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -132,7 +132,8 @@ pslUploadProtocol
   = lens _pslUploadProtocol
       (\ s a -> s{_pslUploadProtocol = a})
 
--- | The name of the cloud project that subscriptions belong to.
+-- | The name of the cloud project that subscriptions belong to. Format is
+-- \`projects\/{project}\`.
 pslProject :: Lens' ProjectsSubscriptionsList Text
 pslProject
   = lens _pslProject (\ s a -> s{_pslProject = a})

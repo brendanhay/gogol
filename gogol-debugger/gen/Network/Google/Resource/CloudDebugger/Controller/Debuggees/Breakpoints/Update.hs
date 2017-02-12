@@ -63,7 +63,7 @@ type ControllerDebuggeesBreakpointsUpdateResource =
            Capture "debuggeeId" Text :>
              "breakpoints" :>
                Capture "id" Text :>
-                 QueryParam "$.xgafv" Text :>
+                 QueryParam "$.xgafv" Xgafv :>
                    QueryParam "upload_protocol" Text :>
                      QueryParam "pp" Bool :>
                        QueryParam "access_token" Text :>
@@ -84,7 +84,7 @@ type ControllerDebuggeesBreakpointsUpdateResource =
 --
 -- /See:/ 'controllerDebuggeesBreakpointsUpdate' smart constructor.
 data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate'
-    { _cdbuXgafv          :: !(Maybe Text)
+    { _cdbuXgafv          :: !(Maybe Xgafv)
     , _cdbuUploadProtocol :: !(Maybe Text)
     , _cdbuPp             :: !Bool
     , _cdbuAccessToken    :: !(Maybe Text)
@@ -139,7 +139,7 @@ controllerDebuggeesBreakpointsUpdate pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
     }
 
 -- | V1 error format.
-cdbuXgafv :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Text)
+cdbuXgafv :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Xgafv)
 cdbuXgafv
   = lens _cdbuXgafv (\ s a -> s{_cdbuXgafv = a})
 

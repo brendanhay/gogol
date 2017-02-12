@@ -55,7 +55,7 @@ type ProjectsUpdateResource =
      "v1" :>
        "projects" :>
          Capture "projectId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -71,7 +71,7 @@ type ProjectsUpdateResource =
 --
 -- /See:/ 'projectsUpdate' smart constructor.
 data ProjectsUpdate = ProjectsUpdate'
-    { _proXgafv          :: !(Maybe Text)
+    { _proXgafv          :: !(Maybe Xgafv)
     , _proUploadProtocol :: !(Maybe Text)
     , _proPp             :: !Bool
     , _proAccessToken    :: !(Maybe Text)
@@ -121,7 +121,7 @@ projectsUpdate pProPayload_ pProProjectId_ =
     }
 
 -- | V1 error format.
-proXgafv :: Lens' ProjectsUpdate (Maybe Text)
+proXgafv :: Lens' ProjectsUpdate (Maybe Xgafv)
 proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

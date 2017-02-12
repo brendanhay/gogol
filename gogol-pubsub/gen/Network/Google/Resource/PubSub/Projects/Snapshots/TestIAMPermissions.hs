@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns permissions that a caller has on the specified resource.
+-- Returns permissions that a caller has on the specified resource. If the
+-- resource does not exist, this will return an empty set of permissions,
+-- not a NOT_FOUND error.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.testIamPermissions@.
 module Network.Google.Resource.PubSub.Projects.Snapshots.TestIAMPermissions
@@ -52,7 +54,7 @@ import           Network.Google.PubSub.Types
 type ProjectsSnapshotsTestIAMPermissionsResource =
      "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -63,11 +65,13 @@ type ProjectsSnapshotsTestIAMPermissionsResource =
                          ReqBody '[JSON] TestIAMPermissionsRequest :>
                            Post '[JSON] TestIAMPermissionsResponse
 
--- | Returns permissions that a caller has on the specified resource.
+-- | Returns permissions that a caller has on the specified resource. If the
+-- resource does not exist, this will return an empty set of permissions,
+-- not a NOT_FOUND error.
 --
 -- /See:/ 'projectsSnapshotsTestIAMPermissions' smart constructor.
 data ProjectsSnapshotsTestIAMPermissions = ProjectsSnapshotsTestIAMPermissions'
-    { _pstipXgafv          :: !(Maybe Text)
+    { _pstipXgafv          :: !(Maybe Xgafv)
     , _pstipUploadProtocol :: !(Maybe Text)
     , _pstipPp             :: !Bool
     , _pstipAccessToken    :: !(Maybe Text)
@@ -117,7 +121,7 @@ projectsSnapshotsTestIAMPermissions pPstipPayload_ pPstipResource_ =
     }
 
 -- | V1 error format.
-pstipXgafv :: Lens' ProjectsSnapshotsTestIAMPermissions (Maybe Text)
+pstipXgafv :: Lens' ProjectsSnapshotsTestIAMPermissions (Maybe Xgafv)
 pstipXgafv
   = lens _pstipXgafv (\ s a -> s{_pstipXgafv = a})
 

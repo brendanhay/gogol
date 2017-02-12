@@ -13,7 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages Hadoop-based clusters and jobs on Google Cloud Platform.
+-- An API for managing Hadoop-based clusters and jobs on Google Cloud
+-- Platform.
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference>
 module Network.Google.Dataproc
@@ -138,6 +139,11 @@ module Network.Google.Dataproc
     , dcNumLocalSsds
     , dcBootDiskSizeGb
 
+    -- ** ClusterOperationMetadataLabels
+    , ClusterOperationMetadataLabels
+    , clusterOperationMetadataLabels
+    , comlAddtional
+
     -- ** ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
@@ -153,16 +159,29 @@ module Network.Google.Dataproc
     , Cluster
     , cluster
     , cStatus
+    , cMetrics
     , cClusterUuid
     , cConfig
     , cClusterName
+    , cLabels
     , cProjectId
     , cStatusHistory
+
+    -- ** JobLabels
+    , JobLabels
+    , jobLabels
+    , jlAddtional
 
     -- ** SubmitJobRequest
     , SubmitJobRequest
     , submitJobRequest
     , sjrJob
+
+    -- ** ClusterMetrics
+    , ClusterMetrics
+    , clusterMetrics
+    , cmYarnMetrics
+    , cmHdfsMetrics
 
     -- ** Operation
     , Operation
@@ -237,6 +256,11 @@ module Network.Google.Dataproc
     , niaExecutionTimeout
     , niaExecutableFile
 
+    -- ** ClusterMetricsYarnMetrics
+    , ClusterMetricsYarnMetrics
+    , clusterMetricsYarnMetrics
+    , cmymAddtional
+
     -- ** JobPlacement
     , JobPlacement
     , jobPlacement
@@ -247,6 +271,7 @@ module Network.Google.Dataproc
     , GceClusterConfig
     , gceClusterConfig
     , gccSubnetworkURI
+    , gccInternalIPOnly
     , gccNetworkURI
     , gccZoneURI
     , gccMetadata
@@ -276,6 +301,11 @@ module Network.Google.Dataproc
     , diagnoseClusterOutputLocation
     , dcolOutputURI
 
+    -- ** ClusterLabels
+    , ClusterLabels
+    , clusterLabels
+    , clAddtional
+
     -- ** Job
     , Job
     , job
@@ -286,6 +316,8 @@ module Network.Google.Dataproc
     , jReference
     , jSparkSQLJob
     , jHadoopJob
+    , jYarnApplications
+    , jLabels
     , jPysparkJob
     , jDriverOutputResourceURI
     , jStatusHistory
@@ -314,6 +346,7 @@ module Network.Google.Dataproc
     , comStatus
     , comClusterUuid
     , comClusterName
+    , comLabels
     , comOperationType
     , comStatusHistory
     , comDescription
@@ -406,6 +439,11 @@ module Network.Google.Dataproc
     , pigJobScriptVariables
     , pjsvAddtional
 
+    -- ** ClusterMetricsHdfsMetrics
+    , ClusterMetricsHdfsMetrics
+    , clusterMetricsHdfsMetrics
+    , cmhmAddtional
+
     -- ** OperationResponse
     , OperationResponse
     , operationResponse
@@ -422,6 +460,14 @@ module Network.Google.Dataproc
     , csState
     , csStateStartTime
     , csDetail
+
+    -- ** YarnApplication
+    , YarnApplication
+    , yarnApplication
+    , yaTrackingURL
+    , yaState
+    , yaProgress
+    , yaName
 
     -- ** PigJob
     , PigJob

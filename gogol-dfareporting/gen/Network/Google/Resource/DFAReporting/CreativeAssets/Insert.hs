@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativeAssetsInsert' request conforms to.
 type CreativeAssetsInsertResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creativeAssets" :>
@@ -57,7 +57,7 @@ type CreativeAssetsInsertResource =
        :<|>
        "upload" :>
          "dfareporting" :>
-           "v2.6" :>
+           "v2.7" :>
              "userprofiles" :>
                Capture "profileId" (Textual Int64) :>
                  "creativeAssets" :>

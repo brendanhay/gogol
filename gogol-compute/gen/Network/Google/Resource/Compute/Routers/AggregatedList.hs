@@ -33,11 +33,11 @@ module Network.Google.Resource.Compute.Routers.AggregatedList
     , RoutersAggregatedList
 
     -- * Request Lenses
-    , ralOrderBy
-    , ralProject
-    , ralFilter
-    , ralPageToken
-    , ralMaxResults
+    , rOrderBy
+    , rProject
+    , rFilter
+    , rPageToken
+    , rMaxResults
     ) where
 
 import           Network.Google.Compute.Types
@@ -63,36 +63,36 @@ type RoutersAggregatedListResource =
 --
 -- /See:/ 'routersAggregatedList' smart constructor.
 data RoutersAggregatedList = RoutersAggregatedList'
-    { _ralOrderBy    :: !(Maybe Text)
-    , _ralProject    :: !Text
-    , _ralFilter     :: !(Maybe Text)
-    , _ralPageToken  :: !(Maybe Text)
-    , _ralMaxResults :: !(Textual Word32)
+    { _rOrderBy    :: !(Maybe Text)
+    , _rProject    :: !Text
+    , _rFilter     :: !(Maybe Text)
+    , _rPageToken  :: !(Maybe Text)
+    , _rMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutersAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ralOrderBy'
+-- * 'rOrderBy'
 --
--- * 'ralProject'
+-- * 'rProject'
 --
--- * 'ralFilter'
+-- * 'rFilter'
 --
--- * 'ralPageToken'
+-- * 'rPageToken'
 --
--- * 'ralMaxResults'
+-- * 'rMaxResults'
 routersAggregatedList
-    :: Text -- ^ 'ralProject'
+    :: Text -- ^ 'rProject'
     -> RoutersAggregatedList
-routersAggregatedList pRalProject_ =
+routersAggregatedList pRProject_ =
     RoutersAggregatedList'
-    { _ralOrderBy = Nothing
-    , _ralProject = pRalProject_
-    , _ralFilter = Nothing
-    , _ralPageToken = Nothing
-    , _ralMaxResults = 500
+    { _rOrderBy = Nothing
+    , _rProject = pRProject_
+    , _rFilter = Nothing
+    , _rPageToken = Nothing
+    , _rMaxResults = 500
     }
 
 -- | Sorts list results by a certain order. By default, results are returned
@@ -103,14 +103,12 @@ routersAggregatedList pRalProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-ralOrderBy :: Lens' RoutersAggregatedList (Maybe Text)
-ralOrderBy
-  = lens _ralOrderBy (\ s a -> s{_ralOrderBy = a})
+rOrderBy :: Lens' RoutersAggregatedList (Maybe Text)
+rOrderBy = lens _rOrderBy (\ s a -> s{_rOrderBy = a})
 
 -- | Project ID for this request.
-ralProject :: Lens' RoutersAggregatedList Text
-ralProject
-  = lens _ralProject (\ s a -> s{_ralProject = a})
+rProject :: Lens' RoutersAggregatedList Text
+rProject = lens _rProject (\ s a -> s{_rProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: field_name
@@ -132,25 +130,23 @@ ralProject
 -- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
 -- expressions are treated as AND expressions, meaning that resources must
 -- match all expressions to pass the filters.
-ralFilter :: Lens' RoutersAggregatedList (Maybe Text)
-ralFilter
-  = lens _ralFilter (\ s a -> s{_ralFilter = a})
+rFilter :: Lens' RoutersAggregatedList (Maybe Text)
+rFilter = lens _rFilter (\ s a -> s{_rFilter = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-ralPageToken :: Lens' RoutersAggregatedList (Maybe Text)
-ralPageToken
-  = lens _ralPageToken (\ s a -> s{_ralPageToken = a})
+rPageToken :: Lens' RoutersAggregatedList (Maybe Text)
+rPageToken
+  = lens _rPageToken (\ s a -> s{_rPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
 -- in subsequent list requests.
-ralMaxResults :: Lens' RoutersAggregatedList Word32
-ralMaxResults
-  = lens _ralMaxResults
-      (\ s a -> s{_ralMaxResults = a})
-      . _Coerce
+rMaxResults :: Lens' RoutersAggregatedList Word32
+rMaxResults
+  = lens _rMaxResults (\ s a -> s{_rMaxResults = a}) .
+      _Coerce
 
 instance GoogleRequest RoutersAggregatedList where
         type Rs RoutersAggregatedList = RouterAggregatedList
@@ -159,8 +155,8 @@ instance GoogleRequest RoutersAggregatedList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RoutersAggregatedList'{..}
-          = go _ralProject _ralOrderBy _ralFilter _ralPageToken
-              (Just _ralMaxResults)
+          = go _rProject _rOrderBy _rFilter _rPageToken
+              (Just _rMaxResults)
               (Just AltJSON)
               computeService
           where go

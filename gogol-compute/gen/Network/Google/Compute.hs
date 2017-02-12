@@ -70,6 +70,9 @@ module Network.Google.Compute
     -- ** compute.autoscalers.update
     , module Network.Google.Resource.Compute.Autoscalers.Update
 
+    -- ** compute.backendServices.aggregatedList
+    , module Network.Google.Resource.Compute.BackendServices.AggregatedList
+
     -- ** compute.backendServices.delete
     , module Network.Google.Resource.Compute.BackendServices.Delete
 
@@ -388,6 +391,9 @@ module Network.Google.Compute
     -- ** compute.instances.setScheduling
     , module Network.Google.Resource.Compute.Instances.SetScheduling
 
+    -- ** compute.instances.setServiceAccount
+    , module Network.Google.Resource.Compute.Instances.SetServiceAccount
+
     -- ** compute.instances.setTags
     , module Network.Google.Resource.Compute.Instances.SetTags
 
@@ -424,6 +430,9 @@ module Network.Google.Compute
     -- ** compute.networks.list
     , module Network.Google.Resource.Compute.Networks.List
 
+    -- ** compute.networks.switchToCustomMode
+    , module Network.Google.Resource.Compute.Networks.SwitchToCustomMode
+
     -- ** compute.projects.get
     , module Network.Google.Resource.Compute.Projects.Get
 
@@ -438,6 +447,90 @@ module Network.Google.Compute
 
     -- ** compute.projects.setUsageExportBucket
     , module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
+
+    -- ** compute.regionAutoscalers.delete
+    , module Network.Google.Resource.Compute.RegionAutoscalers.Delete
+
+    -- ** compute.regionAutoscalers.get
+    , module Network.Google.Resource.Compute.RegionAutoscalers.Get
+
+    -- ** compute.regionAutoscalers.insert
+    , module Network.Google.Resource.Compute.RegionAutoscalers.Insert
+
+    -- ** compute.regionAutoscalers.list
+    , module Network.Google.Resource.Compute.RegionAutoscalers.List
+
+    -- ** compute.regionAutoscalers.patch
+    , module Network.Google.Resource.Compute.RegionAutoscalers.Patch
+
+    -- ** compute.regionAutoscalers.update
+    , module Network.Google.Resource.Compute.RegionAutoscalers.Update
+
+    -- ** compute.regionBackendServices.delete
+    , module Network.Google.Resource.Compute.RegionBackendServices.Delete
+
+    -- ** compute.regionBackendServices.get
+    , module Network.Google.Resource.Compute.RegionBackendServices.Get
+
+    -- ** compute.regionBackendServices.getHealth
+    , module Network.Google.Resource.Compute.RegionBackendServices.GetHealth
+
+    -- ** compute.regionBackendServices.insert
+    , module Network.Google.Resource.Compute.RegionBackendServices.Insert
+
+    -- ** compute.regionBackendServices.list
+    , module Network.Google.Resource.Compute.RegionBackendServices.List
+
+    -- ** compute.regionBackendServices.patch
+    , module Network.Google.Resource.Compute.RegionBackendServices.Patch
+
+    -- ** compute.regionBackendServices.update
+    , module Network.Google.Resource.Compute.RegionBackendServices.Update
+
+    -- ** compute.regionInstanceGroupManagers.abandonInstances
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.AbandonInstances
+
+    -- ** compute.regionInstanceGroupManagers.delete
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Delete
+
+    -- ** compute.regionInstanceGroupManagers.deleteInstances
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.DeleteInstances
+
+    -- ** compute.regionInstanceGroupManagers.get
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Get
+
+    -- ** compute.regionInstanceGroupManagers.insert
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Insert
+
+    -- ** compute.regionInstanceGroupManagers.list
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.List
+
+    -- ** compute.regionInstanceGroupManagers.listManagedInstances
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListManagedInstances
+
+    -- ** compute.regionInstanceGroupManagers.recreateInstances
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.RecreateInstances
+
+    -- ** compute.regionInstanceGroupManagers.resize
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.Resize
+
+    -- ** compute.regionInstanceGroupManagers.setInstanceTemplate
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
+
+    -- ** compute.regionInstanceGroupManagers.setTargetPools
+    , module Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetTargetPools
+
+    -- ** compute.regionInstanceGroups.get
+    , module Network.Google.Resource.Compute.RegionInstanceGroups.Get
+
+    -- ** compute.regionInstanceGroups.list
+    , module Network.Google.Resource.Compute.RegionInstanceGroups.List
+
+    -- ** compute.regionInstanceGroups.listInstances
+    , module Network.Google.Resource.Compute.RegionInstanceGroups.ListInstances
+
+    -- ** compute.regionInstanceGroups.setNamedPorts
+    , module Network.Google.Resource.Compute.RegionInstanceGroups.SetNamedPorts
 
     -- ** compute.regionOperations.delete
     , module Network.Google.Resource.Compute.RegionOperations.Delete
@@ -519,6 +612,9 @@ module Network.Google.Compute
 
     -- ** compute.subnetworks.delete
     , module Network.Google.Resource.Compute.Subnetworks.Delete
+
+    -- ** compute.subnetworks.expandIpCidrRange
+    , module Network.Google.Resource.Compute.Subnetworks.ExpandIPCIdRRange
 
     -- ** compute.subnetworks.get
     , module Network.Google.Resource.Compute.Subnetworks.Get
@@ -723,6 +819,11 @@ module Network.Google.Compute
     , rsrKind
     , rsrResult
 
+    -- ** RegionInstanceGroupManagersDeleteInstancesRequest
+    , RegionInstanceGroupManagersDeleteInstancesRequest
+    , regionInstanceGroupManagersDeleteInstancesRequest
+    , rigmdirInstances
+
     -- ** AddressesScopedList
     , AddressesScopedList
     , addressesScopedList
@@ -737,6 +838,12 @@ module Network.Google.Compute
 
     -- ** SchedulingOnHostMaintenance
     , SchedulingOnHostMaintenance (..)
+
+    -- ** RegionInstanceGroupsListInstancesRequest
+    , RegionInstanceGroupsListInstancesRequest
+    , regionInstanceGroupsListInstancesRequest
+    , riglirInstanceState
+    , riglirPortName
 
     -- ** AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
     , AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType (..)
@@ -780,6 +887,18 @@ module Network.Google.Compute
     , islwData
     , islwCode
     , islwMessage
+
+    -- ** RegionInstanceGroupManagersRecreateRequest
+    , RegionInstanceGroupManagersRecreateRequest
+    , regionInstanceGroupManagersRecreateRequest
+    , rigmrrInstances
+
+    -- ** BackendServicesScopedListWarning
+    , BackendServicesScopedListWarning
+    , backendServicesScopedListWarning
+    , bsslwData
+    , bsslwCode
+    , bsslwMessage
 
     -- ** InstanceGroupList
     , InstanceGroupList
@@ -903,6 +1022,15 @@ module Network.Google.Compute
     , targetPoolsAddInstanceRequest
     , tpairInstances
 
+    -- ** RegionAutoscalerList
+    , RegionAutoscalerList
+    , regionAutoscalerList
+    , rNextPageToken
+    , rKind
+    , rItems
+    , rSelfLink
+    , rId
+
     -- ** InstanceGroupsAddInstancesRequest
     , InstanceGroupsAddInstancesRequest
     , instanceGroupsAddInstancesRequest
@@ -937,6 +1065,7 @@ module Network.Google.Compute
     , iSourceDiskId
     , iKind
     , iSourceDiskEncryptionKey
+    , iGuestOSFeatures
     , iArchiveSizeBytes
     , iFamily
     , iRawDisk
@@ -1004,7 +1133,6 @@ module Network.Google.Compute
     , healthCheck
     , hcHealthyThreshold
     , hcTCPHealthCheck
-    , hcHTTP2HealthCheck
     , hcKind
     , hcSSLHealthCheck
     , hcSelfLink
@@ -1069,6 +1197,9 @@ module Network.Google.Compute
     , namedPort
     , npName
     , npPort
+
+    -- ** RegionInstanceGroupsListInstancesRequestInstanceState
+    , RegionInstanceGroupsListInstancesRequestInstanceState (..)
 
     -- ** TargetInstanceList
     , TargetInstanceList
@@ -1176,16 +1307,21 @@ module Network.Google.Compute
     , ForwardingRule
     , forwardingRule
     , frIPAddress
+    , frLoadBalancingScheme
     , frKind
+    , frNetwork
     , frPortRange
     , frSelfLink
     , frName
     , frIPProtocol
     , frCreationTimestamp
+    , frSubnetwork
+    , frPorts
     , frId
     , frRegion
     , frDescription
     , frTarget
+    , frBackendService
 
     -- ** URLMapList
     , URLMapList
@@ -1231,6 +1367,11 @@ module Network.Google.Compute
     , pId
     , pDescription
     , pCommonInstanceMetadata
+
+    -- ** RegionInstanceGroupManagersListInstancesResponse
+    , RegionInstanceGroupManagersListInstancesResponse
+    , regionInstanceGroupManagersListInstancesResponse
+    , rigmlirManagedInstances
 
     -- ** Operation
     , Operation
@@ -1331,6 +1472,15 @@ module Network.Google.Compute
     , igmInstanceGroup
     , igmNamedPorts
 
+    -- ** RegionInstanceGroupsListInstances
+    , RegionInstanceGroupsListInstances
+    , regionInstanceGroupsListInstances
+    , rigliNextPageToken
+    , rigliKind
+    , rigliItems
+    , rigliSelfLink
+    , rigliId
+
     -- ** TCPHealthCheck
     , TCPHealthCheck
     , tcpHealthCheck
@@ -1366,6 +1516,11 @@ module Network.Google.Compute
     -- ** TargetInstancesScopedListWarningCode
     , TargetInstancesScopedListWarningCode (..)
 
+    -- ** BackendServiceAggregatedListItems
+    , BackendServiceAggregatedListItems
+    , backendServiceAggregatedListItems
+    , bsaliAddtional
+
     -- ** InstanceAggregatedListItems
     , InstanceAggregatedListItems
     , instanceAggregatedListItems
@@ -1391,6 +1546,9 @@ module Network.Google.Compute
     , ManagedInstanceLastAttemptErrors
     , managedInstanceLastAttemptErrors
     , milaeErrors
+
+    -- ** GuestOSFeatureType
+    , GuestOSFeatureType (..)
 
     -- ** RouteWarningsItemCode
     , RouteWarningsItemCode (..)
@@ -1453,15 +1611,6 @@ module Network.Google.Compute
     , ipDescription
     , ipTags
 
-    -- ** HTTP2HealthCheck
-    , HTTP2HealthCheck
-    , hTTP2HealthCheck
-    , httphcRequestPath
-    , httphcHost
-    , httphcProxyHeader
-    , httphcPortName
-    , httphcPort
-
     -- ** DiskTypesScopedListWarning
     , DiskTypesScopedListWarning
     , diskTypesScopedListWarning
@@ -1493,6 +1642,7 @@ module Network.Google.Compute
     -- ** NetworkInterface
     , NetworkInterface
     , networkInterface
+    , niKind
     , niNetwork
     , niName
     , niNetworkIP
@@ -1503,6 +1653,12 @@ module Network.Google.Compute
     , TargetPoolsRemoveHealthCheckRequest
     , targetPoolsRemoveHealthCheckRequest
     , tprhcrHealthChecks
+
+    -- ** RegionInstanceGroupManagersSetTargetPoolsRequest
+    , RegionInstanceGroupManagersSetTargetPoolsRequest
+    , regionInstanceGroupManagersSetTargetPoolsRequest
+    , rigmstprFingerprint
+    , rigmstprTargetPools
 
     -- ** TargetSSLProxyList
     , TargetSSLProxyList
@@ -1546,17 +1702,17 @@ module Network.Google.Compute
     -- ** Router
     , Router
     , router
-    , rBGPPeers
-    , rBGP
-    , rKind
-    , rNetwork
-    , rInterfaces
-    , rSelfLink
-    , rName
-    , rCreationTimestamp
-    , rId
-    , rRegion
-    , rDescription
+    , rouBGPPeers
+    , rouBGP
+    , rouKind
+    , rouNetwork
+    , rouInterfaces
+    , rouSelfLink
+    , rouName
+    , rouCreationTimestamp
+    , rouId
+    , rouRegion
+    , rouDescription
 
     -- ** RoutersScopedListWarningCode
     , RoutersScopedListWarningCode (..)
@@ -1596,6 +1752,15 @@ module Network.Google.Compute
     , firewallAllowedItem
     , faiIPProtocol
     , faiPorts
+
+    -- ** BackendServiceAggregatedList
+    , BackendServiceAggregatedList
+    , backendServiceAggregatedList
+    , bsalNextPageToken
+    , bsalKind
+    , bsalItems
+    , bsalSelfLink
+    , bsalId
 
     -- ** Network
     , Network
@@ -1685,6 +1850,12 @@ module Network.Google.Compute
     , routerBGP
     , rbASN
 
+    -- ** BackendServicesScopedList
+    , BackendServicesScopedList
+    , backendServicesScopedList
+    , bsslWarning
+    , bsslBackendServices
+
     -- ** InstanceGroupManagersRecreateInstancesRequest
     , InstanceGroupManagersRecreateInstancesRequest
     , instanceGroupManagersRecreateInstancesRequest
@@ -1700,6 +1871,9 @@ module Network.Google.Compute
     , instancesScopedList
     , islWarning
     , islInstances
+
+    -- ** BackendServiceLoadBalancingScheme
+    , BackendServiceLoadBalancingScheme (..)
 
     -- ** HealthCheckReference
     , HealthCheckReference
@@ -1726,22 +1900,22 @@ module Network.Google.Compute
     -- ** Route
     , Route
     , route
-    , rouPriority
-    , rouKind
-    , rouNextHopGateway
-    , rouNextHopNetwork
-    , rouNetwork
-    , rouWarnings
-    , rouNextHopIP
-    , rouDestRange
-    , rouSelfLink
-    , rouName
-    , rouCreationTimestamp
-    , rouId
-    , rouNextHopVPNTunnel
-    , rouDescription
-    , rouTags
-    , rouNextHopInstance
+    , rrPriority
+    , rrKind
+    , rrNextHopGateway
+    , rrNextHopNetwork
+    , rrNetwork
+    , rrWarnings
+    , rrNextHopIP
+    , rrDestRange
+    , rrSelfLink
+    , rrName
+    , rrCreationTimestamp
+    , rrId
+    , rrNextHopVPNTunnel
+    , rrDescription
+    , rrTags
+    , rrNextHopInstance
 
     -- ** TargetVPNGatewaysScopedListWarningDataItem
     , TargetVPNGatewaysScopedListWarningDataItem
@@ -1810,6 +1984,9 @@ module Network.Google.Compute
 
     -- ** ManagedInstanceInstanceStatus
     , ManagedInstanceInstanceStatus (..)
+
+    -- ** HTTPHealthCheckProxyHeader
+    , HTTPHealthCheckProxyHeader (..)
 
     -- ** URLMapsValidateResponse
     , URLMapsValidateResponse
@@ -1887,6 +2064,11 @@ module Network.Google.Compute
     , rbpAdvertisedRoutePriority
     , rbpPeerASN
     , rbpName
+
+    -- ** SubnetworksExpandIPCIdRRangeRequest
+    , SubnetworksExpandIPCIdRRangeRequest
+    , subnetworksExpandIPCIdRRangeRequest
+    , seicirrrIPCIdRRange
 
     -- ** ManagedInstance
     , ManagedInstance
@@ -1970,6 +2152,11 @@ module Network.Google.Compute
     , saEmail
     , saScopes
 
+    -- ** RegionInstanceGroupManagersAbandonInstancesRequest
+    , RegionInstanceGroupManagersAbandonInstancesRequest
+    , regionInstanceGroupManagersAbandonInstancesRequest
+    , rigmairInstances
+
     -- ** NetworkList
     , NetworkList
     , networkList
@@ -1986,6 +2173,15 @@ module Network.Google.Compute
 
     -- ** BackendBalancingMode
     , BackendBalancingMode (..)
+
+    -- ** RegionInstanceGroupList
+    , RegionInstanceGroupList
+    , regionInstanceGroupList
+    , riglNextPageToken
+    , riglKind
+    , riglItems
+    , riglSelfLink
+    , riglId
 
     -- ** TargetPoolAggregatedListItems
     , TargetPoolAggregatedListItems
@@ -2051,6 +2247,12 @@ module Network.Google.Compute
     , dtlSelfLink
     , dtlId
 
+    -- ** RegionInstanceGroupsSetNamedPortsRequest
+    , RegionInstanceGroupsSetNamedPortsRequest
+    , regionInstanceGroupsSetNamedPortsRequest
+    , rigsnprFingerprint
+    , rigsnprNamedPorts
+
     -- ** MachineTypeList
     , MachineTypeList
     , machineTypeList
@@ -2068,6 +2270,15 @@ module Network.Google.Compute
     , thttpplItems
     , thttpplSelfLink
     , thttpplId
+
+    -- ** RegionInstanceGroupManagerList
+    , RegionInstanceGroupManagerList
+    , regionInstanceGroupManagerList
+    , rigmlNextPageToken
+    , rigmlKind
+    , rigmlItems
+    , rigmlSelfLink
+    , rigmlId
 
     -- ** ForwardingRuleIPProtocol
     , ForwardingRuleIPProtocol (..)
@@ -2093,19 +2304,11 @@ module Network.Google.Compute
     -- ** HTTPHealthCheck
     , HTTPHealthCheck
     , hTTPHealthCheck
-    , hHealthyThreshold
-    , hKind
-    , hRequestPath
-    , hSelfLink
-    , hCheckIntervalSec
-    , hName
-    , hCreationTimestamp
-    , hId
-    , hHost
-    , hTimeoutSec
-    , hDescription
-    , hUnhealthyThreshold
-    , hPort
+    , httphcRequestPath
+    , httphcHost
+    , httphcProxyHeader
+    , httphcPortName
+    , httphcPort
 
     -- ** BackendServiceGroupHealth
     , BackendServiceGroupHealth
@@ -2135,6 +2338,9 @@ module Network.Google.Compute
     , RouterAggregatedListItems
     , routerAggregatedListItems
     , raliAddtional
+
+    -- ** HTTPSHealthCheckProxyHeader
+    , HTTPSHealthCheckProxyHeader (..)
 
     -- ** AutoscalingPolicy
     , AutoscalingPolicy
@@ -2267,6 +2473,12 @@ module Network.Google.Compute
     -- ** MachineTypesScopedListWarningCode
     , MachineTypesScopedListWarningCode (..)
 
+    -- ** InstancesSetServiceAccountRequest
+    , InstancesSetServiceAccountRequest
+    , instancesSetServiceAccountRequest
+    , issarEmail
+    , issarScopes
+
     -- ** DiskTypesScopedListWarningDataItem
     , DiskTypesScopedListWarningDataItem
     , diskTypesScopedListWarningDataItem
@@ -2341,6 +2553,14 @@ module Network.Google.Compute
     -- ** AutoscalersScopedListWarningCode
     , AutoscalersScopedListWarningCode (..)
 
+    -- ** ForwardingRuleLoadBalancingScheme
+    , ForwardingRuleLoadBalancingScheme (..)
+
+    -- ** RegionInstanceGroupManagersSetTemplateRequest
+    , RegionInstanceGroupManagersSetTemplateRequest
+    , regionInstanceGroupManagersSetTemplateRequest
+    , rigmstrInstanceTemplate
+
     -- ** InstanceGroupsListInstances
     , InstanceGroupsListInstances
     , instanceGroupsListInstances
@@ -2397,16 +2617,21 @@ module Network.Google.Compute
     -- ** Region
     , Region
     , region
-    , rrStatus
-    , rrZones
-    , rrKind
-    , rrSelfLink
-    , rrName
-    , rrCreationTimestamp
-    , rrQuotas
-    , rrId
-    , rrDescription
-    , rrDeprecated
+    , regeStatus
+    , regeZones
+    , regeKind
+    , regeSelfLink
+    , regeName
+    , regeCreationTimestamp
+    , regeQuotas
+    , regeId
+    , regeDescription
+    , regeDeprecated
+
+    -- ** GuestOSFeature
+    , GuestOSFeature
+    , guestOSFeature
+    , gofType
 
     -- ** VPNTunnel
     , VPNTunnel
@@ -2544,9 +2769,6 @@ module Network.Google.Compute
     , managedInstanceLastAttempt
     , milaErrors
 
-    -- ** HTTP2HealthCheckProxyHeader
-    , HTTP2HealthCheckProxyHeader (..)
-
     -- ** BackendServiceList
     , BackendServiceList
     , backendServiceList
@@ -2661,8 +2883,10 @@ module Network.Google.Compute
     -- ** SerialPortOutput
     , SerialPortOutput
     , serialPortOutput
+    , spoNext
     , spoContents
     , spoKind
+    , spoStart
     , spoSelfLink
 
     -- ** TargetVPNGatewayAggregatedList
@@ -2701,6 +2925,7 @@ module Network.Google.Compute
     , CacheInvalidationRule
     , cacheInvalidationRule
     , cirPath
+    , cirHost
 
     -- ** TargetVPNGatewaysScopedList
     , TargetVPNGatewaysScopedList
@@ -2732,12 +2957,19 @@ module Network.Google.Compute
     , islwdiValue
     , islwdiKey
 
+    -- ** BackendServicesScopedListWarningDataItem
+    , BackendServicesScopedListWarningDataItem
+    , backendServicesScopedListWarningDataItem
+    , bsslwdiValue
+    , bsslwdiKey
+
     -- ** BackendService
     , BackendService
     , backendService
     , bsSessionAffinity
     , bsBackends
     , bsAffinityCookieTtlSec
+    , bsLoadBalancingScheme
     , bsKind
     , bsEnableCDN
     , bsFingerprint
@@ -2760,6 +2992,9 @@ module Network.Google.Compute
     , imrTargetInstance
     , imrDestinationZone
 
+    -- ** BackendServicesScopedListWarningCode
+    , BackendServicesScopedListWarningCode (..)
+
     -- ** TargetPoolSessionAffinity
     , TargetPoolSessionAffinity (..)
 
@@ -2777,18 +3012,10 @@ module Network.Google.Compute
     -- ** HTTPSHealthCheck
     , HTTPSHealthCheck
     , httpsHealthCheck
-    , hhcHealthyThreshold
-    , hhcKind
     , hhcRequestPath
-    , hhcSelfLink
-    , hhcCheckIntervalSec
-    , hhcName
-    , hhcCreationTimestamp
-    , hhcId
     , hhcHost
-    , hhcTimeoutSec
-    , hhcDescription
-    , hhcUnhealthyThreshold
+    , hhcProxyHeader
+    , hhcPortName
     , hhcPort
 
     -- ** ImageRawDiskContainerType
@@ -2879,6 +3106,7 @@ import           Network.Google.Resource.Compute.Autoscalers.Insert
 import           Network.Google.Resource.Compute.Autoscalers.List
 import           Network.Google.Resource.Compute.Autoscalers.Patch
 import           Network.Google.Resource.Compute.Autoscalers.Update
+import           Network.Google.Resource.Compute.BackendServices.AggregatedList
 import           Network.Google.Resource.Compute.BackendServices.Delete
 import           Network.Google.Resource.Compute.BackendServices.Get
 import           Network.Google.Resource.Compute.BackendServices.GetHealth
@@ -2981,6 +3209,7 @@ import           Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
 import           Network.Google.Resource.Compute.Instances.SetMachineType
 import           Network.Google.Resource.Compute.Instances.SetMetadata
 import           Network.Google.Resource.Compute.Instances.SetScheduling
+import           Network.Google.Resource.Compute.Instances.SetServiceAccount
 import           Network.Google.Resource.Compute.Instances.SetTags
 import           Network.Google.Resource.Compute.Instances.Start
 import           Network.Google.Resource.Compute.Instances.StartWithEncryptionKey
@@ -2997,11 +3226,40 @@ import           Network.Google.Resource.Compute.Networks.Delete
 import           Network.Google.Resource.Compute.Networks.Get
 import           Network.Google.Resource.Compute.Networks.Insert
 import           Network.Google.Resource.Compute.Networks.List
+import           Network.Google.Resource.Compute.Networks.SwitchToCustomMode
 import           Network.Google.Resource.Compute.Projects.Get
 import           Network.Google.Resource.Compute.Projects.MoveDisk
 import           Network.Google.Resource.Compute.Projects.MoveInstance
 import           Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
 import           Network.Google.Resource.Compute.Projects.SetUsageExportBucket
+import           Network.Google.Resource.Compute.RegionAutoscalers.Delete
+import           Network.Google.Resource.Compute.RegionAutoscalers.Get
+import           Network.Google.Resource.Compute.RegionAutoscalers.Insert
+import           Network.Google.Resource.Compute.RegionAutoscalers.List
+import           Network.Google.Resource.Compute.RegionAutoscalers.Patch
+import           Network.Google.Resource.Compute.RegionAutoscalers.Update
+import           Network.Google.Resource.Compute.RegionBackendServices.Delete
+import           Network.Google.Resource.Compute.RegionBackendServices.Get
+import           Network.Google.Resource.Compute.RegionBackendServices.GetHealth
+import           Network.Google.Resource.Compute.RegionBackendServices.Insert
+import           Network.Google.Resource.Compute.RegionBackendServices.List
+import           Network.Google.Resource.Compute.RegionBackendServices.Patch
+import           Network.Google.Resource.Compute.RegionBackendServices.Update
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.AbandonInstances
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.Delete
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.DeleteInstances
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.Get
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.Insert
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.List
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.ListManagedInstances
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.RecreateInstances
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.Resize
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
+import           Network.Google.Resource.Compute.RegionInstanceGroupManagers.SetTargetPools
+import           Network.Google.Resource.Compute.RegionInstanceGroups.Get
+import           Network.Google.Resource.Compute.RegionInstanceGroups.List
+import           Network.Google.Resource.Compute.RegionInstanceGroups.ListInstances
+import           Network.Google.Resource.Compute.RegionInstanceGroups.SetNamedPorts
 import           Network.Google.Resource.Compute.RegionOperations.Delete
 import           Network.Google.Resource.Compute.RegionOperations.Get
 import           Network.Google.Resource.Compute.RegionOperations.List
@@ -3029,6 +3287,7 @@ import           Network.Google.Resource.Compute.SSLCertificates.Insert
 import           Network.Google.Resource.Compute.SSLCertificates.List
 import           Network.Google.Resource.Compute.Subnetworks.AggregatedList
 import           Network.Google.Resource.Compute.Subnetworks.Delete
+import           Network.Google.Resource.Compute.Subnetworks.ExpandIPCIdRRange
 import           Network.Google.Resource.Compute.Subnetworks.Get
 import           Network.Google.Resource.Compute.Subnetworks.Insert
 import           Network.Google.Resource.Compute.Subnetworks.List
@@ -3113,6 +3372,13 @@ type ComputeAPI =
        :<|> RoutesListResource
        :<|> RoutesGetResource
        :<|> RoutesDeleteResource
+       :<|> RegionBackendServicesInsertResource
+       :<|> RegionBackendServicesListResource
+       :<|> RegionBackendServicesGetHealthResource
+       :<|> RegionBackendServicesPatchResource
+       :<|> RegionBackendServicesGetResource
+       :<|> RegionBackendServicesDeleteResource
+       :<|> RegionBackendServicesUpdateResource
        :<|> InstanceTemplatesInsertResource
        :<|> InstanceTemplatesListResource
        :<|> InstanceTemplatesGetResource
@@ -3128,6 +3394,10 @@ type ComputeAPI =
        :<|> SSLCertificatesDeleteResource
        :<|> ZonesListResource
        :<|> ZonesGetResource
+       :<|> RegionInstanceGroupsListResource
+       :<|> RegionInstanceGroupsGetResource
+       :<|> RegionInstanceGroupsListInstancesResource
+       :<|> RegionInstanceGroupsSetNamedPortsResource
        :<|> GlobalForwardingRulesInsertResource
        :<|> GlobalForwardingRulesListResource
        :<|> GlobalForwardingRulesGetResource
@@ -3136,6 +3406,7 @@ type ComputeAPI =
        :<|> NetworksInsertResource
        :<|> NetworksListResource
        :<|> NetworksGetResource
+       :<|> NetworksSwitchToCustomModeResource
        :<|> NetworksDeleteResource
        :<|> RoutersAggregatedListResource
        :<|> RoutersInsertResource
@@ -3174,6 +3445,23 @@ type ComputeAPI =
        :<|> AutoscalersGetResource
        :<|> AutoscalersDeleteResource
        :<|> AutoscalersUpdateResource
+       :<|>
+       RegionInstanceGroupManagersSetTargetPoolsResource
+       :<|> RegionInstanceGroupManagersInsertResource
+       :<|> RegionInstanceGroupManagersResizeResource
+       :<|> RegionInstanceGroupManagersListResource
+       :<|>
+       RegionInstanceGroupManagersListManagedInstancesResource
+       :<|>
+       RegionInstanceGroupManagersAbandonInstancesResource
+       :<|>
+       RegionInstanceGroupManagersSetInstanceTemplateResource
+       :<|> RegionInstanceGroupManagersGetResource
+       :<|>
+       RegionInstanceGroupManagersDeleteInstancesResource
+       :<|> RegionInstanceGroupManagersDeleteResource
+       :<|>
+       RegionInstanceGroupManagersRecreateInstancesResource
        :<|> DiskTypesAggregatedListResource
        :<|> DiskTypesListResource
        :<|> DiskTypesGetResource
@@ -3189,6 +3477,7 @@ type ComputeAPI =
        :<|> HTTPHealthChecksGetResource
        :<|> HTTPHealthChecksDeleteResource
        :<|> HTTPHealthChecksUpdateResource
+       :<|> SubnetworksExpandIPCIdRRangeResource
        :<|> SubnetworksAggregatedListResource
        :<|> SubnetworksInsertResource
        :<|> SubnetworksListResource
@@ -3216,6 +3505,7 @@ type ComputeAPI =
        :<|> InstancesDetachDiskResource
        :<|> InstancesListResource
        :<|> InstancesStartResource
+       :<|> InstancesSetServiceAccountResource
        :<|> InstancesGetResource
        :<|> InstancesSetMachineTypeResource
        :<|> InstancesDeleteAccessConfigResource
@@ -3229,6 +3519,7 @@ type ComputeAPI =
        :<|> InstancesAttachDiskResource
        :<|> InstancesDeleteResource
        :<|> InstancesSetDiskAutoDeleteResource
+       :<|> BackendServicesAggregatedListResource
        :<|> BackendServicesInsertResource
        :<|> BackendServicesListResource
        :<|> BackendServicesGetHealthResource
@@ -3296,6 +3587,12 @@ type ComputeAPI =
        :<|> InstanceGroupManagersDeleteInstancesResource
        :<|> InstanceGroupManagersDeleteResource
        :<|> InstanceGroupManagersRecreateInstancesResource
+       :<|> RegionAutoscalersInsertResource
+       :<|> RegionAutoscalersListResource
+       :<|> RegionAutoscalersPatchResource
+       :<|> RegionAutoscalersGetResource
+       :<|> RegionAutoscalersDeleteResource
+       :<|> RegionAutoscalersUpdateResource
        :<|> ProjectsSetUsageExportBucketResource
        :<|> ProjectsMoveInstanceResource
        :<|> ProjectsGetResource

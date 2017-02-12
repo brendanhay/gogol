@@ -57,7 +57,7 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
      "v1" :>
        CaptureMode "subscription" "modifyAckDeadline" Text
          :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -76,7 +76,7 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
 --
 -- /See:/ 'projectsSubscriptionsModifyAckDeadline' smart constructor.
 data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDeadline'
-    { _psmadXgafv          :: !(Maybe Text)
+    { _psmadXgafv          :: !(Maybe Xgafv)
     , _psmadUploadProtocol :: !(Maybe Text)
     , _psmadPp             :: !Bool
     , _psmadAccessToken    :: !(Maybe Text)
@@ -126,7 +126,7 @@ projectsSubscriptionsModifyAckDeadline pPsmadPayload_ pPsmadSubscription_ =
     }
 
 -- | V1 error format.
-psmadXgafv :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Text)
+psmadXgafv :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Xgafv)
 psmadXgafv
   = lens _psmadXgafv (\ s a -> s{_psmadXgafv = a})
 
@@ -163,7 +163,8 @@ psmadBearerToken
   = lens _psmadBearerToken
       (\ s a -> s{_psmadBearerToken = a})
 
--- | The name of the subscription.
+-- | The name of the subscription. Format is
+-- \`projects\/{project}\/subscriptions\/{sub}\`.
 psmadSubscription :: Lens' ProjectsSubscriptionsModifyAckDeadline Text
 psmadSubscription
   = lens _psmadSubscription

@@ -24,7 +24,7 @@
 -- restrictions and other invariants described on the annotation set
 -- resource. Caller must have WRITE permission for the associated dataset.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.annotationsets.update@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.annotationsets.update@.
 module Network.Google.Resource.Genomics.AnnotationSets.Update
     (
     -- * REST Resource
@@ -56,9 +56,9 @@ type AnnotationSetsUpdateResource =
      "v1" :>
        "annotationsets" :>
          Capture "annotationSetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "updateMask" Text :>
+               QueryParam "updateMask" FieldMask :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
@@ -74,9 +74,9 @@ type AnnotationSetsUpdateResource =
 --
 -- /See:/ 'annotationSetsUpdate' smart constructor.
 data AnnotationSetsUpdate = AnnotationSetsUpdate'
-    { _asuXgafv           :: !(Maybe Text)
+    { _asuXgafv           :: !(Maybe Xgafv)
     , _asuUploadProtocol  :: !(Maybe Text)
-    , _asuUpdateMask      :: !(Maybe Text)
+    , _asuUpdateMask      :: !(Maybe FieldMask)
     , _asuAnnotationSetId :: !Text
     , _asuPp              :: !Bool
     , _asuAccessToken     :: !(Maybe Text)
@@ -128,7 +128,7 @@ annotationSetsUpdate pAsuAnnotationSetId_ pAsuPayload_ =
     }
 
 -- | V1 error format.
-asuXgafv :: Lens' AnnotationSetsUpdate (Maybe Text)
+asuXgafv :: Lens' AnnotationSetsUpdate (Maybe Xgafv)
 asuXgafv = lens _asuXgafv (\ s a -> s{_asuXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -140,7 +140,7 @@ asuUploadProtocol
 -- | An optional mask specifying which fields to update. Mutable fields are
 -- name, source_uri, and info. If unspecified, all mutable fields will be
 -- updated.
-asuUpdateMask :: Lens' AnnotationSetsUpdate (Maybe Text)
+asuUpdateMask :: Lens' AnnotationSetsUpdate (Maybe FieldMask)
 asuUpdateMask
   = lens _asuUpdateMask
       (\ s a -> s{_asuUpdateMask = a})

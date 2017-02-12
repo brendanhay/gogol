@@ -20,7 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates application parameters.
+-- Updates the specified Application resource. You can update the following
+-- fields: auth_domain
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps#Application.FIELDS.auth_domain)
+-- default_cookie_expiration
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps#Application.FIELDS.default_cookie_expiration)
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.patch@.
 module Network.Google.Resource.AppEngine.Apps.Patch
@@ -66,7 +70,11 @@ type AppsPatchResource =
                              ReqBody '[JSON] Application :>
                                Patch '[JSON] Operation
 
--- | Updates application parameters.
+-- | Updates the specified Application resource. You can update the following
+-- fields: auth_domain
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps#Application.FIELDS.auth_domain)
+-- default_cookie_expiration
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps#Application.FIELDS.default_cookie_expiration)
 --
 -- /See:/ 'appsPatch' smart constructor.
 data AppsPatch = AppsPatch'
@@ -164,8 +172,8 @@ apBearerToken
   = lens _apBearerToken
       (\ s a -> s{_apBearerToken = a})
 
--- | Part of \`name\`. Name of the application to update. Example:
--- \`apps\/myapp\`.
+-- | Part of \`name\`. Name of the Application resource to update. Example:
+-- apps\/myapp.
 apAppsId :: Lens' AppsPatch Text
 apAppsId = lens _apAppsId (\ s a -> s{_apAppsId = a})
 

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sandbox only. Creates a test order.
+-- Sandbox only. Creates a test order. This method can only be called for
+-- non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.createtestorder@.
 module Network.Google.Resource.Content.Orders.CreatetestOrder
@@ -51,7 +52,8 @@ type OrdersCreatetestOrderResource =
                ReqBody '[JSON] OrdersCreateTestOrderRequest :>
                  Post '[JSON] OrdersCreateTestOrderResponse
 
--- | Sandbox only. Creates a test order.
+-- | Sandbox only. Creates a test order. This method can only be called for
+-- non-multi-client accounts.
 --
 -- /See:/ 'ordersCreatetestOrder' smart constructor.
 data OrdersCreatetestOrder = OrdersCreatetestOrder'

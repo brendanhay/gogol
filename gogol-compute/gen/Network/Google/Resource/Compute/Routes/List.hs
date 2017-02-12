@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.Routes.List
     , RoutesList
 
     -- * Request Lenses
-    , rouOrderBy
-    , rouProject
-    , rouFilter
-    , rouPageToken
-    , rouMaxResults
+    , rllOrderBy
+    , rllProject
+    , rllFilter
+    , rllPageToken
+    , rllMaxResults
     ) where
 
 import           Network.Google.Compute.Types
@@ -64,36 +64,36 @@ type RoutesListResource =
 --
 -- /See:/ 'routesList' smart constructor.
 data RoutesList = RoutesList'
-    { _rouOrderBy    :: !(Maybe Text)
-    , _rouProject    :: !Text
-    , _rouFilter     :: !(Maybe Text)
-    , _rouPageToken  :: !(Maybe Text)
-    , _rouMaxResults :: !(Textual Word32)
+    { _rllOrderBy    :: !(Maybe Text)
+    , _rllProject    :: !Text
+    , _rllFilter     :: !(Maybe Text)
+    , _rllPageToken  :: !(Maybe Text)
+    , _rllMaxResults :: !(Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rouOrderBy'
+-- * 'rllOrderBy'
 --
--- * 'rouProject'
+-- * 'rllProject'
 --
--- * 'rouFilter'
+-- * 'rllFilter'
 --
--- * 'rouPageToken'
+-- * 'rllPageToken'
 --
--- * 'rouMaxResults'
+-- * 'rllMaxResults'
 routesList
-    :: Text -- ^ 'rouProject'
+    :: Text -- ^ 'rllProject'
     -> RoutesList
-routesList pRouProject_ =
+routesList pRllProject_ =
     RoutesList'
-    { _rouOrderBy = Nothing
-    , _rouProject = pRouProject_
-    , _rouFilter = Nothing
-    , _rouPageToken = Nothing
-    , _rouMaxResults = 500
+    { _rllOrderBy = Nothing
+    , _rllProject = pRllProject_
+    , _rllFilter = Nothing
+    , _rllPageToken = Nothing
+    , _rllMaxResults = 500
     }
 
 -- | Sorts list results by a certain order. By default, results are returned
@@ -104,14 +104,14 @@ routesList pRouProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-rouOrderBy :: Lens' RoutesList (Maybe Text)
-rouOrderBy
-  = lens _rouOrderBy (\ s a -> s{_rouOrderBy = a})
+rllOrderBy :: Lens' RoutesList (Maybe Text)
+rllOrderBy
+  = lens _rllOrderBy (\ s a -> s{_rllOrderBy = a})
 
 -- | Project ID for this request.
-rouProject :: Lens' RoutesList Text
-rouProject
-  = lens _rouProject (\ s a -> s{_rouProject = a})
+rllProject :: Lens' RoutesList Text
+rllProject
+  = lens _rllProject (\ s a -> s{_rllProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: field_name
@@ -133,24 +133,24 @@ rouProject
 -- (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple
 -- expressions are treated as AND expressions, meaning that resources must
 -- match all expressions to pass the filters.
-rouFilter :: Lens' RoutesList (Maybe Text)
-rouFilter
-  = lens _rouFilter (\ s a -> s{_rouFilter = a})
+rllFilter :: Lens' RoutesList (Maybe Text)
+rllFilter
+  = lens _rllFilter (\ s a -> s{_rllFilter = a})
 
 -- | Specifies a page token to use. Set pageToken to the nextPageToken
 -- returned by a previous list request to get the next page of results.
-rouPageToken :: Lens' RoutesList (Maybe Text)
-rouPageToken
-  = lens _rouPageToken (\ s a -> s{_rouPageToken = a})
+rllPageToken :: Lens' RoutesList (Maybe Text)
+rllPageToken
+  = lens _rllPageToken (\ s a -> s{_rllPageToken = a})
 
 -- | The maximum number of results per page that should be returned. If the
 -- number of available results is larger than maxResults, Compute Engine
 -- returns a nextPageToken that can be used to get the next page of results
 -- in subsequent list requests.
-rouMaxResults :: Lens' RoutesList Word32
-rouMaxResults
-  = lens _rouMaxResults
-      (\ s a -> s{_rouMaxResults = a})
+rllMaxResults :: Lens' RoutesList Word32
+rllMaxResults
+  = lens _rllMaxResults
+      (\ s a -> s{_rllMaxResults = a})
       . _Coerce
 
 instance GoogleRequest RoutesList where
@@ -160,8 +160,8 @@ instance GoogleRequest RoutesList where
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient RoutesList'{..}
-          = go _rouProject _rouOrderBy _rouFilter _rouPageToken
-              (Just _rouMaxResults)
+          = go _rllProject _rllOrderBy _rllFilter _rllPageToken
+              (Just _rllMaxResults)
               (Just AltJSON)
               computeService
           where go

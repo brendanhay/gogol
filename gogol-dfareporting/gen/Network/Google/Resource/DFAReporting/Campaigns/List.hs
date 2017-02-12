@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of campaigns, possibly filtered.
+-- Retrieves a list of campaigns, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaigns.list@.
 module Network.Google.Resource.DFAReporting.Campaigns.List
@@ -56,7 +57,7 @@ import           Network.Google.Prelude
 -- 'CampaignsList' request conforms to.
 type CampaignsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
@@ -78,7 +79,8 @@ type CampaignsListResource =
                                          QueryParam "alt" AltJSON :>
                                            Get '[JSON] CampaignsListResponse
 
--- | Retrieves a list of campaigns, possibly filtered.
+-- | Retrieves a list of campaigns, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ 'campaignsList' smart constructor.
 data CampaignsList = CampaignsList'

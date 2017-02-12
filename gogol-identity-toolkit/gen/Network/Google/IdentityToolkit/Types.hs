@@ -21,6 +21,7 @@ module Network.Google.IdentityToolkit.Types
 
     -- * OAuth Scopes
     , firebaseScope
+    , cloudPlatformScope
 
     -- * UploadAccountResponseErrorItem
     , UploadAccountResponseErrorItem
@@ -34,7 +35,6 @@ module Network.Google.IdentityToolkit.Types
     , uipuiiProviderId
     , uipuiiEmail
     , uipuiiPhotoURL
-    , uipuiiRawUserInfo
     , uipuiiFederatedId
     , uipuiiDisplayName
     , uipuiiScreenName
@@ -76,6 +76,7 @@ module Network.Google.IdentityToolkit.Types
     , uiDisplayName
     , uiPasswordHash
     , uiLocalId
+    , uiRawPassword
     , uiScreenName
 
     -- * IdentitytoolkitRelyingPartySetProjectConfigResponse
@@ -213,6 +214,7 @@ module Network.Google.IdentityToolkit.Types
     , irpgpcrResetPasswordTemplate
     , irpgpcrProjectId
     , irpgpcrUseEmailSending
+    , irpgpcrDynamicLinksDomain
 
     -- * ResetPasswordResponse
     , ResetPasswordResponse
@@ -280,6 +282,7 @@ module Network.Google.IdentityToolkit.Types
     , identitytoolkitRelyingPartyUploadAccountRequest
     , irpuarUsers
     , irpuarMemoryCost
+    , irpuarAllowOverwrite
     , irpuarDelegatedProjectNumber
     , irpuarSanityCheck
     , irpuarSaltSeparator
@@ -340,6 +343,7 @@ module Network.Google.IdentityToolkit.Types
     , iNextPageToken
     , iDelegatedProjectNumber
     , iMaxResults
+    , iTargetProjectId
 
     -- * VerifyPasswordResponse
     , VerifyPasswordResponse
@@ -377,9 +381,12 @@ module Network.Google.IdentityToolkit.Types
     , identitytoolkitRelyingPartySignupNewUserRequest
     , irpsnurEmail
     , irpsnurInstanceId
+    , irpsnurPhotoURL
     , irpsnurCaptchaChallenge
+    , irpsnurDisabled
     , irpsnurPassword
     , irpsnurCaptchaResponse
+    , irpsnurEmailVerified
     , irpsnurDisplayName
     , irpsnurIdToken
 
@@ -452,3 +459,7 @@ identityToolkitService
 -- | View and administer all your Firebase data and settings
 firebaseScope :: Proxy '["https://www.googleapis.com/auth/firebase"]
 firebaseScope = Proxy;
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

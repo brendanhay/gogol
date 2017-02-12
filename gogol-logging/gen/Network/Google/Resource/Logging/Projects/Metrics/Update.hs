@@ -135,11 +135,11 @@ pmuAccessToken
   = lens _pmuAccessToken
       (\ s a -> s{_pmuAccessToken = a})
 
--- | The resource name of the metric to update. Example:
--- \`\"projects\/my-project-id\/metrics\/my-metric-id\"\`. The updated
--- metric must be provided in the request and have the same identifier that
--- is specified in \`metricName\`. If the metric does not exist, it is
--- created.
+-- | The resource name of the metric to update:
+-- \"projects\/[PROJECT_ID]\/metrics\/[METRIC_ID]\" The updated metric must
+-- be provided in the request and it\'s name field must be the same as
+-- [METRIC_ID] If the metric does not exist in [PROJECT_ID], then a new
+-- metric is created.
 pmuMetricName :: Lens' ProjectsMetricsUpdate Text
 pmuMetricName
   = lens _pmuMetricName

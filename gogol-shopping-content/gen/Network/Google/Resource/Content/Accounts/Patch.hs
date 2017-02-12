@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a Merchant Center account. This method supports patch semantics.
+-- Updates a Merchant Center account. This method can only be called for
+-- accounts to which the managing account has access: either the managing
+-- account itself or sub-accounts if the managing account is a multi-client
+-- account. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.patch@.
 module Network.Google.Resource.Content.Accounts.Patch
@@ -54,7 +57,10 @@ type AccountsPatchResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Account :> Patch '[JSON] Account
 
--- | Updates a Merchant Center account. This method supports patch semantics.
+-- | Updates a Merchant Center account. This method can only be called for
+-- accounts to which the managing account has access: either the managing
+-- account itself or sub-accounts if the managing account is a multi-client
+-- account. This method supports patch semantics.
 --
 -- /See:/ 'accountsPatch' smart constructor.
 data AccountsPatch = AccountsPatch'

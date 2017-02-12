@@ -163,7 +163,7 @@ instance ToJSON
 -- /See:/ 'pagespeedAPIImageV2' smart constructor.
 data PagespeedAPIImageV2 = PagespeedAPIImageV2'
     { _paivHeight   :: !(Maybe (Textual Int32))
-    , _paivData     :: !(Maybe Base64)
+    , _paivData     :: !(Maybe Bytes)
     , _paivMimeType :: !(Maybe Text)
     , _paivWidth    :: !(Maybe (Textual Int32))
     , _paivPageRect :: !(Maybe PagespeedAPIImageV2Page_rect)
@@ -207,7 +207,7 @@ paivHeight
 paivData :: Lens' PagespeedAPIImageV2 (Maybe ByteString)
 paivData
   = lens _paivData (\ s a -> s{_paivData = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | Mime type of image data (e.g. \"image\/jpeg\").
 paivMimeType :: Lens' PagespeedAPIImageV2 (Maybe Text)

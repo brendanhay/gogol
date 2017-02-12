@@ -718,7 +718,7 @@ instance ToJSON ListHistoryResponse where
 -- | Settings associated with a send-as alias, which can be either the
 -- primary login address associated with the account or a custom \"from\"
 -- address. Send-as aliases correspond to the \"Send Mail As\" feature in
--- the web interface. See for more details.
+-- the web interface.
 --
 -- /See:/ 'sendAs' smart constructor.
 data SendAs = SendAs'
@@ -784,8 +784,8 @@ saReplyToAddress
       (\ s a -> s{_saReplyToAddress = a})
 
 -- | Whether Gmail should treat this address as an alias for the user\'s
--- primary email address. See for more details. This setting only applies
--- to custom \"from\" aliases.
+-- primary email address. This setting only applies to custom \"from\"
+-- aliases.
 saTreatAsAlias :: Lens' SendAs (Maybe Bool)
 saTreatAsAlias
   = lens _saTreatAsAlias
@@ -1112,8 +1112,7 @@ instance ToJSON ListLabelsResponse where
           = object (catMaybes [("labels" .=) <$> _llrLabels])
 
 -- | Vacation auto-reply settings for an account. These settings correspond
--- to the \"Vacation responder\" feature in the web interface. See for more
--- details.
+-- to the \"Vacation responder\" feature in the web interface.
 --
 -- /See:/ 'vacationSettings' smart constructor.
 data VacationSettings = VacationSettings'
@@ -1284,7 +1283,7 @@ instance ToJSON HistoryMessageDeleted where
 -- /See:/ 'messagePartBody' smart constructor.
 data MessagePartBody = MessagePartBody'
     { _mpbSize         :: !(Maybe (Textual Int32))
-    , _mpbData         :: !(Maybe Base64)
+    , _mpbData         :: !(Maybe Bytes)
     , _mpbAttachmentId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1306,20 +1305,20 @@ messagePartBody =
     , _mpbAttachmentId = Nothing
     }
 
--- | Total number of bytes in the body of the message part.
+-- | Number of bytes for the message part data (encoding notwithstanding).
 mpbSize :: Lens' MessagePartBody (Maybe Int32)
 mpbSize
   = lens _mpbSize (\ s a -> s{_mpbSize = a}) .
       mapping _Coerce
 
--- | The body data of a MIME message part. May be empty for MIME container
--- types that have no message body or when the body data is sent as a
--- separate attachment. An attachment ID is present if the body data is
--- contained in a separate attachment.
+-- | The body data of a MIME message part as a base64url encoded string. May
+-- be empty for MIME container types that have no message body or when the
+-- body data is sent as a separate attachment. An attachment ID is present
+-- if the body data is contained in a separate attachment.
 mpbData :: Lens' MessagePartBody (Maybe ByteString)
 mpbData
   = lens _mpbData (\ s a -> s{_mpbData = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | When present, contains the ID of an external attachment that can be
 -- retrieved in a separate messages.attachments.get request. When not
@@ -1554,6 +1553,72 @@ instance ToJSON WatchResponse where
               (catMaybes
                  [("expiration" .=) <$> _wrExpiration,
                   ("historyId" .=) <$> _wrHistoryId])
+
+--
+-- /See:/ 'batchModifyMessagesRequest' smart constructor.
+data BatchModifyMessagesRequest = BatchModifyMessagesRequest'
+    { _bmmrIds            :: !(Maybe [Text])
+    , _bmmrRemoveLabelIds :: !(Maybe [Text])
+    , _bmmrAddLabelIds    :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchModifyMessagesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bmmrIds'
+--
+-- * 'bmmrRemoveLabelIds'
+--
+-- * 'bmmrAddLabelIds'
+batchModifyMessagesRequest
+    :: BatchModifyMessagesRequest
+batchModifyMessagesRequest =
+    BatchModifyMessagesRequest'
+    { _bmmrIds = Nothing
+    , _bmmrRemoveLabelIds = Nothing
+    , _bmmrAddLabelIds = Nothing
+    }
+
+-- | The IDs of the messages to modify. There is a limit of 1000 ids per
+-- request.
+bmmrIds :: Lens' BatchModifyMessagesRequest [Text]
+bmmrIds
+  = lens _bmmrIds (\ s a -> s{_bmmrIds = a}) . _Default
+      . _Coerce
+
+-- | A list of label IDs to remove from messages.
+bmmrRemoveLabelIds :: Lens' BatchModifyMessagesRequest [Text]
+bmmrRemoveLabelIds
+  = lens _bmmrRemoveLabelIds
+      (\ s a -> s{_bmmrRemoveLabelIds = a})
+      . _Default
+      . _Coerce
+
+-- | A list of label IDs to add to messages.
+bmmrAddLabelIds :: Lens' BatchModifyMessagesRequest [Text]
+bmmrAddLabelIds
+  = lens _bmmrAddLabelIds
+      (\ s a -> s{_bmmrAddLabelIds = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON BatchModifyMessagesRequest where
+        parseJSON
+          = withObject "BatchModifyMessagesRequest"
+              (\ o ->
+                 BatchModifyMessagesRequest' <$>
+                   (o .:? "ids" .!= mempty) <*>
+                     (o .:? "removeLabelIds" .!= mempty)
+                     <*> (o .:? "addLabelIds" .!= mempty))
+
+instance ToJSON BatchModifyMessagesRequest where
+        toJSON BatchModifyMessagesRequest'{..}
+          = object
+              (catMaybes
+                 [("ids" .=) <$> _bmmrIds,
+                  ("removeLabelIds" .=) <$> _bmmrRemoveLabelIds,
+                  ("addLabelIds" .=) <$> _bmmrAddLabelIds])
 
 -- | A draft email in the user\'s mailbox.
 --
@@ -1941,7 +2006,7 @@ instance ToJSON ImapSettings where
 --
 -- /See:/ 'message' smart constructor.
 data Message = Message'
-    { _mRaw          :: !(Maybe Base64)
+    { _mRaw          :: !(Maybe Bytes)
     , _mSnippet      :: !(Maybe Text)
     , _mSizeEstimate :: !(Maybe (Textual Int32))
     , _mPayload      :: !(Maybe MessagePart)
@@ -1993,8 +2058,7 @@ message =
 -- format=RAW parameter is supplied.
 mRaw :: Lens' Message (Maybe ByteString)
 mRaw
-  = lens _mRaw (\ s a -> s{_mRaw = a}) .
-      mapping _Base64
+  = lens _mRaw (\ s a -> s{_mRaw = a}) . mapping _Bytes
 
 -- | A short part of the message text.
 mSnippet :: Lens' Message (Maybe Text)

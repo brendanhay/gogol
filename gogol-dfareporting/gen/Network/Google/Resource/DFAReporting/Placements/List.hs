@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of placements, possibly filtered.
+-- Retrieves a list of placements, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placements.list@.
 module Network.Google.Resource.DFAReporting.Placements.List
@@ -65,7 +66,7 @@ import           Network.Google.Prelude
 -- 'PlacementsList' request conforms to.
 type PlacementsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>
@@ -116,7 +117,8 @@ type PlacementsListResource =
                                                              Get '[JSON]
                                                                PlacementsListResponse
 
--- | Retrieves a list of placements, possibly filtered.
+-- | Retrieves a list of placements, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ 'placementsList' smart constructor.
 data PlacementsList = PlacementsList'

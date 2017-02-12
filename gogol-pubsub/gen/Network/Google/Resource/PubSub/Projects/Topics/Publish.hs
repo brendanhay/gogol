@@ -54,7 +54,7 @@ import           Network.Google.PubSub.Types
 type ProjectsTopicsPublishResource =
      "v1" :>
        CaptureMode "topic" "publish" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -71,7 +71,7 @@ type ProjectsTopicsPublishResource =
 --
 -- /See:/ 'projectsTopicsPublish' smart constructor.
 data ProjectsTopicsPublish = ProjectsTopicsPublish'
-    { _ptpXgafv          :: !(Maybe Text)
+    { _ptpXgafv          :: !(Maybe Xgafv)
     , _ptpUploadProtocol :: !(Maybe Text)
     , _ptpPp             :: !Bool
     , _ptpAccessToken    :: !(Maybe Text)
@@ -121,7 +121,7 @@ projectsTopicsPublish pPtpPayload_ pPtpTopic_ =
     }
 
 -- | V1 error format.
-ptpXgafv :: Lens' ProjectsTopicsPublish (Maybe Text)
+ptpXgafv :: Lens' ProjectsTopicsPublish (Maybe Xgafv)
 ptpXgafv = lens _ptpXgafv (\ s a -> s{_ptpXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -151,7 +151,8 @@ ptpPayload :: Lens' ProjectsTopicsPublish PublishRequest
 ptpPayload
   = lens _ptpPayload (\ s a -> s{_ptpPayload = a})
 
--- | The messages in the request will be published on this topic.
+-- | The messages in the request will be published on this topic. Format is
+-- \`projects\/{project}\/topics\/{topic}\`.
 ptpTopic :: Lens' ProjectsTopicsPublish Text
 ptpTopic = lens _ptpTopic (\ s a -> s{_ptpTopic = a})
 

@@ -72,8 +72,8 @@ data ProposalsPatchUpdateAction
       -- ^ @proposeAndAccept@
     | UnknownAction
       -- ^ @unknownAction@
-    | UpdateFinalized
-      -- ^ @updateFinalized@
+    | UpdateNonTerms
+      -- ^ @updateNonTerms@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProposalsPatchUpdateAction
@@ -85,7 +85,7 @@ instance FromHttpApiData ProposalsPatchUpdateAction where
         "propose" -> Right Propose
         "proposeAndAccept" -> Right ProposeAndAccept
         "unknownAction" -> Right UnknownAction
-        "updateFinalized" -> Right UpdateFinalized
+        "updateNonTerms" -> Right UpdateNonTerms
         x -> Left ("Unable to parse ProposalsPatchUpdateAction from: " <> x)
 
 instance ToHttpApiData ProposalsPatchUpdateAction where
@@ -95,7 +95,7 @@ instance ToHttpApiData ProposalsPatchUpdateAction where
         Propose -> "propose"
         ProposeAndAccept -> "proposeAndAccept"
         UnknownAction -> "unknownAction"
-        UpdateFinalized -> "updateFinalized"
+        UpdateNonTerms -> "updateNonTerms"
 
 instance FromJSON ProposalsPatchUpdateAction where
     parseJSON = parseJSONText "ProposalsPatchUpdateAction"
@@ -156,8 +156,8 @@ data ProposalsUpdateUpdateAction
       -- ^ @proposeAndAccept@
     | PUUAUnknownAction
       -- ^ @unknownAction@
-    | PUUAUpdateFinalized
-      -- ^ @updateFinalized@
+    | PUUAUpdateNonTerms
+      -- ^ @updateNonTerms@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProposalsUpdateUpdateAction
@@ -169,7 +169,7 @@ instance FromHttpApiData ProposalsUpdateUpdateAction where
         "propose" -> Right PUUAPropose
         "proposeAndAccept" -> Right PUUAProposeAndAccept
         "unknownAction" -> Right PUUAUnknownAction
-        "updateFinalized" -> Right PUUAUpdateFinalized
+        "updateNonTerms" -> Right PUUAUpdateNonTerms
         x -> Left ("Unable to parse ProposalsUpdateUpdateAction from: " <> x)
 
 instance ToHttpApiData ProposalsUpdateUpdateAction where
@@ -179,7 +179,7 @@ instance ToHttpApiData ProposalsUpdateUpdateAction where
         PUUAPropose -> "propose"
         PUUAProposeAndAccept -> "proposeAndAccept"
         PUUAUnknownAction -> "unknownAction"
-        PUUAUpdateFinalized -> "updateFinalized"
+        PUUAUpdateNonTerms -> "updateNonTerms"
 
 instance FromJSON ProposalsUpdateUpdateAction where
     parseJSON = parseJSONText "ProposalsUpdateUpdateAction"

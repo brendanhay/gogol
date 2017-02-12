@@ -52,7 +52,7 @@ import           Network.Google.YouTubeReporting.Types
 type JobsCreateResource =
      "v1" :>
        "jobs" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -67,7 +67,7 @@ type JobsCreateResource =
 --
 -- /See:/ 'jobsCreate' smart constructor.
 data JobsCreate = JobsCreate'
-    { _jcXgafv                  :: !(Maybe Text)
+    { _jcXgafv                  :: !(Maybe Xgafv)
     , _jcUploadProtocol         :: !(Maybe Text)
     , _jcPp                     :: !Bool
     , _jcAccessToken            :: !(Maybe Text)
@@ -116,7 +116,7 @@ jobsCreate pJcPayload_ =
     }
 
 -- | V1 error format.
-jcXgafv :: Lens' JobsCreate (Maybe Text)
+jcXgafv :: Lens' JobsCreate (Maybe Xgafv)
 jcXgafv = lens _jcXgafv (\ s a -> s{_jcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

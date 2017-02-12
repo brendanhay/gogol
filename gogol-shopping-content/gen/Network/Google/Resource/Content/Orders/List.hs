@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the orders in your Merchant Center account.
+-- Lists the orders in your Merchant Center account. This method can only
+-- be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.list@.
 module Network.Google.Resource.Content.Orders.List
@@ -63,7 +64,8 @@ type OrdersListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] OrdersListResponse
 
--- | Lists the orders in your Merchant Center account.
+-- | Lists the orders in your Merchant Center account. This method can only
+-- be called for non-multi-client accounts.
 --
 -- /See:/ 'ordersList' smart constructor.
 data OrdersList = OrdersList'

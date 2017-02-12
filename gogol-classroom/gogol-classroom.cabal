@@ -39,8 +39,10 @@ library
         , Network.Google.Resource.Classroom.Courses.Aliases.Delete
         , Network.Google.Resource.Classroom.Courses.Aliases.List
         , Network.Google.Resource.Classroom.Courses.CourseWork.Create
+        , Network.Google.Resource.Classroom.Courses.CourseWork.Delete
         , Network.Google.Resource.Classroom.Courses.CourseWork.Get
         , Network.Google.Resource.Classroom.Courses.CourseWork.List
+        , Network.Google.Resource.Classroom.Courses.CourseWork.Patch
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
         , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments

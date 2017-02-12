@@ -24,7 +24,7 @@
 -- genomics resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.create@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.callsets.create@.
 module Network.Google.Resource.Genomics.CallSets.Create
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 type CallSetsCreateResource =
      "v1" :>
        "callsets" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -69,7 +69,7 @@ type CallSetsCreateResource =
 --
 -- /See:/ 'callSetsCreate' smart constructor.
 data CallSetsCreate = CallSetsCreate'
-    { _cscXgafv          :: !(Maybe Text)
+    { _cscXgafv          :: !(Maybe Xgafv)
     , _cscUploadProtocol :: !(Maybe Text)
     , _cscPp             :: !Bool
     , _cscAccessToken    :: !(Maybe Text)
@@ -114,7 +114,7 @@ callSetsCreate pCscPayload_ =
     }
 
 -- | V1 error format.
-cscXgafv :: Lens' CallSetsCreate (Maybe Text)
+cscXgafv :: Lens' CallSetsCreate (Maybe Xgafv)
 cscXgafv = lens _cscXgafv (\ s a -> s{_cscXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

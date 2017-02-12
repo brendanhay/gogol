@@ -20,6 +20,42 @@ module Network.Google.ServiceControl.Types.Product where
 import           Network.Google.Prelude
 import           Network.Google.ServiceControl.Types.Sum
 
+-- | Other service-specific data about the request, response, and other
+-- activities.
+--
+-- /See:/ 'auditLogServiceData' smart constructor.
+newtype AuditLogServiceData = AuditLogServiceData'
+    { _alsdAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuditLogServiceData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alsdAddtional'
+auditLogServiceData
+    :: HashMap Text JSONValue -- ^ 'alsdAddtional'
+    -> AuditLogServiceData
+auditLogServiceData pAlsdAddtional_ =
+    AuditLogServiceData'
+    { _alsdAddtional = _Coerce # pAlsdAddtional_
+    }
+
+-- | Properties of the object. Contains field \'type with type URL.
+alsdAddtional :: Lens' AuditLogServiceData (HashMap Text JSONValue)
+alsdAddtional
+  = lens _alsdAddtional
+      (\ s a -> s{_alsdAddtional = a})
+      . _Coerce
+
+instance FromJSON AuditLogServiceData where
+        parseJSON
+          = withObject "AuditLogServiceData"
+              (\ o -> AuditLogServiceData' <$> (parseJSONObject o))
+
+instance ToJSON AuditLogServiceData where
+        toJSON = toJSON . _alsdAddtional
+
 -- | The \`Status\` type defines a logical error model that is suitable for
 -- different programming environments, including REST APIs and RPC APIs. It
 -- is used by [gRPC](https:\/\/github.com\/grpc). The error model is
@@ -117,24 +153,93 @@ instance ToJSON Status where
                   ("code" .=) <$> _sCode,
                   ("message" .=) <$> _sMessage])
 
+-- | Metadata about the request.
+--
+-- /See:/ 'requestMetadata' smart constructor.
+data RequestMetadata = RequestMetadata'
+    { _rmCallerSuppliedUserAgent :: !(Maybe Text)
+    , _rmCallerIP                :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RequestMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rmCallerSuppliedUserAgent'
+--
+-- * 'rmCallerIP'
+requestMetadata
+    :: RequestMetadata
+requestMetadata =
+    RequestMetadata'
+    { _rmCallerSuppliedUserAgent = Nothing
+    , _rmCallerIP = Nothing
+    }
+
+-- | The user agent of the caller. This information is not authenticated and
+-- should be treated accordingly. For example: +
+-- \`google-api-python-client\/1.4.0\`: The request was made by the Google
+-- API client for Python. + \`Cloud SDK Command Line Tool
+-- apitools-client\/1.0 gcloud\/0.9.62\`: The request was made by the
+-- Google Cloud SDK CLI (gcloud). + \`AppEngine-Google;
+-- (+http:\/\/code.google.com\/appengine; appid: s~my-project\`: The
+-- request was made from the \`my-project\` App Engine app.
+rmCallerSuppliedUserAgent :: Lens' RequestMetadata (Maybe Text)
+rmCallerSuppliedUserAgent
+  = lens _rmCallerSuppliedUserAgent
+      (\ s a -> s{_rmCallerSuppliedUserAgent = a})
+
+-- | The IP address of the caller.
+rmCallerIP :: Lens' RequestMetadata (Maybe Text)
+rmCallerIP
+  = lens _rmCallerIP (\ s a -> s{_rmCallerIP = a})
+
+instance FromJSON RequestMetadata where
+        parseJSON
+          = withObject "RequestMetadata"
+              (\ o ->
+                 RequestMetadata' <$>
+                   (o .:? "callerSuppliedUserAgent") <*>
+                     (o .:? "callerIp"))
+
+instance ToJSON RequestMetadata where
+        toJSON RequestMetadata'{..}
+          = object
+              (catMaybes
+                 [("callerSuppliedUserAgent" .=) <$>
+                    _rmCallerSuppliedUserAgent,
+                  ("callerIp" .=) <$> _rmCallerIP])
+
 -- | Request message for the Report method.
 --
 -- /See:/ 'reportRequest' smart constructor.
-newtype ReportRequest = ReportRequest'
-    { _rrOperations :: Maybe [Operation]
+data ReportRequest = ReportRequest'
+    { _rrServiceConfigId :: !(Maybe Text)
+    , _rrOperations      :: !(Maybe [Operation])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rrServiceConfigId'
+--
 -- * 'rrOperations'
 reportRequest
     :: ReportRequest
 reportRequest =
     ReportRequest'
-    { _rrOperations = Nothing
+    { _rrServiceConfigId = Nothing
+    , _rrOperations = Nothing
     }
+
+-- | Specifies which version of service config should be used to process the
+-- request. If unspecified or no matching version can be found, the latest
+-- one will be used.
+rrServiceConfigId :: Lens' ReportRequest (Maybe Text)
+rrServiceConfigId
+  = lens _rrServiceConfigId
+      (\ s a -> s{_rrServiceConfigId = a})
 
 -- | Operations to be reported. Typically the service should report one
 -- operation per request. Putting multiple operations into a single request
@@ -152,18 +257,23 @@ instance FromJSON ReportRequest where
         parseJSON
           = withObject "ReportRequest"
               (\ o ->
-                 ReportRequest' <$> (o .:? "operations" .!= mempty))
+                 ReportRequest' <$>
+                   (o .:? "serviceConfigId") <*>
+                     (o .:? "operations" .!= mempty))
 
 instance ToJSON ReportRequest where
         toJSON ReportRequest'{..}
           = object
-              (catMaybes [("operations" .=) <$> _rrOperations])
+              (catMaybes
+                 [("serviceConfigId" .=) <$> _rrServiceConfigId,
+                  ("operations" .=) <$> _rrOperations])
 
 -- | Request message for the Check method.
 --
 -- /See:/ 'checkRequest' smart constructor.
-newtype CheckRequest = CheckRequest'
-    { _crOperation :: Maybe Operation
+data CheckRequest = CheckRequest'
+    { _crOperation       :: !(Maybe Operation)
+    , _crServiceConfigId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CheckRequest' with the minimum fields required to make a request.
@@ -171,11 +281,14 @@ newtype CheckRequest = CheckRequest'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'crOperation'
+--
+-- * 'crServiceConfigId'
 checkRequest
     :: CheckRequest
 checkRequest =
     CheckRequest'
     { _crOperation = Nothing
+    , _crServiceConfigId = Nothing
     }
 
 -- | The operation to be checked.
@@ -183,15 +296,27 @@ crOperation :: Lens' CheckRequest (Maybe Operation)
 crOperation
   = lens _crOperation (\ s a -> s{_crOperation = a})
 
+-- | Specifies which version of service configuration should be used to
+-- process the request. If unspecified or no matching version can be found,
+-- the latest one will be used.
+crServiceConfigId :: Lens' CheckRequest (Maybe Text)
+crServiceConfigId
+  = lens _crServiceConfigId
+      (\ s a -> s{_crServiceConfigId = a})
+
 instance FromJSON CheckRequest where
         parseJSON
           = withObject "CheckRequest"
-              (\ o -> CheckRequest' <$> (o .:? "operation"))
+              (\ o ->
+                 CheckRequest' <$>
+                   (o .:? "operation") <*> (o .:? "serviceConfigId"))
 
 instance ToJSON CheckRequest where
         toJSON CheckRequest'{..}
           = object
-              (catMaybes [("operation" .=) <$> _crOperation])
+              (catMaybes
+                 [("operation" .=) <$> _crOperation,
+                  ("serviceConfigId" .=) <$> _crServiceConfigId])
 
 -- | The labels describing the metric value. See comments on
 -- google.api.servicecontrol.v1.Operation.labels for the overriding
@@ -449,6 +574,66 @@ instance ToJSON ExponentialBuckets where
                  [("growthFactor" .=) <$> _ebGrowthFactor,
                   ("scale" .=) <$> _ebScale,
                   ("numFiniteBuckets" .=) <$> _ebNumFiniteBuckets])
+
+-- | Authorization information for the operation.
+--
+-- /See:/ 'authorizationInfo' smart constructor.
+data AuthorizationInfo = AuthorizationInfo'
+    { _aiGranted    :: !(Maybe Bool)
+    , _aiResource   :: !(Maybe Text)
+    , _aiPermission :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuthorizationInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiGranted'
+--
+-- * 'aiResource'
+--
+-- * 'aiPermission'
+authorizationInfo
+    :: AuthorizationInfo
+authorizationInfo =
+    AuthorizationInfo'
+    { _aiGranted = Nothing
+    , _aiResource = Nothing
+    , _aiPermission = Nothing
+    }
+
+-- | Whether or not authorization for \`resource\` and \`permission\` was
+-- granted.
+aiGranted :: Lens' AuthorizationInfo (Maybe Bool)
+aiGranted
+  = lens _aiGranted (\ s a -> s{_aiGranted = a})
+
+-- | The resource being accessed, as a REST-style string. For example:
+-- bigquery.googlapis.com\/projects\/PROJECTID\/datasets\/DATASETID
+aiResource :: Lens' AuthorizationInfo (Maybe Text)
+aiResource
+  = lens _aiResource (\ s a -> s{_aiResource = a})
+
+-- | The required IAM permission.
+aiPermission :: Lens' AuthorizationInfo (Maybe Text)
+aiPermission
+  = lens _aiPermission (\ s a -> s{_aiPermission = a})
+
+instance FromJSON AuthorizationInfo where
+        parseJSON
+          = withObject "AuthorizationInfo"
+              (\ o ->
+                 AuthorizationInfo' <$>
+                   (o .:? "granted") <*> (o .:? "resource") <*>
+                     (o .:? "permission"))
+
+instance ToJSON AuthorizationInfo where
+        toJSON AuthorizationInfo'{..}
+          = object
+              (catMaybes
+                 [("granted" .=) <$> _aiGranted,
+                  ("resource" .=) <$> _aiResource,
+                  ("permission" .=) <$> _aiPermission])
 
 -- | Represents information regarding an operation.
 --
@@ -1055,55 +1240,91 @@ instance ToJSON MetricValue where
                   ("int64Value" .=) <$> _mvInt64Value,
                   ("labels" .=) <$> _mvLabels])
 
+-- | The operation response. This may not include all response elements, such
+-- as those that are too large, privacy-sensitive, or duplicated elsewhere
+-- in the log record. It should never include user-generated data, such as
+-- file contents. When the JSON object represented here has a proto
+-- equivalent, the proto name will be indicated in the \`\'type\` property.
+--
+-- /See:/ 'auditLogResponse' smart constructor.
+newtype AuditLogResponse = AuditLogResponse'
+    { _alrAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuditLogResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alrAddtional'
+auditLogResponse
+    :: HashMap Text JSONValue -- ^ 'alrAddtional'
+    -> AuditLogResponse
+auditLogResponse pAlrAddtional_ =
+    AuditLogResponse'
+    { _alrAddtional = _Coerce # pAlrAddtional_
+    }
+
+-- | Properties of the object.
+alrAddtional :: Lens' AuditLogResponse (HashMap Text JSONValue)
+alrAddtional
+  = lens _alrAddtional (\ s a -> s{_alrAddtional = a})
+      . _Coerce
+
+instance FromJSON AuditLogResponse where
+        parseJSON
+          = withObject "AuditLogResponse"
+              (\ o -> AuditLogResponse' <$> (parseJSONObject o))
+
+instance ToJSON AuditLogResponse where
+        toJSON = toJSON . _alrAddtional
+
 -- | Response message for the Check method.
 --
 -- /See:/ 'checkResponse' smart constructor.
 data CheckResponse = CheckResponse'
-    { _crCheckErrors     :: !(Maybe [CheckError])
-    , _crServiceConfigId :: !(Maybe Text)
-    , _crOperationId     :: !(Maybe Text)
+    { _cCheckErrors     :: !(Maybe [CheckError])
+    , _cServiceConfigId :: !(Maybe Text)
+    , _cOperationId     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CheckResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'crCheckErrors'
+-- * 'cCheckErrors'
 --
--- * 'crServiceConfigId'
+-- * 'cServiceConfigId'
 --
--- * 'crOperationId'
+-- * 'cOperationId'
 checkResponse
     :: CheckResponse
 checkResponse =
     CheckResponse'
-    { _crCheckErrors = Nothing
-    , _crServiceConfigId = Nothing
-    , _crOperationId = Nothing
+    { _cCheckErrors = Nothing
+    , _cServiceConfigId = Nothing
+    , _cOperationId = Nothing
     }
 
 -- | Indicate the decision of the check. If no check errors are present, the
 -- service should process the operation. Otherwise the service should use
 -- the list of errors to determine the appropriate action.
-crCheckErrors :: Lens' CheckResponse [CheckError]
-crCheckErrors
-  = lens _crCheckErrors
-      (\ s a -> s{_crCheckErrors = a})
+cCheckErrors :: Lens' CheckResponse [CheckError]
+cCheckErrors
+  = lens _cCheckErrors (\ s a -> s{_cCheckErrors = a})
       . _Default
       . _Coerce
 
 -- | The actual config id used to process the request.
-crServiceConfigId :: Lens' CheckResponse (Maybe Text)
-crServiceConfigId
-  = lens _crServiceConfigId
-      (\ s a -> s{_crServiceConfigId = a})
+cServiceConfigId :: Lens' CheckResponse (Maybe Text)
+cServiceConfigId
+  = lens _cServiceConfigId
+      (\ s a -> s{_cServiceConfigId = a})
 
 -- | The same operation_id value used in the CheckRequest. Used for logging
 -- and diagnostics purposes.
-crOperationId :: Lens' CheckResponse (Maybe Text)
-crOperationId
-  = lens _crOperationId
-      (\ s a -> s{_crOperationId = a})
+cOperationId :: Lens' CheckResponse (Maybe Text)
+cOperationId
+  = lens _cOperationId (\ s a -> s{_cOperationId = a})
 
 instance FromJSON CheckResponse where
         parseJSON
@@ -1118,31 +1339,31 @@ instance ToJSON CheckResponse where
         toJSON CheckResponse'{..}
           = object
               (catMaybes
-                 [("checkErrors" .=) <$> _crCheckErrors,
-                  ("serviceConfigId" .=) <$> _crServiceConfigId,
-                  ("operationId" .=) <$> _crOperationId])
+                 [("checkErrors" .=) <$> _cCheckErrors,
+                  ("serviceConfigId" .=) <$> _cServiceConfigId,
+                  ("operationId" .=) <$> _cOperationId])
 
 -- | Response message for the Report method.
 --
 -- /See:/ 'reportResponse' smart constructor.
 data ReportResponse = ReportResponse'
-    { _rrReportErrors    :: !(Maybe [ReportError])
-    , _rrServiceConfigId :: !(Maybe Text)
+    { _rReportErrors    :: !(Maybe [ReportError])
+    , _rServiceConfigId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rrReportErrors'
+-- * 'rReportErrors'
 --
--- * 'rrServiceConfigId'
+-- * 'rServiceConfigId'
 reportResponse
     :: ReportResponse
 reportResponse =
     ReportResponse'
-    { _rrReportErrors = Nothing
-    , _rrServiceConfigId = Nothing
+    { _rReportErrors = Nothing
+    , _rServiceConfigId = Nothing
     }
 
 -- | Partial failures, one for each \`Operation\` in the request that failed
@@ -1154,20 +1375,20 @@ reportResponse =
 -- list indicates a partial success where some \`Operations\` in the
 -- request succeeded. Each \`Operation\` that failed processing has a
 -- corresponding item in this list. 3. A failed RPC status indicates a
--- complete failure where none of the \`Operations\` in the request
--- succeeded.
-rrReportErrors :: Lens' ReportResponse [ReportError]
-rrReportErrors
-  = lens _rrReportErrors
-      (\ s a -> s{_rrReportErrors = a})
+-- general non-deterministic failure. When this happens, it\'s impossible
+-- to know which of the \'Operations\' in the request succeeded or failed.
+rReportErrors :: Lens' ReportResponse [ReportError]
+rReportErrors
+  = lens _rReportErrors
+      (\ s a -> s{_rReportErrors = a})
       . _Default
       . _Coerce
 
 -- | The actual config id used to process the request.
-rrServiceConfigId :: Lens' ReportResponse (Maybe Text)
-rrServiceConfigId
-  = lens _rrServiceConfigId
-      (\ s a -> s{_rrServiceConfigId = a})
+rServiceConfigId :: Lens' ReportResponse (Maybe Text)
+rServiceConfigId
+  = lens _rServiceConfigId
+      (\ s a -> s{_rServiceConfigId = a})
 
 instance FromJSON ReportResponse where
         parseJSON
@@ -1181,8 +1402,8 @@ instance ToJSON ReportResponse where
         toJSON ReportResponse'{..}
           = object
               (catMaybes
-                 [("reportErrors" .=) <$> _rrReportErrors,
-                  ("serviceConfigId" .=) <$> _rrServiceConfigId])
+                 [("reportErrors" .=) <$> _rReportErrors,
+                  ("serviceConfigId" .=) <$> _rServiceConfigId])
 
 -- | An individual log entry.
 --
@@ -1307,6 +1528,44 @@ instance ToJSON LogEntry where
                   ("protoPayload" .=) <$> _leProtoPayload,
                   ("timestamp" .=) <$> _leTimestamp])
 
+-- | The operation request. This may not include all request parameters, such
+-- as those that are too large, privacy-sensitive, or duplicated elsewhere
+-- in the log record. It should never include user-generated data, such as
+-- file contents. When the JSON object represented here has a proto
+-- equivalent, the proto name will be indicated in the \`\'type\` property.
+--
+-- /See:/ 'auditLogRequest' smart constructor.
+newtype AuditLogRequest = AuditLogRequest'
+    { _aAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuditLogRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aAddtional'
+auditLogRequest
+    :: HashMap Text JSONValue -- ^ 'aAddtional'
+    -> AuditLogRequest
+auditLogRequest pAAddtional_ =
+    AuditLogRequest'
+    { _aAddtional = _Coerce # pAAddtional_
+    }
+
+-- | Properties of the object.
+aAddtional :: Lens' AuditLogRequest (HashMap Text JSONValue)
+aAddtional
+  = lens _aAddtional (\ s a -> s{_aAddtional = a}) .
+      _Coerce
+
+instance FromJSON AuditLogRequest where
+        parseJSON
+          = withObject "AuditLogRequest"
+              (\ o -> AuditLogRequest' <$> (parseJSONObject o))
+
+instance ToJSON AuditLogRequest where
+        toJSON = toJSON . _aAddtional
+
 -- | Labels describing the operation. Only the following labels are allowed:
 -- - Labels describing monitored resources as defined in the service
 -- configuration. - Default labels of metric values. When specified, labels
@@ -1395,6 +1654,230 @@ instance FromJSON ExplicitBuckets where
 instance ToJSON ExplicitBuckets where
         toJSON ExplicitBuckets'{..}
           = object (catMaybes [("bounds" .=) <$> _ebBounds])
+
+-- | Authentication information for the operation.
+--
+-- /See:/ 'authenticationInfo' smart constructor.
+data AuthenticationInfo = AuthenticationInfo'
+    { _aiPrincipalEmail    :: !(Maybe Text)
+    , _aiAuthoritySelector :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuthenticationInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aiPrincipalEmail'
+--
+-- * 'aiAuthoritySelector'
+authenticationInfo
+    :: AuthenticationInfo
+authenticationInfo =
+    AuthenticationInfo'
+    { _aiPrincipalEmail = Nothing
+    , _aiAuthoritySelector = Nothing
+    }
+
+-- | The email address of the authenticated user making the request.
+aiPrincipalEmail :: Lens' AuthenticationInfo (Maybe Text)
+aiPrincipalEmail
+  = lens _aiPrincipalEmail
+      (\ s a -> s{_aiPrincipalEmail = a})
+
+-- | The authority selector specified by the requestor, if any. It is not
+-- guaranteed that the principal was allowed to use this authority.
+aiAuthoritySelector :: Lens' AuthenticationInfo (Maybe Text)
+aiAuthoritySelector
+  = lens _aiAuthoritySelector
+      (\ s a -> s{_aiAuthoritySelector = a})
+
+instance FromJSON AuthenticationInfo where
+        parseJSON
+          = withObject "AuthenticationInfo"
+              (\ o ->
+                 AuthenticationInfo' <$>
+                   (o .:? "principalEmail") <*>
+                     (o .:? "authoritySelector"))
+
+instance ToJSON AuthenticationInfo where
+        toJSON AuthenticationInfo'{..}
+          = object
+              (catMaybes
+                 [("principalEmail" .=) <$> _aiPrincipalEmail,
+                  ("authoritySelector" .=) <$> _aiAuthoritySelector])
+
+-- | Common audit log format for Google Cloud Platform API operations.
+--
+-- /See:/ 'auditLog' smart constructor.
+data AuditLog = AuditLog'
+    { _alRequestMetadata    :: !(Maybe RequestMetadata)
+    , _alStatus             :: !(Maybe Status)
+    , _alResourceName       :: !(Maybe Text)
+    , _alAuthorizationInfo  :: !(Maybe [AuthorizationInfo])
+    , _alServiceData        :: !(Maybe AuditLogServiceData)
+    , _alMethodName         :: !(Maybe Text)
+    , _alResponse           :: !(Maybe AuditLogResponse)
+    , _alServiceName        :: !(Maybe Text)
+    , _alNumResponseItems   :: !(Maybe (Textual Int64))
+    , _alAuthenticationInfo :: !(Maybe AuthenticationInfo)
+    , _alRequest            :: !(Maybe AuditLogRequest)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuditLog' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alRequestMetadata'
+--
+-- * 'alStatus'
+--
+-- * 'alResourceName'
+--
+-- * 'alAuthorizationInfo'
+--
+-- * 'alServiceData'
+--
+-- * 'alMethodName'
+--
+-- * 'alResponse'
+--
+-- * 'alServiceName'
+--
+-- * 'alNumResponseItems'
+--
+-- * 'alAuthenticationInfo'
+--
+-- * 'alRequest'
+auditLog
+    :: AuditLog
+auditLog =
+    AuditLog'
+    { _alRequestMetadata = Nothing
+    , _alStatus = Nothing
+    , _alResourceName = Nothing
+    , _alAuthorizationInfo = Nothing
+    , _alServiceData = Nothing
+    , _alMethodName = Nothing
+    , _alResponse = Nothing
+    , _alServiceName = Nothing
+    , _alNumResponseItems = Nothing
+    , _alAuthenticationInfo = Nothing
+    , _alRequest = Nothing
+    }
+
+-- | Metadata about the operation.
+alRequestMetadata :: Lens' AuditLog (Maybe RequestMetadata)
+alRequestMetadata
+  = lens _alRequestMetadata
+      (\ s a -> s{_alRequestMetadata = a})
+
+-- | The status of the overall operation.
+alStatus :: Lens' AuditLog (Maybe Status)
+alStatus = lens _alStatus (\ s a -> s{_alStatus = a})
+
+-- | The resource or collection that is the target of the operation. The name
+-- is a scheme-less URI, not including the API service name. For example:
+-- \"shelves\/SHELF_ID\/books\" \"shelves\/SHELF_ID\/books\/BOOK_ID\"
+alResourceName :: Lens' AuditLog (Maybe Text)
+alResourceName
+  = lens _alResourceName
+      (\ s a -> s{_alResourceName = a})
+
+-- | Authorization information. If there are multiple resources or
+-- permissions involved, then there is one AuthorizationInfo element for
+-- each {resource, permission} tuple.
+alAuthorizationInfo :: Lens' AuditLog [AuthorizationInfo]
+alAuthorizationInfo
+  = lens _alAuthorizationInfo
+      (\ s a -> s{_alAuthorizationInfo = a})
+      . _Default
+      . _Coerce
+
+-- | Other service-specific data about the request, response, and other
+-- activities.
+alServiceData :: Lens' AuditLog (Maybe AuditLogServiceData)
+alServiceData
+  = lens _alServiceData
+      (\ s a -> s{_alServiceData = a})
+
+-- | The name of the service method or operation. For API calls, this should
+-- be the name of the API method. For example,
+-- \"google.datastore.v1.Datastore.RunQuery\"
+-- \"google.logging.v1.LoggingService.DeleteLog\"
+alMethodName :: Lens' AuditLog (Maybe Text)
+alMethodName
+  = lens _alMethodName (\ s a -> s{_alMethodName = a})
+
+-- | The operation response. This may not include all response elements, such
+-- as those that are too large, privacy-sensitive, or duplicated elsewhere
+-- in the log record. It should never include user-generated data, such as
+-- file contents. When the JSON object represented here has a proto
+-- equivalent, the proto name will be indicated in the \`\'type\` property.
+alResponse :: Lens' AuditLog (Maybe AuditLogResponse)
+alResponse
+  = lens _alResponse (\ s a -> s{_alResponse = a})
+
+-- | The name of the API service performing the operation. For example,
+-- \`\"datastore.googleapis.com\"\`.
+alServiceName :: Lens' AuditLog (Maybe Text)
+alServiceName
+  = lens _alServiceName
+      (\ s a -> s{_alServiceName = a})
+
+-- | The number of items returned from a List or Query API method, if
+-- applicable.
+alNumResponseItems :: Lens' AuditLog (Maybe Int64)
+alNumResponseItems
+  = lens _alNumResponseItems
+      (\ s a -> s{_alNumResponseItems = a})
+      . mapping _Coerce
+
+-- | Authentication information.
+alAuthenticationInfo :: Lens' AuditLog (Maybe AuthenticationInfo)
+alAuthenticationInfo
+  = lens _alAuthenticationInfo
+      (\ s a -> s{_alAuthenticationInfo = a})
+
+-- | The operation request. This may not include all request parameters, such
+-- as those that are too large, privacy-sensitive, or duplicated elsewhere
+-- in the log record. It should never include user-generated data, such as
+-- file contents. When the JSON object represented here has a proto
+-- equivalent, the proto name will be indicated in the \`\'type\` property.
+alRequest :: Lens' AuditLog (Maybe AuditLogRequest)
+alRequest
+  = lens _alRequest (\ s a -> s{_alRequest = a})
+
+instance FromJSON AuditLog where
+        parseJSON
+          = withObject "AuditLog"
+              (\ o ->
+                 AuditLog' <$>
+                   (o .:? "requestMetadata") <*> (o .:? "status") <*>
+                     (o .:? "resourceName")
+                     <*> (o .:? "authorizationInfo" .!= mempty)
+                     <*> (o .:? "serviceData")
+                     <*> (o .:? "methodName")
+                     <*> (o .:? "response")
+                     <*> (o .:? "serviceName")
+                     <*> (o .:? "numResponseItems")
+                     <*> (o .:? "authenticationInfo")
+                     <*> (o .:? "request"))
+
+instance ToJSON AuditLog where
+        toJSON AuditLog'{..}
+          = object
+              (catMaybes
+                 [("requestMetadata" .=) <$> _alRequestMetadata,
+                  ("status" .=) <$> _alStatus,
+                  ("resourceName" .=) <$> _alResourceName,
+                  ("authorizationInfo" .=) <$> _alAuthorizationInfo,
+                  ("serviceData" .=) <$> _alServiceData,
+                  ("methodName" .=) <$> _alMethodName,
+                  ("response" .=) <$> _alResponse,
+                  ("serviceName" .=) <$> _alServiceName,
+                  ("numResponseItems" .=) <$> _alNumResponseItems,
+                  ("authenticationInfo" .=) <$> _alAuthenticationInfo,
+                  ("request" .=) <$> _alRequest])
 
 -- | The log entry payload, represented as a structure that is expressed as a
 -- JSON object.

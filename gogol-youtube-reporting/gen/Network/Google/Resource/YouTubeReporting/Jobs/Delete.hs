@@ -53,7 +53,7 @@ type JobsDeleteResource =
      "v1" :>
        "jobs" :>
          Capture "jobId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -67,7 +67,7 @@ type JobsDeleteResource =
 --
 -- /See:/ 'jobsDelete' smart constructor.
 data JobsDelete = JobsDelete'
-    { _jdXgafv                  :: !(Maybe Text)
+    { _jdXgafv                  :: !(Maybe Xgafv)
     , _jdJobId                  :: !Text
     , _jdUploadProtocol         :: !(Maybe Text)
     , _jdPp                     :: !Bool
@@ -116,7 +116,7 @@ jobsDelete pJdJobId_ =
     }
 
 -- | V1 error format.
-jdXgafv :: Lens' JobsDelete (Maybe Text)
+jdXgafv :: Lens' JobsDelete (Maybe Xgafv)
 jdXgafv = lens _jdXgafv (\ s a -> s{_jdXgafv = a})
 
 -- | The ID of the job to delete.

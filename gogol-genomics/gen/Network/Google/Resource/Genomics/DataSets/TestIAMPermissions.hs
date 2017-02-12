@@ -21,11 +21,12 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns permissions that a caller has on the specified resource. See
--- Testing Permissions for more information. For the definitions of
--- datasets and other genomics resources, see [Fundamentals of Google
+-- </iam/docs/managing-policies#testing_permissions Testing Permissions>
+-- for more information. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.testIamPermissions@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.datasets.testIamPermissions@.
 module Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
     (
     -- * REST Resource
@@ -55,7 +56,7 @@ import           Network.Google.Prelude
 type DataSetsTestIAMPermissionsResource =
      "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -67,13 +68,14 @@ type DataSetsTestIAMPermissionsResource =
                            Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource. See
--- Testing Permissions for more information. For the definitions of
--- datasets and other genomics resources, see [Fundamentals of Google
+-- </iam/docs/managing-policies#testing_permissions Testing Permissions>
+-- for more information. For the definitions of datasets and other genomics
+-- resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsTestIAMPermissions' smart constructor.
 data DataSetsTestIAMPermissions = DataSetsTestIAMPermissions'
-    { _dstipXgafv          :: !(Maybe Text)
+    { _dstipXgafv          :: !(Maybe Xgafv)
     , _dstipUploadProtocol :: !(Maybe Text)
     , _dstipPp             :: !Bool
     , _dstipAccessToken    :: !(Maybe Text)
@@ -123,7 +125,7 @@ dataSetsTestIAMPermissions pDstipPayload_ pDstipResource_ =
     }
 
 -- | V1 error format.
-dstipXgafv :: Lens' DataSetsTestIAMPermissions (Maybe Text)
+dstipXgafv :: Lens' DataSetsTestIAMPermissions (Maybe Xgafv)
 dstipXgafv
   = lens _dstipXgafv (\ s a -> s{_dstipXgafv = a})
 

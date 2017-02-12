@@ -21,6 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the statuses of the sub-accounts in your Merchant Center account.
+-- This method can only be called for multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountstatuses.list@.
 module Network.Google.Resource.Content.Accountstatuses.List
@@ -54,6 +55,7 @@ type AccountstatusesListResource =
                    Get '[JSON] AccountstatusesListResponse
 
 -- | Lists the statuses of the sub-accounts in your Merchant Center account.
+-- This method can only be called for multi-client accounts.
 --
 -- /See:/ 'accountstatusesList' smart constructor.
 data AccountstatusesList = AccountstatusesList'

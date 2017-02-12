@@ -109,6 +109,9 @@ module Network.Google.SQLAdmin
     -- ** sql.instances.stopReplica
     , module Network.Google.Resource.SQL.Instances.StopReplica
 
+    -- ** sql.instances.truncateLog
+    , module Network.Google.Resource.SQL.Instances.TruncateLog
+
     -- ** sql.instances.update
     , module Network.Google.Resource.SQL.Instances.Update
 
@@ -241,6 +244,7 @@ module Network.Google.SQLAdmin
     , ipMApping
     , imaIPAddress
     , imaTimeToRetire
+    , imaType
 
     -- ** Database
     , Database
@@ -480,6 +484,12 @@ module Network.Google.SQLAdmin
     , opeCode
     , opeMessage
 
+    -- ** TruncateLogContext
+    , TruncateLogContext
+    , truncateLogContext
+    , tlcKind
+    , tlcLogType
+
     -- ** InstancesCloneRequest
     , InstancesCloneRequest
     , instancesCloneRequest
@@ -539,6 +549,11 @@ module Network.Google.SQLAdmin
     , flrKind
     , flrItems
 
+    -- ** InstancesTruncateLogRequest
+    , InstancesTruncateLogRequest
+    , instancesTruncateLogRequest
+    , itlrTruncateLogContext
+
     -- ** ExportContextSQLExportOptions
     , ExportContextSQLExportOptions
     , exportContextSQLExportOptions
@@ -580,6 +595,7 @@ import           Network.Google.Resource.SQL.Instances.Restart
 import           Network.Google.Resource.SQL.Instances.RestoreBackup
 import           Network.Google.Resource.SQL.Instances.StartReplica
 import           Network.Google.Resource.SQL.Instances.StopReplica
+import           Network.Google.Resource.SQL.Instances.TruncateLog
 import           Network.Google.Resource.SQL.Instances.Update
 import           Network.Google.Resource.SQL.Operations.Get
 import           Network.Google.Resource.SQL.Operations.List
@@ -625,6 +641,7 @@ type SQLAdminAPI =
        :<|> InstancesRestoreBackupResource
        :<|> InstancesFailoverResource
        :<|> InstancesRestartResource
+       :<|> InstancesTruncateLogResource
        :<|> InstancesImportResource
        :<|> InstancesStopReplicaResource
        :<|> InstancesResetSSLConfigResource

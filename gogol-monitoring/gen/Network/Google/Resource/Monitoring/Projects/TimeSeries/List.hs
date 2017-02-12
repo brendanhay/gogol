@@ -257,10 +257,13 @@ ptslName = lens _ptslName (\ s a -> s{_ptslName = a})
 -- prior to applying the aggregation function. Each subset contains time
 -- series that have the same value for each of the grouping fields. Each
 -- individual time series is a member of exactly one subset. The
--- crossSeriesReducer is applied to each subset of time series. Fields not
--- specified in groupByFields are aggregated away. If groupByFields is not
--- specified, the time series are aggregated into a single output time
--- series. If crossSeriesReducer is not defined, this field is ignored.
+-- crossSeriesReducer is applied to each subset of time series. It is not
+-- possible to reduce across different resource types, so this field
+-- implicitly contains resource.type. Fields not specified in groupByFields
+-- are aggregated away. If groupByFields is not specified and all the time
+-- series have the same resource type, then the time series are aggregated
+-- into a single output time series. If crossSeriesReducer is not defined,
+-- this field is ignored.
 ptslAggregationGroupByFields :: Lens' ProjectsTimeSeriesList [Text]
 ptslAggregationGroupByFields
   = lens _ptslAggregationGroupByFields
@@ -285,10 +288,9 @@ ptslAggregationCrossSeriesReducer
   = lens _ptslAggregationCrossSeriesReducer
       (\ s a -> s{_ptslAggregationCrossSeriesReducer = a})
 
--- | A monitoring filter (\/monitoring\/api\/v3\/filters) that specifies
--- which time series should be returned. The filter must specify a single
--- metric type, and can additionally specify metric labels and other
--- information. For example: metric.type =
+-- | A monitoring filter that specifies which time series should be returned.
+-- The filter must specify a single metric type, and can additionally
+-- specify metric labels and other information. For example: metric.type =
 -- \"compute.googleapis.com\/instance\/cpu\/usage_time\" AND
 -- metric.label.instance_name = \"my-instance-name\"
 ptslFilter :: Lens' ProjectsTimeSeriesList (Maybe Text)

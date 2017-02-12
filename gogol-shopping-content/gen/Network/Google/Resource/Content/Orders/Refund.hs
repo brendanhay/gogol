@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Refund a portion of the order, up to the full amount paid.
+-- Refund a portion of the order, up to the full amount paid. This method
+-- can only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.refund@.
 module Network.Google.Resource.Content.Orders.Refund
@@ -54,7 +55,8 @@ type OrdersRefundResource =
                    ReqBody '[JSON] OrdersRefundRequest :>
                      Post '[JSON] OrdersRefundResponse
 
--- | Refund a portion of the order, up to the full amount paid.
+-- | Refund a portion of the order, up to the full amount paid. This method
+-- can only be called for non-multi-client accounts.
 --
 -- /See:/ 'ordersRefund' smart constructor.
 data OrdersRefund = OrdersRefund'

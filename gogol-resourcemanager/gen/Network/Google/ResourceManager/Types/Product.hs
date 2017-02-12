@@ -369,8 +369,8 @@ data Project = Project'
     , _pName           :: !(Maybe Text)
     , _pLabels         :: !(Maybe ProjectLabels)
     , _pProjectId      :: !(Maybe Text)
-    , _pLifecycleState :: !(Maybe Text)
-    , _pCreateTime     :: !(Maybe Text)
+    , _pLifecycleState :: !(Maybe ProjectLifecycleState)
+    , _pCreateTime     :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
@@ -404,12 +404,14 @@ project =
     }
 
 -- | An optional reference to a parent Resource. The only supported parent
--- type is \"organization\". Once set, the parent cannot be modified.
--- Read-write.
+-- type is \"organization\". Once set, the parent cannot be modified. The
+-- \`parent\` can be set on creation or using the \`UpdateProject\` method;
+-- the end user must have the \`resourcemanager.projects.create\`
+-- permission on the parent. Read-write.
 pParent :: Lens' Project (Maybe ResourceId)
 pParent = lens _pParent (\ s a -> s{_pParent = a})
 
--- | The number uniquely identifying the project. Example: 415104041262
+-- | The number uniquely identifying the project. Example: '415104041262'
 -- Read-only.
 pProjectNumber :: Lens' Project (Maybe Int64)
 pProjectNumber
@@ -420,7 +422,7 @@ pProjectNumber
 -- | The user-assigned display name of the Project. It must be 4 to 30
 -- characters. Allowed characters are: lowercase and uppercase letters,
 -- numbers, hyphen, single-quote, double-quote, space, and exclamation
--- point. Example: My Project Read-write.
+-- point. Example: 'My Project' Read-write.
 pName :: Lens' Project (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
@@ -431,29 +433,30 @@ pName = lens _pName (\ s a -> s{_pName = a})
 -- expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256
 -- labels can be associated with a given resource. Clients should store
 -- labels in a representation such as JSON that does not depend on specific
--- characters being disallowed. Example: \"environment\" : \"dev\"
+-- characters being disallowed. Example: '\"environment\" : \"dev\"'
 -- Read-write.
 pLabels :: Lens' Project (Maybe ProjectLabels)
 pLabels = lens _pLabels (\ s a -> s{_pLabels = a})
 
 -- | The unique, user-assigned ID of the Project. It must be 6 to 30
 -- lowercase letters, digits, or hyphens. It must start with a letter.
--- Trailing hyphens are prohibited. Example: tokyo-rain-123 Read-only after
--- creation.
+-- Trailing hyphens are prohibited. Example: 'tokyo-rain-123' Read-only
+-- after creation.
 pProjectId :: Lens' Project (Maybe Text)
 pProjectId
   = lens _pProjectId (\ s a -> s{_pProjectId = a})
 
 -- | The Project lifecycle state. Read-only.
-pLifecycleState :: Lens' Project (Maybe Text)
+pLifecycleState :: Lens' Project (Maybe ProjectLifecycleState)
 pLifecycleState
   = lens _pLifecycleState
       (\ s a -> s{_pLifecycleState = a})
 
 -- | Creation time. Read-only.
-pCreateTime :: Lens' Project (Maybe Text)
+pCreateTime :: Lens' Project (Maybe UTCTime)
 pCreateTime
-  = lens _pCreateTime (\ s a -> s{_pCreateTime = a})
+  = lens _pCreateTime (\ s a -> s{_pCreateTime = a}) .
+      mapping _DateTime
 
 instance FromJSON Project where
         parseJSON
@@ -520,7 +523,7 @@ operation =
 oDone :: Lens' Operation (Maybe Bool)
 oDone = lens _oDone (\ s a -> s{_oDone = a})
 
--- | The error result of the operation in case of failure.
+-- | The error result of the operation in case of failure or cancellation.
 oError :: Lens' Operation (Maybe Status)
 oError = lens _oError (\ s a -> s{_oError = a})
 
@@ -600,7 +603,7 @@ instance ToJSON Empty where
 data ProjectCreationStatus = ProjectCreationStatus'
     { _pcsGettable   :: !(Maybe Bool)
     , _pcsReady      :: !(Maybe Bool)
-    , _pcsCreateTime :: !(Maybe Text)
+    , _pcsCreateTime :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectCreationStatus' with the minimum fields required to make a request.
@@ -633,10 +636,11 @@ pcsReady :: Lens' ProjectCreationStatus (Maybe Bool)
 pcsReady = lens _pcsReady (\ s a -> s{_pcsReady = a})
 
 -- | Creation time of the project creation workflow.
-pcsCreateTime :: Lens' ProjectCreationStatus (Maybe Text)
+pcsCreateTime :: Lens' ProjectCreationStatus (Maybe UTCTime)
 pcsCreateTime
   = lens _pcsCreateTime
       (\ s a -> s{_pcsCreateTime = a})
+      . mapping _DateTime
 
 instance FromJSON ProjectCreationStatus where
         parseJSON
@@ -691,7 +695,7 @@ instance ToJSON StatusDetailsItem where
 --
 -- /See:/ 'folderOperationError' smart constructor.
 newtype FolderOperationError = FolderOperationError'
-    { _foeErrorMessageId :: Maybe Text
+    { _foeErrorMessageId :: Maybe FolderOperationErrorErrorMessageId
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FolderOperationError' with the minimum fields required to make a request.
@@ -707,7 +711,7 @@ folderOperationError =
     }
 
 -- | The type of operation error experienced.
-foeErrorMessageId :: Lens' FolderOperationError (Maybe Text)
+foeErrorMessageId :: Lens' FolderOperationError (Maybe FolderOperationErrorErrorMessageId)
 foeErrorMessageId
   = lens _foeErrorMessageId
       (\ s a -> s{_foeErrorMessageId = a})
@@ -802,6 +806,27 @@ instance ToJSON TestIAMPermissionsRequest where
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
+-- | The request sent to the GetAncestry method.
+--
+-- /See:/ 'getAncestryRequest' smart constructor.
+data GetAncestryRequest =
+    GetAncestryRequest'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GetAncestryRequest' with the minimum fields required to make a request.
+--
+getAncestryRequest
+    :: GetAncestryRequest
+getAncestryRequest = GetAncestryRequest'
+
+instance FromJSON GetAncestryRequest where
+        parseJSON
+          = withObject "GetAncestryRequest"
+              (\ o -> pure GetAncestryRequest')
+
+instance ToJSON GetAncestryRequest where
+        toJSON = const emptyObject
+
 -- | The response returned from the \`SearchOrganizations\` method.
 --
 -- /See:/ 'searchOrganizationsResponse' smart constructor.
@@ -858,6 +883,46 @@ instance ToJSON SearchOrganizationsResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _sorNextPageToken,
                   ("organizations" .=) <$> _sorOrganizations])
+
+-- | Response from the GetAncestry method.
+--
+-- /See:/ 'getAncestryResponse' smart constructor.
+newtype GetAncestryResponse = GetAncestryResponse'
+    { _garAncestor :: Maybe [Ancestor]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GetAncestryResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'garAncestor'
+getAncestryResponse
+    :: GetAncestryResponse
+getAncestryResponse =
+    GetAncestryResponse'
+    { _garAncestor = Nothing
+    }
+
+-- | Ancestors are ordered from bottom to top of the resource hierarchy. The
+-- first ancestor is the project itself, followed by the project\'s parent,
+-- etc.
+garAncestor :: Lens' GetAncestryResponse [Ancestor]
+garAncestor
+  = lens _garAncestor (\ s a -> s{_garAncestor = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON GetAncestryResponse where
+        parseJSON
+          = withObject "GetAncestryResponse"
+              (\ o ->
+                 GetAncestryResponse' <$>
+                   (o .:? "ancestor" .!= mempty))
+
+instance ToJSON GetAncestryResponse where
+        toJSON GetAncestryResponse'{..}
+          = object
+              (catMaybes [("ancestor" .=) <$> _garAncestor])
 
 -- | Response message for \`TestIamPermissions\` method.
 --
@@ -916,7 +981,7 @@ instance ToJSON TestIAMPermissionsResponse where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
-    { _pEtag     :: !(Maybe Base64)
+    { _pEtag     :: !(Maybe Bytes)
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -951,7 +1016,7 @@ policy =
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | Version of the \`Policy\`. The default version is 0.
 pVersion :: Lens' Policy (Maybe Int32)
@@ -991,7 +1056,7 @@ instance ToJSON Policy where
 -- expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256
 -- labels can be associated with a given resource. Clients should store
 -- labels in a representation such as JSON that does not depend on specific
--- characters being disallowed. Example: \"environment\" : \"dev\"
+-- characters being disallowed. Example: '\"environment\" : \"dev\"'
 -- Read-write.
 --
 -- /See:/ 'projectLabels' smart constructor.
@@ -1068,7 +1133,7 @@ instance ToJSON OperationMetadata where
 data FolderOperation = FolderOperation'
     { _foDestinationParent :: !(Maybe Text)
     , _foDisplayName       :: !(Maybe Text)
-    , _foOperationType     :: !(Maybe Text)
+    , _foOperationType     :: !(Maybe FolderOperationOperationType)
     , _foSourceParent      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1107,7 +1172,7 @@ foDisplayName
       (\ s a -> s{_foDisplayName = a})
 
 -- | The type of this operation.
-foOperationType :: Lens' FolderOperation (Maybe Text)
+foOperationType :: Lens' FolderOperation (Maybe FolderOperationOperationType)
 foOperationType
   = lens _foOperationType
       (\ s a -> s{_foOperationType = a})
@@ -1142,11 +1207,11 @@ instance ToJSON FolderOperation where
 --
 -- /See:/ 'organization' smart constructor.
 data Organization = Organization'
-    { _orgCreationTime   :: !(Maybe Text)
+    { _orgCreationTime   :: !(Maybe DateTime')
     , _orgOwner          :: !(Maybe OrganizationOwner)
     , _orgName           :: !(Maybe Text)
     , _orgDisplayName    :: !(Maybe Text)
-    , _orgLifecycleState :: !(Maybe Text)
+    , _orgLifecycleState :: !(Maybe OrganizationLifecycleState)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Organization' with the minimum fields required to make a request.
@@ -1175,10 +1240,11 @@ organization =
 
 -- | Timestamp when the Organization was created. Assigned by the server.
 -- \'OutputOnly
-orgCreationTime :: Lens' Organization (Maybe Text)
+orgCreationTime :: Lens' Organization (Maybe UTCTime)
 orgCreationTime
   = lens _orgCreationTime
       (\ s a -> s{_orgCreationTime = a})
+      . mapping _DateTime
 
 -- | The owner of this Organization. The owner should be specified on
 -- creation. Once set, it cannot be changed. This field is required.
@@ -1202,7 +1268,7 @@ orgDisplayName
 
 -- | The organization\'s current lifecycle state. Assigned by the server.
 -- \'OutputOnly
-orgLifecycleState :: Lens' Organization (Maybe Text)
+orgLifecycleState :: Lens' Organization (Maybe OrganizationLifecycleState)
 orgLifecycleState
   = lens _orgLifecycleState
       (\ s a -> s{_orgLifecycleState = a})
@@ -1225,6 +1291,40 @@ instance ToJSON Organization where
                   ("owner" .=) <$> _orgOwner, ("name" .=) <$> _orgName,
                   ("displayName" .=) <$> _orgDisplayName,
                   ("lifecycleState" .=) <$> _orgLifecycleState])
+
+-- | Identifying information for a single ancestor of a project.
+--
+-- /See:/ 'ancestor' smart constructor.
+newtype Ancestor = Ancestor'
+    { _aResourceId :: Maybe ResourceId
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Ancestor' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aResourceId'
+ancestor
+    :: Ancestor
+ancestor =
+    Ancestor'
+    { _aResourceId = Nothing
+    }
+
+-- | Resource id of the ancestor.
+aResourceId :: Lens' Ancestor (Maybe ResourceId)
+aResourceId
+  = lens _aResourceId (\ s a -> s{_aResourceId = a})
+
+instance FromJSON Ancestor where
+        parseJSON
+          = withObject "Ancestor"
+              (\ o -> Ancestor' <$> (o .:? "resourceId"))
+
+instance ToJSON Ancestor where
+        toJSON Ancestor'{..}
+          = object
+              (catMaybes [("resourceId" .=) <$> _aResourceId])
 
 -- | The normal response of the operation in case of success. If the original
 -- method returns no data on success, such as \`Delete\`, the response is

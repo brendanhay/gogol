@@ -239,17 +239,61 @@ instance ToJSON SourceSplitResponse where
                   ("shards" .=) <$> _ssrShards,
                   ("outcome" .=) <$> _ssrOutcome])
 
--- | Request to create a Dataflow job.
+--
+-- /See:/ 'resourceUtilizationReportMetricsItem' smart constructor.
+newtype ResourceUtilizationReportMetricsItem = ResourceUtilizationReportMetricsItem'
+    { _rurmiAddtional :: HashMap Text JSONValue
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceUtilizationReportMetricsItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rurmiAddtional'
+resourceUtilizationReportMetricsItem
+    :: HashMap Text JSONValue -- ^ 'rurmiAddtional'
+    -> ResourceUtilizationReportMetricsItem
+resourceUtilizationReportMetricsItem pRurmiAddtional_ =
+    ResourceUtilizationReportMetricsItem'
+    { _rurmiAddtional = _Coerce # pRurmiAddtional_
+    }
+
+-- | Properties of the object.
+rurmiAddtional :: Lens' ResourceUtilizationReportMetricsItem (HashMap Text JSONValue)
+rurmiAddtional
+  = lens _rurmiAddtional
+      (\ s a -> s{_rurmiAddtional = a})
+      . _Coerce
+
+instance FromJSON
+         ResourceUtilizationReportMetricsItem where
+        parseJSON
+          = withObject "ResourceUtilizationReportMetricsItem"
+              (\ o ->
+                 ResourceUtilizationReportMetricsItem' <$>
+                   (parseJSONObject o))
+
+instance ToJSON ResourceUtilizationReportMetricsItem
+         where
+        toJSON = toJSON . _rurmiAddtional
+
+-- | A request to create a Cloud Dataflow job from a template.
 --
 -- /See:/ 'createJobFromTemplateRequest' smart constructor.
 data CreateJobFromTemplateRequest = CreateJobFromTemplateRequest'
-    { _cjftrGcsPath    :: !(Maybe Text)
-    , _cjftrParameters :: !(Maybe CreateJobFromTemplateRequestParameters)
+    { _cjftrEnvironment :: !(Maybe RuntimeEnvironment)
+    , _cjftrJobName     :: !(Maybe Text)
+    , _cjftrGcsPath     :: !(Maybe Text)
+    , _cjftrParameters  :: !(Maybe CreateJobFromTemplateRequestParameters)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateJobFromTemplateRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cjftrEnvironment'
+--
+-- * 'cjftrJobName'
 --
 -- * 'cjftrGcsPath'
 --
@@ -258,16 +302,30 @@ createJobFromTemplateRequest
     :: CreateJobFromTemplateRequest
 createJobFromTemplateRequest =
     CreateJobFromTemplateRequest'
-    { _cjftrGcsPath = Nothing
+    { _cjftrEnvironment = Nothing
+    , _cjftrJobName = Nothing
+    , _cjftrGcsPath = Nothing
     , _cjftrParameters = Nothing
     }
 
--- | A path to the serialized JSON representation of the job.
+-- | The runtime environment for the job.
+cjftrEnvironment :: Lens' CreateJobFromTemplateRequest (Maybe RuntimeEnvironment)
+cjftrEnvironment
+  = lens _cjftrEnvironment
+      (\ s a -> s{_cjftrEnvironment = a})
+
+-- | Required. The job name to use for the created job.
+cjftrJobName :: Lens' CreateJobFromTemplateRequest (Maybe Text)
+cjftrJobName
+  = lens _cjftrJobName (\ s a -> s{_cjftrJobName = a})
+
+-- | Required. A Cloud Storage path to the template from which to create the
+-- job. Must be a valid Cloud Storage URL, beginning with \`gs:\/\/\`.
 cjftrGcsPath :: Lens' CreateJobFromTemplateRequest (Maybe Text)
 cjftrGcsPath
   = lens _cjftrGcsPath (\ s a -> s{_cjftrGcsPath = a})
 
--- | Dynamic parameterization of the job\'s runtime environment.
+-- | The runtime parameters to pass to the job.
 cjftrParameters :: Lens' CreateJobFromTemplateRequest (Maybe CreateJobFromTemplateRequestParameters)
 cjftrParameters
   = lens _cjftrParameters
@@ -278,13 +336,17 @@ instance FromJSON CreateJobFromTemplateRequest where
           = withObject "CreateJobFromTemplateRequest"
               (\ o ->
                  CreateJobFromTemplateRequest' <$>
-                   (o .:? "gcsPath") <*> (o .:? "parameters"))
+                   (o .:? "environment") <*> (o .:? "jobName") <*>
+                     (o .:? "gcsPath")
+                     <*> (o .:? "parameters"))
 
 instance ToJSON CreateJobFromTemplateRequest where
         toJSON CreateJobFromTemplateRequest'{..}
           = object
               (catMaybes
-                 [("gcsPath" .=) <$> _cjftrGcsPath,
+                 [("environment" .=) <$> _cjftrEnvironment,
+                  ("jobName" .=) <$> _cjftrJobName,
+                  ("gcsPath" .=) <$> _cjftrGcsPath,
                   ("parameters" .=) <$> _cjftrParameters])
 
 -- | The \`Status\` type defines a logical error model that is suitable for
@@ -1031,6 +1093,7 @@ instance ToJSON InstructionOutput where
 -- /See:/ 'reportWorkItemStatusRequest' smart constructor.
 data ReportWorkItemStatusRequest = ReportWorkItemStatusRequest'
     { _rwisrCurrentWorkerTime :: !(Maybe Text)
+    , _rwisrLocation          :: !(Maybe Text)
     , _rwisrWorkItemStatuses  :: !(Maybe [WorkItemStatus])
     , _rwisrWorkerId          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1041,6 +1104,8 @@ data ReportWorkItemStatusRequest = ReportWorkItemStatusRequest'
 --
 -- * 'rwisrCurrentWorkerTime'
 --
+-- * 'rwisrLocation'
+--
 -- * 'rwisrWorkItemStatuses'
 --
 -- * 'rwisrWorkerId'
@@ -1049,6 +1114,7 @@ reportWorkItemStatusRequest
 reportWorkItemStatusRequest =
     ReportWorkItemStatusRequest'
     { _rwisrCurrentWorkerTime = Nothing
+    , _rwisrLocation = Nothing
     , _rwisrWorkItemStatuses = Nothing
     , _rwisrWorkerId = Nothing
     }
@@ -1058,6 +1124,12 @@ rwisrCurrentWorkerTime :: Lens' ReportWorkItemStatusRequest (Maybe Text)
 rwisrCurrentWorkerTime
   = lens _rwisrCurrentWorkerTime
       (\ s a -> s{_rwisrCurrentWorkerTime = a})
+
+-- | The location which contains the WorkItem\'s job.
+rwisrLocation :: Lens' ReportWorkItemStatusRequest (Maybe Text)
+rwisrLocation
+  = lens _rwisrLocation
+      (\ s a -> s{_rwisrLocation = a})
 
 -- | The order is unimportant, except that the order of the
 -- WorkItemServiceState messages in the ReportWorkItemStatusResponse
@@ -1083,8 +1155,8 @@ instance FromJSON ReportWorkItemStatusRequest where
           = withObject "ReportWorkItemStatusRequest"
               (\ o ->
                  ReportWorkItemStatusRequest' <$>
-                   (o .:? "currentWorkerTime") <*>
-                     (o .:? "workItemStatuses" .!= mempty)
+                   (o .:? "currentWorkerTime") <*> (o .:? "location")
+                     <*> (o .:? "workItemStatuses" .!= mempty)
                      <*> (o .:? "workerId"))
 
 instance ToJSON ReportWorkItemStatusRequest where
@@ -1093,6 +1165,7 @@ instance ToJSON ReportWorkItemStatusRequest where
               (catMaybes
                  [("currentWorkerTime" .=) <$>
                     _rwisrCurrentWorkerTime,
+                  ("location" .=) <$> _rwisrLocation,
                   ("workItemStatuses" .=) <$> _rwisrWorkItemStatuses,
                   ("workerId" .=) <$> _rwisrWorkerId])
 
@@ -1616,12 +1689,12 @@ dSizeGb
 -- resource name typically ending in \"pd-standard\". If SSD persistent
 -- disks are available, the resource name typically ends with \"pd-ssd\".
 -- The actual valid values are defined the Google Compute Engine API, not
--- by the Dataflow API; consult the Google Compute Engine documentation for
--- more information about determining the set of available disk types for a
--- particular project and zone. Google Compute Engine Disk types are local
--- to a particular project in a particular zone, and so the resource name
--- will typically look something like this:
--- compute.googleapis.com\/projects\/ \/zones\/\/diskTypes\/pd-standard
+-- by the Cloud Dataflow API; consult the Google Compute Engine
+-- documentation for more information about determining the set of
+-- available disk types for a particular project and zone. Google Compute
+-- Engine Disk types are local to a particular project in a particular
+-- zone, and so the resource name will typically look something like this:
+-- compute.googleapis.com\/projects\/project-id\/zones\/zone\/diskTypes\/pd-standard
 dDiskType :: Lens' Disk (Maybe Text)
 dDiskType
   = lens _dDiskType (\ s a -> s{_dDiskType = a})
@@ -1890,8 +1963,8 @@ eExperiments
       . _Default
       . _Coerce
 
--- | Worker pools. At least one \"harness\" worker pool must be specified in
--- order for the job to have workers.
+-- | The worker pools. At least one \"harness\" worker pool must be specified
+-- in order for the job to have workers.
 eWorkerPools :: Lens' Environment [WorkerPool]
 eWorkerPools
   = lens _eWorkerPools (\ s a -> s{_eWorkerPools = a})
@@ -1942,10 +2015,10 @@ eUserAgent :: Lens' Environment (Maybe EnvironmentUserAgent)
 eUserAgent
   = lens _eUserAgent (\ s a -> s{_eUserAgent = a})
 
--- | The Dataflow SDK pipeline options specified by the user. These options
--- are passed through the service and are used to recreate the SDK pipeline
--- options on the worker in a language agnostic and platform independent
--- way.
+-- | The Cloud Dataflow SDK pipeline options specified by the user. These
+-- options are passed through the service and are used to recreate the SDK
+-- pipeline options on the worker in a language agnostic and platform
+-- independent way.
 eSdkPipelineOptions :: Lens' Environment (Maybe EnvironmentSdkPipelineOptions)
 eSdkPipelineOptions
   = lens _eSdkPipelineOptions
@@ -2082,6 +2155,7 @@ data CounterUpdate = CounterUpdate'
     , _cuInternal                  :: !(Maybe JSONValue)
     , _cuStringList                :: !(Maybe StringList)
     , _cuShortId                   :: !(Maybe (Textual Int64))
+    , _cuDistribution              :: !(Maybe DistributionUpdate)
     , _cuCumulative                :: !(Maybe Bool)
     , _cuStructuredNameAndMetadata :: !(Maybe CounterStructuredNameAndMetadata)
     , _cuFloatingPointMean         :: !(Maybe FloatingPointMean)
@@ -2107,6 +2181,8 @@ data CounterUpdate = CounterUpdate'
 --
 -- * 'cuShortId'
 --
+-- * 'cuDistribution'
+--
 -- * 'cuCumulative'
 --
 -- * 'cuStructuredNameAndMetadata'
@@ -2130,6 +2206,7 @@ counterUpdate =
     , _cuInternal = Nothing
     , _cuStringList = Nothing
     , _cuShortId = Nothing
+    , _cuDistribution = Nothing
     , _cuCumulative = Nothing
     , _cuStructuredNameAndMetadata = Nothing
     , _cuFloatingPointMean = Nothing
@@ -2174,6 +2251,12 @@ cuShortId :: Lens' CounterUpdate (Maybe Int64)
 cuShortId
   = lens _cuShortId (\ s a -> s{_cuShortId = a}) .
       mapping _Coerce
+
+-- | Distribution data
+cuDistribution :: Lens' CounterUpdate (Maybe DistributionUpdate)
+cuDistribution
+  = lens _cuDistribution
+      (\ s a -> s{_cuDistribution = a})
 
 -- | True if this counter is reported as the total cumulative aggregate value
 -- accumulated since the worker started working on this WorkItem. By
@@ -2227,6 +2310,7 @@ instance FromJSON CounterUpdate where
                      <*> (o .:? "internal")
                      <*> (o .:? "stringList")
                      <*> (o .:? "shortId")
+                     <*> (o .:? "distribution")
                      <*> (o .:? "cumulative")
                      <*> (o .:? "structuredNameAndMetadata")
                      <*> (o .:? "floatingPointMean")
@@ -2245,6 +2329,7 @@ instance ToJSON CounterUpdate where
                   ("internal" .=) <$> _cuInternal,
                   ("stringList" .=) <$> _cuStringList,
                   ("shortId" .=) <$> _cuShortId,
+                  ("distribution" .=) <$> _cuDistribution,
                   ("cumulative" .=) <$> _cuCumulative,
                   ("structuredNameAndMetadata" .=) <$>
                     _cuStructuredNameAndMetadata,
@@ -2820,7 +2905,7 @@ instance ToJSON WorkerMessageCode where
                  [("parameters" .=) <$> _wmcParameters,
                   ("code" .=) <$> _wmcCode])
 
--- | Map of transform name prefixes of the job to be replaced to the
+-- | The map of transform name prefixes of the job to be replaced to the
 -- corresponding name prefixes of the new job.
 --
 -- /See:/ 'jobTransformNameMApping' smart constructor.
@@ -3085,19 +3170,19 @@ taskRunnerSettings =
     , _trsLanguageHint = Nothing
     }
 
--- | Do we continue taskrunner if an exception is hit?
+-- | Whether to continue taskrunner if an exception is hit.
 trsContinueOnException :: Lens' TaskRunnerSettings (Maybe Bool)
 trsContinueOnException
   = lens _trsContinueOnException
       (\ s a -> s{_trsContinueOnException = a})
 
--- | Command to launch the worker harness.
+-- | The command to launch the worker harness.
 trsHarnessCommand :: Lens' TaskRunnerSettings (Maybe Text)
 trsHarnessCommand
   = lens _trsHarnessCommand
       (\ s a -> s{_trsHarnessCommand = a})
 
--- | Store the workflow in this file.
+-- | The file to store the workflow in.
 trsWorkflowFileName :: Lens' TaskRunnerSettings (Maybe Text)
 trsWorkflowFileName
   = lens _trsWorkflowFileName
@@ -3109,30 +3194,30 @@ trsTaskGroup :: Lens' TaskRunnerSettings (Maybe Text)
 trsTaskGroup
   = lens _trsTaskGroup (\ s a -> s{_trsTaskGroup = a})
 
--- | Also send taskrunner log info to stderr?
+-- | Whether to also send taskrunner log info to stderr.
 trsAlsologtostderr :: Lens' TaskRunnerSettings (Maybe Bool)
 trsAlsologtostderr
   = lens _trsAlsologtostderr
       (\ s a -> s{_trsAlsologtostderr = a})
 
--- | API version of endpoint, e.g. \"v1b3\"
+-- | The API version of endpoint, e.g. \"v1b3\"
 trsDataflowAPIVersion :: Lens' TaskRunnerSettings (Maybe Text)
 trsDataflowAPIVersion
   = lens _trsDataflowAPIVersion
       (\ s a -> s{_trsDataflowAPIVersion = a})
 
--- | Directory on the VM to store logs.
+-- | The directory on the VM to store logs.
 trsLogDir :: Lens' TaskRunnerSettings (Maybe Text)
 trsLogDir
   = lens _trsLogDir (\ s a -> s{_trsLogDir = a})
 
--- | Store preprocessing commands in this file.
+-- | The file to store preprocessing commands in.
 trsCommandlinesFileName :: Lens' TaskRunnerSettings (Maybe Text)
 trsCommandlinesFileName
   = lens _trsCommandlinesFileName
       (\ s a -> s{_trsCommandlinesFileName = a})
 
--- | ID string of VM.
+-- | The ID string of the VM.
 trsVMId :: Lens' TaskRunnerSettings (Maybe Text)
 trsVMId = lens _trsVMId (\ s a -> s{_trsVMId = a})
 
@@ -3146,8 +3231,8 @@ trsBaseURL :: Lens' TaskRunnerSettings (Maybe Text)
 trsBaseURL
   = lens _trsBaseURL (\ s a -> s{_trsBaseURL = a})
 
--- | OAuth2 scopes to be requested by the taskrunner in order to access the
--- dataflow API.
+-- | The OAuth2 scopes to be requested by the taskrunner in order to access
+-- the Cloud Dataflow API.
 trsOAuthScopes :: Lens' TaskRunnerSettings [Text]
 trsOAuthScopes
   = lens _trsOAuthScopes
@@ -3161,13 +3246,13 @@ trsTaskUser :: Lens' TaskRunnerSettings (Maybe Text)
 trsTaskUser
   = lens _trsTaskUser (\ s a -> s{_trsTaskUser = a})
 
--- | Streaming worker main class name.
+-- | The streaming worker main class name.
 trsStreamingWorkerMainClass :: Lens' TaskRunnerSettings (Maybe Text)
 trsStreamingWorkerMainClass
   = lens _trsStreamingWorkerMainClass
       (\ s a -> s{_trsStreamingWorkerMainClass = a})
 
--- | Location on the worker for task-specific subdirectories.
+-- | The location on the worker for task-specific subdirectories.
 trsBaseTaskDir :: Lens' TaskRunnerSettings (Maybe Text)
 trsBaseTaskDir
   = lens _trsBaseTaskDir
@@ -3191,19 +3276,20 @@ trsTempStoragePrefix
   = lens _trsTempStoragePrefix
       (\ s a -> s{_trsTempStoragePrefix = a})
 
--- | Send taskrunner log into to Google Compute Engine VM serial console?
+-- | Whether to send taskrunner log info to Google Compute Engine VM serial
+-- console.
 trsLogToSerialconsole :: Lens' TaskRunnerSettings (Maybe Bool)
 trsLogToSerialconsole
   = lens _trsLogToSerialconsole
       (\ s a -> s{_trsLogToSerialconsole = a})
 
--- | Settings to pass to the parallel worker harness.
+-- | The settings to pass to the parallel worker harness.
 trsParallelWorkerSettings :: Lens' TaskRunnerSettings (Maybe WorkerSettings)
 trsParallelWorkerSettings
   = lens _trsParallelWorkerSettings
       (\ s a -> s{_trsParallelWorkerSettings = a})
 
--- | Suggested backend language.
+-- | The suggested backend language.
 trsLanguageHint :: Lens' TaskRunnerSettings (Maybe Text)
 trsLanguageHint
   = lens _trsLanguageHint
@@ -3337,10 +3423,10 @@ instance ToJSON StreamingComputationConfig where
                   ("computationId" .=) <$> _sccComputationId,
                   ("stageName" .=) <$> _sccStageName])
 
--- | The Dataflow SDK pipeline options specified by the user. These options
--- are passed through the service and are used to recreate the SDK pipeline
--- options on the worker in a language agnostic and platform independent
--- way.
+-- | The Cloud Dataflow SDK pipeline options specified by the user. These
+-- options are passed through the service and are used to recreate the SDK
+-- pipeline options on the worker in a language agnostic and platform
+-- independent way.
 --
 -- /See:/ 'environmentSdkPipelineOptions' smart constructor.
 newtype EnvironmentSdkPipelineOptions = EnvironmentSdkPipelineOptions'
@@ -3429,6 +3515,7 @@ instance ToJSON FloatingPointMean where
 data LeaseWorkItemRequest = LeaseWorkItemRequest'
     { _lwirWorkItemTypes          :: !(Maybe [Text])
     , _lwirCurrentWorkerTime      :: !(Maybe Text)
+    , _lwirLocation               :: !(Maybe Text)
     , _lwirWorkerCapabilities     :: !(Maybe [Text])
     , _lwirRequestedLeaseDuration :: !(Maybe Text)
     , _lwirWorkerId               :: !(Maybe Text)
@@ -3442,6 +3529,8 @@ data LeaseWorkItemRequest = LeaseWorkItemRequest'
 --
 -- * 'lwirCurrentWorkerTime'
 --
+-- * 'lwirLocation'
+--
 -- * 'lwirWorkerCapabilities'
 --
 -- * 'lwirRequestedLeaseDuration'
@@ -3453,6 +3542,7 @@ leaseWorkItemRequest =
     LeaseWorkItemRequest'
     { _lwirWorkItemTypes = Nothing
     , _lwirCurrentWorkerTime = Nothing
+    , _lwirLocation = Nothing
     , _lwirWorkerCapabilities = Nothing
     , _lwirRequestedLeaseDuration = Nothing
     , _lwirWorkerId = Nothing
@@ -3471,6 +3561,11 @@ lwirCurrentWorkerTime :: Lens' LeaseWorkItemRequest (Maybe Text)
 lwirCurrentWorkerTime
   = lens _lwirCurrentWorkerTime
       (\ s a -> s{_lwirCurrentWorkerTime = a})
+
+-- | The location which contains the WorkItem\'s job.
+lwirLocation :: Lens' LeaseWorkItemRequest (Maybe Text)
+lwirLocation
+  = lens _lwirLocation (\ s a -> s{_lwirLocation = a})
 
 -- | Worker capabilities. WorkItems might be limited to workers with specific
 -- capabilities.
@@ -3500,6 +3595,7 @@ instance FromJSON LeaseWorkItemRequest where
                  LeaseWorkItemRequest' <$>
                    (o .:? "workItemTypes" .!= mempty) <*>
                      (o .:? "currentWorkerTime")
+                     <*> (o .:? "location")
                      <*> (o .:? "workerCapabilities" .!= mempty)
                      <*> (o .:? "requestedLeaseDuration")
                      <*> (o .:? "workerId"))
@@ -3510,6 +3606,7 @@ instance ToJSON LeaseWorkItemRequest where
               (catMaybes
                  [("workItemTypes" .=) <$> _lwirWorkItemTypes,
                   ("currentWorkerTime" .=) <$> _lwirCurrentWorkerTime,
+                  ("location" .=) <$> _lwirLocation,
                   ("workerCapabilities" .=) <$>
                     _lwirWorkerCapabilities,
                   ("requestedLeaseDuration" .=) <$>
@@ -4009,7 +4106,7 @@ workerSettings =
     , _wsWorkerId = Nothing
     }
 
--- | The Dataflow service path relative to the root URL, for example,
+-- | The Cloud Dataflow service path relative to the root URL, for example,
 -- \"dataflow\/v1b3\/projects\".
 wsServicePath :: Lens' WorkerSettings (Maybe Text)
 wsServicePath
@@ -4042,13 +4139,13 @@ wsTempStoragePrefix
   = lens _wsTempStoragePrefix
       (\ s a -> s{_wsTempStoragePrefix = a})
 
--- | Send work progress updates to service.
+-- | Whether to send work progress updates to the service.
 wsReportingEnabled :: Lens' WorkerSettings (Maybe Bool)
 wsReportingEnabled
   = lens _wsReportingEnabled
       (\ s a -> s{_wsReportingEnabled = a})
 
--- | ID of the worker running this pipeline.
+-- | The ID of the worker running this pipeline.
 wsWorkerId :: Lens' WorkerSettings (Maybe Text)
 wsWorkerId
   = lens _wsWorkerId (\ s a -> s{_wsWorkerId = a})
@@ -4202,12 +4299,86 @@ instance ToJSON DataDiskAssignment where
                  [("vmInstance" .=) <$> _ddaVMInstance,
                   ("dataDisks" .=) <$> _ddaDataDisks])
 
+-- | Worker metrics exported from workers. This contains resource utilization
+-- metrics accumulated from a variety of sources. For more information, see
+-- go\/df-resource-signals. Note that this proto closely follows the
+-- structure of its DFE siblings in its contents.
+--
+-- /See:/ 'resourceUtilizationReport' smart constructor.
+newtype ResourceUtilizationReport = ResourceUtilizationReport'
+    { _rurMetrics :: Maybe [ResourceUtilizationReportMetricsItem]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceUtilizationReport' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rurMetrics'
+resourceUtilizationReport
+    :: ResourceUtilizationReport
+resourceUtilizationReport =
+    ResourceUtilizationReport'
+    { _rurMetrics = Nothing
+    }
+
+-- | Each Struct must parallel DFE worker metrics protos (eg., cpu_time
+-- metric will have nested values “timestamp_ms, total_ms, rate”).
+rurMetrics :: Lens' ResourceUtilizationReport [ResourceUtilizationReportMetricsItem]
+rurMetrics
+  = lens _rurMetrics (\ s a -> s{_rurMetrics = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ResourceUtilizationReport where
+        parseJSON
+          = withObject "ResourceUtilizationReport"
+              (\ o ->
+                 ResourceUtilizationReport' <$>
+                   (o .:? "metrics" .!= mempty))
+
+instance ToJSON ResourceUtilizationReport where
+        toJSON ResourceUtilizationReport'{..}
+          = object (catMaybes [("metrics" .=) <$> _rurMetrics])
+
+-- | Indicates which location failed to respond to a request for data.
+--
+-- /See:/ 'failedLocation' smart constructor.
+newtype FailedLocation = FailedLocation'
+    { _flName :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FailedLocation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'flName'
+failedLocation
+    :: FailedLocation
+failedLocation =
+    FailedLocation'
+    { _flName = Nothing
+    }
+
+-- | The name of the failed location.
+flName :: Lens' FailedLocation (Maybe Text)
+flName = lens _flName (\ s a -> s{_flName = a})
+
+instance FromJSON FailedLocation where
+        parseJSON
+          = withObject "FailedLocation"
+              (\ o -> FailedLocation' <$> (o .:? "name"))
+
+instance ToJSON FailedLocation where
+        toJSON FailedLocation'{..}
+          = object (catMaybes [("name" .=) <$> _flName])
+
 -- | A worker_message response allows the server to pass information to the
 -- sender.
 --
 -- /See:/ 'workerMessageResponse' smart constructor.
-newtype WorkerMessageResponse = WorkerMessageResponse'
-    { _wmrWorkerHealthReportResponse :: Maybe WorkerHealthReportResponse
+data WorkerMessageResponse = WorkerMessageResponse'
+    { _wmrWorkerHealthReportResponse :: !(Maybe WorkerHealthReportResponse)
+    , _wmrWorkerMetricsResponse      :: !(Maybe ResourceUtilizationReportResponse)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkerMessageResponse' with the minimum fields required to make a request.
@@ -4215,11 +4386,14 @@ newtype WorkerMessageResponse = WorkerMessageResponse'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'wmrWorkerHealthReportResponse'
+--
+-- * 'wmrWorkerMetricsResponse'
 workerMessageResponse
     :: WorkerMessageResponse
 workerMessageResponse =
     WorkerMessageResponse'
     { _wmrWorkerHealthReportResponse = Nothing
+    , _wmrWorkerMetricsResponse = Nothing
     }
 
 -- | The service\'s response to a worker\'s health report.
@@ -4228,21 +4402,30 @@ wmrWorkerHealthReportResponse
   = lens _wmrWorkerHealthReportResponse
       (\ s a -> s{_wmrWorkerHealthReportResponse = a})
 
+-- | Service\'s response to reporting worker metrics (currently empty).
+wmrWorkerMetricsResponse :: Lens' WorkerMessageResponse (Maybe ResourceUtilizationReportResponse)
+wmrWorkerMetricsResponse
+  = lens _wmrWorkerMetricsResponse
+      (\ s a -> s{_wmrWorkerMetricsResponse = a})
+
 instance FromJSON WorkerMessageResponse where
         parseJSON
           = withObject "WorkerMessageResponse"
               (\ o ->
                  WorkerMessageResponse' <$>
-                   (o .:? "workerHealthReportResponse"))
+                   (o .:? "workerHealthReportResponse") <*>
+                     (o .:? "workerMetricsResponse"))
 
 instance ToJSON WorkerMessageResponse where
         toJSON WorkerMessageResponse'{..}
           = object
               (catMaybes
                  [("workerHealthReportResponse" .=) <$>
-                    _wmrWorkerHealthReportResponse])
+                    _wmrWorkerHealthReportResponse,
+                  ("workerMetricsResponse" .=) <$>
+                    _wmrWorkerMetricsResponse])
 
--- | Dynamic parameterization of the job\'s runtime environment.
+-- | The runtime parameters to pass to the job.
 --
 -- /See:/ 'createJobFromTemplateRequestParameters' smart constructor.
 newtype CreateJobFromTemplateRequestParameters = CreateJobFromTemplateRequestParameters'
@@ -4932,6 +5115,96 @@ instance FromJSON WorkerPoolPoolArgs where
 instance ToJSON WorkerPoolPoolArgs where
         toJSON = toJSON . _wppaAddtional
 
+-- | The environment values to set at runtime.
+--
+-- /See:/ 'runtimeEnvironment' smart constructor.
+data RuntimeEnvironment = RuntimeEnvironment'
+    { _reZone                    :: !(Maybe Text)
+    , _reBypassTempDirValidation :: !(Maybe Bool)
+    , _reServiceAccountEmail     :: !(Maybe Text)
+    , _reMaxWorkers              :: !(Maybe (Textual Int32))
+    , _reTempLocation            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RuntimeEnvironment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'reZone'
+--
+-- * 'reBypassTempDirValidation'
+--
+-- * 'reServiceAccountEmail'
+--
+-- * 'reMaxWorkers'
+--
+-- * 'reTempLocation'
+runtimeEnvironment
+    :: RuntimeEnvironment
+runtimeEnvironment =
+    RuntimeEnvironment'
+    { _reZone = Nothing
+    , _reBypassTempDirValidation = Nothing
+    , _reServiceAccountEmail = Nothing
+    , _reMaxWorkers = Nothing
+    , _reTempLocation = Nothing
+    }
+
+-- | The Compute Engine [availability
+-- zone](https:\/\/cloud.google.com\/compute\/docs\/regions-zones\/regions-zones)
+-- for launching worker instances to run your pipeline.
+reZone :: Lens' RuntimeEnvironment (Maybe Text)
+reZone = lens _reZone (\ s a -> s{_reZone = a})
+
+-- | Whether to bypass the safety checks for the job\'s temporary directory.
+-- Use with caution.
+reBypassTempDirValidation :: Lens' RuntimeEnvironment (Maybe Bool)
+reBypassTempDirValidation
+  = lens _reBypassTempDirValidation
+      (\ s a -> s{_reBypassTempDirValidation = a})
+
+-- | The email address of the service account to run the job as.
+reServiceAccountEmail :: Lens' RuntimeEnvironment (Maybe Text)
+reServiceAccountEmail
+  = lens _reServiceAccountEmail
+      (\ s a -> s{_reServiceAccountEmail = a})
+
+-- | The maximum number of Google Compute Engine instances to be made
+-- available to your pipeline during execution, from 1 to 1000.
+reMaxWorkers :: Lens' RuntimeEnvironment (Maybe Int32)
+reMaxWorkers
+  = lens _reMaxWorkers (\ s a -> s{_reMaxWorkers = a})
+      . mapping _Coerce
+
+-- | The Cloud Storage path to use for temporary files. Must be a valid Cloud
+-- Storage URL, beginning with \`gs:\/\/\`.
+reTempLocation :: Lens' RuntimeEnvironment (Maybe Text)
+reTempLocation
+  = lens _reTempLocation
+      (\ s a -> s{_reTempLocation = a})
+
+instance FromJSON RuntimeEnvironment where
+        parseJSON
+          = withObject "RuntimeEnvironment"
+              (\ o ->
+                 RuntimeEnvironment' <$>
+                   (o .:? "zone") <*> (o .:? "bypassTempDirValidation")
+                     <*> (o .:? "serviceAccountEmail")
+                     <*> (o .:? "maxWorkers")
+                     <*> (o .:? "tempLocation"))
+
+instance ToJSON RuntimeEnvironment where
+        toJSON RuntimeEnvironment'{..}
+          = object
+              (catMaybes
+                 [("zone" .=) <$> _reZone,
+                  ("bypassTempDirValidation" .=) <$>
+                    _reBypassTempDirValidation,
+                  ("serviceAccountEmail" .=) <$>
+                    _reServiceAccountEmail,
+                  ("maxWorkers" .=) <$> _reMaxWorkers,
+                  ("tempLocation" .=) <$> _reTempLocation])
+
 -- | CounterMetadata includes all static non-name non-value counter
 -- attributes.
 --
@@ -5479,11 +5752,12 @@ instance ToJSON
          PartialGroupByKeyInstructionValueCombiningFn where
         toJSON = toJSON . _pgbkivcfAddtional
 
--- | Defines a job to be run by the Dataflow service.
+-- | Defines a job to be run by the Cloud Dataflow service.
 --
 -- /See:/ 'job' smart constructor.
 data Job = Job'
     { _jRequestedState       :: !(Maybe Text)
+    , _jLocation             :: !(Maybe Text)
     , _jEnvironment          :: !(Maybe Environment)
     , _jClientRequestId      :: !(Maybe Text)
     , _jCurrentState         :: !(Maybe Text)
@@ -5507,6 +5781,8 @@ data Job = Job'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'jRequestedState'
+--
+-- * 'jLocation'
 --
 -- * 'jEnvironment'
 --
@@ -5544,6 +5820,7 @@ job
 job =
     Job'
     { _jRequestedState = Nothing
+    , _jLocation = Nothing
     , _jEnvironment = Nothing
     , _jClientRequestId = Nothing
     , _jCurrentState = Nothing
@@ -5562,45 +5839,52 @@ job =
     , _jCreateTime = Nothing
     }
 
--- | The job\'s requested state. UpdateJob may be used to switch between the
--- JOB_STATE_STOPPED and JOB_STATE_RUNNING states, by setting
--- requested_state. UpdateJob may also be used to directly set a job\'s
--- requested state to JOB_STATE_CANCELLED or JOB_STATE_DONE, irrevocably
--- terminating the job if it has not already reached a terminal state.
+-- | The job\'s requested state. \`UpdateJob\` may be used to switch between
+-- the \`JOB_STATE_STOPPED\` and \`JOB_STATE_RUNNING\` states, by setting
+-- requested_state. \`UpdateJob\` may also be used to directly set a job\'s
+-- requested state to \`JOB_STATE_CANCELLED\` or \`JOB_STATE_DONE\`,
+-- irrevocably terminating the job if it has not already reached a terminal
+-- state.
 jRequestedState :: Lens' Job (Maybe Text)
 jRequestedState
   = lens _jRequestedState
       (\ s a -> s{_jRequestedState = a})
 
--- | Environment for the job.
+-- | The location that contains this job.
+jLocation :: Lens' Job (Maybe Text)
+jLocation
+  = lens _jLocation (\ s a -> s{_jLocation = a})
+
+-- | The environment for the job.
 jEnvironment :: Lens' Job (Maybe Environment)
 jEnvironment
   = lens _jEnvironment (\ s a -> s{_jEnvironment = a})
 
--- | Client\'s unique identifier of the job, re-used by SDK across retried
+-- | The client\'s unique identifier of the job, re-used across retried
 -- attempts. If this field is set, the service will ensure its uniqueness.
--- That is, the request to create a job will fail if the service has
--- knowledge of a previously submitted job with the same client\'s id and
--- job name. The caller may, for example, use this field to ensure
--- idempotence of job creation across retried attempts to create a job. By
--- default, the field is empty and, in that case, the service ignores it.
+-- The request to create a job will fail if the service has knowledge of a
+-- previously submitted job with the same client\'s ID and job name. The
+-- caller may use this field to ensure idempotence of job creation across
+-- retried attempts to create a job. By default, the field is empty and, in
+-- that case, the service ignores it.
 jClientRequestId :: Lens' Job (Maybe Text)
 jClientRequestId
   = lens _jClientRequestId
       (\ s a -> s{_jClientRequestId = a})
 
--- | The current state of the job. Jobs are created in the JOB_STATE_STOPPED
--- state unless otherwise specified. A job in the JOB_STATE_RUNNING state
--- may asynchronously enter a terminal state. Once a job has reached a
--- terminal state, no further state updates may be made. This field may be
--- mutated by the Dataflow service; callers cannot mutate it.
+-- | The current state of the job. Jobs are created in the
+-- \`JOB_STATE_STOPPED\` state unless otherwise specified. A job in the
+-- \`JOB_STATE_RUNNING\` state may asynchronously enter a terminal state.
+-- After a job has reached a terminal state, no further state updates may
+-- be made. This field may be mutated by the Cloud Dataflow service;
+-- callers cannot mutate it.
 jCurrentState :: Lens' Job (Maybe Text)
 jCurrentState
   = lens _jCurrentState
       (\ s a -> s{_jCurrentState = a})
 
 -- | If another job is an update of this job (and thus, this job is in
--- JOB_STATE_UPDATED), this field will contain the ID of that job.
+-- \`JOB_STATE_UPDATED\`), this field contains the ID of that job.
 jReplacedByJobId :: Lens' Job (Maybe Text)
 jReplacedByJobId
   = lens _jReplacedByJobId
@@ -5624,29 +5908,30 @@ jSteps
   = lens _jSteps (\ s a -> s{_jSteps = a}) . _Default .
       _Coerce
 
--- | Information about how the Dataflow service will actually run the job.
+-- | Information about how the Cloud Dataflow service will run the job.
 jExecutionInfo :: Lens' Job (Maybe JobExecutionInfo)
 jExecutionInfo
   = lens _jExecutionInfo
       (\ s a -> s{_jExecutionInfo = a})
 
--- | The user-specified Dataflow job name. Only one Job with a given name may
--- exist in a project at any given time. If a caller attempts to create a
--- Job with the same name as an already-existing Job, the attempt will
--- return the existing Job. The name must match the regular expression
--- [a-z]([-a-z0-9]{0,38}[a-z0-9])?
+-- | The user-specified Cloud Dataflow job name. Only one Job with a given
+-- name may exist in a project at any given time. If a caller attempts to
+-- create a Job with the same name as an already-existing Job, the attempt
+-- returns the existing Job. The name must match the regular expression
+-- \`[a-z]([-a-z0-9]{0,38}[a-z0-9])?\`
 jName :: Lens' Job (Maybe Text)
 jName = lens _jName (\ s a -> s{_jName = a})
 
--- | Map of transform name prefixes of the job to be replaced to the
+-- | The map of transform name prefixes of the job to be replaced to the
 -- corresponding name prefixes of the new job.
 jTransformNameMApping :: Lens' Job (Maybe JobTransformNameMApping)
 jTransformNameMApping
   = lens _jTransformNameMApping
       (\ s a -> s{_jTransformNameMApping = a})
 
--- | The unique ID of this job. This field is set by the Dataflow service
--- when the Job is created, and is immutable for the life of the Job.
+-- | The unique ID of this job. This field is set by the Cloud Dataflow
+-- service when the Job is created, and is immutable for the life of the
+-- job.
 jId :: Lens' Job (Maybe Text)
 jId = lens _jId (\ s a -> s{_jId = a})
 
@@ -5659,12 +5944,12 @@ jId = lens _jId (\ s a -> s{_jId = a})
 jLabels :: Lens' Job (Maybe JobLabels)
 jLabels = lens _jLabels (\ s a -> s{_jLabels = a})
 
--- | The project which owns the job.
+-- | The ID of the Cloud Platform project that the job belongs to.
 jProjectId :: Lens' Job (Maybe Text)
 jProjectId
   = lens _jProjectId (\ s a -> s{_jProjectId = a})
 
--- | The type of dataflow job.
+-- | The type of Cloud Dataflow job.
 jType :: Lens' Job (Maybe Text)
 jType = lens _jType (\ s a -> s{_jType = a})
 
@@ -5674,17 +5959,17 @@ jCurrentStateTime
   = lens _jCurrentStateTime
       (\ s a -> s{_jCurrentStateTime = a})
 
--- | If this job is an update of an existing job, this field will be the ID
--- of the job it replaced. When sending a CreateJobRequest, you can update
--- a job by specifying it here. The job named here will be stopped, and its
--- intermediate state transferred to this job.
+-- | If this job is an update of an existing job, this field is the job ID of
+-- the job it replaced. When sending a \`CreateJobRequest\`, you can update
+-- a job by specifying it here. The job named here is stopped, and its
+-- intermediate state is transferred to this job.
 jReplaceJobId :: Lens' Job (Maybe Text)
 jReplaceJobId
   = lens _jReplaceJobId
       (\ s a -> s{_jReplaceJobId = a})
 
--- | Timestamp when job was initially created. Immutable, set by the Dataflow
--- service.
+-- | The timestamp when the job was initially created. Immutable and set by
+-- the Cloud Dataflow service.
 jCreateTime :: Lens' Job (Maybe Text)
 jCreateTime
   = lens _jCreateTime (\ s a -> s{_jCreateTime = a})
@@ -5694,7 +5979,8 @@ instance FromJSON Job where
           = withObject "Job"
               (\ o ->
                  Job' <$>
-                   (o .:? "requestedState") <*> (o .:? "environment")
+                   (o .:? "requestedState") <*> (o .:? "location") <*>
+                     (o .:? "environment")
                      <*> (o .:? "clientRequestId")
                      <*> (o .:? "currentState")
                      <*> (o .:? "replacedByJobId")
@@ -5716,6 +6002,7 @@ instance ToJSON Job where
           = object
               (catMaybes
                  [("requestedState" .=) <$> _jRequestedState,
+                  ("location" .=) <$> _jLocation,
                   ("environment" .=) <$> _jEnvironment,
                   ("clientRequestId" .=) <$> _jClientRequestId,
                   ("currentState" .=) <$> _jCurrentState,
@@ -5899,10 +6186,11 @@ instance FromJSON SinkSpec where
 instance ToJSON SinkSpec where
         toJSON = toJSON . _sAddtional
 
--- | Describes one particular pool of Dataflow workers to be instantiated by
--- the Dataflow service in order to perform the computations required by a
--- job. Note that a workflow job may use multiple pools, in order to match
--- the various computational requirements of the various stages of the job.
+-- | Describes one particular pool of Cloud Dataflow workers to be
+-- instantiated by the Cloud Dataflow service in order to perform the
+-- computations required by a job. Note that a workflow job may use
+-- multiple pools, in order to match the various computational requirements
+-- of the various stages of the job.
 --
 -- /See:/ 'workerPool' smart constructor.
 data WorkerPool = WorkerPool'
@@ -6024,7 +6312,7 @@ wpDiskSizeGb
   = lens _wpDiskSizeGb (\ s a -> s{_wpDiskSizeGb = a})
       . mapping _Coerce
 
--- | The kind of the worker pool; currently only \'harness\' and \'shuffle\'
+-- | The kind of the worker pool; currently only \`harness\` and \`shuffle\`
 -- are supported.
 wpKind :: Lens' WorkerPool (Maybe Text)
 wpKind = lens _wpKind (\ s a -> s{_wpKind = a})
@@ -6106,16 +6394,17 @@ wpDiskType
   = lens _wpDiskType (\ s a -> s{_wpDiskType = a})
 
 -- | Sets the policy for determining when to turndown worker pool. Allowed
--- values are: TEARDOWN_ALWAYS, TEARDOWN_ON_SUCCESS, and TEARDOWN_NEVER.
--- TEARDOWN_ALWAYS means workers are always torn down regardless of whether
--- the job succeeds. TEARDOWN_ON_SUCCESS means workers are torn down if the
--- job succeeds. TEARDOWN_NEVER means the workers are never torn down. If
--- the workers are not torn down by the service, they will continue to run
--- and use Google Compute Engine VM resources in the user\'s project until
--- they are explicitly terminated by the user. Because of this, Google
--- recommends using the TEARDOWN_ALWAYS policy except for small, manually
--- supervised test jobs. If unknown or unspecified, the service will
--- attempt to choose a reasonable default.
+-- values are: \`TEARDOWN_ALWAYS\`, \`TEARDOWN_ON_SUCCESS\`, and
+-- \`TEARDOWN_NEVER\`. \`TEARDOWN_ALWAYS\` means workers are always torn
+-- down regardless of whether the job succeeds. \`TEARDOWN_ON_SUCCESS\`
+-- means workers are torn down if the job succeeds. \`TEARDOWN_NEVER\`
+-- means the workers are never torn down. If the workers are not torn down
+-- by the service, they will continue to run and use Google Compute Engine
+-- VM resources in the user\'s project until they are explicitly terminated
+-- by the user. Because of this, Google recommends using the
+-- \`TEARDOWN_ALWAYS\` policy except for small, manually supervised test
+-- jobs. If unknown or unspecified, the service will attempt to choose a
+-- reasonable default.
 wpTeardownPolicy :: Lens' WorkerPool (Maybe Text)
 wpTeardownPolicy
   = lens _wpTeardownPolicy
@@ -6134,8 +6423,8 @@ wpPoolArgs :: Lens' WorkerPool (Maybe WorkerPoolPoolArgs)
 wpPoolArgs
   = lens _wpPoolArgs (\ s a -> s{_wpPoolArgs = a})
 
--- | Docker container image that executes Dataflow worker harness, residing
--- in Google Container Registry. Required.
+-- | Required. Docker container image that executes the Cloud Dataflow worker
+-- harness, residing in Google Container Registry.
 wpWorkerHarnessContainerImage :: Lens' WorkerPool (Maybe Text)
 wpWorkerHarnessContainerImage
   = lens _wpWorkerHarnessContainerImage
@@ -6204,7 +6493,7 @@ instance ToJSON WorkerPool where
                     _wpWorkerHarnessContainerImage,
                   ("dataDisks" .=) <$> _wpDataDisks])
 
--- | Defines a particular step within a Dataflow job. A job consists of
+-- | Defines a particular step within a Cloud Dataflow job. A job consists of
 -- multiple steps, each of which performs some specific operation as part
 -- of the overall job. Data is typically passed from one step to another as
 -- part of the job. Here\'s an example of a sequence of steps which
@@ -6214,8 +6503,8 @@ instance ToJSON WorkerPool where
 -- value and extract an element-specific key value. * Group elements with
 -- the same key into a single element with that key, transforming a
 -- multiply-keyed collection into a uniquely-keyed collection. * Write the
--- elements out to some data sink. (Note that the Dataflow service may be
--- used to run many different types of jobs, not just Map-Reduce).
+-- elements out to some data sink. Note that the Cloud Dataflow service may
+-- be used to run many different types of jobs, not just Map-Reduce.
 --
 -- /See:/ 'step' smart constructor.
 data Step = Step'
@@ -6242,12 +6531,12 @@ step =
     , _sProperties = Nothing
     }
 
--- | The kind of step in the dataflow Job.
+-- | The kind of step in the Cloud Dataflow job.
 sKind :: Lens' Step (Maybe Text)
 sKind = lens _sKind (\ s a -> s{_sKind = a})
 
--- | Name identifying the step. This must be unique for each step with
--- respect to all other steps in the dataflow Job.
+-- | The name that identifies the step. This must be unique for each step
+-- with respect to all other steps in the Cloud Dataflow job.
 sName :: Lens' Step (Maybe Text)
 sName = lens _sName (\ s a -> s{_sName = a})
 
@@ -6272,12 +6561,13 @@ instance ToJSON Step where
                  [("kind" .=) <$> _sKind, ("name" .=) <$> _sName,
                   ("properties" .=) <$> _sProperties])
 
--- | Packages that need to be installed in order for a worker to run the
--- steps of the Dataflow job which will be assigned to its worker pool.
--- This is the mechanism by which the SDK causes code to be loaded onto the
--- workers. For example, the Dataflow Java SDK might use this to install
--- jars containing the user\'s code and all of the various dependencies
--- (libraries, data files, etc) required in order for that code to run.
+-- | The packages that must be installed in order for a worker to run the
+-- steps of the Cloud Dataflow job that will be assigned to its worker
+-- pool. This is the mechanism by which the Cloud Dataflow SDK causes code
+-- to be loaded onto the workers. For example, the Cloud Dataflow Java SDK
+-- might use this to install jars containing the user\'s code and all of
+-- the various dependencies (libraries, data files, etc.) required in order
+-- for that code to run.
 --
 -- /See:/ 'package' smart constructor.
 data Package = Package'
@@ -6538,6 +6828,29 @@ instance ToJSON SourceFork where
                   ("primary" .=) <$> _sfPrimary,
                   ("residualSource" .=) <$> _sfResidualSource])
 
+-- | Service-side response to WorkerMessage reporting resource utilization.
+--
+-- /See:/ 'resourceUtilizationReportResponse' smart constructor.
+data ResourceUtilizationReportResponse =
+    ResourceUtilizationReportResponse'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResourceUtilizationReportResponse' with the minimum fields required to make a request.
+--
+resourceUtilizationReportResponse
+    :: ResourceUtilizationReportResponse
+resourceUtilizationReportResponse = ResourceUtilizationReportResponse'
+
+instance FromJSON ResourceUtilizationReportResponse
+         where
+        parseJSON
+          = withObject "ResourceUtilizationReportResponse"
+              (\ o -> pure ResourceUtilizationReportResponse')
+
+instance ToJSON ResourceUtilizationReportResponse
+         where
+        toJSON = const emptyObject
+
 -- | Describes full or partial data disk assignment information of the
 -- computation ranges.
 --
@@ -6591,13 +6904,14 @@ instance ToJSON StreamingComputationRanges where
                  [("rangeAssignments" .=) <$> _scrRangeAssignments,
                   ("computationId" .=) <$> _scrComputationId])
 
--- | Response to a request to list Dataflow jobs. This may be a partial
+-- | Response to a request to list Cloud Dataflow jobs. This may be a partial
 -- response, depending on the page size in the ListJobsRequest.
 --
 -- /See:/ 'listJobsResponse' smart constructor.
 data ListJobsResponse = ListJobsResponse'
-    { _ljrNextPageToken :: !(Maybe Text)
-    , _ljrJobs          :: !(Maybe [Job])
+    { _ljrNextPageToken  :: !(Maybe Text)
+    , _ljrFailedLocation :: !(Maybe [FailedLocation])
+    , _ljrJobs           :: !(Maybe [Job])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListJobsResponse' with the minimum fields required to make a request.
@@ -6606,12 +6920,15 @@ data ListJobsResponse = ListJobsResponse'
 --
 -- * 'ljrNextPageToken'
 --
+-- * 'ljrFailedLocation'
+--
 -- * 'ljrJobs'
 listJobsResponse
     :: ListJobsResponse
 listJobsResponse =
     ListJobsResponse'
     { _ljrNextPageToken = Nothing
+    , _ljrFailedLocation = Nothing
     , _ljrJobs = Nothing
     }
 
@@ -6620,6 +6937,14 @@ ljrNextPageToken :: Lens' ListJobsResponse (Maybe Text)
 ljrNextPageToken
   = lens _ljrNextPageToken
       (\ s a -> s{_ljrNextPageToken = a})
+
+-- | Zero or more messages describing locations that failed to respond.
+ljrFailedLocation :: Lens' ListJobsResponse [FailedLocation]
+ljrFailedLocation
+  = lens _ljrFailedLocation
+      (\ s a -> s{_ljrFailedLocation = a})
+      . _Default
+      . _Coerce
 
 -- | A subset of the requested job information.
 ljrJobs :: Lens' ListJobsResponse [Job]
@@ -6633,13 +6958,15 @@ instance FromJSON ListJobsResponse where
               (\ o ->
                  ListJobsResponse' <$>
                    (o .:? "nextPageToken") <*>
-                     (o .:? "jobs" .!= mempty))
+                     (o .:? "failedLocation" .!= mempty)
+                     <*> (o .:? "jobs" .!= mempty))
 
 instance ToJSON ListJobsResponse where
         toJSON ListJobsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ljrNextPageToken,
+                  ("failedLocation" .=) <$> _ljrFailedLocation,
                   ("jobs" .=) <$> _ljrJobs])
 
 -- | A source that records can be read and decoded from.
@@ -6815,6 +7142,7 @@ data WorkerMessage = WorkerMessage'
     { _wmWorkerHealthReport :: !(Maybe WorkerHealthReport)
     , _wmTime               :: !(Maybe Text)
     , _wmWorkerMessageCode  :: !(Maybe WorkerMessageCode)
+    , _wmWorkerMetrics      :: !(Maybe ResourceUtilizationReport)
     , _wmLabels             :: !(Maybe WorkerMessageLabels)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6828,6 +7156,8 @@ data WorkerMessage = WorkerMessage'
 --
 -- * 'wmWorkerMessageCode'
 --
+-- * 'wmWorkerMetrics'
+--
 -- * 'wmLabels'
 workerMessage
     :: WorkerMessage
@@ -6836,6 +7166,7 @@ workerMessage =
     { _wmWorkerHealthReport = Nothing
     , _wmTime = Nothing
     , _wmWorkerMessageCode = Nothing
+    , _wmWorkerMetrics = Nothing
     , _wmLabels = Nothing
     }
 
@@ -6855,6 +7186,12 @@ wmWorkerMessageCode
   = lens _wmWorkerMessageCode
       (\ s a -> s{_wmWorkerMessageCode = a})
 
+-- | Resource metrics reported by workers.
+wmWorkerMetrics :: Lens' WorkerMessage (Maybe ResourceUtilizationReport)
+wmWorkerMetrics
+  = lens _wmWorkerMetrics
+      (\ s a -> s{_wmWorkerMetrics = a})
+
 -- | Labels are used to group WorkerMessages. For example, a worker_message
 -- about a particular container might have the labels: { \"JOB_ID\":
 -- \"2015-04-22\", \"WORKER_ID\": \"wordcount-vm-2015…\"
@@ -6872,6 +7209,7 @@ instance FromJSON WorkerMessage where
                  WorkerMessage' <$>
                    (o .:? "workerHealthReport") <*> (o .:? "time") <*>
                      (o .:? "workerMessageCode")
+                     <*> (o .:? "workerMetrics")
                      <*> (o .:? "labels"))
 
 instance ToJSON WorkerMessage where
@@ -6881,6 +7219,7 @@ instance ToJSON WorkerMessage where
                  [("workerHealthReport" .=) <$> _wmWorkerHealthReport,
                   ("time" .=) <$> _wmTime,
                   ("workerMessageCode" .=) <$> _wmWorkerMessageCode,
+                  ("workerMetrics" .=) <$> _wmWorkerMetrics,
                   ("labels" .=) <$> _wmLabels])
 
 -- | Location information for a specific key-range of a sharded computation.
@@ -7232,6 +7571,83 @@ instance ToJSON CustomSourceLocation where
         toJSON CustomSourceLocation'{..}
           = object
               (catMaybes [("stateful" .=) <$> _cslStateful])
+
+-- | A metric value representing a distribution.
+--
+-- /See:/ 'distributionUpdate' smart constructor.
+data DistributionUpdate = DistributionUpdate'
+    { _duMax          :: !(Maybe SplitInt64)
+    , _duCount        :: !(Maybe SplitInt64)
+    , _duMin          :: !(Maybe SplitInt64)
+    , _duSumOfSquares :: !(Maybe (Textual Double))
+    , _duSum          :: !(Maybe SplitInt64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DistributionUpdate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'duMax'
+--
+-- * 'duCount'
+--
+-- * 'duMin'
+--
+-- * 'duSumOfSquares'
+--
+-- * 'duSum'
+distributionUpdate
+    :: DistributionUpdate
+distributionUpdate =
+    DistributionUpdate'
+    { _duMax = Nothing
+    , _duCount = Nothing
+    , _duMin = Nothing
+    , _duSumOfSquares = Nothing
+    , _duSum = Nothing
+    }
+
+-- | The maximum value present in the distribution.
+duMax :: Lens' DistributionUpdate (Maybe SplitInt64)
+duMax = lens _duMax (\ s a -> s{_duMax = a})
+
+-- | The count of the number of elements present in the distribution.
+duCount :: Lens' DistributionUpdate (Maybe SplitInt64)
+duCount = lens _duCount (\ s a -> s{_duCount = a})
+
+-- | The minimum value present in the distribution.
+duMin :: Lens' DistributionUpdate (Maybe SplitInt64)
+duMin = lens _duMin (\ s a -> s{_duMin = a})
+
+-- | Use a double since the sum of squares is likely to overflow int64.
+duSumOfSquares :: Lens' DistributionUpdate (Maybe Double)
+duSumOfSquares
+  = lens _duSumOfSquares
+      (\ s a -> s{_duSumOfSquares = a})
+      . mapping _Coerce
+
+-- | Use an int64 since we\'d prefer the added precision. If overflow is a
+-- common problem we can detect it and use an additional int64 or a double.
+duSum :: Lens' DistributionUpdate (Maybe SplitInt64)
+duSum = lens _duSum (\ s a -> s{_duSum = a})
+
+instance FromJSON DistributionUpdate where
+        parseJSON
+          = withObject "DistributionUpdate"
+              (\ o ->
+                 DistributionUpdate' <$>
+                   (o .:? "max") <*> (o .:? "count") <*> (o .:? "min")
+                     <*> (o .:? "sumOfSquares")
+                     <*> (o .:? "sum"))
+
+instance ToJSON DistributionUpdate where
+        toJSON DistributionUpdate'{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _duMax, ("count" .=) <$> _duCount,
+                  ("min" .=) <$> _duMin,
+                  ("sumOfSquares" .=) <$> _duSumOfSquares,
+                  ("sum" .=) <$> _duSum])
 
 --
 -- /See:/ 'sourceBaseSpecsItem' smart constructor.
@@ -7681,8 +8097,8 @@ instance ToJSON SideInputInfo where
                  [("tag" .=) <$> _siiTag, ("kind" .=) <$> _siiKind,
                   ("sources" .=) <$> _siiSources])
 
--- | Additional information about how a Dataflow job will be executed which
--- isn’t contained in the submitted job.
+-- | Additional information about how a Cloud Dataflow job will be executed
+-- that isn\'t contained in the submitted job.
 --
 -- /See:/ 'jobExecutionInfo' smart constructor.
 newtype JobExecutionInfo = JobExecutionInfo'
@@ -7979,6 +8395,7 @@ data PubsubLocation = PubsubLocation'
     , _plTimestampLabel       :: !(Maybe Text)
     , _plIdLabel              :: !(Maybe Text)
     , _plTopic                :: !(Maybe Text)
+    , _plWithAttributes       :: !(Maybe Bool)
     , _plSubscription         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7996,6 +8413,8 @@ data PubsubLocation = PubsubLocation'
 --
 -- * 'plTopic'
 --
+-- * 'plWithAttributes'
+--
 -- * 'plSubscription'
 pubsubLocation
     :: PubsubLocation
@@ -8006,6 +8425,7 @@ pubsubLocation =
     , _plTimestampLabel = Nothing
     , _plIdLabel = Nothing
     , _plTopic = Nothing
+    , _plWithAttributes = Nothing
     , _plSubscription = Nothing
     }
 
@@ -8039,6 +8459,12 @@ plIdLabel
 plTopic :: Lens' PubsubLocation (Maybe Text)
 plTopic = lens _plTopic (\ s a -> s{_plTopic = a})
 
+-- | If true, then the client has requested to get pubsub attributes.
+plWithAttributes :: Lens' PubsubLocation (Maybe Bool)
+plWithAttributes
+  = lens _plWithAttributes
+      (\ s a -> s{_plWithAttributes = a})
+
 -- | A pubsub subscription, in the form of
 -- \"pubsub.googleapis.com\/subscriptions\/ \/\"
 plSubscription :: Lens' PubsubLocation (Maybe Text)
@@ -8056,6 +8482,7 @@ instance FromJSON PubsubLocation where
                      <*> (o .:? "timestampLabel")
                      <*> (o .:? "idLabel")
                      <*> (o .:? "topic")
+                     <*> (o .:? "withAttributes")
                      <*> (o .:? "subscription"))
 
 instance ToJSON PubsubLocation where
@@ -8068,6 +8495,7 @@ instance ToJSON PubsubLocation where
                   ("timestampLabel" .=) <$> _plTimestampLabel,
                   ("idLabel" .=) <$> _plIdLabel,
                   ("topic" .=) <$> _plTopic,
+                  ("withAttributes" .=) <$> _plWithAttributes,
                   ("subscription" .=) <$> _plSubscription])
 
 -- | A metric value representing a list of floating point numbers.

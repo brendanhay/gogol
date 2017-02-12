@@ -54,11 +54,20 @@ module Network.Google.Container
     -- ** container.projects.zones.clusters.nodePools.list
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.List
 
+    -- ** container.projects.zones.clusters.nodePools.rollback
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Rollback
+
+    -- ** container.projects.zones.clusters.nodePools.setManagement
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.SetManagement
+
     -- ** container.projects.zones.clusters.update
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.Update
 
     -- ** container.projects.zones.getServerconfig
     , module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
+
+    -- ** container.projects.zones.operations.cancel
+    , module Network.Google.Resource.Container.Projects.Zones.Operations.Cancel
 
     -- ** container.projects.zones.operations.get
     , module Network.Google.Resource.Container.Projects.Zones.Operations.Get
@@ -89,6 +98,7 @@ module Network.Google.Container
     , cluster
     , cStatus
     , cNodePools
+    , cEnableKubernetesAlpha
     , cNodeConfig
     , cNodeIPv4CIdRSize
     , cClusterIPv4CIdR
@@ -107,12 +117,17 @@ module Network.Google.Container
     , cSubnetwork
     , cCurrentNodeCount
     , cEndpoint
+    , cExpireTime
     , cLocations
     , cLoggingService
     , cDescription
     , cInstanceGroupURLs
     , cMonitoringService
     , cCreateTime
+
+    -- ** CancelOperationRequest
+    , CancelOperationRequest
+    , cancelOperationRequest
 
     -- ** UpdateClusterRequest
     , UpdateClusterRequest
@@ -122,10 +137,16 @@ module Network.Google.Container
     -- ** NodeConfig
     , NodeConfig
     , nodeConfig
+    , ncLocalSsdCount
     , ncDiskSizeGb
     , ncOAuthScopes
+    , ncServiceAccount
+    , ncImageType
     , ncMachineType
     , ncMetadata
+    , ncLabels
+    , ncTags
+    , ncPreemptible
 
     -- ** HTTPLoadBalancing
     , HTTPLoadBalancing
@@ -144,6 +165,23 @@ module Network.Google.Container
     , oTargetLink
     , oDetail
 
+    -- ** Empty
+    , Empty
+    , empty
+
+    -- ** NodeManagement
+    , NodeManagement
+    , nodeManagement
+    , nmAutoUpgrade
+    , nmUpgradeOptions
+
+    -- ** NodePoolAutoscaling
+    , NodePoolAutoscaling
+    , nodePoolAutoscaling
+    , npaMaxNodeCount
+    , npaEnabled
+    , npaMinNodeCount
+
     -- ** AddonsConfig
     , AddonsConfig
     , addonsConfig
@@ -154,13 +192,20 @@ module Network.Google.Container
     , NodePool
     , nodePool
     , npStatus
+    , npAutoscaling
     , npConfig
     , npInitialNodeCount
+    , npManagement
     , npSelfLink
     , npName
     , npStatusMessage
     , npVersion
     , npInstanceGroupURLs
+
+    -- ** SetNodePoolManagementRequest
+    , SetNodePoolManagementRequest
+    , setNodePoolManagementRequest
+    , snpmrManagement
 
     -- ** MasterAuth
     , MasterAuth
@@ -176,13 +221,25 @@ module Network.Google.Container
     , nodeConfigMetadata
     , ncmAddtional
 
+    -- ** NodeConfigLabels
+    , NodeConfigLabels
+    , nodeConfigLabels
+    , nclAddtional
+
     -- ** ServerConfig
     , ServerConfig
     , serverConfig
+    , scDefaultImageType
     , scValidNodeVersions
-    , scDefaultImageFamily
-    , scValidImageFamilies
+    , scValidImageTypes
     , scDefaultClusterVersion
+    , scValidMasterVersions
+
+    -- ** AutoUpgradeOptions
+    , AutoUpgradeOptions
+    , autoUpgradeOptions
+    , auoAutoUpgradeStartTime
+    , auoDescription
 
     -- ** ListClustersResponse
     , ListClustersResponse
@@ -193,11 +250,18 @@ module Network.Google.Container
     -- ** ClusterUpdate
     , ClusterUpdate
     , clusterUpdate
+    , cuDesiredNodePoolAutoscaling
     , cuDesiredAddonsConfig
     , cuDesiredNodePoolId
+    , cuDesiredImageType
     , cuDesiredNodeVersion
     , cuDesiredMasterVersion
+    , cuDesiredLocations
     , cuDesiredMonitoringService
+
+    -- ** RollbackNodePoolUpgradeRequest
+    , RollbackNodePoolUpgradeRequest
+    , rollbackNodePoolUpgradeRequest
 
     -- ** ListNodePoolsResponse
     , ListNodePoolsResponse
@@ -220,8 +284,11 @@ import           Network.Google.Resource.Container.Projects.Zones.Clusters.NodeP
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Delete
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.List
+import           Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Rollback
+import           Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.SetManagement
 import           Network.Google.Resource.Container.Projects.Zones.Clusters.Update
 import           Network.Google.Resource.Container.Projects.Zones.GetServerConfig
+import           Network.Google.Resource.Container.Projects.Zones.Operations.Cancel
 import           Network.Google.Resource.Container.Projects.Zones.Operations.Get
 import           Network.Google.Resource.Container.Projects.Zones.Operations.List
 
@@ -233,8 +300,12 @@ TODO
 type ContainerAPI =
      ProjectsZonesOperationsListResource :<|>
        ProjectsZonesOperationsGetResource
+       :<|> ProjectsZonesOperationsCancelResource
        :<|> ProjectsZonesClustersNodePoolsListResource
        :<|> ProjectsZonesClustersNodePoolsGetResource
+       :<|> ProjectsZonesClustersNodePoolsRollbackResource
+       :<|>
+       ProjectsZonesClustersNodePoolsSetManagementResource
        :<|> ProjectsZonesClustersNodePoolsCreateResource
        :<|> ProjectsZonesClustersNodePoolsDeleteResource
        :<|> ProjectsZonesClustersListResource

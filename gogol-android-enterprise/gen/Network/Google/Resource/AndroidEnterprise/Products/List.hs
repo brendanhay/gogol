@@ -115,7 +115,7 @@ plEnterpriseId
 plToken :: Lens' ProductsList (Maybe Text)
 plToken = lens _plToken (\ s a -> s{_plToken = a})
 
--- | The search query as typed in the Google Play Store search box. If
+-- | The search query as typed in the Google Play store search box. If
 -- omitted, all approved apps will be returned (using the pagination
 -- parameters), including apps that are not available in the store (e.g.
 -- unpublished apps).

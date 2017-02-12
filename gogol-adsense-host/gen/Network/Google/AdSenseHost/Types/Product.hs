@@ -1210,8 +1210,8 @@ adStyle =
     , _assColors = Nothing
     }
 
--- | The style of the corners in the ad. Possible values are SQUARE,
--- SLIGHTLY_ROUNDED and VERY_ROUNDED.
+-- | The style of the corners in the ad (deprecated: never populated,
+-- ignored).
 assCorners :: Lens' AdStyle (Maybe Text)
 assCorners
   = lens _assCorners (\ s a -> s{_assCorners = a})

@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a log and all its log entries. The log will reappear if it
--- receives new entries.
+-- Deletes all the log entries in a log. The log reappears if it receives
+-- new entries.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Stackdriver Logging API Reference> for @logging.projects.logs.delete@.
 module Network.Google.Resource.Logging.Projects.Logs.Delete
@@ -61,8 +61,8 @@ type ProjectsLogsDeleteResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a log and all its log entries. The log will reappear if it
--- receives new entries.
+-- | Deletes all the log entries in a log. The log reappears if it receives
+-- new entries.
 --
 -- /See:/ 'projectsLogsDelete' smart constructor.
 data ProjectsLogsDelete = ProjectsLogsDelete'
@@ -142,8 +142,12 @@ pldBearerToken
   = lens _pldBearerToken
       (\ s a -> s{_pldBearerToken = a})
 
--- | Required. The resource name of the log to delete. Example:
--- \`\"projects\/my-project\/logs\/syslog\"\`.
+-- | Required. The resource name of the log to delete:
+-- \"projects\/[PROJECT_ID]\/logs\/[LOG_ID]\"
+-- \"organizations\/[ORGANIZATION_ID]\/logs\/[LOG_ID]\" [LOG_ID] must be
+-- URL-encoded. For example, \"projects\/my-project-id\/logs\/syslog\",
+-- \"organizations\/1234567890\/logs\/cloudresourcemanager.googleapis.com%2Factivity\".
+-- For more information about log names, see LogEntry.
 pldLogName :: Lens' ProjectsLogsDelete Text
 pldLogName
   = lens _pldLogName (\ s a -> s{_pldLogName = a})

@@ -79,6 +79,7 @@ instance GoogleRequest UsersGetProFile where
         type Scopes UsersGetProFile =
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.compose",
+               "https://www.googleapis.com/auth/gmail.metadata",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
         requestClient UsersGetProFile'{..}

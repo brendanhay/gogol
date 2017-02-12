@@ -25,7 +25,7 @@
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 -- This method supports patch semantics.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.callsets.patch@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.callsets.patch@.
 module Network.Google.Resource.Genomics.CallSets.Patch
     (
     -- * REST Resource
@@ -57,9 +57,9 @@ type CallSetsPatchResource =
      "v1" :>
        "callsets" :>
          Capture "callSetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "updateMask" Text :>
+               QueryParam "updateMask" FieldMask :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
@@ -75,9 +75,9 @@ type CallSetsPatchResource =
 --
 -- /See:/ 'callSetsPatch' smart constructor.
 data CallSetsPatch = CallSetsPatch'
-    { _cspXgafv          :: !(Maybe Text)
+    { _cspXgafv          :: !(Maybe Xgafv)
     , _cspUploadProtocol :: !(Maybe Text)
-    , _cspUpdateMask     :: !(Maybe Text)
+    , _cspUpdateMask     :: !(Maybe FieldMask)
     , _cspPp             :: !Bool
     , _cspAccessToken    :: !(Maybe Text)
     , _cspUploadType     :: !(Maybe Text)
@@ -129,7 +129,7 @@ callSetsPatch pCspPayload_ pCspCallSetId_ =
     }
 
 -- | V1 error format.
-cspXgafv :: Lens' CallSetsPatch (Maybe Text)
+cspXgafv :: Lens' CallSetsPatch (Maybe Xgafv)
 cspXgafv = lens _cspXgafv (\ s a -> s{_cspXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -141,7 +141,7 @@ cspUploadProtocol
 -- | An optional mask specifying which fields to update. At this time, the
 -- only mutable field is name. The only acceptable value is \"name\". If
 -- unspecified, all mutable fields will be updated.
-cspUpdateMask :: Lens' CallSetsPatch (Maybe Text)
+cspUpdateMask :: Lens' CallSetsPatch (Maybe FieldMask)
 cspUpdateMask
   = lens _cspUpdateMask
       (\ s a -> s{_cspUpdateMask = a})

@@ -49,20 +49,20 @@ instance FromJSON LogMetricVersion where
 instance ToJSON LogMetricVersion where
     toJSON = toJSONText
 
--- | Optional. The log entry version to use for this sink\'s exported log
--- entries. This version does not have to correspond to the version of the
--- log entry that was written to Stackdriver Logging. If omitted, the v2
--- format is used.
+-- | Optional. The log entry format to use for this sink\'s exported log
+-- entries. The v2 format is used by default. The v1 format is deprecated
+-- and should be used only as part of a migration effort to v2. See
+-- Migration to the v2 API.
 data LogSinkOutputVersionFormat
     = LSOVFVersionFormatUnspecified
       -- ^ @VERSION_FORMAT_UNSPECIFIED@
-      -- An unspecified version format will default to V2.
+      -- An unspecified format version that will default to V2.
     | LSOVFV2
       -- ^ @V2@
-      -- \`LogEntry\` version 2 format.
+      -- LogEntry version 2 format.
     | LSOVFV1
       -- ^ @V1@
-      -- \`LogEntry\` version 1 format.
+      -- LogEntry version 1 format.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LogSinkOutputVersionFormat
@@ -150,7 +150,7 @@ instance ToJSON Xgafv where
     toJSON = toJSONText
 
 -- | Optional. The severity of the log entry. The default value is
--- \`LogSeverity.DEFAULT\`.
+-- LogSeverity.DEFAULT.
 data LogEntrySeverity
     = Default
       -- ^ @DEFAULT@

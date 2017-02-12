@@ -180,7 +180,7 @@ asvigBearerToken
       (\ s a -> s{_asvigBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1\`.
+-- apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1.
 asvigAppsId :: Lens' AppsServicesVersionsInstancesGet Text
 asvigAppsId
   = lens _asvigAppsId (\ s a -> s{_asvigAppsId = a})
@@ -201,7 +201,9 @@ instance GoogleRequest
          AppsServicesVersionsInstancesGet where
         type Rs AppsServicesVersionsInstancesGet = Instance
         type Scopes AppsServicesVersionsInstancesGet =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsServicesVersionsInstancesGet'{..}
           = go _asvigAppsId _asvigServicesId _asvigVersionsId
               _asvigInstancesId

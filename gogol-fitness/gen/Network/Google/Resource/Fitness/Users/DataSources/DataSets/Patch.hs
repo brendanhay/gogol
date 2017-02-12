@@ -144,9 +144,14 @@ instance GoogleRequest UsersDataSourcesDataSetsPatch
         type Rs UsersDataSourcesDataSetsPatch = DataSet
         type Scopes UsersDataSourcesDataSetsPatch =
              '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.blood_glucose.write",
+               "https://www.googleapis.com/auth/fitness.blood_pressure.write",
                "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.body_temperature.write",
                "https://www.googleapis.com/auth/fitness.location.write",
-               "https://www.googleapis.com/auth/fitness.nutrition.write"]
+               "https://www.googleapis.com/auth/fitness.nutrition.write",
+               "https://www.googleapis.com/auth/fitness.oxygen_saturation.write",
+               "https://www.googleapis.com/auth/fitness.reproductive_health.write"]
         requestClient UsersDataSourcesDataSetsPatch'{..}
           = go _udsdspUserId _udsdspDataSourceId
               _udsdspDataSetId

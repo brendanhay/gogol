@@ -26,7 +26,7 @@
 -- Implements
 -- [GlobalAllianceApi.getReference](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L158).
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.references.get@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.references.get@.
 module Network.Google.Resource.Genomics.References.Get
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type ReferencesGetResource =
      "v1" :>
        "references" :>
          Capture "referenceId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -73,7 +73,7 @@ type ReferencesGetResource =
 --
 -- /See:/ 'referencesGet' smart constructor.
 data ReferencesGet = ReferencesGet'
-    { _rXgafv          :: !(Maybe Text)
+    { _rXgafv          :: !(Maybe Xgafv)
     , _rUploadProtocol :: !(Maybe Text)
     , _rPp             :: !Bool
     , _rAccessToken    :: !(Maybe Text)
@@ -118,7 +118,7 @@ referencesGet pRReferenceId_ =
     }
 
 -- | V1 error format.
-rXgafv :: Lens' ReferencesGet (Maybe Text)
+rXgafv :: Lens' ReferencesGet (Maybe Xgafv)
 rXgafv = lens _rXgafv (\ s a -> s{_rXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

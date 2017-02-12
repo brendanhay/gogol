@@ -248,59 +248,6 @@ instance ToJSON EnterpriseAccount where
                  [Just ("kind" .= _eaKind),
                   ("accountEmail" .=) <$> _eaAccountEmail])
 
--- | The collection resources for the enterprise.
---
--- /See:/ 'collectionsListResponse' smart constructor.
-data CollectionsListResponse = CollectionsListResponse'
-    { _clrKind       :: !Text
-    , _clrCollection :: !(Maybe [Collection])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CollectionsListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'clrKind'
---
--- * 'clrCollection'
-collectionsListResponse
-    :: CollectionsListResponse
-collectionsListResponse =
-    CollectionsListResponse'
-    { _clrKind = "androidenterprise#collectionsListResponse"
-    , _clrCollection = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#collectionsListResponse\".
-clrKind :: Lens' CollectionsListResponse Text
-clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
-
--- | An ordered collection of products which can be made visible on the
--- Google Play Store to a selected group of users.
-clrCollection :: Lens' CollectionsListResponse [Collection]
-clrCollection
-  = lens _clrCollection
-      (\ s a -> s{_clrCollection = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON CollectionsListResponse where
-        parseJSON
-          = withObject "CollectionsListResponse"
-              (\ o ->
-                 CollectionsListResponse' <$>
-                   (o .:? "kind" .!=
-                      "androidenterprise#collectionsListResponse")
-                     <*> (o .:? "collection" .!= mempty))
-
-instance ToJSON CollectionsListResponse where
-        toJSON CollectionsListResponse'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _clrKind),
-                  ("collection" .=) <$> _clrCollection])
-
 -- | A typed value for the restriction.
 --
 -- /See:/ 'appRestrictionsSchemaRestrictionRestrictionValue' smart constructor.
@@ -841,7 +788,7 @@ instance ToJSON ManagedConfiguration where
                   Just ("kind" .= _mcKind),
                   ("productId" .=) <$> _mcProductId])
 
--- | Definition of a Google Play for Work store cluster, a list of products
+-- | Definition of a managed Google Play store cluster, a list of products
 -- displayed as part of a store page.
 --
 -- /See:/ 'storeCluster' smart constructor.
@@ -976,7 +923,8 @@ awtsKind = lens _awtsKind (\ s a -> s{_awtsKind = a})
 
 -- | The list of permissions the admin is granted within the iframe. The
 -- admin will only be allowed to view an iframe if they have all of the
--- permissions associated with it.
+-- permissions associated with it. The only valid value is \"approveApps\"
+-- that will allow the admin to access the iframe in \"approve\" mode.
 awtsPermission :: Lens' AdministratorWebTokenSpec [Text]
 awtsPermission
   = lens _awtsPermission
@@ -1013,6 +961,7 @@ data Notification = Notification'
     , _nAppUpdateEvent                   :: !(Maybe AppUpdateEvent)
     , _nInstallFailureEvent              :: !(Maybe InstallFailureEvent)
     , _nAppRestrictionsSchemaChangeEvent :: !(Maybe AppRestrictionsSchemaChangeEvent)
+    , _nNewDeviceEvent                   :: !(Maybe NewDeviceEvent)
     , _nTimestampMillis                  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1034,6 +983,8 @@ data Notification = Notification'
 --
 -- * 'nAppRestrictionsSchemaChangeEvent'
 --
+-- * 'nNewDeviceEvent'
+--
 -- * 'nTimestampMillis'
 notification
     :: Notification
@@ -1046,6 +997,7 @@ notification =
     , _nAppUpdateEvent = Nothing
     , _nInstallFailureEvent = Nothing
     , _nAppRestrictionsSchemaChangeEvent = Nothing
+    , _nNewDeviceEvent = Nothing
     , _nTimestampMillis = Nothing
     }
 
@@ -1092,6 +1044,12 @@ nAppRestrictionsSchemaChangeEvent
   = lens _nAppRestrictionsSchemaChangeEvent
       (\ s a -> s{_nAppRestrictionsSchemaChangeEvent = a})
 
+-- | Notifications about new devices.
+nNewDeviceEvent :: Lens' Notification (Maybe NewDeviceEvent)
+nNewDeviceEvent
+  = lens _nNewDeviceEvent
+      (\ s a -> s{_nNewDeviceEvent = a})
+
 -- | The time when the notification was published in milliseconds since
 -- 1970-01-01T00:00:00Z. This will always be present.
 nTimestampMillis :: Lens' Notification (Maybe Int64)
@@ -1112,6 +1070,7 @@ instance FromJSON Notification where
                      <*> (o .:? "appUpdateEvent")
                      <*> (o .:? "installFailureEvent")
                      <*> (o .:? "appRestrictionsSchemaChangeEvent")
+                     <*> (o .:? "newDeviceEvent")
                      <*> (o .:? "timestampMillis"))
 
 instance ToJSON Notification where
@@ -1128,6 +1087,7 @@ instance ToJSON Notification where
                   ("installFailureEvent" .=) <$> _nInstallFailureEvent,
                   ("appRestrictionsSchemaChangeEvent" .=) <$>
                     _nAppRestrictionsSchemaChangeEvent,
+                  ("newDeviceEvent" .=) <$> _nNewDeviceEvent,
                   ("timestampMillis" .=) <$> _nTimestampMillis])
 
 --
@@ -1448,17 +1408,17 @@ device =
 dKind :: Lens' Device Text
 dKind = lens _dKind (\ s a -> s{_dKind = a})
 
--- | Identifies the extent to which the device is controlled by an Android
--- for Work EMM in various deployment configurations. Possible values
+-- | Identifies the extent to which the device is controlled by a managed
+-- Google Play EMM in various deployment configurations. Possible values
 -- include: - \"managedDevice\", a device that has the EMM\'s device policy
 -- controller (DPC) as the device owner, - \"managedProfile\", a device
--- that has a work profile managed by the DPC (DPC is profile owner) in
--- addition to a separate, personal profile that is unavailable to the DPC,
--- - \"containerApp\", a device running the Android for Work App. The
--- Android for Work App is managed by the DPC, - \"unmanagedProfile\", a
--- device that has been allowed (by the domain\'s admin, using the Admin
--- Console to enable the privilege) to use Android for Work apps or Google
--- Apps for Work, but the profile is itself not owned by a DPC.
+-- that has a profile managed by the DPC (DPC is profile owner) in addition
+-- to a separate, personal profile that is unavailable to the DPC, -
+-- \"containerApp\", a device running the container App. The container App
+-- is managed by the DPC, - \"unmanagedProfile\", a device that has been
+-- allowed (by the domain\'s admin, using the Admin Console to enable the
+-- privilege) to use managed Google Play, but the profile is itself not
+-- owned by a DPC.
 dManagementType :: Lens' Device (Maybe Text)
 dManagementType
   = lens _dManagementType
@@ -1491,10 +1451,11 @@ instance ToJSON Device where
 --
 -- /See:/ 'serviceAccountKey' smart constructor.
 data ServiceAccountKey = ServiceAccountKey'
-    { _sakKind :: !Text
-    , _sakData :: !(Maybe Text)
-    , _sakId   :: !(Maybe Text)
-    , _sakType :: !(Maybe Text)
+    { _sakKind       :: !Text
+    , _sakData       :: !(Maybe Text)
+    , _sakId         :: !(Maybe Text)
+    , _sakType       :: !(Maybe Text)
+    , _sakPublicData :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ServiceAccountKey' with the minimum fields required to make a request.
@@ -1508,6 +1469,8 @@ data ServiceAccountKey = ServiceAccountKey'
 -- * 'sakId'
 --
 -- * 'sakType'
+--
+-- * 'sakPublicData'
 serviceAccountKey
     :: ServiceAccountKey
 serviceAccountKey =
@@ -1516,6 +1479,7 @@ serviceAccountKey =
     , _sakData = Nothing
     , _sakId = Nothing
     , _sakType = Nothing
+    , _sakPublicData = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
@@ -1538,6 +1502,15 @@ sakId = lens _sakId (\ s a -> s{_sakId = a})
 sakType :: Lens' ServiceAccountKey (Maybe Text)
 sakType = lens _sakType (\ s a -> s{_sakType = a})
 
+-- | Public key data for the credentials file. This is an X.509 cert. If you
+-- are using the googleCredentials key type, this is identical to the cert
+-- that can be retrieved by using the X.509 cert url inside of the
+-- credentials file.
+sakPublicData :: Lens' ServiceAccountKey (Maybe Text)
+sakPublicData
+  = lens _sakPublicData
+      (\ s a -> s{_sakPublicData = a})
+
 instance FromJSON ServiceAccountKey where
         parseJSON
           = withObject "ServiceAccountKey"
@@ -1547,14 +1520,16 @@ instance FromJSON ServiceAccountKey where
                       "androidenterprise#serviceAccountKey")
                      <*> (o .:? "data")
                      <*> (o .:? "id")
-                     <*> (o .:? "type"))
+                     <*> (o .:? "type")
+                     <*> (o .:? "publicData"))
 
 instance ToJSON ServiceAccountKey where
         toJSON ServiceAccountKey'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _sakKind), ("data" .=) <$> _sakData,
-                  ("id" .=) <$> _sakId, ("type" .=) <$> _sakType])
+                  ("id" .=) <$> _sakId, ("type" .=) <$> _sakType,
+                  ("publicData" .=) <$> _sakPublicData])
 
 -- | The install resources for the device.
 --
@@ -1743,8 +1718,8 @@ instance ToJSON AppRestrictionsSchemaRestriction
                   ("description" .=) <$> _arsrDescription,
                   ("nestedRestriction" .=) <$> _arsrNestedRestriction])
 
--- | This represents an enterprise administrator who can manage the
--- enterprise in the Google Play for Work Store.
+-- | This represents an enterprise admin who can manage the enterprise in the
+-- managed Google Play store.
 --
 -- /See:/ 'administrator' smart constructor.
 newtype Administrator = Administrator'
@@ -1763,7 +1738,7 @@ administrator =
     { _aEmail = Nothing
     }
 
--- | The administrator\'s email address.
+-- | The admin\'s email address.
 aEmail :: Lens' Administrator (Maybe Text)
 aEmail = lens _aEmail (\ s a -> s{_aEmail = a})
 
@@ -1907,7 +1882,7 @@ avVersionCode
       (\ s a -> s{_avVersionCode = a})
       . mapping _Coerce
 
--- | The string used in the Play Store by the app developer to identify the
+-- | The string used in the Play store by the app developer to identify the
 -- version. The string is not necessarily unique or localized (for example,
 -- the string could be \"1.4\").
 avVersionString :: Lens' AppVersion (Maybe Text)
@@ -2021,107 +1996,6 @@ instance ToJSON GroupLicensesListResponse where
                  [("groupLicense" .=) <$> _gllrGroupLicense,
                   Just ("kind" .= _gllrKind)])
 
--- | A collection resource defines a named set of apps that is visible to a
--- set of users in the Google Play Store app running on those users\'
--- managed devices. Those users can then install any of those apps if they
--- wish (which will trigger creation of install and entitlement resources).
--- A user cannot install an app on a managed device unless the app is
--- listed in at least one collection that is visible to that user. Note
--- that the API can be used to directly install an app regardless of
--- whether it is in any collection - so an enterprise has a choice of
--- either directly pushing apps to users, or allowing users to install apps
--- if they want. Which is appropriate will depend on the enterprise\'s
--- policies and the purpose of the apps concerned.
---
--- /See:/ 'collection' smart constructor.
-data Collection = Collection'
-    { _colKind         :: !Text
-    , _colCollectionId :: !(Maybe Text)
-    , _colVisibility   :: !(Maybe Text)
-    , _colName         :: !(Maybe Text)
-    , _colProductId    :: !(Maybe [Text])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Collection' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'colKind'
---
--- * 'colCollectionId'
---
--- * 'colVisibility'
---
--- * 'colName'
---
--- * 'colProductId'
-collection
-    :: Collection
-collection =
-    Collection'
-    { _colKind = "androidenterprise#collection"
-    , _colCollectionId = Nothing
-    , _colVisibility = Nothing
-    , _colName = Nothing
-    , _colProductId = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#collection\".
-colKind :: Lens' Collection Text
-colKind = lens _colKind (\ s a -> s{_colKind = a})
-
--- | Arbitrary unique ID, allocated by the API on creation.
-colCollectionId :: Lens' Collection (Maybe Text)
-colCollectionId
-  = lens _colCollectionId
-      (\ s a -> s{_colCollectionId = a})
-
--- | Whether this collection is visible to all users, or only to the users
--- that have been granted access through the \"Collectionviewers\" API.
--- With the launch of the \"setAvailableProductSet\" API, this property
--- should always be set to \"viewersOnly\", as the \"allUsers\" option will
--- bypass the \"availableProductSet\" for all users within a domain. The
--- \"allUsers\" setting is deprecated, and will be removed.
-colVisibility :: Lens' Collection (Maybe Text)
-colVisibility
-  = lens _colVisibility
-      (\ s a -> s{_colVisibility = a})
-
--- | A user-friendly name for the collection (should be unique), e.g.
--- \"Accounting apps\".
-colName :: Lens' Collection (Maybe Text)
-colName = lens _colName (\ s a -> s{_colName = a})
-
--- | The IDs of the products in the collection, in the order in which they
--- should be displayed.
-colProductId :: Lens' Collection [Text]
-colProductId
-  = lens _colProductId (\ s a -> s{_colProductId = a})
-      . _Default
-      . _Coerce
-
-instance FromJSON Collection where
-        parseJSON
-          = withObject "Collection"
-              (\ o ->
-                 Collection' <$>
-                   (o .:? "kind" .!= "androidenterprise#collection") <*>
-                     (o .:? "collectionId")
-                     <*> (o .:? "visibility")
-                     <*> (o .:? "name")
-                     <*> (o .:? "productId" .!= mempty))
-
-instance ToJSON Collection where
-        toJSON Collection'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _colKind),
-                  ("collectionId" .=) <$> _colCollectionId,
-                  ("visibility" .=) <$> _colVisibility,
-                  ("name" .=) <$> _colName,
-                  ("productId" .=) <$> _colProductId])
-
 -- | A set of products.
 --
 -- /See:/ 'productSet' smart constructor.
@@ -2157,8 +2031,10 @@ psKind = lens _psKind (\ s a -> s{_psKind = a})
 -- | The interpretation of this product set. \"unknown\" should never be sent
 -- and ignored if received. \"whitelist\" means that this product set
 -- constitutes a whitelist. \"includeAll\" means that all products are
--- accessible (the value of the productId field is therefore ignored). If a
--- value is not supplied, it is interpreted to be \"whitelist\" for
+-- accessible, including products that are approved, not approved, and even
+-- products where approval has been revoked. If the value is
+-- \"includeAll\", the value of the productId field is therefore ignored.
+-- If a value is not supplied, it is interpreted to be \"whitelist\" for
 -- backwards compatibility.
 psProductSetBehavior :: Lens' ProductSet (Maybe Text)
 psProductSetBehavior
@@ -2328,12 +2204,13 @@ instance ToJSON ServiceAccountKeysListResponse where
 -- | A Users resource represents an account associated with an enterprise.
 -- The account may be specific to a device or to an individual user (who
 -- can then use the account across multiple devices). The account may
--- provide access to Google Play for Work only, or to other Google
--- services, depending on the identity model: - Google managed domain
--- identity model requires synchronization to Google account sources (via
--- primaryEmail). - Android for Work Accounts identity model provides a
--- dynamic means for enterprises to create user or device accounts as
--- needed. These accounts provide access to Google Play for Work only.
+-- provide access to managed Google Play only, or to other Google services,
+-- depending on the identity model: - The Google managed domain identity
+-- model requires synchronization to Google account sources (via
+-- primaryEmail). - The managed Google Play Accounts identity model
+-- provides a dynamic means for enterprises to create user or device
+-- accounts as needed. These accounts provide access to managed Google
+-- Play.
 --
 -- /See:/ 'user' smart constructor.
 data User = User'
@@ -2554,9 +2431,9 @@ instance ToJSON ProductsGenerateApprovalURLResponse
         toJSON ProductsGenerateApprovalURLResponse'{..}
           = object (catMaybes [("url" .=) <$> _pgaurURL])
 
--- | Definition of a Google Play for Work store page, made of a localized
--- name and links to other pages. A page also contains clusters defined as
--- a subcollection.
+-- | Definition of a managed Google Play store page, made of a localized name
+-- and links to other pages. A page also contains clusters defined as a
+-- subcollection.
 --
 -- /See:/ 'storePage' smart constructor.
 data StorePage = StorePage'
@@ -3001,9 +2878,9 @@ instance ToJSON LocalizedText where
                   ("locale" .=) <$> _ltLocale])
 
 -- | A UserToken is used by a user when setting up a managed device or
--- profile with their work account on a device. When the user enters their
--- email address and token (activation code) the appropriate EMM app can be
--- automatically downloaded.
+-- profile with their managed Google Play account on a device. When the
+-- user enters their email address and token (activation code) the
+-- appropriate EMM app can be automatically downloaded.
 --
 -- /See:/ 'userToken' smart constructor.
 data UserToken = UserToken'
@@ -3117,12 +2994,13 @@ instance ToJSON DevicesListResponse where
 -- customers, the process involves using Enterprises.enroll and
 -- Enterprises.setAccount (in conjunction with artifacts obtained from the
 -- Admin console and the Google API Console) and submitted to the EMM
--- through a more-or-less manual process. - For Android for Work Accounts
--- customers, the process involves using Enterprises.generateSignupUrl and
--- Enterprises.completeSignup in conjunction with the Android for Work
--- Sign-up UI (Google-provided mechanism) to create the binding without
--- manual steps. As an EMM, you can support either or both approaches in
--- your EMM console. See Create an Enterprise for details.
+-- through a more-or-less manual process. - For managed Google Play
+-- Accounts customers, the process involves using
+-- Enterprises.generateSignupUrl and Enterprises.completeSignup in
+-- conjunction with the managed Google Play sign-up UI (Google-provided
+-- mechanism) to create the binding without manual steps. As an EMM, you
+-- can support either or both approaches in your EMM console. See Create an
+-- Enterprise for details.
 --
 -- /See:/ 'enterprise' smart constructor.
 data Enterprise = Enterprise'
@@ -3162,8 +3040,8 @@ enterprise =
 eKind :: Lens' Enterprise Text
 eKind = lens _eKind (\ s a -> s{_eKind = a})
 
--- | Administrators of the enterprise. This is only supported for enterprises
--- created via the EMM-initiated flow.
+-- | Admins of the enterprise. This is only supported for enterprises created
+-- via the EMM-initiated flow.
 eAdministrator :: Lens' Enterprise [Administrator]
 eAdministrator
   = lens _eAdministrator
@@ -3346,8 +3224,8 @@ instance ToJSON
                     _mcfulrManagedConfigurationForUser,
                   Just ("kind" .= _mcfulrKind)])
 
--- | General setting for the Google Play for Work store layout, currently
--- only specifying the page to display the first time the store is opened.
+-- | General setting for the managed Google Play store layout, currently only
+-- specifying the page to display the first time the store is opened.
 --
 -- /See:/ 'storeLayout' smart constructor.
 data StoreLayout = StoreLayout'
@@ -3374,13 +3252,14 @@ storeLayout =
     , _slHomepageId = Nothing
     }
 
--- | Sets a store layout type. If set to \"custom\", \"homepageId\" must be
--- specified. If set to \"basic\", the layout will consist of all approved
--- apps accessible by the user, split in pages of 100 each; in this case,
--- \"homepageId\" must not be specified. The \"basic\" setting takes
--- precedence over any existing collections setup for this enterprise (if
--- any). Should the enterprise use collectionViewers for controlling access
--- rights, these will still be respected.
+-- | The store layout type. By default, this value is set to \"basic\". If
+-- set to \"custom\", \"homepageId\" must be specified. If set to
+-- \"basic\", the layout will consist of all approved apps accessible by
+-- the user, split in pages of 100 each; in this case, \"homepageId\" must
+-- not be specified. The \"basic\" setting takes precedence over any
+-- existing collections setup for this enterprise (if any). Should the
+-- enterprise use collectionViewers for controlling access rights, these
+-- will still be respected.
 slStoreLayoutType :: Lens' StoreLayout (Maybe Text)
 slStoreLayoutType
   = lens _slStoreLayoutType
@@ -3392,7 +3271,7 @@ slKind :: Lens' StoreLayout Text
 slKind = lens _slKind (\ s a -> s{_slKind = a})
 
 -- | The ID of the store page to be used as the homepage. The homepage will
--- be used as the first page shown in the Google Play for Work store. If a
+-- be used as the first page shown in the managed Google Play store. If a
 -- homepage has not been set, the Play store shown on devices will be
 -- empty. Not specifying a homepage on a store layout effectively empties
 -- the store. If there exists at least one page, this field must be set to
@@ -3460,7 +3339,71 @@ instance ToJSON AppRestrictionsSchemaChangeEvent
           = object
               (catMaybes [("productId" .=) <$> _arsceProductId])
 
--- | A token authorizing an administrator to access an iframe.
+-- | An event generated when a new device is ready to be managed.
+--
+-- /See:/ 'newDeviceEvent' smart constructor.
+data NewDeviceEvent = NewDeviceEvent'
+    { _ndeUserId         :: !(Maybe Text)
+    , _ndeDeviceId       :: !(Maybe Text)
+    , _ndeManagementType :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NewDeviceEvent' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ndeUserId'
+--
+-- * 'ndeDeviceId'
+--
+-- * 'ndeManagementType'
+newDeviceEvent
+    :: NewDeviceEvent
+newDeviceEvent =
+    NewDeviceEvent'
+    { _ndeUserId = Nothing
+    , _ndeDeviceId = Nothing
+    , _ndeManagementType = Nothing
+    }
+
+-- | The ID of the user. This field will always be present.
+ndeUserId :: Lens' NewDeviceEvent (Maybe Text)
+ndeUserId
+  = lens _ndeUserId (\ s a -> s{_ndeUserId = a})
+
+-- | The Android ID of the device. This field will always be present.
+ndeDeviceId :: Lens' NewDeviceEvent (Maybe Text)
+ndeDeviceId
+  = lens _ndeDeviceId (\ s a -> s{_ndeDeviceId = a})
+
+-- | Identifies the extent to which the device is controlled by an Android
+-- for Work EMM in various deployment configurations. Possible values
+-- include: - \"managedDevice\", a device that has the EMM\'s device policy
+-- controller (DPC) as the device owner, - \"managedProfile\", a device
+-- that has a work profile managed by the DPC (DPC is profile owner) in
+-- addition to a separate, personal profile that is unavailable to the DPC,
+ndeManagementType :: Lens' NewDeviceEvent (Maybe Text)
+ndeManagementType
+  = lens _ndeManagementType
+      (\ s a -> s{_ndeManagementType = a})
+
+instance FromJSON NewDeviceEvent where
+        parseJSON
+          = withObject "NewDeviceEvent"
+              (\ o ->
+                 NewDeviceEvent' <$>
+                   (o .:? "userId") <*> (o .:? "deviceId") <*>
+                     (o .:? "managementType"))
+
+instance ToJSON NewDeviceEvent where
+        toJSON NewDeviceEvent'{..}
+          = object
+              (catMaybes
+                 [("userId" .=) <$> _ndeUserId,
+                  ("deviceId" .=) <$> _ndeDeviceId,
+                  ("managementType" .=) <$> _ndeManagementType])
+
+-- | A token authorizing an admin to access an iframe.
 --
 -- /See:/ 'administratorWebToken' smart constructor.
 data AdministratorWebToken = AdministratorWebToken'
@@ -3570,7 +3513,7 @@ instance ToJSON SignupInfo where
                  [("completionToken" .=) <$> _siCompletionToken,
                   Just ("kind" .= _siKind), ("url" .=) <$> _siURL])
 
--- | A Products resource represents an app in the Google Play Store that is
+-- | A Products resource represents an app in the Google Play store that is
 -- available to at least some users in the enterprise. (Some apps are
 -- restricted to a single enterprise, and no information about them is made
 -- available outside that enterprise.) The information provided for each
@@ -3656,15 +3599,15 @@ pAuthorName
 pKind :: Lens' Product Text
 pKind = lens _pKind (\ s a -> s{_pKind = a})
 
--- | A link to the Google Play for Work details page for the product, for use
--- by an Enterprise administrator.
+-- | A link to the managed Google Play details page for the product, for use
+-- by an Enterprise admin.
 pWorkDetailsURL :: Lens' Product (Maybe Text)
 pWorkDetailsURL
   = lens _pWorkDetailsURL
       (\ s a -> s{_pWorkDetailsURL = a})
 
--- | Whether this app can only be installed on devices using the Android for
--- Work container app.
+-- | Whether this app can only be installed on devices using the Android
+-- container app.
 pRequiresContainerApp :: Lens' Product (Maybe Bool)
 pRequiresContainerApp
   = lens _pRequiresContainerApp
@@ -3689,7 +3632,7 @@ pProductPricing
 
 -- | How and to whom the package is made available. The value
 -- publicGoogleHosted means that the package is available through the Play
--- Store and not restricted to a specific enterprise. The value
+-- store and not restricted to a specific enterprise. The value
 -- privateGoogleHosted means that the package is a private app (restricted
 -- to an enterprise) but hosted by Google. The value privateSelfHosted
 -- means that the package is a private app (restricted to an enterprise)
@@ -3991,57 +3934,6 @@ instance ToJSON ProductsApproveRequest where
               (catMaybes
                  [("approvalUrlInfo" .=) <$> _parApprovalURLInfo])
 
--- | The user resources for the collection.
---
--- /See:/ 'collectionViewersListResponse' smart constructor.
-data CollectionViewersListResponse = CollectionViewersListResponse'
-    { _cvlrKind :: !Text
-    , _cvlrUser :: !(Maybe [User])
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'CollectionViewersListResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'cvlrKind'
---
--- * 'cvlrUser'
-collectionViewersListResponse
-    :: CollectionViewersListResponse
-collectionViewersListResponse =
-    CollectionViewersListResponse'
-    { _cvlrKind = "androidenterprise#collectionViewersListResponse"
-    , _cvlrUser = Nothing
-    }
-
--- | Identifies what kind of resource this is. Value: the fixed string
--- \"androidenterprise#collectionViewersListResponse\".
-cvlrKind :: Lens' CollectionViewersListResponse Text
-cvlrKind = lens _cvlrKind (\ s a -> s{_cvlrKind = a})
-
--- | A user of an enterprise.
-cvlrUser :: Lens' CollectionViewersListResponse [User]
-cvlrUser
-  = lens _cvlrUser (\ s a -> s{_cvlrUser = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON CollectionViewersListResponse where
-        parseJSON
-          = withObject "CollectionViewersListResponse"
-              (\ o ->
-                 CollectionViewersListResponse' <$>
-                   (o .:? "kind" .!=
-                      "androidenterprise#collectionViewersListResponse")
-                     <*> (o .:? "user" .!= mempty))
-
-instance ToJSON CollectionViewersListResponse where
-        toJSON CollectionViewersListResponse'{..}
-          = object
-              (catMaybes
-                 [Just ("kind" .= _cvlrKind),
-                  ("user" .=) <$> _cvlrUser])
-
 -- | The existence of an entitlement resource means that a user has the right
 -- to use a particular app on any of their devices. This might be because
 -- the app is free or because they have been allocated a license to the app
@@ -4173,7 +4065,7 @@ plrPageInfo
 plrKind :: Lens' ProductsListResponse Text
 plrKind = lens _plrKind (\ s a -> s{_plrKind = a})
 
--- | Information about a product (e.g. an app) in the Google Play Store, for
+-- | Information about a product (e.g. an app) in the Google Play store, for
 -- display to an enterprise admin.
 plrProduct :: Lens' ProductsListResponse [Product]
 plrProduct

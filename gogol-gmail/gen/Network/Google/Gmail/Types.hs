@@ -23,6 +23,7 @@ module Network.Google.Gmail.Types
     , gmailSettingsBasicScope
     , mailGoogleComScope
     , gmailModifyScope
+    , gmailMetadataScope
     , gmailLabelsScope
     , gmailSettingsSharingScope
     , gmailSendScope
@@ -233,6 +234,13 @@ module Network.Google.Gmail.Types
     -- * UsersThreadsGetFormat
     , UsersThreadsGetFormat (..)
 
+    -- * BatchModifyMessagesRequest
+    , BatchModifyMessagesRequest
+    , batchModifyMessagesRequest
+    , bmmrIds
+    , bmmrRemoveLabelIds
+    , bmmrAddLabelIds
+
     -- * Draft
     , Draft
     , draft
@@ -372,6 +380,11 @@ mailGoogleComScope = Proxy;
 -- | View and modify but not delete your email
 gmailModifyScope :: Proxy '["https://www.googleapis.com/auth/gmail.modify"]
 gmailModifyScope = Proxy;
+
+-- | View your email message metadata such as labels and headers, but not the
+-- email body
+gmailMetadataScope :: Proxy '["https://www.googleapis.com/auth/gmail.metadata"]
+gmailMetadataScope = Proxy;
 
 -- | Manage mailbox labels
 gmailLabelsScope :: Proxy '["https://www.googleapis.com/auth/gmail.labels"]

@@ -104,12 +104,13 @@ instance ToJSON ConfigFile where
         toJSON ConfigFile'{..}
           = object (catMaybes [("content" .=) <$> _cfContent])
 
--- | Enables \"data access\" audit logging for a service and specifies a list
--- of members that are log-exempted.
+-- | Provides the configuration for non-admin_activity logging for a service.
+-- Controls exemptions and specific log sub-types.
 --
 -- /See:/ 'auditConfig' smart constructor.
 data AuditConfig = AuditConfig'
     { _acService         :: !(Maybe Text)
+    , _acAuditLogConfigs :: !(Maybe [AuditLogConfig])
     , _acExemptedMembers :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -119,21 +120,32 @@ data AuditConfig = AuditConfig'
 --
 -- * 'acService'
 --
+-- * 'acAuditLogConfigs'
+--
 -- * 'acExemptedMembers'
 auditConfig
     :: AuditConfig
 auditConfig =
     AuditConfig'
     { _acService = Nothing
+    , _acAuditLogConfigs = Nothing
     , _acExemptedMembers = Nothing
     }
 
--- | Specifies a service that will be enabled for \"data access\" audit
--- logging. For example, \`resourcemanager\`, \`storage\`, \`compute\`.
--- \`allServices\` is a special value that covers all services.
+-- | Specifies a service that will be enabled for audit logging. For example,
+-- \`resourcemanager\`, \`storage\`, \`compute\`. \`allServices\` is a
+-- special value that covers all services.
 acService :: Lens' AuditConfig (Maybe Text)
 acService
   = lens _acService (\ s a -> s{_acService = a})
+
+-- | The configuration for each type of logging
+acAuditLogConfigs :: Lens' AuditConfig [AuditLogConfig]
+acAuditLogConfigs
+  = lens _acAuditLogConfigs
+      (\ s a -> s{_acAuditLogConfigs = a})
+      . _Default
+      . _Coerce
 
 -- | Specifies the identities that are exempted from \"data access\" audit
 -- logging for the \`service\` specified above. Follows the same format of
@@ -151,13 +163,15 @@ instance FromJSON AuditConfig where
               (\ o ->
                  AuditConfig' <$>
                    (o .:? "service") <*>
-                     (o .:? "exemptedMembers" .!= mempty))
+                     (o .:? "auditLogConfigs" .!= mempty)
+                     <*> (o .:? "exemptedMembers" .!= mempty))
 
 instance ToJSON AuditConfig where
         toJSON AuditConfig'{..}
           = object
               (catMaybes
                  [("service" .=) <$> _acService,
+                  ("auditLogConfigs" .=) <$> _acAuditLogConfigs,
                   ("exemptedMembers" .=) <$> _acExemptedMembers])
 
 -- | A response containing a partial list of operations and a page token used
@@ -601,9 +615,9 @@ oDescription :: Lens' Operation (Maybe Text)
 oDescription
   = lens _oDescription (\ s a -> s{_oDescription = a})
 
--- | [Output Only] The URL of the resource that the operation modifies. If
--- creating a persistent disk snapshot, this points to the persistent disk
--- that the snapshot was created from.
+-- | [Output Only] The URL of the resource that the operation modifies. For
+-- operations related to creating a snapshot, this points to the persistent
+-- disk that the snapshot was created from.
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
@@ -1305,7 +1319,7 @@ instance ToJSON ResourceUpdateWarningsItem where
 --
 -- /See:/ 'deploymentsCancelPreviewRequest' smart constructor.
 newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest'
-    { _dcprFingerprint :: Maybe Base64
+    { _dcprFingerprint :: Maybe Bytes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsCancelPreviewRequest' with the minimum fields required to make a request.
@@ -1333,7 +1347,7 @@ dcprFingerprint :: Lens' DeploymentsCancelPreviewRequest (Maybe ByteString)
 dcprFingerprint
   = lens _dcprFingerprint
       (\ s a -> s{_dcprFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON DeploymentsCancelPreviewRequest
          where
@@ -1720,7 +1734,7 @@ instance ToJSON OperationError where
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
     { _pAuditConfigs :: !(Maybe [AuditConfig])
-    , _pEtag         :: !(Maybe Base64)
+    , _pEtag         :: !(Maybe Bytes)
     , _pRules        :: !(Maybe [Rule])
     , _pVersion      :: !(Maybe (Textual Int32))
     , _pBindings     :: !(Maybe [Binding])
@@ -1778,7 +1792,7 @@ pAuditConfigs
 pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | If more than one rule is specified, the rules are applied in the
 -- following manner: - All matching LOG rules are always applied. - If any
@@ -2019,7 +2033,7 @@ instance ToJSON OperationErrorErrorsItem where
 --
 -- /See:/ 'deploymentsStopRequest' smart constructor.
 newtype DeploymentsStopRequest = DeploymentsStopRequest'
-    { _dsrFingerprint :: Maybe Base64
+    { _dsrFingerprint :: Maybe Bytes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsStopRequest' with the minimum fields required to make a request.
@@ -2047,7 +2061,7 @@ dsrFingerprint :: Lens' DeploymentsStopRequest (Maybe ByteString)
 dsrFingerprint
   = lens _dsrFingerprint
       (\ s a -> s{_dsrFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON DeploymentsStopRequest where
         parseJSON
@@ -2110,6 +2124,58 @@ instance ToJSON ResourceWarningsItemDataItem where
               (catMaybes
                  [("value" .=) <$> _rwidiValue,
                   ("key" .=) <$> _rwidiKey])
+
+-- | Provides the configuration for a sub-type of logging.
+--
+-- /See:/ 'auditLogConfig' smart constructor.
+data AuditLogConfig = AuditLogConfig'
+    { _alcLogType         :: !(Maybe Text)
+    , _alcExemptedMembers :: !(Maybe [Text])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AuditLogConfig' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'alcLogType'
+--
+-- * 'alcExemptedMembers'
+auditLogConfig
+    :: AuditLogConfig
+auditLogConfig =
+    AuditLogConfig'
+    { _alcLogType = Nothing
+    , _alcExemptedMembers = Nothing
+    }
+
+-- | The log type that this config enables.
+alcLogType :: Lens' AuditLogConfig (Maybe Text)
+alcLogType
+  = lens _alcLogType (\ s a -> s{_alcLogType = a})
+
+-- | Specifies the identities that are exempted from this type of logging
+-- Follows the same format of Binding.members.
+alcExemptedMembers :: Lens' AuditLogConfig [Text]
+alcExemptedMembers
+  = lens _alcExemptedMembers
+      (\ s a -> s{_alcExemptedMembers = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON AuditLogConfig where
+        parseJSON
+          = withObject "AuditLogConfig"
+              (\ o ->
+                 AuditLogConfig' <$>
+                   (o .:? "logType") <*>
+                     (o .:? "exemptedMembers" .!= mempty))
+
+instance ToJSON AuditLogConfig where
+        toJSON AuditLogConfig'{..}
+          = object
+              (catMaybes
+                 [("logType" .=) <$> _alcLogType,
+                  ("exemptedMembers" .=) <$> _alcExemptedMembers])
 
 -- | [Output Only] If errors are generated during update of the resource,
 -- this field will be populated.
@@ -2593,7 +2659,7 @@ instance ToJSON Binding where
 data Deployment = Deployment'
     { _dInsertTime  :: !(Maybe Text)
     , _dOperation   :: !(Maybe Operation)
-    , _dFingerprint :: !(Maybe Base64)
+    , _dFingerprint :: !(Maybe Bytes)
     , _dSelfLink    :: !(Maybe Text)
     , _dName        :: !(Maybe Text)
     , _dManifest    :: !(Maybe Text)
@@ -2669,7 +2735,7 @@ dOperation
 dFingerprint :: Lens' Deployment (Maybe ByteString)
 dFingerprint
   = lens _dFingerprint (\ s a -> s{_dFingerprint = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | [Output Only] Self link for the deployment.
 dSelfLink :: Lens' Deployment (Maybe Text)

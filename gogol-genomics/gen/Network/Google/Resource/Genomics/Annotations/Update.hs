@@ -23,7 +23,7 @@
 -- Updates an annotation. Caller must have WRITE permission for the
 -- associated dataset.
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.annotations.update@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.annotations.update@.
 module Network.Google.Resource.Genomics.Annotations.Update
     (
     -- * REST Resource
@@ -55,9 +55,9 @@ type AnnotationsUpdateResource =
      "v1" :>
        "annotations" :>
          Capture "annotationId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
-               QueryParam "updateMask" Text :>
+               QueryParam "updateMask" FieldMask :>
                  QueryParam "pp" Bool :>
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
@@ -72,9 +72,9 @@ type AnnotationsUpdateResource =
 --
 -- /See:/ 'annotationsUpdate' smart constructor.
 data AnnotationsUpdate = AnnotationsUpdate'
-    { _auXgafv          :: !(Maybe Text)
+    { _auXgafv          :: !(Maybe Xgafv)
     , _auUploadProtocol :: !(Maybe Text)
-    , _auUpdateMask     :: !(Maybe Text)
+    , _auUpdateMask     :: !(Maybe FieldMask)
     , _auPp             :: !Bool
     , _auAccessToken    :: !(Maybe Text)
     , _auUploadType     :: !(Maybe Text)
@@ -126,7 +126,7 @@ annotationsUpdate pAuPayload_ pAuAnnotationId_ =
     }
 
 -- | V1 error format.
-auXgafv :: Lens' AnnotationsUpdate (Maybe Text)
+auXgafv :: Lens' AnnotationsUpdate (Maybe Xgafv)
 auXgafv = lens _auXgafv (\ s a -> s{_auXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -138,7 +138,7 @@ auUploadProtocol
 -- | An optional mask specifying which fields to update. Mutable fields are
 -- name, variant, transcript, and info. If unspecified, all mutable fields
 -- will be updated.
-auUpdateMask :: Lens' AnnotationsUpdate (Maybe Text)
+auUpdateMask :: Lens' AnnotationsUpdate (Maybe FieldMask)
 auUpdateMask
   = lens _auUpdateMask (\ s a -> s{_auUpdateMask = a})
 

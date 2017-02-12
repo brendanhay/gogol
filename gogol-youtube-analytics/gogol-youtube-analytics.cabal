@@ -33,9 +33,7 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
-        , Network.Google.Resource.YouTubeAnalytics.BatchReports.List
-        , Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
+          Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
         , Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
         , Network.Google.Resource.YouTubeAnalytics.GroupItems.List
         , Network.Google.Resource.YouTubeAnalytics.Groups.Delete

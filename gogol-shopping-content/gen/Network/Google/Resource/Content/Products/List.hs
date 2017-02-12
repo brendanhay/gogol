@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the products in your Merchant Center account.
+-- Lists the products in your Merchant Center account. This method can only
+-- be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.list@.
 module Network.Google.Resource.Content.Products.List
@@ -55,7 +56,8 @@ type ProductsListResource =
                    QueryParam "alt" AltJSON :>
                      Get '[JSON] ProductsListResponse
 
--- | Lists the products in your Merchant Center account.
+-- | Lists the products in your Merchant Center account. This method can only
+-- be called for non-multi-client accounts.
 --
 -- /See:/ 'productsList' smart constructor.
 data ProductsList = ProductsList'

@@ -44,12 +44,6 @@ module Network.Google.AndroidEnterprise.Types
     , eaKind
     , eaAccountEmail
 
-    -- * CollectionsListResponse
-    , CollectionsListResponse
-    , collectionsListResponse
-    , clrKind
-    , clrCollection
-
     -- * AppRestrictionsSchemaRestrictionRestrictionValue
     , AppRestrictionsSchemaRestrictionRestrictionValue
     , appRestrictionsSchemaRestrictionRestrictionValue
@@ -133,6 +127,7 @@ module Network.Google.AndroidEnterprise.Types
     , nAppUpdateEvent
     , nInstallFailureEvent
     , nAppRestrictionsSchemaChangeEvent
+    , nNewDeviceEvent
     , nTimestampMillis
 
     -- * PageInfo
@@ -181,6 +176,7 @@ module Network.Google.AndroidEnterprise.Types
     , sakData
     , sakId
     , sakType
+    , sakPublicData
 
     -- * InstallsListResponse
     , InstallsListResponse
@@ -236,15 +232,6 @@ module Network.Google.AndroidEnterprise.Types
     , groupLicensesListResponse
     , gllrGroupLicense
     , gllrKind
-
-    -- * Collection
-    , Collection
-    , collection
-    , colKind
-    , colCollectionId
-    , colVisibility
-    , colName
-    , colProductId
 
     -- * ProductSet
     , ProductSet
@@ -388,6 +375,13 @@ module Network.Google.AndroidEnterprise.Types
     , appRestrictionsSchemaChangeEvent
     , arsceProductId
 
+    -- * NewDeviceEvent
+    , NewDeviceEvent
+    , newDeviceEvent
+    , ndeUserId
+    , ndeDeviceId
+    , ndeManagementType
+
     -- * AdministratorWebToken
     , AdministratorWebToken
     , administratorWebToken
@@ -445,12 +439,6 @@ module Network.Google.AndroidEnterprise.Types
     , ProductsApproveRequest
     , productsApproveRequest
     , parApprovalURLInfo
-
-    -- * CollectionViewersListResponse
-    , CollectionViewersListResponse
-    , collectionViewersListResponse
-    , cvlrKind
-    , cvlrUser
 
     -- * Entitlement
     , Entitlement

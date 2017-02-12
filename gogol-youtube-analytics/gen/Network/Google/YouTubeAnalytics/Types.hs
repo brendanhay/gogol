@@ -61,25 +61,6 @@ module Network.Google.YouTubeAnalytics.Types
     , rtRows
     , rtColumnHeaders
 
-    -- * BatchReportDefinition
-    , BatchReportDefinition
-    , batchReportDefinition
-    , brdStatus
-    , brdKind
-    , brdName
-    , brdId
-    , brdType
-
-    -- * BatchReport
-    , BatchReport
-    , batchReport
-    , brTimeUpdated
-    , brKind
-    , brReportId
-    , brTimeSpan
-    , brOutputs
-    , brId
-
     -- * GroupSnippet
     , GroupSnippet
     , groupSnippet
@@ -94,31 +75,6 @@ module Network.Google.YouTubeAnalytics.Types
     , giResource
     , giGroupId
     , giId
-
-    -- * BatchReportDefinitionList
-    , BatchReportDefinitionList
-    , batchReportDefinitionList
-    , brdlKind
-    , brdlItems
-
-    -- * BatchReportList
-    , BatchReportList
-    , batchReportList
-    , brlKind
-    , brlItems
-
-    -- * BatchReportOutputsItem
-    , BatchReportOutputsItem
-    , batchReportOutputsItem
-    , broiFormat
-    , broiDownloadURL
-    , broiType
-
-    -- * BatchReportTimeSpan
-    , BatchReportTimeSpan
-    , batchReportTimeSpan
-    , brtsStartTime
-    , brtsEndTime
 
     -- * GroupItemListResponse
     , GroupItemListResponse

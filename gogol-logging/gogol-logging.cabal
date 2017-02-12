@@ -36,16 +36,31 @@ library
           Network.Google.Logging
         , Network.Google.Logging.Types
         , Network.Google.Resource.Logging.BillingAccounts.Logs.Delete
+        , Network.Google.Resource.Logging.BillingAccounts.Logs.List
+        , Network.Google.Resource.Logging.BillingAccounts.Sinks.Create
+        , Network.Google.Resource.Logging.BillingAccounts.Sinks.Delete
+        , Network.Google.Resource.Logging.BillingAccounts.Sinks.Get
+        , Network.Google.Resource.Logging.BillingAccounts.Sinks.List
+        , Network.Google.Resource.Logging.BillingAccounts.Sinks.Update
         , Network.Google.Resource.Logging.Entries.List
         , Network.Google.Resource.Logging.Entries.Write
+        , Network.Google.Resource.Logging.Folders.Logs.Delete
+        , Network.Google.Resource.Logging.Folders.Logs.List
+        , Network.Google.Resource.Logging.Folders.Sinks.Create
+        , Network.Google.Resource.Logging.Folders.Sinks.Delete
+        , Network.Google.Resource.Logging.Folders.Sinks.Get
+        , Network.Google.Resource.Logging.Folders.Sinks.List
+        , Network.Google.Resource.Logging.Folders.Sinks.Update
         , Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
         , Network.Google.Resource.Logging.Organizations.Logs.Delete
+        , Network.Google.Resource.Logging.Organizations.Logs.List
         , Network.Google.Resource.Logging.Organizations.Sinks.Create
         , Network.Google.Resource.Logging.Organizations.Sinks.Delete
         , Network.Google.Resource.Logging.Organizations.Sinks.Get
         , Network.Google.Resource.Logging.Organizations.Sinks.List
         , Network.Google.Resource.Logging.Organizations.Sinks.Update
         , Network.Google.Resource.Logging.Projects.Logs.Delete
+        , Network.Google.Resource.Logging.Projects.Logs.List
         , Network.Google.Resource.Logging.Projects.Metrics.Create
         , Network.Google.Resource.Logging.Projects.Metrics.Delete
         , Network.Google.Resource.Logging.Projects.Metrics.Get

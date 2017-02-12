@@ -149,6 +149,7 @@ scgBearerToken
   = lens _scgBearerToken
       (\ s a -> s{_scgBearerToken = a})
 
+-- | The id of the service configuration resource.
 scgConfigId :: Lens' ServicesConfigsGet Text
 scgConfigId
   = lens _scgConfigId (\ s a -> s{_scgConfigId = a})

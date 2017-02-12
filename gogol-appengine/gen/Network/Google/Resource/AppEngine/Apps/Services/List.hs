@@ -156,7 +156,7 @@ aslBearerToken
       (\ s a -> s{_aslBearerToken = a})
 
 -- | Part of \`parent\`. Name of the parent Application resource. Example:
--- \`apps\/myapp\`.
+-- apps\/myapp.
 aslAppsId :: Lens' AppsServicesList Text
 aslAppsId
   = lens _aslAppsId (\ s a -> s{_aslAppsId = a})
@@ -180,7 +180,9 @@ aslCallback
 instance GoogleRequest AppsServicesList where
         type Rs AppsServicesList = ListServicesResponse
         type Scopes AppsServicesList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsServicesList'{..}
           = go _aslAppsId _aslXgafv _aslUploadProtocol
               (Just _aslPp)

@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns permissions that a caller has on the specified resource.
+-- Returns permissions that a caller has on the specified resource. If the
+-- resource does not exist, this will return an empty set of permissions,
+-- not a NOT_FOUND error.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.testIamPermissions@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
@@ -53,7 +55,7 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
      =
      "v1" :>
        CaptureMode "resource" "testIamPermissions" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -64,11 +66,13 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
                          ReqBody '[JSON] TestIAMPermissionsRequest :>
                            Post '[JSON] TestIAMPermissionsResponse
 
--- | Returns permissions that a caller has on the specified resource.
+-- | Returns permissions that a caller has on the specified resource. If the
+-- resource does not exist, this will return an empty set of permissions,
+-- not a NOT_FOUND error.
 --
 -- /See:/ 'projectsSubscriptionsTestIAMPermissions' smart constructor.
 data ProjectsSubscriptionsTestIAMPermissions = ProjectsSubscriptionsTestIAMPermissions'
-    { _pstiampXgafv          :: !(Maybe Text)
+    { _pstiampXgafv          :: !(Maybe Xgafv)
     , _pstiampUploadProtocol :: !(Maybe Text)
     , _pstiampPp             :: !Bool
     , _pstiampAccessToken    :: !(Maybe Text)
@@ -118,7 +122,7 @@ projectsSubscriptionsTestIAMPermissions pPstiampPayload_ pPstiampResource_ =
     }
 
 -- | V1 error format.
-pstiampXgafv :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Text)
+pstiampXgafv :: Lens' ProjectsSubscriptionsTestIAMPermissions (Maybe Xgafv)
 pstiampXgafv
   = lens _pstiampXgafv (\ s a -> s{_pstiampXgafv = a})
 

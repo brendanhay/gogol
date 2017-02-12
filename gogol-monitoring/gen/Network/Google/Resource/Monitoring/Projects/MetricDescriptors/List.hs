@@ -169,11 +169,9 @@ pmdlName :: Lens' ProjectsMetricDescriptorsList Text
 pmdlName = lens _pmdlName (\ s a -> s{_pmdlName = a})
 
 -- | If this field is empty, all custom and system-defined metric descriptors
--- are returned. Otherwise, the filter (\/monitoring\/api\/v3\/filters)
--- specifies which metric descriptors are to be returned. For example, the
--- following filter matches all custom metrics
--- (\/monitoring\/custom-metrics): metric.type =
--- starts_with(\"custom.googleapis.com\/\")
+-- are returned. Otherwise, the filter specifies which metric descriptors
+-- are to be returned. For example, the following filter matches all custom
+-- metrics: metric.type = starts_with(\"custom.googleapis.com\/\")
 pmdlFilter :: Lens' ProjectsMetricDescriptorsList (Maybe Text)
 pmdlFilter
   = lens _pmdlFilter (\ s a -> s{_pmdlFilter = a})

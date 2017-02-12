@@ -174,19 +174,19 @@ aspPayload :: Lens' AppsServicesPatch Service
 aspPayload
   = lens _aspPayload (\ s a -> s{_aspPayload = a})
 
--- | Set to \`true\` to gradually shift traffic from one version to another
+-- | Set to true to gradually shift traffic from one version to another
 -- single version. By default, traffic is shifted immediately. For gradual
 -- traffic migration, the target version must be located within instances
--- that are configured for both [warmup
--- requests](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#inboundservicetype)
--- and [automatic
--- scaling](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#automaticscaling).
--- You must specify the
--- [\`shardBy\`](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services#shardby)
+-- that are configured for both warmup requests
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#inboundservicetype)
+-- and automatic scaling
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#automaticscaling).
+-- You must specify the shardBy
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services#shardby)
 -- field in the Service resource. Gradual traffic migration is not
 -- supported in the App Engine flexible environment. For examples, see
--- [Migrating and Splitting
--- Traffic](https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/migrating-splitting-traffic).
+-- Migrating and Splitting Traffic
+-- (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/migrating-splitting-traffic).
 aspMigrateTraffic :: Lens' AppsServicesPatch (Maybe Bool)
 aspMigrateTraffic
   = lens _aspMigrateTraffic
@@ -199,7 +199,7 @@ aspBearerToken
       (\ s a -> s{_aspBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource to update. Example:
--- \`apps\/myapp\/services\/default\`.
+-- apps\/myapp\/services\/default.
 aspAppsId :: Lens' AppsServicesPatch Text
 aspAppsId
   = lens _aspAppsId (\ s a -> s{_aspAppsId = a})

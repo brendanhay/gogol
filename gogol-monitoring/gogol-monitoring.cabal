@@ -37,6 +37,14 @@ library
     exposed-modules:
           Network.Google.Monitoring
         , Network.Google.Monitoring.Types
+        , Network.Google.Resource.Monitoring.Categories.List
+        , Network.Google.Resource.Monitoring.Categories.MetricAssociations.List
+        , Network.Google.Resource.Monitoring.Projects.Categories.Create
+        , Network.Google.Resource.Monitoring.Projects.Categories.Delete
+        , Network.Google.Resource.Monitoring.Projects.Categories.List
+        , Network.Google.Resource.Monitoring.Projects.Categories.MetricAssociations.Create
+        , Network.Google.Resource.Monitoring.Projects.Categories.MetricAssociations.Delete
+        , Network.Google.Resource.Monitoring.Projects.Categories.MetricAssociations.List
         , Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
         , Network.Google.Resource.Monitoring.Projects.Groups.Create
         , Network.Google.Resource.Monitoring.Projects.Groups.Delete

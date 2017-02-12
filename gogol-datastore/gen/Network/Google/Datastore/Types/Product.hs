@@ -44,7 +44,9 @@ import           Network.Google.Prelude
 -- NormalizeLatLng(-180.0, 10.0) assert (0.0, -170.0) ==
 -- NormalizeLatLng(180.0, 10.0) assert (-90.0, 10.0) ==
 -- NormalizeLatLng(270.0, 10.0) assert (90.0, 10.0) ==
--- NormalizeLatLng(-270.0, 10.0)
+-- NormalizeLatLng(-270.0, 10.0) The code in
+-- logs\/storage\/validator\/logs_validator_traits.cc treats this type as
+-- if it were annotated as ST_LOCATION.
 --
 -- /See:/ 'latLng' smart constructor.
 data LatLng = LatLng'
@@ -97,7 +99,7 @@ instance ToJSON LatLng where
 --
 -- /See:/ 'rollbackRequest' smart constructor.
 newtype RollbackRequest = RollbackRequest'
-    { _rrTransaction :: Maybe Base64
+    { _rrTransaction :: Maybe Bytes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
@@ -118,7 +120,7 @@ rrTransaction :: Lens' RollbackRequest (Maybe ByteString)
 rrTransaction
   = lens _rrTransaction
       (\ s a -> s{_rrTransaction = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON RollbackRequest where
         parseJSON
@@ -193,12 +195,12 @@ instance ToJSON PartitionId where
 -- /See:/ 'queryResultBatch' smart constructor.
 data QueryResultBatch = QueryResultBatch'
     { _qrbSkippedResults   :: !(Maybe (Textual Int32))
-    , _qrbSkippedCursor    :: !(Maybe Base64)
+    , _qrbSkippedCursor    :: !(Maybe Bytes)
     , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
     , _qrbSnapshotVersion  :: !(Maybe (Textual Int64))
     , _qrbEntityResults    :: !(Maybe [EntityResult])
     , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
-    , _qrbEndCursor        :: !(Maybe Base64)
+    , _qrbEndCursor        :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
@@ -244,7 +246,7 @@ qrbSkippedCursor :: Lens' QueryResultBatch (Maybe ByteString)
 qrbSkippedCursor
   = lens _qrbSkippedCursor
       (\ s a -> s{_qrbSkippedCursor = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The result type for every entity in \`entity_results\`.
 qrbEntityResultType :: Lens' QueryResultBatch (Maybe QueryResultBatchEntityResultType)
@@ -258,7 +260,8 @@ qrbEntityResultType
 -- \`end_cursor\` (not the query\'s \`end_cursor\`). In a single
 -- transaction, subsequent query result batches for the same query can have
 -- a greater snapshot version number. Each batch\'s snapshot version is
--- valid for all preceding batches.
+-- valid for all preceding batches. The value will be zero for eventually
+-- consistent queries.
 qrbSnapshotVersion :: Lens' QueryResultBatch (Maybe Int64)
 qrbSnapshotVersion
   = lens _qrbSnapshotVersion
@@ -283,7 +286,7 @@ qrbMoreResults
 qrbEndCursor :: Lens' QueryResultBatch (Maybe ByteString)
 qrbEndCursor
   = lens _qrbEndCursor (\ s a -> s{_qrbEndCursor = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON QueryResultBatch where
         parseJSON
@@ -525,7 +528,7 @@ instance ToJSON CompositeFilter where
 --
 -- /See:/ 'beginTransactionResponse' smart constructor.
 newtype BeginTransactionResponse = BeginTransactionResponse'
-    { _btrTransaction :: Maybe Base64
+    { _btrTransaction :: Maybe Bytes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeginTransactionResponse' with the minimum fields required to make a request.
@@ -545,7 +548,7 @@ btrTransaction :: Lens' BeginTransactionResponse (Maybe ByteString)
 btrTransaction
   = lens _btrTransaction
       (\ s a -> s{_btrTransaction = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON BeginTransactionResponse where
         parseJSON
@@ -807,7 +810,7 @@ data Value = Value'
     , _vMeaning            :: !(Maybe (Textual Int32))
     , _vArrayValue         :: !(Maybe ArrayValue)
     , _vNullValue          :: !(Maybe ValueNullValue)
-    , _vBlobValue          :: !(Maybe Base64)
+    , _vBlobValue          :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
@@ -941,7 +944,7 @@ vNullValue
 vBlobValue :: Lens' Value (Maybe ByteString)
 vBlobValue
   = lens _vBlobValue (\ s a -> s{_vBlobValue = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 instance FromJSON Value where
         parseJSON
@@ -1306,11 +1309,11 @@ instance ToJSON PropertyFilter where
 --
 -- /See:/ 'query' smart constructor.
 data Query = Query'
-    { _qStartCursor :: !(Maybe Base64)
+    { _qStartCursor :: !(Maybe Bytes)
     , _qOffSet      :: !(Maybe (Textual Int32))
     , _qKind        :: !(Maybe [KindExpression])
     , _qDistinctOn  :: !(Maybe [PropertyReference])
-    , _qEndCursor   :: !(Maybe Base64)
+    , _qEndCursor   :: !(Maybe Bytes)
     , _qLimit       :: !(Maybe (Textual Int32))
     , _qProjection  :: !(Maybe [Projection])
     , _qFilter      :: !(Maybe Filter)
@@ -1359,7 +1362,7 @@ query =
 qStartCursor :: Lens' Query (Maybe ByteString)
 qStartCursor
   = lens _qStartCursor (\ s a -> s{_qStartCursor = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | The number of results to skip. Applies before limit, but after all other
 -- constraints. Optional. Must be >= 0 if specified.
@@ -1390,7 +1393,7 @@ qDistinctOn
 qEndCursor :: Lens' Query (Maybe ByteString)
 qEndCursor
   = lens _qEndCursor (\ s a -> s{_qEndCursor = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The maximum number of results to return. Applies after all other
 -- constraints. Optional. Unspecified is interpreted as no limit. Must be
@@ -1485,7 +1488,7 @@ instance ToJSON ArrayValue where
 --
 -- /See:/ 'entityResult' smart constructor.
 data EntityResult = EntityResult'
-    { _erCursor  :: !(Maybe Base64)
+    { _erCursor  :: !(Maybe Bytes)
     , _erVersion :: !(Maybe (Textual Int64))
     , _erEntity  :: !(Maybe Entity)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1513,7 +1516,7 @@ entityResult =
 erCursor :: Lens' EntityResult (Maybe ByteString)
 erCursor
   = lens _erCursor (\ s a -> s{_erCursor = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The version of the entity, a strictly positive number that monotonically
 -- increases with changes to the entity. This field is set for \`FULL\`
@@ -1637,7 +1640,7 @@ instance ToJSON KindExpression where
 -- /See:/ 'readOptions' smart constructor.
 data ReadOptions = ReadOptions'
     { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
-    , _roTransaction     :: !(Maybe Base64)
+    , _roTransaction     :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadOptions' with the minimum fields required to make a request.
@@ -1668,7 +1671,7 @@ roTransaction :: Lens' ReadOptions (Maybe ByteString)
 roTransaction
   = lens _roTransaction
       (\ s a -> s{_roTransaction = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON ReadOptions where
         parseJSON
@@ -1794,7 +1797,7 @@ instance ToJSON Filter where
 data CommitRequest = CommitRequest'
     { _crMutations   :: !(Maybe [Mutation])
     , _crMode        :: !(Maybe CommitRequestMode)
-    , _crTransaction :: !(Maybe Base64)
+    , _crTransaction :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
@@ -1839,7 +1842,7 @@ crTransaction :: Lens' CommitRequest (Maybe ByteString)
 crTransaction
   = lens _crTransaction
       (\ s a -> s{_crTransaction = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON CommitRequest where
         parseJSON
@@ -2093,7 +2096,7 @@ instance ToJSON PropertyOrder where
 --
 -- /See:/ 'gqlQueryParameter' smart constructor.
 data GqlQueryParameter = GqlQueryParameter'
-    { _gqpCursor :: !(Maybe Base64)
+    { _gqpCursor :: !(Maybe Bytes)
     , _gqpValue  :: !(Maybe Value)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2116,7 +2119,7 @@ gqlQueryParameter =
 gqpCursor :: Lens' GqlQueryParameter (Maybe ByteString)
 gqpCursor
   = lens _gqpCursor (\ s a -> s{_gqpCursor = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | A value parameter.
 gqpValue :: Lens' GqlQueryParameter (Maybe Value)

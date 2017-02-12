@@ -174,7 +174,7 @@ aBearerToken
   = lens _aBearerToken (\ s a -> s{_aBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1\`.
+-- apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1.
 aAppsId :: Lens' AppsServicesVersionsInstancesDelete Text
 aAppsId = lens _aAppsId (\ s a -> s{_aAppsId = a})
 

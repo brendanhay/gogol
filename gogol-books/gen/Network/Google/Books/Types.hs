@@ -299,6 +299,7 @@ module Network.Google.Books.Types
     , nReason
     , nDontShowNotification
     , nNotificationType
+    , nNotificationGroup
     , nIconURL
     , nTitle
 

@@ -118,6 +118,14 @@ module Network.Google.CivicInfo.Types
     , rirDivisions
     , rirOffices
 
+    -- * VoterInfoSegmentResult
+    , VoterInfoSegmentResult
+    , voterInfoSegmentResult
+    , visrResponse
+    , visrGeneratedMillis
+    , visrPostalAddress
+    , visrRequest
+
     -- * DivisionSearchResult
     , DivisionSearchResult
     , divisionSearchResult
@@ -233,6 +241,7 @@ module Network.Google.CivicInfo.Types
     -- * VoterInfoRequest
     , VoterInfoRequest
     , voterInfoRequest
+    , virVoterInfoSegmentResult
     , virContextParams
 
     -- * SimpleAddressType
@@ -250,6 +259,41 @@ module Network.Google.CivicInfo.Types
     , ContextParams
     , contextParams
     , cpClientProFile
+
+    -- * PostalAddress
+    , PostalAddress
+    , postalAddress
+    , paAdministrativeAreaName
+    , paRecipientName
+    , paLanguageCode
+    , paSortingCode
+    , paPremiseName
+    , paPostalCodeNumberExtension
+    , paCountryNameCode
+    , paDependentThoroughfaresConnector
+    , paThoroughfareLeadingType
+    , paSubAdministrativeAreaName
+    , paThoroughfareTrailingType
+    , paPostBoxNumber
+    , paThoroughfarePreDirection
+    , paLocalityName
+    , paDependentThoroughfaresType
+    , paThoroughfarePostDirection
+    , paIsDisputed
+    , paDependentThoroughfarePreDirection
+    , paThoroughfareNumber
+    , paDependentThoroughfaresIndicator
+    , paDependentLocalityName
+    , paFirmName
+    , paCountryName
+    , paDependentThoroughfareTrailingType
+    , paDependentThoroughfareName
+    , paDependentThoroughfarePostDirection
+    , paAddressLines
+    , paPostalCodeNumber
+    , paThoroughfareName
+    , paSubPremiseName
+    , paDependentThoroughfareLeadingType
 
     -- * AdministrationRegion
     , AdministrationRegion

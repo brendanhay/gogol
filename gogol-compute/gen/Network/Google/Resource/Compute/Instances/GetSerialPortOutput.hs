@@ -34,6 +34,7 @@ module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
 
     -- * Request Lenses
     , igspoProject
+    , igspoStart
     , igspoZone
     , igspoPort
     , igspoInstance
@@ -54,15 +55,17 @@ type InstancesGetSerialPortOutputResource =
                  "instances" :>
                    Capture "instance" Text :>
                      "serialPort" :>
-                       QueryParam "port" (Textual Int32) :>
-                         QueryParam "alt" AltJSON :>
-                           Get '[JSON] SerialPortOutput
+                       QueryParam "start" (Textual Int64) :>
+                         QueryParam "port" (Textual Int32) :>
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] SerialPortOutput
 
 -- | Returns the specified instance\'s serial port output.
 --
 -- /See:/ 'instancesGetSerialPortOutput' smart constructor.
 data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput'
     { _igspoProject  :: !Text
+    , _igspoStart    :: !(Maybe (Textual Int64))
     , _igspoZone     :: !Text
     , _igspoPort     :: !(Textual Int32)
     , _igspoInstance :: !Text
@@ -73,6 +76,8 @@ data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'igspoProject'
+--
+-- * 'igspoStart'
 --
 -- * 'igspoZone'
 --
@@ -87,6 +92,7 @@ instancesGetSerialPortOutput
 instancesGetSerialPortOutput pIgspoProject_ pIgspoZone_ pIgspoInstance_ =
     InstancesGetSerialPortOutput'
     { _igspoProject = pIgspoProject_
+    , _igspoStart = Nothing
     , _igspoZone = pIgspoZone_
     , _igspoPort = 1
     , _igspoInstance = pIgspoInstance_
@@ -96,6 +102,14 @@ instancesGetSerialPortOutput pIgspoProject_ pIgspoZone_ pIgspoInstance_ =
 igspoProject :: Lens' InstancesGetSerialPortOutput Text
 igspoProject
   = lens _igspoProject (\ s a -> s{_igspoProject = a})
+
+-- | For the initial request, leave this field unspecified. For subsequent
+-- calls, this field should be set to the next value that was returned in
+-- the previous call.
+igspoStart :: Lens' InstancesGetSerialPortOutput (Maybe Int64)
+igspoStart
+  = lens _igspoStart (\ s a -> s{_igspoStart = a}) .
+      mapping _Coerce
 
 -- | The name of the zone for this request.
 igspoZone :: Lens' InstancesGetSerialPortOutput Text
@@ -124,6 +138,7 @@ instance GoogleRequest InstancesGetSerialPortOutput
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient InstancesGetSerialPortOutput'{..}
           = go _igspoProject _igspoZone _igspoInstance
+              _igspoStart
               (Just _igspoPort)
               (Just AltJSON)
               computeService

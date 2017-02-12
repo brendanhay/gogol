@@ -44,8 +44,11 @@ library
         , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Delete
         , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Get
         , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.List
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.Rollback
+        , Network.Google.Resource.Container.Projects.Zones.Clusters.NodePools.SetManagement
         , Network.Google.Resource.Container.Projects.Zones.Clusters.Update
         , Network.Google.Resource.Container.Projects.Zones.GetServerConfig
+        , Network.Google.Resource.Container.Projects.Zones.Operations.Cancel
         , Network.Google.Resource.Container.Projects.Zones.Operations.Get
         , Network.Google.Resource.Container.Projects.Zones.Operations.List
 

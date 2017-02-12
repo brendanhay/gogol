@@ -401,7 +401,6 @@ data DynamicLinkInfo = DynamicLinkInfo'
     , _dliDynamicLinkDomain :: !(Maybe Text)
     , _dliLink              :: !(Maybe Text)
     , _dliIosInfo           :: !(Maybe IosInfo)
-    , _dliIsAd              :: !(Maybe Bool)
     , _dliAndroidInfo       :: !(Maybe AndroidInfo)
     , _dliAnalyticsInfo     :: !(Maybe AnalyticsInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -418,8 +417,6 @@ data DynamicLinkInfo = DynamicLinkInfo'
 --
 -- * 'dliIosInfo'
 --
--- * 'dliIsAd'
---
 -- * 'dliAndroidInfo'
 --
 -- * 'dliAnalyticsInfo'
@@ -431,7 +428,6 @@ dynamicLinkInfo =
     , _dliDynamicLinkDomain = Nothing
     , _dliLink = Nothing
     , _dliIosInfo = Nothing
-    , _dliIsAd = Nothing
     , _dliAndroidInfo = Nothing
     , _dliAnalyticsInfo = Nothing
     }
@@ -466,12 +462,6 @@ dliIosInfo :: Lens' DynamicLinkInfo (Maybe IosInfo)
 dliIosInfo
   = lens _dliIosInfo (\ s a -> s{_dliIosInfo = a})
 
--- | Declares that the Dynamic Link is used in an advertisement. See the
--- \'ad\' parameter in the
--- [documentation](https:\/\/firebase.google.com\/docs\/dynamic-links\/android#create-a-dynamic-link-programmatically).
-dliIsAd :: Lens' DynamicLinkInfo (Maybe Bool)
-dliIsAd = lens _dliIsAd (\ s a -> s{_dliIsAd = a})
-
 -- | Android related information. See Android related parameters in the
 -- [documentation](https:\/\/firebase.google.com\/docs\/dynamic-links\/android#create-a-dynamic-link-programmatically).
 dliAndroidInfo :: Lens' DynamicLinkInfo (Maybe AndroidInfo)
@@ -495,7 +485,6 @@ instance FromJSON DynamicLinkInfo where
                      (o .:? "dynamicLinkDomain")
                      <*> (o .:? "link")
                      <*> (o .:? "iosInfo")
-                     <*> (o .:? "isAd")
                      <*> (o .:? "androidInfo")
                      <*> (o .:? "analyticsInfo"))
 
@@ -507,7 +496,6 @@ instance ToJSON DynamicLinkInfo where
                   ("dynamicLinkDomain" .=) <$> _dliDynamicLinkDomain,
                   ("link" .=) <$> _dliLink,
                   ("iosInfo" .=) <$> _dliIosInfo,
-                  ("isAd" .=) <$> _dliIsAd,
                   ("androidInfo" .=) <$> _dliAndroidInfo,
                   ("analyticsInfo" .=) <$> _dliAnalyticsInfo])
 

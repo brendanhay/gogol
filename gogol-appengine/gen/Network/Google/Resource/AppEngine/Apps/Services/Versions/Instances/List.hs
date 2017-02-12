@@ -179,7 +179,7 @@ asvilBearerToken
       (\ s a -> s{_asvilBearerToken = a})
 
 -- | Part of \`parent\`. Name of the parent Version resource. Example:
--- \`apps\/myapp\/services\/default\/versions\/v1\`.
+-- apps\/myapp\/services\/default\/versions\/v1.
 asvilAppsId :: Lens' AppsServicesVersionsInstancesList Text
 asvilAppsId
   = lens _asvilAppsId (\ s a -> s{_asvilAppsId = a})
@@ -214,7 +214,9 @@ instance GoogleRequest
         type Rs AppsServicesVersionsInstancesList =
              ListInstancesResponse
         type Scopes AppsServicesVersionsInstancesList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/appengine.admin",
+               "https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/cloud-platform.read-only"]
         requestClient AppsServicesVersionsInstancesList'{..}
           = go _asvilAppsId _asvilServicesId _asvilVersionsId
               _asvilXgafv

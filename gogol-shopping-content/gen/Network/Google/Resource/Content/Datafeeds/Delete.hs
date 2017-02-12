@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a datafeed from your Merchant Center account.
+-- Deletes a datafeed from your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.delete@.
 module Network.Google.Resource.Content.Datafeeds.Delete
@@ -52,7 +53,8 @@ type DatafeedsDeleteResource =
                QueryParam "dryRun" Bool :>
                  QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
--- | Deletes a datafeed from your Merchant Center account.
+-- | Deletes a datafeed from your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ 'datafeedsDelete' smart constructor.
 data DatafeedsDelete = DatafeedsDelete'

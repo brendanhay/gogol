@@ -20,11 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Recreates the required App Engine features for the application in your
--- project, for example a Cloud Storage bucket or App Engine service
+-- Recreates the required App Engine features for the specified App Engine
+-- application, for example a Cloud Storage bucket or App Engine service
 -- account. Use this method if you receive an error message about a missing
--- feature, for example \"*Error retrieving the App Engine service
--- account*\".
+-- feature, for example, Error retrieving the App Engine service account.
 --
 -- /See:/ <https://cloud.google.com/appengine/docs/admin-api/ Google App Engine Admin API Reference> for @appengine.apps.repair@.
 module Network.Google.Resource.AppEngine.Apps.Repair
@@ -68,11 +67,10 @@ type AppsRepairResource =
                            ReqBody '[JSON] RepairApplicationRequest :>
                              Post '[JSON] Operation
 
--- | Recreates the required App Engine features for the application in your
--- project, for example a Cloud Storage bucket or App Engine service
+-- | Recreates the required App Engine features for the specified App Engine
+-- application, for example a Cloud Storage bucket or App Engine service
 -- account. Use this method if you receive an error message about a missing
--- feature, for example \"*Error retrieving the App Engine service
--- account*\".
+-- feature, for example, Error retrieving the App Engine service account.
 --
 -- /See:/ 'appsRepair' smart constructor.
 data AppsRepair = AppsRepair'
@@ -162,7 +160,7 @@ arBearerToken
       (\ s a -> s{_arBearerToken = a})
 
 -- | Part of \`name\`. Name of the application to repair. Example:
--- \`apps\/myapp\`
+-- apps\/myapp
 arAppsId :: Lens' AppsRepair Text
 arAppsId = lens _arAppsId (\ s a -> s{_arAppsId = a})
 

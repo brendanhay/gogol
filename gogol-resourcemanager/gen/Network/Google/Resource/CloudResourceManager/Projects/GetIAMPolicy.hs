@@ -54,7 +54,7 @@ type ProjectsGetIAMPolicyResource =
      "v1" :>
        "projects" :>
          CaptureMode "resource" "getIamPolicy" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -70,7 +70,7 @@ type ProjectsGetIAMPolicyResource =
 --
 -- /See:/ 'projectsGetIAMPolicy' smart constructor.
 data ProjectsGetIAMPolicy = ProjectsGetIAMPolicy'
-    { _pgipXgafv          :: !(Maybe Text)
+    { _pgipXgafv          :: !(Maybe Xgafv)
     , _pgipUploadProtocol :: !(Maybe Text)
     , _pgipPp             :: !Bool
     , _pgipAccessToken    :: !(Maybe Text)
@@ -120,7 +120,7 @@ projectsGetIAMPolicy pPgipPayload_ pPgipResource_ =
     }
 
 -- | V1 error format.
-pgipXgafv :: Lens' ProjectsGetIAMPolicy (Maybe Text)
+pgipXgafv :: Lens' ProjectsGetIAMPolicy (Maybe Xgafv)
 pgipXgafv
   = lens _pgipXgafv (\ s a -> s{_pgipXgafv = a})
 

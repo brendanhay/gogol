@@ -43,6 +43,7 @@ library
         , Network.Google.Resource.CloudResourceManager.Projects.Create
         , Network.Google.Resource.CloudResourceManager.Projects.Delete
         , Network.Google.Resource.CloudResourceManager.Projects.Get
+        , Network.Google.Resource.CloudResourceManager.Projects.GetAncestry
         , Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
         , Network.Google.Resource.CloudResourceManager.Projects.List
         , Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy

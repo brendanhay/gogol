@@ -161,6 +161,12 @@ module Network.Google.Debugger
     , lbrNextWaitToken
     , lbrBreakpoints
 
+    -- ** StatusMessageRefersTo
+    , StatusMessageRefersTo (..)
+
+    -- ** BreakpointLogLevel
+    , BreakpointLogLevel (..)
+
     -- ** ListDebuggeesResponse
     , ListDebuggeesResponse
     , listDebuggeesResponse
@@ -177,6 +183,12 @@ module Network.Google.Debugger
     , smRefersTo
     , smIsError
     , smDescription
+
+    -- ** Xgafv
+    , Xgafv (..)
+
+    -- ** BreakpointAction
+    , BreakpointAction (..)
 
     -- ** ListActiveBreakpointsResponse
     , ListActiveBreakpointsResponse
@@ -255,6 +267,9 @@ module Network.Google.Debugger
     , aliasContext
     , acKind
     , acName
+
+    -- ** AliasContextKind
+    , AliasContextKind (..)
 
     -- ** CloudWorkspaceId
     , CloudWorkspaceId

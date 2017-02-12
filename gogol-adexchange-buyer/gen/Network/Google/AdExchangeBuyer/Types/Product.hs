@@ -147,6 +147,7 @@ data CreativeNATiveAd = CreativeNATiveAd'
     { _cnataImage                 :: !(Maybe CreativeNATiveAdImage)
     , _cnataAppIcon               :: !(Maybe CreativeNATiveAdAppIcon)
     , _cnataClickTrackingURL      :: !(Maybe Text)
+    , _cnataClickLinkURL          :: !(Maybe Text)
     , _cnataBody                  :: !(Maybe Text)
     , _cnataHeadline              :: !(Maybe Text)
     , _cnataImpressionTrackingURL :: !(Maybe [Text])
@@ -168,6 +169,8 @@ data CreativeNATiveAd = CreativeNATiveAd'
 -- * 'cnataAppIcon'
 --
 -- * 'cnataClickTrackingURL'
+--
+-- * 'cnataClickLinkURL'
 --
 -- * 'cnataBody'
 --
@@ -195,6 +198,7 @@ creativeNATiveAd =
     { _cnataImage = Nothing
     , _cnataAppIcon = Nothing
     , _cnataClickTrackingURL = Nothing
+    , _cnataClickLinkURL = Nothing
     , _cnataBody = Nothing
     , _cnataHeadline = Nothing
     , _cnataImpressionTrackingURL = Nothing
@@ -222,6 +226,12 @@ cnataClickTrackingURL :: Lens' CreativeNATiveAd (Maybe Text)
 cnataClickTrackingURL
   = lens _cnataClickTrackingURL
       (\ s a -> s{_cnataClickTrackingURL = a})
+
+-- | The URL that the browser\/SDK will load when the user clicks the ad.
+cnataClickLinkURL :: Lens' CreativeNATiveAd (Maybe Text)
+cnataClickLinkURL
+  = lens _cnataClickLinkURL
+      (\ s a -> s{_cnataClickLinkURL = a})
 
 -- | A long description of the ad.
 cnataBody :: Lens' CreativeNATiveAd (Maybe Text)
@@ -253,6 +263,8 @@ cnataStore :: Lens' CreativeNATiveAd (Maybe Text)
 cnataStore
   = lens _cnataStore (\ s a -> s{_cnataStore = a})
 
+-- | The URL of the XML VAST for a native ad. Note this is a separate field
+-- from resource.video_url.
 cnataVideoURL :: Lens' CreativeNATiveAd (Maybe Text)
 cnataVideoURL
   = lens _cnataVideoURL
@@ -287,6 +299,7 @@ instance FromJSON CreativeNATiveAd where
                  CreativeNATiveAd' <$>
                    (o .:? "image") <*> (o .:? "appIcon") <*>
                      (o .:? "clickTrackingUrl")
+                     <*> (o .:? "clickLinkUrl")
                      <*> (o .:? "body")
                      <*> (o .:? "headline")
                      <*> (o .:? "impressionTrackingUrl" .!= mempty)
@@ -305,6 +318,7 @@ instance ToJSON CreativeNATiveAd where
                  [("image" .=) <$> _cnataImage,
                   ("appIcon" .=) <$> _cnataAppIcon,
                   ("clickTrackingUrl" .=) <$> _cnataClickTrackingURL,
+                  ("clickLinkUrl" .=) <$> _cnataClickLinkURL,
                   ("body" .=) <$> _cnataBody,
                   ("headline" .=) <$> _cnataHeadline,
                   ("impressionTrackingUrl" .=) <$>
@@ -664,12 +678,11 @@ abliRegion :: Lens' AccountBidderLocationItem (Maybe Text)
 abliRegion
   = lens _abliRegion (\ s a -> s{_abliRegion = a})
 
--- | The protocol that the bidder endpoint is using. By default, OpenRTB
--- protocols use JSON, except PROTOCOL_OPENRTB_PROTOBUF.
--- PROTOCOL_OPENRTB_PROTOBUF uses protobuf encoding over the latest OpenRTB
--- protocol version, which is 2.3 right now. Allowed values: - PROTOCOL_ADX
--- - PROTOCOL_OPENRTB_2_2 - PROTOCOL_OPENRTB_2_3 -
--- PROTOCOL_OPENRTB_PROTOBUF
+-- | The protocol that the bidder endpoint is using. OpenRTB protocols with
+-- prefix PROTOCOL_OPENRTB_PROTOBUF use proto buffer, otherwise use JSON.
+-- Allowed values: - PROTOCOL_ADX - PROTOCOL_OPENRTB_2_2 -
+-- PROTOCOL_OPENRTB_2_3 - PROTOCOL_OPENRTB_2_4 -
+-- PROTOCOL_OPENRTB_PROTOBUF_2_3 - PROTOCOL_OPENRTB_PROTOBUF_2_4
 abliBidProtocol :: Lens' AccountBidderLocationItem (Maybe Text)
 abliBidProtocol
   = lens _abliBidProtocol
@@ -696,7 +709,7 @@ instance ToJSON AccountBidderLocationItem where
 --
 -- /See:/ 'privateData' smart constructor.
 data PrivateData = PrivateData'
-    { _pdReferencePayload :: !(Maybe Base64)
+    { _pdReferencePayload :: !(Maybe Bytes)
     , _pdReferenceId      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -719,7 +732,7 @@ pdReferencePayload :: Lens' PrivateData (Maybe ByteString)
 pdReferencePayload
   = lens _pdReferencePayload
       (\ s a -> s{_pdReferencePayload = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 pdReferenceId :: Lens' PrivateData (Maybe Text)
 pdReferenceId
@@ -1879,7 +1892,7 @@ cSensitiveCategories
       . _Coerce
 
 -- | The URL to fetch a video ad. If set, HTMLSnippet and the nativeAd should
--- not be set. Note, this is diffrent from resource.native_ad.video_url
+-- not be set. Note, this is different from resource.native_ad.video_url
 -- above.
 cVideoURL :: Lens' Creative (Maybe Text)
 cVideoURL
@@ -3050,6 +3063,8 @@ data PretargetingConfig = PretargetingConfig'
     , _pcUserLists                     :: !(Maybe [Textual Int64])
     , _pcKind                          :: !Text
     , _pcExcludedPlacements            :: !(Maybe [PretargetingConfigExcludedPlacementsItem])
+    , _pcUserIdentifierDataRequired    :: !(Maybe [Text])
+    , _pcMinimumViewabilityDecile      :: !(Maybe (Textual Int32))
     , _pcMobileDevices                 :: !(Maybe [Textual Int64])
     , _pcLanguages                     :: !(Maybe [Text])
     , _pcVerticals                     :: !(Maybe [Textual Int64])
@@ -3087,6 +3102,10 @@ data PretargetingConfig = PretargetingConfig'
 -- * 'pcKind'
 --
 -- * 'pcExcludedPlacements'
+--
+-- * 'pcUserIdentifierDataRequired'
+--
+-- * 'pcMinimumViewabilityDecile'
 --
 -- * 'pcMobileDevices'
 --
@@ -3131,6 +3150,8 @@ pretargetingConfig =
     , _pcUserLists = Nothing
     , _pcKind = "adexchangebuyer#pretargetingConfig"
     , _pcExcludedPlacements = Nothing
+    , _pcUserIdentifierDataRequired = Nothing
+    , _pcMinimumViewabilityDecile = Nothing
     , _pcMobileDevices = Nothing
     , _pcLanguages = Nothing
     , _pcVerticals = Nothing
@@ -3213,6 +3234,28 @@ pcExcludedPlacements
       (\ s a -> s{_pcExcludedPlacements = a})
       . _Default
       . _Coerce
+
+-- | Requests containing the specified type of user data will match. Possible
+-- values are HOSTED_MATCH_DATA, which means the request is
+-- cookie-targetable and has a match in the buyer\'s hosted match table,
+-- and COOKIE_OR_IDFA, which means the request has either a targetable
+-- cookie or an iOS IDFA.
+pcUserIdentifierDataRequired :: Lens' PretargetingConfig [Text]
+pcUserIdentifierDataRequired
+  = lens _pcUserIdentifierDataRequired
+      (\ s a -> s{_pcUserIdentifierDataRequired = a})
+      . _Default
+      . _Coerce
+
+-- | Requests where the predicted viewability is below the specified decile
+-- will not match. E.g. if the buyer sets this value to 5, requests from
+-- slots where the predicted viewability is below 50% will not match. If
+-- the predicted viewability is unknown this field will be ignored.
+pcMinimumViewabilityDecile :: Lens' PretargetingConfig (Maybe Int32)
+pcMinimumViewabilityDecile
+  = lens _pcMinimumViewabilityDecile
+      (\ s a -> s{_pcMinimumViewabilityDecile = a})
+      . mapping _Coerce
 
 -- | Requests containing any of these mobile device ids will match. Values
 -- are from mobile-devices.csv in the downloadable files section.
@@ -3353,6 +3396,8 @@ instance FromJSON PretargetingConfig where
                      (o .:? "kind" .!=
                         "adexchangebuyer#pretargetingConfig")
                      <*> (o .:? "excludedPlacements" .!= mempty)
+                     <*> (o .:? "userIdentifierDataRequired" .!= mempty)
+                     <*> (o .:? "minimumViewabilityDecile")
                      <*> (o .:? "mobileDevices" .!= mempty)
                      <*> (o .:? "languages" .!= mempty)
                      <*> (o .:? "verticals" .!= mempty)
@@ -3385,6 +3430,10 @@ instance ToJSON PretargetingConfig where
                   ("userLists" .=) <$> _pcUserLists,
                   Just ("kind" .= _pcKind),
                   ("excludedPlacements" .=) <$> _pcExcludedPlacements,
+                  ("userIdentifierDataRequired" .=) <$>
+                    _pcUserIdentifierDataRequired,
+                  ("minimumViewabilityDecile" .=) <$>
+                    _pcMinimumViewabilityDecile,
                   ("mobileDevices" .=) <$> _pcMobileDevices,
                   ("languages" .=) <$> _pcLanguages,
                   ("verticals" .=) <$> _pcVerticals,
@@ -4994,29 +5043,30 @@ instance ToJSON CreativeNATiveAdImage where
 --
 -- /See:/ 'product' smart constructor.
 data Product = Product'
-    { _proState                     :: !(Maybe Text)
-    , _proInventorySource           :: !(Maybe Text)
-    , _proWebPropertyCode           :: !(Maybe Text)
-    , _proCreationTimeMs            :: !(Maybe (Textual Int64))
-    , _proTerms                     :: !(Maybe DealTerms)
-    , _proLastUpdateTimeMs          :: !(Maybe (Textual Int64))
-    , _proKind                      :: !Text
-    , _proRevisionNumber            :: !(Maybe (Textual Int64))
-    , _proPrivateAuctionId          :: !(Maybe Text)
-    , _proDeliveryControl           :: !(Maybe DeliveryControl)
-    , _proHasCreatorSignedOff       :: !(Maybe Bool)
-    , _proFlightStartTimeMs         :: !(Maybe (Textual Int64))
-    , _proSharedTargetings          :: !(Maybe [SharedTargeting])
-    , _proSeller                    :: !(Maybe Seller)
-    , _proSyndicationProduct        :: !(Maybe Text)
-    , _proFlightEndTimeMs           :: !(Maybe (Textual Int64))
-    , _proName                      :: !(Maybe Text)
-    , _proCreatorContacts           :: !(Maybe [ContactInformation])
-    , _proPublisherProvidedForecast :: !(Maybe PublisherProvidedForecast)
-    , _proLabels                    :: !(Maybe [MarketplaceLabel])
-    , _proPublisherProFileId        :: !(Maybe Text)
-    , _proLegacyOfferId             :: !(Maybe Text)
-    , _proProductId                 :: !(Maybe Text)
+    { _proState                         :: !(Maybe Text)
+    , _proInventorySource               :: !(Maybe Text)
+    , _proWebPropertyCode               :: !(Maybe Text)
+    , _proCreationTimeMs                :: !(Maybe (Textual Int64))
+    , _proTerms                         :: !(Maybe DealTerms)
+    , _proLastUpdateTimeMs              :: !(Maybe (Textual Int64))
+    , _proKind                          :: !Text
+    , _proRevisionNumber                :: !(Maybe (Textual Int64))
+    , _proPrivateAuctionId              :: !(Maybe Text)
+    , _proDeliveryControl               :: !(Maybe DeliveryControl)
+    , _proHasCreatorSignedOff           :: !(Maybe Bool)
+    , _proFlightStartTimeMs             :: !(Maybe (Textual Int64))
+    , _proSharedTargetings              :: !(Maybe [SharedTargeting])
+    , _proSeller                        :: !(Maybe Seller)
+    , _proSyndicationProduct            :: !(Maybe Text)
+    , _proFlightEndTimeMs               :: !(Maybe (Textual Int64))
+    , _proName                          :: !(Maybe Text)
+    , _proCreatorContacts               :: !(Maybe [ContactInformation])
+    , _proMarketplacePublisherProFileId :: !(Maybe Text)
+    , _proPublisherProvidedForecast     :: !(Maybe PublisherProvidedForecast)
+    , _proLabels                        :: !(Maybe [MarketplaceLabel])
+    , _proPublisherProFileId            :: !(Maybe Text)
+    , _proLegacyOfferId                 :: !(Maybe Text)
+    , _proProductId                     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
@@ -5059,6 +5109,8 @@ data Product = Product'
 --
 -- * 'proCreatorContacts'
 --
+-- * 'proMarketplacePublisherProFileId'
+--
 -- * 'proPublisherProvidedForecast'
 --
 -- * 'proLabels'
@@ -5090,6 +5142,7 @@ product =
     , _proFlightEndTimeMs = Nothing
     , _proName = Nothing
     , _proCreatorContacts = Nothing
+    , _proMarketplacePublisherProFileId = Nothing
     , _proPublisherProvidedForecast = Nothing
     , _proLabels = Nothing
     , _proPublisherProFileId = Nothing
@@ -5219,6 +5272,15 @@ proCreatorContacts
       . _Default
       . _Coerce
 
+-- | Marketplace publisher profile Id. This Id differs from the regular
+-- publisher_profile_id in that 1. This is a new id, the old Id will be
+-- deprecated in 2017. 2. This id uniquely identifies a publisher profile
+-- by itself.
+proMarketplacePublisherProFileId :: Lens' Product (Maybe Text)
+proMarketplacePublisherProFileId
+  = lens _proMarketplacePublisherProFileId
+      (\ s a -> s{_proMarketplacePublisherProFileId = a})
+
 -- | Publisher self-provided forecast information.
 proPublisherProvidedForecast :: Lens' Product (Maybe PublisherProvidedForecast)
 proPublisherProvidedForecast
@@ -5274,6 +5336,7 @@ instance FromJSON Product where
                      <*> (o .:? "flightEndTimeMs")
                      <*> (o .:? "name")
                      <*> (o .:? "creatorContacts" .!= mempty)
+                     <*> (o .:? "marketplacePublisherProfileId")
                      <*> (o .:? "publisherProvidedForecast")
                      <*> (o .:? "labels" .!= mempty)
                      <*> (o .:? "publisherProfileId")
@@ -5303,6 +5366,8 @@ instance ToJSON Product where
                   ("flightEndTimeMs" .=) <$> _proFlightEndTimeMs,
                   ("name" .=) <$> _proName,
                   ("creatorContacts" .=) <$> _proCreatorContacts,
+                  ("marketplacePublisherProfileId" .=) <$>
+                    _proMarketplacePublisherProFileId,
                   ("publisherProvidedForecast" .=) <$>
                     _proPublisherProvidedForecast,
                   ("labels" .=) <$> _proLabels,
@@ -5989,7 +6054,7 @@ mdProposalId
 mdDealId :: Lens' MarketplaceDeal (Maybe Text)
 mdDealId = lens _mdDealId (\ s a -> s{_mdDealId = a})
 
--- | Description for the deal terms. (updatable)
+-- | Description for the deal terms. (buyer-readonly)
 mdInventoryDescription :: Lens' MarketplaceDeal (Maybe Text)
 mdInventoryDescription
   = lens _mdInventoryDescription

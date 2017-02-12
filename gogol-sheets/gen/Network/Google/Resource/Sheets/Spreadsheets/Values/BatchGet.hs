@@ -142,7 +142,8 @@ svbgXgafv :: Lens' SpreadsheetsValuesBatchGet (Maybe Xgafv)
 svbgXgafv
   = lens _svbgXgafv (\ s a -> s{_svbgXgafv = a})
 
--- | How values should be represented in the output.
+-- | How values should be represented in the output. The default render
+-- option is ValueRenderOption.FORMATTED_VALUE.
 svbgValueRenderOption :: Lens' SpreadsheetsValuesBatchGet (Maybe Text)
 svbgValueRenderOption
   = lens _svbgValueRenderOption
@@ -190,7 +191,8 @@ svbgBearerToken
       (\ s a -> s{_svbgBearerToken = a})
 
 -- | How dates, times, and durations should be represented in the output.
--- This is ignored if value_render_option is FORMATTED_VALUE.
+-- This is ignored if value_render_option is FORMATTED_VALUE. The default
+-- dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
 svbgDateTimeRenderOption :: Lens' SpreadsheetsValuesBatchGet (Maybe Text)
 svbgDateTimeRenderOption
   = lens _svbgDateTimeRenderOption

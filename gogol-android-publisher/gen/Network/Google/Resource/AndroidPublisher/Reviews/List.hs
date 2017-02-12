@@ -35,6 +35,7 @@ module Network.Google.Resource.AndroidPublisher.Reviews.List
     -- * Request Lenses
     , rlPackageName
     , rlToken
+    , rlTranslationLanguage
     , rlStartIndex
     , rlMaxResults
     ) where
@@ -51,19 +52,21 @@ type ReviewsListResource =
            Capture "packageName" Text :>
              "reviews" :>
                QueryParam "token" Text :>
-                 QueryParam "startIndex" (Textual Word32) :>
-                   QueryParam "maxResults" (Textual Word32) :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] ReviewsListResponse
+                 QueryParam "translationLanguage" Text :>
+                   QueryParam "startIndex" (Textual Word32) :>
+                     QueryParam "maxResults" (Textual Word32) :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] ReviewsListResponse
 
 -- | Returns a list of reviews.
 --
 -- /See:/ 'reviewsList' smart constructor.
 data ReviewsList = ReviewsList'
-    { _rlPackageName :: !Text
-    , _rlToken       :: !(Maybe Text)
-    , _rlStartIndex  :: !(Maybe (Textual Word32))
-    , _rlMaxResults  :: !(Maybe (Textual Word32))
+    { _rlPackageName         :: !Text
+    , _rlToken               :: !(Maybe Text)
+    , _rlTranslationLanguage :: !(Maybe Text)
+    , _rlStartIndex          :: !(Maybe (Textual Word32))
+    , _rlMaxResults          :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReviewsList' with the minimum fields required to make a request.
@@ -73,6 +76,8 @@ data ReviewsList = ReviewsList'
 -- * 'rlPackageName'
 --
 -- * 'rlToken'
+--
+-- * 'rlTranslationLanguage'
 --
 -- * 'rlStartIndex'
 --
@@ -84,6 +89,7 @@ reviewsList pRlPackageName_ =
     ReviewsList'
     { _rlPackageName = pRlPackageName_
     , _rlToken = Nothing
+    , _rlTranslationLanguage = Nothing
     , _rlStartIndex = Nothing
     , _rlMaxResults = Nothing
     }
@@ -97,6 +103,11 @@ rlPackageName
 
 rlToken :: Lens' ReviewsList (Maybe Text)
 rlToken = lens _rlToken (\ s a -> s{_rlToken = a})
+
+rlTranslationLanguage :: Lens' ReviewsList (Maybe Text)
+rlTranslationLanguage
+  = lens _rlTranslationLanguage
+      (\ s a -> s{_rlTranslationLanguage = a})
 
 rlStartIndex :: Lens' ReviewsList (Maybe Word32)
 rlStartIndex
@@ -113,7 +124,8 @@ instance GoogleRequest ReviewsList where
         type Scopes ReviewsList =
              '["https://www.googleapis.com/auth/androidpublisher"]
         requestClient ReviewsList'{..}
-          = go _rlPackageName _rlToken _rlStartIndex
+          = go _rlPackageName _rlToken _rlTranslationLanguage
+              _rlStartIndex
               _rlMaxResults
               (Just AltJSON)
               androidPublisherService

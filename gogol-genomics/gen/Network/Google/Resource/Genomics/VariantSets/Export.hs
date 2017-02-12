@@ -25,7 +25,7 @@
 -- Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variantsets.export@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.variantsets.export@.
 module Network.Google.Resource.Genomics.VariantSets.Export
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type VariantSetsExportResource =
      "v1" :>
        "variantsets" :>
          CaptureMode "variantSetId" "export" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -74,7 +74,7 @@ type VariantSetsExportResource =
 --
 -- /See:/ 'variantSetsExport' smart constructor.
 data VariantSetsExport = VariantSetsExport'
-    { _vseXgafv          :: !(Maybe Text)
+    { _vseXgafv          :: !(Maybe Xgafv)
     , _vseUploadProtocol :: !(Maybe Text)
     , _vsePp             :: !Bool
     , _vseVariantSetId   :: !Text
@@ -124,7 +124,7 @@ variantSetsExport pVseVariantSetId_ pVsePayload_ =
     }
 
 -- | V1 error format.
-vseXgafv :: Lens' VariantSetsExport (Maybe Text)
+vseXgafv :: Lens' VariantSetsExport (Maybe Xgafv)
 vseXgafv = lens _vseXgafv (\ s a -> s{_vseXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

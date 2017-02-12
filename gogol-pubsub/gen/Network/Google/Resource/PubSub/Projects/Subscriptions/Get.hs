@@ -51,7 +51,7 @@ import           Network.Google.PubSub.Types
 type ProjectsSubscriptionsGetResource =
      "v1" :>
        Capture "subscription" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -64,7 +64,7 @@ type ProjectsSubscriptionsGetResource =
 --
 -- /See:/ 'projectsSubscriptionsGet' smart constructor.
 data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet'
-    { _psgXgafv          :: !(Maybe Text)
+    { _psgXgafv          :: !(Maybe Xgafv)
     , _psgUploadProtocol :: !(Maybe Text)
     , _psgPp             :: !Bool
     , _psgAccessToken    :: !(Maybe Text)
@@ -109,7 +109,7 @@ projectsSubscriptionsGet pPsgSubscription_ =
     }
 
 -- | V1 error format.
-psgXgafv :: Lens' ProjectsSubscriptionsGet (Maybe Text)
+psgXgafv :: Lens' ProjectsSubscriptionsGet (Maybe Xgafv)
 psgXgafv = lens _psgXgafv (\ s a -> s{_psgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -140,7 +140,8 @@ psgBearerToken
   = lens _psgBearerToken
       (\ s a -> s{_psgBearerToken = a})
 
--- | The name of the subscription to get.
+-- | The name of the subscription to get. Format is
+-- \`projects\/{project}\/subscriptions\/{sub}\`.
 psgSubscription :: Lens' ProjectsSubscriptionsGet Text
 psgSubscription
   = lens _psgSubscription

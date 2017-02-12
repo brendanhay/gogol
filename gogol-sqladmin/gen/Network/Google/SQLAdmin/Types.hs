@@ -114,6 +114,7 @@ module Network.Google.SQLAdmin.Types
     , ipMApping
     , imaIPAddress
     , imaTimeToRetire
+    , imaType
 
     -- * Database
     , Database
@@ -353,6 +354,12 @@ module Network.Google.SQLAdmin.Types
     , opeCode
     , opeMessage
 
+    -- * TruncateLogContext
+    , TruncateLogContext
+    , truncateLogContext
+    , tlcKind
+    , tlcLogType
+
     -- * InstancesCloneRequest
     , InstancesCloneRequest
     , instancesCloneRequest
@@ -411,6 +418,11 @@ module Network.Google.SQLAdmin.Types
     , flagsListResponse
     , flrKind
     , flrItems
+
+    -- * InstancesTruncateLogRequest
+    , InstancesTruncateLogRequest
+    , instancesTruncateLogRequest
+    , itlrTruncateLogContext
 
     -- * ExportContextSQLExportOptions
     , ExportContextSQLExportOptions

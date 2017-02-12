@@ -23,14 +23,15 @@
 -- Deletes a guardian. The guardian will no longer receive guardian
 -- notifications and the guardian will no longer be accessible via the API.
 -- This method returns the following error codes: * \`PERMISSION_DENIED\`
--- if the requesting user is not permitted to manage guardians for the
--- student identified by the \`student_id\`, if guardians are not enabled
--- for the domain in question, or for other access errors. *
--- \`INVALID_ARGUMENT\` if a \`student_id\` is specified, but its format
+-- if no user that matches the provided \`student_id\` is visible to the
+-- requesting user, if the requesting user is not permitted to manage
+-- guardians for the student identified by the \`student_id\`, if guardians
+-- are not enabled for the domain in question, or for other access errors.
+-- * \`INVALID_ARGUMENT\` if a \`student_id\` is specified, but its format
 -- cannot be recognized (it is not an email address, nor a \`student_id\`
--- from the API). * \`NOT_FOUND\` if Classroom cannot find any record of
--- the given \`student_id\` or \`guardian_id\`, or if the guardian has
--- already been disabled.
+-- from the API). * \`NOT_FOUND\` if the requesting user is permitted to
+-- modify guardians for the requested \`student_id\`, but no \`Guardian\`
+-- record exists for that student with the provided \`guardian_id\`.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.userProfiles.guardians.delete@.
 module Network.Google.Resource.Classroom.UserProFiles.Guardians.Delete
@@ -77,14 +78,15 @@ type UserProFilesGuardiansDeleteResource =
 -- | Deletes a guardian. The guardian will no longer receive guardian
 -- notifications and the guardian will no longer be accessible via the API.
 -- This method returns the following error codes: * \`PERMISSION_DENIED\`
--- if the requesting user is not permitted to manage guardians for the
--- student identified by the \`student_id\`, if guardians are not enabled
--- for the domain in question, or for other access errors. *
--- \`INVALID_ARGUMENT\` if a \`student_id\` is specified, but its format
+-- if no user that matches the provided \`student_id\` is visible to the
+-- requesting user, if the requesting user is not permitted to manage
+-- guardians for the student identified by the \`student_id\`, if guardians
+-- are not enabled for the domain in question, or for other access errors.
+-- * \`INVALID_ARGUMENT\` if a \`student_id\` is specified, but its format
 -- cannot be recognized (it is not an email address, nor a \`student_id\`
--- from the API). * \`NOT_FOUND\` if Classroom cannot find any record of
--- the given \`student_id\` or \`guardian_id\`, or if the guardian has
--- already been disabled.
+-- from the API). * \`NOT_FOUND\` if the requesting user is permitted to
+-- modify guardians for the requested \`student_id\`, but no \`Guardian\`
+-- record exists for that student with the provided \`guardian_id\`.
 --
 -- /See:/ 'userProFilesGuardiansDelete' smart constructor.
 data UserProFilesGuardiansDelete = UserProFilesGuardiansDelete'

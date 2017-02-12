@@ -99,6 +99,9 @@ module Network.Google.YouTubeReporting
     , jExpireTime
     , jCreateTime
 
+    -- ** Xgafv
+    , Xgafv (..)
+
     -- ** ListJobsResponse
     , ListJobsResponse
     , listJobsResponse

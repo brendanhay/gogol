@@ -29,39 +29,6 @@ module Network.Google.AndroidEnterprise
 
     -- * Resources
 
-    -- ** androidenterprise.collections.delete
-    , module Network.Google.Resource.AndroidEnterprise.Collections.Delete
-
-    -- ** androidenterprise.collections.get
-    , module Network.Google.Resource.AndroidEnterprise.Collections.Get
-
-    -- ** androidenterprise.collections.insert
-    , module Network.Google.Resource.AndroidEnterprise.Collections.Insert
-
-    -- ** androidenterprise.collections.list
-    , module Network.Google.Resource.AndroidEnterprise.Collections.List
-
-    -- ** androidenterprise.collections.patch
-    , module Network.Google.Resource.AndroidEnterprise.Collections.Patch
-
-    -- ** androidenterprise.collections.update
-    , module Network.Google.Resource.AndroidEnterprise.Collections.Update
-
-    -- ** androidenterprise.collectionviewers.delete
-    , module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Delete
-
-    -- ** androidenterprise.collectionviewers.get
-    , module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Get
-
-    -- ** androidenterprise.collectionviewers.list
-    , module Network.Google.Resource.AndroidEnterprise.Collectionviewers.List
-
-    -- ** androidenterprise.collectionviewers.patch
-    , module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
-
-    -- ** androidenterprise.collectionviewers.update
-    , module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Update
-
     -- ** androidenterprise.devices.get
     , module Network.Google.Resource.AndroidEnterprise.Devices.Get
 
@@ -215,9 +182,6 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.products.unapprove
     , module Network.Google.Resource.AndroidEnterprise.Products.UnApprove
 
-    -- ** androidenterprise.products.updatePermissions
-    , module Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
-
     -- ** androidenterprise.serviceaccountkeys.delete
     , module Network.Google.Resource.AndroidEnterprise.ServiceAccountkeys.Delete
 
@@ -320,12 +284,6 @@ module Network.Google.AndroidEnterprise
     , eaKind
     , eaAccountEmail
 
-    -- ** CollectionsListResponse
-    , CollectionsListResponse
-    , collectionsListResponse
-    , clrKind
-    , clrCollection
-
     -- ** AppRestrictionsSchemaRestrictionRestrictionValue
     , AppRestrictionsSchemaRestrictionRestrictionValue
     , appRestrictionsSchemaRestrictionRestrictionValue
@@ -409,6 +367,7 @@ module Network.Google.AndroidEnterprise
     , nAppUpdateEvent
     , nInstallFailureEvent
     , nAppRestrictionsSchemaChangeEvent
+    , nNewDeviceEvent
     , nTimestampMillis
 
     -- ** PageInfo
@@ -457,6 +416,7 @@ module Network.Google.AndroidEnterprise
     , sakData
     , sakId
     , sakType
+    , sakPublicData
 
     -- ** InstallsListResponse
     , InstallsListResponse
@@ -512,15 +472,6 @@ module Network.Google.AndroidEnterprise
     , groupLicensesListResponse
     , gllrGroupLicense
     , gllrKind
-
-    -- ** Collection
-    , Collection
-    , collection
-    , colKind
-    , colCollectionId
-    , colVisibility
-    , colName
-    , colProductId
 
     -- ** ProductSet
     , ProductSet
@@ -664,6 +615,13 @@ module Network.Google.AndroidEnterprise
     , appRestrictionsSchemaChangeEvent
     , arsceProductId
 
+    -- ** NewDeviceEvent
+    , NewDeviceEvent
+    , newDeviceEvent
+    , ndeUserId
+    , ndeDeviceId
+    , ndeManagementType
+
     -- ** AdministratorWebToken
     , AdministratorWebToken
     , administratorWebToken
@@ -722,12 +680,6 @@ module Network.Google.AndroidEnterprise
     , productsApproveRequest
     , parApprovalURLInfo
 
-    -- ** CollectionViewersListResponse
-    , CollectionViewersListResponse
-    , collectionViewersListResponse
-    , cvlrKind
-    , cvlrUser
-
     -- ** Entitlement
     , Entitlement
     , entitlement
@@ -746,17 +698,6 @@ module Network.Google.AndroidEnterprise
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.AndroidEnterprise.Collections.Delete
-import           Network.Google.Resource.AndroidEnterprise.Collections.Get
-import           Network.Google.Resource.AndroidEnterprise.Collections.Insert
-import           Network.Google.Resource.AndroidEnterprise.Collections.List
-import           Network.Google.Resource.AndroidEnterprise.Collections.Patch
-import           Network.Google.Resource.AndroidEnterprise.Collections.Update
-import           Network.Google.Resource.AndroidEnterprise.Collectionviewers.Delete
-import           Network.Google.Resource.AndroidEnterprise.Collectionviewers.Get
-import           Network.Google.Resource.AndroidEnterprise.Collectionviewers.List
-import           Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
-import           Network.Google.Resource.AndroidEnterprise.Collectionviewers.Update
 import           Network.Google.Resource.AndroidEnterprise.Devices.Get
 import           Network.Google.Resource.AndroidEnterprise.Devices.GetState
 import           Network.Google.Resource.AndroidEnterprise.Devices.List
@@ -808,7 +749,6 @@ import           Network.Google.Resource.AndroidEnterprise.Products.GetAppRestri
 import           Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
 import           Network.Google.Resource.AndroidEnterprise.Products.List
 import           Network.Google.Resource.AndroidEnterprise.Products.UnApprove
-import           Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
 import           Network.Google.Resource.AndroidEnterprise.ServiceAccountkeys.Delete
 import           Network.Google.Resource.AndroidEnterprise.ServiceAccountkeys.Insert
 import           Network.Google.Resource.AndroidEnterprise.ServiceAccountkeys.List
@@ -848,11 +788,6 @@ type AndroidEnterpriseAPI =
        :<|> StorelayoutclustersGetResource
        :<|> StorelayoutclustersDeleteResource
        :<|> StorelayoutclustersUpdateResource
-       :<|> CollectionviewersListResource
-       :<|> CollectionviewersPatchResource
-       :<|> CollectionviewersGetResource
-       :<|> CollectionviewersDeleteResource
-       :<|> CollectionviewersUpdateResource
        :<|> UsersInsertResource
        :<|> UsersListResource
        :<|> UsersGenerateTokenResource
@@ -875,12 +810,6 @@ type AndroidEnterpriseAPI =
        :<|> StorelayoutpagesGetResource
        :<|> StorelayoutpagesDeleteResource
        :<|> StorelayoutpagesUpdateResource
-       :<|> CollectionsInsertResource
-       :<|> CollectionsListResource
-       :<|> CollectionsPatchResource
-       :<|> CollectionsGetResource
-       :<|> CollectionsDeleteResource
-       :<|> CollectionsUpdateResource
        :<|> ServiceAccountkeysInsertResource
        :<|> ServiceAccountkeysListResource
        :<|> ServiceAccountkeysDeleteResource
@@ -925,7 +854,6 @@ type AndroidEnterpriseAPI =
        :<|> ProductsUnApproveResource
        :<|> ProductsApproveResource
        :<|> ProductsGetPermissionsResource
-       :<|> ProductsUpdatePermissionsResource
        :<|> DevicesListResource
        :<|> DevicesSetStateResource
        :<|> DevicesGetResource

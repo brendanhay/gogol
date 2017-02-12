@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the tax settings of the account.
+-- Updates the tax settings of the account. This method can only be called
+-- for accounts to which the managing account has access: either the
+-- managing account itself or sub-accounts if the managing account is a
+-- multi-client account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounttax.update@.
 module Network.Google.Resource.Content.Accounttax.Update
@@ -54,7 +57,10 @@ type AccounttaxUpdateResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] AccountTax :> Put '[JSON] AccountTax
 
--- | Updates the tax settings of the account.
+-- | Updates the tax settings of the account. This method can only be called
+-- for accounts to which the managing account has access: either the
+-- managing account itself or sub-accounts if the managing account is a
+-- multi-client account.
 --
 -- /See:/ 'accounttaxUpdate' smart constructor.
 data AccounttaxUpdate = AccounttaxUpdate'

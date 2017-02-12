@@ -36,17 +36,59 @@ module Network.Google.Logging
     -- ** logging.billingAccounts.logs.delete
     , module Network.Google.Resource.Logging.BillingAccounts.Logs.Delete
 
+    -- ** logging.billingAccounts.logs.list
+    , module Network.Google.Resource.Logging.BillingAccounts.Logs.List
+
+    -- ** logging.billingAccounts.sinks.create
+    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.Create
+
+    -- ** logging.billingAccounts.sinks.delete
+    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.Delete
+
+    -- ** logging.billingAccounts.sinks.get
+    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.Get
+
+    -- ** logging.billingAccounts.sinks.list
+    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.List
+
+    -- ** logging.billingAccounts.sinks.update
+    , module Network.Google.Resource.Logging.BillingAccounts.Sinks.Update
+
     -- ** logging.entries.list
     , module Network.Google.Resource.Logging.Entries.List
 
     -- ** logging.entries.write
     , module Network.Google.Resource.Logging.Entries.Write
 
+    -- ** logging.folders.logs.delete
+    , module Network.Google.Resource.Logging.Folders.Logs.Delete
+
+    -- ** logging.folders.logs.list
+    , module Network.Google.Resource.Logging.Folders.Logs.List
+
+    -- ** logging.folders.sinks.create
+    , module Network.Google.Resource.Logging.Folders.Sinks.Create
+
+    -- ** logging.folders.sinks.delete
+    , module Network.Google.Resource.Logging.Folders.Sinks.Delete
+
+    -- ** logging.folders.sinks.get
+    , module Network.Google.Resource.Logging.Folders.Sinks.Get
+
+    -- ** logging.folders.sinks.list
+    , module Network.Google.Resource.Logging.Folders.Sinks.List
+
+    -- ** logging.folders.sinks.update
+    , module Network.Google.Resource.Logging.Folders.Sinks.Update
+
     -- ** logging.monitoredResourceDescriptors.list
     , module Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
 
     -- ** logging.organizations.logs.delete
     , module Network.Google.Resource.Logging.Organizations.Logs.Delete
+
+    -- ** logging.organizations.logs.list
+    , module Network.Google.Resource.Logging.Organizations.Logs.List
 
     -- ** logging.organizations.sinks.create
     , module Network.Google.Resource.Logging.Organizations.Sinks.Create
@@ -65,6 +107,9 @@ module Network.Google.Logging
 
     -- ** logging.projects.logs.delete
     , module Network.Google.Resource.Logging.Projects.Logs.Delete
+
+    -- ** logging.projects.logs.list
+    , module Network.Google.Resource.Logging.Projects.Logs.List
 
     -- ** logging.projects.metrics.create
     , module Network.Google.Resource.Logging.Projects.Metrics.Create
@@ -195,6 +240,13 @@ module Network.Google.Logging
     , logEntryProtoPayload
     , leppAddtional
 
+    -- ** LogEntrySourceLocation
+    , LogEntrySourceLocation
+    , logEntrySourceLocation
+    , leslFunction
+    , leslLine
+    , leslFile
+
     -- ** WriteLogEntriesResponse
     , WriteLogEntriesResponse
     , writeLogEntriesResponse
@@ -209,6 +261,12 @@ module Network.Google.Logging
     , lsName
     , lsEndTime
     , lsFilter
+
+    -- ** ListLogsResponse
+    , ListLogsResponse
+    , listLogsResponse
+    , llrNextPageToken
+    , llrLogNames
 
     -- ** ListMonitoredResourceDescriptorsResponse
     , ListMonitoredResourceDescriptorsResponse
@@ -304,8 +362,10 @@ module Network.Google.Logging
     , leInsertId
     , leLabels
     , leProtoPayload
+    , leSourceLocation
     , leLogName
     , leTimestamp
+    , leTrace
 
     -- ** SourceLocation
     , SourceLocation
@@ -335,16 +395,31 @@ module Network.Google.Logging
 import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 import           Network.Google.Resource.Logging.BillingAccounts.Logs.Delete
+import           Network.Google.Resource.Logging.BillingAccounts.Logs.List
+import           Network.Google.Resource.Logging.BillingAccounts.Sinks.Create
+import           Network.Google.Resource.Logging.BillingAccounts.Sinks.Delete
+import           Network.Google.Resource.Logging.BillingAccounts.Sinks.Get
+import           Network.Google.Resource.Logging.BillingAccounts.Sinks.List
+import           Network.Google.Resource.Logging.BillingAccounts.Sinks.Update
 import           Network.Google.Resource.Logging.Entries.List
 import           Network.Google.Resource.Logging.Entries.Write
+import           Network.Google.Resource.Logging.Folders.Logs.Delete
+import           Network.Google.Resource.Logging.Folders.Logs.List
+import           Network.Google.Resource.Logging.Folders.Sinks.Create
+import           Network.Google.Resource.Logging.Folders.Sinks.Delete
+import           Network.Google.Resource.Logging.Folders.Sinks.Get
+import           Network.Google.Resource.Logging.Folders.Sinks.List
+import           Network.Google.Resource.Logging.Folders.Sinks.Update
 import           Network.Google.Resource.Logging.MonitoredResourceDescriptors.List
 import           Network.Google.Resource.Logging.Organizations.Logs.Delete
+import           Network.Google.Resource.Logging.Organizations.Logs.List
 import           Network.Google.Resource.Logging.Organizations.Sinks.Create
 import           Network.Google.Resource.Logging.Organizations.Sinks.Delete
 import           Network.Google.Resource.Logging.Organizations.Sinks.Get
 import           Network.Google.Resource.Logging.Organizations.Sinks.List
 import           Network.Google.Resource.Logging.Organizations.Sinks.Update
 import           Network.Google.Resource.Logging.Projects.Logs.Delete
+import           Network.Google.Resource.Logging.Projects.Logs.List
 import           Network.Google.Resource.Logging.Projects.Metrics.Create
 import           Network.Google.Resource.Logging.Projects.Metrics.Delete
 import           Network.Google.Resource.Logging.Projects.Metrics.Get
@@ -363,12 +438,20 @@ TODO
 -- | Represents the entirety of the methods and resources available for the Stackdriver Logging API service.
 type LoggingAPI =
      EntriesListResource :<|> EntriesWriteResource :<|>
-       MonitoredResourceDescriptorsListResource
+       FoldersSinksListResource
+       :<|> FoldersSinksGetResource
+       :<|> FoldersSinksCreateResource
+       :<|> FoldersSinksDeleteResource
+       :<|> FoldersSinksUpdateResource
+       :<|> FoldersLogsListResource
+       :<|> FoldersLogsDeleteResource
+       :<|> MonitoredResourceDescriptorsListResource
        :<|> OrganizationsSinksListResource
        :<|> OrganizationsSinksGetResource
        :<|> OrganizationsSinksCreateResource
        :<|> OrganizationsSinksDeleteResource
        :<|> OrganizationsSinksUpdateResource
+       :<|> OrganizationsLogsListResource
        :<|> OrganizationsLogsDeleteResource
        :<|> ProjectsSinksListResource
        :<|> ProjectsSinksGetResource
@@ -380,5 +463,12 @@ type LoggingAPI =
        :<|> ProjectsMetricsCreateResource
        :<|> ProjectsMetricsDeleteResource
        :<|> ProjectsMetricsUpdateResource
+       :<|> ProjectsLogsListResource
        :<|> ProjectsLogsDeleteResource
+       :<|> BillingAccountsSinksListResource
+       :<|> BillingAccountsSinksGetResource
+       :<|> BillingAccountsSinksCreateResource
+       :<|> BillingAccountsSinksDeleteResource
+       :<|> BillingAccountsSinksUpdateResource
+       :<|> BillingAccountsLogsListResource
        :<|> BillingAccountsLogsDeleteResource

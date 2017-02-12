@@ -21,7 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the tax settings of the sub-accounts in your Merchant Center
--- account.
+-- account. This method can only be called for multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounttax.list@.
 module Network.Google.Resource.Content.Accounttax.List
@@ -55,7 +55,7 @@ type AccounttaxListResource =
                    Get '[JSON] AccounttaxListResponse
 
 -- | Lists the tax settings of the sub-accounts in your Merchant Center
--- account.
+-- account. This method can only be called for multi-client accounts.
 --
 -- /See:/ 'accounttaxList' smart constructor.
 data AccounttaxList = AccounttaxList'

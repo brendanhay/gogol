@@ -24,7 +24,7 @@
 -- other genomics resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.delete@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.readgroupsets.delete@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Delete
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type ReadGroupSetsDeleteResource =
      "v1" :>
        "readgroupsets" :>
          Capture "readGroupSetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -69,7 +69,7 @@ type ReadGroupSetsDeleteResource =
 --
 -- /See:/ 'readGroupSetsDelete' smart constructor.
 data ReadGroupSetsDelete = ReadGroupSetsDelete'
-    { _rgsdXgafv          :: !(Maybe Text)
+    { _rgsdXgafv          :: !(Maybe Xgafv)
     , _rgsdReadGroupSetId :: !Text
     , _rgsdUploadProtocol :: !(Maybe Text)
     , _rgsdPp             :: !Bool
@@ -114,7 +114,7 @@ readGroupSetsDelete pRgsdReadGroupSetId_ =
     }
 
 -- | V1 error format.
-rgsdXgafv :: Lens' ReadGroupSetsDelete (Maybe Text)
+rgsdXgafv :: Lens' ReadGroupSetsDelete (Maybe Xgafv)
 rgsdXgafv
   = lens _rgsdXgafv (\ s a -> s{_rgsdXgafv = a})
 

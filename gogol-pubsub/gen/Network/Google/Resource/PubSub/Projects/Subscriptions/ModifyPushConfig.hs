@@ -57,7 +57,7 @@ import           Network.Google.PubSub.Types
 type ProjectsSubscriptionsModifyPushConfigResource =
      "v1" :>
        CaptureMode "subscription" "modifyPushConfig" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -77,7 +77,7 @@ type ProjectsSubscriptionsModifyPushConfigResource =
 --
 -- /See:/ 'projectsSubscriptionsModifyPushConfig' smart constructor.
 data ProjectsSubscriptionsModifyPushConfig = ProjectsSubscriptionsModifyPushConfig'
-    { _psmpcXgafv          :: !(Maybe Text)
+    { _psmpcXgafv          :: !(Maybe Xgafv)
     , _psmpcUploadProtocol :: !(Maybe Text)
     , _psmpcPp             :: !Bool
     , _psmpcAccessToken    :: !(Maybe Text)
@@ -127,7 +127,7 @@ projectsSubscriptionsModifyPushConfig pPsmpcPayload_ pPsmpcSubscription_ =
     }
 
 -- | V1 error format.
-psmpcXgafv :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Text)
+psmpcXgafv :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Xgafv)
 psmpcXgafv
   = lens _psmpcXgafv (\ s a -> s{_psmpcXgafv = a})
 
@@ -164,7 +164,8 @@ psmpcBearerToken
   = lens _psmpcBearerToken
       (\ s a -> s{_psmpcBearerToken = a})
 
--- | The name of the subscription.
+-- | The name of the subscription. Format is
+-- \`projects\/{project}\/subscriptions\/{sub}\`.
 psmpcSubscription :: Lens' ProjectsSubscriptionsModifyPushConfig Text
 psmpcSubscription
   = lens _psmpcSubscription

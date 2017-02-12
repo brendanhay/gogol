@@ -92,7 +92,8 @@ instance GoogleRequest RelyingPartyGetProjectConfig
          where
         type Rs RelyingPartyGetProjectConfig =
              IdentitytoolkitRelyingPartyGetProjectConfigResponse
-        type Scopes RelyingPartyGetProjectConfig = '[]
+        type Scopes RelyingPartyGetProjectConfig =
+             '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient RelyingPartyGetProjectConfig'{..}
           = go _rpgpcDelegatedProjectNumber _rpgpcProjectNumber
               (Just AltJSON)

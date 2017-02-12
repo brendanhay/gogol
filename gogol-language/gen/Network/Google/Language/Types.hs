@@ -1,0 +1,250 @@
+{-# LANGUAGE DataKinds          #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
+{-# LANGUAGE OverloadedStrings  #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+-- |
+-- Module      : Network.Google.Language.Types
+-- Copyright   : (c) 2015-2016 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+module Network.Google.Language.Types
+    (
+    -- * Service Configuration
+      languageService
+
+    -- * OAuth Scopes
+    , cloudPlatformScope
+
+    -- * AnalyzeSyntaxRequest
+    , AnalyzeSyntaxRequest
+    , analyzeSyntaxRequest
+    , asrEncodingType
+    , asrDocument
+
+    -- * DependencyEdge
+    , DependencyEdge
+    , dependencyEdge
+    , deHeadTokenIndex
+    , deLabel
+
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- * PartOfSpeechProper
+    , PartOfSpeechProper (..)
+
+    -- * PartOfSpeechTag
+    , PartOfSpeechTag (..)
+
+    -- * Sentiment
+    , Sentiment
+    , sentiment
+    , sScore
+    , sMagnitude
+
+    -- * DocumentType
+    , DocumentType (..)
+
+    -- * AnalyzeSyntaxRequestEncodingType
+    , AnalyzeSyntaxRequestEncodingType (..)
+
+    -- * DependencyEdgeLabel
+    , DependencyEdgeLabel (..)
+
+    -- * PartOfSpeechVoice
+    , PartOfSpeechVoice (..)
+
+    -- * PartOfSpeechForm
+    , PartOfSpeechForm (..)
+
+    -- * PartOfSpeechPerson
+    , PartOfSpeechPerson (..)
+
+    -- * Token
+    , Token
+    , token
+    , tDependencyEdge
+    , tText
+    , tLemma
+    , tPartOfSpeech
+
+    -- * EntityType
+    , EntityType (..)
+
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
+
+    -- * AnnotateTextRequest
+    , AnnotateTextRequest
+    , annotateTextRequest
+    , atrEncodingType
+    , atrFeatures
+    , atrDocument
+
+    -- * EntityMention
+    , EntityMention
+    , entityMention
+    , emText
+    , emType
+
+    -- * TextSpan
+    , TextSpan
+    , textSpan
+    , tsBeginOffSet
+    , tsContent
+
+    -- * AnnotateTextResponse
+    , AnnotateTextResponse
+    , annotateTextResponse
+    , atrEntities
+    , atrTokens
+    , atrDocumentSentiment
+    , atrSentences
+    , atrLanguage
+
+    -- * PartOfSpeechTense
+    , PartOfSpeechTense (..)
+
+    -- * Features
+    , Features
+    , features
+    , fExtractSyntax
+    , fExtractDocumentSentiment
+    , fExtractEntities
+
+    -- * Document
+    , Document
+    , document
+    , dContent
+    , dLanguage
+    , dGcsContentURI
+    , dType
+
+    -- * PartOfSpeechMood
+    , PartOfSpeechMood (..)
+
+    -- * PartOfSpeechCase
+    , PartOfSpeechCase (..)
+
+    -- * AnalyzeSentimentRequest
+    , AnalyzeSentimentRequest
+    , analyzeSentimentRequest
+    , aEncodingType
+    , aDocument
+
+    -- * Xgafv
+    , Xgafv (..)
+
+    -- * AnalyzeEntitiesResponse
+    , AnalyzeEntitiesResponse
+    , analyzeEntitiesResponse
+    , aerEntities
+    , aerLanguage
+
+    -- * AnnotateTextRequestEncodingType
+    , AnnotateTextRequestEncodingType (..)
+
+    -- * PartOfSpeechNumber
+    , PartOfSpeechNumber (..)
+
+    -- * AnalyzeSentimentResponse
+    , AnalyzeSentimentResponse
+    , analyzeSentimentResponse
+    , asrDocumentSentiment
+    , asrSentences
+    , asrLanguage
+
+    -- * AnalyzeEntitiesRequest
+    , AnalyzeEntitiesRequest
+    , analyzeEntitiesRequest
+    , aerEncodingType
+    , aerDocument
+
+    -- * AnalyzeEntitiesRequestEncodingType
+    , AnalyzeEntitiesRequestEncodingType (..)
+
+    -- * Entity
+    , Entity
+    , entity
+    , eName
+    , eSalience
+    , eMetadata
+    , eType
+    , eMentions
+
+    -- * AnalyzeSyntaxResponse
+    , AnalyzeSyntaxResponse
+    , analyzeSyntaxResponse
+    , aTokens
+    , aSentences
+    , aLanguage
+
+    -- * EntityMetadata
+    , EntityMetadata
+    , entityMetadata
+    , emAddtional
+
+    -- * PartOfSpeechAspect
+    , PartOfSpeechAspect (..)
+
+    -- * PartOfSpeech
+    , PartOfSpeech
+    , partOfSpeech
+    , posProper
+    , posTag
+    , posPerson
+    , posAspect
+    , posCase
+    , posGender
+    , posReciprocity
+    , posNumber
+    , posVoice
+    , posForm
+    , posTense
+    , posMood
+
+    -- * PartOfSpeechReciprocity
+    , PartOfSpeechReciprocity (..)
+
+    -- * PartOfSpeechGender
+    , PartOfSpeechGender (..)
+
+    -- * AnalyzeSentimentRequestEncodingType
+    , AnalyzeSentimentRequestEncodingType (..)
+
+    -- * EntityMentionType
+    , EntityMentionType (..)
+
+    -- * Sentence
+    , Sentence
+    , sentence
+    , sSentiment
+    , sText
+    ) where
+
+import           Network.Google.Language.Types.Product
+import           Network.Google.Language.Types.Sum
+import           Network.Google.Prelude
+
+-- | Default request referring to version 'v1' of the Google Cloud Natural Language API. This contains the host and root path used as a starting point for constructing service requests.
+languageService :: ServiceConfig
+languageService
+  = defaultService (ServiceId "language:v1")
+      "language.googleapis.com"
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

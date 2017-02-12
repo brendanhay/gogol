@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Marks line item(s) as shipped.
+-- Marks line item(s) as shipped. This method can only be called for
+-- non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.shiplineitems@.
 module Network.Google.Resource.Content.Orders.Shiplineitems
@@ -54,7 +55,8 @@ type OrdersShiplineitemsResource =
                    ReqBody '[JSON] OrdersShipLineItemsRequest :>
                      Post '[JSON] OrdersShipLineItemsResponse
 
--- | Marks line item(s) as shipped.
+-- | Marks line item(s) as shipped. This method can only be called for
+-- non-multi-client accounts.
 --
 -- /See:/ 'ordersShiplineitems' smart constructor.
 data OrdersShiplineitems = OrdersShiplineitems'

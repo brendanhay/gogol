@@ -103,6 +103,7 @@ module Network.Google.ServiceManagement.Types
     , AuditConfig
     , auditConfig
     , acService
+    , acAuditLogConfigs
     , acExemptedMembers
 
     -- * Control
@@ -208,7 +209,6 @@ module Network.Google.ServiceManagement.Types
     , sAuthentication
     , sAPIs
     , sTypes
-    , sAnalytics
     , sVisibility
     , sSystemTypes
     , sMonitoredResources
@@ -332,11 +332,6 @@ module Network.Google.ServiceManagement.Types
     , generateConfigReportRequestOldConfig
     , gcrrocAddtional
 
-    -- * Analytics
-    , Analytics
-    , analytics
-    , aProducerDestinations
-
     -- * Rule
     , Rule
     , rule
@@ -370,6 +365,7 @@ module Network.Google.ServiceManagement.Types
     -- * SetIAMPolicyRequest
     , SetIAMPolicyRequest
     , setIAMPolicyRequest
+    , siprUpdateMask
     , siprPolicy
 
     -- * TrafficPercentStrategyPercentages
@@ -463,6 +459,9 @@ module Network.Google.ServiceManagement.Types
     , csFiles
     , csId
 
+    -- * AuditLogConfigLogType
+    , AuditLogConfigLogType (..)
+
     -- * Documentation
     , Documentation
     , documentation
@@ -480,12 +479,6 @@ module Network.Google.ServiceManagement.Types
 
     -- * Xgafv
     , Xgafv (..)
-
-    -- * AnalyticsDestination
-    , AnalyticsDestination
-    , analyticsDestination
-    , adMetrics
-    , adMonitoredResource
 
     -- * ConfigFileFileType
     , ConfigFileFileType (..)
@@ -516,6 +509,7 @@ module Network.Google.ServiceManagement.Types
     , usage
     , uRequirements
     , uRules
+    , uProducerNotificationChannel
 
     -- * FieldCardinality
     , FieldCardinality (..)
@@ -614,6 +608,12 @@ module Network.Google.ServiceManagement.Types
     , ceRules
     , ceTypes
 
+    -- * AuditLogConfig
+    , AuditLogConfig
+    , auditLogConfig
+    , alcLogType
+    , alcExemptedMembers
+
     -- * Option
     , Option
     , option
@@ -705,6 +705,7 @@ module Network.Google.ServiceManagement.Types
     , AuthProvider
     , authProvider
     , apJWKsURI
+    , apAudiences
     , apId
     , apIssuer
 

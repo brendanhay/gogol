@@ -446,9 +446,11 @@ module Network.Google.Directory.Types
     , useEmails
     , useIms
     , useIsAdmin
+    , useIsEnrolledIn2Sv
     , useId
     , useOrganizations
     , usePrimaryEmail
+    , useIsEnforcedIn2Sv
     , useNotes
     , useIsDelegatedAdmin
     , useIsMailboxSetup

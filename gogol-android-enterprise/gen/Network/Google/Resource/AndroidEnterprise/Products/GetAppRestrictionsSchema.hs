@@ -23,9 +23,9 @@
 -- Retrieves the schema that defines the configurable properties for this
 -- product. All products have a schema, but this schema may be empty if no
 -- managed configurations have been defined. This schema can be used to
--- populate a UI that allows an administrator to configure the product. To
--- apply a managed configuration based on the schema obtained using this
--- API, see Managed Configurations through Play.
+-- populate a UI that allows an admin to configure the product. To apply a
+-- managed configuration based on the schema obtained using this API, see
+-- Managed Configurations through Play.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.products.getAppRestrictionsSchema@.
 module Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
@@ -63,9 +63,9 @@ type ProductsGetAppRestrictionsSchemaResource =
 -- | Retrieves the schema that defines the configurable properties for this
 -- product. All products have a schema, but this schema may be empty if no
 -- managed configurations have been defined. This schema can be used to
--- populate a UI that allows an administrator to configure the product. To
--- apply a managed configuration based on the schema obtained using this
--- API, see Managed Configurations through Play.
+-- populate a UI that allows an admin to configure the product. To apply a
+-- managed configuration based on the schema obtained using this API, see
+-- Managed Configurations through Play.
 --
 -- /See:/ 'productsGetAppRestrictionsSchema' smart constructor.
 data ProductsGetAppRestrictionsSchema = ProductsGetAppRestrictionsSchema'

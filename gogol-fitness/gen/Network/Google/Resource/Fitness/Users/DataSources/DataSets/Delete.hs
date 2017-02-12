@@ -148,9 +148,14 @@ instance GoogleRequest UsersDataSourcesDataSetsDelete
         type Rs UsersDataSourcesDataSetsDelete = ()
         type Scopes UsersDataSourcesDataSetsDelete =
              '["https://www.googleapis.com/auth/fitness.activity.write",
+               "https://www.googleapis.com/auth/fitness.blood_glucose.write",
+               "https://www.googleapis.com/auth/fitness.blood_pressure.write",
                "https://www.googleapis.com/auth/fitness.body.write",
+               "https://www.googleapis.com/auth/fitness.body_temperature.write",
                "https://www.googleapis.com/auth/fitness.location.write",
-               "https://www.googleapis.com/auth/fitness.nutrition.write"]
+               "https://www.googleapis.com/auth/fitness.nutrition.write",
+               "https://www.googleapis.com/auth/fitness.oxygen_saturation.write",
+               "https://www.googleapis.com/auth/fitness.reproductive_health.write"]
         requestClient UsersDataSourcesDataSetsDelete'{..}
           = go _udsdsdUserId _udsdsdDataSourceId
               _udsdsdDataSetId

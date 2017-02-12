@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a datafeed from your Merchant Center account.
+-- Retrieves a datafeed from your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.get@.
 module Network.Google.Resource.Content.Datafeeds.Get
@@ -50,7 +51,8 @@ type DatafeedsGetResource =
              Capture "datafeedId" (Textual Word64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] Datafeed
 
--- | Retrieves a datafeed from your Merchant Center account.
+-- | Retrieves a datafeed from your Merchant Center account. This method can
+-- only be called for non-multi-client accounts.
 --
 -- /See:/ 'datafeedsGet' smart constructor.
 data DatafeedsGet = DatafeedsGet'

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of user roles, possibly filtered.
+-- Retrieves a list of user roles, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRoles.list@.
 module Network.Google.Resource.DFAReporting.UserRoles.List
@@ -51,7 +52,7 @@ import           Network.Google.Prelude
 -- 'UserRolesList' request conforms to.
 type UserRolesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "userRoles" :>
@@ -66,7 +67,8 @@ type UserRolesListResource =
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] UserRolesListResponse
 
--- | Retrieves a list of user roles, possibly filtered.
+-- | Retrieves a list of user roles, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ 'userRolesList' smart constructor.
 data UserRolesList = UserRolesList'

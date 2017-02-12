@@ -374,6 +374,7 @@ module Network.Google.YouTube.Types
     , VideoContentDetails
     , videoContentDetails
     , vcdCountryRestriction
+    , vcdHasCustomThumbnail
     , vcdDefinition
     , vcdDimension
     , vcdCaption
@@ -525,7 +526,6 @@ module Network.Google.YouTube.Types
     , videoFileDetails
     , vfdBitrateBps
     , vfdCreationTime
-    , vfdRecordingLocation
     , vfdDurationMs
     , vfdFileSize
     , vfdFileType
@@ -563,7 +563,6 @@ module Network.Google.YouTube.Types
     , ChannelContentDetails
     , channelContentDetails
     , ccdRelatedPlayLists
-    , ccdGooglePlusUserId
 
     -- * SearchListVideoDefinition
     , SearchListVideoDefinition (..)
@@ -1385,6 +1384,8 @@ module Network.Google.YouTube.Types
     -- * VideoPlayer
     , VideoPlayer
     , videoPlayer
+    , vpEmbedHeight
+    , vpEmbedWidth
     , vpEmbedHTML
 
     -- * PromotedItemId
@@ -1644,6 +1645,7 @@ module Network.Google.YouTube.Types
     , playListItemContentDetails
     , plicdStartAt
     , plicdNote
+    , plicdVideoPublishedAt
     , plicdVideoId
     , plicdEndAt
 
@@ -1671,6 +1673,9 @@ module Network.Google.YouTube.Types
 
     -- * SearchListVideoEmbeddable
     , SearchListVideoEmbeddable (..)
+
+    -- * ContentRatingMcstRating
+    , ContentRatingMcstRating (..)
 
     -- * LanguageTag
     , LanguageTag
@@ -1841,7 +1846,6 @@ module Network.Google.YouTube.Types
     , cUpdatedAt
     , cAuthorChannelId
     , cCanRate
-    , cAuthorGoogleplusProFileURL
     , cParentId
 
     -- * LiveStreamStatus
@@ -1908,6 +1912,7 @@ module Network.Google.YouTube.Types
     , crSmsaRating
     , crChvrsRating
     , crIncaaRating
+    , crMcstRating
     , crNfrcRating
     , crCsaRating
     , crMocRating

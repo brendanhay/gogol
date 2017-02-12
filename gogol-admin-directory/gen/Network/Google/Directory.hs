@@ -745,9 +745,11 @@ module Network.Google.Directory
     , useEmails
     , useIms
     , useIsAdmin
+    , useIsEnrolledIn2Sv
     , useId
     , useOrganizations
     , usePrimaryEmail
+    , useIsEnforcedIn2Sv
     , useNotes
     , useIsDelegatedAdmin
     , useIsMailboxSetup

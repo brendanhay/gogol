@@ -55,7 +55,7 @@ import           Network.Google.PubSub.Types
 type ProjectsSubscriptionsPullResource =
      "v1" :>
        CaptureMode "subscription" "pull" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -73,7 +73,7 @@ type ProjectsSubscriptionsPullResource =
 --
 -- /See:/ 'projectsSubscriptionsPull' smart constructor.
 data ProjectsSubscriptionsPull = ProjectsSubscriptionsPull'
-    { _pspXgafv          :: !(Maybe Text)
+    { _pspXgafv          :: !(Maybe Xgafv)
     , _pspUploadProtocol :: !(Maybe Text)
     , _pspPp             :: !Bool
     , _pspAccessToken    :: !(Maybe Text)
@@ -123,7 +123,7 @@ projectsSubscriptionsPull pPspPayload_ pPspSubscription_ =
     }
 
 -- | V1 error format.
-pspXgafv :: Lens' ProjectsSubscriptionsPull (Maybe Text)
+pspXgafv :: Lens' ProjectsSubscriptionsPull (Maybe Xgafv)
 pspXgafv = lens _pspXgafv (\ s a -> s{_pspXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -159,7 +159,8 @@ pspBearerToken
   = lens _pspBearerToken
       (\ s a -> s{_pspBearerToken = a})
 
--- | The subscription from which messages should be pulled.
+-- | The subscription from which messages should be pulled. Format is
+-- \`projects\/{project}\/subscriptions\/{sub}\`.
 pspSubscription :: Lens' ProjectsSubscriptionsPull Text
 pspSubscription
   = lens _pspSubscription

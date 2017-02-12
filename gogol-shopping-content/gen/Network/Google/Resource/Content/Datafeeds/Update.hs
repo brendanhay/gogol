@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a datafeed of your Merchant Center account.
+-- Updates a datafeed of your Merchant Center account. This method can only
+-- be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.update@.
 module Network.Google.Resource.Content.Datafeeds.Update
@@ -54,7 +55,8 @@ type DatafeedsUpdateResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Datafeed :> Put '[JSON] Datafeed
 
--- | Updates a datafeed of your Merchant Center account.
+-- | Updates a datafeed of your Merchant Center account. This method can only
+-- be called for non-multi-client accounts.
 --
 -- /See:/ 'datafeedsUpdate' smart constructor.
 data DatafeedsUpdate = DatafeedsUpdate'

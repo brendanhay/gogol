@@ -232,6 +232,7 @@ module Network.Google.Storage.Types
     , Object
     , object'
     , objEtag
+    , objTimeStorageClassUpdated
     , objSize
     , objKind
     , objTimeDeleted

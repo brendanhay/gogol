@@ -29,11 +29,13 @@ module Network.Google.MachineLearning.Types
     -- * GoogleCloudMlV1beta1__Version
     , GoogleCloudMlV1beta1__Version
     , googleCloudMlV1beta1__Version
+    , gcmvvRuntimeVersion
     , gcmvvLastUseTime
     , gcmvvName
     , gcmvvDeploymentURI
     , gcmvvDescription
     , gcmvvCreateTime
+    , gcmvvOnlinePredictionLogging
     , gcmvvIsDefault
 
     -- * GoogleCloudMlV1beta1__HyperparameterSpec
@@ -67,12 +69,15 @@ module Network.Google.MachineLearning.Types
     -- * GoogleCloudMlV1beta1__TrainingOutput
     , GoogleCloudMlV1beta1__TrainingOutput
     , googleCloudMlV1beta1__TrainingOutput
+    , gcmvtoIsHyperparameterTuningJob
     , gcmvtoCompletedTrialCount
+    , gcmvtoConsumedMLUnits
     , gcmvtoTrials
 
     -- * GoogleCloudMlV1beta1__Model
     , GoogleCloudMlV1beta1__Model
     , googleCloudMlV1beta1__Model
+    , gcmvmRegions
     , gcmvmDefaultVersion
     , gcmvmName
     , gcmvmDescription
@@ -125,6 +130,7 @@ module Network.Google.MachineLearning.Types
     , gcmvpiVersionName
     , gcmvpiModelName
     , gcmvpiDataFormat
+    , gcmvpiRuntimeVersion
     , gcmvpiMaxWorkerCount
     , gcmvpiOutputPath
     , gcmvpiRegion
@@ -162,6 +168,7 @@ module Network.Google.MachineLearning.Types
     -- * GoogleCloudMlV1beta1__PredictionOutput
     , GoogleCloudMlV1beta1__PredictionOutput
     , googleCloudMlV1beta1__PredictionOutput
+    , gcmvpoNodeHours
     , gcmvpoErrorCount
     , gcmvpoPredictionCount
     , gcmvpoOutputPath
@@ -198,6 +205,7 @@ module Network.Google.MachineLearning.Types
     , gcmvtiParameterServerCount
     , gcmvtiArgs
     , gcmvtiWorkerCount
+    , gcmvtiRuntimeVersion
     , gcmvtiWorkerType
     , gcmvtiPythonModule
     , gcmvtiParameterServerType

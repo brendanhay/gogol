@@ -69,8 +69,10 @@ packages:
   - gogol-iam
   - gogol-identity-toolkit
   - gogol-kgsearch
+  - gogol-language
   - gogol-latencytest
   - gogol-logging
+  - gogol-manufacturers
   - gogol-maps-coordinate
   - gogol-maps-engine
   - gogol-mirror
@@ -99,6 +101,7 @@ packages:
   - gogol-sheets
   - gogol-shopping-content
   - gogol-siteverification
+  - gogol-slides
   - gogol-spectrum
   - gogol-sqladmin
   - gogol-storage

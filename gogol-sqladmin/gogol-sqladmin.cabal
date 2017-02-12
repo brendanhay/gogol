@@ -60,6 +60,7 @@ library
         , Network.Google.Resource.SQL.Instances.RestoreBackup
         , Network.Google.Resource.SQL.Instances.StartReplica
         , Network.Google.Resource.SQL.Instances.StopReplica
+        , Network.Google.Resource.SQL.Instances.TruncateLog
         , Network.Google.Resource.SQL.Instances.Update
         , Network.Google.Resource.SQL.Operations.Get
         , Network.Google.Resource.SQL.Operations.List

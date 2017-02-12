@@ -38,7 +38,7 @@
 -- respective streams of paginated responses. Implements
 -- [GlobalAllianceApi.searchReads](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L85).
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.reads.search@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.reads.search@.
 module Network.Google.Resource.Genomics.Reads.Search
     (
     -- * REST Resource
@@ -68,7 +68,7 @@ type ReadsSearchResource =
      "v1" :>
        "reads" :>
          "search" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -99,7 +99,7 @@ type ReadsSearchResource =
 --
 -- /See:/ 'readsSearch' smart constructor.
 data ReadsSearch = ReadsSearch'
-    { _reaXgafv          :: !(Maybe Text)
+    { _reaXgafv          :: !(Maybe Xgafv)
     , _reaUploadProtocol :: !(Maybe Text)
     , _reaPp             :: !Bool
     , _reaAccessToken    :: !(Maybe Text)
@@ -144,7 +144,7 @@ readsSearch pReaPayload_ =
     }
 
 -- | V1 error format.
-reaXgafv :: Lens' ReadsSearch (Maybe Text)
+reaXgafv :: Lens' ReadsSearch (Maybe Xgafv)
 reaXgafv = lens _reaXgafv (\ s a -> s{_reaXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

@@ -19,7 +19,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2.6@
+    This library is compatible with version @v2.7@
     of the API.
 
 source-repository head
@@ -237,6 +237,8 @@ library
         , Network.Google.Resource.DFAReporting.UserRoles.List
         , Network.Google.Resource.DFAReporting.UserRoles.Patch
         , Network.Google.Resource.DFAReporting.UserRoles.Update
+        , Network.Google.Resource.DFAReporting.VideoFormats.Get
+        , Network.Google.Resource.DFAReporting.VideoFormats.List
 
     other-modules:
           Network.Google.DFAReporting.Types.Product

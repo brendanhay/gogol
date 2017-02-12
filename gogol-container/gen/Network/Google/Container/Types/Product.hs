@@ -154,6 +154,7 @@ instance ToJSON CreateClusterRequest where
 data Cluster = Cluster'
     { _cStatus                :: !(Maybe Text)
     , _cNodePools             :: !(Maybe [NodePool])
+    , _cEnableKubernetesAlpha :: !(Maybe Bool)
     , _cNodeConfig            :: !(Maybe NodeConfig)
     , _cNodeIPv4CIdRSize      :: !(Maybe (Textual Int32))
     , _cClusterIPv4CIdR       :: !(Maybe Text)
@@ -172,6 +173,7 @@ data Cluster = Cluster'
     , _cSubnetwork            :: !(Maybe Text)
     , _cCurrentNodeCount      :: !(Maybe (Textual Int32))
     , _cEndpoint              :: !(Maybe Text)
+    , _cExpireTime            :: !(Maybe Text)
     , _cLocations             :: !(Maybe [Text])
     , _cLoggingService        :: !(Maybe Text)
     , _cDescription           :: !(Maybe Text)
@@ -187,6 +189,8 @@ data Cluster = Cluster'
 -- * 'cStatus'
 --
 -- * 'cNodePools'
+--
+-- * 'cEnableKubernetesAlpha'
 --
 -- * 'cNodeConfig'
 --
@@ -224,6 +228,8 @@ data Cluster = Cluster'
 --
 -- * 'cEndpoint'
 --
+-- * 'cExpireTime'
+--
 -- * 'cLocations'
 --
 -- * 'cLoggingService'
@@ -241,6 +247,7 @@ cluster =
     Cluster'
     { _cStatus = Nothing
     , _cNodePools = Nothing
+    , _cEnableKubernetesAlpha = Nothing
     , _cNodeConfig = Nothing
     , _cNodeIPv4CIdRSize = Nothing
     , _cClusterIPv4CIdR = Nothing
@@ -259,6 +266,7 @@ cluster =
     , _cSubnetwork = Nothing
     , _cCurrentNodeCount = Nothing
     , _cEndpoint = Nothing
+    , _cExpireTime = Nothing
     , _cLocations = Nothing
     , _cLoggingService = Nothing
     , _cDescription = Nothing
@@ -271,14 +279,23 @@ cluster =
 cStatus :: Lens' Cluster (Maybe Text)
 cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
 
--- | The node pools associated with this cluster. When creating a new
--- cluster, only a single node pool should be specified. This field should
--- not be set if \"node_config\" or \"initial_node_count\" are specified.
+-- | The node pools associated with this cluster. This field should not be
+-- set if \"node_config\" or \"initial_node_count\" are specified.
 cNodePools :: Lens' Cluster [NodePool]
 cNodePools
   = lens _cNodePools (\ s a -> s{_cNodePools = a}) .
       _Default
       . _Coerce
+
+-- | Kubernetes alpha features are enabled on this cluster. This includes
+-- alpha API groups (e.g. v1alpha1) and features that may not be production
+-- ready in the kubernetes version of the master and nodes. The cluster has
+-- no SLA for uptime and master\/node upgrades are disabled. Alpha enabled
+-- clusters are automatically deleted thirty days after creation.
+cEnableKubernetesAlpha :: Lens' Cluster (Maybe Bool)
+cEnableKubernetesAlpha
+  = lens _cEnableKubernetesAlpha
+      (\ s a -> s{_cEnableKubernetesAlpha = a})
 
 -- | Parameters used in creating the cluster\'s nodes. See \`nodeConfig\` for
 -- the description of its properties. For requests, this field should only
@@ -419,6 +436,12 @@ cEndpoint :: Lens' Cluster (Maybe Text)
 cEndpoint
   = lens _cEndpoint (\ s a -> s{_cEndpoint = a})
 
+-- | [Output only] The time the cluster will be automatically deleted in
+-- [RFC3339](https:\/\/www.ietf.org\/rfc\/rfc3339.txt) text format.
+cExpireTime :: Lens' Cluster (Maybe Text)
+cExpireTime
+  = lens _cExpireTime (\ s a -> s{_cExpireTime = a})
+
 -- | The list of Google Compute Engine
 -- [locations](\/compute\/docs\/zones#available) in which the cluster\'s
 -- nodes should be located.
@@ -474,6 +497,7 @@ instance FromJSON Cluster where
               (\ o ->
                  Cluster' <$>
                    (o .:? "status") <*> (o .:? "nodePools" .!= mempty)
+                     <*> (o .:? "enableKubernetesAlpha")
                      <*> (o .:? "nodeConfig")
                      <*> (o .:? "nodeIpv4CidrSize")
                      <*> (o .:? "clusterIpv4Cidr")
@@ -492,6 +516,7 @@ instance FromJSON Cluster where
                      <*> (o .:? "subnetwork")
                      <*> (o .:? "currentNodeCount")
                      <*> (o .:? "endpoint")
+                     <*> (o .:? "expireTime")
                      <*> (o .:? "locations" .!= mempty)
                      <*> (o .:? "loggingService")
                      <*> (o .:? "description")
@@ -505,6 +530,8 @@ instance ToJSON Cluster where
               (catMaybes
                  [("status" .=) <$> _cStatus,
                   ("nodePools" .=) <$> _cNodePools,
+                  ("enableKubernetesAlpha" .=) <$>
+                    _cEnableKubernetesAlpha,
                   ("nodeConfig" .=) <$> _cNodeConfig,
                   ("nodeIpv4CidrSize" .=) <$> _cNodeIPv4CIdRSize,
                   ("clusterIpv4Cidr" .=) <$> _cClusterIPv4CIdR,
@@ -525,12 +552,34 @@ instance ToJSON Cluster where
                   ("subnetwork" .=) <$> _cSubnetwork,
                   ("currentNodeCount" .=) <$> _cCurrentNodeCount,
                   ("endpoint" .=) <$> _cEndpoint,
+                  ("expireTime" .=) <$> _cExpireTime,
                   ("locations" .=) <$> _cLocations,
                   ("loggingService" .=) <$> _cLoggingService,
                   ("description" .=) <$> _cDescription,
                   ("instanceGroupUrls" .=) <$> _cInstanceGroupURLs,
                   ("monitoringService" .=) <$> _cMonitoringService,
                   ("createTime" .=) <$> _cCreateTime])
+
+-- | CancelOperationRequest cancels a single operation.
+--
+-- /See:/ 'cancelOperationRequest' smart constructor.
+data CancelOperationRequest =
+    CancelOperationRequest'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
+--
+cancelOperationRequest
+    :: CancelOperationRequest
+cancelOperationRequest = CancelOperationRequest'
+
+instance FromJSON CancelOperationRequest where
+        parseJSON
+          = withObject "CancelOperationRequest"
+              (\ o -> pure CancelOperationRequest')
+
+instance ToJSON CancelOperationRequest where
+        toJSON = const emptyObject
 
 -- | UpdateClusterRequest updates the settings of a cluster.
 --
@@ -569,32 +618,67 @@ instance ToJSON UpdateClusterRequest where
 --
 -- /See:/ 'nodeConfig' smart constructor.
 data NodeConfig = NodeConfig'
-    { _ncDiskSizeGb  :: !(Maybe (Textual Int32))
-    , _ncOAuthScopes :: !(Maybe [Text])
-    , _ncMachineType :: !(Maybe Text)
-    , _ncMetadata    :: !(Maybe NodeConfigMetadata)
+    { _ncLocalSsdCount  :: !(Maybe (Textual Int32))
+    , _ncDiskSizeGb     :: !(Maybe (Textual Int32))
+    , _ncOAuthScopes    :: !(Maybe [Text])
+    , _ncServiceAccount :: !(Maybe Text)
+    , _ncImageType      :: !(Maybe Text)
+    , _ncMachineType    :: !(Maybe Text)
+    , _ncMetadata       :: !(Maybe NodeConfigMetadata)
+    , _ncLabels         :: !(Maybe NodeConfigLabels)
+    , _ncTags           :: !(Maybe [Text])
+    , _ncPreemptible    :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NodeConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ncLocalSsdCount'
+--
 -- * 'ncDiskSizeGb'
 --
 -- * 'ncOAuthScopes'
 --
+-- * 'ncServiceAccount'
+--
+-- * 'ncImageType'
+--
 -- * 'ncMachineType'
 --
 -- * 'ncMetadata'
+--
+-- * 'ncLabels'
+--
+-- * 'ncTags'
+--
+-- * 'ncPreemptible'
 nodeConfig
     :: NodeConfig
 nodeConfig =
     NodeConfig'
-    { _ncDiskSizeGb = Nothing
+    { _ncLocalSsdCount = Nothing
+    , _ncDiskSizeGb = Nothing
     , _ncOAuthScopes = Nothing
+    , _ncServiceAccount = Nothing
+    , _ncImageType = Nothing
     , _ncMachineType = Nothing
     , _ncMetadata = Nothing
+    , _ncLabels = Nothing
+    , _ncTags = Nothing
+    , _ncPreemptible = Nothing
     }
+
+-- | The number of local SSD disks to be attached to the node. The limit for
+-- this value is dependant upon the maximum number of disks available on a
+-- machine per zone. See:
+-- https:\/\/cloud.google.com\/compute\/docs\/disks\/local-ssd#local_ssd_limits
+-- for more information.
+ncLocalSsdCount :: Lens' NodeConfig (Maybe Int32)
+ncLocalSsdCount
+  = lens _ncLocalSsdCount
+      (\ s a -> s{_ncLocalSsdCount = a})
+      . mapping _Coerce
 
 -- | Size of the disk attached to each node, specified in GB. The smallest
 -- allowed disk size is 10GB. If unspecified, the default disk size is
@@ -621,6 +705,20 @@ ncOAuthScopes
       . _Default
       . _Coerce
 
+-- | The Google Cloud Platform Service Account to be used by the node VMs. If
+-- no Service Account is specified, the \"default\" service account is
+-- used.
+ncServiceAccount :: Lens' NodeConfig (Maybe Text)
+ncServiceAccount
+  = lens _ncServiceAccount
+      (\ s a -> s{_ncServiceAccount = a})
+
+-- | The image type to use for this node. Note that for a given image type,
+-- the latest version of it will be used.
+ncImageType :: Lens' NodeConfig (Maybe Text)
+ncImageType
+  = lens _ncImageType (\ s a -> s{_ncImageType = a})
+
 -- | The name of a Google Compute Engine [machine
 -- type](\/compute\/docs\/machine-types) (e.g. \`n1-standard-1\`). If
 -- unspecified, the default machine type is \`n1-standard-1\`.
@@ -643,24 +741,61 @@ ncMetadata :: Lens' NodeConfig (Maybe NodeConfigMetadata)
 ncMetadata
   = lens _ncMetadata (\ s a -> s{_ncMetadata = a})
 
+-- | The map of Kubernetes labels (key\/value pairs) to be applied to each
+-- node. These will added in addition to any default label(s) that
+-- Kubernetes may apply to the node. In case of conflict in label keys, the
+-- applied set may differ depending on the Kubernetes version -- it\'s best
+-- to assume the behavior is undefined and conflicts should be avoided. For
+-- more information, including usage and the valid values, see:
+-- http:\/\/kubernetes.io\/v1.1\/docs\/user-guide\/labels.html
+ncLabels :: Lens' NodeConfig (Maybe NodeConfigLabels)
+ncLabels = lens _ncLabels (\ s a -> s{_ncLabels = a})
+
+-- | The list of instance tags applied to all nodes. Tags are used to
+-- identify valid sources or targets for network firewalls and are
+-- specified by the client during cluster or node pool creation. Each tag
+-- within the list must comply with RFC1035.
+ncTags :: Lens' NodeConfig [Text]
+ncTags
+  = lens _ncTags (\ s a -> s{_ncTags = a}) . _Default .
+      _Coerce
+
+-- | Whether the nodes are created as preemptible VM instances. See:
+-- https:\/\/cloud.google.com\/compute\/docs\/instances\/preemptible for
+-- more inforamtion about preemptible VM instances.
+ncPreemptible :: Lens' NodeConfig (Maybe Bool)
+ncPreemptible
+  = lens _ncPreemptible
+      (\ s a -> s{_ncPreemptible = a})
+
 instance FromJSON NodeConfig where
         parseJSON
           = withObject "NodeConfig"
               (\ o ->
                  NodeConfig' <$>
-                   (o .:? "diskSizeGb") <*>
+                   (o .:? "localSsdCount") <*> (o .:? "diskSizeGb") <*>
                      (o .:? "oauthScopes" .!= mempty)
+                     <*> (o .:? "serviceAccount")
+                     <*> (o .:? "imageType")
                      <*> (o .:? "machineType")
-                     <*> (o .:? "metadata"))
+                     <*> (o .:? "metadata")
+                     <*> (o .:? "labels")
+                     <*> (o .:? "tags" .!= mempty)
+                     <*> (o .:? "preemptible"))
 
 instance ToJSON NodeConfig where
         toJSON NodeConfig'{..}
           = object
               (catMaybes
-                 [("diskSizeGb" .=) <$> _ncDiskSizeGb,
+                 [("localSsdCount" .=) <$> _ncLocalSsdCount,
+                  ("diskSizeGb" .=) <$> _ncDiskSizeGb,
                   ("oauthScopes" .=) <$> _ncOAuthScopes,
+                  ("serviceAccount" .=) <$> _ncServiceAccount,
+                  ("imageType" .=) <$> _ncImageType,
                   ("machineType" .=) <$> _ncMachineType,
-                  ("metadata" .=) <$> _ncMetadata])
+                  ("metadata" .=) <$> _ncMetadata,
+                  ("labels" .=) <$> _ncLabels, ("tags" .=) <$> _ncTags,
+                  ("preemptible" .=) <$> _ncPreemptible])
 
 -- | Configuration options for the HTTP (L7) load balancing controller addon,
 -- which makes it easy to set up HTTP load balancers for services in a
@@ -814,6 +949,144 @@ instance ToJSON Operation where
                   ("targetLink" .=) <$> _oTargetLink,
                   ("detail" .=) <$> _oDetail])
 
+-- | A generic empty message that you can re-use to avoid defining duplicated
+-- empty messages in your APIs. A typical example is to use it as the
+-- request or the response type of an API method. For instance: service Foo
+-- { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The
+-- JSON representation for \`Empty\` is empty JSON object \`{}\`.
+--
+-- /See:/ 'empty' smart constructor.
+data Empty =
+    Empty'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+--
+empty
+    :: Empty
+empty = Empty'
+
+instance FromJSON Empty where
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
+
+instance ToJSON Empty where
+        toJSON = const emptyObject
+
+-- | NodeManagement defines the set of node management services turned on for
+-- the node pool.
+--
+-- /See:/ 'nodeManagement' smart constructor.
+data NodeManagement = NodeManagement'
+    { _nmAutoUpgrade    :: !(Maybe Bool)
+    , _nmUpgradeOptions :: !(Maybe AutoUpgradeOptions)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NodeManagement' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nmAutoUpgrade'
+--
+-- * 'nmUpgradeOptions'
+nodeManagement
+    :: NodeManagement
+nodeManagement =
+    NodeManagement'
+    { _nmAutoUpgrade = Nothing
+    , _nmUpgradeOptions = Nothing
+    }
+
+-- | Whether the nodes will be automatically upgraded.
+nmAutoUpgrade :: Lens' NodeManagement (Maybe Bool)
+nmAutoUpgrade
+  = lens _nmAutoUpgrade
+      (\ s a -> s{_nmAutoUpgrade = a})
+
+-- | Specifies the Auto Upgrade knobs for the node pool.
+nmUpgradeOptions :: Lens' NodeManagement (Maybe AutoUpgradeOptions)
+nmUpgradeOptions
+  = lens _nmUpgradeOptions
+      (\ s a -> s{_nmUpgradeOptions = a})
+
+instance FromJSON NodeManagement where
+        parseJSON
+          = withObject "NodeManagement"
+              (\ o ->
+                 NodeManagement' <$>
+                   (o .:? "autoUpgrade") <*> (o .:? "upgradeOptions"))
+
+instance ToJSON NodeManagement where
+        toJSON NodeManagement'{..}
+          = object
+              (catMaybes
+                 [("autoUpgrade" .=) <$> _nmAutoUpgrade,
+                  ("upgradeOptions" .=) <$> _nmUpgradeOptions])
+
+-- | NodePoolAutoscaling contains information required by cluster autoscaler
+-- to adjust the size of the node pool to the current cluster usage.
+--
+-- /See:/ 'nodePoolAutoscaling' smart constructor.
+data NodePoolAutoscaling = NodePoolAutoscaling'
+    { _npaMaxNodeCount :: !(Maybe (Textual Int32))
+    , _npaEnabled      :: !(Maybe Bool)
+    , _npaMinNodeCount :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NodePoolAutoscaling' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'npaMaxNodeCount'
+--
+-- * 'npaEnabled'
+--
+-- * 'npaMinNodeCount'
+nodePoolAutoscaling
+    :: NodePoolAutoscaling
+nodePoolAutoscaling =
+    NodePoolAutoscaling'
+    { _npaMaxNodeCount = Nothing
+    , _npaEnabled = Nothing
+    , _npaMinNodeCount = Nothing
+    }
+
+-- | Maximum number of nodes in the NodePool. Must be >= min_node_count.
+-- There has to enough quota to scale up the cluster.
+npaMaxNodeCount :: Lens' NodePoolAutoscaling (Maybe Int32)
+npaMaxNodeCount
+  = lens _npaMaxNodeCount
+      (\ s a -> s{_npaMaxNodeCount = a})
+      . mapping _Coerce
+
+-- | Is autoscaling enabled for this node pool.
+npaEnabled :: Lens' NodePoolAutoscaling (Maybe Bool)
+npaEnabled
+  = lens _npaEnabled (\ s a -> s{_npaEnabled = a})
+
+-- | Minimum number of nodes in the NodePool. Must be >= 1 and \<=
+-- max_node_count.
+npaMinNodeCount :: Lens' NodePoolAutoscaling (Maybe Int32)
+npaMinNodeCount
+  = lens _npaMinNodeCount
+      (\ s a -> s{_npaMinNodeCount = a})
+      . mapping _Coerce
+
+instance FromJSON NodePoolAutoscaling where
+        parseJSON
+          = withObject "NodePoolAutoscaling"
+              (\ o ->
+                 NodePoolAutoscaling' <$>
+                   (o .:? "maxNodeCount") <*> (o .:? "enabled") <*>
+                     (o .:? "minNodeCount"))
+
+instance ToJSON NodePoolAutoscaling where
+        toJSON NodePoolAutoscaling'{..}
+          = object
+              (catMaybes
+                 [("maxNodeCount" .=) <$> _npaMaxNodeCount,
+                  ("enabled" .=) <$> _npaEnabled,
+                  ("minNodeCount" .=) <$> _npaMinNodeCount])
+
 -- | Configuration for the addons that can be automatically spun up in the
 -- cluster, enabling additional functionality.
 --
@@ -879,8 +1152,10 @@ instance ToJSON AddonsConfig where
 -- /See:/ 'nodePool' smart constructor.
 data NodePool = NodePool'
     { _npStatus            :: !(Maybe Text)
+    , _npAutoscaling       :: !(Maybe NodePoolAutoscaling)
     , _npConfig            :: !(Maybe NodeConfig)
     , _npInitialNodeCount  :: !(Maybe (Textual Int32))
+    , _npManagement        :: !(Maybe NodeManagement)
     , _npSelfLink          :: !(Maybe Text)
     , _npName              :: !(Maybe Text)
     , _npStatusMessage     :: !(Maybe Text)
@@ -894,9 +1169,13 @@ data NodePool = NodePool'
 --
 -- * 'npStatus'
 --
+-- * 'npAutoscaling'
+--
 -- * 'npConfig'
 --
 -- * 'npInitialNodeCount'
+--
+-- * 'npManagement'
 --
 -- * 'npSelfLink'
 --
@@ -912,8 +1191,10 @@ nodePool
 nodePool =
     NodePool'
     { _npStatus = Nothing
+    , _npAutoscaling = Nothing
     , _npConfig = Nothing
     , _npInitialNodeCount = Nothing
+    , _npManagement = Nothing
     , _npSelfLink = Nothing
     , _npName = Nothing
     , _npStatusMessage = Nothing
@@ -921,9 +1202,16 @@ nodePool =
     , _npInstanceGroupURLs = Nothing
     }
 
--- | The status of the nodes in this pool instance.
+-- | [Output only] The status of the nodes in this pool instance.
 npStatus :: Lens' NodePool (Maybe Text)
 npStatus = lens _npStatus (\ s a -> s{_npStatus = a})
+
+-- | Autoscaler configuration for this NodePool. Autoscaler is enabled only
+-- if a valid configuration is present.
+npAutoscaling :: Lens' NodePool (Maybe NodePoolAutoscaling)
+npAutoscaling
+  = lens _npAutoscaling
+      (\ s a -> s{_npAutoscaling = a})
 
 -- | The node configuration of the pool.
 npConfig :: Lens' NodePool (Maybe NodeConfig)
@@ -938,7 +1226,12 @@ npInitialNodeCount
       (\ s a -> s{_npInitialNodeCount = a})
       . mapping _Coerce
 
--- | Server-defined URL for the resource.
+-- | NodeManagement configuration for this NodePool.
+npManagement :: Lens' NodePool (Maybe NodeManagement)
+npManagement
+  = lens _npManagement (\ s a -> s{_npManagement = a})
+
+-- | [Output only] Server-defined URL for the resource.
 npSelfLink :: Lens' NodePool (Maybe Text)
 npSelfLink
   = lens _npSelfLink (\ s a -> s{_npSelfLink = a})
@@ -954,7 +1247,7 @@ npStatusMessage
   = lens _npStatusMessage
       (\ s a -> s{_npStatusMessage = a})
 
--- | The version of the Kubernetes of this node.
+-- | [Output only] The version of the Kubernetes of this node.
 npVersion :: Lens' NodePool (Maybe Text)
 npVersion
   = lens _npVersion (\ s a -> s{_npVersion = a})
@@ -974,8 +1267,10 @@ instance FromJSON NodePool where
           = withObject "NodePool"
               (\ o ->
                  NodePool' <$>
-                   (o .:? "status") <*> (o .:? "config") <*>
-                     (o .:? "initialNodeCount")
+                   (o .:? "status") <*> (o .:? "autoscaling") <*>
+                     (o .:? "config")
+                     <*> (o .:? "initialNodeCount")
+                     <*> (o .:? "management")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "statusMessage")
@@ -987,13 +1282,53 @@ instance ToJSON NodePool where
           = object
               (catMaybes
                  [("status" .=) <$> _npStatus,
+                  ("autoscaling" .=) <$> _npAutoscaling,
                   ("config" .=) <$> _npConfig,
                   ("initialNodeCount" .=) <$> _npInitialNodeCount,
+                  ("management" .=) <$> _npManagement,
                   ("selfLink" .=) <$> _npSelfLink,
                   ("name" .=) <$> _npName,
                   ("statusMessage" .=) <$> _npStatusMessage,
                   ("version" .=) <$> _npVersion,
                   ("instanceGroupUrls" .=) <$> _npInstanceGroupURLs])
+
+-- | SetNodePoolManagementRequest sets the node management properties of a
+-- node pool.
+--
+-- /See:/ 'setNodePoolManagementRequest' smart constructor.
+newtype SetNodePoolManagementRequest = SetNodePoolManagementRequest'
+    { _snpmrManagement :: Maybe NodeManagement
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SetNodePoolManagementRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'snpmrManagement'
+setNodePoolManagementRequest
+    :: SetNodePoolManagementRequest
+setNodePoolManagementRequest =
+    SetNodePoolManagementRequest'
+    { _snpmrManagement = Nothing
+    }
+
+-- | NodeManagement configuration for the node pool.
+snpmrManagement :: Lens' SetNodePoolManagementRequest (Maybe NodeManagement)
+snpmrManagement
+  = lens _snpmrManagement
+      (\ s a -> s{_snpmrManagement = a})
+
+instance FromJSON SetNodePoolManagementRequest where
+        parseJSON
+          = withObject "SetNodePoolManagementRequest"
+              (\ o ->
+                 SetNodePoolManagementRequest' <$>
+                   (o .:? "management"))
+
+instance ToJSON SetNodePoolManagementRequest where
+        toJSON SetNodePoolManagementRequest'{..}
+          = object
+              (catMaybes [("management" .=) <$> _snpmrManagement])
 
 -- | The authentication information for accessing the master endpoint.
 -- Authentication can be done using HTTP basic auth or using client
@@ -1128,36 +1463,85 @@ instance FromJSON NodeConfigMetadata where
 instance ToJSON NodeConfigMetadata where
         toJSON = toJSON . _ncmAddtional
 
+-- | The map of Kubernetes labels (key\/value pairs) to be applied to each
+-- node. These will added in addition to any default label(s) that
+-- Kubernetes may apply to the node. In case of conflict in label keys, the
+-- applied set may differ depending on the Kubernetes version -- it\'s best
+-- to assume the behavior is undefined and conflicts should be avoided. For
+-- more information, including usage and the valid values, see:
+-- http:\/\/kubernetes.io\/v1.1\/docs\/user-guide\/labels.html
+--
+-- /See:/ 'nodeConfigLabels' smart constructor.
+newtype NodeConfigLabels = NodeConfigLabels'
+    { _nclAddtional :: HashMap Text Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'NodeConfigLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nclAddtional'
+nodeConfigLabels
+    :: HashMap Text Text -- ^ 'nclAddtional'
+    -> NodeConfigLabels
+nodeConfigLabels pNclAddtional_ =
+    NodeConfigLabels'
+    { _nclAddtional = _Coerce # pNclAddtional_
+    }
+
+nclAddtional :: Lens' NodeConfigLabels (HashMap Text Text)
+nclAddtional
+  = lens _nclAddtional (\ s a -> s{_nclAddtional = a})
+      . _Coerce
+
+instance FromJSON NodeConfigLabels where
+        parseJSON
+          = withObject "NodeConfigLabels"
+              (\ o -> NodeConfigLabels' <$> (parseJSONObject o))
+
+instance ToJSON NodeConfigLabels where
+        toJSON = toJSON . _nclAddtional
+
 -- | Container Engine service configuration.
 --
 -- /See:/ 'serverConfig' smart constructor.
 data ServerConfig = ServerConfig'
-    { _scValidNodeVersions     :: !(Maybe [Text])
-    , _scDefaultImageFamily    :: !(Maybe Text)
-    , _scValidImageFamilies    :: !(Maybe [Text])
+    { _scDefaultImageType      :: !(Maybe Text)
+    , _scValidNodeVersions     :: !(Maybe [Text])
+    , _scValidImageTypes       :: !(Maybe [Text])
     , _scDefaultClusterVersion :: !(Maybe Text)
+    , _scValidMasterVersions   :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ServerConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'scDefaultImageType'
+--
 -- * 'scValidNodeVersions'
 --
--- * 'scDefaultImageFamily'
---
--- * 'scValidImageFamilies'
+-- * 'scValidImageTypes'
 --
 -- * 'scDefaultClusterVersion'
+--
+-- * 'scValidMasterVersions'
 serverConfig
     :: ServerConfig
 serverConfig =
     ServerConfig'
-    { _scValidNodeVersions = Nothing
-    , _scDefaultImageFamily = Nothing
-    , _scValidImageFamilies = Nothing
+    { _scDefaultImageType = Nothing
+    , _scValidNodeVersions = Nothing
+    , _scValidImageTypes = Nothing
     , _scDefaultClusterVersion = Nothing
+    , _scValidMasterVersions = Nothing
     }
+
+-- | Default image type.
+scDefaultImageType :: Lens' ServerConfig (Maybe Text)
+scDefaultImageType
+  = lens _scDefaultImageType
+      (\ s a -> s{_scDefaultImageType = a})
 
 -- | List of valid node upgrade target versions.
 scValidNodeVersions :: Lens' ServerConfig [Text]
@@ -1167,17 +1551,11 @@ scValidNodeVersions
       . _Default
       . _Coerce
 
--- | Default image family.
-scDefaultImageFamily :: Lens' ServerConfig (Maybe Text)
-scDefaultImageFamily
-  = lens _scDefaultImageFamily
-      (\ s a -> s{_scDefaultImageFamily = a})
-
--- | List of valid image families.
-scValidImageFamilies :: Lens' ServerConfig [Text]
-scValidImageFamilies
-  = lens _scValidImageFamilies
-      (\ s a -> s{_scValidImageFamilies = a})
+-- | List of valid image types.
+scValidImageTypes :: Lens' ServerConfig [Text]
+scValidImageTypes
+  = lens _scValidImageTypes
+      (\ s a -> s{_scValidImageTypes = a})
       . _Default
       . _Coerce
 
@@ -1187,25 +1565,91 @@ scDefaultClusterVersion
   = lens _scDefaultClusterVersion
       (\ s a -> s{_scDefaultClusterVersion = a})
 
+-- | List of valid master versions.
+scValidMasterVersions :: Lens' ServerConfig [Text]
+scValidMasterVersions
+  = lens _scValidMasterVersions
+      (\ s a -> s{_scValidMasterVersions = a})
+      . _Default
+      . _Coerce
+
 instance FromJSON ServerConfig where
         parseJSON
           = withObject "ServerConfig"
               (\ o ->
                  ServerConfig' <$>
-                   (o .:? "validNodeVersions" .!= mempty) <*>
-                     (o .:? "defaultImageFamily")
-                     <*> (o .:? "validImageFamilies" .!= mempty)
-                     <*> (o .:? "defaultClusterVersion"))
+                   (o .:? "defaultImageType") <*>
+                     (o .:? "validNodeVersions" .!= mempty)
+                     <*> (o .:? "validImageTypes" .!= mempty)
+                     <*> (o .:? "defaultClusterVersion")
+                     <*> (o .:? "validMasterVersions" .!= mempty))
 
 instance ToJSON ServerConfig where
         toJSON ServerConfig'{..}
           = object
               (catMaybes
-                 [("validNodeVersions" .=) <$> _scValidNodeVersions,
-                  ("defaultImageFamily" .=) <$> _scDefaultImageFamily,
-                  ("validImageFamilies" .=) <$> _scValidImageFamilies,
+                 [("defaultImageType" .=) <$> _scDefaultImageType,
+                  ("validNodeVersions" .=) <$> _scValidNodeVersions,
+                  ("validImageTypes" .=) <$> _scValidImageTypes,
                   ("defaultClusterVersion" .=) <$>
-                    _scDefaultClusterVersion])
+                    _scDefaultClusterVersion,
+                  ("validMasterVersions" .=) <$>
+                    _scValidMasterVersions])
+
+-- | AutoUpgradeOptions defines the set of options for the user to control
+-- how the Auto Upgrades will proceed.
+--
+-- /See:/ 'autoUpgradeOptions' smart constructor.
+data AutoUpgradeOptions = AutoUpgradeOptions'
+    { _auoAutoUpgradeStartTime :: !(Maybe Text)
+    , _auoDescription          :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AutoUpgradeOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'auoAutoUpgradeStartTime'
+--
+-- * 'auoDescription'
+autoUpgradeOptions
+    :: AutoUpgradeOptions
+autoUpgradeOptions =
+    AutoUpgradeOptions'
+    { _auoAutoUpgradeStartTime = Nothing
+    , _auoDescription = Nothing
+    }
+
+-- | [Output only] This field is set when upgrades are about to commence with
+-- the approximate start time for the upgrades, in
+-- [RFC3339](https:\/\/www.ietf.org\/rfc\/rfc3339.txt) text format.
+auoAutoUpgradeStartTime :: Lens' AutoUpgradeOptions (Maybe Text)
+auoAutoUpgradeStartTime
+  = lens _auoAutoUpgradeStartTime
+      (\ s a -> s{_auoAutoUpgradeStartTime = a})
+
+-- | [Output only] This field is set when upgrades are about to commence with
+-- the description of the upgrade.
+auoDescription :: Lens' AutoUpgradeOptions (Maybe Text)
+auoDescription
+  = lens _auoDescription
+      (\ s a -> s{_auoDescription = a})
+
+instance FromJSON AutoUpgradeOptions where
+        parseJSON
+          = withObject "AutoUpgradeOptions"
+              (\ o ->
+                 AutoUpgradeOptions' <$>
+                   (o .:? "autoUpgradeStartTime") <*>
+                     (o .:? "description"))
+
+instance ToJSON AutoUpgradeOptions where
+        toJSON AutoUpgradeOptions'{..}
+          = object
+              (catMaybes
+                 [("autoUpgradeStartTime" .=) <$>
+                    _auoAutoUpgradeStartTime,
+                  ("description" .=) <$> _auoDescription])
 
 -- | ListClustersResponse is the result of ListClustersRequest.
 --
@@ -1268,36 +1712,57 @@ instance ToJSON ListClustersResponse where
 --
 -- /See:/ 'clusterUpdate' smart constructor.
 data ClusterUpdate = ClusterUpdate'
-    { _cuDesiredAddonsConfig      :: !(Maybe AddonsConfig)
-    , _cuDesiredNodePoolId        :: !(Maybe Text)
-    , _cuDesiredNodeVersion       :: !(Maybe Text)
-    , _cuDesiredMasterVersion     :: !(Maybe Text)
-    , _cuDesiredMonitoringService :: !(Maybe Text)
+    { _cuDesiredNodePoolAutoscaling :: !(Maybe NodePoolAutoscaling)
+    , _cuDesiredAddonsConfig        :: !(Maybe AddonsConfig)
+    , _cuDesiredNodePoolId          :: !(Maybe Text)
+    , _cuDesiredImageType           :: !(Maybe Text)
+    , _cuDesiredNodeVersion         :: !(Maybe Text)
+    , _cuDesiredMasterVersion       :: !(Maybe Text)
+    , _cuDesiredLocations           :: !(Maybe [Text])
+    , _cuDesiredMonitoringService   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClusterUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cuDesiredNodePoolAutoscaling'
+--
 -- * 'cuDesiredAddonsConfig'
 --
 -- * 'cuDesiredNodePoolId'
 --
+-- * 'cuDesiredImageType'
+--
 -- * 'cuDesiredNodeVersion'
 --
 -- * 'cuDesiredMasterVersion'
+--
+-- * 'cuDesiredLocations'
 --
 -- * 'cuDesiredMonitoringService'
 clusterUpdate
     :: ClusterUpdate
 clusterUpdate =
     ClusterUpdate'
-    { _cuDesiredAddonsConfig = Nothing
+    { _cuDesiredNodePoolAutoscaling = Nothing
+    , _cuDesiredAddonsConfig = Nothing
     , _cuDesiredNodePoolId = Nothing
+    , _cuDesiredImageType = Nothing
     , _cuDesiredNodeVersion = Nothing
     , _cuDesiredMasterVersion = Nothing
+    , _cuDesiredLocations = Nothing
     , _cuDesiredMonitoringService = Nothing
     }
+
+-- | Autoscaler configuration for the node pool specified in
+-- desired_node_pool_id. If there is only one pool in the cluster and
+-- desired_node_pool_id is not provided then the change applies to that
+-- single node pool.
+cuDesiredNodePoolAutoscaling :: Lens' ClusterUpdate (Maybe NodePoolAutoscaling)
+cuDesiredNodePoolAutoscaling
+  = lens _cuDesiredNodePoolAutoscaling
+      (\ s a -> s{_cuDesiredNodePoolAutoscaling = a})
 
 -- | Configurations for the various addons available to run in the cluster.
 cuDesiredAddonsConfig :: Lens' ClusterUpdate (Maybe AddonsConfig)
@@ -1305,13 +1770,21 @@ cuDesiredAddonsConfig
   = lens _cuDesiredAddonsConfig
       (\ s a -> s{_cuDesiredAddonsConfig = a})
 
--- | The node pool to be upgraded. This field is mandatory if the
--- \"desired_node_version\" or \"desired_image_family\" is specified and
--- there is more than one node pool on the cluster.
+-- | The node pool to be upgraded. This field is mandatory if
+-- \"desired_node_version\", \"desired_image_family\" or
+-- \"desired_node_pool_autoscaling\" is specified and there is more than
+-- one node pool on the cluster.
 cuDesiredNodePoolId :: Lens' ClusterUpdate (Maybe Text)
 cuDesiredNodePoolId
   = lens _cuDesiredNodePoolId
       (\ s a -> s{_cuDesiredNodePoolId = a})
+
+-- | The desired image type for the node pool. NOTE: Set the
+-- \"desired_node_pool\" field as well.
+cuDesiredImageType :: Lens' ClusterUpdate (Maybe Text)
+cuDesiredImageType
+  = lens _cuDesiredImageType
+      (\ s a -> s{_cuDesiredImageType = a})
 
 -- | The Kubernetes version to change the nodes to (typically an upgrade).
 -- Use \`-\` to upgrade to the latest version supported by the server.
@@ -1328,6 +1801,19 @@ cuDesiredMasterVersion
   = lens _cuDesiredMasterVersion
       (\ s a -> s{_cuDesiredMasterVersion = a})
 
+-- | The desired list of Google Compute Engine
+-- [locations](\/compute\/docs\/zones#available) in which the cluster\'s
+-- nodes should be located. Changing the locations a cluster is in will
+-- result in nodes being either created or removed from the cluster,
+-- depending on whether locations are being added or removed. This list
+-- must always include the cluster\'s primary zone.
+cuDesiredLocations :: Lens' ClusterUpdate [Text]
+cuDesiredLocations
+  = lens _cuDesiredLocations
+      (\ s a -> s{_cuDesiredLocations = a})
+      . _Default
+      . _Coerce
+
 -- | The monitoring service the cluster should use to write metrics.
 -- Currently available options: * \"monitoring.googleapis.com\" - the
 -- Google Cloud Monitoring service * \"none\" - no metrics will be exported
@@ -1342,24 +1828,55 @@ instance FromJSON ClusterUpdate where
           = withObject "ClusterUpdate"
               (\ o ->
                  ClusterUpdate' <$>
-                   (o .:? "desiredAddonsConfig") <*>
-                     (o .:? "desiredNodePoolId")
+                   (o .:? "desiredNodePoolAutoscaling") <*>
+                     (o .:? "desiredAddonsConfig")
+                     <*> (o .:? "desiredNodePoolId")
+                     <*> (o .:? "desiredImageType")
                      <*> (o .:? "desiredNodeVersion")
                      <*> (o .:? "desiredMasterVersion")
+                     <*> (o .:? "desiredLocations" .!= mempty)
                      <*> (o .:? "desiredMonitoringService"))
 
 instance ToJSON ClusterUpdate where
         toJSON ClusterUpdate'{..}
           = object
               (catMaybes
-                 [("desiredAddonsConfig" .=) <$>
+                 [("desiredNodePoolAutoscaling" .=) <$>
+                    _cuDesiredNodePoolAutoscaling,
+                  ("desiredAddonsConfig" .=) <$>
                     _cuDesiredAddonsConfig,
                   ("desiredNodePoolId" .=) <$> _cuDesiredNodePoolId,
+                  ("desiredImageType" .=) <$> _cuDesiredImageType,
                   ("desiredNodeVersion" .=) <$> _cuDesiredNodeVersion,
                   ("desiredMasterVersion" .=) <$>
                     _cuDesiredMasterVersion,
+                  ("desiredLocations" .=) <$> _cuDesiredLocations,
                   ("desiredMonitoringService" .=) <$>
                     _cuDesiredMonitoringService])
+
+-- | RollbackNodePoolUpgradeRequest rollbacks the previously Aborted or
+-- Failed NodePool upgrade. This will be an no-op if the last upgrade
+-- successfully completed.
+--
+-- /See:/ 'rollbackNodePoolUpgradeRequest' smart constructor.
+data RollbackNodePoolUpgradeRequest =
+    RollbackNodePoolUpgradeRequest'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RollbackNodePoolUpgradeRequest' with the minimum fields required to make a request.
+--
+rollbackNodePoolUpgradeRequest
+    :: RollbackNodePoolUpgradeRequest
+rollbackNodePoolUpgradeRequest = RollbackNodePoolUpgradeRequest'
+
+instance FromJSON RollbackNodePoolUpgradeRequest
+         where
+        parseJSON
+          = withObject "RollbackNodePoolUpgradeRequest"
+              (\ o -> pure RollbackNodePoolUpgradeRequest')
+
+instance ToJSON RollbackNodePoolUpgradeRequest where
+        toJSON = const emptyObject
 
 -- | ListNodePoolsResponse is the result of ListNodePoolsRequest.
 --

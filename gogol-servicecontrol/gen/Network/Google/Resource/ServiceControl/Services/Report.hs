@@ -20,8 +20,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Reports operations to Google Service Control. It should be called after
--- the operation is completed. This method requires the
+-- Reports operation results to Google Service Control, such as logs and
+-- metrics. It should be called after an operation is completed. If
+-- feasible, the client should aggregate reporting data for up to 5 seconds
+-- to reduce API traffic. Limiting aggregation to 5 seconds is to reduce
+-- data loss during client crashes. Clients should carefully choose the
+-- aggregation time window to avoid data loss risk more than 0.01% for
+-- business and compliance reasons. NOTE: the \`ReportRequest\` has the
+-- size limit of 1MB. This method requires the
 -- \`servicemanagement.services.report\` permission on the specified
 -- service. For more information, see [Google Cloud
 -- IAM](https:\/\/cloud.google.com\/iam).
@@ -68,8 +74,14 @@ type ServicesReportResource =
                            ReqBody '[JSON] ReportRequest :>
                              Post '[JSON] ReportResponse
 
--- | Reports operations to Google Service Control. It should be called after
--- the operation is completed. This method requires the
+-- | Reports operation results to Google Service Control, such as logs and
+-- metrics. It should be called after an operation is completed. If
+-- feasible, the client should aggregate reporting data for up to 5 seconds
+-- to reduce API traffic. Limiting aggregation to 5 seconds is to reduce
+-- data loss during client crashes. Clients should carefully choose the
+-- aggregation time window to avoid data loss risk more than 0.01% for
+-- business and compliance reasons. NOTE: the \`ReportRequest\` has the
+-- size limit of 1MB. This method requires the
 -- \`servicemanagement.services.report\` permission on the specified
 -- service. For more information, see [Google Cloud
 -- IAM](https:\/\/cloud.google.com\/iam).

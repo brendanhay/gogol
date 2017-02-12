@@ -20,7 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns permissions that a caller has on the specified resource.
+-- Returns permissions that a caller has on the specified resource. If the
+-- resource does not exist, this will return an empty set of permissions,
+-- not a NOT_FOUND error.
 --
 -- /See:/ <https://cloud.google.com/service-management/ Google Service Management API Reference> for @servicemanagement.services.testIamPermissions@.
 module Network.Google.Resource.ServiceManagement.Services.TestIAMPermissions
@@ -63,7 +65,9 @@ type ServicesTestIAMPermissionsResource =
                          ReqBody '[JSON] TestIAMPermissionsRequest :>
                            Post '[JSON] TestIAMPermissionsResponse
 
--- | Returns permissions that a caller has on the specified resource.
+-- | Returns permissions that a caller has on the specified resource. If the
+-- resource does not exist, this will return an empty set of permissions,
+-- not a NOT_FOUND error.
 --
 -- /See:/ 'servicesTestIAMPermissions' smart constructor.
 data ServicesTestIAMPermissions = ServicesTestIAMPermissions'

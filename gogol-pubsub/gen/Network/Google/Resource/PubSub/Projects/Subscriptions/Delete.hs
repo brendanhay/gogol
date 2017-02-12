@@ -56,7 +56,7 @@ import           Network.Google.PubSub.Types
 type ProjectsSubscriptionsDeleteResource =
      "v1" :>
        Capture "subscription" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -74,7 +74,7 @@ type ProjectsSubscriptionsDeleteResource =
 --
 -- /See:/ 'projectsSubscriptionsDelete' smart constructor.
 data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete'
-    { _psdXgafv          :: !(Maybe Text)
+    { _psdXgafv          :: !(Maybe Xgafv)
     , _psdUploadProtocol :: !(Maybe Text)
     , _psdPp             :: !Bool
     , _psdAccessToken    :: !(Maybe Text)
@@ -119,7 +119,7 @@ projectsSubscriptionsDelete pPsdSubscription_ =
     }
 
 -- | V1 error format.
-psdXgafv :: Lens' ProjectsSubscriptionsDelete (Maybe Text)
+psdXgafv :: Lens' ProjectsSubscriptionsDelete (Maybe Xgafv)
 psdXgafv = lens _psdXgafv (\ s a -> s{_psdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -150,7 +150,8 @@ psdBearerToken
   = lens _psdBearerToken
       (\ s a -> s{_psdBearerToken = a})
 
--- | The subscription to delete.
+-- | The subscription to delete. Format is
+-- \`projects\/{project}\/subscriptions\/{sub}\`.
 psdSubscription :: Lens' ProjectsSubscriptionsDelete Text
 psdSubscription
   = lens _psdSubscription

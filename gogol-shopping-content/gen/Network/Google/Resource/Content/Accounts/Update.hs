@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a Merchant Center account.
+-- Updates a Merchant Center account. This method can only be called for
+-- accounts to which the managing account has access: either the managing
+-- account itself or sub-accounts if the managing account is a multi-client
+-- account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.update@.
 module Network.Google.Resource.Content.Accounts.Update
@@ -54,7 +57,10 @@ type AccountsUpdateResource =
                  QueryParam "alt" AltJSON :>
                    ReqBody '[JSON] Account :> Put '[JSON] Account
 
--- | Updates a Merchant Center account.
+-- | Updates a Merchant Center account. This method can only be called for
+-- accounts to which the managing account has access: either the managing
+-- account itself or sub-accounts if the managing account is a multi-client
+-- account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
 data AccountsUpdate = AccountsUpdate'

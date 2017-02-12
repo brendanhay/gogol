@@ -26,7 +26,7 @@
 -- Implements
 -- [GlobalAllianceApi.getReferenceSet](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L83).
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.referencesets.get@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.referencesets.get@.
 module Network.Google.Resource.Genomics.Referencesets.Get
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ type ReferencesetsGetResource =
      "v1" :>
        "referencesets" :>
          Capture "referenceSetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -74,7 +74,7 @@ type ReferencesetsGetResource =
 -- /See:/ 'referencesetsGet' smart constructor.
 data ReferencesetsGet = ReferencesetsGet'
     { _rgReferenceSetId :: !Text
-    , _rgXgafv          :: !(Maybe Text)
+    , _rgXgafv          :: !(Maybe Xgafv)
     , _rgUploadProtocol :: !(Maybe Text)
     , _rgPp             :: !Bool
     , _rgAccessToken    :: !(Maybe Text)
@@ -124,7 +124,7 @@ rgReferenceSetId
       (\ s a -> s{_rgReferenceSetId = a})
 
 -- | V1 error format.
-rgXgafv :: Lens' ReferencesetsGet (Maybe Text)
+rgXgafv :: Lens' ReferencesetsGet (Maybe Xgafv)
 rgXgafv = lens _rgXgafv (\ s a -> s{_rgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

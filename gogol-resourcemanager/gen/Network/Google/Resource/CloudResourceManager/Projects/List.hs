@@ -55,7 +55,7 @@ import           Network.Google.ResourceManager.Types
 type ProjectsListResource =
      "v1" :>
        "projects" :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -74,7 +74,7 @@ type ProjectsListResource =
 --
 -- /See:/ 'projectsList' smart constructor.
 data ProjectsList = ProjectsList'
-    { _plXgafv          :: !(Maybe Text)
+    { _plXgafv          :: !(Maybe Xgafv)
     , _plUploadProtocol :: !(Maybe Text)
     , _plPp             :: !Bool
     , _plAccessToken    :: !(Maybe Text)
@@ -126,7 +126,7 @@ projectsList =
     }
 
 -- | V1 error format.
-plXgafv :: Lens' ProjectsList (Maybe Text)
+plXgafv :: Lens' ProjectsList (Maybe Xgafv)
 plXgafv = lens _plXgafv (\ s a -> s{_plXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -158,8 +158,8 @@ plBearerToken
 
 -- | An expression for filtering the results of the request. Filter rules are
 -- case insensitive. The fields eligible for filtering are: + \`name\` +
--- \`id\` + labels.key where *key* is the name of a label Some examples of
--- using labels as filters: |Filter|Description| |------|-----------|
+-- \`id\` + 'labels.key' where *key* is the name of a label Some examples
+-- of using labels as filters: |Filter|Description| |------|-----------|
 -- |name:*|The project has a name.| |name:Howl|The project\'s name is
 -- \`Howl\` or \`howl\`.| |name:HOWL|Equivalent to above.|
 -- |NAME:howl|Equivalent to above.| |labels.color:*|The project has the

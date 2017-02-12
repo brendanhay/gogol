@@ -24,7 +24,7 @@
 -- other genomics resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.get@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.readgroupsets.get@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Get
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type ReadGroupSetsGetResource =
      "v1" :>
        "readgroupsets" :>
          Capture "readGroupSetId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -69,7 +69,7 @@ type ReadGroupSetsGetResource =
 --
 -- /See:/ 'readGroupSetsGet' smart constructor.
 data ReadGroupSetsGet = ReadGroupSetsGet'
-    { _rgsgXgafv          :: !(Maybe Text)
+    { _rgsgXgafv          :: !(Maybe Xgafv)
     , _rgsgReadGroupSetId :: !Text
     , _rgsgUploadProtocol :: !(Maybe Text)
     , _rgsgPp             :: !Bool
@@ -114,7 +114,7 @@ readGroupSetsGet pRgsgReadGroupSetId_ =
     }
 
 -- | V1 error format.
-rgsgXgafv :: Lens' ReadGroupSetsGet (Maybe Text)
+rgsgXgafv :: Lens' ReadGroupSetsGet (Maybe Xgafv)
 rgsgXgafv
   = lens _rgsgXgafv (\ s a -> s{_rgsgXgafv = a})
 

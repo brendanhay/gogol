@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of sites, possibly filtered.
+-- Retrieves a list of sites, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sites.list@.
 module Network.Google.Resource.DFAReporting.Sites.List
@@ -58,7 +59,7 @@ import           Network.Google.Prelude
 -- 'SitesList' request conforms to.
 type SitesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>
@@ -84,7 +85,8 @@ type SitesListResource =
                                              QueryParam "alt" AltJSON :>
                                                Get '[JSON] SitesListResponse
 
--- | Retrieves a list of sites, possibly filtered.
+-- | Retrieves a list of sites, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ 'sitesList' smart constructor.
 data SitesList = SitesList'

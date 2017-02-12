@@ -183,9 +183,13 @@ matrix:
       addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.0.2 LIBRARY=gogol-kgsearch
       addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.0.2 LIBRARY=gogol-language
+      addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.0.2 LIBRARY=gogol-latencytest
       addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.0.2 LIBRARY=gogol-logging
+      addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.0.2 LIBRARY=gogol-manufacturers
       addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.0.2 LIBRARY=gogol-maps-coordinate
       addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }
@@ -240,6 +244,8 @@ matrix:
     - env: GHCVER=8.0.2 LIBRARY=gogol-shopping-content
       addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.0.2 LIBRARY=gogol-siteverification
+      addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }
+    - env: GHCVER=8.0.2 LIBRARY=gogol-slides
       addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }
     - env: GHCVER=8.0.2 LIBRARY=gogol-spectrum
       addons: { apt: { packages: [ghc-8.0.2], sources: [hvr-ghc] } }

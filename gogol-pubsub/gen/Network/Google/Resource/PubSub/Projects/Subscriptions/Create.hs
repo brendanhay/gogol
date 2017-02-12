@@ -24,8 +24,10 @@
 -- exists, returns \`ALREADY_EXISTS\`. If the corresponding topic doesn\'t
 -- exist, returns \`NOT_FOUND\`. If the name is not provided in the
 -- request, the server will assign a random name for this subscription on
--- the same project as the topic. Note that for REST API requests, you must
--- specify a name.
+-- the same project as the topic, conforming to the [resource name
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
+-- generated name is populated in the returned Subscription object. Note
+-- that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.create@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
@@ -57,7 +59,7 @@ import           Network.Google.PubSub.Types
 type ProjectsSubscriptionsCreateResource =
      "v1" :>
        Capture "name" Text :>
-         QueryParam "$.xgafv" Text :>
+         QueryParam "$.xgafv" Xgafv :>
            QueryParam "upload_protocol" Text :>
              QueryParam "pp" Bool :>
                QueryParam "access_token" Text :>
@@ -72,12 +74,14 @@ type ProjectsSubscriptionsCreateResource =
 -- exists, returns \`ALREADY_EXISTS\`. If the corresponding topic doesn\'t
 -- exist, returns \`NOT_FOUND\`. If the name is not provided in the
 -- request, the server will assign a random name for this subscription on
--- the same project as the topic. Note that for REST API requests, you must
--- specify a name.
+-- the same project as the topic, conforming to the [resource name
+-- format](https:\/\/cloud.google.com\/pubsub\/docs\/overview#names). The
+-- generated name is populated in the returned Subscription object. Note
+-- that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ 'projectsSubscriptionsCreate' smart constructor.
 data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'
-    { _pscXgafv          :: !(Maybe Text)
+    { _pscXgafv          :: !(Maybe Xgafv)
     , _pscUploadProtocol :: !(Maybe Text)
     , _pscPp             :: !Bool
     , _pscAccessToken    :: !(Maybe Text)
@@ -127,7 +131,7 @@ projectsSubscriptionsCreate pPscPayload_ pPscName_ =
     }
 
 -- | V1 error format.
-pscXgafv :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
+pscXgafv :: Lens' ProjectsSubscriptionsCreate (Maybe Xgafv)
 pscXgafv = lens _pscXgafv (\ s a -> s{_pscXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

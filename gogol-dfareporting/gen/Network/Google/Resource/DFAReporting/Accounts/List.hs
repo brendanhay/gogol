@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the list of accounts, possibly filtered.
+-- Retrieves the list of accounts, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accounts.list@.
 module Network.Google.Resource.DFAReporting.Accounts.List
@@ -50,7 +51,7 @@ import           Network.Google.Prelude
 -- 'AccountsList' request conforms to.
 type AccountsListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accounts" :>
@@ -64,7 +65,8 @@ type AccountsListResource =
                              QueryParam "alt" AltJSON :>
                                Get '[JSON] AccountsListResponse
 
--- | Retrieves the list of accounts, possibly filtered.
+-- | Retrieves the list of accounts, possibly filtered. This method supports
+-- paging.
 --
 -- /See:/ 'accountsList' smart constructor.
 data AccountsList = AccountsList'

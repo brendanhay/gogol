@@ -959,6 +959,56 @@ instance ToJSON AutoResizeDimensionsRequest where
           = object
               (catMaybes [("dimensions" .=) <$> _ardrDimensions])
 
+-- | Deletes a range of cells, shifting other cells into the deleted area.
+--
+-- /See:/ 'deleteRangeRequest' smart constructor.
+data DeleteRangeRequest = DeleteRangeRequest'
+    { _drrShiftDimension :: !(Maybe DeleteRangeRequestShiftDimension)
+    , _drrRange          :: !(Maybe GridRange)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeleteRangeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drrShiftDimension'
+--
+-- * 'drrRange'
+deleteRangeRequest
+    :: DeleteRangeRequest
+deleteRangeRequest =
+    DeleteRangeRequest'
+    { _drrShiftDimension = Nothing
+    , _drrRange = Nothing
+    }
+
+-- | The dimension from which deleted cells will be replaced with. If ROWS,
+-- existing cells will be shifted upward to replace the deleted cells. If
+-- COLUMNS, existing cells will be shifted left to replace the deleted
+-- cells.
+drrShiftDimension :: Lens' DeleteRangeRequest (Maybe DeleteRangeRequestShiftDimension)
+drrShiftDimension
+  = lens _drrShiftDimension
+      (\ s a -> s{_drrShiftDimension = a})
+
+-- | The range of cells to delete.
+drrRange :: Lens' DeleteRangeRequest (Maybe GridRange)
+drrRange = lens _drrRange (\ s a -> s{_drrRange = a})
+
+instance FromJSON DeleteRangeRequest where
+        parseJSON
+          = withObject "DeleteRangeRequest"
+              (\ o ->
+                 DeleteRangeRequest' <$>
+                   (o .:? "shiftDimension") <*> (o .:? "range"))
+
+instance ToJSON DeleteRangeRequest where
+        toJSON DeleteRangeRequest'{..}
+          = object
+              (catMaybes
+                 [("shiftDimension" .=) <$> _drrShiftDimension,
+                  ("range" .=) <$> _drrRange])
+
 -- | A sheet in a spreadsheet.
 --
 -- /See:/ 'sheet' smart constructor.
@@ -966,6 +1016,7 @@ data Sheet = Sheet'
     { _sData               :: !(Maybe [GridData])
     , _sMerges             :: !(Maybe [GridRange])
     , _sProtectedRanges    :: !(Maybe [ProtectedRange])
+    , _sBandedRanges       :: !(Maybe [BandedRange])
     , _sCharts             :: !(Maybe [EmbeddedChart])
     , _sBasicFilter        :: !(Maybe BasicFilter)
     , _sConditionalFormats :: !(Maybe [ConditionalFormatRule])
@@ -983,6 +1034,8 @@ data Sheet = Sheet'
 --
 -- * 'sProtectedRanges'
 --
+-- * 'sBandedRanges'
+--
 -- * 'sCharts'
 --
 -- * 'sBasicFilter'
@@ -999,6 +1052,7 @@ sheet =
     { _sData = Nothing
     , _sMerges = Nothing
     , _sProtectedRanges = Nothing
+    , _sBandedRanges = Nothing
     , _sCharts = Nothing
     , _sBasicFilter = Nothing
     , _sConditionalFormats = Nothing
@@ -1030,6 +1084,14 @@ sProtectedRanges :: Lens' Sheet [ProtectedRange]
 sProtectedRanges
   = lens _sProtectedRanges
       (\ s a -> s{_sProtectedRanges = a})
+      . _Default
+      . _Coerce
+
+-- | The banded (i.e. alternating colors) ranges on this sheet.
+sBandedRanges :: Lens' Sheet [BandedRange]
+sBandedRanges
+  = lens _sBandedRanges
+      (\ s a -> s{_sBandedRanges = a})
       . _Default
       . _Coerce
 
@@ -1072,6 +1134,7 @@ instance FromJSON Sheet where
                    (o .:? "data" .!= mempty) <*>
                      (o .:? "merges" .!= mempty)
                      <*> (o .:? "protectedRanges" .!= mempty)
+                     <*> (o .:? "bandedRanges" .!= mempty)
                      <*> (o .:? "charts" .!= mempty)
                      <*> (o .:? "basicFilter")
                      <*> (o .:? "conditionalFormats" .!= mempty)
@@ -1084,6 +1147,7 @@ instance ToJSON Sheet where
               (catMaybes
                  [("data" .=) <$> _sData, ("merges" .=) <$> _sMerges,
                   ("protectedRanges" .=) <$> _sProtectedRanges,
+                  ("bandedRanges" .=) <$> _sBandedRanges,
                   ("charts" .=) <$> _sCharts,
                   ("basicFilter" .=) <$> _sBasicFilter,
                   ("conditionalFormats" .=) <$> _sConditionalFormats,
@@ -2825,6 +2889,7 @@ data Response = Response'
     , _rUpdateConditionalFormatRule  :: !(Maybe UpdateConditionalFormatRuleResponse)
     , _rAddNamedRange                :: !(Maybe AddNamedRangeResponse)
     , _rAddChart                     :: !(Maybe AddChartResponse)
+    , _rAddBanding                   :: !(Maybe AddBandingResponse)
     , _rDuplicateSheet               :: !(Maybe DuplicateSheetResponse)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2852,6 +2917,8 @@ data Response = Response'
 --
 -- * 'rAddChart'
 --
+-- * 'rAddBanding'
+--
 -- * 'rDuplicateSheet'
 response
     :: Response
@@ -2867,6 +2934,7 @@ response =
     , _rUpdateConditionalFormatRule = Nothing
     , _rAddNamedRange = Nothing
     , _rAddChart = Nothing
+    , _rAddBanding = Nothing
     , _rDuplicateSheet = Nothing
     }
 
@@ -2927,6 +2995,11 @@ rAddChart :: Lens' Response (Maybe AddChartResponse)
 rAddChart
   = lens _rAddChart (\ s a -> s{_rAddChart = a})
 
+-- | A reply from adding a banded range.
+rAddBanding :: Lens' Response (Maybe AddBandingResponse)
+rAddBanding
+  = lens _rAddBanding (\ s a -> s{_rAddBanding = a})
+
 -- | A reply from duplicating a sheet.
 rDuplicateSheet :: Lens' Response (Maybe DuplicateSheetResponse)
 rDuplicateSheet
@@ -2948,6 +3021,7 @@ instance FromJSON Response where
                      <*> (o .:? "updateConditionalFormatRule")
                      <*> (o .:? "addNamedRange")
                      <*> (o .:? "addChart")
+                     <*> (o .:? "addBanding")
                      <*> (o .:? "duplicateSheet"))
 
 instance ToJSON Response where
@@ -2967,6 +3041,7 @@ instance ToJSON Response where
                     _rUpdateConditionalFormatRule,
                   ("addNamedRange" .=) <$> _rAddNamedRange,
                   ("addChart" .=) <$> _rAddChart,
+                  ("addBanding" .=) <$> _rAddBanding,
                   ("duplicateSheet" .=) <$> _rDuplicateSheet])
 
 -- | Criteria for showing\/hiding rows in a filter or filter view.
@@ -3412,7 +3487,13 @@ sRightToLeft
 
 -- | The index of the sheet within the spreadsheet. When adding or updating
 -- sheet properties, if this field is excluded then the sheet will be added
--- or moved to the end of the sheet list.
+-- or moved to the end of the sheet list. When updating sheet indices or
+-- inserting sheets, movement is considered in \"before the move\" indexes.
+-- For example, if there were 3 sheets (S1, S2, S3) in order to move S1
+-- ahead of S2 the index would have to be set to 2. A sheet index update
+-- request will be ignored if the requested index is identical to the
+-- sheets current index or if the requested new index is equal to the
+-- current sheet index + 1.
 sIndex :: Lens' SheetProperties (Maybe Int32)
 sIndex
   = lens _sIndex (\ s a -> s{_sIndex = a}) .
@@ -3641,10 +3722,11 @@ instance ToJSON UpdateSheetPropertiesRequest where
 --
 -- /See:/ 'spreadsheet' smart constructor.
 data Spreadsheet = Spreadsheet'
-    { _sprSheets        :: !(Maybe [Sheet])
-    , _sprNamedRanges   :: !(Maybe [NamedRange])
-    , _sprSpreadsheetId :: !(Maybe Text)
-    , _sprProperties    :: !(Maybe SpreadsheetProperties)
+    { _sprSheets         :: !(Maybe [Sheet])
+    , _sprNamedRanges    :: !(Maybe [NamedRange])
+    , _sprSpreadsheetId  :: !(Maybe Text)
+    , _sprSpreadsheetURL :: !(Maybe Text)
+    , _sprProperties     :: !(Maybe SpreadsheetProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Spreadsheet' with the minimum fields required to make a request.
@@ -3657,6 +3739,8 @@ data Spreadsheet = Spreadsheet'
 --
 -- * 'sprSpreadsheetId'
 --
+-- * 'sprSpreadsheetURL'
+--
 -- * 'sprProperties'
 spreadsheet
     :: Spreadsheet
@@ -3665,6 +3749,7 @@ spreadsheet =
     { _sprSheets = Nothing
     , _sprNamedRanges = Nothing
     , _sprSpreadsheetId = Nothing
+    , _sprSpreadsheetURL = Nothing
     , _sprProperties = Nothing
     }
 
@@ -3689,6 +3774,12 @@ sprSpreadsheetId
   = lens _sprSpreadsheetId
       (\ s a -> s{_sprSpreadsheetId = a})
 
+-- | The url of the spreadsheet. This field is read-only.
+sprSpreadsheetURL :: Lens' Spreadsheet (Maybe Text)
+sprSpreadsheetURL
+  = lens _sprSpreadsheetURL
+      (\ s a -> s{_sprSpreadsheetURL = a})
+
 -- | Overall properties of a spreadsheet.
 sprProperties :: Lens' Spreadsheet (Maybe SpreadsheetProperties)
 sprProperties
@@ -3703,6 +3794,7 @@ instance FromJSON Spreadsheet where
                    (o .:? "sheets" .!= mempty) <*>
                      (o .:? "namedRanges" .!= mempty)
                      <*> (o .:? "spreadsheetId")
+                     <*> (o .:? "spreadsheetUrl")
                      <*> (o .:? "properties"))
 
 instance ToJSON Spreadsheet where
@@ -3712,6 +3804,7 @@ instance ToJSON Spreadsheet where
                  [("sheets" .=) <$> _sprSheets,
                   ("namedRanges" .=) <$> _sprNamedRanges,
                   ("spreadsheetId" .=) <$> _sprSpreadsheetId,
+                  ("spreadsheetUrl" .=) <$> _sprSpreadsheetURL,
                   ("properties" .=) <$> _sprProperties])
 
 -- | Inserts rows or columns in a sheet at a particular index.
@@ -4310,6 +4403,43 @@ instance FromJSON BasicFilterCriteria where
 instance ToJSON BasicFilterCriteria where
         toJSON = toJSON . _bfcAddtional
 
+-- | Adds a new banded range to the spreadsheet.
+--
+-- /See:/ 'addBandingRequest' smart constructor.
+newtype AddBandingRequest = AddBandingRequest'
+    { _abrBandedRange :: Maybe BandedRange
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AddBandingRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'abrBandedRange'
+addBandingRequest
+    :: AddBandingRequest
+addBandingRequest =
+    AddBandingRequest'
+    { _abrBandedRange = Nothing
+    }
+
+-- | The banded range to add. The bandedRangeId field is optional; if one is
+-- not set, an id will be randomly generated. (It is an error to specify
+-- the ID of a range that already exists.)
+abrBandedRange :: Lens' AddBandingRequest (Maybe BandedRange)
+abrBandedRange
+  = lens _abrBandedRange
+      (\ s a -> s{_abrBandedRange = a})
+
+instance FromJSON AddBandingRequest where
+        parseJSON
+          = withObject "AddBandingRequest"
+              (\ o -> AddBandingRequest' <$> (o .:? "bandedRange"))
+
+instance ToJSON AddBandingRequest where
+        toJSON AddBandingRequest'{..}
+          = object
+              (catMaybes [("bandedRange" .=) <$> _abrBandedRange])
+
 -- | Updates properties of dimensions within the specified range.
 --
 -- /See:/ 'updateDimensionPropertiesRequest' smart constructor.
@@ -4593,8 +4723,11 @@ instance ToJSON DuplicateFilterViewResponse where
 --
 -- /See:/ 'batchUpdateValuesRequest' smart constructor.
 data BatchUpdateValuesRequest = BatchUpdateValuesRequest'
-    { _buvrData             :: !(Maybe [ValueRange])
-    , _buvrValueInputOption :: !(Maybe BatchUpdateValuesRequestValueInputOption)
+    { _buvrData                         :: !(Maybe [ValueRange])
+    , _buvrValueInputOption             :: !(Maybe BatchUpdateValuesRequestValueInputOption)
+    , _buvrIncludeValuesInResponse      :: !(Maybe Bool)
+    , _buvrResponseDateTimeRenderOption :: !(Maybe BatchUpdateValuesRequestResponseDateTimeRenderOption)
+    , _buvrResponseValueRenderOption    :: !(Maybe BatchUpdateValuesRequestResponseValueRenderOption)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchUpdateValuesRequest' with the minimum fields required to make a request.
@@ -4604,12 +4737,21 @@ data BatchUpdateValuesRequest = BatchUpdateValuesRequest'
 -- * 'buvrData'
 --
 -- * 'buvrValueInputOption'
+--
+-- * 'buvrIncludeValuesInResponse'
+--
+-- * 'buvrResponseDateTimeRenderOption'
+--
+-- * 'buvrResponseValueRenderOption'
 batchUpdateValuesRequest
     :: BatchUpdateValuesRequest
 batchUpdateValuesRequest =
     BatchUpdateValuesRequest'
     { _buvrData = Nothing
     , _buvrValueInputOption = Nothing
+    , _buvrIncludeValuesInResponse = Nothing
+    , _buvrResponseDateTimeRenderOption = Nothing
+    , _buvrResponseValueRenderOption = Nothing
     }
 
 -- | The new values to apply to the spreadsheet.
@@ -4625,20 +4767,57 @@ buvrValueInputOption
   = lens _buvrValueInputOption
       (\ s a -> s{_buvrValueInputOption = a})
 
+-- | Determines if the update response should include the values of the cells
+-- that were updated. By default, responses do not include the updated
+-- values. The \`updatedData\` field within each of the
+-- BatchUpdateValuesResponse.responses will contain the updated values. If
+-- the range to write was larger than than the range actually written, the
+-- response will include all values in the requested range (excluding
+-- trailing empty rows and columns).
+buvrIncludeValuesInResponse :: Lens' BatchUpdateValuesRequest (Maybe Bool)
+buvrIncludeValuesInResponse
+  = lens _buvrIncludeValuesInResponse
+      (\ s a -> s{_buvrIncludeValuesInResponse = a})
+
+-- | Determines how dates, times, and durations in the response should be
+-- rendered. This is ignored if response_value_render_option is
+-- FORMATTED_VALUE. The default dateTime render option is
+-- [DateTimeRenderOption.SERIAL_NUMBER].
+buvrResponseDateTimeRenderOption :: Lens' BatchUpdateValuesRequest (Maybe BatchUpdateValuesRequestResponseDateTimeRenderOption)
+buvrResponseDateTimeRenderOption
+  = lens _buvrResponseDateTimeRenderOption
+      (\ s a -> s{_buvrResponseDateTimeRenderOption = a})
+
+-- | Determines how values in the response should be rendered. The default
+-- render option is ValueRenderOption.FORMATTED_VALUE.
+buvrResponseValueRenderOption :: Lens' BatchUpdateValuesRequest (Maybe BatchUpdateValuesRequestResponseValueRenderOption)
+buvrResponseValueRenderOption
+  = lens _buvrResponseValueRenderOption
+      (\ s a -> s{_buvrResponseValueRenderOption = a})
+
 instance FromJSON BatchUpdateValuesRequest where
         parseJSON
           = withObject "BatchUpdateValuesRequest"
               (\ o ->
                  BatchUpdateValuesRequest' <$>
                    (o .:? "data" .!= mempty) <*>
-                     (o .:? "valueInputOption"))
+                     (o .:? "valueInputOption")
+                     <*> (o .:? "includeValuesInResponse")
+                     <*> (o .:? "responseDateTimeRenderOption")
+                     <*> (o .:? "responseValueRenderOption"))
 
 instance ToJSON BatchUpdateValuesRequest where
         toJSON BatchUpdateValuesRequest'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _buvrData,
-                  ("valueInputOption" .=) <$> _buvrValueInputOption])
+                  ("valueInputOption" .=) <$> _buvrValueInputOption,
+                  ("includeValuesInResponse" .=) <$>
+                    _buvrIncludeValuesInResponse,
+                  ("responseDateTimeRenderOption" .=) <$>
+                    _buvrResponseDateTimeRenderOption,
+                  ("responseValueRenderOption" .=) <$>
+                    _buvrResponseValueRenderOption])
 
 -- | Adds a chart to a sheet in the spreadsheet.
 --
@@ -5367,6 +5546,82 @@ instance ToJSON DeleteSheetRequest where
         toJSON DeleteSheetRequest'{..}
           = object (catMaybes [("sheetId" .=) <$> _dsrSheetId])
 
+-- | A banded (alternating colors) range in a sheet.
+--
+-- /See:/ 'bandedRange' smart constructor.
+data BandedRange = BandedRange'
+    { _brBandedRangeId    :: !(Maybe (Textual Int32))
+    , _brRowProperties    :: !(Maybe BandingProperties)
+    , _brRange            :: !(Maybe GridRange)
+    , _brColumnProperties :: !(Maybe BandingProperties)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BandedRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'brBandedRangeId'
+--
+-- * 'brRowProperties'
+--
+-- * 'brRange'
+--
+-- * 'brColumnProperties'
+bandedRange
+    :: BandedRange
+bandedRange =
+    BandedRange'
+    { _brBandedRangeId = Nothing
+    , _brRowProperties = Nothing
+    , _brRange = Nothing
+    , _brColumnProperties = Nothing
+    }
+
+-- | The id of the banded range.
+brBandedRangeId :: Lens' BandedRange (Maybe Int32)
+brBandedRangeId
+  = lens _brBandedRangeId
+      (\ s a -> s{_brBandedRangeId = a})
+      . mapping _Coerce
+
+-- | Properties for row bands. These properties will be applied on a
+-- row-by-row basis throughout all the rows in the range. At least one of
+-- row_properties or column_properties must be specified.
+brRowProperties :: Lens' BandedRange (Maybe BandingProperties)
+brRowProperties
+  = lens _brRowProperties
+      (\ s a -> s{_brRowProperties = a})
+
+-- | The range over which these properties are applied.
+brRange :: Lens' BandedRange (Maybe GridRange)
+brRange = lens _brRange (\ s a -> s{_brRange = a})
+
+-- | Properties for column bands. These properties will be applied on a
+-- column- by-column basis throughout all the columns in the range. At
+-- least one of row_properties or column_properties must be specified.
+brColumnProperties :: Lens' BandedRange (Maybe BandingProperties)
+brColumnProperties
+  = lens _brColumnProperties
+      (\ s a -> s{_brColumnProperties = a})
+
+instance FromJSON BandedRange where
+        parseJSON
+          = withObject "BandedRange"
+              (\ o ->
+                 BandedRange' <$>
+                   (o .:? "bandedRangeId") <*> (o .:? "rowProperties")
+                     <*> (o .:? "range")
+                     <*> (o .:? "columnProperties"))
+
+instance ToJSON BandedRange where
+        toJSON BandedRange'{..}
+          = object
+              (catMaybes
+                 [("bandedRangeId" .=) <$> _brBandedRangeId,
+                  ("rowProperties" .=) <$> _brRowProperties,
+                  ("range" .=) <$> _brRange,
+                  ("columnProperties" .=) <$> _brColumnProperties])
+
 -- | Updates the borders of a range. If a field is not set in the request,
 -- that means the border remains as-is. For example, with two subsequent
 -- UpdateBordersRequest: 1. range: A1:A5 \`{ top: RED, bottom: WHITE }\` 2.
@@ -5919,21 +6174,50 @@ instance ToJSON TextToColumnsRequest where
 -- | The request for updating any aspect of a spreadsheet.
 --
 -- /See:/ 'batchUpdateSpreadsheetRequest' smart constructor.
-newtype BatchUpdateSpreadsheetRequest = BatchUpdateSpreadsheetRequest'
-    { _busrRequests :: Maybe [Request']
+data BatchUpdateSpreadsheetRequest = BatchUpdateSpreadsheetRequest'
+    { _busrResponseIncludeGridData      :: !(Maybe Bool)
+    , _busrResponseRanges               :: !(Maybe [Text])
+    , _busrRequests                     :: !(Maybe [Request'])
+    , _busrIncludeSpreadsheetInResponse :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchUpdateSpreadsheetRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'busrResponseIncludeGridData'
+--
+-- * 'busrResponseRanges'
+--
 -- * 'busrRequests'
+--
+-- * 'busrIncludeSpreadsheetInResponse'
 batchUpdateSpreadsheetRequest
     :: BatchUpdateSpreadsheetRequest
 batchUpdateSpreadsheetRequest =
     BatchUpdateSpreadsheetRequest'
-    { _busrRequests = Nothing
+    { _busrResponseIncludeGridData = Nothing
+    , _busrResponseRanges = Nothing
+    , _busrRequests = Nothing
+    , _busrIncludeSpreadsheetInResponse = Nothing
     }
+
+-- | True if grid data should be returned. Meaningful only if if
+-- include_spreadsheet_response is \'true\'. This parameter is ignored if a
+-- field mask was set in the request.
+busrResponseIncludeGridData :: Lens' BatchUpdateSpreadsheetRequest (Maybe Bool)
+busrResponseIncludeGridData
+  = lens _busrResponseIncludeGridData
+      (\ s a -> s{_busrResponseIncludeGridData = a})
+
+-- | Limits the ranges included in the response spreadsheet. Meaningful only
+-- if include_spreadsheet_response is \'true\'.
+busrResponseRanges :: Lens' BatchUpdateSpreadsheetRequest [Text]
+busrResponseRanges
+  = lens _busrResponseRanges
+      (\ s a -> s{_busrResponseRanges = a})
+      . _Default
+      . _Coerce
 
 -- | A list of updates to apply to the spreadsheet.
 busrRequests :: Lens' BatchUpdateSpreadsheetRequest [Request']
@@ -5942,17 +6226,33 @@ busrRequests
       . _Default
       . _Coerce
 
+-- | Determines if the update response should include the spreadsheet
+-- resource.
+busrIncludeSpreadsheetInResponse :: Lens' BatchUpdateSpreadsheetRequest (Maybe Bool)
+busrIncludeSpreadsheetInResponse
+  = lens _busrIncludeSpreadsheetInResponse
+      (\ s a -> s{_busrIncludeSpreadsheetInResponse = a})
+
 instance FromJSON BatchUpdateSpreadsheetRequest where
         parseJSON
           = withObject "BatchUpdateSpreadsheetRequest"
               (\ o ->
                  BatchUpdateSpreadsheetRequest' <$>
-                   (o .:? "requests" .!= mempty))
+                   (o .:? "responseIncludeGridData") <*>
+                     (o .:? "responseRanges" .!= mempty)
+                     <*> (o .:? "requests" .!= mempty)
+                     <*> (o .:? "includeSpreadsheetInResponse"))
 
 instance ToJSON BatchUpdateSpreadsheetRequest where
         toJSON BatchUpdateSpreadsheetRequest'{..}
           = object
-              (catMaybes [("requests" .=) <$> _busrRequests])
+              (catMaybes
+                 [("responseIncludeGridData" .=) <$>
+                    _busrResponseIncludeGridData,
+                  ("responseRanges" .=) <$> _busrResponseRanges,
+                  ("requests" .=) <$> _busrRequests,
+                  ("includeSpreadsheetInResponse" .=) <$>
+                    _busrIncludeSpreadsheetInResponse])
 
 -- | The response when updating a range of values in a spreadsheet.
 --
@@ -5962,6 +6262,7 @@ data UpdateValuesResponse = UpdateValuesResponse'
     , _uvrSpreadsheetId  :: !(Maybe Text)
     , _uvrUpdatedRows    :: !(Maybe (Textual Int32))
     , _uvrUpdatedRange   :: !(Maybe Text)
+    , _uvrUpdatedData    :: !(Maybe ValueRange)
     , _uvrUpdatedColumns :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5977,6 +6278,8 @@ data UpdateValuesResponse = UpdateValuesResponse'
 --
 -- * 'uvrUpdatedRange'
 --
+-- * 'uvrUpdatedData'
+--
 -- * 'uvrUpdatedColumns'
 updateValuesResponse
     :: UpdateValuesResponse
@@ -5986,6 +6289,7 @@ updateValuesResponse =
     , _uvrSpreadsheetId = Nothing
     , _uvrUpdatedRows = Nothing
     , _uvrUpdatedRange = Nothing
+    , _uvrUpdatedData = Nothing
     , _uvrUpdatedColumns = Nothing
     }
 
@@ -6015,6 +6319,14 @@ uvrUpdatedRange
   = lens _uvrUpdatedRange
       (\ s a -> s{_uvrUpdatedRange = a})
 
+-- | The values of the cells after updates were applied. This is only
+-- included if the request\'s \`includeValuesInResponse\` field was
+-- \`true\`.
+uvrUpdatedData :: Lens' UpdateValuesResponse (Maybe ValueRange)
+uvrUpdatedData
+  = lens _uvrUpdatedData
+      (\ s a -> s{_uvrUpdatedData = a})
+
 -- | The number of columns where at least one cell in the column was updated.
 uvrUpdatedColumns :: Lens' UpdateValuesResponse (Maybe Int32)
 uvrUpdatedColumns
@@ -6030,6 +6342,7 @@ instance FromJSON UpdateValuesResponse where
                    (o .:? "updatedCells") <*> (o .:? "spreadsheetId")
                      <*> (o .:? "updatedRows")
                      <*> (o .:? "updatedRange")
+                     <*> (o .:? "updatedData")
                      <*> (o .:? "updatedColumns"))
 
 instance ToJSON UpdateValuesResponse where
@@ -6040,6 +6353,7 @@ instance ToJSON UpdateValuesResponse where
                   ("spreadsheetId" .=) <$> _uvrSpreadsheetId,
                   ("updatedRows" .=) <$> _uvrUpdatedRows,
                   ("updatedRange" .=) <$> _uvrUpdatedRange,
+                  ("updatedData" .=) <$> _uvrUpdatedData,
                   ("updatedColumns" .=) <$> _uvrUpdatedColumns])
 
 -- | The request to copy a sheet across spreadsheets.
@@ -6850,8 +7164,9 @@ instance ToJSON NumberFormat where
 --
 -- /See:/ 'batchUpdateSpreadsheetResponse' smart constructor.
 data BatchUpdateSpreadsheetResponse = BatchUpdateSpreadsheetResponse'
-    { _busrSpreadsheetId :: !(Maybe Text)
-    , _busrReplies       :: !(Maybe [Response])
+    { _busrSpreadsheetId      :: !(Maybe Text)
+    , _busrReplies            :: !(Maybe [Response])
+    , _busrUpdatedSpreadsheet :: !(Maybe Spreadsheet)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchUpdateSpreadsheetResponse' with the minimum fields required to make a request.
@@ -6861,12 +7176,15 @@ data BatchUpdateSpreadsheetResponse = BatchUpdateSpreadsheetResponse'
 -- * 'busrSpreadsheetId'
 --
 -- * 'busrReplies'
+--
+-- * 'busrUpdatedSpreadsheet'
 batchUpdateSpreadsheetResponse
     :: BatchUpdateSpreadsheetResponse
 batchUpdateSpreadsheetResponse =
     BatchUpdateSpreadsheetResponse'
     { _busrSpreadsheetId = Nothing
     , _busrReplies = Nothing
+    , _busrUpdatedSpreadsheet = Nothing
     }
 
 -- | The spreadsheet the updates were applied to.
@@ -6883,6 +7201,14 @@ busrReplies
       _Default
       . _Coerce
 
+-- | The spreadsheet after updates were applied. This is only set if
+-- [BatchUpdateSpreadsheetRequest.include_spreadsheet_in_response] is
+-- \`true\`.
+busrUpdatedSpreadsheet :: Lens' BatchUpdateSpreadsheetResponse (Maybe Spreadsheet)
+busrUpdatedSpreadsheet
+  = lens _busrUpdatedSpreadsheet
+      (\ s a -> s{_busrUpdatedSpreadsheet = a})
+
 instance FromJSON BatchUpdateSpreadsheetResponse
          where
         parseJSON
@@ -6890,14 +7216,17 @@ instance FromJSON BatchUpdateSpreadsheetResponse
               (\ o ->
                  BatchUpdateSpreadsheetResponse' <$>
                    (o .:? "spreadsheetId") <*>
-                     (o .:? "replies" .!= mempty))
+                     (o .:? "replies" .!= mempty)
+                     <*> (o .:? "updatedSpreadsheet"))
 
 instance ToJSON BatchUpdateSpreadsheetResponse where
         toJSON BatchUpdateSpreadsheetResponse'{..}
           = object
               (catMaybes
                  [("spreadsheetId" .=) <$> _busrSpreadsheetId,
-                  ("replies" .=) <$> _busrReplies])
+                  ("replies" .=) <$> _busrReplies,
+                  ("updatedSpreadsheet" .=) <$>
+                    _busrUpdatedSpreadsheet])
 
 -- | Sets a data validation rule to every cell in the range. To clear
 -- validation in a range, call this with no rule specified.
@@ -6946,6 +7275,96 @@ instance ToJSON SetDataValidationRequest where
               (catMaybes
                  [("rule" .=) <$> _sdvrRule,
                   ("range" .=) <$> _sdvrRange])
+
+-- | Properties referring a single dimension (either row or column). If both
+-- BandedRange.row_properties and BandedRange.column_properties are set,
+-- the fill colors are applied to cells according to the following rules: *
+-- header_color and footer_color take priority over band colors. *
+-- first_band_color takes priority over second_band_color. * row_properties
+-- takes priority over column_properties. For example, the first row color
+-- takes priority over the first column color, but the first column color
+-- takes priority over the second row color. Similarly, the row header
+-- takes priority over the column header in the top left cell, but the
+-- column header takes priority over the first row color if the row header
+-- is not set.
+--
+-- /See:/ 'bandingProperties' smart constructor.
+data BandingProperties = BandingProperties'
+    { _bpSecondBandColor :: !(Maybe Color)
+    , _bpHeaderColor     :: !(Maybe Color)
+    , _bpFooterColor     :: !(Maybe Color)
+    , _bpFirstBandColor  :: !(Maybe Color)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BandingProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bpSecondBandColor'
+--
+-- * 'bpHeaderColor'
+--
+-- * 'bpFooterColor'
+--
+-- * 'bpFirstBandColor'
+bandingProperties
+    :: BandingProperties
+bandingProperties =
+    BandingProperties'
+    { _bpSecondBandColor = Nothing
+    , _bpHeaderColor = Nothing
+    , _bpFooterColor = Nothing
+    , _bpFirstBandColor = Nothing
+    }
+
+-- | The second color that is alternating. (Required)
+bpSecondBandColor :: Lens' BandingProperties (Maybe Color)
+bpSecondBandColor
+  = lens _bpSecondBandColor
+      (\ s a -> s{_bpSecondBandColor = a})
+
+-- | The color of the first row or column. If this field is set, the first
+-- row or column will be filled with this color and the colors will
+-- alternate between first_band_color and second_band_color starting from
+-- the second row or column. Otherwise, the first row or column will be
+-- filled with first_band_color and the colors will proceed to alternate as
+-- they normally would.
+bpHeaderColor :: Lens' BandingProperties (Maybe Color)
+bpHeaderColor
+  = lens _bpHeaderColor
+      (\ s a -> s{_bpHeaderColor = a})
+
+-- | The color of the last row or column. If this field is not set, the last
+-- row or column will be filled with either first_band_color or
+-- second_band_color, depending on the color of the previous row or column.
+bpFooterColor :: Lens' BandingProperties (Maybe Color)
+bpFooterColor
+  = lens _bpFooterColor
+      (\ s a -> s{_bpFooterColor = a})
+
+-- | The first color that is alternating. (Required)
+bpFirstBandColor :: Lens' BandingProperties (Maybe Color)
+bpFirstBandColor
+  = lens _bpFirstBandColor
+      (\ s a -> s{_bpFirstBandColor = a})
+
+instance FromJSON BandingProperties where
+        parseJSON
+          = withObject "BandingProperties"
+              (\ o ->
+                 BandingProperties' <$>
+                   (o .:? "secondBandColor") <*> (o .:? "headerColor")
+                     <*> (o .:? "footerColor")
+                     <*> (o .:? "firstBandColor"))
+
+instance ToJSON BandingProperties where
+        toJSON BandingProperties'{..}
+          = object
+              (catMaybes
+                 [("secondBandColor" .=) <$> _bpSecondBandColor,
+                  ("headerColor" .=) <$> _bpHeaderColor,
+                  ("footerColor" .=) <$> _bpFooterColor,
+                  ("firstBandColor" .=) <$> _bpFirstBandColor])
 
 -- | Duplicates a particular filter view.
 --
@@ -7072,6 +7491,41 @@ instance ToJSON PivotGroup where
                   ("sortOrder" .=) <$> _pgSortOrder,
                   ("showTotals" .=) <$> _pgShowTotals,
                   ("valueBucket" .=) <$> _pgValueBucket])
+
+-- | The result of adding a banded range.
+--
+-- /See:/ 'addBandingResponse' smart constructor.
+newtype AddBandingResponse = AddBandingResponse'
+    { _aBandedRange :: Maybe BandedRange
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AddBandingResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aBandedRange'
+addBandingResponse
+    :: AddBandingResponse
+addBandingResponse =
+    AddBandingResponse'
+    { _aBandedRange = Nothing
+    }
+
+-- | The banded range that was added.
+aBandedRange :: Lens' AddBandingResponse (Maybe BandedRange)
+aBandedRange
+  = lens _aBandedRange (\ s a -> s{_aBandedRange = a})
+
+instance FromJSON AddBandingResponse where
+        parseJSON
+          = withObject "AddBandingResponse"
+              (\ o ->
+                 AddBandingResponse' <$> (o .:? "bandedRange"))
+
+instance ToJSON AddBandingResponse where
+        toJSON AddBandingResponse'{..}
+          = object
+              (catMaybes [("bandedRange" .=) <$> _aBandedRange])
 
 -- | A rule describing a conditional format.
 --
@@ -7517,6 +7971,55 @@ instance ToJSON BasicChartDomain where
         toJSON BasicChartDomain'{..}
           = object (catMaybes [("domain" .=) <$> _bcdDomain])
 
+-- | Inserts cells into a range, shifting the existing cells over or down.
+--
+-- /See:/ 'insertRangeRequest' smart constructor.
+data InsertRangeRequest = InsertRangeRequest'
+    { _irrShiftDimension :: !(Maybe InsertRangeRequestShiftDimension)
+    , _irrRange          :: !(Maybe GridRange)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InsertRangeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'irrShiftDimension'
+--
+-- * 'irrRange'
+insertRangeRequest
+    :: InsertRangeRequest
+insertRangeRequest =
+    InsertRangeRequest'
+    { _irrShiftDimension = Nothing
+    , _irrRange = Nothing
+    }
+
+-- | The dimension which will be shifted when inserting cells. If ROWS,
+-- existing cells will be shifted down. If COLUMNS, existing cells will be
+-- shifted right.
+irrShiftDimension :: Lens' InsertRangeRequest (Maybe InsertRangeRequestShiftDimension)
+irrShiftDimension
+  = lens _irrShiftDimension
+      (\ s a -> s{_irrShiftDimension = a})
+
+-- | The range to insert new cells into.
+irrRange :: Lens' InsertRangeRequest (Maybe GridRange)
+irrRange = lens _irrRange (\ s a -> s{_irrRange = a})
+
+instance FromJSON InsertRangeRequest where
+        parseJSON
+          = withObject "InsertRangeRequest"
+              (\ o ->
+                 InsertRangeRequest' <$>
+                   (o .:? "shiftDimension") <*> (o .:? "range"))
+
+instance ToJSON InsertRangeRequest where
+        toJSON InsertRangeRequest'{..}
+          = object
+              (catMaybes
+                 [("shiftDimension" .=) <$> _irrShiftDimension,
+                  ("range" .=) <$> _irrRange])
+
 -- | The amount of padding around the cell, in pixels. When updating padding,
 -- every field must be specified.
 --
@@ -7721,6 +8224,56 @@ instance ToJSON DimensionProperties where
                   ("pixelSize" .=) <$> _dpPixelSize,
                   ("hiddenByUser" .=) <$> _dpHiddenByUser])
 
+-- | Updates properties of the supplied banded range.
+--
+-- /See:/ 'updateBandingRequest' smart constructor.
+data UpdateBandingRequest = UpdateBandingRequest'
+    { _ubrBandedRange :: !(Maybe BandedRange)
+    , _ubrFields      :: !(Maybe FieldMask)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdateBandingRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ubrBandedRange'
+--
+-- * 'ubrFields'
+updateBandingRequest
+    :: UpdateBandingRequest
+updateBandingRequest =
+    UpdateBandingRequest'
+    { _ubrBandedRange = Nothing
+    , _ubrFields = Nothing
+    }
+
+-- | The banded range to update with the new properties.
+ubrBandedRange :: Lens' UpdateBandingRequest (Maybe BandedRange)
+ubrBandedRange
+  = lens _ubrBandedRange
+      (\ s a -> s{_ubrBandedRange = a})
+
+-- | The fields that should be updated. At least one field must be specified.
+-- The root \`bandedRange\` is implied and should not be specified. A
+-- single \`\"*\"\` can be used as short-hand for listing every field.
+ubrFields :: Lens' UpdateBandingRequest (Maybe FieldMask)
+ubrFields
+  = lens _ubrFields (\ s a -> s{_ubrFields = a})
+
+instance FromJSON UpdateBandingRequest where
+        parseJSON
+          = withObject "UpdateBandingRequest"
+              (\ o ->
+                 UpdateBandingRequest' <$>
+                   (o .:? "bandedRange") <*> (o .:? "fields"))
+
+instance ToJSON UpdateBandingRequest where
+        toJSON UpdateBandingRequest'{..}
+          = object
+              (catMaybes
+                 [("bandedRange" .=) <$> _ubrBandedRange,
+                  ("fields" .=) <$> _ubrFields])
+
 -- | The response when retrieving more than one range of values in a
 -- spreadsheet.
 --
@@ -7775,6 +8328,44 @@ instance ToJSON BatchGetValuesResponse where
                  [("spreadsheetId" .=) <$> _bgvrSpreadsheetId,
                   ("valueRanges" .=) <$> _bgvrValueRanges])
 
+-- | Removes the banded range with the given ID from the spreadsheet.
+--
+-- /See:/ 'deleteBandingRequest' smart constructor.
+newtype DeleteBandingRequest = DeleteBandingRequest'
+    { _dbrBandedRangeId :: Maybe (Textual Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeleteBandingRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dbrBandedRangeId'
+deleteBandingRequest
+    :: DeleteBandingRequest
+deleteBandingRequest =
+    DeleteBandingRequest'
+    { _dbrBandedRangeId = Nothing
+    }
+
+-- | The ID of the banded range to delete.
+dbrBandedRangeId :: Lens' DeleteBandingRequest (Maybe Int32)
+dbrBandedRangeId
+  = lens _dbrBandedRangeId
+      (\ s a -> s{_dbrBandedRangeId = a})
+      . mapping _Coerce
+
+instance FromJSON DeleteBandingRequest where
+        parseJSON
+          = withObject "DeleteBandingRequest"
+              (\ o ->
+                 DeleteBandingRequest' <$> (o .:? "bandedRangeId"))
+
+instance ToJSON DeleteBandingRequest where
+        toJSON DeleteBandingRequest'{..}
+          = object
+              (catMaybes
+                 [("bandedRangeId" .=) <$> _dbrBandedRangeId])
+
 -- | A single kind of update to apply to a spreadsheet.
 --
 -- /See:/ 'request'' smart constructor.
@@ -7788,10 +8379,14 @@ data Request' = Request''
     , _reqSortRange                    :: !(Maybe SortRangeRequest)
     , _reqUpdateNamedRange             :: !(Maybe UpdateNamedRangeRequest)
     , _reqDeleteNamedRange             :: !(Maybe DeleteNamedRangeRequest)
+    , _reqInsertRange                  :: !(Maybe InsertRangeRequest)
+    , _reqDeleteBanding                :: !(Maybe DeleteBandingRequest)
+    , _reqUpdateBanding                :: !(Maybe UpdateBandingRequest)
     , _reqClearBasicFilter             :: !(Maybe ClearBasicFilterRequest)
     , _reqAppendCells                  :: !(Maybe AppendCellsRequest)
     , _reqPasteData                    :: !(Maybe PasteDataRequest)
     , _reqUpdateEmbeddedObjectPosition :: !(Maybe UpdateEmbeddedObjectPositionRequest)
+    , _reqDeleteRange                  :: !(Maybe DeleteRangeRequest)
     , _reqCopyPaste                    :: !(Maybe CopyPasteRequest)
     , _reqAutoResizeDimensions         :: !(Maybe AutoResizeDimensionsRequest)
     , _reqAddSheet                     :: !(Maybe AddSheetRequest)
@@ -7811,6 +8406,7 @@ data Request' = Request''
     , _reqMergeCells                   :: !(Maybe MergeCellsRequest)
     , _reqAddNamedRange                :: !(Maybe AddNamedRangeRequest)
     , _reqAddChart                     :: !(Maybe AddChartRequest)
+    , _reqAddBanding                   :: !(Maybe AddBandingRequest)
     , _reqDuplicateSheet               :: !(Maybe DuplicateSheetRequest)
     , _reqAutoFill                     :: !(Maybe AutoFillRequest)
     , _reqUpdateDimensionProperties    :: !(Maybe UpdateDimensionPropertiesRequest)
@@ -7847,6 +8443,12 @@ data Request' = Request''
 --
 -- * 'reqDeleteNamedRange'
 --
+-- * 'reqInsertRange'
+--
+-- * 'reqDeleteBanding'
+--
+-- * 'reqUpdateBanding'
+--
 -- * 'reqClearBasicFilter'
 --
 -- * 'reqAppendCells'
@@ -7854,6 +8456,8 @@ data Request' = Request''
 -- * 'reqPasteData'
 --
 -- * 'reqUpdateEmbeddedObjectPosition'
+--
+-- * 'reqDeleteRange'
 --
 -- * 'reqCopyPaste'
 --
@@ -7893,6 +8497,8 @@ data Request' = Request''
 --
 -- * 'reqAddChart'
 --
+-- * 'reqAddBanding'
+--
 -- * 'reqDuplicateSheet'
 --
 -- * 'reqAutoFill'
@@ -7929,10 +8535,14 @@ request' =
     , _reqSortRange = Nothing
     , _reqUpdateNamedRange = Nothing
     , _reqDeleteNamedRange = Nothing
+    , _reqInsertRange = Nothing
+    , _reqDeleteBanding = Nothing
+    , _reqUpdateBanding = Nothing
     , _reqClearBasicFilter = Nothing
     , _reqAppendCells = Nothing
     , _reqPasteData = Nothing
     , _reqUpdateEmbeddedObjectPosition = Nothing
+    , _reqDeleteRange = Nothing
     , _reqCopyPaste = Nothing
     , _reqAutoResizeDimensions = Nothing
     , _reqAddSheet = Nothing
@@ -7952,6 +8562,7 @@ request' =
     , _reqMergeCells = Nothing
     , _reqAddNamedRange = Nothing
     , _reqAddChart = Nothing
+    , _reqAddBanding = Nothing
     , _reqDuplicateSheet = Nothing
     , _reqAutoFill = Nothing
     , _reqUpdateDimensionProperties = Nothing
@@ -8019,6 +8630,24 @@ reqDeleteNamedRange
   = lens _reqDeleteNamedRange
       (\ s a -> s{_reqDeleteNamedRange = a})
 
+-- | Inserts new cells in a sheet, shifting the existing cells.
+reqInsertRange :: Lens' Request' (Maybe InsertRangeRequest)
+reqInsertRange
+  = lens _reqInsertRange
+      (\ s a -> s{_reqInsertRange = a})
+
+-- | Removes a banded range
+reqDeleteBanding :: Lens' Request' (Maybe DeleteBandingRequest)
+reqDeleteBanding
+  = lens _reqDeleteBanding
+      (\ s a -> s{_reqDeleteBanding = a})
+
+-- | Updates a banded range
+reqUpdateBanding :: Lens' Request' (Maybe UpdateBandingRequest)
+reqUpdateBanding
+  = lens _reqUpdateBanding
+      (\ s a -> s{_reqUpdateBanding = a})
+
 -- | Clears the basic filter on a sheet.
 reqClearBasicFilter :: Lens' Request' (Maybe ClearBasicFilterRequest)
 reqClearBasicFilter
@@ -8041,6 +8670,12 @@ reqUpdateEmbeddedObjectPosition :: Lens' Request' (Maybe UpdateEmbeddedObjectPos
 reqUpdateEmbeddedObjectPosition
   = lens _reqUpdateEmbeddedObjectPosition
       (\ s a -> s{_reqUpdateEmbeddedObjectPosition = a})
+
+-- | Deletes a range of cells from a sheet, shifting the remaining cells.
+reqDeleteRange :: Lens' Request' (Maybe DeleteRangeRequest)
+reqDeleteRange
+  = lens _reqDeleteRange
+      (\ s a -> s{_reqDeleteRange = a})
 
 -- | Copies data from one area and pastes it to another.
 reqCopyPaste :: Lens' Request' (Maybe CopyPasteRequest)
@@ -8153,6 +8788,12 @@ reqAddChart :: Lens' Request' (Maybe AddChartRequest)
 reqAddChart
   = lens _reqAddChart (\ s a -> s{_reqAddChart = a})
 
+-- | Adds a new banded range
+reqAddBanding :: Lens' Request' (Maybe AddBandingRequest)
+reqAddBanding
+  = lens _reqAddBanding
+      (\ s a -> s{_reqAddBanding = a})
+
 -- | Duplicates a sheet.
 reqDuplicateSheet :: Lens' Request' (Maybe DuplicateSheetRequest)
 reqDuplicateSheet
@@ -8238,10 +8879,14 @@ instance FromJSON Request' where
                      <*> (o .:? "sortRange")
                      <*> (o .:? "updateNamedRange")
                      <*> (o .:? "deleteNamedRange")
+                     <*> (o .:? "insertRange")
+                     <*> (o .:? "deleteBanding")
+                     <*> (o .:? "updateBanding")
                      <*> (o .:? "clearBasicFilter")
                      <*> (o .:? "appendCells")
                      <*> (o .:? "pasteData")
                      <*> (o .:? "updateEmbeddedObjectPosition")
+                     <*> (o .:? "deleteRange")
                      <*> (o .:? "copyPaste")
                      <*> (o .:? "autoResizeDimensions")
                      <*> (o .:? "addSheet")
@@ -8261,6 +8906,7 @@ instance FromJSON Request' where
                      <*> (o .:? "mergeCells")
                      <*> (o .:? "addNamedRange")
                      <*> (o .:? "addChart")
+                     <*> (o .:? "addBanding")
                      <*> (o .:? "duplicateSheet")
                      <*> (o .:? "autoFill")
                      <*> (o .:? "updateDimensionProperties")
@@ -8291,11 +8937,15 @@ instance ToJSON Request' where
                   ("sortRange" .=) <$> _reqSortRange,
                   ("updateNamedRange" .=) <$> _reqUpdateNamedRange,
                   ("deleteNamedRange" .=) <$> _reqDeleteNamedRange,
+                  ("insertRange" .=) <$> _reqInsertRange,
+                  ("deleteBanding" .=) <$> _reqDeleteBanding,
+                  ("updateBanding" .=) <$> _reqUpdateBanding,
                   ("clearBasicFilter" .=) <$> _reqClearBasicFilter,
                   ("appendCells" .=) <$> _reqAppendCells,
                   ("pasteData" .=) <$> _reqPasteData,
                   ("updateEmbeddedObjectPosition" .=) <$>
                     _reqUpdateEmbeddedObjectPosition,
+                  ("deleteRange" .=) <$> _reqDeleteRange,
                   ("copyPaste" .=) <$> _reqCopyPaste,
                   ("autoResizeDimensions" .=) <$>
                     _reqAutoResizeDimensions,
@@ -8320,6 +8970,7 @@ instance ToJSON Request' where
                   ("mergeCells" .=) <$> _reqMergeCells,
                   ("addNamedRange" .=) <$> _reqAddNamedRange,
                   ("addChart" .=) <$> _reqAddChart,
+                  ("addBanding" .=) <$> _reqAddBanding,
                   ("duplicateSheet" .=) <$> _reqDuplicateSheet,
                   ("autoFill" .=) <$> _reqAutoFill,
                   ("updateDimensionProperties" .=) <$>

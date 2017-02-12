@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of account user profiles, possibly filtered.
+-- Retrieves a list of account user profiles, possibly filtered. This
+-- method supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountUserProfiles.list@.
 module Network.Google.Resource.DFAReporting.AccountUserProFiles.List
@@ -52,7 +53,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesList' request conforms to.
 type AccountUserProFilesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>
@@ -72,7 +73,8 @@ type AccountUserProFilesListResource =
                                  QueryParam "alt" AltJSON :>
                                    Get '[JSON] AccountUserProFilesListResponse
 
--- | Retrieves a list of account user profiles, possibly filtered.
+-- | Retrieves a list of account user profiles, possibly filtered. This
+-- method supports paging.
 --
 -- /See:/ 'accountUserProFilesList' smart constructor.
 data AccountUserProFilesList = AccountUserProFilesList'

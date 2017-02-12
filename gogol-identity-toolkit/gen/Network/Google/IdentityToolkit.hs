@@ -23,6 +23,7 @@ module Network.Google.IdentityToolkit
 
     -- * OAuth Scopes
     , firebaseScope
+    , cloudPlatformScope
 
     -- * API Declaration
     , IdentityToolkitAPI
@@ -94,7 +95,6 @@ module Network.Google.IdentityToolkit
     , uipuiiProviderId
     , uipuiiEmail
     , uipuiiPhotoURL
-    , uipuiiRawUserInfo
     , uipuiiFederatedId
     , uipuiiDisplayName
     , uipuiiScreenName
@@ -136,6 +136,7 @@ module Network.Google.IdentityToolkit
     , uiDisplayName
     , uiPasswordHash
     , uiLocalId
+    , uiRawPassword
     , uiScreenName
 
     -- ** IdentitytoolkitRelyingPartySetProjectConfigResponse
@@ -273,6 +274,7 @@ module Network.Google.IdentityToolkit
     , irpgpcrResetPasswordTemplate
     , irpgpcrProjectId
     , irpgpcrUseEmailSending
+    , irpgpcrDynamicLinksDomain
 
     -- ** ResetPasswordResponse
     , ResetPasswordResponse
@@ -340,6 +342,7 @@ module Network.Google.IdentityToolkit
     , identitytoolkitRelyingPartyUploadAccountRequest
     , irpuarUsers
     , irpuarMemoryCost
+    , irpuarAllowOverwrite
     , irpuarDelegatedProjectNumber
     , irpuarSanityCheck
     , irpuarSaltSeparator
@@ -400,6 +403,7 @@ module Network.Google.IdentityToolkit
     , iNextPageToken
     , iDelegatedProjectNumber
     , iMaxResults
+    , iTargetProjectId
 
     -- ** VerifyPasswordResponse
     , VerifyPasswordResponse
@@ -437,9 +441,12 @@ module Network.Google.IdentityToolkit
     , identitytoolkitRelyingPartySignupNewUserRequest
     , irpsnurEmail
     , irpsnurInstanceId
+    , irpsnurPhotoURL
     , irpsnurCaptchaChallenge
+    , irpsnurDisabled
     , irpsnurPassword
     , irpsnurCaptchaResponse
+    , irpsnurEmailVerified
     , irpsnurDisplayName
     , irpsnurIdToken
 

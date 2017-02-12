@@ -24,7 +24,7 @@
 -- resources, see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.get@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.variants.get@.
 module Network.Google.Resource.Genomics.Variants.Get
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ type VariantsGetResource =
      "v1" :>
        "variants" :>
          Capture "variantId" Text :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -69,7 +69,7 @@ type VariantsGetResource =
 --
 -- /See:/ 'variantsGet' smart constructor.
 data VariantsGet = VariantsGet'
-    { _vgXgafv          :: !(Maybe Text)
+    { _vgXgafv          :: !(Maybe Xgafv)
     , _vgUploadProtocol :: !(Maybe Text)
     , _vgPp             :: !Bool
     , _vgAccessToken    :: !(Maybe Text)
@@ -114,7 +114,7 @@ variantsGet pVgVariantId_ =
     }
 
 -- | V1 error format.
-vgXgafv :: Lens' VariantsGet (Maybe Text)
+vgXgafv :: Lens' VariantsGet (Maybe Xgafv)
 vgXgafv = lens _vgXgafv (\ s a -> s{_vgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

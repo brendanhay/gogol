@@ -21,8 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Modifies attachments of student submission. Attachments may only be
--- added to student submissions whose type is \`ASSIGNMENT\`. This request
--- must be made by the Developer Console project of the [OAuth client
+-- added to student submissions belonging to course work objects with a
+-- \`workType\` of \`ASSIGNMENT\`. This request must be made by the
+-- Developer Console project of the [OAuth client
 -- ID](https:\/\/support.google.com\/cloud\/answer\/6158849) used to create
 -- the corresponding course work item. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
@@ -82,8 +83,9 @@ type CoursesCourseWorkStudentSubmissionsModifyAttachmentsResource
                                      Post '[JSON] StudentSubmission
 
 -- | Modifies attachments of student submission. Attachments may only be
--- added to student submissions whose type is \`ASSIGNMENT\`. This request
--- must be made by the Developer Console project of the [OAuth client
+-- added to student submissions belonging to course work objects with a
+-- \`workType\` of \`ASSIGNMENT\`. This request must be made by the
+-- Developer Console project of the [OAuth client
 -- ID](https:\/\/support.google.com\/cloud\/answer\/6158849) used to create
 -- the corresponding course work item. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not

@@ -21,6 +21,7 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves, inserts, and deletes multiple products in a single request.
+-- This method can only be called for non-multi-client accounts.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.custombatch@.
 module Network.Google.Resource.Content.Products.Custombatch
@@ -53,6 +54,7 @@ type ProductsCustombatchResource =
                    Post '[JSON] ProductsCustomBatchResponse
 
 -- | Retrieves, inserts, and deletes multiple products in a single request.
+-- This method can only be called for non-multi-client accounts.
 --
 -- /See:/ 'productsCustombatch' smart constructor.
 data ProductsCustombatch = ProductsCustombatch'

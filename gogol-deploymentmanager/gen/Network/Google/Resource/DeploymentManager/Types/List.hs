@@ -33,6 +33,7 @@ module Network.Google.Resource.DeploymentManager.Types.List
     , TypesList
 
     -- * Request Lenses
+    , tlOrderBy
     , tlProject
     , tlFilter
     , tlPageToken
@@ -51,17 +52,19 @@ type TypesListResource =
            Capture "project" Text :>
              "global" :>
                "types" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Word32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] TypesListResponse
+                 QueryParam "orderBy" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] TypesListResponse
 
 -- | Lists all resource types for Deployment Manager.
 --
 -- /See:/ 'typesList' smart constructor.
 data TypesList = TypesList'
-    { _tlProject    :: !Text
+    { _tlOrderBy    :: !(Maybe Text)
+    , _tlProject    :: !Text
     , _tlFilter     :: !(Maybe Text)
     , _tlPageToken  :: !(Maybe Text)
     , _tlMaxResults :: !(Textual Word32)
@@ -70,6 +73,8 @@ data TypesList = TypesList'
 -- | Creates a value of 'TypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tlOrderBy'
 --
 -- * 'tlProject'
 --
@@ -83,11 +88,24 @@ typesList
     -> TypesList
 typesList pTlProject_ =
     TypesList'
-    { _tlProject = pTlProject_
+    { _tlOrderBy = Nothing
+    , _tlProject = pTlProject_
     , _tlFilter = Nothing
     , _tlPageToken = Nothing
     , _tlMaxResults = 500
     }
+
+-- | Sorts list results by a certain order. By default, results are returned
+-- in alphanumerical order based on the resource name. You can also sort
+-- results in descending order based on the creation timestamp using
+-- orderBy=\"creationTimestamp desc\". This sorts results based on the
+-- creationTimestamp field in reverse chronological order (newest result
+-- first). Use this to sort resources like operations so that the newest
+-- operation is returned first. Currently, only sorting by name or
+-- creationTimestamp desc is supported.
+tlOrderBy :: Lens' TypesList (Maybe Text)
+tlOrderBy
+  = lens _tlOrderBy (\ s a -> s{_tlOrderBy = a})
 
 -- | The project ID for this request.
 tlProject :: Lens' TypesList Text
@@ -140,7 +158,7 @@ instance GoogleRequest TypesList where
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
         requestClient TypesList'{..}
-          = go _tlProject _tlFilter _tlPageToken
+          = go _tlProject _tlOrderBy _tlFilter _tlPageToken
               (Just _tlMaxResults)
               (Just AltJSON)
               deploymentManagerService

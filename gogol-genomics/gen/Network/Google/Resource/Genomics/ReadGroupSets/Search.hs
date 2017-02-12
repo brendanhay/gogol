@@ -27,7 +27,7 @@
 -- Implements
 -- [GlobalAllianceApi.searchReadGroupSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L135).
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.readgroupsets.search@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.readgroupsets.search@.
 module Network.Google.Resource.Genomics.ReadGroupSets.Search
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type ReadGroupSetsSearchResource =
      "v1" :>
        "readgroupsets" :>
          "search" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -77,7 +77,7 @@ type ReadGroupSetsSearchResource =
 --
 -- /See:/ 'readGroupSetsSearch' smart constructor.
 data ReadGroupSetsSearch = ReadGroupSetsSearch'
-    { _rgssXgafv          :: !(Maybe Text)
+    { _rgssXgafv          :: !(Maybe Xgafv)
     , _rgssUploadProtocol :: !(Maybe Text)
     , _rgssPp             :: !Bool
     , _rgssAccessToken    :: !(Maybe Text)
@@ -122,7 +122,7 @@ readGroupSetsSearch pRgssPayload_ =
     }
 
 -- | V1 error format.
-rgssXgafv :: Lens' ReadGroupSetsSearch (Maybe Text)
+rgssXgafv :: Lens' ReadGroupSetsSearch (Maybe Xgafv)
 rgssXgafv
   = lens _rgssXgafv (\ s a -> s{_rgssXgafv = a})
 

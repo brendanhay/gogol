@@ -63,7 +63,7 @@ instance ToJSON ThreatEntryMetadata where
 --
 -- /See:/ 'checksum' smart constructor.
 newtype Checksum = Checksum'
-    { _cSha256 :: Maybe Base64
+    { _cSha256 :: Maybe Bytes
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Checksum' with the minimum fields required to make a request.
@@ -83,7 +83,7 @@ checksum =
 cSha256 :: Lens' Checksum (Maybe ByteString)
 cSha256
   = lens _cSha256 (\ s a -> s{_cSha256 = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 instance FromJSON Checksum where
         parseJSON
@@ -273,7 +273,7 @@ instance ToJSON FetchThreatListUpdatesRequest where
 -- /See:/ 'findFullHashesRequest' smart constructor.
 data FindFullHashesRequest = FindFullHashesRequest'
     { _ffhrThreatInfo   :: !(Maybe ThreatInfo)
-    , _ffhrClientStates :: !(Maybe [Base64])
+    , _ffhrClientStates :: !(Maybe [Bytes])
     , _ffhrClient       :: !(Maybe ClientInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -421,7 +421,7 @@ data RiceDeltaEncoding = RiceDeltaEncoding'
     { _rdeFirstValue    :: !(Maybe (Textual Int64))
     , _rdeRiceParameter :: !(Maybe (Textual Int32))
     , _rdeNumEntries    :: !(Maybe (Textual Int32))
-    , _rdeEncodedData   :: !(Maybe Base64)
+    , _rdeEncodedData   :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RiceDeltaEncoding' with the minimum fields required to make a request.
@@ -475,7 +475,7 @@ rdeEncodedData :: Lens' RiceDeltaEncoding (Maybe ByteString)
 rdeEncodedData
   = lens _rdeEncodedData
       (\ s a -> s{_rdeEncodedData = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 instance FromJSON RiceDeltaEncoding where
         parseJSON
@@ -697,7 +697,7 @@ instance ToJSON FindThreatMatchesRequest where
 --
 -- /See:/ 'listUpdateRequest' smart constructor.
 data ListUpdateRequest = ListUpdateRequest'
-    { _lurState           :: !(Maybe Base64)
+    { _lurState           :: !(Maybe Bytes)
     , _lurThreatEntryType :: !(Maybe Text)
     , _lurConstraints     :: !(Maybe Constraints)
     , _lurThreatType      :: !(Maybe Text)
@@ -733,7 +733,7 @@ listUpdateRequest =
 lurState :: Lens' ListUpdateRequest (Maybe ByteString)
 lurState
   = lens _lurState (\ s a -> s{_lurState = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The types of entries present in the list.
 lurThreatEntryType :: Lens' ListUpdateRequest (Maybe Text)
@@ -784,9 +784,9 @@ instance ToJSON ListUpdateRequest where
 --
 -- /See:/ 'threatEntry' smart constructor.
 data ThreatEntry = ThreatEntry'
-    { _teHash   :: !(Maybe Base64)
+    { _teHash   :: !(Maybe Bytes)
     , _teURL    :: !(Maybe Text)
-    , _teDigest :: !(Maybe Base64)
+    , _teDigest :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ThreatEntry' with the minimum fields required to make a request.
@@ -812,7 +812,7 @@ threatEntry =
 teHash :: Lens' ThreatEntry (Maybe ByteString)
 teHash
   = lens _teHash (\ s a -> s{_teHash = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | A URL.
 teURL :: Lens' ThreatEntry (Maybe Text)
@@ -823,7 +823,7 @@ teURL = lens _teURL (\ s a -> s{_teURL = a})
 teDigest :: Lens' ThreatEntry (Maybe ByteString)
 teDigest
   = lens _teDigest (\ s a -> s{_teDigest = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 instance FromJSON ThreatEntry where
         parseJSON
@@ -947,7 +947,7 @@ instance ToJSON ThreatMatch where
 -- /See:/ 'rawHashes' smart constructor.
 data RawHashes = RawHashes'
     { _rhPrefixSize :: !(Maybe (Textual Int32))
-    , _rhRawHashes  :: !(Maybe Base64)
+    , _rhRawHashes  :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RawHashes' with the minimum fields required to make a request.
@@ -978,7 +978,7 @@ rhPrefixSize
 rhRawHashes :: Lens' RawHashes (Maybe ByteString)
 rhRawHashes
   = lens _rhRawHashes (\ s a -> s{_rhRawHashes = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 instance FromJSON RawHashes where
         parseJSON
@@ -1003,7 +1003,7 @@ data ListUpdateResponse = ListUpdateResponse'
     , _lChecksum        :: !(Maybe Checksum)
     , _lThreatType      :: !(Maybe Text)
     , _lPlatformType    :: !(Maybe Text)
-    , _lNewClientState  :: !(Maybe Base64)
+    , _lNewClientState  :: !(Maybe Bytes)
     , _lRemovals        :: !(Maybe [ThreatEntrySet])
     , _lResponseType    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1080,7 +1080,7 @@ lNewClientState :: Lens' ListUpdateResponse (Maybe ByteString)
 lNewClientState
   = lens _lNewClientState
       (\ s a -> s{_lNewClientState = a})
-      . mapping _Base64
+      . mapping _Bytes
 
 -- | A set of entries to remove from a local threat type\'s list. Repeated
 -- for the same reason as above.
@@ -1317,8 +1317,8 @@ instance ToJSON FindFullHashesResponse where
 --
 -- /See:/ 'metadataEntry' smart constructor.
 data MetadataEntry = MetadataEntry'
-    { _meValue :: !(Maybe Base64)
-    , _meKey   :: !(Maybe Base64)
+    { _meValue :: !(Maybe Bytes)
+    , _meKey   :: !(Maybe Bytes)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataEntry' with the minimum fields required to make a request.
@@ -1340,13 +1340,13 @@ metadataEntry =
 meValue :: Lens' MetadataEntry (Maybe ByteString)
 meValue
   = lens _meValue (\ s a -> s{_meValue = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The metadata entry key.
 meKey :: Lens' MetadataEntry (Maybe ByteString)
 meKey
   = lens _meKey (\ s a -> s{_meKey = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 instance FromJSON MetadataEntry where
         parseJSON

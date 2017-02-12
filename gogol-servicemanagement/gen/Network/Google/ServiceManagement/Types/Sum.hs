@@ -586,6 +586,45 @@ instance FromJSON DiagnosticKind where
 instance ToJSON DiagnosticKind where
     toJSON = toJSONText
 
+-- | The log type that this config enables.
+data AuditLogConfigLogType
+    = LogTypeUnspecified
+      -- ^ @LOG_TYPE_UNSPECIFIED@
+      -- Default case. Should never be this.
+    | AdminRead
+      -- ^ @ADMIN_READ@
+      -- Admin reads. Example: CloudIAM getIamPolicy
+    | DataWrite
+      -- ^ @DATA_WRITE@
+      -- Data writes. Example: CloudSQL Users create
+    | DataRead
+      -- ^ @DATA_READ@
+      -- Data reads. Example: CloudSQL Users list
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable AuditLogConfigLogType
+
+instance FromHttpApiData AuditLogConfigLogType where
+    parseQueryParam = \case
+        "LOG_TYPE_UNSPECIFIED" -> Right LogTypeUnspecified
+        "ADMIN_READ" -> Right AdminRead
+        "DATA_WRITE" -> Right DataWrite
+        "DATA_READ" -> Right DataRead
+        x -> Left ("Unable to parse AuditLogConfigLogType from: " <> x)
+
+instance ToHttpApiData AuditLogConfigLogType where
+    toQueryParam = \case
+        LogTypeUnspecified -> "LOG_TYPE_UNSPECIFIED"
+        AdminRead -> "ADMIN_READ"
+        DataWrite -> "DATA_WRITE"
+        DataRead -> "DATA_READ"
+
+instance FromJSON AuditLogConfigLogType where
+    parseJSON = parseJSONText "AuditLogConfigLogType"
+
+instance ToJSON AuditLogConfigLogType where
+    toJSON = toJSONText
+
 -- | V1 error format.
 data Xgafv
     = X1

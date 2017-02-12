@@ -27,7 +27,7 @@
 -- Implements
 -- [GlobalAllianceApi.searchReferences](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L146).
 --
--- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.references.search@.
+-- /See:/ <https://cloud.google.com/genomics Genomics API Reference> for @genomics.references.search@.
 module Network.Google.Resource.Genomics.References.Search
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ type ReferencesSearchResource =
      "v1" :>
        "references" :>
          "search" :>
-           QueryParam "$.xgafv" Text :>
+           QueryParam "$.xgafv" Xgafv :>
              QueryParam "upload_protocol" Text :>
                QueryParam "pp" Bool :>
                  QueryParam "access_token" Text :>
@@ -77,7 +77,7 @@ type ReferencesSearchResource =
 --
 -- /See:/ 'referencesSearch' smart constructor.
 data ReferencesSearch = ReferencesSearch'
-    { _refXgafv          :: !(Maybe Text)
+    { _refXgafv          :: !(Maybe Xgafv)
     , _refUploadProtocol :: !(Maybe Text)
     , _refPp             :: !Bool
     , _refAccessToken    :: !(Maybe Text)
@@ -122,7 +122,7 @@ referencesSearch pRefPayload_ =
     }
 
 -- | V1 error format.
-refXgafv :: Lens' ReferencesSearch (Maybe Text)
+refXgafv :: Lens' ReferencesSearch (Maybe Xgafv)
 refXgafv = lens _refXgafv (\ s a -> s{_refXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").

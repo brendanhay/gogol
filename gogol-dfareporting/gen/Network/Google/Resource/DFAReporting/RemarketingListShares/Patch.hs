@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 -- 'RemarketingListSharesPatch' request conforms to.
 type RemarketingListSharesPatchResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "remarketingListShares" :>

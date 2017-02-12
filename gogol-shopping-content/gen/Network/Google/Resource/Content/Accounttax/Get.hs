@@ -20,7 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the tax settings of the account.
+-- Retrieves the tax settings of the account. This method can only be
+-- called for accounts to which the managing account has access: either the
+-- managing account itself or sub-accounts if the managing account is a
+-- multi-client account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounttax.get@.
 module Network.Google.Resource.Content.Accounttax.Get
@@ -50,7 +53,10 @@ type AccounttaxGetResource =
              Capture "accountId" (Textual Word64) :>
                QueryParam "alt" AltJSON :> Get '[JSON] AccountTax
 
--- | Retrieves the tax settings of the account.
+-- | Retrieves the tax settings of the account. This method can only be
+-- called for accounts to which the managing account has access: either the
+-- managing account itself or sub-accounts if the managing account is a
+-- multi-client account.
 --
 -- /See:/ 'accounttaxGet' smart constructor.
 data AccounttaxGet = AccounttaxGet'

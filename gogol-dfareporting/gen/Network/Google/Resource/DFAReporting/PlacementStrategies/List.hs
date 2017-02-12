@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves a list of placement strategies, possibly filtered.
+-- Retrieves a list of placement strategies, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.list@.
 module Network.Google.Resource.DFAReporting.PlacementStrategies.List
@@ -49,7 +50,7 @@ import           Network.Google.Prelude
 -- 'PlacementStrategiesList' request conforms to.
 type PlacementStrategiesListResource =
      "dfareporting" :>
-       "v2.6" :>
+       "v2.7" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementStrategies" :>
@@ -66,7 +67,8 @@ type PlacementStrategiesListResource =
                            QueryParam "alt" AltJSON :>
                              Get '[JSON] PlacementStrategiesListResponse
 
--- | Retrieves a list of placement strategies, possibly filtered.
+-- | Retrieves a list of placement strategies, possibly filtered. This method
+-- supports paging.
 --
 -- /See:/ 'placementStrategiesList' smart constructor.
 data PlacementStrategiesList = PlacementStrategiesList'

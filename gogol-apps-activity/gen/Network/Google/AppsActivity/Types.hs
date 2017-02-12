@@ -78,6 +78,7 @@ module Network.Google.AppsActivity.Types
     , uPhoto
     , uIsDeleted
     , uName
+    , uIsMe
     , uPermissionId
 
     -- * EventAdditionalEventTypesItem

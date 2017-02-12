@@ -40,6 +40,7 @@ module Network.Google.DeploymentManager.Types
     , AuditConfig
     , auditConfig
     , acService
+    , acAuditLogConfigs
     , acExemptedMembers
 
     -- * DeploymentsUpdateCreatePolicy
@@ -56,6 +57,9 @@ module Network.Google.DeploymentManager.Types
     , resourceUpdateWarningsItemDataItem
     , ruwidiValue
     , ruwidiKey
+
+    -- * DeploymentsDeleteDeletePolicy
+    , DeploymentsDeleteDeletePolicy (..)
 
     -- * TypesListResponse
     , TypesListResponse
@@ -262,6 +266,12 @@ module Network.Google.DeploymentManager.Types
     , resourceWarningsItemDataItem
     , rwidiValue
     , rwidiKey
+
+    -- * AuditLogConfig
+    , AuditLogConfig
+    , auditLogConfig
+    , alcLogType
+    , alcExemptedMembers
 
     -- * ResourceUpdateError
     , ResourceUpdateError

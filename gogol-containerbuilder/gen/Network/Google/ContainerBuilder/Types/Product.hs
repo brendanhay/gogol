@@ -24,12 +24,13 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'buildStep' smart constructor.
 data BuildStep = BuildStep'
-    { _bsDir     :: !(Maybe Text)
-    , _bsArgs    :: !(Maybe [Text])
-    , _bsEnv     :: !(Maybe [Text])
-    , _bsWaitFor :: !(Maybe [Text])
-    , _bsName    :: !(Maybe Text)
-    , _bsId      :: !(Maybe Text)
+    { _bsDir        :: !(Maybe Text)
+    , _bsArgs       :: !(Maybe [Text])
+    , _bsEnv        :: !(Maybe [Text])
+    , _bsEntrypoint :: !(Maybe Text)
+    , _bsWaitFor    :: !(Maybe [Text])
+    , _bsName       :: !(Maybe Text)
+    , _bsId         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BuildStep' with the minimum fields required to make a request.
@@ -41,6 +42,8 @@ data BuildStep = BuildStep'
 -- * 'bsArgs'
 --
 -- * 'bsEnv'
+--
+-- * 'bsEntrypoint'
 --
 -- * 'bsWaitFor'
 --
@@ -54,6 +57,7 @@ buildStep =
     { _bsDir = Nothing
     , _bsArgs = Nothing
     , _bsEnv = Nothing
+    , _bsEntrypoint = Nothing
     , _bsWaitFor = Nothing
     , _bsName = Nothing
     , _bsId = Nothing
@@ -81,6 +85,12 @@ bsEnv :: Lens' BuildStep [Text]
 bsEnv
   = lens _bsEnv (\ s a -> s{_bsEnv = a}) . _Default .
       _Coerce
+
+-- | Optional entrypoint to be used instead of the build step image\'s
+-- default If unset, the image\'s default will be used.
+bsEntrypoint :: Lens' BuildStep (Maybe Text)
+bsEntrypoint
+  = lens _bsEntrypoint (\ s a -> s{_bsEntrypoint = a})
 
 -- | The ID(s) of the step(s) that this build step depends on. This build
 -- step will not start until all the build steps in wait_for have completed
@@ -120,6 +130,7 @@ instance FromJSON BuildStep where
                  BuildStep' <$>
                    (o .:? "dir") <*> (o .:? "args" .!= mempty) <*>
                      (o .:? "env" .!= mempty)
+                     <*> (o .:? "entrypoint")
                      <*> (o .:? "waitFor" .!= mempty)
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
@@ -129,7 +140,9 @@ instance ToJSON BuildStep where
           = object
               (catMaybes
                  [("dir" .=) <$> _bsDir, ("args" .=) <$> _bsArgs,
-                  ("env" .=) <$> _bsEnv, ("waitFor" .=) <$> _bsWaitFor,
+                  ("env" .=) <$> _bsEnv,
+                  ("entrypoint" .=) <$> _bsEntrypoint,
+                  ("waitFor" .=) <$> _bsWaitFor,
                   ("name" .=) <$> _bsName, ("id" .=) <$> _bsId])
 
 -- | Provenance of the source. Ways to find the original source, or verify
@@ -404,11 +417,32 @@ instance ToJSON ListOperationsResponse where
                  [("nextPageToken" .=) <$> _lorNextPageToken,
                   ("operations" .=) <$> _lorOperations])
 
+-- | The request message for Operations.CancelOperation.
+--
+-- /See:/ 'cancelOperationRequest' smart constructor.
+data CancelOperationRequest =
+    CancelOperationRequest'
+    deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
+--
+cancelOperationRequest
+    :: CancelOperationRequest
+cancelOperationRequest = CancelOperationRequest'
+
+instance FromJSON CancelOperationRequest where
+        parseJSON
+          = withObject "CancelOperationRequest"
+              (\ o -> pure CancelOperationRequest')
+
+instance ToJSON CancelOperationRequest where
+        toJSON = const emptyObject
+
 -- | Container message for hash values.
 --
 -- /See:/ 'hash' smart constructor.
 data Hash = Hash'
-    { _hValue :: !(Maybe Base64)
+    { _hValue :: !(Maybe Bytes)
     , _hType  :: !(Maybe HashType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -431,7 +465,7 @@ hash =
 hValue :: Lens' Hash (Maybe ByteString)
 hValue
   = lens _hValue (\ s a -> s{_hValue = a}) .
-      mapping _Base64
+      mapping _Bytes
 
 -- | The type of hash that was performed.
 hType :: Lens' Hash (Maybe HashType)
@@ -757,6 +791,7 @@ data Build = Build'
     , _bId               :: !(Maybe Text)
     , _bOptions          :: !(Maybe BuildOptions)
     , _bProjectId        :: !(Maybe Text)
+    , _bBuildTriggerId   :: !(Maybe Text)
     , _bTimeout          :: !(Maybe Duration)
     , _bFinishTime       :: !(Maybe DateTime')
     , _bCreateTime       :: !(Maybe DateTime')
@@ -792,6 +827,8 @@ data Build = Build'
 --
 -- * 'bProjectId'
 --
+-- * 'bBuildTriggerId'
+--
 -- * 'bTimeout'
 --
 -- * 'bFinishTime'
@@ -814,6 +851,7 @@ build =
     , _bId = Nothing
     , _bOptions = Nothing
     , _bProjectId = Nothing
+    , _bBuildTriggerId = Nothing
     , _bTimeout = Nothing
     , _bFinishTime = Nothing
     , _bCreateTime = Nothing
@@ -891,6 +929,13 @@ bProjectId :: Lens' Build (Maybe Text)
 bProjectId
   = lens _bProjectId (\ s a -> s{_bProjectId = a})
 
+-- | The ID of the BuildTrigger that triggered this build, if it was
+-- triggered automatically. \'OutputOnly
+bBuildTriggerId :: Lens' Build (Maybe Text)
+bBuildTriggerId
+  = lens _bBuildTriggerId
+      (\ s a -> s{_bBuildTriggerId = a})
+
 -- | Amount of time that this build should be allowed to run, to second
 -- granularity. If this amount of time elapses, work on the build will
 -- cease and the build status will be TIMEOUT. Default time is ten minutes.
@@ -899,13 +944,15 @@ bTimeout
   = lens _bTimeout (\ s a -> s{_bTimeout = a}) .
       mapping _Duration
 
--- | Time at which execution of the build was finished. \'OutputOnly
+-- | Time at which execution of the build was finished. The difference
+-- between finish_time and start_time is the duration of the build\'s
+-- execution. \'OutputOnly
 bFinishTime :: Lens' Build (Maybe UTCTime)
 bFinishTime
   = lens _bFinishTime (\ s a -> s{_bFinishTime = a}) .
       mapping _DateTime
 
--- | Time at which the build was created. \'OutputOnly
+-- | Time at which the request to create the build was received. \'OutputOnly
 bCreateTime :: Lens' Build (Maybe UTCTime)
 bCreateTime
   = lens _bCreateTime (\ s a -> s{_bCreateTime = a}) .
@@ -928,6 +975,7 @@ instance FromJSON Build where
                      <*> (o .:? "id")
                      <*> (o .:? "options")
                      <*> (o .:? "projectId")
+                     <*> (o .:? "buildTriggerId")
                      <*> (o .:? "timeout")
                      <*> (o .:? "finishTime")
                      <*> (o .:? "createTime"))
@@ -948,6 +996,7 @@ instance ToJSON Build where
                   ("source" .=) <$> _bSource, ("id" .=) <$> _bId,
                   ("options" .=) <$> _bOptions,
                   ("projectId" .=) <$> _bProjectId,
+                  ("buildTriggerId" .=) <$> _bBuildTriggerId,
                   ("timeout" .=) <$> _bTimeout,
                   ("finishTime" .=) <$> _bFinishTime,
                   ("createTime" .=) <$> _bCreateTime])
