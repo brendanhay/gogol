@@ -1,5 +1,5 @@
 name:                  gogol-plus-domains
-version:               0.1.1
+version:               0.2.0
 synopsis:              Google + Domains SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -61,5 +61,5 @@ library
         , Network.Google.PlusDomains.Types.Sum
 
     build-depends:
-          gogol-core == 0.1.1.*
+          gogol-core == 0.2.0.*
         , base       >= 4.7 && < 5

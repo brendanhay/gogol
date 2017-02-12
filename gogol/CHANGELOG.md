@@ -1,5 +1,28 @@
 # Change Log
 
+## [0.2.0](https://github.com/brendanhay/gogol/tree/0.2.0)
+
+Released: **12 February, 2017**, Compare: [0.1.1](https://github.com/brendanhay/gogol/compare/0.1.1...0.2.0)
+
+### Fixed
+
+- Removal of 'smart'-deserialisation of Base64-encoded byte streams. [\#47](https://github.com/brendanhay/gogol/issues/47) [\#58](https://github.com/brendanhay/gogol/pull/58)
+- Various fixes for Installed Application AuthN/AuthZ example. [\#39](https://github.com/brendanhay/gogol/pull/39)
+- Various fixes for token-based refresh requests. [\#37](https://github.com/brendanhay/gogol/pull/37) [\#53](https://github.com/brendanhay/gogol/pull/53) [\#55](https://github.com/brendanhay/gogol/pull/55) [\#57](https://github.com/brendanhay/gogol/pull/57)
+- CSV quote parameters in BigQuery should be optional. [\#52](https://github.com/brendanhay/gogol/issues/52)
+- Fixed the incocrrect construction of URL's containing mode suffixes, such as `:commit`. [\#33](https://github.com/brendanhay/gogol/issues/33) [\#34](https://github.com/brendanhay/gogol/pull/34) [\#49](https://github.com/brendanhay/gogol/issues/49)
+
+### New Libraries
+
+- `gogol-manufacturers`: [Manage](https://developers.google.com/manufacturers/) your product listings for [Google Manufacturer Center](https://www.google.com/retail/manufacturer-center/).
+- `gogol-slides`: [Slides Overview](https://developers.google.com/slides/how-tos/overview).
+- `gogol-language`: [Natural Language Overview](https://cloud.google.com/natural-language/).
+
+### Updated Service Definitions
+
+- All service definitions have been updated to their latest respective versions.
+
+
 ## [0.1.1](https://github.com/brendanhay/gogol/tree/0.1.1)
 Released: **03 November, 2016**, Compare: [0.1.0](https://github.com/brendanhay/gogol/compare/0.1.0...0.1.1)
 
@@ -8,7 +31,6 @@ Released: **03 November, 2016**, Compare: [0.1.0](https://github.com/brendanhay/
 - Fixes for incorrectly serialised project/commit URL identifiers. [\#34](https://github.com/brendanhay/gogol/pull/34)
 - Correcting `/computeMetadta/V1` path prefix for metadata token refresh URLs. [\#37](https://github.com/brendanhay/gogol/pull/37)
 - Fixes for Installed Application authentication flow. [\#39](https://github.com/brendanhay/gogol/pull/34)
-
 
 ### Updated Service Definitions
 
