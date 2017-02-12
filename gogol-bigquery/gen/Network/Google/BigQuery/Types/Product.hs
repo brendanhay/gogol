@@ -2367,7 +2367,7 @@ data JobConfigurationLoad = JobConfigurationLoad'
     , _jclAllowQuotedNewlines :: !(Maybe Bool)
     , _jclSourceFormat        :: !(Maybe Text)
     , _jclSchema              :: !(Maybe TableSchema)
-    , _jclQuote               :: !Text
+    , _jclQuote               :: !(Maybe Text)
     , _jclMaxBadRecords       :: !(Maybe (Textual Int32))
     , _jclAutodetect          :: !(Maybe Bool)
     , _jclSourceURIs          :: !(Maybe [Text])
@@ -2436,7 +2436,7 @@ jobConfigurationLoad =
     , _jclAllowQuotedNewlines = Nothing
     , _jclSourceFormat = Nothing
     , _jclSchema = Nothing
-    , _jclQuote = "\""
+    , _jclQuote = Nothing
     , _jclMaxBadRecords = Nothing
     , _jclAutodetect = Nothing
     , _jclSourceURIs = Nothing
@@ -2580,7 +2580,7 @@ jclSchema
 -- not contain quoted sections, set the property value to an empty string.
 -- If your data contains quoted newline characters, you must also set the
 -- allowQuotedNewlines property to true.
-jclQuote :: Lens' JobConfigurationLoad Text
+jclQuote :: Lens' JobConfigurationLoad (Maybe Text)
 jclQuote = lens _jclQuote (\ s a -> s{_jclQuote = a})
 
 -- | [Optional] The maximum number of bad records that BigQuery can ignore
@@ -2660,7 +2660,7 @@ instance FromJSON JobConfigurationLoad where
                      <*> (o .:? "allowQuotedNewlines")
                      <*> (o .:? "sourceFormat")
                      <*> (o .:? "schema")
-                     <*> (o .:? "quote" .!= "\"")
+                     <*> (o .:? "quote")
                      <*> (o .:? "maxBadRecords")
                      <*> (o .:? "autodetect")
                      <*> (o .:? "sourceUris" .!= mempty)
@@ -2688,7 +2688,7 @@ instance ToJSON JobConfigurationLoad where
                     _jclAllowQuotedNewlines,
                   ("sourceFormat" .=) <$> _jclSourceFormat,
                   ("schema" .=) <$> _jclSchema,
-                  Just ("quote" .= _jclQuote),
+                  ("quote" .=) <$> _jclQuote,
                   ("maxBadRecords" .=) <$> _jclMaxBadRecords,
                   ("autodetect" .=) <$> _jclAutodetect,
                   ("sourceUris" .=) <$> _jclSourceURIs,
