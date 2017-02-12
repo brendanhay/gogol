@@ -1,5 +1,5 @@
 name:                  gogol-gen
-version:               0.1.1
+version:               0.2.0
 synopsis:              Gogol Code Generator
 homepage:              https://github.com/brendanhay/gogol
 license:               OtherLicense
