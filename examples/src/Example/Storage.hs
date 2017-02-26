@@ -57,9 +57,7 @@ example bucket input output = do
     runResourceT . Google.runGoogle env $ do
         -- Upload the 'input' file contents to the specified bucket, using
         -- the file path as the key:
-        void $ Google.upload
-            (Storage.objectsInsert bucket object' & Storage.oiName ?~ key)
-            body
+        _     <- Google.upload (Storage.objectsInsert bucket object' & Storage.oiName ?~ key) body
 
         -- Download from the bucket/key and create a source of the HTTP stream:
         stream <- Google.download (Storage.objectsGet bucket key)
