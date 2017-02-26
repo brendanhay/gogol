@@ -40,7 +40,7 @@ import qualified Network.Google.Storage as Storage
 --example :: Text -> FilePath -> IO ()
 example bucket input output = do
     -- Setup a logger to emit 'Debug' (or higher) log statements to 'stdout':
-    lgr  <- Google.newLogger Debug stdout
+    lgr  <- Google.newLogger Google.Debug stdout
 
     -- Create a new environment which will discover the appropriate
     -- AuthN/AuthZ credentials, and explicitly state the OAuth scopes
@@ -57,7 +57,7 @@ example bucket input output = do
     runResourceT . Google.runGoogle env $ do
         -- Upload the 'input' file contents to the specified bucket, using
         -- the file path as the key:
-        _     <- Google.upload (Storage.objectsInsert bucket object' & Storage.oiName ?~ key) body
+        _     <- Google.upload (Storage.objectsInsert bucket Storage.object' & Storage.oiName ?~ key) body
 
         -- Download from the bucket/key and create a source of the HTTP stream:
         stream <- Google.download (Storage.objectsGet bucket key)
