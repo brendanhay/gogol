@@ -127,7 +127,14 @@ data AuthorizedUser = AuthorizedUser
     { _userId      :: !ClientId
     , _userRefresh :: !RefreshToken
     , _userSecret  :: !Secret
-    } deriving (Eq, Show)
+    } deriving (Eq, Show, Generic)
+
+instance ToJSON AuthorizedUser where
+    toEncoding (AuthorizedUser i r s) =
+        pairs (  "client_id"     .= i
+              <> "refresh_token" .= r
+              <> "client_secret" .= s
+              )
 
 instance FromJSON AuthorizedUser where
     parseJSON = withObject "authorized_user" $ \o -> AuthorizedUser
@@ -175,12 +182,13 @@ instance ToHttpApiData (OAuthCode s) where
     toQueryParam (OAuthCode c) = c
     toHeader     (OAuthCode c) = Text.encodeUtf8 c
 
--- | An error thrown when attempting to read AuthN/AuthZ information.
+-- | An error thrown when attempting to read/write AuthN/AuthZ information.
 data AuthError
     = RetrievalError    HttpException
     | MissingFileError  FilePath
     | InvalidFileError  FilePath Text
     | TokenRefreshError Status Text (Maybe Text)
+    | FileExistError    FilePath
       deriving (Show, Typeable)
 
 instance Exception AuthError

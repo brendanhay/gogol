@@ -22,9 +22,12 @@ module Network.Google.Auth.InstalledApplication
     ( installedApplication
 
     -- * Forming the URL
+    , AccessType (..)
     , redirectURI
     , formURL
+    , formAccessTypeURL
     , formURLWith
+    , formAccessTypeURLWith
 
     -- * Internal Exchange and Refresh
     , exchangeCode
@@ -33,6 +36,7 @@ module Network.Google.Auth.InstalledApplication
 
 import           Control.Monad.Catch            (MonadCatch)
 import           Control.Monad.IO.Class         (MonadIO)
+import qualified Data.Text                      as Text
 import qualified Data.Text.Encoding             as Text
 import           GHC.TypeLits                   (Symbol)
 import           Network.Google.Auth.Scope      (AllowScopes (..),
@@ -77,6 +81,9 @@ import qualified Network.HTTP.Conduit           as Client
 installedApplication :: OAuthClient -> OAuthCode s -> Credentials s
 installedApplication = FromClient
 
+-- /See:/ <https://developers.google.com/identity/protocols/OAuth2WebServer#offline>
+data AccessType = Online | Offline deriving (Show, Eq)
+
 -- | The redirection URI used in 'formURL': @urn:ietf:wg:oauth:2.0:oob@.
 redirectURI :: Text
 redirectURI = "urn:ietf:wg:oauth:2.0:oob"
@@ -88,6 +95,12 @@ redirectURI = "urn:ietf:wg:oauth:2.0:oob"
 formURL :: AllowScopes (s :: [Symbol]) => OAuthClient -> proxy s -> Text
 formURL c = formURLWith c . allowScopes
 
+-- | 'formURL' for 'AccessType'
+--
+-- /See:/ 'formUrl'.
+formAccessTypeURL :: AllowScopes (s :: [Symbol]) => OAuthClient -> AccessType -> proxy s -> Text
+formAccessTypeURL c a = formAccessTypeURLWith c a . allowScopes
+
 -- | Form a URL using 'OAuthScope' values.
 --
 -- /See:/ 'formURL'.
@@ -97,6 +110,13 @@ formURLWith c ss = accountsURL
     <> "&client_id="    <> toQueryParam (_clientId c)
     <> "&redirect_uri=" <> redirectURI
     <> "&scope="        <> Text.decodeUtf8 (queryEncodeScopes ss)
+
+-- | 'formURLWith' for 'AccessType'
+--
+-- /See:/ 'formURLWith'.
+formAccessTypeURLWith :: OAuthClient -> AccessType -> [OAuthScope] -> Text
+formAccessTypeURLWith c a ss = formURLWith c ss
+    <> "&access_type="  <> (Text.toLower . Text.pack $ show a)
 
 -- | Exchange 'OAuthClient' details and the received 'OAuthCode' for a new
 -- 'OAuthToken'.
