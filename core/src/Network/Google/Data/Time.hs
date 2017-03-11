@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE DeriveDataTypeable         #-}
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
@@ -22,6 +23,7 @@ module Network.Google.Data.Time
     , _Duration
     ) where
 
+import           Data.Monoid                      ((<>))
 import           Control.Lens
 import           Data.Aeson
 import qualified Data.Aeson.Types                  as Aeson
@@ -86,7 +88,7 @@ _Duration = iso unDuration Duration
 instance ToHttpApiData Duration where
     toQueryParam =
           LText.toStrict
-        . Build.toLazyText
+        . (\seconds -> Build.toLazyText seconds <> "s")
         . Sci.formatScientificBuilder Sci.Fixed (Just 9)
         . unDuration
 
