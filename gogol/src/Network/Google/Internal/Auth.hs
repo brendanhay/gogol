@@ -127,14 +127,14 @@ data AuthorizedUser = AuthorizedUser
     { _userId      :: !ClientId
     , _userRefresh :: !RefreshToken
     , _userSecret  :: !Secret
-    } deriving (Eq, Show, Generic)
+    } deriving (Eq, Show)
 
 instance ToJSON AuthorizedUser where
-    toEncoding (AuthorizedUser i r s) =
-        pairs (  "client_id"     .= i
-              <> "refresh_token" .= r
-              <> "client_secret" .= s
-              )
+    toJSON (AuthorizedUser i r s) =
+        object [ "client_id"     .= i
+               , "refresh_token" .= r
+               , "client_secret" .= s
+               ]
 
 instance FromJSON AuthorizedUser where
     parseJSON = withObject "authorized_user" $ \o -> AuthorizedUser
