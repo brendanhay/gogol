@@ -35,7 +35,6 @@ module Network.Google.Auth
     -- ** Thread-safe Storage
     , Store
     , initStore
-    , refreshStore
     , retrieveAuthFromStore
 
     , Auth           (..)
@@ -127,27 +126,6 @@ initStore :: (MonadIO m, MonadCatch m, AllowScopes s)
           -> Manager
           -> m (Store s)
 initStore c l m = exchange c l m >>= fmap Store . liftIO . newMVar
-
--- | Refresh an 'OAuthToken' if it was expired.
--- Otherwise, keep original one.
-refreshStore :: (MonadIO m, MonadCatch m, AllowScopes s)
-             => Store s
-             -> Logger
-             -> Manager
-             -> m (Store s)
-refreshStore ss@(Store s) l m = do
-    x  <- retrieveAuthFromStore ss
-    mx <- validate x
-    if mx
-        then pure ss
-        else liftIO . modifyMVar s $ \y -> do
-            my <- validate y
-            if my
-                then pure (y, ss)
-                else do
-                    z <- refresh y l m
-                    tt <- fmap Store . liftIO . newMVar $ z
-                    pure (z, tt)
 
 -- | Retrieve auth from storage
 retrieveAuthFromStore :: (MonadIO m, MonadCatch m, AllowScopes s)
