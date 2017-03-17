@@ -22,6 +22,8 @@ module Network.Google.Auth
     , getApplicationDefault
     , fromWellKnownPath
     , fromFilePath
+    , saveAuthorizedUserToWellKnownPath
+    , saveAuthorizedUser
 
     -- ** Installed Application Credentials
     , installedApplication
@@ -33,8 +35,10 @@ module Network.Google.Auth
     -- ** Thread-safe Storage
     , Store
     , initStore
+    , retrieveAuthFromStore
 
     , Auth           (..)
+    , authToAuthorizedUser
     , exchange
     , refresh
 
@@ -81,6 +85,19 @@ import           Network.HTTP.Conduit                     (Manager)
 import qualified Network.HTTP.Conduit                     as Client
 import           Network.HTTP.Types                       (hAuthorization)
 
+-- | 'authToAuthorizedUser' converts 'Auth' into an 'AuthorizedUser'
+--  by returning 'Right' if there is a 'FromClient'-constructed
+--  Credentials and a refreshed token; otherwise, returning
+--  'Left' with error message.
+authToAuthorizedUser :: AllowScopes s => Auth s -> Either Text AuthorizedUser
+authToAuthorizedUser a = AuthorizedUser
+                   <$>  (_clientId <$> getClient)
+                   <*>  maybe (Left "no refresh token") Right (_tokenRefresh (_token a))
+                   <*>  (_clientSecret <$> getClient)
+                        where getClient = case _credentials a of
+                                            FromClient c _ -> Right c
+                                            _ -> Left "not FromClient"
+
 -- | An 'OAuthToken' that can potentially be expired, with the original
 -- credentials that can be used to perform a refresh.
 data Auth (s :: [Symbol]) = Auth
@@ -109,6 +126,12 @@ initStore :: (MonadIO m, MonadCatch m, AllowScopes s)
           -> Manager
           -> m (Store s)
 initStore c l m = exchange c l m >>= fmap Store . liftIO . newMVar
+
+-- | Retrieve auth from storage
+retrieveAuthFromStore :: (MonadIO m, MonadCatch m, AllowScopes s)
+             => Store s
+             -> m (Auth s)
+retrieveAuthFromStore (Store s) = liftIO (readMVar s)
 
 -- | Concurrently read the current token, and if expired, then
 -- safely perform a single serial refresh.
