@@ -1,5 +1,5 @@
 name:                  gogol-examples
-version:               0.2.0
+version:               0.3.0
 synopsis:              Basic examples for various gogol libraries.
 homepage:              https://github.com/brendanhay/gogol
 license:               OtherLicense
@@ -25,7 +25,7 @@ library
         , bytestring
         , conduit
         , conduit-extra
-        , gogol         == 0.2.0.*
+        , gogol         == 0.3.0.*
         , gogol-core
         , gogol-storage
         , lens
