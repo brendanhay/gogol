@@ -1,5 +1,5 @@
 name:                  gogol-servicecontrol
-version:               0.2.0
+version:               0.3.0
 synopsis:              Google Service Control SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -44,5 +44,5 @@ library
         , Network.Google.ServiceControl.Types.Sum
 
     build-depends:
-          gogol-core == 0.2.0.*
+          gogol-core == 0.3.0.*
         , base       >= 4.7 && < 5
