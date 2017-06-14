@@ -56,7 +56,7 @@ executable gogol-gen
         , formatting
         , hashable
         , haskell-src-exts == 1.17.1
-        , hindent           < 5
+        , hindent          == 4.6.4
         , lens
         , mtl
         , optparse-applicative
