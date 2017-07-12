@@ -1,5 +1,18 @@
 # Change Log
 
+## [0.3.0](https://github.com/brendanhay/gogol/tree/0.3.0)
+
+Released: **12 July, 2017**, Compare: [0.3.0](https://github.com/brendanhay/gogol/compare/0.2.0...0.3.0)
+
+### Added
+
+- Addition of offline mode and save + refresh for credentials. [\#66](https://github.com/brendanhay/gogol/pull/66)
+
+### Fixed
+
+- Corrected `Duration` type serialisation. [\#68](https://github.com/brendanhay/gogol/pull/68)
+
+
 ## [0.2.0](https://github.com/brendanhay/gogol/tree/0.2.0)
 
 Released: **12 February, 2017**, Compare: [0.1.1](https://github.com/brendanhay/gogol/compare/0.1.1...0.2.0)

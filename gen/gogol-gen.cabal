@@ -1,5 +1,5 @@
 name:                  gogol-gen
-version:               0.2.0
+version:               0.3.0
 synopsis:              Gogol Code Generator
 homepage:              https://github.com/brendanhay/gogol
 license:               OtherLicense
@@ -56,7 +56,7 @@ executable gogol-gen
         , formatting
         , hashable
         , haskell-src-exts == 1.17.1
-        , hindent           < 5
+        , hindent          == 4.6.4
         , lens
         , mtl
         , optparse-applicative
