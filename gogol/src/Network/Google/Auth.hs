@@ -25,6 +25,9 @@ module Network.Google.Auth
     , saveAuthorizedUserToWellKnownPath
     , saveAuthorizedUser
 
+    -- ** Service account user impersonation
+    , serviceAccountUser
+
     -- ** Installed Application Credentials
     , installedApplication
     , formURL
@@ -198,3 +201,13 @@ authorize rq s l m = bearer <$> getToken s l m
             , "Bearer " <> toHeader (_tokenAccess t)
             ) : Client.requestHeaders rq
         }
+
+-- | Set the user to be impersonated for a service account with domain
+-- wide delegation. See
+-- https://developers.google.com/identity/protocols/OAuth2ServiceAccount
+serviceAccountUser :: forall s. (AllowScopes s)
+                   => Maybe Text
+                   -> Credentials s
+                   -> Credentials s
+serviceAccountUser u (FromAccount s) = FromAccount $ s { _serviceAccountUser = u }
+serviceAccountUser _ c               = c
