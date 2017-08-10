@@ -125,10 +125,10 @@ encodeBearerJWT s p = liftIO $ do
             , "kid" .= _serviceKeyId s
             ]
 
-        payload = base64Encode
+        payload = base64Encode $
             [ "aud"   .= tokenURL
             , "scope" .= concatScopes (allowScopes p)
             , "iat"   .= n
             , "exp"   .= (n + seconds maxTokenLifetime)
             , "iss"   .= _serviceEmail s
-            ]
+            ] <> maybe [] (\sub -> ["sub" .= sub]) (_serviceAccountUser s)
