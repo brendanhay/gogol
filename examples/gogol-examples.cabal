@@ -19,6 +19,7 @@ library
 
     exposed-modules:
           Example.Storage
+        , Example.Sheets
 
     build-depends:
           base          >= 4.7
@@ -28,6 +29,8 @@ library
         , gogol         == 0.3.0.*
         , gogol-core
         , gogol-storage
+        , gogol-sheets
         , lens
         , resourcet
         , text
+        , aeson
