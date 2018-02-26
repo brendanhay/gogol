@@ -53,7 +53,7 @@ import           Network.HTTP.Client          (HttpException, RequestBody (..))
 import           Network.HTTP.Media           hiding (Accept)
 import           Network.HTTP.Types           hiding (Header)
 import qualified Network.HTTP.Types           as HTTP
-import           Servant.API
+import           Servant.API                  hiding (Stream)
 import           Web.HttpApiData
 
 data AltJSON   = AltJSON   deriving (Eq, Ord, Show, Read, Generic, Typeable)
