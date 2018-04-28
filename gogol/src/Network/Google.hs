@@ -1,5 +1,6 @@
+{-# LANGUAGE CPP                        #-}
 {-# LANGUAGE DataKinds                  #-}
-{-# LANGUAGE RankNTypes                  #-}
+{-# LANGUAGE RankNTypes                 #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE FunctionalDependencies     #-}
@@ -117,7 +118,11 @@ module Network.Google
 import           Control.Applicative
 import           Control.Exception.Lens
 import           Control.Monad
+#if MIN_VERSION_resourcet(1,1,10)
+import           Control.Monad.IO.Unlift
+#else
 import           Control.Monad.Base
+#endif
 import           Control.Monad.Catch
 import           Control.Monad.Reader
 import qualified Control.Monad.RWS.Lazy         as LRW
@@ -155,10 +160,20 @@ newtype Google s a = Google { unGoogle :: ReaderT (Env s) (ResourceT IO) a }
         , MonadThrow
         , MonadCatch
         , MonadMask
+#if MIN_VERSION_resourcet(1,1,10)
+#else
         , MonadBase IO
+#endif
         , MonadReader (Env s)
         , MonadResource
         )
+
+#if MIN_VERSION_resourcet(1,1,10)
+instance MonadUnliftIO (Google s) where
+  askUnliftIO = Google $ do
+    (UnliftIO f) <- askUnliftIO
+    return $ UnliftIO (f . unGoogle)
+#endif
 
 -- | Run a 'Google' action using the specified environment and
 -- credentials annotated with sufficient authorization scopes.
@@ -183,11 +198,14 @@ class ( Functor     m
 instance AllowScopes s => MonadGoogle s (Google s) where
     liftGoogle = id
 
+#if MIN_VERSION_resourcet(1,1,10)
+#else
 instance MonadBaseControl IO (Google s) where
     type StM (Google s) a = StM (ReaderT (Env s) (ResourceT IO)) a
 
     liftBaseWith f = Google $ liftBaseWith $ \g -> f (g . unGoogle)
     restoreM       = Google . restoreM
+#endif
 
 instance MonadGoogle s m => MonadGoogle s (IdentityT m) where
     liftGoogle = lift . liftGoogle

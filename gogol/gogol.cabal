@@ -81,6 +81,7 @@ library
         , time                 >= 1.2
         , transformers         >= 0.2
         , transformers-base    >= 0.4
+        , unliftio-core        >= 0.1
         , unordered-containers >= 0.2.5
         , x509                 >= 1.5
         , x509-store           >= 1.5

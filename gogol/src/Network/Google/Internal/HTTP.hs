@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP               #-}
 {-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE LambdaCase        #-}
@@ -20,7 +21,7 @@ import           Control.Monad.Catch
 import           Control.Monad.IO.Class            (MonadIO)
 import           Control.Monad.Trans.Resource      (MonadResource (..))
 import qualified Data.ByteString.Lazy              as LBS
-import           Data.Conduit                      (($$+-))
+import           Data.Conduit                      (($$+-), (.|))
 import qualified Data.Conduit.List                 as Conduit
 import           Data.Monoid                       (Dual (..), Endo (..), (<>))
 import qualified Data.Text.Encoding                as Text
@@ -103,12 +104,12 @@ perform Env{..} x = catches go handlers
     statusCheck rs
         | _cliCheck (responseStatus rs) = pure ()
         | otherwise                     = do
-                b <- LBS.fromChunks <$> (responseBody rs $$+- Conduit.consume)
+                b <- lbsResponse rs
                 throwM . toException . ServiceError $ ServiceError'
                     { _serviceId      = _svcId
-                    , _serviceStatus  = responseStatus rs
-                    , _serviceHeaders = responseHeaders rs
-                    , _serviceBody    = Just b
+                    , _serviceStatus  = responseStatus b
+                    , _serviceHeaders = responseHeaders b
+                    , _serviceBody    = Just $ responseBody b
                     }
 
     timeout =
