@@ -1,14 +1,21 @@
-compiler: ghc-8.0.2
-resolver: lts-9.0
+resolver: lts-12.18
 
 local-bin-path: bin
 
 nix:
   enable: false
-  packages: [zlib, icu]
+  packages: [zlib, icu, unzip]
   add-gc-roots: true
 
+extra-deps:
+  # gogol-gen specific
+  - ede-0.2.9
+  - haskell-src-exts-1.17.1
+  - hindent-4.6.4
+  - text-regex-replace-0.1.1.2
+
 packages:
+  - gen
   - core
   - gogol
   - examples

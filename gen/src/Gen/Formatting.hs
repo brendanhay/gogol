@@ -11,7 +11,6 @@ module Gen.Formatting
     ( module Gen.Formatting
     , module Formatting
     , module Formatting.Time
-    , runFormat
     ) where
 
 import           Control.Monad.Except
