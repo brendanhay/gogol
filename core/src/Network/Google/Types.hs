@@ -24,37 +24,41 @@
 --
 module Network.Google.Types where
 
-import           Control.Applicative
-import           Control.Exception.Lens       (exception)
-import           Control.Lens
-import           Control.Monad.Catch
-import           Control.Monad.Trans.Resource
-import           Data.Aeson
-import           Data.ByteString              (ByteString)
-import qualified Data.ByteString.Char8        as BS8
-import qualified Data.ByteString.Lazy         as LBS
-import qualified Data.CaseInsensitive         as CI
-import           Data.Coerce
-import           Data.Conduit
-import qualified Data.Conduit.List            as CL
-import           Data.Data
-import           Data.DList                   (DList)
-import qualified Data.DList                   as DList
-import           Data.Foldable                (foldMap, foldl')
-import           Data.Monoid
-import           Data.String
-import           Data.Text                    (Text)
-import qualified Data.Text.Encoding           as Text
-import           Data.Text.Lazy.Builder       (Builder)
-import qualified Data.Text.Lazy.Builder       as Build
-import           GHC.Generics
-import           GHC.TypeLits
-import           Network.HTTP.Client          (HttpException, RequestBody (..))
-import           Network.HTTP.Media           hiding (Accept)
-import           Network.HTTP.Types           hiding (Header)
-import qualified Network.HTTP.Types           as HTTP
-import           Servant.API                  hiding (Stream)
-import           Web.HttpApiData
+import Control.Applicative
+import Control.Exception.Lens       (exception)
+import Control.Lens
+import Control.Monad.Catch
+import Control.Monad.Trans.Resource
+
+import Data.Aeson
+import Data.ByteString        (ByteString)
+import Data.Coerce
+import Data.Conduit
+import Data.Data
+import Data.DList             (DList)
+import Data.Foldable          (foldMap, foldl')
+import Data.Monoid
+import Data.String
+import Data.Text              (Text)
+import Data.Text.Lazy.Builder (Builder)
+
+import GHC.Generics
+import GHC.TypeLits
+
+import Network.HTTP.Client (HttpException, RequestBody (..))
+import Network.HTTP.Media  hiding (Accept)
+import Network.HTTP.Types  hiding (Header)
+
+import Servant.API hiding (Stream)
+
+import qualified Data.ByteString.Char8    as BS8
+import qualified Data.ByteString.Lazy     as LBS
+import qualified Data.CaseInsensitive     as CI
+import qualified Data.Conduit.Combinators as Conduit
+import qualified Data.DList               as DList
+import qualified Data.Text.Encoding       as Text
+import qualified Data.Text.Lazy.Builder   as Build
+import qualified Network.HTTP.Types       as HTTP
 
 data AltJSON   = AltJSON   deriving (Eq, Ord, Show, Read, Generic, Typeable)
 data AltMedia  = AltMedia  deriving (Eq, Ord, Show, Read, Generic, Typeable)
@@ -163,7 +167,8 @@ instance Show Secret where
     show = const "*****"
 
 newtype MediaDownload a = MediaDownload a
-data    MediaUpload   a = MediaUpload   a Body
+
+data MediaUpload a = MediaUpload a Body
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce
@@ -176,7 +181,7 @@ _Default = iso f Just
     f (Just x) = x
     f Nothing  = mempty
 
-type Stream = ResumableSource (ResourceT IO) ByteString
+type Stream = ConduitM () ByteString (ResourceT IO) ()
 
 data Error
     = TransportError HttpException
@@ -361,7 +366,7 @@ discard :: Method
         -> Request
         -> ServiceConfig
         -> Client ()
-discard = client (\b -> closeResumableSource b >> pure (Right ())) Nothing
+discard = client (\b -> runConduit (b .| Conduit.sinkNull) >> pure (Right ())) Nothing
 
 client :: (Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
        -> Maybe MediaType
@@ -370,10 +375,10 @@ client :: (Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
        -> Request
        -> ServiceConfig
        -> Client a
-client f cs m ns rq s = Client
+client f cs m statuses rq s = Client
     { _cliAccept   = cs
     , _cliMethod   = m
-    , _cliCheck    = (`elem` ns) . fromEnum
+    , _cliCheck    = \status -> fromEnum status `elem` statuses
     , _cliService  = s
     , _cliRequest  = rq
     , _cliResponse = f
@@ -603,7 +608,7 @@ instance {-# OVERLAPPING #-}
     buildClient Proxy = discard methodDelete [204]
 
 sinkLBS :: Stream -> ResourceT IO LBS.ByteString
-sinkLBS = fmap LBS.fromChunks . ($$+- CL.consume)
+sinkLBS = runConduit . (.| Conduit.sinkLazy)
 
 buildText :: ToHttpApiData a => a -> Builder
 buildText = Build.fromText . toQueryParam
