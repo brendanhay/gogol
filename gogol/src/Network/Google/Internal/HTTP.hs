@@ -15,27 +15,31 @@
 --
 module Network.Google.Internal.HTTP where
 
-import           Control.Lens                      ((%~), (&))
-import           Control.Monad.Catch
-import           Control.Monad.IO.Class            (MonadIO)
-import           Control.Monad.Trans.Resource      (MonadResource (..))
-import qualified Data.ByteString.Lazy              as LBS
-import           Data.Conduit                      (($$+-))
-import qualified Data.Conduit.List                 as Conduit
-import           Data.Monoid                       (Dual (..), Endo (..), (<>))
-import qualified Data.Text.Encoding                as Text
-import qualified Data.Text.Lazy                    as LText
-import qualified Data.Text.Lazy.Builder            as Build
-import           GHC.Exts                          (toList)
-import           Network.Google.Auth               (AllowScopes, authorize)
-import           Network.Google.Env                (Env (..))
-import           Network.Google.Internal.Logger    (logDebug)
-import           Network.Google.Internal.Multipart
-import           Network.Google.Types
-import qualified Network.HTTP.Client.Conduit       as Client
-import           Network.HTTP.Conduit
-import           Network.HTTP.Media                (RenderHeader (..))
-import           Network.HTTP.Types
+import Control.Lens                 ((%~), (&))
+import Control.Monad.Catch
+import Control.Monad.IO.Class       (MonadIO)
+import Control.Monad.Trans.Resource (MonadResource (..))
+
+import Data.Conduit (($$+-))
+import Data.Monoid  (Dual (..), Endo (..), (<>))
+
+import GHC.Exts (toList)
+
+import Network.Google.Auth               (AllowScopes, authorize)
+import Network.Google.Env                (Env (..))
+import Network.Google.Internal.Logger    (logDebug)
+import Network.Google.Internal.Multipart
+import Network.Google.Types
+import Network.HTTP.Conduit
+import Network.HTTP.Media                (RenderHeader (..))
+import Network.HTTP.Types
+
+import qualified Data.ByteString.Lazy        as LBS
+import qualified Data.Conduit.List           as Conduit
+import qualified Data.Text.Encoding          as Text
+import qualified Data.Text.Lazy              as LText
+import qualified Data.Text.Lazy.Builder      as Build
+import qualified Network.HTTP.Client.Conduit as Client
 
 -- FIXME: "mediaType" param also comes/calculated from the request body?
 --
@@ -103,7 +107,7 @@ perform Env{..} x = catches go handlers
     statusCheck rs
         | _cliCheck (responseStatus rs) = pure ()
         | otherwise                     = do
-                b <- LBS.fromChunks <$> (responseBody rs $$+- Conduit.consume)
+                b <- sinkLBS (responseBody rs)
                 throwM . toException . ServiceError $ ServiceError'
                     { _serviceId      = _svcId
                     , _serviceStatus  = responseStatus rs
