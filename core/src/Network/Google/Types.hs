@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP                        #-}
 {-# LANGUAGE DataKinds                  #-}
 {-# LANGUAGE DeriveDataTypeable         #-}
 {-# LANGUAGE DeriveGeneric              #-}
@@ -176,7 +177,11 @@ _Default = iso f Just
     f (Just x) = x
     f Nothing  = mempty
 
+#if MIN_VERSION_conduit(1,3,0)
+type Stream = ConduitT () ByteString (ResourceT IO) ()
+#else
 type Stream = ResumableSource (ResourceT IO) ByteString
+#endif
 
 data Error
     = TransportError HttpException
@@ -358,7 +363,11 @@ discard :: Method
         -> Request
         -> ServiceConfig
         -> Client ()
+#if MIN_VERSION_conduit(1,3,0)
+discard = client (\b -> connect b CL.sinkNull >> pure (Right ())) Nothing
+#else
 discard = client (\b -> closeResumableSource b >> pure (Right ())) Nothing
+#endif
 
 client :: (Stream -> ResourceT IO (Either (String, LBS.ByteString) a))
        -> Maybe MediaType
@@ -600,7 +609,11 @@ instance {-# OVERLAPPING #-}
     buildClient Proxy = discard methodDelete [204]
 
 sinkLBS :: Stream -> ResourceT IO LBS.ByteString
+#if MIN_VERSION_conduit(1,3,0)
+sinkLBS s = LBS.fromChunks <$> connect s CL.consume
+#else
 sinkLBS = fmap LBS.fromChunks . ($$+- CL.consume)
+#endif
 
 buildText :: ToHttpApiData a => a -> Builder
 buildText = Build.fromText . toQueryParam
