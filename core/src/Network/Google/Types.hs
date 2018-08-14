@@ -312,6 +312,7 @@ instance Semigroup Request where
 
 instance Monoid Request where
     mempty      = Request mempty mempty mempty mempty
+    mappend     = (<>)
 
 appendPath :: Request -> Builder -> Request
 appendPath rq x = rq { _rqPath = _rqPath rq <> "/" <> x }
