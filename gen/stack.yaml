@@ -10,3 +10,7 @@ extra-deps:
 
 packages:
   - '.'
+
+nix:
+  enable: true
+  packages: [zlib, icu]
