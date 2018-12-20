@@ -15,7 +15,7 @@ module Example.Storage where
 import Control.Lens                 ((&), (.~), (<&>), (?~))
 import Control.Monad.Trans.Resource (liftResourceT, runResourceT)
 
-import Data.Conduit (($$+-))
+import Data.Conduit (runConduit, (.|))
 import Data.Text    (Text)
 
 import System.IO (stdout)
@@ -62,7 +62,7 @@ example bucket input output = do
         -- Download from the bucket/key and create a source of the HTTP stream:
         stream <- Google.download (Storage.objectsGet bucket key)
 
-        -- 'Conduit' actions such as '$$+-' need to be lifted into the 'Google'
+        -- 'Conduit' actions such as '.|' need to be lifted into the 'Google'
         -- monad using 'liftResourceT', this will stream the received bytes
         -- into the 'output' file:
-        liftResourceT (stream $$+- Conduit.sinkFile output)
+        liftResourceT (runConduit (stream .| Conduit.sinkFile output))
