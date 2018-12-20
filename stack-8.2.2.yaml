@@ -7,15 +7,9 @@ nix:
   packages: [zlib, icu, unzip]
   add-gc-roots: true
 
-extra-deps:
-  # gogol-gen specific
-  - ede-0.2.9
-  - haskell-src-exts-1.17.1
-  - hindent-4.6.4
-  - text-regex-replace-0.1.1.2
+extra-deps: []
 
 packages:
-  - gen
   - core
   - gogol
   - examples
