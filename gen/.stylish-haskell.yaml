@@ -10,7 +10,8 @@ steps:
       records: true
   - trailing_whitespace: {}
 
-columns: 80
+# In recent stylish-haskell versions, record fields do not get aligned at all if any one of the fields length exceeds columns, so we pad it out from 80.
+columns: 140
 
 language_extensions:
   - MultiParamTypeClasses
