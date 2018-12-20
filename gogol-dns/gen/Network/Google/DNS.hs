@@ -135,6 +135,11 @@ module Network.Google.DNS
     , oZoneContext
     , oDNSKeyContext
 
+    -- ** DNSResponseHeader
+    , DNSResponseHeader
+    , dnsResponseHeader
+    , drhOperationId
+
     -- ** DNSKeySpec
     , DNSKeySpec
     , dnsKeySpec
@@ -186,11 +191,6 @@ module Network.Google.DNS
 
     -- ** DNSKeyAlgorithm
     , DNSKeyAlgorithm (..)
-
-    -- ** ResponseHeader
-    , ResponseHeader
-    , responseHeader
-    , rhOperationId
 
     -- ** DNSKeySpecKeyType
     , DNSKeySpecKeyType (..)
