@@ -4,7 +4,10 @@ steps:
   - language_pragmas:
       style: vertical
       remove_redundant: true
-  - records: {}
+  - simple_align:
+      cases: true
+      top_level_patterns: true
+      records: true
   - trailing_whitespace: {}
 
 columns: 80

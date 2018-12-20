@@ -10,6 +10,7 @@
 module Gen.Formatting
     ( module Gen.Formatting
     , module Formatting
+    , module Formatting.Internal
     , module Formatting.Time
     ) where
 

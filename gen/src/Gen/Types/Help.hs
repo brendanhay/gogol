@@ -19,6 +19,7 @@ import Data.Aeson
 import Data.Char   (isSpace)
 import Data.String
 import Data.Text   (Text)
+import qualified Data.Text as T
 
 import Text.Pandoc        as Pandoc
 import Text.Pandoc.Pretty
@@ -54,7 +55,7 @@ rawHelpText = Raw
 
 instance FromJSON Help where
     parseJSON = withText "help" $ \t ->
-        case Pandoc.runPure (Pandoc.readHtml def t) of
+        case Pandoc.readHtml def (T.unpack t) of
             Left  e -> fail (show e)
             Right x -> pure $! Pan x t
 
@@ -83,10 +84,7 @@ flatten :: Help -> String
 flatten = \case
     Help xs  -> foldMap flatten xs
     Raw  t   -> Text.unpack t
-    Pan  d t -> Text.unpack $
-        case Pandoc.runPure (Pandoc.writeHaddock def d) of
-            Left  {} -> t
-            Right x  -> x
+    Pan  d _t -> Pandoc.writeHaddock def d
 
 wrap :: String -> String -> Text
 wrap sep =

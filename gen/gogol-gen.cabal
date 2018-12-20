@@ -60,7 +60,7 @@ executable gogol-gen
         , lens
         , mtl
         , optparse-applicative
-        , pandoc
+        , pandoc < 2.0
         , parsec
         , semigroups
         , system-fileio

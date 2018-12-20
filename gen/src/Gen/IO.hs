@@ -33,7 +33,7 @@ import qualified Filesystem                as FS
 import qualified Text.EDE                  as EDE
 
 run :: ExceptT Error IO a -> IO a
-run = runScript . fmapLT LText.toStrict
+run = runScript . fmapLT LText.unpack
 
 io :: MonadIO m => IO a -> ExceptT Error m a
 io = ExceptT . fmap (first (LText.pack . show)) . liftIO . runUIO . fromIO
