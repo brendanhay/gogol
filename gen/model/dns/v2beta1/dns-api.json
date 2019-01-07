@@ -148,7 +148,7 @@
      }
     },
     "header": {
-     "$ref": "ResponseHeader"
+     "$ref": "DnsResponseHeader"
     },
     "kind": {
      "type": "string",
@@ -324,7 +324,7 @@
      }
     },
     "header": {
-     "$ref": "ResponseHeader"
+     "$ref": "DnsResponseHeader"
     },
     "kind": {
      "type": "string",
@@ -434,7 +434,7 @@
    "type": "object",
    "properties": {
     "header": {
-     "$ref": "ResponseHeader"
+     "$ref": "DnsResponseHeader"
     },
     "kind": {
      "type": "string",
@@ -459,7 +459,7 @@
    "type": "object",
    "properties": {
     "header": {
-     "$ref": "ResponseHeader"
+     "$ref": "DnsResponseHeader"
     }
    }
   },
@@ -468,7 +468,7 @@
    "type": "object",
    "properties": {
     "header": {
-     "$ref": "ResponseHeader"
+     "$ref": "DnsResponseHeader"
     },
     "kind": {
      "type": "string",
@@ -687,7 +687,7 @@
    "type": "object",
    "properties": {
     "header": {
-     "$ref": "ResponseHeader"
+     "$ref": "DnsResponseHeader"
     },
     "kind": {
      "type": "string",
@@ -707,8 +707,8 @@
     }
    }
   },
-  "ResponseHeader": {
-   "id": "ResponseHeader",
+  "DnsResponseHeader": {
+   "id": "DnsResponseHeader",
    "type": "object",
    "description": "Elements common to every response.",
    "properties": {

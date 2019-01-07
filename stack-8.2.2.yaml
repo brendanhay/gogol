@@ -1,7 +1,14 @@
-compiler:   ghc-8.2
-resolver:   nightly-2017-08-12
-flags:      {}
+resolver: lts-12.24
+
+local-bin-path: bin
+
+nix:
+  enable: false
+  packages: [zlib, icu, unzip]
+  add-gc-roots: true
+
 extra-deps: []
+
 packages:
   - core
   - gogol

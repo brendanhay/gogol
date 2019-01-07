@@ -1,4 +1,3 @@
-compiler: ghc-8.0.2
 resolver: lts-8.18
 
 flags: {}
@@ -10,7 +9,3 @@ extra-deps:
 
 packages:
   - '.'
-
-nix:
-  enable: true
-  packages: [zlib, icu]
